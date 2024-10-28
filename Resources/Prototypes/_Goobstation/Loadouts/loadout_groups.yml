@@ -1,24 +1,3 @@
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 DarkenedSynergy <70016079+DarkenedSynergy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Theapug <159912420+Teapug@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Weide <64257676+Lyacs@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Jarl <140098675+JarlElbowses@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Jarl <elliotacline@gmail.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 grub <unalterableness@gmail.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-# SPDX-FileCopyrightText: 2025 shityaml <unalterableness@gmail.com>
-# SPDX-FileCopyrightText: 2025 jvne <juneialduncan21@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # RD
@@ -1380,3 +1359,85 @@
   - JumpsuitHawaiBlue
   - JumpsuitHawaiRed
   - JumpsuitHawaiYellow
+- type: loadoutGroup
+  id: GroupFullTankAquatic
+  name: loadout-group-full-tank-aquatic
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesAquaticFullTank
+
+# decapoid claw and tank
+- type: loadoutGroup
+  id: GroupDecapoidClawLeft
+  name: loadout-group-decapoid-claw-left
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutDecapoidClaw
+
+# the claw and tank but as StartingGear
+- type: startingGear
+  id: StartingGearDecapoidClaw
+  equipment:
+    mask: DecapoidBreathingApparatus
+  inhand:
+    - DecapoidVaporTank
+    - DecapoidClawItem
+
+# the vaporizer but as StartingGear
+- type: startingGear
+  id: StartingGearDecapoidVaporizer
+  equipment:
+    mask: DecapoidBreathingApparatus
+
+# The usual loadouts of the decapoid harness that spawn in your chest slot for jobs that don't have outerwear in their loadout
+- type: loadoutGroup
+  id: GroupTankHarnessAquatic
+  name: loadout-group-tank-harness-aquatic
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutTankHarnessAquatic
+
+- type: loadoutGroup
+  id: GroupTankHarnessCommandAquatic
+  name: loadout-group-tank-harness-command-aquatic
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutTankHarnessAquaticCommand
+
+# Tank harnesses for jobs that spawn with outerwear, puts them in their inventory instead of dropping items at their feet
+- type: loadoutGroup
+  id: GroupTankHarnessWithOuterwearAquatic
+  name: loadout-group-tank-harness-with-outerwear-aquatic
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutTankHarnessAquaticWithOuterwear
+
+- type: loadoutGroup
+  id: GroupTankHarnessCommandWithOuterwearAquatic
+  name: loadout-group-tank-harness-command-with-outerwear-aquatic
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutTankHarnessAquaticCommandWithOuterwear
+
+# vaporizer
+- type: loadoutGroup
+  id: GroupBreathToolDecapoid
+  name: loadout-group-breath-tool-decapoid
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutDecapoidBreathTool
+  
+- type: loadoutGroup
+  id: GroupBreathToolDecapoidInventory
+  name: loadout-group-breath-tool-inventory-decapoid
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutDecapoidBreathToolInventory
