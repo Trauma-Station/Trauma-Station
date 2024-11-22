@@ -737,8 +737,13 @@ namespace Content.Shared.Cuffs
                 if (cuff.BreakOnRemove)
                 {
                     QueueDel(cuffsToRemove);
-                    var trash = Spawn(cuff.BrokenPrototype, Transform(cuffsToRemove).Coordinates);
-                    _hands.PickupOrDrop(user, trash);
+                    // <Trauma> - don't try to spawn anything if BrokenPrototype is null
+                    if (cuff.BrokenPrototype is {} broken)
+                    {
+                        var trash = Spawn(broken, Transform(cuffsToRemove).Coordinates);
+                        _hands.PickupOrDrop(user, trash);
+                    }
+                    // </Trauma>
                 }
                 else
                 {

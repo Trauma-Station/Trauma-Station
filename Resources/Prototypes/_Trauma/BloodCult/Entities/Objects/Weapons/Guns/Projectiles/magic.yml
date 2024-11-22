@@ -1,0 +1,21 @@
+- type: entity
+  parent: BaseBullet
+  id: BloodBoilProjectile
+  name: Concentrated Blood
+  description: Oh no.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Effects/blood_boil.rsi
+    state: bullet
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 10
+        Heat: 10
+  - type: PointLight
+    enabled: true
+    color: "#ff4300"
+    radius: 2.0
+    energy: 7.0
+  - type: BloodBoilProjectile

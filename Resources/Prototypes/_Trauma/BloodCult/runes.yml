@@ -1,0 +1,47 @@
+- type: bloodRune
+  id: CultRuneOffering
+  prototype: CultRuneOffering
+
+- type: bloodRune
+  id: CultRuneEmpower
+  prototype: CultRuneEmpower
+
+- type: bloodRune
+  id: CultRuneTeleport
+  prototype: CultRuneTeleport
+
+- type: bloodRune
+  id: CultRuneRevive
+  prototype: CultRuneRevive
+
+- type: bloodRune
+  id: CultRuneBarrier
+  prototype: CultRuneBarrier
+
+- type: bloodRune
+  id: CultRuneSummoning
+  prototype: CultRuneSummoning
+
+- type: bloodRune
+  id: CultRuneBloodBoil
+  prototype: CultRuneBloodBoil
+
+- type: bloodRune
+  id: CultRuneApocalypse
+  prototype: CultRuneApocalypse
+  drawTime: 40
+  drawDamage:
+    types:
+      Slash: 20
+  # TODO: limit to the cult special areas
+
+- type: bloodRune
+  id: CultRuneDimensionalRending
+  prototype: CultRuneDimensionalRending
+  drawTime: 40
+  drawDamage:
+    types:
+      Slash: 50
+  # TODO: limit to the cult special areas
+  # TODO: cant draw if you didnt sacrafice the target yet
+  # TODO: announcement when drawing it

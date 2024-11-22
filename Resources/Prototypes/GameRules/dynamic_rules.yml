@@ -66,6 +66,13 @@
           - !type:MaxRuleOccurenceCondition
           - !type:PlayerCountCondition
             min: 25
+        - id: BloodCult
+          weight: 10
+          conditions:
+          - !type:HasBudgetCondition
+          - !type:MaxRuleOccurenceCondition
+          - !type:PlayerCountCondition
+            min: 30
         - id: BlobGameMode
           weight: 10
           conditions:

@@ -1,0 +1,41 @@
+- type: entity
+  id: SheetMetalBase
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Materials/Sheets/metal.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Materials/Sheets/metal.rsi
+  - type: Tag
+    tags:
+    - DroneUsable
+
+- type: entity
+  id: SheetSteel
+  components:
+  - type: ShortConstruction
+    prototypes:
+    - MetalRod
+    - TileSteel
+  - type: Tag # add Steel
+    tags:
+    - Sheet
+    - Metal
+    - DroneUsable
+    - ConstructionMaterial
+    - Steel
+
+- type: entity
+  id: SheetBrass
+  components:
+  - type: FloorTile
+    outputs:
+    - PlatingBrass
+
+- type: entity
+  id: SheetPlasteel
+  components:
+  - type: ShortConstruction
+    prototypes:
+    - SecureWindoor
+  - type: TwistedConstructionTarget
+    replacementProto: RunedMetal1

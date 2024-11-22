@@ -1,0 +1,42 @@
+- type: antag
+  id: BloodCultist
+  name: roles-antag-blood-cultist-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-blood-cultist-objective
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 2h
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: BloodCultist
+  jobBlacklist: [ Chaplain ]
+  briefing:
+    text: blood-cult-role-greeting
+    color: Red
+    sound: "/Audio/_Trauma/BloodCult/blood_cult_greeting.ogg"
+  startingGear: BloodCultistGear
+  prefRoles: [ BloodCultist ]
+  mindRoles: [ MindRoleBloodCultist ]
+
+- type: antagSpecifier
+  parent: BloodCultist
+  id: BloodCultLeader
+  mindRoles: [ MindRoleBloodCultLeader ]
+
+- type: startingGear
+  id: BloodCultistGear
+  storage:
+    back:
+    - RitualDagger
+    - RunedMetal20
+
+- type: antagSmite
+  id: BloodCultist
+  antag: BloodCultist
+  rule: BloodCult
+  ruleComp: BloodCultRule
+  icon:
+    sprite: Objects/Weapons/Melee/cult_dagger.rsi
+    state: icon

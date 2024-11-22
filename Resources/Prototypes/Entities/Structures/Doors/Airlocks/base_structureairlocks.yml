@@ -4,6 +4,15 @@
   name: airlock
   description: It opens, it closes, and maybe crushes you.
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 75
+    damagePenalty: 0.2
+  - type: SoundBlocker
+  - type: TwistedConstructionTarget
+    replacementProto: CultDoor
+    doAfterDelay: 10
+  # </Trauma>
   - type: Anchorable
     flags:
     - Anchorable
@@ -204,10 +213,6 @@
     - Airlocks
     - WirePanels
     - Networking
-  - type: Penetratable # Goobstation - Better snipers
-    penetrateDamage: 75
-    damagePenalty: 0.2
-  - type: SoundBlocker # Trauma
   placement:
     mode: SnapgridCenter
 

@@ -483,4 +483,9 @@ public sealed partial class PullingSystem
         RaiseLocalEvent(uid, ref ev);
         return !ev.Cancelled;
     }
+
+    public EntityUid? GetPulledEntity(Entity<PullerComponent?> puller)
+        => Resolve(puller, ref puller.Comp, false)
+            ? puller.Comp.Pulling
+            : null;
 }

@@ -111,6 +111,13 @@ public sealed partial class HumanoidProfileSystem
         => organs?.TryGetValue(EyesCategory, out var eye) == true ? eye.EyeColor : null;
 
     /// <summary>
+    /// Gets a mob's eye color by getting its organs first.
+    /// Inefficient if you are doing other things that might need the organs dictionary.
+    /// </summary>
+    public Color? GetEyeColor(EntityUid mob)
+        => GetEyeColor(GetOrgansData(mob));
+
+    /// <summary>
     /// Gets the skin color from a set of organ visual data, or null if it has no torso. (Should never happen)
     /// </summary>
     public Color? GetSkinColor(Dictionary<ProtoId<OrganCategoryPrototype>, OrganProfileData>? organs)

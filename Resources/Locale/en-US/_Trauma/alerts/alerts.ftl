@@ -6,3 +6,9 @@ alerts-morph-biomass-desc = The collection of meat and fat taken from consuming 
 
 alerts-fultoned-name = [color=yellow]Fultoned[/color]
 alerts-fultoned-desc = You're being [color=yellow]fultoned[/color] to a remote location! Click to quickly remove it.
+
+alerts-blood-spells-name = Blood spells
+alerts-blood-spells-desc = Click to create or remove blood spells.
+
+alerts-blood-cult-empowered-name = Empowered
+alerts-blood-cult-empowered-desc = Blood magic requires much less time to cast and you lose less blood from it. You're also immune to pressure damage.

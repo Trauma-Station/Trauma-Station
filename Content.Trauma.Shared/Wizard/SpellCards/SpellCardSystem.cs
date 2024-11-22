@@ -19,24 +19,16 @@ public sealed partial class SpellCardSystem : EntitySystem
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private TileFrictionController _tileFriction = default!;
     [Dependency] private IGameTiming _timing = default!;
-
-    private EntityQuery<TransformComponent> _xformQuery;
-    private EntityQuery<HomingProjectileComponent> _homingQuery;
-    private EntityQuery<TrailComponent> _trailQuery;
-    private EntityQuery<AppearanceComponent> _appearanceQuery;
-    private EntityQuery<FrozenComponent> _frozenQuery;
+    [Dependency] private EntityQuery<HomingProjectileComponent> _homingQuery = default!;
+    [Dependency] private EntityQuery<TrailComponent> _trailQuery = default!;
+    [Dependency] private EntityQuery<AppearanceComponent> _appearanceQuery = default!;
+    [Dependency] private EntityQuery<FrozenComponent> _frozenQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<SpellCardComponent, ComponentStartup>(OnStartup);
-
-        _xformQuery = GetEntityQuery<TransformComponent>();
-        _homingQuery = GetEntityQuery<HomingProjectileComponent>();
-        _trailQuery = GetEntityQuery<TrailComponent>();
-        _appearanceQuery = GetEntityQuery<AppearanceComponent>();
-        _frozenQuery = GetEntityQuery<FrozenComponent>();
     }
 
     private void OnStartup(Entity<SpellCardComponent> ent, ref ComponentStartup args)
@@ -65,7 +57,7 @@ public sealed partial class SpellCardSystem : EntitySystem
 
                 var oldVelocity = physics.LinearVelocity;
                 var velocity = (oldVelocity.EqualsApprox(Vector2.Zero, card.Tolerance)
-                    ? _transform.GetWorldRotation(uid, _xformQuery).ToWorldVec()
+                    ? _transform.GetWorldRotation(uid).ToWorldVec()
                     : oldVelocity.Normalized()) * card.TargetedSpeed;
                 _tileFriction.SetModifier(uid, 0f);
                 _physics.SetLinearVelocity(uid, velocity, false, true, fix, physics);
@@ -83,7 +75,7 @@ public sealed partial class SpellCardSystem : EntitySystem
 
                 _tileFriction.SetModifier(uid, 0f);
                 _physics.SetLinearDamping(uid, physics, 0f, false);
-                var velocity = _transform.GetWorldRotation(uid, _xformQuery).ToWorldVec() * card.TargetedSpeed;
+                var velocity = _transform.GetWorldRotation(uid).ToWorldVec() * card.TargetedSpeed;
                 if (!_frozenQuery.TryComp(uid, out var frozen))
                     _physics.SetLinearVelocity(uid, velocity, false, true, fix, physics);
                 else
@@ -141,7 +133,7 @@ public sealed partial class SpellCardSystem : EntitySystem
             if (!physics.LinearVelocity.EqualsApprox(Vector2.Zero, card.Tolerance))
             {
                 _physics.SetLinearVelocity(uid,
-                    physics.LinearVelocity.Length() * _transform.GetWorldRotation(uid, _xformQuery).ToWorldVec(),
+                    physics.LinearVelocity.Length() * _transform.GetWorldRotation(uid).ToWorldVec(),
                     false,
                     true,
                     fix,

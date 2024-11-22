@@ -1,0 +1,5 @@
+- type: collectiveMind
+  id: BloodCult
+  name: collective-mind-blood-cult
+  keycode: 'c'
+  color: "#dc143c"

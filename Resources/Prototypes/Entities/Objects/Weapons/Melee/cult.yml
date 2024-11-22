@@ -1,15 +1,9 @@
 - type: entity
   name: ritual dagger
-  parent: [BaseItem, BaseMajorContraband, KnifeDurabilitySharpenOnly] # Trauma - Durability, Contraband
+  parent: [BaseKnife, BaseMajorContraband, KnifeDurabilitySharpenOnly] # Trauma - changed item to knife, added Durability, Contraband
   id: RitualDagger
   description: A strange dagger used by sinister groups for rituals and sacrifices.
   components:
-  # <Trauma>
-  - type: Sharp
-  - type: Tag
-    tags:
-    - Knife
-  # </Trauma>
   - type: Tool
     qualities:
     - Slicing
@@ -17,8 +11,6 @@
     sprite: Objects/Weapons/Melee/cult_dagger.rsi
     state: icon
   - type: MeleeWeapon
-    soundHit: # Trauma
-      path: /Audio/Weapons/bladeslice.ogg
     wideAnimationRotation: -135
     attackRate: 1.5
     damage:
@@ -38,9 +30,6 @@
   id: EldritchBlade
   description: A sword humming with unholy energy.
   components:
-  # <Trauma>
-  - type: Sharp
-  # </Trauma>
   - type: Tool
     qualities:
     - Slicing
@@ -53,8 +42,6 @@
     damage:
       types:
         Slash: 16
-    soundHit: # Goobstation
-        path: /Audio/Weapons/bladeslice.ogg
   - type: Item
     size: Normal
   - type: Clothing
@@ -69,9 +56,6 @@
   id: UnholyHalberd
   description: A poleaxe that seems to be linked to its wielder.
   components:
-  # <Trauma>
-  - type: Sharp
-  # </Trauma>
   - type: Tool
     qualities:
     - Slicing
@@ -89,7 +73,6 @@
       types:
         Blunt: 10
         Slash: 10
-        Structural: 5
     soundHit:
       collection: MetalThud
   - type: Wieldable
@@ -98,7 +81,6 @@
       types:
         Blunt: 5
         Slash: 5
-        Structural: 10
   - type: Item
     size: Ginormous
     shape:

@@ -1,0 +1,179 @@
+- type: entity
+  abstract: true
+  id: BaseCultRune
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Runes/regular.rsi
+  - type: Fixtures
+    fixtures:
+      rune:
+        shape: !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        hard: false
+        mask:
+        - ItemMask
+        layer:
+        - SlipLayer
+  - type: Physics
+  - type: Clickable
+  - type: InteractionOutline
+  - type: CultRune
+  - type: Appearance
+  # Spraying runes with holy water erases them
+  - type: Reactive
+    reactions:
+    - reagents: [ Holywater ]
+      methods: [ Touch ]
+      effects:
+      - !type:Delete
+
+- type: entity
+  parent: BaseCultRune
+  id: CultRuneOffering
+  name: rune of offering
+  components:
+  - type: Sprite
+    state: offering
+  - type: CultRune
+    invokePhrase: "Mah'weyh pleggh at e'ntrath!"
+  - type: CultRuneOffering
+
+- type: entity
+  parent: BaseCultRune
+  id: CultRuneEmpower
+  name: rune of empower
+  components:
+  - type: Sprite
+    state: strength
+  - type: CultRune
+    invokePhrase: "Qu'laris ver'don, thal'sorin mik'thar!"
+  - type: CultRuneEmpower
+
+- type: entity
+  parent: BaseCultRune
+  id: CultRuneTeleport
+  name: rune of teleportation
+  components:
+  - type: Sprite
+    state: teleport
+  - type: CultRune
+    invokePhrase: "Sas'so c'arta forbici!"
+  - type: CultRuneTeleport
+  - type: UserInterface
+    interfaces:
+      enum.WizardTeleportUiKey.Key:
+        type: WizardTeleportBoundUserInterface
+      enum.NameSelectorUiKey.Key:
+        type: NameSelectorBUI
+
+- type: entity
+  parent: BaseCultRune
+  id: CultRuneRevive
+  name: rune of rejuvenation
+  components:
+  - type: Sprite
+    state: revive
+  - type: CultRune
+    invokePhrase: "Pasnar val'keriam usinar. Savrae ines amutan. Yam'toth remium il'tarat!"
+  - type: CultRuneRevive
+
+- type: entity
+  parent: BaseCultRune
+  id: CultRuneBarrier
+  name: rune of barrier
+  components:
+  - type: Sprite
+    state: barrier
+  - type: CultRune
+    invokePhrase: "Khari'd! Eske'te tannin!"
+    runeActivationRange: 1.5
+    activationDamage:
+      types:
+        Slash: 5
+  - type: CultEffectRune
+    effects:
+    - !type:SpawnEntity
+      entity: BloodCultBarrier
+    - !type:Delete # single use rune for obvious reasons (it gets blocked by the barrier)
+
+- type: entity
+  parent: BaseCultRune
+  id: CultRuneSummoning
+  name: rune of summoning
+  components:
+  - type: Sprite
+    state: summon
+  - type: CultRune
+    requiredInvokers: 3
+    invokePhrase: "N'ath reth sh'yro eth d'rekkathnor!"
+  - type: CultRuneSummon
+  - type: UserInterface
+    interfaces:
+      enum.WizardTeleportUiKey.Key:
+        type: WizardTeleportBoundUserInterface
+
+- type: entity
+  parent: BaseCultRune
+  id: CultRuneBloodBoil
+  name: rune of boiling blood
+  components:
+  - type: Sprite
+    state: blood_boil
+  - type: CultRune
+    invokePhrase: "N'Dedo ol'btoh!"
+    requiredInvokers: 3
+    activationDamage:
+      types:
+        Slash: 35
+  - type: CultRuneBloodBoil
+    effects:
+    - !type:Flammable
+      multiplier: 1
+    - !type:Ignite
+
+- type: entity
+  parent: BaseCultRune
+  id: CultRuneApocalypse
+  name: rune of apocalypse
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Runes/apocalypse.rsi
+    layers:
+      - state: icon
+        map: [ "enum.ApocalypseRuneVisuals.Layer" ]
+  - type: CultRune
+    requiredInvokers: 3
+    invokePhrase: "Ta'gh fara'qha fel d'amar det!"
+    activationDamage:
+      types:
+        Slash: 35
+  - type: CultRuneApocalypse
+  - type: GenericVisualizer
+    visuals:
+      enum.ApocalypseRuneVisuals.Used:
+        enum.ApocalypseRuneVisuals.Layer:
+          True: { color: "#696969" }
+
+- type: entity
+  parent: BaseCultRune
+  id: CultRuneDimensionalRending
+  name: rune of dimensional rending
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Runes/dimensional_rending.rsi
+    layers:
+    - state: rune
+      map: [ "enum.RendingRuneVisuals.Layer" ]
+  - type: CultRune
+    requiredInvokers: 10
+    invokeChatType: Speak
+    invokePhrase: "TOK-LYR RQA-NAP G'OLT-ULOFT!!!"
+  - type: CultRuneRending
+  - type: GenericVisualizer
+    visuals:
+      enum.RendingRuneVisuals.Active:
+        enum.RendingRuneVisuals.Layer:
+          True: { state: "rune_animated" }
+          False: { state: "rune"}

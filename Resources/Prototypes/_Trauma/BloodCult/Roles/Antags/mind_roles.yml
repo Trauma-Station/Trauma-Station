@@ -1,0 +1,78 @@
+- type: entity
+  abstract: true
+  parent: BaseMindRoleAntag
+  id: BaseMindRoleBloodCult
+  components:
+  - type: MindRole
+    roleType: TeamAntagonist
+    exclusiveAntag: true
+  - type: BloodCultistRole
+  - type: RoleActions
+    actions:
+    - ActionBloodCultSpells
+  - type: RoleEffects
+    added:
+    - !type:AddFaction
+      faction: BloodCult
+    - !type:GrantSkills
+      skills:
+        EldritchKnowledge: 100
+        LanguageEldritch: 100
+    - !type:AddComponents
+      components:
+      - type: BloodCultMember
+    - !type:AddCollectiveMind
+      channel: BloodCult
+    removed:
+    - !type:RemoveFaction
+      faction: BloodCult
+    - !type:RemoveSkills
+      skills:
+      - EldritchKnowledge
+      - LanguageEldritch
+      force: true
+    - !type:RemoveComponents
+      components:
+      - type: BloodCultMember
+    - !type:RemoveCollectiveMind
+      channel: BloodCult
+
+- type: entity
+  parent: BaseMindRoleBloodCult
+  id: MindRoleBloodCultist
+  name: Blood Cultist Role
+  components:
+  - type: MindRole
+    roleType: TeamAntagonist
+    subtype: role-subtype-blood-cultist
+    antagPrototype: BloodCultist
+  - type: RoleBriefing
+    briefing: blood-cult-role-briefing-short
+  - type: RoleEffects
+    mindAdded:
+    - !type:AddComponents
+      components:
+      - type: BloodCultSpells
+    added:
+    - !type:AddComponents
+      components:
+      - type: BloodCultist
+
+- type: entity
+  parent: MindRoleBloodCultist
+  id: MindRoleBloodCultLeader
+  name: Blood Cult Leader Role
+  components:
+  - type: RoleEffects
+    added:
+    - !type:AddComponents
+      components:
+      - type: BloodCultLeader
+
+- type: entity
+  parent: BaseMindRoleBloodCult
+  id: MindRoleBloodCultConstruct
+  name: Blood Cult Construct Role
+  components:
+  - type: RoleBriefing
+    briefing: blood-cult-role-briefing-construct

@@ -1,0 +1,77 @@
+- type: construction
+  id: CultPylon
+  category: construction-category-structures
+  graph: CultPylon
+  targetNode: pylon
+  objectType: Structure
+  placementMode: AlignPylonConstruction
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    EldritchKnowledge: 5
+
+- type: construction
+  id: CultFactoryAltar
+  category: construction-category-structures
+  graph: CultFactoryAltar
+  targetNode: altar
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    EldritchKnowledge: 5
+
+- type: construction
+  id: CultFactoryForge
+  category: construction-category-structures
+  graph: CultFactoryForge
+  targetNode: forge
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    EldritchKnowledge: 5
+
+- type: construction
+  id: CultFactoryArchives
+  category: construction-category-structures
+  graph: CultFactoryArchives
+  targetNode: archives
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    EldritchKnowledge: 5
+
+- type: construction
+  id: CultDoor
+  category: construction-category-structures
+  graph: CultDoor
+  targetNode: door
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    EldritchKnowledge: 5
+
+- type: construction
+  id: CultGirder
+  category: construction-category-structures
+  graph: CultGirder
+  targetNode: girder
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    EldritchKnowledge: 5

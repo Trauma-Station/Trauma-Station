@@ -1,0 +1,16 @@
+- type: entity
+  parent: BaseAction
+  id: ActionBloodSpearRecall
+  name: Recall spear
+  description: Recalls your blood spear back to your hand.
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Items/Weapons/cult_spear.rsi
+    layers:
+    - state: icon
+    state: stun
+  - type: Action
+    itemIconStyle: BigAction
+    useDelay: 30
+  - type: InstantAction
+    event: !type:BloodSpearRecalledEvent

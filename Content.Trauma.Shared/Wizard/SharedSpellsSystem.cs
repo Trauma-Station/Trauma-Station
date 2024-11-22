@@ -84,7 +84,6 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-
 namespace Content.Trauma.Shared.Wizard;
 
 public abstract partial class SharedSpellsSystem : CommonSpellsSystem
@@ -135,8 +134,17 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
     [Dependency] private SharedChargesSystem _charges = default!;
     [Dependency] private TileFrictionController _tileFriction = default!;
 
+    [Dependency] private EntityQuery<BinglePitComponent> _binglePitQuery = default!;
+    [Dependency] private EntityQuery<BodyComponent> _bodyQuery = default!;
     [Dependency] private EntityQuery<BorgChassisComponent> _borgQuery = default!;
+    [Dependency] private EntityQuery<ContainerManagerComponent> _containerQuery = default!;
+    [Dependency] private EntityQuery<GhostComponent> _ghostQuery = default!;
+    [Dependency] private EntityQuery<HandsComponent> _handsQuery = default!;
+    [Dependency] private EntityQuery<InventoryComponent> _inventoryQuery = default!;
+    [Dependency] private EntityQuery<MagicComponent> _magicQuery = default!;
+    [Dependency] private EntityQuery<OrganComponent> _organQuery = default!;
     [Dependency] private EntityQuery<SiliconComponent> _siliconQuery = default!;
+    [Dependency] private EntityQuery<SpectralComponent> _spectralQuery = default!;
     #endregion
 
     private static readonly EntProtoId ClumsyWizard = "StatusEffectClumsyWizard";
@@ -240,9 +248,6 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
             return;
 
-        var ghostQuery = GetEntityQuery<GhostComponent>();
-        var spectralQuery = GetEntityQuery<SpectralComponent>();
-
         var (coords, mapCoords, spawnCoords, velocity) = GetProjectileData(ev.Performer);
 
         var targets = Lookup.GetEntitiesInRange<MobStateComponent>(coords, ev.Range, LookupFlags.Dynamic);
@@ -253,7 +258,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
             if (target == ev.Performer)
                 continue;
 
-            if (ghostQuery.HasComp(target) || spectralQuery.HasComp(target))
+            if (_ghostQuery.HasComp(target) || _spectralQuery.HasComp(target))
                 continue;
 
             hasTargets = true;
@@ -351,15 +356,12 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ExplodeCorpse(ev);
 
         var targets = Lookup.GetEntitiesInRange<DamageableComponent>(coords, ev.KnockdownRange);
-        var ghostQuery = GetEntityQuery<GhostComponent>();
-        var spectralQuery = GetEntityQuery<SpectralComponent>();
-        var organQuery = GetEntityQuery<OrganComponent>();
         foreach (var (target, damageable) in targets)
         {
             if (target == ev.Performer || target == ev.Target)
                 continue;
 
-            if (ghostQuery.HasComp(target) || spectralQuery.HasComp(target) || organQuery.HasComp(target))
+            if (_ghostQuery.HasComp(target) || _spectralQuery.HasComp(target) || _organQuery.HasComp(target))
                 continue;
 
             var range = (TransformSystem.GetMapCoordinates(target).Position - coords.Position).Length();
@@ -1165,10 +1167,9 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
 
     private bool RechargeAllSpells(EntityUid uid, EntityUid? except = null)
     {
-        var magicQuery = GetEntityQuery<MagicComponent>();
         var ents = except != null
-            ? Actions.GetActions(uid).Where(x => x.Owner != except.Value && magicQuery.HasComp(x.Owner))
-            : Actions.GetActions(uid).Where(x => magicQuery.HasComp(x.Owner));
+            ? Actions.GetActions(uid).Where(x => x.Owner != except.Value && _magicQuery.HasComp(x.Owner))
+            : Actions.GetActions(uid).Where(x => _magicQuery.HasComp(x.Owner));
         var hasSpells = false;
         foreach (var (ent, _) in ents)
         {
@@ -1192,25 +1193,17 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         var child = uid;
         var parent = xform.ParentUid;
 
-        var managerQuery = GetEntityQuery<ContainerManagerComponent>();
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        var bodyQuery = GetEntityQuery<BodyComponent>();
-        var organQuery = GetEntityQuery<OrganComponent>();
-        var inventoryQuery = GetEntityQuery<InventoryComponent>();
-        var handsQuery = GetEntityQuery<HandsComponent>();
-        var binglePitQuery = GetEntityQuery<BinglePitComponent>();
-
-        while (parent.IsValid() && !bodyQuery.HasComp(parent) && !organQuery.HasComp(parent) &&
-               !inventoryQuery.HasComp(parent) && !handsQuery.HasComp(parent) && !binglePitQuery.HasComp(parent))
+        while (parent.IsValid() && !_bodyQuery.HasComp(parent) && !_organQuery.HasComp(parent) &&
+               !_inventoryQuery.HasComp(parent) && !_handsQuery.HasComp(parent) && !_binglePitQuery.HasComp(parent))
         {
-            if (((EntityManager.MetaQuery.GetComponent(child).Flags & MetaDataFlags.InContainer) ==
-                 MetaDataFlags.InContainer) && managerQuery.TryGetComponent(parent, out var conManager) &&
+            if (((MetaData(child).Flags & MetaDataFlags.InContainer) ==
+                MetaDataFlags.InContainer) && _containerQuery.TryComp(parent, out var conManager) &&
                 Container.TryGetContainingContainer(parent, child, out var parentContainer, conManager))
             {
                 container = parentContainer;
             }
 
-            var parentXform = xformQuery.GetComponent(parent);
+            var parentXform = Transform(parent);
             child = parent;
             parent = parentXform.ParentUid;
         }

@@ -1,0 +1,69 @@
+- type: entity
+  parent: [ BaseStructure, BaseMagicalContraband ]
+  id: BloodCultBarrier
+  name: cult barrier
+  description: An eldritch cultist barrier. Can be destroyed by using a ritual dagger.
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    layers:
+    - sprite: _Trauma/BloodCult/Entities/Structures/barrier.rsi
+      state: barrier
+      shader: unshaded
+  - type: Appearance
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger: !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RunedMetal:
+            min: 5
+            max: 5
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PointLight
+    enabled: false
+    radius: 3
+    color: red
+  - type: BloodCultBarrier
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+
+- type: entity
+  parent: [ WallForce, BaseMagicalContraband ]
+  id: WallForceCult
+  name: glowing wall
+  description: An unholy shield that blocks all attacks.
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Structures/cult_shield.rsi
+    layers:
+    - state: icon
+  - type: Icon
+    sprite: _Trauma/BloodCult/Entities/Structures/cult_shield.rsi
+    state: icon

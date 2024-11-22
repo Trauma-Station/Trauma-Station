@@ -16,14 +16,11 @@ public sealed partial class MiningPointsSystem : CommonMiningPointsSystem
     [Dependency] private SharedIdCardSystem _idCard = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-
-    private EntityQuery<MiningPointsComponent> _query;
+    [Dependency] private EntityQuery<MiningPointsComponent> _query = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<MiningPointsComponent>();
 
         SubscribeLocalEvent<MiningPointsLatheComponent, MaterialEntityInsertedEvent>(OnMaterialEntityInserted);
         Subs.BuiEvents<MiningPointsLatheComponent>(LatheUiKey.Key, subs =>

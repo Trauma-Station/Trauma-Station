@@ -1,0 +1,37 @@
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseBloodCultObjective
+  components:
+  - type: Objective
+    issuer: BloodCult
+    unique: true
+    difficulty: 3
+  - type: RoleRequirement
+    roles:
+    - BloodCultistRole
+
+- type: entity
+  parent: BaseBloodCultObjective
+  id: KillTargetCultObjective
+  name: Sacrifice someone
+  description: Our Goddess Nar'Sie demands we sacrifice this fool for Her glory.
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/cult_dagger.rsi
+      state: icon
+  - type: KillTargetCult
+    title: objective-sacrifice-title
+
+- type: entity
+  parent: BaseBloodCultObjective
+  id: SummonNarSieCultObjective
+  name: Summon Nar'Sie
+  description: Once Her target has been sacraficed, we can perform the Ritual of Dimensional Rending!
+  components:
+  - type: Objective
+    icon:
+      sprite: _Trauma/BloodCult/mobs.rsi
+      state: harvester
+  - type: RoleplayObjective # TODO: greentext when summoning

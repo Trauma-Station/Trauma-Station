@@ -69,7 +69,9 @@ public sealed partial class RadialSelectorMenuBUI : BoundUserInterface
                 models.Add(new RadialMenuActionOption<string>(OnPressed, proto)
                 {
                     ToolTip = GetName(proto),
-                    IconSpecifier = RadialMenuIconSpecifier.With(entry.Icon) ?? GetIcon(proto)
+                    IconSpecifier = RadialMenuIconSpecifier.With(entry.Icon)
+                        ?? GetIcon(entry.IconEntity)
+                        ?? GetIcon(proto)
                 });
             }
         }
@@ -101,4 +103,9 @@ public sealed partial class RadialSelectorMenuBUI : BoundUserInterface
 
         return RadialMenuIconSpecifier.With(proto);
     }
+
+    private RadialMenuIconSpecifier? GetIcon(NetEntity? ent)
+        => EntMan.GetEntity(ent) is { } icon
+            ? RadialMenuIconSpecifier.With(icon)
+            : null;
 }

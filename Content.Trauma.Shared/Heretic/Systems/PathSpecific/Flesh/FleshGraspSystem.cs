@@ -10,7 +10,6 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Content.Trauma.Shared.Heretic.Ui;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Flesh;
 

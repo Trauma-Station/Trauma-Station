@@ -1,0 +1,5 @@
+- type: alert
+  id: CultEmpowered
+  icons: [ /Textures/_Trauma/BloodCult/Alerts/empowered.png ]
+  name: alerts-blood-cult-empowered-name
+  description: alerts-blood-cult-empowered-desc

@@ -106,9 +106,8 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         if (!_heretic.TryGetRitual((mind, heretic), BladeBladeRitualTag, out var ritual))
             return false;
 
-        var xformQuery = GetEntityQuery<TransformComponent>();
         var containerEnt = uid;
-        if (_container.TryGetOuterContainer(uid, xformQuery.Comp(uid), out var container, xformQuery))
+        if (_container.TryGetOuterContainer(uid, Transform(uid), out var container))
             containerEnt = container.Owner;
 
         var success = false;
@@ -124,7 +123,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
                 infused.AvailableCharges >= infused.MaxCharges)
                 continue;
 
-            if (!_container.TryGetOuterContainer(blade, xformQuery.Comp(blade), out var bladeContainer, xformQuery))
+            if (!_container.TryGetOuterContainer(blade, Transform(blade), out var bladeContainer))
                 continue;
 
             if (bladeContainer.Owner != containerEnt)

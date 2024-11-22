@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-
 namespace Content.Trauma.Common.RadialSelector;
 
 [NetSerializable, Serializable]
@@ -22,16 +21,16 @@ public sealed class RadialSelectorSelectedMessage(string selectedItem) : BoundUs
 }
 
 [DataDefinition, Serializable, NetSerializable]
-public sealed partial class RadialSelectorEntry
+public partial record struct RadialSelectorEntry
 {
     [DataField]
-    public string? Prototype { get; set; }
-
+    public string? Prototype;
     [DataField]
-    public SpriteSpecifier? Icon { get; set; }
-
+    public SpriteSpecifier? Icon;
+    [ViewVariables]
+    public NetEntity? IconEntity;
     [DataField]
-    public RadialSelectorCategory? Category { get; set; }
+    public RadialSelectorCategory? Category;
 }
 
 [DataDefinition, Serializable, NetSerializable]

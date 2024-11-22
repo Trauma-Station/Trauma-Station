@@ -1,0 +1,21 @@
+- type: entity
+  parent: BaseGameRule
+  id: BloodCult
+  components:
+  - type: GameRule
+    minPlayers: 30
+  - type: BloodCultRule
+  - type: AntagObjectives
+    objectives:
+    - KillTargetCultObjective
+    - SummonNarSieCultObjective
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: BloodCultLeader
+    - !type:LinearAntagCount
+      proto: BloodCultist
+      range:
+        min: 1
+        max: 3
+      playerRatio: 15

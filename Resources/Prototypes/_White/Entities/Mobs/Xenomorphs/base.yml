@@ -11,6 +11,8 @@
   id: BaseMobXenomorph
   abstract: true
   components:
+  - type: LanguageHivemind
+    language: XenoHivemind
   - type: Xenomorph
     weedHeal:
       types:

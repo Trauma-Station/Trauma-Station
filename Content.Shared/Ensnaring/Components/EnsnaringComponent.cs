@@ -2,6 +2,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Ensnaring.Components;
+
 /// <summary>
 /// Use this on something you want to use to ensnare an entity with
 /// </summary>
@@ -68,13 +69,6 @@ public sealed partial class EnsnaringComponent : Component
 /// </summary>
     [DataField]
     public SoundSpecifier? EnsnareSound = new SoundPathSpecifier("/Audio/Effects/snap.ogg");
-
-    /// <summary>
-    /// Goobstation
-    /// Should the ensaring entity be deleted upon removal?
-    /// </summary>
-    [DataField]
-    public bool DestroyOnRemove;
 }
 
 /// <summary>

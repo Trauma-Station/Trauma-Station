@@ -624,5 +624,4 @@ public abstract partial class SharedMagicSystem : EntitySystem
     #endregion
     // End Spells
     #endregion
-
 }

@@ -9,16 +9,7 @@ public sealed partial class RoleEffectsSystem : EntitySystem
 {
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<RoleEffectsComponent, RoleGotAddedEvent>(OnAdded);
-        SubscribeLocalEvent<RoleEffectsComponent, RoleGotRemovedEvent>(OnRemoved);
-        SubscribeLocalEvent<RoleEffectsComponent, RoleMindAddedEvent>(OnMindAdded);
-        SubscribeLocalEvent<RoleEffectsComponent, RoleMindRemovedEvent>(OnMindRemoved);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAdded(Entity<RoleEffectsComponent> ent, ref RoleGotAddedEvent args)
     {
         // TODO: add predicted bools to the mind role chain...
@@ -31,6 +22,7 @@ public sealed partial class RoleEffectsSystem : EntitySystem
             RemCompDeferred(ent, ent.Comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnRemoved(Entity<RoleEffectsComponent> ent, ref RoleGotRemovedEvent args)
     {
         _effects.ApplyEffects(args.Mind, ent.Comp.MindRemoved, predicted: false);
@@ -40,11 +32,13 @@ public sealed partial class RoleEffectsSystem : EntitySystem
         _effects.ApplyEffects(mob, ent.Comp.Removed, predicted: false);
     }
 
+    [SubscribeLocalEvent]
     private void OnMindAdded(Entity<RoleEffectsComponent> ent, ref RoleMindAddedEvent args)
     {
         _effects.ApplyEffects(args.Mob, ent.Comp.Added, predicted: false);
     }
 
+    [SubscribeLocalEvent]
     private void OnMindRemoved(Entity<RoleEffectsComponent> ent, ref RoleMindRemovedEvent args)
     {
         _effects.ApplyEffects(args.Mob, ent.Comp.Removed);

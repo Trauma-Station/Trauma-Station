@@ -1,0 +1,39 @@
+- type: entity
+  id: RitualDagger
+  components:
+  - type: CultItem
+  - type: RuneDrawer
+  - type: ActivatableUI
+    key: enum.RuneDrawerBuiKey.Key
+    inHandsOnly: true
+  - type: ActivatableUiUserWhitelist
+    whitelist:
+      components:
+      - BloodCultMember
+  - type: UserInterface
+    interfaces:
+      enum.RuneDrawerBuiKey.Key:
+        type: RuneDrawerBUI
+  - type: MeleeWeapon
+    soundHit: &sound
+      path: /Audio/Weapons/bladeslice.ogg
+
+- type: entity
+  id: EldritchBlade
+  components:
+  - type: Sharp
+  - type: MeleeWeapon
+    soundHit: *sound
+
+- type: entity
+  id: UnholyHalberd
+  components:
+  - type: Sharp
+  - type: MeleeWeapon
+    damage:
+      types:
+        Structural: 5
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Structural: 5

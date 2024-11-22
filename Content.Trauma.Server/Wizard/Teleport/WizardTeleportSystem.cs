@@ -4,6 +4,8 @@ using System.Linq;
 using Content.Server.Pinpointer;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
+using Content.Shared.Charges.Components;
+using Content.Shared.Charges.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
@@ -22,6 +24,7 @@ public sealed partial class WizardTeleportSystem : SharedWizardTeleportSystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
@@ -38,36 +41,19 @@ public sealed partial class WizardTeleportSystem : SharedWizardTeleportSystem
     private static readonly SoundSpecifier PostTeleportSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Wizard/teleport_app.ogg");
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnLocationSelected(Entity<TeleportScrollComponent> ent, ref WizardTeleportLocationSelectedMessage args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<UserInterfaceComponent, WizardTeleportLocationSelectedMessage>(OnLocationSelected);
-
-        SubscribeLocalEvent<TeleportScrollComponent, WizardTeleportLocationSelectedMessage>(OnScrollLocationSelected);
-        SubscribeLocalEvent<TeleportScrollComponent, AfterActivatableUIOpenEvent>(OnAfterUIOpen);
-
-        SubscribeLocalEvent<WizardTeleportWarpPointComponent, MapInitEvent>(OnTeleportWarpMapInit,
-            after: new[] { typeof(NavMapSystem) });
-    }
-
-    private void OnLocationSelected(Entity<UserInterfaceComponent> ent, ref WizardTeleportLocationSelectedMessage args)
-    {
-        if (HasComp<TeleportScrollComponent>(ent))
+        if (TryComp<ActionComponent>(ent, out var action) && !_actions.ValidAction((ent, action)))
             return;
 
-        if (args.Action == null)
-            return;
-
-        var action = GetEntity(args.Action.Value);
-
-        if (!TryComp(action, out ActionComponent? actionComp) || !_actions.ValidAction((action, actionComp)))
+        if (TryComp<LimitedChargesComponent>(ent, out var charges) && _charges.IsEmpty((ent, charges)))
             return;
 
         var user = args.Actor;
         var location = GetEntity(args.Location);
 
-        if (!HasComp<WizardTeleportLocationComponent>(location))
+        if (!TryComp<WizardTeleportLocationComponent>(location, out var comp))
             return;
 
         if (!Teleport(user, location))
@@ -75,29 +61,12 @@ public sealed partial class WizardTeleportSystem : SharedWizardTeleportSystem
 
         _spells.SpeakSpell(user,
             user,
-            Loc.GetString("action-speech-spell-teleport", ("location", args.LocationName)),
+            Loc.GetString("action-speech-spell-teleport", ("location", comp.Location ?? Name(location))),
             MagicSchool.Translocation);
 
-        _actions.StartUseDelay(action);
-    }
-
-    private void OnScrollLocationSelected(Entity<TeleportScrollComponent> ent,
-        ref WizardTeleportLocationSelectedMessage args)
-    {
-        if (ent.Comp.UsesLeft <= 0)
-            return;
-
-        var user = args.Actor;
-        var location = GetEntity(args.Location);
-
-        if (!HasComp<WizardTeleportLocationComponent>(location))
-            return;
-
-        if (!Teleport(user, location))
-            return;
-
-        ent.Comp.UsesLeft--;
-        if (ent.Comp.UsesLeft <= 0)
+        if (action != null)
+            _actions.StartUseDelay((ent, action));
+        if (charges != null && !_charges.TryUseCharge((ent, charges)))
         {
             _popup.PopupEntity(Loc.GetString("teleport-scroll-no-charges"), user, user, PopupType.Medium);
             _ui.CloseUis(ent.Owner);
@@ -105,8 +74,6 @@ public sealed partial class WizardTeleportSystem : SharedWizardTeleportSystem
             // Don't Queuedel right away so that client doesn't throw debug assert exception
             _fadeDespawn.FadeDespawnEntity(ent, TimeSpan.Zero, TimeSpan.FromSeconds(2));
         }
-
-        Dirty(ent);
     }
 
     private bool Teleport(EntityUid user, EntityUid location)
@@ -129,19 +96,22 @@ public sealed partial class WizardTeleportSystem : SharedWizardTeleportSystem
         if (!_ui.TryToggleUi(action, key, performer))
             return;
 
-        var state = new WizardTeleportState(GetWizardTeleportLocations().ToList(), GetNetEntity(action));
+        var state = new WizardTeleportState(GetWizardTeleportLocations());
         _ui.SetUiState(action, key, state);
     }
 
+    [SubscribeLocalEvent]
     private void OnAfterUIOpen(Entity<TeleportScrollComponent> ent, ref AfterActivatableUIOpenEvent args)
     {
-        if (!_ui.HasUi(ent, WizardTeleportUiKey.Key))
+        var key = WizardTeleportUiKey.Key;
+        if (!_ui.HasUi(ent, key))
             return;
 
-        var state = new WizardTeleportState(GetWizardTeleportLocations().ToList(), null);
-        _ui.SetUiState(ent.Owner, WizardTeleportUiKey.Key, state);
+        var state = new WizardTeleportState(GetWizardTeleportLocations());
+        _ui.SetUiState(ent.Owner, key, state);
     }
 
+    [SubscribeLocalEvent(after: [typeof(NavMapSystem)])]
     private void OnTeleportWarpMapInit(Entity<WizardTeleportWarpPointComponent> ent, ref MapInitEvent args)
     {
         var uid = ent.Owner;
@@ -163,15 +133,17 @@ public sealed partial class WizardTeleportSystem : SharedWizardTeleportSystem
         _transform.AttachToGridOrMap(teleportLocation);
     }
 
-    private IEnumerable<WizardWarp> GetWizardTeleportLocations()
+    private List<WizardWarp> GetWizardTeleportLocations()
     {
+        var list = new List<WizardWarp>();
         var allQuery = AllEntityQuery<WizardTeleportLocationComponent, TransformComponent>();
-
         while (allQuery.MoveNext(out var uid, out var location, out var xform))
         {
             if (CanTeleportTo(xform))
-                yield return new WizardWarp(GetNetEntity(uid), location.Location ?? Name(uid));
+                list.Add(new(GetNetEntity(uid), location.Location ?? Name(uid)));
         }
+
+        return list;
     }
 
     private bool CanTeleportTo(TransformComponent xform)
