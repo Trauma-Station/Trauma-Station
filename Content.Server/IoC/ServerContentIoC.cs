@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Server._RMC14.LinkAccount;
 using Content.Server.MoMMI;
+using Content.Server._RMC14.Mentor;
 // </Trauma>
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -19,6 +20,7 @@ using Content.Server.GhostKick;
 using Content.Server.Info;
 using Content.Server.Mapping;
 using Content.Server.Maps;
+using Content.Server.MoMMI;
 using Content.Server.NodeContainer.NodeGroups;
 using Content.Server.Players.JobWhitelist;
 using Content.Server.Players.PlayTimeTracking;
@@ -88,6 +90,7 @@ internal static class ServerContentIoC
         //deps.Register<DiscordChatLink>(); // Trauma
         deps.Register<IMoMMILink, MoMMILink>(); // Trauma
         deps.Register<LinkAccountManager>(); // RMC - Patreon
+        deps.Register<MentorManager>(); // RMC - Mentor
         deps.Register<ServerFeedbackManager>();
         deps.Register<ISharedFeedbackManager, ServerFeedbackManager>();
     }
