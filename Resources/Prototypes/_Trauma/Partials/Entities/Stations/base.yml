@@ -9,3 +9,12 @@
   - type: StationCargoBountyDatabase
     maxBounties: 8
   - type: StationXenobiologyBountyDatabase
+
+# - type: entity
+#   id: BaseStationShuttles
+#   components:
+#     - type: GridSpawn
+#       groups:
+#         oldstation: !type:GridSpawnGroup #force this to always spawn so ghost roles are always accessible
+#         paths:
+#         - /Maps/_Funkystation/Ruins/oldstation.yml

@@ -1,0 +1,36 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseStructure
+  id: CryogenicSleepUnitAncient
+  name: old cryogenic sleep unit
+  description: An ancient cryogenic sleep unit that has been forced open by a safety mechanism.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _Funkystation/Structures/oldcryo.rsi
+    layers:
+    - state: sleeper_0
+      map: ["base"]
+  - type: AccessReader
+    access: [["Cryogenics"]]
+  - type: InteractionOutline
+  - type: Physics
+    canCollide: false
+  - type: ExitContainerOnMove
+    containerId: storage
+  - type: PointLight
+    color: Lime
+    radius: 1.5
+    energy: 0.5
+    castShadows: false
+  - type: ContainerContainer
+    containers:
+      storage: !type:ContainerSlot
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CryostorageVisuals.Full:
+        base:
+          True: { state: sleeper_1 }
+          False: { state: sleeper_0 }
