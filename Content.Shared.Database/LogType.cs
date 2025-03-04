@@ -508,4 +508,9 @@ public enum LogType
     /// Trauma - Genetics related logs.
     /// </summary>
     Genetics = 20001,
+    
+    /// <summary>
+    /// Trauma - ObjectiveSummary related logs.
+    /// </summary>
+    ObjectiveSummary = 422, // DeltaV
 }
