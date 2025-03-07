@@ -27,6 +27,7 @@
     - BaseStationSiliconLawCrewsimov
     - BaseStationAllEventsEligible
     - BaseStationNanotrasen
+    - BaseStationDeliveries
     # <Trauma>
     - BaseStationWizardTarget
     - BaseStationAlertLevelLocking
