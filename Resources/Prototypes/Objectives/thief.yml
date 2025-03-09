@@ -127,6 +127,20 @@
 
 - type: entity
   parent: BaseThiefStealCollectionObjective
+  id: MailStealCollectionObjective
+  components:
+  - type: NotJobRequirement
+    job: CargoTechnician
+  - type: StealCondition
+    stealGroup: Mail
+    minCollectionSize: 4
+    maxCollectionSize: 8
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 0.8
+
+- type: entity
+  parent: BaseThiefStealCollectionObjective
   id: IDCardsStealCollectionObjective
   components:
   - type: NotJobRequirement #Here cause you can buy a personnel crate from cargo which is 8 ID cards. Meaning the ID you start with is number nine and you only need to steal one.

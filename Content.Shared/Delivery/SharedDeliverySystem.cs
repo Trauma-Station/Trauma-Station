@@ -5,6 +5,7 @@ using Content.Shared.FingerprintReader;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.NameModifier.EntitySystems;
+using Content.Shared.Objectives.Components;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
@@ -128,6 +129,7 @@ public abstract class SharedDeliverySystem : EntitySystem
 
         _tag.AddTags(ent, "Trash", "Recyclable");
         EnsureComp<SpaceGarbageComponent>(ent);
+        RemComp<StealTargetComponent>(ent); // opened mail should not count for the objective
 
         DirtyField(ent.Owner, ent.Comp, nameof(DeliveryComponent.IsOpened));
 
