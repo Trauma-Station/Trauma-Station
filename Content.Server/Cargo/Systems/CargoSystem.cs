@@ -71,27 +71,4 @@ public sealed partial class CargoSystem : SharedCargoSystem
         UpdateTelepad(frameTime);
         UpdateBounty();
     }
-
-    [PublicAPI]
-    public void UpdateBankAccount(Entity<StationBankAccountComponent?> ent, int balanceAdded)
-    {
-        if (!Resolve(ent, ref ent.Comp))
-            return;
-
-        ent.Comp.Balance += balanceAdded;
-
-        var ev = new BankBalanceUpdatedEvent(ent, ent.Comp.Balance);
-
-        var query = EntityQueryEnumerator<BankClientComponent, TransformComponent>();
-        while (query.MoveNext(out var client, out var comp, out var xform))
-        {
-            var station = _station.GetOwningStation(client, xform);
-            if (station != ent)
-                continue;
-
-            comp.Balance = ent.Comp.Balance;
-            Dirty(client, comp);
-            RaiseLocalEvent(client, ref ev);
-        }
-    }
 }
