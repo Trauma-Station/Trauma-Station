@@ -23,7 +23,7 @@ public sealed partial class MaterialStorageControl
         _tag = _entityManager.System<TagSystem>();
     }
 
-    private Dictionary<string, int> FilterOutOres(Dictionary<string, int> materials)
+    private Dictionary<ProtoId<MaterialPrototype>, int> FilterOutOres(Dictionary<ProtoId<MaterialPrototype>, int> materials)
     {
         return materials.Where(pair =>
             !(_proto.TryIndex<MaterialPrototype>(pair.Key, out var proto) &&

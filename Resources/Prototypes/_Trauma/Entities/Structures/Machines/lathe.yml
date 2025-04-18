@@ -57,6 +57,7 @@
   - type: Construction
     deconstructionTarget: null
     graph: RevMachine
+  - type: OreSiloClient
 
 - type: entity
   parent: BaseRevIndustry
@@ -205,15 +206,20 @@
     color: "#ffffff"
     radius: 1.5
     energy: 5.0
-  - type: WirelessNetworkConnection
-    range: 1000
-  - type: DeviceLinkSource
-    range: 1000
-    ports:
-    - MaterialSilo
+  - type: OreSilo
+    range: 15
   - type: MaterialStorage
     ignoreColor: true
-  - type: Silo
+    whitelist:
+      tags:
+      - Sheet
+      - Ingot
+  - type: UserInterface
+    interfaces:
+      enum.LatheUiKey.Key:
+        type: LatheBoundUserInterface
+      enum.OreSiloUiKey.Key:
+        type: OreSiloBoundUserInterface
 
 - type: entity
   parent: BaseRevIndustry

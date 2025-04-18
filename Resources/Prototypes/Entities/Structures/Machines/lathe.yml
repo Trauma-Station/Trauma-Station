@@ -31,6 +31,7 @@
         maxDistance: 10
         variation: 0.05
   - type: SpamEmitSoundRequirePower
+  - type: OreSiloClient # every lathe should be usable with a silo
   # </Trauma>
   - type: Appearance
   - type: WiresVisuals
@@ -149,6 +150,7 @@
         - Sheet
         - RawMaterial
         - Ingot
+  - type: OreSiloClient
   - type: Lathe
     idleState: icon
     runningState: building
@@ -230,6 +232,7 @@
     board: ProtolatheMachineCircuitboard
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
+  - type: OreSiloClient
   - type: Lathe
     idleState: icon
     runningState: building
@@ -335,6 +338,7 @@
     - SharedBoards
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
+  - type: OreSiloClient
   - type: RequireProjectileTarget
 
 - type: entity
@@ -411,6 +415,7 @@
     - MechWeaponsSecurityLight
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
+  - type: OreSiloClient
   - type: GuideHelp
     guides:
     - Robotics
@@ -522,6 +527,9 @@
   #   # - SyndicateAmmoStatic # Trauma
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
+  - type: OreSiloClient
+  #- type: LatheAnnouncing # Trauma - not cherry picked
+  #  channels: [Security]
 
 - type: entity
   id: AmmoTechFab
@@ -556,6 +564,7 @@
       # - SyndicateAmmoStatic # Trauma
     - type: MaterialStorage
       whitelist: *StandardMaterialWhitelist
+    - type: OreSiloClient
 
 - type: entity
   id: MedicalTechFab
@@ -563,6 +572,11 @@
   name: medical techfab
   description: Prints equipment and circuitboards for use by the medbay.
   components:
+  # <Trauma>
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - SyndicateCatridgesStatic
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Machines/techfab.rsi
     layers:
@@ -582,14 +596,7 @@
     unlitIdleState: unlit
     unlitRunningState: unlit-building
     staticPacks:
-    - TopicalsStatic
-    - ChemistryStatic
-    - MedicalStatic
-    - RollerBedsStatic
-    - MedicalClothingStatic
-    - EmptyMedkitsStatic
-    - SurgeryStatic
-    # Goobstation Packs
+    # <Trauma>
     - ParamedHypoStatic
     - MedicalPatchesStatic
     - SurgeryStaticGoob
@@ -598,12 +605,18 @@
     - MedicalBoardsStaticGoob
     - PowerCellsStatic
     - GrenadeTriggersStatic
-    # Einstein Engines Packs
     - SyringeCase
-    - TraumaMedicalStatic # Trauma
+    - TraumaMedicalStatic
+    # </Trauma>
+    - TopicalsStatic
+    - ChemistryStatic
+    - MedicalStatic
+    - RollerBedsStatic
+    - MedicalClothingStatic
+    - EmptyMedkitsStatic
+    - SurgeryStatic
     dynamicPacks:
-    - Chemistry
-    # Goobstation Packs
+    # <Trauma>
     - Surgery
     - MedicalCybernetics
     - EnvirosuitExtinguisherRefill
@@ -613,17 +626,18 @@
     - MedicalBoards
     - Janitor
     - Genetics
-    # Einstein Engines Packs
-    - Translators # Language
-    - TranslatorImplanters # Language
-    - TraumaCybernetics # Trauma
+    - Translators
+    - TranslatorImplanters
+    - TraumaCybernetics
+    # </Trauma>
+    - Chemistry
   - type: Machine
     board: MedicalTechFabCircuitboard
-  - type: EmagLatheRecipes # Goobstation Packs
-    emagStaticPacks:
-    - SyndicateCatridgesStatic
   - type: StealTarget
     stealGroup: MedicalTechFabCircuitboard
+  - type: OreSiloClient
+  #- type: LatheAnnouncing # Trauma - not cherry picked
+  #  channels: [Medical]
 
 - type: entity
   parent: BaseLathe
