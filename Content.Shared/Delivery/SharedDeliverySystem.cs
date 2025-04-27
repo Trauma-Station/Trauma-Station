@@ -68,7 +68,7 @@ public abstract class SharedDeliverySystem : EntitySystem
             var multiplier = GetDeliveryMultiplier(ent);
             var totalSpesos = Math.Round(ent.Comp.BaseSpesoReward * multiplier);
 
-            args.PushMarkup(Loc.GetString("delivery-earnings-examine", ("spesos", totalSpesos)));
+            args.PushMarkup(Loc.GetString("delivery-earnings-examine", ("spesos", totalSpesos)), -1);
         }
     }
 
@@ -237,7 +237,18 @@ public abstract class SharedDeliverySystem : EntitySystem
 
         // If we're trying to unlock, always remove the priority tape
         if (!isLocked)
-            _appearance.SetData(uid, DeliveryVisuals.IsPriority, false);
+            _appearance.SetData(uid, DeliveryVisuals.PriorityState, DeliveryPriorityState.Off);
+    }
+
+    public void UpdatePriorityVisuals(Entity<DeliveryPriorityComponent> ent)
+    {
+        if (!TryComp<DeliveryComponent>(ent, out var delivery))
+            return;
+
+        if (delivery.IsLocked && !delivery.IsOpened)
+        {
+            _appearance.SetData(ent, DeliveryVisuals.PriorityState, ent.Comp.Expired ? DeliveryPriorityState.Inactive : DeliveryPriorityState.Active);
+        }
     }
 
     protected void UpdateDeliverySpawnerVisuals(EntityUid uid, int contents)
@@ -256,7 +267,10 @@ public abstract class SharedDeliverySystem : EntitySystem
         var ev = new GetDeliveryMultiplierEvent();
         RaiseLocalEvent(ent, ref ev);
 
-        return ev.AdditiveMultiplier * ev.MultiplicativeMultiplier;
+        // Ensure the multiplier can never go below 0.
+        var totalMultiplier = Math.Max(ev.AdditiveMultiplier * ev.MultiplicativeMultiplier, 0);
+
+        return totalMultiplier;
     }
 
     protected virtual void GrantSpesoReward(Entity<DeliveryComponent?> ent) { }
