@@ -45,6 +45,7 @@
     - !type:NestedSelector # Trauma
       tableId: ModerateAntagEventsTrauma
     - id: DragonSpawn
+    - id: ColossusSpawn # DeltaV
     - id: NinjaSpawn
     - id: ParadoxCloneSpawn
     #- id: RevenantSpawn  # GoobStation - removed till rework

@@ -1,3 +1,4 @@
+using Content.Server._DV.CosmicCult.Abilities;
 using Content.Server.RoundEnd;
 using Content.Shared._DV.CosmicCult.Components;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -7,7 +8,8 @@ namespace Content.Server._DV.CosmicCult.Components;
 /// <summary>
 /// Component for the CosmicCultRuleSystem that should store gameplay info.
 /// </summary>
-[RegisterComponent, AutoGenerateComponentPause]
+[RegisterComponent, Access(typeof(CosmicCultRuleSystem), typeof(CosmicMonumentSystem))]
+[AutoGenerateComponentPause]
 public sealed partial class CosmicCultRuleComponent : Component
 {
     /// <summary>
@@ -43,8 +45,17 @@ public sealed partial class CosmicCultRuleComponent : Component
     [DataField]
     public HashSet<EntityUid> Cultists = [];
 
+    /// <summary>
+    /// When true, prevents the wincondition state of Cosmic Cult from being changed.
+    /// </summary>
     [DataField]
     public bool WinLocked;
+
+    /// <summary>
+    /// When true, Malign Rifts are unable to spawn.
+    /// </summary>
+    [DataField]
+    public bool RiftStop;
 
     [DataField]
     public WinType WinType = WinType.CrewMinor;
@@ -107,6 +118,10 @@ public sealed partial class CosmicCultRuleComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? Tier2DelayTimer;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan? ExtraRiftTimer;
+
 }
 
 public enum WinType : byte

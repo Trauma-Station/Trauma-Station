@@ -225,6 +225,8 @@
         32:
           sprite: Mobs/Species/Vox/displacement.rsi
           state: hand_r
+  - type: CosmicMarkVisuals # DeltaV - cosmic cult
+    subtleState: vox
   - type: LanguageKnowledge # Einstein Engines - Language
     speaks:
       - TauCetiBasic
