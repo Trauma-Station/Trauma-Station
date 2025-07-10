@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Server.Cargo.Systems;
 using Content.Server.Power.Components;
+using Content.Server.Power.EntitySystems;
 using Content.Server.Vocalization.Systems;
 using Content.Shared.Cargo;
 using Content.Shared.Damage.Systems;
@@ -203,6 +204,11 @@ public sealed partial class VendingMachineSystem : SharedVendingMachineSystem
                 EjectRandom(uid, true, false, comp);
                 comp.NextEmpEject += (5 * comp.EjectDelay);
             }
+        }
+
+        private void OnTryVocalize(Entity<VendingMachineComponent> ent, ref TryVocalizeEvent args)
+        {
+            args.Cancelled |= ent.Comp.Broken;
         }
     }
 
