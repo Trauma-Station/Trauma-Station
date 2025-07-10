@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
+// </Trauma>
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -13,6 +17,8 @@ public partial class SharedGunSystem
         SubscribeLocalEvent<SolutionAmmoProviderComponent, GetAmmoCountEvent>(OnSolutionAmmoCount);
     }
 
+    [Dependency] private SharedSolutionContainerSystem _solution = default!; // Trauma
+
     private void OnSolutionTakeAmmo(Entity<SolutionAmmoProviderComponent> ent, ref TakeAmmoEvent args)
     {
         var shots = Math.Min(args.Shots, ent.Comp.Shots);
@@ -26,6 +32,15 @@ public partial class SharedGunSystem
             args.Ammo.Add(GetSolutionShot(ent, args.Coordinates));
             ent.Comp.Shots--;
         }
+
+        // <Trauma>
+        // Replaced 20 year old shitcode with this so it actually consumes reagents when firing
+        // Yes, it was just two lines all this time. No need to go through 5 different server systems
+        if (TryComp<SolutionComponent>(ent, out var solution))
+        {
+            _solution.RemoveEachReagent((ent.Owner, solution), ent.Comp.FireCost);
+        }
+        // </Trauma>
 
         UpdateSolutionShots(ent);
         UpdateSolutionAppearance(ent);
@@ -47,6 +62,7 @@ public partial class SharedGunSystem
 
     protected void UpdateSolutionAppearance(Entity<SolutionAmmoProviderComponent> ent)
     {
+        if (!Timing.IsFirstTimePredicted) return; // Trauma - fix visual mispredict
         if (!TryComp<AppearanceComponent>(ent, out var appearance))
             return;
 
