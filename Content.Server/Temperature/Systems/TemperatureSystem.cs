@@ -3,6 +3,7 @@ using Content.Goobstation.Common.Temperature;
 // </Trauma>
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Temperature.Components;
+using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Inventory;
 using Content.Shared.Rejuvenate;
@@ -16,6 +17,24 @@ namespace Content.Server.Temperature.Systems;
 public sealed partial class TemperatureSystem : SharedTemperatureSystem
 {
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly TemperatureSystem _temperature = default!;
+    private EntityQuery<TemperatureImmunityComponent> _immuneQuery; // DeltaV
+
+    /// <summary>
+    ///     All the components that will have their damage updated at the end of the tick.
+    ///     This is done because both AtmosExposed and Flammable call ChangeHeat in the same tick, meaning
+    ///     that we need some mechanism to ensure it doesn't double dip on damage for both calls.
+    /// </summary>
+    public HashSet<Entity<TemperatureComponent>> ShouldUpdateDamage = new();
+
+    public float UpdateInterval = 1.0f;
+
+    private float _accumulatedFrametime;
+
+    [ValidatePrototypeId<AlertCategoryPrototype>]
+    public const string TemperatureAlertCategory = "Temperature";
 
     public override void Initialize()
     {
@@ -31,6 +50,13 @@ public sealed partial class TemperatureSystem : SharedTemperatureSystem
         SubscribeLocalEvent<ChangeTemperatureOnCollideComponent, ProjectileHitEvent>(ChangeTemperatureOnCollide);
 
         InitializeDamage();
+        // Allows overriding thresholds based on the parent's thresholds.
+        SubscribeLocalEvent<TemperatureComponent, EntParentChangedMessage>(OnParentChange);
+        SubscribeLocalEvent<ContainerTemperatureDamageThresholdsComponent, ComponentStartup>(
+            OnParentThresholdStartup);
+        SubscribeLocalEvent<ContainerTemperatureDamageThresholdsComponent, ComponentShutdown>(
+            OnParentThresholdShutdown);
+        _immuneQuery = GetEntityQuery<TemperatureImmunityComponent>(); // DeltaV
     }
 
     public override void Update(float frameTime)
@@ -147,6 +173,120 @@ public sealed partial class TemperatureSystem : SharedTemperatureSystem
     private void OnRejuvenate(EntityUid uid, TemperatureComponent comp, RejuvenateEvent args)
     {
         ForceChangeTemperature(uid, Atmospherics.T20C, comp);
+    }
+
+    private void ServerAlert(EntityUid uid, AlertsComponent status, OnTemperatureChangeEvent args)
+    {
+        ProtoId<AlertPrototype> type;
+        float threshold;
+        float idealTemp;
+
+        if (!TryComp<TemperatureComponent>(uid, out var temperature) || _immuneQuery.HasComp(uid)) // DeltaV - hide alerts if immune
+        {
+            _alerts.ClearAlertCategory(uid, TemperatureAlertCategory);
+            return;
+        }
+
+        if (TryComp<ThermalRegulatorComponent>(uid, out var regulator) &&
+            regulator.NormalBodyTemperature > temperature.ColdDamageThreshold &&
+            regulator.NormalBodyTemperature < temperature.HeatDamageThreshold)
+        {
+            idealTemp = regulator.NormalBodyTemperature;
+        }
+        else
+        {
+            idealTemp = (temperature.ColdDamageThreshold + temperature.HeatDamageThreshold) / 2;
+        }
+
+        if (args.CurrentTemperature <= idealTemp)
+        {
+            type = temperature.ColdAlert;
+            threshold = temperature.ColdDamageThreshold;
+        }
+        else
+        {
+            type = temperature.HotAlert;
+            threshold = temperature.HeatDamageThreshold;
+        }
+
+        // Calculates a scale where 1.0 is the ideal temperature and 0.0 is where temperature damage begins
+        // The cold and hot scales will differ in their range if the ideal temperature is not exactly halfway between the thresholds
+        var tempScale = (args.CurrentTemperature - threshold) / (idealTemp - threshold);
+        switch (tempScale)
+        {
+            case <= 0f:
+                _alerts.ShowAlert(uid, type, 3);
+                break;
+
+            case <= 0.4f:
+                _alerts.ShowAlert(uid, type, 2);
+                break;
+
+            case <= 0.66f:
+                _alerts.ShowAlert(uid, type, 1);
+                break;
+
+            case > 0.66f:
+                _alerts.ClearAlertCategory(uid, TemperatureAlertCategory);
+                break;
+        }
+    }
+
+    private void EnqueueDamage(Entity<TemperatureComponent> temperature, ref OnTemperatureChangeEvent args)
+    {
+        // Begin DeltaV Additions - cosmic cult temperature immunity
+        if (_immuneQuery.HasComp(temperature))
+            return;
+        // End DeltaV Additions
+        ShouldUpdateDamage.Add(temperature);
+    }
+
+    private void ChangeDamage(EntityUid uid, TemperatureComponent temperature)
+    {
+        if (!HasComp<DamageableComponent>(uid))
+            return;
+
+        // See this link for where the scaling func comes from:
+        // https://www.desmos.com/calculator/0vknqtdvq9
+        // Based on a logistic curve, which caps out at MaxDamage
+        var heatK = 0.005;
+        var a = 1;
+        var y = temperature.DamageCap;
+        var c = y * 2;
+
+        var heatDamageThreshold = temperature.ParentHeatDamageThreshold ?? temperature.HeatDamageThreshold;
+        var coldDamageThreshold = temperature.ParentColdDamageThreshold ?? temperature.ColdDamageThreshold;
+
+        if (temperature.CurrentTemperature >= heatDamageThreshold)
+        {
+            if (!temperature.TakingDamage)
+            {
+                _adminLogger.Add(LogType.Temperature, $"{ToPrettyString(uid):entity} started taking high temperature damage");
+                temperature.TakingDamage = true;
+            }
+
+            var diff = Math.Abs(temperature.CurrentTemperature - heatDamageThreshold);
+            var tempDamage = c / (1 + a * Math.Pow(Math.E, -heatK * diff)) - y;
+            _damageable.TryChangeDamage(uid, temperature.HeatDamage * tempDamage, ignoreResistances: true, interruptsDoAfters: false);
+        }
+        else if (temperature.CurrentTemperature <= coldDamageThreshold)
+        {
+            if (!temperature.TakingDamage)
+            {
+                _adminLogger.Add(LogType.Temperature, $"{ToPrettyString(uid):entity} started taking low temperature damage");
+                temperature.TakingDamage = true;
+            }
+
+            var diff = Math.Abs(temperature.CurrentTemperature - coldDamageThreshold);
+            var tempDamage =
+                Math.Sqrt(diff * (Math.Pow(temperature.DamageCap.Double(), 2) / coldDamageThreshold));
+            _damageable.TryChangeDamage(uid, temperature.ColdDamage * tempDamage, ignoreResistances: true, interruptsDoAfters: false);
+        }
+        else if (temperature.TakingDamage)
+        {
+            _adminLogger.Add(LogType.Temperature, $"{ToPrettyString(uid):entity} stopped taking temperature damage");
+            temperature.TakingDamage = false;
+        }
     }
 
     private void OnTemperatureChangeAttempt(EntityUid uid, TemperatureProtectionComponent component, ModifyChangedTemperatureEvent args)
