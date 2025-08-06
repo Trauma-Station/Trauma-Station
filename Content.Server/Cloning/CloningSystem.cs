@@ -59,10 +59,11 @@ public sealed partial class CloningSystem : SharedCloningSystem
 
     [Dependency] private EntityQuery<CloneableStatusEffectComponent> _cloneableEffectQuery = default!;
 
-    /// <summary>
-    ///     Spawns a clone of the given humanoid mob at the specified location or in nullspace.
-    /// </summary>
-    public bool TryCloning(EntityUid original, MapCoordinates? coords, ProtoId<CloningSettingsPrototype> settingsId, [NotNullWhen(true)] out EntityUid? clone)
+    public override bool TryCloning(
+        EntityUid original,
+        MapCoordinates? coords,
+        ProtoId<CloningSettingsPrototype> settingsId,
+        [NotNullWhen(true)] out EntityUid? clone)
     {
         clone = null;
         if (!ProtoMan.Resolve(settingsId, out var settings))
@@ -123,7 +124,10 @@ public sealed partial class CloningSystem : SharedCloningSystem
         return true;
     }
 
-    public override void CloneComponents(EntityUid original, EntityUid clone, ProtoId<CloningSettingsPrototype> settings)
+    public override void CloneComponents(
+        EntityUid original,
+        EntityUid clone,
+        ProtoId<CloningSettingsPrototype> settings)
     {
         if (!ProtoMan.Resolve(settings, out var proto))
             return;
@@ -205,18 +209,21 @@ public sealed partial class CloningSystem : SharedCloningSystem
             }
 
             // If the original does not have the component, then the clone shouldn't have it either.
-            RemComp(clone, componentRegistration.Type);
+            if (!HasComp(original, componentRegistration.Type))
+                RemComp(clone, componentRegistration.Type);
         }
 
         var cloningEv = new CloningEvent(settings, clone);
         RaiseLocalEvent(original, ref cloningEv); // used for datafields that cannot be directly copied using CopyComp
     }
 
-    /// <summary>
-    ///     Copies the equipment the original has to the clone.
-    ///     This uses the original prototype of the items, so any changes to components that are done after spawning are lost!
-    /// </summary>
-    public void CopyEquipment(Entity<InventoryComponent?> original, Entity<InventoryComponent?> clone, SlotFlags slotFlags, EntityWhitelist? whitelist = null, EntityWhitelist? blacklist = null, bool makeUnremoveable = false, bool copyStorage = true, bool internalContentsUnremoveable = false) // Goob edit
+    public void CopyEquipment(
+        Entity<InventoryComponent?> original,
+        Entity<InventoryComponent?> clone,
+        SlotFlags slotFlags,
+        EntityWhitelist? whitelist = null,
+        EntityWhitelist? blacklist = null,
+        bool makeUnremoveable = false, bool copyStorage = true, bool internalContentsUnremoveable = false) // Trauma
     {
         if (!Resolve(original, ref original.Comp) || !Resolve(clone, ref clone.Comp))
             return;
