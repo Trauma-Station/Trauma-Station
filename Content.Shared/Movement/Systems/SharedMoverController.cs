@@ -411,7 +411,7 @@ public abstract partial class SharedMoverController : VirtualController
                 }
 
                 // <Trauma>
-                var stepEv = new FootStepEvent(uid);
+                var stepEv = new FootStepEvent(uid, wishDir.ToWorldAngle());
                 RaiseLocalEvent(uid, ref stepEv);
                 // </Trauma>
             }
@@ -812,7 +812,8 @@ public abstract partial class SharedMoverController : VirtualController
                     movementSpeed))
                 {
                     // <Trauma>
-                    var stepEv = new FootStepEvent(uid);
+                    var dir = targetTransform.LocalPosition - tileMovement.Destination;
+                    var stepEv = new FootStepEvent(uid, dir.ToWorldAngle());
                     RaiseLocalEvent(uid, ref stepEv);
                     // </Trauma>
                     EndSlide(uid, tileMovement);
