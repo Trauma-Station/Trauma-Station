@@ -118,6 +118,11 @@
     ClothingHeadSanabi: 1
     ClothingNeckCloakSanabi: 1
     ClothingCostumeGingerbreadHead: 1
+    ClothingHeadHatCapo: 2
+    ClothingNeckCloakCapo: 3
+    ClothingSuitCapo: 3
+    ClothingHandsGlovesCapo: 3
+    ClothingShoesCapo: 3
     # </Goob>
   contrabandInventory:
     ClothingHeadHatRichard: 1
