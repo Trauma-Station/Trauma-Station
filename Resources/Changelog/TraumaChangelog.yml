@@ -1,4 +1,4 @@
-Name: Traumalog
+Name: Gooblog
 Order: -1
 Entries:
 - author: Durk
@@ -7,3 +7,9 @@ Entries:
       message: ERP
   id: 1
   time: '1994-01-01T12:00:00.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Slop
+  id: 2
+  time: '2025-10-06T22:40:15.0000000+00:00'
