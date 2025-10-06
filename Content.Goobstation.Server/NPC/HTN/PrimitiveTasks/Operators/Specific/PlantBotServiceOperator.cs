@@ -74,7 +74,7 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
         if (!_entMan.TryGetComponent<PlantbotComponent>(owner, out var botComp)
             || !_entMan.TryGetComponent<PlantHolderComponent>(target, out var plantHolderComponent)
             || !_interaction.InRangeUnobstructed(owner, target)
-            || (plantHolderComponent is { WaterLevel: >= RequiredWaterLevelToService, WeedLevel: <= RequiredWeedsAmountToWeed } && (!_entMan.HasComponent<EmaggedComponent>(owner) || plantHolderComponent.Dead || plantHolderComponent.WaterLevel <= 0f)))
+            || (plantHolderComponent is { WaterLevel: >= RequiredWaterLevelToService, WeedLevel: <= RequiredWeedsAmountToWeed, Harvest: false} && (!_entMan.HasComponent<EmaggedComponent>(owner) || plantHolderComponent.Dead || plantHolderComponent.WaterLevel <= 0f)))
             return HTNOperatorStatus.Failed;
 
         if (botComp.IsEmagged)
@@ -95,6 +95,11 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
                 plantHolderComponent.WeedLevel -= WeedsRemovedAmount;
                 _audio.PlayPvs(botComp.WeedSound, target);
                 _chat.TrySendInGameICMessage(owner, Loc.GetString("plantbot-remove-weeds"), InGameICChatType.Speak, hideChat: true, hideLog: true);
+            }
+            else if (plantHolderComponent.Harvest)
+            {
+                _plantHolderSystem.DoHarvest(target, owner, plantHolderComponent);
+                _chat.TrySendInGameICMessage(owner, Loc.GetString("plantbot-harvest"), InGameICChatType.Speak, hideChat: true, hideLog: true);
             }
             else
                 return HTNOperatorStatus.Failed;
