@@ -31,6 +31,7 @@
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using Content.Goobstation.Common.CCVar;
 using Content.Shared.CCVar;
 using Content.Shared.Decals;
 using Content.Shared.Examine;
@@ -76,12 +77,16 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
     public static readonly ProtoId<SpeciesPrototype> DefaultSpecies = "Human";
 
+    private bool _heightSlidersEnabled; // Traumastation
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<HumanoidAppearanceComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<HumanoidAppearanceComponent, ExaminedEvent>(OnExamined);
+
+        Subs.CVar(_cfgManager, GoobCVars.HeightSliders, value => _heightSlidersEnabled = value, true); // Traumastation
     }
 
     public DataNode ToDataNode(HumanoidCharacterProfile profile)
@@ -553,7 +558,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         // begin Goobstation: port EE height/width sliders
         var species = _proto.Index(humanoid.Species);
 
-        if (profile.Height <= 0 || profile.Width <= 0)
+        if (!_heightSlidersEnabled || profile.Height <= 0 || profile.Width <= 0)
             SetScale(uid, new Vector2(species.DefaultWidth, species.DefaultHeight), true, humanoid);
         else
             SetScale(uid, new Vector2(profile.Width, profile.Height), true, humanoid);
