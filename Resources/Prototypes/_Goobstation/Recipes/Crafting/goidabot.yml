@@ -1,7 +1,0 @@
-- type: construction
-  id: GoidaBot
-  graph: GoidaBot
-  startNode: start
-  targetNode: bot
-  category: construction-category-utilities
-  objectType: Item
