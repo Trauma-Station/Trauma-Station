@@ -589,5 +589,11 @@ public sealed partial class GoobCVars
     public static readonly CVarDef<bool> HeightSliders =
         CVarDef.Create("trauma.height_sliders_enabled", false, CVar.SERVER | CVar.REPLICATED);
 
+    /// <summary>
+    ///     Is sprinting enabled
+    /// </summary>
+    public static readonly CVarDef<bool> SprintEnabled =
+        CVarDef.Create("trauma.sprint_enabled", false, CVar.SERVER | CVar.REPLICATED);
+
     #endregion
 }
