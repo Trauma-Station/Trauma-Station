@@ -1,7 +1,6 @@
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared._EinsteinEngines.Revolutionary.Components;
-using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Dataset;
@@ -39,8 +38,23 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
         SubscribeLocalEvent<RevolutionaryConverterComponent, RevolutionaryConverterDoAfterEvent>(OnConvertDoAfter);
         SubscribeLocalEvent<RevolutionaryConverterComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RevolutionaryConverterComponent, AfterInteractEvent>(OnConverterAfterInteract);
+        SubscribeLocalEvent<RevolutionaryConverterComponent, AfterFlashedEvent>(OnAfterFlash); // Traumastation
 
         _speechLocalization = _prototypeManager.Index<LocalizedDatasetPrototype>(RevConvertSpeechProto);
+    }
+
+    // Traumastation
+    private void OnAfterFlash(Entity<RevolutionaryConverterComponent> ent, ref AfterFlashedEvent args)
+    {
+        if (!ent.Comp.ApplyFlashEffect)
+            return;
+
+        if (args.Target is not { Valid: true } target
+            || !HasComp<MobStateComponent>(target)
+            || !HasComp<HeadRevolutionaryComponent>(args.User))
+            return;
+
+        ConvertDoAfter(ent, target, args.User.Value);
     }
 
     private void OnUseInHand(Entity<RevolutionaryConverterComponent> ent, ref UseInHandEvent args)
@@ -83,6 +97,9 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
 
     public void OnConverterAfterInteract(Entity<RevolutionaryConverterComponent> entity, ref AfterInteractEvent args)
     {
+        if (entity.Comp.ApplyFlashEffect) // Traumastation
+            return;
+
         if (args.Handled
             || !args.Target.HasValue
             || !args.CanReach
@@ -90,6 +107,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
             && !_chargesSystem.TryUseCharges(entity.Owner, entity.Comp.ConsumesCharges)))
             return;
 
+        /* Trauma edit
         if (entity.Comp.ApplyFlashEffect)
         {
             _flash.Flash(args.Target.Value, args.User, entity.Owner, entity.Comp.FlashDuration, entity.Comp.SlowToOnFlashed, melee: true);
@@ -97,7 +115,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
             bool hasChargesLeft = entity.Comp.ConsumesCharges <= 0 || _chargesSystem.HasCharges(entity.Owner, entity.Comp.ConsumesCharges);
             _appearance.SetData(entity.Owner, FlashVisuals.Flashing, hasChargesLeft);
             _appearance.SetData(entity.Owner, FlashVisuals.Burnt, !hasChargesLeft);
-        }
+        } */
 
         if (args.Target is not { Valid: true } target
             || !HasComp<MobStateComponent>(target)
