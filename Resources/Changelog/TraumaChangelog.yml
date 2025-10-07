@@ -29,3 +29,9 @@ Entries:
       message: Flashrevs.
   id: 4
   time: '2025-10-07T17:37:41.0000000+00:00'
+- author: Aviu
+  changes:
+    - type: Remove
+      message: Nuked height and width sliders
+  id: 5
+  time: '2025-10-07T17:37:47.0000000+00:00'
