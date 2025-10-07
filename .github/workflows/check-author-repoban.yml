@@ -4,8 +4,8 @@ on:
   pull_request:
     types: [opened, reopened]
 
-env:
-  BLOCKED_AUTHORS: "201311861"
+#env:
+#  BLOCKED_AUTHORS: "201311861"
 
 jobs:
   check-author:
