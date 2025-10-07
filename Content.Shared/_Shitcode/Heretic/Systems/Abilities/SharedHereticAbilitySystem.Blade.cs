@@ -36,11 +36,13 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<RealignmentComponent, SlipAttemptEvent>(OnBladeSlipAttempt);
         SubscribeLocalEvent<RealignmentComponent, BeforeHarmfulActionEvent>(OnBladeHarmfulAction);
         SubscribeLocalEvent<RealignmentComponent, StatusEffectEndedEvent>(OnStatusEnded);
-        SubscribeLocalEvent<RealignmentComponent, ComponentRemove>(OnComponentRemove);
+        // SubscribeLocalEvent<RealignmentComponent, ComponentRemove>(OnComponentRemove); // Trauma edit
     }
 
+    /* Trauma edit
     private void OnComponentRemove(Entity<RealignmentComponent> ent, ref ComponentRemove args) =>
         _stam.ToggleStaminaDrain(ent, 0, false, true, ent.Comp.StaminaRegenKey);
+    */
 
     private void OnStatusEnded(Entity<RealignmentComponent> ent, ref StatusEffectEndedEvent args)
     {
@@ -74,9 +76,11 @@ public abstract partial class SharedHereticAbilitySystem
 
     private void OnBeforeBladeStaminaDamage(EntityUid uid, Component component, ref BeforeStaminaDamageEvent args)
     {
+        /* Trauma edit
         if (args.Value <= 0
             || args.Source == uid)
             return;
+        */
 
         args.Cancelled = true;
     }
