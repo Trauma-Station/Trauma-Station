@@ -19,3 +19,13 @@ Entries:
       message: Sprinting is no more.
   id: 3
   time: '2025-10-07T13:30:44.0000000+00:00'
+- author: Aviu
+  changes:
+    - type: Remove
+      message: Bookrevs.
+    - type: Remove
+      message: Rev language.
+    - type: Add
+      message: Flashrevs.
+  id: 4
+  time: '2025-10-07T17:37:41.0000000+00:00'
