@@ -262,7 +262,7 @@
   - type: EmagSiliconLaw
     stunTime: 5
   - type: SiliconLawProvider
-    laws: Crewsimov
+    laws: Asimov # Trauma - asimov replaces crewsimov
   - type: Inventory
     templateId: borg
   - type: Hands
@@ -520,7 +520,7 @@
     factions:
     - NanoTrasen
   - type: SiliconLawProvider
-    laws: CrewsimovBorg # Goobstation - AI/borg law changes - borgs obeying AI
+    laws: Asimov # Trauma - asimov replaces crewsimov
   - type: Access
     enabled: false
     groups:

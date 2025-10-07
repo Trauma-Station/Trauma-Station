@@ -1,0 +1,11 @@
+- type: entity
+  parent: BaseElectronics
+  id: RealAsimovCircuitBoard # stupid chud named crewsimov asimov
+  name: law board (Asimov)
+  description: An electronics board containing the Asimov lawset.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: std_mod
+  - type: SiliconLawProvider
+    laws: Asimov
