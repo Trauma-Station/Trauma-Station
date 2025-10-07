@@ -47,9 +47,10 @@
       guides:
         - Security
         - Antagonists
-    - type: Construction
-      graph: RevFlash
-      node: revFlash
-    - type: Tag
-      tags:
-        - RevFlash
+    # Traumastation - flash revs
+    # - type: Construction
+    #   graph: RevFlash
+    #   node: revFlash
+    # - type: Tag
+    #   tags:
+    #     - RevFlash
