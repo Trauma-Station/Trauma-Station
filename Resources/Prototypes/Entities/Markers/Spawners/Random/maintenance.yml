@@ -371,6 +371,8 @@
         - id: MaterialWoodPlank10
           weight: 0.25
       - id: Plunger
+      - !type:NestedSelector # Trauma
+        tableId: SprayPaints
       - id: PowerCellMedium
       - id: PowerCellSmall
       - id: Soap

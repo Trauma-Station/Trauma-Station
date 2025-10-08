@@ -39,7 +39,9 @@ public sealed class PaintVisualizerSystem : EntitySystem
 
     private void OnCanInit(Entity<PaintCanComponent> ent, ref ComponentInit args)
     {
-        _sprite.LayerSetColor(ent.Owner, PaintCanVisuals.Layer, ent.Comp.Color);
+        // get layer before hand, don't error if no layer is found
+        if (_sprite.TryGetLayer(ent.Owner, PaintCanVisuals.Layer, out var layer, false))
+            _sprite.LayerSetColor(layer, ent.Comp.Color);
     }
 
     private void OnInit(Entity<PaintVisualsComponent> ent, ref ComponentInit args)

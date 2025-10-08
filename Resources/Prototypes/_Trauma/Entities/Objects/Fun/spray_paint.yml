@@ -79,6 +79,8 @@
         enum.OpenableVisuals.Layer:
           True: { state: clown }
           False: { state: clown_cap }
+  - type: Item
+    heldPrefix: clown
   - type: PaintCan
     color: "#fa74df"
 
