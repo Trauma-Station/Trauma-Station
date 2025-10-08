@@ -31,7 +31,8 @@ public sealed class PaintVisualizerSystem : EntitySystem
 
         SubscribeLocalEvent<PaintCanComponent, ComponentInit>(OnCanInit);
 
-        SubscribeLocalEvent<PaintVisualsComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<PaintVisualsComponent, AfterAutoHandleStateEvent>(OnHandleState);
+        SubscribeLocalEvent<PaintVisualsComponent, PaintedEvent>(OnPainted);
         SubscribeLocalEvent<PaintVisualsComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<PaintVisualsComponent, HeldVisualsUpdatedEvent>(OnHeldVisualsUpdated);
         SubscribeLocalEvent<PaintVisualsComponent, EquipmentVisualsUpdatedEvent>(OnEquipmentVisualsUpdated);
@@ -44,26 +45,14 @@ public sealed class PaintVisualizerSystem : EntitySystem
             _sprite.LayerSetColor(layer, ent.Comp.Color);
     }
 
-    private void OnInit(Entity<PaintVisualsComponent> ent, ref ComponentInit args)
+    private void OnHandleState(Entity<PaintVisualsComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (!_spriteQuery.TryComp(ent, out var sprite))
-            return;
+        PaintSprite(ent);
+    }
 
-        var spriteEnt = new Entity<SpriteComponent>(ent, sprite);
-        var colors = ent.Comp.LayerColors;
-        colors.Clear();
-        int index = 0; // god sprite api is so shit
-        foreach (var iLayer in sprite.AllLayers)
-        {
-            int i = index++;
-            // don't replace layers that already have a shader set
-            if (iLayer is not SpriteComponent.Layer layer || layer.Shader != null)
-                continue;
-
-            colors[i] = layer.Color;
-            sprite.LayerSetShader(i, Shader, ShaderId);
-            _sprite.LayerSetColor(spriteEnt, i, ent.Comp.Color);
-        }
+    private void OnPainted(Entity<PaintVisualsComponent> ent, ref PaintedEvent args)
+    {
+        PaintSprite(ent);
     }
 
     private void OnShutdown(Entity<PaintVisualsComponent> ent, ref ComponentShutdown args)
@@ -90,6 +79,27 @@ public sealed class PaintVisualizerSystem : EntitySystem
     private void OnEquipmentVisualsUpdated(Entity<PaintVisualsComponent> ent, ref EquipmentVisualsUpdatedEvent args)
     {
         SetLayers(args.Equipee, ent.Comp.Color, args.RevealedLayers);
+    }
+
+    private void PaintSprite(Entity<PaintVisualsComponent> ent)
+    {
+        if (!_spriteQuery.TryComp(ent, out var sprite))
+            return;
+
+        var colors = ent.Comp.LayerColors;
+        colors.Clear();
+        int index = 0; // god sprite api is so shit
+        foreach (var iLayer in sprite.AllLayers)
+        {
+            int i = index++;
+            // don't replace layers that already have a custom shader set
+            if (iLayer is not SpriteComponent.Layer layer || (layer.Shader != null && layer.Shader != Shader))
+                continue;
+
+            colors[i] = layer.Color;
+            sprite.LayerSetShader(i, Shader, ShaderId);
+            _sprite.LayerSetColor(layer, ent.Comp.Color);
+        }
     }
 
     private void SetLayers(Entity<SpriteComponent?> ent, Color color, HashSet<string> keys)

@@ -31,7 +31,8 @@ public sealed class PaintSystem : EntitySystem
 
     private void OnUseAttempt(Entity<PaintCanComponent> ent, ref EffectsToolUseAttemptEvent args)
     {
-        args.Cancelled |= CanPaintPopup(ent, args.Target, args.User);
+        if (!CanPaintPopup(ent, args.Target, args.User))
+            args.Cancelled = true;
     }
 
     private void OnUsed(Entity<PaintCanComponent> ent, ref EffectsToolUsedEvent args)
@@ -92,11 +93,15 @@ public sealed class PaintSystem : EntitySystem
 
     public void SetColor(Entity<PaintVisualsComponent> ent, Color color)
     {
+        var client = IoCManager.Resolve<Robust.Shared.Network.INetManager>().IsClient;
+        Log.Debug($"client {client} - SetColor {ToPrettyString(ent)} to {color}");
         if (ent.Comp.Color == color)
             return;
 
         ent.Comp.Color = color;
         Dirty(ent);
+        var ev = new PaintedEvent();
+        RaiseLocalEvent(ent, ref ev);
     }
 
     #endregion

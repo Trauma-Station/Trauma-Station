@@ -23,24 +23,28 @@ public sealed class EffectsToolSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EffectsToolComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<EffectsToolComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<EffectsToolComponent, GetVerbsEvent<UtilityVerb>>(OnGetVerbs);
         SubscribeLocalEvent<EffectsToolComponent, EffectsToolDoAfterEvent>(OnDoAfter);
     }
 
-    private void OnInteractUsing(Entity<EffectsToolComponent> ent, ref InteractUsingEvent args)
+    private void OnAfterInteract(Entity<EffectsToolComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Handled)
+        if (!args.CanReach || args.Target is not {} target)
             return;
 
         var user = args.User;
-        var target = args.Target;
         if (!ValidTarget(ent, target, user, popup: true))
         {
             // if it made a popup then don't allow other interactions
             args.Handled = ent.Comp.InvalidPopup != null;
             return;
         }
+
+        // some chud systems handle with no user feedback
+        // so this gives feedback but also stops the tool usage
+        if (args.Handled)
+            return;
 
         args.Handled = true;
         StartDoAfter(ent, target, user);
@@ -91,7 +95,7 @@ public sealed class EffectsToolSystem : EntitySystem
 
     public bool CanUse(Entity<EffectsToolComponent> ent, EntityUid target, EntityUid user)
     {
-        if (!ValidTarget(ent, target, user))
+        if (!ValidTarget(ent, target, user)) // don't need popup as it should have already been checked before calling StartDoAfter
             return false;
 
         var ev = new EffectsToolUseAttemptEvent(target, user);
@@ -107,7 +111,7 @@ public sealed class EffectsToolSystem : EntitySystem
         if (popup && ent.Comp.InvalidPopup is {} key)
         {
             var msg = Loc.GetString(key, ("target", Identity.Name(target, EntityManager)));
-            _popup.PopupEntity(msg, ent, user);
+            _popup.PopupClient(msg, ent, user);
         }
         return false;
     }

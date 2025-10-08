@@ -6,7 +6,7 @@ namespace Content.Trauma.Shared.Paint;
 /// Component for changing non-shaded layers of an entity to have a greyscale shader and specific color.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(PaintSystem))]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState(true)]
 public sealed partial class PaintVisualsComponent : Component
 {
     /// <summary>
@@ -21,3 +21,10 @@ public sealed partial class PaintVisualsComponent : Component
     [ViewVariables]
     public Dictionary<int, Color> LayerColors = new();
 }
+
+/// <summary>
+/// Event raised on the painted entity if it gets painted/repainted.
+/// Used for predicting the sprite changes.
+/// </summary>
+[ByRefEvent]
+public record struct PaintedEvent();
