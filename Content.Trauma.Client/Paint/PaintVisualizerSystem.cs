@@ -66,8 +66,8 @@ public sealed class PaintVisualizerSystem : EntitySystem
             if (!sprite.LayerMapTryGet(key, out var index))
                 continue;
 
-            sprite.LayerSetShader(index, null);
-            _sprite.LayerSetColor(spriteEnt, index, color);
+            sprite.LayerSetShader(index.Value, null);
+            _sprite.LayerSetColor(spriteEnt, index.Value, color);
         }
     }
 
