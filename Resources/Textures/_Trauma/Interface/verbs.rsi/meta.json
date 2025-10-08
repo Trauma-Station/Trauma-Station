@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created by @brainfood1183 (github) for SS14 at https://github.com/space-wizards/space-station-14/pull/23003",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "paint"
+    }
+  ]
+}

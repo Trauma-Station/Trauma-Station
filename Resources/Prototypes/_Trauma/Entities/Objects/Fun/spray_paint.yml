@@ -1,0 +1,213 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseSprayPaintUnlimited
+  name: spray paint
+  description: A can of spray paint. Solvent abuse can kill instantly!
+  components:
+  # Visuals
+  - type: Sprite
+    sprite: Objects/Fun/spraycans.rsi
+    layers:
+    - state: spray_cap
+      map: ["enum.OpenableVisuals.Layer"]
+    - state: spray_cap_colors
+      map: ["enum.PaintCanVisuals.Layer"]
+  - type: Item
+    sprite: _Trauma/Objects/Fun/spraycans.rsi
+    heldPrefix: spray
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: spray }
+          False: { state: spray_cap }
+        enum.PaintCanVisuals.Layer:
+          True: { state: spray_colors }
+          False: { state: spray_cap_colors }
+  - type: Openable
+    sound: /Audio/Effects/pop_high.ogg
+    closeSound: /Audio/Effects/pop_high.ogg
+    closeable: true
+  - type: Sealable
+  # Functionality
+  - type: PaintCan
+  - type: EffectsTool
+    blacklist:
+      components:
+      - Body # no painting people mice borgs etc
+      - BorgChassis
+      - Ghost # for revenant really
+      - SubFloorHide # use spray painter tool for pipes instead
+      - TimedDespawn # projections holofans etc
+    invalidPopup: spray-paint-failure
+    userPopup: spray-paint-success-user
+    othersPopup: spray-paint-success-others
+    sound: /Audio/Effects/spray2.ogg
+    verbText: spray-paint-verb
+    verbIcon:
+      sprite: _Trauma/Interface/verbs.rsi
+      state: paint
+    effects:
+    - !type:PaintTarget
+
+- type: entity
+  abstract: true
+  parent: BaseSprayPaintUnlimited
+  id: BaseSprayPaint
+  components:
+  - type: LimitedCharges
+    charges: 5
+    maxCharges: 5
+
+# funny paint
+
+- type: entity
+  parent: BaseSprayPaint
+  id: SprayPaintFunny
+  name: funny paint
+  description: A tin of funny paint, manufactured by Honk! Co.
+  components:
+  - type: Sprite
+    layers:
+    - state: clown_cap
+      map: ["enum.OpenableVisuals.Layer"]
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: clown }
+          False: { state: clown_cap }
+  - type: PaintCan
+    color: "#fa74df"
+
+- type: entity
+  parent: SprayPaintFunny
+  id: SprayPaintFunnyYellow
+  suffix: Yellow
+  components:
+  - type: Sprite
+    layers:
+    - state: clown2_cap
+      map: ["enum.OpenableVisuals.Layer"]
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: clown2 }
+          False: { state: clown2_cap }
+  - type: PaintCan
+    color: "#d5e028"
+
+# death paint
+
+- type: entity
+  parent: BaseSprayPaint
+  id: SprayPaintDeath
+  suffix: Death
+  components:
+  - type: Sprite
+    layers:
+    - state: death_cap
+      map: ["enum.OpenableVisuals.Layer"]
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: death }
+          False: { state: death_cap }
+  - type: PaintCan
+    color: "#ff20c8"
+
+- type: entity
+  parent: BaseSprayPaint
+  id: SprayPaintDeathTwo
+  suffix: Death 2
+  components:
+  - type: Sprite
+    layers:
+    - state: death2_cap
+      map: ["enum.OpenableVisuals.Layer"]
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: death2 }
+          False: { state: death2_cap }
+  - type: PaintCan
+    color: "#ff2020"
+
+## basic
+
+# red
+- type: entity
+  parent: BaseSprayPaint
+  id: SprayPaintRed
+  suffix: Red
+  components:
+  - type: PaintCan
+    color: "#ff3b3b"
+
+# green
+- type: entity
+  parent: BaseSprayPaint
+  id: SprayPaintGreen
+  suffix: Green
+  components:
+  - type: PaintCan
+    color: "#73f170"
+
+# blue
+- type: entity
+  parent: BaseSprayPaint
+  id: SprayPaintBlue
+  suffix: Blue
+  components:
+  - type: PaintCan
+    color: "#5890f7"
+
+# black
+- type: entity
+  parent: BaseSprayPaint
+  id: SprayPaintBlack
+  suffix: Black
+  components:
+  - type: PaintCan
+    color: "#3a3a3a"
+
+# orange
+- type: entity
+  parent: BaseSprayPaint
+  id: SprayPaintOrange
+  suffix: Orange
+  components:
+  - type: PaintCan
+    color: "#f6a44b"
+
+# purple
+- type: entity
+  parent: BaseSprayPaint
+  id: SprayPaintPurple
+  suffix: Purple
+  components:
+  - type: PaintCan
+    color: "#c063f5"
+
+# white
+- type: entity
+  parent: BaseSprayPaint
+  id: SprayPaintWhite
+  suffix: White
+  components:
+  - type: PaintCan
+    color: "#f2f2f2"
+
+# invisible
+- type: entity
+  parent: BaseSprayPaint
+  id: SprayPaintInvisible
+  suffix: Invisible, DO NOT MAP
+  components:
+  - type: PaintCan
+    color: "#ffffff00"
