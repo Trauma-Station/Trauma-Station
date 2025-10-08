@@ -19,7 +19,7 @@ public sealed class PaintVisualizerSystem : EntitySystem
     private EntityQuery<SpriteComponent> _spriteQuery;
 
     public static readonly ProtoId<ShaderPrototype> ShaderId = "Greyscale";
-    public ShaderInstance Shader;
+    public ShaderInstance Shader = default!;
 
     public override void Initialize()
     {
@@ -60,7 +60,7 @@ public sealed class PaintVisualizerSystem : EntitySystem
         if (TerminatingOrDeleted(ent) || !_spriteQuery.TryComp(ent, out var sprite))
             return;
 
-        var spriteEnt = new Entity<SpriteComponent>(ent, sprite);
+        var spriteEnt = new Entity<SpriteComponent?>(ent, sprite);
         foreach (var (key, color) in ent.Comp.LayerColors)
         {
             if (!sprite.LayerMapTryGet(key, out var index))
@@ -110,7 +110,7 @@ public sealed class PaintVisualizerSystem : EntitySystem
             return;
 
         var sprite = ent.Comp;
-        var spriteEnt = new Entity<SpriteComponent>(ent, sprite);
+        var spriteEnt = new Entity<SpriteComponent?>(ent, sprite);
         foreach (var key in keys)
         {
             if (!sprite.LayerMapTryGet(key, out var index))
