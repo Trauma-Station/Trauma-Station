@@ -83,7 +83,7 @@
     whitelist: # Trauma - let it refill spray cans too
       components:
       - SprayPainter
-      - SprayCan
+      - PaintCan
   - type: Sprite
     sprite: Objects/Tools/spray_painter.rsi
     state: ammo

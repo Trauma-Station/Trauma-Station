@@ -46,9 +46,7 @@
     othersPopup: spray-paint-success-others
     sound: /Audio/Effects/spray2.ogg
     verbText: spray-paint-verb
-    verbIcon:
-      sprite: _Trauma/Interface/verbs.rsi
-      state: paint
+    verbIcon: _Trauma/Interface/VerbIcons/paint.svg.192dpi.png
     effects:
     - !type:PaintTarget
 
