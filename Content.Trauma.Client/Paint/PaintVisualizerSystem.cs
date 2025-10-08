@@ -93,7 +93,9 @@ public sealed class PaintVisualizerSystem : EntitySystem
         {
             int i = index++;
             // don't replace layers that already have a custom shader set
-            if (iLayer is not SpriteComponent.Layer layer || (layer.Shader != null && layer.Shader != Shader))
+            if (iLayer is not SpriteComponent.Layer layer ||
+                layer.UnShaded ||
+                (layer.Shader != null && layer.Shader != Shader))
                 continue;
 
             colors[i] = layer.Color;
