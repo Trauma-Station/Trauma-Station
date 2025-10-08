@@ -74,7 +74,7 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
         if (!_entMan.TryGetComponent<PlantbotComponent>(owner, out var botComp)
             || !_entMan.TryGetComponent<PlantHolderComponent>(target, out var plantHolderComponent)
             || !_interaction.InRangeUnobstructed(owner, target)
-            || (plantHolderComponent is { WaterLevel: >= RequiredWaterLevelToService, WeedLevel: <= RequiredWeedsAmountToWeed, Harvest: false} && (!_entMan.HasComponent<EmaggedComponent>(owner) || plantHolderComponent.Dead || plantHolderComponent.WaterLevel <= 0f)))
+            || (plantHolderComponent is { WaterLevel: >= RequiredWaterLevelToService, WeedLevel: <= RequiredWeedsAmountToWeed, Harvest: false} && (!_entMan.HasComponent<EmaggedComponent>(owner) || plantHolderComponent.Dead || plantHolderComponent.WaterLevel <= 0f))) // Trauma
             return HTNOperatorStatus.Failed;
 
         if (botComp.IsEmagged)
