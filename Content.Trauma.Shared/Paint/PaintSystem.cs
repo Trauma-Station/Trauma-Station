@@ -4,6 +4,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Sprite;
+using Content.Shared.Stacks;
 using Content.Trauma.Shared.Tools;
 
 namespace Content.Trauma.Shared.Paint;
@@ -25,6 +26,7 @@ public sealed class PaintSystem : EntitySystem
         SubscribeLocalEvent<PaintCanComponent, EffectsToolUseAttemptEvent>(OnUseAttempt);
         SubscribeLocalEvent<PaintCanComponent, EffectsToolUsedEvent>(OnUsed);
 
+        SubscribeLocalEvent<PaintVisualsComponent, StackSplitEvent>(OnStackSplit);
         SubscribeLocalEvent<PaintVisualsComponent, PaintAttemptEvent>(OnRepaintAttempt);
         SubscribeLocalEvent<RandomSpriteComponent, PaintAttemptEvent>(OnRandomSpritePaintAttempt);
     }
@@ -38,6 +40,11 @@ public sealed class PaintSystem : EntitySystem
     private void OnUsed(Entity<PaintCanComponent> ent, ref EffectsToolUsedEvent args)
     {
         _charges.TryUseCharge(ent.Owner);
+    }
+
+    private void OnStackSplit(Entity<PaintVisualsComponent> ent, ref StackSplitEvent args)
+    {
+        Paint(args.NewId, ent.Comp.Color);
     }
 
     private void OnRepaintAttempt(Entity<PaintVisualsComponent> ent, ref PaintAttemptEvent args)
@@ -86,15 +93,18 @@ public sealed class PaintSystem : EntitySystem
         if (!_query.TryComp(tool, out var comp))
             return false;
 
-        var painted = EnsureComp<PaintVisualsComponent>(target);
-        SetColor((target, painted), comp.Color);
+        Paint(target, comp.Color);
         return true;
+    }
+
+    public void Paint(EntityUid target, Color color)
+    {
+        var painted = EnsureComp<PaintVisualsComponent>(target);
+        SetColor((target, painted), color);
     }
 
     public void SetColor(Entity<PaintVisualsComponent> ent, Color color)
     {
-        var client = IoCManager.Resolve<Robust.Shared.Network.INetManager>().IsClient;
-        Log.Debug($"client {client} - SetColor {ToPrettyString(ent)} to {color}");
         if (ent.Comp.Color == color)
             return;
 

@@ -30,7 +30,7 @@ public sealed class EffectsToolSystem : EntitySystem
 
     private void OnAfterInteract(Entity<EffectsToolComponent> ent, ref AfterInteractEvent args)
     {
-        if (!args.CanReach || args.Target is not {} target)
+        if (args.Handled || !args.CanReach || args.Target is not {} target)
             return;
 
         var user = args.User;
@@ -40,11 +40,6 @@ public sealed class EffectsToolSystem : EntitySystem
             args.Handled = ent.Comp.InvalidPopup != null;
             return;
         }
-
-        // some chud systems handle with no user feedback
-        // so this gives feedback but also stops the tool usage
-        if (args.Handled)
-            return;
 
         args.Handled = true;
         StartDoAfter(ent, target, user);
