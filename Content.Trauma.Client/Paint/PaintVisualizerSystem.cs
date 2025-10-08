@@ -94,7 +94,7 @@ public sealed class PaintVisualizerSystem : EntitySystem
             int i = index++;
             // don't replace layers that already have a custom shader set
             if (iLayer is not SpriteComponent.Layer layer ||
-                layer.UnShaded ||
+                layer.ShaderPrototype == SpriteSystem.UnshadedId ||
                 (layer.Shader != null && layer.Shader != Shader))
                 continue;
 
