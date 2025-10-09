@@ -56,7 +56,7 @@
   id: BaseSprayPaint
   components:
   - type: LimitedCharges
-    charges: 5
+    lastCharges: 5
     maxCharges: 5
 
 # funny paint
