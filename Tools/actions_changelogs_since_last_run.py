@@ -107,7 +107,7 @@ def get_last_changelog() -> str:
     last_sha = most_recent["head_commit"]["id"]
     print(f"Last successful publish job was {most_recent['id']}: {last_sha}")
     last_changelog_stream = get_last_changelog_by_sha(
-        session, "ac4c4320e6a8eb4f8c7edac8ee3f66d2b3e57edb", github_repository
+        session, last_sha, github_repository
     )
 
     return last_changelog_stream
