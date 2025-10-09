@@ -1,0 +1,14 @@
+- type: construction
+  id: RevForge
+  graph: RevForge
+  startNode: start
+  targetNode: revForge
+  placementMode: SnapgridCenter
+  category: construction-category-structures
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+  entityWhitelist:
+    components:
+    - HeadRevolutionary

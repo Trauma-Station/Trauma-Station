@@ -1,0 +1,263 @@
+- type: entity
+  name: forged mace
+  parent: [BaseItem,BaseMajorContraband]
+  id: RevMace
+  description: A robust mace, hurts and stuns enemies, not great against modern armor.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/mace.rsi
+    state: icon
+  - type: MeleeWeapon
+    animationRotation: -45
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 12
+    soundHit:
+      collection: MetalThud
+    bluntStaminaDamageFactor: 3
+  - type: Item
+    shape:
+    - 0,0,0,2
+    storedRotation: -45
+  - type: DisarmMalus
+    malus: 0.225
+  - type: Appearance
+  - type: StaticPrice
+    price: 80
+  - type: Execution
+    doAfterDuration: 1.0
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevMaceCreation
+    node: finished
+  - type: MeleeThrowOnHit
+    distance: 0.3
+    speed: 1
+
+- type: entity
+  name: forged sword
+  parent: [BaseItem,BaseMajorContraband]
+  id: RevSword
+  description: A two handed sword, deals heavy damage.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/sword.rsi
+    state: icon
+  - type: MeleeWeapon
+    animationRotation: -90
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Slash: 8
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    size: Ginormous
+  - type: DisarmMalus
+    malus: 0.225
+  - type: Appearance
+  - type: StaticPrice
+    price: 80
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Slash: 12
+  - type: Wieldable
+  - type: Tag
+    tags:
+    - Knife
+  - type: Sharp
+  - type: Execution
+    doAfterDuration: 1.0
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_pickup.ogg
+      params:
+        volume: -8
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_drop.ogg
+      params:
+        volume: -8
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_drop.ogg
+      params:
+        volume: -8
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevSwordCreation
+    node: finished
+
+- type: entity
+  name: forged pitchfork
+  parent: [BaseItem,BaseMajorContraband]
+  id: RevPitchfork
+  description: A large pitchfork, can be thrown and has extended melee range.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/pitchfork.rsi
+    state: icon
+  - type: MeleeWeapon
+    animationRotation: -130
+    wideAnimationRotation: -135
+    canWideSwing: false
+    range: 2.2
+    attackRate: 0.8
+    damage:
+      types:
+        Piercing: 8
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    size: Ginormous
+  - type: EmbeddableProjectile
+  - type: ThrowingAngle
+    angle: 225
+  - type: DisarmMalus
+    malus: 0.225
+  - type: Appearance
+  - type: StaticPrice
+    price: 80
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Piercing: 8
+  - type: Wieldable
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 30
+  - type: Execution
+    doAfterDuration: 1.0
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevPitchforkCreation
+    node: finished
+
+- type: entity
+  name: forged knife
+  parent: [BaseItem,BaseMajorContraband]
+  id: RevKnife
+  description: A small forged knife, it is concelable, can be dipped in poison, and can be used with a shield.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/knife.rsi
+    layers:
+    - state: icon
+    - state: icon1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_pickup.ogg
+      params:
+        volume: -8
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_drop.ogg
+      params:
+        volume: -8
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_drop.ogg
+      params:
+        volume: -8
+  - type: MeleeWeapon
+    animationRotation: -45
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Slash: 12
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    size: Small
+    storedRotation: -45
+  - type: DisarmMalus
+    malus: 0.225
+  - type: Appearance
+  - type: StaticPrice
+    price: 80
+  - type: Tag
+    tags:
+    - Knife
+  - type: Execution
+    doAfterDuration: 1.0
+  - type: Sharp
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/bladeslice.ogg
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 5
+  - type: ThrowingAngle
+    angle: 225
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        maxVol: 3
+  - type: MeleeChemicalInjector
+    transferAmount: 3
+    solution: melee
+  - type: RefillableSolution
+    solution: melee
+  - type: InjectableSolution
+    solution: melee
+  - type: SolutionInjectOnEmbed
+    transferAmount: 3
+    solution: melee
+  - type: SolutionTransfer
+    maxTransferAmount: 3
+  - type: UseDelay
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    fillBaseName: icon
+    inHandsFillBaseName: -fill-
+    inHandsMaxFillLevels: 1
+    equippedFillBaseName: -fill-
+    equippedMaxFillLevels: 1
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevKnifeCreation
+    node: finished
+
+
+- type: entity
+  name: combat torch
+  parent: [BaseItem,BaseMajorContraband]
+  id: RevTorch
+  description: A refined torch mounted with a steel head. Lights enemies on fire when hit.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/torch.rsi
+    state: icon
+  - type: MeleeWeapon
+    animationRotation: -45
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Heat: 8
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
+  - type: PointLight
+    enabled: true
+    color: "#E25822"
+    radius: 4.0
+    energy: 5.0
+  - type: Item
+    size: Ginormous
+  - type: DisarmMalus
+    malus: 0.225
+  - type: Appearance
+  - type: StaticPrice
+    price: 80
+  - type: IgnitionSource
+    temperature: 700
+  - type: IgniteOnMeleeHit
+    fireStacks: 1
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevTorchCreation
+    node: finished

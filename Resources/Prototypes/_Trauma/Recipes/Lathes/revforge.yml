@@ -1,0 +1,34 @@
+- type: latheRecipe
+  id: RevSwordRecipe
+  result: RevSwordBlade
+  completetime: 15
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  id: RevKnifeRecipe
+  result: RevKnifeblade
+  completetime: 15
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  id: RevSpearRecipe
+  result: RevPitchforkHead
+  completetime: 15
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  id: RevTorchRecipe
+  result: RevTorchHead
+  completetime: 15
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  id: RevMaceRecipe
+  result: RevMaceHead
+  completetime: 15
+  materials:
+    Steel: 500

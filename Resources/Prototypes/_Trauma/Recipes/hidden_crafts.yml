@@ -1,0 +1,69 @@
+- type: constructionGraph
+  id: RevSwordCreation
+  start: start
+  graph:
+  - node: start
+    edges:
+      - to: finished
+        steps:
+          - material: WoodPlank
+            amount: 1
+            doAfter: 10
+  - node: finished
+    entity: RevSword
+
+- type: constructionGraph
+  id: RevMaceCreation
+  start: start
+  graph:
+  - node: start
+    edges:
+      - to: finished
+        steps:
+          - material: WoodPlank
+            amount: 1
+            doAfter: 10
+  - node: finished
+    entity: RevMace
+
+- type: constructionGraph
+  id: RevKnifeCreation
+  start: start
+  graph:
+  - node: start
+    edges:
+      - to: finished
+        steps:
+          - material: WoodPlank
+            amount: 1
+            doAfter: 10
+  - node: finished
+    entity: RevKnife
+
+- type: constructionGraph
+  id: RevPitchforkCreation
+  start: start
+  graph:
+  - node: start
+    edges:
+      - to: finished
+        steps:
+          - material: WoodPlank
+            amount: 1
+            doAfter: 10
+  - node: finished
+    entity: RevPitchfork
+
+- type: constructionGraph
+  id: RevTorchCreation
+  start: start
+  graph:
+  - node: start
+    edges:
+      - to: finished
+        steps:
+          - material: WoodPlank
+            amount: 1
+            doAfter: 10
+  - node: finished
+    entity: RevTorch

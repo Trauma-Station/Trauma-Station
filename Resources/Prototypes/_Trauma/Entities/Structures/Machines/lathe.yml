@@ -1,0 +1,36 @@
+- type: entity
+  parent: [BaseLathe,BaseMajorContraband]
+  id: RevForge
+  name: industrial forge
+  placement:
+    mode: SnapgridCenter
+  description: This jury rigged machine can produce all sorts of useful (and dangerous) components.
+  components:
+  - type: Transform
+    noRot: false
+
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/revforge.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/strike.ogg
+    idleState: icon
+    runningState: revforge
+    staticPacks:
+    - RevForgeStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+        - Sheet
+        - Metal
+        - Wooden
+        - RawMaterial
+        - Plastic
+  - type: PointLight
+    enabled: true
+    color: "#E25822"
+    radius: 1.5
+    energy: 5.0
