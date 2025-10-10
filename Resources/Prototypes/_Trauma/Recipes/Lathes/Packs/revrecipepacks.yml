@@ -19,7 +19,7 @@
   id: RevTelecommsWorkbenchStatic
   recipes:
   - EncryptionKeyRev
-  - RevDropPodTrapsRecipe
+  - RevDropPodTraps
   - RevTurretElectronics
   - TelecomServerCircuitboard # eventually replace this with a homeade looking one
 # Rev Radio Tracker
