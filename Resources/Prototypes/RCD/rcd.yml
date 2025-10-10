@@ -200,11 +200,32 @@
   rotation: Camera
   fx: EffectRCDConstruct3
 
- # Lighting
- # TubeLight and BulbLight removed from RCD to prevent placing lights via RCD(To buff shadowling and prevent cheese).
- # Note: the underlying prototypes (Poweredlight / PoweredSmallLight) and map placements
- # remain unchanged. Removing those prototypes as well will require updating maps
- # and mapping actions that reference them to avoid runtime errors.
+# Lighting
+- type: rcd
+  id: TubeLight
+  category: Lighting
+  sprite: /Textures/Interface/Radial/RCD/tube_light.png
+  mode: ConstructObject
+  prototype: Poweredlight
+  cost: 2
+  delay: 1
+  collisionMask: TabletopMachineMask
+  collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  rotation: User
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: BulbLight
+  category: Lighting
+  sprite: /Textures/Interface/Radial/RCD/bulb_light.png
+  mode: ConstructObject
+  prototype: PoweredSmallLight
+  cost: 2
+  delay: 1
+  collisionMask: TabletopMachineMask
+  collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  rotation: User
+  fx: EffectRCDConstruct1
 
 # Electrical
 - type: rcd
