@@ -6,7 +6,10 @@
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Revs/propaganda.rsi
-    state: icon
+    layers:
+    - state: icon
+      visible: true
+      map: ["enum.ChargesVisualLayers.ChargesLeft"]
   - type: Flammable
     fireSpread: true
     alwaysCombustible: true
@@ -14,6 +17,12 @@
       types:
         Heat: 1
   - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ChargesVisuals.Charges:
+        enum.ChargesVisualLayers.ChargesLeft:
+          True: {state: icon}
+          False: {state: burnt}
   - type: FireVisuals
     sprite: _Trauma/Effects/fire.rsi
     normalState: revfire
@@ -21,12 +30,6 @@
     damageModifierSet: Wood
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
         damage: 15
@@ -66,21 +69,11 @@
   - type: RevolutionaryConverter
     conversionDuration: 5
     consumesCharges: 1
+    applyFlashEffect: false
   - type: UseDelay
     delay: 5
   - type: LimitedCharges
     maxCharges: 1
-  - type: Food
-    solution: food
-    delay: 7
-    forceFeedDelay: 7
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 1
-        reagents:
-        - ReagentId: Benzene
-          Quantity: 1
   - type: Tag
     tags:
     - Document

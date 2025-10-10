@@ -47,3 +47,9 @@ Entries:
       message: 'Replaced Crewsimov with Asimov '
   id: 7
   time: '2025-10-10T02:00:30.0000000+00:00'
+- author: BombasterDS2
+  changes:
+    - type: Fix
+      message: Fixed propaganda pamphlet charge spending before conversion.
+  id: 8
+  time: '2025-10-10T18:11:12.0000000+00:00'

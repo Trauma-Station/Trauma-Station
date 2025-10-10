@@ -58,6 +58,7 @@
     - id: CrateFunLizardPlushieBulk
     - id: CrateFunSharkPlushieBulk
     - id: CrateCandles
+    - id: CrateFunSprayPaints # Trauma
     - id: CrateFunArtSupplies
     - id: CrateFunFoamGuns
       weight: 0.01
