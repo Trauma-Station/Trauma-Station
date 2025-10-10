@@ -11,6 +11,9 @@
             "name": "icon"
         },
         {
+            "name": "burnt"
+        },
+        {
             "name": "inhand-left",
             "directions": 4
         },
