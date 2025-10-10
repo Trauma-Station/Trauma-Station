@@ -39,7 +39,6 @@
     - state: variant-engineering
       map: ["variant-engineering"]
     - state: variant-revolutionary # Trauma
-      sprite: _Trauma/Structures/Machines/telecomms.rsi
       map: ["variant-revolutionary"]
     - state: variant-medical
       map: ["variant-medical"]
