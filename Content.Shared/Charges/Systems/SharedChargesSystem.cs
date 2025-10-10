@@ -29,6 +29,7 @@ namespace Content.Shared.Charges.Systems;
 
 public abstract class SharedChargesSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!; // TraumaStation
     [Dependency] protected readonly IGameTiming _timing = default!;
 
     /*
@@ -147,6 +148,8 @@ public abstract class SharedChargesSystem : EntitySystem
 
         action.Comp1.LastCharges = Math.Clamp(action.Comp1.LastCharges + addCharges, 0, action.Comp1.MaxCharges);
         Dirty(action.Owner, action.Comp1);
+
+        _appearance.SetData(action.Owner, ChargesVisuals.Charges, !IsEmpty(action)); // TraumaStation
     }
 
     public bool TryUseCharge(Entity<LimitedChargesComponent?> entity)
@@ -189,6 +192,8 @@ public abstract class SharedChargesSystem : EntitySystem
         action.Comp.LastCharges = action.Comp.MaxCharges;
         action.Comp.LastUpdate = _timing.CurTime;
         Dirty(action);
+
+        _appearance.SetData(action.Owner, ChargesVisuals.Charges, !IsEmpty(action)); // TraumaStation
     }
 
     public void SetCharges(Entity<LimitedChargesComponent?> action, int value)
@@ -205,6 +210,8 @@ public abstract class SharedChargesSystem : EntitySystem
         action.Comp.LastCharges = adjusted;
         action.Comp.LastUpdate = _timing.CurTime;
         Dirty(action);
+
+        _appearance.SetData(action.Owner, ChargesVisuals.Charges, !IsEmpty(action)); // TraumaStation
     }
 
     /// <summary>
