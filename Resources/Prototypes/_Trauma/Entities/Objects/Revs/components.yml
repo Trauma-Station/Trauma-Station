@@ -105,7 +105,7 @@
     tags:
     - Gear
   - type: Item
-    size: tiny
+    size: Tiny
 
 - type: entity
   parent: [BaseItem]
@@ -120,7 +120,7 @@
     tags:
     - Bolt
   - type: Item
-    size: tiny
+    size: Tiny
 
 - type: entity
   parent: [BaseItem]
@@ -135,7 +135,7 @@
     tags:
     - Nut
   - type: Item
-    size: tiny
+    size: Tiny
 
 - type: entity
   parent: [BaseItem,BaseMajorContraband]
