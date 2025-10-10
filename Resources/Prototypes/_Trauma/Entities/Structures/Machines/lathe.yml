@@ -1,0 +1,165 @@
+- type: entity
+  parent: [BaseMajorContraband,BaseMachine]
+  id: BaseRevIndustry
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Appearance #Base lathe components without wire pannel for future machines
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+          - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: ActivatableUI
+    key: enum.LatheUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.LatheUiKey.Key:
+        type: LatheBoundUserInterface
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: Pullable
+  - type: StaticPrice
+    price: 800
+  - type: TechnologyDatabase
+  - type: AutomationSlots # Goobstation
+    slots:
+    - !type:AutomatedMaterialStorage
+      input: AutomationSlotMaterials
+      output: null
+  - type: Animateable
+  - type: Machine
+  - type: LightningTarget
+    priority: 1
+  - type: Transform
+    noRot: false
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevForge
+  name: industrial forge
+  placement:
+    mode: SnapgridCenter
+  description: This jury rigged machine can produce all sorts of useful (and dangerous) components.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/revforge.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/strike.ogg
+    idleState: icon
+    runningState: revforge
+    staticPacks:
+    - RevForgeStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+        - Sheet
+        - Metal
+        - Wooden
+        - RawMaterial
+        - Plastic
+  - type: PointLight
+    enabled: true
+    color: "#E25822"
+    radius: 1.5
+    energy: 5.0
+  - type: BlueprintReceiver
+    whitelist:
+      tags:
+      - ForgeMold
+  - type: ContainerContainer
+    containers:
+      blueprint: !type:Container
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - blueprint
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevForgeGraph
+    node: revForgeComplete
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevPrintingPress
+  name: printing press
+  placement:
+    mode: SnapgridCenter
+  description: A printing press for mass producing media, or in your case anti-NT propaganda.
+  components:
+  - type: Transform
+    noRot: false
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/revprintingpress.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/printingpress.ogg
+    idleState: icon
+    runningState: printingpress
+    staticPacks:
+    - RevPrintingPress
+  - type: MaterialStorage
+    whitelist:
+      tags:
+        - Sheet
+  - type: Construction
+    deconstructionTarget: null
+    graph: revPrintingPress
+    node: revPrintingPress
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevRadioBench
+  name: telecommunications workshop
+  placement:
+    mode: SnapgridCenter
+  description: A device for hacking into nearby signals, allows the production of radiochips, turrets, as well as some upgrades for other machines.
+  components:
+  - type: Transform
+    noRot: false
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/telecommsbench.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/commsworkbench.ogg
+    idleState: icon
+    runningState: telecomms
+    staticPacks:
+    - RevTelecommsWorkbenchStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+        - Sheet
+        - RawMaterial
+        - Ingot
+  - type: Construction
+    deconstructionTarget: null
+    graph: revTelecommsWorkbench
+    node: revTelecommsWorkbench

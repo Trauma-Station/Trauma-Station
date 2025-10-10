@@ -1,0 +1,25 @@
+- type: latheRecipePack
+  id: RevForgeStatic
+  recipes:
+  - RevSwordRecipe
+  - RevKnifeRecipe
+  - RevSpearRecipe
+  - RevTorchRecipe
+  - RevMaceRecipe
+  - RevGearRecipe
+  - RevBoltRecipe
+  - RevNutRecipe
+
+- type: latheRecipePack
+  id: RevPrintingPress
+  recipes:
+  - RevPropaganda
+
+- type: latheRecipePack
+  id: RevTelecommsWorkbenchStatic
+  recipes:
+  - EncryptionKeyRev
+  - RevDropPodTrapsRecipe
+  - Revturretelectronicsrecipe
+  - TelecomServerCircuitboard # eventually replace this with a homeade looking one
+# Rev Radio Tracker

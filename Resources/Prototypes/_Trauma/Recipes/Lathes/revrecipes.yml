@@ -1,0 +1,97 @@
+- type: latheRecipe
+  id: RevSwordRecipe
+  result: RevSwordBlade
+  completetime: 15
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  id: RevKnifeRecipe
+  result: RevKnifeblade
+  completetime: 15
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  id: RevSpearRecipe
+  result: RevPitchforkHead
+  completetime: 15
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  id: RevTorchRecipe
+  result: RevTorchHead
+  completetime: 15
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  id: RevMaceRecipe
+  result: RevMaceHead
+  completetime: 15
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  id: RevGearRecipe
+  result: Revgear
+  completetime: 15
+  materials:
+    Steel: 100
+
+- type: latheRecipe
+  id: RevNutRecipe
+  result: Revnut
+  completetime: 15
+  materials:
+    Steel: 100
+
+- type: latheRecipe
+  id: RevBoltRecipe
+  result: Revbolt
+  completetime: 15
+  materials:
+    Steel: 100
+
+- type: latheRecipe
+  id: RevCaltropRecipe
+  result: Caltrops
+  completetime: 15
+  materials:
+    Steel: 300
+
+- type: latheRecipe
+  id: RevDropPodTrapsRecipe
+  result: RevDropPodTraps
+  completetime: 6
+  materials:
+    Silver: 100
+    Gold: 100
+    Steel: 300
+    Glass: 100
+
+- type: latheRecipe
+  id: RevPropaganda
+  result: RevPropaganda
+  completetime: 60
+  materials:
+    Paper: 3000
+
+- type: latheRecipe
+  id: EncryptionKeyRev
+  result: EncryptionKeyRev
+  completetime: 6
+  materials:
+    Silver: 50
+    Gold: 50
+    Steel: 50
+
+- type: latheRecipe
+  id: Revturretelectronicsrecipe
+  result: Revturretelectronics
+  completetime: 6
+  materials:
+    Glass: 500
+    Gold: 50
+

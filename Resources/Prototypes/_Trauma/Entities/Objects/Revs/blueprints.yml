@@ -1,0 +1,15 @@
+- type: entity
+  parent: BaseItem
+  id: BlueprintCaltrops
+  name: caltrops mold
+  description: A mold for caltrops. It can be inserted into an industrial forge.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - RevCaltropRecipe
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/mold.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - ForgeMold
