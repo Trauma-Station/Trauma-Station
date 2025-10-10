@@ -35,8 +35,11 @@
   id: HeadRevGear
   storage:
     back:
-    - Flash
-    - ClothingEyesGlassesSunglasses
+#    - Flash # Trauma edit
+#    - ClothingEyesGlassesSunglasses # Trauma edit
     # - RevolutionaryManifesto # Einstein Engines - Revolutionary Manifesto # Trauma edit
-    - EncryptionKeySyndie # Goobstation
-    - RevsFastDrawImplanter # Goobstation
+#    - EncryptionKeySyndie # Goobstation # Trauma edit
+ #   - RevsFastDrawImplanter # Goobstation # Trauma edit
+     - Revgear
+     - Revnut
+     - Revbolt

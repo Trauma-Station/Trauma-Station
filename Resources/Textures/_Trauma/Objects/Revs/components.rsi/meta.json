@@ -20,6 +20,15 @@
       "name": "knife"
     },
     {
+      "name": "gear"
+    },
+    {
+      "name": "bolt"
+    },
+    {
+      "name": "nut"
+    },
+    {
       "name": "torch"
     }
   ]

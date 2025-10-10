@@ -1,8 +1,0 @@
-- type: latheRecipePack
-  id: RevForgeStatic
-  recipes:
-  - RevSwordRecipe
-  - RevKnifeRecipe
-  - RevSpearRecipe
-  - RevTorchRecipe
-  - RevMaceRecipe

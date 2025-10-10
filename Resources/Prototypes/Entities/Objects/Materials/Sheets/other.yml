@@ -107,7 +107,9 @@
         reagents:
         - ReagentId: Cellulose
           Quantity: 3
-
+  - type: Tag #Trauma
+    tags:
+    - Sheet
 
 - type: entity
   parent: SheetPaper

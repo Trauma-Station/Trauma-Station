@@ -1,0 +1,86 @@
+- type: entity
+  parent: [BaseItem,BaseMajorContraband]
+  id: RevPropaganda
+  name: propaganda pamphlet
+  description: It is a revolutionary propaganda pamphlet. It loses its charm after reading it once, so you will need plenty.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/propaganda.rsi
+    state: icon
+  - type: Flammable
+    fireSpread: true
+    alwaysCombustible: true
+    damage:
+      types:
+        Heat: 1
+  - type: Appearance
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: revfire
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Ash:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/paper_pickup.ogg
+      params:
+        volume: -6
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/paper_drop.ogg
+      params:
+        volume: -6
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/_Goobstation/Items/handling/paper_use.ogg
+      params:
+        volume: -6
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/_Goobstation/Items/handling/paper_drop.ogg
+      params:
+        volume: -6
+  - type: EmitSoundOnThrow
+    sound:
+      path: /Audio/_Goobstation/Items/handling/paper_throw.ogg
+      params:
+        volume: -6
+  - type: RevolutionaryConverter
+    conversionDuration: 5
+    consumesCharges: 1
+  - type: UseDelay
+    delay: 5
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: Food
+    solution: food
+    delay: 7
+    forceFeedDelay: 7
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 1
+        reagents:
+        - ReagentId: Benzene
+          Quantity: 1
+  - type: Tag
+    tags:
+    - Document

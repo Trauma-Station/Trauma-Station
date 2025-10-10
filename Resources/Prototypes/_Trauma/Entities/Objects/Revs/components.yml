@@ -91,3 +91,58 @@
     deconstructionTarget: null
     graph: RevPitchforkCreation
     node: start
+
+- type: entity
+  parent: [BaseItem]
+  id: Revgear
+  name: gear
+  description: A gear, used in quite a few devices.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: gear
+  - type: Tag
+    tags:
+    - Gear
+  - type: Item
+    size: tiny
+
+- type: entity
+  parent: [BaseItem]
+  id: Revbolt
+  name: pile of bolts
+  description: Some bolts, used in quite a few devices.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: bolt
+  - type: Tag
+    tags:
+    - Bolt
+  - type: Item
+    size: tiny
+
+- type: entity
+  parent: [BaseItem]
+  id: Revnut
+  name: pile of nuts
+  description: Some nuts, used in quite a few devices.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: nut
+  - type: Tag
+    tags:
+    - Nut
+  - type: Item
+    size: tiny
+
+- type: entity
+  parent: [BaseItem,BaseMajorContraband]
+  id: Revturretelectronics
+  name: revolutionary turret circuit board
+  description: allows the creation of a revolutionary alligned turret.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: door_electronics

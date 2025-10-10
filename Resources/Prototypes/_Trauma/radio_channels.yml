@@ -1,0 +1,7 @@
+- type: radioChannel
+  id: Revolutionary
+  name: chat-radio-revolutionary
+  keycode: 'r'
+  frequency: 1215
+  color: "#ff0004"
+

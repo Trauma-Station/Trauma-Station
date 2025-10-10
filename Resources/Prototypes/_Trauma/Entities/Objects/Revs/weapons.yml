@@ -234,7 +234,7 @@
     sprite: _Trauma/Objects/Revs/torch.rsi
     state: icon
   - type: MeleeWeapon
-    animationRotation: -45
+    animationRotation: -135
     wideAnimationRotation: -135
     damage:
       types:
@@ -255,9 +255,60 @@
     price: 80
   - type: IgnitionSource
     temperature: 700
+  - type: AlwaysHot
   - type: IgniteOnMeleeHit
     fireStacks: 1
   - type: Construction
     deconstructionTarget: null
     graph: RevTorchCreation
     node: finished
+
+- type: entity
+  parent: [BaseItem,BaseMinorContraband]
+  name: caltrops
+  id: Caltrops
+  description: A weapon designed for being layed on the floor as a trap, can be thrown for a quick trap anchored in place.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/caltrops.rsi
+    state: icon
+  - type: Anchorable
+  - type: Item
+    size: Tiny
+  - type: CollisionWake
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        hard: false
+        layer:
+        - LowImpassable
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        density: 30
+        mask:
+        - ItemMask
+  - type: StepTrigger
+    intersectRatio: 0.2
+  - type: Slippery
+    slipSound:
+      path: /Audio/Weapons/bladeslice.ogg
+    slipData:
+      launchForwardsMultiplier: 0
+  - type: TriggerOnStepTrigger
+  - type: DamageUserOnTrigger
+    damage:
+      types:
+        Piercing: 15
+  - type: EmbeddableProjectile
+  - type: ThrowingAngle
+    angle: 180
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 10
