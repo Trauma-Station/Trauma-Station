@@ -80,6 +80,10 @@
   description: A cartridge of highly compressed paint, commonly used in spray painters.
   components:
   - type: SprayPainterAmmo
+    whitelist: # Trauma - let it refill spray cans too
+      components:
+      - SprayPainter
+      - PaintCan
   - type: Sprite
     sprite: Objects/Tools/spray_painter.rsi
     state: ammo

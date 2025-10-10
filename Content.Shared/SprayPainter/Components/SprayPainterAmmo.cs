@@ -1,3 +1,4 @@
+using Content.Shared.Whitelist; // Trauma
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.SprayPainter.Components;
@@ -14,4 +15,11 @@ public sealed partial class SprayPainterAmmoComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int Charges = 15;
+
+    /// <summary>
+    /// Trauma - Whitelist for items this can recharge.
+    /// This lets it be used as a generic ammo item for anything with limited charges.
+    /// </summary>
+    [DataField(required: true)]
+    public EntityWhitelist Whitelist = new();
 }
