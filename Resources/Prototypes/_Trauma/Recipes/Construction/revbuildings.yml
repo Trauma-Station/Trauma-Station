@@ -8,11 +8,11 @@
   objectType: Structure
   canBuildInImpassable: false
   conditions:
-    - !type:TileNotBlocked
+  - !type:TileNotBlocked
   entityWhitelist:
     components:
     - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary
 
 - type: construction
   id: RevPrintingPress
@@ -24,11 +24,11 @@
   objectType: Structure
   canBuildInImpassable: false
   conditions:
-    - !type:TileNotBlocked
+  - !type:TileNotBlocked
   entityWhitelist:
     components:
     - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary
 
 - type: construction
   id: RevTelecommsWorkbench
@@ -40,8 +40,8 @@
   objectType: Structure
   canBuildInImpassable: false
   conditions:
-    - !type:TileNotBlocked
+  - !type:TileNotBlocked
   entityWhitelist:
     components:
     - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary

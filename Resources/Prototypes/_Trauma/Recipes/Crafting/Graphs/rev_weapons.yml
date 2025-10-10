@@ -1,14 +1,15 @@
+# TODO add hammering and shit as well just touching it with wood shouldn't complete it
 - type: constructionGraph
   id: RevSwordCreation
   start: start
   graph:
   - node: start
     edges:
-      - to: finished
-        steps:
-          - material: WoodPlank
-            amount: 1
-            doAfter: 10
+    - to: finished
+      steps:
+      - material: WoodPlank
+        amount: 1
+        doAfter: 10
   - node: finished
     entity: RevSword
 
@@ -18,11 +19,11 @@
   graph:
   - node: start
     edges:
-      - to: finished
-        steps:
-          - material: WoodPlank
-            amount: 1
-            doAfter: 10
+    - to: finished
+      steps:
+      - material: WoodPlank
+        amount: 1
+        doAfter: 10
   - node: finished
     entity: RevMace
 
@@ -32,11 +33,11 @@
   graph:
   - node: start
     edges:
-      - to: finished
-        steps:
-          - material: WoodPlank
-            amount: 1
-            doAfter: 10
+    - to: finished
+      steps:
+      - material: WoodPlank
+        amount: 1
+        doAfter: 10
   - node: finished
     entity: RevKnife
 
@@ -46,11 +47,11 @@
   graph:
   - node: start
     edges:
-      - to: finished
-        steps:
-          - material: WoodPlank
-            amount: 1
-            doAfter: 10
+    - to: finished
+      steps:
+      - material: WoodPlank
+        amount: 1
+        doAfter: 10
   - node: finished
     entity: RevPitchfork
 
@@ -60,10 +61,10 @@
   graph:
   - node: start
     edges:
-      - to: finished
-        steps:
-          - material: WoodPlank
-            amount: 1
-            doAfter: 10
+    - to: finished
+      steps:
+      - material: WoodPlank
+        amount: 1
+        doAfter: 10
   - node: finished
     entity: RevTorch

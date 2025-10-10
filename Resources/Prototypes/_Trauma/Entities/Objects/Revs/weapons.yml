@@ -1,7 +1,31 @@
 - type: entity
-  name: forged mace
-  parent: [BaseItem,BaseMajorContraband]
+  abstract: true
+  parent: [ BaseItem, BaseMajorContraband ]
+  id: BaseRevMeleeWeapon
+  components:
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+  - type: DisarmMalus
+    malus: 0.225
+  - type: Appearance
+  - type: StaticPrice
+    price: 80
+  - type: Construction
+    deconstructionTarget: null
+    node: finished
+
+- type: entity
+  abstract: true
+  parent: BaseRevMeleeWeapon
+  id: BaseRevForgedWeapon
+  components:
+  - type: Execution
+    doAfterDuration: 1.0
+
+- type: entity
+  parent: BaseRevForgedWeapon
   id: RevMace
+  name: forged mace
   description: A robust mace, hurts and stuns enemies, not great against modern armor.
   components:
   - type: Sprite
@@ -9,7 +33,6 @@
     state: icon
   - type: MeleeWeapon
     animationRotation: -45
-    wideAnimationRotation: -135
     damage:
       types:
         Blunt: 12
@@ -20,25 +43,16 @@
     shape:
     - 0,0,0,2
     storedRotation: -45
-  - type: DisarmMalus
-    malus: 0.225
-  - type: Appearance
-  - type: StaticPrice
-    price: 80
-  - type: Execution
-    doAfterDuration: 1.0
   - type: Construction
-    deconstructionTarget: null
     graph: RevMaceCreation
-    node: finished
   - type: MeleeThrowOnHit
     distance: 0.3
     speed: 1
 
 - type: entity
-  name: forged sword
-  parent: [BaseItem,BaseMajorContraband]
+  parent: BaseRevForgedWeapon
   id: RevSword
+  name: forged sword
   description: A two handed sword, deals heavy damage.
   components:
   - type: Sprite
@@ -46,7 +60,6 @@
     state: icon
   - type: MeleeWeapon
     animationRotation: -90
-    wideAnimationRotation: -135
     damage:
       types:
         Slash: 8
@@ -54,11 +67,6 @@
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
     size: Ginormous
-  - type: DisarmMalus
-    malus: 0.225
-  - type: Appearance
-  - type: StaticPrice
-    price: 80
   - type: IncreaseDamageOnWield
     damage:
       types:
@@ -68,8 +76,6 @@
     tags:
     - Knife
   - type: Sharp
-  - type: Execution
-    doAfterDuration: 1.0
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Goobstation/Items/handling/knife_pickup.ogg
@@ -86,14 +92,12 @@
       params:
         volume: -8
   - type: Construction
-    deconstructionTarget: null
     graph: RevSwordCreation
-    node: finished
 
 - type: entity
-  name: forged pitchfork
-  parent: [BaseItem,BaseMajorContraband]
+  parent: BaseRevForgedWeapon
   id: RevPitchfork
+  name: forged pitchfork
   description: A large pitchfork, can be thrown and has extended melee range.
   components:
   - type: Sprite
@@ -101,7 +105,6 @@
     state: icon
   - type: MeleeWeapon
     animationRotation: -130
-    wideAnimationRotation: -135
     canWideSwing: false
     range: 2.2
     attackRate: 0.8
@@ -115,11 +118,6 @@
   - type: EmbeddableProjectile
   - type: ThrowingAngle
     angle: 225
-  - type: DisarmMalus
-    malus: 0.225
-  - type: Appearance
-  - type: StaticPrice
-    price: 80
   - type: IncreaseDamageOnWield
     damage:
       types:
@@ -129,18 +127,14 @@
     damage:
       types:
         Piercing: 30
-  - type: Execution
-    doAfterDuration: 1.0
   - type: Construction
-    deconstructionTarget: null
     graph: RevPitchforkCreation
-    node: finished
 
 - type: entity
-  name: forged knife
-  parent: [BaseItem,BaseMajorContraband]
+  parent: BaseRevForgedWeapon
   id: RevKnife
-  description: A small forged knife, it is concelable, can be dipped in poison, and can be used with a shield.
+  name: forged knife
+  description: A small forged knife. It is concealable, can be tipped with poison and is usable with a shield.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Revs/knife.rsi
@@ -166,7 +160,6 @@
         volume: -8
   - type: MeleeWeapon
     animationRotation: -45
-    wideAnimationRotation: -135
     damage:
       types:
         Slash: 12
@@ -175,16 +168,9 @@
   - type: Item
     size: Small
     storedRotation: -45
-  - type: DisarmMalus
-    malus: 0.225
-  - type: Appearance
-  - type: StaticPrice
-    price: 80
   - type: Tag
     tags:
     - Knife
-  - type: Execution
-    doAfterDuration: 1.0
   - type: Sharp
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/bladeslice.ogg
@@ -219,15 +205,12 @@
     equippedFillBaseName: -fill-
     equippedMaxFillLevels: 1
   - type: Construction
-    deconstructionTarget: null
     graph: RevKnifeCreation
-    node: finished
-
 
 - type: entity
-  name: combat torch
-  parent: [BaseItem,BaseMajorContraband]
+  parent: BaseRevMeleeWeapon
   id: RevTorch
+  name: combat torch
   description: A refined torch mounted with a steel head. Lights enemies on fire when hit.
   components:
   - type: Sprite
@@ -235,7 +218,6 @@
     state: icon
   - type: MeleeWeapon
     animationRotation: -135
-    wideAnimationRotation: -135
     damage:
       types:
         Heat: 8
@@ -248,26 +230,19 @@
     energy: 5.0
   - type: Item
     size: Ginormous
-  - type: DisarmMalus
-    malus: 0.225
-  - type: Appearance
-  - type: StaticPrice
-    price: 80
   - type: IgnitionSource
     temperature: 700
   - type: AlwaysHot
   - type: IgniteOnMeleeHit
     fireStacks: 1
   - type: Construction
-    deconstructionTarget: null
     graph: RevTorchCreation
-    node: finished
 
 - type: entity
-  parent: [BaseItem,BaseMinorContraband]
+  parent: [ BaseItem, BaseMinorContraband ]
   name: caltrops
   id: Caltrops
-  description: A weapon designed for being layed on the floor as a trap, can be thrown for a quick trap anchored in place.
+  description: A weapon designed to be laid on the floor as a trap, can be thrown for a quick trap anchored in place.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Revs/caltrops.rsi

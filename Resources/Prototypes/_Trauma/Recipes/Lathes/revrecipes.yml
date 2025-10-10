@@ -1,68 +1,68 @@
 - type: latheRecipe
-  id: RevSwordRecipe
+  abstract: true
+  id: BaseRevWeapon
+  categories: [ Weapons ]
+  completetime: 15
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  abstract: true
+  parent: BaseRevWeapon
+  id: BaseRevComponent
+  categories: [ Parts ]
+  materials:
+    Steel: 100
+
+- type: latheRecipe
+  parent: BaseRevWeapon
+  id: RevSword
   result: RevSwordBlade
-  completetime: 15
-  materials:
-    Steel: 500
 
 - type: latheRecipe
-  id: RevKnifeRecipe
+  parent: BaseRevWeapon
+  id: RevKnife
   result: RevKnifeblade
-  completetime: 15
-  materials:
-    Steel: 500
 
 - type: latheRecipe
-  id: RevSpearRecipe
+  parent: BaseRevWeapon
+  id: RevSpear
   result: RevPitchforkHead
-  completetime: 15
-  materials:
-    Steel: 500
 
 - type: latheRecipe
-  id: RevTorchRecipe
+  parent: BaseRevWeapon
+  id: RevTorch
   result: RevTorchHead
-  completetime: 15
-  materials:
-    Steel: 500
 
 - type: latheRecipe
-  id: RevMaceRecipe
+  parent: BaseRevWeapon
+  id: RevMace
   result: RevMaceHead
-  completetime: 15
-  materials:
-    Steel: 500
 
 - type: latheRecipe
-  id: RevGearRecipe
-  result: Revgear
-  completetime: 15
-  materials:
-    Steel: 100
+  parent: BaseRevComponent
+  id: RevGear
+  result: RevGear
 
 - type: latheRecipe
-  id: RevNutRecipe
-  result: Revnut
-  completetime: 15
-  materials:
-    Steel: 100
+  parent: BaseRevComponent
+  id: RevNut
+  result: RevNut
 
 - type: latheRecipe
-  id: RevBoltRecipe
-  result: Revbolt
-  completetime: 15
-  materials:
-    Steel: 100
+  parent: BaseRevComponent
+  id: RevBolt
+  result: RevBolt
 
 - type: latheRecipe
-  id: RevCaltropRecipe
+  parent: BaseRevWeapon
+  id: RevCaltrop
   result: Caltrops
-  completetime: 15
   materials:
     Steel: 300
 
 - type: latheRecipe
-  id: RevDropPodTrapsRecipe
+  id: RevDropPodTraps
   result: RevDropPodTraps
   completetime: 6
   materials:
@@ -88,10 +88,9 @@
     Steel: 50
 
 - type: latheRecipe
-  id: Revturretelectronicsrecipe
-  result: Revturretelectronics
+  id: RevTurretElectronics
+  result: RevTurretElectronics
   completetime: 6
   materials:
     Glass: 500
     Gold: 50
-

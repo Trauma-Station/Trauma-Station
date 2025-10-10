@@ -1,14 +1,14 @@
 - type: Tag
-  id: ForgeMold
+  id: Bolt
 
 - type: Tag
   id: EncryptionRevolutionary
 
 - type: Tag
-  id: Gear
+  id: ForgeMold
 
 - type: Tag
-  id: Bolt
+  id: Gear
 
 - type: Tag
   id: Nut

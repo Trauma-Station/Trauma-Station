@@ -2,100 +2,100 @@
   id: RevForgeGraph
   start: start
   graph:
-    - node: start
-      edges:
-        - to: revForgeComplete
-          steps:
-            - material: Steel
-              amount: 30
-              doAfter: 5
-            - tag: Gear
-              name: construction-graph-tag-gear
-              icon:
-                sprite: _Trauma/Objects/Revs/components.rsi
-                state: gear
-              doAfter: 1
-            - tag: Nut
-              name: construction-graph-tag-nut
-              icon:
-                sprite: _Trauma/Objects/Revs/components.rsi
-                state: nut
-              doAfter: 1
-            - tag: Bolt
-              name: construction-graph-tag-bolt
-              icon:
-                sprite: _Trauma/Objects/Revs/components.rsi
-                state: bolt
-              doAfter: 1
-    - node: revForgeComplete
-      entity: RevForge
+  - node: start
+    edges:
+    - to: revForgeComplete
+      steps:
+      - material: Steel
+        amount: 30
+        doAfter: 5
+      - tag: Gear
+        name: construction-graph-tag-gear
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: gear
+        doAfter: 1
+      - tag: Nut
+        name: construction-graph-tag-nut
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: nut
+        doAfter: 1
+      - tag: Bolt
+        name: construction-graph-tag-bolt
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: bolt
+        doAfter: 1
+  - node: revForgeComplete
+    entity: RevForge
 
 - type: constructionGraph
   id: revPrintingPress
   start: start
   graph:
-    - node: start
-      edges:
-        - to: revPrintingPress
-          steps:
-            - material: Steel
-              amount: 30
-              doAfter: 1
-            - tag: Gear
-              name: construction-graph-tag-gear
-              icon:
-                sprite: _Trauma/Objects/Revs/components.rsi
-                state: gear
-              doAfter: 1
-            - tag: Gear
-              name: construction-graph-tag-gear
-              icon:
-                sprite: _Trauma/Objects/Revs/components.rsi
-                state: gear
-              doAfter: 1
-            - tag: Nut
-              name: construction-graph-tag-nut
-              icon:
-                sprite: _Trauma/Objects/Revs/components.rsi
-                state: nut
-              doAfter: 1
-            - tag: Bolt
-              name: construction-graph-tag-bolt
-              icon:
-                sprite: _Trauma/Objects/Revs/components.rsi
-                state: bolt
-              doAfter: 1
-    - node: revPrintingPress
-      entity: RevPrintingPress
+  - node: start
+    edges:
+    - to: revPrintingPress
+      steps:
+      - material: Steel
+        amount: 30
+        doAfter: 1
+      - tag: Gear
+        name: construction-graph-tag-gear
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: gear
+        doAfter: 1
+      - tag: Gear
+        name: construction-graph-tag-gear
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: gear
+        doAfter: 1
+      - tag: Nut
+        name: construction-graph-tag-nut
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: nut
+        doAfter: 1
+      - tag: Bolt
+        name: construction-graph-tag-bolt
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: bolt
+        doAfter: 1
+  - node: revPrintingPress
+    entity: RevPrintingPress
 
 - type: constructionGraph
   id: revTelecommsWorkbench
   start: start
   graph:
-    - node: start
-      edges:
-        - to: revTelecommsWorkbench
-          steps:
-            - material: Steel
-              amount: 30
-              doAfter: 2
-            - tag: EncryptionSecurity
-              name: construction-graph-tag-seccomms
-              icon:
-                sprite: Objects/Devices/encryption_keys.rsi
-                state: sec_label
-              doAfter: 1
-            - tag: Nut
-              name: construction-graph-tag-nut
-              icon:
-                sprite: _Trauma/Objects/Revs/components.rsi
-                state: nut
-              doAfter: 1
-            - tag: Bolt
-              name: construction-graph-tag-bolt
-              icon:
-                sprite: _Trauma/Objects/Revs/components.rsi
-                state: bolt
-              doAfter: 1
-    - node: revTelecommsWorkbench
-      entity: RevRadioBench
+  - node: start
+    edges:
+    - to: revTelecommsWorkbench
+      steps:
+      - material: Steel
+        amount: 30
+        doAfter: 2
+      - tag: EncryptionSecurity
+        name: construction-graph-tag-seccomms
+        icon:
+          sprite: Objects/Devices/encryption_keys.rsi
+          state: sec_label
+        doAfter: 1
+      - tag: Nut
+        name: construction-graph-tag-nut
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: nut
+        doAfter: 1
+      - tag: Bolt
+        name: construction-graph-tag-bolt
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: bolt
+        doAfter: 1
+  - node: revTelecommsWorkbench
+    entity: RevRadioBench

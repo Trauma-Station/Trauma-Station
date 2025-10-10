@@ -1,14 +1,14 @@
 - type: latheRecipePack
   id: RevForgeStatic
   recipes:
-  - RevSwordRecipe
-  - RevKnifeRecipe
-  - RevSpearRecipe
-  - RevTorchRecipe
-  - RevMaceRecipe
-  - RevGearRecipe
-  - RevBoltRecipe
-  - RevNutRecipe
+  - RevSword
+  - RevKnife
+  - RevSpear
+  - RevTorch
+  - RevMace
+  - RevGear
+  - RevBolt
+  - RevNut
 
 - type: latheRecipePack
   id: RevPrintingPress
@@ -20,6 +20,6 @@
   recipes:
   - EncryptionKeyRev
   - RevDropPodTrapsRecipe
-  - Revturretelectronicsrecipe
+  - RevTurretElectronics
   - TelecomServerCircuitboard # eventually replace this with a homeade looking one
 # Rev Radio Tracker
