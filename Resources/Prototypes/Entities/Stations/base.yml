@@ -245,7 +245,7 @@
   abstract: true
   components:
   - type: SiliconLawProvider
-    laws: Asimov # Trauma - asimov replaces crewsimov
+    laws: Crewsimov
 
 - type: entity
   id: BaseStationNews
