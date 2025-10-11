@@ -1,4 +1,13 @@
 - type: entity
+  parent: WeaponPistolLiberator
+  id: WeaponPistolLiberatorEmpty
+  name: Liberator
+  description: A shitty little pistol that can only hold 6 rounds and has to be hand fed.
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
   parent: [ BaseItem, BaseMajorContraband ]
   id: WeaponPistolLiberator
   name: Liberator

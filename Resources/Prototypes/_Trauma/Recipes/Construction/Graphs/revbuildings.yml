@@ -383,4 +383,4 @@
                 sprite: Objects/Misc/modular_receiver.rsi
                 state: icon
     - node: revLiberator
-      entity: WeaponPistolLiberator
+      entity: WeaponPistolLiberatorEmpty
