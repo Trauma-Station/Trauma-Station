@@ -37,7 +37,6 @@
       tags:
       - CartridgePistol
     capacity: 6
-    count: 0
     proto: CartridgePistol
   - type: AmmoCounter
   - type: ContainerContainer
