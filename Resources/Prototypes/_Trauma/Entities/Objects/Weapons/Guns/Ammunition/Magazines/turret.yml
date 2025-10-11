@@ -1,0 +1,32 @@
+- type: entity
+  id: BaseMagazineTurret
+  name: "magazine (.22)"
+  parent: [ BaseItem, BaseMajorContraband ]
+  components:
+  - type: Tag
+    tags:
+      - MagazineTurret
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeTurret
+    proto: CartridgeTurret
+    capacity: 60
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/Turrets/smgturretmag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance

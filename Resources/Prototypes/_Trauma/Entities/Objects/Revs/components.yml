@@ -141,8 +141,24 @@
   parent: [BaseItem,BaseMajorContraband]
   id: Revturretelectronics
   name: revolutionary turret circuit board
-  description: allows the creation of a revolutionary alligned turret.
+  description: Used in the creation of turrets, they are programmed to shoot anything without an IFF badge so be careful.
   components:
   - type: Sprite
     sprite: Objects/Misc/module.rsi
     state: door_electronics
+  - type: Tag
+    tags:
+    - TurretBoard
+
+- type: entity
+  parent: [BaseItem,BaseMinorContraband]
+  id: RevGunParts
+  name: gun parts
+  description: A small pile of gun parts, useless on its own, but you have plans for it.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: gunparts
+  - type: Tag
+    tags:
+    - GunParts

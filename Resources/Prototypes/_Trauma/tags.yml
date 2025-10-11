@@ -12,3 +12,21 @@
 
 - type: Tag
   id: Nut
+
+- type: Tag
+  id: MagazineTurret
+
+- type: Tag
+  id: CartridgeTurret
+
+- type: Tag
+  id: TurretBoard
+
+- type: Tag
+  id: GunParts
+
+- type: Tag
+  id: HandTeleporter
+
+- type: Tag
+  id: RCD
