@@ -104,6 +104,15 @@
       - material: RevNut
       - tool: Anchoring
         doAfter: 2
+    - to: RevBulletPress
+      steps:
+      - material: RevGunParts
+      - tool: Screwing
+        doAfter: 1
+      - material: RevBolt
+      - material: RevNut
+      - tool: Anchoring
+        doAfter: 2
   - node: RevForge
     entity: RevForge
   - node: RevPrintingPress
@@ -114,3 +123,6 @@
     entity: RevPrinter
   - node: RevTelesphere
     entity: RevTelesphere
+  - node: RevBulletPress
+    entity: RevBulletPress
+

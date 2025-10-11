@@ -21,3 +21,11 @@
   completetime: 15
   materials:
     Steel: 200
+
+- type: latheRecipe
+  parent: BaseRevWeapon
+  id: RevSMGMagazine
+  result: MagazinePistolSubMachineGunEmpty
+  completetime: 15
+  materials:
+    Steel: 200

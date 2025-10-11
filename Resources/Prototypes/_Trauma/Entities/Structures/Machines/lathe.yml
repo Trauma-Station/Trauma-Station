@@ -213,4 +213,4 @@
       - RawMaterial
       - Ingot
   - type: Construction
-    node: RevPrinter
+    node: RevBulletPress
