@@ -120,7 +120,7 @@ public sealed class DamageOverlayUiController : UIController
 
         _overlay.State = mobState.CurrentState;
 
-        if (body == null && damageable != null)
+        if (damageable != null) // Trauma - remove body check
         {
             if (!_mobThresholdSystem.TryGetIncapThreshold(entity, out var foundThreshold, thresholds))
                 return; //this entity cannot die or crit!!
