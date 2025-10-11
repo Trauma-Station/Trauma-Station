@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingOuterBaseMedium,BaseMajorContraband]
+  parent: [ClothingOuterArmorBase,BaseMajorContraband]
   id: ClothingOuterArmorRev
   name: chest plate
   description: Hastily made armor for the people.

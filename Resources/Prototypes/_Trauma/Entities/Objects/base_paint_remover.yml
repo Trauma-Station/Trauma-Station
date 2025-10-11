@@ -1,0 +1,18 @@
+# added to soap etc that can remove paint from entities
+- type: entity
+  abstract: true
+  id: BasePaintRemover
+  components:
+  - type: EffectsTool
+    whitelist:
+      components:
+      - PaintVisuals
+    verbText: paint-remover-verb
+    userPopup: paint-remover-popup-user
+    othersPopup: paint-remover-popup-others
+    sound: /Audio/Effects/Fluids/watersplash.ogg
+    effects:
+    - !type:RemoveComponents
+      guidebookText: paint-remover-guidebook-text
+      components:
+      - type: PaintVisuals

@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseMajorContraband,BaseMachine]
+  parent: [BaseMajorContraband, BaseMachine]
   id: BaseRevIndustry
   abstract: true
   placement:
@@ -92,6 +92,8 @@
   - type: ContainerContainer
     containers:
       blueprint: !type:Container
+      machine_board: !type:Container
+      machine_parts: !type:Container
   - type: EmptyOnMachineDeconstruct
     containers:
     - blueprint
@@ -126,6 +128,10 @@
     whitelist:
       tags:
         - Sheet
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
   - type: Construction
     deconstructionTarget: null
     graph: revPrintingPress
@@ -153,6 +159,10 @@
     runningState: telecomms
     staticPacks:
     - RevTelecommsWorkbenchStatic
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
   - type: MaterialStorage
     whitelist:
       tags:
