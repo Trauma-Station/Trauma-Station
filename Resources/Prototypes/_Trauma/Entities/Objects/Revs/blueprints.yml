@@ -6,7 +6,7 @@
   components:
   - type: Blueprint
     providedRecipes:
-    - RevCaltropRecipe
+    - RevCaltrop
   - type: Sprite
     sprite: _Trauma/Objects/Revs/mold.rsi
     state: icon

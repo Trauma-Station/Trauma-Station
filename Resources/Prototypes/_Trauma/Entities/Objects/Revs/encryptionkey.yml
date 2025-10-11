@@ -9,6 +9,7 @@
     - Revolutionary
     defaultChannel: Revolutionary
   - type: Sprite
+    sprite: _Trauma/Objects/Devices/encryption_keys.rsi
     layers:
     - state: rev_holder
     - state: rev_label

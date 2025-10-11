@@ -1,11 +1,12 @@
 - type: entity
-  id: BaseMagazineTurret
-  name: "magazine (.22)"
   parent: [ BaseItem, BaseMajorContraband ]
+  id: BaseMagazineTurret
+  name: "magazine (.22 short)"
+  description: 60 round low-caliber magazine, often used in anti-personnel turrets.
   components:
   - type: Tag
     tags:
-      - MagazineTurret
+    - MagazineTurret
   - type: BallisticAmmoProvider
     mayTransfer: true
     whitelist:

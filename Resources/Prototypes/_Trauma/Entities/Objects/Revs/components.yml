@@ -1,145 +1,50 @@
 - type: entity
-  parent: [BaseItem,BaseMinorContraband]
-  id: RevSwordBlade
-  name: unfinished sword blade
-  description: An unfinished sword, use some wood to complete it.
+  abstract: true
+  parent: BaseStockPart
+  id: BaseRevComponent
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Revs/components.rsi
-    state: sword
-  - type: EmbeddableProjectile
-    sound: /Audio/Weapons/bladeslice.ogg
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Slash: 5
-  - type: ThrowingAngle
-    angle: 225
-  - type: Construction
-    deconstructionTarget: null
-    graph: RevSwordCreation
-    node: start
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50 # removed plastic
 
 - type: entity
-  parent: [BaseItem,BaseMinorContraband]
-  id: RevMaceHead
-  name: unfinished mace parts
-  description: An unfinished mace, use some wood to complete it.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Revs/components.rsi
-    state: mace
-  - type: Construction
-    deconstructionTarget: null
-    graph: RevMaceCreation
-    node: start
-
-- type: entity
-  parent: [BaseItem,BaseMinorContraband]
-  id: RevKnifeblade
-  name: unfinished knife blade
-  description: An unfinished knife, use some wood to complete it.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Revs/components.rsi
-    state: knife
-  - type: EmbeddableProjectile
-    sound: /Audio/Weapons/bladeslice.ogg
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Slash: 5
-  - type: ThrowingAngle
-    angle: 225
-  - type: Construction
-    deconstructionTarget: null
-    graph: RevKnifeCreation
-    node: start
-
-- type: entity
-  parent: [BaseItem,BaseMinorContraband]
-  id: RevTorchHead
-  name: unfinished combat torch
-  description: An unfinished combat torch, use some wood to complete it.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Revs/components.rsi
-    state: torch
-  - type: Construction
-    deconstructionTarget: null
-    graph: RevTorchCreation
-    node: start
-
-- type: entity
-  parent: [BaseItem,BaseMinorContraband]
-  id: RevPitchforkHead
-  name: unfinished pitchfork
-  description: An unfinished pitchfork, use a some wood to complete it.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Revs/components.rsi
-    state: spear
-  - type: EmbeddableProjectile
-    sound: /Audio/Weapons/bladeslice.ogg
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Slash: 5
-  - type: ThrowingAngle
-    angle: 225
-  - type: Construction
-    deconstructionTarget: null
-    graph: RevPitchforkCreation
-    node: start
-
-- type: entity
-  parent: [BaseItem]
-  id: Revgear
+  parent: BaseRevComponent
+  id: RevGear
   name: gear
   description: A gear, used in quite a few devices.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/components.rsi
     state: gear
-  - type: Tag
-    tags:
-    - Gear
-  - type: Item
-    size: Tiny
+  - type: Stack
+    stackType: RevGear
 
 - type: entity
-  parent: [BaseItem]
-  id: Revbolt
+  parent: BaseRevComponent
+  id: RevBolt
   name: pile of bolts
   description: Some bolts, used in quite a few devices.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/components.rsi
     state: bolt
-  - type: Tag
-    tags:
-    - Bolt
-  - type: Item
-    size: Tiny
+  - type: Stack
+    stackType: RevBolt
 
 - type: entity
-  parent: [BaseItem]
-  id: Revnut
+  parent: BaseRevComponent
+  id: RevNut
   name: pile of nuts
   description: Some nuts, used in quite a few devices.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/components.rsi
     state: nut
-  - type: Tag
-    tags:
-    - Nut
-  - type: Item
-    size: Tiny
+  - type: Stack
+    stackType: RevNut
 
 - type: entity
-  parent: [BaseItem,BaseMajorContraband]
-  id: Revturretelectronics
+  parent: [ BaseItem, BaseMajorContraband ]
+  id: RevTurretElectronics
   name: revolutionary turret circuit board
   description: Used in the creation of turrets, they are programmed to shoot anything without an IFF badge so be careful.
   components:
@@ -148,17 +53,15 @@
     state: door_electronics
   - type: Tag
     tags:
-    - TurretBoard
+    - RevTurretBoard
 
 - type: entity
-  parent: [BaseItem,BaseMinorContraband]
+  parent: [ BaseRevComponent, BaseMinorContraband ]
   id: RevGunParts
   name: gun parts
-  description: A small pile of gun parts, useless on its own, but you have plans for it.
+  description: A small pile of gun parts. Useless on their own, but you have plans for them.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/components.rsi
     state: gunparts
-  - type: Tag
-    tags:
-    - GunParts
+  - type: Stack
+    stackType: RevGunParts

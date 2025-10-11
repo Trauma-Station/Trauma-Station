@@ -1,21 +1,9 @@
 - type: entity
-  parent: WeaponPistolLiberator
-  id: WeaponPistolLiberatorEmpty
-  name: Liberator
-  description: A shitty little pistol that can only hold 6 rounds and has to be hand fed.
-  components:
-  - type: BallisticAmmoProvider
-    proto: null
-  - type: Construction
-    deconstructionTarget: null
-    graph: revLiberator
-    node: revLiberator
-
-- type: entity
   parent: [ BaseItem, BaseMajorContraband ]
   id: WeaponPistolLiberator
-  name: Liberator
+  name: liberator
   description: A shitty little pistol that can only hold 6 rounds and has to be hand fed.
+  suffix: Full
   components:
   - type: Item
     size: Small
@@ -33,7 +21,7 @@
   - type: Gun
     fireRate: 3
     availableModes:
-      - SemiAuto
+    - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/pistol.ogg
   - type: BallisticAmmoProvider
@@ -46,3 +34,15 @@
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
+
+- type: entity
+  parent: WeaponPistolLiberator
+  id: WeaponPistolLiberatorEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevLiberator
+    node: RevLiberator

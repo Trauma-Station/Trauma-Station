@@ -1,0 +1,107 @@
+- type: entity
+  abstract: true
+  parent: [ BaseItem, BaseMinorContraband ]
+  id: BaseUnfinishedRevWeapon
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/components.rsi
+  - type: Construction
+    deconstructionTarget: null
+    defaultTarget: finished
+    node: start
+
+- type: entity
+  parent: BaseUnfinishedRevWeapon
+  id: RevSwordBlade
+  name: unfinished sword blade
+  description: An unfinished sword, use some wood to complete it.
+  components:
+  - type: Sprite
+    state: sword
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/bladeslice.ogg
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 5
+  - type: ThrowingAngle
+    angle: 225
+  - type: Construction
+    graph: RevSword
+
+- type: entity
+  parent: BaseUnfinishedRevWeapon
+  id: RevMaceHead
+  name: unfinished mace parts
+  description: An unfinished mace, use some wood to complete it.
+  components:
+  - type: Sprite
+    state: mace
+  - type: Construction
+    graph: RevMace
+
+- type: entity
+  parent: BaseUnfinishedRevWeapon
+  id: RevKnifeBlade
+  name: unfinished knife blade
+  description: An unfinished knife, use some wood to complete it.
+  components:
+  - type: Sprite
+    state: knife
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/bladeslice.ogg
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 5
+  - type: ThrowingAngle
+    angle: 225
+  - type: Construction
+    graph: RevKnife
+
+- type: entity
+  parent: BaseUnfinishedRevWeapon
+  id: RevTorchHead
+  name: unfinished combat torch
+  description: An unfinished combat torch, use some wood to complete it.
+  components:
+  - type: Sprite
+    state: torch
+  - type: Construction
+    graph: RevTorch
+
+- type: entity
+  parent: BaseUnfinishedRevWeapon
+  id: RevPitchforkHead
+  name: unfinished pitchfork
+  description: An unfinished pitchfork, use a some wood to complete it.
+  components:
+  - type: Sprite
+    state: spear
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/bladeslice.ogg
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 5
+  - type: ThrowingAngle
+    angle: 225
+  - type: Construction
+    graph: RevPitchfork
+
+- type: entity
+  parent: [ BaseItem, BaseMinorContraband ]
+  id: RevUnfinishedGun
+  name: misshapen steel chunk
+  description: A sheet of steel bent into the rough shape of a gun. It needs a lot more work before firing.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Pistols/unfinished.rsi
+    state: icon
+  - type: Item
+    size: Normal
+  - type: Construction
+    graph: RevLiberator
+    deconstructionTarget: null
+    defaultTarget: RevLiberator
+    node: unfinished

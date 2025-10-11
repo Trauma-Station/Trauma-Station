@@ -1,14 +1,12 @@
 - type: entity
-  parent: [ClothingOuterArmorBase,BaseMajorContraband]
+  parent: [ ClothingOuterArmorBase, BaseMajorContraband ]
   id: ClothingOuterArmorRev
   name: chest plate
   description: Hastily made armor for the people.
   components:
   - type: Item
-    size: Tiny
+    size: Normal
   - type: Sprite
-    sprite: _Trauma/Clothing/Outerclothing/revchestplate.rsi
+    sprite: _Trauma/Clothing/OuterClothing/revchestplate.rsi
   - type: Clothing
-    sprite: _Trauma/Clothing/Outerclothing/revchestplate.rsi
-
-
+    sprite: _Trauma/Clothing/OuterClothing/revchestplate.rsi

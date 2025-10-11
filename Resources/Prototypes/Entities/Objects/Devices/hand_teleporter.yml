@@ -23,7 +23,7 @@
   - type: Tag
     tags:
     - HighRiskItem
-    - HandTeleporter #Trauma
+    - HandTeleporter # Trauma
   - type: StealTarget
     stealGroup: HandTeleporter
 

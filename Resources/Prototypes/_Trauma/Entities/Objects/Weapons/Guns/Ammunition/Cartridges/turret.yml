@@ -1,18 +1,19 @@
 - type: entity
-  id: CartridgeTurret
-  name: cartridge (.22 auto)
   parent: [ BaseCartridge, BaseMajorContraband ]
+  id: CartridgeTurret
+  name: cartridge (.22 short)
+  description: A weak round with little stopping power, usually mass produced by communists and other assholes.
   components:
   - type: Tag
     tags:
-      - Cartridge
-      - CartridgeTurret
+    - Cartridge
+    - CartridgeTurret
   - type: CartridgeAmmo
     proto: BulletTurret
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
     layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
   - type: Appearance
   - type: SpentAmmoVisuals

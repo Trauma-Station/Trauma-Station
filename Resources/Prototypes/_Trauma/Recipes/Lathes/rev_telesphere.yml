@@ -1,0 +1,101 @@
+- type: latheRecipe
+  abstract: true
+  id: BaseRevsMaterials
+  completetime: 30
+  materials:
+    Plasma: 1500
+
+- type: latheRecipe
+  id: RevBrass
+  parent: BaseRevsMaterials
+  result: SheetBrass
+
+- type: latheRecipe
+  id: RevBiomass
+  parent: BaseRevsMaterials
+  result: MaterialBiomass
+
+- type: latheRecipe
+  id: RevCrystal
+  parent: BaseRevsMaterials
+  result: MaterialBSCrystal
+
+- type: latheRecipe
+  id: RevBones
+  parent: BaseRevsMaterials
+  result: MaterialBones
+
+- type: latheRecipe
+  id: RevGlass
+  parent: BaseRevsMaterials
+  result: SheetGlass
+
+- type: latheRecipe
+  id: RevCardboard
+  parent: BaseRevsMaterials
+  result: MaterialCardboard
+
+- type: latheRecipe
+  id: RevBanana
+  parent: BaseRevsMaterials
+  result: MaterialBananium
+
+- type: latheRecipe
+  id: RevSteel
+  parent: BaseRevsMaterials
+  result: SheetSteel
+
+- type: latheRecipe
+  id: RevPaper
+  parent: BaseRevsMaterials
+  result: SheetPaper
+
+- type: latheRecipe
+  id: RevCloth
+  parent: BaseRevsMaterials
+  result: MaterialCloth
+
+- type: latheRecipe
+  id: RevMeat
+  parent: BaseRevsMaterials
+  result: MaterialSheetMeat
+
+- type: latheRecipe
+  id: RevDuraThread
+  parent: BaseRevsMaterials
+  result: MaterialDurathread
+
+- type: latheRecipe
+  id: RevPlasma
+  parent: BaseRevsMaterials
+  result: SheetPlasma
+
+- type: latheRecipe
+  id: RevDiamonds
+  parent: BaseRevsMaterials
+  result: MaterialDiamond
+
+- type: latheRecipe
+  id: RevSilk
+  parent: BaseRevsMaterials
+  result: MaterialWebSilk
+
+- type: latheRecipe
+  id: RevUranium
+  parent: BaseRevsMaterials
+  result: SheetUranium
+
+- type: latheRecipe
+  id: RevPlasteel
+  parent: BaseRevsMaterials
+  result: SheetPlasteel
+
+- type: latheRecipe
+  id: RevWood
+  parent: BaseRevsMaterials
+  result: MaterialWoodPlank
+
+- type: latheRecipe
+  id: RevPlastic
+  parent: BaseRevsMaterials
+  result: SheetPlastic

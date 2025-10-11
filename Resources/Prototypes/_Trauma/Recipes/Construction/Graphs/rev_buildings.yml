@@ -1,0 +1,116 @@
+- type: constructionGraph
+  id: RevMachine
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: unfinished
+      steps:
+      - material: Steel
+        amount: 30
+        doAfter: 5
+  - node: unfinished
+    entity: RevUnfinishedMachine
+    edges:
+    - to: gear
+      steps:
+      - material: RevGear
+      - tool: Screwing
+        doAfter: 1
+    - to: RevRadioBench
+      steps:
+      - tag: EncryptionSecurity
+        name: construction-graph-tag-seccomms
+        icon:
+          sprite: Objects/Devices/encryption_keys.rsi
+          state: sec_label
+        doAfter: 1
+      - tool: Cutting
+        doAfter: 1
+      - material: RevBolt
+      - material: RevNut
+      - tool: Anchoring
+        doAfter: 2
+    - to: RevPrinter # CE exclusive
+      steps:
+      - tag: RCD
+        name: construction-graph-tag-RCD
+        icon:
+          sprite: Objects/Tools/rcd.rsi
+          state: icon
+      - tool: Welding
+        doAfter: 3
+      - material: Cable
+        amount: 5
+        doAfter: 1
+      - tool: Cutting
+        doAfter: 2
+      - material: RevBolt
+        amount: 3
+      - material: RevNut
+        amount: 3
+      - tool: Anchoring
+        doAfter: 2
+      - material: Steel
+        amount: 10
+      - tool: Welding
+        doAfter: 4
+      - material: RevBolt
+        amount: 3
+      - material: RevNut
+        amount: 3
+      - tool: Anchoring
+        doAfter: 2
+    - to: RevTelesphere # RD exclusive
+      steps:
+      - tag: HandTeleporter
+        name: construction-graph-tag-hand-teleporter
+        icon:
+          sprite: Objects/Devices/hand_teleporter.rsi
+          state: icon
+      - tool: Welding
+        doAfter: 4
+      - material: Cable
+        amount: 8
+        doAfter: 2
+      - tool: Cutting
+        doAfter: 2
+      - material: RevBolt
+        amount: 3
+      - material: RevNut
+        amount: 3
+      - tool: Anchoring
+        doAfter: 2
+      - material: RevBolt
+        amount: 2
+      - material: RevNut
+        amount: 2
+      - tool: Anchoring
+        doAfter: 1
+  - node: gear
+    edges:
+    - to: RevForge
+      steps:
+      - material: RevBolt
+      - material: RevNut
+      - tool: Anchoring
+        doAfter: 2
+    - to: RevPrintingPress
+      steps:
+      - material: RevGear
+      - tool: Screwing
+        doAfter: 1
+      - material: RevBolt
+      - material: RevNut
+      - tool: Anchoring
+        doAfter: 2
+  - node: RevForge
+    entity: RevForge
+  - node: RevPrintingPress
+    entity: RevPrintingPress
+  - node: RevRadioBench
+    entity: RevRadioBench
+  - node: RevPrinter
+    entity: RevPrinter
+  - node: RevTelesphere
+    entity: RevTelesphere

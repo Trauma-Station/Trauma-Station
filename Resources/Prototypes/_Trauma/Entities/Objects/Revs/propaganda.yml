@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseItem,BaseMajorContraband]
+  parent: [ BaseItem, BaseMajorContraband ]
   id: RevPropaganda
   name: propaganda pamphlet
   description: It is a revolutionary propaganda pamphlet. It loses its charm after reading it once, so you will need plenty.
@@ -24,7 +24,7 @@
           True: {state: icon}
           False: {state: burnt}
   - type: FireVisuals
-    sprite: Effects/fire.rsi
+    sprite: _Trauma/Effects/fire.rsi
     normalState: revfire
   - type: Damageable
     damageModifierSet: Wood

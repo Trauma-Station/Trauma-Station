@@ -1,0 +1,70 @@
+- type: constructionGraph
+  id: RevTurret
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: unfinished
+      steps:
+      - material: Steel
+        amount: 5
+        doAfter: 3
+  - node: unfinished
+    entity: RevUnfinishedTurret
+    edges:
+    - to: barrel
+      steps:
+      - tag: RevTurretBoard
+        name: construction-graph-tag-turretboard
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: door_electronics
+      - tool: Screwing
+        doAfter: 1
+      - tag: Pipe
+        name: construction-graph-tag-pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+      - tool: Welding
+        doAfter: 1
+  - node: barrel
+    entity: RevUnfinishedTurretBarrel
+    edges:
+    - to: RevTurretPistol
+      steps:
+      - material: RevBolt
+      - material: RevNut
+      - tool: Anchoring
+        doAfter: 1
+      - material: RevGunParts
+      - tag: ModularReceiver
+        name: construction-graph-tag-modular-receiver
+        icon:
+          sprite: Objects/Misc/modular_receiver.rsi
+          state: icon
+      - tool: Welding
+        doAfter: 1
+    - to: RevTurretSMG
+      steps:
+      - material: RevGunParts
+        amount: 2
+      - tool: Welding
+        doAfter: 2
+      - material: RevBolt
+      - tag: ModularReceiver
+        name: construction-graph-tag-modular-receiver
+        icon:
+          sprite: Objects/Misc/modular_receiver.rsi
+          state: icon
+      - material: RevNut
+      - tool: Anchoring
+        doAfter: 2
+      - material: RevBolt
+      - material: RevNut
+      - tool: Anchoring
+        doAfter: 2
+  - node: RevTurretPistol
+    entity: WeaponTurretRevolutionaryPistol
+  - node: RevTurretSMG
+    entity: WeaponTurretRevolutionarySMG
