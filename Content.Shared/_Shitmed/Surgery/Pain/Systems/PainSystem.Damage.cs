@@ -58,6 +58,7 @@ public partial class PainSystem
         TimeSpan? time = null,
         PainDamageTypes? painType = null)
     {
+        return false; // Trauma - pain shitcode
         if (!Resolve(uid, ref nerveSys, false))
             return false;
 
@@ -94,6 +95,7 @@ public partial class PainSystem
         NerveSystemComponent? nerveSys = null)
     {
         modifier = null;
+        return false; // Trauma - pain shitcode
         if (!Resolve(uid, ref nerveSys, false))
             return false;
 
@@ -124,6 +126,7 @@ public partial class PainSystem
         NerveSystemComponent? nerveSys = null,
         TimeSpan? time = null)
     {
+        return false; // Trauma - pain shitcode
         if (!Resolve(uid, ref nerveSys, false))
             return false;
 
@@ -174,6 +177,7 @@ public partial class PainSystem
         NerveComponent? nerve = null,
         TimeSpan? time = null)
     {
+        return false; // Trauma - pain shitcode
         if (!Resolve(nerveUid, ref nerve, false))
             return false;
 
@@ -203,6 +207,7 @@ public partial class PainSystem
         NerveComponent? nerve = null)
     {
         modifier = null;
+        return false; // Trauma - pain shitcode
         if (!Resolve(nerveEnt, ref nerve, false))
             return false;
 
@@ -229,6 +234,7 @@ public partial class PainSystem
         FixedPoint2 change,
         NerveComponent? nerve = null)
     {
+        return false; // Trauma - pain shitcode
         if (!Resolve(nerveUid, ref nerve, false))
             return false;
 
@@ -263,6 +269,7 @@ public partial class PainSystem
         TimeSpan? time = null,
         NerveComponent? nerve = null)
     {
+        return false; // Trauma - pain shitcode
         if (!Resolve(nerveUid, ref nerve, false))
             return false;
 
@@ -297,6 +304,7 @@ public partial class PainSystem
         NerveComponent? nerve = null,
         FixedPoint2? change = null)
     {
+        return false; // Trauma - pain shitcode
         if (!Resolve(nerveUid, ref nerve, false))
             return false;
 
@@ -327,6 +335,7 @@ public partial class PainSystem
         EntityUid nerveUid,
         NerveComponent? nerve = null)
     {
+        return false; // Trauma - pain shitcode
         if (!Resolve(nerveUid, ref nerve, false))
             return false;
 
@@ -352,6 +361,7 @@ public partial class PainSystem
         string identifier,
         NerveSystemComponent? nerveSys = null)
     {
+        return false; // Trauma - pain shitcode
         if (!Resolve(uid, ref nerveSys, false))
             return false;
 
@@ -384,6 +394,7 @@ public partial class PainSystem
         NerveSystemComponent? nerveSys = null,
         TimeSpan? time = null)
     {
+        return false; // Trauma - pain shitcode
         if (!Resolve(uid, ref nerveSys, false))
             return false;
 
@@ -416,6 +427,7 @@ public partial class PainSystem
         PainDamageTypes? painType = null,
         NerveSystemComponent? nerveSys = null)
     {
+        return false; // Trauma - pain shitcode
         if (!Resolve(uid, ref nerveSys, false))
             return false;
 
@@ -450,6 +462,7 @@ public partial class PainSystem
         PainDamageTypes? painType = null,
         NerveSystemComponent? nerveSys = null)
     {
+        return false; // Trauma - pain shitcode
         if (!Resolve(uid, ref nerveSys, false))
             return false;
 
@@ -484,6 +497,7 @@ public partial class PainSystem
         TimeSpan? time = null,
         NerveSystemComponent? nerveSys = null)
     {
+        return false; // Trauma - pain shitcode
         if (!Resolve(uid, ref nerveSys, false))
             return false;
 
@@ -509,6 +523,7 @@ public partial class PainSystem
     /// <returns>Returns true, if the multiplier was removed.</returns>
     public bool TryRemovePainMultiplier(EntityUid uid, string identifier, NerveSystemComponent? nerveSys = null)
     {
+        return false; // Trauma - pain shitcode
         if (!Resolve(uid, ref nerveSys, false))
             return false;
 
