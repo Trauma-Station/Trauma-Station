@@ -29,8 +29,6 @@
     {"name": "nano_label"},
     {"name": "pirate_label"},
     {"name": "qm_label"},
-    {"name": "rev_label"},
-    {"name": "rev_holder"},
     {"name": "rd_label"},
     {"name": "robotics_label"},
     {"name": "sci_label"},

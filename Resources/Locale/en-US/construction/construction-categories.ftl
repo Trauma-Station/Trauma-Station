@@ -11,7 +11,6 @@ construction-category-storage = Storage
 construction-category-tools = Tools
 construction-category-materials = Materials
 construction-category-structures = Structures
-construction-category-antagonist = Antagonist
 construction-category-machines = Machines
 construction-category-weapons = Weapons
 construction-category-tiles = Tiles

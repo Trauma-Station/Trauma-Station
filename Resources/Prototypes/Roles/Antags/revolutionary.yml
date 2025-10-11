@@ -35,11 +35,8 @@
   id: HeadRevGear
   storage:
     back:
-#    - Flash # Trauma edit
-#    - ClothingEyesGlassesSunglasses # Trauma edit
-    # - RevolutionaryManifesto # Einstein Engines - Revolutionary Manifesto # Trauma edit
-#    - EncryptionKeySyndie # Goobstation # Trauma edit
- #   - RevsFastDrawImplanter # Goobstation # Trauma edit
-     - Revgear
-     - Revnut
-     - Revbolt
+    # <Trauma> replaced all upstream items
+    - RevGear
+    - RevNut
+    - RevBolt
+    # </Trauma>

@@ -1,0 +1,23 @@
+- type: construction
+  id: RevLiberator
+  graph: RevLiberator
+  startNode: start
+  targetNode: RevLiberator
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
+  id: RevResistance
+  graph: RevResistance
+  startNode: start
+  targetNode: RevResistance
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary

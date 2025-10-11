@@ -1,47 +1,127 @@
 - type: construction
   id: RevForge
-  graph: RevForgeGraph
+  graph: RevMachine
   startNode: start
-  targetNode: revForgeComplete
+  targetNode: RevForge
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure
   canBuildInImpassable: false
   conditions:
-    - !type:TileNotBlocked
+  - !type:TileNotBlocked
   entityWhitelist:
     components:
     - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary
 
 - type: construction
   id: RevPrintingPress
-  graph: revPrintingPress
+  graph: RevMachine
   startNode: start
-  targetNode: revPrintingPress
+  targetNode: RevPrintingPress
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure
   canBuildInImpassable: false
   conditions:
-    - !type:TileNotBlocked
+  - !type:TileNotBlocked
   entityWhitelist:
     components:
     - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary
 
 - type: construction
   id: RevTelecommsWorkbench
-  graph: revTelecommsWorkbench
+  graph: RevMachine
   startNode: start
-  targetNode: revTelecommsWorkbench
+  targetNode: RevRadioBench
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure
   canBuildInImpassable: false
   conditions:
-    - !type:TileNotBlocked
+  - !type:TileNotBlocked
   entityWhitelist:
     components:
     - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary
+
+- type: construction
+  id: RevTelesphere
+  graph: RevMachine
+  startNode: start
+  targetNode: RevTelesphere
+  placementMode: SnapgridCenter
+  category: construction-category-antagonist
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
+  id: Rev3DPrinter
+  graph: RevMachine
+  startNode: start
+  targetNode: RevPrinter
+  placementMode: SnapgridCenter
+  category: construction-category-antagonist
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
+  id: RevBulletPress
+  graph: RevMachine
+  startNode: start
+  targetNode: RevBulletPress
+  placementMode: SnapgridCenter
+  category: construction-category-antagonist
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
+  id: RevTurretPistol
+  graph: RevTurret
+  startNode: start
+  targetNode: RevTurretPistol
+  placementMode: SnapgridCenter
+  category: construction-category-antagonist
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
+  id: RevTurretSMG
+  graph: RevTurret
+  startNode: start
+  targetNode: RevTurretSMG
+  placementMode: SnapgridCenter
+  category: construction-category-antagonist
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary

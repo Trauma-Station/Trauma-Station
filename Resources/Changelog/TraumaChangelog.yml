@@ -47,3 +47,75 @@ Entries:
       message: 'Replaced Crewsimov with Asimov '
   id: 7
   time: '2025-10-10T02:00:30.0000000+00:00'
+- author: BombasterDS2
+  changes:
+    - type: Fix
+      message: Fixed propaganda pamphlet charge spending before conversion.
+  id: 8
+  time: '2025-10-10T18:11:12.0000000+00:00'
+- author: ReiderJack
+  changes:
+    - type: Add
+      message: harvest for plantbot
+  id: 9
+  time: '2025-10-11T04:20:29.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Rev forge
+    - type: Add
+      message: Rev Printing Press
+    - type: Add
+      message: Rev Tellecomms becnh
+    - type: Add
+      message: Rev Tellecomms channel
+    - type: Add
+      message: Rev Deathgasp implant
+    - type: Add
+      message: Rev Telesphere
+    - type: Add
+      message: Rev drop pods
+    - type: Add
+      message: 5 rev melee weapons
+    - type: Add
+      message: rev caltrops
+    - type: Add
+      message: rev liberator pistol
+    - type: Add
+      message: rev 3d printer
+    - type: Add
+      message: rev turrets
+    - type: Add
+      message: rev IFF
+    - type: Add
+      message: rev armor
+    - type: Add
+      message: the grinning pals
+  id: 10
+  time: '2025-10-11T05:16:28.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Unfinished rev weapons now tell you the construction steps when
+        examined.
+    - type: Tweak
+      message: Rev gears and stuff can now be stacked.
+    - type: Tweak
+      message: >-
+        Rev machines actually need tools to make, you can't just summon it with
+        your mind in 5 seconds.
+    - type: Tweak
+      message: Rev chestplate is now normal sized instead of tiny.
+  id: 11
+  time: '2025-10-11T16:22:28.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Rev bullet press
+    - type: Add
+      message: Rev resistance gun
+    - type: Tweak
+      message: fix a bunch of bugs
+  id: 12
+  time: '2025-10-11T18:53:00.0000000+00:00'

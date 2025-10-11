@@ -1,0 +1,36 @@
+- type: latheRecipe
+  abstract: true
+  id: BaseSmilingPal
+  completetime: 15
+  materials:
+    Plastic: 50
+
+- type: latheRecipe
+  id: SmilingPal1
+  parent: BaseSmilingPal
+  result: SmilingBanana
+
+- type: latheRecipe
+  id: SmilingPal2
+  parent: BaseSmilingPal
+  result: SmilingBean
+
+- type: latheRecipe
+  id: SmilingPal3
+  parent: BaseSmilingPal
+  result: SmilingBoss
+
+- type: latheRecipe
+  id: SmilingPal4
+  parent: BaseSmilingPal
+  result: SmilingRedGuy
+
+- type: latheRecipe
+  id: SmilingPal5
+  parent: BaseSmilingPal
+  result: SmilingFrog
+
+- type: latheRecipe
+  id: SmilingPal6
+  parent: BaseSmilingPal
+  result: SmilingTylenol

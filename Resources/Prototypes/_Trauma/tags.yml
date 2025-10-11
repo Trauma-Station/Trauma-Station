@@ -1,14 +1,23 @@
 - type: Tag
-  id: ForgeMold
+  id: CartridgeTurret
 
 - type: Tag
   id: EncryptionRevolutionary
 
 - type: Tag
-  id: Gear
+  id: ForgeMold
 
 - type: Tag
-  id: Bolt
+  id: HandTeleporter
 
 - type: Tag
-  id: Nut
+  id: MagazineTurret
+
+- type: Tag
+  id: RCD
+
+- type: Tag
+  id: RevTurretBoard
+
+- type: Tag
+  id: RevGunParts

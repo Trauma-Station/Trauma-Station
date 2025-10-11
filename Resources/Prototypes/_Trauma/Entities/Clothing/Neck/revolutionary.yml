@@ -1,0 +1,14 @@
+- type: entity
+  parent: [ClothingNeckBase,BaseMajorContraband]
+  id: ClothingRevolutionaryIFF
+  name: Revolutionary IFF Card
+  description: Shows constructed turrets that you are a friend.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Trauma/Clothing/Neck/revIFF.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Neck/revIFF.rsi
+  - type: FactionClothing
+    faction: Revolutionary

@@ -4,6 +4,7 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.SprayPainter.Components;
+using Content.Shared.Whitelist; // Trauma
 
 namespace Content.Shared.SprayPainter;
 
@@ -12,6 +13,7 @@ namespace Content.Shared.SprayPainter;
 /// </summary>
 public sealed class SprayPainterAmmoSystem : EntitySystem
 {
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // Trauma
     [Dependency] private readonly SharedChargesSystem _charges = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
@@ -29,7 +31,7 @@ public sealed class SprayPainterAmmoSystem : EntitySystem
             return;
 
         if (args.Target is not { Valid: true } target ||
-            !HasComp<SprayPainterComponent>(target) ||
+            _whitelist.IsWhitelistFail(ent.Comp.Whitelist, target) || // Trauma - use whitelist instead of hardcoded component check
             !TryComp<LimitedChargesComponent>(target, out var charges))
             return;
 
