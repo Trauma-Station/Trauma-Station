@@ -264,9 +264,3 @@
     Plasteel: 300
     Plastic: 100
 
-- type: latheRecipe
-  id: RevPropaganda
-  result: RevPropaganda
-  completetime: 60
-  materials:
-    Paper: 3000
