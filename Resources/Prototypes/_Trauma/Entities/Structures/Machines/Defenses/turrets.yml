@@ -1,0 +1,204 @@
+- type: entity
+  parent: [BaseWeaponBallisticTurret, BaseMajorContraband]
+  id: BaseWeaponTurretRevolutionary
+  suffix: Full
+  abstract: true
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Revolutionary
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Revturretelectronics:
+            min: 1
+            max: 1
+          SheetSteel1:
+            min: 1
+            max: 3
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Repairable
+    qualityNeeded: "Anchoring"
+    doAfterDelay: 3
+
+- type: entity
+  parent: [BaseStructure, BaseMajorContraband]
+  id: BaseWeaponTurretRevolutionaryMagazine
+  suffix: Full
+  abstract: true
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Actions
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: InteractionPopup
+    interactDelay: 0.2
+    successChance: 0.8
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactSuccessSound:
+      path: /Audio/Effects/double_beep.ogg
+  - type: CombatMode
+    toggleMouseRotator: false
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Revturretelectronics:
+            min: 1
+            max: 1
+          SheetSteel1:
+            min: 1
+            max: 3
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: HTN
+    rootTask:
+      task: TurretCompound
+    blackboard:
+      RotateSpeed: !type:Single
+        9
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+  - type: NpcFactionMember
+    factions:
+    - Revolutionary
+  - type: MouseRotator
+    angleTolerance: 5
+    rotationSpeed: 180
+    simple4DirMode: false
+  - type: NoRotateOnInteract
+  - type: NoRotateOnMove
+  - type: Input
+    context: "human"
+  - type: UnmannedWeaponry # Lavaland Change
+  - type: Repairable
+    qualityNeeded: "Anchoring"
+    doAfterDelay: 3
+  - type: MagazineAmmoProvider
+
+- type: entity
+  parent: [BaseWeaponTurretRevolutionary, BaseMajorContraband]
+  id: WeaponTurretRevolutionaryPistolFull
+  suffix: Full
+  name: improvised pistol turret
+  description: Fires at anything without the proper IFF signal, can only hold ten rounds, and has to be loaded. Careful with this thing.
+  components:
+  - type: Gun
+    fireRate: 0.5
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeTurret
+    proto: CartridgeTurret
+    capacity: 15
+  - type: Sprite
+    sprite: _Trauma/Structures/Defences/turrets.rsi
+    drawdepth: Mobs
+    layers:
+    - state: revturretpistol
+
+- type: entity
+  parent: [WeaponTurretRevolutionaryPistolFull, BaseMajorContraband]
+  id: WeaponTurretRevolutionaryPistol
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+  - type: Construction
+    deconstructionTarget: null
+    graph: revTurretPistol
+    node: revTurretPistol
+
+- type: entity
+  parent: [BaseWeaponTurretRevolutionaryMagazine, BaseMajorContraband]
+  id: WeaponTurretRevolutionarySMG
+  name: improvised smg turret
+  description: Fires at anything without the proper IFF signal, this one is magazine loaded, but extremely innaccurate.
+  suffix: Empty
+  components:
+  - type: Gun
+    minAngle: 36
+    maxAngle: 36
+    fireRate: 1
+    burstFireRate: 16
+    burstCooldown: 0.5
+    selectedMode: Burst
+    availableModes:
+    - Burst
+  - type: Sprite
+    sprite: _Trauma/Structures/Defences/turrets.rsi
+    drawdepth: Mobs
+    layers:
+    - state: revturretsmg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineTurret
+        whitelistFailPopup: gun-magazine-whitelist-fail
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Construction
+    deconstructionTarget: null
+    graph: revTurretSMG
+    node: revTurretSMG
+
+- type: entity
+  parent: [WeaponTurretRevolutionarySMG, BaseMajorContraband]
+  id: WeaponTurretRevolutionarySMGFull
+  suffix: Full
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: BaseMagazineTurret
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineTurret
+        whitelistFailPopup: gun-magazine-whitelist-fail
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+

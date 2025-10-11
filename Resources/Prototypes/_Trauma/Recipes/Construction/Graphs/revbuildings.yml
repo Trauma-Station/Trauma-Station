@@ -14,19 +14,16 @@
               icon:
                 sprite: _Trauma/Objects/Revs/components.rsi
                 state: gear
-              doAfter: 1
             - tag: Nut
               name: construction-graph-tag-nut
               icon:
                 sprite: _Trauma/Objects/Revs/components.rsi
                 state: nut
-              doAfter: 1
             - tag: Bolt
               name: construction-graph-tag-bolt
               icon:
                 sprite: _Trauma/Objects/Revs/components.rsi
                 state: bolt
-              doAfter: 1
     - node: revForgeComplete
       entity: RevForge
 
@@ -40,31 +37,27 @@
           steps:
             - material: Steel
               amount: 30
-              doAfter: 1
+              doAfter: 5
             - tag: Gear
               name: construction-graph-tag-gear
               icon:
                 sprite: _Trauma/Objects/Revs/components.rsi
                 state: gear
-              doAfter: 1
             - tag: Gear
               name: construction-graph-tag-gear
               icon:
                 sprite: _Trauma/Objects/Revs/components.rsi
                 state: gear
-              doAfter: 1
             - tag: Nut
               name: construction-graph-tag-nut
               icon:
                 sprite: _Trauma/Objects/Revs/components.rsi
                 state: nut
-              doAfter: 1
             - tag: Bolt
               name: construction-graph-tag-bolt
               icon:
                 sprite: _Trauma/Objects/Revs/components.rsi
                 state: bolt
-              doAfter: 1
     - node: revPrintingPress
       entity: RevPrintingPress
 
@@ -78,24 +71,316 @@
           steps:
             - material: Steel
               amount: 30
-              doAfter: 2
+              doAfter: 5
             - tag: EncryptionSecurity
               name: construction-graph-tag-seccomms
               icon:
                 sprite: Objects/Devices/encryption_keys.rsi
                 state: sec_label
-              doAfter: 1
             - tag: Nut
               name: construction-graph-tag-nut
               icon:
                 sprite: _Trauma/Objects/Revs/components.rsi
                 state: nut
-              doAfter: 1
             - tag: Bolt
               name: construction-graph-tag-bolt
               icon:
                 sprite: _Trauma/Objects/Revs/components.rsi
                 state: bolt
-              doAfter: 1
     - node: revTelecommsWorkbench
       entity: RevRadioBench
+
+- type: constructionGraph
+  id: rev3DPrinter
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: rev3DPrinter
+          steps:
+            - material: Steel
+              amount: 30
+              doAfter: 5
+            - tag: RCD
+              name: construction-graph-tag-RCD
+              icon:
+                sprite: Objects/Tools/rcd.rsi
+                state: icon
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+    - node: rev3DPrinter
+      entity: RevPrinter
+
+- type: constructionGraph
+  id: revTelesphere
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: revTelesphere
+          steps:
+            - material: Steel
+              amount: 30
+              doAfter: 5
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: HandTeleporter
+              name: construction-graph-tag-RDteleporter
+              icon:
+                sprite: Objects/Devices/hand_teleporter.rsi
+                state: icon
+    - node: revTelesphere
+      entity: RevTelesphere
+
+- type: constructionGraph
+  id: revTurretPistol
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: revTurretPistol
+          steps:
+            - material: Steel
+              amount: 5
+              doAfter: 5
+            - tag: TurretBoard
+              name: construction-graph-tag-turretboard
+              icon:
+                sprite: Objects/Misc/module.rsi
+                state: door_electronics
+            - tag: Pipe
+              icon:
+                sprite: Structures/Piping/Atmospherics/pipe.rsi
+                state: pipeStraight
+              name: construction-graph-tag-pipe
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: GunParts
+              name: construction-graph-tag-gunparts
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: gunparts
+            - tag: ModularReceiver
+              name: construction-graph-tag-modular-receiver
+              icon:
+                sprite: Objects/Misc/modular_receiver.rsi
+                state: icon
+    - node: revTurretPistol
+      entity: WeaponTurretRevolutionaryPistol
+
+- type: constructionGraph
+  id: revTurretSMG
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: revTurretSMG
+          steps:
+            - material: Steel
+              amount: 5
+              doAfter: 5
+            - tag: TurretBoard
+              name: construction-graph-tag-turretboard
+              icon:
+                sprite: Objects/Misc/module.rsi
+                state: door_electronics
+            - tag: Pipe
+              icon:
+                sprite: Structures/Piping/Atmospherics/pipe.rsi
+                state: pipeStraight
+              name: construction-graph-tag-pipe
+            - tag: GunParts
+              name: construction-graph-tag-gunparts
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: gunparts
+            - tag: GunParts
+              name: construction-graph-tag-gunparts
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: gunparts
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: ModularReceiver
+              name: construction-graph-tag-modular-receiver
+              icon:
+                sprite: Objects/Misc/modular_receiver.rsi
+                state: icon
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+    - node: revTurretSMG
+      entity: WeaponTurretRevolutionarySMG
+
+- type: constructionGraph
+  id: revLiberator
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: revLiberator
+          steps:
+            - material: Steel
+              amount: 3
+              doAfter: 5
+            - tag: Pipe
+              icon:
+                sprite: Structures/Piping/Atmospherics/pipe.rsi
+                state: pipeStraight
+              name: construction-graph-tag-pipe
+            - tag: Nut
+              name: construction-graph-tag-nut
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: nut
+            - tag: Bolt
+              name: construction-graph-tag-bolt
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: bolt
+            - tag: GunParts
+              name: construction-graph-tag-gunparts
+              icon:
+                sprite: _Trauma/Objects/Revs/components.rsi
+                state: gunparts
+            - tag: ModularReceiver
+              name: construction-graph-tag-modular-receiver
+              icon:
+                sprite: Objects/Misc/modular_receiver.rsi
+                state: icon
+    - node: revLiberator
+      entity: WeaponPistolLiberatorEmpty

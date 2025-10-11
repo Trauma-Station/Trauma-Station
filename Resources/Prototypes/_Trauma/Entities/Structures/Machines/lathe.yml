@@ -173,3 +173,74 @@
     deconstructionTarget: null
     graph: revTelecommsWorkbench
     node: revTelecommsWorkbench
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevTelesphere
+  name: telesphere
+  placement:
+    mode: SnapgridCenter
+  description: An experimental device, it can be used to remotely steal materials from passing trade ships using plasma. Additionally; it can be used as a material silo for the revolution.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/telesphere.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/telesphere.ogg
+    idleState: icon
+    runningState: telesphere
+    staticPacks:
+    - RevTelesphereStatic
+  - type: Construction
+    deconstructionTarget: null
+    graph: revTelesphere
+    node: revTelesphere
+  - type: PointLight
+    enabled: true
+    color: "#ffffff"
+    radius: 1.5
+    energy: 5.0
+  - type: WirelessNetworkConnection
+    range: 1000
+  - type: DeviceLinkSource
+    range: 1000
+    ports:
+      - MaterialSilo
+  - type: Appearance
+  - type: MaterialStorage
+    ignoreColor: true
+  - type: Silo
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevPrinter
+  name: 3D printer
+  placement:
+    mode: SnapgridCenter
+  description: Makes either cute little guys or gun parts, zero inbetween. This one can print both metal and plastic.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/printer.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/printer.ogg
+    idleState: icon
+    runningState: printer
+    staticPacks:
+    - RevPrinterStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+        - Sheet
+        - RawMaterial
+        - Ingot
+  - type: Construction
+    deconstructionTarget: null
+    graph: rev3DPrinter
+    node: rev3DPrinter

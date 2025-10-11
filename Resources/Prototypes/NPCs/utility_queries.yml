@@ -226,13 +226,12 @@
   query:
     - !type:NearbyHostilesQuery
   considerations:
-    # Goobstation - check is dead instead so we can target non-living stuff
     - !type:TargetIsDeadCon
       curve: !type:InverseBoolCurve
-    - !type:TargetIsCritCon
-      curve: !type:InverseBoolCurve
-    - !type:TargetIsStunnedCon
-      curve: !type:InverseBoolCurve
+#    - !type:TargetIsCritCon              Trauma, Make turrets more cruel
+#      curve: !type:InverseBoolCurve
+#    - !type:TargetIsStunnedCon
+#      curve: !type:InverseBoolCurve
     - !type:TurretTargetingCon
       curve: !type:BoolCurve
     - !type:TargetDistanceCon

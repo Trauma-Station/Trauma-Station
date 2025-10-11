@@ -1,0 +1,18 @@
+- type: entity
+  id: CartridgeTurret
+  name: cartridge (.22 auto)
+  parent: [ BaseCartridge, BaseMajorContraband ]
+  components:
+  - type: Tag
+    tags:
+      - Cartridge
+      - CartridgeTurret
+  - type: CartridgeAmmo
+    proto: BulletTurret
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: Appearance
+  - type: SpentAmmoVisuals

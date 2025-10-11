@@ -9,6 +9,7 @@
   - RevGearRecipe
   - RevBoltRecipe
   - RevNutRecipe
+  - RevChestPlateRecipe
 
 - type: latheRecipePack
   id: RevPrintingPress
@@ -22,4 +23,39 @@
   - RevDropPodTrapsRecipe
   - Revturretelectronicsrecipe
   - TelecomServerCircuitboard # eventually replace this with a homeade looking one
-# Rev Radio Tracker
+  - RevIFF
+  - DeathRattleImplantRev
+
+- type: latheRecipePack
+  id: RevTelesphereStatic
+  recipes:
+  - RevCrystal
+  - RevBiomass
+  - RevBrass
+  - RevBanana
+  - RevBones
+  - RevGlass
+  - RevCardboard
+  - RevPaper
+  - RevCloth
+  - RevSteel
+  - RevMeat
+  - RevDThread
+  - RevPlasma
+  - RevDiamonds
+  - RevSilk
+  - RevPlasteel
+  - RevUranium
+  - RevPlastic
+  - RevWood
+
+- type: latheRecipePack
+  id: RevPrinterStatic
+  recipes:
+  - GunParts
+  - SmilingPal1
+  - SmilingPal2
+  - SmilingPal3
+  - SmilingPal4
+  - SmilingPal5
+  - SmilingPal6
