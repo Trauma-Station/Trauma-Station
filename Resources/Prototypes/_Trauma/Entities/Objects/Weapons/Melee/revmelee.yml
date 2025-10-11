@@ -26,7 +26,7 @@
   parent: BaseRevForgedWeapon
   id: RevMace
   name: forged mace
-  description: A robust mace, hurts and stuns enemies, not great against modern armor.
+  description: A robust mace, stuns enemies. Not great against modern armor, or for killing.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Revs/mace.rsi
@@ -35,10 +35,10 @@
     animationRotation: -45
     damage:
       types:
-        Blunt: 12
+        Blunt: 6
     soundHit:
       collection: MetalThud
-    bluntStaminaDamageFactor: 3
+    bluntStaminaDamageFactor: 6
   - type: Item
     shape:
     - 0,0,0,2
@@ -220,7 +220,7 @@
     animationRotation: -135
     damage:
       types:
-        Heat: 8
+        Heat: 4
     soundHit:
       path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
   - type: PointLight
@@ -234,7 +234,7 @@
     temperature: 700
   - type: AlwaysHot
   - type: IgniteOnMeleeHit
-    fireStacks: 1
+    fireStacks: 0.5
   - type: Construction
     graph: RevTorchCreation
 

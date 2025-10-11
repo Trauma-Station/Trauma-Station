@@ -68,7 +68,7 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
             if (!entityQuery.TryGetComponent(target, out var plantHolderComponent))
                 continue;
 
-            if (plantHolderComponent is { WaterLevel: >= PlantbotServiceOperator.RequiredWaterLevelToService, WeedLevel: <= PlantbotServiceOperator.RequiredWeedsAmountToWeed } && (!emagged || plantHolderComponent.Dead || plantHolderComponent.WaterLevel <= 0f))
+            if (plantHolderComponent is { WaterLevel: >= PlantbotServiceOperator.RequiredWaterLevelToService, WeedLevel: <= PlantbotServiceOperator.RequiredWeedsAmountToWeed, Harvest: false } && (!emagged || plantHolderComponent.Dead || plantHolderComponent.WaterLevel <= 0f)) // Trauma
                 continue;
 
             //Needed to make sure it doesn't sometimes stop right outside it's interaction range

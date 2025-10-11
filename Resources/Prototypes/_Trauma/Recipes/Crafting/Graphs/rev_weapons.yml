@@ -1,6 +1,6 @@
 # TODO add hammering and shit as well just touching it with wood shouldn't complete it
 - type: constructionGraph
-  id: RevSwordCreation
+  id: RevSword
   start: start
   graph:
   - node: start
@@ -14,7 +14,7 @@
     entity: RevSword
 
 - type: constructionGraph
-  id: RevMaceCreation
+  id: RevMace
   start: start
   graph:
   - node: start
@@ -28,7 +28,7 @@
     entity: RevMace
 
 - type: constructionGraph
-  id: RevKnifeCreation
+  id: RevKnife
   start: start
   graph:
   - node: start
@@ -42,7 +42,7 @@
     entity: RevKnife
 
 - type: constructionGraph
-  id: RevPitchforkCreation
+  id: RevPitchfork
   start: start
   graph:
   - node: start
@@ -56,7 +56,7 @@
     entity: RevPitchfork
 
 - type: constructionGraph
-  id: RevTorchCreation
+  id: RevTorch
   start: start
   graph:
   - node: start
@@ -68,3 +68,41 @@
         doAfter: 10
   - node: finished
     entity: RevTorch
+
+- type: constructionGraph
+  id: RevLiberator
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: unfinished
+      steps:
+      - material: Steel
+        amount: 3
+        doAfter: 5
+      - tag: Pipe
+        name: construction-graph-tag-pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+  - node: unfinished
+    entity: RevUnfinishedGun
+    edges:
+    - to: RevLiberator
+      steps:
+      - material: RevBolt
+      - material: RevNut
+      - tool: Anchoring
+        doAfter: 2
+      - material: RevGunParts
+      - tag: ModularReceiver
+        name: construction-graph-tag-modular-receiver
+        icon:
+          sprite: Objects/Misc/modular_receiver.rsi
+          state: icon
+      - tool: Welding
+        doAfter: 2
+      - tool: Screwing
+        doAfter: 1
+  - node: RevLiberator
+    entity: WeaponPistolLiberatorEmpty

@@ -14,10 +14,6 @@
   - type: Appearance
   - type: Lathe
     idleState: icon
-  - type: ContainerContainer
-    containers:
-      machine_board: !type:Container
-      machine_parts: !type:Container
   - type: Fixtures
     fixtures:
       fix1:
@@ -56,11 +52,11 @@
       input: AutomationSlotMaterials
       output: null
   - type: Animateable
-  - type: Machine
   - type: LightningTarget
     priority: 1
   - type: Construction
     deconstructionTarget: null
+    graph: RevMachine
 
 - type: entity
   parent: BaseRevIndustry
@@ -95,14 +91,13 @@
   - type: ContainerContainer
     containers:
       blueprint: !type:Container
-      machine_board: !type:Container
-      machine_parts: !type:Container
+  # this doesn't do anything currently as rev machines dont use machine construction
+  # keeping it here for reference incase it's changed in the future
   - type: EmptyOnMachineDeconstruct
     containers:
     - blueprint
   - type: Construction
-    graph: RevForgeGraph
-    node: revForgeComplete
+    node: RevForge
 
 - type: entity
   parent: BaseRevIndustry
@@ -120,14 +115,9 @@
   - type: MaterialStorage
     whitelist:
       tags:
-        - Sheet
-  - type: ContainerContainer
-    containers:
-      machine_board: !type:Container
-      machine_parts: !type:Container
+      - Sheet
   - type: Construction
-    graph: revPrintingPress
-    node: revPrintingPress
+    node: RevPrintingPress
 
 - type: entity
   parent: BaseRevIndustry
@@ -142,10 +132,6 @@
     runningState: telecomms
     staticPacks:
     - RevTelecommsWorkbenchStatic
-  - type: ContainerContainer
-    containers:
-      machine_board: !type:Container
-      machine_parts: !type:Container
   - type: MaterialStorage
     whitelist:
       tags:
@@ -153,5 +139,56 @@
       - RawMaterial
       - Ingot
   - type: Construction
-    graph: revTelecommsWorkbench
-    node: revTelecommsWorkbench
+    node: RevRadioBench
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevTelesphere
+  name: telesphere
+  description: An experimental device, it can be used to remotely steal materials from passing trade ships using plasma. Additionally; it can be used as a material silo for the revolution.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/telesphere.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/telesphere.ogg
+    runningState: telesphere
+    staticPacks:
+    - RevTelesphereStatic
+  - type: Construction
+    node: RevTelesphere
+  - type: PointLight
+    enabled: true
+    color: "#ffffff"
+    radius: 1.5
+    energy: 5.0
+  - type: WirelessNetworkConnection
+    range: 1000
+  - type: DeviceLinkSource
+    range: 1000
+    ports:
+    - MaterialSilo
+  - type: MaterialStorage
+    ignoreColor: true
+  - type: Silo
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevPrinter
+  name: 3D printer
+  description: Makes either cute little guys or gun parts, zero inbetween. This one can print both metal and plastic.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/printer.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/printer.ogg
+    runningState: printer
+    staticPacks:
+    - RevPrinterStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: Construction
+    node: RevPrinter
