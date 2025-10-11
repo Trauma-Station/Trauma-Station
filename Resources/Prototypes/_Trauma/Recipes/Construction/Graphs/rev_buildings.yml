@@ -63,6 +63,11 @@
         doAfter: 2
     - to: RevTelesphere # RD exclusive
       steps:
+      - tag: EncryptionRevolutionary
+        name: construction-graph-tag-rncryption-revolutionary
+        icon:
+          sprite: _Trauma/Objects/Devices/encryption_keys.rsi
+          state: rev_label
       - tag: HandTeleporter
         name: construction-graph-tag-hand-teleporter
         icon:
