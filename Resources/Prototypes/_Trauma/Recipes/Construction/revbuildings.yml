@@ -11,8 +11,7 @@
     - !type:TileNotBlocked
   entityWhitelist:
     components:
-    - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary
 
 - type: construction
   id: RevPrintingPress
@@ -27,8 +26,7 @@
     - !type:TileNotBlocked
   entityWhitelist:
     components:
-    - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary
 
 - type: construction
   id: RevTelecommsWorkbench
@@ -43,8 +41,7 @@
     - !type:TileNotBlocked
   entityWhitelist:
     components:
-    - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary
 
 - type: construction
   id: RevTelesphere
@@ -59,8 +56,7 @@
     - !type:TileNotBlocked
   entityWhitelist:
     components:
-    - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary
 
 - type: construction
   id: Rev3DPrinter
@@ -75,8 +71,7 @@
     - !type:TileNotBlocked
   entityWhitelist:
     components:
-    - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary
 
 - type: construction
   id: RevTurretPistol
@@ -91,8 +86,7 @@
     - !type:TileNotBlocked
   entityWhitelist:
     components:
-    - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary
 
 - type: construction
   id: RevTurretSMG
@@ -107,8 +101,7 @@
     - !type:TileNotBlocked
   entityWhitelist:
     components:
-    - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary
 
 - type: construction
   id: RevLiberator
@@ -123,5 +116,4 @@
     - !type:TileNotBlocked
   entityWhitelist:
     components:
-    - HeadRevolutionary
-    - Revolutionaty
+    - Revolutionary
