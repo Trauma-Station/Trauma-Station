@@ -79,6 +79,22 @@
     - Revolutionary
 
 - type: construction
+  id: RevBulletPress
+  graph: RevMachine
+  startNode: start
+  targetNode: RevBulletPress
+  placementMode: SnapgridCenter
+  category: construction-category-antagonist
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
   id: RevTurretPistol
   graph: RevTurret
   startNode: start

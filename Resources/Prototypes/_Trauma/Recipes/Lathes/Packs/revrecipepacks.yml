@@ -25,6 +25,7 @@
   - TelecomServerCircuitboard # eventually replace this with a homeade looking one
   - RevIFF
   - TrackingImplanterRev
+  - SheetifierMachineCircuitboard
 
 - type: latheRecipePack
   id: RevTelesphereStatic
@@ -54,3 +55,11 @@
   id: RevPrinterStatic
   recipes:
   - RevGunParts
+  - RevTurretMagazine
+  - RevSMGMagazine
+  
+- type: latheRecipePack
+  id: RevBulletPressStatic
+  recipes:
+  - RevTurretBullet
+  - RevPistolBullet

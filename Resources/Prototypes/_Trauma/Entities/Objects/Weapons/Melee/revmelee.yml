@@ -234,7 +234,7 @@
     temperature: 700
   - type: AlwaysHot
   - type: IgniteOnMeleeHit
-    fireStacks: 0.5
+    fireStacks: 1
   - type: Construction
     graph: RevTorch
 

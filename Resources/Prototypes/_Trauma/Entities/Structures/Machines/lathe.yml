@@ -192,3 +192,25 @@
       - Ingot
   - type: Construction
     node: RevPrinter
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevBulletPress
+  name: Bullet Press
+  description: Created ammo by pressing the bullet into the casing, this one is automated.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/bulletpress.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/bulletpress.ogg
+    runningState: bulletpress
+    staticPacks:
+    - RevBulletPressStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: Construction
+    node: RevBulletPress

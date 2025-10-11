@@ -31,3 +31,12 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
+
+- type: entity
+  parent: BaseMagazineTurret
+  id: BaseMagazineTurretEmpty
+  name: "magazine (.22 short)"
+  description: 60 round low-caliber magazine, often used in anti-personnel turrets.
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
