@@ -6,6 +6,10 @@
   components:
   - type: BallisticAmmoProvider
     proto: null
+  - type: Construction
+    deconstructionTarget: null
+    graph: revLiberator
+    node: revLiberator
 
 - type: entity
   parent: [ BaseItem, BaseMajorContraband ]
