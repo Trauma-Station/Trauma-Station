@@ -1,0 +1,10 @@
+- type: entity
+  id: BulletTurret
+  name: bullet (.22 short)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 10
