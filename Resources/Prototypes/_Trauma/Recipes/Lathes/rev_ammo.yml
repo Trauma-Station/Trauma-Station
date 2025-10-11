@@ -1,0 +1,23 @@
+- type: latheRecipe
+  parent: BaseRevWeapon
+  id: RevTurretBullet
+  result: CartridgeTurret
+  completetime: 1.5
+  materials:
+    Steel: 10
+
+- type: latheRecipe
+  parent: BaseRevWeapon
+  id: RevPistolBullet
+  result: CartridgePistol
+  completetime: 1.5
+  materials:
+    Steel: 10
+
+- type: latheRecipe
+  parent: BaseRevWeapon
+  id: RevTurretMagazine
+  result: BaseMagazineTurretEmpty
+  completetime: 15
+  materials:
+    Steel: 200

@@ -54,3 +54,10 @@
   id: RevPrinterStatic
   recipes:
   - RevGunParts
+  - RevTurretMagazine
+
+- type: latheRecipePack
+  id: RevBulletPressStatic
+  recipes:
+  - RevTurretBullet
+  - RevPistolBullet
