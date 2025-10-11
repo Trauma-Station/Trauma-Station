@@ -53,3 +53,9 @@ Entries:
       message: Fixed propaganda pamphlet charge spending before conversion.
   id: 8
   time: '2025-10-10T18:11:12.0000000+00:00'
+- author: ReiderJack
+  changes:
+    - type: Add
+      message: harvest for plantbot
+  id: 9
+  time: '2025-10-11T04:20:29.0000000+00:00'
