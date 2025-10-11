@@ -28,6 +28,8 @@
   - type: Repairable
     qualityNeeded: Anchoring
     doAfterDelay: 3
+  - type: StaticPrice
+    price: 100
 
 - type: entity
   abstract: true
@@ -101,6 +103,8 @@
     qualityNeeded: Anchoring
     doAfterDelay: 3
   - type: MagazineAmmoProvider
+  - type: StaticPrice
+    price: 100
 
 - type: entity
   parent: BaseWeaponTurretRevolutionary
