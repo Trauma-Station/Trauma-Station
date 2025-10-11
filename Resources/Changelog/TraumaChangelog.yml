@@ -93,3 +93,19 @@ Entries:
       message: the grinning pals
   id: 10
   time: '2025-10-11T05:16:28.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Unfinished rev weapons now tell you the construction steps when
+        examined.
+    - type: Tweak
+      message: Rev gears and stuff can now be stacked.
+    - type: Tweak
+      message: >-
+        Rev machines actually need tools to make, you can't just summon it with
+        your mind in 5 seconds.
+    - type: Tweak
+      message: Rev chestplate is now normal sized instead of tiny.
+  id: 11
+  time: '2025-10-11T16:22:28.0000000+00:00'
