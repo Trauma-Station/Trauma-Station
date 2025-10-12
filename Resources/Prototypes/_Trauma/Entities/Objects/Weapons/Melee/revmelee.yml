@@ -239,7 +239,7 @@
     graph: RevTorch
 
 - type: entity
-  parent: [ BaseItem, BaseMinorContraband ]
+  parent: [ BaseItem, BaseRevMinorContraband ]
   name: caltrops
   id: Caltrops
   description: A weapon designed to be laid on the floor as a trap, can be thrown for a quick trap anchored in place.
