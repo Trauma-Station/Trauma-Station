@@ -38,6 +38,8 @@
       map: ["variant-cargo"]
     - state: variant-engineering
       map: ["variant-engineering"]
+    - state: variant-revolutionary # Trauma
+      map: ["variant-revolutionary"]
     - state: variant-medical
       map: ["variant-medical"]
     - state: variant-science
@@ -73,6 +75,10 @@
         whitelist:
           tags:
           - EncryptionCargo
+      variant-revolutionary: #Trauma
+        whitelist:
+          tags:
+          - EncryptionRevolutionary #Trauma
       variant-engineering:
         whitelist:
           tags:

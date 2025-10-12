@@ -1,0 +1,35 @@
+- type: stack
+  id: RevGear
+  name: stack-rev-gear
+  icon:
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: gear
+  spawn: RevGear
+  maxCount: 4
+
+- type: stack
+  id: RevBolt
+  name: stack-rev-bolt
+  icon:
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: bolt
+  spawn: RevBolt
+  maxCount: 4
+
+- type: stack
+  id: RevNut
+  name: stack-rev-nut
+  icon:
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: nut
+  spawn: RevNut
+  maxCount: 4
+
+- type: stack
+  id: RevGunParts
+  name: stack-rev-gun-parts
+  icon:
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: gunparts
+  spawn: RevGunParts
+  maxCount: 4

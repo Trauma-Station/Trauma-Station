@@ -1,0 +1,289 @@
+- type: entity
+  abstract: true
+  parent: [ BaseItem, BaseMajorContraband ]
+  id: BaseRevMeleeWeapon
+  components:
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+  - type: DisarmMalus
+    malus: 0.225
+  - type: Appearance
+  - type: StaticPrice
+    price: 80
+  - type: Construction
+    deconstructionTarget: null
+    node: finished
+
+- type: entity
+  abstract: true
+  parent: BaseRevMeleeWeapon
+  id: BaseRevForgedWeapon
+  components:
+  - type: Execution
+    doAfterDuration: 1.0
+
+- type: entity
+  parent: BaseRevForgedWeapon
+  id: RevMace
+  name: forged mace
+  description: A robust mace, stuns enemies. Not great against modern armor, or for killing.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/mace.rsi
+    state: icon
+  - type: MeleeWeapon
+    animationRotation: -45
+    damage:
+      types:
+        Blunt: 6
+    soundHit:
+      collection: MetalThud
+    bluntStaminaDamageFactor: 6
+  - type: Item
+    shape:
+    - 0,0,0,2
+    storedRotation: -45
+  - type: Construction
+    graph: RevMace
+  - type: MeleeThrowOnHit
+    distance: 0.3
+    speed: 1
+
+- type: entity
+  parent: BaseRevForgedWeapon
+  id: RevSword
+  name: forged sword
+  description: A two handed sword, deals heavy damage.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/sword.rsi
+    state: icon
+  - type: MeleeWeapon
+    animationRotation: -90
+    damage:
+      types:
+        Slash: 8
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    size: Ginormous
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Slash: 12
+  - type: Wieldable
+  - type: Tag
+    tags:
+    - Knife
+  - type: Sharp
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_pickup.ogg
+      params:
+        volume: -8
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_drop.ogg
+      params:
+        volume: -8
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_drop.ogg
+      params:
+        volume: -8
+  - type: Construction
+    graph: RevSword
+
+- type: entity
+  parent: BaseRevForgedWeapon
+  id: RevPitchfork
+  name: forged pitchfork
+  description: A large pitchfork, can be thrown and has extended melee range.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/pitchfork.rsi
+    state: icon
+  - type: MeleeWeapon
+    animationRotation: -130
+    canWideSwing: false
+    range: 2.2
+    attackRate: 0.8
+    damage:
+      types:
+        Piercing: 8
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    size: Ginormous
+  - type: EmbeddableProjectile
+  - type: ThrowingAngle
+    angle: 225
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Piercing: 8
+  - type: Wieldable
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 30
+  - type: Construction
+    graph: RevPitchfork
+
+- type: entity
+  parent: BaseRevForgedWeapon
+  id: RevKnife
+  name: forged knife
+  description: A small forged knife. It is concealable, can be tipped with poison and is usable with a shield.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/knife.rsi
+    layers:
+    - state: icon
+    - state: icon1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_pickup.ogg
+      params:
+        volume: -8
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_drop.ogg
+      params:
+        volume: -8
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_drop.ogg
+      params:
+        volume: -8
+  - type: MeleeWeapon
+    animationRotation: -45
+    damage:
+      types:
+        Slash: 12
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    size: Small
+    storedRotation: -45
+  - type: Tag
+    tags:
+    - Knife
+  - type: Sharp
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/bladeslice.ogg
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 5
+  - type: ThrowingAngle
+    angle: 225
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        maxVol: 3
+  - type: MeleeChemicalInjector
+    transferAmount: 3
+    solution: melee
+  - type: RefillableSolution
+    solution: melee
+  - type: InjectableSolution
+    solution: melee
+  - type: SolutionInjectOnEmbed
+    transferAmount: 3
+    solution: melee
+  - type: SolutionTransfer
+    maxTransferAmount: 3
+  - type: UseDelay
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    fillBaseName: icon
+    inHandsFillBaseName: -fill-
+    inHandsMaxFillLevels: 1
+    equippedFillBaseName: -fill-
+    equippedMaxFillLevels: 1
+  - type: Construction
+    graph: RevKnife
+
+- type: entity
+  parent: BaseRevMeleeWeapon
+  id: RevTorch
+  name: combat torch
+  description: A refined torch mounted with a steel head. Lights enemies on fire when hit.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/torch.rsi
+    state: icon
+  - type: MeleeWeapon
+    animationRotation: -135
+    damage:
+      types:
+        Heat: 4
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
+  - type: PointLight
+    enabled: true
+    color: "#E25822"
+    radius: 4.0
+    energy: 5.0
+  - type: Item
+    size: Ginormous
+  - type: IgnitionSource
+    temperature: 700
+  - type: AlwaysHot
+  - type: IgniteOnMeleeHit
+    fireStacks: 1
+  - type: Construction
+    graph: RevTorch
+
+- type: entity
+  parent: [ BaseItem, BaseMinorContraband ]
+  name: caltrops
+  id: Caltrops
+  description: A weapon designed to be laid on the floor as a trap, can be thrown for a quick trap anchored in place.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/caltrops.rsi
+    state: icon
+  - type: Anchorable
+  - type: Item
+    size: Tiny
+  - type: CollisionWake
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        hard: false
+        layer:
+        - LowImpassable
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        density: 30
+        mask:
+        - ItemMask
+  - type: StepTrigger
+    intersectRatio: 0.2
+  - type: Slippery
+    slipSound:
+      path: /Audio/Weapons/bladeslice.ogg
+    slipData:
+      launchForwardsMultiplier: 0
+  - type: TriggerOnStepTrigger
+  - type: DamageUserOnTrigger
+    damage:
+      types:
+        Piercing: 15
+  - type: EmbeddableProjectile
+  - type: ThrowingAngle
+    angle: 180
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 10

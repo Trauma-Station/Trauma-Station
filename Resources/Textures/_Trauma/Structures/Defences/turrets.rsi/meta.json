@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by Armok for Traumastation. Unfinished states modified by deltanedas",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "revturretpistol",
+      "directions": 8
+    },
+    {
+      "name": "revturretsmg",
+      "directions": 8
+    },
+    {
+      "name": "unfinished"
+    },
+    {
+      "name": "unfinished-barrel"
+    }
+  ]
+}

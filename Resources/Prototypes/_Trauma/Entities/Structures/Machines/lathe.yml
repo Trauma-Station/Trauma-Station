@@ -1,0 +1,216 @@
+# Like BaseLathe but without wire panel or constructible/powered machine
+- type: entity
+  parent: [ BaseMachine, BaseMajorContraband ]
+  id: BaseRevIndustry
+  abstract: true
+  components:
+  - type: Transform
+    noRot: false
+  - type: Sprite
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Appearance
+  - type: Lathe
+    idleState: icon
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: ActivatableUI
+    key: enum.LatheUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.LatheUiKey.Key:
+        type: LatheBoundUserInterface
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: StaticPrice
+    price: 800
+  - type: TechnologyDatabase
+  - type: AutomationSlots
+    slots:
+    - !type:AutomatedMaterialStorage
+      input: AutomationSlotMaterials
+      output: null
+  - type: Animateable
+  - type: LightningTarget
+    priority: 1
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevMachine
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevForge
+  name: industrial forge
+  description: This jury rigged machine can produce all sorts of useful (and dangerous) components.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/revforge.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/strike.ogg
+    runningState: revforge
+    staticPacks:
+    - RevForgeStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - Metal
+      - Wooden
+      - RawMaterial
+      - Plastic
+  - type: PointLight
+    enabled: true
+    color: "#E25822"
+    radius: 1.5
+    energy: 5.0
+  - type: BlueprintReceiver
+    whitelist:
+      tags:
+      - ForgeMold
+  - type: ContainerContainer
+    containers:
+      blueprint: !type:Container
+  # this doesn't do anything currently as rev machines dont use machine construction
+  # keeping it here for reference incase it's changed in the future
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - blueprint
+  - type: Construction
+    node: RevForge
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevPrintingPress
+  name: printing press
+  description: A printing press for mass producing media, or in your case anti-NT propaganda.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/revprintingpress.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/printingpress.ogg
+    runningState: printingpress
+    staticPacks:
+    - RevPrintingPress
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+  - type: Construction
+    node: RevPrintingPress
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevRadioBench
+  name: telecommunications workshop
+  description: A device for hacking into nearby signals, allows the production of radiochips, turrets, as well as some upgrades for other machines.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/telecommsbench.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/commsworkbench.ogg
+    runningState: telecomms
+    staticPacks:
+    - RevTelecommsWorkbenchStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: Construction
+    node: RevRadioBench
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevTelesphere
+  name: telesphere
+  description: An experimental device, it can be used to remotely steal materials from passing trade ships using plasma. Additionally; it can be used as a material silo for the revolution.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/telesphere.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/telesphere.ogg
+    runningState: telesphere
+    staticPacks:
+    - RevTelesphereStatic
+  - type: Construction
+    node: RevTelesphere
+  - type: PointLight
+    enabled: true
+    color: "#ffffff"
+    radius: 1.5
+    energy: 5.0
+  - type: WirelessNetworkConnection
+    range: 1000
+  - type: DeviceLinkSource
+    range: 1000
+    ports:
+    - MaterialSilo
+  - type: MaterialStorage
+    ignoreColor: true
+  - type: Silo
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevPrinter
+  name: 3D printer
+  description: Makes either cute little guys or gun parts, zero inbetween. This one can print both metal and plastic.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/printer.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/printer.ogg
+    runningState: printer
+    staticPacks:
+    - RevPrinterStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: Construction
+    node: RevPrinter
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevBulletPress
+  name: Bullet Press
+  description: Created ammo by pressing the bullet into the casing, this one is automated.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/bulletpress.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/bulletpress.ogg
+    runningState: bulletpress
+    staticPacks:
+    - RevBulletPressStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: Construction
+    node: RevBulletPress

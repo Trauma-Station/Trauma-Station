@@ -1,0 +1,48 @@
+- type: entity
+  parent: [ BaseItem, BaseMajorContraband ]
+  id: WeaponPistolLiberator
+  name: liberator
+  description: A shitty little pistol that can only hold 6 rounds and has to be hand fed.
+  suffix: Full
+  components:
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+  - type: Tag
+    tags:
+    - Sidearm
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Pistols/liberator.rsi
+    layers:
+    - state: icon
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Gun
+    fireRate: 3
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/pistol.ogg
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CartridgePistol
+    capacity: 6
+    proto: CartridgePistol
+  - type: AmmoCounter
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+
+- type: entity
+  parent: WeaponPistolLiberator
+  id: WeaponPistolLiberatorEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevLiberator
+    node: RevLiberator

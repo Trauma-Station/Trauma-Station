@@ -1,0 +1,18 @@
+- type: entity
+  parent: [ EncryptionKey, BaseMajorContraband ]
+  id: EncryptionKeyRev
+  name: revolutionary encryption key
+  description: An encryption key used by underground revolutionary groups.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Revolutionary
+    defaultChannel: Revolutionary
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: rev_holder
+    - state: rev_label
+  - type: Tag
+    tags:
+    - EncryptionRevolutionary

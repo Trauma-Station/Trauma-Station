@@ -1,0 +1,82 @@
+- type: entity
+  abstract: true
+  parent: BaseStockPart
+  id: BaseRevPart # can't be made via construction
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/components.rsi
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50 # removed plastic
+
+- type: entity
+  abstract: true
+  parent: BaseRevPart
+  id: BaseRevComponent # can be made via construction
+  components:
+  - type: Construction
+    graph: RevParts
+    deconstructionTarget: null
+
+- type: entity
+  parent: BaseRevComponent
+  id: RevGear
+  name: gear
+  description: A gear, used in quite a few devices.
+  components:
+  - type: Sprite
+    state: gear
+  - type: Stack
+    stackType: RevGear
+  - type: Construction
+    node: gear
+
+- type: entity
+  parent: BaseRevComponent
+  id: RevBolt
+  name: pile of bolts
+  description: Some bolts, used in quite a few devices.
+  components:
+  - type: Sprite
+    state: bolt
+  - type: Stack
+    stackType: RevBolt
+  - type: Construction
+    node: bolt
+
+- type: entity
+  parent: BaseRevComponent
+  id: RevNut
+  name: pile of nuts
+  description: Some nuts, used in quite a few devices.
+  components:
+  - type: Sprite
+    state: nut
+  - type: Stack
+    stackType: RevNut
+  - type: Construction
+    node: nut
+
+- type: entity
+  parent: [ BaseItem, BaseMajorContraband ]
+  id: RevTurretElectronics
+  name: revolutionary turret circuit board
+  description: Used in the creation of turrets, they are programmed to shoot anything without an IFF badge so be careful.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: door_electronics
+  - type: Tag
+    tags:
+    - RevTurretBoard
+
+- type: entity
+  parent: [ BaseRevPart, BaseMinorContraband ]
+  id: RevGunParts
+  name: gun parts
+  description: A small pile of gun parts. Useless on their own, but you have plans for them.
+  components:
+  - type: Sprite
+    state: gunparts
+  - type: Stack
+    stackType: RevGunParts

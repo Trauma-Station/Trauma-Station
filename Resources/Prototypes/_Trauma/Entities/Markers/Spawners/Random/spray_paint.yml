@@ -1,0 +1,38 @@
+- type: entity
+  parent: MarkerBase
+  id: MarkerSpawnerSprayPaint
+  name: spray paint spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Objects/Fun/spraycans.rsi
+      state: death2_cap
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: SprayPaints
+    offset: 0.0
+
+# fun fluff spawner / cargo product
+- type: entityTable
+  id: SprayPaints
+  table: !type:GroupSelector
+    children:
+    - id: SprayPaintRed
+    - id: SprayPaintGreen
+    - id: SprayPaintBlue
+    - id: SprayPaintOrange
+    - id: SprayPaintBlack
+    - id: SprayPaintPurple
+    - id: SprayPaintWhite
+    - !type:NestedSelector
+      tableId: SprayPaintsDeath
+      weight: 2
+
+# random maints locker loot
+- type: entityTable
+  id: SprayPaintsDeath
+  table: !type:GroupSelector
+    children:
+    - id: SprayPaintDeath
+    - id: SprayPaintDeathTwo
