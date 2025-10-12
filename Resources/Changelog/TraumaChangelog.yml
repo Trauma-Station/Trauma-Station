@@ -125,3 +125,9 @@ Entries:
       message: Removed pain pending rework (goidaden reference)
   id: 13
   time: '2025-10-11T20:55:26.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed slaughter demon popups being visible to everyone
+  id: 14
+  time: '2025-10-12T08:26:21.0000000+00:00'
