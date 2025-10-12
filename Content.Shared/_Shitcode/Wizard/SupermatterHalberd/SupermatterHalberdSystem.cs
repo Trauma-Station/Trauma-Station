@@ -75,7 +75,7 @@ public sealed class SupermatterHalberdSystem : EntitySystem
             return;
 
         _admin.Add(HasComp<MobStateComponent>(args.Target.Value) ? LogType.Gib : LogType.InteractUsing,
-            LogImpact.Extreme,
+            LogImpact.Medium,
             $"{ToPrettyString(args.User):user} ashed {ToPrettyString(args.Target.Value):target} using {ToPrettyString(uid):used}");
 
         var xform = Transform(args.Target.Value);
