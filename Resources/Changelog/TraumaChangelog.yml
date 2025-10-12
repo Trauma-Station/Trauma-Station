@@ -119,3 +119,23 @@ Entries:
       message: fix a bunch of bugs
   id: 12
   time: '2025-10-11T18:53:00.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Removed pain pending rework (goidaden reference)
+  id: 13
+  time: '2025-10-11T20:55:26.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed slaughter demon popups being visible to everyone
+  id: 14
+  time: '2025-10-12T08:26:21.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Changed rev machine cost from 30 to 5 steel.
+    - type: Tweak
+      message: Changed rev propaganda cost from 30 to 10 paper.
+  id: 15
+  time: '2025-10-12T08:33:55.0000000+00:00'
