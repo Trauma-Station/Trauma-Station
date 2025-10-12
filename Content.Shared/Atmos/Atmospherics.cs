@@ -460,7 +460,7 @@ namespace Content.Shared.Atmos
         ///     (The pressure threshold is so low that it doesn't make sense to do any calculations,
         ///     so it just applies this flat value).
         /// </summary>
-        public const int LowPressureDamage = 1; // TRAUMA - Revert the revert of the nerf
+        public const int LowPressureDamage = 1.5; // TRAUMA - Revert the revert of the nerf
 
         public const float WindowHeatTransferCoefficient = 0.1f;
 
