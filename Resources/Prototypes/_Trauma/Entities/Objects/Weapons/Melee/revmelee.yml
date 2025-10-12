@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ BaseItem, BaseMajorContraband ]
+  parent: [ BaseItem, BaseRevMajorContraband ]
   id: BaseRevMeleeWeapon
   components:
   - type: MeleeWeapon

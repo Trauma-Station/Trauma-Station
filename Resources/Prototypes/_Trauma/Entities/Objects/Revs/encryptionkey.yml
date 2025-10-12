@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ EncryptionKey, BaseMajorContraband ]
+  parent: [ EncryptionKey, BaseRevMajorContraband ]
   id: EncryptionKeyRev
   name: revolutionary encryption key
   description: An encryption key used by underground revolutionary groups.

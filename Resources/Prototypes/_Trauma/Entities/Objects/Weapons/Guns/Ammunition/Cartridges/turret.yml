@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseCartridge, BaseMajorContraband ]
+  parent: [ BaseCartridge, BaseRevMajorContraband ]
   id: CartridgeTurret
   name: cartridge (.22 short)
   description: A weak round with little stopping power, usually mass produced by communists and other assholes.

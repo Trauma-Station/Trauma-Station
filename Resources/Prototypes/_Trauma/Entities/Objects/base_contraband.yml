@@ -1,0 +1,15 @@
+# Valid rev items that you can get flogged for
+- type: entity
+  abstract: true
+  id: BaseRevMinorContraband
+  components:
+  - type: Contraband
+    severity: RevMinor
+
+# Rev weaponry turrets etc
+- type: entity
+  abstract: true
+  id: BaseRevMajorContraband
+  components:
+  - type: Contraband
+    severity: RevMajor
