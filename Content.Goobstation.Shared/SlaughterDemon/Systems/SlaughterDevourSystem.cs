@@ -129,7 +129,7 @@ public sealed class SlaughterDevourSystem : EntitySystem
         }
         else if (HasComp<BorgChassisComponent>(target) || HasComp<SiliconComponent>(target))
         {
-            _popup.PopupPopupClient(Loc.GetString("slaughter-devour-robot"), devourer, devourer); // Trauma - PopupClient
+            _popup.PopupClient(Loc.GetString("slaughter-devour-robot"), devourer, devourer); // Trauma - PopupClient
             _damageable.TryChangeDamage(devourer, component.ToHealNonCrew);
         }
         else
