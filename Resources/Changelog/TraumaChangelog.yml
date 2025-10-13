@@ -145,3 +145,9 @@ Entries:
       message: Max nukies is 5, but this doesn't affect buying reinforcements.
   id: 16
   time: '2025-10-13T01:56:02.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Buffed rev pitchfork to not be worse than a random tider spear.
+  id: 17
+  time: '2025-10-13T18:50:50.0000000+00:00'
