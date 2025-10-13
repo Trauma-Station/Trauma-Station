@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseItem, BaseMajorContraband ]
+  parent: [ BaseItem, BaseRevMajorContraband ]
   id: RevPropaganda
   name: propaganda pamphlet
   description: It is a revolutionary propaganda pamphlet. It loses its charm after reading it once, so you will need plenty.

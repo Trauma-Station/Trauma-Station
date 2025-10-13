@@ -58,7 +58,7 @@
     node: nut
 
 - type: entity
-  parent: [ BaseItem, BaseMajorContraband ]
+  parent: [ BaseItem, BaseRevMajorContraband ]
   id: RevTurretElectronics
   name: revolutionary turret circuit board
   description: Used in the creation of turrets, they are programmed to shoot anything without an IFF badge so be careful.
@@ -71,7 +71,7 @@
     - RevTurretBoard
 
 - type: entity
-  parent: [ BaseRevPart, BaseMinorContraband ]
+  parent: [ BaseRevPart, BaseRevMajorContraband ]
   id: RevGunParts
   name: gun parts
   description: A small pile of gun parts. Useless on their own, but you have plans for them.

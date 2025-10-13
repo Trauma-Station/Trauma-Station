@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: [ BaseItem, BaseRevMinorContraband ]
   id: RevDropPodTraps
   name: drop pod beacon (caltrop mold)
   description: Hacks a nearby shipping pod containing needed items and reroutes it to your location.
