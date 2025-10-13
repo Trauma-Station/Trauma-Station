@@ -151,3 +151,9 @@ Entries:
       message: Buffed rev pitchfork to not be worse than a random tider spear.
   id: 17
   time: '2025-10-13T18:50:50.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Changed contraband examine text for all rev items.
+  id: 18
+  time: '2025-10-13T18:50:57.0000000+00:00'
