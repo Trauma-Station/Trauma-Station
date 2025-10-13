@@ -139,3 +139,9 @@ Entries:
       message: Changed rev propaganda cost from 30 to 10 paper.
   id: 15
   time: '2025-10-12T08:33:55.0000000+00:00'
+- author: Speebro
+  changes:
+    - type: Tweak
+      message: Max nukies is 5, but this doesn't affect buying reinforcements.
+  id: 16
+  time: '2025-10-13T01:56:02.0000000+00:00'
