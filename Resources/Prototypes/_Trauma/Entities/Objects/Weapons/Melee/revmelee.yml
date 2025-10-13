@@ -121,7 +121,7 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Piercing: 8
+        Piercing: 16
   - type: Wieldable
   - type: DamageOtherOnHit
     damage:
