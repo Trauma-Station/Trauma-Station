@@ -105,3 +105,13 @@
     deconstructionTarget: null
     defaultTarget: RevLiberator
     node: unfinished
+
+- type: entity
+  parent: RevUnfinishedGun
+  id: RevUnfinishedGun2
+  components:
+  - type: Construction
+    graph: RevResistance
+    deconstructionTarget: null
+    defaultTarget: RevResistance
+    node: unfinished

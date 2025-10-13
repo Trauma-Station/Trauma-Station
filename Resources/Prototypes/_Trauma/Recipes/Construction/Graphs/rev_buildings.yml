@@ -64,7 +64,7 @@
     - to: RevTelesphere # RD exclusive
       steps:
       - tag: EncryptionRevolutionary
-        name: construction-graph-tag-rncryption-revolutionary
+        name: construction-graph-tag-encryption-revolutionary
         icon:
           sprite: _Trauma/Objects/Devices/encryption_keys.rsi
           state: rev_label
@@ -130,4 +130,3 @@
     entity: RevTelesphere
   - node: RevBulletPress
     entity: RevBulletPress
-

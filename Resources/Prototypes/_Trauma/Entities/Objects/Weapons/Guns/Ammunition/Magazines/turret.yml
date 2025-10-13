@@ -2,6 +2,7 @@
   parent: [ BaseItem, BaseMajorContraband ]
   id: BaseMagazineTurret
   name: "magazine (.22 short)"
+  suffix: full
   description: 60 round low-caliber magazine, often used in anti-personnel turrets.
   components:
   - type: Tag
@@ -35,8 +36,7 @@
 - type: entity
   parent: BaseMagazineTurret
   id: BaseMagazineTurretEmpty
-  name: "magazine (.22 short)"
-  description: 60 round low-caliber magazine, often used in anti-personnel turrets.
+  suffix: empty
   components:
   - type: BallisticAmmoProvider
     proto: null
