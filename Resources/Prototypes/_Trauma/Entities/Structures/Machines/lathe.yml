@@ -1,8 +1,8 @@
 # Like BaseLathe but without wire panel or constructible/powered machine
 - type: entity
-  parent: [ BaseMachine, BaseMajorContraband ]
-  id: BaseRevIndustry
   abstract: true
+  parent: [ BaseMachine, BaseRevMinorContraband ]
+  id: BaseRevIndustry
   components:
   - type: Transform
     noRot: false

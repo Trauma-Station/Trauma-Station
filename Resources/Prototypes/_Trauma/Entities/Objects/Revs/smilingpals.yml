@@ -1,59 +1,57 @@
 - type: entity
+  abstract: true
   parent: BaseItem
-  id: SmilingBanana
-  name: grinning banana guy
+  id: BaseGrinningPal
   description: I love you, my grinning pal.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Revs/smilingpals.rsi
+
+- type: entity
+  parent: BaseGrinningPal
+  id: SmilingBanana
+  name: grinning banana guy
+  components:
+  - type: Sprite
     state: smilingbanana
 
 - type: entity
-  parent: BaseItem
+  parent: BaseGrinningPal
   id: SmilingBean
   name: grinning small guy
-  description: I love you, my grinning pal.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/smilingpals.rsi
     state: smilingbean
 
 - type: entity
-  parent: BaseItem
+  parent: BaseGrinningPal
   id: SmilingBoss
   name: grinning old guy
-  description: I love you, my grinning pal.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/smilingpals.rsi
     state: smilingboss
 
 - type: entity
-  parent: BaseItem
+  parent: BaseGrinningPal
   id: SmilingFrog
   name: grinning green guy
   description: His eye burn with a blazing hatred.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/smilingpals.rsi
     state: smilingfrog
 
 - type: entity
-  parent: BaseItem
+  parent: BaseGrinningPal
   id: SmilingRedGuy
   name: grinning red guy
-  description: I love you, my grinning pal.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/smilingpals.rsi
     state: smilingredguy
 
 - type: entity
-  parent: BaseItem
+  parent: BaseGrinningPal
   id: SmilingTylenol
   name: grinning tylenol
-  description: I love you, my grinning pal.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/smilingpals.rsi
     state: smilingtylenol

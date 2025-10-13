@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ BaseWeaponBallisticTurret, BaseMajorContraband ]
+  parent: [ BaseWeaponBallisticTurret, BaseRevMajorContraband ]
   id: BaseWeaponTurretRevolutionary
   suffix: Full
   components:
@@ -33,7 +33,7 @@
 
 - type: entity
   abstract: true
-  parent: [ BaseStructure, BaseMajorContraband ]
+  parent: [ BaseStructure, BaseRevMajorContraband ]
   id: BaseWeaponTurretRevolutionaryMagazine
   suffix: Full
   components:
