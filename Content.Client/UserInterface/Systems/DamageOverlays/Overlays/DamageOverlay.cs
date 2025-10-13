@@ -5,14 +5,6 @@
 // SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
 // SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
 // SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Coolsurf6 <coolsurf24@yahoo.com.au>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Kayzel <43700376+KayzelW@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Trest <144359854+trest100@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 kurokoTurbo <92106367+kurokoTurbo@users.noreply.github.com>
 //
 // SPDX-License-Identifier: MIT
 
@@ -27,8 +19,6 @@ namespace Content.Client.UserInterface.Systems.DamageOverlays.Overlays;
 
 public sealed class DamageOverlay : Overlay
 {
-    private static readonly ProtoId<ShaderPrototype> CircleMaskShader = "GradientCircleMask";
-
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
@@ -43,7 +33,7 @@ public sealed class DamageOverlay : Overlay
     public MobState State = MobState.Alive;
 
     /// <summary>
-    /// Shitmed Change: Handles the red pulsing overlay
+    /// Handles the red pulsing overlay
     /// </summary>
     public float PainLevel = 0f;
 
@@ -69,9 +59,9 @@ public sealed class DamageOverlay : Overlay
     {
         // TODO: Replace
         IoCManager.InjectDependencies(this);
-        _oxygenShader = _prototypeManager.Index(CircleMaskShader).InstanceUnique();
-        _critShader = _prototypeManager.Index(CircleMaskShader).InstanceUnique();
-        _bruteShader = _prototypeManager.Index(CircleMaskShader).InstanceUnique();
+        _oxygenShader = _prototypeManager.Index<ShaderPrototype>("GradientCircleMask").InstanceUnique();
+        _critShader = _prototypeManager.Index<ShaderPrototype>("GradientCircleMask").InstanceUnique();
+        _bruteShader = _prototypeManager.Index<ShaderPrototype>("GradientCircleMask").InstanceUnique();
     }
 
     protected override void Draw(in OverlayDrawArgs args)

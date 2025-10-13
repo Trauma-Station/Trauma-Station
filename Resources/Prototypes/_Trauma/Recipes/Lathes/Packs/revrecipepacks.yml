@@ -1,15 +1,15 @@
 - type: latheRecipePack
   id: RevForgeStatic
   recipes:
-  - RevSwordRecipe
-  - RevKnifeRecipe
-  - RevSpearRecipe
-  - RevTorchRecipe
-  - RevMaceRecipe
-  - RevGearRecipe
-  - RevBoltRecipe
-  - RevNutRecipe
-  - RevChestPlateRecipe
+  - RevSword
+  - RevKnife
+  - RevPitchfork
+  - RevTorch
+  - RevMace
+  - RevGear
+  - RevBolt
+  - RevNut
+  - ClothingOuterArmorRev
 
 - type: latheRecipePack
   id: RevPrintingPress
@@ -20,11 +20,12 @@
   id: RevTelecommsWorkbenchStatic
   recipes:
   - EncryptionKeyRev
-  - RevDropPodTrapsRecipe
-  - Revturretelectronicsrecipe
+  - RevDropPodTraps
+  - RevTurretElectronics
   - TelecomServerCircuitboard # eventually replace this with a homeade looking one
   - RevIFF
-  - DeathRattleImplantRev
+  - TrackingImplanterRev
+  - SheetifierMachineCircuitboard
 
 - type: latheRecipePack
   id: RevTelesphereStatic
@@ -40,7 +41,7 @@
   - RevCloth
   - RevSteel
   - RevMeat
-  - RevDThread
+  - RevDuraThread
   - RevPlasma
   - RevDiamonds
   - RevSilk
@@ -50,12 +51,15 @@
   - RevWood
 
 - type: latheRecipePack
+  parent: SmilingPals
   id: RevPrinterStatic
   recipes:
-  - GunParts
-  - SmilingPal1
-  - SmilingPal2
-  - SmilingPal3
-  - SmilingPal4
-  - SmilingPal5
-  - SmilingPal6
+  - RevGunParts
+  - RevTurretMagazine
+  - RevSMGMagazine
+  
+- type: latheRecipePack
+  id: RevBulletPressStatic
+  recipes:
+  - RevTurretBullet
+  - RevPistolBullet

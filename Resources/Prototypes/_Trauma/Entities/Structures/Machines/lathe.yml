@@ -1,11 +1,19 @@
+# Like BaseLathe but without wire panel or constructible/powered machine
 - type: entity
-  parent: [BaseMajorContraband, BaseMachine]
+  parent: [ BaseMachine, BaseMajorContraband ]
   id: BaseRevIndustry
   abstract: true
-  placement:
-    mode: SnapgridCenter
   components:
-  - type: Appearance #Base lathe components without wire pannel for future machines
+  - type: Transform
+    noRot: false
+  - type: Sprite
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Appearance
+  - type: Lathe
+    idleState: icon
   - type: Fixtures
     fixtures:
       fix1:
@@ -16,11 +24,10 @@
         mask:
         - MachineMask
         layer:
-          - MachineLayer
+        - MachineLayer
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 100
       behaviors:
       - !type:PlaySoundBehavior
@@ -36,50 +43,42 @@
         type: LatheBoundUserInterface
       enum.ResearchClientUiKey.Key:
         type: ResearchClientBoundUserInterface
-  - type: Pullable
   - type: StaticPrice
     price: 800
   - type: TechnologyDatabase
-  - type: AutomationSlots # Goobstation
+  - type: AutomationSlots
     slots:
     - !type:AutomatedMaterialStorage
       input: AutomationSlotMaterials
       output: null
   - type: Animateable
-  - type: Machine
   - type: LightningTarget
     priority: 1
-  - type: Transform
-    noRot: false
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevMachine
 
 - type: entity
   parent: BaseRevIndustry
   id: RevForge
   name: industrial forge
-  placement:
-    mode: SnapgridCenter
   description: This jury rigged machine can produce all sorts of useful (and dangerous) components.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Machines/revforge.rsi
-    snapCardinals: true
-    layers:
-    - state: icon
-      map: ["enum.LatheVisualLayers.IsRunning"]
   - type: Lathe
     producingSound: /Audio/_Trauma/Revs/strike.ogg
-    idleState: icon
     runningState: revforge
     staticPacks:
     - RevForgeStatic
   - type: MaterialStorage
     whitelist:
       tags:
-        - Sheet
-        - Metal
-        - Wooden
-        - RawMaterial
-        - Plastic
+      - Sheet
+      - Metal
+      - Wooden
+      - RawMaterial
+      - Plastic
   - type: PointLight
     enabled: true
     color: "#E25822"
@@ -92,112 +91,71 @@
   - type: ContainerContainer
     containers:
       blueprint: !type:Container
-      machine_board: !type:Container
-      machine_parts: !type:Container
+  # this doesn't do anything currently as rev machines dont use machine construction
+  # keeping it here for reference incase it's changed in the future
   - type: EmptyOnMachineDeconstruct
     containers:
     - blueprint
   - type: Construction
-    deconstructionTarget: null
-    graph: RevForgeGraph
-    node: revForgeComplete
+    node: RevForge
 
 - type: entity
   parent: BaseRevIndustry
   id: RevPrintingPress
   name: printing press
-  placement:
-    mode: SnapgridCenter
   description: A printing press for mass producing media, or in your case anti-NT propaganda.
   components:
-  - type: Transform
-    noRot: false
   - type: Sprite
     sprite: _Trauma/Structures/Machines/revprintingpress.rsi
-    snapCardinals: true
-    layers:
-    - state: icon
-      map: ["enum.LatheVisualLayers.IsRunning"]
   - type: Lathe
     producingSound: /Audio/_Trauma/Revs/printingpress.ogg
-    idleState: icon
     runningState: printingpress
     staticPacks:
     - RevPrintingPress
   - type: MaterialStorage
     whitelist:
       tags:
-        - Sheet
-  - type: ContainerContainer
-    containers:
-      machine_board: !type:Container
-      machine_parts: !type:Container
+      - Sheet
   - type: Construction
-    deconstructionTarget: null
-    graph: revPrintingPress
-    node: revPrintingPress
+    node: RevPrintingPress
 
 - type: entity
   parent: BaseRevIndustry
   id: RevRadioBench
   name: telecommunications workshop
-  placement:
-    mode: SnapgridCenter
   description: A device for hacking into nearby signals, allows the production of radiochips, turrets, as well as some upgrades for other machines.
   components:
-  - type: Transform
-    noRot: false
   - type: Sprite
     sprite: _Trauma/Structures/Machines/telecommsbench.rsi
-    snapCardinals: true
-    layers:
-    - state: icon
-      map: ["enum.LatheVisualLayers.IsRunning"]
   - type: Lathe
     producingSound: /Audio/_Trauma/Revs/commsworkbench.ogg
-    idleState: icon
     runningState: telecomms
     staticPacks:
     - RevTelecommsWorkbenchStatic
-  - type: ContainerContainer
-    containers:
-      machine_board: !type:Container
-      machine_parts: !type:Container
   - type: MaterialStorage
     whitelist:
       tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+      - Sheet
+      - RawMaterial
+      - Ingot
   - type: Construction
-    deconstructionTarget: null
-    graph: revTelecommsWorkbench
-    node: revTelecommsWorkbench
+    node: RevRadioBench
 
 - type: entity
   parent: BaseRevIndustry
   id: RevTelesphere
   name: telesphere
-  placement:
-    mode: SnapgridCenter
   description: An experimental device, it can be used to remotely steal materials from passing trade ships using plasma. Additionally; it can be used as a material silo for the revolution.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Machines/telesphere.rsi
-    snapCardinals: true
-    layers:
-    - state: icon
-      map: ["enum.LatheVisualLayers.IsRunning"]
   - type: Lathe
     producingSound: /Audio/_Trauma/Revs/telesphere.ogg
-    idleState: icon
     runningState: telesphere
     staticPacks:
     - RevTelesphereStatic
   - type: Construction
-    deconstructionTarget: null
-    graph: revTelesphere
-    node: revTelesphere
+    node: RevTelesphere
   - type: PointLight
     enabled: true
     color: "#ffffff"
@@ -208,8 +166,7 @@
   - type: DeviceLinkSource
     range: 1000
     ports:
-      - MaterialSilo
-  - type: Appearance
+    - MaterialSilo
   - type: MaterialStorage
     ignoreColor: true
   - type: Silo
@@ -218,29 +175,42 @@
   parent: BaseRevIndustry
   id: RevPrinter
   name: 3D printer
-  placement:
-    mode: SnapgridCenter
   description: Makes either cute little guys or gun parts, zero inbetween. This one can print both metal and plastic.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Machines/printer.rsi
-    snapCardinals: true
-    layers:
-    - state: icon
-      map: ["enum.LatheVisualLayers.IsRunning"]
   - type: Lathe
     producingSound: /Audio/_Trauma/Revs/printer.ogg
-    idleState: icon
     runningState: printer
     staticPacks:
     - RevPrinterStatic
   - type: MaterialStorage
     whitelist:
       tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+      - Sheet
+      - RawMaterial
+      - Ingot
   - type: Construction
-    deconstructionTarget: null
-    graph: rev3DPrinter
-    node: rev3DPrinter
+    node: RevPrinter
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevBulletPress
+  name: Bullet Press
+  description: Created ammo by pressing the bullet into the casing, this one is automated.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/bulletpress.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/bulletpress.ogg
+    runningState: bulletpress
+    staticPacks:
+    - RevBulletPressStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: Construction
+    node: RevBulletPress

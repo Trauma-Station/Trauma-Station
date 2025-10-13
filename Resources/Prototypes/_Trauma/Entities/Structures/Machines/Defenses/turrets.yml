@@ -1,23 +1,22 @@
 - type: entity
-  parent: [BaseWeaponBallisticTurret, BaseMajorContraband]
+  abstract: true
+  parent: [ BaseWeaponBallisticTurret, BaseMajorContraband ]
   id: BaseWeaponTurretRevolutionary
   suffix: Full
-  abstract: true
   components:
   - type: NpcFactionMember
     factions:
     - Revolutionary
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 50
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          Revturretelectronics:
+          RevTurretElectronics:
             min: 1
             max: 1
           SheetSteel1:
@@ -27,16 +26,17 @@
         sound:
           collection: MetalBreak
   - type: Repairable
-    qualityNeeded: "Anchoring"
+    qualityNeeded: Anchoring
     doAfterDelay: 3
+  - type: StaticPrice
+    price: 100
 
 - type: entity
-  parent: [BaseStructure, BaseMajorContraband]
+  abstract: true
+  parent: [ BaseStructure, BaseMajorContraband ]
   id: BaseWeaponTurretRevolutionaryMagazine
   suffix: Full
-  abstract: true
   components:
-  - type: Clickable
   - type: InteractionOutline
   - type: Actions
   - type: Fixtures
@@ -63,15 +63,14 @@
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 50
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
         spawn:
-          Revturretelectronics:
+          RevTurretElectronics:
             min: 1
             max: 1
           SheetSteel1:
@@ -99,18 +98,19 @@
   - type: NoRotateOnMove
   - type: Input
     context: "human"
-  - type: UnmannedWeaponry # Lavaland Change
+  - type: UnmannedWeaponry
   - type: Repairable
-    qualityNeeded: "Anchoring"
+    qualityNeeded: Anchoring
     doAfterDelay: 3
   - type: MagazineAmmoProvider
+  - type: StaticPrice
+    price: 100
 
 - type: entity
-  parent: [BaseWeaponTurretRevolutionary, BaseMajorContraband]
+  parent: BaseWeaponTurretRevolutionary
   id: WeaponTurretRevolutionaryPistolFull
-  suffix: Full
   name: improvised pistol turret
-  description: Fires at anything without the proper IFF signal, can only hold ten rounds, and has to be loaded. Careful with this thing.
+  description: Fires at anything without the proper IFF signal, can only hold ten rounds which must be hand loaded. Careful with this thing.
   components:
   - type: Gun
     fireRate: 0.5
@@ -122,7 +122,7 @@
     mayTransfer: true
     whitelist:
       tags:
-        - CartridgeTurret
+      - CartridgeTurret
     proto: CartridgeTurret
     capacity: 15
   - type: Sprite
@@ -132,7 +132,7 @@
     - state: revturretpistol
 
 - type: entity
-  parent: [WeaponTurretRevolutionaryPistolFull, BaseMajorContraband]
+  parent: WeaponTurretRevolutionaryPistolFull
   id: WeaponTurretRevolutionaryPistol
   suffix: Empty
   components:
@@ -140,14 +140,14 @@
     proto: null
   - type: Construction
     deconstructionTarget: null
-    graph: revTurretPistol
-    node: revTurretPistol
+    graph: RevTurret
+    node: RevTurretPistol
 
 - type: entity
-  parent: [BaseWeaponTurretRevolutionaryMagazine, BaseMajorContraband]
+  parent: BaseWeaponTurretRevolutionaryMagazine
   id: WeaponTurretRevolutionarySMG
   name: improvised smg turret
-  description: Fires at anything without the proper IFF signal, this one is magazine loaded, but extremely innaccurate.
+  description: Fires at anything without the proper IFF signal. This one is magazine loaded, but extremely innaccurate.
   suffix: Empty
   components:
   - type: Gun
@@ -181,24 +181,14 @@
       gun_chamber: !type:ContainerSlot
   - type: Construction
     deconstructionTarget: null
-    graph: revTurretSMG
-    node: revTurretSMG
+    graph: RevTurret
+    node: RevTurretSMG
 
 - type: entity
-  parent: [WeaponTurretRevolutionarySMG, BaseMajorContraband]
+  parent: WeaponTurretRevolutionarySMG
   id: WeaponTurretRevolutionarySMGFull
   suffix: Full
   components:
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: BaseMagazineTurret
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineTurret
-        whitelistFailPopup: gun-magazine-whitelist-fail
-        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-
+  - type: ContainerFill
+    containers:
+      gun_magazine: [ BaseMagazineTurret ]

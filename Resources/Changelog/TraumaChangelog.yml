@@ -93,3 +93,55 @@ Entries:
       message: the grinning pals
   id: 10
   time: '2025-10-11T05:16:28.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Unfinished rev weapons now tell you the construction steps when
+        examined.
+    - type: Tweak
+      message: Rev gears and stuff can now be stacked.
+    - type: Tweak
+      message: >-
+        Rev machines actually need tools to make, you can't just summon it with
+        your mind in 5 seconds.
+    - type: Tweak
+      message: Rev chestplate is now normal sized instead of tiny.
+  id: 11
+  time: '2025-10-11T16:22:28.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Rev bullet press
+    - type: Add
+      message: Rev resistance gun
+    - type: Tweak
+      message: fix a bunch of bugs
+  id: 12
+  time: '2025-10-11T18:53:00.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Removed pain pending rework (goidaden reference)
+  id: 13
+  time: '2025-10-11T20:55:26.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed slaughter demon popups being visible to everyone
+  id: 14
+  time: '2025-10-12T08:26:21.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Changed rev machine cost from 30 to 5 steel.
+    - type: Tweak
+      message: Changed rev propaganda cost from 30 to 10 paper.
+  id: 15
+  time: '2025-10-12T08:33:55.0000000+00:00'
+- author: Speebro
+  changes:
+    - type: Tweak
+      message: Max nukies is 5, but this doesn't affect buying reinforcements.
+  id: 16
+  time: '2025-10-13T01:56:02.0000000+00:00'

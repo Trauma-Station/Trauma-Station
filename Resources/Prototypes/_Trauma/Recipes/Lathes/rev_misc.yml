@@ -1,0 +1,65 @@
+- type: latheRecipe
+  id: ClothingOuterArmorRev
+  result: ClothingOuterArmorRev
+  completetime: 15
+  materials:
+    Steel: 1500
+
+- type: latheRecipe
+  id: RevDropPodTraps
+  result: RevDropPodTraps
+  completetime: 6
+  materials:
+    Silver: 100
+    Gold: 100
+    Steel: 300
+    Glass: 100
+
+- type: latheRecipe
+  id: RevPropaganda
+  result: RevPropaganda
+  completetime: 60
+  materials:
+    Paper: 1000
+
+- type: latheRecipe
+  id: EncryptionKeyRev
+  result: EncryptionKeyRev
+  completetime: 6
+  materials:
+    Silver: 50
+    Gold: 50
+    Steel: 50
+
+- type: latheRecipe
+  id: RevTurretElectronics
+  result: RevTurretElectronics
+  completetime: 6
+  materials:
+    Glass: 500
+    Gold: 150
+
+- type: latheRecipe
+  id: RevIFF
+  result: ClothingRevolutionaryIFF
+  completetime: 6
+  materials:
+    Plastic: 100
+    Gold: 150
+
+- type: latheRecipe
+  id: TrackingImplanterRev
+  result: TrackingImplanterRev
+  completetime: 6
+  materials:
+    Plastic: 100
+    Gold: 500
+    Silver: 500
+
+- type: latheRecipe
+  id: RevGunParts
+  result: RevGunParts
+  completetime: 15
+  materials:
+    Plasteel: 300
+    Plastic: 100
