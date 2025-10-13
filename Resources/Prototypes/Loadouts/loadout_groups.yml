@@ -229,18 +229,20 @@
   - WhiteCane
   - TapeRecorder
   # End DeltaV Additions
-  - SprayPaintRed # Trauma
-  - SprayPaintGreen # Trauma
-  - SprayPaintBlue # Trauma
-  - SprayPaintBlack # Trauma
-  - SprayPaintOrange # Trauma
-  - SprayPaintPurple # Trauma
-  - SprayPaintWhite # Trauma
-  - SprayPaintFunny # Trauma
-  - SprayPaintFunnyYellow # Trauma
-  - SprayPaintDeath # Trauma
-  - SprayPaintDeathTwo # Trauma
-  - SprayPainterAmmo # Trauma
+  #<Trauma>
+  - SprayPaintRed
+  - SprayPaintGreen
+  - SprayPaintBlue
+  - SprayPaintBlack
+  - SprayPaintOrange
+  - SprayPaintPurple
+  - SprayPaintWhite
+  - SprayPaintFunny
+  - SprayPaintFunnyYellow
+  - SprayPaintDeath
+  - SprayPaintDeathTwo
+  - SprayPainterAmmo
+  #</Trauma>
 
 - type: loadoutGroup
   id: Glasses
