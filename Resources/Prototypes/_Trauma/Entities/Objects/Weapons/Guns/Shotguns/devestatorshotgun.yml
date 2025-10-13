@@ -1,0 +1,34 @@
+- type: entity
+  parent: [ BaseItem, BaseMajorContraband, BaseWeaponShotgun, BaseGunWieldable ]
+  id: WeaponShotgunDevestator
+  name: devestator shotgun
+  description: A 4 barrel shotgun that's surprisingly shit, the barrels are barely lined up... but it's still deadly.
+  suffix: Full
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Shotguns/devestator.rsi
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,3,1
+    sprite: _Trauma/Objects/Weapons/Guns/Shotguns/devestator.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Guns/Shotguns/devestator.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: GunRequiresWield
+  - type: Gun
+    fireRate: 4
+  - type: GunSpreadModifier
+    spread: 2
+  - type: BallisticAmmoProvider
+    capacity: 4
+
+- type: entity
+  parent: WeaponShotgunDevestator
+  id: WeaponShotgunDevestatorEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
