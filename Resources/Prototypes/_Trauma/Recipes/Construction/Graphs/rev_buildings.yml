@@ -7,7 +7,7 @@
     - to: unfinished
       steps:
       - material: Steel
-        amount: 30
+        amount: 5
         doAfter: 5
   - node: unfinished
     entity: RevUnfinishedMachine

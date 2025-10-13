@@ -1,8 +1,6 @@
-// TraumaStation addition
-
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Charges;
+namespace Content.Trauma.Common.Charges;
 
 [Serializable, NetSerializable]
 public enum ChargesVisuals : byte

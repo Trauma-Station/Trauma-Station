@@ -1,12 +1,23 @@
 - type: entity
-  abstract: true
-  parent: [ BaseItem, BaseMinorContraband ]
-  id: BaseUnfinishedRevWeapon
+  parent: BaseItem
+  id: RevUnfinishedComponent
+  name: steel chunk
+  description: A misshapen lump of steel, clearly being worked into something.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Revs/components.rsi
+    state: unfinished
   - type: Construction
+    graph: RevParts
     deconstructionTarget: null
+    node: unfinished
+
+- type: entity
+  abstract: true
+  parent: [ RevUnfinishedComponent, BaseRevMinorContraband ]
+  id: BaseUnfinishedRevWeapon
+  components:
+  - type: Construction
     defaultTarget: finished
     node: start
 
@@ -90,7 +101,7 @@
     graph: RevPitchfork
 
 - type: entity
-  parent: [ BaseItem, BaseMinorContraband ]
+  parent: [ BaseItem, BaseRevMinorContraband ]
   id: RevUnfinishedGun
   name: misshapen steel chunk
   description: A sheet of steel bent into the rough shape of a gun. It needs a lot more work before firing.

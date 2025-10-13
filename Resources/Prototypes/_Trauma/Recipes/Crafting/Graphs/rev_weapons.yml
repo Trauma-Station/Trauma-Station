@@ -144,9 +144,7 @@
       - material: RevNut
       - tool: Anchoring
         doAfter: 2
-      - material: RevGunParts
-      - tool: Screwing
-        doAfter: 1
+      - tool: Welding
   - node: RevResistance
     entity: WeaponSMGResistanceEmpty
 
