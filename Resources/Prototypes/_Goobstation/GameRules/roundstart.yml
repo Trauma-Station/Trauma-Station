@@ -359,7 +359,7 @@
     - prefRoles: [ Nukeops ]
       fallbackRoles: [ NukeopsCommander, NukeopsMedic ]
       spawnerPrototype: SpawnPointNukeopsOperative
-      max: 10 # Goobstation / 古布空间站 - 没有限制的核特工
+      max: 5 # Goobstation / 古布空间站 - 没有限制的核特工 # Traumastation / 创伤站——亲爱的领导要求削减核行动人员
       playerRatio: 16 # Goobstation
       startingGear: SyndicateOperativeGearFullHonkops
       roleLoadout:
