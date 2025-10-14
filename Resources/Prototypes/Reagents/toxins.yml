@@ -583,8 +583,8 @@
           - !type:OrganType # Goobstation - Yowie
             type: Yowie
             shouldHave: false
-          - !type:OrganType
-            type: Plant # Trauma
+          - !type:OrganType # Trauma
+            type: Plant 
             shouldHave: false
         type: Local
         visualType: MediumCaution
@@ -602,8 +602,8 @@
           - !type:OrganType # Goobstation - Yowie
             type: Yowie
             shouldHave: false
-          - !type:OrganType
-            type: Plant # Trauma
+          - !type:OrganType # Trauma
+            type: Plant 
             shouldHave: false
       - !type:HealthChange
         conditions:
@@ -616,8 +616,8 @@
         - !type:OrganType # Goobstation - Yowie
           type: Yowie
           shouldHave: false
-        - !type:OrganType
-          type: Plant # Trauma
+        - !type:OrganType # Trauma
+          type: Plant 
           shouldHave: false
         damage:
           types:
@@ -634,12 +634,13 @@
           type: Vox
         reagent: Protein
         amount: 0.25
-      - !type:AdjustReagent
+      - !type:AdjustReagent # Trauma
         conditions:
         - !type:OrganType
-          type: Plant # Trauma
+          type: Plant
         reagent: Protein
         amount: 0.5
+        
 - type: reagent
   id: Allicin
   name: reagent-name-allicin
