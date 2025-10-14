@@ -16,8 +16,8 @@
 - type: latheRecipe
   id: RevDoor
   parent: BaseRevGadget
-  result:
-  materials: RevDoorFlatpack
+  result: RevDoorFlatpack
+  materials:
     Steel: 500
     Plastic: 50
     Glass: 150

@@ -149,7 +149,7 @@ namespace Content.Shared.Construction.Prototypes
                 var current = frontier.Dequeue();
                 foreach (var edge in current.Edges)
                 {
-                    var edgeNode = _nodes[edge.Target];
+                    w
                     if(cameFrom.ContainsKey(edgeNode)) continue;
                     frontier.Enqueue(edgeNode);
                     cameFrom[edgeNode] = current;

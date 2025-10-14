@@ -4,3 +4,4 @@ construction-graph-tag-turretboard = revolutionary turret circuit board
 construction-graph-tag-hand-teleporter = hand teleporter
 construction-graph-tag-RCD = RCD
 construction-graph-tag-encryption-revolutionary = revolutionary encryption key
+construction-graph-tag-paper = paper
