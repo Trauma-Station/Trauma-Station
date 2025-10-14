@@ -1,5 +1,4 @@
 ﻿using Content.Shared.EntityEffects;
-using Content.Shared.IdentityManagement;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects.EffectConditions;
