@@ -1,0 +1,58 @@
+- type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerGeneticsConsole
+  name: genetics console
+  description: From here you can research mysteries of DNA!
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: dna
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: Computer
+    board: GeneticsConsoleCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#1f8c28"
+  - type: GeneticsConsole
+    scanSound: /Audio/Machines/beep.ogg
+    sequenceFailSound: /Audio/Effects/smoke.ogg
+    writeSound: /Audio/Machines/printer.ogg
+  - type: DoAfter # to start the doafters
+  - type: ItemSlots
+    slots:
+      genetics_disk:
+        whitelist:
+          insertSound: /Audio/Machines/scanning.ogg
+          ejectSound: /Audio/Machines/tray_eject.ogg
+          components:
+          - GeneticsDisk
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+      genetics_disk: !type:ContainerSlot
+  - type: DeviceNetwork
+    deviceNetId: Wired
+  - type: DeviceLinkSource
+    range: 4
+    ports:
+    - MedicalScannerSender
+  - type: ActivatableUI
+    key: enum.GeneticsConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.GeneticsConsoleUiKey.Key:
+        type: GeneticsConsoleBUI
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: GuideHelp
+    guides:
+    - Genetics

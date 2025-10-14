@@ -20,6 +20,7 @@
       - chest
       organs:
         brain: OrganDionaBrainNymph
+        eyes: OrganDionaEyes # Trauma
     chest:
       part: ChestDiona
       connections:

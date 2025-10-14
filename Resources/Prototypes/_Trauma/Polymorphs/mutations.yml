@@ -1,0 +1,15 @@
+- type: polymorph
+  id: MutationMonkey
+  configuration:
+    entity: MobMonkey
+    forced: true
+    inventory: Transfer
+    polymorphSound: /Audio/Animals/monkey_scream.ogg
+
+- type: polymorph
+  id: MutationMouse
+  configuration:
+    entity: MobMouse
+    forced: true
+    inventory: Drop
+    polymorphSound: /Audio/Animals/mouse_squeak.ogg

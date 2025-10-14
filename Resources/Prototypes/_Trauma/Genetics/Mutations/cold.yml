@@ -1,0 +1,35 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationGeladikinesis
+  name: Geladikinesis
+  description: Allows the user to concentrate moisture and sub-zero forces into snow.
+  components:
+  - type: Mutation
+    instability: 10
+    difficulty: 10
+  - type: ActionMutation
+    action: ActionMutationGeladikinesis
+
+- type: entity
+  parent: BaseMutation
+  id: MutationCryokinesis
+  name: Cryokinesis
+  description: Draws negative energy from the sub-zero void to freeze surrounding temperatures at subject's will.
+  components:
+  - type: Mutation
+    instability: 25
+    difficulty: 12
+  # TODO
+
+- type: entity
+  parent: BaseConjureAction
+  id: ActionMutationGeladikinesis
+  name: Create Snow
+  description: Concentrates cryokinetic forces to create snow, useful for snow-like construction.
+  components:
+  - type: Action
+    icon:
+      sprite: _Goobstation/Actions/mutations.rsi
+      state: cold
+  - type: ConjureAction
+    spawn: Snowcone # TODO: if anyone ever makes a snow item, spawn that instead

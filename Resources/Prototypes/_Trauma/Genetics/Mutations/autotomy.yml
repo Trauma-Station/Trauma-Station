@@ -1,0 +1,28 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationAutotomy
+  name: Autotomy
+  description: Allows a creature to voluntary discard a random appendage.
+  components:
+  - type: Mutation
+    instability: 10
+  - type: ActionMutation
+    action: ActionMutationAutotomy
+  - type: AutotomyMutation
+  # TODO
+
+- type: entity
+  parent: BaseAction
+  id: ActionMutationAutotomy
+  name: Drop a limb
+  description: Concentrate to make a random limb pop right off your body.
+  components:
+  - type: Action
+    icon:
+      sprite: _Goobstation/Actions/mutations.rsi
+      state: autotomy
+  - type: UseDelay
+    delay: 10
+  - type: InstantAction
+    event: !type:AutotomyActionEvent
+  # TODO: implement, dismembers a random non-head non-groin non-chest bodypart

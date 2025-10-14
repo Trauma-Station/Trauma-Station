@@ -1,0 +1,21 @@
+- type: entity
+  parent: BaseItem
+  id: GeneticsDisk
+  name: genetics disk
+  description: A storage disk capable of encoding a single mutation for use in a genetics console.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    layers:
+    - state: datadisk_base
+    - state: datadisk_label
+  - type: GeneticsDisk
+
+# admin aboose
+- type: entity
+  parent: GeneticsDisk
+  id: GeneticsDiskUnstableDna
+  suffix: Unstable DNA
+  components:
+  - type: GeneticsDisk
+    mutation: MutationUnstableDna

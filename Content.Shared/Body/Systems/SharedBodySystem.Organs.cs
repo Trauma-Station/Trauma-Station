@@ -137,7 +137,7 @@ public partial class SharedBodySystem
         Dirty(organEnt, organEnt.Comp);
     }
 
-    private void RemoveOrgan(Entity<OrganComponent> organEnt, EntityUid parentPartUid)
+    public void RemoveOrgan(Entity<OrganComponent> organEnt, EntityUid parentPartUid) // Trauma - public
     {
         var removedEv = new OrganRemovedEvent(parentPartUid, organEnt.Comp.Body); // Shitmed - add body
         RaiseLocalEvent(organEnt, ref removedEv);
@@ -160,7 +160,7 @@ public partial class SharedBodySystem
     /// <summary>
     /// Creates the specified organ slot on the parent entity.
     /// </summary>
-    private OrganSlot? CreateOrganSlot(Entity<BodyPartComponent?> parentEnt, string slotId)
+    public OrganSlot? CreateOrganSlot(Entity<BodyPartComponent?> parentEnt, string slotId) // Trauma - public
     {
         if (!Resolve(parentEnt, ref parentEnt.Comp, logMissing: false))
             return null;

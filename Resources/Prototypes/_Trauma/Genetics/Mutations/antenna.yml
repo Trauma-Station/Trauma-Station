@@ -1,0 +1,29 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationAntenna
+  name: Antenna
+  description: The affected person sprouts an antenna. This is known to allow them to access common radio channel passively.
+  components:
+  - type: Mutation
+    instability: 10
+  # TODO give a radio implant
+
+- type: entity
+  parent: BaseMutation
+  id: MutationMindReader
+  name: Mind Reader
+  description: The affected person can look into the recent memories of others.
+  components:
+  - type: Mutation
+    instability: 10
+    requires:
+    - MutationAntenna
+    - MutationParanoia
+  - type: RemovesMutation
+    removes:
+    - MutationAntenna
+    # keep your paranoia :)
+  # TODO: evil thing
+  # TODO: 20% chance to tell them "You feel something foreign enter your mind."
+  # TODO: say up to 3 lines of last chat messages, with each having 50% chance
+  # TODO: doxx the real identity

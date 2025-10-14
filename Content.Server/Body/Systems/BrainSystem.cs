@@ -73,11 +73,13 @@ namespace Content.Server.Body.Systems
                 || HasComp<ChangelingComponent>(args.Body))
                 return;
 
+            // <Trauma>
+            RemComp<DebrainedComponent>(args.Body);
             if (!CheckOtherBrains(args.Body))
             {
-                RemComp<DebrainedComponent>(args.Body);
                 HandleMind(args.Body, uid, brain);
             }
+            // </Trauma>
         }
 
 

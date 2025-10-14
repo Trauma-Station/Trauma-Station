@@ -1,0 +1,5 @@
+- type: emote
+  id: Twitch
+  name: chat-emote-name-twitch
+  category: General
+  chatMessages: ["chat-emote-msg-twitch"]

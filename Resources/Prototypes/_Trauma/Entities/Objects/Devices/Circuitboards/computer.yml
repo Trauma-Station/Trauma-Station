@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: GeneticsConsoleCircuitboard
+  name: genetics computer board
+  description: A computer printed circuit board for a genetics console.
+  components:
+  - type: Sprite
+    state: cpu_medical
+  - type: ComputerBoard
+    prototype: ComputerGeneticsConsole

@@ -682,6 +682,10 @@ public abstract class SharedActionsSystem : EntitySystem
 
         if (!action.Comp.RaiseOnUser && action.Comp.Container is {} container && !_mindQuery.HasComp(container))
             target = container;
+        // <Trauma>
+        if (action.Comp.RaiseOnAction)
+            target = action.Owner;
+        // </Trauma>
 
         RaiseLocalEvent(target, (object) ev, broadcast: true);
         handled = ev.Handled;

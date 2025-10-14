@@ -245,7 +245,7 @@ public partial class SharedBodySystem
 
             if (part.Body is not null)
             {
-                RemovePart(part.Body.Value, (removedUid, part), slotId);
+                //RemovePart(part.Body.Value, (removedUid, part), slotId); // Trauma - arm keeps hand when severed
                 RecursiveBodyUpdate((removedUid, part), null);
             }
         }
@@ -436,7 +436,7 @@ public partial class SharedBodySystem
     /// <summary>
     /// Creates a BodyPartSlot on the specified partUid.
     /// </summary>
-    private BodyPartSlot? CreatePartSlot(
+    public BodyPartSlot? CreatePartSlot( // Trauma - public
         EntityUid partUid,
         string slotId,
         BodyPartType partType,

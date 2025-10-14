@@ -23,6 +23,7 @@
       - chest
       organs:
         brain: OrganHumanBrain
+        eyes: OrganHumanEyes # Trauma - it had none
     chest:
       part: ChestHuman
       connections:

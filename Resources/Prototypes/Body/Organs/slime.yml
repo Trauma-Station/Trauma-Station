@@ -44,7 +44,7 @@
         Normal: 60
         Damaged: 27
         Destroyed: 0
-      slotId: core
+      slotId: stomach # Trauma - stomach not core
     - type: Metabolizer
       maxPoisonsProcessable: 2 # Shitmed
       metabolizerTypes: [ Slime ]

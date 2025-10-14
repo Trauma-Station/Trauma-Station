@@ -1,0 +1,34 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationHulk # the big one
+  name: Hulk
+  description: A poorly understood genome that causes the holder's muscles to expand, inhibit speech and gives the person a bad skin condition.
+  components:
+  - type: Mutation
+    instability: 35
+    difficulty: 16
+    requires:
+    - MutationRadioactive
+    - MutationStrength
+    conflicts:
+    - MutationOrk
+  # TODO: species lock to human
+  # TODO: chunky fingers, no shoving or stunning
+  # TODO: always shout
+  # TODO: holy shit
+
+- type: entity
+  parent: MutationHulk
+  id: MutationOrk
+  name: Ork
+  description: A mutation caused by a mixup of hulk genes which severely impacts speech centers in owners' brains.
+  components:
+  - type: Mutation
+    requires:
+    - MutationHulk
+    - MutationClumsy
+    conflicts: [] # uninherit ork conflict
+  - type: RemovesMutation
+    removes:
+    - MutationHulk
+  # TODO: change skin colour to brown and add Ork accent

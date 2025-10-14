@@ -119,6 +119,12 @@
   - type: InnateMiningScannerViewer # Frontier
     pingSound: null
     viewRange: 3 # Goob value
+  - type: Mutatable # Trauma - dwarves have dwarfism
+    defaultMutations:
+      MutationDwarfism: 1.0
+    dormant:
+    - MutationDwarfism
+    - MutationRockEater # non parity but peak
 
 - type: entity
   parent: BaseSpeciesDummy

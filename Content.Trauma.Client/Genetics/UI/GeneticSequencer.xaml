@@ -1,0 +1,38 @@
+<Control xmlns="https://spacestation14.io"
+        xmlns:genetics="using:Content.Trauma.Client.Genetics.UI"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        HorizontalExpand="True"
+        VerticalExpand="True">
+	<BoxContainer Name="ErrorContainer" Align="Center" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+		<controls:StripeBack>
+			<Label Name="ErrorLabel" HorizontalAlignment="Center" Margin="8"/>
+		</controls:StripeBack>
+		<Button Name="ScanButton" Text="{Loc 'genetics-console-scan'}" MaxWidth="80" Disabled="True"/>
+	</BoxContainer>
+	<BoxContainer Name="MobContainer" Orientation="Vertical" Visible="False">
+		<!-- List of sequences available -->
+		<controls:NanoHeading Text="{Loc 'genetics-console-sequences'}"/>
+		<ScrollContainer HorizontalExpand="True" SetHeight="40">
+			<BoxContainer Name="SequenceButtons" HorizontalExpand="True" VerticalExpand="True" Align="Center"/> <!-- Populated at runtime -->
+		</ScrollContainer>
+		<controls:HLine Thickness="2" Margin="4" Color="#424242"/>
+		<!-- Mutation Info -->
+		<BoxContainer Name="SequenceInfo" Orientation="Vertical" VerticalExpand="True" Visible="False">
+			<!-- Metadata -->
+		<controls:NanoHeading Text="{Loc 'genetics-console-sequence-info'}"/>
+			<GridContainer Columns="2">
+				<Label Text="{Loc 'genetics-console-mutation-name'}"/>
+				<Label Name="MutationName"/>
+				<Label Text="{Loc 'genetics-console-mutation-desc'}"/>
+				<Label Name="MutationDesc"/>
+				<Label Text="{Loc 'genetics-console-mutation-instability'}"/>
+				<Label Name="MutationInstability"/>
+			</GridContainer>
+			<Button Name="WriteButton" Text="{Loc 'genetics-console-write-mutation'}" Disabled="True"/>
+			<genetics:GenePuzzle Name="Puzzle"/>
+		</BoxContainer>
+		<BoxContainer Name="NoSequence" Align="Center">
+			<Label Text="{Loc 'genetics-console-sequencer-no-sequence-selected'}"/>
+		</BoxContainer>
+	</BoxContainer>
+</Control>

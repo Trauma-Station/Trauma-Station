@@ -53,6 +53,7 @@ using Content.Shared.Body.Components;
 using Content.Shared.Climbing.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Trauma.Common.Medical; // Trauma
 using Robust.Server.Containers;
 using static Content.Shared.MedicalScanner.SharedMedicalScannerComponent; // Hmm...
 
@@ -139,7 +140,7 @@ namespace Content.Server.Medical
 
         private void AddAlternativeVerbs(EntityUid uid, MedicalScannerComponent component, GetVerbsEvent<AlternativeVerb> args)
         {
-            if (!args.CanAccess || !args.CanInteract)
+            if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract) // Goobstation - complex check
                 return;
 
             // Eject verb
@@ -181,20 +182,36 @@ namespace Content.Server.Medical
 
         private void OnPortDisconnected(EntityUid uid, MedicalScannerComponent component, PortDisconnectedEvent args)
         {
+            // <Trauma>
+            if (args.Port != MedicalScannerComponent.ScannerPort)
+                return;
+
+            if (component.ConnectedConsole is {} console)
+            {
+                var ev = new ScannerDisconnectedEvent(uid);
+                RaiseLocalEvent(console, ref ev);
+            }
+            // </Trauma>
             component.ConnectedConsole = null;
         }
 
         private void OnAnchorChanged(EntityUid uid, MedicalScannerComponent component, ref AnchorStateChangedEvent args)
         {
-            if (component.ConnectedConsole == null || !TryComp<CloningConsoleComponent>(component.ConnectedConsole, out var console))
+            // <Trauma> rewrote for reuse with genetics, cloning console UI moved into its own system
+            if (component.ConnectedConsole is not {} console)
                 return;
 
             if (args.Anchored)
             {
-                _cloningConsoleSystem.RecheckConnections(component.ConnectedConsole.Value, console.CloningPod, uid, console);
-                return;
+                var ev = new ScannerConnectedEvent(uid);
+                RaiseLocalEvent(console, ref ev);
             }
-            _cloningConsoleSystem.UpdateUserInterface(component.ConnectedConsole.Value, console);
+            else
+            {
+                var ev = new ScannerDisconnectedEvent(uid);
+                RaiseLocalEvent(console, ref ev);
+            }
+            // </Trauma>
         }
         private MedicalScannerStatus GetStatus(EntityUid uid, MedicalScannerComponent scannerComponent)
         {
@@ -271,6 +288,13 @@ namespace Content.Server.Medical
 
             _containerSystem.Insert(to_insert, scannerComponent.BodyContainer);
             UpdateAppearance(uid, scannerComponent);
+            // <Trauma>
+            if (scannerComponent.ConnectedConsole is {} console)
+            {
+                var ev = new ScannerInsertedEvent(uid, to_insert);
+                RaiseLocalEvent(console, ref ev);
+            }
+            // </Trauma>
         }
 
         public void EjectBody(EntityUid uid, MedicalScannerComponent? scannerComponent)
@@ -284,6 +308,13 @@ namespace Content.Server.Medical
             _containerSystem.Remove(contained, scannerComponent.BodyContainer);
             _climbSystem.ForciblySetClimbing(contained, uid);
             UpdateAppearance(uid, scannerComponent);
+            // <Trauma>
+            if (scannerComponent.ConnectedConsole is {} console)
+            {
+                var ev = new ScannerEjectedEvent(uid, contained);
+                RaiseLocalEvent(console, ref ev);
+            }
+            // </Trauma>
         }
     }
 }

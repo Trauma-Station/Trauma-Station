@@ -1819,6 +1819,11 @@
     - MindRoleGhostRoleFreeAgent
   - type: GhostTakeoverAvailable
   - type: Skinnable # Goobstation - Fuck pun-pun
+  - type: Mutatable # Trauma - genetics
+    defaultMutations:
+      MutationMonkified: 1.0 # always monkey...
+    dormant:
+    - MutationMonkified
   - type: Clumsy
     gunShootFailDamage:
       types:

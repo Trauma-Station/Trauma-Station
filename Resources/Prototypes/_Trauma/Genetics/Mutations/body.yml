@@ -1,0 +1,359 @@
+# Free stability
+
+- type: entity
+  parent: BaseMutation
+  id: MutationEpilepsy
+  name: Epilepsy
+  description: A genetic defect that sporadically causes seizures.
+  components:
+  - type: Mutation
+    instability: -30
+  # TODO
+
+- type: entity
+  parent: BaseMutation
+  id: MutationCough
+  name: Cough
+  description: A chronic cough.
+  components:
+  - type: Mutation
+    instability: -30
+  # TODO
+
+- type: entity
+  parent: BaseMutation
+  id: MutationParanoia
+  name: Paranoia
+  description: Subject is easily terrified, and may suffer from hallucinations.
+  components:
+  - type: Mutation
+    instability: -30
+  # TODO
+
+# Height
+
+- type: entity
+  parent: BaseMutation
+  id: MutationDwarfism
+  name: Dwarfism
+  description: A mutation believed to be the cause of dwarfism.
+  components:
+  - type: Mutation
+    locked: true # dwarf default mutation
+    instability: 10
+    difficulty: 16
+    conflicts:
+    - MutationAcromegaly
+    - MutationGigantism
+  # TODO
+
+- type: entity
+  parent: BaseMutation
+  id: MutationAcromegaly
+  name: Acromegaly
+  description: "A mutation believed to be the cause of acromegaly, or 'being unusually tall'."
+  components:
+  - type: Mutation
+    instability: -30
+    difficulty: 16
+    conflicts:
+    - MutationDwarfism
+  # TODO
+
+- type: entity
+  parent: BaseFreeMutation
+  id: MutationGigantism
+  name: Gigantism
+  description: The cells within the subject spread out to cover more area, making the subject appear larger.
+  components:
+  - type: Mutation
+    difficulty: 12
+    conflicts:
+    - MutationDwarfism
+  # TODO
+
+# Disabilities
+
+- type: entity
+  parent: BaseMutation
+  id: MutationClumsiness
+  name: Clumsiness
+  description: A genome that inhibits certain brain functions, causing the holder to appear clumsy. Honk!
+  components:
+  - type: Mutation
+    instability: -40
+  - type: ComponentMutation
+    added:
+    - type: Clumsy
+      gunShootFailDamage:
+        types: # literally just copied semi random values a chud picked
+          Blunt: 5
+          Piercing: 4
+        groups:
+          Burn: 3
+
+- type: entity
+  parent: BaseFreeMutation
+  id: MutationTourettes
+  name: Tourette's Syndrome
+  description: A chronic twitch that forces the user to scream bad words.
+  components:
+  - type: RandomTrigger
+    # TODO: make this be affected by synchronizer chromosome
+    prob: 0.05
+  - type: EffectOnTriggerMutation
+    states: [ Alive ]
+    effects:
+    - !type:WeightedRandomEffect
+      children:
+      - weight: 1
+        effect: !type:Emote
+          emote: Twitch
+      - weight: 2
+        effect: !type:Speak
+          id: TourettesSwearing
+
+- type: entity
+  parent: BaseMutation
+  id: MutationDeafness
+  name: Deafness
+  description: The holder of this genome is completely deaf.
+  components:
+  - type: Mutation
+    instability: -40
+  - type: ComponentMutation
+    added:
+    - type: Deaf
+      permanent: true
+
+- type: entity
+  parent: BaseMutation
+  id: MutationMonkified
+  name: Monkified
+  description: A strange genome, believing to be what differentiates monkeys from humans.
+  components:
+  - type: Mutation
+    instability: -40 # mmmonky
+    locked: true # specific to monkeys (active) and humans (dormant)
+  - type: PolymorphMutation
+    prototype: MutationMonkey
+
+# Powergaming
+
+- type: entity
+  parent: BaseMutation
+  id: MutationGlowy
+  name: Glowy
+  description: You permanently emit a light with a random color and intensity.
+  components:
+  - type: Mutation
+    instability: 5
+    conflicts:
+    - MutationAntiGlow
+  # TODO: point light with random colour and intensity
+
+- type: entity
+  parent: MutationGlowy
+  id: MutationAntiGlow
+  name: Anti-Glow
+  description: "Your skin seems to attract and absorb nearby light creating 'darkness' around you."
+  components:
+  - type: Mutation
+    instability: 10
+    requires:
+    - MutationGlowy
+    - MutationVoidMagnet
+    conflicts: [] # uninherit
+  - type: RemovesMutation
+    removes:
+    - MutationGlowy
+  # TODO: negative point light??
+
+- type: entity
+  parent: BaseMutation
+  id: MutationStrength
+  name: Strength
+  description: The user's muscles slightly expand. Commonly seen in top-ranking boxers.
+  components:
+  - type: Mutation
+    instability: 5
+    difficulty: 16
+  # TODO
+
+- type: entity
+  parent: BaseMutation
+  id: MutationStimmed
+  name: Stimmed
+  description: The user's chemical balance is more robust. This mutation is known to slightly improve workout efficiency.
+  components:
+  - type: Mutation
+    instability: 5
+    difficulty: 16
+  # TODO
+
+- type: entity
+  parent: BaseMutation
+  id: MutationInsulated # tider holy grail
+  name: Insulated
+  description: The affected person does not conduct electricity.
+  components:
+  - type: Mutation
+    instability: 25
+    difficulty: 16
+  - type: ComponentMutation
+    added:
+    - type: Insulated
+
+# Dangerous though potentially useful
+
+- type: entity
+  parent: BaseFreeMutation
+  id: MutationFierySweat
+  name: Fiery Sweat
+  description: The user's skin will randomly combust, but is generally a lot more resilient to burning.
+  components:
+  - type: Mutation
+    difficulty: 14
+    conflicts:
+    - MutationHeatAdaptation
+    # TG does not have it incompatible with thermal adaptation :) have fun
+  # TODO: randomly ignite with chance proportional to instability, (0.05 + instability/19.5) * synch
+  # TODO: halve burn damage
+
+# if some yml warrior adds endermen give them this trust
+- type: entity
+  parent: BaseMutation
+  id: MutationSpatialInstability
+  name: Spatial Instability
+  description: The victim of the mutation has a very weak link to spatial reality, and may be displaced. Often causes extreme nausea.
+  components:
+  - type: Mutation
+    instability: -30
+    difficulty: 18
+  - type: ComponentMutation
+    added:
+    - type: ChaoticJump # technically anom infection can add this too but idgaf
+      jumpMinInterval: 15 # these are also the exact values anoms use
+      jumpMaxInterval: 25
+      # TODO: multiply interval by energy chromo
+      rangeMin: 10 # TODO: multiply by power
+      rangeMax: 15
+      effect: PuddleSparkle # TODO: copy shit from tg
+
+- type: entity
+  parent: BaseMutation
+  id: MutationAcidicFlesh
+  name: Acidic Flesh
+  description: Subject has acidic chemicals building up underneath the skin. This is often lethal.
+  components:
+  - type: Mutation
+    instability: -40
+    difficulty: 18
+  - type: RandomTrigger
+    prob: 0.13
+    # TODO: 20s cooldown on popups, 15% chance to splash acid
+  # TODO: randomly splash the user with acid, also make it so you splash acid when cut
+  # TODO: give it to xenos
+
+- type: entity
+  parent: BaseMutation
+  id: MutationSpastic
+  name: Spastic
+  description: Subject suffers from muscle spasms.
+  components:
+  - type: Mutation
+    instability: -30
+    difficulty: 16
+  # TODO
+
+- type: entity
+  parent: BaseMutation
+  id: MutationTwoLeftFeet
+  name: Two Left Feet
+  description: A mutation that replaces the right foot with another left foot. Symptoms include kissing the floor when taking a step.
+  components:
+  - type: Mutation
+    instability: -30
+    difficulty: 16
+  # TODO
+
+- type: entity
+  parent: BaseMutation
+  id: MutationInternalMartyrdom
+  name: Internal Martyrdom
+  description: A mutation that makes the body destruct when near death. Not damaging, but very, VERY disorienting.
+  components:
+  - type: Mutation
+    instability: -40
+    requires:
+    - MutationStrong
+    - MutationStimmed
+  # TODO
+
+- type: entity
+  parent: BaseMutation
+  id: MutationHeadless
+  name: H.A.R.S.
+  description: "A mutation that makes the body reject the head, the brain receding into the chest. Stands for Head Allergic Rejection Syndrome. Warning: Removing this mutation is very dangerous, though it will regenerate non-vital head organs."
+  components:
+  - type: Mutation
+    instability: -40
+    difficulty: 12
+  # TODO:
+  # 1. remove brain
+  # 2. delete head
+  # 3. add brain slot to chest
+  # 4. insert brain into chest brain slot
+
+# Peak of powergaming technology
+
+- type: entity
+  parent: BaseMutation
+  id: MutationHypermetabolicBlood
+  name: Hypermetabolic Blood
+  description: The subject's blood is hypermetabolic, causing it to be produced at a much faster rate.
+  components:
+  - type: Mutation
+    instability: 10
+    difficulty: 16
+
+- type: entity
+  parent: BaseMutation
+  id: MutationRockEater
+  name: Rock Eater
+  description: The subject's body is able to digest rocks and minerals.
+  components:
+  - type: Mutation
+    instability: 10
+    difficulty: 12
+    conflicts:
+    - MutationRockAbsorber # can't stack them, one-way conflict to allow upgrading
+  # TODO
+
+- type: entity
+  parent: MutationRockEater
+  id: MutationRockAbsorber
+  name: Rock Absorber
+  description: The subject's body is able to digest rocks and minerals, taking on their properties.
+  components:
+  - type: Mutation
+    instability: 35
+    conflicts: [] # uninherit conflicts so it doesn't conflict with itself
+    requires:
+    - MutationRockEater
+    - MutationStoner
+  - type: RemovesMutation
+    removes:
+    - MutationRockEater
+  # TODO
+
+- type: entity
+  parent: BaseMutation
+  id: MutationInexorable
+  name: Inexorable
+  description: Your body can push on beyond the limits of normal human endurance. However, pushing it too far can cause severe damage to your body.
+  components:
+  - type: Mutation
+    instability: 25
+    difficulty: 24
+  # TODO GOIDAMED: disable softcrit

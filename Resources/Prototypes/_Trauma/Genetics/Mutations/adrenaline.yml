@@ -1,0 +1,37 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationAdrenalineRush
+  name: Adrenaline Rush
+  description: Allows the host to trigger their body's adrenaline response at will.
+  components:
+  - type: Mutation
+    instability: 25
+  - type: ActionMutation
+    action: ActionMutationAdrenaline
+
+- type: entity
+  parent: BaseMutationAction
+  id: ActionMutationAdrenaline
+  name: Adrenaline!
+  description: Energize yourself, pushing your body to its limits!
+  components:
+  - type: Action
+    checkCanInteract: false # its your heart or something
+    useDelay: 2m
+    icon:
+      sprite: _Goobstation/actions/mutations.rsi
+      state: adrenaline
+  - type: InjectChemicalsAction
+    main:
+      # no Pump Up and using adrenaline instead of determination
+      reagents: [ Synaptizine, Adrenaline ]
+      baseQuantity: 10
+      popup: MutationAdrenalineRush-inject-popup
+    # no confusion system so theres no confusion reagent
+    comedown:
+      reagents: [ TiringSolution ]
+      baseQuantity: 7
+      popup: MutationAdrenalineRush-comedown-popup
+    comedownDelay: 25
+  - type: InstantAction
+    event: !type:InjectChemicalsActionEvent

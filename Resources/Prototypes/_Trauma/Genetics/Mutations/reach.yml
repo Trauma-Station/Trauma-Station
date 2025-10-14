@@ -1,0 +1,21 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationTelekinesis
+  name: Telekinesis
+  description: A strange mutation that allows the holder to interact with objects through thought.
+  components:
+  - type: Mutation
+    instability: 35
+    difficulty: 18
+  # TODO: remove obsruction from interaction checks, and replace action blockers with just consciousness/adminfreeze check?
+
+- type: entity
+  parent: BaseMutation
+  id: MutationElasticArms
+  name: Elastic Arms
+  description: Subject's arms have become elastic, allowing them to stretch up to a meter away. However, this elasticity makes it difficult to wear gloves, handle complex tasks, or grab large objects.
+  components:
+  - type: Mutation
+    instability: 35
+    difficulty: 32 # good luck chuddy
+  # TODO: increase interaction range by 1m

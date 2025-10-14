@@ -1,0 +1,12 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationRadioactivity
+  name: Radioactivity
+  description: A volatile mutation that causes the host to sent out deadly beta radiation. This affects both the host and their surroundings.
+  components:
+  - type: Mutation
+    instability: -40
+  - type: RadiationMutation
+  - type: RadiationSource
+    # TODO: specify its beta particles if that ever gets added
+    # TODO: disable source when target is dead

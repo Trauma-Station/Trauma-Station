@@ -1,0 +1,11 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationFarsight
+  name: Farsight
+  description: The subject's eyes are able to see further than normal.
+  components:
+  - type: Mutation
+    instability: 10
+    difficulty: 16
+  # TODO: power chromosome increases range by 3 instead of 1
+  # TODO: pvs troll??

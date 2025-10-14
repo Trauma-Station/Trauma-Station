@@ -69,6 +69,7 @@ using Robust.Shared.Network;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Popups;
 using Robust.Shared.Configuration;
+using Robust.Shared.Prototypes; // Trauma
 using Robust.Shared.Timing;
 using Content.Goobstation.Maths.FixedPoint;
 
@@ -280,7 +281,7 @@ public partial class SharedBodySystem
         }
     }
 
-    private void SetupOrgans(Entity<BodyPartComponent> ent, Dictionary<string, string> organs)
+    private void SetupOrgans(Entity<BodyPartComponent> ent, Dictionary<string, EntProtoId> organs) // Trauma - EntProtoId instead of string
     {
         foreach (var (organSlotId, organProto) in organs)
         {

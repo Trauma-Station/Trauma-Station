@@ -1,0 +1,11 @@
+# no Biotech Compatibility as there are no skillchips
+
+- type: entity
+  parent: BaseMutation
+  id: MutationClever
+  name: Clever
+  description: Causes the subject to feel just a little bit smarter. Most effective in specimens with low levels of intelligence.
+  components:
+  - type: Mutation
+    instability: 25
+  # TODO give random shit complex interaction and literacy

@@ -127,7 +127,7 @@ public sealed class BodyPrototypeSerializer : ITypeReader<BodyPrototype, Mapping
         var name = node.Get<ValueDataNode>("name").Value;
         var root = node.Get<ValueDataNode>("root").Value;
         var slotNodes = node.Get<MappingDataNode>("slots");
-        var allConnections = new Dictionary<string, (string? Part, HashSet<string>? Connections, Dictionary<string, string>? Organs)>();
+        var allConnections = new Dictionary<string, (string? Part, HashSet<string>? Connections, Dictionary<string, EntProtoId>? Organs)>(); // Trauma - EntProtoId instead of string
 
         foreach (var (slotId, valueNode) in slotNodes)
         {
@@ -150,10 +150,10 @@ public sealed class BodyPrototypeSerializer : ITypeReader<BodyPrototype, Mapping
                 }
             }
 
-            Dictionary<string, string>? organs = null;
+            Dictionary<string, EntProtoId>? organs = null; // Trauma - EntProtoId instead of string
             if (slot.TryGet("organs", out MappingDataNode? slotOrgansNode))
             {
-                organs = new Dictionary<string, string>();
+                organs = new Dictionary<string, EntProtoId>(); // Trauma - EntProtoId instead of string
 
                 foreach (var (organKey, organValueNode) in slotOrgansNode)
                 {
@@ -182,7 +182,7 @@ public sealed class BodyPrototypeSerializer : ITypeReader<BodyPrototype, Mapping
 
         foreach (var (slotId, (part, connections, organs)) in allConnections)
         {
-            var slot = new BodyPrototypeSlot(part, connections ?? new HashSet<string>(), organs ?? new Dictionary<string, string>());
+            var slot = new BodyPrototypeSlot(part, connections ?? new HashSet<string>(), organs ?? new Dictionary<string, EntProtoId>()); // Trauma - EntProtoId instead of string
             slots.Add(slotId, slot);
         }
 

@@ -152,7 +152,9 @@
             state: jumpsuit-female
   - type: Sprinter # Goob Change: human major
     staminaDrainRate: 8
-
+  - type: Mutatable # Trauma - genetics
+    dormant:
+    - MutationMonkified
 
 - type: entity
   parent: BaseSpeciesDummy

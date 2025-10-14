@@ -1,0 +1,28 @@
+- type: entity
+  parent: BaseItem
+  id: GeneticsMutator
+  name: mutator
+  description: A single-use injector of a mutagen designed to replicate a specific gene throughout the body.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: medipen
+      map: [ enum.MutatorVisuals.Layer ]
+  - type: Mutator
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.MutatorVisuals.Spent:
+        enum.MutatorVisuals.Layer:
+          True: { state: medipen_empty }
+          False: { state: medipen }
+
+- type: entity
+  parent: GeneticsMutator
+  id: GeneticsActivator
+  name: activator
+  description: A single-use injector of a mutagen which can activate a dormant mutation without increasing instability.
+  components:
+  - type: Mutator
+    activator: true

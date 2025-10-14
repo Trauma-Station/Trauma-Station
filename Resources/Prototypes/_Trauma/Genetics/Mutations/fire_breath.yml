@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationFireBreath
+  name: Fire Breath
+  description: An ancient mutation that gives lizards breath of fire.
+  components:
+  - type: Mutation
+    instability: 25
+    difficulty: 12
+    locked: true # need to get it via lizard dormant mutation

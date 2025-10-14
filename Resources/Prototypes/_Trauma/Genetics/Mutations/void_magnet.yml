@@ -1,0 +1,23 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationVoidMagnet
+  name: Void Magnet
+  description: A rare genome that attracts odd forces not usually observed.
+  components:
+  - type: Mutation
+    instability: 25
+  - type: ActionMutation
+    action: ActionMutationVoidMagnet
+
+- type: entity
+  parent: BaseMutationAction
+  id: ActionMutationVoidMagnet
+  name: Convoke Void
+  description: A rare genome that attracts odd forces not usually observed. May sometimes pull you in randomly.
+  components:
+  - type: Action
+    useDelay: 60
+  - type: InstantAction
+    event: !type:ConvokeVoidActionEvent
+  - type: ConvokeVoidAction
+  # TODO: have it randomly activate

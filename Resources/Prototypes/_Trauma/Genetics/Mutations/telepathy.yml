@@ -1,0 +1,9 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationTelepathy
+  name: Telepathy
+  description: A rare mutation that allows the user to telepathically communicate to others.
+  components:
+  - type: Mutation
+    instability: 10
+    difficulty: 12

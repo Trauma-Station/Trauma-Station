@@ -29,7 +29,7 @@
     groin:
       part: GroinSlime
       organs:
-        core: SentientSlimeCore
+        stomach: SentientSlimeCore # Trauma - stomach not core
       connections:
       - right leg
       - left leg

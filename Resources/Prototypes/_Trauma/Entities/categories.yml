@@ -1,0 +1,4 @@
+- type: entityCategory
+  id: Mutations
+  name: entity-category-name-mutations
+  hideSpawnMenu: true

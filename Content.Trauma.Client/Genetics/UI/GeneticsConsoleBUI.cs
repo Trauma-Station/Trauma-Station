@@ -1,0 +1,35 @@
+using Content.Trauma.Shared.Genetics.Console;
+using Robust.Client.UserInterface;
+
+namespace Content.Trauma.Client.Genetics.UI;
+
+public sealed class GeneticsConsoleBUI : BoundUserInterface
+{
+    private GeneticsConsoleWindow? _window;
+
+    public GeneticsConsoleBUI(EntityUid owner, Enum key) : base(owner, key)
+    {
+    }
+
+    protected override void Open()
+    {
+        base.Open();
+
+        _window = this.CreateWindow<GeneticsConsoleWindow>();
+        _window.SetEntity(Owner);
+        _window.OpenCentered();
+        _window.OnScan += () => SendPredictedMessage(new GeneticsConsoleScanMessage());
+        _window.OnSetBase += (s, i, b) => SendPredictedMessage(new GeneticsConsoleSetBaseMessage(s, i, b));
+        _window.OnWriteMutation += i => SendPredictedMessage(new GeneticsConsoleWriteMutationMessage(i));
+        _window.OnJoker += i => SendPredictedMessage(new GeneticsConsoleJokerMessage(i));
+        _window.OnSequence += i => SendPredictedMessage(new GeneticsConsoleSequenceMessage(i));
+    }
+
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        if (state is not GeneticsConsoleState cast)
+            return;
+
+        _window?.UpdateState(cast);
+    }
+}

@@ -1,0 +1,21 @@
+- type: entity
+  abstract: true
+  id: BaseMutation
+  components:
+  - type: Mutation
+
+- type: entity
+  abstract: true
+  parent: BaseMutation
+  id: BaseFreeMutation
+  components:
+  - type: Mutation
+    instability: 0
+
+- type: entity
+  abstract: true
+  parent: BaseAction
+  id: BaseMutationAction
+  components:
+  - type: Action
+    raiseOnAction: true # don't want to shit up the body entity with a bunch of action related components
