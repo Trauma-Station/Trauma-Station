@@ -44,5 +44,5 @@
     proto: null
   - type: Construction
     deconstructionTarget: null
-    graph: RevLiberator
-    node: RevLiberator
+    graph: RevGuns
+    node: liberator

@@ -17,7 +17,7 @@
       - material: RevGear
       - tool: Screwing
         doAfter: 1
-    - to: RevRadioBench
+    - to: telecomms workshop
       steps:
       - tag: EncryptionSecurity
         name: construction-graph-tag-seccomms
@@ -31,7 +31,7 @@
       - material: RevNut
       - tool: Anchoring
         doAfter: 2
-    - to: RevMicroelectronicsAssembler
+    - to: microelectronics assembler
       steps:
       - tool: Screwing
         doAfter: 1
@@ -43,7 +43,7 @@
         amount: 4
       - tool: Anchoring
         doAfter: 2
-    - to: RevPrinter # CE exclusive
+    - to: 3D printer # CE exclusive
       steps:
       - tag: RCD
         name: construction-graph-tag-RCD
@@ -73,7 +73,7 @@
         amount: 3
       - tool: Anchoring
         doAfter: 2
-    - to: RevTelesphere # RD exclusive
+    - to: telesphere # RD exclusive
       steps:
       - tag: EncryptionRevolutionary
         name: construction-graph-tag-encryption-revolutionary
@@ -106,13 +106,13 @@
         doAfter: 1
   - node: gear
     edges:
-    - to: RevForge
+    - to: industrial forge
       steps:
       - material: RevBolt
       - material: RevNut
       - tool: Anchoring
         doAfter: 2
-    - to: RevPrintingPress
+    - to: printing press
       steps:
       - material: RevGear
       - tool: Screwing
@@ -121,7 +121,7 @@
       - material: RevNut
       - tool: Anchoring
         doAfter: 2
-    - to: RevBulletPress
+    - to: bullet press
       steps:
       - material: RevGunParts
       - tool: Screwing
@@ -130,17 +130,17 @@
       - material: RevNut
       - tool: Anchoring
         doAfter: 2
-  - node: RevForge
+  - node: industrial forge
     entity: RevForge
-  - node: RevPrintingPress
+  - node: printing press
     entity: RevPrintingPress
-  - node: RevRadioBench
+  - node: telecomms workshop
     entity: RevRadioBench
-  - node: RevPrinter
+  - node: 3D printer
     entity: RevPrinter
-  - node: RevTelesphere
+  - node: telesphere
     entity: RevTelesphere
-  - node: RevBulletPress
+  - node: bullet press
     entity: RevBulletPress
-  - node: RevMicroelectronicsAssembler
+  - node: microelectronics assembler
     entity: RevMicroelectronicsAssembler

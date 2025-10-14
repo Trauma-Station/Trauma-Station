@@ -1,16 +1,17 @@
 - type: entity
-  parent: [BaseItem , BaseRevMajorContraband]
+  parent: [ BaseItem, BaseRevMajorContraband ]
   id: WeaponSMGResistance
   name: resistance
   description: A small and innaccurate gun, cannot hit anything but at least it has a magazine.
+  suffix: Full
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/SMGs/resistance.rsi
     layers:
-      - state: base
-        map: ["enum.GunVisualLayers.Base"]
-      - state: mag-0
-        map: ["enum.GunVisualLayers.Mag"]
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
   - type: Item
     size: Small
     shape:
@@ -96,7 +97,7 @@
   components:
   - type: Construction
     deconstructionTarget: null
-    graph: RevResistance
-    node: RevResistance
+    graph: RevGuns
+    node: resistance
   - type: ContainerFill
     containers: {}
