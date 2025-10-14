@@ -112,6 +112,6 @@
   - type: Item
     size: Normal
   - type: Construction
-    graph: RevLiberator
+    graph: RevGuns
     deconstructionTarget: null
     node: unfinished
