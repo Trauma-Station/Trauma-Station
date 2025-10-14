@@ -185,3 +185,9 @@ Entries:
       message: Added Spray Paint and compressed paint to loadout trinkets.
   id: 21
   time: '2025-10-14T18:55:04.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Rev ID cards and doors now use their own access instead of syndicate.
+  id: 22
+  time: '2025-10-14T20:08:41.0000000+00:00'
