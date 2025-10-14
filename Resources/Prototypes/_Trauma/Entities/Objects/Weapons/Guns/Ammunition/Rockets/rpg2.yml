@@ -17,8 +17,8 @@
     fillPrototype: PelletClusterLethalWeak
     capacity: 50
   - type: ContainerContainer
-      containers:
-        cluster-payload: !type:Container
+    containers:
+      cluster-payload: !type:Container
 
 - type: entity
   parent: BulletRocket
