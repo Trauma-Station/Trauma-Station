@@ -2,7 +2,7 @@
 using Content.Shared.IdentityManagement;
 using Robust.Shared.Prototypes;
 
-namespace Content.Trauma.Server.EntityEffects.EffectConditions;
+namespace Content.Trauma.Shared.EntityEffects.EffectConditions;
 
 public sealed partial class HasMobName : EntityEffectCondition
 {
