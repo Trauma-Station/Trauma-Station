@@ -1,0 +1,64 @@
+
+- type: entity
+  name: revolurionary radio jammer
+  parent: [RadioJammer, BaseRevMajorContraband]
+  id: RevRadioJammer
+  description: This device will disrupt any nearby outgoing radio communication as well as suit sensors when activated.
+  components:
+  - type: RadioJammer
+    settings:
+    - wattage: 1
+      range: 2.5
+      message: radio-jammer-component-set-message-low
+      name: radio-jammer-component-setting-low
+
+- type: entity
+  name: revolutionary access card
+  parent: [IDCardStandard, BaseRevMajorContraband]
+  id: RevIDCard
+  components:
+  - type: Access
+    tags:
+    - Maintenance
+    - SyndicateAgent #remake this later
+  - type: Sprite
+    layers:
+    - state: revolutionary
+    - state: idrevolutionary
+  - type: AgentIDCard
+  - type: ActivatableUI
+    key: enum.AgentIDCardUiKey.Key
+    inHandsOnly: true
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: UserInterface
+    interfaces:
+      enum.AgentIDCardUiKey.Key:
+        type: AgentIDCardBoundUserInterface
+      enum.ChameleonUiKey.Key:
+        type: ChameleonBoundUserInterface
+  - type: NanoChatCard
+    listNumber: false
+
+- type: entity
+  parent: [BaseFlatpack, BaseRevMajorContraband]
+  id: RevDoorFlatpack
+  name: revolutionary airlock flatpack
+  description: A flatpack used for constructing a door locked to revolutionary access cards.
+  components:
+  - type: Flatpack
+    entity: AirlockRevolutionary
+  - type: StaticPrice
+    price: 75
+
+- type: entity
+  parent: [AirlockSyndicate, BaseRevMajorContraband]
+  id: AirlockRevolutionary
+  suffix: Revolutionary, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsSyndicateAgent ]
+  - type: Sprite
+    sprite: Structures/Doors/Airlocks/Standard/maint.rsi

@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem , BaseRevMajorContraband]
   id: WeaponSMGResistance
   name: resistance
   description: A small and innaccurate gun, cannot hit anything but at least it has a magazine.
@@ -83,6 +83,11 @@
     wideAnimationRotation: 90
     soundHit:
       collection: MetalThud
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
 
 - type: entity
   parent: WeaponSMGResistance

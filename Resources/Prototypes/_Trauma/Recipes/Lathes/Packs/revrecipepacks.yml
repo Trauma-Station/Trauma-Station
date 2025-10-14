@@ -57,9 +57,17 @@
   - RevGunParts
   - RevTurretMagazine
   - RevSMGMagazine
-  
+
 - type: latheRecipePack
   id: RevBulletPressStatic
   recipes:
   - RevTurretBullet
   - RevPistolBullet
+
+- type: latheRecipePack
+  id: RevMicroElectronicsStatic
+  recipes:
+  - RevID
+  - RevDoor
+  - RevJammer
+#  - Revpayloads later

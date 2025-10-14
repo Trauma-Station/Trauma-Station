@@ -96,8 +96,8 @@
     edges:
     - to: RevForge
       steps:
-      - material: RevBolt
-      - material: RevNut
+      - material: RevGear
+        amount: 3
       - tool: Anchoring
         doAfter: 2
     - to: RevPrintingPress
@@ -118,6 +118,19 @@
       - material: RevNut
       - tool: Anchoring
         doAfter: 2
+    - to: RevMicroelectronicsAssembler
+      steps:
+      - material: RevGunParts
+      - tool: Screwing
+        doAfter: 1
+      - material: Glass
+        amount: 5
+      - material: RevBolt
+        amount: 5
+      - material: RevNut
+        amount: 5
+      - tool: Anchoring
+        doAfter: 2
   - node: RevForge
     entity: RevForge
   - node: RevPrintingPress
@@ -130,3 +143,5 @@
     entity: RevTelesphere
   - node: RevBulletPress
     entity: RevBulletPress
+  - node: RevMicroelectronicsAssembler
+    entity: RevMicroelectronicsAssembler
