@@ -21,9 +21,5 @@
 		<ProjectReference Include="../RobustToolbox/Robust.Shared/Robust.Shared.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="EntityEffects\" />
-	</ItemGroup>
-
 	<Import Project="../RobustToolbox/MSBuild/Robust.Properties.targets" />
 </Project>
