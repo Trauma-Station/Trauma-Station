@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ BaseItem, BaseMajorContraband ]
+  parent: [ BaseItem, BaseRevMajorContraband ]
   id: BaseRevMeleeWeapon
   components:
   - type: MeleeWeapon
@@ -121,7 +121,7 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Piercing: 8
+        Piercing: 16
   - type: Wieldable
   - type: DamageOtherOnHit
     damage:
@@ -239,7 +239,7 @@
     graph: RevTorch
 
 - type: entity
-  parent: [ BaseItem, BaseMinorContraband ]
+  parent: [ BaseItem, BaseRevMinorContraband ]
   name: caltrops
   id: Caltrops
   description: A weapon designed to be laid on the floor as a trap, can be thrown for a quick trap anchored in place.

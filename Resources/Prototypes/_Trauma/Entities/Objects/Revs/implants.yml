@@ -1,12 +1,12 @@
 - type: entity
+  parent: [ BaseImplantOnlyImplanter, BaseRevMinorContraband ]
   id: TrackingImplanterRev
-  suffix: Tracking
-  parent: BaseImplantOnlyImplanter
   name: meditrack implanter
+  suffix: Tracking
   description: An implant that reports in the revolutionary radio the location of its host if injured or killed.
   components:
-    - type: Implanter
-      implant: DeathRattleImplantRev
+  - type: Implanter
+    implant: DeathRattleImplantRev
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -15,15 +15,15 @@
   description: This implant will inform the Revolutionary radio channel should the user fall into critical condition or die.
   categories: [ HideSpawnMenu ]
   components:
-    - type: SubdermalImplant
-      permanent: true
-      whitelist:
-        components:
-        - MobState
-    - type: MansusGraspBlockTrigger
-    - type: TriggerOnMobstateChange
-      mobState:
-      - Critical
-      - Dead
-    - type: Rattle
-      radioChannel: Revolutionary
+  - type: SubdermalImplant
+    permanent: true
+    whitelist:
+      components:
+      - MobState
+  - type: MansusGraspBlockTrigger
+  - type: TriggerOnMobstateChange
+    mobState:
+    - Critical
+    - Dead
+  - type: Rattle
+    radioChannel: Revolutionary

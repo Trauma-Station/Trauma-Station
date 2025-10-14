@@ -14,7 +14,7 @@
 
 - type: entity
   abstract: true
-  parent: [ RevUnfinishedComponent, BaseMinorContraband ]
+  parent: [ RevUnfinishedComponent, BaseRevMinorContraband ]
   id: BaseUnfinishedRevWeapon
   components:
   - type: Construction
@@ -101,7 +101,7 @@
     graph: RevPitchfork
 
 - type: entity
-  parent: [ BaseItem, BaseMinorContraband ]
+  parent: [ BaseItem, BaseRevMinorContraband ]
   id: RevUnfinishedGun
   name: misshapen steel chunk
   description: A sheet of steel bent into the rough shape of a gun. It needs a lot more work before firing.
