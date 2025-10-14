@@ -94,21 +94,21 @@
     - HeadRevolutionary
     - Revolutionary
 
-#- type: construction
-#  id: RevMicroelectronicsAssembler
-#  graph: RevMachine
-#  startNode: start
-#  targetNode: RevMicroelectronicsAssembler
-#  placementMode: SnapgridCenter
-#  category: construction-category-antagonist
-#  objectType: Structure
-#  canBuildInImpassable: false
-#  conditions:
-# - !type:TileNotBlocked
-#  entityWhitelist:
-#    components:
-#    - HeadRevolutionary
-#    - Revolutionary
+- type: construction
+  id: RevMicroelectronicsAssembler
+  graph: RevMachine
+  startNode: start
+  targetNode: RevMicroelectronicsAssembler
+  placementMode: SnapgridCenter
+  category: construction-category-antagonist
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
 
 - type: construction
   id: RevTurretPistol

@@ -15,6 +15,5 @@
             icon:
               sprite: Objects/Misc/bureaucracy.rsi
               state: paper
-
     - node: SheetPaper
       entity: SheetPaper
