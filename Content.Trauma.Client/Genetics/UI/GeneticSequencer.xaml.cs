@@ -155,7 +155,6 @@ public sealed partial class GeneticSequencer : Control
         Puzzle.SetSequenced(sequence.Mutation != null);
         if (sequence.Mutation is {} id)
         {
-            IoCManager.Resolve<ILogManager>().GetSawmill("FUCK").Debug($"Mutation is {id}!!!! {id == null}");
             var proto = _proto.Index<EntityPrototype>(id);
             var instability = _mutation.AllMutations[id].Instability;
             MutationName.Text = proto.Name;

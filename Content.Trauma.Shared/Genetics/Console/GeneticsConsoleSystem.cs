@@ -160,6 +160,17 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             return;
         }
 
+        // discovered sequences have no missing bases
+        if (data.Discovered)
+        {
+            comp.Sequences.Add(new Sequence
+            {
+                Mutation = id,
+                Bases = data.Bases
+            });
+            return;
+        }
+
         _builder.Clear();
         _builder.Append(data.Bases);
 

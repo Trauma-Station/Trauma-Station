@@ -3,7 +3,10 @@
   id: MutationNervousness
   name: Nervousness
   description: Causes the holder to stutter.
-  # TODO
+  components:
+  - type: ComponentMutation
+    added:
+    - type: StutteringAccent
 
 - type: entity
   parent: BaseFreeMutation
@@ -27,6 +30,7 @@
     - MutationWacky
   # TODO
 
+# fun fact: mimes can take this then remove it to speak with vow intact
 - type: entity
   parent: BaseMutation
   id: MutationMute
@@ -38,7 +42,9 @@
   - type: RemovesMutation
     removes:
     - MutationUnintelligible # no free -70
-  # TODO: implement and gives this to mimes
+  - type: ComponentMutation
+    added:
+    - type: Muted
 
 - type: entity
   parent: BaseMutation
