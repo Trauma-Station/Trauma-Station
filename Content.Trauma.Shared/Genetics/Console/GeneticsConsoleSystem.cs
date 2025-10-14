@@ -1,3 +1,4 @@
+using Content.Shared.Chat;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -24,6 +25,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly MutationSystem _mutation = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedChatSystem _chat = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
@@ -107,18 +109,26 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             target: mob);
         doAfterArgs.AttemptFrequency = AttemptFrequency.EveryTick;
         SetBusy(ent, _doAfter.TryStartDoAfter(doAfterArgs));
+
+        Speak(ent, "scanning");
     }
 
     private void OnScanDoAfter(Entity<GeneticsConsoleComponent> ent, ref ScanDoAfterEvent args)
     {
         SetBusy(ent, false);
         if (args.Cancelled)
+        {
+            Speak(ent, "scan-failed");
             return;
+        }
 
         args.Handled = true;
         var mob = GetEntity(args.Mob);
         if (!CanScan(ent, mob))
+        {
+            Speak(ent, "scan-failed");
             return;
+        }
 
         var scanned = EnsureComp<ScannedGenomeComponent>(mob);
 
@@ -131,6 +141,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             TryAddSequence(scanned, id);
         }
         UpdateUI(ent);
+        Speak(ent, "scanned");
     }
 
     private void OnScanCheck(Entity<GeneticsConsoleComponent> ent, ref DoAfterAttemptEvent<ScanDoAfterEvent> args)
@@ -260,21 +271,32 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             target: mob);
         doAfterArgs.AttemptFrequency = AttemptFrequency.EveryTick;
         SetBusy(ent, _doAfter.TryStartDoAfter(doAfterArgs));
+        Speak(ent, "sequencing");
     }
 
     private void OnSequenceDoAfter(Entity<GeneticsConsoleComponent> ent, ref SequenceDoAfterEvent args)
     {
         SetBusy(ent, false);
         if (args.Cancelled)
+        {
+            Speak(ent, "sequence-failed");
             return;
+        }
 
         args.Handled = true;
         var mob = GetEntity(args.Mob);
         if (!CanWorkOn(ent, mob))
+        {
+            Speak(ent, "sequence-failed");
+            return;
+        }
+
+        if (_net.IsClient)
             return;
 
-        if (_net.IsServer)
-            SequenceMutation(ent, mob, args.Index);
+        Speak(ent, SequenceMutation(ent, mob, args.Index)
+            ? "sequenced"
+            : "sequence-failed");
     }
 
     private void OnSequenceCheck(Entity<GeneticsConsoleComponent> ent, ref DoAfterAttemptEvent<SequenceDoAfterEvent> args)
@@ -317,6 +339,13 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
         ent.Comp.Busy = busy;
         DirtyField(ent, nameof(GeneticsConsoleComponent.Busy));
+    }
+
+    private void Speak(EntityUid uid, string suffix)
+    {
+        var msg = Loc.GetString("genetics-console-chat-" + suffix);
+        var type = InGameICChatType.Speak;
+        _chat.TrySendInGameICMessage(uid, msg, type, hideChat: false, hideLog: true);
     }
 
     private void UpdateUI(Entity<GeneticsConsoleComponent> ent)
@@ -401,18 +430,18 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     /// <summary>
     /// Tries to sequences a mutation, either activating it in the mob or damaging it.
     /// </summary>
-    public void SequenceMutation(Entity<GeneticsConsoleComponent> ent, EntityUid mob, uint index)
+    public bool SequenceMutation(Entity<GeneticsConsoleComponent> ent, EntityUid mob, uint index)
     {
         if (!CanWorkOn(ent, mob) ||
             GetSequence(mob, index) is not {} sequence)
-            return;
+            return false;
 
         var mutation = sequence.Mutation;
         if (_mutation.GetRoundData(mutation) is not {} data)
-            return;
+            return false;
 
         if (data.Discovered) // no
-            return;
+            return false;
 
         if (sequence.Bases != data.Bases)
         {
@@ -421,13 +450,14 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             _audio.PlayPvs(ent.Comp.SequenceFailSound, ent);
             _popup.PopupPredicted(you, others, ent, mob, PopupType.LargeCaution);
             _damage.TryChangeDamage(mob, ent.Comp.SequenceFailDamage);
-            return;
+            return false;
         }
 
         _audio.PlayPvs(ent.Comp.ScanSound, ent);
         data.Discovered = true;
         _mutation.AddMutation(mob, sequence.Mutation);
         UpdateUI(ent); // it's now discovered
+        return true;
     }
 
     #endregion Public API

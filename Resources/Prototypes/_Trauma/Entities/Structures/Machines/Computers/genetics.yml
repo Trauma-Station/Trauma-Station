@@ -53,6 +53,9 @@
         type: GeneticsConsoleBUI
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Pai
   - type: GuideHelp
     guides:
     - Genetics

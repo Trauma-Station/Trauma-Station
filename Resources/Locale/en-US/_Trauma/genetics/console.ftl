@@ -1,3 +1,10 @@
+genetics-console-chat-scanning = SCANNING SUBJECT
+genetics-console-chat-scan-failed = SUBJECT SCAN FAILED
+genetics-console-chat-scanned = NEW SUBJECT SCANNED
+genetics-console-chat-sequencing = SEQUENCING GENOME
+genetics-console-chat-sequence-failed = FAILED TO SEQUENCE GENOME
+genetics-console-chat-sequenced = SEQUENCING GENOME COMPLETE
+
 genetics-console-damages-you = The sequencing fails catastrophically and damages your genome!
 genetics-console-damages-others = The genetics console fails catastrophically and damages the subject's genome!
 

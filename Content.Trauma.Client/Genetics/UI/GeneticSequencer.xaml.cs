@@ -152,6 +152,7 @@ public sealed partial class GeneticSequencer : Control
             return;
 
         var sequence = _sequences[(int) selected];
+        Puzzle.SetSequenced(sequence.Mutation != null);
         if (sequence.Mutation is {} id)
         {
             IoCManager.Resolve<ILogManager>().GetSawmill("FUCK").Debug($"Mutation is {id}!!!! {id == null}");

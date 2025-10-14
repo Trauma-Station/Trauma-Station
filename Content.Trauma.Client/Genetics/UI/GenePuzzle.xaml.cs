@@ -13,6 +13,7 @@ public sealed partial class GenePuzzle : Control
     public event Action? OnSequence;
 
     private bool _busy;
+    private bool _sequenced;
     private string _bases = string.Empty;
 
     public GenePuzzle()
@@ -26,7 +27,7 @@ public sealed partial class GenePuzzle : Control
 
     private void UpdateSequenceButton()
     {
-        SequenceButton.Disabled = _busy || !IsComplete();
+        SequenceButton.Disabled = _busy || _sequenced || !IsComplete();
     }
 
     private bool IsComplete()
@@ -42,6 +43,12 @@ public sealed partial class GenePuzzle : Control
     public void SetBusy(bool busy)
     {
         _busy = busy;
+        UpdateSequenceButton();
+    }
+
+    public void SetSequenced(bool sequenced)
+    {
+        _sequenced = sequenced;
         UpdateSequenceButton();
     }
 
