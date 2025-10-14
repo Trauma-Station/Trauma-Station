@@ -22,9 +22,7 @@
     - Maintenance
     - SyndicateAgent #remake this later
   - type: Sprite
-    layers:
-    - state: revolutionary
-    - state: idrevolutionary
+    state: idrevolutionary
   - type: AgentIDCard
   - type: ActivatableUI
     key: enum.AgentIDCardUiKey.Key

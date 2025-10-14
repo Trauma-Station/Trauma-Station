@@ -68,6 +68,9 @@
     solutions:
       paper:
         canReact: false
+  - type: Construction #truama
+    graph: SheetPaper
+    node: start
 
 - type: entity
   parent: SheetOtherBase
