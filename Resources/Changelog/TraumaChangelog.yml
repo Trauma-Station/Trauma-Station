@@ -179,3 +179,9 @@ Entries:
       message: Mice now have an egg sack organ, steal their powers!
   id: 20
   time: '2025-10-14T07:12:55.0000000+00:00'
+- author: MayasMischief
+  changes:
+    - type: Add
+      message: Added Spray Paint and compressed paint to loadout trinkets.
+  id: 21
+  time: '2025-10-14T18:55:04.0000000+00:00'
