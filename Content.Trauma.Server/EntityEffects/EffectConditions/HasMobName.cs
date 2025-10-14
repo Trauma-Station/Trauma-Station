@@ -2,21 +2,20 @@
 using Content.Shared.IdentityManagement;
 using Robust.Shared.Prototypes;
 
-namespace Content.Goobstation.Server.EntityEffects.EffectConditions;
+namespace Content.Trauma.Server.EntityEffects.EffectConditions;
 
 public sealed partial class HasMobName : EntityEffectCondition
 {
     [DataField]
-    public string? Name = null;
+    public string Name = string.Empty;
 
     public override bool Condition(EntityEffectBaseArgs args)
     {
-        return Name!= null && Identity.Name(args.TargetEntity, args.EntityManager).ToLower().Contains(Name.ToLower());
+        return args.EntityManager.GetComponent<MetaDataComponent>(args.TargetEntity).EntityName.IndexOf(Name, StringComparison.OrdinalIgnoreCase) >= 0;
     }
 
     public override string GuidebookExplanation(IPrototypeManager prototype)
     {
-        Name ??= "";
         return Loc.GetString("reagent-effect-condition-guidebook-has-mob-name",("name",Name));
     }
 }
