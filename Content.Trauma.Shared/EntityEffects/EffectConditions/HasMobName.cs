@@ -6,16 +6,17 @@ namespace Content.Trauma.Server.EntityEffects.EffectConditions;
 
 public sealed partial class HasMobName : EntityEffectCondition
 {
-    [DataField]
+    [DataField(required: true)]
     public string Name = string.Empty;
 
     public override bool Condition(EntityEffectBaseArgs args)
     {
-        return args.EntityManager.GetComponent<MetaDataComponent>(args.TargetEntity).EntityName.IndexOf(Name, StringComparison.OrdinalIgnoreCase) >= 0;
+        var entName = args.EntityManager.GetComponent<MetaDataComponent>(args.TargetEntity).EntityName;
+        return entName.IndexOf(Name, StringComparison.OrdinalIgnoreCase) >= 0;
     }
 
     public override string GuidebookExplanation(IPrototypeManager prototype)
     {
-        return Loc.GetString("reagent-effect-condition-guidebook-has-mob-name",("name",Name));
+        return Loc.GetString("reagent-effect-condition-guidebook-has-mob-name", ("name", Name));
     }
 }
