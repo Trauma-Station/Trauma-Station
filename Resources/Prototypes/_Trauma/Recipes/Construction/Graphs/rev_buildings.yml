@@ -120,15 +120,14 @@
         doAfter: 2
     - to: RevMicroelectronicsAssembler
       steps:
-      - material: RevGunParts
       - tool: Screwing
         doAfter: 1
       - material: Glass
         amount: 5
       - material: RevBolt
-        amount: 5
+        amount: 4
       - material: RevNut
-        amount: 5
+        amount: 4
       - tool: Anchoring
         doAfter: 2
   - node: RevForge
