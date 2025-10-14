@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseWeaponLauncher, BaseRevMajorContraband, BaseGunWieldable]
+  parent: [ BaseWeaponLauncher, BaseRevMajorContraband, BaseGunWieldable ]
   id: WeaponLauncherRPG2
   name: RPG-2
   description: An ancient old earth rocket launcher.

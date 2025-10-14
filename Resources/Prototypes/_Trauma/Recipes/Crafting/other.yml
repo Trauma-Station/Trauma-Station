@@ -2,6 +2,6 @@
   id: SheetPaper
   graph: SheetPaper
   startNode: start
-  targetNode: SheetPaper
+  targetNode: paper sheet
   category: construction-category-materials
   objectType: Item

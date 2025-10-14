@@ -1,9 +1,7 @@
-
 - type: entity
-  name: revolurionary radio jammer
-  parent: [RadioJammer, BaseRevMajorContraband]
+  parent: [ RadioJammer, BaseRevMajorContraband ]
   id: RevRadioJammer
-  description: This device will disrupt any nearby outgoing radio communication as well as suit sensors when activated.
+  name: revolutionary radio jammer
   components:
   - type: RadioJammer
     settings:
@@ -13,34 +11,30 @@
       name: radio-jammer-component-setting-low
 
 - type: entity
-  name: revolutionary access card
-  parent: [IDCardStandard, BaseRevMajorContraband]
+  parent: [ AgentIDCard, BaseRevMajorContraband ]
   id: RevIDCard
+  name: revolutionary access card
   components:
   - type: Access
     tags:
     - Maintenance
-    - SyndicateAgent #remake this later
-  - type: Sprite
-    state: idrevolutionary
-  - type: AgentIDCard
-  - type: ActivatableUI
-    key: enum.AgentIDCardUiKey.Key
-    inHandsOnly: true
+    - Revolutionary
   - type: Tag
     tags:
     - DoorBumpOpener
-  - type: UserInterface
-    interfaces:
-      enum.AgentIDCardUiKey.Key:
-        type: AgentIDCardBoundUserInterface
-      enum.ChameleonUiKey.Key:
-        type: ChameleonBoundUserInterface
-  - type: NanoChatCard
-    listNumber: false
+    - WhitelistChameleon # Agent id is just assistant, this isn't
+    - WhitelistChameleonIdCard
+  - type: ChameleonClothing
+    default: RevIDCard
+  - type: Sprite
+    layers:
+    - state: idrevolutionary
+      sprite: _Trauma/Objects/Misc/id_cards.rsi
+    - state: revolutionary
+      sprite: _Trauma/Objects/Misc/id_cards.rsi
 
 - type: entity
-  parent: [BaseFlatpack, BaseRevMajorContraband]
+  parent: [ BaseFlatpack, BaseRevMajorContraband ]
   id: RevDoorFlatpack
   name: revolutionary airlock flatpack
   description: A flatpack used for constructing a door locked to revolutionary access cards.
@@ -51,12 +45,12 @@
     price: 75
 
 - type: entity
-  parent: [AirlockSyndicate, BaseRevMajorContraband]
+  parent: [ AirlockSyndicate, BaseRevMajorContraband ]
   id: AirlockRevolutionary
   suffix: Revolutionary, Locked
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsSyndicateAgent ]
+      board: [ DoorElectronicsRevolutionary ]
   - type: Sprite
     sprite: Structures/Doors/Airlocks/Standard/maint.rsi

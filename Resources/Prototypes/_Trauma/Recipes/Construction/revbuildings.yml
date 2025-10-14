@@ -2,7 +2,7 @@
   id: RevForge
   graph: RevMachine
   startNode: start
-  targetNode: RevForge
+  targetNode: industrial forge
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure
@@ -18,7 +18,7 @@
   id: RevPrintingPress
   graph: RevMachine
   startNode: start
-  targetNode: RevPrintingPress
+  targetNode: printing press
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure
@@ -34,7 +34,7 @@
   id: RevTelecommsWorkbench
   graph: RevMachine
   startNode: start
-  targetNode: RevRadioBench
+  targetNode: telecomms workshop
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure
@@ -50,7 +50,7 @@
   id: RevTelesphere
   graph: RevMachine
   startNode: start
-  targetNode: RevTelesphere
+  targetNode: telesphere
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure
@@ -66,7 +66,7 @@
   id: Rev3DPrinter
   graph: RevMachine
   startNode: start
-  targetNode: RevPrinter
+  targetNode: 3D printer
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure
@@ -82,7 +82,7 @@
   id: RevBulletPress
   graph: RevMachine
   startNode: start
-  targetNode: RevBulletPress
+  targetNode: bullet press
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure
@@ -98,7 +98,7 @@
   id: RevMicroelectronicsAssembler
   graph: RevMachine
   startNode: start
-  targetNode: RevMicroelectronicsAssembler
+  targetNode: microelectronics assembler
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure
@@ -114,7 +114,7 @@
   id: RevTurretPistol
   graph: RevTurret
   startNode: start
-  targetNode: RevTurretPistol
+  targetNode: pistol turret
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure
@@ -130,7 +130,7 @@
   id: RevTurretSMG
   graph: RevTurret
   startNode: start
-  targetNode: RevTurretSMG
+  targetNode: SMG turret
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure
@@ -141,4 +141,3 @@
     components:
     - HeadRevolutionary
     - Revolutionary
-
