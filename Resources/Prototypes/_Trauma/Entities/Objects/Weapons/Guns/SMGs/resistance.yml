@@ -1,15 +1,16 @@
 - type: entity
-  parent: [ BaseItem, BaseRevMajorContraband ]
+  parent: [BaseItem , BaseRevMajorContraband]
   id: WeaponSMGResistance
   name: resistance
   description: A small and innaccurate gun, cannot hit anything but at least it has a magazine.
-  suffix: Full
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/SMGs/resistance.rsi
     layers:
-    - state: icon
-      map: ["enum.GunVisualLayers.Base"]
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
   - type: Item
     size: Small
     shape:
@@ -38,7 +39,6 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistolSubMachineGun
         insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
         priority: 2
@@ -53,6 +53,9 @@
         whitelist:
           tags:
             - CartridgePistol
+  - type: ContainerFill
+    containers:
+      gun_magazine: [ MagazinePistolSubMachineGun ]
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -80,30 +83,20 @@
     wideAnimationRotation: 90
     soundHit:
       collection: MetalThud
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
 
 - type: entity
   parent: WeaponSMGResistance
   id: WeaponSMGResistanceEmpty
   suffix: Empty
   components:
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazinePistolSubMachineGun
-        whitelistFailPopup: gun-magazine-whitelist-fail
-      gun_chamber:
-        name: Chamber
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgePistol
   - type: Construction
     deconstructionTarget: null
     graph: RevResistance
     node: RevResistance
+  - type: ContainerFill
+    containers: {}

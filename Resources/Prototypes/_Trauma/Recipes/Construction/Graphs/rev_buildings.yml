@@ -31,6 +31,18 @@
       - material: RevNut
       - tool: Anchoring
         doAfter: 2
+    - to: RevMicroelectronicsAssembler
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: Glass
+        amount: 5
+      - material: RevBolt
+        amount: 4
+      - material: RevNut
+        amount: 4
+      - tool: Anchoring
+        doAfter: 2
     - to: RevPrinter # CE exclusive
       steps:
       - tag: RCD
@@ -64,7 +76,7 @@
     - to: RevTelesphere # RD exclusive
       steps:
       - tag: EncryptionRevolutionary
-        name: construction-graph-tag-rncryption-revolutionary
+        name: construction-graph-tag-encryption-revolutionary
         icon:
           sprite: _Trauma/Objects/Devices/encryption_keys.rsi
           state: rev_label
@@ -130,4 +142,5 @@
     entity: RevTelesphere
   - node: RevBulletPress
     entity: RevBulletPress
-
+  - node: RevMicroelectronicsAssembler
+    entity: RevMicroelectronicsAssembler

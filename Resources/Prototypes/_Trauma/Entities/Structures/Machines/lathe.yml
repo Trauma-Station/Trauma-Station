@@ -109,7 +109,7 @@
     sprite: _Trauma/Structures/Machines/revprintingpress.rsi
   - type: Lathe
     producingSound: /Audio/_Trauma/Revs/printingpress.ogg
-    runningState: printingpress
+    runningState: printingpress3m
     staticPacks:
     - RevPrintingPress
   - type: MaterialStorage
@@ -196,8 +196,8 @@
 - type: entity
   parent: BaseRevIndustry
   id: RevBulletPress
-  name: Bullet Press
-  description: Created ammo by pressing the bullet into the casing, this one is automated.
+  name: bullet press
+  description: Creates ammo by pressing the bullet into the casing, this one is automated.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Machines/bulletpress.rsi
@@ -214,3 +214,25 @@
       - Ingot
   - type: Construction
     node: RevBulletPress
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevMicroelectronicsAssembler
+  name: microelectronics assembler
+  description: Allows the creation of illegal technology useful to the revolution.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/microelectronicsassembler.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/microelectronicsassembler.ogg
+    runningState: microelectronicsassembler
+    staticPacks:
+    - RevMicroElectronicsStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: Construction
+    node: RevMicroelectronicsAssembler

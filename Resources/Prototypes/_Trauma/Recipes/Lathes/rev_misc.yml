@@ -18,9 +18,9 @@
 - type: latheRecipe
   id: RevPropaganda
   result: RevPropaganda
-  completetime: 60
+  completetime: 180
   materials:
-    Paper: 1000
+    Paper: 500
 
 - type: latheRecipe
   id: EncryptionKeyRev

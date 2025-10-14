@@ -1,20 +1,14 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Sprited by Armok and AK5intow for TraumaStation",
+  "copyright": "Made by Armok and AK5intow for Traumastation",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "base"
-    },
-    {
-      "name": "bolt-open"
-    },
-    {
-      "name": "mag-0"
+      "name": "icon"
     },
     {
       "name": "inhand-left",

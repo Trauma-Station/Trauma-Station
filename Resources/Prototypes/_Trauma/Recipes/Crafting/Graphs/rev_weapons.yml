@@ -128,6 +128,8 @@
     edges:
     - to: RevResistance
       steps:
+      - tool: Welding
+        doAfter: 2
       - material: RevBolt
       - material: RevNut
       - tool: Anchoring
@@ -143,10 +145,6 @@
       - tool: Anchoring
         doAfter: 2
       - tool: Welding
-        doAfter: 2
-      - material: RevGunParts
-      - tool: Screwing
-        doAfter: 1
   - node: RevResistance
     entity: WeaponSMGResistanceEmpty
 

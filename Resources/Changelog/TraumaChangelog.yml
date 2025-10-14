@@ -173,3 +173,9 @@ Entries:
       message: Temp way to craft paper
   id: 19
   time: '2025-10-14T02:52:08.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Mice now have an egg sack organ, steal their powers!
+  id: 20
+  time: '2025-10-14T07:12:55.0000000+00:00'
