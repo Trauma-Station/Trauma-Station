@@ -37,6 +37,6 @@
     back:
     # <Trauma> replaced all upstream items
     - RevGear
-    - RevNut
-    - RevBolt
+    - RevGear
+    - RevGear
     # </Trauma>
