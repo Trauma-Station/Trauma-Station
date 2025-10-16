@@ -15,7 +15,7 @@
   id: CatEars
   bodyPart: Special
   markingCategory: Special
-  speciesRestriction: [Felinid, Tajaran] #trauma - humans are humans
+  speciesRestriction: [Felinid, Tajaran] # Trauma - humans are humans
   coloring:
     default:
       type:
@@ -38,7 +38,7 @@
   id: CatTail
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Felinid, Tajaran] #trauma - humans are humans
+  speciesRestriction: [Felinid, Tajaran] # Trauma - humans are humans
   coloring:
     default:
       type:
