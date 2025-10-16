@@ -97,7 +97,7 @@
     containers:
     - blueprint
   - type: Construction
-    node: RevForge
+    node: industrial forge
 
 - type: entity
   parent: BaseRevIndustry
@@ -117,7 +117,7 @@
       tags:
       - Sheet
   - type: Construction
-    node: RevPrintingPress
+    node: printing press
 
 - type: entity
   parent: BaseRevIndustry
@@ -139,7 +139,7 @@
       - RawMaterial
       - Ingot
   - type: Construction
-    node: RevRadioBench
+    node: telecomms workshop
 
 - type: entity
   parent: BaseRevIndustry
@@ -155,7 +155,7 @@
     staticPacks:
     - RevTelesphereStatic
   - type: Construction
-    node: RevTelesphere
+    node: telesphere
   - type: PointLight
     enabled: true
     color: "#ffffff"
@@ -191,7 +191,7 @@
       - RawMaterial
       - Ingot
   - type: Construction
-    node: RevPrinter
+    node: 3D printer
 
 - type: entity
   parent: BaseRevIndustry
@@ -213,7 +213,7 @@
       - RawMaterial
       - Ingot
   - type: Construction
-    node: RevBulletPress
+    node: bullet press
 
 - type: entity
   parent: BaseRevIndustry
@@ -235,4 +235,4 @@
       - RawMaterial
       - Ingot
   - type: Construction
-    node: RevMicroelectronicsAssembler
+    node: microelectronics assembler

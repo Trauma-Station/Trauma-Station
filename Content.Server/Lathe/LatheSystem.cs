@@ -273,6 +273,11 @@ namespace Content.Server.Lathe
             if (component.CurrentRecipe != null || component.Queue.Count <= 0 || !this.IsPowered(uid, EntityManager))
                 return false;
 
+            // <Trauma> no using powerless lathes if they are unanchored
+            if (!Transform(uid).Anchored)
+                return false;
+            // </Trauma>
+
             var recipeProto = component.Queue.Dequeue();
             var recipe = _proto.Index(recipeProto);
 

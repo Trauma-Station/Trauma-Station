@@ -68,9 +68,6 @@
     solutions:
       paper:
         canReact: false
-  - type: Construction #truama
-    graph: SheetPaper
-    node: start
 
 - type: entity
   parent: SheetOtherBase
@@ -113,9 +110,9 @@
   - type: Tag # Trauma
     tags:
     - Sheet
-  - type: Construction #Trauma
+  - type: Construction # Trauma
     graph: SheetPaper
-    node: SheetPaper
+    node: paper sheet
 
 - type: entity
   parent: SheetPaper
