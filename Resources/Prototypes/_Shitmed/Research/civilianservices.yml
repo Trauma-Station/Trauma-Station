@@ -33,7 +33,7 @@
   cost: 10000
   recipeUnlocks:
   - DefibrillatorCompact # Goob
-  - OmnimedTool # Shitmed
+  # - OmnimedTool # Trauma - slop no reason to be in same tech as other tools if you never use them
   - EnergyScalpel # Shitmed
   - AdvancedRetractor # Shitmed
   - EnergyCautery # Shitmed
@@ -176,6 +176,7 @@
   recipeUnlocks:
   - ClothingHandsGlovesSurgical
   - AutodocUpgradeKitBluespace # Goobstation
+  - OmnimedTool # Trauma - moved out of the 5m in tech
   technologyPrerequisites:
   - AdvancedCybernetics
   position: -2,9
