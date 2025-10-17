@@ -124,9 +124,11 @@ using Content.Shared.Mind;
 using Content.Shared.Players;
 using Content.Shared.Roles;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.CCVar;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
@@ -153,9 +155,12 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     [Dependency] private readonly LastRolledAntagManager _lastRolled = default!; // Goobstation
     [Dependency] private readonly PlayTimeTrackingManager _playTime = default!; // Goobstation
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!; // Trauma
 
     // arbitrary random number to give late joining some mild interest.
     public const float LateJoinRandomChance = 0.5f;
+
+    private static bool _pityEnabled;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -172,6 +177,8 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnPlayerSpawning);
         SubscribeLocalEvent<RulePlayerJobsAssignedEvent>(OnJobsAssigned);
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnSpawnComplete);
+
+        Subs.CVar(_cfg, TraumaCVars.AntagPityEnabled, value => _pityEnabled = value, true);
     }
 
     private void OnTakeGhostRole(Entity<GhostRoleAntagSpawnerComponent> ent, ref TakeGhostRoleEvent args)
@@ -351,6 +358,9 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     // Goobstation
     public Dictionary<ICommonSession, float> ToWeightsDict(IList<ICommonSession> pool)
     {
+        if (!_pityEnabled) // Trauma
+            return pool.ToDictionary(x => x, _ => 1f);
+
         Dictionary<ICommonSession, float> weights = new();
 
         // weight by playtime since last rolled

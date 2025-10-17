@@ -31,9 +31,6 @@
 using System.IO;
 using System.Linq;
 using System.Numerics;
-using Content.Goobstation.Common.CCVar;
-using Content.Shared.CCVar;
-using Content.Shared.Decals;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared._Shitmed.Humanoid.Events; // Shitmed Change
@@ -42,6 +39,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Preferences;
 using Content.Shared._EinsteinEngines.HeightAdjust;
+using Content.Trauma.Common.CCVar;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects.Components.Localization;
@@ -86,7 +84,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         SubscribeLocalEvent<HumanoidAppearanceComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<HumanoidAppearanceComponent, ExaminedEvent>(OnExamined);
 
-        Subs.CVar(_cfgManager, GoobCVars.HeightSliders, value => _heightSlidersEnabled = value, true); // Traumastation
+        Subs.CVar(_cfgManager, TraumaCVars.HeightSliders, value => _heightSlidersEnabled = value, true); // Traumastation
     }
 
     public DataNode ToDataNode(HumanoidCharacterProfile profile)

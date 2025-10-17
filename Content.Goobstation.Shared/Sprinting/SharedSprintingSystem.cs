@@ -14,7 +14,6 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
-using Content.Shared.DoAfter;
 using Content.Shared.Gravity;
 using Content.Shared.Input;
 using Content.Shared.Mech.Components;
@@ -33,7 +32,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Network;
 using System.Numerics;
-using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.CCVar;
 using Robust.Shared.Configuration;
 
 namespace Content.Goobstation.Shared.Sprinting;
@@ -76,7 +75,7 @@ public abstract class SharedSprintingSystem : EntitySystem
         SubscribeLocalEvent<SprinterComponent, EntityZombifiedEvent>(OnZombified);
 
         // Traumastation
-        Subs.CVar(_cfg, GoobCVars.SprintEnabled, value => SprintEnabled = value, true);
+        Subs.CVar(_cfg, TraumaCVars.SprintEnabled, value => SprintEnabled = value, true);
     }
 
     #region Core Functions

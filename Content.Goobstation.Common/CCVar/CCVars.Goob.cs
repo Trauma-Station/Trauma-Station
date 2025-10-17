@@ -579,21 +579,4 @@ public sealed partial class GoobCVars
         CVarDef.Create("hub.use_dynamic_hostname", false, CVar.SERVERONLY);
 
     #endregion
-
-    // TODO: Move trauma cvars to traumamod when it's real
-    #region Trauma
-
-    /// <summary>
-    ///     Are height/width sliders enabled
-    /// </summary>
-    public static readonly CVarDef<bool> HeightSliders =
-        CVarDef.Create("trauma.height_sliders_enabled", false, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
-    ///     Is sprinting enabled
-    /// </summary>
-    public static readonly CVarDef<bool> SprintEnabled =
-        CVarDef.Create("trauma.sprint_enabled", false, CVar.SERVER | CVar.REPLICATED);
-
-    #endregion
 }
