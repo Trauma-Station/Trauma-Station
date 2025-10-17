@@ -197,3 +197,15 @@ Entries:
       message: Fixed rev machines working when unanchored.
   id: 23
   time: '2025-10-14T20:57:13.0000000+00:00'
+- author: JetstreamToaster
+  changes:
+    - type: Remove
+      message: Poison to dionas from animal proteins are no more
+  id: 24
+  time: '2025-10-15T09:02:00.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Remove
+      message: Tail and catear style markings from humans.
+  id: 25
+  time: '2025-10-16T23:20:22.0000000+00:00'
