@@ -215,3 +215,9 @@ Entries:
       message: Juice that kills people named John
   id: 26
   time: '2025-10-17T16:50:35.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Only CE and engiborgs get an RCD now.
+  id: 27
+  time: '2025-10-17T16:51:40.0000000+00:00'
