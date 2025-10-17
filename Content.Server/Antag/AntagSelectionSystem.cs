@@ -124,11 +124,11 @@ using Content.Shared.Mind;
 using Content.Shared.Players;
 using Content.Shared.Roles;
 using Content.Shared.Whitelist;
-using Content.Trauma.Common.CCVar;
+using Content.Trauma.Common.CCVar; // Trauma
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
-using Robust.Shared.Configuration;
+using Robust.Shared.Configuration; // Trauma
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
@@ -160,7 +160,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     // arbitrary random number to give late joining some mild interest.
     public const float LateJoinRandomChance = 0.5f;
 
-    private static bool _pityEnabled;
+    private static bool _pityEnabled; // Trauma
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -178,7 +178,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         SubscribeLocalEvent<RulePlayerJobsAssignedEvent>(OnJobsAssigned);
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnSpawnComplete);
 
-        Subs.CVar(_cfg, TraumaCVars.AntagPityEnabled, value => _pityEnabled = value, true);
+        Subs.CVar(_cfg, TraumaCVars.AntagPityEnabled, value => _pityEnabled = value, true); // Trauma
     }
 
     private void OnTakeGhostRole(Entity<GhostRoleAntagSpawnerComponent> ent, ref TakeGhostRoleEvent args)

@@ -31,6 +31,9 @@
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using Content.Goobstation.Common.CCVar;
+using Content.Shared.CCVar;
+using Content.Shared.Decals;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared._Shitmed.Humanoid.Events; // Shitmed Change
@@ -39,7 +42,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Preferences;
 using Content.Shared._EinsteinEngines.HeightAdjust;
-using Content.Trauma.Common.CCVar;
+using Content.Trauma.Common.CCVar; // Trauma
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects.Components.Localization;
