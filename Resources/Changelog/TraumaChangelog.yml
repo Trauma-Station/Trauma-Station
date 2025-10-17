@@ -209,3 +209,9 @@ Entries:
       message: Tail and catear style markings from humans.
   id: 25
   time: '2025-10-16T23:20:22.0000000+00:00'
+- author: ImWeax
+  changes:
+    - type: Add
+      message: Juice that kills people named John
+  id: 26
+  time: '2025-10-17T16:50:35.0000000+00:00'
