@@ -146,6 +146,7 @@
   group: market
 
 - type: cargoProduct
+  abstract: true # Trauma - RCD is CE's precious
   id: EngineeringRCD
   icon:
     sprite: Objects/Tools/rcd.rsi
