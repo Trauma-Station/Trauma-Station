@@ -227,3 +227,9 @@ Entries:
       message: Renamed goobcoin to evilcoin.
   id: 28
   time: '2025-10-17T17:04:02.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Surgical omnitools are no longer available 5 seconds into the round.
+  id: 29
+  time: '2025-10-17T17:53:32.0000000+00:00'
