@@ -6,7 +6,10 @@
   suffix: Full
   components:
   - type: Item
-    size: Tiny
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
   - type: Tag
     tags:
     - Sidearm
@@ -41,5 +44,5 @@
     proto: null
   - type: Construction
     deconstructionTarget: null
-    graph: RevLiberator
-    node: RevLiberator
+    graph: RevGuns
+    node: liberator

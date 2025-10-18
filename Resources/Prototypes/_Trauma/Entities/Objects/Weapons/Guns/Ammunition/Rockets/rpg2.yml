@@ -1,0 +1,74 @@
+- type: entity
+  parent: BulletRocket
+  id: BulletRPG2HE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: frag
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 10
+    intensitySlope: 5
+    totalIntensity: 30
+    maxTileBreak: 0
+  - type: ProjectileGrenade
+    fillPrototype: PelletClusterLethalWeak
+    capacity: 50
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+
+- type: entity
+  parent: BulletRocket
+  id: BulletRPG2AP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: frag
+  - type: Explosive
+    explosionType: Minibomb
+    totalIntensity: 5
+    intensitySlope: 1
+    maxIntensity: 1
+    maxTileBreak: 0
+  - type: Projectile
+    damage:
+      types:
+        Ion: 2000
+        Structural: 2000
+        Blunt: 1000
+
+- type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: CartridgeRocketRPG2HE
+  name: rocket-propelled high explosive grenade
+  description: A warhead for the RPG-2, this one is high explosive and launches shrapnel everywhere.
+  components:
+  - type: Item
+    shape:
+    - 0,0,3,0
+  - type: CartridgeAmmo
+    proto: BulletRPG2HE
+    deleteOnSpawn: true
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Rockets/he.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - CartridgeRPG2
+  - type: MultiHandedItem
+
+- type: entity
+  parent: CartridgeRocketRPG2HE
+  id: CartridgeRocketRPG2AP
+  name: rocket-propelled armor piercing grenade
+  description: A warhead for the RPG-2, this one is armor piercing, and good against mechs, borgs, and structures. Requires a direct hit to be effective.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRPG2AP
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Rockets/ap.rsi

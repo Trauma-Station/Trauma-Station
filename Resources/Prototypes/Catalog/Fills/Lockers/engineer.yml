@@ -163,8 +163,8 @@
       - id: HolofanProjector
       - id: RPD #funkystation
       - id: DoorRemoteFirefight # Goobstation - re adding fire door remote
-      - id: RCD
-      - id: RCDAmmo
+      #- id: RCD # Trauma - RCD is CE's precious
+      #- id: RCDAmmo # Trauma
       - id: AirGrenade
       - id: ClothingHandsGlovesAtmosInsulated # Goobstation - insulated atmos gloves
       - id: ClothingBackpackFirefighterTank # Assmos - Firefighter nozzle
@@ -184,8 +184,8 @@
       - id: HolofanProjector
       - id: RPD #funkystation
       - id: DoorRemoteFirefight # Goobstation - re adding fire door remote
-      - id: RCD
-      - id: RCDAmmo
+      #- id: RCD # Trauma - RCD is CE's precious
+      #- id: RCDAmmo # Trauma
       - id: ClothingHandsGlovesAtmosInsulated # Goobstation - insulated atmos gloves
       - id: ClothingBackpackFirefighterTank # Assmos - Firefighter nozzle
       - id: AirGrenade
@@ -203,8 +203,8 @@
       - id: ClothingHandsGlovesColorYellow
       - id: ClothingMaskGas
       - id: ClothingShoesBootsMag
-      - id: RCD
-      - id: RCDAmmo
+      #- id: RCD # Trauma - RCD is CE's precious
+      #- id: RCDAmmo # Trauma
       - id: MetalFoamGrenade
 
 - type: entity
@@ -217,8 +217,8 @@
       - id: ClothingHandsGlovesColorYellow
       - id: ClothingMaskGas
       - id: trayScanner
-      - id: RCD
-      - id: RCDAmmo
+      #- id: RCD # Trauma - RCD is CE's precious
+      #- id: RCDAmmo # Trauma
       - id: MetalFoamGrenade
 
 - type: entity

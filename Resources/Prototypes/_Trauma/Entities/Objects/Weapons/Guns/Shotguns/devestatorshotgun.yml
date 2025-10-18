@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseItem, BaseMajorContraband, BaseWeaponShotgun, BaseGunWieldable ]
+  parent: [ BaseMajorContraband, BaseWeaponShotgun, BaseGunWieldable ]
   id: WeaponShotgunDevestator
   name: devestator shotgun
   description: A 4 barrel shotgun that's surprisingly shit, the barrels are barely lined up... but it's still deadly.

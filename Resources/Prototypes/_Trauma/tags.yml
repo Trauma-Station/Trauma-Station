@@ -1,4 +1,7 @@
 - type: Tag
+  id: CartridgeRPG2
+
+- type: Tag
   id: CartridgeTurret
 
 - type: Tag
@@ -18,6 +21,3 @@
 
 - type: Tag
   id: RevTurretBoard
-
-- type: Tag
-  id: RevGunParts
