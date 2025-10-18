@@ -123,8 +123,7 @@
         doAfter: 2
     - to: printing press
       steps:
-      - material: RevGear
-      - tool: Screwing
+      - tool: Anchoring
         doAfter: 1
       - material: RevBolt
         amount: 2
