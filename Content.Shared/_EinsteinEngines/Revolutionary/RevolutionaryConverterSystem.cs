@@ -41,23 +41,8 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
         SubscribeLocalEvent<RevolutionaryConverterComponent, RevolutionaryConverterDoAfterEvent>(OnConvertDoAfter);
         SubscribeLocalEvent<RevolutionaryConverterComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RevolutionaryConverterComponent, AfterInteractEvent>(OnConverterAfterInteract);
-        SubscribeLocalEvent<RevolutionaryConverterComponent, AfterFlashedEvent>(OnAfterFlash); // Traumastation
 
         _speechLocalization = _prototypeManager.Index<LocalizedDatasetPrototype>(RevConvertSpeechProto);
-    }
-
-    // Traumastation
-    private void OnAfterFlash(Entity<RevolutionaryConverterComponent> ent, ref AfterFlashedEvent args)
-    {
-        if (!ent.Comp.ApplyFlashEffect)
-            return;
-
-        if (args.Target is not { Valid: true } target
-            || !HasComp<MobStateComponent>(target)
-            || !HasComp<HeadRevolutionaryComponent>(args.User))
-            return;
-
-        ConvertDoAfter(ent, target, args.User.Value);
     }
 
     private void OnUseInHand(Entity<RevolutionaryConverterComponent> ent, ref UseInHandEvent args)
