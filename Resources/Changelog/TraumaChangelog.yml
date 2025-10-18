@@ -239,3 +239,27 @@ Entries:
       message: Goodbye antag pity.
   id: 30
   time: '2025-10-18T13:23:25.0000000+00:00'
+- author: ARMOKS
+  changes:
+    - type: Remove
+      message: Ventilator syndicate gun, its gimmick was useless
+    - type: Remove
+      message: Krav maga implant, its now warden only.
+    - type: Remove
+      message: >-
+        Big shotgun, does not match game vision, TTK too low to ever bring into
+        a proper place.
+    - type: Remove
+      message: Scram implant, replaced by teleporter
+    - type: Remove
+      message: Syndicate disabler, its job is done better by the telebaton
+    - type: Remove
+      message: Syndicate knuckle dusters, they are just stronger northstars
+    - type: Remove
+      message: Cat ears, no more being trolled in surplus crates.
+    - type: Tweak
+      message: Thermals and NVG now give flash weakness even if you have protection on
+    - type: Tweak
+      message: Syndicate teleporter made cheaper, its a better version of scram
+  id: 31
+  time: '2025-10-18T18:26:00.0000000+00:00'
