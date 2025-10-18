@@ -1,0 +1,35 @@
+- type: entity
+  parent: [ClothingEyesBase,BaseRevMajorContraband,ShowSecurityIcons]
+  id: ClothingEyesRevolutionaryVisor
+  name: revolutionary visor
+  description: Protects you from flashes and shows who is set to wanted.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Trauma/Clothing/Eyes/Glasses/revvisor.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Eyes/Glasses/revvisor.rsi
+  - type: FactionClothing
+    faction: Revolutionary
+  - type: FlashImmunity
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: Armor
+    coverage:
+    - Head
+    modifiers:
+      coefficients:
+        Heat: 0.95
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+    traumaDeductions:
+      Dismemberment: 0
+      OrganDamage: 0.13
+      BoneDamage: 0.13
+      VeinsDamage: 0
+      NerveDamage: 0

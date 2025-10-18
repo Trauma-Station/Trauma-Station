@@ -1,0 +1,23 @@
+- type: construction
+  id: RevRPG2HE
+  graph: RevRockets
+  startNode: start
+  targetNode: HE
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
+  id: RevRPG2AP
+  graph: RevRockets
+  startNode: start
+  targetNode: AP
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary

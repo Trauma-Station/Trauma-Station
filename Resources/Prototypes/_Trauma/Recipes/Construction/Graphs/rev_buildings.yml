@@ -33,14 +33,23 @@
         doAfter: 2
     - to: microelectronics assembler
       steps:
+      - tag: TechfabMachineBoard
+        name: construction-graph-tag-techfabmachineboard
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: generic
+        doAfter: 1
       - tool: Screwing
         doAfter: 1
       - material: Glass
         amount: 5
+      - material: Cable
+        amount: 5
+        doAfter: 1
       - material: RevBolt
-        amount: 4
+        amount: 7
       - material: RevNut
-        amount: 4
+        amount: 7
       - tool: Anchoring
         doAfter: 2
     - to: 3D printer # CE exclusive
@@ -58,19 +67,19 @@
       - tool: Cutting
         doAfter: 2
       - material: RevBolt
-        amount: 3
+        amount: 5
       - material: RevNut
-        amount: 3
+        amount: 5
       - tool: Anchoring
         doAfter: 2
-      - material: Steel
-        amount: 10
+      - material: Plastic
+        amount: 1
       - tool: Welding
         doAfter: 4
       - material: RevBolt
         amount: 3
       - material: RevNut
-        amount: 3
+        amount: 2
       - tool: Anchoring
         doAfter: 2
     - to: telesphere # RD exclusive
@@ -93,23 +102,23 @@
       - tool: Cutting
         doAfter: 2
       - material: RevBolt
-        amount: 3
+        amount: 10
       - material: RevNut
-        amount: 3
+        amount: 10
       - tool: Anchoring
         doAfter: 2
       - material: RevBolt
-        amount: 2
+        amount: 10
       - material: RevNut
-        amount: 2
+        amount: 10
       - tool: Anchoring
         doAfter: 1
   - node: gear
     edges:
     - to: industrial forge
       steps:
-      - material: RevBolt
-      - material: RevNut
+      - material: RevGear
+      - material: RevGear
       - tool: Anchoring
         doAfter: 2
     - to: printing press
@@ -118,7 +127,9 @@
       - tool: Screwing
         doAfter: 1
       - material: RevBolt
+        amount: 2
       - material: RevNut
+        amount: 2
       - tool: Anchoring
         doAfter: 2
     - to: bullet press
@@ -127,7 +138,19 @@
       - tool: Screwing
         doAfter: 1
       - material: RevBolt
+        amount: 5
       - material: RevNut
+        amount: 5
+      - tool: Anchoring
+        doAfter: 2
+    - to: uniform printer
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: RevBolt
+        amount: 5
+      - material: RevNut
+        amount: 5
       - tool: Anchoring
         doAfter: 2
   - node: industrial forge
@@ -144,3 +167,5 @@
     entity: RevBulletPress
   - node: microelectronics assembler
     entity: RevMicroelectronicsAssembler
+  - node: uniform printer
+    entity: RevUniformPrinter

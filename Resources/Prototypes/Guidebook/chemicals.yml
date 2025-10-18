@@ -23,6 +23,7 @@
   - Biological
   - Special
   - Others
+  - Solids # Trauma
   filterEnabled: True
 
 - type: guideEntry
@@ -78,3 +79,4 @@
   name: guide-entry-others
   text: "/ServerInfo/Guidebook/ChemicalTabs/Other.xml"
   filterEnabled: True
+

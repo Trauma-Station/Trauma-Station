@@ -23,7 +23,7 @@
     beepSound: /Audio/Effects/lightburn.ogg
   - type: RandomTimerTrigger
     min: 1
-    max: 10
+    max: 5 # Trauma 15 > 5
   - type: ExplodeOnTrigger
   - type: Explosive # Weak explosion in a very small radius. Doesn't break underplating.
     explosionType: Default

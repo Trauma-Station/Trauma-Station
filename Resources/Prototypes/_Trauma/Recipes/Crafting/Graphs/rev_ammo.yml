@@ -1,0 +1,139 @@
+- type: constructionGraph
+  id: RevRockets
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: unfinished
+      steps:
+      - material: Steel
+        amount: 3
+        doAfter: 5
+      - tag: Pipe
+        name: construction-graph-tag-pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+  - node: unfinished
+    entity: RevUnfinishedRocket
+    edges:
+    - to: HE
+      steps:
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tag: RevBallBearings
+        name: construction-graph-tag-ballbearings
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: ballbearings
+      - material: RevBolt
+      - material: RevNut
+      - tool: Screwing
+        doAfter: 5
+      - material: Steel
+        amount: 2
+        doAfter: 3
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - material: Gunpowder
+        amount: 5
+      - tool: Screwing
+        doAfter: 5
+    - to: AP
+      steps:
+      - tool: Screwing
+        doAfter: 5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - material: Uranium
+        amount: 2
+        doAfter: 3
+      - material: RevBolt
+      - material: RevNut
+      - tool: Screwing
+        doAfter: 5
+      - material: Steel
+        amount: 2
+        doAfter: 3
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - material: Gunpowder
+        amount: 5
+      - tool: Screwing
+        doAfter: 5
+  - node: HE
+    entity: CartridgeRocketRPG2HE
+  - node: AP
+    entity: CartridgeRocketRPG2AP

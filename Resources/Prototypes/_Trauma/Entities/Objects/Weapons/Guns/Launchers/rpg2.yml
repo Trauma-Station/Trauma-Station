@@ -33,6 +33,14 @@
     magState: mag
     steps: 2
     zeroVisible: false
-  - type: ClothingSpeedModifier #Look at the size of this thing, absolute unit to carry on you
-    walkModifier: 0.7
-    sprintModifier: 0.7
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.5
+    sprintModifier: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 0.75
+    sprintModifier: 0.75
+  - type: HeldSpeedModifier
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevGuns
+    node: RPG2

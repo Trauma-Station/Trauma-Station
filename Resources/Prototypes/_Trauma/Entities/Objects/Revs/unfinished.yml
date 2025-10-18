@@ -115,3 +115,89 @@
     graph: RevGuns
     deconstructionTarget: null
     node: unfinished
+
+- type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: RevHelmetLiner
+  name: helmet liner
+  description: Used in the creation of helmets. Add plasteel to complete it.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: helmetliner
+  - type: Construction
+    graph: RevHelmet
+    deconstructionTarget: null
+    node: unfinished
+
+- type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: RevGasFilter
+  name: gas filter
+  description: Used in the creations of gas masks. Use plastic to complete it.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: gasfilter
+  - type: Construction
+    graph: RevMask
+    deconstructionTarget: null
+    node: unfinished
+
+- type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: RevEmptyVest
+  name: empty web vest
+  description: An empty web vest, still needs plates. Add some armor plates to complete it.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: emptyweb
+  - type: Construction
+    graph: RevVest
+    deconstructionTarget: null
+    node: unfinished
+
+- type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: RevArmorPlate
+  name: armor plate
+  description: A plate for a web vest.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: armorplate
+  - type: Tag
+    tags:
+    - RevArmorPlate
+  - type: Construction
+    graph: RevVest
+    deconstructionTarget: null
+    node: unfinished
+
+- type: entity
+  parent: BaseItem
+  id: RevBallBearings
+  name: ball bearings
+  description: A small handfull of metal balls.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: ballbearings
+  - type: Tag
+    tags:
+    - RevBallBearings
+
+- type: entity
+  parent: [BaseItem, BaseRevMajorContraband]
+  id: RevUnfinishedRocket
+  name: unfinished rocket
+  description: An unfinished rocket.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Rockets/unfinished.rsi
+    state: icon
+  - type: Construction
+    graph: RevRockets
+    deconstructionTarget: null
+    node: unfinished

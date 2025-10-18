@@ -7,7 +7,7 @@
     sprite: _Trauma/Objects/Revs/components.rsi
   - type: PhysicalComposition
     materialComposition:
-      Steel: 50 # removed plastic
+      Steel: 10 # removed plastic
 
 - type: entity
   abstract: true
@@ -17,6 +17,7 @@
   - type: Construction
     graph: RevParts
     deconstructionTarget: null
+  - type: Appearance
 
 - type: entity
   parent: BaseRevComponent
@@ -25,9 +26,16 @@
   description: A gear, used in quite a few devices.
   components:
   - type: Sprite
-    state: gear
+    layers:
+    - state: gear
+      map: ["base"]
   - type: Stack
     stackType: RevGear
+    baseLayer: base
+    layerStates:
+    - gear
+    - gear_2
+    - gear_3
   - type: Construction
     node: gear
 
@@ -38,9 +46,16 @@
   description: Some bolts, used in quite a few devices.
   components:
   - type: Sprite
-    state: bolt
+    layers:
+    - state: bolt
+      map: ["base"]
   - type: Stack
     stackType: RevBolt
+    baseLayer: base
+    layerStates:
+    - bolt
+    - bolt_2
+    - bolt_3
   - type: Construction
     node: bolt
 
@@ -51,9 +66,16 @@
   description: Some nuts, used in quite a few devices.
   components:
   - type: Sprite
-    state: nut
+    layers:
+    - state: nut
+      map: ["base"]
   - type: Stack
     stackType: RevNut
+    baseLayer: base
+    layerStates:
+    - nut
+    - nut_2
+    - nut_3
   - type: Construction
     node: nut
 

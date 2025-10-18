@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingNeckBase,BaseMajorContraband]
+  parent: [ClothingNeckBase,BaseRevMajorContraband]
   id: ClothingRevolutionaryIFF
   name: Revolutionary IFF Card
   description: Shows constructed turrets that you are a friend.
