@@ -1,0 +1,56 @@
+- type: entity
+  parent: [ RadioJammer, BaseRevMajorContraband ]
+  id: RevRadioJammer
+  name: revolutionary radio jammer
+  components:
+  - type: RadioJammer
+    settings:
+    - wattage: 1
+      range: 2.5
+      message: radio-jammer-component-set-message-low
+      name: radio-jammer-component-setting-low
+
+- type: entity
+  parent: [ AgentIDCard, BaseRevMajorContraband ]
+  id: RevIDCard
+  name: revolutionary access card
+  components:
+  - type: Access
+    tags:
+    - Maintenance
+    - Revolutionary
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - WhitelistChameleon # Agent id is just assistant, this isn't
+    - WhitelistChameleonIdCard
+  - type: ChameleonClothing
+    default: RevIDCard
+  - type: Sprite
+    layers:
+    - state: idrevolutionary
+      sprite: _Trauma/Objects/Misc/id_cards.rsi
+    - state: revolutionary
+      sprite: _Trauma/Objects/Misc/id_cards.rsi
+
+- type: entity
+  parent: [ BaseFlatpack, BaseRevMajorContraband ]
+  id: RevDoorFlatpack
+  name: revolutionary airlock flatpack
+  description: A flatpack used for constructing a door locked to revolutionary access cards.
+  components:
+  - type: Flatpack
+    entity: AirlockRevolutionary
+  - type: StaticPrice
+    price: 75
+
+- type: entity
+  parent: [ AirlockSyndicate, BaseRevMajorContraband ]
+  id: AirlockRevolutionary
+  suffix: Revolutionary, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRevolutionary ]
+  - type: Sprite
+    sprite: Structures/Doors/Airlocks/Standard/maint.rsi

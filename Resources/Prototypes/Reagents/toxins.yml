@@ -583,6 +583,9 @@
           - !type:OrganType # Goobstation - Yowie
             type: Yowie
             shouldHave: false
+          - !type:OrganType # Trauma
+            type: Plant 
+            shouldHave: false
         type: Local
         visualType: MediumCaution
         messages: [ "generic-reagent-effect-sick" ]
@@ -599,6 +602,9 @@
           - !type:OrganType # Goobstation - Yowie
             type: Yowie
             shouldHave: false
+          - !type:OrganType # Trauma
+            type: Plant 
+            shouldHave: false
       - !type:HealthChange
         conditions:
         - !type:OrganType
@@ -609,6 +615,9 @@
           shouldHave: false
         - !type:OrganType # Goobstation - Yowie
           type: Yowie
+          shouldHave: false
+        - !type:OrganType # Trauma
+          type: Plant 
           shouldHave: false
         damage:
           types:
@@ -625,7 +634,13 @@
           type: Vox
         reagent: Protein
         amount: 0.25
-
+      - !type:AdjustReagent # Trauma
+        conditions:
+        - !type:OrganType
+          type: Plant
+        reagent: Protein
+        amount: 0.5
+        
 - type: reagent
   id: Allicin
   name: reagent-name-allicin

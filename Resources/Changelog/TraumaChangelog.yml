@@ -157,3 +157,79 @@ Entries:
       message: Changed contraband examine text for all rev items.
   id: 18
   time: '2025-10-13T18:50:57.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Rev rocket launcher
+    - type: Add
+      message: Microelectronics Assembler
+    - type: Add
+      message: More bugfixes
+    - type: Add
+      message: More rev items to use
+    - type: Add
+      message: Made revs slightly faster
+    - type: Add
+      message: Temp way to craft paper
+  id: 19
+  time: '2025-10-14T02:52:08.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Mice now have an egg sack organ, steal their powers!
+  id: 20
+  time: '2025-10-14T07:12:55.0000000+00:00'
+- author: MayasMischief
+  changes:
+    - type: Add
+      message: Added Spray Paint and compressed paint to loadout trinkets.
+  id: 21
+  time: '2025-10-14T18:55:04.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Rev ID cards and doors now use their own access instead of syndicate.
+  id: 22
+  time: '2025-10-14T20:08:41.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed rev machines working when unanchored.
+  id: 23
+  time: '2025-10-14T20:57:13.0000000+00:00'
+- author: JetstreamToaster
+  changes:
+    - type: Remove
+      message: Poison to dionas from animal proteins are no more
+  id: 24
+  time: '2025-10-15T09:02:00.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Remove
+      message: Tail and catear style markings from humans.
+  id: 25
+  time: '2025-10-16T23:20:22.0000000+00:00'
+- author: ImWeax
+  changes:
+    - type: Add
+      message: Juice that kills people named John
+  id: 26
+  time: '2025-10-17T16:50:35.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Only CE and engiborgs get an RCD now.
+  id: 27
+  time: '2025-10-17T16:51:40.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Renamed goobcoin to evilcoin.
+  id: 28
+  time: '2025-10-17T17:04:02.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Surgical omnitools are no longer available 5 seconds into the round.
+  id: 29
+  time: '2025-10-17T17:53:32.0000000+00:00'
