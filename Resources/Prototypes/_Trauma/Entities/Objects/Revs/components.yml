@@ -102,3 +102,14 @@
     state: gunparts
   - type: Stack
     stackType: RevGunParts
+
+- type: entity
+  parent: BaseRevPart
+  id: RevBallBearings
+  name: ball bearings
+  description: A small handfull of metal balls.
+  components:
+  - type: Sprite
+    state: ballbearings
+  - type: Stack
+    stackType: RevBallBearings

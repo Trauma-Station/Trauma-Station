@@ -39,11 +39,7 @@
         doAfter: 0.5
       - tool: Hammering
         doAfter: 0.5
-      - tag: RevBallBearings
-        name: construction-graph-tag-ballbearings
-        icon:
-          sprite: _Trauma/Objects/Revs/components.rsi
-          state: ballbearings
+      - material: RevBallBearings
       - material: RevBolt
       - material: RevNut
       - tool: Screwing
