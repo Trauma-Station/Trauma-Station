@@ -1096,7 +1096,7 @@
 #  categories:
 #  - UplinkAmmo
 
-#- type: listing
+#- type: listing Trauma, removed with the shotgun
 #  id: UplinkMagazineShotgunHeavy
 #  name: uplink-heavy-shotgun-magazine-name
 #  description: uplink-heavy-shotgun-magazine-desc
@@ -1107,7 +1107,7 @@
 #  categories:
 #  - UplinkAmmo
 
-#- type: listing
+#- type: listing Trauma, removed with the shotgun
 #  id: UplinkMagazineShotgunHeavySlug
 #  name: uplink-heavy-shotgun-magazine-slug-name
 #  description: uplink-heavy-shotgun-magazine-slug-desc
@@ -1178,7 +1178,7 @@
   categories:
   - UplinkAmmo
 
-#- type: listing
+#- type: listing - Trauma, removed with the SMG
 #  id: UplinkMagazineM7S
 #  name: uplink-m7s-mag-name
 #  description: uplink-m7s-mag-desc
