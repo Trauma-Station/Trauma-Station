@@ -80,8 +80,3 @@
   text: "/ServerInfo/Guidebook/ChemicalTabs/Other.xml"
   filterEnabled: True
 
-- type: guideEntry # Trauma
-  id: Solids
-  name: guide-entry-solids
-  text: "/ServerInfo/_Trauma/Guidebook/ChemicalTabs/Solids.xml"
-  filterEnabled: True

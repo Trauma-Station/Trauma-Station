@@ -159,12 +159,12 @@
         doAfter: 3
       - material: WoodPlank
         amount: 3
-        doafter: 3
+        doAfter: 3
       - tool: Slicing
         doAfter: 10
       - material: Steel
         amount: 3
-        doafter: 3
+        doAfter: 3
       - tool: Hammering
         doAfter: 0.5
       - tool: Hammering

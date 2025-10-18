@@ -26,6 +26,7 @@
   - type: Tag # Trauma
     tags:
       - TechfabMachineBoard
+      - DroneUsable
 
 - type: entity
   id: CargoTechFabCircuitboard
@@ -46,6 +47,7 @@
   - type: Tag # Trauma
     tags:
       - TechfabMachineBoard
+      - DroneUsable
 
 - type: entity
   id: ScienceTechFabCircuitboard
@@ -66,6 +68,7 @@
   - type: Tag # Trauma
     tags:
       - TechfabMachineBoard
+      - DroneUsable
 
 - type: entity
   id: ServiceTechFabCircuitboard
@@ -86,6 +89,7 @@
   - type: Tag # Trauma
     tags:
       - TechfabMachineBoard
+      - DroneUsable
 
 - type: entity
   id: TeslaCoilCircuitboard

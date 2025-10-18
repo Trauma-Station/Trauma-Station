@@ -224,6 +224,7 @@
     - type: Tag #Trauma
       tags:
       - TechfabMachineBoard
+      - DroneUsable
 
 - type: entity
   id: AmmoTechFabCircuitboard
@@ -259,6 +260,7 @@
     - type: Tag #Trauma
       tags:
       - TechfabMachineBoard
+      - DroneUsable
 
 - type: entity
   id: CircuitImprinterMachineCircuitboard

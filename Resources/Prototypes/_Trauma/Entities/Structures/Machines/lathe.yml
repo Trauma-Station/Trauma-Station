@@ -247,7 +247,6 @@
     sprite: _Trauma/Structures/Machines/uniformprinter.rsi
   - type: Lathe
     producingSound: /Audio/Machines/uniformprinter.ogg
-    idleState: icon
     runningState: uniformsewer
     staticPacks:
     - RevClothingStatic

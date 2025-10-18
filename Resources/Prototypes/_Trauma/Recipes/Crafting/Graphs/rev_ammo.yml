@@ -50,7 +50,7 @@
         doAfter: 5
       - material: Steel
         amount: 2
-        doafter: 3
+        doAfter: 3
       - tool: Hammering
         doAfter: 0.5
       - tool: Hammering
@@ -101,14 +101,14 @@
         doAfter: 0.5
       - material: Uranium
         amount: 2
-        doafter: 3
+        doAfter: 3
       - material: RevBolt
       - material: RevNut
       - tool: Screwing
         doAfter: 5
       - material: Steel
         amount: 2
-        doafter: 3
+        doAfter: 3
       - tool: Hammering
         doAfter: 0.5
       - tool: Hammering

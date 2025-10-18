@@ -189,7 +189,7 @@
     - RevBallBearings
 
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, BaseRevMajorContraband]
   id: RevUnfinishedRocket
   name: unfinished rocket
   description: An unfinished rocket.

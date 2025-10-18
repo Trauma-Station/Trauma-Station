@@ -39,8 +39,8 @@
       params:
         volume: 1
   - type: RandomTimerTrigger
-    min: 1
-    max: 5 #Trauma
+    min: 1 # Trauma 0 > 1
+    max: 5 # Trauma 15 > 5
   - type: Explosive # Weak explosion in a very small radius. Ignites surrounding entities.
     explosionType: FireBomb
     totalIntensity: 25

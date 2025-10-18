@@ -26,7 +26,7 @@
     - to: cable
       steps:
       - material: Gunpowder
-        amount: 1 # trauma
+        amount: 1 # trauma was 5
         doAfter: 3
   - node: cable
     entity: PipeBombCable

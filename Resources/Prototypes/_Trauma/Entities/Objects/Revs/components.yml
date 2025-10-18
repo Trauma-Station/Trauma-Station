@@ -26,7 +26,6 @@
   description: A gear, used in quite a few devices.
   components:
   - type: Sprite
-    state: gear
     layers:
     - state: gear
       map: ["base"]
@@ -47,7 +46,6 @@
   description: Some bolts, used in quite a few devices.
   components:
   - type: Sprite
-    state: bolt
     layers:
     - state: bolt
       map: ["base"]
@@ -68,7 +66,6 @@
   description: Some nuts, used in quite a few devices.
   components:
   - type: Sprite
-    state: nut
     layers:
     - state: nut
       map: ["base"]

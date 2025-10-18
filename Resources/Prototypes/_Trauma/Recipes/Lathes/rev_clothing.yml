@@ -24,7 +24,6 @@
   materials:
     Cloth: 100
 
-
 - type: latheRecipe
   parent: BaseRevClothingRecipe
   id: RevGasFilter
