@@ -97,7 +97,7 @@
     containers:
     - blueprint
   - type: Construction
-    node: RevForge
+    node: industrial forge
 
 - type: entity
   parent: BaseRevIndustry
@@ -109,7 +109,7 @@
     sprite: _Trauma/Structures/Machines/revprintingpress.rsi
   - type: Lathe
     producingSound: /Audio/_Trauma/Revs/printingpress.ogg
-    runningState: printingpress
+    runningState: printingpress3m
     staticPacks:
     - RevPrintingPress
   - type: MaterialStorage
@@ -117,7 +117,7 @@
       tags:
       - Sheet
   - type: Construction
-    node: RevPrintingPress
+    node: printing press
 
 - type: entity
   parent: BaseRevIndustry
@@ -139,7 +139,7 @@
       - RawMaterial
       - Ingot
   - type: Construction
-    node: RevRadioBench
+    node: telecomms workshop
 
 - type: entity
   parent: BaseRevIndustry
@@ -155,7 +155,7 @@
     staticPacks:
     - RevTelesphereStatic
   - type: Construction
-    node: RevTelesphere
+    node: telesphere
   - type: PointLight
     enabled: true
     color: "#ffffff"
@@ -191,13 +191,13 @@
       - RawMaterial
       - Ingot
   - type: Construction
-    node: RevPrinter
+    node: 3D printer
 
 - type: entity
   parent: BaseRevIndustry
   id: RevBulletPress
-  name: Bullet Press
-  description: Created ammo by pressing the bullet into the casing, this one is automated.
+  name: bullet press
+  description: Creates ammo by pressing the bullet into the casing, this one is automated.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Machines/bulletpress.rsi
@@ -213,4 +213,26 @@
       - RawMaterial
       - Ingot
   - type: Construction
-    node: RevBulletPress
+    node: bullet press
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevMicroelectronicsAssembler
+  name: microelectronics assembler
+  description: Allows the creation of illegal technology useful to the revolution.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/microelectronicsassembler.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/microelectronicsassembler.ogg
+    runningState: microelectronicsassembler
+    staticPacks:
+    - RevMicroElectronicsStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: Construction
+    node: microelectronics assembler

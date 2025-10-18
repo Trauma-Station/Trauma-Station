@@ -1,8 +1,8 @@
 - type: construction
   id: RevLiberator
-  graph: RevLiberator
+  graph: RevGuns
   startNode: start
-  targetNode: RevLiberator
+  targetNode: liberator
   category: construction-category-antagonist
   objectType: Item
   entityWhitelist:
@@ -12,9 +12,9 @@
 
 - type: construction
   id: RevResistance
-  graph: RevResistance
+  graph: RevGuns
   startNode: start
-  targetNode: RevResistance
+  targetNode: resistance
   category: construction-category-antagonist
   objectType: Item
   entityWhitelist:
