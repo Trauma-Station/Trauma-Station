@@ -309,3 +309,11 @@ Entries:
         into your bloodstream.
   id: 33
   time: '2025-10-18T18:55:38.0000000+00:00'
+- author: ShellKnight
+  changes:
+    - type: Add
+      message: >-
+        Ported WDP's Alert Level Locks (Certain safes cannot be opened unless it
+        is red)
+  id: 34
+  time: '2025-10-18T18:59:07.0000000+00:00'
