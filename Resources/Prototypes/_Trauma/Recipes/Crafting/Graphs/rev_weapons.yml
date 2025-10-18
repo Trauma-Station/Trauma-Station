@@ -236,7 +236,7 @@
           state: icon
       - material: Gunpowder
         amount: 1
-      - material: RevBallbearings
+      - material: RevBallBearings
       - material: Cable
         amount: 5
   - node: IED
