@@ -14,9 +14,6 @@
     sprite: _Trauma/Objects/Weapons/Guns/Shotguns/devestator.rsi
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Shotguns/devestator.rsi
-    slots:
-    - Back
-    - suitStorage
   - type: GunRequiresWield
   - type: Gun
     fireRate: 4
