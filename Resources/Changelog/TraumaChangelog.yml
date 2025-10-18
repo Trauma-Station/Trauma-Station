@@ -233,3 +233,9 @@ Entries:
       message: Surgical omnitools are no longer available 5 seconds into the round.
   id: 29
   time: '2025-10-17T17:53:32.0000000+00:00'
+- author: Aviu
+  changes:
+    - type: Remove
+      message: Goodbye antag pity.
+  id: 30
+  time: '2025-10-18T13:23:25.0000000+00:00'
