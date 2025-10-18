@@ -221,7 +221,7 @@
   graph:
   - node: start
     edges:
-    - to: RevIED
+    - to: IED
       steps:
       - tag: DrinkCan
         name: construction-graph-tag-empty-can
@@ -236,12 +236,8 @@
           state: icon
       - material: Gunpowder
         amount: 1
-      - tag: RevBallBearings
-        name: construction-graph-tag-ballbearings
-        icon:
-          sprite: _Trauma/Objects/Revs/components.rsi
-          state: ballbearings
+      - material: RevBallbearings
       - material: Cable
         amount: 5
-  - node: RevIED
+  - node: IED
     entity: GrenadeShrapnelRev

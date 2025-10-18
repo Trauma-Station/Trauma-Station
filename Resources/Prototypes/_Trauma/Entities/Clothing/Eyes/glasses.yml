@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingEyesBase,BaseRevMajorContraband,ShowSecurityIcons]
+  parent: [ ClothingEyesBase, BaseRevMajorContraband, ShowSecurityIcons ]
   id: ClothingEyesRevolutionaryVisor
   name: revolutionary visor
   description: Protects you from flashes and shows who is set to wanted.

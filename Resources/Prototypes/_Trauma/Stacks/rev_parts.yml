@@ -33,3 +33,12 @@
     state: gunparts
   spawn: RevGunParts
   maxCount: 30
+
+- type: stack
+  id: RevBallbearings
+  name: stack-rev-ball-bearings
+  icon:
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: ballbearings
+  spawn: RevBallBearings
+  maxCount: 30

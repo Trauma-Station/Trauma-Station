@@ -1,4 +1,5 @@
 - type: entity
-  parent: [ClothingHeadBandBase, ClothingMaskBandRev]
+  parent: [ ClothingHeadBandBase, ClothingMaskBandRev ]
   id: ClothingHeadBandRev
   name: dark green bandana
+  suffix: Headband
