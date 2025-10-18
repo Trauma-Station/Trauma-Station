@@ -109,7 +109,7 @@
     sprite: _Trauma/Structures/Machines/revprintingpress.rsi
   - type: Lathe
     producingSound: /Audio/_Trauma/Revs/printingpress.ogg
-    runningState: printingpress3m
+    runningState: printingpress
     staticPacks:
     - RevPrintingPress
   - type: MaterialStorage
