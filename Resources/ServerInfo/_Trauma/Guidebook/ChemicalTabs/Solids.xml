@@ -1,0 +1,130 @@
+<!--
+SPDX-FileCopyrightText: 2024 f0x-n3rd <150924715+f0x-n3rd@users.noreply.github.com>
+SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+
+SPDX-License-Identifier: MIT
+-->
+
+<Document>
+
+# Solids
+
+Recipes here are solid items that are created using chemistry.
+
+## Aloe Cream
+  <Box>
+    <GuideEntityEmbed Entity="FoodAloe" Caption="Raw Aloe"/>
+    <GuideEntityEmbed Entity="AloeCream" Caption="Aloe Cream"/>
+  </Box>
+
+Aloe Cream can be created by microwaving raw aloe for 10 seconds.
+
+## Crystals
+  <Box>
+    <GuideEntityEmbed Entity="ShardCrystalBlue" Caption="Crystal"/>
+  </Box>
+
+A crystal can be created by combining the following ingredients:
+- 15 Sugar
+- 15 Water
+- 5 Ethanol
+
+## EMP
+  <Box>
+    <GuideEntityEmbed Entity="EmpGrenade" Caption="EMP"/>
+  </Box>
+
+An EMP blast can be created by combining the following ingredients:
+- 1 Uranium
+- 1 Iron
+- 1 Aluminum
+
+## Foam
+  <Box>
+    <GuideEntityEmbed Entity="CleanerGrenade" Caption="Foam"/>
+  </Box>
+
+A cloud of foam can be created by combining the following ingredients:
+- 1 Water
+- 1 Fluorosurfactant
+
+Foam works the same as smoke, holding chems up to the limit it was made with.
+
+## Gunpowder
+  <Box>
+    <GuideEntityEmbed Entity="MaterialGunpowder" Caption="Gunpowder"/>
+  </Box>
+
+Gunpowder can be created by combining the following ingredients:
+- 6 Potassium
+- 2 Sulfur
+- 2 Charcoal
+
+## Plastic
+  <Box>
+    <GuideEntityEmbed Entity="SheetPlastic" Caption="Plastic Sheets"/>
+  </Box>
+
+10 Plastic Can be created by combining the following ingredients:
+- 10 Oil
+- 6 Ash
+- 4 Sulfuric Acid
+- Heating the solution to 374 degrees
+
+## Regenerative Mesh
+  <Box>
+    <GuideEntityEmbed Entity="RegenerativeMesh" Caption="Mesh"/>
+  </Box>
+
+Meshes can be created by microwaving the following ingredients for 10 seconds:
+
+  <Box>
+    <GuideEntityEmbed Entity="FoodAloe" Caption="Raw Aloe"/>
+    <GuideEntityEmbed Entity="Ointment" Caption="Ointment"/>
+    <GuideEntityEmbed Entity="MaterialCloth" Caption="Cloth"/>
+  </Box>
+
+- 1 Raw Aloe
+- 1 Ointment
+- 1 Cloth
+- 20 units of Sigynate
+- 20 units of Dermaline
+
+
+## Smoke
+  <Box>
+    <GuideEntityEmbed Entity="SmokeGrenade" Caption="Smoke"/>
+  </Box>
+
+A cloud of smoke can be created by combining the following ingredients:
+- 1 Sugar
+- 1 Potassium
+- 1 Phosphorus
+
+Smoke carries any extra chems in its reaction medium up to the amount of smoke you make, for example;
+
+a 5-5-5 mix can carry 5u of mutagen and pass it onto anyone who enteres the smoke cloud.
+
+## Suture
+  <Box>
+    <GuideEntityEmbed Entity="MedicatedSuture" Caption="Suture"/>
+  </Box>
+
+Sutures can be created by microwaving the following ingredients for 10 seconds:
+
+  <Box>
+    <GuideEntityEmbed Entity="FoodPoppy" Caption="Poppy"/>
+    <GuideEntityEmbed Entity="MaterialCloth" Caption="Cloth"/>
+    <GuideEntityEmbed Entity="Brutepack" Caption="Brute Packs"/>
+  </Box>
+
+- 1 Poppy
+- 1 Brute Pack
+- 1 Cloth
+- 20 units of Tranexamic Acid
+- 20 units of Cryptobiolin
+
+
+<GuideReagentGroupEmbed Group="Solids"/>
+
+</Document>

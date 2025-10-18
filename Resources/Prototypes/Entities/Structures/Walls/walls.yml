@@ -203,7 +203,7 @@
     key: walls
   - type: Damageable
     damageContainer: StructuralInorganic
-    damageModifierSet: StructuralMetallic
+    damageModifierSet: Walls # Trauma
   - type: Physics
     bodyType: Static
   - type: Fixtures

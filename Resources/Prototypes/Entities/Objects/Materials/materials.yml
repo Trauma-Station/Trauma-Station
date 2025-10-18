@@ -965,6 +965,15 @@
   - type: Item
     size: Tiny
 
+- type: entity #Truama
+  parent: MaterialGunpowder
+  id: MaterialGunpowder60
+  suffix: full
+  components:
+  - type: Stack
+    stackType: Gunpowder
+    count: 60 #Trauma
+
 - type: entity
   parent: MaterialBase
   id: MaterialGoliathHide

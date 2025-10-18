@@ -61,6 +61,10 @@
     tags:
     - CartridgeRPG2
   - type: MultiHandedItem
+  - type: Construction
+    graph: RevRockets
+    deconstructionTarget: null
+    node: HE
 
 - type: entity
   parent: CartridgeRocketRPG2HE
@@ -72,3 +76,7 @@
     proto: BulletRPG2AP
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Rockets/ap.rsi
+  - type: Construction
+    graph: RevRockets
+    deconstructionTarget: null
+    node: AP

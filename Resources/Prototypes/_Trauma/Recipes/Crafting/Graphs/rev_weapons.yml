@@ -123,7 +123,125 @@
       - tool: Anchoring
         doAfter: 2
       - tool: Welding
+    - to: RPG2
+      steps:
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Screwing
+        doAfter: 3
+      - tool: Welding
+        doAfter: 5
+      - material: RevBolt
+        amount: 7
+        doafter: 10
+      - material: RevNut
+        amount: 7
+        doafter: 10
+      - tool: Anchoring
+        doAfter: 3
+      - material: WoodPlank
+        amount: 3
+        doafter: 3
+      - tool: Slicing
+        doAfter: 10
+      - material: Steel
+        amount: 3
+        doafter: 3
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Welding
+        doAfter: 5
+      - material: RevGunParts
+        amount: 5
+        doafter: 10
+      - material: RevBolt
+        amount: 7
+        doafter: 10
+      - material: RevGunParts
+        amount: 5
+        doafter: 10
+      - tool: Screwing
+        doAfter: 3
+      - material: RevNut
+        amount: 7
+        doafter: 10
+      - tool: Anchoring
+        doAfter: 3
+      - material: RevGunParts
+        amount: 5
+        doafter: 10
+      - tool: Screwing
+        doAfter: 3
   - node: liberator
     entity: WeaponPistolLiberatorEmpty
   - node: resistance
     entity: WeaponSMGResistanceEmpty
+  - node: RPG2
+    entity: WeaponLauncherRPG2
+
+- type: constructionGraph
+  id: RevIED
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: RevIED
+      steps:
+      - tag: DrinkCan
+        name: construction-graph-tag-empty-can
+        icon:
+          sprite: Objects/Consumable/Drinks/cola.rsi
+          state: icon_open
+        doAfter: 10
+      - tag: Igniter
+        name: construction-graph-tag-igniter
+        icon:
+          sprite: Objects/Devices/igniter.rsi
+          state: icon
+      - material: Gunpowder
+        amount: 1
+      - tag: RevBallBearings
+        name: construction-graph-tag-ballbearings
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: ballbearings
+      - material: Cable
+        amount: 5
+  - node: RevIED
+    entity: GrenadeShrapnelRev

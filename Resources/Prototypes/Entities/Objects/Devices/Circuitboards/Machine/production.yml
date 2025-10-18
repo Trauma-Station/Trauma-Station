@@ -221,6 +221,9 @@
         GlassBeaker:
           amount: 2
           defaultPrototype: Beaker
+    - type: Tag #Trauma
+      tags:
+      - TechfabMachineBoard
 
 - type: entity
   id: AmmoTechFabCircuitboard
@@ -253,6 +256,9 @@
           defaultPrototype: Beaker
     - type: StealTarget
       stealGroup: MedicalTechFabCircuitboard
+    - type: Tag #Trauma
+      tags:
+      - TechfabMachineBoard
 
 - type: entity
   id: CircuitImprinterMachineCircuitboard

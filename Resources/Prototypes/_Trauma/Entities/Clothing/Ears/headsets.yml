@@ -1,0 +1,12 @@
+- type: entity
+  parent: [ClothingHeadsetAlt,BaseRevMajorContraband]
+  id: ClothingHeadsetRevolutionary
+  name: revolutionary headset
+  description: A modular intercom that fits over the head, takes encryption keys and protects from flashbangs.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Ears/Headsets/revearpiece.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Trauma/Clothing/Ears/Headsets/revearpiece.rsi
+  - type: FlashSoundSuppression

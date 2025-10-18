@@ -1,0 +1,14 @@
+- type: entity
+  parent: [ ClothingHeadHelmetArmoredBase, BaseRevMajorContraband ]
+  id: ClothingHeadHelmetRev
+  name: helmet
+  description: The combat helmet is commonly used by revolutionaries, is strong and light.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Helmets/merc_helmet.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Helmets/merc_helmet.rsi
+  - type: Construction
+    graph: RevHelmet
+    deconstructionTarget: null
+    node: finished

@@ -10,6 +10,7 @@
   - RevBolt
   - RevNut
   - ClothingOuterArmorRev
+  - RevArmorPlate
 
 - type: latheRecipePack
   id: RevPrintingPress
@@ -49,6 +50,7 @@
   - RevUranium
   - RevPlastic
   - RevWood
+  - RevGunpowder
 
 - type: latheRecipePack
   parent: SmilingPals
@@ -70,4 +72,19 @@
   - RevID
   - RevDoor
   - RevJammer
+  - RevHeadset
+  - RevVisor
 #  - Revpayloads later
+
+- type: latheRecipePack
+  id: RevClothingStatic
+  recipes:
+  - ClothingBackpackRev
+  - ClothingBeltRevWebbing
+  - RevHelmetLiner
+  - RevGasFilter
+  - ClothingHeadBandRev
+  - RevEmptyVest
+  - ClothingUniformJumpsuitMilitaryTurtleneckRev
+  - ClothingShoesBootsJack
+  - ClothingHandsGlovesCombat

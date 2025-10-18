@@ -1,0 +1,68 @@
+- type: latheRecipe
+  abstract: true
+  id: BaseRevClothingRecipe
+  completetime: 4
+  materials:
+    Cloth: 300
+
+- type: latheRecipe
+  parent: BaseRevClothingRecipe
+  id: ClothingBackpackRev
+  result: ClothingBackpackRev
+
+- type: latheRecipe
+  parent: BaseRevClothingRecipe
+  id: ClothingBeltRevWebbing
+  result: ClothingBeltRevWebbing
+  materials:
+    Durathread: 300
+
+- type: latheRecipe
+  parent: BaseRevClothingRecipe
+  id: RevHelmetLiner
+  result: RevHelmetLiner
+  materials:
+    Cloth: 100
+
+
+- type: latheRecipe
+  parent: BaseRevClothingRecipe
+  id: RevGasFilter
+  result: RevGasFilter
+  materials:
+    Cloth: 100
+    Plastic: 50
+
+- type: latheRecipe
+  parent: BaseRevClothingRecipe
+  id: ClothingHeadBandRev
+  result: ClothingHeadBandRev
+  materials:
+    Cloth: 100
+
+- type: latheRecipe
+  parent: BaseRevClothingRecipe
+  id: RevEmptyVest
+  result: RevEmptyVest
+  materials:
+    Durathread: 300
+
+- type: latheRecipe
+  parent: BaseRevClothingRecipe
+  id: ClothingUniformJumpsuitMilitaryTurtleneckRev
+  result: ClothingUniformJumpsuitMilitaryTurtleneckRev
+
+- type: latheRecipe
+  parent: BaseRevClothingRecipe
+  id: ClothingShoesBootsJack
+  result: ClothingShoesBootsJack
+  materials:
+    Durathread: 200
+    Plastic: 100
+
+- type: latheRecipe
+  parent: BaseRevClothingRecipe
+  id: ClothingHandsGlovesCombat
+  result: ClothingHandsGlovesCombat
+  materials:
+    Durathread: 100

@@ -1,7 +1,7 @@
 - type: entity
   parent: [ BaseItem, BaseRevMajorContraband ]
   id: WeaponPistolLiberator
-  name: liberator
+  name: Liberator
   description: A shitty little pistol that can only hold 6 rounds and has to be hand fed.
   suffix: Full
   components:

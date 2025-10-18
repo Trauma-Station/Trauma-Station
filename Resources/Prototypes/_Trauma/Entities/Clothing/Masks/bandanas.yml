@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingMaskBandanaBase
+  id: ClothingMaskBandRev
+  name: dark green bandana
+  description: To conceal your identity, or cover your hair.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Bandanas/merc.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Bandanas/merc.rsi

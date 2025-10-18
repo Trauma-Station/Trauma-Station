@@ -236,3 +236,26 @@
       - Ingot
   - type: Construction
     node: microelectronics assembler
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevUniformPrinter
+  name: military uniform printer
+  description: Creates armored clothing for the troops.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/uniformprinter.rsi
+  - type: Lathe
+    producingSound: /Audio/Machines/uniformprinter.ogg
+    idleState: icon
+    runningState: uniformsewer
+    staticPacks:
+    - RevClothingStatic
+  - type: Construction
+    node: uniform printer
+  - type: MaterialStorage
+    whitelist:
+      tags:
+        - Sheet
+        - RawMaterial
+        - Ingot

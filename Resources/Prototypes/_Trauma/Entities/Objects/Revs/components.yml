@@ -17,6 +17,7 @@
   - type: Construction
     graph: RevParts
     deconstructionTarget: null
+  - type: Appearance
 
 - type: entity
   parent: BaseRevComponent
@@ -26,8 +27,16 @@
   components:
   - type: Sprite
     state: gear
+    layers:
+    - state: gear
+      map: ["base"]
   - type: Stack
     stackType: RevGear
+    baseLayer: base
+    layerStates:
+    - gear
+    - gear_2
+    - gear_3
   - type: Construction
     node: gear
 
@@ -39,8 +48,16 @@
   components:
   - type: Sprite
     state: bolt
+    layers:
+    - state: bolt
+      map: ["base"]
   - type: Stack
     stackType: RevBolt
+    baseLayer: base
+    layerStates:
+    - bolt
+    - bolt_2
+    - bolt_3
   - type: Construction
     node: bolt
 
@@ -52,8 +69,16 @@
   components:
   - type: Sprite
     state: nut
+    layers:
+    - state: nut
+      map: ["base"]
   - type: Stack
     stackType: RevNut
+    baseLayer: base
+    layerStates:
+    - nut
+    - nut_2
+    - nut_3
   - type: Construction
     node: nut
 

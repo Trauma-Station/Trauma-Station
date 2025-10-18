@@ -5,7 +5,7 @@
     sprite: _Trauma/Objects/Revs/components.rsi
     state: gear
   spawn: RevGear
-  maxCount: 4
+  maxCount: 30
 
 - type: stack
   id: RevBolt
@@ -14,7 +14,7 @@
     sprite: _Trauma/Objects/Revs/components.rsi
     state: bolt
   spawn: RevBolt
-  maxCount: 4
+  maxCount: 30
 
 - type: stack
   id: RevNut
@@ -23,7 +23,7 @@
     sprite: _Trauma/Objects/Revs/components.rsi
     state: nut
   spawn: RevNut
-  maxCount: 4
+  maxCount: 30
 
 - type: stack
   id: RevGunParts
@@ -32,4 +32,4 @@
     sprite: _Trauma/Objects/Revs/components.rsi
     state: gunparts
   spawn: RevGunParts
-  maxCount: 4
+  maxCount: 30
