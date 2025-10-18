@@ -263,3 +263,41 @@ Entries:
       message: Syndicate teleporter made cheaper, its a better version of scram
   id: 31
   time: '2025-10-18T18:26:00.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Rev rocket crafting recipe
+    - type: Add
+      message: Rev rocket launcher crafting recipe
+    - type: Add
+      message: Rev uniform printer
+    - type: Add
+      message: Rev ball bearings, can be used to make improv grenades
+    - type: Add
+      message: >-
+        Guidebook section for making weird chem things like gunpowder and
+        plastic
+    - type: Add
+      message: Microelectronic Assembler crafting recipe
+    - type: Add
+      message: Made IEDS and Pipebombs not shit
+    - type: Add
+      message: Walls no longer die to bullets
+    - type: Add
+      message: Entire rev clothing set
+    - type: Add
+      message: Rev visor and earpiece
+    - type: Add
+      message: >-
+        Craftable rev helmets and vests, made with helmet liners and armor
+        plates
+    - type: Add
+      message: Nut, Bolt, and Gear sprites for bigger stacks.
+    - type: Tweak
+      message: RPG-2 slows you down while walking now
+    - type: Tweak
+      message: 'Some rev lathes made more expensive '
+    - type: Tweak
+      message: Basic rev parts made much cheaper
+  id: 32
+  time: '2025-10-18T18:46:47.0000000+00:00'
