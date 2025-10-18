@@ -1,0 +1,7 @@
+- type: entity
+  parent: BaseImplantOnlyImplanterSyndi
+  id: HellRipImplanter
+  suffix: Hell Rip
+  components:
+  - type: Implanter
+    implant: HellRipImplant
