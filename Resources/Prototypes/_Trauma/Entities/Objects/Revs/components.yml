@@ -7,7 +7,7 @@
     sprite: _Trauma/Objects/Revs/components.rsi
   - type: PhysicalComposition
     materialComposition:
-      Steel: 50 # removed plastic
+      Steel: 10 # removed plastic
 
 - type: entity
   abstract: true
