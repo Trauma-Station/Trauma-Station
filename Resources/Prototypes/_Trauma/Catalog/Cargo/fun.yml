@@ -1,9 +1,9 @@
-- type: cargoProduct
-  id: FunSprayPaints
-  icon:
-    sprite: Objects/Fun/spraycans.rsi
-    state: death2_cap
-  product: CrateFunSprayPaints
-  cost: 2000
-  category: cargoproduct-category-name-fun
-  group: market
+#- type: cargoProduct - ITS SO FUCKING UGLY
+#  id: FunSprayPaints
+#  icon:
+#   sprite: Objects/Fun/spraycans.rsi
+#    state: death2_cap
+#  product: CrateFunSprayPaints
+#  cost: 2000
+#  category: cargoproduct-category-name-fun
+#  group: market
