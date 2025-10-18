@@ -35,7 +35,7 @@
   maxCount: 30
 
 - type: stack
-  id: RevBallbearings
+  id: RevBallBearings
   name: stack-rev-ball-bearings
   icon:
     sprite: _Trauma/Objects/Revs/components.rsi
