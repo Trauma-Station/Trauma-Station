@@ -159,7 +159,6 @@
 # SPDX-FileCopyrightText: 2025 shityaml <unalterableness@gmail.com>
 # SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 starch <starchpersonal@gmail.com>
-# SPDX-FileCopyrightText: 2025 MayasMischief <anusholeripper73@yahoo.com>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Miscellaneous
@@ -229,20 +228,6 @@
   - WhiteCane
   - TapeRecorder
   # End DeltaV Additions
-  #<Trauma>
-  - SprayPaintRed
-  - SprayPaintGreen
-  - SprayPaintBlue
-  - SprayPaintBlack
-  - SprayPaintOrange
-  - SprayPaintPurple
-  - SprayPaintWhite
-  - SprayPaintFunny
-  - SprayPaintFunnyYellow
-  - SprayPaintDeath
-  - SprayPaintDeathTwo
-  - SprayPainterAmmo
-  #</Trauma>
 
 - type: loadoutGroup
   id: Glasses
