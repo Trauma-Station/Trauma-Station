@@ -301,3 +301,11 @@ Entries:
       message: Basic rev parts made much cheaper
   id: 32
   time: '2025-10-18T18:46:47.0000000+00:00'
+- author: ImWeax
+  changes:
+    - type: Tweak
+      message: >-
+        You can now grind up cigarettes for their reagents. Inject pure nicotine
+        into your bloodstream.
+  id: 33
+  time: '2025-10-18T18:55:38.0000000+00:00'
