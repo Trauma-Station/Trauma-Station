@@ -32,7 +32,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Network;
 using System.Numerics;
-using Content.Trauma.Common.CCVar;
+using Content.Trauma.Common.CCVar; // Traumastation
 using Robust.Shared.Configuration;
 
 namespace Content.Goobstation.Shared.Sprinting;
