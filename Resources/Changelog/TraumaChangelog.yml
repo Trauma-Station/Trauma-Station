@@ -323,3 +323,9 @@ Entries:
       message: remove flash revs fuck you aviu
   id: 35
   time: '2025-10-18T20:37:25.0000000+00:00'
+- author: ARMOKS
+  changes:
+    - type: Fix
+      message: Fixed revs not being able to build a printing press.
+  id: 36
+  time: '2025-10-18T20:43:36.0000000+00:00'
