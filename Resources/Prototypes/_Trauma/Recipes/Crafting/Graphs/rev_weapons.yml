@@ -151,10 +151,10 @@
         doAfter: 5
       - material: RevBolt
         amount: 7
-        doafter: 10
+        doAfter: 10
       - material: RevNut
         amount: 7
-        doafter: 10
+        doAfter: 10
       - tool: Anchoring
         doAfter: 3
       - material: WoodPlank
@@ -189,23 +189,23 @@
         doAfter: 5
       - material: RevGunParts
         amount: 5
-        doafter: 10
+        doAfter: 10
       - material: RevBolt
         amount: 7
-        doafter: 10
+        doAfter: 10
       - material: RevGunParts
         amount: 5
-        doafter: 10
+        doAfter: 10
       - tool: Screwing
         doAfter: 3
       - material: RevNut
         amount: 7
-        doafter: 10
+        doAfter: 10
       - tool: Anchoring
         doAfter: 3
       - material: RevGunParts
         amount: 5
-        doafter: 10
+        doAfter: 10
       - tool: Screwing
         doAfter: 3
   - node: liberator
