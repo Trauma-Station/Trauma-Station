@@ -231,7 +231,7 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
     // Trauma edit start
     private void CheckCBurnCall(ZombieRuleComponent zombieRuleComponent)
     {
-        if (GetInfectedFraction(false) > zombieRuleComponent.ZombieCBurnCallPercentage && !zombieRuleComponent.CBurnCalled)
+        if (GetInfectedFraction(false) > zombieRuleComponent.ZombieCBurnCallPercentage && !zombieRuleComponent.ZombieCBurnCalled)
         {
             foreach (var station in _station.GetStations())
             {
