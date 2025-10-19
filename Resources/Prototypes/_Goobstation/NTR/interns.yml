@@ -132,8 +132,8 @@
     id: PassengerIDCard
     pocket1: DrinkEnergyDrinkCan
     pocket2: TelescopicBaton
-  inhand:
-    #- WeaponLaserCarbine # Trauma - no intern weapons
+  #inhand: # Trauma - no intern weapons
+  #  - WeaponLaserCarbine
   storage:
     back:
     - NerdInternCoin
@@ -154,8 +154,8 @@
     id: PassengerIDCard
     pocket1: DrinkEnergyDrinkCan
     pocket2: WeaponDisabler
-  inhand:
-    #- WeaponLaserCarbine # Trauma - no intern weapons
+  #inhand: # Trauma - no intern weapons
+  #  - WeaponLaserCarbine
   storage:
     back:
     - Vape # interns ammiright?
