@@ -53,6 +53,6 @@ public sealed partial class ZombieRuleComponent : Component
     public string ZombieCBurnEvent = "SpawnCBURNNoAnnounce";
 
     [DataField]
-    public bool CBurnCalled = false;
+    public bool ZombieCBurnCalled = false;
     // trauma edit end
 }

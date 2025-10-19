@@ -8,7 +8,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.GameTicking.Rules;
 using Content.Shared.Mind;
 using Robust.Shared.Audio;
 
@@ -31,6 +30,14 @@ public sealed partial class BlobRuleComponent : Component
 
     [ViewVariables]
     public float Accumulator = 0f;
+
+    // trauma edit start
+    [DataField]
+    public string BlobCBurnEvent = "SpawnCBURNNoAnnounce";
+
+    [DataField]
+    public bool BlobCBurnCalled = false;
+    //trauma edit end
 }
 
 

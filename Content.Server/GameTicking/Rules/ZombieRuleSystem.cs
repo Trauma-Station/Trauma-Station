@@ -238,7 +238,7 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
                 _chat.DispatchStationAnnouncement(station, Loc.GetString("zombie-cburn-call"), colorOverride: Color.Crimson);
             }
             _gameTicker.StartGameRule(zombieRuleComponent.ZombieCBurnEvent);
-            zombieRuleComponent.CBurnCalled = true;
+            zombieRuleComponent.ZombieCBurnCalled = true;
         }
     }
     // Trauma edit end
