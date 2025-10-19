@@ -50,7 +50,7 @@ public sealed partial class ZombieRuleComponent : Component
     public float ZombieCBurnCallPercentage = 0.6f;
 
     [DataField]
-    public string ZombieCBurnEvent = "SpawnCBURN";
+    public string ZombieCBurnEvent = "SpawnCBURNNoAnnounce";
 
     [DataField]
     public bool CBurnCalled = false;

@@ -35,6 +35,14 @@
   - type: LoadMapRule
     preloadedGrid: RetortShuttleCBURN
 
+## trauma edit - for autocall cburn
+- type: entity
+  parent: BaseGameRule
+  id: SpawnCBURNNoAnnounce
+  components:
+  - type: LoadMapRule
+    preloadedGrid: RetortShuttleCBURN
+
 # ERT
 
 - type: entity
