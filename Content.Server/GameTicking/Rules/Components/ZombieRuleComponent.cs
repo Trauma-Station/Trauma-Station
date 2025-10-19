@@ -41,4 +41,18 @@ public sealed partial class ZombieRuleComponent : Component
 
     // goob edit
     public bool StartAnnounced = false;
+
+    // trauma edit start
+    /// <summary>
+    /// After this percentage of crew are zombies, a CBurn shuttle will be automatically sent.
+    /// </summary>
+    [DataField]
+    public float ZombieCBurnCallPercentage = 0.6f;
+
+    [DataField]
+    public string ZombieCBurnEvent = "SpawnCBURN";
+
+    [DataField]
+    public bool CBurnCalled = false;
+    // trauma edit end
 }

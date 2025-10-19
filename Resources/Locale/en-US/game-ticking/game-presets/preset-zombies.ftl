@@ -29,6 +29,9 @@ zombie-start-announcement = Confirmed outbreak of level 7 biological hazard aboa
 zombie-alone = You feel entirely alone.
 
 zombie-shuttle-call = We have detected that the undead have overtaken the station. Dispatching an emergency shuttle to collect remaining personnel.
+## trauma edit start
+zombie-cburn-call = We have detected that a majority of the crew is undead. A specialized response force has been dispatched.
+### trauma edit end
 
 zombie-round-end-initial-count = {$initialCount ->
     [one] There was one initial infected:

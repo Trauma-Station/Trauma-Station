@@ -228,6 +228,21 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
             _roundEnd.EndRound();
     }
 
+    // Trauma edit start
+    private void CheckCBurnCall(ZombieRuleComponent zombieRuleComponent)
+    {
+        if (GetInfectedFraction(false) > zombieRuleComponent.ZombieCBurnCallPercentage && !zombieRuleComponent.CBurnCalled)
+        {
+            foreach (var station in _station.GetStations())
+            {
+                _chat.DispatchStationAnnouncement(station, Loc.GetString("zombie-cburn-call"), colorOverride: Color.Crimson);
+            }
+            _gameTicker.StartGameRule(zombieRuleComponent.ZombieCBurnEvent);
+            zombieRuleComponent.CBurnCalled = true;
+        }
+    }
+    // Trauma edit end
+
     protected override void Started(EntityUid uid, ZombieRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
@@ -240,6 +255,7 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
         base.ActiveTick(uid, component, gameRule, frameTime);
         if (!component.NextRoundEndCheck.HasValue || component.NextRoundEndCheck > _timing.CurTime)
             return;
+        CheckCBurnCall(component); // trauma edit - add auto cburn call
         CheckRoundEnd(component);
         component.NextRoundEndCheck = _timing.CurTime + component.EndCheckDelay;
     }
