@@ -1,0 +1,10 @@
+- type: latheRecipe
+  abstract: true
+  id: BaseRedAlert
+  requiredAlerts:
+  - red
+  - gamma
+  - delta
+  - omicron
+  - octarine
+  # same as cargo product, intentionally no epsilon
