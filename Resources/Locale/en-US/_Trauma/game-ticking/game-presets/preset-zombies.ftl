@@ -1,0 +1,1 @@
+zombie-cburn-call = We have detected that a majority of the crew is undead. A specialized response force has been dispatched.
