@@ -1,0 +1,7 @@
+- type: contrabandSeverity
+  id: RevMinor
+  examineText: contraband-examine-text-RevMinor
+
+- type: contrabandSeverity
+  id: RevMajor
+  examineText: contraband-examine-text-RevMajor

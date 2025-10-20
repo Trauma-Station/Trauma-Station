@@ -1,0 +1,39 @@
+- type: latheRecipe
+  abstract: true
+  id: BaseRevWeapon
+  categories: [ Weapons ]
+  completetime: 15
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  parent: BaseRevWeapon
+  id: RevSword
+  result: RevSwordBlade
+
+- type: latheRecipe
+  parent: BaseRevWeapon
+  id: RevKnife
+  result: RevKnifeBlade
+
+- type: latheRecipe
+  parent: BaseRevWeapon
+  id: RevPitchfork
+  result: RevPitchforkHead
+
+- type: latheRecipe
+  parent: BaseRevWeapon
+  id: RevTorch
+  result: RevTorchHead
+
+- type: latheRecipe
+  parent: BaseRevWeapon
+  id: RevMace
+  result: RevMaceHead
+
+- type: latheRecipe
+  parent: BaseRevWeapon
+  id: RevCaltrop
+  result: Caltrops
+  materials:
+    Steel: 300

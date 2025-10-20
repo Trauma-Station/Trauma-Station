@@ -1,16 +1,17 @@
-- type: constructionGraph
-  id: RevolutionaryManifesto
-  start: start
-  graph:
-    - node: start
-      edges:
-        - to: revolutionaryManifesto
-          steps:
-            - tag: Book
-              name: construction-graph-tag-book
-              icon:
-                sprite: Objects/Misc/books.rsi
-                state: cover_base
-              doAfter: 30
-    - node: revolutionaryManifesto
-      entity: RevolutionaryManifesto
+# Traumastation - flash revs
+# - type: constructionGraph
+#   id: RevolutionaryManifesto
+#   start: start
+#   graph:
+#     - node: start
+#       edges:
+#         - to: revolutionaryManifesto
+#           steps:
+#             - tag: Book
+#               name: construction-graph-tag-book
+#               icon:
+#                 sprite: Objects/Misc/books.rsi
+#                 state: cover_base
+#               doAfter: 30
+#     - node: revolutionaryManifesto
+#       entity: RevolutionaryManifesto

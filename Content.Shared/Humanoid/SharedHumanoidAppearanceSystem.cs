@@ -31,6 +31,7 @@
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using Content.Goobstation.Common.CCVar;
 using Content.Shared.CCVar;
 using Content.Shared.Decals;
 using Content.Shared.Examine;
@@ -41,6 +42,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Preferences;
 using Content.Shared._EinsteinEngines.HeightAdjust;
+using Content.Trauma.Common.CCVar; // Trauma
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects.Components.Localization;
@@ -74,8 +76,9 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     [Dependency] private readonly GrammarSystem _grammarSystem = default!;
     [Dependency] private readonly SharedIdentitySystem _identity = default!;
 
-    [ValidatePrototypeId<SpeciesPrototype>]
-    public const string DefaultSpecies = "Human";
+    public static readonly ProtoId<SpeciesPrototype> DefaultSpecies = "Human";
+
+    private bool _heightSlidersEnabled; // Traumastation
 
     public override void Initialize()
     {
@@ -83,6 +86,8 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
         SubscribeLocalEvent<HumanoidAppearanceComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<HumanoidAppearanceComponent, ExaminedEvent>(OnExamined);
+
+        Subs.CVar(_cfgManager, TraumaCVars.HeightSliders, value => _heightSlidersEnabled = value, true); // Traumastation
     }
 
     public DataNode ToDataNode(HumanoidCharacterProfile profile)
@@ -554,7 +559,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         // begin Goobstation: port EE height/width sliders
         var species = _proto.Index(humanoid.Species);
 
-        if (profile.Height <= 0 || profile.Width <= 0)
+        if (!_heightSlidersEnabled || profile.Height <= 0 || profile.Width <= 0)
             SetScale(uid, new Vector2(species.DefaultWidth, species.DefaultHeight), true, humanoid);
         else
             SetScale(uid, new Vector2(profile.Width, profile.Height), true, humanoid);

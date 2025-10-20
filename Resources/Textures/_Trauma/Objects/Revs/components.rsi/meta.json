@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created by Armok for Traumastation. Unfinished state created by @deltanedas (github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "sword"
+    },
+    {
+      "name": "spear"
+    },
+    {
+      "name": "mace"
+    },
+    {
+      "name": "knife"
+    },
+    {
+      "name": "gear"
+    },
+    {
+      "name": "gear_2"
+    },
+    {
+      "name": "gear_3"
+    },
+    {
+      "name": "ballbearings"
+    },
+    {
+      "name": "bolt"
+    },
+    {
+      "name": "bolt_2"
+    },
+    {
+      "name": "bolt_3"
+    },
+    {
+      "name": "emptyweb"
+    },
+    {
+      "name": "armorplate"
+    },
+    {
+      "name": "nut"
+    },
+    {
+      "name": "gasfilter"
+    },
+    {
+      "name": "helmetliner"
+    },
+    {
+      "name": "nut_2"
+    },
+    {
+      "name": "nut_3"
+    },
+    {
+      "name": "gunparts"
+    },
+    {
+      "name": "torch"
+    },
+    {
+      "name": "unfinished"
+    }
+  ]
+}

@@ -44,7 +44,7 @@
 - type: entity
   name: soap
   id: Soap
-  parent: BaseItem
+  parent: [ BaseItem, BasePaintRemover ] # Trauma - add paint remove parent
   description: A cheap bar of soap. Doesn't smell.
   components:
   - type: Tag

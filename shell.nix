@@ -43,6 +43,7 @@ let
     at-spi2-core
     cups
     python3
+    pre-commit # Trauma
   ];
 in pkgs.mkShell {
   name = "space-station-14-devshell";

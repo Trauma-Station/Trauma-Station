@@ -50,6 +50,7 @@
 # BSO locked
 
 - type: entity
+  abstract: true # Trauma
   parent: AirlockCentralCommand
   id: AirlockBlueshieldOfficerCommandLocked
   suffix: Blueshield, Locked
@@ -59,6 +60,7 @@
       board: [ DoorElectronicsBSO ]
 
 - type: entity
+  abstract: true # Trauma
   parent: AirlockCentralCommandGlass
   id: AirlockBlueshieldOfficerCommandGlassLocked
   suffix: Blueshield, Locked

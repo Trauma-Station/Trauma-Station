@@ -1,0 +1,44 @@
+- type: constructionGraph
+  id: RevMask
+  start: unfinished
+  graph:
+  - node: unfinished
+    edges:
+    - to: finished
+      steps:
+      - material: Plastic
+        amount: 1
+        doAfter: 30
+  - node: finished
+    entity: ClothingMaskGasRev
+
+- type: constructionGraph
+  id: RevHelmet
+  start: unfinished
+  graph:
+  - node: unfinished
+    edges:
+    - to: finished
+      steps:
+      - material: Plasteel
+        amount: 1
+        doAfter: 30
+  - node: finished
+    entity: ClothingHeadHelmetRev
+
+- type: constructionGraph
+  id: RevVest
+  start: unfinished
+  graph:
+  - node: unfinished
+    edges:
+    - to: finished
+      steps:
+      - tag: RevArmorPlate
+        name: construction-graph-tag-armorplate
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: armorplate
+        doAfter: 30
+  - node: finished
+    entity: ClothingOuterVestWebRev

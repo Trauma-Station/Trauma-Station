@@ -1,0 +1,9 @@
+- type: latheRecipePack
+  id: SmilingPals
+  recipes:
+  - SmilingPal1
+  - SmilingPal2
+  - SmilingPal3
+  - SmilingPal4
+  - SmilingPal5
+  - SmilingPal6

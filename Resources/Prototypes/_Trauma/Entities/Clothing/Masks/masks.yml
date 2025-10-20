@@ -1,0 +1,25 @@
+- type: entity
+  parent: [ ClothingMaskGas, BaseRevMajorContraband ]
+  id: ClothingMaskGasRev
+  name: gas mask
+  description: A reliable military-style gas mask.
+  components:
+  - type: Sprite
+    sprite: Clothing/Mask/merc.rsi
+  - type: Clothing
+    sprite: Clothing/Mask/merc.rsi
+  - type: Armor
+    coverage:
+    - Head
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: IngestionBlocker
+    blockSmokeIngestion: true
+  - type: Construction
+    graph: RevMask
+    deconstructionTarget: null
+    node: finished

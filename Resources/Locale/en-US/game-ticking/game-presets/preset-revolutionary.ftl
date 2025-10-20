@@ -16,16 +16,17 @@
 
 roles-antag-rev-head-name = Head Revolutionary
 roles-antag-rev-head-objective = Your objective is to take over the station by converting people to your cause and killing all Command staff on station.
-
+## Trauma change, greeting changed.
 head-rev-role-greeting =
     You are a Head Revolutionary.
     You are tasked with removing all of Command from station via death, exilement or imprisonment.
-    The Syndicate has sponsored you with a manifesto that persuades the crew to your side.
-    Beware, this won't work on Security or Command - their loyalty is unwavering.
+    You have prepared the components needed to make an industrial forge and produce the tools you need.
+    Produce propoganda flyers with the printing press to convert the crew.
+    Be careful, your machines are very loud. You will have to hide and defend your base of operations.
     Viva la revolución!
 
 head-rev-briefing =
-    Use the manifesto to convert people to your cause.
+    Build rev industrial buildings.
     Get rid of all heads to take over the station.
 
 head-rev-break-mindshield = The Mindshield neutralized hypnotic powers, but its functionality has been compromised!

@@ -1,0 +1,48 @@
+- type: entity
+  parent: [ BaseWeaponLauncher, BaseRevMajorContraband, BaseGunWieldable ]
+  id: WeaponLauncherRPG2
+  name: RPG-2
+  description: An ancient old earth rocket launcher.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Launchers/RPG2.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Guns/Launchers/RPG2worn.rsi
+  - type: Item
+    shape:
+    - 0,0,7,2
+  - type: Gun
+    fireRate: 0.5
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CartridgeRPG2
+    capacity: 1
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+  - type: Appearance
+  - type: StaticPrice
+    price: 1000
+  - type: GunRequiresWield
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.5
+    sprintModifier: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 0.75
+    sprintModifier: 0.75
+  - type: HeldSpeedModifier
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevGuns
+    node: RPG2

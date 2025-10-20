@@ -1,0 +1,47 @@
+- type: construction
+  id: RevLiberator
+  graph: RevGuns
+  startNode: start
+  targetNode: liberator
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
+  id: RevResistance
+  graph: RevGuns
+  startNode: start
+  targetNode: resistance
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
+  id: RPG2
+  graph: RevGuns
+  startNode: start
+  targetNode: RPG2
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
+  id: RevIED
+  graph: RevIED
+  startNode: start
+  targetNode: IED
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary

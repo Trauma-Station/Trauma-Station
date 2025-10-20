@@ -1,0 +1,37 @@
+# less material and time efficient than a forge, basically
+# only for bootstrapping if you lose your starting parts
+- type: construction
+  id: RevGear
+  graph: RevParts
+  startNode: start
+  targetNode: gear
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
+  id: RevBolt
+  graph: RevParts
+  startNode: start
+  targetNode: bolt
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
+  id: RevNut
+  graph: RevParts
+  startNode: start
+  targetNode: nut
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary

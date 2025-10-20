@@ -33,6 +33,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <ProjectReference Include="..\Content.Goobstation.Client\Content.Goobstation.Client.csproj" />
     <ProjectReference Include="..\Content.Goobstation.Server\Content.Goobstation.Server.csproj" />
     <ProjectReference Include="..\Content.Goobstation.Shared\Content.Goobstation.Shared.csproj" />
+    <!-- Trauma -->
+    <ProjectReference Include="../Content.Trauma.Client/Content.Trauma.Client.csproj" />
+    <ProjectReference Include="../Content.Trauma.Server/Content.Trauma.Server.csproj" />
+    <ProjectReference Include="../Content.Trauma.Shared/Content.Trauma.Shared.csproj" />
+    <!-- /Trauma -->
     <ProjectReference Include="..\Content.Server\Content.Server.csproj" />
     <ProjectReference Include="..\Content.Shared\Content.Shared.csproj" />
     <ProjectReference Include="..\Content.Tests\Content.Tests.csproj" />

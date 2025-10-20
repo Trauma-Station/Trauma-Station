@@ -232,6 +232,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     public void OnStateExited(LobbyState state)
     {
         PreviewPanel?.SetLoaded(false);
+        _profileEditor?.Shutdown(); // Traumastation
         _profileEditor?.Dispose();
         _characterSetup?.Dispose();
 

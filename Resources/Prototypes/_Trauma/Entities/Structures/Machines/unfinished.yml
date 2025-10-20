@@ -1,0 +1,47 @@
+- type: entity
+  parent: [ BaseMachine, BaseMinorContraband ]
+  id: RevUnfinishedMachine
+  name: steel contraption
+  description: A large mass of steel worked into some kind of machine. Only a madman knows what this could be!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/unfinished.rsi
+    state: icon
+  - type: Construction
+    graph: RevMachine
+    deconstructionTarget: null
+    node: unfinished
+
+- type: entity
+  parent: RevUnfinishedMachine
+  id: RevUnfinishedTurret
+  name: turret base
+  description: A lump of steel mounted to a tripod, not very imposing.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Defences/turrets.rsi
+    state: unfinished
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Construction
+    graph: RevTurret
+
+- type: entity
+  parent: RevUnfinishedTurret
+  id: RevUnfinishedTurretBarrel
+  suffix: Barrel
+  description: A homemade anti-personnel turret. It still needs more work to be done, though keep your eyes clear of its barrel.
+  components:
+  - type: Sprite
+    state: unfinished-barrel
+  - type: Construction
+    node: barrel

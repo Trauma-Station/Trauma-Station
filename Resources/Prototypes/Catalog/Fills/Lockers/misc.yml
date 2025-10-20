@@ -272,6 +272,9 @@
     children:
     - id: StrangePill
       prob: 0.15
+    - !type:NestedSelector # Trauma
+      tableId: SprayPaintsDeath
+      prob: 0.075
     # Tools
     - !type:NestedSelector
       tableId: MaintToolsTable

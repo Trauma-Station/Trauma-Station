@@ -10,9 +10,11 @@
 
 # Rules
 
-ui-rules-header = Goob Station Official Server Rules
-ui-rules-header-rp = Goob Station Roleplay Official Server Rules
-ui-rules-accept = I have read and agree to follow the rules. (I also give up my soul to kira)
+# <Trauma>
+ui-rules-header = Trauma Station Official Server Rules
+ui-rules-header-rp = Trauma Station Roleplay Official Server Rules
+# </Trauma>
+ui-rules-accept = I have read and agree to follow the rules
 ui-rules-wait = The accept button will be enabled after {$time} seconds.
 
 ui-rules-button-home = Home

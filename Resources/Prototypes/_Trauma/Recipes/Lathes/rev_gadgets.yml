@@ -1,0 +1,49 @@
+- type: latheRecipe
+  abstract: true
+  id: BaseRevGadget
+  completetime: 7.5
+
+- type: latheRecipe
+  id: RevJammer
+  parent: BaseRevGadget
+  result: RevRadioJammer
+  materials:
+    Steel: 100
+    Plastic: 100
+    Glass: 25
+    Gold: 25
+    Silver: 25
+
+- type: latheRecipe
+  id: RevDoor
+  parent: BaseRevGadget
+  result: RevDoorFlatpack
+  materials:
+    Steel: 500
+    Plastic: 50
+    Glass: 150
+
+- type: latheRecipe
+  id: RevID
+  parent: BaseRevGadget
+  result: RevIDCard
+  materials:
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+
+- type: latheRecipe
+  id: RevVisor
+  parent: BaseRevGadget
+  result: ClothingEyesRevolutionaryVisor
+  materials:
+    Glass: 50
+    Plastic: 50
+
+- type: latheRecipe
+  id: RevHeadset
+  parent: BaseRevGadget
+  result: ClothingHeadsetRevolutionary
+  materials:
+    Steel: 50
+    Plastic: 50

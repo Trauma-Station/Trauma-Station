@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2025 Evaisa <mail@evaisa.dev>
-#
+# SPDX-FileCopyrightText: 2025 RichardBlonski <48651647+RichardBlonski@users.noreply.github.com>
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -14,6 +14,7 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: floor_goblin
+  - type: Physics
   - type: Fixtures
     fixtures:
       fix1:
@@ -22,9 +23,10 @@
           radius: 0.2
         density: 100
         mask:
-        - SmallMobMask
+        - MobMask
         layer:
-        - SmallMobLayer
+        - MobLayer
+        # Regular mob collision, but we'll handle small mob behavior in code
   - type: GhostRole
     makeSentient: true
     allowSpeech: true
@@ -34,6 +36,8 @@
     rules: ghost-role-information-freeagent-rules
     mindRoles:
     - MindRoleGhostRoleFreeAgent
+    raffle:
+      settings: default
   - type: GhostTakeoverAvailable
   - type: Speech
     speechVerb: FloorGoblin
@@ -52,7 +56,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Dead
+      60: Dead
   - type: Bloodstream
     bloodReagent: InsectBlood
     bloodMaxVolume: 40
@@ -64,7 +68,7 @@
     spawned: []
   - type: NpcFactionMember
     factions:
-      - Mouse
+      - SimpleNeutral
   - type: VentCrawler
   - type: MeleeWeapon
     soundHit:
@@ -97,3 +101,4 @@
         Blunt: 0.1
   - type: Puller
     needsHands: false
+  - type: Stealth # Hijacking this to prevent huds from showing, tell me if you got a better solution.

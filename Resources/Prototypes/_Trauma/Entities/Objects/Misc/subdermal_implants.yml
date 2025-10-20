@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseSubdermalImplant
+  id: HellRipImplant
+  name: hell ripte implant
+  description: This implant allows the user to perform various Hell Rip moves.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ComponentsImplant
+    added:
+    - type: GrantHellRip

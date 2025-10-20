@@ -48,6 +48,7 @@
     - AllHostile
     - Heretic # goob edit - heretics
     - Blob # Goobstation - Blob
+    - Shadowling # Einstein Engines - Shadowlings
   friendly: # Goobstation
     - Wizard
     - PirateFaction # goob - pirates
@@ -65,6 +66,7 @@
   - Changeling # goob edit - changelings
   - Heretic # goob edit - heretics
   - Blob # Goobstation - Blob
+  - Shadowling # Einstein Engines - Shadowlings
   - Wizard
   - PirateFaction # goob - pirates
   - Xenoborg
@@ -106,7 +108,8 @@
   - Blob # Goobstation - Blob
   - PirateFaction # goob - pirates
   friendly: # Goobstation
-    - Wizard
+  - Wizard
+  - Shadowling # Einstein Engines - Shadowlings
 
 - type: npcFaction
   id: SimpleNeutral
@@ -127,6 +130,7 @@
   - Blob # Goobstation - Blob
   - Wizard # goob edit - wizard
   - PirateFaction # goob - pirates
+  - Shadowling # Einstein Engines - Shadowlings
 
 - type: npcFaction
   id: Xeno
@@ -162,22 +166,32 @@
   - Changeling # goob edit - changelings
   - Heretic # goob edit - heretics
   - Blob # Goobstation - Blob
+  - Shadowling # Einstein Engines - Shadowlings
   - Wizard # goob edit - wizard
   - PirateFaction # goob - pirates
   - Xenoborg
 
 - type: npcFaction
-  id: Revolutionary
+  id: Revolutionary #made more hostile for trauma
   hostile:
   - NanoTrasen
-  - Zombie
-  - SimpleHostile
   - Dragon
-  - AllHostile
+  - Mouse
+  - Passive
+  - PetsNT
+  - SimpleHostile
+  - SimpleNeutral
+  - Syndicate
+  - Xeno
+  - Zombie
+  - Changeling # goob edit - changelings
+  - Heretic # goob edit - heretics
   - Blob # Goobstation - Blob
-  - Wizard # Goobstation - wizard
+  - Shadowling # Einstein Engines - Shadowlings
+  - Wizard # goob edit - wizard
   - PirateFaction # goob - pirates
-  - Xenoborg
+  friendly: # Goobstation
+  - Revolutionary
 
 - type: npcFaction
   id: AllHostile
@@ -196,14 +210,15 @@
   - Changeling # goob edit - changelings
   - Heretic # goob edit - heretics
   - Blob # Goobstation - Blob
+  - Shadowling # Einstein Engines - Shadowlings
   - Wizard # goob edit - wizard
   - PirateFaction # goob - pirates
 
 # Balloons Factions Edit:
-- type: npcFaction  
+- type: npcFaction
   id: Balloon
   # Balloons can't attack
-  
+
 - type: npcFaction
   id: Monkey
   hostile:
@@ -225,6 +240,7 @@
   - Xeno # rivalry
 
   # cause they are hostile to them
-  - SimpleHostile 
+  - SimpleHostile
   - AllHostile
   - Blob # Goobstation - Blob
+  - Shadowling # Einstein Engines - Shadowlings

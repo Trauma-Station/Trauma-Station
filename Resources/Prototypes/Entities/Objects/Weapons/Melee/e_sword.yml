@@ -487,9 +487,9 @@
         variation: 0.250
     activatedDamage:
         types:
-            Slash: 20   #Goob Station rebalance, was originally 12
-            Heat: 20    #Goob Station rebalance, was originally 12
-            Structural: 40 # Goob edit
+          Slash: 20   #Goob Station rebalance, was originally 12
+          Heat: 20    #Goob Station rebalance, was originally 12
+          Structural: 40 # Goob edit
   - type: ItemToggleActiveSound
     activeSound:
       path: /Audio/Weapons/ebladehum.ogg

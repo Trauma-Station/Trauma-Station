@@ -106,7 +106,7 @@
   text: "/ServerInfo/_Goobstation/Guidebook/SoP/Jobs/Command/CommandSOP.xml"
   children:
   - NanotrasenRep SOP
-  - BlueshieldOfficer SOP
+  #- BlueshieldOfficer SOP # Trauma - removed BSO
   - Captain SOP
   - HeadOfPersonnel SOP
   - HeadOfSecurity SOP
@@ -318,10 +318,11 @@
   name: guide-entry-sop-ntr
   text: "/ServerInfo/_Goobstation/Guidebook/SoP/Jobs/Command/NanotrasenRepSOP.xml"
 
-- type: guideEntry
-  id: BlueshieldOfficer SOP
-  name: guide-entry-sop-bso
-  text: "/ServerInfo/_Goobstation/Guidebook/SoP/Jobs/Command/BlueshieldOfficerSOP.xml"
+# Trauma - removed BSO
+#- type: guideEntry
+#  id: BlueshieldOfficer SOP
+#  name: guide-entry-sop-bso
+#  text: "/ServerInfo/_Goobstation/Guidebook/SoP/Jobs/Command/BlueshieldOfficerSOP.xml"
 
 - type: guideEntry
   id: Captain SOP

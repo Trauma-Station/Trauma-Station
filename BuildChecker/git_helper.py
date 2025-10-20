@@ -106,6 +106,11 @@ def install_hooks():
         shutil.copy2(str(hooks_source_dir/filename),
                         str(hooks_target_dir/filename))
 
+    # <Trauma> - add pre-commit hooks if you have it installed
+    if shutil.which("pre-commit") is not None:
+        run_command(["pre-commit", "install"], True)
+    # </Trauma>
+
 
 def reset_solution():
     """

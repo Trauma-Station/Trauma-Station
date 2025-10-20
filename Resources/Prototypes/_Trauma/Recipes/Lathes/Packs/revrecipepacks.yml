@@ -1,0 +1,90 @@
+- type: latheRecipePack
+  id: RevForgeStatic
+  recipes:
+  - RevSword
+  - RevKnife
+  - RevPitchfork
+  - RevTorch
+  - RevMace
+  - RevGear
+  - RevBolt
+  - RevNut
+  - ClothingOuterArmorRev
+  - RevArmorPlate
+
+- type: latheRecipePack
+  id: RevPrintingPress
+  recipes:
+  - RevPropaganda
+
+- type: latheRecipePack
+  id: RevTelecommsWorkbenchStatic
+  recipes:
+  - EncryptionKeyRev
+  - RevDropPodTraps
+  - RevTurretElectronics
+  - TelecomServerCircuitboard # eventually replace this with a homeade looking one
+  - RevIFF
+  - TrackingImplanterRev
+  - SheetifierMachineCircuitboard
+
+- type: latheRecipePack
+  id: RevTelesphereStatic
+  recipes:
+  - RevCrystal
+  - RevBiomass
+  - RevBrass
+  - RevBanana
+  - RevBones
+  - RevGlass
+  - RevCardboard
+  - RevPaper
+  - RevCloth
+  - RevSteel
+  - RevMeat
+  - RevDuraThread
+  - RevPlasma
+  - RevDiamonds
+  - RevSilk
+  - RevPlasteel
+  - RevUranium
+  - RevPlastic
+  - RevWood
+  - RevGunpowder
+
+- type: latheRecipePack
+  parent: SmilingPals
+  id: RevPrinterStatic
+  recipes:
+  - RevGunParts
+  - RevTurretMagazine
+  - RevSMGMagazine
+
+- type: latheRecipePack
+  id: RevBulletPressStatic
+  recipes:
+  - RevTurretBullet
+  - RevPistolBullet
+
+- type: latheRecipePack
+  id: RevMicroElectronicsStatic
+  recipes:
+  - RevID
+  - RevDoor
+  - RevJammer
+  - RevHeadset
+  - RevVisor
+#  - Revpayloads later
+
+- type: latheRecipePack
+  id: RevClothingStatic
+  recipes:
+  - ClothingBackpackRev
+  - ClothingBeltRevWebbing
+  - RevHelmetLiner
+  - RevGasFilter
+  - ClothingHeadBandRev
+  - RevEmptyVest
+  - ClothingUniformJumpsuitMilitaryTurtleneckRev
+  - ClothingShoesBootsJack
+  - ClothingHandsGlovesCombat

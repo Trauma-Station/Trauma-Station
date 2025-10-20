@@ -67,11 +67,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 262.0.0
+  engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/14/2025 19:57:57
-  entityCount: 35858
+  time: 10/08/2025 15:37:15
+  entityCount: 35859
 maps:
 - 1
 grids:
@@ -678,6 +678,11 @@ entities:
       id: Fland
     - type: OccluderTree
     - type: Shuttle
+      dampingModifiers:
+        Cruise: 0.0075
+        Dampen: 0.25
+        Anchor: 2
+        None: 0.25
       dampingModifier: 0.25
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
@@ -16213,6 +16218,7 @@ entities:
     - type: GridPathfinding
     - type: NavMap
     - type: ImplicitRoof
+    - type: FTLDrive
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 3
@@ -21226,7 +21232,7 @@ entities:
       pos: 72.5,-11.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -69510.555
+      secondsUntilStateChange: -69740.79
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -89875,6 +89881,14 @@ entities:
     - type: Transform
       pos: -19.46565,10.906514
       parent: 2
+- proto: CleanerDispenser
+  entities:
+  - uid: 24437
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 6.5,9.5
+      parent: 2
 - proto: ClosetBombFilled
   entities:
   - uid: 14240
@@ -94986,6 +95000,13 @@ entities:
     - type: Transform
       pos: 62.563507,-54.453243
       parent: 2
+- proto: ClothingMultipleHeadphones
+  entities:
+  - uid: 14592
+    components:
+    - type: Transform
+      pos: 31.565708,30.688412
+      parent: 2
 - proto: ClothingNeckBling
   entities:
   - uid: 14587
@@ -95013,13 +95034,6 @@ entities:
     components:
     - type: Transform
       pos: -35.53245,36.540043
-      parent: 2
-- proto: ClothingNeckHeadphones
-  entities:
-  - uid: 14592
-    components:
-    - type: Transform
-      pos: 31.565708,30.688412
       parent: 2
 - proto: ClothingNeckScarfStripedBlue
   entities:
@@ -187031,15 +187045,15 @@ entities:
       parent: 2
 - proto: SignSmoking
   entities:
+  - uid: 24438
+    components:
+    - type: Transform
+      pos: 6.5,14.5
+      parent: 2
   - uid: 28090
     components:
     - type: Transform
       pos: 79.5,37.5
-      parent: 2
-  - uid: 28091
-    components:
-    - type: Transform
-      pos: 6.5,9.5
       parent: 2
   - uid: 28092
     components:

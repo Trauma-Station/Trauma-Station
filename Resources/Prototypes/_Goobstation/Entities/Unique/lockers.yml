@@ -13,6 +13,7 @@
     - UniqueMarkerNanorepLocker 
 
 - type: entity
+  abstract: true # Trauma
   id: UniqueLockerBlueshieldOfficerFilled
   suffix: MAP THIS, Unique, Filled
   parent: LockerBlueshieldOfficerFilled

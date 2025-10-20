@@ -1,0 +1,29 @@
+- type: latheRecipe
+  abstract: true
+  id: BaseRevComponent
+  categories: [ Parts ]
+  completetime: 15
+  materials:
+    Steel: 10
+
+- type: latheRecipe
+  parent: BaseRevComponent
+  id: RevGear
+  result: RevGear
+
+- type: latheRecipe
+  parent: BaseRevComponent
+  id: RevNut
+  result: RevNut
+
+- type: latheRecipe
+  parent: BaseRevComponent
+  id: RevBolt
+  result: RevBolt
+
+- type: latheRecipe
+  parent: BaseRevComponent
+  id: RevArmorPlate
+  result: RevArmorPlate
+  materials:
+    Steel: 500

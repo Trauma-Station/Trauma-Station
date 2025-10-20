@@ -13,17 +13,19 @@
       - state: icon_manifesto
       - state: detail_bookmark
         color: "#aaaa24"
-    - type: RevolutionaryConverter
-      conversionDuration: 2
+    # Traumastation - flash revs
+    # - type: RevolutionaryConverter
+    #   conversionDuration: 2
     - type: Tag
       tags:
         - Book
     - type: UseDelay
       delay: 2
     - type: Appearance
-    - type: GuideHelp
-      guides:
-      - Revolutionaries
-    - type: Construction
-      graph: RevolutionaryManifesto
-      node: revolutionaryManifesto
+    # Traumastation - flash revs
+    # - type: GuideHelp
+    #   guides:
+    # - Revolutionaries
+    # - type: Construction
+    #   graph: RevolutionaryManifesto
+    #   node: revolutionaryManifesto

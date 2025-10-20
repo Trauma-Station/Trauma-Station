@@ -1,0 +1,7 @@
+- type: construction
+  id: SheetPaper
+  graph: SheetPaper
+  startNode: start
+  targetNode: paper sheet
+  category: construction-category-materials
+  objectType: Item
