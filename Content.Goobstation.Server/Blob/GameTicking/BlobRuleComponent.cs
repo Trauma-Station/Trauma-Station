@@ -8,8 +8,10 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Server.GameTicking.Rules;
 using Content.Shared.Mind;
 using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Blob.GameTicking;
 
@@ -31,13 +33,17 @@ public sealed partial class BlobRuleComponent : Component
     [ViewVariables]
     public float Accumulator = 0f;
 
-    // trauma edit start
+    /// <summary>
+    /// Trauma - 
+    /// </summary>
     [DataField]
-    public string BlobCBurnEvent = "SpawnCBURNNoAnnounce";
+    public EntProtoId BlobCBurnEvent = "SpawnCBURNNoAnnounce";
 
+    /// <summary>
+    /// Trauma -
+    /// </summary>
     [DataField]
-    public bool BlobCBurnCalled = false;
-    //trauma edit end
+    public bool BlobCBurnCalled;
 }
 
 

@@ -228,20 +228,21 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
             _roundEnd.EndRound();
     }
 
-    // Trauma edit start
-    private void CheckCBurnCall(ZombieRuleComponent zombieRuleComponent)
+    /// <summary>
+    /// Trauma - 
+    /// </summary>
+    private void CheckCBurnCall(ZombieRuleComponent comp)
     {
-        if (GetInfectedFraction(false) > zombieRuleComponent.ZombieCBurnCallPercentage && !zombieRuleComponent.ZombieCBurnCalled)
+        if (comp.ZombieCBurnCalled || GetInfectedFraction(false) < comp.ZombieCBurnCallPercentage)
+            return;
+
+        foreach (var station in _station.GetStations())
         {
-            foreach (var station in _station.GetStations())
-            {
-                _chat.DispatchStationAnnouncement(station, Loc.GetString("zombie-cburn-call"), colorOverride: Color.Crimson);
-            }
-            _gameTicker.StartGameRule(zombieRuleComponent.ZombieCBurnEvent);
-            zombieRuleComponent.ZombieCBurnCalled = true;
+            _chat.DispatchStationAnnouncement(station, Loc.GetString("zombie-cburn-call"), colorOverride: Color.Crimson);
         }
+        _gameTicker.StartGameRule(comp.ZombieCBurnEvent);
+        comp.ZombieCBurnCalled = true;
     }
-    // Trauma edit end
 
     protected override void Started(EntityUid uid, ZombieRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
