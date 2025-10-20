@@ -11,6 +11,8 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Guns/Launchers/RPG2worn.rsi
   - type: Item
     shape:
     - 0,0,7,2
