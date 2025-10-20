@@ -8,7 +8,14 @@
     sprite: Objects/Misc/module.rsi
     layers:
     - state: datadisk_base
+      map: ["base"]
     - state: datadisk_label
+  - type: RandomSprite
+    available:
+    - base:
+        datadisk_base: Sixteen
+  - type: Item
+    size: Tiny
   - type: GeneticsDisk
 
 # admin aboose

@@ -1,5 +1,7 @@
 using Content.Shared.Actions.Components;
 using Content.Shared.Body.Systems;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction.Components;
@@ -7,7 +9,6 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
-using Content.Trauma.Shared.Genetics.Console;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -51,9 +52,12 @@ public sealed class MutationSystem : EntitySystem
     public Dictionary<EntProtoId<MutationComponent>, MutationData> RoundData = new();
     private HashSet<int> MutationNumbers = new();
 
+    private static readonly ProtoId<DamageGroupPrototype> Genetic = "Genetic";
+
     private List<EntProtoId<MutationComponent>> _removing = new();
 
     private EntityQuery<ActionComponent> _actionQuery;
+    private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<DnaComponent> _dnaQuery;
     private EntityQuery<MutatableComponent> _mutatableQuery;
     private EntityQuery<MutationComponent> _query;
@@ -64,6 +68,7 @@ public sealed class MutationSystem : EntitySystem
         base.Initialize();
 
         _actionQuery = GetEntityQuery<ActionComponent>();
+        _damageableQuery = GetEntityQuery<DamageableComponent>();
         _dnaQuery = GetEntityQuery<DnaComponent>();
         _mutatableQuery = GetEntityQuery<MutatableComponent>();
         _query = GetEntityQuery<MutationComponent>();
@@ -118,7 +123,7 @@ public sealed class MutationSystem : EntitySystem
         var dna = GetDna(ent);
         TransferMutations(ent, (target, comp));
         if (dna is {} oldDna)
-            SetDna(target, oldDna); // don't change dna by reapply mutations
+            SetDna(target, oldDna); // don't change dna by reapplying mutations
     }
 
     private void MutationAdded(Entity<MutatableComponent> ent, Entity<MutationComponent> mutation, bool automatic)
@@ -237,11 +242,23 @@ public sealed class MutationSystem : EntitySystem
         => !comp.Dormant.Contains(id);
 
     /// <summary>
+    /// Get the total instability of a mutatable entity.
+    /// Returns 0 if the entity is not mutatable.
+    /// </summary>
+    public int GetInstability(EntityUid uid)
+        => _mutatableQuery.CompOrNull(uid)?.TotalInstability ?? 0;
+
+    /// <summary>
+    /// Returns true if an entity has <see cref="MutatableComponent"/>.
+    /// </summary>
+    public bool IsMutatable(EntityUid uid) => _mutatableQuery.HasComp(uid);
+
+    /// <summary>
     /// Returns true if an entity can currently mutate.
     /// Corpses cannot mutate because the body has to do work to change every cell.
     /// </summary>
     public bool CanMutate(EntityUid uid)
-        => _mutatableQuery.HasComp(uid) && !_mob.IsDead(uid);
+        => IsMutatable(uid) && !_mob.IsDead(uid);
 
     public Entity<MutatableComponent>? GetMutatable(EntityUid uid)
         => _mutatableQuery.TryComp(uid, out var comp) && !_mob.IsDead(uid)
@@ -410,8 +427,9 @@ public sealed class MutationSystem : EntitySystem
         // transfer the mutation entities
         foreach (var (id, mutation) in ent.Comp.Mutations)
         {
-            MutationRemoved(ent, mutation, automatic: true);
-            MutationAdded(target, mutation, automatic: true);
+            var comp = _query.Comp(mutation);
+            MutationRemoved(ent, (mutation, comp), automatic: true);
+            MutationAdded(target, (mutation, comp), automatic: true);
             target.Comp.Mutations[id] = mutation;
         }
         ent.Comp.Mutations.Clear();
@@ -450,6 +468,20 @@ public sealed class MutationSystem : EntitySystem
 
         comp.DNA = dna;
         Dirty(uid, comp);
+    }
+
+    /// <summary>
+    /// Gets the total genetic damage of a mob, or null if it isn't damageable.
+    /// </summary>
+    public int? GetGeneticDamage(EntityUid mob)
+    {
+        if (!_damageableQuery.TryComp(mob, out var comp))
+            return null;
+
+        if (!comp.DamagePerGroup.TryGetValue(Genetic, out var damage))
+            return 0;
+
+        return (int) damage;
     }
 
     /// <summary>

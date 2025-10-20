@@ -1,15 +1,14 @@
-using Content.Trauma.Shared.Genetics.Mutations;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Trauma.Shared.Genetics.Console;
+namespace Content.Trauma.Shared.Genetics.Mutations;
 
 /// <summary>
 /// Added to entities scanned by the genetics console.
 /// This allows mutations to be discovered, activated and stored to disks for further printing.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(GeneticsConsoleSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(ScannedGenomeSystem))]
 public sealed partial class ScannedGenomeComponent : Component
 {
     /// <summary>
@@ -41,6 +40,6 @@ public sealed partial class Sequence
 [DataRecord]
 public partial record struct UnknownBase(uint Index, char Value = 'X');
 
-// EntProtoId doesnt serializer properly for some reason
+// EntProtoId doesnt work properly with Serializable for some reason
 [Serializable, NetSerializable]
 public record struct SequenceState(string Bases, int Number, string? Mutation);

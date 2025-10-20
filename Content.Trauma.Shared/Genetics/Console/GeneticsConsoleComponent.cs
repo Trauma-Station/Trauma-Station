@@ -1,5 +1,6 @@
-using Content.Trauma.Shared.Genetics.Mutations;
+using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Damage;
+using Content.Trauma.Shared.Genetics.Mutations;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -26,6 +27,12 @@ public sealed partial class GeneticsConsoleComponent : Component
     /// </summary>
     [DataField]
     public string DiskSlot = "genetics_disk";
+
+    /// <summary>
+    /// Subjects with more than this number of genetic damage can't be scanned or sequenced.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 MaxGeneticDamage = 90;
 
     #region Scanning
 

@@ -8,13 +8,15 @@
 		<controls:NanoHeading Text="{Loc 'genetics-console-heading-scanner'}"/>
 		<BoxContainer Orientation="Horizontal">
 			<SpriteView Name="MobView" SetSize="64 64" OverrideDirection="South" Stretch="Fill"/>
-			<GridContainer Columns="2">
-				<Label Text="{Loc 'genetics-console-name'}"/>
-				<Label Name="MobName"/>
+			<GridContainer Columns="4" HorizontalExpand="True">
+				<Label Text="{Loc 'genetics-console-name'}" MinWidth="150"/>
+				<Label Name="MobName" MinWidth="200"/>
 				<Label Text="{Loc 'genetics-console-status'}"/>
-				<Label Name="MobStatus"/>
-				<Label Text="{Loc 'genetics-console-integrity'}"/>
+				<Label Name="MobStatus" MinWidth="300"/>
+				<Label Text="{Loc 'genetics-console-integrity'}" MinWidth="150"/>
 				<Label Name="MobIntegrity"/>
+				<Label Text="{Loc 'genetics-console-instability'}" MinWidth="150"/>
+				<Label Name="MobInstability"/>
 			</GridContainer>
 		</BoxContainer>
 		<!-- Console tabs -->

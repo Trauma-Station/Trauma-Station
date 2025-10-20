@@ -32,6 +32,8 @@ public sealed partial class ShapeshiftSystem : EntitySystem
     private EntityQuery<BodyPartComponent> _partQuery;
     private EntityQuery<OrganComponent> _organQuery;
 
+    private List<Entity<WoundComponent>> _wounds = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -167,14 +169,23 @@ public sealed partial class ShapeshiftSystem : EntitySystem
             if (GetPartOrgan(part, organSlot) is not {} organ)
                 continue;
 
-            var organId = Prototype(organ)?.ID;
-            if (organId != defaultOrgan && GetPartOrgan(mirror, organSlot) is {} mirrorOrgan)
+            var mirrorOrgan = GetPartOrgan(mirror, organSlot);
+            if (mirrorOrgan != null)
             {
-                ev = new ShapeshiftedEvent(target, mirrorOrgan);
+                ev = new ShapeshiftedEvent(target, mirrorOrgan.Value);
                 RaiseLocalEvent(organ, ref ev);
-                _body.RemoveOrgan(mirrorOrgan, mirror);
+            }
+
+            var organId = Prototype(organ)?.ID;
+            if (organId == defaultOrgan) // don't transfer default organs
+                continue;
+
+            if (mirrorOrgan != null)
+            {
+                _body.RemoveOrgan(mirrorOrgan.Value, mirror);
                 Del(mirrorOrgan);
             }
+
             var inserted = _body.InsertOrgan(part, organ, organSlot, part.Comp, organ.Comp);
             if (!inserted)
                 Log.Error($"Failed to insert organ {ToPrettyString(organ)} into {ToPrettyString(mirror)}!");
@@ -258,7 +269,13 @@ public sealed partial class ShapeshiftSystem : EntitySystem
 
     private void OnWoundableShapeshifted(Entity<WoundableComponent> ent, ref ShapeshiftedEvent args)
     {
+        _wounds.Clear();
         foreach (var wound in _wound.GetAllWounds(ent, ent.Comp))
+        {
+            _wounds.Add(wound);
+        }
+
+        foreach (var wound in _wounds)
         {
             var severity = wound.Comp.WoundSeverityPoint;
             var group = wound.Comp.DamageGroup;

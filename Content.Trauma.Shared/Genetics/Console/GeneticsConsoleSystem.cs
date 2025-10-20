@@ -24,6 +24,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly MutationSystem _mutation = default!;
+    [Dependency] private readonly ScannedGenomeSystem _genome = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedChatSystem _chat = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -36,8 +37,6 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
     private EntityQuery<GeneticsConsoleComponent> _query;
     private EntityQuery<GeneticsDiskComponent> _diskQuery;
-    private EntityQuery<MutatableComponent> _mutatableQuery;
-    private EntityQuery<ScannedGenomeComponent> _scannedQuery;
 
     public override void Initialize()
     {
@@ -45,8 +44,6 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
         _query = GetEntityQuery<GeneticsConsoleComponent>();
         _diskQuery = GetEntityQuery<GeneticsDiskComponent>();
-        _mutatableQuery = GetEntityQuery<MutatableComponent>();
-        _scannedQuery = GetEntityQuery<ScannedGenomeComponent>();
 
         SubscribeLocalEvent<GeneticsConsoleComponent, ScannerConnectedEvent>(OnScannerConnected);
         SubscribeLocalEvent<GeneticsConsoleComponent, ScannerDisconnectedEvent>(OnScannerDisconnected);
@@ -130,18 +127,19 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             return;
         }
 
-        var scanned = EnsureComp<ScannedGenomeComponent>(mob);
-
-        if (_net.IsClient) return;
-
-        _audio.PlayPvs(ent.Comp.ScanSound, ent);
-        var mutatable = _mutatableQuery.Comp(mob);
-        foreach (var id in mutatable.Dormant)
+        var damage = _mutation.GetGeneticDamage(mob) ?? 0;
+        if (damage > ent.Comp.MaxGeneticDamage)
         {
-            TryAddSequence(scanned, id);
+            Speak(ent, "genetic-damage");
+            return;
         }
+
+        _audio.PlayPredicted(ent.Comp.ScanSound, ent, args.User);
+
         UpdateUI(ent);
         Speak(ent, "scanned");
+        if (_net.IsServer)
+            _genome.ScanGenome(mob);
     }
 
     private void OnScanCheck(Entity<GeneticsConsoleComponent> ent, ref DoAfterAttemptEvent<ScanDoAfterEvent> args)
@@ -151,82 +149,12 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             args.Cancel();
     }
 
-    private void TryAddSequence(ScannedGenomeComponent comp, EntProtoId<MutationComponent> id)
-    {
-        if (comp.Sequences.Count >= ScannedGenomeComponent.SequenceLimit ||
-            !_mutation.AllMutations.TryGetValue(id, out var mutation) ||
-            _mutation.GetRoundData(id) is not {} data)
-        {
-            return;
-        }
-
-        // discovered sequences have no missing bases
-        if (data.Discovered)
-        {
-            comp.Sequences.Add(new Sequence
-            {
-                Mutation = id,
-                Bases = data.Bases
-            });
-            return;
-        }
-
-        _builder.Clear();
-        _builder.Append(data.Bases);
-
-        // give difficulty a random offset so its a bit harder to metagame what a mutation could be
-        // you can still generally go off more bases missing = better but not automatically know
-        // exactly what it is by grepping the mutations :)
-        var difficulty = mutation.Difficulty;
-        difficulty += _random.Next(-2, 2);
-        difficulty = Math.Clamp(difficulty, 0, MutationData.BaseCount);
-
-        // chance of Xing out a whole pair goes up with difficulty
-        // so you are less likely to get free easy fixes
-        var pairChance = (float) difficulty / MutationData.BaseCount;
-
-        // randomly X out bases depending on mutation difficulty
-        while (difficulty > 0)
-        {
-            var pair = _random.Next(0, MutationData.PairCount);
-            var i = pair * 2;
-            // cant X out a whole pair if theres only 1 difficulty left
-            if (difficulty >= 2 && _random.Prob(pairChance))
-            {
-                TryX(i);
-                TryX(i + 1);
-            }
-            else if (_random.Prob(0.5f))
-            {
-                TryX(i);
-            }
-            else
-            {
-                TryX(i + 1);
-            }
-        }
-        comp.Sequences.Add(new Sequence
-        {
-            Mutation = id,
-            Bases = _builder.ToString()
-        });
-
-        void TryX(int i)
-        {
-            if (_builder[i] == 'X')
-                return;
-
-            _builder[i] = 'X';
-            difficulty--;
-        }
-    }
-
     private void OnSetBase(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleSetBaseMessage args)
     {
         if (ent.Comp.ScannedMob is not {} mob || !CanWorkOn(ent, mob))
             return;
 
-        if (GetSequence(mob, args.Sequence) is not {} sequence)
+        if (_genome.GetSequence(mob, args.Sequence) is not {} sequence)
             return;
 
         var valid = args.Base switch
@@ -257,7 +185,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         if (!CanWorkOn(ent, mob))
             return;
 
-        if (GetSequence(mob, args.Index) is not {} sequence)
+        if (_genome.GetSequence(mob, args.Index) is not {} sequence)
             return;
 
         // TODO
@@ -268,7 +196,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         if (ent.Comp.ScannedMob is not {} mob)
             return;
 
-        if (!CanWorkOn(ent, mob) || GetSequence(mob, args.Index) is not {} sequence)
+        if (!CanWorkOn(ent, mob) || _genome.GetSequence(mob, args.Index) is not {} sequence)
             return;
 
         if (_mutation.GetRoundData(sequence.Mutation)?.Discovered == true)
@@ -302,6 +230,13 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             return;
         }
 
+        var damage = _mutation.GetGeneticDamage(mob) ?? 0;
+        if (damage > ent.Comp.MaxGeneticDamage)
+        {
+            Speak(ent, "genetic-damage");
+            return;
+        }
+
         if (_net.IsClient)
             return;
 
@@ -325,7 +260,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         if (GetDisk(ent) is not {} disk)
             return;
 
-        if (ent.Comp.ScannedMob is not {} mob || GetSequence(mob, args.Index) is not {} sequence)
+        if (ent.Comp.ScannedMob is not {} mob || _genome.GetSequence(mob, args.Index) is not {} sequence)
             return;
 
         var mutation = sequence.Mutation;
@@ -362,20 +297,8 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     private void UpdateUI(Entity<GeneticsConsoleComponent> ent)
     {
         _sequences.Clear();
-        if (_scannedQuery.TryComp(ent.Comp.ScannedMob, out var scanned))
-        {
-            foreach (var sequence in scanned.Sequences)
-            {
-                var id = sequence.Mutation;
-                if (_mutation.GetRoundData(id) is not {} data)
-                {
-                    Log.Error($"Sequence of {ToPrettyString(ent.Comp.ScannedMob)} contains unknown mutation {id}!");
-                    continue;
-                }
-
-                _sequences.Add(new SequenceState(sequence.Bases, data.Number, data.Discovered ? id : null));
-            }
-        }
+        if (ent.Comp.ScannedMob is {} mob)
+            _genome.AddSequenceStates(mob, _sequences);
         var state = new GeneticsConsoleState(_sequences);
         _ui.SetUiState(ent.Owner, GeneticsConsoleUiKey.Key, state);
     }
@@ -394,7 +317,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
     public bool CanScan(Entity<GeneticsConsoleComponent> ent, EntityUid mob)
         => CanWorkOn(ent, mob)
-            && !_scannedQuery.HasComp(mob); // can't scan someone multiple times
+            && !_genome.IsScanned(mob); // can't scan someone multiple times
 
     public Entity<GeneticsDiskComponent>? GetDisk(Entity<GeneticsConsoleComponent> ent)
     {
@@ -412,12 +335,6 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         ent.Comp.Mutation = id;
         Dirty(ent);
     }
-
-    public Sequence? GetSequence(EntityUid mob, uint index)
-        => _scannedQuery.TryComp(mob, out var scanned)
-            && index < scanned.Sequences.Count
-            ? scanned.Sequences[(int) index]
-            : null;
 
     public bool TryAddRandomChromosome(Entity<GeneticsConsoleComponent?> ent)
     {
@@ -444,7 +361,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     public bool SequenceMutation(Entity<GeneticsConsoleComponent> ent, EntityUid mob, uint index)
     {
         if (!CanWorkOn(ent, mob) ||
-            GetSequence(mob, index) is not {} sequence)
+            _genome.GetSequence(mob, index) is not {} sequence)
             return false;
 
         var mutation = sequence.Mutation;

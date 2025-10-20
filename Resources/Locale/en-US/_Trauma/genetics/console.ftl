@@ -3,6 +3,7 @@ genetics-console-chat-scan-failed = SUBJECT SCAN FAILED
 genetics-console-chat-scanned = NEW SUBJECT SCANNED
 genetics-console-chat-sequencing = SEQUENCING GENOME
 genetics-console-chat-sequence-failed = FAILED TO SEQUENCE GENOME
+genetics-console-chat-genetic-damage = GENOME IS DAMAGED BEYOND READABILITY
 genetics-console-chat-sequenced = SEQUENCING GENOME COMPLETE
 
 genetics-console-damages-you = The sequencing fails catastrophically and damages your genome!
@@ -22,6 +23,7 @@ genetics-console-no-subject = No subject detected in Medical Scanner.
 genetics-console-name = Name
 genetics-console-status = Status
 genetics-console-integrity = Integrity
+genetics-console-instability = Instability
 
 genetics-console-tab-storage = Storage
 genetics-console-no-chromosome = Empty chromosome

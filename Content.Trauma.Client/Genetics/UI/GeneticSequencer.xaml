@@ -28,7 +28,7 @@
 				<Label Text="{Loc 'genetics-console-mutation-instability'}"/>
 				<Label Name="MutationInstability"/>
 			</GridContainer>
-			<Button Name="WriteButton" Text="{Loc 'genetics-console-write-mutation'}" Disabled="True"/>
+			<Button Name="WriteButton" Text="{Loc 'genetics-console-write-mutation'}" Disabled="True" MaxWidth="160"/>
 			<genetics:GenePuzzle Name="Puzzle"/>
 		</BoxContainer>
 		<BoxContainer Name="NoSequence" Align="Center">
