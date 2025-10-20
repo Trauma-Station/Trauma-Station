@@ -169,7 +169,7 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                     blobRuleComp.CriticalAudio,
                     Color.Red);
 
-               if (!blobRuleComp.BlobCBurnCalled)
+                if (!blobRuleComp.BlobCBurnCalled)
                     _ticker.StartGameRule(blobRuleComp.BlobCBurnEvent);
                 blobRuleComp.BlobCBurnCalled = true;
                 // </Trauma>
