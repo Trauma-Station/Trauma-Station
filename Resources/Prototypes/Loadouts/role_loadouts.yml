@@ -186,6 +186,9 @@
   - AssistantEnvirohelm
   - AssistantEnvirosuit
   - AssistantEnvirogloves
+  # Traumastation - Exclusive items
+  - ExclusiveItems
+
 
 - type: roleLoadout
   id: JobBartender
