@@ -170,10 +170,8 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                     Color.Red);
 
                if (!blobRuleComp.BlobCBurnCalled)
-                    {
-                        _ticker.StartGameRule(blobRuleComp.BlobCBurnEvent);
-                        blobRuleComp.BlobCBurnCalled = true;
-                    }
+                    _ticker.StartGameRule(blobRuleComp.BlobCBurnEvent);
+                blobRuleComp.BlobCBurnCalled = true;
                 // </Trauma>
 
                 _alertLevelSystem.SetLevel(stationUid, StationAlertCritical, true, true, true, true);
