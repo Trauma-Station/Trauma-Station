@@ -229,7 +229,7 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
     }
 
     /// <summary>
-    /// Trauma - 
+    /// Trauma - Sends a CBurn shuttle when zombies get to a certain percentage of infected crew.
     /// </summary>
     private void CheckCBurnCall(ZombieRuleComponent comp)
     {
@@ -256,7 +256,7 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
         base.ActiveTick(uid, component, gameRule, frameTime);
         if (!component.NextRoundEndCheck.HasValue || component.NextRoundEndCheck > _timing.CurTime)
             return;
-        CheckCBurnCall(component); // trauma edit - add auto cburn call
+        CheckCBurnCall(component); // Trauma - Add auto cburn call
         CheckRoundEnd(component);
         component.NextRoundEndCheck = _timing.CurTime + component.EndCheckDelay;
     }

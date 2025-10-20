@@ -50,13 +50,13 @@ public sealed partial class ZombieRuleComponent : Component
     public float ZombieCBurnCallPercentage = 0.6f;
 
     /// <summary>
-    /// Trauma - The shuttle event used for the CBurn autocall.
+    /// Trauma - The shuttle event used for the zombies CBurn autocall.
     /// </summary>
     [DataField]
     public EntProtoId ZombieCBurnEvent = "SpawnCBURNNoAnnounce";
 
     /// <summary>
-    /// Trauma - Whether or not a CBurn shuttle has been sent.
+    /// Trauma - Whether or not a CBurn shuttle for zombies has been sent.
     /// </summary>
     [DataField]
     public bool ZombieCBurnCalled;
