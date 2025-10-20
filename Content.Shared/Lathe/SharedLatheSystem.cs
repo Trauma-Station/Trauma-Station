@@ -135,17 +135,27 @@ public abstract class SharedLatheSystem : EntitySystem
     }
 
     [PublicAPI]
-    public bool CanProduce(EntityUid uid, string recipe, int amount = 1, LatheComponent? component = null)
+    // Trauma - added alertLevel
+    public bool CanProduce(EntityUid uid, string recipe, int amount = 1, LatheComponent? component = null, string? alertLevel = null)
     {
-        return _proto.TryIndex<LatheRecipePrototype>(recipe, out var proto) && CanProduce(uid, proto, amount, component);
+        // Trauma - added alertLevel
+        return _proto.TryIndex<LatheRecipePrototype>(recipe, out var proto) && CanProduce(uid, proto, amount, component, alertLevel);
     }
 
-    public bool CanProduce(EntityUid uid, LatheRecipePrototype recipe, int amount = 1, LatheComponent? component = null)
+    // Trauma - added alertLevel
+    public bool CanProduce(EntityUid uid, LatheRecipePrototype recipe, int amount = 1, LatheComponent? component = null, string? alertLevel = null)
     {
         if (!Resolve(uid, ref component))
             return false;
         if (!HasRecipe(uid, recipe, component))
             return false;
+
+        // <Trauma> - check alert level unless emagged
+        if (!_emag.CheckFlag(uid, EmagType.Interaction) &&
+            recipe.RequiredAlerts is {} alerts &&
+            (alertLevel is not {} level || !alerts.Contains(level)))
+            return false;
+        // </Trauma>
 
         foreach (var (material, needed) in recipe.Materials)
         {
