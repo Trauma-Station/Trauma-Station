@@ -14,7 +14,7 @@ namespace Content.Shared.Preferences.Loadouts.Effects;
 public sealed partial class PlayerGUIDLoadoutEffect : LoadoutEffect
 {
     [DataField]
-    public string Guid {  get; set; }
+    public Guid Guid { get; set; }
 
     public override bool Validate(HumanoidCharacterProfile profile, RoleLoadout loadout, ICommonSession? session, IDependencyCollection collection, [NotNullWhen(false)] out FormattedMessage? reason)
     {
@@ -24,7 +24,7 @@ public sealed partial class PlayerGUIDLoadoutEffect : LoadoutEffect
             return true;
         }
 
-        if (session.UserId == new Guid(Guid))
+        if (session.UserId == Guid)
         {
             reason = null;
             return true;
