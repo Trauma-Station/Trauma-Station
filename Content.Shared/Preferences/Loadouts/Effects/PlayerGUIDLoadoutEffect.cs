@@ -1,6 +1,3 @@
-using Content.Shared.Preferences.Loadouts;
-using Content.Shared.Preferences;
-using Content.Shared.Preferences.Loadouts.Effects;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
