@@ -130,7 +130,7 @@
   parent: BaseMutation
   id: MutationMonkified
   name: Monkified
-  description: A strange genome, believing to be what differentiates monkeys from humans.
+  description: A strange genome, believed to be what differentiates monkeys from humans.
   components:
   - type: Mutation
     instability: -40 # mmmonky
