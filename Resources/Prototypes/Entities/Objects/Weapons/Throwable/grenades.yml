@@ -196,9 +196,10 @@
         volume: 5
     initialBeepDelay: 0
     beepInterval: 2 # 2 beeps total (at 0 and 2)
-  - type: Construction #goob
+  - type: Construction # Trauma
     graph: ExplosiveGrenadeGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   name: flashbang
@@ -229,9 +230,10 @@
     tags:
     - HandGrenade
     - GrenadeFlashBang
-  - type: Construction #goob
+  - type: Construction # Trauma
     graph: FlashbangGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   id: GrenadeFlashEffect
@@ -289,9 +291,10 @@
         volume: 12
   - type: StaticPrice
     price: 2000
-  - type: Construction
+  - type: Construction # Trauma
     graph: SyndicateMinibombGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   name: self destruct
@@ -381,9 +384,10 @@
       - type: ExplodeOnTrigger
   - type: StaticPrice
     price: 1000
-  - type: Construction #goob
+  - type: Construction # Trauma
     graph: SupermatterGrenadeGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   name: whitehole grenade
@@ -433,9 +437,10 @@
       - type: DeleteOnTrigger
   - type: StaticPrice
     price: 1000
-  - type: Construction #goob
+  - type: Construction # Truama
     graph: WhiteholeGrenadeGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   name: the nuclear option
@@ -466,9 +471,10 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
-  - type: Construction #goob
+  - type: Construction #Trauma
     graph: NuclearOptionGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   name: modular grenade
@@ -536,9 +542,10 @@
       path: /Audio/Effects/countdown.ogg
   - type: StaticPrice
     price: 666 # 2000 for 3, I love fractions
-  - type: Construction #Goob
+  - type: Construction #Trauma
     graph: EMPGrenadeGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   name: holy hand grenade
@@ -566,9 +573,10 @@
       path: /Audio/Effects/hallelujah.ogg
   - type: StaticPrice
     price: 10000
-  - type: Construction
+  - type: Construction # Trauma
     graph: HolyHandGrenadeGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   parent: [ GrenadeBase, BaseSecurityContraband ]
@@ -587,10 +595,10 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Items/smoke_grenade_prime.ogg
-  - type: Construction
+  - type: Construction # Trauma
     graph: SmokeGrenadeGraph
     node: grenade1
-
+    deconstructionTarget: null
 
 - type: entity
   parent: [ BaseCivilianContraband, SmokeGrenade ]
@@ -608,9 +616,10 @@
       reagents:
       - ReagentId: SpaceCleaner
         Quantity: 30
-  - type: Construction
+  - type: Construction # Trauma
     graph: CleanerGrenadeGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   parent: SmokeGrenade
@@ -628,9 +637,10 @@
       reagents:
       - ReagentId: TearGas
         Quantity: 20
-  - type: Construction
+  - type: Construction # Trauma
     graph: TearGasGrenadeGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   parent: [ BaseEngineeringContraband, SmokeGrenade ]
@@ -648,9 +658,10 @@
     smokePrototype: AluminiumMetalFoam
   - type: StaticPrice
     price: 350
-  - type: Construction #goob
+  - type: Construction # Trauma
     graph: MetalFoamGrenadeGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   parent: [ BaseEngineeringContraband, GrenadeBase ] # Prevent inheriting DeleteOnTrigger from SmokeGrenade
@@ -683,9 +694,10 @@
         enabled:
           True: { state: active }
           False: { state: spent }
-  - type: Construction
+  - type: Construction # Trauma
     graph: AirGrenadeGraph
     node: grenade1
+    deconstructionTarget: null
 
 # Non-explosive "dummy" grenades to use as a distraction.
 
@@ -707,9 +719,10 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
-  - type: Construction #goob
+  - type: Construction # Trauma
     graph: TrickGrenadeGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   name: syndicate trickybomb
@@ -732,6 +745,7 @@
         volume: 12
   - type: StaticPrice
     price: 1000
-  - type: Construction #Goob
+  - type: Construction # Trauma
     graph: SyndicateTrickybombGraph
     node: grenade1
+    deconstructionTarget: null

@@ -18,10 +18,10 @@
       initialBeepDelay: 0
       delayOptions: [3, 5, 10, 15, 30]
       beepSound:
-        path: /Audio/_Goobstation/Machines/BombComponents/minibombbeep.ogg
+        path: /Audio/_Trauma/Machines/BombComponents/minibombbeep.ogg
         params:
           volume: 11
-  - type: PhysicalComposition #Goobstation - Recycle update
+  - type: PhysicalComposition
     materialComposition:
       Steel: 75
       Plastic: 25
@@ -50,7 +50,7 @@
         path: /Audio/Effects/Grenades/Supermatter/smbeep.ogg
         params:
           volume: 5
-  - type: PhysicalComposition #Goobstation - Recycle update
+  - type: PhysicalComposition
     materialComposition:
       Steel: 75
       Plastic: 25
@@ -79,7 +79,7 @@
         path: /Audio/Effects/Grenades/Supermatter/smbeep.ogg
         params:
           volume: -5
-  - type: PhysicalComposition #Goobstation - Recycle update
+  - type: PhysicalComposition
     materialComposition:
       Steel: 75
       Plastic: 25
@@ -106,7 +106,7 @@
       beepInterval: 3
       beepSound:
         path: /Audio/Effects/hallelujah.ogg
-  - type: PhysicalComposition #Goobstation - Recycle update
+  - type: PhysicalComposition
     materialComposition:
       Steel: 75
       Plastic: 25
@@ -135,7 +135,7 @@
         path: /Audio/Items/smoke_grenade_prime.ogg
         params:
           volume: 11
-  - type: PhysicalComposition #Goobstation - Recycle update
+  - type: PhysicalComposition
     materialComposition:
       Steel: 75
       Plastic: 25

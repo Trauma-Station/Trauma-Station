@@ -77,9 +77,10 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
-  - type: Construction #goob
+  - type: Construction # Trauma
     graph: StingerGrenadeGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   parent: [ProjectileGrenadeBase, BaseSyndicateContraband]
@@ -108,9 +109,10 @@
       path: "/Audio/Weapons/Guns/Gunshots/batrifle.ogg"
   - type: StaticPrice
     price: 1500
-  - type: Construction #Goob
+  - type: Construction # Trauma
     graph: IncendiaryGrenadeGraph
     node: grenade1
+    deconstructionTarget: null
 
 - type: entity
   parent: [ProjectileGrenadeBase, BaseSyndicateContraband]
@@ -139,6 +141,7 @@
       path: "/Audio/Weapons/Guns/Gunshots/batrifle.ogg"
   - type: StaticPrice
     price: 1500
-  - type: Construction #goob
+  - type: Construction # Trauma
     graph: ShrapnelGrenadeGraph
     node: grenade1
+    deconstructionTarget: null

@@ -19,6 +19,7 @@
       reagents:
       - ReagentId: Sarin
         Quantity: 50
-  - type: Construction
+  - type: Construction # Trauma
     graph: SarinGasGrenadeGraph
     node: grenade1
+    deconstructionTarget: null

@@ -34,6 +34,7 @@
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
-  - type: Construction
+  - type: Construction # Trauma
     graph: BeeGrenadeGraph
     node: grenade1
+    deconstructionTarget: null
