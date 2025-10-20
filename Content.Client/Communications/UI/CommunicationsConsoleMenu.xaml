@@ -57,6 +57,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
             </BoxContainer>
 
+            <!-- Trauma - Show unlock time for locked alert level -->
+            <BoxContainer Name="UnlockContainer" Margin="0 2" HorizontalAlignment="Center">
+            	<controls:StripeBack>
+	            	<Label Name="UnlockLabel" Margin="8 4"/>
+            	</controls:StripeBack>
+            </BoxContainer>
+
             <!-- EmergencyPart -->
             <BoxContainer Orientation="Vertical"
                 SeparationOverride="6">

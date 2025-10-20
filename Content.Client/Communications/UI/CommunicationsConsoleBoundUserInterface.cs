@@ -25,6 +25,7 @@
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Communications;
+using Content.Trauma.Common.AlertLevel; // Trauma
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 
@@ -114,6 +115,17 @@ namespace Content.Client.Communications.UI
                 _menu.EmergencyShuttleButton.Disabled = !_menu.CanCall;
                 _menu.AnnounceButton.Disabled = !_menu.CanAnnounce;
                 _menu.BroadcastButton.Disabled = !_menu.CanBroadcast;
+
+                // <Trauma>
+                if (!EntMan.TryGetEntity(commsState.Station, out var station))
+                    return;
+
+                var ev = new CheckAlertLevelLockEvent();
+                EntMan.EventBus.RaiseLocalEvent(station.Value, ref ev);
+                _menu.NextUnlock = ev.NextUnlock;
+                _menu.LockedLevel = ev.LockedLevel;
+                _menu.UpdateUnlock();
+                // </Trauma>
             }
         }
     }
