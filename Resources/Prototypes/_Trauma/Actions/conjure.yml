@@ -5,8 +5,7 @@
   components:
   - type: ConjureAction
   - type: Action
+    useDelay: 5
     raiseOnAction: true
-  - type: UseDelay
-    delay: 5
   - type: InstantAction
     event: !type:ConjureActionEvent

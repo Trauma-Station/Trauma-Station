@@ -29,10 +29,10 @@
   description: Concentrates cryokinetic forces to create snow, useful for snow-like construction.
   components:
   - type: Action
-    iconStyle: BigAction
+    itemIconStyle: BigAction
     icon:
       sprite: Objects/Consumable/Food/frozen.rsi
-      state: snowcone
+      state: cone
   - type: ConjureAction
     spawn: FoodFrozenSnowcone # TODO: if anyone ever makes a snow item, spawn that instead
 
