@@ -18,7 +18,7 @@
       initialBeepDelay: 0
       delayOptions: [3, 5, 10, 15, 30]
       beepSound:
-        path: /Audio/_Trauma/Machines/BombComponents/minibombbeep.ogg
+        path: _Trauma/Machines/BombComponents/minibombbeep.ogg
         params:
           volume: 11
   - type: PhysicalComposition
