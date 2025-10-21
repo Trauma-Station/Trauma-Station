@@ -19,7 +19,7 @@
   components:
   - type: Action
     icon:
-      sprite: _Goobstation/Actions/mutations.rsi
+      sprite: _Trauma/Actions/mutations.rsi
       state: autotomy
   - type: UseDelay
     delay: 10

@@ -19,7 +19,7 @@
     checkCanInteract: false # its your heart or something
     useDelay: 2m
     icon:
-      sprite: _Goobstation/actions/mutations.rsi
+      sprite: _Trauma/actions/mutations.rsi
       state: adrenaline
   - type: InjectChemicalsAction
     main:

@@ -29,11 +29,12 @@
   description: Concentrates cryokinetic forces to create snow, useful for snow-like construction.
   components:
   - type: Action
+    iconStyle: BigAction
     icon:
-      sprite: _Goobstation/Actions/mutations.rsi
-      state: cold
+      sprite: Objects/Consumable/Food/frozen.rsi
+      state: snowcone
   - type: ConjureAction
-    spawn: Snowcone # TODO: if anyone ever makes a snow item, spawn that instead
+    spawn: FoodFrozenSnowcone # TODO: if anyone ever makes a snow item, spawn that instead
 
 - type: entity
   parent: ActionMutationPyrokinesis
