@@ -329,3 +329,49 @@ Entries:
       message: Fixed revs not being able to build a printing press.
   id: 36
   time: '2025-10-18T20:43:36.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed rev printing press gmod ERROR
+  id: 37
+  time: '2025-10-19T15:17:12.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Removed BSO.
+  id: 38
+  time: '2025-10-19T16:27:21.0000000+00:00'
+- author: JoeHammad
+  changes:
+    - type: Add
+      message: You can now wear the RPG2 on your back
+    - type: Tweak
+      message: RPG2 sprites are now 48x32, aka longer
+  id: 39
+  time: '2025-10-20T04:10:17.0000000+00:00'
+- author: Lumminal
+  changes:
+    - type: Tweak
+      message: Flashes only work directionally now.
+  id: 40
+  time: '2025-10-20T22:44:03.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Replace Sec roundstart 80DPS pistol with a 32 DPS laser pistol
+  id: 41
+  time: '2025-10-21T00:21:01.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: The station has to be on blue alert for 10 minutes to unlock red alert.
+    - type: Tweak
+      message: >-
+        The station has to be on red alert or higher to order guns and combat
+        hardsuits.
+    - type: Tweak
+      message: >-
+        The station has to be on red alert or higher to build gygax/durand
+        mechs.
+  id: 42
+  time: '2025-10-21T01:37:52.0000000+00:00'

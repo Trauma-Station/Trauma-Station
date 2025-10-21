@@ -77,6 +77,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Administration.Logs;
+using Content.Server.AlertLevel; // Trauma
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Lathe.Components;
@@ -84,6 +85,7 @@ using Content.Server.Materials;
 using Content.Server.Popups;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Stack;
+using Content.Server.Station.Systems; // Trauma
 using Content.Shared.Atmos;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -134,6 +136,7 @@ namespace Content.Server.Lathe
         [Dependency] private readonly TransformSystem _transform = default!;
         [Dependency] private readonly ChatSystem _chatSystem = default!; // Goobstation - New recipes message
         [Dependency] private readonly IComponentFactory _factory = default!; // Goobstation - Output to material storage
+        [Dependency] private readonly StationSystem _station = default!; // Trauma
 
         /// <summary>
         /// Per-tick cache
@@ -250,7 +253,11 @@ namespace Content.Server.Lathe
             if (!Resolve(uid, ref component))
                 return false;
 
-            if (!CanProduce(uid, recipe, 1, component))
+            // <Trauma> - get alertLevel for the recipe
+            var station = _station.GetOwningStation(uid);
+            var alertLevel = CompOrNull<AlertLevelComponent>(station)?.CurrentLevel;
+            if (!CanProduce(uid, recipe, 1, component, alertLevel))
+            // </Trauma>
                 return false;
 
             foreach (var (mat, amount) in recipe.Materials)
@@ -369,7 +376,11 @@ namespace Content.Server.Lathe
             if (producing == null && component.Queue.TryPeek(out var next))
                 producing = next;
 
-            var state = new LatheUpdateState(GetAvailableRecipes(uid, component), component.Queue.ToArray(), producing);
+            // <Trauma> - pass alertLevel to the ui
+            var station = _station.GetOwningStation(uid);
+            var alertLevel = CompOrNull<AlertLevelComponent>(station)?.CurrentLevel;
+            var state = new LatheUpdateState(GetAvailableRecipes(uid, component), component.Queue.ToArray(), producing, alertLevel);
+            // </Trauma>
             _uiSys.SetUiState(uid, LatheUiKey.Key, state);
         }
 

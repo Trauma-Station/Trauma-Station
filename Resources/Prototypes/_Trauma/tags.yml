@@ -20,13 +20,10 @@
   id: RCD
 
 - type: Tag
+  id: RevArmorPlate
+
+- type: Tag
   id: RevTurretBoard
 
 - type: Tag
   id: TechfabMachineBoard
-
-- type: Tag
-  id: RevArmorPlate
-
-- type: Tag
-  id: RevBallBearings

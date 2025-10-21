@@ -1,8 +1,8 @@
 - type: entity
-  parent: [ClothingUniformJumpsuitMercenary,BaseRevMajorContraband]
+  parent: [ ClothingUniformJumpsuitMercenary, BaseRevMajorContraband ]
   id: ClothingUniformJumpsuitMilitaryTurtleneckRev
-  description: A sturdy and protective jumpsuit.
   name: military jumpsuit
+  description: A sturdy and protective jumpsuit.
   components:
   - type: Sprite
     sprite: _NF/Clothing/Uniforms/Jumpsuit/military.rsi

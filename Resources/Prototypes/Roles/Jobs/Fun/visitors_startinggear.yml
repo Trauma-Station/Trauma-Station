@@ -239,8 +239,8 @@
     mask: ClothingMaskGasSecurity # Goobstation
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterArmorBasic
-    pocket1: WeaponPistolMk58
-    pocket2: MagazinePistol
+    pocket1: WeaponLaserSidearm # Trauma
+#    pocket2: MagazinePistol - Truama
   inhand:
   - FlashlightSeclite
 
@@ -258,8 +258,8 @@
     mask: ClothingMaskGasSecurity # Goobstation
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterArmorBasicSlim
-    pocket1: WeaponPistolMk58
-    pocket2: MagazinePistol
+    pocket1: WeaponLaserSidearm # Trauma
+#    pocket2: MagazinePistol - Trauma
   inhand:
   - FlashlightSeclite
 
@@ -276,8 +276,8 @@
     mask: ClothingMaskGasSecurity # Goobstation
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterArmorBasic
-    pocket1: WeaponPistolMk58
-    pocket2: MagazinePistol
+    pocket1: WeaponLaserSidearm # Trauma
+#    pocket2: MagazinePistol - Trauma
   inhand:
   - FlashlightSeclite
 
@@ -295,8 +295,8 @@
     mask: ClothingMaskGasSecurity # Goobstation
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterArmorBasicSlim
-    pocket1: WeaponPistolMk58
-    pocket2: MagazinePistol
+    pocket1: WeaponLaserSidearm # Trauma
+#    pocket2: MagazinePistol - Trauma
   inhand:
   - FlashlightSeclite
 
@@ -1083,7 +1083,7 @@
     back: ClothingBackpack
     belt: ClothingBeltChefFilled
     ears: ClothingHeadsetService
-    outerClothing: ClothingOuterWinterChef 
+    outerClothing: ClothingOuterWinterChef
     pocket1: RollingPin
     pocket2: BookHowToCookForFortySpaceman
   inhand:

@@ -38,7 +38,7 @@
   id: RevIED
   graph: RevIED
   startNode: start
-  targetNode: RevIED
+  targetNode: IED
   category: construction-category-antagonist
   objectType: Item
   entityWhitelist:

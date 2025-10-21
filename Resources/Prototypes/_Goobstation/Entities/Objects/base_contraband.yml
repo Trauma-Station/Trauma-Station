@@ -11,7 +11,7 @@
   abstract: true
   components:
   - type: Contraband
-    allowedJobs: [ BlueshieldOfficer ] # Basically both security and medic.
+    #allowedJobs: [ BlueshieldOfficer ] # Trauma - no bso
     allowedDepartments: [ Security, Medical ]
 
 - type: entity

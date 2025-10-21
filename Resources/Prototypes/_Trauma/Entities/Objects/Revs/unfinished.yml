@@ -176,20 +176,7 @@
     node: unfinished
 
 - type: entity
-  parent: BaseItem
-  id: RevBallBearings
-  name: ball bearings
-  description: A small handfull of metal balls.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Revs/components.rsi
-    state: ballbearings
-  - type: Tag
-    tags:
-    - RevBallBearings
-
-- type: entity
-  parent: [BaseItem, BaseRevMajorContraband]
+  parent: [ BaseItem, BaseRevMajorContraband ]
   id: RevUnfinishedRocket
   name: unfinished rocket
   description: An unfinished rocket.

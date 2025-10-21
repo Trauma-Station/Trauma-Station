@@ -106,8 +106,8 @@
     back: ClothingBackpackCentcomm
     ears: ClothingHeadsetGrey
     id: PassengerIDCard # let NTR give them access on bridge lol, im too lazy to make a new ID just for interns
-    pocket1: WeaponLaserCellRevolver
-    pocket2: PowerCellHigh
+    #pocket1: WeaponLaserCellRevolver # Trauma - no intern weapons
+    #pocket2: PowerCellHigh # Trauma - no intern weapons
   inhand:
     - MedkitAdvancedFilled
     - ToolboxElectricalFilled
@@ -115,7 +115,7 @@
     back:
     - ClothingShoesSlippers
     - BoxSurvivalSlotsMedical
-    - Stunbaton
+    #- Stunbaton # Trauma - no intern weapons
 
 # Lead Intern Gear
 - type: startingGear
@@ -132,8 +132,8 @@
     id: PassengerIDCard
     pocket1: DrinkEnergyDrinkCan
     pocket2: TelescopicBaton
-  inhand:
-    - WeaponLaserCarbine
+  #inhand: # Trauma - no intern weapons
+  #  - WeaponLaserCarbine
   storage:
     back:
     - NerdInternCoin
@@ -154,10 +154,10 @@
     id: PassengerIDCard
     pocket1: DrinkEnergyDrinkCan
     pocket2: WeaponDisabler
-  inhand:
-    - WeaponLaserCarbine
+  #inhand: # Trauma - no intern weapons
+  #  - WeaponLaserCarbine
   storage:
     back:
     - Vape # interns ammiright?
     - BoxSurvivalSlotsMedical
-    - Stunbaton
+    #- Stunbaton # Trauma - no intern weapons

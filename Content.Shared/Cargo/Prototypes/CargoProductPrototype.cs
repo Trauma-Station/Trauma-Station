@@ -111,6 +111,12 @@ namespace Content.Shared.Cargo.Prototypes
         public int Cooldown { get; private set; } = 0;
 
         /// <summary>
+        /// Trauma - If non-null, the station must be in one of these alert levels for this product to be bought.
+        /// </summary>
+        [DataField]
+        public HashSet<string>? RequiredAlerts;
+
+        /// <summary>
         ///     The prototype category of the product. (e.g. Engineering, Medical)
         /// </summary>
         [DataField]

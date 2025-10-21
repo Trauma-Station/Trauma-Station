@@ -102,6 +102,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.Common.Pirates;
 using System.Linq;
+using Content.Server.AlertLevel; // Trauma
 using Content.Server.Cargo.Components;
 using Content.Server.Station.Components;
 using Content.Shared.Cargo;
@@ -179,7 +180,8 @@ namespace Content.Server.Cargo.Systems
                 return;
 
             var orderId = GenerateOrderId(orderDatabase);
-            var data = new CargoOrderData(orderId, product.Product, product.Name, product.Cost, slip.OrderQuantity, slip.Requester, slip.Reason, slip.Account, product.Cooldown);
+            // Trauma - added RequiredAlerts
+            var data = new CargoOrderData(orderId, product.Product, product.Name, product.Cost, slip.OrderQuantity, slip.Requester, slip.Reason, slip.Account, product.Cooldown, product.RequiredAlerts);
 
             if (!TryAddOrder(stationUid.Value, ent.Comp.Account, data, orderDatabase))
             {
@@ -347,6 +349,17 @@ namespace Content.Server.Cargo.Systems
                     return;
                 }
             }
+
+            // <Trauma> can't buy guns on green
+            if (!_emag.CheckFlag(uid, EmagType.Interaction)
+                && order.RequiredAlerts is {} alerts
+                && (CompOrNull<AlertLevelComponent>(station)?.CurrentLevel is not {} current || !alerts.Contains(current)))
+            {
+                ConsolePopup(args.Actor, Loc.GetString("cargo-console-alert-level", ("product", order.ProductName)));
+                PlayDenySound(uid, component);
+                return;
+            }
+            // </Trauma>
 
             var ev = new FulfillCargoOrderEvent((station.Value, stationData), order, (uid, component));
             RaiseLocalEvent(ref ev);
@@ -609,7 +622,8 @@ namespace Content.Server.Cargo.Systems
         private static CargoOrderData GetOrderData(CargoConsoleAddOrderMessage args, CargoProductPrototype cargoProduct, int id, ProtoId<CargoAccountPrototype> account)
         {
             // GoobStation - cooldown on Cargo Orders (specifically gamba)
-            return new CargoOrderData(id, cargoProduct.Product, cargoProduct.Name, cargoProduct.Cost, args.Amount, args.Requester, args.Reason, account, cargoProduct.Cooldown);
+            // Trauma - added RequiredAlerts
+            return new CargoOrderData(id, cargoProduct.Product, cargoProduct.Name, cargoProduct.Cost, args.Amount, args.Requester, args.Reason, account, cargoProduct.Cooldown, cargoProduct.RequiredAlerts);
         }
 
         public int GetOutstandingOrderCount(Entity<StationCargoOrderDatabaseComponent> station, ProtoId<CargoAccountPrototype> account)

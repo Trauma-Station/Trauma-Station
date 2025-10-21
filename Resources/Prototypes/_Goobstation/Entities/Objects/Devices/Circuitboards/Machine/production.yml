@@ -25,8 +25,8 @@
         defaultPrototype: Beaker
   - type: Tag # Trauma
     tags:
-      - TechfabMachineBoard
-      - DroneUsable
+    - TechfabMachineBoard
+    - DroneUsable
 
 - type: entity
   id: CargoTechFabCircuitboard
@@ -46,8 +46,8 @@
         defaultPrototype: Beaker
   - type: Tag # Trauma
     tags:
-      - TechfabMachineBoard
-      - DroneUsable
+    - TechfabMachineBoard
+    - DroneUsable
 
 - type: entity
   id: ScienceTechFabCircuitboard
@@ -67,8 +67,8 @@
         defaultPrototype: Beaker
   - type: Tag # Trauma
     tags:
-      - TechfabMachineBoard
-      - DroneUsable
+    - TechfabMachineBoard
+    - DroneUsable
 
 - type: entity
   id: ServiceTechFabCircuitboard
@@ -88,8 +88,8 @@
         defaultPrototype: Beaker
   - type: Tag # Trauma
     tags:
-      - TechfabMachineBoard
-      - DroneUsable
+    - TechfabMachineBoard
+    - DroneUsable
 
 - type: entity
   id: TeslaCoilCircuitboard

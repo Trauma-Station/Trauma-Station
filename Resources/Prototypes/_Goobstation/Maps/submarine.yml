@@ -31,7 +31,7 @@
           #command
             Captain: [ 1, 1 ]
             NanotrasenRepresentative: [ 1, 1 ]
-            BlueshieldOfficer: [ 1, 1 ]
+            #BlueshieldOfficer: [ 1, 1 ] # Trauma
           #engineering
             AtmosphericTechnician: [ 2, 4 ]
             ChiefEngineer: [ 1, 1 ]

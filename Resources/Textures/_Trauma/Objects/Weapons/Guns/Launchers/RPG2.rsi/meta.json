@@ -1,9 +1,9 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Sprited by Armok and AK5intow for TraumaStation",
+  "copyright": "Sprited by Armok, AK5intow, and JoeHammad for TraumaStation",
   "size": {
-    "x": 32,
+    "x": 48,
     "y": 32
   },
   "states": [

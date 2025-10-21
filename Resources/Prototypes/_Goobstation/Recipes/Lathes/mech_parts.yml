@@ -76,6 +76,7 @@
 
 # Durand
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: DurandHarness
   result: DurandHarness
   categories:
@@ -87,6 +88,7 @@
     Silver: 1500
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: DurandArmor
   result: DurandArmorPlate
   categories:
@@ -97,6 +99,7 @@
     Silver: 900
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: DurandHead
   result: DurandHead
   categories:
@@ -109,6 +112,7 @@
     Diamond: 100
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: DurandLArm
   result: DurandLArm
   categories:
@@ -119,6 +123,7 @@
     Silver: 250
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: DurandLLeg
   result: DurandLLeg
   categories:
@@ -129,6 +134,7 @@
     Silver: 250
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: DurandRLeg
   result: DurandRLeg
   categories:
@@ -139,6 +145,7 @@
     Silver: 250
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: DurandRArm
   result: DurandRArm
   categories:
@@ -150,6 +157,7 @@
 
 # Gygax
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: GygaxHarness
   result: GygaxHarness
   categories:
@@ -160,6 +168,7 @@
     Glass: 2000
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: GygaxArmor
   result: GygaxArmorPlate
   categories:
@@ -169,6 +178,7 @@
     Steel: 3000
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: GygaxHead
   result: GygaxHead
   categories:
@@ -180,6 +190,7 @@
     Diamond: 100
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: GygaxLArm
   result: GygaxLArm
   categories:
@@ -189,6 +200,7 @@
     Steel: 1100
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: GygaxLLeg
   result: GygaxLLeg
   categories:
@@ -198,6 +210,7 @@
     Steel: 1100
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: GygaxRLeg
   result: GygaxRLeg
   categories:
@@ -207,6 +220,7 @@
     Steel: 1100
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: GygaxRArm
   result: GygaxRArm
   categories:

@@ -67,6 +67,7 @@
     - id: FlashlightSeclite
 
 - type: entity
+  abstract: true # Trauma
   id: LockerBlueshieldOfficerFilled
   suffix: Filled
   parent: LockerBlueshieldOfficer

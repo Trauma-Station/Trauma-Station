@@ -112,6 +112,7 @@ public sealed partial class LatheMenu : DefaultWindow
     public ProtoId<LatheCategoryPrototype>? CurrentCategory;
 
     public EntityUid Entity;
+    public string? AlertLevel; // Trauma
 
     private uint? _lastMiningPoints; // DeltaV: used to avoid Loc.GetString every frame
 
@@ -279,7 +280,8 @@ public sealed partial class LatheMenu : DefaultWindow
 
         foreach (var prototype in sortedRecipesToShow)
         {
-            var canProduce = _lathe.CanProduce(Entity, prototype, quantity, component: lathe);
+            // Trauma - added alertLevel
+            var canProduce = _lathe.CanProduce(Entity, prototype, quantity, component: lathe, alertLevel: AlertLevel);
 
             var control = new RecipeControl(_lathe, prototype, () => GenerateTooltipText(prototype), canProduce, GetRecipeDisplayControl(prototype));
             control.OnButtonPressed += s =>

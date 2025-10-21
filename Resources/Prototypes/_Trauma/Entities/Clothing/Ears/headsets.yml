@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingHeadsetAlt,BaseRevMajorContraband]
+  parent: [ ClothingHeadsetAlt, BaseRevMajorContraband ]
   id: ClothingHeadsetRevolutionary
   name: revolutionary headset
   description: A modular intercom that fits over the head, takes encryption keys and protects from flashbangs.

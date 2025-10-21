@@ -241,6 +241,7 @@
 
 # Mech Weapons
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: WeaponMechCombatImmolationGun
   result: WeaponMechCombatImmolationGun
   categories:
@@ -253,6 +254,7 @@
     Glass: 500
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: WeaponMechCombatSolarisLaser
   result: WeaponMechCombatSolarisLaser
   categories:
@@ -265,6 +267,7 @@
     Glass: 200
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: WeaponMechCombatFiredartLaser
   result: WeaponMechCombatFiredartLaser
   categories:
@@ -277,6 +280,7 @@
     Glass: 50
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: WeaponMechCombatUltraRifle
   result: WeaponMechCombatUltraRifle
   categories:
@@ -287,6 +291,7 @@
     Plastic: 200
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: WeaponMechCombatShotgun
   result: WeaponMechCombatShotgun
   categories:
@@ -297,6 +302,7 @@
     Plastic: 550
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: WeaponMechCombatShotgunIncendiary
   result: WeaponMechCombatShotgunIncendiary
   categories:
@@ -308,6 +314,7 @@
     Plasma: 300
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: WeaponMechCombatDisabler
   result: WeaponMechCombatDisabler
   categories:
@@ -319,6 +326,7 @@
     Plastic: 300
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: WeaponMechCombatFlashbangLauncher
   result: WeaponMechCombatFlashbangLauncher
   categories:
@@ -330,6 +338,7 @@
     Plastic: 450
 
 - type: latheRecipe
+  parent: BaseRedAlert # Trauma
   id: WeaponMechCombatMissileRack8
   result: WeaponMechCombatMissileRack8
   categories:
