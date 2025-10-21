@@ -349,53 +349,6 @@
 # Patch/microdose meds, hilariously strong due to difficulties in making and using them
 
 - type: reagent
-  id: Syriniver
-  name: reagent-name-syriniver
-  group: Medicine
-  desc: reagent-desc-syriniver
-  physicalDesc: reagent-physical-desc-alkaline
-  flavor: medicine
-  color: "#97e239"
-  plantMetabolism:
-    - !type:PlantAdjustToxins
-      amount: -30
-  metabolisms:
-    Medicine:
-      metabolismRate: 3
-      effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Poison: -18
-      - !type:AdjustReagent
-        reagent: Musiver
-        amount: 3
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 6
-        damage:
-          types:
-            Blunt: 15
-      - !type:ModifyBleedAmount
-        amount: 1
-        conditions:
-        - !type:ReagentThreshold
-          min: 6
-      - !type:AdjustReagent
-        amount: -25
-        reagent: Syriniver
-      - !type:AdjustReagent
-        amount: -50
-        reagent: Ebifin
-      - !type:AdjustReagent
-        amount: -25
-        reagent: ProcenylLazide
-      - !type:AdjustReagent
-        amount: -25
-        reagent: Aluite
-
-- type: reagent
   id: Musiver
   name: reagent-name-musiver
   group: Medicine
@@ -431,53 +384,6 @@
         damage:
           types:
             Blunt: 5
-
-- type: reagent
-  id: Ebifin
-  name: reagent-name-ebifin
-  group: Medicine
-  desc: reagent-desc-ebifin
-  physicalDesc: reagent-physical-desc-alkaline
-  flavor: medicine
-  color: "#996fcc"
-  metabolisms:
-    Medicine:
-      metabolismRate: 3
-      effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Heat: -30
-            Cold: -24
-            Shock: -24
-            Caustic: -18
-      - !type:AdjustReagent
-        reagent: Tehifin
-        amount: 3
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 4
-        damage:
-          types:
-            Blunt: 30
-      - !type:ModifyBleedAmount
-        amount: 2
-        conditions:
-        - !type:ReagentThreshold
-          min: 4
-      - !type:AdjustReagent
-        amount: -25
-        reagent: Syriniver
-      - !type:AdjustReagent
-        amount: -50
-        reagent: Ebifin
-      - !type:AdjustReagent
-        amount: -25
-        reagent: ProcenylLazide
-      - !type:AdjustReagent
-        amount: -25
-        reagent: Aluite
 
 - type: reagent
   id: Tehifin
@@ -538,9 +444,9 @@
       - !type:HealthChange
         damage:
           types:
-            Slash: -24
-            Blunt: -24
-            Piercing: -24
+            Slash: -4 # Trauma
+            Blunt: -4 # Trauma
+            Piercing: -4 # Trauma
       - !type:AdjustReagent
         reagent: Bozaide
         amount: 3
@@ -556,12 +462,6 @@
         conditions:
         - !type:ReagentThreshold
           min: 6
-      - !type:AdjustReagent
-        amount: -25
-        reagent: Syriniver
-      - !type:AdjustReagent
-        amount: -50
-        reagent: Ebifin
       - !type:AdjustReagent
         amount: -25
         reagent: ProcenylLazide
@@ -933,126 +833,126 @@
 
 # Externally applied meds
 
-- type: reagent
-  id: SilverSulfadiazine
-  name: reagent-name-silver-sulfadiazine
-  group: Medicine
-  desc: reagent-desc-silver-sulfadiazine
-  physicalDesc: reagent-physical-desc-viscous
-  flavor: bitter
-  color: "#ffed24"
-  plantMetabolism:
-    - !type:PlantAdjustWeeds
-      amount: -8
-    - !type:PlantAdjustHealth
-      amount: -20
-  worksOnTheDead: true
-  reactiveEffects:
-    Acidic:
-      methods: [ Touch ]
-      effects:
-      - !type:HealthChange
-        scaleByQuantity: true
-        ignoreResistances: false
-        ignoreBlockers: false
-        damage:
-          types:
-            Heat: -1.5
-            Cold: -1.5
-            Shock: -1
-            Caustic: -1
-        conditions:
-        - !type:HasComponentOnEquipmentCondition
-          components:
-          - type: PressureProtection # can't get through this to reach the bodyparts!
-          invert: true
-  metabolisms:
-    Medicine:
-      metabolismRate: 3
-      effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Heat: -1
-            Cold: -1
-      - !type:HealthChange
-        damage:
-          types:
-            Poison: 2
-        conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+#- type: reagent # Trauma
+#  id: SilverSulfadiazine
+#  name: reagent-name-silver-sulfadiazine
+#  group: Medicine
+#  desc: reagent-desc-silver-sulfadiazine
+#  physicalDesc: reagent-physical-desc-viscous
+#  flavor: bitter
+#  color: "#ffed24"
+#  plantMetabolism:
+#    - !type:PlantAdjustWeeds
+#      amount: -8
+#    - !type:PlantAdjustHealth
+#      amount: -20
+#  worksOnTheDead: true
+#  reactiveEffects:
+#    Acidic:
+#      methods: [ Touch ]
+#      effects:
+#      - !type:HealthChange
+#        scaleByQuantity: true
+#        ignoreResistances: false
+#        ignoreBlockers: false
+#        damage:
+#          types:
+#            Heat: -1.5
+#            Cold: -1.5
+#            Shock: -1
+#            Caustic: -1
+#        conditions:
+#        - !type:HasComponentOnEquipmentCondition
+#          components:
+#          - type: PressureProtection # can't get through this to reach the bodyparts!
+#          invert: true
+#  metabolisms:
+#    Medicine:
+#      metabolismRate: 3
+#      effects:
+#      - !type:HealthChange
+#        damage:
+#          types:
+#            Heat: -1
+#            Cold: -1
+#      - !type:HealthChange
+#        damage:
+#          types:
+#            Poison: 2
+#        conditions:
+#        - !type:OrganType
+#          type: Yowie
+#          shouldHave: false
 
-- type: reagent
-  id: StypticCrystalCatalyst
-  name: reagent-name-styptic-crystal-catalyst
-  group: Medicine
-  desc: reagent-desc-styptic-crystal-catalyst
-  physicalDesc: reagent-physical-desc-shiny
-  flavor: bitter
-  color: "#ed603e"
-  plantMetabolism:
-    - !type:PlantAdjustWeeds
-      amount: -8
-    - !type:PlantAdjustHealth
-      amount: -20
+#- type: reagent # Trauma
+#  id: StypticCrystalCatalyst
+#  name: reagent-name-styptic-crystal-catalyst
+#  group: Medicine
+#  desc: reagent-desc-styptic-crystal-catalyst
+#  physicalDesc: reagent-physical-desc-shiny
+#  flavor: bitter
+#  color: "#ed603e"
+#  plantMetabolism:
+#    - !type:PlantAdjustWeeds
+#      amount: -8
+#    - !type:PlantAdjustHealth
+#      amount: -20
 
-- type: reagent
-  id: StypticPowder
-  name: reagent-name-styptic-powder
-  group: Medicine
-  desc: reagent-desc-styptic-powder
-  physicalDesc: reagent-physical-desc-powdery
-  flavor: bitter
-  color: "#ff9b83"
-  plantMetabolism:
-    - !type:PlantAdjustWeeds
-      amount: -8
-    - !type:PlantAdjustHealth
-      amount: -20
-  worksOnTheDead: true
-  reactiveEffects:
-    Acidic:
-      methods: [ Touch ]
-      effects:
-      - !type:HealthChange
-        scaleByQuantity: true
-        ignoreResistances: false
-        ignoreBlockers: false
-        damage:
-          types:
-            Blunt: -2
-            Piercing: -1 # limits combat effectivness
-            Slash: -2
-        conditions:
-        - !type:HasComponentOnEquipmentCondition
-          components:
-          - type: PressureProtection # can't get through this to reach the bodyparts!
-          invert: true
-      - !type:ModifyBleedAmount
-        amount: -2
-        conditions:
-        - !type:HasComponentOnEquipmentCondition
-          components:
-          - type: PressureProtection
-          invert: true
-  metabolisms:
-    Medicine:
-      metabolismRate: 3
-      effects:
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: -2
-      - !type:HealthChange
-        damage:
-          types:
-            Poison: 2
-        conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+#- type: reagent
+#  id: StypticPowder
+#  name: reagent-name-styptic-powder
+#  group: Medicine
+#  desc: reagent-desc-styptic-powder
+#  physicalDesc: reagent-physical-desc-powdery
+#  flavor: bitter
+#  color: "#ff9b83"
+#  plantMetabolism:
+#    - !type:PlantAdjustWeeds
+#      amount: -8
+#    - !type:PlantAdjustHealth
+#      amount: -20
+#  worksOnTheDead: true
+#  reactiveEffects:
+#    Acidic:
+#      methods: [ Touch ]
+#      effects:
+#      - !type:HealthChange
+#        scaleByQuantity: true
+#        ignoreResistances: false
+#        ignoreBlockers: false
+#        damage:
+#          types:
+#            Blunt: -2
+#            Piercing: -1 # limits combat effectivness
+#            Slash: -2
+#        conditions:
+#        - !type:HasComponentOnEquipmentCondition
+#          components:
+#          - type: PressureProtection # can't get through this to reach the bodyparts!
+#          invert: true
+#      - !type:ModifyBleedAmount
+#        amount: -2
+#        conditions:
+#        - !type:HasComponentOnEquipmentCondition
+#          components:
+#          - type: PressureProtection
+#          invert: true
+#  metabolisms:
+#    Medicine:
+#      metabolismRate: 3
+#      effects:
+#      - !type:HealthChange
+#        damage:
+#          groups:
+#            Brute: -2
+#      - !type:HealthChange
+#        damage:
+#          types:
+#            Poison: 2
+#        conditions:
+#        - !type:OrganType
+#         type: Yowie
+#          shouldHave: false
 
 - type: reagent
   id: Synthflesh # synthflesh is somewhat mid in SS14 due to topicals, so it's mostly a reference here

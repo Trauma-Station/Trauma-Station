@@ -182,12 +182,6 @@
             Blunt: 10
       - !type:AdjustReagent
         amount: -25
-        reagent: Syriniver
-      - !type:AdjustReagent
-        amount: -50
-        reagent: Ebifin
-      - !type:AdjustReagent
-        amount: -25
         reagent: ProcenylLazide
       - !type:AdjustReagent
         amount: -25

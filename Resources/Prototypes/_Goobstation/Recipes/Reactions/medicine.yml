@@ -96,37 +96,6 @@
     Tirimol: 4
 
 - type: reaction
-  id: Syriniver
-  maxTemp: 200
-  reactants:
-    Silver: # check 1
-      amount: 2
-    Diphenhydramine: # check 2
-      amount: 2
-    Fluorine:
-      amount: 1
-    Aluite:
-      amount: 5
-  products:
-    Syriniver: 5
-
-- type: reaction
-  id: Ebifin
-  impact: Medium # more dangerous OD than its contemporaries
-  minTemp: 500 # actually hotbeakerable
-  reactants:
-    Gold: # check 1
-      amount: 2
-    Sigynate: # check 2
-      amount: 2
-    Silicon: 
-      amount: 1
-    Aluite:
-      amount: 5
-  products:
-    Ebifin: 5
-
-- type: reaction
   id: ProcenylLazideSludge
   minTemp: 400
   reactants:
@@ -212,7 +181,7 @@
     Antihol: 3
 
 - type: reaction # This will do until we get molecular chemistry in
-  id: Ibuprofen 
+  id: Ibuprofen
   reactants:
     Charcoal:
       amount: 1
@@ -224,51 +193,51 @@
   products:
     Ibuprofen: 3
 
-- type: reaction
-  id: SilverSulfadiazine
-  minTemp: 500
-  reactants:
-    Silver: # actually using silver cuz it's just strong
-      amount: 1
-    Chlorine:
-      amount: 1
-    Ammonia:
-      amount: 1
-    Oxygen:
-      amount: 1
-    Sulfur:
-      amount: 1
-  products:
-    SilverSulfadiazine: 5 # might need to be lowered
+#- type: reaction
+#  id: SilverSulfadiazine
+#  minTemp: 500
+#  reactants:
+#    Silver: # actually using silver cuz it's just strong
+#      amount: 1
+#    Chlorine:
+#      amount: 1
+#    Ammonia:
+#      amount: 1
+#    Oxygen:
+#      amount: 1
+#    Sulfur:
+#      amount: 1
+#  products:
+#    SilverSulfadiazine: 5 # might need to be lowered
 
-- type: reaction
-  id: StypticCrystalCatalyst
-  reactants:
-    Aluminium:
-      amount: 1
-    Hydroxide:
-      amount: 1
-    SulfuricAcid:
-      amount: 1
-    Silicon:
-      amount: 1
-  products:
-    StypticCrystalCatalyst: 2
+#- type: reaction # Trauma
+#  id: StypticCrystalCatalyst
+#  reactants:
+#    Aluminium:
+#      amount: 1
+#    Hydroxide:
+#      amount: 1
+#    SulfuricAcid:
+#      amount: 1
+#    Silicon:
+#      amount: 1
+#  products:
+#    StypticCrystalCatalyst: 2
 
-- type: reaction
-  id: StypticCrystalCreation
-  quantized: true
-  conserveEnergy: false
-  reactants:
-    StypticCrystalCatalyst:
-      amount: 5
-    Blood:
-      amount: 10
-    Sodium:
-      amount: 10
-  effects:
-    - !type:CreateEntityReactionEffect
-      entity: ShardCrystalStyptic
+#- type: reaction
+#  id: StypticCrystalCreation
+#  quantized: true
+#  conserveEnergy: false
+#  reactants:
+#    StypticCrystalCatalyst:
+#      amount: 5
+#    Blood:
+#      amount: 10
+#    Sodium:
+#      amount: 10
+#  effects:
+#    - !type:CreateEntityReactionEffect
+#      entity: ShardCrystalStyptic
 
 - type: reaction
   id: MeatSynth
@@ -381,7 +350,7 @@
     PotassiumIodide:
       amount: 1
   products:
-    Hercuri: 5  
+    Hercuri: 5
 
 - type: reaction
   id: Herignis
