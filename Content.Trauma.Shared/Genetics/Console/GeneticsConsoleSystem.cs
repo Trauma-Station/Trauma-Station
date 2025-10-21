@@ -136,10 +136,10 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
         _audio.PlayPredicted(ent.Comp.ScanSound, ent, args.User);
 
-        UpdateUI(ent);
         Speak(ent, "scanned");
         if (_net.IsServer)
             _genome.ScanGenome(mob);
+        UpdateUI(ent);
     }
 
     private void OnScanCheck(Entity<GeneticsConsoleComponent> ent, ref DoAfterAttemptEvent<ScanDoAfterEvent> args)

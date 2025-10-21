@@ -16,6 +16,9 @@ public sealed partial class GenePuzzle : Control
     private bool _sequenced;
     private string _bases = string.Empty;
 
+    public static readonly Color Blue = Color.FromHex("#1c71b1");
+    public static readonly Color Green = Color.FromHex("#1b9638");
+
     public GenePuzzle()
     {
         RobustXamlLoader.Load(this);
@@ -68,15 +71,28 @@ public sealed partial class GenePuzzle : Control
     {
         var button = new Button();
         button.Text = b.ToString();
+        button.ModulateSelfOverride = GetColor(b);
         // TODO: implement ctrl / right click
         button.OnPressed += _ =>
         {
             b = Cycle(b);
+            button.ModulateSelfOverride = GetColor(b);
+
             button.Text = b.ToString();
             OnSetBase?.Invoke(i, b);
         };
         BaseButtons.AddChild(button);
     }
+
+    private Color? GetColor(char b)
+        => b switch
+        {
+            'A' => Green,
+            'G' => Green,
+            'C' => Blue,
+            'T' => Blue,
+            _ => null
+        };
 
     private static char Cycle(char b)
         => b switch

@@ -129,6 +129,7 @@ public sealed partial class GeneticSequencer : Control
                 ToggleMode = true,
                 HorizontalExpand = true
             };
+            button.Pressed = i == _selected;
             button.OnPressed += _ => SelectSequence(index);
             _buttons.Add(button);
             SequenceButtons.AddChild(button);
