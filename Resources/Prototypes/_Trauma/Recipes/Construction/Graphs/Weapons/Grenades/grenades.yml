@@ -8,10 +8,10 @@
 
 - type: constructionGraph
   id: SyndicateMinibombGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: SyndieMiniBomb
     edges:
     - to: emptyCase
@@ -28,9 +28,6 @@
 
   - node: emptyCase
     entity: SyndieMiniBombModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -57,7 +54,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -76,14 +73,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -99,10 +96,10 @@
 #Start New
 - type: constructionGraph
   id: SyndicateTrickybombGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: SyndieTrickyBomb
     edges:
     - to: emptyCase
@@ -119,9 +116,6 @@
 
   - node: emptyCase
     entity: SyndieTrickyBombModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -148,7 +142,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -167,14 +161,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -190,10 +184,10 @@
 #Start New
 - type: constructionGraph
   id: WhiteholeGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: WhiteholeGrenade
     edges:
     - to: emptyCase
@@ -210,9 +204,6 @@
 
   - node: emptyCase
     entity: WhiteholeGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -239,7 +230,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -258,14 +249,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -281,10 +272,10 @@
 #Start New
 - type: constructionGraph
   id: NuclearOptionGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: NuclearGrenade
     edges:
     - to: emptyCase
@@ -301,9 +292,6 @@
 
   - node: emptyCase
     entity: NuclearGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -330,7 +318,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -349,14 +337,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -372,10 +360,10 @@
 #Start New
 - type: constructionGraph
   id: SupermatterGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: GrenadeStinger
     edges:
     - to: emptyCase
@@ -392,9 +380,6 @@
 
   - node: emptyCase
     entity: SupermatterGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -421,7 +406,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -440,14 +425,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -463,10 +448,10 @@
 #Start New
 - type: constructionGraph
   id: StingerGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: GrenadeStinger
     edges:
     - to: emptyCase
@@ -483,9 +468,6 @@
 
   - node: emptyCase
     entity: StingerGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -512,7 +494,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -531,14 +513,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -554,10 +536,10 @@
 #Start New
 - type: constructionGraph
   id: TearGasGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: TearGasGrenade
     edges:
     - to: emptyCase
@@ -574,9 +556,6 @@
 
   - node: emptyCase
     entity: TearGasGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -603,7 +582,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -622,14 +601,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -645,10 +624,10 @@
 #Start New
 - type: constructionGraph
   id: SarinGasGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: SarinGasGrenade
     edges:
     - to: emptyCase
@@ -665,9 +644,6 @@
 
   - node: emptyCase
     entity: SarinGasGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -694,7 +670,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -713,14 +689,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -736,10 +712,10 @@
 #Start New
 - type: constructionGraph
   id: IncendiaryGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: GrenadeIncendiary
     edges:
     - to: emptyCase
@@ -756,9 +732,6 @@
 
   - node: emptyCase
     entity: IncendiaryGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -785,7 +758,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -804,14 +777,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -827,10 +800,10 @@
 #Start New
 - type: constructionGraph
   id: HolyHandGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: HolyHandGrenade
     edges:
     - to: emptyCase
@@ -847,9 +820,6 @@
 
   - node: emptyCase
     entity: HolyHandGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -876,7 +846,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -895,14 +865,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -918,10 +888,10 @@
 #Start New
 - type: constructionGraph
   id: ClusterGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: ClusterGrenade
     edges:
     - to: emptyCase
@@ -938,9 +908,6 @@
 
   - node: emptyCase
     entity: ClusterGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -967,7 +934,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -986,14 +953,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -1009,10 +976,10 @@
 #Start New
 - type: constructionGraph
   id: ClusterBangGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: ClusterBangFull
     edges:
     - to: emptyCase
@@ -1029,9 +996,6 @@
 
   - node: emptyCase
     entity: ClusterBangModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -1058,7 +1022,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -1077,14 +1041,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -1100,10 +1064,10 @@
 #Start New
 - type: constructionGraph
   id: AirGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: AirGrenade
     edges:
     - to: emptyCase
@@ -1120,9 +1084,6 @@
 
   - node: emptyCase
     entity: AirGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -1149,7 +1110,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -1168,14 +1129,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -1191,10 +1152,10 @@
 #Start New
 - type: constructionGraph
   id: FoamGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: GrenadeFoamDart
     edges:
     - to: emptyCase
@@ -1211,9 +1172,6 @@
 
   - node: emptyCase
     entity: GrenadeFoamDartModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -1240,7 +1198,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -1259,14 +1217,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -1282,10 +1240,10 @@
 #Start New
 - type: constructionGraph
   id: EMPGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: EmpGrenade
     edges:
     - to: emptyCase
@@ -1302,9 +1260,6 @@
 
   - node: emptyCase
     entity: EmpGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -1331,7 +1286,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -1350,14 +1305,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -1373,10 +1328,10 @@
 #Start New
 - type: constructionGraph
   id: BeeGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: BeeGrenade
     edges:
     - to: emptyCase
@@ -1393,9 +1348,6 @@
 
   - node: emptyCase
     entity: BeeGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -1422,7 +1374,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -1441,14 +1393,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -1464,10 +1416,10 @@
 #Start New
 - type: constructionGraph
   id: ShrapnelGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: GrenadeShrapnel
     edges:
     - to: emptyCase
@@ -1484,9 +1436,6 @@
 
   - node: emptyCase
     entity: ShrapnelGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -1513,7 +1462,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -1532,14 +1481,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -1555,10 +1504,10 @@
 #Start New
 - type: constructionGraph
   id: FlashbangGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: GrenadeFlashBang
     edges:
     - to: emptyCase
@@ -1575,9 +1524,6 @@
 
   - node: emptyCase
     entity: FlashbangModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -1604,7 +1550,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -1623,14 +1569,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -1646,10 +1592,10 @@
 #Start New
 - type: constructionGraph
   id: TrickGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: GrenadeDummy
     edges:
     - to: emptyCase
@@ -1666,9 +1612,6 @@
 
   - node: emptyCase
     entity: TrickGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -1695,7 +1638,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -1714,14 +1657,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -1737,10 +1680,10 @@
 #Start New
 - type: constructionGraph
   id: LubeGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: LubeGrenade
     edges:
     - to: emptyCase
@@ -1763,9 +1706,6 @@
 
   - node: emptyCase
     entity: LubeGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -1792,7 +1732,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -1811,14 +1751,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -1834,10 +1774,10 @@
 #Start New
 - type: constructionGraph
   id: GlueGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: GlueGrenade
     edges:
     - to: emptyCase
@@ -1860,9 +1800,6 @@
 
   - node: emptyCase
     entity: GlueGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -1889,7 +1826,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -1908,14 +1845,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -1931,10 +1868,10 @@
 #Start New
 - type: constructionGraph
   id: CleanerGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: CleanerGrenade
     edges:
     - to: emptyCase
@@ -1957,9 +1894,6 @@
 
   - node: emptyCase
     entity: CleanerGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -1986,7 +1920,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -2005,14 +1939,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -2028,10 +1962,10 @@
 #Start New
 - type: constructionGraph
   id: SmokeGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: SmokeGrenade
     edges:
     - to: emptyCase
@@ -2048,9 +1982,6 @@
 
   - node: emptyCase
     entity: SmokeGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -2077,7 +2008,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -2096,14 +2027,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -2119,10 +2050,10 @@
 #Start New
 - type: constructionGraph
   id: MetalFoamGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: MetalFoamGrenade
     edges:
     - to: emptyCase
@@ -2145,9 +2076,6 @@
 
   - node: emptyCase
     entity: MetalFoamGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -2174,7 +2102,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -2193,14 +2121,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
@@ -2216,10 +2144,10 @@
 #Start New
 - type: constructionGraph
   id: ExplosiveGrenadeGraph
-  start: start
+  start: grenade1
   graph:
 
-  - node: start
+  - node: grenade1
     entity: ExGrenade
     edges:
     - to: emptyCase
@@ -2236,9 +2164,6 @@
 
   - node: emptyCase
     entity: ExplosiveGrenadeModular
-    actions:
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     edges:
     - to: caseWithTrigger
       steps:
@@ -2265,7 +2190,7 @@
         completed:
         - !type:EmptyContainer
           container: payloadTrigger
-    - to: complete
+    - to: grenade2
       steps:
       - tag: Payload
         store: payload
@@ -2284,14 +2209,14 @@
         completed:
         - !type:EmptyContainer
           container: payload
-    - to: complete
+    - to: grenade2
       steps:
       - component: PayloadTrigger
         store: payloadTrigger
         name: construction-graph-component-payload-trigger
         doAfter: 0.5
 
-  - node: complete
+  - node: grenade2
     actions:
     - !type:PlaySound
       sound: /Audio/Machines/button.ogg
