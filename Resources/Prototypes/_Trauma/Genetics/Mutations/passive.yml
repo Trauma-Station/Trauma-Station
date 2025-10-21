@@ -8,4 +8,8 @@
   components:
   - type: Mutation
     instability: 25
-  # TODO give random shit complex interaction and literacy
+  - type: ComponentMutation
+    added:
+    - type: ComplexInteraction
+    removed:
+    - type: BlockWriting
