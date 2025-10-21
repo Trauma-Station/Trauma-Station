@@ -5,7 +5,7 @@
   description: Causes a small, deadly explosion.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-minibomb
   - type: Destructible
     thresholds:
@@ -29,7 +29,7 @@
   id: FakeMiniBombPayload
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-trick
   - type: SoundOnTrigger
     sound:
@@ -42,7 +42,7 @@
   description: Pushes everything away very quickly.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-whitehole
   - type: SoundOnTrigger
     sound:
@@ -86,7 +86,7 @@
   description: Oh no.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-nuclearoption
   - type: Destructible
     thresholds:
@@ -110,7 +110,7 @@
   description: Pulls nearby objects close, then explodes.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-supermatter
   - type: Destructible
     thresholds:
@@ -162,7 +162,7 @@
   description: Launches many of less-lethal stunning rubber pellets.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-stinger
   - type: DeleteOnTrigger
   - type: ProjectileGrenade
@@ -181,7 +181,7 @@
   description: Releases a large amount of blinding gas.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-teargas
   - type: DeleteOnTrigger
   - type: SmokeOnTrigger
@@ -202,7 +202,7 @@
   description: Releases a large, long-lasting cloud of smoke when used.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-stinger
   - type: DeleteOnTrigger
   - type: SmokeOnTrigger
@@ -218,7 +218,7 @@
   description: Releases a large amount of deadly gas.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-saringas
   - type: DeleteOnTrigger
   - type: SmokeOnTrigger
@@ -238,7 +238,7 @@
   description: Launches many firey fragments.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-incendiary
   - type: Destructible
     thresholds:
@@ -262,7 +262,7 @@
   description: Causes a HUGE, deadly explosion.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-HHG
   - type: Destructible
     thresholds:
@@ -290,7 +290,7 @@
   description: Causes three large, deadly explosions.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-triple
   - type: Destructible
     thresholds:
@@ -341,7 +341,7 @@
   description: Releashes three flashbangs.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-triple
   - type: EmitSoundOnTrigger
     sound:
@@ -362,7 +362,7 @@
   description: Releases air I guess.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-air
   - type: DeleteOnTrigger
   - type: ReleaseGasOnTrigger
@@ -381,7 +381,7 @@
   description: Makes a giant fucking mess. Shame on you.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-trick
   - type: ScatteringGrenade
     fillPrototype: BulletFoam
@@ -395,7 +395,7 @@
   description: Releases an electro magnetic pulse, disrupts electronics.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-EMP
   - type: EmpOnTrigger
     range: 5.5
@@ -409,7 +409,7 @@
   description: Releases bees. (they are mean)
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-bee
   - type: ScatteringGrenade
     fillPrototype: MobSyndieAngryBee

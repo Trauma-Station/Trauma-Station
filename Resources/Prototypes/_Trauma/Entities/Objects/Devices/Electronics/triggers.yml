@@ -5,7 +5,7 @@
   description: A sinister timer.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: timer-minibomb
   - type: Item
     size: Small
@@ -33,7 +33,7 @@
   description: A repulsive timer.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: timer-whitehole
   - type: Item
     size: Small
@@ -62,7 +62,7 @@
   description: An atttractive timer.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: timer-supermatter
   - type: Item
     size: Small
@@ -91,7 +91,7 @@
   description: For the Grail...
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: timer-holy
   - type: Item
     size: Small
@@ -118,7 +118,7 @@
   description: A silent timer.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Devices/bombcomponents.rsi
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: timer-silent
   - type: Item
     size: Small
