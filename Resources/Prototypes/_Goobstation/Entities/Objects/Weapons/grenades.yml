@@ -21,5 +21,5 @@
         Quantity: 50
   - type: Construction # Trauma
     graph: SarinGasGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null

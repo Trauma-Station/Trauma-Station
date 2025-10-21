@@ -198,7 +198,7 @@
     beepInterval: 2 # 2 beeps total (at 0 and 2)
   - type: Construction # Trauma
     graph: ExplosiveGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -232,7 +232,7 @@
     - GrenadeFlashBang
   - type: Construction # Trauma
     graph: FlashbangGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -293,7 +293,7 @@
     price: 2000
   - type: Construction # Trauma
     graph: SyndicateMinibombGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -386,7 +386,7 @@
     price: 1000
   - type: Construction # Trauma
     graph: SupermatterGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -439,7 +439,7 @@
     price: 1000
   - type: Construction # Truama
     graph: WhiteholeGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -473,7 +473,7 @@
       path: /Audio/Effects/countdown.ogg
   - type: Construction #Trauma
     graph: NuclearOptionGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -544,7 +544,7 @@
     price: 666 # 2000 for 3, I love fractions
   - type: Construction #Trauma
     graph: EMPGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -575,7 +575,7 @@
     price: 10000
   - type: Construction # Trauma
     graph: HolyHandGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -597,7 +597,7 @@
       path: /Audio/Items/smoke_grenade_prime.ogg
   - type: Construction # Trauma
     graph: SmokeGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -618,7 +618,7 @@
         Quantity: 30
   - type: Construction # Trauma
     graph: CleanerGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -639,7 +639,7 @@
         Quantity: 20
   - type: Construction # Trauma
     graph: TearGasGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -660,7 +660,7 @@
     price: 350
   - type: Construction # Trauma
     graph: MetalFoamGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -696,7 +696,7 @@
           False: { state: spent }
   - type: Construction # Trauma
     graph: AirGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 # Non-explosive "dummy" grenades to use as a distraction.
@@ -721,7 +721,7 @@
       path: /Audio/Effects/countdown.ogg
   - type: Construction # Trauma
     graph: TrickGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -747,5 +747,5 @@
     price: 1000
   - type: Construction # Trauma
     graph: SyndicateTrickybombGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null

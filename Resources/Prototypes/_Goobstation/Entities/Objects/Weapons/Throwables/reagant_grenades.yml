@@ -27,7 +27,7 @@
         Quantity: 20
   - type: Construction # Trauma
     graph: LubeGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -48,4 +48,4 @@
         Quantity: 20
   - type: Construction
     graph: GlueGrenadeGraph
-    node: grenade1
+    node: start

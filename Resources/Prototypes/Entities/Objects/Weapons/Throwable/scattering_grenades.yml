@@ -92,7 +92,7 @@
       path: "/Audio/Machines/door_lock_off.ogg"
   - type: Construction #Trauma
     graph: ClusterBangGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -123,7 +123,7 @@
     price: 2500
   - type: Construction # Trauma
     graph: ClusterGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -204,5 +204,5 @@
       path: "/Audio/Weapons/Guns/Gunshots/batrifle.ogg"
   - type: Construction # Trauma
     graph: FoamGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null

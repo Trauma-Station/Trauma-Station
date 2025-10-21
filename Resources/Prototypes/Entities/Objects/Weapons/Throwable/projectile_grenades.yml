@@ -79,7 +79,7 @@
       path: /Audio/Effects/countdown.ogg
   - type: Construction # Trauma
     graph: StingerGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -111,7 +111,7 @@
     price: 1500
   - type: Construction # Trauma
     graph: IncendiaryGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
 
 - type: entity
@@ -143,5 +143,5 @@
     price: 1500
   - type: Construction # Trauma
     graph: ShrapnelGrenadeGraph
-    node: grenade1
+    node: start
     deconstructionTarget: null
