@@ -11,6 +11,7 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: Scribbles
-  equipment:
-    id: CybersunFlippo
+  storage:
+    back:
+    - CybersunFlippo
   
