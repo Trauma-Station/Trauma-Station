@@ -164,6 +164,9 @@
   - type: Sprite
     sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-stinger
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
   - type: DeleteOnTrigger
   - type: ProjectileGrenade
     fillPrototype: PelletClusterRubber
@@ -240,6 +243,9 @@
   - type: Sprite
     sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-incendiary
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
   - type: Destructible
     thresholds:
     - trigger:
@@ -248,6 +254,7 @@
       behaviors:
       - !type:TriggerBehavior
   - type: DeleteOnTrigger
+  - type: ContainerContainer
   - type: ProjectileGrenade
     fillPrototype: PelletClusterIncendiary
     capacity: 30
@@ -380,6 +387,9 @@
   id: FoamPayload
   description: Makes a giant fucking mess. Shame on you.
   components:
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
   - type: Sprite
     sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-trick
