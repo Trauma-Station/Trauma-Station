@@ -33,6 +33,7 @@
   - type: Construction
     graph: SyndicateMinibombGraph
     node: emptyCase
+    deconstructionTarget: null
   - type: Appearance
   - type: Damageable
     damageContainer: Inorganic
@@ -50,6 +51,7 @@
   - type: Construction
     graph: SyndicateTrickybombGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: whitehole grenade
@@ -64,6 +66,7 @@
   - type: Construction
     graph: WhiteholeGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: the nuclear option
@@ -78,6 +81,7 @@
   - type: Construction
     graph: NuclearOptionGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: supermatter grenade
@@ -92,6 +96,7 @@
   - type: Construction
     graph: SupermatterGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: stinger grenade
@@ -106,6 +111,7 @@
   - type: Construction
     graph: SupermatterGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: tear gas grenade
@@ -120,6 +126,7 @@
   - type: Construction
     graph: TearGasGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: sarin gas grenade
@@ -134,6 +141,7 @@
   - type: Construction
     graph: SarinGasGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: incendiary grenade
@@ -148,6 +156,7 @@
   - type: Construction
     graph: IncendiaryGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: holy hand grenade
@@ -166,6 +175,7 @@
   - type: Construction
     graph: HolyHandGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: ClusterGrenade
@@ -180,6 +190,7 @@
   - type: Construction
     graph: ClusterGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: ClusterBang
@@ -194,6 +205,7 @@
   - type: Construction
     graph: ClusterBangGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: air grenade
@@ -208,6 +220,7 @@
   - type: Construction
     graph: AirGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: foam dart grenade
@@ -222,6 +235,7 @@
   - type: Construction
     graph: FoamGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: EMP Grenade
@@ -236,6 +250,7 @@
   - type: Construction
     graph: EMPGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: Beenade
@@ -250,6 +265,7 @@
   - type: Construction
     graph: BeeGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: shrapnel grenade
@@ -264,6 +280,7 @@
   - type: Construction
     graph: ShrapnelGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: flashbang
@@ -278,6 +295,7 @@
   - type: Construction
     graph: FlashbangGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: trick grenade
@@ -292,6 +310,7 @@
   - type: Construction
     graph: TrickGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: lube grenade
@@ -306,6 +325,7 @@
   - type: Construction
     graph: LubeGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: glue grenade
@@ -320,6 +340,7 @@
   - type: Construction
     graph: GlueGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: smoke grenade
@@ -334,6 +355,7 @@
   - type: Construction
     graph: SmokeGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: cleanade
@@ -348,6 +370,7 @@
   - type: Construction
     graph: CleanerGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: metal foam grenade
@@ -362,6 +385,7 @@
   - type: Construction
     graph: MetalFoamGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
 
 - type: entity
   name: explosive grenade
@@ -376,3 +400,4 @@
   - type: Construction
     graph: ExplosiveGrenadeGraph
     node: emptyCase
+    deconstructionTarget: null
