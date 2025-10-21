@@ -19,7 +19,8 @@
   - type: Mutation
     instability: 25
     difficulty: 12
-  # TODO
+  - type: ActionMutation
+    action: ActionMutationCryokinesis
 
 - type: entity
   parent: BaseConjureAction
@@ -33,3 +34,18 @@
       state: cold
   - type: ConjureAction
     spawn: Snowcone # TODO: if anyone ever makes a snow item, spawn that instead
+
+- type: entity
+  parent: ActionMutationPyrokinesis
+  id: ActionMutationCryokinesis
+  name: Cryobeam
+  description: This power fires a frozen bolt at a target.
+  components:
+  - type: Action
+    useDelay: 16
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: icebeam
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: BulletTemperatureCryo

@@ -31,7 +31,8 @@
   - type: RemovesMutation
     removes:
     - MutationCryokinesis
-  # TODO: fireball-like ability
+  - type: ActionMutation
+    action: ActionMutationPyrokinesis
 
 - type: entity
   parent: BaseConjureAction
@@ -45,3 +46,24 @@
       state: ash
   - type: ConjureAction
     spawn: Ash
+
+- type: entity
+  parent: BaseAction
+  id: ActionMutationPyrokinesis
+  name: Pyrobeam
+  description: This power fires a heated bolt at a target.
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: BigAction
+    raiseOnUser: true
+    sound: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: firebeam
+  - type: TargetAction
+    range: 60
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: BulletTemperaturePyro
