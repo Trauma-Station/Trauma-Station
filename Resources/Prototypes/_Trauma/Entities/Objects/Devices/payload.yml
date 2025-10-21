@@ -254,7 +254,6 @@
       behaviors:
       - !type:TriggerBehavior
   - type: DeleteOnTrigger
-  - type: ContainerContainer
   - type: ProjectileGrenade
     fillPrototype: PelletClusterIncendiary
     capacity: 30
