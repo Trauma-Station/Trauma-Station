@@ -1,0 +1,12 @@
+using Robust.Shared.GameStates;
+
+namespace Content.Trauma.Shared.Interaction;
+
+/// <summary>
+/// Lets you ignore action blockers while conscious and interact with obstructed entities, if they are still in range.
+/// </summary>
+/// <remarks>
+/// Not relayed to mutations and handled there because interaction is really, really common.
+/// </remarks>
+[RegisterComponent, NetworkedComponent]
+public sealed partial class TelekinesisComponent : Component;

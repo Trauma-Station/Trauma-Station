@@ -7,7 +7,9 @@
   - type: Mutation
     instability: 35
     difficulty: 18
-  # TODO: remove obsruction from interaction checks, and replace action blockers with just consciousness/adminfreeze check?
+  - type: ComponentMutation
+    added:
+    - type: Telekinesis
 
 - type: entity
   parent: BaseMutation
@@ -18,4 +20,33 @@
   - type: Mutation
     instability: 35
     difficulty: 32 # good luck chuddy
-  # TODO: increase interaction range by 1m
+  # TODO: prevent wearing gloves, disable picking up two handed items
+  - type: EffectsMutation
+    added:
+    - !type:BodyPartEffects
+      guidebookText: entity-effect-guidebook-stretches-arms
+      conditions:
+      - !type:MobStateCondition
+        mobstate: Alive
+      partType: Arm
+      effects:
+      - !type:AddComponents
+        guidebookText: entity-effect-guidebook-stretches-arms
+        conditions:
+        - !type:WhitelistCondition # has to be an organic arm
+          guidebookText: entity-effect-condition-guidebook-cybernetics-blacklist
+          blacklist:
+            components:
+            - Cybernetics
+        components:
+        - type: ExtraReach
+          bonus: 0.5 # both arms add to 1m
+    removed:
+    - !type:BodyPartEffects
+      guidebookText: entity-effect-guidebook-stretches-arms
+      partType: Arm
+      effects:
+      - !type:RemoveComponents
+        guidebookText: entity-effect-guidebook-stretches-arms
+        components:
+        - type: ExtraReach
