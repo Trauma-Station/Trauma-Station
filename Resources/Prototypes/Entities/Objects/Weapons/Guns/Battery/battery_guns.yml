@@ -465,8 +465,8 @@
   - type: StaticPrice
     price: 420
   - type: HitscanBatteryAmmoProvider
-    proto: RedLaser
-    fireCost: 62.5
+    proto: RedMediumLaser # Trauma - atleast its not so much worse than starting gun
+    fireCost: 30 # Trauma - 2 times more ammo
 
 - type: entity
   name: pulse pistol
