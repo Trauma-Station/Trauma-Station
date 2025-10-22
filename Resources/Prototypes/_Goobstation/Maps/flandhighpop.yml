@@ -37,7 +37,7 @@
 - type: gameMap
   id: FlandHighPop
   mapName: 'Fland Installation'
-  mapPath: /Maps/_Goobstation/fland.yml
+  mapPath: /Maps/_Trauma/fland.yml # Trauma
   minPlayers: 85
   stations:
     Fland:
