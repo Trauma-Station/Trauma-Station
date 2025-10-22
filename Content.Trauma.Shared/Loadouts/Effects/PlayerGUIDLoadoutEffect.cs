@@ -1,17 +1,19 @@
+using Content.Shared.Preferences.Loadouts.Effects;
+using Content.Shared.Preferences.Loadouts;
+using Content.Shared.Preferences;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 
-
-namespace Content.Shared.Preferences.Loadouts.Effects;
+namespace Content.Trauma.Shared.Loadouts;
 
 /// <summary>
 /// Checks for a specific player GUID.
 /// </summary>
 public sealed partial class PlayerGUIDLoadoutEffect : LoadoutEffect
 {
-    [DataField]
-    public string Guid {  get; set; }
+    [DataField(required: true)]
+    public string Guid { get; set; }
 
     public override bool Validate(HumanoidCharacterProfile profile, RoleLoadout loadout, ICommonSession? session, IDependencyCollection collection, [NotNullWhen(false)] out FormattedMessage? reason)
     {

@@ -108,8 +108,7 @@
   - NanotrasenRepresentativeEnvirohelm
   - NanotrasenRepresentativeEnvirosuit
   - NanotrasenRepresentativeEnvirogloves
-  # Traumastation - Exclusive items
-  - ExclusiveItems
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobBlueshieldOfficer
@@ -130,8 +129,7 @@
   - BlueshieldOfficerEnvirosuit
   - BlueshieldOfficerEnvirogloves
   - BlueshieldOfficerGloves
-  # Traumastation - Exclusive items
-  - ExclusiveItems
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobNanotrasenCareerTrainer
@@ -152,8 +150,7 @@
   - CentComOfficerEnvirohelm
   - CentComOfficerEnvirosuit
   - CentComOfficerEnvirogloves
-  # Traumastation - Exclusive items
-  - ExclusiveItems
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: RoleSurvivalNukieHonkops
@@ -183,8 +180,7 @@
   - BrigmedicEnvirohelm
   - BrigmedicEnvirosuit
   - BrigmedicEnvirogloves
-  # Traumastation - Exclusive items
-  - ExclusiveItems
+  - ExclusiveItems # Trauma
 
 
 # gives plasmaman a plasma breathing tank
