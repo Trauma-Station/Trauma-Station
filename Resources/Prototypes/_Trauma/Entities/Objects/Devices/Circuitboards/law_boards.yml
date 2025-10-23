@@ -1,0 +1,14 @@
+- type: entity
+  id: RevCircuitBoard
+  parent: [BaseElectronics, BaseRevMajorContraband]
+  name: law board (Revolutionary)
+  description: An electronics board containing the Revolutionary lawset.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: std_mod
+  - type: SiliconLawProvider
+    laws: RevLawset
+    lawUploadSound: /Audio/Ambience/Antag/silicon_lawboard_antimov.ogg
+  - type: StaticPrice
+    price: 10000

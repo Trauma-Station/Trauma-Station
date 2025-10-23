@@ -5,3 +5,54 @@
   components:
   - type: Implanter
     implant: HellRipImplant
+
+- type: entity
+  id: RevsShieldFryer
+  name: shield fryer
+  description: A device that fries mindshield circuts near instantly, you need to get close to use it, and it can only be used once.
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  components:
+    - type: Item
+      sprite: _Goobstation/Objects/Specific/Medical/revs_implanter.rsi
+    - type: Sprite
+      sprite: _Goobstation/Objects/Specific/Medical/revs_implanter.rsi
+      state: implanter1
+      layers:
+        - state: implanter1
+          map: [ "implantFull" ]
+          visible: false
+        - state: implanter0
+          map: [ "implantOnly" ]
+    - type: GenericVisualizer
+      visuals:
+        enum.ImplanterVisuals.Full:
+          implantFull:
+            True: {visible: true}
+            False: {visible: false}
+        enum.ImplanterImplantOnlyVisuals.ImplantOnly:
+          implantOnly:
+            True: {state: broken}
+            False: {state: implanter1}
+    - type: Tag
+      tags: []
+    - type: ItemSlots
+    - type: ContainerContainer
+      containers:
+        implanter_slot: !type:ContainerSlot { }
+    - type: Implanter
+      whitelist:
+        components:
+        - Body
+      currentMode: Draw
+      drawTime: 1
+      implanterSlot:
+        name: Implant
+        locked: True
+        priority: 0
+        whitelist:
+          tags:
+            - SubdermalImplant
+      allowDeimplantAll: false
+      deimplantWhitelist:
+      - MindShieldImplant
+    - type: Appearance
