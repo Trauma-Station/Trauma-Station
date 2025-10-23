@@ -100,7 +100,7 @@
   - NanotrasenRepresentativeBelt
   - Glasses
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   - Survival
   - NanotrasenRepresentativeGloves
@@ -120,7 +120,7 @@
   - BlueshieldOfficerMask
   - BlueshieldOfficerShoes
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   - SurvivalSecurity
   # Goobstation - EE Plasmeme Change.
@@ -141,7 +141,7 @@
   - NanotrasenTrainerGloves
   - NanotrasenTrainerBelt
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   - Survival
   # Goobstation - EE Plasmeme Change.
@@ -170,7 +170,7 @@
   - SecurityNeck
   - SurvivalSecurity
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
