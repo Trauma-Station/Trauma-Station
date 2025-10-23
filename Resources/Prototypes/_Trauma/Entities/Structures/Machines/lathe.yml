@@ -258,3 +258,25 @@
         - Sheet
         - RawMaterial
         - Ingot
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevTechAnalyzer
+  name: tech analyzer
+  description: Scans NT tech and produces tech disks for the microelectronics assembler to create.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/techanalyzer.rsi
+  - type: Lathe
+    producingSound: /Audio/Machines/uniformprinter.ogg
+    runningState: techAnalyzer
+    staticPacks:
+    - RevPrinterStatic
+#  - type: Construction
+#    node: uniform printer
+  - type: MaterialStorage
+    whitelist:
+      tags:
+        - Sheet
+        - RawMaterial
+        - Ingot
