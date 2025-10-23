@@ -53,8 +53,8 @@
 
 - type: latheRecipe
   parent: BaseRevClothingRecipe
-  id: ClothingShoesBootsJack
-  result: ClothingShoesBootsJack
+  id: ClothingShoesBootsRev
+  result: ClothingShoesBootsRev
   materials:
     Durathread: 200
     Plastic: 100

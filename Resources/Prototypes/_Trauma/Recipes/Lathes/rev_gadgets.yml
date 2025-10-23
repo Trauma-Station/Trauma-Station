@@ -47,3 +47,39 @@
   materials:
     Steel: 50
     Plastic: 50
+
+- type: latheRecipe
+  id: RevCircuitBoard
+  parent: BaseRevGadget
+  result: RevCircuitBoard
+  materials:
+    Steel: 50
+    Plastic: 50
+    Gold: 25
+
+- type: latheRecipe
+  id: RevReflectivePlate
+  parent: BaseRevGadget
+  result: RevReflectivePlate
+  materials:
+    Steel: 200
+    Silver: 200
+    Gold: 25
+
+- type: latheRecipea
+  id: FakeMindShieldImplanterRev
+  parent: BaseRevGadget
+  result: FakeMindShieldImplanterRev
+  materials:
+    Steel: 50
+    Plastic: 50
+    Gold: 25
+
+- type: latheRecipe
+  id: RevShieldRipper
+  parent: BaseRevGadget
+  result: RevShieldRipper
+  materials:
+    Steel: 50
+    Plastic: 50
+    Gold: 25

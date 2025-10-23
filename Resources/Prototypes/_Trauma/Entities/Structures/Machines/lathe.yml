@@ -236,6 +236,10 @@
       - Ingot
   - type: Construction
     node: microelectronics assembler
+  - type: BlueprintReceiver
+    whitelist:
+      tags:
+      - DataChip
 
 - type: entity
   parent: BaseRevIndustry
@@ -271,7 +275,7 @@
     producingSound: /Audio/Machines/uniformprinter.ogg
     runningState: techAnalyzer
     staticPacks:
-    - RevPrinterStatic
+    - RevTechStatic
 #  - type: Construction
 #    node: uniform printer
   - type: MaterialStorage

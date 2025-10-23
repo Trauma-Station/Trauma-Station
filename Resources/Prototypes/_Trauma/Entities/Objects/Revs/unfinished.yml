@@ -147,8 +147,8 @@
 - type: entity
   parent: [ BaseItem, BaseRevMajorContraband ]
   id: RevEmptyVest
-  name: empty web vest
-  description: An empty web vest, still needs plates. Add some armor plates to complete it.
+  name: empty vest
+  description: An empty  vest, still needs plates. Add some armor plates to complete it.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Revs/components.rsi
@@ -162,7 +162,7 @@
   parent: [ BaseItem, BaseRevMajorContraband ]
   id: RevArmorPlate
   name: armor plate
-  description: A plate for a web vest.
+  description: A plate for a bullet resistant vest.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Revs/components.rsi
@@ -170,10 +170,19 @@
   - type: Tag
     tags:
     - RevArmorPlate
-  - type: Construction
-    graph: RevVest
-    deconstructionTarget: null
-    node: unfinished
+
+- type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: RevReflectivePlate
+  name: reflective plate
+  description: A plate for a laser resistant vest.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/components.rsi
+    state: reflectplate
+  - type: Tag
+    tags:
+    - RevReflectivePlate
 
 - type: entity
   parent: [ BaseItem, BaseRevMajorContraband ]

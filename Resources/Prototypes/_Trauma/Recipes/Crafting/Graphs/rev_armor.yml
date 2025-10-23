@@ -27,7 +27,7 @@
     entity: ClothingHeadHelmetRev
 
 - type: constructionGraph
-  id: RevVest
+  id: RevBoots
   start: unfinished
   graph:
   - node: unfinished
@@ -41,4 +41,26 @@
           state: armorplate
         doAfter: 30
   - node: finished
+    entity: ClothingShoesBootsRevSteel
+
+- type: constructionGraph
+  id: RevVest
+  start: unfinished
+  graph:
+  - node: unfinished
+    edges:
+    - to: bullet
+      steps:
+      - tag: RevArmorPlate
+        name: construction-graph-tag-armorplate
+        doAfter: 30
+    - to: reflect
+      steps:
+      - tag: RevReflectivePlate
+        name: construction-graph-tag-reflectiveplate
+        doAfter: 30
+  - node: bullet
     entity: ClothingOuterVestWebRev
+  - node: reflect
+    entity: ClothingOuterVestReflectRev
+

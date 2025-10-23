@@ -23,6 +23,9 @@
   id: RevArmorPlate
 
 - type: Tag
+  id: RevReflectivePlate
+
+- type: Tag
   id: RevTurretBoard
 
 - type: Tag

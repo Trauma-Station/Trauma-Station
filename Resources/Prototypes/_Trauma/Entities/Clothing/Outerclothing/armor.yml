@@ -7,9 +7,9 @@
   - type: Item
     size: Ginormous
   - type: Sprite
-    sprite: _Trauma/Clothing/OuterClothing/revchestplate.rsi
+    sprite: _Trauma/Clothing/OuterClothing/Armor/revchestplate.rsi
   - type: Clothing
-    sprite: _Trauma/Clothing/OuterClothing/revchestplate.rsi
+    sprite: _Trauma/Clothing/OuterClothing/Armor/revchestplate.rsi
   - type: Armor
     coverage:
     - Chest
@@ -71,4 +71,38 @@
   - type: Construction
     graph: RevVest
     deconstructionTarget: null
-    node: finished
+    node: bullet
+
+- type: entity
+  parent: [ ClothingOuterStorageBase, AllowSuitStorageClothing, BaseRevMajorContraband ]
+  id: ClothingOuterVestReflectRev
+  name: reflective vest
+  description: An armored vest with advanced shielding to protect against energy weapons.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Vests/revreflective.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Vests/revreflective.rsi
+  - type: Armor
+    coverage:
+    - Chest
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.5
+  - type: Reflect
+    reflectProb: 0.5
+    reflects:
+    - Energy
+    reflectingInHands: false
+  - type: PointLight
+    enabled: true
+    radius: 1.5
+    softness: 5
+    color: "#4acff7"
+  - type: Construction
+    graph: RevVest
+    deconstructionTarget: null
+    node: reflect

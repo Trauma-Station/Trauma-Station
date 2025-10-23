@@ -86,5 +86,13 @@
   - ClothingHeadBandRev
   - RevEmptyVest
   - ClothingUniformJumpsuitMilitaryTurtleneckRev
-  - ClothingShoesBootsJack
+  - ClothingShoesBootsRev
   - ClothingHandsGlovesCombat
+
+- type: latheRecipePack
+  id: RevTechStatic
+  recipes:
+  - DataChipAIBoard
+  - DataChipReflectivePlate
+  - DataChipFakeMindshield
+  - DataChipShieldRipper
