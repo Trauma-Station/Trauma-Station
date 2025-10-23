@@ -127,7 +127,7 @@
   - CaptainOuterClothing
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - CaptainEnvirohelm
@@ -147,7 +147,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - HoPEnvirohelm
@@ -180,7 +180,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - AssistantEnvirohelm
@@ -198,7 +198,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - BartenderEnvirohelm
@@ -214,7 +214,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ServiceWorkerEnvirohelm
@@ -233,7 +233,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ChefEnvirohelm
@@ -249,7 +249,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - LibrarianEnvirohelm
@@ -266,7 +266,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - LawyerEnvirohelm
@@ -286,7 +286,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ChaplainEnvirohelm
@@ -306,7 +306,7 @@
   - Survival
   - Trinkets
   - JanitorPlunger
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - JanitorEnvirohelm
@@ -324,7 +324,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - BotanistEnvirohelm
@@ -344,7 +344,7 @@
   - Glasses
   - SurvivalClown
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   # Goobstation - EE Plasmeme Change.
   - ClownEnvirohelm
   - ClownEnvirosuit
@@ -364,7 +364,7 @@
   - Glasses
   - SurvivalMime
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   # Goobstation - EE Plasmeme Change.
   - MimeEnvirohelm
   - MimeEnvirosuit
@@ -382,7 +382,7 @@
   - Survival
   - Trinkets
   - Instruments
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - MusicianEnvirohelm
@@ -403,7 +403,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - QuartermasterEnvirohelm
@@ -422,7 +422,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - CargoTechnicianEnvirohelm
@@ -440,7 +440,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - SalvageEnvirohelm
@@ -460,7 +460,7 @@
   - ChiefEngineerShoes
   - SurvivalExtended
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ChiefEngineerEnvirohelm
@@ -475,7 +475,7 @@
   - StationEngineerBackpack
   - SurvivalExtended
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - TechnicalAssistantEnvirohelm
@@ -494,7 +494,7 @@
   - StationEngineerID
   - SurvivalExtended
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - StationEngineerEnvirohelm
@@ -512,7 +512,7 @@
   - AtmosphericTechnicianShoes
   - SurvivalExtended
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - AtmosEnvirohelm
@@ -534,7 +534,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ResearchDirectorEnvirosuit
@@ -556,7 +556,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ScientistEnvirohelm
@@ -572,7 +572,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ResearchAssistantEnvirohelm
@@ -594,7 +594,7 @@
   - SurvivalSecurity
   - Trinkets
   - SecurityStar
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - HeadofSecurityEnvirohelm
@@ -616,7 +616,7 @@
   - SurvivalSecurity
   - Trinkets
   - SecurityStar
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - WardenEnvirohelm
@@ -638,7 +638,7 @@
   - SurvivalSecurity
   - Trinkets
   - SecurityStar
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - SecurityOfficerEnvirohelm
@@ -657,7 +657,7 @@
   - SurvivalSecurity
   - Trinkets
   - SecurityStar
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - DetectiveEnvirohelm
@@ -675,7 +675,7 @@
   - SecurityNeck
   - SecurityOuterClothing # Goobstation - Why not.
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - SecurityCadetEnvirohelm
@@ -698,7 +698,7 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
   - ChiefMedicalOfficerEnvirohelm
@@ -720,7 +720,7 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
   - MedicalDoctorEnvirohelm
@@ -736,7 +736,7 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
   - MedicalInternEnvirohelm
@@ -756,7 +756,7 @@
   - MedicalShoes
   - SurvivalMedical
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
   - ChemistEnvirohelm
@@ -777,7 +777,7 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
   - ParamedicEnvirohelm
@@ -795,7 +795,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ZookeeperEnvirohelm
@@ -812,7 +812,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ReporterEnvirohelm
@@ -828,7 +828,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - PsychologistEnvirohelm
@@ -845,7 +845,7 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+#  - Animals - Trauma - Remove Animal ghostroles
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - BoxerEnvirohelm
