@@ -173,8 +173,9 @@
   - Headphones
   - PlushieLizard
   - PlushieSpaceLizard
-  - PersonalAI # Goobstation
-  - GoldenPersonalAI # Goobstation
+# Trauma - Remove PAI from loadout, reduce ghostroles.
+#  - PersonalAI # Goobstation
+#  - GoldenPersonalAI # Goobstation
   - ThreeCandles
   - Lighter
   - CigPackGreen
@@ -239,16 +240,17 @@
   - GlassesJensen
   - CheapSunglasses # Goobstation
 
-- type: loadoutGroup
-  id: Animals  # Goobstation
-  name: loadout-group-animals
-  minLimit: 0
-  maxLimit: 1
-  loadouts:
-  - Squackroach
-  - Mouse
-  - Mothroach
-  - Goldfish
+# Trauma - Remove Animal Loadout, ghostrole reduction.
+#- type: loadoutGroup
+#  id: Animals  # Goobstation
+#  name: loadout-group-animals
+#  minLimit: 0
+#  maxLimit: 1
+#  loadouts:
+#  - Squackroach
+#  - Mouse
+#  - Mothroach
+#  - Goldfish
 
 - type: loadoutGroup
   id: GroupTankHarness

@@ -1070,11 +1070,12 @@
     flavorKind: station-event-random-sentience-flavor-slime
   - type: MobPrice
     price: 3000 # it is a truly valuable creature
-  - type: GhostRole
-    name: ghost-role-information-smile-name
-    description: ghost-role-information-smile-description
-    rules: ghost-role-information-nonantagonist-rules
-    raffle: null
+# Trauma - Remove smile ghostrole, reduce ghostrole amount.
+#  - type: GhostRole  
+#    name: ghost-role-information-smile-name
+#    description: ghost-role-information-smile-description
+#    rules: ghost-role-information-nonantagonist-rules
+#    raffle: null
   - type: Grammar
     attributes:
       proper: true

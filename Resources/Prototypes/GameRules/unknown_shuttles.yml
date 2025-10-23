@@ -66,9 +66,9 @@
     startAnnouncement: station-event-unknown-shuttle-incoming
     startAudio:
       path: /Audio/Announcements/attention.ogg
-    weight: 4 #Common, but not every round
-    reoccurrenceDelay: 30
-    earliestStart: 20 # Goobstation
+    weight: 3 # Trauma start - Lower ShuttleRule spawn weight, increase reoccurence, increase earliest time. Reduce ghostroles.
+    reoccurrenceDelay: 35
+    earliestStart: 25 # Truama end.
     duration: 1
     maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
     chaos: # Goobstation
