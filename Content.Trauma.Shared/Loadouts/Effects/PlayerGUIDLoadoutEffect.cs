@@ -13,7 +13,9 @@ namespace Content.Trauma.Shared.Loadouts;
 public sealed partial class PlayerGUIDLoadoutEffect : LoadoutEffect
 {
     [DataField(required: true)]
-    public string Guid { get; set; }
+    public string Guid;
+
+    private Guid? _guid;
 
     public override bool Validate(HumanoidCharacterProfile profile, RoleLoadout loadout, ICommonSession? session, IDependencyCollection collection, [NotNullWhen(false)] out FormattedMessage? reason)
     {
@@ -23,7 +25,9 @@ public sealed partial class PlayerGUIDLoadoutEffect : LoadoutEffect
             return true;
         }
 
-        if (session.UserId == new Guid(Guid))
+        _guid ??= new Guid(Guid);
+
+        if (session.UserId == _guid)
         {
             reason = null;
             return true;
