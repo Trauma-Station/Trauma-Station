@@ -22,7 +22,7 @@ public sealed partial class PlayerGUIDLoadoutEffect : LoadoutEffect
         if (session == null)
         {
             reason = FormattedMessage.Empty;
-            return true;
+            return false;
         }
 
         _guid ??= new Guid(Guid);
