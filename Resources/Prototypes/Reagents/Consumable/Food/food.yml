@@ -51,13 +51,13 @@
         #        probability: 0.5, goob
         damage:
           groups:
-            Brute: -0.7 #Truama - Good food heals, cheap food does not.
-            Burn: -0.7
+            Brute: -0.7 # Trauma - 0.5 to 0.7 healing buff.
+            Burn: -0.7 # Trauma - 0.5 to 0.7 healing buff.
       # Helps you stop bleeding to an extent.
       - !type:ModifyBleedAmount
-        amount: -0.35 # Trauma - Start - Good food heals, cheap food does not.
-      - !type:ModifyBloodLevel
-        amount: 0.25 # Trauma - End
+        amount: -0.35 # Trauma - was 0.25. 
+      - !type:ModifyBloodLevel # Trauma - Moved here from nutriment.
+        amount: 0.25
       - !type:SatiateHunger #Numbers are balanced with this in mind + it helps limit how much healing you can get from food
   # Lets plants benefit too
   plantMetabolism:
