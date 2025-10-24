@@ -55,7 +55,7 @@
             Burn: -0.7
       # Helps you stop bleeding to an extent.
       - !type:ModifyBleedAmount
-        amount: -0.50 # Trauma - Start - Good food heals, cheap food does not.
+        amount: -0.35 # Trauma - Start - Good food heals, cheap food does not.
       - !type:MofifyBloodLevel
         amount: 0.25 # Trauma - End
       - !type:SatiateHunger #Numbers are balanced with this in mind + it helps limit how much healing you can get from food
