@@ -96,7 +96,7 @@
     - type: Sprite
       sprite: Structures/Piping/Atmospherics/gasfilter.rsi
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
           state: pipeTrinaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: gasFilter
@@ -163,7 +163,7 @@
     - enum.SubfloorLayers.FirstLayer
   - type: Sprite
     layers:
-    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+    - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
       state: pipeTrinaryConnectors
       map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: gasFilterF
@@ -194,7 +194,7 @@
     - type: Sprite
       sprite: Structures/Piping/Atmospherics/gasmixer.rsi
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
           state: pipeTrinaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: gasMixer
@@ -253,7 +253,7 @@
   - type: Sprite
     sprite: Structures/Piping/Atmospherics/gasmixer.rsi
     layers:
-    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+    - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
       state: pipeTrinaryConnectors
       map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: gasMixerF
@@ -329,7 +329,7 @@
     - type: Sprite
       sprite: Structures/Piping/Atmospherics/pneumaticvalve.rsi
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
           state: pipeTrinaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: off

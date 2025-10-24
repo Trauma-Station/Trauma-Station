@@ -145,7 +145,7 @@
       sprite: Structures/Piping/Atmospherics/vent.rsi
       noRot: true
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
           state: pipeUnaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: vent_off
@@ -197,7 +197,7 @@
       sprite: Structures/Piping/Atmospherics/vent.rsi
       noRot: true
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
           state: pipeUnaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: vent_passive
@@ -252,7 +252,7 @@
       sprite: Structures/Piping/Atmospherics/scrubber.rsi
       noRot: true
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
           state: pipeUnaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: scrub_off
@@ -301,7 +301,7 @@
       sprite: Structures/Piping/Atmospherics/outletinjector.rsi
       layers:
         - state: pipeUnaryConnectors
-          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: injector
           map: [ "enum.SubfloorLayers.FirstLayer" ]
@@ -359,9 +359,13 @@
     - type: AtmosPipeLayers
       spriteLayersRsiPaths:
         enum.PipeVisualLayers.Pipe:
-          Primary: Structures/Piping/Atmospherics/thermomachine.rsi
-          Secondary: Structures/Piping/Atmospherics/thermomachine_alt1.rsi
-          Tertiary: Structures/Piping/Atmospherics/thermomachine_alt2.rsi
+          # Carpmosia-start - 5 pipe layers
+          Primary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine.rsi
+          Secondary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt1.rsi
+          Tertiary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt2.rsi
+          Quaternary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt3.rsi
+          Quinary: _Carpmosia/Structures/Piping/Atmospherics/thermomachine_alt4.rsi
+          # Carpmosia-end - 5 pipe layers
     - type: AtmosDevice
     - type: UserInterface
       interfaces:
@@ -556,9 +560,13 @@
   - type: AtmosPipeLayers
     spriteLayersRsiPaths:
       enum.PipeVisualLayers.Pipe:
-        Primary: Structures/Piping/Atmospherics/condenser.rsi
-        Secondary: Structures/Piping/Atmospherics/condenser_alt1.rsi
-        Tertiary: Structures/Piping/Atmospherics/condenser_alt2.rsi
+        # Carpmosia-start - 5 pipe layers
+        Primary: _Carpmosia/Structures/Piping/Atmospherics/condenser.rsi
+        Secondary: _Carpmosia/Structures/Piping/Atmospherics/condenser_alt1.rsi
+        Tertiary: _Carpmosia/Structures/Piping/Atmospherics/condenser_alt2.rsi
+        Quaternary: _Carpmosia/Structures/Piping/Atmospherics/condenser_alt3.rsi
+        Quinary: _Carpmosia/Structures/Piping/Atmospherics/condenser_alt4.rsi
+        # Carpmosia-end - 5 pipe layers
   - type: AtmosDevice
   - type: PipeRestrictOverlap
   - type: ApcPowerReceiver

@@ -30,6 +30,20 @@
         amount: 1
         doAfter: 1
 
+    # Carpmosia-start - 5 pipe layers
+    - to: halfAlt3
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+
+    - to: halfAlt4
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+    # Carpmosia-end - 5 pipe layers
+
     - to: straight
       steps:
       - material: Steel
@@ -47,6 +61,20 @@
       - material: Steel
         amount: 1
         doAfter: 1
+
+    # Carpmosia-start - 5 pipe layers
+    - to: straightAlt3
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+
+    - to: straightAlt4
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+    # Carpmosia-end - 5 pipe layers
 
     - to: bend
       steps:
@@ -66,6 +94,20 @@
         amount: 1
         doAfter: 1
 
+    # Carpmosia-start - 5 pipe layers
+    - to: bendAlt3
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+
+    - to: bendAlt4
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+    # Carpmosia-end - 5 pipe layers
+
     - to: tjunction
       steps:
       - material: Steel
@@ -84,6 +126,20 @@
         amount: 1
         doAfter: 1
 
+    # Carpmosia-start - 5 pipe layers
+    - to: tjunctionAlt3
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+
+    - to: tjunctionAlt4
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+    # Carpmosia-end - 5 pipe layers
+
     - to: fourway
       steps:
       - material: Steel
@@ -101,6 +157,20 @@
       - material: Steel
         amount: 1
         doAfter: 1
+
+    # Carpmosia-start - 5 pipe layers
+    - to: fourwayAlt3
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+
+    - to: fourwayAlt4
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+    # Carpmosia-end - 5 pipe layers
 
     - to: manifold
       steps:
@@ -156,6 +226,40 @@
       - tool: Welding
         doAfter: 1
 
+  # Carpmosia-start - 5 pipe layers
+  - node: halfAlt3
+    entity: GasPipeHalfAlt3
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: halfAlt4
+    entity: GasPipeHalfAlt4
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+  # Carpmosia-end - 5 pipe layers
+
   - node: straight
     entity: GasPipeStraight
     edges:
@@ -203,6 +307,40 @@
       steps:
       - tool: Welding
         doAfter: 1
+
+  # Carpmosia-start - 5 pipe layers
+  - node: straightAlt3
+    entity: GasPipeStraightAlt3
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: straightAlt4
+    entity: GasPipeStraightAlt4
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+  # Carpmosia-end - 5 pipe layers
 
   - node: bend
     entity: GasPipeBend
@@ -252,6 +390,40 @@
       - tool: Welding
         doAfter: 1
 
+  # Carpmosia-start - 5 pipe layers
+  - node: bendAlt3
+    entity: GasPipeBendAlt3
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: bendAlt4
+    entity: GasPipeBendAlt4
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+  # Carpmosia-end - 5 pipe layers
+
   - node: tjunction
     entity: GasPipeTJunction
     edges:
@@ -300,6 +472,40 @@
       - tool: Welding
         doAfter: 1
 
+  # Carpmosia-start - 5 pipe layers
+  - node: tjunctionAlt3
+    entity: GasPipeTJunctionAlt3
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: tjunctionAlt4
+    entity: GasPipeTJunctionAlt4
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+  # Carpmosia-end - 5 pipe layers
+
   - node: fourway
     entity: GasPipeFourway
     edges:
@@ -347,6 +553,40 @@
       steps:
       - tool: Welding
         doAfter: 1
+
+  # Carpmosia-start - 5 pipe layers
+  - node: fourwayAlt3
+    entity: GasPipeFourwayAlt3
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: fourwayAlt4
+    entity: GasPipeFourwayAlt4
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+  # Carpmosia-end - 5 pipe layers
 
   - node: broken
     entity: GasPipeBroken
