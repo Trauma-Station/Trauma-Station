@@ -1,11 +1,26 @@
 - type: Tag
+  id: AdvancedMagboots
+
+- type: Tag
   id: CartridgeRPG2
 
 - type: Tag
   id: CartridgeTurret
 
 - type: Tag
+  id: DataChip
+
+- type: Tag
   id: EncryptionRevolutionary
+
+- type: Tag
+  id: FlamethrowerBackpack
+
+- type: Tag
+  id: FlamethrowerGun
+
+- type: Tag
+  id: FlamethrowerTank
 
 - type: Tag
   id: ForgeMold
@@ -23,6 +38,9 @@
   id: RevArmorPlate
 
 - type: Tag
+  id: RevID
+
+- type: Tag
   id: RevReflectivePlate
 
 - type: Tag
@@ -30,21 +48,3 @@
 
 - type: Tag
   id: TechfabMachineBoard
-
-- type: Tag
-  id: DataChip
-
-- type: Tag
-  id: AdvancedMagboots
-
-- type: Tag
-  id: RevID
-
-- type: Tag
-  id: FlamethrowerBackpack
-
-- type: Tag
-  id: FlamethrowerGun
-
-- type: Tag
-  id: FlamethrowerTank
