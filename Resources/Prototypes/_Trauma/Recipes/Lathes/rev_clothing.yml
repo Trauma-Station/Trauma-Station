@@ -15,7 +15,7 @@
   id: ClothingBeltRevWebbing
   result: ClothingBeltRevWebbing
   materials:
-    Durathread: 300
+    Cloth: 300
 
 - type: latheRecipe
   parent: BaseRevClothingRecipe
@@ -44,7 +44,7 @@
   id: RevEmptyVest
   result: RevEmptyVest
   materials:
-    Durathread: 300
+    Cloth: 300
 
 - type: latheRecipe
   parent: BaseRevClothingRecipe
@@ -56,7 +56,7 @@
   id: ClothingShoesBootsRev
   result: ClothingShoesBootsRev
   materials:
-    Durathread: 200
+    Cloth: 200
     Plastic: 100
 
 - type: latheRecipe
@@ -64,4 +64,4 @@
   id: ClothingHandsGlovesCombat
   result: ClothingHandsGlovesCombat
   materials:
-    Durathread: 100
+    Cloth: 100
