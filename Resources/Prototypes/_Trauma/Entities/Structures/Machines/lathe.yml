@@ -276,8 +276,8 @@
     runningState: techAnalyzer
     staticPacks:
     - RevTechStatic
-#  - type: Construction
-#    node: uniform printer
+  - type: Construction
+    node: tech analyzer
   - type: MaterialStorage
     whitelist:
       tags:

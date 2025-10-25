@@ -12,3 +12,59 @@
     grid:
     - 0,0,7,3
     - 8,1,8,3
+
+- type: entity
+  parent: [Clothing, ClothingSlotBase, BaseRevMajorContraband]
+  id: ClothingBackpackFlamethrower
+  name: flamethrower back tank
+  description: Accepts custom fuel tanks to fuel a flamethrower.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Back/Backpacks/flamethrower.rsi
+    layers:
+    - state: base
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Clothing
+    slots: BACK
+    sprite: _Trauma/Clothing/Back/Backpacks/flamethrower.rsi
+  - type: MagazineAmmoProvider
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        whitelist:
+          tags:
+          - FlamethrowerTank
+      item:
+        name: flamethrower
+        priority: 2
+        startingItem: WeaponFlamethrower
+        whitelist:
+          tags:
+          - FlamethrowerGun
+  - type: Appearance
+  - type: StaticPrice
+    price: 500
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      item: !type:ContainerSlot
+  - type: Item
+    size: Ginormous
+  - type: Tag
+    tags:
+    - FlamethrowerBackpack
+    - WhitelistChameleon
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+  - type: HeldSpeedModifier
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevGuns
+    node: Flamethrower

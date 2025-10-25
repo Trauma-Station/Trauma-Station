@@ -129,7 +129,70 @@
         amount: 5
       - tool: Screwing
         doAfter: 5
+    - to: FlamethrowerAmmo
+      steps:
+      - tool: Screwing
+        doAfter: 5
+      - tool: Screwing
+        doAfter: 5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - material: Uranium
+        amount: 2
+        doAfter: 3
+      - material: RevBolt
+      - material: RevNut
+      - tool: Screwing
+        doAfter: 5
+      - material: Steel
+        amount: 2
+        doAfter: 3
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - material: Gunpowder
+        amount: 5
+      - tool: Screwing
+        doAfter: 5
   - node: HE
     entity: CartridgeRocketRPG2HE
   - node: AP
     entity: CartridgeRocketRPG2AP
+  - node: AP
+    entity: FlamethrowerAmmo # TEMP
+

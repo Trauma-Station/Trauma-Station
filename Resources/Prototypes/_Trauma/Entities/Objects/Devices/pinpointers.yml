@@ -1,0 +1,21 @@
+- type: entity
+  name: command pinpointer
+  description: A handheld tracking device that tracks the nearest command member.
+  id: PinpointerCommand
+  parent: [PinpointerBase, BaseRevMajorContraband]
+  components:
+  - type: Sprite
+    layers:
+    - state: pinpointer_thief
+      map: ["enum.PinpointerLayers.Base"]
+    - state: pinonnull
+      map: ["enum.PinpointerLayers.Screen"]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    state: pinpointer_thief
+  - type: Pinpointer
+    targetName: command staff
+    whitelist:
+      components:
+      - CommandStaff

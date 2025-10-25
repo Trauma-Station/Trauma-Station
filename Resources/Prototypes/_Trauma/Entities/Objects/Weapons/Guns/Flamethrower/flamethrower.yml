@@ -1,0 +1,145 @@
+
+- type: entity
+  name: flamethrower
+  parent: [BaseItem, BaseRevMajorContraband]
+  id: WeaponFlamethrower
+  description: A flamethrower, draws its fuel from the backpack tank.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Flamethrower/flamethrower.rsi/flamethrower.rsi
+    state: icon
+  - type: Item
+    size: Ginormous
+  - type: Wieldable
+  - type: GunRequiresWield
+  - type: Gun
+    minAngle: 0
+    maxAngle: 0
+    fireRate: 15
+    burstFireRate: 15
+    burstCooldown: .5
+    shotsPerBurst: 5
+    projectileSpeed: 20
+    selectedMode: FullAuto
+    availableModes:
+      - FullAuto
+      - Burst
+    soundGunshot:
+      path: /Audio/_Trauma/Revs/flamethrower.ogg
+  - type: AmmoCounter
+  - type: StaticPrice
+    price: 500
+  - type: UseDelay
+    delay: 1
+  - type: ClothingSlotAmmoProvider
+    targetSlot: BACK
+    providerWhitelist:
+      tags:
+      - FlamethrowerBackpack
+  - type: Tag
+    tags:
+    - FlamethrowerGun
+
+- type: entity
+  id: FuelTankFlamethrower
+  parent: [BaseItem, BaseRevMajorContraband]
+  name: flamethrower fuel tank
+  description: A fuel tank for the flamethrower.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Flamethrower/fuel.rsi
+    state: icon
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,1
+  - type: BasicEntityAmmoProvider
+    proto: FlameThrowerBullet
+    capacity: 100
+    count: 100
+  - type: Tag
+    tags:
+    - FlamethrowerTank
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 300
+  - type: AmmoCounter
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevRockets
+    node: FlamethrowerAmmo
+
+- type: entity
+  parent: BaseItem
+  id: FlameThrowerBullet
+  name: flame
+  description: Dont be close to this probably.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/flamethrower.rsi
+    state: icon
+  - type: PointLight
+    enabled: true
+    color: "#E25822"
+    radius: 2.0
+    energy: 1.0
+  - type: Appearance
+  - type: AnimationPlayer
+  - type: IgniteOnCollide
+    fireStacks: 3
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:ExplodeBehavior
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          molotovfire:
+            min: 1
+            max: 1
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 15
+  - type: LandAtCursor
+  - type: FadingTimedDespawn
+    lifetime: 5
+    fadeOutTime: 3
+  - type: Physics
+    bodyType: Dynamic
+    bodyStatus: InAir
+    linearDamping: 0
+    angularDamping: 0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Burn: 5
+  - type: IgnitionSource
+    temperature: 400
+    ignited: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.2
+        density: 5
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.3,0.1,-0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+  - type: ThrowingAngle
+    angle: 90

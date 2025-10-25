@@ -129,11 +129,11 @@
   - type: PointLight
     radius: 5
     energy: 3
-    color: "#FFC90C"
+    color: "#ff790c"
   - type: Sprite
-    sprite: Effects/fire.rsi
+    sprite: _Trauma/Effects/floorfire.rsi
     layers:
-    - state: 1
+    - state: floorfire
   - type: Transform
     anchored: true
   - type: Physics

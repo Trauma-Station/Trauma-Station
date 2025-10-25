@@ -74,7 +74,7 @@
   - RevJammer
   - RevHeadset
   - RevVisor
-#  - Revpayloads later
+  - PinpointerCommand
 
 - type: latheRecipePack
   id: RevClothingStatic

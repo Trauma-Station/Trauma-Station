@@ -208,12 +208,101 @@
         doAfter: 10
       - tool: Screwing
         doAfter: 3
+    - to: RPG2
+      steps:
+      - tool: Screwing
+        doAfter: 3
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Screwing
+        doAfter: 3
+      - tool: Welding
+        doAfter: 5
+      - material: RevBolt
+        amount: 7
+        doAfter: 10
+      - material: RevNut
+        amount: 7
+        doAfter: 10
+      - tool: Anchoring
+        doAfter: 3
+      - material: WoodPlank
+        amount: 3
+        doAfter: 3
+      - tool: Slicing
+        doAfter: 10
+      - material: Steel
+        amount: 3
+        doAfter: 3
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Welding
+        doAfter: 5
+      - material: RevGunParts
+        amount: 5
+        doAfter: 10
+      - material: RevBolt
+        amount: 7
+        doAfter: 10
+      - material: RevGunParts
+        amount: 5
+        doAfter: 10
+      - tool: Screwing
+        doAfter: 3
+      - material: RevNut
+        amount: 7
+        doAfter: 10
+      - tool: Anchoring
+        doAfter: 3
+      - material: RevGunParts
+        amount: 5
+        doAfter: 10
+      - tool: Screwing
+        doAfter: 3
   - node: liberator
     entity: WeaponPistolLiberatorEmpty
   - node: resistance
     entity: WeaponSMGResistanceEmpty
   - node: RPG2
     entity: WeaponLauncherRPG2
+  - node: Flamethrower
+    entity: ClothingBackpackFlamethrower # Temp
 
 - type: constructionGraph
   id: RevIED

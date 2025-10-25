@@ -17,7 +17,7 @@
       - material: RevGear
       - tool: Screwing
         doAfter: 1
-    - to: telecomms workshop
+    - to: telecomms workshop # Secoff required
       steps:
       - tag: EncryptionSecurity
         name: construction-graph-tag-seccomms
@@ -31,7 +31,7 @@
       - material: RevNut
       - tool: Anchoring
         doAfter: 2
-    - to: microelectronics assembler
+    - to: microelectronics assembler # Techfab sabotage required
       steps:
       - tag: TechfabMachineBoard
         name: construction-graph-tag-techfabmachineboard
@@ -52,7 +52,7 @@
         amount: 7
       - tool: Anchoring
         doAfter: 2
-    - to: 3D printer # CE exclusive
+    - to: 3D printer # Engi required
       steps:
       - tag: RCD
         name: construction-graph-tag-RCD
@@ -93,6 +93,37 @@
         name: construction-graph-tag-hand-teleporter
         icon:
           sprite: Objects/Devices/hand_teleporter.rsi
+          state: icon
+      - tool: Welding
+        doAfter: 4
+      - material: Cable
+        amount: 8
+        doAfter: 2
+      - tool: Cutting
+        doAfter: 2
+      - material: RevBolt
+        amount: 10
+      - material: RevNut
+        amount: 10
+      - tool: Anchoring
+        doAfter: 2
+      - material: RevBolt
+        amount: 10
+      - material: RevNut
+        amount: 10
+      - tool: Anchoring
+        doAfter: 1
+    - to: tech analyzer # CE exclusive
+      steps:
+      - tag: RevID
+        name: construction-graph-tag-RevID
+        icon:
+          sprite: _Trauma/Objects/Misc/id_cards.rsi
+          state: idrevolutionary
+      - tag: AdvancedMagboots # Change to CE magboots
+        name: construction-graph-tag-AdvancedMagboots
+        icon:
+          sprite: Clothing/Shoes/Boots/magboots-advanced.rsi
           state: icon
       - tool: Welding
         doAfter: 4
@@ -168,3 +199,5 @@
     entity: RevMicroelectronicsAssembler
   - node: uniform printer
     entity: RevUniformPrinter
+  - node: tech analyzer
+    entity: RevTechAnalyzer

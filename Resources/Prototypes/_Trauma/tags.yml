@@ -33,3 +33,18 @@
 
 - type: Tag
   id: DataChip
+
+- type: Tag
+  id: AdvancedMagboots
+
+- type: Tag
+  id: RevID
+
+- type: Tag
+  id: FlamethrowerBackpack
+
+- type: Tag
+  id: FlamethrowerGun
+
+- type: Tag
+  id: FlamethrowerTank
