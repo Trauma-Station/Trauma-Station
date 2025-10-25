@@ -13,9 +13,9 @@
   parent: [ BaseFastDrawImplanter, BaseRevMajorContraband ]
   components:
     - type: Item
-      sprite: _Trauma/Objects/Revs/shieldripper.rsi
+      sprite: _Trauma/Objects/Specific/Medical/shieldripper.rsi
     - type: Sprite
-      sprite: _Trauma/Objects/Revs/shieldripper.rsi
+      sprite: _Trauma/Objects/Specific/Medical/shieldripper.rsi
       state: implanter1
       layers:
         - state: implanter1

@@ -6,7 +6,7 @@
   description: A flamethrower, draws its fuel from the backpack tank.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Flamethrower/flamethrower.rsi/flamethrower.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Flamethrower/flamethrower.rsi
     state: icon
   - type: Item
     size: Ginormous
