@@ -240,6 +240,12 @@
     whitelist:
       tags:
       - DataChip
+  - type: ContainerContainer
+    containers:
+      blueprint: !type:Container
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - blueprint
 
 - type: entity
   parent: BaseRevIndustry
