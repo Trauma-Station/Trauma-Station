@@ -194,5 +194,5 @@
   - node: AP
     entity: CartridgeRocketRPG2AP
   - node: FlamethrowerAmmo
-    entity: FlamethrowerAmmo
+    entity: FuelTankFlamethrower
 
