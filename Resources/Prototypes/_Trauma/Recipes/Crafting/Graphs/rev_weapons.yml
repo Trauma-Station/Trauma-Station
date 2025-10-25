@@ -208,7 +208,7 @@
         doAfter: 10
       - tool: Screwing
         doAfter: 3
-    - to: RPG2
+    - to: Flamethrower
       steps:
       - tool: Screwing
         doAfter: 3
