@@ -26,4 +26,20 @@ public sealed partial class TraumaCVars
         CVarDef.Create("trauma.pity_enabled", false, CVar.SERVER | CVar.REPLICATED);
 
     #endregion
+
+    #region Mining rewards
+
+    /// <summary>
+    /// Maximum currency to possibly give a player from mining in a round.
+    /// </summary>
+    public static readonly CVarDef<int> MiningRewardLimit =
+        CVarDef.Create("trauma.mining_reward_limit", 100, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// How many mining points give 1 currency.
+    /// </summary>
+    public static readonly CVarDef<int> MiningRewardRatio =
+        CVarDef.Create("trauma.mining_reward_ratio", 50, CVar.SERVER | CVar.REPLICATED);
+
+    #endregion
 }

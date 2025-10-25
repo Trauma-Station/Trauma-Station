@@ -28,6 +28,7 @@ using Content.Shared._Lavaland.UnclaimedOre;
 using Content.Shared.Access.Systems;
 using Content.Shared.Lathe;
 using Content.Shared.Materials;
+using Content.Trauma.Common.Salvage; // Trauma
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
@@ -74,8 +75,20 @@ public sealed class MiningPointsSystem : EntitySystem
     private void OnClaimMiningPoints(Entity<MiningPointsLatheComponent> ent, ref LatheClaimMiningPointsMessage args)
     {
         var user = args.Actor;
-        if (TryFindIdCard(user) is {} dest)
-            TransferAll(ent.Owner, dest);
+        // <Trauma> - raises event too
+        var comp = _query.Comp(ent);
+        var points = comp.Points;
+        if (points == 0)
+            return;
+
+        if (TryFindIdCard(user) is not {} dest)
+            return;
+
+        TransferAll((ent.Owner, comp), dest);
+
+        var ev = new MiningPointsClaimedEvent(user, (int) points);
+        RaiseLocalEvent(ent, ref ev, true);
+        // </Trauma>
     }
 
     #endregion
