@@ -193,6 +193,6 @@
     entity: CartridgeRocketRPG2HE
   - node: AP
     entity: CartridgeRocketRPG2AP
-  - node: AP
-    entity: FlamethrowerAmmo # TEMP
+  - node: FlamethrowerAmmo
+    entity: FlamethrowerAmmo
 
