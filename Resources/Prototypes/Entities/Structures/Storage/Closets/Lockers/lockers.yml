@@ -443,6 +443,20 @@
   components:
   - type: AccessReader
     access: [["Armory"]]
+  - type: Damageable # WWDP
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+
+- type: entity
+  abstract: true
+  id: AlertLevelLock
+  components:
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - blue
+    - yellow
+    - violet
 
 # Genpop Storage
 - type: entity
