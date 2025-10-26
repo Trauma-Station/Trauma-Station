@@ -1,5 +1,5 @@
 - type: entity
-  parent: MarkerBase
+  parent: BaseAntagSpawner
   id: SpawnPointInsurgent
   name: insurgent spawn point
   categories: [ Spawner ]
@@ -8,10 +8,6 @@
     rules: ghost-role-information-rules-team-antagonist
     mindRoles:
     - MindRoleInsurgent
-    raffle:
-      settings: default
-  - type: GhostRoleMobSpawner
-    prototype: MobHumanRandom
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
