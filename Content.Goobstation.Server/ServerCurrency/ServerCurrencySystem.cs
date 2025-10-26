@@ -115,9 +115,12 @@ namespace Content.Goobstation.Server.ServerCurrency
                             money *= 2;
 
                         // <Trauma>
-                        var modifyEv = new ModifyCurrencyEvent(session.Value, money);
-                        RaiseLocalEvent(ref modifyEv);
-                        money = modifyEv.Money;
+                        if (session is {} sess)
+                        {
+                            var modifyEv = new ModifyCurrencyEvent(sess, money);
+                            RaiseLocalEvent(ref modifyEv);
+                            money = modifyEv.Money;
+                        }
                         // </Trauma>
 
                         if (_goobcoinsUseShortRoundPenalty)
