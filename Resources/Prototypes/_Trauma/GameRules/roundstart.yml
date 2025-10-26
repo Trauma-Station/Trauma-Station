@@ -4,7 +4,6 @@
   components:
   - type: GameRule
     minPlayers: 10 # no insurgents on deadpop
-    duration: null # show them in round end
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/insurgents.yml
