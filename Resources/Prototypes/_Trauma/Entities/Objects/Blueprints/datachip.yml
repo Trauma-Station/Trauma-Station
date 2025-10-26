@@ -1,9 +1,9 @@
 - type: entity
+  abstract: true
   parent: [ BaseItem, BaseRevMinorContraband ]
   id: BaseBlueprintDatachip
-  abstract: true
   name: data chip
-  description: A datachip, can be insterted into th microelectronics assembler to make useful new tech.
+  description: A datachip, can be inserted into a microelectronics assembler to make new useful tech.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Revs/datachip.rsi

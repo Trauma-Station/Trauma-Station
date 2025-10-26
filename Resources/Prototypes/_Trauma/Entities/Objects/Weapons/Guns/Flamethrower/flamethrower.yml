@@ -1,8 +1,7 @@
-
 - type: entity
-  name: flamethrower
-  parent: [BaseItem, BaseRevMajorContraband]
+  parent: [ BaseItem, BaseRevMajorContraband ]
   id: WeaponFlamethrower
+  name: flamethrower
   description: A flamethrower, draws its fuel from the backpack tank.
   components:
   - type: Sprite
@@ -22,8 +21,8 @@
     projectileSpeed: 20
     selectedMode: FullAuto
     availableModes:
-      - FullAuto
-      - Burst
+    - FullAuto
+    - Burst
     soundGunshot:
       path: /Audio/_Trauma/Revs/flamethrower.ogg
   - type: AmmoCounter
@@ -41,10 +40,10 @@
     - FlamethrowerGun
 
 - type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
   id: FuelTankFlamethrower
-  parent: [BaseItem, BaseRevMajorContraband]
   name: flamethrower fuel tank
-  description: A fuel tank for the flamethrower.
+  description: A fuel tank for the flamethrower. Loaded with napalm that sticks to your newly-charred corpses as it burns.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Flamethrower/fuel.rsi
@@ -68,78 +67,3 @@
     deconstructionTarget: null
     graph: RevRockets
     node: FlamethrowerAmmo
-
-- type: entity
-  parent: BaseItem
-  id: FlameThrowerBullet
-  name: flame
-  description: Dont be close to this probably.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/flamethrower.rsi
-    state: icon
-  - type: PointLight
-    enabled: true
-    color: "#E25822"
-    radius: 2.0
-    energy: 1.0
-  - type: Appearance
-  - type: AnimationPlayer
-  - type: IgniteOnCollide
-    fireStacks: 3
-  - type: Damageable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 15
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:ExplodeBehavior
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          molotovfire:
-            min: 1
-            max: 1
-  - type: DamageOnLand
-    damage:
-      types:
-        Blunt: 15
-  - type: LandAtCursor
-  - type: FadingTimedDespawn
-    lifetime: 5
-    fadeOutTime: 3
-  - type: Physics
-    bodyType: Dynamic
-    bodyStatus: InAir
-    linearDamping: 0
-    angularDamping: 0
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Burn: 5
-  - type: IgnitionSource
-    temperature: 400
-    ignited: true
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape: !type:PhysShapeCircle
-          radius: 0.2
-        density: 5
-        mask:
-        - ItemMask
-        restitution: 0.3
-        friction: 0.2
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.1,-0.3,0.1,-0.1"
-        hard: false
-        mask:
-        - Impassable
-        - BulletImpassable
-  - type: ThrowingAngle
-    angle: 90

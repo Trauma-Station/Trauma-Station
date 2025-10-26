@@ -12,29 +12,24 @@
     modifier: 0.5
   - type: Construction
     graph: RevBoots
+    defaultTarget: finished
     deconstructionTarget: null
     node: unfinished
 
 - type: entity
-  parent: [ClothingShoesMilitaryBase, BaseRevMajorContraband]
+  parent: ClothingShoesBootsRev
   id: ClothingShoesBootsRevSteel
   name: steel-toed workboots
-  description: Workboots that have been modified to be able walk across caltrops.
+  description: Workboots that have been modified to safely walk across caltrops.
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Shoes/Boots/steeltoed.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Shoes/Boots/steeltoed.rsi
-  - type: ClothingSlowOnDamageModifier
-    modifier: 0.5
-  - type: ClothingGrantComponent
-    component:
-    - type: StepTriggerImmune
-      whitelist:
-        types:
-        - Caltrop
+  - type: StepTriggerImmune # Works by inventory relay
+    whitelist:
+      types:
+      - Caltrop
   - type: Construction
-    graph: RevBoots
-    deconstructionTarget: null
     node: finished
 

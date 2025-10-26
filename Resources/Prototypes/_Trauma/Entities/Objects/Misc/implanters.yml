@@ -7,58 +7,57 @@
     implant: HellRipImplant
 
 - type: entity
+  parent: [ BaseFastDrawImplanter, BaseRevMajorContraband ]
   id: RevShieldRipper
   name: shield ripper
   description: A device that quickly and painfully rips the mindshield out of someone, it can only be used one time.
-  parent: [ BaseFastDrawImplanter, BaseRevMajorContraband ]
   components:
-    - type: Item
-      sprite: _Trauma/Objects/Specific/Medical/shieldripper.rsi
-    - type: Sprite
-      sprite: _Trauma/Objects/Specific/Medical/shieldripper.rsi
-      state: implanter1
-      layers:
-        - state: implanter1
-          map: [ "implantFull" ]
-          visible: false
-        - state: implanter0
-          map: [ "implantOnly" ]
-    - type: GenericVisualizer
-      visuals:
-        enum.ImplanterVisuals.Full:
-          implantFull:
-            True: {visible: true}
-            False: {visible: false}
-        enum.ImplanterImplantOnlyVisuals.ImplantOnly:
-          implantOnly:
-            True: {state: broken}
-            False: {state: implanter1}
-    - type: Tag
-      tags: []
-    - type: Implanter
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Medical/shieldripper.rsi
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Medical/shieldripper.rsi
+    state: implanter1
+    layers:
+    - state: implanter1
+      map: [ "implantFull" ]
+      visible: false
+    - state: implanter0
+      map: [ "implantOnly" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ImplanterVisuals.Full:
+        implantFull:
+          True: {visible: true}
+          False: {visible: false}
+      enum.ImplanterImplantOnlyVisuals.ImplantOnly:
+        implantOnly:
+          True: {state: broken}
+          False: {state: implanter1}
+  - type: Tag
+    tags: []
+  - type: Implanter
+    whitelist:
+      components:
+      - Body
+    currentMode: Draw
+    drawTime: 1
+    implantTime: 999
+    implanterSlot:
+      name: Implant
+      locked: True
+      priority: 0
       whitelist:
-        components:
-        - Body
-      currentMode: Draw
-      drawTime: 1
-      implantTime: 999
-      implanterSlot:
-        name: Implant
-        locked: True
-        priority: 0
-        whitelist:
-          tags:
-            - SubdermalImplant
-      allowDeimplantAll: false
-      deimplantWhitelist:
-      - MindShieldImplant
-
+        tags:
+        - SubdermalImplant
+    allowDeimplantAll: false
+    deimplantWhitelist:
+    - MindShieldImplant
 
 - type: entity
+  parent: [BaseImplantOnlyImplanter, BaseRevMajorContraband]
   id: FakeMindShieldImplanterRev
   suffix: Fake Mindshield
   name: fake mindshield implanter
-  parent: [BaseImplantOnlyImplanter, BaseRevMajorContraband]
   components:
   - type: Implanter
     implant: FakeMindShieldImplant
@@ -68,11 +67,11 @@
     sprite: _Goobstation/Objects/Specific/Medical/revs_implanter.rsi
     state: implanter1
     layers:
-      - state: implanter1
-        map: [ "implantFull" ]
-        visible: false
-      - state: implanter0
-        map: [ "implantOnly" ]
+    - state: implanter1
+      map: [ "implantFull" ]
+      visible: false
+    - state: implanter0
+      map: [ "implantOnly" ]
   - type: GenericVisualizer
     visuals:
       enum.ImplanterVisuals.Full:

@@ -1,6 +1,6 @@
 - type: entity
+  parent: [ BaseElectronics, BaseRevMajorContraband ]
   id: RevCircuitBoard
-  parent: [BaseElectronics, BaseRevMajorContraband]
   name: law board (Revolutionary)
   description: An electronics board containing the Revolutionary lawset.
   components:

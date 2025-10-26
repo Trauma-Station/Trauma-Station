@@ -141,6 +141,7 @@
     state: gasfilter
   - type: Construction
     graph: RevMask
+    defaultTarget: finished
     deconstructionTarget: null
     node: unfinished
 
@@ -155,6 +156,7 @@
     state: emptyweb
   - type: Construction
     graph: RevVest
+    defaultTarget: finished
     deconstructionTarget: null
     node: unfinished
 
@@ -162,7 +164,7 @@
   parent: [ BaseItem, BaseRevMajorContraband ]
   id: RevArmorPlate
   name: armor plate
-  description: A plate for a bullet resistant vest.
+  description: A plate for a bullet resistant vest or steel-toed boots.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Revs/components.rsi
