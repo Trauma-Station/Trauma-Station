@@ -1,0 +1,19 @@
+- type: entity
+  parent: MarkerBase
+  id: SpawnPointInsurgent
+  name: insurgent spawn point
+  categories: [ Spawner ]
+  components:
+  - type: GhostRole
+    rules: ghost-role-information-rules-team-antagonist
+    mindRoles:
+    - MindRoleInsurgent
+    raffle:
+      settings: default
+  - type: GhostRoleMobSpawner
+    prototype: MobHumanRandom
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - state: passenger

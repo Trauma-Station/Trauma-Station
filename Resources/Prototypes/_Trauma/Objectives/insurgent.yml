@@ -1,0 +1,23 @@
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseInsurgentObjective
+  components:
+  - type: Objective
+    issuer: objective-issuer-insurgents
+  - type: RoleRequirement
+    roles:
+    - InsurgentRole
+
+- type: entity
+  parent: [ BaseInsurgentObjective, BaseLivingObjective]
+  id: InsurgentEscapeObjective
+  name: Escape to centcomm alive and unrestrained.
+  description: For the insurgence to succeed, you must keep your cover and reach Central Command in one piece.
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Structures/Furniture/chairs.rsi
+      state: shuttle
+  - type: EscapeShuttleCondition

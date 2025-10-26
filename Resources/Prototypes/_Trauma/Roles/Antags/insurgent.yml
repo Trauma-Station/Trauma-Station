@@ -1,0 +1,24 @@
+- type: antag
+  id: Insurgent
+  name: roles-antag-insurgent-name
+  objective: roles-antag-insurgent-objective
+  antagonist: true
+  setPreference: true
+  requirements:
+  - !type:RoleTimeRequirement
+    role: JobPassenger
+    time: 5h # become one with maints
+  # TODO: guide? its just being a halal shitter
+
+- type: startingGear
+  id: Insurgent
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    back: ClothingBackpackSatchel
+    mask: ClothingMaskGas
+    head: ClothingHeadHatWelding
+    ears: ClothingHeadsetGrey
+    gloves: ClothingHandsGlovesColorYellowBudget
+    shoes: ClothingShoesColorBlack
+    pocket2: FlashlightLantern
+    belt: ClothingBeltUtilityFilled

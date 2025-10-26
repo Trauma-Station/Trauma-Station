@@ -1,0 +1,15 @@
+- type: gamePreset
+  id: Insurgency
+  alias:
+  - insurgency
+  - insurgents
+  - greytide
+  name: insurgency-title
+  description: insurgency-description
+  showInVote: false
+  rules:
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - BasicRoundstartVariation
+  - Insurgency
