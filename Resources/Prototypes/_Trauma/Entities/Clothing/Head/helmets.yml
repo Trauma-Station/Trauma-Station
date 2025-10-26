@@ -2,7 +2,7 @@
   parent: [ ClothingHeadHelmetArmoredBase, BaseRevMajorContraband ]
   id: ClothingHeadHelmetRev
   name: helmet
-  description: The combat helmet is commonly used by revolutionaries, is strong and light.
+  description: This combat helmet is commonly used by revolutionaries and is both strong and light.
   components:
   - type: Sprite
     sprite: Clothing/Head/Helmets/merc_helmet.rsi
@@ -12,3 +12,22 @@
     graph: RevHelmet
     deconstructionTarget: null
     node: finished
+  - type: Armor # same values as BSO chud gear, it should much stronger than a 1 cloth cap hat you can make roundstart as any role
+    coverage:
+    - Head
+    traumaDeductions:
+      Dismemberment: 0.3
+      OrganDamage: 0.3
+      BoneDamage: 0.3
+      VeinsDamage: 0
+      NerveDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.3
+        Heat: 0.3
+        Radiation: 0.75
+        Caustic: 0.75
+  - type: ExplosionResistance
+    damageCoefficient: 0.75
