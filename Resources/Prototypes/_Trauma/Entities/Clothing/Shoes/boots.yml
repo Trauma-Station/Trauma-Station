@@ -31,5 +31,5 @@
       types:
       - Caltrop
   - type: Construction
+    defaultTarget: null
     node: finished
-
