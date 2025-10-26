@@ -153,7 +153,7 @@
     head: ClothingHeadMirror
     outerClothing: ClothingOuterCoatAbductor
     back: ClothingBackpackDuffelAbductor
-    pocket1: AbductorGizmo
+    pocket1: Silencer # Trauma - swapped silencer and gizmo
     suitstorage: WeaponDecloner
     id: AgentIDCard
 
@@ -167,7 +167,7 @@
     head: ClothingHeadHelmetAbductor
     outerClothing: ClothingOuterArmorAbductor
     back: ClothingBackpackAbductor
-    pocket1: Silencer
+    pocket1: AbductorGizmo # Trauma - swapped silencer and gizmo
     pocket2: WeaponAlien
     suitstorage: Wonderprod
     id: AgentIDCard
