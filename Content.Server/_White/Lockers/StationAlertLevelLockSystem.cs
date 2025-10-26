@@ -1,86 +1,49 @@
-using System.Linq;
 using Content.Server.AlertLevel;
 using Content.Server.Station.Systems;
 using Content.Shared._White.Lockers;
-using Content.Shared.Emag.Systems;
-using Content.Shared.Examine;
 
 namespace Content.Server._White.Lockers;
 
-public sealed class StationAlertLevelLockSystem : EntitySystem
+public sealed class StationAlertLevelLockSystem : SharedStationAlertLevelLockSystem
 {
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly AlertLevelSystem _level = default!;
+    [Dependency] private readonly StationSystem _station = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<StationAlertLevelLockComponent, MapInitEvent>(OnInit);
-        SubscribeLocalEvent<StationAlertLevelLockComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<StationAlertLevelLockComponent, GotEmaggedEvent>(OnEmagged);
         SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertChanged);
     }
 
-    public void OnInit(EntityUid uid, StationAlertLevelLockComponent component, MapInitEvent args)
+    public void OnInit(Entity<StationAlertLevelLockComponent> ent, ref MapInitEvent args)
     {
-        var station = _station.GetOwningStation(uid);
-
-        if (station == null)
+        // for non-station mapped safes don't lock them because that's chuddy
+        if (_station.GetOwningStation(ent.Owner) is not {} station)
         {
-            component.Enabled = false;
-            Dirty(uid, component);
+            ent.Comp.Enabled = false;
+            Dirty(ent);
             return;
         }
 
-        component.StationId = station.Value;
+        ent.Comp.StationId = station;
+        ent.Comp.Enabled = true;
 
-        CheckAlertLevels(component, _level.GetLevel(component.StationId.Value));
-        Dirty(uid, component);
+        CheckAlertLevels(ent, _level.GetLevel(station));
+        Dirty(ent);
     }
 
     private void OnAlertChanged(AlertLevelChangedEvent args)
     {
-        var enumerator = _entMan.AllEntityQueryEnumerator<StationAlertLevelLockComponent>();
-        while (enumerator.MoveNext(out var uid, out var component))
+        var query = EntityQueryEnumerator<StationAlertLevelLockComponent>();
+        while (query.MoveNext(out var uid, out var comp))
         {
             var station = args.Station;
-
-            if (station != component.StationId)
+            if (station != comp.StationId)
                 continue;
 
-            CheckAlertLevels(component, args.AlertLevel);
-            Dirty(uid, component);
+            CheckAlertLevels((uid, comp), args.AlertLevel);
         }
-    }
-
-    private void CheckAlertLevels(StationAlertLevelLockComponent component, string newAlertLevel)
-    {
-        component.Locked = false;
-
-        foreach (var level in component.LockedAlertLevels)
-            if (level == newAlertLevel)
-            {
-                component.Locked = true;
-                break;
-            }
-    }
-
-    private void OnEmagged(EntityUid uid, StationAlertLevelLockComponent component, ref GotEmaggedEvent args)
-    {
-        args.Handled = true;
-        component.Enabled = false;
-        Dirty(uid, component);
-    }
-
-    public void OnExamined(EntityUid uid, StationAlertLevelLockComponent component, ExaminedEvent args)
-    {
-        if (!component.Enabled || component.LockedAlertLevels.Count == 0)
-            return;
-
-        var levels = string.Join(", ", component.LockedAlertLevels.Select( s => Loc.GetString($"alert-level-{s}").ToLower()));
-
-        args.PushMarkup(Loc.GetString("station-alert-level-lock-examined", ("levels", levels)));
     }
 }
