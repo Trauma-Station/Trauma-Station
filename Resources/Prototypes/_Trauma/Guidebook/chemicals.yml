@@ -1,0 +1,5 @@
+- type: guideEntry # Trauma
+  id: Solids
+  name: guide-entry-solids
+  text: "/ServerInfo/_Trauma/Guidebook/ChemicalTabs/Solids.xml"
+  filterEnabled: True

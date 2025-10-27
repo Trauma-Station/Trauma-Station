@@ -259,9 +259,5 @@
       amount: 1
     - id: OmnizineChemistryVial
       amount: 1
-    - id: SyriniverChemistryVial
-      amount: 1
     - id: ProcenylLazideChemistryVial
-      amount: 1
-    - id: EbifinlLazideChemistryVial
       amount: 1

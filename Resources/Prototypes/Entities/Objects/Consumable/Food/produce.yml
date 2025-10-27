@@ -1895,8 +1895,8 @@
         reagents:
         - ReagentId: Aloe
           Quantity: 5 # Goobstation edit
-        - ReagentId: SilverSulfadiazine # Goobstation edit
-          Quantity: 20
+#        - ReagentId: SilverSulfadiazine # Trauma
+#          Quantity: 20
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/aloe.rsi
   - type: Item
@@ -1978,8 +1978,8 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 2
-        - ReagentId: StypticPowder
-          Quantity: 20
+#        - ReagentId: StypticPowder Trauma
+#          Quantity: 20
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/lily.rsi
   - type: Produce

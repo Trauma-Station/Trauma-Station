@@ -77,12 +77,16 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
+  - type: Construction # Trauma
+    graph: StingerGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ProjectileGrenadeBase, BaseSyndicateContraband]
   id: GrenadeIncendiary
   name: incendiary grenade
-  description: Guaranteed to light up the mood.
+  description: A brutal grenade that fires flaming shrapnel, igniting anyone it hits.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Grenades/pyrogrenade.rsi
@@ -105,6 +109,10 @@
       path: "/Audio/Weapons/Guns/Gunshots/batrifle.ogg"
   - type: StaticPrice
     price: 1500
+  - type: Construction # Trauma
+    graph: IncendiaryGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ProjectileGrenadeBase, BaseSyndicateContraband]
@@ -133,3 +141,7 @@
       path: "/Audio/Weapons/Guns/Gunshots/batrifle.ogg"
   - type: StaticPrice
     price: 1500
+  - type: Construction # Trauma
+    graph: ShrapnelGrenadeGraph
+    node: start
+    deconstructionTarget: null

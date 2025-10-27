@@ -134,6 +134,7 @@
   - CaptainEnvirosuit
   - CaptainEnvirogloves
   - CaptainGloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobHeadOfPersonnel
@@ -154,6 +155,8 @@
   - HoPEnvirosuit
   - HoPEnvirogloves
   - HoPGloves
+  - ExclusiveItems # Trauma
+
 # Silicons
 - type: roleLoadout
   id: JobBorg
@@ -186,6 +189,8 @@
   - AssistantEnvirohelm
   - AssistantEnvirosuit
   - AssistantEnvirogloves
+  - ExclusiveItems # Trauma
+
 
 - type: roleLoadout
   id: JobBartender
@@ -204,6 +209,7 @@
   - BartenderEnvirohelm
   - BartenderEnvirosuit
   - BartenderEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobServiceWorker
@@ -220,6 +226,7 @@
   - ServiceWorkerEnvirohelm
   - ServiceWorkerEnvirosuit
   - ServiceWorkerEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobChef
@@ -239,6 +246,7 @@
   - ChefEnvirohelm
   - ChefEnvirosuit
   - ChefEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobLibrarian
@@ -255,6 +263,7 @@
   - LibrarianEnvirohelm
   - LibrarianEnvirosuit
   - LibrarianEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobLawyer
@@ -272,6 +281,7 @@
   - LawyerEnvirohelm
   - LawyerEnvirosuit
   - LawyerEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobChaplain
@@ -292,6 +302,7 @@
   - ChaplainEnvirohelm
   - ChaplainEnvirosuit
   - ChaplainEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobJanitor
@@ -312,6 +323,7 @@
   - JanitorEnvirohelm
   - JanitorEnvirosuit
   - JanitorEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobBotanist
@@ -330,6 +342,7 @@
   - BotanistEnvirohelm
   - BotanistEnvirosuit
   - BotanistEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobClown
@@ -349,6 +362,7 @@
   - ClownEnvirohelm
   - ClownEnvirosuit
   - ClownEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobMime
@@ -370,6 +384,7 @@
   - MimeEnvirosuit
   - MimeEnvirogloves
   - MimeGloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobMusician
@@ -388,6 +403,7 @@
   - MusicianEnvirohelm
   - MusicianEnvirosuit
   - MusicianEnvirogloves
+  - ExclusiveItems # Trauma
 
 # Cargo
 - type: roleLoadout
@@ -409,6 +425,7 @@
   - QuartermasterEnvirohelm
   - QuartermasterEnvirosuit
   - QuartermasterEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobCargoTechnician
@@ -428,6 +445,7 @@
   - CargoTechnicianEnvirohelm
   - CargoTechnicianEnvirosuit
   - CargoTechnicianEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobSalvageSpecialist
@@ -446,6 +464,7 @@
   - SalvageEnvirohelm
   - SalvageEnvirosuit
   - SalvageEnvirogloves
+  - ExclusiveItems # Trauma
 
 # Engineering
 - type: roleLoadout
@@ -466,6 +485,7 @@
   - ChiefEngineerEnvirohelm
   - ChiefEngineerEnvirosuit
   - ChiefEngineerEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobTechnicalAssistant
@@ -481,6 +501,7 @@
   - TechnicalAssistantEnvirohelm
   - TechnicalAssistantEnvirosuit
   - TechnicalAssistantEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobStationEngineer
@@ -500,6 +521,7 @@
   - StationEngineerEnvirohelm
   - StationEngineerEnvirosuit
   - StationEngineerEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobAtmosphericTechnician
@@ -518,6 +540,7 @@
   - AtmosEnvirohelm
   - AtmosEnvirosuit
   - AtmosEnvirogloves
+  - ExclusiveItems # Trauma
 
 # Science
 - type: roleLoadout
@@ -540,6 +563,7 @@
   - ResearchDirectorEnvirosuit
   - ResearchDirectorEnvirohelm
   - ResearchDirectorEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobScientist
@@ -562,6 +586,7 @@
   - ScientistEnvirohelm
   - ScientistEnvirosuit
   - ScientistEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobResearchAssistant
@@ -578,6 +603,7 @@
   - ResearchAssistantEnvirohelm
   - ResearchAssistantEnvirosuit
   - ResearchAssistantEnvirogloves
+  - ExclusiveItems # Trauma
 
 # Security
 - type: roleLoadout
@@ -601,6 +627,7 @@
   - HeadofSecurityEnvirosuit
   - HeadofSecurityEnvirogloves
   - HeadofSecurityGloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobWarden
@@ -622,6 +649,7 @@
   - WardenEnvirohelm
   - WardenEnvirosuit
   - WardenEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobSecurityOfficer
@@ -644,6 +672,7 @@
   - SecurityOfficerEnvirohelm
   - SecurityOfficerEnvirosuit
   - SecurityOfficerEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobDetective
@@ -664,6 +693,7 @@
   - DetectiveEnvirosuit
   - DetectiveEnvirogloves
   - DetectiveGloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobSecurityCadet
@@ -681,6 +711,7 @@
   - SecurityCadetEnvirohelm
   - SecurityCadetEnvirosuit
   - SecurityCadetEnvirogloves
+  - ExclusiveItems # Trauma
 
 # Medical
 - type: roleLoadout
@@ -704,6 +735,7 @@
   - ChiefMedicalOfficerEnvirohelm
   - ChiefMedicalOfficerEnvirosuit
   - ChiefMedicalOfficerEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobMedicalDoctor
@@ -726,6 +758,7 @@
   - MedicalDoctorEnvirohelm
   - MedicalDoctorEnvirosuit
   - MedicalDoctorEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobMedicalIntern
@@ -742,6 +775,7 @@
   - MedicalInternEnvirohelm
   - MedicalInternEnvirosuit
   - MedicalInternEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobChemist
@@ -762,6 +796,7 @@
   - ChemistEnvirohelm
   - ChemistEnvirosuit
   - ChemistEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobParamedic
@@ -783,6 +818,7 @@
   - ParamedicEnvirohelm
   - ParamedicEnvirosuit
   - ParamedicEnvirogloves
+  - ExclusiveItems # Trauma
 
 # Wildcards
 - type: roleLoadout
@@ -801,6 +837,7 @@
   - ZookeeperEnvirohelm
   - ZookeeperEnvirosuit
   - ZookeeperEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobReporter
@@ -818,6 +855,7 @@
   - ReporterEnvirohelm
   - ReporterEnvirosuit
   - ReporterEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobPsychologist
@@ -834,6 +872,7 @@
   - PsychologistEnvirohelm
   - PsychologistEnvirosuit
   - PsychologistEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobBoxer
@@ -850,6 +889,7 @@
   # Goobstation - EE Plasmeme Change.
   - BoxerEnvirohelm
   - BoxerEnvirosuit
+  - ExclusiveItems # Trauma
 
 # These loadouts are used for non-crew spawns, like off-station antags and event mobs
 # They will be used without player configuration, thus they will only ever apply what is forced by MinLimit

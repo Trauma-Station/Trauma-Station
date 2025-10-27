@@ -41,11 +41,7 @@
         amount: 1
       - id: OmnizineChemistryVial
         amount: 1
-      - id: SyriniverChemistryVial
-        amount: 1
       - id: ProcenylLazideChemistryVial
-        amount: 1
-      - id: EbifinlLazideChemistryVial
         amount: 1
   - type: Sprite
     sprite: _Goobstation/Objects/Storage/boxes.rsi

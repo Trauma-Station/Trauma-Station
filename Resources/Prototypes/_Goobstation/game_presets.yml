@@ -45,7 +45,6 @@
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     - BasicRoundstartVariation
-    - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: Traitorling
@@ -61,7 +60,6 @@
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     - BasicRoundstartVariation
-    - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: NukeTraitor
@@ -78,7 +76,6 @@
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     - BasicRoundstartVariation
-    - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: NukeLing
@@ -94,7 +91,6 @@
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     - BasicRoundstartVariation
-    - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: RevTraitor
@@ -110,7 +106,6 @@
     - CalmTraitor
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
-    - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: RevLing
@@ -126,8 +121,6 @@
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     - BasicRoundstartVariation
-    - BasicRoundstartVariation
-    - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: Blob
@@ -142,7 +135,6 @@
   - AntagStationEventScheduler
   - BasicRoundstartVariation
   - SubGamemodesRule
-  - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: Honkops
@@ -158,7 +150,6 @@
     - MeteorSwarmScheduler
     - SpaceTrafficControlEventScheduler
     - BasicRoundstartVariation
-    - LavalandStormScheduler
 
 - type: gamePreset
   id: TheGhost
@@ -171,10 +162,10 @@
   minPlayers: 5
   rules:
     - CalmDynamic
-    - LavalandStormScheduler
     - SubGamemodesRule
     - RareIonStormScheduler
     - SpaceTrafficControlFriendlyEventScheduler
+    - BasicRoundstartVariation # Trauma
 
 - type: gamePreset
   id: TheGuide
@@ -187,10 +178,10 @@
   minPlayers: 25
   rules:
     - CombatDynamic
-    - LavalandStormScheduler
     - SubGamemodesRule
     - IonStormScheduler
     - SpaceTrafficControlEventScheduler
+    - BasicRoundstartVariation # Trauma
 
 - type: gamePreset
   id: SecretPlusLow
@@ -203,7 +194,7 @@
   showInVote: true
   rules:
     - SecretPlusLow
-    - LavalandStormScheduler
+    - BasicRoundstartVariation # Trauma
 
 - type: gamePreset
   id: SecretPlusMid
@@ -216,7 +207,7 @@
   showInVote: true
   rules:
     - SecretPlusMid
-    - LavalandStormScheduler
+    - BasicRoundstartVariation # Trauma
 
 - type: gamePreset
   id: SecretPlusAdmeme
@@ -230,7 +221,7 @@
   showInVote: false # 1984
   rules:
     - SecretPlusAdmeme
-    - LavalandStormScheduler
+    - BasicRoundstartVariation # Trauma
 
 - type: gamePreset
   id: SurvivalPlusMid
@@ -243,7 +234,7 @@
   showInVote: true
   rules:
     - SecretPlusRampingMid
-    - LavalandStormScheduler
+    - BasicRoundstartVariation # Trauma
 
 # survival+ but it has roundstart abductors and maybe thieves
 - type: gamePreset
@@ -258,4 +249,4 @@
   - DuoAbductorRoundstart
   - SubGamemodesRule
   - SecretPlusRampingMid
-  - LavalandStormScheduler
+  - BasicRoundstartVariation # Trauma

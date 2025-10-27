@@ -1,0 +1,23 @@
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseSalvageObjective
+  components:
+  - type: Objective
+    issuer: objective-issuer-nanotrasen
+  - type: NotJobRequirement
+    job: SalvageSpecialist
+    inverted: true
+
+- type: entity
+  parent: BaseSalvageObjective
+  id: SalvageMineObjective
+  name: Make the company rich
+  components:
+  - type: Objective
+    difficulty: 100000 # only 1% of salvagers will mine...
+    icon:
+      sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: ClaimPointsCondition
+    desc: objective-salvage-mine-desc

@@ -443,6 +443,9 @@
   components:
   - type: AccessReader
     access: [["Armory"]]
+  - type: Damageable # WWDP
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
 
 # Genpop Storage
 - type: entity
@@ -629,6 +632,7 @@
   - type: StorageFill #Goobstation - clowncar
     contents:
     - id: VehicleClowncarTrainee
+    - id: ClownMegaphone # goob - loudspeakers
 
 # Mime
 - type: entity

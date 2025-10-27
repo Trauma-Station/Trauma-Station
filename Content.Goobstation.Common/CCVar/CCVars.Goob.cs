@@ -580,20 +580,10 @@ public sealed partial class GoobCVars
 
     #endregion
 
-    // TODO: Move trauma cvars to traumamod when it's real
-    #region Trauma
+    #region Flash
 
-    /// <summary>
-    ///     Are height/width sliders enabled
-    /// </summary>
-    public static readonly CVarDef<bool> HeightSliders =
-        CVarDef.Create("trauma.height_sliders_enabled", false, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
-    ///     Is sprinting enabled
-    /// </summary>
-    public static readonly CVarDef<bool> SprintEnabled =
-        CVarDef.Create("trauma.sprint_enabled", false, CVar.SERVER | CVar.REPLICATED);
+    public static readonly CVarDef<bool> FlashDirectionCheck =
+        CVarDef.Create("flash.direction_check", true, CVar.ARCHIVE | CVar.REPLICATED);
 
     #endregion
 }

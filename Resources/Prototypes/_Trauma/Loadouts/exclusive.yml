@@ -1,0 +1,17 @@
+#GUIDs
+- type: loadoutEffectGroup
+  id: Scribbles
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: bb948988-53ed-4985-aec0-2ca378f7f8b1
+
+#Items
+- type: loadout
+  id: CybersunFlippo
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Scribbles
+  storage:
+    back:
+    - CybersunFlippo
+  

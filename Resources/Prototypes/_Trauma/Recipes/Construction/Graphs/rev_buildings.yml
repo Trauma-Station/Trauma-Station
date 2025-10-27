@@ -17,7 +17,7 @@
       - material: RevGear
       - tool: Screwing
         doAfter: 1
-    - to: telecomms workshop
+    - to: telecomms workshop # Secoff required
       steps:
       - tag: EncryptionSecurity
         name: construction-graph-tag-seccomms
@@ -31,19 +31,28 @@
       - material: RevNut
       - tool: Anchoring
         doAfter: 2
-    - to: microelectronics assembler
+    - to: microelectronics assembler # Techfab sabotage required
       steps:
+      - tag: TechfabMachineBoard
+        name: construction-graph-tag-techfabmachineboard
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: generic
+        doAfter: 1
       - tool: Screwing
         doAfter: 1
       - material: Glass
         amount: 5
+      - material: Cable
+        amount: 5
+        doAfter: 1
       - material: RevBolt
-        amount: 4
+        amount: 7
       - material: RevNut
-        amount: 4
+        amount: 7
       - tool: Anchoring
         doAfter: 2
-    - to: 3D printer # CE exclusive
+    - to: 3D printer # Engi required
       steps:
       - tag: RCD
         name: construction-graph-tag-RCD
@@ -58,19 +67,19 @@
       - tool: Cutting
         doAfter: 2
       - material: RevBolt
-        amount: 3
+        amount: 5
       - material: RevNut
-        amount: 3
+        amount: 5
       - tool: Anchoring
         doAfter: 2
-      - material: Steel
-        amount: 10
+      - material: Plastic
+        amount: 1
       - tool: Welding
         doAfter: 4
       - material: RevBolt
         amount: 3
       - material: RevNut
-        amount: 3
+        amount: 2
       - tool: Anchoring
         doAfter: 2
     - to: telesphere # RD exclusive
@@ -93,32 +102,64 @@
       - tool: Cutting
         doAfter: 2
       - material: RevBolt
-        amount: 3
+        amount: 10
       - material: RevNut
-        amount: 3
+        amount: 10
       - tool: Anchoring
         doAfter: 2
       - material: RevBolt
-        amount: 2
+        amount: 10
       - material: RevNut
-        amount: 2
+        amount: 10
+      - tool: Anchoring
+        doAfter: 1
+    - to: tech analyzer # CE exclusive
+      steps:
+      - tag: RevID
+        name: construction-graph-tag-RevID
+        icon:
+          sprite: _Trauma/Objects/Misc/id_cards.rsi
+          state: idrevolutionary
+      - tag: AdvancedMagboots # Change to CE magboots
+        name: construction-graph-tag-AdvancedMagboots
+        icon:
+          sprite: Clothing/Shoes/Boots/magboots-advanced.rsi
+          state: icon
+      - tool: Welding
+        doAfter: 4
+      - material: Cable
+        amount: 8
+        doAfter: 2
+      - tool: Cutting
+        doAfter: 2
+      - material: RevBolt
+        amount: 10
+      - material: RevNut
+        amount: 10
+      - tool: Anchoring
+        doAfter: 2
+      - material: RevBolt
+        amount: 10
+      - material: RevNut
+        amount: 10
       - tool: Anchoring
         doAfter: 1
   - node: gear
     edges:
     - to: industrial forge
       steps:
-      - material: RevBolt
-      - material: RevNut
+      - material: RevGear
+      - material: RevGear
       - tool: Anchoring
         doAfter: 2
     - to: printing press
       steps:
-      - material: RevGear
-      - tool: Screwing
+      - tool: Anchoring
         doAfter: 1
       - material: RevBolt
+        amount: 2
       - material: RevNut
+        amount: 2
       - tool: Anchoring
         doAfter: 2
     - to: bullet press
@@ -127,7 +168,19 @@
       - tool: Screwing
         doAfter: 1
       - material: RevBolt
+        amount: 5
       - material: RevNut
+        amount: 5
+      - tool: Anchoring
+        doAfter: 2
+    - to: uniform printer
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: RevBolt
+        amount: 5
+      - material: RevNut
+        amount: 5
       - tool: Anchoring
         doAfter: 2
   - node: industrial forge
@@ -144,3 +197,7 @@
     entity: RevBulletPress
   - node: microelectronics assembler
     entity: RevMicroelectronicsAssembler
+  - node: uniform printer
+    entity: RevUniformPrinter
+  - node: tech analyzer
+    entity: RevTechAnalyzer

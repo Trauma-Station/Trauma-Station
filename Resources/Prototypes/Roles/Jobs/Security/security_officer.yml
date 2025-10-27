@@ -116,11 +116,11 @@
   equipment:
     eyes: ClothingEyesGlassesSecurity
     ears: ClothingHeadsetAltSecurityRegular # Goobstation
-    pocket1: WeaponPistolMk58
+    pocket1: WeaponLaserSidearm # Trauma
   storage:
     back:
     - Flash
-    - MagazinePistol
+#    - MagazinePistol - Trauma
 
 - type: chameleonOutfit
   id: SecurityOfficerChameleonOutfit

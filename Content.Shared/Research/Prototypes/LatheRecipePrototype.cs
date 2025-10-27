@@ -145,5 +145,11 @@ namespace Content.Shared.Research.Prototypes
         /// </summary>
         [DataField]
         public List<ProtoId<LatheCategoryPrototype>> Categories = new();
+
+        /// <summary>
+        /// Trauma - If non-null, the station must be in one of these alert levels for this recipe to be produced.
+        /// </summary>
+        [DataField]
+        public HashSet<string>? RequiredAlerts;
     }
 }

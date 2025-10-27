@@ -1,0 +1,32 @@
+- type: entity
+  parent: BaseGameRule
+  id: Insurgency
+  components:
+  - type: GameRule
+    minPlayers: 10 # no insurgents on deadpop
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/insurgents.yml
+  - type: AntagObjectives
+    objectives:
+    - InsurgentEscapeObjective
+    #- InsurgentAllSurviveObjective # TODO
+  - type: AntagLoadProfileRule
+  - type: AntagSelection
+    selectionTime: PrePlayerSpawn # need to move them to their shittle
+    agentName: insurgent-round-end-agent-name
+    definitions:
+    - prefRoles: [ Insurgent ]
+      spawnerPrototype: SpawnPointInsurgent
+      startingGear: Insurgent
+      unequipOldGear: true
+      max: 8
+      playerRatio: 10
+      chaosScore: 50
+      roleLoadout:
+      - RoleSurvivalStandard
+      components:
+      - type: RandomHumanoidAppearance
+        randomizeName: true
+      mindRoles:
+      - MindRoleInsurgent

@@ -270,6 +270,9 @@
         - ItemMask
   - type: StepTrigger
     intersectRatio: 0.2
+    triggerGroups:
+      types:
+      - Caltrop
   - type: Slippery
     slipSound:
       path: /Audio/Weapons/bladeslice.ogg

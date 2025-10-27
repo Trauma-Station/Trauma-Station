@@ -42,6 +42,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Preferences;
 using Content.Shared._EinsteinEngines.HeightAdjust;
+using Content.Trauma.Common.CCVar; // Trauma
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects.Components.Localization;
@@ -86,7 +87,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         SubscribeLocalEvent<HumanoidAppearanceComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<HumanoidAppearanceComponent, ExaminedEvent>(OnExamined);
 
-        Subs.CVar(_cfgManager, GoobCVars.HeightSliders, value => _heightSlidersEnabled = value, true); // Traumastation
+        Subs.CVar(_cfgManager, TraumaCVars.HeightSliders, value => _heightSlidersEnabled = value, true); // Traumastation
     }
 
     public DataNode ToDataNode(HumanoidCharacterProfile profile)

@@ -159,7 +159,6 @@
 # SPDX-FileCopyrightText: 2025 shityaml <unalterableness@gmail.com>
 # SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 starch <starchpersonal@gmail.com>
-# SPDX-FileCopyrightText: 2025 MayasMischief <anusholeripper73@yahoo.com>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Miscellaneous
@@ -229,20 +228,6 @@
   - WhiteCane
   - TapeRecorder
   # End DeltaV Additions
-  #<Trauma>
-  - SprayPaintRed
-  - SprayPaintGreen
-  - SprayPaintBlue
-  - SprayPaintBlack
-  - SprayPaintOrange
-  - SprayPaintPurple
-  - SprayPaintWhite
-  - SprayPaintFunny
-  - SprayPaintFunnyYellow
-  - SprayPaintDeath
-  - SprayPaintDeathTwo
-  - SprayPainterAmmo
-  #</Trauma>
 
 - type: loadoutGroup
   id: Glasses
@@ -397,6 +382,7 @@
   minLimit: 0
   loadouts:
   - HoPWintercoat
+  - HoPLongcoat #goob
 
 # Civilian
 - type: loadoutGroup
@@ -1142,6 +1128,7 @@
   loadouts:
   - ResearchDirectorLabCoat
   - ResearchDirectorWintercoat
+  - ResearchDirectorLabCoatPurple #goob
 
 - type: loadoutGroup
   id: ResearchDirectorShoes
@@ -1292,6 +1279,7 @@
   loadouts:
   - WardenCoat
   - WardenArmoredWinterCoat
+  - WardenCoatBlue #goob
 
 - type: loadoutGroup
   id: SecurityHead
@@ -1331,7 +1319,6 @@
   loadouts:
   - SecurityBelt
   - SecurityWebbing
-  - SecurityJudoBelt # Goobstation - Martial Arts
 
 - type: loadoutGroup
   id: SecurityOuterClothing

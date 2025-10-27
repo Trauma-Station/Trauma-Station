@@ -108,6 +108,7 @@
     tags:
     - WhitelistChameleon
     - HighRiskItem
+    - AdvancedMagboots # Trauma
   - type: StaticPrice
     price: 750
   - type: StealTarget

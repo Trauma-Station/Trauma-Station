@@ -196,6 +196,10 @@
         volume: 5
     initialBeepDelay: 0
     beepInterval: 2 # 2 beeps total (at 0 and 2)
+  - type: Construction # Trauma
+    graph: ExplosiveGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: flashbang
@@ -226,6 +230,10 @@
     tags:
     - HandGrenade
     - GrenadeFlashBang
+  - type: Construction # Trauma
+    graph: FlashbangGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   id: GrenadeFlashEffect
@@ -283,6 +291,10 @@
         volume: 12
   - type: StaticPrice
     price: 2000
+  - type: Construction # Trauma
+    graph: SyndicateMinibombGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: self destruct
@@ -369,9 +381,13 @@
           path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
           params:
             volume: 5
-      - type: DeleteOnTrigger
+      - type: ExplodeOnTrigger
   - type: StaticPrice
     price: 1000
+  - type: Construction # Trauma
+    graph: SupermatterGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: whitehole grenade
@@ -421,6 +437,10 @@
       - type: DeleteOnTrigger
   - type: StaticPrice
     price: 1000
+  - type: Construction # Truama
+    graph: WhiteholeGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: the nuclear option
@@ -451,6 +471,10 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
+  - type: Construction #Trauma
+    graph: NuclearOptionGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: modular grenade
@@ -518,6 +542,10 @@
       path: /Audio/Effects/countdown.ogg
   - type: StaticPrice
     price: 666 # 2000 for 3, I love fractions
+  - type: Construction #Trauma
+    graph: EMPGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: holy hand grenade
@@ -545,6 +573,10 @@
       path: /Audio/Effects/hallelujah.ogg
   - type: StaticPrice
     price: 10000
+  - type: Construction # Trauma
+    graph: HolyHandGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ GrenadeBase, BaseSecurityContraband ]
@@ -563,6 +595,10 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Items/smoke_grenade_prime.ogg
+  - type: Construction # Trauma
+    graph: SmokeGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ BaseCivilianContraband, SmokeGrenade ]
@@ -580,6 +616,10 @@
       reagents:
       - ReagentId: SpaceCleaner
         Quantity: 30
+  - type: Construction # Trauma
+    graph: CleanerGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: SmokeGrenade
@@ -597,6 +637,10 @@
       reagents:
       - ReagentId: TearGas
         Quantity: 20
+  - type: Construction # Trauma
+    graph: TearGasGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ BaseEngineeringContraband, SmokeGrenade ]
@@ -614,6 +658,10 @@
     smokePrototype: AluminiumMetalFoam
   - type: StaticPrice
     price: 350
+  - type: Construction # Trauma
+    graph: MetalFoamGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ BaseEngineeringContraband, GrenadeBase ] # Prevent inheriting DeleteOnTrigger from SmokeGrenade
@@ -646,6 +694,10 @@
         enabled:
           True: { state: active }
           False: { state: spent }
+  - type: Construction # Trauma
+    graph: AirGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 # Non-explosive "dummy" grenades to use as a distraction.
 
@@ -667,6 +719,10 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
+  - type: Construction # Trauma
+    graph: TrickGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: syndicate trickybomb
@@ -689,3 +745,7 @@
         volume: 12
   - type: StaticPrice
     price: 1000
+  - type: Construction # Trauma
+    graph: SyndicateTrickybombGraph
+    node: start
+    deconstructionTarget: null

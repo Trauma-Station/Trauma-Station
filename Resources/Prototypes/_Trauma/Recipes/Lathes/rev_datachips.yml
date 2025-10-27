@@ -1,0 +1,29 @@
+- type: latheRecipe
+  abstract: true
+  id: BaseRevDatachip
+  completetime: 10
+  materials:
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+
+- type: latheRecipe
+  id: DataChipAIBoard
+  parent: BaseRevDatachip
+  result: DataChipAIBoard
+
+- type: latheRecipe
+  id: DataChipReflectivePlate
+  parent: BaseRevDatachip
+  result: DataChipReflectivePlate
+
+- type: latheRecipe
+  id: DataChipFakeMindshield
+  parent: BaseRevDatachip
+  result: DataChipFakeMindshield
+
+- type: latheRecipe
+  id: DataChipShieldRipper
+  parent: BaseRevDatachip
+  result: DataChipShieldRipper
+

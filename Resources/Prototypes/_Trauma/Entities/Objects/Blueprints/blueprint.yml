@@ -1,0 +1,25 @@
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintExplosivePayload
+  name: explosive payload blueprint
+  description: A blueprint with schematics for numerous explosive components.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - ExplosivePayload
+    - SarinGasPayload
+    - SmokePayload
+    - IncendiaryPayload
+    - FlashPayload
+    - StrongShrapnelPayload
+    - EMPPayload
+    - ExplosiveGrenadeModular
+    - MinibombTimerTrigger
+    - SupermatterTimerTrigger
+    - SilentTimerTrigger
+    - WhiteHoleTimerTrigger
+    - HolyTimer
+    - TimerTrigger
+    - SignalTrigger
+    - VoiceTrigger
+    - Signaller

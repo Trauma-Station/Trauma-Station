@@ -11,7 +11,7 @@
   abstract: true
   components:
   - type: Contraband
-    allowedJobs: [ BlueshieldOfficer ] # Basically both security and medic.
+    #allowedJobs: [ BlueshieldOfficer ] # Trauma - no bso
     allowedDepartments: [ Security, Medical ]
 
 - type: entity
@@ -38,3 +38,12 @@
   - type: Contraband
     allowedDepartments: [ Security ]
     allowedJobs: [ Zookeeper ]
+
+# non-stealth syndicate stuff that can't be scanned by the NTR
+- type: entity
+  id: BaseSyndicateAnchoredContraband
+  abstract: true
+  components:
+  - type: Contraband
+    severity: Syndicate
+

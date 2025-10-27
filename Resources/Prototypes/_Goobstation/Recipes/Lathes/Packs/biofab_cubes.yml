@@ -10,19 +10,19 @@
   recipes:
   - HumanCube
   - DionaCube
-  - GingerbreadCube
+ # - GingerbreadCube # Trauma
   - MothCube
   - DwarfCube
   - HarpyCube
-  - RodentiaCube
+#  - RodentiaCube # Trauma
   - ReptilianCube
   - VulpkaninCube
   - SlimePersonCube
-  - TajaranCube
+#  - TajaranCube # Trauma
   - VoxCube
   - YowieCube
   - ShadowkinCube
-  - ChitinidCube
+#  - ChitinidCube # Trauma
 
 - type: latheRecipePack
   id: EmagCubesStatic

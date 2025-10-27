@@ -86,6 +86,10 @@
   - Salvage
   - Maintenance
   - External
+  special: # Trauma - salv greentext
+  - !type:AddObjectiveSpecial
+    objectives:
+    - SalvageMineObjective
 
 - type: startingGear
   id: SalvageSpecialistGear

@@ -1,0 +1,35 @@
+# Rev lawset
+- type: siliconLaw
+  id: Rev1
+  order: 1
+  lawString: law-rev-1
+
+- type: siliconLaw
+  id: Rev2
+  order: 2
+  lawString: law-rev-2
+
+- type: siliconLaw
+  id: Rev3
+  order: 3
+  lawString: law-rev-3
+
+- type: siliconLaw
+  id: Rev4
+  order: 4
+  lawString: law-rev-4
+
+- type: siliconLaw
+  id: Rev5
+  order: 5
+  lawString: law-rev-5
+
+- type: siliconLawset
+  id: RevLawset
+  laws:
+  - Rev1
+  - Rev2
+  - Rev3
+  - Rev4
+  - Rev5
+  obeysTo: laws-owner-crew

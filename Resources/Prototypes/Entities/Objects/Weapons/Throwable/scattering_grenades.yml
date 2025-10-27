@@ -90,11 +90,15 @@
   - type: EmitSoundOnTrigger
     sound:
       path: "/Audio/Machines/door_lock_off.ogg"
+  - type: Construction #Trauma
+    graph: ClusterBangGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ScatteringGrenadeBase, BaseSyndicateContraband]
   id: ClusterGrenade
-  name: clustergrenade
+  name: ClusterGrenade
   description: Why use one grenade when you can use three at once!
   components:
   - type: Sprite
@@ -117,6 +121,10 @@
       path: "/Audio/Machines/door_lock_off.ogg"
   - type: StaticPrice
     price: 2500
+  - type: Construction # Trauma
+    graph: ClusterGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ScatteringGrenadeBase, BaseSyndicateContraband]
@@ -194,3 +202,7 @@
   - type: EmitSoundOnTrigger
     sound:
       path: "/Audio/Weapons/Guns/Gunshots/batrifle.ogg"
+  - type: Construction # Trauma
+    graph: FoamGrenadeGraph
+    node: start
+    deconstructionTarget: null

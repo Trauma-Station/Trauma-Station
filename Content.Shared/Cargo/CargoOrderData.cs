@@ -65,6 +65,12 @@ namespace Content.Shared.Cargo
         public int Cooldown { get; private set; }
 
         /// <summary>
+        /// Trauma - If non-null, the station must be in one of these alert levels for this product to be bought
+        /// </summary>
+        [DataField]
+        public HashSet<string>? RequiredAlerts;
+
+        /// <summary>
         /// The number of items in the order. Not readonly, as it might change
         /// due to caps on the amount of orders that can be placed.
         /// </summary>
@@ -94,7 +100,8 @@ namespace Content.Shared.Cargo
         public ProtoId<CargoAccountPrototype> Account;
 
         // GoobStation - (cooldown parameter) cooldown on Cargo Orders (specifically gamba)
-        public CargoOrderData(int orderId, string productId, string productName, int price, int amount, string requester, string reason, ProtoId<CargoAccountPrototype> account, int cooldown)
+        // Trauma - added requiredAlerts
+        public CargoOrderData(int orderId, string productId, string productName, int price, int amount, string requester, string reason, ProtoId<CargoAccountPrototype> account, int cooldown, HashSet<string>? requiredAlerts = null)
         {
             OrderId = orderId;
             ProductId = productId;
@@ -106,6 +113,8 @@ namespace Content.Shared.Cargo
             Account = account;
             // GoobStation - (cooldown assignment) cooldown on Cargo Orders (specifically gamba)
             Cooldown = cooldown;
+            // Trauma
+            RequiredAlerts = requiredAlerts;
         }
 
         public void SetApproverData(string? approver)

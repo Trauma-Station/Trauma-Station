@@ -298,13 +298,6 @@
       sound:
         path: /Audio/_Goobstation/Items/handling/component_drop.ogg
     # Goobstation edit end
-    # Traumastation start
-    - type: RevolutionaryConverter
-      conversionDuration: 0
-      silent: true
-      consumesCharges: 1
-      applyFlashEffect: true
-    # Traumastation end
     - type: Sprite
       sprite: Objects/Weapons/Melee/flash.rsi
       layers:
@@ -315,6 +308,10 @@
         visible: false
         shader: unshaded
     - type: Flash
+      meleeDuration: 7.0 # Goobstation Start - Total Flash Death
+      aoeFlashDuration: 6.0
+      meleeStunDuration: 2.5 
+      slowTo: 1.5 # Goobstation End - Total Flash Death
     - type: LimitedCharges
       maxCharges: 5
     - type: MeleeWeapon
