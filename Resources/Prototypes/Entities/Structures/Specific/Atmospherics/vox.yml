@@ -35,30 +35,26 @@
   id: AirSensorVox
 
 - type: entity
-  parent: [AirSensorVoxBase, GasVentPump]
+  parent: [AirSensorVoxBase, GasVentPumpVoxBase, GasVentPump] # Carpmosia-edit - Atmos Alt Prototypes
   id: GasVentPumpVox
 
 - type: entity
-  parent: [AirSensorVoxBase, GasVentScrubber]
+  parent: [AirSensorVoxBase, GasVentScrubberVoxBase, GasVentScrubber] # Carpmosia-edit - Atmos Alt Prototypes
   id: GasVentScrubberVox
-  components:
-  - type: GasVentScrubber
-    wideNet: true # Air alarm with auto mode overrides filters with hardcoded defaults so default to widenet
-    filterGases:
-    - Oxygen # filter out oxygen as well as regular harmful gases
-    - CarbonDioxide
-    - Plasma
-    - Tritium
-    - WaterVapor
-    - Ammonia
-    - NitrousOxide
-    - Frezon
-    # <Goobstation>
-    - BZ
-    - Healium
-    - Nitrium
-    - Pluoxium # pluox is probably giga cancer to vox
-    # </Goobstation>
+# Carpmosia-start - Atmos Alt Prototypes
+#  components:
+#  - type: GasVentScrubber
+#    wideNet: true # Air alarm with auto mode overrides filters with hardcoded defaults so default to widenet
+#    filterGases:
+#    - Oxygen # filter out oxygen as well as regular harmful gases
+#    - CarbonDioxide
+#    - Plasma
+#    - Tritium
+#    - WaterVapor
+#    - Ammonia
+#    - NitrousOxide
+#    - Frezon
+# Carpmosia-end - Atmos Alt Prototypes
 
 # use this to prevent overriding filters with hardcoded defaults
 - type: entity

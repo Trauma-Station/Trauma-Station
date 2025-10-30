@@ -808,10 +808,18 @@
   startNode: start
   targetNode: ventpump
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   conditions:
   - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasVentPump
+  - GasVentPumpAlt1
+  - GasVentPumpAlt2
+  - GasVentPumpAlt3
+  - GasVentPumpAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -825,10 +833,18 @@
   startNode: start
   targetNode: passivevent
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   conditions:
   - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasPassiveVent
+  - GasPassiveVentAlt1
+  - GasPassiveVentAlt2
+  - GasPassiveVentAlt3
+  - GasPassiveVentAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -842,10 +858,18 @@
   startNode: start
   targetNode: ventscrubber
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   conditions:
   - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasVentScrubber
+  - GasVentScrubberAlt1
+  - GasVentScrubberAlt2
+  - GasVentScrubberAlt3
+  - GasVentScrubberAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -861,10 +885,18 @@
   startNode: start
   targetNode: outletinjector
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   conditions:
   - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasOutletInjector
+  - GasOutletInjectorAlt1
+  - GasOutletInjectorAlt2
+  - GasOutletInjectorAlt3
+  - GasOutletInjectorAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1305,10 +1337,18 @@
   startNode: start
   targetNode: port
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   conditions:
     - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasPort
+  - GasPortAlt1
+  - GasPortAlt2
+  - GasPortAlt3
+  - GasPortAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1322,8 +1362,16 @@
   startNode: start
   targetNode: dualportventpump
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasDualPortVentPump
+  - GasDualPortVentPumpAlt1
+  - GasDualPortVentPumpAlt2
+  - GasDualPortVentPumpAlt3
+  - GasDualPortVentPumpAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1369,11 +1417,19 @@
   startNode: start
   targetNode: filter
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   mirror: GasFilterFlipped
   conditions:
     - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasFilter
+  - GasFilterAlt1
+  - GasFilterAlt2
+  - GasFilterAlt3
+  - GasFilterAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1391,11 +1447,19 @@
   startNode: start
   targetNode: filterflipped
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   mirror: GasFilter
   conditions:
     - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasFilterFlipped
+  - GasFilterFlippedAlt1
+  - GasFilterFlippedAlt2
+  - GasFilterFlippedAlt3
+  - GasFilterFlippedAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
 
 - type: construction
   id: GasMixer
@@ -1403,11 +1467,19 @@
   startNode: start
   targetNode: mixer
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   mirror: GasMixerFlipped
   conditions:
     - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasMixer
+  - GasMixerAlt1
+  - GasMixerAlt2
+  - GasMixerAlt3
+  - GasMixerAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1425,11 +1497,19 @@
   startNode: start
   targetNode: mixerflipped
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   mirror: GasMixer
   conditions:
     - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasMixerFlipped
+  - GasMixerFlippedAlt1
+  - GasMixerFlippedAlt2
+  - GasMixerFlippedAlt3
+  - GasMixerFlippedAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
 
 - type: construction
   id: PressureControlledValve
@@ -1437,10 +1517,18 @@
   startNode: start
   targetNode: pneumaticvalve
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   conditions:
     - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - PressureControlledValve
+  - PressureControlledValveAlt1
+  - PressureControlledValveAlt2
+  - PressureControlledValveAlt3
+  - PressureControlledValveAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
