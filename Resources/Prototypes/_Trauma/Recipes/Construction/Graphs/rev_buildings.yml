@@ -124,7 +124,7 @@
         name: construction-graph-tag-QMBoard
         icon:
           sprite: Objects/Misc/qm_clipboard.rsi
-          state: icon
+          state: qm_clipboard
       - tool: Welding
         doAfter: 4
       - material: Cable
