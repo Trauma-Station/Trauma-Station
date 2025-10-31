@@ -41,6 +41,12 @@
   id: RevID
 
 - type: Tag
+  id: RevFuelTank
+
+- type: Tag
+  id: RevRocket
+
+- type: Tag
   id: RevReflectivePlate
 
 - type: Tag
@@ -48,3 +54,4 @@
 
 - type: Tag
   id: TechfabMachineBoard
+

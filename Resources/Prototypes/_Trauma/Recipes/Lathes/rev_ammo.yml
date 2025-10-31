@@ -25,6 +25,11 @@
   result: CartridgePistol
 
 - type: latheRecipe
+  parent: BaseRevBullet
+  id: RevRifleBullet
+  result: CartridgeLightRifle
+
+- type: latheRecipe
   parent: BaseRevMagazine
   id: RevTurretMagazine
   result: BaseMagazineTurretEmpty

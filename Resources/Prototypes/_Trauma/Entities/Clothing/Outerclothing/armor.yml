@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseMajorContraband ]
+  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseRevMajorContraband ]
   id: ClothingOuterArmorRev
   name: chest plate
   description: Hastily made armor for the people.
@@ -34,7 +34,7 @@
     delayDelta: 2
     knockdownTimeDelta: -2
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.3
 
 - type: entity
   parent: [ ClothingOuterStorageBase, AllowSuitStorageClothing, BaseRevMajorContraband ]
@@ -67,7 +67,7 @@
     delayDelta: 2.25
     knockdownTimeDelta: -2.25
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.3
   - type: Construction
     graph: RevVest
     deconstructionTarget: null
@@ -106,3 +106,54 @@
     graph: RevVest
     deconstructionTarget: null
     node: reflect
+  - type: StaminaResistance
+    damageCoefficient: 0.3
+
+- type: entity
+  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseRevMajorContraband ]
+  id: ClothingOuterArmorRevFlame
+  name: flame trooper armor
+  description: Heavy armor that completely protects the user from fire.
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Armor/revflamearmor.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Armor/revflamearmor.rsi
+  - type: Armor
+    coverage:
+    - Chest
+    traumaDeductions:
+      Dismemberment: 0.2
+      OrganDamage: 0.2
+      BoneDamage: 0.2
+      VeinsDamage: 0
+      NerveDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.90
+  - type: ModifyDelayedKnockdown
+    delayDelta: 2
+    knockdownTimeDelta: -2
+  - type: StaminaResistance
+    damageCoefficient: 0.3
+  - type: FireProtection
+    reduction: 0.8
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHelmetRevFlame
+  - type: SelfExtinguisher
+    cooldown: 1
+    requiresIgniteFromGasImmune: false
+    sound:
+      path: /Audio/_Trauma/Revs/flamethrower.ogg

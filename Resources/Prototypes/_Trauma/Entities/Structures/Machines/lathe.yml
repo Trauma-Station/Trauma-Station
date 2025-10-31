@@ -67,7 +67,6 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/revforge.rsi
   - type: Lathe
-    producingSound: /Audio/_Trauma/Revs/strike.ogg
     runningState: revforge
     staticPacks:
     - RevForgeStatic
@@ -290,3 +289,35 @@
       - Sheet
       - RawMaterial
       - Ingot
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevPlasmaFoundry
+  name: plasma foundry
+  description: An advanced foundry powered by plasma, it melts metals incredibly fast and produces advanced components.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/plasmaforge.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/foundryaudio.ogg
+    runningState: plasmaforge
+    staticPacks:
+    - RevFoundryStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - Metal
+      - Wooden
+      - RawMaterial
+      - Plastic
+  - type: PointLight
+    enabled: true
+    color: "#E25822"
+    radius: 3.5
+    energy: 5.0
+  - type: ContainerContainer
+    containers:
+      blueprint: !type:Container
+  - type: Construction
+    node: plasma foundry

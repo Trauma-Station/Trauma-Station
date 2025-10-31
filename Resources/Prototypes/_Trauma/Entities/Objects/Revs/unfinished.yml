@@ -199,3 +199,67 @@
     graph: RevRockets
     deconstructionTarget: null
     node: unfinished
+
+- type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: RevRocketFrame
+  name: rocket frame
+  description: A frame for a rocket
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Rockets/unfinished.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - RevRocket
+
+- type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: RevUnfinishedFuelTank
+  name: unfinished fuel tank
+  description: An unfinished flamethrower fuel tank
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Flamethrower/unfinished.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - RevFuelTank
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 100
+  - type: MixableSolution
+    solution: beaker
+  - type: RefillableSolution
+    solution: beaker
+  - type: DrainableSolution
+    solution: beaker
+  - type: ExaminableSolution
+    solution: beaker
+  - type: DrawableSolution
+    solution: beaker
+  - type: SolutionTransfer
+    maxTransferAmount: 20
+    canChangeTransferAmount: true
+  - type: SolutionItemStatus
+    solution: beaker
+  - type: Spillable
+    solution: beaker
+  - type: Construction
+    graph: RevFlamethrowerAmmo
+    deconstructionTarget: null
+    node: empty
+
+- type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: RevFuelFrame
+  name: empty fuel tank
+  description: A frame for a flamethrower fuel tank
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Flamethrower/unfinished.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - RevFuelTank

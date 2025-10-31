@@ -31,3 +31,34 @@
         Caustic: 0.75
   - type: ExplosionResistance
     damageCoefficient: 0.75
+
+- type: entity
+  parent: [ ClothingHeadHelmetArmoredBase, BaseRevMajorContraband ]
+  id: ClothingHelmetRevFlame
+  name: flame trooper helmet
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Helmets/revflamearmor.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Helmets/revflamearmor.rsi
+  - type: Armor
+    coverage:
+    - Head
+    traumaDeductions:
+      Dismemberment: 0.2
+      OrganDamage: 0.2
+      BoneDamage: 0.2
+      VeinsDamage: 0
+      NerveDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.5
+  - type: ExplosionResistance
+    damageCoefficient: 0.90
+  - type: FireProtection
+    reduction: 0.2

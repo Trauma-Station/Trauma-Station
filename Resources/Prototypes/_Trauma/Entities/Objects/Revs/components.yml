@@ -104,6 +104,17 @@
     stackType: RevGunParts
 
 - type: entity
+  parent: [ BaseRevPart, BaseRevMajorContraband ]
+  id: RevEngineParts
+  name: engine parts
+  description: A pile of engine parts. Useless on their own, but you have plans for them.
+  components:
+  - type: Sprite
+    state: engineparts
+  - type: Stack
+    stackType: RevEngineParts
+
+- type: entity
   parent: BaseRevPart
   id: RevBallBearings
   name: ball bearings
@@ -113,3 +124,4 @@
     state: ballbearings
   - type: Stack
     stackType: RevBallBearings
+

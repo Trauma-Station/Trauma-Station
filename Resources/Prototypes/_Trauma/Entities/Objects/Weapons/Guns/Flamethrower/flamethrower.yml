@@ -65,5 +65,5 @@
   - type: AmmoCounter
   - type: Construction
     deconstructionTarget: null
-    graph: RevRockets
+    graph: RevFlamethrowerAmmo
     node: FlamethrowerAmmo

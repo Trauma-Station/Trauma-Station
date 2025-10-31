@@ -6,14 +6,12 @@
     edges:
     - to: unfinished
       steps:
-      - material: Steel
-        amount: 3
-        doAfter: 5
-      - tag: Pipe
-        name: construction-graph-tag-pipe
+      - tag: RevRocket
+        name: construction-graph-tag-RocketFrame
         icon:
-          sprite: Structures/Piping/Atmospherics/pipe.rsi
-          state: pipeStraight
+          sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Rockets/unfinished.rsi
+          state: icon
+        doAfter: 5
   - node: unfinished
     entity: RevUnfinishedRocket
     edges:
@@ -129,69 +127,39 @@
         amount: 5
       - tool: Screwing
         doAfter: 5
-    - to: FlamethrowerAmmo
-      steps:
-      - tool: Screwing
-        doAfter: 5
-      - tool: Screwing
-        doAfter: 5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - material: Uranium
-        amount: 2
-        doAfter: 3
-      - material: RevBolt
-      - material: RevNut
-      - tool: Screwing
-        doAfter: 5
-      - material: Steel
-        amount: 2
-        doAfter: 3
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - material: Gunpowder
-        amount: 5
-      - tool: Screwing
-        doAfter: 5
   - node: HE
     entity: CartridgeRocketRPG2HE
   - node: AP
     entity: CartridgeRocketRPG2AP
+
+- type: constructionGraph
+  id: RevFlamethrowerAmmo
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: empty
+      steps:
+      - tag: RevFuelTank
+        name: construction-graph-tag-FlamethrowerTank
+        icon:
+          sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Flamethrower/unfinished.rsi
+          state: icon
+        doAfter: 1
+  - node: empty
+    entity: RevUnfinishedFuelTank
+    edges:
+    - to: FlamethrowerAmmo
+      conditions:
+      - !type:MinSolution
+        solution: beaker
+        reagent:
+          ReagentId: WeldingFuel
+        quantity: 100
+      steps:
+      - tool: Screwing
+        doAfter: 3
+      - tool: Painting
+        doAfter: 3
   - node: FlamethrowerAmmo
     entity: FuelTankFlamethrower

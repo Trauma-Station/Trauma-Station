@@ -173,3 +173,19 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+
+- type: construction
+  id: RevPlasmaFoundry
+  graph: RevMachine
+  startNode: start
+  targetNode: plasma foundry
+  placementMode: SnapgridCenter
+  category: construction-category-antagonist
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary

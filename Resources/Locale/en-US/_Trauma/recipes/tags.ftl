@@ -10,3 +10,5 @@ construction-graph-tag-armorplate = an armor plate
 construction-graph-tag-reflectiveplate = a reflective plate
 construction-graph-tag-AdvancedMagboots = the Chief Engineer's magboots
 construction-graph-tag-RevID = a revolutionary ID card
+construction-graph-tag-RocketFrame = a rocket frame
+construction-graph-tag-FlamethrowerTank = an empty fuel tank

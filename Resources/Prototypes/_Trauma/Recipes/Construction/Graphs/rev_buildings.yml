@@ -144,6 +144,35 @@
         amount: 10
       - tool: Anchoring
         doAfter: 1
+    - to: plasma foundry # ??? exclusive
+      steps:
+      - material: RevGunParts
+      - tool: Screwing
+        doAfter: 1
+      - tag: AdvancedMagboots # Change to CE magboots
+        name: construction-graph-tag-AdvancedMagboots
+        icon:
+          sprite: Clothing/Shoes/Boots/magboots-advanced.rsi
+          state: icon
+      - tool: Welding
+        doAfter: 4
+      - material: Cable
+        amount: 8
+        doAfter: 2
+      - tool: Cutting
+        doAfter: 2
+      - material: RevBolt
+        amount: 10
+      - material: RevNut
+        amount: 10
+      - tool: Anchoring
+        doAfter: 2
+      - material: RevBolt
+        amount: 10
+      - material: RevNut
+        amount: 10
+      - tool: Anchoring
+        doAfter: 1
   - node: gear
     edges:
     - to: industrial forge
@@ -201,3 +230,5 @@
     entity: RevUniformPrinter
   - node: tech analyzer
     entity: RevTechAnalyzer
+  - node: plasma foundry
+    entity: RevPlasmaFoundry

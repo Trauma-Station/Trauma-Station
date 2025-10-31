@@ -47,18 +47,6 @@
     - Revolutionary
 
 - type: construction
-  id: FlamethrowerAmmo
-  graph: RevRockets
-  startNode: start
-  targetNode: FlamethrowerAmmo
-  category: construction-category-antagonist
-  objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
-
-- type: construction
   id: RevIED
   graph: RevIED
   startNode: start
