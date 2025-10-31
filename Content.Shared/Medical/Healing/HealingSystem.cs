@@ -530,7 +530,7 @@ public sealed class HealingSystem : EntitySystem
             _popupSystem.PopupClient(msg, target, target, PopupType.Medium);
         }
 
-        var delay = isNotSelf
+        var delay = isNotSelf || healing.Comp.SelfHealPenaltyMultiplier == 0f // Trauma - fix healing toolbox taking 1000 years to use
             ? healing.Comp.Delay
             : healing.Comp.Delay * GetScaledHealingPenalty(target.Owner, healing.Comp.SelfHealPenaltyMultiplier);
 
