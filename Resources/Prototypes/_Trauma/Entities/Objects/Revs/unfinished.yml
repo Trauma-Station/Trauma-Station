@@ -156,7 +156,6 @@
     state: emptyweb
   - type: Construction
     graph: RevVest
-    defaultTarget: finished
     deconstructionTarget: null
     node: unfinished
 
