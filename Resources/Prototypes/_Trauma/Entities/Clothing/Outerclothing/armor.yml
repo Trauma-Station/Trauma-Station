@@ -157,3 +157,6 @@
     requiresIgniteFromGasImmune: false
     sound:
       path: /Audio/_Trauma/Revs/flamethrower.ogg
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container {}

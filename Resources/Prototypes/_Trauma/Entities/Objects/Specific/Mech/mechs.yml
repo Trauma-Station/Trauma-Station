@@ -120,6 +120,9 @@
     walkModifier: 0.05
     sprintModifier: 0.05
   - type: HeldSpeedModifier
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
 
 - type: entity
   id: WeaponMechMosinPortsEmpty
