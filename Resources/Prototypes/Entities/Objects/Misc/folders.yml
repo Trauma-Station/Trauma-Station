@@ -309,5 +309,6 @@
     tags:
     - Folder
     - HighRiskItem
+    - QMBoard
   - type: StealTarget
     stealGroup: BoxFolderQmClipboard

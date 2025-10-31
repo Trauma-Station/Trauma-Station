@@ -77,3 +77,14 @@
   - type: Tag
     tags:
     - Document
+
+- type: entity
+  parent: RevPropaganda
+  id: RevPropagandaAdvanced
+  name: advanced propaganda pamphlet
+  description: This propaganda pamphlet is full of the most potent class consciousness you can come up with. It will convert instantly.
+  components:
+  - type: RevolutionaryConverter
+    conversionDuration: 0
+    consumesCharges: 1
+    applyFlashEffect: false

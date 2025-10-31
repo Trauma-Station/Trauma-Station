@@ -32,6 +32,9 @@
   id: MagazineTurret
 
 - type: Tag
+  id: QMBoard
+
+- type: Tag
   id: RCD
 
 - type: Tag
