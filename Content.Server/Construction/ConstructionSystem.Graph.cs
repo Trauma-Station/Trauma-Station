@@ -430,7 +430,7 @@ namespace Content.Server.Construction
             RaiseLocalEvent(uid, entChangeEv);
             RaiseLocalEvent(newUid, entChangeEv, broadcast: true);
 
-            foreach (var logic in x)
+            foreach (var logic in GetCurrentNode(newUid, newConstruction)!.TransformLogic)
             {
                 logic.Transform(uid, newUid, userUid, new(EntityManager));
             }
