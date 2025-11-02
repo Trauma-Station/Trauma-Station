@@ -180,7 +180,7 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: _Trauma/Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     state: ash
   - type: Tag
     tags:

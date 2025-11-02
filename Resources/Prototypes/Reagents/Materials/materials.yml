@@ -43,7 +43,7 @@
   id: Cardboard
   stackEntity: MaterialCardboard1
   name: materials-cardboard
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: cardboard }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: cardboard } # Trauma
   color: "#70736c"
   price: 0.025
 
@@ -70,7 +70,7 @@
   id: Paper
   stackEntity: SheetPaper1
   name: materials-paper
-  icon: { sprite: _Trauma/Objects/Materials/Sheets/other.rsi, state: paper }
+  icon: { sprite: _Trauma/Objects/Materials/Sheets/other.rsi, state: paper } # Trauma
   color: "#d9d9d9"
   price: 0.01 # it's paper bro what do you expect?
 
@@ -78,7 +78,7 @@
   id: Plasma
   stackEntity: SheetPlasma1
   name: materials-plasma
-  icon: { sprite: _Trauma/Objects/Materials/Sheets/other.rsi, state: plasma }
+  icon: { sprite: _Trauma/Objects/Materials/Sheets/other.rsi, state: plasma } # Trauma
   color: "#7e009e"
   price: 0.35 # $35 for 1 unit
 
@@ -86,7 +86,7 @@
   id: Plastic
   stackEntity: SheetPlastic1
   name: materials-plastic
-  icon: { sprite: _Trauma/Objects/Materials/Sheets/other.rsi, state: plastic }
+  icon: { sprite: _Trauma/Objects/Materials/Sheets/other.rsi, state: plastic } # Trauma
   color: "#d9d9d9"
   price: 0.20 # $20 for 1 unit
 
@@ -103,7 +103,7 @@
   id: Uranium
   stackEntity: SheetUranium1
   name: materials-uranium
-  icon: { sprite: _Trauma/Objects/Materials/Sheets/other.rsi, state: uranium }
+  icon: { sprite: _Trauma/Objects/Materials/Sheets/other.rsi, state: uranium } # Trauma
   color: "#32a852"
   price: 0.85 # $85 for 1 unit
 
@@ -112,7 +112,7 @@
   stackEntity: MaterialBananium1
   name: materials-bananium
   unit: materials-unit-bunch
-  icon: { sprite: _Trauma/Objects/Materials/materials.rsi, state: bananium }
+  icon: { sprite: _Trauma/Objects/Materials/materials.rsi, state: bananium } # Trauma
   color: "#32a852"
   price: 1.0 # $100 for 1 unit
 
@@ -120,7 +120,7 @@
   id: Meaterial # you can't take this pun from me
   name: materials-meat
   unit: materials-unit-slab
-  icon: { sprite: _Trauma/Objects/Materials/Sheets/meaterial.rsi, state: meat }
+  icon: { sprite: _Trauma/Objects/Materials/Sheets/meaterial.rsi, state: meat } # Trauma
   color: "#c53648"
   price: 0.05
 
@@ -128,7 +128,7 @@
   id: WebSilk
   name: materials-web
   unit: materials-unit-web
-  icon: { sprite: _Trauma/Objects/Materials/silk.rsi, state: icon }
+  icon: { sprite: _Trauma/Objects/Materials/silk.rsi, state: icon } # Trauma
   color: "#eeeeee" #eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
   price: 0 # Maybe better for it to be priceless, knowing how greedy cargo is.
 
@@ -144,7 +144,7 @@
   id: Bones
   name: materials-bones
   unit: materials-unit-piece
-  icon: { sprite: _Trauma/Objects/Materials/materials.rsi, state: bones }
+  icon: { sprite: _Trauma/Objects/Materials/materials.rsi, state: bones } # Trauma
   color: "#896f5e"
   price: 0
 
@@ -170,6 +170,6 @@
   stackEntity: MaterialDiamond1
   name: materials-diamond
   unit: materials-unit-piece
-  icon: { sprite: _Trauma/Objects/Materials/materials.rsi, state: diamond }
+  icon: { sprite: _Trauma/Objects/Materials/materials.rsi, state: diamond } # Trauma
   color: "#80ffff"
   price: 20 # big diamond gaslit us so hard diamonds actually became extremely rare

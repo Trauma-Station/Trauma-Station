@@ -12,7 +12,7 @@
     - type: Sprite
       layers:
         - state: red
-        - sprite: _Trauma/Objects/Materials/Sheets/metal.rsi
+        - sprite: _Trauma/Objects/Materials/Sheets/metal.rsi # Trauma
           state: steel_3
     - type: RandomSpawner
       rarePrototypes:
@@ -58,7 +58,7 @@
     - type: Sprite
       layers:
         - state: red
-        - sprite: _Trauma/Objects/Materials/Sheets/metal.rsi
+        - sprite: _Trauma/Objects/Materials/Sheets/metal.rsi # Trauma
           state: plasteel_2
     - type: RandomSpawner
       rarePrototypes:
@@ -78,7 +78,7 @@
     - type: Sprite
       layers:
         - state: red
-        - sprite: _Trauma/Objects/Materials/Sheets/other.rsi
+        - sprite: _Trauma/Objects/Materials/Sheets/other.rsi # Trauma
           state: plasma_2
     - type: RandomSpawner
       rarePrototypes:
@@ -102,7 +102,7 @@
     - type: Sprite
       layers:
         - state: red
-        - sprite: _Trauma/Objects/Materials/Sheets/metal.rsi
+        - sprite: _Trauma/Objects/Materials/Sheets/metal.rsi # Trauma
           state: steel_3
     - type: RandomSpawner
       rarePrototypes:

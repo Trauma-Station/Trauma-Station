@@ -12,27 +12,27 @@
 - type: stack
   id: Paper
   name: stack-paper
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/other.rsi, state: paper }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/other.rsi, state: paper } # Trauma
   spawn: SheetPaper1
   maxCount: 30
 
 - type: stack
   id: Plasma
   name: stack-plasma
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/other.rsi, state: plasma }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/other.rsi, state: plasma } # Trauma
   spawn: SheetPlasma1
   maxCount: 30
 
 - type: stack
   id: Plastic
   name: stack-plastic
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/other.rsi, state: plastic }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/other.rsi, state: plastic } # Trauma
   spawn: SheetPlastic1
   maxCount: 30
 
 - type: stack
   id: Uranium
   name: stack-uranium
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/other.rsi, state: uranium }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/other.rsi, state: uranium } # Trauma
   spawn: SheetUranium1
   maxCount: 30

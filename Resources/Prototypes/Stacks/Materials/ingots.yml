@@ -12,13 +12,13 @@
 - type: stack
   id: Gold
   name: stack-gold
-  icon: { sprite: "/Textures/_Trauma/Objects/Materials/ingots.rsi", state: gold }
+  icon: { sprite: "/Textures/_Trauma/Objects/Materials/ingots.rsi", state: gold } # Trauma
   spawn: IngotGold1
   maxCount: 30
 
 - type: stack
   id: Silver
   name: stack-silver
-  icon: { sprite: "/Textures/_Trauma/Objects/Materials/ingots.rsi", state: silver }
+  icon: { sprite: "/Textures/_Trauma/Objects/Materials/ingots.rsi", state: silver } # Trauma
   spawn: IngotSilver1
   maxCount: 30

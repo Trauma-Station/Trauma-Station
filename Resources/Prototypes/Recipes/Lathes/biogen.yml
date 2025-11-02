@@ -41,7 +41,7 @@
   categories:
   - Materials
   icon:
-    sprite: _Trauma/Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     state: cardboard
   completetime: 1
   materials:

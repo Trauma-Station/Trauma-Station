@@ -39,7 +39,7 @@
 - type: stack
   id: Cardboard
   name: stack-cardboard
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: cardboard }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: cardboard } # Trauma
   spawn: MaterialCardboard1
   maxCount: 30
 
@@ -60,7 +60,7 @@
 - type: stack
   id: Diamond
   name: stack-diamond
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: diamond }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: diamond } # Trauma
   spawn: MaterialDiamond1
   maxCount: 30
 
@@ -81,42 +81,42 @@
 - type: stack
   id: Bananium
   name: stack-bananium
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: bananium }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: bananium } # Trauma
   spawn: MaterialBananium1
   maxCount: 10
 
 - type: stack
   id: MeatSheets
   name: stack-meat-sheet
-  icon: { sprite: /Textures/_Trauma/_Trauma/Objects/Materials/Sheets/meaterial.rsi, state: meat }
+  icon: { sprite: /Textures/_Trauma/_Trauma/Objects/Materials/Sheets/meaterial.rsi, state: meat } # Trauma
   spawn: MaterialSheetMeat1
   maxCount: 30
 
 - type: stack
   id: WebSilk
   name: stack-silk
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/silk.rsi, state: icon }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/silk.rsi, state: icon } # Trauma
   spawn: MaterialWebSilk1
   maxCount: 50
 
 - type: stack
   id: SpaceCarpTooth
   name: stack-space-carp-tooth
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/Mob/carptooth.rsi, state: tooth }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Mob/carptooth.rsi, state: tooth } # Trauma
   spawn: MaterialToothSpaceCarp1
   maxCount: 30
 
 - type: stack
   id: SharkMinnowTooth
   name: stack-sharkminnow-tooth
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/Mob/sharktooth.rsi, state: tooth }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Mob/sharktooth.rsi, state: tooth } # Trauma
   spawn: MaterialToothSharkminnow1
   maxCount: 30
 
 - type: stack
   id: Bones
   name: stack-bones
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: bones }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: bones } # Trauma
   spawn: MaterialBones1
   maxCount: 30
 
@@ -130,6 +130,6 @@
 - type: stack
   id: GoliathHide
   name: stack-goliath-hide
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/hide.rsi, state: goliath_hide }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/hide.rsi, state: goliath_hide } # Trauma
   spawn: MaterialGoliathHide1
   maxCount: 30

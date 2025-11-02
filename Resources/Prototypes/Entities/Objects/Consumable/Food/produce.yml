@@ -715,14 +715,14 @@
   id: TrashBananiumPeel
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     state: peel
   - type: Item
-    sprite: _Trauma/Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     heldPrefix: peel
   - type: Slippery
   - type: Clothing
-    sprite: _Trauma/Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     equippedState: peel-equipped-HELMET
 
 - type: entity

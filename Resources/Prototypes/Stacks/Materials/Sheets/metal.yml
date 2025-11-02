@@ -14,20 +14,20 @@
 - type: stack
   id: Steel
   name: stack-steel
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/metal.rsi, state: steel }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/metal.rsi, state: steel } # Trauma
   spawn: SheetSteel1
   maxCount: 30
 
 - type: stack
   id: Plasteel
   name: stack-plasteel
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/metal.rsi, state: plasteel }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/metal.rsi, state: plasteel } # Trauma
   spawn: SheetPlasteel1
   maxCount: 30
 
 - type: stack
   id: Brass
   name: stack-brass
-  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/metal.rsi, state: brass }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/metal.rsi, state: brass } # Trauma
   spawn: SheetBrass1
   maxCount: 30
