@@ -25,7 +25,7 @@
     doAfterDuration: 4.0
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Materials/Shards/Crystal.rsi # Trauma # Trauma
+      - sprite: _Trauma/Objects/Materials/Shards/crystal.rsi # Trauma
         state: shard1
         map: [ "enum.DamageStateVisualLayers.Base" ]
   - type: RandomSprite
