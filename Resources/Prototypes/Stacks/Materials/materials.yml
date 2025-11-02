@@ -88,7 +88,7 @@
 - type: stack
   id: MeatSheets
   name: stack-meat-sheet
-  icon: { sprite: /Textures/_Trauma/_Trauma/Objects/Materials/Sheets/meaterial.rsi, state: meat } # Trauma
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/meaterial.rsi, state: meat } # Trauma
   spawn: MaterialSheetMeat1
   maxCount: 30
 
