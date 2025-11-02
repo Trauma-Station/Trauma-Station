@@ -167,7 +167,7 @@
   id: UraniumMunitions
   name: research-technology-uranium-munitions
   icon:
-    sprite: Objects/Materials/Sheets/other.rsi
+    sprite: _Trauma/Objects/Materials/Sheets/other.rsi
     state: uranium
   discipline: Arsenal
   tier: 1

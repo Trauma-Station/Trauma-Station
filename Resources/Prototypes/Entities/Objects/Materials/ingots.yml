@@ -28,9 +28,9 @@
   description: A heavy metal ingot stamped with the Nanotrasen logo.
   components:
   - type: Sprite
-    sprite: Objects/Materials/ingots.rsi
+    sprite: _Trauma/Objects/Materials/ingots.rsi
   - type: Item
-    sprite: Objects/Materials/ingots.rsi
+    sprite: _Trauma/Objects/Materials/ingots.rsi
     size: Normal
   - type: StaticPrice
     price: 0

@@ -46,9 +46,9 @@
   description: A sheet of material, used often on the station in various applications.
   components:
   - type: Sprite
-    sprite: Objects/Materials/Sheets/other.rsi
+    sprite: _Trauma/Objects/Materials/Sheets/other.rsi
   - type: Item
-    sprite: Objects/Materials/Sheets/other.rsi
+    sprite: _Trauma/Objects/Materials/Sheets/other.rsi
     size: Normal
   - type: Tag
     tags:
@@ -330,7 +330,7 @@
   suffix: Full
   components:
     - type: Sprite
-      sprite: Objects/Materials/Sheets/meaterial.rsi
+      sprite: _Trauma/Objects/Materials/Sheets/meaterial.rsi
       layers:
       - state: meat_3
         map: [ "base" ]
@@ -355,7 +355,7 @@
         enum.StackCustomSplitUiKey.Key:
           type: StackCustomSplitBoundUserInterface
     - type: Item
-      sprite: Objects/Materials/Sheets/meaterial.rsi
+      sprite: _Trauma/Objects/Materials/Sheets/meaterial.rsi
       heldPrefix: meat
     - type: Extractable
       grindableSolutionName: meatsheet

@@ -119,9 +119,9 @@
   description: A raw material.
   components:
   - type: Sprite
-    sprite: Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi
   - type: Item
-    sprite: Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi
     size: Normal
   - type: Tag
     tags:
@@ -753,7 +753,7 @@
     materialComposition:
       WebSilk: 100
   - type: Sprite
-    sprite: Objects/Materials/silk.rsi
+    sprite: _Trauma/Objects/Materials/silk.rsi
     state: icon
   - type: Stack
     count: 50
@@ -787,7 +787,7 @@
       - ClothMade
       - RawMaterial
   - type: Item
-    sprite: Objects/Materials/silk.rsi
+    sprite: _Trauma/Objects/Materials/silk.rsi
     heldPrefix: silk
 
 - type: entity
@@ -814,12 +814,12 @@
   suffix: Full
   components:
   - type: Sprite
-    sprite: Objects/Materials/Mob/carptooth.rsi
+    sprite: _Trauma/Objects/Materials/Mob/carptooth.rsi
     layers:
     - state: tooth
       map: [ "base" ]
   - type: Item
-    sprite: Objects/Materials/Mob/carptooth.rsi
+    sprite: _Trauma/Objects/Materials/Mob/carptooth.rsi
     size: Normal
   - type: Appearance
   - type: Stack
@@ -861,12 +861,12 @@
       types:
         Slash: 12 #goobedit - buff spear variant, nerf tooth.
   - type: Sprite
-    sprite: Objects/Materials/Mob/sharktooth.rsi
+    sprite: _Trauma/Objects/Materials/Mob/sharktooth.rsi
     layers:
     - state: tooth
       map: [ "base" ]
   - type: Item
-    sprite: Objects/Materials/Mob/sharktooth.rsi
+    sprite: _Trauma/Objects/Materials/Mob/sharktooth.rsi
     size: Normal
   - type: Appearance
   - type: Stack
@@ -973,7 +973,7 @@
   suffix: Full
   components:
   - type: Sprite
-    sprite: Objects/Materials/hide.rsi
+    sprite: _Trauma/Objects/Materials/hide.rsi
     layers:
     - state: goliath_hide
       map: [ "base" ]
@@ -997,7 +997,7 @@
   - type: Item
     size: Large
     heldPrefix: goliathhide
-    sprite: Objects/Materials/hide.rsi
+    sprite: _Trauma/Objects/Materials/hide.rsi
     shape:
     - 0,0,2,2
   - type: Tag
