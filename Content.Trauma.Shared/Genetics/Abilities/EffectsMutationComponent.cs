@@ -13,23 +13,11 @@ public sealed partial class EffectsMutationComponent : Component
     /// The effects ran on the target when this mutation is added.
     /// </summary>
     [DataField]
-    public List<EntityEffect> Added = new();
+    public EntityEffect[] Added = [];
 
     /// <summary>
     /// The effects ran on the target when this mutation is removed.
     /// </summary>
     [DataField]
-    public List<EntityEffect> Removed = new();
-}
-
-/// <summary>
-/// Data passed to entity effects that use <see cref="EffectsMutationSystem"/>.
-/// </summary>
-public record class MutationEntityEffectArgs : EntityEffectBaseArgs
-{
-    public EntityUid Mutation = EntityUid.Invalid;
-
-    public MutationEntityEffectArgs(IEntityManager entMan) : base(EntityUid.Invalid, entMan)
-    {
-    }
+    public EntityEffect[] Removed = [];
 }

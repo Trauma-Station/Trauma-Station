@@ -1,4 +1,4 @@
-using Content.Server.Explosion.EntitySystems;
+using Content.Shared.Trigger.Systems;
 using Content.Trauma.Shared.Trigger;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -9,7 +9,7 @@ public sealed class RandomTriggerSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!; // TODO: update if trigger refactor is cherry picked
+    [Dependency] private readonly TriggerSystem _trigger = default!;
 
     public override void Initialize()
     {
@@ -18,6 +18,7 @@ public sealed class RandomTriggerSystem : EntitySystem
         SubscribeLocalEvent<RandomTriggerComponent, MapInitEvent>(OnMapInit);
     }
 
+    // TODO: move this to shared when predicted random
     public override void Update(float frameTime)
     {
         var now = _timing.CurTime;

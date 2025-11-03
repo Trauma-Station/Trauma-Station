@@ -55,8 +55,8 @@
     useDelay: 25
   - type: EffectAction
     effects:
-    - !type:ChemHealEyeDamage
-      amount: 1 # default is negative so this does damage, chud effect name
+    - !type:EyeDamage
+      amount: 1 # default is negative so this does damage
       probability: 0.2 # eye damage is obscene compared to ss13 so average 0.2 vs 10 per use
 
 - type: entity

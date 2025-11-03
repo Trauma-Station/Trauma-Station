@@ -101,19 +101,20 @@
   - type: RandomTrigger
     # TODO: make this be affected by synchronizer chromosome
     prob: 0.05
-  - type: EffectOnTriggerMutation
+  - type: EntityEffectsOnTrigger
     effects:
-    - !type:WeightedRandomEffect
-      conditions:
-      - !type:MobStateCondition
-        mobstate: Alive
-      children:
-      - weight: 1
-        effect: !type:Emote
-          emote: Twitch
-      - weight: 2
-        effect: !type:Speak
-          id: TourettesSwearing
+    - !type:RelayMutated
+      effect: !type:WeightedRandomEffect
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Alive
+        children:
+        - weight: 1
+          effect: !type:Emote
+            emote: Twitch
+        - weight: 2
+          effect: !type:Speak
+            id: TourettesSwearing
 
 - type: entity
   parent: BaseMutation
@@ -152,7 +153,10 @@
     instability: 5
     conflicts:
     - MutationAntiGlow
-  # TODO: point light with random colour and intensity
+  - type: EffectsMutation
+    added:
+    - !type:Glow # this works on the mutation entity because the mutations container doesn't occlude lights
+    # TODO: random intensity...
 
 - type: entity
   parent: MutationGlowy
@@ -169,7 +173,7 @@
   - type: RemovesMutation
     removes:
     - MutationGlowy
-  # TODO: negative point light??
+  # TODO: negative intenstiy or something??
 
 - type: entity
   parent: BaseMutation

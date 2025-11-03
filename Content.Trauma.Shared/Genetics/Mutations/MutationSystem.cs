@@ -85,7 +85,8 @@ public sealed class MutationSystem : EntitySystem
 
     private void OnMapInit(Entity<MutatableComponent> ent, ref MapInitEvent args)
     {
-        _container.EnsureContainer<Container>(ent.Owner, ent.Comp.ContainerId);
+        var container = _container.EnsureContainer<Container>(ent.Owner, ent.Comp.ContainerId);
+        container.OccludesLight = false; // let glowy mutation shine
 
         if (_net.IsClient) // no rolling stuff
             return;
