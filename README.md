@@ -30,11 +30,11 @@ If you want to host or create content for SS14, go to the [Space Station 14 repo
 
 ## Links
 
-[Trauma Station Discord Server](https://discord.gg/bW74BtDaeR) | Trauma Station Forum \[WORK IN PROGRESS] | Trauma Station Website \[WORK IN PROGRESS]
+[Trauma Station Discord Server](https://discord.gg/bW74BtDaeR) | Trauma Station Forum \[WIP] | Trauma Station Website \[WIP]
 
 ## Documentation/Wiki
 
-The Trauma Station \[WORK IN PROGRESS] has documentation on GS14's content, engine, game design, and more. It also has lots of resources for new contributors to the project.
+The Trauma Station document\[WIP] has documentation on GS14's content, engine, game design, and more. It also has lots of resources for new contributors to the project.
 
 ## Contributing
 
