@@ -32,7 +32,7 @@
 - type: stack
   id: WoodPlank
   name: stack-wood-plank
-  icon: { sprite: /Textures/Objects/Materials/materials.rsi, state: wood }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: wood } # Trauma
   spawn: MaterialWoodPlank1
   maxCount: 30
 
@@ -46,14 +46,14 @@
 - type: stack
   id: Cloth
   name: stack-cloth
-  icon: { sprite: /Textures/Objects/Materials/materials.rsi, state: cloth }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: cloth } # Trauma
   spawn: MaterialCloth1
   maxCount: 30
 
 - type: stack
   id: Durathread
   name: stack-durathread
-  icon: { sprite: /Textures/Objects/Materials/materials.rsi, state: durathread }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: durathread } # Trauma
   spawn: MaterialDurathread1
   maxCount: 30
 
@@ -67,14 +67,14 @@
 - type: stack
   id: Cotton
   name: stack-cotton
-  icon: { sprite: /Textures/Objects/Materials/materials.rsi, state: cotton }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: cotton } # Trauma
   spawn: MaterialCotton1
   maxCount: 30
 
 - type: stack
   id: Pyrotton
   name: stack-pyrotton
-  icon: { sprite: /Textures/Objects/Materials/materials.rsi, state: pyrotton }
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: pyrotton } # Trauma
   spawn: MaterialPyrotton1
   maxCount: 30
 

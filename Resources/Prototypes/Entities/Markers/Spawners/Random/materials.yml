@@ -37,7 +37,7 @@
     - type: Sprite
       layers:
         - state: red
-        - sprite: Objects/Materials/materials.rsi
+        - sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
           state: wood_2
     - type: RandomSpawner
       prototypes:

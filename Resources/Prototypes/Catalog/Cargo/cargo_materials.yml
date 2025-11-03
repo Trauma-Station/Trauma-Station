@@ -92,7 +92,7 @@
 - type: cargoProduct
   id: MaterialTextiles
   icon:
-    sprite: Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     state: cloth_3
   product: CrateMaterialTextiles
   cost: 1500
