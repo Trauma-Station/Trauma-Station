@@ -45,7 +45,14 @@
     conflicts:
     - MutationAcromegaly
     - MutationGigantism
-  # TODO
+  - type: EffectsMutation
+    added:
+    - !type:Scale
+      multiplier: 1, 0.8
+    removed:
+    - !type:Scale
+      multiplier: 1, 1.25
+    # TODO: adjust hitbox?
 
 - type: entity
   parent: BaseMutation
@@ -58,7 +65,14 @@
     difficulty: 16
     conflicts:
     - MutationDwarfism
-  # TODO
+  - type: EffectsMutation
+    added:
+    - !type:Scale
+      multiplier: 1, 1.25
+    removed:
+    - !type:Scale
+      multiplier: 1, 0.8
+  # TODO: adjust hitbox?
 
 - type: entity
   parent: BaseFreeMutation
@@ -70,7 +84,14 @@
     difficulty: 12
     conflicts:
     - MutationDwarfism
-  # TODO
+  - type: EffectsMutation
+    added:
+    - !type:Scale
+      multiplier: 1.25, 1.25
+    removed:
+    - !type:Scale
+      multiplier: 1.25, 1.25
+  # TODO: adjust hitbox
 
 # Disabilities
 
@@ -101,7 +122,7 @@
   - type: RandomTrigger
     # TODO: make this be affected by synchronizer chromosome
     prob: 0.05
-  - type: EntityEffectsOnTrigger
+  - type: EntityEffectOnTrigger
     effects:
     - !type:RelayMutated
       effect: !type:WeightedRandomEffect
@@ -144,7 +165,17 @@
 # Powergaming
 
 - type: entity
+  abstract: true
   parent: BaseMutation
+  id: BaseLightMutation
+  components:
+  - type: PointLight # this works on the mutation entity because the mutations container doesn't occlude lights
+    radius: 3
+    softness: 5
+    enabled: true
+
+- type: entity
+  parent: BaseLightMutation
   id: MutationGlowy
   name: Glowy
   description: You permanently emit a light with a random color and intensity.
@@ -153,13 +184,11 @@
     instability: 5
     conflicts:
     - MutationAntiGlow
-  - type: EffectsMutation
-    added:
-    - !type:Glow # this works on the mutation entity because the mutations container doesn't occlude lights
-    # TODO: random intensity...
+  - type: RandomPointLight
+    energy: 0.5, 2.0
 
 - type: entity
-  parent: MutationGlowy
+  parent: BaseLightMutation
   id: MutationAntiGlow
   name: Anti-Glow
   description: "Your skin seems to attract and absorb nearby light creating 'darkness' around you."
@@ -169,11 +198,11 @@
     requires:
     - MutationGlowy
     - MutationVoidMagnet
-    conflicts: [] # uninherit
   - type: RemovesMutation
     removes:
     - MutationGlowy
-  # TODO: negative intenstiy or something??
+  - type: PointLight
+    energy: -3 # TODO: find a way to make this work
 
 - type: entity
   parent: BaseMutation

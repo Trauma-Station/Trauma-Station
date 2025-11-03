@@ -14,7 +14,7 @@
     action: ActionMutationShockTouch
 
 - type: entity
-  parent: BaseAction
+  parent: BaseMutationAction
   id: ActionMutationShockTouch
   name: Shock Touch
   description: Channel electricity to your hand to shock people with. Mostly harmless! Mostly...
@@ -26,6 +26,11 @@
     whitelist:
       components:
       - Damageable
+    event: !type:EffectActionEvent
+  - type: EffectAction
+    effects:
+    - !type:Electrocute
+      bypassInsulation: false # you are kind enough to only touch them on their insuls <3
 
 - type: entity
   parent: BaseMutation

@@ -12,11 +12,21 @@ public sealed class EffectActionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<EffectActionComponent, ActionPerformedEvent>(OnActionPerformed);
+        SubscribeLocalEvent<EffectActionComponent, EffectActionEvent>(OnEffectAction);
     }
 
     private void OnActionPerformed(Entity<EffectActionComponent> ent, ref ActionPerformedEvent args)
     {
+        if (!ent.Comp.TargetUser)
+            return;
+
         var target = args.Performer;
+        _effects.ApplyEffects(target, ent.Comp.Effects);
+    }
+
+    private void OnEffectAction(Entity<EffectActionComponent> ent, ref EffectActionEvent args)
+    {
+        var target = args.Target;
         _effects.ApplyEffects(target, ent.Comp.Effects);
     }
 }

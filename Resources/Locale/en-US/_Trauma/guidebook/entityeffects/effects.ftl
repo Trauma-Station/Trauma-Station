@@ -9,3 +9,10 @@ entity-effect-guidebook-force-equip-clothing = force {$chance ->
     [1] equips
     *[other] equip
 } {A($name)} to the target's {$slot}
+
+entity-effect-guidebook-speak = Causes involuntary speech
+
+entity-effect-guidebook-increases-reach = Increases reach
+entity-effect-guidebook-decreases-reach = Decreases reach
+
+entity-effect-guidebook-scale-entity = Scales the target's size by ({$x}, {y})

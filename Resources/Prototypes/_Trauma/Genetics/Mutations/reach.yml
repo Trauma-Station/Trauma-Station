@@ -23,15 +23,15 @@
   # TODO: prevent wearing gloves, disable picking up two handed items
   - type: EffectsMutation
     added:
-    - !type:BodyPartEffects
-      guidebookText: entity-effect-guidebook-stretches-arms
+    - !type:RelayBodyParts
+      guidebookText: entity-effect-guidebook-increases-reach
       conditions:
       - !type:MobStateCondition
         mobstate: Alive
       partType: Arm
       effects:
       - !type:AddComponents
-        guidebookText: entity-effect-guidebook-stretches-arms
+        guidebookText: entity-effect-guidebook-increases-reach
         conditions:
         - !type:WhitelistCondition # has to be an organic arm
           guidebookText: entity-effect-condition-guidebook-cybernetics-blacklist
@@ -42,11 +42,11 @@
         - type: ExtraReach
           bonus: 0.5 # both arms add to 1m
     removed:
-    - !type:BodyPartEffects
-      guidebookText: entity-effect-guidebook-stretches-arms
+    - !type:RelayBodyParts
+      guidebookText: entity-effect-guidebook-decreases-reach
       partType: Arm
       effects:
       - !type:RemoveComponents
-        guidebookText: entity-effect-guidebook-stretches-arms
+        guidebookText: entity-effect-guidebook-decreases-reach
         components:
         - type: ExtraReach
