@@ -398,7 +398,7 @@
     - BulletEnergyGunExecute
     - BulletEnergyGunHotshot
     - BulletEnergyGunSleepshot
-    - BulletEnergyGunBigshot
+    #- BulletEnergyGunBigshot # Trauma - no chud anti-base instant win ammo
   - type: UserInterface
     interfaces:
       enum.AmmoSelectorUiKey.Key:
