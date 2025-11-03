@@ -123,7 +123,6 @@
     - id: Handcuffs
     - id: HoloprojectorSecurity
     - id: RadioHandheldSecurity
-    - id: WeaponDisabler #Goobstation
 
 - type: entity
   id: ClothingBeltCorporateJudoFilled
@@ -172,6 +171,14 @@
       - WeaponPistolCasul
       item2:
       - WeaponPistolJackal
+  - type: DivineIntervention
+  - type: Reflect
+    reflectProb: 1
+    reflects:
+    - Magic
+  - type: Tag
+    tags:
+    - Nullrod
 
 - type: entityTable
   id: BeltAssaultBSOEntityTable
@@ -188,7 +195,7 @@
 
 - type: entity
   id: ClothingBeltAssaultFilled
-  parent: ClothingBeltAssault
+  parent: ClothingBeltMilitaryWebbing
   suffix: Filled, BSO
   components:
   - type: EntityTableContainerFill

@@ -1,0 +1,20 @@
+- type: stack
+  parent: BaseSheetStack
+  id: Plasma
+  name: stack-plasma
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/other.rsi, state: plasma } # Trauma
+  spawn: SheetPlasma1
+
+- type: stack
+  parent: BaseSheetStack
+  id: Plastic
+  name: stack-plastic
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/other.rsi, state: plastic } # Trauma
+  spawn: SheetPlastic1
+
+- type: stack
+  parent: BaseSheetStack
+  id: Uranium
+  name: stack-uranium
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/other.rsi, state: uranium } # Trauma
+  spawn: SheetUranium1

@@ -352,10 +352,8 @@ public sealed partial class CriminalRecordsConsoleWindow : FancyWindow
 
     private void SetStatus(SecurityStatus status)
     {
-        if (status == SecurityStatus.Wanted
-            || status == SecurityStatus.Suspected
-            || status == SecurityStatus.Search
-            || status == SecurityStatus.Dangerous)
+        if (status == SecurityStatus.Wanted || status == SecurityStatus.Suspected || status == SecurityStatus.Hostile ||
+            status == SecurityStatus.Search) // Goob
         {
             GetReason(status);
             return;
@@ -401,9 +399,12 @@ public sealed partial class CriminalRecordsConsoleWindow : FancyWindow
             SecurityStatus.Detained => "hud_incarcerated",
             SecurityStatus.Discharged => "hud_discharged",
             SecurityStatus.Suspected => "hud_suspected",
+            // <Goob>
             SecurityStatus.Search => "hud_search",
             SecurityStatus.Perma => "hud_perma",
-            SecurityStatus.Dangerous => "hud_dangerous",
+            // </Goob>
+            SecurityStatus.Hostile => "hud_hostile",
+            SecurityStatus.Eliminated => "hud_eliminated",
             _ => "SecurityIconNone"
         };
     }

@@ -7,7 +7,7 @@ namespace Content.Shared._EinsteinEngines.Language.Events;
 ///     Typically raised on an entity after a Language Agent (e.g. a translator) has been added to or removed from them.
 /// </summary>
 [ByRefEvent]
-public record struct DetermineEntityLanguagesEvent
+public record struct DetermineEntityLanguagesEvent()
 {
     /// <summary>
     ///     The list of all languages the entity may speak.
@@ -20,6 +20,4 @@ public record struct DetermineEntityLanguagesEvent
     ///     By default, contains the languages this entity understands intrinsically.
     /// </summary>
     public HashSet<ProtoId<LanguagePrototype>> UnderstoodLanguages = new();
-
-    public DetermineEntityLanguagesEvent() {}
 }

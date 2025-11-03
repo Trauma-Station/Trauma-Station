@@ -28,7 +28,8 @@ public abstract partial class SharedGunSystem
     {
         for (var i = 0; i < args.Shots; i++)
         {
-            args.Ammo.Add((null, ProtoManager.Index<HitscanPrototype>(ent.Comp.Proto)));
+            var hitscanEnt = Spawn(ent.Comp.Proto);
+            args.Ammo.Add((hitscanEnt, EnsureShootable(hitscanEnt)));
         }
     }
 }

@@ -7,12 +7,12 @@
 using Content.Goobstation.Shared.Shadowling;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.PreAscension;
-using Content.Server.Temperature.Components;
 using Content.Shared.Actions;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Content.Shared.Temperature.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
@@ -102,9 +102,6 @@ public sealed class ShadowlingIcyVeinsSystem : EntitySystem
         EnsureComp<IcyVeinsTargetComponent>(target);
         _popup.PopupEntity(Loc.GetString("shadowling-icy-veins-activated"), target, target, PopupType.MediumCaution);
 
-        if (!TryComp<StatusEffectsComponent>(target, out var statusEffectsComponent))
-            return;
-
-        _stun.TryParalyze(target, TimeSpan.FromSeconds(component.ParalyzeTime), false, statusEffectsComponent);
+        _stun.TryAddParalyzeDuration(target, TimeSpan.FromSeconds(component.ParalyzeTime));
     }
 }

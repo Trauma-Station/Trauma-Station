@@ -12,6 +12,7 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Server.Lightning;
 using Content.Shared._Goobstation.Wizard.Spellblade;
 using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Electrocution;
 using Content.Shared.Mobs.Components;
@@ -106,7 +107,9 @@ public sealed class SpellbladeSystem : SharedSpellbladeSystem
                 continue;
             }
 
-            AddComp<TemporalSlashComponent>(entity).Damage = args.BaseDamage;
+            tempSlash = AddComp<TemporalSlashComponent>(entity);
+            tempSlash.Damage = args.BaseDamage;
+            tempSlash.Effect = ent.Comp.Effect;
         }
     }
 

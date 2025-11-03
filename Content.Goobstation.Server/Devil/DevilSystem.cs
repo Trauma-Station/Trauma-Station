@@ -5,61 +5,53 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Text.RegularExpressions;
+using Content.Goobstation.Common.Morgue;
+using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Server.Devil.Condemned;
 using Content.Goobstation.Server.Devil.Contract;
 using Content.Goobstation.Server.Devil.Objectives.Components;
 using Content.Goobstation.Server.Possession;
-using Content.Goobstation.Server.Singularity.EventHorizon;
-using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.CheatDeath;
-using Content.Goobstation.Shared.Chemistry;
-using Content.Goobstation.Shared.CrematorImmune;
 using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Devil.Condemned;
 using Content.Goobstation.Shared.Exorcism;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Supermatter.Components;
-using Content.Server._Shitmed.StatusEffects;
 using Content.Server.Actions;
-using Content.Server.Administration.Systems;
 using Content.Server.Antag.Components;
 using Content.Server.Atmos.Components;
 using Content.Server.Body.Systems;
-using Content.Server.Chat.Systems;
-using Content.Server.Cuffs;
 using Content.Server.Destructible;
 using Content.Server.Hands.Systems;
 using Content.Server.Jittering;
 using Content.Server.Mind;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Popups;
-using Content.Server.Speech;
-using Content.Server.Speech.Components;
 using Content.Server.Stunnable;
 using Content.Server.Temperature.Components;
-using Content.Server.Zombies;
 using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared._Lavaland.Chasm;
 using Content.Shared._Shitmed.Body.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
 using Content.Shared.Actions;
+using Content.Shared.Administration.Systems;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.IdentityManagement.Components;
-using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
-using Content.Shared.Polymorph;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Speech;
+using Content.Shared.Speech.Components;
 using Content.Shared.Temperature.Components;
+using Content.Shared.Zombies;
 using Robust.Server.Containers;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -246,14 +238,14 @@ public sealed partial class DevilSystem : EntitySystem
         if (HasComp<BibleUserComponent>(args.Source))
         {
             _damageable.TryChangeDamage(devil, devil.Comp.DamageOnTrueName * devil.Comp.BibleUserDamageMultiplier, true);
-            _stun.TryParalyze(devil, devil.Comp.ParalyzeDurationOnTrueName * devil.Comp.BibleUserDamageMultiplier, false);
+            _stun.TryAddParalyzeDuration(devil, devil.Comp.ParalyzeDurationOnTrueName * devil.Comp.BibleUserDamageMultiplier);
 
             var popup = Loc.GetString("devil-true-name-heard-chaplain", ("speaker", args.Source), ("target", devil));
             _popup.PopupEntity(popup, devil, PopupType.LargeCaution);
         }
         else
         {
-            _stun.TryParalyze(devil, devil.Comp.ParalyzeDurationOnTrueName, false);
+            _stun.TryAddParalyzeDuration(devil, devil.Comp.ParalyzeDurationOnTrueName);
             _damageable.TryChangeDamage(devil, devil.Comp.DamageOnTrueName, true);
 
             var popup = Loc.GetString("devil-true-name-heard", ("speaker", args.Source), ("target", devil));

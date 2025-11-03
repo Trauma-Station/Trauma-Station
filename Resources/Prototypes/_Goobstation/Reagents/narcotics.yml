@@ -31,8 +31,9 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType
-          type: Yowie
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         damage:
           groups:
             Brute: -1
@@ -43,18 +44,19 @@
             Radiation: -0.5
       - !type:HealthChange
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         damage:
           types:
             Poison: 0.25
       - !type:HealthChange # When overdosing
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: Fentanyl
           min: 5
         damage:
           types:
@@ -62,10 +64,11 @@
             Asphyxiation: 0.75 # more damage, but easier to treat, will rapidly kill in crit probably?
       - !type:HealthChange # More overdose damage
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: Fentanyl
           min: 5
         probability: 0.05
         damage:
@@ -81,7 +84,8 @@
         probability: 0.05
       - !type:PopupMessage # when you're really tripping balls
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Fentanyl
           min: 5
         type: Local
         visualType: Medium
@@ -89,37 +93,37 @@
         probability: 0.05
       - !type:MovespeedModifier # you didn't think this would improve your abilities right?
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         walkSpeedModifier: 0.8
         sprintSpeedModifier: 0.8
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
       - !type:Jitter
-      - !type:Paralyze # loss of muscle control
+      - !type:ModifyParalysis # loss of muscle control
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         probability: 0.05
-        paralyzeTime: 2
-      - !type:Paralyze # more severe effects when you are overdosing
+        time: 2
+      - !type:ModifyParalysis # more severe effects when you are overdosing
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: Fentanyl
           min: 5
         probability: 0.05
-        paralyzeTime: 4
+        time: 4
       - !type:GenericStatusEffect # tripping balls, duh
         key: SeeingRainbows
         component: SeeingRainbows
         type: Add
         time: 20
-        refresh: false
       - !type:Drunk
         boozePower: 10
       - !type:Emote # Now a bunch of emotes
@@ -146,14 +150,13 @@
       effects:
       - !type:GenericStatusEffect
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         key: TemporaryBlindness
         component: TemporaryBlindness
         type: Add
         time: 3
-        refresh: false
 
 - type: reagent
   id: Amnestizine
@@ -176,9 +179,9 @@
         component: StutteringAccent
       - !type:TakeStaminaDamage
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         amount: 7
         immediate: false
       - !type:PopupMessage
@@ -195,7 +198,8 @@
         - amnestizine-effect-leave
         - amnestizine-effect-listen
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Amnestizine
           min: 1
         probability: 0.35
       - !type:GenericStatusEffect # You can't remember how to fire a gun, or swing a sword.
@@ -205,29 +209,30 @@
         time: 4
       - !type:MovespeedModifier # You can't quite remember how to walk properly.
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
+        - !type:ReagentCondition
           reagent: Amnestizine
           min: 4
         walkSpeedModifier: 0.4
         sprintSpeedModifier: 0.4
       - !type:GenericStatusEffect
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: Amnestizine
           min: 10
         key: TemporaryBlindness
         component: TemporaryBlindness
         type: Add
         time: 2
-        refresh: false
       - !type:Jitter
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Amnestizine
           min: 15
       - !type:HealthChange
         damage:
@@ -235,10 +240,11 @@
             Poison: 0.25
             Asphyxiation: 0.25
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: Amnestizine
           min: 15
       - !type:HealthChange
         damage:
@@ -246,25 +252,26 @@
             Cellular: 1
             Asphyxiation: 1
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: Amnestizine
           min: 30
-      - !type:FlammableReaction
+      - !type:Flammable
         multiplier: 0.3
-      - !type:Paralyze
+      - !type:ModifyParalysis
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         probability: 0.05
-        paralyzeTime: 2
+        time: 2
   reactiveEffects:
     Flammable:
       methods: [ Touch ]
       effects:
-      - !type:FlammableReaction
+      - !type:Flammable
         multiplier: 0.4
 
 # Homemade hyperzine, should be worse than it and harder to make, but
@@ -283,8 +290,8 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType
-          type: Yowie
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
         damage:
           groups:
             Brute: -1
@@ -315,9 +322,10 @@
       - !type:TakeStaminaDamage
         amount: -5
         immediate: true
-      - !type:RemoveComponentEffect
-        component: DelayedKnockdown
-        locale: reagent-effect-guidebook-remove-delayed-knockdown
+      - !type:RemoveComponents
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
     Medicine:
       metabolismRate: 1
       effects:
@@ -330,15 +338,16 @@
           types:
             Asphyxiation: 0.5
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:HealthChange
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: Amnestizine
           min: 50
         damage:
           types:
@@ -347,8 +356,8 @@
         emote: Gasp
         probability: 0.1
         conditions:
-        - !type:OrganType
-          type: Yowie
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
 
 - type: reagent
   id: MouseBites
@@ -368,17 +377,20 @@
       - !type:Polymorph
         prototype: MouseSentient
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: MouseBites
           min: 50 # raised because mouse retaliation is now a thing
       - !type:AdjustReagent
         reagent: MouseBites
         amount: -20
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: MouseBites
           min: 50 # keep it the same as above
       - !type:PopupMessage
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: MouseBites
           min: 5
         type: Local
         visualType: Medium
@@ -457,24 +469,26 @@
             Cold: 0.25
             Asphyxiation: 0.75
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Heroin
           min: 10.5
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:GenericStatusEffect # tripping balls
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Heroin
           min: 10.5
         key: SeeingRainbows
         component: SeeingRainbows
         type: Add
         time: 20
-        refresh: false
       - !type:Drunk
         boozePower: 10
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Heroin
           min: 10.5
       - !type:AdjustConsciousness
         allowNewModifiers: true
@@ -482,3 +496,51 @@
         identifier: Suffocation
         amount: -5
         time: 12
+
+- type: reagent
+  id: NitrosylPlasmide
+  name: reagent-name-nitrosyl-plasmide
+  group: Narcotics
+  desc: reagent-desc-nitrosyl-plasmide
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: sour
+  color: "#e1a116"
+  metabolisms:
+    Gas:
+      effects:
+      - !type:Jitter
+    Narcotic:
+      effects:
+      - !type:Jitter
+      - !type:GenericStatusEffect
+        key: Stun
+        time: 3
+        type: Remove
+      - !type:GenericStatusEffect
+        key: KnockedDown
+        time: 3
+        type: Remove
+      - !type:GenericStatusEffect
+        key: Drowsiness
+        time: 10
+        type: Remove
+      - !type:GenericStatusEffect
+        conditions:
+        key: ForcedSleep
+        type: Remove
+        time: 10
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 0.1
+      - !type:RemoveComponents
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
+    Medicine:
+      effects:
+      - !type:ResetNarcolepsy
+        conditions:
+        - !type:ReagentCondition
+          reagent: NitrosylPlasmide
+          min: 1

@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BeBright <98597725+be1bright@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Actions;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -55,12 +47,14 @@ public abstract class SharedBorgSwitchableTypeSystem : EntitySystem
         _actionsSystem.AddAction(ent, ref ent.Comp.SelectTypeAction, ActionId);
         Dirty(ent);
 
+        // <Goob> - use subtypes
         if (ent.Comp.SelectedBorgType != null &&
-            TryComp(ent, out BorgSwitchableSubtypeComponent? subtype) &&
-            subtype.BorgSubtype != null)
+            TryComp<BorgSwitchableSubtypeComponent>(ent, out var subtype) &&
+            subtype.BorgSubtype is {} sub)
         {
-            SelectBorgModule(ent, ent.Comp.SelectedBorgType.Value, subtype.BorgSubtype.Value);
+            SelectBorgModule(ent, ent.Comp.SelectedBorgType.Value, sub);
         }
+        // </Goob>
     }
 
     private void OnShutdown(Entity<BorgSwitchableTypeComponent> ent, ref ComponentShutdown args)
@@ -96,36 +90,42 @@ public abstract class SharedBorgSwitchableTypeSystem : EntitySystem
     protected virtual void SelectBorgModule(
         Entity<BorgSwitchableTypeComponent> ent,
         ProtoId<BorgTypePrototype> borgType,
-        ProtoId<BorgSubtypePrototype> borgSubtype)
+        ProtoId<BorgSubtypePrototype> borgSubtype) // Goob
     {
         ent.Comp.SelectedBorgType = borgType;
-        if (TryComp(ent, out BorgSwitchableSubtypeComponent? subtype))
+        // <Goob> set subtype
+        if (TryComp<BorgSwitchableSubtypeComponent>(ent, out var subtype))
+        {
             subtype.BorgSubtype = borgSubtype;
+            Dirty(ent, subtype);
+        }
+        // </Goob>
 
         _actionsSystem.RemoveAction(ent.Owner, ent.Comp.SelectTypeAction);
-        _userInterface.CloseUi(ent.Owner, BorgSwitchableTypeUiKey.SelectBorgType);
         ent.Comp.SelectTypeAction = null;
         Dirty(ent);
-        if (subtype != null)
-            Dirty(ent.Owner, subtype);
+
+        _userInterface.CloseUi((ent.Owner, null), BorgSwitchableTypeUiKey.SelectBorgType);
 
         UpdateEntityAppearance(ent);
     }
 
     protected void UpdateEntityAppearance(Entity<BorgSwitchableTypeComponent> entity)
     {
-        if (!Prototypes.TryIndex(entity.Comp.SelectedBorgType, out var proto) ||
-            !TryComp(entity, out BorgSwitchableSubtypeComponent? subtype) ||
-            !Prototypes.TryIndex(subtype.BorgSubtype, out var subtypeProto))
+        // <Goob> - get subtype too
+        if (!Prototypes.Resolve(entity.Comp.SelectedBorgType, out var proto) ||
+            !TryComp<BorgSwitchableSubtypeComponent>(entity, out var subtype) ||
+            !Prototypes.Resolve(subtype.BorgSubtype, out var subtypeProto))
             return;
 
         UpdateEntityAppearance(entity, proto, subtypeProto);
+        // </Goob>
     }
 
     protected virtual void UpdateEntityAppearance(
         Entity<BorgSwitchableTypeComponent> entity,
         BorgTypePrototype prototype,
-        BorgSubtypePrototype subtypePrototype)
+        BorgSubtypePrototype subtypePrototype) // Goob
     {
         if (TryComp(entity, out InteractionPopupComponent? popup))
         {
@@ -136,6 +136,25 @@ public abstract class SharedBorgSwitchableTypeSystem : EntitySystem
         if (TryComp(entity, out FootstepModifierComponent? footstepModifier))
         {
             footstepModifier.FootstepSoundCollection = prototype.FootstepCollection;
+        }
+
+        if (prototype.SpriteBodyMovementState is { } movementState)
+        {
+            var spriteMovement = EnsureComp<SpriteMovementComponent>(entity);
+            spriteMovement.NoMovementLayers.Clear();
+            spriteMovement.NoMovementLayers["movement"] = new PrototypeLayerData
+            {
+                State = prototype.SpriteBodyState,
+            };
+            spriteMovement.MovementLayers.Clear();
+            spriteMovement.MovementLayers["movement"] = new PrototypeLayerData
+            {
+                State = movementState,
+            };
+        }
+        else
+        {
+            RemComp<SpriteMovementComponent>(entity);
         }
     }
 }

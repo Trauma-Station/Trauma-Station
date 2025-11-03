@@ -203,7 +203,7 @@
   - type: Sprite
     layers:
     - state: pink
-    - sprite: Objects/Materials/materials.rsi
+    - sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
       state: diamond
   - type: EntityTableSpawner
     offset: 0.4
@@ -272,7 +272,7 @@
   - type: Sprite
     layers:
     - state: pink
-    - sprite: Objects/Materials/materials.rsi
+    - sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
       state: diamond
   - type: EntityTableSpawner
     offset: 0.4

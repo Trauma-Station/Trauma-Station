@@ -46,25 +46,24 @@ using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Changeling.Systems;
 using Content.Goobstation.Shared.MartialArts.Components;
 using Content.Server.Actions;
-using Content.Server.Administration.Systems;
-using Content.Server.Atmos.Components;
 using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
-using Content.Server.Emp;
+using Content.Shared.Emp;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Gravity;
 using Content.Server.Guardian;
 using Content.Server.Humanoid;
-using Content.Server.Light.EntitySystems;
+using Content.Shared.Light.EntitySystems;
 using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Popups;
 using Content.Server.Store.Systems;
 using Content.Server.Stunnable;
-using Content.Server.Zombies;
 using Content.Shared._Goobstation.Weapons.AmmoSelector;
 using Content.Shared.Actions;
+using Content.Shared.Administration.Systems;
 using Content.Shared.Alert;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Camera;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -98,6 +97,7 @@ using Content.Shared.Rejuvenate;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
+using Content.Shared.Zombies;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
@@ -132,9 +132,9 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly EmpSystem _emp = default!;
+    [Dependency] private readonly SharedEmpSystem _emp = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly PoweredLightSystem _light = default!;
+    [Dependency] private readonly SharedPoweredLightSystem _light = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -365,13 +365,13 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
             if (soundEv.ProtectionRange < float.MaxValue)
             {
-                _stun.TryStun(player, TimeSpan.FromSeconds(stunTime / 2f), true);
-                _stun.TryKnockdown(player, TimeSpan.FromSeconds(knockdownTime / 2f), true);
+                _stun.TryUpdateParalyzeDuration(player, TimeSpan.FromSeconds(stunTime / 2f));
+                _stun.TryKnockdown(player, TimeSpan.FromSeconds(knockdownTime / 2f));
                 continue;
             }
 
-            _stun.TryStun(player, TimeSpan.FromSeconds(stunTime), true);
-            _stun.TryKnockdown(player, TimeSpan.FromSeconds(knockdownTime), true);
+            _stun.TryUpdateParalyzeDuration(player, TimeSpan.FromSeconds(stunTime));
+            _stun.TryKnockdown(player, TimeSpan.FromSeconds(knockdownTime));
         }
     }
 

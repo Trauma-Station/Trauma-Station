@@ -68,14 +68,14 @@
         amount: 0.05
       - !type:Jitter # Goobstation: Coffee causes jitteriness and alters speed
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: Coffee
           min: 25
       - !type:MovespeedModifier
         walkSpeedModifier: 1.1
         sprintSpeedModifier: 1.1
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: Coffee
           min: 25
           max: 99
@@ -83,14 +83,14 @@
         key: Stutter
         component: StutteringAccent
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: Coffee
           min: 75
       - !type:MovespeedModifier # Goobstation: Drinking too much causes chest pain and slows you down
         walkSpeedModifier: 0.70
         sprintSpeedModifier: 0.70
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: Coffee
           min: 100
       - !type:PopupMessage
@@ -99,7 +99,7 @@
         type: Local
         probability: 0.1
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: Coffee
           min: 100
   metamorphicSprite:
@@ -179,7 +179,7 @@
   color: "#664300"
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/cafe_latte.rsi
-    state: icon_empty
+    state: icon
   metamorphicMaxFillLevels: 1
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
@@ -244,6 +244,9 @@
       effects:
       - !type:SatiateThirst
         factor: 2
+      - !type:AdjustReagent
+        reagent: Theobromine
+        amount: 0.05
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 2
@@ -304,9 +307,9 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goob - Yowie
+          type: [ Yowie ]
+          inverted: true
         damage:
           types:
             Poison: 1
@@ -353,8 +356,9 @@
         factor: 4
       - !type:HealthChange
         conditions:
-        - !type:OrganType
-          type: Plasmaman
+        - !type:MetabolizerTypeCondition # Goob - milk heals plasmamen because skeleton
+          type: [ Plasmaman ]
+          inverted: true
         damage:
           groups:
             Brute: -0.90
@@ -448,9 +452,9 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goob - Yowie
+          type: [ Yowie ]
+          inverted: true
         damage:
           types:
             Poison: 1
@@ -552,12 +556,11 @@
     Gas:
       effects:
       - !type:HealthChange
-        scaleByQuantity: true
+        scaling: true
         ignoreResistances: true
         conditions:
-        - !type:OrganType
-          type: Slime
-          shouldHave: true
+        - !type:MetabolizerTypeCondition
+          type: [ Slime ]
         damage:
           types:
             Heat: 3
@@ -568,16 +571,22 @@
   desc: reagent-desc-ice
   slipData:
     requiredSlipSpeed: 3.5
+  evaporationSpeed: 0.15 # TODO: Ideally Ice should just turn into Water if the room is warm enough (and vis versa), rather than Ice directly evaporating
   physicalDesc: reagent-physical-desc-frosty
   flavor: cold
   color: "#bed8e6"
   recognizable: true
   meltingPoint: 0.0
   boilingPoint: 100.0
-  friction: 0.05 #Copied from Ice Crust
+  friction: 0.05 # Copied from Ice Crust
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 3 # Slightly worse for quenching thirst than just straight water
   plantMetabolism:
   - !type:PlantAdjustWater
-    amount: 1
+    amount: 1 # The internet tells me I should avoid watering plants with ice, but mostly because of temperature, so this value being the same as water should probably be fine?
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/iceglass.rsi
     state: icon_empty

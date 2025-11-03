@@ -51,6 +51,9 @@
         enum.StackCustomSplitUiKey.Key:
           type: StackCustomSplitBoundUserInterface
     - type: StockPart # Goobstation
+    - type: Tag
+      tags:
+      - ConstructionMaterial
 
 - type: entity
   id: MicroManipulatorStockPart

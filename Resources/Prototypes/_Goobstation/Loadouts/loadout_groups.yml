@@ -346,6 +346,13 @@
 # Atmospheric Technician
 
 - type: loadoutGroup
+  id: AtmosphericTechnicianHead
+  name: loadout-group-atmospheric-technician-head
+  minLimit: 0
+  loadouts:
+  - SeniorEngineerBeret
+
+- type: loadoutGroup
   id: AtmosEnvirohelm
   name: loadout-group-atmos-envirohelm
   minLimit: 1
@@ -1385,8 +1392,6 @@
   name: loadout-group-security-melee
   loadouts:
   - SecurityMeleeKnife
-  - SecurityMeleePolyBaton
-  - SecurityMeleeSpear
 
 # Zookeeper
 

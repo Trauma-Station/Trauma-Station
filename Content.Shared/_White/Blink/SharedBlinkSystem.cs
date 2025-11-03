@@ -7,6 +7,7 @@
 
 using System.Linq;
 using System.Numerics;
+using Content.Goobstation.Common.BlockTeleport;
 using Content.Shared._White.Standing;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Physics;
@@ -56,6 +57,11 @@ public abstract class SharedBlinkSystem : EntitySystem
 
         var user = args.SenderSession.AttachedEntity.Value;
 
+        var ev = new TeleportAttemptEvent();
+        RaiseLocalEvent(user, ref ev);
+        if (ev.Cancelled)
+            return;
+
         if (!TryComp(user, out TransformComponent? xform))
             return;
 
@@ -85,6 +91,6 @@ public abstract class SharedBlinkSystem : EntitySystem
         _transform.SetWorldPosition(user, targetPos);
         _audio.PlayPredicted(blink.BlinkSound, user, user);
         if (_net.IsServer) // Prediction issues
-            _telefrag.DoTelefrag(user, xform.Coordinates, blink.KnockdownTime, blink.KnockdownRadius, autoStandUp: true);
+            _telefrag.DoTelefrag(user, xform.Coordinates, blink.KnockdownTime, blink.KnockdownRadius, autoStand: true);
     }
 }

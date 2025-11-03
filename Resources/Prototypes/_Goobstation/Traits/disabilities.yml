@@ -30,19 +30,6 @@
   - type: TileMovement
 
 - type: trait
-  id: MovementImpaired
-  name: trait-movement-impaired-name
-  description: trait-movement-impaired-desc
-  traitGear: Cane
-  category: Disabilities
-  blacklist:
-    components:
-    - BorgChassis
-  components:
-    - type: MovementImpaired
-      impairedSpeedMultiplier: 0.6
-
-- type: trait
   id: SocialAnxietyTrait
   name: trait-social-anxiety-name
   description: trait-social-anxiety-disc

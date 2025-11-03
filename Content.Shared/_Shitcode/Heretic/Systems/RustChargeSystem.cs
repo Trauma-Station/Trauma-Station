@@ -10,24 +10,25 @@ using Content.Shared.Damage;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Standing;
-using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Shitcode.Heretic.Systems;
 
 public sealed class RustChargeSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+
+    private static readonly ProtoId<TagPrototype> IgnoreImmovableRod = "IgnoreImmovableRod";
 
     public override void Initialize()
     {
@@ -39,7 +40,7 @@ public sealed class RustChargeSystem : EntitySystem
         SubscribeLocalEvent<RustChargeComponent, StopThrowEvent>(OnStopThrow);
         SubscribeLocalEvent<RustChargeComponent, DownAttemptEvent>(OnDownAttempt);
         SubscribeLocalEvent<RustChargeComponent, InteractionAttemptEvent>(OnInteractAttempt);
-        SubscribeLocalEvent<RustChargeComponent, OldBeforeStatusEffectAddedEvent>(OnBeforeRustChargeStatusEffect);
+        SubscribeLocalEvent<RustChargeComponent, KnockDownAttemptEvent>(OnKnockDownAttempt);
         SubscribeLocalEvent<RustChargeComponent, ComponentShutdown>(OnRustChargeShutdown);
     }
 
@@ -51,10 +52,9 @@ public sealed class RustChargeSystem : EntitySystem
         RemCompDeferred<RustObjectsInRadiusComponent>(ent);
     }
 
-    private void OnBeforeRustChargeStatusEffect(Entity<RustChargeComponent> ent, ref OldBeforeStatusEffectAddedEvent args)
+    private void OnKnockDownAttempt(Entity<RustChargeComponent> ent, ref KnockDownAttemptEvent args)
     {
-        if (args.Key == "KnockedDown")
-            args.Cancelled = true;
+        args.Cancelled = true;
     }
 
     private void OnInteractAttempt(Entity<RustChargeComponent> ent, ref InteractionAttemptEvent args)
@@ -74,7 +74,7 @@ public sealed class RustChargeSystem : EntitySystem
 
         var other = args.OtherEntity;
 
-        if (!HasComp<DamageableComponent>(other) || _tag.HasTag(other, "IgnoreImmovableRod") ||
+        if (!HasComp<DamageableComponent>(other) || _tag.HasTag(other, IgnoreImmovableRod) ||
             ent.Comp.DamagedEntities.Contains(other))
             args.Cancelled = true;
     }
@@ -110,7 +110,7 @@ public sealed class RustChargeSystem : EntitySystem
         // Damage mobs
         if (HasComp<MobStateComponent>(other))
         {
-            _stun.KnockdownOrStun(other, ent.Comp.KnockdownTime, true);
+            _stun.KnockdownOrStun(other, ent.Comp.KnockdownTime);
 
             _damageable.TryChangeDamage(other,
                 ent.Comp.Damage,

@@ -53,8 +53,8 @@
         - Lava
   - type: TileEntityEffect
     effects:
-    - !type:FlammableReaction
-      multiplier: 2.5 # Lavaland Change
+    - !type:Flammable
+      multiplier: 2.5 # Lavaland Change - was 3.75
       multiplierOnExisting: 0.75
     - !type:Ignite
   # Lavaland Change start

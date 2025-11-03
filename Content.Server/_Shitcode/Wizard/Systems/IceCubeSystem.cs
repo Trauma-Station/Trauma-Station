@@ -7,12 +7,12 @@
 
 using System.Linq;
 using Content.Server._Goobstation.Wizard.Components;
-using Content.Server.Temperature.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared._Goobstation.Wizard.Traps;
 using Content.Shared.Damage;
 using Content.Shared.Projectiles;
 using Content.Shared.Temperature;
+using Content.Shared.Temperature.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Random;
 

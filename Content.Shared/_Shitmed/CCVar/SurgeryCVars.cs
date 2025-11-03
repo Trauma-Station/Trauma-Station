@@ -73,18 +73,6 @@ public sealed class SurgeryCVars : CVars
         CVarDef.Create("traumas.organ_slowdown_time", 2f, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
-    /// The slowdown applied to the walk speed upon an infliction of organ trauma
-    /// </summary>
-    public static readonly CVarDef<float> OrganTraumaWalkSpeedSlowdown =
-        CVarDef.Create("traumas.organ_walk_speed_slowdown", 0.6f, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
-    /// The slowdown applied to the run speed upon an infliction of organ trauma
-    /// </summary>
-    public static readonly CVarDef<float> OrganTraumaRunSpeedSlowdown =
-        CVarDef.Create("traumas.organ_run_speed_slowdown", 0.6f, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
     /// How much damage needs to happen in a single attack to destroy a part?
     /// </summary>
     public static readonly CVarDef<float> DestroySeverityMultiplier =

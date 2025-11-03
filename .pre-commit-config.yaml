@@ -1,9 +1,7 @@
-# TraumaStation's pre-commit.com config  
+# TraumaStation's pre-commit.com config
 # You don't have to install it yourself, CI applies fixes to PRs automatically (but it's still good to have)
 # Use `pip3 install pre-commit` or use your system package.
 
-# don't touch upstream files
-files: "_Trauma"
 repos:
 - repo: "https://github.com/pre-commit/pre-commit-hooks"
   rev: "v6.0.0"

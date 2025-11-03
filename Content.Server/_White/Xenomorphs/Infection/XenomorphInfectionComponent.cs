@@ -26,7 +26,7 @@ public sealed partial class XenomorphInfectionComponent : SharedXenomorphInfecti
     public TimeSpan GrowTime = TimeSpan.FromSeconds(25);
 
     [DataField]
-    public Dictionary<int, List<EntityEffect>> Effects = new ();
+    public Dictionary<int, EntityEffect[]> Effects = new ();
 
     [ViewVariables]
     public TimeSpan NextPointsAt;

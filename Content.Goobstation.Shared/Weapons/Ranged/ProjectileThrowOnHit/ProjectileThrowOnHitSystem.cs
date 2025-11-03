@@ -53,8 +53,8 @@ public sealed class ProjectileThrowOnHitSystem : EntitySystem
         var startEvent = new ProjectileThrowOnHitStartEvent(ent.Owner, user);
         RaiseLocalEvent(target, ref startEvent);
 
-        if (ent.Comp.StunTime != null)
-            _stun.TryParalyze(target, ent.Comp.StunTime.Value, false);
+        if (ent.Comp.StunTime is {} time)
+            _stun.TryAddParalyzeDuration(target, time);
 
         if (direction == Vector2.Zero)
             return;

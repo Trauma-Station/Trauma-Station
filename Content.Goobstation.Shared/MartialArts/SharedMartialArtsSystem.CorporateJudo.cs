@@ -26,11 +26,14 @@ using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.MartialArts;
 
 public partial class SharedMartialArtsSystem
 {
+    public static readonly EntProtoId DiscombobulateEffect = "JudoDiscombobulateStatusEffect";
+
     private void InitializeCorporateJudo()
     {
         SubscribeLocalEvent<CanPerformComboComponent, JudoDiscombobulatePerformedEvent>(OnJudoDiscombobulate);
@@ -90,9 +93,9 @@ public partial class SharedMartialArtsSystem
             || !TryComp(target, out StatusEffectsComponent? status))
             return;
 
-        _stun.TrySlowdown(target, TimeSpan.FromSeconds(5), true, 0.5f, 0.5f, status);
+        _newStatus.TryUpdateStatusEffectDuration(target, DiscombobulateEffect, TimeSpan.FromSeconds(5));
 
-        _stamina.TakeStaminaDamage(target, proto.StaminaDamage, applyResistances: true);
+        _stamina.TakeStaminaDamage(target, proto.StaminaDamage);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit3.ogg"), target);
         ComboPopup(ent, target, proto.Name);
@@ -133,16 +136,16 @@ public partial class SharedMartialArtsSystem
             || !TryComp<PullableComponent>(target, out var pullable))
             return;
 
-        var knockdownTime = TimeSpan.FromSeconds(proto.ParalyzeTime);
+        var knockdownTime = proto.ParalyzeTime;
 
         var ev = new BeforeStaminaDamageEvent(1f);
         RaiseLocalEvent(target, ref ev);
 
         knockdownTime *= ev.Value;
 
-        _stun.TryKnockdown(target, knockdownTime, true, proto.DropHeldItemsBehavior);
+        _stun.TryKnockdown(target, knockdownTime, true, drop: proto.DropItems);
 
-        _stamina.TakeStaminaDamage(target, proto.StaminaDamage, applyResistances: true);
+        _stamina.TakeStaminaDamage(target, proto.StaminaDamage);
 
         _pulling.TryStopPull(target, pullable, ent, true);
 
@@ -160,7 +163,7 @@ public partial class SharedMartialArtsSystem
             || !TryComp<PullableComponent>(target, out var pullable))
             return;
 
-        var knockdownTime = TimeSpan.FromSeconds(proto.ParalyzeTime);
+        var knockdownTime = proto.ParalyzeTime;
 
         var ev = new BeforeStaminaDamageEvent(1f);
         RaiseLocalEvent(target, ref ev);
@@ -169,7 +172,7 @@ public partial class SharedMartialArtsSystem
 
         if (!HasComp<ArmbarredComponent>(target))
         {
-            _stamina.TakeStaminaDamage(target, proto.StaminaDamage, applyResistances: true);
+            _stamina.TakeStaminaDamage(target, proto.StaminaDamage);
             AddComp<ArmbarredComponent>(target).Puller = ent;
         }
 
@@ -178,7 +181,7 @@ public partial class SharedMartialArtsSystem
             || pullable.GrabStage != GrabStage.Suffocate)
             _pulling.TrySetGrabStages((ent, puller), (target, pullable), GrabStage.Suffocate);
 
-        _stun.TryKnockdown(target, knockdownTime, true, proto.DropHeldItemsBehavior);
+        _stun.TryKnockdown(target, knockdownTime, true, drop: proto.DropItems);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit3.ogg"), target);
         ComboPopup(ent, target, proto.Name);
@@ -195,13 +198,13 @@ public partial class SharedMartialArtsSystem
             || armbarred.Puller != ent.Owner)
             return;
 
-        _stamina.TakeStaminaDamage(target, proto.StaminaDamage, applyResistances: true);
+        _stamina.TakeStaminaDamage(target, proto.StaminaDamage);
 
         _pulling.TryStopPull(target, pullable, ent, true);
         _grabThrowing.Throw(target, ent, _transform.GetMapCoordinates(ent).Position - _transform.GetMapCoordinates(target).Position, 5);
 
         _status.TryRemoveStatusEffect(ent, "KnockedDown");
-        _standingState.Stand(ent);
+        _standing.Stand(ent);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit3.ogg"), target);
         ComboPopup(ent, target, proto.Name);
@@ -213,11 +216,11 @@ public partial class SharedMartialArtsSystem
     {
         if (!_proto.TryIndex(ent.Comp.BeingPerformed, out var proto)
             || !TryUseMartialArt(ent, proto, out var target, out var _)
-            || !TryComp(target, out StatusEffectsComponent? status)
+            || !HasComp<StatusEffectsComponent>(target)
             || !TryComp<PullableComponent>(target, out var pullable))
             return;
 
-        _stun.TryParalyze(target, TimeSpan.FromSeconds(proto.ParalyzeTime), true, status);
+        _stun.TryUpdateParalyzeDuration(target, proto.ParalyzeTime);
 
         _pulling.TryStopPull(target, pullable, ent, true);
 

@@ -95,6 +95,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Content.Shared.Actions.Components;
+using Content.Shared.Charges.Components;
+using Content.Shared.Charges.Systems;
 
 namespace Content.Shared._Goobstation.Wizard;
 
@@ -142,6 +144,8 @@ public abstract class SharedSpellsSystem : EntitySystem
     [Dependency] private   readonly PullingSystem _pulling = default!;
     [Dependency] private   readonly MobThresholdSystem _threshold = default!;
     [Dependency] private   readonly TurfSystem _turf = default!;
+    [Dependency] private   readonly SharedProjectileSystem _projectile = default!;
+    [Dependency] private   readonly SharedChargesSystem _charges = default!;
 
     #endregion
 
@@ -215,11 +219,9 @@ public abstract class SharedSpellsSystem : EntitySystem
             return;
         }
 
-        if (TryComp(ev.Target, out StatusEffectsComponent? status))
-        {
-            Stun.TryParalyze(ev.Target, ev.ParalyzeDuration, true, status);
-            _jitter.DoJitter(ev.Target, ev.StutterDuration, true, status: status);
-        }
+        // TODO: all this shit can be entity effects
+        Stun.TryUpdateParalyzeDuration(ev.Target, ev.ParalyzeDuration);
+        _jitter.DoJitter(ev.Target, ev.StutterDuration, true);
 
         EnsureComp<CluwneComponent>(ev.Target);
 
@@ -237,12 +239,9 @@ public abstract class SharedSpellsSystem : EntitySystem
             return;
         }
 
-        if (TryComp(ev.Target, out StatusEffectsComponent? status))
-        {
-            Stun.TryParalyze(ev.Target, ev.ParalyzeDuration, true, status);
-            _jitter.DoJitter(ev.Target, ev.JitterStutterDuration, true, status: status);
-            _stutter.DoStutter(ev.Target, ev.JitterStutterDuration, true, status);
-        }
+        Stun.TryUpdateParalyzeDuration(ev.Target, ev.ParalyzeDuration);
+        _jitter.DoJitter(ev.Target, ev.JitterStutterDuration, refresh: true);
+        _stutter.DoStutter(ev.Target, ev.JitterStutterDuration, refresh: true);
 
         var targetWizard = HasComp<WizardComponent>(ev.Target) || HasComp<ApprenticeComponent>(ev.Target);
 
@@ -265,10 +264,7 @@ public abstract class SharedSpellsSystem : EntitySystem
             return;
         }
 
-        if (!TryComp(ev.Target, out StatusEffectsComponent? status))
-            return;
-
-        Stun.TryParalyze(ev.Target, ev.ParalyzeDuration, true, status);
+        Stun.TryUpdateParalyzeDuration(ev.Target, ev.ParalyzeDuration);
 
         var targetWizard = HasComp<WizardComponent>(ev.Target) || HasComp<ApprenticeComponent>(ev.Target);
 
@@ -277,7 +273,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (!targetWizard)
             MakeMime(ev.Target);
         else
-            _statusEffects.TryAddStatusEffect<MutedComponent>(ev.Target, "Muted", ev.WizardMuteDuration, true, status);
+            _statusEffects.TryAddStatusEffect<MutedComponent>(ev.Target, "Muted", ev.WizardMuteDuration, true);
 
         ev.Handled = true;
     }
@@ -304,9 +300,6 @@ public abstract class SharedSpellsSystem : EntitySystem
                 continue;
 
             hasTargets = true;
-
-            if (_net.IsClient)
-                break;
 
             SpawnHomingProjectile(ev.Proto,
                 spawnCoords,
@@ -398,7 +391,6 @@ public abstract class SharedSpellsSystem : EntitySystem
         var targets = Lookup.GetEntitiesInRange<DamageableComponent>(coords, ev.KnockdownRange);
         var ghostQuery = GetEntityQuery<GhostComponent>();
         var spectralQuery = GetEntityQuery<SpectralComponent>();
-        var statusQuery = GetEntityQuery<StatusEffectsComponent>();
         var bodyPartQuery = GetEntityQuery<BodyPartComponent>();
         foreach (var (target, damageable) in targets)
         {
@@ -418,13 +410,10 @@ public abstract class SharedSpellsSystem : EntitySystem
                 origin: ev.Performer,
                 targetPart: TargetBodyPart.All);
 
-            if (!statusQuery.TryComp(target, out var status))
-                continue;
-
             if (HasComp<SiliconComponent>(target) || HasComp<BorgChassisComponent>(target))
-                Stun.TryParalyze(target, ev.SiliconStunTime / range, true, status);
+                Stun.TryUpdateParalyzeDuration(target, ev.SiliconStunTime / range);
             else
-                Stun.KnockdownOrStun(target, ev.KnockdownTime / range, true, status);
+                Stun.KnockdownOrStun(target, ev.KnockdownTime / range);
         }
 
         ev.Handled = true;
@@ -620,20 +609,17 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (!ValidateLockOnAction(ev))
             return;
 
-        if (_net.IsServer)
-        {
-            var (_, mapCoords, spawnCoords, velocity) = GetProjectileData(ev.Performer);
+        var (_, mapCoords, spawnCoords, velocity) = GetProjectileData(ev.Performer);
 
-            SpawnHomingProjectile(ev.Proto,
-                spawnCoords,
-                ev.Entity,
-                ev.Performer,
-                mapCoords,
-                velocity,
-                ev.ProjectileSpeed,
-                true,
-                TransformSystem.ToMapCoordinates(ev.Target));
-        }
+        SpawnHomingProjectile(ev.Proto,
+            spawnCoords,
+            ev.Entity,
+            ev.Performer,
+            mapCoords,
+            velocity,
+            ev.ProjectileSpeed,
+            true,
+            TransformSystem.ToMapCoordinates(ev.Target));
 
         ev.Handled = true;
     }
@@ -776,23 +762,10 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (!TryComp(ev.Action, out InstantSummonsActionComponent? summons))
             return;
 
-        if (!Hands.TryGetActiveItem(ev.Performer, out var held))
+        Hands.TryGetActiveItem(ev.Performer, out var held);
+
+        if (held != null && held == summons.Entity)
             return;
-
-        if ( held == summons.Entity)
-            return;
-
-        bool ItemValid([NotNullWhen(true)] EntityUid? item)
-        {
-            return HasComp<ItemComponent>(item) && !HasComp<VirtualItemComponent>(item);
-        }
-
-        void MarkItem(EntityUid item)
-        {
-            summons.Entity = item;
-            PopupLoc(ev.Performer, Loc.GetString("instant-summons-item-marked", ("item", item)));
-            Dirty(ev.Action, summons);
-        }
 
         if (!Exists(summons.Entity) || !TryComp(summons.Entity.Value, out TransformComponent? xform))
         {
@@ -840,16 +813,26 @@ public abstract class SharedSpellsSystem : EntitySystem
         Audio.PlayEntity(ev.SummonSound, Filter.Pvs(item).Merge(Filter.Pvs(ev.Performer)), item, true);
 
         if (TryComp(item, out EmbeddableProjectileComponent? embeddable) && embeddable.EmbeddedIntoUid != null)
-        {
-            Physics.SetBodyType(item, BodyType.Dynamic);
-            embeddable.EmbeddedIntoUid = null;
-            Dirty(item, embeddable);
-        }
+            _projectile.EmbedDetach(item, embeddable);
 
         TransformSystem.SetMapCoordinates(item, TransformSystem.GetMapCoordinates(ev.Performer));
         TransformSystem.AttachToGridOrMap(item);
 
         Hands.TryForcePickupAnyHand(ev.Performer, item);
+
+        return;
+
+        void MarkItem(EntityUid obj)
+        {
+            summons.Entity = obj;
+            PopupLoc(ev.Performer, Loc.GetString("instant-summons-item-marked", ("item", obj)));
+            Dirty(ev.Action, summons);
+        }
+
+        bool ItemValid([NotNullWhen(true)] EntityUid? obj)
+        {
+            return HasComp<ItemComponent>(obj) && !HasComp<VirtualItemComponent>(obj);
+        }
     }
 
     private void OnTeleport(WizardTeleportEvent ev)
@@ -1133,7 +1116,8 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (packet == null)
             return;
 
-        Audio.PlayEntity(ev.Sound, Filter.Pvs(packet.Value), packet.Value, true);
+        if (_net.IsServer)
+            Audio.PlayPvs(ev.Sound, packet.Value);
 
         ev.Handled = true;
     }
@@ -1160,14 +1144,23 @@ public abstract class SharedSpellsSystem : EntitySystem
 
         foreach (var item in Hands.EnumerateHeld((ev.Performer, hands)))
         {
-            if (Tag.HasAnyTag(item, ev.RechargeTags) &&
-                TryComp<BasicEntityAmmoProviderComponent>(item, out var basicAmmoComp) &&
-                basicAmmoComp is { Count: not null, Capacity: not null } &&
-                basicAmmoComp.Count < basicAmmoComp.Capacity)
+            if (Tag.HasAnyTag(item, ev.RechargeTags))
             {
-                _gunSystem.UpdateBasicEntityAmmoCount(item, basicAmmoComp.Capacity.Value, basicAmmoComp);
-                PopupCharged(item, ev.Performer);
-                break;
+                if (TryComp<LimitedChargesComponent>(item, out var limitedCharges))
+                {
+                    _charges.SetCharges((item, limitedCharges), limitedCharges.MaxCharges);
+                    PopupCharged(item, ev.Performer);
+                    break;
+                }
+
+                if (TryComp<BasicEntityAmmoProviderComponent>(item, out var basicAmmoComp) &&
+                    basicAmmoComp is { Count: not null, Capacity: not null } &&
+                    basicAmmoComp.Count < basicAmmoComp.Capacity)
+                {
+                    _gunSystem.UpdateBasicEntityAmmoCount(item, basicAmmoComp.Capacity.Value, basicAmmoComp);
+                    PopupCharged(item, ev.Performer);
+                    break;
+                }
             }
 
             if (ChargeItem(item, ev))
@@ -1356,14 +1349,11 @@ public abstract class SharedSpellsSystem : EntitySystem
             return null;
         }
 
-        if (_net.IsClient)
-            return null;
-
-        var item = Spawn(proto, Transform(user).Coordinates);
+        var item = PredictedSpawnAtPosition(proto, Transform(user).Coordinates);
         if (Hands.TryPickup(user, item, hand, false))
             return item;
 
-        QueueDel(item);
+        PredictedQueueDel(item);
         Actions.SetCooldown(action, TimeSpan.FromSeconds(0.5));
         return null;
     }
@@ -1419,7 +1409,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (direction == Vector2.Zero)
             return;
 
-        var projectile = Spawn(proto, coords);
+        var projectile = PredictedSpawnAtPosition(proto, coords);
 
         _gunSystem.ShootProjectile(projectile, direction, velocity, user, user, speed);
 
@@ -1509,7 +1499,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         return true;
     }
 
-    protected virtual void ShootSpellCards(SpellCardsEvent ev, EntProtoId proto) { }
+    protected virtual void ShootSpellCards(SpellCardsEvent ev, EntProtoId proto) {}
 
     protected virtual void Speak(EntityUid uid, string message) { }
 

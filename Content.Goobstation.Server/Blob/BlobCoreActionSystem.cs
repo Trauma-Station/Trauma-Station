@@ -14,13 +14,13 @@ using System.Threading.Tasks;
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Destructible;
-using Content.Server.Emp;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Popups;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
+using Content.Shared.Emp;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
 using Content.Shared.Popups;
@@ -47,7 +47,7 @@ public sealed class BlobCoreActionSystem : SharedBlobCoreActionSystem
     [Dependency] private readonly BlobCoreSystem _blobCoreSystem = default!;
     [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
     [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly EmpSystem _empSystem = default!;
+    [Dependency] private readonly SharedEmpSystem _emp = default!;
     [Dependency] private readonly AudioSystem _audioSystem = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -263,6 +263,7 @@ public sealed class BlobCoreActionSystem : SharedBlobCoreActionSystem
         _blobTileSystem.DoLunge(from, target);
         _damageableSystem.TryChangeDamage(target, ent.Comp.ChemDamageDict[ent.Comp.CurrentChem]);
 
+        // TODO: FUCKING ENTITY EFFECTS BRUH
         switch (ent.Comp.CurrentChem)
         {
             case BlobChemType.ExplosiveLattice:
@@ -271,7 +272,7 @@ public sealed class BlobCoreActionSystem : SharedBlobCoreActionSystem
             case BlobChemType.ElectromagneticWeb:
             {
                 if (_random.Prob(0.2f))
-                    _empSystem.EmpPulse(_transform.GetMapCoordinates(target), 3f, 50f, 3f);
+                    _emp.EmpPulse(_transform.GetMapCoordinates(target), 3f, 50f, TimeSpan.FromSeconds(3f));
                 break;
             }
             case BlobChemType.BlazingOil:

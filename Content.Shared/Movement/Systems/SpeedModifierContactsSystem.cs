@@ -104,7 +104,7 @@ public sealed class SpeedModifierContactsSystem : EntitySystem
         var sprintSpeed = 0.0f;
 
         // Cache the result of the airborne check, as it's expensive and independent of contacting entities, hence need only be done once.
-        var isAirborne = physicsComponent.BodyStatus == BodyStatus.InAir || _gravity.IsWeightless(uid, physicsComponent);
+        var isAirborne = physicsComponent.BodyStatus == BodyStatus.InAir || _gravity.IsWeightless(uid);
 
         bool remove = true;
         var entries = 0;
@@ -115,6 +115,10 @@ public sealed class SpeedModifierContactsSystem : EntitySystem
             if (TryComp<SpeedModifierContactsComponent>(ent, out var slowContactsComponent))
             {
                 if (_whitelistSystem.IsWhitelistPass(slowContactsComponent.IgnoreWhitelist, uid))
+                    continue;
+
+                // Goobstation
+                if (_whitelistSystem.IsWhitelistFail(slowContactsComponent.Whitelist, uid))
                     continue;
 
                 // Entities that are airborne should not be affected by contact slowdowns that are specified to not affect airborne entities.
@@ -174,7 +178,8 @@ public sealed class SpeedModifierContactsSystem : EntitySystem
 
     private void OnEntityEnter(EntityUid uid, SpeedModifierContactsComponent component, ref StartCollideEvent args)
     {
-        AddModifiedEntity(args.OtherEntity);
+        if (!args.OurFixture.Hard) // Goobstation
+            AddModifiedEntity(args.OtherEntity);
     }
 
     /// <summary>

@@ -68,6 +68,7 @@ using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
+using Content.Trauma.Common.AlertLevel; // Trauma
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 
@@ -197,6 +198,12 @@ namespace Content.Server.Communications
                         levels = new();
                         foreach (var (id, detail) in alertComp.AlertLevels.Levels)
                         {
+                            // <Trauma> - only show alert levels that won't get cancelled
+                            var attemptEv = new ChangeAlertLevelAttemptEvent(id);
+                            RaiseLocalEvent(stationUid.Value, ref attemptEv);
+                            if (attemptEv.Cancelled)
+                                continue;
+                            // </Trauma>
                             if (detail.Selectable)
                             {
                                 levels.Add(id);
@@ -210,6 +217,7 @@ namespace Content.Server.Communications
             }
 
             _uiSystem.SetUiState(uid, CommunicationsConsoleUiKey.Key, new CommunicationsConsoleInterfaceState(
+                GetNetEntity(stationUid), // Trauma
                 CanAnnounce(comp),
                 CanCallOrRecall(comp),
                 levels,

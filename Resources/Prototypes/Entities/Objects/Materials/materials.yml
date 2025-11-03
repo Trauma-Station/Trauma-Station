@@ -119,9 +119,9 @@
   description: A raw material.
   components:
   - type: Sprite
-    sprite: Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
   - type: Item
-    sprite: Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     size: Normal
   - type: Tag
     tags:
@@ -176,6 +176,13 @@
           Quantity: 6
   - type: Item
     heldPrefix: cardboard
+  - type: FloorTile
+    outputs:
+    - Plating
+  - type: SpawnAfterInteract #Nuke after convert to FloorTile
+    prototype: CarpetCard
+    doAfter: 0.5
+    removeOnInteract: true
 
 - type: entity
   parent: MaterialCardboard
@@ -248,7 +255,7 @@
     - state: cloth_3
       map: ["base"]
   - type: Appearance
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: FlavorProfile
     flavors:
@@ -266,6 +273,7 @@
       - Gauze
       - RawMaterial
       - DroneUsable # Goobstation
+      - ConstructionMaterial
   - type: Construction
     graph: WebObjects # not sure if I should either keep this here or just make another prototype. Will keep it here just in case.
     node: cloth
@@ -323,7 +331,7 @@
   - type: Construction
     graph: Durathread
     node: MaterialDurathread
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
     solutions:
@@ -337,6 +345,7 @@
       - ClothMade
       - RawMaterial
       - DroneUsable # Goobstation
+      - ConstructionMaterial
   - type: Item
     heldPrefix: durathread
 
@@ -349,13 +358,6 @@
     state: durathread
   - type: Stack
     count: 1
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 5
-        reagents: #Hell if I know what durathread is made out of.
-        - ReagentId: Fiber
-          Quantity: 6
 
 - type: entity
   parent: MaterialBase
@@ -392,6 +394,7 @@
     - Wooden
     - RawMaterial
     - DroneUsable # Goobstation
+    - ConstructionMaterial
   - type: Extractable
     grindableSolutionName: wood
   - type: SolutionContainerManager
@@ -574,7 +577,7 @@
     - state: cotton_3
       map: ["base"]
   - type: Appearance
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: FlavorProfile
     flavors:
@@ -639,7 +642,7 @@
     - state: pyrotton_3
       map: ["base"]
   - type: Appearance
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
     solutions:
@@ -704,7 +707,7 @@
   - type: FlavorProfile
     flavors:
       - banana
-  - type: Food
+  - type: Edible
     trash:
     - TrashBananiumPeel
   - type: BadFood
@@ -753,17 +756,12 @@
     materialComposition:
       WebSilk: 100
   - type: Sprite
-    sprite: Objects/Materials/silk.rsi
+    sprite: _Trauma/Objects/Materials/silk.rsi # Trauma
     state: icon
   - type: Stack
     count: 50
     stackType: WebSilk
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: FlavorProfile
     flavors:
@@ -787,7 +785,7 @@
       - ClothMade
       - RawMaterial
   - type: Item
-    sprite: Objects/Materials/silk.rsi
+    sprite: _Trauma/Objects/Materials/silk.rsi # Trauma
     heldPrefix: silk
 
 - type: entity
@@ -814,12 +812,12 @@
   suffix: Full
   components:
   - type: Sprite
-    sprite: Objects/Materials/Mob/carptooth.rsi
+    sprite: _Trauma/Objects/Materials/Mob/carptooth.rsi # Trauma
     layers:
     - state: tooth
       map: [ "base" ]
   - type: Item
-    sprite: Objects/Materials/Mob/carptooth.rsi
+    sprite: _Trauma/Objects/Materials/Mob/carptooth.rsi # Trauma
     size: Normal
   - type: Appearance
   - type: Stack
@@ -859,14 +857,14 @@
   - type: MeleeWeapon
     damage:
       types:
-        Slash: 15
+        Slash: 12 #goobedit - buff spear variant, nerf tooth.
   - type: Sprite
-    sprite: Objects/Materials/Mob/sharktooth.rsi
+    sprite: _Trauma/Objects/Materials/Mob/sharktooth.rsi # Trauma
     layers:
     - state: tooth
       map: [ "base" ]
   - type: Item
-    sprite: Objects/Materials/Mob/sharktooth.rsi
+    sprite: _Trauma/Objects/Materials/Mob/sharktooth.rsi # Trauma
     size: Normal
   - type: Appearance
   - type: Stack
@@ -921,7 +919,7 @@
     - state: cotton_3
       map: ["base"]
   - type: Appearance
-  - type: Food
+  - type: Edible
   - type: BadFood
   - type: SolutionContainerManager
     solutions:
@@ -973,7 +971,7 @@
   suffix: Full
   components:
   - type: Sprite
-    sprite: Objects/Materials/hide.rsi
+    sprite: _Trauma/Objects/Materials/hide.rsi # Trauma
     layers:
     - state: goliath_hide
       map: [ "base" ]
@@ -997,7 +995,7 @@
   - type: Item
     size: Large
     heldPrefix: goliathhide
-    sprite: Objects/Materials/hide.rsi
+    sprite: _Trauma/Objects/Materials/hide.rsi # Trauma
     shape:
     - 0,0,2,2
   - type: Tag

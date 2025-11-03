@@ -11,7 +11,5 @@
   rules:
   - Shadowling
   - BasicStationEventScheduler
-  - AntagStationEventScheduler
   - BasicRoundstartVariation
   - SubGamemodesRule
-  - LavalandStormScheduler # Lavaland Change

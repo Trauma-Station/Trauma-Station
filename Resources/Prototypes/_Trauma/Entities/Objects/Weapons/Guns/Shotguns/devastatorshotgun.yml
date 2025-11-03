@@ -1,0 +1,31 @@
+- type: entity
+  parent: [ BaseMajorContraband, BaseWeaponShotgun, BaseGunWieldable ]
+  id: WeaponShotgunDevastator
+  name: devastator shotgun
+  description: A 4 barrel shotgun that's surprisingly shit, the barrels are barely lined up... but it's still deadly.
+  suffix: Full
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Shotguns/devastator.rsi
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,3,1
+    sprite: _Trauma/Objects/Weapons/Guns/Shotguns/devastator.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Guns/Shotguns/devastator.rsi
+  - type: GunRequiresWield
+  - type: Gun
+    fireRate: 4
+  - type: GunSpreadModifier
+    spread: 2
+  - type: BallisticAmmoProvider
+    capacity: 4
+
+- type: entity
+  parent: WeaponShotgunDevastator
+  id: WeaponShotgunDevastatorEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null

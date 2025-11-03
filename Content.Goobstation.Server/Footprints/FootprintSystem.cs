@@ -35,6 +35,7 @@ public sealed class FootprintSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SharedPuddleSystem _puddle = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly GravitySystem _gravity = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
@@ -71,7 +72,7 @@ public sealed class FootprintSystem : EntitySystem
         if (_noFootprintsQuery.HasComp(entity))
             return;
 
-        if (_gravity.IsWeightless(entity) || !e.OldPosition.IsValid(EntityManager) || !e.NewPosition.IsValid(EntityManager))
+        if (_gravity.IsWeightless(entity.Owner) || !e.OldPosition.IsValid(EntityManager) || !e.NewPosition.IsValid(EntityManager))
             return;
 
         var oldPosition = _transform.ToMapCoordinates(e.OldPosition).Position;
@@ -79,7 +80,7 @@ public sealed class FootprintSystem : EntitySystem
 
         entity.Comp.Distance += Vector2.Distance(newPosition, oldPosition);
 
-        var standing = TryComp<StandingStateComponent>(entity, out var standingState) && standingState.CurrentState == StandingState.Standing;
+        var standing = !_standing.IsDown(entity.Owner);
 
         var requiredDistance = standing ? entity.Comp.FootDistance : entity.Comp.BodyDistance;
 

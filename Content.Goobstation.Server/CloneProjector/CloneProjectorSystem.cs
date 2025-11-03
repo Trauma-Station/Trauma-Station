@@ -9,7 +9,7 @@ using System.Linq;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Goobstation.Shared.CloneProjector;
 using Content.Goobstation.Shared.CloneProjector.Clone;
-using Content.Server.Emp;
+using Content.Shared.Emp;
 using Content.Server.Ghost.Roles.Components;
 using Content.Shared._DV.Carrying;
 using Content.Shared._EinsteinEngines.Silicon.IPC;
@@ -163,7 +163,7 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
         TryGenerateClone(projector, args.User);
 
         if (projector.Comp.DoStun)
-            _stun.TryParalyze(args.User, projector.Comp.StunDuration, true);
+            _stun.TryUpdateParalyzeDuration(args.User, projector.Comp.StunDuration);
 
         EnsureComp<WearingCloneProjectorComponent>(args.User).ConnectedProjector = projector;
     }
@@ -177,7 +177,7 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
         _popup.PopupEntity(popup, args.Equipee, args.Equipee);
 
         if (projector.Comp.DoStun)
-            _stun.TryParalyze(args.Equipee, projector.Comp.StunDuration, true);
+            _stun.TryUpdateParalyzeDuration(args.Equipee, projector.Comp.StunDuration);
 
         RemComp<WearingCloneProjectorComponent>(args.Equipee);
     }

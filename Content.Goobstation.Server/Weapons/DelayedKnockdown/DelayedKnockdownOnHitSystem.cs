@@ -113,15 +113,16 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<DelayedKnockdownComponent, StatusEffectsComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var status))
+        var query = EntityQueryEnumerator<DelayedKnockdownComponent>();
+        while (query.MoveNext(out var uid, out var comp))
         {
+            // TODO: dont fucking use frametime
             comp.Time -= frameTime;
 
             if (comp.Time > 0)
                 continue;
 
-            _stun.TryKnockdown(uid, TimeSpan.FromSeconds(comp.KnockdownTime), comp.Refresh, status);
+            _stun.TryKnockdown(uid, TimeSpan.FromSeconds(comp.KnockdownTime), comp.Refresh);
 
             RemCompDeferred(uid, comp);
         }

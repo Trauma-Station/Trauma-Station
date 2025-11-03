@@ -33,7 +33,7 @@
         - reagents: [Water, SpaceCleaner]
           methods: [Touch]
           effects:
-            - !type:WashCreamPieReaction
+          - !type:WashCreamPie
     - type: DamageOnHighSpeedImpact
       damage:
         types:
@@ -217,6 +217,7 @@
         - CanPilot
         - FootstepSound
         - DoorBumpOpener
+        - IPCDrinkBlacklist # Goobstation - Energycrit: Don't let self antagging IPCs steal power from other battery powered species.
     - type: Hands
     - type: Inventory
       templateId: human
@@ -316,7 +317,6 @@
     - type: StatusEffects
       allowed:
         - Stun
-        - KnockedDown
         - SlowedDown
         - Stutter
         - SeeingRainbows
@@ -340,7 +340,7 @@
     - type: ComplexInteraction
     - type: Carriable
     - type: Targeting
-    - type: LayingDown
+    - type: Crawler
     - type: Consciousness
       cap: 190
       threshold: 95

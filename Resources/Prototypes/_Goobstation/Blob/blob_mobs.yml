@@ -228,6 +228,11 @@
         - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
           state: nautdamage
           shader: unshaded
+    - type: AnimatedEmotes
+      flexState: blobbernaut_flex
+      flexDefaultState: blobbernaut
+      flexDamageState: blobbernaut_flex_damage
+      flexDefaultDamageState: nautdamage
     - type: NightVision
       color: "#808080"
       activateSound: null
@@ -235,6 +240,10 @@
     - type: GuideHelp
       guides:
       - Blob
+    - type: Bloodstream
+      bloodMaxVolume: 300
+      bloodReagent: Blood
+      bleedReductionAmount: 5
 
 # Observer
 - type: entity
@@ -278,9 +287,6 @@
       rules: You are an antagonist, destroy the station!
       mindRoles:
       - MindRoleGhostRoleSoloAntagonist
-      requirements:
-      - !type:OverallPlaytimeRequirement
-        time: 18000 #5 hours
     - type: GhostTakeoverAvailable
     - type: Fixtures
       fixtures:

@@ -17,7 +17,7 @@
       - material: RevGear
       - tool: Screwing
         doAfter: 1
-    - to: RevRadioBench
+    - to: telecomms workshop # Secoff required
       steps:
       - tag: EncryptionSecurity
         name: construction-graph-tag-seccomms
@@ -31,19 +31,28 @@
       - material: RevNut
       - tool: Anchoring
         doAfter: 2
-    - to: RevMicroelectronicsAssembler
+    - to: microelectronics assembler # Techfab sabotage required
       steps:
+      - tag: TechfabMachineBoard
+        name: construction-graph-tag-techfabmachineboard
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: generic
+        doAfter: 1
       - tool: Screwing
         doAfter: 1
       - material: Glass
         amount: 5
+      - material: Cable
+        amount: 5
+        doAfter: 1
       - material: RevBolt
-        amount: 4
+        amount: 7
       - material: RevNut
-        amount: 4
+        amount: 7
       - tool: Anchoring
         doAfter: 2
-    - to: RevPrinter # CE exclusive
+    - to: 3D printer # Engi required
       steps:
       - tag: RCD
         name: construction-graph-tag-RCD
@@ -58,22 +67,22 @@
       - tool: Cutting
         doAfter: 2
       - material: RevBolt
-        amount: 3
+        amount: 5
       - material: RevNut
-        amount: 3
+        amount: 5
       - tool: Anchoring
         doAfter: 2
-      - material: Steel
-        amount: 10
+      - material: Plastic
+        amount: 1
       - tool: Welding
         doAfter: 4
       - material: RevBolt
         amount: 3
       - material: RevNut
-        amount: 3
+        amount: 2
       - tool: Anchoring
         doAfter: 2
-    - to: RevTelesphere # RD exclusive
+    - to: telesphere # RD exclusive
       steps:
       - tag: EncryptionRevolutionary
         name: construction-graph-tag-encryption-revolutionary
@@ -93,54 +102,133 @@
       - tool: Cutting
         doAfter: 2
       - material: RevBolt
-        amount: 3
+        amount: 10
       - material: RevNut
-        amount: 3
+        amount: 10
       - tool: Anchoring
         doAfter: 2
       - material: RevBolt
-        amount: 2
+        amount: 10
       - material: RevNut
-        amount: 2
+        amount: 10
+      - tool: Anchoring
+        doAfter: 1
+    - to: tech analyzer # QM exclusive
+      steps:
+      - tag: RevID
+        name: construction-graph-tag-RevID
+        icon:
+          sprite: _Trauma/Objects/Misc/id_cards.rsi
+          state: idrevolutionary
+      - tag: QMBoard
+        name: construction-graph-tag-QMBoard
+        icon:
+          sprite: Objects/Misc/qm_clipboard.rsi
+          state: qm_clipboard
+      - tool: Welding
+        doAfter: 4
+      - material: Cable
+        amount: 8
+        doAfter: 2
+      - tool: Cutting
+        doAfter: 2
+      - material: RevBolt
+        amount: 10
+      - material: RevNut
+        amount: 10
+      - tool: Anchoring
+        doAfter: 2
+      - material: RevBolt
+        amount: 10
+      - material: RevNut
+        amount: 10
+      - tool: Anchoring
+        doAfter: 1
+    - to: plasma foundry # CE exclusive
+      steps:
+      - material: RevGunParts
+      - tool: Screwing
+        doAfter: 1
+      - tag: AdvancedMagboots # Change to CE magboots
+        name: construction-graph-tag-AdvancedMagboots
+        icon:
+          sprite: Clothing/Shoes/Boots/magboots-advanced.rsi
+          state: icon
+      - tool: Welding
+        doAfter: 4
+      - material: Cable
+        amount: 8
+        doAfter: 2
+      - tool: Cutting
+        doAfter: 2
+      - material: RevBolt
+        amount: 10
+      - material: RevNut
+        amount: 10
+      - tool: Anchoring
+        doAfter: 2
+      - material: RevBolt
+        amount: 10
+      - material: RevNut
+        amount: 10
       - tool: Anchoring
         doAfter: 1
   - node: gear
     edges:
-    - to: RevForge
-      steps:
-      - material: RevBolt
-      - material: RevNut
-      - tool: Anchoring
-        doAfter: 2
-    - to: RevPrintingPress
+    - to: industrial forge
       steps:
       - material: RevGear
-      - tool: Screwing
-        doAfter: 1
-      - material: RevBolt
-      - material: RevNut
+      - material: RevGear
       - tool: Anchoring
         doAfter: 2
-    - to: RevBulletPress
+    - to: printing press
+      steps:
+      - tool: Anchoring
+        doAfter: 1
+      - material: RevBolt
+        amount: 2
+      - material: RevNut
+        amount: 2
+      - tool: Anchoring
+        doAfter: 2
+    - to: bullet press
       steps:
       - material: RevGunParts
       - tool: Screwing
         doAfter: 1
       - material: RevBolt
+        amount: 5
       - material: RevNut
+        amount: 5
       - tool: Anchoring
         doAfter: 2
-  - node: RevForge
+    - to: uniform printer
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: RevBolt
+        amount: 5
+      - material: RevNut
+        amount: 5
+      - tool: Anchoring
+        doAfter: 2
+  - node: industrial forge
     entity: RevForge
-  - node: RevPrintingPress
+  - node: printing press
     entity: RevPrintingPress
-  - node: RevRadioBench
+  - node: telecomms workshop
     entity: RevRadioBench
-  - node: RevPrinter
+  - node: 3D printer
     entity: RevPrinter
-  - node: RevTelesphere
+  - node: telesphere
     entity: RevTelesphere
-  - node: RevBulletPress
+  - node: bullet press
     entity: RevBulletPress
-  - node: RevMicroelectronicsAssembler
+  - node: microelectronics assembler
     entity: RevMicroelectronicsAssembler
+  - node: uniform printer
+    entity: RevUniformPrinter
+  - node: tech analyzer
+    entity: RevTechAnalyzer
+  - node: plasma foundry
+    entity: RevPlasmaFoundry

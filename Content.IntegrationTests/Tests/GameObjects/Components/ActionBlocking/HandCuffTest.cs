@@ -24,12 +24,11 @@
 
 #nullable enable
 using Content.Server.Cuffs;
-using Content.Shared.Body.Components;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems; // Trauma
 using Robust.Server.Console;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Map;
 
 namespace Content.IntegrationTests.Tests.GameObjects.Components.ActionBlocking
 {
@@ -46,9 +45,15 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.ActionBlocking
   components:
   - type: Cuffable
   - type: Hands
+    hands:
+      hand_right:
+        location: Right
+      hand_left:
+        location: Left
+    sortedHands:
+    - hand_right
+    - hand_left
   - type: ComplexInteraction
-  - type: Body
-    prototype: Human
 
 - type: entity
   name: HandcuffsDummy
@@ -71,8 +76,7 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.ActionBlocking
             HandsComponent hands = default!;
 
             var entityManager = server.ResolveDependency<IEntityManager>();
-            var mapManager = server.ResolveDependency<IMapManager>();
-            var host = server.ResolveDependency<IServerConsoleHost>();
+            var handsSys = entityManager.System<SharedHandsSystem>(); // Trauma - replaces host
 
             var map = await pair.CreateTestMap();
 
@@ -97,7 +101,6 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.ActionBlocking
                 {
                     Assert.That(entityManager.TryGetComponent(human, out cuffed!), $"Human has no {nameof(CuffableComponent)}");
                     Assert.That(entityManager.TryGetComponent(human, out hands!), $"Human has no {nameof(HandsComponent)}");
-                    Assert.That(entityManager.TryGetComponent(human, out BodyComponent? _), $"Human has no {nameof(BodyComponent)}");
                     Assert.That(entityManager.TryGetComponent(cuffs, out HandcuffComponent? _), $"Handcuff has no {nameof(HandcuffComponent)}");
                     Assert.That(entityManager.TryGetComponent(secondCuffs, out HandcuffComponent? _), $"Second handcuffs has no {nameof(HandcuffComponent)}");
                 });
@@ -106,10 +109,12 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.ActionBlocking
                 cuffableSys.TryAddNewCuffs(human, human, cuffs, cuffed);
                 Assert.That(cuffed.CuffedHandCount, Is.GreaterThan(0), "Handcuffing a player did not result in their hands being cuffed");
 
-                // Test to ensure a player with 4 hands will still only have 2 hands cuffed
-                AddHand(entityManager.GetNetEntity(human), host);
-                AddHand(entityManager.GetNetEntity(human), host);
+                // <Trauma> - dont use fucking addhand command
+                handsSys.AddHand(human, "hand_lefter", HandLocation.Left);
+                handsSys.AddHand(human, "hand_righter", HandLocation.Right);
+                // </Trauma>
 
+                // Test to ensure a player with 4 hands will still only have 2 hands cuffed
                 Assert.Multiple(() =>
                 {
                     Assert.That(cuffed.CuffedHandCount, Is.EqualTo(2));
@@ -122,11 +127,6 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.ActionBlocking
             });
 
             await pair.CleanReturnAsync();
-        }
-
-        private static void AddHand(NetEntity to, IServerConsoleHost host)
-        {
-            host.ExecuteCommand(null, $"addhand {to}");
         }
     }
 }

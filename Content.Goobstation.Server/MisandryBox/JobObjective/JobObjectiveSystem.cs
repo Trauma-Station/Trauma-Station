@@ -7,6 +7,7 @@ using Content.Server.Objectives;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.MisandryBox.JobObjective;
 
@@ -49,7 +50,7 @@ public sealed class JobObjectiveSystem : EntitySystem
         }
     }
 
-    public void QueueObjectives(EntityUid mob, List<string> objectives)
+    public void QueueObjectives(EntityUid mob, List<EntProtoId> objectives)
     {
         _queuedObjectives.Add(new QueuedObjective(mob, objectives));
     }
@@ -88,7 +89,7 @@ public sealed class JobObjectiveSystem : EntitySystem
         ruleComp.TrackedMinds.Add((mind, mindComp));
     }
 
-    private bool TryAssignObjectives(EntityUid mind, MindComponent comp, List<string> objectives)
+    private bool TryAssignObjectives(EntityUid mind, MindComponent comp, List<EntProtoId> objectives)
     {
         var allAssigned = true;
 
@@ -110,4 +111,4 @@ public sealed class JobObjectiveSystem : EntitySystem
     }
 }
 
-public readonly record struct QueuedObjective(EntityUid Mob, List<string> Objectives);
+public readonly record struct QueuedObjective(EntityUid Mob, List<EntProtoId> Objectives);

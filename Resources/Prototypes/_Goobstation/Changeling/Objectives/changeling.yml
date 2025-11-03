@@ -101,8 +101,13 @@
   - type: TargetObjective
     title: objective-condition-escape-identity-title
   - type: PickRandomPerson
-    needsOrganic: true # Don't pick IPCs.
-    excludeChangeling: true # if they swap identities its a guarantee fail
+    filters:
+    - !type:BodyMindFilter
+      inverted: true # don't pick these
+      whitelist:
+        components:
+        - Silicon # Don't pick IPCs
+        - Changeling # if they swap identities its a guaranteed fail
 
 - type: entity
   parent: [BaseChangelingSyndicateObjective, BaseStealObjective]
@@ -122,7 +127,12 @@
     unique: true
   - type: TargetObjective
     title: objective-condition-kill-head-title
-  - type: PickRandomHead
+  - type: PickRandomPerson
+    filters:
+    - !type:BodyMindFilter
+      whitelist:
+        components:
+        - CommandStaff
   - type: KillPersonCondition
     requireDead: true
 
@@ -180,17 +190,17 @@
   - type: StealCondition
     stealGroup: HandTeleporter
 
-## warden
+## hos
 
 - type: entity
   parent: ChangelingStealObjective
-  id: LingEnergyShotgunStealObjective
+  id: LingEnergyMagnumStealObjective
   components:
   - type: NotJobRequirement
-    job: Warden # Goob edit
+    job: HeadOfSecurity
   - type: StealCondition
-    stealGroup: WeaponEnergyShotgun
-    owner: job-name-warden # Goob edit
+    stealGroup: WeaponEnergyMagnum
+    owner: job-name-hos
 
 ## ce
 

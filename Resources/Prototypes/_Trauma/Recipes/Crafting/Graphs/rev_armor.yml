@@ -1,0 +1,104 @@
+- type: constructionGraph
+  id: RevMask
+  start: unfinished
+  graph:
+  - node: unfinished
+    edges:
+    - to: finished
+      steps:
+      - material: Plastic
+        amount: 4
+        doAfter: 3
+      - tool: Screwing
+        doAfter: 2
+  - node: finished
+    entity: ClothingMaskGasRev
+
+- type: constructionGraph
+  id: RevHelmet
+  start: unfinished
+  graph:
+  - node: unfinished
+    edges:
+    - to: finished
+      steps:
+      - material: Plasteel
+        amount: 5
+        doAfter: 4
+      - tool: Welding
+        doAfter: 4
+      - tool: Hammering
+        doAfter: 2
+      - tool: Screwing
+        doAfter: 3
+      - material: RevBolt
+      - material: RevNut
+      - tool: Anchoring
+        doAfter: 4
+  - node: finished
+    entity: ClothingHeadHelmetRev
+
+- type: constructionGraph
+  id: RevBoots
+  start: unfinished
+  graph:
+  - node: unfinished
+    edges:
+    - to: finished
+      steps:
+      - tag: RevArmorPlate
+        name: construction-graph-tag-armorplate
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: armorplate
+        doAfter: 4
+      - tool: Hammering
+        doAfter: 2
+      - tool: Screwing
+        doAfter: 2
+  - node: finished
+    entity: ClothingShoesBootsRevSteel
+
+- type: constructionGraph
+  id: RevVest
+  start: unfinished
+  graph:
+  - node: unfinished
+    edges:
+    - to: bullet
+      steps:
+      - tag: RevArmorPlate
+        name: construction-graph-tag-armorplate
+        doAfter: 4
+      - tool: Hammering
+        doAfter: 2
+      - material: RevBolt
+        amount: 2
+        doAfter: 1
+      - material: RevNut
+        amount: 2
+        doAfter: 1
+      - tool: Anchoring
+        doAfter: 4
+    - to: reflect
+      steps:
+      - tag: RevReflectivePlate
+        name: construction-graph-tag-reflectiveplate
+        doAfter: 4
+      - tool: Screwing
+        doAfter: 2
+      - material: Cable
+        amount: 5
+        doAfter: 1
+      - tool: Cutting
+        doAfter: 3
+      - material: Plastic
+        amount: 4
+        doAfter: 2
+      - tool: Welding
+        doAfter: 2
+  - node: bullet
+    entity: ClothingOuterVestWebRev
+  - node: reflect
+    entity: ClothingOuterVestReflectRev
+

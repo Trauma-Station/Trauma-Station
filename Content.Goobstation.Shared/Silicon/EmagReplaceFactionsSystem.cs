@@ -48,8 +48,7 @@ public sealed class EmagReplaceFactionsSystem : EntitySystem
         _npcFactionSystem.ClearFactions(uid, false);
         _npcFactionSystem.AddFactions(uid, newFactions);
 
-        if(comp.StunSeconds > 0)
-            _stunSystem.TryStun(uid, new TimeSpan(0, 0, 0, comp.StunSeconds), true);
+        _stunSystem.TryUpdateParalyzeDuration(uid, comp.StunTime);
 
         args.Handled = true;
     }

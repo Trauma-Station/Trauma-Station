@@ -9,21 +9,11 @@
     implant: DeathRattleImplantRev
 
 - type: entity
-  parent: BaseSubdermalImplant
+  parent: DeathRattleImplant
   id: DeathRattleImplantRev
   name: meditrack implant
   description: This implant will inform the Revolutionary radio channel should the user fall into critical condition or die.
   categories: [ HideSpawnMenu ]
   components:
-  - type: SubdermalImplant
-    permanent: true
-    whitelist:
-      components:
-      - MobState
-  - type: MansusGraspBlockTrigger
-  - type: TriggerOnMobstateChange
-    mobState:
-    - Critical
-    - Dead
-  - type: Rattle
+  - type: RattleOnTrigger
     radioChannel: Revolutionary

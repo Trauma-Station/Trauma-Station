@@ -8,10 +8,9 @@ using Content.Shared.Chat;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Movement.Systems;
 using Content.Shared.Rotation;
 using Content.Shared.Standing;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
@@ -36,7 +35,6 @@ public abstract class SharedShadowCloakSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
 
     private static readonly ProtoId<TagPrototype> ActionTag = "ShadowCloakAction";
@@ -48,7 +46,6 @@ public abstract class SharedShadowCloakSystem : EntitySystem
         SubscribeLocalEvent<ShadowCloakedComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ShadowCloakedComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<ShadowCloakedComponent, ComponentRemove>(OnRemove);
-        SubscribeLocalEvent<ShadowCloakedComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMoveSpeed);
         SubscribeLocalEvent<ShadowCloakedComponent, GetDoAfterDelayMultiplierEvent>(OnGetDoAfterSpeed);
         SubscribeLocalEvent<ShadowCloakedComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<ShadowCloakedComponent, TransformSpeakerNameEvent>(OnTransformName);
@@ -139,9 +136,8 @@ public abstract class SharedShadowCloakSystem : EntitySystem
 
         if (ent.Comp.DebuffOnEarlyReveal)
         {
-            _stun.KnockdownOrStun(ent, ent.Comp.KnockdownTime, true);
-            var (walk, sprint) = ent.Comp.EarlyRemoveMoveSpeedModifiers;
-            _stun.TrySlowdown(ent, ent.Comp.SlowdownTime, true, walk, sprint);
+            _stun.KnockdownOrStun(ent, ent.Comp.KnockdownTime);
+            _status.TryUpdateStatusEffectDuration(ent, ent.Comp.SlowdownEffect, ent.Comp.SlowdownTime);
         }
 
         ResetAbilityCooldown(ent, ent.Comp.ForceRevealCooldown);
@@ -161,12 +157,6 @@ public abstract class SharedShadowCloakSystem : EntitySystem
     private void OnGetDoAfterSpeed(Entity<ShadowCloakedComponent> ent, ref GetDoAfterDelayMultiplierEvent args)
     {
         args.Multiplier *= ent.Comp.DoAfterSlowdown;
-    }
-
-    private void OnRefreshMoveSpeed(Entity<ShadowCloakedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
-    {
-        var (walk, sprint) = ent.Comp.MoveSpeedModifiers;
-        args.ModifySpeed(walk, sprint);
     }
 
     private void OnCloakDamaged(Entity<ShadowCloakEntityComponent> ent, ref DamageChangedEvent args)
@@ -218,8 +208,6 @@ public abstract class SharedShadowCloakSystem : EntitySystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        _modifier.RefreshMovementSpeedModifiers(ent);
-
         ResetAbilityCooldown(ent, ent.Comp.RevealCooldown);
     }
 
@@ -229,6 +217,8 @@ public abstract class SharedShadowCloakSystem : EntitySystem
             return;
 
         Shutdown(ent);
+
+        _status.TryRemoveStatusEffect(ent, ent.Comp.Status);
 
         var xform = Transform(ent);
 
@@ -256,7 +246,7 @@ public abstract class SharedShadowCloakSystem : EntitySystem
     {
         Startup(ent);
 
-        _modifier.RefreshMovementSpeedModifiers(ent);
+        _status.TryUpdateStatusEffectDuration(ent, ent.Comp.Status, null); // runs indefinitely
 
         if (_net.IsClient)
             return;
@@ -278,7 +268,7 @@ public abstract class SharedShadowCloakSystem : EntitySystem
 
         _appearance.SetData(cloakEntity,
             RotationVisuals.RotationState,
-            _standing.IsDown(ent) ? RotationState.Horizontal : RotationState.Vertical);
+            _standing.IsDown(ent.Owner) ? RotationState.Horizontal : RotationState.Vertical);
     }
 
     private void ResetAbilityCooldown(EntityUid uid, TimeSpan cooldown)
@@ -321,7 +311,6 @@ public abstract class SharedShadowCloakSystem : EntitySystem
 
     private void RemoveShadowCloak(Entity<ShadowCloakedComponent> ent)
     {
-        _status.TryRemoveStatusEffect(ent, ent.Comp.Status, remComp: false);
         RemCompDeferred(ent.Owner, ent.Comp);
     }
 

@@ -32,7 +32,7 @@
       path: /Audio/Weapons/genhit3.ogg
   extraDamage: 5
   paralyzeTime: 1
-  dropHeldItemsBehavior: NoDrop
+  dropItems: false
   canDoWhileProne: false
 
 - type: combo

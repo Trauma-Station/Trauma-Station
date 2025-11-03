@@ -1,10 +1,10 @@
 using Content.Goobstation.Shared.Augments;
-using Content.Server.Power.Components; // ough BatteryComponent why are you in server
 using Content.Server.Power.EntitySystems;
 using Content.Server.PowerCell;
 using Content.Shared.Alert;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Power.Components;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
 using Robust.Shared.Timing;

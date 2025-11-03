@@ -53,20 +53,16 @@ public sealed class JumpSystem : EntitySystem
 
     private void OnThrowDoHit(EntityUid uid, JumpComponent component, ThrowDoHitEvent args)
     {
-        if (args.Handled)
-            return;
-
         _throwingItem.StopThrow(uid, args.Component);
 
         if (Transform(args.Target).Anchored)
         {
-            _stun.TryParalyze(uid, component.StunTime, true);
+            _stun.TryUpdateParalyzeDuration(uid, component.StunTime);
             return;
         }
 
-        _stun.TryKnockdown(args.Target, component.StunTime, true);
-
-        args.Handled = true;
+        _stun.TryUpdateParalyzeDuration(args.Target, component.StunTime);
+        _stun.TryKnockdown(args.Target, component.StunTime);
     }
 }
 

@@ -14,9 +14,17 @@
     entity: MobReptilian
     forced: true
     transferName: true
-    transferHumanoidAppearance: true
     inventory: Transfer
-    allowRepeatedMorphs: true
+    ignoreAllowRepeatedMorphs: true
+
+- type: polymorph
+  id: AdminVulpSmite
+  configuration:
+    entity: MobVulpkanin
+    forced: true
+    transferName: true
+    inventory: Transfer
+    ignoreAllowRepeatedMorphs: true
 
 - type: polymorph
   id: AdminMonkeySmite
@@ -24,7 +32,7 @@
     entity: MobMonkey
     forced: true
     inventory: Drop
-    allowRepeatedMorphs: true
+    ignoreAllowRepeatedMorphs: true
 
 - type: polymorph
   id: AdminBreadSmite
@@ -32,7 +40,7 @@
     entity: FoodBreadPlain
     forced: true
     inventory: Drop
-    allowRepeatedMorphs: true
+    ignoreAllowRepeatedMorphs: true
 
 - type: polymorph
   id: AdminInstrumentSmite
@@ -40,7 +48,7 @@
     entity: SuperSynthesizerInstrument
     forced: true
     inventory: Drop
-    allowRepeatedMorphs: true
+    ignoreAllowRepeatedMorphs: true
 
 - type: polymorph
   id: AdminMouseSmite
@@ -48,7 +56,7 @@
     entity: MobMouse
     forced: true
     inventory: Drop
-    allowRepeatedMorphs: true
+    ignoreAllowRepeatedMorphs: true
 
 - type: polymorph
   id: AdminDisposalsSmite
@@ -56,4 +64,4 @@
     entity: DisposalUnit
     forced: true
     inventory: Drop
-    allowRepeatedMorphs: true
+    ignoreAllowRepeatedMorphs: true

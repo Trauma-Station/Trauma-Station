@@ -48,11 +48,11 @@ using Content.Server.Chat;
 using Content.Server.Chat.Systems;
 using Content.Server.Emoting.Systems;
 using Content.Server.Speech.EntitySystems;
-using Content.Server.Roles;
 using Content.Shared.Anomaly.Components;
 using Content.Shared.Armor;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Cloning.Events;
+using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
@@ -63,6 +63,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Zombies;
 using Content.Shared.Blocking; // Goobstation
@@ -96,7 +97,7 @@ namespace Content.Server.Zombies
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SharedRoleSystem _role = default!;
-        [Dependency] private readonly LanguageSystem _language = default!;
+        [Dependency] private readonly LanguageSystem _language = default!; // Goob
 
         public readonly ProtoId<NpcFactionPrototype> Faction = "Zombie";
 
@@ -254,12 +255,20 @@ namespace Content.Server.Zombies
                 || TerminatingOrDeleted(uid)) // Goob Change
                 return;
 
-            // Goobstation Change Start
+            // <Goob>
             var comp = EnsureComp<LanguageSpeakerComponent>(uid); // Ensure they can speak language before adding language.
+            var spoken = comp.UnderstoodLanguages;
+            var understood = comp.UnderstoodLanguages;
+            spoken.Clear();
+            understood.Clear();
             if (!string.IsNullOrEmpty(component.ForcedLanguage)) // Should never be false, but security either way.
-                comp.CurrentLanguage = component.ForcedLanguage;
-            _language.UpdateEntityLanguages(uid);
-            // Goobstation Change End
+            {
+                spoken.Add(component.ForcedLanguage);
+                understood.Add(component.ForcedLanguage);
+            }
+            _language.EnsureValidLanguage((uid, comp));
+            _language.UpdateEntityLanguages((uid, comp));
+            // </Goob>
         }
 
         private void OnEmote(EntityUid uid, ZombieComponent component, ref EmoteEvent args)
@@ -268,7 +277,7 @@ namespace Content.Server.Zombies
             if (args.Handled)
                 return;
 
-            _protoManager.TryIndex(component.EmoteSoundsId, out var sounds);
+            _protoManager.Resolve(component.EmoteSoundsId, out var sounds);
 
             args.Handled = _chat.TryPlayEmoteSound(uid, sounds, args.Emote);
         }
@@ -325,46 +334,50 @@ namespace Content.Server.Zombies
             return MathF.Max(chance, zombieComponent.MinZombieInfectionChance);
         }
 
-        private void OnMeleeHit(EntityUid uid, ZombieComponent component, MeleeHitEvent args)
+        private void OnMeleeHit(Entity<ZombieComponent> entity, ref MeleeHitEvent args)
         {
-            if (!TryComp<ZombieComponent>(args.User, out _))
+            if (!args.IsHit)
                 return;
 
-            if (!args.HitEntities.Any())
-                return;
+            var cannotSpread = HasComp<NonSpreaderZombieComponent>(args.User);
 
-            foreach (var entity in args.HitEntities)
+            foreach (var uid in args.HitEntities)
             {
-                if (args.User == entity)
+                if (args.User == uid)
                     continue;
 
-                if (!TryComp<MobStateComponent>(entity, out var mobState))
+                if (!TryComp<MobStateComponent>(uid, out var mobState))
                     continue;
 
                 if (TryComp<BlockingUserComponent>(entity, out var blockingUser) && IsUserBlocking(blockingUser)) // Goobstation edit - prevents infection if user is actively blocking
                     return;
 
-                if (HasComp<ZombieComponent>(entity) || HasComp<InitialInfectedComponent>(entity)) // Goobstation edit - prevent zombies from damaging IIs
+                if (HasComp<ZombieComponent>(uid) || HasComp<IncurableZombieComponent>(uid))
                 {
-                    args.BonusDamage = -args.BaseDamage;
+                    // Don't infect, don't deal damage, do not heal from bites, don't pass go!
+                    args.Handled = true;
+                    continue;
+                }
+
+                if (_mobState.IsAlive(uid, mobState))
+                {
+                    _damageable.TryChangeDamage(args.User, entity.Comp.HealingOnBite, true, false);
+
+                    // If we cannot infect the living target, the zed will just heal itself.
+                    if (HasComp<ZombieImmuneComponent>(uid) || cannotSpread || _random.Prob(GetZombieInfectionChance(uid, entity.Comp)))
+                        continue;
+
+                    EnsureComp<PendingZombieComponent>(uid);
+                    EnsureComp<ZombifyOnDeathComponent>(uid);
                 }
                 else
                 {
-                    if (!HasComp<ZombieImmuneComponent>(entity) && !HasComp<NonSpreaderZombieComponent>(args.User) && _random.Prob(GetZombieInfectionChance(entity, component)))
-                    {
-                        EnsureComp<PendingZombieComponent>(entity);
-                        EnsureComp<ZombifyOnDeathComponent>(entity);
-                    }
-                }
+                    if (HasComp<ZombieImmuneComponent>(uid) || cannotSpread)
+                        continue;
 
-                if (_mobState.IsIncapacitated(entity, mobState) && !HasComp<ZombieComponent>(entity) && !HasComp<ZombieImmuneComponent>(entity) && !HasComp<InitialInfectedComponent>(entity)) // Goobstation edit - prevent zombies from damaging IIs
-                {
-                    ZombifyEntity(entity);
-                    args.BonusDamage = -args.BaseDamage;
-                }
-                else if (mobState.CurrentState == MobState.Alive) //heals when zombies bite live entities
-                {
-                    _damageable.TryChangeDamage(uid, component.HealingOnBite, true, false);
+                    // If the target is dead and can be infected, infect.
+                    ZombifyEntity(uid);
+                    args.Handled = true;
                 }
             }
         }

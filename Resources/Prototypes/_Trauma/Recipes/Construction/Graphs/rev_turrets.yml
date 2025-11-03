@@ -31,7 +31,7 @@
   - node: barrel
     entity: RevUnfinishedTurretBarrel
     edges:
-    - to: RevTurretPistol
+    - to: pistol turret
       steps:
       - material: RevBolt
       - material: RevNut
@@ -45,7 +45,7 @@
           state: icon
       - tool: Welding
         doAfter: 1
-    - to: RevTurretSMG
+    - to: SMG turret
       steps:
       - material: RevGunParts
         amount: 2
@@ -64,7 +64,7 @@
       - material: RevNut
       - tool: Anchoring
         doAfter: 2
-  - node: RevTurretPistol
+  - node: pistol turret
     entity: WeaponTurretRevolutionaryPistol
-  - node: RevTurretSMG
+  - node: SMG turret
     entity: WeaponTurretRevolutionarySMG

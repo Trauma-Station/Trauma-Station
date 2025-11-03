@@ -204,13 +204,11 @@ namespace Content.Shared.Throwing
                 _adminLogger.Add(LogType.ThrowHit, LogImpact.Low,
                     $"{ToPrettyString(thrown):thrown} thrown by {ToPrettyString(component.Thrower.Value):thrower} hit {ToPrettyString(target):target}.");
 
-            // Goob edit start
-            var ev = new ThrowHitByEvent(thrown, target, component);
-            RaiseLocalEvent(target, ev, true);
-            if (ev.Handled)
-                return;
-            // Goob edit ent
-            RaiseLocalEvent(thrown, new ThrowDoHitEvent(thrown, target, component), true);
+            var hitByEv = new ThrowHitByEvent(thrown, target, component);
+            var doHitEv = new ThrowDoHitEvent(thrown, target, component);
+            RaiseLocalEvent(target, ref hitByEv, true);
+            if (hitByEv.Handled) return; // Goob - don't process for the thrown item if the target handles it
+            RaiseLocalEvent(thrown, ref doHitEv, true);
         }
 
         public override void Update(float frameTime)

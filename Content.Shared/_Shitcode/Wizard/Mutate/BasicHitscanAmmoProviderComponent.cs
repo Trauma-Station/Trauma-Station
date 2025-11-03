@@ -15,6 +15,6 @@ namespace Content.Shared._Goobstation.Wizard.Mutate;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BasicHitscanAmmoProviderComponent : AmmoProviderComponent
 {
-    [ViewVariables(VVAccess.ReadWrite), DataField(required: true), AutoNetworkedField]
-    public ProtoId<HitscanPrototype> Proto;
+    [DataField(required: true), AutoNetworkedField]
+    public EntProtoId Proto;
 }

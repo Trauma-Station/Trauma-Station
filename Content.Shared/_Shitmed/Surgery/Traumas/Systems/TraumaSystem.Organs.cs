@@ -1,25 +1,35 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._Shitmed.CCVar;
 using Content.Shared._Shitmed.Medical.Surgery.Pain;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
 using Content.Shared.Body.Organ;
+using Content.Shared.StatusEffectNew;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Shitmed.Medical.Surgery.Traumas.Systems;
 
 public partial class TraumaSystem
 {
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
+
     private const string OrganDamagePainIdentifier = "OrganDamage";
+
+    private float _organSlowdownMul;
+
+    public static readonly EntProtoId OrganSlowdownStatusEffect = "OrganSlowdownStatusEffect";
 
     private void InitOrgans()
     {
         SubscribeLocalEvent<WoundableComponent, OrganIntegrityChangedEventOnWoundable>(OnOrganIntegrityOnWoundableChanged);
         SubscribeLocalEvent<OrganComponent, OrganIntegrityChangedEvent>(OnOrganIntegrityChanged);
         SubscribeLocalEvent<WoundableComponent, OrganDamageSeverityChangedOnWoundable>(OnOrganSeverityChanged);
+
+        Subs.CVar(_cfg, SurgeryCVars.OrganTraumaSlowdownTimeMultiplier, x => _organSlowdownMul = x, true);
     }
 
     #region Event handling
@@ -95,13 +105,9 @@ public partial class TraumaSystem
                 nerveSys.Value.Comp.OrganDestructionReflexSounds[sex],
                 AudioParams.Default.WithVolume(6f));
 
-            _stun.TryParalyze(body.Value, nerveSys.Value.Comp.OrganDamageStunTime, true);
-            _stun.TrySlowdown(
-                body.Value,
-                nerveSys.Value.Comp.OrganDamageStunTime * _cfg.GetCVar(SurgeryCVars.OrganTraumaSlowdownTimeMultiplier),
-                true,
-                _cfg.GetCVar(SurgeryCVars.OrganTraumaWalkSpeedSlowdown),
-                _cfg.GetCVar(SurgeryCVars.OrganTraumaRunSpeedSlowdown));
+            _stun.TryUpdateParalyzeDuration(body.Value, nerveSys.Value.Comp.OrganDamageStunTime);
+            var slowdown = nerveSys.Value.Comp.OrganDamageStunTime * _organSlowdownMul;
+            _status.TryUpdateStatusEffectDuration(body.Value, OrganSlowdownStatusEffect, slowdown);
         }
 
         if (TryGetWoundableTrauma(bodyPart, out var traumas, TraumaType.OrganDamage, bodyPart))

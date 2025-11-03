@@ -5,9 +5,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: EffectTeleportation
-  categories: [ HideSpawnMenu ]
+  abstract: true
+  id: BaseEffectTeleportation
   name: teleportation
+  description: "A pink haze is swirling around, unlike anything you've ever seen..."
   components:
   - type: Transform
     anchored: True
@@ -16,24 +17,38 @@
     canCollide: false
   - type: Sprite
     sprite: _Shitmed/Effects/teleportation.rsi
-    state: teleportation
     scale: 0.65, 0.65
     color: "#FD009899"
   - type: TimedDespawn
-    lifetime: 5.0
+    lifetime: 5
 
 - type: entity
-  id: EffectTeleportationEntity
-  categories: [ HideSpawnMenu ]
-  name: teleportation
+  parent: BaseEffectTeleportation
+  id: EffectTeleportation
   components:
-  - type: Physics
-    bodyType: Static
-    canCollide: false
   - type: Sprite
-    sprite: _Shitmed/Effects/teleportation.rsi
+    state: teleportation
+
+- type: entity
+  parent: BaseEffectTeleportation
+  id: EffectTeleportationEntity
+  suffix: Entity
+  components:
+  - type: Sprite
     state: teleportation-entity
-    scale: 0.65, 0.65
-    color: "#FD009899"
+
+- type: entity
+  parent: EffectTeleportation
+  id: EffectTeleportationShort
+  suffix: Short
+  components:
   - type: TimedDespawn
-    lifetime: 5.0
+    lifetime: 3
+
+- type: entity
+  parent: EffectTeleportationEntity
+  id: EffectTeleportationEntityShort
+  suffix: Entity, Short
+  components:
+  - type: TimedDespawn
+    lifetime: 3

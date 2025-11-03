@@ -25,10 +25,11 @@ using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
-using Content.Server.Station.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Station.Components;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Log; // Trauma
 using Robust.Shared.Map.Components;
 
 namespace Content.IntegrationTests.Tests.Station;
@@ -63,6 +64,16 @@ public sealed class EvacShuttleTest
 
         // Find the station, centcomm, and shuttle, and ftl map.
 
+        // <Trauma> temporary thing to try fix heisentest
+        var sawmill = server.ResolveDependency<ILogManager>().GetSawmill("troll_evac_test");
+        var query = entMan.AllEntityQueryEnumerator<StationDataComponent>();
+        sawmill.Info($"Stations: {entMan.Count<StationDataComponent>()}");
+        sawmill.Info($"Stations with centcomm: {entMan.Count<StationCentcommComponent>()}");
+        while (query.MoveNext(out var uid, out _))
+        {
+            sawmill.Info($"Station {uid}: {entMan.HasComponent<StationCentcommComponent>(uid)}");
+        }
+        // </Trauma>
         Assert.That(entMan.Count<StationCentcommComponent>(), Is.EqualTo(1));
         Assert.That(entMan.Count<StationEmergencyShuttleComponent>(), Is.EqualTo(1));
         Assert.That(entMan.Count<StationDataComponent>(), Is.EqualTo(1));

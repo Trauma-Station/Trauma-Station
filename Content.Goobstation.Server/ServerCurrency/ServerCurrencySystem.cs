@@ -21,6 +21,7 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Trauma.Common.ServerCurrency; // Trauma
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 
@@ -112,6 +113,15 @@ namespace Content.Goobstation.Server.ServerCurrency
 
                         if (session != null && _linkAccount.GetPatron(session)?.Tier != null)
                             money *= 2;
+
+                        // <Trauma>
+                        if (session is {} sess)
+                        {
+                            var modifyEv = new ModifyCurrencyEvent(sess, money);
+                            RaiseLocalEvent(ref modifyEv);
+                            money = modifyEv.Money;
+                        }
+                        // </Trauma>
 
                         if (_goobcoinsUseShortRoundPenalty)
                         {

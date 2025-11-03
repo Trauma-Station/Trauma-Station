@@ -164,15 +164,15 @@
     - reagents: [ Water, SpaceCleaner ]
       methods: [ Touch ]
       effects:
-      - !type:WashCreamPieReaction
+      - !type:WashCreamPie
     - reagents: [ Water ]
       methods: [ Touch ]
       effects:
       - !type:HealthChange
-        scaleByQuantity: true
+        scaling: true
         damage:
           types:
-            Caustic: 5 # Goobstation
+            Caustic: 5 # Goobstation - replaced 0.05 heat
       - !type:PopupMessage
         type: Local
         messages: [ "slime-hurt-by-water-popup" ]

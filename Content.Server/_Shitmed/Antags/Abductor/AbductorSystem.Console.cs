@@ -25,22 +25,27 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 {
     [Dependency] private readonly NumberObjectiveSystem _number = default!;
     [Dependency] private readonly SharedItemSwitchSystem _itemSwitch = default!;
+
     public void InitializeConsole()
     {
         SubscribeLocalEvent<AbductorConsoleComponent, BeforeActivatableUIOpenEvent>(OnBeforeActivatableUIOpen);
         SubscribeLocalEvent<AbductConditionComponent, ObjectiveGetProgressEvent>(OnAbductGetProgress);
 
-        Subs.BuiEvents<AbductorConsoleComponent>(AbductorConsoleUIKey.Key, subs => subs.Event<AbductorAttractBuiMsg>(OnAttractBuiMsg));
-        Subs.BuiEvents<AbductorConsoleComponent>(AbductorConsoleUIKey.Key, subs => subs.Event<AbductorCompleteExperimentBuiMsg>(OnCompleteExperimentBuiMsg));
-        Subs.BuiEvents<AbductorConsoleComponent>(AbductorConsoleUIKey.Key, subs => subs.Event<AbductorVestModeChangeBuiMsg>(OnVestModeChangeBuiMsg));
-        Subs.BuiEvents<AbductorConsoleComponent>(AbductorConsoleUIKey.Key, subs => subs.Event<AbductorLockBuiMsg>(OnVestLockBuiMsg));
-        SubscribeLocalEvent<AbductorComponent, AbductorAttractDoAfterEvent>(OnDoAfterAttract);
+        Subs.BuiEvents<AbductorConsoleComponent>(AbductorConsoleUIKey.Key, subs =>
+        {
+            subs.Event<AbductorAttractBuiMsg>(OnAttractBuiMsg);
+            subs.Event<AbductorCompleteExperimentBuiMsg>(OnCompleteExperimentBuiMsg);
+            subs.Event<AbductorVestModeChangeBuiMsg>(OnVestModeChangeBuiMsg);
+            subs.Event<AbductorLockBuiMsg>(OnVestLockBuiMsg);
+        });
+        SubscribeLocalEvent<AbductorConsoleComponent, AbductorAttractDoAfterEvent>(OnDoAfterAttract);
     }
+
     private void OnAbductGetProgress(Entity<AbductConditionComponent> ent, ref ObjectiveGetProgressEvent args)
         => args.Progress = AbductProgress(ent.Comp, _number.GetTarget(ent.Owner));
 
     private float AbductProgress(AbductConditionComponent comp, int target)
-        => target == 0 ? 1f : MathF.Min(comp.Abducted / (float) target, 1f);
+        => target == 0 ? 1f : MathF.Min(comp.TotalAbducted / (float) target, 1f);
 
     private void OnVestModeChangeBuiMsg(EntityUid uid, AbductorConsoleComponent component, AbductorVestModeChangeBuiMsg args)
     {
@@ -50,63 +55,49 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     private void OnVestLockBuiMsg(Entity<AbductorConsoleComponent> ent, ref AbductorLockBuiMsg args)
     {
-        if (ent.Comp.Armor != null && GetEntity(ent.Comp.Armor.Value) is EntityUid armor)
-            if (TryComp<UnremoveableComponent>(armor, out var unremoveable))
-                RemComp(armor, unremoveable);
-            else
-                AddComp<UnremoveableComponent>(armor);
+        if (ent.Comp.Armor != null && GetEntity(ent.Comp.Armor.Value) is {} armor)
+            if (!RemComp<UnremoveableComponent>(armor))
+                EnsureComp<UnremoveableComponent>(armor);
     }
 
     private void OnCompleteExperimentBuiMsg(EntityUid uid, AbductorConsoleComponent component, AbductorCompleteExperimentBuiMsg args)
     {
-        if (component.Experimentator != null
-            && GetEntity(component.Experimentator) is EntityUid experimentatorId
-            && TryComp<AbductorExperimentatorComponent>(experimentatorId, out var experimentatorComp))
-        {
-            var container = _container.GetContainer(experimentatorId, experimentatorComp.ContainerId);
-            var victim = container.ContainedEntities.FirstOrDefault(HasComp<AbductorVictimComponent>);
-            if (victim != default && TryComp(victim, out AbductorVictimComponent? victimComp))
-            {
-                if (victimComp.Implanted
-                    && TryComp<MindContainerComponent>(args.Actor, out var mindContainer)
-                    && mindContainer.Mind.HasValue
-                    && TryComp<MindComponent>(mindContainer.Mind.Value, out var mind)
-                    && mind.Objectives.FirstOrDefault(HasComp<AbductConditionComponent>) is EntityUid objId
-                    && TryComp<AbductConditionComponent>(objId, out var condition)
-                    && !condition.AbductedHashs.Contains(GetNetEntity(victim)))
-                {
-                    condition.AbductedHashs.Add(GetNetEntity(victim));
-                    condition.Abducted++;
-                }
-                _audioSystem.PlayPvs("/Audio/Voice/Human/wilhelm_scream.ogg", experimentatorId);
+        if (GetEntity(component.Experimentator) is not {} experimentator ||
+            !TryComp<AbductorExperimentatorComponent>(experimentator, out var comp))
+            return;
 
-                if (victimComp.Position is not null)
-                    _xformSys.SetCoordinates(victim, victimComp.Position.Value);
+        var container = _container.GetContainer(experimentator, comp.ContainerId);
+        var victim = container.ContainedEntities.FirstOrDefault(HasComp<AbductorVictimComponent>);
+        if (victim != default && TryComp(victim, out AbductorVictimComponent? victimComp))
+        {
+            if (victimComp.Implanted
+                && TryComp<MindContainerComponent>(args.Actor, out var mindContainer)
+                && mindContainer.Mind.HasValue
+                && TryComp<MindComponent>(mindContainer.Mind.Value, out var mind)
+                && mind.Objectives.FirstOrDefault(HasComp<AbductConditionComponent>) is {} objId
+                && TryComp<AbductConditionComponent>(objId, out var condition))
+            {
+                condition.Abducted.Add(GetNetEntity(victim));
             }
+            _audio.PlayPvs("/Audio/Voice/Human/wilhelm_scream.ogg", experimentator);
+
+            if (victimComp.Position is {} pos)
+                _xform.SetCoordinates(victim, pos);
         }
     }
 
     private void OnAttractBuiMsg(Entity<AbductorConsoleComponent> ent, ref AbductorAttractBuiMsg args)
     {
-        if (ent.Comp.Target == null || ent.Comp.AlienPod == null) return;
-        var target = GetEntity(ent.Comp.Target.Value);
-        EnsureComp<TransformComponent>(target, out var xform);
-        var effectEnt = SpawnAttachedTo(TeleportationEffectEntity, xform.Coordinates);
-        _xformSys.SetParent(effectEnt, target);
-        EnsureComp<TimedDespawnComponent>(effectEnt, out var despawnEffectEntComp);
-        despawnEffectEntComp.Lifetime = 3.0f;
-        _audioSystem.PlayPvs("/Audio/_Shitmed/Misc/alien_teleport.ogg", effectEnt);
+        if (GetEntity(ent.Comp.Target) is not {} target || GetEntity(ent.Comp.AlienPod) is not {} telepad)
+            return;
 
-        var telepad = GetEntity(ent.Comp.AlienPod.Value);
-        var telepadXform = EnsureComp<TransformComponent>(telepad);
-        var effect = _entityManager.SpawnEntity(TeleportationEffect, telepadXform.Coordinates);
-        EnsureComp<TimedDespawnComponent>(effect, out var despawnComp);
-        despawnComp.Lifetime = 3.0f;
-        _audioSystem.PlayPvs("/Audio/_Shitmed/Misc/alien_teleport.ogg", effect);
+        AddTeleportationEffect(target, TeleportationEffectEntityShort);
+        AddTeleportationEffect(telepad, TeleportationEffectShort);
 
-        var @event = new AbductorAttractDoAfterEvent(GetNetCoordinates(telepadXform.Coordinates), GetNetEntity(target));
+        var coords = Transform(telepad).Coordinates;
+        var ev = new AbductorAttractDoAfterEvent(GetNetCoordinates(coords), GetNetEntity(target));
         ent.Comp.Target = null;
-        var doAfter = new DoAfterArgs(EntityManager, args.Actor, TimeSpan.FromSeconds(3), @event, args.Actor)
+        var doAfter = new DoAfterArgs(EntityManager, ent, TimeSpan.FromSeconds(3), ev, eventTarget: ent)
         {
             BreakOnDamage = false,
             BreakOnDropItem = false,
@@ -116,27 +107,18 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         };
         _doAfter.TryStartDoAfter(doAfter);
     }
-    private void OnDoAfterAttract(Entity<AbductorComponent> ent, ref AbductorAttractDoAfterEvent args)
+    private void OnDoAfterAttract(Entity<AbductorConsoleComponent> ent, ref AbductorAttractDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
             return;
 
         var victim = GetEntity(args.Victim);
-        if (_pullingSystem.IsPulling(victim))
-        {
-            if (!TryComp<PullerComponent>(victim, out var pullerComp)
-                || pullerComp.Pulling == null
-                || !TryComp<PullableComponent>(pullerComp.Pulling.Value, out var pullableComp)
-                || !_pullingSystem.TryStopPull(pullerComp.Pulling.Value, pullableComp)) return;
-        }
-        if (_pullingSystem.IsPulled(victim))
-        {
-            if (!TryComp<PullableComponent>(victim, out var pullableComp)
-                || !_pullingSystem.TryStopPull(victim, pullableComp)) return;
-        }
-        _xformSys.SetCoordinates(victim, GetCoordinates(args.TargetCoordinates));
+        StopPulls(victim);
+        _xform.SetCoordinates(victim, GetCoordinates(args.TargetCoordinates));
     }
-    private void OnBeforeActivatableUIOpen(Entity<AbductorConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args) => UpdateGui(ent.Comp.Target, ent);
+
+    private void OnBeforeActivatableUIOpen(Entity<AbductorConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
+        => UpdateGui(ent.Comp.Target, ent);
 
     protected override void UpdateGui(NetEntity? target, Entity<AbductorConsoleComponent> computer)
     {
@@ -148,18 +130,19 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         var armorLock = false;
         var armorMode = AbductorArmorModeType.Stealth;
 
-        if (computer.Comp.Armor != null)
+        if (GetEntity(computer.Comp.Armor) is {} armor)
         {
-            if (HasComp<UnremoveableComponent>(GetEntity(computer.Comp.Armor.Value)))
+            if (HasComp<UnremoveableComponent>(armor))
                 armorLock = true;
-            if (TryComp<ItemSwitchComponent>(GetEntity(computer.Comp.Armor.Value), out var switchVest) && Enum.TryParse<AbductorArmorModeType>(switchVest.State, ignoreCase: true, out var State))
+            if (TryComp<ItemSwitchComponent>(armor, out var switchVest) && Enum.TryParse<AbductorArmorModeType>(switchVest.State, ignoreCase: true, out var State))
                 armorMode = State;
         }
 
+        var coords = Transform(computer).Coordinates;
         if (computer.Comp.AlienPod == null)
         {
-            var xform = EnsureComp<TransformComponent>(computer.Owner);
-            var alienpad = _entityLookup.GetEntitiesInRange<AbductorAlienPadComponent>(xform.Coordinates, 4, LookupFlags.Approximate | LookupFlags.Dynamic)
+            // goidabrained device linking...
+            var alienpad = _lookup.GetEntitiesInRange<AbductorAlienPadComponent>(coords, 4, LookupFlags.Approximate | LookupFlags.Dynamic)
                 .FirstOrDefault().Owner;
             if (alienpad != default)
                 computer.Comp.AlienPod = GetNetEntity(alienpad);
@@ -167,24 +150,22 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         if (computer.Comp.Experimentator == null)
         {
-            var xform = EnsureComp<TransformComponent>(computer.Owner);
-            var experimentator = _entityLookup.GetEntitiesInRange<AbductorExperimentatorComponent>(xform.Coordinates, 4, LookupFlags.Approximate | LookupFlags.Dynamic)
+            var foundExp = _lookup.GetEntitiesInRange<AbductorExperimentatorComponent>(coords, 4, LookupFlags.Approximate | LookupFlags.Dynamic)
                 .FirstOrDefault().Owner;
-            if (experimentator != default)
-                computer.Comp.Experimentator = GetNetEntity(experimentator);
+            if (foundExp != default)
+                computer.Comp.Experimentator = GetNetEntity(foundExp);
         }
 
-        if (computer.Comp.Experimentator != null
-            && GetEntity(computer.Comp.Experimentator) is EntityUid experimentatorId
-            && TryComp<AbductorExperimentatorComponent>(experimentatorId, out var experimentatorComp))
+        if (GetEntity(computer.Comp.Experimentator) is {} experimentator &&
+            TryComp<AbductorExperimentatorComponent>(experimentator, out var expComp))
         {
-            var container = _container.GetContainer(experimentatorId, experimentatorComp.ContainerId);
+            var container = _container.GetContainer(experimentator, expComp.ContainerId);
             var victim = container.ContainedEntities.FirstOrDefault(e => HasComp<AbductorVictimComponent>(e));
-            if (victim != default && TryComp(victim, out MetaDataComponent? victimMetadata))
-                victimName = victimMetadata?.EntityName;
+            if (victim != default)
+                victimName = Name(victim);
         }
 
-        _uiSystem.SetUiState(computer.Owner, AbductorConsoleUIKey.Key, new AbductorConsoleBuiState()
+        _ui.SetUiState(computer.Owner, AbductorConsoleUIKey.Key, new AbductorConsoleBuiState()
         {
             Target = target,
             TargetName = targetName,

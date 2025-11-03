@@ -14,14 +14,22 @@ using Content.Goobstation.Shared.MartialArts.Events;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Systems;
+using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.MartialArts;
 
 public abstract partial class SharedMartialArtsSystem
 {
+    [Dependency] private readonly MovementModStatusSystem _movementMod = default!;
+    [Dependency] private readonly SharedAnimatedEmotesSystem _animatedEmotes = default!;
+
+    public static readonly EntProtoId CircleKickEffect = "CircleKickSlowdownStatusEffect";
+
     private void InitializeCapoeira()
     {
         SubscribeLocalEvent<CanPerformComboComponent, PushKickPerformedEvent>(OnPushKick);
@@ -82,8 +90,7 @@ public abstract partial class SharedMartialArtsSystem
             || target != ent.Owner)
             return;
 
-        _status.TryRemoveStatusEffect(ent, "KnockedDown");
-        _standingState.Stand(ent);
+        RemComp<KnockedDownComponent>(ent);
         _stamina.TryTakeStamina(ent, args.StaminaToHeal); // Trauma edit
         ent.Comp.LastAttacks.Clear();
     }
@@ -104,9 +111,9 @@ public abstract partial class SharedMartialArtsSystem
             return;
 
         _stun.TryKnockdown(target,
-            TimeSpan.FromSeconds(proto.ParalyzeTime * power),
+            proto.ParalyzeTime * power,
             true,
-            proto.DropHeldItemsBehavior);
+            drop: proto.DropItems);
 
         if (TryComp<PullableComponent>(target, out var pullable))
             _pulling.TryStopPull(target, pullable, ent, true);
@@ -115,11 +122,8 @@ public abstract partial class SharedMartialArtsSystem
         DoDamage(ent, target, proto.DamageType, proto.ExtraDamage * power, out _);
         ApplyMultiplier(ent, args.AttackSpeedMultiplier, 0f, args.AttackSpeedMultiplierTime);
 
-        if (args.Emote != null && TryComp(ent, out AnimatedEmotesComponent? emotes))
-        {
-            emotes.Emote = args.Emote.Value;
-            Dirty(ent, emotes);
-        }
+        if (args.Emote is {} emote)
+            _animatedEmotes.PlayEmoteAnimation(ent.Owner, emote);
 
         ComboPopup(ent, target, proto.Name);
         ent.Comp.LastAttacks.Clear();
@@ -135,9 +139,9 @@ public abstract partial class SharedMartialArtsSystem
             return;
 
         _stun.TryKnockdown(target,
-            TimeSpan.FromSeconds(proto.ParalyzeTime * power),
+            proto.ParalyzeTime * power,
             true,
-            proto.DropHeldItemsBehavior);
+            drop: proto.DropItems);
 
         DoDamage(ent, target, proto.DamageType, proto.ExtraDamage * power, out _);
         _audio.PlayPvs(args.Sound, target);
@@ -156,8 +160,7 @@ public abstract partial class SharedMartialArtsSystem
             return;
 
         var speedMultiplier = 1f / MathF.Max(1f, power);
-        _stun.TrySlowdown(target, args.SlowDownTime * power, true, speedMultiplier, speedMultiplier);
-        _modifier.RefreshMovementSpeedModifiers(target);
+        _movementMod.TryUpdateMovementSpeedModDuration(target, CircleKickEffect, args.SlowDownTime * power, speedMultiplier);
         DoDamage(ent, target, proto.DamageType, proto.ExtraDamage * power, out _);
         _audio.PlayPvs(args.Sound, target);
         ComboPopup(ent, target, proto.Name);
@@ -181,9 +184,9 @@ public abstract partial class SharedMartialArtsSystem
             _pulling.TryStopPull(target, pullable, ent, true);
 
         _stun.TryKnockdown(target,
-            TimeSpan.FromSeconds(proto.ParalyzeTime * power),
+            proto.ParalyzeTime * power,
             true,
-            proto.DropHeldItemsBehavior);
+            drop: proto.DropItems);
 
         _audio.PlayPvs(args.Sound, target);
         DoDamage(ent, target, proto.DamageType, proto.ExtraDamage * power, out _);
@@ -191,7 +194,7 @@ public abstract partial class SharedMartialArtsSystem
             ent,
             dir.Normalized() * args.ThrowRange * power,
             proto.ThrownSpeed,
-            behavior: proto.DropHeldItemsBehavior);
+            drop: proto.DropItems);
         ComboPopup(ent, target, proto.Name);
         ent.Comp.LastAttacks.Clear();
     }

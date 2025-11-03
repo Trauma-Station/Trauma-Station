@@ -49,6 +49,7 @@ public sealed class AdminNotesEui : BaseEui
         NoteWindow.SetTitlePlayer(s.NotedPlayerName);
         NoteControl.SetPlayerName(s.NotedPlayerName);
         NoteControl.SetNotes(s.Notes);
+        Logger.Debug($"Create {s.CanCreate} Delete {s.CanDelete} Edit {s.CanEdit}");
         NoteControl.SetPermissions(s.CanCreate, s.CanDelete, s.CanEdit);
     }
 

@@ -90,7 +90,7 @@
   - type: Woundable
     damageContainer: Inorganic
     integrity: 200
-    integrityCap: 400
+    integrityCap: 400 # Trauma - was 200
     thresholds:
       Minor: 180
       Moderate: 120
@@ -197,9 +197,7 @@
         id: eyes
   - type: Input
     context: "ghost"
-  - type: Tag
-    tags:
-      - Head
+  # <Shitmed>
   - type: Woundable
     boneEntity: BoneNeck
     integrity: 65
@@ -235,6 +233,7 @@
         ents: []
       Bone: !type:Container # Shitmed Change
         ents: []
+  # </Shitmed>
 
 - type: entity
   abstract: true

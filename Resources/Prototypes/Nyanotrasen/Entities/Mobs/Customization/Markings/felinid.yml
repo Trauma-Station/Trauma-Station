@@ -107,7 +107,7 @@
   id: FelinidTailBasic
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Felinid, Tajaran, Human] # Goobstation - Tajaran
+  speciesRestriction: [Felinid, Tajaran] # Trauma - humans are human
   sprites:
   - sprite: Nyanotrasen/Mobs/Customization/felinid_tails.rsi
     state: basic_tail_tip

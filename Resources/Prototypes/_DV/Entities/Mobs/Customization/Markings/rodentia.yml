@@ -31,7 +31,7 @@
   id: RodentiaTailDefault
   markingCategory: Tail
   bodyPart: Tail
-  speciesRestriction: [Rodentia, Human]
+  speciesRestriction: [Rodentia] # Trauma - humans are human
   coloring:
     default:
       type: !type:TattooColoring

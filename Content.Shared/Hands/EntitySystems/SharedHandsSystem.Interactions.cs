@@ -1,26 +1,8 @@
-// SPDX-FileCopyrightText: 2022 Jacob Tong <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Wrexbe (Josh) <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 wrexbe <wrexbe@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 themias <89101928+themias@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 vanx <61917534+Vaaankas@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using System.Linq;
+// <Trauma>
+using Content.Goobstation.Common.Hands;
 using Content.Shared._Goobstation.Wizard.ArcaneBarrage;
+// </Trauma>
+using System.Linq;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
@@ -146,27 +128,22 @@ public abstract partial class SharedHandsSystem : EntitySystem
             && TryGetActiveItem(session.AttachedEntity.Value, out var activeItem))
         {
             // Goobstation start
-            if (_net.IsServer && HasComp<DeleteOnDropAttemptComponent>(activeItem))
+            if (HasComp<DeleteOnDropAttemptComponent>(activeItem))
             {
-                QueueDel(activeItem);
+                PredictedQueueDel(activeItem);
                 return false;
             }
 
-            if (session is not { AttachedEntity: not null })
+            if (session?.AttachedEntity is not {} ent)
                 return false;
-
-            var ent = session.AttachedEntity.Value;
 
             if (TryGetActiveItem(ent, out var item) && TryComp<VirtualItemComponent>(item, out var virtComp))
             {
-                var userEv = new VirtualItemDropAttemptEvent(virtComp.BlockingEntity, ent, item.Value, false);
-                RaiseLocalEvent(ent, userEv);
-
-                var targEv = new VirtualItemDropAttemptEvent(virtComp.BlockingEntity, ent, item.Value, false);
-                RaiseLocalEvent(virtComp.BlockingEntity, targEv);
-
-                if (userEv.Cancelled || targEv.Cancelled)
-                    return false;
+                var virtEv = new VirtualItemDropAttemptEvent(virtComp.BlockingEntity, ent, item.Value, false);
+                RaiseLocalEvent(ent, ref virtEv);
+                if (virtEv.Cancelled) return false;
+                RaiseLocalEvent(virtComp.BlockingEntity, ref virtEv);
+                if (virtEv.Cancelled) return false;
             }
             var activeHand = GetActiveHand(session.AttachedEntity.Value);
             TryDrop(ent, activeHand!, coords); // Supress nullable, because if active hand has something, it exists.
@@ -242,7 +219,7 @@ public abstract partial class SharedHandsSystem : EntitySystem
         if (!CanDropHeld(uid, handName, checkActionBlocker))
             return false;
 
-        if (!CanPickupToHand(uid, entity.Value, handsComp.ActiveHandId, checkActionBlocker, handsComp))
+        if (!CanPickupToHand(uid, entity.Value, handsComp.ActiveHandId, checkActionBlocker: checkActionBlocker, handsComp: handsComp))
             return false;
 
         DoDrop(uid, handName, false, log: false);

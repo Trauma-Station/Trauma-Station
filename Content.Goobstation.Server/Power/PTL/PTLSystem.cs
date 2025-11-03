@@ -11,7 +11,6 @@
 using Content.Goobstation.Shared.Power.PTL;
 using Content.Server.Flash;
 using Content.Server.Popups;
-using Content.Server.Power.Components;
 using Content.Server.Power.SMES;
 using Content.Server.Stack;
 using Content.Server.Weapons.Ranged.Systems;
@@ -19,11 +18,14 @@ using Content.Shared.Emag.Components;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Power.Components;
 using Content.Shared.Radiation.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
+using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Systems;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
@@ -65,6 +67,7 @@ public sealed partial class PTLSystem : EntitySystem
         SubscribeLocalEvent<PTLComponent, AfterInteractUsingEvent>(OnAfterInteractUsing);
         SubscribeLocalEvent<PTLComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<PTLComponent, GotEmaggedEvent>(OnEmagged);
+        SubscribeLocalEvent<PTLComponent, GunShotEvent>(OnShot);
     }
 
     public override void Update(float frameTime)
@@ -118,20 +121,14 @@ public sealed partial class PTLSystem : EntitySystem
         if (chargeBefore <= 0)
             return;
 
-        // Configure consumption and damage based on planned energy use (capped).
-        if (TryComp<HitscanBatteryAmmoProviderComponent>(ent, out var hitscan))
-        {
-            var desiredFireCost = (float) Math.Min(chargeBefore, ent.Comp1.MaxEnergyPerShot);
-            if (desiredFireCost <= 0)
-                return;
+        var desiredFireCost = (float) Math.Min(chargeBefore, ent.Comp1.MaxEnergyPerShot);
+        if (desiredFireCost <= 0)
+            return;
 
-            hitscan.FireCost = desiredFireCost;
+        if (!TryComp<HitscanBatteryAmmoProviderComponent>(ent, out var provider))
+            return;
 
-            // Scale damage from the planned energy use (in MJ);
-            var plannedMJ = desiredFireCost / (float) megajoule;
-            var prot = _protMan.Index<HitscanPrototype>(hitscan.Prototype);
-            prot.Damage = ent.Comp1.BaseBeamDamage * plannedMJ * 2f;
-        }
+        provider.FireCost = desiredFireCost;
 
         if (TryComp<GunComponent>(ent, out var gun))
         {
@@ -246,5 +243,24 @@ public sealed partial class PTLSystem : EntitySystem
 
         component.ReversedFiring = true;
         args.Handled = true;
+    }
+
+    private void OnShot(Entity<PTLComponent> ent, ref GunShotEvent args)
+    {
+        if (!TryComp<HitscanBatteryAmmoProviderComponent>(ent, out var provider))
+            return;
+
+        var megajoule = 1e6;
+        var plannedMJ = provider.FireCost / (float) megajoule;
+        var modifier = 2f * plannedMJ;
+
+        // Configure consumption and damage based on planned energy use (capped).
+        foreach (var (ammo, _) in args.Ammo)
+        {
+            if (!TryComp<HitscanBasicDamageComponent>(ammo, out var hitscan))
+                continue;
+
+            hitscan.Damage *= modifier;
+        }
     }
 }

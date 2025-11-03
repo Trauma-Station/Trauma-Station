@@ -25,6 +25,10 @@
       reagents:
       - ReagentId: SpaceLube
         Quantity: 20
+  - type: Construction # Trauma
+    graph: LubeGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: SmokeGrenade
@@ -42,3 +46,6 @@
       reagents:
       - ReagentId: SpaceGlue
         Quantity: 20
+  - type: Construction
+    graph: GlueGrenadeGraph
+    node: start

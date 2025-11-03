@@ -9,6 +9,7 @@ using Content.Shared.Actions;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Content.Shared.Speech.Muting;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.PreAscension;
@@ -24,6 +25,7 @@ public sealed class ShadowlingGlareSystem : EntitySystem
     [Dependency] private readonly SharedShadowlingSystem _shadowling = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StatusEffectsSystem _effects = default!;
+    [Dependency] private readonly Content.Shared.StatusEffectNew.StatusEffectsSystem _effectsNew = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
@@ -49,14 +51,15 @@ public sealed class ShadowlingGlareSystem : EntitySystem
             return;
 
         var query = EntityQueryEnumerator<ShadowlingGlareComponent>();
+        var decay = TimeSpan.FromSeconds(frameTime);
         while (query.MoveNext(out _, out var glare))
         {
             if (glare.ActivateGlareTimer)
             {
                 // Time before the ability activates
-                glare.GlareTimeBeforeEffect -= frameTime;
+                glare.GlareTimeBeforeEffect -= decay;
 
-                if (glare.GlareTimeBeforeEffect <= 0)
+                if (glare.GlareTimeBeforeEffect <= TimeSpan.Zero)
                     ActivateStun(glare.GlareTarget, glare);
             }
         }
@@ -64,7 +67,7 @@ public sealed class ShadowlingGlareSystem : EntitySystem
 
     private void ActivateStun(EntityUid target, ShadowlingGlareComponent comp)
     {
-        _stun.TryStun(target, TimeSpan.FromSeconds(comp.GlareStunTime), false);
+        _stun.TryAddParalyzeDuration(target, comp.GlareStunTime);
         comp.ActivateGlareTimer = false;
     }
 
@@ -83,26 +86,23 @@ public sealed class ShadowlingGlareSystem : EntitySystem
         var distance = (_transform.GetWorldPosition(user) - targetCoords).Length();
         comp.GlareTarget = target;
 
-        // Glare mutes and slows down the target no matter what.
-        if (TryComp<StatusEffectsComponent>(target, out var statComp))
-        {
-            _effects.TryAddStatusEffect(target, "Muted", TimeSpan.FromSeconds(comp.MuteTime), false, statComp);
-            _stun.TrySlowdown(target, TimeSpan.FromSeconds(comp.SlowTime), false, 0.5f, 0.5f, statComp);
-        }
-
         if (distance <= comp.MinGlareDistance)
         {
             comp.GlareStunTime = comp.MaxGlareStunTime;
-            _stun.TryStun(target, TimeSpan.FromSeconds(comp.GlareStunTime), true);
+            _stun.TryUpdateParalyzeDuration(target, comp.GlareStunTime);
         }
         else
         {
             // Do I know what is going on here? No. But it works so... Thanks for listening!
-            comp.GlareStunTime = comp.MaxGlareStunTime * (1 - Math.Clamp(distance / comp.MaxGlareDistance, 0, 1));
+            comp.GlareStunTime *= (1 - Math.Clamp(distance / comp.MaxGlareDistance, 0, 1));
             comp.GlareTimeBeforeEffect = comp.MinGlareDelay + (comp.MaxGlareDelay - comp.MinGlareDelay) * Math.Clamp(distance / comp.MaxGlareDistance, 0, 1);
 
             comp.ActivateGlareTimer = true;
         }
+
+        // Glare mutes and slows down the target no matter what.
+        _effects.TryAddStatusEffect<MutedComponent>(target, "Muted", comp.MuteTime, true);
+        _effectsNew.TryUpdateStatusEffectDuration(target, comp.SlowdownStatusEffect, comp.SlowTime);
 
         var effectEnt = PredictedSpawnAtPosition(comp.EffectGlare, Transform(uid).Coordinates);
         _transform.SetParent(effectEnt, uid);

@@ -138,6 +138,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Hands; // Goob
 using Content.Server.Stack;
 using Content.Server.Stunnable;
 using Content.Shared._Shitmed.Body.Events; // Shitmed Change
@@ -315,14 +316,12 @@ namespace Content.Server.Hands.Systems
             // Goobstation start
             if (TryGetActiveItem(player, out var item) && TryComp<VirtualItemComponent>(item, out var virtComp))
             {
-                var userEv = new VirtualItemDropAttemptEvent(virtComp.BlockingEntity, player, item.Value, true);
-                RaiseLocalEvent(player, userEv);
+                var virtEv = new VirtualItemDropAttemptEvent(virtComp.BlockingEntity, player, item.Value, true);
+                RaiseLocalEvent(player, ref virtEv);
+                if (virtEv.Cancelled) return false;
 
-                var targEv = new VirtualItemDropAttemptEvent(virtComp.BlockingEntity, player, item.Value, true);
-                RaiseLocalEvent(virtComp.BlockingEntity, targEv);
-
-                if (userEv.Cancelled || targEv.Cancelled)
-                    return false;
+                RaiseLocalEvent(virtComp.BlockingEntity, ref virtEv);
+                if (virtEv.Cancelled) return false;
             }
             // Goobstation end
 
@@ -346,11 +345,9 @@ namespace Content.Server.Hands.Systems
 
             if (TryComp<VirtualItemComponent>(throwEnt, out var virt))
             {
-                var userEv = new VirtualItemThrownEvent(virt.BlockingEntity, player, throwEnt.Value, direction);
-                RaiseLocalEvent(player, userEv);
-
-                var targEv = new VirtualItemThrownEvent(virt.BlockingEntity, player, throwEnt.Value, direction);
-                RaiseLocalEvent(virt.BlockingEntity, targEv);
+                var virtEv = new VirtualItemThrownEvent(virt.BlockingEntity, player, throwEnt.Value, direction);
+                RaiseLocalEvent(player, ref virtEv);
+                RaiseLocalEvent(virt.BlockingEntity, ref virtEv);
             }
             // Goobstation end
 
@@ -399,9 +396,6 @@ namespace Content.Server.Hands.Systems
             // If the holder doesn't have a physics component, they ain't moving
             var holderVelocity = _physicsQuery.TryComp(entity, out var physics) ? physics.LinearVelocity : Vector2.Zero;
             var spreadMaxAngle = Angle.FromDegrees(DropHeldItemsSpread);
-
-            var fellEvent = new FellDownEvent(entity);
-            RaiseLocalEvent(entity, fellEvent);
 
             foreach (var hand in entity.Comp.Hands.Keys)
             {

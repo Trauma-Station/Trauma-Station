@@ -76,10 +76,14 @@ namespace Content.Shared.Lathe
         // Otherwise the material arbitrage test and/or LatheSystem.GetAllBaseRecipes needs to be updated
 
         /// <summary>
-        /// The lathe's construction queue
+        /// The lathe's construction queue.
         /// </summary>
+        /// <remarks>
+        /// This is a LinkedList to allow for constant time insertion/deletion (vs a List), and more efficient
+        /// moves (vs a Queue).
+        /// </remarks>
         [DataField]
-        public Queue<ProtoId<LatheRecipePrototype>> Queue = new();
+        public LinkedList<LatheRecipeBatch> Queue = new();
 
         /// <summary>
         /// The sound that plays when the lathe is producing an item, if any
@@ -129,6 +133,14 @@ namespace Content.Shared.Lathe
         [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
         public float MaterialUseMultiplier = 1;
         #endregion
+
+        // Goobstation change start
+        // <summary>
+        // Output to MaterialStorage instead of spawning it
+        // </summary>
+        [DataField, ViewVariables(VVAccess.ReadWrite)]
+        public bool OutputToStorage = false;
+        // Goobstation change end
     }
 
     public sealed class LatheGetRecipesEvent : EntityEventArgs
@@ -144,6 +156,21 @@ namespace Content.Shared.Lathe
         {
             (Lathe, Comp) = lathe;
             GetUnavailable = forced;
+        }
+    }
+
+    [Serializable]
+    public sealed partial class LatheRecipeBatch
+    {
+        public ProtoId<LatheRecipePrototype> Recipe;
+        public int ItemsPrinted;
+        public int ItemsRequested;
+
+        public LatheRecipeBatch(ProtoId<LatheRecipePrototype> recipe, int itemsPrinted, int itemsRequested)
+        {
+            Recipe = recipe;
+            ItemsPrinted = itemsPrinted;
+            ItemsRequested = itemsRequested;
         }
     }
 

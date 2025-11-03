@@ -5,13 +5,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Chat.Managers;
-using Content.Server.IdentityManagement;
 using Content.Goobstation.Common.Examine; // Goobstation Change
 using Content.Goobstation.Common.CCVar; // Goobstation Change
 using Content.Shared._Goobstation.Heretic.Components; // Goobstation Change
 using Content.Shared.Chat;
 using Content.Shared.Examine;
 using Content.Shared._White.Examine;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;

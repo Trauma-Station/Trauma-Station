@@ -14,7 +14,7 @@
 
 - type: entity
   id: PowerSink
-  parent: [BaseMachine, BaseSyndicateContraband]
+  parent: [BaseMachine, BaseSyndicateAnchoredContraband]
   name: power sink
   description: Drains immense amounts of electricity from the grid.
   components:
@@ -54,8 +54,8 @@
           acts: [ "Destruction" ]
     - type: PowerSink
     - type: Battery
-      maxCharge: 7500000
-      pricePerJoule: 0.0003
+      maxCharge: 250000000
+      pricePerJoule: 0.000009
     - type: ExaminableBattery
     - type: PowerConsumer
       voltage: High

@@ -106,7 +106,8 @@ public abstract class SharedBindSoulSystem : EntitySystem
         if (!Deleting(args.Container))
             QueueDel(args.Container);
 
-        var item = ent.Comp.Item;
+        if (ent.Comp.Item is not {} item)
+            return;
 
         if (!ItemExistsAndOnSamePlane(item, xform.MapUid, out var itemXform))
         {
@@ -114,27 +115,26 @@ public abstract class SharedBindSoulSystem : EntitySystem
                 return;
 
             // Item exists but on another plane, respawn it
-            if (!RespawnItem(item.Value, itemXform, xform))
+            if (!RespawnItem(item, itemXform, xform))
                 return;
         }
         else if ((itemXform.GridUid == null &&
-                 (!TryComp(item.Value, out PhysicsComponent? body) ||
-                  _gravity.IsWeightless(item.Value, body, itemXform)) ||
+                  _gravity.IsWeightless(item) &&
                  itemXform.GridUid != xform.GridUid) && // If it is in space or on another grid
-                 !RespawnItem(item.Value, itemXform, xform))
+                 !RespawnItem(item, itemXform, xform))
             return;
 
         // If it is somehow on another plane after respawning
         if (xform.MapUid == null || xform.MapUid != itemXform.MapUid)
             return;
 
-        var itemCoords = TransformSystem.GetMapCoordinates(item.Value, itemXform);
+        var itemCoords = TransformSystem.GetMapCoordinates(item, itemXform);
         var particle = Spawn(ParticlePrototype, coords);
         var direction = itemCoords.Position - coords.Position;
         _physics.SetLinearVelocity(particle, direction.Normalized());
-        EnsureComp<TimedDespawnComponent>(particle).Lifetime = 15f * (1 + ent.Comp.ResurrectionsCount);
+        EnsureComp<TimedDespawnComponent>(particle).Lifetime = 30f * (1 + ent.Comp.ResurrectionsCount);
         var homing = EnsureComp<HomingProjectileComponent>(particle);
-        homing.Target = item.Value;
+        homing.Target = item;
         Dirty(particle, homing);
     }
 

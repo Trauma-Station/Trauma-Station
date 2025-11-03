@@ -47,11 +47,11 @@
     solution: print
   - type: BadDrink
   - type: IgnoresFingerprints
-  - type: Drink
+  - type: Edible
+    edible: Drink
     delay: 3
     transferAmount: 0.5
     solution: print
-    examinable: false
   - type: Tag
     tags:
     - DNASolutionScannable

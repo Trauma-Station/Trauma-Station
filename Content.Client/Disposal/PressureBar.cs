@@ -1,8 +1,4 @@
-// SPDX-FileCopyrightText: 2022 Julian Giebel <juliangiebel@live.de>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
+using System.Numerics;
 using Content.Shared.Disposal;
 using Content.Shared.Disposal.Unit;
 using Robust.Client.Graphics;

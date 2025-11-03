@@ -7,8 +7,6 @@ using Content.Server.Actions;
 using Content.Server.Antag;
 //using Content.Server.Bible.Components;
 using Content.Server.Interaction;
-using Content.Server.Light.Components;
-using Content.Server.Light.EntitySystems;
 using Content.Server.Popups;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
@@ -23,6 +21,8 @@ using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Light.Components;
+using Content.Shared.Light.EntitySystems;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
@@ -60,7 +60,7 @@ public sealed class RogueAscendedSystem : EntitySystem
     // [Dependency] private readonly DamageableSystem _damageable = default!;
     // [Dependency] private readonly InteractionSystem _interact = default!;
     // [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    // [Dependency] private readonly PoweredLightSystem _poweredLight = default!;
+    // [Dependency] private readonly SharedPoweredLightSystem _poweredLight = default!;
     // [Dependency] private readonly SharedMindSystem _mind = default!;
     // [Dependency] private readonly IRobustRandom _random = default!;
     // [Dependency] private readonly IGameTiming _timing = default!;
@@ -240,7 +240,7 @@ public sealed class RogueAscendedSystem : EntitySystem
     //     _antag.SendBriefing(target, Loc.GetString("rogue-ascended-infection-briefing"), Color.FromHex("#4cabb3"), null);
     //     _damageable.TryChangeDamage(target, uid.Comp.InfectionHeal * -1);
     //
-    //     _stun.TryStun(target, uid.Comp.StunTime, false);
+    //     _stun.TryAddParalyzeDuration(target, uid.Comp.StunTime);
     //     _audio.PlayPvs(uid.Comp.InfectionSfx, target);
     //
     //     if (_mind.TryGetObjectiveComp<RogueInfectionConditionComponent>(uid, out var obj))

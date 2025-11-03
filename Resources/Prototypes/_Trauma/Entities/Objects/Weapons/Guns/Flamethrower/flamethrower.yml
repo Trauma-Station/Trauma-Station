@@ -1,0 +1,69 @@
+- type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: WeaponFlamethrower
+  name: flamethrower
+  description: A flamethrower, draws its fuel from the backpack tank.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Flamethrower/flamethrower.rsi
+    state: icon
+  - type: Item
+    size: Ginormous
+  - type: Wieldable
+  - type: GunRequiresWield
+  - type: Gun
+    minAngle: 0
+    maxAngle: 0
+    fireRate: 15
+    burstFireRate: 15
+    burstCooldown: .5
+    shotsPerBurst: 5
+    projectileSpeed: 20
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_Trauma/Revs/flamethrower.ogg
+  - type: AmmoCounter
+  - type: StaticPrice
+    price: 500
+  - type: UseDelay
+    delay: 1
+  - type: ClothingSlotAmmoProvider
+    targetSlot: BACK
+    providerWhitelist:
+      tags:
+      - FlamethrowerBackpack
+  - type: Tag
+    tags:
+    - FlamethrowerGun
+
+- type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: FuelTankFlamethrower
+  name: flamethrower fuel tank
+  description: A fuel tank for the flamethrower. Loaded with napalm that sticks to your newly-charred corpses as it burns.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Flamethrower/fuel.rsi
+    state: icon
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,1
+  - type: BasicEntityAmmoProvider
+    proto: FlameThrowerBullet
+    capacity: 100
+    count: 100
+  - type: Tag
+    tags:
+    - FlamethrowerTank
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 300
+  - type: AmmoCounter
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevFlamethrowerAmmo
+    node: FlamethrowerAmmo

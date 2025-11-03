@@ -20,14 +20,14 @@ namespace Content.Client._EinsteinEngines.Language;
 [GenerateTypedNameReferences]
 public sealed partial class LanguageMenuWindow : DefaultWindow
 {
-    private readonly LanguageSystem _clientLanguageSystem;
+    private readonly LanguageSystem _language;
     private readonly List<EntryState> _entries = new();
 
     public LanguageMenuWindow()
     {
         RobustXamlLoader.Load(this);
-        _clientLanguageSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<LanguageSystem>();
-        _clientLanguageSystem.OnLanguagesChanged += UpdateState;
+        _language = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<LanguageSystem>();
+        _language.OnLanguagesChanged += UpdateState;
     }
 
     protected override void Dispose(bool disposing)
@@ -35,7 +35,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
         base.Dispose(disposing);
 
         if (disposing)
-            _clientLanguageSystem.OnLanguagesChanged -= UpdateState;
+            _language.OnLanguagesChanged -= UpdateState;
     }
 
     protected override void Opened()
@@ -45,7 +45,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
 
     private void UpdateState()
     {
-        var languageSpeaker = _clientLanguageSystem.GetLocalSpeaker();
+        var languageSpeaker = _language.GetLocalSpeaker();
         if (languageSpeaker == null)
             return;
 
@@ -75,7 +75,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
 
     private void AddLanguageEntry(ProtoId<LanguagePrototype> language)
     {
-        var proto = _clientLanguageSystem.GetLanguagePrototype(language);
+        var proto = _language.GetLanguagePrototype(language);
         var state = new EntryState { Language = language };
 
         var container = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
@@ -137,11 +137,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
 
     private void OnLanguageChosen(ProtoId<LanguagePrototype> id)
     {
-        _clientLanguageSystem.RequestSetLanguage(id);
-
-        // Predict the change
-        if (_clientLanguageSystem.GetLocalSpeaker()?.SpokenLanguages is {} languages)
-            UpdateState(id, languages);
+        _language.RequestSetLanguage(id);
     }
 
     private struct EntryState

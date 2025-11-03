@@ -14,6 +14,7 @@ using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._Goobstation.Wizard.Mutate;
 using Content.Shared.Chat;
 using Content.Shared.Humanoid;
+using Content.Shared.Sprite;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Server.Console.Commands;
 using Robust.Server.GameObjects;
@@ -34,6 +35,7 @@ public sealed class HulkSystem : SharedHulkSystem
     [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly SharedScaleVisualsSystem _scale = default!;
 
     public override void Initialize()
     {
@@ -144,19 +146,12 @@ public sealed class HulkSystem : SharedHulkSystem
 
     private void Scale(EntityUid uid, float scale)
     {
-        EnsureComp<ScaleVisualsComponent>(uid);
-        var ev = new ScaleCommand.ScaleEntityEvent();
-        RaiseLocalEvent(uid, ref ev);
-
-        var appearanceComponent = EnsureComp<AppearanceComponent>(uid);
-        if (!_appearance.TryGetData<Vector2>(uid, ScaleVisuals.Scale, out var oldScale, appearanceComponent))
-            oldScale = TryComp(uid, out ScaleDataComponent? scaleData) ? scaleData.Scale : Vector2.One;
-
-        _appearance.SetData(uid, ScaleVisuals.Scale, oldScale * scale, appearanceComponent);
+        _scale.SetSpriteScale(uid, _scale.GetSpriteScale(uid) * scale);
 
         if (!TryComp(uid, out FixturesComponent? manager))
             return;
 
+        // fat
         foreach (var (id, fixture) in manager.Fixtures)
         {
             switch (fixture.Shape)

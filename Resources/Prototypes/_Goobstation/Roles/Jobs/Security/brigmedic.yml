@@ -11,10 +11,10 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: Medical
-    time: 36000 # 10 hrs
+    time: 10h
   - !type:DepartmentTimeRequirement
     department: Security
-    time: 36000 # 10 hrs
+    time: 10h
   startingGear: BrigmedicGear
   icon: "JobIconBrigmedic"
   supervisors: job-supervisors-hos

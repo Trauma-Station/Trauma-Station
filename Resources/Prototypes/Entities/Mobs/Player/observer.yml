@@ -217,7 +217,7 @@
   components:
   - type: Spectral
   - type: Tag
-    tags:
+    tags: # BAD: Intentional removal of inherited tag
     - AllowGhostShownByEvent
   # <Goobstation>
   - type: UserInterface
@@ -231,22 +231,6 @@
   - type: RadarConsole
     followEntity: true
   # </Goobstation>
-
-
-# Goobstation
-- type: entity
-  id: ActionGhostShowRadar
-  name: Mass Scanner Interface
-  description: View a Mass Scanner Interface.
-  components:
-  - type: Action
-    icon: { sprite: Interface/Actions/actions_ai.rsi, state: mass_scanner }
-    iconOn: Interface/Actions/actions_ai.rsi/mass_scanner.png
-    keywords: [ "AI", "console", "interface" ]
-    priority: 10
-    checkCanInteract: false
-  - type: InstantAction
-    event: !type:ToggleIntrinsicUIEvent { key: enum.RadarConsoleUiKey.Key }
 
 - type: entity
   parent: BaseMentalAction

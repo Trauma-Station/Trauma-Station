@@ -147,6 +147,7 @@
         type: SurgeryBui
   - type: Bloodstream
     bloodMaxVolume: 650
+    bleedReductionAmount: 5 #goob
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
@@ -242,8 +243,6 @@
       types: {}
   - type: StatusEffects # Overwriting basesimplemob to remove flash, getting flashed as dragon just feelsbad
     allowed:
-    - SlowedDown
-    - Stutter
     - Electrocution
     - TemporaryBlindness
     - Pacified
@@ -298,6 +297,7 @@
     tags:
     - CannotSuicide
     - DoorBumpOpener
+    - StunImmune
   # Goobstation - Collective mind
   - type: CollectiveMind
     defaultChannel: Dragonmind

@@ -139,6 +139,8 @@
   - type: Multishot
     missChance: 0
     spreadAddition: 10
+  - type: MeleeWeapon
+    resetOnHandSelected: false
 
 - type: entity
   name: plasma rifle
@@ -433,15 +435,20 @@
     isEmaggable: true
   - type: StaticPrice
     price: 750
-  - type: TriggerOnVoiceIdLocked
-    keyPhrase: "lawbringer-phrase"
+  - type: TriggerOnVoice
+    showVerbs: false
+    keyPhrase: "I AM THE LAW"
     listenRange: 1
-    holderOnly: true
+  - type: AccessTriggerCondition # need hos access to explode it
+  - type: HoldingTriggerCondition # need to be holding it to explode it so chuddies cant run up to you and boom
   - type: AccessReader
     access: [['HeadOfSecurity']]
   - type: ActiveListener
   - type: ExplodeOnTrigger
-  - type: DropOnTrigger
+  - type: EntityEffectOnTrigger
+    targetUser: true
+    effects:
+    - !type:DropItems
   - type: Explosive
     explosionType: Default
     maxIntensity: 2

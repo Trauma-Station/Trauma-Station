@@ -28,7 +28,12 @@
       state: folder-white
   - type: TargetObjective
     title: objective-condition-other-head-alive-title
-  - type: PickRandomHead
+  - type: PickRandomPerson
+    filters:
+    - !type:BodyMindFilter
+      whitelist:
+        components:
+        - CommandStaff
 
 - type: entity
   id: JobObjectiveRule

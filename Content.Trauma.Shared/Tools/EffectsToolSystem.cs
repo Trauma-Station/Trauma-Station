@@ -5,23 +5,28 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using Content.Trauma.Shared.EntityEffects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Tools;
 
 public sealed class EffectsToolSystem : EntitySystem
 {
+    [Dependency] private readonly EffectDataSystem _data = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+
+    private EntityQuery<EffectsToolComponent> _query;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _query = GetEntityQuery<EffectsToolComponent>();
 
         SubscribeLocalEvent<EffectsToolComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<EffectsToolComponent, GetVerbsEvent<UtilityVerb>>(OnGetVerbs);
@@ -116,15 +121,15 @@ public sealed class EffectsToolSystem : EntitySystem
         if (!CanUse(ent, target, user))
             return false;
 
-        // do the thing
-        var args = new EntityEffectToolArgs(target, user, ent, EntityManager);
-        foreach (var effect in ent.Comp.Effects)
-        {
-            if (effect.ShouldApply(args, _random))
-                effect.Effect(args);
-        }
+        // do the thing, effects are expected to call MarkUsed
+        ent.Comp.Used = false;
+        _data.SetUser(target, user);
+        _data.SetTool(target, ent);
+        _effects.ApplyEffects(target, ent.Comp.Effects);
+        _data.ClearUser(target);
+        _data.ClearTool(target);
 
-        if (!args.Handled)
+        if (!ent.Comp.Used)
             return false;
 
         // use resources etc
@@ -143,6 +148,19 @@ public sealed class EffectsToolSystem : EntitySystem
             user);
         _audio.PlayPredicted(ent.Comp.Sound, target, user);
         return true;
+    }
+
+    /// <summary>
+    /// Called by an effect to mark that the tool was used.
+    /// </summary>
+    /// <remarks>
+    /// Only needed because "ECS" entity effects are cruel and don't let you handle the args anymore.
+    /// TheShuEd my goat.
+    /// </remarks>
+    public void MarkUsed(Entity<EffectsToolComponent?> ent)
+    {
+        if (_query.Resolve(ent, ref ent.Comp))
+            ent.Comp.Used = true;
     }
 }
 

@@ -12,13 +12,13 @@
 
 - type: species
   id: Tajaran
-  name: species-name-tajaran
-  roundStart: true
+  name: MobTajaranMobTajaran
+  roundStart: false # Trauma
   prototype: MobTajaran
   sprites: MobTajaranSprites
   markingLimits: MobTajaranMarkingLimits
   dollPrototype: MobTajaranDummy
-  skinColoration: AnimalFur
+  skinColoration: TintedHues
   maleFirstNames: NamesTajaranFirst
   femaleFirstNames: NamesTajaranFirst
   lastNames: NamesTajaranLast

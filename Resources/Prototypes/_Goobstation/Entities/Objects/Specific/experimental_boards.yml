@@ -4,14 +4,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: BaseSiliconLawboard
   id: ExperimentalCircuitBoard
-  parent: BaseElectronics
   name: experimental law board
   description: An electronics board containing experimental lawset. When installed, will give some research points after time has passed.
   components:
-  - type: Sprite
-    sprite: Objects/Misc/module.rsi
-    state: std_mod
   - type: SiliconLawProvider
     laws: Crewsimov # Placeholder because lazy.
   - type: ExperimentalLawProvider

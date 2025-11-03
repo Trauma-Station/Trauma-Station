@@ -1,33 +1,11 @@
-// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2021 mirrorcult <notzombiedude@gmail.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 blueDev2 <89804215+blueDev2@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Content.Goobstation.Common.Chemistry; // Goob
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Body.Components;
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Hypospray.Events;
 using Content.Shared.Database;
+using Content.Shared.DoAfter;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Forensics;
 using Content.Shared.IdentityManagement;
@@ -39,8 +17,7 @@ using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
-using Content.Shared.Administration.Logs;
-using Content.Shared.Chemistry.EntitySystems.Hypospray;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
@@ -52,6 +29,7 @@ public sealed class HypospraySystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainers = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
     public override void Initialize()
     {
@@ -61,6 +39,7 @@ public sealed class HypospraySystem : EntitySystem
         SubscribeLocalEvent<HyposprayComponent, MeleeHitEvent>(OnAttack);
         SubscribeLocalEvent<HyposprayComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<HyposprayComponent, GetVerbsEvent<AlternativeVerb>>(AddToggleModeVerb);
+        SubscribeLocalEvent<HyposprayComponent, HyposprayDrawDoAfterEvent>(OnDrawDoAfter);
     }
 
     #region Ref events
@@ -88,6 +67,20 @@ public sealed class HypospraySystem : EntitySystem
         TryDoInject(entity, args.HitEntities[0], args.User);
     }
 
+    private void OnDrawDoAfter(Entity<HyposprayComponent> entity, ref HyposprayDrawDoAfterEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (entity.Comp.CanContainerDraw
+            && args.Target.HasValue
+            && !EligibleEntity(args.Target.Value, entity)
+            && _solutionContainers.TryGetDrawableSolution(args.Target.Value, out var drawableSolution, out _))
+        {
+            TryDraw(entity, args.Target.Value, drawableSolution.Value, args.User);
+        }
+    }
+
     #endregion
 
     #region Draw/Inject
@@ -98,7 +91,7 @@ public sealed class HypospraySystem : EntitySystem
             && !EligibleEntity(target, entity)
             && _solutionContainers.TryGetDrawableSolution(target, out var drawableSolution, out _))
         {
-            return TryDraw(entity, target, drawableSolution.Value, user);
+            return TryStartDraw(entity, target, drawableSolution.Value, user);
         }
 
         return TryDoInject(entity, target, user);
@@ -169,7 +162,7 @@ public sealed class HypospraySystem : EntitySystem
             return false;
         }
 
-        _popup.PopupClient(Loc.GetString(msgFormat ?? "hypospray-component-inject-other-message", ("other", target)), target, user);
+        _popup.PopupClient(Loc.GetString(msgFormat ?? "hypospray-component-inject-other-message", ("other", Identity.Entity(target, EntityManager))), target, user);
 
         if (target != user)
         {
@@ -205,8 +198,10 @@ public sealed class HypospraySystem : EntitySystem
         var ev = new TransferDnaEvent { Donor = target, Recipient = uid };
         RaiseLocalEvent(target, ref ev);
 
-        var afterinjectev = new AfterHyposprayInjectsEvent { User = user, Target = target }; //Goobedit
+        // <Goob>
+        var afterinjectev = new AfterHyposprayInjectsEvent(user, target);
         RaiseLocalEvent(uid, ref afterinjectev);
+        // </Goob>
 
         // same LogType as syringes...
         _adminLogger.Add(LogType.ForceFeed, $"{ToPrettyString(user):user} injected {ToPrettyString(target):target} with a solution {SharedSolutionContainerSystem.ToPrettyString(removedSolution):removedSolution} using a {ToPrettyString(uid):using}");
@@ -214,17 +209,37 @@ public sealed class HypospraySystem : EntitySystem
         return true;
     }
 
-    private bool TryDraw(Entity<HyposprayComponent> entity, EntityUid target, Entity<SolutionComponent> targetSolution, EntityUid user)
+    public bool TryStartDraw(Entity<HyposprayComponent> entity, EntityUid target, Entity<SolutionComponent> targetSolution, EntityUid user)
     {
-        if (!_solutionContainers.TryGetSolution(entity.Owner, entity.Comp.SolutionName, out var soln,
-                out var solution) || solution.AvailableVolume == 0)
+        if (!_solutionContainers.TryGetSolution(entity.Owner, entity.Comp.SolutionName, out var soln))
+            return false;
+
+        if (!TryGetDrawAmount(entity, target, targetSolution, user,  soln.Value, out _))
+            return false;
+
+        var doAfterArgs = new DoAfterArgs(EntityManager, user, entity.Comp.DrawTime, new HyposprayDrawDoAfterEvent(), entity, target)
+        {
+            BreakOnDamage = true,
+            BreakOnMove = true,
+            NeedHand = true,
+            Hidden = true,
+        };
+
+        return _doAfter.TryStartDoAfter(doAfterArgs, out _);
+    }
+
+    private bool TryGetDrawAmount(Entity<HyposprayComponent> entity, EntityUid target, Entity<SolutionComponent> targetSolution, EntityUid user, Entity<SolutionComponent> solutionEntity, [NotNullWhen(true)] out FixedPoint2? amount)
+    {
+        amount = null;
+
+        if (solutionEntity.Comp.Solution.AvailableVolume == 0)
         {
             return false;
         }
 
         // Get transfer amount. May be smaller than _transferAmount if not enough room, also make sure there's room in the injector
         var realTransferAmount = FixedPoint2.Min(entity.Comp.TransferAmount, targetSolution.Comp.Solution.Volume,
-            solution.AvailableVolume);
+            solutionEntity.Comp.Solution.AvailableVolume);
 
         if (realTransferAmount <= 0)
         {
@@ -235,7 +250,19 @@ public sealed class HypospraySystem : EntitySystem
             return false;
         }
 
-        var removedSolution = _solutionContainers.Draw(target, targetSolution, realTransferAmount);
+        amount = realTransferAmount;
+        return true;
+    }
+
+    private bool TryDraw(Entity<HyposprayComponent> entity, EntityUid target, Entity<SolutionComponent> targetSolution, EntityUid user)
+    {
+        if (!_solutionContainers.TryGetSolution(entity.Owner, entity.Comp.SolutionName, out var soln))
+            return false;
+
+        if (!TryGetDrawAmount(entity, target, targetSolution, user, soln.Value, out var amount))
+            return false;
+
+        var removedSolution = _solutionContainers.Draw(target, targetSolution, amount.Value);
 
         if (!_solutionContainers.TryAddSolution(soln.Value, removedSolution))
         {
@@ -303,3 +330,6 @@ public sealed class HypospraySystem : EntitySystem
 
     #endregion
 }
+
+[Serializable, NetSerializable]
+public sealed partial class HyposprayDrawDoAfterEvent : SimpleDoAfterEvent {}

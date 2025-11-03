@@ -1,174 +1,3 @@
-# SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-# SPDX-FileCopyrightText: 2021 Elijahrane <60792108+Elijahrane@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Galactic Chimp <GalacticChimpanzee@gmail.com>
-# SPDX-FileCopyrightText: 2021 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2021 Swept <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2021 SweptWasTaken <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2021 Ygg01 <y.laughing.man.y@gmail.com>
-# SPDX-FileCopyrightText: 2022 ElectroJr <leonsfriedrich@gmail.com>
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Jacob Tong <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Jessica M <jessica@jessicamaybe.com>
-# SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 Michael Phillips <1194692+MeltedPixel@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 T-Stalker <43253663+DogZeroX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 T-Stalker <le0nel_1van@hotmail.com>
-# SPDX-FileCopyrightText: 2022 TaralGit <76408146+TaralGit@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Willhelm53 <97707302+Willhelm53@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 and_a <and_a@DESKTOP-RJENGIR>
-# SPDX-FileCopyrightText: 2022 hubismal <47284081+hubismal@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 612 <125925684+612git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Doru991 <75124791+Doru991@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 DoubleRiceEddiedd <149714181+DoubleRiceEddiedd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Feluk6174 <77207907+Feluk6174@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Fluffiest Floofers <thebluewulf@gmail.com>
-# SPDX-FileCopyrightText: 2023 Kevin Zheng <kevinz5000@gmail.com>
-# SPDX-FileCopyrightText: 2023 LankLTE <135308300+LankLTE@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Puro <103608145+PuroSlavKing@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Stealthbomber16 <100171035+Stealthbomber16@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Vladislav Kadira <130583174+FillerVK@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 ZeroDayDaemon <60460608+ZeroDayDaemon@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 brainfood1183 <113240905+brainfood1183@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 crazybrain23 <44417085+crazybrain23@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 drteaspoon420 <87363733+drteaspoon420@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 kerisargit <108146620+kerisargit@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 lapatison <100279397+lapatison@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 12rabbits <53499656+12rabbits@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Adeinitas <147965189+adeinitas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Adrian16199 <144424013+Adrian16199@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Alzore <140123969+Blackern5000@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 ArtisticRoomba <145879011+ArtisticRoomba@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Brandon Hu <103440971+Brandon-Huu@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 CaasGit <87243814+CaasGit@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Danger Revolution! <142105406+DangerRevolution@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 DieselMohawk <gavin.drinka@gmail.com>
-# SPDX-FileCopyrightText: 2024 Dimastra <65184747+Dimastra@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Dimastra <dimastra@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 EdenTheLiznerd <138748328+EdenTheLiznerd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 EmoGarbage404 <retron404@gmail.com>
-# SPDX-FileCopyrightText: 2024 Eoin Mcloughlin <helloworld@eoinrul.es>
-# SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Gyrandola <pasta.frollagg@gmail.com>
-# SPDX-FileCopyrightText: 2024 Hrosts <35345601+Hrosts@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ian <ignaz.k@live.de>
-# SPDX-FileCopyrightText: 2024 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 JIPDawg <51352440+JIPDawg@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 JIPDawg <JIPDawg93@gmail.com>
-# SPDX-FileCopyrightText: 2024 Jeff <velcroboy333@hotmail.com>
-# SPDX-FileCopyrightText: 2024 Joel Zimmerman <JoelZimmerman@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 JustCone <141039037+JustCone14@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 K-Dynamic <20566341+K-Dynamic@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Killerqu00 <47712032+Killerqu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ko4ergaPunk <62609550+Ko4ergaPunk@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Kukutis96513 <146854220+Kukutis96513@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Lye <128915833+Lyroth001@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 MerrytheManokit <167581110+MerrytheManokit@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-# SPDX-FileCopyrightText: 2024 MisterMecky <mrmecky@hotmail.com>
-# SPDX-FileCopyrightText: 2024 Moomoobeef <62638182+Moomoobeef@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 MureixloI <132683811+MureixloI@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 NakataRin <45946146+NakataRin@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 OrangeMoronage9622 <whyteterry0092@gmail.com>
-# SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-# SPDX-FileCopyrightText: 2024 Partmedia <kevinz5000@gmail.com>
-# SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 PopGamer46 <yt1popgamer@gmail.com>
-# SPDX-FileCopyrightText: 2024 Preston Smith <92108534+thetolbean@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Psychpsyo <60073468+Psychpsyo@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 PursuitInAshes <pursuitinashes@gmail.com>
-# SPDX-FileCopyrightText: 2024 QueerNB <176353696+QueerNB@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Repo <47093363+Titian3@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 RiceMar1244 <138547931+RiceMar1244@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 RumiTiger <154005209+RumiTiger@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Saphire Lattice <lattice@saphi.re>
-# SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Simon <63975668+Simyon264@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 SpaceLizard <the.justice.league.of.canada@gmail.com>
-# SPDX-FileCopyrightText: 2024 Spessmann <156740760+Spessmann@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Stalen <33173619+stalengd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 TakoDragon <69509841+BackeTako@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-# SPDX-FileCopyrightText: 2024 Thomas <87614336+Aeshus@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Timemaster99 <57200767+Timemaster99@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 TsjipTsjip <19798667+TsjipTsjip@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ubaser <134914314+UbaserB@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Unisol <1929445+Unisol@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Unkn0wn_Gh0st <shadowstalkermll@gmail.com>
-# SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
-# SPDX-FileCopyrightText: 2024 Vasilis <vasilis@pikachu.systems>
-# SPDX-FileCopyrightText: 2024 Velcroboy <107660393+IamVelcroboy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Vigers Ray <60344369+VigersRay@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 blueDev2 <89804215+blueDev2@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 coolboy911 <85909253+coolboy911@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 deathride58 <deathride58@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-# SPDX-FileCopyrightText: 2024 dffdff2423 <dffdff2423@gmail.com>
-# SPDX-FileCopyrightText: 2024 eoineoineoin <github@eoinrul.es>
-# SPDX-FileCopyrightText: 2024 foboscheshir <156405958+foboscheshir@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 lunarcomets <140772713+lunarcomets@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 osjarw <oskariwjarvinen@gmail.com>
-# SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-# SPDX-FileCopyrightText: 2024 potato1234_x <79580518+potato1234x@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 ravage <142820619+ravage123321@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 saintmuntzer <47153094+saintmuntzer@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 shamp <140359015+shampunj@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 stellar-novas <stellar_novas@riseup.net>
-# SPDX-FileCopyrightText: 2024 strO0pwafel <153459934+strO0pwafel@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 stroopwafel <j.o.luijkx@student.tudelft.nl>
-# SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 to4no_fix <156101927+chavonadelal@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 voidnull000 <18663194+voidnull000@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 wafehling <wafehling@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Boaz1111 <149967078+Boaz1111@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 James <40279265+ViceEmargo@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-# SPDX-FileCopyrightText: 2025 RatherUncreative <RatherUncreativeName@proton.me>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2025 mubururu_ <139181059+muburu@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 # When adding new food also add to random spawner located in Resources\Prototypes\Entities\Markers\Spawners\Random\Food_Drinks\food_produce.yml
 # For produce that can't be immediately eaten
 
@@ -180,14 +9,23 @@
   - type: SolutionContainerManager
   - type: Sprite
     state: produce
-  # let cows eat raw produce like wheat and oats
-  - type: Food
-    requiredStomachs: 2
   - type: Produce
   - type: PotencyVisuals
   - type: Appearance
   - type: Extractable
     grindableSolutionName: food
+
+- type: entity
+  parent: ProduceBase
+  id: ProduceBaseRuminant
+  abstract: true
+  components:
+  # let cows eat raw produce like wheat and oats
+  - type: Edible
+    requiresSpecialDigestion: true
+  - type: Tag
+    tags:
+    - Ruminant
 
 # For produce that can be immediately eaten
 
@@ -211,7 +49,7 @@
   name: wheat bushel
   description: Sigh... wheat... a-grain?
   id: WheatBushel
-  parent: ProduceBase
+  parent: ProduceBaseRuminant
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/wheat.rsi
@@ -228,12 +66,13 @@
   - type: Tag
     tags:
     - Wheat
+    - Ruminant
 
 - type: entity
   name: meatwheat bushel
   description: Some blood-drenched wheat stalks. You can crush them into what passes for meat if you squint hard enough.
   id: MeatwheatBushel
-  parent: ProduceBase
+  parent: ProduceBaseRuminant
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/meatwheat.rsi
@@ -257,7 +96,7 @@
   name: oat bushel
   description: Eat oats, do squats.
   id: OatBushel
-  parent: ProduceBase
+  parent: ProduceBaseRuminant
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/oat.rsi
@@ -281,7 +120,7 @@
   name: sugarcane
   description: Sickly sweet.
   id: Sugarcane
-  parent: ProduceBase
+  parent: ProduceBaseRuminant
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/sugarcane.rsi
@@ -347,15 +186,7 @@
   - type: Tag
     tags:
     - Vegetable
-  - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/laughin_pea.rsi
-      state: produce
-    entries:
-      burger:
-        name: food-sequence-content-pea
-      taco:
-        name: food-sequence-content-pea
+    - Ruminant
 
 - type: entity
   name: tower-cap log
@@ -401,7 +232,7 @@
   name: nettle
   description: Stingy little prick.
   id: Nettle
-  parent: ProduceBase
+  parent: ProduceBaseRuminant
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/nettle.rsi
@@ -422,7 +253,7 @@
   - type: Produce
     seedId: nettle
   - type: MeleeChemicalInjector
-    transferAmount: 3 #To OD someone you would need 2 nettles and about 6-7 hits, the DOT is likely to crit them if they are running away with almost no health
+    transferAmount: 3 #TODO someone you would need 2 nettles and about 6-7 hits, the DOT is likely to crit them if they are running away with almost no health
     solution: food
     pierceArmor: false
   - type: Extractable
@@ -503,7 +334,7 @@
   - type: FlavorProfile
     flavors:
       - banana
-  - type: Food
+  - type: Edible
     trash:
     - TrashBananaPeel
   - type: SolutionContainerManager
@@ -531,15 +362,10 @@
     - Fruit
     - Banana
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/banana.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-banana
-      taco:
-        name: food-sequence-content-banana
-  - type: Healing #Goobstation - Clowncar
+      Burger: Banana
+      Taco: Banana
+  - type: Healing # Goob - Bananas heal clown car
     damageContainers:
       - ClowncarDamageContainer
     damage:
@@ -563,7 +389,7 @@
     flavors:
       - banana
       - nothing
-  - type: Food
+  - type: Edible
     trash:
     - TrashMimanaPeel
   - type: SolutionContainerManager
@@ -592,14 +418,9 @@
     tags:
     - Fruit
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/mimana.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-mimana
-      taco:
-        name: food-sequence-content-mimana
+      Burger: Mimana
+      Taco: Mimana
 
 - type: entity
   name: banana peel
@@ -643,6 +464,8 @@
     - Recyclable
     - Trash
     - BananaPeel
+    - Ruminant
+
     - WhitelistChameleon
     - HamsterWearable
   - type: SolutionContainerManager
@@ -655,11 +478,11 @@
   - type: Extractable
     grindableSolutionName: food
   - type: SpaceGarbage
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: Clothing
     sprite: Objects/Specific/Hydroponics/banana.rsi
-    equippedState: peel-equipped-HELMET
+    equippedPrefix: peel
     slots:
     - HEAD
     quickEquip: false
@@ -671,7 +494,7 @@
   components:
   - type: Clothing
     sprite: Objects/Specific/Hydroponics/banana.rsi
-    equippedState: baked-peel-equipped-HELMET
+    equippedPrefix: baked-peel
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/banana.rsi
     state: baked-peel
@@ -702,7 +525,7 @@
     heldPrefix: peel
   - type: Clothing
     sprite: Objects/Specific/Hydroponics/mimana.rsi
-    equippedState: equipped-HELMET
+    equippedPrefix: peel
   - type: Slippery
     slipSound:
       path: /Audio/Effects/slip.ogg
@@ -715,15 +538,15 @@
   id: TrashBananiumPeel
   components:
   - type: Sprite
-    sprite: Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     state: peel
   - type: Item
-    sprite: Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     heldPrefix: peel
   - type: Slippery
   - type: Clothing
-    sprite: Objects/Materials/materials.rsi
-    equippedState: peel-equipped-HELMET
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
+    equippedPrefix: peel
 
 - type: entity
   name: carrot
@@ -763,14 +586,9 @@
       - ReagentId: Oculine
         Quantity: 2
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/carrot.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-burger-content-carrot
-      taco:
-        name: food-sequence-content-carrot
+      Burger: CarrotBurger
+      Taco: Carrot
 
 - type: entity
   name: cabbage
@@ -800,14 +618,9 @@
     tags:
     - Vegetable
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/cabbage.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-burger-content-cabbage
-      taco:
-        name: food-sequence-content-cabbage
+      Burger: CabbageBurger
+      Taco: Cabbage
 
 - type: entity
   name: garlic
@@ -837,14 +650,9 @@
     tags:
     - Vegetable
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/garlic.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-burger-content-garlic
-      taco:
-        name: food-sequence-content-garlic
+      Burger: GarlicBurger
+      Taco: Garlic
 
 - type: entity
   name: lemon
@@ -880,14 +688,9 @@
     - Lemon
     - Fruit
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/lemon.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-lemon
-      taco:
-        name: food-sequence-content-lemon
+      Burger: Lemon
+      Taco: Lemon
 
 - type: entity
   name: lemoon
@@ -922,14 +725,9 @@
     tags:
     - Fruit
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/lemoon.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-lemoon
-      taco:
-        name: food-sequence-content-lemoon
+      Burger: Lemoon
+      Taco: Lemoon
 
 - type: entity
   name: lime
@@ -956,14 +754,9 @@
     - Lime
     - Fruit
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/lime.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-lime
-      taco:
-        name: food-sequence-content-lime
+      Burger: Lime
+      Taco: Lime
 
 - type: entity
   name: orange
@@ -989,14 +782,9 @@
     tags:
     - Fruit
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/orange.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-orange
-      taco:
-        name: food-sequence-content-orange
+      Burger: Orange
+      Taco: Orange
 
 - type: entity
   name: extradimensional orange
@@ -1036,6 +824,10 @@
   - type: Tag
     tags:
     - Fruit
+  - type: FoodSequenceElement
+    entries:
+      Burger: ExtradimensionalOrangeBurger
+      Taco: ExtradimensionalOrange
 
 - type: entity
   name: pineapple
@@ -1109,14 +901,9 @@
     - Potato
     - Vegetable
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/potato.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-potato
-      taco:
-        name: food-sequence-content-potato
+      Burger: Potato
+      Taco: Potato
 
 
 - type: entity
@@ -1176,19 +963,10 @@
     - Fruit
     - Vegetable
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/tomato.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-tomato
-      taco:
-        name: food-sequence-content-tomato
-      skewer:
-        name: food-sequence-content-tomato
-        sprite:
-          sprite: Objects/Consumable/Food/skewer.rsi
-          state: skewer-tomato
+      Skewer: TomatoSkewer
+      Burger: Tomato
+      Taco: Tomato
 
 - type: entity
   name: blue tomato
@@ -1237,14 +1015,9 @@
     - Fruit
     - Vegetable
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/blue_tomato.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-tomato
-      taco:
-        name: food-sequence-content-tomato
+      Burger: BlueTomato
+      Taco: BlueTomato
 
 - type: entity
   name: blood tomato
@@ -1291,19 +1064,10 @@
     - Fruit # Fuck you they're a fruit
     - Vegetable
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/blood_tomato.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-tomato
-      taco:
-        name: food-sequence-content-tomato
-      skewer:
-        name: food-sequence-content-tomato
-        sprite:
-          sprite: Objects/Consumable/Food/skewer.rsi
-          state: skewer-tomato
+      Skewer: TomatoSkewer
+      Burger: BloodTomato
+      Taco: BloodTomato
 
 - type: entity
   name: eggplant
@@ -1367,14 +1131,9 @@
     tags:
     - Fruit
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/apple.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-apple
-      taco:
-        name: food-sequence-content-apple
+      Burger: Apple
+      Taco: Apple
 
 - type: entity
   name: golden apple
@@ -1414,14 +1173,9 @@
     tags:
     - Fruit
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/golden_apple.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-apple
-      taco:
-        name: food-sequence-content-apple
+      Burger: GoldenApple
+      Taco: GoldenApple
 
 - type: entity
   name: cocoa pod
@@ -1455,15 +1209,6 @@
   - type: Tag
     tags:
     - Fruit
-  - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/cocoa.rsi
-      state: produce
-    entries:
-      burger:
-        name: food-sequence-content-cocoa
-      taco:
-        name: food-sequence-content-cocoa
 
 - type: entity
   name: ear of corn
@@ -1474,7 +1219,7 @@
   - type: FlavorProfile
     flavors:
       - corn
-  - type: Food
+  - type: Edible
     trash:
     - FoodCornTrash
   - type: SolutionContainerManager
@@ -1503,19 +1248,10 @@
       - ReagentId: Enzyme
         Quantity: 2
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/corn.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-corn
-      taco:
-        name: food-sequence-content-corn
-      skewer:
-        name: food-sequence-content-corn
-        sprite:
-          sprite: Objects/Consumable/Food/skewer.rsi
-          state: skewer-corn
+      Burger: Corn
+      Taco: Corn
+      Skewer: CornSkewer
 
 - type: entity
   name: corn cob
@@ -1538,15 +1274,6 @@
         reagents:
         - ReagentId: Cornmeal
           Quantity: 10
-  - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/corn.rsi
-      state: produce
-    entries:
-      burger:
-        name: food-sequence-content-corn
-      taco:
-        name: food-sequence-content-corn
 
 - type: entity
   name: onion
@@ -1580,15 +1307,6 @@
   - type: Tag
     tags:
     - Vegetable
-  - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/onion.rsi
-      state: produce
-    entries:
-      burger:
-        name: food-sequence-burger-content-onion
-      taco:
-        name: food-sequence-content-onion
 
 - type: entity
   name: red onion
@@ -1622,15 +1340,6 @@
   - type: Tag
     tags:
     - Vegetable
-  - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/onion_red.rsi
-      state: produce
-    entries:
-      burger:
-        name: food-sequence-burger-content-onion
-      taco:
-        name: food-sequence-content-onion
 
 - type: entity
   name: chanterelle cluster
@@ -1654,20 +1363,6 @@
     tags:
     - Vegetable
     - Mushroom
-  - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/chanterelle.rsi
-      state: produce
-    entries:
-      burger:
-        name: food-sequence-content-mushroom
-      taco:
-        name: food-sequence-content-mushroom
-      skewer:
-        name: food-sequence-content-mushroom
-        sprite:
-          sprite: Objects/Consumable/Food/skewer.rsi
-          state: skewer-mushroom
 
 # Slices
 
@@ -1712,14 +1407,9 @@
     - Fruit
     - Slice
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/pineapple.rsi
-      state: slice
     entries:
-      burger:
-        name: food-sequence-burger-content-pineapple
-      taco:
-        name: food-sequence-content-pineapple
+      Burger: PineappleSliceBurger
+      Taco: PineappleSlice
 
 - type: entity
   name: onion slice
@@ -1748,14 +1438,9 @@
     - Vegetable
     - Slice
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/onion.rsi
-      state: slice
     entries:
-      burger:
-        name: food-sequence-burger-content-onion
-      taco:
-        name: food-sequence-content-onion
+      Burger: OnionSliceBurger
+      Taco: OnionSlice
 
 - type: entity
   name: red onion slice
@@ -1784,14 +1469,9 @@
     - Vegetable
     - Slice
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/onion_red.rsi
-      state: slice
     entries:
-      burger:
-        name: food-sequence-burger-content-onion
-      taco:
-        name: food-sequence-content-onion
+      Burger: OnionRedSliceBurger
+      Taco: OnionRedSlice
 
 - type: entity
   name: chili pepper
@@ -1823,19 +1503,10 @@
     tags:
     - Vegetable
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/chili.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-chili
-      taco:
-        name: food-sequence-content-chili
-      skewer:
-        name: food-sequence-content-chili
-        sprite:
-          sprite: Objects/Consumable/Food/skewer.rsi
-          state: skewer-pepper
+      Taco: ChiliPepper
+      Burger: ChiliPepper
+      Skewer: ChiliPepperSkewer
 
 - type: entity
   name: chilly pepper
@@ -1865,19 +1536,10 @@
   - type: Produce
     seedId: chilly
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/chilly.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-chilly
-      taco:
-        name: food-sequence-content-chilly
-      skewer:
-        name: food-sequence-content-chilly
-        sprite:
-          sprite: Objects/Consumable/Food/skewer.rsi
-          state: skewer-bluepepper
+      Taco: ChillyPepper
+      Burger: ChillyPepper
+      Skewer: ChillyPepperSkewer
 
 - type: entity
   name: aloe
@@ -1894,9 +1556,9 @@
         maxVol: 25 ##I'm pretty sure this has to match the total of 100 potency yields
         reagents:
         - ReagentId: Aloe
-          Quantity: 5 # Goobstation edit
-        - ReagentId: SilverSulfadiazine # Goobstation edit
-          Quantity: 20
+          Quantity: 10
+        - ReagentId: Dermaline
+          Quantity: 10
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/aloe.rsi
   - type: Item
@@ -1909,14 +1571,9 @@
     tags:
     - Vegetable
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/aloe.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-aloe
-      taco:
-        name: food-sequence-content-aloe
+      Taco: Aloe
+      Burger: Aloe
 
 - type: entity
   name: poppy
@@ -1953,20 +1610,15 @@
     - Flower # TODO add "RedFlower" or "Poppy" tag, when other color flowers will be
     - Poppy # goob edit
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/poppy.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-poppy
-      taco:
-        name: food-sequence-content-poppy
+      Taco: Poppy
+      Burger: Poppy
 
 - type: entity
   name: lily
-  parent: FoodProduceBase
+  parent: FoodPoppy
   id: FoodLily
-  description: A beautiful orange flower containing topical medicine.
+  description: A beautiful orange flower.
   components:
   - type: FlavorProfile
     flavors:
@@ -1978,7 +1630,7 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 2
-        - ReagentId: StypticPowder
+        - ReagentId: Bicaridine
           Quantity: 20
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/lily.rsi
@@ -1990,14 +1642,9 @@
     tags:
     - Flower
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/lily.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-lily
-      taco:
-        name: food-sequence-content-lily
+      Taco: Lily
+      Burger: Lily
 
 - type: entity
   name: lingzhi
@@ -2027,19 +1674,9 @@
   - type: Extractable
     grindableSolutionName: food
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/lingzhi.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-mushroom
-      taco:
-        name: food-sequence-content-mushroom
-      skewer:
-        name: food-sequence-content-mushroom
-        sprite:
-          sprite: Objects/Consumable/Food/skewer.rsi
-          state: skewer-mushroom
+      Taco: Lingzhi
+      Burger: Lingzhi
   - type: Tag
     tags:
     - Mushroom
@@ -2057,7 +1694,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 24
+        maxVol: 14
         reagents:
         - ReagentId: Bicaridine
           Quantity: 5
@@ -2065,8 +1702,6 @@
           Quantity: 5
         - ReagentId: Nutriment
           Quantity: 2
-        - ReagentId: Desoxyephedrine
-          Quantity: 10
         - ReagentId: Vitamin
           Quantity: 2
   - type: Sprite
@@ -2086,11 +1721,8 @@
     - Ambrosia
   - type: FoodSequenceElement
     entries:
-      burger:
-        name: food-sequence-burger-content-ambrosia
-        sprite:
-          sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
-          state: produce
+      Taco: AmbrosiaVulgaris
+      Burger: AmbrosiaVulgarisBurger
 
 - type: entity
   name: ambrosia deus
@@ -2105,7 +1737,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 20
+        maxVol: 10
         reagents:
         - ReagentId: Omnizine
           Quantity: 3
@@ -2113,8 +1745,6 @@
           Quantity: 5
         - ReagentId: Nutriment
           Quantity: 2
-        - ReagentId: Desoxyephedrine
-          Quantity: 10
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/ambrosia_deus.rsi
   - type: Item
@@ -2131,14 +1761,9 @@
     tags:
     - Ambrosia
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/ambrosia_deus.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-burger-content-ambrosia
-      taco:
-        name: food-sequence-content-ambrosia
+      Taco: AmbrosiaDeus
+      Burger: AmbrosiaDeusBurger
 
 - type: entity
   name: galaxythistle
@@ -2169,14 +1794,9 @@
     - Galaxythistle
     - Fruit # Probably?
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/galaxythistle.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-burger-content-galaxy
-      taco:
-        name: food-sequence-content-galaxy
+      Taco: Galaxythistle
+      Burger: GalaxythistleBurger
 
 - type: entity
   name: glasstle
@@ -2194,10 +1814,12 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 15
+        maxVol: 25
         reagents:
         - ReagentId: Razorium
           Quantity: 15
+        - ReagentId: Desoxyephedrine
+          Quantity: 10
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/glasstle.rsi
   - type: Produce
@@ -2242,14 +1864,9 @@
     tags:
     - Galaxythistle
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/glasstle.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-burger-content-glasstle
-      taco:
-        name: food-sequence-content-glasstle
+      Taco: Glasstle
+      Burger: GlasstleBurger
 
 - type: entity
   name: fly amanita
@@ -2279,19 +1896,9 @@
     grindableSolutionName: food
   - type: BadFood
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/fly_amanita.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-mushroom
-      taco:
-        name: food-sequence-content-mushroom
-      skewer:
-        name: food-sequence-content-mushroom
-        sprite:
-          sprite: Objects/Consumable/Food/skewer.rsi
-          state: skewer-mushroom
+      Taco: FlyAmanita
+      Burger: FlyAmanita
   - type: Tag
     tags:
     - Mushroom
@@ -2318,21 +1925,16 @@
     sprite: Objects/Specific/Hydroponics/gatfruit.rsi
   - type: Produce
     seedId: gatfruit
-  - type: Food
+  - type: Edible
     trash:
     - WeaponRevolverPython
   - type: Tag
     tags:
     - Fruit # It's in the name
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/gatfruit.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-burger-content-gatfruit
-      taco:
-        name: food-sequence-content-gatfruit
+      Taco: Gatfruit
+      Burger: GatfruitBurger
 
 - type: entity
   name: capfruit
@@ -2358,21 +1960,16 @@
     heldPrefix: produce
   - type: Produce
     seedId: realCapfruit
-  - type: Food
+  - type: Edible
     trash:
     - RevolverCapGun
   - type: Tag
     tags:
     - Fruit
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/capfruit.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-burger-content-capfruit
-      taco:
-        name: food-sequence-content-capfruit
+      Taco: Capfruit
+      Burger: CapfruitBurger
 
 - type: entity
   name: capfruit
@@ -2382,7 +1979,7 @@
   components:
   - type: Produce
     seedId: fakeCapfruit
-  - type: Food
+  - type: Edible
     trash:
     - RevolverCapGunFake
 
@@ -2390,7 +1987,7 @@
   name: rice bushel
   description: Can be ground into rice, perfect for pudding or sake.
   id: RiceBushel
-  parent: ProduceBase
+  parent: ProduceBaseRuminant
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/rice.rsi
@@ -2409,7 +2006,7 @@
   name: soybeans
   description: For those who can't stand seeing good old meat.
   id: FoodSoybeans
-  parent: ProduceBase
+  parent: ProduceBaseRuminant
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/soybeans.rsi
@@ -2431,14 +2028,9 @@
     tags:
     - Vegetable
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/soybeans.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-soy
-      taco:
-        name: food-sequence-content-soy
+      Taco: Soybeans
+      Burger: SoybeansBurger
 
 - type: entity
   name: spaceman's trumpet
@@ -2470,20 +2062,15 @@
   - type: Instrument #hehe trumpet
     program: 56
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/spacemans_trumpet.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-burger-content-spacemans-trumpet
-      taco:
-        name: food-sequence-content-spacemans-trumpet
+      Taco: SpacemansTrumpet
+      Burger: SpacemansTrumpetBurger
 
 - type: entity
   name: koibean
   description: These beans seem a little bit fishy.
   id: FoodKoibean
-  parent: ProduceBase
+  parent: ProduceBaseRuminant
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/koibean.rsi
@@ -2507,14 +2094,9 @@
     tags:
     - Vegetable
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/koibean.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-burger-content-koibean
-      taco:
-        name: food-sequence-content-koibean
+      Taco: Koibean
+      Burger: KoibeanBurger
 
 - type: entity
   name: watermelon
@@ -2613,14 +2195,10 @@
     - Fruit
     - Slice
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/watermelon.rsi
-      state: slice
     entries:
-      burger:
-        name: food-sequence-burger-content-watermelon
-      taco:
-        name: food-sequence-content-watermelon
+      Burger: WatermelonSliceBurger
+      Taco: WatermelonSlice
+      Skewer: WatermelonSliceSkewer
 
 - type: entity
   name: holymelon
@@ -2720,6 +2298,11 @@
     tags:
     - Fruit
     - Slice
+  - type: FoodSequenceElement
+    entries:
+      Burger: HolymelonSliceBurger
+      Taco: HolymelonSlice
+      Skewer: HolymelonSliceSkewer
 
 - type: entity
   name: grapes
@@ -2787,14 +2370,9 @@
     tags:
     - Fruit
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/berries.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-burger-content-berries
-      taco:
-        name: food-sequence-content-berries
+      Taco: Berries
+      Burger: BerriesBurger
 
 - type: entity
   name: bungo fruit
@@ -2805,7 +2383,7 @@
   - type: FlavorProfile
     flavors:
       - bungo
-  - type: Food
+  - type: Edible
     trash:
     - FoodBungoPit
   - type: SolutionContainerManager
@@ -2830,14 +2408,9 @@
     tags:
     - Fruit
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/bungo.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-bungo
-      taco:
-        name: food-sequence-content-bungo
+      Taco: Bungo
+      Burger: Bungo
 
 - type: entity
   name: bungo pit
@@ -2895,14 +2468,9 @@
     tags:
     - Vegetable
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/pea.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-pea
-      taco:
-        name: food-sequence-content-pea
+      Taco: Pea
+      Burger: Pea
 
 - type: entity
   parent: FoodProduceBase
@@ -2933,6 +2501,10 @@
   - type: Tag
     tags:
     - Vegetable
+  - type: FoodSequenceElement
+    entries:
+      Taco: WorldPea
+      Burger: WorldPeaBurger
 
 - type: entity
   name: pumpkin
@@ -3046,7 +2618,7 @@
   - type: FlavorProfile
     flavors:
       - cotton
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
     solutions:
@@ -3063,6 +2635,9 @@
     tags:
     - ClothMade
     - CottonBoll
+  - type: FoodSequenceElement
+    entries:
+      CottonBurger: CottonBol
 
 - type: entity
   name: pyrotton boll
@@ -3075,7 +2650,7 @@
   - type: FlavorProfile
     flavors:
       - pyrotton
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
     solutions:
@@ -3096,6 +2671,9 @@
     - CottonBoll
   - type: Extractable
     grindableSolutionName: food
+  - type: FoodSequenceElement
+    entries:
+      CottonBurger: PyrottonBol
 
 - type: entity
   name: cherry
@@ -3106,7 +2684,7 @@
   - type: FlavorProfile
     flavors:
       - cherry
-  - type: Food
+  - type: Edible
     trash:
     - TrashCherryPit
   - type: SolutionContainerManager
@@ -3131,14 +2709,9 @@
     tags:
     - Fruit
   - type: FoodSequenceElement
-    sprite:
-      sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-cherry
-      taco:
-        name: food-sequence-content-cherry
+      Taco: Cherry
+      Burger: Cherry
 
 - type: entity
   name: cherry pit
@@ -3151,6 +2724,7 @@
   - type: Item
     sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi
     heldPrefix: pit
+    size: Tiny
   - type: Tag
     tags:
     - Recyclable
@@ -3185,7 +2759,7 @@
     heldPrefix: produce
   - type: Produce
     seedId: anomalyBerry
-  - type: Food
+  - type: Edible
     trash:
     - EffectAnomalyFloraBulb # Random loot
   - type: SolutionContainerManager
@@ -3203,11 +2777,81 @@
     tags:
     - Fruit
   - type: FoodSequenceElement
-    sprite:
-      sprite: Objects/Specific/Hydroponics/anomaly_berry.rsi
-      state: produce
     entries:
-      burger:
-        name: food-sequence-content-anomaly-berry
-      taco:
-        name: food-sequence-content-anomaly-berry
+      Taco: AnomalyBerry
+      Burger: AnomalyBerryBurger
+
+- type: entity
+  name: bloonion bulb
+  description: A strange floating bulb.. Nothing worth crying over.
+  parent: BaseStructureDynamic
+  id: FoodBloonion
+  components:
+  - type: Appearance
+  - type: Sprite
+    drawdepth: Items
+    noRot: true
+    sprite: Objects/Specific/Hydroponics/bloonion.rsi
+    state: produce
+  - type: Item
+    size: Small
+    sprite: Objects/Specific/Hydroponics/bloonion.rsi
+    heldPrefix: produce
+  - type: Produce
+    seedId: bloonion
+  - type: Tag
+    tags:
+    - Vegetable
+  - type: PotencyVisuals
+  - type: FlavorProfile
+    flavors:
+    - onion
+    - strange
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 7
+        canReact: false
+        reagents:
+        - ReagentId: Potassium
+          Quantity: 1
+        - ReagentId: Phosphorus
+          Quantity: 1
+        - ReagentId: Sugar
+          Quantity: 1
+        - ReagentId: Allicin
+          Quantity: 4
+  - type: Extractable
+    grindableSolutionName: food
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 0.001
+    intensitySlope: 1
+    totalIntensity: 0.1
+  - type: Damageable
+    damageContainer: Biological
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:SpillBehavior
+        solution: food
+      - !type:TriggerBehavior
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.20
+          position: 0, 0.35
+        density: 80
+        mask:
+        - MobMask
+        layer:
+        - MobLayer

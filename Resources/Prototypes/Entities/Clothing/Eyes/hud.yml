@@ -129,6 +129,7 @@
   - type: Tag
     tags:
     - HudDiagnostic # Goobstation - CR glasses changes and addition
+  - type: ShowAccessReaderSettings
 
 - type: entity
   parent: [ClothingEyesBase, ShowMedicalIcons]

@@ -7,12 +7,12 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Emp;
+using Content.Shared.Emp;
 using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Stunnable;
 
-namespace Content.Goobstation.Server.Emp;
+namespace Content.Goobstation.Shared.Emp;
 
 public sealed class EmpStunSystem : EntitySystem
 {
@@ -33,6 +33,6 @@ public sealed class EmpStunSystem : EntitySystem
         var duration = args.Duration;
         if (duration > TimeSpan.FromSeconds(15))
             duration = TimeSpan.FromSeconds(15);
-        _stun.TryParalyze(uid, duration, true);
+        _stun.TryUpdateParalyzeDuration(uid, duration);
     }
 }

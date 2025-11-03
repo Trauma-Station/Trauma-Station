@@ -16,10 +16,10 @@ using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Radio;
-using Content.Server.Radio.Components;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
+using Content.Shared.Radio.Components;
 using Content.Shared.Speech;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -107,8 +107,6 @@ public sealed class BlobMobSystem : SharedBlobMobSystem
             return;
 
         _language.UpdateEntityLanguages(ent.Owner);
-        // var radio = EnsureComp<ActiveRadioComponent>(ent);
-        // radio.Channels.Remove(ent.Comp.Channel);
     }
 
     private void OnSpokeAdd(Entity<BlobSpeakComponent> ent, ref ComponentStartup args)
@@ -116,12 +114,7 @@ public sealed class BlobMobSystem : SharedBlobMobSystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        var component = EnsureComp<LanguageSpeakerComponent>(ent);
-        component.CurrentLanguage = ent.Comp.Language;
-        _language.UpdateEntityLanguages(ent.Owner);
-
-        // var radio = EnsureComp<ActiveRadioComponent>(ent);
-        // radio.Channels.Add(ent.Comp.Channel);
+        _language.EnsureValidLanguage(ent.Owner);
     }
 
     private void OnPulsed(EntityUid uid, BlobMobComponent component, BlobMobGetPulseEvent args) =>

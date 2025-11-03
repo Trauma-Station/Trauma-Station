@@ -1,7 +1,6 @@
 using Content.Goobstation.Shared.Shadowling;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.PreAscension;
 using Content.Server.Light.Components;
-using Content.Server.Light.EntitySystems;
 using Content.Shared.Actions;
 using Content.Shared.Light;
 using Content.Shared.Light.Components;
@@ -19,7 +18,7 @@ public sealed class ShadowlingVeilSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly PoweredLightSystem _light = default!;
+    [Dependency] private readonly SharedPoweredLightSystem _light = default!;
     [Dependency] private readonly SharedHandheldLightSystem _handheld = default!;
     [Dependency] private readonly UnpoweredFlashlightSystem _unpowered = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;

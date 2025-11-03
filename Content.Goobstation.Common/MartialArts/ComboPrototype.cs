@@ -9,7 +9,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Standing;
 using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Common.MartialArts;
@@ -37,10 +36,10 @@ public sealed partial class ComboPrototype : IPrototype
     public float ExtraDamage;
 
     /// <summary>
-    /// Stun time in seconds
+    /// Stun time.
     /// </summary>
     [DataField]
-    public int ParalyzeTime;
+    public TimeSpan ParalyzeTime = TimeSpan.Zero;
 
     /// <summary>
     /// Can a lying person perform this combo
@@ -52,7 +51,7 @@ public sealed partial class ComboPrototype : IPrototype
     /// Should the target drop items on knockdown?
     /// </summary>
     [DataField]
-    public DropHeldItemsBehavior DropHeldItemsBehavior = DropHeldItemsBehavior.DropIfStanding;
+    public bool DropItems = true;
 
     /// <summary>
     /// How much stamina damage should this move do on perform.

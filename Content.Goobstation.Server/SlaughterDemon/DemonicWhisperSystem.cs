@@ -5,9 +5,9 @@
 
 using Content.Goobstation.Shared.SlaughterDemon;
 using Content.Server.Administration;
-using Content.Server.IdentityManagement;
 using Content.Server.Popups;
 using Content.Server.Prayer;
+using Content.Shared.IdentityManagement;
 using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.SlaughterDemon;

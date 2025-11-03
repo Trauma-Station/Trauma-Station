@@ -15,14 +15,14 @@
 using System.Linq;
 using Content.Goobstation.Server.Blob.Components;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Server.Popups;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
-using Content.Shared.Explosion.Components;
+using Content.Shared.Trigger.Components.Effects;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Prototypes;
 
@@ -30,10 +30,9 @@ namespace Content.Goobstation.Server.Blob;
 
 public sealed class BlobFactorySystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-
 
     public override void Initialize()
     {
@@ -42,7 +41,6 @@ public sealed class BlobFactorySystem : EntitySystem
         SubscribeLocalEvent<BlobFactoryComponent, BlobSpecialGetPulseEvent>(OnPulsed);
         SubscribeLocalEvent<BlobFactoryComponent, ProduceBlobbernautEvent>(OnProduceBlobbernaut);
         SubscribeLocalEvent<BlobFactoryComponent, DestructionEventArgs>(OnDestruction);
-
     }
 
     private void OnDestruction(EntityUid uid, BlobFactoryComponent component, DestructionEventArgs args)
@@ -86,28 +84,19 @@ public sealed class BlobFactorySystem : EntitySystem
         }
     }
 
-    [ValidatePrototypeId<ReagentPrototype>]
-    private const string Phlogiston = "Phlogiston";
+    private static readonly ProtoId<ReagentPrototype> Phlogiston = "Phlogiston";
 
-    [ValidatePrototypeId<ReagentPrototype>]
-    private const string TearGas = "TearGas";
+    private static readonly ProtoId<ReagentPrototype> TearGas = "TearGas";
 
-    [ValidatePrototypeId<ReagentPrototype>]
+    private static readonly ProtoId<ReagentPrototype> Lexorin = "Lexorin";
 
-    private const string Lexorin = "Lexorin";
+    private static readonly ProtoId<ReagentPrototype> Mold = "Mold";
 
-    [ValidatePrototypeId<ReagentPrototype>]
-    private const string Mold = "Mold";
+    private static readonly ProtoId<ReagentPrototype> Bicaridine = "Bicaridine";
 
-    [ValidatePrototypeId<ReagentPrototype>]
-    private const string Bicaridine = "Bicaridine";
-
-    [ValidatePrototypeId<ReagentPrototype>]
-    private const string Aluminium = "Aluminium";
-    [ValidatePrototypeId<ReagentPrototype>]
-    private const string Iron = "Iron";
-    [ValidatePrototypeId<ReagentPrototype>]
-    private const string Uranium = "Uranium";
+    private static readonly ProtoId<ReagentPrototype> Aluminium = "Aluminium";
+    private static readonly ProtoId<ReagentPrototype> Iron = "Iron";
+    private static readonly ProtoId<ReagentPrototype> Uranium = "Uranium";
 
     private void FillSmokeGas(Entity<BlobPodComponent> ent, BlobChemType currentChem)
     {
@@ -118,27 +107,27 @@ public sealed class BlobFactorySystem : EntitySystem
                 blobGas.AddSolution(new Solution(Phlogiston, FixedPoint2.New(30))
                 {
                     Temperature = 1000
-                },_prototypeManager);
+                }, _proto);
                 break;
             case BlobChemType.ReactiveSpines:
-                blobGas.AddSolution(new Solution(Mold, FixedPoint2.New(30)),_prototypeManager);
+                blobGas.AddSolution(new Solution(Mold, FixedPoint2.New(30)), _proto);
                 break;
             case BlobChemType.RegenerativeMateria:
-                blobGas.AddSolution(new Solution(Bicaridine, FixedPoint2.New(30)),_prototypeManager);
+                blobGas.AddSolution(new Solution(Bicaridine, FixedPoint2.New(30)), _proto);
                 break;
             case BlobChemType.ExplosiveLattice:
                 blobGas.AddSolution(new Solution(Lexorin, FixedPoint2.New(30))
                 {
                     Temperature = 1000
-                },_prototypeManager);
+                }, _proto);
                 break;
             case BlobChemType.ElectromagneticWeb:
-                blobGas.AddSolution(new Solution(Aluminium, FixedPoint2.New(10)){ CanReact = false },_prototypeManager);
-                blobGas.AddSolution(new Solution(Iron, FixedPoint2.New(10)){ CanReact = false },_prototypeManager);
-                blobGas.AddSolution(new Solution(Uranium, FixedPoint2.New(10)){ CanReact = false },_prototypeManager);
+                blobGas.AddSolution(new Solution(Aluminium, FixedPoint2.New(10)){ CanReact = false }, _proto);
+                blobGas.AddSolution(new Solution(Iron, FixedPoint2.New(10)){ CanReact = false }, _proto);
+                blobGas.AddSolution(new Solution(Uranium, FixedPoint2.New(10)){ CanReact = false }, _proto);
                 break;
             default:
-                blobGas.AddSolution(new Solution(TearGas, FixedPoint2.New(30)),_prototypeManager);
+                blobGas.AddSolution(new Solution(TearGas, FixedPoint2.New(30)), _proto);
                 break;
         }
     }

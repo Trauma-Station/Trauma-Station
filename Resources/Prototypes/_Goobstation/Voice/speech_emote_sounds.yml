@@ -66,3 +66,47 @@
   sounds:
     Laugh:
       path: /Audio/_Goobstation/Goose/goose_laugh.ogg
+
+- type: emoteSounds
+  id: MonkeyMode
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: MonkeyScreeches
+    Laugh:
+      collection: MonkeyScreeches
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    CatMeow:
+      collection: CatMeows
+    CatHisses:
+      collection: CatHisses
+    MonkeyScreeches:
+      collection: MonkeyScreeches
+    RobotBeep:
+      collection: RobotBeeps
+    Yawn:
+      collection: MonkeyScreeches
+    Snore:
+      collection: MonkeyScreeches
+    Honk:
+      collection: BikeHorn
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MonkeyScreeches
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MaleDeathGasp
+    Gulp:
+      path: /Audio/_Goobstation/Voice/Human/gulp.ogg

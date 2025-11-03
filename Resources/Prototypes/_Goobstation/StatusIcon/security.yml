@@ -12,3 +12,17 @@
   icon:
     sprite: /Textures/_Goobstation/Interface/Misc/security_icons.rsi
     state: MindShield-broken
+
+- type: securityIcon
+  parent: SecurityIcon
+  id: SecurityIconPerma
+  icon:
+    sprite: /Textures/Interface/Misc/security_icons.rsi
+    state: hud_perma
+
+- type: securityIcon
+  parent: SecurityIcon
+  id: SecurityIconSearch
+  icon:
+    sprite: /Textures/Interface/Misc/security_icons.rsi
+    state: hud_search

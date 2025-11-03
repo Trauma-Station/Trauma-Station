@@ -195,7 +195,7 @@ namespace Content.Client.Inventory
                 var button = new Button()
                 {
                     Text = Loc.GetString("strippable-bound-user-interface-stripping-menu-ensnare-button"),
-                    StyleClasses = { StyleBase.ButtonOpenRight }
+                    StyleClasses = { StyleClass.ButtonOpenRight }
                 };
 
                 button.OnPressed += (_) => SendPredictedMessage(new StrippingEnsnareButtonPressed());
@@ -238,7 +238,7 @@ namespace Content.Client.Inventory
             var isCard = EntMan.HasComponent<CardComponent>(heldEntity) ||
                          EntMan.HasComponent<CardHandComponent>(heldEntity);
             UpdateEntityIcon(button, isCard ? _virtualHiddenEntity : heldEntity);
-            
+
             _strippingMenu!.HandsContainer.AddChild(button);
             LayoutContainer.SetPosition(button, new Vector2i(_handCount, 0) * (SlotControl.DefaultButtonSize + ButtonSeparation));
             _handCount++;

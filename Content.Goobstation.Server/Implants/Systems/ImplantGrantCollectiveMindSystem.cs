@@ -21,9 +21,7 @@ public sealed class ImplantGrantCollectiveMindSystem : EntitySystem
 
     public void OnImplanted(Entity<ImplantGrantCollectiveMindComponent> ent, ref ImplantImplantedEvent args)
     {
-        if (args.Implanted is not {} mob)
-            return;
-
+        var mob = args.Implanted;
         var mind = EnsureComp<CollectiveMindComponent>(mob);
         mind.Channels.Add(ent.Comp.CollectiveMind);
     }

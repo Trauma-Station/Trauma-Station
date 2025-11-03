@@ -1,17 +1,18 @@
-using Content.Server.Chat.Systems;
-using Content.Shared.Speech.Components;
-using Content.Shared.Speech;
-using Content.Shared.Speech.EntitySystems;
-using Content.Shared.Speech.Muting;
-using Content.Shared.Actions.Events;
+// <Trauma>
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared._Goobstation.Wizard.Chuuni;
 using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Magic.Components;
-using Content.Shared.Damage;
-using Content.Shared.Chat;
 using Content.Shared._Shitmed.Damage;
-
+using Content.Shared.Damage;
+using Content.Shared.Magic.Components;
+// </Trauma>
+using Content.Server.Chat.Systems;
+using Content.Shared.Actions.Events;
+using Content.Shared.Chat;
+using Content.Shared.Speech;
+using Content.Shared.Speech.Components;
+using Content.Shared.Speech.EntitySystems;
+using Content.Shared.Speech.Muting;
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -22,7 +23,7 @@ namespace Content.Server.Speech.EntitySystems;
 public sealed class SpeakOnActionSystem : SharedSpeakOnActionSystem
 {
     [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!; // Goob
 
     public override void Initialize()
     {

@@ -1,20 +1,9 @@
-# SPDX-FileCopyrightText: 2024 NULL882 <gost6865@yandex.ru>
-# SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 āda <ss.adasts@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 # Generic
 lathe-category-circuitry = Circuitry
 lathe-category-clothing = Clothing
 lathe-category-lights = Lights
 lathe-category-machines = Machines
 lathe-category-parts = Parts
-lathe-category-robotics = Robotics
-lathe-category-tiles = Tiles
 lathe-category-tools = Tools
 lathe-category-weapons = Weapons
 
@@ -34,16 +23,21 @@ lathe-category-service = Service
 lathe-category-supply = Supply
 
 # Cutter
-lathe-category-concrete = Concrete
-lathe-category-dark = Dark
-lathe-category-maints = Maints
-lathe-category-steel = Steel
-lathe-category-white = White
-lathe-category-wood = Wood
+lathe-category-tiles = Tiles
+lathe-category-circuit-tile = Circuit
+lathe-category-concrete-tile = Concrete
+lathe-category-dark-tile = Dark
+lathe-category-faux-tile = Faux
+lathe-category-maints-tile = Maints
 lathe-category-marble = Marble
+lathe-category-steel-tile = Steel
+lathe-category-white-tile = White
+lathe-category-wood-tile = Wood
 
 # Science
 lathe-category-mechs = Mechs
+lathe-category-modules = Modules
+lathe-category-robotics = Robotics
 
 # Security TechFab
 lathe-category-ammo = Ammo

@@ -2,18 +2,18 @@
   id: SheetPaper
   start: start
   graph:
-    - node: start
-      edges:
-        - to: SheetPaper
-          completed:
-            - !type:SetStackCount
-              amount: 1
-          steps:
-          - tag: Paper
-            doAfter: 5
-            name: construction-graph-tag-paper
-            icon:
-              sprite: Objects/Misc/bureaucracy.rsi
-              state: paper
-    - node: SheetPaper
-      entity: SheetPaper
+  - node: start
+    edges:
+    - to: paper sheet
+      completed:
+      - !type:SetStackCount
+        amount: 1
+      steps:
+      - tag: Paper
+        doAfter: 5
+        name: construction-graph-tag-paper
+        icon:
+          sprite: Objects/Misc/bureaucracy.rsi
+          state: paper
+  - node: paper sheet
+    entity: SheetPaper

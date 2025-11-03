@@ -46,14 +46,15 @@
   description: A sheet of material, used often on the station in various applications.
   components:
   - type: Sprite
-    sprite: Objects/Materials/Sheets/other.rsi
+    sprite: _Trauma/Objects/Materials/Sheets/other.rsi # Trauma
   - type: Item
-    sprite: Objects/Materials/Sheets/other.rsi
+    sprite: _Trauma/Objects/Materials/Sheets/other.rsi # Trauma
     size: Normal
   - type: Tag
     tags:
     - Sheet
     - DroneUsable # Goobstation
+    - ConstructionMaterial
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
@@ -68,9 +69,6 @@
     solutions:
       paper:
         canReact: false
-  - type: Construction #truama
-    graph: SheetPaper
-    node: start
 
 - type: entity
   parent: SheetOtherBase
@@ -113,9 +111,9 @@
   - type: Tag # Trauma
     tags:
     - Sheet
-  - type: Construction #Trauma
+  - type: Construction # Trauma
     graph: SheetPaper
-    node: SheetPaper
+    node: paper sheet
 
 - type: entity
   parent: SheetPaper
@@ -167,10 +165,11 @@
         - ReagentId: Plasma
           Quantity: 10
         canReact: false
-  - type: Tag
+  - type: Tag # Redundant
     tags:
     - Sheet
-    - SheetPlasma
+    - SheetPlasma # Goob
+    - ConstructionMaterial
 
 - type: entity
   parent: SheetPlasma
@@ -194,16 +193,6 @@
     count: 1
 
 - type: entity
-  parent: SheetPlasma
-  id: SheetPlasmaLingering0
-  name: plasma
-  suffix: 0, Lingering
-  components:
-  - type: Stack
-    lingering: true
-    count: 0
-
-- type: entity
   parent: SheetOtherBase
   id: SheetPlastic
   name: plastic
@@ -214,6 +203,7 @@
     - Plastic
     - Sheet
     - DroneUsable # Goobstation
+    - ConstructionMaterial
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -279,7 +269,7 @@
   suffix: Full
   components:
   - type: Material
-  - type: Food
+  - type: Edible
     transferAmount: 10
   - type: BadFood
   - type: PhysicalComposition
@@ -333,7 +323,7 @@
   suffix: Full
   components:
     - type: Sprite
-      sprite: Objects/Materials/Sheets/meaterial.rsi
+      sprite: _Trauma/Objects/Materials/Sheets/meaterial.rsi # Trauma
       layers:
       - state: meat_3
         map: [ "base" ]
@@ -358,7 +348,7 @@
         enum.StackCustomSplitUiKey.Key:
           type: StackCustomSplitBoundUserInterface
     - type: Item
-      sprite: Objects/Materials/Sheets/meaterial.rsi
+      sprite: _Trauma/Objects/Materials/Sheets/meaterial.rsi # Trauma
       heldPrefix: meat
     - type: Extractable
       grindableSolutionName: meatsheet

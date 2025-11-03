@@ -64,6 +64,7 @@
   description: An abomination that supposedly assists in station activity.
   components:
   - type: Sprite
+    sprite: _Goobstation/Mobs/Silicon/huborg.rsi
     layers:
     - state: huborg
     - state: huborg_e_r
@@ -118,10 +119,6 @@
     rules: ghost-role-information-silicon-rules
     raffle:
       settings: default
-    requirements: # Goobstation - ghost roles requirements
-    - !type:RoleTimeRequirement
-      role: JobBorg
-      time: 3600 #1 hour
   - type: GhostTakeoverAvailable
 
 # Mining

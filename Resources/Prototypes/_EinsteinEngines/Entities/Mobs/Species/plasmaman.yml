@@ -142,10 +142,7 @@
   - type: SpawnGasOnGib
     gasMixture:
       moles:
-      - 0    # oxygen
-      - 0    # nitrogen
-      - 0    # CO2
-      - 100  # plasma
+        Plasma: 100
   - type: Fixtures
     fixtures: # TODO: This needs a second fixture just for mob collisions.
       fix1:

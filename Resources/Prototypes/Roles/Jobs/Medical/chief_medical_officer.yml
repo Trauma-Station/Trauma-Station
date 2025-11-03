@@ -138,23 +138,23 @@
   requirements:
     - !type:RoleTimeRequirement
       role: JobChemist
-      time: 9000 #2.5 hrs
+      time: 2.5h
     - !type:RoleTimeRequirement
       role: JobMedicalDoctor
-      time: 18000 #5 hrs
+      time: 5h
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 36000 #10 hrs
+      time: 10h
     - !type:SpeciesRequirement # Goob - None Felinid
       inverted: true
       species:
       - Felinid
+  weight: 10
   startingGear: CMOGear
   icon: "JobIconChiefMedicalOfficer"
   supervisors: job-supervisors-captain
   canBeAntag: false
   goobcoins: 40 #Goob content
-  weight: 10 #Goob Edit
   access:
   - Medical
   - Command

@@ -100,7 +100,7 @@
   setPreference: false
   startingGear: SyndicateHighCommanderGearFull
   icon: "JobIconSyndicate"
-  supervisors: job-supervisors-syndicate
+  supervisors: job-supervisor-syndicate
   canBeAntag: true
   requirements:
   - !type:AgeRequirement

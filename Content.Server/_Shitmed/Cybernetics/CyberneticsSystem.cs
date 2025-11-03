@@ -6,7 +6,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Emp;
+using Content.Shared.Emp;
 using Content.Shared._Shitmed.Body.Organ;
 using Content.Shared._Shitmed.Body.Events;
 using Content.Shared._Shitmed.Cybernetics;
@@ -27,53 +27,53 @@ internal sealed class CyberneticsSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<CyberneticsComponent, EmpPulseEvent>(OnEmpPulse);
-        SubscribeLocalEvent<CyberneticsComponent, EmpDisabledRemoved>(OnEmpDisabledRemoved);
+        SubscribeLocalEvent<CyberneticsComponent, EmpDisabledRemovedEvent>(OnEmpDisabledRemoved);
     }
     private void OnEmpPulse(Entity<CyberneticsComponent> cyberEnt, ref EmpPulseEvent ev)
     {
-        if (!cyberEnt.Comp.Disabled)
+        if (cyberEnt.Comp.Disabled)
+            return;
+
+        ev.Affected = true;
+        ev.Disabled = true;
+        cyberEnt.Comp.Disabled = true;
+
+        if (HasComp<OrganComponent>(cyberEnt))
         {
-            ev.Affected = true;
-            ev.Disabled = true;
-            cyberEnt.Comp.Disabled = true;
+            var disableEvent = new OrganEnableChangedEvent(false);
+            RaiseLocalEvent(cyberEnt, ref disableEvent);
+        }
+        else if (TryComp(cyberEnt, out BodyPartComponent? part))
+        {
+            var disableEvent = new BodyPartEnableChangedEvent(false);
+            RaiseLocalEvent(cyberEnt, ref disableEvent);
 
-            if (HasComp<OrganComponent>(cyberEnt))
+            if (TryComp(cyberEnt, out DamageableComponent? damageable)
+                && part.Body is not null)
             {
-                var disableEvent = new OrganEnableChangedEvent(false);
-                RaiseLocalEvent(cyberEnt, ref disableEvent);
-            }
-            else if (TryComp(cyberEnt, out BodyPartComponent? part))
-            {
-                var disableEvent = new BodyPartEnableChangedEvent(false);
-                RaiseLocalEvent(cyberEnt, ref disableEvent);
-
-                if (TryComp(cyberEnt, out DamageableComponent? damageable)
-                    && part.Body is not null)
-                {
-                    var shock = new DamageSpecifier(_prototypes.Index<DamageTypePrototype>("Shock"), 30);
-                    var targetPart = _body.GetTargetBodyPart(part);
-                    _damageable.TryChangeDamage(part.Body.Value, shock, ignoreResistances: true, targetPart: targetPart, damageable: damageable);
-                    Dirty(cyberEnt, damageable);
-                }
+                var shock = new DamageSpecifier(_prototypes.Index<DamageTypePrototype>("Shock"), 30);
+                var targetPart = _body.GetTargetBodyPart(part);
+                _damageable.TryChangeDamage(part.Body.Value, shock, ignoreResistances: true, targetPart: targetPart, damageable: damageable);
+                Dirty(cyberEnt, damageable);
             }
         }
     }
 
-    private void OnEmpDisabledRemoved(Entity<CyberneticsComponent> cyberEnt, ref EmpDisabledRemoved ev)
+    private void OnEmpDisabledRemoved(Entity<CyberneticsComponent> cyberEnt, ref EmpDisabledRemovedEvent ev)
     {
-        if (cyberEnt.Comp.Disabled)
+        if (!cyberEnt.Comp.Disabled)
+            return;
+
+        cyberEnt.Comp.Disabled = false;
+        if (HasComp<OrganComponent>(cyberEnt))
         {
-            cyberEnt.Comp.Disabled = false;
-            if (HasComp<OrganComponent>(cyberEnt))
-            {
-                var enableEvent = new OrganEnableChangedEvent(true);
-                RaiseLocalEvent(cyberEnt, ref enableEvent);
-            }
-            else if (HasComp<BodyPartComponent>(cyberEnt))
-            {
-                var enableEvent = new BodyPartEnableChangedEvent(true);
-                RaiseLocalEvent(cyberEnt, ref enableEvent);
-            }
+            var enableEvent = new OrganEnableChangedEvent(true);
+            RaiseLocalEvent(cyberEnt, ref enableEvent);
+        }
+        else if (HasComp<BodyPartComponent>(cyberEnt))
+        {
+            var enableEvent = new BodyPartEnableChangedEvent(true);
+            RaiseLocalEvent(cyberEnt, ref enableEvent);
         }
     }
 }

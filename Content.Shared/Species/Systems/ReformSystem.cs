@@ -76,7 +76,7 @@ public sealed partial class ReformSystem : EntitySystem
     {
         // Stun them when they use the action for the amount of reform time.
         if (comp.ShouldStun)
-            _stunSystem.TryStun(uid, TimeSpan.FromSeconds(comp.ReformTime), true);
+            _stunSystem.TryUpdateStunDuration(uid, TimeSpan.FromSeconds(comp.ReformTime));
         _popupSystem.PopupClient(Loc.GetString(comp.PopupText, ("name", uid)), uid, uid);
 
         // Create a doafter & start it
@@ -102,22 +102,9 @@ public sealed partial class ReformSystem : EntitySystem
         if (_netMan.IsClient)
             return;
 
-        EntityUid child;
-
-        // Madness: If you just goidaspawn entities when they're in a container - Transform(ent).Coordinates will just give 0,0 and the box as the parent
-        // But you're not spawning them in the parent, you're spawning them next to it while thinking they're in the container
-        // Which by a mysterious mean scams networking into thinking you NEVER LEFT the container, and frankly never even got back in into the world.
-        // So anyone who was out of PVS range when you respawned will not and cannot see you as you're nonexistant.
-        // Your entire state hinges on the idea that you're still in the container.
-
-        if (_container.TryGetContainingContainer((uid, null, null), out var container))
-        {
-            child = TrySpawnInContainer(comp.ReformPrototype, container.Owner, container.ID, out var containedChild)
-                ? containedChild.Value
-                : SpawnNextToOrDrop(comp.ReformPrototype, container.Owner);
-        }
-        else
-            child = Spawn(comp.ReformPrototype, Transform(uid).Coordinates);
+        // Spawn a new entity
+        // This is, to an extent, taken from polymorph. I don't use polymorph for various reasons- most notably that this is permanent.
+        var child = SpawnNextToOrDrop(comp.ReformPrototype, uid);
 
         // This transfers the mind to the new entity
         if (_mindSystem.TryGetMind(uid, out var mindId, out var mind))

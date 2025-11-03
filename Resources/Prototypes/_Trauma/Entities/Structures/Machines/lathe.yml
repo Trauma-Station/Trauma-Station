@@ -67,7 +67,6 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/revforge.rsi
   - type: Lathe
-    producingSound: /Audio/_Trauma/Revs/strike.ogg
     runningState: revforge
     staticPacks:
     - RevForgeStatic
@@ -97,7 +96,7 @@
     containers:
     - blueprint
   - type: Construction
-    node: RevForge
+    node: industrial forge
 
 - type: entity
   parent: BaseRevIndustry
@@ -108,8 +107,8 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/revprintingpress.rsi
   - type: Lathe
-    producingSound: /Audio/_Trauma/Revs/printingpress.ogg
-    runningState: printingpress3m
+    producingSound: /Audio/_Trauma/Revs/printingpresslong.ogg
+    runningState: printingpress
     staticPacks:
     - RevPrintingPress
   - type: MaterialStorage
@@ -117,7 +116,7 @@
       tags:
       - Sheet
   - type: Construction
-    node: RevPrintingPress
+    node: printing press
 
 - type: entity
   parent: BaseRevIndustry
@@ -139,7 +138,7 @@
       - RawMaterial
       - Ingot
   - type: Construction
-    node: RevRadioBench
+    node: telecomms workshop
 
 - type: entity
   parent: BaseRevIndustry
@@ -155,7 +154,7 @@
     staticPacks:
     - RevTelesphereStatic
   - type: Construction
-    node: RevTelesphere
+    node: telesphere
   - type: PointLight
     enabled: true
     color: "#ffffff"
@@ -191,7 +190,7 @@
       - RawMaterial
       - Ingot
   - type: Construction
-    node: RevPrinter
+    node: 3D printer
 
 - type: entity
   parent: BaseRevIndustry
@@ -213,7 +212,7 @@
       - RawMaterial
       - Ingot
   - type: Construction
-    node: RevBulletPress
+    node: bullet press
 
 - type: entity
   parent: BaseRevIndustry
@@ -235,4 +234,90 @@
       - RawMaterial
       - Ingot
   - type: Construction
-    node: RevMicroelectronicsAssembler
+    node: microelectronics assembler
+  - type: BlueprintReceiver
+    whitelist:
+      tags:
+      - DataChip
+  - type: ContainerContainer
+    containers:
+      blueprint: !type:Container
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - blueprint
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevUniformPrinter
+  name: military uniform printer
+  description: Creates armored clothing for the troops.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/uniformprinter.rsi
+  - type: Lathe
+    producingSound: /Audio/Machines/uniformprinter.ogg
+    runningState: uniformsewer
+    staticPacks:
+    - RevClothingStatic
+  - type: Construction
+    node: uniform printer
+  - type: MaterialStorage
+    whitelist:
+      tags:
+        - Sheet
+        - RawMaterial
+        - Ingot
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevTechAnalyzer
+  name: tech analyzer
+  description: Scans NT tech and produces tech disks for the microelectronics assembler to create.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/techanalyzer.rsi
+  - type: Lathe
+    producingSound: /Audio/Machines/uniformprinter.ogg
+    runningState: techAnalyzer
+    staticPacks:
+    - RevTechStatic
+  - type: Construction
+    node: tech analyzer
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevPlasmaFoundry
+  name: plasma foundry
+  description: An advanced foundry powered by plasma, it melts metals incredibly fast and produces advanced components.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/plasmaforge.rsi
+  - type: Lathe
+    producingSound: /Audio/_Trauma/Revs/foundryaudio.ogg
+    runningState: plasmaforge
+    staticPacks:
+    - RevFoundryStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - Metal
+      - Wooden
+      - RawMaterial
+      - Plastic
+  - type: PointLight
+    enabled: true
+    color: "#E25822"
+    radius: 3.5
+    energy: 5.0
+  - type: ContainerContainer
+    containers:
+      blueprint: !type:Container
+  - type: Construction
+    node: plasma foundry

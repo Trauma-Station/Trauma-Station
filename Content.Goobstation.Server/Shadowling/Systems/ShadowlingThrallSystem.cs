@@ -2,6 +2,7 @@ using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Overlays;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.Thrall;
+using Content.Goobstation.Shared.Roles;
 using Content.Server.Antag;
 using Content.Server.Mind;
 using Content.Server.Roles;

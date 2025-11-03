@@ -1,0 +1,49 @@
+- type: entity
+  abstract: true
+  parent: [ BaseItem, BaseRevMinorContraband ]
+  id: BaseBlueprintDatachip
+  name: data chip
+  description: A datachip, can be inserted into a microelectronics assembler to make new useful tech.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/datachip.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - DataChip
+
+- type: entity
+  parent: BaseBlueprintDatachip
+  id: DataChipAIBoard
+  name: data chip [AI Override Board]
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - RevCircuitBoard
+
+- type: entity
+  parent: BaseBlueprintDatachip
+  id: DataChipReflectivePlate
+  name: data chip [Reflective Plate]
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - RevReflectivePlate
+
+- type: entity
+  parent: BaseBlueprintDatachip
+  id: DataChipFakeMindshield
+  name: data chip [Fake Mindshield]
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - FakeMindShieldImplanterRev
+
+- type: entity
+  parent: BaseBlueprintDatachip
+  id: DataChipShieldRipper
+  name: data chip [Mindshield Ripper]
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - RevShieldRipper

@@ -424,7 +424,7 @@ public sealed partial class DragonSystem : EntitySystem
 
         Roar(uid, component);
 
-        // TODO: add pushing (like from push horn but stronger) after upstream is merged
+        // TODO: add pushing (like from push horn but stronger)
 
         var xform = Transform(uid);
         var nearMobs = _lookup.GetEntitiesInRange<NpcFactionMemberComponent>(xform.Coordinates, component.RoarRange, LookupFlags.Uncontained);
@@ -433,7 +433,7 @@ public sealed partial class DragonSystem : EntitySystem
             if (_faction.IsEntityFriendly(uid, (mob.Owner, mob.Comp)))
                 continue;
 
-            _stun.TryStun(mob, TimeSpan.FromSeconds(component.RoarStunTime), false);
+            _stun.TryAddParalyzeDuration(mob, TimeSpan.FromSeconds(component.RoarStunTime));
         }
 
         args.Handled = true;

@@ -164,9 +164,12 @@
   - FauxTileAstroGrass
   - FauxTileMowedAstroGrass
   - FauxTileJungleAstroGrass
+  - FauxTileDarkAstroGrass
+  - FauxTileLightAstroGrass
   - FauxTileAstroIce
   - FauxTileAstroSnow
   - FauxTileAstroAsteroidSand
+  - FauxTileDesertAstroSand
   # Goobstation R&D Console rework start
   position: 1,5
   technologyPrerequisites:
@@ -304,6 +307,7 @@
   cost: 4000
   recipeUnlocks:
   - PushHorn
+  - BorgModuleAdvancedClowning
   # Goobstation R&D Console rework start
   position: 0,5
   technologyPrerequisites:

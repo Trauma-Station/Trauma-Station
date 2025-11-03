@@ -14,6 +14,7 @@ using Content.Shared.Damage;
 using Content.Shared._DV.Storage.Components;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Nutrition;
 using Content.Shared.Standing;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
@@ -37,6 +38,7 @@ public abstract class SharedMouthStorageSystem : EntitySystem
         SubscribeLocalEvent<MouthStorageComponent, DisarmedEvent>(DropAllContentsByRef);
         SubscribeLocalEvent<MouthStorageComponent, DamageChangedEvent>(OnDamageModified);
         SubscribeLocalEvent<MouthStorageComponent, ExaminedEvent>(OnExamined);
+        SubscribeLocalEvent<MouthStorageComponent, IngestionAttemptEvent>(OnIngestAttempt);
     }
 
     protected bool IsMouthBlocked(MouthStorageComponent component)
@@ -98,5 +100,19 @@ public abstract class SharedMouthStorageSystem : EntitySystem
             var subject = Identity.Entity(uid, EntityManager);
             args.PushMarkup(Loc.GetString("mouth-storage-examine-condition-occupied", ("entity", subject)));
         }
+    }
+
+    // Attempting to eat or drink anything with items in your mouth won't work
+    private void OnIngestAttempt(EntityUid uid, MouthStorageComponent component, ref IngestionAttemptEvent args)
+    {
+        if (!IsMouthBlocked(component))
+            return;
+
+        if (!TryComp<StorageComponent>(component.MouthId, out var storage))
+            return;
+
+        var firstItem = storage.Container.ContainedEntities[0];
+        args.Blocker = firstItem;
+        args.Cancelled = true;
     }
 }

@@ -57,7 +57,7 @@ public abstract partial class SharedMartialArtsSystem
         }
 
         // Paralyze, not knockdown
-        _stun.TryParalyze(target, TimeSpan.FromSeconds(proto.ParalyzeTime), true);
+        _stun.TryUpdateParalyzeDuration(target, proto.ParalyzeTime);
         DoDamage(ent, target, proto.DamageType, proto.ExtraDamage, out _);
         _audio.PlayPvs(args.Sound, target);
         ComboPopup(ent, target, proto.Name);
@@ -74,11 +74,11 @@ public abstract partial class SharedMartialArtsSystem
             _pulling.TryStopPull(target, pullable, ent, true);
 
         if (downed)
-            _stun.TryStun(target, args.DownedParalyzeTime, true); // No stunlocks
+            _stun.TryUpdateParalyzeDuration(target, args.DownedParalyzeTime); // No stunlocks
         else
         {
-            _stamina.TakeStaminaDamage(target, proto.StaminaDamage, applyResistances: true);
-            _stun.TryKnockdown(target, TimeSpan.FromSeconds(proto.ParalyzeTime), true, proto.DropHeldItemsBehavior);
+            _stamina.TakeStaminaDamage(target, proto.StaminaDamage);
+            _stun.TryKnockdown(target, proto.ParalyzeTime, true, drop: proto.DropItems);
             DoDamage(ent, target, proto.DamageType, proto.ExtraDamage, out _);
         }
 
@@ -94,8 +94,8 @@ public abstract partial class SharedMartialArtsSystem
             || !TryUseMartialArt(ent, proto, out var target, out _))
             return;
 
-        _stun.TrySlowdown(target, args.SlowdownTime, true, args.WalkSpeedModifier, args.SprintSpeedModifier);
-        _stamina.TakeStaminaDamage(target, proto.StaminaDamage, applyResistances: true);
+        _newStatus.TryUpdateStatusEffectDuration(target, args.StatusEffect, args.SlowdownTime);
+        _stamina.TakeStaminaDamage(target, proto.StaminaDamage);
         DoDamage(ent, target, proto.DamageType, proto.ExtraDamage, out _);
         _audio.PlayPvs(args.Sound, target);
         ComboPopup(ent, target, proto.Name);

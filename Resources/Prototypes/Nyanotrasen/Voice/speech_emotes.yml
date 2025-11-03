@@ -74,25 +74,6 @@
     - mewed
 
 - type: emote
-  id: Growl
-  name: Growl
-  category: Vocal
-  icon: _Goobstation/Interface/Emotes/growl.png
-  whitelist:
-    tags:
-    - FelinidEmotes
-    - HarpyEmotes
-  blacklist:
-    components:
-    - BorgChassis
-  chatMessages: [growls.]
-  chatTriggers:
-    - growl
-    - growls
-    - growling
-    - growled
-
-- type: emote
   id: Purr
   name: Purr
   category: Vocal

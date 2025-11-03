@@ -99,7 +99,7 @@ public partial struct ReagentQuantity : IEquatable<ReagentQuantity>
 
     public ReagentQuantity(ReagentId reagent, FixedPoint2 quantity)
     {
-        Reagent = reagent;
+        Reagent = new(reagent.Prototype, reagent.Data); // Goobstation - fix shallow cloning of solution
         Quantity = quantity;
     }
 
@@ -127,7 +127,7 @@ public partial struct ReagentQuantity : IEquatable<ReagentQuantity>
 
     public bool Equals(ReagentQuantity other)
     {
-        return Quantity != other.Quantity && Reagent.Equals(other.Reagent);
+        return Quantity == other.Quantity && Reagent.Equals(other.Reagent);
     }
 
     public override bool Equals(object? obj)

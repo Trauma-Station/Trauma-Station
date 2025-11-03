@@ -28,21 +28,6 @@
   - type: ApprenticeRole
 
 - type: antag
-  id: Wizard
-  name: roles-antag-wizard-name
-  antagonist: true
-  setPreference: true
-  objective: roles-antag-wizard-description
-  requirements:
-  - !type:OverallPlaytimeRequirement
-    time: 126000 # 35h
-  - !type:SpeciesRequirement
-    inverted: true
-    species:
-    - Plasmaman
-  guides: [ Wizard ]
-
-- type: antag
   id: Apprentice
   name: roles-antag-apprentice-name
   antagonist: true

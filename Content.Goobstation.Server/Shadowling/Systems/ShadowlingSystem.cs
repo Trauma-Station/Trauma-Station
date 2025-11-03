@@ -3,10 +3,10 @@ using Content.Goobstation.Shared.Shadowling;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Systems;
 using Content.Server.Objectives.Systems;
-using Content.Server.Storage.Components;
-using Content.Server.Storage.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Inventory;
+using Content.Shared.Storage.Components;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Random;
@@ -18,10 +18,10 @@ namespace Content.Goobstation.Server.Shadowling.Systems;
 /// </summary>
 public sealed class ShadowlingSystem : SharedShadowlingSystem
 {
-    [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly CodeConditionSystem _codeCondition = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
 
@@ -51,7 +51,7 @@ public sealed class ShadowlingSystem : SharedShadowlingSystem
 
         _damageable.TryChangeDamage(ent, ent.Comp.GunShootFailDamage, origin: ent);
 
-        _stun.TryParalyze(ent, ent.Comp.GunShootFailStunTime, false);
+        _stun.TryAddParalyzeDuration(ent, ent.Comp.GunShootFailStunTime);
 
         args.Cancel();
     }

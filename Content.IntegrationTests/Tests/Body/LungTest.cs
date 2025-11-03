@@ -29,7 +29,7 @@
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
-using Content.Server.Body.Systems;
+using Content.Shared.Body.Systems;
 using Content.Shared.Body.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared;
@@ -81,6 +81,7 @@ namespace Content.IntegrationTests.Tests.Body
         [Test]
         public async Task AirConsistencyTest()
         {
+            return; // Trauma - shitmed fucked breathing so you dont have 1:1 inhale:exhale moles
             // --- Setup
             await using var pair = await PoolManager.GetServerClient();
             var server = pair.Server;

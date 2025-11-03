@@ -15,50 +15,36 @@ using Content.Goobstation.Server.Implants.Components;
 using Content.Goobstation.Server.Mindcontrol;
 using Content.Goobstation.Shared.Mindcontrol;
 using Content.Shared.Implants;
+using Content.Trauma.Common.Implants;
 using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Server.Implants.Systems;
+
 public sealed class MindcontrolImplantSystem : EntitySystem
 {
     [Dependency] private readonly MindcontrolSystem _mindcontrol = default!;
+
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<MindcontrolImplantComponent, EntGotRemovedFromContainerMessage>(OnRemove); //implant gets removed, remove traitor
-        SubscribeLocalEvent<MindcontrolImplantComponent, ImplantImplantedEvent>(OnImplant);
-        SubscribeLocalEvent<MindcontrolImplantComponent, EntGotInsertedIntoContainerMessage>(OnInsert);
-    }
-    private void OnImplant(EntityUid uid, MindcontrolImplantComponent component, ImplantImplantedEvent args) //called after implanted ?
-    {
-        if (component.ImplanterUid != null)
-        {
-            component.HolderUid = Transform(component.ImplanterUid.Value).ParentUid;
-        }
-        if (args.Implanted != null)
-            EnsureComp<MindcontrolledComponent>(args.Implanted.Value);
 
-        component.ImplanterUid = null;
-        if (args.Implanted == null)
-            return;
-        if (!TryComp<MindcontrolledComponent>(args.Implanted.Value, out var implanted))
-            return;
-        implanted.Master = component.HolderUid;
-        _mindcontrol.Start(args.Implanted.Value, implanted);
+        SubscribeLocalEvent<MindcontrolImplantComponent, ImplanterUsedEvent>(OnImplanterUsed);
+        SubscribeLocalEvent<MindcontrolImplantComponent, ImplantRemovedEvent>(OnRemoved);
     }
-    private void OnInsert(EntityUid uid, MindcontrolImplantComponent component, EntGotInsertedIntoContainerMessage args)
+
+    private void OnImplanterUsed(Entity<MindcontrolImplantComponent> ent, ref ImplanterUsedEvent args)
     {
-        if (args.Container.ID == "implanter_slot")  //being inserted in a implanter.
-        {
-            component.ImplanterUid = args.Container.Owner;    //save Implanter uid
-            component.HolderUid = null;
-        }
+        if (ent.Owner != args.Implant)
+            return;
+
+        var mob = args.Target;
+        var comp = EnsureComp<MindcontrolledComponent>(mob);
+        comp.Master = args.User;
+        _mindcontrol.Start(mob, comp);
     }
-    private void OnRemove(EntityUid uid, MindcontrolImplantComponent component, EntGotRemovedFromContainerMessage args)
+
+    private void OnRemoved(Entity<MindcontrolImplantComponent> ent, ref ImplantRemovedEvent args)
     {
-        if (args.Container.ID == "implant") //when implant is removed
-        {
-            if (HasComp<MindcontrolledComponent>(args.Container.Owner))
-                RemComp<MindcontrolledComponent>(args.Container.Owner);
-        }
+        RemComp<MindcontrolledComponent>(args.Implanted);
     }
 }

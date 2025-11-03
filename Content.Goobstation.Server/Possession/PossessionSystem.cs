@@ -5,7 +5,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Changeling;
-using Content.Goobstation.Shared.Bible;
+using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Possession;
 using Content.Goobstation.Shared.Religion;
@@ -14,7 +14,6 @@ using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Stunnable;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
-using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Coordinates;
@@ -22,7 +21,6 @@ using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.Heretic;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs.Systems;
@@ -136,7 +134,7 @@ public sealed partial class PossessionSystem : EntitySystem
             coordinates = _transform.ToMapCoordinates(possessed.Comp.OriginalEntity.ToCoordinates());
 
         // Paralyze, so you can't just magdump them.
-        _stun.TryParalyze(possessed, TimeSpan.FromSeconds(10), false);
+        _stun.TryAddParalyzeDuration(possessed, TimeSpan.FromSeconds(10));
         _popup.PopupEntity(Loc.GetString("possession-end-popup", ("target", possessed)), possessed, PopupType.LargeCaution);
 
         // Teleport to the entity, kinda like you're popping out of their head!

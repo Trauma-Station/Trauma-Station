@@ -8,7 +8,7 @@
   id: FirefighterNozzle
   parent: BaseItem
   name: firefighter nozzle
-  description: A specialized nozzle intended to fight fires. 
+  description: A specialized nozzle intended to fight fires.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Basic/extinguishernozzle.rsi
@@ -25,7 +25,6 @@
   - type: Tag
     tags:
     - Nozzle
-    
   - type: Spray
     transferAmount: 15
     pushbackAmount: 60
@@ -75,8 +74,7 @@
     duration: 8
     spreadAmount: 200
     smokePrototype: Resin
-  - type: ActiveTimerTrigger
-    timeRemaining: 0.3
+  - type: AutoStartTimer
+  - type: TimerTrigger
+    delay: 0.3
   - type: DeleteOnTrigger
-  
-  

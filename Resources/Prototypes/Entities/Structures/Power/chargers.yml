@@ -122,6 +122,7 @@
   parent: BaseItemRecharger
   id: PowerCellRecharger
   name: cell recharger
+  description: An older model recharger that can recharge power cells.
   components:
   - type: Sprite
     sprite: Structures/Power/cell_recharger.rsi
@@ -155,11 +156,15 @@
           tags:
           - PowerCell
           - PowerCellSmall
+        blacklist:
+          tags:
+          - PotatoBattery
 
 - type: entity
   parent: [ BaseItemRecharger, ConstructibleMachine ]
   id: PowerCageRecharger
   name: cage recharger
+  description: A specialized machine made for recharging the heavy cage batteries used by ship-mounted weapons.
   components:
   - type: Fixtures
     fixtures:
@@ -200,6 +205,7 @@
   parent: BaseItemRecharger
   id: WeaponCapacitorRecharger
   name: recharger
+  description: A modern recharging station that can fit both power cells and small electronic devices.
   components:
   - type: Sprite
     sprite: Structures/Power/recharger.rsi
@@ -218,7 +224,6 @@
     # WWDP Edit end
   - type: Machine
     board: WeaponCapacitorRechargerCircuitboard
-  # no powercellslot since stun baton etc arent powercells
   - type: ItemSlots
     slots:
       charger_slot:
@@ -228,13 +233,14 @@
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
           - Stunbaton
-        # Goobstation
-          tags:
+          - PowerCell
+          tags: # Goob
           - FitsInCharger
         blacklist:
           tags:
-          - WizardWand
-          components:
+          - PotatoBattery
+          - WizardWand # Goob
+          components:  # Goob
           - MaterialEnergy
   - type: ItemSlotRenderer # WWDP
     mapping:
@@ -244,7 +250,7 @@
   parent: BaseItemRecharger
   id: TurboItemRecharger
   name: turbo recharger
-  description: An overclocked recharger that's been adapted with a global port.
+  description: An overclocked recharger. Not recommended for use around asthmatics.
   components:
   - type: Sprite
     sprite: Structures/Power/turbo_recharger.rsi
@@ -288,9 +294,10 @@
       charger_slot: enum.PowerChargerVisualLayers.ItemDisplay
 
 - type: entity
-  parent: BaseItemRecharger
+  parent: [ BaseItemRecharger, BaseWallmount ]
   id: WallWeaponCapacitorRecharger
   name: wall recharger
+  description: A compact wall-mounted recharger. It can only recharge electronic devices and has no space for power cells.
   components:
   - type: Sprite
     sprite: Structures/Power/wall_recharger.rsi
@@ -307,7 +314,6 @@
       offset: 0,0.45
       scale: 0.5,0.5
       # WWDP Edit end
-  - type: WallMount
   - type: Charger
     chargeRate: 25
   - type: ItemSlots
@@ -319,9 +325,10 @@
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
           - Stunbaton
-        blacklist:  # Goobstation
+        blacklist:
           tags:
-          - WizardWand
+          - PotatoBattery
+          - WizardWand # Goob
   - type: ItemSlotRenderer # WWDP
     mapping:
       charger_slot: enum.PowerChargerVisualLayers.ItemDisplay

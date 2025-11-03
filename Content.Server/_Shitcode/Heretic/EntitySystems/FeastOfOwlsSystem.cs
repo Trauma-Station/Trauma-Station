@@ -45,7 +45,7 @@ public sealed class FeastOfOwlsSystem : EntitySystem
 
             comp.ElapsedTime = 0f;
 
-            if (comp.CurrentStep + 1 < comp.Reward && !_stun.TryParalyze(uid, comp.ParalyzeTime, true, status))
+            if (comp.CurrentStep + 1 < comp.Reward && !_stun.TryUpdateParalyzeDuration(uid, comp.ParalyzeTime))
             {
                 _heretic.UpdateKnowledge(uid, heretic, comp.Reward - comp.CurrentStep, store);
                 RemCompDeferred(uid, comp);
@@ -53,7 +53,7 @@ public sealed class FeastOfOwlsSystem : EntitySystem
             }
 
             _jitter.DoJitter(uid, comp.JitterStutterTime, true, 10f, 10f,  true, status);
-            _stutter.DoStutter(uid, comp.JitterStutterTime, true, status);
+            _stutter.DoStutter(uid, comp.JitterStutterTime, refresh: true);
 
             if (vocalQuery.TryGetComponent(uid, out var vocal))
                 _chat.TryEmoteWithChat(uid, vocal.ScreamId);

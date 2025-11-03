@@ -123,6 +123,12 @@
   - type: Tag
     tags:
     - HolyClaymore
+  - type: Tool
+    qualities:
+      - Slicing
+    useSound:
+      path: /Audio/Items/Culinary/chop.ogg
+
 
 - type: entity
   name: rosary
@@ -432,7 +438,7 @@
         volume: 3
   - type: KnockdownOnHit
     duration: 0.2
-    dropHeldItemsBehavior: NoDrop
+    dropItems: false
   - type: UseDelay
     delay: 3
   - type: UseDelayBlockKnockdown

@@ -1,24 +1,7 @@
-// SPDX-FileCopyrightText: 2022 Moony <moony@hellomouse.net>
-// SPDX-FileCopyrightText: 2022 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 Moomoobeef <62638182+Moomoobeef@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deathride58 <deathride58@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lunarcomets <140772713+lunarcomets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lunarcomets <luanrcomets2@gmail,com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.IdentityManagement;
-using Robust.Shared.Network;
 
 namespace Content.Shared.Traits.Assorted;
 
@@ -28,7 +11,6 @@ namespace Content.Shared.Traits.Assorted;
 public sealed class PermanentBlindnessSystem : EntitySystem
 {
     [Dependency] private readonly BlindableSystem _blinding = default!;
-    [Dependency] private readonly INetManager _net = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -44,10 +26,12 @@ public sealed class PermanentBlindnessSystem : EntitySystem
         {
             args.PushMarkup(Loc.GetString("permanent-blindness-trait-examined", ("target", Identity.Entity(blindness, EntityManager))));
         }
-        else if (args.IsInDetailsRange && !_net.IsClient && blindness.Comp.Blindness == 4) /// Goobstation
+        // <Goob>
+        else if (args.IsInDetailsRange && blindness.Comp.Blindness == 4)
         {
             args.PushMarkup(Loc.GetString("poor-vision-trait-examined", ("target", Identity.Entity(blindness, EntityManager))));
-        }  
+        }
+        // </Goob>
     }
 
     private void OnShutdown(Entity<PermanentBlindnessComponent> blindness, ref ComponentShutdown args)
@@ -59,18 +43,23 @@ public sealed class PermanentBlindnessSystem : EntitySystem
         {
             _blinding.SetMinDamage((blindness.Owner, blindable), 0);
         }
+
+        // Heal all eye damage when the component is removed.
+        // Otherwise you would still be blind, but not *permanently* blind, meaning you have to heal the eye damage with oculine.
+        // This is needed for changelings that transform from a blind player to a non-blind one.
+        _blinding.AdjustEyeDamage((blindness.Owner, blindable), -blindable.EyeDamage);
     }
 
     private void OnMapInit(Entity<PermanentBlindnessComponent> blindness, ref MapInitEvent args)
     {
-        if(!TryComp<BlindableComponent>(blindness.Owner, out var blindable))
+        if (!TryComp<BlindableComponent>(blindness.Owner, out var blindable))
             return;
 
         if (blindness.Comp.Blindness != 0)
             _blinding.SetMinDamage((blindness.Owner, blindable), blindness.Comp.Blindness);
         else
         {
-            var maxMagnitudeInt = (int) BlurryVisionComponent.MaxMagnitude;
+            var maxMagnitudeInt = (int)BlurryVisionComponent.MaxMagnitude;
             _blinding.SetMinDamage((blindness.Owner, blindable), maxMagnitudeInt);
         }
     }

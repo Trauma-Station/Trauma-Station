@@ -7,15 +7,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: speechSounds
-  id: Vulpkanin
-  saySound:
-    path: /Audio/_DV/Voice/Talk/vulp.ogg
-  askSound:
-    path: /Audio/_DV/Voice/Talk/vulp_ask.ogg
-  exclaimSound:
-    path: /Audio/_DV/Voice/Talk/vulp_exclaim.ogg
-
-- type: speechSounds
   id: Harpy
   saySound:
     path: /Audio/_DV/Voice/Harpy/chirp1.ogg

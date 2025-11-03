@@ -112,23 +112,28 @@
     ClothingShoesBootsCowboyBrown: 1
     ClothingShoesBootsCowboyBlack: 1
     ClothingShoesBootsCowboyWhite: 1
+    # <Goob>
     ClothingCostumeAbductorHead: 1
     ClothingCostumeAbductor: 1
-    ClothingHeadSanabi: 1 # Goobstation
-    ClothingNeckCloakSanabi: 1 # Goobstation
-    ClothingCostumeGingerbreadHead: 1 #goob
+    ClothingHeadSanabi: 1
+    ClothingNeckCloakSanabi: 1
+    ClothingCostumeGingerbreadHead: 1
+    # </Goob>
   contrabandInventory:
     ClothingHeadHatRichard: 1
     ClothingShoesBling: 1
     ClothingShoesBootsCowboyFancy: 1
     ClothingOuterDogi: 1
+    ClothingOuterSuitCarp: 1
     ClothingMaskSexyClown: 1
     ClothingMaskSexyMime: 1
     ClothingHeadHatCowboyBountyHunter: 1
     ToyFigurineBoxer: 1
     ToyFigurineMusician: 1
-    WeaponLauncherTaiwanPond: 1 # Goobstation
-    GrenadeToy: 5 # Goobstation
-    ClothingShoesResonant: 1 # Goobstation
-    ClothingNeckCloakResonant: 1 # Goobstation
-    ClothingUniformJumpsuitResonant: 1 # Goobstation
+    # <Goob>
+    WeaponLauncherTaiwanPond: 1
+    GrenadeToy: 5
+    ClothingShoesResonant: 1
+    ClothingNeckCloakResonant: 1
+    ClothingUniformJumpsuitResonant: 1
+    # </Goob>

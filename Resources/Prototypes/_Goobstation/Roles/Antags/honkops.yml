@@ -49,7 +49,7 @@
   equipment:
     back: ClothingBackpackDuffelSyndicateMedical
     eyes: ClothingEyesHudSyndicateAgent
-    id: SyndiAgentPDA
+    id: SyndiCorpsmanPDA
     belt: ClothingBeltChemBagSyndiFilled
     pocket2: BaseUplinkRadio225TCMedic
   storage:

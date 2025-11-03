@@ -36,7 +36,7 @@ namespace Content.Server.Medical
         private void OnComponentRemove(EntityUid uid, InsideCryoPodComponent component, ComponentRemove args)
         {
             _actionsSystem.RemoveAction(uid, component.SleepAction);
-            _sleepingSystem.TryWaking(uid);
+            _sleeping.TryWaking(uid);
         }
         // Shitmed Change End
 

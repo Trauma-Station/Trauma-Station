@@ -9,12 +9,17 @@
   name: "misc signaller base"
   abstract: true
   components:
-  - type: MiscSignaller
+  - type: SignalOnTrigger
+    port: Triggered
+  - type: UseDelayTriggerCondition
+  - type: UseDelayOnTrigger
+  - type: UseDelay
+    delay: 3
   - type: StaticPrice
     price: 40
   - type: DeviceLinkSource
     ports:
-      - Triggered
+    - Triggered
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice

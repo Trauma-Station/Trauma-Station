@@ -1,0 +1,10 @@
+- type: entity
+  parent: [ ClothingBeltStorageBase, BaseRevMajorContraband ]
+  id: ClothingBeltRevWebbing
+  name: chest rig
+  description: Ideal for storing everything from ammo to weapons and combat essentials.
+  components:
+  - type: Sprite
+    sprite: Clothing/Belt/mercwebbing.rsi
+  - type: Clothing
+    sprite: Clothing/Belt/mercwebbing.rsi

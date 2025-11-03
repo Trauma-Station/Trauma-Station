@@ -6,7 +6,7 @@ namespace Content.Trauma.Shared.EntityEffects;
 /// <summary>
 /// Removes components from the target entity.
 /// </summary>
-public sealed partial class RemoveComponents : EntityEffect
+public sealed partial class RemoveComponents : EntityEffectBase<RemoveComponents>
 {
     /// <summary>
     /// Components to remove.
@@ -20,11 +20,14 @@ public sealed partial class RemoveComponents : EntityEffect
     [DataField(required: true)]
     public LocId GuidebookText;
 
-    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString(GuidebookText);
+    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+        => Loc.GetString(GuidebookText, ("chance", Probability));
+}
 
-    public override void Effect(EntityEffectBaseArgs args)
+public sealed class RemoveComponentsEffectSystem : EntityEffectSystem<MetaDataComponent, RemoveComponents>
+{
+    protected override void Effect(Entity<MetaDataComponent> ent, ref EntityEffectEvent<RemoveComponents> args)
     {
-        args.EntityManager.RemoveComponents(args.TargetEntity, Components);
+        EntityManager.RemoveComponents(ent, args.Effect.Components);
     }
 }

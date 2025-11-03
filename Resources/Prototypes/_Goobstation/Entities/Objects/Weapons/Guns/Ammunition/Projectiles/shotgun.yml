@@ -243,8 +243,10 @@
       - ReagentId: Sarin
         Quantity: 20
     spreadAmount: 1
-  - type: ActiveTimerTrigger
-    timeRemaining: 1
+  - type: AutoStartTimer
+  - type: TimerTrigger
+    examinable: false
+    delay: 1
   - type: DeleteOnTrigger
   - type: Projectile
     damage:
@@ -357,4 +359,3 @@
     proto: HighCaliberPelletGrenade
     count: 20
     spread: 15
-

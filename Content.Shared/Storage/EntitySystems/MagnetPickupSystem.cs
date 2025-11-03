@@ -1,26 +1,12 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Stray-Pyramid <Pharaohofnile@gmail.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 RatherUncreative <RatherUncreativeName@proton.me>
-// SPDX-FileCopyrightText: 2024 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Kyle Tyo <36606155+VerinSenpai@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Server.Storage.Components;
+// <Goob>
 using Content.Shared.Examine;
-using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
+// </Goob>
+using Content.Shared.Inventory;
+using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
-using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
 
@@ -36,7 +22,7 @@ public sealed class MagnetPickupSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
+    [Dependency] private readonly ItemToggleSystem _toggle = default!; // Goob
     [Dependency] private readonly SharedItemSystem _item = default!; // White Dream
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
@@ -56,7 +42,7 @@ public sealed class MagnetPickupSystem : EntitySystem
     //WD EDIT start
     private void OnExamined(Entity<MagnetPickupComponent> entity, ref ExaminedEvent args)
     {
-        var onMsg = _itemToggle.IsActivated(entity.Owner)
+        var onMsg = _toggle.IsActivated(entity.Owner)
             ? Loc.GetString("comp-magnet-pickup-examined-on")
             : Loc.GetString("comp-magnet-pickup-examined-off");
         args.PushMarkup(onMsg);
@@ -93,6 +79,7 @@ public sealed class MagnetPickupSystem : EntitySystem
                 continue;
 
             comp.NextScan += ScanDelay;
+            Dirty(uid, comp);
 
                         // WD EDIT START. Added ForcePickup.
             if (!comp.ForcePickup && !_inventory.TryGetContainingSlot((uid, xform, meta), out _))

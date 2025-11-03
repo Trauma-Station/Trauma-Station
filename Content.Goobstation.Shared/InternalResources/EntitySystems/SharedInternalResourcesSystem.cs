@@ -50,7 +50,7 @@ public sealed class SharedInternalResourcesSystem : EntitySystem
         if (!_protoMan.TryIndex(protoId, out var proto))
             return;
 
-        _alertsSystem.ShowAlert(entity, proto.AlertPrototype);
+        _alertsSystem.ShowAlert(entity.Owner, proto.AlertPrototype);
     }
 
     /// <summary>

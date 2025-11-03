@@ -16,7 +16,7 @@ public sealed partial class ShadowCloakedComponent : Component
     public bool WasVisible = true;
 
     [DataField]
-    public ProtoId<StatusEffectPrototype> Status = "ShadowCloak";
+    public EntProtoId Status = "ShadowCloakStatusEffect";
 
     [DataField]
     public ProtoId<EmoteSoundsPrototype> EmoteSounds = "ShadowCloak";
@@ -37,16 +37,13 @@ public sealed partial class ShadowCloakedComponent : Component
     public bool DebuffOnEarlyReveal;
 
     [DataField]
-    public Vector2 MoveSpeedModifiers = new(1.25f, 1.25f);
-
-    [DataField]
-    public Vector2 EarlyRemoveMoveSpeedModifiers = new(0.75f, 0.75f);
-
-    [DataField]
     public TimeSpan KnockdownTime = TimeSpan.FromSeconds(0.5f);
 
     [DataField]
     public TimeSpan SlowdownTime = TimeSpan.FromSeconds(10f);
+
+    [DataField]
+    public EntProtoId SlowdownEffect = "ShadowCloakRevealStatusEffect";
 
     [DataField]
     public float DoAfterSlowdown = 3f;

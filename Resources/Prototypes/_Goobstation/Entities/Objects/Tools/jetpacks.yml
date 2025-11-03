@@ -24,8 +24,8 @@
       volume: 1000
       temperature: 1
       moles:
-        - 10000 # oxygen
-        - 10000 # nitrogen
+        Oxygen: 10000
+        Nitrogen: 10000
   - type: Jetpack
     moleUsage: 0.00002
   - type: MovementSpeedModifier

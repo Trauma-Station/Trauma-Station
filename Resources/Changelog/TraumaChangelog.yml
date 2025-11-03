@@ -179,3 +179,382 @@ Entries:
       message: Mice now have an egg sack organ, steal their powers!
   id: 20
   time: '2025-10-14T07:12:55.0000000+00:00'
+- author: MayasMischief
+  changes:
+    - type: Add
+      message: Added Spray Paint and compressed paint to loadout trinkets.
+  id: 21
+  time: '2025-10-14T18:55:04.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Rev ID cards and doors now use their own access instead of syndicate.
+  id: 22
+  time: '2025-10-14T20:08:41.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed rev machines working when unanchored.
+  id: 23
+  time: '2025-10-14T20:57:13.0000000+00:00'
+- author: JetstreamToaster
+  changes:
+    - type: Remove
+      message: Poison to dionas from animal proteins are no more
+  id: 24
+  time: '2025-10-15T09:02:00.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Remove
+      message: Tail and catear style markings from humans.
+  id: 25
+  time: '2025-10-16T23:20:22.0000000+00:00'
+- author: ImWeax
+  changes:
+    - type: Add
+      message: Juice that kills people named John
+  id: 26
+  time: '2025-10-17T16:50:35.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Only CE and engiborgs get an RCD now.
+  id: 27
+  time: '2025-10-17T16:51:40.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Renamed goobcoin to evilcoin.
+  id: 28
+  time: '2025-10-17T17:04:02.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Surgical omnitools are no longer available 5 seconds into the round.
+  id: 29
+  time: '2025-10-17T17:53:32.0000000+00:00'
+- author: Aviu
+  changes:
+    - type: Remove
+      message: Goodbye antag pity.
+  id: 30
+  time: '2025-10-18T13:23:25.0000000+00:00'
+- author: ARMOKS
+  changes:
+    - type: Remove
+      message: Ventilator syndicate gun, its gimmick was useless
+    - type: Remove
+      message: Krav maga implant, its now warden only.
+    - type: Remove
+      message: >-
+        Big shotgun, does not match game vision, TTK too low to ever bring into
+        a proper place.
+    - type: Remove
+      message: Scram implant, replaced by teleporter
+    - type: Remove
+      message: Syndicate disabler, its job is done better by the telebaton
+    - type: Remove
+      message: Syndicate knuckle dusters, they are just stronger northstars
+    - type: Remove
+      message: Cat ears, no more being trolled in surplus crates.
+    - type: Tweak
+      message: Thermals and NVG now give flash weakness even if you have protection on
+    - type: Tweak
+      message: Syndicate teleporter made cheaper, its a better version of scram
+  id: 31
+  time: '2025-10-18T18:26:00.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Rev rocket crafting recipe
+    - type: Add
+      message: Rev rocket launcher crafting recipe
+    - type: Add
+      message: Rev uniform printer
+    - type: Add
+      message: Rev ball bearings, can be used to make improv grenades
+    - type: Add
+      message: >-
+        Guidebook section for making weird chem things like gunpowder and
+        plastic
+    - type: Add
+      message: Microelectronic Assembler crafting recipe
+    - type: Add
+      message: Made IEDS and Pipebombs not shit
+    - type: Add
+      message: Walls no longer die to bullets
+    - type: Add
+      message: Entire rev clothing set
+    - type: Add
+      message: Rev visor and earpiece
+    - type: Add
+      message: >-
+        Craftable rev helmets and vests, made with helmet liners and armor
+        plates
+    - type: Add
+      message: Nut, Bolt, and Gear sprites for bigger stacks.
+    - type: Tweak
+      message: RPG-2 slows you down while walking now
+    - type: Tweak
+      message: 'Some rev lathes made more expensive '
+    - type: Tweak
+      message: Basic rev parts made much cheaper
+  id: 32
+  time: '2025-10-18T18:46:47.0000000+00:00'
+- author: ImWeax
+  changes:
+    - type: Tweak
+      message: >-
+        You can now grind up cigarettes for their reagents. Inject pure nicotine
+        into your bloodstream.
+  id: 33
+  time: '2025-10-18T18:55:38.0000000+00:00'
+- author: ShellKnight
+  changes:
+    - type: Add
+      message: >-
+        Ported WDP's Alert Level Locks (Certain safes cannot be opened unless it
+        is red)
+  id: 34
+  time: '2025-10-18T18:59:07.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: remove flash revs fuck you aviu
+  id: 35
+  time: '2025-10-18T20:37:25.0000000+00:00'
+- author: ARMOKS
+  changes:
+    - type: Fix
+      message: Fixed revs not being able to build a printing press.
+  id: 36
+  time: '2025-10-18T20:43:36.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed rev printing press gmod ERROR
+  id: 37
+  time: '2025-10-19T15:17:12.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Removed BSO.
+  id: 38
+  time: '2025-10-19T16:27:21.0000000+00:00'
+- author: JoeHammad
+  changes:
+    - type: Add
+      message: You can now wear the RPG2 on your back
+    - type: Tweak
+      message: RPG2 sprites are now 48x32, aka longer
+  id: 39
+  time: '2025-10-20T04:10:17.0000000+00:00'
+- author: Lumminal
+  changes:
+    - type: Tweak
+      message: Flashes only work directionally now.
+  id: 40
+  time: '2025-10-20T22:44:03.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Replace Sec roundstart 80DPS pistol with a 32 DPS laser pistol
+  id: 41
+  time: '2025-10-21T00:21:01.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: The station has to be on blue alert for 10 minutes to unlock red alert.
+    - type: Tweak
+      message: >-
+        The station has to be on red alert or higher to order guns and combat
+        hardsuits.
+    - type: Tweak
+      message: >-
+        The station has to be on red alert or higher to build gygax/durand
+        mechs.
+  id: 42
+  time: '2025-10-21T01:37:52.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Remove
+      message: Gygax and Durand bounty
+  id: 43
+  time: '2025-10-21T01:40:40.0000000+00:00'
+- author: ARMOKS
+  changes:
+    - type: Add
+      message: new lobby art
+    - type: Remove
+      message: Every lobby art
+  id: 44
+  time: '2025-10-21T02:24:31.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Remove
+      message: Some slop chems
+  id: 45
+  time: '2025-10-21T03:50:46.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: >-
+        Every grenade can be taken apart and put back together with each others
+        payloads / triggers.
+    - type: Add
+      message: >-
+        EMP, air, bee, cluster, clusterband, explosive, foam, holy, incendiary,
+        minibomb, nuclear, plasteel shrapnel, sarin gas, speaker, smoke,
+        stinger, supermatter, tear gas, and whitehole grenade payloads.
+    - type: Add
+      message: Whitehole, supermatter, silent, minibomb, and holy timers.
+    - type: Add
+      message: >-
+        you can put the new grenade payloads in landmines, or other grenade
+        shells
+    - type: Add
+      message: TONS of grenade shells
+    - type: Add
+      message: Crowbars take grenades apart.
+    - type: Add
+      message: you can put any bomb in plushies
+    - type: Add
+      message: bomb components can spawn in maints
+  id: 46
+  time: '2025-10-21T04:28:43.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Bigger fland maints
+  id: 47
+  time: '2025-10-22T02:02:07.0000000+00:00'
+- author: Speebro
+  changes:
+    - type: Add
+      message: >-
+        Tranquility now slowly increases while in your bloodstream, find a cure
+        before you turn...
+  id: 48
+  time: '2025-10-24T10:52:03.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Remove
+      message: Nutriment no longer provides minor healing.
+    - type: Tweak
+      message: Vitamin gained the healing lost from nutriment values.
+  id: 49
+  time: '2025-10-24T21:19:14.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Rev Tech Analyzer
+    - type: Add
+      message: Rev reflective armor
+    - type: Add
+      message: Updated fire sprites
+    - type: Add
+      message: Rev boots, with caltrop resist
+    - type: Add
+      message: A WHOLE REV FLAMETHROWER
+    - type: Add
+      message: Four four new rev datachips
+    - type: Add
+      message: Rev AI lawboard
+    - type: Add
+      message: Command pinpointer
+    - type: Add
+      message: Rev shieldripper
+    - type: Add
+      message: Rev fake mindshield
+    - type: Fix
+      message: Bugs
+  id: 50
+  time: '2025-10-25T16:23:58.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Salv now gets up to 100 evil coin if they actually mine.
+  id: 51
+  time: '2025-10-26T11:32:24.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: >-
+        Re ported alert level locks for gun safes from white dream, no more
+        lecters on green.
+  id: 52
+  time: '2025-10-26T12:51:20.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Made rev endgame armor much stronger, it was worse than crew's free
+        roundstart gear.
+    - type: Tweak
+      message: >-
+        Changed rev endgame armor to have construction steps instead of a 30s
+        doafter.
+  id: 53
+  time: '2025-10-26T13:47:00.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        For abductor duos, the agent can now use gizmos as well, which he gets
+        instead of the scientist.
+  id: 54
+  time: '2025-10-26T16:21:39.0000000+00:00'
+- author: rustdevelopment
+  changes:
+    - type: Tweak
+      message: Changed default rat servant behavior from "Loose" to "Follow"
+  id: 55
+  time: '2025-10-27T20:13:14.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Killdozer
+    - type: Add
+      message: Plasma Foundry
+    - type: Add
+      message: Flame armor
+    - type: Add
+      message: bunch more stuff I forgot
+    - type: Add
+      message: Insurgents for real this time?
+  id: 56
+  time: '2025-10-31T22:33:49.0000000+00:00'
+- author: ParadoxumOfficial
+  changes:
+    - type: Tweak
+      message: Updated some Job Sprites.
+  id: 57
+  time: '2025-11-02T09:42:01.0000000+00:00'
+- author: ParadoxumOfficial
+  changes:
+    - type: Tweak
+      message: Updated Material Sprites!
+  id: 58
+  time: '2025-11-03T00:58:54.0000000+00:00'
+- author: ParadoxumOfficial
+  changes:
+    - type: Tweak
+      message: Updated Wood Sprites
+    - type: Tweak
+      message: Updated Durathread Sprites
+    - type: Tweak
+      message: Updated Cloth Sprites
+    - type: Tweak
+      message: Updated Cotton Sprites
+    - type: Tweak
+      message: Updated Pyrotton Sprites
+  id: 59
+  time: '2025-11-03T07:02:01.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Added bugs, please report them on traumastation github.
+    - type: Remove
+      message: Removed anything burgers pending rework due to shitcode.
+  id: 60
+  time: '2025-11-03T10:46:20.0000000+00:00'

@@ -137,10 +137,10 @@
   requirements:
     - !type:RoleTimeRequirement
       role: JobSecurityOfficer
-      time: 18000 #5 hrs
+      time: 5h
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 36000 #10 hrs
+      time: 10h
     - !type:SpeciesRequirement # Goob - None Felinid
       inverted: true
       species:
@@ -160,6 +160,8 @@
   - External
   - Detective
   - Cryogenics
+  - GenpopEnter
+  - GenpopLeave
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -173,11 +175,10 @@
     eyes: ClothingEyesGlassesSecurity
     id: WardenPDA
     ears: ClothingHeadsetAltWarden # Goobstation
-    pocket1: WeaponPistolMk58
+    pocket1: WeaponLaserSidearm
   storage:
     back:
     - Flash
-    - MagazinePistol
     - ClothingMaskGasSecurity # Goobstation
 
 - type: chameleonOutfit

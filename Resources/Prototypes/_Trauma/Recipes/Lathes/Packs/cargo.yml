@@ -1,0 +1,6 @@
+## Static
+
+- type: latheRecipePack
+  id: CargoStaticTrauma
+  recipes:
+  - ConstructionBag

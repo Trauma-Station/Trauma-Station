@@ -1,0 +1,133 @@
+- type: entity
+  id: Killdozer
+  parent: [ BaseMech, IndustrialMech, BaseRevMajorContraband ]
+  name: killdozer
+  description: Oh no
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _Trauma/Objects/Specific/Mech/killdozer.rsi
+    layers:
+    - map: [ "enum.MechVisualLayers.Base" ]
+      state: killdozer
+    - map: ["enum.PaperLabelVisuals.Layer"]
+      sprite: Structures/Storage/Crates/labels.rsi
+      state: paper
+    scale: 1.2, 1.2
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepKilldozer
+      params:
+        variation: 0.17
+  - type: Mech
+    baseState: killdozer
+    openState: icon
+    brokenState: icon
+    mechToPilotDamageMultiplier: 0
+    airtight: false
+    maxIntegrity: 1000
+    maxEquipmentAmount: 1
+    pilotWhitelist:
+      components:
+        - HumanoidAppearance
+    startingEquipment:
+      - WeaponMechMosinPortsEmpty
+  - type: MeleeWeapon
+    hidden: true
+    attackRate: 0.5
+    damage:
+      types:
+        Structural: 800
+        Blunt: 50
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 2
+  - type: Damageable
+    damageModifierSet: MediumArmorNT
+  - type: StaticPrice
+    price: 1000
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: Construction
+    graph: Killdozer
+    deconstructionTarget: null
+    node: Killdozer
+
+- type: entity
+  id: UnfinishedKilldozer
+  name: pile of metal parts
+  description: This feels forboding
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 100
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+        restitution: 0.3
+        friction: 0.2
+  - type: Sprite
+    noRot: true
+    drawdepth: Items
+    sprite: _Trauma/Objects/Specific/Mech/killdozer.rsi
+    state: unfinished
+  - type: Appearance
+  - type: Pullable
+  - type: Construction
+    graph: Killdozer
+    deconstructionTarget: null
+    node: unfinished
+
+- type: entity
+  id: WeaponMechMosinPorts
+  name: firing-port mosins
+  description: Several Mosin rifles modified to be accepted into the killdozer firing ports.
+  suffix: Mech Weapon, Full
+  parent: [ BaseMechWeaponRange, IndustrialMechEquipment ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Mechs/mosinports.rsi
+    state: icon
+  - type: AmmoCounter
+  - type: Gun
+    fireRate: 0.75
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+  - type: BallisticAmmoProvider
+    autoCycle: true
+    capacity: 500
+    proto: CartridgeLightRifle
+    whitelist:
+      tags:
+      - CartridgeLightRifle
+  - type: ClothingSpeedModifier
+    walkModifier: 0.05
+    sprintModifier: 0.05
+  - type: HeldSpeedModifier
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+
+- type: entity
+  id: WeaponMechMosinPortsEmpty
+  suffix: Mech Weapon, Empty
+  parent: WeaponMechMosinPorts
+  components:
+  - type: BallisticAmmoProvider
+    proto: null

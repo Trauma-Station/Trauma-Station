@@ -20,32 +20,32 @@
   result: ClarkePeripheralsElectronics
 
 - type: latheRecipe
-  parent: BaseGoldCircuitboardRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseRedAlert ] # Trauma - added BaseRedAlert
   id: GygaxCentralElectronics
   result: GygaxCentralElectronics
 
 - type: latheRecipe
-  parent: BaseGoldCircuitboardRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseRedAlert ] # Trauma - added BaseRedAlert
   id: GygaxPeripheralsElectronics
   result: GygaxPeripheralsElectronics
 
 - type: latheRecipe
-  parent: BaseGoldCircuitboardRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseRedAlert ] # Trauma - added BaseRedAlert
   id: GygaxTargetingElectronics
   result: GygaxTargetingElectronics
 
 - type: latheRecipe
-  parent: BaseSilverCircuitboardRecipe
+  parent: [ BaseSilverCircuitboardRecipe, BaseRedAlert ] # Trauma - added BaseRedAlert
   id: DurandCentralElectronics
   result: DurandCentralElectronics
 
 - type: latheRecipe
-  parent: BaseSilverCircuitboardRecipe
+  parent: [ BaseSilverCircuitboardRecipe, BaseRedAlert ] # Trauma - added BaseRedAlert
   id: DurandPeripheralsElectronics
   result: DurandPeripheralsElectronics
 
 - type: latheRecipe
-  parent: BaseSilverCircuitboardRecipe
+  parent: [ BaseSilverCircuitboardRecipe, BaseRedAlert ] # Trauma - added BaseRedAlert
   id: DurandTargetingElectronics
   result: DurandTargetingElectronics
 

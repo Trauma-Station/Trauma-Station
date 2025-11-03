@@ -1,0 +1,55 @@
+# Effect ran on mimes when they break vow
+- type: entityEffect
+  id: MimePunishments
+  effects:
+  - !type:WeightedRandomEffect
+    probability: 0.25 # 75% chance of nothing happening
+    children:
+    - effect: !type:NestedEffect
+        proto: KillSign
+    - effect: !type:NestedEffect
+        proto: GibExplode
+    - effect: !type:Polymorph
+        prototype: AdminBreadSmite
+    - effect: !type:ForceEquipClothing
+        spawn: ClothingHeadHatCatEars
+        slot: head
+    - effect: !type:AddComponents
+        guidebookText: entity-effect-guidebook-add-accents
+        components:
+        - type: OhioAccent
+    - effect: !type:AddComponents
+        guidebookText: entity-effect-guidebook-add-accents
+        components:
+        - type: BackwardsAccent
+        - type: DementiaAccent
+    - effect: !type:AddComponents
+        guidebookText: entity-effect-guidebook-add-accents
+        components:
+        - type: VulgarAccent
+        - type: BoganAccent
+    - effect: !type:AddComponents
+        guidebookText: entity-effect-guidebook-add-accents
+        components:
+        - type: VulgarAccent
+        - type: RussianAccent
+        - type: BackwardsAccent
+        - type: OhioAccent
+
+- type: entityEffect
+  id: KillSign
+  effects:
+  - !type:AddComponents
+    guidebookText: entity-effect-guidebook-add-killsign
+    components:
+    - type: KillSign
+
+- type: entityEffect
+  id: GibExplode
+  effects:
+  - !type:ExplosionEffect
+    explosionType: Default
+    maxIntensity: 4
+    maxTotalIntensity: 2
+    tileBreakScale: 0
+  - !type:Gib

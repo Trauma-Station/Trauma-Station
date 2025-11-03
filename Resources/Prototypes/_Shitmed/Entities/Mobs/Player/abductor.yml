@@ -52,15 +52,6 @@
     description: abductor-lone-ghost-role-desc
     mindRoles:
     - MindRoleGhostRoleSoloAntagonist
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 7200 #2 hours
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 7200 #2 hours
   - type: AbductorScientist
   - type: SurgeryIgnoreClothing
   - type: Sanitized
@@ -80,12 +71,6 @@
     description: abductor-scientist-ghost-role-desc
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 10800 #3 hours
   - type: AbductorScientist
   - type: SurgeryIgnoreClothing
   - type: Sanitized
@@ -105,12 +90,6 @@
     description: abductor-agent-ghost-role-desc
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 10800 #3 hours
   - type: RandomMetadata
     nameSegments:
       - AbductorAgentPrefix
@@ -153,7 +132,7 @@
     head: ClothingHeadMirror
     outerClothing: ClothingOuterCoatAbductor
     back: ClothingBackpackDuffelAbductor
-    pocket1: AbductorGizmo
+    pocket1: Silencer # Trauma - swapped silencer and gizmo
     suitstorage: WeaponDecloner
     id: AgentIDCard
 
@@ -167,7 +146,7 @@
     head: ClothingHeadHelmetAbductor
     outerClothing: ClothingOuterArmorAbductor
     back: ClothingBackpackAbductor
-    pocket1: Silencer
+    pocket1: AbductorGizmo # Trauma - swapped silencer and gizmo
     pocket2: WeaponAlien
     suitstorage: Wonderprod
     id: AgentIDCard
@@ -200,15 +179,6 @@
     - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: default
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 7200 #2 hours
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 7200 #2 hours
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -242,12 +212,6 @@
     - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 10800 #3 hours
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -281,12 +245,6 @@
     - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 10800 #3 hours
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:

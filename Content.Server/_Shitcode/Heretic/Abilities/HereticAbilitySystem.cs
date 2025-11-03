@@ -22,6 +22,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+// the fucking eye of the shitcode storm
+
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Goobstation.Shared.Overlays;
 using Content.Server.Atmos.EntitySystems;
@@ -41,7 +43,7 @@ using Robust.Shared.Audio.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Random;
 using Content.Shared.Body.Systems;
-using Content.Server.Medical;
+using Content.Shared.Medical;
 using Robust.Server.GameObjects;
 using Content.Shared.Stunnable;
 using Robust.Shared.Map;
@@ -60,7 +62,7 @@ using Content.Server.Body.Systems;
 using Content.Server.Temperature.Systems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Server.Heretic.Components;
-using Content.Server.Temperature.Components;
+using Content.Shared.Temperature.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Components;
@@ -75,6 +77,7 @@ using Content.Shared.Standing;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Body.Components;
 using Content.Shared.Examine;
+using Content.Shared.Hands.Components;
 using Content.Shared.Tag;
 using Robust.Server.Containers;
 
@@ -104,7 +107,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly ProtectiveBladeSystem _pblade = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly VoidCurseSystem _voidcurse = default!;
@@ -124,26 +126,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
     private const float LeechingWalkUpdateInterval = 1f;
     private float _accumulator;
-
-    private List<EntityUid> GetNearbyPeople(Entity<HereticComponent> ent, float range)
-    {
-        var list = new List<EntityUid>();
-        var lookup = Lookup.GetEntitiesInRange<MobStateComponent>(Transform(ent).Coordinates, range);
-
-        foreach (var look in lookup)
-        {
-            // ignore heretics with the same path*, affect everyone else
-            if (TryComp<HereticComponent>(look, out var th) && th.CurrentPath == ent.Comp.CurrentPath ||
-                HasComp<GhoulComponent>(look))
-                continue;
-
-            if (!HasComp<StatusEffectsComponent>(look))
-                continue;
-
-            list.Add(look);
-        }
-        return list;
-    }
 
     public override void Initialize()
     {
@@ -184,18 +166,21 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         if (!TryUseAbility(ent, args))
             return;
 
+        if (!TryComp<HandsComponent>(ent, out var handsComp))
+            return;
+
         if (ent.Comp.MansusGrasp != EntityUid.Invalid)
         {
-            foreach (var item in _hands.EnumerateHeld(ent.Owner))
+            foreach (var item in _hands.EnumerateHeld((ent.Owner, handsComp)))
             {
-                if (HasComp<MansusGraspComponent>(item ))
-                    QueueDel(item );
+                if (HasComp<MansusGraspComponent>(item))
+                    QueueDel(item);
             }
             ent.Comp.MansusGrasp = EntityUid.Invalid;
             return;
         }
 
-        if (!_hands.TryGetEmptyHand(ent.Owner, out var emptyHand))
+        if (!_hands.TryGetEmptyHand((ent.Owner, handsComp), out var emptyHand))
         {
             // Empowered blades - infuse all of our blades that are currently in our inventory
             if (ent.Comp.CurrentPath == "Blade" && ent.Comp.PathStage >= 7)
@@ -212,7 +197,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
         var st = Spawn(GetMansusGraspProto(ent), Transform(ent).Coordinates);
 
-        if (!_hands.TryPickup(ent, st, emptyHand, animate: false))
+        if (!_hands.TryPickup(ent, st, emptyHand, animate: false, handsComp: handsComp))
         {
             Popup.PopupEntity(Loc.GetString("heretic-ability-fail"), ent, ent);
             QueueDel(st);
@@ -373,7 +358,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
     private void OnVoidVision(Entity<HereticComponent> ent, ref HereticVoidVisionEvent args)
     {
-        var thermalVision = _compFactory.GetComponent<ThermalVisionComponent>();
+        var thermalVision = Factory.GetComponent<ThermalVisionComponent>();
         thermalVision.Color = Color.FromHex("#b4babf");
         thermalVision.LightRadius = 7.5f;
         thermalVision.FlashDurationMultiplier = 1f;

@@ -400,16 +400,17 @@ namespace Content.Shared.StatusEffect
         /// <param name="key">The status effect ID to check for</param>
         /// <param name="status">The status effect component, should you already have it.</param>
         [Obsolete("Migration to Content.Shared.StatusEffectNew.StatusEffectsSystem is required")]
+        // Goob - added raiseEvent
         public bool CanApplyEffect(EntityUid uid, string key, StatusEffectsComponent? status = null, bool raiseEvent = true)
         {
             // don't log since stuff calling this prolly doesn't care if we don't actually have it
             if (!Resolve(uid, ref status, false))
                 return false;
 
-            // Goob edit start
+            // Goob edit start - added raiseEvent check
             if (raiseEvent)
             {
-                var ev = new OldBeforeStatusEffectAddedEvent(key);
+                var ev = new BeforeOldStatusEffectAddedEvent(key);
                 RaiseLocalEvent(uid, ref ev);
                 if (ev.Cancelled)
                     return false;
@@ -540,10 +541,11 @@ namespace Content.Shared.StatusEffect
     }
 
     /// <summary>
-    /// Goob edit
+    /// Raised on an entity before a status effect is added to determine if adding it should be cancelled.
+    /// Obsolete version of <see cref="BeforeStatusEffectAddedEvent" />
     /// </summary>
-    [ByRefEvent]
-    public record struct OldBeforeStatusEffectAddedEvent(string Key, bool Cancelled=false);
+    [ByRefEvent, Obsolete("Migration to StatusEffectNew.StatusEffectsSystem is required")]
+    public record struct BeforeOldStatusEffectAddedEvent(string EffectKey, bool Cancelled = false);
 
     public readonly struct StatusEffectAddedEvent
     {

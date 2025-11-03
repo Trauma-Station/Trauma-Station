@@ -43047,8 +43047,6 @@ entities:
     - type: Transform
       pos: 47.320854,40.58717
       parent: 2
-- proto: Bloodpack10Lingering
-  entities:
   - uid: 37024
     components:
     - type: Transform
@@ -158901,8 +158899,6 @@ entities:
     - type: Transform
       pos: 47.545647,40.521706
       parent: 2
-- proto: Gauze10Lingering
-  entities:
   - uid: 37019
     components:
     - type: Transform

@@ -212,6 +212,11 @@
           collection: GlassBreak
   - type: Penetratable # Goobstation - Better snipers
     penetrateDamage: 10
+  - type: Tag # Goobstation - Prevent RCD from making lights in one tile
+    tags:
+    - WallLight
+  - type: PlacementReplacement
+    key: lights
   placement:
     mode: SnapgridCenter
     snap:

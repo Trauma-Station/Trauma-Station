@@ -272,7 +272,7 @@ namespace Content.Client.HealthAnalyzer.UI
             DamageLabel.Visible = true;
             DamageLabel.Text = damageable.TotalDamage.ToString();
 
-            if (part != null)
+            if (part != null) // Shitmed
                 PartNameLabel.Text = _entityManager.HasComponent<MetaDataComponent>(part)
                     ? Identity.Name(part.Value, _entityManager)
                     : Loc.GetString("health-analyzer-window-entity-unknown-value-text");

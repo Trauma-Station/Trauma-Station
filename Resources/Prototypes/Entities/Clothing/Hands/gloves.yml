@@ -345,7 +345,7 @@
   - type: FingerprintMask
 
 - type: entity
-  parent: [ClothingHandsBase, BaseToggleClothing, BaseMajorContraband]
+  parent: [ClothingHandsBase, BaseToggleClothing, BaseHighlyIllegalContraband]
   id: ClothingHandsGlovesSpaceNinja
   name: space ninja gloves
   description: These black nano-enhanced gloves insulate from electricity and provide fire resistance.
@@ -380,6 +380,7 @@
       - type: BatteryDrainer
       # Goobstation - replaced shock with ninjutsu
       #- type: StunProvider
+      #  cooldown: 10
       #  noPowerPopup: ninja-no-power
       #  whitelist:
       #    components:

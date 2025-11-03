@@ -12,11 +12,11 @@
   components:
   - type: Bone # backmen: wounding
   - type: Sprite
-    sprite: Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     state: bones
   - type: Appearance
   - type: Item
-    sprite: Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     size: Normal
   - type: Tag
     tags:
@@ -34,6 +34,6 @@
     integrityCap: 120
     boneIntegrity: 120
   - type: Sprite
-    sprite: Objects/Materials/materials.rsi
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     state: bones
   - type: Appearance

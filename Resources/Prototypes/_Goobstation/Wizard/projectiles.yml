@@ -52,7 +52,7 @@
       sprite: /Textures/Objects/Weapons/Guns/Projectiles/magic.rsi
       state: magicm
   - type: HomingProjectile
-    homingSpeed: 540
+    homingSpeed: 1620
   - type: Ammo
     muzzleFlash: null
 
@@ -96,7 +96,7 @@
   - type: HomingProjectile
     homingSpeed: 1080
   - type: KnockdownOnCollide
-    behavior: DropIfStanding
+    dropItems: true
   - type: Ammo
     muzzleFlash: null
 
@@ -140,6 +140,8 @@
         - BulletImpassable
   - type: Ammo
     muzzleFlash: null
+  - type: TileFrictionModifier # Thanks wizden for killing physics comp damping
+    modifier: 0
 
 - type: entity
   id: ProjectileSpellCardRed
@@ -288,7 +290,7 @@
   id: ProjectileWabbajack
   name: bolt of change
   description: Wabbajack, Wabbajack!
-  parent: BaseBullet
+  parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -302,11 +304,10 @@
         Heat: 0
   - type: PolymorphOnTrigger
     polymorph: WizardWabbajack
-  - type: TriggerWhitelist
-    whitelist:
+  - type: WhitelistTriggerCondition
+    userWhitelist:
       components:
       - Body
-  - type: TriggerOnProjectileHit
   - type: Reflective
     reflective: Magic
   - type: Ammo
@@ -556,7 +557,7 @@
   id: ProjectileEmpBolt
   name: electromagnetic bolt
   description: Energy low!!!
-  parent: BaseBullet
+  parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -572,7 +573,6 @@
     reflective: Magic
   - type: Ammo
     muzzleFlash: null
-  - type: TriggerOnProjectileHit
   - type: EmpOnTrigger
     range: 3
     energyConsumption: 50000
@@ -607,7 +607,7 @@
         Quantity: 25
   - type: Trail
     lerpTime: 0.05
-    frequency: 0.05
+    frequency: 0.02
     lifetime: 5
     alphaLerpAmount: 0
     color: "#28005B"
@@ -752,7 +752,7 @@
   - type: Slippery
     slipData:
       slipOnStep: false
-      paralyzeTime: 10
+      knockdownTime: 10
       launchForwardsMultiplier: 1
   - type: ProjectileHitShooterAfterDelay
     delay: 0.5

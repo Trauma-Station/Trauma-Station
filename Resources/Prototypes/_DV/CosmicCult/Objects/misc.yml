@@ -13,7 +13,7 @@
   - type: RogueAscendedDendrite
   - type: Item
     size: Normal
-  - type: Food
+  - type: Edible
   - type: FlavorProfile
     flavors:
       - entropic
@@ -36,8 +36,8 @@
           Quantity: 10
 
 - type: entity
+  parent: [ BaseSiliconLawboard, BaseMagicalContraband ]
   id: CosmicCultLawBoard
-  parent: BaseElectronics
   name: malign law board
   description: An eerie circuit board, suited for slotting into an AI law upload console. Its circuitry is interwoven with phantasmal dendritic strands that twitch of their own accord.
   components:

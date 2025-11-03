@@ -14,34 +14,44 @@
   id: Tranquility
   name: reagent-name-tranquility
   group: Toxins
-  desc: reagent-desc-tranquility
+  desc: reagent-desc-tranquility-trauma # Trauma
   physicalDesc: reagent-physical-desc-calming
   flavor: mindful
   color: "#915E48"
   metabolisms:
     Poison:
-      metabolismRate: 0.25
+      metabolismRate: 0.05 # Trauma
       effects:
-      - !type:PopupMessage
-          type: Local
-          messages: [ "reagent-popup-tranquility" ]
-          probability: 0.2
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
+      - !type:AdjustReagent # Trauma - Gradually builds up if not "neutralized" with spicy food
+        reagent: Tranquility
+        amount: 0.1 # 20s/1u after metabolism
         conditions:
-        - !type:ReagentThreshold
-          min: 5
+        - !type:ReagentCondition
+          reagent: Tranquility
+          min: 2.5 # Not sure where to put this yet, but shouldn't work diluted
+      - !type:PopupMessage
+        type: Local
+        messages: [ "reagent-popup-tranquility" ]
+        probability: 0.05 # Trauma - Reduced so that it doesn't spam you over the course of your "infection"
       - !type:GenericStatusEffect
         key: Pacified
         component: Pacified
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Tranquility
           min: 10
+      - !type:GenericStatusEffect
+        key: Muted
+        component: Muted
+        conditions:
+        - !type:ReagentCondition
+          reagent: Tranquility
+          min: 20 # Trauma - Threshold increased so you can ask medical for help
       - !type:Polymorph
         prototype: Gondola
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Tranquility
           min: 25
 
 - type: reagent
@@ -63,7 +73,8 @@
       - !type:Polymorph
         prototype: Bingle
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: BingleJuice
           min: 25
 
 - type: reagent
@@ -81,13 +92,15 @@
       - !type:Polymorph
         prototype: ForcedCarpSentient
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Carpolin
           min: 9
       - !type:AdjustReagent
         reagent: Carpolin
         amount: -10
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Carpolin
           min: 9 # keep it the same as above
       - !type:PopupMessage
         type: Local
@@ -95,10 +108,11 @@
         probability: 0.3
       - !type:HealthChange
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Carpolin
           min: 1
-        - !type:OrganType
-          type: Animal
+        - !type:MetabolizerTypeCondition
+          type: [ Animal ]
         damage:
           types:
             Poison: 0.06
@@ -161,16 +175,18 @@
       - !type:Polymorph
         prototype: Cat
         conditions:
-        - !type:OrganType
-          type: Animal
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition
+          type: [ Animal ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: CatDrugs
           min: 50
       - !type:AdjustReagent
         reagent: CatDrugs
         amount: -20
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: CatDrugs
           min: 50
 
 - type: reagent

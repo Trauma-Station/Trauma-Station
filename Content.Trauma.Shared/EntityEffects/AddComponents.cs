@@ -6,7 +6,7 @@ namespace Content.Trauma.Shared.EntityEffects;
 /// <summary>
 /// Adds components to the target entity.
 /// </summary>
-public sealed partial class AddComponents : EntityEffect
+public sealed partial class AddComponents : EntityEffectBase<AddComponents>
 {
     /// <summary>
     /// Components to add.
@@ -20,11 +20,14 @@ public sealed partial class AddComponents : EntityEffect
     [DataField(required: true)]
     public LocId GuidebookText;
 
-    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString(GuidebookText);
+    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+        => Loc.GetString(GuidebookText, ("chance", Probability));
+}
 
-    public override void Effect(EntityEffectBaseArgs args)
+public sealed class AddComponentsEffectSystem : EntityEffectSystem<MetaDataComponent, AddComponents>
+{
+    protected override void Effect(Entity<MetaDataComponent> ent, ref EntityEffectEvent<AddComponents> args)
     {
-        args.EntityManager.AddComponents(args.TargetEntity, Components);
+        EntityManager.AddComponents(ent, args.Effect.Components);
     }
 }

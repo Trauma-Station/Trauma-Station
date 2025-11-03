@@ -12,11 +12,11 @@ using System.Linq;
 using Content.Goobstation.Common.Blob;
 using Content.Server.Abilities.Felinid;
 using Content.Server.Ghost.Roles.Events;
-using Content.Server.Nutrition.Components;
 using Content.Server.Station.Components;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Nutrition.Components;
 using Content.Shared.Station.Components;
 using Robust.Server.Player;
 using Robust.Shared.Map;
@@ -89,9 +89,7 @@ public sealed class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComponent>
             return;
 
         // Blob doesn't spawn when blob carrier was eaten.
-        RemComp<FoodComponent>(carrier);
+        RemComp<EdibleComponent>(carrier);
         RemComp<FelinidFoodComponent>(carrier);
-
-
     }
 }

@@ -20,6 +20,7 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
+using System.Numerics;
 
 namespace Content.Goobstation.Server.Sandevistan;
 

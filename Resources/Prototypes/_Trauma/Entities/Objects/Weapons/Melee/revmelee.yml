@@ -41,8 +41,8 @@
     bluntStaminaDamageFactor: 6
   - type: Item
     shape:
-    - 0,0,0,2
-    storedRotation: -45
+    - 0,0,2,0
+    storedRotation: 45
   - type: Construction
     graph: RevMace
   - type: MeleeThrowOnHit
@@ -270,6 +270,9 @@
         - ItemMask
   - type: StepTrigger
     intersectRatio: 0.2
+    triggerGroups:
+      types:
+      - Caltrop
   - type: Slippery
     slipSound:
       path: /Audio/Weapons/bladeslice.ogg

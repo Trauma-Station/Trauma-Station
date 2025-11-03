@@ -23,6 +23,12 @@ marking-slot-add = Add
 marking-slot-remove = Remove
 marking-slot = Slot {$number}
 
+humanoid-marking-modifier-force = Force
+humanoid-marking-modifier-ignore-species = Ignore Species
+humanoid-marking-modifier-base-layers = Base layers
+humanoid-marking-modifier-enable = Enable
+humanoid-marking-modifier-prototype-id = Prototype id:
+
 # Categories
 
 markings-category-Special = Special
@@ -33,6 +39,7 @@ markings-category-Head = Head
 markings-category-HeadTop = Head (Top)
 markings-category-HeadSide = Head (Side)
 markings-category-Snout = Snout
+markings-category-SnoutCover = Snout (Cover)
 markings-category-Chest = Chest
 markings-category-RightArm = Right Arm
 markings-category-RightHand = Right Hand

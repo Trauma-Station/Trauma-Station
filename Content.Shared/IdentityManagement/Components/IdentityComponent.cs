@@ -9,6 +9,7 @@
 
 using Robust.Shared.Containers;
 using Robust.Shared.Enums;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared.IdentityManagement.Components;
 
@@ -19,11 +20,15 @@ namespace Content.Shared.IdentityManagement.Components;
 /// <remarks>
 ///     This is a <see cref="ContainerSlot"/> and not just a datum entity because we do sort of care that it gets deleted and sent with the user.
 /// </remarks>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class IdentityComponent : Component
 {
+    /// <summary>
+    /// The slot which carries around the entity representing the carrier's
+    /// perceived identity. May be null if the component is not initialized.
+    /// </summary>
     [ViewVariables]
-    public ContainerSlot IdentityEntitySlot = default!;
+    public ContainerSlot? IdentityEntitySlot;
 }
 
 /// <summary>
@@ -40,7 +45,7 @@ public sealed class IdentityRepresentation
     public string? PresumedName;
     public string? PresumedJob;
 
-    public IdentityRepresentation(string trueName, Gender trueGender, string ageString, string? presumedName=null, string? presumedJob=null)
+    public IdentityRepresentation(string trueName, Gender trueGender, string ageString, string? presumedName = null, string? presumedJob = null)
     {
         TrueName = trueName;
         TrueGender = trueGender;

@@ -1,0 +1,11 @@
+- type: entityTable
+  id: FillLockerWardenTrauma
+  table: !type:AllSelector
+    children:
+    - id: ClothingHandsGlovesKravMaga
+    - id: BoxLethalInjection
+    - id: ClothingHeadsetAltWarden
+    - id: Multitool
+    - id: Wrench
+    - id: ContrabandDetectorFlatpack
+    - id: SecurityMegaphone

@@ -26,6 +26,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Hands.Components;
 using Content.Shared.Light.Components;
+using Content.Shared.Kitchen.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
@@ -130,27 +131,24 @@ public abstract partial class SharedWeaponAttachmentSystem : EntitySystem
 
         component.BayonetAttached = attached;
 
+        // JFC this is shitcode
         if (attached)
         {
             meleeComp.Damage = new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>("Slash"), 12);
             meleeComp.AttackRate = 1.5f;
             meleeComp.HitSound = new SoundPathSpecifier("/Audio/Weapons/bladeslice.ogg");
-            AddSharp(uid);
+            EnsureComp<SharpComponent>(uid);
         }
         else
         {
             meleeComp.Damage = new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>("Blunt"), 5);
             meleeComp.AttackRate = 1f;
             meleeComp.HitSound = null;
-            RemSharp(uid);
+            RemComp<SharpComponent>(uid);
         }
 
         Dirty(uid, component);
     }
-
-    // Due to SharpComponent not being shared, we need to override this in the server.
-    protected abstract void AddSharp(EntityUid uid);
-    protected abstract void RemSharp(EntityUid uid);
 
     private void AttachLight(EntityUid uid, EntityUid light, WeaponAttachmentComponent component)
     {

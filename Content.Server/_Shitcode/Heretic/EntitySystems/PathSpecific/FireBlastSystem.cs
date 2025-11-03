@@ -1,13 +1,13 @@
 using System.Linq;
 using Content.Goobstation.Common.Physics;
 using Content.Goobstation.Common.Religion;
-using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Stunnable;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Heretic;
 using Content.Shared.Mobs.Components;
@@ -60,7 +60,6 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         var flammableQuery = GetEntityQuery<FlammableComponent>();
         var mobStateQuery = GetEntityQuery<MobStateComponent>();
         var dmgQuery = GetEntityQuery<DamageableComponent>();
-        var statusQuery = GetEntityQuery<StatusEffectsComponent>();
 
         // Prioritize alive targets on fire, closest to origin
         var result = _lookup.GetEntitiesInRange(origin, origin.Comp.BonusRange, flags: LookupFlags.Dynamic)
@@ -74,8 +73,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         {
             _flammable.AdjustFireStacks(uid, origin.Comp.BonusFireStacks, flam, true);
 
-            if (statusQuery.TryComp(uid, out var status))
-                _stun.KnockdownOrStun(uid, origin.Comp.BonusKnockdownTime, true, status);
+            _stun.KnockdownOrStun(uid, origin.Comp.BonusKnockdownTime);
 
             if (!dmgQuery.TryComp(uid, out var dmg))
                 continue;
@@ -157,8 +155,8 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
 
         // Send beam from target to origin so that we can easier remove it if we only have access to target
         var beam = EnsureComp<ComplexJointVisualsComponent>(target);
-        beam.Data.Add(GetNetEntity(origin),
-            new ComplexJointVisualsData(origin.Comp.FireBlastBeamDataId, origin.Comp.FireBlastBeamSprite));
+        beam.Data[GetNetEntity(origin)] =
+            new ComplexJointVisualsData(origin.Comp.FireBlastBeamDataId, origin.Comp.FireBlastBeamSprite);
         Dirty(target, beam);
 
         _audio.PlayPvs(origin.Comp.Sound, xform.Coordinates);

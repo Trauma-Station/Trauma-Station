@@ -59,12 +59,9 @@ public sealed class DevilGripSystem : EntitySystem
             return;
         }
 
-        if (TryComp(target, out StatusEffectsComponent? status))
-        {
-            _stun.KnockdownOrStun(target, ent.Comp.KnockdownTime, true, status);
-            _stamina.TakeStaminaDamage(target, ent.Comp.StaminaDamage);
-            _language.DoRatvarian(target, ent.Comp.SpeechTime, true, status);
-        }
+        _stun.KnockdownOrStun(target, ent.Comp.KnockdownTime);
+        _stamina.TakeStaminaDamage(target, ent.Comp.StaminaDamage);
+        _language.DoRatvarian(target, ent.Comp.SpeechTime, true);
 
         _actions.SetCooldown(devilComp.DevilGrip, ent.Comp.CooldownAfterUse);
         devilComp.DevilGrip = null;
