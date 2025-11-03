@@ -19,6 +19,8 @@ SPDX-FileCopyrightText: 2024 router <messagebus@vk.com>
 SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
 SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
 
+Edited for Trauma Station by @Paradoxum on Discord :P
+
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
@@ -34,7 +36,7 @@ If you want to host or create content for SS14, go to the [Space Station 14 repo
 
 ## Documentation/Wiki
 
-The Trauma Station document\[WIP] has documentation on GS14's content, engine, game design, and more. It also has lots of resources for new contributors to the project.
+The Trauma Station document \[WIP] has documentation on GS14's content, engine, game design, and more. It also has lots of resources for new contributors to the project.
 
 ## Contributing
 
