@@ -899,6 +899,9 @@
 ## M ##
 
 - type: Tag
+  id: LoneOpsUplink # Goob
+
+- type: Tag
   id: Machete
 
 - type: Tag

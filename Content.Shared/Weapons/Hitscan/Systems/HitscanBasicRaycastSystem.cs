@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Goobstation.Common.CCVar;
+using Robust.Shared.Configuration;
+// </Trauma>
 using System.Numerics;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Components;
@@ -16,17 +20,20 @@ namespace Content.Shared.Weapons.Hitscan.Systems;
 
 public sealed class HitscanBasicRaycastSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _cfg = default!; // Trauma
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ISharedAdminLogManager _log = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
+    private float _crawlHitzoneSquared; // Trauma
     private EntityQuery<HitscanBasicVisualsComponent> _visualsQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        _cfg.OnValueChanged(GoobCVars.CrawlHitzoneSize, x => _crawlHitzoneSquared = x * x, true); // Trauma - cvar is squared as micro-optimisation for later checking
         _visualsQuery = GetEntityQuery<HitscanBasicVisualsComponent>();
 
         SubscribeLocalEvent<HitscanBasicRaycastComponent, HitscanTraceEvent>(OnHitscanFired);
@@ -44,10 +51,12 @@ public sealed class HitscanBasicRaycastSystem : EntitySystem
         // Otherwise:
         //  1.) Hit the first entity that you targeted.
         //  2.) Hit the first entity that doesn't require you to aim at it specifically to be hit.
+        var targetCoords = args.TargetCoordinates; // Goob
         var result = _container.IsEntityOrParentInContainer(shooter)
             ? rayCastResults.FirstOrNull()
             : rayCastResults.FirstOrNull(hit => hit.HitEntity == target
-                                                || CompOrNull<RequireProjectileTargetComponent>(hit.HitEntity)?.Active != true);
+                                                || CompOrNull<RequireProjectileTargetComponent>(hit.HitEntity)?.Active != true
+                                                || (_transform.GetMapCoordinates(hit.HitEntity).Position - targetCoords).LengthSquared() > _crawlHitzoneSquared); // Goob
 
         var distanceTried = result?.Distance ?? ent.Comp.MaxDistance;
 

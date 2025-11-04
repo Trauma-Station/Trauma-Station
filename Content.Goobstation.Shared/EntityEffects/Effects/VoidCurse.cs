@@ -15,6 +15,9 @@ namespace Content.Goobstation.Shared.EntityEffects.Effects;
 
 public sealed partial class VoidCurse : EntityEffectBase<VoidCurse>
 {
+    [DataField]
+    public int Stacks = 1;
+
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => "Inflicts void curse.";
 }
@@ -25,6 +28,6 @@ public sealed class VoidCurseEffectSystem : EntityEffectSystem<TransformComponen
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<VoidCurse> args)
     {
-        _voidCurse.DoCurse(ent);
+        _voidCurse.DoCurse(ent, args.Effect.Stacks);
     }
 }

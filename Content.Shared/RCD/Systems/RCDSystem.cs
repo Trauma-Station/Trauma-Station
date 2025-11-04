@@ -3,6 +3,7 @@ using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 // </Trauma>
 using Content.Shared.Administration.Logs;
@@ -52,7 +53,6 @@ public sealed class RCDSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!; // Goobstation - RCD respects door access
-    [Dependency] private readonly SharedDoorSystem _doorSystem = default!; // Goobstation - RCD respects door bolts
 
     private readonly int _instantConstructionDelay = 0;
     private readonly EntProtoId _instantConstructionFx = "EffectRCDConstruct0";
@@ -338,7 +338,7 @@ public sealed class RCDSystem : EntitySystem
         if (session.SenderSession.AttachedEntity == null)
             return;
 
-        if (_hands.TryGetActiveItem(session.SenderSession.AttachedEntity.Value, out var held)
+        if (!_hands.TryGetActiveItem(session.SenderSession.AttachedEntity.Value, out var held) // Goobstation, switched logic.
             || uid != held)
             return;
 
@@ -578,7 +578,7 @@ public sealed class RCDSystem : EntitySystem
             }
 
             // Goobstation - RCD check access for doors
-            if (!_accessReader.IsAllowed(user, target.Value))
+            if (TryComp<AccessReaderComponent>(target, out var accessList) && !_accessReader.IsAllowed(user, target.Value))
             {
                 if (popMsgs)
                     _popup.PopupClient(Loc.GetString("rcd-component-deconstruct-target-no-access"), uid, user);
@@ -587,7 +587,7 @@ public sealed class RCDSystem : EntitySystem
             }
 
             // Goobstation - RCD check access for bolts (Yeah, this should be event based...)
-            if (_doorSystem.IsBolted(target.Value))
+            if (TryComp<DoorBoltComponent>(target, out var doorBolt) && doorBolt.BoltsDown)
             {
                 if (popMsgs)
                     _popup.PopupClient(Loc.GetString("rcd-component-deconstruct-target-is-bolted"), uid, user);
@@ -725,6 +725,6 @@ public sealed partial class RCDDoAfterEvent : DoAfterEvent
 
     public override DoAfterEvent Clone()
     {
-        return this;
+        return this; 
     }
 }

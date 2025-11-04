@@ -176,8 +176,7 @@
     - id: MothroachSpawn # DeltaV
     - id: DerelictCyborgSyndicateSpawn # Goobstation - usually calm
     - id: MalignRiftSpawn # DeltaV
-    - id: FloorGoblinSpawn # Goobstation
-    - id: HellGooseSpawn # Goobstation
+    - id: FloorGoblinMidRound # Goobstation
 
 - type: entityTable
   id: BasicAntagEventsTable
@@ -201,12 +200,15 @@
     - id: ZombieOutbreak
     - id: LoneOpsSpawn
     #- id: WizardSpawn # Trauma - chud wizard removed pending rework
-    - id: BlobSpawn # Goobstation - Blob
-    - id: LoneAbductorSpawn # Shitmed - Starlight Abductors
-    - id: DuoAbductorSpawn # Shitmed - Starlight Abductors
-    - id: BingleSpawn #Goobstation - Bingle
-    - id: SlaughterDemonMidround # Goobstation - Slaughter Demon
-    - id: XenomorphsInfestation # WD EDIT
+    # <Goob>
+    - id: BlobSpawn
+    - id: LoneAbductorSpawn
+    - id: DuoAbductorSpawn
+    - id: BingleSpawn
+    - id: SlaughterDemonMidround
+    - id: XenomorphsInfestation
+    - id: WraithMidround
+    # </Goob>
     - !type:NestedSelector
       tableId: DerelictBorgEventTable
 
@@ -452,6 +454,7 @@
     - Diona
     - Abductor
     - Harpy
+    - Plasmaman # EE
     # Goobstation end
   - type: AntagObjectives
     objectives:

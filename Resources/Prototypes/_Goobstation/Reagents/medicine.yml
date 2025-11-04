@@ -806,7 +806,7 @@
 # Externally applied meds
 
 - type: reagent
-  id: Synthflesh # synthflesh is somewhat mid in SS14 due to topicals, so it's mostly a reference here
+  id: Synthflesh
   name: reagent-name-synthflesh
   desc: reagent-desc-synthflesh
   physicalDesc: reagent-physical-desc-pulpy
@@ -817,6 +817,32 @@
       amount: 10
     - !type:PlantAdjustHealth
       amount: 10
+  worksOnTheDead: true
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaling: true
+        ignoreResistances: false
+        ignoreBlockers: false
+        damage: #1/4th of the brute healing of Styptic Powder and 1/4th the burn healing of Silver Sulfide, so 1/2 of the overall healing of either chem
+          types:
+            Blunt: -0.5
+            Piercing: -0.25
+            Slash: -0.5
+            Heat: -0.38
+            Cold: -0.38
+            Shock: -0.25
+            Caustic: -0.25
+        conditions:
+        - !type:NestedCondition
+          proto: NoPressureProtection
+      - !type:ModifyBleed
+        amount: -2
+        conditions:
+        - !type:NestedCondition
+          proto: NoPressureProtection
 
 - type: reagent
   id: Synthcells
@@ -842,7 +868,7 @@
         ignoreBlockers: false
         damage:
           types:
-            Blunt: 1
+            Blunt: 0.25
             Poison: -2
             Radiation: -1
         conditions:
@@ -1293,3 +1319,38 @@
         identifier: Suffocation
         amount: -50
         time: 12
+
+# Wraith
+- type: reagent
+  id: Formaldehyde
+  name: reagent-name-formaldehyde
+  group: Medicine
+  desc: reagent-desc-formaldehyde
+  physicalDesc: reagent-physical-desc-thick
+  flavor: medicine
+  color: "#FFA500"
+  worksOnTheDead: true
+  metabolisms:
+    Poison:
+      metabolismRate: 0.05
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 0.5
+    Medicine:
+      metabolismRate: 0.05
+      effects:
+      - !type:ReduceRotting
+        seconds: 1
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: Formaldehyde
+          min: 30
+        reagent: Histamine
+        amount: 0.2
+        probability: 0.1

@@ -130,4 +130,4 @@
   traitGear: OffsetCane
   category: Disabilities
   components:
-    - type: ImpairedMobility
+  - type: ImpairedMobility

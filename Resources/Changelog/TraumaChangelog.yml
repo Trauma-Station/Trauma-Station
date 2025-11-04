@@ -558,3 +558,9 @@ Entries:
       message: Removed anything burgers pending rework due to shitcode.
   id: 60
   time: '2025-11-03T10:46:20.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Removed DT-12 anti-structure firing mode.
+  id: 61
+  time: '2025-11-03T21:31:23.0000000+00:00'

@@ -1,61 +1,36 @@
-# SPDX-FileCopyrightText: 2021 Metal Gear Sloth <metalgearsloth@gmail.com>
-# SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-# SPDX-FileCopyrightText: 2023 EmoGarbage404 <retron404@gmail.com>
-# SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Nim <128169402+Nimfar11@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 coolmankid12345 <55817627+coolmankid12345@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 coolmankid12345 <coolmankid12345@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 AverageNotDoingAnythingEnjoyer <113719989+AverageNotDoingAnythingEnjoyer@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 CaptainMaru <124701378+CaptainMaru@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 ActiveMammmoth <140334666+ActiveMammmoth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Arraydeess <arraygitbash@gmail.com>
-# SPDX-FileCopyrightText: 2025 Arraydeess14 <87253287+Arraydeess14@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-# SPDX-FileCopyrightText: 2025 Ethan_k <eknowles27@dtechhs.org>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 K-Dynamic <20566341+K-Dynamic@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 OnsenCapy <101037138+OnsenCapy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Samuka-C <47865393+Samuka-C@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 amogus <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: npcFaction
   id: Dragon
   hostile:
-    - NanoTrasen
-    - Syndicate
-    - Xeno
-    - PetsNT
-    - Zombie
-    - Revolutionary
-    - AllHostile
-    - Heretic # goob edit - heretics
-    - Blob # Goobstation - Blob
-    - Shadowling # Einstein Engines - Shadowlings
-  friendly: # Goobstation
-    - Wizard
-    - PirateFaction # goob - pirates
+  - NanoTrasen
+  - Syndicate
+  - Xeno
+  - PetsNT
+  - Zombie
+  - Revolutionary
+  - AllHostile
+  # <Goob>
+  #- Wizard
+  - Heretic
+  - Blob
+  - Shadowling
+  friendly:
+  - Wizard # was hostile, now they're friendly
+  - PirateFaction
+  - Lavafauna
+  # </Goob>
 
 - type: npcFaction
   id: NanoTrasen
   hostile:
+  # <Goob>
+  - Changeling
+  - Heretic
+  - Blob
+  - Shadowling
+  - PirateFaction
+  - Wraith
+  - Lavafauna
+  # </Goob>
   - SimpleHostile
   - Syndicate
   - Xeno
@@ -63,12 +38,7 @@
   - Revolutionary
   - Dragon
   - AllHostile
-  - Changeling # goob edit - changelings
-  - Heretic # goob edit - heretics
-  - Blob # Goobstation - Blob
-  - Shadowling # Einstein Engines - Shadowlings
   - Wizard
-  - PirateFaction # goob - pirates
   - Xenoborg
 
 - type: npcFaction
@@ -81,15 +51,18 @@
 - type: npcFaction
   id: PetsNT
   hostile:
+  # <Goob>
+  - Balloon # Pets can join the fight against the balloons
+  - Blob
+  - Lavafauna
+  # </Goob>
   - Mouse
-  - Balloon # Goob Balloon Edit     Pets can join the fight against the balloons
   - SimpleHostile
   - Zombie
   - Xeno
   - AllHostile
   - Wizard
   - Dragon
-  - Blob # Goobstation - Blob
 
 - type: npcFaction
   id: SimpleHostile
@@ -103,13 +76,18 @@
   - Dragon
   - Xeno
   - AllHostile
+  #- Wizard # Goob
   - Xenoborg
-  - Heretic # goob edit - heretics
-  - Blob # Goobstation - Blob
-  - PirateFaction # goob - pirates
-  friendly: # Goobstation
-  - Wizard
-  - Shadowling # Einstein Engines - Shadowlings
+  # <Goob>
+  - Heretic
+  - Blob
+  - PirateFaction
+  - Lavafauna
+  friendly:
+  - Wizard # was hostile, now they're friendly
+  - Shadowling
+  - Wraith
+  # </Goob>
 
 - type: npcFaction
   id: SimpleNeutral
@@ -117,6 +95,15 @@
 - type: npcFaction
   id: Syndicate
   hostile:
+  # <Goob>
+  - Changeling
+  - Heretic
+  - Blob
+  - PirateFaction
+  - Shadowling
+  - Wraith
+  - Lavafauna
+  # </Goob>
   - NanoTrasen
   - SimpleHostile
   - Xeno
@@ -124,17 +111,19 @@
   - Zombie
   - Dragon
   - AllHostile
+  - Wizard
   - Xenoborg
-  - Changeling # goob edit - changelings
-  - Heretic # goob edit - heretics
-  - Blob # Goobstation - Blob
-  - Wizard # goob edit - wizard
-  - PirateFaction # goob - pirates
-  - Shadowling # Einstein Engines - Shadowlings
 
 - type: npcFaction
   id: Xeno
   hostile:
+  # <Goob>
+  - Heretic
+  - Blob
+  - PirateFaction
+  - Wraith
+  - Lavafauna
+  # </Goob>
   - NanoTrasen
   - Syndicate
   - Passive
@@ -142,18 +131,24 @@
   - Zombie
   - Revolutionary
   - AllHostile
+  #- Wizard # Goob - made friendly
   - Dragon
   - Xenoborg
-  - Dragon
-  - Heretic # goob edit - heretics
-  - Blob # Goobstation - Blob
-  - PirateFaction # goob - pirates
-  friendly: # Goobstation
-    - Wizard
+  friendly: # Goob - wizard is now friendly
+  - Wizard
 
 - type: npcFaction
   id: Zombie
   hostile:
+  # <Goob>
+  - Changeling
+  - Heretic
+  - Blob
+  - Shadowling
+  - PirateFaction
+  - Wraith
+  - Lavafauna
+  # </Goob>
   - NanoTrasen
   - SimpleNeutral
   - SimpleHostile
@@ -162,40 +157,50 @@
   - PetsNT
   - Revolutionary
   - AllHostile
+  - Wizard
   - Dragon
-  - Changeling # goob edit - changelings
-  - Heretic # goob edit - heretics
-  - Blob # Goobstation - Blob
-  - Shadowling # Einstein Engines - Shadowlings
-  - Wizard # goob edit - wizard
-  - PirateFaction # goob - pirates
   - Xenoborg
 
 - type: npcFaction
-  id: Revolutionary #made more hostile for trauma
+  id: Revolutionary
   hostile:
-  - NanoTrasen
-  - Dragon
+  # <Goob>
+  - Changeling
+  - Heretic
+  - Blob
+  - Shadowling
+  - Wizard
+  - PirateFaction
+  - Lavafauna
+  # </Goob>
+  # <Trauma> - made more hostile for rev turrets
   - Mouse
   - Passive
   - PetsNT
-  - SimpleHostile
   - SimpleNeutral
   - Syndicate
   - Xeno
+  # </Trauma>
+  - NanoTrasen
   - Zombie
-  - Changeling # goob edit - changelings
-  - Heretic # goob edit - heretics
-  - Blob # Goobstation - Blob
-  - Shadowling # Einstein Engines - Shadowlings
-  - Wizard # goob edit - wizard
-  - PirateFaction # goob - pirates
-  friendly: # Goobstation
-  - Revolutionary
+  - SimpleHostile
+  - Dragon
+  - AllHostile
+  - Wizard
+  - Xenoborg
 
 - type: npcFaction
   id: AllHostile
   hostile:
+  # <Goob>
+  - Changeling
+  - Heretic
+  - Blob
+  - Shadowling
+  - PirateFaction
+  - Wraith
+  - Lavafauna
+  # </Goob>
   - NanoTrasen
   - Dragon
   - Mouse
@@ -207,40 +212,43 @@
   - Xeno
   - Zombie
   - Revolutionary
-  - Changeling # goob edit - changelings
-  - Heretic # goob edit - heretics
-  - Blob # Goobstation - Blob
-  - Shadowling # Einstein Engines - Shadowlings
-  - Wizard # goob edit - wizard
-  - PirateFaction # goob - pirates
-
-# Balloons Factions Edit:
-- type: npcFaction
-  id: Balloon
-  # Balloons can't attack
+  - Wizard
+  - Xenoborg
 
 - type: npcFaction
-  id: Monkey
+  id: Wizard
   hostile:
-  - Balloon     # Custom faction specifically for attacking bloons
+  - NanoTrasen
+  - Dragon
+  - Mouse
+  - Passive
+  - PetsNT
+  - SimpleHostile
+  - SimpleNeutral
+  - Syndicate
+  - Xeno
+  - Zombie
+  - Revolutionary
+  - AllHostile
+  - Xenoborg
 
 - type: npcFaction
   id: Xenoborg
   hostile:
+  # <Goob>
+  - Changeling
+  - Heretic
+  - PirateFaction
+  - Blob
+  - Shadowling
+  # </Goob>
   # they have brains
   - NanoTrasen
   - Syndicate
   - Zombie
   - Revolutionary
   - Wizard
-  - Changeling # goob edit - changelings
-  - Heretic # goob edit - heretics
-  - PirateFaction # goob - pirates
-
   - Xeno # rivalry
-
   # cause they are hostile to them
   - SimpleHostile
   - AllHostile
-  - Blob # Goobstation - Blob
-  - Shadowling # Einstein Engines - Shadowlings

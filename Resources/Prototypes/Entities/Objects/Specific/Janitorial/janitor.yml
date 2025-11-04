@@ -430,6 +430,7 @@
   components:
   - type: Tag # TODO change Plunger into a tool so we dont got to layer Tags like below.
     tags:
+    - Plunger #Goobedit
     - GoldenPlunger
     - Plunger
     - WhitelistChameleon

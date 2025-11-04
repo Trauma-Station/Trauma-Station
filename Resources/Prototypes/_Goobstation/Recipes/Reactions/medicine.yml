@@ -390,3 +390,17 @@
       catalyst: true
   products:
     Oxycodone: 1
+
+# Wraith
+- type: reaction
+  minTemp: 424
+  id: Formaldehyde
+  reactants:
+    Ethanol:
+      amount: 1
+    Iron:
+      amount: 1
+    Silver:
+      amount: 1
+  products:
+    Formaldehyde: 2

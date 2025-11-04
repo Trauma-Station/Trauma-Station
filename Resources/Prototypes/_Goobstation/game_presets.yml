@@ -254,3 +254,20 @@
   - SubGamemodesRule
   - SecretPlusRampingMid
   - BasicRoundstartVariation # Trauma
+
+- type: gamePreset
+  id: OopsAllThieves
+  alias:
+  - oopsallthieves
+  - allthieves
+  - thieves
+  name: oops-all-thieves-title
+  description: oops-all-thieves-description
+  showInVote: false
+  rules:
+    - OopsAllThieves
+    - TraitorSubGamemodesRule
+    - BasicStationEventScheduler
+    - MeteorSwarmScheduler
+    - SpaceTrafficControlEventScheduler
+    - BasicRoundstartVariation

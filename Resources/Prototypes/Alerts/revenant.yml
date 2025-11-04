@@ -17,7 +17,7 @@
 
 - type: alert
   id: Corporeal
-  icons: [ { sprite: /Textures/Mobs/Ghosts/revenant.rsi, state: icon } ]
+  icons: [ { sprite: _Goobstation/Wraith/wraith.rsi, state: icon } ] # Goob - changed sprite to wraith
   name: alerts-revenant-corporeal-name
   description: alerts-revenant-corporeal-desc
 

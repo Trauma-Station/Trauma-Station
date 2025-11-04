@@ -23,9 +23,10 @@ namespace Content.Shared.Eye
         Ghost = 1 << 1, // Observers and revenants.
         Subfloor = 1 << 2, // Pipes, disposal chutes, cables etc. while hidden under tiles. Can be revealed with a t-ray.
         Admin = 1 << 3, // Reserved for admins in stealth mode and admin tools.
-        Abductor = 1 << 4, // Shitmed Change - Starlight Abductor
-        CosmicCultMonument = 1 << 5, // DeltaV - Cosmic Cult
-        EldritchInfluence = 1 << 6, // Goobstation
-        EldritchInfluenceSpent = 1 << 7, // Goobstation
+        // <Trauma>
+        Abductor = 1 << 4, // abductor eye
+        CosmicCultMonument = 1 << 5, // cosmic cult
+        EldritchInfluence = 1 << 6, // heretic
+        // </Trauma>
     }
 }

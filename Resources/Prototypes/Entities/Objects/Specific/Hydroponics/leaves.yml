@@ -115,11 +115,6 @@
   - type: Stack
     stackType: LeavesCannabisDried
     count: 1
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: SolutionContainerManager
     solutions:
       food:
@@ -139,11 +134,6 @@
   - type: Stack
     stackType: GroundCannabis
     count: 1
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: SolutionContainerManager
     solutions:
       food:
@@ -321,11 +311,6 @@
   - type: Stack
     stackType: LeavesTobaccoDried
     count: 1
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: SolutionContainerManager
     solutions:
       food:
@@ -345,11 +330,6 @@
   - type: Stack
     stackType: GroundTobacco
     count: 1
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: SolutionContainerManager
     solutions:
       food:

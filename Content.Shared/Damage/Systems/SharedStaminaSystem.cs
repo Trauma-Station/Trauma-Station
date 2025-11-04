@@ -41,6 +41,11 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 {
     public static readonly EntProtoId StaminaLow = "StatusEffectStaminaLow";
 
+    // <Goob>
+    [Dependency] private readonly SharedStutteringSystem _stutter = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    // </Goob>
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -52,11 +57,6 @@ public abstract partial class SharedStaminaSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] protected readonly SharedStunSystem StunSystem = default!;
-    // <Goob>
-    [Dependency] private readonly SharedStutteringSystem _stutter = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    // </Goob>
 
     /// <summary>
     /// How much of a buffer is there between the stun duration and when stuns can be re-applied.
@@ -84,6 +84,9 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         SubscribeLocalEvent<StaminaDamageOnCollideComponent, ThrowDoHitEvent>(OnThrowHit);
 
         SubscribeLocalEvent<StaminaDamageOnHitComponent, MeleeHitEvent>(OnMeleeHit);
+
+        // Goobstation - Grab Sprinting Toggle from Goob Mod
+        SubscribeLocalEvent<SprintingStateChangedEvent>(OnSprintingStateChanged);
 
         Subs.CVar(_config, CCVars.PlaytestStaminaDamageModifier, value => UniversalStaminaDamageModifier = value, true);
     }
@@ -378,13 +381,14 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 
         if (value <= 0)
             return;
-        if (source != null)
+
+        // Goobstation - Don't log stamina damage if the entity is sprinting and the damage is from themselves (sprinting)
+        if (!component.IsSprinting && source != uid)
         {
-            _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(source.Value):user} caused {value} stamina damage to {ToPrettyString(uid):target}{(with != null ? $" using {ToPrettyString(with.Value):using}" : "")}");
-        }
-        else
-        {
-            _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(uid):target} took {value} stamina damage");
+            if (source != null)
+                _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(source.Value):user} caused {value} stamina damage to {ToPrettyString(uid):target}{(with != null ? $" using {ToPrettyString(with.Value):using}" : "")}");
+            else
+                _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(uid):target} took {value} stamina damage");
         }
 
         if (visual)
@@ -572,4 +576,17 @@ public abstract partial class SharedStaminaSystem : EntitySystem
     {
         public NetEntity Entity = entity;
     }
+
+    #region Goobstaiton - Sprinting State Change Event
+
+    private void OnSprintingStateChanged(ref SprintingStateChangedEvent ev)
+    {
+        if (TryComp<StaminaComponent>(ev.Uid, out var stamina))
+        {
+            stamina.IsSprinting = ev.IsSprinting;
+            Dirty(ev.Uid, stamina);
+        }
+    }
+
+    #endregion
 }

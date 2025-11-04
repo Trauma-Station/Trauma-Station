@@ -14,6 +14,7 @@ using Content.Shared.Labels.Components;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio.Systems; // Goobstation
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 
@@ -23,6 +24,7 @@ public abstract class SharedHandLabelerSystem : EntitySystem
 {
     [Dependency] protected readonly SharedUserInterfaceSystem UserInterfaceSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!; // Goobstation
     [Dependency] private readonly LabelSystem _labelSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly INetManager _netManager = default!;
@@ -82,8 +84,9 @@ public abstract class SharedHandLabelerSystem : EntitySystem
             result = Loc.GetString("hand-labeler-successfully-removed");
             return;
         }
-        if (_netManager.IsServer)
-            _labelSystem.Label(target, handLabeler.AssignedLabel);
+
+        _labelSystem.Label(target, handLabeler.AssignedLabel);
+
         result = Loc.GetString("hand-labeler-successfully-applied");
     }
 
@@ -117,6 +120,10 @@ public abstract class SharedHandLabelerSystem : EntitySystem
     private void Labeling(EntityUid uid, EntityUid target, EntityUid User, HandLabelerComponent handLabeler)
     {
         AddLabelTo(uid, handLabeler, target, out var result);
+
+        // Goobstation
+        _audio.PlayPredicted(handLabeler.PrintSound, uid, User, handLabeler.PrintSound.Params);
+
         if (result == null)
             return;
 

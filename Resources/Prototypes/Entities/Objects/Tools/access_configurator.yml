@@ -54,6 +54,7 @@
         - Belt
     - type: AccessOverrider
       accessLevels:
+      - Robotics # Goob
       - Armory
       - Atmospherics
       - Bar
@@ -125,6 +126,12 @@
     sprite: Objects/Tools/universal_access_configurator.rsi
   - type: AccessOverrider
     accessLevels:
+    # <Trauma>
+    - NanotrasenRepresentative
+    - BlueshieldOfficer
+    - Robotics
+    - Revolutionary
+    # </Trauma>
     - Armory
     - Atmospherics
     - Bar
@@ -162,9 +169,6 @@
     - CentralCommand
     - NuclearOperative
     - SyndicateAgent
-    - NanotrasenRepresentative # goobstation
-    - BlueshieldOfficer # goobstation
-    - Revolutionary # Trauma
     - Wizard
     - Xenoborg
     - GenpopEnter

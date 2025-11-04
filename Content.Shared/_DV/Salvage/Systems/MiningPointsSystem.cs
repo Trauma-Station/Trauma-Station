@@ -81,7 +81,7 @@ public sealed class MiningPointsSystem : EntitySystem
         if (points == 0)
             return;
 
-        if (TryFindIdCard(user) is not {} dest)
+        if (GetPointComp(user) is not {} dest)
             return;
 
         TransferAll((ent.Owner, comp), dest);
@@ -93,6 +93,28 @@ public sealed class MiningPointsSystem : EntitySystem
 
     #endregion
     #region Public API
+    /// <summary>
+    /// if user can claim mining points
+    /// <summary>
+    public bool CanClaimPoints(EntityUid user) // Goobstation - borg Miningpoints
+    {
+        if (TryComp<MiningPointsComponent>(user, out var comp))
+            return true;
+        if (TryFindIdCard(user) != null)
+            return true;
+
+        return false;
+    }
+
+    /// <summary>
+    /// returns Miningpoint component of user, if its directly atatched or on users Id card
+    /// <summary>
+    public Entity<MiningPointsComponent?>? GetPointComp(EntityUid user) // Goobstation - borg Miningpoints
+    {
+        if (TryComp<MiningPointsComponent>(user, out var comp))
+            return  (user,comp);
+        return TryFindIdCard(user);
+    }
 
     /// <summary>
     /// Tries to find the user's id card and gets its <see cref="MiningPointsComponent"/>.
@@ -116,7 +138,7 @@ public sealed class MiningPointsSystem : EntitySystem
     /// </summary>
     public bool UserHasPoints(EntityUid user, uint points)
     {
-        if (TryFindIdCard(user)?.Comp is not {} comp)
+        if (GetPointComp(user)?.Comp is not {} comp) // Goobstation - borg Miningpoints
             return false;
 
         return comp.Points >= points;

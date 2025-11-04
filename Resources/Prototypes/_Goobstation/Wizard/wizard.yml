@@ -64,21 +64,6 @@
     - sprite: Objects/Fun/figurines.rsi
       state: wizard
 
-- type: npcFaction
-  id: Wizard # Not hostile to angry mobs
-  hostile:
-    - NanoTrasen
-    - Syndicate
-    - Zombie
-    - Revolutionary
-    - Changeling
-    - Heretic
-    - Blob
-  friendly:
-    - Dragon
-    - SimpleHostile
-    - Xeno
-
 - type: factionIcon
   id: WizardFaction
   isShaded: false

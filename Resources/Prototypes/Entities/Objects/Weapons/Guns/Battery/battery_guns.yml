@@ -482,6 +482,7 @@
     proto: RedLaserPractice
     fireCost: 62.5
   - type: PacifismAllowedGun
+  - type: GunExecutionBlacklist # Goob
 
 - type: entity
   name: pulse pistol
@@ -784,6 +785,7 @@
     - Taser
     - Sidearm
   - type: PacifismAllowedGun
+  - type: GunExecutionBlacklist # Goobstation
 
 - type: entity
   name: disabler
@@ -861,6 +863,7 @@
   - type: StaticPrice
     price: 260
   - type: PacifismAllowedGun
+  - type: GunExecutionBlacklist # Goobstation
 
 - type: entity
   name: taser
@@ -898,6 +901,7 @@
     zeroVisible: true
   - type: Appearance
   - type: PacifismAllowedGun
+  - type: GunExecutionBlacklist # Goobstation
 
 - type: entity
   name: elite taser

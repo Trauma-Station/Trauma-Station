@@ -910,7 +910,8 @@ public partial class PainSystem
 
         nerveSys.LastThresholdType = nearestReflex;
 
-        ApplyPainReflexesEffects(organ.Body.Value, (uid, nerveSys), nearestReflex);
+        //Disabled until better implementation
+        //ApplyPainReflexesEffects(organ.Body.Value, (uid, nerveSys), nearestReflex);
     }
 
     private FixedPoint2 ApplyModifiersToPain(

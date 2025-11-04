@@ -198,6 +198,7 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
+  - type: FacehuggerImmune # Goobstation - Xenomorphs
 
 - type: entity
   parent: BaseSpeciesDummy

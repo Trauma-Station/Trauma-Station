@@ -17,6 +17,11 @@ public record struct HitscanTraceEvent
     public EntityCoordinates FromCoordinates;
 
     /// <summary>
+    /// Goob - Where the user was aiming to shoot, before recoil is added.
+    /// </summary>
+    public Vector2 TargetCoordinates;
+
+    /// <summary>
     /// Direction that the ray was fired towards.
     /// </summary>
     public Vector2 ShotDirection;
