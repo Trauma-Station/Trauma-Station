@@ -114,3 +114,13 @@
     messages:
     - entity-effect-popup-spasm-arm
   - !type:ThrowRandomItem
+
+- type: entityEffect
+  id: MutationFeetTrip
+  effects:
+  - !type:PopupMessage
+    visualType: SmallCaution
+    messages:
+    - entity-effect-popup-feet-trip
+  - !type:Knockdown
+    time: 3

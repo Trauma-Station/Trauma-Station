@@ -2,7 +2,7 @@
   parent: BaseMutation
   id: MutationTongueSpike
   name: Tongue Spike
-  description: Allows a creature to voluntary shoot their tongue out as a deadly weapon.
+  description: Allows a creature to voluntarily shoot their tongue out as a deadly weapon.
   components:
   - type: Mutation
     instability: 5
@@ -13,7 +13,7 @@
 - type: entity
   parent: MutationTongueSpike
   id: MutationChemSpike
-  description: Allows a creature to voluntary shoot their tongue out as biomass, allowing a long range transfer of chemicals.
+  description: Allows a creature to voluntarily shoot their tongue out as biomass, allowing a long range transfer of chemicals.
   components:
   - type: Mutation
     instability: 10
@@ -24,3 +24,4 @@
   - type: RemovesMutation
     removes:
     - MutationTongueSpike
+  # TODO

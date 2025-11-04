@@ -1,3 +1,4 @@
+using Content.Trauma.Common.Movement;
 using Content.Shared.Flash;
 using Content.Shared.Mobs;
 
@@ -13,6 +14,7 @@ public sealed class MutationRelaySystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MutatableComponent, AfterFlashedEvent>(RelayEvent);
+        SubscribeLocalEvent<MutatableComponent, FootStepEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, MobStateChangedEvent>(RelayEvent);
     }
 

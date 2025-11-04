@@ -353,7 +353,7 @@
         proto: MutationSpasms
 
 - type: entity
-  parent: BaseMutation
+  parent: BaseTriggerMutation
   id: MutationTwoLeftFeet
   name: Two Left Feet
   description: A mutation that replaces the right foot with another left foot. Symptoms include kissing the floor when taking a step.
@@ -361,7 +361,15 @@
   - type: Mutation
     instability: -30
     difficulty: 16
-  # TODO
+  - type: TriggerOnWalk
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      probability: 0.03 # 3% per tile walked - tg is 0.5% but its too rare for -30, so free
+      effect: !type:NestedEffect
+        conditions:
+        - !type:StandingCondition # bro is not tripping on the floor
+        proto: MutationFeetTrip
 
 - type: entity
   parent: BaseMutation
