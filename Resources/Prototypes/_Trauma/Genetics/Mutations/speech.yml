@@ -56,6 +56,7 @@
     instability: -30
     conflicts:
     - MutationMute # can upgrade to Mute
+  # TODO
 
 - type: entity
   parent: BaseFreeMutation
@@ -90,7 +91,10 @@
   id: MutationMedieval
   name: Medieval
   description: A horrible mutation originating from the distant past, thought to have once been a common gene in all of old world Europe.
-  # TODO
+  components:
+  - type: ComponentMutation
+    added:
+    - type: MedievalAccent
 
 - type: entity
   parent: BaseFreeMutation

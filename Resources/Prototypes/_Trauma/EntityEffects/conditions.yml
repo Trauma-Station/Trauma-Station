@@ -7,4 +7,13 @@
       whitelist:
         components:
         - PressureProtection
-      guidebookText: entity-effect-condition-guidebook-pressure-protection
+      guidebookText: entity-condition-guidebook-pressure-protection
+
+- type: entityCondition
+  id: IsAwake
+  condition: !type:WhitelistCondition
+    inverted: true
+    guidebookText: entity-condition-guidebook-is-awake
+    whitelist:
+      components:
+      - Sleeping

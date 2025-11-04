@@ -12,6 +12,18 @@
   - type: Mutation
     instability: 0
 
+# prevents a mutation from triggering if the mutated mob is dead
+- type: entity
+  abstract: true
+  parent: BaseMutation
+  id: BaseTriggerMutation
+  components:
+  - type: GenericTriggerCondition
+    condition: !type:MutatedNestedCondition
+      condition: !type:MobStateCondition
+        mobState: Dead
+        inverted: true
+
 - type: entity
   abstract: true
   parent: BaseAction

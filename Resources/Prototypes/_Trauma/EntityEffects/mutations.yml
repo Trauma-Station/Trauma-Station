@@ -1,0 +1,116 @@
+- type: entityEffect
+  id: MutationSeizure
+  effects:
+  - !type:PopupMessage
+    type: Pvs
+    visualType: LargeCaution
+    messages:
+    - entity-effect-popup-seizure
+  - !type:Jitter
+    amplitude: 20
+    time: 29
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectForcedSleeping
+    time: 20
+
+- type: entityEffect
+  id: MutationCough
+  effects:
+  - !type:Emote
+    emote: Cough
+    showInChat: true
+  - !type:DropItems
+  # TODO: throw the mob backwards with power chromosome, range 6 or something
+
+- type: entityEffect
+  id: MutationParanoia
+  effects:
+  - !type:Emote
+    emote: Scream
+    showInChat: true
+  # TODO: 25% chance to start hallucinating for 40s
+
+- type: entityEffect
+  id: MutationFierySweat
+  effects:
+  - !type:Flammable
+    multiplier: 2 # TODO: make power chromosome increase this
+  - !type:Ignite
+
+- type: entityEffect
+  id: MutationAcidicFleshPop
+  effects:
+  - !type:PopupMessage
+    type: Pvs
+    visualType: MediumCaution
+    messages:
+    - entity-effect-popup-acidic-flesh-pops
+  - !type:HealthChange
+    ignoreResistances: false # having lab coats etc help is decent for gameplay, doesnt make much sense though
+    useTargeting: false # picks a random limb instead of applying damage everywhere evenly
+    damage:
+      types:
+        Caustic: 15 # TODO: random scale
+  # TODO: play sear sound
+
+- type: entityEffect
+  id: MutationSpasms
+  effects:
+  - !type:WeightedRandomEffect
+    children:
+    - effect: !type:NestedEffect
+        proto: SpasmMove
+    - effect: !type:NestedEffect
+        conditions:
+        - !type:HoldingItemCondition
+        proto: SpasmAttackSelf
+    - effect: !type:NestedEffect
+        proto: SpasmPunchSelf
+    - effect: !type:NestedEffect
+        proto: SpasmAttackOthers
+    - effect: !type:NestedEffect
+        conditions:
+        - !type:HoldingItemCondition
+        proto: SpasmThrow
+
+- type: entityEffect
+  id: SpasmMove
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-spasm-leg
+  # TODO
+
+- type: entityEffect
+  id: SpasmAttackSelf
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-spasm-fingers
+  - !type:AttackSelf
+
+- type: entityEffect
+  id: SpasmPunchSelf
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-spasm-arm
+  - !type:AttackSelf
+    useHeld: false
+
+- type: entityEffect
+  id: SpasmAttackOthers
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-spasm-arm
+  - !type:AttackOthers
+  # TODO: attack in a random direction, using 7m range for a gun
+
+- type: entityEffect
+  id: SpasmThrow
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-spasm-arm
+  - !type:ThrowRandomItem

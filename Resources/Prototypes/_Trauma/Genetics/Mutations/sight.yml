@@ -68,7 +68,10 @@
   components:
   - type: Mutation
     instability: -40
-  # TODO
+  - type: ComponentMutation
+    added:
+    - type: BlockReading
+    - type: BlockWriting
 
 - type: entity
   parent: BaseMutationAdmeme # wizard and admeme only
@@ -78,4 +81,4 @@
   components:
   - type: Mutation
     difficulty: 16
-  # TODO: implement and give wizard the mutation spell
+  # TODO: move out of goob hulk

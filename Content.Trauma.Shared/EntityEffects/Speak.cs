@@ -23,7 +23,7 @@ public sealed partial class Speak : EntityEffectBase<Speak>
     public LocId GuidebookText = "entity-effect-guidebook-speak";
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString(GuidebookText);
+        => Loc.GetString(GuidebookText, ("chance", Probability));
 }
 
 public sealed class SpeakEffectSystem : EntityEffectSystem<SpeechComponent, Speak>

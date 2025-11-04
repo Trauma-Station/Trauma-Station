@@ -34,7 +34,7 @@ public sealed partial class RelayBodyParts : EntityEffectBase<RelayBodyParts>
     public EntityEffect[] Effects = default!;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString(GuidebookText);
+        => Loc.GetString(GuidebookText, ("chance", Probability));
 }
 
 public sealed class RelayBodyPartsEffectSystem : EntityEffectSystem<BodyComponent, RelayBodyParts>

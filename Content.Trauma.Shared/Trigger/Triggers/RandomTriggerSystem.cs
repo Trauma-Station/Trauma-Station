@@ -1,9 +1,10 @@
+using Content.Shared.Random.Helpers;
 using Content.Shared.Trigger.Systems;
 using Content.Trauma.Shared.Trigger;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Trauma.Server.Trigger;
+namespace Content.Trauma.Shared.Trigger.Triggers;
 
 public sealed class RandomTriggerSystem : EntitySystem
 {
@@ -18,21 +19,25 @@ public sealed class RandomTriggerSystem : EntitySystem
         SubscribeLocalEvent<RandomTriggerComponent, MapInitEvent>(OnMapInit);
     }
 
-    // TODO: move this to shared when predicted random
     public override void Update(float frameTime)
     {
+        base.Update(frameTime);
+
         var now = _timing.CurTime;
+        var tick = (int) _timing.CurTick.Value;
         var query = EntityQueryEnumerator<RandomTriggerComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
             if (now < comp.NextUpdate)
                 continue;
 
-            comp.NextUpdate = _timing.CurTime + comp.UpdateDelay;
-            if (!_random.Prob(comp.Prob))
+            comp.NextUpdate = now + comp.UpdateDelay;
+            var seed = SharedRandomExtensions.HashCodeCombine(tick, GetNetEntity(uid).Id);
+            var rand = new Random(seed);
+            if (!rand.Prob(comp.Prob))
                 continue;
 
-            _trigger.Trigger(uid);
+            _trigger.Trigger(uid, key: comp.KeyOut);
         }
     }
 

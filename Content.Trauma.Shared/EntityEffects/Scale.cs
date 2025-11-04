@@ -18,7 +18,7 @@ public sealed partial class Scale : EntityEffectBase<Scale>
     public Vector2 Multiplier;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("entity-effect-guidebook-scale-entity", ("x", Multiplier.X), ("y", Multiplier.Y));
+        => Loc.GetString("entity-effect-guidebook-scale-entity", ("chance", Probability), ("x", Multiplier.X), ("y", Multiplier.Y));
 }
 
 public sealed class ScaleEffectSystem : EntityEffectSystem<TransformComponent, Scale>

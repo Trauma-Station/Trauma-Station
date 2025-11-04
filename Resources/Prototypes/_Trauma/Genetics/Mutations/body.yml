@@ -1,24 +1,45 @@
 # Free stability
 
 - type: entity
-  parent: BaseMutation
+  parent: BaseTriggerMutation
   id: MutationEpilepsy
   name: Epilepsy
   description: A genetic defect that sporadically causes seizures.
   components:
   - type: Mutation
     instability: -30
-  # TODO
+  - type: RandomTrigger
+    # TODO: make synchronizer decrease this chance
+    prob: 0.005 # 0.5%
+  - type: TriggerOnFlashed # get flashed nerd
+    prob: 0.7 # 70%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        conditions:
+        - !type:NestedCondition
+          proto: IsAwake
+        proto: MutationSeizure
 
 - type: entity
-  parent: BaseMutation
+  parent: BaseTriggerMutation
   id: MutationCough
   name: Cough
   description: A chronic cough.
   components:
   - type: Mutation
     instability: -30
-  # TODO
+  - type: RandomTrigger
+    prob: 0.025 # 2.5%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        conditions:
+        - !type:NestedCondition
+          proto: IsAwake
+        proto: MutationCough
 
 - type: entity
   parent: BaseMutation
@@ -28,7 +49,16 @@
   components:
   - type: Mutation
     instability: -30
-  # TODO
+  - type: RandomTrigger
+    prob: 0.025 # 2.5%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        conditions:
+        - !type:NestedCondition
+          proto: IsAwake
+        proto: MutationParanoia
 
 # Height
 
@@ -87,10 +117,10 @@
   - type: EffectsMutation
     added:
     - !type:Scale
-      multiplier: 1.25, 1.25
+      multiplier: 1.2, 1.2
     removed:
     - !type:Scale
-      multiplier: 1.25, 1.25
+      multiplier: 0.833333, 0.833333 # enjoy being permanently trolled by FP error mixels
   # TODO: adjust hitbox
 
 # Disabilities
@@ -114,7 +144,7 @@
           Burn: 3
 
 - type: entity
-  parent: BaseFreeMutation
+  parent: [ BaseFreeMutation, BaseTriggerMutation ]
   id: MutationTourettes
   name: Tourette's Syndrome
   description: A chronic twitch that forces the user to scream bad words.
@@ -127,8 +157,8 @@
     - !type:RelayMutated
       effect: !type:WeightedRandomEffect
         conditions:
-        - !type:MobStateCondition
-          mobstate: Alive
+        - !type:NestedCondition
+          proto: IsAwake
         children:
         - weight: 1
           effect: !type:Emote
@@ -242,7 +272,7 @@
 # Dangerous though potentially useful
 
 - type: entity
-  parent: BaseFreeMutation
+  parent: [ BaseFreeMutation, BaseTriggerMutation ]
   id: MutationFierySweat
   name: Fiery Sweat
   description: The user's skin will randomly combust, but is generally a lot more resilient to burning.
@@ -252,7 +282,14 @@
     conflicts:
     - MutationHeatAdaptation
     # TG does not have it incompatible with thermal adaptation :) have fun
-  # TODO: randomly ignite with chance proportional to instability, (0.05 + instability/19.5) * synch
+  - type: RandomTrigger
+    # TODO: (0.0005 + instability/0.195) * synchronized chromosome
+    prob: 0.0005 # 0.05%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        proto: MutationFierySweat
   # TODO: halve burn damage
 
 # if some yml warrior adds endermen give them this trust
@@ -276,7 +313,7 @@
       effect: PuddleSparkle # TODO: copy shit from tg
 
 - type: entity
-  parent: BaseMutation
+  parent: BaseTriggerMutation
   id: MutationAcidicFlesh
   name: Acidic Flesh
   description: Subject has acidic chemicals building up underneath the skin. This is often lethal.
@@ -285,13 +322,21 @@
     instability: -40
     difficulty: 18
   - type: RandomTrigger
-    prob: 0.13
-    # TODO: 20s cooldown on popups, 15% chance to splash acid
-  # TODO: randomly splash the user with acid, also make it so you splash acid when cut
-  # TODO: give it to xenos
+    prob: 0.13 # 13%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:PopupMessage
+        messages:
+        - entity-effect-popup-acidic-flesh-bubbles
+      # TODO: 20s cooldown
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        probability: 0.15
+        proto: MutationAcidicFleshPop
 
 - type: entity
-  parent: BaseMutation
+  parent: BaseTriggerMutation
   id: MutationSpastic
   name: Spastic
   description: Subject suffers from muscle spasms.
@@ -299,7 +344,13 @@
   - type: Mutation
     instability: -30
     difficulty: 16
-  # TODO
+  - type: RandomTrigger
+    prob: 0.15 # 15%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        proto: MutationSpasms
 
 - type: entity
   parent: BaseMutation

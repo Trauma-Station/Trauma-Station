@@ -16,3 +16,17 @@ entity-effect-guidebook-increases-reach = Increases reach
 entity-effect-guidebook-decreases-reach = Decreases reach
 
 entity-effect-guidebook-scale-entity = Scales the target's size by ({$x}, {y})
+
+entity-effect-guidebook-attack-self = Makes the target {$canUse ->
+    [true] attack
+    *[false] punch
+} itself
+entity-effect-guidebook-attack-others = Makes the target attack a random nearby thing
+
+entity-effect-popup-seizure = {CAPITALIZE($entity)} starts having a seizure!
+entity-effect-popup-acidic-flesh-bubbles = Your acid flesh bubbles...
+entity-effect-popup-acidic-flesh-pops = {$entity}'s skin bubbles and pops!
+
+entity-effect-popup-spasm-leg = Your leg spasms!
+entity-effect-popup-spasm-fingers = Your fingers spasm!
+entity-effect-popup-spasm-arm = Your arm spasms!

@@ -5,7 +5,6 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction.Components;
-using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
@@ -75,7 +74,6 @@ public sealed class MutationSystem : EntitySystem
         _unremoveableQuery = GetEntityQuery<UnremoveableComponent>();
 
         SubscribeLocalEvent<MutatableComponent, MapInitEvent>(OnMapInit, after: new[] { typeof(SharedBodySystem) });
-        SubscribeLocalEvent<MutatableComponent, MobStateChangedEvent>(OnStateChanged);
         SubscribeLocalEvent<MutatableComponent, PolymorphedEvent>(OnPolymorphed);
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
@@ -105,14 +103,6 @@ public sealed class MutationSystem : EntitySystem
         }
 
         RemoveConflictingMutations(ent);
-    }
-
-    private void OnStateChanged(Entity<MutatableComponent> ent, ref MobStateChangedEvent args)
-    {
-        foreach (var uid in ent.Comp.Mutations.Values)
-        {
-            RaiseLocalEvent(uid, args);
-        }
     }
 
     private void OnPolymorphed(Entity<MutatableComponent> ent, ref PolymorphedEvent args)

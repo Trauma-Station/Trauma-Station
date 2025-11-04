@@ -12,10 +12,12 @@
     - MutationStrength
     conflicts:
     - MutationOrk
-  # TODO: species lock to human
-  # TODO: chunky fingers, no shoving or stunning
-  # TODO: always shout
-  # TODO: holy shit
+  - type: ComponentMutation
+    added:
+    - type: Hulk
+      laserEyes: false # that's a separate mutation
+  # TODO: make sure goob hulk is good for this
+  # TODO: species lock to human?
 
 - type: entity
   parent: MutationHulk
@@ -31,4 +33,9 @@
   - type: RemovesMutation
     removes:
     - MutationHulk
-  # TODO: change skin colour to brown and add Ork accent
+  - type: ComponentMutation
+    added:
+    - type: Hulk
+      laserEyes: false # that's a separate mutation
+      skinColor: "#828163" # assistant olive :)
+  # TODO: add Ork accent
