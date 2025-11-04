@@ -21,8 +21,8 @@
   - type: GenericTriggerCondition
     condition: !type:MutatedNestedCondition
       condition: !type:MobStateCondition
-        mobState: Dead
         inverted: true
+        mobstate: Dead
 
 - type: entity
   abstract: true
