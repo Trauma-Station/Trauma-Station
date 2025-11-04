@@ -21,6 +21,7 @@
     icon:
       sprite: _Trauma/Actions/mutations.rsi
       state: autotomy
+    itemIconStyle: BigAction
   - type: UseDelay
     delay: 10
   - type: InstantAction
