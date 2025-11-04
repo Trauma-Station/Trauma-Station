@@ -42,6 +42,25 @@ public sealed class MutationCommand : ToolshedCommand
         Mutation.RemoveMutation(uid, Check(id));
     }
 
+    [CommandImplementation("clear")]
+    public void Clear([PipedArgument] EntityUid uid)
+    {
+        if (Mutation.GetMutatable(uid) is {} ent)
+            Mutation.ClearMutations(ent);
+    }
+
+    [CommandImplementation("list")]
+    public IEnumerable<EntityUid> List([PipedArgument] EntityUid uid)
+        => Mutation.GetMutatable(uid) is {} ent
+            ? ent.Comp.Mutations.Values
+            : null;
+
+    [CommandImplementation("dormant")]
+    public IEnumerable<EntProtoId<MutationComponent>> Dormant([PipedArgument] EntityUid uid)
+        => Mutation.GetMutatable(uid) is {} ent
+            ? ent.Comp.Dormant
+            : null;
+
     private EntProtoId<MutationComponent> Check(string id)
     {
         var mid = (EntProtoId<MutationComponent>) id;

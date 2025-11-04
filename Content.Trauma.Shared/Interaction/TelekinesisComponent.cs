@@ -1,3 +1,4 @@
+using Content.Shared.Actions;
 using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Interaction;
@@ -10,3 +11,8 @@ namespace Content.Trauma.Shared.Interaction;
 /// </remarks>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class TelekinesisComponent : Component;
+
+/// <summary>
+/// Event for tethering the target entity.
+/// </summary>
+public sealed partial class TelekinesisActionEvent : EntityTargetActionEvent;

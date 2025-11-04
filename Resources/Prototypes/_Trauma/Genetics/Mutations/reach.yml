@@ -10,6 +10,39 @@
   - type: ComponentMutation
     added:
     - type: Telekinesis
+    - type: TetherGun # surely this won't conflict with anything in the future
+      lineColor: "#18a2d5"
+  - type: ActionMutation
+    action: ActionMutationTelekinesis
+
+- type: entity
+  parent: BaseAction
+  id: ActionMutationTelekinesis
+  name: Use Telekinesis
+  description: Move an object using the power of your mind!
+  components:
+  - type: Action
+    raiseOnUser: true
+    icon:
+      sprite: Mobs/Species/Human/organs.rsi
+      state: brain
+    itemIconStyle: BigAction
+    useDelay: 1
+  - type: TargetAction
+    checkCanAccess: false
+    range: 18 # anti trolling, should be outside PVS anyway
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - Item
+      - MobState
+      - Physics
+    blacklist:
+      components:
+      - PhysicsGunBlacklist
+    canTargetSelf: true # for easy deselecting
+    rotateOnUse: false # its with your mind jimbo
+    event: !type:TelekinesisActionEvent
 
 - type: entity
   parent: BaseMutation

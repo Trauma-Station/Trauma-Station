@@ -36,6 +36,7 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: TelekineticInteractable # Trauma
   - type: Animateable
   - type: MeleeSound
     soundGroups:
