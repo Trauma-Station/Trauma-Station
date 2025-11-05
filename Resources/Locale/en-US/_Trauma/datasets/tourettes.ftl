@@ -7,3 +7,5 @@ tourettes-swear-6 = MOTHERFUCKER
 tourettes-swear-7 = TITS
 ## non parity
 tourettes-swear-8 = GOIDA
+
+tourettes-radio-prefix = ;

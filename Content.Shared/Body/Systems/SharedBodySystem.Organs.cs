@@ -172,6 +172,7 @@ public partial class SharedBodySystem
 
         var slot = new OrganSlot(slotId);
         parentEnt.Comp.Organs.Add(slotId, slot);
+        Dirty(parentEnt, parentEnt.Comp); // Trauma
         return slot;
     }
 

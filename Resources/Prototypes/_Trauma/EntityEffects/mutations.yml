@@ -38,6 +38,15 @@
   - !type:Ignite
 
 - type: entityEffect
+  id: MutationAcidicFleshBubble
+  effects:
+  - !type:RelayMutated
+    effect: !type:PopupMessage
+      messages:
+      - entity-effect-popup-acidic-flesh-bubbles
+  - !type:StartUseDelay
+
+- type: entityEffect
   id: MutationAcidicFleshPop
   effects:
   - !type:PopupMessage
@@ -52,6 +61,8 @@
       types:
         Caustic: 15 # TODO: random scale
   # TODO: play sear sound
+
+# Spastic
 
 - type: entityEffect
   id: MutationSpasms
@@ -115,6 +126,8 @@
     - entity-effect-popup-spasm-arm
   - !type:ThrowRandomItem
 
+# Two Left Feet
+
 - type: entityEffect
   id: MutationFeetTrip
   effects:
@@ -124,3 +137,74 @@
     - entity-effect-popup-feet-trip
   - !type:Knockdown
     time: 3
+
+# H.A.R.S.
+
+- type: entityEffect
+  id: MutationRemoveHead
+  effects:
+  - !type:RelayBodyParts
+    guidebookText: entity-effect-guidebook-add-brain-slot-chest
+    partType: Chest
+    effects:
+    - !type:AddOrganSlot
+      slot: brain
+  - !type:MoveOrgan
+    slot: brain
+    src: Head
+    dest: Chest
+  - !type:RelayBodyParts
+    guidebookText: entity-effect-guidebook-gib-head
+    partType: Head
+    effects:
+    - !type:HealthChange
+      damage:
+        types:
+          Blunt: 1000 # this should definitely gib it
+  - !type:RelayBodyParts
+    guidebookText: entity-effect-guidebook-remove-head-slot
+    partType: Chest
+    effects:
+    - !type:RemovePartSlot # no cheesing it by attaching a new head
+      slot: head
+  - !type:PopupMessage
+    type: Pvs
+    visualType: Medium
+    messages:
+    - entity-effect-popup-head-removed
+
+- type: entityEffect
+  id: MutationAddHead
+  effects:
+  - !type:RelayBodyParts
+    guidebookText: entity-effect-guidebook-add-head-slot
+    partType: Chest
+    effects:
+    - !type:AddPartSlot
+      slot: head
+    - !type:RegeneratePart
+      slot: head
+    # getting your eyes back is left as an exercise for the user
+  - !type:RelayBodyParts
+    guidebookText: entity-effect-guidebook-damage-head
+    partType: Head
+    effects:
+    - !type:HealthChange
+      damage:
+        types:
+          Blunt: 50 # discourage eye farming
+  - !type:MoveOrgan
+    slot: brain
+    src: Chest
+    dest: Head
+  - !type:RelayBodyParts
+    guidebookText: entity-effect-guidebook-remove-brain-slot-chest
+    partType: Chest
+    effects:
+    - !type:RemoveOrganSlot
+      slot: brain
+  - !type:PopupMessage
+    type: Pvs
+    visualType: Medium
+    messages:
+    - entity-effect-popup-head-regrown

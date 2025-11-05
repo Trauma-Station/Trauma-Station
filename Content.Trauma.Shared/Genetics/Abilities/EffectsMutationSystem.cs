@@ -20,11 +20,17 @@ public sealed class EffectsMutationSystem : EntitySystem
 
     private void OnAdded(Entity<EffectsMutationComponent> ent, ref MutationAddedEvent args)
     {
+        if (args.Automatic && ent.Comp.IgnoreAutomatic)
+            return;
+
         _effects.ApplyEffects(args.Target, ent.Comp.Added);
     }
 
     private void OnRemoved(Entity<EffectsMutationComponent> ent, ref MutationRemovedEvent args)
     {
+        if (args.Automatic && ent.Comp.IgnoreAutomatic)
+            return;
+
         _effects.ApplyEffects(args.Target, ent.Comp.Removed);
     }
 }

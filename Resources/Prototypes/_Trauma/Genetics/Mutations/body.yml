@@ -160,12 +160,13 @@
         - !type:NestedCondition
           proto: IsAwake
         children:
-        - weight: 1
-          effect: !type:Emote
+        - effect: !type:Emote # emote 33%
             emote: Twitch
-        - weight: 2 # TODO: 50% chance to say it on common radio :')
-          effect: !type:Speak
+        - effect: !type:Speak # local 33%
             id: TourettesSwearing
+        - effect: !type:Speak # common 33%
+            id: TourettesSwearing
+            prefix: tourettes-prefix-radio
 
 - type: entity
   parent: BaseMutation
@@ -323,13 +324,14 @@
     difficulty: 18
   - type: RandomTrigger
     prob: 0.13 # 13%
+  - type: UseDelay # for the popup
+    delay: 20
   - type: EntityEffectOnTrigger
     effects:
-    - !type:RelayMutated
-      effect: !type:PopupMessage
-        messages:
-        - entity-effect-popup-acidic-flesh-bubbles
-      # TODO: 20s cooldown
+    - !type:NestedEffect
+      condition:
+      - !type:UseDelayCondition
+      proto: MutationAcidicFleshBubble
     - !type:RelayMutated
       effect: !type:NestedEffect
         probability: 0.15
@@ -393,11 +395,24 @@
   - type: Mutation
     instability: -40
     difficulty: 12
-  # TODO:
-  # 1. remove brain
-  # 2. delete head
-  # 3. add brain slot to chest
-  # 4. insert brain into chest brain slot
+  - type: EffectsMutation
+    ignoreAutomatic: true # shapeshift system will handle the organs and parts being mirrored
+    added:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        conditions:
+        - !type:OrganSlotCondition
+          organ: brain
+          partType: Head
+        proto: MutationRemoveHead
+    removed:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        conditions:
+        - !type:OrganSlotCondition
+          organ: brain
+          partType: Chest
+        proto: MutationAddHead
 
 # Peak of powergaming technology
 

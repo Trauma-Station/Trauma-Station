@@ -10,11 +10,15 @@ namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
 /// Makes the target entity say a random line from a localized dataset.
+/// It can also have a string prepended.
 /// </summary>
 public sealed partial class Speak : EntityEffectBase<Speak>
 {
     [DataField(required: true)]
     public ProtoId<LocalizedDatasetPrototype> Id;
+
+    [DataField]
+    public LocId? Prefix;
 
     [DataField]
     public bool HideChat;
@@ -36,6 +40,11 @@ public sealed class SpeakEffectSystem : EntityEffectSystem<SpeechComponent, Spea
     {
         var proto = _proto.Index(args.Effect.Id);
         var picked = _random.Pick(proto);
+
+        // prepend the prefix
+        if (args.Effect.Prefix is {} prefix)
+            picked = Loc.GetString(prefix) + picked;
+
         // this is still logged so admins can know e.g. what started a dispute, it would look bad say
         // if you say fuck 8 times to pun pun and he starts attacking you
         // vs you say nothing for 30s and pun pun randomly attacks you according to evil logs

@@ -20,4 +20,10 @@ public sealed partial class EffectsMutationComponent : Component
     /// </summary>
     [DataField]
     public EntityEffect[] Removed = [];
+
+    /// <summary>
+    /// If true, doesn't run effects for automatic mutation adding/removing (polymorph).
+    /// </summary>
+    [DataField]
+    public bool IgnoreAutomatic;
 }

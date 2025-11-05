@@ -29,12 +29,17 @@ entity-effect-guidebook-attack-others = {$chance ->
     *[other] make
 } the target attack a random nearby thing
 
-entity-effect-popup-seizure = {CAPITALIZE($entity)} starts having a seizure!
-entity-effect-popup-acidic-flesh-bubbles = Your acid flesh bubbles...
-entity-effect-popup-acidic-flesh-pops = {$entity}'s skin bubbles and pops!
+entity-effect-guidebook-start-use-delay = {$chance ->
+    [1] starts
+    *[other] start
+} the {$id} use delay on the target
 
-entity-effect-popup-spasm-leg = Your leg spasms!
-entity-effect-popup-spasm-fingers = Your fingers spasm!
-entity-effect-popup-spasm-arm = Your arm spasms!
+entity-effect-guidebook-part-add-slot = {$chance ->
+    [1] adds
+    *[other] add
+} a {$slot} slot to the target part
 
-entity-effect-popup-feet-trip = You trip over your own feet.
+entity-effect-guidebook-part-remove-slot = {$chance ->
+    [1] removes
+    *[other] remove
+} a {$slot} slot from the target part

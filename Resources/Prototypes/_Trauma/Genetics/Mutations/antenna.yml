@@ -6,7 +6,10 @@
   components:
   - type: Mutation
     instability: 10
-  # TODO give a radio implant
+  - type: RadioMutation
+    channels:
+    - Common
+  # TODO: add sprite layer with antenna
 
 - type: entity
   parent: BaseMutation
