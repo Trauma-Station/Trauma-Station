@@ -36,10 +36,19 @@ public sealed partial class DebugEffectStickWindow : FancyWindow
 
         var selected = comp.Effect;
         Effects.AddItem("None");
+        var effects = new List<string>();
         foreach (var proto in _proto.EnumeratePrototypes<EntityEffectPrototype>())
         {
+            effects.Add(proto.ID);
+        }
+        if (selected == null)
+            Effects.Select(0);
+
+        effects.Sort();
+
+        foreach (var effect in effects)
+        {
             var idx = Effects.ItemCount;
-            var effect = proto.ID;
             Effects.AddItem(effect);
             Effects.SetItemMetadata(idx, (string?) effect);
             if (effect == selected)

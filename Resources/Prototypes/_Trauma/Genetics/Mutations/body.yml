@@ -398,21 +398,19 @@
   - type: EffectsMutation
     ignoreAutomatic: true # shapeshift system will handle the organs and parts being mirrored
     added:
-    - !type:RelayMutated
-      effect: !type:NestedEffect
-        conditions:
-        - !type:OrganSlotCondition
-          organ: brain
-          partType: Head
-        proto: MutationRemoveHead
+    - !type:NestedEffect
+      conditions:
+      - !type:OrganSlotCondition
+        organ: brain
+        partType: Head
+      proto: MutationRemoveHead
     removed:
-    - !type:RelayMutated
-      effect: !type:NestedEffect
-        conditions:
-        - !type:OrganSlotCondition
-          organ: brain
-          partType: Chest
-        proto: MutationAddHead
+    - !type:NestedEffect
+      conditions:
+      - !type:OrganSlotCondition
+        organ: brain
+        partType: Chest
+      proto: MutationAddHead
 
 # Peak of powergaming technology
 

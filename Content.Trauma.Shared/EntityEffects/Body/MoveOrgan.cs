@@ -3,6 +3,7 @@ using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -36,10 +37,14 @@ public sealed partial class MoveOrgan : EntityEffectBase<MoveOrgan>
 
 public sealed class MoveOrganEffectSystem : EntityEffectSystem<BodyComponent, MoveOrgan>
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
 
     protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<MoveOrgan> args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         var effect = args.Effect;
         var symmetry = effect.Symmetry;
         var slot = effect.Slot;
@@ -48,7 +53,7 @@ public sealed class MoveOrganEffectSystem : EntityEffectSystem<BodyComponent, Mo
             _body.FindPartOrgan(src, slot) is not {} organ)
             return;
 
-        _body.RemoveOrgan(organ, src);
+        _body.RemoveOrgan(organ, organ.Comp);
         if (!_body.InsertOrgan(dest, organ, slot, dest.Comp, organ.Comp))
             Log.Error($"Failed to move organ {ToPrettyString(organ)} from {ToPrettyString(src)} to {ToPrettyString(dest)} in slot {slot}!");
     }

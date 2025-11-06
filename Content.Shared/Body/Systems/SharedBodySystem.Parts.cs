@@ -245,7 +245,7 @@ public partial class SharedBodySystem
 
             if (part.Body is not null)
             {
-                //RemovePart(part.Body.Value, (removedUid, part), slotId); // Trauma - arm keeps hand when severed
+                RemovePart(part.Body.Value, (removedUid, part), slotId);
                 RecursiveBodyUpdate((removedUid, part), null);
             }
         }
@@ -255,7 +255,8 @@ public partial class SharedBodySystem
             if (!slotId.Contains(OrganSlotContainerIdPrefix + organ.SlotId))
                 return;
 
-            DebugTools.Assert(organ.Body == ent.Comp.Body);
+            // Trauma - add useful assert message
+            DebugTools.Assert(organ.Body == ent.Comp.Body, $"Organ {ToPrettyString(removedUid)} had different body from part {ToPrettyString(ent)}: {ToPrettyString(organ.Body)} vs {ToPrettyString(ent.Comp.Body)}");
 
             RemoveOrgan((removedUid, organ), ent);
         }
@@ -333,6 +334,7 @@ public partial class SharedBodySystem
         Resolve(bodyEnt, ref bodyEnt.Comp, logMissing: false);
         Dirty(partEnt, partEnt.Comp);
 
+        Log.Debug($"Called RemovePart {ToPrettyString(bodyEnt)} with {ToPrettyString(partEnt)}");
         var ev = new BodyPartRemovedEvent(slotId, partEnt);
         RaiseLocalEvent(bodyEnt, ref ev);
 

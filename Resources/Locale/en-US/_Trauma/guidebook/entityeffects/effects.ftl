@@ -43,3 +43,8 @@ entity-effect-guidebook-part-remove-slot = {$chance ->
     [1] removes
     *[other] remove
 } a {$slot} slot from the target part
+
+entity-effect-guidebook-remove-part = {$chance ->
+    [1] detaches
+    *[other] detach
+} the body part from the body

@@ -149,18 +149,22 @@
     effects:
     - !type:AddOrganSlot
       slot: brain
+    - !type:AddOrganSlot
+      slot: eyes
   - !type:MoveOrgan
     slot: brain
+    src: Head
+    dest: Chest
+  - !type:MoveOrgan
+    slot: eyes
     src: Head
     dest: Chest
   - !type:RelayBodyParts
     guidebookText: entity-effect-guidebook-gib-head
     partType: Head
     effects:
-    - !type:HealthChange
-      damage:
-        types:
-          Blunt: 1000 # this should definitely gib it
+    - !type:DetachPart
+    - !type:Gib
   - !type:RelayBodyParts
     guidebookText: entity-effect-guidebook-remove-head-slot
     partType: Chest
@@ -182,9 +186,10 @@
     effects:
     - !type:AddPartSlot
       slot: head
+      partType: Head
+      symmetry: None
     - !type:RegeneratePart
       slot: head
-    # getting your eyes back is left as an exercise for the user
   - !type:RelayBodyParts
     guidebookText: entity-effect-guidebook-damage-head
     partType: Head
@@ -192,9 +197,13 @@
     - !type:HealthChange
       damage:
         types:
-          Blunt: 50 # discourage eye farming
+          Blunt: 50
   - !type:MoveOrgan
     slot: brain
+    src: Chest
+    dest: Head
+  - !type:MoveOrgan
+    slot: eyes
     src: Chest
     dest: Head
   - !type:RelayBodyParts
@@ -203,6 +212,8 @@
     effects:
     - !type:RemoveOrganSlot
       slot: brain
+    - !type:RemoveOrganSlot
+      slot: eyes
   - !type:PopupMessage
     type: Pvs
     visualType: Medium
