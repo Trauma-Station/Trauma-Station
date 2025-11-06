@@ -171,6 +171,7 @@
     effects:
     - !type:RemovePartSlot # no cheesing it by attaching a new head
       slot: head
+  - !type:SetStanding # Debrained gets added for a moment which downs them, undo that
   - !type:PopupMessage
     type: Pvs
     visualType: Medium
@@ -214,6 +215,7 @@
       slot: brain
     - !type:RemoveOrganSlot
       slot: eyes
+  - !type:SetStanding # Debrained gets added for a moment which downs them, undo that
   - !type:PopupMessage
     type: Pvs
     visualType: Medium

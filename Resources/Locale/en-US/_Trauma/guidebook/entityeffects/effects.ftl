@@ -48,3 +48,11 @@ entity-effect-guidebook-remove-part = {$chance ->
     [1] detaches
     *[other] detach
 } the body part from the body
+
+entity-effect-guidebook-set-standing = {$chance ->
+    [1] makes
+    *[other] make
+} the target {$standing ->
+    [true] stand up
+    *[other] get knocked down
+}
