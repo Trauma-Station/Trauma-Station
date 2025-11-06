@@ -423,6 +423,8 @@
   - type: Mutation
     instability: 10
     difficulty: 16
+  - type: BleedingMutation
+    bleedingModifier: 3 # non-parity: 1.5x bleeding feels too weak given this is a fairly strong mutation (nearly ignore bloodloss)
 
 - type: entity
   parent: BaseMutation
