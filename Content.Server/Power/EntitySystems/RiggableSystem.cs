@@ -10,7 +10,7 @@
 
 using Content.Server.Administration.Logs;
 using Content.Server.Explosion.EntitySystems;
-using Content.Server.Kitchen.Components;
+using Content.Shared.Kitchen.Components; // Trauma - moved microwaved event to shared
 using Content.Server.Power.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Database;

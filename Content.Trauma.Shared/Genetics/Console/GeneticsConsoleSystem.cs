@@ -1,5 +1,4 @@
 using Content.Shared.Chat;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
@@ -20,9 +19,9 @@ namespace Content.Trauma.Shared.Genetics.Console;
 public sealed class GeneticsConsoleSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly GeneticsDiskSystem _disk = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly MutationSystem _mutation = default!;
     [Dependency] private readonly ScannedGenomeSystem _genome = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -36,14 +35,12 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     private List<SequenceState> _sequences = new();
 
     private EntityQuery<GeneticsConsoleComponent> _query;
-    private EntityQuery<GeneticsDiskComponent> _diskQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _query = GetEntityQuery<GeneticsConsoleComponent>();
-        _diskQuery = GetEntityQuery<GeneticsDiskComponent>();
 
         SubscribeLocalEvent<GeneticsConsoleComponent, ScannerConnectedEvent>(OnScannerConnected);
         SubscribeLocalEvent<GeneticsConsoleComponent, ScannerDisconnectedEvent>(OnScannerDisconnected);
@@ -257,7 +254,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (GetDisk(ent) is not {} disk)
+        if (_disk.GetDisk(ent.Owner) is not {} disk)
             return;
 
         if (ent.Comp.ScannedMob is not {} mob || _genome.GetSequence(mob, args.Index) is not {} sequence)
@@ -269,9 +266,10 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
         // TODO admin log
         _audio.PlayPvs(ent.Comp.WriteSound, ent);
-        disk.Comp.Mutation = mutation;
-        Dirty(disk);
+        _disk.SetMutation(disk, mutation);
     }
+
+    // TODO: combining
 
     private void OnUIOpened(Entity<GeneticsConsoleComponent> ent, ref AfterActivatableUIOpenEvent args)
     {
@@ -318,23 +316,6 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     public bool CanScan(Entity<GeneticsConsoleComponent> ent, EntityUid mob)
         => CanWorkOn(ent, mob)
             && !_genome.IsScanned(mob); // can't scan someone multiple times
-
-    public Entity<GeneticsDiskComponent>? GetDisk(Entity<GeneticsConsoleComponent> ent)
-    {
-        if (_slots.GetItemOrNull(ent.Owner, ent.Comp.DiskSlot) is not {} item)
-            return null;
-
-        if (!_diskQuery.TryComp(item, out var disk))
-            return null;
-
-        return (item, disk);
-    }
-
-    public void SetDiskMutation(Entity<GeneticsDiskComponent> ent, EntProtoId<MutationComponent>? id)
-    {
-        ent.Comp.Mutation = id;
-        Dirty(ent);
-    }
 
     public bool TryAddRandomChromosome(Entity<GeneticsConsoleComponent?> ent)
     {

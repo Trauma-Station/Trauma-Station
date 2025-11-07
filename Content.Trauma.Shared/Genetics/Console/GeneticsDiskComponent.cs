@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.Genetics.Console;
 /// A disk storing genetics data.
 /// This is for the geneticist what an id card is for HoP.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(GeneticsConsoleSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(GeneticsDiskSystem))]
 [AutoGenerateComponentState]
 public sealed partial class GeneticsDiskComponent : Component
 {

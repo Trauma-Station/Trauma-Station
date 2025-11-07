@@ -120,7 +120,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
-using Content.Server.Kitchen.Components;
+using Content.Shared.Kitchen.Components; // Trauma - moved microwaved event to shared
 using Content.Server.Pinpointer;
 using Content.Server.Popups;
 using Content.Server.Station.Systems;

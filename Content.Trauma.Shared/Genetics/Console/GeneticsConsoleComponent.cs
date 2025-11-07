@@ -23,12 +23,6 @@ public sealed partial class GeneticsConsoleComponent : Component
     public int[] Chromosomes = new int[4];
 
     /// <summary>
-    /// Name of the item slot that holds a genetics disk.
-    /// </summary>
-    [DataField]
-    public string DiskSlot = "genetics_disk";
-
-    /// <summary>
     /// Subjects with more than this number of genetic damage can't be scanned or sequenced.
     /// </summary>
     [DataField]

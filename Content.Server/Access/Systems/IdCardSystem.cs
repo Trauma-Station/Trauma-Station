@@ -1,3 +1,4 @@
+using Content.Shared.Kitchen.Components; // Trauma - moved microwaved event to shared
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;

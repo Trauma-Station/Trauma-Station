@@ -173,15 +173,5 @@ namespace Content.Server.Kitchen.Components
         public bool CanMicrowaveIdsSafely = true;
     }
 
-    public sealed class BeingMicrowavedEvent : HandledEntityEventArgs
-    {
-        public EntityUid Microwave;
-        public EntityUid? User;
-
-        public BeingMicrowavedEvent(EntityUid microwave, EntityUid? user)
-        {
-            Microwave = microwave;
-            User = user;
-        }
-    }
+    // Trauma - moved BeingMicrowavedEvent to shared
 }

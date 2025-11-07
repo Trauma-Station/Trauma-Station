@@ -2,7 +2,8 @@
   parent: BaseItem
   id: GeneticsDisk
   name: genetics disk
-  description: A storage disk capable of encoding a single mutation for use in a genetics console.
+  suffix: Blank
+  description: A storage disk capable of encoding a single mutation for use in a genetics console. Do not expose to microwave radiation.
   components:
   - type: Sprite
     sprite: Objects/Misc/module.rsi
@@ -26,3 +27,11 @@
   components:
   - type: GeneticsDisk
     mutation: MutationUnstableDna
+
+- type: entity
+  parent: GeneticsDisk
+  id: GeneticsDiskMouse
+  suffix: Mouse
+  components:
+  - type: GeneticsDisk
+    mutation: MutationMouse

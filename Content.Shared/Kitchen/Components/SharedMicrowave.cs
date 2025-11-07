@@ -14,6 +14,21 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Kitchen.Components
 {
+    /// <summary>
+    /// Trauma - moved from server
+    /// </summary>
+    public sealed class BeingMicrowavedEvent : HandledEntityEventArgs
+    {
+        public EntityUid Microwave;
+        public EntityUid? User;
+
+        public BeingMicrowavedEvent(EntityUid microwave, EntityUid? user)
+        {
+            Microwave = microwave;
+            User = user;
+        }
+    }
+
     [Serializable, NetSerializable]
     public sealed class MicrowaveStartCookMessage : BoundUserInterfaceMessage
     {

@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Server.Kitchen.Components;
+using Content.Shared.Kitchen.Components; // Trauma - moved microwaved event to shared
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Containers.ItemSlots;

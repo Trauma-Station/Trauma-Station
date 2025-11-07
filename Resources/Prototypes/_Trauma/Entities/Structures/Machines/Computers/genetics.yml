@@ -27,6 +27,7 @@
     sequenceFailSound: /Audio/Effects/smoke.ogg
     writeSound: /Audio/Machines/printer.ogg
   - type: DoAfter # to start the doafters
+  - type: GeneticsDiskSlot
   - type: ItemSlots
     slots:
       genetics_disk:
