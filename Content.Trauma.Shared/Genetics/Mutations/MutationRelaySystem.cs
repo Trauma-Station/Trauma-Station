@@ -1,4 +1,5 @@
 using Content.Shared.Body.Events;
+using Content.Shared.Damage;
 using Content.Shared.Flash;
 using Content.Shared.Mobs;
 using Content.Trauma.Common.Movement;
@@ -18,6 +19,7 @@ public sealed class MutationRelaySystem : EntitySystem
         SubscribeLocalEvent<MutatableComponent, FootStepEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, MobStateChangedEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, BleedModifierEvent>(RelayEvent);
+        SubscribeLocalEvent<MutatableComponent, DamageModifyEvent>(RelayEvent);
     }
 
     public void RelayEvent<T>(Entity<MutatableComponent> ent, ref T args) where T: notnull

@@ -291,7 +291,13 @@
     - !type:RelayMutated
       effect: !type:NestedEffect
         proto: MutationFierySweat
-  # TODO: halve burn damage
+  - type: ArmorMutation
+    modifiers:
+      coefficients: # in tg it seems to apply for all burn damage, not just heat
+        Heat: 0.5
+        Cold: 0.5
+        Shock: 0.5
+        Caustin: 0.5
 
 # if some yml warrior adds endermen give them this trust
 - type: entity
