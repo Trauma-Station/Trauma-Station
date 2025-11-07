@@ -1,0 +1,22 @@
+- type: entity
+  parent: ReinforcementRadio
+  id: BaseReinforcementBeacon
+  name: reinforcement beacon
+  abstract: true
+  description: A reinforcement beacon placed by a nanotrasen command member, it can be destroyed to prevent the reinforcement from arriving.
+  components:
+  - type: GhostRole
+    name: ghost-role-information-SyndiCat-name
+    description: ghost-role-information-SyndiCat-description
+    rules: ghost-role-information-syndicate-reinforcement-rules
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
+    raffle:
+      settings: default
+  - type: GhostRoleMobSpawner
+    prototype: MobCatSyndy
+
+# - type: entity
+#   parent: BaseReinforcementBeacon
+#   id: ReinforcementBeaconSecurityOfficer
+#   components:

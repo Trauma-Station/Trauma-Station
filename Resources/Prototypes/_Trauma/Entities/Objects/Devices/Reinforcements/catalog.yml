@@ -1,0 +1,15 @@
+- type: listing
+  id: SecoffReinforcement
+  name: Reinforcement Officer
+  description: A reinforcement officer, does not come with equipment and will have to be armed.
+  productEntity: SpawnPodCargoBingle
+  icon:
+    sprite: _Goobstation/Mobs/Bingle/cargo-bingle.rsi
+    state: icon
+  cost:
+    Spesos: 500
+  categories:
+  - ReinforcementsHoS
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60 # 1 minute, might not keep
