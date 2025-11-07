@@ -49,7 +49,7 @@ public sealed class RelayBodyPartsEffectSystem : EntityEffectSystem<BodyComponen
         var symmetry = args.Effect.PartSymmetry;
         foreach (var part in _body.GetBodyChildrenOfType(ent, partType, ent.Comp, symmetry))
         {
-            _effects.ApplyEffects(part.Id, effects);
+            _effects.ApplyEffects(part.Id, effects, args.Scale);
         }
     }
 }

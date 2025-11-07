@@ -56,3 +56,5 @@ entity-effect-guidebook-set-standing = {$chance ->
     [true] stand up
     *[other] get knocked down
 }
+
+entity-effect-guidebook-relay-random-part = for a random part, {$effect}

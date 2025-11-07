@@ -5,25 +5,30 @@
   description: Allows a creature to voluntary discard a random appendage.
   components:
   - type: Mutation
-    instability: 10
+    instability: 10 # how is this good?
   - type: ActionMutation
     action: ActionMutationAutotomy
-  - type: AutotomyMutation
-  # TODO
 
 - type: entity
-  parent: BaseAction
+  parent: BaseMutationAction
   id: ActionMutationAutotomy
   name: Drop a limb
   description: Concentrate to make a random limb pop right off your body.
   components:
   - type: Action
+    useDelay: 10
     icon:
       sprite: _Trauma/Actions/mutations.rsi
       state: autotomy
     itemIconStyle: BigAction
-  - type: UseDelay
-    delay: 10
   - type: InstantAction
-    event: !type:AutotomyActionEvent
-  # TODO: implement, dismembers a random non-head non-groin non-chest bodypart
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:RelayRandomPart
+      # No chest, groin or head.
+      types: [ Foot, Hand, Leg, Arm, Tail ]
+      effect: !type:DetachPart
+      failEffect: !type:PopupMessage
+        messages:
+        - entity-effect-popup-autotomy-failed

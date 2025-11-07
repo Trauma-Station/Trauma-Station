@@ -12,21 +12,25 @@ public sealed class EffectActionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<EffectActionComponent, ActionPerformedEvent>(OnActionPerformed);
-        SubscribeLocalEvent<EffectActionComponent, EffectActionEvent>(OnEffectAction);
+        SubscribeLocalEvent<EffectActionComponent, EffectInstantActionEvent>(OnInstantAction);
+        SubscribeLocalEvent<EffectActionComponent, EffectTargetActionEvent>(OnTargetAction);
     }
 
     private void OnActionPerformed(Entity<EffectActionComponent> ent, ref ActionPerformedEvent args)
     {
-        if (!ent.Comp.TargetUser)
-            return;
-
-        var target = args.Performer;
-        _effects.ApplyEffects(target, ent.Comp.Effects);
+        if (ent.Comp.OnPerformed)
+            _effects.ApplyEffects(args.Performer, ent.Comp.Effects);
     }
 
-    private void OnEffectAction(Entity<EffectActionComponent> ent, ref EffectActionEvent args)
+    private void OnInstantAction(Entity<EffectActionComponent> ent, ref EffectInstantActionEvent args)
     {
-        var target = args.Target;
-        _effects.ApplyEffects(target, ent.Comp.Effects);
+        _effects.ApplyEffects(args.Performer, ent.Comp.Effects);
+        args.Handled = true;
+    }
+
+    private void OnTargetAction(Entity<EffectActionComponent> ent, ref EffectTargetActionEvent args)
+    {
+        _effects.ApplyEffects(args.Target, ent.Comp.Effects);
+        args.Handled = true;
     }
 }

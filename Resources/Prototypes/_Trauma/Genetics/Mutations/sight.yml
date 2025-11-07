@@ -54,7 +54,7 @@
   - type: Action
     useDelay: 25
   - type: EffectAction
-    targetUser: true
+    onPerformed: true
     effects:
     - !type:EyeDamage
       amount: 1 # default is negative so this does damage

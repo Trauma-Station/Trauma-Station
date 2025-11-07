@@ -322,6 +322,16 @@ public partial class SharedBodySystem
 
         var ev1 = new BodyPartAddedEvent(slotId, partEnt);
         RaiseLocalEvent(partEnt, ref ev1);
+        // <Trauma> - update e.g. hands on arm attached to a chest so they dont't need to be added individually
+        foreach (var child in GetBodyPartChildren(partEnt, partEnt.Comp))
+        {
+            // who thought this was a good idea? you aren't your own child.
+            if (child.Id == partEnt.Owner)
+                continue;
+
+            AddPart(bodyEnt, (child.Id, child.Component), GetSlotFromBodyPart(child.Component));
+        }
+        // </Trauma>
 
         AddLeg(partEnt, bodyEnt);
     }
@@ -334,7 +344,6 @@ public partial class SharedBodySystem
         Resolve(bodyEnt, ref bodyEnt.Comp, logMissing: false);
         Dirty(partEnt, partEnt.Comp);
 
-        Log.Debug($"Called RemovePart {ToPrettyString(bodyEnt)} with {ToPrettyString(partEnt)}");
         var ev = new BodyPartRemovedEvent(slotId, partEnt);
         RaiseLocalEvent(bodyEnt, ref ev);
 

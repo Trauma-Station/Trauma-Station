@@ -24,6 +24,7 @@ public sealed class DetachPartEffectSystem : EntityEffectSystem<BodyPartComponen
             return;
 
         _body.DropSlotContents(ent); // TODO: check if theres other parts present, rn this is only used for head which is fine
-        _body.DetachPart(parent, ent.Comp.SlotId, ent, part: ent.Comp);
+        var slot = _body.GetSlotFromBodyPart(ent.Comp);
+        _body.DetachPart(parent, slot, ent, part: ent.Comp);
     }
 }

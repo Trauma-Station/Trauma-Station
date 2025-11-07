@@ -5,8 +5,8 @@ using Robust.Shared.GameStates;
 namespace Content.Trauma.Shared.Actions;
 
 /// <summary>
-/// Applies entity effects to the target entity when using <see cref="EffectActionEvent"/>.
-/// Applies it to the performer as well if <see cref="TargetUser"/> is true.
+/// Applies entity effects to the target entity when using <see cref="EffectInstantActionEvent"/> or <see cref="EffectTargetActionEvent"/>.
+/// Applies it to the performer as well if <see cref="OnPerformed"/> is true, regardless of event used.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(EffectActionSystem))]
 public sealed partial class EffectActionComponent : Component
@@ -21,7 +21,9 @@ public sealed partial class EffectActionComponent : Component
     /// Applies effects to the performer if true, regardless of event used.
     /// </summary>
     [DataField]
-    public bool TargetUser;
+    public bool OnPerformed;
 }
 
-public sealed partial class EffectActionEvent : EntityTargetActionEvent;
+public sealed partial class EffectInstantActionEvent : InstantActionEvent;
+
+public sealed partial class EffectTargetActionEvent : EntityTargetActionEvent;

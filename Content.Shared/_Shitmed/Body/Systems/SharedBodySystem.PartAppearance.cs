@@ -206,7 +206,6 @@ public partial class SharedBodySystem
 
     protected void RemoveAppearance(EntityUid entity, BodyPartAppearanceComponent component, EntityUid partEntity)
     {
-        Log.Debug($"RemoveAppearance({ToPrettyString(entity)}) part {ToPrettyString(partEntity)}");
         if (!TryComp(entity, out HumanoidAppearanceComponent? bodyAppearance))
             return;
 
