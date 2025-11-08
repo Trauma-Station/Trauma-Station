@@ -51,10 +51,10 @@
 # Civilian
 
 - type: listing
-  id: ReinforcementAssisstant
-  name: Hire Assisstant
-  description: Hire an assisstant, fent not included. Minimum arrival time of three minutes.
-  productEntity: ReinforcementBeaconAssisstant
+  id: ReinforcementAssistant
+  name: Hire Assistant
+  description: Hire an assistant, fent not included. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconAssistant
   icon:
     sprite: Markers/jobs.rsi
     state: passenger

@@ -38,12 +38,12 @@
 
 - type: entity
   parent: BaseReinforcement
-  id: AssisstantReinforcement
-  name: reinforcement assisstant
+  id: AssistantReinforcement
+  name: reinforcement assistant
   categories: [ HideSpawnMenu ]
   components:
   - type: Loadout
-    prototypes: [AssisstantReinforcement]
+    prototypes: [AssistantReinforcement]
     roleLoadout: [ RoleSurvivalStandard ]
 
 - type: entity
@@ -109,7 +109,7 @@
 # StartingGear Others
 
 - type: startingGear
-  id: AssisstantReinforcement
+  id: AssistantReinforcement
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorGrey
     shoes: ClothingShoesColorBlack

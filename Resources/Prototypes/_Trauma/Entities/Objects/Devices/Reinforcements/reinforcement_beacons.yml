@@ -97,11 +97,11 @@
 
 - type: entity
   parent: BaseReinforcementBeacon
-  id: ReinforcementBeaconAssisstant
+  id: ReinforcementBeaconAssistant
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
-    name: ghost-role-information-reinforcement-assisstant-name
+    name: ghost-role-information-reinforcement-assistant-name
     description: ghost-role-information-reinforcement-description
     rules: ghost-role-information-nonantagonist-rules
     mindRoles:
@@ -109,7 +109,7 @@
     raffle:
       settings: reinforcement
   - type: GhostRoleMobSpawner
-    prototype: AssisstantReinforcement
+    prototype: AssistantReinforcement
 
 - type: entity
   parent: BaseReinforcementBeacon
