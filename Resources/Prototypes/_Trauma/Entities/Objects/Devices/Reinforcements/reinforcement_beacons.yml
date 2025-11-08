@@ -59,7 +59,7 @@
     raffle:
       settings: reinforcement
   - type: GhostRoleMobSpawner
-    prototype: MobSecurityReinforcement
+    prototype: SecurityReinforcement
 
 - type: entity
   parent: BaseReinforcementBeacon
