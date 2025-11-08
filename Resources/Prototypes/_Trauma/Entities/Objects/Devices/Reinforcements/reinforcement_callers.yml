@@ -57,7 +57,7 @@
     - MedicalHoP
     - CargoHoP
     currencyWhitelist:
-    - Credit
+    - Spesos
     sales:
       enabled: false
     ownerOnly: false
