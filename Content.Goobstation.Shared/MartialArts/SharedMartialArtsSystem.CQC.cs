@@ -33,12 +33,16 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.MartialArts;
 
 public partial class SharedMartialArtsSystem
 {
+    private readonly ProtoId<DamageTypePrototype> Asphyxiation = "Asphyxiation";
+    private readonly EntProtoId ForcedSleeping = "StatusEffectForcedSleeping";
+
     private void InitializeCqc()
     {
         SubscribeLocalEvent<CanPerformComboComponent, CqcSlamPerformedEvent>(OnCQCSlam);
@@ -122,6 +126,7 @@ public partial class SharedMartialArtsSystem
         {
             case ComboAttackType.Disarm:
                 _stamina.TakeStaminaDamage(args.Target, 25f);
+                TryChokehold(ent, args.Target); // Trauma
                 break;
             case ComboAttackType.Harm:
                 // Snap neck
@@ -163,6 +168,35 @@ public partial class SharedMartialArtsSystem
                 _stun.TryKnockdown(args.Target, TimeSpan.FromSeconds(5));
                 ComboPopup(ent, args.Target, "Leg Sweep");
                 break;
+        }
+    }
+
+    /// <summary>
+    /// Trauma - Chokehold to force sleep with disarm.
+    /// Unlike tg this uses choking and not the restrain combo.
+    /// </summary>
+    private void TryChokehold(EntityUid ent, EntityUid target)
+    {
+        if (_mobState.IsAlive(target) && !HasComp<GodmodeComponent>(target) &&
+            TryComp(ent, out PullerComponent? puller) &&
+            puller.Pulling == target &&
+            TryComp(target, out PullableComponent? pullable) &&
+            TryComp(target, out BodyComponent? body) &&
+            TryComp(target, out StaminaComponent? stamina) &&
+            stamina.Critical &&
+            puller.GrabStage == GrabStage.Suffocate &&
+            TryComp(ent, out TargetingComponent? targeting) &&
+            targeting.Target == TargetBodyPart.Head)
+        {
+            // choking someones whos already knocked out isn't good for them
+            if (HasComp<SleepingComponent>(target))
+            {
+                var damage = new DamageSpecifier(_proto.Index(Asphyxiation), 10);
+                _damageable.TryChangeDamage(target, damage, true, targetPart: TargetBodyPart.Head);
+            }
+
+            _newStatus.TryUpdateStatusEffectDuration(target, ForcedSleeping, TimeSpan.FromSeconds(40));
+            ComboPopup(ent, target, "a Chokehold");
         }
     }
 

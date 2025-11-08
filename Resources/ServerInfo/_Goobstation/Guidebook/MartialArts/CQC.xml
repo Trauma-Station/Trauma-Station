@@ -28,6 +28,13 @@
   There is no escape from a choke grab of a CQC master. With a single Harm action to the head, the victim's neck breaks,
   killing them instantly. No armor can shield against this deadly precision. The end comes swiftly, and without mercy.
 
+  <!-- <Trauma> -->
+  ### Chokehold
+
+  The pacifist's alternative to the Neck Snap, a chokehold takes a Disarm instead of Harm action to the head.
+  This will knock the victim out for 40 seconds, but don't use it too much or they'll suffocate.
+  <!-- </Trauma> -->
+
   ## Combo attacks
 
   ### Slam
