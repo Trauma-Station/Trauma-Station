@@ -1,0 +1,145 @@
+- type: entity
+  parent: MobHuman
+  id: BaseReinforcement
+  categories: [ HideSpawnMenu ]
+  abstract: true
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: RandomHumanoidAppearance
+    randomizeName: true
+
+# Sec Reinforcements
+
+- type: entity
+  parent: BaseReinforcement
+  id: SecurityReinforcement
+  name: reinforcement security officer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ReinforcementOfficer]
+    roleLoadout: [ RoleSurvivalSecurity ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: MSecurityReinforcementSpecialist
+  name: reinforcement security officer specialist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ReinforcementOfficerSpec]
+    roleLoadout: [ RoleSurvivalSecurity ]
+
+# Service Reinforcements
+
+- type: entity
+  parent: BaseReinforcement
+  id: AssisstantReinforcement
+  name: reinforcement assisstant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [AssisstantReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: BartenderReinforcement
+  name: reinforcement bartender
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [BartenderReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: ChefReinforcement
+  name: reinforcement chef
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ChefReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: BotanistReinforcement
+  name: reinforcement botanist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [BotanistReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+# Starting Gear Sec
+
+- type: startingGear
+  id: ReinforcementOfficer
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    shoes: ClothingShoesBootsCombat
+    id: SecurityPDA
+    ears: ClothingHeadsetAltSecurityRegular
+    back: ClothingBackpackSecurity
+  inhand:
+  - MindShieldImplanter
+
+- type: startingGear
+  id: ReinforcementOfficerSpec
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    shoes: ClothingShoesBootsCombat
+    id: SecurityPDA
+    ears: ClothingHeadsetAltSecurityRegular
+    back: ClothingBackpackSecurity
+    pocket1: WeaponLaserSidearm
+    outerClothing: ClothingOuterArmorBasic
+    head: ClothingHeadHelmetBasic
+  storage:
+    back:
+    - WeaponLaserCarbine
+  inhand:
+  - MindShieldImplanter
+
+# StartingGear Others
+
+- type: startingGear
+  id: AssisstantReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+    id: PassengerPDA
+    ears: ClothingHeadsetGrey
+    back: ClothingBackpack
+
+- type: startingGear
+  id: BartenderReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBartender
+    shoes: ClothingShoesColorBlack
+    id: BartenderPDA
+    ears: ClothingHeadsetService
+    back: ClothingBackpack
+
+- type: startingGear
+  id: ChefReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChef
+    shoes: ClothingShoesColorBlack
+    id: ChefPDA
+    ears: ClothingHeadsetService
+    back: ClothingBackpack
+
+- type: startingGear
+  id: BotanistReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitHydroponics
+    shoes: ClothingShoesColorGreen
+    id: BotanistPDA
+    ears: ClothingHeadsetService
+    back: ClothingBackpackHydroponics

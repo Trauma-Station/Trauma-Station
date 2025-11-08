@@ -1,22 +1,160 @@
 - type: entity
-  parent: ReinforcementRadio
   id: BaseReinforcementBeacon
   name: reinforcement beacon
   abstract: true
+  placement:
+    mode: SnapgridCenter
   description: A reinforcement beacon placed by a nanotrasen command member, it can be destroyed to prevent the reinforcement from arriving.
   components:
-  - type: GhostRole
-    name: ghost-role-information-SyndiCat-name
-    description: ghost-role-information-SyndiCat-description
-    rules: ghost-role-information-syndicate-reinforcement-rules
-    mindRoles:
-    - MindRoleGhostRoleFamiliar
-    raffle:
-      settings: default
-  - type: GhostRoleMobSpawner
-    prototype: MobCatSyndy
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_beacon.rsi
+    state: icon
+  - type: Animateable
+  - type: Clickable
+  - type: InteractionOutline
+  - type: EmitSoundOnCollide
+    sound:
+      collection: WeakHit
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Effects/drop.ogg
+      params:
+        volume: 2
+  - type: DamageOnHighSpeedImpact
+    damage:
+      types:
+        Blunt: 5
+    soundHit:
+      collection: MetalThud
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Transform
+    anchored: true
 
-# - type: entity
-#   parent: BaseReinforcementBeacon
-#   id: ReinforcementBeaconSecurityOfficer
-#   components:
+# Sec
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconSecurityOfficer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-fast-sec-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: MobSecurityReinforcement
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconSecurityOfficerFast
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-sec-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: short
+  - type: GhostRoleMobSpawner
+    prototype: MobSecurityReinforcement
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconSpecialistOfficerLaser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-specialist-sec-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: MobSecurityReinforcement
+
+# Civ
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconAssisstant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-assisstant-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: AssisstantReinforcement
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconBartender
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-bartender-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: BartenderReinforcement
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconChef
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-chef-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: ChefReinforcement
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconBotanist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-botanist-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: BotanistReinforcement

@@ -1,6 +1,6 @@
 - type: entity
   name: reinforcement caller
-  parent: BaseItem
+  parent: [BaseItem, BaseCommandContraband]
   suffix: Empty
   abstract: true
   id: BaseReinforcementCallerEmpty
@@ -31,47 +31,41 @@
     name: store-preset-name-reinforcements
     categories:
     - ReinforcementsHoS
-    # - SpecialistsHoS
+    currencyWhitelist:
+    - Spesos
+    sales:
+      enabled: false
+    ownerOnly: false
+
+- type: entity
+  parent: BaseReinforcementCallerEmpty
+  suffix: Empty
+  id: ReinforcementCallerHoP
+  components:
+  - type: Item
+    size: Small
+    sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_caller_hop.rsi
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_caller_hop.rsi
+    state: animated
+  - type: Store
+    name: store-preset-name-reinforcements
+    categories:
+    - ServiceHoP
+    - EngineeringHoP
+    - ScienceHoP
+    - MedicalHoP
+    - CargoHoP
     currencyWhitelist:
     - Credit
     sales:
       enabled: false
-    ownerOnly: true
-
-# - type: entity
-#   parent: BaseReinforcementCallerEmpty
-#   suffix: Empty
-#   id: ReinforcementCallerHoP
-#   components:
-#   - type: Item
-#     size: Small
-#     sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_caller_hop.rsi
-#   - type: Sprite
-#     sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_caller_hop.rsi
-#     state: animated
-#   - type: Store
-#     name: store-preset-name-reinforcements
-#     categories:
-#     - ServiceHoP
-#     - EngineeringHoP
-#     - ScienceHoP
-#     - MedicalHoP
-#     - CargoHoP
-#     currencyWhitelist:
-#     - Credit
-#     sales:
-#       enabled: false
-#     ownerOnly: true
+    ownerOnly: false
 
 - type: storeCategory
   id: ReinforcementsHoS
   name: store-category-security
   priority: 0
-
-- type: storeCategory
-  id: SpecialistsHoS
-  name: store-category-specialists
-  priority: 1
 
 - type: storeCategory
   id: ServiceHoP
@@ -98,18 +92,21 @@
   name: store-category-cargo
   priority: 4
 
-# - type: entity
-#   id: DebugReinforcementCallerHoP
-#   parent: BaseReinforcementCallerEmpty
-#   suffix: Debug
-#   components:
-#   - type: Store
-#     balance:
-#       Credit: 999999
-#     categories:
-#     - NTRstation
-#     - NTRpersonal
-#     - NTRBoards
-#     - NTREvil
-
-
+- type: entity
+  id: DebugReinforcementCaller
+  parent: BaseReinforcementCallerEmpty
+  suffix: Debug
+  components:
+  - type: Store
+    name: store-preset-name-reinforcements
+    balance:
+      Spesos: 999999
+    categories:
+    - ReinforcementsHoS
+    - ServiceHoP
+    - EngineeringHoP
+    - ScienceHoP
+    - MedicalHoP
+    - CargoHoP
+    currencyWhitelist:
+    - Spesos

@@ -29,7 +29,7 @@
   description: You gotta have money.
   components:
   - type: Cash
-  - type: Currency
+  - type: Currency # Trauma
     price:
       Spesos: 1
   - type: Item

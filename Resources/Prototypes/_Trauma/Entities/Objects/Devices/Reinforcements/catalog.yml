@@ -1,11 +1,13 @@
+# Security
+
 - type: listing
   id: SecoffReinforcement
   name: Reinforcement Officer
-  description: A reinforcement officer, does not come with equipment and will have to be armed.
-  productEntity: SpawnPodCargoBingle
+  description: A reinforcement officer, does not come with equipment and will have to be armed. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconSecurityOfficer
   icon:
-    sprite: _Goobstation/Mobs/Bingle/cargo-bingle.rsi
-    state: icon
+    sprite: Markers/jobs.rsi
+    state: security_cadet
   cost:
     Spesos: 500
   categories:
@@ -13,3 +15,101 @@
   restockTime: 0
   resetRestockOnPurchase: true
   restockAfterPurchase: 60 # 1 minute, might not keep
+
+- type: listing
+  id: SecoffReinforcementExpress
+  name: Express Reinforcement Officer
+  description: A reinforcement officer, does not come with equipment and will have to be armed. Minimum arrival time of ten seconds.
+  productEntity: ReinforcementBeaconSecurityOfficerFast
+  icon:
+    sprite: Markers/jobs.rsi
+    state: security_cadet
+  cost:
+    Spesos: 2500
+  categories:
+  - ReinforcementsHoS
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: SecoffReinforcementSpecialist
+  name: Specialist Reinforcement Officer
+  description: A reinforcement officer, this one is armored and armed. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconSpecialistOfficerLaser
+  icon:
+    sprite: Markers/jobs.rsi
+    state: security_officer
+  cost:
+    Spesos: 5000
+  categories:
+  - ReinforcementsHoS
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+# Civilian
+
+- type: listing
+  id: ReinforcementAssisstant
+  name: Hire Assisstant
+  description: Hire an assisstant, fent not included. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconAssisstant
+  icon:
+    sprite: Markers/jobs.rsi
+    state: passenger
+  cost:
+    Spesos: 250
+  categories:
+  - ServiceHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementBartender
+  name: Hire Bartender
+  description: Hire an bartender. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconBartender
+  icon:
+    sprite: Markers/jobs.rsi
+    state: bartender
+  cost:
+    Spesos: 750
+  categories:
+  - ServiceHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementChef
+  name: Hire Chef
+  description: Hire an chef. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconChef
+  icon:
+    sprite: Markers/jobs.rsi
+    state: chef
+  cost:
+    Spesos: 750
+  categories:
+  - ServiceHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementBeaconBotanist
+  name: Hire Bartender
+  description: Hire an botanist. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconBotanist
+  icon:
+    sprite: Markers/jobs.rsi
+    state: botanist
+  cost:
+    Spesos: 750
+  categories:
+  - ServiceHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
