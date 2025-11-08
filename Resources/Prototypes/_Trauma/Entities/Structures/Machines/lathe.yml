@@ -67,6 +67,10 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/revforge.rsi
   - type: Lathe
+    producingSound:
+      path: /Audio/_Trauma/Revs/strike.ogg
+      params:
+        maxDistance: 3
     runningState: revforge
     staticPacks:
     - RevForgeStatic
