@@ -229,6 +229,8 @@
   - type: ExaminableDamage
     messages: WindowMessages
   # </Goobstation>
+  - type: SoundBlocker # Traumastation
+    soundBlockPercent: 0.7
 
 - type: entity
   abstract: true
