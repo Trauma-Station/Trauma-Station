@@ -5,6 +5,14 @@ ghost-role-information-reinforcement-tant-name = Station Reinforcement (Assistan
 ghost-role-information-reinforcement-chef-name = Station Reinforcement (Chef)
 ghost-role-information-reinforcement-bartender-name = Station Reinforcement (Bartender)
 ghost-role-information-reinforcement-botanist-name = Station Reinforcement (Botanist)
+ghost-role-information-reinforcement-engi-name = Station Reinforcement (Engineer)
+ghost-role-information-reinforcement-atmos-name = Station Reinforcement (Atmos tech)
+ghost-role-information-reinforcement-sci-name = Station Reinforcement (Scientist)
+ghost-role-information-reinforcement-DClass-name = D-Class Personell
+ghost-role-information-reinforcement-doctor-name = Station Reinforcement (Doctor)
+ghost-role-information-reinforcement-chemist-name = Station Reinforcement (Chemist)
+ghost-role-information-reinforcement-cargo-name = Station Reinforcement (Cargo)
+ghost-role-information-reinforcement-salv-name = Station Reinforcement (Salvage)
 
 ghost-role-information-reinforcement-description = You're a reinforcement sent to the nanotrasen station, transit to the station takes three minutes.
-
+ghost-role-information-DClass-description = The science team wants to use you for its experiments, comply or risk death.

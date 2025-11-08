@@ -275,8 +275,6 @@
     - id: BoxPDA
     - id: CigarGoldCase
       prob: 0.25
-      # Fuck the HoP they don't deserve fucking cigars.
-      # Yes they do fuck you.
     - id: ClothingBackpackIan
       prob: 0.5
     #- id: ClothingHeadsetCommand # Goob - overear instead
@@ -285,6 +283,7 @@
     - id: HoPIDCard
     - id: WeaponDisabler
     - id: ClothingEyesHudCommand
+    - id: ReinforcementCallerHoP # Trauma
 
 - type: entity
   id: LockerHeadOfPersonnelFilled
@@ -491,6 +490,7 @@
     #- id: WeaponDisabler # Goobstation (Disablers in belts)
     - id: WantedListCartridge
     - id: DrinkHosFlask
+    - id: ReinforcementCallerHos # Trauma
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable

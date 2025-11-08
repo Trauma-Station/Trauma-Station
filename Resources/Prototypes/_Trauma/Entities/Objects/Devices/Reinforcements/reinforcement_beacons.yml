@@ -158,3 +158,131 @@
       settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: BotanistReinforcement
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconEngi
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-engi-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: EngiReinforcement
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconAtmos
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-atmos-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: AtmosReinforcement
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconSci
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-sci-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: ScienceReinforcement
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconDClass
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-DClass-name
+    description: ghost-role-information-DClass-description
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: DClassReinforcement
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconDoctor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-doctor-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: DoctorReinforcement
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconChemist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-chemist-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: ChemistReinforcement
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconCargo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-cargo-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: CargoReinforcement
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconSalv
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-reinforcement-salvage-name
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
+  - type: GhostRoleMobSpawner
+    prototype: SalvageReinforcement
