@@ -295,7 +295,7 @@ namespace Content.Server.Construction
             if (handle is not HandleResult.True)
                 return handle;
 
-            DebugTools.Assert(!validation);
+            DebugTools.Assert(!validation, $"Construction step for {ToPrettyString(uid)} event {ev} was not handled, and validation is enabled."); // Trauma - add message
 
             // Actually perform the step completion actions, since the step was handled correctly.
             PerformActions(uid, user, step.Completed);
