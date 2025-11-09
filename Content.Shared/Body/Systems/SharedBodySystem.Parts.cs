@@ -123,20 +123,10 @@ public partial class SharedBodySystem
 
         // Shitmed Change
         SubscribeLocalEvent<BodyPartComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<BodyPartComponent, ComponentRemove>(OnBodyPartRemove);
     }
 
     private void OnMapInit(Entity<BodyPartComponent> ent, ref MapInitEvent args)
     {
-        if (ent.Comp.PartType == BodyPartType.Chest)
-        {
-            // For whatever reason this slot is initialized properly on the server, but not on the client.
-            // This seems to be an issue due to wiz-merge, on my old branch it was properly instantiating
-            // ItemInsertionSlot's container on both ends. It does show up properly on ItemSlotsComponent though.
-            _slots.AddItemSlot(ent, ent.Comp.ContainerName, ent.Comp.ItemInsertionSlot);
-            Dirty(ent, ent.Comp);
-        }
-
         if (ent.Comp.OnAdd is not null || ent.Comp.OnRemove is not null)
             EnsureComp<BodyPartEffectComponent>(ent);
 
@@ -149,12 +139,6 @@ public partial class SharedBodySystem
         {
             Containers.EnsureContainer<ContainerSlot>(ent, GetOrganContainerId(organ));
         }
-    }
-
-    private void OnBodyPartRemove(Entity<BodyPartComponent> ent, ref ComponentRemove args)
-    {
-        if (ent.Comp.PartType == BodyPartType.Chest)
-            _slots.RemoveItemSlot(ent, ent.Comp.ItemInsertionSlot);
     }
 
     /// <summary>
@@ -183,43 +167,24 @@ public partial class SharedBodySystem
         var insertedUid = args.Entity;
         var slotId = args.Container.ID;
         // <Shitmed>
-        if (slotId == ent.Comp.ContainerName)
-        {
-            // this will give a mob inserted into someones chest an action to burst out
-            _insideBodyPart.InsertedIntoPart(insertedUid, ent);
-            return; // don't need to do bodypart logic it's just a cavity insertion
-        }
         // </Shitmed>
 
         var body = ent.Comp.Body; // Shitmed Change
         if (body is null)
             return;
 
-        if (TryComp(insertedUid, out BodyPartComponent? part) && slotId.Contains(PartSlotContainerIdPrefix + GetSlotFromBodyPart(part))) // Shitmed Change
+        // <Trauma> - reorganise the errors and check based on slot id first rather than component
+        if (slotId.StartsWith(PartSlotContainerIdPrefix) && TryComp<BodyPartComponent>(insertedUid, out var part))
         {
             AddPart(body.Value, (insertedUid, part), slotId);
             RecursiveBodyUpdate((insertedUid, part), body.Value);
         }
-#if DEBUG
-        else if(HasComp<BodyPartComponent>(insertedUid))
-        {
-            DebugTools.Assert(
-                slotId.Contains(PartSlotContainerIdPrefix + GetSlotFromBodyPart(part)),
-                $"BodyPartComponent has not been inserted ({Prototype(args.Entity)?.ID}) into {Prototype(ent.Comp.Body!.Value)?.ID}" +
-                $" прототип должен иметь подключение начиная с {GetSlotFromBodyPart(part)} (сейчас {slotId.Replace(PartSlotContainerIdPrefix,"")})");
-        }
-#endif
 
-        if (TryComp(insertedUid, out OrganComponent? organ) && slotId.Contains(OrganSlotContainerIdPrefix + organ.SlotId)) // Shitmed Change
+        if (slotId.StartsWith(OrganSlotContainerIdPrefix) && TryComp<OrganComponent>(insertedUid, out var organ))
         {
             AddOrgan((insertedUid, organ), body.Value, ent);
         }
-#if DEBUG
-        else if(HasComp<OrganComponent>(insertedUid))
-        {
-            DebugTools.Assert($"OrganComponent has not been inserted ({Prototype(args.Entity)?.ID}) into {Prototype(ent.Comp.Body!.Value)?.ID}");
-        }
-#endif
+        // </Trauma>
     }
 
     private void OnBodyPartRemoved(Entity<BodyPartComponent> ent, ref EntRemovedFromContainerMessage args)
@@ -229,13 +194,6 @@ public partial class SharedBodySystem
         var slotId = args.Container.ID;
 
         // Shitmed Change Start
-        if (slotId == ent.Comp.ContainerName)
-        {
-            // this will remove the chest burst action
-            _insideBodyPart.RemovedFromPart(removedUid);
-            return; // don't need to do bodypart logic it's just a cavity removal
-        }
-
         if (TryComp(removedUid, out BodyPartComponent? part))
         {
             if (!slotId.Contains(PartSlotContainerIdPrefix + GetSlotFromBodyPart(part)))

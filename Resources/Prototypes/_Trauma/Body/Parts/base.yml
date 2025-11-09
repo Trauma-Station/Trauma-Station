@@ -1,0 +1,9 @@
+- type: entity
+  abstract: true
+  id: BaseBodyPartCavity
+  components:
+  - type: BodyPartCavity
+    whitelist: # any tiny or small item, thats it
+      sizes:
+      - Tiny
+      - Small

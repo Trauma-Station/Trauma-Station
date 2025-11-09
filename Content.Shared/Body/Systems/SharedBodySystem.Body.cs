@@ -59,7 +59,6 @@ using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Systems;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
 using Content.Shared.Silicons.Borgs.Components;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory.Events;
@@ -88,7 +87,6 @@ public partial class SharedBodySystem
 
     // Shitmed Change Start
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly WoundSystem _woundSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TraumaSystem _trauma = default!;
