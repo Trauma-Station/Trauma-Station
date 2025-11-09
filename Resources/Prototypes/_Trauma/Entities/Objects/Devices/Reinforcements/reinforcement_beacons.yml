@@ -51,7 +51,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
-    name: ghost-role-information-reinforcement-fast-sec-name
+    name: ghost-role-information-reinforcement-sec-name
     description: ghost-role-information-reinforcement-description
     rules: ghost-role-information-nonantagonist-rules
     mindRoles:
@@ -67,7 +67,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
-    name: ghost-role-information-reinforcement-sec-name
+    name: ghost-role-information-reinforcement-fast-sec-name
     description: ghost-role-information-reinforcement-description
     rules: ghost-role-information-nonantagonist-rules
     mindRoles:
