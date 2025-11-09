@@ -635,6 +635,7 @@
     LiveLetLiveLaws: 1
     EfficiencyLawset: 1
     RobocopLawset: 1
+    GambamovLawset: 0.7 #Goobstation
     OverlordLawset: 0.5
     GameMasterLawset: 0.5
     PainterLawset: 1
