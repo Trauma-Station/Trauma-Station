@@ -1,4 +1,6 @@
 MutationAdrenalineRush-mutated = You feel pumped up!
+MutationAdrenalineRush-inject-popup = You feel pumped up! It's time to GO!
+MutationAdrenalineRush-comedown-popup = Your adrenaline rush makes way for a bout of nausea and a deep feeling of exhaustion in your muscles.
 MutationColdAdaptation-mutated = Your body feels refreshingly cold.
 MutationHeatAdaptation-mutated = Your body feels invirogatingly warm.
 MutationThermalAdaptation-mutated = Your body feels pleasantly room temperature.

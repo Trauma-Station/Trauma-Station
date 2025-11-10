@@ -32,7 +32,7 @@ public sealed class InjectChemicalsActionSystem : EntitySystem
         var now = _timing.CurTime;
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (comp.NextComedown is not {} next || next < now)
+            if (comp.NextComedown is not {} next || now < next)
                 continue;
 
             Comedown((uid, comp));

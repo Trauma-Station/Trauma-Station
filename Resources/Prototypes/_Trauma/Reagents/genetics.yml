@@ -18,4 +18,4 @@
         visualType: Small
         probability: 0.16
         messages:
-        - entity-effect-popup-tiredeness
+        - entity-effect-popup-tiredness

@@ -19,8 +19,9 @@
     checkCanInteract: false # its your heart or something
     useDelay: 2m
     icon:
-      sprite: _Trauma/actions/mutations.rsi
+      sprite: _Trauma/Actions/mutations.rsi
       state: adrenaline
+    itemIconStyle: BigAction
   - type: InjectChemicalsAction
     main:
       # no Pump Up and using adrenaline instead of determination
