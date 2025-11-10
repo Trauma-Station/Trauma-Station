@@ -1,0 +1,4 @@
+- type: flavor
+  id: tiredness
+  flavorType: Complex
+  description: flavor-complex-tiredness

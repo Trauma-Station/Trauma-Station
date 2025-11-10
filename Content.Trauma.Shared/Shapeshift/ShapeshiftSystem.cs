@@ -5,9 +5,9 @@ using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Prototypes;
 using Content.Shared.Body.Systems;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Polymorph;
 using Content.Shared.Standing;
+using Content.Trauma.Shared.Body.Part;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -21,7 +21,6 @@ namespace Content.Trauma.Shared.Shapeshift;
 public sealed partial class ShapeshiftSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -44,7 +43,7 @@ public sealed partial class ShapeshiftSystem : EntitySystem
 
         SubscribeLocalEvent<BodyComponent, PolymorphedEvent>(OnPolymorphed);
 
-        SubscribeLocalEvent<BodyPartComponent, ShapeshiftedEvent>(OnPartShapeshifted);
+        SubscribeLocalEvent<BodyPartCavityComponent, ShapeshiftedEvent>(OnCavityShapeshifted);
         SubscribeLocalEvent<WoundableComponent, ShapeshiftedEvent>(OnWoundableShapeshifted);
     }
 
@@ -257,14 +256,18 @@ public sealed partial class ShapeshiftSystem : EntitySystem
 
     #region Event handlers
 
-    private void OnPartShapeshifted(Entity<BodyPartComponent> ent, ref ShapeshiftedEvent args)
+    private void OnCavityShapeshifted(Entity<BodyPartCavityComponent> ent, ref ShapeshiftedEvent args)
     {
-        // transfer chest cavity implant
-        if (ent.Comp.ItemInsertionSlot.Item is not {} item)
+        if (!_container.TryGetContainer(ent.Owner, ent.Comp.ContainerId, out var container) ||
+            container is not ContainerSlot slot ||
+            slot.ContainedEntity is not {} item)
             return;
 
-        var part = _partQuery.Comp(args.Target);
-        _slots.TryInsert(args.Target, part.ItemInsertionSlot, item, user: null);
+        if (!TryComp<BodyPartCavityComponent>(args.Target, out var cavity) ||
+            !_container.TryGetContainer(args.Target, cavity.ContainerId, out var dest))
+            return;
+
+        _container.Insert(item, dest);
     }
 
     private void OnWoundableShapeshifted(Entity<WoundableComponent> ent, ref ShapeshiftedEvent args)

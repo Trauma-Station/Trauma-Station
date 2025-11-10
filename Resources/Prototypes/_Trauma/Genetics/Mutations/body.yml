@@ -244,9 +244,11 @@
   - type: Mutation
     instability: 5
     difficulty: 16
-  # TODO
+  - type: StrengthMutation
+  # TODO: exercise and fitness buffs
 
 - type: entity
+  abstract: true # TODO: pointless without exercise
   parent: BaseMutation
   id: MutationStimmed
   name: Stimmed
@@ -255,7 +257,7 @@
   - type: Mutation
     instability: 5
     difficulty: 16
-  # TODO
+  # TODO: add 1 to exercise modifier if stimmed
 
 - type: entity
   parent: BaseMutation

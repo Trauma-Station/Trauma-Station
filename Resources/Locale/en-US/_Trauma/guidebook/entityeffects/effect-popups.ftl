@@ -12,3 +12,5 @@ entity-effect-popup-head-removed = {$entity}'s head splatters with a sickening c
 entity-effect-popup-head-regrown = {$entity}'s head returns with a sickening crunch!
 
 entity-effect-popup-autotomy-failed = You can't shed any more limbs!
+
+entity-effect-popup-tiredness = You should sit down and take a rest...

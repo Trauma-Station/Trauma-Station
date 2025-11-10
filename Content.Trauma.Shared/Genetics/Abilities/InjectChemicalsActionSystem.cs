@@ -58,8 +58,7 @@ public sealed class InjectChemicalsActionSystem : EntitySystem
         if (_mutation.GetActionMutation(ent)?.Comp?.Target is not {} target)
             return;
 
-        // this is only run by the server
-        _popup.PopupEntity(Loc.GetString(ent.Comp.Comedown.Popup), target, target);
+        _popup.PopupClient(Loc.GetString(ent.Comp.Comedown.Popup), target, target);
         ent.Comp.NextComedown = null;
         // TODO CHROMO
         Inject(target, ent.Comp.Comedown.Reagents, ent.Comp.Comedown.BaseQuantity);

@@ -2,6 +2,7 @@ using Content.Shared.Body.Events;
 using Content.Shared.Damage;
 using Content.Shared.Flash;
 using Content.Shared.Mobs;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Movement;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
@@ -20,6 +21,7 @@ public sealed class MutationRelaySystem : EntitySystem
         SubscribeLocalEvent<MutatableComponent, MobStateChangedEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, BleedModifierEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, DamageModifyEvent>(RelayEvent);
+        SubscribeLocalEvent<MutatableComponent, GetUserMeleeDamageEvent>(RelayEvent);
     }
 
     public void RelayEvent<T>(Entity<MutatableComponent> ent, ref T args) where T: notnull
