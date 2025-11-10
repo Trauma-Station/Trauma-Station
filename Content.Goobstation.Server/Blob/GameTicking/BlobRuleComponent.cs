@@ -11,7 +11,7 @@
 using Content.Server.GameTicking.Rules;
 using Content.Shared.Mind;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Prototypes; // Trauma
 
 namespace Content.Goobstation.Server.Blob.GameTicking;
 
