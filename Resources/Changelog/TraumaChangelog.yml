@@ -564,3 +564,33 @@ Entries:
       message: Removed DT-12 anti-structure firing mode.
   id: 61
   time: '2025-11-03T21:31:23.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Hardgrab and choking now pulls your victim in closer.
+  id: 62
+  time: '2025-11-08T16:29:10.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: >-
+        CQC now has the Chokehold move to put someone to sleep, like Neck Snap
+        but disarm instead of punching.
+  id: 63
+  time: '2025-11-08T16:48:42.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Hos and Hop reinforcement callers
+    - type: Add
+      message: D-Class Personnel
+    - type: Remove
+      message: Lobby Guilt trip
+  id: 64
+  time: '2025-11-08T21:25:15.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed everything
+  id: 65
+  time: '2025-11-09T22:41:50.0000000+00:00'

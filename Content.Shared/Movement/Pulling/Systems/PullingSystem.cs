@@ -19,6 +19,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Dynamics.Joints;
 using Robust.Shared.Random;
 // </Trauma>
 using Content.Shared.ActionBlocker;
@@ -993,6 +994,24 @@ public sealed class PullingSystem : EntitySystem
     {
         puller.Comp.GrabStage = stage;
         pullable.Comp.GrabStage = stage;
+
+        // <Trauma> - harder grabs force you closer together, you can't use mind powers to choke someone 3m away
+        var stageLength = stage switch
+        {
+            GrabStage.Hard => 0.5f,
+            GrabStage.Suffocate => 0.25f,
+            _ => 30f // basically use interaction range for softgrab
+        };
+        if (pullable.Comp.PullJointId is {} jointId &&
+            TryComp<JointComponent>(pullable, out var jointComp) &&
+            jointComp.GetJoints.TryGetValue(jointId, out var joint) &&
+            joint is DistanceJoint distJoint &&
+            distJoint.MaxLength > stageLength)
+        {
+            distJoint.MaxLength = stageLength;
+            Dirty(pullable, jointComp);
+        }
+        // </Trauma>
 
         if (!TryUpdateGrabVirtualItems(puller, pullable))
             return false;

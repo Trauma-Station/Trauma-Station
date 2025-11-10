@@ -29,6 +29,9 @@
   description: You gotta have money.
   components:
   - type: Cash
+  - type: Currency # Trauma
+    price:
+      Spesos: 1
   - type: Item
     shape:
     - 0,0,1,0

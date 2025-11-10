@@ -39,6 +39,9 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem
         EntityManager.AddComponents(ent.Comp.ImplantedEntity.Value, ent.Comp.ImplantComponents);
         if (ent.Comp.ImplantAction != null)
             _actions.AddAction(ent.Comp.ImplantedEntity.Value, ref ent.Comp.Action, ent.Comp.ImplantAction, ent.Owner);
+
+        var ev = new ImplantImplantedEvent(ent.Owner, ent.Comp.ImplantedEntity.Value);
+        RaiseLocalEvent(ent.Owner, ref ev);
     }
 
     private void OnRemoveAttempt(Entity<SubdermalImplantComponent> ent, ref ContainerGettingRemovedAttemptEvent args)

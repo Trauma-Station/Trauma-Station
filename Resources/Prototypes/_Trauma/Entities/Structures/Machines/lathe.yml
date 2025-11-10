@@ -67,6 +67,10 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/revforge.rsi
   - type: Lathe
+    producingSound:
+      path: /Audio/_Trauma/Revs/strike.ogg
+      params:
+        maxDistance: 3
     runningState: revforge
     staticPacks:
     - RevForgeStatic
@@ -107,7 +111,10 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/revprintingpress.rsi
   - type: Lathe
-    producingSound: /Audio/_Trauma/Revs/printingpresslong.ogg
+    producingSound:
+      path: /Audio/_Trauma/Revs/printingpresslong.ogg
+      params:
+        maxDistance: 3
     runningState: printingpress
     staticPacks:
     - RevPrintingPress
@@ -127,7 +134,10 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/telecommsbench.rsi
   - type: Lathe
-    producingSound: /Audio/_Trauma/Revs/commsworkbench.ogg
+    producingSound:
+      path: /Audio/_Trauma/Revs/commsworkbench.ogg
+      params:
+        maxDistance: 3
     runningState: telecomms
     staticPacks:
     - RevTelecommsWorkbenchStatic
@@ -149,7 +159,10 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/telesphere.rsi
   - type: Lathe
-    producingSound: /Audio/_Trauma/Revs/telesphere.ogg
+    producingSound:
+      path: /Audio/_Trauma/Revs/telesphere.ogg
+      params:
+        maxDistance: 3
     runningState: telesphere
     staticPacks:
     - RevTelesphereStatic
@@ -179,7 +192,10 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/printer.rsi
   - type: Lathe
-    producingSound: /Audio/_Trauma/Revs/printer.ogg
+    producingSound:
+      path: /Audio/_Trauma/Revs/printer.ogg
+      params:
+        maxDistance: 3
     runningState: printer
     staticPacks:
     - RevPrinterStatic
@@ -201,7 +217,10 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/bulletpress.rsi
   - type: Lathe
-    producingSound: /Audio/_Trauma/Revs/bulletpress.ogg
+    producingSound:
+      path: /Audio/_Trauma/Revs/bulletpress.ogg
+      params:
+        maxDistance: 3
     runningState: bulletpress
     staticPacks:
     - RevBulletPressStatic
@@ -223,7 +242,10 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/microelectronicsassembler.rsi
   - type: Lathe
-    producingSound: /Audio/_Trauma/Revs/microelectronicsassembler.ogg
+    producingSound:
+      path: /Audio/_Trauma/Revs/microelectronicsassembler.ogg
+      params:
+        maxDistance: 3
     runningState: microelectronicsassembler
     staticPacks:
     - RevMicroElectronicsStatic
@@ -255,7 +277,10 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/uniformprinter.rsi
   - type: Lathe
-    producingSound: /Audio/Machines/uniformprinter.ogg
+    producingSound:
+      path: /Audio/Machines/uniformprinter.ogg
+      params:
+        maxDistance: 3
     runningState: uniformsewer
     staticPacks:
     - RevClothingStatic
@@ -277,7 +302,10 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/techanalyzer.rsi
   - type: Lathe
-    producingSound: /Audio/Machines/uniformprinter.ogg
+    producingSound:
+      path: /Audio/Machines/uniformprinter.ogg
+      params:
+        maxDistance: 3
     runningState: techAnalyzer
     staticPacks:
     - RevTechStatic
@@ -299,7 +327,10 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/plasmaforge.rsi
   - type: Lathe
-    producingSound: /Audio/_Trauma/Revs/foundryaudio.ogg
+    producingSound:
+      path: /Audio/_Trauma/Revs/foundryaudio.ogg
+      params:
+        maxDistance: 3
     runningState: plasmaforge
     staticPacks:
     - RevFoundryStatic

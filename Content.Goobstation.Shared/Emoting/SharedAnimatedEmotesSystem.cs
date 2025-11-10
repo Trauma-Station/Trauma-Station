@@ -29,7 +29,7 @@ public abstract class SharedAnimatedEmotesSystem : EntitySystem
 
     public void PlayEmoteAnimation(Entity<AnimatedEmotesComponent?> ent, ProtoId<EmotePrototype> emote)
     {
-        if (!Resolve(ent, ref ent.Comp, false) || ent.Comp.Emote == emote)
+        if (!Resolve(ent, ref ent.Comp, false))
             return;
 
         ent.Comp.Emote = emote;

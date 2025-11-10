@@ -28,7 +28,6 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.GameTicking;
@@ -60,7 +59,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;

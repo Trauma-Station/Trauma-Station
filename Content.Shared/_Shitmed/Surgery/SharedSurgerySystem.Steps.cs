@@ -26,7 +26,6 @@ using Content.Shared.Body.Part;
 using Content.Shared.Body.Organ;
 using Content.Shared._Shitmed.BodyEffects;
 using Content.Shared.Buckle.Components;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
@@ -45,6 +44,8 @@ using Content.Shared.Item;
 using Content.Shared._Shitmed.Body.Organ;
 using Content.Shared._Shitmed.Body.Part;
 using Content.Shared.Popups;
+using Content.Trauma.Common.Body.Part;
+using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
@@ -53,6 +54,8 @@ namespace Content.Shared._Shitmed.Medical.Surgery;
 
 public abstract partial class SharedSurgerySystem
 {
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+
     private EntityQuery<BodyPartComponent> _partQuery;
     private EntityQuery<SurgeryIgnoreClothingComponent> _ignoreQuery;
     private EntityQuery<SurgeryStepComponent> _stepQuery;
@@ -228,31 +231,30 @@ public abstract partial class SharedSurgerySystem
 
     private void OnCavityStep(Entity<SurgeryStepCavityEffectComponent> ent, ref SurgeryStepEvent args)
     {
-        if (!_partQuery.TryComp(args.Part, out var partComp) || partComp.PartType != BodyPartType.Chest)
+        // <Trauma> - rewritten to use event
+        var ev = new GetBodyPartCavityEvent();
+        RaiseLocalEvent(args.Part, ref ev);
+        if (ev.Container is not {} container)
             return;
 
         var activeHandEntity = _hands.EnumerateHeld(args.User).FirstOrDefault();
-        if (activeHandEntity != default
-            && ent.Comp.Action == "Insert"
-            && TryComp(activeHandEntity, out ItemComponent? itemComp)
-            && (itemComp.Size.Id == "Tiny"
-            || itemComp.Size.Id == "Small"))
-            _itemSlotsSystem.TryInsert(ent, partComp.ItemInsertionSlot, activeHandEntity, args.User);
-        else if (ent.Comp.Action == "Remove")
-            _itemSlotsSystem.TryEjectToHands(ent, partComp.ItemInsertionSlot, args.User);
+        if (activeHandEntity != default && ent.Comp.Action == "Insert")
+            _container.Insert(activeHandEntity, container);
+        else if (ent.Comp.Action == "Remove" && container.ContainedEntity is {} contained)
+            _hands.TryPickupAnyHand(args.User, contained);
+        // </Trauma>
     }
 
     private void OnCavityCheck(Entity<SurgeryStepCavityEffectComponent> ent, ref SurgeryStepCompleteCheckEvent args)
     {
-        // Normally this check would simply be partComp.ItemInsertionSlot.HasItem, but as mentioned before,
-        // For whatever reason it's not instantiating the field on the clientside after the wizmerge.
-        if (!_partQuery.TryComp(args.Part, out var partComp)
-            || !TryComp(args.Part, out ItemSlotsComponent? itemComp)
-            || ent.Comp.Action == "Insert"
-            && !itemComp.Slots[partComp.ContainerName].HasItem
-            || ent.Comp.Action == "Remove"
-            && itemComp.Slots[partComp.ContainerName].HasItem)
+        // <Trauma> - rewritten to use event
+        var ev = new GetBodyPartCavityEvent();
+        RaiseLocalEvent(args.Part, ref ev);
+        if (ev.Container is not {} container
+            || (ent.Comp.Action == "Insert" && container.Count == 0)
+            || (ent.Comp.Action == "Remove" && container.Count != 0))
             args.Cancelled = true;
+        // </Trauma>
     }
 
     private void OnAddPartStep(Entity<SurgeryAddPartStepComponent> ent, ref SurgeryStepEvent args)

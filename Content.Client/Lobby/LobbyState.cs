@@ -305,7 +305,7 @@ namespace Content.Client.Lobby
             UpdatePlayerBalance(); // Goobstation - Goob Coin
 
             var minutesToday = _playtimeTracking.PlaytimeMinutesToday;
-            if (minutesToday > 60)
+            if (minutesToday > 99999) // trauma, remove guilt tripping
             {
                 Lobby!.PlaytimeComment.Visible = true;
 

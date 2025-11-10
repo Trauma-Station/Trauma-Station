@@ -111,12 +111,6 @@ namespace Content.Client.Options.UI.Tabs
             _cfg.SaveToFile();
         }
 
-        private void HandleToggleAutoGetUp(BaseButton.ButtonToggledEventArgs args) // WD EDIT
-        {
-            _cfg.SetCVar(GoobCVars.AutoGetUp, args.Pressed);
-            _cfg.SaveToFile();
-        }
-
         public KeyRebindTab()
         {
             IoCManager.InjectDependencies(this);
@@ -175,9 +169,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.Walk);
             AddCheckBox("ui-options-hotkey-toggle-walk", _cfg.GetCVar(CCVars.ToggleWalk), HandleToggleWalk);
             AddCheckBox("ui-options-hotkey-default-walk", _cfg.GetCVar(GoobCVars.DefaultWalk), HandleDefaultWalk); // Goob
-            AddButton(ContentKeyFunctions.Sprint);
-            AddButton(ContentKeyFunctions.ToggleStanding);
-            AddCheckBox("ui-options-function-auto-get-up", _cfg.GetCVar(GoobCVars.AutoGetUp), HandleToggleAutoGetUp); // WD EDIT
+            AddButton(ContentKeyFunctions.Sprint); // Goob
             InitToggleWalk();
             AddButton(ContentKeyFunctions.ToggleKnockdown);
 
@@ -199,7 +191,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.Drop);
             AddButton(ContentKeyFunctions.ExamineEntity);
             AddButton(ContentKeyFunctions.SwapHands);
-            AddButton(ContentKeyFunctions.ResistGrab);
+            AddButton(ContentKeyFunctions.ResistGrab); // Goob
             AddButton(ContentKeyFunctions.SwapHandsReverse);
             AddButton(ContentKeyFunctions.MoveStoredItem);
             AddButton(ContentKeyFunctions.RotateStoredItem);

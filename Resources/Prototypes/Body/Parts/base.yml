@@ -57,6 +57,7 @@
 
 - type: entity
   abstract: true
+  parent: BaseBodyPartCavity # Trauma
   id: BaseChestInorganic
   name: "chest"
   components:
@@ -68,7 +69,6 @@
     partType: Chest
     # Shitmed Change Start
     toolName: "a chest"
-    containerName: "chest_slot"
     children:
       groin:
         id: groin
@@ -112,7 +112,6 @@
     causesDeath: true
   - type: ContainerContainer
     containers:
-      chest_slot: !type:ContainerSlot {}
       Wounds: !type:Container # Shitmed Change
         ents: []
       Bone: !type:Container # Shitmed Change

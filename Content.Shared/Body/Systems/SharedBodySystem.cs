@@ -63,7 +63,6 @@ public abstract partial class SharedBodySystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem SharedTransform = default!;
     [Dependency] protected readonly StandingStateSystem Standing = default!;
     // <Shitmed>
-    [Dependency] private readonly CommonInsideBodyPartSystem _insideBodyPart = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     // </Shitmed>

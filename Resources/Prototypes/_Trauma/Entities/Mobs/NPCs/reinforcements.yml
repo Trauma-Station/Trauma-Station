@@ -1,0 +1,307 @@
+- type: entity
+  parent: MobHuman
+  id: BaseReinforcement
+  categories: [ HideSpawnMenu ]
+  abstract: true
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: RandomHumanoidAppearance
+    randomizeName: true
+
+# Sec Reinforcements
+
+- type: entity
+  parent: BaseReinforcement
+  id: SecurityReinforcement
+  name: reinforcement security officer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ReinforcementOfficer]
+    roleLoadout: [ RoleSurvivalSecurity ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: MSecurityReinforcementSpecialist
+  name: reinforcement security officer specialist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ReinforcementOfficerSpec]
+    roleLoadout: [ RoleSurvivalSecurity ]
+
+# Service Reinforcements
+
+- type: entity
+  parent: BaseReinforcement
+  id: AssistantReinforcement
+  name: reinforcement assistant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [AssistantReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: BartenderReinforcement
+  name: reinforcement bartender
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [BartenderReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: ChefReinforcement
+  name: reinforcement chef
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ChefReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: BotanistReinforcement
+  name: reinforcement botanist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [BotanistReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: EngiReinforcement
+  name: reinforcement engineer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [EngineerReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: AtmosReinforcement
+  name: reinforcement atmostech
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [AtmosReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: DClassReinforcement
+  name: D-Class
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [DClassReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: ScienceReinforcement
+  name: reinforcement scientist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ScienceReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: DoctorReinforcement
+  name: reinforcement doctor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [DoctorReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: ChemistReinforcement
+  name: reinforcement chemist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ChemistReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: CargoReinforcement
+  name: reinforcement cargo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [CargoReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+- type: entity
+  parent: BaseReinforcement
+  id: SalvageReinforcement
+  name: reinforcement chemist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [SalvageReinforcement]
+    roleLoadout: [ RoleSurvivalStandard ]
+
+# Starting Gear Sec
+
+- type: startingGear
+  id: ReinforcementOfficer
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    shoes: ClothingShoesBootsCombat
+    id: SecurityPDA
+    ears: ClothingHeadsetAltSecurityRegular
+    back: ClothingBackpackSecurity
+  inhand:
+  - MindShieldImplanter
+
+- type: startingGear
+  id: ReinforcementOfficerSpec
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    shoes: ClothingShoesBootsCombat
+    id: SecurityPDA
+    ears: ClothingHeadsetAltSecurityRegular
+    back: ClothingBackpackSecurity
+    pocket1: WeaponLaserSidearm
+    outerClothing: ClothingOuterArmorBasic
+    head: ClothingHeadHelmetBasic
+  storage:
+    back:
+    - WeaponLaserCarbine
+  inhand:
+  - MindShieldImplanter
+
+# StartingGear Others
+
+- type: startingGear
+  id: AssistantReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+    id: PassengerPDA
+    ears: ClothingHeadsetGrey
+    back: ClothingBackpack
+
+- type: startingGear
+  id: BartenderReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBartender
+    shoes: ClothingShoesColorBlack
+    id: BartenderPDA
+    ears: ClothingHeadsetService
+    back: ClothingBackpack
+
+- type: startingGear
+  id: ChefReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChef
+    shoes: ClothingShoesColorBlack
+    id: ChefPDA
+    ears: ClothingHeadsetService
+    back: ClothingBackpack
+
+- type: startingGear
+  id: BotanistReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitHydroponics
+    shoes: ClothingShoesColorGreen
+    id: BotanistPDA
+    ears: ClothingHeadsetService
+    back: ClothingBackpackHydroponics
+
+- type: startingGear
+  id: EngineerReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEngineering
+    shoes: ClothingShoesBootsWork
+    id: EngineerPDA
+    ears: ClothingHeadsetEngineering
+    back: ClothingBackpackEngineering
+    eyes: ClothingEyesGlassesMeson
+    gloves: ClothingHandsGlovesColorYellow
+    belt: ClothingBeltUtilityEngineering
+
+- type: startingGear
+  id: AtmosReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitAtmos
+    shoes: ClothingShoesColorWhite
+    id: AtmosPDA
+    ears: ClothingHeadsetEngineering
+    back: ClothingBackpackAtmospherics
+    eyes: ClothingEyesGlassesMeson
+    gloves: ClothingHandsGlovesColorYellow
+    belt: ClothingBeltUtilityEngineering
+
+- type: startingGear
+  id: ScienceReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitScientist
+    shoes: ClothingShoesColorWhite
+    id: SciencePDA
+    ears: ClothingHeadsetScience
+    back: ClothingBackpackScience
+    eyes: ClothingEyesGlasses
+
+- type: startingGear
+  id: DClassReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPrisoner
+    shoes: ClothingShoesColorBlack
+
+- type: startingGear
+  id: DoctorReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMedicalDoctor
+    shoes: ClothingShoesColorWhite
+    id: MedicalPDA
+    ears: ClothingHeadsetMedical
+    back: ClothingBackpackMedical
+    eyes: ClothingEyesHudMedical
+    gloves: ClothingHandsGlovesNitrile
+    belt: ClothingBeltMedicalFilled
+
+- type: startingGear
+  id: ChemistReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChemistry
+    shoes: ClothingShoesColorOrange
+    id: ChemistryPDA
+    ears: ClothingHeadsetMedical
+    back: ClothingBackpackChemistry
+    eyes: ClothingEyesGlassesChemical
+    belt: ChemBag
+
+- type: startingGear
+  id: CargoReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCargo
+    shoes: ClothingShoesColorBrown
+    id: CargoPDA
+    ears: ClothingHeadsetCargo
+    back: ClothingBackpackCargo
+
+- type: startingGear
+  id: SalvageReinforcement
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    shoes: ClothingShoesBootsSalvage
+    id: SalvagePDA
+    ears: ClothingHeadsetCargo
+    back: ClothingBackpackSalvage
+    belt: ClothingBeltSalvageWebbing
