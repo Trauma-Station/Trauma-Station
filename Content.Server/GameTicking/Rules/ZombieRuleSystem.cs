@@ -248,6 +248,11 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
     {
         base.Started(uid, component, gameRule, args);
 
+        // Trauma - Send announcement when initial infected roll
+        foreach (var station in _station.GetStations())
+        {
+            _chat.DispatchStationAnnouncement(station, Loc.GetString("zombie-gamerule-started"), colorOverride: Color.Crimson);
+        }
         component.NextRoundEndCheck = _timing.CurTime + component.EndCheckDelay;
     }
 
