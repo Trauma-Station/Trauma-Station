@@ -12,6 +12,8 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Chemistry;
 
+// /!\ SHITCODE ALERT /!\
+// this should really be its own component and not subbing for hypospray...
 public sealed class SolutionCartridgeSystem : EntitySystem
 {
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;

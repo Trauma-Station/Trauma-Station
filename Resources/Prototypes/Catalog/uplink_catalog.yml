@@ -806,7 +806,7 @@
   icon: { sprite: /Textures/Objects/Misc/pens.rsi, state: pen }
   productEntity: HypopenBox
   cost:
-    Telecrystal: 30 # goob
+    Telecrystal: 10 # Trauma - was 30, hypos are a common crew item now so this is purely to look less sus
   categories:
   - UplinkChemicals
 

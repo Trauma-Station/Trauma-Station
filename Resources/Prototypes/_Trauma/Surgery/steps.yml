@@ -1,0 +1,42 @@
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepRearrangeTissue
+  name: Rearrange soft tissue
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Tweezers
+    add:
+    - type: TissueRearranged
+    duration: 5
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: SurgeryDamageChangeEffect
+    damage:
+      types:
+        Brute: 15
+    sleepModifier: 0.2
+  - type: SurgeryStepPainInflicter
+    painDuration: 30
+    painType: TraumaticPain
+    amount: 30
+    sleepModifier: 0.12
+
+- type: entity
+  parent: SurgeryStepCloseBloodOutputs
+  id: SurgeryStepStitchVessels
+  name: Stitch up blood vessels
+  components:
+  - type: SurgeryStep
+    add:
+    - type: VesselsStitched
+    remove: null
+  - type: SurgeryStepPainInflicter
+    amount: 10
+    sleepModifier: 0
+
+- type: entity
+  parent: SurgeryStepInsertOrgan
+  id: SurgeryStepInsertHypoport
+  name: Add hypoport assembly

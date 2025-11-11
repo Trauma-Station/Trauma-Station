@@ -140,7 +140,7 @@
   - type: SolutionContainerManager
     solutions:
       hypospray:
-        maxVol: 30
+        maxVol: 50 # Trauma - was 30, buffed capacity to make it better than crew hypospray (30u vials)
   - type: RefillableSolution
     solution: hypospray
   - type: ExaminableSolution
@@ -182,7 +182,7 @@
   - type: SolutionContainerManager
     solutions:
       hypospray:
-        maxVol: 20
+        maxVol: 40 # Trauma - was 20, buffed to be stronger than crew hypo
   - type: RefillableSolution
     solution: hypospray
   - type: ExaminableSolution
@@ -235,6 +235,7 @@
           maxVol: 3000
     - type: UseDelay
       delay: 0.0
+    - type: IgnoreHypoport # Trauma - admin aboose
 
 - type: entity
   name: chemical medipen
@@ -273,6 +274,7 @@
     transferAmount: 20 # Goobstation
     onlyAffectsMobs: false
     injectOnly: true
+  - type: IgnoreHypoport # Trauma - medipens have a needle, they aren't actually hyposprays
   - type: Appearance
   - type: SolutionContainerVisuals
     maxFillLevels: 1
