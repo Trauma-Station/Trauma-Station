@@ -48,7 +48,8 @@ public sealed class HypoportSystem : EntitySystem
 
         // first require that the user is being (at least) softgrabbed, so surprise injections are cooler (grabbed then prick prick prick)
         // it makes sense since youd need to get a hold of someone to properly connect to their neck's port
-        if (_pullerQuery.TryComp(user, out var puller) && puller.Pulling != target)
+        // of course ignore this if you are injecting yourself
+        if (user != target && _pullerQuery.TryComp(user, out var puller) && puller.Pulling != target)
         {
             args.InjectMessageOverride = "hypoport-fail-grab";
             args.Cancel();

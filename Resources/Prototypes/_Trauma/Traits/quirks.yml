@@ -1,0 +1,17 @@
+- type: trait
+  id: Hypoport
+  name: trait-hypoport-name
+  description: trait-hypoport-desc
+  category: Quirks
+  blacklist:
+    components:
+    - BorgChassis
+  effects:
+  - !type:RelayBodyParts
+    partType: Head
+    guidebookText: entity-effect-guidebook-install-hypoport
+    effects:
+    - !type:AddOrganSlot
+      slot: hypoport
+    - !type:InsertNewOrgan
+      organ: Hypoport
