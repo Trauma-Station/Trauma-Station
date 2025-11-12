@@ -652,6 +652,7 @@
     - PartsStatic
     - CablesStatic
     - PowerCellsStatic
+    - TraumaCyberneticsStatic # Trauma
     dynamicPacks:
     - Robotics
     - BorgModules
@@ -668,6 +669,7 @@
     - PowerAugments
     - ToolAugments
     - PowerCells
+    - TraumaCybernetics # Trauma
   - type: EmagLatheRecipes # Goobstation
     emagStaticPacks:
     - MechWeaponsSecurityStatic
@@ -900,6 +902,7 @@
     # Einstein Engines Packs
     - Translators # Language
     - TranslatorImplanters # Language
+    - TraumaCybernetics # Trauma
   - type: Machine
     board: MedicalTechFabCircuitboard
   - type: EmagLatheRecipes # Goobstation Packs
