@@ -155,10 +155,10 @@
         - ReagentId: Plasma
           Quantity: 10
         canReact: false
-  - type: Tag # Redundant
+  - type: Tag # Goob - add SheetPlasma
     tags:
     - Sheet
-    - SheetPlasma # Goob
+    - SheetPlasma
     - ConstructionMaterial
 
 - type: entity

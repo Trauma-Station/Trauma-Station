@@ -8,7 +8,7 @@
 
 using Content.Shared.Stealth.Components;
 using Content.Shared.Stealth;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Ninja.Components;
 using Content.Shared.Ninja.Systems;
 using Content.Shared.Weapons.Melee.Events;

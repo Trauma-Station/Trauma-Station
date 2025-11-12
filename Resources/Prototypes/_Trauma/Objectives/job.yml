@@ -6,7 +6,7 @@
   - type: Objective
     issuer: objective-issuer-nanotrasen
   - type: NotJobRequirement
-    job: SalvageSpecialist
+    jobs: [ SalvageSpecialist ]
     inverted: true
 
 - type: entity

@@ -18,7 +18,9 @@ using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -161,7 +163,7 @@ public sealed partial class MindTests
             var damageable = entMan.GetComponent<DamageableComponent>(entity);
             var prototype = protoMan.Index(BluntDamageType);
 
-            damageableSystem.SetDamage(entity, damageable, new DamageSpecifier(prototype, FixedPoint2.New(401)));
+            damageableSystem.SetDamage((entity, damageable), new DamageSpecifier(prototype, FixedPoint2.New(401)));
             Assert.That(mindSystem.GetMind(entity, mindContainerComp), Is.EqualTo(mindId));
         });
 

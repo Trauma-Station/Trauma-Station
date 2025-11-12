@@ -5,12 +5,16 @@
   description: A wallmount dispenser capable of dispensing capsaicin. Refill your pepperspray here.
   components:
   - type: Sprite
-    sprite: Structures/Storage/tanks.rsi
-    state: pepperdispenser # This was already in the files lol.
+    layers:
+    - state: pepperdispenser
+      sprite: _Trauma/Structures/Wallmounts/walldispenser.rsi
+    - state: fill-1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
   - type: SolutionContainerManager
     solutions:
       tank:
+        maxVol: 2000
         reagents:
         - ReagentId: OleoresinCapsaicin
           Quantity: 2000
-  - type: ReagentTank

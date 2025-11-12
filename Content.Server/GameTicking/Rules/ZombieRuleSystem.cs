@@ -228,10 +228,31 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
             _roundEnd.EndRound();
     }
 
+    /// <summary>
+    /// Trauma - Sends a CBurn shuttle when zombies get to a certain percentage of infected crew.
+    /// </summary>
+    private void CheckCBurnCall(ZombieRuleComponent comp)
+    {
+        if (comp.ZombieCBurnCalled || GetInfectedFraction(false) < comp.ZombieCBurnCallPercentage)
+            return;
+
+        foreach (var station in _station.GetStations())
+        {
+            _chat.DispatchStationAnnouncement(station, Loc.GetString("zombie-cburn-call"), colorOverride: Color.Crimson);
+        }
+        _gameTicker.StartGameRule(comp.ZombieCBurnEvent);
+        comp.ZombieCBurnCalled = true;
+    }
+
     protected override void Started(EntityUid uid, ZombieRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
 
+        // Trauma - Send announcement when initial infected roll
+        foreach (var station in _station.GetStations())
+        {
+            _chat.DispatchStationAnnouncement(station, Loc.GetString("zombie-gamerule-started"), colorOverride: Color.Crimson);
+        }
         component.NextRoundEndCheck = _timing.CurTime + component.EndCheckDelay;
     }
 
@@ -240,6 +261,7 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
         base.ActiveTick(uid, component, gameRule, frameTime);
         if (!component.NextRoundEndCheck.HasValue || component.NextRoundEndCheck > _timing.CurTime)
             return;
+        CheckCBurnCall(component); // Trauma - Add auto cburn call
         CheckRoundEnd(component);
         component.NextRoundEndCheck = _timing.CurTime + component.EndCheckDelay;
     }

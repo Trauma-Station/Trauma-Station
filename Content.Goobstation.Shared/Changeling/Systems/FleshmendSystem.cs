@@ -12,7 +12,9 @@ using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
@@ -163,7 +165,7 @@ public sealed partial class FleshmendSystem : EntitySystem
         healSpec.DamageDict.Add("Asphyxiation", ent.Comp.AsphyxHeal);
 
         // heal the damage
-        _dmg.TryChangeDamage(ent, healSpec, true, false, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAllOrganic);
+        _dmg.TryChangeDamage(ent.Owner, healSpec, true, false, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAllOrganic);
 
         // heal bleeding and restore blood
         _bloodstream.TryModifyBleedAmount(ent.Owner, ent.Comp.BleedingAdjust);

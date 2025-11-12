@@ -18,7 +18,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Radio;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared.Chat;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Radio.Components;
 using Content.Shared.Speech;
 using Robust.Shared.Network;

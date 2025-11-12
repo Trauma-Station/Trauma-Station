@@ -22,6 +22,8 @@ using Content.Shared.Body.Components;
 using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -143,6 +145,7 @@ public sealed class BodySetupTest
                 var legsCount = bodySys.GetBodyPartCount(dummy, BodyPartType.Leg);
                 Assert.That(legsCount, Is.EqualTo(legs.Count));
                 Assert.That(legsCount, Is.GreaterThanOrEqualTo(2), $"legs {speciesPrototype.ID}({speciesPrototype.Prototype})");
+                server.EntMan.DeleteEntity(dummy);
             });
 
         }
@@ -180,6 +183,7 @@ public sealed class BodySetupTest
                 Assert.That(dummy, Is.Not.EqualTo(EntityUid.Invalid));
                 var handCount = handsSys.EnumerateHands(dummy).Count();
                 Assert.That(handCount, Is.GreaterThanOrEqualTo(2), $"hands {speciesPrototype.ID}({speciesPrototype.Prototype})");
+                server.EntMan.DeleteEntity(dummy);
             });
 
         }
@@ -199,7 +203,7 @@ public sealed class BodySetupTest
 
         var server = pair.Server;
 
-        var entMan = server.ResolveDependency<IEntityManager>();
+        var entMan = server.EntMan;
         var consciousnessSystem = entMan.System<ConsciousnessSystem>();
 
         await server.WaitAssertion(() =>
@@ -223,6 +227,8 @@ public sealed class BodySetupTest
 
                     Assert.That(consciousnessSystem.CheckConscious(dummy, consciousness), $"Failed species to pass the test: {speciesPrototype.ID}");
                 });
+
+                entMan.DeleteEntity(dummy);
             }
         });
 
@@ -281,6 +287,8 @@ public sealed class BodySetupTest
 
                     Assert.That(consciousnessSystem.CheckConscious(dummy), $"Failed species to pass the test: {speciesPrototype.ID}");
                 });
+
+                entMan.DeleteEntity(dummy);
             }
         });
 

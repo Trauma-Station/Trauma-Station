@@ -594,3 +594,17 @@ Entries:
       message: Fixed everything
   id: 65
   time: '2025-11-09T22:41:50.0000000+00:00'
+- author: Scribbles0
+  changes:
+    - type: Add
+      message: >-
+        CBURN autocall when zombies reach 60% infected crew or blob reaches the
+        halfway point to its goal.
+  id: 66
+  time: '2025-11-11T07:12:19.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Added bugs from upstream.
+  id: 67
+  time: '2025-11-12T15:04:59.0000000+00:00'

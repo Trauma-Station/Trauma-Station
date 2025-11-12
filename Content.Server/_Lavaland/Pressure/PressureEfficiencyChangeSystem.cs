@@ -25,7 +25,7 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Shared._Lavaland.Weapons.Ranged.Events;
 using Content.Shared.Armor;
 using Content.Shared.Body.Systems;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Inventory;
 using Content.Shared.Weapons.Melee.Events;

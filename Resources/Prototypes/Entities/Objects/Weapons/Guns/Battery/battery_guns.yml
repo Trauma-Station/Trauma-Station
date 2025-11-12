@@ -1130,12 +1130,11 @@
   # Goob edit start
   #- type: BatteryWeaponFireModes
   #  fireModes:
-  #  - proto: BulletLaserSpread
-  #    fireCost: 150
   #  - proto: BulletLaserSpreadNarrow
-  #    fireCost: 200
+  #    fireCost: 80
   #  - proto: BulletDisablerSmgSpread
-  #    fireCost: 120
+  #    fireCost: 48
+  #    pacifismAllowedMode: true
   - type: AmmoSelector
     prototypes:
       - BulletLaserSpread
@@ -1204,6 +1203,7 @@
       fireCost: 150
     - proto: BulletDisabler
       fireCost: 62.5
+      pacifismAllowedMode: true
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 48

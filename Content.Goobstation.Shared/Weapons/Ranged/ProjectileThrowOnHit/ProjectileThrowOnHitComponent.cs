@@ -6,6 +6,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Throwing;
 using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Weapons.Ranged.ProjectileThrowOnHit;
@@ -29,10 +30,10 @@ public sealed partial class ProjectileThrowOnHitComponent : Component
     public float Distance = 20f;
 
     /// <summary>
-    /// Whether or not anchorable entities should be unanchored when hit.
+    /// Unanchor strength for anchorable entities that get hit.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool UnanchorOnHit;
+    public ThrowingUnanchorStrength UnanchorOnHit = ThrowingUnanchorStrength.None;
 
     /// <summary>
     /// How long should this stun the target, if applicable?

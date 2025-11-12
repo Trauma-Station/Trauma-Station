@@ -198,7 +198,6 @@
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1.5
-        type: Add
       - !type:HealthChange
         damage:
           types:
@@ -1510,7 +1509,6 @@
 #      methods: [ Touch ]
 #      effects:
 #      - !type:HealthChange
-#        scaling: true
 #        ignoreResistances: false
 #        damage:
 #          types:

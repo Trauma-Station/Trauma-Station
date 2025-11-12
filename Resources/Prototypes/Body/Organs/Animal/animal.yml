@@ -29,13 +29,15 @@
   abstract: true
   components:
   - type: Organ
+    # <Shitmed>
     intCap: 13
     integrity: 13
     integrityThresholds:
       Normal: 13
       Damaged: 6
       Destroyed: 0
-  - type: Food
+    # </Shitmed>
+  - type: Edible
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
   - type: StaticPrice
@@ -161,6 +163,11 @@
     solutions:
       stomach:
         maxVol: 30
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 5
   - type: Item
     size: Small
     heldPrefix: stomach
@@ -186,7 +193,6 @@
     metabolizerTypes: [ Animal ]
     groups:
     - id: Alcohol
-      rateModifier: 0.1
   - type: Liver # Shitmed
   - type: Tag # goob edit
     tags:

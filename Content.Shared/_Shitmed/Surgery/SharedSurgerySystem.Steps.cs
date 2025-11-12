@@ -27,6 +27,7 @@ using Content.Shared.Body.Organ;
 using Content.Shared._Shitmed.BodyEffects;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;

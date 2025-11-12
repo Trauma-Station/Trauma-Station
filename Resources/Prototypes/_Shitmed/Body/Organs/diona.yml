@@ -1,0 +1,9 @@
+- type: entity
+  id: BaseDionaOrgan
+  parent: BaseDionaOrganUnGibbable
+  abstract: true
+  components:
+  - type: Gibbable
+  - type: PhysicalComposition
+    materialComposition:
+      Biomass: 5

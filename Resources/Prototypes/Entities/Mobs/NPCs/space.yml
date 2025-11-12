@@ -611,7 +611,7 @@
         Base: dead
       Dead:
         Base: dead
-  - type: Food
+  - type: Edible
   - type: Thirst
     startingThirst: 25  # spawn with Okay thirst state
     thresholds:
@@ -669,7 +669,6 @@
       methods: [Touch, Ingestion, Injection]
       effects:
       - !type:HealthChange
-        scaling: true
         damage:
           types:
             Caustic: 1

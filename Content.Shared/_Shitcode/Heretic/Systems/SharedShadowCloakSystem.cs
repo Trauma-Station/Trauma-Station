@@ -6,7 +6,7 @@ using Content.Shared._Shitmed.DoAfter;
 using Content.Shared.Actions;
 using Content.Shared.Chat;
 using Content.Shared.Coordinates;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Rotation;
 using Content.Shared.Standing;

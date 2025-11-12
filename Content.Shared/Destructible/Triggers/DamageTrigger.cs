@@ -1,4 +1,4 @@
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Goobstation.Maths.FixedPoint;
 using Robust.Shared.Serialization;
 

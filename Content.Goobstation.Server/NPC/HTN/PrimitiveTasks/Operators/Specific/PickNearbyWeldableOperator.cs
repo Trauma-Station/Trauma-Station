@@ -14,7 +14,7 @@ using Content.Goobstation.Shared.Silicon.Bots;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN.PrimitiveTasks;
 using Content.Server.NPC.Pathfinding;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Emag.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Repairable;

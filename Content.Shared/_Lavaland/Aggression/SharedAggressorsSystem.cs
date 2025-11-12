@@ -22,7 +22,7 @@
 
 using Content.Shared._Lavaland.Audio;
 using Content.Shared._Lavaland.Components;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Mobs;
 using Robust.Shared.GameStates;

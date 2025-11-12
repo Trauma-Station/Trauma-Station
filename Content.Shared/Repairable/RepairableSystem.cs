@@ -1,31 +1,36 @@
+// <Trauma>
 using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Administration.Logs;
+using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
+using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared.Body.Components;
-using Content.Shared.Damage;
+using Content.Shared.Body.Systems;
+using Content.Shared.Medical.Healing;
+using Content.Goobstation.Maths.FixedPoint;
+using System.Linq;
+// </Trauma>
+using Content.Shared.Administration.Logs;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
-using Content.Shared.Body.Systems;
 using Robust.Shared.Serialization;
-using System.Linq;
-using Content.Shared.Medical.Healing;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Goobstation.Maths.FixedPoint;
 
 namespace Content.Shared.Repairable;
 
 public sealed partial class RepairableSystem : EntitySystem
 {
+    // <Goob>
+    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly HealingSystem _healing = default!;
+    [Dependency] private readonly WoundSystem _wounds = default!;
+    // </Goob>
     [Dependency] private readonly SharedToolSystem _toolSystem = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;          // Goob edit
-    [Dependency] private readonly HealingSystem _healingSystem = default!;          // Goob edit
-    [Dependency] private readonly WoundSystem _wounds = default!;                   // Goob edit
 
     public override void Initialize()
     {
@@ -52,6 +57,7 @@ public sealed partial class RepairableSystem : EntitySystem
         if (TryComp<BodyComponent>(ent.Owner, out var body) && ent.Comp.Damage != null && body != null) // repair entities with bodies
         {
             // here we create a fake healing comp
+            // /!\ SHITCODE ALERT /!\
             HealingComponent repairHealing = new HealingComponent();
             repairHealing.Damage = ent.Comp.Damage;
             repairHealing.BloodlossModifier = -100;
@@ -59,21 +65,21 @@ public sealed partial class RepairableSystem : EntitySystem
             var targetedWoundable = EntityUid.Invalid;
             if (TryComp<TargetingComponent>(user, out var targeting))
             {
-                var (partType, symmetry) = _bodySystem.ConvertTargetBodyPart(targeting.Target);
-                var targetedBodyPart = _bodySystem.GetBodyChildrenOfType(ent, partType, body, symmetry).ToList().FirstOrDefault();
+                var (partType, symmetry) = _body.ConvertTargetBodyPart(targeting.Target);
+                var targetedBodyPart = _body.GetBodyChildrenOfType(ent, partType, body, symmetry).ToList().FirstOrDefault();
                 targetedWoundable = targetedBodyPart.Id;
             }
             else
             {
-                if (_healingSystem.TryGetNextDamagedPart(ent, repairHealing, out var limbTemp) && limbTemp is not null)
+                if (_healing.TryGetNextDamagedPart(ent, repairHealing, out var limbTemp) && limbTemp is not null)
                     targetedWoundable = limbTemp.Value;
             }
 
             if (!TryComp<DamageableComponent>(targetedWoundable, out var damageableComp))
                 return false;
 
-            if (!_healingSystem.IsBodyDamaged((ent.Owner, body), null, repairHealing, targetedWoundable))                    // Check if there is anything to heal on the initial limb target
-                if (_healingSystem.TryGetNextDamagedPart(ent, repairHealing, out var limbTemp) && limbTemp is not null)      // If not then get the next limb to heal
+            if (!_healing.IsBodyDamaged((ent.Owner, body), null, repairHealing, targetedWoundable))                    // Check if there is anything to heal on the initial limb target
+                if (_healing.TryGetNextDamagedPart(ent, repairHealing, out var limbTemp) && limbTemp is not null)      // If not then get the next limb to heal
                     targetedWoundable = limbTemp.Value;
 
             // Welding removes all bleeding instantly. IPC don't even have blood as i'm writing this so makes 0 sense for them to have bleeds.
@@ -90,21 +96,21 @@ public sealed partial class RepairableSystem : EntitySystem
                         user);
             }
 
-            var damageChanged = _damageableSystem.TryChangeDamage(targetedWoundable, ent.Comp.Damage, true, false, origin: user);
-            _adminLogger.Add(LogType.Healed, $"{ToPrettyString(user):user} repaired {ToPrettyString(ent.Owner):target} by {damageChanged?.GetTotal()}");
+            var damageChanged = _damageableSystem.ChangeDamage(targetedWoundable, ent.Comp.Damage, true, false, origin: user);
+            _adminLogger.Add(LogType.Healed, $"{ToPrettyString(user):user} repaired {ToPrettyString(ent.Owner):target} by {damageChanged.GetTotal()}");
 
-            if (_healingSystem.TryGetNextDamagedPart(ent.Owner, repairHealing, out var _))
+            if (_healing.TryGetNextDamagedPart(ent.Owner, repairHealing, out var _))
                 return true;
         }
         else if (ent.Comp.Damage != null)
         {
-            var damageChanged = _damageableSystem.TryChangeDamage(ent.Owner, ent.Comp.Damage, true, false, origin: user);
-            _adminLogger.Add(LogType.Healed, $"{ToPrettyString(user):user} repaired {ToPrettyString(ent.Owner):target} by {damageChanged?.GetTotal()}");
+            var damageChanged = _damageableSystem.ChangeDamage(ent.Owner, ent.Comp.Damage, true, false, origin: user);
+            _adminLogger.Add(LogType.Healed, $"{ToPrettyString(user):user} repaired {ToPrettyString(ent.Owner):target} by {damageChanged.GetTotal()}");
         }
         else
         {
             // Repair all damage
-            _damageableSystem.SetAllDamage(ent.Owner, damageable, 0);
+            _damageableSystem.SetAllDamage((ent.Owner, damageable), 0);
             _adminLogger.Add(LogType.Healed, $"{ToPrettyString(user):user} repaired {ToPrettyString(ent.Owner):target} back to full health");
         }
         return false;
@@ -150,7 +156,7 @@ public sealed partial class RepairableSystem : EntitySystem
             HealingComponent repairHealing = new HealingComponent();
             repairHealing.Damage = ent.Comp.Damage;
             repairHealing.BloodlossModifier = -100;
-            if (!_healingSystem.TryGetNextDamagedPart(ent.Owner, repairHealing, out var _))
+            if (!_healing.TryGetNextDamagedPart(ent.Owner, repairHealing, out var _))
                 return;
         } // Goob Edit End
 

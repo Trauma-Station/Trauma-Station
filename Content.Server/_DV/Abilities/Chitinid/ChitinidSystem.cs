@@ -7,7 +7,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared._DV.Abilities;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -43,8 +44,7 @@ public sealed partial class ChitinidSystem : EntitySystem
                 || _mobState.IsDead(uid))
                 continue;
 
-            if (_damageable.TryChangeDamage(uid, comp.Healing, damageable: damageable) is not {} delta)
-                continue;
+            var delta = _damageable.ChangeDamage((uid, damageable), comp.Healing);
 
             // damage healed is subtracted, so the delta is negative.
             comp.AmountAbsorbed -= delta.GetTotal();

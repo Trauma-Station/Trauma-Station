@@ -1,4 +1,7 @@
-using Content.Shared.Random; // Trauma
+// <Trauma>
+using Content.Shared.Random;
+using Robust.Shared.Timing;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.DisplacementMap;
@@ -13,6 +16,7 @@ namespace Content.Shared.Inventory;
 public partial class InventorySystem : EntitySystem
 {
     // <Trauma>
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly RandomHelperSystem _randomHelper = default!;
     // </Trauma>
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -337,7 +341,7 @@ public partial class InventorySystem : EntitySystem
     /// </summary>
     public void DropSlotContents(EntityUid uid, string slotName, InventoryComponent? inventory = null)
     {
-        if (!_gameTiming.IsFirstTimePredicted || !Resolve(uid, ref inventory))
+        if (!_timing.IsFirstTimePredicted || !Resolve(uid, ref inventory))
             return;
 
         foreach (var slot in inventory.Slots)

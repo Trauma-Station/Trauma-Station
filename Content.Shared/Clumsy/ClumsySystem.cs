@@ -13,7 +13,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Chemistry.Hypospray.Events;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Climbing.Events;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Medical;
 using Content.Shared.Popups;
@@ -106,7 +106,7 @@ public sealed class ClumsySystem : EntitySystem
         args.Cancelled = true; // fail to catch
 
         if (ent.Comp.CatchingFailDamage != null)
-            _damageable.TryChangeDamage(ent, ent.Comp.CatchingFailDamage, origin: args.Item);
+            _damageable.ChangeDamage(ent.Owner, ent.Comp.CatchingFailDamage, origin: args.Item);
 
         // Collisions don't work properly with PopupPredicted or PlayPredicted.
         // So we make this server only.
@@ -138,7 +138,7 @@ public sealed class ClumsySystem : EntitySystem
             return;
 
         if (ent.Comp.GunShootFailDamage != null)
-            _damageable.TryChangeDamage(ent, ent.Comp.GunShootFailDamage, origin: ent);
+            _damageable.ChangeDamage(ent.Owner, ent.Comp.GunShootFailDamage, origin: ent);
 
         _stun.TryUpdateParalyzeDuration(ent, ent.Comp.GunShootFailStunTime);
 
@@ -210,7 +210,7 @@ public sealed class ClumsySystem : EntitySystem
         {
             stunTime = bonkComp.BonkTime;
             if (bonkComp.BonkDamage != null)
-                _damageable.TryChangeDamage(target, bonkComp.BonkDamage, true);
+                _damageable.ChangeDamage(target.Owner, bonkComp.BonkDamage, true);
         }
 
         _stun.TryUpdateParalyzeDuration(target, stunTime);

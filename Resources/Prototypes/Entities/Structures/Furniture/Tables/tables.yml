@@ -970,10 +970,9 @@
   description: PUT ON THEM CODERSOCKS!!
   suffix: DEBUG
   components:
-  - type: Tag
+  - type: Tag # Goob
     tags:
-      - Debug
-      - Table # goob
+    - Table
   - type: Sprite
     sprite: Structures/Furniture/Tables/debug.rsi
   - type: Icon

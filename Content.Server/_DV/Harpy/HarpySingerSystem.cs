@@ -12,7 +12,7 @@ using Content.Server.Instruments;
 using Content.Server.Speech.Components;
 using Content.Shared.Instruments;
 using Content.Shared.ActionBlocker;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Damage.ForceSay;
 using Content.Shared._DV.Harpy;
 using Content.Goobstation.Maths.FixedPoint;

@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.Bloodstream;
-using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Medical.Surgery.Consciousness;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
@@ -16,8 +15,9 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.EntityEffects.Effects.Solution;
-using Content.Shared.EntityEffects.Effects.Transform;
+using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Fluids;
 using Content.Shared.Forensics.Components;
 using Content.Shared.HealthExaminable;
@@ -116,8 +116,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed 
                 amt *= multiplierEv.Multiplier;
                 // Goobstation end
 
-                _damageableSystem.TryChangeDamage(uid, amt,
-                    ignoreResistances: false, interruptsDoAfters: false);
+                _damageableSystem.TryChangeDamage(uid, amt, ignoreResistances: false, interruptsDoAfters: false);
 
                 // Apply dizziness as a symptom of bloodloss.
                 // The effect is applied in a way that it will never be cleared without being healthy.

@@ -115,11 +115,6 @@
   name: metal rod
   suffix: 10
   components:
-  - type: Tag
-    tags:
-    - RodMetal1
-    - DroneUsable # Goobstation
-    - ConstructionMaterial
   - type: Sprite
     state: rods
   - type: Stack
@@ -131,11 +126,6 @@
   name: metal rod
   suffix: Single
   components:
-  - type: Tag
-    tags:
-    - RodMetal1
-    - DroneUsable # Goobstation
-    - ConstructionMaterial
   - type: Sprite
     state: rods
   - type: Stack

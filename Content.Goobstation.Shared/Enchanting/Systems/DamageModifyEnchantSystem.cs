@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Enchanting.Components;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Goobstation.Shared.Enchanting.Systems;
 

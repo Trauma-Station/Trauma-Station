@@ -9,10 +9,17 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: BaseItem
   id: BaseCyberneticOrgan
-  parent: BaseHumanOrgan
   abstract: true
   components:
+  - type: Organ
+    intCap: 15
+    integrity: 15
+    integrityThresholds:
+      Normal: 15
+      Damaged: 6
+      Destroyed: 0
   - type: Cybernetics
   - type: Sprite
     sprite: _Shitmed/Mobs/Species/Misc/Cybernetics/organs.rsi

@@ -73,9 +73,6 @@
       - state: animation-inhand-left
       right:
       - state: animation-inhand-right
-  - type: Tag
-    tags:
-    - WizardStaff
   - type: Clothing
     sprite: _Goobstation/Wizard/Objects/Weapons/Staves/animation.rsi
     quickEquip: false

@@ -47,7 +47,7 @@
 - type: entityEffect
   id: GibExplode
   effects:
-  - !type:ExplosionEffect
+  - !type:Explosion
     explosionType: Default
     maxIntensity: 4
     maxTotalIntensity: 2

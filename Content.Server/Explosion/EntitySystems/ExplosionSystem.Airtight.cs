@@ -80,9 +80,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Atmos.Components;
-using Content.Server.Destructible;
 using Content.Shared.Atmos;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Explosion;
 using Content.Goobstation.Maths.FixedPoint;
 using Robust.Shared.Map.Components;

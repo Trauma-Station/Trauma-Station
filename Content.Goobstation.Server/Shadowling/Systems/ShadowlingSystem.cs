@@ -3,7 +3,8 @@ using Content.Goobstation.Shared.Shadowling;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Systems;
 using Content.Server.Objectives.Systems;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
@@ -49,7 +50,7 @@ public sealed class ShadowlingSystem : SharedShadowlingSystem
         if (!_random.Prob(0.5f))
             return;
 
-        _damageable.TryChangeDamage(ent, ent.Comp.GunShootFailDamage, origin: ent);
+        _damageable.ChangeDamage(ent.Owner, ent.Comp.GunShootFailDamage, origin: ent);
 
         _stun.TryAddParalyzeDuration(ent, ent.Comp.GunShootFailStunTime);
 
@@ -59,10 +60,7 @@ public sealed class ShadowlingSystem : SharedShadowlingSystem
     private void OnFlashBanged(EntityUid uid, ShadowlingComponent component, GetFlashbangedEvent args)
     {
         // Shadowling get damaged from flashbangs
-        if (!TryComp<DamageableComponent>(uid, out var damageableComp))
-            return;
-
-        _damageable.TryChangeDamage(uid, component.HeatDamage, damageable: damageableComp);
+        _damageable.ChangeDamage(uid, component.HeatDamage);
     }
 
     protected override void StartHatchingProgress(Entity<ShadowlingComponent> ent)

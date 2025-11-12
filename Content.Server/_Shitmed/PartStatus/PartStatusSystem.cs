@@ -24,7 +24,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
 using Content.Goobstation.Common.Examine; // Goobstation Change
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Examine;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.IdentityManagement;

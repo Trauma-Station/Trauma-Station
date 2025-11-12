@@ -14,7 +14,7 @@ using Content.Server.Lightning.Components; // Goobstation - Fix IPC shock loops
 using Content.Server.Power.EntitySystems; // Goobstation - Energycrit
 using Content.Shared._EinsteinEngines.Silicon.DeadStartupButton;
 using Content.Shared.Audio;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Electrocution;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;

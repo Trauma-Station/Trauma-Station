@@ -50,6 +50,8 @@
 
 - type: npcFaction
   id: PetsNT
+  friendly:
+  - NanoTrasen
   hostile:
   # <Goob>
   - Balloon # Pets can join the fight against the balloons
@@ -61,7 +63,6 @@
   - Zombie
   - Xeno
   - AllHostile
-  - Wizard
   - Dragon
 
 - type: npcFaction

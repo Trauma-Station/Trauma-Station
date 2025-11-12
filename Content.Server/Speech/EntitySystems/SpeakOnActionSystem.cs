@@ -3,7 +3,7 @@ using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared._Goobstation.Wizard.Chuuni;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared._Shitmed.Damage;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Magic.Components;
 // </Trauma>
 using Content.Server.Chat.Systems;

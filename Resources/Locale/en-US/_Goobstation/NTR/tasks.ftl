@@ -57,7 +57,7 @@ task-ntr-thc-name = Send THC to CentComm
 task-ntr-thc-desc = Send a jug with 100u of THC to CC for a "special party".
 
 # Drink descriptions
-task-ntr-kira-special-desc = Send 30u of Kira Special cocktail to CC.
+task-ntr-citrus-bikeshed-desc = Send 30u of Citrus Bikeshed cocktail to CC.
 task-ntr-nuclear-cola-desc = Send 30u of Nuclear Cola to CC. Highly classified!
 task-ntr-gildlager-desc = Deliver 30u of Gildlager beer for quality check.
 task-ntr-grog-desc = Provide 30u of authentic Space Grog.
