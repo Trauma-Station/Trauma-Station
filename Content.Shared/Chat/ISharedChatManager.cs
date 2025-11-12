@@ -1,7 +1,4 @@
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
+using Robust.Shared.Network; // Trauma
 
 namespace Content.Shared.Chat;
 
@@ -32,4 +29,10 @@ public interface ISharedChatManager
     /// could clink on.
     /// </summary>
     void SendAdminAlertNoFormatOrEscape(string message);
+
+    /// <summary>
+    /// Trauma - moved from server, sends a message to a single player.
+    /// </summary>
+    void ChatMessageToOne(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat,
+        INetChannel client, Color? colorOverride = null, bool recordReplay = false, string? audioPath = null, float audioVolume = 0, NetUserId? author = null, bool canCoalesce = true);
 }

@@ -26,7 +26,27 @@
     removes:
     - MutationAntenna
     # keep your paranoia :)
+  - type: ActionMutation
   # TODO: evil thing
   # TODO: 20% chance to tell them "You feel something foreign enter your mind."
   # TODO: say up to 3 lines of last chat messages, with each having 50% chance
   # TODO: doxx the real identity
+
+- type: entity
+  parent: BaseMutationAction
+  id: ActionMutationMindRead
+  name: Mindread
+  description: Read the target's mind.
+  components:
+  - type: Action
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: mindread
+    itemActionStyle: BigAction
+    useDelay: 5
+  - type: TargetAction
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - MindContainer
+  - type: MindReadAction

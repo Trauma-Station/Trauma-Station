@@ -1,6 +1,6 @@
 using Content.Shared.Actions.Components;
 using Content.Shared.Body.Systems;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;

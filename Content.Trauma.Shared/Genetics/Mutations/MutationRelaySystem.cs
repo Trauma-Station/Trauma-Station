@@ -1,5 +1,5 @@
 using Content.Shared.Body.Events;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Flash;
 using Content.Shared.Mobs;
 using Content.Shared.Weapons.Melee.Events;
