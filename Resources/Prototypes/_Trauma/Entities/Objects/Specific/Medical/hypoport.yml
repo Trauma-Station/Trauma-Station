@@ -25,6 +25,7 @@
   name: secure hypoport
   description: A hermetically sealing port to accept sterile injections without a needle. An upgraded model that checks for access which can be set by multitools.
   components:
+  - type: HypoportAccess
   - type: AccessReader
     access: [["Medical"]]
   - type: DoorElectronics # you could technically use this in an airlock but idc its just a waste. upstream shitcode not having this be a separate component

@@ -118,7 +118,8 @@ public sealed partial class HypospraySystem : EntitySystem // Trauma - made part
 
         if (selfEvent.Cancelled)
         {
-            _popup.PopupClient(Loc.GetString(selfEvent.InjectMessageOverride ?? "hypospray-cant-inject", ("owner", Identity.Entity(target, EntityManager))), target, user);
+            // Trauma - replaced "owner" with "target"
+            _popup.PopupClient(Loc.GetString(selfEvent.InjectMessageOverride ?? "hypospray-cant-inject", ("target", Identity.Entity(target, EntityManager))), target, user);
             return false;
         }
 
@@ -133,7 +134,8 @@ public sealed partial class HypospraySystem : EntitySystem // Trauma - made part
 
         if (targetEvent.Cancelled)
         {
-            _popup.PopupClient(Loc.GetString(targetEvent.InjectMessageOverride ?? "hypospray-cant-inject", ("owner", Identity.Entity(target, EntityManager))), target, user);
+            // Trauma - replaced "owner" with "target"
+            _popup.PopupClient(Loc.GetString(targetEvent.InjectMessageOverride ?? "hypospray-cant-inject", ("target", Identity.Entity(target, EntityManager))), target, user);
             return false;
         }
 

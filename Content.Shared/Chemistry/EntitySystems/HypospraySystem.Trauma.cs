@@ -11,7 +11,7 @@ public sealed partial class HypospraySystem
     {
         var ev = new HyposprayGetSolutionEvent();
         RaiseLocalEvent(ent, ref ev);
-        if (ev.Handled);
+        if (ev.Handled)
             return ev.Solution;
 
         _solutionContainers.TryGetSolution(ent.Owner, ent.Comp.SolutionName, out var solution);

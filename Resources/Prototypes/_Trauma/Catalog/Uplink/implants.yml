@@ -1,0 +1,15 @@
+# this is basically just for reinforcements as they don't get free hypoports.
+- type: listing
+  id: UplinkHypoportSecureNukie
+  name: uplink-hypoport-secure-nukie-name
+  description: uplink-hypoport-secure-nukie-desc
+  productEntity: HypoportSecureNukie
+  cost:
+    Telecrystal: 10
+  categories:
+  - UplinkImplants
+  conditions:
+  - !type:StoreWhitelistCondition # traitors can just print a (secure) hypoport on station
+    whitelist:
+      tags:
+      - NukeOpsUplink

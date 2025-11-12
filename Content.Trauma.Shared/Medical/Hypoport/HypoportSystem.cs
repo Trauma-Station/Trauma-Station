@@ -70,7 +70,7 @@ public sealed class HypoportSystem : EntitySystem
                 return; // this port is valid, let the event go through
 
             // use the first failing hypoport's message incase there are multiple (evil)
-            message ??= args.InjectMessageOverride;
+            message ??= ev.InjectMessageOverride;
         }
 
         // no valid port found. say there were none unless an existing port prevented injection

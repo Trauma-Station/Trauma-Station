@@ -1,0 +1,55 @@
+<Document>
+# Hyposprays
+
+On Trauma Station, hyposprays aren't magic and need the target to have a [bold]Hypoport[/bold] surgically installed in their neck to transfer liquids.
+
+You will also need to be [bold]soft-grabbing[/bold] (pulling) the target if you want to inject someone else.
+
+However since they are now more in depth, medical has vial-fed [color=cyan]medical hyposprays[/color] roundstart. The CMO's [color=red]prototype hypospray[/color] holds 50u and can draw from containers directly, keeping it as the superior tool.
+
+<GuideEntityEmbed Entity="MedicalHyposprayFilled"/>
+
+Medical hyposprays can be cheaply made and got from any Nanomed Plus vending machine.
+They have no internal reservoir, instead feeding from vials like in RMC14.
+Very useful to have for patients that have hypoports!
+
+# Hypoports
+
+<Box>
+  <GuideEntityEmbed Entity="Hypoport"/>
+  <GuideEntityEmbed Entity="HypoportSecure"/>
+  <GuideEntityEmbed Entity="HypoportSecureNukie" Caption="Nukie-locked version"/>
+</Box>
+
+You can use the detailed health examine button to see if someone has a hypoport installed.
+
+The standard hypoport can be made at a medfab or exofab roundstart and allows anyone with a hypospray to easily inject you with medicines.
+This hypoport is what you get for free if you enable the [bold]Hypoport[/bold] trait.
+
+[color=#c96dbf]Science[/color] is able to research [bold]secure hypoports[/bold] which check the user's ID.
+The access needed starts out as Medical, but can be changed using a multitool.
+When using this remember that if you lose your id, or someone steals it, you won't be able to inject yourself anymore, and they will!
+Keep this tradeoff in mind before rushing to replace your standard one.
+
+# Nukies
+
+The team all starts with nukie-locked secure hypoports. As long as nobody loses their IDs, you will be safe from validhunters with hyposprays.
+
+Should you buy reinforcements, even kobolds and monkeys, they won't have hypoports. You can choose to buy a 10TC nukie hypoport for them and install it.
+
+Discuss with your commander and corpsman whether you should extract the hypoport from anyone going undercover, as it could arouse suspicion from astute metagamers.
+
+# Installation
+
+First print or buy a hypoport of choice. Change its access if needed and start operating on the target's head.
+
+The first surgery to do is opening a hypoport cavity. Once you've done that you can install the hypoport separately.
+
+# Hypoports as a traitor
+
+Because not everyone will have a hypoport, you can no longer rely on hypopen with nocturine being a guaranteed KO. As a result it's much cheaper (and you can just get a regular hypo anyway)
+
+If you are a traitor with a hypoport you can use it to easily heal yourself on the go. If you change a secure hypoport's access to Syndicate, an Agent ID will allow you alone to use it.
+Very handy if the doctors are carrying poisons on them, "just in case".
+
+</Document>

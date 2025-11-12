@@ -1,0 +1,25 @@
+# Installs a hypoport to the target mob's head
+- type: entityEffect
+  id: InstallHypoport
+  effects:
+  - !type:RelayBodyParts
+    partType: Head
+    guidebookText: entity-effect-guidebook-install-hypoport
+    effects:
+    - !type:AddOrganSlot
+      slot: hypoport
+    - !type:InsertNewOrgan
+      organ: Hypoport
+
+# Nukie-locked version
+- type: entityEffect
+  id: InstallHypoportNukie
+  effects:
+  - !type:RelayBodyParts
+    partType: Head
+    guidebookText: entity-effect-guidebook-install-hypoport
+    effects:
+    - !type:AddOrganSlot
+      slot: hypoport
+    - !type:InsertNewOrgan
+      organ: HypoportSecureNukie
