@@ -160,7 +160,7 @@ public partial class SharedBodySystem
     /// <summary>
     /// Creates the specified organ slot on the parent entity.
     /// </summary>
-    public OrganSlot? CreateOrganSlot(Entity<BodyPartComponent?> parentEnt, string slotId) // Trauma - public
+    public OrganSlot? CreateOrganSlot(Entity<BodyPartComponent?> parentEnt, string slotId) // Trauma - made public
     {
         if (!Resolve(parentEnt, ref parentEnt.Comp, logMissing: false))
             return null;

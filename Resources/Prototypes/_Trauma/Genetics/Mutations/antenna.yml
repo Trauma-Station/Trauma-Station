@@ -27,6 +27,7 @@
     - MutationAntenna
     # keep your paranoia :)
   - type: ActionMutation
+    action: ActionMutationMindRead
   # TODO: evil thing
   # TODO: 20% chance to tell them "You feel something foreign enter your mind."
   # TODO: say up to 3 lines of last chat messages, with each having 50% chance

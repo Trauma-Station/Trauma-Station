@@ -148,6 +148,10 @@
     SyringeIpecac: 1
     ClothingEyesHudMedical: 2
     ClothingEyesEyepatchHudMedical: 2
+    # <Trauma>
+    MedicalHyposprayFilled: 4
+    BaseChemistryEmptyVial: 4
+    # </Trauma>
     # <Goob>
     MedicalPatchPrefilledBicaridine: 3
     MedicalPatchPrefilledDermaline: 3

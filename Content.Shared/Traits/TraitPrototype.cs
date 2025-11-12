@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Shared._EinsteinEngines.Language;
+using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid.Prototypes;
 // </Trauma>
 using Content.Shared.Whitelist;
@@ -45,7 +46,7 @@ public sealed partial class TraitPrototype : IPrototype
     /// The components that get added to the player, when they pick this trait.
     /// </summary>
     [DataField]
-    public ComponentRegistry Components { get; private set; } = default!;
+    public ComponentRegistry Components { get; private set; } = new(); // Trauma - don't default to null chud it isn't required
 
     /// <summary>
     /// Gear that is given to the player, when they pick this trait.
@@ -76,6 +77,12 @@ public sealed partial class TraitPrototype : IPrototype
     /// </summary>
     [DataField]
     public HashSet<ProtoId<SpeciesPrototype>> IncludedSpecies = new();
+
+    /// <summary>
+    /// Trauma - Entity effects applied to the mob after spawning.
+    /// </summary>
+    [DataField]
+    public EntityEffect[] Effects = [];
 
     // Einstein Engines - Language begin (remove this if trait system refactor)
     /// <summary>

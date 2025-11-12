@@ -131,8 +131,10 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         EnsureComp<EmbeddedContainerComponent>(target, out var embeddedContainer);
 
-        //Assert that this entity not embed
-        DebugTools.Assert(!embeddedContainer.EmbeddedObjects.Contains(uid), $"Entity {ToPrettyString(uid)} was not supposed to be embedded into {ToPrettyString(target)}!"); // Trauma - useful message
+        // <Trauma> - just warn instead of assert and have a useful message
+        if (embeddedContainer.EmbeddedObjects.Contains(uid))
+            Log.Warning($"Entity {ToPrettyString(uid)} was not supposed to be embedded into {ToPrettyString(target)}!");
+        // </Trauma>
 
         embeddedContainer.EmbeddedObjects.Add(uid);
     }

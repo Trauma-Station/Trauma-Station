@@ -1,0 +1,11 @@
+- type: trait
+  id: Hypoport
+  name: trait-hypoport-name
+  description: trait-hypoport-desc
+  category: Quirks
+  blacklist:
+    components:
+    - BorgChassis
+  effects:
+  - !type:NestedEffect
+    proto: InstallHypoport

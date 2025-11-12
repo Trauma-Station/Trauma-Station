@@ -608,3 +608,17 @@ Entries:
       message: Added bugs from upstream.
   id: 67
   time: '2025-11-12T15:04:59.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: >-
+        Added hypoports and secure hypoports which allow using hyposprays on
+        their owner.
+    - type: Add
+      message: Crew can enable the Hypoport trait for a free roundstart hypoport.
+    - type: Add
+      message: Nukies get nukie-locked secure hypoports by default.
+    - type: Tweak
+      message: Hyposprays now require the target to have a hypoport and be grabbed.
+  id: 68
+  time: '2025-11-12T16:50:14.0000000+00:00'

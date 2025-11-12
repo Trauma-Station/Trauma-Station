@@ -109,7 +109,10 @@
   - type: AntagObjectives # Goobstation
     objectives:
     - NukeopsDetonateObjective
-
+  - type: AntagPlayerEffects # Trauma - nukies get nukie-locked hypoports
+    effects:
+    - !type:NestedEffect
+      proto: InstallHypoportNukie
 
 - type: entity
   parent: BaseNukeopsRule

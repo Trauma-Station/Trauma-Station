@@ -802,11 +802,11 @@
 - type: listing
   id: UplinkHypopen
   name: uplink-hypopen-name
-  description: uplink-hypopen-desc
+  description: uplink-hypopen-desc-trauma # Trauma - mention hypoport is needed
   icon: { sprite: /Textures/Objects/Misc/pens.rsi, state: pen }
   productEntity: HypopenBox
   cost:
-    Telecrystal: 30 # goob
+    Telecrystal: 10 # Trauma - was 30, hypos are a common crew item now so this is purely to look less sus
   categories:
   - UplinkChemicals
 
@@ -818,7 +818,7 @@
   icon: { sprite: /Textures/Objects/Fun/Darts/dart_red.rsi, state: icon }
   productEntity: HypoDartBox
   cost:
-    Telecrystal: 5 # goob
+    Telecrystal: 25 # Trauma - was 5, with hypoports existing this is much stronger
   categories:
   - UplinkChemicals
 

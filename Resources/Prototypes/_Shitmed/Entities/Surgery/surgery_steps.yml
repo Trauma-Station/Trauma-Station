@@ -285,6 +285,10 @@
     - type: IncisionOpen
     - type: BodyPartReattached
     - type: InternalBleedersClamped
+    # <Trauma>
+    - type: TissueRearranged
+    - type: VesselsStitched
+    # </Trauma>
     duration: 2
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/cautery.rsi
@@ -327,6 +331,10 @@
     - type: BleedersClamped
     - type: IncisionOpen
     - type: InternalBleedersClamped
+    # <Trauma>
+    - type: TissueRearranged
+    - type: VesselsStitched
+    # </Trauma>
     duration: 2
   - type: SurgeryAffixPartStep
   - type: Sprite

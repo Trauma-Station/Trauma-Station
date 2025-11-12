@@ -66,6 +66,7 @@
   - BasicCyberneticHeart
   - BasicCyberneticLungs
   - BasicCyberneticLiver
+  - HypoportSecure # Trauma
   position: -2,5
   technologyPrerequisites:
   - AdvancedTreatment

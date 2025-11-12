@@ -21,7 +21,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
-public sealed class HypospraySystem : EntitySystem
+public sealed partial class HypospraySystem : EntitySystem // Trauma - made partial
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ReactiveSystem _reactiveSystem = default!;
@@ -118,7 +118,8 @@ public sealed class HypospraySystem : EntitySystem
 
         if (selfEvent.Cancelled)
         {
-            _popup.PopupClient(Loc.GetString(selfEvent.InjectMessageOverride ?? "hypospray-cant-inject", ("owner", Identity.Entity(target, EntityManager))), target, user);
+            // Trauma - replaced "owner" with "target"
+            _popup.PopupClient(Loc.GetString(selfEvent.InjectMessageOverride ?? "hypospray-cant-inject", ("target", Identity.Entity(target, EntityManager))), target, user);
             return false;
         }
 
@@ -133,7 +134,8 @@ public sealed class HypospraySystem : EntitySystem
 
         if (targetEvent.Cancelled)
         {
-            _popup.PopupClient(Loc.GetString(targetEvent.InjectMessageOverride ?? "hypospray-cant-inject", ("owner", Identity.Entity(target, EntityManager))), target, user);
+            // Trauma - replaced "owner" with "target"
+            _popup.PopupClient(Loc.GetString(targetEvent.InjectMessageOverride ?? "hypospray-cant-inject", ("target", Identity.Entity(target, EntityManager))), target, user);
             return false;
         }
 
@@ -150,11 +152,13 @@ public sealed class HypospraySystem : EntitySystem
         else if (target == user)
             msgFormat = "hypospray-component-inject-self-message";
 
-        if (!_solutionContainers.TryGetSolution(uid, component.SolutionName, out var hypoSpraySoln, out var hypoSpraySolution) || hypoSpraySolution.Volume == 0)
+        // <Trauma> - use GetSolution and get the Solution from its component
+        if (GetSolution((uid, component)) is not {} hypoSpraySoln || hypoSpraySoln.Comp.Solution.Volume == 0)
         {
             _popup.PopupClient(Loc.GetString("hypospray-component-empty-message"), target, user);
             return false; // Goobstation edit - why was it true?
         }
+        // </Trauma>
 
         if (!_solutionContainers.TryGetInjectableSolution(target, out var targetSoln, out var targetSolution))
         {
@@ -188,7 +192,7 @@ public sealed class HypospraySystem : EntitySystem
         }
 
         // Move units from attackSolution to targetSolution
-        var removedSolution = _solutionContainers.SplitSolution(hypoSpraySoln.Value, realTransferAmount);
+        var removedSolution = _solutionContainers.SplitSolution(hypoSpraySoln, realTransferAmount); // Trauma - remove .Value from hypoSpraySoln
 
         if (!targetSolution.CanAddSolution(removedSolution))
             return true;
@@ -211,11 +215,13 @@ public sealed class HypospraySystem : EntitySystem
 
     public bool TryStartDraw(Entity<HyposprayComponent> entity, EntityUid target, Entity<SolutionComponent> targetSolution, EntityUid user)
     {
-        if (!_solutionContainers.TryGetSolution(entity.Owner, entity.Comp.SolutionName, out var soln))
+        // <Trauma> - use GetSolution, replace soln.Value with soln
+        if (GetSolution(entity) is not {} soln)
             return false;
 
-        if (!TryGetDrawAmount(entity, target, targetSolution, user,  soln.Value, out _))
+        if (!TryGetDrawAmount(entity, target, targetSolution, user, soln, out _))
             return false;
+        // </Trauma>
 
         var doAfterArgs = new DoAfterArgs(EntityManager, user, entity.Comp.DrawTime, new HyposprayDrawDoAfterEvent(), entity, target)
         {
@@ -256,18 +262,20 @@ public sealed class HypospraySystem : EntitySystem
 
     private bool TryDraw(Entity<HyposprayComponent> entity, EntityUid target, Entity<SolutionComponent> targetSolution, EntityUid user)
     {
-        if (!_solutionContainers.TryGetSolution(entity.Owner, entity.Comp.SolutionName, out var soln))
+        // <Trauma> - use GetSolution, replace soln.Value with soln
+        if (GetSolution(entity) is not {} soln)
             return false;
 
-        if (!TryGetDrawAmount(entity, target, targetSolution, user, soln.Value, out var amount))
+        if (!TryGetDrawAmount(entity, target, targetSolution, user, soln, out var amount))
             return false;
 
         var removedSolution = _solutionContainers.Draw(target, targetSolution, amount.Value);
 
-        if (!_solutionContainers.TryAddSolution(soln.Value, removedSolution))
+        if (!_solutionContainers.TryAddSolution(soln, removedSolution))
         {
             return false;
         }
+        // </Trauma>
 
         _popup.PopupClient(Loc.GetString("injector-component-draw-success-message",
             ("amount", removedSolution.Volume),

@@ -1,0 +1,48 @@
+# Hyposprays can't inject unless the target mob has a hypoport surgically installed (on their head)
+# It's assumed that all hardsuits have a passthrough port so you don't need to take them off.
+- type: entity
+  parent: BaseItem
+  id: Hypoport
+  name: hypoport
+  description: A hermetically sealing port to accept sterile injections without a needle. Compatible with all hyposprays.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi # TODO: make unique sprite??
+    state: cpu_super
+  - type: Item
+    size: Tiny
+  - type: Hypoport
+  - type: Organ
+    slotId: hypoport
+  - type: OrganExamine
+    examine: hypoport-detail-examine
+  - type: GuideHelp
+    guides: [ Hypoports ]
+
+- type: entity
+  parent: Hypoport
+  id: HypoportSecure
+  name: secure hypoport
+  description: A hermetically sealing port to accept sterile injections without a needle. An upgraded model that checks for access which can be set by multitools.
+  components:
+  - type: HypoportAccess
+  - type: AccessReader
+    access: [["Medical"]]
+  - type: DoorElectronics # you could technically use this in an airlock but idc its just a waste. upstream shitcode not having this be a separate component
+  - type: ActivatableUI
+    key: enum.DoorElectronicsConfigurationUiKey.Key
+    requiredItems:
+      tags:
+      - DoorElectronicsConfigurator
+  - type: UserInterface
+    interfaces:
+      enum.DoorElectronicsConfigurationUiKey.Key:
+        type: DoorElectronicsBoundUserInterface
+
+- type: entity
+  parent: HypoportSecure
+  id: HypoportSecureNukie
+  suffix: Nukie
+  components:
+  - type: AccessReader
+    access: [["NuclearOperative"]]
