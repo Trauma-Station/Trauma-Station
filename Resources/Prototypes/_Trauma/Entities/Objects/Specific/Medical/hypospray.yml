@@ -15,8 +15,6 @@
     - state: fill-1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
-    - state: hypo-vial
-      visible: false # TODO: show this when a vial is inserted
   - type: SolutionContainerManager
     solutions:
       hypospray:
@@ -35,6 +33,12 @@
     maxFillLevels: 6
     fillBaseName: fill-
     solutionName: hypospray
+  - type: ItemMapper
+    mapLayers:
+      hypo-vial:
+        whitelist:
+          tags:
+          - CentrifugeCompatible
   - type: ContainerContainer
     containers:
       vial: !type:ContainerSlot
