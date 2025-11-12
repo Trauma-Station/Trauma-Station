@@ -884,6 +884,7 @@
     - GrenadeTriggersStatic
     # Einstein Engines Packs
     - SyringeCase
+    - TraumaMedicalStatic # Trauma
     dynamicPacks:
     - Chemistry
     # Goobstation Packs

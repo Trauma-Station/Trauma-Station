@@ -1,0 +1,8 @@
+- type: latheRecipe
+  id: MedicalHyposprayEmpty
+  result: MedicalHyposprayEmpty
+  completetime: 5
+  materials:
+    Steel: 500
+    Glass: 300
+    Silver: 150
