@@ -150,7 +150,7 @@
     ClothingEyesEyepatchHudMedical: 2
     # <Trauma>
     MedicalHyposprayFilled: 4
-    BaseChemistryVialEmpty: 4
+    BaseChemistryEmptyVial: 4
     # </Trauma>
     # <Goob>
     MedicalPatchPrefilledBicaridine: 3
