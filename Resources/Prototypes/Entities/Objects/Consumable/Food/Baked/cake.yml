@@ -160,7 +160,7 @@
   - type: FlavorProfile
     flavors:
       - sweet
-  - type: Food
+  - type: Edible
   - type: SolutionContainerManager
     solutions:
       food:
@@ -1253,11 +1253,11 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 48
+        maxVol: 48 # Goob - removed sugar from it, so less volume
         reagents:
         - ReagentId: Nutriment
-          Quantity: 48
-  - type: Food
+          Quantity: 48 # Goob - was 80
+  - type: Edible
     transferAmount: 12
   - type: Item
     size: Normal
@@ -1278,11 +1278,11 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 12
+        maxVol: 12 # Goob - removed sugar so reduced volume
         reagents:
         - ReagentId: Nutriment
-          Quantity: 12
-  - type: Food
+          Quantity: 12 # Goob - was 10
+  - type: Edible
     transferAmount: 3
   - type: PointLight
     color: "#FFFF00"

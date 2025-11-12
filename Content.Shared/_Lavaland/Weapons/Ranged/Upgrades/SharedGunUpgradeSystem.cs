@@ -29,7 +29,7 @@ using Content.Shared._Lavaland.Weapons.Ranged.Upgrades.Components;
 using Content.Shared._Lavaland.Weapons.Ranged.Events;
 using Content.Shared.CCVar;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
@@ -220,9 +220,10 @@ public abstract class SharedGunUpgradeSystem : EntitySystem
 
     private void OnVampirismProjectileHit(Entity<ProjectileVampirismComponent> ent, ref ProjectileHitEvent args)
     {
-        if (!HasComp<MobStateComponent>(args.Target))
+        if (args.Shooter is not {} shooter || !HasComp<MobStateComponent>(args.Target))
             return;
-        _damage.TryChangeDamage(args.Shooter, ent.Comp.DamageOnHit);
+
+        _damage.ChangeDamage(shooter, ent.Comp.DamageOnHit);
     }
 
     public HashSet<Entity<GunUpgradeComponent>> GetCurrentUpgrades(Entity<UpgradeableGunComponent> ent, ItemSlotsComponent? itemSlots = null)

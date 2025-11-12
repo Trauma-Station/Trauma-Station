@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.DoAfter;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
@@ -91,7 +91,7 @@ public sealed class SkinnableSystem : EntitySystem
     {
         ent.Comp.Skinned = true;
         Dirty(ent, ent.Comp);
-        _damageable.TryChangeDamage(ent, ent.Comp.DamageOnSkinned);
+        _damageable.TryChangeDamage(ent.Owner, ent.Comp.DamageOnSkinned);
         // TODO: this is awful, change the mobs base rsi instead
         _appearance.SetData(ent, ToggleableVisuals.Enabled, true);
     }

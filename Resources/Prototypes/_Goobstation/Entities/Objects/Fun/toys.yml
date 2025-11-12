@@ -250,8 +250,7 @@
   - type: EmitSoundOnCollide
     sound:
       collection: ToySqueak
-  - type: Food
-    requiresSpecialDigestion: true
+  - type: Edible
     useSound:
       path: /Audio/_Shitmed/Misc/abductor.ogg
   - type: MeleeWeapon

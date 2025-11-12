@@ -10,7 +10,7 @@
 using Content.Server.Power.Components;
 using Content.Server.PowerCell;
 using Content.Shared._White.Blocking;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;

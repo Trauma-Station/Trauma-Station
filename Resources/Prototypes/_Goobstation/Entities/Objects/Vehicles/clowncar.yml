@@ -114,10 +114,13 @@
     deleteAfterExplosion: false
     repeatable: true # if it managed to survuve.
   - type: ExplodeOnTrigger
-  - type: SpawnSolutionOnDamage
-    solution: PuddleSpaceLube
-    threshold: 5
+  - type: TriggerOnDamage # car leaks lube when hit
+    keyOut: damaged
     probability: 0.33
+  - type: SpawnOnTrigger
+    keysIn: [ damaged ]
+    proto: PuddleSpaceLube
+    predicted: true
   - type: Damageable
     damageContainer: ClowncarDamageContainer
     damageModifierSet: Metallic

@@ -6,7 +6,7 @@
 using Content.Server.Popups;
 using Content.Shared._EinsteinEngines.Silicon.EmitBuzzWhileDamaged;
 using Content.Shared.Audio;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Audio.Systems;

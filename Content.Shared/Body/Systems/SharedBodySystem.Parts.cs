@@ -321,10 +321,12 @@ public partial class SharedBodySystem
         if (legEnt.Comp.PartType != BodyPartType.Leg)
             return;
 
+        // <Shitmed>
         bodyEnt.Comp.LegEntities.Remove(legEnt);
         UpdateMovementSpeed(bodyEnt);
         Dirty(bodyEnt, bodyEnt.Comp);
         Standing.Down(bodyEnt);
+        // </Shitmed>
     }
 
     /// <summary>

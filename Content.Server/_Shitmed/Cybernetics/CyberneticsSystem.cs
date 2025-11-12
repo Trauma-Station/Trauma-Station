@@ -14,6 +14,8 @@ using Content.Shared.Body.Part;
 using Content.Shared.Body.Organ;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Prototypes;
 
@@ -37,6 +39,7 @@ internal sealed class CyberneticsSystem : EntitySystem
         ev.Affected = true;
         ev.Disabled = true;
         cyberEnt.Comp.Disabled = true;
+        Dirty(cyberEnt);
 
         if (HasComp<OrganComponent>(cyberEnt))
         {
@@ -48,13 +51,11 @@ internal sealed class CyberneticsSystem : EntitySystem
             var disableEvent = new BodyPartEnableChangedEvent(false);
             RaiseLocalEvent(cyberEnt, ref disableEvent);
 
-            if (TryComp(cyberEnt, out DamageableComponent? damageable)
-                && part.Body is not null)
+            if (part.Body is {} body)
             {
                 var shock = new DamageSpecifier(_prototypes.Index<DamageTypePrototype>("Shock"), 30);
                 var targetPart = _body.GetTargetBodyPart(part);
-                _damageable.TryChangeDamage(part.Body.Value, shock, ignoreResistances: true, targetPart: targetPart, damageable: damageable);
-                Dirty(cyberEnt, damageable);
+                _damageable.ChangeDamage(body, shock, ignoreResistances: true, targetPart: targetPart);
             }
         }
     }
@@ -65,6 +66,7 @@ internal sealed class CyberneticsSystem : EntitySystem
             return;
 
         cyberEnt.Comp.Disabled = false;
+        Dirty(cyberEnt);
         if (HasComp<OrganComponent>(cyberEnt))
         {
             var enableEvent = new OrganEnableChangedEvent(true);

@@ -8,6 +8,8 @@
 using System.Linq;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Mobs;
@@ -158,11 +160,10 @@ public abstract class SharedSanguineStrikeSystem : EntitySystem
         else
             toHeal = damageable.Damage;
 
-        _damageable.TryChangeDamage(uid,
+        _damageable.TryChangeDamage((uid, damageable),
             -toHeal,
             true,
             false,
-            damageable,
             null,
             false,
             targetPart: TargetBodyPart.All,

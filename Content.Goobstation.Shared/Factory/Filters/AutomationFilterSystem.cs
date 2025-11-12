@@ -450,14 +450,14 @@ public sealed class AutomationFilterSystem : EntitySystem
             return item;
 
         // don't need to split if it's already a multiple of the split size
-        var stack = Comp<StackComponent>(item);
+        var stack = _stackQuery.Comp(item);
         var excess = stack.Count % split;
         if (excess == 0)
             return item;
 
         // have to split it, client will return null here
         var coords = Transform(item).Coordinates;
-        return _stack.Split(item, stack.Count - excess, coords, stack);
+        return _stack.Split((item, stack), stack.Count - excess, coords);
     }
 
     /// <summary>

@@ -12,6 +12,7 @@
 using System.Linq;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
@@ -39,6 +40,7 @@ using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
+using Content.Shared._Shitmed.Targeting;
 
 namespace Content.Goobstation.Shared.ReverseBearTrap;
 
@@ -291,12 +293,12 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
 
     private void OnWeldFinished(EntityUid uid, ReverseBearTrapComponent trap, WeldFinishedEvent args)
     {
-        if (_net.IsClient || args.Cancelled || args.Used == null || !trap.Wearer.HasValue)
+        if (_net.IsClient || args.Cancelled || args.Used == null || trap.Wearer is not {} target)
             return;
 
         var damage = new DamageSpecifier();
         damage.DamageDict.Add("Heat", 50);
-        _damageable.TryChangeDamage(trap.Wearer, damage, true, origin: args.Used, targetPart: Content.Shared._Shitmed.Targeting.TargetBodyPart.Head);
+        _damageable.TryChangeDamage(target, damage, true, origin: args.Used, targetPart: TargetBodyPart.Head);
 
         _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-trap-fall-observer",
                     ("user", Identity.Name(trap.Wearer.Value, EntityManager))),
@@ -396,30 +398,22 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
 
     private void SnapTrap(EntityUid uid, ReverseBearTrapComponent? trap)
     {
-        if (!Resolve(uid, ref trap) || trap.Wearer == null)
+        if (!Resolve(uid, ref trap) || trap.Wearer is not {} wearer)
             return;
 
-        if (_net.IsServer)
-        {
-            _audio.PlayPredicted(trap.SnapSound, trap.Wearer.Value, null);
+        _audio.PlayPredicted(trap.SnapSound, wearer, wearer);
 
-            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-trap-snap-observer",
-                ("user", Identity.Name(trap.Wearer.Value, EntityManager))),
-                uid, Filter.Pvs(uid, entityManager: EntityManager)
-                .RemoveWhere(e => e.AttachedEntity == uid || e.AttachedEntity == trap.Wearer), true, PopupType.LargeCaution);
-
-            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-trap-snap-self"), trap.Wearer.Value, trap.Wearer.Value, PopupType.LargeCaution);
-        }
-
-        var wearer = trap.Wearer;
+        var you = Loc.GetString("reverse-bear-trap-component-trap-snap-self");
+        var others = Loc.GetString("reverse-bear-trap-component-trap-snap-observer", ("user", Identity.Name(wearer, EntityManager)));
+        _popup.PopupPredicted(you, others, wearer, wearer, PopupType.LargeCaution);
 
         // damage destroys trap
         ResetTrap(uid, trap);
 
         var damage = new DamageSpecifier();
         damage.DamageDict.Add("Blunt", 300);
-        _damageable.TryChangeDamage(wearer, damage, true, origin: uid, targetPart: Content.Shared._Shitmed.Targeting.TargetBodyPart.Head);
-        var head = _body.GetBodyChildrenOfType(wearer.Value, BodyPartType.Head).FirstOrDefault();
+        _damageable.TryChangeDamage(wearer, damage, true, origin: uid, targetPart: TargetBodyPart.Head);
+        var head = _body.GetBodyChildrenOfType(wearer, BodyPartType.Head).FirstOrDefault();
         if (head != default
             && TryComp<WoundableComponent>(head.Id, out var woundable)
             && woundable.ParentWoundable.HasValue)

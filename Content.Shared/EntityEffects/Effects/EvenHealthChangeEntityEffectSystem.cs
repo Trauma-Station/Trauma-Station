@@ -1,5 +1,7 @@
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Localizations;
 using Robust.Shared.Prototypes;
@@ -44,11 +46,10 @@ public sealed partial class EvenHealthChangeEntityEffectSystem : EntityEffectSys
         damageSpec *= args.Scale;
 
         _damageable.TryChangeDamage(
-            entity,
+            entity.AsNullable(),
             damageSpec,
             args.Effect.IgnoreResistances,
             interruptsDoAfters: false,
-            damageable: entity.Comp,
             splitDamage: args.Effect.SplitDamage); // Shitmed Change
     }
 }

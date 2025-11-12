@@ -11,7 +11,8 @@ using Content.Server.Atmos.Rotting;
 using Content.Server.Body.Components;
 using Content.Server.DoAfter;
 using Content.Shared.Atmos.Rotting;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Inventory;
 
@@ -114,28 +115,27 @@ public sealed class CPRSystem : EntitySystem
 
     private void OnCPRDoAfter(Entity<CPRTrainingComponent> performer, ref CPRDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled || !args.Target.HasValue)
+        if (args.Cancelled || args.Handled || args.Target is not {} target)
         {
             performer.Comp.CPRPlayingStream = _audio.Stop(performer.Comp.CPRPlayingStream);
             return;
         }
 
         if (!performer.Comp.CPRHealing.Empty)
-            _damageable.TryChangeDamage(args.Target, performer.Comp.CPRHealing, true, origin: performer, targetPart: TargetBodyPart.All); // Shitmed Change
+            _damageable.ChangeDamage(target, performer.Comp.CPRHealing, true, origin: performer, targetPart: TargetBodyPart.All); // Shitmed Change
 
         if (performer.Comp.RotReductionMultiplier > 0)
-            _rottingSystem.ReduceAccumulator(
-                (EntityUid)args.Target, performer.Comp.DoAfterDuration * performer.Comp.RotReductionMultiplier);
+            _rottingSystem.ReduceAccumulator(target, performer.Comp.DoAfterDuration * performer.Comp.RotReductionMultiplier);
 
         if (_robustRandom.Prob(performer.Comp.ResuscitationChance)
-            && _mobThreshold.TryGetThresholdForState((EntityUid)args.Target, MobState.Dead, out var threshold)
-            && TryComp<DamageableComponent>(args.Target, out var damageableComponent)
-            && TryComp<MobStateComponent>(args.Target, out var state)
-            && !HasComp<UnrevivableComponent>(args.Target)
+            && _mobThreshold.TryGetThresholdForState(target, MobState.Dead, out var threshold)
+            && TryComp<DamageableComponent>(target, out var damageableComponent)
+            && TryComp<MobStateComponent>(target, out var state)
+            && !HasComp<UnrevivableComponent>(target)
             && damageableComponent.TotalDamage < threshold)
-            _mobStateSystem.ChangeMobState(args.Target.Value, MobState.Critical, state, performer);
+            _mobStateSystem.ChangeMobState(target, MobState.Critical, state, performer);
 
-        var isAlive = _mobStateSystem.IsAlive(args.Target.Value);
+        var isAlive = _mobStateSystem.IsAlive(target);
         args.Repeat = !isAlive;
         if (isAlive)
             performer.Comp.CPRPlayingStream = _audio.Stop(performer.Comp.CPRPlayingStream);

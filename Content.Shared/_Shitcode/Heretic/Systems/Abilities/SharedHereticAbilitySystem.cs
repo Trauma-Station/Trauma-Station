@@ -12,6 +12,8 @@ using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Heretic;
@@ -198,11 +200,10 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         if (!Resolve(uid, ref uid.Comp1, false))
             return;
 
-        _dmg.TryChangeDamage(uid,
+        _dmg.ChangeDamage((uid, uid.Comp1),
             toHeal,
             true,
             false,
-            uid.Comp1,
             targetPart: TargetBodyPart.All,
             splitDamage: SplitDamageBehavior.SplitEnsureAll);
 

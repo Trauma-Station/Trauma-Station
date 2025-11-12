@@ -280,9 +280,9 @@
     - VulpEmotes
     - HarpyEmotes
   blacklist:
-    components:
-    - BorgChassis
-  chatMessages: [barks.]
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-bark"]
   chatTriggers:
   - bark
   - barks
@@ -300,9 +300,9 @@
     - VulpEmotes
     - HarpyEmotes
   blacklist:
-    components:
-    - BorgChassis
-  chatMessages: [snarls.]
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-snarl"]
   chatTriggers:
   - snarl
   - snarls
@@ -320,9 +320,9 @@
     - VulpEmotes
     - HarpyEmotes
   blacklist:
-    components:
-    - BorgChassis
-  chatMessages: [whines.]
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-whine"]
   chatTriggers:
   - whine
   - whines
@@ -340,9 +340,9 @@
     - VulpEmotes
     - HarpyEmotes
   blacklist:
-    components:
-    - BorgChassis
-  chatMessages: [howls.]
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-howl"]
   chatTriggers:
   - howl
   - howls
@@ -361,9 +361,9 @@
     - VulpEmotes
     - HarpyEmotes
   blacklist:
-    components:
-    - BorgChassis
-  chatMessages: [growls.]
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-growl"]
   chatTriggers:
   - growl
   - growls

@@ -116,7 +116,7 @@ using Content.Shared.Devour.Components; // Goobstation
 using Content.Shared.NPC.Components; // Goobstation
 using Robust.Shared.Serialization.Manager; // Goobstation
 using Content.Server.Body.Systems;
-using Content.Shared.Damage; // Goobstation
+using Content.Shared.Damage.Systems; // Goobstation
 
 namespace Content.Server.Dragon;
 

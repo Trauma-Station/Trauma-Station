@@ -14,7 +14,7 @@
 using Content.Server.Body.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Heretic;
 using Content.Shared.Popups;
@@ -102,14 +102,14 @@ public sealed partial class HereticAbilitySystem
         if (args.Cancelled)
             return;
 
-        if (args.Target == null) // shouldn't really happen. just in case
+        if (args.Target is not {} target) // shouldn't really happen. just in case
             return;
 
-        if (!TryComp<DamageableComponent>(args.Target, out var dmg))
+        if (!TryComp<DamageableComponent>(target, out var dmg))
             return;
 
         // heal teammates, mostly ghouls
-        _dmg.SetAllDamage((EntityUid) args.Target, dmg, 0);
+        _dmg.SetAllDamage((target, dmg), 0);
         args.Handled = true;
     }
     private void OnAscensionFlesh(Entity<HereticComponent> ent, ref HereticAscensionFleshEvent args)

@@ -18,6 +18,7 @@ using Content.Server.Construction.Components;
 using Content.Server.Destructible;
 using Content.Shared.Emp;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Components;

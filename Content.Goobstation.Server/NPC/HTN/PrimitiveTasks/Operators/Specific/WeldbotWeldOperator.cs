@@ -12,7 +12,8 @@ using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.HTN.PrimitiveTasks;
 using Content.Shared.Chat;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Emag.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -79,7 +80,7 @@ public sealed partial class WeldbotWeldOperator : HTNOperator
 
         if (botComp.IsEmagged)
         {
-            _damageableSystem.TryChangeDamage(target, -botComp.DamageAmount, true, false, damage);
+            _damageableSystem.ChangeDamage((target, damage), -botComp.DamageAmount, true, false);
         }
         else
         {

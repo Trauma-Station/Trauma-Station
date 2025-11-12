@@ -2,7 +2,7 @@ using Content.Server.Body.Systems;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Hands;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;

@@ -14,13 +14,14 @@ using Content.Server._Goobstation.Wizard.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
-using Content.Server.Ghost.Components;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Eye;
@@ -585,6 +586,7 @@ namespace Content.Server.Ghost
                 {
                     canReturn = true;
 
+                    // <Goob> - added this check
                     if (!HasComp<XenomorphPreventSuicideComponent>(playerEntity.Value))
                     {
                         FixedPoint2 dealtDamage = 200;
@@ -605,14 +607,15 @@ namespace Content.Server.Ghost
                         if (TryComp<BodyComponent>(playerEntity, out var body)
                             && body.BodyType == BodyType.Complex
                             && body.RootContainer.ContainedEntities.FirstOrNull() is { } root)
-                            _damageable.TryChangeDamage(playerEntity,
+                            _damageable.ChangeDamage(playerEntity.Value,
                                 damage,
                                 true,
                                 targetPart: _bodySystem.GetTargetBodyPart(root));
                         else
-                            _damageable.TryChangeDamage(playerEntity, damage, true);
+                            _damageable.ChangeDamage(playerEntity.Value, damage, true);
                         // Shitmed Change End
                     }
+                    // </Goob>
                 }
             }
 

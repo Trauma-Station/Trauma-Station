@@ -126,7 +126,7 @@ public sealed partial class HereticAbilitySystem
         {
             if (condition)
                 _voidcurse.DoCurse(pookie);
-            _dmg.TryChangeDamage(pookie,
+            _dmg.ChangeDamage(pookie.Owner,
                 args.Damage,
                 true,
                 origin: ent,
@@ -151,7 +151,7 @@ public sealed partial class HereticAbilitySystem
         foreach (var pookie in topPriority)
         {
             // apply gaming.
-            _dmg.TryChangeDamage(pookie,
+            _dmg.ChangeDamage(pookie.Owner,
                 args.Damage,
                 true,
                 origin: ent,

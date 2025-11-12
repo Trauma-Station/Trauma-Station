@@ -1,13 +1,11 @@
 - type: entity
+  categories: [ Debug ]
   name: holy blast stick 100dmg
   parent: BaseItem
   id: MeleeDebugGibHoly100
   description: Behold, the power of GOD!!
   suffix: DEBUG
   components:
-  - type: Tag
-    tags:
-    - Debug
   - type: Sprite
     sprite: Objects/Weapons/Melee/debug.rsi
     state: icon
@@ -20,15 +18,13 @@
     sprite: Objects/Weapons/Melee/debug.rsi
 
 - type: entity
+  categories: [ Debug ]
   name: holy blast stick 200dmg
   parent: BaseItem
   id: MeleeDebugGibHoly200
   description: Behold, the power of GOD!!
   suffix: DEBUG
   components:
-  - type: Tag
-    tags:
-    - Debug
   - type: Sprite
     sprite: Objects/Weapons/Melee/debug.rsi
     state: icon
@@ -41,15 +37,13 @@
     sprite: Objects/Weapons/Melee/debug.rsi
 
 - type: entity
+  categories: [ Debug ]
   name: holy smite stick # This ones just for fun
   parent: BaseItem
   id: MeleeDebugGibHoly200000
   description: BEGONE SINNER
   suffix: DEBUG
   components:
-  - type: Tag
-    tags:
-    - Debug
   - type: Sprite
     sprite: Objects/Weapons/Melee/debug.rsi
     state: icon

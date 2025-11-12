@@ -13,7 +13,8 @@ using Content.Server.Lightning;
 using Content.Shared._Goobstation.Wizard.Spellblade;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Atmos.Components;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
@@ -61,7 +62,7 @@ public sealed class SpellbladeSystem : SharedSpellbladeSystem
             temporal.HitsLeft--;
             temporal.Accumulator = 0f;
 
-            _damageable.TryChangeDamage(uid, temporal.Damage, damageable: damageable, targetPart: TargetBodyPart.Chest);
+            _damageable.ChangeDamage((uid, damageable), temporal.Damage, targetPart: TargetBodyPart.Chest);
             Audio.PlayPvs(temporal.HitSound, xform.Coordinates);
             Spawn(temporal.Effect, xform.Coordinates);
 

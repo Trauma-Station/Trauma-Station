@@ -25,6 +25,7 @@ using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Examine;
 using Content.Shared.Heretic;
 using Content.Shared.Heretic.Components;

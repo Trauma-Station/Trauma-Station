@@ -16,8 +16,9 @@
 using Content.Goobstation.Common.Bloodstream;
 using Content.Server.Heretic.Components.PathSpecific;
 using Content.Shared.Body.Part;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;

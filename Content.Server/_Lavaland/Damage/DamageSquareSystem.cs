@@ -22,7 +22,8 @@
 
 using Content.Shared._Lavaland.Damage;
 using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
@@ -36,7 +37,7 @@ public sealed class DamageSquareSystem : SharedDamageSquareSystem
     protected override void DoDamage(Entity<DamageSquareComponent> field, Entity<DamageableComponent> entity)
     {
         // Damage
-        _dmg.TryChangeDamage(entity, field.Comp.Damage, damageable: entity.Comp, targetPart: TargetBodyPart.All);
+        _dmg.ChangeDamage(entity.AsNullable(), field.Comp.Damage, targetPart: TargetBodyPart.All);
 
         // Sound
         if (field.Comp.Sound != null)

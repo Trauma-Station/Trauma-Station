@@ -94,7 +94,7 @@ public sealed partial class HereticAbilitySystem
             toHeal += args.HealAmount;
 
             _flammable.AdjustFireStacks(look, args.FireStacks, flam, true);
-            _dmg.TryChangeDamage(look, args.Damage, true, targetPart: TargetBodyPart.All);
+            _dmg.ChangeDamage(look.Owner, args.Damage, true, targetPart: TargetBodyPart.All);
         }
 
         args.Handled = true;

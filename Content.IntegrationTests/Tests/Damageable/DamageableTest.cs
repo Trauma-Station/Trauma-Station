@@ -42,7 +42,9 @@
 
 using System.Linq;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Goobstation.Maths.FixedPoint;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -275,10 +277,14 @@ namespace Content.IntegrationTests.Tests.Damageable
                     Assert.That(sDamageableComponent.TotalDamage, Is.EqualTo(FixedPoint2.Zero));
                 });
 
-                // Test SetAll function
-                sDamageableSystem.SetAllDamage(sDamageableEntity, sDamageableComponent, 10);
+                // Test SetAll and ClearAll function
+                sDamageableSystem.SetAllDamage((sDamageableEntity, sDamageableComponent), 10);
                 Assert.That(sDamageableComponent.TotalDamage, Is.EqualTo(FixedPoint2.New(10 * sDamageableComponent.Damage.DamageDict.Count)));
-                sDamageableSystem.SetAllDamage(sDamageableEntity, sDamageableComponent, 0);
+                sDamageableSystem.SetAllDamage((sDamageableEntity, sDamageableComponent), 0);
+                Assert.That(sDamageableComponent.TotalDamage, Is.EqualTo(FixedPoint2.Zero));
+                sDamageableSystem.SetAllDamage((sDamageableEntity, sDamageableComponent), 10);
+                Assert.That(sDamageableComponent.TotalDamage, Is.EqualTo(FixedPoint2.New(10 * sDamageableComponent.Damage.DamageDict.Count)));
+                sDamageableSystem.ClearAllDamage((sDamageableEntity, sDamageableComponent));
                 Assert.That(sDamageableComponent.TotalDamage, Is.EqualTo(FixedPoint2.Zero));
 
                 // Test 'wasted' healing

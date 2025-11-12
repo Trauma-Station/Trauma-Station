@@ -410,7 +410,7 @@
   - type: Machine
     board: AutolatheMachineCircuitboard
   - type: MaterialStorage
-    whitelist:
+    whitelist: &StandardMaterialWhitelist
       tags:
         - Sheet
         - RawMaterial
@@ -497,11 +497,7 @@
   - type: Machine
     board: ProtolatheMachineCircuitboard
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+    whitelist: *StandardMaterialWhitelist
   - type: Lathe
     idleState: icon
     runningState: building
@@ -602,11 +598,7 @@
     - SharedBoards
     - ShuttleBoardsGoob
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+    whitelist: *StandardMaterialWhitelist
   - type: RequireProjectileTarget
 
 - type: entity
@@ -677,11 +669,7 @@
     - MechWeaponsSalvage
     - MechWeaponsSecurityLight
   - type: MaterialStorage
-    whitelist:
-      tags:
-      - Sheet
-      - RawMaterial
-      - Ingot
+    whitelist: *StandardMaterialWhitelist
   - type: GuideHelp
     guides:
     - Robotics
@@ -768,7 +756,6 @@
     - PowerCellsStatic
     - ScienceExplosives
     - GrenadeTriggersStatic
-    - SecurityWeaponsNonEmaggableStaticGoob
     dynamicPacks:
     - SalvageSecurityBoards
     - SalvageSecurityWeapons
@@ -798,11 +785,7 @@
     - SyndicateAmmoHeavyStatic
     # </Goob>
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+    whitelist: *StandardMaterialWhitelist
 
 - type: entity
   id: AmmoTechFab
@@ -839,11 +822,7 @@
       - SyndicateAmmoHeavyStatic
       # </Goob>
     - type: MaterialStorage
-      whitelist:
-        tags:
-          - Sheet
-          - RawMaterial
-          - Ingot
+      whitelist: *StandardMaterialWhitelist
 
 - type: entity
   id: MedicalTechFab
@@ -957,11 +936,7 @@
     - ClothingDurathreadArmoured
     - ClothingCasualContrabandJumpsuits
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+    whitelist: *StandardMaterialWhitelist
 
 - type: entity
   id: Biogenerator
@@ -1140,10 +1115,4 @@
     dynamicPacks:
     - FauxTiles
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - Metal
-        - Wooden
-        - RawMaterial
-        - Plastic
+    whitelist: *StandardMaterialWhitelist

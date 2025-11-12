@@ -98,7 +98,7 @@ namespace Content.Server.Cloning;
 ///     System responsible for making a copy of a humanoid's body.
 ///     For the cloning machines themselves look at CloningPodSystem, CloningConsoleSystem and MedicalScannerSystem instead.
 /// </summary>
-public sealed partial class CloningSystem : EntitySystem
+public sealed partial class CloningSystem : SharedCloningSystem
 {
     [Dependency] private readonly HumanoidAppearanceSystem _humanoidSystem = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -164,13 +164,15 @@ public sealed partial class CloningSystem : EntitySystem
         return true;
     }
 
-    /// <summary>
-    ///     Copy components from one entity to another based on a CloningSettingsPrototype.
-    /// </summary>
-    /// <param name="original">The orignal Entity to clone components from.</param>
-    /// <param name="clone">The target Entity to clone components to.</param>
-    /// <param name="settings">The clone settings prototype containing the list of components to clone.</param>
-    public void CloneComponents(EntityUid original, EntityUid clone, CloningSettingsPrototype settings)
+    public override void CloneComponents(EntityUid original, EntityUid clone, ProtoId<CloningSettingsPrototype> settings)
+    {
+        if (!_prototype.Resolve(settings, out var proto))
+            return;
+
+        CloneComponents(original, clone, proto);
+    }
+
+    public override void CloneComponents(EntityUid original, EntityUid clone, CloningSettingsPrototype settings)
     {
         var componentsToCopy = settings.Components;
         var componentsToEvent = settings.EventComponents;

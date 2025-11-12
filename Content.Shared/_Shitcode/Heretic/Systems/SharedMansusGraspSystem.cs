@@ -11,7 +11,9 @@ using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared._White.BackStab;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Eye.Blinding.Systems;
@@ -193,10 +195,9 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                           HasComp<BorgChassisComponent>(target) ||
                           _tag.HasTag(target, "Bot"))) // Check for ingorganic target
                 {
-                    _damage.TryChangeDamage(target,
+                    _damage.ChangeDamage((target, damageable),
                         new DamageSpecifier(_proto.Index<DamageGroupPrototype>("Brute"), 500),
                         ignoreResistances: true,
-                        damageable: damageable,
                         origin: performer,
                         targetPart: TargetBodyPart.Chest);
                 }

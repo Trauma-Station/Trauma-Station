@@ -100,12 +100,11 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         EmbedAttach(embeddable, args.Target, args.Shooter, embeddable.Comp);
 
         // Raise a specific event for projectiles.
-        if (TryComp(embeddable, out ProjectileComponent? projectile) && projectile.Weapon.HasValue) // Goobstation edit: un-heisenfailing tests
-        {
-            // Goobstation edit: Shooter is nullable, so why are we using nullforgiving operator for shooter?
-            var ev = new ProjectileEmbedEvent(projectile.Shooter, projectile.Weapon.Value, args.Target);
-            RaiseLocalEvent(embeddable, ref ev);
-        }
+        if (!TryComp<ProjectileComponent>(embeddable, out var projectile))
+            return;
+
+        var ev = new ProjectileEmbedEvent(projectile.Shooter, projectile.Weapon, args.Target);
+        RaiseLocalEvent(embeddable, ref ev);
     }
 
     private void EmbedAttach(EntityUid uid, EntityUid target, EntityUid? user, EmbeddableProjectileComponent component)
@@ -133,7 +132,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         EnsureComp<EmbeddedContainerComponent>(target, out var embeddedContainer);
 
         //Assert that this entity not embed
-        DebugTools.AssertEqual(embeddedContainer.EmbeddedObjects.Contains(uid), false);
+        DebugTools.Assert(!embeddedContainer.EmbeddedObjects.Contains(uid), $"Entity {ToPrettyString(uid)} was not supposed to be embedded into {ToPrettyString(target)}!"); // Trauma - useful message
 
         embeddedContainer.EmbeddedObjects.Add(uid);
     }

@@ -22,6 +22,7 @@ using Content.Shared.Atmos.Components;
 using Content.Shared.Audio;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Heretic;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
@@ -289,19 +290,18 @@ public sealed partial class AristocratSystem : EntitySystem
         foreach (var tag in tags)
         {
             // walls
-            if (_tag.HasTag(tag.Owner, "Wall")
+            if (_tag.HasTag(tag.Comp, "Wall")
                 && _rand.Prob(.45f)
-                && Prototype(tag) != null
-                && Prototype(tag)!.ID != SnowWallPrototype)
+                && Prototype(tag) is {} id
+                && id != SnowWallPrototype) // /!\ SHITCODE ALERT /!\
             {
                 Spawn(SnowWallPrototype, Transform(tag).Coordinates);
                 QueueDel(tag);
             }
 
             // windows
-            if (_tag.HasTag(tag.Owner, "Window")
-                && Prototype(tag) != null)
-                _damage.TryChangeDamage(tag, dspec, origin: ent);
+            if (_tag.HasTag(tag.Comp, "Window"))
+                _damage.ChangeDamage(tag.Owner, dspec, origin: ent);
         }
     }
 

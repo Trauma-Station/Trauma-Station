@@ -40,6 +40,8 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Clumsy;
 using Content.Shared.Cluwne;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Goobstation.Maths.FixedPoint;
@@ -404,9 +406,8 @@ public abstract class SharedSpellsSystem : EntitySystem
 
             range = MathF.Max(1f, range);
 
-            Damageable.TryChangeDamage(target,
+            Damageable.ChangeDamage((target, damageable),
                 ev.Damage / range,
-                damageable: damageable,
                 origin: ev.Performer,
                 targetPart: TargetBodyPart.All);
 
@@ -1083,10 +1084,10 @@ public abstract class SharedSpellsSystem : EntitySystem
 
             Popup(ev.Performer, "spell-soul-tap-dead-message-user", PopupType.LargeCaution);
 
-            var dmg = Damageable.TryChangeDamage(ev.Performer,
+            var dmg = Damageable.ChangeDamage(ev.Performer,
                 new DamageSpecifier(ProtoMan.Index(ev.KillDamage), 666),
                 true);
-            if ((dmg == null || dmg.GetTotal() < 1) && Timing.IsFirstTimePredicted)
+            if (dmg.GetTotal() > 1)
                 Body.GibBody(ev.Performer, contents: GibContentsOption.Gib);
         }
 

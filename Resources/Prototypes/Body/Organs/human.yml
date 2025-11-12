@@ -145,13 +145,15 @@
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
   - type: Organ
+    # <Shitmed>
     intCap: 15
     integrity: 15
     integrityThresholds:
       Normal: 15
       Damaged: 6
       Destroyed: 0
-  - type: Food
+    # </Shitmed>
+  - type: Edible
   - type: Extractable
     grindableSolutionName: organ
   - type: SolutionContainerManager
@@ -461,7 +463,6 @@
     metabolizerTypes: [Human]
     groups:
     - id: Alcohol
-      rateModifier: 0.1 # removes alcohol very slowly along with the stomach removing it as a drink
   - type: Tag # Goob
     tags:
     - Meat

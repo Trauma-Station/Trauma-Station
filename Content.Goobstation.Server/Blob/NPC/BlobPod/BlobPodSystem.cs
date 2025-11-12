@@ -23,7 +23,7 @@ using Content.Server.NPC.Systems;
 using Content.Server.Popups;
 using Content.Shared.ActionBlocker;
 using Content.Shared.CombatMode;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;

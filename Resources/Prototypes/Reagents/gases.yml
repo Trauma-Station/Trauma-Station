@@ -47,13 +47,11 @@
     Poison:
       effects:
       - !type:Oxygenate
-        scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Human, Animal, Rat, Plant, Yowie, Cybernetic ] # Goob - Yowie-Cybernetic
       # Convert Oxygen into CO2.
       - !type:ModifyLungGas
-        scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Vox, Yowie, Plasmaman, Cybernetic ] # Goob - Yowie-Cybernetic
@@ -65,7 +63,6 @@
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Vox ]
-        scaling: true
         ignoreResistances: true
         damage:
           types:
@@ -91,13 +88,11 @@
     Gas:
       effects:
       - !type:Oxygenate
-        scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Human, Animal, Rat, Plant, Yowie, Cybernetic ] # Goob - add Yowie-Cybernetic
       # Convert Oxygen into CO2.
       - !type:ModifyLungGas
-        scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Vox, Cybernetic ] # Goob - add Cybernetic
@@ -109,7 +104,6 @@
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Vox ]
-        scaling: true
         ignoreResistances: true
         damage:
           types:
@@ -169,7 +163,7 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Good
+        - !type:MetabolizerTypeCondition # Goob
           type: [ Yowie, Plasmaman, Cybernetic ]
           inverted: true
         damage:
@@ -177,14 +171,14 @@
             Poison: 1.5
       - !type:AdjustReagent
         conditions:
-        - !type:MetabolizerTypeCondition # Good
+        - !type:MetabolizerTypeCondition # Goob
           type: [ Plasmaman ]
           inverted: true
         reagent: Inaprovaline
         amount: -2.0
       - !type:HealthChange # Shitmed - Cybernetic Organs
         conditions:
-        - !type:MetabolizerTypeCondition # Good
+        - !type:MetabolizerTypeCondition # Goob
           type: [ Cybernetic ]
           inverted: true
         damage:
@@ -194,10 +188,9 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Good
+        - !type:MetabolizerTypeCondition # Goob
           type: [ Yowie, Plasmaman, Cybernetic ]
           inverted: true
-        scaling: true
         ignoreResistances: true
         damage:
           types:
@@ -207,7 +200,7 @@
       - !type:AdjustAlert
         alertType: Toxins
         conditions: # Goob
-        - !type:MetabolizerTypeCondition # Good
+        - !type:MetabolizerTypeCondition # Goob
           type: [ Plasmaman ]
           inverted: true
         - !type:ReagentCondition
@@ -304,7 +297,6 @@
         - !type:MetabolizerTypeCondition # Shitmed
           type: [ Cybernetic ]
           inverted: true
-        scaling: true
         ignoreResistances: true
         damage:
           types:
@@ -338,7 +330,6 @@
     Poison:
       effects:
       - !type:Oxygenate
-        scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Plant ]
@@ -347,14 +338,12 @@
         - !type:MetabolizerTypeCondition
           type: [ Plant, Vox, Cybernetic ] # Goob - add Cybernetic
           inverted: true
-        scaling: true
         ignoreResistances: true
         damage:
           types:
             Poison:
               0.4
       - !type:Oxygenate
-        scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Plant, Cybernetic ] # Goob - add Cybernetic
@@ -363,7 +352,6 @@
     Gas:
       effects:
       - !type:Oxygenate
-        scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Plant ]
@@ -375,14 +363,12 @@
           inverted: true
         # Don't want people to get toxin damage from the gas they just
         # exhaled, right?
-        scaling: true
         ignoreResistances: true
         damage:
           types:
             Poison:
               0.8
       - !type:Oxygenate # carbon dioxide displaces oxygen from the bloodstream, causing asphyxiation
-        scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Plant, Cybernetic ] # Goob - added Cybernetic
@@ -411,13 +397,11 @@
     Gas:
       effects:
       - !type:Oxygenate
-        scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Vox, Slime, Cybernetic ] # Goob - added Cybernetic
       # Converts Nitrogen into Ammonia
       - !type:ModifyLungGas
-        scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Vox ]
@@ -425,7 +409,6 @@
           Ammonia: 1.0
           Nitrogen: -1.0
       - !type:ModifyLungGas
-        scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Slime ]
@@ -540,7 +523,6 @@
     Narcotic:
       effects:
       - !type:HealthChange
-        scaling: true
         ignoreResistances: true
         damage:
           types:
@@ -586,7 +568,6 @@
           reagent: Frezon
           min: 0.5
         minScale: 1
-        scaling: true
         ignoreResistances: true
         damage:
           types:

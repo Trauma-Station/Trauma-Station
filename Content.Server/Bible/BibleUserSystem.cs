@@ -42,8 +42,8 @@ using Content.Shared._Shitmed.Targeting;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Bible;
-using Content.Shared.Bible.Components;
-using Content.Shared.Damage;
+using Content.Shared.Bible.Components; // Goob
+using Content.Shared.Damage.Systems;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -175,15 +175,8 @@ namespace Content.Server.Bible
                 }
             }
 
-            var damage = _damageableSystem.TryChangeDamage(args.Target.Value,
-                component.Damage,
-                true,
-                origin: uid,
-                targetPart: TargetBodyPart.All,
-                ignoreBlockers: true,
-                splitDamage: SplitDamageBehavior.SplitEnsureAll);
-
-            if (damage == null || damage.Empty)
+            // Goob - added targetPart-splitDamage
+            if (_damageableSystem.TryChangeDamage(args.Target.Value, component.Damage, true, origin: uid, targetPart: TargetBodyPart.All, ignoreBlockers: true, splitDamage: SplitDamageBehavior.SplitEnsureAll))
             {
                 var othersMessage = Loc.GetString(component.LocPrefix + "-heal-success-none-others", ("user", Identity.Entity(args.User, EntityManager)), ("target", Identity.Entity(args.Target.Value, EntityManager)), ("bible", uid));
                 _popupSystem.PopupEntity(othersMessage, args.User, Filter.PvsExcept(args.User), true, PopupType.Medium);

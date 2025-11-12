@@ -116,7 +116,7 @@
     guides: [ Plasmaman ]
   - type: AllowSuitStorage # Goobstation - plasmamen can use the envirosuit as gasholder
     whitelist:
-      tags:
+      components:
       - GasTank
 
 - type: entity

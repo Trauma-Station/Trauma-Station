@@ -86,6 +86,16 @@
     Glass: 100
 
 - type: latheRecipe
+  parent: BasePartRecipe
+  id: VoiceSensor
+  result: voicesensor
+  materials:
+    Steel: 100
+    Plastic: 200
+    Glass: 100
+
+- type: latheRecipe
+  parent: BasePartRecipe
   id: SignallerAdvanced
   result: RemoteSignallerAdvanced
   categories:
