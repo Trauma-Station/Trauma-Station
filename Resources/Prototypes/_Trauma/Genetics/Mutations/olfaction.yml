@@ -7,4 +7,7 @@
   - type: Mutation
     instability: 25
     difficulty: 12
-  # TODO: huge shitcode needed
+  - type: ComponentMutation
+    added:
+    - !type:ScentTracker
+  # TODO: huge shitcode needed for parity

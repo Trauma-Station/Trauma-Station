@@ -12,4 +12,6 @@
     added:
     - type: ComplexInteraction
     removed:
+    - type: BlockReading
     - type: BlockWriting
+  # TODO: change melee weapon from bites to punches, parity

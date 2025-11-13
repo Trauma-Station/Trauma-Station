@@ -1802,6 +1802,10 @@
       effects:
       - !type:WashCreamPie
   - type: Crawler
+  # <Trauma> stupid monkey needs clever mutation to be literate
+  - type: BlockReading
+  - type: BlockWriting
+  # </Trauma>
   - type: Vocal # Goobstation
     sounds:
       Male: MonkeyMode
