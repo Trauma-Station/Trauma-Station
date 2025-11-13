@@ -9,5 +9,5 @@
     difficulty: 12
   - type: ComponentMutation
     added:
-    - !type:ScentTracker
+    - type: ScentTracker
   # TODO: huge shitcode needed for parity

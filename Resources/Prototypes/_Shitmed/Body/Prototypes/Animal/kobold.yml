@@ -23,6 +23,7 @@
       organs:
         brain: OrganAnimalBrain
         eyes: OrganAnimalEyes
+        tongue: OrganHumanTongue # Trauma
     chest:
       part: ChestKobold
       connections:

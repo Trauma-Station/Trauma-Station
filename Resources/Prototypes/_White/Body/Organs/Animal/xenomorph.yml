@@ -69,6 +69,7 @@
   id: OrganXenomorphTongue
   name: xenomorph tongue
   description: According to leading xenobiologists the evolutionary benefit of having a second mouth in your mouth is "that it looks badass".
+  # TODO: grant alien languages and hivemind
 
 - type: entity
   parent: [BaseXenomorphOrgan, OrganReptilianStomach]

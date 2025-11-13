@@ -40,3 +40,8 @@
   parent: SurgeryStepInsertOrgan
   id: SurgeryStepInsertHypoport
   name: Add hypoport assembly
+
+- type: entity
+  parent: SurgeryStepInsertOrgan
+  id: SurgeryStepInsertTongue
+  name: Add tongue

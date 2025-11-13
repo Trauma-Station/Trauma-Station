@@ -20,6 +20,7 @@
       organs:
         brain: OrganHumanBrain
         eyes: OrganHumanEyes
+        tongue: OrganHumanTongue # Trauma
     chest:
       part: ChestReptilian
       organs:

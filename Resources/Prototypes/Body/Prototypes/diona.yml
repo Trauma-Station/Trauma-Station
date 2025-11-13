@@ -21,6 +21,7 @@
       organs:
         brain: OrganDionaBrainNymph
         eyes: OrganDionaEyes # Trauma
+        tongue: OrganDionaTongue # Trauma
     chest:
       part: ChestDiona
       connections:

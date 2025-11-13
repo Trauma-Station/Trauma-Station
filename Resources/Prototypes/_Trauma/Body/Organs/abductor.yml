@@ -1,0 +1,9 @@
+- type: entity
+  parent: OrganHumanTongue
+  id: OrganAbductorTongue
+  name: superlingual matrix
+  description: A mysterious structure that allows for instant communication between users. Pretty impressive until you need to eat something.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Species/Abductor/organs.rsi
+  # TODO: grant abductor glorpmind and language

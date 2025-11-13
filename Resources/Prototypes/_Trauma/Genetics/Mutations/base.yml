@@ -30,4 +30,5 @@
   id: BaseMutationAction
   components:
   - type: Action
+    itemIconStyle: BigAction # mutations don't have sprites, only show the action icon
     raiseOnAction: true # don't want to shit up the body entity with a bunch of action related components

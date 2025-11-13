@@ -21,6 +21,7 @@
       organs:
         brain: OrganHumanBrain
         eyes: OrganHumanEyes
+        tongue: OrganHumanTongue # Trauma
     chest:
       part: ChestGingerbread
       connections:

@@ -16,6 +16,7 @@
       organs:
         brain: OrganAbductorBrain
         eyes: OrganAbductorEyes
+        tongue: OrganAbductorTongue # Trauma
     chest:
       part: ChestAbductor
       connections:

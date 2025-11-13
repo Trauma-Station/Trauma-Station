@@ -280,6 +280,13 @@
   components:
   - type: Sprite
     state: tongue
+  # <Trauma>
+  - type: Tongue
+  - type: Organ
+    slotId: tongue
+    onRemove: # yeah this is awful but muting needs to be refactored
+    - type: Muted
+  # </Trauma>
   - type: Tag # Goob
     tags:
     - Meat

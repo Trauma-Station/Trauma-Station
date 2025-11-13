@@ -181,6 +181,8 @@ MutationTelepathy-mutated = You hear your thoughts echo in your mind.
 MutationTelepathy-removed = You don't hear your mind echo anymore.
 
 MutationTongueSpike-mutated = You feel like you can throw your voice.
+MutationTongueSpike-popup-no-organ = You don't have a {$organ} to shoot!
+MutationTongueSpike-popup-revert = {CAPITALIZE(THE($child))} cracks and twists, changing shape!
 
 MutationChemSpike-mutated = You feel like you can really connect with people by throwing your voice.
 

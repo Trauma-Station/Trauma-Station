@@ -17,6 +17,8 @@
       part: HeadSlime
       connections:
       - chest
+      organs: # Trauma
+        tongue: OrganSlimeTongue
     chest:
       part: ChestSlime
       connections:

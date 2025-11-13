@@ -10,6 +10,7 @@
       organs:
         brain: OrganXenomorphBrain
         eyes: OrganXenomorphEyes
+        tongue: OrganXenomorphTongue # Trauma
         hive_node: OrganXenomorphHiveNode
         neurotoxin_gland: OrganXenomorphNeurotoxinGland
         acid_gland: OrganXenomorphAcidGland

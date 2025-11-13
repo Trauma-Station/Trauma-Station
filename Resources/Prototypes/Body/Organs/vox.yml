@@ -92,7 +92,7 @@
     heldPrefix: eyeballs
 
 - type: entity
-  id: OrganVoxTongueA
+  id: OrganVoxTongue # Trauma - why the fuck were there 2 of the exact same tongue
   parent: OrganHumanTongue
   name: tongue
   description: "A fleshy muscle mostly used for screaming."
@@ -103,6 +103,7 @@
     size: Small
 
 - type: entity
+  abstract: true # trauma - why the fuck were there 2 of the exact same tongue
   id: OrganVoxTongueB
   parent: OrganHumanTongue
   name: tongue

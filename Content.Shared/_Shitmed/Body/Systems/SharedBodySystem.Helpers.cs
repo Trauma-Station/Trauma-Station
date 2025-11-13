@@ -12,7 +12,7 @@ public partial class SharedBodySystem
     /// <summary>
     /// Finds the first body part matching a given type and symmetry.
     /// </summary>
-    public Entity<BodyPartComponent>? FindPart(Entity<BodyComponent> body, BodyPartType partType, BodyPartSymmetry? symmetry = null)
+    public Entity<BodyPartComponent>? FindPart(Entity<BodyComponent?> body, BodyPartType partType, BodyPartSymmetry? symmetry = null)
     {
         foreach (var (uid, comp) in GetBodyChildrenOfType(body, partType, body.Comp, symmetry))
         {

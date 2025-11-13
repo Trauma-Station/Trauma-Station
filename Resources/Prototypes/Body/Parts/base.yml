@@ -194,6 +194,8 @@
         id: brain
       eyes:
         id: eyes
+      tongue: # Trauma
+        id: tongue
   - type: Input
     context: "ghost"
   # <Shitmed>

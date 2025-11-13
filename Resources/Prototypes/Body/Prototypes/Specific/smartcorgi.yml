@@ -9,6 +9,8 @@
       - groin
       organs:
         brain: OrganHumanBrain # feels strange but it is what it is
+        eyes: OrganHumanEyes # Trauma
+        tongue: OrganHumanTongue # Trauma
         lungs: OrganAnimalLungs
         stomach: OrganAnimalStomach
         liver: OrganAnimalLiver

@@ -13,3 +13,19 @@
     forced: true
     inventory: Drop
     polymorphSound: /Audio/Animals/mouse_squeak.ogg
+
+- type: polymorph
+  id: TongueSpike
+  configuration:
+    entity: TongueSpike
+    forced: true
+    polymorphPopup: null
+    exitPolymorphPopup: MutationTongueSpike-popup-revert
+
+- type: polymorph
+  id: TongueSpikeChem
+  configuration:
+    entity: TongueSpikeChem
+    forced: true
+    polymorphPopup: null
+    exitPolymorphPopup: MutationTongueSpike-popup-revert

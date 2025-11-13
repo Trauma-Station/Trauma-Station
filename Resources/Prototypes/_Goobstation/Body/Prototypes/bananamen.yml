@@ -24,6 +24,7 @@
       organs:
         brain: OrganHumanBrain
         eyes: OrganHumanEyes # Trauma - it had none
+        tongue: OrganHumanTongue # Trauma
     chest:
       part: ChestHuman
       connections:

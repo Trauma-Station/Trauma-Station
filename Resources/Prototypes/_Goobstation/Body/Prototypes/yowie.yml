@@ -28,6 +28,8 @@
       - chest
       organs:
         brain: OrganHumanBrain
+        eyes: OrganHumanEyes # Trauma
+        tongue: OrganHumanTongue # Trauma
     chest:
       part: ChestYowie
       connections:

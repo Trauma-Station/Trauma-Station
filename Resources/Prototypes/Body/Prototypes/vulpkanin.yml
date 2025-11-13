@@ -10,6 +10,7 @@
       organs:
         brain: OrganHumanBrain
         eyes: OrganHumanEyes
+        tongue: OrganHumanTongue # Trauma
     # <Trauma> - torso -> chest + groin
     chest:
       part: ChestVulpkanin
