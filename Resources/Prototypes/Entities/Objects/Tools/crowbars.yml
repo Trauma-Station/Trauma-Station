@@ -136,7 +136,7 @@
     - Belt
   - type: Item
     sprite: Objects/Tools/crowbar.rsi
-    size: Small
+    size: Small # Trauma, OBJECTS THAT IVE SHOVED UP MY GROIN CAVITY
   - type: Tweezers # Shitmed
     speed: 0.55
   - type: SurgeryTool # Shitmed
