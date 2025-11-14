@@ -60,22 +60,22 @@
       - type: Abductor
       - type: ActionGrant
         actions:
-          - ActionReturnToShip
+        - ActionReturnToShip
       - type: NpcFactionMember
         factions:
-          - SimpleHostile
+        - SimpleHostile
       - type: RandomMetadata
         nameSegments:
-          - AbductorScientistPrefix
-          - AbductorNames
+        - AbductorScientistPrefix
+        - AbductorNames
         nameFormat: name-format-standard
       - type: Tag
         tags:
-          - Abductor
-          - AbductorScientist
-          - CanPilot
-          - FootstepSound
-          - DoorBumpOpener
+        - Abductor
+        - AbductorScientist
+        - CanPilot
+        - FootstepSound
+        - DoorBumpOpener
       - type: AbductorScientist
       - type: SurgeryIgnoreClothing
       - type: Sanitized
@@ -99,19 +99,19 @@
       - type: Abductor
       - type: ActionGrant
         actions:
-          - ActionReturnToShip
+        - ActionReturnToShip
       - type: NpcFactionMember
         factions:
-          - SimpleHostile
+        - SimpleHostile
       - type: RandomMetadata
         nameSegments:
-          - AbductorAgentPrefix
-          - AbductorNames
+        - AbductorAgentPrefix
+        - AbductorNames
         nameFormat: name-format-standard
       - type: Tag
         tags:
           - Abductor
-          - AbductorScientist # Trauma - stop agent being a cuck
+          - AbductorScientist
           - CanPilot
           - FootstepSound
           - DoorBumpOpener
