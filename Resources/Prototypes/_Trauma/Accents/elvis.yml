@@ -1,0 +1,12 @@
+- type: accent
+  id: Elvis
+  wordReplacements:
+    accent-elvis-words-1: accent-elvis-words-replace-1
+    accent-elvis-words-2: accent-elvis-words-replace-2
+    accent-elvis-words-3: accent-elvis-words-replace-3
+    accent-elvis-words-4: accent-elvis-words-replace-4
+    accent-elvis-words-5-a: accent-elvis-words-replace-5
+    accent-elvis-words-5-b: accent-elvis-words-replace-5
+    accent-elvis-words-6: accent-elvis-words-replace-6
+    accent-elvis-words-7: accent-elvis-words-replace-7
+    accent-elvis-words-8: accent-elvis-words-replace-8

@@ -233,3 +233,28 @@
     visualType: Medium
     messages:
     - entity-effect-popup-head-regrown
+
+- type: entityEffect
+  id: MutationElvisDance
+  effects:
+  - !type:PopupMessage
+    type: Pvs
+    visualType: Small
+    messages:
+    - MutationElvis-popup-dance-1
+    - MutationElvis-popup-dance-2
+    - MutationElvis-popup-dance-3
+    - MutationElvis-popup-dance-4
+    - MutationElvis-popup-dance-5
+    - MutationElvis-popup-dance-6
+    - MutationElvis-popup-dance-7
+    - MutationElvis-popup-dance-8
+    - MutationElvis-popup-dance-9
+    - MutationElvis-popup-dance-10
+    - MutationElvis-popup-move-1
+    - MutationElvis-popup-move-2
+    - MutationElvis-popup-move-3
+    - MutationElvis-popup-move-4
+    - MutationElvis-popup-move-5
+    - MutationElvis-popup-move-6
+    - MutationElvis-popup-move-7

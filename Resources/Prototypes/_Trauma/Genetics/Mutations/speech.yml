@@ -28,7 +28,8 @@
   - type: RemovesMutation
     removes:
     - MutationWacky
-  # TODO
+  - type: ReplacementAccent
+    accent: Heckacious # not the same as ss13 but dear god im not writing all that byond shitcode
 
 # fun fact: mimes can take this then remove it to speak with vow intact
 - type: entity
@@ -70,14 +71,28 @@
   id: MutationChav
   name: Chav
   description: Unknown
-  # TODO
+  components:
+  - type: BritishAccent
 
 - type: entity
-  parent: BaseFreeMutation
+  parent: [ BaseFreeMutation, BaseTriggerMutation ]
   id: MutationElvis
   name: Elvis
   description: "A terrifying mutation named after its 'patient-zero'."
-  # TODO: accent and randomly emote moving hips / busting out moves
+  components:
+  - type: ReplacementAccent
+    accent: Elvis
+  - type: RandomTrigger
+    prob: 0.075 # 7.5%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        conditions:
+        - !type:NestedCondition
+          proto: IsAwake
+        proto: MutationElvisDance
+  # TODO: randomly emote moving hips / busting out moves
 
 - type: entity
   parent: BaseFreeMutation
@@ -92,9 +107,7 @@
   name: Medieval
   description: A horrible mutation originating from the distant past, thought to have once been a common gene in all of old world Europe.
   components:
-  - type: ComponentMutation
-    added:
-    - type: MedievalAccent
+  - type: MedievalAccent
 
 - type: entity
   parent: BaseFreeMutation
