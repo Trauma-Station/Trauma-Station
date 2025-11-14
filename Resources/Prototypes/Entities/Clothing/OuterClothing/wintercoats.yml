@@ -159,7 +159,7 @@
       Durathread: 50
 
 - type: entity
-  parent: [ ClothingOuterStorageToggleableBase, ClothingOuterWinterCoat ]
+  parent: [ ClothingOuterWinterCoat, ClothingOuterStorageToggleableBase ] # Trauma - winter coat first to preserve armor
   id: ClothingOuterWinterCoatToggleable
   name: winter coat with hood
   categories: [ HideSpawnMenu ]
