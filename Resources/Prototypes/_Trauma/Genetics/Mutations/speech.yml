@@ -64,7 +64,14 @@
   id: MutationSwedish
   name: Swedish
   description: A horrible mutation originating from the distant past. Thought to be eradicated after the incident in 2037.
-  # TODO
+  components:
+  - type: CharactersAccent
+    chars:
+      w: [ "v" ]
+      j: [ "y" ]
+      b: [ "bj" ]
+      a: [ "å", "ä", "æ", "a" ]
+      o: [ "ö", "ø", "o" ]
 
 - type: entity
   parent: BaseFreeMutation
