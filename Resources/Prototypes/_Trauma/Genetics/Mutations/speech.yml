@@ -13,7 +13,10 @@
   id: MutationWacky
   name: Wacky
   description: You are not a clown. You are the entire circus.
-  # TODO: set speech font to comic sans, also give this to clown
+  components:
+  - type: SpeechFontOverride
+    font: LDFComicSans
+    sourceOnly: false
 
 - type: entity
   parent: BaseFreeMutation

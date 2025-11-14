@@ -5,6 +5,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Speech;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Movement;
+using Content.Trauma.Common.Speech;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
 
@@ -24,13 +25,14 @@ public sealed class MutationRelaySystem : EntitySystem
         SubscribeLocalEvent<MutatableComponent, DamageModifyEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, GetUserMeleeDamageEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, AccentGetEvent>(RelayEvent);
+        SubscribeLocalEvent<MutatableComponent, SpeechFontOverrideEvent>(RelayEvent);
     }
 
     public void RelayEvent<T>(Entity<MutatableComponent> ent, ref T args) where T: notnull
     {
         foreach (var uid in ent.Comp.Mutations.Values)
         {
-            RaiseLocalEvent(uid, args);
+            RaiseLocalEvent(uid, ref args);
         }
     }
 }

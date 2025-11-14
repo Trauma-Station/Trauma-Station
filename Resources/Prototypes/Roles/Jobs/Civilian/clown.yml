@@ -146,6 +146,8 @@
     - type: SleepEmitSound
       snore: /Audio/Voice/Misc/silly_snore.ogg
       interval: 10
+    - type: SpeechFontOverride # Trauma - ss13 parity
+      font: LDFComicSans
   - !type:AddImplantSpecial
     implants: [ SadTromboneImplant ]
 
