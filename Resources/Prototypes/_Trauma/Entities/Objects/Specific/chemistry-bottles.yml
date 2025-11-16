@@ -1,0 +1,14 @@
+- type: entity
+  id: ChemistryBottleBananadine
+  suffix: bananadine
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-bananadine
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Bananadine
+          Quantity: 30
