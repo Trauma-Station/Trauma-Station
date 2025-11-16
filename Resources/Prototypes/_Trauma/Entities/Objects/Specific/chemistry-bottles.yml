@@ -1,7 +1,7 @@
 - type: entity
+  parent: BaseChemistryBottleFilled
   id: ChemistryBottleBananadine
   suffix: bananadine
-  parent: BaseChemistryBottleFilled
   components:
   - type: Label
     currentLabel: reagent-name-bananadine
