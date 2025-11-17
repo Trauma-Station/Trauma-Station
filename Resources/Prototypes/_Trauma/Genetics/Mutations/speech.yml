@@ -124,4 +124,5 @@
   id: MutationPigLatin
   name: Pig Latin
   description: Historians say back in the 2020's humanity spoke entirely in this mystical language.
-  # TODO
+  components:
+  - type: PigLatinAccent
