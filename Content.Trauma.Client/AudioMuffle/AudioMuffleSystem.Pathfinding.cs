@@ -29,17 +29,15 @@ public sealed partial class AudioMuffleSystem
         if (distance >= AudioRange)
         {
             Log.Debug("Tree expansion: range exceeds limit - rebuilding tree");
-            Expand(newPos, false);
+            Expand(newPos);
             return;
         }
-
-        var reverseDist = AudioRange - distance;
 
         if (!TileDataDict.TryGetValue(oldPos, out var oldData) || oldData.Previous != null ||
             !TileDataDict.TryGetValue(newPos, out var newData))
         {
             Log.Error("Tree expansion: node not found or is invalid - rebuilding tree");
-            Expand(newPos, false);
+            Expand(newPos);
             return;
         }
 
@@ -52,7 +50,7 @@ public sealed partial class AudioMuffleSystem
             if (!TrySwapPrev(cur, newPrev, out var nextTile))
             {
                 Log.Error("Tree expansion: reconstructing path failed - rebuilding tree");
-                Expand(newPos, false);
+                Expand(newPos);
                 return;
             }
 
@@ -64,7 +62,7 @@ public sealed partial class AudioMuffleSystem
             if (!TileDataDict.TryGetValue(nextTile.Value, out cur))
             {
                 Log.Error("Tree expansion: reconstructing path failed - rebuilding tree");
-                Expand(newPos, false);
+                Expand(newPos);
                 return;
             }
         }
@@ -72,7 +70,7 @@ public sealed partial class AudioMuffleSystem
         if (!cur.Equals(oldData))
         {
             Log.Error("Tree expansion: reconstructing path failed - rebuilding tree");
-            Expand(newPos, false);
+            Expand(newPos);
             return;
         }
 
@@ -83,7 +81,7 @@ public sealed partial class AudioMuffleSystem
             Log.Debug("Tree expansion: node expansion failed - rebuilding tree");
             if (reExpand.Contains(newData))
             {
-                Expand(newPos, false);
+                Expand(newPos);
                 return;
             }
 
@@ -93,7 +91,7 @@ public sealed partial class AudioMuffleSystem
                 if (invalidated.Contains(node.Indices))
                     continue;
 
-                RewriteAndReExpand(node, invalidated, false);
+                RewriteAndReExpand(node, invalidated);
             }
         }
 

@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Ghost;
 using Content.Shared.Physics;
 using Content.Trauma.Shared.AudioMuffle;
@@ -13,7 +12,6 @@ using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Player;
@@ -60,6 +58,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     [ViewVariables]
     public readonly Dictionary<EntityUid, float> AudioVolumeDict = new();
 
+    // TODO: remove this?
     // Audio entity -> volume
     [ViewVariables]
     public readonly Dictionary<EntityUid, float> CachedMuffleVolumeDict = new();
@@ -86,11 +85,10 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     [ViewVariables]
     public Vector2i? OldPlayerTile;
 
-    private bool _muffleReset;
     private float _accumulator;
 
     private const float ResetDelay = 1f;
-    private const int AudioRange = 16;
+    private const int AudioRange = (int) SharedAudioSystem.DefaultSoundRange;
 
     public override void Initialize()
     {
@@ -137,7 +135,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     {
         base.Update(frameTime);
 
-        ResetAllPosAudio();
+        ResetAllPosAudio(null);
         ResetAllRaycastAudio();
 
         if (!_timing.IsFirstTimePredicted)
@@ -145,15 +143,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
         if (_accumulator >= ResetDelay)
         {
-            if (!_muffleReset)
-                return;
-
-            _accumulator = 0f;
-            _muffleReset = false;
-
-            if (ResolvePlayer() is { } player)
-                ResetImmediate(player, false);
-
             foreach (var audio in AudioToRemove)
             {
                 RemoveAudioMuffle(audio);
@@ -181,7 +170,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         var query = EntityQueryEnumerator<AudioComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var audio, out var xform))
         {
-            ReCalculateAudioMuffle(player, (uid, audio), _xform.GetMapCoordinates(uid, xform));
+            ReCalculateAudioMuffle(player, (uid, audio), _xform.GetMapCoordinates(uid, xform), null, false);
         }
     }
 
@@ -228,6 +217,12 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
     private void OnMove(ref MoveEvent ev)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        if (ev.OldPosition == ev.NewPosition)
+            return;
+
         if (ResolvePlayer() is not { } player)
             return;
 
@@ -282,7 +277,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         if (ResolvePlayer() is not { } player)
             return;
 
-        // ReCalculateAudioMuffle(player, obj.Owner, _xform.GetMapCoordinates(obj.Owner));
+        ReCalculateAudioMuffle(player, obj.Owner, _xform.GetMapCoordinates(obj.Owner));
     }
 
     private void OnEntDeleted(Entity<MetaDataComponent> obj)
@@ -312,17 +307,18 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             if (!_audioQuery.TryComp(ent.Value, out var audioComp))
                 continue;
 
+            float? volume = null;
+
             foreach (var change in states.ComponentChanges.Value)
             {
                 if (change.State is not AudioComponent.AudioComponent_AutoState state)
                     continue;
 
-                var contains = AudioVolumeDict.ContainsKey(ent.Value);
-                AudioVolumeDict[ent.Value] = state.Params.Volume;
-                if (!contains)
-                    ReCalculateAudioMuffle(player, ent.Value, _xform.GetMapCoordinates(ent.Value));
+                volume = state.Params.Volume;
                 break;
             }
+
+            ReCalculateAudioMuffle(player, (ent.Value, audioComp), _xform.GetMapCoordinates(ent.Value), volume);
         }
     }
 
@@ -381,7 +377,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 continue;
 
             blockers.Remove(blocker);
-            ResetAudioMuffle(audio, null);
+            // ResetAudioMuffle(audio, null);
 
             if (blockers.Count == 0)
                 ReverseSoundBlockerDict.Remove(audio);
@@ -391,10 +387,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     private void PlayerMoved(EntityUid player, MapCoordinates oldPos, MapCoordinates newPos)
     {
         if (newPos == MapCoordinates.Nullspace)
-        {
-            ResetMuffle();
             return;
-        }
 
         if (oldPos.MapId != newPos.MapId || !Exists(PlayerGrid))
         {
@@ -446,7 +439,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
                 ResetAllPosAudio();
                 ResetAllRaycastAudio();
-                ResetMuffle();
                 return;
             }
 
@@ -461,12 +453,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
         ResetAllPosAudio();
         ResetAllRaycastAudio();
-        ResetMuffle();
-    }
-
-    private void ResetMuffle()
-    {
-        _muffleReset = true;
     }
 
     // TODO: Add TransformComponent to Entity<T?>
@@ -550,14 +536,12 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         }
 
         var center = aabb.Value.Center;
-        var vec = new Robust.Shared.Maths.Vector3(center - pos.Position);
+        var vec = center - pos.Position;
         var list = new List<Vector2>
             { aabb.Value.BottomLeft, aabb.Value.BottomRight, aabb.Value.TopLeft, aabb.Value.TopRight };
         foreach (var point in list)
         {
-            var angle = Robust.Shared.Maths.Vector3.CalculateAngle(
-                new Robust.Shared.Maths.Vector3(point - pos.Position),
-                vec);
+            var angle = AngleBetween(point - pos.Position, vec);
             minAngleTheta = MathF.Min(minAngleTheta, angle);
             maxAngleTheta = MathF.Max(maxAngleTheta, angle);
         }
@@ -639,10 +623,9 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             else
                 data.Add((dir, key));
 
-            if (!value.Contains(blocker))
-                value.Add(blocker);
+            value.Add(blocker);
 
-            ResetAudioMuffle(key, null);
+            // ResetAudioMuffle(key, null);
         }
 
         foreach (var remove in toRemove)
@@ -651,7 +634,11 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         }
     }
 
-    private void ReCalculateAudioMuffle(EntityUid player, Entity<AudioComponent?> audio, MapCoordinates audioPos)
+    private void ReCalculateAudioMuffle(EntityUid player,
+        Entity<AudioComponent?> audio,
+        MapCoordinates audioPos,
+        float? volume = null,
+        bool reset = true)
     {
         if (!Resolve(audio, ref audio.Comp, false))
             return;
@@ -671,7 +658,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             {
                 if (audioIndices == oldIndices)
                 {
-                    ResetAudioMuffle(audio, null);
+                    ResetAudioMuffle(audio, volume, reset, true);
                     return;
                 }
 
@@ -688,7 +675,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 audioSet.Add(audio);
             else
                 ReverseAudioPosDict[audioIndices] = new HashSet<EntityUid> {audio};
-            ResetAudioMuffle(audio, null);
+
+            ResetAudioMuffle(audio, volume, reset, true);
             return;
         }
 
@@ -758,7 +746,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         else
             ReverseSoundBlockerDict[audio] = hashSet;
 
-        ResetAudioMuffle(audio, null);
+        ResetAudioMuffle(audio, volume, reset, true);
     }
 
     public Entity<MapGridComponent>? TryFindCommonPlayerGrid(MapCoordinates pos, MapCoordinates other)
@@ -809,20 +797,35 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         }
     }
 
-    private void ResetAudioMuffle(Entity<AudioComponent?> audio, float? volume)
+    private void ResetAudioMuffle(Entity<AudioComponent?> audio, float? volume, bool reset = true, bool ignoreNonPlaying = false)
     {
         if (!Exists(audio) || !Resolve(audio, ref audio.Comp, false))
             return;
 
-        if (audio.Comp.Global || ! audio.Comp.Playing)
+        if (audio.Comp.Global)
             return;
 
-        if (volume != null)
+        if (!ignoreNonPlaying)
+        {
+            if (!audio.Comp.Playing)
+                return;
+
+            var offset = ((audio.Comp.PauseTime ?? _timing.CurTime) - audio.Comp.AudioStart).TotalSeconds;
+            if (offset < SharedAudioSystem.AudioDespawnBuffer)
+                return;
+        }
+
+        if (volume != null && !Single.IsInfinity(volume.Value))
             AudioVolumeDict[audio] = volume.Value;
         else if (!AudioVolumeDict.ContainsKey(audio))
-            AudioVolumeDict.Add(audio, audio.Comp.Volume);
+        {
+            if (Single.IsInfinity(audio.Comp.Params.Volume))
+                return;
+            AudioVolumeDict.Add(audio, audio.Comp.Params.Volume);
+        }
 
-        if (ResolvePlayer() is not { } player)
+        if (!reset || audio.Comp.State == AudioState.Stopped || !audio.Comp.Loaded ||
+            ResolvePlayer() is not { } player)
             return;
 
         var muffleLevel = 0f;
@@ -878,7 +881,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     private void ResetAllRaycastAudio()
     {
         var toRemove = new List<EntityUid>();
-        foreach (var (audio, pos) in ReverseSoundBlockerDict)
+        foreach (var audio in ReverseSoundBlockerDict.Keys)
         {
             if (!Exists(audio))
             {
@@ -1026,8 +1029,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         if (!Resolve(audio, ref audio.Comp, false))
             return;
 
-        var newVolume = volume;
-
         switch (muffleLevel)
         {
             case <= 0f:
@@ -1041,8 +1042,18 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 break;
         }
 
-        _audio.SetVolume(audio, volume, audio);
         if (muffleLevel > 0f)
             CachedMuffleVolumeDict[audio] = volume;
+        else if (CachedMuffleVolumeDict.TryGetValue(audio, out var cached) &&
+            MathHelper.CloseToPercent(cached, audio.Comp.Params.Volume))
+            return;
+
+        _audio.SetVolume(audio, volume, audio);
+    }
+
+    private float AngleBetween(Vector2 a, Vector2 b)
+    {
+        var div = a.Length() * b.Length();
+        return MathHelper.CloseToPercent(div, 0f) ? 0f : MathF.Acos(Vector2.Dot(a, b) / div);
     }
 }
