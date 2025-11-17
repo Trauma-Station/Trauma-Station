@@ -20,6 +20,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     public event Action<uint>? OnWriteMutation;
     public event Action<uint>? OnJoker;
     public event Action<uint>? OnSequence;
+    public event Action<uint>? OnCombine;
 
     private EntityQuery<GeneticsConsoleComponent> _query;
     private EntityQuery<MobStateComponent> _mobQuery;
@@ -46,6 +47,8 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         Sequencer.OnWriteMutation += i => OnWriteMutation?.Invoke(i);
         Sequencer.OnJoker += i => OnJoker?.Invoke(i);
         Sequencer.OnSequence += i => OnSequence?.Invoke(i);
+
+        Combiner.OnCombine += i => OnCombine?.Invoke(i);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

@@ -12,9 +12,7 @@
     <BoxContainer Name="MobContainer" Orientation="Vertical" Visible="False">
         <!-- List of sequences available -->
         <controls:NanoHeading Text="{Loc 'genetics-console-sequences'}"/>
-        <ScrollContainer SetWidth="200">
-            <GridContainer Name="SequenceButtons" Columns="2" VerticalExpand="True"/> <!-- Populated at runtime -->
-        </ScrollContainer>
+        <genetics:SequenceButtons Name="SequenceButtons"/>
         <!-- Mutation Info -->
         <BoxContainer Name="SequenceInfo" Orientation="Vertical" VerticalExpand="True" Visible="False">
             <!-- Metadata -->

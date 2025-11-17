@@ -17,7 +17,7 @@ using System.Text;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
 
-public sealed class MutationSystem : EntitySystem
+public sealed partial class MutationSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
@@ -37,7 +37,7 @@ public sealed class MutationSystem : EntitySystem
     public int MutationCount;
 
     /// <summary>
-    /// All mutation ids which don't have <c>locked: true</c>.
+    /// All mutation ids which don't have <c>locked: true</c> and have no mutation recipe.
     /// </summary>
     public HashSet<EntProtoId<MutationComponent>> UnlockedMutations = new();
 
@@ -92,11 +92,11 @@ public sealed class MutationSystem : EntitySystem
         foreach (var (id, chance) in ent.Comp.DefaultMutations)
         {
             if (_random.Prob(chance))
-                AddMutation((ent, ent), id, automatic: true);
+                AddMutation(ent.AsNullable(), id, automatic: true);
         }
 
         // add enough random dormant mutations so there will be enough sequences.
-        while (ent.Comp.Dormant.Count < ScannedGenomeComponent.SequenceLimit)
+        while (ent.Comp.Dormant.Count < ent.Comp.MaxDormant)
         {
             ent.Comp.Dormant.Add(_random.Pick(UnlockedMutations));
             Dirty(ent);
@@ -167,6 +167,8 @@ public sealed class MutationSystem : EntitySystem
     {
         if (args.WasModified<EntityPrototype>())
             LoadPrototypes();
+        if (args.WasModified<MutationRecipePrototype>())
+            LoadRecipes();
     }
 
     private void LoadPrototypes()
@@ -181,7 +183,7 @@ public sealed class MutationSystem : EntitySystem
 
             MutationCount++;
             AllMutations[proto.ID] = comp;
-            if (!comp.Locked)
+            if (!comp.Locked && !HasRecipe(proto.ID))
                 UnlockedMutations.Add(proto.ID);
         }
     }

@@ -23,6 +23,7 @@ public sealed class GeneticsConsoleBUI : BoundUserInterface
         _window.OnWriteMutation += i => SendPredictedMessage(new GeneticsConsoleWriteMutationMessage(i));
         _window.OnJoker += i => SendPredictedMessage(new GeneticsConsoleJokerMessage(i));
         _window.OnSequence += i => SendPredictedMessage(new GeneticsConsoleSequenceMessage(i));
+        _window.OnCombine += i => SendPredictedMessage(new GeneticsConsoleCombineMessage(i));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

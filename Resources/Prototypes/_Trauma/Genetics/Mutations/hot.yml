@@ -7,9 +7,6 @@
   - type: Mutation
     instability: 10
     difficulty: 10
-    requires:
-    - MutationGeladikinesis
-    - MutationFierySweat
   - type: RemovesMutation
     removes:
     - MutationGeladikinesis
@@ -25,9 +22,6 @@
   - type: Mutation
     instability: 25
     difficulty: 12
-    requires:
-    - MutationCryokinesis
-    - MutationFierySweat
   - type: RemovesMutation
     removes:
     - MutationCryokinesis

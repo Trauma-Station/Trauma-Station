@@ -38,9 +38,6 @@
   components:
   - type: Mutation
     instability: 10
-    requires:
-    - MutationTongueSpike
-    - MutationStimmed
     conflicts: [] # uninherit
   - type: RemovesMutation
     removes:

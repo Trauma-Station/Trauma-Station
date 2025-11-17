@@ -1,0 +1,6 @@
+- type: mutationRecipe
+  id: HeckaciousLarincks
+  result: MutationHeckaciousLarincks
+  required:
+  - MutationWacky
+  - MutationStoner

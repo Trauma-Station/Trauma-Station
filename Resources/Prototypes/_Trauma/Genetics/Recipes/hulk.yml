@@ -1,0 +1,13 @@
+- type: mutationRecipe
+  id: Hulk
+  result: MutationHulk
+  required:
+  - MutationRadioactive
+  - MutationStrength
+
+- type: mutationRecipe
+  id: Ork
+  result: MutationOrk
+  required:
+  - MutationHulk
+  - MutationClumsy

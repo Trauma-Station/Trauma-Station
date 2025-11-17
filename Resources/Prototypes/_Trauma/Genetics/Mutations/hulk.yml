@@ -7,9 +7,6 @@
   - type: Mutation
     instability: 35
     difficulty: 16
-    requires:
-    - MutationRadioactive
-    - MutationStrength
     conflicts:
     - MutationOrk
   - type: ComponentMutation
@@ -26,9 +23,6 @@
   description: A mutation caused by a mixup of hulk genes which severely impacts speech centers in owners' brains.
   components:
   - type: Mutation
-    requires:
-    - MutationHulk
-    - MutationClumsy
     conflicts: [] # uninherit ork conflict
   - type: RemovesMutation
     removes:

@@ -24,13 +24,9 @@
   name: Heckacious Larincks
   description: duge what is WISH your words man...........
   components:
-  - type: Mutation
-    requires:
-    - MutationWacky
-    - MutationStoner
   - type: RemovesMutation
     removes:
-    - MutationWacky
+    - MutationStoner
   - type: ReplacementAccent
     accent: Heckacious # not the same as ss13 but dear god im not writing all that byond shitcode
 

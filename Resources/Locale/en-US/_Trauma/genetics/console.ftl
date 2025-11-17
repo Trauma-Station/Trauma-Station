@@ -5,6 +5,11 @@ genetics-console-chat-sequencing = SEQUENCING GENOME
 genetics-console-chat-sequence-failed = FAILED TO SEQUENCE GENOME
 genetics-console-chat-genetic-damage = GENOME IS DAMAGED BEYOND READABILITY
 genetics-console-chat-sequenced = SEQUENCING GENOME COMPLETE
+genetics-console-chat-combining = COMBINING MUTATIONS
+genetics-console-chat-combine-failed = MUTATION COMBINATION INTERRUPTED
+genetics-console-chat-combine-none = NO COMBINATION FOUND
+genetics-console-chat-combine-present = COMBINATION ALREADY PRESENT
+genetics-console-chat-combined = MUTATION COMBINATION COMPLETED
 
 genetics-console-damages-you = The sequencing fails catastrophically and damages your genome!
 genetics-console-damages-others = The genetics console fails catastrophically and damages the subject's genome!

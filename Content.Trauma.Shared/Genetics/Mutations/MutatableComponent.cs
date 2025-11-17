@@ -30,6 +30,12 @@ public sealed partial class MutatableComponent : Component
     public HashSet<EntProtoId<MutationComponent>> Dormant = new();
 
     /// <summary>
+    /// Maximum number of dormant mutations to pick on map init.
+    /// </summary>
+    [DataField]
+    public int MaxDormant = 8;
+
+    /// <summary>
     /// Add these mutations on map init, with a chance from 0-1.
     /// </summary>
     [DataField]

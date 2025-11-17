@@ -1,3 +1,5 @@
-<Control xmlns="https://spacestation14.io">
-    <Label Text="not done yet"/>
+<Control xmlns="https://spacestation14.io"
+        xmlns:genetics="clr-namespace:Content.Trauma.Client.Genetics.UI">
+    <genetics:SequenceButtons Name="SequenceButtons"/>
+    <Button Name="CombineButton" Text="Combine"/>
 </Control>

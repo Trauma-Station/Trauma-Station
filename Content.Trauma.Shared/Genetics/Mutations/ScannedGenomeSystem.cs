@@ -51,9 +51,10 @@ public sealed class ScannedGenomeSystem : EntitySystem
     {
         var scanned = EnsureComp<ScannedGenomeComponent>(mob);
         var mutatable = _mutatableQuery.Comp(mob);
+        var ent = (mob, scanned);
         foreach (var id in mutatable.Dormant)
         {
-            TryAddSequence(scanned, id);
+            TryAddSequence(ent, id);
         }
     }
 
@@ -70,9 +71,9 @@ public sealed class ScannedGenomeSystem : EntitySystem
     /// <summary>
     /// Adds a randomly generated sequence for a given mutation to the given genome.
     /// </summary>
-    public void TryAddSequence(ScannedGenomeComponent comp, EntProtoId<MutationComponent> id)
+    public void TryAddSequence(Entity<ScannedGenomeComponent?> ent, EntProtoId<MutationComponent> id)
     {
-        if (comp.Sequences.Count >= ScannedGenomeComponent.SequenceLimit ||
+        if (!_query.Resolve(ent, ref ent.Comp) ||
             !_mutation.AllMutations.TryGetValue(id, out var mutation) ||
             _mutation.GetRoundData(id) is not {} data)
         {
@@ -82,7 +83,7 @@ public sealed class ScannedGenomeSystem : EntitySystem
         // discovered sequences have no missing bases
         if (data.Discovered)
         {
-            comp.Sequences.Add(new Sequence
+            ent.Comp.Sequences.Add(new Sequence
             {
                 Mutation = id,
                 Bases = data.Bases
@@ -124,7 +125,7 @@ public sealed class ScannedGenomeSystem : EntitySystem
                 TryX(i + 1);
             }
         }
-        comp.Sequences.Add(new Sequence
+        ent.Comp.Sequences.Add(new Sequence
         {
             Mutation = id,
             Bases = _builder.ToString()

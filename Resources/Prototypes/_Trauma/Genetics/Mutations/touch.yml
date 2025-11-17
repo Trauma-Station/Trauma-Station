@@ -7,9 +7,6 @@
   - type: Mutation
     instability: 25
     difficulty: 16
-    requires:
-    - MutationInsulated # does tg remove this?
-    - MutationRadioactive
   - type: ActionMutation
     action: ActionMutationShockTouch
 

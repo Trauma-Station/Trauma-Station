@@ -26,11 +26,8 @@ public sealed partial class GeneticSequencer : Control
     public event Action<uint>? OnSequence;
 
     private EntityQuery<ScannedGenomeComponent> _scannedQuery;
-    private List<SequenceState> _sequences = new();
-    private List<BaseButton> _buttons = new();
     private EntityUid? _mob;
     private bool _busy;
-    private uint? _selected;
 
     public GeneticSequencer()
     {
@@ -42,36 +39,32 @@ public sealed partial class GeneticSequencer : Control
 
         Puzzle.OnSetBase += (i, b) =>
         {
-            if (_selected is {} s)
+            if (SequenceButtons.Index is {} s)
                 OnSetBase?.Invoke(s, i, b);
         };
         Puzzle.OnJoker += () =>
         {
-            if (_selected is {} s)
+            if (SequenceButtons.Index is {} s)
                 OnJoker?.Invoke(s);
         };
         Puzzle.OnSequence += () =>
         {
-            if (_selected is {} s)
+            if (SequenceButtons.Index is {} s)
                 OnSequence?.Invoke(s);
         };
 
         ScanButton.OnPressed += _ => OnScan?.Invoke();
         WriteButton.OnPressed += _ =>
         {
-            if (_selected is {} s)
+            if (SequenceButtons.Index is {} s)
                 OnWriteMutation?.Invoke(s);
         };
 
-        OnSelectSequence += sel =>
+        SequenceButtons.OnSelected += i =>
         {
-            for (int i = 0; i < _buttons.Count; i++)
-            {
-                var index = (uint) i;
-                _buttons[i].Pressed = sel == index;
-            }
+            UpdateSequence();
+            OnSelectSequence?.Invoke(i);
         };
-        OnSelectSequence += _ => UpdateSequence();
     }
 
     public void SetMob(EntityUid? mob)
@@ -116,50 +109,14 @@ public sealed partial class GeneticSequencer : Control
         UpdateScanButton(mob);
     }
 
-    private void UpdateSequences()
-    {
-        _buttons.Clear();
-        SequenceButtons.RemoveAllChildren();
-        for (int i = 0; i < _sequences.Count; i++)
-        {
-            var sequence = _sequences[i];
-            var index = (uint) i;
-            var button = new Button()
-            {
-                // TODO: use a wrapping shader or something to do helix animated button
-                Text = sequence.Number.ToString(),
-                ToggleMode = true,
-                HorizontalExpand = true
-            };
-            button.Pressed = i == _selected;
-            button.OnPressed += _ => SelectSequence(index);
-            /*button.AddChild(new Label()
-            {
-                Text = sequence.Number.ToString(),
-                HorizontalAlignment = HAlignment.Center
-            });*/
-            _buttons.Add(button);
-            SequenceButtons.AddChild(button);
-        }
-    }
-
-    private void SelectSequence(uint? i)
-    {
-        if (i == _selected) i = null;
-
-        _selected = i;
-        OnSelectSequence?.Invoke(i);
-    }
-
     private void UpdateSequence()
     {
-        SequenceInfo.Visible = _selected != null;
+        SequenceInfo.Visible = SequenceButtons.Index != null;
         NoSequence.Visible = !SequenceInfo.Visible;
         Puzzle.Visible = SequenceInfo.Visible;
-        if (_selected is not {} selected || selected >= _sequences.Count)
+        if (SequenceButtons.Sequence is not {} sequence)
             return;
 
-        var sequence = _sequences[(int) selected];
         Puzzle.SetSequenced(sequence.Mutation != null);
         if (sequence.Mutation is {} id)
         {
@@ -189,7 +146,7 @@ public sealed partial class GeneticSequencer : Control
 
     public void SetState(List<SequenceState> states)
     {
-        _sequences = states;
+        SequenceButtons.SetStates(states);
         var scanned = _mob != null && _scannedQuery.HasComp(_mob);
         if (states.Count == 0 && scanned)
         {
@@ -200,7 +157,7 @@ public sealed partial class GeneticSequencer : Control
         if (scanned)
             SetError(null);
 
-        UpdateSequences();
+        SequenceButtons.UpdateSequences();
         UpdateSequence();
     }
 }

@@ -8,5 +8,7 @@ namespace Content.Trauma.Client.Genetics.UI;
 [GenerateTypedNameReferences]
 public sealed partial class GeneticCombiner : Control
 {
+    public event Action<uint>? OnCombine;
+
     // TODO
 }

@@ -226,9 +226,6 @@
   components:
   - type: Mutation
     instability: 10
-    requires:
-    - MutationGlowy
-    - MutationVoidMagnet
   - type: RemovesMutation
     removes:
     - MutationGlowy
@@ -389,9 +386,6 @@
   components:
   - type: Mutation
     instability: -40
-    requires:
-    - MutationStrong
-    - MutationStimmed
   # TODO
 
 - type: entity
@@ -456,9 +450,6 @@
   - type: Mutation
     instability: 35
     conflicts: [] # uninherit conflicts so it doesn't conflict with itself
-    requires:
-    - MutationRockEater
-    - MutationStoner
   - type: RemovesMutation
     removes:
     - MutationRockEater

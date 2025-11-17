@@ -14,6 +14,7 @@ namespace Content.Trauma.Shared.Genetics.Console;
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(GeneticsConsoleSystem))]
 [AutoGenerateComponentState(fieldDeltas: true)]
+[AutoGenerateComponentPause]
 public sealed partial class GeneticsConsoleComponent : Component
 {
     /// <summary>
@@ -27,6 +28,12 @@ public sealed partial class GeneticsConsoleComponent : Component
     /// </summary>
     [DataField]
     public FixedPoint2 MaxGeneticDamage = 90;
+
+    /// <summary>
+    /// Used to prevent scanning/sequencing/etc at the same time.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Busy;
 
     #region Scanning
 
@@ -83,10 +90,10 @@ public sealed partial class GeneticsConsoleComponent : Component
     public SoundSpecifier? SequenceFailSound;
 
     /// <summary>
-    /// Used to prevent scanning/sequencing at the same time.
+    /// Research points given when sequencing a mutation for the first time this round, scaled by its difficulty.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool Busy;
+    [DataField]
+    public int PointsPerDifficulty = 1000;
 
     #endregion
 
@@ -104,8 +111,30 @@ public sealed partial class GeneticsConsoleComponent : Component
     [DataField]
     public TimeSpan WriteDelay = TimeSpan.FromSeconds(2);
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextWrite = TimeSpan.Zero;
+
+    #endregion
+
+    #region Combining
+
+    /// <summary>
+    /// Sound played when combining mutations.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? CombineSound;
+
+    /// <summary>
+    /// How long the combining doafter is.
+    /// </summary>
+    [DataField]
+    public TimeSpan CombineDelay = TimeSpan.FromSeconds(10);
+
+    /// <summary>
+    /// Damage dealt to the mob when combining a new mutation.
+    /// </summary>
+    [DataField]
+    public DamageSpecifier CombineDamage;
 
     #endregion
 
@@ -126,7 +155,7 @@ public sealed partial class GeneticsConsoleComponent : Component
     /// <summary>
     /// How long you have to wait before printing another mutator/activator.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextPrint = TimeSpan.Zero;
 
     #endregion
@@ -186,10 +215,18 @@ public sealed partial class GeneticsConsoleWriteMutationMessage(uint index) : Bo
 /// Message to print a mutator or activator from the current disk's mutation.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class GeneticsConsolePrintMessage(bool activator, Chromosome chromosome) : BoundUserInterfaceMessage
+public sealed partial class GeneticsConsolePrintMessage(bool activator) : BoundUserInterfaceMessage
 {
     public readonly bool Activator = activator;
-    public readonly Chromosome Chromosome = chromosome;
+}
+
+/// <summary>
+/// Message to create a new combined mutation from the current disk's mutation and a selected mutation on the mob.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class GeneticsConsoleCombineMessage(uint index) : BoundUserInterfaceMessage
+{
+    public readonly uint Index = index;
 }
 
 /// <summary>

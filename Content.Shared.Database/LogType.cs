@@ -617,4 +617,9 @@ public enum LogType
     /// Antag objective info.
     /// </summary>
     AntagObjective = 10004, // Goobstation
+
+    /// <summary>
+    /// Trauma - Genetics related logs.
+    /// </summary>
+    Genetics = 20001,
 }

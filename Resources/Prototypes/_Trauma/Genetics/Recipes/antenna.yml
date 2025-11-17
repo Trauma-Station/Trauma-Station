@@ -1,0 +1,6 @@
+- type: mutationRecipe
+  id: MindReader
+  result: MutationMindReader
+  required:
+  - MutationAntenna
+  - MutationParanoia

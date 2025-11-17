@@ -1,5 +1,7 @@
+using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Content.Shared.Power.EntitySystems;
@@ -11,17 +13,19 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 using System.Text;
 
 namespace Content.Trauma.Shared.Genetics.Console;
 
-// TODO: admin log actions
 public sealed class GeneticsConsoleSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly GeneticsDiskSystem _disk = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly MutationSystem _mutation = default!;
     [Dependency] private readonly ScannedGenomeSystem _genome = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -50,6 +54,8 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         SubscribeLocalEvent<GeneticsConsoleComponent, DoAfterAttemptEvent<ScanDoAfterEvent>>(OnScanCheck);
         SubscribeLocalEvent<GeneticsConsoleComponent, SequenceDoAfterEvent>(OnSequenceDoAfter);
         SubscribeLocalEvent<GeneticsConsoleComponent, DoAfterAttemptEvent<SequenceDoAfterEvent>>(OnSequenceCheck);
+        SubscribeLocalEvent<GeneticsConsoleComponent, CombineDoAfterEvent>(OnCombineDoAfter);
+        SubscribeLocalEvent<GeneticsConsoleComponent, DoAfterAttemptEvent<CombineDoAfterEvent>>(OnCombineCheck);
         SubscribeLocalEvent<GeneticsConsoleComponent, AfterActivatableUIOpenEvent>(OnUIOpened);
 
         Subs.BuiEvents<GeneticsConsoleComponent>(GeneticsConsoleUiKey.Key, subs =>
@@ -59,6 +65,8 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             subs.Event<GeneticsConsoleJokerMessage>(OnJoker);
             subs.Event<GeneticsConsoleSequenceMessage>(OnSequence);
             subs.Event<GeneticsConsoleWriteMutationMessage>(OnWriteMutation);
+            subs.Event<GeneticsConsoleCombineMessage>(OnCombine);
+            subs.Event<GeneticsConsolePrintMessage>(OnPrint);
         });
     }
 
@@ -131,6 +139,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             return;
         }
 
+        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{ToPrettyString(mob)} was scanned by {ToPrettyString(args.User)} with console {ToPrettyString(ent)}");
         _audio.PlayPredicted(ent.Comp.ScanSound, ent, args.User);
 
         Speak(ent, "scanned");
@@ -251,11 +260,12 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
     private void OnWriteMutation(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleWriteMutationMessage args)
     {
-        if (_net.IsClient)
+        // check delay
+        var now = _timing.CurTime;
+        if (now < ent.Comp.NextWrite)
             return;
 
-        if (_disk.GetDisk(ent.Owner) is not {} disk)
-            return;
+        ent.Comp.NextWrite = now + ent.Comp.WriteDelay;
 
         if (ent.Comp.ScannedMob is not {} mob || _genome.GetSequence(mob, args.Index) is not {} sequence)
             return;
@@ -264,12 +274,99 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         if (_mutation.GetRoundData(mutation)?.Discovered != true)
             return;
 
-        // TODO admin log
+        if (_disk.GetDisk(ent.Owner) is not {} disk || disk.Comp.Mutation == mutation)
+            return;
+
+        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{mutation} from {ToPrettyString(mob)} was written to {ToPrettyString(disk)} by {ToPrettyString(args.Actor)} using console {ToPrettyString(ent)}");
         _audio.PlayPvs(ent.Comp.WriteSound, ent);
         _disk.SetMutation(disk, mutation);
     }
 
-    // TODO: combining
+    private void OnCombine(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleCombineMessage args)
+    {
+        if (ent.Comp.ScannedMob is not {} mob)
+            return;
+
+        if (!CanWorkOn(ent, mob) || _genome.GetSequence(mob, args.Index) is not {} sequence)
+            return;
+
+        if (_disk.GetDisk(ent.Owner)?.Comp.Mutation == null)
+            return;
+
+        var doAfterArgs = new DoAfterArgs(EntityManager,
+            ent,
+            ent.Comp.SequenceDelay,
+            new CombineDoAfterEvent(GetNetEntity(mob), args.Index),
+            eventTarget: ent,
+            target: mob);
+        doAfterArgs.AttemptFrequency = AttemptFrequency.EveryTick;
+        SetBusy(ent, _doAfter.TryStartDoAfter(doAfterArgs));
+        Speak(ent, "combining");
+    }
+
+    private void OnCombineDoAfter(Entity<GeneticsConsoleComponent> ent, ref CombineDoAfterEvent args)
+    {
+        SetBusy(ent, false);
+        if (args.Cancelled)
+        {
+            Speak(ent, "combine-failed");
+            return;
+        }
+
+        args.Handled = true;
+        var mob = GetEntity(args.Mob);
+        if (!CanWorkOn(ent, mob))
+        {
+            Speak(ent, "combine-failed");
+            return;
+        }
+
+        var damage = _mutation.GetGeneticDamage(mob) ?? 0;
+        if (damage > ent.Comp.MaxGeneticDamage)
+        {
+            Speak(ent, "genetic-damage");
+            return;
+        }
+
+        // should never happen, no message
+        if (_disk.GetDisk(ent.Owner)?.Comp.Mutation is not {} diskMutation ||
+            _genome.GetSequence(mob, args.Index) is not {} sequence ||
+            _mutation.GetMutatable(mob) is not {} mutatable)
+            return;
+
+        var mutation = sequence.Mutation;
+        if (_mutation.CombineMutations(mutation, diskMutation) is not {} result)
+        {
+            Speak(ent, "combine-none");
+            return;
+        }
+
+        // already present or couldn't add it
+        if (!_mutation.AddMutation(mutatable.AsNullable(), result))
+        {
+            Speak(ent, "combine-present");
+            return;
+        }
+
+        Speak(ent, "combined");
+
+        _adminLog.Add(LogType.Genetics, LogImpact.Medium, $"{result} combined from {mutation} and {diskMutation} by {ToPrettyString(args.User)} using console {ToPrettyString(ent)}");
+
+        // it isn't discovered so you have to figure out what it is before it's too late...
+        _genome.TryAddSequence(mob, result);
+    }
+
+    private void OnCombineCheck(Entity<GeneticsConsoleComponent> ent, ref DoAfterAttemptEvent<CombineDoAfterEvent> args)
+    {
+        var mob = GetEntity(args.Event.Mob);
+        if (!CanKeepWorkingOn(ent, mob) || _disk.GetDisk(ent.Owner) == null)
+            args.Cancel();
+    }
+
+    private void OnPrint(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsolePrintMessage args)
+    {
+        // TODO
+    }
 
     private void OnUIOpened(Entity<GeneticsConsoleComponent> ent, ref AfterActivatableUIOpenEvent args)
     {
@@ -323,7 +420,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             return false;
 
         if (_net.IsServer)
-            AddChromosome((ent, ent.Comp), RandomChromosome());
+            AddChromosome(ent.AsNullable(), RandomChromosome());
         return true;
     }
 
@@ -361,6 +458,9 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             _damage.TryChangeDamage(mob, ent.Comp.SequenceFailDamage);
             return false;
         }
+
+        var points = _mutation.AllMutations[mutation].Difficulty * ent.Comp.PointsPerDifficulty;
+        // TODO: give points and send radio message
 
         _audio.PlayPvs(ent.Comp.ScanSound, ent);
         data.Discovered = true;
@@ -400,4 +500,20 @@ public sealed partial class SequenceDoAfterEvent : DoAfterEvent
 
     public override DoAfterEvent Clone()
         => new SequenceDoAfterEvent(Mob, Index);
+}
+
+[Serializable, NetSerializable]
+public sealed partial class CombineDoAfterEvent : DoAfterEvent
+{
+    public NetEntity Mob;
+    public uint Index;
+
+    public CombineDoAfterEvent(NetEntity mob, uint index)
+    {
+        Mob = mob;
+        Index = index;
+    }
+
+    public override DoAfterEvent Clone()
+        => new CombineDoAfterEvent(Mob, Index);
 }

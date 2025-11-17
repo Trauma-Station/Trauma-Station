@@ -43,9 +43,6 @@
   - type: Mutation
     instability: 35
     difficulty: 32 # powergamers delight
-    requires:
-    - MutationColdAdaptation
-    - MutationHeatAdaptation
     conflicts:
     - MutationPressureAdaptation
   - type: RemovesMutation

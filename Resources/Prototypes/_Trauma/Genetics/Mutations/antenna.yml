@@ -19,9 +19,6 @@
   components:
   - type: Mutation
     instability: 10
-    requires:
-    - MutationAntenna
-    - MutationParanoia
   - type: RemovesMutation
     removes:
     - MutationAntenna

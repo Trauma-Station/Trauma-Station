@@ -12,12 +12,6 @@ namespace Content.Trauma.Shared.Genetics.Mutations;
 public sealed partial class ScannedGenomeComponent : Component
 {
     /// <summary>
-    /// Maximum number of sequenced mutations a single mob can have.
-    /// Also by extension the dormant mutation limit.
-    /// </summary>
-    public const int SequenceLimit = 8;
-
-    /// <summary>
     /// The sequences this mob can have mutated.
     /// Not networked, the client has to get them via BUI SequenceState.
     /// </summary>
