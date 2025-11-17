@@ -108,21 +108,21 @@ public partial class SharedMartialArtsSystem
             || !TryComp<PullableComponent>(target, out var pullable))
             return;
 
-        var knockdownTime = TimeSpan.FromSeconds(proto.ParalyzeTime);
+        var knockdownTime = proto.ParalyzeTime;
 
         var ev = new BeforeStaminaDamageEvent(1f);
         RaiseLocalEvent(target, ref ev);
 
         knockdownTime *= ev.Value;
 
-        _stun.TryKnockdown(target, knockdownTime, true, proto.DropHeldItemsBehavior);
+        _stun.TryKnockdown(target, knockdownTime, true, drop: proto.DropItems);
 
-        _stamina.TakeStaminaDamage(target, proto.StaminaDamage, applyResistances: true);
+        _stamina.TakeStaminaDamage(target, proto.StaminaDamage);
 
         //_pulling.TryStopPull(target, pullable, ent, true);
 
         _status.TryRemoveStatusEffect(ent, "KnockedDown");
-        _standingState.Stand(ent);
+        _standing.Stand(ent);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Effects/demon_attack1.ogg"), ent);
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Effects/metal_slam5.ogg"), target);
@@ -138,7 +138,7 @@ public partial class SharedMartialArtsSystem
             || !TryComp<PullableComponent>(target, out var pullable))
             return;
 
-        _stamina.TakeStaminaDamage(target, proto.StaminaDamage, applyResistances: true);
+        _stamina.TakeStaminaDamage(target, proto.StaminaDamage);
 
         _pulling.TryStopPull(target, pullable, ent, true);
         //_grabThrowing.Throw(target, ent, _transform.GetMapCoordinates(ent).Position + _transform.GetMapCoordinates(target).Position, 50);

@@ -218,7 +218,7 @@
       - 0,0,7,3
     whitelist:
       components:
-      - OnUseTimerTrigger # Basically all and only grenades use this
+      - TimerTrigger # Basically all and only grenades use this
       tags:
         - Grenade # China lake ammo
         - MagazinePistol
@@ -259,9 +259,5 @@
       amount: 1
     - id: OmnizineChemistryVial
       amount: 1
-    - id: SyriniverChemistryVial
-      amount: 1
     - id: ProcenylLazideChemistryVial
-      amount: 1
-    - id: EbifinlLazideChemistryVial
       amount: 1

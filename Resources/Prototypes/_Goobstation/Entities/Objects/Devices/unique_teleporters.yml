@@ -19,6 +19,7 @@
     sound: /Audio/Items/Mining/fultext_launch.ogg
 
 - type: entity
+  abstract: true # Trauma
   parent: BaseLockerTeleporter
   id: BlueshieldOfficerLockerTeleporter
   name: blueshield locker teleporter

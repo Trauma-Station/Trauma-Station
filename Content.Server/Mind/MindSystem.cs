@@ -68,7 +68,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
-using Content.Server.Mind.Commands;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
@@ -423,7 +422,7 @@ public sealed class MindSystem : SharedMindSystem
             _tag.AddTag(mind.OwnedEntity.Value, SharedBindSoulSystem.IgnoreBindSoulTag);
         _tag.AddTag(target, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
 
-        MakeSentientCommand.MakeSentient(target, EntityManager);
+        MakeSentient(target);
         TransferTo(mindId, target, ghostCheckOverride: true, mind: mind);
 
         if (mind.OwnedEntity != null) // Goobstation

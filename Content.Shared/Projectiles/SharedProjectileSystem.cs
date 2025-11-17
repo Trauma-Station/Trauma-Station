@@ -1,48 +1,16 @@
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 KP <13428215+nok-ko@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 PixelTK <85175107+PixelTheKermit@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 Arendian <137322659+Arendian@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Dakamakat <52600490+dakamakat@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Hmeister <nathan.springfredfoxbon4@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Shared.Damage.Components;
+using Content.Shared.Tag;
+using Content.Shared.Weapons.Ranged.Components;
+using Robust.Shared.Prototypes;
+// </Trauma>
 using System.Numerics;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Tag;
 using Content.Shared.Throwing;
-using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -50,7 +18,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
@@ -60,15 +27,14 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 {
     public const string ProjectileFixture = "projectile";
 
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly TagSystem _tag = default!; // Goob
 
-    private static readonly ProtoId<TagPrototype> GunCanAimShooterTag = "GunCanAimShooter";
+    private static readonly ProtoId<TagPrototype> GunCanAimShooterTag = "GunCanAimShooter"; // Goob
 
     public override void Initialize()
     {
@@ -134,12 +100,11 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         EmbedAttach(embeddable, args.Target, args.Shooter, embeddable.Comp);
 
         // Raise a specific event for projectiles.
-        if (TryComp(embeddable, out ProjectileComponent? projectile) && projectile.Weapon.HasValue) // Goobstation edit: un-heisenfailing tests
-        {
-            // Goobstation edit: Shooter is nullable, so why are we using nullforgiving operator for shooter?
-            var ev = new ProjectileEmbedEvent(projectile.Shooter, projectile.Weapon.Value, args.Target);
-            RaiseLocalEvent(embeddable, ref ev);
-        }
+        if (!TryComp<ProjectileComponent>(embeddable, out var projectile))
+            return;
+
+        var ev = new ProjectileEmbedEvent(projectile.Shooter, projectile.Weapon, args.Target);
+        RaiseLocalEvent(embeddable, ref ev);
     }
 
     private void EmbedAttach(EntityUid uid, EntityUid target, EntityUid? user, EmbeddableProjectileComponent component)
@@ -166,8 +131,10 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         EnsureComp<EmbeddedContainerComponent>(target, out var embeddedContainer);
 
-        //Assert that this entity not embed
-        DebugTools.AssertEqual(embeddedContainer.EmbeddedObjects.Contains(uid), false);
+        // <Trauma> - just warn instead of assert and have a useful message
+        if (embeddedContainer.EmbeddedObjects.Contains(uid))
+            Log.Warning($"Entity {ToPrettyString(uid)} was not supposed to be embedded into {ToPrettyString(target)}!");
+        // </Trauma>
 
         embeddedContainer.EmbeddedObjects.Add(uid);
     }
@@ -177,20 +144,20 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
-        if (component.EmbeddedIntoUid is not null)
+        if (component.EmbeddedIntoUid == null)
+            return; // the entity is not embedded, so do nothing
+
+        if (TryComp<EmbeddedContainerComponent>(component.EmbeddedIntoUid.Value, out var embeddedContainer))
         {
-            if (TryComp<EmbeddedContainerComponent>(component.EmbeddedIntoUid.Value, out var embeddedContainer))
-            {
-                embeddedContainer.EmbeddedObjects.Remove(uid);
-                Dirty(component.EmbeddedIntoUid.Value, embeddedContainer);
-                if (embeddedContainer.EmbeddedObjects.Count == 0)
-                    RemCompDeferred<EmbeddedContainerComponent>(component.EmbeddedIntoUid.Value);
-            }
+            embeddedContainer.EmbeddedObjects.Remove(uid);
+            Dirty(component.EmbeddedIntoUid.Value, embeddedContainer);
+            if (embeddedContainer.EmbeddedObjects.Count == 0)
+                RemCompDeferred<EmbeddedContainerComponent>(component.EmbeddedIntoUid.Value);
         }
 
-        if (component.DeleteOnRemove && _net.IsServer)
+        if (component.DeleteOnRemove)
         {
-            QueueDel(uid);
+            PredictedQueueDel(uid);
             return;
         }
 
@@ -275,7 +242,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         if (component.Shooter == shooterId)
             return;
 
-        component.Shooter = shooterId;
+        component.Shooter = TerminatingOrDeleted(shooterId) ? null : shooterId; // Goobstation - set to null if deleted
         Dirty(id, component);
     }
 

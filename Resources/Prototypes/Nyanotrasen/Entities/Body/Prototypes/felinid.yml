@@ -40,7 +40,7 @@
       - right leg
       - left leg
       organs:
-        stomach: OrganVulpkaninStomach
+        stomach: OrganAnimalStomach
         liver:  OrganAnimalLiver
         kidneys: OrganHumanKidneys
     right arm:

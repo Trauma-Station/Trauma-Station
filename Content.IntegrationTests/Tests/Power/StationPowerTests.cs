@@ -5,6 +5,7 @@ using Content.Server.Maps;
 using Content.Server.Power.Components;
 using Content.Server.Power.NodeGroups;
 using Content.Server.Power.Pow3r;
+using Content.Shared.Power.Components;
 using Content.Shared.NodeContainer;
 using Robust.Shared.EntitySerialization;
 
@@ -19,26 +20,30 @@ public sealed class StationPowerTests
     private const float MinimumPowerDurationSeconds = 10 * 60;
 
     private static readonly string[] GameMaps =
-    [
-        "Fland",
-        "Meta",
-        "Packed",
-        "Omega",
+    [ // Goobstation only maps in rotation
+        "Atlas",
+        "Amber",
         "Bagel",
         "Box",
-        "Core",
-        "Marathon",
-        "Saltern",
-        "Reach",
-        "Train",
-        "Oasis",
-        "Gate",
-        "Amber",
+        "Cluster",
+        "Fland",
         "Loop",
-        "Plasma",
-        "Elkridge",
-        "Convex",
-        "Relic",
+        "Marathon",
+        "Meta",
+        "Oasis",
+        "Omega",
+        "Origin",
+        "Saltern",
+        "Packed",
+        "Reach",
+        "OasisHighPop",
+        "Barratry",
+        "Kettle",
+        "Submarine",
+        "Leonid",
+        "Delta",
+        "Chloris",
+        "Cog"
     ];
 
     [Test, TestCaseSource(nameof(GameMaps))]

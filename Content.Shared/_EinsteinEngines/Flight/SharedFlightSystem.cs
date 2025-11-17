@@ -19,6 +19,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Gravity;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Components;
@@ -39,6 +40,7 @@ namespace Content.Shared._EinsteinEngines.Flight;
 public abstract class SharedFlightSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private readonly SharedGravitySystem _gravity = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly SharedStaminaSystem _staminaSystem = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -68,6 +70,7 @@ public abstract class SharedFlightSystem : EntitySystem
         SubscribeLocalEvent<FlightComponent, DownedEvent>(OnDowned);
         SubscribeLocalEvent<FlightComponent, SleepStateChangedEvent>(OnSleep);
         SubscribeLocalEvent<FlightComponent, AttemptClimbEvent>(OnAttemptClimb);
+        SubscribeLocalEvent<FlightComponent, IsWeightlessEvent>(OnIsWeightless);
     }
 
     public override void Update(float frameTime)
@@ -115,6 +118,7 @@ public abstract class SharedFlightSystem : EntitySystem
         component.TimeUntilFlap = 0f;
         _actionsSystem.SetToggled(component.ToggleActionEntity, component.On);
         RaiseLocalEvent(uid, new FlightEvent(uid, component.On, component.IsAnimated));
+        _gravity.RefreshWeightless(uid);
         _staminaSystem.ToggleStaminaDrain(uid, component.StaminaDrainRate, active, false, component.StaminaDrainKey, uid);
         _movementSpeed.RefreshWeightlessModifiers(uid);
         ToggleCollisionMasks(uid, component);
@@ -272,7 +276,7 @@ public abstract class SharedFlightSystem : EntitySystem
 
     private void OnStandingStateFlightAttempt(EntityUid uid, StandingStateComponent component, ref FlightAttemptEvent args)
     {
-        if (!_standing.IsDown(uid, component))
+        if (component.Standing)
             return;
 
         _popupSystem.PopupClient(Loc.GetString("no-flight-while-lying"), uid, uid, PopupType.Medium);
@@ -323,6 +327,15 @@ public abstract class SharedFlightSystem : EntitySystem
             return;
 
         args.Cancelled = true;
+    }
+
+    private void OnIsWeightless(Entity<FlightComponent> ent, ref IsWeightlessEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+        args.IsWeightless = ent.Comp.On;
     }
 
     #endregion

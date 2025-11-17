@@ -1,0 +1,39 @@
+- type: latheRecipe
+  abstract: true
+  id: BaseRevFoundry
+  completetime: 30
+  materials:
+    Plasma: 100
+
+- type: latheRecipe
+  parent: BaseRevFoundry
+  id: RevRocketFrame
+  result: RevRocketFrame
+  materials:
+    Steel: 500
+    Plasma: 100
+
+- type: latheRecipe
+  parent: BaseRevFoundry
+  id: RevEmptyFuelTank
+  result: RevUnfinishedFuelTank
+  materials:
+    Steel: 500
+    Plasma: 100
+
+- type: latheRecipe
+  parent: BaseRevFoundry
+  id: ClothingOuterArmorRevFlame
+  result: ClothingOuterArmorRevFlame
+  materials:
+    Steel: 500
+    Plasteel: 100
+    Plasma: 100
+
+- type: latheRecipe
+  parent: BaseRevFoundry
+  id: RevEngineParts
+  result: RevEngineParts
+  materials:
+    Steel: 300
+    Plasma: 100

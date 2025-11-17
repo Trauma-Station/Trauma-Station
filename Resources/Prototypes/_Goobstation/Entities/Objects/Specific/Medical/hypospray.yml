@@ -43,6 +43,7 @@
     onlyAffectsMobs: false
     injectOnly: true
   - type: HyposprayBlockNonMobInjection
+  - type: IgnoreHypoport # Trauma - it's an auto"injector" not a hypospray and these would be strictly inferior to crew hyposprays with 30s delay
   - type: UseDelay
     delay: 30
   - type: ContainerContainer
@@ -114,6 +115,7 @@
     onlyAffectsMobs: false
     injectOnly: true
   - type: HyposprayBlockNonMobInjection
+  - type: IgnoreHypoport # Trauma - admin aboose
   - type: ContainerContainer
     containers:
       item: !type:ContainerSlot
@@ -350,12 +352,11 @@
         reagents:
         - ReagentId: Amnestizine
           Quantity: 10
-  - type: Food
+  - type: Edible
     delay: 0.2
     forceFeedDelay: 1.5
     transferAmount: null
-    eatMessage: food-swallow
-    useSound: /Audio/Items/pill.ogg
+    edible: Pill
   - type: BadFood
   - type: FlavorProfile
     ignoreReagents: [ ]
@@ -469,7 +470,7 @@
   - type: SolutionContainerManager
     solutions:
       pen:
-        maxVol: 10
+        maxVol: 20
         reagents:
         - ReagentId: AmbuzolPlus
           Quantity: 5

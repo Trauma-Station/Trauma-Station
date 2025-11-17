@@ -59,7 +59,6 @@ using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Systems;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
 using Content.Shared.Silicons.Borgs.Components;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory.Events;
@@ -88,7 +87,6 @@ public partial class SharedBodySystem
 
     // Shitmed Change Start
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly WoundSystem _woundSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TraumaSystem _trauma = default!;
@@ -537,6 +535,18 @@ public partial class SharedBodySystem
 
     private void OnRejuvenate(EntityUid ent, BodyComponent body, ref RejuvenateEvent args)
     {
+        RestoreBody((ent, body)); // Goobstation
+    }
+
+    // Goob edit start
+    public void RestoreBody(Entity<BodyComponent?> entity)
+    {
+        if (!Resolve(entity, ref entity.Comp, false))
+            return;
+
+        var ent = entity.Owner;
+        var body = entity.Comp;
+
         if (body.Prototype == null)
             return;
 
@@ -693,6 +703,7 @@ public partial class SharedBodySystem
             _woundSystem.ForceHealWoundsOnWoundable(bodyPart.Id, out _);
         }
     }
+    // Goob edit end
 
     /// <summary>
     /// Gets all child body parts of this entity that have component T, including the root entity if it has component T.

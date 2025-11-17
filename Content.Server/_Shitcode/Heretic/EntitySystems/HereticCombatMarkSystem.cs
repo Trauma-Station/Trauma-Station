@@ -24,13 +24,13 @@ using System.Linq;
 using Content.Shared.Humanoid;
 using Content.Server._Goobstation.Heretic.EntitySystems.PathSpecific;
 using Content.Server._Shitcode.Heretic.EntitySystems.PathSpecific;
-using Content.Server.Medical;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Body.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Medical;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Stunnable;
 
@@ -115,7 +115,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
 
             case "Rust":
                 _vomit.Vomit(target);
-                _stun.KnockdownOrStun(target, TimeSpan.FromSeconds(20), true);
+                _stun.KnockdownOrStun(target, TimeSpan.FromSeconds(20));
                 break;
 
             case "Void":
@@ -139,7 +139,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
                     Del(cosmicMark.CosmicDiamondUid.Value); // Just in case
                 }
 
-                _stun.TryParalyze(target, cosmicMark.ParalyzeTime, true);
+                _stun.TryUpdateParalyzeDuration(target, cosmicMark.ParalyzeTime);
                 break;
 
             default:

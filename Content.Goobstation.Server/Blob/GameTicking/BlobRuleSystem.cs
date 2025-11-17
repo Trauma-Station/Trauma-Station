@@ -42,6 +42,7 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly ObjectivesSystem _objectivesSystem = default!;
     [Dependency] private readonly AlertLevelSystem _alertLevelSystem = default!;
+    [Dependency] private readonly GameTicker _ticker = default!; // Trauma
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
@@ -159,26 +160,19 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                 return;
             case BlobStage.Begin when blobTilesCount >= (stationUid.Comp?.StageCritical ?? StationBlobConfigComponent.DefaultStageCritical):
             {
-                if (_nukeCode.SendNukeCodes(stationUid))//send the nuke code?
-                {
-                    blobRuleComp.Stage = BlobStage.Critical;
+                // <Trauma> autocall cburn instead of sending nuke codes
+                blobRuleComp.Stage = BlobStage.Critical;
                     _chatSystem.DispatchGlobalAnnouncement(
-                    Loc.GetString("blob-alert-critical"),
+                    Loc.GetString("blob-alert-critical-cburn"),
                     stationName,
                     true,
                     blobRuleComp.CriticalAudio,
                     Color.Red);
-                }
-                else
-                {
-                    blobRuleComp.Stage = BlobStage.Critical;
-                    _chatSystem.DispatchGlobalAnnouncement(
-                    Loc.GetString("blob-alert-critical-NoNukeCode"),
-                    stationName,
-                    true,
-                    blobRuleComp.CriticalAudio,
-                    Color.Red);
-                }
+
+                if (!blobRuleComp.BlobCBurnCalled)
+                    _ticker.StartGameRule(blobRuleComp.BlobCBurnEvent);
+                blobRuleComp.BlobCBurnCalled = true;
+                // </Trauma>
 
                 _alertLevelSystem.SetLevel(stationUid, StationAlertCritical, true, true, true, true);
 

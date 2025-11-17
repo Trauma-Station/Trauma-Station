@@ -10,20 +10,20 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Power.Components;
-using Content.Server.Power.EntitySystems;
 using Content.Shared._Shitmed.ItemSwitch;
 using Content.Shared._Shitmed.ItemSwitch.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
+using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Server._Shitmed.ItemSwitch;
 
 public sealed class ItemSwitchSystem : SharedItemSwitchSystem
 {
-    [Dependency] private readonly SharedItemSwitchSystem _itemSwitch = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
+    [Dependency] private readonly SharedBatterySystem _battery = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -67,7 +67,7 @@ public sealed class ItemSwitchSystem : SharedItemSwitchSystem
         component.IsPowered = battery.CurrentCharge >= state.EnergyPerUse;
 
         if (component is { IsPowered: false, DefaultState: { } defaultState } && component.State != defaultState)
-            _itemSwitch.Switch((uid, component), defaultState);
+            Switch((uid, component), defaultState);
     }
 
     private void OnMeleeAttack(Entity<ItemSwitchComponent> ent, ref MeleeHitEvent args)

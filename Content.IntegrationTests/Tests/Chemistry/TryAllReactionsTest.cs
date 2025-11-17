@@ -128,11 +128,17 @@ namespace Content.IntegrationTests.Tests.Chemistry
                     var foundProductsMap = reactionPrototype.Products
                         .Concat(reactionPrototype.Reactants.Where(x => x.Value.Catalyst).ToDictionary(x => x.Key, x => x.Value.Amount))
                         .ToDictionary(x => x, _ => false);
-                    foreach (var (reagent, quantity) in solution.Contents)
+                    // <Trauma> - wrap in assert multiple...
+                    Assert.Multiple(() =>
                     {
-                        Assert.That(foundProductsMap.TryFirstOrNull(x => x.Key.Key == reagent.Prototype && x.Key.Value == quantity, out var foundProduct));
-                        foundProductsMap[foundProduct.Value.Key] = true;
-                    }
+                        foreach (var (reagent, quantity) in solution.Contents)
+                        {
+                            Assert.That(foundProductsMap.TryFirstOrNull(x => x.Key.Key == reagent.Prototype && x.Key.Value == quantity, out var foundProduct),
+                                $"Reaction {reactionPrototype.ID} had unexpected reagent {reagent.Prototype} {quantity}u");
+                            foundProductsMap[foundProduct.Value.Key] = true;
+                        }
+                    });
+                    // </Trauma>
 
                     Assert.That(foundProductsMap.All(x => x.Value));
                 });

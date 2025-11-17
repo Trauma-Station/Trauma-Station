@@ -41,7 +41,7 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Sprite
-    sprite: Objects/Consumable/TrashDrinks/broken_bottle.rsi
+    sprite: Objects/Misc/broken_bottle.rsi
     state: icon
   - type: DamageOtherOnHit
     damage:
@@ -50,6 +50,7 @@
   - type: Tag
     tags:
     - Trash
+    - RotHulkTrash # Goobstation - Wraith
   - type: PhysicalComposition #Goobstation - Recycle update
     materialComposition:
       Glass: 25

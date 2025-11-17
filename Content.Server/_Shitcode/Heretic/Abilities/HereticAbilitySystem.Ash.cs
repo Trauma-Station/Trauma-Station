@@ -17,7 +17,7 @@
 using Content.Shared.Heretic;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
-using Content.Server.Atmos.Components;
+using Content.Shared.Atmos.Components;
 using Robust.Shared.Map.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
@@ -94,7 +94,7 @@ public sealed partial class HereticAbilitySystem
             toHeal += args.HealAmount;
 
             _flammable.AdjustFireStacks(look, args.FireStacks, flam, true);
-            _dmg.TryChangeDamage(look, args.Damage, true, targetPart: TargetBodyPart.All);
+            _dmg.ChangeDamage(look.Owner, args.Damage, true, targetPart: TargetBodyPart.All);
         }
 
         args.Handled = true;

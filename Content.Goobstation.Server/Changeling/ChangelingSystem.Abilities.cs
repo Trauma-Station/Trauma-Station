@@ -40,8 +40,7 @@ using Content.Goobstation.Server.Changeling.Objectives.Components;
 using Content.Goobstation.Shared.Body.Components;
 using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
-using Content.Server.Light.Components;
-using Content.Server.Nutrition.Components;
+using Content.Shared.Light.Components;
 using Content.Shared._Goobstation.Weapons.AmmoSelector;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared._Shitmed.Targeting; // Shitmed Change
@@ -61,6 +60,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs;
 using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Stealth.Components;
@@ -262,7 +262,7 @@ public sealed partial class ChangelingSystem
         if (!TryUseAbility(uid, comp, args))
             return;
 
-        if (!TryComp<FoodComponent>(target, out var food))
+        if (!TryComp<EdibleComponent>(target, out var edible))
             return;
 
         if (!TryComp<SolutionContainerManagerComponent>(target, out var solMan))
@@ -273,7 +273,7 @@ public sealed partial class ChangelingSystem
             foreach (var proto in BiomassAbsorbedChemicals)
                 totalFood += sol.Comp.Solution.GetTotalPrototypeQuantity(proto);
 
-        if (food.RequiresSpecialDigestion || totalFood == 0) // no eating winter coats or food that won't give you anything
+        if (edible.RequiresSpecialDigestion || totalFood == 0) // no eating winter coats or food that won't give you anything
         {
             var popup = Loc.GetString("changeling-absorbbiomatter-bad-food");
             _popup.PopupEntity(popup, uid, uid);
@@ -446,7 +446,7 @@ public sealed partial class ChangelingSystem
             var puller = Comp<PullableComponent>(uid).Puller;
             if (puller != null)
             {
-                _stun.KnockdownOrStun(puller.Value, TimeSpan.FromSeconds(1), true);
+                _stun.KnockdownOrStun(puller.Value, TimeSpan.FromSeconds(1));
             }
         }
     }
@@ -576,7 +576,7 @@ public sealed partial class ChangelingSystem
 
         var pos = _transform.GetMapCoordinates(uid);
         var power = comp.ShriekPower;
-        _emp.EmpPulse(pos, power, 5000f, power * 2);
+        _emp.EmpPulse(pos, power, 5000f, TimeSpan.FromSeconds(power * 2));
     }
     private void OnShriekResonant(EntityUid uid, ChangelingIdentityComponent comp, ref ShriekResonantEvent args)
     {
@@ -737,10 +737,11 @@ public sealed partial class ChangelingSystem
 
         if (TryComp<CuffableComponent>(uid, out var cuffs) && cuffs.Container.ContainedEntities.Count > 0)
         {
-            var cuff = cuffs.LastAddedCuffs;
-
-            _cuffs.Uncuff(uid, cuffs.LastAddedCuffs, cuff);
-            QueueDel(cuff);
+            foreach (var cuff in cuffs.Container.ContainedEntities)
+            {
+                _cuffs.Uncuff(uid, uid, cuff, cuffs);
+                QueueDel(cuff);
+            }
         }
 
         if (TryComp<EnsnareableComponent>(uid, out var ensnareable) && ensnareable.Container.ContainedEntities.Count > 0)
@@ -760,7 +761,7 @@ public sealed partial class ChangelingSystem
             if (puller != null)
             {
                 _puddle.TrySplashSpillAt(puller.Value, Transform((EntityUid) puller).Coordinates, soln, out _);
-                _stun.KnockdownOrStun(puller.Value, TimeSpan.FromSeconds(1.5), true);
+                _stun.KnockdownOrStun(puller.Value, TimeSpan.FromSeconds(1.5));
 
                 if (!TryComp(puller.Value, out StatusEffectsComponent? status))
                     return;

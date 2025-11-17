@@ -1,0 +1,10 @@
+# Requires that the target entity isn't wearing any pressure protecting gear
+- type: entityCondition
+  id: NoPressureProtection
+  condition: !type:InventoryAnyNestedCondition
+    inverted: true
+    condition: !type:WhitelistCondition
+      whitelist:
+        components:
+        - PressureProtection
+      guidebookText: entity-effect-condition-guidebook-pressure-protection

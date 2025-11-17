@@ -69,6 +69,7 @@
     - BaseStationNanotrasen
     - BaseStationMail # Nyano component, required for station mail to function
     - BaseStationWizardTarget # Goobstation
+    - BaseStationAlertLevelLocking # Trauma
   categories: [ HideSpawnMenu ]
   components:
     - type: Transform

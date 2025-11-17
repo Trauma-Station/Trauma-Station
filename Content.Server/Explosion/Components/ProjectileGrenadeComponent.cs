@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Explosion.EntitySystems;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -50,4 +45,10 @@ public sealed partial class ProjectileGrenadeComponent : Component
     /// </summary>
     [DataField]
     public float MaxVelocity = 6f;
+
+    /// <summary>
+    /// The trigger key that will activate the grenade.
+    /// </summary>
+    [DataField]
+    public string TriggerKey = "trigger"; // Trauma - using "timer" broke modular grenades
 }

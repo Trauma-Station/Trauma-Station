@@ -22,7 +22,8 @@ species-name-arachnid = Arachnid
 species-name-moth = Moth Person
 species-name-skeleton = Skeleton
 species-name-vox = Vox
-# species-name-gingerbread = delicious baked good goobstation - no
+#species-name-gingerbread = delicious baked good # Goob - no
+species-name-vulpkanin = Vulpkanin
 
 ## Misc species things
 

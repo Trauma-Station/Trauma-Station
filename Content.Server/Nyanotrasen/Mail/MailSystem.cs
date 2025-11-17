@@ -26,12 +26,12 @@ using Content.Shared.Cargo.Components;
 using Content.Server.Cargo.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Chemistry.Containers.EntitySystems;
-using Content.Server.Damage.Components;
 using Content.Server._DV.Cargo.Components;
+using Content.Server.Damage.Components;
 using Content.Server.Destructible;
 using Content.Server.Destructible.Thresholds;
 using Content.Server.Destructible.Thresholds.Behaviors;
-using Content.Server.Destructible.Thresholds.Triggers;
+using Content.Shared.Destructible.Thresholds.Triggers;
 using Content.Server.Item;
 using Content.Server.Mail.Components;
 using Content.Server.Mind;
@@ -42,7 +42,8 @@ using Content.Server.Spawners.EntitySystems;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Emag.Components;
 using Content.Shared.Destructible;
 using Content.Shared.Emag.Systems;
@@ -566,7 +567,7 @@ namespace Content.Server.Mail
                 ("recipient", recipient.Name)));
 
             var accessReader = EnsureComp<AccessReaderComponent>(uid);
-            _accessReader.AddAccess((uid, accessReader), recipient.AccessTags);
+            _accessReader.TryAddAccesses((uid, accessReader), [ recipient.AccessTags ]);
         }
 
         /// <summary>

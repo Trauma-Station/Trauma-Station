@@ -40,7 +40,7 @@ public sealed partial class EffectsToolComponent : Component
     /// Effects to run on the target.
     /// </summary>
     [DataField(required: true)]
-    public List<EntityEffect> Effects = new();
+    public EntityEffect[] Effects = default!;
 
     /// <summary>
     /// How long the doafter takes.
@@ -79,6 +79,11 @@ public sealed partial class EffectsToolComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier? Sound;
+
+    /// <summary>
+    /// Hack used in place of <c>args.Handled</c> with old entity effects code.
+    /// </summary>
+    public bool Used;
 }
 
 /// <summary>
@@ -93,19 +98,3 @@ public record struct EffectsToolUseAttemptEvent(EntityUid Target, EntityUid User
 /// </summary>
 [ByRefEvent]
 public record struct EffectsToolUsedEvent(EntityUid Target, EntityUid User);
-
-/// <summary>
-/// Entity effect args that also passes a user and tool.
-/// Raises <see cref="EffectsToolUsedEvent"/> afterwards if an effect called <c>Handle()</c>.
-/// </summary>
-public record class EntityEffectToolArgs(EntityUid target, EntityUid user, EntityUid tool, IEntityManager entMan) : EntityEffectBaseArgs(target, entMan)
-{
-    public EntityUid User = user;
-    public EntityUid Tool = tool;
-    public bool Handled;
-
-    public void Handle()
-    {
-        Handled = true;
-    }
-}

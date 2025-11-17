@@ -1,0 +1,244 @@
+# Security
+
+- type: listing
+  id: SecoffReinforcement
+  name: Reinforcement Officer
+  description: A reinforcement officer, does not come with equipment and will have to be armed. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconSecurityOfficer
+  icon:
+    sprite: Markers/jobs.rsi
+    state: security_cadet
+  cost:
+    Spesos: 500
+  categories:
+  - ReinforcementsHoS
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60 # 1 minute, might not keep
+
+- type: listing
+  id: SecoffReinforcementExpress
+  name: Express Reinforcement Officer
+  description: A reinforcement officer, does not come with equipment and will have to be armed. Minimum arrival time of ten seconds.
+  productEntity: ReinforcementBeaconSecurityOfficerFast
+  icon:
+    sprite: Markers/jobs.rsi
+    state: security_cadet
+  cost:
+    Spesos: 2500
+  categories:
+  - ReinforcementsHoS
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: SecoffReinforcementSpecialist
+  name: Specialist Reinforcement Officer
+  description: A reinforcement officer, this one is armored and armed. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconSpecialistOfficerLaser
+  icon:
+    sprite: Markers/jobs.rsi
+    state: security_officer
+  cost:
+    Spesos: 5000
+  categories:
+  - ReinforcementsHoS
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+# Civilian
+
+- type: listing
+  id: ReinforcementAssistant
+  name: Hire Assistant
+  description: Hire an assistant, fent not included. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconAssistant
+  icon:
+    sprite: Markers/jobs.rsi
+    state: passenger
+  cost:
+    Spesos: 250
+  categories:
+  - ServiceHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementBartender
+  name: Hire Bartender
+  description: Hire a bartender. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconBartender
+  icon:
+    sprite: Markers/jobs.rsi
+    state: bartender
+  cost:
+    Spesos: 750
+  categories:
+  - ServiceHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementChef
+  name: Hire Chef
+  description: Hire a chef. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconChef
+  icon:
+    sprite: Markers/jobs.rsi
+    state: chef
+  cost:
+    Spesos: 750
+  categories:
+  - ServiceHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementBeaconBotanist
+  name: Hire Botanist
+  description: Hire a botanist. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconBotanist
+  icon:
+    sprite: Markers/jobs.rsi
+    state: botanist
+  cost:
+    Spesos: 750
+  categories:
+  - ServiceHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementBeaconEngineer
+  name: Hire Engineer
+  description: Hire an engineer, tools included. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconEngi
+  icon:
+    sprite: Markers/jobs.rsi
+    state: engineer
+  cost:
+    Spesos: 1500
+  categories:
+  - EngineeringHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementBeaconAtmos
+  name: Hire Atmos Tech
+  description: Hire an atmos tech, tools included. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconAtmos
+  icon:
+    sprite: Markers/jobs.rsi
+    state: atmospherics
+  cost:
+    Spesos: 2000
+  categories:
+  - EngineeringHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementBeaconScientist
+  name: Hire Scientist
+  description: Hire a scientist. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconSci
+  icon:
+    sprite: Markers/jobs.rsi
+    state: scientist
+  cost:
+    Spesos: 1000
+  categories:
+  - ScienceHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementBeaconDClass
+  name: Purchase D-Class
+  description: Hire a disposable, taken from some backwater planet. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconDClass
+  icon:
+    sprite: Markers/jobs.rsi
+    state: prisoner
+  cost:
+    Spesos: 250
+  categories:
+  - ScienceHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementBeaconDoctor
+  name: Hire Doctor
+  description: Hire a doctor. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconDoctor
+  icon:
+    sprite: Markers/jobs.rsi
+    state: doctor
+  cost:
+    Spesos: 1250
+  categories:
+  - MedicalHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementBeaconChemist
+  name: Hire Chemist
+  description: Hire a chemist. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconChemist
+  icon:
+    sprite: Markers/jobs.rsi
+    state: chemist
+  cost:
+    Spesos: 2000
+  categories:
+  - MedicalHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementBeaconCargo
+  name: Hire Cargo Tech
+  description: Hire a cargo tech. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconCargo
+  icon:
+    sprite: Markers/jobs.rsi
+    state: cargo_tech
+  cost:
+    Spesos: 1250
+  categories:
+  - CargoHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementBeaconSalv
+  name: Hire Salvage Specialist
+  description: Hire a salvager. Minimum arrival time of three minutes.
+  productEntity: ReinforcementBeaconSalv
+  icon:
+    sprite: Markers/jobs.rsi
+    state: salvagespecialist
+  cost:
+    Spesos: 2000
+  categories:
+  - CargoHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+

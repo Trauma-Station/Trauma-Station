@@ -7,7 +7,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Cargo.Components;
 using Content.Server.Stack;
 using Content.Shared._EinsteinEngines.Silicon.BlindHealing;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Components;
@@ -41,9 +41,8 @@ public sealed class BlindHealingSystem : SharedBlindHealingSystem
             || blindComp is { EyeDamage: 0 })
             return;
 
-        if (TryComp<StackComponent>(uid, out var stackComponent)
-            && TryComp<StackPriceComponent>(uid, out var stackPrice))
-            _stackSystem.SetCount(uid, (int) (_stackSystem.GetCount(uid, stackComponent) - stackPrice.Price), stackComponent);
+        if (TryComp<StackComponent>(uid, out var stack))
+            _stackSystem.TryUse((uid, stack), 1);
 
         _blindableSystem.AdjustEyeDamage((args.Target.Value, blindComp), -blindComp.EyeDamage);
 
@@ -55,7 +54,7 @@ public sealed class BlindHealingSystem : SharedBlindHealingSystem
         _popup.PopupEntity(str, uid, args.User);
 
     }
-    
+
     private bool TryHealBlindness(EntityUid uid, EntityUid user, EntityUid target, float delay)
     {
         var doAfterEventArgs =

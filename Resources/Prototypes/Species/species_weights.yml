@@ -23,10 +23,10 @@
     Reptilian: 4
     SlimePerson: 4
     Diona: 2
-    # Goobstation
-    Vulpkanin: 3
-    # Felinid: 4
+    Vulpkanin: 3 # Trauma - was 4
+    # <Goob>
     Harpy: 3
     Rodentia: 3
-    Tajaran: 3
-    Chitinid: 2 # DeltaV
+    #Tajaran: 3 # Trauma
+    Chitinid: 2
+    # </Goob>

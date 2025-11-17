@@ -93,10 +93,10 @@ namespace Content.Server.GameTicking
         public void UpdateInfoText()
         {
             RaiseNetworkEvent(GetInfoMsg(), Filter.Empty().AddPlayers(_playerManager.NetworkedSessions));
-            RaiseNetworkEvent(GetInGameInfoMsg(), Filter.Empty().AddPlayers(_playerManager.NetworkedSessions));
+            RaiseNetworkEvent(GetInGameInfoMsg(), Filter.Empty().AddPlayers(_playerManager.NetworkedSessions)); // Goob
         }
 
-        private string GetInfoText(bool isInGameInfo = false)
+        private string GetInfoText(bool isInGameInfo = false) // Goob - added isInGameInfo
         {
             var preset = CurrentPreset ?? Preset;
             if (preset == null)
@@ -117,7 +117,7 @@ namespace Content.Server.GameTicking
             {
                 foundOne = true;
                 if (stationNames.Length > 0)
-                        stationNames.Append('\n');
+                    stationNames.Append('\n');
 
                 stationNames.Append(meta.EntityName);
             }
@@ -128,17 +128,17 @@ namespace Content.Server.GameTicking
                                     Loc.GetString("game-ticker-no-map-selected"));
             }
 
-            var gmTitle = Loc.GetString(preset.ModeTitle);
-            var desc = Loc.GetString(preset.Description);
+            var gmTitle = (Decoy == null) ? Loc.GetString(preset.ModeTitle) : Loc.GetString(Decoy.ModeTitle);
+            var desc = (Decoy == null) ? Loc.GetString(preset.Description) : Loc.GetString(Decoy.Description);
+            // <Goob> override info text for separated hud
             var infoText = RunLevel == GameRunLevel.PreRoundLobby
-                    ? "game-ticker-get-info-preround-text"
-                    : "game-ticker-get-info-text";
-
+                ? "game-ticker-get-info-preround-text"
+                : "game-ticker-get-info-text";
             if (isInGameInfo)
                 infoText = "game-ticker-get-ingame-info-text";
-
+            // </Goob>
             return Loc.GetString(
-                infoText,
+                infoText, // Goob - use var from above
                 ("roundId", RoundId),
                 ("playerCount", playerCount),
                 ("readyCount", readyCount),
@@ -168,7 +168,7 @@ namespace Content.Server.GameTicking
 
         private TickerLobbyInfoEvent GetInfoMsg()
         {
-            return new (GetInfoText());
+            return new(GetInfoText());
         }
 
         private void UpdateLateJoinStatus()
@@ -176,10 +176,12 @@ namespace Content.Server.GameTicking
             RaiseNetworkEvent(new TickerLateJoinStatusEvent(DisallowLateJoin));
         }
 
+        /// <summary>
+        /// Goob - Get the info text for separated hud, shown ingame
+        /// </summary>
         private TickerInGameInfoEvent GetInGameInfoMsg()
-        {
-            return new (GetInfoText(true));
-        }
+            => new (GetInfoText(true));
+
         public bool PauseStart(bool pause = true)
         {
             if (Paused == pause)
@@ -238,7 +240,6 @@ namespace Content.Server.GameTicking
                 return;
             }
 
-            var status = ready ? PlayerGameStatus.ReadyToPlay : PlayerGameStatus.NotReadyToPlay;
             _playerGameStatuses[player.UserId] = ready ? PlayerGameStatus.ReadyToPlay : PlayerGameStatus.NotReadyToPlay;
             RaiseNetworkEvent(GetStatusMsg(player), player.Channel);
             // update server info to reflect new ready count

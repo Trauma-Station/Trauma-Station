@@ -1,0 +1,41 @@
+- type: entity
+  parent: SurgeryOpenCavityBase
+  id: SurgeryOpenCavityHypoport
+  name: Open hypoport cavity
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepRearrangeTissue
+    - SurgeryStepStitchVessels
+    - SurgeryStepOpenOrganSlot
+  - type: SurgeryPartCondition
+    part: Head
+  - type: SurgeryOrganSlotCondition
+    organSlot: hypoport
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertHypoport
+  name: Install Hypoport
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepOpenIncisionScalpel
+    - SurgeryStepClampBleeders
+    - SurgeryStepInsertHypoport
+    - SurgeryStepSealOrganWound
+  - type: SurgeryOrganSlotCondition
+    organSlot: hypoport
+  - type: SurgeryOrganCondition
+    organ:
+    - type: Hypoport
+
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveHypoport
+  name: Extract Hypoport
+  components:
+  - type: SurgeryOrganCondition
+    organ:
+    - type: Hypoport

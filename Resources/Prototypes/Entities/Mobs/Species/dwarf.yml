@@ -61,13 +61,8 @@
     damageRecovery:
       types:
         Asphyxiation: -1.0
-  - type: Sprite
-    noRot: true
-    drawdepth: Mobs
-# Goobstation: port EE height/width sliders (below is not needed with height/width sliders implemented)
-#    scale: 1.1, 0.75 # goob value
-#  - type: ScaleData # Goobstation
-#    scale: 1.1, 0.75
+  #- type: ScaleVisuals # Goob - port EE height/width sliders (below is not needed with height/width sliders implemented)
+  #  scale: 1, 0.8
   - type: Body
     prototype: Dwarf
     requiredLegs: 2
@@ -125,8 +120,8 @@
   id: MobDwarfDummy
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
-#    scale: 1, 0.8
+  - type: ScaleVisuals
+    scale: 1, 0.8
   - type: Inventory
     femaleDisplacements:
       jumpsuit:

@@ -32,18 +32,22 @@
   name: Blueshield Officer
   description: "Act as a bodyguard and advisor for Command and CentCom VIPs."
   playTimeTracker: JobBlueshieldOfficer
+  setPreference: false # Trauma - no chud job
   requirements:
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 90000 # 25 hours
+      time: 25h
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 54000 # 15 hours
+      time: 15h
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 90000 # 25 hours
+      time: 25h
     - !type:AgeRequirement
       requiredAge: 21
+    - !type:SpeciesRequirement # Trauma - prevent anyone taking it that has it enabled previously in db
+      species:
+      - Felinid
     - !type:SpeciesRequirement # Goob - None Felinid
       inverted: true
       species:
@@ -78,9 +82,6 @@
       - type: CommandStaff
       - type: Condemned
         soulOwnedNotDevil: true
-  - !type:AddObjectiveSpecial
-    objectives:
-    - BlueshieldRandomCommandAliveObjective
 
 - type: startingGear
   id: BlueshieldOfficerGear

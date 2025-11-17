@@ -42,6 +42,7 @@ using Content.Shared._Goobstation.Wizard.Refund; // Goob
 using Content.Shared.Actions;
 using Content.Shared.Database;
 using Content.Goobstation.Maths.FixedPoint;
+using Content.Goobstation.Shared.ManifestListings;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Heretic; // Goob
 using Content.Shared.Heretic.Prototypes; // Goob
@@ -212,6 +213,14 @@ public sealed partial class StoreSystem
         if (HasComp<NtrClientAccountComponent>(uid))
             RaiseLocalEvent(uid, new NtrListingPurchaseEvent(listing.Cost.First().Value));
         OnPurchase(listing); // Goob edit - ntr shittery
+
+        // Goobstation start
+        if (_mind.TryGetMind(buyer, out var mindId, out _))
+        {
+            var ev = new ListingPurchasedEvent(buyer, uid, listing);
+            RaiseLocalEvent(mindId, ref ev);
+        }
+        // Goobstation end
 
         // if (!IsOnStartingMap(uid, component)) // Goob edit
         //     component.RefundAllowed = false;
@@ -404,7 +413,7 @@ public sealed partial class StoreSystem
         {
             var cashId = proto.Cash[value];
             var amountToSpawn = (int) MathF.Floor((float) (amountRemaining / value));
-            var ents = _stack.SpawnMultiple(cashId, amountToSpawn, coordinates);
+            var ents = _stack.SpawnMultipleAtPosition(cashId, amountToSpawn, coordinates);
             if (ents.FirstOrDefault() is {} ent)
                 _hands.PickupOrDrop(buyer, ent);
             amountRemaining -= value * amountToSpawn;

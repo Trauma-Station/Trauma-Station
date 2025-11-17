@@ -18,6 +18,8 @@ using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
@@ -372,15 +374,16 @@ public sealed partial class WoundSystem : EntitySystem
 
         if (component.WoundableIntegrity != state.WoundableIntegrity)
         {
-            var bodyPart = Comp<BodyPartComponent>(uid);
-
             var ev = new WoundableIntegrityChangedEvent(component.WoundableIntegrity, state.WoundableIntegrity);
             RaiseLocalEvent(uid, ref ev);
 
             var bodySeverity = FixedPoint2.Zero;
-            if (bodyPart.Body.HasValue)
+            if (TryComp<BodyPartComponent>(uid, out var bodyPart) && bodyPart.Body.HasValue)
             {
-                var rootPart = Comp<BodyComponent>(bodyPart.Body.Value)?.RootContainer?.ContainedEntity;
+                if (!TryComp<BodyComponent>(bodyPart.Body.Value, out var bodyComp))
+                    return;
+
+                var rootPart = bodyComp.RootContainer?.ContainedEntity;
                 if (rootPart.HasValue)
                 {
                     foreach (var woundable in GetAllWoundableChildren(rootPart.Value))

@@ -64,16 +64,8 @@ public sealed class ThrownLightningSystem : EntitySystem
         if (Deleting(ent))
             return;
 
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-
-        if (!TryComp(args.Target, out StatusEffectsComponent? status))
-            return;
-
-        _electrocution.TryDoElectrocution(args.Target, ent, 1, ent.Comp.StunTime, true, 1f, status, true);
-        _sparks.DoSparks(Transform(ent).Coordinates);
+        if (_electrocution.TryDoElectrocution(args.Target, ent, 1, ent.Comp.StunTime, true, 1f, ignoreInsulation: true))
+            _sparks.DoSparks(Transform(ent).Coordinates);
     }
 
     private bool Deleting(EntityUid ent)

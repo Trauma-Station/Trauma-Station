@@ -32,7 +32,6 @@ using Robust.Shared.Serialization;
 using Content.Shared._Shitmed.Body.Part;
 using Content.Shared._Shitmed.Medical.Surgery.Tools;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds;
-using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Body.Part;
@@ -88,19 +87,6 @@ public sealed partial class BodyPartComponent : Component, ISurgeryToolComponent
     /// </summary>
     [DataField]
     public bool CanAttachChildren = true;
-
-    /// <summary>
-    ///     Shitmed Change: The name of the container for this body part. Used in insertion surgeries.
-    /// </summary>
-    [DataField]
-    public string ContainerName { get; set; } = "part_slot";
-
-    /// <summary>
-    ///     Shitmed Change: The slot for item insertion.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public ItemSlot ItemInsertionSlot = new();
-
 
     /// <summary>
     ///     Shitmed Change: Current species. Dictates things like body part sprites.

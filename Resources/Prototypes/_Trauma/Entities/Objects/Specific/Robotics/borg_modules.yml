@@ -1,0 +1,7 @@
+- type: entity
+  parent: BaseItem
+  id: BorgModulePKAPlaceholder
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Basic/kinetic_accelerator.rsi
+    state: icon

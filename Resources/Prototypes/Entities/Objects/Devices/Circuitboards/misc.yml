@@ -25,5 +25,3 @@
     tags:
       - DroneUsable # Goobstation
       - StationMapElectronics
-  - type: StaticPrice
-    price: 30

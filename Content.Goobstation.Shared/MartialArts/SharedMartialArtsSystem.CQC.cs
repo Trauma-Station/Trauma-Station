@@ -31,14 +31,18 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Standing;
+using Content.Shared.Stunnable;
 using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.MartialArts;
 
 public partial class SharedMartialArtsSystem
 {
+    private readonly ProtoId<DamageTypePrototype> Asphyxiation = "Asphyxiation";
+    private readonly EntProtoId ForcedSleeping = "StatusEffectForcedSleeping";
+
     private void InitializeCqc()
     {
         SubscribeLocalEvent<CanPerformComboComponent, CqcSlamPerformedEvent>(OnCQCSlam);
@@ -121,7 +125,8 @@ public partial class SharedMartialArtsSystem
         switch (args.Type)
         {
             case ComboAttackType.Disarm:
-                _stamina.TakeStaminaDamage(args.Target, 25f, applyResistances: true);
+                _stamina.TakeStaminaDamage(args.Target, 25f);
+                TryChokehold(ent, args.Target); // Trauma
                 break;
             case ComboAttackType.Harm:
                 // Snap neck
@@ -156,17 +161,42 @@ public partial class SharedMartialArtsSystem
                 }
 
                 // Leg sweep
-                if (!TryComp<StandingStateComponent>(ent, out var standing)
-                    || standing.CurrentState == StandingState.Standing ||
-                    !TryComp(args.Target, out StandingStateComponent? targetStanding) ||
-                    targetStanding.CurrentState != StandingState.Standing)
+                if (!_standing.IsDown(ent.Owner) || _standing.IsDown(args.Target))
                     break;
 
-                _status.TryRemoveStatusEffect(ent, "KnockedDown");
-                _standingState.Stand(ent);
-                _stun.TryKnockdown(args.Target, TimeSpan.FromSeconds(5), true);
+                RemComp<KnockedDownComponent>(ent);
+                _stun.TryKnockdown(args.Target, TimeSpan.FromSeconds(5));
                 ComboPopup(ent, args.Target, "Leg Sweep");
                 break;
+        }
+    }
+
+    /// <summary>
+    /// Trauma - Chokehold to force sleep with disarm.
+    /// Unlike tg this uses choking and not the restrain combo.
+    /// </summary>
+    private void TryChokehold(EntityUid ent, EntityUid target)
+    {
+        if (_mobState.IsAlive(target) && !HasComp<GodmodeComponent>(target) &&
+            TryComp(ent, out PullerComponent? puller) &&
+            puller.Pulling == target &&
+            TryComp(target, out PullableComponent? pullable) &&
+            TryComp(target, out BodyComponent? body) &&
+            TryComp(target, out StaminaComponent? stamina) &&
+            stamina.Critical &&
+            puller.GrabStage == GrabStage.Suffocate &&
+            TryComp(ent, out TargetingComponent? targeting) &&
+            targeting.Target == TargetBodyPart.Head)
+        {
+            // choking someones whos already knocked out isn't good for them
+            if (HasComp<SleepingComponent>(target))
+            {
+                var damage = new DamageSpecifier(_proto.Index(Asphyxiation), 10);
+                _damageable.TryChangeDamage(target, damage, true, targetPart: TargetBodyPart.Head);
+            }
+
+            _newStatus.TryUpdateStatusEffectDuration(target, ForcedSleeping, TimeSpan.FromSeconds(40));
+            ComboPopup(ent, target, "a Chokehold");
         }
     }
 
@@ -182,7 +212,7 @@ public partial class SharedMartialArtsSystem
             return;
 
         DoDamage(ent, target, proto.DamageType, proto.ExtraDamage, out _);
-        _stun.TryKnockdown(target, TimeSpan.FromSeconds(proto.ParalyzeTime), true, proto.DropHeldItemsBehavior);
+        _stun.TryKnockdown(target, proto.ParalyzeTime, true, drop: proto.DropItems);
         if (TryComp<PullableComponent>(target, out var pullable))
             _pulling.TryStopPull(target, pullable, ent, true);
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit3.ogg"), target);
@@ -204,13 +234,13 @@ public partial class SharedMartialArtsSystem
         if (downed)
         {
             if (TryComp<StaminaComponent>(target, out var stamina) && stamina.Critical)
-                _newStatus.TryAddStatusEffectDuration(target, "StatusEffectForcedSleeping", out _, TimeSpan.FromSeconds(10));
+                _newStatus.TryAddStatusEffectDuration(target, "StatusEffectForcedSleeping", TimeSpan.FromSeconds(10));
             DoDamage(ent, target, proto.DamageType, proto.ExtraDamage, out _, TargetBodyPart.Head);
-            _stamina.TakeStaminaDamage(target, proto.StaminaDamage * 2 + 5, source: ent, applyResistances: true);
+            _stamina.TakeStaminaDamage(target, proto.StaminaDamage * 2 + 5, source: ent);
         }
         else
         {
-            _stamina.TakeStaminaDamage(target, proto.StaminaDamage, source: ent, applyResistances: true);
+            _stamina.TakeStaminaDamage(target, proto.StaminaDamage, source: ent);
         }
 
         if (TryComp<PullableComponent>(target, out var pullable))
@@ -227,8 +257,8 @@ public partial class SharedMartialArtsSystem
             || !TryUseMartialArt(ent, proto, out var target, out _))
             return;
 
-        _stun.TryKnockdown(target, TimeSpan.FromSeconds(proto.ParalyzeTime), true, proto.DropHeldItemsBehavior);
-        _stamina.TakeStaminaDamage(target, proto.StaminaDamage, source: ent, applyResistances: true);
+        _stun.TryKnockdown(target, proto.ParalyzeTime, drop: proto.DropItems);
+        _stamina.TakeStaminaDamage(target, proto.StaminaDamage, source: ent);
         ComboPopup(ent, target, proto.Name);
         ent.Comp.LastAttacks.Clear();
     }
@@ -239,7 +269,7 @@ public partial class SharedMartialArtsSystem
             || !TryUseMartialArt(ent, proto, out var target, out _))
             return;
 
-        _stamina.TakeStaminaDamage(target, proto.StaminaDamage, source: ent, applyResistances: true);
+        _stamina.TakeStaminaDamage(target, proto.StaminaDamage, source: ent);
 
         ComboPopup(ent, target, proto.Name);
         ent.Comp.LastAttacks.Clear();
@@ -262,7 +292,7 @@ public partial class SharedMartialArtsSystem
             return;
 
         DoDamage(ent, target, proto.DamageType, proto.ExtraDamage, out _);
-        _stamina.TakeStaminaDamage(target, proto.StaminaDamage, source: ent, applyResistances: true);
+        _stamina.TakeStaminaDamage(target, proto.StaminaDamage, source: ent);
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit1.ogg"), target);
         ComboPopup(ent, target, proto.Name);
         ent.Comp.LastAttacks.Clear();

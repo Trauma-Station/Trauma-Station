@@ -1,24 +1,13 @@
-// SPDX-FileCopyrightText: 2022 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 T-Stalker <43253663+DogZeroX@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 T-Stalker <le0nel_1van@hotmail.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <wrexbe@protonmail.com>
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Content.Shared.Damage;
+using Content.Shared.Damage.Events;
 using Content.Shared.Examine;
+using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -34,6 +23,7 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, TakeAmmoEvent>(OnBatteryTakeAmmo);
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, GetAmmoCountEvent>(OnBatteryAmmoCount);
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, ExaminedEvent>(OnBatteryExamine);
+        SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, DamageExamineEvent>(OnBatteryDamageExamine);
 
         // Projectile
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ComponentGetState>(OnBatteryGetState);
@@ -41,6 +31,7 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, TakeAmmoEvent>(OnBatteryTakeAmmo);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, GetAmmoCountEvent>(OnBatteryAmmoCount);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ExaminedEvent>(OnBatteryExamine);
+        SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, DamageExamineEvent>(OnBatteryDamageExamine);
     }
 
     private void OnBatteryHandleState(EntityUid uid, BatteryAmmoProviderComponent component, ref ComponentHandleState args)
@@ -53,7 +44,7 @@ public abstract partial class SharedGunSystem
         component.FireCost = state.FireCost;
 
         if (component is HitscanBatteryAmmoProviderComponent hitscan && state.Prototype != null) // Shitmed Change
-            hitscan.Prototype = state.Prototype;
+            hitscan.HitscanEntityProto = state.Prototype;
 
         UpdateAmmoCount(uid, prediction: false);
     }
@@ -68,7 +59,7 @@ public abstract partial class SharedGunSystem
         };
 
         if (TryComp<HitscanBatteryAmmoProviderComponent>(uid, out var hitscan)) // Shitmed Change
-           state.Prototype = hitscan.Prototype;
+           state.Prototype = hitscan.HitscanEntityProto;
 
         args.State = state; // Shitmed Change
     }
@@ -77,6 +68,66 @@ public abstract partial class SharedGunSystem
     {
         if (component.Examinable) // goob edit
             args.PushMarkup(Loc.GetString("gun-battery-examine", ("color", AmmoExamineColor), ("count", component.Shots)));
+    }
+
+    private void OnBatteryDamageExamine<T>(Entity<T> entity, ref DamageExamineEvent args) where T : BatteryAmmoProviderComponent
+    {
+        var damageSpec = GetDamage(entity.Comp);
+
+        if (damageSpec == null)
+            return;
+
+        var damageType = entity.Comp switch
+        {
+            HitscanBatteryAmmoProviderComponent => Loc.GetString("damage-hitscan"),
+            ProjectileBatteryAmmoProviderComponent => Loc.GetString("damage-projectile"),
+            _ => throw new ArgumentOutOfRangeException(),
+        };
+
+        _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damageSpec), damageType);
+
+        // <Goob> - partial armor penetration
+        // TODO: hitscan armor penetration
+        if (entity.Comp is not ProjectileBatteryAmmoProviderComponent p)
+            return;
+
+        var ap = GetProjectilePenetration(p.Prototype);
+        if (ap == 0)
+            return;
+
+        var abs = Math.Abs(ap);
+        args.Message.AddMarkupPermissive("\n" + Loc.GetString("armor-penetration", ("arg", ap/abs), ("abs", abs)));
+        // </Goob>
+    }
+
+    private DamageSpecifier? GetDamage(BatteryAmmoProviderComponent component)
+    {
+        if (component is ProjectileBatteryAmmoProviderComponent battery)
+        {
+            if (ProtoManager.Index<EntityPrototype>(battery.Prototype).Components
+                .TryGetValue(Factory.GetComponentName<ProjectileComponent>(), out var projectile))
+            {
+                var p = (ProjectileComponent) projectile.Component;
+
+                if (!p.Damage.Empty)
+                {
+                    return p.Damage * Damageable.UniversalProjectileDamageModifier;
+                }
+            }
+
+            return null;
+        }
+
+        if (component is HitscanBatteryAmmoProviderComponent hitscan)
+        {
+            var dmg = ProtoManager.Index(hitscan.HitscanEntityProto);
+            if (!dmg.TryGetComponent<HitscanBasicDamageComponent>(out var basicDamageComp, Factory))
+                return null;
+
+            return basicDamageComp.Damage * Damageable.UniversalHitscanDamageModifier;
+        }
+
+        return null;
     }
 
     private void OnBatteryTakeAmmo(EntityUid uid, BatteryAmmoProviderComponent component, TakeAmmoEvent args)
@@ -130,7 +181,8 @@ public abstract partial class SharedGunSystem
                 var ent = Spawn(proj.Prototype, coordinates);
                 return (ent, EnsureShootable(ent));
             case HitscanBatteryAmmoProviderComponent hitscan:
-                return (null, ProtoManager.Index<HitscanPrototype>(hitscan.Prototype));
+                var hitscanEnt = Spawn(hitscan.HitscanEntityProto);
+                return (hitscanEnt, EnsureShootable(hitscanEnt));
             default:
                 throw new ArgumentOutOfRangeException();
         }

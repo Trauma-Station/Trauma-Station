@@ -32,7 +32,6 @@ using Content.Server.Audio;
 using Content.Server.Chat.Systems;
 using Content.Server.DoAfter;
 using Content.Server.Explosion.EntitySystems;
-using Content.Server.Kitchen.Components;
 using Content.Server.Lightning;
 using Content.Server.Popups;
 using Content.Server.Station.Systems;
@@ -43,6 +42,7 @@ using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Kitchen.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Radiation.Components;
@@ -588,9 +588,19 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
     {
         if (!sm.Activated)
         {
-            _adminLog.Add(LogType.Supermatter,
-                          HasComp<MobStateComponent>(args.OtherEntity) ? LogImpact.Extreme : LogImpact.High, // for mice activating it
-                          $"{ToPrettyString(args.OtherEntity):actor} activated Supermatter {ToPrettyString(uid):subject}");
+            // Extra logging for supermatter
+            var activator = ToPrettyString(args.OtherEntity);
+            var isMob = HasComp<MobStateComponent>(args.OtherEntity);
+            var impact = isMob ? LogImpact.Extreme : LogImpact.High;
+
+            // Original log entry
+            _adminLog.Add(LogType.Supermatter, impact,
+                $"{activator:actor} activated Supermatter {ToPrettyString(uid):subject}");
+
+            // New admin alert
+            _adminLog.Add(LogType.AdminMessage, LogImpact.Extreme,
+                $"SUPERMATTER ACTIVATED BY {activator} AT {Transform(uid).Coordinates}");
+
             sm.Activated = true;
         }
 

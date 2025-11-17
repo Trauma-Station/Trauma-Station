@@ -140,7 +140,8 @@
     quickEquip: false
     slots:
     - Belt
-  - type: OnUseTimerTrigger
+  - type: TriggerOnUse
+  - type: TimerTrigger
     delay: 3
   - type: Damageable
     damageContainer: Inorganic
@@ -151,6 +152,7 @@
         damage: 10
       behaviors:
       - !type:TriggerBehavior
+        keyOut: timer # explode immediately
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Appearance
@@ -183,19 +185,25 @@
   id: ExGrenade
   components:
   - type: ExplodeOnTrigger
+    keysIn:
+    - timer
   - type: Explosive
     explosionType: Default
     maxIntensity: 10
     intensitySlope: 3
     totalIntensity: 120 # about a ~4 tile radius
     canCreateVacuum: false
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
       params:
         volume: 5
     initialBeepDelay: 0
     beepInterval: 2 # 2 beeps total (at 0 and 2)
+  - type: Construction # Trauma
+    graph: ExplosiveGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: flashbang
@@ -206,13 +214,23 @@
   - type: Sprite
     sprite: Objects/Weapons/Grenades/flashbang.rsi
   - type: FlashOnTrigger
+    keysIn:
+    - timer
     range: 7
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: "/Audio/Effects/flash_bang.ogg"
+    positional: true
   - type: DeleteOnTrigger
+    keysIn:
+    - timer
   - type: SpawnOnTrigger
+    keysIn:
+    - timer
     proto: GrenadeFlashEffect
+    predicted: true
   - type: Appearance
   - type: TimerTriggerVisuals
     primingSound:
@@ -226,6 +244,10 @@
     tags:
     - HandGrenade
     - GrenadeFlashBang
+  - type: Construction # Trauma
+    graph: FlashbangGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   id: GrenadeFlashEffect
@@ -265,11 +287,14 @@
         damage: 45
       behaviors:
       - !type:TriggerBehavior
+        keyOut: timer # immediately explode
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 5
   - type: ExplodeOnTrigger
+    keysIn:
+    - timer
   - type: Explosive
     explosionType: Minibomb
     totalIntensity: 200
@@ -283,6 +308,10 @@
         volume: 12
   - type: StaticPrice
     price: 2000
+  - type: Construction # Trauma
+    graph: SyndicateMinibombGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: self destruct
@@ -292,13 +321,17 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ExplodeOnTrigger
+    keysIn:
+    - timer
   - type: Explosive
     explosionType: Minibomb
     totalIntensity: 400
     intensitySlope: 30
     maxIntensity: 125
+    deleteAfterExplosion: false
+    repeatable: true
     canCreateVacuum: true
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 4.5
     beepSound:
       path: /Audio/Effects/Grenades/SelfDestruct/SDS_Charge2.ogg
@@ -315,8 +348,8 @@
   id: SupermatterGrenade
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/supermattergrenade.rsi
-  - type: OnUseTimerTrigger
+    sprite: Objects/Weapons/Grenades/supermattergrenade.rsi # Trauma - reverted gimped supermatter grenade
+  - type: TimerTrigger
     delay: 3
     beepInterval: 0.46
     beepSound:
@@ -328,19 +361,25 @@
       path: /Audio/Effects/Grenades/Supermatter/smbeep.ogg
       params:
         volume: -5
-  - type: Explosive
+  - type: Explosive # Trauma - reverted gimped supermatter grenade
     explosionType: Default
     totalIntensity: 200
     intensitySlope: 30
     maxIntensity: 120
-  - type: SoundOnTrigger
-    removeOnTrigger: true
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: /Audio/Effects/Grenades/Supermatter/supermatter_start.ogg
-      volume: 5
+      params:
+        volume: 5
   - type: AnchorOnTrigger
+    keysIn:
+    - timer
     removeOnTrigger: true
   - type: TwoStageTrigger
+    keysIn:
+    - timer
     triggerDelay: 10.45
     components:
       - type: AmbientSound
@@ -364,14 +403,23 @@
         radius: 6
         softness: 1
         offset: "0, 0"
-      - type: SoundOnTrigger
+      - type: EmitSoundOnTrigger
         sound:
           path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
           params:
             volume: 5
-      - type: DeleteOnTrigger
+        positional: true
+        keysIn:
+        - stageTwo
+      - type: ExplodeOnTrigger # Trauma - reverted gimped supermatter grenade
+        keysIn:
+        - stageTwo
   - type: StaticPrice
     price: 1000
+  - type: Construction # Trauma
+    graph: SupermatterGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: whitehole grenade
@@ -381,14 +429,20 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Grenades/whiteholegrenade.rsi
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 3
     beepInterval: 0.69
-  - type: SoundOnTrigger
-    removeOnTrigger: true
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: /Audio/Effects/Grenades/Supermatter/whitehole_start.ogg
-      volume: 5
+      params:
+        volume: 5
+  - type: AnchorOnTrigger
+    keysIn:
+    - timer
+    removeOnTrigger: true
   - type: TwoStageTrigger
     triggerDelay: 11.14
     components:
@@ -413,14 +467,23 @@
         radius: 6
         softness: 1
         offset: "0, 0"
-      - type: SoundOnTrigger
+      - type: EmitSoundOnTrigger
+        keysIn:
+        - stageTwo
         sound:
           path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
           params:
             volume: 15
+        positional: true
       - type: DeleteOnTrigger
+        keysIn:
+        - stageTwo
   - type: StaticPrice
     price: 1000
+  - type: Construction # Truama
+    graph: WhiteholeGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: the nuclear option
@@ -430,9 +493,11 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Grenades/nukenade.rsi
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 5
   - type: ExplodeOnTrigger
+    keysIn:
+    - timer
   - type: Explosive
     explosionType: Default
     totalIntensity: 20000 # ~15 tile radius.
@@ -445,12 +510,17 @@
         damage: 50
       behaviors:
       - !type:TriggerBehavior
+        keyOut: timer # immediately explode
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Appearance
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
+  - type: Construction #Trauma
+    graph: NuclearOptionGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: modular grenade
@@ -509,15 +579,23 @@
   - type: Sprite
     sprite: Objects/Weapons/Grenades/empgrenade.rsi
   - type: EmpOnTrigger
+    keysIn:
+    - timer
     range: 5.5
     energyConsumption: 50000
   - type: DeleteOnTrigger
+    keysIn:
+    - timer
   - type: Appearance
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
   - type: StaticPrice
     price: 666 # 2000 for 3, I love fractions
+  - type: Construction #Trauma
+    graph: EMPGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: holy hand grenade
@@ -528,13 +606,15 @@
   - type: Sprite
     sprite: Objects/Weapons/Grenades/holyhandgrenade.rsi
   - type: ExplodeOnTrigger
+    keysIn:
+    - timer
   - type: Explosive
     explosionType: Holy # Shitchap
     totalIntensity: 3500
     intensitySlope: 15
     maxIntensity: 70
     canCreateVacuum: true
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 3 # by canon
   - type: PointLight
     radius: 7
@@ -545,6 +625,10 @@
       path: /Audio/Effects/hallelujah.ogg
   - type: StaticPrice
     price: 10000
+  - type: Construction # Trauma
+    graph: HolyHandGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ GrenadeBase, BaseSecurityContraband ]
@@ -555,14 +639,25 @@
   - type: Sprite
     sprite: Objects/Weapons/Grenades/smoke.rsi
   - type: SmokeOnTrigger
+    keysIn:
+    - timer
     duration: 30
     spreadAmount: 50
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound: /Audio/Items/smoke_grenade_smoke.ogg
+    positional: true
   - type: DeleteOnTrigger
+    keysIn:
+    - timer
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Items/smoke_grenade_prime.ogg
+  - type: Construction # Trauma
+    graph: SmokeGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ BaseCivilianContraband, SmokeGrenade ]
@@ -573,6 +668,8 @@
   - type: Sprite
     sprite: Objects/Weapons/Grenades/janitor.rsi
   - type: SmokeOnTrigger
+    keysIn:
+    - timer
     duration: 15
     spreadAmount: 50
     smokePrototype: Foam
@@ -580,6 +677,10 @@
       reagents:
       - ReagentId: SpaceCleaner
         Quantity: 30
+  - type: Construction # Trauma
+    graph: CleanerGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: SmokeGrenade
@@ -590,6 +691,8 @@
   - type: Sprite
     sprite: Objects/Weapons/Grenades/tear_gas.rsi
   - type: SmokeOnTrigger
+    keysIn:
+    - timer
     duration: 10
     spreadAmount: 30
     smokePrototype: TearGasSmokeWhite
@@ -597,6 +700,10 @@
       reagents:
       - ReagentId: TearGas
         Quantity: 20
+  - type: Construction # Trauma
+    graph: TearGasGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ BaseEngineeringContraband, SmokeGrenade ]
@@ -606,14 +713,20 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Grenades/metalfoam.rsi
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 5
   - type: SmokeOnTrigger
+    keysIn:
+    - timer
     duration: 10
     spreadAmount: 20
     smokePrototype: AluminiumMetalFoam
   - type: StaticPrice
     price: 350
+  - type: Construction # Trauma
+    graph: MetalFoamGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ BaseEngineeringContraband, GrenadeBase ] # Prevent inheriting DeleteOnTrigger from SmokeGrenade
@@ -623,20 +736,24 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Grenades/airboom.rsi
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound: /Audio/Items/smoke_grenade_smoke.ogg
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Items/smoke_grenade_prime.ogg
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 3
   - type: ReleaseGasOnTrigger
+    keysIn:
+    - timer
     removeFraction: 0.25
     air:
       volume: 1000
       moles: # Target is 3117.84 mols total for filling 30 tiles (goal is 101.325 kPa @ 20C)
-      - 654.7464 # oxygen
-      - 2463.0936 # nitrogen
+        Oxygen: 654.7464 # oxygen
+        Nitrogen: 2463.0936 # nitrogen
       temperature: 293.15
   - type: StaticPrice
     price: 350
@@ -646,6 +763,10 @@
         enabled:
           True: { state: active }
           False: { state: spent }
+  - type: Construction # Trauma
+    graph: AirGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 # Non-explosive "dummy" grenades to use as a distraction.
 
@@ -658,15 +779,27 @@
   - type: Sprite
     sprite: Objects/Weapons/Grenades/grenade.rsi
   - type: DeleteOnTrigger
+    keysIn:
+    - timer
   - type: SpawnOnTrigger
+    keysIn:
+    - timer
     proto: GrenadeFlashEffect
-  - type: SoundOnTrigger
+    predicted: true
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: /Audio/Effects/Emotes/parp1.ogg
+    positional: true
   - type: Appearance
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
+  - type: Construction # Trauma
+    graph: TrickGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   name: syndicate trickybomb
@@ -676,11 +809,14 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Grenades/syndgrenade.rsi
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 5
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: /Audio/Effects/Emotes/parp1.ogg
+    positional: true
   - type: Appearance
   - type: TimerTriggerVisuals
     primingSound:
@@ -689,3 +825,7 @@
         volume: 12
   - type: StaticPrice
     price: 1000
+  - type: Construction # Trauma
+    graph: SyndicateTrickybombGraph
+    node: start
+    deconstructionTarget: null

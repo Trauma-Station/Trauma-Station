@@ -26,13 +26,13 @@ public sealed partial class NinjutsuSneakAttackComponent : Component
     public float AssassinateArmorPierce = -2.5f;
 
     [DataField]
-    public float TakedownSlowdownTime = 5f;
+    public TimeSpan TakedownSlowdownTime = TimeSpan.FromSeconds(5);
 
     [DataField]
-    public float TakedownMuteTime = 10f;
+    public TimeSpan TakedownMuteTime = TimeSpan.FromSeconds(10);
 
     [DataField]
-    public float TakedownSpeedModifier = 0.2f;
+    public EntProtoId TakedownStatusEffect = "NinjutsuTakedownStatusEffect";
 
     [DataField]
     public float TakedownBackstabMultiplier = 1.5f;

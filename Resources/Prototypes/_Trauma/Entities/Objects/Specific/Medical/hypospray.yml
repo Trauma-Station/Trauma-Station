@@ -1,0 +1,61 @@
+- type: entity
+  parent: BaseItem
+  id: MedicalHyposprayEmpty
+  name: medical hypospray
+  suffix: Empty
+  description: A sterile injector for rapid administration of drugs to patients. This mass-produced version is fed by an attached vial.
+  components:
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Medical/medical_hypospray.rsi
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Medical/medical_hypospray.rsi
+    layers:
+    - state: hypo
+      map: ["enum.SolutionContainerLayers.Base"]
+    - state: fill-1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: SolutionContainerManager
+    solutions:
+      hypospray:
+        maxVol: 0 # prevent any funnies
+  - type: VialHypospray
+    slot: vial
+  - type: Hypospray
+    transferAmount: 5
+    onlyAffectsMobs: false
+    injectOnly: true # take the vial out chuddy
+  - type: UseDelay
+    delay: 0.5
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    insertedItemSlotID: vial # thank you shitcoder that added this
+    maxFillLevels: 6
+    fillBaseName: fill-
+    solutionName: hypospray
+  - type: ItemMapper
+    mapLayers:
+      hypo-vial:
+        whitelist:
+          tags:
+          - CentrifugeCompatible
+  - type: ContainerContainer
+    containers:
+      vial: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      vial:
+        name: Vial
+        whitelist:
+          tags:
+          - CentrifugeCompatible
+
+- type: entity
+  parent: MedicalHyposprayEmpty
+  id: MedicalHyposprayFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      vial:
+      - BaseChemistryEmptyVial

@@ -29,8 +29,4 @@ reagent-effect-condition-guidebook-unique-bloodstream-chem-threshold =
                  }
     }
 
-reagent-effect-condition-guidebook-typed-damage-threshold =
-    { $inverse ->
-        [true] the target has at most
-        *[false] the target has at least
-    } { $changes } damage
+reagent-effect-condition-guidebook-typed-damage-threshold = the target has at most { $changes } damage

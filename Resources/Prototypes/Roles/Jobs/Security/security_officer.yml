@@ -91,7 +91,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 9000 #2.5 hrs
+      time: 2.5h
   startingGear: SecurityOfficerGear
   icon: "JobIconSecurityOfficer"
   supervisors: job-supervisors-hos
@@ -104,6 +104,8 @@
   - Service
   - External
   - Cryogenics
+  - GenpopEnter
+  - GenpopLeave
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -116,11 +118,11 @@
   equipment:
     eyes: ClothingEyesGlassesSecurity
     ears: ClothingHeadsetAltSecurityRegular # Goobstation
-    pocket1: WeaponPistolMk58
+    pocket1: WeaponLaserSidearm # Trauma
   storage:
     back:
     - Flash
-    - MagazinePistol
+#    - MagazinePistol - Trauma
 
 - type: chameleonOutfit
   id: SecurityOfficerChameleonOutfit

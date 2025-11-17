@@ -25,10 +25,9 @@
     reoccurrenceDelay: 45
     weight: 4 # Goobstation - 7.5 -> 4
     minimumPlayers: 10
-    duration: 1
-    chaos:
-      Hostile: 75
-      Medical: 75
+    duration: null # Goobstation - chud
+    chaos: # Trauma - abductors arent meant to actively harm crew
+      Hostile: 15
     eventType: HostilesSpawn
   - type: GameRule
     chaosScore: 300
@@ -64,15 +63,6 @@
         - MindRoleGhostRoleSoloAntagonist
         raffle:
           settings: default
-        requirements:
-        - !type:OverallPlaytimeRequirement
-          time: 180000 #50 hours
-        - !type:DepartmentTimeRequirement
-          department: Medical
-          time: 7200 #2 hours
-        - !type:DepartmentTimeRequirement
-          department: Security
-          time: 7200 #2 hours
       - type: GhostTakeoverAvailable
       - type: NpcFactionMember
         factions:
@@ -125,10 +115,9 @@
     reoccurrenceDelay: 45
     weight: 4 # Goobstation - 7.5 -> 4
     minimumPlayers: 20
-    duration: 1
-    chaos:
-      Hostile: 150
-      Medical: 150
+    duration: null # Goobstation - chud
+    chaos: # Trauma - abductors arent meant to actively harm crew
+      Hostile: 20
     eventType: HostilesSpawn
   - type: GameRule
     chaosScore: 450
@@ -164,12 +153,6 @@
         - MindRoleGhostRoleTeamAntagonist
         raffle:
           settings: default
-        requirements:
-        - !type:OverallPlaytimeRequirement
-          time: 180000 #50 hours
-        - !type:DepartmentTimeRequirement
-          department: Medical
-          time: 10800 #3 hours
       - type: GhostTakeoverAvailable
       - type: NpcFactionMember
         factions:
@@ -215,12 +198,6 @@
         - MindRoleGhostRoleTeamAntagonist
         raffle:
           settings: default
-        requirements:
-        - !type:OverallPlaytimeRequirement
-          time: 18000 #5 hours
-        - !type:DepartmentTimeRequirement
-          department: Security
-          time: 10800 #3 hours
       - type: GhostTakeoverAvailable
       - type: NpcFactionMember
         factions:
@@ -233,6 +210,7 @@
       - type: Tag
         tags:
           - Abductor
+          - AbductorScientist # Trauma - stop agent being a cuck
           - CanPilot
           - FootstepSound
           - DoorBumpOpener

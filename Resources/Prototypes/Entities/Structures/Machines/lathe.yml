@@ -338,6 +338,10 @@
     - !type:AutomatedMaterialStorage
       input: AutomationSlotMaterials
       output: null
+    - !type:AutomatedPorts
+      sinks:
+      - LathePrint
+  - type: LatheAutomation # Goobstation
   - type: SpamEmitSound # Goobstation - random lathe sounds
     minInterval: 300
     maxInterval: 900
@@ -406,7 +410,7 @@
   - type: Machine
     board: AutolatheMachineCircuitboard
   - type: MaterialStorage
-    whitelist:
+    whitelist: &StandardMaterialWhitelist
       tags:
         - Sheet
         - RawMaterial
@@ -421,6 +425,8 @@
     - PartsStatic
     - AtmosStatic
     - CablesStatic
+    - PaperworkStatic
+    - TowelsStatic
     #- CargoStatic Goob edit - Moved to Cargo fab
     - MaterialsStatic
     - BasicChemistryStatic
@@ -440,8 +446,8 @@
     emagStaticPacks:
     - SecurityWeaponsStatic
     - SecurityAmmoStatic
+    - SyndicateAmmoStatic
     # Goobstation
-    - SecurityWeaponsStaticGoob
     - SecurityAmmoStaticGoob
     - SyndicateAmmoLightStatic
     - ScienceExplosives
@@ -491,11 +497,7 @@
   - type: Machine
     board: ProtolatheMachineCircuitboard
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+    whitelist: *StandardMaterialWhitelist
   - type: Lathe
     idleState: icon
     runningState: building
@@ -518,7 +520,6 @@
     - Janitor
     - Instruments
     - Equipment # Goobstation note: handheld mass scanner is removed
-    - FauxTiles
     # Goobstation Packs
     # - ServiceWeapons
     - SpecOpsGoogles
@@ -580,7 +581,6 @@
     - CargoBoardsStatic
     #- MedicalBoardsStatic - Goobstation - Moved to Scifab and Medfab
     #- EngineeringBoardsStatic - Goobstation - Moved to Scifab and Engifab
-    - CircuitFloorsStatic
     # Goobstation Packs
     - SharedBoardsStatic
     - MedicalBoardsStaticGoob
@@ -598,11 +598,7 @@
     - SharedBoards
     - ShuttleBoardsGoob
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+    whitelist: *StandardMaterialWhitelist
   - type: RequireProjectileTarget
 
 - type: entity
@@ -648,6 +644,7 @@
     - PartsStatic
     - CablesStatic
     - PowerCellsStatic
+    - TraumaCyberneticsStatic # Trauma
     dynamicPacks:
     - Robotics
     - BorgModules
@@ -664,6 +661,7 @@
     - PowerAugments
     - ToolAugments
     - PowerCells
+    - TraumaCybernetics # Trauma
   - type: EmagLatheRecipes # Goobstation
     emagStaticPacks:
     - MechWeaponsSecurityStatic
@@ -671,11 +669,7 @@
     - MechWeaponsSalvage
     - MechWeaponsSecurityLight
   - type: MaterialStorage
-    whitelist:
-      tags:
-      - Sheet
-      - RawMaterial
-      - Ingot
+    whitelist: *StandardMaterialWhitelist
   - type: GuideHelp
     guides:
     - Robotics
@@ -762,8 +756,6 @@
     - PowerCellsStatic
     - ScienceExplosives
     - GrenadeTriggersStatic
-    - SecurityWeaponsStaticGoob
-    - SecurityWeaponsNonEmaggableStaticGoob
     dynamicPacks:
     - SalvageSecurityBoards
     - SalvageSecurityWeapons
@@ -773,7 +765,7 @@
     - SecurityAmmo
     - SecurityWeapons
     - SecurityDisablers
-    # Goobstation
+    # <Goob>
     - SecurityWeaponsGoob
     - RestraintTechnology
     - MechBoardsSecurity
@@ -784,16 +776,16 @@
     # - ServiceWeapons
     - SpecOpsGoogles
     - PowerCells
-  - type: EmagLatheRecipes # Goobstation
+    # </Goob>
+  - type: EmagLatheRecipes
     emagStaticPacks:
+    - SyndicateAmmoStatic
+    # <Goob>
     - SyndicateAmmoLightStatic
     - SyndicateAmmoHeavyStatic
+    # </Goob>
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+    whitelist: *StandardMaterialWhitelist
 
 - type: entity
   id: AmmoTechFab
@@ -821,18 +813,16 @@
       runningState: icon
       staticPacks:
       - SecurityAmmoStatic
-      # Goobstation Packs
-      - SecurityAmmoStaticGoob
-    - type: EmagLatheRecipes # Goobstation Packs
+      - SecurityAmmoStaticGoob # Goob
+    - type: EmagLatheRecipes
       emagStaticPacks:
+      - SyndicateAmmoStatic
+      # <Goob>
       - SyndicateAmmoLightStatic
       - SyndicateAmmoHeavyStatic
+      # </Goob>
     - type: MaterialStorage
-      whitelist:
-        tags:
-          - Sheet
-          - RawMaterial
-          - Ingot
+      whitelist: *StandardMaterialWhitelist
 
 - type: entity
   id: MedicalTechFab
@@ -875,6 +865,7 @@
     - GrenadeTriggersStatic
     # Einstein Engines Packs
     - SyringeCase
+    - TraumaMedicalStatic # Trauma
     dynamicPacks:
     - Chemistry
     # Goobstation Packs
@@ -890,6 +881,7 @@
     # Einstein Engines Packs
     - Translators # Language
     - TranslatorImplanters # Language
+    - TraumaCybernetics # Trauma
   - type: Machine
     board: MedicalTechFabCircuitboard
   - type: EmagLatheRecipes # Goobstation Packs
@@ -919,6 +911,7 @@
     idleState: icon
     runningState: building
     staticPacks:
+    - TowelsStatic
     - ClothingCivilian
     - ClothingCargo
     - ClothingCommand
@@ -943,11 +936,7 @@
     - ClothingDurathreadArmoured
     - ClothingCasualContrabandJumpsuits
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - RawMaterial
-        - Ingot
+    whitelist: *StandardMaterialWhitelist
 
 - type: entity
   id: Biogenerator
@@ -991,6 +980,10 @@
     staticPacks:
     - BioGenIngredientsStatic
     - BioGenMaterialsStatic
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - BioGenEmagStatic
+    - HostileCubesStatic
 
 - type: entity
   parent: [BaseLathe, BaseSiloUtilizer] # Goob edit
@@ -1111,12 +1104,15 @@
     idleState: icon
     runningState: building
     staticPacks:
-    - FloorTilesStatic
+    - FloorDarkTilesStatic
+    - FloorSteelTilesStatic
+    - FloorWhiteTilesStatic
+    - FloorMaintsTilesStatic
+    - FloorWoodTilesStatic
+    - FloorConcreteTilesStatic
+    - CircuitFloorsStatic
+    - FloorMarbleTilesStatic
+    dynamicPacks:
+    - FauxTiles
   - type: MaterialStorage
-    whitelist:
-      tags:
-        - Sheet
-        - Metal
-        - Wooden
-        - RawMaterial
-        - Plastic
+    whitelist: *StandardMaterialWhitelist

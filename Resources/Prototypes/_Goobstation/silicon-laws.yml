@@ -30,6 +30,7 @@
 
 - type: siliconLawset
   id: HelpimovLawset
+  name: law-helpimov-name
   laws:
   - Helpimov1
   - Helpimov2

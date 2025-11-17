@@ -3,10 +3,10 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared._EinsteinEngines.Language.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Shared._EinsteinEngines.Language.Components;
 
@@ -17,7 +17,8 @@ namespace Content.Shared._EinsteinEngines.Language.Components;
 ///     All fields of this component are populated during a DetermineEntityLanguagesEvent.
 ///     They are not to be modified externally.
 /// </remarks>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, Access(typeof(SharedLanguageSystem), typeof(SharedTranslatorSystem))]
+[AutoGenerateComponentState(true)]
 public sealed partial class LanguageSpeakerComponent : Component
 {
     public override bool SendOnlyToOwner => true;
@@ -26,26 +27,18 @@ public sealed partial class LanguageSpeakerComponent : Component
     ///     The current language the entity uses when speaking.
     ///     Other listeners will hear the entity speak in this language.
     /// </summary>
-    [DataField]
-    public string CurrentLanguage = ""; // The Language system will override it on mapinit
+    [DataField, AutoNetworkedField]
+    public ProtoId<LanguagePrototype> CurrentLanguage = SharedLanguageSystem.FallbackLanguagePrototype; // The Language system will override it on mapinit
 
     /// <summary>
     ///     List of languages this entity can speak at the current moment.
     /// </summary>
-    [DataField]
-    public List<ProtoId<LanguagePrototype>> SpokenLanguages = [];
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<LanguagePrototype>> SpokenLanguages = new();
 
     /// <summary>
     ///     List of languages this entity can understand at the current moment.
     /// </summary>
-    [DataField]
-    public List<ProtoId<LanguagePrototype>> UnderstoodLanguages = [];
-
-    [Serializable, NetSerializable]
-    public sealed class State : ComponentState
-    {
-        public string CurrentLanguage = default!;
-        public List<ProtoId<LanguagePrototype>> SpokenLanguages = default!;
-        public List<ProtoId<LanguagePrototype>> UnderstoodLanguages = default!;
-    }
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<LanguagePrototype>> UnderstoodLanguages = new();
 }

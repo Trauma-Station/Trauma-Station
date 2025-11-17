@@ -87,7 +87,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Alert;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Nutrition.Components;
@@ -329,13 +329,13 @@ public sealed class HungerSystem : EntitySystem
         switch (component.CurrentThreshold)
         {
             case HungerThreshold.Overfed:
-                _prototype.TryIndex(HungerIconOverfedId, out prototype);
+                _prototype.Resolve(HungerIconOverfedId, out prototype);
                 break;
             case HungerThreshold.Peckish:
-                _prototype.TryIndex(HungerIconPeckishId, out prototype);
+                _prototype.Resolve(HungerIconPeckishId, out prototype);
                 break;
             case HungerThreshold.Starving:
-                _prototype.TryIndex(HungerIconStarvingId, out prototype);
+                _prototype.Resolve(HungerIconStarvingId, out prototype);
                 break;
             default:
                 prototype = null;

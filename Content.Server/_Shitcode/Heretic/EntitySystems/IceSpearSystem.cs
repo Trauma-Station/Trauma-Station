@@ -1,6 +1,5 @@
 using Content.Goobstation.Common.Religion;
 using Content.Server.Damage.Systems;
-using Content.Server.Temperature.Components;
 using Content.Shared._Goobstation.Wizard.Traps;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Actions;
@@ -8,6 +7,7 @@ using Content.Shared.Ghost;
 using Content.Shared.Heretic;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
+using Content.Shared.Temperature.Components;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;

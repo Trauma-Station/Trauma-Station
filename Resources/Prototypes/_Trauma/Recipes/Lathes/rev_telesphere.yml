@@ -3,7 +3,7 @@
   id: BaseRevsMaterials
   completetime: 30
   materials:
-    Plasma: 1500
+    Plasma: 500
 
 - type: latheRecipe
   id: RevBrass
@@ -99,3 +99,8 @@
   id: RevPlastic
   parent: BaseRevsMaterials
   result: SheetPlastic
+
+- type: latheRecipe
+  id: RevGunpowder
+  parent: BaseRevsMaterials
+  result: MaterialGunpowder60

@@ -101,8 +101,13 @@
   - type: TargetObjective
     title: objective-condition-escape-identity-title
   - type: PickRandomPerson
-    needsOrganic: true # Don't pick IPCs.
-    excludeChangeling: true # if they swap identities its a guarantee fail
+    filters:
+    - !type:BodyMindFilter
+      inverted: true # don't pick these
+      whitelist:
+        components:
+        - Silicon # Don't pick IPCs
+        - Changeling # if they swap identities its a guaranteed fail
 
 - type: entity
   parent: [BaseChangelingSyndicateObjective, BaseStealObjective]
@@ -122,7 +127,12 @@
     unique: true
   - type: TargetObjective
     title: objective-condition-kill-head-title
-  - type: PickRandomHead
+  - type: PickRandomPerson
+    filters:
+    - !type:BodyMindFilter
+      whitelist:
+        components:
+        - CommandStaff
   - type: KillPersonCondition
     requireDead: true
 
@@ -136,7 +146,7 @@
   id: LingCMOStealObjective
   components:
   - type: NotJobRequirement
-    job: ChiefMedicalOfficer
+    jobs: [ ChiefMedicalOfficer ]
   - type: StealCondition
     owner: job-name-cmo
 
@@ -162,7 +172,7 @@
   id: LingRDStealObjective
   components:
   - type: NotJobRequirement
-    job: ResearchDirector
+    jobs: [ ResearchDirector ]
   - type: StealCondition
     owner: job-name-rd
 
@@ -180,17 +190,17 @@
   - type: StealCondition
     stealGroup: HandTeleporter
 
-## warden
+## hos
 
 - type: entity
   parent: ChangelingStealObjective
-  id: LingEnergyShotgunStealObjective
+  id: LingEnergyMagnumStealObjective
   components:
   - type: NotJobRequirement
-    job: Warden # Goob edit
+    jobs: [ HeadOfSecurity ]
   - type: StealCondition
-    stealGroup: WeaponEnergyShotgun
-    owner: job-name-warden # Goob edit
+    stealGroup: WeaponEnergyMagnum
+    owner: job-name-hos
 
 ## ce
 
@@ -200,7 +210,7 @@
   id: LingCEStealObjective
   components:
   - type: NotJobRequirement
-    job: ChiefEngineer
+    jobs: [ ChiefEngineer ]
   - type: StealCondition
     owner: job-name-ce
 
@@ -218,7 +228,7 @@
   id: LingClipboardStealObjective
   components:
   - type: NotJobRequirement
-    job: Quartermaster
+    jobs: [ Quartermaster ]
   - type: StealCondition
     stealGroup: BoxFolderQmClipboard
     owner: job-name-qm
@@ -228,7 +238,7 @@
   id: LingKnuckleDustersStealObjective
   components:
   - type: NotJobRequirement
-    job: Quartermaster
+    jobs: [ Quartermaster ]
   - type: StealCondition
     stealGroup: ClothingHandsKnuckleDustersQM
     owner: job-name-qm
@@ -240,7 +250,7 @@
   id: LingCorgiMeatStealObjective
   components:
   - type: NotJobRequirement
-    job: HeadOfPersonnel
+    jobs: [ HeadOfPersonnel ]
   - type: StealCondition
     stealGroup: FoodMeatCorgi
     owner: objective-condition-steal-Ian
@@ -253,7 +263,7 @@
   id: LingCaptainObjective
   components:
   - type: NotJobRequirement
-    job: Captain
+    jobs: [ Captain ]
 
 - type: entity
   parent: LingCaptainObjective

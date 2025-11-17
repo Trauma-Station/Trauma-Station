@@ -1,0 +1,6 @@
+- type: ghostRoleRaffleSettings
+  id: reinforcement
+  settings:
+    initialDuration: 180 #3 minutes
+    joinExtendsDurationBy: 0
+    maxDuration: 180

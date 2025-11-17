@@ -12,9 +12,10 @@
 using System.Linq;
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Server.Emp;
+using Content.Shared.Emp;
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -31,11 +32,10 @@ public sealed class BlobbernautSystem : SharedBlobbernautSystem
 
     [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EmpSystem _empSystem = default!;
+    [Dependency] private readonly SharedEmpSystem _emp = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
-    //private EntityQuery<MapGridComponent> _mapGridQuery;
     private EntityQuery<BlobTileComponent> _tileQuery;
     private EntityQuery<BlobCoreComponent> _coreQuery;
 
@@ -44,14 +44,11 @@ public sealed class BlobbernautSystem : SharedBlobbernautSystem
         base.Initialize();
         SubscribeLocalEvent<BlobbernautComponent, MeleeHitEvent>(OnMeleeHit);
 
-        //_mapGridQuery = GetEntityQuery<MapGridComponent>();
         _tileQuery = GetEntityQuery<BlobTileComponent>();
         _coreQuery = GetEntityQuery<BlobCoreComponent>();
     }
 
-
     private readonly HashSet<Entity<BlobTileComponent>> _entitySet = new();
-
 
     public override void Update(float frameTime)
     {
@@ -111,15 +108,15 @@ public sealed class BlobbernautSystem : SharedBlobbernautSystem
             {
                 var xform = Transform(args.HitEntities.FirstOrDefault());
                 if (_random.Prob(0.2f))
-                    _empSystem.EmpPulse(_transform.GetMapCoordinates(xform), 3f, 50f, 3f);
+                    _emp.EmpPulse(_transform.GetMapCoordinates(xform), 3f, 50f, TimeSpan.FromSeconds(3f));
                 break;
             }
         }
     }
 
-    private DamageSpecifier? TryChangeDamage(string msg, EntityUid ent, DamageSpecifier dmg)
+    private DamageSpecifier TryChangeDamage(string msg, EntityUid ent, DamageSpecifier dmg)
     {
         _popup.PopupEntity(Loc.GetString(msg), ent, ent, PopupType.LargeCaution);
-        return _damageableSystem.TryChangeDamage(ent, dmg);
+        return _damageableSystem.ChangeDamage(ent, dmg);
     }
 }

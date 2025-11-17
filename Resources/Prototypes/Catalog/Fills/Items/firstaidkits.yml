@@ -53,7 +53,7 @@
     contents:
       - id: Ointment
         amount: 2
-      - id: SprayBottleSilverSulfadiazine # Goobstation
+#      - id: SprayBottleSilverSulfadiazine # Trauma
       - id: BurnAutoInjector # Goobstation
       - id: PillCanisterDermaline
 
@@ -66,7 +66,7 @@
     contents:
       - id: Brutepack
       - id: Gauze
-      - id: SprayBottleStypticPowder # Goobstation
+#      - id: SprayBottleStypticPowder # Trauma
       - id: BruteAutoInjector # Goobstation
       - id: PillCanisterIron
 

@@ -4,12 +4,6 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-reagent-effect-condition-guidebook-has-component =
-    the target { $invert ->
-                 [true] is not
-                 *[false] is
-                } {$comp}
-
 reagent-effect-guidebook-drop-items =
     { $chance ->
         [1] Forces
@@ -22,6 +16,7 @@ reagent-desc-thick-smoke = Extremely thick smoke with magical properties. You do
 reagent-name-mugwort = mugwort tea
 reagent-desc-mugwort = A rather bitter herb once thought to hold magical protective properties.
 
-reagent-comp-condition-wizard-or-apprentice = wizard or apprentice
+entity-effect-condition-wizard-or-apprentice = the target is a wizard or apprentice
+entity-effect-condition-not-wizard-or-apprentice = the target is not a wizard or apprentice
 
 reagent-physical-desc-magical = magical

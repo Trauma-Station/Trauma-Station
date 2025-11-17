@@ -1,20 +1,3 @@
-# SPDX-FileCopyrightText: 2022 Andreas Kämper <andreas.kaemper@5minds.de>
-# SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 ArkiveDev <95712736+ArkiveDev@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 august-sun <45527070+august-sun@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 august-sun <45527070+august.sun@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 keronshb <54602815+keronshb@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   id: ImmovableRod
   name: immovable rod
@@ -23,6 +6,7 @@
   - type: Clickable
   - type: InteractionOutline
   - type: MovementIgnoreGravity
+    weightless: true
   - type: Sprite
     sprite: Objects/Fun/immovable_rod.rsi
     state: icon
@@ -30,6 +14,7 @@
   - type: ImmovableRod
     minSpeed: 15 # Goobstation
     maxSpeed: 15 # Goobstation
+  - type: GravityAffected
   - type: Physics
     bodyType: Dynamic
     linearDamping: 0
@@ -55,39 +40,6 @@
   - type: WarpPoint
     follow: true
     location: immovable rod
-
-# goob edit
-- type: entity
-  id: ImmovableVoidRod
-  name: immovable void rod
-  description: You can sense that it's hungry. That's usually a bad sign.
-  components:
-  - type: Clickable
-  - type: InteractionOutline
-  - type: MovementIgnoreGravity
-  - type: Sprite
-    sprite: _Goobstation/Heretic/abilities_heretic.rsi
-    state: immovable_rod
-    noRot: false
-  - type: ImmovableVoidRod
-  - type: Physics
-    bodyType: Dynamic
-    linearDamping: 0
-  - type: PointLight
-    radius: 3
-    color: blue
-    energy: 2.0
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb # Goob edit
-          bounds: "-0.1,-0.5,0.1,0.5"
-        density: 5
-        hard: false
-        layer:
-        - Impassable
-        - Opaque
 
 - type: entity
   id: ImmovableRodDespawn
@@ -132,9 +84,7 @@
     shouldGib: false
     damage:
       types:
-        Blunt: 70 # Goob edit
-  - type: MovementIgnoreGravity
-    gravityState: true
+        Blunt: 70 # Goob edit - was 190
   # - type: InputMover # Goob edit
   - type: MovementSpeedModifier
     baseWeightlessAcceleration: 5

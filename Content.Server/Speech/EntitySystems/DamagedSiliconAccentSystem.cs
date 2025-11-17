@@ -1,8 +1,9 @@
+using Content.Shared.Power.Components; // Goobstation
 using System.Text;
 using Content.Server.Destructible;
 using Content.Server.PowerCell;
 using Content.Shared.Speech.Components;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Speech;
 using Robust.Shared.Random;
@@ -32,7 +33,8 @@ public sealed class DamagedSiliconAccentSystem : EntitySystem
             {
                 currentChargeLevel = ent.Comp.OverrideChargeLevel.Value;
             }
-            else if (_powerCell.TryGetBatteryFromSlot(uid, out var battery))
+            else if (_powerCell.TryGetBatteryFromSlot(uid, out var battery) ||
+                     TryComp<BatteryComponent>(uid, out battery)) // Goobstation - Energycrit: Make this work with BatteryComponent too
             {
                 currentChargeLevel = battery.CurrentCharge / battery.MaxCharge;
             }

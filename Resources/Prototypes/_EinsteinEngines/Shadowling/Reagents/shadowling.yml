@@ -8,8 +8,15 @@
   flavor: sharp
   metabolisms:
     Medicine:
+      conditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - Shadowling
+          - Thrall
+        guidebookText: entity-effect-condition-shadowling-or-thrall
       effects:
-      - !type:HealShadowling
+      - !type:HealthChange
         damage:
           groups:
             Burn: -9
@@ -19,8 +26,19 @@
             Poison: -9
             Bloodloss: -9
     Narcotic:
+      conditions:
+      - !type:WhitelistCondition
+        blacklist:
+          components:
+          - Shadowling
+          - Thrall
+        guidebookText: entity-effect-condition-not-shadowling-or-thrall
       effects:
-      - !type:BlindNonShadowling
+      - !type:GenericStatusEffect
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: ShadowlingToxin
           min: 5
+        key: TemporaryBlindness
+        component: TemporaryBlindness
+        time: 3

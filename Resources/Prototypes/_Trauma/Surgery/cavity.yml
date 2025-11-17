@@ -1,0 +1,15 @@
+# ribcage requirement is shitcode so need a separate one
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryInsertItemGroin
+  name: Cavity Implant
+  suffix: Groin
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepPriseOpenBones
+    - SurgeryStepInsertItem
+    - SurgeryStepRemoveItem
+  - type: SurgeryPartCondition
+    part: Groin

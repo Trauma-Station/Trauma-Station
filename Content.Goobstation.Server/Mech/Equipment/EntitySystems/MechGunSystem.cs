@@ -8,14 +8,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Mech.Systems;
-using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Mech.Equipment.Components;
+using Content.Shared.Power.Components;
 using Content.Shared.Weapons.Ranged.Components;
 
 namespace Content.Goobstation.Server.Mech.Equipment.EntitySystems;
+
 public sealed class MechGunSystem : EntitySystem
 {
     [Dependency] private readonly MechSystem _mech = default!;

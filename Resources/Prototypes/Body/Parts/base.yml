@@ -57,6 +57,7 @@
 
 - type: entity
   abstract: true
+  parent: BaseBodyPartCavity # Trauma
   id: BaseChestInorganic
   name: "chest"
   components:
@@ -68,7 +69,6 @@
     partType: Chest
     # Shitmed Change Start
     toolName: "a chest"
-    containerName: "chest_slot"
     children:
       groin:
         id: groin
@@ -112,7 +112,6 @@
     causesDeath: true
   - type: ContainerContainer
     containers:
-      chest_slot: !type:ContainerSlot {}
       Wounds: !type:Container # Shitmed Change
         ents: []
       Bone: !type:Container # Shitmed Change
@@ -120,6 +119,7 @@
 
 - type: entity
   abstract: true
+  parent: BaseBodyPartCavity # Trauma
   id: BaseGroinInorganic
   name: "groin"
   components:
@@ -197,9 +197,7 @@
         id: eyes
   - type: Input
     context: "ghost"
-  - type: Tag
-    tags:
-      - Head
+  # <Shitmed>
   - type: Woundable
     boneEntity: BoneNeck
     integrity: 65
@@ -235,6 +233,7 @@
         ents: []
       Bone: !type:Container # Shitmed Change
         ents: []
+  # </Shitmed>
 
 - type: entity
   abstract: true

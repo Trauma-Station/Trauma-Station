@@ -142,6 +142,12 @@ public sealed partial class GoobCVars
         CVarDef.Create("control.toggle_sprint", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
+    /// Whether the player mob is walking by default instead of running.
+    /// </summary>
+    public static readonly CVarDef<bool> DefaultWalk =
+        CVarDef.Create("control.default_walk", false, CVar.CLIENT | CVar.REPLICATED | CVar.ARCHIVE);
+
+    /// <summary>
     ///     Enable Dorm Notifier
     /// </summary>
     public static readonly CVarDef<bool> DormNotifier =
@@ -245,10 +251,10 @@ public sealed partial class GoobCVars
         CVarDef.Create("silicon.npcupdatetime", 1.5f, CVar.SERVERONLY);
 
     /// <summary>
-    ///     Should the player automatically get up after being knocked down
+    ///     Sets the size of the hitbox where projectile/laser will hit any entity regardless of crawling
     /// </summary>
-    public static readonly CVarDef<bool> AutoGetUp =
-        CVarDef.Create("white.auto_get_up", true, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED); // WD EDIT
+    public static readonly CVarDef<float> CrawlHitzoneSize =
+        CVarDef.Create("goob.crawl_hitzone_size", 0.4f, CVar.SERVER | CVar.REPLICATED);
 
     #region Blob
     public static readonly CVarDef<int> BlobMax =
@@ -561,6 +567,12 @@ public sealed partial class GoobCVars
     #region Misc
 
     /// <summary>
+    /// Whether or not to automatically focus the search bar when opening the build menu.
+    /// </summary>
+    public static readonly CVarDef<bool> AutoFocusSearchOnBuildMenu =
+        CVarDef.Create("ui.auto_focus_search_on_build_menu", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
     /// Whether or not to show detailed examine text.
     /// </summary>
     public static readonly CVarDef<bool> DetailedExamine =
@@ -578,22 +590,18 @@ public sealed partial class GoobCVars
     public static readonly CVarDef<bool> UseDynamicHostname =
         CVarDef.Create("hub.use_dynamic_hostname", false, CVar.SERVERONLY);
 
+    /// <summary>
+    /// Determines minimum amount of solution you have to step into for footprints to be created.
+    /// </summary>
+    public static readonly CVarDef<float> MinimumPuddleSizeForFootprints =
+        CVarDef.Create("footprints.minimum_puddle_size", 6f, CVar.SERVERONLY);
+
     #endregion
 
-    // TODO: Move trauma cvars to traumamod when it's real
-    #region Trauma
+    #region Flash
 
-    /// <summary>
-    ///     Are height/width sliders enabled
-    /// </summary>
-    public static readonly CVarDef<bool> HeightSliders =
-        CVarDef.Create("trauma.height_sliders_enabled", false, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
-    ///     Is sprinting enabled
-    /// </summary>
-    public static readonly CVarDef<bool> SprintEnabled =
-        CVarDef.Create("trauma.sprint_enabled", false, CVar.SERVER | CVar.REPLICATED);
+    public static readonly CVarDef<bool> FlashDirectionCheck =
+        CVarDef.Create("flash.direction_check", true, CVar.ARCHIVE | CVar.REPLICATED);
 
     #endregion
 }

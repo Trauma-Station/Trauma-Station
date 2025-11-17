@@ -12,7 +12,7 @@
 using Content.Goobstation.Server.Implants.Components;
 using Content.Server.Body.Systems;
 using Content.Shared.Body.Components;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Implants;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
@@ -34,10 +34,7 @@ public sealed class StypticStimulatorImplantSystem : EntitySystem
 
     private void OnImplant(Entity<StypticStimulatorImplantComponent> implant, ref ImplantImplantedEvent args)
     {
-        if (!args.Implanted.HasValue || TerminatingOrDeleted(args.Implanted.Value))
-            return;
-
-        implant.Comp.User = args.Implanted.Value;
+        implant.Comp.User = args.Implanted;
     }
 
     public override void Update(float frameTime)
@@ -53,8 +50,7 @@ public sealed class StypticStimulatorImplantSystem : EntitySystem
             if (TryComp<BloodstreamComponent>(user, out var bloodstreamComponent))
                 _bloodstream.TryModifyBleedAmount((user, bloodstreamComponent), comp.BleedingModifier);
 
-            if (TryComp<DamageableComponent>(user, out var damageableComponent))
-                _damageable.TryChangeDamage(user, comp.DamageModifier, true, false, damageableComponent);
+            _damageable.ChangeDamage(user, comp.DamageModifier, true, false);
 
             comp.NextExecutionTime = _gameTiming.CurTime + comp.ExecutionDelay;
         }

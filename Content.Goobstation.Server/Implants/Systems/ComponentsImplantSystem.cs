@@ -20,9 +20,7 @@ public sealed class ComponentsImplantSystem : EntitySystem
 
     public void OnImplanted(Entity<ComponentsImplantComponent> ent, ref ImplantImplantedEvent args)
     {
-        if (args.Implanted is not {} mob)
-            return;
-
+        var mob = args.Implanted;
         if (ent.Comp.Added is {} added)
             EntityManager.AddComponents(mob, added);
         if (ent.Comp.Removed is {} removed)

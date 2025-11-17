@@ -8,3 +8,54 @@
   - Heretic
   - Wizard
   - Blob
+
+- type: npcFaction
+  id: Balloon
+  # Balloons can't attack
+
+- type: npcFaction
+  id: Monkey
+  hostile:
+  - Balloon # Custom faction specifically for attacking bloons
+
+- type: npcFaction
+  id: Wraith
+  hostile:
+  - NanoTrasen
+  - Syndicate
+  - Passive
+  - PetsNT
+  - Zombie
+  - Revolutionary
+  - Dragon
+  - Xeno
+  - AllHostile
+  - Xenoborg
+  - Heretic
+  - Blob
+  - PirateFaction
+  friendly:
+  - Lavafauna
+
+# Lavaland mob faction to stop gang wars
+- type: npcFaction
+  id: Lavafauna
+  hostile:
+  - NanoTrasen
+  - Mouse
+  - Passive
+  - PetsNT
+  - SimpleHostile
+  - SimpleNeutral
+  - Syndicate
+  - Xeno
+  - Zombie
+  - Revolutionary
+  - Changeling
+  - Heretic
+  - Blob
+  - Shadowling
+  - Wizard
+  - PirateFaction
+  friendly:
+  - Dragon

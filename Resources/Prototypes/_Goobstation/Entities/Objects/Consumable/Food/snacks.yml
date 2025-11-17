@@ -92,7 +92,7 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: proteinbar
   - type: Item
-  - type: Food
+  - type: Edible
     trash:
     - FoodPacketProteinbarTrash
   - type: SolutionContainerManager
@@ -231,7 +231,7 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: tidegobs
   - type: Item
-  - type: Food
+  - type: Edible
     trash:
     - FoodPacketTidegobsTrash
 
@@ -248,7 +248,7 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: saturno
   - type: Item
-  - type: Food
+  - type: Edible
     trash:
     - FoodPacketSaturnosTrash
 
@@ -265,7 +265,7 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: jupiter
   - type: Item
-  - type: Food
+  - type: Edible
     trash:
     - FoodPacketJoveGelloTrash
 
@@ -282,7 +282,7 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: pluto
   - type: Item
-  - type: Food
+  - type: Edible
     trash:
     - FoodPacketPlutoniumrodsTrash
 
@@ -301,7 +301,7 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: mars
   - type: Item
-  - type: Food
+  - type: Edible
     trash:
     - FoodPacketMarsFroukaTrash
 
@@ -318,7 +318,7 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: venus
   - type: Item
-  - type: Food
+  - type: Edible
     trash:
     - FoodPacketVenusTrash
 
@@ -336,7 +336,7 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: oort
   - type: Item
-  - type: Food
+  - type: Edible
     trash:
     - FoodPacketOortrocksTrash
 
@@ -354,7 +354,7 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: weebonuts
   - type: Item
-  - type: Food
+  - type: Edible
     trash:
     - FoodPacketRedalertnutsTrash
 
@@ -401,7 +401,7 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: chocobanana
   - type: Item
-  - type: Food
+  - type: Edible
     trash:
     - FoodPacketStickTrash
 
@@ -419,7 +419,7 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: dango
   - type: Item
-  - type: Food
+  - type: Edible
     trash:
     - FoodPacketStickTrash
 

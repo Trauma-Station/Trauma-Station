@@ -12,8 +12,6 @@ using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.Religion; // Goobstation - Bible
 using Content.Server.Flash;
-using Content.Server.Light.Components;
-using Content.Server.Light.EntitySystems;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._EinsteinEngines.Silicon.Components;
@@ -21,6 +19,8 @@ using Content.Shared.Effects;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
+using Content.Shared.Light.Components;
+using Content.Shared.Light.EntitySystems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Content.Shared.Silicons.Borgs.Components;
@@ -35,7 +35,7 @@ public sealed class CosmicGlareSystem : EntitySystem
     [Dependency] private readonly CosmicCultSystem _cult = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly FlashSystem _flash = default!;
-    [Dependency] private readonly PoweredLightSystem _poweredLight = default!;
+    [Dependency] private readonly SharedPoweredLightSystem _poweredLight = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly SharedCosmicCultSystem _cosmicCult = default!;
@@ -106,7 +106,7 @@ public sealed class CosmicGlareSystem : EntitySystem
 
             if (HasComp<BorgChassisComponent>(targetEnt) // fuck them clankers
                 || HasComp<SiliconComponent>(targetEnt))
-                _stun.TryParalyze(targetEnt, uid.Comp.CosmicGlareDuration / 2, true);
+                _stun.TryUpdateParalyzeDuration(targetEnt, uid.Comp.CosmicGlareDuration / 2);
 
             _color.RaiseEffect(Color.CadetBlue,
                 new List<EntityUid>() { targetEnt },

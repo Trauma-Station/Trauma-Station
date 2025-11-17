@@ -181,7 +181,6 @@ spellbook-knock-desc =
     This spell opens nearby doors and lockers.
     Doesn't require wizard's robe and hat to cast.
 
-spellbook-smite-name = Smite
 spellbook-smite-desc =
     This spell charges your hand with an unholy energy that can be used to cause a touched victim to violently explode.
     Requires wizard's robe and hat to cast.

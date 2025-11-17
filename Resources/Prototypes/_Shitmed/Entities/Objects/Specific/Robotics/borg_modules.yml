@@ -1,0 +1,54 @@
+- type: entity
+  parent: [ BaseBorgModuleMedical, BaseProviderBorgModule ]
+  id: BorgModuleSurgery
+  name: surgery cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: medical
+    - state: icon-surgery
+  - type: ItemBorgModule
+    hands:
+    - item: Scalpel
+    - item: SawElectric
+    - item: Drill
+    - item: Retractor
+    - item: Hemostat
+    - item: Cautery
+    - item: MedicalStitches
+    - item: BoneGel
+    #- item: Bonesetter # Trauma - unused currently
+    - hand:
+        emptyRepresentative: OrganHumanBrain
+        emptyLabel: borg-slot-organ-empty
+        whitelist:
+          components:
+          - BodyPart
+          - Organ
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: surgery-module }
+
+- type: entity
+  id: BorgModuleAdvancedSurgery
+  parent: [ BaseBorgModuleMedical, BaseProviderBorgModule ]
+  name: advanced surgery cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: medical
+    - state: icon-advanced-surgery
+  - type: ItemBorgModule
+    hands:
+    - item: EnergyScalpel
+    - item: EnergyCautery
+    - item: AdvancedRetractor
+    - item: AdvancedBoneGel
+    - hand:
+        emptyRepresentative: OrganHumanBrain
+        emptyLabel: borg-slot-organ-empty
+        whitelist:
+          components:
+          - BodyPart
+          - Organ
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: adv-surgery-module }

@@ -1,0 +1,112 @@
+- type: entity
+  name: reinforcement caller
+  parent: [BaseItem, BaseCommandContraband]
+  suffix: Empty
+  abstract: true
+  id: BaseReinforcementCallerEmpty
+  description: A device that calls in reinforcements for the station.
+  components:
+  - type: Item
+    size: Small
+    sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_caller_hos.rsi
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_caller_hos.rsi
+    state: animated
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StoreUiKey.Key
+  - type: Store
+    balance:
+      Spesos: 0
+
+- type: entity
+  parent: BaseReinforcementCallerEmpty
+  suffix: Empty
+  id: ReinforcementCallerHos
+  components:
+  - type: Store
+    name: store-preset-name-reinforcements
+    categories:
+    - ReinforcementsHoS
+    currencyWhitelist:
+    - Spesos
+    sales:
+      enabled: false
+    ownerOnly: false
+
+- type: entity
+  parent: BaseReinforcementCallerEmpty
+  suffix: Empty
+  id: ReinforcementCallerHoP
+  components:
+  - type: Item
+    size: Small
+    sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_caller_hop.rsi
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_caller_hop.rsi
+    state: animated
+  - type: Store
+    name: store-preset-name-reinforcements
+    categories:
+    - ServiceHoP
+    - EngineeringHoP
+    - ScienceHoP
+    - MedicalHoP
+    - CargoHoP
+    currencyWhitelist:
+    - Spesos
+    sales:
+      enabled: false
+    ownerOnly: false
+
+- type: storeCategory
+  id: ReinforcementsHoS
+  name: store-category-security
+  priority: 0
+
+- type: storeCategory
+  id: ServiceHoP
+  name: store-category-service
+  priority: 0
+
+- type: storeCategory
+  id: EngineeringHoP
+  name: store-category-engineering
+  priority: 1
+
+- type: storeCategory
+  id: ScienceHoP
+  name: store-category-science
+  priority: 2
+
+- type: storeCategory
+  id: MedicalHoP
+  name: store-category-medical
+  priority: 3
+
+- type: storeCategory
+  id: CargoHoP
+  name: store-category-cargo
+  priority: 4
+
+- type: entity
+  id: DebugReinforcementCaller
+  parent: BaseReinforcementCallerEmpty
+  suffix: Debug
+  components:
+  - type: Store
+    name: store-preset-name-reinforcements
+    balance:
+      Spesos: 999999
+    categories:
+    - ReinforcementsHoS
+    - ServiceHoP
+    - EngineeringHoP
+    - ScienceHoP
+    - MedicalHoP
+    - CargoHoP
+    currencyWhitelist:
+    - Spesos

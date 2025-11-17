@@ -11,7 +11,6 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
-using Content.Shared.Damage;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
@@ -25,6 +24,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Shared.Polymorph.Systems;
 

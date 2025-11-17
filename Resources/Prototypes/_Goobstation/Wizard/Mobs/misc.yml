@@ -129,11 +129,11 @@
       methods: [ Touch ]
       effects:
       - !type:HealthChange
-        scaleByQuantity: true
+        scaling: true
         damage:
           types:
             Cellular: 1
-  - type: LayingDown
+  - type: Crawler
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: PaperCreature
@@ -170,7 +170,6 @@
     baseSprintSpeed : 4
   - type: StatusEffects
     allowed:
-    - KnockedDown
     - SlowedDown
     - Stutter
     - Flashed
@@ -195,5 +194,5 @@
   suffix: Temporary
   components:
   - type: FadingTimedDespawn
-    lifetime: 12
+    lifetime: 60
     fadeOutTime: 3

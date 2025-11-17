@@ -3,15 +3,15 @@ using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
-using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
+using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Body;
@@ -20,8 +20,8 @@ public sealed class InsideBodyPartSystem : CommonInsideBodyPartSystem
 {
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedJitteringSystem _jittering = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -89,7 +89,12 @@ public sealed class InsideBodyPartSystem : CommonInsideBodyPartSystem
         if (args.Cancelled || !_partQuery.TryComp(part, out var partComp))
             return;
 
-        _slots.TryEject(part, partComp.ItemInsertionSlot, ent, out _);
+        // <Trauma> - use containers instead of item slots
+        if (!_container.TryGetContainingContainer(ent.Owner, out var container) ||
+            !_container.Remove(ent.Owner, container))
+            return;
+        // </Trauma>
+
         _damage.TryChangeDamage(part, ent.Comp.BurstDamage, ignoreResistances: true);
         _wound.TryCreateWound(part, Trauma, 20, out _, _proto.Index(Brute));
 
@@ -98,7 +103,7 @@ public sealed class InsideBodyPartSystem : CommonInsideBodyPartSystem
 
         if (partComp.Body is {} body)
         {
-            _stun.TryStun(body, ent.Comp.StunTime, refresh: true);
+            _stun.TryUpdateParalyzeDuration(body, ent.Comp.StunTime);
             _jittering.DoJitter(body, ent.Comp.StunTime, refresh: true, frequency: 12f);
         }
 

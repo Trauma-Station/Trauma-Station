@@ -101,5 +101,6 @@ public sealed partial class StepTriggerActiveComponent : Component
 [RegisterComponent]
 public sealed partial class StepTriggerCleanupComponent : Component
 {
+    [DataField]
     public EntityUid StepTrigger;
 }

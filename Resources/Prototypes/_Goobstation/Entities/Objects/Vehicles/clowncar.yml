@@ -84,9 +84,8 @@
     collidableEntities:
       components:
       - HumanoidAppearance
-      - KnockedDown
       - Item
-      - SlowContacts
+      - KnockedDown
       - Puddle
       - Airlock
       - Door
@@ -103,8 +102,8 @@
       path: "/Audio/_Goobstation/Vehicle/Clowncar/clowncar_deactivate_cannon.ogg"
       params:
         volume: 5
-  - type: TriggerOnSolutionInsert
-    solutionName: IrishCarBomb
+  - type: TriggerOnSolutionInsert # bringing a full class of car bomb in blows the car up
+    reagent: IrishCarBomb
     minAmount: 30
   - type: Explosive # Explosive banana peel
     explosionType: Default
@@ -115,10 +114,13 @@
     deleteAfterExplosion: false
     repeatable: true # if it managed to survuve.
   - type: ExplodeOnTrigger
-  - type: SpawnSolutionOnDamage
-    solution: PuddleSpaceLube
-    threshold: 5
+  - type: TriggerOnDamage # car leaks lube when hit
+    keyOut: damaged
     probability: 0.33
+  - type: SpawnOnTrigger
+    keysIn: [ damaged ]
+    proto: PuddleSpaceLube
+    predicted: true
   - type: Damageable
     damageContainer: ClowncarDamageContainer
     damageModifierSet: Metallic

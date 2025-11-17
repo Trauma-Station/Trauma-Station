@@ -18,6 +18,7 @@ namespace Content.Goobstation.UIKit.UserInterface.Controls;
 internal struct CustomWordWrap
 {
     private readonly float _maxSizeX;
+    private ISawmill _sawmill;
 
     public float MaxUsedWidth;
     // Index we put into the LineBreaks list when a line break should occur.
@@ -38,6 +39,7 @@ internal struct CustomWordWrap
     {
         this = default;
         _maxSizeX = maxSizeX;
+        _sawmill = IoCManager.Resolve<ILogManager>().GetSawmill("custom_word_wrap");
         LastRune = new Rune('A');
     }
 
@@ -138,20 +140,20 @@ internal struct CustomWordWrap
         {
             if (!WordStartBreakIndex.HasValue)
             {
-                Logger.Error(
+                _sawmill.Error(
                     "Assert fail inside RichTextEntry.Update, " +
                     "wordStartBreakIndex is null on method end w/ word wrap required. " +
                     "Dumping relevant stuff. Send this to PJB.");
-                // Logger.Error($"Message: {Message}");
-                Logger.Error($"maxSizeX: {_maxSizeX}");
-                Logger.Error($"maxUsedWidth: {MaxUsedWidth}");
-                Logger.Error($"breakIndexCounter: {BreakIndexCounter}");
-                Logger.Error("wordStartBreakIndex: null (duh)");
-                Logger.Error($"wordSizePixels: {WordSizePixels}");
-                Logger.Error($"posX: {PosX}");
-                Logger.Error($"lastChar: {LastRune}");
-                Logger.Error($"forceSplitData: {ForceSplitData}");
-                // Logger.Error($"LineBreaks: {string.Join(", ", LineBreaks)}");
+                // _sawmill.Error($"Message: {Message}");
+                _sawmill.Error($"maxSizeX: {_maxSizeX}");
+                _sawmill.Error($"maxUsedWidth: {MaxUsedWidth}");
+                _sawmill.Error($"breakIndexCounter: {BreakIndexCounter}");
+                _sawmill.Error("wordStartBreakIndex: null (duh)");
+                _sawmill.Error($"wordSizePixels: {WordSizePixels}");
+                _sawmill.Error($"posX: {PosX}");
+                _sawmill.Error($"lastChar: {LastRune}");
+                _sawmill.Error($"forceSplitData: {ForceSplitData}");
+                // _sawmill.Error($"LineBreaks: {string.Join(", ", LineBreaks)}");
 
                 throw new Exception(
                     "wordStartBreakIndex can only be null if the word begins at a new line," +

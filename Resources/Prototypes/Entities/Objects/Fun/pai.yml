@@ -122,8 +122,8 @@
   - type: Instrument
     allowPercussion: false
     handheld: false
-    bank: 1
     program: 2
+    bank: 100 # Defined in space-station-14.sf2
   - type: UserInterface
     interfaces:
       enum.StoreUiKey.Key:
@@ -180,6 +180,9 @@
     - Binary
   - type: DoAfter
   - type: Actions
+  - type: ActionGrant
+    actions:
+    - ActionPAIOpenShop
   - type: Store
     categories:
     - PAIAbilities
@@ -210,8 +213,6 @@
           Searching: { state: pai-searching-overlay }
           On: { state: pai-on-overlay }
   - type: StationMap
-  - type: StationAiVision # Goobstation - AI can see through NT silicon
-    range: 1
   - type: ChangeVoiceInContainer
     whitelist:
       components:
@@ -257,7 +258,6 @@
     - Elyran
     - Freespeak
     - Tradeband
-    - Sign # Should know it but not speak it, for obvious reasons.
     - Schechi
     - NewKinPidgin
   # Einstein Engines - Language end
@@ -358,15 +358,10 @@
     node: potatoai
 
 - type: entity
-  parent: BaseMentalAction
+  parent: ActionIntrinsicStore
   id: ActionPAIOpenShop
   name: Software Catalog
   description: Install new software to assist your owner.
-  components:
-  - type: Action
-    icon: Interface/Actions/shop.png
-  - type: InstantAction
-    event: !type:PAIShopActionEvent
 
 - type: entity
   parent: BaseMentalAction

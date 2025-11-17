@@ -28,6 +28,7 @@ using System.Linq;
 using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.MartialArts.Components;
+using Content.Goobstation.Shared.Sprinting;
 using Content.Goobstation.Shared.Stealth;
 using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Systems;
@@ -92,7 +93,7 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly StandingStateSystem _standingState = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
@@ -104,6 +105,7 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly TraumaSystem _trauma = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private readonly SharedSprintingSystem _sprinting = default!;
 
     public override void Initialize()
     {
@@ -569,13 +571,13 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
         if (knowledgeComponent.MartialArtsForm != proto.MartialArtsForm)
             return false;
 
-        if (!proto.CanDoWhileProne && IsDown(ent))
+        if (!proto.CanDoWhileProne && _standing.IsDown(ent.Owner))
         {
             _popupSystem.PopupEntity(Loc.GetString("martial-arts-fail-prone"), ent, ent);
             return false;
         }
 
-        downed = IsDown(ent.Comp.CurrentTarget.Value);
+        downed = _standing.IsDown(ent.Comp.CurrentTarget.Value);
         target = ent.Comp.CurrentTarget.Value;
 
         if (!knowledgeComponent.Blocked)
@@ -585,14 +587,6 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
         var ev = new CanDoCQCEvent();
         RaiseLocalEvent(ent, ev);
         return ev.Handled;
-
-        bool IsDown(EntityUid uid)
-        {
-            if (!TryComp<StandingStateComponent>(uid, out var standingState))
-                return false;
-
-            return standingState.CurrentState != StandingState.Standing;
-        }
     }
 
     private void DoDamage(EntityUid ent,

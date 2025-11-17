@@ -1,0 +1,11 @@
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleInsurgent
+  name: Insurgent Role
+  components:
+  - type: MindRole
+    roleType: TeamAntagonist
+    subtype: role-subtype-insurgent
+    exclusiveAntag: true # too op for insurgents to also roll syndie or something
+    antagPrototype: Insurgent
+  - type: InsurgentRole

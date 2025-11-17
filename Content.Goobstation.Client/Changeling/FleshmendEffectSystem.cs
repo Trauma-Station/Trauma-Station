@@ -19,12 +19,6 @@ public sealed class FleshmendEffectSystem : EntitySystem
 
         SubscribeLocalEvent<FleshmendEffectComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<FleshmendEffectComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<FleshmendEffectComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
-    }
-
-    private void OnAfterAutoHandleState(Entity<FleshmendEffectComponent> ent, ref AfterAutoHandleStateEvent args)
-    {
-        AddLayer(ent);
     }
 
     private void OnStartup(Entity<FleshmendEffectComponent> ent, ref ComponentStartup args)

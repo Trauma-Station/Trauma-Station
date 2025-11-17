@@ -25,11 +25,9 @@ using Content.Server.EUI;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
-using Content.Server.Light.Components;
 using Content.Server.Objectives.Components;
 using Content.Server.Popups;
-using Content.Server.Radio.Components;
-using Content.Server.Roles;
+using Content.Shared.Radio.Components;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Voting.Managers;
@@ -45,11 +43,13 @@ using Content.Shared.Alert;
 using Content.Shared.Audio;
 using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Light.Components;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
@@ -58,6 +58,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Parallax;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Temperature.Components;
 using Robust.Server.Audio;
@@ -776,7 +777,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         var cosmicGamerule = cult.Comp;
 
-        _stun.TryKnockdown(uid, TimeSpan.FromSeconds(2), true);
+        _stun.TryKnockdown(uid.Owner, TimeSpan.FromSeconds(2));
         foreach (var actionEnt in uid.Comp.ActionEntities) _actions.RemoveAction(actionEnt);
 
         if (TryComp<IntrinsicRadioTransmitterComponent>(uid, out var transmitter))
@@ -816,7 +817,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             _euiMan.OpenEui(new CosmicDeconvertedEui(), session);
 
         _eye.SetVisibilityMask(uid, 1);
-        _alerts.ClearAlert(uid, uid.Comp.EntropyAlert);
+        _alerts.ClearAlert(uid.Owner, uid.Comp.EntropyAlert);
         cosmicGamerule.TotalCult--;
         cosmicGamerule.Cultists.Remove(uid);
 

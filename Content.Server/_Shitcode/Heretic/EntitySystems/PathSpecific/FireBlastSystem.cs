@@ -1,14 +1,14 @@
 using System.Linq;
 using Content.Goobstation.Common.Physics;
 using Content.Goobstation.Common.Religion;
-using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Stunnable;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Damage;
+using Content.Shared.Atmos.Components;
+using Content.Shared.Damage.Components;
 using Content.Shared.Heretic;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
@@ -59,8 +59,6 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         var hereticQuery = GetEntityQuery<HereticComponent>();
         var flammableQuery = GetEntityQuery<FlammableComponent>();
         var mobStateQuery = GetEntityQuery<MobStateComponent>();
-        var dmgQuery = GetEntityQuery<DamageableComponent>();
-        var statusQuery = GetEntityQuery<StatusEffectsComponent>();
 
         // Prioritize alive targets on fire, closest to origin
         var result = _lookup.GetEntitiesInRange(origin, origin.Comp.BonusRange, flags: LookupFlags.Dynamic)
@@ -74,17 +72,12 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         {
             _flammable.AdjustFireStacks(uid, origin.Comp.BonusFireStacks, flam, true);
 
-            if (statusQuery.TryComp(uid, out var status))
-                _stun.KnockdownOrStun(uid, origin.Comp.BonusKnockdownTime, true, status);
-
-            if (!dmgQuery.TryComp(uid, out var dmg))
-                continue;
+            _stun.KnockdownOrStun(uid, origin.Comp.BonusKnockdownTime);
 
             Dmg.TryChangeDamage(uid,
                 origin.Comp.FireBlastBonusDamage,
                 false,
                 false,
-                dmg,
                 targetPart: TargetBodyPart.All,
                 splitDamage: SplitDamageBehavior.SplitEnsureAll,
                 canMiss: false);
@@ -191,7 +184,6 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         var result = _physics.IntersectRay(originPos.MapId, ray, origin.Comp.FireBlastRange, origin, false);
 
         var flammableQuery = GetEntityQuery<FlammableComponent>();
-        var dmgQuery = GetEntityQuery<DamageableComponent>();
         var ghoulQuery = GetEntityQuery<GhoulComponent>();
         var hereticQuery = GetEntityQuery<HereticComponent>();
         var mobStateQuery = GetEntityQuery<MobStateComponent>();
@@ -213,14 +205,10 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
             if (flammableQuery.TryComp(ent.HitEntity, out var flam))
                 _flammable.AdjustFireStacks(ent.HitEntity, origin.Comp.CollisionFireStacks, flam, true);
 
-            if (!dmgQuery.TryComp(ent.HitEntity, out var dmg))
-                continue;
-
             Dmg.TryChangeDamage(ent.HitEntity,
                 origin.Comp.FireBlastBeamCollideDamage,
                 false,
                 false,
-                dmg,
                 targetPart: TargetBodyPart.All,
                 splitDamage: SplitDamageBehavior.SplitEnsureAll,
                 canMiss: false);

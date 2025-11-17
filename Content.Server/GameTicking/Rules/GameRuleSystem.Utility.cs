@@ -1,39 +1,26 @@
-// SPDX-FileCopyrightText: 2024 AJCM <AJCM@tutanota.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Rainfall <rainfey0+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Rainfey <rainfey0+github@gmail.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Server.Station.Systems;
+using Content.Shared.Maps;
+using System.Linq;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Station.Components;
-using Content.Server.Station.Systems;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Maps;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Station.Components;
 using Robust.Shared.Collections;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Server.GameTicking.Rules;
 
 public abstract partial class GameRuleSystem<T> where T: IComponent
 {
-    [Dependency] private readonly StationSystem _station = default!; // Goobstation
-    [Dependency] private readonly TurfSystem _turf = default!; // Goobstation
+    // <Goob>
+    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
+    // </Goob>
 
     protected EntityQueryEnumerator<ActiveGameRuleComponent, T, GameRuleComponent> QueryActiveRules()
     {
@@ -113,20 +100,31 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
         targetCoords = EntityCoordinates.Invalid;
         targetGrid = EntityUid.Invalid;
 
-        if (GetStationMainGrid(station.Comp) is not { } grid)
+        if (GetStationMainGrid(station) is not { } grid)
             return false;
 
         targetGrid = grid.Owner;
         return TryFindTileOnGrid(grid, out tile, out targetCoords);
     }
 
-    protected Entity<MapGridComponent>? GetStationMainGrid(StationDataComponent station)
+    protected Entity<MapGridComponent>? GetStationMainGrid(Entity<StationDataComponent> station)
     {
-        if ((station.Grids.FirstOrNull(HasComp<BecomesStationComponent>) ?? _station.GetLargestGrid(station)) is not
-            { } grid || !TryComp(grid, out MapGridComponent? gridComp))
+        if (GetStationGridUid(station) is not {} grid ||
+            !TryComp(grid, out MapGridComponent? gridComp))
             return null;
 
         return (grid, gridComp);
+    }
+
+    protected EntityUid? GetStationGridUid(Entity<StationDataComponent> station)
+    {
+        foreach (var grid in station.Comp.Grids)
+        {
+            if (HasComp<BecomesStationComponent>(grid))
+                return grid;
+        }
+
+        return _station.GetLargestGrid((station, station));
     }
 
     protected bool TryFindTileOnGrid(Entity<MapGridComponent> grid,

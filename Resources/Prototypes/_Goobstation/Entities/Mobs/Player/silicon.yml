@@ -15,14 +15,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: BaseSiliconLawboard
   id: HelpimovCircuitBoard
-  parent: BaseElectronics
   name: law board (Helpimov)
   description: An electronics board containing the Helpimov lawset.
   components:
-  - type: Sprite
-    sprite: Objects/Misc/module.rsi
-    state: std_mod
   - type: SiliconLawProvider
     laws: HelpimovLawset
 
@@ -68,8 +65,4 @@
     - MindRoleGhostRoleSilicon
     raffle:
       settings: default
-    requirements: # Goobstation - ghost roles requirements
-    - !type:RoleTimeRequirement
-      role: JobBorg
-      time: 3600 #1 hour
   - type: GhostTakeoverAvailable

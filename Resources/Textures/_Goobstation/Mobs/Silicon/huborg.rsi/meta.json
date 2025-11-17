@@ -1,0 +1,27 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Created by venikt (760006609254219790) on discord",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "huborg",
+            "directions": 4
+        },
+        {
+            "name": "huborg_e",
+            "directions": 4
+        },
+        {
+            "name": "huborg_e_r",
+            "directions": 4
+        },
+        {
+            "name": "huborg_l",
+            "directions": 4
+        }
+    ]
+}

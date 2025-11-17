@@ -9,7 +9,7 @@
 
 using Content.Shared._DV.CosmicCult.Components;
 using Robust.Shared.Timing;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Random;
 using Content.Shared._Shitmed.Targeting; // Shitmed Change

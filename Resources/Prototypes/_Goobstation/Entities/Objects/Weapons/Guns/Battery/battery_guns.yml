@@ -74,8 +74,6 @@
     wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
     soundHit:
       collection: MetalThud # Goobstation ^
-  - type: BatteryDrinkerSource # Goobstation - Energycrit
-    maxAmount: 180
   - type: Multishot # Goobstation V
     missChance: 0.4
     spreadMultiplier: 3
@@ -400,7 +398,7 @@
     - BulletEnergyGunExecute
     - BulletEnergyGunHotshot
     - BulletEnergyGunSleepshot
-    - BulletEnergyGunBigshot
+    #- BulletEnergyGunBigshot # Trauma - no chud anti-base instant win ammo
   - type: UserInterface
     interfaces:
       enum.AmmoSelectorUiKey.Key:
@@ -437,15 +435,20 @@
     isEmaggable: true
   - type: StaticPrice
     price: 750
-  - type: TriggerOnVoiceIdLocked
-    keyPhrase: "lawbringer-phrase"
+  - type: TriggerOnVoice
+    showVerbs: false
+    keyPhrase: "I AM THE LAW"
     listenRange: 1
-    holderOnly: true
+  - type: AccessTriggerCondition # need hos access to explode it
+  - type: HoldingTriggerCondition # need to be holding it to explode it so chuddies cant run up to you and boom
   - type: AccessReader
     access: [['HeadOfSecurity']]
   - type: ActiveListener
   - type: ExplodeOnTrigger
-  - type: DropOnTrigger
+  - type: EntityEffectOnTrigger
+    targetUser: true
+    effects:
+    - !type:DropItems
   - type: Explosive
     explosionType: Default
     maxIntensity: 2

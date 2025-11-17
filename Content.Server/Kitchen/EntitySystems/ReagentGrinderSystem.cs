@@ -196,7 +196,7 @@ namespace Content.Server.Kitchen.EntitySystems
                         scaledSolution.ScaleSolution(fitsCount);
                         solution = scaledSolution;
 
-                        _stackSystem.SetCount(item, stack.Count - fitsCount); // Setting to 0 will QueueDel
+                        _stackSystem.ReduceCount((item, stack), fitsCount); // Setting to 0 will QueueDel
                     }
                     else
                     {
@@ -244,6 +244,9 @@ namespace Content.Server.Kitchen.EntitySystems
                 var program = reagentGrinder.AutoMode == GrinderAutoMode.Grind ? GrinderProgram.Grind : GrinderProgram.Juice;
                 DoWork(uid, reagentGrinder, program);
             }
+
+            if (TryComp<AppearanceComponent>(uid, out var appearanceComponent)) // Goobstation
+                Dirty(uid, appearanceComponent);
         }
 
         private void OnInteractUsing(Entity<ReagentGrinderComponent> entity, ref InteractUsingEvent args)

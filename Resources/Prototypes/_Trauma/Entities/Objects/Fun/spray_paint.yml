@@ -34,6 +34,9 @@
   # Functionality
   - type: PaintCan
   - type: EffectsTool
+    whitelist:
+      components:
+      - Item # 1984
     blacklist:
       components:
       - Body # no painting people mice borgs etc

@@ -14,6 +14,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Prototypes; // Trauma
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.GameTicking.Rules.Components;
@@ -41,4 +42,22 @@ public sealed partial class ZombieRuleComponent : Component
 
     // goob edit
     public bool StartAnnounced = false;
+
+    /// <summary>
+    /// Trauma - After this percentage of crew are zombies, a CBurn shuttle will be automatically sent.
+    /// </summary>
+    [DataField]
+    public float ZombieCBurnCallPercentage = 0.6f;
+
+    /// <summary>
+    /// Trauma - The shuttle event used for the zombies CBurn autocall.
+    /// </summary>
+    [DataField]
+    public EntProtoId ZombieCBurnEvent = "SpawnCBURNNoAnnounce";
+
+    /// <summary>
+    /// Trauma - Whether or not a CBurn shuttle for zombies has been sent.
+    /// </summary>
+    [DataField]
+    public bool ZombieCBurnCalled;
 }

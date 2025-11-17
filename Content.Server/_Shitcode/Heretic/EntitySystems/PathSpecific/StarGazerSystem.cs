@@ -12,7 +12,7 @@ using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Heretic;
 using Content.Shared.Mind.Components;
@@ -346,10 +346,13 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
             if (cLen <= 0.01f)
                 continue;
 
+            var cNorm = c / cLen;
             var angle = c.ToAngle();
-            var box = new Box2(gazerPos + new Vector2(0f, -starGaze.LaserThickness),
-                gazerPos + new Vector2(cLen, starGaze.LaserThickness));
-            var boxRot = new Box2Rotated(box, angle, gazerPos);
+
+            var offset = cNorm * starGaze.BeamScale;
+            var box = new Box2(gazerPos + offset + new Vector2(0f, -starGaze.LaserThickness),
+                gazerPos + offset + new Vector2(cLen, starGaze.LaserThickness));
+            var boxRot = new Box2Rotated(box, angle, gazerPos + offset);
 
             var noobs = _lookup.GetEntitiesIntersecting(xform.MapID, boxRot, LookupFlags.Dynamic);
             foreach (var noob in noobs)
@@ -383,7 +386,7 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
                     continue;
                 }
 
-                _mark.TryApplyStarMark((noob, mobState), uid, true);
+                _mark.TryApplyStarMark((noob, mobState));
                 _dmg.TryChangeDamage(noob,
                     starGaze.Damage,
                     origin: uid,
@@ -394,9 +397,7 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
                     _chat.TryEmoteWithChat(noob, "Scream");
             }
 
-            var cNorm = c / cLen;
-
-            var boxRot2 = new Box2Rotated(box.Enlarged(starGaze.GravityPullSizeModifier), angle, gazerPos);
+            var boxRot2 = new Box2Rotated(box.Enlarged(starGaze.GravityPullSizeModifier), angle, gazerPos + offset);
             var noobs2 = _lookup.GetEntitiesIntersecting(xform.MapID, boxRot2, LookupFlags.Dynamic);
             foreach (var noob in noobs2)
             {
@@ -409,18 +410,16 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
                 var noobXform = xformQuery.Comp(noob);
                 var noobPos = Xform.GetWorldPosition(noobXform, xformQuery);
 
-                var a = pos - noobPos;
-                var b = gazerPos - noobPos;
+                var a = pos + offset - noobPos;
+                var b = gazerPos + offset - noobPos;
                 var aLen = a.Length();
                 var bLen = b.Length();
 
                 if (aLen <= 0.01f || bLen <= 0.01f)
                     continue;
 
-                var angleac = Robust.Shared.Maths.Vector3.CalculateAngle(new Robust.Shared.Maths.Vector3(-a),
-                    new Robust.Shared.Maths.Vector3(-c));
-                var anglebc = Robust.Shared.Maths.Vector3.CalculateAngle(new Robust.Shared.Maths.Vector3(-b),
-                    new Robust.Shared.Maths.Vector3(c));
+                var angleac = MathF.Acos(Vector2.Dot(a / aLen, cNorm));
+                var anglebc = MathF.Acos(Vector2.Dot(cNorm, b / -bLen));
 
                 var sinac = MathF.Sin(angleac);
                 var sinbc = MathF.Sin(anglebc);
@@ -434,9 +433,9 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
                 var try2 = -try1;
                 var try2Pos = noobPos + try2 * dist * 2f;
 
-                if (DoIntersect(gazerPos, pos, noobPos, try1Pos))
+                if (DoIntersect(gazerPos + offset, pos + offset, noobPos, try1Pos))
                     list.Add((try1, dist));
-                else if (DoIntersect(gazerPos, pos, noobPos, try2Pos))
+                else if (DoIntersect(gazerPos + offset, pos + offset, noobPos, try2Pos))
                     list.Add((try2, dist));
 
                 var result = list.MinBy(x => x.Item2);

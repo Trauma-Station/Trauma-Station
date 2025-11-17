@@ -43,7 +43,8 @@ public sealed class BloodCrawlSystem : SharedBloodCrawlSystem
                 _audio.PlayPvs(component.ExitJauntSound, reverted.Value);
 
             var evExit = new BloodCrawlExitEvent();
-            RaiseLocalEvent(polymorph.Parent, ref evExit);
+            if (polymorph.Parent is {} parent)
+                RaiseLocalEvent(parent, ref evExit);
 
             return false;
         }
@@ -57,5 +58,3 @@ public sealed class BloodCrawlSystem : SharedBloodCrawlSystem
         _polymorph.PolymorphEntity(user, polymorph);
     }
 }
-
-

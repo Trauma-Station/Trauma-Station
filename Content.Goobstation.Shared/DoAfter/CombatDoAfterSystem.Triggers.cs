@@ -9,6 +9,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Ensnaring.Components;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 
@@ -16,6 +17,8 @@ namespace Content.Goobstation.Shared.DoAfter;
 
 public sealed partial class CombatDoAfterSystem
 {
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+
     private void InitializeTriggers()
     {
         SubscribeLocalEvent<CombatDoAfterComponent, MeleeHitEvent>(OnHit);
@@ -35,7 +38,7 @@ public sealed partial class CombatDoAfterSystem
 
     private void OnEnsnared(Entity<EnsnaringKnockdownComponent> ent, ref EnsnaredEvent args)
     {
-        _layingDown.TryLieDown(args.Target);
+        _stun.TryKnockdown(args.Target, time: null); // until the target manually gets up
         RemCompDeferred(ent.Owner, ent.Comp);
     }
 

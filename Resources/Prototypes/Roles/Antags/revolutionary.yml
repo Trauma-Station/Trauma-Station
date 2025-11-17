@@ -18,10 +18,10 @@
   setPreference: true
   objective: roles-antag-rev-head-objective
   requirements:
-  - !type:DepartmentTimeRequirement # was  - !type:OverallPlaytimeRequirement, Goob change
-      department: Command
-      time: 36000 # 10h
-  guides: [ Revolutionaries ]
+  - !type:DepartmentTimeRequirement # Goob - was overall
+    department: Command # Goob - was overall
+    time: 10h
+  guides: [ Revolutionaries ] # Goob
 
 - type: antag
   id: Rev
@@ -39,4 +39,9 @@
     - RevGear
     - RevGear
     - RevGear
+    - RevPropagandaAdvanced
+    - RevPropagandaAdvanced
+    - RevMace
+    - Handcuffs
+    - SheetPaper
     # </Trauma>

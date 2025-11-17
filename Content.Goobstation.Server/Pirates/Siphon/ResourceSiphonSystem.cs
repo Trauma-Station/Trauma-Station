@@ -27,7 +27,6 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Mind;
 using Content.Shared.Stacks;
-using Robust.Server.GameObjects;
 
 namespace Content.Goobstation.Server.Pirates.Siphon;
 
@@ -38,7 +37,8 @@ public sealed partial class ResourceSiphonSystem : EntitySystem
     [Dependency] private readonly StationAnchorSystem _anchor = default!;
     [Dependency] private readonly CargoSystem _cargo = default!;
     [Dependency] private readonly PricingSystem _pricing = default!;
-    [Dependency] private readonly TransformSystem _xform = default!;
+    [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly MindSystem _mind = default!;
 
     private float TickTimer = 1f;
@@ -166,8 +166,7 @@ public sealed partial class ResourceSiphonSystem : EntitySystem
         DeactivateSiphon(ent, "broken");
 
         var speso = Spawn("SpaceCash", Transform(ent).Coordinates);
-        if (TryComp<StackComponent>(speso, out var stack))
-            stack.Count = (int) ent.Comp.Credits;
+        _stack.SetCount(speso, (int) ent.Comp.Credits);
     }
     #endregion
 

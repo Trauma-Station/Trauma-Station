@@ -22,10 +22,12 @@
   chance: 0.5
   withChat: false
 
-# Brullbar # TODO put this into goob directory
+# Kudzu
 - type: autoEmote
-  id: BrullbarHowl
-  emote: Scream
-  interval: 5.0 
-  chance: 0.5
-  withChat: false
+  id: MeatGasp
+  emote: Gasp
+  interval: 4.0 # Same interval as a full breathing cycle
+  chance: 0.01 # Make it very rare
+  ignoreActionBlocker: true
+  force: true
+  hiddenFromChatWindow: true

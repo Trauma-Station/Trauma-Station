@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Movement;
+using Content.Shared.Damage.Events;
 using Content.Shared._EinsteinEngines.Flight.Events;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Buckle.Components;
@@ -14,7 +15,6 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
-using Content.Shared.DoAfter;
 using Content.Shared.Gravity;
 using Content.Shared.Input;
 using Content.Shared.Mech.Components;
@@ -33,7 +33,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Network;
 using System.Numerics;
-using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.CCVar; // Traumastation
 using Robust.Shared.Configuration;
 
 namespace Content.Goobstation.Shared.Sprinting;
@@ -76,7 +76,7 @@ public abstract class SharedSprintingSystem : EntitySystem
         SubscribeLocalEvent<SprinterComponent, EntityZombifiedEvent>(OnZombified);
 
         // Traumastation
-        Subs.CVar(_cfg, GoobCVars.SprintEnabled, value => SprintEnabled = value, true);
+        Subs.CVar(_cfg, TraumaCVars.SprintEnabled, value => SprintEnabled = value, true);
     }
 
     #region Core Functions
@@ -150,7 +150,7 @@ public abstract class SharedSprintingSystem : EntitySystem
     private void OnSprintToggle(EntityUid uid, SprinterComponent component, ref SprintToggleEvent args) =>
         ToggleSprint(uid, component, args.IsSprinting);
 
-    private void ToggleSprint(EntityUid uid, SprinterComponent component, bool newSprintState, bool gracefulStop = true)
+    public void ToggleSprint(EntityUid uid, SprinterComponent component, bool newSprintState, bool gracefulStop = true)
     {
         // Breaking these into two separate if's for better readability
         if (newSprintState == component.IsSprinting)
@@ -163,6 +163,10 @@ public abstract class SharedSprintingSystem : EntitySystem
 
         component.LastSprint = _timing.CurTime;
         component.IsSprinting = newSprintState;
+
+        // Raise the stamina-specific event (for `SharedStaminaSystem.cs`)
+        var staminaEv = new SprintingStateChangedEvent(uid, newSprintState);
+        RaiseLocalEvent(uid, ref staminaEv);
 
         if (newSprintState)
         {
@@ -208,7 +212,7 @@ public abstract class SharedSprintingSystem : EntitySystem
 
     private void OnStandingStateSprintAttempt(EntityUid uid, StandingStateComponent component, ref SprintAttemptEvent args)
     {
-        if (!_standing.IsDown(uid, component))
+        if (!component.Standing)
             return;
 
         _popupSystem.PopupClient(Loc.GetString("no-sprint-while-lying"), uid, uid, PopupType.Medium);

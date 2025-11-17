@@ -145,7 +145,7 @@
     slots:
     - Back
   - type: Item
-    size: Huge
+    size: Huge # Goobstation - was Ginormous
     shape: # Goobstation
     - 0,0,5,2
   - type: StaticPrice
@@ -154,6 +154,7 @@
     containers:
       ballistic-ammo: !type:Container
         ents: []
+  - type: GunExecutionBlacklist # Goobstation
 
 - type: entity
   name: china lake
@@ -171,6 +172,10 @@
     slots:
     - Back
     - suitStorage
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,4,2
   - type: AmmoCounter
   - type: Gun
     fireRate: 1
@@ -196,7 +201,7 @@
   parent: [ BaseWeaponLauncher, BaseGunWieldable, BaseMajorContraband ]
   id: WeaponLauncherHydra
   name: hydra
-  description: PLOOP... FSSSSSS
+  description: PLOOP... FSSSSSS...
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Launchers/hydra_launcher.rsi
@@ -208,6 +213,8 @@
     slots:
     - Back
     - suitStorage
+  - type: Item
+    size: Huge
   - type: AmmoCounter
   - type: Gun
     fireRate: 1
@@ -342,7 +349,7 @@
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
     - type: Item
-      storedRotation: -90
+      size: Normal
     - type: TetherGun
       frequency: 5
       dampingRatio: 4
@@ -389,7 +396,7 @@
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
     - type: Item
-      storedRotation: -90
+      size: Normal
     - type: ForceGun
       frequency: 15
       dampingRatio: 4
@@ -438,6 +445,12 @@
   parent: BaseItem
   id: WeaponGrapplingGun
   components:
+    - type: Item
+      size: Small
+      shape:
+      - 0,0,1,0
+      - 0,1,0,1
+      storedOffset: 0,-6
     - type: AmmoCounter
     - type: GrapplingGun
     - type: Gun
@@ -518,6 +531,8 @@
   suffix: Admeme
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
+    - type: Item
+      size: Normal
     - type: TetherGun
       canTetherAlive: true
       canUnanchor: true
@@ -557,6 +572,8 @@
   suffix: Admeme
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
+    - type: Item
+      size: Normal
     - type: ForceGun
       canTetherAlive: true
       canUnanchor: true
@@ -600,9 +617,6 @@
   description: It fires large meteors.
   components:
   - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-        - CartridgeRocket
     proto: MeteorMedium
 
 - type: entity
@@ -613,7 +627,4 @@
   description: It fires slow immovable rods.
   components:
   - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-        - CartridgeRocket
     proto: ImmovableRodSlow

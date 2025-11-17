@@ -18,6 +18,7 @@ using Content.Server.Atmos.Components;
 using Content.Server.Heretic.Components.PathSpecific;
 using Content.Server.Magic;
 using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Heretic;
 using Content.Shared.Movement.Components;
@@ -125,7 +126,7 @@ public sealed partial class HereticAbilitySystem
         {
             if (condition)
                 _voidcurse.DoCurse(pookie);
-            _dmg.TryChangeDamage(pookie,
+            _dmg.ChangeDamage(pookie.Owner,
                 args.Damage,
                 true,
                 origin: ent,
@@ -150,7 +151,7 @@ public sealed partial class HereticAbilitySystem
         foreach (var pookie in topPriority)
         {
             // apply gaming.
-            _dmg.TryChangeDamage(pookie,
+            _dmg.ChangeDamage(pookie.Owner,
                 args.Damage,
                 true,
                 origin: ent,
@@ -158,15 +159,15 @@ public sealed partial class HereticAbilitySystem
                 canMiss: false);
         }
 
-        var condition = ent.Comp.CurrentPath == "Void";
+        var curse = ent.Comp.CurrentPath == "Void";
 
         // stun close-mid range
         foreach (var pookie in midPriority)
         {
-            _stun.TryStun(pookie, args.StunTime, true);
-            _stun.TryKnockdown(pookie, args.KnockDownTime, true);
+            _stun.TryUpdateParalyzeDuration(pookie.Owner, args.StunTime);
+            _stun.TryKnockdown(pookie.Owner, args.KnockDownTime);
 
-            if (condition)
+            if (curse)
                 _voidcurse.DoCurse(pookie);
         }
 

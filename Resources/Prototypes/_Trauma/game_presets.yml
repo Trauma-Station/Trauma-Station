@@ -1,0 +1,30 @@
+- type: gamePreset
+  id: Insurgency
+  alias:
+  - insurgency
+  - insurgents
+  - greytide
+  name: insurgency-title
+  description: insurgency-description
+  showInVote: false
+  rules:
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - BasicRoundstartVariation
+  - Insurgency
+
+# survival+ but it has roundstart abductors and maybe thieves
+- type: gamePreset
+  id: Abductors
+  alias:
+  - ayylmao
+  name: abductors-title
+  description: abductors-description
+  showInVote: false
+  minPlayers: 20
+  rules:
+  - DuoAbductorRoundstart
+  - SubGamemodesRule
+  - SecretPlusRampingMid
+  - BasicRoundstartVariation

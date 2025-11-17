@@ -215,6 +215,8 @@
   - type: Tag # Goobstation - Prevent RCD from making lights in one tile
     tags:
     - WallLight
+  - type: PlacementReplacement
+    key: lights
   placement:
     mode: SnapgridCenter
     snap:

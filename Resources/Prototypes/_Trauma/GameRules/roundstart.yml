@@ -1,0 +1,120 @@
+- type: entity
+  parent: BaseGameRule
+  id: Insurgency
+  components:
+  - type: GameRule
+    minPlayers: 10 # no insurgents on deadpop
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/insurgents.yml
+  - type: AntagObjectives
+    objectives:
+    - InsurgentEscapeObjective
+    #- InsurgentAllSurviveObjective # TODO
+  - type: AntagLoadProfileRule
+  - type: AntagSelection
+    selectionTime: PrePlayerSpawn # need to move them to their shittle
+    agentName: insurgent-round-end-agent-name
+    definitions:
+    - prefRoles: [ Insurgent ]
+      spawnerPrototype: SpawnPointInsurgent
+      startingGear: Insurgent
+      unequipOldGear: true
+      max: 8
+      playerRatio: 10
+      chaosScore: 50
+      roleLoadout:
+      - RoleSurvivalStandard
+      components:
+      - type: RandomHumanoidAppearance
+        randomizeName: true
+      mindRoles:
+      - MindRoleInsurgent
+
+- type: entity
+  parent: DuoAbductorSpawn
+  id: DuoAbductorRoundstart
+  components:
+  - type: StationEvent
+    chaos: # 20 chaos because abductors aren't mean to actively harm crew just experiment
+      Hostile: 20
+    earliestStart: 0 # its roundstart chud
+  # I LOVE GOIDA COPY PASTING THE ENTIRE THING
+  # this just has ghost roles removed, pref roles added and players are picked roundstart
+  - type: AntagSelection
+    selectionTime: PrePlayerSpawn
+    definitions:
+    - spawnerPrototype: AbductorScientistSpawner
+      prefRoles: [ AbductorScientistAntag ]
+      fallbackRoles: [ AbductorAgentAntag ]
+      min: 1
+      max: 1
+      pickPlayer: true
+      unequipOldGear: true
+      startingGear: AbductorScientistGear
+      briefing:
+        text: abductor-role-greeting
+        color: Green
+        sound: /Audio/_Shitmed/Misc/abductor.ogg
+      components:
+      - type: Abductor
+      - type: ActionGrant
+        actions:
+        - ActionReturnToShip
+      - type: NpcFactionMember
+        factions:
+        - SimpleHostile
+      - type: RandomMetadata
+        nameSegments:
+        - AbductorScientistPrefix
+        - AbductorNames
+        nameFormat: name-format-standard
+      - type: Tag
+        tags:
+        - Abductor
+        - AbductorScientist
+        - CanPilot
+        - FootstepSound
+        - DoorBumpOpener
+      - type: AbductorScientist
+      - type: SurgeryIgnoreClothing
+      - type: Sanitized
+      - type: SurgerySpeedModifier
+        speedModifier: 1.5
+      mindRoles:
+      - MindRoleAbductorScientist
+    - spawnerPrototype: AbductorAgentSpawner
+      prefRoles: [ AbductorAgentAntag ]
+      fallbackRoles: [ AbductorScientistAntag ]
+      min: 1
+      max: 1
+      pickPlayer: true
+      unequipOldGear: true
+      startingGear: AbductorAgentGear
+      briefing:
+        text: abductor-role-greeting
+        color: Green
+        sound: /Audio/_Shitmed/Misc/abductor.ogg
+      components:
+      - type: Abductor
+      - type: ActionGrant
+        actions:
+        - ActionReturnToShip
+      - type: NpcFactionMember
+        factions:
+        - SimpleHostile
+      - type: RandomMetadata
+        nameSegments:
+        - AbductorAgentPrefix
+        - AbductorNames
+        nameFormat: name-format-standard
+      - type: Tag
+        tags:
+          - Abductor
+          - AbductorScientist
+          - CanPilot
+          - FootstepSound
+          - DoorBumpOpener
+      - type: AbductorScientist # Should be removed when we have proper teleportation system
+      mindRoles:
+      - MindRoleAbductorAgent

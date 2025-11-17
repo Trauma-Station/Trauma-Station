@@ -16,7 +16,9 @@
   setPreference: true
   objective: roles-antag-initial-infected-objective
   requirements:
-  - !type:SpeciesRequirement
+  - !type:OverallPlaytimeRequirement
+    time: 1h
+  - !type:SpeciesRequirement # Goob
     inverted: true
     species:
     - IPC
@@ -30,7 +32,7 @@
   setPreference: false
   objective: roles-antag-zombie-objective
   requirements:
-  - !type:SpeciesRequirement
+  - !type:SpeciesRequirement # Goob
     inverted: true
     species:
     - IPC

@@ -28,15 +28,16 @@
   description: A heavy metal ingot stamped with the Nanotrasen logo.
   components:
   - type: Sprite
-    sprite: Objects/Materials/ingots.rsi
+    sprite: _Trauma/Objects/Materials/ingots.rsi # Trauma
   - type: Item
-    sprite: Objects/Materials/ingots.rsi
+    sprite: _Trauma/Objects/Materials/ingots.rsi # Trauma
     size: Normal
   - type: StaticPrice
     price: 0
   - type: Tag
     tags:
     - Ingot
+    - ConstructionMaterial
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
@@ -66,11 +67,6 @@
     - gold
     - gold_2
     - gold_3
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: gold_3
     layers:
@@ -116,11 +112,6 @@
     - silver
     - silver_2
     - silver_3
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: silver_3
     layers:

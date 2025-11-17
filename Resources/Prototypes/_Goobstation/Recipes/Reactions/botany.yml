@@ -6,14 +6,12 @@
 
 - type: reaction
   id: OrganicPotash
-  minTemp: 354
+  minTemp: 400 # hotter than 373 so soap can still be made
   reactants:
-    Water:
-      amount: 1
-    Ash:
+    Lye:
       amount: 1
   products:
-    Potash: 2
+    Potash: 1
 
 - type: reaction
   id: Potash

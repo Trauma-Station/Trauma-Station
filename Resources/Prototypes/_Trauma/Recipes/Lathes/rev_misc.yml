@@ -53,13 +53,13 @@
   completetime: 6
   materials:
     Plastic: 100
-    Gold: 500
-    Silver: 500
+    Gold: 50
+    Silver: 50
 
 - type: latheRecipe
   id: RevGunParts
   result: RevGunParts
   completetime: 15
   materials:
-    Plasteel: 300
+    Steel: 300
     Plastic: 100

@@ -7,12 +7,10 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Standing;
-
 namespace Content.Shared._EinsteinEngines.TelescopicBaton;
 
 [ByRefEvent]
-public record struct KnockdownOnHitAttemptEvent(bool Cancelled, DropHeldItemsBehavior Behavior); // Goob edit
+public record struct KnockdownOnHitAttemptEvent(bool Cancelled, bool DropItems); // Goobstation
 
 public sealed class KnockdownOnHitSuccessEvent(List<EntityUid> knockedDown) : EntityEventArgs // Goobstation
 {

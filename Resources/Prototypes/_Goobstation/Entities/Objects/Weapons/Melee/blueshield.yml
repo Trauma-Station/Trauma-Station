@@ -30,9 +30,6 @@
   id: BlueshieldMace
   description: Crush all those who oppose your leaders. Functions as a stun baton in its powered state.
   components:
-  - type: Tag
-    tags:
-    - Stunbaton
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Melee/blueshield_mace.rsi
     layers:
@@ -116,8 +113,9 @@
         maxVol: 5
   - type: Injector
     delay: 1
-    maxTransferAmount: 5
-    minTransferAmount: 3
+    transferAmounts:
+    - 3
+    - 5
     injectOnly: false
   - type: MeleeChemicalInjector
     transferAmount: 5

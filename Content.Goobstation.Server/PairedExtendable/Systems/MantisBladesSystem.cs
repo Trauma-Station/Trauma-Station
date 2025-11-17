@@ -4,7 +4,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.MantisBlades;
-using Content.Server.Emp;
 using Content.Shared.Actions;
 using Content.Shared.Body.Part;
 using Content.Shared.Emp;

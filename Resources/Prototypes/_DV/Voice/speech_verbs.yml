@@ -11,15 +11,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: speechVerb
-  id: Vulpkanin
-  name: chat-speech-verb-name-vulpkanin
-  speechVerbStrings:
-  - chat-speech-verb-vulpkanin-1
-  - chat-speech-verb-vulpkanin-2
-  - chat-speech-verb-vulpkanin-3
-  - chat-speech-verb-vulpkanin-4
-
-- type: speechVerb
   id: Felinid
   name: chat-speech-verb-name-felinid
   speechVerbStrings:

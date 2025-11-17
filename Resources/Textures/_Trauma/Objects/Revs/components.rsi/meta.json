@@ -20,13 +20,52 @@
       "name": "knife"
     },
     {
+      "name": "engineparts"
+    },
+    {
       "name": "gear"
+    },
+    {
+      "name": "gear_2"
+    },
+    {
+      "name": "gear_3"
+    },
+    {
+      "name": "ballbearings"
     },
     {
       "name": "bolt"
     },
     {
+      "name": "bolt_2"
+    },
+    {
+      "name": "bolt_3"
+    },
+    {
+      "name": "emptyweb"
+    },
+    {
+      "name": "armorplate"
+    },
+    {
+      "name": "reflectplate"
+    },
+    {
       "name": "nut"
+    },
+    {
+      "name": "gasfilter"
+    },
+    {
+      "name": "helmetliner"
+    },
+    {
+      "name": "nut_2"
+    },
+    {
+      "name": "nut_3"
     },
     {
       "name": "gunparts"

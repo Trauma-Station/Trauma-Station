@@ -7,11 +7,11 @@
 using System.Numerics;
 using Content.Server.Actions;
 using Content.Server.Popups;
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared.Maps;
+using Content.Shared.Station.Components;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -124,14 +124,15 @@ public sealed class CosmicMonumentSystem : EntitySystem
         }
 
         //CHECK IF WE'RE ON THE STATION OR IF SOMEONE'S TRYING TO SNEAK THIS ONTO SOMETHING SMOL
-        var station = _station.GetStationInMap(xform.MapID);
+        if (_station.GetStationInMap(xform.MapID) is not {} station)
+        {
+            _popup.PopupEntity(Loc.GetString("cosmicability-monument-spawn-error-station"), uid, uid);
+            return false;
+        }
 
-        EntityUid? stationGrid = null;
+        var stationGrid = _station.GetLargestGrid(station);
 
-        if (TryComp<StationDataComponent>(station, out var stationData))
-            stationGrid = _station.GetLargestGrid(stationData);
-
-        if (stationGrid is not null && stationGrid != xform.GridUid)
+        if (stationGrid != null && stationGrid != xform.GridUid)
         {
             _popup.PopupEntity(Loc.GetString("cosmicability-monument-spawn-error-station"), uid, uid);
             return false;

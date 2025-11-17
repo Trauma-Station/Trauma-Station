@@ -1,0 +1,35 @@
+- type: entity
+  parent: [ClothingShoesMilitaryBase, BaseRevMajorContraband]
+  id: ClothingShoesBootsRev
+  name: workboots
+  description: Robust workboots that help with maintaining footing, getting up, and marching on while injured. They can be upgraded with an armor plate.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Shoes/Boots/workboots.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Shoes/Boots/workboots.rsi
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.5
+  - type: Construction
+    graph: RevBoots
+    defaultTarget: finished
+    deconstructionTarget: null
+    node: unfinished
+
+- type: entity
+  parent: ClothingShoesBootsRev
+  id: ClothingShoesBootsRevSteel
+  name: steel-toed workboots
+  description: Workboots that have been modified to safely walk across caltrops.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Shoes/Boots/steeltoed.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Shoes/Boots/steeltoed.rsi
+  - type: StepTriggerImmune # Works by inventory relay
+    whitelist:
+      types:
+      - Caltrop
+  - type: Construction
+    defaultTarget: null
+    node: finished

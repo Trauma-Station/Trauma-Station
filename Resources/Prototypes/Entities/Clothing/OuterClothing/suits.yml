@@ -288,7 +288,7 @@
     - jumpsuit
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseToggleClothing, BaseMajorContraband]
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseToggleClothing, BaseHighlyIllegalContraband]
   id: ClothingOuterSuitSpaceNinja
   name: space ninja suit
   description: This black technologically advanced, cybernetically-enhanced suit provides many abilities like invisibility or teleportation.
@@ -330,6 +330,7 @@
     - type: Stealth
       maxVisibility: 0.2 # Goob edit
       hadOutline: true
+      thermalsImmune: true # Goobstation
   - type: PowerCellDraw
     drawRate: 3.6 # 100 seconds on the default cell # Goob edit
   - type: ToggleCellDraw
@@ -447,6 +448,8 @@
     tags:
     - CorgiWearable
     - WhitelistChameleon
+  - type: AddAccentClothing
+    accent: BarkAccent
 
 - type: entity
   parent: [ ClothingOuterBase, ClothingOuterBaseToggleable ]
@@ -488,4 +491,3 @@
     - jumpsuit
   - type: StaticPrice
     price: 1500
-

@@ -18,7 +18,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.StatusEffect;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Timing;
 using Content.Shared.UserInterface;
@@ -34,6 +33,8 @@ public abstract class SharedSpellbladeSystem : EntitySystem
     [Dependency] protected readonly SharedAudioSystem Audio = default!;
     [Dependency] private   readonly IPrototypeManager _protoManager = default!;
     [Dependency] private   readonly SharedHandsSystem _hands = default!;
+
+    public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
 
     public override void Initialize()
     {
@@ -52,7 +53,7 @@ public abstract class SharedSpellbladeSystem : EntitySystem
         SubscribeLocalEvent<ElectrocutionAttemptEvent>(OnElectrocutionAttempt);
 
         SubscribeLocalEvent<ShieldedComponent, BeforeStaminaDamageEvent>(OnBeforeStaminaDamage);
-        SubscribeLocalEvent<ShieldedComponent, OldBeforeStatusEffectAddedEvent>(OnBeforeStatusEffect);
+        SubscribeLocalEvent<ShieldedComponent, BeforeStatusEffectAddedEvent>(OnBeforeStatusEffect);
         SubscribeLocalEvent<ShieldedComponent, DamageModifyEvent>(OnDamageModify);
     }
 
@@ -62,9 +63,9 @@ public abstract class SharedSpellbladeSystem : EntitySystem
             DamageSpecifier.PenetrateArmor(ent.Comp.Resistances, args.Damage.ArmorPenetration));
     }
 
-    private void OnBeforeStatusEffect(Entity<ShieldedComponent> ent, ref OldBeforeStatusEffectAddedEvent args)
+    private void OnBeforeStatusEffect(Entity<ShieldedComponent> ent, ref BeforeStatusEffectAddedEvent args)
     {
-        if (!ent.Comp.AntiStun || args.Key is not ("Stun"))
+        if (!ent.Comp.AntiStun || args.Effect != StatusEffectStunned)
             return;
 
         args.Cancelled = true;

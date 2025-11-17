@@ -127,13 +127,15 @@
   - CaptainOuterClothing
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - CaptainJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - CaptainEnvirohelm
   - CaptainEnvirosuit
   - CaptainEnvirogloves
   - CaptainGloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobHeadOfPersonnel
@@ -147,13 +149,16 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - HoPJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - HoPEnvirohelm
   - HoPEnvirosuit
   - HoPEnvirogloves
   - HoPGloves
+  - ExclusiveItems # Trauma
+
 # Silicons
 - type: roleLoadout
   id: JobBorg
@@ -180,12 +185,15 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - PassengerJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - AssistantEnvirohelm
   - AssistantEnvirosuit
   - AssistantEnvirogloves
+  - ExclusiveItems # Trauma
+
 
 - type: roleLoadout
   id: JobBartender
@@ -198,12 +206,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - BartenderJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - BartenderEnvirohelm
   - BartenderEnvirosuit
   - BartenderEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobServiceWorker
@@ -214,12 +224,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - ServiceWorkerJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ServiceWorkerEnvirohelm
   - ServiceWorkerEnvirosuit
   - ServiceWorkerEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobChef
@@ -233,12 +245,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - ChefJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ChefEnvirohelm
   - ChefEnvirosuit
   - ChefEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobLibrarian
@@ -249,12 +263,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - LibrarianJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - LibrarianEnvirohelm
   - LibrarianEnvirosuit
   - LibrarianEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobLawyer
@@ -266,12 +282,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - LawyerJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - LawyerEnvirohelm
   - LawyerEnvirosuit
   - LawyerEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobChaplain
@@ -286,12 +304,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - ChaplainJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ChaplainEnvirohelm
   - ChaplainEnvirosuit
   - ChaplainEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobJanitor
@@ -305,6 +325,7 @@
   - Glasses
   - Survival
   - Trinkets
+  - JanitorJobTrinkets
   - JanitorPlunger
   - Animals
   - GroupSpeciesBreathTool
@@ -312,6 +333,7 @@
   - JanitorEnvirohelm
   - JanitorEnvirosuit
   - JanitorEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobBotanist
@@ -324,12 +346,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - BotanistJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - BotanistEnvirohelm
   - BotanistEnvirosuit
   - BotanistEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobClown
@@ -344,11 +368,13 @@
   - Glasses
   - SurvivalClown
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - ClownJobTrinkets
   # Goobstation - EE Plasmeme Change.
   - ClownEnvirohelm
   - ClownEnvirosuit
   - ClownEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobMime
@@ -364,15 +390,18 @@
   - Glasses
   - SurvivalMime
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - MimeJobTrinkets
   # Goobstation - EE Plasmeme Change.
   - MimeEnvirohelm
   - MimeEnvirosuit
   - MimeEnvirogloves
   - MimeGloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobMusician
+  canCustomizeName: true
   groups:
   - GroupTankHarness
   - MusicianJumpsuit
@@ -381,6 +410,7 @@
   - Glasses
   - Survival
   - Trinkets
+  - MusicianJobTrinkets
   - Instruments
   - Animals
   - GroupSpeciesBreathTool
@@ -388,6 +418,7 @@
   - MusicianEnvirohelm
   - MusicianEnvirosuit
   - MusicianEnvirogloves
+  - ExclusiveItems # Trauma
 
 # Cargo
 - type: roleLoadout
@@ -403,12 +434,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - QuartermasterJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - QuartermasterEnvirohelm
   - QuartermasterEnvirosuit
   - QuartermasterEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobCargoTechnician
@@ -419,15 +452,18 @@
   - CargoTechnicianBackpack
   - CargoTechnicianOuterClothing
   - CargoTechnicianShoes
+  - CargoTechnicianID
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - CargoTechnicianJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - CargoTechnicianEnvirohelm
   - CargoTechnicianEnvirosuit
   - CargoTechnicianEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobSalvageSpecialist
@@ -440,12 +476,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - SalvageSpecialistJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - SalvageEnvirohelm
   - SalvageEnvirosuit
   - SalvageEnvirogloves
+  - ExclusiveItems # Trauma
 
 # Engineering
 - type: roleLoadout
@@ -460,12 +498,14 @@
   - ChiefEngineerShoes
   - SurvivalExtended
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - ChiefEngineerJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ChiefEngineerEnvirohelm
   - ChiefEngineerEnvirosuit
   - ChiefEngineerEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobTechnicalAssistant
@@ -475,12 +515,14 @@
   - StationEngineerBackpack
   - SurvivalExtended
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - TechnicalAssistantJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - TechnicalAssistantEnvirohelm
   - TechnicalAssistantEnvirosuit
   - TechnicalAssistantEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobStationEngineer
@@ -494,12 +536,14 @@
   - StationEngineerID
   - SurvivalExtended
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - StationEngineerJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - StationEngineerEnvirohelm
   - StationEngineerEnvirosuit
   - StationEngineerEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobAtmosphericTechnician
@@ -512,12 +556,14 @@
   - AtmosphericTechnicianShoes
   - SurvivalExtended
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - AtmosphericTechnicianJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - AtmosEnvirohelm
   - AtmosEnvirosuit
   - AtmosEnvirogloves
+  - ExclusiveItems # Trauma
 
 # Science
 - type: roleLoadout
@@ -534,12 +580,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - ResearchDirectorJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ResearchDirectorEnvirosuit
   - ResearchDirectorEnvirohelm
   - ResearchDirectorEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobScientist
@@ -556,12 +604,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - ScientistJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ScientistEnvirohelm
   - ScientistEnvirosuit
   - ScientistEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobResearchAssistant
@@ -572,12 +622,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - ResearchAssistantJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ResearchAssistantEnvirohelm
   - ResearchAssistantEnvirosuit
   - ResearchAssistantEnvirogloves
+  - ExclusiveItems # Trauma
 
 # Security
 - type: roleLoadout
@@ -593,6 +645,7 @@
   - HeadofSecurityShoes # Goobstation edit
   - SurvivalSecurity
   - Trinkets
+  - HeadofSecurityJobTrinkets
   - SecurityStar
   - Animals
   - GroupSpeciesBreathToolSecurity
@@ -601,6 +654,7 @@
   - HeadofSecurityEnvirosuit
   - HeadofSecurityEnvirogloves
   - HeadofSecurityGloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobWarden
@@ -615,6 +669,7 @@
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - WardenJobTrinkets
   - SecurityStar
   - Animals
   - GroupSpeciesBreathToolSecurity
@@ -622,6 +677,7 @@
   - WardenEnvirohelm
   - WardenEnvirosuit
   - WardenEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobSecurityOfficer
@@ -637,6 +693,7 @@
   - SecurityBelt
   - SurvivalSecurity
   - Trinkets
+  - SecurityJobTrinkets
   - SecurityStar
   - Animals
   - GroupSpeciesBreathToolSecurity
@@ -644,6 +701,7 @@
   - SecurityOfficerEnvirohelm
   - SecurityOfficerEnvirosuit
   - SecurityOfficerEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobDetective
@@ -656,6 +714,7 @@
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - DetectiveJobTrinkets
   - SecurityStar
   - Animals
   - GroupSpeciesBreathToolSecurity
@@ -664,6 +723,7 @@
   - DetectiveEnvirosuit
   - DetectiveEnvirogloves
   - DetectiveGloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobSecurityCadet
@@ -675,12 +735,14 @@
   - SecurityNeck
   - SecurityOuterClothing # Goobstation - Why not.
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - SecurityCadetJobTrinkets
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - SecurityCadetEnvirohelm
   - SecurityCadetEnvirosuit
   - SecurityCadetEnvirogloves
+  - ExclusiveItems # Trauma
 
 # Medical
 - type: roleLoadout
@@ -698,12 +760,14 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - ChiefMedicalOfficerJobTrinkets
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
   - ChiefMedicalOfficerEnvirohelm
   - ChiefMedicalOfficerEnvirosuit
   - ChiefMedicalOfficerEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobMedicalDoctor
@@ -720,12 +784,14 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - MedicalDoctorJobTrinkets
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
   - MedicalDoctorEnvirohelm
   - MedicalDoctorEnvirosuit
   - MedicalDoctorEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobMedicalIntern
@@ -736,12 +802,14 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - MedicalInternJobTrinkets
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
   - MedicalInternEnvirohelm
   - MedicalInternEnvirosuit
   - MedicalInternEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobChemist
@@ -756,12 +824,14 @@
   - MedicalShoes
   - SurvivalMedical
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - ChemistJobTrinkets
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
   - ChemistEnvirohelm
   - ChemistEnvirosuit
   - ChemistEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobParamedic
@@ -777,12 +847,14 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - ParamedicJobTrinkets
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
   - ParamedicEnvirohelm
   - ParamedicEnvirosuit
   - ParamedicEnvirogloves
+  - ExclusiveItems # Trauma
 
 # Wildcards
 - type: roleLoadout
@@ -795,12 +867,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - ZookeeperJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ZookeeperEnvirohelm
   - ZookeeperEnvirosuit
   - ZookeeperEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobReporter
@@ -812,12 +886,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - ReporterJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - ReporterEnvirohelm
   - ReporterEnvirosuit
   - ReporterEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobPsychologist
@@ -828,12 +904,14 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - PsychologistJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - PsychologistEnvirohelm
   - PsychologistEnvirosuit
   - PsychologistEnvirogloves
+  - ExclusiveItems # Trauma
 
 - type: roleLoadout
   id: JobBoxer
@@ -845,11 +923,13 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals
+  - Animals # Goob
+  - BoxerJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - BoxerEnvirohelm
   - BoxerEnvirosuit
+  - ExclusiveItems # Trauma
 
 # These loadouts are used for non-crew spawns, like off-station antags and event mobs
 # They will be used without player configuration, thus they will only ever apply what is forced by MinLimit

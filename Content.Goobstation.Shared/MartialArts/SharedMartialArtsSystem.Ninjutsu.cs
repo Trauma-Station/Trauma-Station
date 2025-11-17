@@ -20,6 +20,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffect;
+using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
@@ -58,7 +59,7 @@ public abstract partial class SharedMartialArtsSystem
     private void OnAlertEffectEnded(Entity<NinjutsuSneakAttackComponent> ent, ref StatusEffectEndedEvent args)
     {
         if (args.Key == "LossOfSurprise")
-            _alerts.ShowAlert(ent, ent.Comp.Alert);
+            _alerts.ShowAlert(ent.Owner, ent.Comp.Alert);
     }
 
     private void OnSneakAttackRemove(Entity<NinjutsuSneakAttackComponent> ent, ref ComponentRemove args)
@@ -66,12 +67,12 @@ public abstract partial class SharedMartialArtsSystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        _alerts.ClearAlertCategory(ent, NinjutsuAlertCategory);
+        _alerts.ClearAlertCategory(ent.Owner, NinjutsuAlertCategory);
     }
 
     private void OnSneakAttackInit(Entity<NinjutsuSneakAttackComponent> ent, ref ComponentInit args)
     {
-        _alerts.ShowAlert(ent, ent.Comp.Alert);
+        _alerts.ShowAlert(ent.Owner, ent.Comp.Alert);
     }
 
     private void OnMobStateChanged(MobStateChangedEvent ev)
@@ -107,7 +108,7 @@ public abstract partial class SharedMartialArtsSystem
 
         ResetDebuff(ent);
 
-        if (_standingState.IsDown(target))
+        if (_standing.IsDown(target))
         {
             _popupSystem.PopupEntity(Loc.GetString("martial-arts-fail-target-down"), ent, ent);
             return;
@@ -120,10 +121,8 @@ public abstract partial class SharedMartialArtsSystem
             muteTime *= sneakAttack.TakedownBackstabMultiplier;
         }
 
-        var modifier = sneakAttack.TakedownSpeedModifier;
-
-        _stun.TrySlowdown(target, TimeSpan.FromSeconds(slowdownTime), true, modifier, modifier);
-        _status.TryAddStatusEffect<MutedComponent>(target, "Muted", TimeSpan.FromSeconds(muteTime), true);
+        _newStatus.TryUpdateStatusEffectDuration(target, sneakAttack.TakedownStatusEffect, slowdownTime);
+        _status.TryAddStatusEffect<MutedComponent>(target, "Muted", muteTime, true);
 
         _audio.PlayPvs(sneakAttack.AssassinateSoundUnarmed, target);
         ComboPopup(ent, target, sneakAttack.TakedownComboName);
@@ -198,12 +197,12 @@ public abstract partial class SharedMartialArtsSystem
 
         if (args.Type != ComboAttackType.Harm || args.Target == args.Performer ||
             !IsWeaponValid(args.Performer, args.Weapon, out var melee) ||
-            !_standingState.IsDown(args.Target))
+            !_standing.IsDown(args.Target))
             return;
 
         // Swift Strike
         if (args.Performer == args.Weapon)
-            _stamina.TakeStaminaDamage(args.Target, 30f, applyResistances: true);
+            _stamina.TakeStaminaDamage(args.Target, 30f);
         var fireRate = TimeSpan.FromSeconds(1f / _melee.GetAttackRate(args.Weapon, args.Performer, melee));
         /* Trauma edit
         var minFireRate = TimeSpan.FromSeconds(1f / 8f); // This is basically the attack speed of a HF Blade.
@@ -229,17 +228,17 @@ public abstract partial class SharedMartialArtsSystem
         }
 
         // Paralyze, not knockdown
-        var time = TimeSpan.FromSeconds(proto.ParalyzeTime);
-        if (_status.TryGetTime(target, "KnockedDown", out var knockdownStartEnd))
+        var time = proto.ParalyzeTime;
+        if (TryComp<KnockedDownComponent>(target, out var knocked))
         {
-            var knockdownTime = knockdownStartEnd.Value.Item2 - _timing.CurTime;
+            var knockdownTime = knocked.NextUpdate - _timing.CurTime;
             if (knockdownTime > TimeSpan.Zero)
             {
                 if (time > knockdownTime)
                     time = knockdownTime;
 
                 // We do not want to knockdown because it will stunlock the target
-                _stun.TryStun(target, time, true);
+                _stun.TryUpdateParalyzeDuration(target, time);
             }
         }
 
@@ -264,7 +263,7 @@ public abstract partial class SharedMartialArtsSystem
         if (TryComp<PullableComponent>(target, out var pullable))
             _pulling.TryStopPull(target, pullable, ent, true);
 
-        _stun.TryKnockdown(target, TimeSpan.FromSeconds(proto.ParalyzeTime), true, proto.DropHeldItemsBehavior);
+        _stun.TryKnockdown(target, proto.ParalyzeTime, true, drop: proto.DropItems);
         DoDamage(ent, target, proto.DamageType, proto.ExtraDamage * GetDamageMultiplier(ent), out _);
         _audio.PlayPvs(args.Sound, target);
         ComboPopup(ent, target, proto.Name);

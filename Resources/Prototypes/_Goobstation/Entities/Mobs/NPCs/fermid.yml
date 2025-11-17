@@ -257,7 +257,7 @@
 #      Starving: 25
 #     Dead: 0
 #    baseDecayRate: 0.04
-#  - type: Food
+#  - type: Edible
 #  - type: HTN
 #    rootTask:
 #      task: MouseCompound

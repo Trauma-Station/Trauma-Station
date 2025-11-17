@@ -142,7 +142,7 @@ public sealed class RiposteeSystem : EntitySystem
                     continue;
             }
 
-            if (!data.CanRiposteWhileProne && _standing.IsDown(ent))
+            if (!data.CanRiposteWhileProne && _standing.IsDown(ent.Owner))
                 continue;
 
             if (data.RiposteChance is > 0f and < 1f)
@@ -209,10 +209,10 @@ public sealed class RiposteeSystem : EntitySystem
             _melee.InRange(user, target, weapon.Comp.Range, CompOrNull<ActorComponent>(user)?.PlayerSession))
         {
             if (data.StunTime > TimeSpan.Zero)
-                _stun.TryStun(target, data.StunTime, true);
+                _stun.TryUpdateParalyzeDuration(target, data.StunTime);
 
             if (data.KnockdownTime > TimeSpan.Zero)
-                _stun.TryKnockdown(target, data.KnockdownTime, true);
+                _stun.TryKnockdown(target, data.KnockdownTime);
         }
 
         if (!inCombat)

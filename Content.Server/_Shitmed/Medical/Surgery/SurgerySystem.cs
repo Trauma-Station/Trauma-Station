@@ -17,6 +17,8 @@ using Content.Shared.Body.Part;
 using Content.Server.Popups;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared._Shitmed.Damage;

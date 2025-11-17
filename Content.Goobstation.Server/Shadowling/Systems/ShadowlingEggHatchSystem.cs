@@ -1,8 +1,8 @@
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Server.Polymorph.Systems;
-using Content.Server.Storage.Components;
-using Content.Server.Storage.EntitySystems;
 using Content.Shared.Popups;
+using Content.Shared.Storage.Components;
+using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
@@ -17,7 +17,7 @@ public sealed class ShadowlingEggHatchSystem : EntitySystem
 {
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 

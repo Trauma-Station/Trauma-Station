@@ -43,5 +43,3 @@
         Blunt: 3
   - type: UseDelay
     delay: 1
-  - type: MovementImpairedCorrection # Goobstation
-    speedCorrection: 0.2

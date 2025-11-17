@@ -66,9 +66,6 @@
       - MindRoleGhostRoleSoloAntagonist
       raffle:
         settings: default
-      requirements:
-      - !type:OverallPlaytimeRequirement
-        time: 54000 #15 hours
     - type: Sprite
       sprite: Markers/jobs.rsi
       layers:

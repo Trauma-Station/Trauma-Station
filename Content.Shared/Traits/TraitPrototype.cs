@@ -1,21 +1,10 @@
-// SPDX-FileCopyrightText: 2022 CommieFlowers <rasmus.cedergren@hotmail.com>
-// SPDX-FileCopyrightText: 2022 Morb <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 rolfero <45628623+rolfero@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 forkeyboards <91704530+forkeyboards@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Shared._EinsteinEngines.Language;
+using Content.Shared.EntityEffects;
+using Content.Shared.Humanoid.Prototypes;
+// </Trauma>
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
-using Content.Shared.Humanoid.Prototypes; // Goob: Ported from DeltaV - Species specific trait support.
 
 namespace Content.Shared.Traits;
 
@@ -57,7 +46,7 @@ public sealed partial class TraitPrototype : IPrototype
     /// The components that get added to the player, when they pick this trait.
     /// </summary>
     [DataField]
-    public ComponentRegistry Components { get; private set; } = default!;
+    public ComponentRegistry Components { get; private set; } = new(); // Trauma - don't default to null chud it isn't required
 
     /// <summary>
     /// Gear that is given to the player, when they pick this trait.
@@ -89,29 +78,35 @@ public sealed partial class TraitPrototype : IPrototype
     [DataField]
     public HashSet<ProtoId<SpeciesPrototype>> IncludedSpecies = new();
 
+    /// <summary>
+    /// Trauma - Entity effects applied to the mob after spawning.
+    /// </summary>
+    [DataField]
+    public EntityEffect[] Effects = [];
+
     // Einstein Engines - Language begin (remove this if trait system refactor)
     /// <summary>
     ///     The list of all Spoken Languages that this trait adds.
     /// </summary>
     [DataField]
-    public List<string>? LanguagesSpoken { get; private set; } = default!;
+    public List<ProtoId<LanguagePrototype>>? LanguagesSpoken { get; private set; } = default!;
 
     /// <summary>
     ///     The list of all Understood Languages that this trait adds.
     /// </summary>
     [DataField]
-    public List<string>? LanguagesUnderstood { get; private set; } = default!;
+    public List<ProtoId<LanguagePrototype>>? LanguagesUnderstood { get; private set; } = default!;
 
     /// <summary>
     ///     The list of all Spoken Languages that this trait removes.
     /// </summary>
     [DataField]
-    public List<string>? RemoveLanguagesSpoken { get; private set; } = default!;
+    public List<ProtoId<LanguagePrototype>>? RemoveLanguagesSpoken { get; private set; } = default!;
 
     /// <summary>
     ///     The list of all Understood Languages that this trait removes.
     /// </summary>
     [DataField]
-    public List<string>? RemoveLanguagesUnderstood { get; private set; } = default!;
+    public List<ProtoId<LanguagePrototype>>? RemoveLanguagesUnderstood { get; private set; } = default!;
     // Einstein Engines - Language end
 }

@@ -1,21 +1,50 @@
-# SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 ThatGuyUSA <thatguyusa123@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Ignaz "Ian" Kraft <ignaz.k@live.de>
-# SPDX-FileCopyrightText: 2025 Killerqu00 <47712032+Killerqu00@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
+contraband-examine-text-Minor =
+    { $type ->
+        *[item] [color=yellow]This item is considered minor contraband.[/color]
+        [reagent] [color=yellow]This reagent is considered minor contraband.[/color]
+    }
 
-contraband-examine-text-Minor = [color=yellow]This item is considered minor contraband.[/color]
-contraband-examine-text-Restricted = [color=yellow]This item is departmentally restricted.[/color]
-contraband-examine-text-Restricted-department = [color=yellow]This item is restricted to {$departments}, and may be considered contraband.[/color]
-contraband-examine-text-Major = [color=red]This item is considered major contraband.[/color]
-contraband-examine-text-GrandTheft = [color=red]This item is a highly valuable target for Syndicate agents![/color]
-contraband-examine-text-Syndicate = [color=crimson]This item is highly illegal Syndicate contraband![/color]
-contraband-examine-text-Magical = [color=#b337b3]This item is highly illegal Magical contraband![/color]
-contraband-examine-text-Clown = [color=yellow]This item belongs to the clown, give it back before they get sad.[/color]
+contraband-examine-text-Restricted =
+    { $type ->
+        *[item] [color=yellow]This item is departmentally restricted.[/color]
+        [reagent] [color=yellow]This reagent is departmentally restricted.[/color]
+    }
+
+contraband-examine-text-Restricted-department =
+    { $type ->
+        *[item] [color=yellow]This item is restricted to {$departments}, and may be considered contraband.[/color]
+        [reagent] [color=yellow]This reagent is restricted to {$departments}, and may be considered contraband.[/color]
+    }
+
+contraband-examine-text-Major =
+    { $type ->
+        *[item] [color=red]This item is considered major contraband.[/color]
+        [reagent] [color=red]This reagent is considered major contraband.[/color]
+    }
+
+contraband-examine-text-GrandTheft =
+    { $type ->
+        *[item] [color=red]This item is a highly valuable target for Syndicate agents![/color]
+        [reagent] [color=red]This reagent is a highly valuable target for Syndicate agents![/color]
+    }
+
+contraband-examine-text-Highly-Illegal =
+    { $type ->
+        *[item] [color=crimson]This item is highly illegal contraband![/color]
+        [reagent] [color=crimson]This reagent is highly illegal contraband![/color]
+    }
+
+contraband-examine-text-Syndicate =
+    { $type ->
+        *[item] [color=crimson]This item is highly illegal Syndicate contraband![/color]
+        [reagent] [color=crimson]This reagent is highly illegal Syndicate contraband![/color]
+    }
+
+contraband-examine-text-Magical =
+    { $type ->
+        *[item] [color=#b337b3]This item is highly illegal magical contraband![/color]
+        [reagent] [color=#b337b3]This reagent is highly illegal magical contraband![/color]
+    }
 
 contraband-examine-text-avoid-carrying-around = [color=red][italic]You probably want to avoid visibly carrying this around without a good reason.[/italic][/color]
 contraband-examine-text-in-the-clear = [color=green][italic]You should be in the clear to visibly carry this around.[/italic][/color]

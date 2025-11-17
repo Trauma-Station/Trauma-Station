@@ -121,19 +121,6 @@
     isSelectable: false
 
 - type: entity
-  parent: SpawnPointGhostAncientRogueKing
-  id: TokenAncientRogueKingSpawn
-  components:
-  - type: AntagSelection
-    definitions:
-    - spawnerPrototype: AncientRogueKingToken
-      min: 1
-      max: 1
-      pickPlayer: false
-  - type: StationEvent
-    isSelectable: false
-
-- type: entity
   parent: BlobMidround
   id: TokenBlobMidround
   components:

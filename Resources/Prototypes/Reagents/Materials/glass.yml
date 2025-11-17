@@ -24,7 +24,7 @@
   id: Glass
   stackEntity: SheetGlass1
   name: materials-glass
-  icon: { sprite: Objects/Materials/Sheets/glass.rsi, state: glass }
+  icon: { sprite: _Trauma/Objects/Materials/Sheets/glass.rsi, state: glass } # Trauma
   color: "#a8ccd7"
   price: 0.15 # $15 for one unit
 
@@ -32,7 +32,7 @@
   id: ReinforcedGlass
   stackEntity: SheetRGlass1
   name: materials-reinforced-glass
-  icon: { sprite: Objects/Materials/Sheets/glass.rsi, state: rglass }
+  icon: { sprite: _Trauma/Objects/Materials/Sheets/glass.rsi, state: rglass } # Trauma
   color: "#549bb0"
   price: 0.225 # 1-0.5 mix of glass and metal.
 
@@ -40,7 +40,7 @@
   id: PlasmaGlass
   stackEntity: SheetPGlass1
   name: materials-plasma-glass
-  icon: { sprite: Objects/Materials/Sheets/glass.rsi, state: pglass }
+  icon: { sprite: _Trauma/Objects/Materials/Sheets/glass.rsi, state: pglass } # Trauma
   color: "#b35989"
   price: 0.50 # 1-1 mix of plasma and glass.
 
@@ -48,7 +48,7 @@
   id: ReinforcedPlasmaGlass
   stackEntity: SheetRPGlass1
   name: materials-reinforced-plasma-glass
-  icon: { sprite: Objects/Materials/Sheets/glass.rsi, state: rpglass }
+  icon: { sprite: _Trauma/Objects/Materials/Sheets/glass.rsi, state: rpglass } # Trauma
   color: "#8c4069"
   price: 0.575 # 1-1-0.5 mix of plasma, glass, and metal.
 
@@ -56,7 +56,7 @@
   id: BrassGlass
   stackEntity: SheetClockworkGlass1
   name: materials-clockwork-glass
-  icon: { sprite: Objects/Materials/Sheets/glass.rsi, state: cglass }
+  icon: { sprite: _Trauma/Objects/Materials/Sheets/glass.rsi, state: cglass } # Trauma
   color: "#9b6f07"
   price: 0.225 # average of glass and brass.
 
@@ -64,7 +64,7 @@
   id: UraniumGlass
   stackEntity: SheetUGlass1
   name: materials-uranium-glass
-  icon: { sprite: Objects/Materials/Sheets/glass.rsi, state: uglass }
+  icon: { sprite: _Trauma/Objects/Materials/Sheets/glass.rsi, state: uglass } # Trauma
   color: "#3cab38"
   price: 1.0 # 1-1 mix of uranium and glass.
 
@@ -72,6 +72,6 @@
   id: ReinforcedUraniumGlass
   stackEntity: SheetRUGlass1
   name: materials-reinforced-uranium-glass
-  icon: { sprite: Objects/Materials/Sheets/glass.rsi, state: ruglass }
+  icon: { sprite: _Trauma/Objects/Materials/Sheets/glass.rsi, state: ruglass } # Trauma
   color: "#2d872a"
   price: 1.075 # 2-2-1 mix of uranium, glass, and metal.

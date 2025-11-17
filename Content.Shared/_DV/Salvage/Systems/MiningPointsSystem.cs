@@ -28,6 +28,7 @@ using Content.Shared._Lavaland.UnclaimedOre;
 using Content.Shared.Access.Systems;
 using Content.Shared.Lathe;
 using Content.Shared.Materials;
+using Content.Trauma.Common.Salvage; // Trauma
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
@@ -74,12 +75,46 @@ public sealed class MiningPointsSystem : EntitySystem
     private void OnClaimMiningPoints(Entity<MiningPointsLatheComponent> ent, ref LatheClaimMiningPointsMessage args)
     {
         var user = args.Actor;
-        if (TryFindIdCard(user) is {} dest)
-            TransferAll(ent.Owner, dest);
+        // <Trauma> - raises event too
+        var comp = _query.Comp(ent);
+        var points = comp.Points;
+        if (points == 0)
+            return;
+
+        if (GetPointComp(user) is not {} dest)
+            return;
+
+        TransferAll((ent.Owner, comp), dest);
+
+        var ev = new MiningPointsClaimedEvent(user, (int) points);
+        RaiseLocalEvent(ent, ref ev, true);
+        // </Trauma>
     }
 
     #endregion
     #region Public API
+    /// <summary>
+    /// if user can claim mining points
+    /// <summary>
+    public bool CanClaimPoints(EntityUid user) // Goobstation - borg Miningpoints
+    {
+        if (TryComp<MiningPointsComponent>(user, out var comp))
+            return true;
+        if (TryFindIdCard(user) != null)
+            return true;
+
+        return false;
+    }
+
+    /// <summary>
+    /// returns Miningpoint component of user, if its directly atatched or on users Id card
+    /// <summary>
+    public Entity<MiningPointsComponent?>? GetPointComp(EntityUid user) // Goobstation - borg Miningpoints
+    {
+        if (TryComp<MiningPointsComponent>(user, out var comp))
+            return  (user,comp);
+        return TryFindIdCard(user);
+    }
 
     /// <summary>
     /// Tries to find the user's id card and gets its <see cref="MiningPointsComponent"/>.
@@ -103,7 +138,7 @@ public sealed class MiningPointsSystem : EntitySystem
     /// </summary>
     public bool UserHasPoints(EntityUid user, uint points)
     {
-        if (TryFindIdCard(user)?.Comp is not {} comp)
+        if (GetPointComp(user)?.Comp is not {} comp) // Goobstation - borg Miningpoints
             return false;
 
         return comp.Points >= points;

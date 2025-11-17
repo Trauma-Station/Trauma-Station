@@ -116,6 +116,10 @@ namespace Content.Client.Communications.UI
         public bool CountdownStarted;
         public string CurrentLevel = string.Empty;
         public TimeSpan? CountdownEnd;
+        // <Trauma>
+        public string LockedLevel = string.Empty;
+        public TimeSpan? NextUnlock;
+        // </Trauma>
 
         public event Action? OnEmergencyLevel;
         public event Action<string>? OnAlertLevel;
@@ -171,6 +175,7 @@ namespace Content.Client.Communications.UI
         {
             base.FrameUpdate(args);
             UpdateCountdown();
+            UpdateUnlock(); // Trauma
         }
 
         // The current alert could make levels unselectable, so we need to ensure that the UI reacts properly.
@@ -225,6 +230,27 @@ namespace Content.Client.Communications.UI
             var infoText = Loc.GetString($"comms-console-menu-time-remaining",
                 ("time", diff.ToString(@"hh\:mm\:ss", CultureInfo.CurrentCulture)));
             CountdownLabel.SetMessage(infoText);
+        }
+
+        /// <summary>
+        /// Trauma - updates the unlock text when waiting for a locked alert level.
+        /// </summary>
+        public void UpdateUnlock()
+        {
+            if (NextUnlock is not {} unlock)
+            {
+                UnlockContainer.Visible = false;
+                return;
+            }
+
+            var level = Loc.GetString($"alert-level-{LockedLevel}");
+            var now = _timing.CurTime;
+            UnlockLabel.Text = unlock > now
+                ? Loc.GetString("comms-console-menu-level-unlocked-at",
+                    ("time", (unlock - now).ToString(@"hh\:mm\:ss", CultureInfo.CurrentCulture)),
+                    ("level", level))
+                : Loc.GetString("comms-console-menu-level-unlocked", ("level", level));
+            UnlockContainer.Visible = true;
         }
     }
 }

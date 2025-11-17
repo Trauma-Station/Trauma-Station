@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
@@ -10,12 +5,15 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 using Robust.Shared.Utility;
+using Content.Client.UserInterface.ControlExtensions;
 
 namespace Content.Client.Guidebook.RichText;
 
 [UsedImplicitly]
 public sealed class TextLinkTag : IMarkupTagHandler
 {
+    public static Color LinkColor => Color.CornflowerBlue;
+
     public string Name => "textlink";
 
     /// <inheritdoc/>
@@ -33,7 +31,7 @@ public sealed class TextLinkTag : IMarkupTagHandler
         label.Text = text;
 
         label.MouseFilter = Control.MouseFilterMode.Stop;
-        label.FontColorOverride = Color.CornflowerBlue;
+        label.FontColorOverride = LinkColor;
         label.DefaultCursorShape = Control.CursorShape.Hand;
 
         label.OnMouseEntered += _ => label.FontColorOverride = Color.LightSkyBlue;
@@ -62,6 +60,8 @@ public sealed class TextLinkTag : IMarkupTagHandler
             handler.HandleClick(link);
             return;
         }
+
+        Logger.Warning("Warning! No valid ILinkClickHandler found.");
     }
 }
 

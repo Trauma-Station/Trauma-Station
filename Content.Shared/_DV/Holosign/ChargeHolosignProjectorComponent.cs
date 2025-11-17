@@ -15,7 +15,7 @@ namespace Content.Shared._DV.Holosign;
 /// If there is already a sign on the clicked tile it reclaims it for a charge instead of stacking it.
 /// Currently there is no spawning prediction so signs are spawned once in a container and moved out to allow prediction.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true), Access(typeof(ChargeHolosignSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, Access(typeof(ChargeHolosignSystem))]
 public sealed partial class ChargeHolosignProjectorComponent : Component
 {
     /// <summary>

@@ -54,7 +54,7 @@
   event: !type:JudoThrowPerformedEvent
   paralyzeTime: 7
   staminaDamage: 15
-  dropHeldItemsBehavior: NoDrop
+  dropItems: false
   canDoWhileProne: false
 
 - type: combo
@@ -68,7 +68,7 @@
   event: !type:JudoArmbarPerformedEvent
   paralyzeTime: 5
   staminaDamage: 25
-  dropHeldItemsBehavior: AlwaysDrop
+  dropItems: true
 
 - type: combo
   id: JudoWheelThrow

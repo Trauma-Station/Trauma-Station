@@ -7,21 +7,26 @@ namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
 /// Paints the target entity.
-/// Requires <see cref="EntityEffectToolArgs"/> to work and the tool must have <see cref="PaintCanComponent"/>.
+/// Requires <see cref="EntityEffectToolComponent"/> to work and the tool must have <see cref="PaintCanComponent"/>.
 /// </summary>
-public sealed partial class PaintTarget : EntityEffect
+public sealed partial class PaintTarget : EntityEffectBase<PaintTarget>
 {
-    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("entity-effect-paint-target-guidebook-text");
+    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+        => Loc.GetString("entity-effect-paint-target-guidebook-text", ("chance", Probability));
+}
 
-    public override void Effect(EntityEffectBaseArgs baseArgs)
+public sealed class PaintTargetEffectSystem : EntityEffectSystem<TransformComponent, PaintTarget>
+{
+    [Dependency] private readonly EffectDataSystem _data = default!;
+    [Dependency] private readonly EffectsToolSystem _tool = default!;
+    [Dependency] private readonly PaintSystem _paint = default!;
+
+    protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<PaintTarget> args)
     {
-        if (baseArgs is not EntityEffectToolArgs args)
+        if (_data.GetTool(ent) is not {} tool)
             return;
 
-        var paint = args.EntityManager.System<PaintSystem>();
-        args.Handled = paint.TryPaint(args.Tool, args.TargetEntity);
+        if (_paint.TryPaint(tool, ent))
+            _tool.MarkUsed(tool);
     }
-
-    public override bool ShouldLog => true;
 }

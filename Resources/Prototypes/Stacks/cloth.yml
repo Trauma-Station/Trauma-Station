@@ -1,0 +1,27 @@
+- type: stack
+  parent: BaseMediumStack
+  id: Cloth
+  name: stack-cloth
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: cloth } # Trauma
+  spawn: MaterialCloth1
+
+- type: stack
+  parent: BaseMediumStack
+  id: Durathread
+  name: stack-durathread
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: durathread } # Trauma
+  spawn: MaterialDurathread1
+
+- type: stack
+  parent: BaseMediumStack
+  id: Cotton
+  name: stack-cotton
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: cotton } # Trauma
+  spawn: MaterialCotton1
+
+- type: stack
+  parent: BaseMediumStack
+  id: Pyrotton
+  name: stack-pyrotton
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: pyrotton } # Trauma
+  spawn: MaterialPyrotton1

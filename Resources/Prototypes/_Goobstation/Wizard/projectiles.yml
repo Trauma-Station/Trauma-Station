@@ -96,7 +96,7 @@
   - type: HomingProjectile
     homingSpeed: 1080
   - type: KnockdownOnCollide
-    behavior: DropIfStanding
+    dropItems: true
   - type: Ammo
     muzzleFlash: null
 
@@ -290,7 +290,7 @@
   id: ProjectileWabbajack
   name: bolt of change
   description: Wabbajack, Wabbajack!
-  parent: BaseBullet
+  parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -304,11 +304,10 @@
         Heat: 0
   - type: PolymorphOnTrigger
     polymorph: WizardWabbajack
-  - type: TriggerWhitelist
-    whitelist:
+  - type: WhitelistTriggerCondition
+    userWhitelist:
       components:
       - Body
-  - type: TriggerOnProjectileHit
   - type: Reflective
     reflective: Magic
   - type: Ammo
@@ -558,7 +557,7 @@
   id: ProjectileEmpBolt
   name: electromagnetic bolt
   description: Energy low!!!
-  parent: BaseBullet
+  parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -574,7 +573,6 @@
     reflective: Magic
   - type: Ammo
     muzzleFlash: null
-  - type: TriggerOnProjectileHit
   - type: EmpOnTrigger
     range: 3
     energyConsumption: 50000
@@ -754,7 +752,7 @@
   - type: Slippery
     slipData:
       slipOnStep: false
-      paralyzeTime: 10
+      knockdownTime: 10
       launchForwardsMultiplier: 1
   - type: ProjectileHitShooterAfterDelay
     delay: 0.5

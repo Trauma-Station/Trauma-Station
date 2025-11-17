@@ -107,10 +107,7 @@ public sealed class ShadowlingCollectiveMindSystem : EntitySystem
         // If no abilities were added, nothing happens as seen from the return statement above.
         foreach (var thrall in sling.Thralls)
         {
-            if (!HasComp<StatusEffectsComponent>(thrall))
-                return;
-
-            _stun.TryParalyze(thrall, TimeSpan.FromSeconds(comp.BaseStunTime * abiltiesAddedCount + 1), false);
+            _stun.TryAddParalyzeDuration(thrall, TimeSpan.FromSeconds(comp.BaseStunTime * abiltiesAddedCount + 1));
         }
 
         args.Handled = true;

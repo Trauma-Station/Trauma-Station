@@ -1,0 +1,13 @@
+- type: stack
+  parent: BaseSheetStack
+  id: Paper
+  name: stack-paper
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/other.rsi, state: paper } # Trauma
+  spawn: SheetPaper1
+
+- type: stack
+  parent: BaseSheetStack
+  id: MeatSheets
+  name: stack-meat-sheet
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/Sheets/meaterial.rsi, state: meat } # Trauma
+  spawn: MaterialSheetMeat1

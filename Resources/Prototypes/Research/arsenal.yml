@@ -167,7 +167,7 @@
   id: UraniumMunitions
   name: research-technology-uranium-munitions
   icon:
-    sprite: Objects/Materials/Sheets/other.rsi
+    sprite: _Trauma/Objects/Materials/Sheets/other.rsi # Trauma
     state: uranium
   discipline: Arsenal
   tier: 1
@@ -204,11 +204,40 @@
   - TelescopicShield
   - HoloprojectorSecurity
   - WeaponDisablerSMG
+  - PolymerBaton #goob
+  - SpearTelescopic #goob
   # Goobstation R&D Console rework start
   position: 3,3
   technologyPrerequisites:
   - NonlethalAmmunition
   # Goobstation R&D Console rework end
+
+- type: technology
+  id: ExplosiveTechnology
+  name: research-technology-explosive-technology
+  icon:
+    sprite: Objects/Devices/payload.rsi
+    state: payload-explosive-armed
+  discipline: Arsenal
+  tier: 1
+  cost: 10000
+  recipeUnlocks:
+  - SignallerAdvanced
+  # <Trauma>
+  #- SignalTrigger # These are roundstart
+  #- VoiceTrigger
+  #- TimerTrigger
+  #- FlashPayload
+  - ShrapnelPayload # was ExplosivePayload
+  #- ChemicalPayload # roundstart
+  # </Trauma>
+  - CableDetStack1
+  - EmptyDetonator
+  # <Trauma>
+  position: 3,1
+  technologyPrerequisites:
+  - NonlethalAmmunition
+  # </Trauma>
 
 - type: technology
   id: SpecialMeans

@@ -11,7 +11,9 @@ using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared._White.BackStab;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Eye.Blinding.Systems;
@@ -118,7 +120,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 // small stun if the person is looking away or laying down
                 if (_backstab.TryBackstab(target, performer, Angle.FromDegrees(45d)))
                 {
-                    _stun.TryParalyze(target, TimeSpan.FromSeconds(1.5f), true);
+                    _stun.TryUpdateParalyzeDuration(target, TimeSpan.FromSeconds(1.5f));
                     _damage.TryChangeDamage(target,
                         new DamageSpecifier(_proto.Index<DamageTypePrototype>("Slash"), 10),
                         ignoreResistances: true,
@@ -193,10 +195,9 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                           HasComp<BorgChassisComponent>(target) ||
                           _tag.HasTag(target, "Bot"))) // Check for ingorganic target
                 {
-                    _damage.TryChangeDamage(target,
+                    _damage.ChangeDamage((target, damageable),
                         new DamageSpecifier(_proto.Index<DamageGroupPrototype>("Brute"), 500),
                         ignoreResistances: true,
-                        damageable: damageable,
                         origin: performer,
                         targetPart: TargetBodyPart.Chest);
                 }
@@ -206,7 +207,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
             case "Cosmos":
             {
-                if (_starMark.TryApplyStarMark(target, performer))
+                if (_starMark.TryApplyStarMark(target))
                     _starMark.SpawnCosmicField(Transform(performer).Coordinates, heretic.PathStage);
                 break;
             }

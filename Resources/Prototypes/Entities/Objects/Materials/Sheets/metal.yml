@@ -46,9 +46,9 @@
   description: A sheet of metal, used often on the station in various applications.
   components:
   - type: Sprite
-    sprite: Objects/Materials/Sheets/metal.rsi
+    sprite: _Trauma/Objects/Materials/Sheets/metal.rsi # Trauma
   - type: Item
-    sprite: Objects/Materials/Sheets/metal.rsi
+    sprite: _Trauma/Objects/Materials/Sheets/metal.rsi # Trauma
     size: Normal
   - type: StaticPrice
     price: 0
@@ -57,6 +57,7 @@
     - Sheet
     - Metal
     - DroneUsable # Goobstation
+    - ConstructionMaterial
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
@@ -93,11 +94,6 @@
     - steel
     - steel_2
     - steel_3
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: steel_3
     layers:
@@ -149,15 +145,6 @@
     count: 1
 
 - type: entity
-  parent: SheetSteel
-  id: SheetSteelLingering0
-  suffix: Lingering, 0
-  components:
-  - type: Stack
-    lingering: true
-    count: 0
-
-- type: entity
   parent: SheetMetalBase
   id: SheetBrass
   name: brass
@@ -175,11 +162,6 @@
     - brass
     - brass_2
     - brass_3
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: brass_3
     layers:
@@ -243,11 +225,6 @@
     - plasteel
     - plasteel_2
     - plasteel_3
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: plasteel_3
     layers:
@@ -293,12 +270,3 @@
   - type: Stack
     stackType: Plasteel
     count: 1
-
-- type: entity
-  parent: SheetPlasteel
-  id: SheetPlasteelLingering0
-  suffix: Lingering, 0
-  components:
-  - type: Stack
-    lingering: true
-    count: 0

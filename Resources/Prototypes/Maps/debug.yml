@@ -50,7 +50,7 @@
           availableJobs:
             Captain: [ -1, -1 ]
             NanotrasenRepresentative: [ -1, -1 ] # Goob - remove it after test
-            BlueshieldOfficer: [ -1, -1 ] # Remove this too
+            #BlueshieldOfficer: [ -1, -1 ] # Trauma
         # Goobstation blob-config-start DEBUG
         - type: StationBlobConfig
           stageBegin: 20

@@ -1,13 +1,4 @@
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <drsmugleaf@gmail.com>
-// SPDX-FileCopyrightText: 2023 Jezithyr <jezithyr@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
+using System.Numerics;
 using Content.Shared.Mobs;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -143,12 +134,11 @@ public sealed class DamageOverlay : Overlay
          * innerCircleMaxRadius is what we start at for 0 level for the inner circle
          */
 
-        // Makes debugging easier don't @ me
+        // Only show pain overlay if there's actual pain and we're not in critical stat
+        // Goobstation start
         float level = 0f;
         level = _oldPainLevel;
-
-        // TODO: Lerping
-        if (level > 0f && _oldCritLevel <= 0f)
+        if (_oldPainLevel > 0f && _oldCritLevel <= 0f)
         {
             var pulseRate = 3f;
             var adjustedTime = time * pulseRate;
@@ -157,26 +147,30 @@ public sealed class DamageOverlay : Overlay
             float innerMaxLevel = 0.6f * distance;
             float innerMinLevel = 0.2f * distance;
 
-            var outerRadius = outerMaxLevel - level * (outerMaxLevel - outerMinLevel);
-            var innerRadius = innerMaxLevel - level * (innerMaxLevel - innerMinLevel);
+            var outerRadius = outerMaxLevel - _oldPainLevel * (outerMaxLevel - outerMinLevel);
+            var innerRadius = innerMaxLevel - _oldPainLevel * (innerMaxLevel - innerMinLevel);
 
             var pulse = MathF.Max(0f, MathF.Sin(adjustedTime));
 
             _bruteShader.SetParameter("time", pulse);
             _bruteShader.SetParameter("color", new Vector3(1f, 0f, 0f));
-            _bruteShader.SetParameter("darknessAlphaOuter", 0.8f);
+            _bruteShader.SetParameter("darknessAlphaOuter", 0.8f * _oldPainLevel); // Scale alpha with pain level
 
             _bruteShader.SetParameter("outerCircleRadius", outerRadius);
             _bruteShader.SetParameter("outerCircleMaxRadius", outerRadius + 0.2f * distance);
             _bruteShader.SetParameter("innerCircleRadius", innerRadius);
             _bruteShader.SetParameter("innerCircleMaxRadius", innerRadius + 0.02f * distance);
+
             handle.UseShader(_bruteShader);
             handle.DrawRect(viewport, Color.White);
         }
-        else
+
+        // Always update _oldPainLevel to match PainLevel when PainLevel is 0
+        if (PainLevel <= 0f)
         {
-            _oldPainLevel = PainLevel;
+            _oldPainLevel = 0f;
         }
+        // Goobstation end
 
         level = State != MobState.Critical ? _oldOxygenLevel : 1f;
 

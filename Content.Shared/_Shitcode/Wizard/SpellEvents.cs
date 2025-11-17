@@ -97,7 +97,7 @@ public sealed partial class DisableTechEvent : InstantActionEvent
     public float EnergyConsumption = 50000f;
 
     [DataField]
-    public float DisableDuration = 60f;
+    public TimeSpan DisableDuration = TimeSpan.FromMinutes(1);
 
     [DataField]
     public EntProtoId Effect = "EmpFlashEffect";

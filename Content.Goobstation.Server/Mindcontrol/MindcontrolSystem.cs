@@ -11,6 +11,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Mindcontrol;
+using Content.Goobstation.Shared.Roles;
 using Content.Server.Administration.Logs;
 using Content.Server.Antag;
 using Content.Server.Mind;
@@ -21,6 +22,7 @@ using Content.Shared.Database;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mindshield.Components;
+using Content.Shared.Roles.Components;
 using Content.Shared.Popups;
 using Robust.Server.Player;
 using Robust.Shared.Prototypes;
@@ -50,11 +52,11 @@ public sealed class MindcontrolSystem : EntitySystem
     }
     public void OnStartup(EntityUid uid, MindcontrolledComponent component, ComponentStartup arg)
     {
-        _stun.TryParalyze(uid, TimeSpan.FromSeconds(5f), true); //dont need this but, but its a still a good indicator from how Revulution and subverted silicone does it
+        _stun.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(5f)); //dont need this but, but its a still a good indicator from how Revolution and subverted silicon does it
     }
     public void OnShutdown(EntityUid uid, MindcontrolledComponent component, ComponentShutdown arg)
     {
-        _stun.TryParalyze(uid, TimeSpan.FromSeconds(5f), true);
+        _stun.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(5f));
         if (_mindSystem.TryGetMind(uid, out var mindId, out _))
             _roleSystem.MindRemoveRole<MindcontrolledRoleComponent>(mindId);
         _popup.PopupEntity(Loc.GetString("mindcontrol-popup-stop"), uid, PopupType.Large);

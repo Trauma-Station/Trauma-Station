@@ -5,13 +5,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Chat.Managers;
-using Content.Server.IdentityManagement;
 using Content.Goobstation.Common.Examine; // Goobstation Change
 using Content.Goobstation.Common.CCVar; // Goobstation Change
 using Content.Shared._Goobstation.Heretic.Components; // Goobstation Change
 using Content.Shared.Chat;
 using Content.Shared.Examine;
 using Content.Shared._White.Examine;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
@@ -92,7 +92,7 @@ public sealed class ExaminableCharacterSystem : EntitySystem
             if (_entityManager.TryGetComponent<MetaDataComponent>(slotEntity, out var metaData)
                 && !HasComp<StripMenuInvisibleComponent>(slotEntity))
             {
-                var itemTex = Loc.GetString(slotLabel, ("item", metaData.EntityName), ("ent", uid), ("id", slotEntity.Value.Id), ("size", 14));
+                var itemTex = Loc.GetString(slotLabel, ("item", metaData.EntityName), ("ent", uid), ("id", GetNetEntity(slotEntity.Value).Id), ("size", 14));
                 if (showExamine)
                     args.PushMarkup($"[font size=10]{Loc.GetString(slotLabel, ("item", metaData.EntityName), ("ent", uid), ("id", "empty"))}[/font]", priority);
                 logLines.Add($"[color=DarkGray][font size=10]{itemTex}[/font][/color]");
@@ -155,7 +155,7 @@ public sealed class ExaminableCharacterSystem : EntitySystem
             if (!args.IsSecondaryInfo)
             {
                 TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-                var item = Loc.GetString("examine-present-tex", ("name", textInfo.ToTitleCase(metaData.EntityName)), ("id", uid.Id), ("size", 14));
+                var item = Loc.GetString("examine-present-tex", ("name", textInfo.ToTitleCase(metaData.EntityName)), ("id", GetNetEntity(uid).Id), ("size", 14));
                 message.AddText($"[color=DarkGray][font size=11]{item}[/font][/color]");
                 message.PushNewline();
             }

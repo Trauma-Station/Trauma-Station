@@ -25,6 +25,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: cargoProduct
+  parent: BaseRedAlert # Trauma
   id: ArmorySmg
   icon:
     sprite: Objects/Weapons/Guns/SMGs/wt550.rsi
@@ -35,6 +36,7 @@
   group: market
 
 - type: cargoProduct
+  parent: BaseRedAlert # Trauma
   id: ArmoryShotgun
   icon:
     sprite: Objects/Weapons/Guns/Shotguns/enforcer.rsi
@@ -45,6 +47,7 @@
   group: market
 
 - type: cargoProduct
+  parent: BaseRedAlert # Trauma
   id: SecurityRiot
   icon:
     sprite: Clothing/OuterClothing/Armor/riot.rsi
@@ -75,6 +78,7 @@
   group: market
 
 - type: cargoProduct
+  parent: BaseRedAlert # Trauma
   id: ArmoryLaser
   icon:
     sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
@@ -85,6 +89,7 @@
   group: market
 
 - type: cargoProduct
+  parent: BaseRedAlert # Trauma
   id: ArmoryPistol
   icon:
     sprite: Objects/Weapons/Guns/Pistols/mk58.rsi
@@ -95,6 +100,7 @@
   group: market
 
 - type: cargoProduct
+  parent: BaseRedAlert # Trauma
   id: ArmoryRifle
   icon:
     sprite: Objects/Weapons/Guns/Rifles/lecter.rsi

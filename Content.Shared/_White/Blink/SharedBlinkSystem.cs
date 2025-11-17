@@ -91,6 +91,6 @@ public abstract class SharedBlinkSystem : EntitySystem
         _transform.SetWorldPosition(user, targetPos);
         _audio.PlayPredicted(blink.BlinkSound, user, user);
         if (_net.IsServer) // Prediction issues
-            _telefrag.DoTelefrag(user, xform.Coordinates, blink.KnockdownTime, blink.KnockdownRadius, autoStandUp: true);
+            _telefrag.DoTelefrag(user, xform.Coordinates, blink.KnockdownTime, blink.KnockdownRadius, autoStand: true);
     }
 }

@@ -71,7 +71,6 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Shared.Body.Events;
 using Content.Server.DeviceNetwork.Systems;
-using Content.Server.Explosion.EntitySystems;
 using Content.Server.Hands.Systems;
 using Content.Server.PowerCell;
 using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
@@ -96,6 +95,7 @@ using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.StationAi;
 using Content.Shared.Throwing;
+using Content.Shared.Trigger.Systems;
 using Content.Shared.Whitelist;
 using Content.Shared.Wires;
 using Robust.Server.GameObjects;
@@ -391,8 +391,8 @@ public sealed partial class BorgSystem : SharedBorgSystem
     {
         if (!_powerCell.TryGetBatteryFromSlot(ent, out var battery, slotComponent))
         {
-            _alerts.ClearAlert(ent, ent.Comp.BatteryAlert);
-            _alerts.ShowAlert(ent, ent.Comp.NoBatteryAlert);
+            _alerts.ClearAlert(ent.Owner, ent.Comp.BatteryAlert);
+            _alerts.ShowAlert(ent.Owner, ent.Comp.NoBatteryAlert);
             return;
         }
 
@@ -405,8 +405,8 @@ public sealed partial class BorgSystem : SharedBorgSystem
             chargePercent = 1;
         }
 
-        _alerts.ClearAlert(ent, ent.Comp.NoBatteryAlert);
-        _alerts.ShowAlert(ent, ent.Comp.BatteryAlert, chargePercent);
+        _alerts.ClearAlert(ent.Owner, ent.Comp.NoBatteryAlert);
+        _alerts.ShowAlert(ent.Owner, ent.Comp.BatteryAlert, chargePercent);
     }
 
     public bool TryEjectPowerCell(EntityUid uid, BorgChassisComponent component, [NotNullWhen(true)] out List<EntityUid>? ents)
@@ -416,7 +416,7 @@ public sealed partial class BorgSystem : SharedBorgSystem
         if (!TryComp<PowerCellSlotComponent>(uid, out var slotComp) ||
             !Container.TryGetContainer(uid, slotComp.CellSlotId, out var container) ||
             !container.ContainedEntities.Any())
-                return false;
+            return false;
 
         ents = Container.EmptyContainer(container);
 
@@ -450,7 +450,6 @@ public sealed partial class BorgSystem : SharedBorgSystem
 
     /// <summary>
     /// Checks that a player has fulfilled the requirements for the borg job.
-    /// If they don't have enough hours, they cannot be placed into a chassis.
     /// </summary>
     public bool CanPlayerBeBorged(ICommonSession session)
     {

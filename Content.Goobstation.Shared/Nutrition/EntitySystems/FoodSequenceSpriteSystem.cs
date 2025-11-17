@@ -14,6 +14,8 @@ namespace Content.Goobstation.Shared.Nutrition.EntitySystems;
 
 public class FoodSequenceSpriteSystem : SharedFoodSequenceSystem
 {
+    /* Trauma
+    Can't work anymore because Sprite is clientside...
     private EntityQuery<NameModifierComponent> _modifierQuery;
 
     public override void Initialize()
@@ -30,7 +32,7 @@ public class FoodSequenceSpriteSystem : SharedFoodSequenceSystem
         if (ent.Comp.Entries.Count != 0)
             return;
 
-        var defaultEntry = new FoodSequenceElementEntry();
+        var layer = new FoodSequenceVisualLayer();
 
         var meta = MetaData(ent);
         var name = _modifierQuery.CompOrNull(ent)?.BaseName ?? meta.EntityName;
@@ -39,4 +41,5 @@ public class FoodSequenceSpriteSystem : SharedFoodSequenceSystem
 
         ent.Comp.Entries.Add("default", defaultEntry);
     }
+    */
 }

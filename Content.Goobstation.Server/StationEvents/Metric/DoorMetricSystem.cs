@@ -117,7 +117,7 @@ public sealed class DoorMetricSystem : ChaosMetricSystem<DoorMetricComponent>
                 airlockCounter += 1;
             }
 
-            if (power.Recalculate || !power.NeedsPower)
+            if (power.Powered || !power.NeedsPower)
             {
                 powerCount += 1;
             }

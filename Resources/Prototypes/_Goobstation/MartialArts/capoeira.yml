@@ -32,7 +32,7 @@
       path: /Audio/Weapons/genhit3.ogg
   extraDamage: 5
   paralyzeTime: 1
-  dropHeldItemsBehavior: NoDrop
+  dropItems: false
   canDoWhileProne: false
 
 - type: combo
@@ -99,5 +99,5 @@
   - Disarm
   - Disarm
   event: !type:KickUpPerformedEvent
-    staminaToHeal: -20
+    staminaToHeal: 0
   performOnSelf: true

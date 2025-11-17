@@ -46,14 +46,15 @@
   description: A sheet of material, used often on the station in various applications.
   components:
   - type: Sprite
-    sprite: Objects/Materials/Sheets/other.rsi
+    sprite: _Trauma/Objects/Materials/Sheets/other.rsi # Trauma
   - type: Item
-    sprite: Objects/Materials/Sheets/other.rsi
+    sprite: _Trauma/Objects/Materials/Sheets/other.rsi # Trauma
     size: Normal
   - type: Tag
     tags:
     - Sheet
     - DroneUsable # Goobstation
+    - ConstructionMaterial
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
@@ -82,11 +83,6 @@
     - paper
     - paper_2
     - paper_3
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -142,11 +138,6 @@
     - plasma
     - plasma_2
     - plasma_3
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: plasma_3
     layers:
@@ -164,10 +155,11 @@
         - ReagentId: Plasma
           Quantity: 10
         canReact: false
-  - type: Tag
+  - type: Tag # Goob - add SheetPlasma
     tags:
     - Sheet
     - SheetPlasma
+    - ConstructionMaterial
 
 - type: entity
   parent: SheetPlasma
@@ -191,16 +183,6 @@
     count: 1
 
 - type: entity
-  parent: SheetPlasma
-  id: SheetPlasmaLingering0
-  name: plasma
-  suffix: 0, Lingering
-  components:
-  - type: Stack
-    lingering: true
-    count: 0
-
-- type: entity
   parent: SheetOtherBase
   id: SheetPlastic
   name: plastic
@@ -211,6 +193,7 @@
     - Plastic
     - Sheet
     - DroneUsable # Goobstation
+    - ConstructionMaterial
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -222,11 +205,6 @@
     - plastic
     - plastic_2
     - plastic_3
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: plastic_3
     layers:
@@ -276,7 +254,7 @@
   suffix: Full
   components:
   - type: Material
-  - type: Food
+  - type: Edible
     transferAmount: 10
   - type: BadFood
   - type: PhysicalComposition
@@ -289,11 +267,6 @@
     - uranium
     - uranium_2
     - uranium_3
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: uranium_3
     layers:
@@ -330,7 +303,7 @@
   suffix: Full
   components:
     - type: Sprite
-      sprite: Objects/Materials/Sheets/meaterial.rsi
+      sprite: _Trauma/Objects/Materials/Sheets/meaterial.rsi # Trauma
       layers:
       - state: meat_3
         map: [ "base" ]
@@ -349,13 +322,8 @@
         - meat
         - meat_2
         - meat_3
-  # Goobstation - Custom stack splitting dialog
-    - type: UserInterface
-      interfaces:
-        enum.StackCustomSplitUiKey.Key:
-          type: StackCustomSplitBoundUserInterface
     - type: Item
-      sprite: Objects/Materials/Sheets/meaterial.rsi
+      sprite: _Trauma/Objects/Materials/Sheets/meaterial.rsi # Trauma
       heldPrefix: meat
     - type: Extractable
       grindableSolutionName: meatsheet

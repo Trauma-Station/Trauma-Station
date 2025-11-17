@@ -14,18 +14,14 @@ using System.Numerics;
 using Content.Goobstation.Common.Actions;
 using Content.Goobstation.Common.Bloodstream;
 using Content.Server._Goobstation.Wizard.Components;
-using Content.Server.Abilities.Mime;
 using Content.Server.Antag;
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
-using Content.Server.Emp;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Fluids.EntitySystems;
-using Content.Server.IdentityManagement;
 using Content.Server.Inventory;
 using Content.Server.Polymorph.Systems;
-using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Singularity.EntitySystems;
 using Content.Server.Spreader;
@@ -38,12 +34,15 @@ using Content.Shared._Goobstation.Wizard.BindSoul;
 using Content.Shared._Goobstation.Wizard.Chuuni;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
 using Content.Shared._Goobstation.Wizard.SpellCards;
+using Content.Shared._Shitcode.Roles;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared._Shitmed.Damage; // Shitmed Change
+using Content.Shared.Abilities.Mime;
 using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.Emp;
 using Content.Shared.Gibbing.Events;
 using Content.Shared.Hands.Components;
 using Content.Shared.Humanoid;
@@ -55,7 +54,9 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
+using Content.Shared.Power.Components;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Roles.Components;
 using Content.Shared.Speech.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Server.Player;
@@ -82,7 +83,7 @@ namespace Content.Server._Goobstation.Wizard.Systems;
 public sealed class SpellsSystem : SharedSpellsSystem
 {
     [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly EmpSystem _emp = default!;
+    [Dependency] private readonly SharedEmpSystem _emp = default!;
     [Dependency] private readonly SmokeSystem _smoke = default!;
     [Dependency] private readonly SpreaderSystem _spreader = default!;
     [Dependency] private readonly GravityWellSystem _gravityWell = default!;
@@ -250,7 +251,7 @@ public sealed class SpellsSystem : SharedSpellsSystem
             if (distance2 < minRange2)
                 continue;
 
-            Stun.TryParalyze(entity, ev.StunTime, true);
+            Stun.TryUpdateParalyzeDuration(entity, ev.StunTime);
 
             Spawn(ev.EffectProto, TransformSystem.GetMapCoordinates(entity, xform));
 

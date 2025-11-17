@@ -1,62 +1,9 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Morb <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vordenburg <114301317+Vordenburg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 12rabbits <53499656+12rabbits@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Alzore <140123969+Blackern5000@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ArtisticRoomba <145879011+ArtisticRoomba@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Brandon Hu <103440971+Brandon-Huu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Dimastra <65184747+Dimastra@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Dimastra <dimastra@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Eoin Mcloughlin <helloworld@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JIPDawg <51352440+JIPDawg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JIPDawg <JIPDawg93@gmail.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 Moomoobeef <62638182+Moomoobeef@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 PopGamer46 <yt1popgamer@gmail.com>
-// SPDX-FileCopyrightText: 2024 PursuitInAshes <pursuitinashes@gmail.com>
-// SPDX-FileCopyrightText: 2024 QueerNB <176353696+QueerNB@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Saphire Lattice <lattice@saphi.re>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Simon <63975668+Simyon264@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Spessmann <156740760+Spessmann@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 Thomas <87614336+Aeshus@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 eoineoineoin <github@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 stellar-novas <stellar_novas@riseup.net>
-// SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 J <billsmith116@gmail.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Server.Atmos;
+using Content.Shared._vg.TileMovement;
+using Content.Shared.Gravity;
+using Robust.Server.GameObjects;
+// </Trauma>
 using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -89,17 +36,16 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.Prying.Systems;
 using Microsoft.Extensions.ObjectPool;
-
-// Tile Movement Change
-using Content.Server.Atmos;
-using Content.Shared._vg.TileMovement;
-using Robust.Server.GameObjects;
-using Content.Shared.Gravity;
+using Prometheus;
 
 namespace Content.Server.NPC.Systems;
 
 public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
 {
+    private static readonly Gauge ActiveSteeringGauge = Metrics.CreateGauge(
+        "npc_steering_active_count",
+        "Amount of NPCs trying to actively do steering");
+
     /*
      * We use context steering to determine which way to move.
      * This involves creating an array of possible directions and assigning a value for the desireability of each direction.
@@ -110,8 +56,14 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
      * (though in their case it was for an F1 game so used context steering across the width of the road).
      */
 
+    // <Trauma>
+    [Dependency] private readonly SharedGravitySystem _gravity = default!;
+    private TimeSpan CurrentTime => _physics.EffectiveCurTime ?? _timing.CurTime;
+    private EntityQuery<TileMovementComponent> _tileMovementQuery;
+    // </Trauma>
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly IConfigurationManager _configManager = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ClimbSystem _climb = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
@@ -123,18 +75,14 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly SharedMoverController _mover = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!; // Tile Movement Change
-    [Dependency] protected readonly SharedPhysicsSystem PhysicsSystem = default!; // Tile Movement Change
-    [Dependency] private readonly SharedGravitySystem _gravity = default!; // Tile Movement Change
-    private TimeSpan CurrentTime => PhysicsSystem.EffectiveCurTime ?? Timing.CurTime; // Tile Movement Change
     private EntityQuery<FixturesComponent> _fixturesQuery;
     private EntityQuery<MovementSpeedModifierComponent> _modifierQuery;
     private EntityQuery<NpcFactionMemberComponent> _factionQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<TransformComponent> _xformQuery;
-    private EntityQuery<TileMovementComponent> _tileMovementQuery; // Tile Movement Change
     private ObjectPool<HashSet<EntityUid>> _entSetPool =
         new DefaultObjectPool<HashSet<EntityUid>>(new SetPolicy<EntityUid>());
 
@@ -152,6 +100,8 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
     private readonly HashSet<ICommonSession> _subscribedSessions = new();
 
     private object _obstacles = new();
+
+    private int _activeSteeringCount;
 
     public override void Initialize()
     {
@@ -308,7 +258,9 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
         {
             MaxDegreeOfParallelism = 1,
         };
-        var curTime = Timing.CurTime;
+        var curTime = _timing.CurTime;
+
+        _activeSteeringCount = 0;
 
         Parallel.For(0, index, options, i =>
         {
@@ -316,6 +268,7 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
             Steer(uid, steering, mover, xform, frameTime, curTime);
         });
 
+        ActiveSteeringGauge.Set(_activeSteeringCount);
 
         if (_subscribedSessions.Count > 0)
         {
@@ -350,7 +303,7 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
         }
 
         component.CurTickSprintMovement = value;
-        component.LastInputTick = Timing.CurTick;
+        component.LastInputTick = _timing.CurTick;
         component.LastInputSubTick = ushort.MaxValue;
 
         var ev = new SpriteMoveEvent(true);
@@ -390,19 +343,22 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
             return;
         }
 
+        Interlocked.Increment(ref _activeSteeringCount);
+
         var agentRadius = steering.Radius;
         var worldPos = _transform.GetWorldPosition(xform);
-        var (layer, mask) = PhysicsSystem.GetHardCollision(uid);
+        var (layer, mask) = _physics.GetHardCollision(uid);
         // Use rotation relative to parent to rotate our context vectors by.
         var offsetRot = -_mover.GetParentGridAngle(mover);
 
         _modifierQuery.TryGetComponent(uid, out var modifier);
-        var body = _physicsQuery.GetComponent(uid);
-
-        var weightless = _gravity.IsWeightless(uid, body, xform);
         var moveSpeed = GetSprintSpeed(uid, modifier);
+        var body = _physicsQuery.GetComponent(uid);
+        // <Goob>
+        var weightless = _gravity.IsWeightless(uid);
         var acceleration = GetAcceleration((uid, modifier), weightless);
         var friction = GetFriction((uid, modifier), weightless);
+        // </Goob>
 
         var dangerPoints = steering.DangerPoints;
         dangerPoints.Clear();
@@ -470,10 +426,10 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
 
         steering.LastSteerDirection = resultDirection;
         DebugTools.Assert(!float.IsNaN(resultDirection.X));
-        // Tile Movement Change
-        if (!_gravity.IsWeightless(uid, body, xform) &&
-            body.BodyStatus == BodyStatus.OnGround &&
-            _tileMovementQuery.TryGetComponent(uid, out var tileMovement))
+        // <Goob> - tile movement
+        if (body.BodyStatus == BodyStatus.OnGround &&
+            _tileMovementQuery.TryComp(uid, out var tileMovement) &&
+            !_gravity.IsWeightless(uid))
         {
             SetTileMovementDirection(xform, tileMovement, resultDirection);
         }
@@ -481,6 +437,7 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
         {
             SetDirection(uid, mover, steering, resultDirection, false);
         }
+        // </Goob>
     }
 
     private EntityCoordinates GetCoordinates(PathPoly poly)

@@ -24,8 +24,10 @@
         damage: 10
       behaviors:
       - !type:TriggerBehavior
+        keyOut: timer # explode immediately
   - type: ScatteringGrenade
-  - type: OnUseTimerTrigger
+  - type: TriggerOnUse
+  - type: TimerTrigger
     delay: 3
   - type: Tag
     tags:
@@ -88,13 +90,20 @@
           Primed: { state: primed }
           Unprimed: { state: icon }
   - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: "/Audio/Machines/door_lock_off.ogg"
+    positional: true
+  - type: Construction #Trauma
+    graph: ClusterBangGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ScatteringGrenadeBase, BaseSyndicateContraband]
   id: ClusterGrenade
-  name: clustergrenade
+  name: ClusterGrenade
   description: Why use one grenade when you can use three at once!
   components:
   - type: Sprite
@@ -105,7 +114,7 @@
   - type: ScatteringGrenade
     fillPrototype: ExGrenade
     distance: 4
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
       params:
@@ -113,10 +122,17 @@
     initialBeepDelay: 0
     beepInterval: 0.5
   - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: "/Audio/Machines/door_lock_off.ogg"
+    positional: true
   - type: StaticPrice
     price: 2500
+  - type: Construction # Trauma
+    graph: ClusterGrenadeGraph
+    node: start
+    deconstructionTarget: null
 
 - type: entity
   parent: [ScatteringGrenadeBase, BaseSyndicateContraband]
@@ -137,8 +153,11 @@
       types:
         Blunt: 10
   - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: "/Audio/Items/bikehorn.ogg"
+    positional: true
 
 - type: entity
   parent: [SoapSyndie, ScatteringGrenadeBase, BaseSyndicateContraband]
@@ -162,8 +181,11 @@
       types:
         Blunt: 10
   - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: "/Audio/Effects/flash_bang.ogg"
+    positional: true
   - type: StaticPrice
     price: 1000
 
@@ -184,7 +206,7 @@
     fillPrototype: BulletFoam
     capacity: 30
     velocity: 30
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
       params:
@@ -192,5 +214,12 @@
     initialBeepDelay: 0
     beepInterval: 2
   - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: "/Audio/Weapons/Guns/Gunshots/batrifle.ogg"
+    positional: true
+  - type: Construction # Trauma
+    graph: FoamGrenadeGraph
+    node: start
+    deconstructionTarget: null

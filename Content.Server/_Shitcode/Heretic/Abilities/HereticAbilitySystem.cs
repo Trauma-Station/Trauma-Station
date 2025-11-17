@@ -22,6 +22,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+// the fucking eye of the shitcode storm
+
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Goobstation.Shared.Overlays;
 using Content.Server.Atmos.EntitySystems;
@@ -41,7 +43,7 @@ using Robust.Shared.Audio.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Random;
 using Content.Shared.Body.Systems;
-using Content.Server.Medical;
+using Content.Shared.Medical;
 using Robust.Server.GameObjects;
 using Content.Shared.Stunnable;
 using Robust.Shared.Map;
@@ -60,7 +62,7 @@ using Content.Server.Body.Systems;
 using Content.Server.Temperature.Systems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Server.Heretic.Components;
-using Content.Server.Temperature.Components;
+using Content.Shared.Temperature.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Components;
@@ -105,7 +107,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly ProtectiveBladeSystem _pblade = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly VoidCurseSystem _voidcurse = default!;
@@ -357,7 +358,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
     private void OnVoidVision(Entity<HereticComponent> ent, ref HereticVoidVisionEvent args)
     {
-        var thermalVision = _compFactory.GetComponent<ThermalVisionComponent>();
+        var thermalVision = Factory.GetComponent<ThermalVisionComponent>();
         thermalVision.Color = Color.FromHex("#b4babf");
         thermalVision.LightRadius = 7.5f;
         thermalVision.FlashDurationMultiplier = 1f;
@@ -418,8 +419,8 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         var temperatureQuery = GetEntityQuery<TemperatureComponent>();
         var staminaQuery = GetEntityQuery<StaminaComponent>();
         var statusQuery = GetEntityQuery<StatusEffectsComponent>();
-        var rustbringerQuery = GetEntityQuery<RustbringerComponent>();
         var resiratorQuery = GetEntityQuery<RespiratorComponent>();
+        var hereticQuery = GetEntityQuery<HereticComponent>();
 
         var leechQuery = EntityQueryEnumerator<LeechingWalkComponent, TransformComponent>();
         while (leechQuery.MoveNext(out var uid, out var leech, out var xform))
@@ -427,23 +428,44 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
             if (!IsTileRust(xform.Coordinates, out _))
                 continue;
 
-            var multiplier = 1f;
+            damageableQuery.TryComp(uid, out var damageable);
 
-            if (rustbringerQuery.HasComp(uid))
+            var multiplier = 2f;
+            var boneHeal = FixedPoint2.Zero;
+            var shouldHeal = true;
+            if (hereticQuery.TryComp(uid, out var heretic))
             {
-                multiplier = leech.AscensionMultiplier;
+                if (heretic.PathStage >= 7)
+                {
+                    if (heretic.Ascended)
+                    {
+                        multiplier = 4f;
+                        if (resiratorQuery.TryComp(uid, out var respirator))
+                        {
+                            _respirator.UpdateSaturation(uid,
+                                respirator.MaxSaturation - respirator.MinSaturation,
+                                respirator);
+                        }
 
-                if (resiratorQuery.TryComp(uid, out var respirator))
-                    _respirator.UpdateSaturation(uid, respirator.MaxSaturation - respirator.MinSaturation, respirator);
+                        if (damageable != null && damageable.TotalDamage < FixedPoint2.Epsilon)
+                        {
+                            _body.RestoreBody(uid);
+                            shouldHeal = false;
+                        }
+                    }
+                    else
+                        multiplier = 3f;
+
+                    boneHeal = leech.BoneHeal * multiplier;
+                }
             }
+            var otherHeal = boneHeal; // Same as boneHeal because I don't give a fuck
 
             RemCompDeferred<DelayedKnockdownComponent>(uid);
 
             var toHeal = leech.ToHeal * multiplier;
-            var boneHeal = leech.BoneHeal * multiplier;
-            var otherHeal = boneHeal; // Same as boneHeal because I don't give a fuck
 
-            if (damageableQuery.TryComp(uid, out var damageable))
+            if (shouldHeal && damageable != null)
             {
                 IHateWoundMed((uid, damageable, null, null), toHeal, boneHeal, otherHeal);
             }
@@ -461,6 +483,8 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
                         FixedPoint2.Min(leech.BloodHeal * multiplier,
                             blood.BloodMaxVolume - blood.BloodSolution.Value.Comp.Solution.Volume));
                 }
+
+                _blood.FlushChemicals((uid, blood), leech.ExcludedReagent, leech.ChemPurgeRate * multiplier);
             }
 
             if (temperatureQuery.TryComp(uid, out var temperature))

@@ -10,14 +10,16 @@ using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Robust.Client.Player;
-using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._EinsteinEngines.Language.Systems;
 
+/// <summary>
+/// Provides API to set current language and action for updating UI when languages change.
+/// </summary>
 public sealed class LanguageSystem : SharedLanguageSystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
 
     /// <summary>
     ///     Invoked when the Languages of the local player entity change, for use in UI.
@@ -26,21 +28,17 @@ public sealed class LanguageSystem : SharedLanguageSystem
 
     public override void Initialize()
     {
-        _playerManager.LocalPlayerAttached += NotifyUpdate;
-        SubscribeLocalEvent<LanguageSpeakerComponent, ComponentHandleState>(OnHandleState);
+        base.Initialize();
+
+        SubscribeLocalEvent<LanguageSpeakerComponent, AfterAutoHandleStateEvent>(OnAutoHandleState);
+
+        _player.LocalPlayerAttached += _ => OnLanguagesChanged?.Invoke();
     }
 
-    private void OnHandleState(Entity<LanguageSpeakerComponent> ent, ref ComponentHandleState args)
+    private void OnAutoHandleState(Entity<LanguageSpeakerComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (args.Current is not LanguageSpeakerComponent.State state)
-            return;
-
-        ent.Comp.CurrentLanguage = state.CurrentLanguage;
-        ent.Comp.SpokenLanguages = state.SpokenLanguages;
-        ent.Comp.UnderstoodLanguages = state.UnderstoodLanguages;
-
-        if (ent.Owner == _playerManager.LocalEntity)
-            NotifyUpdate(ent);
+        if (ent.Owner == _player.LocalEntity)
+            OnLanguagesChanged?.Invoke();
     }
 
     /// <summary>
@@ -48,21 +46,13 @@ public sealed class LanguageSystem : SharedLanguageSystem
     ///     Will return null if the player does not have an entity, or if the client has not yet received the component state.
     /// </summary>
     public LanguageSpeakerComponent? GetLocalSpeaker()
-    {
-        return CompOrNull<LanguageSpeakerComponent>(_playerManager.LocalEntity);
-    }
+        => CompOrNull<LanguageSpeakerComponent>(_player.LocalEntity);
 
     public void RequestSetLanguage(ProtoId<LanguagePrototype> language)
     {
-        if (GetLocalSpeaker()?.CurrentLanguage?.Equals(language) == true)
+        if (GetLocalSpeaker()?.CurrentLanguage.Equals(language) == true)
             return;
 
-        RaiseNetworkEvent(new LanguagesSetMessage(language));
-    }
-
-    private void NotifyUpdate(EntityUid localPlayer)
-    {
-        RaiseLocalEvent(localPlayer, new LanguagesUpdateEvent(), broadcast: true);
-        OnLanguagesChanged?.Invoke();
+        RaisePredictiveEvent(new LanguagesSetMessage(language));
     }
 }

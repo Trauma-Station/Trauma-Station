@@ -444,7 +444,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         if (!TryComp(comp.AttachedUid, out ToggleableClothingComponent? toggleableComp))
             return;
 
-        if (toggleableComp.LifeStage > ComponentLifeStage.Running)
+        if (LifeStage(comp.AttachedUid) > EntityLifeStage.MapInitialized)
             return;
 
         // As unequipped gets called in the middle of container removal, we cannot call a container-insert without causing issues.
@@ -893,5 +893,3 @@ public readonly record struct ToggledBackClothingFullUnequipAndInsertedEvent(
 
     List<(EntityUid Part, string Slot)> Parts
 );
-
-

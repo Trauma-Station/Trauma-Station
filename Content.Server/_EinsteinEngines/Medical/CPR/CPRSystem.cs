@@ -10,10 +10,9 @@
 using Content.Server.Atmos.Rotting;
 using Content.Server.Body.Components;
 using Content.Server.DoAfter;
-using Content.Server.Nutrition.EntitySystems;
-using Content.Server.Popups;
 using Content.Shared.Atmos.Rotting;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Inventory;
 
@@ -21,6 +20,8 @@ using Content.Shared.Medical.CPR;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
@@ -33,10 +34,10 @@ namespace Content.Server.Medical.CPR;
 
 public sealed class CPRSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly DoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly FoodSystem _foodSystem = default!;
+    [Dependency] private readonly IngestionSystem _ingestion = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
@@ -88,7 +89,7 @@ public sealed class CPRSystem : EntitySystem
             return;
         }
 
-        if (_foodSystem.IsMouthBlocked(performer, performer) || _foodSystem.IsMouthBlocked(target, performer))
+        if (_ingestion.HasMouthAvailable(performer, performer) || _ingestion.HasMouthAvailable(target, performer))
             return;
 
         _popupSystem.PopupEntity(Loc.GetString("cpr-start-second-person", ("target", target)), target, performer);
@@ -114,28 +115,27 @@ public sealed class CPRSystem : EntitySystem
 
     private void OnCPRDoAfter(Entity<CPRTrainingComponent> performer, ref CPRDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled || !args.Target.HasValue)
+        if (args.Cancelled || args.Handled || args.Target is not {} target)
         {
             performer.Comp.CPRPlayingStream = _audio.Stop(performer.Comp.CPRPlayingStream);
             return;
         }
 
         if (!performer.Comp.CPRHealing.Empty)
-            _damageable.TryChangeDamage(args.Target, performer.Comp.CPRHealing, true, origin: performer, targetPart: TargetBodyPart.All); // Shitmed Change
+            _damageable.ChangeDamage(target, performer.Comp.CPRHealing, true, origin: performer, targetPart: TargetBodyPart.All); // Shitmed Change
 
         if (performer.Comp.RotReductionMultiplier > 0)
-            _rottingSystem.ReduceAccumulator(
-                (EntityUid)args.Target, performer.Comp.DoAfterDuration * performer.Comp.RotReductionMultiplier);
+            _rottingSystem.ReduceAccumulator(target, performer.Comp.DoAfterDuration * performer.Comp.RotReductionMultiplier);
 
         if (_robustRandom.Prob(performer.Comp.ResuscitationChance)
-            && _mobThreshold.TryGetThresholdForState((EntityUid)args.Target, MobState.Dead, out var threshold)
-            && TryComp<DamageableComponent>(args.Target, out var damageableComponent)
-            && TryComp<MobStateComponent>(args.Target, out var state)
-            && !HasComp<UnrevivableComponent>(args.Target)
+            && _mobThreshold.TryGetThresholdForState(target, MobState.Dead, out var threshold)
+            && TryComp<DamageableComponent>(target, out var damageableComponent)
+            && TryComp<MobStateComponent>(target, out var state)
+            && !HasComp<UnrevivableComponent>(target)
             && damageableComponent.TotalDamage < threshold)
-            _mobStateSystem.ChangeMobState(args.Target.Value, MobState.Critical, state, performer);
+            _mobStateSystem.ChangeMobState(target, MobState.Critical, state, performer);
 
-        var isAlive = _mobStateSystem.IsAlive(args.Target.Value);
+        var isAlive = _mobStateSystem.IsAlive(target);
         args.Repeat = !isAlive;
         if (isAlive)
             performer.Comp.CPRPlayingStream = _audio.Stop(performer.Comp.CPRPlayingStream);

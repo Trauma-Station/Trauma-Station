@@ -4,7 +4,7 @@
   id: BaseRevBullet
   completetime: 1.5
   materials:
-    Steel: 10
+    Steel: 5
 
 - type: latheRecipe
   abstract: true
@@ -23,6 +23,11 @@
   parent: BaseRevBullet
   id: RevPistolBullet
   result: CartridgePistol
+
+- type: latheRecipe
+  parent: BaseRevBullet
+  id: RevRifleBullet
+  result: CartridgeLightRifle
 
 - type: latheRecipe
   parent: BaseRevMagazine

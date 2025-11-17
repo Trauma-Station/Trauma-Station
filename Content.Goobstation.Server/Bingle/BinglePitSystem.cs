@@ -39,6 +39,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Sprite;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
@@ -61,6 +62,7 @@ public sealed class BinglePitSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private readonly SharedScaleVisualsSystem _scale = default!;
     [Dependency] private readonly BingleSystem _bingle = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -266,9 +268,7 @@ public sealed class BinglePitSystem : EntitySystem
 
     private void ScaleUpPit(EntityUid uid, BinglePitComponent component)
     {
-        EnsureComp<ScaleVisualsComponent>(uid);
-
-        _appearance.SetData(uid, ScaleVisuals.Scale, Vector2.One * component.Level);
+        _scale.SetSpriteScale(uid, Vector2.One * component.Level);
     }
 
     private void OnRoundEndTextAppend(RoundEndTextAppendEvent ev)

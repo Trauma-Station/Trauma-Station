@@ -1,20 +1,6 @@
-// SPDX-FileCopyrightText: 2022 Jacob Tong <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Paul <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 ScalyChimp <72841710+scaly-chimp@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Numerics;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using JetBrains.Annotations;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
@@ -155,8 +141,6 @@ namespace Content.Shared.Hands
         }
     }
 
-    // Goobstation start
-    // Added virtual items for grab intent, this is heavily edited please do not bulldoze.
     /// <summary>
     ///     Raised directed on both the blocking entity and user when
     ///     a virtual hand item is deleted.
@@ -165,55 +149,42 @@ namespace Content.Shared.Hands
     {
         public EntityUid BlockingEntity;
         public EntityUid User;
-        public EntityUid VirtualItem;
+        public EntityUid VirtualItem; // Goob
 
+        // Goob - added virtualItem
         public VirtualItemDeletedEvent(EntityUid blockingEntity, EntityUid user, EntityUid virtualItem)
         {
             BlockingEntity = blockingEntity;
             User = user;
-            VirtualItem = virtualItem;
+            VirtualItem = virtualItem; // Goob
         }
     }
 
     /// <summary>
-    ///     Raised directed on both the blocking entity and user when
-    ///     a virtual hand item is thrown (at least attempted to).
+    /// Raised against an item being picked up before it is actually inserted
+    /// into the pick-up-ers hand container. This can be handled with side
+    /// effects, and may be canceled preventing the pickup in a way that
+    /// <see cref="SharedHandsSystem.CanPickupToHand"/> and similar don't see.
     /// </summary>
-    public sealed class VirtualItemThrownEvent : EntityEventArgs
-    {
-        public EntityUid BlockingEntity;
-        public EntityUid User;
-        public EntityUid VirtualItem;
-        public Vector2 Direction;
-        public VirtualItemThrownEvent(EntityUid blockingEntity, EntityUid user, EntityUid virtualItem, Vector2 direction)
-        {
-            BlockingEntity = blockingEntity;
-            User = user;
-            VirtualItem = virtualItem;
-            Direction = direction;
-        }
-    }
+    /// <param name="User">The user picking up the item.</param>
+    /// <param name="Cancelled">
+    /// If true, the item will not be equipped into the user's hand.
+    /// </param>
+    [ByRefEvent]
+    public record struct BeforeGettingEquippedHandEvent(EntityUid User, bool Cancelled = false);
 
     /// <summary>
-    ///     Raised directed on both the blocking entity and user when
-    ///     user tries to drop it by keybind.
-    ///     Cancellable.
+    /// Raised against a mob picking up and item before it is actually inserted
+    /// into the pick-up-ers hand container. This can be handled with side
+    /// effects, and may be canceled preventing the pickup in a way that
+    /// <see cref="SharedHandsSystem.CanPickupToHand"/> and similar don't see.
     /// </summary>
-    public sealed class VirtualItemDropAttemptEvent : CancellableEntityEventArgs
-    {
-        public EntityUid BlockingEntity;
-        public EntityUid User;
-        public EntityUid VirtualItem;
-        public bool Throw;
-        public VirtualItemDropAttemptEvent(EntityUid blockingEntity, EntityUid user, EntityUid virtualItem, bool thrown)
-        {
-            BlockingEntity = blockingEntity;
-            User = user;
-            VirtualItem = virtualItem;
-            Throw = thrown;
-        }
-    }
-    // Goobstation end
+    /// <param name="Item">The item being picked up.</param>
+    /// <param name="Cancelled">
+    /// If true, the item will not be equipped into the user's hand.
+    /// </param>
+    [ByRefEvent]
+    public record struct BeforeEquippingHandEvent(EntityUid Item, bool Cancelled = false);
 
     /// <summary>
     ///     Raised when putting an entity into a hand slot

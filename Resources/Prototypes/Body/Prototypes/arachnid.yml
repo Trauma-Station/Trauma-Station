@@ -24,7 +24,7 @@
       part: ChestArachnid
       organs:
         heart: OrganArachnidHeart
-        lungs: OrganAnimalLungs
+        lungs: OrganArachnidLungs
       connections:
       - right arm
       - left arm

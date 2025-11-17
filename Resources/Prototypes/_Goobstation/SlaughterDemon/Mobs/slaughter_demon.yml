@@ -54,9 +54,6 @@
     - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: default
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000
   - type: GhostTakeoverAvailable
   - type: Physics
     bodyType: KinematicController
@@ -122,7 +119,7 @@
   - type: TypingIndicator
     proto: guardian
   - type: Gibbable
-  - type: LayingDown
+  - type: Crawler
   - type: RotationVisuals
     defaultRotation: 90
     horizontalRotation: 90
@@ -215,9 +212,6 @@
     - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: default
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000
   - type: EmitSoundOnTrigger
     sound:
       path: /Audio/Effects/sadtrombone.ogg

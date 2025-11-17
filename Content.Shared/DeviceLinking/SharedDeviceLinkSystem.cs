@@ -286,6 +286,17 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
     }
 
     /// <summary>
+    /// Gets the entities linked to a specific source port.
+    /// </summary>
+    public HashSet<EntityUid> GetLinkedSinks(Entity<DeviceLinkSourceComponent?> source, ProtoId<SourcePortPrototype> port)
+    {
+        if (!Resolve(source, ref source.Comp) || !source.Comp.Outputs.TryGetValue(port, out var linked))
+            return new HashSet<EntityUid>(); // not a source or not linked
+
+        return new HashSet<EntityUid>(linked); // clone to prevent modifying the original
+    }
+
+    /// <summary>
     /// Returns the default links for the given list of source port prototypes
     /// </summary>
     /// <param name="sources">The list of source port prototypes to get the default links for</param>
@@ -571,7 +582,7 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
         RaiseLocalEvent(sinkUid, linkAttemptEvent, true);
         if (linkAttemptEvent.Cancelled && userId.HasValue)
         {
-            _popupSystem.PopupCursor(Loc.GetString("signal-linker-component-connection-refused", ("machine", source)), userId.Value);
+            _popupSystem.PopupCursor(Loc.GetString("signal-linker-component-connection-refused", ("machine", sink)), userId.Value); // Goobstation - sink instead of source
             return false;
         }
 
@@ -621,6 +632,24 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
         DeviceLinkSourceComponent? sourceComponent = null)
     {
         // NOOP on client for the moment.
+    }
+
+    /// <summary>
+    /// Goobstation - moved out of server
+    /// Helper function that invokes a port with a high/low binary logic signal.
+    /// </summary>
+    public void SendSignal(EntityUid uid, string port, bool signal, DeviceLinkSourceComponent? comp = null)
+    {
+        if (!Resolve(uid, ref comp))
+            return;
+
+        var data = new NetworkPayload
+        {
+            [DeviceNetworkConstants.LogicState] = signal ? SignalState.High : SignalState.Low
+        };
+        InvokePort(uid, port, data, comp);
+
+        comp.LastSignals[port] = signal;
     }
     #endregion
 

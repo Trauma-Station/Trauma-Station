@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server._Lavaland.Procedural.Components;
+using Content.Shared._Lavaland.Procedural.Components;
 using Content.Shared.Parallax.Biomes;
 using Robust.Shared.Map.Enumerators;
 

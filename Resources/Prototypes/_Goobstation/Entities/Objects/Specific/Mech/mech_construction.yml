@@ -48,14 +48,16 @@
   - type: ContainerContainer
     containers:
       mech-assembly-container: !type:Container
-  - type: MechAssembly
-    finishedPrototype: RipleyMKIIChassis
-    requiredParts:
-      RipleyMKIIUpgradeKit: false
-      RipleyLArm: false
-      RipleyRArm: false
-      RipleyLLeg: false
-      RipleyRLeg: false
+      battery-container: !type:Container
+  - type: PartAssembly
+    containerId: mech-assembly-container
+    parts:
+      RipleyMkIIChassis:
+      - RipleyMKIIUpgradeKit
+      - RipleyLArm
+      - RipleyRArm
+      - RipleyLLeg
+      - RipleyRLeg
   - type: Sprite
     state: ripleymkii_harness+o
     noRot: true
@@ -129,13 +131,15 @@
   - type: ContainerContainer
     containers:
       mech-assembly-container: !type:Container
-  - type: MechAssembly
-    finishedPrototype: ClarkeChassis
-    requiredParts:
-      ClarkeHead: false
-      ClarkeLArm: false
-      ClarkeRArm: false
-      ClarkeTreads: false
+      battery-container: !type:Container
+  - type: PartAssembly
+    containerId: mech-assembly-container
+    parts:
+      ClarkeChassis:
+      - ClarkeHead
+      - ClarkeLArm
+      - ClarkeRArm
+      - ClarkeTreads
   - type: Sprite
     state: clarke_harness+o
     noRot: true
@@ -261,14 +265,16 @@
   - type: ContainerContainer
     containers:
       mech-assembly-container: !type:Container
-  - type: MechAssembly
-    finishedPrototype: DurandChassis
-    requiredParts:
-      DurandHead: false
-      DurandLArm: false
-      DurandRArm: false
-      DurandLLeg: false
-      DurandRLeg: false
+      battery-container: !type:Container
+  - type: PartAssembly
+    containerId: mech-assembly-container
+    parts:
+      DurandChassis:
+      - DurandHead
+      - DurandLArm
+      - DurandRArm
+      - DurandLLeg
+      - DurandRLeg
   - type: Sprite
     state: durand_harness+o
     noRot: true
@@ -406,14 +412,16 @@
   - type: ContainerContainer
     containers:
       mech-assembly-container: !type:Container
-  - type: MechAssembly
-    finishedPrototype: GygaxChassis
-    requiredParts:
-      GygaxHead: false
-      GygaxLArm: false
-      GygaxRArm: false
-      GygaxLLeg: false
-      GygaxRLeg: false
+      battery-container: !type:Container
+  - type: PartAssembly
+    containerId: mech-assembly-container
+    parts:
+      GygaxChassis:
+      - GygaxHead
+      - GygaxLArm
+      - GygaxRArm
+      - GygaxLLeg
+      - GygaxRLeg
   - type: Sprite
     state: gygax_harness+o
     noRot: true

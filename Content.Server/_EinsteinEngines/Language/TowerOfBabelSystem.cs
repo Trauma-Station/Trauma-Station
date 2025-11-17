@@ -1,13 +1,14 @@
-using System.Linq;
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Components;
+using Content.Shared._EinsteinEngines.Language.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._EinsteinEngines.Language;
 
 public sealed class TowerOfBabelSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly SharedLanguageSystem _language = default!;
 
     public override void Initialize()
     {
@@ -22,11 +23,16 @@ public sealed class TowerOfBabelSystem : EntitySystem
             !TryComp(ent, out LanguageSpeakerComponent? speaker))
             return;
 
-        if (!_prototype.TryGetInstances<LanguagePrototype>(out var langs))
-            return;
-
-        knowledge.SpokenLanguages = langs.Keys.Select(x => new ProtoId<LanguagePrototype>(x)).ToList();
-        knowledge.UnderstoodLanguages = knowledge.SpokenLanguages.ToList();
-        speaker.CurrentLanguage = ent.Comp.DefaultLanguage;
+        var spoken = knowledge.SpokenLanguages;
+        spoken.Clear();
+        foreach (var proto in _proto.EnumeratePrototypes<LanguagePrototype>())
+        {
+            spoken.Add(proto.ID);
+        }
+        var understood = knowledge.UnderstoodLanguages;
+        understood.Clear();
+        understood.AddRange(spoken);
+        Dirty(ent.Owner, knowledge);
+        _language.EnsureValidLanguage((ent.Owner, speaker));
     }
 }

@@ -8,13 +8,13 @@
 
 using Content.Goobstation.Shared.Emag;
 using Content.Server.Administration.Logs;
-using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Emag.Components;
 using Content.Shared.Emag.Systems;
+using Content.Shared.Shuttles.Components;
 
 namespace Content.Goobstation.Server.Shuttle;
 

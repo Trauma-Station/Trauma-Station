@@ -37,7 +37,8 @@ public sealed partial class ForeignerTraitSystem : EntitySystem
             return;
         }
 
-        var alternateLanguage = knowledge.SpokenLanguages.Find(it => it != entity.Comp.BaseLanguage);
+        var spoken = knowledge.SpokenLanguages;
+        var alternateLanguage = spoken.Find(it => it != entity.Comp.BaseLanguage);
         if (alternateLanguage == default)
         {
             Log.Warning($"Entity {entity.Owner} does not have an alternative language to choose from (must have at least one non-GC for ForeignerTrait)!");

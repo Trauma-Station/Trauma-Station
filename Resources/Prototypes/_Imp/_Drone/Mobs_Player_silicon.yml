@@ -157,13 +157,6 @@
         toggleAction: ActionDronePlayMidi
   - type: StationMap #imp
   - type: GhostRole
-    requirements:
-    - !type:DepartmentTimeRequirement
-      department: Engineering
-      time: 36000 # ten hours
-    - !type:DepartmentTimeRequirement
-      department: Silicon
-      time: 18000 # five hours
     makeSentient: true
     name: ghost-role-information-drone-name
     description: ghost-role-information-drone-description
@@ -190,7 +183,6 @@
   - type: StatusEffects
     allowed:
     - Stun
-    - KnockedDown
     - SlowedDown
     - Flashed # Goobstation - counter to shitter drones
   - type: SlowOnDamage

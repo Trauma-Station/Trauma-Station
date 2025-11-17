@@ -1,13 +1,7 @@
-# SPDX-FileCopyrightText: 2023 Chronophylos <nikolai@chronophylos.com>
-# SPDX-FileCopyrightText: 2024 Ko4ergaPunk <62609550+Ko4ergaPunk@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
-
-- files: [LightningShock.ogg]
-  license: CC-BY-NC-SA-3.0
-  copyright: Citadel Station 13
-  source: https://github.com/Citadel-Station-13/Citadel-Station-13/commit/35a1723e98a60f375df590ca572cc90f1bb80bd5
+- files: ["lightningshock.ogg", "lightningbolt.ogg"]
+  license: CC-BY-SA-3.0
+  copyright: "/tg/station"
+  source: "https://github.com/tgstation/tgstation/pull/9701/"
 
 - files: ["strobeepsilon.ogg"]
   license: "CC-BY-SA-3.0"

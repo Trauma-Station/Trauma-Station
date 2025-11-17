@@ -11,3 +11,25 @@
   slots:
     hand 1:
       part: LeftArmBorg
+
+# It's like a medibot or a cleanbot except it has two arms to hug :)
+- type: body
+  id: HugBot
+  name: "hugBot"
+  root: chest
+  slots:
+    # <Trauma> use right connections
+    chest:
+      part: TorsoBorg
+      connections:
+      - right arm
+      - left arm
+    right arm:
+      connections:
+      - chest
+      part: RightArmBorg
+    left arm:
+      connections:
+      - chest
+      part: LeftArmBorg
+    # </Trauma>

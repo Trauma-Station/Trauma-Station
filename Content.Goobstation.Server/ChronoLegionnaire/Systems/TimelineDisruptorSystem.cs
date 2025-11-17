@@ -8,20 +8,20 @@
 
 using Content.Goobstation.Shared.ChronoLegionnaire.Components;
 using Content.Goobstation.Shared.ChronoLegionnaire.EntitySystems;
-using Content.Server.Storage.Components;
+using Content.Shared.Storage.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Interaction;
 using Robust.Server.Containers;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.ChronoLegionnaire.Systems;
 
+// TODO move to shared all of this can be predicted?
 public sealed class TimelineDisruptorSystem : SharedTimelineDisruptorSystem
 {
-    [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly ContainerSystem _containerSystem = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;

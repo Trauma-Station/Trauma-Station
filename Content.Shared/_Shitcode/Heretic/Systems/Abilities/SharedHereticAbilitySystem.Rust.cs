@@ -8,9 +8,11 @@ using Content.Shared.Electrocution;
 using Content.Shared.Explosion;
 using Content.Shared.Maps;
 using Content.Shared.Slippery;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Shitcode.Heretic.Systems.Abilities;
 
@@ -18,10 +20,13 @@ public abstract partial class SharedHereticAbilitySystem
 {
     public const string RustTile = "PlatingRust";
 
+    public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
+
     protected virtual void SubscribeRust()
     {
         SubscribeLocalEvent<RustbringerComponent, BeforeStaminaDamageEvent>(OnBeforeStaminaDamage);
-        SubscribeLocalEvent<RustbringerComponent, OldBeforeStatusEffectAddedEvent>(OnBeforeStatusEffect);
+        SubscribeLocalEvent<RustbringerComponent, KnockDownAttemptEvent>(OnKnockDownAttempt);
+        SubscribeLocalEvent<RustbringerComponent, BeforeStatusEffectAddedEvent>(OnBeforeStatusEffect);
         SubscribeLocalEvent<RustbringerComponent, SlipAttemptEvent>(OnSlipAttempt);
         SubscribeLocalEvent<RustbringerComponent, GetExplosionResistanceEvent>(OnGetExplosionResists);
         SubscribeLocalEvent<RustbringerComponent, ElectrocutionAttemptEvent>(OnElectrocuteAttempt);
@@ -31,7 +36,7 @@ public abstract partial class SharedHereticAbilitySystem
 
     private void OnModifyDamage(Entity<RustbringerComponent> ent, ref DamageModifyEvent args)
     {
-        if (!IsTileRust(Transform(ent).Coordinates, out _))
+        if (!IsOnRust(ent))
             return;
 
         args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, ent.Comp.ModifierSet);
@@ -42,7 +47,7 @@ public abstract partial class SharedHereticAbilitySystem
         if (args.Cancelled || args.Type == HarmfulActionType.Harm)
             return;
 
-        if (!IsTileRust(Transform(ent).Coordinates, out _))
+        if (!IsOnRust(ent))
             return;
 
         args.Cancel();
@@ -58,7 +63,7 @@ public abstract partial class SharedHereticAbilitySystem
 
     private void OnGetExplosionResists(Entity<RustbringerComponent> ent, ref GetExplosionResistanceEvent args)
     {
-        if (!IsTileRust(Transform(ent).Coordinates, out _))
+        if (!IsOnRust(ent))
             return;
 
         args.DamageCoefficient *= 0f;
@@ -66,29 +71,23 @@ public abstract partial class SharedHereticAbilitySystem
 
     private void OnSlipAttempt(Entity<RustbringerComponent> ent, ref SlipAttemptEvent args)
     {
-        if (!IsTileRust(Transform(ent).Coordinates, out _))
-            return;
-
-        args.NoSlip = true;
+        args.NoSlip |= IsOnRust(ent);
     }
 
-    private void OnBeforeStatusEffect(Entity<RustbringerComponent> ent, ref OldBeforeStatusEffectAddedEvent args)
+    private void OnKnockDownAttempt(EntityUid uid, RustbringerComponent comp, ref KnockDownAttemptEvent args)
     {
-        if (!IsTileRust(Transform(ent).Coordinates, out _))
-            return;
+        args.Cancelled |= IsOnRust(uid);
+    }
 
-        if (args.Key is not ("KnockedDown" or "Stun"))
-            return;
-
-        args.Cancelled = true;
+    private void OnBeforeStatusEffect(Entity<RustbringerComponent> ent, ref BeforeStatusEffectAddedEvent args)
+    {
+        if (args.Effect == StatusEffectStunned)
+            args.Cancelled |= IsOnRust(ent);
     }
 
     private void OnBeforeStaminaDamage(Entity<RustbringerComponent> ent, ref BeforeStaminaDamageEvent args)
     {
-        if (!IsTileRust(Transform(ent).Coordinates, out _))
-            return;
-
-        args.Cancelled = true;
+        args.Cancelled |= IsOnRust(ent);
     }
 
     public bool IsTileRust(EntityCoordinates coords, [NotNullWhen(true)] out Vector2i? tileCoords)
@@ -103,4 +102,7 @@ public abstract partial class SharedHereticAbilitySystem
         tileCoords = tileRef.GridIndices;
         return tileDef.ID == RustTile;
     }
+
+    public bool IsOnRust(EntityUid uid)
+        => IsTileRust(Transform(uid).Coordinates, out _);
 }

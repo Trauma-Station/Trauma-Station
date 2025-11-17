@@ -24,6 +24,7 @@
     - DoorBumpOpener
     - WhitelistChameleon # Agent id is just assistant, this isn't
     - WhitelistChameleonIdCard
+    - RevID
   - type: ChameleonClothing
     default: RevIDCard
   - type: Sprite

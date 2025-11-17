@@ -69,8 +69,8 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 7
-        Heat: 7
+        Piercing: 26
+        Heat: 9
 
 - type: entity
   id: BulletMagnumAP

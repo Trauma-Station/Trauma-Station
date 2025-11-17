@@ -46,7 +46,7 @@
   query:
     - !type:ComponentQuery
       components:
-      - type: Food
+      - type: Edible
   considerations:
     - !type:TargetIsAliveCon
       curve: !type:InverseBoolCurve
@@ -65,7 +65,7 @@
   query:
   - !type:ComponentQuery
     components:
-    - type: Drink
+    - type: Edible
   considerations:
   - !type:TargetIsAliveCon
     curve: !type:InverseBoolCurve
@@ -174,7 +174,7 @@
     - !type:ComponentFilter
       components:
         - type: Gun
-      invert: true
+      retainWithComp: false # Goob
     - !type:RemoveAnchoredFilter
   considerations:
     - !type:TargetMeleeCon

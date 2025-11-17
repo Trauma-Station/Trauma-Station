@@ -1,0 +1,20 @@
+## Static
+
+- type: latheRecipePack
+  parent:
+  - TraumaCyberneticsStatic
+  id: TraumaMedicalStatic
+  recipes:
+  - MedicalHyposprayEmpty
+
+- type: latheRecipePack
+  id: TraumaCyberneticsStatic
+  recipes:
+  - Hypoport
+
+## Dynamic
+
+- type: latheRecipePack
+  id: TraumaCybernetics
+  recipes:
+  - HypoportSecure

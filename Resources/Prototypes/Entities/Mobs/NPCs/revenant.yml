@@ -120,7 +120,6 @@
     - state: active
   - type: StatusEffects
     allowed:
-    - Stun
     - Corporeal
   - type: Damageable
     damageContainer: ManifestedSpirit
@@ -144,9 +143,6 @@
     - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: default
-    requirements: # Goobstation - ghost roles requirements
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
   - type: GhostTakeoverAvailable
   - type: Revenant
     malfunctionWhitelist:
@@ -170,6 +166,9 @@
         type: StoreBoundUserInterface
   - type: Visibility
     layer: 2 #ghost vis layer
+  - type: ActionGrant
+    actions:
+    - ActionRevenantShop
   - type: Store
     categories:
     - RevenantAbilities
@@ -194,3 +193,7 @@
       Acidic: [Touch]
   - type: WeakToHoly # Goobstation Shitchap
     alwaysTakeHoly: true
+  - type: Tag
+    tags:
+    - SlowImmune
+    - KnockdownImmune

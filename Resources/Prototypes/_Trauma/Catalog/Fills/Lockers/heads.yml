@@ -1,0 +1,49 @@
+- type: entityTable
+  id: LockerFillQuarterMasterTrauma
+  table: !type:AllSelector
+    children:
+    - id: CargoMegaphone
+
+- type: entityTable
+  id: LockerFillHeadOfPersonnelTrauma
+  table: !type:AllSelector
+    children:
+    - id: ClothingHeadsetAltCommand
+    - id: CommandMegaphone
+
+- type: entityTable
+  id: LockerFillChiefEngineerTrauma
+  table: !type:AllSelector
+    children:
+    - id: RCDRechargingCE # replaces regular RCD
+    - id: RPD
+    - id: BaseHandheldStationMapPowerCe
+    - id: CartridgeRocketSingularityBuster
+    - id: CartridgeRocketSingularityBuster
+    - id: WeaponLauncherSingularityBuster
+    - id: MachinePowerTransmissionLaserFlatpack
+
+- type: entityTable
+  id: LockerFillChiefMedicalOfficerTrauma
+  table: !type:AllSelector
+    children:
+    - id: Multitool # for linking cloning machines
+    - id: RapidSyringeGun
+    - id: BoxSyringePax
+    - id: ClothingBeltMilitaryWebbingCMOFilled
+
+- type: entityTable
+  id: LockerFillResearchDirectorTrauma
+  table: !type:AllSelector
+    children:
+    - id: AnomalyLocator # added anomaly locator to (try) reduce the amount of anoms that crit
+    - id: CigarCase # RD needs cigs for uhh... science...
+      prob: 0.15
+    - id: ClothingBeltGeminiHoloProjector # Who better to do science with than yourself?
+    - id: MMI
+
+- type: entityTable
+  id: LockerFillHeadOfSecurityTrauma
+  table: !type:AllSelector
+    children:
+    - id: ClothingBeltSheathHeadOfSecurityFilled

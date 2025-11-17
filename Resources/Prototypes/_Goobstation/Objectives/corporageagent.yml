@@ -9,14 +9,8 @@
 
 - type: entity
   abstract: true
-  parent: BaseObjective
+  parent: BaseTraitorObjective
   id: BaseCorporateObjective
-  components:
-  - type: Objective
-    issuer: objective-issuer-syndicate
-  - type: RoleRequirement
-    roles:
-    - TraitorRole
 
 - type: entity
   abstract: true
@@ -115,7 +109,12 @@
     unique: true
   - type: TargetObjective
     title: objective-condition-kill-maroon-title
-  - type: PickRandomHead
+  - type: PickRandomPerson
+    filters:
+    - !type:BodyMindFilter
+      whitelist:
+        components:
+        - CommandStaff
   - type: KillPersonCondition
     # don't count missing evac as killing as heads are higher profile, so you really need to do the dirty work
     # if ce flies a shittle to centcom you better find a way onto it
@@ -133,7 +132,12 @@
     difficulty: 1.75
   - type: TargetObjective
     title: objective-condition-other-traitor-alive-title
-  - type: RandomTraitorAlive
+  - type: PickRandomPerson
+    filters:
+    - !type:HasRoleMindFilter
+      whitelist:
+        components:
+        - TraitorRole
 
 - type: entity
   parent: [BaseCorporateSocialObjective, BaseHelpProgressObjective]
@@ -144,7 +148,12 @@
     difficulty: 2.5
   - type: TargetObjective
     title: objective-condition-other-traitor-progress-title
-  - type: RandomTraitorProgress
+  - type: PickRandomPerson
+    filters:
+    - !type:HasRoleMindFilter
+      whitelist:
+        components:
+        - TraitorRole
 
 # steal
 
@@ -156,7 +165,7 @@
   id: CorporateBaseCMOStealObjective
   components:
   - type: NotJobRequirement
-    job: ChiefMedicalOfficer
+    jobs: [ ChiefMedicalOfficer ]
   - type: StealCondition
     owner: job-name-cmo
 
@@ -182,7 +191,7 @@
   id: CorporateBaseRDStealObjective
   components:
   - type: NotJobRequirement
-    job: ResearchDirector
+    jobs: [ ResearchDirector ]
   - type: StealCondition
     owner: job-name-rd
 
@@ -203,20 +212,20 @@
   - type: StealCondition
     stealGroup: HandTeleporter
 
-## warden
+## hos
 
 - type: entity
   parent: BaseCorporateStealObjective
-  id: CorporateEnergyShotgunStealObjective
+  id: CorporateEnergyMagnumStealObjective
   components:
   - type: Objective
-    # Warden will have this on them a lot of the time so..
+    # HoS will have this on them a lot of the time so..
     difficulty: 3
   - type: NotJobRequirement
-    job: Warden # Goob edit
+    jobs: [ HeadOfSecurity ]
   - type: StealCondition
-    stealGroup: WeaponEnergyShotgun
-    owner: job-name-warden # Goob edit
+    stealGroup: WeaponEnergyMagnum
+    owner: job-name-hos
 
 ## ce
 
@@ -226,7 +235,7 @@
   id: CorporateBaseCEStealObjective
   components:
   - type: NotJobRequirement
-    job: ChiefEngineer
+    jobs: [ ChiefEngineer ]
   - type: StealCondition
     owner: job-name-ce
 
@@ -244,7 +253,7 @@
   id: CorporateClipboardStealObjective
   components:
   - type: NotJobRequirement
-    job: Quartermaster
+    jobs: [ Quartermaster ]
   - type: StealCondition
     stealGroup: BoxFolderQmClipboard
     owner: job-name-qm
@@ -254,7 +263,7 @@
   id: CorporateKnuckleDustersStealObjective
   components:
   - type: NotJobRequirement
-    job: Quartermaster
+    jobs: [ Quartermaster ]
   - type: StealCondition
     stealGroup: ClothingHandsKnuckleDustersQM
     owner: job-name-qm
@@ -266,7 +275,7 @@
   id: CorporateCorgiMeatStealObjective
   components:
   - type: NotJobRequirement
-    job: HeadOfPersonnel
+    jobs: [ HeadOfPersonnel ]
   - type: ObjectiveLimit
     limit: 3 # ian only has 2 slices, 3 obj for drama
   - type: StealCondition
@@ -284,7 +293,7 @@
     # sorry ce but your jordans are not as high security as the caps gear
     difficulty: 3.5
   - type: NotJobRequirement
-    job: Captain
+    jobs: [ Captain ]
 
 - type: entity
   parent: CorporateBaseCaptainObjective
@@ -376,14 +385,13 @@
 # Steal
 
 - type: entity
-  categories: [ HideSpawnMenu ]
   parent: BaseCorporateStealObjective
   id: CorporateStealSupermatterSliverObjective
   components:
   - type: Objective
     difficulty: 3.5
   - type: NotJobRequirement
-    job: ChiefEngineer
+    jobs: [ ChiefEngineer ]
   - type: StealCondition
     verifyMapExistence: true
     stealGroup: SupermatterSliver
@@ -398,7 +406,7 @@
     # HoS will have this on them a lot of the time so..
     difficulty: 3
   - type: NotJobRequirement
-    job: HeadOfSecurity
+    jobs: [ HeadOfSecurity ]
   - type: StealCondition
     stealGroup: WeaponEnergyGunLawbringer
     owner: job-name-hos
@@ -417,7 +425,7 @@
   id: CorporateGeminiProjectorStealObjective
   components:
   - type: NotJobRequirement
-    job: ResearchDirector
+    jobs: [ ResearchDirector ]
   - type: StealCondition
     stealGroup: ClothingBeltGeminiHoloProjector
     descriptionText: objective-condition-steal-gemini-projector-description

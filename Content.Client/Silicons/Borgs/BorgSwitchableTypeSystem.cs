@@ -52,7 +52,7 @@ public sealed class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeSystem
     protected override void UpdateEntityAppearance(
         Entity<BorgSwitchableTypeComponent> entity,
         BorgTypePrototype prototype,
-        BorgSubtypePrototype subtypePrototype)
+        BorgSubtypePrototype subtypePrototype) // Goob - add subtype
     {
         if (TryComp(entity, out SpriteComponent? sprite))
         {
@@ -60,7 +60,7 @@ public sealed class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeSystem
             _sprite.LayerSetRsiState((entity, sprite), BorgVisualLayers.Light, prototype.SpriteBodyState);
             _sprite.LayerSetRsiState((entity, sprite), BorgVisualLayers.LightStatus, prototype.SpriteBodyState);
 
-            var rsiPath = SpriteSpecifierSerializer.TextureRoot / subtypePrototype.SpritePath;
+            var rsiPath = SpriteSpecifierSerializer.TextureRoot / subtypePrototype.SpritePath; // Goob - use subtype
             if (_resourceCache.TryGetResource<RSIResource>(rsiPath, out var resource))
             {
                 _sprite.LayerSetRsi((entity, sprite), BorgVisualLayers.Body, resource.RSI);
@@ -85,25 +85,6 @@ public sealed class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeSystem
             }
         }
 
-        if (prototype.SpriteBodyMovementState is { } movementState)
-        {
-            var spriteMovement = EnsureComp<SpriteMovementComponent>(entity);
-            spriteMovement.NoMovementLayers.Clear();
-            spriteMovement.NoMovementLayers["movement"] = new PrototypeLayerData
-            {
-                State = prototype.SpriteBodyState,
-            };
-            spriteMovement.MovementLayers.Clear();
-            spriteMovement.MovementLayers["movement"] = new PrototypeLayerData
-            {
-                State = movementState,
-            };
-        }
-        else
-        {
-            RemComp<SpriteMovementComponent>(entity);
-        }
-
-        base.UpdateEntityAppearance(entity, prototype, subtypePrototype);
+        base.UpdateEntityAppearance(entity, prototype, subtypePrototype); // Goob - add subtype
     }
 }

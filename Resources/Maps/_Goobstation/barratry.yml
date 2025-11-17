@@ -106755,29 +106755,6 @@ entities:
       parent: 2
     - type: WarpPoint
       location: chapel
-- proto: WarpPointBombing
-  entities:
-  - uid: 15413
-    components:
-    - type: Transform
-      pos: 3.5,25.5
-      parent: 2
-    - type: WarpPoint
-      location: Med
-  - uid: 15414
-    components:
-    - type: Transform
-      pos: -42.5,63.5
-      parent: 2
-    - type: WarpPoint
-      location: Armory
-  - uid: 15415
-    components:
-    - type: Transform
-      pos: 2.5,38.5
-      parent: 2
-    - type: WarpPoint
-      location: Cloning
 - proto: WaterCooler
   entities:
   - uid: 15416

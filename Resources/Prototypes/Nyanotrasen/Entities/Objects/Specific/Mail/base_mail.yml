@@ -16,7 +16,8 @@
   - type: Mail
   - type: Tag # Goobstation - Moth food
     tags:
-    - Paper
+    - Mail
+    - Paper # Goobstation
   - type: AccessReader
   - type: Sprite
     scale: 0.7, 0.7 # Frontier
@@ -104,7 +105,7 @@
       types:
         Blunt: 10
   - type: CargoSellBlacklist # Frontier
-  - type: Food # Frontier - Moth food
+  - type: Edible
     delay: 7 # Goobstation - Mail should take as long as paper to eat
     forceFeedDelay: 7
     requiresSpecialDigestion: true

@@ -12,11 +12,13 @@ using Robust.Shared.Audio;
 
 namespace Content.Shared._Shitmed.Antags.Abductor;
 
+// RIP mocho fucking chud died fighting in ukraine
+
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem)), AutoGenerateComponentState]
 public sealed partial class AbductorHumanObservationConsoleComponent : Component
 {
     [DataField(readOnly: true)]
-    public EntProtoId? RemoteEntityProto = "AbductorHumanObservationConsoleEye";
+    public EntProtoId RemoteEntityProto = "AbductorHumanObservationConsoleEye";
 
     [DataField, AutoNetworkedField]
     public NetEntity? RemoteEntity;
@@ -38,9 +40,7 @@ public sealed partial class AbductorConsoleComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
-public sealed partial class AbductorAlienPadComponent : Component
-{
-}
+public sealed partial class AbductorAlienPadComponent : Component;
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem)), AutoGenerateComponentState]
 public sealed partial class AbductorExperimentatorComponent : Component
@@ -48,7 +48,7 @@ public sealed partial class AbductorExperimentatorComponent : Component
     [DataField, AutoNetworkedField]
     public NetEntity? Console;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public string ContainerId = "storage";
 }
 
@@ -60,14 +60,12 @@ public sealed partial class AbductorGizmoComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
-public sealed partial class AbductorComponent : Component
-{
-}
+public sealed partial class AbductorComponent : Component;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class AbductorVictimComponent : Component
 {
-    [DataField("position"), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public EntityCoordinates? Position;
 
     [DataField, AutoNetworkedField]
@@ -83,7 +81,7 @@ public sealed partial class AbductorOrganComponent : Component;
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem)), AutoGenerateComponentState]
 public sealed partial class AbductorScientistComponent : Component
 {
-    [DataField("position"), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public EntityCoordinates? SpawnPosition;
 
     [DataField, AutoNetworkedField]
@@ -119,21 +117,14 @@ public sealed partial class AbductorVestComponent : Component
 [RegisterComponent, Access(typeof(SharedAbductorSystem))]
 public sealed partial class AbductConditionComponent : Component
 {
-    [DataField("abducted"), ViewVariables(VVAccess.ReadWrite)]
-    public int Abducted;
-    [DataField("hashset"), ViewVariables(VVAccess.ReadWrite)]
-    public HashSet<NetEntity> AbductedHashs = [];
+    public int TotalAbducted => Abducted.Count;
+
+    [DataField]
+    public HashSet<NetEntity> Abducted = new();
 }
 
-public sealed partial class ExitConsoleEvent : InstantActionEvent
-{
+public sealed partial class ExitConsoleEvent : InstantActionEvent;
 
-}
-public sealed partial class SendYourselfEvent : WorldTargetActionEvent
-{
+public sealed partial class SendYourselfEvent : WorldTargetActionEvent;
 
-}
-public sealed partial class AbductorReturnToShipEvent : InstantActionEvent
-{
-
-}
+public sealed partial class AbductorReturnToShipEvent : InstantActionEvent;

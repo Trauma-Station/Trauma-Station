@@ -6,7 +6,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Server.Power.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.PowerCell.Components;
@@ -19,6 +18,7 @@ using Content.Server.Power.EntitySystems;
 using Content.Server.Popups;
 using Content.Server.PowerCell;
 using Content.Shared.Popups;
+using Content.Shared.Power.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 // Goobstation Start - Energycrit
@@ -62,9 +62,8 @@ public sealed class BatteryDrinkerSystem : SharedBatteryDrinkerSystem
         if (!TryComp<BatteryDrinkerComponent>(args.User, out var drinkerComp) ||
             // Goobstation Start - Energycrit
             _whitelist.IsBlacklistPass(drinkerComp.Blacklist, uid) ||
-            // Goobstation - replaced battery lookup to allow augment power cells
-            !_chargers.SearchForBattery(args.User, out _, out _) ||
-            !_chargers.SearchForBattery(uid, out var battery, out _) ||
+            !SearchForDrinker(args.User, out _) ||
+            !SearchForSource(uid, out var battery) ||
             !TestDrinkableBattery(battery.Value, drinkerComp))
             // Goobstation End - Energycrit
             return;
@@ -84,7 +83,8 @@ public sealed class BatteryDrinkerSystem : SharedBatteryDrinkerSystem
 
     private bool TestDrinkableBattery(EntityUid target, BatteryDrinkerComponent drinkerComp)
     {
-        if (!drinkerComp.DrinkAll && !HasComp<BatteryDrinkerSourceComponent>(target))
+        // Goobstation - Energycrit: Remove DrinkAll
+        if (!HasComp<BatteryDrinkerSourceComponent>(target))
             return false;
 
         return true;
@@ -94,10 +94,11 @@ public sealed class BatteryDrinkerSystem : SharedBatteryDrinkerSystem
     {
         var doAfterTime = drinkerComp.DrinkSpeed;
 
+        // Goobstation - Energycrit: Remove DrinkAll
         if (TryComp<BatteryDrinkerSourceComponent>(target, out var sourceComp))
             doAfterTime *= sourceComp.DrinkSpeedMulti;
         else
-            doAfterTime *= drinkerComp.DrinkAllMultiplier;
+            return;
 
         var args = new DoAfterArgs(EntityManager, user, doAfterTime, new BatteryDrinkerDoAfterEvent(), user, target) // TODO: Make this doafter loop, once we merge Upstream.
         {
@@ -122,10 +123,10 @@ public sealed class BatteryDrinkerSystem : SharedBatteryDrinkerSystem
         var drinker = uid;
         var sourceBattery = Comp<BatteryComponent>(source);
 
-        // <Goobstation> - replace battery lookup to allow augment power cells
-        if (!_chargers.SearchForBattery(drinker, out var drinkerBattery, out var drinkerBatteryComponent))
+        // Goobstation - Energycrit
+        if (!SearchForDrinker(drinker, out var drinkerBattery) ||
+            !TryComp<BatteryComponent>(drinkerBattery, out var drinkerBatteryComponent))
             return;
-        // </Goobstation>
 
         TryComp<BatteryDrinkerSourceComponent>(source, out var sourceComp);
 

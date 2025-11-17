@@ -12,13 +12,13 @@ using Content.Server._DV.CosmicCult.Components;
 using Content.Server.Popups;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._DV.CosmicCult;
-using Content.Shared.Damage;
+using Content.Shared.Administration.Systems;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Server.Atmos.Rotting;
-using Content.Server.Administration.Systems;
 
 namespace Content.Server._DV.CosmicCult.Abilities;
 
@@ -80,7 +80,7 @@ public sealed class CosmicConversionSystem : EntitySystem
             }
             else
             {
-                _stun.TryStun(target, TimeSpan.FromSeconds(4f), false);
+                _stun.TryAddParalyzeDuration(target, TimeSpan.FromSeconds(4f));
                 _rejuvenateSystem.PerformRejuvenate(target); //Goobstation: No one likes being brought into the antag gang dead, now do we?
                 _cultRule.CosmicConversion(uid, target);
                 var finaleQuery = EntityQueryEnumerator<CosmicFinaleComponent>(); // Enumerator for The Monument's Finale

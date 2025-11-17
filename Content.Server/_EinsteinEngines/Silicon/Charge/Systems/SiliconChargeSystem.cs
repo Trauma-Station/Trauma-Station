@@ -6,28 +6,27 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Random;
-using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Server.Power.Components;
-using Content.Shared.Mobs.Systems;
-using Content.Server.Temperature.Components;
-using Content.Server.Atmos.Components;
-using Content.Server.Atmos.EntitySystems;
-using Content.Server.Popups;
-using Content.Shared.Popups;
-using Content.Shared._EinsteinEngines.Silicon.Systems;
-using Content.Shared.Movement.Systems;
-using Content.Server.Body.Components;
-using Content.Shared.Mind.Components;
-using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.Common.CCVar;
+using Content.Server.Atmos.EntitySystems;
+using Content.Server.Body.Components;
 using Content.Server.Power.EntitySystems; // Goobstation - Energycrit
 using Content.Server.PowerCell;
+using Content.Shared._EinsteinEngines.Silicon.Components;
+using Content.Shared._EinsteinEngines.Silicon.Systems;
+using Content.Shared.Alert;
+using Content.Shared.Atmos.Components;
+using Content.Shared.Mind.Components;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
+using Content.Shared.Power.Components;
+using Content.Shared.PowerCell.Components;
+using Content.Shared.Temperature.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Configuration;
+using Robust.Shared.Random;
 using Robust.Shared.Utility;
-using Content.Shared.PowerCell.Components;
-using Content.Shared.Alert;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server._EinsteinEngines.Silicon.Charge;
 
@@ -36,7 +35,7 @@ public sealed class SiliconChargeSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _moveMod = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;

@@ -986,9 +986,6 @@ PlushieBlackburnKobliska: null
 # 2025-06-13 Goobstation
 BroomWitch: Broomstick
 
-# 2025-06-04 Goobstation
-SmartFridge: DVSmartFridgeMedical
-
 # 2025-05-02
 CigPackMixedNasty: CigPackMixed
 CigPackMixedMedical: CigPackMixed
@@ -1024,6 +1021,11 @@ SpawnHonkBot: SpawnMobHonkBot
 CrateFoodPizzaLarge: CrateFoodPizza
 CrateFoodSoftdrinksLarge: CrateFoodSoftdrinks
 
+# 2025-06-03
+FloorTileItemGCircuit4: FloorTileItemGCircuit
+FloorTileItemBCircuit4: FloorTileItemBCircuit
+FloorTileItemRCircuit4: FloorTileItemRCircuit
+
 # 2025-06-09
 BarSignAlignTile: BarSign
 BarSignComboCafeAlignTile: BarSignComboCafe
@@ -1055,5 +1057,48 @@ BarSignWhiskeyEchoesAlignTile: BarSignWhiskeyEchoes
 # 2025-06-21
 ClothingNeckHeadphones: ClothingMultipleHeadphones
 
-# 2025-10-09
+# 2025-07-17
+RipleyChassis: null
+HonkerChassis: null
+HamtrChassis: null
+VimChassis: null
+
+# 2025-08-01
 FoodDonutJellySlugcat: FoodDonutJellyScurret
+
+# 2025-08-11
+ClothingUniformJumpsuitChiefEngineerNT: ClothingUniformJumpsuitChiefEngineer
+ClothingUniformJumpsuitParamedicNT: ClothingUniformJumpsuitParamedic
+
+# 2025-08-29
+PrefilledSyringe: Syringe
+
+# 2025-10-6
+BibleTanakh: null
+BibleSatanic: null
+
+
+# 2025-10-08
+ClothingBeltAssault: ClothingBeltMilitaryWebbing
+WarpPointBombing: null
+
+# 2025-10-13
+ToyGriffin: ToyFigurineGriffin
+ToyOwlman: ToyFigurineOwlman
+ToySkeleton: ToyFigurineSkeleton
+
+# Trauma - 2025-10-19
+LockerBlueshieldOfficerFilled: null
+DresserBlueshieldOfficerFilled: null
+UniqueLockerBlueshieldOfficerFilled: null
+AirlockBlueshieldOfficerCommandLocked: AirlockCentralCommandLocked
+AirlockBlueshieldOfficerCommandGlassLocked: AirlockCentralCommandGlassLocked
+
+# 2025-10-28
+DrinkKiraSpecial: DrinkOrangeLimeSodaGlass
+
+# Trauma - 2025-10-30
+DVSmartFridgeMedical: SmartFridgeMedical
+
+# Trauma - 2025-11-12
+Terminus: null

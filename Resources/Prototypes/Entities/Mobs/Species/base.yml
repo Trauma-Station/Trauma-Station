@@ -260,8 +260,8 @@
   components:
   - type: Sprite
     layers:
-    - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Groin" ]
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
     - map: [ "enum.HumanoidVisualLayers.Eyes" ]
@@ -285,6 +285,7 @@
     - map: [ "belt" ] #Goobedit - Belts over outerwear
     - map: [ "back" ]
     - map: [ "neck" ]
+    - map: [ "enum.HumanoidVisualLayers.SnoutCover" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "maskalt" ]
@@ -334,6 +335,7 @@
     horizontalRotation: 90
   - type: HumanoidAppearance
     species: Human
+  - type: TypingIndicator
   - type: SlowOnDamage
     speedModifierThresholds:
       60: 0.7
@@ -369,16 +371,10 @@
     - reagents: [Water, SpaceCleaner]
       methods: [Touch]
       effects:
-      - !type:WashCreamPieReaction
+      - !type:WashCreamPie
   - type: StatusEffects
     allowed:
-    - Stun
-    - KnockedDown
-    - SlowedDown
-    - Stutter
     - Electrocution
-    - Drunk
-    - SlurredSpeech
     - RatvarianLanguage
     - PressureImmunity
     - Muted
@@ -422,6 +418,7 @@
   - type: SleepEmitSound
   - type: SSDIndicator
   - type: StandingState
+  - type: Crawler
   - type: Dna
   - type: Scent # Einstein Engines
   - type: MindContainer
@@ -437,17 +434,16 @@
     factions:
     - NanoTrasen
   - type: CreamPied
+  - type: ParcelWrapOverride
+    parcelPrototype: WrappedParcelHumanoid
+    wrapDelay: 5
   - type: Stripping
-  - type: AccessReader # Goobstation-WantedMenu
-    access: [["Security"]]
   - type: UserInterface
     interfaces:
       enum.HumanoidMarkingModifierKey.Key:
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
-      enum.SetWantedVerbMenu.Key: # Goobstation-WantedMenu
-        type: WantedMenuBoundUserInterface
       # Goobstation - changelings
       enum.StoreUiKey.Key:
         type: StoreBoundUserInterface
@@ -485,7 +481,6 @@
     - FootstepSound
     - DoorBumpOpener
     - AnomalyHost
-  - type: LayingDown # WD EDIT
   - type: Targeting # Shitmed Change
   - type: CanEscapeInventory # GoobStation - Escape being picked up by players
   - type: Consciousness
@@ -511,6 +506,7 @@
   abstract: true
   components:
   - type: Absorbable # Goobstation - changelings
+  - type: WraithAbsorbable # Goobstation - wraith
   - type: Barotrauma
     damage:
       types:
@@ -541,9 +537,9 @@
         Heat: 1.5 #per second, scales with temperature & other constants
   - type: TemperatureSpeed
     thresholds:
-      293: 0.8
-      280: 0.6
-      260: 0.4
+      293: 0.9
+      280: 0.8
+      260: 0.7
   - type: ThermalRegulator
     metabolismHeat: 800
     radiatedHeat: 100
@@ -592,8 +588,8 @@
     noRot: true
     # TODO BODY Turn these into individual body parts?
     layers:
-    - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Groin" ]
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
     - map: [ "enum.HumanoidVisualLayers.Eyes" ]
@@ -623,6 +619,7 @@
     - map: [ "belt" ] #Goobedit - Belts over outerwear
     - map: [ "back" ]
     - map: [ "neck" ]
+    - map: [ "enum.HumanoidVisualLayers.SnoutCover" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "maskalt" ]

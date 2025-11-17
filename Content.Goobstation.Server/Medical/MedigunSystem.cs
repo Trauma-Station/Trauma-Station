@@ -9,7 +9,6 @@ using Content.Goobstation.Shared.Medical;
 using Content.Goobstation.Shared.Medical.Components;
 using Content.Server.Body.Systems;
 using Content.Server.Explosion.EntitySystems;
-using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Systems;
@@ -19,10 +18,12 @@ using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Power.Components;
 using Content.Shared.Timing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -140,12 +141,11 @@ public sealed class MedigunSystem : SharedMedigunSystem
         var healing = comp.UberActivated ? comp.UberHealing : comp.Healing;
         var originalDamage = damageable.TotalDamage;
 
-        _damage.TryChangeDamage(
-            healed,
+        _damage.ChangeDamage(
+            (healed, damageable),
             healing,
             true,
             false,
-            damageable,
             ent.Comp.ParentEntity,
             partMultiplier: 1.0f,
             targetPart: TargetBodyPart.All,

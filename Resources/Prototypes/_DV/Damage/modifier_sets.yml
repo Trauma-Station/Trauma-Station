@@ -15,13 +15,6 @@
 # SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
-
-- type: damageModifierSet
-  id: Vulpkanin
-  coefficients:
-    Heat: 1.15
-  ignoreArmorPierceFlags: All # Goobstation
-
 - type: damageModifierSet
   id: Harpy
   coefficients:

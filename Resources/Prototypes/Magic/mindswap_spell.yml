@@ -14,7 +14,9 @@
   components:
   - type: Action
     raiseOnUser: true # Goobstation
-    useDelay: 60
+    useDelay: 180
+    #sound: !type:SoundPathSpecifier # Goob - event plays the sound
+    #  path: /Audio/Magic/staff_animation.ogg
     icon:
       sprite: _Goobstation/Wizard/actions.rsi # Goob edit
       state: mindswap # Goob edit
@@ -27,10 +29,12 @@
       - Body
       - MobState
       - MindContainer
+      - PAI # intended to mindswap pAIs and AIs
+      - StationAiCore
     # Goob edit end
     event: !type:MindSwapSpellEvent
       sound: # Goobstation
-        path: /Audio/_Goobstation/Wizard/mandswap.ogg
+        path: /Audio/_Goobstation/Wizard/mandswap.ogg # ESL lmao
       performerStunDuration: 5 # Goobstation
       targetStunDuration: 5 # Goobstation
   - type: Sprite # Goobstation - for apprentices

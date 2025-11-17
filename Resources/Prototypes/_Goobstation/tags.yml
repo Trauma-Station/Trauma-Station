@@ -58,6 +58,12 @@
   id: AthiestsFedora
 
 - type: Tag
+  id: AtmosBackTank # Assmos - Extinguisher Nozzle
+
+- type: Tag
+  id: ATVKeys
+
+- type: Tag
   id: AntagGateway
 
 - type: Tag
@@ -143,6 +149,9 @@
 
 - type: Tag
   id: CombatMech
+
+- type: Tag
+  id: ContravendUplink
 
 - type: Tag
   id: CorporateOverride
@@ -250,6 +259,9 @@
   id: GorillaFormAction
 
 - type: Tag
+  id: GrimoireGhost
+
+- type: Tag
   id: Gygax
 
 - type: Tag
@@ -304,6 +316,9 @@
   id: HereticBladeBlade
 
 - type: Tag
+  id: HereticCarving
+
+- type: Tag
   id: HereticItem
 
 - type: Tag
@@ -355,11 +370,17 @@
   id: LaserLMGBackpack
 
 - type: Tag
+  id: Lighter # for whitelisted cig pack strorage
+
+- type: Tag
   id: Liver
 
 # tag roundstart rules that should be run alone
 - type: Tag
   id: LoneRunRule
+
+- type: Tag
+  id: LoneOpsUplink
 
 - type: Tag
   id: Lungs
@@ -377,10 +398,16 @@
   id: MagazineMagnumLeverRifle
 
 - type: Tag
+  id: MagazineMagnumSubMachineGun
+
+- type: Tag
   id: MagazineNailgun
 
 - type: Tag
   id: MagazineShotgunHeavy
+
+- type: Tag
+  id: MagazineShotgunLeverRifle
 
 - type: Tag
   id: MagazineSmart
@@ -396,6 +423,9 @@
 
 - type: Tag
   id: MechThruster
+
+- type: Tag
+  id: MechUnGrabbable
 
 - type: Tag
   id: MedicalPatch
@@ -458,6 +488,9 @@
   id: NonLethalGrenade
 
 - type: Tag
+  id: Nozzle # Assmos - Extinguisher Nozzle
+
+- type: Tag
   id: NukeOpsCommanderUplink
 
 - type: Tag
@@ -471,6 +504,9 @@
 
 - type: Tag
   id: NunHood
+
+- type: Tag
+  id: Oni # for oni shitcode
 
 - type: Tag
   id: Organ
@@ -503,6 +539,9 @@
   id: SecurityBreathMask
 
 - type: Tag
+  id: SecwayKeys
+
+- type: Tag
   id: ShadowCloakAction
 
 - type: Tag
@@ -516,6 +555,9 @@
 
 - type: Tag
   id: SnapPop
+
+- type: Tag
+  id: Softsuit # Used for Yowies outerslot whitelist
 
 - type: Tag
   id: SolarAssemblyFlatpack # stupid upstream thing used it in a construction graph
@@ -542,10 +584,16 @@
   id: Stomach
 
 - type: Tag
+  id: StunBaton # for heretic ritual
+
+- type: Tag
   id: SummonSimiansMaxLevelAction
 
 - type: Tag
   id: SyndicateBreathMask
+
+- type: Tag
+  id: SyndicateSegwayKeys
 
 - type: Tag
   id: ShellShotgunHeavier
@@ -609,7 +657,7 @@
 
 - type: Tag
   id: Vial
-  
+
 - type: Tag
   id: WallLight
 
@@ -648,6 +696,9 @@
 
 - type: Tag
   id: WizardHat
+
+- type: Tag
+  id: WizardStaff
 
 - type: Tag # These tags are NOT alphabetical!!
   id: Xenomorph

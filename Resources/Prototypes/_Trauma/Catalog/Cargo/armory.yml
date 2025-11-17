@@ -1,0 +1,12 @@
+- type: cargoProduct
+  abstract: true
+  id: BaseRedAlert
+  requiredAlerts:
+  - red
+  - gamma
+  - delta
+  - omicron
+  - octarine
+  # intentionally no epsilon, NT won't sell you guns to kill their deathsquads
+  category: cargoproduct-category-name-armory
+  group: market

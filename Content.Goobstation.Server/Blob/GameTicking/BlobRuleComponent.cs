@@ -11,6 +11,7 @@
 using Content.Server.GameTicking.Rules;
 using Content.Shared.Mind;
 using Robust.Shared.Audio;
+using Robust.Shared.Prototypes; // Trauma
 
 namespace Content.Goobstation.Server.Blob.GameTicking;
 
@@ -31,6 +32,18 @@ public sealed partial class BlobRuleComponent : Component
 
     [ViewVariables]
     public float Accumulator = 0f;
+
+    /// <summary>
+    /// Trauma - The shuttle event used for the blob CBurn autocall.
+    /// </summary>
+    [DataField]
+    public EntProtoId BlobCBurnEvent = "SpawnCBURNNoAnnounce";
+
+    /// <summary>
+    /// Trauma - Whether or not a CBurn shuttle for blob has been sent.
+    /// </summary>
+    [DataField]
+    public bool BlobCBurnCalled;
 }
 
 

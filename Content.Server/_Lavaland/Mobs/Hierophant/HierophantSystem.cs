@@ -35,7 +35,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server._Lavaland.Mobs.Hierophant.Components;
 using Content.Shared._Lavaland.Aggression;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -100,7 +101,7 @@ public sealed class HierophantSystem : EntitySystem
         _hierophantField.DeactivateField((field, fieldComp));
         // After 10 seconds, hierophant teleports back to it's original place
         var position = _xform.GetMapCoordinates(field);
-        _damage.SetAllDamage(ent, damageable, 0);
+        _damage.SetAllDamage((ent.Owner, damageable), 0);
         _threshold.SetMobStateThreshold(ent, _baseHierophantHp, MobState.Dead, thresholds);
         Robust.Shared.Timing.Timer.Spawn(TimeSpan.FromSeconds(10), () => _xform.SetMapCoordinates(ent, position));
     }

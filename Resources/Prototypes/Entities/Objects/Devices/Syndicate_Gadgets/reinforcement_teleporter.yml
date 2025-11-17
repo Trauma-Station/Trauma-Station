@@ -72,7 +72,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseItem, BaseSyndicateAnchoredContraband]
   abstract: true
   id: ReinforcementRadio
   name: syndicate reinforcement radio
@@ -103,9 +103,6 @@
     - MindRoleGhostRoleFamiliar
     raffle:
       settings: default
-    requirements: # Goobstation - ghost roles requirements
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
   - type: GhostRoleMobSpawner
     prototype: MobHumanSyndicateAgentSpy
     selectablePrototypes: ["SyndicateAgentMedic", "SyndicateAgentSpy", "SyndicateAgentThief"]
@@ -126,9 +123,6 @@
     - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
-    requirements: # Goobstation - ghost roles requirements
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
   - type: GhostRoleMobSpawner
     prototype: MobHumanSyndicateAgentNukeops
 
@@ -146,9 +140,6 @@
     - MindRoleGhostRoleFamiliar
     raffle:
       settings: default
-    requirements: # Goobstation - ghost roles requirements
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
   - type: GhostRoleMobSpawner
     prototype: MobMonkeySyndicateAgent
     selectablePrototypes: ["SyndicateMonkey", "SyndicateKobold"]
@@ -178,9 +169,6 @@
     - MindRoleGhostRoleFamiliar
     raffle:
       settings: default
-    requirements: # Goobstation - ghost roles requirements
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
   - type: GhostRoleMobSpawner
     prototype: MobCatSyndy
   - type: EmitSoundOnUse
@@ -201,8 +189,6 @@
       - MindRoleGhostRoleSilicon
       raffle:
         settings: default
-      requirements: # Goobstation - ghost roles requirements
-      - !type:OverallPlaytimeRequirement
-        time: 18000 #5 hours
+      job: Borg
     - type: GhostRoleMobSpawner
       prototype: PlayerBorgSyndicateAssaultBattery

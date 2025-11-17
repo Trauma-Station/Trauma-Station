@@ -13,7 +13,9 @@ namespace Content.Shared._White.Grab;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class GrabThrownComponent : Component
 {
+    [DataField]
     public DamageSpecifier? DamageOnCollide;
 
+    [DataField]
     public List<EntityUid> IgnoreEntity = new();
 }

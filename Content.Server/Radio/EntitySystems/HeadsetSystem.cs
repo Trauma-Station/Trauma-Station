@@ -1,24 +1,6 @@
-// SPDX-FileCopyrightText: 2023 AJCM <AJCM@tutanota.com>
-// SPDX-FileCopyrightText: 2023 AlexMorgan3817 <46600554+AlexMorgan3817@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 John Willis <143434770+CerberusWolfie@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-//
-// SPDX-License-Identifier: MIT
-
-using Content.Server.Chat.Systems;
-using Content.Server.Emp;
-using Content.Server.Radio.Components;
-using Content.Server.Speech;
-using Content.Server._EinsteinEngines.Language;
+// <Trauma>
+using Content.Shared._EinsteinEngines.Language.Systems;
+// </Trauma>
 using Content.Shared.Chat;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Radio;
@@ -32,10 +14,12 @@ namespace Content.Server.Radio.EntitySystems;
 
 public sealed class HeadsetSystem : SharedHeadsetSystem
 {
+    // <Trauma>
+    [Dependency] private readonly SharedLanguageSystem _language = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    // </Trauma>
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // Goobstation
 
     public override void Initialize()
     {
@@ -45,8 +29,6 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 
         SubscribeLocalEvent<WearingHeadsetComponent, EntitySpokeEvent>(OnSpeak);
         SubscribeLocalEvent<HeadsetComponent, RadioReceiveAttemptEvent>(OnHeadsetReceiveAttempt); // Goobstation - Whitelisted radio channel
-
-        SubscribeLocalEvent<HeadsetComponent, EmpPulseEvent>(OnEmpPulse);
     }
 
     private void OnKeysChanged(EntityUid uid, HeadsetComponent component, EncryptionChannelsChangedEvent args)
@@ -94,7 +76,6 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     protected override void OnGotUnequipped(EntityUid uid, HeadsetComponent component, GotUnequippedEvent args)
     {
         base.OnGotUnequipped(uid, component, args);
-        component.IsEquipped = false;
         RemComp<ActiveRadioComponent>(uid);
         RemComp<WearingHeadsetComponent>(args.Equipee);
     }
@@ -106,6 +87,9 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 
         if (component.Enabled == value)
             return;
+
+        component.Enabled = value;
+        Dirty(uid, component);
 
         if (!value)
         {
@@ -142,15 +126,6 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
             _netMan.ServerSendMessage(msg, actor.PlayerSession.Channel);
         }
         // Einstein Engines - Language end
-    }
-
-    private void OnEmpPulse(EntityUid uid, HeadsetComponent component, ref EmpPulseEvent args)
-    {
-        if (component.Enabled)
-        {
-            args.Affected = true;
-            args.Disabled = true;
-        }
     }
 
     // Goobstation - Whitelisted radio channel

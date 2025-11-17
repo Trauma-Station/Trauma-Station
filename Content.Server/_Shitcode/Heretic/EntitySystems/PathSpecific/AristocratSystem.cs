@@ -14,17 +14,18 @@
 
 using Content.Server._Goobstation.Heretic.EntitySystems.PathSpecific;
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Atmos.Components;
 using Content.Server.Audio;
 using Content.Server.Ghost;
-using Content.Server.Light.Components;
-using Content.Server.Light.EntitySystems;
 using Content.Server.Heretic.Components.PathSpecific;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Audio;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Heretic;
+using Content.Shared.Light.Components;
+using Content.Shared.Light.EntitySystems;
 using Content.Shared.Maps;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -58,7 +59,7 @@ public sealed partial class AristocratSystem : EntitySystem
     [Dependency] private readonly VoidCurseSystem _voidcurse = default!;
     [Dependency] private readonly ServerGlobalSoundSystem _globalSound = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly PoweredLightSystem _light = default!;
+    [Dependency] private readonly SharedPoweredLightSystem _light = default!;
     [Dependency] private readonly FlammableSystem _flammable = default!;
     [Dependency] private readonly SharedWeatherSystem _weather = default!;
     [Dependency] private readonly TagSystem _tag = default!;
@@ -289,19 +290,18 @@ public sealed partial class AristocratSystem : EntitySystem
         foreach (var tag in tags)
         {
             // walls
-            if (_tag.HasTag(tag.Owner, "Wall")
+            if (_tag.HasTag(tag.Comp, "Wall")
                 && _rand.Prob(.45f)
-                && Prototype(tag) != null
-                && Prototype(tag)!.ID != SnowWallPrototype)
+                && Prototype(tag) is {} id
+                && id != SnowWallPrototype) // /!\ SHITCODE ALERT /!\
             {
                 Spawn(SnowWallPrototype, Transform(tag).Coordinates);
                 QueueDel(tag);
             }
 
             // windows
-            if (_tag.HasTag(tag.Owner, "Window")
-                && Prototype(tag) != null)
-                _damage.TryChangeDamage(tag, dspec, origin: ent);
+            if (_tag.HasTag(tag.Comp, "Window"))
+                _damage.ChangeDamage(tag.Owner, dspec, origin: ent);
         }
     }
 

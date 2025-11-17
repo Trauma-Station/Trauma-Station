@@ -290,10 +290,10 @@ namespace Content.Client.Lobby
             else
             {
                 Lobby!.StartTime.Text = string.Empty;
+                Lobby!.ReadyButton.Pressed = _gameTicker.AreWeReady;
                 Lobby!.ReadyButton.Text = Loc.GetString(Lobby!.ReadyButton.Pressed ? "lobby-state-player-status-ready": "lobby-state-player-status-not-ready");
                 Lobby!.ReadyButton.ToggleMode = true;
                 Lobby!.ReadyButton.Disabled = false;
-                Lobby!.ReadyButton.Pressed = _gameTicker.AreWeReady;
                 Lobby!.ObserveButton.Disabled = true;
             }
 
@@ -305,7 +305,7 @@ namespace Content.Client.Lobby
             UpdatePlayerBalance(); // Goobstation - Goob Coin
 
             var minutesToday = _playtimeTracking.PlaytimeMinutesToday;
-            if (minutesToday > 60)
+            if (minutesToday > 99999) // trauma, remove guilt tripping
             {
                 Lobby!.PlaytimeComment.Visible = true;
 

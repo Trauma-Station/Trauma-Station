@@ -57,7 +57,7 @@ namespace Content.Shared.Cargo.Prototypes
                 if (_name.Trim().Length != 0)
                     return _name;
 
-                if (IoCManager.Resolve<IPrototypeManager>().TryIndex(Product, out EntityPrototype? prototype))
+                if (IoCManager.Resolve<IPrototypeManager>().Resolve(Product, out EntityPrototype? prototype))
                 {
                     _name = prototype.Name;
                 }
@@ -77,7 +77,7 @@ namespace Content.Shared.Cargo.Prototypes
                 if (_description.Trim().Length != 0)
                     return _description;
 
-                if (IoCManager.Resolve<IPrototypeManager>().TryIndex(Product, out EntityPrototype? prototype))
+                if (IoCManager.Resolve<IPrototypeManager>().Resolve(Product, out EntityPrototype? prototype))
                 {
                     _description = prototype.Description;
                 }
@@ -109,6 +109,12 @@ namespace Content.Shared.Cargo.Prototypes
         /// </summary>
         [DataField]
         public int Cooldown { get; private set; } = 0;
+
+        /// <summary>
+        /// Trauma - If non-null, the station must be in one of these alert levels for this product to be bought.
+        /// </summary>
+        [DataField]
+        public HashSet<string>? RequiredAlerts;
 
         /// <summary>
         ///     The prototype category of the product. (e.g. Engineering, Medical)

@@ -23,7 +23,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Botany.Components;
-using Content.Server.Kitchen.Components;
 using Content.Server.Popups;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Botany;
@@ -41,6 +40,7 @@ using System.Linq;
 using Content.Goobstation.Common.NTR.Scan; // Goobstation
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.Kitchen.Components;
 
 namespace Content.Server.Botany.Systems;
 

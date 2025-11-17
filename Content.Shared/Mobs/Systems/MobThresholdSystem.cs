@@ -28,13 +28,15 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Alert;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Goobstation.Maths.FixedPoint;
-using Content.Shared._Shitmed.Body;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Events;
 using Robust.Shared.GameStates;
 
 // Shitmed Change
+using Content.Shared._Shitmed.Body;
 using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;

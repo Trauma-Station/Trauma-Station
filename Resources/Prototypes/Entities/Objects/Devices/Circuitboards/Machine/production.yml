@@ -221,6 +221,10 @@
         GlassBeaker:
           amount: 2
           defaultPrototype: Beaker
+    - type: Tag #Trauma
+      tags:
+      - TechfabMachineBoard
+      - DroneUsable
 
 - type: entity
   id: AmmoTechFabCircuitboard
@@ -253,6 +257,10 @@
           defaultPrototype: Beaker
     - type: StealTarget
       stealGroup: MedicalTechFabCircuitboard
+    - type: Tag #Trauma
+      tags:
+      - TechfabMachineBoard
+      - DroneUsable
 
 - type: entity
   id: CircuitImprinterMachineCircuitboard
@@ -789,10 +797,10 @@
       stackRequirements:
         Manipulator: 2
         Cable: 5
-    - type: PhysicalComposition #Goobstation - Recycle update
+    - type: PhysicalComposition
       materialComposition:
-        Steel: 12
-        Plastic: 12
+        Steel: 25
+        Plastic: 25
     - type: StaticPrice
       price: 15
     - type: Tag # Goobstation - augment construction
@@ -836,10 +844,10 @@
       stackRequirements:
         Manipulator: 2
         Cable: 5
-    - type: PhysicalComposition #Goobstation - Recycle update
+    - type: PhysicalComposition
       materialComposition:
-        Steel: 12
-        Plastic: 12
+        Steel: 25
+        Plastic: 25
     - type: StaticPrice
       price: 15
     - type: Tag # Goobstation - augment construction
@@ -861,10 +869,10 @@
       stackRequirements:
         Manipulator: 2
         CableMV: 5
-    - type: PhysicalComposition #Goobstation - Recycle update
+    - type: PhysicalComposition
       materialComposition:
-        Steel: 12
-        Plastic: 12
+        Steel: 25
+        Plastic: 25
     - type: StaticPrice
       price: 15
 
@@ -1270,6 +1278,20 @@
       Glass: 1
 
 - type: entity
+  parent: BaseMachineCircuitboard
+  id: SurveillanceCameraWirelessRouterXenoborgCircuitboard
+  name: xenoborg camera wireless router
+  description: A machine printed circuit board for a xenoborg camera wireless router.
+  components:
+  - type: Sprite
+    state: generic
+  - type: MachineBoard
+    prototype: SurveillanceCameraWirelessRouterXenoborg
+    stackRequirements:
+      Cable: 2
+      Glass: 1
+
+- type: entity
   id: SurveillanceWirelessCameraMovableCircuitboard
   parent: BaseMachineCircuitboard
   name: movable wireless camera board
@@ -1475,17 +1497,20 @@
       Manipulator: 2
       Cable: 1
 
-# Shitmed Change Start
 - type: entity
-  id: MedicalBiofabMachineBoard
   parent: BaseMachineCircuitboard
-  name: medical biofab machine board
-  description: A machine printed circuit board for a medical biofab.
+  id: SmartFridgeCircuitboard
+  name: SmartFridge machine board
+  description: A machine printed circuit board for a SmartFridge.
   components:
-    - type: Sprite
-      state: medical
-    - type: MachineBoard
-      prototype: MedicalBiofabricator
-      stackRequirements:
-        Manipulator: 4
-# Shitmed Change End
+  - type: Sprite
+    state: service
+  - type: MachineBoard
+    prototype: SmartFridge
+    stackRequirements:
+      Glass: 5
+      Manipulator: 2
+    tagRequirements:
+        GlassBeaker:
+          amount: 2
+          defaultPrototype: Beaker

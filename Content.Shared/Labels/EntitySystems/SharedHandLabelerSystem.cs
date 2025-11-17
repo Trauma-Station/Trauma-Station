@@ -8,11 +8,13 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Labels.Components;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio.Systems; // Goobstation
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 
@@ -22,6 +24,7 @@ public abstract class SharedHandLabelerSystem : EntitySystem
 {
     [Dependency] protected readonly SharedUserInterfaceSystem UserInterfaceSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!; // Goobstation
     [Dependency] private readonly LabelSystem _labelSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly INetManager _netManager = default!;
@@ -33,6 +36,7 @@ public abstract class SharedHandLabelerSystem : EntitySystem
 
         SubscribeLocalEvent<HandLabelerComponent, AfterInteractEvent>(AfterInteractOn);
         SubscribeLocalEvent<HandLabelerComponent, GetVerbsEvent<UtilityVerb>>(OnUtilityVerb);
+        SubscribeLocalEvent<HandLabelerComponent, ExaminedEvent>(OnExamined);
         // Bound UI subscriptions
         SubscribeLocalEvent<HandLabelerComponent, HandLabelerLabelChangedMessage>(OnHandLabelerLabelChanged);
         SubscribeLocalEvent<HandLabelerComponent, ComponentGetState>(OnGetState);
@@ -80,8 +84,9 @@ public abstract class SharedHandLabelerSystem : EntitySystem
             result = Loc.GetString("hand-labeler-successfully-removed");
             return;
         }
-        if (_netManager.IsServer)
-            _labelSystem.Label(target, handLabeler.AssignedLabel);
+
+        _labelSystem.Label(target, handLabeler.AssignedLabel);
+
         result = Loc.GetString("hand-labeler-successfully-applied");
     }
 
@@ -115,6 +120,10 @@ public abstract class SharedHandLabelerSystem : EntitySystem
     private void Labeling(EntityUid uid, EntityUid target, EntityUid User, HandLabelerComponent handLabeler)
     {
         AddLabelTo(uid, handLabeler, target, out var result);
+
+        // Goobstation
+        _audio.PlayPredicted(handLabeler.PrintSound, uid, User, handLabeler.PrintSound.Params);
+
         if (result == null)
             return;
 
@@ -135,5 +144,16 @@ public abstract class SharedHandLabelerSystem : EntitySystem
         // Log label change
         _adminLogger.Add(LogType.Action, LogImpact.Low,
             $"{ToPrettyString(args.Actor):user} set {ToPrettyString(uid):labeler} to apply label \"{handLabeler.AssignedLabel}\"");
+    }
+
+    private void OnExamined(Entity<HandLabelerComponent> ent, ref ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange)
+            return;
+
+        var text = ent.Comp.AssignedLabel == string.Empty
+            ? Loc.GetString("hand-labeler-examine-blank")
+            : Loc.GetString("hand-labeler-examine-label-text", ("label-text", ent.Comp.AssignedLabel));
+        args.PushMarkup(text);
     }
 }

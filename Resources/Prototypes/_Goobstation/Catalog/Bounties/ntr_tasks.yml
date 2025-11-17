@@ -379,15 +379,15 @@
 
 # Drink tasks
 - type: ntrTask
-  id: TaskKiraSpecial
+  id: TaskCitrusBikeshed
   proto: TaskBottle
   reward: 2
   weight: 0.2
   cooldown: 300
-  description: task-ntr-kira-special-desc
+  description: task-ntr-citrus-bikeshed-desc
   reagentTask: true
   reagents:
-    KiraSpecial: 3000
+    OrangeLimeSoda: 3000
   entries:
   - name: task-ntr-drink-base-name
     stamps: [ ]

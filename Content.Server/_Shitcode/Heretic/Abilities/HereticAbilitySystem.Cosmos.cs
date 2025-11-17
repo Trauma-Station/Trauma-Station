@@ -20,7 +20,7 @@ public sealed partial class HereticAbilitySystem
     {
         base.OnAscension(ent, ref args);
 
-        var nightVision = _compFactory.GetComponent<NightVisionComponent>();
+        var nightVision = Factory.GetComponent<NightVisionComponent>();
         nightVision.Color = Color.White;
         nightVision.ActivateSound = null;
         nightVision.DeactivateSound = null;

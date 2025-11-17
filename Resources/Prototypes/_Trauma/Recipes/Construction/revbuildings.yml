@@ -111,6 +111,38 @@
     - Revolutionary
 
 - type: construction
+  id: RevUniformPrinter
+  graph: RevMachine
+  startNode: start
+  targetNode: uniform printer
+  placementMode: SnapgridCenter
+  category: construction-category-antagonist
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
+  id: RevTechAnalyzer
+  graph: RevMachine
+  startNode: start
+  targetNode: tech analyzer
+  placementMode: SnapgridCenter
+  category: construction-category-antagonist
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
   id: RevTurretPistol
   graph: RevTurret
   startNode: start
@@ -131,6 +163,22 @@
   graph: RevTurret
   startNode: start
   targetNode: SMG turret
+  placementMode: SnapgridCenter
+  category: construction-category-antagonist
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
+  id: RevPlasmaFoundry
+  graph: RevMachine
+  startNode: start
+  targetNode: plasma foundry
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure

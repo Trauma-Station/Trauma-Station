@@ -243,9 +243,7 @@ public sealed partial class NPCCombatSystem
 
             _gun.AttemptShoot(uid, gunUid, gun, targetCordinates, comp.Target);
 
-            break;
-
-            // Goobstation
+            // <Goob>
             void UpdatePointerLineNoTarget()
             {
                 if (TryComp(gunUid, out LaserPointerComponent? pointer) && TryComp(gunUid, out WieldableComponent? wieldable))
@@ -271,6 +269,7 @@ public sealed partial class NPCCombatSystem
                         comp.Target);
                 }
             }
+            // </Goob>
         }
     }
 }

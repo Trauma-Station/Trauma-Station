@@ -22,11 +22,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Shuttles.Events;
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._Lavaland.Shuttles.Components;
 using Content.Shared._Lavaland.Shuttles.Systems;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Station;
+using Content.Shared.Station.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map.Components;
 using System.Linq;
@@ -41,7 +42,7 @@ public sealed class DockingShuttleSystem : SharedDockingShuttleSystem
 {
     [Dependency] private readonly DockingConsoleSystem _console = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private readonly SharedStationSystem _station = default!;
 
     public override void Initialize()
     {

@@ -12,7 +12,7 @@
 
 using Content.Server.Heretic.Components;
 using Content.Server.Weapons.Ranged.Systems;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Follower;
 using Content.Shared.Follower.Components;
 using Content.Shared.Heretic;

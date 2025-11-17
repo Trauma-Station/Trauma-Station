@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
-using Content.Server.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared._Shitmed.Body.Organ;
 using Content.Server._Shitmed.DelayedDeath;
@@ -39,5 +39,4 @@ public sealed class HeartSystem : EntitySystem
         if (_bodySystem.TryGetBodyOrganEntityComps<BrainComponent>(args.Body, out var _))
             RemComp<DelayedDeathComponent>(args.Body);
     }
-    // Shitmed-End
 }

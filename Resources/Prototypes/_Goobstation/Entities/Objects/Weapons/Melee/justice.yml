@@ -179,7 +179,8 @@
           canCreateVacuum: false
           deleteAfterExplosion: false
           repeatable: true
-        - type: ExplodeOnMeleeHit
+        - type: ExplodeOnTrigger
+        - type: TriggerOnMeleeHit
         - type: MeleeWeapon
           canWideSwing: false
           attackRate: 0.5
