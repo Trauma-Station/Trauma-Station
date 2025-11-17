@@ -57,6 +57,10 @@ public sealed class MobStateComponentsSystem : EntitySystem
 
     private void OnAliveShutdown(Entity<AliveMobComponent> ent, ref ComponentShutdown args)
     {
+        // client would chud out without this
+        if (_timing.ApplyingState)
+            return;
+
         RemComp<AwakeMobComponent>(ent);
     }
 
