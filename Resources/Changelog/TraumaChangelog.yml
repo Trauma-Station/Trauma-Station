@@ -622,3 +622,63 @@ Entries:
       message: Hyposprays now require the target to have a hypoport and be grabbed.
   id: 68
   time: '2025-11-12T16:50:14.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: >-
+        You can now surgically put items in peoples groin cavity like with chest
+        cavity.
+  id: 69
+  time: '2025-11-13T15:08:37.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Abductors have much lower chaos score, so less chudshifts.
+  id: 70
+  time: '2025-11-14T18:01:03.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Removed sign language.
+  id: 71
+  time: '2025-11-14T23:11:44.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Added the old CQC box to traitor uplinks for 100TC.
+  id: 72
+  time: '2025-11-14T23:13:05.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: winter coats are now consistently armor
+  id: 73
+  time: '2025-11-15T11:18:05.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: >-
+        Fixed vulp beheading making everyone blackscreen, resuming beheading
+        vulps.
+  id: 74
+  time: '2025-11-15T18:13:22.0000000+00:00'
+- author: ParadoxumOfficial
+  changes:
+    - type: Tweak
+      message: Updated Metal Textures.
+  id: 75
+  time: '2025-11-16T01:47:53.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Removed AI vision from pAIs.
+  id: 76
+  time: '2025-11-16T15:48:30.0000000+00:00'
+- author: MayasMischief
+  changes:
+    - type: Add
+      message: >-
+        Bananadine bottles can now be grabbed by Botany from hacking their
+        vendor.
+  id: 77
+  time: '2025-11-16T20:26:56.0000000+00:00'

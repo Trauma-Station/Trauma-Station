@@ -13,6 +13,14 @@ public sealed class EffectDataSystem : EntitySystem
     private EntityQuery<EntityEffectUserComponent> _userQuery;
     private EntityQuery<EntityEffectToolComponent> _toolQuery;
 
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        _userQuery = GetEntityQuery<EntityEffectUserComponent>();
+        _toolQuery = GetEntityQuery<EntityEffectToolComponent>();
+    }
+
     public EntityUid? GetUser(EntityUid target)
         => _userQuery.CompOrNull(target)?.User;
 

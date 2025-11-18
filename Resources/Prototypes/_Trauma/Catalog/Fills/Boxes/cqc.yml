@@ -1,0 +1,12 @@
+- type: entity
+  parent: BigBox
+  id: BigBoxCQC
+  suffix: Filled, CQC
+  components:
+  - type: ContainerFill
+    containers:
+      entity_storage:
+      - CQCManual # only real reason to buy it, the rest is fluff
+      - ClothingHeadHatSolidHeadband
+      - ClothingUniformJumpsuitMilitaryTurtleneckRev
+      - ClothingShoesBootsCombatFilled

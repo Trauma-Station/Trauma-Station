@@ -119,6 +119,7 @@
 
 - type: entity
   abstract: true
+  parent: BaseBodyPartCavity # Trauma
   id: BaseGroinInorganic
   name: "groin"
   components:

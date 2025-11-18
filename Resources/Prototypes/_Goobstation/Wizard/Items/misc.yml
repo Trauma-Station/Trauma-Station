@@ -206,6 +206,7 @@
   parent: BaseCrowbar
   id: CrowbarWizard
   description: A compact multipurpose tool to pry open doors and destroy stations.
+  suffix: Wizard # Trauma
   components:
   - type: MeleeWeapon
     damage:

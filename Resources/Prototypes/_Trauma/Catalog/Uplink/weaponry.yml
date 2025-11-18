@@ -1,0 +1,14 @@
+- type: listing
+  id: UplinkCQCBox
+  name: uplink-cqc-box-name
+  description: uplink-cqc-box-desc
+  productEntity: BigBoxCQC
+  cost:
+    Telecrystal: 100
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition # nukies get cheaper cqc manual and can just steal the drip
+    blacklist:
+      tags:
+      - NukeOpsUplink

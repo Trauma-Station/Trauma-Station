@@ -159,11 +159,15 @@
       Durathread: 50
 
 - type: entity
-  parent: [ ClothingOuterStorageToggleableBase, ClothingOuterWinterCoat ]
+  parent: [ ClothingOuterWinterCoat, ClothingOuterStorageToggleableBase ] # Trauma - winter coat first to preserve armor
   id: ClothingOuterWinterCoatToggleable
   name: winter coat with hood
   categories: [ HideSpawnMenu ]
   components:
+  - type: ContainerContainer # Trauma
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:Container
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHatHoodWinterDefault

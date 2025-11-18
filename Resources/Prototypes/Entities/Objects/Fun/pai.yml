@@ -213,8 +213,6 @@
           Searching: { state: pai-searching-overlay }
           On: { state: pai-on-overlay }
   - type: StationMap
-  - type: StationAiVision # Goobstation - AI can see through NT silicon
-    range: 1
   - type: ChangeVoiceInContainer
     whitelist:
       components:
@@ -260,7 +258,6 @@
     - Elyran
     - Freespeak
     - Tradeband
-    - Sign # Should know it but not speak it, for obvious reasons.
     - Schechi
     - NewKinPidgin
   # Einstein Engines - Language end

@@ -1,6 +1,6 @@
-hypoport-fail-missing = {CAPITALIZE($owner)} has no hypoport to inject into!
-hypoport-fail-access = {CAPITALIZE($owner)}'s hypoport is locked!
-hypoport-fail-grab = You need to get a hold of {$owner} first!
+hypoport-fail-missing = {CAPITALIZE($target)} has no hypoport to inject into!
+hypoport-fail-access = {CAPITALIZE($target)}'s hypoport is locked!
+hypoport-fail-grab = You need to get a hold of {$target} first!
 
 hypoport-detail-examine = {CAPITALIZE(POSS-ADJ($target))} {$part ->
     [head] neck
