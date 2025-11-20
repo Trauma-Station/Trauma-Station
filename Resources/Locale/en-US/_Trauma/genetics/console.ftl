@@ -20,6 +20,8 @@ chromosome-Stabilizer = Stabilizer
 chromosome-Power = Power
 chromosome-Energetic = Energetic
 
+## UI ##
+
 genetics-console-window-title = Genetics Console 3000
 
 genetics-console-heading-scanner = Medical Scanner
@@ -29,11 +31,14 @@ genetics-console-name = Name
 genetics-console-status = Status
 genetics-console-integrity = Integrity
 genetics-console-instability = Instability
+genetics-console-scramble = Scramble DNA
+genetics-console-scramble-cooldown = Scramble on cooldown ({$cooldown}s)
 
 genetics-console-tab-storage = Storage
-genetics-console-no-chromosome = Empty chromosome
-genetics-console-create-mutator = Print mutator
-genetics-console-create-activator = Print activator
+genetics-console-inserted-disk = Inserted disk:
+genetics-console-loaded-mutation = Loaded mutation:
+genetics-console-no-disk = No disk inserted
+genetics-console-print-item = Print {$item} {$delay}s
 
 genetics-console-tab-sequencer = Sequencer
 genetics-console-sequencer-no-subject = No subject detected
@@ -53,3 +58,9 @@ genetics-console-sequencer-tip = Tip: Ctrl+Click on the base to set it to X. Rig
 genetics-console-joker = Joker
 genetics-console-joker-cooldown = Joker on cooldown ({$cooldown}s)
 genetics-console-begin-sequencing = Begin Sequencing
+
+genetics-console-combine-button = Combine!
+genetics-console-combine-catalyst = Catalyst Mutation: {$mutation}
+genetics-console-combine-results = This mutation can be used to make {$results}!
+genetics-console-combine-no-results = This mutation cannot be combined with anything.
+genetics-console-disk-empty = Disk has no mutation!

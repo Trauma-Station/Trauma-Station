@@ -19,6 +19,9 @@
                 <Label Name="MobInstability"/>
             </GridContainer>
         </BoxContainer>
+        <controls:StripeBack Name="ScrambleContainer" Margin="125 5" Visible="False">
+            <Button Name="ScrambleButton" Text="{Loc 'genetics-console-scramble'}" Disabled="True" SetWidth="400" Margin="5"/>
+        </controls:StripeBack>
         <!-- Console tabs -->
         <TabContainer Name="Tabs">
             <genetics:GeneticSequencer Name="Sequencer"/>

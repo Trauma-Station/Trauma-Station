@@ -63,6 +63,33 @@ public sealed partial class GeneticsConsoleComponent : Component
 
     #endregion
 
+    #region Scrambling
+
+    /// <summary>
+    /// How long you have to wait between scrambling mobs genomes.
+    /// Starts when the computer is built to prevent cheesing.
+    /// </summary>
+    [DataField]
+    public TimeSpan ScrambleCooldown = TimeSpan.FromSeconds(180);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField, AutoNetworkedField]
+    public TimeSpan NextScramble = TimeSpan.Zero;
+
+    /// <summary>
+    /// Damage dealt to the mob when scrambling its genome.
+    /// </summary>
+    [DataField]
+    public DamageSpecifier ScrambleDamage = new DamageSpecifier()
+    {
+        DamageDict = new()
+        {
+            { "Cellular", 60 }
+        }
+    };
+
+    #endregion
+
     #region Sequencing
 
     /// <summary>
@@ -130,33 +157,48 @@ public sealed partial class GeneticsConsoleComponent : Component
     [DataField]
     public TimeSpan CombineDelay = TimeSpan.FromSeconds(10);
 
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan NextCombine = TimeSpan.Zero;
+
     /// <summary>
     /// Damage dealt to the mob when combining a new mutation.
     /// </summary>
     [DataField]
-    public DamageSpecifier CombineDamage;
+    public DamageSpecifier CombineDamage = new DamageSpecifier()
+    {
+        DamageDict = new()
+        {
+            { "Cellular", 10 }
+        }
+    };
 
     #endregion
 
     #region Printing
 
     /// <summary>
-    /// How long you have to wait before printing another mutator.
+    /// Items that can be printed and the delay for it.
     /// </summary>
     [DataField]
-    public TimeSpan MutatorDelay = TimeSpan.FromSeconds(60);
+    public List<GeneticsPrint> Prints = new()
+    {
+        new(TimeSpan.FromSeconds(60), "GeneticsMutator"),
+        new(TimeSpan.FromSeconds(15), "GeneticsActivator"),
+        new(TimeSpan.FromSeconds(30), "GeneticsCleanser") // not parity, fuck chud mutadone
+    };
 
     /// <summary>
-    /// How long you have to wait before printing another activator.
+    /// When the next item can be printed.
     /// </summary>
-    [DataField]
-    public TimeSpan ActivatorDelay = TimeSpan.FromSeconds(15);
-
-    /// <summary>
-    /// How long you have to wait before printing another mutator/activator.
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField, AutoNetworkedField]
     public TimeSpan NextPrint = TimeSpan.Zero;
+
+    /// <summary>
+    /// Sound played when printing an item.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? PrintSound = new SoundPathSpecifier("/Audio/Machines/printer.ogg");
 
     #endregion
 }
@@ -172,6 +214,12 @@ public enum GeneticsConsoleUiKey : byte
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class GeneticsConsoleScanMessage : BoundUserInterfaceMessage;
+
+/// <summary>
+/// Message to scramble the scanned mob's genome.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class GeneticsConsoleScrambleMessage : BoundUserInterfaceMessage;
 
 /// <summary>
 /// Message to set an unknown base to a certain char.
@@ -212,12 +260,12 @@ public sealed partial class GeneticsConsoleWriteMutationMessage(uint index) : Bo
 }
 
 /// <summary>
-/// Message to print a mutator or activator from the current disk's mutation.
+/// Message to print an item from the current disk's mutation.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class GeneticsConsolePrintMessage(bool activator) : BoundUserInterfaceMessage
+public sealed partial class GeneticsConsolePrintMessage(uint print) : BoundUserInterfaceMessage
 {
-    public readonly bool Activator = activator;
+    public readonly uint Print = print;
 }
 
 /// <summary>
@@ -237,3 +285,6 @@ public sealed class GeneticsConsoleState(List<SequenceState> sequences) : BoundU
 {
     public readonly List<SequenceState> Sequences = sequences;
 }
+
+[DataRecord]
+public partial record struct GeneticsPrint(TimeSpan Delay, EntProtoId Proto);

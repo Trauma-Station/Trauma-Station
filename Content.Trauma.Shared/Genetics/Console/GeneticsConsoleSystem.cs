@@ -8,6 +8,7 @@ using Content.Shared.Power.EntitySystems;
 using Content.Shared.UserInterface;
 using Content.Trauma.Common.Medical;
 using Content.Trauma.Shared.Genetics.Mutations;
+using Content.Trauma.Shared.Genetics.Tools;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -27,6 +28,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly MutationSystem _mutation = default!;
+    [Dependency] private readonly MutatorSystem _mutator = default!;
     [Dependency] private readonly ScannedGenomeSystem _genome = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedChatSystem _chat = default!;
@@ -46,6 +48,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
         _query = GetEntityQuery<GeneticsConsoleComponent>();
 
+        SubscribeLocalEvent<GeneticsConsoleComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<GeneticsConsoleComponent, ScannerConnectedEvent>(OnScannerConnected);
         SubscribeLocalEvent<GeneticsConsoleComponent, ScannerDisconnectedEvent>(OnScannerDisconnected);
         SubscribeLocalEvent<GeneticsConsoleComponent, ScannerInsertedEvent>(OnScannerInserted);
@@ -61,6 +64,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         Subs.BuiEvents<GeneticsConsoleComponent>(GeneticsConsoleUiKey.Key, subs =>
         {
             subs.Event<GeneticsConsoleScanMessage>(OnScan);
+            subs.Event<GeneticsConsoleScrambleMessage>(OnScramble);
             subs.Event<GeneticsConsoleSetBaseMessage>(OnSetBase);
             subs.Event<GeneticsConsoleJokerMessage>(OnJoker);
             subs.Event<GeneticsConsoleSequenceMessage>(OnSequence);
@@ -68,6 +72,12 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             subs.Event<GeneticsConsoleCombineMessage>(OnCombine);
             subs.Event<GeneticsConsolePrintMessage>(OnPrint);
         });
+    }
+
+    private void OnMapInit(Entity<GeneticsConsoleComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.NextScramble = _timing.CurTime + ent.Comp.ScrambleCooldown;
+        DirtyField(ent, nameof(GeneticsConsoleComponent.NextScramble));
     }
 
     private void OnScannerConnected(Entity<GeneticsConsoleComponent> ent, ref ScannerConnectedEvent args)
@@ -153,6 +163,30 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         var mob = GetEntity(args.Event.Mob);
         if (!CanKeepWorkingOn(ent, mob))
             args.Cancel();
+    }
+
+    private void OnScramble(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleScrambleMessage args)
+    {
+        if (ent.Comp.ScannedMob is not {} mob ||
+            !CanWorkOn(ent, mob)
+            || !_genome.IsScanned(mob) || // can't scramble unscanned mobs
+            _mutation.GetMutatable(mob) is not {} mutatable)
+            return;
+
+        var now = _timing.CurTime;
+        if (now < ent.Comp.NextScramble)
+            return;
+
+        _adminLog.Add(LogType.Genetics, LogImpact.High, $"Scrambled genome of {ToPrettyString(mob)} by {ToPrettyString(args.Actor)} using console {ToPrettyString(ent)}");
+
+        _damage.ChangeDamage(mob, ent.Comp.ScrambleDamage);
+
+        ent.Comp.NextScramble = now + ent.Comp.ScrambleCooldown;
+        DirtyField(ent, nameof(GeneticsConsoleComponent.NextScramble));
+
+        _mutation.Scramble(mutatable);
+        RemComp<ScannedGenomeComponent>(mob);
+        UpdateUI(ent);
     }
 
     private void OnSetBase(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleSetBaseMessage args)
@@ -348,6 +382,8 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             return;
         }
 
+        _damage.ChangeDamage(mob, ent.Comp.CombineDamage);
+
         Speak(ent, "combined");
 
         _adminLog.Add(LogType.Genetics, LogImpact.Medium, $"{result} combined from {mutation} and {diskMutation} by {ToPrettyString(args.User)} using console {ToPrettyString(ent)}");
@@ -365,7 +401,23 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
     private void OnPrint(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsolePrintMessage args)
     {
-        // TODO
+        var now = _timing.CurTime;
+        var i = (int) args.Print;
+        if (now < ent.Comp.NextPrint ||
+            i >= ent.Comp.Prints.Count ||
+            _disk.GetDisk(ent.Owner) is not {} disk ||
+            disk.Comp.Mutation is not {} mutation)
+            return;
+
+        var delay = ent.Comp.Prints[i].Delay;
+        ent.Comp.NextPrint = now + delay;
+
+        var proto = ent.Comp.Prints[i].Proto;
+        var item = PredictedSpawnAtPosition(proto, Transform(ent).Coordinates);
+        _mutator.AddMutation(item, mutation);
+        _audio.PlayPredicted(ent.Comp.PrintSound, ent, args.Actor);
+
+        _adminLog.Add(LogType.Genetics, LogImpact.Medium, $"Printed {ToPrettyString(item)} with {mutation} by {ToPrettyString(args.Actor)} using console {ToPrettyString(ent)}");
     }
 
     private void OnUIOpened(Entity<GeneticsConsoleComponent> ent, ref AfterActivatableUIOpenEvent args)
@@ -455,7 +507,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             var others = Loc.GetString("genetics-console-damages-others");
             _audio.PlayPvs(ent.Comp.SequenceFailSound, ent);
             _popup.PopupPredicted(you, others, ent, mob, PopupType.LargeCaution);
-            _damage.TryChangeDamage(mob, ent.Comp.SequenceFailDamage);
+            _damage.ChangeDamage(mob, ent.Comp.SequenceFailDamage);
             return false;
         }
 

@@ -1,5 +1,15 @@
-<Control xmlns="https://spacestation14.io"
-        xmlns:genetics="clr-namespace:Content.Trauma.Client.Genetics.UI">
-    <genetics:SequenceButtons Name="SequenceButtons"/>
-    <Button Name="CombineButton" Text="Combine"/>
-</Control>
+<BoxContainer xmlns="https://spacestation14.io"
+        xmlns:genetics="clr-namespace:Content.Trauma.Client.Genetics.UI"
+        Orientation="Vertical">
+    <BoxContainer Orientation="Horizontal">
+	    <genetics:SequenceButtons Name="SequenceButtons"/>
+	    <genetics:SequenceInfo Name="Info">
+		    <Button Name="CombineButton" Text="{Loc 'genetics-console-combine-button'}" Disabled="True"/>
+	    </genetics:SequenceInfo>
+        <BoxContainer Name="NoSequence" Align="Center" HorizontalExpand="True">
+            <Label Text="{Loc 'genetics-console-sequencer-no-sequence-selected'}"/>
+        </BoxContainer>
+    </BoxContainer>
+    <Label Name="DiskMutation" Text="{Loc 'genetics-console-disk-empty'}"/>
+    <Label Name="DiskRecipes" Visible="False"/>
+</BoxContainer>

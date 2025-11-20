@@ -89,18 +89,8 @@ public sealed partial class MutationSystem : EntitySystem
         if (_net.IsClient) // no rolling stuff
             return;
 
-        foreach (var (id, chance) in ent.Comp.DefaultMutations)
-        {
-            if (_random.Prob(chance))
-                AddMutation(ent.AsNullable(), id, automatic: true);
-        }
-
-        // add enough random dormant mutations so there will be enough sequences.
-        while (ent.Comp.Dormant.Count < ent.Comp.MaxDormant)
-        {
-            ent.Comp.Dormant.Add(_random.Pick(UnlockedMutations));
-            Dirty(ent);
-        }
+        // clear is false, don't clear forced mutations in the yml
+        Scramble(ent, clear: false, automatic: true);
 
         RemoveConflictingMutations(ent);
     }
@@ -403,6 +393,29 @@ public sealed partial class MutationSystem : EntitySystem
 
         ent.Comp.Dormant.Clear();
         Dirty(ent);
+    }
+
+    /// <summary>
+    /// Add random default mutations and ensure there's enough dormant mutations.
+    /// Optionally removes all active and mutations and dormant mutations beforehand.
+    /// </summary>
+    public void Scramble(Entity<MutatableComponent> ent, bool clear = true, bool automatic = false)
+    {
+        if (clear)
+            ClearMutations(ent, automatic);
+
+        foreach (var (id, chance) in ent.Comp.DefaultMutations)
+        {
+            if (_random.Prob(chance))
+                AddMutation(ent.AsNullable(), id, automatic: automatic);
+        }
+
+        // add enough random dormant mutations so there will be enough sequences.
+        while (ent.Comp.Dormant.Count < ent.Comp.MaxDormant)
+        {
+            ent.Comp.Dormant.Add(_random.Pick(UnlockedMutations));
+            Dirty(ent);
+        }
     }
 
     public void TransferMutations(Entity<MutatableComponent> ent, Entity<MutatableComponent> target)

@@ -32,6 +32,14 @@ public sealed partial class MutatorComponent : Component
     [DataField]
     public bool Activator;
 
+    // TODO: make this a component or something not this
+    /// <summary>
+    /// Removes mutations instead of adding them.
+    /// <see cref="Activator"/> is then ignored.
+    /// </summary>
+    [DataField]
+    public bool Remove;
+
     /// <summary>
     /// How long it takes to inject the mutator into yourself.
     /// Doubled when used on others.

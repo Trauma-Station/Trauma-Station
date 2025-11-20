@@ -26,3 +26,12 @@
   components:
   - type: Mutator
     activator: true
+
+- type: entity
+  parent: GeneticsMutator
+  id: GeneticsCleanser
+  name: cleanser
+  description: A single-use injector of a mutagen designed to remove and de-express a specific gene from the body.
+  components:
+  - type: Mutator
+    remove: true

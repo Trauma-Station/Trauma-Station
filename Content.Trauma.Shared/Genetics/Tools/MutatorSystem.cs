@@ -48,10 +48,12 @@ public sealed class MutatorSystem : EntitySystem
         var target = args.Target;
         if (ent.Comp.Mutations.Count == 0)
         {
+            // TODO: general mutator recycling??
             if (ent.Comp.HasChromosome && _console.TryAddRandomChromosome(target))
             {
                 SetChromosome(ent, false);
                 _popup.PopupClient(Loc.GetString("mutator-added-chromosome"), user, user);
+                QueueDel(ent);
                 return;
             }
 
@@ -59,16 +61,16 @@ public sealed class MutatorSystem : EntitySystem
             return;
         }
 
+        var targetName = Identity.Name(target, EntityManager);
         if (!_mutation.CanMutate(target))
         {
-            _popup.PopupClient(Loc.GetString("mutator-cant-mutate"), user, user);
+            _popup.PopupClient(Loc.GetString("mutator-cant-mutate", ("target", targetName)), user, user);
             return;
         }
 
         var userName = Identity.Name(user, EntityManager);
-        var targetName = Identity.Name(target, EntityManager);
-        var you = Loc.GetString("mutator-mutating-you", ("user", userName));
-        var others = Loc.GetString("mutator-mutating-others", ("user", userName), ("target", targetName));
+        var you = Loc.GetString("mutator-mutating-you", ("user", userName), ("item", ent));
+        var others = Loc.GetString("mutator-mutating-others", ("user", userName), ("target", targetName), ("item", ent));
         _popup.PopupPredicted(you, others, ent, target);
 
         // injecting someone else takes twice as long
@@ -90,18 +92,29 @@ public sealed class MutatorSystem : EntitySystem
         if (args.Cancelled || args.Args.Target is not {} target)
             return;
 
-        // TOCTOU
+        // prevent TOCTOU
         if (ent.Comp.Mutations.Count == 0 || _mutation.GetMutatable(target) is not {} mutatable)
             return;
 
         args.Handled = true;
 
-        if (ent.Comp.Activator)
-            // TODO: add dna if something was activated
+        if (ent.Comp.Remove)
+        {
+            _mutation.RemoveMutations(mutatable, ent.Comp.Mutations);
+            // TODO: maybe do genetic damage if it succeeded
+        }
+        else if (ent.Comp.Activator)
+        {
+            // you get a free chromosome for using activator
+            SetChromosome(ent, true);
             _mutation.ActivateMutations(mutatable, ent.Comp.Mutations);
+        }
         else
+        {
             _mutation.AddMutations(mutatable, ent.Comp.Mutations);
+        }
 
+        // TODO: make chromosome shitcode use this instead
         var ev = new MutatorUsedEvent(mutatable);
         RaiseLocalEvent(ent, ref ev);
 
@@ -127,10 +140,14 @@ public sealed class MutatorSystem : EntitySystem
 
     #region Public API
 
-    public void AddMutation(Entity<MutatorComponent> ent, EntProtoId<MutationComponent> id)
+    public void AddMutation(Entity<MutatorComponent?> ent, EntProtoId<MutationComponent> id)
     {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
         ent.Comp.Mutations.Add(id);
-        UpdateAppearance(ent);
+        Dirty(ent, ent.Comp);
+        UpdateAppearance((ent, ent));
     }
 
     #endregion

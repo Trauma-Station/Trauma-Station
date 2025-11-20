@@ -13,13 +13,18 @@ namespace Content.Trauma.Client.Genetics.UI;
 public sealed partial class GeneticsConsoleWindow : FancyWindow
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    private readonly GeneticsDiskSystem _disk;
     private readonly MutationSystem _mutation;
+    private readonly ScannedGenomeSystem _genome;
 
     public event Action? OnScan;
+    public event Action? OnScramble;
     public event Action<uint, uint, char>? OnSetBase;
     public event Action<uint>? OnWriteMutation;
     public event Action<uint>? OnJoker;
     public event Action<uint>? OnSequence;
+    public event Action<uint>? OnPrint;
     public event Action<uint>? OnCombine;
 
     private EntityQuery<GeneticsConsoleComponent> _query;
@@ -28,25 +33,34 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     private EntityUid _uid;
     private bool? _hasScanner;
     private EntityUid? _mob;
+    private Entity<GeneticsDiskComponent>? _currentDisk;
     private bool _busy;
     private int? _damage;
     private int _instability;
+    private int _scrambleCooldown;
+    private bool _writeCooldown;
+    private bool _printCooldown;
 
     public GeneticsConsoleWindow()
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
+        _disk = _entMan.System<GeneticsDiskSystem>();
         _mutation = _entMan.System<MutationSystem>();
+        _genome = _entMan.System<ScannedGenomeSystem>();
 
         _query = _entMan.GetEntityQuery<GeneticsConsoleComponent>();
         _mobQuery = _entMan.GetEntityQuery<MobStateComponent>();
 
         Sequencer.OnScan += () => OnScan?.Invoke();
+        ScrambleButton.OnPressed += _ => OnScramble?.Invoke();
         Sequencer.OnSetBase += (s, i, b) => OnSetBase?.Invoke(s, i, b);
         Sequencer.OnWriteMutation += i => OnWriteMutation?.Invoke(i);
         Sequencer.OnJoker += i => OnJoker?.Invoke(i);
         Sequencer.OnSequence += i => OnSequence?.Invoke(i);
+
+        Storage.OnPrint += p => OnPrint?.Invoke(p);
 
         Combiner.OnCombine += i => OnCombine?.Invoke(i);
     }
@@ -62,6 +76,9 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         }
 
         Update(comp);
+        var disk = _disk.GetDisk(_uid);
+        if (_currentDisk != disk)
+            UpdateDisk(_currentDisk = disk);
     }
 
     public void SetEntity(EntityUid uid)
@@ -71,6 +88,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
 
         _uid = uid;
         Update(comp);
+        Storage.SetConsole(comp);
     }
 
     public void UpdateState(GeneticsConsoleState state)
@@ -90,6 +108,9 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
             UpdateMob(_mob = comp.ScannedMob);
         if (comp.Busy != _busy)
             UpdateBusy(_busy = comp.Busy);
+        UpdateScrambleCooldown(comp.NextScramble);
+        UpdateWriteCooldown(comp.NextWrite);
+        UpdatePrintCooldown(comp.NextPrint);
         if (_mob is {} mob)
         {
             var damage = _mutation.GetGeneticDamage(mob);
@@ -107,6 +128,13 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         }
     }
 
+    private void UpdateDisk(Entity<GeneticsDiskComponent>? disk)
+    {
+        Sequencer.UpdateDisk(disk);
+        Storage.UpdateDisk(disk);
+        Combiner.UpdateDisk(disk);
+    }
+
     private void UpdateScanner(bool hasScanner)
     {
         UpdateMob(hasScanner ? _mob : null);
@@ -117,6 +145,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     private void UpdateMob(EntityUid? uid)
     {
         MobView.SetEntity(uid);
+        UpdateScrambleDisabled();
         Sequencer.SetMob(uid);
         if (_mobQuery.TryComp(uid, out var mob))
         {
@@ -130,6 +159,52 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         }
         UpdateInstability();
         UpdateIntegrity();
+    }
+
+    private void UpdateScrambleDisabled()
+    {
+        ScrambleContainer.Visible = _mob != null;
+        ScrambleButton.Disabled = _mob is not {} mob ||
+            !_genome.IsScanned(mob) ||
+            _scrambleCooldown > 0;
+    }
+
+    private bool OnCooldown(TimeSpan next)
+        => _timing.CurTime < next;
+
+    private void UpdateScrambleCooldown(TimeSpan nextScramble)
+    {
+        var cooldown = (int) (nextScramble - _timing.CurTime).TotalSeconds;
+        if (cooldown < 0)
+            cooldown = 0;
+        if (cooldown == _scrambleCooldown)
+            return;
+
+        _scrambleCooldown = cooldown;
+        ScrambleButton.Text = cooldown > 0
+            ? Loc.GetString("genetics-console-scramble-cooldown", ("cooldown", cooldown))
+            : Loc.GetString("genetics-console-scramble");
+        UpdateScrambleDisabled();
+    }
+
+    private void UpdateWriteCooldown(TimeSpan nextWrite)
+    {
+        var cooldown = OnCooldown(nextWrite);
+        if (cooldown != _writeCooldown)
+            return;
+
+        _writeCooldown = cooldown;
+        Sequencer.UpdateWriteCooldown(cooldown);
+    }
+
+    private void UpdatePrintCooldown(TimeSpan nextPrint)
+    {
+        var cooldown = OnCooldown(nextPrint);
+        if (cooldown != _printCooldown)
+            return;
+
+        _printCooldown = cooldown;
+        Storage.UpdateCooldowns(cooldown);
     }
 
     private void UpdateInstability()

@@ -19,10 +19,12 @@ public sealed class GeneticsConsoleBUI : BoundUserInterface
         _window.SetEntity(Owner);
         _window.OpenCentered();
         _window.OnScan += () => SendPredictedMessage(new GeneticsConsoleScanMessage());
+        _window.OnScramble += () => SendPredictedMessage(new GeneticsConsoleScrambleMessage());
         _window.OnSetBase += (s, i, b) => SendPredictedMessage(new GeneticsConsoleSetBaseMessage(s, i, b));
         _window.OnWriteMutation += i => SendPredictedMessage(new GeneticsConsoleWriteMutationMessage(i));
         _window.OnJoker += i => SendPredictedMessage(new GeneticsConsoleJokerMessage(i));
         _window.OnSequence += i => SendPredictedMessage(new GeneticsConsoleSequenceMessage(i));
+        _window.OnPrint += p => SendPredictedMessage(new GeneticsConsolePrintMessage(p));
         _window.OnCombine += i => SendPredictedMessage(new GeneticsConsoleCombineMessage(i));
     }
 
