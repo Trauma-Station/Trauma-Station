@@ -18,6 +18,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     private readonly MutationSystem _mutation;
     private readonly ScannedGenomeSystem _genome;
 
+    public event Action? OnSelectServer;
     public event Action? OnScan;
     public event Action? OnScramble;
     public event Action<uint, uint, char>? OnSetBase;
@@ -34,6 +35,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     private bool? _hasScanner;
     private EntityUid? _mob;
     private Entity<GeneticsDiskComponent>? _currentDisk;
+    private EntProtoId<MutationComponent>? _diskMutation;
     private bool _busy;
     private int? _damage;
     private int _instability;
@@ -52,6 +54,8 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
 
         _query = _entMan.GetEntityQuery<GeneticsConsoleComponent>();
         _mobQuery = _entMan.GetEntityQuery<MobStateComponent>();
+
+        ServerButton.OnPressed += _ => OnSelectServer?.Invoke();
 
         Sequencer.OnScan += () => OnScan?.Invoke();
         ScrambleButton.OnPressed += _ => OnScramble?.Invoke();
@@ -76,9 +80,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         }
 
         Update(comp);
-        var disk = _disk.GetDisk(_uid);
-        if (_currentDisk != disk)
-            UpdateDisk(_currentDisk = disk);
+        UpdateDisk(_disk.GetDisk(_uid));
     }
 
     public void SetEntity(EntityUid uid)
@@ -94,6 +96,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     public void UpdateState(GeneticsConsoleState state)
     {
         Sequencer.SetState(state.Sequences);
+        Combiner.SetState(state.Sequences);
     }
 
     private void Update(GeneticsConsoleComponent comp)
@@ -130,9 +133,21 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
 
     private void UpdateDisk(Entity<GeneticsDiskComponent>? disk)
     {
+        var mutation = disk?.Comp.Mutation;
+        if (_diskMutation != mutation)
+        {
+            _diskMutation = mutation;
+            Storage.UpdateDiskMutation(mutation);
+            Combiner.UpdateDiskMutation(mutation);
+        }
+
+        if (_currentDisk == disk)
+            return;
+
+        _currentDisk = disk;
+
         Sequencer.UpdateDisk(disk);
         Storage.UpdateDisk(disk);
-        Combiner.UpdateDisk(disk);
     }
 
     private void UpdateScanner(bool hasScanner)

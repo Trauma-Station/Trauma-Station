@@ -116,12 +116,6 @@ public sealed partial class GeneticsConsoleComponent : Component
     [DataField]
     public SoundSpecifier? SequenceFailSound;
 
-    /// <summary>
-    /// Research points given when sequencing a mutation for the first time this round, scaled by its difficulty.
-    /// </summary>
-    [DataField]
-    public int PointsPerDifficulty = 1000;
-
     #endregion
 
     #region Writing
@@ -198,10 +192,16 @@ public sealed partial class GeneticsConsoleComponent : Component
     /// Sound played when printing an item.
     /// </summary>
     [DataField]
-    public SoundSpecifier? PrintSound = new SoundPathSpecifier("/Audio/Machines/printer.ogg");
+    public SoundSpecifier? PrintSound;
 
     #endregion
 }
+
+/// <summary>
+/// Event raised on the console when a mutation is sequenced, before any changes are made to the round data.
+/// </summary>
+[ByRefEvent]
+public readonly record struct MutationSequencedEvent(EntProtoId<MutationComponent> Mutation, MutationData Data);
 
 [Serializable, NetSerializable]
 public enum GeneticsConsoleUiKey : byte

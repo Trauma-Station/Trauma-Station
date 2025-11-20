@@ -382,6 +382,28 @@ public sealed partial class MutationSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    /// Removes multiple mutations, returning true if any of them succeeded.
+    /// </summary>
+    public bool RemoveMutations(Entity<MutatableComponent?> ent, IEnumerable<EntProtoId<MutationComponent>> ids, bool automatic = false)
+    {
+        if (!_mutatableQuery.Resolve(ent, ref ent.Comp))
+            return false;
+
+        if (_mob.IsDead(ent))
+            return false;
+
+        var added = false;
+        foreach (var id in ids)
+        {
+            added |= RemoveMutation(ent, id, automatic);
+        }
+        return added;
+    }
+
+    /// <summary>
+    /// Removes all active and dormant mutations from a mob.
+    /// </summary>
     public void ClearMutations(Entity<MutatableComponent> ent, bool automatic = false)
     {
         foreach (var mutation in ent.Comp.Mutations.Values)

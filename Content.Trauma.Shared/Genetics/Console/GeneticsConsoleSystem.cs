@@ -411,6 +411,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
         var delay = ent.Comp.Prints[i].Delay;
         ent.Comp.NextPrint = now + delay;
+        DirtyField(ent, ent.Comp, nameof(GeneticsConsoleComponent.NextPrint));
 
         var proto = ent.Comp.Prints[i].Proto;
         var item = PredictedSpawnAtPosition(proto, Transform(ent).Coordinates);
@@ -511,8 +512,8 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             return false;
         }
 
-        var points = _mutation.AllMutations[mutation].Difficulty * ent.Comp.PointsPerDifficulty;
-        // TODO: give points and send radio message
+        var ev = new MutationSequencedEvent(mutation, data);
+        RaiseLocalEvent(ent, ref ev);
 
         _audio.PlayPvs(ent.Comp.ScanSound, ent);
         data.Discovered = true;

@@ -23,7 +23,7 @@ public sealed class MutatorSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MutatorComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<MutatorComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<MutatorComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<MutatorComponent, MutatorDoAfterEvent>(OnDoAfter);
     }
 
@@ -33,19 +33,21 @@ public sealed class MutatorSystem : EntitySystem
             return;
 
         var msg = ent.Comp.Mutations.Count > 0
-            ? "mutator-examine-spent"
+            ? "mutator-examine-loaded"
             : ent.Comp.HasChromosome
                 ? "mutator-examine-chromosome"
                 : "mutator-examine-spent";
         args.PushMarkup(Loc.GetString(msg));
     }
 
-    private void OnInteractUsing(Entity<MutatorComponent> ent, ref InteractUsingEvent args)
+    private void OnAfterInteract(Entity<MutatorComponent> ent, ref AfterInteractEvent args)
     {
+        if (args.Handled || !args.CanReach || args.Target is not {} target)
+            return;
+
         args.Handled = true;
 
         var user = args.User;
-        var target = args.Target;
         if (ent.Comp.Mutations.Count == 0)
         {
             // TODO: general mutator recycling??

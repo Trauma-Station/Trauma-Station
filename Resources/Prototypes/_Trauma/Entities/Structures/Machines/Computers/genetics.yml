@@ -26,6 +26,7 @@
     scanSound: /Audio/Machines/beep.ogg
     sequenceFailSound: /Audio/Effects/smoke.ogg
     writeSound: /Audio/Machines/printer.ogg
+    printSound: /Audio/Machines/printer.ogg
   - type: DoAfter # to start the doafters
   - type: GeneticsDiskSlot
   - type: ItemSlots
@@ -52,8 +53,15 @@
     interfaces:
       enum.GeneticsConsoleUiKey.Key:
         type: GeneticsConsoleBUI
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
+  - type: ActiveRadio
+    channels:
+    - Science
+  - type: GeneticsResearchConsole
+  - type: ResearchClient
   - type: Speech
     speechVerb: Robotic
     speechSounds: Pai

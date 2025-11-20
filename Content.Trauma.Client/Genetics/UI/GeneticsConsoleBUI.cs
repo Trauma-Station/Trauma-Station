@@ -1,3 +1,4 @@
+using Content.Shared.Research.Components;
 using Content.Trauma.Shared.Genetics.Console;
 using Robust.Client.UserInterface;
 
@@ -18,6 +19,7 @@ public sealed class GeneticsConsoleBUI : BoundUserInterface
         _window = this.CreateWindow<GeneticsConsoleWindow>();
         _window.SetEntity(Owner);
         _window.OpenCentered();
+        _window.OnSelectServer += () => SendPredictedMessage(new ConsoleServerSelectionMessage());
         _window.OnScan += () => SendPredictedMessage(new GeneticsConsoleScanMessage());
         _window.OnScramble += () => SendPredictedMessage(new GeneticsConsoleScrambleMessage());
         _window.OnSetBase += (s, i, b) => SendPredictedMessage(new GeneticsConsoleSetBaseMessage(s, i, b));

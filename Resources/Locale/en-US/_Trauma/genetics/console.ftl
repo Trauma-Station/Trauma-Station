@@ -11,6 +11,8 @@ genetics-console-chat-combine-none = NO COMBINATION FOUND
 genetics-console-chat-combine-present = COMBINATION ALREADY PRESENT
 genetics-console-chat-combined = MUTATION COMBINATION COMPLETED
 
+genetics-console-radio-message = {CAPITALIZE($mutation)} has been sequenced, {$points} points have been added to the R&D server!
+
 genetics-console-damages-you = The sequencing fails catastrophically and damages your genome!
 genetics-console-damages-others = The genetics console fails catastrophically and damages the subject's genome!
 
@@ -48,7 +50,7 @@ genetics-console-sequences = Sequences
 genetics-console-sequence-info = Sequence Info
 genetics-console-scan = Scan!
 genetics-console-genome-sequencer = Genome Sequencer™
-genetics-console-sequencer-no-sequence-selected = Select a sequence above.
+genetics-console-sequencer-no-sequence-selected = Select a sequence to work with.
 genetics-console-mutation-name = Name:
 genetics-console-mutation-desc = Description:
 genetics-console-mutation-instability = Instability:

@@ -4,8 +4,11 @@
         Title="{Loc 'genetics-console-window-title'}"
         MinSize="800 600">
     <BoxContainer Orientation="Vertical">
+        <BoxContainer>
+            <controls:NanoHeading Text="{Loc 'genetics-console-heading-scanner'}"/>
+            <Button Name="ServerButton" Text="{Loc 'lathe-menu-server-list'}" HorizontalAlignment="Left"/>
+        </BoxContainer>
         <!-- Patient info -->
-        <controls:NanoHeading Text="{Loc 'genetics-console-heading-scanner'}"/>
         <BoxContainer Orientation="Horizontal">
             <SpriteView Name="MobView" SetSize="64 64" OverrideDirection="South" Stretch="Fill"/>
             <GridContainer Columns="4" HorizontalExpand="True">

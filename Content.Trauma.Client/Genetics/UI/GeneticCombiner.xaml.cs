@@ -51,17 +51,17 @@ public sealed partial class GeneticCombiner : BoxContainer
         UpdateButton();
     }
 
-    public void UpdateDisk(Entity<GeneticsDiskComponent>? disk)
+    public void UpdateDiskMutation(EntProtoId<MutationComponent>? mutation)
     {
-        if (disk?.Comp.Mutation is {} mutation)
+        if (mutation is {} id)
         {
-            DiskMutation.Text = Loc.GetString("genetics-console-combine-catalyst", ("mutation", _proto.Index(mutation).Name));
-            var recipes = _mutation.GetPossibleRecipes(mutation);
+            DiskMutation.Text = Loc.GetString("genetics-console-combine-catalyst", ("mutation", _proto.Index(id).Name));
+            var recipes = _mutation.GetPossibleRecipes(id);
             _canCombine = recipes.Count > 0;
             _names.Clear();
-            foreach (var id in recipes)
+            foreach (var recipe in recipes)
             {
-                var result = _proto.Index(id).Result;
+                var result = _proto.Index(recipe).Result;
                 _names.Add(_proto.Index(result).Name);
             }
             var results = ContentLocalizationManager.FormatList(_names);
