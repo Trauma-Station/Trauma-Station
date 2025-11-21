@@ -80,12 +80,15 @@ public sealed partial class IdCardConsoleComponent : Component
         "Medical",
         "Quartermaster",
         "Research",
+        // <Trauma>
+        "Robotics",
+        "Genetics",
+        // </Trauma>
         "ResearchDirector",
         "Salvage",
         "Security",
         "Service",
         "Theatre",
-        "Robotics", //Goob
     };
 
     [Serializable, NetSerializable]

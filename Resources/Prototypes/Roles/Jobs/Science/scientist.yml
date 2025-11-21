@@ -84,6 +84,9 @@
   access:
   - Research
   - Maintenance
+  extendedAccess: # Trauma
+  - Robotics
+  - Genetics
 
 - type: startingGear
   id: ScientistGear

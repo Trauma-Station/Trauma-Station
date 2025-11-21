@@ -54,7 +54,10 @@
         - Belt
     - type: AccessOverrider
       accessLevels:
-      - Robotics # Goob
+      # <Trauma>
+      - Robotics
+      - Genetics
+      # </Trauma>
       - Armory
       - Atmospherics
       - Bar
@@ -130,6 +133,7 @@
     - NanotrasenRepresentative
     - BlueshieldOfficer
     - Robotics
+    - Genetics
     - Revolutionary
     # </Trauma>
     - Armory

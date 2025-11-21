@@ -122,18 +122,18 @@ public sealed class MutatorSystem : EntitySystem
 
         if (ent.Comp.Remove)
         {
-            _mutation.RemoveMutations(mutatable, ent.Comp.Mutations);
+            _mutation.RemoveMutations(mutatable, ent.Comp.Mutations, predicted: true);
             // TODO: maybe do genetic damage if it succeeded
         }
         else if (ent.Comp.Activator)
         {
             // you get a free chromosome for using activator
             SetChromosome(ent, true);
-            _mutation.ActivateMutations(mutatable, ent.Comp.Mutations);
+            _mutation.ActivateMutations(mutatable, ent.Comp.Mutations, predicted: true);
         }
         else
         {
-            _mutation.AddMutations(mutatable, ent.Comp.Mutations);
+            _mutation.AddMutations(mutatable, ent.Comp.Mutations, predicted: true);
         }
 
         // TODO: make chromosome shitcode use this instead

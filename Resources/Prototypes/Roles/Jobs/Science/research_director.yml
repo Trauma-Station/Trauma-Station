@@ -161,7 +161,11 @@
   - ResearchDirector
   - Brig
   - Cryogenics
-  - External # goobstation
+  # <Trauma>
+  - Robotics
+  - Genetics
+  - External
+  # </Trauma>
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
