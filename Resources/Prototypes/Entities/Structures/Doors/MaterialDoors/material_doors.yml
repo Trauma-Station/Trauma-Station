@@ -61,6 +61,8 @@
         acts: ["Destruction"]
   - type: Occluder
   - type: BlockWeather
+  - type: SoundBlocker # Traumastation
+    soundBlockPercent: 0.7
 
 - type: entity
   abstract: true
