@@ -72,7 +72,7 @@ public sealed class AudioMuffleOverlay : Overlay
             if (data.Previous == null)
                 continue;
 
-            handle.DrawLine(indices + offset, indices + offset + (data.Previous.Value - indices) / 2f, Color.Blue);
+            handle.DrawLine(indices + offset, indices + offset + (data.Previous.Indices - indices) / 2f, Color.Blue);
         }
 
         handle.SetTransform(Matrix3x2.Identity);

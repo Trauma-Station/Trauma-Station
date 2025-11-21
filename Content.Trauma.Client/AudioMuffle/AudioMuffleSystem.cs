@@ -1,17 +1,18 @@
 using System.Numerics;
+using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Physics;
 using Content.Trauma.Shared.AudioMuffle;
 using Robust.Client.Audio;
 using Robust.Client.GameObjects;
 using Robust.Client.GameStates;
-using Robust.Client.Graphics;
 using Robust.Client.Physics;
 using Robust.Client.Player;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network.Messages;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Player;
@@ -96,15 +97,24 @@ public sealed partial class AudioMuffleSystem : EntitySystem
         _stateMan.GameStateApplied += OnGameStateApplied;
         EntityManager.EntityDeleted += OnEntDeleted;
         EntityManager.EntityInitialized += OnEntInitialized;
+        _stateMan.PvsLeave += OnPvsLeave;
 
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnLocalPlayerDetached);
         SubscribeLocalEvent<LocalPlayerAttachedEvent>(OnLocalPlayerAttached);
 
         SubscribeLocalEvent<SoundBlockerComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<SoundBlockerComponent, ComponentShutdown>(OnShutdown);
+
+        SubscribeNetworkEvent<RoundRestartCleanupEvent>(OnRestart);
     }
 
-    // TODO: reset on round restart
+    private void OnRestart(RoundRestartCleanupEvent ev)
+    {
+        PlayerGrid = null;
+        OldPlayerTile = null;
+        ClearDicts(true);
+    }
+
     public override void Shutdown()
     {
         base.Shutdown();
@@ -117,8 +127,7 @@ public sealed partial class AudioMuffleSystem : EntitySystem
         _stateMan.GameStateApplied -= OnGameStateApplied;
         EntityManager.EntityDeleted -= OnEntDeleted;
         EntityManager.EntityInitialized -= OnEntInitialized;
-
-        _overlay.RemoveOverlay<AudioMuffleOverlay>();
+        _stateMan.PvsLeave -= OnPvsLeave;
     }
 
     public override void Update(float frameTime)
@@ -127,6 +136,17 @@ public sealed partial class AudioMuffleSystem : EntitySystem
 
         ResetAllPosAudio();
         ResetAllRaycastAudio();
+    }
+
+    private void OnPvsLeave(MsgStateLeavePvs obj)
+    {
+        foreach (var netEnt in obj.Entities)
+        {
+            if (!TryGetEntity(netEnt, out var ent))
+                continue;
+
+            RemoveAudioMuffle(ent.Value);
+        }
     }
 
     private void ResetImmediate(EntityUid player, bool fullReset)
@@ -264,7 +284,14 @@ public sealed partial class AudioMuffleSystem : EntitySystem
         if (ResolvePlayer() is not { } player)
             return;
 
-        // TODO: detached + pvs leave action
+        foreach (var detached in args.Detached)
+        {
+            if (!TryGetEntity(detached, out var ent))
+                continue;
+
+            RemoveAudioMuffle(ent.Value);
+        }
+
         foreach (var deleted in args.AppliedState.EntityDeletions.Value)
         {
             if (!TryGetEntity(deleted, out var ent))
@@ -374,6 +401,7 @@ public sealed partial class AudioMuffleSystem : EntitySystem
                 ResetAllBlockers(player);
                 return;
             }
+
             ResetImmediate(player, true);
             return;
         }
@@ -532,7 +560,10 @@ public sealed partial class AudioMuffleSystem : EntitySystem
         SoundBlockerDict[blockerEnt] = data;
     }
 
-    private void ResetBlockerOnGrid(Entity<MapGridComponent> grid, EntityUid blocker, MapCoordinates blockerPos, Vector2i? oldIndices)
+    private void ResetBlockerOnGrid(Entity<MapGridComponent> grid,
+        EntityUid blocker,
+        MapCoordinates blockerPos,
+        Vector2i? oldIndices)
     {
         var indices = _map.TileIndicesFor(grid, blockerPos);
         AddOrRemoveBlocker(blocker, indices, true, true);
@@ -655,7 +686,7 @@ public sealed partial class AudioMuffleSystem : EntitySystem
             if (ReverseAudioPosDict.TryGetValue(audioIndices, out var audioSet))
                 audioSet.Add(audioEnt);
             else
-                ReverseAudioPosDict[audioIndices] = new HashSet<Entity<AudioComponent>> {audioEnt};
+                ReverseAudioPosDict[audioIndices] = new HashSet<Entity<AudioComponent>> { audioEnt };
 
             ResetAudioMuffle(audio, volume, reset, true);
             return;
@@ -784,7 +815,10 @@ public sealed partial class AudioMuffleSystem : EntitySystem
         }
     }
 
-    private void ResetAudioMuffle(Entity<AudioComponent?> audio, float? volume, bool reset = true, bool ignoreNonPlaying = false)
+    private void ResetAudioMuffle(Entity<AudioComponent?> audio,
+        float? volume,
+        bool reset = true,
+        bool ignoreNonPlaying = false)
     {
         if (!Exists(audio) || !Resolve(audio, ref audio.Comp, false))
             return;
@@ -827,7 +861,7 @@ public sealed partial class AudioMuffleSystem : EntitySystem
             var playerIndices = _map.TileIndicesFor(grid, playerPos);
             var playerDist = (float) ManhattanDistance(pos, playerIndices);
             if (TileDataDict.TryGetValue(playerIndices, out var playerTile) && playerTile.Previous != null)
-                playerDist += (xform.Coordinates.Position - playerTile.Previous.Value).Length() - 1f;
+                playerDist += (xform.Coordinates.Position - playerTile.Previous.Indices).Length() - 1f;
             muffleLevel = tileData.TotalCost + (playerDist - AudioRange) / 4f - GetTotalTileCost(pos);
         }
         else if (ReverseSoundBlockerDict.TryGetValue(audioEnt, out var data))

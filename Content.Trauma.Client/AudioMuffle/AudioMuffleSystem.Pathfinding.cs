@@ -42,29 +42,18 @@ public sealed partial class AudioMuffleSystem
         }
 
         var cur = newData;
-        Vector2i? newPrev = null;
+        MuffleTileData? newPrev = null;
         for (var i = 0; i < AudioRange; i++)
         {
             cur.TotalCost = i;
 
-            if (!TrySwapPrev(cur, newPrev, out var nextTile))
-            {
-                Log.Error("Tree expansion: reconstructing path failed - rebuilding tree");
-                Expand(newPos);
-                return;
-            }
+            SwapPrev(cur, newPrev, out var nextTile);
 
             if (nextTile == null || cur.Equals(oldData))
                 break;
 
-            newPrev = cur.Indices;
-
-            if (!TileDataDict.TryGetValue(nextTile.Value, out cur))
-            {
-                Log.Error("Tree expansion: reconstructing path failed - rebuilding tree");
-                Expand(newPos);
-                return;
-            }
+            newPrev = cur;
+            cur = nextTile;
         }
 
         if (!cur.Equals(oldData))
@@ -109,10 +98,10 @@ public sealed partial class AudioMuffleSystem
 
                     var neighbor = tile + new Vector2i(x, y);
 
-                    if (neighbor == data.Previous)
+                    if (TileDataDict.TryGetValue(neighbor, out var neighborData))
                         continue;
 
-                    if (TileDataDict.ContainsKey(neighbor))
+                    if (neighborData == data.Previous)
                         continue;
 
                     frontier.Add(data);
@@ -137,7 +126,12 @@ public sealed partial class AudioMuffleSystem
         TileDataDict[start] = newNode;
 
         var vec = Vector2i.One;
-        Expand(new PriorityQueue<MuffleTileData> { newNode }, start, new HashSet<Vector2i> { start }, vec, vec, updateAudio);
+        Expand(new PriorityQueue<MuffleTileData> { newNode },
+            start,
+            new HashSet<Vector2i> { start },
+            vec,
+            vec,
+            updateAudio);
         if (updateAudio)
             ResetAudioOnPos(start);
     }
@@ -181,10 +175,13 @@ public sealed partial class AudioMuffleSystem
 
                     var neighbor = node.Indices + new Vector2i(x, y);
 
-                    if (neighbor == node.Previous)
+                    if (passed.Contains(neighbor))
                         continue;
 
-                    if (passed.Contains(neighbor))
+                    if (TileDataDict.TryGetValue(neighbor, out var neighborData))
+                        continue;
+
+                    if (neighborData == node.Previous)
                         continue;
 
                     if (ManhattanDistance(origin, neighbor) > amount)
@@ -200,7 +197,7 @@ public sealed partial class AudioMuffleSystem
                         if (diff >= 0)
                             continue;
 
-                        next.Previous = node.Indices;
+                        next.Previous = node;
                         node.Next.Add(next);
 
                         UpdateTotalCostOfNextTileData(next, diff, false, AudioRange - count);
@@ -215,7 +212,7 @@ public sealed partial class AudioMuffleSystem
                         var newNode = new MuffleTileData(neighbor)
                         {
                             TotalCost = score,
-                            Previous = node.Indices,
+                            Previous = node,
                         };
 
                         node.Next.Add(newNode);
@@ -276,10 +273,10 @@ public sealed partial class AudioMuffleSystem
 
                     var neighbor = node.Indices + new Vector2i(x, y);
 
-                    if (neighbor == node.Previous)
+                    if (TileDataDict.TryGetValue(neighbor, out var neighborData))
                         continue;
 
-                    if (!invalidated.Contains(neighbor))
+                    if (neighborData == node.Previous)
                         continue;
 
                     if (ManhattanDistance(node.Indices, neighbor) > amount)
@@ -294,7 +291,7 @@ public sealed partial class AudioMuffleSystem
                     var newNode = new MuffleTileData(neighbor)
                     {
                         TotalCost = score,
-                        Previous = node.Indices,
+                        Previous = node,
                     };
 
                     node.Next.Add(newNode);
@@ -372,22 +369,22 @@ public sealed partial class AudioMuffleSystem
         var result = true;
         foreach (var (next, score) in expansionNodes)
         {
-            if (node.Previous == next.Indices)
+            if (node.Previous == next)
                 continue;
 
             nextNodesToExpand.Add(next);
 
             var diff = score - next.TotalCost;
 
-            if (next.Previous != node.Indices && diff <= 0 || node.Previous == null)
+            if (next.Previous != node && diff <= 0 || node.Previous == null)
             {
-                if (TrySwapPrev(next, node.Indices, out _))
-                    next.TotalCost = score;
+                SwapPrev(next, node, out _);
+                next.TotalCost = score;
 
                 nodesToReExpand.Add(node);
                 result = false;
             }
-            else if (next.Previous == node.Indices && diff > 0 && !ConnectToNewPreviousNode(next))
+            else if (next.Previous == node && diff > 0 && !ConnectToNewPreviousNode(next))
             {
                 nodesToReExpand.Add(node);
                 result = false;
@@ -443,16 +440,14 @@ public sealed partial class AudioMuffleSystem
 
         list.Sort();
         var result = list[^1];
-        if (node.Previous == result.Indices)
+        if (node.Previous == result)
             return true;
 
         var prev = result.Previous;
 
-        if (prev == null || prev != node.Indices)
+        if (prev == null || prev != node)
         {
-            if (!TrySwapPrev(node, result.Indices, out _))
-                return false;
-
+            SwapPrev(node, result, out _);
             node.TotalCost = result.TotalCost + 1f + GetTotalTileCost(node.Indices);
         }
         else
@@ -474,10 +469,10 @@ public sealed partial class AudioMuffleSystem
 
                 var neighbor = node.Indices + new Vector2i(x, y);
 
-                if (node.Previous == neighbor)
+                if (!TileDataDict.TryGetValue(neighbor, out var next))
                     continue;
 
-                if (!TileDataDict.TryGetValue(neighbor, out var next))
+                if (node.Previous == next)
                     continue;
 
                 var moveCost = 1f;
@@ -491,28 +486,25 @@ public sealed partial class AudioMuffleSystem
         return expansionNodes;
     }
 
-    private bool TrySwapPrev(MuffleTileData data, Vector2i? newPrevTile, out Vector2i? nextPrevious)
+    private void SwapPrev(MuffleTileData data, MuffleTileData? newPrevTile, out MuffleTileData? nextPrevious)
     {
         nextPrevious = data.Previous;
 
         if (nextPrevious != null && nextPrevious == newPrevTile)
-            return true;
+            return;
 
         data.Previous = newPrevTile;
 
-        if (nextPrevious != null && TileDataDict.TryGetValue(nextPrevious.Value, out var nextPrev))
-            nextPrev.Next.Remove(data);
+        if (nextPrevious == null)
+            return;
+
+        nextPrevious.Next.Remove(data);
 
         if (newPrevTile == null)
-            return true;
+            return;
 
-        if (!TileDataDict.TryGetValue(newPrevTile.Value, out var newPrev))
-            return false;
-
-        data.Next.Remove(newPrev);
-        newPrev.Next.Add(data);
-
-        return true;
+        data.Next.Remove(nextPrevious);
+        nextPrevious.Next.Add(data);
     }
 
     private void UpdateTotalCostOfNextTileData(MuffleTileData data,
@@ -610,8 +602,7 @@ public sealed partial class AudioMuffleSystem
 
         public float TotalCost;
 
-        // TODO: make this into MuffleTileData
-        public Vector2i? Previous;
+        public MuffleTileData? Previous;
 
         public HashSet<MuffleTileData> Next = new(4);
 
