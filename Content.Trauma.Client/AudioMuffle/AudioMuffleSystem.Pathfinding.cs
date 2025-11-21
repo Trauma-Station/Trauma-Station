@@ -28,7 +28,6 @@ public sealed partial class AudioMuffleSystem
 
         if (distance >= AudioRange)
         {
-            Log.Debug("Tree expansion: range exceeds limit - rebuilding tree");
             Expand(newPos);
             return;
         }
@@ -36,7 +35,6 @@ public sealed partial class AudioMuffleSystem
         if (!TileDataDict.TryGetValue(oldPos, out var oldData) || oldData.Previous != null ||
             !TileDataDict.TryGetValue(newPos, out var newData))
         {
-            Log.Error("Tree expansion: node not found or is invalid - rebuilding tree");
             Expand(newPos);
             return;
         }
@@ -58,7 +56,6 @@ public sealed partial class AudioMuffleSystem
 
         if (!cur.Equals(oldData))
         {
-            Log.Error("Tree expansion: reconstructing path failed - rebuilding tree");
             Expand(newPos);
             return;
         }
@@ -67,7 +64,6 @@ public sealed partial class AudioMuffleSystem
         var reExpand = new HashSet<MuffleTileData>();
         if (!ExpandNode(newData, 0f, false, reExpand, out _))
         {
-            Log.Debug("Tree expansion: node expansion failed - rebuilding tree");
             if (reExpand.Contains(newData))
             {
                 Expand(newPos);
@@ -582,17 +578,16 @@ public sealed partial class AudioMuffleSystem
             delta = -data.TotalCost;
 
         var reExpand = new HashSet<MuffleTileData>();
-        if (!ExpandNode(data, delta, resetAudio, reExpand, out _, true, 1))
-        {
-            Log.Debug("Failed to gracefully rebuild the tree upon adding/removing blocker");
-            HashSet<Vector2i> invalidated = new();
-            foreach (var node in reExpand)
-            {
-                if (invalidated.Contains(node.Indices))
-                    continue;
+        if (ExpandNode(data, delta, resetAudio, reExpand, out _, true, 1))
+            return;
 
-                RewriteAndReExpand(node, invalidated);
-            }
+        HashSet<Vector2i> invalidated = new();
+        foreach (var node in reExpand)
+        {
+            if (invalidated.Contains(node.Indices))
+                continue;
+
+            RewriteAndReExpand(node, invalidated);
         }
     }
 
