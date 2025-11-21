@@ -6,7 +6,7 @@
     <BoxContainer Orientation="Vertical">
         <BoxContainer>
             <controls:NanoHeading Text="{Loc 'genetics-console-heading-scanner'}"/>
-            <Button Name="ServerButton" Text="{Loc 'lathe-menu-server-list'}" HorizontalAlignment="Left"/>
+            <Button Name="ServerButton" Text="{Loc 'lathe-menu-server-list'}" HorizontalAlignment="Right" HorizontalExpand="True"/>
         </BoxContainer>
         <!-- Patient info -->
         <BoxContainer Orientation="Horizontal">

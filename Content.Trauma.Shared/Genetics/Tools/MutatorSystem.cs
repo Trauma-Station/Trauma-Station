@@ -102,7 +102,11 @@ public sealed class MutatorSystem : EntitySystem
             new MutatorDoAfterEvent(),
             eventTarget: ent,
             target: target,
-            used: ent));
+            used: ent)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true
+        });
     }
 
     private void OnDoAfter(Entity<MutatorComponent> ent, ref MutatorDoAfterEvent args)

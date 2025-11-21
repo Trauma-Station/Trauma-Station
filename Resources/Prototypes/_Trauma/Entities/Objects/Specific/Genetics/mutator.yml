@@ -2,6 +2,7 @@
   parent: BaseItem
   id: GeneticsMutator
   name: mutator
+  suffix: Empty
   description: A single-use injector of a mutagen designed to replicate a specific gene throughout the body.
   components:
   - type: Sprite

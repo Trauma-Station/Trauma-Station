@@ -9,7 +9,7 @@ namespace Content.Trauma.Client.Genetics.UI;
 [GenerateTypedNameReferences]
 public sealed partial class GenePuzzle : Control
 {
-    public event Action<uint, char>? OnSetBase;
+    public event Action<uint, GeneticsCycle>? OnSetBase;
     public event Action? OnJoker;
     public event Action? OnSequence;
 

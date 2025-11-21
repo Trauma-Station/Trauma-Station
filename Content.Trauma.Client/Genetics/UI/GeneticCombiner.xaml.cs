@@ -16,6 +16,7 @@ public sealed partial class GeneticCombiner : BoxContainer
     [Dependency] private readonly IPrototypeManager _proto = default!;
     private readonly MutationSystem _mutation;
 
+    public event Action? OnScan;
     public event Action<uint>? OnCombine;
 
     private bool _busy;
@@ -28,6 +29,12 @@ public sealed partial class GeneticCombiner : BoxContainer
         RobustXamlLoader.Load(this);
 
         _mutation = _entMan.System<MutationSystem>();
+
+        Scanner.OnScan += () => OnScan?.Invoke();
+        Scanner.OnErrorSet += error =>
+        {
+            MobContainer.Visible = error == null;
+        };
 
         SequenceButtons.OnSelected += i =>
         {
@@ -49,7 +56,13 @@ public sealed partial class GeneticCombiner : BoxContainer
     public void SetBusy(bool busy)
     {
         _busy = busy;
+        Scanner.SetBusy(busy);
         UpdateButton();
+    }
+
+    public void SetMob(EntityUid? mob)
+    {
+        Scanner.SetMob(mob);
     }
 
     public void UpdateDiskMutation(EntProtoId<MutationComponent>? mutation)

@@ -132,7 +132,8 @@ public sealed partial class GeneticsConsoleComponent : Component
     [DataField]
     public TimeSpan WriteDelay = TimeSpan.FromSeconds(2);
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField, AutoNetworkedField]
     public TimeSpan NextWrite = TimeSpan.Zero;
 
     #endregion
@@ -150,9 +151,6 @@ public sealed partial class GeneticsConsoleComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan CombineDelay = TimeSpan.FromSeconds(10);
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan NextCombine = TimeSpan.Zero;
 
     /// <summary>
     /// Damage dealt to the mob when combining a new mutation.
@@ -240,7 +238,7 @@ public sealed partial class GeneticsConsoleSetBaseMessage(uint sequence, uint in
 {
     public readonly uint Sequence = sequence;
     public readonly uint Index = index;
-    public readonly GeneticsCycle Cycle;
+    public readonly GeneticsCycle Cycle = cycle;
 }
 
 /// <summary>

@@ -1,5 +1,5 @@
 mutator-added-chromosome = New chromosome added to storage.
-mutator-depleted = It has no genetic material to redeem.
+mutator-depleted = It's empty.
 mutator-examine-loaded = It is loaded with a mutagen.
 mutator-examine-spent = Its mutagen is spent.
 mutator-examine-chromosome = Its mutagen is spent. Genetic material is stored inside.

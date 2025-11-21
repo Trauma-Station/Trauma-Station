@@ -21,7 +21,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     public event Action? OnSelectServer;
     public event Action? OnScan;
     public event Action? OnScramble;
-    public event Action<uint, uint, char>? OnSetBase;
+    public event Action<uint, uint, GeneticsCycle>? OnSetBase;
     public event Action<uint>? OnWriteMutation;
     public event Action<uint>? OnJoker;
     public event Action<uint>? OnSequence;
@@ -40,8 +40,8 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     private int? _damage;
     private int _instability;
     private int _scrambleCooldown;
-    private bool? _writeCooldown;
-    private bool? _printCooldown;
+    private bool _writeCooldown;
+    private bool _printCooldown;
 
     public GeneticsConsoleWindow()
     {
@@ -59,13 +59,14 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
 
         Sequencer.OnScan += () => OnScan?.Invoke();
         ScrambleButton.OnPressed += _ => OnScramble?.Invoke();
-        Sequencer.OnSetBase += (s, i, b) => OnSetBase?.Invoke(s, i, b);
+        Sequencer.OnSetBase += (s, i, c) => OnSetBase?.Invoke(s, i, c);
         Sequencer.OnWriteMutation += i => OnWriteMutation?.Invoke(i);
         Sequencer.OnJoker += i => OnJoker?.Invoke(i);
         Sequencer.OnSequence += i => OnSequence?.Invoke(i);
 
         Storage.OnPrint += p => OnPrint?.Invoke(p);
 
+        Combiner.OnScan += () => OnScan?.Invoke();
         Combiner.OnCombine += i => OnCombine?.Invoke(i);
     }
 
@@ -162,6 +163,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         MobView.SetEntity(uid);
         UpdateScrambleDisabled();
         Sequencer.SetMob(uid);
+        Combiner.SetMob(uid);
         if (_mobQuery.TryComp(uid, out var mob))
         {
             MobName.Text = _entMan.GetComponent<MetaDataComponent>(uid.Value).EntityName;
@@ -205,7 +207,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     private void UpdateWriteCooldown(TimeSpan nextWrite)
     {
         var cooldown = OnCooldown(nextWrite);
-        if (cooldown != _writeCooldown)
+        if (cooldown == _writeCooldown)
             return;
 
         _writeCooldown = cooldown;
@@ -215,7 +217,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     private void UpdatePrintCooldown(TimeSpan nextPrint)
     {
         var cooldown = OnCooldown(nextPrint);
-        if (cooldown != _printCooldown)
+        if (cooldown == _printCooldown)
             return;
 
         _printCooldown = cooldown;
@@ -237,5 +239,6 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     private void UpdateBusy(bool busy)
     {
         Sequencer.SetBusy(busy);
+        Combiner.SetBusy(busy);
     }
 }

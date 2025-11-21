@@ -122,7 +122,10 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             ent.Comp.ScanDelay,
             new ScanDoAfterEvent(GetNetEntity(mob)),
             eventTarget: ent,
-            target: mob);
+            target: mob)
+        {
+            BreakOnMove = true
+        };
         doAfterArgs.AttemptFrequency = AttemptFrequency.EveryTick;
         SetBusy(ent, _doAfter.TryStartDoAfter(doAfterArgs));
 
@@ -195,17 +198,17 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
     private void OnSetBase(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleSetBaseMessage args)
     {
-        if (ent.Comp.ScannedMob is not {} mob || !CanWorkOn(ent, mob))
-            return;
-
-        if (_genome.GetSequence(mob, args.Sequence) is not {} sequence)
+        if (ent.Comp.ScannedMob is not {} mob ||
+            !CanWorkOn(ent, mob) ||
+            _genome.GetSequence(mob, args.Sequence) is not {} sequence ||
+            args.Index > sequence.Bases.Length)
             return;
 
         // chud language can't just set a char directly
         _builder.Clear();
         _builder.Append(sequence.Bases);
         var i = (int) args.Index;
-        _builder[i] = CycleBase(_builder[i], args.Cycle);
+        _builder[i] = CycleBase(sequence.Bases[i], args.Cycle);
         sequence.Bases = _builder.ToString();
         UpdateUI(ent);
     }
@@ -240,7 +243,10 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             ent.Comp.SequenceDelay,
             new SequenceDoAfterEvent(GetNetEntity(mob), args.Index),
             eventTarget: ent,
-            target: mob);
+            target: mob)
+        {
+            BreakOnMove = true
+        };
         doAfterArgs.AttemptFrequency = AttemptFrequency.EveryTick;
         SetBusy(ent, _doAfter.TryStartDoAfter(doAfterArgs));
         Speak(ent, "sequencing");
@@ -292,8 +298,6 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         if (now < ent.Comp.NextWrite)
             return;
 
-        ent.Comp.NextWrite = now + ent.Comp.WriteDelay;
-
         if (ent.Comp.ScannedMob is not {} mob || _genome.GetSequence(mob, args.Index) is not {} sequence)
             return;
 
@@ -303,6 +307,9 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
         if (_disk.GetDisk(ent.Owner) is not {} disk || disk.Comp.Mutation == mutation)
             return;
+
+        ent.Comp.NextWrite = now + ent.Comp.WriteDelay;
+        DirtyField(ent, ent.Comp, nameof(GeneticsConsoleComponent.NextWrite));
 
         _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{mutation} from {ToPrettyString(mob)} was written to {ToPrettyString(disk)} by {ToPrettyString(args.Actor)} using console {ToPrettyString(ent)}");
         _audio.PlayPvs(ent.Comp.WriteSound, ent);
@@ -325,7 +332,10 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             ent.Comp.SequenceDelay,
             new CombineDoAfterEvent(GetNetEntity(mob), args.Index),
             eventTarget: ent,
-            target: mob);
+            target: mob)
+        {
+            BreakOnMove = true
+        };
         doAfterArgs.AttemptFrequency = AttemptFrequency.EveryTick;
         SetBusy(ent, _doAfter.TryStartDoAfter(doAfterArgs));
         Speak(ent, "combining");

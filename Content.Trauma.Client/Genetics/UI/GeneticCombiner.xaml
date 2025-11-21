@@ -3,16 +3,19 @@
         xmlns:controls="using:Content.Client.UserInterface.Controls"
         Orientation="Vertical"
         Align="Center">
-    <controls:NanoHeading Text="{Loc 'genetics-console-sequences'}"/>
-    <BoxContainer Orientation="Horizontal">
-	    <genetics:SequenceButtons Name="SequenceButtons"/>
-	    <genetics:SequenceInfo Name="Info">
-		    <Button Name="CombineButton" Text="{Loc 'genetics-console-combine-button'}" Disabled="True"/>
-	    </genetics:SequenceInfo>
-        <BoxContainer Name="NoSequence" Align="Center" HorizontalExpand="True">
-            <Label Text="{Loc 'genetics-console-sequencer-no-sequence-selected'}"/>
+    <genetics:GeneticScanner Name="Scanner"/>
+    <BoxContainer Name="MobContainer" Orientation="Vertical" Visible="False">
+        <controls:NanoHeading Text="{Loc 'genetics-console-sequences'}"/>
+        <BoxContainer Orientation="Horizontal">
+            <genetics:SequenceButtons Name="SequenceButtons"/>
+            <genetics:SequenceInfo Name="Info">
+                <Button Name="CombineButton" Text="{Loc 'genetics-console-combine-button'}" Disabled="True" MaxWidth="120"/>
+            </genetics:SequenceInfo>
+            <BoxContainer Name="NoSequence" Align="Center" HorizontalExpand="True">
+                <Label Text="{Loc 'genetics-console-sequencer-no-sequence-selected'}"/>
+            </BoxContainer>
         </BoxContainer>
+        <Label Name="DiskMutation" Text="{Loc 'genetics-console-disk-empty'}" Align="Center"/>
+        <Label Name="DiskRecipes" Visible="False" Align="Center"/>
     </BoxContainer>
-    <Label Name="DiskMutation" Text="{Loc 'genetics-console-disk-empty'}" Align="Center"/>
-    <Label Name="DiskRecipes" Visible="False" Align="Center"/>
 </BoxContainer>

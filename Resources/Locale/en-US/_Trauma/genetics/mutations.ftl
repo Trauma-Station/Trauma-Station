@@ -199,3 +199,5 @@ MutationWebbingProduction-mutated = Your skin feels webby.
 MutationLaserEyes-mutated = You feel pressure building up behind your eyes.
 
 MutationUnstableDna-mutated = You feel strange.
+
+MutationMouse-mutated = You hunger for cheese...
