@@ -1,7 +1,9 @@
 <BoxContainer xmlns="https://spacestation14.io"
         xmlns:genetics="clr-namespace:Content.Trauma.Client.Genetics.UI"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
         Orientation="Vertical"
         Align="Center">
+    <controls:NanoHeading Text="{Loc 'genetics-console-sequences'}"/>
     <BoxContainer Orientation="Horizontal">
 	    <genetics:SequenceButtons Name="SequenceButtons"/>
 	    <genetics:SequenceInfo Name="Info">
@@ -11,6 +13,6 @@
             <Label Text="{Loc 'genetics-console-sequencer-no-sequence-selected'}"/>
         </BoxContainer>
     </BoxContainer>
-    <Label Name="DiskMutation" Text="{Loc 'genetics-console-disk-empty'}"/>
-    <Label Name="DiskRecipes" Visible="False"/>
+    <Label Name="DiskMutation" Text="{Loc 'genetics-console-disk-empty'}" Align="Center"/>
+    <Label Name="DiskRecipes" Visible="False" Align="Center"/>
 </BoxContainer>

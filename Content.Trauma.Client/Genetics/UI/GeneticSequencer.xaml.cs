@@ -141,6 +141,7 @@ public sealed partial class GeneticSequencer : Control
 
         SequenceButtons.UpdateSequences();
         UpdateSequence();
+        UpdateWriteButton();
     }
 
     public void UpdateDisk(Entity<GeneticsDiskComponent>? disk)
@@ -157,8 +158,9 @@ public sealed partial class GeneticSequencer : Control
 
     private void UpdateWriteButton()
     {
-        WriteButton.Disabled = _disk == null ||
-            SequenceButtons.Sequence?.Mutation == null ||
+        WriteButton.Disabled = _disk is not {} disk ||
+            SequenceButtons.Sequence?.Mutation is not {} mutation ||
+            disk.Comp.Mutation == mutation ||
             _writeCooldown;
     }
 }

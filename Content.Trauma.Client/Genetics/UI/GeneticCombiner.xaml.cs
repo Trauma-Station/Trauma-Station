@@ -43,6 +43,7 @@ public sealed partial class GeneticCombiner : BoxContainer
     public void SetState(List<SequenceState> states)
     {
         SequenceButtons.SetStates(states);
+        SequenceButtons.UpdateSequences();
     }
 
     public void SetBusy(bool busy)

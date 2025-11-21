@@ -378,7 +378,7 @@ public sealed partial class MutationSystem : EntitySystem
 
         ent.Comp.Mutations.Remove(id);
         Dirty(ent);
-        QueueDel(mutation);
+        PredictedQueueDel(mutation);
         return true;
     }
 
@@ -409,7 +409,7 @@ public sealed partial class MutationSystem : EntitySystem
         foreach (var mutation in ent.Comp.Mutations.Values)
         {
             MutationRemoved(ent, mutation, automatic);
-            QueueDel(mutation);
+            PredictedQueueDel(mutation);
         }
         ent.Comp.Mutations.Clear();
 
@@ -541,7 +541,7 @@ public sealed partial class MutationSystem : EntitySystem
 
         foreach (var id in _removing)
         {
-            QueueDel(ent.Comp.Mutations[id]);
+            PredictedQueueDel(ent.Comp.Mutations[id]);
             ent.Comp.Mutations.Remove(id);
         }
 

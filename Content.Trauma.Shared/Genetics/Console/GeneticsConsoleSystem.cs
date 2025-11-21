@@ -84,24 +84,28 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     {
         ent.Comp.Scanner = args.Scanner;
         DirtyField(ent, nameof(GeneticsConsoleComponent.Scanner));
+        UpdateUI(ent);
     }
 
     private void OnScannerDisconnected(Entity<GeneticsConsoleComponent> ent, ref ScannerDisconnectedEvent args)
     {
         ent.Comp.Scanner = null;
         DirtyField(ent, nameof(GeneticsConsoleComponent.Scanner));
+        UpdateUI(ent);
     }
 
     private void OnScannerInserted(Entity<GeneticsConsoleComponent> ent, ref ScannerInsertedEvent args)
     {
         ent.Comp.ScannedMob = args.Target;
         DirtyField(ent, nameof(GeneticsConsoleComponent.ScannedMob));
+        UpdateUI(ent);
     }
 
     private void OnScannerEjected(Entity<GeneticsConsoleComponent> ent, ref ScannerEjectedEvent args)
     {
         ent.Comp.ScannedMob = null;
         DirtyField(ent, nameof(GeneticsConsoleComponent.ScannedMob));
+        UpdateUI(ent);
     }
 
     private void OnScan(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleScanMessage args)

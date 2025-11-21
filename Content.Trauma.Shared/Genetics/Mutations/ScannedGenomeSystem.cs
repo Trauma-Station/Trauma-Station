@@ -45,7 +45,7 @@ public sealed class ScannedGenomeSystem : EntitySystem
     public bool IsScanned(EntityUid mob) => _query.HasComp(mob);
 
     /// <summary>
-    /// Scans a mob's genome, adding sequences for every dormant gene it has.
+    /// Scans a mob's genome, adding sequences for every dormant and active mutation it has.
     /// </summary>
     public void ScanGenome(EntityUid mob)
     {

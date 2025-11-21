@@ -2,17 +2,20 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Trauma.Shared.Genetics.Console;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Genetics.Tools;
 
 public sealed class MutatorSystem : EntitySystem
 {
     [Dependency] private readonly GeneticsConsoleSystem _console = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MutationSystem _mutation = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -24,6 +27,7 @@ public sealed class MutatorSystem : EntitySystem
 
         SubscribeLocalEvent<MutatorComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<MutatorComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<MutatorComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<MutatorComponent, MutatorDoAfterEvent>(OnDoAfter);
     }
 
@@ -46,8 +50,20 @@ public sealed class MutatorSystem : EntitySystem
             return;
 
         args.Handled = true;
+        StartInject(ent, target, args.User);
+    }
 
-        var user = args.User;
+    private void OnUseInHand(Entity<MutatorComponent> ent, ref UseInHandEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+        StartInject(ent, args.User, args.User);
+    }
+
+    public void StartInject(Entity<MutatorComponent> ent, EntityUid target, EntityUid user)
+    {
         if (ent.Comp.Mutations.Count == 0)
         {
             // TODO: general mutator recycling??
@@ -55,7 +71,7 @@ public sealed class MutatorSystem : EntitySystem
             {
                 SetChromosome(ent, false);
                 _popup.PopupClient(Loc.GetString("mutator-added-chromosome"), user, user);
-                QueueDel(ent);
+                PredictedQueueDel(ent);
                 return;
             }
 
@@ -91,7 +107,7 @@ public sealed class MutatorSystem : EntitySystem
 
     private void OnDoAfter(Entity<MutatorComponent> ent, ref MutatorDoAfterEvent args)
     {
-        if (args.Cancelled || args.Args.Target is not {} target)
+        if (!_timing.IsFirstTimePredicted || args.Cancelled || args.Args.Target is not {} target)
             return;
 
         // prevent TOCTOU

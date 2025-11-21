@@ -40,8 +40,8 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     private int? _damage;
     private int _instability;
     private int _scrambleCooldown;
-    private bool _writeCooldown;
-    private bool _printCooldown;
+    private bool? _writeCooldown;
+    private bool? _printCooldown;
 
     public GeneticsConsoleWindow()
     {

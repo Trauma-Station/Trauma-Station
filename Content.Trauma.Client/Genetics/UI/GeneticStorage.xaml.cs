@@ -42,6 +42,7 @@ public sealed partial class GeneticStorage : BoxContainer
                 Margin = new Thickness(4),
                 HorizontalExpand = true
             };
+            button.Disabled = true;
             button.OnPressed += _ => OnPrint?.Invoke(index);
             _buttons.Add(button);
             PrintButtons.AddChild(button);
