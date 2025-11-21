@@ -20,7 +20,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.AudioMuffle;
 
-public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
+public sealed partial class AudioMuffleSystem : EntitySystem
 {
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
@@ -31,7 +31,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     [Dependency] private readonly IClientGameStateManager _stateMan = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
 
     private static EntityQuery<GhostComponent> _ghostQuery;
     private static EntityQuery<SpectralComponent> _spectralQuery;
@@ -103,8 +102,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
         SubscribeLocalEvent<SoundBlockerComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<SoundBlockerComponent, ComponentShutdown>(OnShutdown);
-
-        _overlay.AddOverlay(new AudioMuffleOverlay());
     }
 
     // TODO: reset on round restart
