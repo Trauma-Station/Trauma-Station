@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Client.Resources;
+using Content.Trauma.Shared.AudioMuffle;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.ResourceManagement;
@@ -101,9 +102,10 @@ public sealed class AudioMuffleOverlay : Overlay
         var offset = new Vector2(0, lineHeight);
         var offset2 = new Vector2(lineHeight, 0);
 
-        var blockerSet = _system.ReverseBlockerIndicesDict.GetValueOrDefault(index, new HashSet<EntityUid>());
+        var blockerSet =
+            _system.ReverseBlockerIndicesDict.GetValueOrDefault(index, new HashSet<Entity<SoundBlockerComponent>>());
         var blockersCount = blockerSet.Count;
-        var audioSet = _system.ReverseAudioPosDict.GetValueOrDefault(index, new HashSet<EntityUid>());
+        var audioSet = _system.ReverseAudioPosDict.GetValueOrDefault(index, new HashSet<Entity<AudioComponent>>());
         var audioCount = audioSet.Count;
         var hasTileData = _system.TileDataDict.TryGetValue(index, out var data);
 
@@ -112,55 +114,56 @@ public sealed class AudioMuffleOverlay : Overlay
         handle.DrawString(_font, pos, $"Blockers amount: {blockersCount}");
         pos += offset;
         handle.DrawString(_font, pos, $"Audio count: {audioCount}");
-        if (audioCount > 0)
+
+        if (hasTileData)
         {
             pos += offset;
-            handle.DrawString(_font, pos, "Audio data:");
+            handle.DrawString(_font, pos, "Tile data:");
             pos += offset2;
-            foreach (var audio in audioSet)
+            pos += offset;
+            handle.DrawString(_font, pos, $"Indices: {data!.Indices}");
+            pos += offset;
+            handle.DrawString(_font, pos, $"Total cost: {data.TotalCost}");
+            if (data.Previous != null)
             {
                 pos += offset;
-                var hasVolume = _system.AudioVolumeDict.TryGetValue(audio, out var volume);
-                float? realVolume = _entManager.TryGetComponent(audio, out AudioComponent? audioComp)
-                    ? audioComp.Params.Volume
-                    : null;
-                var volumeStr = hasVolume ? $"{volume:0.00}" : "UNKNOWN";
-                var realVolumeStr = realVolume == null ? "UNKNOWN" : $"{realVolume.Value:0.00}";
-
-                handle.DrawString(_font, pos, $"Volume: {volumeStr}");
-                pos += offset;
-                handle.DrawString(_font, pos, $"Real volume: {realVolumeStr}");
+                handle.DrawString(_font, pos, $"Previous: {data.Previous}");
             }
 
-            pos -= offset2;
+            if (data.Next.Count <= 0)
+                return;
+
+            pos += offset;
+            handle.DrawString(_font, pos, "Next:");
+            pos += offset2;
+            foreach (var next in data.Next)
+            {
+                pos += offset;
+                handle.DrawString(_font, pos, $"Indices: {next.Indices}");
+            }
         }
 
-        if (!hasTileData)
+        pos -= offset2;
+
+        if (audioCount <= 0)
             return;
 
         pos += offset;
-        handle.DrawString(_font, pos, "Tile data:");
+        handle.DrawString(_font, pos, "Audio data:");
         pos += offset2;
-        pos += offset;
-        handle.DrawString(_font, pos, $"Indices: {data!.Indices}");
-        pos += offset;
-        handle.DrawString(_font, pos, $"Total cost: {data.TotalCost}");
-        if (data.Previous != null)
+        foreach (var audio in audioSet)
         {
             pos += offset;
-            handle.DrawString(_font, pos, $"Previous: {data.Previous}");
-        }
+            var hasVolume = _system.AudioVolumeDict.TryGetValue(audio, out var volume);
+            float? realVolume = _entManager.TryGetComponent(audio, out AudioComponent? audioComp)
+                ? audioComp.Params.Volume
+                : null;
+            var volumeStr = hasVolume ? $"{volume:0.00}" : "UNKNOWN";
+            var realVolumeStr = realVolume == null ? "UNKNOWN" : $"{realVolume.Value:0.00}";
 
-        if (data.Next.Count <= 0)
-            return;
-
-        pos += offset;
-        handle.DrawString(_font, pos, "Next:");
-        pos += offset2;
-        foreach (var next in data.Next)
-        {
+            handle.DrawString(_font, pos, $"Volume: {volumeStr}");
             pos += offset;
-            handle.DrawString(_font, pos, $"Indices: {next.Indices}");
+            handle.DrawString(_font, pos, $"Real volume: {realVolumeStr}");
         }
     }
 }

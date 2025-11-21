@@ -1,6 +1,3 @@
 namespace Content.Trauma.Shared.AudioMuffle;
 
-public abstract class SharedAudioMuffleSystem : EntitySystem
-{
-
-}
+public abstract class SharedAudioMuffleSystem : EntitySystem;

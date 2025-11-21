@@ -40,44 +40,37 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
     // Blocker entity -> List<(ray direction between player and audio, Audio entity)>
     [ViewVariables]
-    public readonly Dictionary<EntityUid, List<(Vector2, EntityUid)>> SoundBlockerDict = new();
+    public readonly Dictionary<Entity<SoundBlockerComponent>, List<(Vector2, Entity<AudioComponent>)>>
+        SoundBlockerDict = new();
 
     // Blocker entity -> tile indices
     [ViewVariables]
-    public readonly Dictionary<EntityUid, Vector2i> BlockerIndicesDict = new();
+    public readonly Dictionary<Entity<SoundBlockerComponent>, Vector2i> BlockerIndicesDict = new();
 
     // Tile indices -> blocker entities
     [ViewVariables]
-    public readonly Dictionary<Vector2i, HashSet<EntityUid>> ReverseBlockerIndicesDict = new();
+    public readonly Dictionary<Vector2i, HashSet<Entity<SoundBlockerComponent>>> ReverseBlockerIndicesDict = new();
 
     // Audio entity -> List of blocker entities
     [ViewVariables]
-    public readonly Dictionary<EntityUid, HashSet<EntityUid>> ReverseSoundBlockerDict = new();
+    public readonly Dictionary<Entity<AudioComponent>, HashSet<Entity<SoundBlockerComponent>>> ReverseSoundBlockerDict =
+        new();
 
     // Audio entity -> volume
     [ViewVariables]
-    public readonly Dictionary<EntityUid, float> AudioVolumeDict = new();
-
-    // TODO: remove this?
-    // Audio entity -> volume
-    [ViewVariables]
-    public readonly Dictionary<EntityUid, float> CachedMuffleVolumeDict = new();
+    public readonly Dictionary<Entity<AudioComponent>, float> AudioVolumeDict = new();
 
     // Audio entity -> tile indices
     [ViewVariables]
-    public readonly Dictionary<EntityUid, Vector2i> AudioPosDict = new();
+    public readonly Dictionary<Entity<AudioComponent>, Vector2i> AudioPosDict = new();
 
     // Tile indices -> list of audio entities
     [ViewVariables]
-    public readonly Dictionary<Vector2i, HashSet<EntityUid>> ReverseAudioPosDict = new();
+    public readonly Dictionary<Vector2i, HashSet<Entity<AudioComponent>>> ReverseAudioPosDict = new();
 
     // Tile indices -> data
     [ViewVariables]
     public readonly Dictionary<Vector2i, MuffleTileData> TileDataDict = new();
-
-    // TODO: remove this?
-    [ViewVariables]
-    public HashSet<EntityUid> AudioToRemove = new();
 
     [ViewVariables]
     public Entity<MapGridComponent>? PlayerGrid;
@@ -85,9 +78,10 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     [ViewVariables]
     public Vector2i? OldPlayerTile;
 
-    private float _accumulator;
+    private readonly List<Entity<AudioComponent>> _audioToRemove = new();
 
-    private const float ResetDelay = 1f;
+    private readonly List<Entity<SoundBlockerComponent>> _blockersToRemove = new();
+
     private const int AudioRange = (int) SharedAudioSystem.DefaultSoundRange;
 
     public override void Initialize()
@@ -120,7 +114,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
         PlayerGrid = null;
         OldPlayerTile = null;
-        AudioToRemove.Clear();
         ClearDicts(true);
 
         _xform.OnGlobalMoveEvent -= OnMove;
@@ -135,23 +128,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     {
         base.Update(frameTime);
 
-        ResetAllPosAudio(null);
+        ResetAllPosAudio();
         ResetAllRaycastAudio();
-
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        if (_accumulator >= ResetDelay)
-        {
-            foreach (var audio in AudioToRemove)
-            {
-                RemoveAudioMuffle(audio);
-            }
-
-            AudioToRemove.Clear();
-        }
-
-        _accumulator += frameTime;
     }
 
     private void ResetImmediate(EntityUid player, bool fullReset)
@@ -176,10 +154,10 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
     private void ResetAllBlockers(EntityUid player)
     {
-        var query = EntityQueryEnumerator<SoundBlockerComponent>();
-        while (query.MoveNext(out var uid, out var blocker))
+        var query = EntityQueryEnumerator<SoundBlockerComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var blocker, out var xform))
         {
-            ResetBlockerMuffle(player, (uid, blocker));
+            ResetBlockerMuffle(player, (uid, xform, blocker));
         }
     }
 
@@ -188,7 +166,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         if (ResolvePlayer() is not { } player)
             return;
 
-        ResetBlockerMuffle(player, ent.AsNullable());
+        ResetBlockerMuffle(player, (ent, null, ent));
     }
 
     private void OnShutdown(Entity<SoundBlockerComponent> ent, ref ComponentShutdown args)
@@ -211,7 +189,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     private void OnLocalPlayerDetached(LocalPlayerDetachedEvent ev)
     {
         ClearDicts(false);
-        AudioToRemove.Clear();
         TileDataDict.Clear();
     }
 
@@ -264,7 +241,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         }
 
         if (_blockerQuery.TryComp(uid, out var blocker))
-            ResetBlockerMuffle(player, (uid, blocker), oldPosition, newPosition);
+            ResetBlockerMuffle(player, (uid, null, blocker), oldPosition, newPosition);
 
         if (_audioQuery.TryComp(uid, out var audio))
             ReCalculateAudioMuffle(player, (uid, audio), newPosition);
@@ -296,7 +273,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             if (!TryGetEntity(deleted, out var ent))
                 continue;
 
-            AudioToRemove.Add(ent.Value);
+            RemoveAudioMuffle(ent.Value);
         }
 
         foreach (var states in args.AppliedState.EntityStates.Value)
@@ -331,7 +308,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             return;
 
         AudioVolumeDict.Clear();
-        CachedMuffleVolumeDict.Clear();
         TileDataDict.Clear();
         AudioPosDict.Clear();
         ReverseAudioPosDict.Clear();
@@ -363,10 +339,10 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         return PlayerGrid;
     }
 
-    private void RemoveBlocker(EntityUid blocker)
+    private void RemoveBlocker(Entity<SoundBlockerComponent> blocker)
     {
         if (BlockerIndicesDict.Remove(blocker, out var blockerIndices))
-            AddOrRemoveBlocker(blocker, blockerIndices, false, true);
+            AddOrRemoveBlocker(blocker.AsNullable(), blockerIndices, false, true);
 
         if (!SoundBlockerDict.Remove(blocker, out var data))
             return;
@@ -377,7 +353,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 continue;
 
             blockers.Remove(blocker);
-            // ResetAudioMuffle(audio, null);
 
             if (blockers.Count == 0)
                 ReverseSoundBlockerDict.Remove(audio);
@@ -455,14 +430,18 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         ResetAllRaycastAudio();
     }
 
-    // TODO: Add TransformComponent to Entity<T?>
-    private void ResetBlockerMuffle(EntityUid player, Entity<SoundBlockerComponent?> blocker, MapCoordinates? oldPosition = null, MapCoordinates? newPosition = null)
+    private void ResetBlockerMuffle(EntityUid player,
+        Entity<TransformComponent?, SoundBlockerComponent?> blocker,
+        MapCoordinates? oldPosition = null,
+        MapCoordinates? newPosition = null)
     {
-        if (!Resolve(blocker, ref blocker.Comp, false))
+        if (!Resolve(blocker, ref blocker.Comp1, ref blocker.Comp2, false))
             return;
 
+        Entity<SoundBlockerComponent> blockerEnt = (blocker.Owner, blocker.Comp2);
+
         var playerXform = Transform(player);
-        var blockerXform = Transform(blocker);
+        var blockerXform = blocker.Comp1;
 
         var blockerPos = newPosition;
         if (blockerPos == null || blockerPos == MapCoordinates.Nullspace)
@@ -471,13 +450,13 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             blockerPos = _xform.GetMapCoordinates(blocker.Owner, blockerXform);
         if (blockerPos == MapCoordinates.Nullspace)
         {
-            RemoveBlocker(blocker);
+            RemoveBlocker(blockerEnt);
             return;
         }
 
         var pos = _xform.GetMapCoordinates(player, playerXform);
 
-        var found = BlockerIndicesDict.TryGetValue(blocker, out var oldIndices);
+        var found = BlockerIndicesDict.TryGetValue(blockerEnt, out var oldIndices);
 
         if (pos == MapCoordinates.Nullspace)
         {
@@ -490,8 +469,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
         if (pos.MapId != blockerPos.Value.MapId)
         {
-            SoundBlockerDict.Remove(blocker);
-            if (BlockerIndicesDict.Remove(blocker, out var indices))
+            SoundBlockerDict.Remove(blockerEnt);
+            if (BlockerIndicesDict.Remove(blockerEnt, out var indices))
             {
                 found = true;
                 oldIndices = indices;
@@ -500,7 +479,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             if (!found)
                 return;
 
-            AddOrRemoveBlocker(blocker, oldIndices, false, true);
+            AddOrRemoveBlocker(blockerEnt.AsNullable(), oldIndices, false, true);
             return;
         }
 
@@ -508,12 +487,12 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             ResetBlockerOnGrid(grid, blocker, blockerPos.Value, found ? oldIndices : null);
         else
         {
-            BlockerIndicesDict.Remove(blocker);
-            AddOrRemoveBlocker(blocker, oldIndices, false, true);
+            BlockerIndicesDict.Remove(blockerEnt);
+            AddOrRemoveBlocker(blockerEnt.AsNullable(), oldIndices, false, true);
         }
 
-        if (!SoundBlockerDict.TryGetValue(blocker, out var data))
-            data = new List<(Vector2, EntityUid)>();
+        if (!SoundBlockerDict.TryGetValue(blockerEnt, out var data))
+            data = new List<(Vector2, Entity<AudioComponent>)>();
 
         var aabb = CalculateAABB((blocker, null, blockerXform));
         if (aabb == null)
@@ -521,7 +500,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
         if (aabb.Value.Box.IsEmpty())
         {
-            SoundBlockerDict.Remove(blocker);
+            SoundBlockerDict.Remove(blockerEnt);
             return;
         }
 
@@ -530,8 +509,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
         if (aabb.Value.Contains(pos.Position))
         {
-            GatherAudio(blocker, pos.Position, data, null);
-            SoundBlockerDict[blocker] = data;
+            GatherAudio(blockerEnt, pos.Position, data, null);
+            SoundBlockerDict[blockerEnt] = data;
             return;
         }
 
@@ -548,12 +527,12 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
         if (Math.Abs(minAngleTheta - maxAngleTheta) < 0.001f)
         {
-            SoundBlockerDict.Remove(blocker);
+            SoundBlockerDict.Remove(blockerEnt);
             return;
         }
 
-        GatherAudio(blocker, pos.Position, data, new Vector2(minAngleTheta, maxAngleTheta));
-        SoundBlockerDict[blocker] = data;
+        GatherAudio(blockerEnt, pos.Position, data, new Vector2(minAngleTheta, maxAngleTheta));
+        SoundBlockerDict[blockerEnt] = data;
     }
 
     private void ResetBlockerOnGrid(Entity<MapGridComponent> grid, EntityUid blocker, MapCoordinates blockerPos, Vector2i? oldIndices)
@@ -593,9 +572,12 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             : new Box2Rotated(aabb.Value, _xform.GetWorldRotation(blocker.Comp2), aabb.Value.Center);
     }
 
-    private void GatherAudio(EntityUid blocker, Vector2 pos, List<(Vector2, EntityUid)> data, Vector2? minMaxAngle)
+    private void GatherAudio(Entity<SoundBlockerComponent> blocker,
+        Vector2 pos,
+        List<(Vector2, Entity<AudioComponent>)> data,
+        Vector2? minMaxAngle)
     {
-        var toRemove = new List<EntityUid>();
+        _audioToRemove.Clear();
         foreach (var (key, value) in ReverseSoundBlockerDict)
         {
             if (AudioPosDict.ContainsKey(key))
@@ -603,7 +585,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
             if (!Exists(key))
             {
-                toRemove.Add(key);
+                _audioToRemove.Add(key);
                 continue;
             }
 
@@ -624,14 +606,14 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 data.Add((dir, key));
 
             value.Add(blocker);
-
-            // ResetAudioMuffle(key, null);
         }
 
-        foreach (var remove in toRemove)
+        foreach (var remove in _audioToRemove)
         {
             ReverseSoundBlockerDict.Remove(remove);
         }
+
+        _audioToRemove.Clear();
     }
 
     private void ReCalculateAudioMuffle(EntityUid player,
@@ -642,6 +624,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     {
         if (!Resolve(audio, ref audio.Comp, false))
             return;
+
+        Entity<AudioComponent> audioEnt = (audio, audio.Comp);
 
         var playerPos = _xform.GetMapCoordinates(player);
 
@@ -654,7 +638,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         if (TryFindCommonPlayerGrid(playerPos, audioPos) is { } grid)
         {
             var audioIndices = _map.TileIndicesFor(grid, audioPos);
-            if (AudioPosDict.TryGetValue(audio, out var oldIndices))
+            if (AudioPosDict.TryGetValue(audioEnt, out var oldIndices))
             {
                 if (audioIndices == oldIndices)
                 {
@@ -664,17 +648,17 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
                 if (ReverseAudioPosDict.TryGetValue(oldIndices, out var oldSet))
                 {
-                    oldSet.Remove(audio);
+                    oldSet.Remove(audioEnt);
                     if (oldSet.Count == 0)
                         ReverseAudioPosDict.Remove(oldIndices);
                 }
             }
 
-            AudioPosDict[audio] = audioIndices;
+            AudioPosDict[audioEnt] = audioIndices;
             if (ReverseAudioPosDict.TryGetValue(audioIndices, out var audioSet))
-                audioSet.Add(audio);
+                audioSet.Add(audioEnt);
             else
-                ReverseAudioPosDict[audioIndices] = new HashSet<EntityUid> {audio};
+                ReverseAudioPosDict[audioIndices] = new HashSet<Entity<AudioComponent>> {audioEnt};
 
             ResetAudioMuffle(audio, volume, reset, true);
             return;
@@ -686,10 +670,10 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             return;
         }
 
-        if (AudioPosDict.Remove(audio, out var audioCoords) &&
+        if (AudioPosDict.Remove(audioEnt, out var audioCoords) &&
             ReverseAudioPosDict.TryGetValue(audioCoords, out var set))
         {
-            set.Remove(audio);
+            set.Remove(audioEnt);
             if (set.Count == 0)
                 ReverseAudioPosDict.Remove(audioCoords);
         }
@@ -703,7 +687,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         var ray = new CollisionRay(playerPos.Position, norm, (int) CollisionGroup.Impassable);
         var result = _physics.IntersectRay(playerPos.MapId, ray, range, player, false);
 
-        var hashSet = new HashSet<EntityUid>();
+        var hashSet = new HashSet<Entity<SoundBlockerComponent>>();
         foreach (var hitResult in result)
         {
             var potentialBlocker = hitResult.HitEntity;
@@ -711,29 +695,31 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             if (potentialBlocker == audio.Owner)
                 continue;
 
-            if (!_blockerQuery.HasComp(potentialBlocker))
+            if (!_blockerQuery.TryComp(potentialBlocker, out var blockerComp))
                 continue;
 
             if (_xform.GetWorldPosition(potentialBlocker).EqualsApprox(audioPos.Position))
                 continue;
 
+            Entity<SoundBlockerComponent> blockerEnt = (potentialBlocker, blockerComp);
+
             var coords = _xform.GetMapCoordinates(potentialBlocker);
             if (TryFindCommonPlayerGrid(playerPos, coords) is { } blockerGrid)
             {
                 var indices = _map.TileIndicesFor(blockerGrid, coords);
-                if (!BlockerIndicesDict.TryGetValue(potentialBlocker, out var blockerIndices) ||
+                if (!BlockerIndicesDict.TryGetValue(blockerEnt, out var blockerIndices) ||
                     blockerIndices != indices)
                 {
-                    BlockerIndicesDict[potentialBlocker] = indices;
+                    BlockerIndicesDict[blockerEnt] = indices;
                     AddOrRemoveBlocker(potentialBlocker, indices, true, true);
                 }
             }
 
-            hashSet.Add(potentialBlocker);
-            var blockerList = SoundBlockerDict.GetOrNew(potentialBlocker);
+            hashSet.Add(blockerEnt);
+            var blockerList = SoundBlockerDict.GetOrNew(blockerEnt);
             foreach (var tuple in blockerList)
             {
-                if (tuple.Item2 != audio.Owner)
+                if (tuple.Item2.Owner != audio.Owner)
                     continue;
 
                 blockerList.Remove(tuple);
@@ -742,9 +728,9 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         }
 
         if (hashSet.Count == 0)
-            ReverseSoundBlockerDict.Remove(audio);
+            ReverseSoundBlockerDict.Remove(audioEnt);
         else
-            ReverseSoundBlockerDict[audio] = hashSet;
+            ReverseSoundBlockerDict[audioEnt] = hashSet;
 
         ResetAudioMuffle(audio, volume, reset, true);
     }
@@ -758,22 +744,26 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         return null;
     }
 
-    private void RemoveAudioMuffle(EntityUid audio, bool removeFromDict = true)
+    private void RemoveAudioMuffle(Entity<AudioComponent?> audio, bool removeFromDict = true)
     {
+        if (!Resolve(audio, ref audio.Comp, false))
+            return;
+
+        Entity<AudioComponent> audioEnt = (audio, audio.Comp);
+
         if (removeFromDict)
         {
-            AudioVolumeDict.Remove(audio);
-            CachedMuffleVolumeDict.Remove(audio);
-            if (AudioPosDict.Remove(audio, out var pos) &&
+            AudioVolumeDict.Remove(audioEnt);
+            if (AudioPosDict.Remove(audioEnt, out var pos) &&
                 ReverseAudioPosDict.TryGetValue(pos, out var audioSet))
             {
-                audioSet.Remove(audio);
+                audioSet.Remove(audioEnt);
                 if (audioSet.Count == 0)
                     ReverseAudioPosDict.Remove(pos);
             }
         }
 
-        if (!ReverseSoundBlockerDict.Remove(audio, out var blockers))
+        if (!ReverseSoundBlockerDict.Remove(audioEnt, out var blockers))
             return;
 
         foreach (var blocker in blockers)
@@ -783,7 +773,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
             foreach (var audioData in data)
             {
-                if (audioData.Item2 != audio)
+                if (audioData.Item2 != audioEnt)
                     continue;
 
                 data.Remove(audioData);
@@ -802,6 +792,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         if (!Exists(audio) || !Resolve(audio, ref audio.Comp, false))
             return;
 
+        Entity<AudioComponent> audioEnt = (audio, audio.Comp);
+
         if (audio.Comp.Global)
             return;
 
@@ -815,13 +807,13 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 return;
         }
 
-        if (volume != null && !Single.IsInfinity(volume.Value))
-            AudioVolumeDict[audio] = volume.Value;
-        else if (!AudioVolumeDict.ContainsKey(audio))
+        if (volume != null && !float.IsInfinity(volume.Value))
+            AudioVolumeDict[audioEnt] = volume.Value;
+        else if (!AudioVolumeDict.ContainsKey(audioEnt))
         {
-            if (Single.IsInfinity(audio.Comp.Params.Volume))
+            if (float.IsInfinity(audio.Comp.Params.Volume))
                 return;
-            AudioVolumeDict.Add(audio, audio.Comp.Params.Volume);
+            AudioVolumeDict.Add(audioEnt, audio.Comp.Params.Volume);
         }
 
         if (!reset || audio.Comp.State == AudioState.Stopped || !audio.Comp.Loaded ||
@@ -832,7 +824,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         var xform = Transform(player);
         var playerPos = _xform.GetMapCoordinates(player, xform);
 
-        if (ResolvePlayerGrid(playerPos) is { } grid && AudioPosDict.TryGetValue(audio, out var pos) &&
+        if (ResolvePlayerGrid(playerPos) is { } grid && AudioPosDict.TryGetValue(audioEnt, out var pos) &&
             TileDataDict.TryGetValue(pos, out var tileData))
         {
             var playerIndices = _map.TileIndicesFor(grid, playerPos);
@@ -841,61 +833,57 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 playerDist += (xform.Coordinates.Position - playerTile.Previous.Value).Length() - 1f;
             muffleLevel = tileData.TotalCost + (playerDist - AudioRange) / 4f - GetTotalTileCost(pos);
         }
-        else if (ReverseSoundBlockerDict.TryGetValue(audio, out var data))
+        else if (ReverseSoundBlockerDict.TryGetValue(audioEnt, out var data))
         {
-            var toRemove = new List<EntityUid>();
+            _blockersToRemove.Clear();
             foreach (var blocker in data)
             {
-                if (!TryGetBlockerCost(blocker, out var cost))
+                if (!TryGetBlockerCost(blocker.AsNullable(), out var cost))
                 {
-                    toRemove.Add(blocker);
+                    _blockersToRemove.Add(blocker);
                     continue;
                 }
 
                 muffleLevel += cost;
             }
 
-            foreach (var remove in toRemove)
+            foreach (var remove in _blockersToRemove)
             {
                 SoundBlockerDict.Remove(remove);
                 BlockerIndicesDict.Remove(remove);
                 data.Remove(remove);
             }
 
+            _blockersToRemove.Clear();
+
             if (data.Count == 0)
-                ReverseSoundBlockerDict.Remove(audio);
-        }
-        else if (CachedMuffleVolumeDict.TryGetValue(audio, out var cached))
-        {
-            muffleLevel = 0f;
-            volume = cached;
+                ReverseSoundBlockerDict.Remove(audioEnt);
         }
         else if ((_xform.GetWorldPosition(audio) - playerPos.Position).Length() <= AudioRange)
             muffleLevel = 0f;
         else
             muffleLevel = 16f;
 
-        SetVolume(audio, volume ?? AudioVolumeDict[audio], muffleLevel);
+        SetVolume(audio, volume ?? AudioVolumeDict[audioEnt], muffleLevel);
     }
 
     private void ResetAllRaycastAudio()
     {
-        var toRemove = new List<EntityUid>();
+        _audioToRemove.Clear();
         foreach (var audio in ReverseSoundBlockerDict.Keys)
         {
             if (!Exists(audio))
             {
-                toRemove.Add(audio);
+                _audioToRemove.Add(audio);
                 continue;
             }
 
-            ResetAudioMuffle(audio, null);
+            ResetAudioMuffle(audio.AsNullable(), null);
         }
 
-        foreach (var remove in toRemove)
+        foreach (var remove in _audioToRemove)
         {
             AudioVolumeDict.Remove(remove);
-            CachedMuffleVolumeDict.Remove(remove);
             if (!ReverseSoundBlockerDict.Remove(remove, out var blockers))
                 continue;
 
@@ -914,27 +902,28 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 }
             }
         }
+
+        _audioToRemove.Clear();
     }
 
     private void ResetAllPosAudio(HashSet<Vector2i>? toUpdate = null)
     {
-        var toRemove = new List<EntityUid>();
+        _audioToRemove.Clear();
         foreach (var (audio, pos) in AudioPosDict)
         {
             if (!Exists(audio))
             {
-                toRemove.Add(audio);
+                _audioToRemove.Add(audio);
                 continue;
             }
 
             if (toUpdate == null || toUpdate.Contains(pos))
-                ResetAudioMuffle(audio, null);
+                ResetAudioMuffle(audio.AsNullable(), null);
         }
 
-        foreach (var remove in toRemove)
+        foreach (var remove in _audioToRemove)
         {
             AudioVolumeDict.Remove(remove);
-            CachedMuffleVolumeDict.Remove(remove);
             if (!AudioPosDict.Remove(remove, out var pos) ||
                 !ReverseAudioPosDict.TryGetValue(pos, out var audioSet))
                 continue;
@@ -943,6 +932,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             if (audioSet.Count == 0)
                 ReverseAudioPosDict.Remove(pos);
         }
+
+        _audioToRemove.Clear();
     }
 
     private void ResetAudioOnPos(Vector2i pos)
@@ -950,25 +941,26 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         if (!ReverseAudioPosDict.TryGetValue(pos, out var audioSet))
             return;
 
-        var toRemove = new List<EntityUid>();
+        _audioToRemove.Clear();
         foreach (var audio in audioSet)
         {
             if (!Exists(audio))
             {
-                toRemove.Add(audio);
+                _audioToRemove.Add(audio);
                 continue;
             }
 
-            ResetAudioMuffle(audio, null);
+            ResetAudioMuffle(audio.AsNullable(), null);
         }
 
-        foreach (var remove in toRemove)
+        foreach (var remove in _audioToRemove)
         {
             AudioVolumeDict.Remove(remove);
-            CachedMuffleVolumeDict.Remove(remove);
             AudioPosDict.Remove(remove);
             audioSet.Remove(remove);
         }
+
+        _audioToRemove.Clear();
 
         if (audioSet.Count == 0)
             ReverseAudioPosDict.Remove(pos);
@@ -980,24 +972,25 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             return 0f;
 
         var total = 0f;
-        var toRemove = new List<EntityUid>();
+        _blockersToRemove.Clear();
         foreach (var blocker in blockers)
         {
-            if (!TryGetBlockerCost(blocker, out var cost))
+            if (!TryGetBlockerCost(blocker.AsNullable(), out var cost))
             {
-                toRemove.Add(blocker);
+                _blockersToRemove.Add(blocker);
                 continue;
             }
 
             total += cost;
         }
 
-        foreach (var remove in toRemove)
+        foreach (var remove in _blockersToRemove)
         {
-            BlockerIndicesDict.Remove(remove);
             BlockerIndicesDict.Remove(remove);
             blockers.Remove(remove);
         }
+
+        _blockersToRemove.Clear();
 
         if (blockers.Count == 0)
             ReverseBlockerIndicesDict.Remove(tile);
@@ -1008,7 +1001,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     public bool TryGetBlockerCost(Entity<SoundBlockerComponent?> blocker, out float cost)
     {
         cost = 0f;
-        if (!Exists(blocker) || !Resolve(blocker, ref blocker.Comp, false))
+        if (!Exists(blocker) || !Resolve(blocker.AsNullable(), ref blocker.Comp, false))
             return false;
 
         cost = GetBlockerCost(blocker.Comp);
@@ -1041,12 +1034,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 volume = SharedAudioSystem.GainToVolume(gain);
                 break;
         }
-
-        if (muffleLevel > 0f)
-            CachedMuffleVolumeDict[audio] = volume;
-        else if (CachedMuffleVolumeDict.TryGetValue(audio, out var cached) &&
-            MathHelper.CloseToPercent(cached, audio.Comp.Params.Volume))
-            return;
 
         _audio.SetVolume(audio, volume, audio);
     }

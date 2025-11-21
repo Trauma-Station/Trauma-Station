@@ -99,7 +99,7 @@ public sealed partial class AudioMuffleSystem
         HashSet<Vector2i> passed = new();
         foreach (var (tile, data) in TileDataDict)
         {
-            bool isPassed = true;
+            var isPassed = true;
             for (var x = -1; x <= 1; x++)
             {
                 for (var y = -1; y <= 1; y++)
@@ -203,7 +203,7 @@ public sealed partial class AudioMuffleSystem
                         next.Previous = node.Indices;
                         node.Next.Add(next);
 
-                        UpdateTotalCostOfNextTileDatas(next, diff, false, AudioRange - count);
+                        UpdateTotalCostOfNextTileData(next, diff, false, AudioRange - count);
 
                         frontier.Add(next);
                     }
@@ -230,7 +230,6 @@ public sealed partial class AudioMuffleSystem
 
         if (updateAudio)
             ResetAllPosAudio(updated);
-        CachedMuffleVolumeDict.Clear();
     }
 
     private void RewriteAndReExpand(MuffleTileData first,
@@ -402,7 +401,7 @@ public sealed partial class AudioMuffleSystem
         if (iteration <= 1)
         {
             if (firstIteration)
-                UpdateTotalCostOfNextTileDatas(node, toUpdate, resetAudio, iteration, true);
+                UpdateTotalCostOfNextTileData(node, toUpdate, resetAudio, iteration, true);
             return true;
         }
 
@@ -431,7 +430,7 @@ public sealed partial class AudioMuffleSystem
             }
         }
 
-        UpdateTotalCostOfNextTileDatas(node, toUpdate, resetAudio, iteration, true);
+        UpdateTotalCostOfNextTileData(node, toUpdate, resetAudio, iteration, true);
 
         return result;
     }
@@ -465,7 +464,7 @@ public sealed partial class AudioMuffleSystem
     private Dictionary<MuffleTileData, float> GetExpansionNodes(MuffleTileData node)
     {
         var cost = node.TotalCost;
-        Dictionary<MuffleTileData, float> exoansionNodes = new();
+        Dictionary<MuffleTileData, float> expansionNodes = new();
         for (var x = -1; x <= 1; x++)
         {
             for (var y = -1; y <= 1; y++)
@@ -485,11 +484,11 @@ public sealed partial class AudioMuffleSystem
 
                 var score = moveCost + GetTotalTileCost(neighbor) + cost;
 
-                exoansionNodes[next] = score;
+                expansionNodes[next] = score;
             }
         }
 
-        return exoansionNodes;
+        return expansionNodes;
     }
 
     private bool TrySwapPrev(MuffleTileData data, Vector2i? newPrevTile, out Vector2i? nextPrevious)
@@ -516,7 +515,7 @@ public sealed partial class AudioMuffleSystem
         return true;
     }
 
-    private void UpdateTotalCostOfNextTileDatas(MuffleTileData data,
+    private void UpdateTotalCostOfNextTileData(MuffleTileData data,
         float delta,
         bool resetAudio,
         int iteration = AudioRange,
@@ -544,7 +543,7 @@ public sealed partial class AudioMuffleSystem
         var nextDelta = reCalculate ? newCost + 1f : delta;
         foreach (var next in data.Next)
         {
-            UpdateTotalCostOfNextTileDatas(next, nextDelta, resetAudio, iteration - 1, reCalculate, false);
+            UpdateTotalCostOfNextTileData(next, nextDelta, resetAudio, iteration - 1, reCalculate, false);
         }
     }
 
@@ -557,14 +556,19 @@ public sealed partial class AudioMuffleSystem
         if (!TryGetBlockerCost(blocker, out var cost))
             return;
 
+        if (!Resolve(blocker, ref blocker.Comp, false))
+            return;
+
+        Entity<SoundBlockerComponent> blockerEnt = (blocker, blocker.Comp);
+
         if (add)
         {
-            BlockerIndicesDict[blocker] = indices;
-            ReverseBlockerIndicesDict.GetOrNew(indices).Add(blocker);
+            BlockerIndicesDict[blockerEnt] = indices;
+            ReverseBlockerIndicesDict.GetOrNew(indices).Add(blockerEnt);
         }
         else if (ReverseBlockerIndicesDict.TryGetValue(indices, out var blockers))
         {
-            blockers.Remove(blocker);
+            blockers.Remove(blockerEnt);
             if (blockers.Count == 0)
                 ReverseBlockerIndicesDict.Remove(indices);
         }
