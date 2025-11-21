@@ -210,6 +210,17 @@ public enum GeneticsConsoleUiKey : byte
 }
 
 /// <summary>
+/// Ways which a base can be cycled in the gene puzzle.
+/// </summary>
+[Serializable, NetSerializable]
+public enum GeneticsCycle : byte
+{
+    Reset,
+    Next,
+    Last
+}
+
+/// <summary>
 /// Message to start the scanning process for an unscanned mob in the scanner.
 /// </summary>
 [Serializable, NetSerializable]
@@ -225,11 +236,11 @@ public sealed partial class GeneticsConsoleScrambleMessage : BoundUserInterfaceM
 /// Message to set an unknown base to a certain char.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class GeneticsConsoleSetBaseMessage(uint sequence, uint index, char b) : BoundUserInterfaceMessage
+public sealed partial class GeneticsConsoleSetBaseMessage(uint sequence, uint index, GeneticsCycle cycle) : BoundUserInterfaceMessage
 {
     public readonly uint Sequence = sequence;
     public readonly uint Index = index;
-    public readonly char Base = b;
+    public readonly GeneticsCycle Cycle;
 }
 
 /// <summary>

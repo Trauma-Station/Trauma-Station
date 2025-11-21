@@ -201,22 +201,11 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         if (_genome.GetSequence(mob, args.Sequence) is not {} sequence)
             return;
 
-        var valid = args.Base switch
-        {
-            'A' => true,
-            'C' => true,
-            'G' => true,
-            'T' => true,
-            'X' => true,
-            _ => false
-        };
-        if (!valid)
-            return;
-
         // chud language can't just set a char directly
         _builder.Clear();
         _builder.Append(sequence.Bases);
-        _builder[(int) args.Index] = args.Base;
+        var i = (int) args.Index;
+        _builder[i] = CycleBase(_builder[i], args.Cycle);
         sequence.Bases = _builder.ToString();
         UpdateUI(ent);
     }
@@ -458,6 +447,23 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     #region Public API
 
     public Chromosome RandomChromosome() => (Chromosome) _random.Next(0, 4);
+
+    public static char CycleBase(char b, GeneticsCycle cycle)
+        => (b, cycle) switch
+        {
+            (_, GeneticsCycle.Reset) => 'X',
+            ('A', GeneticsCycle.Next) => 'C',
+            ('C', GeneticsCycle.Next) => 'G',
+            ('G', GeneticsCycle.Next) => 'T',
+            ('T', GeneticsCycle.Next) => 'X',
+            ('X', GeneticsCycle.Next) => 'A',
+            ('A', GeneticsCycle.Last) => 'X',
+            ('C', GeneticsCycle.Last) => 'A',
+            ('G', GeneticsCycle.Last) => 'C',
+            ('T', GeneticsCycle.Last) => 'G',
+            ('X', GeneticsCycle.Last) => 'T',
+            _ => b // how
+        };
 
     public bool CanWorkOn(Entity<GeneticsConsoleComponent> ent, EntityUid mob)
         => !ent.Comp.Busy && CanKeepWorkingOn(ent, mob);
