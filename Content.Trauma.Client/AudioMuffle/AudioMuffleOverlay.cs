@@ -127,7 +127,7 @@ public sealed class AudioMuffleOverlay : Overlay
             if (data.Previous != null)
             {
                 pos += offset;
-                handle.DrawString(_font, pos, $"Previous: {data.Previous}");
+                handle.DrawString(_font, pos, $"Previous: {data.Previous.Indices}");
             }
 
             if (data.Next.Count <= 0)

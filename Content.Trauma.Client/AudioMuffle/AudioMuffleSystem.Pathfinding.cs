@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Linq;
 using Content.Trauma.Shared.AudioMuffle;
 using Robust.Shared.Utility;
@@ -16,6 +17,12 @@ public sealed partial class AudioMuffleSystem
         return Math.Abs(distance.X) + Math.Abs(distance.Y);
     }
 
+    public static float ManhattanDistance(Vector2 start, Vector2 end)
+    {
+        var distance = end - start;
+        return Math.Abs(distance.X) + Math.Abs(distance.Y);
+    }
+
     private void RebuildAndExpand(Vector2i newPos, Vector2i oldPos)
     {
         if (newPos == oldPos)
@@ -26,7 +33,7 @@ public sealed partial class AudioMuffleSystem
         var signY = MathF.Sign(difference.Y);
         var distance = difference.X * signX + difference.Y * signY;
 
-        if (distance >= AudioRange)
+        if (distance >= PathfindingRange)
         {
             Expand(newPos);
             return;
@@ -41,7 +48,7 @@ public sealed partial class AudioMuffleSystem
 
         var cur = newData;
         MuffleTileData? newPrev = null;
-        for (var i = 0; i < AudioRange; i++)
+        for (var i = 0; i < PathfindingRange; i++)
         {
             cur.TotalCost = i;
 
@@ -94,10 +101,10 @@ public sealed partial class AudioMuffleSystem
 
                     var neighbor = tile + new Vector2i(x, y);
 
-                    if (TileDataDict.TryGetValue(neighbor, out var neighborData))
+                    if (neighbor == data.Previous?.Indices)
                         continue;
 
-                    if (neighborData == data.Previous)
+                    if (TileDataDict.ContainsKey(neighbor))
                         continue;
 
                     frontier.Add(data);
@@ -111,7 +118,7 @@ public sealed partial class AudioMuffleSystem
 
         var vecX = new Vector2i(Math.Sign(signX - 1), Math.Sign(1 - signX)) * signX;
         var vecY = new Vector2i(Math.Sign(signY - 1), Math.Sign(1 - signY)) * signY;
-        Expand(frontier, newPos, passed, vecX, vecY, false, AudioRange * distance);
+        Expand(frontier, newPos, passed, vecX, vecY, false, PathfindingRange * distance);
     }
 
     private void Expand(Vector2i start, bool updateAudio = false)
@@ -138,7 +145,7 @@ public sealed partial class AudioMuffleSystem
         Vector2i minMaxXDir,
         Vector2i minMaxYDir,
         bool updateAudio = false,
-        int amount = AudioRange)
+        int amount = PathfindingRange)
     {
         if (PlayerGrid is not { } grid || grid.Comp.Deleted)
             return;
@@ -174,10 +181,10 @@ public sealed partial class AudioMuffleSystem
                     if (passed.Contains(neighbor))
                         continue;
 
-                    if (TileDataDict.TryGetValue(neighbor, out var neighborData))
+                    if (neighbor == node.Previous?.Indices)
                         continue;
 
-                    if (neighborData == node.Previous)
+                    if (TileDataDict.ContainsKey(neighbor))
                         continue;
 
                     if (ManhattanDistance(origin, neighbor) > amount)
@@ -196,7 +203,7 @@ public sealed partial class AudioMuffleSystem
                         next.Previous = node;
                         node.Next.Add(next);
 
-                        UpdateTotalCostOfNextTileData(next, diff, false, AudioRange - count);
+                        UpdateTotalCostOfNextTileData(next, diff, false, PathfindingRange - count);
 
                         frontier.Add(next);
                     }
@@ -228,7 +235,7 @@ public sealed partial class AudioMuffleSystem
     private void RewriteAndReExpand(MuffleTileData first,
         HashSet<Vector2i> invalidated,
         bool updateAudio = false,
-        int amount = AudioRange)
+        int amount = PathfindingRange)
     {
         if (first.Previous == null)
         {
@@ -269,10 +276,10 @@ public sealed partial class AudioMuffleSystem
 
                     var neighbor = node.Indices + new Vector2i(x, y);
 
-                    if (TileDataDict.TryGetValue(neighbor, out var neighborData))
+                    if (neighbor == node.Previous?.Indices)
                         continue;
 
-                    if (neighborData == node.Previous)
+                    if (!invalidated.Contains(neighbor))
                         continue;
 
                     if (ManhattanDistance(node.Indices, neighbor) > amount)
@@ -343,7 +350,7 @@ public sealed partial class AudioMuffleSystem
         HashSet<MuffleTileData> nodesToReExpand,
         out HashSet<MuffleTileData> nextNodesToExpand,
         bool firstIteration = true,
-        int iteration = AudioRange)
+        int iteration = PathfindingRange)
     {
         nextNodesToExpand = new();
 
@@ -406,7 +413,7 @@ public sealed partial class AudioMuffleSystem
         }
 
         var count = 0;
-        while (frontier.Count > 0 && count < Math.Pow(AudioRange, 4))
+        while (frontier.Count > 0 && count < Math.Pow(PathfindingRange, 4))
         {
             var next = frontier.Take();
             count++;
@@ -506,7 +513,7 @@ public sealed partial class AudioMuffleSystem
     private void UpdateTotalCostOfNextTileData(MuffleTileData data,
         float delta,
         bool resetAudio,
-        int iteration = AudioRange,
+        int iteration = PathfindingRange,
         bool reCalculate = false,
         bool firstIteration = true)
     {

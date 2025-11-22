@@ -1,8 +1,8 @@
 using System.Numerics;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
+using Content.Shared.Movement.Components;
 using Content.Shared.Physics;
-using Content.Shared.Silicons.StationAi;
 using Content.Shared.StationAi;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.AudioMuffle;
@@ -41,7 +41,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
     private static EntityQuery<GhostComponent> _ghostQuery;
     private static EntityQuery<SpectralComponent> _spectralQuery;
-    private static EntityQuery<StationAiOverlayComponent> _aiOverlayQuery;
+    private static EntityQuery<RelayInputMoverComponent> _relayedQuery;
+    private static EntityQuery<AiEyeComponent> _aiEyeQuery;
     private static EntityQuery<AudioComponent> _audioQuery;
     private static EntityQuery<SoundBlockerComponent> _blockerQuery;
 
@@ -91,6 +92,10 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
     private const int AudioRange = (int) SharedAudioSystem.DefaultSoundRange;
 
+    private const int PathfindingRange = AudioRange + 3;
+
+    private const float ShortAudioLength = 4f;
+
     private bool _raycastEnabled = true;
 
     private bool _pathfindingEnabled = true;
@@ -101,7 +106,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
         _ghostQuery = GetEntityQuery<GhostComponent>();
         _spectralQuery = GetEntityQuery<SpectralComponent>();
-        _aiOverlayQuery = GetEntityQuery<StationAiOverlayComponent>();
+        _relayedQuery = GetEntityQuery<RelayInputMoverComponent>();
+        _aiEyeQuery = GetEntityQuery<AiEyeComponent>();
         _audioQuery = GetEntityQuery<AudioComponent>();
         _blockerQuery = GetEntityQuery<SoundBlockerComponent>();
 
@@ -219,6 +225,9 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     {
         ResetImmediate(ev.Entity, true);
 
+        if (!_pathfindingEnabled)
+            return;
+
         var pos = _xform.GetMapCoordinates(ev.Entity);
         if (ResolvePlayerGrid(pos) is { } grid)
         {
@@ -235,9 +244,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
     private void OnMove(ref MoveEvent ev)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
         if (!_raycastEnabled && !_pathfindingEnabled)
             return;
 
@@ -279,7 +285,14 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         MapCoordinates newPosition)
     {
         // ResolvePlayer returns "fake" player (ai vision entity) if local entity is ai eye
-        if (uid == player || _player.LocalEntity is { } realPlayer && uid == realPlayer && player != realPlayer)
+        if (_relayedQuery.TryComp(_player.LocalEntity, out var relay) &&
+            uid == relay.RelayEntity && player != relay.RelayEntity)
+        {
+            PlayerMoved(player, MapCoordinates.Nullspace, _xform.GetMapCoordinates(player));
+            return true;
+        }
+
+        if (uid == player)
         {
             PlayerMoved(player, oldPosition, newPosition);
             return true;
@@ -289,7 +302,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             ResetBlockerMuffle(player, (uid, null, blocker), oldPosition, newPosition);
 
         if (_audioQuery.TryComp(uid, out var audio))
-            ReCalculateAudioMuffle(player, (uid, audio), newPosition);
+            ReCalculateAudioMuffle(player, (uid, audio), newPosition, reset: false);
 
         return false;
     }
@@ -372,14 +385,16 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         if (_player.LocalEntity is not { } player)
             return null;
 
+        if (_relayedQuery.TryComp(player, out var relay) && _aiEyeQuery.HasComp(relay.RelayEntity))
+        {
+            if (FindNearestAiVisionEntity(relay.RelayEntity) is { } entity)
+                return entity;
+
+            return relay.RelayEntity;
+        }
+
         if (_ghostQuery.HasComp(player) || _spectralQuery.HasComp(player))
             return null;
-
-        if (!_aiOverlayQuery.HasComp(player))
-            return player;
-
-        if (FindNearestAiVisionEntity(player) is { } entity)
-            return entity;
 
         return player;
     }
@@ -397,7 +412,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
             var dist = (coords.Position - _xform.GetMapCoordinates(uid).Position).Length();
 
-            if (result != null && !(dist < distance))
+            if (result != null && dist >= distance)
                 continue;
 
             result = uid;
@@ -442,6 +457,20 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
     private void PlayerMoved(EntityUid player, MapCoordinates oldPos, MapCoordinates newPos)
     {
+        if (!_pathfindingEnabled)
+        {
+            if (_raycastEnabled)
+                ResetAllRaycastAudio();
+            return;
+        }
+
+        if (!_timing.IsFirstTimePredicted)
+        {
+            ResetAllPosAudio();
+            ResetAllRaycastAudio();
+            return;
+        }
+
         if (newPos == MapCoordinates.Nullspace)
             return;
 
@@ -629,15 +658,14 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         Vector2i? oldIndices)
     {
         var indices = _map.TileIndicesFor(grid, blockerPos);
-        AddOrRemoveBlocker(blocker, indices, true, true);
-
-        if (oldIndices != null)
+        if (oldIndices == null)
         {
-            if (oldIndices.Value == indices)
-                return;
-
-            AddOrRemoveBlocker(blocker, oldIndices.Value, false, true);
+            AddOrRemoveBlocker(blocker, indices, true, true);
+            return;
         }
+
+        AddOrRemoveBlocker(blocker, oldIndices.Value, false, true);
+        AddOrRemoveBlocker(blocker, indices, true, false);
     }
 
     private Box2Rotated? CalculateAABB(Entity<FixturesComponent?, TransformComponent?> blocker)
@@ -756,24 +784,24 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 ResetAudioMuffle(audio, volume, reset, true);
                 return;
             }
-
-            if (audioPos.Position.EqualsApprox(playerPos.Position))
-            {
-                RemoveAudioMuffle(audio, false);
-                return;
-            }
-
-            if (AudioPosDict.Remove(audioEnt, out var audioCoords) &&
-                ReverseAudioPosDict.TryGetValue(audioCoords, out var set))
-            {
-                set.Remove(audioEnt);
-                if (set.Count == 0)
-                    ReverseAudioPosDict.Remove(audioCoords);
-            }
         }
 
         if (!_raycastEnabled)
             return;
+
+        if (audioPos.Position.EqualsApprox(playerPos.Position))
+        {
+            RemoveAudioMuffle(audio, false);
+            return;
+        }
+
+        if (AudioPosDict.Remove(audioEnt, out var audioCoords) &&
+            ReverseAudioPosDict.TryGetValue(audioCoords, out var set))
+        {
+            set.Remove(audioEnt);
+            if (set.Count == 0)
+                ReverseAudioPosDict.Remove(audioCoords);
+        }
 
         var dir = audioPos.Position - playerPos.Position;
         var len = dir.Length();
@@ -887,23 +915,21 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     private void ResetAudioMuffle(Entity<AudioComponent?> audio,
         float? volume,
         bool reset = true,
-        bool ignoreNonPlaying = false)
+        bool ignoreShort = false)
     {
         if (!Exists(audio) || !Resolve(audio, ref audio.Comp, false))
             return;
 
         Entity<AudioComponent> audioEnt = (audio, audio.Comp);
 
-        if (audio.Comp.Global)
+        // For some reason looping doesn't work with audio muffle
+        if (audio.Comp.Global || audio.Comp.Looping || !audio.Comp.Loaded)
             return;
 
-        if (!ignoreNonPlaying)
+        if (!ignoreShort)
         {
-            if (!audio.Comp.Playing)
-                return;
-
             var offset = ((audio.Comp.PauseTime ?? _timing.CurTime) - audio.Comp.AudioStart).TotalSeconds;
-            if (offset < SharedAudioSystem.AudioDespawnBuffer)
+            if (offset < ShortAudioLength)
                 return;
         }
 
@@ -926,16 +952,21 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
         // ResolvePlayer returns nearest entity that provides ai vision, if it cannot find any, it returns ai eye
         // itself, which means no cameras nearby => all audio is muffled
-        if (_aiOverlayQuery.HasComp(player))
+        if (_aiEyeQuery.HasComp(player) ||
+            ManhattanDistance(_xform.GetWorldPosition(audio), playerPos.Position) > AudioRange)
             muffleLevel = 16f;
         else if (_pathfindingEnabled && ResolvePlayerGrid(playerPos) is { } grid &&
-            AudioPosDict.TryGetValue(audioEnt, out var pos) && TileDataDict.TryGetValue(pos, out var tileData))
+                 AudioPosDict.TryGetValue(audioEnt, out var pos) && TileDataDict.TryGetValue(pos, out var tileData))
         {
             var playerIndices = _map.TileIndicesFor(grid, playerPos);
             var playerDist = (float) ManhattanDistance(pos, playerIndices);
-            if (TileDataDict.TryGetValue(playerIndices, out var playerTile) && playerTile.Previous != null)
-                playerDist += (xform.Coordinates.Position - playerTile.Previous.Indices).Length() - 1f;
             muffleLevel = tileData.TotalCost + (playerDist - AudioRange) / 4f - GetTotalTileCost(pos);
+            var playerTilePos = _map.GridTileToWorldPos(grid, grid, playerIndices);
+            var diff1 = playerPos.Position - playerTilePos;
+            var diff2 = (Vector2) (playerIndices - pos);
+            var len = diff2.Length();
+            if (!MathHelper.CloseToPercent(len, 0f))
+                muffleLevel += Vector2.Dot(diff1, diff2) / len;
         }
         else if (_raycastEnabled && ReverseSoundBlockerDict.TryGetValue(audioEnt, out var data))
         {
@@ -963,10 +994,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             if (data.Count == 0)
                 ReverseSoundBlockerDict.Remove(audioEnt);
         }
-        else if ((_xform.GetWorldPosition(audio) - playerPos.Position).Length() <= AudioRange)
-            muffleLevel = 0f;
         else
-            muffleLevel = 16f;
+            muffleLevel = 0f;
 
         SetVolume(audio, volume ?? AudioVolumeDict[audioEnt], muffleLevel);
     }
@@ -1124,7 +1153,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             return 0f;
 
         var percent = MathF.Max(blocker.SoundBlockPercent, 0f);
-        return percent > 0.99f ? 400f : -(1 / (percent - 1)) * 4 - 4;
+        return percent > 0.99f ? 400f : -(1f / (percent - 1f)) * 4f - 4f;
     }
 
     private void SetVolume(Entity<AudioComponent?> audio, float volume, float muffleLevel)
@@ -1135,6 +1164,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         if (!Resolve(audio, ref audio.Comp, false))
             return;
 
+        Entity<AudioComponent> audioEnt = (audio, audio.Comp);
+
         switch (muffleLevel)
         {
             case <= 0f:
@@ -1143,7 +1174,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 volume = -100f;
                 break;
             default:
-                var gain = SharedAudioSystem.VolumeToGain(volume) / MathF.Pow(muffleLevel / 16 + 1, 4f);
+                var gain = SharedAudioSystem.VolumeToGain(volume) / MathF.Pow(muffleLevel / 16f + 1f, 4f);
                 volume = SharedAudioSystem.GainToVolume(gain);
                 break;
         }
