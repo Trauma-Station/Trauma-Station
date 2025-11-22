@@ -229,11 +229,15 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             return;
 
         var pos = _xform.GetMapCoordinates(ev.Entity);
-        if (ResolvePlayerGrid(pos) is { } grid)
-        {
-            var tile = _map.TileIndicesFor(grid, pos);
-            Expand(tile);
-        }
+        if (ResolvePlayerGrid(pos) is not { } grid)
+            return;
+
+        var tile = _map.TileIndicesFor(grid, pos);
+
+        if (!_map.CollidesWithGrid(grid, grid, tile))
+            return;
+
+        Expand(tile);
     }
 
     private void OnLocalPlayerDetached(LocalPlayerDetachedEvent ev)
@@ -424,7 +428,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
     public Entity<MapGridComponent>? ResolvePlayerGrid(MapCoordinates pos)
     {
-        if (Exists(PlayerGrid) && !PlayerGrid.Value.Comp.Deleted)
+        if (Exists(PlayerGrid) && !PlayerGrid.Value.Comp.Deleted &&
+            _xform.GetMapId(PlayerGrid.Value.Owner) == pos.MapId)
             return PlayerGrid.Value;
 
         if (_mapManager.TryFindGridAt(pos, out var grid, out var gridComp))
@@ -573,7 +578,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
             if (pos == MapCoordinates.Nullspace)
             {
-                if (!Exists(PlayerGrid) || PlayerGrid.Value.Comp.Deleted)
+                if (!Exists(PlayerGrid) || PlayerGrid.Value.Comp.Deleted ||
+                    _xform.GetMapId(PlayerGrid.Value.Owner) != blockerPos.Value.MapId)
                     return;
 
                 ResetBlockerOnGrid(PlayerGrid.Value, blocker, blockerPos.Value, found ? oldIndices : null);
