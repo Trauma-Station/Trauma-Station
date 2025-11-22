@@ -19,14 +19,13 @@ using Content.Shared._Shitcode.Weapons.Misc;
 using Content.Shared.Armor;
 using Content.Shared.Damage.Events;
 using Content.Shared.Inventory;
-using Content.Shared.StatusEffect;
+using Content.Shared.Standing;
 using Content.Shared.Timing;
 
 namespace Content.Goobstation.Server.Weapons.DelayedKnockdown;
 
 public sealed class DelayedKnockdownOnHitSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly StunSystem _stun = default!;
     [Dependency] private readonly UseDelaySystem _delay = default!;
     [Dependency] private readonly ChampionStanceSystem _champion = default!;
@@ -143,7 +142,7 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
 
         foreach (var (hit, _) in args.HitEntities)
         {
-            if (!_status.CanApplyEffect(hit, "KnockedDown"))
+            if (!HasComp<StandingStateComponent>(hit))
                 continue;
 
             var ev = new DelayedKnockdownAttemptEvent();

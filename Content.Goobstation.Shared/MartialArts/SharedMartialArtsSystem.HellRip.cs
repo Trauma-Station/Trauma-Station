@@ -22,6 +22,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Audio;
 
@@ -121,7 +122,7 @@ public partial class SharedMartialArtsSystem
 
         //_pulling.TryStopPull(target, pullable, ent, true);
 
-        _status.TryRemoveStatusEffect(ent, "KnockedDown");
+        RemComp<KnockedDownComponent>(ent);
         _standing.Stand(ent);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Effects/demon_attack1.ogg"), ent);
