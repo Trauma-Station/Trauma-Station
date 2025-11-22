@@ -73,7 +73,7 @@
   - type: Penetratable # Goobstation - Better snipers
     penetrateDamage: 200
     damagePenalty: 0.4
-  - type: SoundBlocker # Traumastation
+  - type: SoundBlocker # Trauma
     soundBlockPercent: 0.8
 
 - type: entity

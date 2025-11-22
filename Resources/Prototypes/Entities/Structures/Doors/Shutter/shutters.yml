@@ -152,7 +152,7 @@
     interactSuccessSound:
       collection: FenceRattle
   - type: BlockWeather
-  - type: SoundBlocker # Traumastation
+  - type: SoundBlocker # Trauma
     soundBlockPercent: 0.5
 
 - type: entity

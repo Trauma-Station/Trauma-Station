@@ -7,9 +7,10 @@ namespace Content.Trauma.Client.AudioMuffle;
 
 public sealed partial class AudioMuffleSystem
 {
-    [ViewVariables]
     public HashSet<MuffleTileData> UpdatedData = new();
-
+    public HashSet<MuffleTileData> ReExpand = new();
+    public HashSet<Vector2i> Passed = new();
+    public PriorityQueue<MuffleTileData> Frontier = new();
 
     public static int ManhattanDistance(Vector2i start, Vector2i end)
     {
@@ -31,7 +32,7 @@ public sealed partial class AudioMuffleSystem
         var difference = newPos - oldPos;
         var signX = MathF.Sign(difference.X);
         var signY = MathF.Sign(difference.Y);
-        var distance = difference.X * signX + difference.Y * signY;
+        var distance = ManhattanDistance(newPos, oldPos);
 
         if (distance >= PathfindingRange)
         {
@@ -68,26 +69,28 @@ public sealed partial class AudioMuffleSystem
         }
 
         newData.TotalCost = 0f;
-        var reExpand = new HashSet<MuffleTileData>();
-        if (!ExpandNode(newData, 0f, false, reExpand, out _))
+        ReExpand.Clear();
+        if (!ExpandNode(newData, 0f, false, ReExpand, out _))
         {
-            if (reExpand.Contains(newData))
+            if (ReExpand.Contains(newData))
             {
                 Expand(newPos);
                 return;
             }
 
-            HashSet<Vector2i> invalidated = new();
-            foreach (var node in reExpand)
+            Passed.Clear();
+            foreach (var node in ReExpand)
             {
-                if (invalidated.Contains(node.Indices))
+                if (Passed.Contains(node.Indices))
                     continue;
 
-                RewriteAndReExpand(node, invalidated);
+                RewriteAndReExpand(node, Passed);
             }
+            Passed.Clear();
         }
+        ReExpand.Clear();
 
-        var frontier = new PriorityQueue<MuffleTileData>();
+        Frontier.Clear();
         HashSet<Vector2i> passed = new();
         foreach (var (tile, data) in TileDataDict)
         {
@@ -107,7 +110,7 @@ public sealed partial class AudioMuffleSystem
                     if (TileDataDict.ContainsKey(neighbor))
                         continue;
 
-                    frontier.Add(data);
+                    Frontier.Add(data);
                     isPassed = false;
                 }
             }
@@ -116,20 +119,25 @@ public sealed partial class AudioMuffleSystem
                 passed.Add(tile);
         }
 
+        // This determines the side of already expanded area that we are expanding into.
         var vecX = new Vector2i(Math.Sign(signX - 1), Math.Sign(1 - signX)) * signX;
         var vecY = new Vector2i(Math.Sign(signY - 1), Math.Sign(1 - signY)) * signY;
-        Expand(frontier, newPos, passed, vecX, vecY, false, PathfindingRange * distance);
+        Expand(Frontier, newPos, passed, vecX, vecY, false, PathfindingRange * distance);
+        Frontier.Clear();
     }
 
     private void Expand(Vector2i start, bool updateAudio = false)
     {
         var newNode = new MuffleTileData(start);
 
+        // Clear and rebuild from the newNode
         TileDataDict.Clear();
         TileDataDict[start] = newNode;
 
         var vec = Vector2i.One;
-        Expand(new PriorityQueue<MuffleTileData> { newNode },
+        Frontier.Clear();
+        Frontier.Add(newNode);
+        Expand(Frontier,
             start,
             new HashSet<Vector2i> { start },
             vec,
@@ -137,6 +145,7 @@ public sealed partial class AudioMuffleSystem
             updateAudio);
         if (updateAudio)
             ResetAudioOnPos(start);
+        Frontier.Clear();
     }
 
     private void Expand(PriorityQueue<MuffleTileData> frontier,
@@ -160,8 +169,7 @@ public sealed partial class AudioMuffleSystem
         var max = MathF.Pow(amount, sum);
         var count = 0;
 
-        HashSet<Vector2i> updated = new();
-
+        Passed.Clear();
         while (frontier.Count > 0 && count < max)
         {
             var node = frontier.Take();
@@ -223,13 +231,14 @@ public sealed partial class AudioMuffleSystem
                         frontier.Add(newNode);
                     }
 
-                    updated.Add(neighbor);
+                    Passed.Add(neighbor);
                 }
             }
         }
 
         if (updateAudio)
-            ResetAllPosAudio(updated);
+            ResetAllPosAudio(Passed);
+        Passed.Clear();
     }
 
     private void RewriteAndReExpand(MuffleTileData first,
@@ -243,8 +252,10 @@ public sealed partial class AudioMuffleSystem
             return;
         }
 
-        PriorityQueue<MuffleTileData> queue = new() { first };
-        HashSet<Vector2i> updated = new() { first.Indices };
+        Frontier.Clear();
+        Passed.Clear();
+        Frontier.Add(first);
+        Passed.Add(first.Indices);
 
         InvalidateNext(first, invalidated);
         invalidated.Remove(first.Indices);
@@ -253,13 +264,13 @@ public sealed partial class AudioMuffleSystem
         foreach (var node in TileDataDict.Values)
         {
             if (ShouldAddToQueue(node, invalidated))
-                queue.Add(node);
+                Frontier.Add(node);
         }
 
         var count = 0;
-        while (queue.Count > 0 && count < Math.Pow(amount, 4))
+        while (Frontier.Count > 0 && count < Math.Pow(amount, 4))
         {
-            var node = queue.Take();
+            var node = Frontier.Take();
             count++;
 
             if (invalidated.Contains(node.Indices))
@@ -299,14 +310,15 @@ public sealed partial class AudioMuffleSystem
 
                     node.Next.Add(newNode);
                     TileDataDict[neighbor] = newNode;
-                    queue.Add(newNode);
-                    updated.Add(neighbor);
+                    Frontier.Add(newNode);
+                    Passed.Add(neighbor);
                 }
             }
         }
 
         if (updateAudio)
-            ResetAllPosAudio(updated);
+            ResetAllPosAudio(Passed);
+        Frontier.Clear();
     }
 
     private bool ShouldAddToQueue(MuffleTileData node, HashSet<Vector2i> invalidated)
