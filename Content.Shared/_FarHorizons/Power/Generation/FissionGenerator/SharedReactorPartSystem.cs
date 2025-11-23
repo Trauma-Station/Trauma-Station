@@ -11,6 +11,10 @@ using Content.Shared._FarHorizons.Materials.Systems;
 
 namespace Content.Shared._FarHorizons.Power.Generation.FissionGenerator;
 
+// Ported and modified from goonstation by Jhrushbe.
+// CC-BY-NC-SA-3.0
+// https://github.com/goonstation/goonstation/blob/ff86b044/code/obj/nuclearreactor/reactorcomponents.dm
+
 public abstract class SharedReactorPartSystem : EntitySystem
 {
     [Dependency] private readonly EntityManager _entityManager = default!;
