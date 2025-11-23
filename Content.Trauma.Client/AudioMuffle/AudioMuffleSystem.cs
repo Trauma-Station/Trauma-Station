@@ -115,7 +115,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         SubscribeLocalEvent<SoundBlockerComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SoundBlockerComponent, AfterAutoHandleStateEvent>(OnBlockerState);
 
-        SubscribeLocalEvent<AudioComponent, ComponentAdd>(OnAdd);
+        SubscribeLocalEvent<AudioComponent, ComponentInit>(OnInit);
 
         SubscribeLocalEvent<AudioMuffleComponent, ComponentShutdown>(OnMuffleShutdown);
 
@@ -161,7 +161,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         ReCalculateAllAudio(player, raycastBehavior, AudioProcessBehavior.Reset);
     }
 
-    private void OnAdd(Entity<AudioComponent> ent, ref ComponentAdd args)
+    private void OnInit(Entity<AudioComponent> ent, ref ComponentInit args)
     {
         if (!CanMuffle(ent.Comp))
             return;
