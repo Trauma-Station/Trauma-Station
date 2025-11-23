@@ -3,6 +3,7 @@
   configuration:
     entity: MobMonkey
     transferName: true
+    copiedComponents: [] # no language chud
     forced: true
     revertOnCrit: false
     revertOnDeath: false
@@ -15,6 +16,7 @@
   configuration:
     entity: MobMouse
     transferName: true
+    copiedComponents: [] # no language chud
     forced: true
     revertOnCrit: false
     revertOnDeath: false

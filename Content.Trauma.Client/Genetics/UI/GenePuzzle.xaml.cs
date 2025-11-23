@@ -10,7 +10,6 @@ namespace Content.Trauma.Client.Genetics.UI;
 public sealed partial class GenePuzzle : Control
 {
     public event Action<uint, GeneticsCycle>? OnSetBase;
-    public event Action? OnJoker;
     public event Action? OnSequence;
 
     private bool _busy;
@@ -24,7 +23,6 @@ public sealed partial class GenePuzzle : Control
     {
         RobustXamlLoader.Load(this);
 
-        JokerButton.OnPressed += _ => OnJoker?.Invoke();
         SequenceButton.OnPressed += _ => OnSequence?.Invoke();
         OnSetBase += (_, _) => UpdateSequenceButton();
     }
@@ -75,6 +73,9 @@ public sealed partial class GenePuzzle : Control
         button.ModulateSelfOverride = GetColor(b);
         button.OnPressed += _ =>
         {
+            if (_busy)
+                return;
+
             // TODO: implement ctrl / right click
             var cycle = GeneticsCycle.Next;
             b = GeneticsConsoleSystem.CycleBase(b, cycle);

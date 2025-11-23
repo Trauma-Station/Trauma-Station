@@ -84,7 +84,8 @@ public sealed partial class GeneticsConsoleComponent : Component
     {
         DamageDict = new()
         {
-            { "Cellular", 60 }
+            { "Radiation", 50 },
+            { "Cellular", 10 }
         }
     };
 
@@ -239,15 +240,6 @@ public sealed partial class GeneticsConsoleSetBaseMessage(uint sequence, uint in
     public readonly uint Sequence = sequence;
     public readonly uint Index = index;
     public readonly GeneticsCycle Cycle = cycle;
-}
-
-/// <summary>
-/// Message to use joker to correct a base for a mutation.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed partial class GeneticsConsoleJokerMessage(uint index) : BoundUserInterfaceMessage
-{
-    public readonly uint Index = index;
 }
 
 /// <summary>

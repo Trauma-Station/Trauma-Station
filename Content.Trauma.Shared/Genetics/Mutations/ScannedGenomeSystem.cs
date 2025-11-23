@@ -24,6 +24,7 @@ public sealed class ScannedGenomeSystem : EntitySystem
         _query = GetEntityQuery<ScannedGenomeComponent>();
 
         SubscribeLocalEvent<ScannedGenomeComponent, PolymorphedEvent>(OnPolymorphed);
+        SubscribeLocalEvent<ScannedGenomeComponent, MutationRemovedEvent>(OnMutationRemoved);
     }
 
     private void OnPolymorphed(Entity<ScannedGenomeComponent> ent, ref PolymorphedEvent args)
@@ -35,6 +36,15 @@ public sealed class ScannedGenomeSystem : EntitySystem
         var comp = EnsureComp<ScannedGenomeComponent>(target);
         DebugTools.Assert(comp.Sequences.Count == 0, $"Polymorphed {ToPrettyString(ent)} into a non-empty scanned gnome entity {ToPrettyString(target)}, its sequences would be wiped!");
         TransferSequences(ent, (target, comp));
+    }
+
+    private void OnMutationRemoved(Entity<ScannedGenomeComponent> ent, ref MutationRemovedEvent args)
+    {
+        // check just incase you are VERY evil and have a mutation that is a mob or something crazy
+        if (ent.Owner != args.Target.Owner)
+            return;
+
+        RemoveSequence(ent, args.Id);
     }
 
     #region Public API
@@ -159,6 +169,30 @@ public sealed class ScannedGenomeSystem : EntitySystem
             }
 
             sequences.Add(new SequenceState(sequence.Bases, data.Number, data.Discovered ? id : null));
+        }
+    }
+
+    /// <summary>
+    /// Removes a sequence of a specific mutation by swap removing with the last mutation.
+    /// </summary>
+    public void RemoveSequence(Entity<ScannedGenomeComponent> ent, EntProtoId<MutationComponent> id)
+    {
+        var sequences = ent.Comp.Sequences;
+        var count = sequences.Count;
+        if (count == 0)
+            return;
+
+        // swap remove, great language
+        for (var i = 0; i < count; i++)
+        {
+            var sequence = sequences[i];
+            if (sequence.Mutation != id)
+                continue;
+
+            var last = count - 1;
+            sequences[i] = sequences[last];
+            sequences.RemoveAt(last);
+            return;
         }
     }
 

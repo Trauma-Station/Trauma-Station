@@ -63,13 +63,13 @@ public sealed partial class MutationComponent : Component
 }
 
 /// <summary>
-/// Event raised on a mutation entity after it has been added to a target.
+/// Event raised on both mutation and target entities after a mutation has been added to a target.
 /// </summary>
 [ByRefEvent]
-public record struct MutationAddedEvent(Entity<MutatableComponent> Target, Entity<MutationComponent> Mutation, bool Automatic, bool Predicted);
+public record struct MutationAddedEvent(Entity<MutatableComponent> Target, Entity<MutationComponent> Mutation, EntProtoId<MutationComponent> Id, bool Automatic, bool Predicted);
 
 /// <summary>
-/// Event raised on a mutation entity before it has been removed from a target.
+/// Event raised on both mutation and target entities before a mutation has been removed from a target.
 /// </summary>
 [ByRefEvent]
-public record struct MutationRemovedEvent(Entity<MutatableComponent> Target, Entity<MutationComponent> Mutation, bool Automatic, bool Predicted);
+public record struct MutationRemovedEvent(Entity<MutatableComponent> Target, Entity<MutationComponent> Mutation, EntProtoId<MutationComponent> Id, bool Automatic, bool Predicted);

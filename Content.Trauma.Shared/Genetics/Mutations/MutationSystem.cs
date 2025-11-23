@@ -94,6 +94,15 @@ public sealed partial class MutationSystem : EntitySystem
         // clear is false, don't clear forced mutations in the yml or from previous polymorph body
         Scramble(ent, clear: false, automatic: true);
 
+        if (ent.Comp.Mutations.Count == 0)
+        {
+            foreach (var (id, chance) in ent.Comp.DefaultMutations)
+            {
+                if (_random.Prob(chance))
+                    AddMutation(ent.AsNullable(), id, automatic: true, predicted: false);
+            }
+        }
+
         RemoveConflictingMutations(ent);
     }
 
@@ -121,8 +130,9 @@ public sealed partial class MutationSystem : EntitySystem
         mutation.Comp.Target = ent.Owner;
         Dirty(mutation);
 
-        var ev = new MutationAddedEvent(ent, mutation, automatic, predicted);
+        var ev = new MutationAddedEvent(ent, mutation, id, automatic, predicted);
         RaiseLocalEvent(mutation, ref ev);
+        RaiseLocalEvent(ent, ref ev);
 
         if (automatic)
             return;
@@ -145,8 +155,9 @@ public sealed partial class MutationSystem : EntitySystem
         if (IsForeign(ent, id))
             AddInstability(ent, -mutation.Comp.Instability);
 
-        var ev = new MutationRemovedEvent(ent, mutation, automatic, predicted);
+        var ev = new MutationRemovedEvent(ent, mutation, id, automatic, predicted);
         RaiseLocalEvent(mutation, ref ev);
+        RaiseLocalEvent(ent, ref ev);
 
         if (automatic || !Loc.TryGetString(id + "-removed", out var popup))
             return;
@@ -253,8 +264,8 @@ public sealed partial class MutationSystem : EntitySystem
     public bool CanMutate(EntityUid uid)
         => IsMutatable(uid) && !_mob.IsDead(uid);
 
-    public Entity<MutatableComponent>? GetMutatable(EntityUid uid)
-        => _mutatableQuery.TryComp(uid, out var comp) && !_mob.IsDead(uid)
+    public Entity<MutatableComponent>? GetMutatable(EntityUid uid, bool force = true)
+        => _mutatableQuery.TryComp(uid, out var comp) && (force || !_mob.IsDead(uid))
            ? (uid, comp)
            : null;
 
@@ -420,7 +431,8 @@ public sealed partial class MutationSystem : EntitySystem
     {
         foreach (var mutation in ent.Comp.Mutations.Values)
         {
-            MutationRemoved(ent, mutation, automatic, predicted);
+            if (_query.TryComp(mutation, out var mutationComp))
+                MutationRemoved(ent, (mutation, mutationComp), automatic, predicted);
             PredictedQueueDel(mutation);
         }
         ent.Comp.Mutations.Clear();
@@ -430,7 +442,7 @@ public sealed partial class MutationSystem : EntitySystem
     }
 
     /// <summary>
-    /// Add random default mutations and ensure there's enough dormant mutations.
+    /// Add random dormant mutations.
     /// Optionally removes all active and mutations and dormant mutations beforehand.
     /// Predicted only applies to clearing, the RNG is not predicted here
     /// as mispredicts from tick timing or something might be disastrous.
@@ -440,15 +452,9 @@ public sealed partial class MutationSystem : EntitySystem
         if (clear)
             ClearMutations(ent, automatic, predicted);
 
-        // don't scramble existing mutations and no predicting adding them
-        if (ent.Comp.Mutations.Count > 0 || _net.IsClient)
+        // don't scramble existing mutations
+        if (ent.Comp.Mutations.Count > 0)
             return;
-
-        foreach (var (id, chance) in ent.Comp.DefaultMutations)
-        {
-            if (_random.Prob(chance))
-                AddMutation(ent.AsNullable(), id, automatic: automatic);
-        }
 
         // add enough random dormant mutations so there will be enough sequences.
         while (ent.Comp.Dormant.Count < ent.Comp.MaxDormant)
@@ -471,8 +477,10 @@ public sealed partial class MutationSystem : EntitySystem
         ent.Comp.Dormant.Clear();
 
         // transfer the mutation entities
+        Log.Debug($"Transferring {ent.Comp.Mutations.Count} mutations from {ToPrettyString(ent)} to {ToPrettyString(target)}");
         foreach (var (id, mutation) in ent.Comp.Mutations)
         {
+            Log.Debug($"- {ToPrettyString(mutation)}");
             var comp = _query.Comp(mutation);
             MutationRemoved(ent, (mutation, comp), automatic: true, predicted: predicted);
             MutationAdded(target, (mutation, comp), automatic: true, predicted: predicted);

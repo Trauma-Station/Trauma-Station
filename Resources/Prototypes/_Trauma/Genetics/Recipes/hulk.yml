@@ -2,7 +2,7 @@
   id: Hulk
   result: MutationHulk
   required:
-  - MutationRadioactive
+  - MutationRadioactivity
   - MutationStrength
 
 - type: mutationRecipe

@@ -66,7 +66,6 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             subs.Event<GeneticsConsoleScanMessage>(OnScan);
             subs.Event<GeneticsConsoleScrambleMessage>(OnScramble);
             subs.Event<GeneticsConsoleSetBaseMessage>(OnSetBase);
-            subs.Event<GeneticsConsoleJokerMessage>(OnJoker);
             subs.Event<GeneticsConsoleSequenceMessage>(OnSequence);
             subs.Event<GeneticsConsoleWriteMutationMessage>(OnWriteMutation);
             subs.Event<GeneticsConsoleCombineMessage>(OnCombine);
@@ -191,7 +190,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         ent.Comp.NextScramble = now + ent.Comp.ScrambleCooldown;
         DirtyField(ent, nameof(GeneticsConsoleComponent.NextScramble));
 
-        _mutation.Scramble(mutatable);
+        _mutation.Scramble(mutatable, predicted: true);
         RemComp<ScannedGenomeComponent>(mob);
         UpdateUI(ent);
     }
@@ -211,20 +210,6 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         _builder[i] = CycleBase(sequence.Bases[i], args.Cycle);
         sequence.Bases = _builder.ToString();
         UpdateUI(ent);
-    }
-
-    private void OnJoker(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleJokerMessage args)
-    {
-        if (ent.Comp.ScannedMob is not {} mob)
-            return;
-
-        if (!CanWorkOn(ent, mob))
-            return;
-
-        if (_genome.GetSequence(mob, args.Index) is not {} sequence)
-            return;
-
-        // TODO
     }
 
     private void OnSequence(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleSequenceMessage args)
@@ -393,6 +378,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
         // it isn't discovered so you have to figure out what it is before it's too late...
         _genome.TryAddSequence(mob, result);
+        UpdateUI(ent);
     }
 
     private void OnCombineCheck(Entity<GeneticsConsoleComponent> ent, ref DoAfterAttemptEvent<CombineDoAfterEvent> args)

@@ -57,8 +57,6 @@ genetics-console-mutation-instability = Instability:
 genetics-console-mutation-name-placeholder = Mutation {$number}
 genetics-console-write-mutation = Save to disk
 genetics-console-sequencer-tip = Tip: Ctrl+Click on the base to set it to X. Right Click to cycle in reverse.
-genetics-console-joker = Joker
-genetics-console-joker-cooldown = Joker on cooldown ({$cooldown}s)
 genetics-console-begin-sequencing = Begin Sequencing
 
 genetics-console-combine-button = Combine!

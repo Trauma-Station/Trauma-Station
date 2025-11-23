@@ -23,7 +23,6 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     public event Action? OnScramble;
     public event Action<uint, uint, GeneticsCycle>? OnSetBase;
     public event Action<uint>? OnWriteMutation;
-    public event Action<uint>? OnJoker;
     public event Action<uint>? OnSequence;
     public event Action<uint>? OnPrint;
     public event Action<uint>? OnCombine;
@@ -37,6 +36,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     private Entity<GeneticsDiskComponent>? _currentDisk;
     private EntProtoId<MutationComponent>? _diskMutation;
     private bool _busy;
+    private bool _scanned;
     private int? _damage;
     private int _instability;
     private int _scrambleCooldown;
@@ -61,7 +61,6 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         ScrambleButton.OnPressed += _ => OnScramble?.Invoke();
         Sequencer.OnSetBase += (s, i, c) => OnSetBase?.Invoke(s, i, c);
         Sequencer.OnWriteMutation += i => OnWriteMutation?.Invoke(i);
-        Sequencer.OnJoker += i => OnJoker?.Invoke(i);
         Sequencer.OnSequence += i => OnSequence?.Invoke(i);
 
         Storage.OnPrint += p => OnPrint?.Invoke(p);
@@ -128,6 +127,12 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
             {
                 _instability = instability;
                 UpdateInstability();
+            }
+            var scanned = _genome.IsScanned(mob);
+            if (scanned != _scanned)
+            {
+                _scanned = scanned;
+                Sequencer.UpdateScannedMob(mob);
             }
         }
     }

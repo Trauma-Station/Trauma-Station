@@ -45,21 +45,31 @@ public sealed class MutationCommand : ToolshedCommand
     [CommandImplementation("clear")]
     public void Clear([PipedArgument] EntityUid uid)
     {
-        if (Mutation.GetMutatable(uid) is {} ent)
+        if (Mutation.GetMutatable(uid, true) is {} ent)
             Mutation.ClearMutations(ent);
     }
 
     [CommandImplementation("list")]
     public IEnumerable<EntityUid> List([PipedArgument] EntityUid uid)
-        => Mutation.GetMutatable(uid) is {} ent
+        => Mutation.GetMutatable(uid, true) is {} ent
             ? ent.Comp.Mutations.Values
             : null;
 
     [CommandImplementation("dormant")]
     public IEnumerable<EntProtoId<MutationComponent>> Dormant([PipedArgument] EntityUid uid)
-        => Mutation.GetMutatable(uid) is {} ent
+        => Mutation.GetMutatable(uid, true) is {} ent
             ? ent.Comp.Dormant
             : null;
+
+    [CommandImplementation("scramble")]
+    public void Scramble([PipedArgument] EntityUid uid)
+    {
+        if (Mutation.GetMutatable(uid, true) is not {} ent)
+            return;
+
+        Mutation.Scramble(ent);
+        RemComp<ScannedGenomeComponent>(ent);
+    }
 
     private EntProtoId<MutationComponent> Check(string id)
     {

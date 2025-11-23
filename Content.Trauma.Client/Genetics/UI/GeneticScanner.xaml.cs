@@ -59,7 +59,7 @@ public sealed partial class GeneticScanner : BoxContainer
         UpdateScanButton(mob);
     }
 
-    private void UpdateScanButton(EntityUid mob)
+    public void UpdateScanButton(EntityUid mob)
     {
         var isScanned = _genome.IsScanned(mob);
         ScanButton.Disabled = isScanned || _busy;

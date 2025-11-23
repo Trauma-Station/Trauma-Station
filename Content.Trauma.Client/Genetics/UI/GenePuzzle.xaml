@@ -2,10 +2,7 @@
         xmlns:controls="using:Content.Client.UserInterface.Controls"
         xmlns:genetics="using:Content.Trauma.Client.Genetics.UI">
     <BoxContainer Orientation="Vertical">
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
-            <controls:NanoHeading Text="{Loc 'genetics-console-genome-sequencer'}" HorizontalExpand="True"/>
-            <Button Name="JokerButton" Text="{Loc 'genetics-console-joker'}"/>
-        </BoxContainer>
+        <controls:NanoHeading Text="{Loc 'genetics-console-genome-sequencer'}" HorizontalExpand="True"/>
         <GridContainer Name="BaseButtons" Columns="16"/> <!-- Populated at runtime -->
         <Label Text="{Loc 'genetics-console-sequencer-tip'}"/>
         <BoxContainer Orientation="Horizontal" Align="Center">

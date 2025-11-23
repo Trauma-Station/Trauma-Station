@@ -17,7 +17,6 @@ public sealed partial class GeneticSequencer : BoxContainer
     public event Action? OnScan;
     public event Action<uint, uint, GeneticsCycle>? OnSetBase;
     public event Action<uint>? OnWriteMutation;
-    public event Action<uint>? OnJoker;
     public event Action<uint>? OnSequence;
 
     private EntityUid? _mob;
@@ -41,11 +40,6 @@ public sealed partial class GeneticSequencer : BoxContainer
         {
             if (SequenceButtons.Index is {} s)
                 OnSetBase?.Invoke(s, i, c);
-        };
-        Puzzle.OnJoker += () =>
-        {
-            if (SequenceButtons.Index is {} s)
-                OnJoker?.Invoke(s);
         };
         Puzzle.OnSequence += () =>
         {
@@ -107,6 +101,11 @@ public sealed partial class GeneticSequencer : BoxContainer
         SequenceButtons.UpdateSequences();
         UpdateSequence();
         UpdateWriteButton();
+    }
+
+    public void UpdateScannedMob(EntityUid mob)
+    {
+        Scanner.UpdateScanButton(mob);
     }
 
     public void UpdateDisk(Entity<GeneticsDiskComponent>? disk)

@@ -3,4 +3,4 @@
   result: MutationShockTouch
   required:
   - MutationInsulated # does tg remove this?
-  - MutationRadioactive
+  - MutationRadioactivity
