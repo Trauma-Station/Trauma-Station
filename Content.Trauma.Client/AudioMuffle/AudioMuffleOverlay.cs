@@ -18,6 +18,7 @@ public sealed class AudioMuffleOverlay : Overlay
     [Dependency] private readonly IInputManager _input = default!;
     [Dependency] private readonly IUserInterfaceManager _ui = default!;
     [Dependency] private readonly IResourceCache _cache = default!;
+
     private readonly AudioMuffleSystem _system;
     private readonly SharedTransformSystem _transform;
     private readonly SharedMapSystem _map;
@@ -105,7 +106,7 @@ public sealed class AudioMuffleOverlay : Overlay
         var blockerSet =
             _system.ReverseBlockerIndicesDict.GetValueOrDefault(index, new HashSet<Entity<SoundBlockerComponent>>());
         var blockersCount = blockerSet.Count;
-        var audioSet = _system.ReverseAudioPosDict.GetValueOrDefault(index, new HashSet<Entity<AudioComponent>>());
+        var audioSet = _system.ReverseAudioPosDict.GetValueOrDefault(index, new HashSet<Entity<AudioComponent, AudioMuffleComponent>>());
         var audioCount = audioSet.Count;
         var hasTileData = _system.TileDataDict.TryGetValue(index, out var data);
 
@@ -154,12 +155,8 @@ public sealed class AudioMuffleOverlay : Overlay
         foreach (var audio in audioSet)
         {
             pos += offset;
-            var hasVolume = _system.AudioVolumeDict.TryGetValue(audio, out var volume);
-            float? realVolume = _entManager.TryGetComponent(audio, out AudioComponent? audioComp)
-                ? audioComp.Params.Volume
-                : null;
-            var volumeStr = hasVolume ? $"{volume:0.00}" : "UNKNOWN";
-            var realVolumeStr = realVolume == null ? "UNKNOWN" : $"{realVolume.Value:0.00}";
+            var volumeStr = $"{audio.Comp2.OriginalVolume:0.00}";
+            var realVolumeStr = $"{audio.Comp1.Params.Volume:0.00}";
 
             handle.DrawString(_font, pos, $"Volume: {volumeStr}");
             pos += offset;

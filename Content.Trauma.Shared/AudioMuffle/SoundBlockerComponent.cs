@@ -1,3 +1,5 @@
+using System.Numerics;
+using Robust.Shared.Audio.Components;
 using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.AudioMuffle;
@@ -10,4 +12,10 @@ public sealed partial class SoundBlockerComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Active = true;
+
+    [ViewVariables]
+    public Vector2i? Indices;
+
+    [ViewVariables]
+    public Dictionary<Vector2, List<Entity<AudioComponent>>> RayData = new();
 }
