@@ -41,7 +41,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     private static EntityQuery<RelayInputMoverComponent> _relayedQuery;
     private static EntityQuery<AiEyeComponent> _aiEyeQuery;
     private static EntityQuery<AudioComponent> _audioQuery;
-    private static EntityQuery<AudioMuffleComponent> _audioMuffleQuery;
     private static EntityQuery<SoundBlockerComponent> _blockerQuery;
 
     // Tile indices -> blocker entities
@@ -64,8 +63,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     public Vector2i? OldPlayerTile;
 
     private readonly HashSet<Entity<StationAiVisionComponent>> _nearestVisionEntities = new();
-
-    private readonly List<Vector2> _directionsToRemove = new();
 
     private readonly List<Entity<AudioComponent, AudioMuffleComponent>> _audioToRemove = new();
 
@@ -100,7 +97,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         _relayedQuery = GetEntityQuery<RelayInputMoverComponent>();
         _aiEyeQuery = GetEntityQuery<AiEyeComponent>();
         _audioQuery = GetEntityQuery<AudioComponent>();
-        _audioMuffleQuery = GetEntityQuery<AudioMuffleComponent>();
         _blockerQuery = GetEntityQuery<SoundBlockerComponent>();
 
         _xform.OnGlobalMoveEvent += OnMove;
@@ -191,26 +187,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                     ReverseAudioPosDict.Remove(indices);
             }
         }
-
-        var blockers = ent.Comp.RayBlockers;
-        foreach (var blocker in blockers)
-        {
-            var data = blocker.Comp.RayData;
-            _directionsToRemove.Clear();
-            foreach (var (dir, list) in data)
-            {
-                list.Remove((ent.Owner, audioComp));
-                if (list.Count == 0)
-                    _directionsToRemove.Add(dir);
-            }
-
-            foreach (var dir in _directionsToRemove)
-            {
-                data.Remove(dir);
-            }
-
-            _directionsToRemove.Clear();
-        }
     }
 
 
@@ -262,6 +238,8 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
     private void OnBlockerState(Entity<SoundBlockerComponent> ent, ref AfterAutoHandleStateEvent args)
     {
+        ent.Comp.CachedBlockerCost = null;
+
         if (ResolvePlayer() is not { } player)
             return;
 
@@ -480,29 +458,10 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
     private void RemoveBlocker(Entity<SoundBlockerComponent> blocker)
     {
+        _shouldResetRaycastFully = true;
+
         if (blocker.Comp.Indices is { } blockerIndices)
-        {
-            AddOrRemoveBlocker(blocker.AsNullable(), blockerIndices, false, true);
-            if (ReverseBlockerIndicesDict.TryGetValue(blockerIndices, out var set))
-            {
-                set.Remove(blocker);
-                if (set.Count == 0)
-                    ReverseBlockerIndicesDict.Remove(blockerIndices);
-            }
-            blocker.Comp.Indices = null;
-        }
-
-        var data = blocker.Comp.RayData;
-        foreach (var (_, list) in data)
-        {
-            foreach (var audio in list)
-            {
-                if (_audioMuffleQuery.TryComp(audio, out var muffle))
-                    muffle.RayBlockers.Remove(blocker);
-            }
-        }
-
-        data.Clear();
+            AddOrRemoveBlocker(blocker, blockerIndices, false, true);
     }
 
     private void PlayerMoved(EntityUid player, MapCoordinates oldPos, MapCoordinates newPos)
@@ -525,7 +484,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 PlayerGrid = (g, gC);
                 var tile = _map.TileIndicesFor((g, gC), newPos);
                 Expand(tile);
-                ResetAllBlockers(player);
                 ReCalculateAllAudio(player,
                     AudioProcessBehavior.None,
                     AudioProcessBehavior.Reset | AudioProcessBehavior.Recalculate);
@@ -536,56 +494,53 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             return;
         }
 
-        if (_mapManager.TryFindGridAt(newPos, out var grid, out var gridComp))
+        if (!_mapManager.TryFindGridAt(newPos, out var grid, out var gridComp))
         {
-            var tileNew = _map.TileIndicesFor((grid, gridComp), newPos);
+            PlayerGrid = null;
+            OldPlayerTile = null;
+            return;
+        }
 
-            if (grid != PlayerGrid.Value.Owner)
+        var tileNew = _map.TileIndicesFor((grid, gridComp), newPos);
+
+        if (grid != PlayerGrid.Value.Owner)
+        {
+            PlayerGrid = (grid, gridComp);
+            Expand(tileNew);
+            ReCalculateAllAudio(player,
+                AudioProcessBehavior.None,
+                AudioProcessBehavior.Reset | AudioProcessBehavior.Recalculate);
+            return;
+        }
+
+        if (oldPos == MapCoordinates.Nullspace)
+        {
+            Expand(tileNew);
+            ReCalculateAllAudio(player,
+                AudioProcessBehavior.None,
+                AudioProcessBehavior.Reset | AudioProcessBehavior.Recalculate);
+            return;
+        }
+
+        var tileOld = _map.TileIndicesFor((grid, gridComp), oldPos);
+
+        if (tileOld == tileNew)
+        {
+            if (OldPlayerTile != null && OldPlayerTile != tileNew)
             {
-                PlayerGrid = (grid, gridComp);
-                Expand(tileNew);
-                ResetAllBlockers(player);
-                ReCalculateAllAudio(player,
-                    AudioProcessBehavior.None,
-                    AudioProcessBehavior.Reset | AudioProcessBehavior.Recalculate);
-                return;
-            }
-
-            if (oldPos == MapCoordinates.Nullspace)
-            {
-                Expand(tileNew);
-                ResetAllBlockers(player);
-                ReCalculateAllAudio(player,
-                    AudioProcessBehavior.None,
-                    AudioProcessBehavior.Reset | AudioProcessBehavior.Recalculate);
-                return;
-            }
-
-            var tileOld = _map.TileIndicesFor((grid, gridComp), oldPos);
-
-            if (tileOld == tileNew)
-            {
-                if (OldPlayerTile != null && OldPlayerTile != tileNew)
-                {
-                    RebuildAndExpand(tileNew, OldPlayerTile.Value);
-                    OldPlayerTile = tileNew;
-                    ReCalculateAllAudio(player, AudioProcessBehavior.None, AudioProcessBehavior.Reset);
-                    return;
-                }
-
+                RebuildAndExpand(tileNew, OldPlayerTile.Value);
+                OldPlayerTile = tileNew;
                 ReCalculateAllAudio(player, AudioProcessBehavior.None, AudioProcessBehavior.Reset);
                 return;
             }
 
-            OldPlayerTile = tileNew;
-            RebuildAndExpand(tileNew, tileOld);
             ReCalculateAllAudio(player, AudioProcessBehavior.None, AudioProcessBehavior.Reset);
+            return;
         }
-        else
-        {
-            PlayerGrid = null;
-            OldPlayerTile = null;
-        }
+
+        OldPlayerTile = tileNew;
+        RebuildAndExpand(tileNew, tileOld);
+        ReCalculateAllAudio(player, AudioProcessBehavior.None, AudioProcessBehavior.Reset);
     }
 
     private void ResetBlockerMuffle(EntityUid player,
@@ -625,43 +580,58 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 _xform.GetMapId(PlayerGrid.Value.Owner) != blockerPos.Value.MapId)
                 return;
 
-            ResetBlockerOnGrid(PlayerGrid.Value, blocker, blockerPos.Value, oldIndices);
+            ResetBlockerOnGrid(PlayerGrid.Value, blockerEnt, blockerPos.Value, oldIndices);
             return;
         }
 
         if (pos.MapId != blockerPos.Value.MapId)
         {
-            blockerEnt.Comp.RayData.Clear();
             if (blockerEnt.Comp.Indices is { } indices)
                 oldIndices = indices;
 
             if (oldIndices == null)
                 return;
 
-            AddOrRemoveBlocker(blockerEnt.AsNullable(), oldIndices.Value, false, true);
+            AddOrRemoveBlocker(blockerEnt, oldIndices.Value, false, true);
             return;
         }
 
         if (TryFindCommonPlayerGrid(pos, blockerPos.Value) is { } grid)
-            ResetBlockerOnGrid(grid, blocker, blockerPos.Value, oldIndices);
+            ResetBlockerOnGrid(grid, blockerEnt, blockerPos.Value, oldIndices);
         else if (oldIndices != null)
-            AddOrRemoveBlocker(blockerEnt.AsNullable(), oldIndices.Value, false, true);
+            AddOrRemoveBlocker(blockerEnt, oldIndices.Value, false, true);
     }
 
     private void ResetBlockerOnGrid(Entity<MapGridComponent> grid,
-        EntityUid blocker,
+        Entity<SoundBlockerComponent> blocker,
         MapCoordinates blockerPos,
         Vector2i? oldIndices)
     {
         var indices = _map.TileIndicesFor(grid, blockerPos);
-        if (oldIndices == null)
+        if (oldIndices != null)
         {
-            AddOrRemoveBlocker(blocker, indices, true, true);
-            return;
+            if (indices == oldIndices.Value)
+            {
+                if (TileDataDict.TryGetValue(indices, out var data))
+                {
+                    var curCost = data.TotalCost;
+                    var baseCost = (data.Previous?.TotalCost ?? -1f) + 1f;
+                    var totalCost = GetTotalTileCost(indices);
+                    var sum = baseCost + totalCost;
+                    var delta = sum - curCost;
+                    if (MathHelper.CloseToPercent(delta, 0f))
+                        return;
+
+                    ModifyBlockerAmount(data, delta);
+                }
+
+                return;
+            }
+
+            AddOrRemoveBlocker(blocker, oldIndices.Value, false, true);
         }
 
-        AddOrRemoveBlocker(blocker, oldIndices.Value, false, true);
-        AddOrRemoveBlocker(blocker, indices, true, false);
+        AddOrRemoveBlocker(blocker, indices, true, true);
     }
 
     private void ReCalculateAudioMuffle(EntityUid player,
@@ -764,32 +734,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
             Entity<SoundBlockerComponent> blockerEnt = (potentialBlocker, blockerComp);
 
-            var coords = _xform.GetMapCoordinates(potentialBlocker);
-            if (TryFindCommonPlayerGrid(playerPos, coords) is { } blockerGrid)
-            {
-                var indices = _map.TileIndicesFor(blockerGrid, coords);
-                if (blockerEnt.Comp.Indices is not { } blockerIndices || blockerIndices != indices)
-                {
-                    blockerEnt.Comp.Indices = indices;
-                    AddOrRemoveBlocker(potentialBlocker, indices, true, true);
-                }
-            }
-
             hashSet.Add(blockerEnt);
-            var blockerList = blockerEnt.Comp.RayData;
-            _directionsToRemove.Clear();
-            foreach (var (key, value) in blockerList)
-            {
-                value.Remove(audioEnt);
-                if (value.Count == 0)
-                    _directionsToRemove.Add(key);
-                break;
-            }
-
-            foreach (var remove in _directionsToRemove)
-            {
-                blockerList.Remove(remove);
-            }
         }
 
         if (reset)
@@ -853,19 +798,18 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             _blockersToRemove.Clear();
             foreach (var blocker in data)
             {
-                if (!TryGetBlockerCost(blocker.AsNullable(), out var cost))
+                if (!Exists(blocker))
                 {
                     _blockersToRemove.Add(blocker);
                     continue;
                 }
 
-                muffleLevel += cost;
+                muffleLevel += GetBlockerCost(blocker.Comp);
             }
 
             foreach (var remove in _blockersToRemove)
             {
                 remove.Comp.Indices = null;
-                remove.Comp.RayData.Clear();
                 data.Remove(remove);
             }
 
@@ -914,19 +858,18 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         _blockersToRemove.Clear();
         foreach (var blocker in blockers)
         {
-            if (!TryGetBlockerCost(blocker.AsNullable(), out var cost))
+            if (!Exists(blocker))
             {
                 _blockersToRemove.Add(blocker);
                 continue;
             }
 
-            total += cost;
+            total += GetBlockerCost(blocker.Comp);
         }
 
         foreach (var remove in _blockersToRemove)
         {
             remove.Comp.Indices = null;
-            remove.Comp.RayData.Clear();
             blockers.Remove(remove);
         }
 
@@ -938,23 +881,18 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         return total;
     }
 
-    public bool TryGetBlockerCost(Entity<SoundBlockerComponent?> blocker, out float cost)
-    {
-        cost = 0f;
-        if (!Exists(blocker) || !Resolve(blocker, ref blocker.Comp, false))
-            return false;
-
-        cost = GetBlockerCost(blocker.Comp);
-        return true;
-    }
-
     public static float GetBlockerCost(SoundBlockerComponent blocker)
     {
         if (!blocker.Active)
             return 0f;
 
-        var percent = MathF.Max(blocker.SoundBlockPercent, 0f);
-        return percent > 0.99f ? 400f : -(1f / (percent - 1f)) * 4f - 4f;
+        if (blocker.CachedBlockerCost == null)
+        {
+            var percent = MathF.Max(blocker.SoundBlockPercent, 0f);
+            blocker.CachedBlockerCost = percent > 0.99f ? 400f : -(1f / (percent - 1f)) * 4f - 4f;
+        }
+
+        return blocker.CachedBlockerCost.Value;
     }
 
     private void SetVolume(Entity<AudioComponent?> audio, float volume, float muffleLevel)

@@ -10,6 +10,7 @@ public sealed partial class AudioMuffleSystem
     private readonly HashSet<MuffleTileData> _updatedData = new();
     private readonly HashSet<MuffleTileData> _reExpand = new();
     private readonly HashSet<Vector2i> _passed = new();
+    private readonly HashSet<Vector2i> _rewritePassed = new();
     private readonly PriorityQueue<MuffleTileData> _frontier = new();
     private readonly Dictionary<MuffleTileData, float> _expansionNodes = new();
     private readonly Dictionary<MuffleTileData, float> _innerExpansionNodes = new();
@@ -256,9 +257,9 @@ public sealed partial class AudioMuffleSystem
         }
 
         _frontier.Clear();
-        _passed.Clear();
+        _rewritePassed.Clear();
         _frontier.Add(first);
-        _passed.Add(first.Indices);
+        _rewritePassed.Add(first.Indices);
 
         InvalidateNext(first, invalidated);
         invalidated.Remove(first.Indices);
@@ -293,6 +294,9 @@ public sealed partial class AudioMuffleSystem
                     if (neighbor == node.Previous?.Indices)
                         continue;
 
+                    if (_rewritePassed.Contains(neighbor))
+                        continue;
+
                     if (!invalidated.Contains(neighbor))
                         continue;
 
@@ -314,13 +318,14 @@ public sealed partial class AudioMuffleSystem
                     node.Next.Add(newNode);
                     TileDataDict[neighbor] = newNode;
                     _frontier.Add(newNode);
-                    _passed.Add(neighbor);
+                    _rewritePassed.Add(neighbor);
                 }
             }
         }
 
         if (updateAudio)
             ReCalculateAllAudio(null, AudioProcessBehavior.None, AudioProcessBehavior.Reset);
+        _rewritePassed.Clear();
         _frontier.Clear();
     }
 
@@ -415,7 +420,7 @@ public sealed partial class AudioMuffleSystem
         if (!result)
             return false;
 
-        var toUpdate = delta < 0 ? node.TotalCost : node.TotalCost - delta;
+        var toUpdate = (node.Previous?.TotalCost ?? -1f) + 1f;
         if (iteration <= 1)
         {
             if (firstIteration)
@@ -423,17 +428,17 @@ public sealed partial class AudioMuffleSystem
             return true;
         }
 
-        PriorityQueue<MuffleTileData> frontier = new();
+        _frontier.Clear();
         foreach (var next in nextNodesToExpand)
         {
             if (!_updatedData.Contains(next))
-                frontier.Add(next);
+                _frontier.Add(next);
         }
 
         var count = 0;
-        while (frontier.Count > 0 && count < Math.Pow(PathfindingRange, 4))
+        while (_frontier.Count > 0 && count < Math.Pow(PathfindingRange, 4))
         {
-            var next = frontier.Take();
+            var next = _frontier.Take();
             count++;
 
             if (!ExpandNode(next, 0f, resetAudio, nodesToReExpand, out var nodes, false, 1))
@@ -444,9 +449,11 @@ public sealed partial class AudioMuffleSystem
                 if (_updatedData.Contains(toAdd))
                     continue;
 
-                frontier.Add(toAdd);
+                _frontier.Add(toAdd);
             }
         }
+
+        _frontier.Clear();
 
         UpdateTotalCostOfNextTileData(node, toUpdate, resetAudio, iteration, true);
 
@@ -516,16 +523,14 @@ public sealed partial class AudioMuffleSystem
 
         data.Previous = newPrevTile;
 
-        if (nextPrevious == null)
-            return;
-
-        nextPrevious.Next.Remove(data);
+        if (nextPrevious != null)
+            nextPrevious.Next.Remove(data);
 
         if (newPrevTile == null)
             return;
 
-        data.Next.Remove(nextPrevious);
-        nextPrevious.Next.Add(data);
+        data.Next.Remove(newPrevTile);
+        newPrevTile.Next.Add(data);
     }
 
     private void UpdateTotalCostOfNextTileData(MuffleTileData data,
@@ -560,45 +565,41 @@ public sealed partial class AudioMuffleSystem
         }
     }
 
-    private void AddOrRemoveBlocker(Entity<SoundBlockerComponent?> blocker,
+    private void AddOrRemoveBlocker(Entity<SoundBlockerComponent> blocker,
         Vector2i indices,
         bool add,
         bool modifyCost,
         bool resetAudio = false)
     {
-        if (!TryGetBlockerCost(blocker, out var cost))
-            return;
-
-        if (!Resolve(blocker, ref blocker.Comp, false))
-            return;
-
-        Entity<SoundBlockerComponent> blockerEnt = (blocker, blocker.Comp);
-
         if (add)
         {
             blocker.Comp.Indices = indices;
-            ReverseBlockerIndicesDict.GetOrNew(indices).Add(blockerEnt);
+            ReverseBlockerIndicesDict.GetOrNew(indices).Add(blocker);
         }
-        else if (ReverseBlockerIndicesDict.TryGetValue(indices, out var blockers))
+        else if (blocker.Comp.Indices == indices && ReverseBlockerIndicesDict.TryGetValue(indices, out var blockers))
         {
-            blockers.Remove(blockerEnt);
+            blocker.Comp.Indices = null;
+            blockers.Remove(blocker);
             if (blockers.Count == 0)
                 ReverseBlockerIndicesDict.Remove(indices);
         }
+        else
+            return;
 
         if (!modifyCost)
             return;
 
-        var sign = add ? 1 : -1;
-
-        ModifyBlockerAmount(indices, sign * cost, resetAudio);
-    }
-
-    private void ModifyBlockerAmount(Vector2i indices, float delta, bool resetAudio = false)
-    {
         if (!TileDataDict.TryGetValue(indices, out var data))
             return;
 
+        var cost = GetBlockerCost(blocker.Comp);
+        var sign = add ? 1 : -1;
+
+        ModifyBlockerAmount(data, sign * cost, resetAudio);
+    }
+
+    private void ModifyBlockerAmount(MuffleTileData data, float delta, bool resetAudio = false)
+    {
         if (delta < 0 && delta < -data.TotalCost)
             delta = -data.TotalCost;
 
