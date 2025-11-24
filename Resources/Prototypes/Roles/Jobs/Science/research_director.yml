@@ -162,9 +162,9 @@
   - Brig
   - Cryogenics
   # <Trauma>
+  - External
   - Robotics
   - Genetics
-  - External
   # </Trauma>
   special:
   - !type:AddImplantSpecial

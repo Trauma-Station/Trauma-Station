@@ -96,7 +96,7 @@
     science:     Structures/Doors/Airlocks/Standard/science.rsi
     security:    Structures/Doors/Airlocks/Standard/security.rsi
     virology:    Structures/Doors/Airlocks/Standard/virology.rsi
-    roboticist: _Goobstation/Structures/Doors/Airlocks/Glass/robotics.rsi # Goobstation - Roboticist
+    roboticist: _Goobstation/Structures/Doors/Airlocks/Glass/robotics.rsi # Trauma - there is no standard so this is glass :(
 
 - type: AirlockGroup
   id: Glass
@@ -117,6 +117,7 @@
     salvage:     Structures/Doors/Airlocks/Glass/salvage.rsi
     security:    Structures/Doors/Airlocks/Glass/security.rsi
     virology:    Structures/Doors/Airlocks/Glass/virology.rsi
+    roboticist: _Goobstation/Structures/Doors/Airlocks/Glass/robotics.rsi # Trauma
 
 - type: AirlockGroup
   id: Windoor
@@ -163,6 +164,7 @@
     hydroponics: Civilian
     janitor: Civilian # Goobstation - Sweet new jani door
     roboticist: Science # Goobstation
+    genetics: Science # Trauma
     maintenance: Civilian
     medical: Medical
     salvage: Cargo

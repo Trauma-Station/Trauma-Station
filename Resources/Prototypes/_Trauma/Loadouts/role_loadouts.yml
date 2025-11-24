@@ -1,0 +1,21 @@
+- type: roleLoadout
+  id: JobGeneticist
+  groups:
+  - GroupTankHarness
+  - ScientistHead
+  - ScientistNeck
+  - GeneticistJumpsuit
+  - GeneticistBackpack
+  - GeneticistOuterClothing
+  - ScientistGloves
+  - ScientistShoes
+  - Glasses
+  - Survival
+  - Trinkets
+  - Animals
+  - ScientistJobTrinkets # no geneticist weh plush WYSI
+  - GroupSpeciesBreathTool
+  - ScientistEnvirohelm
+  - ScientistEnvirosuit
+  - ScientistEnvirogloves
+  - ExclusiveItems

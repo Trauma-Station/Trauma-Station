@@ -189,6 +189,10 @@
   - Cargo
   - Atmospherics
   - Medical
+  # <Trauma>
+  - Robotics
+  - Genetics
+  # </Trauma>
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

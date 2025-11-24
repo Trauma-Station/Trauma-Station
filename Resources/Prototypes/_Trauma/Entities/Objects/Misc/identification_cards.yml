@@ -1,0 +1,11 @@
+- type: entity
+  parent: IDCardStandard
+  id: GeneticistIDCard
+  name: geneticist ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idgeneticist
+  - type: PresetIdCard
+    job: Geneticist

@@ -1,0 +1,38 @@
+- type: job
+  id: Geneticist
+  name: job-name-geneticist
+  description: job-description-geneticist
+  playTimeTracker: JobGeneticist
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Science
+    time: 2.5h
+  - !type:DepartmentTimeRequirement
+    department: Medical
+    time: 1h
+  startingGear: GeneticistGear
+  icon: JobIconGeneticist
+  supervisors: job-supervisors-rd
+  goobcoins: 25 # harder to roll than scientist
+  access:
+  - Research
+  - Maintenance
+  - Genetics
+
+- type: startingGear
+  id: GeneticistGear
+  equipment:
+    id: GeneticistPDA
+    ears: ClothingHeadsetScience
+    pocket1: HandLabeler
+
+- type: chameleonOutfit
+  id: GeneticistChameleonOutfit
+  job: Geneticist
+  equipment:
+    head: ClothingHeadHatBeretRND
+    eyes: ClothingEyesGlasses
+    mask: ClothingMaskSterile
+    neck: ClothingNeckTieSci
+    outerClothing: ClothingOuterWinterGen
+    gloves: ClothingHandsGlovesLatex
