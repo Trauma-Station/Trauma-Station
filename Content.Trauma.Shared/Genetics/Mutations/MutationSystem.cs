@@ -79,8 +79,8 @@ public sealed partial class MutationSystem : EntitySystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
-        LoadPrototypes();
         LoadRecipes();
+        LoadPrototypes();
     }
 
     private void OnMapInit(Entity<MutatableComponent> ent, ref MapInitEvent args)
@@ -176,10 +176,10 @@ public sealed partial class MutationSystem : EntitySystem
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
-        if (args.WasModified<EntityPrototype>())
-            LoadPrototypes();
         if (args.WasModified<MutationRecipePrototype>())
             LoadRecipes();
+        if (args.WasModified<EntityPrototype>())
+            LoadPrototypes();
     }
 
     private void LoadPrototypes()

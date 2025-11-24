@@ -97,8 +97,9 @@
         conditions:
         - !type:NestedCondition
           proto: IsAwake
+        - !type:InContainerCondition
+          inverted: true # can't dance inside a locker bro
         proto: MutationElvisDance
-  # TODO: randomly emote moving hips / busting out moves
 
 - type: entity
   parent: BaseFreeMutation

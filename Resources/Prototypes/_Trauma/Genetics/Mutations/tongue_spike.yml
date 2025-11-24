@@ -34,6 +34,7 @@
 - type: entity
   parent: MutationTongueSpike
   id: MutationChemSpike
+  name: Chem Spike
   description: Allows a creature to voluntarily shoot their tongue out as biomass, allowing a long range transfer of chemicals.
   components:
   - type: Mutation
