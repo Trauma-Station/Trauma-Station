@@ -378,7 +378,6 @@
     - PlushieMoth
     - PlushieHuman
     - PlushiePenguin
-    - PlushieXeve
     - PlushieDurk
     - PlushieMnwaar
     - PlushieLouie
@@ -394,7 +393,6 @@
     - PlushieBoggle
     - PlushieLehmin
     evilRewards:
-    - EvilPlushieXeve
     - EvilPlushieBoggle
     - EvilPlushieBrizby
     - EvilPlushieNigel
