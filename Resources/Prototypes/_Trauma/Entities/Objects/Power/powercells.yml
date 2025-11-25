@@ -1,0 +1,62 @@
+- type: entity
+  id: BaseLaserGunCell
+  abstract: true
+  parent: BaseItem
+  components:
+  - type: Item
+    storedRotation: -90
+  - type: Battery
+    pricePerJoule: 0.15
+  - type: PowerCell
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 200
+    intensitySlope: 1.5
+  - type: Sprite
+    sprite: Objects/Power/power_cells.rsi
+  - type: SolutionContainerManager
+    solutions:
+      battery:
+        maxVol: 5
+  - type: InjectableSolution
+    solution: battery
+  - type: DrawableSolution
+    solution: battery
+  - type: Extractable
+    juiceSolution:
+      reagents:
+        - ReagentId: Zinc
+          Quantity: 5
+  - type: Tag
+    tags:
+      - PowerCell
+      - GunPowerCell
+  - type: Appearance
+  - type: PowerCellVisuals
+  - type: Riggable
+
+- type: entity
+  name: high-capacity laser power cell
+  description: A rechargeable proprietary power cell for laser weaponry. Somehow works in things that fit the standard cells.
+  id: HighCapacityLaserGunCell
+  suffix: Full
+  parent: BaseLaserGunCell
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ] # TODO: Resprite to look like a magazine.
+      state: high
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+  - type: Battery
+    maxCharge: 1024 # Not meaningfully worse than high capacity cells, just to make it easier to make the ammo a power of 8.
+    startingCharge: 1024
+  - type: PhysicalComposition # Recycling from goob
+    materialComposition:
+      Plastic: 37
+      Steel: 50
+      Glass: 100
+      Gold: 5
+    chemicalComposition:
+      Zinc: 15

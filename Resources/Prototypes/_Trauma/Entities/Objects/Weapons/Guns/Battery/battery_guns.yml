@@ -42,3 +42,237 @@
     guides:
     - Security
     - Antagonists
+
+- type: entity
+  id: BaseWeaponProprietaryCell
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Item
+    size: Large
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: AmmoCounter
+  - type: Gun
+    fireRate: 2
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLaser
+    fireCost: 64
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: Magazine
+        startingItem: HighCapacityLaserGunCell # Make PowerCellHigh if making a worse BaseWeaponBattery
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - GunPowerCell
+            # - PowerCell
+            # - PowerCellSmall
+# Decomment PowerCell and PowerCellSmall and comment GunPowerCell to make it a worse BaseWeaponBattery, no you can't make it refrence that instead. I tried. I can't move it either or it fucks itself. So for now you get this with the proprietary cells.
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: Appearance
+  - type: StaticPrice
+    price: 420
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+  - type: Cautery
+    speed: 0.9
+  - type: SurgeryTool
+    endSound:
+      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
+  - type: AlwaysHot
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 12
+    angle: 0
+    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
+    soundHit:
+      collection: MetalThud
+  - type: Multishot
+    missChance: 0.4
+    spreadMultiplier: 3
+    spreadAddition: 40
+  - type: BatteryDrinkerSource
+    maxAmount: 180
+
+- type: entity
+  name: Lysithea rifle
+  parent: [BaseWeaponProprietaryCell, BaseGunWieldable, BaseSecurityContraband]
+  id: WeaponLysitheaRifle
+  description: An expensive laser rifle based off of a WW3-era superweapon prototype. Takes laser power cells.
+  components:
+  - type: Sprite # TODO: Resprite
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Gun
+    fireRate: 2
+  - type: Item
+    size: Large
+    sprite: Objects/Weapons/Guns/Battery/svalinn.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLaser
+    fireCost: 64
+
+- type: entity
+  name: Antique Lysithea rifle
+  parent: [BaseWeaponProprietaryCell, BaseGunWieldable, BaseSecurityContraband]
+  id: WeaponAntiqueLysitheaRifle
+  description: Made orginally by Juptier Gas Mining Company when they found a new element, sold to Nanotresen before WW3.
+  # Just a reskin that you guys can do wahtever with, give it to HoS for all I care
+
+- type: entity
+  name: Lysithea IAR
+  parent: [BaseWeaponProprietaryCell, BaseGunWieldable, BaseSecurityContraband]
+  id: WeaponLysitheaIAR
+  description: A Lysithea series Infantry Automatic Rifle, a mid-point between an LMG and standard rifle. Takes laser power cells.
+  components:
+  - type: Sprite # TODO: Resprite
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Gun
+    fireRate: 3
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+  - type: Item
+    size: Large
+    sprite: Objects/Weapons/Guns/Battery/svalinn.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLightLaser
+    fireCost: 16
+
+- type: entity
+  name: Lysithea IFR
+  parent: [BaseWeaponProprietaryCell, BaseGunWieldable, BaseSecurityContraband]
+  id: WeaponLysitheaPDW
+  description: A Lysithea series rifle that somehow goes through armor? Why can't they all do that? Takes laser power cells.
+  components:
+  - type: Sprite # TODO: Resprite
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Gun
+    fireRate: 3
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+  - type: Item
+    size: Large
+    sprite: Objects/Weapons/Guns/Battery/svalinn.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: HitscanBatteryAmmoProvider
+    proto: RedAPLightLaser
+    fireCost: 21.3333333333333333 # fuck
+
+- type: entity
+  name: Lysithea carbine
+  parent: [BaseWeaponProprietaryCell, BaseSecurityContraband]
+  id: WeaponLysitheaCarbine
+  description: A Lysithea series rifle fitted with an arm brace to allow for one-handed shooting. Takes laser power cells.
+  components:
+  - type: Sprite # TODO: Resprite
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Gun
+    fireRate: 3
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+  - type: Item
+    size: Large
+    sprite: Objects/Weapons/Guns/Battery/svalinn.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLightLaser
+    fireCost: 32
+
+- type: entity
+  name: Lysithea battle rifle
+  parent: [BaseWeaponProprietaryCell, BaseGunWieldable, BaseSecurityContraband]
+  id: WeaponLysitheaBattleRifle
+  description: A Lysithea series rifle that fires in two shot bursts. Takes laser power cells.
+  components:
+  - type: Sprite # TODO: Resprite
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Gun
+    fireRate: 2
+    shotsPerBurst: 2
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    burstFireRate: 14
+  - type: Item
+    size: Large
+    sprite: Objects/Weapons/Guns/Battery/svalinn.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLaser
+    fireCost: 64

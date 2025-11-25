@@ -1,0 +1,10 @@
+- type: entity
+  parent: BasicHitscan
+  id: RedAPLightLaser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 7
+      armorPenetration: 0.75
