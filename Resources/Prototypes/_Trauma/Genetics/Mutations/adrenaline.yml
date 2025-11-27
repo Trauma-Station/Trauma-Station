@@ -25,7 +25,8 @@
   - type: InjectChemicalsAction
     main:
       # no Pump Up and using adrenaline instead of determination
-      reagents: [ Synaptizine, Adrenaline ]
+      # synaptizine is a poison for some reason, so use stimulants instead
+      reagents: [ Stimulants, Epinephrine ]
       baseQuantity: 10
       popup: MutationAdrenalineRush-inject-popup
     # no confusion system so theres no confusion reagent

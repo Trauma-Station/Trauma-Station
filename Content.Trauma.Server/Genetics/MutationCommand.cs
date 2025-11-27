@@ -68,7 +68,6 @@ public sealed class MutationCommand : ToolshedCommand
             return;
 
         Mutation.Scramble(ent);
-        RemComp<ScannedGenomeComponent>(ent);
     }
 
     private EntProtoId<MutationComponent> Check(string id)

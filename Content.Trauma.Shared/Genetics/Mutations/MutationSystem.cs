@@ -9,6 +9,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.Trigger.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -77,6 +78,7 @@ public sealed partial class MutationSystem : EntitySystem
 
         SubscribeLocalEvent<MutatableComponent, MapInitEvent>(OnMapInit, after: new[] { typeof(SharedBodySystem) });
         SubscribeLocalEvent<MutatableComponent, PolymorphedEvent>(OnPolymorphed);
+        SubscribeLocalEvent<MutatableComponent, DnaScrambledEvent>(OnDnaScrambled);
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
@@ -120,6 +122,11 @@ public sealed partial class MutationSystem : EntitySystem
             SetDna(target, oldDna); // don't change dna by reapplying mutations
     }
 
+    private void OnDnaScrambled(Entity<MutatableComponent> ent, ref DnaScrambledEvent args)
+    {
+        Scramble(ent, predicted: false); // currently it's only raised on server
+    }
+
     private void MutationAdded(Entity<MutatableComponent> ent, Entity<MutationComponent> mutation, bool automatic, bool predicted)
     {
         if (_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
@@ -155,7 +162,7 @@ public sealed partial class MutationSystem : EntitySystem
         // very important that foreign is checked before removing instability
         // otherwise livrah rat heart incident can happen but for instability instead of damage reduction
         if (IsForeign(ent, id))
-            AddInstability(ent, -mutation.Comp.Instability, predicted: predicted);
+            AddInstability(ent, -mutation.Comp.Instability, automatic: automatic, predicted: predicted);
 
         var ev = new MutationRemovedEvent(ent, mutation, id, automatic, predicted);
         RaiseLocalEvent(mutation, ref ev);
@@ -246,7 +253,7 @@ public sealed partial class MutationSystem : EntitySystem
     }
 
     public MutationData? GetRoundData(EntityUid uid)
-        => GetRoundData(Prototype(uid)?.ID);
+        => GetRoundData(GetID(uid));
 
     /// <summary>
     /// Gets the ID of a mutation, or throws if it isn't valid.
@@ -483,6 +490,8 @@ public sealed partial class MutationSystem : EntitySystem
             ent.Comp.Dormant.Add(_random.Pick(UnlockedMutations));
             Dirty(ent);
         }
+
+        RemComp<ScannedGenomeComponent>(ent); // have to rescan it now chud
     }
 
     public void TransferMutations(Entity<MutatableComponent> ent, Entity<MutatableComponent> target, bool predicted = false)

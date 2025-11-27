@@ -191,7 +191,6 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         DirtyField(ent, nameof(GeneticsConsoleComponent.NextScramble));
 
         _mutation.Scramble(mutatable, predicted: true);
-        RemComp<ScannedGenomeComponent>(mob);
         UpdateUI(ent);
     }
 

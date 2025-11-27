@@ -1,13 +1,47 @@
 - type: entity
-  parent: StatusEffect
+  parent: StatusEffectBase
   id: DnaMeltingStatusEffect
   name: DNA melting
   components:
-  - type: EffectsOnStatusEffectRemoved
+  - type: TriggerOnStatusEffectRemoved
+  - type: EntityEffectOnTrigger
+    targetUser: true
     effects:
     - !type:NestedEffect
-      conditions:
-      - !type:DnaUnstable
+      conditions: # don't do a bad thing if instability is fixed in time
+      - !type:DnaUnstableCondition
       proto: SomethingHorrible
     # not parity, always scramble dna when it's removed to prevent edging it every 9 minutes by removing and adding some mutation on the fly
     - !type:ScrambleDna
+
+- type: entity
+  parent: StatusEffectBase
+  id: DecloningStatusEffect
+  name: decloning
+  # TODO
+
+- type: entity
+  parent: StatusEffectBase
+  id: LookingUpStatusEffect
+  components:
+  - type: TriggerOnStatusEffectRemoved
+  - type: EntityEffectOnTrigger
+    targetUser: true
+    effects:
+    - !type:PopupMessage
+      type: Pvs
+      messages:
+      - entity-effect-popup-eyes-melt
+    - !type:RelayOrgans
+      slot: eyes
+      guidebookText: entity-effect-guidebook-melts-eyes
+      effects:
+      - !type:Delete
+    - !type:RelayOrgans
+      slot: brain
+      guidebookText: entity-effect-guidebook-melts-brain
+      effects:
+      - !type:AddComponents
+        components:
+        - type: TimedDespawn
+          lifetime: 3

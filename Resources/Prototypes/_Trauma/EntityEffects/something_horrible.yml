@@ -1,7 +1,20 @@
 # What happens to you if you mutate and stay at 100 instability for too long
 
 - type: entityEffect
-  id: SomethingHorribleSafe
+  id: SomethingHorrible
+  effects:
+  # not parity but i cbf to make the scaling thing and not sure it would apply anyway
+  - !type:WeightedRandomEffect
+    children:
+    - weight: 3
+      effect: !type:NestedEffect
+        proto: SomethingHorribleNonLethal
+    - weight: 7
+      effect: !type:NestedEffect
+        proto: SomethingHorribleLethal
+
+- type: entityEffect
+  id: SomethingHorribleNonLethal
   effects:
   - !type:WeightedRandomEffect
     children:
@@ -14,22 +27,31 @@
         prototype: Snail
     - effect: !type:NestedEffect
         proto: Cripple
-    - effect: !type:NestedEffect
-        proto: Corgify
+    - effect: !type:Polymorph
+        prototype: Corgi
     - weight: 4 # number of "alright" effects
       effect: !type:NestedEffect
         proto: Alright
     - weight: 2 # parity...
       effect: !type:Polymorph
         prototype: Snail
+    - effect: !type:NestedEffect
+        proto: UltimateLifeform
 
 - type: entityEffect
   id: SomethingHorribleLethal
   effects:
   - !type:WeightedRandomEffect
     children:
-    - effect:
-    - effect:
+    - effect: !type:Gib
+    - effect: !type:NestedEffect
+        proto: Dust
+    # TODO: petrify permanently if someone ever makes that
+    - effect: !type:NestedEffect
+        proto: Skeletonize
+    - effect: !type:NestedEffect
+        proto: LookUp
+    # TODO: psykerize if someone ever makes that
 
 # Non-lethal
 
@@ -37,7 +59,7 @@
   id: Cripple
   effects:
   - !type:SpawnEntity
-    proto: VehicleWheelchair
+    entity: VehicleWheelchair
   # TODO: change this to paraplegic brain trauma if anyone ever makes that
   - !type:AddComponents
     guidebookText: entity-effect-guidebook-paralyze-legs
@@ -60,9 +82,9 @@
     - effect: !type:NoEffect # small chance of it being a dud
     - effect: !type:NestedEffect
         proto: MakeFragile
-    - !type:PolymorphEntity
+    - effect: !type:Polymorph
       prototype: Slime # CBF to make the reagent stuff, reuse it if xenobio ever makes it
-    - !type:ModifyStatusEffect
+    - effect: !type:ModifyStatusEffect
       effectProto: DecloningStatusEffect # not using a disease because it doesnt exist :(
       time: 5m
 
@@ -75,9 +97,48 @@
     - type: Fragile
 
 - type: entityEffect
-  id: Snailify
+  id: UltimateLifeform
   effects:
+  - !type:PopupMessage
+    method: PopupCoordinates # need it to persist after the original mob is gone
+    messages:
+    - entity-effect-popup-ultimate-lifeform
   - !type:Polymorph
-    prototype: Snail
+    prototype: Crab
 
 # Lethal
+
+- type: entityEffect
+  id: Dust
+  effects:
+  - !type:PopupMessage
+    type: Pvs
+    method: PopupCoordinates # mob is deleted
+    messages:
+    - entity-effect-popup-dusted
+  - !type:SpawnEntity
+    entity: Ash
+  - !type:Delete # bye bye
+
+- type: entityEffect
+  id: Skeletonize
+  effects:
+  - !type:PopupMessage
+    type: Pvs
+    method: PopupCoordinates # mob is deleted
+    messages:
+    - entity-effect-popup-skeletonized
+  - !type:Polymorph
+    prototype: Skeleton
+  # TODO: 90% chance of the skeleton dying in 3 seconds
+
+- type: entityEffect
+  id: LookUp # I understand now
+  effects:
+  - !type:PopupMessage
+    visualType: LargeCaution
+    messages:
+    - entity-effect-popup-look-up
+  - !type:ModifyStatusEffect
+    effectProto: LookingUpStatusEffect
+    time: 3s

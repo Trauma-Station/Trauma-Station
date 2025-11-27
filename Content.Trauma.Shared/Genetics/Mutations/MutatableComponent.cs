@@ -1,3 +1,4 @@
+using Content.Shared.StatusEffectNew.Components;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -58,11 +59,11 @@ public sealed partial class MutatableComponent : Component
     /// Status effect added while DNA is melting.
     /// </summary>
     [DataField]
-    public EntProtoId<StatusEffectComponent> MeltingEffect = "StatusEffectDnaMelting";
+    public EntProtoId<StatusEffectComponent> MeltingEffect = "DnaMeltingStatusEffect";
 
     /// <summary>
     /// How long <see cref="MeltingEffect"/> lasts for.
     /// </summary>
     [DataField]
-    public TimeSpan MeltDuration = TimeSpan.FromMinutes(10);
+    public TimeSpan MeltDuration = TimeSpan.FromMinutes(3); // its 10m in tg but that seems like way too long
 }

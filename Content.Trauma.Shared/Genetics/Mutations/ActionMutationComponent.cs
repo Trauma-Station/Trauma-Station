@@ -12,4 +12,7 @@ public sealed partial class ActionMutationComponent : Component
 {
     [DataField(required: true)]
     public EntProtoId<ActionComponent> Action;
+
+    [DataField]
+    public EntityUid? ActionEntity;
 }

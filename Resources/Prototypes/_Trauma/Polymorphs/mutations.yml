@@ -39,3 +39,66 @@
     forced: true
     polymorphPopup: null
     exitPolymorphPopup: MutationTongueSpike-popup-revert
+
+# Something Horrible polymorphs
+
+- type: polymorph
+  id: Corgi
+  configuration:
+    entity: MobCorgi
+    forced: false
+    inventory: Drop
+    transferName: true
+    copiedComponents: []
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+
+- type: polymorph
+  id: Slime
+  configuration:
+    entity: MobAdultSlimes
+    forced: false
+    inventory: Drop
+    transferName: true
+    copiedComponents: []
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+
+- type: polymorph
+  id: Snail
+  configuration:
+    entity: MobSnail
+    forced: false
+    inventory: Drop
+    transferName: true
+    copiedComponents: []
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+    allowRepeatedMorphs: false
+
+- type: polymorph
+  id: Crab
+  configuration:
+    entity: MobCrab
+    forced: false
+    inventory: Drop
+    transferName: true
+    copiedComponents: []
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+    allowRepeatedMorphs: false
+
+- type: polymorph
+  id: Skeleton
+  configuration:
+    entity: MobSkeleton
+    forced: false
+    inventory: Drop # your skin melts off so your clothes drop
+    transferName: false # fibula time
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
