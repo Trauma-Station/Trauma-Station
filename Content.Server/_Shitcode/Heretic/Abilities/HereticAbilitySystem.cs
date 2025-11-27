@@ -502,7 +502,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
             {
                 var reduction = leech.StunReduction * multiplier;
                 _statusEffect.TryRemoveTime(uid, "Stun", reduction, status);
-                _statusEffect.TryRemoveTime(uid, "KnockedDown", reduction, status);
+                _stun.AddKnockdownTime(uid, -reduction);
 
                 _statusEffect.TryRemoveStatusEffect(uid, "Pacified", status);
                 _statusEffect.TryRemoveStatusEffect(uid, "ForcedSleep", status);

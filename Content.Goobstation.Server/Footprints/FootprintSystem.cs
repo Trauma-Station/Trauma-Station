@@ -16,6 +16,7 @@ using System.Numerics;
 using Content.Goobstation.Common.Footprints;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Fluids;
 using Content.Shared.Fluids.Components;
@@ -141,7 +142,7 @@ public sealed class FootprintSystem : EntitySystem
 
         var puddleSolSol = puddleSolution.Value.Comp.Solution;
         // don't transfer reagents that don't stick to skin to our footsteps
-        var nonStickProtos = new List<string>(); // has to be string or it dies
+        var nonStickProtos = new List<ProtoId<ReagentPrototype>>();
         foreach (var (proto, amt) in puddleSolSol.GetReagentPrototypes(_prototype))
         {
             if (!proto.SticksToSkin)

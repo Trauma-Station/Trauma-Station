@@ -195,6 +195,8 @@ public sealed class FreezeContactsSystem : EntitySystem
             return;
 
         var otherUid = args.OtherEntity;
+        if (TerminatingOrDeleted(otherUid))
+            return;
 
         if (!TryComp(uid, out TimedDespawnComponent? despawn) || despawn.Lifetime <= 0f)
             return;

@@ -361,22 +361,6 @@
   - UplinkWeaponry
 
 - type: listing
-  id: UplinkMiniatureEnergyCrossbow
-  name: uplink-miniature-energy-crossbow-name
-  description: uplink-miniature-energy-crossbow-desc
-  icon: { sprite:  /Textures/_Goobstation/Objects/Weapons/Guns/Battery/miniature_ebow.rsi, state: icon }
-  productEntity: MiniatureEnergyCrossbow
-  cost:
-    Telecrystal: 50
-  categories:
-  - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - NukeOpsUplink
-
-- type: listing
   id: UplinkWSPR
   name: uplink-WSPR-name
   description: uplink-WSPR-desc

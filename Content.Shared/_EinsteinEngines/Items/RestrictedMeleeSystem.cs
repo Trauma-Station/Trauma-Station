@@ -7,7 +7,7 @@
 
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffect;
+using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
@@ -20,7 +20,7 @@ public sealed class RestrictedMeleeSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
 
@@ -46,7 +46,7 @@ public sealed class RestrictedMeleeSystem : EntitySystem
         if (comp.ForceDrop)
             _hands.TryDrop(args.User);
 
-        if (!_statusEffects.HasStatusEffect(args.User, "KnockedDown"))
+        if (!_standing.IsDown(args.User))
             _audioSystem.PlayPredicted(comp.FallSound, args.User, args.User);
 
         // Display the message to the player and cancel the melee attempt.

@@ -300,6 +300,23 @@
 
 
 - type: listing
+  id: UplinkEnergyCrossbow
+  name: uplink-energycrossbow-name
+  description: uplink-energycrossbow-desc
+  productEntity: WeaponEnergyCrossbow
+  cost:
+    Telecrystal: 50 # Trauma
+  categories:
+  - UplinkWeaponry
+  conditions:
+  #- !type:ListingLimitedStockCondition # Trauma
+  #  stock: 1
+  - !type:StoreWhitelistCondition # Trauma
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
   id: UplinkThrowingKnivesKit
   name: uplink-knives-kit-name
   description: uplink-knives-kit-desc
@@ -2402,3 +2419,32 @@
   - !type:BuyerJobCondition
     whitelist:
     - Chaplain
+
+#- type: listing # Trauma - surgical bundle exists
+#  id: UplinkSawAdvanced
+#  name: uplink-saw-advanced-name
+#  description: uplink-saw-advanced-desc
+#  icon: { sprite:  Objects/Specific/Medical/Surgery/saw.rsi, state: advanced}
+#  productEntity: SawAdvanced
+#  cost:
+#    Telecrystal: 10 # Trauma
+#  categories:
+#  - UplinkJob
+#  conditions:
+#  - !type:BuyerJobCondition
+#    whitelist:
+#    - MedicalDoctor
+
+- type: listing
+  id: uplinkBriefcaseGun
+  name: uplink-briefcase-gun-name
+  description: uplink-briefcase-gun-desc
+  productEntity: WeaponSubMachineGunBriefcase
+  cost:
+    Telecrystal: 75 # Trauma
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Lawyer

@@ -36,4 +36,5 @@
     whitelist:
       tags:
       - PKAUpgrade
+  - type: ItemSlots
 # TODO: Plasma Cutter

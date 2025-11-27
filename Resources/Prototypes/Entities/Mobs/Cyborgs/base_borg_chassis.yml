@@ -495,9 +495,8 @@
     stunTime: 5
   - type: SiliconLawProvider
     laws: XenoborgLawset # custom laws here
-    subverted: true
-  - type: IntrinsicRadioReceiver # Goob - moved binary to CM
-  - type: CollectiveMind
+    subverted: true # Goob
+  - type: CollectiveMind # Goob
     defaultChannel: Binary
     channels:
     - Binary
@@ -570,6 +569,11 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PinpointerMothership: # drop a pinpointer to the mothership upon being destructed
+            min: 1
+            max: 1
       - !type:EmptyContainersBehaviour
         containers:
         - borg_brain
@@ -583,7 +587,7 @@
     guides:
     - Cyborgs
     - Robotics
-    # TODO: add Xenoborg guide (part 7 spoilers)
+    - Xenoborgs
   - type: Access
     enabled: false
     tags:
@@ -594,3 +598,4 @@
   - type: InteractionPopup
     interactSuccessSound:
       path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: Xenoborg

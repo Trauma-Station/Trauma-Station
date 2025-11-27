@@ -13,9 +13,6 @@
   components:
   - type: Sprite
     sprite: _Goobstation/Structures/Doors/Airlocks/Standard/janitor.rsi
-  - type: PaintableAirlock
-    group: Standard
-    department: Civilian
   - type: Wires
     layoutId: AirlockService
 
@@ -26,9 +23,6 @@
   components:
   - type: Sprite
     sprite: _Goobstation/Structures/Doors/Airlocks/Glass/janitor.rsi
-  - type: PaintableAirlock
-    group: Glass
-    department: Civilian
   - type: Wires
     layoutId: AirlockService
 
@@ -70,8 +64,5 @@
       board: [ DoorElectronicsRobotics ]
   - type: Sprite
     sprite: _Goobstation/Structures/Doors/Airlocks/Glass/robotics.rsi
-  - type: PaintableAirlock
-    department: Science
-    group: Glass
   - type: Wires
     layoutId: AirlockScience

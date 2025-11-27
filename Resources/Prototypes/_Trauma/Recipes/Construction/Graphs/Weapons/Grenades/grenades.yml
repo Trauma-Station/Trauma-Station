@@ -8,9 +8,7 @@
 
 - type: constructionGraph
   id: SyndicateMinibombGraph
-  start: start
   graph:
-
   - node: start
     entity: SyndieMiniBomb
     edges:
@@ -96,9 +94,7 @@
 #Start New
 - type: constructionGraph
   id: SyndicateTrickybombGraph
-  start: start
   graph:
-
   - node: start
     entity: SyndieTrickyBomb
     edges:
@@ -184,9 +180,7 @@
 #Start New
 - type: constructionGraph
   id: WhiteholeGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: WhiteholeGrenade
     edges:
@@ -272,9 +266,7 @@
 #Start New
 - type: constructionGraph
   id: NuclearOptionGraph
-  start: start
   graph:
-
   - node: start
     entity: NuclearGrenade
     edges:
@@ -360,9 +352,7 @@
 #Start New
 - type: constructionGraph
   id: SupermatterGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: GrenadeStinger
     edges:
@@ -448,9 +438,7 @@
 #Start New
 - type: constructionGraph
   id: StingerGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: GrenadeStinger
     edges:
@@ -536,9 +524,7 @@
 #Start New
 - type: constructionGraph
   id: TearGasGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: TearGasGrenade
     edges:
@@ -624,9 +610,7 @@
 #Start New
 - type: constructionGraph
   id: SarinGasGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: SarinGasGrenade
     edges:
@@ -712,9 +696,7 @@
 #Start New
 - type: constructionGraph
   id: IncendiaryGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: GrenadeIncendiary
     edges:
@@ -800,9 +782,7 @@
 #Start New
 - type: constructionGraph
   id: HolyHandGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: HolyHandGrenade
     edges:
@@ -888,9 +868,7 @@
 #Start New
 - type: constructionGraph
   id: ClusterGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: ClusterGrenade
     edges:
@@ -976,9 +954,7 @@
 #Start New
 - type: constructionGraph
   id: ClusterBangGraph
-  start: start
   graph:
-
   - node: start
     entity: ClusterBangFull
     edges:
@@ -1064,9 +1040,7 @@
 #Start New
 - type: constructionGraph
   id: AirGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: AirGrenade
     edges:
@@ -1152,9 +1126,7 @@
 #Start New
 - type: constructionGraph
   id: FoamGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: GrenadeFoamDart
     edges:
@@ -1240,9 +1212,7 @@
 #Start New
 - type: constructionGraph
   id: EMPGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: EmpGrenade
     edges:
@@ -1328,9 +1298,7 @@
 #Start New
 - type: constructionGraph
   id: BeeGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: BeeGrenade
     edges:
@@ -1416,9 +1384,7 @@
 #Start New
 - type: constructionGraph
   id: ShrapnelGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: GrenadeShrapnel
     edges:
@@ -1504,9 +1470,7 @@
 #Start New
 - type: constructionGraph
   id: FlashbangGraph
-  start: start
   graph:
-
   - node: start
     entity: GrenadeFlashBang
     edges:
@@ -1592,9 +1556,7 @@
 #Start New
 - type: constructionGraph
   id: TrickGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: GrenadeDummy
     edges:
@@ -1680,9 +1642,7 @@
 #Start New
 - type: constructionGraph
   id: LubeGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: LubeGrenade
     edges:
@@ -1774,9 +1734,7 @@
 #Start New
 - type: constructionGraph
   id: GlueGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: GlueGrenade
     edges:
@@ -1868,9 +1826,7 @@
 #Start New
 - type: constructionGraph
   id: CleanerGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: CleanerGrenade
     edges:
@@ -1962,9 +1918,7 @@
 #Start New
 - type: constructionGraph
   id: SmokeGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: SmokeGrenade
     edges:
@@ -2050,9 +2004,7 @@
 #Start New
 - type: constructionGraph
   id: MetalFoamGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: MetalFoamGrenade
     edges:
@@ -2144,9 +2096,7 @@
 #Start New
 - type: constructionGraph
   id: ExplosiveGrenadeGraph
-  start: start
   graph:
-
   - node: start
     entity: ExGrenade
     edges:
@@ -2228,3 +2178,18 @@
         completed:
         - !type:EmptyContainer
           container: payload
+
+# shouldn't be possible unless admin abuse
+- type: constructionGraph
+  id: SelfDestructSeq
+  graph:
+  - node: start
+    entity: SelfDestructSeq
+    edges:
+    - to: emptyCase
+      steps:
+      - tool: Prying
+        doAfter: 0.5
+        completed:
+        - !type:DeleteEntity
+  - node: emptyCase

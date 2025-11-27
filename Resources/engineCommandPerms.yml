@@ -127,11 +127,9 @@
   - nearby
   - ent
 
-- Flags: FUN
+- Flags: FUN # Goob
   Commands:
-  - tippy
-  - loadprototype # Goobstation
-  - tip
+  - loadprototype
 
 - Flags: SERVER
   Commands:

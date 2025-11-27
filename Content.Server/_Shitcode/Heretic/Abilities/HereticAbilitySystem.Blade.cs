@@ -19,6 +19,7 @@ using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Heretic;
+using Content.Shared.Stunnable;
 using Content.Shared.CombatMode.Pacification;
 using Robust.Shared.Timing;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components; // Shitmed Change
@@ -51,7 +52,7 @@ public sealed partial class HereticAbilitySystem
             return;
 
         _statusEffect.TryRemoveStatusEffect(ent, "Stun");
-        _statusEffect.TryRemoveStatusEffect(ent, "KnockedDown");
+        RemComp<KnockedDownComponent>(ent);
         _statusEffect.TryRemoveStatusEffect(ent, "ForcedSleep");
         _statusEffect.TryRemoveStatusEffect(ent, "Drowsiness");
 

@@ -30,9 +30,6 @@
   - type: Construction
     graph: Airlock
     node: sealedAirlock
-  - type: PaintableAirlock
-    group: Standard
-    department: null
   - type: Tag
     tags:
       - SealedAirlock
@@ -63,9 +60,6 @@
   - type: Construction
     graph: Airlock
     node: sealedGlassAirlock
-  - type: PaintableAirlock
-    group: Glass
-    department: null
   - type: Tag
     tags:
       - SealedGlassAirlock

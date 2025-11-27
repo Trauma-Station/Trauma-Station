@@ -32,7 +32,7 @@ namespace Content.Shared.Construction.Prototypes
         public string ID { get; private set; } = default!;
 
         [DataField("start")]
-        public string? Start { get; private set; }
+        public string? Start = "start"; // Trauma - default to start because that's what everything uses...
 
         [DataField("graph", priority: 0)]
         private List<ConstructionGraphNode> _graph = new();

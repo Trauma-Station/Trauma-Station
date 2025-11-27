@@ -42,4 +42,20 @@ public sealed partial class TraumaCVars
         CVarDef.Create("trauma.mining_reward_ratio", 50, CVar.SERVER | CVar.REPLICATED);
 
     #endregion
+
+    #region AudioMuffle
+
+    /// <summary>
+    /// Is audio muffle raycast behavior enabled?
+    /// </summary>
+    public static readonly CVarDef<bool> AudioMuffleRaycast =
+        CVarDef.Create("trauma.audio_muffle_raycast", true, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// Is audio muffle pathfinding behavior enabled?
+    /// </summary>
+    public static readonly CVarDef<bool> AudioMufflePathfinding =
+        CVarDef.Create("trauma.audio_muffle_pathfinding", true, CVar.SERVER | CVar.REPLICATED);
+
+    #endregion
 }

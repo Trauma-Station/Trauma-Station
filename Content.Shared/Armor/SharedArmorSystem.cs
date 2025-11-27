@@ -1,3 +1,8 @@
+// <Trauma>
+using Content.Shared.Body.Part;
+using Content.Shared.Body.Systems;
+using System.Linq;
+// </Trauma>
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
@@ -5,13 +10,7 @@ using Content.Shared.Examine;
 using Content.Shared.Inventory;
 using Content.Shared.Silicons.Borgs;
 using Content.Shared.Verbs;
-using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
-
-// Shitmed Change
-using System.Linq;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
 
 namespace Content.Shared.Armor;
 
@@ -28,22 +27,10 @@ public abstract class SharedArmorSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ArmorComponent, InventoryRelayedEvent<DamageModifyEvent>>(OnRelayDamageModify);
         SubscribeLocalEvent<ArmorComponent, InventoryRelayedEvent<CoefficientQueryEvent>>(OnCoefficientQuery);
+        SubscribeLocalEvent<ArmorComponent, InventoryRelayedEvent<DamageModifyEvent>>(OnDamageModify);
         SubscribeLocalEvent<ArmorComponent, BorgModuleRelayedEvent<DamageModifyEvent>>(OnBorgDamageModify);
         SubscribeLocalEvent<ArmorComponent, GetVerbsEvent<ExamineVerb>>(OnArmorVerbExamine);
-    }
-
-    private void OnDamageModify(EntityUid uid, ArmorComponent component, DamageModifyEvent args)
-    {
-        if (args.TargetPart == null)
-            return;
-
-        var (partType, _) = _body.ConvertTargetBodyPart(args.TargetPart);
-
-        if (component.ArmorCoverage.Contains(partType))
-            args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage,
-            DamageSpecifier.PenetrateArmor(component.Modifiers, args.Damage.ArmorPenetration));
     }
 
     /// <summary>
@@ -62,7 +49,7 @@ public abstract class SharedArmorSystem : EntitySystem
         }
     }
 
-    private void OnRelayDamageModify(EntityUid uid, ArmorComponent component, InventoryRelayedEvent<DamageModifyEvent> args)
+    private void OnDamageModify(EntityUid uid, ArmorComponent component, InventoryRelayedEvent<DamageModifyEvent> args)
     {
         if (TryComp<MaskComponent>(uid, out var mask) && mask.IsToggled)
             return;
@@ -98,9 +85,6 @@ public abstract class SharedArmorSystem : EntitySystem
         if (component is { ArmourCoverageHidden: true, ArmourModifiersHidden: true })
             return;
 
-        if (!component.Modifiers.Coefficients.Any() && !component.Modifiers.FlatReduction.Any())
-            return;
-
         var examineMarkup = GetArmorExamine(component);
         // Shitmed Change End
         var ev = new ArmorExamineEvent(examineMarkup);
@@ -116,6 +100,9 @@ public abstract class SharedArmorSystem : EntitySystem
     {
         var msg = new FormattedMessage();
         msg.AddMarkupOrThrow(Loc.GetString("armor-examine"));
+
+        if (!component.Modifiers.Coefficients.Any() && !component.Modifiers.FlatReduction.Any())
+            return msg;
 
         var coverage = component.ArmorCoverage;
         var armorModifiers = component.Modifiers;

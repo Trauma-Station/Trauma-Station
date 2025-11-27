@@ -61,6 +61,7 @@
         acts: ["Destruction"]
   - type: Occluder
   - type: BlockWeather
+  - type: SoundBlocker # Trauma
 
 - type: entity
   abstract: true

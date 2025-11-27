@@ -88,6 +88,8 @@
     - fullstatereset
     - dumpentities
     - showaccessreaders
+    - quickinspect
+    - showaudiomuffle # Trauma
 
 - Flags: MAPPING
   Commands:

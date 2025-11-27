@@ -233,6 +233,7 @@
   - type: ExaminableDamage
     messages: WindowMessages
   # </Goobstation>
+  - type: SoundBlocker # Trauma
 
 - type: entity
   abstract: true

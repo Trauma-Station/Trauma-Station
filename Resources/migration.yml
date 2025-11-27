@@ -1102,3 +1102,6 @@ DVSmartFridgeMedical: SmartFridgeMedical
 
 # Trauma - 2025-11-12
 Terminus: null
+
+# Trauma - 2025-11-23
+MiniatureEnergyCrossbow: WeaponEnergyCrossbow

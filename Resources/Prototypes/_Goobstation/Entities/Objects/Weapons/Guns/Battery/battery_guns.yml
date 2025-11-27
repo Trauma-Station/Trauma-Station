@@ -107,42 +107,6 @@
       collection: MetalThud # Goobstation ^
 
 - type: entity
-  name: miniature energy crossbow
-  parent: [ BaseWeaponBatterySmall, BaseSyndicateContraband ]
-  id: MiniatureEnergyCrossbow
-  description: The syndicate's energy crossbow, small, silent and deadly.
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Objects/Weapons/Guns/Battery/miniature_ebow.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Gun
-    resetOnHandSelected: false
-    soundGunshot:
-      path: /Audio/_Goobstation/Weapons/Guns/Gunshots/heavy_shot_suppressed.ogg
-      params:
-        volume: -5
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletMic
-    fireCost: 900
-  - type: BatterySelfRecharger
-    autoRecharge: true
-    autoRechargeRate: 900
-  - type: Appearance
-  - type: MagazineVisuals
-    magState: mag
-    steps: 2
-    zeroVisible: true
-  - type: Multishot
-    missChance: 0
-    spreadAddition: 10
-  - type: MeleeWeapon
-    resetOnHandSelected: false
-
-- type: entity
   name: plasma rifle
   parent: BaseWeaponBattery
   id: WeaponPlasmaRifle

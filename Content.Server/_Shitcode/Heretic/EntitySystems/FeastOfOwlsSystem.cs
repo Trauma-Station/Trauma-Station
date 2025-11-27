@@ -8,6 +8,7 @@ using Content.Shared.Heretic;
 using Content.Shared.Popups;
 using Content.Shared.Speech.Components;
 using Content.Shared.StatusEffect;
+using Content.Shared.Stunnable;
 using Content.Shared.Store.Components;
 using Robust.Shared.Audio.Systems;
 
@@ -70,7 +71,7 @@ public sealed class FeastOfOwlsSystem : EntitySystem
                 continue;
 
             _status.TryRemoveStatusEffect(uid, "Stun", status);
-            _status.TryRemoveStatusEffect(uid, "KnockedDown", status);
+            RemComp<KnockedDownComponent>(uid);
             RemCompDeferred(uid, comp);
         }
     }

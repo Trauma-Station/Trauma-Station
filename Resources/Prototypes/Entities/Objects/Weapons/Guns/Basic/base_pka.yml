@@ -108,6 +108,7 @@
       Steel: 250
       Glass: 125
       Silver: 25
+  - type: ItemSlots # Trauma
   - type: MeleeWeapon
     wideAnimationRotation: 270
     attackRate: 1

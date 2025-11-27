@@ -771,22 +771,14 @@
     tags: [] # ignore "WhitelistChameleon" tag
 
 - type: entity
-  name: passenger ID card
-  parent: [IDCardStandard, BaseChameleon]
+  parent: [PassengerIDCard, BaseChameleon]
   id: AgentIDCard
   suffix: Agent
   components:
-  # Goob edit
-  #- type: PresetIdCard
-  #  job: Passenger
   - type: Access
     tags:
     - Maintenance
     - SyndicateAgent
-  - type: Sprite
-    layers:
-    - state: default
-    - state: idpassenger
   - type: AgentIDCard
   - type: UIRequiresLock
   - type: ActivatableUI
@@ -809,7 +801,6 @@
     listNumber: false
 
 - type: entity
-  name: passenger ID card
   parent: AgentIDCard
   id: NukieAgentIDCard
   suffix: Nukie

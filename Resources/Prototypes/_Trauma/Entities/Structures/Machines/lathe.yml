@@ -69,8 +69,6 @@
   - type: Lathe
     producingSound:
       path: /Audio/_Trauma/Revs/strike.ogg
-      params:
-        maxDistance: 3
     runningState: revforge
     staticPacks:
     - RevForgeStatic
@@ -113,8 +111,6 @@
   - type: Lathe
     producingSound:
       path: /Audio/_Trauma/Revs/printingpresslong.ogg
-      params:
-        maxDistance: 3
     runningState: printingpress
     staticPacks:
     - RevPrintingPress
@@ -136,8 +132,6 @@
   - type: Lathe
     producingSound:
       path: /Audio/_Trauma/Revs/commsworkbench.ogg
-      params:
-        maxDistance: 3
     runningState: telecomms
     staticPacks:
     - RevTelecommsWorkbenchStatic
@@ -161,8 +155,6 @@
   - type: Lathe
     producingSound:
       path: /Audio/_Trauma/Revs/telesphere.ogg
-      params:
-        maxDistance: 3
     runningState: telesphere
     staticPacks:
     - RevTelesphereStatic
@@ -194,8 +186,6 @@
   - type: Lathe
     producingSound:
       path: /Audio/_Trauma/Revs/printer.ogg
-      params:
-        maxDistance: 3
     runningState: printer
     staticPacks:
     - RevPrinterStatic
@@ -219,8 +209,6 @@
   - type: Lathe
     producingSound:
       path: /Audio/_Trauma/Revs/bulletpress.ogg
-      params:
-        maxDistance: 3
     runningState: bulletpress
     staticPacks:
     - RevBulletPressStatic
@@ -244,8 +232,6 @@
   - type: Lathe
     producingSound:
       path: /Audio/_Trauma/Revs/microelectronicsassembler.ogg
-      params:
-        maxDistance: 3
     runningState: microelectronicsassembler
     staticPacks:
     - RevMicroElectronicsStatic
@@ -279,8 +265,6 @@
   - type: Lathe
     producingSound:
       path: /Audio/Machines/uniformprinter.ogg
-      params:
-        maxDistance: 3
     runningState: uniformsewer
     staticPacks:
     - RevClothingStatic
@@ -304,8 +288,6 @@
   - type: Lathe
     producingSound:
       path: /Audio/Machines/uniformprinter.ogg
-      params:
-        maxDistance: 3
     runningState: techAnalyzer
     staticPacks:
     - RevTechStatic
@@ -329,8 +311,6 @@
   - type: Lathe
     producingSound:
       path: /Audio/_Trauma/Revs/foundryaudio.ogg
-      params:
-        maxDistance: 3
     runningState: plasmaforge
     staticPacks:
     - RevFoundryStatic

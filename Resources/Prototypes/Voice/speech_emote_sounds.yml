@@ -773,6 +773,8 @@
       collection: VulpkaninBarks
     Whine:
       collection: VulpkaninWhines
+    Crying:
+      collection: VulpkaninWhines
     Howl:
       collection: VulpkaninHowls
 
@@ -800,6 +802,8 @@
     Bark:
       collection: VulpkaninBarks
     Whine:
+      collection: VulpkaninWhines
+    Crying:
       collection: VulpkaninWhines
     Howl:
       collection: VulpkaninHowls

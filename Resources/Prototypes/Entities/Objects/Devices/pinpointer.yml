@@ -159,5 +159,5 @@
   - type: Pinpointer
     whitelist: # Trauma - pinpointer whitelist
       components:
-      - XenoborgMothership
+      - MothershipCore
     targetName: the Mothership

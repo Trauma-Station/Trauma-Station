@@ -1,38 +1,5 @@
-# SPDX-FileCopyrightText: 2022 20kdc <asdd2808@gmail.com>
-# SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
-# SPDX-FileCopyrightText: 2022 EmoGarbage404 <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 CrigCrag <137215465+CrigCrag@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Interrobang01 <113810873+Interrobang01@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 Kevin Zheng <kevinz5000@gmail.com>
-# SPDX-FileCopyrightText: 2023 LankLTE <135308300+LankLTE@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 PuceTint <69696513+PuceTint@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Whisper <121047731+QuietlyWhisper@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 qwerltaz <69696513+qwerltaz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 ArchPigeon <bookmaster3@gmail.com>
-# SPDX-FileCopyrightText: 2024 Ashley Woodiss-Field <ash@DESKTOP-H64M4AI.localdomain>
-# SPDX-FileCopyrightText: 2024 Brandon Li <48413902+aspiringLich@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 CM <ash@DESKTOP-H64M4AI.localdomain>
-# SPDX-FileCopyrightText: 2024 ColesMagnum <98577947+AW-FulCode@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Steve <marlumpy@gmail.com>
-# SPDX-FileCopyrightText: 2025 marc-pelletier <113944176+marc-pelletier@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# TODO: Reagent Args which allow more selective scaling.
+# Currently all Gas metabolisms scale by reagent quantity metabolized, where other Metabolisms are modified by metabolism rate!
 
 - type: reagent
   id: Oxygen
@@ -110,7 +77,7 @@
             Poison: 0.7
       - !type:AdjustAlert
         alertType: HighOxygen # Goob - was Toxins
-        minScale: 1
+        minScale: 0.5
         conditions:
           - !type:MetabolizerTypeCondition
             type: [ Vox ]
@@ -200,13 +167,13 @@
       - !type:AdjustAlert
         alertType: Toxins
         conditions: # Goob
-        - !type:MetabolizerTypeCondition # Goob
+        - !type:MetabolizerTypeCondition
           type: [ Plasmaman ]
           inverted: true
         - !type:ReagentCondition
           reagent: Plasma
           min: 1.5
-        minScale: 3
+        minScale: 1.5
         clear: True
         time: 5
       # <Goob>
@@ -305,7 +272,7 @@
       # We need a metabolism effect on reagent removal
       - !type:AdjustAlert
         alertType: Toxins
-        minScale: 3
+        minScale: 1.5
         clear: True
         time: 5
       - !type:HealthChange # Shitmed - Cybernetic Organs
@@ -356,7 +323,7 @@
         - !type:MetabolizerTypeCondition
           type: [ Plant ]
       - !type:HealthChange
-        minScale: 1
+        minScale: 0.5
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Plant, Vox, Yowie, Cybernetic] # Goob - added Yowie-Cybernetic
@@ -442,7 +409,7 @@
     Gas:
       effects:
       - !type:Emote
-        minScale: 1
+        minScale: 0.2
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Slime, Cybernetic ] # Goob - added Cybernetic
@@ -451,7 +418,7 @@
         showInChat: true
         probability: 0.1
       - !type:Emote
-        minScale: 0.4
+        minScale: 0.2
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Slime, Cybernetic ] # Goob - added Cybernetic
@@ -460,7 +427,7 @@
         showInChat: true
         probability: 0.01
       - !type:PopupMessage
-        minScale: 1
+        minScale: 0.5
         conditions:
         - !type:ReagentCondition # Goob
           reagent: NitrosylPlasmide
@@ -473,7 +440,7 @@
         messages: [ "effect-sleepy" ]
         probability: 0.1
       - !type:MovementSpeedModifier
-        minScale: 2
+        minScale: 1
         conditions:
         - !type:ReagentCondition # Goob
           reagent: NitrosylPlasmide
@@ -484,7 +451,7 @@
         walkSpeedModifier: 0.65
         sprintSpeedModifier: 0.65
       - !type:ModifyStatusEffect
-        minScale: 3.6
+        minScale: 1.8
         conditions:
         - !type:ReagentCondition # Goob
           reagent: NitrosylPlasmide
@@ -496,7 +463,7 @@
         time: 3
         type: Update
       - !type:HealthChange
-        minScale: 7
+        minScale: 3.5
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Slime, Yowie, Cybernetic ] # Goob - added Yowie-Cybernetic
@@ -560,14 +527,14 @@
             Cold: -0.5
             Radiation: -0.5
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob
+        conditions: # Goob
+        - !type:MetabolizerTypeCondition
           type: [ Yowie, Cybernetic ]
           inverted: true
         - !type:ReagentCondition
           reagent: Frezon
           min: 0.5
-        minScale: 1
+        minScale: 0.5
         ignoreResistances: true
         damage:
           types:
@@ -586,21 +553,21 @@
           types:
             Cellular: 0.025
       - !type:ModifyStatusEffect
-        minScale: 2
+        minScale: 1
         effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 500
       - !type:Drunk
         boozePower: 500
-        minScale: 2
+        minScale: 1
       - !type:PopupMessage
         type: Local
         messages: [ "frezon-lungs-cold" ]
         probability: 0.1
-        minScale: 2
+        minScale: 1
       - !type:PopupMessage
         type: Local
         visualType: Medium
         messages: [ "frezon-euphoric" ]
         probability: 0.1
-        minScale: 2
+        minScale: 1

@@ -24,6 +24,7 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
+using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -203,7 +204,7 @@ public partial class SharedMartialArtsSystem
         _pulling.TryStopPull(target, pullable, ent, true);
         _grabThrowing.Throw(target, ent, _transform.GetMapCoordinates(ent).Position - _transform.GetMapCoordinates(target).Position, 5);
 
-        _status.TryRemoveStatusEffect(ent, "KnockedDown");
+        RemComp<KnockedDownComponent>(ent);
         _standing.Stand(ent);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit3.ogg"), target);
@@ -248,7 +249,7 @@ public partial class SharedMartialArtsSystem
             return;
 
         if (!_status.HasStatusEffect(ent, "Stun"))
-            _status.TryRemoveStatusEffect(ent, "KnockedDown");
+            RemComp<KnockedDownComponent>(ent);
 
         RemComp<ArmbarredComponent>(ent);
     }

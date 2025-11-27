@@ -60,9 +60,6 @@ uplink-signaller-desc = A device that can trigger signals at any distance. You c
 
 # bang bang pew pew eat it up i gota go
 
-uplink-miniature-energy-crossbow-name = Miniature Energy Crossbow
-uplink-miniature-energy-crossbow-desc = The syndicate's energy crossbow, small, silent and deadly.
-
 uplink-hardlight-bow-name = Hardlight Bow
 uplink-hardlight-bow-desc = A modern bow that can fabricate hardlight arrows, designed for silent takedowns of targets. Has 8 different firing modes. Can be folded.
 

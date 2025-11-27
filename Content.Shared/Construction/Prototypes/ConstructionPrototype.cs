@@ -79,8 +79,8 @@ public sealed partial class ConstructionPrototype : IPrototype
     /// <summary>
     ///     The starting <see cref="ConstructionGraphNode"/> this construction will start at.
     /// </summary>
-    [DataField(required: true)]
-    public string StartNode { get; private set; } = default!;
+    [DataField] // Trauma - not required
+    public string StartNode = "start"; // Trauma - default to start...
 
     /// <summary>
     ///     If you can start building or complete steps on impassable terrain.
