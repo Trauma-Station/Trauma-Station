@@ -1,0 +1,83 @@
+# What happens to you if you mutate and stay at 100 instability for too long
+
+- type: entityEffect
+  id: SomethingHorribleSafe
+  effects:
+  - !type:WeightedRandomEffect
+    children:
+    - effect: !type:Polymorph
+        prototype: Monkey
+    - effect: !type:Polymorph
+        prototype: Corgi
+    - weight: 2
+      effect: !type:Polymorph
+        prototype: Snail
+    - effect: !type:NestedEffect
+        proto: Cripple
+    - effect: !type:NestedEffect
+        proto: Corgify
+    - weight: 4 # number of "alright" effects
+      effect: !type:NestedEffect
+        proto: Alright
+    - weight: 2 # parity...
+      effect: !type:Polymorph
+        prototype: Snail
+
+- type: entityEffect
+  id: SomethingHorribleLethal
+  effects:
+  - !type:WeightedRandomEffect
+    children:
+    - effect:
+    - effect:
+
+# Non-lethal
+
+- type: entityEffect
+  id: Cripple
+  effects:
+  - !type:SpawnEntity
+    proto: VehicleWheelchair
+  # TODO: change this to paraplegic brain trauma if anyone ever makes that
+  - !type:AddComponents
+    guidebookText: entity-effect-guidebook-paralyze-legs
+    components:
+    - type: LegsStartParalyzed
+    - type: LegsParalyzed
+  - !type:PopupMessage
+    type: Pvs
+    messages:
+    - entity-effect-popup-crippled
+
+- type: entityEffect
+  id: Alright
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-alright
+  - !type:WeightedRandomEffect
+    children:
+    - effect: !type:NoEffect # small chance of it being a dud
+    - effect: !type:NestedEffect
+        proto: MakeFragile
+    - !type:PolymorphEntity
+      prototype: Slime # CBF to make the reagent stuff, reuse it if xenobio ever makes it
+    - !type:ModifyStatusEffect
+      effectProto: DecloningStatusEffect # not using a disease because it doesnt exist :(
+      time: 5m
+
+- type: entityEffect
+  id: MakeFragile
+  effects:
+  - !type:AddComponents
+    guidebookText: entity-effect-guidebook-make-fragile
+    components:
+    - type: Fragile
+
+- type: entityEffect
+  id: Snailify
+  effects:
+  - !type:Polymorph
+    prototype: Snail
+
+# Lethal

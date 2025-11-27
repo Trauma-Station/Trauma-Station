@@ -1,0 +1,13 @@
+- type: entity
+  parent: StatusEffect
+  id: DnaMeltingStatusEffect
+  name: DNA melting
+  components:
+  - type: EffectsOnStatusEffectRemoved
+    effects:
+    - !type:NestedEffect
+      conditions:
+      - !type:DnaUnstable
+      proto: SomethingHorrible
+    # not parity, always scramble dna when it's removed to prevent edging it every 9 minutes by removing and adding some mutation on the fly
+    - !type:ScrambleDna

@@ -8,6 +8,7 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -25,6 +26,7 @@ public sealed partial class MutationSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     /// <summary>
     /// All mutation prototypes and their respective <see cref="MutationComponent"/>.
@@ -125,7 +127,7 @@ public sealed partial class MutationSystem : EntitySystem
 
         var id = GetID(mutation);
         if (IsForeign(ent, id))
-            AddInstability(ent, mutation.Comp.Instability);
+            AddInstability(ent, mutation.Comp.Instability, automatic: automatic, predicted: predicted);
 
         mutation.Comp.Target = ent.Owner;
         Dirty(mutation);
@@ -153,7 +155,7 @@ public sealed partial class MutationSystem : EntitySystem
         // very important that foreign is checked before removing instability
         // otherwise livrah rat heart incident can happen but for instability instead of damage reduction
         if (IsForeign(ent, id))
-            AddInstability(ent, -mutation.Comp.Instability);
+            AddInstability(ent, -mutation.Comp.Instability, predicted: predicted);
 
         var ev = new MutationRemovedEvent(ent, mutation, id, automatic, predicted);
         RaiseLocalEvent(mutation, ref ev);
@@ -198,6 +200,25 @@ public sealed partial class MutationSystem : EntitySystem
                 UnlockedMutations.Add(proto.ID);
         }
     }
+
+    private LocId? InstabilityPopup(int instability)
+        => instability switch
+        {
+            // 0-10
+            < 10 => null,
+            // 10-30
+            < 30 => "genetics-instability-warning-shiver",
+            // 30-40
+            < 40 => "genetics-instability-warning-cold",
+            // 40-60
+            < 60 => "genetics-instability-warning-sick",
+            // 60-80
+            < 80 => "genetics-instability-warning-skin-moving",
+            // 80-100
+            < 100 => "genetics-instability-warning-cells-burning",
+            // 100+
+            _ => "genetics-instability-warning-dna-exploding"
+        };
 
     #region Public API
 
@@ -578,14 +599,29 @@ public sealed partial class MutationSystem : EntitySystem
 
     /// <summary>
     /// Adds instability to an entity.
+    /// Automatic and predicted control the popup logic.
     /// </summary>
-    public void AddInstability(Entity<MutatableComponent> ent, int instability)
+    public void AddInstability(Entity<MutatableComponent> ent, int instability, bool automatic, bool predicted)
     {
         if (instability == 0)
             return;
 
         ent.Comp.TotalInstability += instability;
         Dirty(ent);
+
+        if (!automatic && InstabilityPopup(ent.Comp.TotalInstability) is {} key)
+        {
+            var msg = Loc.GetString(key);
+            if (predicted)
+                _popup.PopupClient(msg, ent, ent);
+            else
+                _popup.PopupEntity(msg, ent, ent);
+        }
+
+        if (ent.Comp.TotalInstability >= ent.Comp.MaxInstability)
+            _status.TrySetStatusEffectDuration(ent.Owner, ent.Comp.MeltingEffect, ent.Comp.MeltDuration);
+        else
+            _status.TryRemoveStatusEffect(ent.Owner, ent.Comp.MeltingEffect);
     }
 
     /// <summary>

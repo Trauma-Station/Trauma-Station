@@ -14,3 +14,6 @@ entity-effect-popup-head-regrown = {$entity}'s head returns with a sickening cru
 entity-effect-popup-autotomy-failed = You can't shed any more limbs!
 
 entity-effect-popup-tiredness = You should sit down and take a rest...
+
+entity-effect-popup-crippled = My flesh turned into a wheelchair and I can't feel my legs.
+entity-effect-popup-alright = Oh, I actually feel quite alright!

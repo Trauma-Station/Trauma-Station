@@ -47,4 +47,22 @@ public sealed partial class MutatableComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int TotalInstability;
+
+    /// <summary>
+    /// Max instability where your DNA starts melting.
+    /// </summary>
+    [DataField]
+    public int MaxInstability = 100;
+
+    /// <summary>
+    /// Status effect added while DNA is melting.
+    /// </summary>
+    [DataField]
+    public EntProtoId<StatusEffectComponent> MeltingEffect = "StatusEffectDnaMelting";
+
+    /// <summary>
+    /// How long <see cref="MeltingEffect"/> lasts for.
+    /// </summary>
+    [DataField]
+    public TimeSpan MeltDuration = TimeSpan.FromMinutes(10);
 }

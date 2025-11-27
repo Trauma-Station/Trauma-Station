@@ -5,3 +5,6 @@ entity-effect-guidebook-install-hypoport = gives the target a hypoport
 
 entity-effect-guidebook-increases-reach = Increases reach
 entity-effect-guidebook-decreases-reach = Decreases reach
+
+entity-effect-guidebook-paralyze-legs = Paralyzes legs
+entity-effect-guidebook-make-fragile = Makes extremely fragile

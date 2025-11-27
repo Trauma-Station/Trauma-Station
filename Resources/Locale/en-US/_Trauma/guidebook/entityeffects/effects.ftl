@@ -57,3 +57,8 @@ entity-effect-guidebook-set-standing = {$chance ->
 }
 
 entity-effect-guidebook-relay-random-part = for a random part, {$effect}
+
+entity-effect-guidebook-nothing = nothing ever {$chance ->
+    [1] happens
+    *[other] happen
+}
