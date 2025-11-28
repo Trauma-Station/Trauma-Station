@@ -219,6 +219,6 @@
   - type: TriggerOnCollide
     fixtureID: projectile
   - type: EmpOnTrigger
-    range: 1
-    energyConsumption: 360
+    range: 1.5
+    energyConsumption: 1000
     disableDuration: 5

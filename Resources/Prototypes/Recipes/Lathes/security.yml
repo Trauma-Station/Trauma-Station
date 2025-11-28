@@ -37,13 +37,13 @@
 
 - type: latheRecipe
   abstract: true
-  parent: BaseWeaponRecipe
+  parent: [BaseWeaponRecipe , BaseRedAlert] # Trauma
   id: BaseWeaponRecipeLong
   completetime: 5
 
 - type: latheRecipe
   abstract: true
-  parent: BaseWeaponRecipe
+  parent: [BaseWeaponRecipe , BaseRedAlert] # Trauma
   id: BaseWeaponRecipeSidearm
   completetime: 6
 
@@ -255,15 +255,15 @@
     Plastic: 250
     Gold: 250
 
-- type: latheRecipe
-  parent: BaseWeaponRecipeLong
-  id: WeaponTemperatureGun
-  result: WeaponTemperatureGun
-  materials:
-    Steel: 2000
-    Glass: 500
-    Plastic: 500
-    Gold: 500
+# - type: latheRecipe # Trauma
+#   parent: BaseWeaponRecipeLong
+#   id: WeaponTemperatureGun
+#   result: WeaponTemperatureGun
+#   materials:
+#     Steel: 2000
+#     Glass: 500
+#     Plastic: 500
+#     Gold: 500
 
 # Sidearms
 - type: latheRecipe

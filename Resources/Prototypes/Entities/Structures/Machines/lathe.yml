@@ -448,7 +448,7 @@
     - SecurityAmmoStatic
     - SyndicateAmmoStatic
     # Goobstation
-    - SecurityAmmoStaticGoob
+    # - SecurityAmmoStaticGoob #Trauma Remove 8 Gauge
     - SyndicateAmmoLightStatic
     - ScienceExplosives
   - type: BlueprintReceiver
@@ -747,7 +747,7 @@
     - SecurityAmmoStatic
     - SecurityWeaponsStatic
     # Goobstation
-    - SecurityAmmoStaticGoob
+    # - SecurityAmmoStaticGoob # Trauma - remove 8 gauge
     - SecurityEquipmentStaticGoob
     - SecurityHypoStatic
     - MechWeaponsSecurityStatic
@@ -813,7 +813,7 @@
       runningState: icon
       staticPacks:
       - SecurityAmmoStatic
-      - SecurityAmmoStaticGoob # Goob
+      # - SecurityAmmoStaticGoob # Trauma - Remove 8 Gauge
     - type: EmagLatheRecipes
       emagStaticPacks:
       - SyndicateAmmoStatic

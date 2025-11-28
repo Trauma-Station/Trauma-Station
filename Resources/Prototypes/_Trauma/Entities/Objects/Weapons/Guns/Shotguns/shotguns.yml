@@ -1,4 +1,12 @@
 - type: entity
+  parent: [WeaponShotgunKammerer]
+  id: WeaponShotgunKammererEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
   parent: [ BaseMajorContraband, BaseWeaponShotgun, BaseGunWieldable ]
   id: WeaponShotgunDevastator
   name: devastator shotgun

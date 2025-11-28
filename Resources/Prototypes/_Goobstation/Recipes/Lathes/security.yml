@@ -186,14 +186,14 @@
     Gold: 500
     Glass: 850
 
-- type: latheRecipe
-  parent: BaseWeaponRecipeLong
-  id: WeaponEnergyIonRifle
-  result: WeaponEnergyIonRifle
-  materials:
-    Steel: 1200
-    Plastic: 600
-    Gold: 300
+# - type: latheRecipe Traumastation - removal
+#   parent: BaseWeaponRecipeLong
+#   id: WeaponEnergyIonRifle
+#   result: WeaponEnergyIonRifle
+#   materials:
+#     Steel: 1200
+#     Plastic: 600
+#     Gold: 300
 
 - type: latheRecipe
   parent: BaseWeaponRecipe

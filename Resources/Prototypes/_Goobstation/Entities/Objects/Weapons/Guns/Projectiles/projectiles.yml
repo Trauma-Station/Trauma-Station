@@ -304,12 +304,15 @@
     damage:
       types:
         Cold: 3
+  - type: Reflective # Trauma
+    reflective:
+    - None
   - type: PointLight
     radius: 2
     color: blue
     energy: 1
   - type: ChangeTemperatureOnCollide
-    heat: -35000
+    heat: -50000 # -35000 > -50000 Trauma
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
@@ -327,13 +330,15 @@
     damage:
       types:
         Heat: 3
+  - type: Reflective # Trauma
+    reflective:
+    - None
   - type: PointLight
     radius: 2
     color: red
     energy: 1
   - type: ChangeTemperatureOnCollide # This will probably be tweaked.
-    heat: 35000
-
+    heat: 50000 # 35000 > 50000 Trauma
 
 - type: entity
   name: disabler bolt

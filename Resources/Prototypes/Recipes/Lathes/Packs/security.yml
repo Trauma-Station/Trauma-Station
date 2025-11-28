@@ -132,7 +132,7 @@
   - WeaponLaserCannon
   - WeaponLaserCarbine
   - WeaponXrayCannon
-  - WeaponTemperatureGun # Goobstation
+  # - WeaponTemperatureGun # Traumastation - removal
   - PolymerBaton #goob
   - SpearTelescopic #goob
 

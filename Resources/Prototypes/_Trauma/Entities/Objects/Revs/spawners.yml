@@ -13,6 +13,7 @@
     damageContainer: Inorganic
   - type: TimerTrigger
     delay: 0.9
+  - type: TriggerOnUse
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger

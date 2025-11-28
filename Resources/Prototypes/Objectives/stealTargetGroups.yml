@@ -121,12 +121,12 @@
     sprite: Objects/Misc/nukedisk.rsi
     state: icon
 
-- type: stealTargetGroup
-  id: WeaponEnergyMagnum
-  name: steal-target-groups-weapon-energy-magnum
-  sprite:
-    sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi
-    state: icon
+# - type: stealTargetGroup # Trauma
+#   id: WeaponEnergyMagnum
+#   name: steal-target-groups-weapon-energy-magnum
+#   sprite:
+#     sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi
+#     state: icon
 
 # Thief Collection
 
