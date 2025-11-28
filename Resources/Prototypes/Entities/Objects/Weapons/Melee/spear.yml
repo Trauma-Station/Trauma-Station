@@ -236,8 +236,8 @@
         acts: [ "Destruction" ]
   - type: DamageOnLand
     damage:
-    types:
-      Blunt: 3
+      types:
+        Blunt: 3
   - type: DamageOnHit # Trauma - durability
     damage:
       types:
@@ -283,8 +283,8 @@
         acts: [ "Destruction" ]
   - type: DamageOnLand
     damage:
-    types:
-      Blunt: 2
+      types:
+        Blunt: 2
   - type: DamageOnHit # Trauma - durability
     damage:
       types:
@@ -332,8 +332,8 @@
         acts: [ "Destruction" ]
   - type: DamageOnLand
     damage:
-    types:
-      Blunt: 2
+      types:
+        Blunt: 2
   - type: DamageOnHit # Trauma - durability
     damage:
       types:
