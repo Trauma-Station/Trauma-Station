@@ -7,7 +7,6 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/DropPod/item.rsi
     state: DROPPOD
-  - type: TriggerOnUse
   - type: Item
     size: Ginormous
   - type: Storage
