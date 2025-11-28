@@ -62,7 +62,7 @@ selectable-set-syndicate-hitman-description =
     Find and eliminate your targets quietly and effectively with this bundle.
     Contains: Cobra pistol with 4 extra mags, Capoeira manual,
     a special invisible armor vest, Interdyne herbals packet,
-    combat medkit, energy dagger and a stylish look and a syndicate encryption key.
+    combat medkit, energy dagger, a stylish look and a syndicate encryption key.
 
 selectable-set-syndicate-implants-name = Cyberpsychosis Bundle
 selectable-set-syndicate-implants-description =
