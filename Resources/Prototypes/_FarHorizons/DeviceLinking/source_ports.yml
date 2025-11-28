@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Holographic Generator
+
 - type: sourcePort
   id: ConnectionStatus
   name: signal-port-name-holographic-generator-connection-status
@@ -15,3 +16,15 @@
   id: FieldDisconnected
   name: signal-port-name-holographic-generator-field-disconnected
   description: signal-port-description-holographic-generator-field-disconnected
+
+# Gas Turbine
+
+- type: sourcePort
+  id: TurbineSpeedHigh
+  name: signal-port-name-gas-turbine-speed-high
+  description: signal-port-description-gas-turbine-speed-high
+
+- type: sourcePort
+  id: TurbineSpeedLow
+  name: signal-port-name-gas-turbine-speed-low
+  description: signal-port-description-gas-turbine-speed-low
