@@ -178,8 +178,8 @@
         acts: [ "Destruction" ]
   - type: DamageOnLand
     damage:
-    types:
-      Blunt: 4
+      types:
+        Blunt: 4
   - type: DamageOnHit # Trauma - durability
     damage:
       types:
@@ -224,7 +224,7 @@
       behaviors:
       - !type:PlaySoundBehavior
         sound:
-          collection: GlassBreakReinforced
+          collection: GlassBreak
           params:
             volume: -4
       - !type:SpawnEntitiesBehavior
@@ -271,7 +271,7 @@
       behaviors:
       - !type:PlaySoundBehavior
         sound:
-          collection: GlassBreakPlasma
+          collection: GlassBreak
           params:
             volume: -4
       - !type:SpawnEntitiesBehavior
@@ -320,7 +320,7 @@
       behaviors:
       - !type:PlaySoundBehavior
         sound:
-          collection: GlassBreakUranium
+          collection: GlassBreak
           params:
             volume: -4
       - !type:SpawnEntitiesBehavior

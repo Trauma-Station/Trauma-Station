@@ -17,7 +17,6 @@
     Shock: 0
     Heat: 1
     Structural: 0.5
-    Genetic: 0
     Ion: 0
     Caustic: 0
   flatReductions:
