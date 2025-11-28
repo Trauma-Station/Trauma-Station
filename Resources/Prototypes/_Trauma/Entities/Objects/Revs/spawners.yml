@@ -11,6 +11,7 @@
     size: Small
   - type: Damageable
     damageContainer: Inorganic
+  - type: TriggerOnUse
   - type: TimerTrigger
     delay: 0.9
   - type: Destructible
@@ -32,15 +33,16 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: TwoStageTrigger
+    keysIn:
+    - timer
     triggerDelay: 1
     components:
-      - type: DamageOverTime
-        damage:
-          types:
-            Slash: 50
-        interval: 0.1
-        ignoreResistances: true
-      #- type: AnchorOnTrigger - reactivate final build
+    - type: DamageOverTime
+      damage:
+        types:
+          Slash: 50
+      interval: 0.1
+      ignoreResistances: true
 
 - type: entity
   parent: SpawnSupplyEmpty
