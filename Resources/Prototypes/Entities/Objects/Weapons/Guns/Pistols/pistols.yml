@@ -201,6 +201,14 @@
   id: WeaponPistolViper
   description: A common handgun illegally modified by the Syndicate. The Viper sports a selector switch between semi-auto and ‘rock and roll’. The standard sidearm for any soldier who fights under the three serpents. Feeds from .35 pistol magazines.
   components:
+  - type: Gun # Trauma
+    fireRate: 4
+    selectedMode: SemiAuto
+    availableModes:
+      - SemiAuto
+      - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/pistol.ogg
   - type: Sprite
     sprite: Objects/Weapons/Guns/Pistols/viper.rsi
   - type: ItemSlots
@@ -237,7 +245,7 @@
   description: A cyborg-mounted weapon system based on the Viper pistol. Creates ammunition on the fly from an internal fabricator, which slowly self-charges.
   components:
   - type: Gun
-    fireRate: 5
+    fireRate: 4 #trauma
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -335,7 +343,7 @@
   - type: Item
     storedOffset: 0,-2
   - type: Gun
-    fireRate: 5
+    fireRate: 3 #trauma
     availableModes:
     - SemiAuto
     soundGunshot:

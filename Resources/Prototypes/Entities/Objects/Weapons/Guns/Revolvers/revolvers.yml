@@ -226,7 +226,7 @@
     storedOffset: 0,-2
   - type: Gun
     selectedMode: SemiAuto
-    fireRate: 2.5 # Goobstation
+    fireRate: 1.5 # Goobstation
     availableModes:
     - SemiAuto
     soundGunshot:
