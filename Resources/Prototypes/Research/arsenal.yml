@@ -131,9 +131,7 @@
   cost: 7500
   recipeUnlocks:
   - WeaponLaserCarbine
-  # - WeaponTemperatureGun # Traumastation - removal
   - WeaponMechCombatFiredartLaser # Goobstation
-  # - WeaponEnergyIonRifle # Traumastation - removal
   - PowerCellIonRevolver # Goobstation
   # Goobstation R&D Console rework start
   position: 4,0

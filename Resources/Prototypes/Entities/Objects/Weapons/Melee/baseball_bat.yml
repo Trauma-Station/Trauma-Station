@@ -102,6 +102,28 @@
     tags:
     - BaseballBat
   - type: UndetectableContraband #Goobstation-Contraband detector
+  - type: DamageOnHit # <Trauma>
+    damage:
+      types:
+        Blunt: 1
+  - type: Damageable # Trauma - durability
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ] # </Trauma>
 
 - type: entity
   name: incomplete baseball bat

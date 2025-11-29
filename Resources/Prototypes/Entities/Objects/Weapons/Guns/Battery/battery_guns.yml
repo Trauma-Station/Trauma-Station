@@ -466,11 +466,11 @@
 
 - type: entity
   name: laser carbine
-  parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband]
+  parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband] # Trauma - BaseWeaponLaser > BaseWeaponBattery
   id: WeaponLaserCarbine
   description: Favoured by Nanotrasen Security for being cheap and easy to use.
   components:
-  - type: Gun
+  - type: Gun # Trauma
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -492,7 +492,7 @@
     magState: mag
     steps: 5
     zeroVisible: false
-  - type: Appearance
+  - type: Appearance # /Trauma
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Battery/laser_gun.rsi
   - type: StaticPrice

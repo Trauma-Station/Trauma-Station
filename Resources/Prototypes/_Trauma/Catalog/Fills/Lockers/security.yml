@@ -1,8 +1,8 @@
 - type: entity
-  parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock] # WWDP
-  id: TrumaGunsafe
+  parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
+  id: BaseTraumaGunSafe
   name: gun safe
-  suffix: Alert Level Lock # WWDP
+  suffix: Alert Level Lock
   components:
   - type: EntityTableContainerFill
     containers:
@@ -30,10 +30,9 @@
     - id: SecurityMegaphone
 
 - type: entity
-  parent: [TrumaGunsafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  parent: [BaseTraumaGunSafe] # WWDP
   id: GunSafeLaserCarbine
   name: laser safe
-  suffix: Alert Level Lock # WWDP
   components:
   - type: EntityTableContainerFill
     containers:
@@ -41,7 +40,7 @@
         tableId: FillGunSafeLaserT1
 
 - type: entity
-  parent: [TrumaGunsafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
   id: GunSafeShotguns
   name: shotgun safe
   suffix: Alert Level Lock # WWDP
@@ -56,7 +55,7 @@
     - yellow
 
 - type: entity
-  parent: [TrumaGunsafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
   id: GunSafeLaserSpec
   name: specialist laser safe
   suffix: Alert Level Lock # WWDP
@@ -71,7 +70,7 @@
     - yellow
 
 - type: entity
-  parent: [TrumaGunsafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
   id: GunSafeMelee
   name: melee weapon safe
   suffix: Alert Level Lock # WWDP
@@ -86,7 +85,7 @@
     - yellow
 
 - type: entity
-  parent: [TrumaGunsafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
   id: GunSafeJudo
   name: judo safe
   suffix: Alert Level Lock # WWDP
@@ -102,7 +101,7 @@
     - blue
 
 - type: entity
-  parent: [TrumaGunsafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
   id: GunSafeRiotLauncher
   name: riot launcher safe
   suffix: Alert Level Lock # WWDP

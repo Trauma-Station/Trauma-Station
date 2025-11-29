@@ -10,7 +10,7 @@
 
 - type: latheRecipe
   abstract: true
-  parent: [BaseAmmoRecipe , BaseRedAlert]
+  parent: BaseAmmoRecipe
   id: BaseAmmoBoxRecipe
   categories:
   - Ammo
@@ -18,7 +18,6 @@
 
 - type: latheRecipe
   abstract: true
-  parent: BaseRedAlert # Trauma
   id: BaseEmptyAmmoRecipe
   categories:
   - Magazines

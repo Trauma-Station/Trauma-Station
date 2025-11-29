@@ -374,9 +374,9 @@
   components:
   - type: Sprite
     state: brassknuckleduster
-  - type: Construction
-    graph: ClothingHandsKnuckleDustersBrass
-    node: icon
+  # - type: Construction # Trauma
+  #   graph: ClothingHandsKnuckleDustersBrass
+  #   node: icon
 
 - type: entity
   parent: [ClothingHandsKnuckleDustersBase, BaseSyndicateContraband]

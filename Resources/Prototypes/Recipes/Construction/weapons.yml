@@ -210,7 +210,7 @@
   category: construction-category-weapons
   objectType: Item
 
-# - type: construction
+# - type: construction # Trauma
 #   id: ClothingHandsKnuckleDustersBrass
 #   graph: ClothingHandsKnuckleDustersBrass
 #   startNode: start
