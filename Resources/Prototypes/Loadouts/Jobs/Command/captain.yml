@@ -188,8 +188,3 @@
   id: CaptainOuterClothing
   equipment:
     outerClothing: ClothingOuterArmorCaptainCarapace
-
-- type: loadout
-  id: CaptainWintercoat
-  equipment:
-    outerClothing: ClothingOuterWinterCapArmored # Goob edit

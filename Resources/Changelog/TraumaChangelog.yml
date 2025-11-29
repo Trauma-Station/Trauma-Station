@@ -694,3 +694,11 @@ Entries:
       message: Sound now gets muffled when passing through obstacles.
   id: 79
   time: '2025-11-24T16:29:56.0000000+00:00'
+- author: armok
+  changes:
+    - type: Tweak
+      message: Most armors made weaker
+    - type: Tweak
+      message: Many syndicate items made weaker.
+  id: 80
+  time: '2025-11-29T18:42:13.0000000+00:00'
