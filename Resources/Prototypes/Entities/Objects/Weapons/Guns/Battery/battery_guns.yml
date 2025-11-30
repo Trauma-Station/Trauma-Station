@@ -774,7 +774,6 @@
     price: 100
   - type: Gun
     fireRate: 2
-    #projectileSpeed: 35 # Goobstation - nuh uh
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: ProjectileBatteryAmmoProvider

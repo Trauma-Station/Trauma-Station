@@ -25,7 +25,7 @@
     - 0,0,2,1
   - type: Gun
     fireRate: 12.5 # Reduced fireRate and increased projectileSpeed
-    projectileSpeed: 30
+    projectileSpeed: 27 # Trauma fire rate breaks past 27 idk why
     minAngle: 15 # More controlled than before
     maxAngle: 55
     angleDecay: -8 # Intentionally negative, loses accuracy while not shooting

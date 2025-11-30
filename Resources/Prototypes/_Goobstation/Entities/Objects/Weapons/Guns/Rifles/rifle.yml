@@ -186,7 +186,7 @@
     sprite: _Goobstation/Objects/Weapons/Guns/Rifles/wspr.rsi
   - type: Gun
     fireRate: 5.5
-    projectileSpeed: 35
+    projectileSpeed: 27 # Trauma
     soundGunshot:
       path: /Audio/_Goobstation/Weapons/Guns/Gunshots/suppressed_smg.ogg
       params:
