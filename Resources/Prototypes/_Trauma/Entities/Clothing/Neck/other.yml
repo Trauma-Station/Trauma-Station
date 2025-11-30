@@ -12,3 +12,17 @@
     sprite: _Trauma/Clothing/Neck/revIFF.rsi
   - type: FactionClothing
     faction: Revolutionary
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckBombCollarBroken
+  name: disabled bomb collar
+  description: A disabled bomb collar, it will no longer explode, but it will give away your criminal history.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Trauma/Clothing/Neck/bombcollar.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Neck/bombcollar.rsi
+  - type: Unremoveable
