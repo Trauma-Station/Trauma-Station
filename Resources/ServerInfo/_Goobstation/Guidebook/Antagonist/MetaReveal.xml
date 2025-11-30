@@ -13,72 +13,21 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
   The following list provides revealing conditions for different antags you may see on the station
 
-  ## Heretics
-  The revealing condition for this shield is any of the following:
-  - Finding a rune
-  - Finding a reality fracture
-  - Witnessing a crewmember using their powers
+  ## Nukies
 
-  ## Cosmic Cult
+  - Crew know what nukies are, but should not prepare for them.
+  - Seeing the nukies.
+  - Seeing someone that looks like a nukie.
+  - Finding the nukie ship.
+  - Pretty simple
 
-  The revealing condition for this shield is any of the following:
-  - witnessing a crewmember with the telltale facemask
-  - Seeing a glyph
-  - witnessing a crewmember absorb a malign shift
-  - witnessing a crewmember use a cult-specific ability
-  - witnessing cult gear like entropic swords and armor
+  ## Everything else
 
-  ## Devils
-
-  The revealing condition for this shield is any of the following:
-  - You are a Devil.
-  - You are the Chaplain, a lawyer, or a member of Central Command. (Including BSO and NTR)
-  - You have made a deal with the Devil.
-  - You have witnessed someone make a deal.
-
-  ## Zombies
-
-  Revealing conditions to the "Zombie" Shield:
-  - You are a Nuclear Operative
-  - You are a Syndicate Agent
-  - You are a Zombie
-  - You have seen Zombies on the station
-
-  ## Infections(Once the zombie virus is proven)
-
-  Revealing conditions to the "Infections" Shield:
-  - You are a Chemist
-  - You are a Chief Medical Officer
-  - Zombies are announced to be real and station-wide
-
-  ## Deathsquad
-
-  Revealing conditions to the "Deathsquad" Shield:
-  - You'll know.
-
-  ## Implanted implants
-
-  The revealing condition for this shield is any of the following:
-  - discovering a non-NT implanter, used or unused
-  - discovering a non-NT implant box
-  - discovering use of a non-NT implant by anyone
-  - experiencing a situation where absolutely no other explanation is possible
-  - discovering an unlocked uplink
-
-  ## Chameleon Items
-
-  The revealing condition for this shield is any of the following:
-  - seeing someone else cause any chameleon item to change
-  - finding holographic nanomachine fibers
-  - experiencing a situation where absolutely no other explanation is possible
-  - discovering an unlocked uplink
+  - Nanotrasen knows about the other threats. If you suspect them being real, they might be.
 
   ## Stealth Items
 
-  The revealing condition for this shield is any of the following:
-  - seeing the item behave differently than the expected behavior for the item
-  - seeing the item used for its hidden purpose
-  - experiencing a situation where absolutely no other explanation is possible
-  - discovering an unlocked uplink
+  - As an antagonist use your stealth items in a way that they wont get found.
+  - If sec realises you have an implant / no-slips / another stealth item thats on you.
 
 </Document>
