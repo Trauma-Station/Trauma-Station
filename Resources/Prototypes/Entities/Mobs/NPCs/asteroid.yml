@@ -326,7 +326,7 @@
         acts: [ "Destruction" ]
   - type: NpcFactionMember
     factions:
-    - SimpleHostile
+    - Lavafauna # Trauma - fix hivelord brood killing hivelord
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
