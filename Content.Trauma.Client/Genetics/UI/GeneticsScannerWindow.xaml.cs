@@ -71,7 +71,7 @@ public sealed partial class GeneticsScannerWindow : FancyWindow
         if (mob is not {} uid)
             return;
 
-        var scanned = _genome.IsScanned(mob);
+        var scanned = _genome.IsScanned(uid);
         if (scanned != _scanned)
         {
             _scanned = scanned;
