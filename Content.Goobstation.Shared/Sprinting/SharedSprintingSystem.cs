@@ -13,7 +13,6 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Gravity;
 using Content.Shared.Input;
@@ -29,6 +28,7 @@ using Content.Shared.Zombies;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Network;
@@ -40,6 +40,7 @@ namespace Content.Goobstation.Shared.Sprinting;
 public abstract class SharedSprintingSystem : EntitySystem
 {
     [Dependency] private readonly SharedStaminaSystem _staminaSystem = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedGravitySystem _gravity = default!;
@@ -74,6 +75,7 @@ public abstract class SharedSprintingSystem : EntitySystem
         SubscribeLocalEvent<StandingStateComponent, SprintAttemptEvent>(OnStandingStateSprintAttempt);
         SubscribeLocalEvent<BuckleComponent, SprintAttemptEvent>(OnBuckleSprintAttempt);
         SubscribeLocalEvent<SprinterComponent, EntityZombifiedEvent>(OnZombified);
+        SubscribeLocalEvent<SprinterComponent, StartCollideEvent>(OnCollide);
 
         // Traumastation
         Subs.CVar(_cfg, TraumaCVars.SprintEnabled, value => SprintEnabled = value, true);
@@ -163,10 +165,6 @@ public abstract class SharedSprintingSystem : EntitySystem
 
         component.LastSprint = _timing.CurTime;
         component.IsSprinting = newSprintState;
-
-        // Raise the stamina-specific event (for `SharedStaminaSystem.cs`)
-        var staminaEv = new SprintingStateChangedEvent(uid, newSprintState);
-        RaiseLocalEvent(uid, ref staminaEv);
 
         if (newSprintState)
         {
@@ -303,5 +301,24 @@ public abstract class SharedSprintingSystem : EntitySystem
     private void OnZombified(EntityUid uid, SprinterComponent component, ref EntityZombifiedEvent args) =>
         component.SprintSpeedMultiplier *= 0.5f; // We dont want super fast zombies do we?
 
+    private void OnCollide(EntityUid uid, SprinterComponent sprinter, ref StartCollideEvent args)
+    {
+        var otherUid = args.OtherEntity;
+
+        if (uid == otherUid)
+            return;
+
+        if (!sprinter.IsSprinting)
+            return;
+
+        if (!TryComp(otherUid, out SprinterComponent? otherSprinter) || !otherSprinter.IsSprinting)
+            return;
+
+        _stun.TryKnockdown(uid, sprinter.KnockdownDurationOnInterrupt, refresh: false, drop: false);
+        _stun.TryKnockdown(otherUid,
+            otherSprinter.KnockdownDurationOnInterrupt,
+            refresh: false,
+            drop: false);
+    }
     #endregion
 }

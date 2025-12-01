@@ -11,6 +11,14 @@ public abstract partial class SharedHereticAbilitySystem
     {
         SubscribeLocalEvent<HereticComponent, EventHereticRustCharge>(OnRustCharge);
         SubscribeLocalEvent<HereticComponent, EventHereticIceSpear>(OnIceSpear);
+
+        SubscribeLocalEvent<EventEmp>(OnEmp);
+    }
+
+    private void OnEmp(EventEmp ev)
+    {
+        _emp.EmpPulse(Transform(ev.Performer).Coordinates, ev.Range, ev.EnergyConsumption, ev.Duration, ev.Performer);
+        ev.Handled = true;
     }
 
     private void OnIceSpear(Entity<HereticComponent> ent, ref EventHereticIceSpear args)
@@ -67,7 +75,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         if (!IsTileRust(xform.Coordinates, out _))
         {
-            Popup.PopupPredicted(Loc.GetString("heretic-ability-fail-tile-underneath-not-rusted"), ent, ent);
+            Popup.PopupClient(Loc.GetString("heretic-ability-fail-tile-underneath-not-rusted"), ent, ent);
             return;
         }
 

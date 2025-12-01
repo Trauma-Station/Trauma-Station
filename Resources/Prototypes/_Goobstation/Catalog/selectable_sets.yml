@@ -159,7 +159,9 @@
   - MagazinePistolCaselessRifle
   - MagazinePistolCaselessRifle
   - MagazinePistolCaselessRifle
-  - CQCManual
+  - MagazinePistolCaselessRifle #Trauma - Replace CQC with capoeira, extra cobra mag and energy dagger to rebalance price.
+  - CapoeiraManual
+  - EnergyDaggerBox 
   - ClothingOuterArmourInvisibleSyndie
   - ClothingShoesBootsJack
   - CigPackSyndicate
@@ -181,7 +183,8 @@
   - ScramImplanter
   - FreedomImplanter
   - SmokeImplanter
-  - KravMagaImplanter
+#  - KravMagaImplanter #Trauma - Kill Krav Maga implanter. Replace with fakemindshield.
+  - FakeMindShieldImplanter
   - ClothingOuterDavidsJacketValid
   - AutosurgeonRightMantisBlade
   - AutosurgeonLeftMantisBlade

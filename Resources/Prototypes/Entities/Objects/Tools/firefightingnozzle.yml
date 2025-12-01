@@ -59,6 +59,8 @@
     providerWhitelist:
       tags:
       - AtmosBackTank
+  - type: UseDelay
+    delay: 0.5
 
 - type: entity
   parent: [ BaseCivilianContraband, SmokeGrenade ]

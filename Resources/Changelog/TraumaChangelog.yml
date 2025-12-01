@@ -694,3 +694,105 @@ Entries:
       message: Sound now gets muffled when passing through obstacles.
   id: 79
   time: '2025-11-24T16:29:56.0000000+00:00'
+- author: armok
+  changes:
+    - type: Tweak
+      message: Most armors made weaker
+    - type: Tweak
+      message: Many syndicate items made weaker.
+  id: 80
+  time: '2025-11-29T18:42:13.0000000+00:00'
+- author: Aviu
+  changes:
+    - type: Fix
+      message: Fix audio muffle being shitty in some scenarios.
+  id: 81
+  time: '2025-11-29T18:56:46.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Removed slot machine adhd slop.
+    - type: Remove
+      message: Removed wizard chud 2 wizcoin demonic heart.
+    - type: Remove
+      message: No heretic flesh path rework due to shitcode crimes.
+  id: 82
+  time: '2025-11-30T01:37:40.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: >-
+        Bomb collars for insurgents, they are disabled and serve as a way to
+        identify.
+    - type: Fix
+      message: Guns hitting targets a tile after the target
+  id: 83
+  time: '2025-11-30T05:22:27.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Remove
+      message: Hos magnum
+    - type: Tweak
+      message: EMP implant is stronger
+    - type: Tweak
+      message: Laser rifles stronger, and tweaked for lasersec
+    - type: Tweak
+      message: Shivs hit faster but break after being used for a while.
+    - type: Tweak
+      message: >-
+        Improv spears damage standardized and they break after being used for a
+        while.
+    - type: Remove
+      message: 8 gauge printing
+    - type: Remove
+      message: brass knuckle crafting
+    - type: Remove
+      message: temperature gun and ion rifle printing
+    - type: Tweak
+      message: >-
+        Ammo and guns can only be printed on red alert, with the exception of
+        detective ammo
+    - type: Tweak
+      message: Ion rifle EMPS on hit
+    - type: Tweak
+      message: temp gun cannot be reflected
+    - type: Tweak
+      message: buff hardlight bow EMP effect
+    - type: Add
+      message: laser sec to fland for testing
+    - type: Tweak
+      message: armory safes are much stronger
+    - type: Fix
+      message: broken drop pods bug
+    - type: Tweak
+      message: laser sidearm DPS 13>10, capacity is doubled
+    - type: Tweak
+      message: new laser gun sprites
+  id: 84
+  time: '2025-11-30T05:46:57.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: >-
+        CQC removed from hitman bundle, replaced with capoeira an extra mag and
+        an energy dagger.
+    - type: Tweak
+      message: >-
+        Krav Maga implant removed from Cyberpsychosis bundle, replaced with fake
+        mindshield.
+    - type: Remove
+      message: BigBoxCQC 100TC crate.
+  id: 85
+  time: '2025-11-30T06:11:04.0000000+00:00'
+- author: Aviu
+  changes:
+    - type: Add
+      message: Flesh heretic path rework.
+  id: 86
+  time: '2025-11-30T20:04:05.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Fix
+      message: Hivelord brood no longer attack other megafauna.
+  id: 87
+  time: '2025-11-30T22:23:50.0000000+00:00'

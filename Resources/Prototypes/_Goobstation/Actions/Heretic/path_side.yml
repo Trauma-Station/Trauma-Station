@@ -52,3 +52,20 @@
   - type: HereticAction
     requireMagicItem: true
     messageLoc: heretic-speech-cleave
+
+- type: entity
+  parent: BaseAction
+  id: ActionActivateEmp
+  name: Activate EMP
+  description: Triggers EMP pulse around you
+  components:
+  - type: Action
+    checkCanInteract: false
+    useDelay: 30
+    itemIconStyle: BigAction
+    priority: -20
+    icon:
+      sprite: Objects/Weapons/Grenades/empgrenade.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:EventEmp

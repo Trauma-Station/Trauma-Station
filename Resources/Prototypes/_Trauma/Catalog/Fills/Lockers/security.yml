@@ -1,3 +1,22 @@
+- type: entity
+  parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
+  id: BaseTraumaGunSafe
+  name: gun safe
+  suffix: Alert Level Lock
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillGunSafeLaserCarbine
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Gunsafes
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - blue
+    - yellow
+
 - type: entityTable
   id: FillLockerWardenTrauma
   table: !type:AllSelector
@@ -9,3 +28,142 @@
     - id: Wrench
     - id: ContrabandDetectorFlatpack
     - id: SecurityMegaphone
+
+- type: entity
+  parent: [BaseTraumaGunSafe] # WWDP
+  id: GunSafeLaserCarbine
+  name: laser safe
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillGunSafeLaserT1
+
+- type: entity
+  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  id: GunSafeShotguns
+  name: shotgun safe
+  suffix: Alert Level Lock # WWDP
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillGunSafeShotgunsT1
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - yellow
+
+- type: entity
+  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  id: GunSafeLaserSpec
+  name: specialist laser safe
+  suffix: Alert Level Lock # WWDP
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillGunSafeLaserT2
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - yellow
+
+- type: entity
+  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  id: GunSafeMelee
+  name: melee weapon safe
+  suffix: Alert Level Lock # WWDP
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillGunSafeMeleeT1
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - yellow
+
+- type: entity
+  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  id: GunSafeJudo
+  name: judo safe
+  suffix: Alert Level Lock # WWDP
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillGunSafeJudoT1
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - yellow
+    - blue
+
+- type: entity
+  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  id: GunSafeRiotLauncher
+  name: riot launcher safe
+  suffix: Alert Level Lock # WWDP
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillGunSafeRiot
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - yellow
+    - blue
+
+- type: entityTable
+  id: FillGunSafeRiot
+  table: !type:AllSelector
+    children:
+    - id: WeaponLauncherNonLethal
+      amount: 1
+    - id: BoxGrenadesBaton
+      amount: 1
+    - id: BoxGrenadesFlash
+      amount: 1
+    - id: BoxGrenadesTeargas
+      amount: 1
+
+- type: entityTable
+  id: FillGunSafeLaserT1
+  table: !type:AllSelector
+    children:
+    - id: WeaponLaserCarbine
+      amount: 6
+
+- type: entityTable
+  id: FillGunSafeShotgunsT1
+  table: !type:AllSelector
+    children:
+    - id: WeaponShotgunKammererEmpty
+      amount: 3
+    - id: BoxBeanbag
+      amount: 3
+
+- type: entityTable
+  id: FillGunSafeLaserT2
+  table: !type:AllSelector
+    children:
+    - id: WeaponTemperatureGun
+      amount: 1
+    - id: WeaponEnergyIonRifle
+      amount: 1
+
+- type: entityTable
+  id: FillGunSafeMeleeT1
+  table: !type:AllSelector
+    children:
+    - id: Truncheon
+      amount: 6
+
+- type: entityTable
+  id: FillGunSafeJudoT1
+  table: !type:AllSelector
+    children:
+    - id: ClothingBeltCorporateJudo
+      amount: 2

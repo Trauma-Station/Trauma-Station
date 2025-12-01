@@ -10,3 +10,18 @@
     Piercing: 30
     Heat: 10
     Structural: 10
+
+- type: damageModifierSet
+  id: Gunsafes
+  coefficients:
+    Shock: 0
+    Heat: 1
+    Structural: 0.5
+    Ion: 0
+    Caustic: 0
+  flatReductions:
+    Blunt: 15
+    Slash: 15
+    Piercing: 15
+    Heat: 15
+    Structural: 15

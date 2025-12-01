@@ -33,7 +33,7 @@ namespace Content.Server.Body.Components
     /// <summary>
     ///     Handles metabolizing various reagents with given effects.
     /// </summary>
-    [RegisterComponent, AutoGenerateComponentPause, Access(typeof(MetabolizerSystem))]
+    [RegisterComponent, AutoGenerateComponentPause] // Goob edit
     public sealed partial class MetabolizerComponent : Component
     {
         /// <summary>
@@ -80,7 +80,7 @@ namespace Content.Server.Body.Components
         ///     List of metabolizer types that this organ is. ex. Human, Slime, Felinid, w/e.
         /// </summary>
         [DataField]
-        [Access(typeof(MetabolizerSystem), Other = AccessPermissions.ReadExecute)] // FIXME Friends
+        // [Access(typeof(MetabolizerSystem), Other = AccessPermissions.ReadExecute)] // FIXME Friends // Goob edit
         public HashSet<ProtoId<MetabolizerTypePrototype>>? MetabolizerTypes;
 
         /// <summary>

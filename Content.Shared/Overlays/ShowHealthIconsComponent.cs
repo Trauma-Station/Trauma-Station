@@ -11,6 +11,10 @@ namespace Content.Shared.Overlays;
 [AutoGenerateComponentState(true)]
 public sealed partial class ShowHealthIconsComponent : Component
 {
+    // Goobstation
+    [DataField]
+    public bool WorksInHands;
+
     /// <summary>
     /// Displays health status icons of the damage containers.
     /// </summary>

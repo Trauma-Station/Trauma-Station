@@ -284,18 +284,29 @@ public sealed class DamageChangedEvent : EntityEventArgs
     /// </summary>
     public readonly bool IgnoreBlockers;
 
+    /// <summary>
+    /// Goob - Damage before clamp of excessive heal and damage cap was applied
+    /// </summary>
+    public readonly DamageSpecifier? UncappedDamage;
+
     public DamageChangedEvent(
         DamageableComponent damageable,
         DamageSpecifier? damageDelta,
         bool interruptsDoAfters,
         EntityUid? origin,
-        bool ignoreBlockers = false // Goob
+        // <Goob>
+        bool ignoreBlockers = false,
+        DamageSpecifier? uncapped = null
+        // </Goob>
     )
     {
         Damageable = damageable;
         DamageDelta = damageDelta;
         Origin = origin;
-        IgnoreBlockers = ignoreBlockers; // Goob
+        // <Goob>
+        IgnoreBlockers = ignoreBlockers;
+        UncappedDamage = uncapped ?? damageDelta;
+        // </Goob>
 
         if (DamageDelta is null)
             return;

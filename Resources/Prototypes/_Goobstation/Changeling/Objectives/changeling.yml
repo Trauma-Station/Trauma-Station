@@ -190,18 +190,6 @@
   - type: StealCondition
     stealGroup: HandTeleporter
 
-## hos
-
-- type: entity
-  parent: ChangelingStealObjective
-  id: LingEnergyMagnumStealObjective
-  components:
-  - type: NotJobRequirement
-    jobs: [ HeadOfSecurity ]
-  - type: StealCondition
-    stealGroup: WeaponEnergyMagnum
-    owner: job-name-hos
-
 ## ce
 
 - type: entity

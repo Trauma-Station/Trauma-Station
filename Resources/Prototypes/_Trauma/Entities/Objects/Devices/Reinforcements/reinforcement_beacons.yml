@@ -277,7 +277,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
-    name: ghost-role-information-reinforcement-salvage-name
+    name: ghost-role-information-reinforcement-salv-name
     description: ghost-role-information-reinforcement-description
     rules: ghost-role-information-nonantagonist-rules
     mindRoles:

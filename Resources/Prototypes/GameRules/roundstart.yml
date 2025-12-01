@@ -27,12 +27,12 @@
     - id: Xenoborgs
       prob: 0.05
     # <Goob>
-    - id: Heretic # goob edit
+    - id: Heretic
       prob: 0.2
-    - id: Devil # Goob
+    - id: Devil
       prob: 0.02
-    - id: Shadowling # Goob
-      prob: 0.09
+    - id: Shadowling
+      prob: 0.02
     # </Goob>
 
 - type: entity
@@ -46,12 +46,12 @@
     - id: Xenoborgs
       prob: 0.05
     # <Goob>
-    - id: Heretic # goob edit
+    - id: Heretic
       prob: 0.2
-    - id: Devil # Goob
+    - id: Devil
       prob: 0.02
-    - id: Shadowling # Goob
-      prob: 0.09
+    - id: Shadowling
+      prob: 0.02
     # </Goob>
 
 - type: entity
@@ -65,12 +65,12 @@
     #- id: SubWizard # Trauma - not real
     #  prob: 0.05
     # <Goob>
-    - id: Heretic # goob edit
+    - id: Heretic
       prob: 0.2
-    - id: Devil # Goob
+    - id: Devil
       prob: 0.02
-    - id: Shadowling # Goob
-      prob: 0.09
+    - id: Shadowling
+      prob: 0.02
     # </Goob>
 
 - type: entity
@@ -424,6 +424,7 @@
         components:
         - CommandStaff # Goobstation
         - ZombieImmune
+        - AntagImmune
       briefing:
         text: zombie-patientzero-role-greeting
         color: Plum

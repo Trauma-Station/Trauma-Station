@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Bloodstream;
+using Content.Shared._Shitmed.Body;
 using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Medical.Surgery.Consciousness;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
@@ -139,9 +140,6 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed 
             }
 
             // Shitmed Change Start
-            if (!_consciousness.TryGetNerveSystem(uid, out var nerveSys))
-                continue;
-
             var total = FixedPoint2.Zero;
             foreach (var (bodyPart, _) in _body.GetBodyChildren(uid))
             {
@@ -152,7 +150,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed 
                         continue;
 
                     total += bleeds.BleedingAmount;
-                    totalPartBleeds = bleeds.BleedingAmount; // Goobstation
+                    totalPartBleeds += bleeds.BleedingAmount; // Goobstation
                 }
 
                 if (TryComp<WoundableComponent>(bodyPart, out var woundable)) // Goobstation
@@ -163,22 +161,40 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed 
 
             var missingBlood = bloodstream.BloodMaxVolume - bloodstream.BloodSolution.Value.Comp.Solution.Volume;
 
-            bloodstream.BleedAmount = (float) total / 4;
-            if (!_consciousness.SetConsciousnessModifier(
-                    uid,
-                    nerveSys.Value,
-                    -missingBlood / 4,
-                    identifier: "Bleeding",
-                    type: ConsciousnessModType.Pain))
+            bloodstream.BleedAmountFromWounds = (float) total; // why was it ever divided by 4? Goobstation
+
+            if (_consciousness.TryGetNerveSystem(uid, out var nerveSys))
             {
-                _consciousness.AddConsciousnessModifier(
-                    uid,
-                    nerveSys.Value,
-                    -missingBlood / 4,
-                    identifier: "Bleeding",
-                    type: ConsciousnessModType.Pain);
+                if (!_consciousness.SetConsciousnessModifier(
+                        uid,
+                        nerveSys.Value,
+                        -missingBlood / 4,
+                        identifier: "Bleeding",
+                        type: ConsciousnessModType.Pain))
+                {
+                    _consciousness.AddConsciousnessModifier(
+                        uid,
+                        nerveSys.Value,
+                        -missingBlood / 4,
+                        identifier: "Bleeding",
+                        type: ConsciousnessModType.Pain);
+                }
             }
             // Shitmed Change End
+            // Goobstation start
+            bloodstream.BleedAmount = bloodstream.BleedAmountFromWounds + bloodstream.BleedAmountNotFromWounds;
+            bloodstream.BleedAmount = Math.Clamp(bloodstream.BleedAmount, 0, bloodstream.MaxBleedAmount);
+
+            DirtyFields(uid, bloodstream, null, nameof(BloodstreamComponent.BleedAmount), nameof(BloodstreamComponent.BleedAmountFromWounds));
+
+            if (bloodstream.BleedAmount == 0)
+                _alertsSystem.ClearAlert(uid, bloodstream.BleedingAlert);
+            else
+            {
+                var severity = (short) Math.Clamp(Math.Round(bloodstream.BleedAmount, MidpointRounding.ToZero), 0, 10);
+                _alertsSystem.ShowAlert(uid, bloodstream.BleedingAlert, severity);
+            }
+            // Goobstation end
         }
 
         UpdateWounds(frameTime);
@@ -271,10 +287,11 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed 
             return;
 
         // Does the calculation of how much bleed rate should be added/removed, then applies it
-        var oldBleedAmount = ent.Comp.BleedAmount;
+        var oldBleedAmount = ent.Comp.BleedAmountNotFromWounds; // Goobstation
         var total = bloodloss.GetTotal();
         var totalFloat = total.Float();
-        TryModifyBleedAmount(ent.AsNullable(), totalFloat);
+        if (TryComp<BodyComponent>(ent, out var body) && body.BodyType == BodyType.Simple) // Goobstation
+            TryModifyBleedAmount(ent.AsNullable(), totalFloat); // Goobstation - do not apply base bleed to woundmed supported bodies
 
         /// Critical hit. Causes target to lose blood, using the bleed rate modifier of the weapon, currently divided by 5
         /// The crit chance is currently the bleed rate modifier divided by 25.
@@ -488,9 +505,22 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed 
         if (!Resolve(ent, ref ent.Comp, logMissing: false))
             return false;
 
-        ent.Comp.BleedAmount += amount;
-        ent.Comp.BleedAmount = Math.Clamp(ent.Comp.BleedAmount, 0, ent.Comp.MaxBleedAmount);
+        // Goobstation start
+        ent.Comp.BleedAmountNotFromWounds += amount;
 
+        if (amount <= 0 && TryComp<BodyComponent>(ent, out var body)
+            && body.BodyType == BodyType.Complex)
+        {
+            _wound.TryHealMostSevereBleedingWoundables(ent, -amount, out var _);
+        }
+
+        // Clamp minimum bleed to zero
+        ent.Comp.BleedAmountNotFromWounds = Math.Max(ent.Comp.BleedAmountNotFromWounds, 0);
+
+        ent.Comp.BleedAmount = Math.Clamp(ent.Comp.BleedAmountFromWounds + ent.Comp.BleedAmountNotFromWounds, 0, ent.Comp.MaxBleedAmount);
+
+        DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BleedAmountNotFromWounds));
+        // Goobstation end
         DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BleedAmount));
 
         if (ent.Comp.BleedAmount == 0)

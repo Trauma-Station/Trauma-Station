@@ -43,3 +43,6 @@
 
 - type: Tag
   id: LavalandInterior7x7
+
+- type: Tag
+  id: MarkerBeacon

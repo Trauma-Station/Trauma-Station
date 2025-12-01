@@ -291,7 +291,7 @@
   - type: TriggerOnActivateImplant
   - type: EmpOnTrigger
     range: 2.75
-    energyConsumption: 360 # Goob edit - was 50000
+    energyConsumption: 1000 # Trauma edit - was 50000
     disableDuration: 10
 
 - type: entity

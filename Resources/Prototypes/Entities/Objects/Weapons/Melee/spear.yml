@@ -121,7 +121,7 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 24 # Goob edit
+        Piercing: 25 # Trauma edit
   - type: Item
     size: Large # Goob edit
     shape: # Goob
@@ -155,38 +155,35 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Piercing: 6 # Goob edit
-  # Goobstation - nuh uh
-  #- type: Damageable
-  #  damageContainer: Inorganic
-  #- type: Destructible
-  #  thresholds:
-  #  - trigger:
-  #      !type:DamageTrigger
-  #      damage: 40 # Goob edit, excess damage avoids cost of spawning entities.
-  #    behaviors:
-  #    - !type:DoActsBehavior
-  #      acts: [ "Destruction" ]
-  #  - trigger:
-  #      !type:DamageTrigger
-  #      damage: 20
-  #    behaviors:
-  #    - !type:PlaySoundBehavior
-  #      sound:
-  #        collection: GlassBreak
-  #        params:
-  #          volume: -4
-  #    - !type:SpawnEntitiesBehavior
-  #      spawn:
-  #        PartRodMetal1:
-  #          min: 1
-  #          max: 1
-  #    - !type:DoActsBehavior
-  #      acts: [ "Destruction" ]
-  #- type: DamageOnLand
-  #  damage:
-  #    types:
-  #      Blunt: 5
+        Piercing: 8 # Trauma edit
+  - type: Damageable # Trauma - durability
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 4
+  - type: DamageOnHit # Trauma - durability
+    damage:
+      types:
+        Blunt: 1
   - type: UseDelay
   - type: Appearance
   - type: SolutionContainerVisuals
@@ -198,7 +195,6 @@
     equippedMaxFillLevels: 1
   - type: ThrowableBlocked # Goobstation
   - type: UndetectableContraband #Goobstation-Contraband detector
-
 
 - type: entity
   name: reinforced spear
@@ -213,13 +209,35 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 15
+        Piercing: 12 # Trauma, was 15
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 30 # Goob edit
+        Piercing: 25 # Trauma edit
   - type: Construction
     graph: SpearReinforced
+  - type: Destructible # Trauma - durability
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 3
 
 - type: entity
   name: plasma spear
@@ -234,13 +252,35 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 18
+        Piercing: 12
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 36 # Goob edit
+        Piercing: 25 # Trauma edit
   - type: Construction
     graph: SpearPlasma
+  - type: Destructible # Trauma - durability
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 2
 
 - type: entity
   name: uranium spear
@@ -255,15 +295,37 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 10
-        Radiation: 8
+        Piercing: 6 # Trauma Piercing was 10, radiation was 8
+        Radiation: 6
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 24 # Goob edit
-        Radiation: 12 # Goob edit
+        Piercing: 12 # Trauma edit
+        Radiation: 13 # Trauma edit
   - type: Construction
     graph: SpearUranium
+  - type: Destructible # Trauma - durability
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 2
 
 - type: entity
   name: bone spear

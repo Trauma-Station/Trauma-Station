@@ -33,7 +33,7 @@
     - suitStorage
   - type: AmmoCounter
   - type: Gun
-    projectileSpeed: 30
+    projectileSpeed: 27 # Trauma
     fireRate: 6
     selectedMode: FullAuto
     availableModes:

@@ -94,7 +94,14 @@ public partial class SharedMartialArtsSystem
             || !TryComp(target, out StatusEffectsComponent? status))
             return;
 
-        _newStatus.TryUpdateStatusEffectDuration(target, DiscombobulateEffect, TimeSpan.FromSeconds(5));
+        _newStatus.TryUpdateStatusEffectDuration(target, DiscombobulateEffect, args.Time);
+
+        if (_newStatus.TryUpdateStatusEffectDuration(target, args.StatusEffectProto, out var effect, args.Time) &&
+            TryComp(effect, out StaminaResistanceModifierStatusEffectComponent? effectComp))
+        {
+            effectComp.Modifier *= args.StaminaResistanceModifier;
+            Dirty(effect.Value, effectComp);
+        }
 
         _stamina.TakeStaminaDamage(target, proto.StaminaDamage);
 

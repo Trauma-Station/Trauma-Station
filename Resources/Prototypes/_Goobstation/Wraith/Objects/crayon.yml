@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem # don't want to inherit LimitedCharges
+  parent: BaseItem
   id: CrayonBlood
   categories: [ HideSpawnMenu ]
   name: bloody crayon
@@ -28,3 +28,4 @@
     - CrayonRed
     - Recyclable
     - Trash
+  - type: SpaceGarbage

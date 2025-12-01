@@ -9,7 +9,6 @@
 
 - type: constructionGraph
   id: ContrabandDetector
-  start: start
   graph:
   - node: start
     edges:
@@ -86,7 +85,7 @@
         prototype: SheetGlass1
         amount: 2
 
-  - node: assemble 
+  - node: assemble
     edges:
     - to: detector
       steps:

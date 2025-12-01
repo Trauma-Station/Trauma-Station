@@ -45,7 +45,7 @@
         amount: 1.5
         conditions:
         - !type:PressureCondition
-          min: 0
+          min: 1
           max: 50
           worksOnLavaland: true
       - !type:HealthChange
@@ -57,7 +57,7 @@
             Bloodloss: -1.25
         conditions:
         - !type:PressureCondition
-          min: 0
+          min: 1
           max: 50
           worksOnLavaland: true
       - !type:HealthChange
@@ -65,10 +65,14 @@
         - !type:ReagentCondition
           reagent: MinersSalve
           min: 21
+        - !type:PressureCondition
+          min: 1
+          max: 50
+          worksOnLavaland: true
         damage:
           types:
-            Poison: 15
-            Cold: 15
+            Poison: 5
+            Cold: 5
       - !type:Jitter
       - !type:PopupMessage
         type: Local
@@ -96,7 +100,7 @@
         conditions:
         - !type:PressureCondition
           inverted: true # only do the damage outside of lavaland
-          min: 0
+          min: 1
           max: 50
           worksOnLavaland: true
         damage:

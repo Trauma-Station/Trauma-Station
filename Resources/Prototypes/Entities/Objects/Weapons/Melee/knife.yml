@@ -391,15 +391,39 @@
     sprite: Objects/Weapons/Melee/shiv.rsi
     state: icon
   - type: MeleeWeapon
-    attackRate: 1.5
+    attackRate: 2
     damage:
       types:
-        Slash: 6 # goob edit
+        Slash: 7 # Trauma edit
   - type: Item
     sprite: Objects/Weapons/Melee/shiv.rsi
   - type: DisarmMalus
     malus: 0.225
   - type: UndetectableContraband #Goobstation-Contraband detector
+  - type: Destructible # <Trauma>
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlass:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageOnHit
+    damage:
+      types:
+        Blunt: 1
+  - type: Damageable
+    damageContainer: Inorganic # </Trauma>
 
 - type: entity
   name: reinforced shiv
@@ -411,14 +435,32 @@
     graph: ReinforcedShiv
     node: icon
   - type: MeleeWeapon
-    attackRate: 1.5
+    attackRate: 2 # Trauma. was 1.5
     damage:
       types:
-        Slash: 8 #each "tier" grants an additional 2 damage # goob edit
+        Slash: 7 # Trauma , was 8
   - type: Item
     sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
+  - type: Destructible # <Trauma>
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassReinforced:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ] # </Trauma>
 
 - type: entity
   name: plasma shiv
@@ -430,14 +472,32 @@
     graph: PlasmaShiv
     node: icon
   - type: MeleeWeapon
-    attackRate: 1.5
+    attackRate: 2 # Trauma, was 1.5
     damage:
       types:
-        Slash: 10 # goob edit
+        Slash: 7 # Trauma, was 10
   - type: Item
     sprite: Objects/Weapons/Melee/plasma_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/plasma_shiv.rsi
+  - type: Destructible # <Trauma>
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ] # </Trauma>
 
 - type: entity
   name: uranium shiv
@@ -449,15 +509,33 @@
     graph: UraniumShiv
     node: icon
   - type: MeleeWeapon
-    attackRate: 1.5
+    attackRate: 2 #Trauma Was 1.5
     damage:
       types:
-        Slash: 6 # goob edit
+        Slash: 3 # Trauma edit
         Radiation: 4
   - type: Item
     sprite: Objects/Weapons/Melee/uranium_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/uranium_shiv.rsi
+  - type: Destructible # <Trauma>
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassUranium:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ] # </Trauma>
 
 - type: entity
   name: throwing knife

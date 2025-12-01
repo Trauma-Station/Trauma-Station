@@ -332,3 +332,53 @@
           inverted: true
         probability: 0.05
         time: 2
+
+- type: reagent
+  id: Microplastics
+  name: reagent-name-microplastics
+  group: Toxins
+  desc: reagent-desc-microplastics
+  physicalDesc: reagent-physical-desc-powdery
+  color: "#ffffff"
+  plantMetabolism:
+  - !type:PlantAdjustToxins
+    amount: 2
+  - !type:PlantAdjustHealth
+    amount: -1
+  metabolisms:
+    Poison:
+      metabolismRate: 0.01 #Yummers
+      conditions:
+      - !type:MetabolizerTypeCondition
+        type: [ Vox ]
+        inverted: true
+      effects:
+      - !type:HealthChange
+        probability: 0.5
+        damage:
+          types:
+            Poison: 0.25 #should be 0.02, dealt ~30 dmg (less due to Good code)
+      - !type:Vomit
+        probability: 0.1
+        conditions:
+        - !type:ReagentCondition
+          reagent: Microplastics
+          min: 10
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.90
+        sprintSpeedModifier: 0.90
+        conditions:
+        - !type:ReagentCondition
+          reagent: Microplastics
+          min: 20
+    Medicine:
+      metabolismRate: 0.01
+      conditions:
+      - !type:MetabolizerTypeCondition
+        type: [ Vox ]
+        inverted: false # vox are stinky
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: -0.125 #in reality i dont care if its a good medicine for vox bcz its funny

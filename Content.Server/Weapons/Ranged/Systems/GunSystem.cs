@@ -201,6 +201,7 @@ public sealed partial class GunSystem : SharedGunSystem
                     {
                         FiredProjectile = newuid
                     });
+                    SetProjectilePerfectHitEntities(newuid, user, new MapCoordinates(toMap, fromMap.MapId)); // Goob
                     ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation
                     shotProjectiles.Add(newuid);
                 }

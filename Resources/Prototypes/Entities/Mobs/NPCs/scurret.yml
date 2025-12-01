@@ -17,6 +17,7 @@
     prototype: Scurret
     bodyType: Complex
     requiredLegs: 2
+  - type: AntagImmune # Goob, no evil wawa
   - type: Sprite
     layers:
     - map: [ "enum.HumanoidVisualLayers.Chest" ]

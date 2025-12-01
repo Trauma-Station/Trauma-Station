@@ -1,11 +1,14 @@
+using Content.Goobstation.Common.Changeling;
 using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.LightDetection.Systems;
 using Content.Goobstation.Shared.Mindcontrol;
 using Content.Goobstation.Shared.Shadowling.Components;
+using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Heretic;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
@@ -13,7 +16,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
-using Content.Shared.Stunnable;
+using Content.Shared.StatusEffectNew;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
@@ -30,6 +33,7 @@ public abstract class SharedShadowlingSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     public override void Initialize()
     {
@@ -83,9 +87,12 @@ public abstract class SharedShadowlingSystem : EntitySystem
         _lightDamage.AddResistance((ent.Owner, lightDet), -ent.Comp.LightResistanceModifier);
     }
 
+    public ProtoId<CollectiveMindPrototype> ShadowMind = "Shadowmind";
     private void OnInit(EntityUid uid, ShadowlingComponent component, ref MapInitEvent args)
     {
         _actions.AddAction(uid, ref component.ActionHatchEntity, component.ActionHatch);
+
+        EnsureComp<CollectiveMindComponent>(uid).Channels.Add(ShadowMind);
     }
 
     private void OnHatch(Entity<ShadowlingComponent> ent, ref HatchEvent args)
@@ -138,7 +145,7 @@ public abstract class SharedShadowlingSystem : EntitySystem
                 EntityManager.RemoveComponents(uid, _protoMan.Index(component.ObtainableComponents));
 
                 // this is such a big L that even the code is losing and all variables are hardcoded.
-                EnsureComp<SlowedDownComponent>(uid);
+                _status.TryAddStatusEffect(uid, "ShadowlingAbominationStatusEffect", out _);
                 _appearance.AddMarking(uid, "AbominationTorso");
                 _appearance.AddMarking(uid, "AbominationHorns");
 
@@ -205,7 +212,9 @@ public abstract class SharedShadowlingSystem : EntitySystem
     {
         return HasComp<MobStateComponent>(target)
                && !HasComp<ShadowlingComponent>(target)
-               && !HasComp<ThrallComponent>(target);
+               && !HasComp<ThrallComponent>(target)
+               && !HasComp<HereticComponent>(target)
+               && !HasComp<ChangelingComponent>(target);
     }
 
     public void DoEnthrall(EntityUid uid, EntProtoId components, SimpleDoAfterEvent args)

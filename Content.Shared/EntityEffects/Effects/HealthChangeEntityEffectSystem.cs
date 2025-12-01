@@ -9,6 +9,8 @@ using Robust.Shared.Prototypes;
 using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.EntityEffects.Effects;
 using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Heretic;
+
 //using Content.Shared.Temperature.Components;
 
 namespace Content.Shared.EntityEffects.Effects;
@@ -27,6 +29,17 @@ public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<
         var damageSpec = new DamageSpecifier(args.Effect.Damage);
 
         damageSpec *= args.Scale;
+
+        // Goobstation start
+        var ev = new ImmuneToPoisonDamageEvent();
+        EntityManager.EventBus.RaiseLocalEvent(entity, ref ev);
+        if (ev.Immune)
+        {
+            damageSpec = DamageSpecifier.GetNegative(damageSpec);
+            if (damageSpec.GetTotal() == FixedPoint2.Zero)
+                return;
+        }
+        // Goobstation end
 
         _damageable.TryChangeDamage(
                 entity.AsNullable(),

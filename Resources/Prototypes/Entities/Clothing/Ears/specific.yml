@@ -14,3 +14,4 @@
     - type: ChameleonClothing
       slot: [ears]
       default: ClothingHeadsetGrey
+    - type: HideContrabandContent #Goobstation-Contraband detector

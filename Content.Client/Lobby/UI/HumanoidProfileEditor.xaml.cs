@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
+using Content.Goobstation.Common.Barks;
 using Content.Trauma.Common.CCVar;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
@@ -228,6 +229,17 @@ namespace Content.Client.Lobby.UI
             };
 
             #endregion Gender
+
+            // Goob Station
+            #region Barks
+
+            if (configurationManager.GetCVar(GoobCVars.BarksEnabled))
+            {
+                BarksContainer.Visible = true;
+                InitializeBarkVoice();
+            }
+
+            #endregion
 
             RefreshSpecies();
 
@@ -813,6 +825,7 @@ namespace Content.Client.Lobby.UI
             UpdateEyePickers();
             UpdateSaveButton();
             UpdateMarkings();
+            UpdateBarkVoice(); // Goob Station - Barks
             UpdateHairPickers();
             UpdateCMarkingsHair();
             UpdateCMarkingsFacialHair();
@@ -1257,6 +1270,7 @@ namespace Content.Client.Lobby.UI
             UpdateSexControls(); // update sex for new species
             UpdateSpeciesGuidebookIcon();
             ReloadPreview();
+            UpdateBarkVoice(); // Goob Station - Barks
             // begin Goobstation: port EE height/width sliders
             // Changing species provides inaccurate sliders without these
             // Trauma edit start
@@ -1285,8 +1299,8 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
-        // begin Goobstation: port EE height/width sliders
-        // <Trauma>
+        // <Goob>
+        // <Trauma> - use cvars
         private void ResetWidthAndHeight()
         {
             HeightLabel.Visible = _heightSlidersEnabled;
@@ -1340,7 +1354,12 @@ namespace Content.Client.Lobby.UI
             ReloadProfilePreview();
             IsDirty = true;
         }
-        // end Goobstation: port EE height/width sliders
+        private void SetBarkVoice(BarkPrototype newVoice)
+        {
+            Profile = Profile?.WithBarkVoice(newVoice);
+            IsDirty = true;
+        }
+        // </Goob>
 
         public bool IsDirty
         {

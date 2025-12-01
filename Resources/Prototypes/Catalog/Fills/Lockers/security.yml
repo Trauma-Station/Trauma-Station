@@ -405,7 +405,7 @@
 
 - type: entity
   parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock] # WWDP
-  id: GunSafeLaserCarbine
+  id: GunSafeLaserCarbineOutdated # Trauma
   name: laser safe
   suffix: Alert Level Lock # WWDP
   components:

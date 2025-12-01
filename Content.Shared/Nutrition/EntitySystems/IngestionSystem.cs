@@ -1,3 +1,4 @@
+using Content.Trauma.Common.Nutrition; // Trauma
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Organ;
@@ -11,6 +12,7 @@ using Content.Shared.DoAfter;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Forensics;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Heretic;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -376,7 +378,14 @@ public sealed partial class IngestionSystem : EntitySystem
         var afterEv = new IngestedEvent(args.User, entity, split, forceFed);
         RaiseLocalEvent(food, ref afterEv);
 
-        _stomach.TryTransferSolution(stomachToUse.Value.Owner, split, stomachToUse);
+        // Goobstation start
+        var volume = split.Volume;
+        if (_stomach.TryTransferSolution(stomachToUse.Value.Owner, split, stomachToUse))
+        {
+            var consumingEv = new ConsumingFoodEvent(food, volume);
+            RaiseLocalEvent(entity, ref consumingEv);
+        }
+        // Goobstation end
 
         if (!afterEv.Destroy)
         {
@@ -392,6 +401,10 @@ public sealed partial class IngestionSystem : EntitySystem
         // Tell the food that it's time to die.
         var finishedEv = new FullyEatenEvent(args.User);
         RaiseLocalEvent(food, ref finishedEv);
+        // <Trauma>
+        var ateEv = new FullyAteEvent(food, args.User);
+        RaiseLocalEvent(entity, ref ateEv);
+        // </Trauma>
 
         var eventArgs = new DestructionEventArgs();
         RaiseLocalEvent(food, eventArgs);

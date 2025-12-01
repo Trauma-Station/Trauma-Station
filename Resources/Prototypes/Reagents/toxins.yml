@@ -499,12 +499,19 @@
       effects:
         - !type:HealthChange
           conditions:
-          - !type:MetabolizerTypeCondition # Goob - Yowie
-            type: [ Yowie ]
+          - !type:MetabolizerTypeCondition # Goob
+            type: [ Yowie, Vox ]
             inverted: true
           damage:
             types:
               Poison: 2
+    Food: # Goob - Vox are stinky
+     effects:
+      - !type:SatiateHunger
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Vox ]
+          inverted: false
 
 - type: reagent
   id: Romerol

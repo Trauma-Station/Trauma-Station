@@ -1,5 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Traits;
+using Content.Shared.Mech.Components;
+using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Rejuvenate;
 // </Trauma>
 using Content.Server.Administration.Managers;
@@ -58,6 +60,9 @@ namespace Content.Server.Zombies;
 /// </remarks>
 public sealed partial class ZombieSystem
 {
+    // <Trauma>
+    [Dependency] private readonly SharedMechSystem _mech = default!;
+    // </Trauma>
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _ban = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
@@ -315,5 +320,7 @@ public sealed partial class ZombieSystem
         RaiseLocalEvent(target, ref ev, true);
         //zombies get slowdown once they convert
         _movementSpeedModifier.RefreshMovementSpeedModifiers(target);
+        if (TryComp<MechPilotComponent>(target, out var mechPilotComponent)) // Goobstation - kick out zombies from mechs on conversion
+            _mech.TryEject(mechPilotComponent.Mech, null, target);
     }
 }

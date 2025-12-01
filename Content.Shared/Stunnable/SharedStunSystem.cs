@@ -138,7 +138,7 @@ public abstract partial class SharedStunSystem : EntitySystem
     {
         // <Goob>
         var modifierEv = new GetClothingStunModifierEvent(uid);
-        RaiseLocalEvent(modifierEv);
+        RaiseLocalEvent(uid, modifierEv, true);
         duration *= modifierEv.Modifier;
 
         if (duration <= TimeSpan.Zero)
@@ -154,6 +154,12 @@ public abstract partial class SharedStunSystem : EntitySystem
 
     public bool TryUpdateStunDuration(EntityUid uid, TimeSpan? duration)
     {
+        // <Goob>
+        var modifierEv = new GetClothingStunModifierEvent(uid);
+        RaiseLocalEvent(uid, modifierEv, true);
+        duration *= modifierEv.Modifier;
+        // </Goob>
+
         if (!_status.TryUpdateStatusEffectDuration(uid, StunId, duration))
             return false;
 

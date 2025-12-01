@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Body.Components;
 using Content.Shared.Bed.Sleep; // Shitmed Change
 using Content.Shared.Body.Events;
@@ -15,6 +16,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.EntityEffects.Effects.Body;
 using Content.Shared.EntityEffects.Effects.Solution;
 using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.Heretic;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Random.Helpers;
@@ -168,7 +170,12 @@ public sealed class MetabolizerSystem : SharedMetabolizerSystem
                 continue;
 
             // TODO: Kill MetabolismGroups!
-            foreach (var group in ent.Comp1.MetabolismGroups)
+            // Goob edit start
+            var ev = new ExcludeMetabolismGroupsEvent(ent.Owner);
+            RaiseLocalEvent(solutionEntityUid.Value, ref ev);
+            var exclude = ev.Groups ?? new();
+
+            foreach (var group in ent.Comp1.MetabolismGroups.ExceptBy(exclude, x => x.Id)) // Goob edit end
             {
                 if (!proto.Metabolisms.TryGetValue(group.Id, out var entry))
                     continue;

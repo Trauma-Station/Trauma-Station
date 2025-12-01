@@ -2,6 +2,7 @@
 
 - type: latheRecipe
   abstract: true
+  parent: BaseRedAlert # Trauma
   id: BaseAmmoRecipe
   categories:
   - Ammo
@@ -48,7 +49,7 @@
     Plastic: 450
 
 - type: latheRecipe
-  parent: BaseAmmoRecipe
+  parent: BasePracticeAmmoRecipe # Trauma
   id: MagazineRiflePractice
   result: MagazineRiflePractice
   materials:
@@ -78,7 +79,7 @@
     Plastic: 750
 
 - type: latheRecipe
-  parent: BaseAmmoBoxRecipe
+  parent: BasePracticeAmmoBoxRecipe # Trauma
   id: MagazineBoxRiflePractice
   result: MagazineBoxRiflePractice
   materials:
@@ -124,7 +125,7 @@
     Plastic: 540
 
 - type: latheRecipe
-  parent: BaseAmmoRecipe
+  parent: BasePracticeAmmoRecipe # Trauma
   id: MagazineLightRiflePractice
   result: MagazineLightRiflePractice
   materials:
@@ -154,7 +155,7 @@
     Plastic: 900
 
 - type: latheRecipe
-  parent: BaseAmmoBoxRecipe
+  parent: BasePracticeAmmoBoxRecipe # Trauma
   id: MagazineBoxLightRiflePractice
   result: MagazineBoxLightRiflePractice
   materials:
@@ -192,7 +193,7 @@
     Plastic: 120
 
 - type: latheRecipe
-  parent: BaseAmmoRecipe
+  parent: BasePracticeAmmoRecipe # Trauma
   id: MagazinePistolPractice
   result: MagazinePistolPractice
   materials:
@@ -230,7 +231,7 @@
     Plastic: 275
 
 - type: latheRecipe
-  parent: BaseAmmoRecipe
+  parent: BasePracticeAmmoRecipe # Trauma
   id: MagazinePistolSubMachineGunPractice
   result: MagazinePistolSubMachineGunPractice
   materials:
@@ -274,7 +275,7 @@
     Plastic: 600
 
 - type: latheRecipe
-  parent: BaseAmmoBoxRecipe
+  parent: BasePracticeAmmoBoxRecipe # Trauma
   id: MagazineBoxPistolPractice
   result: MagazineBoxPistolPractice
   materials:
@@ -297,14 +298,14 @@
     Steel: 50
 
 - type: latheRecipe
-  parent: BaseAmmoRecipe
+  parent: BasePracticeAmmoRecipe # Trauma
   id: SpeedLoaderMagnum
   result: SpeedLoaderMagnum
   materials:
     Steel: 190
 
 - type: latheRecipe
-  parent: BaseAmmoRecipe
+  parent: BasePracticeAmmoRecipe # Trauma
   id: SpeedLoaderMagnumIncendiary
   result: SpeedLoaderMagnumIncendiary
   materials:
@@ -312,14 +313,14 @@
     Plastic: 150
 
 - type: latheRecipe
-  parent: BaseAmmoRecipe
+  parent: BasePracticeAmmoRecipe # Trauma
   id: SpeedLoaderMagnumPractice
   result: SpeedLoaderMagnumPractice
   materials:
     Steel: 90
 
 - type: latheRecipe
-  parent: BaseAmmoRecipe
+  parent: BasePracticeAmmoRecipe # Trauma
   id: SpeedLoaderMagnumUranium
   result: SpeedLoaderMagnumUranium
   materials:
@@ -328,28 +329,28 @@
     Uranium: 110
 
 - type: latheRecipe
-  parent: BaseAmmoBoxRecipe
+  parent: BasePracticeAmmoBoxRecipe # Trauma
   id: MagazineBoxMagnum
   result: MagazineBoxMagnum
   materials:
     Steel: 240
 
 - type: latheRecipe
-  parent: BaseAmmoBoxRecipe
+  parent: BasePracticeAmmoBoxRecipe # Trauma
   id: MagazineBoxMagnumIncendiary
   result: MagazineBoxMagnumIncendiary
   materials:
     Plastic: 240
 
 - type: latheRecipe
-  parent: BaseAmmoBoxRecipe
+  parent: BasePracticeAmmoBoxRecipe # Trauma
   id: MagazineBoxMagnumPractice
   result: MagazineBoxMagnumPractice
   materials:
     Steel: 60
 
 - type: latheRecipe
-  parent: BaseAmmoBoxRecipe
+  parent: BasePracticeAmmoBoxRecipe # Trauma
   id: MagazineBoxMagnumUranium
   result: MagazineBoxMagnumUranium
   materials:
@@ -411,7 +412,7 @@
     Plastic: 320
 
 - type: latheRecipe
-  parent: BaseAmmoBoxRecipe
+  parent: BasePracticeAmmoBoxRecipe # Trauma
   id: BoxShotgunPractice
   result: BoxShotgunPractice
   materials:

@@ -1,4 +1,9 @@
-using Content.Goobstation.Common.Speech; // Goob
+// <Trauma>
+using Content.Goobstation.Common.Barks;
+using Content.Goobstation.Common.CCVar;
+using Content.Goobstation.Common.Speech;
+using Robust.Shared.Configuration;
+// </Trauma>
 using Content.Shared.Chat;
 using Content.Shared.Speech;
 using Robust.Shared.Audio;
@@ -11,21 +16,25 @@ namespace Content.Server.Speech
 {
     public sealed class SpeechSoundSystem : EntitySystem
     {
+        [Dependency] private readonly IConfigurationManager _cfg = default!; // Goob
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly IPrototypeManager _protoManager = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
+
+        private bool _barksEnabled; // Goob
 
         public override void Initialize()
         {
             base.Initialize();
 
             SubscribeLocalEvent<SpeechComponent, EntitySpokeEvent>(OnEntitySpoke);
+            Subs.CVar(_cfg, GoobCVars.BarksEnabled, x => _barksEnabled = x, true); // Goob
         }
 
         public SoundSpecifier? GetSpeechSound(Entity<SpeechComponent> ent, string message)
         {
-            // Goobstation start
+            // <Goob>
             var getSpeechSoundEv = new GetSpeechSoundEvent();
             RaiseLocalEvent(ent, ref getSpeechSoundEv);
             if (getSpeechSoundEv.SpeechSoundProtoId == null ||
@@ -36,7 +45,7 @@ namespace Content.Server.Speech
 
                 prototype = _protoManager.Index<SpeechSoundsPrototype>(ent.Comp.SpeechSounds);
             }
-            // Goobstation end
+            // </Goob>
 
             // Play speech sound
             SoundSpecifier? contextSound;
@@ -68,8 +77,13 @@ namespace Content.Server.Speech
 
         private void OnEntitySpoke(EntityUid uid, SpeechComponent component, EntitySpokeEvent args)
         {
-            if (component.SpeechSounds == null || !args.Language.SpeechOverride.RequireSpeech) // No noises for non-speech languages.
+            // <Goob> - Barks
+            if (component.SpeechSounds == null
+                || !args.Language.SpeechOverride.RequireSpeech
+                || _barksEnabled // Goob
+                && HasComp<SpeechSynthesisComponent>(uid))
                 return;
+            // </Goob>
 
             var currentTime = _gameTiming.CurTime;
             var cooldown = TimeSpan.FromSeconds(component.SoundCooldownTime);

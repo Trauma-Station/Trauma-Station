@@ -58,6 +58,9 @@ new_player_threshold = 120
 [lavaland] # Lavaland Change
 enabled = false
 
+[heretic] # Goobstation
+ascension_requires_objectives = false
+
 [ic]
 random_characters = false
 random_species_weights = ""

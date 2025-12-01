@@ -49,7 +49,10 @@ public sealed partial class DamageableSystem : EntitySystem
         DamageSpecifier? damageDelta = null,
         bool interruptsDoAfters = true,
         EntityUid? origin = null,
-        bool ignoreBlockers = false // Goob
+        // <Goob>
+        bool ignoreBlockers = false,
+        DamageSpecifier? uncappedDamage = null
+        // </Goob>
     )
     {
         ent.Comp.Damage.GetDamagePerGroup(_prototypeManager, ent.Comp.DamagePerGroup);
@@ -68,7 +71,8 @@ public sealed partial class DamageableSystem : EntitySystem
 
         // TODO DAMAGE
         // byref struct event.
-        RaiseLocalEvent(ent, new DamageChangedEvent(ent.Comp, damageDelta, interruptsDoAfters, origin, ignoreBlockers)); // Goob - add ignoreBlockers
+        RaiseLocalEvent(ent, new DamageChangedEvent(ent.Comp, damageDelta, interruptsDoAfters, origin,
+            ignoreBlockers, uncappedDamage)); // Goob - add ignoreBlockers, uncappedDamage
     }
 
     private void DamageableGetState(Entity<DamageableComponent> ent, ref ComponentGetState args)

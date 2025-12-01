@@ -236,8 +236,7 @@
     - Other
     modifiers:
       coefficients:
-        Heat: 0.9
-        Radiation: 0.75
+        Radiation: 0.1
         Caustic: 0.5
   - type: GroupExamine
   - type: StealTarget

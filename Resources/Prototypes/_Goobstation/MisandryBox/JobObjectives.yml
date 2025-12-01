@@ -34,6 +34,11 @@
       whitelist:
         components:
         - CommandStaff
+    - !type:BodyMindFilter # Trauma - don't pick nukie commander...
+      inverted: true
+      whitelist:
+        components:
+        - NukeOperative
 
 - type: entity
   id: JobObjectiveRule

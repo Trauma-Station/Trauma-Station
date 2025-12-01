@@ -304,3 +304,15 @@
   - type: ComponentsImplant
     added:
     - type: XenoCompatible
+
+- type: entity
+  parent: BluespaceLifelineImplant
+  id: RedspaceLifelineImplant
+  name: redspace lifeline implant
+  description: Teleports the hosts body to Syndicate High Command on activation. They will not be able to return.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    implantAction: ActionActivateRedspaceLifeline
+  - type: SpawnOnTrigger
+    proto: RedspaceLifelineSpawnCore

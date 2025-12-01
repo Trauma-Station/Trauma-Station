@@ -1050,6 +1050,7 @@
           components:
           - FitsInDispenser
     - item: GeigerCounter
+    - item: HolofanProjector # Goobstation
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: node-scanner-module }
 
@@ -1076,6 +1077,12 @@
           - ConstructionMaterial
     - hand:
         emptyRepresentative: SheetRPGlass
+        emptyLabel: borg-slot-construction-empty
+        whitelist:
+          tags:
+          - ConstructionMaterial
+    - hand: # Goob
+        emptyRepresentative: SheetPlasteel
         emptyLabel: borg-slot-construction-empty
         whitelist:
           tags:

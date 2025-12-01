@@ -9,6 +9,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Damage.Events;
 using Content.Server.Tools;
 using Content.Shared.Abilities.Oni;
 using Content.Shared.Tools.Components;
@@ -33,7 +34,7 @@ namespace Content.Server.Abilities.Oni
             SubscribeLocalEvent<OniComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
             SubscribeLocalEvent<OniComponent, MeleeHitEvent>(OnOniMeleeHit);
             SubscribeLocalEvent<HeldByOniComponent, MeleeHitEvent>(OnHeldMeleeHit);
-            SubscribeLocalEvent<HeldByOniComponent, StaminaMeleeHitEvent>(OnStamHit);
+            SubscribeLocalEvent<OniComponent, ModifyOutgoingStaminaDamageEvent>(OnStamHit);
         }
 
         private void OnEntInserted(EntityUid uid, OniComponent component, EntInsertedIntoContainerMessage args)
@@ -86,12 +87,9 @@ namespace Content.Server.Abilities.Oni
             args.ModifiersList.Add(oni.MeleeModifiers);
         }
 
-        private void OnStamHit(EntityUid uid, HeldByOniComponent component, StaminaMeleeHitEvent args)
+        private void OnStamHit(EntityUid uid, OniComponent component, ref ModifyOutgoingStaminaDamageEvent args)
         {
-            if (!TryComp<OniComponent>(component.Holder, out var oni))
-                return;
-
-            args.Multiplier *= oni.StamDamageMultiplier;
+            args.Value *= component.StamDamageMultiplier;
         }
     }
 }

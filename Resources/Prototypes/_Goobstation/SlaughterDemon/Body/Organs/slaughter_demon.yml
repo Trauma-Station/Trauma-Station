@@ -29,3 +29,5 @@
       - AlienBlood
       - BlackBlood
       - BloodChangeling
+  - type: StaticPrice
+    price: 10000

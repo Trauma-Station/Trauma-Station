@@ -1,79 +1,11 @@
-# SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-# SPDX-FileCopyrightText: 2021 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 E F R <602406+Efruit@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Elijahrane <60792108+Elijahrane@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Mith-randalf <84274729+Mith-randalf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2021 buletsponge <96000213+buletsponge@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 wrexbe <81056464+wrexbe@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Jacob Tong <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Morbo <14136326+Morb0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Myctai <108953437+Myctai@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 TimrodDX <timrod@gmail.com>
-# SPDX-FileCopyrightText: 2022 Veritius <veritiusgaming@gmail.com>
-# SPDX-FileCopyrightText: 2022 and_a <and_a@DESKTOP-RJENGIR>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 moonheart08 <moonheart08@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 DerbyX <50932435+DerbyX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Eoin Mcloughlin <helloworld@eoinrul.es>
-# SPDX-FileCopyrightText: 2023 Jackrost <jackrost@mail.ru>
-# SPDX-FileCopyrightText: 2023 JustCone <141039037+JustCone14@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Kevin Zheng <kevinz5000@gmail.com>
-# SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 PeterFuto <futo.petr@gmail.com>
-# SPDX-FileCopyrightText: 2023 Sailor <109166122+Equivocateur@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 TaralGit <76408146+TaralGit@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Ubaser <134914314+UbaserB@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 c4llv07e <38111072+c4llv07e@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 eoineoineoin <github@eoinrul.es>
-# SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Arendian <137322659+Arendian@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2024 Brandon Hu <103440971+Brandon-Huu@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 MisterMecky <mrmecky@hotmail.com>
-# SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2024 Verm <32827189+Vermidia@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 EulogisticLullaby <karaadastra@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 OnsenCapy <101037138+OnsenCapy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-# SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 meta:
   format: 7
   category: Map
-  engineVersion: 260.2.0
+  engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/16/2025 16:09:31
-  entityCount: 44328
+  time: 10/26/2025 22:06:28
+  entityCount: 44302
 maps:
 - 18185
 grids:
@@ -858,6 +790,11 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
     - type: Shuttle
+      dampingModifiers:
+        Cruise: 0.0075
+        Dampen: 0.25
+        Anchor: 2
+        None: 0.25
       dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity
@@ -11071,7 +11008,8 @@ entities:
           -2,7:
             0: 20222
           -2,8:
-            0: 65535
+            0: 57343
+            2: 8192
           -1,5:
             0: 52447
           -1,7:
@@ -11458,11 +11396,11 @@ entities:
             1: 4096
           -16,-3:
             0: 15
-            2: 60928
+            3: 60928
           -17,-3:
             0: 65535
           -16,-2:
-            2: 238
+            3: 238
             0: 58368
           -17,-2:
             0: 53247
@@ -11472,9 +11410,9 @@ entities:
             0: 62463
           -15,-3:
             0: 31
-            2: 30464
+            3: 30464
           -15,-2:
-            2: 119
+            3: 119
             0: 28672
           -15,-5:
             0: 65523
@@ -12301,7 +12239,8 @@ entities:
           -6,11:
             0: 4095
           -6,12:
-            0: 48059
+            0: 48043
+            4: 16
           -5,12:
             0: 65535
           -12,9:
@@ -12317,8 +12256,8 @@ entities:
           -13,11:
             0: 8191
           -12,12:
-            3: 4369
-            4: 17476
+            5: 4369
+            6: 17476
           -11,9:
             0: 65308
           -11,10:
@@ -12326,8 +12265,8 @@ entities:
           -11,11:
             0: 4095
           -11,12:
-            4: 4369
-            5: 17476
+            6: 4369
+            7: 17476
           -10,9:
             0: 65287
           -10,10:
@@ -12335,7 +12274,7 @@ entities:
           -10,11:
             0: 36863
           -10,12:
-            4: 4369
+            6: 4369
             0: 52428
           -9,9:
             0: 7
@@ -12406,7 +12345,7 @@ entities:
             0: 13107
             1: 34944
           -13,12:
-            6: 17476
+            8: 17476
             1: 4368
           16,12:
             1: 4949
@@ -12576,7 +12515,7 @@ entities:
           -19,11:
             1: 4095
           -19,12:
-            4: 61166
+            6: 61166
           -19,8:
             1: 32896
           -18,8:
@@ -12591,7 +12530,7 @@ entities:
           -18,11:
             1: 53247
           -18,12:
-            4: 4369
+            6: 4369
             1: 52428
           -17,12:
             1: 65535
@@ -13701,10 +13640,10 @@ entities:
           -21,13:
             1: 24831
           -19,13:
-            4: 238
+            6: 238
             1: 49152
           -18,13:
-            4: 17
+            6: 17
             1: 4300
           -25,12:
             0: 2049
@@ -15058,10 +14997,48 @@ entities:
           - 0
           - 0
         - volume: 2500
+          temperature: 293.14975
+          moles:
+          - 20.078066
+          - 75.531784
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+        - volume: 2500
           temperature: 235
           moles:
           - 27.225372
           - 102.419266
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+        - volume: 2500
+          temperature: 293.15
+          moles:
+          - 21.813705
+          - 82.06108
           - 0
           - 0
           - 0
@@ -15158,6 +15135,7 @@ entities:
       id: Submarine
     - type: NavMap
     - type: ImplicitRoof
+    - type: FTLDrive
   - uid: 18185
     components:
     - type: MetaData
@@ -20638,6 +20616,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -39.5,14.5
       parent: 2
+    - type: StepTriggerCleanup
   - uid: 40065
     components:
     - type: Transform
@@ -93106,33 +93085,6 @@ entities:
     - type: Transform
       pos: 3.449183,6.550448
       parent: 2
-- proto: CapacitorStockPart
-  entities:
-  - uid: 14948
-    components:
-    - type: Transform
-      pos: 21.57747,-25.42226
-      parent: 2
-  - uid: 19724
-    components:
-    - type: Transform
-      pos: 21.554033,-25.289448
-      parent: 2
-  - uid: 20183
-    components:
-    - type: Transform
-      pos: 52.36106,8.602298
-      parent: 2
-  - uid: 31176
-    components:
-    - type: Transform
-      pos: -69.67199,1.5256414
-      parent: 2
-  - uid: 31181
-    components:
-    - type: Transform
-      pos: -69.63683,1.7600164
-      parent: 2
 - proto: CapsaicinDispenser
   entities:
   - uid: 465
@@ -97527,13 +97479,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 9.5,1.5
-      parent: 2
-- proto: CartridgeRocket
-  entities:
-  - uid: 15714
-    components:
-    - type: Transform
-      pos: -22.327036,51.442375
       parent: 2
 - proto: CarvedPumpkin
   entities:
@@ -109016,6 +108961,23 @@ entities:
     - type: Transform
       pos: 13.44741,-13.26918
       parent: 2
+- proto: ClothingMultipleHeadphones
+  entities:
+  - uid: 1530
+    components:
+    - type: Transform
+      pos: -2.3107271,-34.414944
+      parent: 2
+  - uid: 15746
+    components:
+    - type: Transform
+      pos: -2.6961436,-34.571194
+      parent: 2
+  - uid: 19882
+    components:
+    - type: Transform
+      pos: -2.4669771,-34.477444
+      parent: 2
 - proto: ClothingNeckCargomedal
   entities:
   - uid: 34632
@@ -109094,23 +109056,6 @@ entities:
     components:
     - type: Transform
       pos: 4.7256656,29.15224
-      parent: 2
-- proto: ClothingNeckHeadphones
-  entities:
-  - uid: 1530
-    components:
-    - type: Transform
-      pos: -2.3107271,-34.414944
-      parent: 2
-  - uid: 15746
-    components:
-    - type: Transform
-      pos: -2.6961436,-34.571194
-      parent: 2
-  - uid: 19882
-    components:
-    - type: Transform
-      pos: -2.4669771,-34.477444
       parent: 2
 - proto: ClothingNeckMedicalmedal
   entities:
@@ -124141,6 +124086,13 @@ entities:
     components:
     - type: Transform
       pos: 71.553635,72.590164
+      parent: 2
+- proto: DVSmartFridgeMedical
+  entities:
+  - uid: 34673
+    components:
+    - type: Transform
+      pos: 12.5,4.5
       parent: 2
 - proto: ElectricGuitarInstrument
   entities:
@@ -197255,7 +197207,7 @@ entities:
       parent: 2
 - proto: GunSafe
   entities:
-  - uid: 13323
+  - uid: 413
     components:
     - type: Transform
       pos: -6.5,35.5
@@ -197264,10 +197216,10 @@ entities:
       air:
         volume: 200
         immutable: False
-        temperature: 293.14673
+        temperature: 293.14676
         moles:
-        - 1.8968438
-        - 7.1357465
+        - 1.7459188
+        - 6.567981
         - 0
         - 0
         - 0
@@ -197288,8 +197240,9 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 13324
-          - 15204
+          - 704
+          - 2072
+          - 2568
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -199473,6 +199426,8 @@ entities:
     components:
     - type: Transform
       parent: 405
+    - type: Physics
+      canCollide: False
     - type: InsideEntityStorage
   - uid: 34665
     components:
@@ -202241,8 +202196,8 @@ entities:
         immutable: False
         temperature: 293.14673
         moles:
-        - 1.8856695
-        - 7.0937095
+        - 1.8968438
+        - 7.1357465
         - 0
         - 0
         - 0
@@ -202539,17 +202494,6 @@ entities:
     - type: Transform
       pos: 81.5,54.5
       parent: 2
-- proto: MagazineBoxAntiMateriel
-  entities:
-  - uid: 15204
-    components:
-    - type: Transform
-      parent: 13323
-    - type: Physics
-      angularDamping: 0
-      linearDamping: 0
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: MagazineBoxLightRiflePractice
   entities:
   - uid: 39533
@@ -202680,6 +202624,22 @@ entities:
     components:
     - type: Transform
       parent: 40544
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+- proto: MagazinePistolSubMachineGunTopMounted
+  entities:
+  - uid: 704
+    components:
+    - type: Transform
+      parent: 413
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 2072
+    components:
+    - type: Transform
+      parent: 413
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -204020,6 +203980,33 @@ entities:
       name: Aquarium Dome Plaque
     - type: Transform
       pos: -81.5,22.5
+      parent: 2
+- proto: MicroManipulatorStockPart
+  entities:
+  - uid: 14948
+    components:
+    - type: Transform
+      pos: 21.57747,-25.42226
+      parent: 2
+  - uid: 19724
+    components:
+    - type: Transform
+      pos: 21.554033,-25.289448
+      parent: 2
+  - uid: 20183
+    components:
+    - type: Transform
+      pos: 52.36106,8.602298
+      parent: 2
+  - uid: 31176
+    components:
+    - type: Transform
+      pos: -69.67199,1.5256414
+      parent: 2
+  - uid: 31181
+    components:
+    - type: Transform
+      pos: -69.63683,1.7600164
       parent: 2
 - proto: MiningDrill
   entities:
@@ -233653,13 +233640,6 @@ entities:
     components:
     - type: Transform
       pos: 6.5396366,-18.413843
-      parent: 2
-- proto: SmartFridge
-  entities:
-  - uid: 34673
-    components:
-    - type: Transform
-      pos: 12.5,4.5
       parent: 2
 - proto: SMESBasic
   entities:
@@ -270343,6 +270323,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -34.5,5.5
       parent: 2
+    - type: StepTriggerCleanup
   - uid: 16987
     components:
     - type: Transform
@@ -270770,6 +270751,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -35.5,5.5
       parent: 2
+    - type: StepTriggerCleanup
   - uid: 21017
     components:
     - type: Transform
@@ -272865,16 +272847,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -30.89752,43.651028
       parent: 2
-- proto: WeaponLauncherRocket
-  entities:
-  - uid: 14355
-    components:
-    - type: MetaData
-      desc: The Warden's special girl.
-      name: Bethany
-    - type: Transform
-      pos: -22.514536,51.356438
-      parent: 2
 - proto: WeaponPistolMk58
   entities:
   - uid: 40505
@@ -272890,20 +272862,6 @@ entities:
     - type: Transform
       pos: 115.407104,5.4507217
       parent: 2
-- proto: WeaponSniperHristov
-  entities:
-  - uid: 13324
-    components:
-    - type: MetaData
-      desc: Found on a grassy knoll in Texas. It is inscribed with the initials 'LHO'. A portable anti-materiel rifle. Fires armor piercing 14.5mm shells. Uses .60 anti-materiel ammo.
-      name: HoS' Trophy Hristov
-    - type: Transform
-      parent: 13323
-    - type: Physics
-      angularDamping: 0
-      linearDamping: 0
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: WeaponSniperMosin
   entities:
   - uid: 22910
@@ -272911,6 +272869,15 @@ entities:
     - type: Transform
       pos: -102.44507,69.5518
       parent: 2
+- proto: WeaponSubMachineGunWt550
+  entities:
+  - uid: 2568
+    components:
+    - type: Transform
+      parent: 413
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: WeaponTurretHostile
   entities:
   - uid: 9161
@@ -273036,6 +273003,13 @@ entities:
     components:
     - type: Transform
       pos: 82.5,85.5
+      parent: 2
+- proto: WeaponWaterBlasterSuper
+  entities:
+  - uid: 2991
+    components:
+    - type: Transform
+      pos: -22.61532,51.372295
       parent: 2
 - proto: Welder
   entities:

@@ -60,15 +60,15 @@ selectable-set-syndicate-spy-description =
 selectable-set-syndicate-hitman-name = Hitman Bundle
 selectable-set-syndicate-hitman-description =
     Find and eliminate your targets quietly and effectively with this bundle.
-    Contains: Cobra pistol with 3 extra mags, CQC manual,
+    Contains: Cobra pistol with 4 extra mags, Capoeira manual,
     a special invisible armor vest, Interdyne herbals packet,
-    combat medkit, a stylish look and a syndicate encryption key.
+    combat medkit, energy dagger, a stylish look and a syndicate encryption key.
 
 selectable-set-syndicate-implants-name = Cyberpsychosis Bundle
 selectable-set-syndicate-implants-description =
     A few implants to give you some options for when you inevitably get arrested.
     Contains: nutriment pump, scram, freedom, smoke,
-    krav maga and syndicate radio implanters, Sandevistan
+    fake mindshield and syndicate radio implanters, Sandevistan
     and paired mantis blades autosurgeons, and a cool jacket.
 
 selectable-set-syndicate-hacker-name = Hacker Bundle

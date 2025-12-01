@@ -89,7 +89,7 @@
     - RadioImplant
     # Goob implants
     - MindcontrolImplant
-    - KravMagaImplant
+#    - KravMagaImplant # Trauma - Kill Krav implant.
     - NutrimentPumpImplant
     - SmokeImplant
     # - StypticStimulatorImplant # Uncomment if given to traitors, currently it's DS only implant

@@ -1,0 +1,14 @@
+- type: latheRecipe
+  abstract: true
+  id: BasePracticeAmmoRecipe
+  categories:
+  - Ammo
+  completetime: 5
+
+- type: latheRecipe
+  abstract: true
+  parent: BasePracticeAmmoRecipe
+  id: BasePracticeAmmoBoxRecipe
+  categories:
+  - Ammo
+  - Boxes

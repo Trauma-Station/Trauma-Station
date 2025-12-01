@@ -60,9 +60,7 @@ public sealed class FootprintSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<FootprintComponent, FootprintCleanEvent>(OnFootprintClean);
-
         SubscribeLocalEvent<FootprintOwnerComponent, MoveEvent>(OnMove);
-
         SubscribeLocalEvent<PuddleComponent, MapInitEvent>(OnMapInit);
 
         _noFootprintsQuery = GetEntityQuery<NoFootprintsComponent>();
@@ -96,6 +94,11 @@ public sealed class FootprintSystem : EntitySystem
             return;
 
         entity.Comp.Distance -= requiredDistance;
+
+        var attemptEv = new FootprintLeaveAttemptEvent(entity.Owner);
+        RaiseLocalEvent(ref attemptEv);
+        if (attemptEv.Cancelled)
+            return;
 
         var transform = Transform(entity);
 

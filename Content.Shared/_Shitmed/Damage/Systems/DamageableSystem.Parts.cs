@@ -14,6 +14,7 @@ using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 using System.Linq;
 
 namespace Content.Shared.Damage.Systems;
@@ -27,6 +28,8 @@ public sealed partial class DamageableSystem
     private EntityQuery<BodyComponent> _bodyQuery;
     private EntityQuery<ConsciousnessComponent> _consciousnessQuery;
     private EntityQuery<WoundableComponent> _woundableQuery;
+
+    private List<float> _weights = new();
 
     /// <summary>
     /// Applies damage to an entity with body parts, targeting specific parts as needed.
@@ -83,12 +86,27 @@ public sealed partial class DamageableSystem
                 targetedBodyParts = query;
             }
 
-            var damagePerPart = ApplySplitDamageBehaviors(splitDamageBehavior, adjustedDamage, targetedBodyParts);
+
+            List<float>? multipliers = null;
+            var damagePerPart = adjustedDamage;
+            if (targetedBodyParts.Count > 0 && adjustedDamage.PartDamageVariation != 0f)
+            {
+                multipliers =
+                    GetDamageVariationMultipliers(uid, adjustedDamage.PartDamageVariation, targetedBodyParts.Count);
+            }
+            else
+            {
+                damagePerPart = ApplySplitDamageBehaviors(splitDamageBehavior, adjustedDamage, targetedBodyParts);
+            }
             var appliedDamage = new DamageSpecifier();
             var surplusHealing = new DamageSpecifier();
-            foreach (var (partId, _, partDamageable) in targetedBodyParts)
+            for (var i = 0; i < targetedBodyParts.Count; i++)
             {
-                var modifiedDamage = damagePerPart + surplusHealing;
+                var (partId, _, partDamageable) = targetedBodyParts[i];
+                var modifiedDamage = damagePerPart;
+                if (multipliers != null && multipliers.Count == targetedBodyParts.Count)
+                    modifiedDamage *= multipliers[i];
+                modifiedDamage += surplusHealing;
 
                 // Apply damage to this part
                 var partDamageResult = ChangeDamage((partId, partDamageable), modifiedDamage, ignoreResistances,
@@ -162,6 +180,34 @@ public sealed partial class DamageableSystem
         var chosenTarget = rand.PickAndTake(possibleTargets);
         return ChangeDamage(chosenTarget.Id, adjustedDamage, ignoreResistances,
             interruptsDoAfters, origin, ignoreBlockers: ignoreBlockers);
+    }
+
+    public List<float> GetDamageVariationMultipliers(EntityUid uid, float variation, int count)
+    {
+        DebugTools.AssertNotEqual(count, 0);
+        variation = MathF.Abs(variation);
+        var list = new List<float>(count);
+        _weights.Clear();
+        _weights.EnsureCapacity(count);
+        var totalWeight = 0f;
+        // TODO: proper predicted random
+        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(uid).Id);
+        var random = new System.Random(seed);
+        for (var i = 0; i < count; i++)
+        {
+            var weight = random.NextFloat() * MathF.Abs(variation) + 1f;
+            _weights.Add(weight);
+            totalWeight += weight;
+        }
+
+        DebugTools.AssertNotEqual(totalWeight, 0f);
+
+        foreach (var weight in _weights)
+        {
+            list.Add(weight / totalWeight);
+        }
+
+        return list;
     }
 
     /// <summary>

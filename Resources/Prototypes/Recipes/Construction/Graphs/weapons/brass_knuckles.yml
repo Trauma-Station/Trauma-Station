@@ -3,16 +3,16 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: constructionGraph
-  id: ClothingHandsKnuckleDustersBrass
-  start: start
-  graph:
-  - node: start
-    edges:
-    - to: icon
-      steps:
-      - material: Brass
-        amount: 6
-        doAfter: 10
-  - node: icon
-    entity: ClothingHandsKnuckleDustersBrass
+# - type: constructionGraph # Trauma
+#   id: ClothingHandsKnuckleDustersBrass
+#   start: start
+#   graph:
+#   - node: start
+#     edges:
+#     - to: icon
+#       steps:
+#       - material: Brass
+#         amount: 6
+#         doAfter: 10
+#   - node: icon
+#     entity: ClothingHandsKnuckleDustersBrass

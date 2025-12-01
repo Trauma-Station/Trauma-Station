@@ -15,4 +15,4 @@
     sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/energy_bolt.rsi
     state: bolt_blue_heavy
   protoId: SidearmDisable
-  fireCost: 40
+  fireCost: 80

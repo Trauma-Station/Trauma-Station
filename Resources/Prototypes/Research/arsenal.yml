@@ -106,7 +106,6 @@
   - MagazineRifleIncendiary
   - MagazinePistolIncendiary
   - MagazinePistolSubMachineGunIncendiary
-  - MagazineBoxShotgunIncendiaryHighCaliber # Goobstation
   # - MagazineLightRifleIncendiary # Goobstation - remove light rifle
   - SpeedLoaderMagnumIncendiary
   - MagazineShotgunIncendiary
@@ -131,9 +130,7 @@
   cost: 7500
   recipeUnlocks:
   - WeaponLaserCarbine
-  - WeaponTemperatureGun # Goobstation
   - WeaponMechCombatFiredartLaser # Goobstation
-  - WeaponEnergyIonRifle # Goobstation - CR second energy bolt update(and ion)
   - PowerCellIonRevolver # Goobstation
   # Goobstation R&D Console rework start
   position: 4,0
@@ -154,7 +151,6 @@
   - MagazineShotgunBeanbag
   - BoxShellTranquilizer
   - BoxBeanbag
-  - MagazineBoxShotgunBeanbagHighCaliber # Goobstation
   - WeaponDisabler
   - WeaponMechCombatDisabler # Goobstation
   # Goobstation R&D Console rework start
@@ -183,7 +179,6 @@
   # - MagazineBoxLightRifleUranium # Goobstation - remove light rifle
   - MagazineBoxRifleUranium
   - BoxShotgunUranium
-  - MagazineBoxShotgunUraniumHighCaliber # Goobstation
   # Goobstation R&D Console rework start
   position: 3,2
   technologyPrerequisites:

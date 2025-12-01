@@ -92,7 +92,6 @@
       - id: ClothingUniformJumpsuitCapFormal
       - id: ClothingUniformJumpskirtCapFormalDress
       - id: ClothingHandsGlovesCaptain
-      - id: ClothingOuterWinterCapArmored # Goobstation
       - id: ClothingNeckCloakCap
 
 - type: entity

@@ -224,6 +224,11 @@ public sealed partial class DamageableSystem
         if (!ignoreGlobalModifiers)
             damage = ApplyUniversalAllModifiers(damage);
 
+        // <Goob> - keep penetration etc values
+        damageDone.ArmorPenetration = damage.ArmorPenetration;
+        damageDone.PartDamageVariation = damage.PartDamageVariation;
+        damageDone.WoundSeverityMultipliers = new(damage.WoundSeverityMultipliers);
+        // </Goob>
 
         damageDone.DamageDict.EnsureCapacity(damage.DamageDict.Count);
 
@@ -394,7 +399,8 @@ public sealed partial class DamageableSystem
 
             foreach (var (type, value) in ent.Comp.Damage.DamageDict)
             {
-                _wounds.TryInduceWound(ent, type, value, out _, woundable);
+                var mul = ent.Comp.Damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
+                _wounds.TryInduceWound(ent, type, value * mul, out _, woundable);
             }
         }
         // </Shitmed>

@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Goobstation.Common.Damage.Events;
 using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Common.Stunnable;
 using Content.Shared._Shitcode.Weapons.Misc;
@@ -41,11 +42,6 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 {
     public static readonly EntProtoId StaminaLow = "StatusEffectStaminaLow";
 
-    // <Goob>
-    [Dependency] private readonly SharedStutteringSystem _stutter = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    // </Goob>
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -84,9 +80,6 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         SubscribeLocalEvent<StaminaDamageOnCollideComponent, ThrowDoHitEvent>(OnThrowHit);
 
         SubscribeLocalEvent<StaminaDamageOnHitComponent, MeleeHitEvent>(OnMeleeHit);
-
-        // Goobstation - Grab Sprinting Toggle from Goob Mod
-        SubscribeLocalEvent<SprintingStateChangedEvent>(OnSprintingStateChanged);
 
         Subs.CVar(_config, CCVars.PlaytestStaminaDamageModifier, value => UniversalStaminaDamageModifier = value, true);
     }
@@ -146,7 +139,6 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 
     private void OnDisarmed(EntityUid uid, StaminaComponent component, ref DisarmedEvent args)
     {
-        // No random stamina damage
         if (args.Handled)
             return;
 
@@ -204,11 +196,16 @@ public abstract partial class SharedStaminaSystem : EntitySystem
             // raise event for each entity hit
             RaiseLocalEvent(ent, ref hitEvent);
 
+            // <Goob>
+            // raise event to modify outgoing stamina damage by multiplier or something
+            var outgoingModifier = new ModifyOutgoingStaminaDamageEvent(1f);
+            RaiseLocalEvent(args.User, ref outgoingModifier);
+
             var damageImmediate = component.Damage;
             var damageOvertime = component.Overtime;
-            damageImmediate *= hitEvent.Value;
-            damageOvertime *= hitEvent.Value;
-
+            damageImmediate *= hitEvent.Value * outgoingModifier.Value;
+            damageOvertime *= hitEvent.Value * outgoingModifier.Value;
+            // </Goob>
             if (args.Direction == null)
             {
                 damageImmediate *= component.LightAttackDamageMultiplier;
@@ -318,7 +315,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 
     public void TakeStaminaDamage(EntityUid uid, float value, StaminaComponent? component = null,
         EntityUid? source = null, EntityUid? with = null, bool visual = true, SoundSpecifier? sound = null, bool ignoreResist = false,
-        bool immediate = true) // Goob - stunmeta
+        bool immediate = true, bool logDamage = true) // Goob - stunmeta
     {
         if (!Resolve(uid, ref component, false)
         || value == 0) // no damage???
@@ -383,7 +380,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
             return;
 
         // Goobstation - Don't log stamina damage if the entity is sprinting and the damage is from themselves (sprinting)
-        if (!component.IsSprinting && source != uid)
+        if (logDamage && source != uid)
         {
             if (source != null)
                 _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(source.Value):user} caused {value} stamina damage to {ToPrettyString(uid):target}{(with != null ? $" using {ToPrettyString(with.Value):using}" : "")}");
@@ -576,17 +573,4 @@ public abstract partial class SharedStaminaSystem : EntitySystem
     {
         public NetEntity Entity = entity;
     }
-
-    #region Goobstaiton - Sprinting State Change Event
-
-    private void OnSprintingStateChanged(ref SprintingStateChangedEvent ev)
-    {
-        if (TryComp<StaminaComponent>(ev.Uid, out var stamina))
-        {
-            stamina.IsSprinting = ev.IsSprinting;
-            Dirty(ev.Uid, stamina);
-        }
-    }
-
-    #endregion
 }

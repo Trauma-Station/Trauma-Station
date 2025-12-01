@@ -52,6 +52,7 @@ namespace Content.Shared.Body.Components
         ///     transferred to <see cref="BloodstreamComponent"/>
         /// </summary>
         [DataField]
+        [Access(Other = AccessPermissions.ReadWriteExecute)] // Goobstation
         public TimeSpan DigestionDelay = TimeSpan.FromSeconds(20);
 
         /// <summary>

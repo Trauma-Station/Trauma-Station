@@ -5,12 +5,14 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Stunnable;
 using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared.Actions.Events;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Slippery;
+using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
@@ -29,6 +31,9 @@ public abstract partial class SharedHereticAbilitySystem
         // SubscribeLocalEvent<SilverMaelstromComponent, BeforeStatusEffectAddedEvent>(OnBeforeBladeStatusEffect);
         // Remove this after adding noslip heretic magboots side knowledge
         SubscribeLocalEvent<SilverMaelstromComponent, SlipAttemptEvent>(OnBladeSlipAttempt);
+        SubscribeLocalEvent<SilverMaelstromComponent, GetClothingStunModifierEvent>(OnBladeStunModify);
+        SubscribeLocalEvent<SilverMaelstromComponent, DropHandItemsEvent>(OnBladeDropItems,
+            before: new[] { typeof(SharedHandsSystem) });
         // Protective blades do that
         // SubscribeLocalEvent<SilverMaelstromComponent, BeforeHarmfulActionEvent>(OnBladeHarmfulAction);
 
@@ -39,6 +44,11 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<RealignmentComponent, BeforeHarmfulActionEvent>(OnBladeHarmfulAction);
         SubscribeLocalEvent<RealignmentComponent, StatusEffectEndedEvent>(OnStatusEnded);
         // SubscribeLocalEvent<RealignmentComponent, ComponentRemove>(OnComponentRemove); // Trauma edit
+    }
+
+    private void OnBladeDropItems(Entity<SilverMaelstromComponent> ent, ref DropHandItemsEvent args)
+    {
+        args.Handled = true;
     }
 
     /* Trauma edit
@@ -61,6 +71,11 @@ public abstract partial class SharedHereticAbilitySystem
             return;
 
         args.Cancel();
+    }
+
+    private void OnBladeStunModify(Entity<SilverMaelstromComponent> ent, ref GetClothingStunModifierEvent args)
+    {
+        args.Modifier *= 0.5f;
     }
 
     private void OnBladeSlipAttempt(EntityUid uid, Component component, SlipAttemptEvent args)

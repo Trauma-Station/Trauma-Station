@@ -23,14 +23,14 @@
   - type: StationEvent
     earliestStart: 15
     reoccurrenceDelay: 45
-    weight: 4 # Goobstation - 7.5 -> 4
+    weight: 3 # Goobstation - 7.5 -> 3
     minimumPlayers: 10
     duration: null # Goobstation - chud
     chaos: # Trauma - abductors arent meant to actively harm crew
       Hostile: 15
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 300
+    chaosScore: 100
   - type: RuleGrids
   - type: LoadMapRule
     mapPath: /Maps/_Shitmed/Shuttles/ShuttleEvent/abductor_shuttle.yml
@@ -113,14 +113,14 @@
   - type: StationEvent
     earliestStart: 15
     reoccurrenceDelay: 45
-    weight: 4 # Goobstation - 7.5 -> 4
+    weight: 3 # Goobstation - 7.5 -> 3
     minimumPlayers: 20
     duration: null # Goobstation - chud
     chaos: # Trauma - abductors arent meant to actively harm crew
       Hostile: 20
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 450
+    chaosScore: 150
   - type: RuleGrids
   - type: LoadMapRule
     mapPath: /Maps/_Shitmed/Shuttles/ShuttleEvent/duo_abductor_shuttle.yml

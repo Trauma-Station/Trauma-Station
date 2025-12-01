@@ -8,3 +8,7 @@
     containers:
       mind_roles: !type:Container
         ents: []
+  # <Trauma>
+  - type: LastWords
+  - type: MindLastMob
+  # </Trauma>
