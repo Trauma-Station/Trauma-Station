@@ -14,6 +14,7 @@ public sealed partial class GenePuzzle : Control
 
     private bool _busy;
     private bool _sequenced;
+    private bool _writable = true;
     private string _bases = string.Empty;
 
     public static readonly Color Blue = Color.FromHex("#1c71b1");
@@ -25,6 +26,13 @@ public sealed partial class GenePuzzle : Control
 
         SequenceButton.OnPressed += _ => OnSequence?.Invoke();
         OnSetBase += (_, _) => UpdateSequenceButton();
+    }
+
+    public void MakeReadonly()
+    {
+        _writable = false;
+        Tip.Visible = false; // clicking won't do anything
+        SequenceButtonContainer.Visible = false;
     }
 
     private void UpdateSequenceButton()
@@ -73,7 +81,7 @@ public sealed partial class GenePuzzle : Control
         button.ModulateSelfOverride = GetColor(b);
         button.OnPressed += _ =>
         {
-            if (_busy)
+            if (_busy || !_writable)
                 return;
 
             // TODO: implement ctrl / right click

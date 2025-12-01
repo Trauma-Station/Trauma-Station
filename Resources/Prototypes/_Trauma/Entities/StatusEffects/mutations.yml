@@ -42,6 +42,7 @@
       guidebookText: entity-effect-guidebook-melts-brain
       effects:
       - !type:AddComponents
+        guidebookText: entity-effect-guidebook-melts-brain
         components:
         - type: TimedDespawn
           lifetime: 3

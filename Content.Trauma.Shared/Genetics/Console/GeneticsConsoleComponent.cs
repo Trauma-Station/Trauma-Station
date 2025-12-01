@@ -24,44 +24,10 @@ public sealed partial class GeneticsConsoleComponent : Component
     public int[] Chromosomes = new int[4];
 
     /// <summary>
-    /// Subjects with more than this number of genetic damage can't be scanned or sequenced.
+    /// Subjects with more than this number of genetic damage can't be sequenced etc.
     /// </summary>
     [DataField]
     public FixedPoint2 MaxGeneticDamage = 90;
-
-    /// <summary>
-    /// Used to prevent scanning/sequencing/etc at the same time.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool Busy;
-
-    #region Scanning
-
-    /// <summary>
-    /// The linked medical scanner.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid? Scanner;
-
-    /// <summary>
-    /// The mob currently in a linked scanner.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid? ScannedMob;
-
-    /// <summary>
-    /// How long it takes to scan a mob's genome.
-    /// </summary>
-    [DataField]
-    public TimeSpan ScanDelay = TimeSpan.FromSeconds(15);
-
-    /// <summary>
-    /// Sound played after successfully scanning a mob.
-    /// </summary>
-    [DataField]
-    public SoundSpecifier? ScanSound;
-
-    #endregion
 
     #region Scrambling
 
@@ -116,6 +82,12 @@ public sealed partial class GeneticsConsoleComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier? SequenceFailSound;
+
+    /// <summary>
+    /// Sound played if sequencing a mutation succeeds.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? SequenceSound;
 
     #endregion
 
@@ -218,12 +190,6 @@ public enum GeneticsCycle : byte
     Next,
     Last
 }
-
-/// <summary>
-/// Message to start the scanning process for an unscanned mob in the scanner.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed partial class GeneticsConsoleScanMessage : BoundUserInterfaceMessage;
 
 /// <summary>
 /// Message to scramble the scanned mob's genome.

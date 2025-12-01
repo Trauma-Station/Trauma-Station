@@ -28,6 +28,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     public event Action<uint>? OnCombine;
 
     private EntityQuery<GeneticsConsoleComponent> _query;
+    private EntityQuery<GeneticsScannerComponent> _scannerQuery;
     private EntityQuery<MobStateComponent> _mobQuery;
 
     private EntityUid _uid;
@@ -53,6 +54,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         _genome = _entMan.System<ScannedGenomeSystem>();
 
         _query = _entMan.GetEntityQuery<GeneticsConsoleComponent>();
+        _scannerQuery = _entMan.GetEntityQuery<GeneticsScannerComponent>();
         _mobQuery = _entMan.GetEntityQuery<MobStateComponent>();
 
         ServerButton.OnPressed += _ => OnSelectServer?.Invoke();
@@ -73,23 +75,22 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     {
         base.FrameUpdate(args);
 
-        if (!_query.TryComp(_uid, out var comp))
-        {
-            Close();
+        if (!_query.TryComp(_uid, out var comp) || !_scannerQuery.TryComp(_uid, out var scanner))
             return;
-        }
 
-        Update(comp);
+        Update(comp, scanner);
         UpdateDisk(_disk.GetDisk(_uid));
     }
 
     public void SetEntity(EntityUid uid)
     {
-        if (!_query.TryComp(uid, out var comp))
+        if (!_query.TryComp(uid, out var comp) || !_scannerQuery.TryComp(uid, out var scanner))
+        {
             return;
+        }
 
         _uid = uid;
-        Update(comp);
+        Update(comp, scanner);
         Storage.SetConsole(comp);
     }
 
@@ -99,41 +100,40 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         Combiner.SetState(state.Sequences);
     }
 
-    private void Update(GeneticsConsoleComponent comp)
+    private void Update(GeneticsConsoleComponent comp, GeneticsScannerComponent scanner)
     {
-        var hasScanner = comp.Scanner != null;
+        var hasScanner = scanner.Scanner != null;
         if (hasScanner != _hasScanner)
-        {
-            _hasScanner = hasScanner;
-            UpdateScanner(hasScanner);
-        }
-        if (comp.ScannedMob != _mob)
-            UpdateMob(_mob = comp.ScannedMob);
-        if (comp.Busy != _busy)
-            UpdateBusy(_busy = comp.Busy);
+            UpdateScanner(_hasScanner = hasScanner);
+        if (scanner.ScannedMob != _mob)
+            UpdateMob(_mob = scanner.ScannedMob);
+        if (scanner.Busy != _busy)
+            UpdateBusy(_busy = scanner.Busy);
+
         UpdateScrambleCooldown(comp.NextScramble);
         UpdateWriteCooldown(comp.NextWrite);
         UpdatePrintCooldown(comp.NextPrint);
-        if (_mob is {} mob)
+
+        if (_mob is not {} mob)
+            return;
+
+        var damage = _mutation.GetGeneticDamage(mob);
+        if (damage != _damage)
         {
-            var damage = _mutation.GetGeneticDamage(mob);
-            if (damage != _damage)
-            {
-                _damage = damage;
-                UpdateIntegrity();
-            }
-            var instability = _mutation.GetInstability(mob);
-            if (instability != _instability)
-            {
-                _instability = instability;
-                UpdateInstability();
-            }
-            var scanned = _genome.IsScanned(mob);
-            if (scanned != _scanned)
-            {
-                _scanned = scanned;
-                Sequencer.UpdateScannedMob(mob);
-            }
+            _damage = damage;
+            UpdateIntegrity();
+        }
+        var instability = _mutation.GetInstability(mob);
+        if (instability != _instability)
+        {
+            _instability = instability;
+            UpdateInstability();
+        }
+        var scanned = _genome.IsScanned(mob);
+        if (scanned != _scanned)
+        {
+            _scanned = scanned;
+            Sequencer.UpdateScannedMob(mob);
         }
     }
 
@@ -156,10 +156,11 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         Storage.UpdateDisk(disk);
     }
 
-    private void UpdateScanner(bool hasScanner)
+    private void UpdateScanner(bool? hasScanner)
     {
-        UpdateMob(hasScanner ? _mob : null);
-        if (!hasScanner)
+        // optional bool moment
+        UpdateMob(hasScanner == true ? _mob : null);
+        if (hasScanner != true)
             MobStatus.Text = Loc.GetString("genetics-console-no-scanner");
     }
 

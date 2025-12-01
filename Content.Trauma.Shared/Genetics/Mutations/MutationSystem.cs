@@ -491,6 +491,7 @@ public sealed partial class MutationSystem : EntitySystem
             Dirty(ent);
         }
 
+        MutateDna(ent, rolls: 16);
         RemComp<ScannedGenomeComponent>(ent); // have to rescan it now chud
     }
 

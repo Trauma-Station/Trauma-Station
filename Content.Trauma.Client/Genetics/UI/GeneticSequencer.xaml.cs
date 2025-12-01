@@ -60,6 +60,12 @@ public sealed partial class GeneticSequencer : BoxContainer
         };
     }
 
+    public void MakeReadonly()
+    {
+        WriteButton.Visible = false;
+        Puzzle.MakeReadonly();
+    }
+
     public void SetMob(EntityUid? mob)
     {
         _mob = mob;
@@ -97,6 +103,8 @@ public sealed partial class GeneticSequencer : BoxContainer
 
         if (scanned)
             Scanner.SetError(null);
+        else
+            Scanner.SetError("genetics-console-sequencer-not-scanned");
 
         SequenceButtons.UpdateSequences();
         UpdateSequence();

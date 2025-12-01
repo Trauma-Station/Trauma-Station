@@ -5,8 +5,6 @@ using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Content.Shared.Power.EntitySystems;
-using Content.Shared.UserInterface;
-using Content.Trauma.Common.Medical;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Content.Trauma.Shared.Genetics.Tools;
 using Robust.Shared.Audio.Systems;
@@ -19,7 +17,7 @@ using System.Text;
 
 namespace Content.Trauma.Shared.Genetics.Console;
 
-public sealed class GeneticsConsoleSystem : EntitySystem
+public sealed partial class GeneticsConsoleSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly GeneticsDiskSystem _disk = default!;
@@ -38,7 +36,6 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private StringBuilder _builder = new();
-    private List<SequenceState> _sequences = new();
 
     private EntityQuery<GeneticsConsoleComponent> _query;
 
@@ -49,21 +46,13 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         _query = GetEntityQuery<GeneticsConsoleComponent>();
 
         SubscribeLocalEvent<GeneticsConsoleComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<GeneticsConsoleComponent, ScannerConnectedEvent>(OnScannerConnected);
-        SubscribeLocalEvent<GeneticsConsoleComponent, ScannerDisconnectedEvent>(OnScannerDisconnected);
-        SubscribeLocalEvent<GeneticsConsoleComponent, ScannerInsertedEvent>(OnScannerInserted);
-        SubscribeLocalEvent<GeneticsConsoleComponent, ScannerEjectedEvent>(OnScannerEjected);
-        SubscribeLocalEvent<GeneticsConsoleComponent, ScanDoAfterEvent>(OnScanDoAfter);
-        SubscribeLocalEvent<GeneticsConsoleComponent, DoAfterAttemptEvent<ScanDoAfterEvent>>(OnScanCheck);
         SubscribeLocalEvent<GeneticsConsoleComponent, SequenceDoAfterEvent>(OnSequenceDoAfter);
         SubscribeLocalEvent<GeneticsConsoleComponent, DoAfterAttemptEvent<SequenceDoAfterEvent>>(OnSequenceCheck);
         SubscribeLocalEvent<GeneticsConsoleComponent, CombineDoAfterEvent>(OnCombineDoAfter);
         SubscribeLocalEvent<GeneticsConsoleComponent, DoAfterAttemptEvent<CombineDoAfterEvent>>(OnCombineCheck);
-        SubscribeLocalEvent<GeneticsConsoleComponent, AfterActivatableUIOpenEvent>(OnUIOpened);
 
         Subs.BuiEvents<GeneticsConsoleComponent>(GeneticsConsoleUiKey.Key, subs =>
         {
-            subs.Event<GeneticsConsoleScanMessage>(OnScan);
             subs.Event<GeneticsConsoleScrambleMessage>(OnScramble);
             subs.Event<GeneticsConsoleSetBaseMessage>(OnSetBase);
             subs.Event<GeneticsConsoleSequenceMessage>(OnSequence);
@@ -71,6 +60,9 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             subs.Event<GeneticsConsoleCombineMessage>(OnCombine);
             subs.Event<GeneticsConsolePrintMessage>(OnPrint);
         });
+
+        InitializeHandheld();
+        InitializeScanner();
     }
 
     private void OnMapInit(Entity<GeneticsConsoleComponent> ent, ref MapInitEvent args)
@@ -79,103 +71,10 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         DirtyField(ent, nameof(GeneticsConsoleComponent.NextScramble));
     }
 
-    private void OnScannerConnected(Entity<GeneticsConsoleComponent> ent, ref ScannerConnectedEvent args)
-    {
-        ent.Comp.Scanner = args.Scanner;
-        DirtyField(ent, nameof(GeneticsConsoleComponent.Scanner));
-        UpdateUI(ent);
-    }
-
-    private void OnScannerDisconnected(Entity<GeneticsConsoleComponent> ent, ref ScannerDisconnectedEvent args)
-    {
-        ent.Comp.Scanner = null;
-        DirtyField(ent, nameof(GeneticsConsoleComponent.Scanner));
-        UpdateUI(ent);
-    }
-
-    private void OnScannerInserted(Entity<GeneticsConsoleComponent> ent, ref ScannerInsertedEvent args)
-    {
-        ent.Comp.ScannedMob = args.Target;
-        DirtyField(ent, nameof(GeneticsConsoleComponent.ScannedMob));
-        UpdateUI(ent);
-    }
-
-    private void OnScannerEjected(Entity<GeneticsConsoleComponent> ent, ref ScannerEjectedEvent args)
-    {
-        ent.Comp.ScannedMob = null;
-        DirtyField(ent, nameof(GeneticsConsoleComponent.ScannedMob));
-        UpdateUI(ent);
-    }
-
-    private void OnScan(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleScanMessage args)
-    {
-        if (ent.Comp.ScannedMob is not {} mob)
-            return;
-
-        if (!CanScan(ent, mob))
-            return;
-
-        var doAfterArgs = new DoAfterArgs(
-            EntityManager,
-            ent,
-            ent.Comp.ScanDelay,
-            new ScanDoAfterEvent(GetNetEntity(mob)),
-            eventTarget: ent,
-            target: mob)
-        {
-            BreakOnMove = true
-        };
-        doAfterArgs.AttemptFrequency = AttemptFrequency.EveryTick;
-        SetBusy(ent, _doAfter.TryStartDoAfter(doAfterArgs));
-
-        Speak(ent, "scanning");
-    }
-
-    private void OnScanDoAfter(Entity<GeneticsConsoleComponent> ent, ref ScanDoAfterEvent args)
-    {
-        SetBusy(ent, false);
-        if (args.Cancelled)
-        {
-            Speak(ent, "scan-failed");
-            return;
-        }
-
-        args.Handled = true;
-        var mob = GetEntity(args.Mob);
-        if (!CanScan(ent, mob))
-        {
-            Speak(ent, "scan-failed");
-            return;
-        }
-
-        var damage = _mutation.GetGeneticDamage(mob) ?? 0;
-        if (damage > ent.Comp.MaxGeneticDamage)
-        {
-            Speak(ent, "genetic-damage");
-            return;
-        }
-
-        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{ToPrettyString(mob)} was scanned by {ToPrettyString(args.User)} with console {ToPrettyString(ent)}");
-        _audio.PlayPredicted(ent.Comp.ScanSound, ent, args.User);
-
-        Speak(ent, "scanned");
-        if (_net.IsServer)
-            _genome.ScanGenome(mob);
-        UpdateUI(ent);
-    }
-
-    private void OnScanCheck(Entity<GeneticsConsoleComponent> ent, ref DoAfterAttemptEvent<ScanDoAfterEvent> args)
-    {
-        var mob = GetEntity(args.Event.Mob);
-        if (!CanKeepWorkingOn(ent, mob))
-            args.Cancel();
-    }
-
     private void OnScramble(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleScrambleMessage args)
     {
-        if (ent.Comp.ScannedMob is not {} mob ||
-            !CanWorkOn(ent, mob)
-            || !_genome.IsScanned(mob) || // can't scramble unscanned mobs
+        if (GetWorkableMob(ent.Owner) is not {} mob ||
+            !_genome.IsScanned(mob) || // can't scramble unscanned mobs
             _mutation.GetMutatable(mob) is not {} mutatable)
             return;
 
@@ -191,13 +90,12 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         DirtyField(ent, nameof(GeneticsConsoleComponent.NextScramble));
 
         _mutation.Scramble(mutatable, predicted: true);
-        UpdateUI(ent);
+        UpdateUI(ent.Owner);
     }
 
     private void OnSetBase(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleSetBaseMessage args)
     {
-        if (ent.Comp.ScannedMob is not {} mob ||
-            !CanWorkOn(ent, mob) ||
+        if (GetWorkableMob(ent.Owner) is not {} mob ||
             _genome.GetSequence(mob, args.Sequence) is not {} sequence ||
             args.Index > sequence.Bases.Length)
             return;
@@ -208,37 +106,35 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         var i = (int) args.Index;
         _builder[i] = CycleBase(sequence.Bases[i], args.Cycle);
         sequence.Bases = _builder.ToString();
-        UpdateUI(ent);
+        UpdateUI(ent.Owner);
     }
 
     private void OnSequence(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleSequenceMessage args)
     {
-        if (ent.Comp.ScannedMob is not {} mob)
-            return;
-
-        if (!CanWorkOn(ent, mob) || _genome.GetSequence(mob, args.Index) is not {} sequence)
-            return;
-
-        if (_mutation.GetRoundData(sequence.Mutation)?.Discovered == true)
+        if (GetWorkableMob(ent.Owner) is not {} mob ||
+            _genome.GetSequence(mob, args.Index) is not {} sequence ||
+            _mutation.GetRoundData(sequence.Mutation)?.Discovered == true)
             return;
 
         var doAfterArgs = new DoAfterArgs(EntityManager,
-            ent,
+            args.Actor,
             ent.Comp.SequenceDelay,
             new SequenceDoAfterEvent(GetNetEntity(mob), args.Index),
             eventTarget: ent,
-            target: mob)
+            target: mob,
+            used: ent)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            AttemptFrequency = AttemptFrequency.EveryTick
         };
-        doAfterArgs.AttemptFrequency = AttemptFrequency.EveryTick;
-        SetBusy(ent, _doAfter.TryStartDoAfter(doAfterArgs));
+        SetBusy(ent.Owner, _doAfter.TryStartDoAfter(doAfterArgs));
         Speak(ent, "sequencing");
     }
 
     private void OnSequenceDoAfter(Entity<GeneticsConsoleComponent> ent, ref SequenceDoAfterEvent args)
     {
-        SetBusy(ent, false);
+        SetBusy(ent.Owner, false);
         if (args.Cancelled)
         {
             Speak(ent, "sequence-failed");
@@ -247,7 +143,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
         args.Handled = true;
         var mob = GetEntity(args.Mob);
-        if (!CanWorkOn(ent, mob))
+        if (!CanWorkOn(ent.Owner, mob))
         {
             Speak(ent, "sequence-failed");
             return;
@@ -271,7 +167,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     private void OnSequenceCheck(Entity<GeneticsConsoleComponent> ent, ref DoAfterAttemptEvent<SequenceDoAfterEvent> args)
     {
         var mob = GetEntity(args.Event.Mob);
-        if (!CanKeepWorkingOn(ent, mob))
+        if (!CanKeepWorkingOn(ent.Owner, mob))
             args.Cancel();
     }
 
@@ -279,17 +175,15 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     {
         // check delay
         var now = _timing.CurTime;
-        if (now < ent.Comp.NextWrite)
-            return;
-
-        if (ent.Comp.ScannedMob is not {} mob || _genome.GetSequence(mob, args.Index) is not {} sequence)
+        if (now < ent.Comp.NextWrite ||
+            GetWorkableMob(ent.Owner) is not {} mob ||
+            _genome.GetSequence(mob, args.Index) is not {} sequence)
             return;
 
         var mutation = sequence.Mutation;
-        if (_mutation.GetRoundData(mutation)?.Discovered != true)
-            return;
-
-        if (_disk.GetDisk(ent.Owner) is not {} disk || disk.Comp.Mutation == mutation)
+        if (_mutation.GetRoundData(mutation)?.Discovered != true ||
+            _disk.GetDisk(ent.Owner) is not {} disk ||
+            disk.Comp.Mutation == mutation)
             return;
 
         ent.Comp.NextWrite = now + ent.Comp.WriteDelay;
@@ -302,32 +196,30 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
     private void OnCombine(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleCombineMessage args)
     {
-        if (ent.Comp.ScannedMob is not {} mob)
-            return;
-
-        if (!CanWorkOn(ent, mob) || _genome.GetSequence(mob, args.Index) is not {} sequence)
-            return;
-
-        if (_disk.GetDisk(ent.Owner)?.Comp.Mutation == null)
+        if (GetWorkableMob(ent.Owner) is not {} mob ||
+            _genome.GetSequence(mob, args.Index) is not {} sequence ||
+            _disk.GetDisk(ent.Owner)?.Comp.Mutation == null)
             return;
 
         var doAfterArgs = new DoAfterArgs(EntityManager,
-            ent,
+            args.Actor,
             ent.Comp.SequenceDelay,
             new CombineDoAfterEvent(GetNetEntity(mob), args.Index),
             eventTarget: ent,
-            target: mob)
+            target: mob,
+            used: ent)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            AttemptFrequency = AttemptFrequency.EveryTick
         };
-        doAfterArgs.AttemptFrequency = AttemptFrequency.EveryTick;
-        SetBusy(ent, _doAfter.TryStartDoAfter(doAfterArgs));
+        SetBusy(ent.Owner, _doAfter.TryStartDoAfter(doAfterArgs));
         Speak(ent, "combining");
     }
 
     private void OnCombineDoAfter(Entity<GeneticsConsoleComponent> ent, ref CombineDoAfterEvent args)
     {
-        SetBusy(ent, false);
+        SetBusy(ent.Owner, false);
         if (args.Cancelled)
         {
             Speak(ent, "combine-failed");
@@ -336,7 +228,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
         args.Handled = true;
         var mob = GetEntity(args.Mob);
-        if (!CanWorkOn(ent, mob))
+        if (!CanWorkOn(ent.Owner, mob))
         {
             Speak(ent, "combine-failed");
             return;
@@ -377,13 +269,13 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
         // it isn't discovered so you have to figure out what it is before it's too late...
         _genome.TryAddSequence(mob, result);
-        UpdateUI(ent);
+        UpdateUI(ent.Owner);
     }
 
     private void OnCombineCheck(Entity<GeneticsConsoleComponent> ent, ref DoAfterAttemptEvent<CombineDoAfterEvent> args)
     {
         var mob = GetEntity(args.Event.Mob);
-        if (!CanKeepWorkingOn(ent, mob) || _disk.GetDisk(ent.Owner) == null)
+        if (!CanKeepWorkingOn(ent.Owner, mob) || _disk.GetDisk(ent.Owner) == null)
             args.Cancel();
     }
 
@@ -409,34 +301,11 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         _adminLog.Add(LogType.Genetics, LogImpact.Medium, $"Printed {ToPrettyString(item)} with {mutation} by {ToPrettyString(args.Actor)} using console {ToPrettyString(ent)}");
     }
 
-    private void OnUIOpened(Entity<GeneticsConsoleComponent> ent, ref AfterActivatableUIOpenEvent args)
-    {
-        UpdateUI(ent);
-    }
-
-    private void SetBusy(Entity<GeneticsConsoleComponent> ent, bool busy)
-    {
-        if (ent.Comp.Busy == busy)
-            return;
-
-        ent.Comp.Busy = busy;
-        DirtyField(ent, nameof(GeneticsConsoleComponent.Busy));
-    }
-
     private void Speak(EntityUid uid, string suffix)
     {
         var msg = Loc.GetString("genetics-console-chat-" + suffix);
         var type = InGameICChatType.Speak;
         _chat.TrySendInGameICMessage(uid, msg, type, hideChat: false, hideLog: true);
-    }
-
-    private void UpdateUI(Entity<GeneticsConsoleComponent> ent)
-    {
-        _sequences.Clear();
-        if (ent.Comp.ScannedMob is {} mob)
-            _genome.AddSequenceStates(mob, _sequences);
-        var state = new GeneticsConsoleState(_sequences);
-        _ui.SetUiState(ent.Owner, GeneticsConsoleUiKey.Key, state);
     }
 
     #region Public API
@@ -459,18 +328,6 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             ('X', GeneticsCycle.Last) => 'T',
             _ => b // how
         };
-
-    public bool CanWorkOn(Entity<GeneticsConsoleComponent> ent, EntityUid mob)
-        => !ent.Comp.Busy && CanKeepWorkingOn(ent, mob);
-
-    public bool CanKeepWorkingOn(Entity<GeneticsConsoleComponent> ent, EntityUid mob)
-        => ent.Comp.ScannedMob == mob // no bait n switch
-            && _mutation.CanMutate(mob)
-            && _power.IsPowered(ent.Owner);
-
-    public bool CanScan(Entity<GeneticsConsoleComponent> ent, EntityUid mob)
-        => CanWorkOn(ent, mob)
-            && !_genome.IsScanned(mob); // can't scan someone multiple times
 
     public bool TryAddRandomChromosome(Entity<GeneticsConsoleComponent?> ent)
     {
@@ -496,7 +353,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
     /// </summary>
     public bool SequenceMutation(Entity<GeneticsConsoleComponent> ent, EntityUid mob, uint index)
     {
-        if (!CanWorkOn(ent, mob) ||
+        if (!CanWorkOn(ent.Owner, mob) ||
             _genome.GetSequence(mob, index) is not {} sequence)
             return false;
 
@@ -520,28 +377,14 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         var ev = new MutationSequencedEvent(mutation, data);
         RaiseLocalEvent(ent, ref ev);
 
-        _audio.PlayPvs(ent.Comp.ScanSound, ent);
+        _audio.PlayPvs(ent.Comp.SequenceSound, ent);
         data.Discovered = true;
         _mutation.AddMutation(mob, sequence.Mutation);
-        UpdateUI(ent); // it's now discovered
+        UpdateUI(ent.Owner); // it's now discovered
         return true;
     }
 
     #endregion Public API
-}
-
-[Serializable, NetSerializable]
-public sealed partial class ScanDoAfterEvent : DoAfterEvent
-{
-    public NetEntity Mob;
-
-    public ScanDoAfterEvent(NetEntity mob)
-    {
-        Mob = mob;
-    }
-
-    public override DoAfterEvent Clone()
-        => new ScanDoAfterEvent(Mob);
 }
 
 [Serializable, NetSerializable]

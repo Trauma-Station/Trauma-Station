@@ -19,4 +19,4 @@
     - id: ClothingMaskSterile
     - id: ClothingOuterCoatLabGene
     - id: BoxGeneticsDisk
-    # TODO: handheld genome scanner
+    - id: HandheldGeneticsScanner

@@ -16,6 +16,10 @@ genetics-console-radio-message = {CAPITALIZE($mutation)} has been sequenced, {$p
 genetics-console-damages-you = The sequencing fails catastrophically and damages your genome!
 genetics-console-damages-others = The genetics console fails catastrophically and damages the subject's genome!
 
+genetics-console-linking-you = {CAPITALIZE($user)} starts linking you to {POSS-ADJ($user)} {$scanner}
+genetics-console-linking-others = {CAPITALIZE($user)} starts linking {$target} to {POSS-ADJ($user)} {$scanner}
+genetics-console-linked = Target linked successfully
+
 chromosome-count = {$name} ({$count}x)
 chromosome-Synchronizer = Synchronizer
 chromosome-Stabilizer = Stabilizer
@@ -25,6 +29,7 @@ chromosome-Energetic = Energetic
 ## UI ##
 
 genetics-console-window-title = Genetics Console 3000
+genetics-scanner-window-title = Genetics Scanner 4000
 
 genetics-console-heading-scanner = Medical Scanner
 genetics-console-no-scanner = No Medical Scanner connected!

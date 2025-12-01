@@ -62,3 +62,8 @@ entity-effect-guidebook-nothing = nothing ever {$chance ->
     [1] happens
     *[other] happen
 }
+
+entity-effect-guidebook-scramble-dna = {$chance ->
+    [1] scrambles
+    *[other] scramble
+} the target's mutations
