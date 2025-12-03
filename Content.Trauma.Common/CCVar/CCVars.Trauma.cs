@@ -58,4 +58,14 @@ public sealed partial class TraumaCVars
         CVarDef.Create("trauma.audio_muffle_pathfinding", true, CVar.SERVER | CVar.REPLICATED);
 
     #endregion
+
+    #region Streamer Mode
+
+    /// <summary>
+    /// Client setting to disable music that would cause copyright claims.
+    /// </summary>
+    public static readonly CVarDef<bool> StreamerMode =
+        CVarDef.Create("trauma.streamer_mode", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    #endregion
 }
