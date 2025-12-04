@@ -796,3 +796,17 @@ Entries:
       message: Hivelord brood no longer attack other megafauna.
   id: 87
   time: '2025-11-30T22:23:50.0000000+00:00'
+- author: Santa
+  changes:
+    - type: Add
+      message: More present anomalies, merry christmas.
+  id: 88
+  time: '2025-12-04T01:46:29.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: >-
+        Specified that the character description box, is for visually describing
+        your character. Failure to comply will lead to beatings.
+  id: 89
+  time: '2025-12-04T18:52:05.0000000+00:00'

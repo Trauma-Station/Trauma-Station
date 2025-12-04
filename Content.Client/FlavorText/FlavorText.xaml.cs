@@ -24,7 +24,7 @@ namespace Content.Client.FlavorText
             IoCManager.InjectDependencies(this);
 
             var loc = IoCManager.Resolve<ILocalizationManager>();
-            CFlavorTextInput.Placeholder = new Rope.Leaf(loc.GetString("flavor-text-placeholder"));
+            CFlavorTextInput.Placeholder = new Rope.Leaf(loc.GetString("flavor-text-placeholder-trauma")); // Trauma - Change to our loc
             CFlavorTextInput.OnTextChanged  += _ => FlavorTextChanged();
         }
 

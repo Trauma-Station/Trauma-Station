@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Salvage;
 using Content.Trauma.Common.ServerCurrency;

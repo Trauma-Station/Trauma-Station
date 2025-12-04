@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;

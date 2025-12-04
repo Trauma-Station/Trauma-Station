@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Server.Cloning;
 using Content.Server.Cloning.Components;
 using Content.Server.Medical.Components;
