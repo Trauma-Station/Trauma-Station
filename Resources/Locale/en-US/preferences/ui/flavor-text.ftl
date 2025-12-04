@@ -4,4 +4,4 @@
 #
 # SPDX-License-Identifier: MIT
 
-flavor-text-placeholder = An outer description of your character that others can get by looking at them...
+flavor-text-placeholder = A short visual description of your characters outward appearance. Adding any information other than what could be seen at a first glance here gives both admins and players the right to abuse you in-character.
