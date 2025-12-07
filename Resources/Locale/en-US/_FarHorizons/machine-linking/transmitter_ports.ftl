@@ -9,6 +9,11 @@ signal-port-description-holographic-generator-field-connected = This port is inv
 signal-port-name-holographic-generator-field-disconnected = Field Disconnected
 signal-port-description-holographic-generator-field-disconnected = This port is invoked whenever the field fizzles out.
 
+# Nuclear Reactor
+
+signal-port-name-nuclear-reactor-data-sender = Nuclear Reactor
+signal-port-description-nuclear-reactor-data-sender = Sending info about a nuclear reactor to a monitor.
+
 # Gas Turbine
 
 signal-port-name-gas-turbine-speed-high = High Speed
