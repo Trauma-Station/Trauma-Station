@@ -58,3 +58,5 @@
 - type: Tag
   id: TechfabMachineBoard
 
+- type: Tag
+  id: WelderExperimental
