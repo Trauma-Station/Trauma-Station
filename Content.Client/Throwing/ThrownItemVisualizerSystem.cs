@@ -2,8 +2,10 @@
 // SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
 // SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Tayrtahn <tayrtahn@gmail.com>
+// SPDX-FileCopyrightText: 2025 Toaster <mrtoastymyroasty@gmail.com>
+// SPDX-FileCopyrightText: 2025 Toastermeister <215405651+Toastermeister@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 taydeo <td12233a@gmail.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -36,6 +38,10 @@ public sealed class ThrownItemVisualizerSystem : EntitySystem
     {
         if (!TryComp<SpriteComponent>(uid, out var sprite)) // Goob edit start
             return;
+
+        // Ensure thrown items are visible (items from containers may be occluded)
+        _sprite.SetVisible((uid, sprite), true);
+        _sprite.SetContainerOccluded((uid, sprite), false);
 
         if (!component.Animate)
         {

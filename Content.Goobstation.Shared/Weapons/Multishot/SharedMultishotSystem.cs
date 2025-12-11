@@ -31,7 +31,9 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Weapons.Multishot;
@@ -46,6 +48,8 @@ public sealed class SharedMultishotSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedStaminaSystem _staminaSystem = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -62,6 +66,9 @@ public sealed class SharedMultishotSystem : EntitySystem
 
     private void OnRequestShoot(RequestShootEvent msg, EntitySessionEventArgs args)
     {
+        if (_timing.IsFirstTimePredicted)
+            return;
+
         var user = args.SenderSession.AttachedEntity;
 
         if (user == null ||
@@ -75,6 +82,10 @@ public sealed class SharedMultishotSystem : EntitySystem
         foreach(var gun in gunsEnumerator)
         {
             var (gunEnt, gunComp, _) = gun;
+
+            var netGun = GetNetEntity(gunEnt);
+            if (netGun == msg.Gun)
+                continue;
 
             if (!HasComp<MultishotComponent>(GetEntity(msg.Gun)) && gunEnt != GetEntity(msg.Gun))
                 continue;

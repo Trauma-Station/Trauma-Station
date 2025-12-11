@@ -5,12 +5,23 @@ using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Prototypes;
 // </Trauma>
 using System.Numerics;
+using Content.Goobstation.Common.Projectiles;
+using Content.Goobstation.Common.Weapons.Penetration;
+using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Damage;
+using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Camera;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.Effects;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Throwing;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -18,8 +29,8 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Serialization;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.Projectiles;
 
@@ -32,6 +43,12 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private readonly SharedGunSystem _guns = default!;
+    [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly TagSystem _tag = default!; // Goob
 
     private static readonly ProtoId<TagPrototype> GunCanAimShooterTag = "GunCanAimShooter"; // Goob
@@ -40,6 +57,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<ProjectileComponent, PreventCollideEvent>(PreventCollision);
         SubscribeLocalEvent<EmbeddableProjectileComponent, PreventCollideEvent>(EmbeddablePreventCollision); // Goobstation - Crawl Fix
         SubscribeLocalEvent<EmbeddableProjectileComponent, ProjectileHitEvent>(OnEmbedProjectileHit);
@@ -49,6 +67,224 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         SubscribeLocalEvent<EmbeddableProjectileComponent, ComponentShutdown>(OnEmbeddableCompShutdown);
 
         SubscribeLocalEvent<EmbeddedContainerComponent, EntityTerminatingEvent>(OnEmbeddableTermination);
+    }
+
+    private void OnStartCollide(EntityUid uid, ProjectileComponent component, ref StartCollideEvent args)
+    {
+        // This is so entities that shouldn't get a collision are ignored.
+        if (args.OurFixtureId != ProjectileFixture || !args.OtherFixture.Hard
+            || component.DamagedEntity || component is { Weapon: null, OnlyCollideWhenShot: true })
+            return;
+
+        ProjectileCollide((uid, component, args.OurBody), args.OtherEntity);
+    }
+
+    public void ProjectileCollide(Entity<ProjectileComponent, PhysicsComponent> projectile, EntityUid target, bool predicted = false)
+    {
+        ProjectileCollide(projectile, target, null, predicted);
+    }
+
+    public void ProjectileCollide(Entity<ProjectileComponent, PhysicsComponent> projectile, EntityUid target, MapCoordinates? collisionCoordinates, bool predicted = false)
+    {
+        var (uid, component, ourBody) = projectile;
+        if (projectile.Comp1.DamagedEntity)
+        {
+            if (component.DeleteOnCollide)
+                PredictedQueueDel(uid);
+
+            return;
+        }
+
+        // it's here so this check is only done once before possible hit
+        var attemptEv = new ProjectileReflectAttemptEvent(uid, component, false);
+        RaiseLocalEvent(target, ref attemptEv);
+        if (attemptEv.Cancelled)
+        {
+            SetShooter(uid, component, target);
+            _guns.SetTarget(uid, null, out _); // Goobstation
+            component.IgnoredEntities.Clear(); // Goobstation
+            return;
+        }
+
+        var ev = new ProjectileHitEvent(component.Damage, target, component.Shooter);
+        RaiseLocalEvent(uid, ref ev);
+        if (ev.Handled)
+            return;
+
+        var coordinates = collisionCoordinates != null
+            ? _transform.ToCoordinates(collisionCoordinates.Value)
+            : Transform(projectile).Coordinates;
+        var otherName = ToPrettyString(target);
+        var damageRequired = GetDestructionDamage(target);
+        if (TryComp<DamageableComponent>(target, out var damageableComponent))
+        {
+            damageRequired -= damageableComponent.TotalDamage;
+            damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
+        }
+
+        var direction = ourBody.LinearVelocity.Normalized();
+        // <Goob>
+        TargetBodyPart? targetPart = null;
+        if (TryComp(uid, out ProjectileMissTargetPartChanceComponent? missComp) &&
+            !missComp.PerfectHitEntities.Contains(target))
+            targetPart = TargetBodyPart.Chest;
+        var modifiedDamage = _net.IsClient
+            ? new DamageSpecifier(ev.Damage)
+            : _damageableSystem.TryChangeDamage(target,
+                ev.Damage,
+                out var damage,
+                component.IgnoreResistances,
+                origin: component.Shooter,
+                targetPart: targetPart,
+                tool: uid)
+                ? damage
+                : null;
+        // </Goob>
+        var deleted = Deleted(target);
+
+        var filter = Filter.Pvs(coordinates, entityMan: EntityManager);
+        if (_guns.GunPrediction &&
+            TryComp(projectile, out PredictedProjectileServerComponent? serverProjectile) &&
+            serverProjectile.Shooter is { } shooter)
+        {
+            filter = filter.RemovePlayer(shooter);
+        }
+
+        if (modifiedDamage is not null && (EntityManager.EntityExists(component.Shooter) || EntityManager.EntityExists(component.Weapon)))
+        {
+            if (modifiedDamage.AnyPositive() && !deleted)
+            {
+                _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, filter);
+            }
+
+            var shooterOrWeapon = EntityManager.EntityExists(component.Shooter) ? component.Shooter!.Value : component.Weapon!.Value;
+            var total = modifiedDamage.GetTotal();
+
+            _adminLogger.Add(LogType.BulletHit,
+                HasComp<ActorComponent>(target) ? LogImpact.Extreme : LogImpact.High,
+                $"Projectile {ToPrettyString(uid):projectile} shot by {ToPrettyString(shooterOrWeapon):source} hit {otherName:target} and dealt {total:damage} damage");
+
+            // <Goob> - Splits penetration change if target have PenetratableComponent
+            if (!TryComp<PenetratableComponent>(target, out var penetratable))
+            {
+                // If the object won't be destroyed, it "tanks" the penetration hit.
+                if (total < damageRequired)
+                {
+                    component.ProjectileSpent = true;
+                }
+
+                if (!component.ProjectileSpent)
+                {
+                    component.PenetrationAmount += damageRequired;
+                    // The projectile has dealt enough damage to be spent.
+                    if (component.PenetrationAmount >= component.PenetrationThreshold)
+                    {
+                        component.ProjectileSpent = true;
+                    }
+                }
+            }
+            else
+            {
+                // Goobstation - Here penetration threshold count as "penetration health".
+                // If it's lower than damage than penetation damage entity cause it deletes projectile
+                if (component.PenetrationThreshold < penetratable.PenetrateDamage)
+                {
+                    component.ProjectileSpent = true;
+                }
+
+                component.PenetrationThreshold -= FixedPoint2.New(penetratable.PenetrateDamage);
+                component.Damage *= (1 - penetratable.DamagePenaltyModifier);
+            }
+            // </Goob>
+
+            // If penetration is to be considered, we need to do some checks to see if the projectile should stop.
+            if (component.PenetrationThreshold != 0)
+            {
+                // If a damage type is required, stop the bullet if the hit entity doesn't have that type.
+                if (component.PenetrationDamageTypeRequirement != null)
+                {
+                    var stopPenetration = false;
+                    foreach (var requiredDamageType in component.PenetrationDamageTypeRequirement)
+                    {
+                        if (!modifiedDamage.DamageDict.Keys.Contains(requiredDamageType))
+                        {
+                            stopPenetration = true;
+                            break;
+                        }
+                    }
+                    if (stopPenetration)
+                        component.ProjectileSpent = true;
+                }
+
+                // If the object won't be destroyed, it "tanks" the penetration hit.
+                if (total < damageRequired)
+                {
+                    component.ProjectileSpent = true;
+                }
+
+                if (!component.ProjectileSpent)
+                {
+                    component.PenetrationAmount += damageRequired;
+                    // The projectile has dealt enough damage to be spent.
+                    if (component.PenetrationAmount >= component.PenetrationThreshold)
+                    {
+                        component.ProjectileSpent = true;
+                    }
+                }
+            }
+            else
+            {
+                component.ProjectileSpent = true;
+            }
+        }
+
+        // Goobstation start
+        if (component.Penetrate)
+        {
+            component.IgnoredEntities.Add(target);
+            component.ProjectileSpent = false; // Hardlight bow should be able to deal damage while piercing, no?
+        }
+        // Goobstation end
+
+        if (!deleted)
+        {
+            _guns.PlayImpactSound(target, modifiedDamage, component.SoundHit, component.ForceSound, filter, projectile);
+            _sharedCameraRecoil.KickCamera(target, direction);
+        }
+
+        component.DamagedEntity = true;
+        Dirty(uid, component);
+
+        var noPenetration = TryComp(target, out PhysicsComponent? physics) &&
+                            (component.NoPenetrateMask & physics.CollisionLayer) != 0;
+
+        if (!predicted && component is { DeleteOnCollide: true, ProjectileSpent: true } || noPenetration) // Goobstation - Make x-ray arrows not penetrate blob
+            PredictedQueueDel(uid);
+        else if (_net.IsServer && component.DeleteOnCollide)
+        {
+            var predictedComp = EnsureComp<PredictedProjectileHitComponent>(uid);
+            predictedComp.Origin = _transform.GetMoverCoordinates(coordinates);
+
+            var targetCoords = _transform.GetMoverCoordinates(target);
+            if (predictedComp.Origin.TryDistance(EntityManager, _transform, targetCoords, out var distance))
+                predictedComp.Distance = distance;
+
+            Dirty(uid, predictedComp);
+        }
+
+        if ((_net.IsServer || IsClientSide(uid)) && component.ImpactEffect != null)
+        {
+            var impactEffectEv = new ImpactEffectEvent(component.ImpactEffect, GetNetCoordinates(coordinates));
+            if (_net.IsServer)
+                RaiseNetworkEvent(impactEffectEv, filter);
+            else
+                RaiseLocalEvent(impactEffectEv);
+        }
+    }
+
+    protected virtual FixedPoint2 GetDestructionDamage(EntityUid target)
+    {
+        return FixedPoint2.Zero;
     }
 
     private void OnEmbedActivate(Entity<EmbeddableProjectileComponent> embeddable, ref ActivateInWorldEvent args)
@@ -279,4 +515,4 @@ public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, Projectile
 /// Raised when a projectile hits an entity
 /// </summary>
 [ByRefEvent]
-public record struct ProjectileHitEvent(DamageSpecifier Damage, EntityUid Target, EntityUid? Shooter = null);
+public record struct ProjectileHitEvent(DamageSpecifier Damage, EntityUid Target, EntityUid? Shooter = null, bool Handled = false);

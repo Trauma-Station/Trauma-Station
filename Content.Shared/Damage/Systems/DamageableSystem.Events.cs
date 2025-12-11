@@ -229,7 +229,7 @@ public record struct BeforeDamageChangedEvent(DamageSpecifier Damage, EntityUid?
 ///     For example, armor.
 /// </summary>
 // Goob - added target, targetPart
-public sealed class DamageModifyEvent(EntityUid target, DamageSpecifier damage, EntityUid? origin = null, TargetBodyPart? targetPart = null)
+public sealed class DamageModifyEvent(EntityUid target, DamageSpecifier damage, EntityUid? origin = null, EntityUid? tool = null, TargetBodyPart? targetPart = null)
     : EntityEventArgs, IInventoryRelayEvent
 {
     // Whenever locational damage is a thing, this should just check only that bit of armour.
@@ -240,6 +240,7 @@ public sealed class DamageModifyEvent(EntityUid target, DamageSpecifier damage, 
     public readonly EntityUid? Origin = origin; // Why was this not a field already?
     public readonly TargetBodyPart? TargetPart = targetPart;
     // </Goob>
+    public EntityUid? Tool = tool;
     public readonly DamageSpecifier OriginalDamage = damage;
     public DamageSpecifier Damage = damage;
 }

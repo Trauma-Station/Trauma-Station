@@ -369,15 +369,6 @@
         hard: false
         mask:
         - Opaque
-      fly-by: &flybyfixture
-        shape: !type:PhysShapeCircle
-          radius: 1.5
-        layer:
-        - Impassable
-        - MidImpassable
-        - HighImpassable
-        - LowImpassable
-        hard: False
   - type: Ammo
   - type: StaminaDamageOnCollide
     damage: 33
@@ -513,7 +504,6 @@
         hard: false
         mask:
         - Opaque # Goobstation
-      fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
     damage: 33

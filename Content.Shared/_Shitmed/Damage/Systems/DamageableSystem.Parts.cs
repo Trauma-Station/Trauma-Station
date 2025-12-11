@@ -337,7 +337,8 @@ public sealed partial class DamageableSystem
         TargetBodyPart targetPart,
         DamageSpecifier damageSpecifier,
         bool ignoreResistances = false,
-        float partMultiplier = 1.00f)
+        float partMultiplier = 1.00f,
+        EntityUid? tool = null)
     {
         var damageDict = new Dictionary<string, FixedPoint2>();
 
@@ -358,7 +359,7 @@ public sealed partial class DamageableSystem
                 damageSpecifier = DamageSpecifier.ApplyModifierSet(spec, modifierSet);
             }
 
-            var ev = new DamageModifyEvent(ent, damageSpecifier, origin, targetPart);
+            var ev = new DamageModifyEvent(ent, damageSpecifier, origin, tool, targetPart);
             RaiseLocalEvent(ent, ev);
             damageSpecifier = ev.Damage;
 

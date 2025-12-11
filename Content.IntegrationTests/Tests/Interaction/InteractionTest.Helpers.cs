@@ -570,7 +570,7 @@ public abstract partial class InteractionTest
 
         await Server.WaitAssertion(() =>
         {
-            var success = SGun.AttemptShoot(SPlayer, gunUid, gunComp!, actualTarget);
+            var success = SGun.AttemptShoot(SPlayer, gunUid, gunComp!, actualTarget) is not null;
             if (assert)
                 Assert.That(success, "Gun failed to shoot.");
         });
@@ -609,7 +609,7 @@ public abstract partial class InteractionTest
 
         await Server.WaitAssertion(() =>
         {
-            var success = SGun.AttemptShoot(SPlayer, gunUid, gunComp!, Position(actualTarget!.Value), ToServer(actualTarget));
+            var success = SGun.AttemptShoot(SPlayer, gunUid, gunComp!, Position(actualTarget!.Value), ToServer(actualTarget)) is not null;
             if (assert)
                 Assert.That(success, "Gun failed to shoot.");
         });

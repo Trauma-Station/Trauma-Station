@@ -36,15 +36,6 @@
         mask:
         - Impassable
         - BulletImpassable
-      fly-by: &flybyfixture
-        shape: !type:PhysShapeCircle
-          radius: 1.5
-        layer:
-        - Impassable
-        - MidImpassable
-        - HighImpassable
-        - LowImpassable
-        hard: False
   - type: Projectile
     impactEffect: BulletImpactEffect
     damage:
@@ -54,6 +45,7 @@
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: TimedDespawn
     lifetime: 10
+  - type: LagCompensation
 
 - type: entity
   id: BulletDeclone

@@ -53,7 +53,6 @@
   abstract: true
   components:
   - type: Reflective
-  - type: FlyBySound
   - type: Clickable
   - type: Sprite
     noRot: false
@@ -77,15 +76,6 @@
         #- Opaque # Goob
         - Impassable
         - BulletImpassable
-      fly-by: &flybyfixture
-        shape: !type:PhysShapeCircle
-          radius: 1.5
-        layer:
-        - Impassable
-        - MidImpassable
-        - HighImpassable
-        - LowImpassable
-        hard: False
   - type: Projectile
     impactEffect: BulletImpactEffect
     damage:
@@ -95,6 +85,7 @@
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: TimedDespawn
     lifetime: 10
+  - type: LagCompensation
 
 - type: entity
   id: BaseBulletTrigger # Trigger-on-collide bullets
@@ -118,7 +109,6 @@
         mask:
         - Impassable
         - BulletImpassable
-      fly-by: *flybyfixture
 
 - type: entity
   id: BaseBulletPractice
@@ -221,7 +211,6 @@
         - Opaque
         - Impassable
         - BulletImpassable
-      fly-by: *flybyfixture
   - type: Ammo
   - type: Projectile
     damage:
@@ -282,6 +271,7 @@
       params:
         volume: 5
   - type: Sprite
+    noRot: false
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
     - state: omnilaser
@@ -295,8 +285,16 @@
           bounds: "-0.15,-0.3,0.15,0.3"
         hard: false
         mask:
-        - Opaque # Goobstation
-      fly-by: *flybyfixture
+        - Opaque
+      fly-by: # Inlined definition to avoid anchor issues
+        shape: !type:PhysShapeCircle
+          radius: 0.6
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: false
   - type: Ammo
   - type: StaminaDamageOnCollide
     damage: 20 # Goob edit
@@ -321,6 +319,7 @@
       params:
         volume: 5
   - type: Sprite
+    noRot: false
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
     - state: omnilaser
@@ -334,8 +333,16 @@
           bounds: "-0.15,-0.3,0.15,0.3"
         hard: false
         mask:
-        - Opaque # Goobstation
-      fly-by: *flybyfixture
+        - Opaque
+      fly-by: # Inlined definition to avoid anchor issues
+        shape: !type:PhysShapeCircle
+          radius: 0.6
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: false
   - type: Ammo
   - type: StaminaDamageOnCollide
     damage: 1
@@ -371,7 +378,6 @@
         hard: false
         mask:
         - Opaque
-      fly-by: *flybyfixture
   - type: Reflective # Goobstation - Make emitter bolts reflect as energy
     reflective:
     - Energy
@@ -419,7 +425,6 @@
         - Opaque
         - Impassable
         - BulletImpassable
-      fly-by: *flybyfixture
   - type: Projectile
     #   soundHit:  Waiting on serv3
     impactEffect: BulletImpactEffectDisabler
@@ -500,7 +505,6 @@
         hard: false
         mask:
         - Opaque
-      fly-by: *flybyfixture
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
@@ -669,7 +673,6 @@
         hard: false
         mask:
         - Opaque
-      fly-by: *flybyfixture
   - type: Projectile
     damage:
       types:
@@ -1166,6 +1169,7 @@
       params:
         volume: 5
   - type: Sprite
+    noRot: false
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
     - state: omnilaser
@@ -1179,8 +1183,16 @@
           bounds: "-0.15,-0.3,0.15,0.3"
         hard: false
         mask:
-        - Opaque # Goobstation
-      fly-by: *flybyfixture
+        - Opaque
+      fly-by: # Inlined definition to avoid anchor issues
+        shape: !type:PhysShapeCircle
+          radius: 0.6
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: false
   - type: Ammo
   - type: StaminaDamageOnCollide
     damage: 12 # Goob edit
@@ -1222,7 +1234,15 @@
         hard: false
         mask:
         - Opaque
-      fly-by: *flybyfixture
+      fly-by:
+        shape: !type:PhysShapeCircle
+          radius: 0.6
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: false
   - type: Ammo
 
 - type: entity
@@ -1335,7 +1355,6 @@
         - Opaque
         - Impassable
         - BulletImpassable
-      fly-by: *flybyfixture
   - type: Ammo
   - type: Projectile
     impactEffect: BulletImpactEffectOrangeDisabler

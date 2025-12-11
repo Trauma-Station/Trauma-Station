@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Shared._Shitmed.Body;
-using Content.Shared._Shitmed.Body.Part;
 using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Body.Part;
@@ -83,14 +82,15 @@ public sealed partial class DamageableSystem
         TargetBodyPart? targetPart = null,
         bool ignoreBlockers = false,
         SplitDamageBehavior splitDamage = SplitDamageBehavior.Split,
-        bool canMiss = true
+        bool canMiss = true,
         // </Shitmed>
+        EntityUid? tool = null
     )
     {
         //! Empty just checks if the DamageSpecifier is _literally_ empty, as in, is internal dictionary of damage types is empty.
         // If you deal 0.0 of some damage type, Empty will be false!
         return TryChangeDamage(ent, damage, out _, ignoreResistances, interruptsDoAfters, origin, ignoreGlobalModifiers,
-            canBeCancelled, partMultiplier, targetPart, ignoreBlockers, splitDamage, canMiss); // Shitmed
+            canBeCancelled, partMultiplier, targetPart, ignoreBlockers, splitDamage, canMiss, tool); // Shitmed
     }
 
     /// <summary>
@@ -118,14 +118,15 @@ public sealed partial class DamageableSystem
         TargetBodyPart? targetPart = null,
         bool ignoreBlockers = false,
         SplitDamageBehavior splitDamage = SplitDamageBehavior.Split,
-        bool canMiss = true
+        bool canMiss = true,
         // </Shitmed>
+        EntityUid? tool = null
     )
     {
         //! Empty just checks if the DamageSpecifier is _literally_ empty, as in, is internal dictionary of damage types is empty.
         // If you deal 0.0 of some damage type, Empty will be false!
         newDamage = ChangeDamage(ent, damage, ignoreResistances, interruptsDoAfters, origin, ignoreGlobalModifiers,
-            canBeCancelled, partMultiplier, targetPart, ignoreBlockers, splitDamage, canMiss); // Shitmed
+            canBeCancelled, partMultiplier, targetPart, ignoreBlockers, splitDamage, canMiss, tool); // Shitmed
         return !damage.Empty;
     }
 
@@ -153,8 +154,9 @@ public sealed partial class DamageableSystem
         TargetBodyPart? targetPart = null,
         bool ignoreBlockers = false,
         SplitDamageBehavior splitDamage = SplitDamageBehavior.Split,
-        bool canMiss = true
+        bool canMiss = true,
         // </Shitmed>
+        EntityUid? tool = null
     )
     {
         var damageDone = new DamageSpecifier();
@@ -198,20 +200,20 @@ public sealed partial class DamageableSystem
                 if (bodyPart.Body != null)
                 {
                     // First raise the event on the parent to apply any parent modifiers
-                    var parentEv = new DamageModifyEvent(bodyPart.Body.Value, damage, origin, target);
+                    var parentEv = new DamageModifyEvent(bodyPart.Body.Value, damage, origin, tool, target);
                     RaiseLocalEvent(bodyPart.Body.Value, parentEv);
                     damage = parentEv.Damage;
                 }
 
                 // Then raise on the part itself for any part-specific modifiers
-                var ev = new DamageModifyEvent(ent, damage, origin, target);
+                var ev = new DamageModifyEvent(ent, damage, origin, tool, target);
                 RaiseLocalEvent(ent, ev);
                 damage = ev.Damage;
             }
             else
             {
                 // Not a body part, just apply modifiers normally
-                var ev = new DamageModifyEvent(ent, damage, origin);
+                var ev = new DamageModifyEvent(ent, damage, origin, tool);
                 RaiseLocalEvent(ent, ev);
                 damage = ev.Damage;
             }
