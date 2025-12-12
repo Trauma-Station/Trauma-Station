@@ -1086,6 +1086,9 @@
   id: Pizza # Storage whitelist: FoodBoxPizza
 
 - type: Tag
+  id: PlantAnalyzer
+
+- type: Tag
   id: PKAUpgrade # UpgradeableGun whitelist for WeaponProtoKineticAccelerator.
 
 - type: Tag

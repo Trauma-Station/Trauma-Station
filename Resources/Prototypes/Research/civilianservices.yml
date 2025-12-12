@@ -56,6 +56,7 @@
   - SeedExtractorMachineCircuitboard
   - HydroponicsTrayMachineCircuitboard
   - ReagentGrinderIndustrialMachineCircuitboard
+  - PlantAnalyzer # Frontier
   # Goobstation R&D Console rework start
   position: -3,4
   technologyPrerequisites:
