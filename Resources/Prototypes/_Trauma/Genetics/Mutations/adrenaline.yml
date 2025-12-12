@@ -27,12 +27,12 @@
       # no Pump Up and using adrenaline instead of determination
       # synaptizine is a poison for some reason, so use stimulants instead
       reagents: [ Stimulants, Epinephrine ]
-      baseQuantity: 10
+      quantity: 5 # these are very strong so less amount than 13
       popup: MutationAdrenalineRush-inject-popup
     # no confusion system so theres no confusion reagent
     comedown:
       reagents: [ TiringSolution ]
-      baseQuantity: 7
+      quantity: 7
       popup: MutationAdrenalineRush-comedown-popup
     comedownDelay: 25
   - type: InstantAction

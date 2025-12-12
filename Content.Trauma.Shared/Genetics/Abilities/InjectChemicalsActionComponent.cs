@@ -29,7 +29,7 @@ public sealed partial class InjectChemicalsActionComponent : Component
     public InjectionConfig Comedown = default!;
 
     /// <summary>
-    /// Base comedown delay that can be modified by chromosomes.
+    /// How long to wait after injecting main chemicals to inject comedown chemicals.
     /// </summary>
     [DataField(required: true)]
     public TimeSpan ComedownDelay;
@@ -46,9 +46,9 @@ public partial record struct InjectionConfig
     /// </summary>
     public List<ProtoId<ReagentPrototype>> Reagents;
     /// <summary>
-    /// Quantity that can be scaled up/down depending on chromosomes.
+    /// Quantity for each reagent to add.
     /// </summary>
-    public FixedPoint2 BaseQuantity;
+    public FixedPoint2 Quantity;
     public LocId Popup;
 }
 

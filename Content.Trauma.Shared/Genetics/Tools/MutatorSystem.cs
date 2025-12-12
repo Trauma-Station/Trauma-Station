@@ -5,6 +5,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Content.Trauma.Shared.Genetics.Console;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Robust.Shared.Prototypes;
@@ -21,6 +22,9 @@ public sealed class MutatorSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+
+    private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
 
     public override void Initialize()
     {
@@ -39,9 +43,7 @@ public sealed class MutatorSystem : EntitySystem
 
         var msg = ent.Comp.Mutations.Count > 0
             ? "mutator-examine-loaded"
-            : ent.Comp.HasChromosome
-                ? "mutator-examine-chromosome"
-                : "mutator-examine-spent";
+            : "mutator-examine-spent";
         args.PushMarkup(Loc.GetString(msg));
     }
 
@@ -67,15 +69,6 @@ public sealed class MutatorSystem : EntitySystem
     {
         if (ent.Comp.Mutations.Count == 0)
         {
-            // TODO: general mutator recycling??
-            if (ent.Comp.HasChromosome && _console.TryAddRandomChromosome(target))
-            {
-                SetChromosome(ent, false);
-                _popup.PopupClient(Loc.GetString("mutator-added-chromosome"), user, user);
-                PredictedQueueDel(ent);
-                return;
-            }
-
             _popup.PopupClient(Loc.GetString("mutator-depleted"), user, user);
             return;
         }
@@ -128,8 +121,6 @@ public sealed class MutatorSystem : EntitySystem
         }
         else if (ent.Comp.Activator)
         {
-            // you get a free chromosome for using activator
-            SetChromosome(ent, true);
             _mutation.ActivateMutations(mutatable, ent.Comp.Mutations, predicted: true);
         }
         else
@@ -137,23 +128,12 @@ public sealed class MutatorSystem : EntitySystem
             _mutation.AddMutations(mutatable, ent.Comp.Mutations, predicted: true);
         }
 
-        // TODO: make chromosome shitcode use this instead
-        var ev = new MutatorUsedEvent(mutatable);
-        RaiseLocalEvent(ent, ref ev);
-
         // prevent reuse
         ent.Comp.Mutations.Clear();
         Dirty(ent);
         UpdateAppearance(ent);
-    }
-
-    private void SetChromosome(Entity<MutatorComponent> ent, bool present)
-    {
-        if (ent.Comp.HasChromosome == present)
-            return;
-
-        ent.Comp.HasChromosome = present;
-        Dirty(ent);
+        // allow recycling in disposals
+        _tag.AddTag(ent, TrashTag);
     }
 
     private void UpdateAppearance(Entity<MutatorComponent> ent)

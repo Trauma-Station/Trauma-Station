@@ -43,12 +43,6 @@ public sealed partial class MutationComponent : Component
     public bool Locked;
 
     /// <summary>
-    /// The chromosome this mutation was assigned in the genetics console.
-    /// </summary>
-    [DataField]
-    public Chromosome? Chromosome;
-
-    /// <summary>
     /// These mutations are required by this one.
     /// It cannot be added if any of them are missing.
     /// </summary>

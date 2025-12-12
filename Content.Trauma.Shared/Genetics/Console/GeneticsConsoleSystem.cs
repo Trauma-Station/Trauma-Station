@@ -311,8 +311,6 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
 
     #region Public API
 
-    public Chromosome RandomChromosome() => (Chromosome) _random.Next(0, 4);
-
     public static char CycleBase(char b, GeneticsCycle cycle)
         => (b, cycle) switch
         {
@@ -329,25 +327,6 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
             ('X', GeneticsCycle.Last) => 'T',
             _ => b // how
         };
-
-    public bool TryAddRandomChromosome(Entity<GeneticsConsoleComponent?> ent)
-    {
-        if (!_query.Resolve(ent, ref ent.Comp))
-            return false;
-
-        if (_net.IsServer)
-            AddChromosome(ent.AsNullable(), RandomChromosome());
-        return true;
-    }
-
-    public void AddChromosome(Entity<GeneticsConsoleComponent> ent, Chromosome chromosome, int n = 1)
-    {
-        ent.Comp.Chromosomes[(int) chromosome] += n;
-        DirtyField(ent, nameof(GeneticsConsoleComponent.Chromosomes));
-    }
-
-    public void RemoveChromosome(Entity<GeneticsConsoleComponent> ent, Chromosome chromosome, int n = 1)
-        => AddChromosome(ent, chromosome, -n);
 
     /// <summary>
     /// Tries to sequences a mutation, either activating it in the mob or damaging it.

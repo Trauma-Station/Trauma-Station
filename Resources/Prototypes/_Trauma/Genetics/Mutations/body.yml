@@ -150,7 +150,6 @@
   description: A chronic twitch that forces the user to scream bad words.
   components:
   - type: RandomTrigger
-    # TODO: make this be affected by synchronizer chromosome
     prob: 0.05
   - type: EntityEffectOnTrigger
     effects:
@@ -283,7 +282,6 @@
     - MutationHeatAdaptation
     # TG does not have it incompatible with thermal adaptation :) have fun
   - type: RandomTrigger
-    # TODO: (0.0005 + instability/0.195) * synchronized chromosome
     prob: 0.0005 # 0.05%
   - type: EntityEffectOnTrigger
     effects:
@@ -313,8 +311,7 @@
     - type: ChaoticJump # technically anom infection can add this too but idgaf
       jumpMinInterval: 15 # these are also the exact values anoms use
       jumpMaxInterval: 25
-      # TODO: multiply interval by energy chromo
-      rangeMin: 10 # TODO: multiply by power
+      rangeMin: 10
       rangeMax: 15
       effect: PuddleSparkle # TODO: copy shit from tg
 

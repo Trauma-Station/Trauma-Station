@@ -20,12 +20,6 @@ genetics-console-linking-you = {CAPITALIZE($user)} starts linking you to {POSS-A
 genetics-console-linking-others = {CAPITALIZE($user)} starts linking {$target} to {POSS-ADJ($user)} {$scanner}
 genetics-console-linked = Target linked successfully
 
-chromosome-count = {$name} ({$count}x)
-chromosome-Synchronizer = Synchronizer
-chromosome-Stabilizer = Stabilizer
-chromosome-Power = Power
-chromosome-Energetic = Energetic
-
 ## UI ##
 
 genetics-console-window-title = Genetics Console 3000

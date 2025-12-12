@@ -22,7 +22,6 @@ public sealed class InjectChemicalsActionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<InjectChemicalsActionComponent, InjectChemicalsActionEvent>(OnAction);
-        // TODO CHROMO
     }
 
     public override void Update(float frameTime)
@@ -51,7 +50,7 @@ public sealed class InjectChemicalsActionSystem : EntitySystem
     {
         _popup.PopupClient(Loc.GetString(ent.Comp.Main.Popup), target, target);
         ent.Comp.NextComedown = _timing.CurTime + ent.Comp.ComedownDelay;
-        Inject(target, ent.Comp.Main.Reagents, ent.Comp.Main.BaseQuantity);
+        Inject(target, ent.Comp.Main.Reagents, ent.Comp.Main.Quantity);
     }
 
     private void Comedown(Entity<InjectChemicalsActionComponent> ent)
@@ -61,8 +60,7 @@ public sealed class InjectChemicalsActionSystem : EntitySystem
 
         _popup.PopupClient(Loc.GetString(ent.Comp.Comedown.Popup), target, target);
         ent.Comp.NextComedown = null;
-        // TODO CHROMO
-        Inject(target, ent.Comp.Comedown.Reagents, ent.Comp.Comedown.BaseQuantity);
+        Inject(target, ent.Comp.Comedown.Reagents, ent.Comp.Comedown.Quantity);
     }
 
     private void Inject(EntityUid target, List<ProtoId<ReagentPrototype>> reagents, FixedPoint2 quantity)

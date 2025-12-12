@@ -1,8 +1,6 @@
-mutator-added-chromosome = New chromosome added to storage.
 mutator-depleted = It's empty.
 mutator-examine-loaded = It is loaded with a mutagen.
 mutator-examine-spent = Its mutagen is spent.
-mutator-examine-chromosome = Its mutagen is spent. Genetic material is stored inside.
 
 mutator-cant-mutate = {CAPITALIZE($target)} can't be mutated
 

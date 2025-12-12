@@ -21,13 +21,6 @@ public sealed partial class MutatorComponent : Component
     public List<EntProtoId<MutationComponent>> Mutations = new();
 
     /// <summary>
-    /// A chromosome was gained by using an <see cref="Activator"/> successfully.
-    /// This can be used on a genetics computer to add a random chromosome to its storage.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool HasChromosome;
-
-    /// <summary>
     /// Uses ActivateMutation instead of AddMutation, so it'll only do anything for Dormant mutations.
     /// </summary>
     [DataField]
@@ -48,12 +41,6 @@ public sealed partial class MutatorComponent : Component
     [DataField]
     public TimeSpan InjectTime = TimeSpan.FromSeconds(3);
 }
-
-/// <summary>
-/// Event raised on the mutator when it injects a valid target.
-/// </summary>
-[ByRefEvent]
-public record struct MutatorUsedEvent(Entity<MutatableComponent> Target);
 
 [Serializable, NetSerializable]
 public enum MutatorVisuals : byte

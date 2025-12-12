@@ -19,12 +19,6 @@ namespace Content.Trauma.Shared.Genetics.Console;
 public sealed partial class GeneticsConsoleComponent : Component
 {
     /// <summary>
-    /// The number of each stored chromosome, indexed by its integer value
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public int[] Chromosomes = new int[4];
-
-    /// <summary>
     /// Subjects with more than this number of genetic damage can't be sequenced etc.
     /// </summary>
     [DataField]

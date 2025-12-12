@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Kitchen.Components;
+using Content.Shared.Kitchen;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Robust.Shared.Prototypes;
 

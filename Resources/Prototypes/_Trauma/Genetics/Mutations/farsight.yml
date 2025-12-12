@@ -7,6 +7,5 @@
   - type: Mutation
     instability: 10
     difficulty: 16
-  # TODO: power chromosome increases range by 3 instead of 1
   - type: MaxZoomMutation
     modifier: 1.1 # a bit more than 1 tile increase
