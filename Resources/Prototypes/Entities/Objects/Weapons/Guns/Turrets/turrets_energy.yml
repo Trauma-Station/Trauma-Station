@@ -77,7 +77,7 @@
   - type: NpcFactionMember
     factions:
     - AllHostile
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletEnergyTurretDisabler
     fireCost: 100
   - type: BatteryWeaponFireModes

@@ -1,17 +1,11 @@
-// <Trauma>
-using Content.Shared._White.Blocking;
-using Content.Shared.Containers.ItemSlots;
-using Content.Shared.PowerCell.Components;
-// </Trauma>
 using Content.Shared.Emp;
 using Content.Shared.Power.Components;
+using JetBrains.Annotations;
 
 namespace Content.Shared.Power.EntitySystems;
 
-public abstract class SharedBatterySystem : EntitySystem
+public abstract partial class SharedBatterySystem : EntitySystem // Trauma - partial
 {
-    [Dependency] private readonly ItemSlotsSystem _slots = default!; // _Trauma
-
     public override void Initialize()
     {
         base.Initialize();
@@ -19,53 +13,75 @@ public abstract class SharedBatterySystem : EntitySystem
         SubscribeLocalEvent<BatteryComponent, EmpPulseEvent>(OnEmpPulse);
     }
 
-    private void OnEmpPulse(Entity<BatteryComponent> entity, ref EmpPulseEvent args)
+    private void OnEmpPulse(Entity<BatteryComponent> ent, ref EmpPulseEvent args)
     {
         args.Affected = true;
         // <Goob> - rechargeable blocking system handles it
-        if (!HasComp<RechargeableBlockingComponent>(entity))
+        if (!ShouldDisable(ent))
             args.Disabled = true;
         // </Goob>
-        UseCharge(entity, args.EnergyConsumption, entity.Comp);
+        UseCharge(ent.AsNullable(), args.EnergyConsumption);
         // Apply a cooldown to the entity's self recharge if needed to avoid it immediately self recharging after an EMP.
-        TrySetChargeCooldown(entity);
+        TrySetChargeCooldown(ent.Owner);
     }
 
-    public virtual float UseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
-    {
-        return 0f;
-    }
-
-    public virtual void SetMaxCharge(EntityUid uid, float value, BatteryComponent? battery = null) { }
-
-    public virtual float ChangeCharge(EntityUid uid, float value, BatteryComponent? battery = null)
+    /// <summary>
+    /// Changes the battery's charge by the given amount
+    /// and resets the self-recharge cooldown if it exists.
+    /// A positive value will add charge, a negative value will remove charge.
+    /// </summary>
+    /// <returns>The actually changed amount.</returns>
+    [PublicAPI]
+    public virtual float ChangeCharge(Entity<BatteryComponent?> ent, float amount)
     {
         return 0f;
     }
 
     /// <summary>
-    /// Checks if the entity has a self recharge and puts it on cooldown if applicable.
+    /// Removes the given amount of charge from the battery
+    /// and resets the self-recharge cooldown if it exists.
     /// </summary>
-    public virtual void TrySetChargeCooldown(EntityUid uid, float value = -1) { }
+    /// <returns>The actually changed amount.</returns>
+    [PublicAPI]
+    public virtual float UseCharge(Entity<BatteryComponent?> ent, float amount)
+    {
+        return 0f;
+    }
 
-    public virtual bool TryUseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
+    /// <summary>
+    /// If sufficient charge is available on the battery, use it. Otherwise, don't.
+    /// Resets the self-recharge cooldown if it exists.
+    /// Always returns false on the client.
+    /// </summary>
+    /// <returns>If the full amount was able to be removed.</returns>
+    [PublicAPI]
+    public virtual bool TryUseCharge(Entity<BatteryComponent?> ent, float amount)
     {
         return false;
     }
 
     /// <summary>
-    /// Trauma - Gets the battery for an entity either if it is a battery, or from its power cell if it has a slot.
+    /// Sets the battery's charge.
     /// </summary>
-    public Entity<BatteryComponent>? GetBattery(EntityUid uid)
-    {
-        if (TryComp<BatteryComponent>(uid, out var battery))
-            return (uid, battery);
+    [PublicAPI]
+    public virtual void SetCharge(Entity<BatteryComponent?> ent, float value) { }
 
-        // not a battery and no slot found
-        if (!TryComp<PowerCellSlotComponent>(uid, out var slotComp) ||
-            _slots.GetItemOrNull(uid, slotComp.CellSlotId) is not {} cell)
-            return null;
+    /// <summary>
+    /// Sets the battery's maximum charge.
+    /// </summary>
+    [PublicAPI]
+    public virtual void SetMaxCharge(Entity<BatteryComponent?> ent, float value) { }
 
-        return GetBattery(cell);
-    }
+    /// <summary>
+    /// Checks if the entity has a self recharge and puts it on cooldown if applicable.
+    /// Uses the cooldown time given in the component.
+    /// </summary>
+    [PublicAPI]
+    public virtual void TrySetChargeCooldown(Entity<BatterySelfRechargerComponent?> ent) { }
+
+    /// <summary>
+    /// Puts the entity's self recharge on cooldown for the specified time.
+    /// </summary>
+    [PublicAPI]
+    public virtual void SetChargeCooldown(Entity<BatterySelfRechargerComponent?> ent, TimeSpan cooldown) { }
 }

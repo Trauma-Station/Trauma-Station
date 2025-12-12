@@ -11,10 +11,12 @@
   description: Contains one car, Clown not included
   suffix: Uplink item
   components:
-  - type: StorageFill
-    contents:
-    - id: VehicleClowncarAntag
-    - id: BikeHorn
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: VehicleClowncarAntag
+        - id: BikeHorn
 
 - type: entity
   id: CrateFunClownCarNukieUplink
@@ -23,11 +25,13 @@
   description: Contains one car, Clown not included
   suffix: Uplink item
   components:
-  - type: StorageFill
-    contents:
-    - id: VehicleClowncarAntag
-    - id: BikeHorn
-    - id: ClumsyImplanter
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: VehicleClowncarAntag
+        - id: BikeHorn
+        - id: ClumsyImplanter
 
 - type: entity
   id: CrateFunClownCarCargo
@@ -36,10 +40,12 @@
   suffix: Cargo Order
   description: Contains one car, Clown not included
   components:
-  - type: StorageFill
-    contents:
-    - id: VehicleClowncarTrainee
-    - id: BikeHorn
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: VehicleClowncarTrainee
+        - id: BikeHorn
 
 - type: entity
   id: CrateFunClownCarTesting
@@ -48,8 +54,10 @@
   suffix: for testing
   description: for the cursed clown
   components:
-  - type: StorageFill
-    contents:
-    - id: VehicleClowncarAntag
-    - id: BikeHorn
-    - id: DrinkIrishCarBomb
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: VehicleClowncarAntag
+        - id: BikeHorn
+        - id: DrinkIrishCarBomb

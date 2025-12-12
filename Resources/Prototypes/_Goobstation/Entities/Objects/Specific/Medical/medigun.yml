@@ -67,14 +67,13 @@
   suffix: Battery
   id: MedicalBeamGunBattery
   components:
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 20
     startingCharge: 20
   - type: RechargeableBlocking
     chargedRechargeRate: 0
     dischargedRechargeRate: 1
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 0
 
 - type: entity
@@ -109,12 +108,11 @@
   id: MedicalBeamGunSyndicateBattery
   components:
   # Less overall battery, faster recharging
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 15
     startingCharge: 15
   - type: RechargeableBlocking
     chargedRechargeRate: 0
     dischargedRechargeRate: 1.5
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 0

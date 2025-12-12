@@ -84,7 +84,10 @@
         layer:
         - MobLayer
   - type: Bloodstream
-    bloodReagent: FluorosulfuricAcid
+    bloodReagents:
+      reagents:
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 1
     bloodMaxVolume: 250
     bloodlossDamage:
       types:
@@ -164,7 +167,6 @@
   - type: Inventory
     templateId: xenomorph
   - type: Stripping
-  - type: SurgeryTarget
   - type: UserInterface
     interfaces:
       enum.StrippingUiKey.Key:
@@ -172,8 +174,6 @@
       enum.InstrumentUiKey.Key:
         type: InstrumentBoundUserInterface
         requireInputValidation: false
-      enum.SurgeryUIKey.Key:
-        type: SurgeryBui
   - type: RotationVisuals
     defaultRotation: 90
     horizontalRotation: 90

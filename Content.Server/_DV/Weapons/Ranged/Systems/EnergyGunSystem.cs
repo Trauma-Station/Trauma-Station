@@ -128,44 +128,41 @@ public sealed class EnergyGunSystem : EntitySystem
 
         component.CurrentFireMode = fireMode;
 
-        if (TryComp(uid, out ProjectileBatteryAmmoProviderComponent? projectileBatteryAmmoProvider))
+        // kys shitcoder that wrote all this
+        // also no fucking reason for this to be in server either
+        if (!TryComp(uid, out BatteryAmmoProviderComponent? battery))
+            return;
+        if (!_prototypeManager.Resolve(fireMode.Prototype, out var prototype))
+            return;
+
+        battery.Prototype = fireMode.Prototype;
+        battery.FireCost = fireMode.FireCost;
+        Dirty(uid, battery);
+
+        if (user != null)
+            _popupSystem.PopupEntity(Loc.GetString("gun-set-fire-mode", ("mode", component.CurrentFireMode.Name != string.Empty ? component.CurrentFireMode.Name : prototype.Name)), uid, user.Value);
+
+        if (component.CurrentFireMode.State == string.Empty)
+            return;
+
+        _item.SetHeldPrefix(uid, component.CurrentFireMode.State);
+        switch (component.CurrentFireMode.State) // Holy shit this is shitcoded.
         {
-            if (!_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var prototype))
-                return;
-
-            projectileBatteryAmmoProvider.Prototype = fireMode.Prototype;
-            projectileBatteryAmmoProvider.FireCost = fireMode.FireCost;
-
-            if (user != null)
-            {
-                _popupSystem.PopupEntity(Loc.GetString("gun-set-fire-mode", ("mode", component.CurrentFireMode.Name != string.Empty ? component.CurrentFireMode.Name : prototype.Name)), uid, user.Value);
-            }
-
-            if (component.CurrentFireMode.State == string.Empty)
-                return;
-
-            if (TryComp<AppearanceComponent>(uid, out var _) && TryComp<ItemComponent>(uid, out var item))
-            {
-                _item.SetHeldPrefix(uid, component.CurrentFireMode.State, component: item);
-                switch (component.CurrentFireMode.State) // Holy shit this is shitcoded.
-                {
-                    case "disabler":
-                        UpdateAppearance(uid, EnergyGunFireModeState.Disabler);
-                        break;
-                    case "lethal":
-                        UpdateAppearance(uid, EnergyGunFireModeState.Lethal);
-                        break;
-                    case "special":
-                        UpdateAppearance(uid, EnergyGunFireModeState.Special);
-                        break;
-                    case "heating":
-                        UpdateAppearance(uid, EnergyGunFireModeState.Heating);
-                        break;
-                    case "cooling":
-                        UpdateAppearance(uid, EnergyGunFireModeState.Cooling);
-                        break;
-                }
-            }
+            case "disabler":
+                UpdateAppearance(uid, EnergyGunFireModeState.Disabler); // FUN FACT YOU CAN USE A STRING AS APPEARANCE DATA, FUCKING IDIOT!
+                break;
+            case "lethal":
+                UpdateAppearance(uid, EnergyGunFireModeState.Lethal);
+                break;
+            case "special":
+                UpdateAppearance(uid, EnergyGunFireModeState.Special);
+                break;
+            case "heating":
+                UpdateAppearance(uid, EnergyGunFireModeState.Heating);
+                break;
+            case "cooling":
+                UpdateAppearance(uid, EnergyGunFireModeState.Cooling);
+                break;
         }
     }
 

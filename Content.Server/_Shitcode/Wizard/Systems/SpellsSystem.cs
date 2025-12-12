@@ -22,7 +22,6 @@ using Content.Server.Explosion.EntitySystems;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Inventory;
 using Content.Server.Polymorph.Systems;
-using Content.Server.Power.EntitySystems;
 using Content.Server.Singularity.EntitySystems;
 using Content.Server.Spreader;
 using Content.Server.Store.Components;
@@ -55,6 +54,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Roles.Components;
 using Content.Shared.Speech.Components;
@@ -95,7 +95,7 @@ public sealed class SpellsSystem : SharedSpellsSystem
     [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
+    [Dependency] private readonly PredictedBatterySystem _battery = default!;
     [Dependency] private readonly TeleportSystem _teleport = default!;
     [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -647,21 +647,25 @@ public sealed class SpellsSystem : SharedSpellsSystem
 
     protected override bool ChargeItem(EntityUid uid, ChargeMagicEvent ev)
     {
-        if (!TryComp(uid, out BatteryComponent? battery) || battery.CurrentCharge >= battery.MaxCharge)
+        if (!TryComp(uid, out PredictedBatteryComponent? battery))
+            return false;
+
+        var current = _battery.GetCharge((uid, battery));
+        if (current >= battery.MaxCharge)
             return false;
 
         if (Tag.HasTag(uid, ev.WandTag))
         {
-            var difference = battery.MaxCharge - battery.CurrentCharge;
+            var difference = battery.MaxCharge - current;
             var charge = MathF.Min(difference, ev.WandChargeRate);
             var degrade = charge * ev.WandDegradePercentagePerCharge;
             var afterDegrade = MathF.Max(ev.MinWandDegradeCharge, battery.MaxCharge - degrade);
             if (battery.MaxCharge > ev.MinWandDegradeCharge)
-                _battery.SetMaxCharge(uid, afterDegrade, battery);
-            _battery.AddCharge(uid, charge, battery);
+                _battery.SetMaxCharge((uid, battery), afterDegrade);
+            _battery.ChangeCharge((uid, battery), charge);
         }
         else
-            _battery.SetCharge(uid, battery.MaxCharge, battery);
+            _battery.SetCharge((uid, battery), battery.MaxCharge);
 
         PopupCharged(uid, ev.Performer, false);
         return true;

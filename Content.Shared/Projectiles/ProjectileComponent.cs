@@ -1,6 +1,6 @@
 // <Trauma>
 using System.Numerics;
-using Robust.Shared.Map; // Goobstation
+using Robust.Shared.Map;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 // </Trauma>

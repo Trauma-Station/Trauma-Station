@@ -18,7 +18,7 @@
     slots:
       - suitStorage
       - Belt
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 1000
     startingCharge: 1000
   - type: AmmoSelector

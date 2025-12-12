@@ -178,8 +178,10 @@
   parent: SuitStorageBase
   suffix: Medical Responsory Modsuit
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
         - id: OxygenTankFilled
         - id: ClothingModsuitResponsoryMedical
         - id: ClothingMaskBreath

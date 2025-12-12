@@ -139,8 +139,9 @@ public abstract class SharedChangelingBiomassSystem : EntitySystem
                 return;
             }
 
-            var cough = new Solution();
-            cough.AddReagent(bloodComp.BloodReagent, ent.Comp.BloodCoughAmount);
+            var cough = bloodComp.BloodReagents;
+            cough = cough.Clone(); // don't modify the original blood...
+            cough.ScaleTo(ent.Comp.BloodCoughAmount);
 
             _puddle.TrySpillAt(Transform(ent).Coordinates, cough, out _, false);
             DoCough(ent);

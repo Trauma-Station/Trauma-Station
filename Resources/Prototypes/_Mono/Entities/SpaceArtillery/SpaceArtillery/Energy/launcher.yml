@@ -14,7 +14,7 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 2000
     startingCharge: 2000
   - type: ExaminableBattery
@@ -32,7 +32,7 @@
     powerUsePassive: 2000
     powerUseActive: 0
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipRubiconProjectile
     fireCost: 400
   - type: Destructible
@@ -76,7 +76,7 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 3000
     startingCharge: 3000
   - type: ExaminableBattery
@@ -89,15 +89,14 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon2.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
-  #- type: BatterySelfRecharger
-  #  autoRecharge: true
+  #- type: PredictedBatterySelfRecharger
   #  autoRechargeRate: 350
   - type: SpaceArtillery
     powerChargeRate: 100
     powerUsePassive: 500
     powerUseActive: 0
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipMediumPlasmaProjectile
     fireCost: 1000
   - type: Destructible
@@ -140,7 +139,7 @@
     state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 20000
     startingCharge: 20000
   - type: ExaminableBattery
@@ -165,7 +164,7 @@
     powerUsePassive: 20000
     powerUseActive: 0
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipDymereProjectile
     fireCost: 20000
   - type: RadarBlip

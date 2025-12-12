@@ -863,7 +863,7 @@ entities:
     - type: Transform
       pos: -5.5,-9.5
       parent: 2
-- proto: BoxFolderBlue
+- proto: BoxFolderBlueEmpty
   entities:
   - uid: 33
     components:
@@ -932,8 +932,6 @@ entities:
         52:
           position: 4,3
           _rotation: South
-    - type: StorageFill
-      contents: []
     - type: ContainerContainer
       containers:
         storagebase: !type:Container

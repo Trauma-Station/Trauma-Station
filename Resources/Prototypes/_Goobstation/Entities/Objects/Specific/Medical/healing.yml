@@ -120,10 +120,11 @@
   components:
   - type: Label
     currentLabel: tramadol 7.5u
-  - type: StorageFill
-    contents:
-    - id: PillTramadol
-      amount: 15
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: PillTramadol
+        amount: 15
 
 - type: entity
   name: pill
@@ -153,10 +154,11 @@
   components:
   - type: Label
     currentLabel: oxycodone 5u
-  - type: StorageFill
-    contents:
-    - id: PillOxycodone
-      amount: 15
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: PillOxycodone
+        amount: 15
 
 - type: entity
   name: pill
@@ -186,10 +188,11 @@
   components:
   - type: Label
     currentLabel: Ibuprofen 10u
-  - type: StorageFill
-    contents:
-    - id: PillIbuprofen
-      amount: 15
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: PillIbuprofen
+        amount: 15
 
 - type: entity
   parent: PrefilledSyringe

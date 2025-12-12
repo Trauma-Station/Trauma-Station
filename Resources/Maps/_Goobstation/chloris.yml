@@ -235561,15 +235561,11 @@ entities:
     - type: Transform
       pos: 19.5,121.5
       parent: 2
-    - type: RandomSpawner
-      chance: 0.5
   - uid: 35912
     components:
     - type: Transform
       pos: 19.5,120.5
       parent: 2
-    - type: RandomSpawner
-      chance: 0.5
   - uid: 35913
     components:
     - type: Transform

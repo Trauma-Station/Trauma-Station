@@ -28,15 +28,16 @@
   - type: Damageable
     damageContainer: Inorganic
   - type: Bloodstream
-    bloodReagent: Oil
+    bloodReagents:
+      reagents:
+      - ReagentId: Oil
+        Quantity: 1
     bloodlossDamage:
       types:
-        Bloodloss:
-          1
+        Bloodloss: 1
     bloodlossHealDamage:
       types:
-        Bloodloss:
-          -1
+        Bloodloss: -1
   - type: InteractionOutline
   - type: Fixtures
     fixtures:

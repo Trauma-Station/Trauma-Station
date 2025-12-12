@@ -1,0 +1,19 @@
+- type: cargoProduct
+  id: FoodPizzaLarge
+  icon:
+    sprite: Objects/Consumable/Food/Baked/pizza.rsi
+    state: margherita
+  product: CrateFoodPizzaLarge
+  cost: 6000
+  category: cargoproduct-category-name-food
+  group: market
+
+- type: cargoProduct
+  id: FoodSoftdrinksLarge
+  icon:
+    sprite: Objects/Consumable/Drinks/colabottle.rsi
+    state: icon
+  product: CrateFoodSoftdrinksLarge
+  cost: 5000
+  category: cargoproduct-category-name-food
+  group: market

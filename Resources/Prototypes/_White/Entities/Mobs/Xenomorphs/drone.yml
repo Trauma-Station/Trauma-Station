@@ -61,8 +61,6 @@
       enum.InstrumentUiKey.Key:
         type: InstrumentBoundUserInterface
         requireInputValidation: false
-      enum.SurgeryUIKey.Key:
-        type: SurgeryBui
       enum.RadialSelectorUiKey.Key:
         type: TrackedRadialSelectorMenuBUI
 

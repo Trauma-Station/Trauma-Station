@@ -77,9 +77,11 @@
   parent: SuitStorageBase
   suffix: Spirate
   components:
-  - type: StorageFill
-    contents:
-    - id: OxygenTankFilled
-    - id: NitrogenTankFilled
-    - id: GoobClothingOuterHardsuitSpirate
-    - id: ClothingMaskBreath
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: OxygenTankFilled
+        - id: NitrogenTankFilled
+        - id: GoobClothingOuterHardsuitSpirate
+        - id: ClothingMaskBreath

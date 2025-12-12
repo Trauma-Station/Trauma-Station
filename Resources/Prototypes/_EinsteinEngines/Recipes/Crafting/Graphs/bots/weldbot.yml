@@ -24,11 +24,11 @@
           state: icon
         name: construction-graph-tag-welding-mask
         doAfter: 2
-      - tag: WeldingTool
+      - tag: WelderExperimental # Trauma - Weldbot requires experimental welder
         icon:
-          sprite: Objects/Tools/welder.rsi
+          sprite: Objects/Tools/welder_experimental.rsi
           state: icon
-        name: construction-graph-tag-welding-tool
+        name: construction-graph-tag-welder-experimental
         doAfter: 2
   - node: bot
     entity: MobWeldbot

@@ -12,12 +12,14 @@
   id: BoxReagentGrenades
   description: A box full of lube & glue grenades.
   components:
-  - type: StorageFill
-    contents:
-    - id: LubeGrenade
-      amount: 2
-    - id: GlueGrenade
-      amount: 2
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: LubeGrenade
+          amount: 2
+        - id: GlueGrenade
+          amount: 2
   - type: Sprite
     layers:
     - state: box
@@ -29,10 +31,11 @@
   id: SyndicateLollypopBundle
   description: A box full of Donk co. candy. What could be inside?
   components:
-  - type: StorageFill
-    contents:
-    - id: FoodSnackLollypopWrappedMysteryEvil
-      amount: 9
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: FoodSnackLollypopWrappedMysteryEvil
+        amount: 9
   - type: Sprite
     layers:
     - state: box_of_doom

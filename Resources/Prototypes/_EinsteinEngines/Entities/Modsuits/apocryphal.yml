@@ -186,8 +186,10 @@
   parent: SuitStorageBase
   suffix: Apocryphal Modsuit
   components:
-    - type: StorageFill
-      contents:
-          - id: OxygenTankFilled
-          - id: ClothingModsuitApocryphal
-          - id: ClothingMaskBreath
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: OxygenTankFilled
+        - id: ClothingModsuitApocryphal
+        - id: ClothingMaskBreath

@@ -7,7 +7,7 @@
 using System.Linq;
 using Content.Goobstation.Shared.Nightmare;
 using Content.Goobstation.Shared.Nightmare.Components;
-using Content.Server.PowerCell;
+using Content.Shared.PowerCell;
 using Content.Shared.Actions;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
@@ -17,6 +17,7 @@ using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Goobstation.Server.Nightmare;
 
+// TODO: move this to shared and predict it
 /// <summary>
 /// This handles the Light Eater system.
 /// Light Eater is an armblade that ashes any light that it attacks.

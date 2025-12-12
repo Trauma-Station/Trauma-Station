@@ -12,9 +12,10 @@
   name: gondola crate
   description: A crate containing a gondola.
   components:
-    - type: StorageFill
-      contents:
-        - id: MobGondola
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: MobGondola
 
 - type: entity
   id: CrateNPCLootbug
@@ -22,7 +23,8 @@
   name: crate of lootbugs
   description: A crate containing three lootbugs.
   components:
-  - type: StorageFill
-    contents:
-      - id: MobLootbug
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: MobLootbug
         amount: 3

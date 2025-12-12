@@ -10,11 +10,13 @@
   parent: ClothingAbductorBelt
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-      - id: CrowbarAbductor
-      - id: WrenchAbductor
-      - id: ScrewdriverAbductor
-      - id: WirecutterAbductor
-      - id: WelderAbductor
-      - id: MultitoolAbductor
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CrowbarAbductor
+        - id: WrenchAbductor
+        - id: ScrewdriverAbductor
+        - id: WirecutterAbductor
+        - id: WelderAbductor
+        - id: MultitoolAbductor

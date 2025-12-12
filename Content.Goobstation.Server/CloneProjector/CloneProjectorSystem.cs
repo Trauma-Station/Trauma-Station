@@ -351,7 +351,7 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
         {
             if (slot.ContainedEntity is not { } item
                 || _whitelist.IsWhitelistFail(projector.ClonedItemWhitelist, item)
-                || _whitelist.IsBlacklistPass(projector.ClonedItemBlacklist, item))
+                || _whitelist.IsWhitelistPass(projector.ClonedItemBlacklist, item))
                 continue;
 
             var proto = Prototype(item);
@@ -462,6 +462,6 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
 
     private bool CanUseProjector(Entity<CloneProjectorComponent> projector, EntityUid user)
     {
-        return _whitelist.IsBlacklistFail(projector.Comp.UserBlacklist, user);
+        return _whitelist.IsWhitelistFail(projector.Comp.UserBlacklist, user);
     }
 }

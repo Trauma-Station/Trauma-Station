@@ -12,9 +12,10 @@
   id: BoxSyringePax
   description: A box full of tranquilizer syringes.
   components:
-  - type: StorageFill
-    contents:
-      - id: SyringePax
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: SyringePax
         amount: 6
   - type: Sprite
     layers:
@@ -27,10 +28,11 @@
   id: BoxSyringePoison
   description: A box full of quick-acting poison syringes.
   components:
-  - type: StorageFill
-    contents:
-    - id: SyringePoisonCentcomm
-      amount: 6
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: SyringePoisonCentcomm
+        amount: 6
   - type: Sprite
     layers:
     - state: box

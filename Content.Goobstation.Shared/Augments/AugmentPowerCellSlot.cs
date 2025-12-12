@@ -7,7 +7,7 @@ namespace Content.Goobstation.Shared.Augments;
 /// <summary>
 /// Component for entities that serve as AugmentPowerCellSlot organs
 /// <summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, Access(typeof(AugmentPowerCellSystem))]
 public sealed partial class AugmentPowerCellSlotComponent : Component
 {
     /// <summary>

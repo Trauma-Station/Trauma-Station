@@ -20,6 +20,7 @@ using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Server._Shitmed.ItemSwitch;
 
+// TODO: MOVE THIS SHITCODE TO GOOB.SHARED!!!!!!!
 public sealed class ItemSwitchSystem : SharedItemSwitchSystem
 {
     [Dependency] private readonly SharedBatterySystem _battery = default!;
@@ -73,11 +74,10 @@ public sealed class ItemSwitchSystem : SharedItemSwitchSystem
     private void OnMeleeAttack(Entity<ItemSwitchComponent> ent, ref MeleeHitEvent args)
     {
         if (!ent.Comp.NeedsPower
-            || !TryComp<BatteryComponent>(ent, out var battery)
             || !ent.Comp.States.TryGetValue(ent.Comp.State, out var state))
             return;
 
-        _battery.TryUseCharge(ent, state.EnergyPerUse, battery);
+        _battery.TryUseCharge(ent.Owner, state.EnergyPerUse);
     }
 
     private void OnAttemptMelee(EntityUid uid, ItemSwitchComponent component, ref AttemptMeleeEvent args)

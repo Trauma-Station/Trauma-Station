@@ -19,13 +19,15 @@
   name: Cybersun gygax bundle
   description: Contains a set of Cybersan light armored mechs.
   components:
-  - type: StorageFill
-    contents:
-      - id: MechGygaxSyndieFilled
-      - id: DoubleEmergencyOxygenTankFilled
-      - id: DoubleEmergencyNitrogenTankFilled
-      - id: ToolboxSyndicateFilled
-      - id: PlushieNuke
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: MechGygaxSyndieFilled
+        - id: DoubleEmergencyOxygenTankFilled
+        - id: DoubleEmergencyNitrogenTankFilled
+        - id: ToolboxSyndicateFilled
+        - id: PlushieNuke
 
 - type: entity
   id: CrateCybersunMaulerBundle
@@ -34,13 +36,15 @@
   name: Cybersun mauler bundle
   description: Contains a set of Cybersan heavy armored mechs.
   components:
-  - type: StorageFill
-    contents:
-      - id: MechMaulerSyndieFilled
-      - id: DoubleEmergencyOxygenTankFilled
-      - id: DoubleEmergencyNitrogenTankFilled
-      - id: ToolboxSyndicateFilled
-      - id: PlushieNuke
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: MechMaulerSyndieFilled
+        - id: DoubleEmergencyOxygenTankFilled
+        - id: DoubleEmergencyNitrogenTankFilled
+        - id: ToolboxSyndicateFilled
+        - id: PlushieNuke
 
 - type: entity
   id: CrateSyndicateBulkMosin
@@ -49,8 +53,10 @@
   name: Syndicate bulk rifle crate
   description: Just use more rifles, comrade.
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
         - id: WeaponSniperMosin
           amount: 10
         - id: ClothingHeadHatUshanka
@@ -64,13 +70,15 @@
   name: cybersun dreadnought bundle
   description: "An advanced cybersun dreadnought bundle."
   components:
-  - type: StorageFill
-    contents:
-      - id: ClothingOuterHardsuitCybersunDreadnought
-      - id: ClothingMaskGasSyndicate
-      - id: ClothingHandsGlovesCombat
-      - id: DoubleEmergencyOxygenTankFilled
-      - id: DoubleEmergencyNitrogenTankFilled
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingOuterHardsuitCybersunDreadnought
+        - id: ClothingMaskGasSyndicate
+        - id: ClothingHandsGlovesCombat
+        - id: DoubleEmergencyOxygenTankFilled
+        - id: DoubleEmergencyNitrogenTankFilled
 
 - type: entity
   id: CratePizzaParty
@@ -79,32 +87,19 @@
   description: In the ultimate event that all else has failed, Find comfort in that more pizza solves everything. Includes 16 pizzas.
   suffix: "bombs"
   components:
-  - type: StorageFill
-    contents:     #to avoid them from being easily identifiable (8 pizza bomb + 8 regular pizzas)
-    - id: FoodBoxPizzaFilled
-      amount: 1
-    - id: FoodBoxPizzaBomb
-      amount: 2
-    - id: FoodBoxPizzaFilled
-      amount: 2
-    - id: FoodBoxPizzaBomb
-      amount : 1
-    - id: FoodBoxPizzaCotton
-      amount : 1
-    - id: FoodBoxPizzaBomb
-      amount : 2
-    - id: FoodBoxPizzaFilled
-      amount: 2
-    - id: FoodBoxPizzaBomb
-      amount : 2
-    - id: FoodBoxPizzaFilled
-      amount: 1
-    - id: FoodBoxPizzaBomb
-      amount: 1
-    - id: FoodBoxPizzaFilled
-      amount: 1
-    - id: LidSalami
-      prob: 0.01
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - !type:GroupSelector
+          children:
+          - id: FoodBoxPizzaFilled
+          - id: FoodBoxPizzaBomb
+          rolls: 14 # maybe you get good pizza maybe i blow your arm off
+        - id: FoodBoxPizzaBomb # to counter the guaranteed cotton pizza
+        - id: FoodBoxPizzaCotton
+        - id: LidSalami
+          prob: 0.01
 
 - type: entity
   parent: [ BaseStructureDynamic, BaseSetSelector, BaseSyndicateContraband ]
@@ -164,19 +159,21 @@
   name: basic operative bundle
   description: "Contains everything an operative needs to wreak havoc."
   components:
-  - type: StorageFill
-    contents:
-      - id: WeaponSubMachineGunC20r
-      - id: MagazinePistolSubMachineGun
-        amount: 5
-      - id: SyndicateJawsOfLife
-      - id: C4
-        amount: 2
-      - id: MedkitCombatFilled
-      - id: EmpImplanter
-      - id: ClothingShoesChameleonNoSlips
-      - id: ClothingOuterHardsuitSyndie
-      - id: ScramImplanter
-      - id: EnergySword
-      - id: DoubleEmergencyOxygenTankFilled
-      - id: DoubleEmergencyNitrogenTankFilled
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponSubMachineGunC20r
+        - id: MagazinePistolSubMachineGun
+          amount: 5
+        - id: SyndicateJawsOfLife
+        - id: C4
+          amount: 2
+        - id: MedkitCombatFilled
+        - id: EmpImplanter
+        - id: ClothingShoesChameleonNoSlips
+        - id: ClothingOuterHardsuitSyndie
+        - id: ScramImplanter
+        - id: EnergySword
+        - id: DoubleEmergencyOxygenTankFilled
+        - id: DoubleEmergencyNitrogenTankFilled

@@ -1715,7 +1715,7 @@
       blacklist:
         components:
           - SurplusBundle
-          - ContravendUplink
+        tags: [ ContravendUplink ] # Goob
 
 - type: listing
   id: UplinkFakeMindshield

@@ -180,8 +180,10 @@
   parent: SuitStorageBase
   suffix: Janitorial Responsory Modsuit
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
         - id: OxygenTankFilled
         - id: ClothingModsuitResponsoryJanitorial
         - id: ClothingMaskBreath

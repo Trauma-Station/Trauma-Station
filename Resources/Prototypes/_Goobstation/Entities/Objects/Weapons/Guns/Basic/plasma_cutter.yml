@@ -24,12 +24,12 @@
     size: Normal
     shape:
     - 0,0,2,2
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 1500
     startingCharge: 1500
   - type: MaterialEnergy
     materialWhiteList: [Plasma]
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletPlasmaCutter
     fireCost: 100
   - type: Appearance
@@ -44,6 +44,6 @@
   id: WeaponPlasmaCutterEmpty
   suffix: Empty
   components:
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 1500
     startingCharge: 0

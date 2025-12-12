@@ -112103,7 +112103,7 @@ entities:
     - type: Transform
       pos: 96.424286,-12.341495
       parent: 2
-- proto: Dresser
+- proto: DresserFilled
   entities:
   - uid: 16956
     components:

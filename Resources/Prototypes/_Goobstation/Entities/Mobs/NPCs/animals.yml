@@ -276,7 +276,10 @@
       0: Alive
       100: Dead
   - type: Bloodstream
-    bloodReagent: InsectBlood
+    bloodReagents:
+      reagents:
+      - ReagentId: InsectBlood
+        Quantity: 1
     bloodMaxVolume: 40
   - type: Tag
     tags:
@@ -395,19 +398,14 @@
     interactFailureString: petting-failure-carp
     interactFailureSound:
       path: /Audio/Effects/bite.ogg
-  - type: Body # Shitmed: Special carp organs
+  - type: Body
     prototype: Carp
     bodyType: Simple
-  - type: SurgeryTarget # Shitmed
-  - type: UserInterface # Shitmed
-    interfaces:
-      enum.SurgeryUIKey.Key:
-        type: SurgeryBui
-  - type: NightVision # Goobstation - Nigthvision
+  - type: NightVision
     color: "#808080"
     activateSound: null
     deactivateSound: null
-  - type: LanguageKnowledge # Einstein Engines - Language (prevent universal)
+  - type: LanguageKnowledge
     speaks:
     - TauCetiBasic # Is sentient, should have TauCeti since it's the norm.
     understands:
@@ -487,7 +485,10 @@
       0: Alive
       50: Dead
   - type: Bloodstream
-    bloodReagent: Blood
+    bloodReagents:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 1
     bloodMaxVolume: 40
   - type: Tag
     tags:
@@ -560,7 +561,10 @@
       speechVerb: Cluwne
     - type: Bloodstream
       bloodMaxVolume: 150
-      bloodReagent: Laughter
+      bloodReagents:
+        reagents:
+        - ReagentId: Laughter
+          Quantity: 1
     - type: Clumsy
     - type: NoSlip
     - type: Tag

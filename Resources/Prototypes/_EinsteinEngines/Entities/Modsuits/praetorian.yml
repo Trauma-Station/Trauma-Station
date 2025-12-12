@@ -207,8 +207,10 @@
   parent: SuitStorageBase
   suffix: Praetorian Modsuit
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
         - id: OxygenTankFilled
         - id: ClothingModsuitPraetorian
         - id: ClothingMaskBreath

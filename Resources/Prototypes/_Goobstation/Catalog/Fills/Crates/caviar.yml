@@ -9,10 +9,11 @@
   name: Black caviar crate
   description: Contains 5 tins of black caviar.
   components:
-  - type: StorageFill
-    contents:
-    - id: FoodBlackCaviar
-      amount: 5
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: FoodBlackCaviar
+        amount: 5
 
 - type: entity
   id: CrateFunRedCaviar
@@ -20,7 +21,8 @@
   name: Red caviar crate
   description: Contains 5 tins of red caviar.
   components:
-  - type: StorageFill
-    contents:
-    - id: FoodRedCaviar
-      amount: 5
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: FoodRedCaviar
+        amount: 5

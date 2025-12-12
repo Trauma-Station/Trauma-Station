@@ -14,7 +14,7 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
@@ -27,15 +27,14 @@
       path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 200
   - type: SpaceArtillery
     powerChargeRate: 200
     powerUsePassive: 750
     powerUseActive: 0
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipMissileASM417
     fireCost: 867
   - type: RadarBlip
@@ -62,7 +61,7 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
@@ -78,11 +77,10 @@
   - type: SpaceArtillery
     powerChargeRate: 250
     powerUsePassive: 200
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 60
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipMissileASM501
     fireCost: 350
   - type: RadarBlip
@@ -109,7 +107,7 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
@@ -122,11 +120,10 @@
       path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 60
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipMissileASM302
     fireCost: 300
   - type: SpaceArtillery
@@ -174,7 +171,7 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
@@ -187,15 +184,14 @@
       path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 500
   - type: SpaceArtillery
     powerChargeRate: 500
     powerUsePassive: 2500
     powerUseActive: 0
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipMissileASM557
     fireCost: 12500
   - type: RadarBlip

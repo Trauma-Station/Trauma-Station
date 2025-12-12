@@ -244,7 +244,8 @@ public sealed class SharedGunExecutionSystem : EntitySystem
                 break;
         }
 
-        if (HasComp<HitscanBatteryAmmoProviderComponent>(weapon)) // Almost all hitscans are heat so this should work fine
+        // TODO: actually get the fucking damage from the prototype, fuck you john j john
+        if (HasComp<BatteryAmmoProviderComponent>(weapon)) // Almost all hitscans are heat so this should work fine
             mainDamageType = "Heat";
 
         var prev = _combat.IsInCombatMode(attacker);

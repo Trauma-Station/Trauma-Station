@@ -6,8 +6,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Server.Popups;
-using Content.Server.PowerCell;
+using Content.Shared.Popups;
+using Content.Shared.PowerCell;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item.ItemToggle.Components;
@@ -24,10 +24,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._EinsteinEngines.Language;
 
+// TODO: move this to shared and predict
 public sealed class TranslatorSystem : SharedTranslatorSystem
 {
     [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly LanguageSystem _language = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
 

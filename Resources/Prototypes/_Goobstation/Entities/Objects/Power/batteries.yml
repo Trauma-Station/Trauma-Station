@@ -6,7 +6,7 @@
   components:
   - type: Item
     size: Tiny
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 360 # same as a small-cap
     startingCharge: 360
   - type: StaticPrice

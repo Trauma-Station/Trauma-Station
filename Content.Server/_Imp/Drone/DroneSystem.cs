@@ -61,7 +61,7 @@ namespace Content.Server._Imp.Drone
         {
             if (args.Used != null && NonDronesInRange(uid, component))
             {
-                if (_whitelist.IsBlacklistPass(component.Blacklist, args.Used)) // imp special. blacklist. this one *does* prevent actions. it would probably be best if this read from the component or something.
+                if (_whitelist.IsWhitelistPass(component.Blacklist, args.Used)) // imp special. blacklist. this one *does* prevent actions. it would probably be best if this read from the component or something.
                 {
                     args.Cancel();
                     if (_gameTiming.CurTime >= component.NextProximityAlert)
@@ -82,7 +82,7 @@ namespace Content.Server._Imp.Drone
                 }
             }
 
-            else if (args.Used != null && _whitelist.IsBlacklistPass(component.Blacklist, args.Used))
+            else if (args.Used != null && _whitelist.IsWhitelistPass(component.Blacklist, args.Used))
             {
                 args.Cancel();
                 if (_gameTiming.CurTime >= component.NextProximityAlert)
@@ -95,7 +95,7 @@ namespace Content.Server._Imp.Drone
 
         private void OnActivateUIAttempt(EntityUid uid, DroneComponent component, UserOpenActivatableUIAttemptEvent args)
         {
-            if (_whitelist.IsBlacklistPass(component.Blacklist, args.Target))
+            if (_whitelist.IsWhitelistPass(component.Blacklist, args.Target))
             {
                 args.Cancel();
             }

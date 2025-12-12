@@ -1,0 +1,8 @@
+- type: entityTable
+  id: FillLockerAtmosphericsTrauma
+  table: !type:AllSelector
+    children:
+    - id: RPD
+    - id: DoorRemoteFirefight
+    - id: ClothingHandsGlovesAtmosInsulated
+    - id: ClothingBackpackFirefighterTank

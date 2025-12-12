@@ -19,16 +19,18 @@
     maxItemSize: Huge
     grid:
     - 0,0,6,3
-  - type: StorageFill
-    contents:
-      - id: WeaponPistolDualetta
-      - id: WeaponPistolDualetta
-      - id: MagazinePistolHighCapacity
-      - id: MagazinePistolHighCapacity
-      - id: ClothingHandsGlovesCombat
-      - id: ClothingUniformJumpsuitDetectiveGrey
-      - id: ClothingOuterCoatDetectiveLoadout
-      - id: ClothingShoesBootsLaceup
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponPistolDualetta
+          amount: 2
+        - id: MagazinePistolHighCapacity
+          amount: 2
+        - id: ClothingHandsGlovesCombat
+        - id: ClothingUniformJumpsuitDetectiveGrey
+        - id: ClothingOuterCoatDetectiveLoadout
+        - id: ClothingShoesBootsLaceup
 
 - type: entity
   id: BriefcaseCentcomm
@@ -41,11 +43,13 @@
     maxItemSize: Huge
     grid:
     - 0,0,8,4
-  - type: StorageFill
-    contents:
-    - id: PenCentcom # Reference to half life. If you look inside G-Mans briefcase, this is whats inside.
-    - id: PenCap # Todo - Maybe make these unique pens?
-    - id: CyberPen
-    - id: Paper
-    - id: ExecutiveIDCard
-    - id: WeaponPistolAnaconda # Todo - Make this a custom one.
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: PenCentcom # Reference to half life. If you look inside G-Mans briefcase, this is whats inside.
+        - id: PenCap # Todo - Maybe make these unique pens?
+        - id: CyberPen
+        - id: Paper
+        - id: ExecutiveIDCard
+        - id: WeaponPistolAnaconda # Todo - Make this a custom one.

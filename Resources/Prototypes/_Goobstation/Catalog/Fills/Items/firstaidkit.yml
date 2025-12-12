@@ -16,10 +16,12 @@
   suffix: Stazisium
   parent: MedkitCombat
   components:
-  - type: StorageFill
-    contents:
-      - id: StasiziumAutoInjector
-        amount: 8
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: StasiziumAutoInjector
+          amount: 8
   - type: Sprite
     sprite: Objects/Specific/Medical/firstaidkits.rsi
     state: purplekit
@@ -29,51 +31,59 @@
   suffix: Filled
   parent: MedkitBSO
   components:
-  - type: StorageFill
-    contents:
-    - id: MedicatedSuture
-    - id: RegenerativeMesh
-    - id: CartridgeBicaridine
-    - id: CartridgeDermaline
-    - id: CartridgeSaline
-    - id: CartridgeEpinephrine
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: MedicatedSuture
+        - id: RegenerativeMesh
+        - id: CartridgeBicaridine
+        - id: CartridgeDermaline
+        - id: CartridgeSaline
+        - id: CartridgeEpinephrine
 
 - type: entity
   id: MedkitBSOIPCFilled
   suffix: Filled
   parent: MedkitBSOIPC
   components:
-  - type: StorageFill
-    contents:
-    - id: ClothingEyesGlassesMeson
-    - id: WelderIndustrial
-    - id: CableApcStack
-    - id: PowerCellHigh
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingEyesGlassesMeson
+        - id: WelderIndustrial
+        - id: CableApcStack
+        - id: PowerCellHigh
 
 - type: entity
   id: MedkitCombatBlueFilled
   suffix: Filled, Pills
   parent: MedkitCombatBlue
   components:
-  - type: StorageFill
-    contents:
-    - id: PillCanisterBicaridine
-    - id: PillCanisterDermaline
-    - id: PillCanisterTricordrazine
-    - id: PillCanisterTramadol
-    - id: PillCanisterIron
-    - id: PillCanisterDexalin
-    - id: PillCanisterDylovene
-    - id: PillCanisterHyronalin
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: PillCanisterBicaridine
+        - id: PillCanisterDermaline
+        - id: PillCanisterTricordrazine
+        - id: PillCanisterTramadol
+        - id: PillCanisterIron
+        - id: PillCanisterDexalin
+        - id: PillCanisterDylovene
+        - id: PillCanisterHyronalin
 
 - type: entity
   id: MedkitCombatPurpleFilled
   suffix: Filled, IPC
   parent: MedkitCombatPurple
   components:
-  - type: StorageFill
-    contents:
-    - id: ClothingEyesGlassesMeson
-    - id: WelderIndustrial
-    - id: CableApcStack
-    - id: PowerCellHigh
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingEyesGlassesMeson
+        - id: WelderIndustrial
+        - id: CableApcStack
+        - id: PowerCellHigh

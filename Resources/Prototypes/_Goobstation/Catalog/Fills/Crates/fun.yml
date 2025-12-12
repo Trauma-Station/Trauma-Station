@@ -12,10 +12,12 @@
   name: ATV crate
   description: An Absolutely Taxable Vehicle to help cargo with hauling.
   components:
-  - type: StorageFill
-    contents:
-      - id: VehicleATV
-      - id: VehicleKeyATV
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: VehicleATV
+        - id: VehicleKeyATV
 
 - type: entity
   id: CrateFunSyndicateSegway
@@ -23,8 +25,10 @@
   name: Syndicate segway crate
   description: A crate containing a two-wheeler that will help you escape from the security officers. Or not.
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
         - id: VehicleSyndicateSegway
         - id: VehicleKeySyndicateSegway
 
@@ -34,14 +38,16 @@
   parent: CrateBingle
   name: Bingle loot
   components:
-  - type: StorageFill
-    contents:
-    - id: PlushieBingle
-      amount: 3
-    - id: PlushieBingleSmall
-    - id: PlushieBongle
-    - id: PlushieBingleYakub
-    - id: PlushieBinglePony
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: PlushieBingle
+          amount: 3
+        - id: PlushieBingleSmall
+        - id: PlushieBongle
+        - id: PlushieBingleYakub
+        - id: PlushieBinglePony
 
 - type: entity
   id: CrateFunBingleAdmeme
@@ -62,10 +68,10 @@
   name: disco beach ball crate
   description: A crate containing a Disco Beach Ball that turns any beach trip into Studio 54.
   components:
-  - type: StorageFill
-    contents:
-    - id: DiscoBeachBall
-      amount: 1
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: DiscoBeachBall
 
 - type: entity
   id: CrateWizardAnomCore
@@ -79,7 +85,7 @@
       entity_storage: !type:AllSelector
         children:
         - !type:NestedSelector
-          tableId: RandomAnomalyCoreEnchantTable 
+          tableId: RandomAnomalyCoreEnchantTable
         - !type:NestedSelector
           tableId: RandomAnomalyCoreInertEnchantTable
           rolls: 2

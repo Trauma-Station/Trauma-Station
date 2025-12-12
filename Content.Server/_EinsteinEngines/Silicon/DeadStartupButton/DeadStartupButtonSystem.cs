@@ -8,10 +8,10 @@
 using Content.Server.Chat.Systems;
 using Content.Server.Lightning;
 using Content.Server.Popups;
-using Content.Server.PowerCell;
+using Content.Shared.PowerCell;
 using Content.Server._EinsteinEngines.Silicon.Charge;
 using Content.Server.Lightning.Components; // Goobstation - Fix IPC shock loops
-using Content.Server.Power.EntitySystems; // Goobstation - Energycrit
+using Content.Shared.Power.EntitySystems; // Goobstation - Energycrit
 using Content.Shared._EinsteinEngines.Silicon.DeadStartupButton;
 using Content.Shared.Audio;
 using Content.Shared.Damage.Components;
@@ -32,10 +32,9 @@ public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly LightningSystem _lightning = default!;
-    [Dependency] private readonly SiliconChargeSystem _siliconChargeSystem = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly BatterySystem _battery = default!; // Goobstation - Energycrit
+    [Dependency] private readonly PredictedBatterySystem _battery = default!; // Goobstation - Energycrit
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -82,12 +81,12 @@ public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
         if (HasComp<LightningComponent>(args.SourceUid) // Goobstation - Fix IPC shock loops.
             || !TryComp<MobStateComponent>(uid, out var mobStateComponent)
             || !_mobState.IsDead(uid, mobStateComponent)
-            || !_siliconChargeSystem.TryGetSiliconBattery(uid, out var bateria, out var batteryEnt) // Goobstation - Added batteryEnt argument
-            || bateria.CurrentCharge <= 0)
+            || !_powerCell.TryGetBatteryFromEntityOrSlot(uid, out var battery)
+            || _battery.GetCharge(battery.Value.AsNullable()) <= 0)
             return;
 
         _lightning.ShootRandomLightnings(uid, 2, 4);
-        _battery.TryUseCharge(batteryEnt.Value, bateria.CurrentCharge); // Goobstation - Added batteryEnt argument
+        _battery.SetCharge(battery.Value.AsNullable(), 0);
     }
 
     private void OnMobStateChanged(EntityUid uid, DeadStartupButtonComponent comp, MobStateChangedEvent args)

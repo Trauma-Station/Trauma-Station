@@ -10,17 +10,19 @@
   components:
   - type: Tag
     tags: [] # ignore "WhitelistChameleon" tag
-  - type: StorageFill
-    contents:
-      - id: ClothingOuterWizardClownReal
-      - id: ClothingHeadHatClownReal
-      - id: ClownPDA
-      - id: ClothingMaskClown
-      - id: ClothingShoesClown
-      - id: ClothingMaskSexyClown
-      - id: ClothingMaskClownBanana
-      - id: ClothingUniformJumpsuitClown
-      - id: ClothingShoesBling
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingOuterWizardClownReal
+        - id: ClothingHeadHatClownReal
+        - id: ClownPDA
+        - id: ClothingMaskClown
+        - id: ClothingShoesClown
+        - id: ClothingMaskSexyClown
+        - id: ClothingMaskClownBanana
+        - id: ClothingUniformJumpsuitClown
+        - id: ClothingShoesBling
 
 - type: entity
   parent: ClothingBackpackMime
@@ -29,18 +31,20 @@
   components:
   - type: Tag
     tags: [] # ignore "WhitelistChameleon" tag
-  - type: StorageFill
-    contents:
-      - id: ClothingOuterWizardMimeReal
-      - id: ClothingHeadHatMimeReal
-      - id: MimePDA
-      - id: ClothingBeltSuspendersBlack
-      - id: ClothingBeltSuspendersRed
-      - id: ClothingUniformJumpsuitMime
-      - id: ClothingMaskMime
-      - id: ClothingMaskSadMime
-      - id: ClothingMaskScaredMime
-      - id: ClothingMaskSexyMime
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingOuterWizardMimeReal
+        - id: ClothingHeadHatMimeReal
+        - id: MimePDA
+        - id: ClothingBeltSuspendersBlack
+        - id: ClothingBeltSuspendersRed
+        - id: ClothingUniformJumpsuitMime
+        - id: ClothingMaskMime
+        - id: ClothingMaskSadMime
+        - id: ClothingMaskScaredMime
+        - id: ClothingMaskSexyMime
 
 - type: entity
   parent: ClothingBackpack
@@ -49,13 +53,15 @@
   components:
   - type: Tag
     tags: [] # ignore "WhitelistChameleon" tag
-  - type: StorageFill
-    contents:
-      - id: ClothingOuterOblivionEnforcer
-      - id: ClothingMaskGasOblivionEnforcer
-      - id: ClothingUniformJumpsuitColorWhite
-      - id: ClothingShoesColorWhite
-      - id: ClothingHandsGlovesColorYellow
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingOuterOblivionEnforcer
+        - id: ClothingMaskGasOblivionEnforcer
+        - id: ClothingUniformJumpsuitColorWhite
+        - id: ClothingShoesColorWhite
+        - id: ClothingHandsGlovesColorYellow
 
 - type: entity
   parent: ToolboxMechanical
@@ -73,12 +79,14 @@
   id: ToolboxTiderFilled
   suffix: Wizard Tider Bundle
   components:
-  - type: StorageFill
-    contents:
-      - id: ClothingUniformJumpsuitAncient
-      - id: ClothingMaskGas
-      - id: ClothingHandsGlovesColorYellow
-      - id: ClothingNeckMantle
-      - id: ClothingOuterWinterColorGray
-      - id: ClothingShoesColorBlack
-      - id: PassengerPDA
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingUniformJumpsuitAncient
+        - id: ClothingMaskGas
+        - id: ClothingHandsGlovesColorYellow
+        - id: ClothingNeckMantle
+        - id: ClothingOuterWinterColorGray
+        - id: ClothingShoesColorBlack
+        - id: PassengerPDA

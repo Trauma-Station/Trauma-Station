@@ -13167,10 +13167,10 @@ entities:
     - type: Transform
       pos: 1.4187559,0.6584672
       parent: 1
-    - type: Battery
+    - type: PredictedBattery
       startingCharge: 20000
       maxCharge: 20000
-    - type: BatterySelfRecharger
+    - type: PredictedBatterySelfRecharger
       autoRechargeRate: 200
 - proto: WeaponRevolverMateba
   entities:

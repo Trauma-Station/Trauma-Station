@@ -42,7 +42,7 @@
   - type: Appearance
   - type: PowerNetworkBattery
     maxChargeRate: 5000000 # 5MJ
-  - type: Battery
+  - type: PredictedBattery
     startingCharge: 0
     maxCharge: 100000000 # 100MJ
   - type: ExaminableBattery
@@ -68,7 +68,7 @@
       - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     examinable: false
     proto: HitscanPTL
     fireCost: 1000

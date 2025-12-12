@@ -3,11 +3,8 @@
   name: uplink-bribe-plasmaman-name
   description: uplink-bribe-plasmaman-desc
   productEntity: BriefcaseSyndieLobbyingBundlePlasmamanFilled
-  #discountCategory: usualDiscounts
-  #discountDownTo:
- #  Telecrystal: 2
   cost:
-    Telecrystal: 4
+    Telecrystal: 20
   categories:
     - UplinkDeception
   conditions:

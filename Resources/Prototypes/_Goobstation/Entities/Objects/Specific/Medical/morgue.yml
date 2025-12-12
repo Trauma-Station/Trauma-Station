@@ -20,15 +20,14 @@
   name: morgue supplies
   description: Contains 1x bible, 1x syringe, 2x "embalming fluid bottle", 10x body bag, 1x coffin.
   components:
-  - type: StorageFill
-    contents:
-    - id: ChemistryBottleFormaldehyde
-      amount: 2
-    - id: Bible
-      amount: 1
-    - id: Syringe
-      amount: 1
-    - id: BoxBodyBag
-      amount: 10
-    - id: CrateCoffin
-      amount: 1
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ChemistryBottleFormaldehyde
+          amount: 2
+        - id: Bible
+        - id: Syringe
+        - id: BoxBodyBag
+          amount: 10
+        - id: CrateCoffin

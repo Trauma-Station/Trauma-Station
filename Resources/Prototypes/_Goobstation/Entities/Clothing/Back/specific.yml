@@ -54,35 +54,39 @@
   id: ClothingBackpackStasisBatteryUnremoveableFilled
   suffix: Filled, Unremoveable
   components:
-  - type: StorageFill
-    contents:
-      - id: StasisCage
-        amount: 4
-      - id: MedkitCombatStasiziumFilled
-      - id: StasisBaton
-      - id: FreedomImplanter
-      - id: ScramImplanter
-      - id: MindShieldImplanter
-      - id: RCDChrono
-      - id: ChronoTeleporter
-      - id: HandheldGPSBasic # Mass Scanner Removed by Lavaland
-      - id: Flash
-      - id: TimelineDisruptorFlatpack
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: StasisCage
+          amount: 4
+        - id: MedkitCombatStasiziumFilled
+        - id: StasisBaton
+        - id: FreedomImplanter
+        - id: ScramImplanter
+        - id: MindShieldImplanter
+        - id: RCDChrono
+        - id: ChronoTeleporter
+        - id: HandheldGPSBasic
+        - id: Flash
+        - id: TimelineDisruptorFlatpack
 
 - type: entity
   parent: ClothingBackpackMerc
   id: ClothingBackpackMercFilledHECU
   suffix: Filled, HECU
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxMagazinePistolSubMachineGun
-      - id: MindShieldImplanter
-      - id: Zipties
-      - id: Zipties
-      - id: MedkitAdvancedFilled
-      - id: WeaponPistolEchis
-      - id: Flash
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxMagazinePistolSubMachineGun
+        - id: MindShieldImplanter
+        - id: Zipties
+          amount: 2
+        - id: MedkitAdvancedFilled
+        - id: WeaponPistolEchis
+        - id: Flash
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -166,7 +170,7 @@
   parent: Clothing
   id: ClothingBackpackFirefighterTank
   name: firefighter water tank backpack
-  description: A refrigerated water tank backpack that can switch modes to launch ATMOS resin or work as a high pressure extinguisher. 
+  description: A refrigerated water tank backpack that can switch modes to launch ATMOS resin or work as a high pressure extinguisher.
   components:
   - type: Tag
     tags:

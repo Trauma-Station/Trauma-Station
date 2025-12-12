@@ -9,9 +9,25 @@
   name: fishing goodies crate
   description: A couple of fishing rods, a bear, and a hat. Everything you need to catch all fish on the station!
   components:
-  - type: StorageFill
-    contents:
-      - id: FishingRod
-      - id: FishingRodGoon
-      - id: ClothingHeadFishCap
-      - id: DrinkBeerBottleFull
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: FishingRod
+        - id: FishingRodGoon
+        - id: ClothingHeadFishCap
+        - id: DrinkBeerBottleFull
+
+- type: entity
+  id: CrateHolySupplies
+  parent: CratePlastic
+  name: holy supplies crate
+  description: Contains a Bible and 2 Jugs of holy water for religious needs
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: JugHolyWater
+          amount: 2
+        - id: Bible

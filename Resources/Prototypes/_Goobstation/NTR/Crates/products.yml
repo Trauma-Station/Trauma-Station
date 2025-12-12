@@ -4,9 +4,10 @@
   name: Spesos grant bonus
   description: Tough times require capitalist solutions.
   components:
-  - type: StorageFill
-    contents:
-      - id: SpaceCash500
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: SpaceCash500
         amount: 20 # Why? cuz a whole ass crate for 1 cash stack is wierd
 
 - type: entity
@@ -15,9 +16,10 @@
   name: Point disks grant bonus
   description: Progress, my friend, progress.
   components:
-  - type: StorageFill
-    contents:
-      - id: ResearchDisk
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: ResearchDisk
         amount: 10 # 10 x 1000 = 10000 points, should be enough for sci, and also, a whole crate for 1 disk is stupid so 10 disks is good
 
 - type: entity
@@ -26,13 +28,15 @@
   name: Emergency medical supplies
   description: Think about how would you explain this to NT.
   components:
-  - type: StorageFill
-    contents:
-      - id: MedkitBurnFilled
-      - id: MedkitToxinFilled
-      - id: MedkitOxygenFilled
-      - id: MedkitBruteFilled
-      - id: MedkitRadiationFilled # its an emergency med crate, not war med crate so no combat medkits
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: MedkitBurnFilled
+        - id: MedkitToxinFilled
+        - id: MedkitOxygenFilled
+        - id: MedkitBruteFilled
+        - id: MedkitRadiationFilled # its an emergency med crate, not war med crate so no combat medkits
 
 - type: entity
   id: NTRCrateDisablers
@@ -40,11 +44,13 @@
   name: Disablers crate
   description: A crate with disablers, why would you need this?
   components:
-  - type: StorageFill
-    contents:
-      - id: WeaponDisablerSMG # yknow maybe its too good for tier 1, i hope i dont forget about this before doing a pr
-      - id: WeaponDisabler
-        amount: 3
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponDisablerSMG # yknow maybe its too good for tier 1, i hope i dont forget about this before doing a pr
+        - id: WeaponDisabler
+          amount: 3
 
 - type: entity
   id: NTRCrateToolsSmall
@@ -52,15 +58,18 @@
   name: Tools crate
   description: A crate with standard NanoTrasen tools.
   components:
-  - type: StorageFill
-    contents:
-      - id: Wirecutter
-      - id: Screwdriver
-      - id: Wrench
-      - id: Multitool
-      - id: NetworkConfigurator
-      - id: ClothingBeltUtility
-      - id: Crowbar
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        # who the fuck is wasting ntbux on this
+        - id: Wirecutter
+        - id: Screwdriver
+        - id: Wrench
+        - id: Multitool
+        - id: NetworkConfigurator
+        - id: ClothingBeltUtility
+        - id: Crowbar
 
 - type: entity
   id: NTRBoardTelecom
@@ -68,10 +77,11 @@
   name: Telecom server computer board crate
   description: A crate, containing 2 telecom server machine boards.
   components:
-  - type: StorageFill
-    contents:
-    - id: TelecomServerCircuitboard
-    - id: TelecomServerCircuitboard
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: TelecomServerCircuitboard
+        amount: 2
 
 - type: entity
   id: NTRBoardHolopad
@@ -79,19 +89,22 @@
   name: Holopad crate
   description: A crate, that contains 2 holopad machine boards.
   components:
-  - type: StorageFill
-    contents:
-    - id: HolopadMachineCircuitboard
-    - id: HolopadMachineCircuitboard # what is the point of having 1 holopad?
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: HolopadMachineCircuitboard
+        amount: 2 # what is the point of having 1 holopad?
 
 - type: entity
   id: NTRBoardShuttle
   parent: CrateEngineeringSecure
   name: Shuttle-maker bundle crate
   components:
-  - type: StorageFill
-    contents:
-    - id: ThrusterFlatpack
-      amount: 4
-    - id: ShuttleConsoleCircuitboard
-    - id: GyroscopeFlatpack
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ThrusterFlatpack
+          amount: 4
+        - id: ShuttleConsoleCircuitboard
+        - id: GyroscopeFlatpack

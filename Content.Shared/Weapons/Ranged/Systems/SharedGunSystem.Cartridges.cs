@@ -17,7 +17,6 @@ public abstract partial class SharedGunSystem
     {
         SubscribeLocalEvent<CartridgeAmmoComponent, ExaminedEvent>(OnCartridgeExamine);
         SubscribeLocalEvent<CartridgeAmmoComponent, DamageExamineEvent>(OnCartridgeDamageExamine);
-        SubscribeLocalEvent<BasicEntityAmmoProviderComponent, DamageExamineEvent>(OnBasicEntityDamageExamine); // Goobstation
     }
 
     private void OnCartridgeExamine(Entity<CartridgeAmmoComponent> ent, ref ExaminedEvent args)
@@ -59,37 +58,4 @@ public abstract partial class SharedGunSystem
 
         return null;
     }
-
-    // <Goob>
-    private void OnBasicEntityDamageExamine(EntityUid uid, BasicEntityAmmoProviderComponent component, ref DamageExamineEvent args)
-    {
-        if (component.Proto == null)
-            return;
-
-        var damageSpec = GetProjectileDamage(component.Proto);
-
-        if (damageSpec == null)
-            return;
-
-        _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damageSpec), Loc.GetString("damage-projectile"));
-
-        var ap = GetProjectilePenetration(component.Proto);
-        if (ap == 0)
-            return;
-
-        var abs = Math.Abs(ap);
-        args.Message.AddMarkupPermissive("\n" + Loc.GetString("armor-penetration", ("arg", ap/abs), ("abs", abs)));
-    }
-
-    private int GetProjectilePenetration(string proto)
-    {
-        if (!ProtoManager.TryIndex<EntityPrototype>(proto, out var entityProto)
-        || !entityProto.Components.TryGetValue(Factory.GetComponentName<ProjectileComponent>(), out var projectile))
-            return 0;
-
-        var p = (ProjectileComponent) projectile.Component;
-
-        return p.IgnoreResistances ? 100 : (int)Math.Round(p.Damage.ArmorPenetration * 100);
-    }
-    // </Goob>
 }

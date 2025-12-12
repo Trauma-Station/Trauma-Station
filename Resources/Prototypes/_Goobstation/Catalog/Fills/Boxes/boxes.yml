@@ -17,12 +17,12 @@
   id: BoxReverseBearTrap
   description: A box full of completely legal stuff.
   components:
-  - type: StorageFill
-    contents:
-      - id: ReverseBearTrap
-        amount: 1
-      - id: ReverseBearTrapKey
-        amount: 1
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ReverseBearTrap
+        - id: ReverseBearTrapKey
   - type: Sprite
     sprite: _Goobstation/Objects/Storage/boxes.rsi
 
@@ -33,16 +33,14 @@
   suffix: DO NOT MAP
   description: A box containing a combat injector and a few healing chemicals.
   components:
-  - type: StorageFill
-    contents:
-      - id: CombatInjector
-        amount: 1
-      - id: TirimolChemistryVial
-        amount: 1
-      - id: OmnizineChemistryVial
-        amount: 1
-      - id: ProcenylLazideChemistryVial
-        amount: 1
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CombatInjector
+        - id: TirimolChemistryVial
+        - id: OmnizineChemistryVial
+        - id: ProcenylLazideChemistryVial
   - type: Sprite
     sprite: _Goobstation/Objects/Storage/boxes.rsi
 
@@ -52,13 +50,15 @@
   id: BoxAutoinjectorCartidges
   description: A box with autoinjector cartridges.
   components:
-  - type: StorageFill
-    contents:
-    - id: CartridgeSaline
-      amount: 3
-    - id: CartridgeBicaridine
-      amount: 3
-    - id: CartridgeDermaline
-      amount: 3
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CartridgeSaline
+          amount: 3
+        - id: CartridgeBicaridine
+          amount: 3
+        - id: CartridgeDermaline
+          amount: 3
   - type: Sprite
     sprite: _Goobstation/Objects/Storage/boxes.rsi

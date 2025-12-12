@@ -1,8 +1,8 @@
-using Content.Shared._EinsteinEngines.Power.Systems;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
+using Content.Shared.PowerCell;
 
 namespace Content.Shared._EinsteinEngines.Silicon.Death;
 
@@ -16,7 +16,7 @@ namespace Content.Shared._EinsteinEngines.Silicon.Death;
 /// </remarks>
 public abstract class SharedSiliconDeathSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBatteryDrinkerSystem _drinker = default!;
+    [Dependency] protected readonly PowerCellSystem _powerCell = default!;
 
     public override void Initialize()
     {
@@ -49,7 +49,7 @@ public abstract class SharedSiliconDeathSystem : EntitySystem
         // anything that slips through the cracks should be prevented by discharged
         // silicons not having ComplexInteractionComponent
         if (ent.Comp.Dead)
-            args.Cancelled = !args.Target.HasValue || !_drinker.SearchForSource(args.Target.Value, out _);
+            args.Cancelled |= args.Target is not {} target || !_powerCell.TryGetBatteryFromEntityOrSlot(target, out _);
     }
 
     private void OnUnequipAttempt(Entity<SiliconDownOnDeadComponent> ent, ref IsUnequippingAttemptEvent args)

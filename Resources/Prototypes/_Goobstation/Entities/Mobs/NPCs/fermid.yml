@@ -10,14 +10,9 @@
   abstract: true
   description: Extremely hostile asteroid-dwelling bugs. Best to avoid them wherever possible.
   components:
-  - type: VentCrawler # goobstation - Ventcrawl
-  - type: Body # Shitmed Change
+  - type: VentCrawler
+  - type: Body
     prototype: SpaceSpider
-  - type: SurgeryTarget # Shitmed
-  - type: UserInterface # Shitmed
-    interfaces:
-      enum.SurgeryUIKey.Key:
-        type: SurgeryBui
   - type: Sprite
     drawdepth: Mobs
     sprite: /Textures/_Goobstation/Mobs/Animals/Fermids/fermid.rsi
@@ -46,7 +41,10 @@
       amount: 2
   - type: Bloodstream
     bloodMaxVolume: 50
-    bloodReagent: InsectBlood
+    bloodReagents:
+      reagents:
+      - ReagentId: InsectBlood
+        Quantity: 1
   - type: Fixtures
     fixtures:
       fix1:
@@ -90,8 +88,8 @@
     color: "#808080"
     activateSound: null
     deactivateSound: null
-  - type: Fauna # Lavaland Change
-  - type: CombatPower # Goobstation
+  - type: Fauna
+  - type: CombatPower
     factor: 0.5 # times more dangerous than a crew-member
 
 - type: entity

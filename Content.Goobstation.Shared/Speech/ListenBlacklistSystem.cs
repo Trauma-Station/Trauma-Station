@@ -20,7 +20,7 @@ public sealed class ListenBlacklistSystem : EntitySystem
 
     private void OnListenAttempt(Entity<ListenBlacklistComponent> ent, ref ListenAttemptEvent args)
     {
-        if (_whitelist.IsBlacklistPass(ent.Comp.Blacklist, args.Source))
+        if (_whitelist.IsWhitelistPass(ent.Comp.Blacklist, args.Source))
             args.Cancel();
     }
 }

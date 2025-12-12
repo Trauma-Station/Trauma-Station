@@ -7,8 +7,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Power.Components;
-using Content.Server.PowerCell;
 using Content.Shared._White.Blocking;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
@@ -16,11 +14,14 @@ using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Content.Shared.Power;
+using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
+using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
 
 namespace Content.Server._White.Blocking;
 
+// TODO: move this to shared goobmod and predict
 public sealed class RechargeableBlockingSystem : EntitySystem
 {
     [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
@@ -40,10 +41,7 @@ public sealed class RechargeableBlockingSystem : EntitySystem
     private void OnExamined(EntityUid uid, RechargeableBlockingComponent component, ExaminedEvent args)
     {
         if (!component.Discharged)
-        {
-            _powerCell.OnBatteryExamined(uid, null, args);
             return;
-        }
 
         args.PushMarkup(Loc.GetString("rechargeable-blocking-discharged"));
         args.PushMarkup(Loc.GetString("rechargeable-blocking-remaining-time", ("remainingTime", GetRemainingTime(uid))));
@@ -68,7 +66,7 @@ public sealed class RechargeableBlockingSystem : EntitySystem
             return;
 
         var batteryUse = Math.Min(args.DamageDelta.GetTotal().Float(), battery.Comp.CurrentCharge);
-        _battery.TryUseCharge(battery, batteryUse, battery.Comp);
+        _battery.TryUseCharge(battery.AsNullable(), batteryUse);
     }
 
     private void AttemptToggle(EntityUid uid, RechargeableBlockingComponent component, ref ItemToggleActivateAttemptEvent args)

@@ -98,9 +98,10 @@
   id: BoxBalloonPackage
   description: A box full of soon to be balloons.
   components:
-  - type: StorageFill
-    contents:
-      - id: BalloonPackageBasic
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: BalloonPackageBasic
         amount: 9
   - type: Sprite
     sprite: _Goobstation/Objects/Storage/boxes.rsi
@@ -111,9 +112,10 @@
   id: PremiumBoxBalloonPackage
   description: A box full of soon to be balloons.
   components:
-  - type: StorageFill
-    contents:
-      - id: BalloonPackagePremium
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: BalloonPackagePremium
         amount: 9
   - type: Sprite
     sprite: _Goobstation/Objects/Storage/boxes.rsi
@@ -125,20 +127,19 @@
   name: balloon popper's package
   description: A crate containing 2 full balloon boxes and some additional popping equipment.
   components:
-  - type: StorageFill
-    contents:
-    - id: BoxBalloonPackage
-      amount: 2
-    - id: ClothingOuterSuitMonkey
-      amount: 1
-    - id: Dart
-      amount: 1
-    - id: MonkeyCube
-      prob: 0.7
-    # Extra
-    - id: MonkeyCube
-      prob: 0.4
-
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: BoxBalloonPackage
+          amount: 2
+        - id: ClothingOuterSuitMonkey
+        - id: Dart
+        - id: MonkeyCube
+          prob: 0.7
+        # Extra
+        - id: MonkeyCube
+          prob: 0.4
 
 - type: entity
   id: PremiumCrateBalloonPackage
@@ -146,18 +147,16 @@
   name: premium balloon warrior's package
   description: Contains the most elite balloons and some additional popping equipment. WARNING! SEVERAL MOAB CLASS BALLOONS INCOMING!
   components:
-  - type: StorageFill
-    contents:
-    - id: PremiumBoxBalloonPackage
-      amount: 1
-    - id: ClothingOuterSuitMonkey
-      amount: 1
-    - id: boomerang
-      amount: 1
-    - id: MonkeyCube
-      prob: 0.7
-    - id: ClothingOuterSuitMonkey   # Extra
-      amount: 1
-      prob: 0.4
-    - id: MonkeyCube
-      prob: 0.4
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: PremiumBoxBalloonPackage
+        - id: ClothingOuterSuitMonkey
+        - id: boomerang
+        - id: MonkeyCube
+          prob: 0.7
+        - id: ClothingOuterSuitMonkey # Extra
+          prob: 0.4
+        - id: MonkeyCube
+          prob: 0.4

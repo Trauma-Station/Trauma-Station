@@ -185,8 +185,10 @@
   parent: SuitStorageBase
   suffix: Leader Responsory Modsuit
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
         - id: OxygenTankFilled
         - id: ClothingModsuitResponsoryLeader
         - id: ClothingMaskBreath

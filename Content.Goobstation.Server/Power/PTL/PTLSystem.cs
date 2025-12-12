@@ -125,10 +125,11 @@ public sealed partial class PTLSystem : EntitySystem
         if (desiredFireCost <= 0)
             return;
 
-        if (!TryComp<HitscanBatteryAmmoProviderComponent>(ent, out var provider))
+        if (!TryComp<BatteryAmmoProviderComponent>(ent, out var provider))
             return;
 
         provider.FireCost = desiredFireCost;
+        Dirty(ent, provider);
 
         if (TryComp<GunComponent>(ent, out var gun))
         {
@@ -247,7 +248,7 @@ public sealed partial class PTLSystem : EntitySystem
 
     private void OnShot(Entity<PTLComponent> ent, ref GunShotEvent args)
     {
-        if (!TryComp<HitscanBatteryAmmoProviderComponent>(ent, out var provider))
+        if (!TryComp<BatteryAmmoProviderComponent>(ent, out var provider))
             return;
 
         var megajoule = 1e6;
@@ -261,6 +262,7 @@ public sealed partial class PTLSystem : EntitySystem
                 continue;
 
             hitscan.Damage *= modifier;
+            Dirty(ammo.Value, hitscan);
         }
     }
 }

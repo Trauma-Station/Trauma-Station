@@ -56,24 +56,7 @@
           - !type:PlaySoundBehavior
             sound:
               collection: MeatLaserImpact
-#  - type: PassiveDamage # Trauma - remove stealth buffs
-#    allowedStates:
-#      - Alive
-#    damageCap: 20
-#    damage:
-#      types:
-#        Heat: -0.07
-#      groups:
-#        Brute: -0.07
   - type: Blindable
-#  - type: ThermalRegulator # Trauma - remove stealth buffs
-#    metabolismHeat: 800
-#    radiatedHeat: 100
-#    implicitHeatRegulation: 500
-#    sweatHeatRegulation: 2000
-#    shiveringHeatRegulation: 2000
-#    normalBodyTemperature: 310.15
-#    thermalRegulationTemperatureThreshold: 2
   - type: Perishable
   - type: FireVisuals
     alternateState: Standing
@@ -87,41 +70,14 @@
     state: full
   - type: Body
     prototype: Shadowkin
-#  - type: Flammable # Trauma - remove stealth buffs
-#    damage:
-#      types:
-#        Heat: 1.5 # burn more
   - type: Damageable
     damageContainer: Biological # Shadowkin
     damageModifierSet: Shadowkin
-#    - type: DamageVisuals
-#      damageOverlayGroups:
-#        Brute:
-#          sprite: Mobs/Effects/brute_damage.rsi
-#          color: "#1c1624"
-#  - type: Barotrauma # Trauma - remove stealth buffs
-#    damage:
-#      types:
-#        Blunt: 0.35
   - type: Bloodstream
-#    bloodlossDamage: # Trauma - remove stealth buffs
-#      types:
-#        Bloodloss: 1
-#    bloodlossHealDamage:
-#      types:
-#        Bloodloss: -0.25
-    bloodReagent: BlackBlood
-#  - type: Temperature # Trauma - remove stealth buffs
-#    heatDamageThreshold: 330
-#    coldDamageThreshold: 195
-#    currentTemperature: 310.15
-#    specificHeat: 46
-#    coldDamage:
-#      types:
-#        Cold: 0.05
-#    heatDamage:
-#      types:
-#        Heat: 0.25
+    bloodReagents:
+      reagents:
+      - ReagentId: BlackBlood
+        Quantity: 1
   - type: Fixtures
     fixtures:
       fix1:
@@ -206,9 +162,6 @@
       Unsexed: MaleShadowkin
   - type: TypingIndicator
     proto: alien
-#  - type: MovementSpeedModifier # Trauma - remove stealth buffs
-#    baseWalkSpeed: 2.7
-#    baseSprintSpeed: 4.5
   - type: Speech
     allowedEmotes: ['Mars', 'Wurble']
   - type: CollectiveMind

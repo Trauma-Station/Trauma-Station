@@ -4,16 +4,18 @@
   id: BoxQMCircuitboards
   description: A Tote filled with QM's Circuit boards.
   components:
-  - type: StorageFill
-    contents:
-      - id: CargoBountyComputerCircuitboard
-      - id: CargoRequestComputerCircuitboard
-      - id: CargoSaleComputerCircuitboard
-      - id: CargoShuttleConsoleCircuitboard
-      - id: LavalandShuttleConsoleCircuitboard # Goobstation - replaces magnet
-      - id: CargoTechFabCircuitboard # Goobstation - Cargo Techfab
-      - id: SalvageJobBoardComputerCircuitboard
-      - id: MailTeleporterMachineCircuitboard
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CargoBountyComputerCircuitboard
+        - id: CargoRequestComputerCircuitboard
+        - id: CargoSaleComputerCircuitboard
+        - id: CargoShuttleConsoleCircuitboard
+        - id: LavalandShuttleConsoleCircuitboard # Goob - was SalvageMagnetMachineCircuitboard
+        - id: CargoTechFabCircuitboard # Goob
+        - id: SalvageJobBoardComputerCircuitboard
+        - id: MailTeleporterMachineCircuitboard
 
 - type: entity
   name: stamp box [QM]
@@ -25,11 +27,13 @@
     size: Small
     shape:
     - 0,0,1,1
-  - type: StorageFill
-    contents:
-      - id: RubberStampApproved
-      - id: RubberStampDenied
-      - id: RubberStampQm
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: RubberStampApproved
+        - id: RubberStampDenied
+        - id: RubberStampQm
   - type: Storage
     grid:
     - 0,0,1,1
@@ -47,12 +51,14 @@
   id: BoxHoPCircuitboards
   description: A Tote filled with HoP's Circuit boards.
   components:
-  - type: StorageFill
-    contents:
-      - id: IDComputerCircuitboard
-      - id: FundingAllocationComputerCircuitboard
-      - id: CargoRequestServiceComputerCircuitboard
-      - id: ServiceTechFabCircuitboard # Goob - Service Techfab
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: IDComputerCircuitboard
+        - id: FundingAllocationComputerCircuitboard
+        - id: CargoRequestServiceComputerCircuitboard
+        - id: ServiceTechFabCircuitboard # Goob
 
 - type: entity
   name: stamp box [HoP]
@@ -64,11 +70,13 @@
     size: Small
     shape:
     - 0,0,1,1
-  - type: StorageFill
-    contents:
-      - id: RubberStampApproved
-      - id: RubberStampDenied
-      - id: RubberStampHop
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: RubberStampApproved
+        - id: RubberStampDenied
+        - id: RubberStampHop
   - type: Storage
     grid:
     - 0,0,1,1
@@ -86,14 +94,16 @@
   id: BoxCECircuitboards
   description: A Tote filled with CE's Circuit boards.
   components:
-  - type: StorageFill
-    contents:
-      - id: CargoRequestEngineeringComputerCircuitboard
-      - id: AlertsComputerCircuitboard
-      - id: AtmosMonitoringComputerCircuitboard
-      - id: PowerComputerCircuitboard
-      - id: SolarControlComputerCircuitboard
-      - id: EngineeringTechFabCircuitboard # Goob - Engi Techfab
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CargoRequestEngineeringComputerCircuitboard
+        - id: AlertsComputerCircuitboard
+        - id: AtmosMonitoringComputerCircuitboard
+        - id: PowerComputerCircuitboard
+        - id: SolarControlComputerCircuitboard
+        - id: EngineeringTechFabCircuitboard # Goob
 
 - type: entity
   name: circuit tote [Captain]
@@ -101,10 +111,12 @@
   id: BoxCaptainCircuitboards
   description: A Tote filled with Captain's Circuit boards.
   components:
-  - type: StorageFill
-    contents:
-      - id: CommsComputerCircuitboard
-      - id: StationRecordsComputerCircuitboard
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CommsComputerCircuitboard
+        - id: StationRecordsComputerCircuitboard
 
 - type: entity
   name: circuit tote [CMO]
@@ -112,17 +124,19 @@
   id: BoxCMOCircuitboards
   description: A Tote filled with CMO's Circuit boards.
   components:
-  - type: StorageFill
-    contents:
-      - id: MedicalTechFabCircuitboard
-      - id: CargoRequestMedicalComputerCircuitboard
-      # <Goob>
-      - id: CloningPodMachineCircuitboard
-      - id: MedicalScannerMachineCircuitboard
-      - id: CloningConsoleComputerCircuitboard
-      - id: BiomassReclaimerMachineCircuitboard
-      - id: MedicalBiofabMachineBoard
-      # </Goob>
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: MedicalTechFabCircuitboard
+        - id: CargoRequestMedicalComputerCircuitboard
+        # <Goob>
+        - id: CloningPodMachineCircuitboard
+        - id: MedicalScannerMachineCircuitboard
+        - id: CloningConsoleComputerCircuitboard
+        - id: BiomassReclaimerMachineCircuitboard
+        - id: MedicalBiofabMachineBoard
+        # </Goob>
 
 - type: entity
   name: circuit tote [RD]
@@ -130,15 +144,17 @@
   id: BoxRDCircuitboards
   description: A Tote filled with RD's Circuit boards.
   components:
-  - type: StorageFill
-    contents:
-      - id: ScienceTechFabCircuitboard # Goob - replaces circuit printer and protolathe
-      - id: ResearchComputerCircuitboard
-      - id: CargoRequestScienceComputerCircuitboard
-      - id: RoboticsConsoleCircuitboard
-      - id: AnalysisComputerCircuitboard #Because sometimes round start artis just fucking explode on the pad.
-      - id: ArtifactAnalyzerMachineCircuitboard
-      - id: StationAiFixerCircuitboard
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ScienceTechFabCircuitboard # Goob - replaces circuit printer and protolathe
+        - id: ResearchComputerCircuitboard
+        - id: CargoRequestScienceComputerCircuitboard
+        - id: RoboticsConsoleCircuitboard
+        - id: AnalysisComputerCircuitboard #Because sometimes round start artis just fucking explode on the pad.
+        - id: ArtifactAnalyzerMachineCircuitboard
+        - id: StationAiFixerCircuitboard
 
 - type: entity
   name: circuit tote [HoS]
@@ -146,7 +162,9 @@
   id: BoxHoSCircuitboards
   description: A Tote filled with HoS's Circuit boards.
   components:
-  - type: StorageFill
-    contents:
-      - id: SecurityTechFabCircuitboard
-      - id: CargoRequestSecurityComputerCircuitboard
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SecurityTechFabCircuitboard
+        - id: CargoRequestSecurityComputerCircuitboard

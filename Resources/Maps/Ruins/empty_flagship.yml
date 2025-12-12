@@ -5340,8 +5340,6 @@ entities:
     - type: Transform
       pos: 22.5,-11.5
       parent: 1
-    - type: RandomSpawner
-      offset: 0.2
   - uid: 1453
     components:
     - type: Transform
@@ -5391,50 +5389,36 @@ entities:
     - type: Transform
       pos: 25.5,-9.5
       parent: 1
-    - type: RandomSpawner
-      offset: 0.2
   - uid: 421
     components:
     - type: Transform
       pos: 25.5,-11.5
       parent: 1
-    - type: RandomSpawner
-      offset: 0.2
   - uid: 423
     components:
     - type: Transform
       pos: 25.5,-12.5
       parent: 1
-    - type: RandomSpawner
-      offset: 0.2
   - uid: 427
     components:
     - type: Transform
       pos: 22.5,-10.5
       parent: 1
-    - type: RandomSpawner
-      offset: 0.2
   - uid: 428
     components:
     - type: Transform
       pos: 22.5,-7.5
       parent: 1
-    - type: RandomSpawner
-      offset: 0.2
   - uid: 438
     components:
     - type: Transform
       pos: 22.5,-13.5
       parent: 1
-    - type: RandomSpawner
-      offset: 0.2
   - uid: 439
     components:
     - type: Transform
       pos: 22.5,-14.5
       parent: 1
-    - type: RandomSpawner
-      offset: 0.2
   - uid: 2187
     components:
     - type: Transform

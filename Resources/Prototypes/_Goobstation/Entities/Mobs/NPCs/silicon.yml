@@ -46,7 +46,10 @@
       amount: 2
   - type: Bloodstream
     bloodMaxVolume: 10
-    bloodReagent: Oil
+    bloodReagents:
+      reagents:
+      - ReagentId: Oil
+        Quantity: 1
   - type: Fixtures
     fixtures:
       fix1:
@@ -131,13 +134,12 @@
         - MobMask
         layer:
         - MobLayer
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletPistol
     fireCost: 50
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 50
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 1000
     startingCharge: 1000
   - type: Gun
@@ -179,7 +181,7 @@
     noMovementLayers:
       movement:
         state: nukebot
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BaseBulletIncendiary
     fireCost: 50
   - type: Gun

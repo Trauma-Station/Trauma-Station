@@ -73,7 +73,7 @@
     lightAttackOvertimeDamageMultiplier: 0
     sound: /Audio/Weapons/egloves.ogg
   - type: LandAtCursor
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 600
     startingCharge: 600
   - type: UseDelay

@@ -64,8 +64,6 @@
       enum.WizardTeleportUiKey.Key: # Goobstation - wizard
         type: WizardTeleportBoundUserInterface
         requireInputValidation: false
-      enum.SurgeryUIKey.Key: # Shitmed
-        type: SurgeryBui
   # Goobstation Start - Energycrit
   # - type: PowerCellSlot
   #   cellSlotId: cell_slot
@@ -78,7 +76,7 @@
   #       startingItem: PowerCellMedium
   # - type: BatterySlotRequiresLock
   #   itemSlot: cell_slot
-  - type: Battery # Power cell slot replaced with high capacity battery
+  - type: PredictedBattery # Power cell slot replaced with high capacity battery
     maxCharge: 1080
     startingCharge: 1080
   # Goobstation End - Energycrit

@@ -37,6 +37,5 @@
   - type: UseDelay
   - type: Item
     size: Small
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 5

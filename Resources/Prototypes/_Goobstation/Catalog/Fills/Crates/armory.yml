@@ -11,10 +11,10 @@
   name: Combat hardsuit crate
   description: Contains an advanced security hardsuit. Requires Armory access to open.
   components:
-  - type: StorageFill
-    contents:
-      - id: ClothingOuterHardsuitCombatOfficer
-        amount: 1
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: ClothingOuterHardsuitCombatOfficer
 
 - type: entity
   id: CrateArmoryCombatMedicalHardsuit
@@ -22,10 +22,10 @@
   name: Combat medical hardsuit crate
   description:  Contains an advanced medical security hardsuit, less defence but much less cumbersome. Requires Armory access to open.
   components:
-  - type: StorageFill
-    contents:
-      - id: ClothingOuterHardsuitCombatMedical
-        amount: 1
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: ClothingOuterHardsuitCombatMedical
 
 - type: entity
   id: CrateArmoryCombatRiotHardsuit
@@ -33,7 +33,7 @@
   name: Riot hardsuit crate
   description: Contains an advanced riot security hardsuit, very high defence but much also very cumbersome. Requires Armory access to open.
   components:
-  - type: StorageFill
-    contents:
-      - id: ClothingOuterHardsuitCombatRiot
-        amount: 1
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: ClothingOuterHardsuitCombatRiot

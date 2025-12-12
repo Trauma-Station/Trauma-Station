@@ -35,13 +35,14 @@
   parent: DeterrentCase
   suffix: Filled, CentComm
   components:
-  - type: StorageFill
-    contents:
-    - id: AmnestizineHypospray
-    - id: BoxAmnestizineCartridge
-    - id: TelescopicBatonAdvanced
-    - id: HyperFlash
-
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: AmnestizineHypospray
+        - id: BoxAmnestizineCartridge
+        - id: TelescopicBatonAdvanced
+        - id: HyperFlash
 
 - type: entity
   id: ClothingShoesBootsJackAdvancedFilled

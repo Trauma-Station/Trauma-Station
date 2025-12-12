@@ -8,9 +8,10 @@
   parent: CrateGenericSteel
   name: power transmission laser crate
   components:
-  - type: StorageFill
-    contents:
-    - id: MachinePowerTransmissionLaserFlatpack
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: MachinePowerTransmissionLaserFlatpack
 
 - type: entity
   id: CrateEngineeringTEG
@@ -18,9 +19,11 @@
   name: thermo-electric generator crate
   description: Containing thermo-electric generator flatpack to make atmosian happy.
   components:
-  - type: StorageFill
-    contents:
-      - id: TegCirculatorFlatpack
-      - id: TegCirculatorFlatpack
-      - id: TegMiddleFlatpack
-      - id: ToyFigurineAtmosTech
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: TegCirculatorFlatpack
+        - id: TegCirculatorFlatpack
+        - id: TegMiddleFlatpack
+        - id: ToyFigurineAtmosTech

@@ -14,7 +14,8 @@
   name: MOD cores crate
   description: Contains three MOD cores inside.
   components:
-  - type: StorageFill
-    contents:
-    - id: ModsuitCoreStandard
-      amount: 3
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: ModsuitCoreStandard
+        amount: 3

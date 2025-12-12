@@ -3,7 +3,6 @@ using Content.Server._Mono.FireControl;
 using Content.Server._Mono.SpaceArtillery.Components;
 using Content.Server.DeviceLinking.Systems;
 using Content.Server.Power.Components;
-using Content.Server.Power.EntitySystems;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._Mono.ShipGuns;
 using Content.Shared._Mono.SpaceArtillery;
@@ -13,6 +12,7 @@ using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Examine;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Map;
@@ -24,7 +24,7 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
 {
     [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
+    [Dependency] private readonly PredictedBatterySystem _battery = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _recoilSystem = default!;
     [Dependency] private readonly FireControlSystem _fireControl = default!;
@@ -133,10 +133,7 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
             return;
         }
 
-        if (TryComp<BatteryComponent>(uid, out var battery))
-        {
-            _battery.UseCharge(uid, component.PowerUseActive, battery);
-        }
+        _battery.UseCharge(uid, component.PowerUseActive);
     }
 
     private void OnEmptyShotEvent(EntityUid uid, SpaceArtilleryComponent component, OnEmptyGunShotEvent args)

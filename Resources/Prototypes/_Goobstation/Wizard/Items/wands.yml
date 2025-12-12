@@ -36,10 +36,10 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/Magic/staff_healing.ogg
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 10000
     startingCharge: 10000
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ProjectileFireball
     fireCost: 250
   - type: Appearance

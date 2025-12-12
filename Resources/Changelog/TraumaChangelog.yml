@@ -810,3 +810,17 @@ Entries:
         your character. Failure to comply will lead to beatings.
   id: 89
   time: '2025-12-04T18:52:05.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: >-
+        Fixed plasmamen traitors getting 5x more bribery because of unadjusted
+        uplink price.
+  id: 90
+  time: '2025-12-09T20:00:27.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: Weldbot requires an experimental welder.
+  id: 91
+  time: '2025-12-10T21:37:23.0000000+00:00'

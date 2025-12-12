@@ -14,8 +14,10 @@
     - state: box_security
     - sprite: _DV/Objects/Storage/boxes.rsi
       state: recorder
-  - type: StorageFill
-    contents:
-    - id: CassetteTape
-      amount: 4
-    - id: TapeRecorder
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CassetteTape
+          amount: 4
+        - id: TapeRecorder

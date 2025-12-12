@@ -9,9 +9,10 @@
   name: lavaland gateway crate
   description: Allows you to teleport straight to Lavaland.
   components:
-  - type: StorageFill
-    contents:
-    - id: GatewayFlatpackLavaland
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: GatewayFlatpackLavaland
 
 - type: entity
   id: CrateCargoClarkeAssembly
@@ -19,14 +20,16 @@
   description: At long last, you will finally feel secure inside this brand new spankin machine! Assembly required.
   parent: CratePrivateSecure
   components:
-  - type: StorageFill
-    contents:
-    - id: ClarkeHarness
-    - id: ClarkeHead
-    - id: ClarkeLArm
-    - id: ClarkeRArm
-    - id: ClarkeTreads
-    - id: ClarkeCentralElectronics
-    - id: ClarkePeripheralsElectronics
-    - id: MechAirTank
-    - id: MechThruster
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClarkeHarness
+        - id: ClarkeHead
+        - id: ClarkeLArm
+        - id: ClarkeRArm
+        - id: ClarkeTreads
+        - id: ClarkeCentralElectronics
+        - id: ClarkePeripheralsElectronics
+        - id: MechAirTank
+        - id: MechThruster
