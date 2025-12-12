@@ -12,13 +12,13 @@ public enum PlantAnalyzerModes
 }
 
 [Serializable, NetSerializable]
-public partial struct MutationData
+public partial struct GeneData
 {
     public int MutationID;
 
     public float MutationValue;
 
-    public MutationData(int id, float value)
+    public GeneData(int id, float value)
     {
         MutationID = id;
         MutationValue = value;
@@ -29,7 +29,7 @@ public partial struct MutationData
 // 0 - float, 1 - int, 2 - Enum HarvestType, 3 - bool
 public partial struct SeedDataTypes
 {
-    // 0 - float, 1 - int, 2 - Enum HarvestType, 3 - bool
+    // 0 - float, 1 - int, 2 - Enum HarvestType, 3 - bool, 4 - Gas, 5 - Chemical, 6 - class RandomPlantMutation
     public static readonly Dictionary<int, int> IdToType = new()
     {
         { 0, 0 },

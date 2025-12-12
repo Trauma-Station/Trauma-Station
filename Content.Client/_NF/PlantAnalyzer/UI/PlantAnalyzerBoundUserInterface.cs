@@ -56,7 +56,7 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
         }
     }
 
-    public void MutationIterate(bool up)
+    public void GeneIterate(bool up)
     {
         if (_window!=null)
             SendMessage(new PlantAnalyzerMutateIterate(up, (_window.internalmode == PlantAnalyzerModes.Implant)));

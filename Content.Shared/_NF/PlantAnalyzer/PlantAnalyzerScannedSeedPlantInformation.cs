@@ -141,9 +141,9 @@ public sealed class PlantAnalyzerCurrentCount : BoundUserInterfaceState
 [Serializable, NetSerializable]
 public sealed class PlantAnalyzerSeedDatabank : BoundUserInterfaceState
 {
-    public List<MutationData> SeedData { get; }
+    public List<GeneData> SeedData { get; }
 
-    public PlantAnalyzerSeedDatabank(List<MutationData> seedData)
+    public PlantAnalyzerSeedDatabank(List<GeneData> seedData)
     {
         SeedData = seedData;
     }

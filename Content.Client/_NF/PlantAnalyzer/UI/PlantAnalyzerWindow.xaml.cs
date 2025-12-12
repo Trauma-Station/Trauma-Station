@@ -27,7 +27,7 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
     private const string IndentedNewline = "\n   ";
     public PlantAnalyzerModes internalmode = PlantAnalyzerModes.BasicScan;
     private int internalNumberToDisplay = 0;
-    private List<MutationData> internalMutationDatabank = new();
+    private List<GeneData> internalGeneDatabank = new();
 
     public PlantAnalyzerWindow(PlantAnalyzerBoundUserInterface owner)
     {
@@ -50,8 +50,8 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
         ExtractButton.OnPressed += _ => owner.AdvPressed(PlantAnalyzerModes.Extract);
         ImplantButton.OnPressed += _ => owner.AdvPressed(PlantAnalyzerModes.Implant);
 
-        StepDown.OnPressed += _ => owner.MutationIterate(false);
-        StepUp.OnPressed += _ => owner.MutationIterate(true);
+        StepDown.OnPressed += _ => owner.GeneIterate(false);
+        StepUp.OnPressed += _ => owner.GeneIterate(true);
 
         DeleteDatabaseEntryButton.OnPressed += _ => owner.DeleteDatabaseEntry();
     }
@@ -65,20 +65,20 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
         internalNumberToDisplay = msg.CurrentCount;
         if (internalmode == PlantAnalyzerModes.Implant)
         {
-            MutationIndex.Text = "Selected ID: " + (internalNumberToDisplay + 1).ToString();
+            GeneIndex.Text = "Selected ID: " + (internalNumberToDisplay + 1).ToString();
         }
         else
         {
-            MutationIndex.Text = SeedDataTypes.IdToString[internalNumberToDisplay];
+            GeneIndex.Text = SeedDataTypes.IdToString[internalNumberToDisplay];
         }
     }
 
     public void Populate(PlantAnalyzerSeedDatabank msg)
     {
-        internalMutationDatabank = msg.SeedData;
-        MutationDatabaseListContainer.RemoveAllChildren();
+        internalGeneDatabank = msg.SeedData;
+        GeneDatabaseListContainer.RemoveAllChildren();
         int index = 0;
-        foreach (MutationData mutation in internalMutationDatabank)
+        foreach (GeneData mutation in internalGeneDatabank)
         {
             int mutationID = mutation.MutationID;
             int mutationType = SeedDataTypes.IdToType[mutationID];
@@ -90,7 +90,7 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
                 3 => mutation.MutationValue >= 0.5f ? Loc.GetString("plant-analyzer-boolean-true") : Loc.GetString("plant-analyzer-boolean-false"),
                 _ => "N/A"
             };
-            MutationDatabaseListContainer.AddChild(new RichTextLabel
+            GeneDatabaseListContainer.AddChild(new RichTextLabel
             {
                 Text = "ID: " + (index + 1) + " " + SeedDataTypes.IdToString[mutationID] + ": " + mutationValue,
                 Margin = new Thickness(0, 4),

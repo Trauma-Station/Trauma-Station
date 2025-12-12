@@ -5,6 +5,7 @@
 
 using Content.Shared.DoAfter;
 using Robust.Shared.Audio;
+using Content.Shared.Atmos;
 using Content.Shared.Botany.Components;
 
 namespace Content.Server.Botany.Components;
@@ -38,7 +39,7 @@ public sealed partial class PlantAnalyzerComponent : Component
     public SoundSpecifier? ScanningEndSound;
 
     [DataField]
-    public List<MutationData> MutationBank = new();
+    public List<GeneData> MutationBank = new();
 
     [DataField]
     public int MutationIndex = 0;
@@ -47,8 +48,7 @@ public sealed partial class PlantAnalyzerComponent : Component
     public int DatabankIndex = 0;
 
     // This is some shit which is really fucking wack.
-
-    public float GetMutationFromInteger(int index, SeedData seed)
+    public float GetGeneFromInteger(int index, SeedData seed)
     {
         if (index < 0)
         {
@@ -85,9 +85,9 @@ public sealed partial class PlantAnalyzerComponent : Component
         return seedData[index];
     }
 
-    public void SetMutationFromInteger(int index, SeedData seed)
+    public void SetGeneFromInteger(int index, SeedData seed)
     {
-        MutationData mutation = MutationBank[index];
+        GeneData mutation = MutationBank[index];
         switch (mutation.MutationID)
         {
             case 0:

@@ -57,9 +57,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
             <BoxContainer Name="{Loc 'plant-analyzer-window-tab-databank'}" Orientation="Vertical"  VerticalAlignment="Stretch" Margin="10 0 5 0">
                 <Button Name="DeleteDatabaseEntryButton" Text="{Loc 'plant-analyzer-delete-entry'}" StyleClasses="OpenLeft"/>
                 <Button Name="StepDown" Text="{Loc 'plant-analyzer-subtract'}" StyleClasses="OpenLeft"/>
-                <Label Name="MutationIndex" Text="Not Detected" Margin="10 0 0 0"/>
+                <Label Name="GeneIndex" Text="Not Detected" Margin="10 0 0 0"/>
                 <Button Name="StepUp" Text="{Loc 'plant-analyzer-add'}" StyleClasses="OpenRight"/>
-                <BoxContainer Name="MutationDatabaseListContainer" Orientation="Vertical" HorizontalExpand="True" HorizontalAlignment="Left">
+                <BoxContainer Name="GeneDatabaseListContainer" Orientation="Vertical" HorizontalExpand="True" HorizontalAlignment="Left">
                     <Label Name="Database" Text="Database:" Margin="10 0 0 0"/>
                 </BoxContainer>
             </BoxContainer>

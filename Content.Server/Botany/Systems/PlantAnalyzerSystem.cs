@@ -126,14 +126,14 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             if (seedComp.Seed != null)
             {
                 // Copy mutation to databank.
-                ent.Comp.MutationBank.Add(new MutationData(ent.Comp.MutationIndex, ent.Comp.GetMutationFromInteger(ent.Comp.MutationIndex, seedComp.Seed)));
+                ent.Comp.MutationBank.Add(new GeneData(ent.Comp.MutationIndex, ent.Comp.GetGeneFromInteger(ent.Comp.MutationIndex, seedComp.Seed)));
                 // Delete seed
                 EntityManager.DeleteEntity(target);
             }
             else if (seedComp.SeedId != null && _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed))
             {
                 // Copy mutation to databank.
-                ent.Comp.MutationBank.Add(new MutationData(ent.Comp.MutationIndex, ent.Comp.GetMutationFromInteger(ent.Comp.MutationIndex, protoSeed)));
+                ent.Comp.MutationBank.Add(new GeneData(ent.Comp.MutationIndex, ent.Comp.GetGeneFromInteger(ent.Comp.MutationIndex, protoSeed)));
                 // Delete seed
                 EntityManager.DeleteEntity(target);
             }
@@ -143,7 +143,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             if (plantComp.Seed != null)
             {
                 // Copy mutation to databank.
-                ent.Comp.MutationBank.Add(new MutationData(ent.Comp.MutationIndex, ent.Comp.GetMutationFromInteger(ent.Comp.MutationIndex, plantComp.Seed)));
+                ent.Comp.MutationBank.Add(new GeneData(ent.Comp.MutationIndex, ent.Comp.GetGeneFromInteger(ent.Comp.MutationIndex, plantComp.Seed)));
                 // Delete seed
                 EntityManager.DeleteEntity(target);
             }
@@ -159,18 +159,18 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         {
             if (seedComp.Seed != null)
             {
-                ent.Comp.SetMutationFromInteger(ent.Comp.DatabankIndex, seedComp.Seed);
+                ent.Comp.SetGeneFromInteger(ent.Comp.DatabankIndex, seedComp.Seed);
             }
             else if (seedComp.SeedId != null && _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed))
             {
-                ent.Comp.SetMutationFromInteger(ent.Comp.DatabankIndex, protoSeed);
+                ent.Comp.SetGeneFromInteger(ent.Comp.DatabankIndex, protoSeed);
             }
         }
         else if (TryComp<PlantHolderComponent>(target, out var plantComp))
         {
             if (plantComp.Seed != null)
             {
-                ent.Comp.SetMutationFromInteger(ent.Comp.DatabankIndex, plantComp.Seed);
+                ent.Comp.SetGeneFromInteger(ent.Comp.DatabankIndex, plantComp.Seed);
             }
         }
     }
