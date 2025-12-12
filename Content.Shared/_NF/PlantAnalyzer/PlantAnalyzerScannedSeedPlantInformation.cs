@@ -104,12 +104,12 @@ public sealed class PlantAnalyzerSetMode : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerMutateIterate : BoundUserInterfaceMessage
+public sealed class PlantAnalyzerGeneIterate : BoundUserInterfaceMessage
 {
     public bool MutationIterate { get; }
     public bool IsDatabank { get; }
 
-    public PlantAnalyzerMutateIterate(bool up, bool isDatabank)
+    public PlantAnalyzerGeneIterate(bool up, bool isDatabank)
     {
         MutationIterate = up;
         IsDatabank = isDatabank;
@@ -142,14 +142,26 @@ public sealed class PlantAnalyzerCurrentCount : BoundUserInterfaceState
 public sealed class PlantAnalyzerSeedDatabank : BoundUserInterfaceState
 {
     public List<GeneData> SeedData { get; }
+    public List<GasData> ConsumeGasData { get; }
+    public List<GasData> ExudeGasData { get; }
+    public List<ChemData> ChemicalData { get; }
 
-    public PlantAnalyzerSeedDatabank(List<GeneData> seedData)
+    public PlantAnalyzerSeedDatabank(List<GeneData> seedData, List<GasData> consumeGasData, List<GasData> exudeGasData, List<ChemData> chemicalData)
     {
         SeedData = seedData;
+        ConsumeGasData = consumeGasData;
+        ExudeGasData = exudeGasData;
+        ChemicalData = chemicalData;
     }
 }
 
 [Serializable, NetSerializable]
 public sealed class PlantAnalyzerDeleteDatabankEntry : BoundUserInterfaceMessage
 {
+    public bool IsDeleteMutations { get; }
+
+    public PlantAnalyzerDeleteDatabankEntry(bool isDeleteMutations)
+    {
+        IsDeleteMutations = isDeleteMutations;
+    }
 }

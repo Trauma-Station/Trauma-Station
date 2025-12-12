@@ -25,9 +25,12 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
     private readonly ButtonGroup _buttonGroup = new();
 
     private const string IndentedNewline = "\n   ";
-    public PlantAnalyzerModes internalmode = PlantAnalyzerModes.BasicScan;
-    private int internalNumberToDisplay = 0;
-    private List<GeneData> internalGeneDatabank = new();
+    public PlantAnalyzerModes _internalmode = PlantAnalyzerModes.BasicScan;
+    private int _internalNumberToDisplay = 0;
+    private List<GeneData> _internalGeneDatabank = new();
+    private List<GasData> _internalConsumeGasesDatabank = new();
+    private List<GasData> _internalExudeGasesDatabank = new();
+    private List<ChemData> _internalChemicalsDatabank = new();
 
     public PlantAnalyzerWindow(PlantAnalyzerBoundUserInterface owner)
     {
@@ -53,46 +56,89 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
         StepDown.OnPressed += _ => owner.GeneIterate(false);
         StepUp.OnPressed += _ => owner.GeneIterate(true);
 
-        DeleteDatabaseEntryButton.OnPressed += _ => owner.DeleteDatabaseEntry();
+        DeleteMutations.OnPressed += _ => owner.DeleteDatabaseEntry(true);
+        DeleteDatabaseEntryButton.OnPressed += _ => owner.DeleteDatabaseEntry(false);
     }
 
     public void Populate(PlantAnalyzerCurrentMode msg)
     {
-        internalmode = msg.CurrentMode;
+        _internalmode = msg.CurrentMode;
     }
     public void Populate(PlantAnalyzerCurrentCount msg)
     {
-        internalNumberToDisplay = msg.CurrentCount;
-        if (internalmode == PlantAnalyzerModes.Implant)
+        _internalNumberToDisplay = msg.CurrentCount;
+        if (_internalmode == PlantAnalyzerModes.Implant)
         {
-            GeneIndex.Text = "Selected ID: " + (internalNumberToDisplay + 1).ToString();
+            if (_internalGeneDatabank.Count + _internalConsumeGasesDatabank.Count + _internalExudeGasesDatabank.Count + _internalChemicalsDatabank.Count <= 0)
+            {
+                GeneIndex.Text = "-----";
+            }
+            else
+            {
+                GeneIndex.Text = "Selected ID: " + (_internalNumberToDisplay + 1).ToString();
+            }
         }
         else
         {
-            GeneIndex.Text = SeedDataTypes.IdToString[internalNumberToDisplay];
+            if (_internalNumberToDisplay < 0)
+            {
+                GeneIndex.Text = "Invalid Data";
+                return;
+            }
+            GeneIndex.Text = SeedDataTypes.IdToString[_internalNumberToDisplay];
         }
     }
 
     public void Populate(PlantAnalyzerSeedDatabank msg)
     {
-        internalGeneDatabank = msg.SeedData;
+        _internalGeneDatabank = msg.SeedData;
+        _internalConsumeGasesDatabank = msg.ConsumeGasData;
+        _internalExudeGasesDatabank = msg.ExudeGasData;
+        _internalChemicalsDatabank = msg.ChemicalData;
         GeneDatabaseListContainer.RemoveAllChildren();
         int index = 0;
-        foreach (GeneData mutation in internalGeneDatabank)
+        foreach (GeneData gene in _internalGeneDatabank)
         {
-            int mutationID = mutation.MutationID;
+            int mutationID = gene.GeneID;
             int mutationType = SeedDataTypes.IdToType[mutationID];
             string mutationValue = mutationType switch
             {
-                0 => $"{mutation.MutationValue:F2}",
-                1 => $"{(int)mutation.MutationValue:D0}",
-                2 => Loc.GetString($"plant-analyzer-harvest-{(AnalyzerHarvestType)(int)mutation.MutationValue}"),
-                3 => mutation.MutationValue >= 0.5f ? Loc.GetString("plant-analyzer-boolean-true") : Loc.GetString("plant-analyzer-boolean-false"),
+                0 => $"{gene.GeneValue:F2}",
+                1 => $"{(int)gene.GeneValue:D0}",
+                2 => Loc.GetString($"plant-analyzer-harvest-{(AnalyzerHarvestType)(int)gene.GeneValue}"),
+                3 => gene.GeneValue >= 0.5f ? Loc.GetString("plant-analyzer-boolean-true") : Loc.GetString("plant-analyzer-boolean-false"),
                 _ => "N/A"
             };
             GeneDatabaseListContainer.AddChild(new RichTextLabel
             {
                 Text = "ID: " + (index + 1) + " " + SeedDataTypes.IdToString[mutationID] + ": " + mutationValue,
+                Margin = new Thickness(0, 4),
+            });
+            index++;
+        }
+        foreach (GasData gene in _internalConsumeGasesDatabank)
+        {
+            GeneDatabaseListContainer.AddChild(new RichTextLabel
+            {
+                Text = "ID: " + (index + 1) + " Consume " + gene.GasID.ToString() + ": " + gene.GasValue,
+                Margin = new Thickness(0, 4),
+            });
+            index++;
+        }
+        foreach (GasData gene in _internalExudeGasesDatabank)
+        {
+            GeneDatabaseListContainer.AddChild(new RichTextLabel
+            {
+                Text = "ID: " + (index + 1) + " Exude " + gene.GasID.ToString() + ": " + gene.GasValue,
+                Margin = new Thickness(0, 4),
+            });
+            index++;
+        }
+        foreach (ChemData gene in _internalChemicalsDatabank)
+        {
+            GeneDatabaseListContainer.AddChild(new RichTextLabel
+            {
+                Text = "ID: " + (index + 1) + " " + gene.ChemID + ": Min - " + gene.ChemValue.Min + ", Max - " + gene.ChemValue.Max + ", Potency Divisor - " + gene.ChemValue.PotencyDivisor + ", Inherent - " + gene.ChemValue.Inherent,
                 Margin = new Thickness(0, 4),
             });
             index++;

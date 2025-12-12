@@ -1,6 +1,8 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
+using Content.Shared.Atmos;
+
 namespace Content.Shared.Botany.Components;
 
 public enum PlantAnalyzerModes
@@ -14,14 +16,42 @@ public enum PlantAnalyzerModes
 [Serializable, NetSerializable]
 public partial struct GeneData
 {
-    public int MutationID;
+    public int GeneID;
 
-    public float MutationValue;
+    public float GeneValue;
 
     public GeneData(int id, float value)
     {
-        MutationID = id;
-        MutationValue = value;
+        GeneID = id;
+        GeneValue = value;
+    }
+}
+
+[Serializable, NetSerializable]
+public partial struct ChemData
+{
+    public string ChemID;
+
+    public SeedChemQuantityAlternate ChemValue;
+
+    public ChemData(string id, SeedChemQuantityAlternate value)
+    {
+        ChemID = id;
+        ChemValue = value;
+    }
+}
+
+[Serializable, NetSerializable]
+public partial struct GasData
+{
+    public Gas GasID;
+
+    public float GasValue;
+
+    public GasData(Gas gasId, float value)
+    {
+        GasID = gasId;
+        GasValue = value;
     }
 }
 
@@ -83,6 +113,9 @@ public partial struct SeedDataTypes
         { 20, "Viable" },
         { 21, "Ligneous" },
         { 22, "CanScream" },
-        { 23, "TurnIntoKudzu" }
+        { 23, "TurnIntoKudzu" },
+        { 24, "Consume Gases" },
+        { 25, "Exude Gases" },
+        { 26, "Chemicals"}
     };
 }

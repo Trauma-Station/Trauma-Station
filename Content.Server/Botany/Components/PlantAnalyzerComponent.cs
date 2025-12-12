@@ -3,10 +3,13 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 
-using Content.Shared.DoAfter;
-using Robust.Shared.Audio;
+using System.Linq;
 using Content.Shared.Atmos;
 using Content.Shared.Botany.Components;
+using Content.Shared.DoAfter;
+using JetBrains.FormatRipper.Elf;
+using Robust.Shared.Audio;
+using Serilog;
 
 namespace Content.Server.Botany.Components;
 
@@ -39,177 +42,251 @@ public sealed partial class PlantAnalyzerComponent : Component
     public SoundSpecifier? ScanningEndSound;
 
     [DataField]
-    public List<GeneData> MutationBank = new();
+    public List<GeneData> GeneBank = new();
 
     [DataField]
-    public int MutationIndex = 0;
+    public List<GasData> ConsumeGasesBank = new();
+
+    [DataField]
+    public List<GasData> ExudeGasesBank = new();
+
+    [DataField]
+    public List<ChemData> ChemicalBank = new();
+
+
+    [DataField]
+    public int GeneIndex = 0;
 
     [DataField]
     public int DatabankIndex = 0;
 
     // This is some shit which is really fucking wack.
-    public float GetGeneFromInteger(int index, SeedData seed)
+    public void GetGeneFromInteger(int index, SeedData seed)
     {
         if (index < 0)
         {
-            return 0.0f;
+            return;
         }
 
-        Dictionary<int, float> seedData = new()
+        int intCount = SeedDataTypes.IdToType.Count;
+        if (index >= intCount)
         {
-            { 0, seed.NutrientConsumption},
-            { 1, seed.WaterConsumption },
-            { 2, seed.IdealHeat },
-            { 3, seed.HeatTolerance },
-            { 4, seed.IdealLight },
-            { 5, seed.LightTolerance },
-            { 6, seed.ToxinsTolerance },
-            { 7, seed.LowPressureTolerance },
-            { 8, seed.HighPressureTolerance },
-            { 9, seed.PestTolerance },
-            { 10, seed.WeedTolerance },
-            { 11, seed.Endurance },
-            { 12, (float) seed.Yield },
-            { 13, seed.Lifespan },
-            { 14, seed.Maturation },
-            { 15, seed.Production },
-            { 16, seed.GrowthStages },
-            { 17, (float) seed.HarvestRepeat },
-            { 18, seed.Potency },
-            { 19, (float)Convert.ToInt16(seed.Seedless) },
-            { 20, (float)Convert.ToInt16(seed.Viable) },
-            { 21, (float)Convert.ToInt16(seed.Ligneous) },
-            { 22, (float)Convert.ToInt16(seed.CanScream) },
-            { 23, (float)Convert.ToInt16(seed.TurnIntoKudzu) }
-        };
-        return seedData[index];
+            if (index >= intCount + 1)
+            {
+                if (index >= intCount + 2)
+                {
+                    foreach (KeyValuePair<string, SeedChemQuantity> chemical in seed.Chemicals)
+                    {
+                        ChemicalBank.Add(new ChemData(chemical.Key, new SeedChemQuantityAlternate(chemical.Value.Min, chemical.Value.Max, chemical.Value.PotencyDivisor, chemical.Value.Inherent)));
+                    }
+                }
+                else
+                {
+                    foreach (KeyValuePair<Gas, float> gas in seed.ExudeGasses)
+                    {
+                        ExudeGasesBank.Add(new GasData(gas.Key, gas.Value));
+                    }
+                }
+            }
+            else
+            {
+                foreach (KeyValuePair<Gas, float> gas in seed.ConsumeGasses)
+                {
+                    ConsumeGasesBank.Add(new GasData(gas.Key, gas.Value));
+                }
+            }
+        }
+        else
+        {
+            Dictionary<int, float> seedData = new()
+            {
+                { 0, seed.NutrientConsumption},
+                { 1, seed.WaterConsumption },
+                { 2, seed.IdealHeat },
+                { 3, seed.HeatTolerance },
+                { 4, seed.IdealLight },
+                { 5, seed.LightTolerance },
+                { 6, seed.ToxinsTolerance },
+                { 7, seed.LowPressureTolerance },
+                { 8, seed.HighPressureTolerance },
+                { 9, seed.PestTolerance },
+                { 10, seed.WeedTolerance },
+                { 11, seed.Endurance },
+                { 12, (float) seed.Yield },
+                { 13, seed.Lifespan },
+                { 14, seed.Maturation },
+                { 15, seed.Production },
+                { 16, seed.GrowthStages },
+                { 17, (float) seed.HarvestRepeat },
+                { 18, seed.Potency },
+                { 19, (float)Convert.ToInt16(seed.Seedless) },
+                { 20, (float)Convert.ToInt16(seed.Viable) },
+                { 21, (float)Convert.ToInt16(seed.Ligneous) },
+                { 22, (float)Convert.ToInt16(seed.CanScream) },
+                { 23, (float)Convert.ToInt16(seed.TurnIntoKudzu) }
+            };
+            GeneBank.Add(new GeneData(index, seedData[index]));
+        }
     }
 
     public void SetGeneFromInteger(int index, SeedData seed)
     {
-        GeneData mutation = MutationBank[index];
-        switch (mutation.MutationID)
+        int intCount = 0;
+        if (index >= intCount + GeneBank.Count)
         {
-            case 0:
+            intCount += GeneBank.Count;
+            if (index >= intCount + ConsumeGasesBank.Count)
+            {
+                intCount += ConsumeGasesBank.Count;
+                if (index >= intCount + ExudeGasesBank.Count)
                 {
-                    seed.NutrientConsumption = mutation.MutationValue;
-                    break;
+                    intCount += ExudeGasesBank.Count;
+                    ChemData chem = ChemicalBank[index - intCount];
+                    SeedChemQuantity chemical = new SeedChemQuantity();
+                    chemical.Min = chem.ChemValue.Min;
+                    chemical.Max = chem.ChemValue.Max;
+                    chemical.PotencyDivisor = chem.ChemValue.PotencyDivisor;
+                    chemical.Inherent = chem.ChemValue.Inherent;
+                    seed.Chemicals.Add(chem.ChemID, chemical);
                 }
-            case 1:
+                else
                 {
-                    seed.WaterConsumption = mutation.MutationValue;
-                    break;
+                    GasData gas = ExudeGasesBank[index - intCount];
+                    seed.ExudeGasses.Add(gas.GasID, gas.GasValue);
                 }
-            case 2:
-                {
-                    seed.IdealHeat = mutation.MutationValue;
-                    break;
-                }
-            case 3:
-                {
-                    seed.HeatTolerance = mutation.MutationValue;
-                    break;
-                }
-            case 4:
-                {
-                    seed.IdealLight = mutation.MutationValue;
-                    break;
-                }
-            case 5:
-                {
-                    seed.LightTolerance = mutation.MutationValue;
-                    break;
-                }
-            case 6:
-                {
-                    seed.ToxinsTolerance = mutation.MutationValue;
-                    break;
-                }
-            case 7:
-                {
-                    seed.LowPressureTolerance = mutation.MutationValue;
-                    break;
-                }
-            case 8:
-                {
-                    seed.HighPressureTolerance = mutation.MutationValue;
-                    break;
-                }
-            case 9:
-                {
-                    seed.PestTolerance = mutation.MutationValue;
-                    break;
-                }
-            case 10:
-                {
-                    seed.WeedTolerance = mutation.MutationValue;
-                    break;
-                }
-            case 11:
-                {
-                    seed.Endurance = mutation.MutationValue;
-                    break;
-                }
-            case 12:
-                {
-                    seed.Yield = (int) mutation.MutationValue;
-                    break;
-                }
-            case 13:
-                {
-                    seed.Lifespan = mutation.MutationValue;
-                    break;
-                }
-            case 14:
-                {
-                    seed.Maturation = mutation.MutationValue;
-                    break;
-                }
-            case 15:
-                {
-                    seed.Production = mutation.MutationValue;
-                    break;
-                }
-            case 16:
-                {
-                    seed.GrowthStages = (int) mutation.MutationValue;
-                    break;
-                }
-            case 17:
-                {
-                    seed.HarvestRepeat = (HarvestType) mutation.MutationValue;
-                    break;
-                }
-            case 18:
-                {
-                    seed.Potency = mutation.MutationValue;
-                    break;
-                }
-            case 19:
-                {
-                    seed.Seedless = Convert.ToBoolean(mutation.MutationValue);
-                    break;
-                }
-            case 20:
-                {
-                    seed.Viable = Convert.ToBoolean(mutation.MutationValue);
-                    break;
-                }
-            case 21:
-                {
-                    seed.Ligneous = Convert.ToBoolean(mutation.MutationValue);
-                    break;
-                }
-            case 22:
-                {
-                    seed.CanScream = Convert.ToBoolean(mutation.MutationValue);
-                    break;
-                }
-            case 23:
-                {
-                    seed.TurnIntoKudzu = Convert.ToBoolean(mutation.MutationValue);
-                    break;
-                }
+            }
+            else
+            {
+                GasData gas = ConsumeGasesBank[index - intCount];
+                seed.ConsumeGasses.Add(gas.GasID, gas.GasValue);
+            }
+        }
+        else
+        {
+            GeneData gene = GeneBank[index];
+            switch (gene.GeneID)
+            {
+                case 0:
+                    {
+                        seed.NutrientConsumption = gene.GeneValue;
+                        break;
+                    }
+                case 1:
+                    {
+                        seed.WaterConsumption = gene.GeneValue;
+                        break;
+                    }
+                case 2:
+                    {
+                        seed.IdealHeat = gene.GeneValue;
+                        break;
+                    }
+                case 3:
+                    {
+                        seed.HeatTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 4:
+                    {
+                        seed.IdealLight = gene.GeneValue;
+                        break;
+                    }
+                case 5:
+                    {
+                        seed.LightTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 6:
+                    {
+                        seed.ToxinsTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 7:
+                    {
+                        seed.LowPressureTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 8:
+                    {
+                        seed.HighPressureTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 9:
+                    {
+                        seed.PestTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 10:
+                    {
+                        seed.WeedTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 11:
+                    {
+                        seed.Endurance = gene.GeneValue;
+                        break;
+                    }
+                case 12:
+                    {
+                        seed.Yield = (int) gene.GeneValue;
+                        break;
+                    }
+                case 13:
+                    {
+                        seed.Lifespan = gene.GeneValue;
+                        break;
+                    }
+                case 14:
+                    {
+                        seed.Maturation = gene.GeneValue;
+                        break;
+                    }
+                case 15:
+                    {
+                        seed.Production = gene.GeneValue;
+                        break;
+                    }
+                case 16:
+                    {
+                        seed.GrowthStages = (int) gene.GeneValue;
+                        break;
+                    }
+                case 17:
+                    {
+                        seed.HarvestRepeat = (HarvestType) gene.GeneValue;
+                        break;
+                    }
+                case 18:
+                    {
+                        seed.Potency = gene.GeneValue;
+                        break;
+                    }
+                case 19:
+                    {
+                        seed.Seedless = Convert.ToBoolean(gene.GeneValue);
+                        break;
+                    }
+                case 20:
+                    {
+                        seed.Viable = Convert.ToBoolean(gene.GeneValue);
+                        break;
+                    }
+                case 21:
+                    {
+                        seed.Ligneous = Convert.ToBoolean(gene.GeneValue);
+                        break;
+                    }
+                case 22:
+                    {
+                        seed.CanScream = Convert.ToBoolean(gene.GeneValue);
+                        break;
+                    }
+                case 23:
+                    {
+                        seed.TurnIntoKudzu = Convert.ToBoolean(gene.GeneValue);
+                        break;
+                    }
+            }
         }
     }
 }

@@ -18,6 +18,7 @@ plant-analyzer-window-mode-extract = Extract
 plant-analyzer-add = +
 plant-analyzer-subtract = -
 plant-analyzer-delete-entry = Delete
+plant-analyzer-delete-mutations = Delete Mutations
 
 plant-analyzer-window-label-name-scanned-plant = Scanned plant: {$seedName}
 plant-analyzer-window-label-name-scanned-seed = Scanned seed: {$seedName}
