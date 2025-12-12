@@ -244,16 +244,17 @@
   # TODO: exercise and fitness buffs
 
 - type: entity
-  abstract: true # TODO: pointless without exercise
   parent: BaseMutation
   id: MutationStimmed
   name: Stimmed
-  description: The user's chemical balance is more robust. This mutation is known to slightly improve workout efficiency.
+  description: The user's chemical balance is more robust. This mutation is known to speed up metabolism of chemicals.
   components:
   - type: Mutation
     instability: 5
     difficulty: 16
-  # TODO: add 1 to exercise modifier if stimmed
+  - type: MetabolismSpeedMutation # this isn't parity but it does nothing otherwise
+    speed: 0.25
+  # TODO: exercise modifier if that ever gets added
 
 - type: entity
   parent: BaseMutation
