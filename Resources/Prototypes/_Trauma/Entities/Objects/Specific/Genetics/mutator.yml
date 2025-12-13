@@ -1,16 +1,14 @@
+# shared by mutators and enzyme incubator
 - type: entity
+  abstract: true
   parent: BaseItem
-  id: GeneticsMutator
-  name: mutator
-  suffix: Empty
-  description: A single-use injector of a mutagen designed to replicate a specific gene throughout the body.
+  id: BaseGeneticsInjector
   components:
   - type: Sprite
     sprite: Objects/Specific/Medical/medipen.rsi
     layers:
     - state: medipen
       map: [ enum.MutatorVisuals.Layer ]
-  - type: Mutator
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -18,6 +16,15 @@
         enum.MutatorVisuals.Layer:
           True: { state: medipen_empty }
           False: { state: medipen }
+
+- type: entity
+  parent: BaseGeneticsInjector
+  id: GeneticsMutator
+  name: mutator
+  suffix: Empty
+  description: A single-use injector of a mutagen designed to replicate a specific gene throughout the body.
+  components:
+  - type: Mutator
 
 - type: entity
   parent: GeneticsMutator
@@ -36,3 +43,11 @@
   components:
   - type: Mutator
     remove: true
+
+- type: entity
+  parent: BaseGeneticsInjector
+  id: GeneticsEnzymeIncubator
+  name: enzyme incubator
+  description: A injector of a person's Unique Enzymes, the specific genes that control your outward appearance. However, the process is somewhat painful.
+  components:
+  - type: EnzymeIncubator

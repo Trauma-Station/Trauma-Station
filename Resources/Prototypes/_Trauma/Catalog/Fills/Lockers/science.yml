@@ -20,3 +20,5 @@
     - id: ClothingOuterCoatLabGene
     - id: BoxGeneticsDisk
     - id: HandheldGeneticsScanner
+    - id: BarberScissors
+      prob: 0.2 # for unique enzyme trollage

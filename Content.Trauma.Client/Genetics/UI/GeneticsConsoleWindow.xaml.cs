@@ -44,6 +44,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     private int _scrambleCooldown;
     private bool _writeCooldown;
     private bool _printCooldown;
+    private bool _incubatorCooldown;
 
     public GeneticsConsoleWindow()
     {
@@ -217,8 +218,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         if (cooldown == _writeCooldown)
             return;
 
-        _writeCooldown = cooldown;
-        Sequencer.UpdateWriteCooldown(cooldown);
+        Sequencer.UpdateWriteCooldown(_writeCooldown = cooldown);
     }
 
     private void UpdatePrintCooldown(TimeSpan nextPrint)
@@ -227,8 +227,16 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         if (cooldown == _printCooldown)
             return;
 
-        _printCooldown = cooldown;
-        Storage.UpdateCooldowns(cooldown);
+        Storage.UpdateCooldowns(_printCooldown = cooldown);
+    }
+
+    private void UpdatePrintIncubatorCooldown(TimeSpan nextPrint)
+    {
+        var cooldown = OnCooldown(nextPrint);
+        if (cooldown == _incubatorCooldown)
+            return;
+
+        Enzymes.UpdateCooldown(_incubatorCooldown = cooldown);
     }
 
     private void UpdateInstability()

@@ -26,6 +26,7 @@ public sealed class GeneticsDiskSystem : EntitySystem
     private void OnMicrowaved(Entity<GeneticsDiskComponent> ent, ref BeingMicrowavedEvent args)
     {
         SetMutation(ent, null);
+        SetEnzymes(ent, null);
     }
 
     /// <summary>
@@ -37,7 +38,25 @@ public sealed class GeneticsDiskSystem : EntitySystem
             return;
 
         ent.Comp.Mutation = id;
-        Dirty(ent);
+        DirtyField(ent, ent.Comp, nameof(GeneticsDiskComponent.Mutation));
+
+        if (id != null) // mutually exclusive
+            SetEnzymes(ent, null);
+    }
+
+    /// <summary>
+    /// Changes the unique enzymes stored on a disk.
+    /// </summary>
+    public void SetEnzymes(Entity<GeneticsDiskComponent> ent, UniqueEnzymes? enzymes)
+    {
+        if (ent.Comp.Enzymes?.Name == enzymes?.Name)
+            return;
+
+        ent.Comp.Enzymes = enzymes;
+        DirtyField(ent, ent.Comp, nameof(GeneticsDiskComponent.Enzymes));
+
+        if (enzymes != null) // mutually exclusive
+            SetMutation(ent, null);
     }
 
     /// <summary>

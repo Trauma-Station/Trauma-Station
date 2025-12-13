@@ -105,7 +105,7 @@ public sealed class MutatorSystem : EntitySystem
 
     private void OnDoAfter(Entity<MutatorComponent> ent, ref MutatorDoAfterEvent args)
     {
-        if (!_timing.IsFirstTimePredicted || args.Cancelled || args.Args.Target is not {} target)
+        if (!_timing.IsFirstTimePredicted || args.Cancelled || args.Target is not {} target)
             return;
 
         // prevent TOCTOU

@@ -74,14 +74,14 @@ public sealed partial class GeneticsConsoleSystem
             BreakOnDamage = true,
             AttemptFrequency = AttemptFrequency.EveryTick
         };
-        SetBusy(ent, _doAfter.TryStartDoAfter(doAfterArgs));
+        SetBusy(ent.AsNullable(), _doAfter.TryStartDoAfter(doAfterArgs));
 
         Speak(ent, "scanning");
     }
 
     private void OnScanDoAfter(Entity<GeneticsScannerComponent> ent, ref ScanDoAfterEvent args)
     {
-        SetBusy(ent, false);
+        SetBusy(ent.AsNullable(), false);
         if (args.Cancelled)
         {
             Speak(ent, "scan-failed");

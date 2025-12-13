@@ -1,0 +1,21 @@
+<BoxContainer xmlns="https://spacestation14.io"
+        xmlns:genetics="clr-namespace:Content.Trauma.Client.Genetics.UI"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Orientation="Vertical">
+    <controls:NanoHeading Text="{Loc 'genetics-console-scanned-mob'}"/>
+    <BoxContainer Orientation="Horizontal">
+    	<Label Name="MobNameLabel" Text="{Loc 'generic-unknown-title'}" HorizontalExpand="True"/>
+    	<Button Name="SaveButton" Text="{Loc 'genetics-console-save-enzymes'}" Disabled="True"/>
+	</BoxContainer>
+    <controls:NanoHeading Text="{Loc 'genetics-console-disk-enzymes'}"/>
+    <BoxContainer Orientation="Vertical" Align="Center">
+    	<Label Name="DiskLabel" Text="{Loc 'genetics-console-disk-empty'}" Align="Center"/>
+    	<Label Name="DiskNameLabel" Text="{Loc 'generic-unknown-title'}" Align="Center"/>
+    	<Label Name="DiskSexLabel" Text="{Loc 'generic-unknown-title'}" Align="Center"/>
+    	<Label Name="DiskEyeLabel" Text="{Loc 'generic-unknown-title'}" Align="Center"/>
+    	<Label Name="DiskSkinLabel" Text="{Loc 'generic-unknown-title'}" Align="Center"/>
+    	<controls:StripeBack>
+	    	<Button Name="PrintButton" Text="{Loc 'genetics-console-print-incubator'}" Disabled="True"/>
+    	</controls:StripeBack>
+    </BoxContainer>
+</BoxContainer>

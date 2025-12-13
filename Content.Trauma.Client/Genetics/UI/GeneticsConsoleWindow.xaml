@@ -30,6 +30,7 @@
             <genetics:GeneticSequencer Name="Sequencer"/>
             <genetics:GeneticStorage Name="Storage"/>
             <genetics:GeneticCombiner Name="Combiner"/>
+            <genetics:GeneticEnzymes Name="Enzymes"/>
         </TabContainer>
     </BoxContainer>
 </controls:FancyWindow>

@@ -35,13 +35,11 @@ genetics-console-instability = Instability
 genetics-console-scramble = Scramble DNA
 genetics-console-scramble-cooldown = Scramble on cooldown ({$cooldown}s)
 
-genetics-console-tab-storage = Storage
 genetics-console-inserted-disk = Inserted disk:
 genetics-console-loaded-mutation = Loaded mutation:
 genetics-console-no-disk = No disk inserted
 genetics-console-print-item = Print {$item} {$delay}s
 
-genetics-console-tab-sequencer = Sequencer
 genetics-console-sequencer-no-subject = No subject detected
 genetics-console-sequencer-not-scanned = Scan the subject to begin.
 genetics-console-sequencer-no-sequences = Subject's DNA is blank!
@@ -63,3 +61,9 @@ genetics-console-combine-catalyst = Catalyst Mutation: {$mutation}
 genetics-console-combine-results = This mutation can be used to make {$results}!
 genetics-console-combine-no-results = This mutation cannot be combined with anything.
 genetics-console-disk-empty = Disk has no mutation!
+
+genetics-console-scanned-mob = Scanned Mob
+genetics-console-save-enzymes = Save to Disk
+genetics-console-disk-enzymes = Disk Unique Enzymes
+genetics-console-print-incubator = Print Enzyme Incubator
+genetics-console-color = R{$r}/G{$g}/B{$b}

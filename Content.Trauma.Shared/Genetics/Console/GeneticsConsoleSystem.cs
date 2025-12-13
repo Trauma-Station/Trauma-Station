@@ -62,6 +62,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
             subs.Event<GeneticsConsolePrintMessage>(OnPrint);
         });
 
+        InitializeEnzymes();
         InitializeHandheld();
         InitializeScanner();
     }

@@ -253,7 +253,7 @@
     instability: 5
     difficulty: 16
   - type: MetabolismSpeedMutation # this isn't parity but it does nothing otherwise
-    speed: 0.25
+    bonus: 0.25
   # TODO: exercise modifier if that ever gets added
 
 - type: entity
