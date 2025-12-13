@@ -12,7 +12,10 @@
 		<Configurations>Debug;Release;Tools;DebugOpt</Configurations>
 		<Platforms>AnyCPU</Platforms>
 	</PropertyGroup>
-
+    <ItemGroup>
+      <PackageReference Include="Nett" />
+      <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
+    </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="../Content.Goobstation.Client/Content.Goobstation.Client.csproj" />
 		<ProjectReference Include="../Content.Trauma.Shared/Content.Trauma.Shared.csproj" />

@@ -144,7 +144,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             {
                 // Copy genes to databank.
                 GetGeneFromInteger(ent, plantComp.Seed);
-                // EntityManager.DeleteEntity(target);
+                // Del(target);
             }
         }
         _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank));
