@@ -193,7 +193,7 @@
     - id: ClothingUniformOveralls
     - id: ClothingHeadHatTrucker
       prob: 0.1
-    - id: PlantAnalyzer
+    - id: PlantAnalyzer # Trauma Station
 
 - type: entity
   id: LockerBotanistLoot

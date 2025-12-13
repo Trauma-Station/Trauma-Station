@@ -4,10 +4,10 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 
-using Content.Shared.Botany.Components;
+using Content.Trauma.Shared.Botany.Components;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._NF.PlantAnalyzer;
+namespace Content.Trauma.Shared.Botany.PlantAnalyzer;
 
 /// <summary>
 ///     The information about the last scanned plant/seed is stored here.
@@ -85,11 +85,12 @@ public enum GasFlags : short
 
 public enum AnalyzerHarvestType : byte
 {
-    Unknown, // Just in case the backing enum type changes and we haven't caught it.
-    Repeat,
+    //Unknown, // Just in case the backing enum type changes and we haven't caught it.
     NoRepeat,
+    Repeat,
     SelfHarvest
 }
+
 
 
 [Serializable, NetSerializable]

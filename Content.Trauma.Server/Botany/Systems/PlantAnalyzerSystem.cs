@@ -5,24 +5,21 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 
 using System.Linq;
-using System.Text;
+using Content.Server.Botany;
 using Content.Server.Botany.Components;
-using Content.Server.Construction.Completions;
-using Content.Shared._NF.PlantAnalyzer;
 using Content.Shared.Atmos;
-using Content.Shared.Botany.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.PowerCell;
-using Content.Shared.PowerCell.Components;
-using JetBrains.FormatRipper.Elf;
-using Robust.Server.GameObjects;
+using Content.Trauma.Server.Botany.Components;
+using Content.Trauma.Shared.Botany.Components;
+using Content.Trauma.Shared.Botany.PlantAnalyzer;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using static Content.Server.Botany.Components.PlantAnalyzerComponent;
+using Robust.Server.GameObjects;
 
-namespace Content.Server.Botany.Systems;
+namespace Content.Trauma.Server.Botany.Systems;
 
 public sealed class PlantAnalyzerSystem : EntitySystem
 {
@@ -44,18 +41,21 @@ public sealed class PlantAnalyzerSystem : EntitySystem
 
     private void OnAfterInteract(Entity<PlantAnalyzerComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Target == null || !args.CanReach || !_cell.HasActivatableCharge(ent.Owner, user: args.User))
+        if (args.Target is not { } target)
+            return;
+
+        if (!args.CanReach || !_cell.HasActivatableCharge(ent.Owner, user: args.User))
             return;
 
         if (ent.Comp.DoAfter != null)
             return;
 
-        if (HasComp<SeedComponent>(args.Target) || TryComp<PlantHolderComponent>(args.Target, out var plantHolder) && plantHolder.Seed != null)
+        if (HasComp<SeedComponent>(target) || TryComp<PlantHolderComponent>(target, out var plantHolder) && plantHolder.Seed != null)
         {
 
             if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.AdvancedScan)
             {
-                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.Settings.AdvScanDelay, new PlantAnalyzerDoAfterEvent(), ent, target: args.Target, used: ent)
+                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.Settings.AdvScanDelay, new PlantAnalyzerDoAfterEvent(), ent, target: target, used: ent)
                 {
                     NeedHand = true,
                     BreakOnDamage = true,
@@ -66,7 +66,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             }
             else
             {
-                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.Settings.ScanDelay, new PlantAnalyzerDoAfterEvent(), ent, target: args.Target, used: ent)
+                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.Settings.ScanDelay, new PlantAnalyzerDoAfterEvent(), ent, target: target, used: ent)
                 {
                     NeedHand = true,
                     BreakOnDamage = true,
@@ -126,16 +126,16 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             if (seedComp.Seed != null)
             {
                 // Copy genes to databank.
-                ent.Comp.GetGeneFromInteger(ent.Comp.GeneIndex, seedComp.Seed);
+                GetGeneFromInteger(ent, seedComp.Seed);
                 // Delete seed
-                EntityManager.DeleteEntity(target);
+                Del(target);
             }
             else if (seedComp.SeedId != null && _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed))
             {
                 // Copy genes to databank.
-                ent.Comp.GetGeneFromInteger(ent.Comp.GeneIndex, protoSeed);
+                GetGeneFromInteger(ent, protoSeed);
                 // Delete seed
-                EntityManager.DeleteEntity(target);
+                Del(target);
             }
         }
         else if (TryComp<PlantHolderComponent>(target, out var plantComp))
@@ -143,7 +143,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             if (plantComp.Seed != null)
             {
                 // Copy genes to databank.
-                ent.Comp.GetGeneFromInteger(ent.Comp.GeneIndex, plantComp.Seed);
+                GetGeneFromInteger(ent, plantComp.Seed);
                 // EntityManager.DeleteEntity(target);
             }
         }
@@ -158,18 +158,18 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         {
             if (seedComp.Seed != null)
             {
-                ent.Comp.SetGeneFromInteger(ent.Comp.DatabankIndex, seedComp.Seed);
+                SetGeneFromInteger(ent, seedComp.Seed);
             }
             else if (seedComp.SeedId != null && _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed))
             {
-                ent.Comp.SetGeneFromInteger(ent.Comp.DatabankIndex, protoSeed);
+                SetGeneFromInteger(ent, protoSeed);
             }
         }
         else if (TryComp<PlantHolderComponent>(target, out var plantComp))
         {
             if (plantComp.Seed != null)
             {
-                ent.Comp.SetGeneFromInteger(ent.Comp.DatabankIndex, plantComp.Seed);
+                SetGeneFromInteger(ent, plantComp.Seed);
             }
         }
         _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank));
@@ -207,21 +207,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
     {
         bool scanIsAdvanced = (scannerMode == PlantAnalyzerModes.AdvancedScan);
         // Get trickier fields first.
-        AnalyzerHarvestType harvestType = AnalyzerHarvestType.Unknown;
-        switch (seedData.HarvestRepeat)
-        {
-            case HarvestType.Repeat:
-                harvestType = AnalyzerHarvestType.Repeat;
-                break;
-            case HarvestType.NoRepeat:
-                harvestType = AnalyzerHarvestType.NoRepeat;
-                break;
-            case HarvestType.SelfHarvest:
-                harvestType = AnalyzerHarvestType.SelfHarvest;
-                break;
-            default:
-                break;
-        }
+        AnalyzerHarvestType harvestType = (AnalyzerHarvestType) seedData.HarvestRepeat;
 
         var mutationProtos = seedData.MutationPrototypes;
         List<string> mutationStrings = new();
@@ -296,8 +282,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         {
             // Funkystation - 
             // plantGases[i] = Atmospherics.GasNames.GetValueOrDefault(gas, Loc.GetString("gases-unknown"));
-            // Need to actually localize this shit like funky does.
-            plantGases[i] = gas.ToString();
+            plantGases[i] = Loc.GetString($"gases-{gas}");
             i++;
         }
         return plantGases;
@@ -438,5 +423,237 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             }
         }
         _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank));
+    }
+
+    // This is some shit which is really fucking wack.
+    public void GetGeneFromInteger(Entity<PlantAnalyzerComponent> ent, SeedData seed)
+    {
+        int index = ent.Comp.GeneIndex;
+        if (index < 0)
+        {
+            return;
+        }
+
+        int intCount = SeedDataTypes.IdToType.Count;
+        if (index >= intCount)
+        {
+            if (index >= intCount + 1)
+            {
+                if (index >= intCount + 2)
+                {
+                    foreach (KeyValuePair<string, SeedChemQuantity> chemical in seed.Chemicals)
+                    {
+                        ent.Comp.ChemicalBank.Add(new ChemData(chemical.Key, new SeedChemQuantityHelper(chemical.Value.Min, chemical.Value.Max, chemical.Value.PotencyDivisor, chemical.Value.Inherent)));
+                    }
+                }
+                else
+                {
+                    foreach (KeyValuePair<Gas, float> gas in seed.ExudeGasses)
+                    {
+                        ent.Comp.ExudeGasesBank.Add(new GasData(gas.Key, gas.Value));
+                    }
+                }
+            }
+            else
+            {
+                foreach (KeyValuePair<Gas, float> gas in seed.ConsumeGasses)
+                {
+                    ent.Comp.ConsumeGasesBank.Add(new GasData(gas.Key, gas.Value));
+                }
+            }
+        }
+        else
+        {
+            Dictionary<int, float> seedData = new()
+            {
+                { 0, seed.NutrientConsumption},
+                { 1, seed.WaterConsumption },
+                { 2, seed.IdealHeat },
+                { 3, seed.HeatTolerance },
+                { 4, seed.IdealLight },
+                { 5, seed.LightTolerance },
+                { 6, seed.ToxinsTolerance },
+                { 7, seed.LowPressureTolerance },
+                { 8, seed.HighPressureTolerance },
+                { 9, seed.PestTolerance },
+                { 10, seed.WeedTolerance },
+                { 11, seed.Endurance },
+                { 12, (float) seed.Yield },
+                { 13, seed.Lifespan },
+                { 14, seed.Maturation },
+                { 15, seed.Production },
+                { 16, seed.GrowthStages },
+                { 17, (float) seed.HarvestRepeat },
+                { 18, seed.Potency },
+                { 19, (float)Convert.ToInt16(seed.Seedless) },
+                { 20, (float)Convert.ToInt16(seed.Viable) },
+                { 21, (float)Convert.ToInt16(seed.Ligneous) },
+                { 22, (float)Convert.ToInt16(seed.CanScream) },
+                { 23, (float)Convert.ToInt16(seed.TurnIntoKudzu) }
+            };
+            ent.Comp.GeneBank.Add(new GeneData(index, seedData[index]));
+        }
+    }
+
+    public void SetGeneFromInteger(Entity<PlantAnalyzerComponent> ent, SeedData seed)
+    {
+        int index = ent.Comp.DatabankIndex;
+        int intCount = 0;
+        if (index >= intCount + ent.Comp.GeneBank.Count)
+        {
+            intCount += ent.Comp.GeneBank.Count;
+            if (index >= intCount + ent.Comp.ConsumeGasesBank.Count)
+            {
+                intCount += ent.Comp.ConsumeGasesBank.Count;
+                if (index >= intCount + ent.Comp.ExudeGasesBank.Count)
+                {
+                    intCount += ent.Comp.ExudeGasesBank.Count;
+                    ChemData chem = ent.Comp.ChemicalBank[index - intCount];
+                    SeedChemQuantity chemical = new SeedChemQuantity();
+                    chemical.Min = chem.ChemValue.Min;
+                    chemical.Max = chem.ChemValue.Max;
+                    chemical.PotencyDivisor = chem.ChemValue.PotencyDivisor;
+                    chemical.Inherent = chem.ChemValue.Inherent;
+                    seed.Chemicals.Add(chem.ChemID, chemical);
+                }
+                else
+                {
+                    GasData gas = ent.Comp.ExudeGasesBank[index - intCount];
+                    seed.ExudeGasses.Add(gas.GasID, gas.GasValue);
+                }
+            }
+            else
+            {
+                GasData gas = ent.Comp.ConsumeGasesBank[index - intCount];
+                seed.ConsumeGasses.Add(gas.GasID, gas.GasValue);
+            }
+        }
+        else
+        {
+            GeneData gene = ent.Comp.GeneBank[index];
+            switch (gene.GeneID)
+            {
+                case 0:
+                    {
+                        seed.NutrientConsumption = gene.GeneValue;
+                        break;
+                    }
+                case 1:
+                    {
+                        seed.WaterConsumption = gene.GeneValue;
+                        break;
+                    }
+                case 2:
+                    {
+                        seed.IdealHeat = gene.GeneValue;
+                        break;
+                    }
+                case 3:
+                    {
+                        seed.HeatTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 4:
+                    {
+                        seed.IdealLight = gene.GeneValue;
+                        break;
+                    }
+                case 5:
+                    {
+                        seed.LightTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 6:
+                    {
+                        seed.ToxinsTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 7:
+                    {
+                        seed.LowPressureTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 8:
+                    {
+                        seed.HighPressureTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 9:
+                    {
+                        seed.PestTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 10:
+                    {
+                        seed.WeedTolerance = gene.GeneValue;
+                        break;
+                    }
+                case 11:
+                    {
+                        seed.Endurance = gene.GeneValue;
+                        break;
+                    }
+                case 12:
+                    {
+                        seed.Yield = (int) gene.GeneValue;
+                        break;
+                    }
+                case 13:
+                    {
+                        seed.Lifespan = gene.GeneValue;
+                        break;
+                    }
+                case 14:
+                    {
+                        seed.Maturation = gene.GeneValue;
+                        break;
+                    }
+                case 15:
+                    {
+                        seed.Production = gene.GeneValue;
+                        break;
+                    }
+                case 16:
+                    {
+                        seed.GrowthStages = (int) gene.GeneValue;
+                        break;
+                    }
+                case 17:
+                    {
+                        seed.HarvestRepeat = (HarvestType) gene.GeneValue;
+                        break;
+                    }
+                case 18:
+                    {
+                        seed.Potency = gene.GeneValue;
+                        break;
+                    }
+                case 19:
+                    {
+                        seed.Seedless = Convert.ToBoolean(gene.GeneValue);
+                        break;
+                    }
+                case 20:
+                    {
+                        seed.Viable = Convert.ToBoolean(gene.GeneValue);
+                        break;
+                    }
+                case 21:
+                    {
+                        seed.Ligneous = Convert.ToBoolean(gene.GeneValue);
+                        break;
+                    }
+                case 22:
+                    {
+                        seed.CanScream = Convert.ToBoolean(gene.GeneValue);
+                        break;
+                    }
+                case 23:
+                    {
+                        seed.TurnIntoKudzu = Convert.ToBoolean(gene.GeneValue);
+                        break;
+                    }
+            }
+        }
     }
 }

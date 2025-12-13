@@ -3,12 +3,12 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 
-using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._NF.PlantAnalyzer;
+namespace Content.Trauma.Shared.Botany.PlantAnalyzer;
 
 [Serializable, NetSerializable]
-public sealed partial class PlantAnalyzerDoAfterEvent : SimpleDoAfterEvent
+public enum PlantAnalyzerUiKey : byte
 {
+    Key
 }

@@ -4,11 +4,11 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 
-using Content.Shared._NF.PlantAnalyzer;
-using Content.Shared.Botany.Components;
+using Content.Trauma.Shared.Botany.PlantAnalyzer;
+using Content.Trauma.Shared.Botany.Components;
 using JetBrains.Annotations;
 
-namespace Content.Client._NF.PlantAnalyzer.UI;
+namespace Content.Trauma.Client.Botany.PlantAnalyzer.UI;
 
 [UsedImplicitly]
 public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
