@@ -1,3 +1,4 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
 <genetics:GenePuzzle xmlns="https://spacestation14.io"
         xmlns:controls="using:Content.Client.UserInterface.Controls"
         xmlns:genetics="using:Content.Trauma.Client.Genetics.UI">

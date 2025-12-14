@@ -27,8 +27,11 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     public event Action<uint>? OnSequence;
     public event Action<uint>? OnPrint;
     public event Action<uint>? OnCombine;
+    public event Action? OnSaveEnzymes;
+    public event Action? OnPrintIncubator;
 
     private EntityQuery<GeneticsConsoleComponent> _query;
+    private EntityQuery<GeneticsConsoleEnzymesComponent> _enzymesQuery;
     private EntityQuery<GeneticsScannerComponent> _scannerQuery;
     private EntityQuery<MobStateComponent> _mobQuery;
 
@@ -56,6 +59,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         _genome = _entMan.System<ScannedGenomeSystem>();
 
         _query = _entMan.GetEntityQuery<GeneticsConsoleComponent>();
+        _enzymesQuery = _entMan.GetEntityQuery<GeneticsConsoleEnzymesComponent>();
         _scannerQuery = _entMan.GetEntityQuery<GeneticsScannerComponent>();
         _mobQuery = _entMan.GetEntityQuery<MobStateComponent>();
 
@@ -71,28 +75,33 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
 
         Combiner.OnScan += () => OnScan?.Invoke();
         Combiner.OnCombine += i => OnCombine?.Invoke(i);
+
+        Enzymes.OnSave += () => OnSaveEnzymes?.Invoke();
+        Enzymes.OnPrint += () => OnPrintIncubator?.Invoke();
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
 
-        if (!_query.TryComp(_uid, out var comp) || !_scannerQuery.TryComp(_uid, out var scanner))
+        if (!_query.TryComp(_uid, out var comp) ||
+            !_scannerQuery.TryComp(_uid, out var scanner) ||
+            !_enzymesQuery.TryComp(_uid, out var enzymes))
             return;
 
-        Update(comp, scanner);
+        Update(comp, scanner, enzymes);
         UpdateDisk(_disk.GetDisk(_uid));
     }
 
     public void SetEntity(EntityUid uid)
     {
-        if (!_query.TryComp(uid, out var comp) || !_scannerQuery.TryComp(uid, out var scanner))
-        {
+        if (!_query.TryComp(uid, out var comp) ||
+            !_scannerQuery.TryComp(uid, out var scanner) ||
+            !_enzymesQuery.TryComp(uid, out var enzymes))
             return;
-        }
 
         _uid = uid;
-        Update(comp, scanner);
+        Update(comp, scanner, enzymes);
         Storage.SetConsole(comp);
     }
 
@@ -102,11 +111,11 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         Combiner.SetState(state.Sequences);
     }
 
-    private void Update(GeneticsConsoleComponent comp, GeneticsScannerComponent scanner)
+    private void Update(GeneticsConsoleComponent comp, GeneticsScannerComponent scanner, GeneticsConsoleEnzymesComponent enzymes)
     {
         var hasScanner = scanner.Scanner != null;
         if (hasScanner != _hasScanner)
-            UpdateScanner(_hasScanner = hasScanner);
+            UpdateScanner((_hasScanner = hasScanner) == true);
         if (scanner.ScannedMob != _mob)
             UpdateMob(_mob = scanner.ScannedMob);
         if (scanner.Busy != _busy)
@@ -115,6 +124,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         UpdateScrambleCooldown(comp.NextScramble);
         UpdateWriteCooldown(comp.NextWrite);
         UpdatePrintCooldown(comp.NextPrint);
+        UpdatePrintIncubatorCooldown(enzymes.NextPrint);
 
         if (_mob is not {} mob)
             return;
@@ -135,7 +145,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         if (scanned != _scanned)
         {
             _scanned = scanned;
-            Sequencer.UpdateScannedMob(mob);
+            Sequencer.UpdateScanButton();
         }
     }
 
@@ -148,6 +158,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
             Storage.UpdateDiskMutation(mutation);
             Combiner.UpdateDiskMutation(mutation);
         }
+        Enzymes.UpdateEnzymes(disk?.Comp.Enzymes); // internal change detection
 
         if (_currentDisk == disk)
             return;
@@ -156,13 +167,14 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
 
         Sequencer.UpdateDisk(disk);
         Storage.UpdateDisk(disk);
+        Enzymes.UpdateDisk(disk);
     }
 
-    private void UpdateScanner(bool? hasScanner)
+    private void UpdateScanner(bool hasScanner)
     {
-        // optional bool moment
-        UpdateMob(hasScanner == true ? _mob : null);
-        if (hasScanner != true)
+        Sequencer.UpdateHasScanner(hasScanner);
+        UpdateMob(hasScanner ? _mob : null);
+        if (!hasScanner)
             MobStatus.Text = Loc.GetString("genetics-console-no-scanner");
     }
 
@@ -172,6 +184,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         UpdateScrambleDisabled();
         Sequencer.SetMob(uid);
         Combiner.SetMob(uid);
+        Enzymes.SetMob(uid);
         if (_mobQuery.TryComp(uid, out var mob))
         {
             MobName.Text = _entMan.GetComponent<MetaDataComponent>(uid.Value).EntityName;
@@ -255,5 +268,6 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     {
         Sequencer.SetBusy(busy);
         Combiner.SetBusy(busy);
+        Enzymes.SetBusy(busy);
     }
 }

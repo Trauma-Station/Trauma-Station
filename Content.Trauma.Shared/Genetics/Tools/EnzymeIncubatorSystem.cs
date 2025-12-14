@@ -73,20 +73,20 @@ public sealed class EnzymeIncubatorSystem : EntitySystem
     {
         if (ent.Comp.Enzymes == null)
         {
-            _popup.PopupClient(Loc.GetString("enzyme-incubator-depleted"), user, user);
+            _popup.PopupClient(Loc.GetString("mutator-depleted"), user, user);
             return;
         }
 
         var targetName = Identity.Name(target, EntityManager);
         if (!_mutation.CanMutate(target))
         {
-            _popup.PopupClient(Loc.GetString("enzyme-incubator-cant-mutate", ("target", targetName)), user, user);
+            _popup.PopupClient(Loc.GetString("mutator-cant-mutate", ("target", targetName)), user, user);
             return;
         }
 
         var userName = Identity.Name(user, EntityManager);
-        var you = Loc.GetString("enzyme-incubator-mutating-you", ("user", userName), ("item", ent));
-        var others = Loc.GetString("EnzymeIncubator-mutating-others", ("user", userName), ("target", targetName), ("item", ent));
+        var you = Loc.GetString("mutator-mutating-you", ("user", userName), ("item", ent));
+        var others = Loc.GetString("mutator-mutating-others", ("user", userName), ("target", targetName), ("item", ent));
         _popup.PopupPredicted(you, others, ent, target);
 
         // injecting someone else takes twice as long

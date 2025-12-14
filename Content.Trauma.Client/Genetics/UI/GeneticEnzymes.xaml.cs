@@ -30,7 +30,7 @@ public sealed partial class GeneticEnzymes : BoxContainer
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
-        _na = Loc.GetString("generic-unknown-shorthand");
+        _na = Loc.GetString("generic-not-available-shorthand");
 
         SaveButton.OnPressed += _ => OnSave?.Invoke();
         PrintButton.OnPressed += _ => OnPrint?.Invoke();
@@ -46,6 +46,7 @@ public sealed partial class GeneticEnzymes : BoxContainer
     {
         _mobName = _entMan.GetComponentOrNull<MetaDataComponent>(mob)?.EntityName;
         MobNameLabel.Text = _mobName ?? _na;
+        UpdateSaveButton();
     }
 
     public void UpdateCooldown(bool cooldown)

@@ -20,7 +20,9 @@ public sealed partial class GeneticScanner : BoxContainer
     public event Action<LocId?>? OnErrorSet;
 
     private EntityUid? _mob;
+    private bool _hasScanner;
     private bool _busy;
+    private bool _blank;
 
     public GeneticScanner()
     {
@@ -35,42 +37,30 @@ public sealed partial class GeneticScanner : BoxContainer
     public void SetMob(EntityUid? mob)
     {
         _mob = mob;
-        if (mob is not {} uid)
-        {
-            SetError("genetics-console-sequencer-no-subject");
-            ScanButton.Disabled = true;
-            return;
-        }
-
-        UpdateScanButton(uid);
+        UpdateScanButton();
     }
 
     public void SetBusy(bool busy)
     {
         _busy = busy;
-        if (busy)
-        {
-            ScanButton.Disabled = true;
-            return;
-        }
-
-        if (_mob is not {} mob)
-            return;
-
-        UpdateScanButton(mob);
+        UpdateScanButton();
     }
 
-    public void UpdateScanButton(EntityUid mob)
+    public void UpdateScanButton()
     {
-        var isScanned = _genome.IsScanned(mob);
-        ScanButton.Disabled = isScanned || _busy;
-        if (!isScanned)
-        {
+        var scanned = _mob is {} uid && _genome.IsScanned(uid);
+        ScanButton.Disabled = !_hasScanner || _mob == null || scanned || _busy;
+        if (!_hasScanner)
+            SetError("genetics-console-no-scanner");
+        else if (_mob == null)
+            SetError("genetics-console-sequencer-no-subject");
+        else if (!scanned) // button should be enabled for this
             SetError("genetics-console-sequencer-not-scanned");
-            return;
-        }
-
-        SetError(null);
+        else if (_blank)
+            SetError("genetics-console-sequencer-no-sequences");
+        else if (!_busy) // ready to work on
+            SetError(null);
+        // retain previous message if busy
     }
 
     public void SetError(LocId? error)
@@ -79,5 +69,17 @@ public sealed partial class GeneticScanner : BoxContainer
         if (error is {} id)
             ErrorLabel.Text = Loc.GetString(id);
         OnErrorSet?.Invoke(error);
+    }
+
+    public void UpdateHasScanner(bool hasScanner)
+    {
+        _hasScanner = hasScanner;
+        UpdateScanButton();
+    }
+
+    public void SetSequences(int count)
+    {
+        _blank = count == 0;
+        UpdateScanButton();
     }
 }

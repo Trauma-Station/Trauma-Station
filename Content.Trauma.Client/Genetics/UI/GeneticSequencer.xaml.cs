@@ -95,26 +95,20 @@ public sealed partial class GeneticSequencer : BoxContainer
     public void SetState(List<SequenceState> states)
     {
         SequenceButtons.SetStates(states);
-        var scanned = _mob is {} mob && _genome.IsScanned(mob);
-        if (states.Count == 0 && scanned)
-        {
-            Scanner.SetError("genetics-console-sequencer-no-sequences");
-            return;
-        }
-
-        if (scanned)
-            Scanner.SetError(null);
-        else
-            Scanner.SetError("genetics-console-sequencer-not-scanned");
-
+        Scanner.SetSequences(states.Count);
         SequenceButtons.UpdateSequences();
         UpdateSequence();
         UpdateWriteButton();
     }
 
-    public void UpdateScannedMob(EntityUid mob)
+    public void UpdateScanButton()
     {
-        Scanner.UpdateScanButton(mob);
+        Scanner.UpdateScanButton();
+    }
+
+    public void UpdateHasScanner(bool hasScanner)
+    {
+        Scanner.UpdateHasScanner(hasScanner);
     }
 
     public void UpdateDisk(Entity<GeneticsDiskComponent>? disk)

@@ -76,7 +76,7 @@ public sealed partial class GeneticsScannerWindow : FancyWindow
         if (scanned != _scanned)
         {
             _scanned = scanned;
-            Sequencer.UpdateScannedMob(uid);
+            Sequencer.UpdateScanButton();
         }
     }
 }
