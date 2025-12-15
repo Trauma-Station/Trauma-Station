@@ -171,6 +171,8 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 if (seedComp.Seed == null || seedComp.SeedId == null)
                     return;
                 _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed);
+                if (protoSeed == null)
+                    return;
                 seedComp.Seed = protoSeed.Clone();
                 SetGeneFromInteger(ent, ref seedComp.Seed);
             }
@@ -198,6 +200,8 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 if (seedComp.Seed == null || seedComp.SeedId == null)
                     return;
                 _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed);
+                if (protoSeed == null)
+                    return;
                 seedComp.Seed = protoSeed.Clone();
                 seedComp.Seed.Mutations.Clear();
             }
@@ -327,8 +331,10 @@ public sealed class PlantAnalyzerSystem : EntitySystem
 
         var state = new PlantAnalyzerCurrentMode(ent.Comp.Settings.AnalyzerModes);
         _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state);
-
-        SendCurrentIndex(ent);
+        if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Implant)
+        {
+            SendDatabase(ent);
+        }
     }
 
     private void OnGeneIterate(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerGeneIterate args)
@@ -435,7 +441,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 ent.Comp.DatabankIndex = 0;
             }
         }
-        _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank, ent.Comp.GeneIndex, ent.Comp.DatabankIndex));
+        SendDatabase(ent);
     }
 
     public void OnRequestSeedData(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerRequestDatabank args)

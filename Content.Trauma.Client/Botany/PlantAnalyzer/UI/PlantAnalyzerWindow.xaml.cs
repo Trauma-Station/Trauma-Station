@@ -109,6 +109,11 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
                     GeneIndexDatabase.Text = "Selected ID: " + (_internalDatabaseNumber + 1).ToString();
                 }
                 GeneDatabaseListContainer.RemoveAllChildren();
+                GeneDatabaseListContainer.AddChild(new Label
+                {
+                    Text = Loc.GetString("plant-analyzer-database-entries-header"),
+                    Margin = new Thickness(10, 0, 0, 0),
+                });
                 int index = 0;
                 foreach (GeneData gene in _internalGeneDatabank)
                 {

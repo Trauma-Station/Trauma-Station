@@ -60,7 +60,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
                 <Label Name="GeneIndexDatabase" Text="{Loc 'plant-analyzer-invalid-database'}}" Margin="10 0 0 0"/>
                 <Button Name="StepUpDatabase" Text="{Loc 'plant-analyzer-add'}" StyleClasses="OpenRight"/>
                 <BoxContainer Name="GeneDatabaseListContainer" Orientation="Vertical" HorizontalExpand="True" HorizontalAlignment="Left">
-                    <Label Name="Database" Text="Database:" Margin="10 0 0 0"/>
+                    <Label Name="Database" Text="{Loc 'plant-analyzer-database-entries-header'}" Margin="10 0 0 0"/>
                 </BoxContainer>
             </BoxContainer>
         </TabContainer>

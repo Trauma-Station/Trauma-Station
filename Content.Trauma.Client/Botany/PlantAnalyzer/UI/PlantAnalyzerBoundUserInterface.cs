@@ -29,7 +29,7 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
         };
         _window.OnClose += Close;
         _window.OpenCenteredLeft();
-        SendMessage(new PlantAnalyzerRequestDatabank());
+        //SendMessage(new PlantAnalyzerRequestDatabank());
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)  //Funkystation - Switched to state instead of message to fix UI bug
