@@ -13,12 +13,14 @@ using Content.Shared.Tag;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Genetics.Tools;
 
 public sealed class EnzymeIncubatorSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly MutationSystem _mutation = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -84,17 +86,12 @@ public sealed class EnzymeIncubatorSystem : EntitySystem
             return;
         }
 
-        var userName = Identity.Name(user, EntityManager);
-        var you = Loc.GetString("mutator-mutating-you", ("user", userName), ("item", ent));
-        var others = Loc.GetString("mutator-mutating-others", ("user", userName), ("target", targetName), ("item", ent));
-        _popup.PopupPredicted(you, others, ent, target);
-
         // injecting someone else takes twice as long
         var delay = ent.Comp.Delay;
         if (user != target)
             delay *= 2;
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
+        if (!_doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
             user,
             delay,
             new EnzymeIncubatorDoAfterEvent(),
@@ -104,7 +101,13 @@ public sealed class EnzymeIncubatorSystem : EntitySystem
         {
             BreakOnMove = true,
             BreakOnDamage = true
-        });
+        }))
+            return;
+
+        var userName = Identity.Name(user, EntityManager);
+        var you = Loc.GetString("mutator-mutating-you", ("user", userName), ("item", ent));
+        var others = Loc.GetString("mutator-mutating-others", ("user", userName), ("target", targetName), ("item", ent));
+        _popup.PopupPredicted(you, others, ent, target);
     }
 
     private void OnDoAfter(Entity<EnzymeIncubatorComponent> ent, ref EnzymeIncubatorDoAfterEvent args)
@@ -115,6 +118,9 @@ public sealed class EnzymeIncubatorSystem : EntitySystem
             return;
 
         args.Handled = true;
+
+        if (!_timing.IsFirstTimePredicted)
+            return;
 
         _adminLog.Add(LogType.Genetics, LogImpact.High, $"{ToPrettyString(args.User)} used {ToPrettyString(ent)} to change {ToPrettyString(target)} to {enzymes.Name}!");
 

@@ -11,11 +11,18 @@ public sealed partial class GeneticsConsoleSystem
 
     private void InitializeEnzymes()
     {
+        SubscribeLocalEvent<GeneticsConsoleEnzymesComponent, MapInitEvent>(OnEnzymesMapInit);
         Subs.BuiEvents<GeneticsConsoleEnzymesComponent>(GeneticsConsoleUiKey.Key, subs =>
         {
             subs.Event<GeneticsConsoleSaveEnzymesMessage>(OnSaveEnzymes);
             subs.Event<GeneticsConsolePrintIncubatorMessage>(OnPrintIncubator);
         });
+    }
+
+    private void OnEnzymesMapInit(Entity<GeneticsConsoleEnzymesComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.NextPrint = _timing.CurTime + ent.Comp.PrintDelay;
+        Dirty(ent);
     }
 
     private void OnSaveEnzymes(Entity<GeneticsConsoleEnzymesComponent> ent, ref GeneticsConsoleSaveEnzymesMessage args)

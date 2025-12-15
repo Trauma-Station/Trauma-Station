@@ -80,17 +80,12 @@ public sealed class MutatorSystem : EntitySystem
             return;
         }
 
-        var userName = Identity.Name(user, EntityManager);
-        var you = Loc.GetString("mutator-mutating-you", ("user", userName), ("item", ent));
-        var others = Loc.GetString("mutator-mutating-others", ("user", userName), ("target", targetName), ("item", ent));
-        _popup.PopupPredicted(you, others, ent, target);
-
         // injecting someone else takes twice as long
         var delay = ent.Comp.InjectTime;
         if (user != target)
             delay *= 2;
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
+        if (!_doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
             user,
             delay,
             new MutatorDoAfterEvent(),
@@ -100,7 +95,13 @@ public sealed class MutatorSystem : EntitySystem
         {
             BreakOnMove = true,
             BreakOnDamage = true
-        });
+        }))
+            return;
+
+        var userName = Identity.Name(user, EntityManager);
+        var you = Loc.GetString("mutator-mutating-you", ("user", userName), ("item", ent));
+        var others = Loc.GetString("mutator-mutating-others", ("user", userName), ("target", targetName), ("item", ent));
+        _popup.PopupPredicted(you, others, ent, target);
     }
 
     private void OnDoAfter(Entity<MutatorComponent> ent, ref MutatorDoAfterEvent args)

@@ -242,7 +242,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
             profile.Appearance.EyeColor,
             _markingManager);
 
-        DebugTools.Assert(IsClientSide(uid));
+        //DebugTools.Assert(IsClientSide(uid)); // Trauma - fuck you prediction
 
         humanoid.MarkingSet = markings;
         humanoid.PermanentlyHidden = new HashSet<HumanoidVisualLayers>();

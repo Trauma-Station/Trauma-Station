@@ -3,6 +3,7 @@
   configuration:
     entity: MobMonkey
     transferName: true
+    stripNameModifier: false # keep it when going monkey -> human -> monkey
     copiedComponents: [] # no language chud
     forced: true
     revertOnCrit: false
@@ -16,6 +17,7 @@
   configuration:
     entity: MobHuman
     transferName: true # human named monkey (MK-28) kino
+    stripNameModifier: false
     # yes language so monkey is still forced to speak monkey
     forced: true
     revertOnCrit: false

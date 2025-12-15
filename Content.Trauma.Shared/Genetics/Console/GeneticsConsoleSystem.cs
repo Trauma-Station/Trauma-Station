@@ -69,8 +69,18 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
 
     private void OnMapInit(Entity<GeneticsConsoleComponent> ent, ref MapInitEvent args)
     {
+        // prevent reconstruct cheesing
         ent.Comp.NextScramble = _timing.CurTime + ent.Comp.ScrambleCooldown;
         DirtyField(ent, nameof(GeneticsConsoleComponent.NextScramble));
+
+        var longestPrintDelay = TimeSpan.Zero;
+        foreach (var print in ent.Comp.Prints)
+        {
+            if (print.Delay > longestPrintDelay)
+                longestPrintDelay = print.Delay;
+        }
+        ent.Comp.NextPrint = _timing.CurTime + longestPrintDelay;
+        DirtyField(ent, nameof(GeneticsConsoleComponent.NextPrint));
     }
 
     private void OnScramble(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleScrambleMessage args)

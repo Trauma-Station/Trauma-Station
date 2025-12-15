@@ -368,10 +368,10 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
 
         if (configuration.TransferName && TryComp(uid, out MetaDataComponent? targetMeta))
         {
-            // Goob edit start
+            // <Trauma> - remove name modifier suffix by default
             _metaData.SetEntityName(child,
-                TryComp(uid, out NameModifierComponent? modifier) ? modifier.BaseName : targetMeta.EntityName);
-            // Goob edit end
+                configuration.StripNameModifier && TryComp(uid, out NameModifierComponent? modifier) ? modifier.BaseName : targetMeta.EntityName);
+            // </Trauma>
         }
 
         if (configuration.TransferHumanoidAppearance)
