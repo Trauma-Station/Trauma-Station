@@ -158,18 +158,20 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         {
             if (seedComp.Seed != null)
             {
-                SetGeneFromInteger(ent, seedComp.Seed);
+                SetGeneFromInteger(ent, ref seedComp.Seed);
             }
-            else if (seedComp.SeedId != null && _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed))
+            else
             {
-                SetGeneFromInteger(ent, protoSeed);
+                _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed);
+                seedComp.Seed = protoSeed.Clone();
+                SetGeneFromInteger(ent, ref seedComp.Seed);
             }
         }
         else if (TryComp<PlantHolderComponent>(target, out var plantComp))
         {
             if (plantComp.Seed != null)
             {
-                SetGeneFromInteger(ent, plantComp.Seed);
+                SetGeneFromInteger(ent, ref plantComp.Seed);
             }
         }
         _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank));
@@ -495,8 +497,12 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         }
     }
 
-    public void SetGeneFromInteger(Entity<PlantAnalyzerComponent> ent, SeedData seed)
+    public void SetGeneFromInteger(Entity<PlantAnalyzerComponent> ent, ref SeedData seed)
     {
+        if (!seed.Unique)
+        {
+            seed = seed.Clone();
+        }
         int index = ent.Comp.DatabankIndex;
         int intCount = 0;
         if (index >= intCount + ent.Comp.GeneBank.Count)
