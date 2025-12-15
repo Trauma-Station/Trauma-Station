@@ -5,7 +5,7 @@
         "y": 32
     },
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/4397d63a55dac7d0536eb9bcc0a0f68634858c50/code/modules/hydroponics/hydroitemdefines.dm",
+    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/c05f8ea57da3bba0f45bf5e1e5f176055674b7a2/icons/obj/devices/scanner.dmi",
     "states": 
     [
         {

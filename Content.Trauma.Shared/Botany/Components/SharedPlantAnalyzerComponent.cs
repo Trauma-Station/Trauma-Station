@@ -47,47 +47,21 @@ public enum PlantAnalyzerModes
     DeleteMutations
 }
 
-[Serializable, NetSerializable]
-public partial struct GeneData
+public enum HarvestType : byte
 {
-    public int GeneID;
-
-    public float GeneValue;
-
-    public GeneData(int id, float value)
-    {
-        GeneID = id;
-        GeneValue = value;
-    }
+    NoRepeat,
+    Repeat,
+    SelfHarvest
 }
 
 [Serializable, NetSerializable]
-public partial struct ChemData
-{
-    public string ChemID;
-
-    public SeedChemQuantityHelper ChemValue;
-
-    public ChemData(string id, SeedChemQuantityHelper value)
-    {
-        ChemID = id;
-        ChemValue = value;
-    }
-}
+public partial record struct GeneData(int GeneID, float GeneValue);
 
 [Serializable, NetSerializable]
-public partial struct GasData
-{
-    public Gas GasID;
+public partial record struct ChemData(string ChemID, SeedChemQuantityHelper ChemValue);
 
-    public float GasValue;
-
-    public GasData(Gas gasId, float value)
-    {
-        GasID = gasId;
-        GasValue = value;
-    }
-}
+[Serializable, NetSerializable]
+public partial record struct GasData(Gas GasID, float GasValue);
 
 // This is some shit which is really fucking wack.
 // 0 - float, 1 - int, 2 - Enum HarvestType, 3 - bool
@@ -99,7 +73,8 @@ public partial struct SeedDataTypes
         Int,
         HarvestType,
         Bool,
-        Gas,
+        GasConsume,
+        GasExude,
         Chemical,
         RandomPlantMutation
     }
@@ -130,7 +105,10 @@ public partial struct SeedDataTypes
         SeedDataType.Bool,
         SeedDataType.Bool,
         SeedDataType.Bool,
-        SeedDataType.Bool
+        SeedDataType.Bool,
+        SeedDataType.GasConsume,
+        SeedDataType.GasExude,
+        SeedDataType.Chemical
     };
 
     public static readonly List<String> IdToString = new()

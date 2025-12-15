@@ -6,10 +6,11 @@
 
 using Content.Trauma.Shared.Botany.PlantAnalyzer;
 using Content.Trauma.Shared.Botany.Components;
+using JetBrains.Annotations;
 
 namespace Content.Trauma.Client.Botany.PlantAnalyzer.UI;
 
-
+[UsedImplicitly]
 public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]

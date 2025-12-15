@@ -20,7 +20,7 @@ public sealed class PlantAnalyzerScannedSeedPlantInformation : BoundUserInterfac
 
     public string? SeedName;
     public string[]? SeedChem;
-    public AnalyzerHarvestType HarvestType;
+    public HarvestType HarvestType;
     public string[]? ExudeGases; //Funkystation - Swapped to string
     public string[]? ConsumeGases; //Funkystation - Swapped to string
     public float Endurance;
@@ -93,16 +93,6 @@ public enum GasFlags : short
     NitrousOxide = 128,
     Frezon = 256,
 }
-
-public enum AnalyzerHarvestType : byte
-{
-    //Unknown, // Just in case the backing enum type changes and we haven't caught it.
-    NoRepeat,
-    Repeat,
-    SelfHarvest
-}
-
-
 
 [Serializable, NetSerializable]
 public sealed class PlantAnalyzerSetMode : BoundUserInterfaceMessage

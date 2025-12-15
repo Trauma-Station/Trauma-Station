@@ -14,7 +14,6 @@ using Content.Shared.PowerCell;
 using Content.Trauma.Server.Botany.Components;
 using Content.Trauma.Shared.Botany.Components;
 using Content.Trauma.Shared.Botany.PlantAnalyzer;
-using JetBrains.FormatRipper.Elf;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
@@ -110,17 +109,8 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         {
             InjectGene(ent, args.Args.Target.Value);
         }
-        OpenUserInterface(args.User, ent);
-
+        _uiSystem.TryOpenUi(args.User, PlantAnalyzerUiKey.Key, ent);
         args.Handled = true;
-    }
-
-    private void OpenUserInterface(EntityUid user, EntityUid analyzer)
-    {
-        if (!TryComp<ActorComponent>(user, out var actor) || !_uiSystem.HasUi(analyzer, PlantAnalyzerUiKey.Key))
-            return;
-
-        _uiSystem.OpenUi(analyzer, PlantAnalyzerUiKey.Key, actor.PlayerSession);
     }
 
     public void ExtractGene(Entity<PlantAnalyzerComponent> ent, EntityUid target)
@@ -136,7 +126,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 // Delete seed
                 Del(target);
             }
-            else if (seedComp.SeedId != null && _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed))
+            else if (seedComp.SeedId != null && _prototypeManager.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
             {
                 // Copy genes to databank.
                 GetGeneFromInteger(ent, protoSeed);
@@ -150,7 +140,6 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             {
                 // Copy genes to databank.
                 GetGeneFromInteger(ent, plantComp.Seed);
-                // Del(target);
             }
         }
         SendDatabase(ent);
@@ -168,10 +157,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             }
             else
             {
-                if (seedComp.SeedId == null)
-                    return;
-                _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed);
-                if (protoSeed == null)
+                if (seedComp.SeedId == null || !_prototypeManager.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
                     return;
                 seedComp.Seed = protoSeed.Clone();
                 SetGeneFromInteger(ent, ref seedComp.Seed);
@@ -197,10 +183,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             }
             else
             {
-                if (seedComp.SeedId == null)
-                    return;
-                _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed);
-                if (protoSeed == null)
+                if (seedComp.SeedId == null || !_prototypeManager.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
                     return;
                 seedComp.Seed = protoSeed.Clone();
                 seedComp.Seed.Mutations.Clear();
@@ -221,12 +204,12 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         {
             if (seedComp.Seed != null)
             {
-                var state = ObtainingGeneDataSeed(seedComp.Seed, target, false);
+                var state = ObtainingGeneDataSeed(ent, seedComp.Seed, target, false);
                 _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state);  //Funkystation - Swapped to set state instead of UI message
             }
-            else if (seedComp.SeedId != null && _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed))
+            else if (seedComp.SeedId != null && _prototypeManager.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
             {
-                var state = ObtainingGeneDataSeed(protoSeed, target, false);
+                var state = ObtainingGeneDataSeed(ent, protoSeed, target, false);
                 _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state); //Funkystation - Swapped to set state instead of UI message
             }
         }
@@ -234,7 +217,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         {
             if (plantComp.Seed != null)
             {
-                var state = ObtainingGeneDataSeed(plantComp.Seed, target, true);
+                var state = ObtainingGeneDataSeed(ent, plantComp.Seed, target, true);
                 _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state); //Funkystation - Swapped to set state instead of UI message
             }
         }
@@ -243,22 +226,22 @@ public sealed class PlantAnalyzerSystem : EntitySystem
     /// <summary>
     ///     Analysis of seed from prototype.
     /// </summary>
-    public PlantAnalyzerScannedSeedPlantInformation ObtainingGeneDataSeed(SeedData seedData, EntityUid target, bool isTray)
+    public PlantAnalyzerScannedSeedPlantInformation ObtainingGeneDataSeed(Entity<PlantAnalyzerComponent> ent, SeedData seedData, EntityUid target, bool isTray)
     {
         // Get trickier fields first.
-        AnalyzerHarvestType harvestType = (AnalyzerHarvestType) seedData.HarvestRepeat;
+        Shared.Botany.Components.HarvestType harvestType = (Shared.Botany.Components.HarvestType) seedData.HarvestRepeat;
 
         var mutationProtos = seedData.MutationPrototypes;
-        List<string> mutationStrings = new();
+        ent.Comp.StoredMutationStrings.Clear();
         foreach (var mutationProto in mutationProtos)
         {
-            if (_prototypeManager.TryIndex<SeedPrototype>(mutationProto, out var seed))
+            if (_prototypeManager.Resolve<SeedPrototype>(mutationProto, out var seed))
             {
-                mutationStrings.Add(seed.DisplayName);
+                ent.Comp.StoredMutationStrings.Add(seed.DisplayName);
             }
         }
 
-        PlantAnalyzerScannedSeedPlantInformation ret = new()
+        return new PlantAnalyzerScannedSeedPlantInformation
         {
             TargetEntity = GetNetEntity(target),
             IsTray = isTray,
@@ -274,7 +257,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             Production = seedData.Production,
             GrowthStages = seedData.GrowthStages,
             SeedPotency = seedData.Potency,
-            Speciation = mutationStrings.ToArray(),
+            Speciation = ent.Comp.StoredMutationStrings.ToArray(),
             NutrientConsumption = seedData.NutrientConsumption,
             WaterConsumption = seedData.WaterConsumption,
             IdealHeat = seedData.IdealHeat,
@@ -288,7 +271,6 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             WeedTolerance = seedData.WeedTolerance,
             Mutations = GetMutationFlags(seedData)
         };
-        return ret;
     }
 
     public MutationFlags GetMutationFlags(SeedData plant)
@@ -310,8 +292,6 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         int i = 0;
         foreach (var gas in gases)
         {
-            // Funkystation - 
-            // plantGases[i] = Atmospherics.GasNames.GetValueOrDefault(gas, Loc.GetString("gases-unknown"));
             plantGases[i] = Loc.GetString($"gases-{gas}");
             i++;
         }
@@ -461,64 +441,56 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             return;
         }
 
-        int intCount = SeedDataTypes.IdToType.Count;
-        if (index >= intCount)
+        switch (SeedDataTypes.IdToType[index])
         {
-            if (index >= intCount + 1)
-            {
-                if (index >= intCount + 2)
+            case SeedDataTypes.SeedDataType.Chemical:
+                foreach (KeyValuePair<string, SeedChemQuantity> chemical in seed.Chemicals)
                 {
-                    foreach (KeyValuePair<string, SeedChemQuantity> chemical in seed.Chemicals)
-                    {
-                        ent.Comp.ChemicalBank.Add(new ChemData(chemical.Key, new SeedChemQuantityHelper(chemical.Value.Min, chemical.Value.Max, chemical.Value.PotencyDivisor, chemical.Value.Inherent)));
-                    }
+                    ent.Comp.ChemicalBank.Add(new ChemData(chemical.Key, new SeedChemQuantityHelper(chemical.Value.Min, chemical.Value.Max, chemical.Value.PotencyDivisor, chemical.Value.Inherent)));
                 }
-                else
-                {
-                    foreach (KeyValuePair<Gas, float> gas in seed.ExudeGasses)
-                    {
-                        ent.Comp.ExudeGasesBank.Add(new GasData(gas.Key, gas.Value));
-                    }
-                }
-            }
-            else
-            {
+                break;
+            case SeedDataTypes.SeedDataType.GasConsume:
                 foreach (KeyValuePair<Gas, float> gas in seed.ConsumeGasses)
                 {
                     ent.Comp.ConsumeGasesBank.Add(new GasData(gas.Key, gas.Value));
                 }
-            }
-        }
-        else
-        {
-            Dictionary<int, float> seedData = new()
-            {
-                { 0, seed.NutrientConsumption},
-                { 1, seed.WaterConsumption },
-                { 2, seed.IdealHeat },
-                { 3, seed.HeatTolerance },
-                { 4, seed.IdealLight },
-                { 5, seed.LightTolerance },
-                { 6, seed.ToxinsTolerance },
-                { 7, seed.LowPressureTolerance },
-                { 8, seed.HighPressureTolerance },
-                { 9, seed.PestTolerance },
-                { 10, seed.WeedTolerance },
-                { 11, seed.Endurance },
-                { 12, (float) seed.Yield },
-                { 13, seed.Lifespan },
-                { 14, seed.Maturation },
-                { 15, seed.Production },
-                { 16, seed.GrowthStages },
-                { 17, (float) seed.HarvestRepeat },
-                { 18, seed.Potency },
-                { 19, (float)Convert.ToInt16(seed.Seedless) },
-                { 20, (float)Convert.ToInt16(seed.Viable) },
-                { 21, (float)Convert.ToInt16(seed.Ligneous) },
-                { 22, (float)Convert.ToInt16(seed.CanScream) },
-                { 23, (float)Convert.ToInt16(seed.TurnIntoKudzu) }
-            };
-            ent.Comp.GeneBank.Add(new GeneData(index, seedData[index]));
+                break;
+            case SeedDataTypes.SeedDataType.GasExude:
+                foreach (KeyValuePair<Gas, float> gas in seed.ExudeGasses)
+                {
+                    ent.Comp.ExudeGasesBank.Add(new GasData(gas.Key, gas.Value));
+                }
+                break;
+            default:
+                List<float> seedData = new()
+                {
+                    {seed.NutrientConsumption},
+                    {seed.WaterConsumption },
+                    {seed.IdealHeat },
+                    {seed.HeatTolerance },
+                    {seed.IdealLight },
+                    {seed.LightTolerance },
+                    {seed.ToxinsTolerance },
+                    {seed.LowPressureTolerance },
+                    {seed.HighPressureTolerance },
+                    {seed.PestTolerance },
+                    {seed.WeedTolerance },
+                    {seed.Endurance },
+                    {(float) seed.Yield },
+                    {seed.Lifespan },
+                    {seed.Maturation },
+                    {seed.Production },
+                    {seed.GrowthStages },
+                    {(float) seed.HarvestRepeat },
+                    {seed.Potency },
+                    {(float)Convert.ToInt16(seed.Seedless) },
+                    {(float)Convert.ToInt16(seed.Viable) },
+                    {(float)Convert.ToInt16(seed.Ligneous) },
+                    {(float)Convert.ToInt16(seed.CanScream) },
+                    {(float)Convert.ToInt16(seed.TurnIntoKudzu) }
+                };
+                ent.Comp.GeneBank.Add(new GeneData(index, seedData[index]));
+                break;
         }
     }
 
@@ -651,7 +623,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                     }
                 case 17:
                     {
-                        seed.HarvestRepeat = (HarvestType) gene.GeneValue;
+                        seed.HarvestRepeat = (Content.Server.Botany.HarvestType) gene.GeneValue;
                         break;
                     }
                 case 18:

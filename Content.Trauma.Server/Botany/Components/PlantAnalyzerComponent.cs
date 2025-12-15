@@ -18,19 +18,6 @@ namespace Content.Trauma.Server.Botany.Components;
 [RegisterComponent]
 public sealed partial class PlantAnalyzerComponent : Component
 {
-    [DataDefinition]
-    public partial struct PlantAnalyzerSetting
-    {
-        [DataField]
-        public PlantAnalyzerModes AnalyzerModes;
-
-        [DataField]
-        public float ScanDelay;
-
-        [DataField]
-        public float ModeDelay;
-    }
-
     [DataField]
     public PlantAnalyzerSetting Settings = new();
 
@@ -52,10 +39,22 @@ public sealed partial class PlantAnalyzerComponent : Component
     [DataField]
     public List<ChemData> ChemicalBank = new();
 
+    [DataField]
+    public List<string> StoredMutationStrings = new();
 
     [DataField]
     public int GeneIndex = 0;
 
     [DataField]
     public int DatabankIndex = 0;
+}
+
+[DataRecord]
+public partial struct PlantAnalyzerSetting
+{
+    public PlantAnalyzerModes AnalyzerModes;
+
+    public float ScanDelay;
+
+    public float ModeDelay;
 }
