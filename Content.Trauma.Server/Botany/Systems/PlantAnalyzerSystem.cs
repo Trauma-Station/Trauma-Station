@@ -362,9 +362,9 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             if (mode)
             {
                 ent.Comp.GeneIndex += 1;
-                if (ent.Comp.GeneIndex >= SeedDataTypes.IdToType.Count + 1 + 1 + 1)
+                if (ent.Comp.GeneIndex >= SeedDataTypes.IdToType.Count)
                 {
-                    ent.Comp.GeneIndex = SeedDataTypes.IdToType.Count + 1 + 1 + 1 - 1;
+                    ent.Comp.GeneIndex = SeedDataTypes.IdToType.Count - 1;
                 }
             }
             else
