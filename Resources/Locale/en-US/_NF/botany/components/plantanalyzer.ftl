@@ -4,14 +4,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 
 plant-analyzer-interface-title = Agrinfo 3000 Plant Analyzer
-plant-analyzer-window-no-seed-information-text = No seed/plant scanned.
+plant-analyzer-window-no-seed-information-text = No seed/plant scanned in memory.
+plant-analyzer-window-tab-scan = Scan
 plant-analyzer-window-tab-basics = Basic Info
 plant-analyzer-window-tab-tolerances = Tolerances
 plant-analyzer-window-tab-mutations = Mutations
+plant-analyzer-window-tab-extractor = Extractor
 plant-analyzer-window-tab-databank = Databank
-plant-analyzer-window-scanmode = Advanced scan mode:
-plant-analyzer-window-mode-advanced = Advanced
-plant-analyzer-window-mode-basic = Basic
+plant-analyzer-window-scanmode = Analyzer Mode:
+plant-analyzer-window-mode-mutation = Mutations
+plant-analyzer-window-mode-scan = Scan
 plant-analyzer-window-mode-implant = Implant
 plant-analyzer-window-mode-extract = Extract
 
@@ -19,6 +21,8 @@ plant-analyzer-add = +
 plant-analyzer-subtract = -
 plant-analyzer-delete-entry = Delete
 plant-analyzer-delete-mutations = Delete Mutations
+plant-analyzer-invalid-gene = -----
+plant-analyzer-invalid-database = No Data Detected
 
 plant-analyzer-window-label-name-scanned-plant = Scanned plant: {$seedName}
 plant-analyzer-window-label-name-scanned-seed = Scanned seed: {$seedName}

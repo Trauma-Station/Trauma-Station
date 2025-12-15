@@ -28,7 +28,7 @@ public sealed partial class PlantAnalyzerComponent : Component
         public float ScanDelay;
 
         [DataField]
-        public float AdvScanDelay;
+        public float ModeDelay;
     }
 
     [DataField]

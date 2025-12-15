@@ -29,6 +29,7 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
         };
         _window.OnClose += Close;
         _window.OpenCenteredLeft();
+        SendMessage(new PlantAnalyzerRequestDatabank());
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)  //Funkystation - Switched to state instead of message to fix UI bug
@@ -44,6 +45,7 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
             _window.Populate(last);
         if (state is PlantAnalyzerSeedDatabank seed)
             _window.Populate(seed);
+        _window.PopulateUpdateButtons();
         return;
     }
 
@@ -56,10 +58,10 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
         }
     }
 
-    public void GeneIterate(bool up)
+    public void GeneIterate(bool up, bool isImplantMode)
     {
         if (_window!=null)
-            SendMessage(new PlantAnalyzerGeneIterate(up, (_window._internalmode == PlantAnalyzerModes.Implant)));
+            SendMessage(new PlantAnalyzerGeneIterate(up, isImplantMode));
     }
 
     protected override void Dispose(bool disposing)
@@ -73,8 +75,8 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
 
         _window?.Dispose();
     }
-    public void DeleteDatabaseEntry(bool isDeleteMutations)
+    public void DeleteDatabaseEntry()
     {
-        SendMessage(new PlantAnalyzerDeleteDatabankEntry(isDeleteMutations));
+        SendMessage(new PlantAnalyzerDeleteDatabankEntry());
     }
 }

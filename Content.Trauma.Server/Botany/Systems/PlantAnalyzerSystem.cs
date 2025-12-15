@@ -14,10 +14,11 @@ using Content.Shared.PowerCell;
 using Content.Trauma.Server.Botany.Components;
 using Content.Trauma.Shared.Botany.Components;
 using Content.Trauma.Shared.Botany.PlantAnalyzer;
+using JetBrains.FormatRipper.Elf;
+using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Server.GameObjects;
 
 namespace Content.Trauma.Server.Botany.Systems;
 
@@ -37,6 +38,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerSetMode>(OnModeSelected);
         SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerGeneIterate>(OnGeneIterate);
         SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerDeleteDatabankEntry>(OnDeleteDatabaseEntry);
+        SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerRequestDatabank>(OnRequestSeedData);
     }
 
     private void OnAfterInteract(Entity<PlantAnalyzerComponent> ent, ref AfterInteractEvent args)
@@ -53,9 +55,9 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         if (HasComp<SeedComponent>(target) || TryComp<PlantHolderComponent>(target, out var plantHolder) && plantHolder.Seed != null)
         {
 
-            if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.AdvancedScan)
+            if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Scan)
             {
-                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.Settings.AdvScanDelay, new PlantAnalyzerDoAfterEvent(), ent, target: target, used: ent)
+                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.Settings.ScanDelay, new PlantAnalyzerDoAfterEvent(), ent, target: target, used: ent)
                 {
                     NeedHand = true,
                     BreakOnDamage = true,
@@ -66,7 +68,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             }
             else
             {
-                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.Settings.ScanDelay, new PlantAnalyzerDoAfterEvent(), ent, target: target, used: ent)
+                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.Settings.ModeDelay, new PlantAnalyzerDoAfterEvent(), ent, target: target, used: ent)
                 {
                     NeedHand = true,
                     BreakOnDamage = true,
@@ -82,7 +84,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
     {
         ent.Comp.DoAfter = null;
         // Double charge use for advanced scan.
-        if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.AdvancedScan)
+        if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Scan)
         {
             if (!_cell.TryUseActivatableCharge(ent.Owner, user: args.User))
                 return;
@@ -92,15 +94,19 @@ public sealed class PlantAnalyzerSystem : EntitySystem
 
         _audio.PlayPvs(ent.Comp.ScanningEndSound, ent);
 
-        if ((ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.AdvancedScan) || (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.BasicScan))
+        if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Scan)
         {
-            ReadScannedPlant(ent, args.Args.Target.Value); //Funkystation - Renamed to match plants instead of copying HealthAnalyzer func names
+            ReadScannedPlant(ent, args.Args.Target.Value);
         }
-        if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Extract)
+        else if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.DeleteMutations)
+        {
+            DeleteMutations(ent, args.Args.Target.Value);
+        }
+        else if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Extract)
         {
             ExtractGene(ent, args.Args.Target.Value);
         }
-        if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Implant)
+        else if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Implant)
         {
             InjectGene(ent, args.Args.Target.Value);
         }
@@ -147,7 +153,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 // Del(target);
             }
         }
-        _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank));
+        SendDatabase(ent);
     }
 
     public void InjectGene(Entity<PlantAnalyzerComponent> ent, EntityUid target)
@@ -162,6 +168,8 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             }
             else
             {
+                if (seedComp.Seed == null || seedComp.SeedId == null)
+                    return;
                 _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed);
                 seedComp.Seed = protoSeed.Clone();
                 SetGeneFromInteger(ent, ref seedComp.Seed);
@@ -174,7 +182,33 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 SetGeneFromInteger(ent, ref plantComp.Seed);
             }
         }
-        _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank));
+        SendDatabase(ent);
+    }
+
+    public void DeleteMutations(Entity<PlantAnalyzerComponent> ent, EntityUid target)
+    {
+        if (TryComp<SeedComponent>(target, out var seedComp))
+        {
+            if (seedComp.Seed != null)
+            {
+                seedComp.Seed.Mutations.Clear();
+            }
+            else
+            {
+                if (seedComp.Seed == null || seedComp.SeedId == null)
+                    return;
+                _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed);
+                seedComp.Seed = protoSeed.Clone();
+                seedComp.Seed.Mutations.Clear();
+            }
+        }
+        else if (TryComp<PlantHolderComponent>(target, out var plantComp))
+        {
+            if (plantComp.Seed != null)
+            {
+                plantComp.Seed.Mutations.Clear();
+            }
+        }
     }
     public void ReadScannedPlant(Entity<PlantAnalyzerComponent> ent, EntityUid target)  //Funkystation - Renamed to match plants instead of copying HealthAnalyzer func names
     {
@@ -183,12 +217,12 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         {
             if (seedComp.Seed != null)
             {
-                var state = ObtainingGeneDataSeed(seedComp.Seed, target, false, ent.Comp.Settings.AnalyzerModes);
+                var state = ObtainingGeneDataSeed(seedComp.Seed, target, false);
                 _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state);  //Funkystation - Swapped to set state instead of UI message
             }
             else if (seedComp.SeedId != null && _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed))
             {
-                var state = ObtainingGeneDataSeed(protoSeed, target, false, ent.Comp.Settings.AnalyzerModes);
+                var state = ObtainingGeneDataSeed(protoSeed, target, false);
                 _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state); //Funkystation - Swapped to set state instead of UI message
             }
         }
@@ -196,7 +230,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         {
             if (plantComp.Seed != null)
             {
-                var state = ObtainingGeneDataSeed(plantComp.Seed, target, true, ent.Comp.Settings.AnalyzerModes);
+                var state = ObtainingGeneDataSeed(plantComp.Seed, target, true);
                 _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state); //Funkystation - Swapped to set state instead of UI message
             }
         }
@@ -205,9 +239,8 @@ public sealed class PlantAnalyzerSystem : EntitySystem
     /// <summary>
     ///     Analysis of seed from prototype.
     /// </summary>
-    public PlantAnalyzerScannedSeedPlantInformation ObtainingGeneDataSeed(SeedData seedData, EntityUid target, bool isTray, PlantAnalyzerModes scannerMode)
+    public PlantAnalyzerScannedSeedPlantInformation ObtainingGeneDataSeed(SeedData seedData, EntityUid target, bool isTray)
     {
-        bool scanIsAdvanced = (scannerMode == PlantAnalyzerModes.AdvancedScan);
         // Get trickier fields first.
         AnalyzerHarvestType harvestType = (AnalyzerHarvestType) seedData.HarvestRepeat;
 
@@ -237,29 +270,20 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             Production = seedData.Production,
             GrowthStages = seedData.GrowthStages,
             SeedPotency = seedData.Potency,
-            Speciation = mutationStrings.ToArray()
+            Speciation = mutationStrings.ToArray(),
+            NutrientConsumption = seedData.NutrientConsumption,
+            WaterConsumption = seedData.WaterConsumption,
+            IdealHeat = seedData.IdealHeat,
+            HeatTolerance = seedData.HeatTolerance,
+            IdealLight = seedData.IdealLight,
+            LightTolerance = seedData.LightTolerance,
+            ToxinsTolerance = seedData.ToxinsTolerance,
+            LowPressureTolerance = seedData.LowPressureTolerance,
+            HighPressureTolerance = seedData.HighPressureTolerance,
+            PestTolerance = seedData.PestTolerance,
+            WeedTolerance = seedData.WeedTolerance,
+            Mutations = GetMutationFlags(seedData)
         };
-
-        if (scanIsAdvanced)
-        {
-            AdvancedScanInfo advancedInfo = new()
-            {
-                NutrientConsumption = seedData.NutrientConsumption,
-                WaterConsumption = seedData.WaterConsumption,
-                IdealHeat = seedData.IdealHeat,
-                HeatTolerance = seedData.HeatTolerance,
-                IdealLight = seedData.IdealLight,
-                LightTolerance = seedData.LightTolerance,
-                ToxinsTolerance = seedData.ToxinsTolerance,
-                LowPressureTolerance = seedData.LowPressureTolerance,
-                HighPressureTolerance = seedData.HighPressureTolerance,
-                PestTolerance = seedData.PestTolerance,
-                WeedTolerance = seedData.WeedTolerance,
-                Mutations = GetMutationFlags(seedData)
-            };
-
-            ret.AdvancedInfo = advancedInfo;
-        }
         return ret;
     }
 
@@ -315,12 +339,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
 
     private void SendCurrentIndex(Entity<PlantAnalyzerComponent> ent)
     {
-        int currentCount = ent.Comp.GeneIndex;
-        if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Implant)
-        {
-            currentCount = ent.Comp.DatabankIndex;
-        }
-        var state = new PlantAnalyzerCurrentCount(currentCount);
+        var state = new PlantAnalyzerCurrentCount(ent.Comp.GeneIndex, ent.Comp.DatabankIndex);
         _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state);
     }
 
@@ -376,57 +395,57 @@ public sealed class PlantAnalyzerSystem : EntitySystem
 
     public void OnDeleteDatabaseEntry(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerDeleteDatabankEntry args)
     {
-        if (args.IsDeleteMutations)
+        if (ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count <= 0)
         {
-            // implement later, need to get an actual seed lmao.
+            SendCurrentIndex(ent);
             return;
         }
-        else
+        int intCount = 0;
+        if (ent.Comp.DatabankIndex >= intCount + ent.Comp.GeneBank.Count)
         {
-            if (ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count <= 0)
+            intCount += ent.Comp.GeneBank.Count;
+            if (ent.Comp.DatabankIndex >= intCount + ent.Comp.ConsumeGasesBank.Count)
             {
-                SendCurrentIndex(ent);
-                return;
-            }
-            int intCount = 0;
-            if (ent.Comp.DatabankIndex >= intCount + ent.Comp.GeneBank.Count)
-            {
-                intCount += ent.Comp.GeneBank.Count;
-                if (ent.Comp.DatabankIndex >= intCount + ent.Comp.ConsumeGasesBank.Count)
+                intCount += ent.Comp.ConsumeGasesBank.Count;
+                if (ent.Comp.DatabankIndex >= intCount + ent.Comp.ExudeGasesBank.Count)
                 {
-                    intCount += ent.Comp.ConsumeGasesBank.Count;
-                    if (ent.Comp.DatabankIndex >= intCount + ent.Comp.ExudeGasesBank.Count)
-                    {
-                        intCount += ent.Comp.ExudeGasesBank.Count;
-                        ent.Comp.ChemicalBank.RemoveAt(ent.Comp.DatabankIndex - intCount);
-                    }
-                    else
-                    {
-                        ent.Comp.ExudeGasesBank.RemoveAt(ent.Comp.DatabankIndex - intCount);
-                    }
+                    intCount += ent.Comp.ExudeGasesBank.Count;
+                    ent.Comp.ChemicalBank.RemoveAt(ent.Comp.DatabankIndex - intCount);
                 }
                 else
                 {
-                    ent.Comp.ConsumeGasesBank.RemoveAt(ent.Comp.DatabankIndex - intCount);
+                    ent.Comp.ExudeGasesBank.RemoveAt(ent.Comp.DatabankIndex - intCount);
                 }
             }
             else
             {
-                ent.Comp.GeneBank.RemoveAt(ent.Comp.DatabankIndex);
-            }
-            intCount = ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count;
-            if (ent.Comp.DatabankIndex >= intCount)
-            {
-                ent.Comp.DatabankIndex = intCount - 1;
-                if (ent.Comp.DatabankIndex < 0)
-                {
-                    ent.Comp.DatabankIndex = 0;
-                }
+                ent.Comp.ConsumeGasesBank.RemoveAt(ent.Comp.DatabankIndex - intCount);
             }
         }
-        _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank));
+        else
+        {
+            ent.Comp.GeneBank.RemoveAt(ent.Comp.DatabankIndex);
+        }
+        intCount = ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count;
+        if (ent.Comp.DatabankIndex >= intCount)
+        {
+            ent.Comp.DatabankIndex = intCount - 1;
+            if (ent.Comp.DatabankIndex < 0)
+            {
+                ent.Comp.DatabankIndex = 0;
+            }
+        }
+        _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank, ent.Comp.GeneIndex, ent.Comp.DatabankIndex));
     }
 
+    public void OnRequestSeedData(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerRequestDatabank args)
+    {
+        SendDatabase(ent);
+    }
+    public void SendDatabase(Entity<PlantAnalyzerComponent> ent)
+    {
+        _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank, ent.Comp.GeneIndex, ent.Comp.DatabankIndex));
+    }
     // This is some shit which is really fucking wack.
     public void GetGeneFromInteger(Entity<PlantAnalyzerComponent> ent, SeedData seed)
     {
@@ -520,18 +539,18 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                     chemical.Max = chem.ChemValue.Max;
                     chemical.PotencyDivisor = chem.ChemValue.PotencyDivisor;
                     chemical.Inherent = chem.ChemValue.Inherent;
-                    seed.Chemicals.Add(chem.ChemID, chemical);
+                    seed.Chemicals[chem.ChemID] = chemical;
                 }
                 else
                 {
                     GasData gas = ent.Comp.ExudeGasesBank[index - intCount];
-                    seed.ExudeGasses.Add(gas.GasID, gas.GasValue);
+                    seed.ExudeGasses[gas.GasID] = gas.GasValue;
                 }
             }
             else
             {
                 GasData gas = ent.Comp.ConsumeGasesBank[index - intCount];
-                seed.ConsumeGasses.Add(gas.GasID, gas.GasValue);
+                seed.ConsumeGasses[gas.GasID] = gas.GasValue;
             }
         }
         else

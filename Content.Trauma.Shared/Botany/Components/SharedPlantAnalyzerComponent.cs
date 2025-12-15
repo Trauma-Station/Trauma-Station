@@ -41,10 +41,10 @@ public partial struct SeedChemQuantityHelper
 
 public enum PlantAnalyzerModes
 {
-    BasicScan,
-    AdvancedScan,
+    Scan,
     Extract,
-    Implant
+    Implant,
+    DeleteMutations
 }
 
 [Serializable, NetSerializable]

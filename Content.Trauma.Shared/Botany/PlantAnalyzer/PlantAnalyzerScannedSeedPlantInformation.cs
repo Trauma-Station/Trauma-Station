@@ -31,7 +31,18 @@ public sealed class PlantAnalyzerScannedSeedPlantInformation : BoundUserInterfac
     public int GrowthStages;
     public float SeedPotency;
     public string[]? Speciation; // Currently only available on server, we need to send strings to the client.
-    public AdvancedScanInfo? AdvancedInfo;
+    public float NutrientConsumption;
+    public float WaterConsumption;
+    public float IdealHeat;
+    public float HeatTolerance;
+    public float IdealLight;
+    public float LightTolerance;
+    public float ToxinsTolerance;
+    public float LowPressureTolerance;
+    public float HighPressureTolerance;
+    public float PestTolerance;
+    public float WeedTolerance;
+    public MutationFlags Mutations;
 }
 
 /// <summary>
@@ -131,11 +142,13 @@ public sealed class PlantAnalyzerCurrentMode : BoundUserInterfaceState
 [Serializable, NetSerializable]
 public sealed class PlantAnalyzerCurrentCount : BoundUserInterfaceState
 {
-    public int CurrentCount { get; }
+    public int GeneIndex { get; }
+    public int DatabaseIndex { get; }
 
-    public PlantAnalyzerCurrentCount(int currentCount)
+    public PlantAnalyzerCurrentCount(int geneIndex, int databaseIndex)
     {
-        CurrentCount = currentCount;
+        GeneIndex = geneIndex;
+        DatabaseIndex = databaseIndex;
     }
 }
 
@@ -146,23 +159,31 @@ public sealed class PlantAnalyzerSeedDatabank : BoundUserInterfaceState
     public List<GasData> ConsumeGasData { get; }
     public List<GasData> ExudeGasData { get; }
     public List<ChemData> ChemicalData { get; }
+    public int GeneIndex { get; }
+    public int DatabaseIndex { get; }
 
-    public PlantAnalyzerSeedDatabank(List<GeneData> seedData, List<GasData> consumeGasData, List<GasData> exudeGasData, List<ChemData> chemicalData)
+    public PlantAnalyzerSeedDatabank(List<GeneData> seedData, List<GasData> consumeGasData, List<GasData> exudeGasData, List<ChemData> chemicalData, int geneIndex, int databaseIndex)
     {
         SeedData = seedData;
         ConsumeGasData = consumeGasData;
         ExudeGasData = exudeGasData;
         ChemicalData = chemicalData;
+        GeneIndex = geneIndex;
+        DatabaseIndex = databaseIndex;
     }
 }
 
 [Serializable, NetSerializable]
 public sealed class PlantAnalyzerDeleteDatabankEntry : BoundUserInterfaceMessage
 {
-    public bool IsDeleteMutations { get; }
+    public PlantAnalyzerDeleteDatabankEntry()
+    { }
+}
 
-    public PlantAnalyzerDeleteDatabankEntry(bool isDeleteMutations)
-    {
-        IsDeleteMutations = isDeleteMutations;
-    }
+
+[Serializable, NetSerializable]
+public sealed class PlantAnalyzerRequestDatabank : BoundUserInterfaceMessage
+{
+    public PlantAnalyzerRequestDatabank()
+    { }
 }
