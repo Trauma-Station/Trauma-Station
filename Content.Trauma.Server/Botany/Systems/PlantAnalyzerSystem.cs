@@ -168,7 +168,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             }
             else
             {
-                if (seedComp.Seed == null || seedComp.SeedId == null)
+                if (seedComp.SeedId == null)
                     return;
                 _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed);
                 if (protoSeed == null)
@@ -197,7 +197,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             }
             else
             {
-                if (seedComp.Seed == null || seedComp.SeedId == null)
+                if (seedComp.SeedId == null)
                     return;
                 _prototypeManager.TryIndex(seedComp.SeedId, out SeedPrototype? protoSeed);
                 if (protoSeed == null)
