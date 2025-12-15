@@ -489,8 +489,11 @@ public sealed partial class MutationSystem : EntitySystem
         while (ent.Comp.Dormant.Count < ent.Comp.MaxDormant)
         {
             ent.Comp.Dormant.Add(_random.Pick(UnlockedMutations));
-            Dirty(ent);
         }
+
+        // don't have dormant mutation as first item
+        _random.Shuffle(ent.Comp.Dormant);
+        Dirty(ent);
 
         MutateDna(ent, rolls: 16);
         RemComp<ScannedGenomeComponent>(ent); // have to rescan it now chud

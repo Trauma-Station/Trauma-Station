@@ -191,6 +191,7 @@
     locked: true # specific to monkeys (active) and humans (dormant)
   - type: PolymorphMutation
     prototype: MutationMonkey
+    fallback: MutationHuman
 
 # Powergaming
 

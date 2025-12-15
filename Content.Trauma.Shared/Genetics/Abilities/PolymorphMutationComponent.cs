@@ -21,6 +21,15 @@ public sealed partial class PolymorphMutationComponent : Component
     [DataField(required: true)]
     public ProtoId<PolymorphPrototype> Prototype;
 
+    /// <summary>
+    /// If non-null and <see cref="Worked"/> is false, will polymorph into this if removed.
+    /// </summary>
+    [DataField]
+    public ProtoId<PolymorphPrototype>? Fallback;
+
+    /// <summary>
+    /// If true, will try to revert if the mutation was removed.
+    /// </summary>
     [DataField]
     public bool Worked;
 }

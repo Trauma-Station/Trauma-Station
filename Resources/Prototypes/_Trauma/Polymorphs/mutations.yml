@@ -12,6 +12,19 @@
     polymorphSound: /Audio/Animals/monkey_scream.ogg
 
 - type: polymorph
+  id: MutationHuman
+  configuration:
+    entity: MobHuman
+    transferName: true # human named monkey (MK-28) kino
+    # yes language so monkey is still forced to speak monkey
+    forced: true
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+    inventory: Transfer
+    polymorphSound: /Audio/Voice/Human/malescream_1.ogg
+
+- type: polymorph
   id: MutationMouse
   configuration:
     entity: MobMouse

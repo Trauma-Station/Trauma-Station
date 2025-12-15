@@ -101,6 +101,7 @@ public sealed partial class GeneticsConsoleSystem
         Dirty(target, linked);
 
         _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{ToPrettyString(user)} linked {ToPrettyString(target)} to {ToPrettyString(ent)}");
+        _ui.TryOpenUi(ent.Owner, GeneticsConsoleUiKey.Key, user);
     }
 
     private void OnLinkedShutdown(Entity<LinkedToGeneticScannerComponent> ent, ref ComponentShutdown args)

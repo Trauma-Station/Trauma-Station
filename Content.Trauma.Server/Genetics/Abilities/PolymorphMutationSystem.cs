@@ -32,7 +32,13 @@ public sealed class PolymorphMutationSystem : EntitySystem
 
     private void OnMutationRemoved(Entity<PolymorphMutationComponent> ent, ref MutationRemovedEvent args)
     {
-        if (ent.Comp.Worked && !args.Automatic)
-            _polymorph.Revert(args.Target.Owner);
+        if (args.Automatic)
+            return;
+
+        var target = args.Target.Owner;
+        if (ent.Comp.Worked)
+            _polymorph.Revert(target);
+        else if (ent.Comp.Fallback is {} fallback)
+            _polymorph.PolymorphEntity(target, fallback);
     }
 }

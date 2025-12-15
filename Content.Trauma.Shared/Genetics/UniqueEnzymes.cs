@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Shared.Humanoid;
+using Robust.Shared.Enums;
 using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Genetics;
@@ -9,4 +10,4 @@ namespace Content.Trauma.Shared.Genetics;
 /// Hair isn't included since you can do that with barber scissors / mirror.
 /// </summary>
 [DataRecord, Serializable, NetSerializable]
-public record struct UniqueEnzymes(string Name, string? Prints, Sex? Sex, Color? EyeColor, Color? SkinColor);
+public record struct UniqueEnzymes(string Name, string? Prints, Sex? Sex, Gender? Gender, Color? EyeColor, Color? SkinColor);

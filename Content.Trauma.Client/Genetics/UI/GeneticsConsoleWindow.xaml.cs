@@ -146,6 +146,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         {
             _scanned = scanned;
             Sequencer.UpdateScanButton();
+            Combiner.UpdateScanButton();
         }
     }
 
@@ -173,6 +174,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     private void UpdateScanner(bool hasScanner)
     {
         Sequencer.UpdateHasScanner(hasScanner);
+        Combiner.UpdateHasScanner(hasScanner);
         UpdateMob(hasScanner ? _mob : null);
         if (!hasScanner)
             MobStatus.Text = Loc.GetString("genetics-console-no-scanner");

@@ -29,7 +29,7 @@ public sealed partial class MutatableComponent : Component
     /// They are also what go into a mob's sequenced mutations.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public HashSet<EntProtoId<MutationComponent>> Dormant = new();
+    public List<EntProtoId<MutationComponent>> Dormant = new();
 
     /// <summary>
     /// Maximum number of dormant mutations to pick on map init.

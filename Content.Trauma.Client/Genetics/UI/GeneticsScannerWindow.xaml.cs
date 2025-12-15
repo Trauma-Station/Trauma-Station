@@ -29,6 +29,8 @@ public sealed partial class GeneticsScannerWindow : FancyWindow
 
         Sequencer.MakeReadonly();
         Sequencer.OnScan += () => OnScan?.Invoke();
+
+        Sequencer.UpdateHasScanner(true); // this is the scanner
     }
 
     private EntityUid _uid;

@@ -1,6 +1,8 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Shared.Forensics.Components;
 using Content.Shared.Humanoid;
 using Content.Trauma.Shared.Genetics.Mutations;
+using Robust.Shared.GameObjects.Components.Localization;
 
 namespace Content.Trauma.Shared.Genetics;
 
@@ -9,6 +11,7 @@ namespace Content.Trauma.Shared.Genetics;
 /// </summary>
 public sealed class UniqueEnzymesSystem : EntitySystem
 {
+    [Dependency] private readonly GrammarSystem _grammar = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly MutationSystem _mutation = default!;
     [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoid = default!;
@@ -45,6 +48,9 @@ public sealed class UniqueEnzymesSystem : EntitySystem
         if (enzymes.Sex is {} sex)
             _humanoid.SetSex(mob, sex, humanoid: humanoid);
 
+        if (enzymes.Gender is {} gender)
+            _grammar.SetGender((mob, EnsureComp<GrammarComponent>(mob)), gender);
+
         if (enzymes.EyeColor is {} eyeColor)
         {
             humanoid.EyeColor = eyeColor;
@@ -65,6 +71,7 @@ public sealed class UniqueEnzymesSystem : EntitySystem
             Name(mob),
             _printsQuery.CompOrNull(mob)?.Fingerprint,
             humanoid?.Sex,
+            humanoid?.Gender,
             humanoid?.EyeColor,
             humanoid?.SkinColor
         );

@@ -55,6 +55,16 @@ public sealed partial class GeneticCombiner : BoxContainer
         SequenceButtons.UpdateSequences();
     }
 
+    public void UpdateScanButton()
+    {
+        Scanner.UpdateScanButton();
+    }
+
+    public void UpdateHasScanner(bool hasScanner)
+    {
+        Scanner.UpdateHasScanner(hasScanner);
+    }
+
     public void SetBusy(bool busy)
     {
         _busy = busy;

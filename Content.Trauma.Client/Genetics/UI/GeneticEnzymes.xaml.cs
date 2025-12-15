@@ -61,6 +61,7 @@ public sealed partial class GeneticEnzymes : BoxContainer
         DiskLabel.Text = _entMan.GetComponentOrNull<MetaDataComponent>(disk)?.EntityName
             ?? Loc.GetString("genetics-console-no-disk");
         UpdateEnzymes(disk?.Comp.Enzymes);
+        UpdateSaveButton();
     }
 
     public void UpdateEnzymes(UniqueEnzymes? enzymes)
