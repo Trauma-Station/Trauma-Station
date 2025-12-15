@@ -28,6 +28,15 @@ public sealed partial class PlantAnalyzerComponent : Component
     public SoundSpecifier? ScanningEndSound;
 
     [DataField]
+    public SoundSpecifier? DeleteMutationEndSound;
+
+    [DataField]
+    public SoundSpecifier? ExtractEndSound;
+
+    [DataField]
+    public SoundSpecifier? InjectEndSound;
+
+    [DataField]
     public List<GeneData> GeneBank = new();
 
     [DataField]

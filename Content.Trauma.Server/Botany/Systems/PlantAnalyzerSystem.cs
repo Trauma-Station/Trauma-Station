@@ -37,7 +37,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerSetMode>(OnModeSelected);
         SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerGeneIterate>(OnGeneIterate);
         SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerDeleteDatabankEntry>(OnDeleteDatabaseEntry);
-        SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerRequestDatabank>(OnRequestSeedData);
+        SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerRequestDefault>(OnRequestDefault);
     }
 
     private void OnAfterInteract(Entity<PlantAnalyzerComponent> ent, ref AfterInteractEvent args)
@@ -91,8 +91,6 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Args.Target == null || !_cell.TryUseActivatableCharge(ent.Owner, user: args.User))
             return;
 
-        _audio.PlayPvs(ent.Comp.ScanningEndSound, ent);
-
         if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Scan)
         {
             ReadScannedPlant(ent, args.Args.Target.Value);
@@ -142,6 +140,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 GetGeneFromInteger(ent, plantComp.Seed);
             }
         }
+        _audio.PlayPvs(ent.Comp.ExtractEndSound, ent);
         SendDatabase(ent);
     }
 
@@ -170,6 +169,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 SetGeneFromInteger(ent, ref plantComp.Seed);
             }
         }
+        _audio.PlayPvs(ent.Comp.InjectEndSound, ent);
         SendDatabase(ent);
     }
 
@@ -196,6 +196,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 plantComp.Seed.Mutations.Clear();
             }
         }
+        _audio.PlayPvs(ent.Comp.DeleteMutationEndSound, ent);
     }
     public void ReadScannedPlant(Entity<PlantAnalyzerComponent> ent, EntityUid target)  //Funkystation - Renamed to match plants instead of copying HealthAnalyzer func names
     {
@@ -221,6 +222,8 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state); //Funkystation - Swapped to set state instead of UI message
             }
         }
+
+        _audio.PlayPvs(ent.Comp.ScanningEndSound, ent);
     }
 
     /// <summary>
@@ -424,9 +427,10 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         SendDatabase(ent);
     }
 
-    public void OnRequestSeedData(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerRequestDatabank args)
+    public void OnRequestDefault(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerRequestDefault args)
     {
-        SendDatabase(ent);
+        var state = new PlantAnalyzerCurrentMode(ent.Comp.Settings.AnalyzerModes);
+        _uiSystem.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state);
     }
     public void SendDatabase(Entity<PlantAnalyzerComponent> ent)
     {

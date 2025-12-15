@@ -164,16 +164,8 @@ public sealed class PlantAnalyzerSeedDatabank : BoundUserInterfaceState
 }
 
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerDeleteDatabankEntry : BoundUserInterfaceMessage
-{
-    public PlantAnalyzerDeleteDatabankEntry()
-    { }
-}
+public sealed class PlantAnalyzerDeleteDatabankEntry : BoundUserInterfaceMessage;
 
 
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerRequestDatabank : BoundUserInterfaceMessage
-{
-    public PlantAnalyzerRequestDatabank()
-    { }
-}
+public sealed class PlantAnalyzerRequestDefault : BoundUserInterfaceMessage;
