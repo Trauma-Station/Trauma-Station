@@ -96,73 +96,42 @@ public enum GasFlags : short
 }
 
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerSetMode : BoundUserInterfaceMessage
+public sealed class PlantAnalyzerSetMode(PlantAnalyzerModes scannerModes) : BoundUserInterfaceMessage
 {
-    public PlantAnalyzerModes ScannerModes { get; }
-
-    public PlantAnalyzerSetMode(PlantAnalyzerModes scannerModes)
-    {
-        ScannerModes = scannerModes;
-    }
+    public PlantAnalyzerModes ScannerModes { get; } = scannerModes;
 }
 
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerGeneIterate : BoundUserInterfaceMessage
+public sealed class PlantAnalyzerGeneIterate(bool up, bool isDatabank) : BoundUserInterfaceMessage
 {
-    public bool MutationIterate { get; }
-    public bool IsDatabank { get; }
-
-    public PlantAnalyzerGeneIterate(bool up, bool isDatabank)
-    {
-        MutationIterate = up;
-        IsDatabank = isDatabank;
-    }
+    public bool MutationIterate { get; } = up;
+    public bool IsDatabank { get; } = isDatabank;
 }
 
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerCurrentMode : BoundUserInterfaceState
+public sealed class PlantAnalyzerCurrentMode(PlantAnalyzerModes currentMode) : BoundUserInterfaceState
 {
-    public PlantAnalyzerModes CurrentMode { get; }
-
-    public PlantAnalyzerCurrentMode(PlantAnalyzerModes currentMode)
-    {
-        CurrentMode = currentMode;
-    }
+    public PlantAnalyzerModes CurrentMode { get; } = currentMode;
 }
 
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerCurrentCount : BoundUserInterfaceState
+public sealed class PlantAnalyzerCurrentCount(int geneIndex, int databaseIndex) : BoundUserInterfaceState
 {
-    public int GeneIndex { get; }
-    public int DatabaseIndex { get; }
-
-    public PlantAnalyzerCurrentCount(int geneIndex, int databaseIndex)
-    {
-        GeneIndex = geneIndex;
-        DatabaseIndex = databaseIndex;
-    }
+    public int GeneIndex { get; } = geneIndex;
+    public int DatabaseIndex { get; } = databaseIndex;
 }
 
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerSeedDatabank : BoundUserInterfaceState
+public sealed class PlantAnalyzerSeedDatabank(List<GeneData> seedData, List<GasData> consumeGasData, List<GasData> exudeGasData, List<ChemData> chemicalData, int geneIndex, int databaseIndex) : BoundUserInterfaceState
 {
-    public List<GeneData> SeedData { get; }
-    public List<GasData> ConsumeGasData { get; }
-    public List<GasData> ExudeGasData { get; }
-    public List<ChemData> ChemicalData { get; }
-    public int GeneIndex { get; }
-    public int DatabaseIndex { get; }
-
-    public PlantAnalyzerSeedDatabank(List<GeneData> seedData, List<GasData> consumeGasData, List<GasData> exudeGasData, List<ChemData> chemicalData, int geneIndex, int databaseIndex)
-    {
-        SeedData = seedData;
-        ConsumeGasData = consumeGasData;
-        ExudeGasData = exudeGasData;
-        ChemicalData = chemicalData;
-        GeneIndex = geneIndex;
-        DatabaseIndex = databaseIndex;
-    }
+    public List<GeneData> SeedData { get; } = seedData;
+    public List<GasData> ConsumeGasData { get; } = consumeGasData;
+    public List<GasData> ExudeGasData { get; } = exudeGasData;
+    public List<ChemData> ChemicalData { get; } = chemicalData;
+    public int GeneIndex { get; } = geneIndex;
+    public int DatabaseIndex { get; } = databaseIndex;
 }
+
 
 [Serializable, NetSerializable]
 public sealed class PlantAnalyzerDeleteDatabankEntry : BoundUserInterfaceMessage;
