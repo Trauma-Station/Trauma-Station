@@ -1,5 +1,6 @@
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.Electrocution;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -21,6 +22,7 @@ public abstract class SharedTurbineSystem : EntitySystem
     [Dependency] protected readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedToolSystem _toolSystem = default!;
+    [Dependency] private readonly EntityManager _entityManager = default!;
 
     private readonly float _threshold = 0.5f;
     private float _accumulator = 0f;
@@ -244,6 +246,8 @@ public abstract class SharedTurbineSystem : EntitySystem
             comp.IsSmoking = false;
             _popupSystem.PopupEntity(Loc.GetString("turbine-smoke-stop", ("owner", uid)), uid, PopupType.Medium);
         }
+
+        _entityManager.EnsureComponent<ElectrifiedComponent>(uid).Enabled = comp.IsSparking;
 
         UpdateAppearance(uid, comp);
     }
