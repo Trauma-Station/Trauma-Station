@@ -4,6 +4,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 
+using Content.Trauma.Common.Botany;
 using Content.Trauma.Shared.Botany.Components;
 using Robust.Shared.Serialization;
 

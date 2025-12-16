@@ -47,13 +47,6 @@ public enum PlantAnalyzerModes
     DeleteMutations
 }
 
-public enum HarvestType : byte
-{
-    NoRepeat,
-    Repeat,
-    SelfHarvest
-}
-
 [Serializable, NetSerializable]
 public partial record struct GeneData(int GeneID, float GeneValue);
 
@@ -111,7 +104,7 @@ public partial struct SeedDataTypes
         SeedDataType.Chemical
     };
 
-    public static readonly List<String> IdToString = new()
+    public static readonly List<string> IdToString = new()
     {
         "NutrientConsumption",
         "WaterConsumption",

@@ -6,6 +6,7 @@
 using System.Linq;
 using Content.Shared.Atmos;
 using Content.Trauma.Server.Botany;
+using Content.Trauma.Common.Botany;
 using Content.Trauma.Shared.Botany.Components;
 using Content.Shared.DoAfter;
 using Robust.Shared.Audio;

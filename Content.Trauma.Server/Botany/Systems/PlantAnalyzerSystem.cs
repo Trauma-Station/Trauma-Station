@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 
 using System.Linq;
+using Content.Trauma.Common.Botany;
 using Content.Server.Botany;
 using Content.Server.Botany.Components;
 using Content.Shared.Atmos;
@@ -232,7 +233,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
     public PlantAnalyzerScannedSeedPlantInformation ObtainingGeneDataSeed(Entity<PlantAnalyzerComponent> ent, SeedData seedData, EntityUid target, bool isTray)
     {
         // Get trickier fields first.
-        Shared.Botany.Components.HarvestType harvestType = (Shared.Botany.Components.HarvestType) seedData.HarvestRepeat;
+        Common.Botany.HarvestType harvestType = (Common.Botany.HarvestType) seedData.HarvestRepeat;
 
         var mutationProtos = seedData.MutationPrototypes;
         ent.Comp.StoredMutationStrings.Clear();

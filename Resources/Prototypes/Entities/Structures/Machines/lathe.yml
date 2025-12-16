@@ -530,7 +530,7 @@
     # Einstein Engines Packs
     - Translators
     # Botany Bullcrap
-    # - PlantAnalyzer # Frontier
+    - DynamicBotanyPack # Trauma
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - SecurityAmmo

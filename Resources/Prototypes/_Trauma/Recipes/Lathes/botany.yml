@@ -1,0 +1,12 @@
+- type: latheRecipePack
+  id: DynamicBotanyPack
+  recipes:
+  - PlantAnalyzer
+
+- type: latheRecipe
+  id: PlantAnalyzer
+  result: PlantAnalyzerEmpty
+  completetime: 4
+  materials: # Values taken from the health analyzer, reduced slightly for bluespace inclusion #Funky removed bluespace line
+    Glass: 400
+    Steel: 400

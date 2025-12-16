@@ -59,8 +59,7 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
 
     public void GeneIterate(bool up, bool isImplantMode)
     {
-        if (_window!=null)
-            SendMessage(new PlantAnalyzerGeneIterate(up, isImplantMode));
+         SendMessage(new PlantAnalyzerGeneIterate(up, isImplantMode));
     }
 
     protected override void Dispose(bool disposing)
