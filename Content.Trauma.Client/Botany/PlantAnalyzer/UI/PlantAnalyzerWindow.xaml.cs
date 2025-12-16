@@ -19,8 +19,7 @@ namespace Content.Trauma.Client.Botany.PlantAnalyzer.UI;
 [GenerateTypedNameReferences]
 public sealed partial class PlantAnalyzerWindow : FancyWindow
 {
-    [Dependency]
-    private readonly IEntityManager _entityManager;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
     private readonly ButtonGroup _buttonGroupTop = new();
 
     private const string IndentedNewline = "\n   ";
@@ -35,9 +34,6 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
     public PlantAnalyzerWindow(PlantAnalyzerBoundUserInterface owner)
     {
         RobustXamlLoader.Load(this);
-
-        var dependencies = IoCManager.Instance!;
-        _entityManager = dependencies.Resolve<IEntityManager>();
 
         Tabs.OnTabChanged += _ =>
         {

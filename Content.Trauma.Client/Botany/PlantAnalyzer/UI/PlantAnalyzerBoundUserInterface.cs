@@ -10,7 +10,7 @@ using JetBrains.Annotations;
 
 namespace Content.Trauma.Client.Botany.PlantAnalyzer.UI;
 
-[UsedImplicitly]
+
 public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]
