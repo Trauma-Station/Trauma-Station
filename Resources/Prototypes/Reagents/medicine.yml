@@ -1514,6 +1514,10 @@
       methods: [ Touch ]
       effects:
       - !type:Extinguish
+    Extinguish:
+      methods: [ Touch ]
+      effects:
+      - !type:HolyIgnite
 #    Acidic:  # Goobstation - Removing holy water damage on touch pending rework.
 #      methods: [ Touch ]
 #      effects:
