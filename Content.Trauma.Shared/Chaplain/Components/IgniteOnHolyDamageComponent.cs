@@ -6,7 +6,7 @@ namespace Content.Trauma.Shared.Chaplain.Components;
 public sealed partial class IgniteOnHolyDamageComponent : Component
 {
     [DataField("fireStacks")]
-    public float FireStacks = 1f;
+    public float FireStacks = 0.7f;
 
     // The minimum amount of damage taken to apply fire stacks
     [DataField("threshold")]

@@ -375,7 +375,7 @@ namespace Content.Trauma.Server.Chaplain
                     return;
 
                 // Ignite that sucker
-                flammable.FireStacks += component.FireStacks;
+                flammable.FireStacks += component.FireStacks * ((float) value.Value - (float) component.Threshold.Value);
                 HolyIgnite(uid, uid);
             }
 
@@ -394,7 +394,7 @@ namespace Content.Trauma.Server.Chaplain
             flammable.Resisting = true;
 
             _popup.PopupEntity(Loc.GetString("flammable-component-resist-message"), uid, uid);
-            _stunSystem.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(4f));
+            _stunSystem.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(2f));
 
             // TODO FLAMMABLE: Make this not use TimerComponent...
             uid.SpawnTimer(2000, () =>
@@ -411,7 +411,25 @@ namespace Content.Trauma.Server.Chaplain
             EnsureComp<HolyIgniteOnCollideComponent>(uid);
             EnsureComp<IgniteOnHolyDamageComponent>(uid);
         }
+        public float DamageCurve(float x)
+        {
+            float initialGrowthRate = 0.5f;
+            float intermediateGrowthRate = 0.1f;
+            float lateGrowthRate = 50.0f;
 
+            if (x < 4)
+            {
+                return x * initialGrowthRate;
+            }
+            else if (x >= 4 && x <= 40)
+            {
+                return initialGrowthRate * 4 + intermediateGrowthRate * (x - 4);
+            }
+            else
+            {
+                return initialGrowthRate * 4 + intermediateGrowthRate * (40 - 4) + lateGrowthRate + (x - 40);
+            }
+        }
         public override void Update(float frameTime)
         {
             // process all fire events
@@ -466,7 +484,7 @@ namespace Content.Trauma.Server.Chaplain
                 if (flammable.FireStacks > 0)
                 {
 
-                    _damageableSystem.TryChangeDamage(uid, flammable.Damage * flammable.FireStacks, interruptsDoAfters: false, partMultiplier: 2f); // Lavaland: Nerf fire 
+                    _damageableSystem.TryChangeDamage(uid, flammable.Damage * DamageCurve(flammable.FireStacks), interruptsDoAfters: false, partMultiplier: 2f); // Lavaland: Nerf fire 
                     AdjustFireStacks(uid, flammable.FirestackFade * (flammable.Resisting ? 20f : 1f), flammable, flammable.OnFire);
                 }
                 else
