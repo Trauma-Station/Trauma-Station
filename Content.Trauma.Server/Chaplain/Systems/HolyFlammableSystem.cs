@@ -1,23 +1,13 @@
-using Content.Goobstation.Common.CCVar;
-using Content.Goobstation.Maths.FixedPoint;
 using Content.Goobstation.Shared.Religion;
 using Content.Server._Goobstation.Wizard.Systems;
 using Content.Server.Administration.Logs;
-using Content.Server.Atmos.Components;
-using Content.Server.Damage.Components;
 using Content.Server.Stunnable;
-using Content.Server.Temperature.Systems;
-using Content.Shared._Goobstation.Wizard.Spellblade;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
-using Content.Shared.EntityEffects.Effects.Atmos;
-using Content.Shared.Hands;
-using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Physics;
@@ -25,17 +15,15 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Temperature;
-using Content.Shared.Temperature.Components;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
-using JetBrains.FormatRipper.Elf;
+using Content.Trauma.Server.Chaplain.Components;
 using Robust.Server.Audio;
 using Robust.Shared.Configuration;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -88,11 +76,11 @@ namespace Content.Trauma.Server.Chaplain.Systems
             //SubscribeLocalEvent<HolyFlammableComponent, IsHotEvent>(OnIsHot);
             SubscribeLocalEvent<HolyFlammableComponent, TileFireEvent>(OnTileFire);
             SubscribeLocalEvent<HolyFlammableComponent, RejuvenateEvent>(OnRejuvenate);
-            SubscribeLocalEvent<HolyFlammableComponent, ResistFireAlertEvent>(OnResistFireAlert);
+            SubscribeLocalEvent<HolyFlammableComponent, ResistHolyFireAlertEvent>(OnResistFireAlert);
             Subs.SubscribeWithRelay<HolyFlammableComponent, HolyExtinguishEvent>(OnExtinguishEvent);
             Subs.SubscribeWithRelay<WeakToHolyComponent, HolyIgniteEvent>(OnHolyIgniteEvent);
 
-            SubscribeLocalEvent<IgniteOnCollideComponent, StartCollideEvent>(IgniteOnCollide);
+            SubscribeLocalEvent<HolyIgniteOnCollideComponent, StartCollideEvent>(HolyIgniteOnCollide);
             //SubscribeLocalEvent<IgniteOnCollideComponent, LandEvent>(OnIgniteLand);
             //SubscribeLocalEvent<IgniteOnCollideComponent, ProjectileHitEvent>(OnProjectileHit); // Goobstation
 
@@ -113,6 +101,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
 
         private void OnHolyIgniteEvent(Entity<WeakToHolyComponent> ent, ref HolyIgniteEvent args)
         {
+            SetupEntity(ent);
             EnsureComp<HolyFlammableComponent>(ent, out var flammable);
             AdjustFireStacks(ent, args.FireStacksAdjustment, flammable, true);
         }
@@ -137,12 +126,12 @@ namespace Content.Trauma.Server.Chaplain.Systems
             }
         }
 
-        private void OnIgniteLand(EntityUid uid, IgniteOnCollideComponent component, ref LandEvent args)
+        private void OnIgniteLand(EntityUid uid, HolyIgniteOnCollideComponent component, ref LandEvent args)
         {
-            RemCompDeferred<IgniteOnCollideComponent>(uid);
+            RemCompDeferred<HolyIgniteOnCollideComponent>(uid);
         }
 
-        private void OnProjectileHit(Entity<IgniteOnCollideComponent> ent, ref ProjectileHitEvent args) // Goobstation
+        private void OnProjectileHit(Entity<HolyIgniteOnCollideComponent> ent, ref ProjectileHitEvent args) // Goobstation
         {
             var otherEnt = args.Target;
 
@@ -156,10 +145,10 @@ namespace Content.Trauma.Server.Chaplain.Systems
             ent.Comp.Count--;
 
             if (ent.Comp.Count == 0)
-                RemCompDeferred<IgniteOnCollideComponent>(ent);
+                RemCompDeferred<HolyIgniteOnCollideComponent>(ent);
         }
 
-        private void IgniteOnCollide(EntityUid uid, IgniteOnCollideComponent component, ref StartCollideEvent args)
+        private void HolyIgniteOnCollide(EntityUid uid, HolyIgniteOnCollideComponent component, ref StartCollideEvent args)
         {
             if (args.OurFixtureId == SharedProjectileSystem.ProjectileFixture) // Goobstation
                 return;
@@ -172,6 +161,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
             if (!TryComp(otherEnt, out WeakToHolyComponent? weakToHoly))
                 return;
 
+            SetupEntity(otherEnt);
             EnsureComp<HolyFlammableComponent>(otherEnt, out var flammable);
 
             //Only ignite when the colliding fixture is projectile or ignition.
@@ -185,7 +175,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
             component.Count--;
 
             if (component.Count == 0)
-                RemCompDeferred<IgniteOnCollideComponent>(uid);
+                RemCompDeferred<HolyIgniteOnCollideComponent>(uid);
         }
 
         private void OnMapInit(EntityUid uid, HolyFlammableComponent component, MapInitEvent args)
@@ -304,7 +294,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
             HolyExtinguish(uid, component);
         }
 
-        private void OnResistFireAlert(Entity<HolyFlammableComponent> ent, ref ResistFireAlertEvent args)
+        private void OnResistFireAlert(Entity<HolyFlammableComponent> ent, ref ResistHolyFireAlertEvent args)
         {
             if (args.Handled)
                 return;
@@ -457,6 +447,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
         public void SetupEntity(EntityUid uid)
         {
             EnsureComp<HolyFlammableComponent>(uid);
+            EnsureComp<HolyIgniteOnCollideComponent>(uid);
         }
 
         public override void Update(float frameTime)
