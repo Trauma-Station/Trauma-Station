@@ -269,8 +269,8 @@ namespace Content.Trauma.Server.Chaplain
             if (!Resolve(uid, ref flammable, ref appearance))
                 return;
 
-            _appearance.SetData(uid, FireVisuals.OnFire, flammable.OnFire, appearance);
-            _appearance.SetData(uid, FireVisuals.FireStacks, flammable.FireStacks, appearance);
+            _appearance.SetData(uid, FireVisuals.OnHolyFire, flammable.OnFire, appearance);
+            _appearance.SetData(uid, FireVisuals.HolyFireStacks, flammable.FireStacks, appearance);
 
             // Also enable toggleable-light visuals
             // This is intended so that matches & candles can re-use code for un-shaded layers on in-hand sprites.

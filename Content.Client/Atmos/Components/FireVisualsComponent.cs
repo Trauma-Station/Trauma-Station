@@ -26,6 +26,9 @@ public sealed partial class FireVisualsComponent : Component
     [DataField("sprite")]
     public string? Sprite;
 
+    [DataField("alternatSprite")] // Trauma
+    public string? AlternateSprite = "_Trauma/Mobs/Effects/onholyfire.rsi";
+
     [DataField("lightEnergyPerStack")]
     public float LightEnergyPerStack = 0.5f;
 
@@ -41,9 +44,14 @@ public sealed partial class FireVisualsComponent : Component
     [DataField("lightColor")]
     public Color LightColor = Color.Orange;
 
+    [DataField("lightColorHoly")]
+    public Color LightColorHoly = Color.Blue; // Trauma
+
     /// <summary>
     ///     Client side point-light entity. We use this instead of directly adding a light to
     ///     the burning entity as entities don't support having multiple point-lights.
     /// </summary>
     public EntityUid? LightEntity;
+
+    public EntityUid? LightEntityHoly; // Trauma
 }

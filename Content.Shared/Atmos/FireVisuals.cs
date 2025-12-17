@@ -18,5 +18,7 @@ namespace Content.Shared.Atmos
     {
         OnFire,
         FireStacks,
+        OnHolyFire, // Trauma
+        HolyFireStacks, // Trauma
     }
 }

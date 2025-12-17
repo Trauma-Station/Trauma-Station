@@ -40,12 +40,23 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
             component.LightEntity = null;
         }
 
+        if (component.LightEntityHoly != null)
+        {
+            Del(component.LightEntityHoly.Value);
+            component.LightEntityHoly = null;
+        }
+
         // Need LayerMapTryGet because Init fails if there's no existing sprite / appearancecomp
         // which means in some setups (most frequently no AppearanceComp) the layer never exists.
         if (TryComp<SpriteComponent>(uid, out var sprite) &&
             _sprite.LayerMapTryGet((uid, sprite), FireVisualLayers.Fire, out var layer, false))
         {
             _sprite.RemoveLayer((uid, sprite), layer);
+        }
+
+        if (_sprite.LayerMapTryGet((uid, sprite), FireVisualLayers.HolyFire, out var alternateLayer, false))
+        {
+            _sprite.RemoveLayer((uid, sprite), alternateLayer);
         }
     }
 
@@ -61,6 +72,14 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
             _sprite.LayerSetRsi((uid, sprite), FireVisualLayers.Fire, new ResPath(component.Sprite));
 
         UpdateAppearance(uid, component, sprite, appearance);
+
+        _sprite.LayerMapReserve((uid, sprite), FireVisualLayers.HolyFire);
+        _sprite.LayerSetVisible((uid, sprite), FireVisualLayers.HolyFire, false);
+        sprite.LayerSetShader(FireVisualLayers.HolyFire, "unshaded");
+        if (component.AlternateSprite != null)
+            _sprite.LayerSetRsi((uid, sprite), FireVisualLayers.HolyFire, new ResPath(component.AlternateSprite));
+
+        UpdateAppearance(uid, component, sprite, appearance);
     }
 
     protected override void OnAppearanceChange(EntityUid uid, FireVisualsComponent component, ref AppearanceChangeEvent args)
@@ -71,43 +90,78 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
 
     private void UpdateAppearance(EntityUid uid, FireVisualsComponent component, SpriteComponent sprite, AppearanceComponent appearance)
     {
-        if (!_sprite.LayerMapTryGet((uid, sprite), FireVisualLayers.Fire, out var index, false))
-            return;
-
-        AppearanceSystem.TryGetData<bool>(uid, FireVisuals.OnFire, out var onFire, appearance);
-        AppearanceSystem.TryGetData<float>(uid, FireVisuals.FireStacks, out var fireStacks, appearance);
-        _sprite.LayerSetVisible((uid, sprite), index, onFire);
-
-        if (!onFire)
+        if (_sprite.LayerMapTryGet((uid, sprite), FireVisualLayers.Fire, out var index, false))
         {
-            if (component.LightEntity != null)
+            AppearanceSystem.TryGetData<bool>(uid, FireVisuals.OnFire, out var onFire, appearance);
+            AppearanceSystem.TryGetData<float>(uid, FireVisuals.FireStacks, out var fireStacks, appearance);
+            _sprite.LayerSetVisible((uid, sprite), index, onFire);
+
+            if (!onFire)
             {
-                Del(component.LightEntity.Value);
-                component.LightEntity = null;
+                if (component.LightEntity != null)
+                {
+                    Del(component.LightEntity.Value);
+                    component.LightEntity = null;
+                }
+
+                return;
             }
 
-            return;
+            if (fireStacks > component.FireStackAlternateState && !string.IsNullOrEmpty(component.AlternateState))
+                _sprite.LayerSetRsiState((uid, sprite), index, component.AlternateState);
+            else
+                _sprite.LayerSetRsiState((uid, sprite), index, component.NormalState);
+
+            component.LightEntity ??= Spawn(null, new EntityCoordinates(uid, default));
+            var light = EnsureComp<PointLightComponent>(component.LightEntity.Value);
+
+            _lights.SetColor(component.LightEntity.Value, component.LightColor, light);
+
+            // light needs a minimum radius to be visible at all, hence the + 1.5f
+            _lights.SetRadius(component.LightEntity.Value, Math.Clamp(1.5f + component.LightRadiusPerStack * fireStacks, 0f, component.MaxLightRadius), light);
+            _lights.SetEnergy(component.LightEntity.Value, Math.Clamp(1 + component.LightEnergyPerStack * fireStacks, 0f, component.MaxLightEnergy), light);
+
+            // TODO flickering animation? Or just add a noise mask to the light? But that requires an engine PR.
         }
+        //Trauma
+        else if (_sprite.LayerMapTryGet((uid, sprite), FireVisualLayers.HolyFire, out var alternateIndex, false))
+        {
+            AppearanceSystem.TryGetData<bool>(uid, FireVisuals.OnHolyFire, out var onFire, appearance);
+            AppearanceSystem.TryGetData<float>(uid, FireVisuals.HolyFireStacks, out var fireStacks, appearance);
+            _sprite.LayerSetVisible((uid, sprite), alternateIndex, onFire);
 
-        if (fireStacks > component.FireStackAlternateState && !string.IsNullOrEmpty(component.AlternateState))
-            _sprite.LayerSetRsiState((uid, sprite), index, component.AlternateState);
-        else
-            _sprite.LayerSetRsiState((uid, sprite), index, component.NormalState);
+            if (!onFire)
+            {
+                if (component.LightEntityHoly != null)
+                {
+                    Del(component.LightEntityHoly.Value);
+                    component.LightEntityHoly = null;
+                }
 
-        component.LightEntity ??= Spawn(null, new EntityCoordinates(uid, default));
-        var light = EnsureComp<PointLightComponent>(component.LightEntity.Value);
+                return;
+            }
 
-        _lights.SetColor(component.LightEntity.Value, component.LightColor, light);
+            if (fireStacks > component.FireStackAlternateState && !string.IsNullOrEmpty(component.AlternateState))
+                _sprite.LayerSetRsiState((uid, sprite), alternateIndex, component.AlternateState);
+            else
+                _sprite.LayerSetRsiState((uid, sprite), alternateIndex, component.NormalState);
 
-        // light needs a minimum radius to be visible at all, hence the + 1.5f
-        _lights.SetRadius(component.LightEntity.Value, Math.Clamp(1.5f + component.LightRadiusPerStack * fireStacks, 0f, component.MaxLightRadius), light);
-        _lights.SetEnergy(component.LightEntity.Value, Math.Clamp(1 + component.LightEnergyPerStack * fireStacks, 0f, component.MaxLightEnergy), light);
+            component.LightEntityHoly ??= Spawn(null, new EntityCoordinates(uid, default));
+            var light = EnsureComp<PointLightComponent>(component.LightEntityHoly.Value);
 
-        // TODO flickering animation? Or just add a noise mask to the light? But that requires an engine PR.
+            _lights.SetColor(component.LightEntityHoly.Value, component.LightColorHoly, light);
+
+            // light needs a minimum radius to be visible at all, hence the + 1.5f
+            _lights.SetRadius(component.LightEntityHoly.Value, Math.Clamp(1.5f + component.LightRadiusPerStack * fireStacks, 0f, component.MaxLightRadius), light);
+            _lights.SetEnergy(component.LightEntityHoly.Value, Math.Clamp(1 + component.LightEnergyPerStack * fireStacks, 0f, component.MaxLightEnergy), light);
+
+            // TODO flickering animation? Or just add a noise mask to the light? But that requires an engine PR.
+        }
     }
 }
 
 public enum FireVisualLayers : byte
 {
-    Fire
+    Fire,
+    HolyFire // Trauma
 }
