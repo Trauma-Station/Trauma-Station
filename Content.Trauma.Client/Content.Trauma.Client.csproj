@@ -12,7 +12,6 @@
 		<Configurations>Debug;Release;Tools;DebugOpt</Configurations>
 		<Platforms>AnyCPU</Platforms>
 	</PropertyGroup>
-
 	<ItemGroup>
 		<ProjectReference Include="../Content.Goobstation.Client/Content.Goobstation.Client.csproj" />
 		<ProjectReference Include="../Content.Trauma.Shared/Content.Trauma.Shared.csproj" />

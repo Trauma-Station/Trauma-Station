@@ -1,0 +1,71 @@
+# SPDX-FileCopyrightText: 2025 Liamofthesky <157073227+Liamofthesky@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 taydeo <td12233a@gmail.com>
+# SPDX-FileCopyrightText: 2025 tea <xerithin@gmail.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
+
+- type: entity
+  name: plant analyzer
+  parent: BaseItem
+  id: BasePlantAnalyzer
+  description: A handheld device that allows you to scan seeds and plants to get detailed information about their genes.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _NF/Objects/Devices/plant_analyzer.rsi
+    layers:
+    - state: plantanalyzer
+    - state: unlit
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      shader: unshaded
+  - type: Item
+    storedRotation: -90
+  - type: ActivatableUI
+    key: enum.PlantAnalyzerUiKey.Key
+    inHandsOnly: true
+  - type: UserInterface
+    interfaces:
+      enum.PlantAnalyzerUiKey.Key:
+        type: PlantAnalyzerBoundUserInterface
+  - type: PlantAnalyzer
+    settings:
+      scanDelay: 3
+      modeDelay: 1
+    scanningEndSound:
+      path: "/Audio/Items/Medical/healthscanner.ogg"
+    deleteMutationEndSound:
+      path: "/Audio/_Shitmed/Medical/Surgery/cautery2.ogg"
+    extractEndSound:
+      path: "/Audio/_Shitmed/ReBELL/Organs/OrganDestroyed2.ogg"
+    injectEndSound:
+      path: "/Audio/_Shitmed/Medical/Surgery/organ2.ogg"
+
+
+- type: entity
+  id: PlantAnalyzer
+  parent: [BasePlantAnalyzer, PowerCellSlotSmallItem]
+  components:
+  - type: PowerCellDraw
+    drawRate: 0
+    useCharge: 40
+  - type: ActivatableUIRequiresPowerCell
+
+- type: entity
+  id: PlantAnalyzerEmpty
+  parent: PlantAnalyzer
+  suffix: Empty
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+
+- type: entity
+  id: PlantAnalyzerDebug
+  parent: BasePlantAnalyzer
+  suffix: Debug
+  components:
+  - type: PlantAnalyzer
+    settings:
+      scanDelay: 0.5
+      modeDelay: 0.1
