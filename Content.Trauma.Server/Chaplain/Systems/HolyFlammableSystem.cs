@@ -15,6 +15,7 @@ using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
+using Content.Shared.EntityEffects.Effects.Atmos;
 using Content.Shared.Hands;
 using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction;
@@ -85,13 +86,13 @@ namespace Content.Trauma.Server.Chaplain.Systems
             //SubscribeLocalEvent<HolyFlammableComponent, InteractUsingEvent>(OnInteractUsing);
             SubscribeLocalEvent<HolyFlammableComponent, StartCollideEvent>(OnCollide);
             //SubscribeLocalEvent<HolyFlammableComponent, IsHotEvent>(OnIsHot);
-            //SubscribeLocalEvent<HolyFlammableComponent, TileFireEvent>(OnTileFire);
+            SubscribeLocalEvent<HolyFlammableComponent, TileFireEvent>(OnTileFire);
             SubscribeLocalEvent<HolyFlammableComponent, RejuvenateEvent>(OnRejuvenate);
             SubscribeLocalEvent<HolyFlammableComponent, ResistFireAlertEvent>(OnResistFireAlert);
             Subs.SubscribeWithRelay<HolyFlammableComponent, HolyExtinguishEvent>(OnExtinguishEvent);
             Subs.SubscribeWithRelay<WeakToHolyComponent, HolyIgniteEvent>(OnHolyIgniteEvent);
 
-            //SubscribeLocalEvent<IgniteOnCollideComponent, StartCollideEvent>(IgniteOnCollide);
+            SubscribeLocalEvent<IgniteOnCollideComponent, StartCollideEvent>(IgniteOnCollide);
             //SubscribeLocalEvent<IgniteOnCollideComponent, LandEvent>(OnIgniteLand);
             //SubscribeLocalEvent<IgniteOnCollideComponent, ProjectileHitEvent>(OnProjectileHit); // Goobstation
 
@@ -100,8 +101,6 @@ namespace Content.Trauma.Server.Chaplain.Systems
             //SubscribeLocalEvent<ExtinguishOnInteractComponent, ActivateInWorldEvent>(OnExtinguishActivateInWorld);
 
             SubscribeLocalEvent<IgniteOnHolyDamageComponent, DamageChangedEvent>(OnDamageChanged);
-
-            Subs.CVar(_cfg, GoobCVars.FireStackHeat, value => _addHeatFirestack = value, true);
         }
 
         private void OnExtinguishEvent(Entity<HolyFlammableComponent> ent, ref HolyExtinguishEvent args)
@@ -170,8 +169,10 @@ namespace Content.Trauma.Server.Chaplain.Systems
 
             var otherEnt = args.OtherEntity;
 
-            if (!TryComp(otherEnt, out HolyFlammableComponent? flammable))
+            if (!TryComp(otherEnt, out WeakToHolyComponent? weakToHoly))
                 return;
+
+            EnsureComp<HolyFlammableComponent>(otherEnt, out var flammable);
 
             //Only ignite when the colliding fixture is projectile or ignition.
             if (args.OurFixtureId != component.FixtureId) // Goob edit
@@ -246,6 +247,8 @@ namespace Content.Trauma.Server.Chaplain.Systems
         private void OnCollide(EntityUid uid, HolyFlammableComponent flammable, ref StartCollideEvent args)
         {
             var otherUid = args.OtherEntity;
+            if (!TryComp<WeakToHolyComponent>(otherUid, out var otherWeak))
+                return;
 
             // Collisions cause events to get raised directed at both entities. We only want to handle this collision
             // once, hence the uid check.
@@ -293,12 +296,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
 
         private void OnTileFire(Entity<HolyFlammableComponent> ent, ref TileFireEvent args)
         {
-            var tempDelta = args.Temperature - ent.Comp.MinIgnitionTemperature;
-
-            _fireEvents.TryGetValue(ent, out var maxTemp);
-
-            if (tempDelta > maxTemp)
-                _fireEvents[ent] = tempDelta;
+            _fireEvents[ent] = ent.Comp.FireStacks;
         }
 
         private void OnRejuvenate(EntityUid uid, HolyFlammableComponent component, RejuvenateEvent args)
@@ -456,13 +454,18 @@ namespace Content.Trauma.Server.Chaplain.Systems
             });
         }
 
+        public void SetupEntity(EntityUid uid)
+        {
+            EnsureComp<HolyFlammableComponent>(uid);
+        }
+
         public override void Update(float frameTime)
         {
             // process all fire events
             foreach (var (flammable, deltaTemp) in _fireEvents)
             {
                 // 100 -> 1, 200 -> 2, 400 -> 3...
-                var fireStackMod = Math.Max(MathF.Log2(deltaTemp / 100) + 1, 0);
+                var fireStackMod = deltaTemp;
                 var fireStackDelta = fireStackMod - flammable.Comp.FireStacks;
                 var flammableEntity = flammable.Owner;
                 if (fireStackDelta > 0)
@@ -490,13 +493,22 @@ namespace Content.Trauma.Server.Chaplain.Systems
                     RemCompDeferred<OnHolyFireComponent>(uid);
                     continue;
                 }
-                // </Goobstation>
+
+                // Slowly dry ourselves off if wet.
+                if (flammable.FireStacks < 0)
+                {
+                    flammable.FireStacks = MathF.Min(0, flammable.FireStacks + 1);
+                }
+
                 if (!flammable.OnFire)
                 {
+                    _alertsSystem.ClearAlert(uid, flammable.FireAlert);
                     // Goobstation - from EE at 7b0949568d07df81b298251c6fce9be4d7d03f18 (https://github.com/Simple-Station/Einstein-Engines/pull/2462)
-                    RemCompDeferred<OnHolyFireComponent>(uid);
+                    RemCompDeferred<OnFireComponent>(uid);
                     continue;
                 }
+
+                _alertsSystem.ShowAlert(uid, flammable.FireAlert);
 
                 if (flammable.FireStacks > 0)
                 {

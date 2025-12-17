@@ -43,7 +43,7 @@ namespace Content.Trauma.Shared.Chaplain.Components
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
-        public bool FireSpread { get; private set; } = false;
+        public bool FireSpread { get; private set; } = true;
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
@@ -55,7 +55,7 @@ namespace Content.Trauma.Shared.Chaplain.Components
         {
             DamageDict =
             {
-                ["Holy"] = 10
+                ["Holy"] = 1
             }
         };
 
@@ -99,6 +99,6 @@ namespace Content.Trauma.Shared.Chaplain.Components
         public float FirestackFade = -0.1f;
 
         [DataField]
-        public ProtoId<AlertPrototype> FireAlert = "Fire";
+        public ProtoId<AlertPrototype> FireAlert = "HolyFire";
     }
 }

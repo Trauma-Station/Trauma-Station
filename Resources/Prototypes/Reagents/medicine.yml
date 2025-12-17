@@ -1518,7 +1518,7 @@
       methods: [ Touch ]
       effects:
       - !type:HolyIgnite
-        stacks: 2.0
+        stacks: 4
 #    Acidic:  # Goobstation - Removing holy water damage on touch pending rework.
 #      methods: [ Touch ]
 #      effects:
