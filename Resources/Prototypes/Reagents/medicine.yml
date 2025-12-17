@@ -1514,7 +1514,7 @@
       methods: [ Touch ]
       effects:
       - !type:Extinguish
-    Acidic:
+    Acidic: # Trauma
       methods: [ Touch ]
       effects:
       - !type:HolyIgnite
