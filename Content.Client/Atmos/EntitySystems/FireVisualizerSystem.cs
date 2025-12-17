@@ -103,28 +103,28 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
                     Del(component.LightEntity.Value);
                     component.LightEntity = null;
                 }
-
-                return;
             }
-
-            if (fireStacks > component.FireStackAlternateState && !string.IsNullOrEmpty(component.AlternateState))
-                _sprite.LayerSetRsiState((uid, sprite), index, component.AlternateState);
             else
-                _sprite.LayerSetRsiState((uid, sprite), index, component.NormalState);
+            {
+                if (fireStacks > component.FireStackAlternateState && !string.IsNullOrEmpty(component.AlternateState))
+                    _sprite.LayerSetRsiState((uid, sprite), index, component.AlternateState);
+                else
+                    _sprite.LayerSetRsiState((uid, sprite), index, component.NormalState);
 
-            component.LightEntity ??= Spawn(null, new EntityCoordinates(uid, default));
-            var light = EnsureComp<PointLightComponent>(component.LightEntity.Value);
+                component.LightEntity ??= Spawn(null, new EntityCoordinates(uid, default));
+                var light = EnsureComp<PointLightComponent>(component.LightEntity.Value);
 
-            _lights.SetColor(component.LightEntity.Value, component.LightColor, light);
+                _lights.SetColor(component.LightEntity.Value, component.LightColor, light);
 
-            // light needs a minimum radius to be visible at all, hence the + 1.5f
-            _lights.SetRadius(component.LightEntity.Value, Math.Clamp(1.5f + component.LightRadiusPerStack * fireStacks, 0f, component.MaxLightRadius), light);
-            _lights.SetEnergy(component.LightEntity.Value, Math.Clamp(1 + component.LightEnergyPerStack * fireStacks, 0f, component.MaxLightEnergy), light);
+                // light needs a minimum radius to be visible at all, hence the + 1.5f
+                _lights.SetRadius(component.LightEntity.Value, Math.Clamp(1.5f + component.LightRadiusPerStack * fireStacks, 0f, component.MaxLightRadius), light);
+                _lights.SetEnergy(component.LightEntity.Value, Math.Clamp(1 + component.LightEnergyPerStack * fireStacks, 0f, component.MaxLightEnergy), light);
 
-            // TODO flickering animation? Or just add a noise mask to the light? But that requires an engine PR.
+                // TODO flickering animation? Or just add a noise mask to the light? But that requires an engine PR.
+            }
         }
         //Trauma
-        else if (_sprite.LayerMapTryGet((uid, sprite), FireVisualLayers.HolyFire, out var alternateIndex, false))
+        if (_sprite.LayerMapTryGet((uid, sprite), FireVisualLayers.HolyFire, out var alternateIndex, false))
         {
             AppearanceSystem.TryGetData<bool>(uid, FireVisuals.OnHolyFire, out var onFire, appearance);
             AppearanceSystem.TryGetData<float>(uid, FireVisuals.HolyFireStacks, out var fireStacks, appearance);
