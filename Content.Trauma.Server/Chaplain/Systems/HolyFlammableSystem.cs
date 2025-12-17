@@ -12,6 +12,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Hands;
@@ -114,7 +115,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
         private void OnHolyIgniteEvent(Entity<WeakToHolyComponent> ent, ref HolyIgniteEvent args)
         {
             EnsureComp<HolyFlammableComponent>(ent, out var flammable);
-            AdjustFireStacks(ent, args.FireStacksAdjustment);
+            AdjustFireStacks(ent, args.FireStacksAdjustment, flammable, true);
         }
 
         private void OnHolyIgniteEvent(Entity<HolyFlammableComponent> ent, ref HolyIgniteEvent args)
@@ -379,9 +380,6 @@ namespace Content.Trauma.Server.Chaplain.Systems
         {
             EnsureComp<HolyFlammableComponent>(uid, out var flammable);
             EnsureComp<IgniteOnHolyDamageComponent>(uid);
-
-            if (flammable.Damage.DamageDict["Holy"] <= 0)
-                flammable.Damage.DamageDict["Holy"] = 2; // Ensure it does holy damage
 
             // Goobstation - from EE at 7b0949568d07df81b298251c6fce9be4d7d03f18 (https://github.com/Simple-Station/Einstein-Engines/pull/2462)
             EnsureComp<OnHolyFireComponent>(uid);

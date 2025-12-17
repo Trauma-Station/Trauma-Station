@@ -51,7 +51,13 @@ namespace Content.Trauma.Shared.Chaplain.Components
 
         [DataField(required: true)]
         [ViewVariables(VVAccess.ReadWrite)]
-        public DamageSpecifier Damage = new();
+        public DamageSpecifier Damage = new DamageSpecifier()
+        {
+            DamageDict =
+            {
+                ["Holy"] = 10
+            }
+        };
 
         /// <summary>
         ///     Used for the fixture created to handle passing firestacks when two flammable objects collide.

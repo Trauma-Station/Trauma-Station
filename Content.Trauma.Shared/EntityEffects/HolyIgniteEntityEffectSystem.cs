@@ -1,12 +1,10 @@
 using Content.Goobstation.Shared.Religion;
-using Content.Shared.Atmos;
-using Content.Shared.Atmos.Components;
-using Content.Shared.Damage;
+using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.EntityEffects.Effects.Atmos;
+namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
 /// This raises an the Ignite event on a given entity.
@@ -31,7 +29,7 @@ public sealed partial class HolyIgnite : EntityEffectBase<HolyIgnite>
     ///     Amount of FireStacks improved.
     /// </summary>
     [DataField(required: true)]
-    public float Stacks = 3.0f;
+    public float Stacks;
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) =>
         Loc.GetString("entity-effect-guidebook-extinguish-reaction", ("chance", Probability));
