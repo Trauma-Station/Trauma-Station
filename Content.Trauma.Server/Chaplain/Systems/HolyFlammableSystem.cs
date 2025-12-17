@@ -1,10 +1,12 @@
+using Content.Goobstation.Common.CCVar;
+using Content.Goobstation.Maths.FixedPoint;
+using Content.Goobstation.Shared.Religion;
 using Content.Server._Goobstation.Wizard.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
+using Content.Server.Damage.Components;
 using Content.Server.Stunnable;
 using Content.Server.Temperature.Systems;
-using Content.Server.Damage.Components;
-using Content.Goobstation.Common.CCVar;
 using Content.Shared._Goobstation.Wizard.Spellblade;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
@@ -12,6 +14,7 @@ using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
+using Content.Shared.Hands;
 using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -20,21 +23,21 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Temperature;
+using Content.Shared.Temperature.Components;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Goobstation.Maths.FixedPoint;
-using Content.Shared.Hands;
-using Content.Shared.Temperature.Components;
+using Content.Trauma.Shared.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
+using JetBrains.FormatRipper.Elf;
 using Robust.Server.Audio;
+using Robust.Shared.Configuration;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
-using Robust.Shared.Configuration;
-using Content.Goobstation.Shared.Religion;
 
 
 
@@ -84,27 +87,39 @@ namespace Content.Trauma.Server.Chaplain.Systems
             //SubscribeLocalEvent<HolyFlammableComponent, TileFireEvent>(OnTileFire);
             SubscribeLocalEvent<HolyFlammableComponent, RejuvenateEvent>(OnRejuvenate);
             SubscribeLocalEvent<HolyFlammableComponent, ResistFireAlertEvent>(OnResistFireAlert);
-            Subs.SubscribeWithRelay<HolyFlammableComponent, ExtinguishEvent>(OnExtinguishEvent);
+            Subs.SubscribeWithRelay<HolyFlammableComponent, HolyExtinguishEvent>(OnExtinguishEvent);
+            Subs.SubscribeWithRelay<WeakToHolyComponent, HolyIgniteEvent>(OnHolyIgniteEvent);
 
-            SubscribeLocalEvent<IgniteOnCollideComponent, StartCollideEvent>(IgniteOnCollide);
-            SubscribeLocalEvent<IgniteOnCollideComponent, LandEvent>(OnIgniteLand);
+            //SubscribeLocalEvent<IgniteOnCollideComponent, StartCollideEvent>(IgniteOnCollide);
+            //SubscribeLocalEvent<IgniteOnCollideComponent, LandEvent>(OnIgniteLand);
             //SubscribeLocalEvent<IgniteOnCollideComponent, ProjectileHitEvent>(OnProjectileHit); // Goobstation
 
             //SubscribeLocalEvent<HolyIgniteOnMeleeHitComponent, MeleeHitEvent>(OnMeleeHit);
 
-            SubscribeLocalEvent<ExtinguishOnInteractComponent, ActivateInWorldEvent>(OnExtinguishActivateInWorld);
+            //SubscribeLocalEvent<ExtinguishOnInteractComponent, ActivateInWorldEvent>(OnExtinguishActivateInWorld);
 
             SubscribeLocalEvent<IgniteOnHolyDamageComponent, DamageChangedEvent>(OnDamageChanged);
 
             Subs.CVar(_cfg, GoobCVars.FireStackHeat, value => _addHeatFirestack = value, true);
         }
 
-        private void OnExtinguishEvent(Entity<HolyFlammableComponent> ent, ref ExtinguishEvent args)
+        private void OnExtinguishEvent(Entity<HolyFlammableComponent> ent, ref HolyExtinguishEvent args)
         {
             // You know I'm really not sure if having AdjustFireStacks *after* Extinguish,
             // but I'm just moving this code, not questioning it.
             HolyExtinguish(ent, ent.Comp);
             AdjustFireStacks(ent, args.FireStacksAdjustment, ent.Comp);
+        }
+
+        private void OnHolyIgniteEvent(Entity<WeakToHolyComponent> ent, ref HolyIgniteEvent args)
+        {
+            EnsureComp<HolyFlammableComponent>(ent, out var flammable);
+            AdjustFireStacks(ent, args.FireStacksAdjustment);
+        }
+
+        private void OnHolyIgniteEvent(Entity<HolyFlammableComponent> ent, ref HolyIgniteEvent args)
+        {
+            AdjustFireStacks(ent, args.FireStacksAdjustment);
         }
 
         private void OnMeleeHit(EntityUid uid, HolyIgniteOnMeleeHitComponent component, MeleeHitEvent args)
@@ -114,8 +129,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
                 if (!TryComp<WeakToHolyComponent>(uid, out var weakToHoly))
                     continue;
 
-                if (!EnsureComp<HolyFlammableComponent>(uid, out var flammable))
-                    continue;
+                EnsureComp<HolyFlammableComponent>(uid, out var flammable);
 
                 AdjustFireStacks(entity, component.FireStacks, flammable);
                 if (component.FireStacks >= 0)
@@ -135,8 +149,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
             if (!TryComp<WeakToHolyComponent>(otherEnt, out var weakToHoly))
                 return;
 
-            if (!EnsureComp<HolyFlammableComponent>(otherEnt, out var flammable))
-                return;
+            EnsureComp<HolyFlammableComponent>(otherEnt, out var flammable);
 
             flammable.FireStacks += ent.Comp.FireStacks;
             HolyIgnite(otherEnt, ent);
@@ -364,11 +377,8 @@ namespace Content.Trauma.Server.Chaplain.Systems
         // Goobstation - now nullable
         public void HolyIgnite(EntityUid uid, EntityUid? ignitionSource = null, EntityUid? ignitionSourceUser = null, bool ignoreFireProtection = false) // EE Plasmamen Change
         {
-            if (!TryComp<WeakToHolyComponent>(uid, out var weakToHoly))
-                return;
-
-            if (!EnsureComp<HolyFlammableComponent>(uid, out var flammable))
-                return;
+            EnsureComp<HolyFlammableComponent>(uid, out var flammable);
+            EnsureComp<IgniteOnHolyDamageComponent>(uid);
 
             if (flammable.Damage.DamageDict["Holy"] <= 0)
                 flammable.Damage.DamageDict["Holy"] = 2; // Ensure it does holy damage
@@ -386,10 +396,12 @@ namespace Content.Trauma.Server.Chaplain.Systems
                     _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):target} set on holy fire by {ToPrettyString(ignitionSourceUser.Value):actor} with {ToPrettyString(ignitionSource):tool}");
                 else if (ignitionSource != null) // Goobstation
                     _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):target} set on holy fire by {ToPrettyString(ignitionSource):actor}");
+                else
+                    _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):target} set on holy fire");
                 flammable.OnFire = true;
 
-                var extinguished = new IgnitedEvent();
-                RaiseLocalEvent(uid, ref extinguished);
+                //var extinguished = new HolyIgnitedEvent();
+                //RaiseLocalEvent(uid, ref extinguished);
             }
 
             if (ignoreFireProtection) // EE Plasmamen Change
