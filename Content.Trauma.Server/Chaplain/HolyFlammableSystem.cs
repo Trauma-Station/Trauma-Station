@@ -21,7 +21,6 @@ using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
-using Content.Trauma.Server.Chaplain.Components;
 using Robust.Server.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
@@ -35,7 +34,7 @@ using Robust.Shared.Random;
 /// Adds an action ability that will cause all flammable targets in a radius to ignite, also heals the owner
 /// of the component when used.
 /// </summary>
-namespace Content.Trauma.Server.Chaplain.Systems
+namespace Content.Trauma.Server.Chaplain
 {
     public sealed class HolyFlammableSystem : EntitySystem
     {
@@ -71,9 +70,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
             _physicsQuery = GetEntityQuery<PhysicsComponent>();
 
             SubscribeLocalEvent<HolyFlammableComponent, MapInitEvent>(OnMapInit);
-            //SubscribeLocalEvent<HolyFlammableComponent, InteractUsingEvent>(OnInteractUsing);
             SubscribeLocalEvent<HolyFlammableComponent, StartCollideEvent>(OnCollide);
-            //SubscribeLocalEvent<HolyFlammableComponent, IsHotEvent>(OnIsHot);
             SubscribeLocalEvent<HolyFlammableComponent, TileFireEvent>(OnTileFire);
             SubscribeLocalEvent<HolyFlammableComponent, RejuvenateEvent>(OnRejuvenate);
             SubscribeLocalEvent<HolyFlammableComponent, ResistHolyFireAlertEvent>(OnResistFireAlert);
@@ -84,7 +81,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
             //SubscribeLocalEvent<IgniteOnCollideComponent, LandEvent>(OnIgniteLand);
             //SubscribeLocalEvent<IgniteOnCollideComponent, ProjectileHitEvent>(OnProjectileHit); // Goobstation
 
-            //SubscribeLocalEvent<HolyIgniteOnMeleeHitComponent, MeleeHitEvent>(OnMeleeHit);
+            SubscribeLocalEvent<HolyIgniteOnMeleeHitComponent, MeleeHitEvent>(OnMeleeHit);
 
             //SubscribeLocalEvent<ExtinguishOnInteractComponent, ActivateInWorldEvent>(OnExtinguishActivateInWorld);
 
@@ -106,11 +103,6 @@ namespace Content.Trauma.Server.Chaplain.Systems
             AdjustFireStacks(ent, args.FireStacksAdjustment, flammable, true);
         }
 
-        private void OnHolyIgniteEvent(Entity<HolyFlammableComponent> ent, ref HolyIgniteEvent args)
-        {
-            AdjustFireStacks(ent, args.FireStacksAdjustment);
-        }
-
         private void OnMeleeHit(EntityUid uid, HolyIgniteOnMeleeHitComponent component, MeleeHitEvent args)
         {
             foreach (var entity in args.HitEntities)
@@ -118,11 +110,10 @@ namespace Content.Trauma.Server.Chaplain.Systems
                 if (!TryComp<WeakToHolyComponent>(uid, out var weakToHoly))
                     continue;
 
+                SetupEntity(entity);
                 EnsureComp<HolyFlammableComponent>(uid, out var flammable);
 
-                AdjustFireStacks(entity, component.FireStacks, flammable);
-                if (component.FireStacks >= 0)
-                    HolyIgnite(entity, args.Weapon, args.User);
+                AdjustFireStacks(entity, component.FireStacks, flammable, true);
             }
         }
 
@@ -164,12 +155,6 @@ namespace Content.Trauma.Server.Chaplain.Systems
             SetupEntity(otherEnt);
             EnsureComp<HolyFlammableComponent>(otherEnt, out var flammable);
 
-            //Only ignite when the colliding fixture is projectile or ignition.
-            if (args.OurFixtureId != component.FixtureId) // Goob edit
-            {
-                return;
-            }
-
             flammable.FireStacks += component.FireStacks;
             HolyIgnite(otherEnt, uid);
             component.Count--;
@@ -189,21 +174,6 @@ namespace Content.Trauma.Server.Chaplain.Systems
 
             _fixture.TryCreateFixture(uid, component.FlammableCollisionShape, component.FlammableFixtureID, hard: false,
                 collisionMask: (int) CollisionGroup.FullTileLayer, body: body);
-        }
-
-        private void OnInteractUsing(EntityUid uid, HolyFlammableComponent flammable, InteractUsingEvent args)
-        {
-            if (args.Handled)
-                return;
-
-            var isHotEvent = new IsHotEvent();
-            RaiseLocalEvent(args.Used, isHotEvent);
-
-            if (!isHotEvent.IsHot)
-                return;
-
-            HolyIgnite(uid, args.Used, args.User);
-            args.Handled = true;
         }
 
         private void OnExtinguishActivateInWorld(EntityUid uid, ExtinguishOnInteractComponent component, ActivateInWorldEvent args)
@@ -237,23 +207,19 @@ namespace Content.Trauma.Server.Chaplain.Systems
         private void OnCollide(EntityUid uid, HolyFlammableComponent flammable, ref StartCollideEvent args)
         {
             var otherUid = args.OtherEntity;
-            if (!TryComp<WeakToHolyComponent>(otherUid, out var otherWeak))
-                return;
 
             // Collisions cause events to get raised directed at both entities. We only want to handle this collision
             // once, hence the uid check.
             if (otherUid.Id < uid.Id)
                 return;
 
-            // Normal hard collisions, though this isn't generally possible since most flammable things are mobs
-            // which don't collide with one another, shouldn't work here.
-            if (args.OtherFixtureId != flammable.FlammableFixtureID && args.OurFixtureId != flammable.FlammableFixtureID)
+            
+            if (!TryComp<WeakToHolyComponent>(otherUid, out var otherWeak))
                 return;
 
-            if (!flammable.FireSpread)
-                return;
+            SetupEntity(otherUid);
 
-            if (!TryComp(otherUid, out HolyFlammableComponent? otherFlammable) || !otherFlammable.FireSpread)
+            if (!TryComp(otherUid, out HolyFlammableComponent? otherFlammable))
                 return;
 
             if (!flammable.OnFire && !otherFlammable.OnFire)
@@ -277,11 +243,6 @@ namespace Content.Trauma.Server.Chaplain.Systems
             // bring each entity to the same firestack mass, firestack amount is scaled by the inverse of the entity's mass
             SetFireStacks(uid, avg / mass1, flammable, ignite: true);
             SetFireStacks(otherUid, avg / mass2, otherFlammable, ignite: true);
-        }
-
-        private void OnIsHot(EntityUid uid, HolyFlammableComponent flammable, IsHotEvent args)
-        {
-            args.IsHot = flammable.OnFire;
         }
 
         private void OnTileFire(Entity<HolyFlammableComponent> ent, ref TileFireEvent args)
@@ -406,7 +367,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
             if (args.DamageDelta == null)
                 return;
 
-            // Check if its' taken any heat damage, and give the value
+            // Check if its' taken any holy damage, and give the value
             if (args.DamageDelta.DamageDict.TryGetValue("Holy", out var value))
             {
                 // Make sure the value is greater than the threshold
@@ -439,7 +400,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
             uid.SpawnTimer(2000, () =>
             {
                 flammable.Resisting = false;
-                flammable.FireStacks -= flammable.FirestackFade * 10f; // EE Plasmamen Change
+                flammable.FireStacks -= flammable.FirestackFade * 50f; // EE Plasmamen Change
                 UpdateAppearance(uid, flammable);
             });
         }
@@ -448,6 +409,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
         {
             EnsureComp<HolyFlammableComponent>(uid);
             EnsureComp<HolyIgniteOnCollideComponent>(uid);
+            EnsureComp<IgniteOnHolyDamageComponent>(uid);
         }
 
         public override void Update(float frameTime)
@@ -505,7 +467,7 @@ namespace Content.Trauma.Server.Chaplain.Systems
                 {
 
                     _damageableSystem.TryChangeDamage(uid, flammable.Damage * flammable.FireStacks, interruptsDoAfters: false, partMultiplier: 2f); // Lavaland: Nerf fire 
-                    AdjustFireStacks(uid, flammable.FirestackFade * (flammable.Resisting ? 10f : 1f), flammable, flammable.OnFire);
+                    AdjustFireStacks(uid, flammable.FirestackFade * (flammable.Resisting ? 50f : 1f), flammable, flammable.OnFire);
                 }
                 else
                 {

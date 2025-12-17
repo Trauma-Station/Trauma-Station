@@ -35,15 +35,7 @@ namespace Content.Trauma.Shared.Chaplain.Components
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
-        public string FlammableFixtureID = "flammable";
-
-        [ViewVariables(VVAccess.ReadWrite)]
-        [DataField]
-        public float MinIgnitionTemperature = 373.15f;
-
-        [ViewVariables(VVAccess.ReadWrite)]
-        [DataField]
-        public bool FireSpread { get; private set; } = true;
+        public string FlammableFixtureID = "holyFlammable";
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
@@ -55,7 +47,7 @@ namespace Content.Trauma.Shared.Chaplain.Components
         {
             DamageDict =
             {
-                ["Holy"] = 1
+                ["Holy"] = 0.5
             }
         };
 

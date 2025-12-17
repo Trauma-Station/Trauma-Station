@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Content.Server.Atmos.EntitySystems;
-
-namespace Content.Trauma.Server.Chaplain.Components;
+namespace Content.Trauma.Shared.Chaplain.Components;
 
 [RegisterComponent]
 public sealed partial class HolyIgniteOnCollideComponent : Component
