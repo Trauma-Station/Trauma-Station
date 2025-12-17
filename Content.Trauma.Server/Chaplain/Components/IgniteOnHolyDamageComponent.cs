@@ -1,6 +1,6 @@
 using Content.Goobstation.Maths.FixedPoint;
 
-namespace Content.Server.Damage.Components;
+namespace Content.Trauma.Server.Chaplain.Components;
 
 [RegisterComponent]
 public sealed partial class IgniteOnHolyDamageComponent : Component
