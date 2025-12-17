@@ -27,7 +27,7 @@ namespace Content.Trauma.Shared.Chaplain.Components
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
-        public float MaximumFireStacks = 10f;
+        public float MaximumFireStacks = 50f;
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField]

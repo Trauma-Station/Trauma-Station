@@ -240,7 +240,7 @@
 
 - type: alert # Trauma
   id: HolyFire
-  icons: [ /Textures/Interface/Alerts/Fire/fire.png ]
+  icons: [ /Textures/_Trauma/Interface/Alerts/HolyFire/holyfire.png ]
   clickEvent: !type:ResistHolyFireAlertEvent
   name: alerts-on-fire-name
   description: alerts-on-fire-desc
