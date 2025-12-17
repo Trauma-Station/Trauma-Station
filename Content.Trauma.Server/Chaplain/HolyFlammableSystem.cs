@@ -394,13 +394,13 @@ namespace Content.Trauma.Server.Chaplain
             flammable.Resisting = true;
 
             _popup.PopupEntity(Loc.GetString("flammable-component-resist-message"), uid, uid);
-            _stunSystem.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(2f));
+            _stunSystem.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(4f));
 
             // TODO FLAMMABLE: Make this not use TimerComponent...
             uid.SpawnTimer(2000, () =>
             {
                 flammable.Resisting = false;
-                flammable.FireStacks -= flammable.FirestackFade * 50f; // EE Plasmamen Change
+                flammable.FireStacks -= flammable.FirestackFade * 20f; // EE Plasmamen Change
                 UpdateAppearance(uid, flammable);
             });
         }
@@ -467,7 +467,7 @@ namespace Content.Trauma.Server.Chaplain
                 {
 
                     _damageableSystem.TryChangeDamage(uid, flammable.Damage * flammable.FireStacks, interruptsDoAfters: false, partMultiplier: 2f); // Lavaland: Nerf fire 
-                    AdjustFireStacks(uid, flammable.FirestackFade * (flammable.Resisting ? 50f : 1f), flammable, flammable.OnFire);
+                    AdjustFireStacks(uid, flammable.FirestackFade * (flammable.Resisting ? 20f : 1f), flammable, flammable.OnFire);
                 }
                 else
                 {
