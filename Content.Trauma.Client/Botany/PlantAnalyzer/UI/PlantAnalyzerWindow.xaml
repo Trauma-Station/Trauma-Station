@@ -8,7 +8,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 <controls:FancyWindow xmlns="https://spacestation14.io"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
-    Title="{Loc 'plant-analyzer-interface-title'}">
+    Title="{Loc 'plant-analyzer-interface-title'}"
+    MinSize="500 500">
     <!-- Margin="left,top,right,bottom" -->
     <GridContainer Rows="3" Name ="GridCont" Margin="10 5 10 5" VerticalAlignment="Stretch" HorizontalExpand="True">
         <BoxContainer Name="Top">

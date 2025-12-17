@@ -828,7 +828,5 @@ Entries:
   changes:
     - type: Add
       message: Planet Analyzer
-    - type: Add
-      message: A lot of helper code.
   id: 92
   time: '2025-12-17T06:29:59.0000000+00:00'
