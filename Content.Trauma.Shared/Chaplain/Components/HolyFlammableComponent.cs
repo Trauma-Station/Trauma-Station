@@ -51,7 +51,7 @@ namespace Content.Trauma.Shared.Chaplain.Components
 
         [DataField(required: true)]
         [ViewVariables(VVAccess.ReadWrite)]
-        public DamageSpecifier Damage = new(); // Empty by default, we don't want any funny NREs.
+        public DamageSpecifier Damage = new();
 
         /// <summary>
         ///     Used for the fixture created to handle passing firestacks when two flammable objects collide.

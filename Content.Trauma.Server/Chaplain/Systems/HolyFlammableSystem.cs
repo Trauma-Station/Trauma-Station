@@ -370,6 +370,9 @@ namespace Content.Trauma.Server.Chaplain.Systems
             if (!EnsureComp<HolyFlammableComponent>(uid, out var flammable))
                 return;
 
+            if (flammable.Damage.DamageDict["Holy"] <= 0)
+                flammable.Damage.DamageDict["Holy"] = 2; // Ensure it does holy damage
+
             // Goobstation - from EE at 7b0949568d07df81b298251c6fce9be4d7d03f18 (https://github.com/Simple-Station/Einstein-Engines/pull/2462)
             EnsureComp<OnHolyFireComponent>(uid);
             if (flammable.AlwaysCombustible)
