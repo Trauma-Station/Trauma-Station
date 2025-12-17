@@ -3,10 +3,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 
-using System.Linq;
-using Content.Shared.Atmos;
-using Content.Trauma.Server.Botany;
-using Content.Trauma.Common.Botany;
 using Content.Trauma.Shared.Botany.Components;
 using Content.Shared.DoAfter;
 using Robust.Shared.Audio;

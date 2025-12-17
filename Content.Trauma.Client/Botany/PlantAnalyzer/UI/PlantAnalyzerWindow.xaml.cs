@@ -257,11 +257,6 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
             mutations.Append(IndentedNewline);
             mutations.Append(Loc.GetString("plant-analyzer-mutation-ligneous"));
         }
-        // if (advInst.Mutations.HasFlag(MutationFlags.Bioluminescent))
-        // {
-        //     mutations.Append(IndentedNewline);
-        //     mutations.Append(Loc.GetString("plant-analyzer-mutation-bioluminescent"));
-        // }
         if (msg.Mutations.HasFlag(MutationFlags.CanScream))
         {
             mutations.Append(IndentedNewline);

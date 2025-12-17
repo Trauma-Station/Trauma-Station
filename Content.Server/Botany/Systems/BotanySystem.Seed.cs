@@ -41,6 +41,7 @@ using Content.Goobstation.Common.NTR.Scan; // Goobstation
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Kitchen.Components;
+using Content.Trauma.Common.Botany; // Trauma
 
 namespace Content.Server.Botany.Systems;
 
