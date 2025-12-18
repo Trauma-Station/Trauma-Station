@@ -291,6 +291,13 @@ namespace Content.Trauma.Server.Chaplain
 
             _popup.PopupEntity(Loc.GetString("flammable-component-resist-message"), uid, uid);
             _stun.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(2f));
+
+            // TODO FLAMMABLE: Make this not use TimerComponent...
+            uid.SpawnTimer(2000, () =>
+            {
+                flammable.Resisting = false;
+                UpdateAppearance(uid, flammable);
+            });
         }
 
         public void SetupEntity(EntityUid uid)
