@@ -21,6 +21,7 @@ using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
+using Microsoft.EntityFrameworkCore.Storage;
 using Robust.Server.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
@@ -100,7 +101,12 @@ namespace Content.Trauma.Server.Chaplain
         {
             SetupEntity(ent);
             EnsureComp<HolyFlammableComponent>(ent, out var flammable);
-            AdjustFireStacks(ent, args.FireStacksAdjustment, flammable, true);
+            float multiplier = 1f;
+            if (flammable.FireStacks > 10)
+            {
+                multiplier = 0.2f
+            }
+            AdjustFireStacks(ent, args.FireStacksAdjustment * multiplier, flammable, true);
         }
 
         private void OnMeleeHit(EntityUid uid, HolyIgniteOnMeleeHitComponent component, MeleeHitEvent args)
