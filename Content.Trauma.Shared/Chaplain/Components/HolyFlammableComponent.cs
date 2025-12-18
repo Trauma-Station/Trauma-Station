@@ -88,7 +88,7 @@ namespace Content.Trauma.Shared.Chaplain.Components
         /// Determines how quickly the object will fade out. With positive values, the object will flare up instead of going out.
         /// </summary>
         [DataField, ViewVariables(VVAccess.ReadWrite)]
-        public float FirestackFade = -0.1f;
+        public float FirestackFade = -1f;
 
         [DataField]
         public ProtoId<AlertPrototype> FireAlert = "HolyFire";
