@@ -266,25 +266,10 @@ internal sealed partial class ChatManager : IChatManager
             var prefs = _preferencesManager.GetPreferences(player.UserId);
             colorOverride = prefs.AdminOOCColor;
         }
-        // RMC - Heavily modified for patreon.
-        if (_netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) &&
-            _linkAccount.GetPatron(player)?.Tier is { } tier)
+        if (  _netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) &&
+            _linkAccount.GetPatron(player)?.Tier != null) // RMC - Patreon
         {
-            if (tier.Icon != null)
-            {
-                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message",
-                    ("tierIcon", tier.Icon),
-                    ("patronColor", "#aa00ff"),
-                    ("playerName", player.Name),
-                    ("message", FormattedMessage.EscapeText(message)));
-            }
-            else
-            {
-                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message-no-icon",
-                    ("patronColor", "#aa00ff"),
-                    ("playerName", player.Name),
-                    ("message", FormattedMessage.EscapeText(message)));
-            }
+            wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", "#aa00ff"),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message))); // RMC - Patreon
         }
 
         //TODO: player.Name color, this will need to change the structure of the MsgChatMessage
