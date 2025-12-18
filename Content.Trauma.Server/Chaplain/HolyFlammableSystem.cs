@@ -414,8 +414,8 @@ namespace Content.Trauma.Server.Chaplain
         }
         public float DamageCurve(float x)
         {
-            float initialGrowthRate = 0.5f;
-            float intermediateGrowthRate = 0.1f;
+            float initialGrowthRate = 0.6f;
+            float intermediateGrowthRate = 0.2f;
             float lateGrowthRate = 50.0f;
 
             if (x < 4)
