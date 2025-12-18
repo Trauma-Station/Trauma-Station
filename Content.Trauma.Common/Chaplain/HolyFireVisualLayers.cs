@@ -6,10 +6,7 @@ namespace Content.Trauma.Common.Chaplain
     public enum HolyFireVisuals
     {
         OnFire,
-        FireStacks
+        FireStacks,
+        HolyFire
     }
-}
-public enum HolyFireVisualLayers : byte
-{
-    Fire
 }

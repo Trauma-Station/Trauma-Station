@@ -199,7 +199,6 @@ namespace Content.Trauma.Server.Chaplain
 
             flammable.FireStacks = MathF.Min(MathF.Max(flammable.MinimumFireStacks, stacks), flammable.MaximumFireStacks);
 
-            // Goobstation modified - fix
             if (flammable.FireStacks <= 0)
                 HolyExtinguish(uid, flammable);
             else if (ignite)
@@ -208,11 +207,9 @@ namespace Content.Trauma.Server.Chaplain
 
         public void HolyExtinguish(EntityUid uid, HolyFlammableComponent? flammable = null)
         {
-            // Goobstation - from EE at 7b0949568d07df81b298251c6fce9be4d7d03f18 (https://github.com/Simple-Station/Einstein-Engines/pull/2462)
             if (!Resolve(uid, ref flammable) || !flammable.CanExtinguish)
                 return;
 
-            // Goobstation - from EE at 7b0949568d07df81b298251c6fce9be4d7d03f18 (https://github.com/Simple-Station/Einstein-Engines/pull/2462)
             RemCompDeferred<OnHolyFireComponent>(uid);
             if (!flammable.OnFire)
                 return;
@@ -225,16 +222,14 @@ namespace Content.Trauma.Server.Chaplain
             RaiseLocalEvent(uid, ref extinguished);
 
             UpdateAppearance(uid, flammable);
-            _alerts.ClearAlert(uid, flammable.FireAlert); // Goob Edit - Fix Fire Alert
+            _alerts.ClearAlert(uid, flammable.FireAlert);
         }
 
-        // Goobstation - now nullable
-        public void HolyIgnite(EntityUid uid, EntityUid? ignitionSource = null, EntityUid? ignitionSourceUser = null, bool ignoreFireProtection = false) // EE Plasmamen Change
+        public void HolyIgnite(EntityUid uid, EntityUid? ignitionSource = null, EntityUid? ignitionSourceUser = null, bool ignoreFireProtection = false)
         {
             EnsureComp<HolyFlammableComponent>(uid, out var flammable);
             EnsureComp<IgniteOnHolyDamageComponent>(uid);
 
-            // Goobstation - from EE at 7b0949568d07df81b298251c6fce9be4d7d03f18 (https://github.com/Simple-Station/Einstein-Engines/pull/2462)
             EnsureComp<OnHolyFireComponent>(uid);
             if (flammable.AlwaysCombustible)
             {
@@ -245,7 +240,7 @@ namespace Content.Trauma.Server.Chaplain
             {
                 if (ignitionSourceUser != null)
                     _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):target} set on holy fire by {ToPrettyString(ignitionSourceUser.Value):actor} with {ToPrettyString(ignitionSource):tool}");
-                else if (ignitionSource != null) // Goobstation
+                else if (ignitionSource != null)
                     _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):target} set on holy fire by {ToPrettyString(ignitionSource):actor}");
                 else
                     _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):target} set on holy fire");
@@ -254,8 +249,6 @@ namespace Content.Trauma.Server.Chaplain
                 //var extinguished = new HolyIgnitedEvent();
                 //RaiseLocalEvent(uid, ref extinguished);
             }
-
-            if (ignoreFireProtection) // EE Plasmamen Change
 
             UpdateAppearance(uid, flammable);
         }
