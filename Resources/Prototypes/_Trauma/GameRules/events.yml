@@ -1,0 +1,22 @@
+- type: entityTable
+  id: BasicCalmEventsTrauma
+  table: !type:AllSelector
+    children:
+    - id: TidemindDevelop
+    - id: MothmaggotSpawn
+    - id: DerelictCyborgSyndicateSpawn
+    - id: MalignRiftSpawn
+    - id: FloorGoblinMidRound
+
+- type: entityTable
+  id: ModerateAntagEventsTrauma
+  table: !type:AllSelector
+    children:
+    - id: BlobSpawn
+    - id: LoneAbductorSpawn
+    - id: DuoAbductorSpawn
+    - id: BingleSpawn
+    - id: SlaughterDemonMidround
+    - id: XenomorphsInfestation
+    - id: WraithMidround
+    # TODO: When Slasher is Ready - id: SlasherSpawn

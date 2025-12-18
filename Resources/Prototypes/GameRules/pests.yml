@@ -111,8 +111,8 @@
       children:
       - id: MobCockroach
         weight: 0.79
-      #- id: MobMothroach # Trauma - removed pending mothmaggot rework
-      #  weight: 0.20
+      - id: MobMothmaggot # Trauma - was MobMothroach
+        weight: 0.20
       - id: MobLootbug # Goobstation
         weight: 0.3
       - id: MobMoproach
