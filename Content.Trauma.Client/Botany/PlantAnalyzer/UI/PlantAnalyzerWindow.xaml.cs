@@ -118,7 +118,7 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
                     {
                         SeedDataTypes.SeedDataType.Float => $"{gene.GeneValue:F2}",
                         SeedDataTypes.SeedDataType.Int => $"{(int) gene.GeneValue:D0}",
-                        SeedDataTypes.SeedDataType.HarvestType => Loc.GetString($"plant-analyzer-harvest-{(SeedDataTypes.SeedDataType) (int) gene.GeneValue}"),
+                        SeedDataTypes.SeedDataType.HarvestType => Loc.GetString($"plant-analyzer-harvest-{(SeedDataTypes.SeedDataType) gene.GeneValue}"),
                         SeedDataTypes.SeedDataType.Bool => gene.GeneValue >= 0.5f ? Loc.GetString("plant-analyzer-boolean-true") : Loc.GetString("plant-analyzer-boolean-false"),
                         _ => "N/A"
                     };
