@@ -17,8 +17,6 @@ namespace Content.Shared.Atmos
     public enum FireVisuals
     {
         OnFire,
-        FireStacks,
-        OnHolyFire, // Trauma
-        HolyFireStacks, // Trauma
+        FireStacks
     }
 }

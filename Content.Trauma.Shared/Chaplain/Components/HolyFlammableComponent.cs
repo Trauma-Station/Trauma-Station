@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
@@ -17,32 +12,28 @@ namespace Content.Trauma.Shared.Chaplain.Components
         [DataField]
         public bool Resisting;
 
-        [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
         public bool OnFire;
 
-        [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
         public float FireStacks;
 
-        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField]
+        public float FireStacksDropoff = 10f;
+
         [DataField]
         public float MaximumFireStacks = 50f;
 
-        [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
         public float MinimumFireStacks = -10f;
 
-        [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
-        public string FlammableFixtureID = "holyFlammable";
+        public string FlammableFixtureID = "flammable";
 
-        [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
         public bool CanResistFire { get; private set; } = false;
 
-        [DataField(required: true)]
-        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField]
         public DamageSpecifier Damage = new DamageSpecifier()
         {
             DamageDict =
@@ -52,35 +43,20 @@ namespace Content.Trauma.Shared.Chaplain.Components
         };
 
         /// <summary>
-        ///     Used for the fixture created to handle passing firestacks when two flammable objects collide.
-        /// </summary>
-        [DataField]
-        public IPhysShape FlammableCollisionShape = new PhysShapeCircle(0.35f);
-
-        /// <summary>
         ///     Should the component be set on fire by interactions with isHot entities
         /// </summary>
-        [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
         public bool AlwaysCombustible = false;
 
         /// <summary>
         ///     Can the component anyhow lose its FireStacks?
         /// </summary>
-        [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
         public bool CanExtinguish = true;
 
         /// <summary>
-        ///     EE Plasmamen Change: Should the component ignore fire protection when on fire?
-        /// </summary>
-        [DataField]
-        public bool IgnoreFireProtection = false;
-
-        /// <summary>
         ///     How many firestacks should be applied to component when being set on fire?
         /// </summary>
-        [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
         public float FirestacksOnIgnite = 2.0f;
 
@@ -92,5 +68,18 @@ namespace Content.Trauma.Shared.Chaplain.Components
 
         [DataField]
         public ProtoId<AlertPrototype> FireAlert = "HolyFire";
+
+        /// <summary>
+        /// Represents the time interval, in seconds, at which updates occur.
+        /// </summary>
+        [DataField]
+        public float UpdateTime = 1f;
+
+        /// <summary>
+        /// Contains the timer for the next update tick.
+        /// </summary>
+        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField]
+        public float Timer;
     }
 }

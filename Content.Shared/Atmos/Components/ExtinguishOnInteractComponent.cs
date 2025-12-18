@@ -107,5 +107,3 @@ public sealed partial class ExtinguishOnInteractComponent : Component
 }
 
 public sealed partial class ResistFireAlertEvent : BaseAlertEvent;
-
-public sealed partial class ResistHolyFireAlertEvent : BaseAlertEvent; // Trauma

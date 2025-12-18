@@ -1,7 +1,14 @@
+using Content.Shared.Alert;
 using Content.Shared.Inventory;
 
 namespace Content.Trauma.Shared.Chaplain;
-// NOTE: These components are currently not raised on the client, only on the server.
+
+/// <summary>
+/// This allows a character to resist the holy fire effect.
+/// </summary>
+public sealed partial class ResistHolyFireAlertEvent : BaseAlertEvent;
+
+// NOTE: These events are currently not raised on the client, only on the server.
 
 /// <summary>
 /// An entity has had an existing effect applied to it.

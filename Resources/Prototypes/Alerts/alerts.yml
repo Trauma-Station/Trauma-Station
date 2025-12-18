@@ -238,13 +238,6 @@
   name: alerts-on-fire-name
   description: alerts-on-fire-desc
 
-- type: alert # Trauma
-  id: HolyFire
-  icons: [ /Textures/_Trauma/Interface/Alerts/HolyFire/holyfire.png ]
-  clickEvent: !type:ResistHolyFireAlertEvent
-  name: alerts-on-fire-name
-  description: alerts-on-fire-desc
-
 - type: alert
   id: Cold
   category: Temperature

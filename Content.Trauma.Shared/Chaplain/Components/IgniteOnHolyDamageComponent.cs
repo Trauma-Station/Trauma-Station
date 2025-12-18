@@ -1,14 +1,20 @@
 using Content.Goobstation.Maths.FixedPoint;
+using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Chaplain.Components;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class IgniteOnHolyDamageComponent : Component
 {
-    [DataField("fireStacks")]
+    /// <summary>
+    /// How much fire stacks to apply on damage dealt.
+    /// </summary>
+    [DataField]
     public float FireStacks = 1f;
 
-    // The minimum amount of damage taken to apply fire stacks
-    [DataField("threshold")]
+    /// <summary>
+    /// Gets or sets the minimum amount of damage required to apply fire stacks.
+    /// </summary>
+    [DataField]
     public FixedPoint2 Threshold = 15;
 }

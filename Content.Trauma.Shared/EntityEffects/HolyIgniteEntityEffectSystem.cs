@@ -1,4 +1,3 @@
-using Content.Goobstation.Shared.Religion;
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
