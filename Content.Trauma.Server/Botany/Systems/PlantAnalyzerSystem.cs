@@ -5,19 +5,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 
 using System.Linq;
-using Content.Trauma.Common.Botany;
 using Content.Server.Botany;
 using Content.Server.Botany.Components;
 using Content.Shared.Atmos;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.PowerCell;
+using Content.Shared.Random;
+using Content.Trauma.Common.Botany;
 using Content.Trauma.Server.Botany.Components;
 using Content.Trauma.Shared.Botany.Components;
 using Content.Trauma.Shared.Botany.PlantAnalyzer;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Botany.Systems;
@@ -437,7 +437,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
     }
     public void SendDatabase(Entity<PlantAnalyzerComponent> ent)
     {
-        _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank, ent.Comp.GeneIndex, ent.Comp.DatabankIndex));
+        _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank, ent.Comp.MutationBank, ent.Comp.GeneIndex, ent.Comp.DatabankIndex));
     }
     // This is some shit which is really fucking wack.
     public void GetGeneFromInteger(Entity<PlantAnalyzerComponent> ent, SeedData seed)
@@ -450,6 +450,12 @@ public sealed class PlantAnalyzerSystem : EntitySystem
 
         switch (SeedDataTypes.IdToType[index])
         {
+            case SeedDataTypes.SeedDataType.RandomPlantMutation:
+                foreach (var mutation in seed.Mutations)
+                {
+                    ent.Comp.MutationBank.Add(mutation);
+                }
+                break;
             case SeedDataTypes.SeedDataType.Chemical:
                 foreach (var chemical in seed.Chemicals)
                 {
@@ -520,13 +526,20 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 if (index >= intCount + ent.Comp.ExudeGasesBank.Count)
                 {
                     intCount += ent.Comp.ExudeGasesBank.Count;
-                    ChemData chem = ent.Comp.ChemicalBank[index - intCount];
-                    SeedChemQuantity chemical = new SeedChemQuantity();
-                    chemical.Min = chem.ChemValue.Min;
-                    chemical.Max = chem.ChemValue.Max;
-                    chemical.PotencyDivisor = chem.ChemValue.PotencyDivisor;
-                    chemical.Inherent = chem.ChemValue.Inherent;
-                    seed.Chemicals[chem.ChemID] = chemical;
+                    if (index >= intCount + ent.Comp.ChemicalBank.Count)
+                    {
+                        seed.Mutations.Add(ent.Comp.MutationBank[index - intCount]);
+                    }
+                    else
+                    {
+                        ChemData chem = ent.Comp.ChemicalBank[index - intCount];
+                        SeedChemQuantity chemical = new SeedChemQuantity();
+                        chemical.Min = chem.ChemValue.Min;
+                        chemical.Max = chem.ChemValue.Max;
+                        chemical.PotencyDivisor = chem.ChemValue.PotencyDivisor;
+                        chemical.Inherent = chem.ChemValue.Inherent;
+                        seed.Chemicals[chem.ChemID] = chemical;
+                    }
                 }
                 else
                 {

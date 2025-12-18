@@ -4,6 +4,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 
+using Content.Shared.Random;
 using Content.Trauma.Common.Botany;
 using Content.Trauma.Shared.Botany.Components;
 using Robust.Shared.Serialization;
@@ -122,12 +123,13 @@ public sealed class PlantAnalyzerCurrentCount(int geneIndex, int databaseIndex) 
 }
 
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerSeedDatabank(List<GeneData> seedData, List<GasData> consumeGasData, List<GasData> exudeGasData, List<ChemData> chemicalData, int geneIndex, int databaseIndex) : BoundUserInterfaceState
+public sealed class PlantAnalyzerSeedDatabank(List<GeneData> seedData, List<GasData> consumeGasData, List<GasData> exudeGasData, List<ChemData> chemicalData, List<RandomPlantMutation> mutationData, int geneIndex, int databaseIndex) : BoundUserInterfaceState
 {
     public List<GeneData> SeedData { get; } = seedData;
     public List<GasData> ConsumeGasData { get; } = consumeGasData;
     public List<GasData> ExudeGasData { get; } = exudeGasData;
     public List<ChemData> ChemicalData { get; } = chemicalData;
+    public List<RandomPlantMutation> MutationData { get; } = mutationData;
     public int GeneIndex { get; } = geneIndex;
     public int DatabaseIndex { get; } = databaseIndex;
 }

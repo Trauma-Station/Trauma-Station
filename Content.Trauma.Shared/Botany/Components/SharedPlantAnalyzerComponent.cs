@@ -101,7 +101,8 @@ public partial struct SeedDataTypes
         SeedDataType.Bool,
         SeedDataType.GasConsume,
         SeedDataType.GasExude,
-        SeedDataType.Chemical
+        SeedDataType.Chemical,
+        SeedDataType.RandomPlantMutation
     };
 
     public static readonly List<string> IdToString = new()
@@ -132,6 +133,7 @@ public partial struct SeedDataTypes
         "TurnIntoKudzu",
         "Consume Gases",
         "Exude Gases",
-        "Chemical"
+        "Chemical",
+        "Mutations"
     };
 }
