@@ -82,18 +82,18 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
 
     public void SetGeneIndex(int index)
     {
-        if (index is 0)
+        if (index < 0)
             return;
         if (_window != null)
         {
-            _window._internalGeneNumber = index - 1;
+            _window._internalGeneNumber = index;
             SendMessage(new PlantAnalyzerSetGeneIndex(_window._internalGeneNumber, false));
         }
 }
 
     public void SetDatabaseIndex(int index)
     {
-        if (index is 0)
+        if (index <= 0)
             return;
         if (_window != null)
         {

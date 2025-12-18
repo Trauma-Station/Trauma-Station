@@ -83,7 +83,6 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
                 break;
             case PlantAnalyzerModes.Extract:
                 GeneList.Clear();
-                GeneList.AddItem(Loc.GetString("plant-analyzer-invalid-gene"));
                 foreach (var entry in SeedDataTypes.IdToString)
                 {
                     GeneList.AddItem(entry);
