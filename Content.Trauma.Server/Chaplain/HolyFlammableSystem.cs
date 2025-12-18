@@ -486,7 +486,7 @@ namespace Content.Trauma.Server.Chaplain
                 {
 
                     _damageableSystem.TryChangeDamage(uid, flammable.Damage * DamageCurve(flammable.FireStacks), interruptsDoAfters: false, partMultiplier: 2f); // Lavaland: Nerf fire 
-                    AdjustFireStacks(uid, flammable.FirestackFade * (flammable.Resisting ? 20f : 1f), flammable, flammable.OnFire);
+                    AdjustFireStacks(uid, (flammable.FireStacks - 5f) / (50f - 5f) + flammable.FirestackFade * (flammable.Resisting ? 20f : 0f), flammable, flammable.OnFire);
                 }
                 else
                 {
