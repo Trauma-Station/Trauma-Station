@@ -103,9 +103,6 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
             AppearanceSystem.TryGetData<float>(uid, HolyFireVisuals.FireStacks, out var fireStacksHoly, appearance);
             _sprite.LayerSetVisible((uid, sprite), indexHoly, onFireHoly);
 
-            if(onFireHoly)
-                throw new Exception("Holy fire visual layer found but entity is not marked as on holy fire in appearance data.");
-
             // If entity is not on fire, no need for light effects.
             if (!onFireHoly && component.LightEntityHoly != null)
             {
