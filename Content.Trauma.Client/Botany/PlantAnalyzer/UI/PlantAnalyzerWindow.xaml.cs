@@ -113,12 +113,13 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
                 foreach (var gene in _internalGeneDatabank)
                 {
                     int mutationID = gene.GeneID;
+                    int intValue = (int) gene.GeneValue;
                     SeedDataTypes.SeedDataType mutationType = SeedDataTypes.IdToType[mutationID];
                     string mutationValue = mutationType switch
                     {
                         SeedDataTypes.SeedDataType.Float => $"{gene.GeneValue:F2}",
                         SeedDataTypes.SeedDataType.Int => $"{(int) gene.GeneValue:D0}",
-                        SeedDataTypes.SeedDataType.HarvestType => Loc.GetString($"plant-analyzer-harvest-{(SeedDataTypes.SeedDataType) gene.GeneValue}"),
+                        SeedDataTypes.SeedDataType.HarvestType => Loc.GetString($"plant-analyzer-harvest-{(SeedDataTypes.SeedDataType) intValue}"),
                         SeedDataTypes.SeedDataType.Bool => gene.GeneValue >= 0.5f ? Loc.GetString("plant-analyzer-boolean-true") : Loc.GetString("plant-analyzer-boolean-false"),
                         _ => "N/A"
                     };
