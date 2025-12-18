@@ -22,7 +22,7 @@ plant-analyzer-subtract = -
 plant-analyzer-delete-entry = Delete
 plant-analyzer-delete-mutations = Delete Mutations
 plant-analyzer-invalid-gene = -----
-plant-analyzer-invalid-database = No Data Detected
+plant-analyzer-invalid-database = -----
 plant-analyzer-database-entries-header = Database:
 
 plant-analyzer-window-label-name-scanned-plant = Scanned plant: {$seedName}

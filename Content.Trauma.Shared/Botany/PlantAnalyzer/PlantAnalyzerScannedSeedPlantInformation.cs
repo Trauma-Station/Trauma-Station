@@ -103,9 +103,9 @@ public sealed class PlantAnalyzerSetMode(PlantAnalyzerModes scannerModes) : Boun
 }
 
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerGeneIterate(bool up, bool isDatabank) : BoundUserInterfaceMessage
+public sealed class PlantAnalyzerSetGeneIndex(int index, bool isDatabank) : BoundUserInterfaceMessage
 {
-    public bool MutationIterate { get; } = up;
+    public int Index { get; } = index;
     public bool IsDatabank { get; } = isDatabank;
 }
 
@@ -136,7 +136,10 @@ public sealed class PlantAnalyzerSeedDatabank(List<GeneData> seedData, List<GasD
 
 
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerDeleteDatabankEntry : BoundUserInterfaceMessage;
+public sealed class PlantAnalyzerDeleteDatabankEntry(int geneIndex) : BoundUserInterfaceMessage
+{
+    public int Index { get; } = geneIndex;
+}
 
 
 [Serializable, NetSerializable]
