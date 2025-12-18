@@ -381,9 +381,8 @@ namespace Content.Trauma.Server.Chaplain
                     return;
 
                 // Ignite that sucker
-                flammable.FireStacks += component.FireStacks * (flammable.FireStacks - -3f) / (60f - -3f);
-                if (flammable.FireStacks > 0)
-                    HolyIgnite(uid, uid);
+                flammable.FireStacks += component.FireStacks;
+                HolyIgnite(uid, uid);
             }
 
 
