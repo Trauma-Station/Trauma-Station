@@ -11,22 +11,20 @@ using Content.Shared.Atmos;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.PowerCell;
+using Content.Shared.Random;
 using Content.Trauma.Common.Botany;
 using Content.Trauma.Server.Botany.Components;
 using Content.Trauma.Shared.Botany.Components;
 using Content.Trauma.Shared.Botany.PlantAnalyzer;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Botany.Systems;
 
 public sealed class PlantAnalyzerSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly PowerCellSystem _cell = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -145,8 +143,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 GetGeneFromInteger(ent, plantComp.Seed);
             }
         }
-        if (_net.IsClient)
-            _audio.PlayPvs(ent.Comp.ExtractEndSound, ent);
+        _audio.PlayPvs(ent.Comp.ExtractEndSound, ent);
         SendDatabase(ent);
     }
 
@@ -175,8 +172,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 SetGeneFromInteger(ent, ref plantComp.Seed);
             }
         }
-        if (_net.IsClient)
-            _audio.PlayPvs(ent.Comp.InjectEndSound, ent);
+        _audio.PlayPvs(ent.Comp.InjectEndSound, ent);
         SendDatabase(ent);
     }
 
@@ -203,8 +199,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 plantComp.Seed.Mutations.Clear();
             }
         }
-        if (_net.IsClient)
-            _audio.PlayPvs(ent.Comp.DeleteMutationEndSound, ent);
+        _audio.PlayPvs(ent.Comp.DeleteMutationEndSound, ent);
     }
     public void ReadScannedPlant(Entity<PlantAnalyzerComponent> ent, EntityUid target)  //Funkystation - Renamed to match plants instead of copying HealthAnalyzer func names
     {
@@ -230,8 +225,8 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state); //Funkystation - Swapped to set state instead of UI message
             }
         }
-        if (_net.IsClient)
-            _audio.PlayPvs(ent.Comp.ScanningEndSound, ent);
+
+        _audio.PlayPvs(ent.Comp.ScanningEndSound, ent);
     }
 
     /// <summary>
