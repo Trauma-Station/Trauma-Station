@@ -73,28 +73,3 @@
   storage:
     back:
     - CrewCassette
-
-# Animals
-- type: loadout
-  id: Squackroach
-  storage:
-    back:
-    - MobSquackroach
-
-- type: loadout
-  id: Mouse
-  storage:
-    back:
-    - MobMouse
-
-- type: loadout
-  id: Mothroach
-  storage:
-    back:
-    - MobMothroach
-
-- type: loadout
-  id: Goldfish
-  storage:
-    back:
-    - MobCarpGoldfish
