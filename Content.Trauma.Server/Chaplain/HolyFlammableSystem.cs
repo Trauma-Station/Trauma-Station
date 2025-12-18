@@ -104,7 +104,7 @@ namespace Content.Trauma.Server.Chaplain
             float multiplier = 1f;
             if (flammable.FireStacks > 10)
             {
-                multiplier = 0.2f
+                multiplier = 0.2f;
             }
             AdjustFireStacks(ent, args.FireStacksAdjustment * multiplier, flammable, true);
         }
