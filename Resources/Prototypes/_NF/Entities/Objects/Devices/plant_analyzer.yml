@@ -18,6 +18,9 @@
     - state: unlit
       map: [ "enum.PowerDeviceVisualLayers.Powered" ]
       shader: unshaded
+  - type: Tag
+    tags:
+    - PlantAnalyzer
   - type: Item
     storedRotation: -90
   - type: ActivatableUI

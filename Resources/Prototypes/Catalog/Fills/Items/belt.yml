@@ -150,6 +150,7 @@
         - id: HydroponicsToolMiniHoe
         - id: HydroponicsToolSpade
         - id: HydroponicsToolClippers
+        - id: PlantAnalyzer # Trauma
         - id: ChemistryBottleRobustHarvest
 
 - type: entity

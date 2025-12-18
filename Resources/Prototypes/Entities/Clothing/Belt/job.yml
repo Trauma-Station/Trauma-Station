@@ -273,6 +273,7 @@
       - Syringe
       - CigPack
       - Dropper
+      - PlantAnalyzer
       components:
       - Seed
       - Smokable
