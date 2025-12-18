@@ -494,14 +494,13 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                         13 => seed.Lifespan,
                         14 => seed.Maturation,
                         15 => seed.Production,
-                        16 => seed.GrowthStages,
-                        17 => (float) seed.HarvestRepeat,
-                        18 => seed.Potency,
-                        19 => (float) Convert.ToInt16(seed.Seedless),
-                        20 => (float) Convert.ToInt16(seed.Viable),
-                        21 => (float) Convert.ToInt16(seed.Ligneous),
-                        22 => (float) Convert.ToInt16(seed.CanScream),
-                        23 => (float) Convert.ToInt16(seed.TurnIntoKudzu)
+                        16 => (float) seed.HarvestRepeat,
+                        17 => seed.Potency,
+                        18 => (float) Convert.ToInt16(seed.Seedless),
+                        19 => (float) Convert.ToInt16(seed.Viable),
+                        20 => (float) Convert.ToInt16(seed.Ligneous),
+                        21 => (float) Convert.ToInt16(seed.CanScream),
+                        22 => (float) Convert.ToInt16(seed.TurnIntoKudzu)
                     };
                     ent.Comp.GeneBank.Add(new GeneData(index, value));
                     break;
@@ -640,40 +639,35 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                     }
                 case 16:
                     {
-                        seed.GrowthStages = (int) gene.GeneValue;
+                        seed.HarvestRepeat = (HarvestType) gene.GeneValue;
                         break;
                     }
                 case 17:
                     {
-                        seed.HarvestRepeat = (HarvestType) gene.GeneValue;
+                        seed.Potency = gene.GeneValue;
                         break;
                     }
                 case 18:
                     {
-                        seed.Potency = gene.GeneValue;
+                        seed.Seedless = Convert.ToBoolean(gene.GeneValue);
                         break;
                     }
                 case 19:
                     {
-                        seed.Seedless = Convert.ToBoolean(gene.GeneValue);
+                        seed.Viable = Convert.ToBoolean(gene.GeneValue);
                         break;
                     }
                 case 20:
                     {
-                        seed.Viable = Convert.ToBoolean(gene.GeneValue);
+                        seed.Ligneous = Convert.ToBoolean(gene.GeneValue);
                         break;
                     }
                 case 21:
                     {
-                        seed.Ligneous = Convert.ToBoolean(gene.GeneValue);
-                        break;
-                    }
-                case 22:
-                    {
                         seed.CanScream = Convert.ToBoolean(gene.GeneValue);
                         break;
                     }
-                case 23:
+                case 22:
                     {
                         seed.TurnIntoKudzu = Convert.ToBoolean(gene.GeneValue);
                         break;
