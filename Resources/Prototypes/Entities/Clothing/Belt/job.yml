@@ -273,11 +273,11 @@
       - Syringe
       - CigPack
       - Dropper
-      - PlantAnalyzer # Trauma
       components:
       - Seed
       - Smokable
       - HandLabeler
+      - PlantAnalyzer # Trauma
   - type: ItemMapper
     sprite: *BeltOverlay
     mapLayers:
