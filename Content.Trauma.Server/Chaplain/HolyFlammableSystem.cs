@@ -1,3 +1,4 @@
+using Content.Goobstation.Shared._Trauma.Chaplain;
 using Content.Goobstation.Shared.Religion;
 using Content.Server.Administration.Logs;
 using Content.Server.Stunnable;
@@ -18,7 +19,6 @@ using Content.Trauma.Shared.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Physics.Systems;
 
 namespace Content.Trauma.Server.Chaplain
 {
@@ -30,7 +30,6 @@ namespace Content.Trauma.Server.Chaplain
         [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
         [Dependency] private readonly AlertsSystem _alerts = default!;
         [Dependency] private readonly DamageableSystem _damageable = default!;
-        [Dependency] private readonly FixtureSystem _fixture = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
