@@ -150,6 +150,8 @@
   id: BasicCalmEventsTable
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
+    - !type:NestedSelector # Trauma
+      tableId: BasicCalmEventsTrauma
     - id: AnomalySpawn
     - id: BluespaceArtifact
     - id: BluespaceLocker
@@ -173,11 +175,6 @@
     - id: SpiderClownSpawn
     - id: SpiderSpawn
     - id: VentClog
-    - id: TidemindDevelop # Goobstation - Tidemind
-    - id: MothroachSpawn # DeltaV
-    - id: DerelictCyborgSyndicateSpawn # Goobstation - usually calm
-    - id: MalignRiftSpawn # DeltaV
-    - id: FloorGoblinMidRound # Goobstation
 
 - type: entityTable
   id: BasicAntagEventsTable
@@ -193,6 +190,8 @@
   id: ModerateAntagEventsTable
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
+    - !type:NestedSelector # Trauma
+      tableId: ModerateAntagEventsTrauma
     - id: DragonSpawn
     - id: NinjaSpawn
     - id: ParadoxCloneSpawn
@@ -204,16 +203,6 @@
     - id: ZombieOutbreak
     - id: LoneOpsSpawn
     #- id: WizardSpawn # Trauma - chud wizard removed pending rework
-    # <Goob>
-    - id: BlobSpawn
-    - id: LoneAbductorSpawn
-    - id: DuoAbductorSpawn
-    - id: BingleSpawn
-    - id: SlaughterDemonMidround
-    - id: XenomorphsInfestation
-    - id: WraithMidround
-    #TODO When Slasher is Ready - id: SlasherSpawn
-    # </Goob>
     - !type:NestedSelector
       tableId: DerelictBorgEventTable
 

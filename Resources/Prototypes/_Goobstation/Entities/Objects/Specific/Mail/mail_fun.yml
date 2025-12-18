@@ -238,7 +238,7 @@
         orGroup: Critter
         prob: 0.36
         # Uncommon
-      - id: MobMothroach
+      - id: MobMothmaggot
         orGroup: Critter
         prob: 0.2
       # Small reptiles (weight: 1)

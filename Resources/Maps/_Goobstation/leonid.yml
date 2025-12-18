@@ -104292,7 +104292,7 @@ entities:
     - type: Transform
       pos: -17.5,16.5
       parent: 2
-- proto: CrateNPCMothroach
+- proto: CrateNPCMothmaggot
   entities:
   - uid: 16857
     components:

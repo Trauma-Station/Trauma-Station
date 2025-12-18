@@ -86,9 +86,6 @@ ghost-role-information-cancer-mouse-description = An irradiated mouse, spread yo
 ghost-role-information-mothroach-name = Mothroach
 ghost-role-information-mothroach-description = A cute but mischievous mothroach.
 
-ghost-role-information-squackroach-name = Squackroach
-ghost-role-information-squackroach-description = A diabolical but nearly harmless squackroach.
-
 ghost-role-information-moproach-name = Moproach
 ghost-role-information-moproach-description = A cute mothroach with more cute moplike shoes on its feet.
 
@@ -154,9 +151,6 @@ ghost-role-information-salvage-carp-description = Defend the loot inside the sal
 
 ghost-role-information-sentient-carp-name = Sentient Carp
 ghost-role-information-sentient-carp-description = Help the dragon flood the station with carps!
-
-ghost-role-information-space-goldfish-name = Space Goldfish
-ghost-role-information-space-goldfish-description = Swim aimlessly through the air and nibble at anyone foolish enough to incur your wrath.
 
 ghost-role-information-willow-name = Willow the Kangaroo
 ghost-role-information-willow-description = You're a kangaroo named Willow! Willow likes to box.

@@ -111,10 +111,8 @@
       children:
       - id: MobCockroach
         weight: 0.79
-      - id: MobMothroach
+      - id: MobMothmaggot # Trauma - was MobMothroach
         weight: 0.20
-      - id: MobSquackroach # Goobstation
-        weight: 0.1
       - id: MobLootbug # Goobstation
         weight: 0.3
       - id: MobMoproach

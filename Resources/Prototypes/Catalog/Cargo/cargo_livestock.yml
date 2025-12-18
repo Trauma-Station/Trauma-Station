@@ -248,7 +248,7 @@
   icon:
     sprite: Mobs/Animals/mothroach/mothroach.rsi
     state: mothroach
-  product: CrateNPCMothroach
+  product: CrateNPCMothmaggot # Trauma
   cost: 5000
   category: cargoproduct-category-name-livestock
   group: market

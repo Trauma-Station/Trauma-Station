@@ -127,7 +127,6 @@
   - CaptainOuterClothing
   - Survival
   - Trinkets
-  - Animals # Goob
   - CaptainJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -149,7 +148,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - HoPJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -185,7 +183,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - PassengerJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -206,7 +203,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - BartenderJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -224,7 +220,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - ServiceWorkerJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -245,7 +240,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - ChefJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -263,7 +257,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - LibrarianJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -282,7 +275,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - LawyerJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -304,7 +296,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - ChaplainJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -327,7 +318,6 @@
   - Trinkets
   - JanitorJobTrinkets
   - JanitorPlunger
-  - Animals
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - JanitorEnvirohelm
@@ -346,7 +336,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - BotanistJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -368,7 +357,6 @@
   - Glasses
   - SurvivalClown
   - Trinkets
-  - Animals # Goob
   - ClownJobTrinkets
   # Goobstation - EE Plasmeme Change.
   - ClownEnvirohelm
@@ -390,7 +378,6 @@
   - Glasses
   - SurvivalMime
   - Trinkets
-  - Animals # Goob
   - MimeJobTrinkets
   # Goobstation - EE Plasmeme Change.
   - MimeEnvirohelm
@@ -412,7 +399,6 @@
   - Trinkets
   - MusicianJobTrinkets
   - Instruments
-  - Animals
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - MusicianEnvirohelm
@@ -434,7 +420,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - QuartermasterJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -456,7 +441,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - CargoTechnicianJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -476,7 +460,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - SalvageSpecialistJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -498,7 +481,6 @@
   - ChiefEngineerShoes
   - SurvivalExtended
   - Trinkets
-  - Animals # Goob
   - ChiefEngineerJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -515,7 +497,6 @@
   - StationEngineerBackpack
   - SurvivalExtended
   - Trinkets
-  - Animals # Goob
   - TechnicalAssistantJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -536,7 +517,6 @@
   - StationEngineerID
   - SurvivalExtended
   - Trinkets
-  - Animals # Goob
   - StationEngineerJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -556,7 +536,6 @@
   - AtmosphericTechnicianShoes
   - SurvivalExtended
   - Trinkets
-  - Animals # Goob
   - AtmosphericTechnicianJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -580,7 +559,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - ResearchDirectorJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -604,7 +582,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - ScientistJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -622,7 +599,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - ResearchAssistantJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -647,7 +623,6 @@
   - Trinkets
   - HeadofSecurityJobTrinkets
   - SecurityStar
-  - Animals
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - HeadofSecurityEnvirohelm
@@ -671,7 +646,6 @@
   - Trinkets
   - WardenJobTrinkets
   - SecurityStar
-  - Animals
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - WardenEnvirohelm
@@ -695,7 +669,6 @@
   - Trinkets
   - SecurityJobTrinkets
   - SecurityStar
-  - Animals
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - SecurityOfficerEnvirohelm
@@ -716,7 +689,6 @@
   - Trinkets
   - DetectiveJobTrinkets
   - SecurityStar
-  - Animals
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - DetectiveEnvirohelm
@@ -735,7 +707,6 @@
   - SecurityNeck
   - SecurityOuterClothing # Goobstation - Why not.
   - Trinkets
-  - Animals # Goob
   - SecurityCadetJobTrinkets
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
@@ -760,7 +731,6 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - Animals # Goob
   - ChiefMedicalOfficerJobTrinkets
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
@@ -784,7 +754,6 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - Animals # Goob
   - MedicalDoctorJobTrinkets
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
@@ -802,7 +771,6 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - Animals # Goob
   - MedicalInternJobTrinkets
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
@@ -824,7 +792,6 @@
   - MedicalShoes
   - SurvivalMedical
   - Trinkets
-  - Animals # Goob
   - ChemistJobTrinkets
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
@@ -847,7 +814,6 @@
   - MedicalEyewear
   - SurvivalMedical
   - Trinkets
-  - Animals # Goob
   - ParamedicJobTrinkets
   - GroupSpeciesBreathToolMedical
   # Goobstation - EE Plasmeme Change.
@@ -867,7 +833,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - ZookeeperJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -886,7 +851,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - ReporterJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -904,7 +868,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - PsychologistJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
@@ -923,7 +886,6 @@
   - Glasses
   - Survival
   - Trinkets
-  - Animals # Goob
   - BoxerJobTrinkets
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
