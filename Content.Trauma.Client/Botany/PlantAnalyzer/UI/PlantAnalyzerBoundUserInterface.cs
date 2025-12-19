@@ -53,13 +53,9 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
         if (_window != null)
         {
             _window._internalmode = scanMode;
+            _window.PopulateUpdateButtons();
             SendMessage(new PlantAnalyzerSetMode(scanMode));
         }
-    }
-
-    public void GeneIterate(bool up, bool isImplantMode)
-    {
-        SendMessage(new PlantAnalyzerGeneIterate(up, isImplantMode));
     }
 
     protected override void Dispose(bool disposing)
@@ -73,8 +69,37 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
 
         _window?.Dispose();
     }
-    public void DeleteDatabaseEntry()
+    public void DeleteDatabaseEntry(int index)
     {
-        SendMessage(new PlantAnalyzerDeleteDatabankEntry());
+        if (index < 0)
+            return;
+        if (_window != null)
+        {
+            _window._internalDatabaseNumber += -1;
+            SendMessage(new PlantAnalyzerDeleteDatabankEntry(index));
+        }
+    }
+
+    public void SetGeneIndex(int index)
+    {
+        if (index < 0)
+            return;
+        if (_window != null)
+        {
+            _window._internalGeneNumber = index;
+            SendMessage(new PlantAnalyzerSetGeneIndex(_window._internalGeneNumber, false));
+        }
+}
+
+    public void SetDatabaseIndex(int index)
+    {
+        if (index <= 0)
+            return;
+        if (_window != null)
+        {
+            _window._internalGeneNumber = index - 1;
+            SendMessage(new PlantAnalyzerSetGeneIndex(index, true));
+        }
     }
 }
+

@@ -39,7 +39,9 @@
       path: "/Audio/_Shitmed/ReBELL/Organs/OrganDestroyed2.ogg"
     injectEndSound:
       path: "/Audio/_Shitmed/Medical/Surgery/organ2.ogg"
-
+  - type: Tag
+    tags:
+    - PlantAnalyzer
 
 - type: entity
   id: PlantAnalyzer

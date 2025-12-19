@@ -36,7 +36,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         SubscribeLocalEvent<PlantAnalyzerComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerSetMode>(OnModeSelected);
-        SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerGeneIterate>(OnGeneIterate);
+        SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerSetGeneIndex>(OnGeneIterate);
         SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerDeleteDatabankEntry>(OnDeleteDatabaseEntry);
         SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerRequestDefault>(OnRequestDefault);
     }
@@ -315,18 +315,16 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             return;
         ent.Comp.Settings.AnalyzerModes = mode;
 
-        var state = new PlantAnalyzerCurrentMode(ent.Comp.Settings.AnalyzerModes);
-        _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state);
         if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Implant)
         {
             SendDatabase(ent);
         }
     }
 
-    private void OnGeneIterate(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerGeneIterate args)
+    private void OnGeneIterate(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerSetGeneIndex args)
     {
-        GeneIterate(ent, args.MutationIterate, args.IsDatabank);
-        SendCurrentIndex(ent);
+        GeneIterate(ent, args.Index, args.IsDatabank);
+        //SendCurrentIndex(ent);
     }
 
     private void SendCurrentIndex(Entity<PlantAnalyzerComponent> ent)
@@ -335,53 +333,34 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state);
     }
 
-    public void GeneIterate(Entity<PlantAnalyzerComponent> ent, bool mode, bool isDatabank)
+    public void GeneIterate(Entity<PlantAnalyzerComponent> ent, int mode, bool isDatabank)
     {
         if (ent.Comp.DoAfter != null)
             return;
         if (isDatabank)
         {
-            if (mode)
+            ent.Comp.DatabankIndex = mode;
+            int intCount = ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count + ent.Comp.MutationBank.Count;
+            if (ent.Comp.DatabankIndex >= intCount)
             {
-                ent.Comp.DatabankIndex += 1;
-                int intCount = ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count;
-                if (ent.Comp.DatabankIndex >= intCount)
-                {
-                    ent.Comp.DatabankIndex = intCount - 1;
-                    if (ent.Comp.DatabankIndex < 0)
-                    {
-                        ent.Comp.DatabankIndex = 0;
-                    }
-                }
+                ent.Comp.DatabankIndex = intCount - 1;
             }
-            else
+            if (ent.Comp.DatabankIndex < 0)
             {
-                ent.Comp.DatabankIndex -= 1;
-                if (ent.Comp.DatabankIndex < 0)
-                {
-                    ent.Comp.DatabankIndex = 0;
-                }
+                ent.Comp.DatabankIndex = 0;
             }
         }
         else
         {
-            if (mode)
+            ent.Comp.GeneIndex = mode;
+            if (ent.Comp.GeneIndex >= SeedDataTypes.IdToType.Count)
             {
-                ent.Comp.GeneIndex += 1;
-                if (ent.Comp.GeneIndex >= SeedDataTypes.IdToType.Count)
-                {
-                    ent.Comp.GeneIndex = SeedDataTypes.IdToType.Count - 1;
-                }
+                ent.Comp.GeneIndex = SeedDataTypes.IdToType.Count - 1;
             }
-            else
+            if (ent.Comp.GeneIndex < 0)
             {
-                ent.Comp.GeneIndex -= 1;
-                if (ent.Comp.GeneIndex < 0)
-                {
-                    ent.Comp.GeneIndex = 0;
-                }
+                ent.Comp.GeneIndex = 0;
             }
-
         }
     }
 
@@ -389,7 +368,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
     {
         if (ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count <= 0)
         {
-            SendCurrentIndex(ent);
+            //SendCurrentIndex(ent);
             return;
         }
         int intCount = 0;
