@@ -46,12 +46,7 @@
     - !type:AgeRequirement
       requiredAge: 21
     - !type:SpeciesRequirement # Trauma - prevent anyone taking it that has it enabled previously in db
-      species:
-      - Felinid
-    - !type:SpeciesRequirement # Goob - None Felinid
-      inverted: true
-      species:
-      - Felinid
+      species: []
   guides:
   - Command
   - SOPSuccession

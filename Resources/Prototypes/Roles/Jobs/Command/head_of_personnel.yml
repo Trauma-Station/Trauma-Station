@@ -152,10 +152,6 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 2.5h
-    - !type:SpeciesRequirement # Goob - None Felinid
-      inverted: true
-      species:
-      - Felinid
   guides: # goobstation
   - Command
   - SOPSuccession

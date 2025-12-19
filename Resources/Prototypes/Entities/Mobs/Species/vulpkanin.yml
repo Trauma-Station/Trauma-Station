@@ -18,13 +18,6 @@
     speechSounds: Vulpkanin
     speechVerb: Vulpkanin
     allowedEmotes: [ 'Bark', 'Snarl', 'Whine', 'Howl', 'Growl' ]
-  - type: LanguageKnowledge # Trauma
-    speaks:
-    - TauCetiBasic
-    - Canilunzt
-    understands:
-    - TauCetiBasic
-    - Canilunzt
   - type: Vocal
     sounds:
       Male: MaleVulpkanin
@@ -110,7 +103,7 @@
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
     - map: [ "clownedon" ]
-      sprite: "_DV/Effects/creampie.rsi" # Trauma - vulp not fully cherry picked goida
+      sprite: "Effects/creampie.rsi"
       state: "creampie_vulpkanin"
       visible: false
   - type: HumanoidAppearance
