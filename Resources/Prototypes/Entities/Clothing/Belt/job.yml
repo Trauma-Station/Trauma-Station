@@ -273,7 +273,6 @@
       - Syringe
       - CigPack
       - Dropper
-      - PlantAnalyzer # Trauma
       components:
       - Seed
       - Smokable
