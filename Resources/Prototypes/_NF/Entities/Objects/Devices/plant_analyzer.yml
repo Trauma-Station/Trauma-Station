@@ -19,7 +19,6 @@
       map: [ "enum.PowerDeviceVisualLayers.Powered" ]
       shader: unshaded
   - type: Item
-    size: small
     storedRotation: -90
   - type: ActivatableUI
     key: enum.PlantAnalyzerUiKey.Key
@@ -40,7 +39,9 @@
       path: "/Audio/_Shitmed/ReBELL/Organs/OrganDestroyed2.ogg"
     injectEndSound:
       path: "/Audio/_Shitmed/Medical/Surgery/organ2.ogg"
-
+  - type: Tag
+      tags:
+      - PlantSampleTaker
 
 - type: entity
   id: PlantAnalyzer
