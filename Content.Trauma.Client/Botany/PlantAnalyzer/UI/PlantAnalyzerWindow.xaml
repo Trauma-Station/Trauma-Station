@@ -11,11 +11,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
     Title="{Loc 'plant-analyzer-interface-title'}"
     MinSize="500 500">
     <!-- Margin="left,top,right,bottom" -->
-    <GridContainer Rows="3" Name ="GridCont" Margin="10 5 10 5" VerticalAlignment="Stretch" HorizontalExpand="True">
+    <GridContainer Rows="3" Name ="GridCont" Margin="10 5 10 5" VerticalAlignment="Stretch" HorizontalExpand="True" VerticalExpand="True">
         <BoxContainer Name="Top">
             <Label Name="NoData" Text="{Loc 'plant-analyzer-window-no-seed-information-text'}" Margin="10 0 0 0"/>
         </BoxContainer>
-        <TabContainer Name="Tabs" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalExpand="True">
+        <TabContainer Name="Tabs" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Name ="{Loc 'plant-analyzer-window-tab-scan'}" Orientation="Horizontal" VerticalAlignment="Stretch" Margin="10 0 5 0">
                 <BoxContainer Name ="{Loc 'plant-analyzer-window-tab-basics'}" Orientation="Vertical" VerticalAlignment="Stretch" Margin="10 0 5 0">
                     <Label Name="PlantName" Margin="0 5 0 5"/>
@@ -51,18 +51,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
                 <Label Name="ExtraInfo" Margin="0 5 0 5"/>
             </BoxContainer>
             <BoxContainer Name="{Loc 'plant-analyzer-window-tab-extractor'}" Orientation="Vertical"  VerticalAlignment="Stretch" Margin="10 0 5 0">
-                <Button Name="StepDownExtract" Text="{Loc 'plant-analyzer-subtract'}" StyleClasses="OpenLeft"/>
-                <Label Name="GeneIndexExtract" Text="{Loc 'plant-analyzer-invalid-gene'}}" Margin="10 0 0 0"/>
-                <Button Name="StepUpExtract" Text="{Loc 'plant-analyzer-add'}" StyleClasses="OpenRight"/>
+                <ItemList Name="GeneList" SelectMode="Single" VerticalExpand="True"  Margin ="0 4"/>
             </BoxContainer>
             <BoxContainer Name="{Loc 'plant-analyzer-window-tab-databank'}" Orientation="Vertical"  VerticalAlignment="Stretch" Margin="10 0 5 0">
                 <Button Name="DeleteDatabaseEntryButton" Text="{Loc 'plant-analyzer-delete-entry'}" StyleClasses="OpenLeft"/>
-                <Button Name="StepDownDatabase" Text="{Loc 'plant-analyzer-subtract'}" StyleClasses="OpenLeft"/>
-                <Label Name="GeneIndexDatabase" Text="{Loc 'plant-analyzer-invalid-database'}}" Margin="10 0 0 0"/>
-                <Button Name="StepUpDatabase" Text="{Loc 'plant-analyzer-add'}" StyleClasses="OpenRight"/>
-                <BoxContainer Name="GeneDatabaseListContainer" Orientation="Vertical" HorizontalExpand="True" HorizontalAlignment="Left">
-                    <Label Name="Database" Text="{Loc 'plant-analyzer-database-entries-header'}" Margin="10 0 0 0"/>
-                </BoxContainer>
+                <ItemList Name="DatabaseList" SelectMode="Single" VerticalExpand="True"  Margin ="0 4"/>
             </BoxContainer>
         </TabContainer>
     </GridContainer>
