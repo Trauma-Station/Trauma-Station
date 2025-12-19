@@ -124,12 +124,7 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
                 }
                 foreach (var gene in _internalMutationsDatabank)
                 {
-                    GeneDatabaseListContainer.AddChild(new RichTextLabel
-                    {
-                        Text = $"ID: {index} {gene.Name}: Description - {gene.Description}",
-                        Margin = new Thickness(0, 4),
-                    });
-                    index++;
+                    DatabaseList.AddItem($"{gene.Name}: Description - {gene.Description}");
                 }
                 break;
         }
