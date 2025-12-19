@@ -1,7 +1,6 @@
 using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
-using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Chaplain.Components
@@ -29,9 +28,6 @@ namespace Content.Trauma.Shared.Chaplain.Components
 
         [DataField]
         public string FlammableFixtureID = "flammable";
-
-        [DataField]
-        public bool CanResistFire { get; private set; } = false;
 
         [DataField]
         public DamageSpecifier Damage = new DamageSpecifier()
