@@ -75,13 +75,29 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
             _sprite.LayerSetRsi((uid, sprite), FireVisualLayers.Fire, new ResPath(component.Sprite));
 
         // <Trauma>
-        // This adds an additional layer for Holy Fire effects.
-        _sprite.LayerMapReserve((uid, sprite), HolyFireVisuals.HolyFire);
-        _sprite.LayerSetVisible((uid, sprite), HolyFireVisuals.HolyFire, false);
-        sprite.LayerSetShader(HolyFireVisuals.HolyFire, "unshaded");
         // This checks if the resource file for the Holy Fire sprite exists.
-        if (component.SpriteHoly != null)
-            _sprite.LayerSetRsi((uid, sprite), HolyFireVisuals.HolyFire, new ResPath(component.SpriteHoly));
+        if (component.SpriteHoly != null && component.Sprite != null)
+        {
+            int lastIndex = component.Sprite.LastIndexOf('/');
+
+            // Only proceed if the Sprite file ends with "onfire.rsi" to ensure it's the correct sprite kind.
+            if (lastIndex != -1)
+            {
+                string endOfBitRSI = component.Sprite.Substring(lastIndex + 1);
+                if (endOfBitRSI == "onfire.rsi")
+                {
+                    // This adds an additional layer for Holy Fire effects. Don't need it if it's not a person.
+                    _sprite.LayerMapReserve((uid, sprite), HolyFireVisuals.HolyFire);
+                    _sprite.LayerSetVisible((uid, sprite), HolyFireVisuals.HolyFire, false);
+                    sprite.LayerSetShader(HolyFireVisuals.HolyFire, "unshaded");
+                    _sprite.LayerSetRsi((uid, sprite), HolyFireVisuals.HolyFire, new ResPath(component.SpriteHoly));
+                }
+            }
+            else
+            {
+                component.SpriteHoly = null; // Invalid path, disable Holy Fire sprite.
+            }
+        }
         // </Trauma>
 
         UpdateAppearance(uid, component, sprite, appearance);
