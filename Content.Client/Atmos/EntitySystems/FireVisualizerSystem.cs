@@ -92,11 +92,19 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
                     sprite.LayerSetShader(HolyFireVisuals.HolyFire, "unshaded");
                     _sprite.LayerSetRsi((uid, sprite), HolyFireVisuals.HolyFire, new ResPath(component.SpriteHoly));
                 }
+                else
+                {
+                    component.SpriteHoly = null; // Invalid path, disable Holy Fire sprite.
+                }
             }
             else
             {
                 component.SpriteHoly = null; // Invalid path, disable Holy Fire sprite.
             }
+        }
+        else
+        {
+            component.SpriteHoly = null; // Invalid path, disable Holy Fire sprite.
         }
         // </Trauma>
 
