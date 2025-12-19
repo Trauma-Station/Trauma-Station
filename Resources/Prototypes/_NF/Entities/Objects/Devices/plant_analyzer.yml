@@ -19,6 +19,7 @@
       map: [ "enum.PowerDeviceVisualLayers.Powered" ]
       shader: unshaded
   - type: Item
+    size: small
     storedRotation: -90
   - type: ActivatableUI
     key: enum.PlantAnalyzerUiKey.Key
