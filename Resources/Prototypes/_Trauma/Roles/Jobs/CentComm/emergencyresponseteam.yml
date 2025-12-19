@@ -1,0 +1,16 @@
+- type: startingGear
+  id: ERTChaplainGearTank
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitERTChaplain
+    back: ClothingBackpackHolyFirefighterTank
+    shoes: ClothingShoesBootsMagEmergencyResponseTeam # Goobstation
+    head: ClothingHeadHatFez
+    eyes: ClothingEyesGlasses
+    neck: ClothingNeckStoleChaplain
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterArmourDurathread # Durathread armor is cooler.
+    id: ERTChaplainPDA
+    ears: ClothingHeadsetAltCentCom
+    belt: ClothingBeltStorageWaistbag
+    pocket1: WeaponPulsePistol # Literally described as "Favored sidearm of NT ERT operatives".
+    pocket2: DrinkWaterBottleFull

@@ -120,7 +120,7 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
                 component.LightEntityHoly ??= Spawn(null, new EntityCoordinates(uid, default));
                 var lightHoly = EnsureComp<PointLightComponent>(component.LightEntityHoly.Value);
 
-                _lights.SetColor(component.LightEntityHoly.Value, component.LightColor, lightHoly);
+                _lights.SetColor(component.LightEntityHoly.Value, component.LightColorHoly, lightHoly);
 
                 // light needs a minimum radius to be visible at all, hence the + 1.5f
                 _lights.SetRadius(component.LightEntityHoly.Value, Math.Clamp(1.5f + component.LightRadiusPerStack * fireStacksHoly, 0f, component.MaxLightRadius), lightHoly);
