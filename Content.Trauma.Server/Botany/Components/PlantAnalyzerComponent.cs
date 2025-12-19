@@ -3,8 +3,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 
-using Content.Trauma.Shared.Botany.Components;
 using Content.Shared.DoAfter;
+using Content.Shared.Random;
+using Content.Trauma.Shared.Botany.Components;
 using Robust.Shared.Audio;
 
 namespace Content.Trauma.Server.Botany.Components;
@@ -44,6 +45,9 @@ public sealed partial class PlantAnalyzerComponent : Component
 
     [DataField]
     public List<ChemData> ChemicalBank = new();
+
+    [DataField]
+    public List<RandomPlantMutation> MutationBank= new();
 
     [DataField]
     public List<string> StoredMutationStrings = new();

@@ -5,19 +5,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
 
 using System.Linq;
-using Content.Trauma.Common.Botany;
 using Content.Server.Botany;
 using Content.Server.Botany.Components;
 using Content.Shared.Atmos;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.PowerCell;
+using Content.Shared.Random;
+using Content.Trauma.Common.Botany;
 using Content.Trauma.Server.Botany.Components;
 using Content.Trauma.Shared.Botany.Components;
 using Content.Trauma.Shared.Botany.PlantAnalyzer;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Botany.Systems;
@@ -437,7 +437,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
     }
     public void SendDatabase(Entity<PlantAnalyzerComponent> ent)
     {
-        _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank, ent.Comp.GeneIndex, ent.Comp.DatabankIndex));
+        _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank, ent.Comp.MutationBank, ent.Comp.GeneIndex, ent.Comp.DatabankIndex));
     }
     // This is some shit which is really fucking wack.
     public void GetGeneFromInteger(Entity<PlantAnalyzerComponent> ent, SeedData seed)
@@ -450,6 +450,12 @@ public sealed class PlantAnalyzerSystem : EntitySystem
 
         switch (SeedDataTypes.IdToType[index])
         {
+            case SeedDataTypes.SeedDataType.RandomPlantMutation:
+                foreach (var mutation in seed.Mutations)
+                {
+                    ent.Comp.MutationBank.Add(mutation);
+                }
+                break;
             case SeedDataTypes.SeedDataType.Chemical:
                 foreach (var chemical in seed.Chemicals)
                 {
@@ -488,14 +494,13 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                         13 => seed.Lifespan,
                         14 => seed.Maturation,
                         15 => seed.Production,
-                        16 => seed.GrowthStages,
-                        17 => (float) seed.HarvestRepeat,
-                        18 => seed.Potency,
-                        19 => (float) Convert.ToInt16(seed.Seedless),
-                        20 => (float) Convert.ToInt16(seed.Viable),
-                        21 => (float) Convert.ToInt16(seed.Ligneous),
-                        22 => (float) Convert.ToInt16(seed.CanScream),
-                        23 => (float) Convert.ToInt16(seed.TurnIntoKudzu)
+                        16 => (float) seed.HarvestRepeat,
+                        17 => seed.Potency,
+                        18 => (float) Convert.ToInt16(seed.Seedless),
+                        19 => (float) Convert.ToInt16(seed.Viable),
+                        20 => (float) Convert.ToInt16(seed.Ligneous),
+                        21 => (float) Convert.ToInt16(seed.CanScream),
+                        22 => (float) Convert.ToInt16(seed.TurnIntoKudzu)
                     };
                     ent.Comp.GeneBank.Add(new GeneData(index, value));
                     break;
@@ -520,13 +525,20 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 if (index >= intCount + ent.Comp.ExudeGasesBank.Count)
                 {
                     intCount += ent.Comp.ExudeGasesBank.Count;
-                    ChemData chem = ent.Comp.ChemicalBank[index - intCount];
-                    SeedChemQuantity chemical = new SeedChemQuantity();
-                    chemical.Min = chem.ChemValue.Min;
-                    chemical.Max = chem.ChemValue.Max;
-                    chemical.PotencyDivisor = chem.ChemValue.PotencyDivisor;
-                    chemical.Inherent = chem.ChemValue.Inherent;
-                    seed.Chemicals[chem.ChemID] = chemical;
+                    if (index >= intCount + ent.Comp.ChemicalBank.Count)
+                    {
+                        seed.Mutations.Add(ent.Comp.MutationBank[index - intCount]);
+                    }
+                    else
+                    {
+                        ChemData chem = ent.Comp.ChemicalBank[index - intCount];
+                        SeedChemQuantity chemical = new SeedChemQuantity();
+                        chemical.Min = chem.ChemValue.Min;
+                        chemical.Max = chem.ChemValue.Max;
+                        chemical.PotencyDivisor = chem.ChemValue.PotencyDivisor;
+                        chemical.Inherent = chem.ChemValue.Inherent;
+                        seed.Chemicals[chem.ChemID] = chemical;
+                    }
                 }
                 else
                 {
@@ -627,40 +639,35 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                     }
                 case 16:
                     {
-                        seed.GrowthStages = (int) gene.GeneValue;
+                        seed.HarvestRepeat = (HarvestType) gene.GeneValue;
                         break;
                     }
                 case 17:
                     {
-                        seed.HarvestRepeat = (HarvestType) gene.GeneValue;
+                        seed.Potency = gene.GeneValue;
                         break;
                     }
                 case 18:
                     {
-                        seed.Potency = gene.GeneValue;
+                        seed.Seedless = Convert.ToBoolean(gene.GeneValue);
                         break;
                     }
                 case 19:
                     {
-                        seed.Seedless = Convert.ToBoolean(gene.GeneValue);
+                        seed.Viable = Convert.ToBoolean(gene.GeneValue);
                         break;
                     }
                 case 20:
                     {
-                        seed.Viable = Convert.ToBoolean(gene.GeneValue);
+                        seed.Ligneous = Convert.ToBoolean(gene.GeneValue);
                         break;
                     }
                 case 21:
                     {
-                        seed.Ligneous = Convert.ToBoolean(gene.GeneValue);
-                        break;
-                    }
-                case 22:
-                    {
                         seed.CanScream = Convert.ToBoolean(gene.GeneValue);
                         break;
                     }
-                case 23:
+                case 22:
                     {
                         seed.TurnIntoKudzu = Convert.ToBoolean(gene.GeneValue);
                         break;
