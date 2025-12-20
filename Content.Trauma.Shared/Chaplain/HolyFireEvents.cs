@@ -53,4 +53,3 @@ public struct HolyIgniteEvent : IInventoryRelayEvent
 
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
-
