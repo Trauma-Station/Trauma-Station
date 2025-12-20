@@ -109,7 +109,7 @@ public sealed class HolyFlammableSystem : EntitySystem
         HolyIgnite(otherEnt, uid);
         component.Count--;
 
-        if (component.Count == 0)
+        if (component.Count <= 0)
             RemCompDeferred<HolyIgniteOnCollideComponent>(uid);
     }
 
@@ -287,7 +287,6 @@ public sealed class HolyFlammableSystem : EntitySystem
             return;
 
         flammable.Resisting = true;
-
         _popup.PopupEntity(Loc.GetString("flammable-component-resist-message"), uid, uid);
         _stun.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(2f));
 
@@ -347,10 +346,8 @@ public sealed class HolyFlammableSystem : EntitySystem
             }
 
             _alerts.ShowAlert(uid, flammable.FireAlert);
-
             if (flammable.FireStacks > 0)
             {
-
                 _damageable.TryChangeDamage(uid, flammable.Damage * DamageCurve(flammable), interruptsDoAfters: false, partMultiplier: 2f);
                 AdjustFireStacks(uid, (flammable.FireStacks - 5f) / (50f - 5f) + flammable.FirestackFade * (flammable.Resisting ? 20f : 0f), flammable, flammable.OnFire);
             }
