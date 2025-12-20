@@ -76,7 +76,7 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
 
         // <Trauma>
         // This checks if the resource file for the Holy Fire sprite exists.
-        if (component.SpriteHoly != null && component.Sprite != null)
+        if (component.Sprite != null)
         {
             int lastIndex = component.Sprite.LastIndexOf('/');
 

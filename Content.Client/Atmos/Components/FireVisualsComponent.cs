@@ -50,7 +50,6 @@ public sealed partial class FireVisualsComponent : Component
     /// <summary>
     /// Trauma - Hardlink for the holy fire effect to be used in tandem with the fire effect.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
     [DataField]
     public string? SpriteHoly;
 
