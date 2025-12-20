@@ -1,12 +1,11 @@
 using Robust.Shared.Serialization;
 
-namespace Content.Trauma.Common.Chaplain
+namespace Content.Trauma.Common.Chaplain;
+
+[Serializable, NetSerializable]
+public enum HolyFireVisuals : byte
 {
-    [Serializable, NetSerializable]
-    public enum HolyFireVisuals
-    {
-        OnFire,
-        FireStacks,
-        HolyFire
-    }
+    OnFire,
+    FireStacks,
+    HolyFire
 }

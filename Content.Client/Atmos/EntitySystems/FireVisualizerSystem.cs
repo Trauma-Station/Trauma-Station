@@ -10,7 +10,7 @@
 
 using Content.Client.Atmos.Components;
 using Content.Shared.Atmos;
-using Content.Trauma.Common.Chaplain;
+using Content.Trauma.Common.Chaplain; // Trauma
 using Robust.Client.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Utility;
@@ -86,25 +86,14 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
                 string endOfBitRSI = component.Sprite.Substring(lastIndex + 1);
                 if (endOfBitRSI == "onfire.rsi")
                 {
+                    component.SpriteHoly = "_Trauma/Mobs/Effects/onholyfire.rsi";
                     // This adds an additional layer for Holy Fire effects. Don't need it if it's not a person.
                     _sprite.LayerMapReserve((uid, sprite), HolyFireVisuals.HolyFire);
                     _sprite.LayerSetVisible((uid, sprite), HolyFireVisuals.HolyFire, false);
                     sprite.LayerSetShader(HolyFireVisuals.HolyFire, "unshaded");
                     _sprite.LayerSetRsi((uid, sprite), HolyFireVisuals.HolyFire, new ResPath(component.SpriteHoly));
                 }
-                else
-                {
-                    component.SpriteHoly = null; // Invalid path, disable Holy Fire sprite.
-                }
             }
-            else
-            {
-                component.SpriteHoly = null; // Invalid path, disable Holy Fire sprite.
-            }
-        }
-        else
-        {
-            component.SpriteHoly = null; // Invalid path, disable Holy Fire sprite.
         }
         // </Trauma>
 

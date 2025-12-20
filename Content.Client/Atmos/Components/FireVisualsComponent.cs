@@ -51,7 +51,7 @@ public sealed partial class FireVisualsComponent : Component
     /// Trauma - Hardlink for the holy fire effect to be used in tandem with the fire effect.
     /// </summary>
     [DataField]
-    public string? SpriteHoly = "_Trauma/Mobs/Effects/onholyfire.rsi";
+    public string? SpriteHoly;
 
     /// <summary>
     /// Trauma - Color for the holy fire light.
