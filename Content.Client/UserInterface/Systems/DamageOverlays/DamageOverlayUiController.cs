@@ -30,7 +30,7 @@ public sealed class DamageOverlayUiController : UIController
         SubscribeLocalEvent<LocalPlayerAttachedEvent>(OnPlayerAttach);
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnPlayerDetached);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeNetworkEvent<MobThresholdChecked>(OnThresholdCheck); // Trauma - shitmed networked it
+        SubscribeLocalEvent<MobThresholdChecked>(OnThresholdCheck);
     }
 
     private void OnPlayerAttach(LocalPlayerAttachedEvent args)
@@ -57,15 +57,13 @@ public sealed class DamageOverlayUiController : UIController
         UpdateOverlays(args.Target, args.Component);
     }
 
-    // <Trauma> use changed shitmed event
-    private void OnThresholdCheck(MobThresholdChecked args, EntitySessionEventArgs session)
+    private void OnThresholdCheck(ref MobThresholdChecked args)
     {
-        if (!EntityManager.TryGetEntity(args.Uid, out var entity) ||
-            !_playerManager.LocalEntity.Equals(entity))
+
+        if (args.Target != _playerManager.LocalEntity)
             return;
-        UpdateOverlays(entity.Value, null);
+        UpdateOverlays(args.Target, args.MobState, args.Damageable, args.Threshold);
     }
-    // </Trauma>
 
     private void ClearOverlay()
     {
@@ -129,7 +127,7 @@ public sealed class DamageOverlayUiController : UIController
             case MobState.Critical:
             {
                 if (!_mobThresholdSystem.TryGetDeadPercentage(entity,
-                        FixedPoint2.Max(0.0, damageable.TotalDamage), out var critLevel))
+                        FixedPoint2.Max(0.0, _mobThresholdSystem.CheckVitalDamage(entity, damageable)), out var critLevel)) // GoobStation - check vital damage not total damage
                     return;
                 _overlay.CritLevel = critLevel.Value.Float();
 

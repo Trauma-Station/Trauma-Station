@@ -738,12 +738,6 @@ public partial class PainSystem
             foreach (var (key, value) in nerve.PainFeelingModifiers.ToList())
                 if (_timing.CurTime > value.Time)
                     shouldUpdate |= TryRemovePainFeelsModifier(key.Item1, key.Item2, ent, nerve);
-
-        if (shouldUpdate
-            && _net.IsServer)
-        {
-            RaiseNetworkEvent(new MobThresholdChecked(GetNetEntity(body)), body); // Shitcod to handle overlays.
-        }
     }
 
     private void UpdateNerveSystemPain(EntityUid uid, NerveSystemComponent? nerveSys = null)

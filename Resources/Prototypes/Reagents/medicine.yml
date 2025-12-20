@@ -883,6 +883,10 @@
         damage:
           types:
             Caustic: 0.3
+      # Goobstation
+      - !type:DiseaseProgressChange
+        affectedType: OwnCells
+        progressModifier: -0.07 # anti-cancer
 
 - type: reagent
   id: PolypyryliumOligomers
@@ -1830,6 +1834,10 @@
         effectProto: StatusEffectDrowsiness
         time: 4
         type: Add
+        conditions: # Goob
+        - !type:ReagentCondition
+          reagent: Haloperidol
+          min: 5
       - !type:GenericStatusEffect
         key: Jitter
         time: 4.0

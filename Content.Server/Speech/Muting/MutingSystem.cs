@@ -1,4 +1,6 @@
-using Content.Server._EinsteinEngines.Language; // EE
+// <Trauma>
+using Content.Server._EinsteinEngines.Language;
+// </Trauma>
 using Content.Server.Popups;
 using Content.Server.Speech.EntitySystems;
 using Content.Shared.Abilities.Mime;
@@ -12,7 +14,9 @@ namespace Content.Server.Speech.Muting
 {
     public sealed class MutingSystem : EntitySystem
     {
+        // <Trauma>
         [Dependency] private readonly LanguageSystem _languages = default!;
+        // </Trauma>
         [Dependency] private readonly PopupSystem _popupSystem = default!;
 
         public override void Initialize()
@@ -51,9 +55,11 @@ namespace Content.Server.Speech.Muting
         {
             // TODO something better than this.
 
+            // <Goob>
             var language = _languages.GetLanguage(uid);
             if (!language.SpeechOverride.RequireSpeech)
                 return; // Cannot mute if there's no speech involved
+            // </Goob>
 
             if (HasComp<MimePowersComponent>(uid))
                 _popupSystem.PopupEntity(Loc.GetString("mime-cant-speak"), uid, uid);

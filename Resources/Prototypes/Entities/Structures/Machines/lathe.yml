@@ -529,6 +529,8 @@
     - ConstructionBagOfHolding
     # Einstein Engines Packs
     - Translators
+    # Botany Trauma
+    - BotanyTrauma # Trauma
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - SecurityAmmo

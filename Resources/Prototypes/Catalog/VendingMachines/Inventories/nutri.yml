@@ -43,8 +43,7 @@
     Bucket: 3
     BoxMouthSwab: 1
     BoxAgrichem: 1
-    #TO DO:
-    #plant analyzer
+    PlantAnalyzer: 2 # Trauma
   contrabandInventory:
     ChemistryBottleUnstableMutagen: 1
     Chainsaw: 1 #Goob

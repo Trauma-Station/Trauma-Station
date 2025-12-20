@@ -154,6 +154,13 @@
   icon: "JobIconChiefMedicalOfficer"
   supervisors: job-supervisors-captain
   canBeAntag: false
+  guides: # goobstation
+  - Medical
+  - SOPChiefMedicalOfficer
+  - SOPMedical
+  - Command
+  - Chemicals
+  - Virology
   goobcoins: 40 #Goob content
   access:
   - Medical

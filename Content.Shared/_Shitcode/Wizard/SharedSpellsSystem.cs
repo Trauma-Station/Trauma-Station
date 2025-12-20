@@ -29,8 +29,8 @@ using Content.Shared._Goobstation.Wizard.SpellCards;
 using Content.Shared._Goobstation.Wizard.Teleport;
 using Content.Shared._Goobstation.Wizard.TeslaBlast;
 using Content.Shared._Goobstation.Wizard.Traps;
-using Content.Shared._Lavaland.Mobs.Components;
 using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Abilities.Mime;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
@@ -45,6 +45,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared._Lavaland.Movement;
 using Content.Shared.Ghost;
 using Content.Shared.Gibbing.Events;
 using Content.Shared.Hands.Components;
@@ -1475,13 +1476,19 @@ public abstract class SharedSpellsSystem : EntitySystem
                 EnsureComp<UnremoveableComponent>(ent);
         }
     }
+
+    private void MakeMime(EntityUid uid)
+    {
+        var powers = EnsureComp<MimePowersComponent>(uid);
+        powers.CanBreakVow = false;
+        Dirty(uid, powers);
+    }
+
     #endregion
 
     #region ServerMethods
 
     public virtual void SpeakSpell(EntityUid speakerUid, EntityUid casterUid, string speech, MagicSchool school) { }
-
-    protected virtual void MakeMime(EntityUid uid) { }
 
     protected virtual void Emp(DisableTechEvent ev) { }
 

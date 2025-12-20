@@ -28,6 +28,7 @@ using Content.Shared.Atmos;
 using Content.Shared.Database;
 using Content.Shared.EntityEffects;
 using Content.Shared.Random;
+using Content.Trauma.Common.Botany;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
@@ -43,12 +44,7 @@ public sealed partial class SeedPrototype : SeedData, IPrototype
     [IdDataField] public string ID { get; private set; } = default!;
 }
 
-public enum HarvestType : byte
-{
-    NoRepeat,
-    Repeat,
-    SelfHarvest
-}
+// Trauma - moved HarvestType to Content.Trauma.Common.Botany.
 
 /*
     public enum PlantSpread : byte

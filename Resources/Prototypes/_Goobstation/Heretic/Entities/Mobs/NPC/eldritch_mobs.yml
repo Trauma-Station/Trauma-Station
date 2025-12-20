@@ -124,6 +124,7 @@
     baseSprintSpeed: 4.5 # Trauma edit
   - type: FlashImmunity
   - type: ThermalVision
+    thermalShader: null
     isActive: true
     color: white
     drawOverlay: false

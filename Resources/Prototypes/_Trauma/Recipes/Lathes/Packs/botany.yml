@@ -1,0 +1,4 @@
+- type: latheRecipePack
+  id: BotanyTrauma
+  recipes:
+  - PlantAnalyzer

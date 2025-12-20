@@ -1,5 +1,7 @@
 // <Trauma>
-using Content.Goobstation.Shared.Body.Components;
+using Content.Goobstation.Common.Body.Components;
+using Content.Goobstation.Common.MartialArts;
+using Content.Goobstation.Shared.Body;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared._Shitmed.Body.Components;
@@ -7,9 +9,7 @@ using Content.Shared._Shitmed.Body.Organ;
 using Content.Shared._Shitmed.Medical.Surgery.Consciousness;
 using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Systems;
 using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Movement.Pulling.Systems;
 // </Trauma>
-using Content.Goobstation.Common.MartialArts;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;

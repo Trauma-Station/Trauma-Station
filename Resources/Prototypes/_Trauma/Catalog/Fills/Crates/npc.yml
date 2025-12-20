@@ -1,0 +1,11 @@
+- type: entity
+  parent: CrateLivestock
+  id: CrateNPCMothmaggot
+  name: crate of mothmaggots
+  description: A crate containing four disgusting mothmaggots. Gestation hosts sold separately.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: MobMothmaggot
+        amount: 4

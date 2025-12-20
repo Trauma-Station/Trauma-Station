@@ -10,7 +10,7 @@
     - SurgeryStepStitchVessels
     - SurgeryStepOpenOrganSlot
   - type: SurgeryPartCondition
-    part: Head
+    parts: [ Head ]
   - type: SurgeryOrganSlotCondition
     organSlot: hypoport
 

@@ -20,6 +20,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.MassMedia.Ui;
 
+// Goobstation ported Wizden PR
+// https://github.com/space-wizards/space-station-14/pull/41799
+// Fix news console formatting and pda news formating #41799
 [GenerateTypedNameReferences]
 public sealed partial class ArticleEditorPanel : Control
 {

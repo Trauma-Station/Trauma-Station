@@ -33,6 +33,8 @@
     - Gruntish # Goob - Oni Language
   - type: HumanoidAppearance
     species: Oni
+  - type: Damageable
+    damageModifierSet: Oni
   - type: Mutatable
     defaultMutations:
       MutationGigantism: 1.0 # oni big ye
@@ -44,9 +46,7 @@
         Blunt: 1.35
         Slash: 1.2
         Piercing: 1.2
-        Structural: 1.35 # Goobstation - Changed from Asphyxiation
-  - type: Damageable
-    damageModifierSet: Oni
+        Structural: 1.35
   - type: Body
     prototype: Oni
   - type: Fixtures
@@ -61,8 +61,6 @@
         - MobMask
         layer:
         - MobLayer
-  - type: Stamina
-    critThreshold: 115
   - type: TypingIndicator
     proto: oni
   - type: Tag

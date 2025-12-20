@@ -210,3 +210,14 @@
     impactFlash:
       sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
       state: impact_beam_light_pulse
+
+- type: entity
+  parent: RedHeavyLaser
+  id: RedHeavyLaserShock
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 17
+        Shock: 4

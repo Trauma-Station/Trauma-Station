@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: MothroachSpawn
+  id: MothmaggotSpawn
   parent: BaseGameRule
   components:
   - type: StationEvent
@@ -20,8 +20,8 @@
  #- type: PrecognitionResult
  #  message: psionic-power-precognition-mothroach-spawn-result-message
   - type: VentCrittersRule
-    table: # DeltaV: EntityTable instead of spawn entries
-      id: MobMothroach
+    table:
+      id: MobMothmaggot
 
 - type: entity
   parent: BaseGameRule

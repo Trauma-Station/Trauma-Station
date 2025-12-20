@@ -154,7 +154,7 @@
   name: Plaguebringer
   components:
   - type: Wraith
-    abilities: PlaguebingerAbilities
+    abilities: PlaguebringerAbilities
   - type: Sprite
     sprite: _Goobstation/Wraith/wraith.rsi
     layers:
@@ -171,7 +171,7 @@
     volume: -15
     sound:
       path: /Audio/_Goobstation/Wraith/Ambience/Void_Calls.ogg
-  - type: Plaguebinger
+  - type: Plaguebringer
 
 - type: entity
   id: MobWraithHarbinger

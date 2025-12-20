@@ -27,11 +27,13 @@
   id: LockerFillChiefMedicalOfficerTrauma
   table: !type:AllSelector
     children:
+    - id: ChemistryHotplateFlatPack
     - id: Multitool # for linking cloning machines
     - id: RapidSyringeGun
     - id: BoxSyringePax
     - id: ClothingBeltMilitaryWebbingCMOFilled
-
+    - id: DiseaseDiagnoserFlatPack
+    - id: VaccinatorFlatPack
 - type: entityTable
   id: LockerFillResearchDirectorTrauma
   table: !type:AllSelector
@@ -47,3 +49,4 @@
   table: !type:AllSelector
     children:
     - id: ClothingBeltSheathHeadOfSecurityFilled
+    - id: ReinforcementCallerHos
