@@ -1,4 +1,4 @@
-- type: alert # Trauma
+- type: alert
   id: HolyFire
   icons: [ /Textures/_Trauma/Interface/Alerts/HolyFire/holyfire.png ]
   clickEvent: !type:ResistHolyFireAlertEvent

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
 		<LangVersion>12</LangVersion>
@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-        <ProjectReference Include="../Content.Shared/Content.Shared.csproj" />
+		<ProjectReference Include="../Content.Shared/Content.Shared.csproj" />
 		<ProjectReference Include="../RobustToolbox/Robust.Shared/Robust.Shared.csproj" Private="false" />
 	</ItemGroup>
 
