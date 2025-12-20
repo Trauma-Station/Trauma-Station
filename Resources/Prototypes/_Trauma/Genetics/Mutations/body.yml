@@ -69,7 +69,6 @@
   description: A mutation believed to be the cause of dwarfism.
   components:
   - type: Mutation
-    locked: true # dwarf default mutation
     instability: 10
     difficulty: 16
     conflicts:
