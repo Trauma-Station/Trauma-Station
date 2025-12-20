@@ -115,6 +115,9 @@
   id: CartridgeG8
 
 - type: Tag
+  id: CameraElectronics
+
+- type: Tag
   id: CannotSuicideAny
 
 - type: Tag
@@ -325,6 +328,9 @@
   id: HEVSuit
 
 - type: Tag
+  id: Holosign
+
+- type: Tag
   id: HolyClaymore
 
 - type: Tag
@@ -518,6 +524,9 @@
   id: Poppy
 
 - type: Tag
+  id: RatvarianSpear
+
+- type: Tag
   id: ReptilianEmotes
 
 - type: Tag
@@ -552,6 +561,9 @@
 
 - type: Tag
   id: SiliconMob
+
+- type: Tag
+  id: SkeletonMotorcycleKeys
 
 - type: Tag
   id: SnapPop
@@ -741,3 +753,9 @@
 
 - type: Tag
   id: ChaplainsHolster
+
+- type: Tag
+  id: ForkliftKeys
+
+- type: Tag
+  id: Crate

@@ -12,4 +12,4 @@
     - SurgeryStepInsertItem
     - SurgeryStepRemoveItem
   - type: SurgeryPartCondition
-    part: Groin
+    parts: [ Groin ]

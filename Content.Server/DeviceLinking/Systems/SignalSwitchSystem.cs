@@ -1,24 +1,6 @@
-// SPDX-FileCopyrightText: 2021 Paul <ritter.paul1+git@googlemail.com>
-// SPDX-FileCopyrightText: 2021 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 Jack Fox <35575261+DubiousDoggo@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Morber <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2023 Julian Giebel <juliangiebel@live.de>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Goobstation.Common.DeviceLinking;
+// </Trauma>
 using Content.Server.DeviceLinking.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Lock;
@@ -32,6 +14,7 @@ public sealed class SignalSwitchSystem : EntitySystem
     [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly LockSystem _lock = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!; // CorvaxGoob-ButtonsVisuals
 
     public override void Initialize()
     {
@@ -44,6 +27,8 @@ public sealed class SignalSwitchSystem : EntitySystem
     private void OnInit(EntityUid uid, SignalSwitchComponent comp, ComponentInit args)
     {
         _deviceLink.EnsureSourcePorts(uid, comp.OnPort, comp.OffPort, comp.StatusPort);
+
+        UpdateAppearance((uid, comp)); // CorvaxGoob-ButtonsVisuals
     }
 
     private void OnActivated(EntityUid uid, SignalSwitchComponent comp, ActivateInWorldEvent args)
@@ -65,6 +50,15 @@ public sealed class SignalSwitchSystem : EntitySystem
 
         _audio.PlayPvs(comp.ClickSound, uid, AudioParams.Default.WithVariation(0.125f).WithVolume(8f));
 
+        UpdateAppearance((uid, comp)); // CorvaxGoob-ButtonsVisuals
+
         args.Handled = true;
     }
+
+    // CorvaxGoob-ButtonsVisuals-Start
+    private void UpdateAppearance(Entity<SignalSwitchComponent> entity)
+    {
+        _appearance.SetData(entity.Owner, SignalSwitchVisuals.State, entity.Comp.State ? SignalSwitchState.On : SignalSwitchState.Off);
+    }
+    // CorvaxGoob-ButtonsVisuals-End
 }

@@ -16,6 +16,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.CartridgeLoader.Cartridges;
 
+// Goobstation ported Wizden
+// https://github.com/space-wizards/space-station-14/pull/41799
+//  Fix news console formatting #41799
 [GenerateTypedNameReferences]
 public sealed partial class NewsReaderUiFragment : BoxContainer
 {

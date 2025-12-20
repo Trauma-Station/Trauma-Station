@@ -171,13 +171,6 @@ public sealed class SpellsSystem : SharedSpellsSystem
             args.MessageColor);
     }
 
-    protected override void MakeMime(EntityUid uid)
-    {
-        base.MakeMime(uid);
-
-        EnsureComp<MimePowersComponent>(uid).CanBreakVow = false;
-    }
-
     protected override void Emp(DisableTechEvent ev)
     {
         base.Emp(ev);

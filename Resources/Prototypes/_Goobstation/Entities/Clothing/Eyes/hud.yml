@@ -6,7 +6,7 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: entity 
+- type: entity
   id: ShowHealthRelatedIcons
   abstract: true
   categories: [ HideSpawnMenu ]
@@ -20,6 +20,7 @@
   - type: ShowHealthIcons
     damageContainers:
     - Biological
+  - type: ShowDiseaseIcons
 
 - type: entity
   parent: ClothingEyesHudOmni
@@ -39,7 +40,7 @@
   components:
   - type: Unremoveable
 
-- type: entity 
+- type: entity
   parent: [ClothingEyesBase, ShowHealthRelatedIcons]
   id: ClothingEyesHudDiagnosticMedical
   name: meddiag hud
@@ -55,3 +56,18 @@
   - type: Tag
     tags:
     - HudMedicalDiagnostic
+
+- type: entity
+  parent: ClothingEyesHudMedical
+  id: ClothingEyesHudViro
+  name: viro hud
+  description: A medical HUD upgraded with advanced disease scanning.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Clothing/Eyes/Hud/viro.rsi
+  - type: Clothing
+    sprite: _Goobstation/Clothing/Eyes/Hud/viro.rsi
+  - type: ShowDiseaseIcons
+    lowThreshold: 1 # very sensitive
+    mediumThreshold: 20
+    highThreshold: 40

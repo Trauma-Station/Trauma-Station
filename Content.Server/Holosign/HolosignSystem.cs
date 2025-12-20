@@ -1,20 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Ben <50087092+benev0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 BenOwnby <ownbyb@appstate.edu>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Examine;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.PowerCell;
@@ -23,7 +6,7 @@ using Content.Shared.Storage;
 
 namespace Content.Server.Holosign;
 
-public sealed class HolosignSystem : EntitySystem
+public sealed partial class HolosignSystem : EntitySystem // Trauma - made partial
 {
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -33,6 +16,8 @@ public sealed class HolosignSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<HolosignProjectorComponent, BeforeRangedInteractEvent>(OnBeforeInteract);
         SubscribeLocalEvent<HolosignProjectorComponent, ExaminedEvent>(OnExamine);
+
+        InitializeTrauma(); // Trauma
     }
 
     private void OnExamine(EntityUid uid, HolosignProjectorComponent component, ExaminedEvent args)
@@ -55,17 +40,13 @@ public sealed class HolosignSystem : EntitySystem
 
     private void OnBeforeInteract(EntityUid uid, HolosignProjectorComponent component, BeforeRangedInteractEvent args)
     {
-
         if (args.Handled
             || !args.CanReach // prevent placing out of range
             || HasComp<StorageComponent>(args.Target) // if it's a storage component like a bag, we ignore usage so it can be stored
-            || !_powerCell.TryUseCharge(uid, component.ChargeUse, user: args.User) // if no battery or no charge, doesn't work
-            )
+            || CheckCoords((uid, component), args) is not {} coords) // Goob - replaces power check
             return;
 
-        // places the holographic sign at the click location, snapped to grid.
-        // overlapping of the same holo on one tile remains allowed to allow holofan refreshes
-        var holoUid = Spawn(component.SignProto, args.ClickLocation.SnapToGrid(EntityManager));
+        var holoUid = Spawn(component.SignProto, coords); // Goob - use coords from above logic
         var xform = Transform(holoUid);
         // TODO: Just make the prototype anchored
         if (!xform.Anchored)

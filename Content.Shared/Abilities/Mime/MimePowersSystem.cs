@@ -1,3 +1,4 @@
+using Content.Trauma.Common.Abilities.Mime; // Trauma
 using Content.Shared.Popups;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
@@ -8,7 +9,6 @@ using Content.Shared.Maps;
 using Content.Shared.Paper;
 using Content.Shared.Physics;
 using Content.Shared.Speech.Muting;
-using Content.Trauma.Common.Abilities.Mime; // Trauma
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
@@ -139,10 +139,10 @@ public sealed class MimePowersSystem : EntitySystem
         if (!Resolve(uid, ref mimePowers))
             return;
 
-        if (!mimePowers.CanBreakVow) // Goobstation
+        if (mimePowers.VowBroken)
             return;
 
-        if (mimePowers.VowBroken)
+        if (!mimePowers.CanBreakVow) // Goobstation
             return;
 
         mimePowers.Enabled = false;

@@ -70,7 +70,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
 
         foreach (var (uid, flam) in result)
         {
-            _flammable.AdjustFireStacks(uid, origin.Comp.BonusFireStacks, flam, true);
+            _flammable.AdjustFireStacks(uid, origin.Comp.BonusFireStacks, flam, true, origin.Comp.FireProtectionPenetration);
 
             _stun.KnockdownOrStun(uid, origin.Comp.BonusKnockdownTime);
 
@@ -159,7 +159,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         if (antimagic)
             return true;
 
-        _flammable.AdjustFireStacks(target, origin.Comp.FireStacks, flam, true);
+        _flammable.AdjustFireStacks(target, origin.Comp.FireStacks, flam, true, origin.Comp.FireProtectionPenetration);
 
         Dmg.TryChangeDamage(target,
             origin.Comp.FireBlastDamage,
@@ -178,7 +178,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         var originPos = Xform.GetMapCoordinates(origin);
         var targetPos = Xform.GetMapCoordinates(target);
 
-        var dir = (targetPos.Position - originPos.Position).Normalized();
+        var dir = (originPos.Position - targetPos.Position).Normalized();
 
         var ray = new CollisionRay(originPos.Position, dir, (int) CollisionGroup.Opaque);
         var result = _physics.IntersectRay(originPos.MapId, ray, origin.Comp.FireBlastRange, origin, false);
@@ -203,7 +203,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
                 continue;
 
             if (flammableQuery.TryComp(ent.HitEntity, out var flam))
-                _flammable.AdjustFireStacks(ent.HitEntity, origin.Comp.CollisionFireStacks, flam, true);
+                _flammable.AdjustFireStacks(ent.HitEntity, origin.Comp.CollisionFireStacks, flam, true, origin.Comp.FireProtectionPenetration);
 
             Dmg.TryChangeDamage(ent.HitEntity,
                 origin.Comp.FireBlastBeamCollideDamage,

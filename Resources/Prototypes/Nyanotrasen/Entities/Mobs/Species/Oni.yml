@@ -37,15 +37,15 @@
     # scale: 1.2, 1.2 # Goobstation: port EE height/width sliders
   - type: ScaleData # Goobstation
     # scale: 1.2, 1.2 # Goobstation: port EE height/width sliders
+  - type: Damageable
+    damageModifierSet: Oni
   - type: Oni
     modifiers:
       coefficients:
         Blunt: 1.35
         Slash: 1.2
         Piercing: 1.2
-        Structural: 1.35 # Goobstation - Changed from Asphyxiation
-  - type: Damageable
-    damageModifierSet: Oni
+        Structural: 1.35
   - type: Body
     prototype: Oni
   - type: Fixtures
@@ -60,8 +60,6 @@
         - MobMask
         layer:
         - MobLayer
-  - type: Stamina
-    critThreshold: 115
   - type: TypingIndicator
     proto: oni
   - type: Tag

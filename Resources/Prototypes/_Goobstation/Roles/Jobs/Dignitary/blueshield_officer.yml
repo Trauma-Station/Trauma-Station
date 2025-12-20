@@ -52,6 +52,9 @@
       inverted: true
       species:
       - Felinid
+  guides:
+  - Command
+  - SOPSuccession
   goobcoins: 45
   weight: 20
   startingGear: BlueshieldOfficerGear

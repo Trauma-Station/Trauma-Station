@@ -20,6 +20,7 @@ public sealed partial class FlammableEntityEffectSystem : EntityEffectSystem<Fla
         // If both of these are true, we use the MultiplierOnExisting value, otherwise we use the standard Multiplier.
         var multiplier = entity.Comp.FireStacks == 0f || args.Effect.MultiplierOnExisting == null ? args.Effect.Multiplier : args.Effect.MultiplierOnExisting.Value;
 
-        _flammable.AdjustFireStacks(entity, args.Scale * multiplier, entity.Comp);
+        _flammable.AdjustFireStacks(entity, args.Scale * multiplier, entity.Comp,
+            penetration: args.Effect.FireProtectionPenetration); // Goob
     }
 }
