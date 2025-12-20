@@ -291,7 +291,7 @@ public sealed class HolyFlammableSystem : EntitySystem
         _stun.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(2f));
 
         // TODO FLAMMABLE: Make this not use TimerComponent...
-        flammable.ResistTimer = 2f;a
+        flammable.ResistTimer = 2f;
     }
 
     public void SetupEntity(EntityUid uid)
