@@ -34,3 +34,17 @@ public sealed partial class HolyExtinguish : EntityEffectBase<HolyExtinguish>
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) =>
         Loc.GetString("entity-effect-guidebook-extinguish-reaction", ("chance", Probability));
 }
+
+/// <inheritdoc cref="EntityEffect"/>
+public sealed partial class HolyIgnite : EntityEffectBase<HolyIgnite>
+{
+    /// <summary>
+    ///     Amount of FireStacks improved.
+    /// </summary>
+    [DataField(required: true)]
+    public float Stacks;
+
+    public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) =>
+        Loc.GetString("entity-effect-guidebook-extinguish-reaction", ("chance", Probability));
+}
+

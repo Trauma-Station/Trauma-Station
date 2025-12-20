@@ -1,7 +1,7 @@
 using Content.Goobstation.Shared.Religion;
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Chaplain;
-using Robust.Shared.Prototypes;
+using Content.Trauma.Shared.EntityEffects;
 
 namespace Content.Trauma.Server.EntityEffects;
 
@@ -20,17 +20,3 @@ public sealed partial class HolyIgniteEntityEffectSystem : EntityEffectSystem<We
         RaiseLocalEvent(entity, ref ev);
     }
 }
-
-/// <inheritdoc cref="EntityEffect"/>
-public sealed partial class HolyIgnite : EntityEffectBase<HolyIgnite>
-{
-    /// <summary>
-    ///     Amount of FireStacks improved.
-    /// </summary>
-    [DataField(required: true)]
-    public float Stacks;
-
-    public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) =>
-        Loc.GetString("entity-effect-guidebook-extinguish-reaction", ("chance", Probability));
-}
-
