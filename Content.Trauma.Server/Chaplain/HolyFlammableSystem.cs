@@ -291,11 +291,7 @@ public sealed class HolyFlammableSystem : EntitySystem
         _stun.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(2f));
 
         // TODO FLAMMABLE: Make this not use TimerComponent...
-        uid.SpawnTimer(2000, () =>
-        {
-            flammable.Resisting = false;
-            UpdateAppearance(uid, flammable);
-        });
+        flammable.ResistTimer = 2f;
     }
 
     public void SetupEntity(EntityUid uid)
@@ -323,6 +319,16 @@ public sealed class HolyFlammableSystem : EntitySystem
             {
                 RemCompDeferred<OnHolyFireComponent>(uid);
                 continue;
+            }
+
+            // Handle resist timer
+            if (flammable.ResistTimer >= 0)
+            {
+                flammable.ResistTimer -= frameTime;
+                if (flammable.ResistTimer < 0)
+                {
+                    flammable.Resisting = false;
+                }
             }
 
             // This refactors the timer so that Holy Fire doesn't tick every frame but rather at fixed intervals and not all at once.

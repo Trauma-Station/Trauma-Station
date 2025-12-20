@@ -76,4 +76,10 @@ public sealed partial class HolyFlammableComponent : Component
     /// </summary>
     [DataField]
     public float Timer;
+
+    /// <summary>
+    /// Contains the rest time left for the next update tick.
+    /// </summary>
+    [DataField]
+    public float ResistTimer;
 }
