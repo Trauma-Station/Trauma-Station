@@ -287,11 +287,9 @@ public sealed class HolyFlammableSystem : EntitySystem
             return;
 
         flammable.Resisting = true;
+        flammable.ResistTimer = 2f;
         _popup.PopupEntity(Loc.GetString("flammable-component-resist-message"), uid, uid);
         _stun.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(2f));
-
-        // TODO FLAMMABLE: Make this not use TimerComponent...
-        flammable.ResistTimer = 2f;
     }
 
     public void SetupEntity(EntityUid uid)
