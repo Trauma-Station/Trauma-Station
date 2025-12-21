@@ -146,6 +146,7 @@
   - alertType: ModsuitPower # Goobstation - Modsuits
   - category: Internals
   - alertType: Fire
+  - alertType: HolyFire # Trauma
   - alertType: Handcuffed
   - alertType: Ensnared
   - category: Buckled
@@ -235,7 +236,6 @@
   clickEvent: !type:ResistFireAlertEvent
   name: alerts-on-fire-name
   description: alerts-on-fire-desc
-
 
 - type: alert
   id: Cold

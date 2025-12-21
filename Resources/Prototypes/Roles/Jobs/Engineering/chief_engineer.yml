@@ -143,10 +143,6 @@
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 10h
-    - !type:SpeciesRequirement # Goob - None Felinid
-      inverted: true
-      species:
-      - Felinid
   weight: 10
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"

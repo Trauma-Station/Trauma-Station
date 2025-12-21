@@ -10,6 +10,7 @@
 
 using Content.Client.Atmos.Components;
 using Content.Shared.Atmos;
+using Content.Trauma.Common.Chaplain; // Trauma
 using Robust.Client.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Utility;
@@ -47,6 +48,19 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
         {
             _sprite.RemoveLayer((uid, sprite), layer);
         }
+
+        // <Trauma>
+        if (component.LightEntityHoly != null)
+        {
+            Del(component.LightEntityHoly.Value);
+            component.LightEntityHoly = null;
+        }
+
+        if (sprite != null && _sprite.LayerMapTryGet((uid, sprite), HolyFireVisuals.HolyFire, out var alternateLayer, false))
+        {
+            _sprite.RemoveLayer((uid, sprite), alternateLayer);
+        }
+        // </Trauma>
     }
 
     private void OnComponentStartup(EntityUid uid, FireVisualsComponent component, ComponentStartup args) // Goob edit
@@ -60,6 +74,29 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
         if (component.Sprite != null)
             _sprite.LayerSetRsi((uid, sprite), FireVisualLayers.Fire, new ResPath(component.Sprite));
 
+        // <Trauma>
+        // This checks if the resource file for the Holy Fire sprite exists.
+        if (component.Sprite != null)
+        {
+            int lastIndex = component.Sprite.LastIndexOf('/');
+
+            // Only proceed if the Sprite file ends with "onfire.rsi" to ensure it's the correct sprite kind.
+            if (lastIndex != -1)
+            {
+                string endOfBitRSI = component.Sprite.Substring(lastIndex + 1);
+                if (endOfBitRSI == "onfire.rsi")
+                {
+                    component.SpriteHoly = "_Trauma/Mobs/Effects/onholyfire.rsi";
+                    // This adds an additional layer for Holy Fire effects. Don't need it if it's not a person.
+                    _sprite.LayerMapReserve((uid, sprite), HolyFireVisuals.HolyFire);
+                    _sprite.LayerSetVisible((uid, sprite), HolyFireVisuals.HolyFire, false);
+                    sprite.LayerSetShader(HolyFireVisuals.HolyFire, "unshaded");
+                    _sprite.LayerSetRsi((uid, sprite), HolyFireVisuals.HolyFire, new ResPath(component.SpriteHoly));
+                }
+            }
+        }
+        // </Trauma>
+
         UpdateAppearance(uid, component, sprite, appearance);
     }
 
@@ -71,6 +108,40 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
 
     private void UpdateAppearance(EntityUid uid, FireVisualsComponent component, SpriteComponent sprite, AppearanceComponent appearance)
     {
+        // <Trauma>
+        if (_sprite.LayerMapTryGet((uid, sprite), HolyFireVisuals.HolyFire, out var indexHoly, false))
+        {
+            // This gets the data we passed in from HolyFlammableSystem.cs to process Holy Fire effects.
+            AppearanceSystem.TryGetData<bool>(uid, HolyFireVisuals.OnFire, out var onFireHoly, appearance);
+            AppearanceSystem.TryGetData<float>(uid, HolyFireVisuals.FireStacks, out var fireStacksHoly, appearance);
+            _sprite.LayerSetVisible((uid, sprite), indexHoly, onFireHoly);
+
+            // If entity is not on fire, no need for light effects.
+            if (!onFireHoly && component.LightEntityHoly != null)
+            {
+                Del(component.LightEntityHoly.Value);
+                component.LightEntityHoly = null;
+            }
+            else
+            {
+                // Set the sprite state and light properties based on fire stacks.
+                if (fireStacksHoly > component.FireStackAlternateState && !string.IsNullOrEmpty(component.AlternateState))
+                    _sprite.LayerSetRsiState((uid, sprite), indexHoly, component.AlternateState);
+                else
+                    _sprite.LayerSetRsiState((uid, sprite), indexHoly, component.NormalState);
+
+                component.LightEntityHoly ??= Spawn(null, new EntityCoordinates(uid, default));
+                var lightHoly = EnsureComp<PointLightComponent>(component.LightEntityHoly.Value);
+
+                _lights.SetColor(component.LightEntityHoly.Value, component.LightColorHoly, lightHoly);
+
+                // light needs a minimum radius to be visible at all, hence the + 1.5f
+                _lights.SetRadius(component.LightEntityHoly.Value, Math.Clamp(1.5f + component.LightRadiusPerStack * fireStacksHoly, 0f, component.MaxLightRadius), lightHoly);
+                _lights.SetEnergy(component.LightEntityHoly.Value, Math.Clamp(1 + component.LightEnergyPerStack * fireStacksHoly, 0f, component.MaxLightEnergy), lightHoly);
+            }
+        }
+        // </Trauma>
+
         if (!_sprite.LayerMapTryGet((uid, sprite), FireVisualLayers.Fire, out var index, false))
             return;
 

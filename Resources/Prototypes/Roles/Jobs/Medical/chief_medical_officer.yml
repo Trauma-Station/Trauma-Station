@@ -145,10 +145,6 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 10h
-    - !type:SpeciesRequirement # Goob - None Felinid
-      inverted: true
-      species:
-      - Felinid
   weight: 10
   startingGear: CMOGear
   icon: "JobIconChiefMedicalOfficer"

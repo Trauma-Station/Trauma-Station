@@ -127,16 +127,9 @@
     - Reptilian
     - Vulpkanin
     # <Goob> - Custom Races
-    - Felinid
     - Harpy
     - Gingerbread
-    - Rodentia
     - Yowie
-    - Oni
-    - Resomi
-    - Tajaran
-    - Chitinid
-    - Shadowkin
     # </Goob>
 
 - type: loadoutEffectGroup
@@ -197,15 +190,9 @@
     - Reptilian
     - Vulpkanin
     # </Goob> - Custom Races
-    - Felinid
     - Harpy
     - Gingerbread
-    - Rodentia
     - Yowie
-    - Oni
-    - Resomi
-    - Tajaran
-    - Shadowkin
     # <Goob>
 
 - type: loadoutEffectGroup

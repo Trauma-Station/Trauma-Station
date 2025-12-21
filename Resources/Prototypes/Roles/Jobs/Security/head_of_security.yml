@@ -151,10 +151,6 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 10h
-    - !type:SpeciesRequirement # Goob - None Felinid
-      inverted: true
-      species:
-      - Felinid
   #  - !type:StyleRequirement
   #    styles:
   #    - HumanHairFloorlengthBedhead
