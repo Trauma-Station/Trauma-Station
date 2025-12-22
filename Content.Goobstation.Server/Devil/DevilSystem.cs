@@ -191,7 +191,7 @@ public sealed partial class DevilSystem : EntitySystem
                 protoId = new ProtoId<PolymorphPrototype>("MobArchDevil");
                 break;
             case DevilPowerLevel.Moderate:
-                // Change sprite to archdevil and cause demonic incursion
+                // Change sprite to greater devil
                 protoId = new ProtoId<PolymorphPrototype>("MobLesserDevil");
                 break;
         };
