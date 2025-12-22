@@ -195,9 +195,17 @@ public sealed partial class DevilSystem : EntitySystem
         switch (devil.Comp.PowerLevel)
         {
             case DevilPowerLevel.Powerful:
+<<<<<<< Updated upstream
                 protoId = new ProtoId<PolymorphPrototype>("MobArchDevil");
                 break;
             case DevilPowerLevel.Moderate:
+=======
+                // Change sprite to archdevil and cause demonic incursion
+                protoId = new ProtoId<PolymorphPrototype>("MobArchDevil");
+                break;
+            case DevilPowerLevel.Moderate:
+                // Change sprite to archdevil and cause demonic incursion
+>>>>>>> Stashed changes
                 protoId = new ProtoId<PolymorphPrototype>("MobLesserDevil");
                 break;
         };
