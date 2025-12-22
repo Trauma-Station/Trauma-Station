@@ -5,6 +5,7 @@
   abstract: true
   description: It's like it's staring right through you.
   components:
+  - type: WeatherImmune
   - type: NpcFactionMember
     factions:
     - Lavafauna

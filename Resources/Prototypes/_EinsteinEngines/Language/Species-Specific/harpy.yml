@@ -4,7 +4,7 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Language spoken by Harpies and Squackroaches.
+# Language spoken by Harpies.
 # Based on Polish, Greek, Serbian, Turkish.
 - type: language
   id: ValyrianStandard

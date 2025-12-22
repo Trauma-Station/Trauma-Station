@@ -1132,7 +1132,7 @@ public partial class SharedBodySystem
 
     public TargetBodyPart GetRandomBodyPart(EntityUid target)
     {
-        var children = GetBodyChildren(target).ToList();
+        var children = GetVitalBodyChildren(target).ToList(); // Goobstation
         if (children.Count == 0)
             return TargetBodyPart.Chest;
 

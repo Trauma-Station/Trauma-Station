@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Silicons.Components;
+using Content.Goobstation.Shared.CustomLawboard;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Research.Systems;
@@ -36,7 +37,6 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server.Silicons.Laws;
 
-/// <inheritdoc/>
 public sealed class SiliconLawSystem : SharedSiliconLawSystem
 {
     // <Trauma>
@@ -54,7 +54,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
 
-    /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
@@ -343,21 +342,34 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             ApplyExperimentalLaws(ent, (args.Entity, experimentalLaws, provider));
             return;
         }
+
+        // This part is for custom lawboards as there's no lawset prototype for them.
+
+        List<SiliconLaw>? lawset;
+
+        if (TryComp(args.Entity, out CustomLawboardComponent? customLawboard))
+        {
+            lawset = customLawboard.Laws;
+        }
+        else
+        {
+            lawset = GetLawset(provider.Laws).Laws;
+        }
+
         // Goob edit end
-        var lawset = provider.Lawset ?? GetLawset(provider.Laws);
 
         var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
 
         while (query.MoveNext(out var update))
         {
-            SetLaws(lawset.Laws, update, provider.LawUploadSound);
+            SetLaws(lawset, update, provider.LawUploadSound); // Trauma - lawset itself is a List now
 
             // Corvax-Next-AiRemoteControl-Start
             if (TryComp<StationAiHeldComponent>(update, out var stationAiHeldComp)
                 && stationAiHeldComp.CurrentConnectedEntity != null
                 && HasComp<SiliconLawProviderComponent>(stationAiHeldComp.CurrentConnectedEntity))
             {
-                SetLaws(lawset.Laws, stationAiHeldComp.CurrentConnectedEntity.Value, provider.LawUploadSound);
+                SetLaws(lawset, stationAiHeldComp.CurrentConnectedEntity.Value, provider.LawUploadSound);
             }
             // Corvax-Next-AiRemoteControl-End
         }

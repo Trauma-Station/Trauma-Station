@@ -9,7 +9,7 @@
   - type: SmokeOnTrigger
     keysIn:
     - timer
-    duration: 30
+    duration: 15 # Goob - was 30
     spreadAmount: 50
   - type: EmitSoundOnTrigger
     keysIn:
@@ -38,7 +38,7 @@
   - type: SmokeOnTrigger
     keysIn:
     - timer
-    duration: 15
+    duration: 5 # Goob - was 15
     spreadAmount: 50
     smokePrototype: Foam
     solution:
@@ -61,7 +61,7 @@
   - type: SmokeOnTrigger
     keysIn:
     - timer
-    duration: 10
+    duration: 5 # Goob - was 10
     spreadAmount: 30
     smokePrototype: TearGasSmokeWhite
     solution:
@@ -86,7 +86,7 @@
   - type: SmokeOnTrigger
     keysIn:
     - timer
-    duration: 10
+    duration: 5 # Goob - was 10
     spreadAmount: 20
     smokePrototype: AluminiumMetalFoam
   - type: StaticPrice

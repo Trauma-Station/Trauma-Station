@@ -25,6 +25,8 @@ public sealed partial class DamageableSystem
         SubscribeLocalEvent<DamageableComponent, OnIrradiatedEvent>(OnIrradiated);
         SubscribeLocalEvent<DamageableComponent, RejuvenateEvent>(OnRejuvenate);
 
+        InitializeTrauma(); // Trauma
+
         // <Shitmed>
         _bodyQuery = GetEntityQuery<BodyComponent>();
         _consciousnessQuery = GetEntityQuery<ConsciousnessComponent>();

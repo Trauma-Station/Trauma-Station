@@ -143,16 +143,18 @@
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 10h
-    - !type:SpeciesRequirement # Goob - None Felinid
-      inverted: true
-      species:
-      - Felinid
   weight: 10
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"
   supervisors: job-supervisors-captain
   #canBeAntag: false
   antagAdvantage: 75 # Goobstation
+  guides: # goobstation
+  - Engineering
+  - SOPChiefEngineer
+  - SOPEngineering
+  - Command
+  - SOPEmergencies
   goobcoins: 40 #Goob content
   access:
   - Maintenance

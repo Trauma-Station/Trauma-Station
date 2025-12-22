@@ -11,15 +11,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: speechVerb
-  id: Felinid
-  name: chat-speech-verb-name-felinid
-  speechVerbStrings:
-  - chat-speech-verb-felinid-1
-  - chat-speech-verb-felinid-2
-  - chat-speech-verb-felinid-3
-  - chat-speech-verb-felinid-4
-
-- type: speechVerb
   id: Harpy
   name: chat-speech-verb-name-harpy
   speechVerbStrings:
@@ -27,21 +18,3 @@
   - chat-speech-verb-harpy-2
   - chat-speech-verb-harpy-3
   - chat-speech-verb-harpy-4
-
-- type: speechVerb
-  id: Rodentia
-  name: chat-speech-verb-name-rodentia
-  speechVerbStrings:
-  - chat-speech-verb-rodentia-1
-  - chat-speech-verb-rodentia-2
-  - chat-speech-verb-rodentia-3
-  - chat-speech-verb-rodentia-4
-
-- type: speechVerb
-  id: Chitinid
-  name: chat-speech-verb-name-chitinid
-  speechVerbStrings:
-  - chat-speech-verb-chitinid-1
-  - chat-speech-verb-chitinid-2
-  - chat-speech-verb-chitinid-3
-  - chat-speech-verb-chitinid-4

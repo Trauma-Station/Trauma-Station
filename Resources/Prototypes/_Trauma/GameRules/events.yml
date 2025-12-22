@@ -1,0 +1,34 @@
+- type: entityTable
+  id: BasicCalmEventsTrauma
+  table: !type:AllSelector
+    children:
+    - id: TidemindDevelop
+    - id: MothmaggotSpawn
+    - id: DerelictCyborgSyndicateSpawn
+    - id: MalignRiftSpawn
+    - id: FloorGoblinMidRound
+    - id: ClownGoblinMigration
+
+- type: entityTable
+  id: ModerateAntagEventsTrauma
+  table: !type:AllSelector
+    children:
+    - id: BlobSpawn
+    - id: LoneAbductorSpawn
+    - id: DuoAbductorSpawn
+    - id: BingleSpawn
+    - id: SlaughterDemonMidround
+    - id: XenomorphsInfestation
+    # TOOD: see if good or slop
+    #- id: GreyTideAntagMidround
+    #- id: SingulothKnightsMidround
+    #- id: DarkLordMidround
+    #- id: MimeAssassinMidround
+    #- id: DarkPriestMidround
+    #- id: VoxRaidersMidround
+    #- id: TunnelClownMidround
+    #- id: WraithMidround # if someone makes it less chuddy
+    - id: ChangelingMidround
+    - id: HereticMidround
+    - id: Devilmidround
+    #- id: SlasherSpawn # TODO: when slasher is ready

@@ -151,10 +151,6 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 10h
-    - !type:SpeciesRequirement # Goob - None Felinid
-      inverted: true
-      species:
-      - Felinid
   #  - !type:StyleRequirement
   #    styles:
   #    - HumanHairFloorlengthBedhead
@@ -165,6 +161,14 @@
   icon: "JobIconHeadOfSecurity"
   supervisors: job-supervisors-captain
   canBeAntag: false
+  guides: # goobstation
+  - Security
+  - SpaceLaw
+  - SOPLegal
+  - Command
+  - SOPHeadOfSecurity
+  - SOPSecurity
+  - SOPAlertLevels
   goobcoins: 45 #Goob content
   access:
   - HeadOfSecurity

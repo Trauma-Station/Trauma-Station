@@ -17,7 +17,7 @@ command-language-invalid-language = The language {$id} does not exist or you can
 
 # Toolshed
 
-command-description-language-add = Adds a new language to the piped entity. The two last arguments indicate whether it should be spoken/understood. Example: 'self language:add "Canilunzt" true true'
+command-description-language-add = Adds a new language to the piped entity. The two last arguments indicate whether it should be spoken/understood. Example: 'self language:add "SolCommon" true true'
 command-description-language-rm = Removes a language from the piped entity. Works similarly to language:add. Example: 'self language:rm "TauCetiBasic" true true'.
 command-description-language-lsspoken = Lists all languages the entity can speak. Example: 'self language:lsspoken'
 command-description-language-lsunderstood = Lists all languages the entity can understand. Example: 'self language:lssunderstood'

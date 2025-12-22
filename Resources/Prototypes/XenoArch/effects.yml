@@ -912,7 +912,7 @@
         - id: MobPenguin
           amount: !type:RangeNumberSelector
             range: 1, 2
-        - id: MobMothroach
+        - id: MobMothmaggot # Trauma - was MobMothroach
           amount: !type:RangeNumberSelector
             range: 1, 2
         - id: MobCorgiPuppy

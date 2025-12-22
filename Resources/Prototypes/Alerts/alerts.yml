@@ -146,6 +146,7 @@
   - alertType: ModsuitPower # Goobstation - Modsuits
   - category: Internals
   - alertType: Fire
+  - alertType: HolyFire # Trauma
   - alertType: Handcuffed
   - alertType: Ensnared
   - category: Buckled
@@ -158,7 +159,6 @@
   - category: Breathing # Vox gang not calling this oxygen
   - category: Pressure
   - alertType: Bleed
-  - category: Pain # Goobstation - Woundmed Pain Indicator
   - category: Temperature
   - category: Hunger
   - category: Thirst
@@ -236,7 +236,6 @@
   clickEvent: !type:ResistFireAlertEvent
   name: alerts-on-fire-name
   description: alerts-on-fire-desc
-
 
 - type: alert
   id: Cold

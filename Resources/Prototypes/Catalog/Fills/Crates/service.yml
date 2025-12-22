@@ -342,7 +342,7 @@
           # Creatures
         - id: MobCockroach
           prob: 0.05
-        - id: MobMothroach
+        - id: MobMothmaggot # Trauma - was MobMothroach
           prob: 0.03
         - id: MobMouse
           prob: 0.05

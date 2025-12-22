@@ -132,7 +132,7 @@ public sealed class CPRSystem : EntitySystem
             && TryComp<DamageableComponent>(target, out var damageableComponent)
             && TryComp<MobStateComponent>(target, out var state)
             && !HasComp<UnrevivableComponent>(target)
-            && damageableComponent.TotalDamage < threshold)
+            && _mobThreshold.CheckVitalDamage(target, damageableComponent) < threshold) // GoobStation
             _mobStateSystem.ChangeMobState(target, MobState.Critical, state, performer);
 
         var isAlive = _mobStateSystem.IsAlive(target);

@@ -15,7 +15,6 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Climbing.Events;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
-using Content.Shared.Hands.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
@@ -35,8 +34,8 @@ using Content.Shared.Throwing;
 using Content.Shared.Verbs;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Components;
 using System.Numerics;
+using Content.Shared._EinsteinEngines.Contests;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mind.Components;
 
@@ -56,14 +55,11 @@ public sealed class CarryingSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standingState = default!;
     [Dependency] private readonly SharedVirtualItemSystem  _virtualItem = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-
-    private EntityQuery<PhysicsComponent> _physicsQuery;
+    [Dependency] private readonly ContestsSystem _contests = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
 
         SubscribeLocalEvent<CarriableComponent, GetVerbsEvent<AlternativeVerb>>(AddCarryVerb);
         SubscribeLocalEvent<CarryingComponent, GetVerbsEvent<InnateVerb>>(AddInsertCarriedVerb);
@@ -158,7 +154,7 @@ public sealed class CarryingSystem : EntitySystem
         var carried = virtItem.BlockingEntity;
         args.ItemUid = carried;
 
-        args.ThrowSpeed = 5f * MassContest(ent, carried);
+        args.ThrowSpeed = 5f * _contests.MassContest(ent, carried);
     }
 
     private void OnParentChanged(Entity<CarryingComponent> ent, ref EntParentChangedMessage args)
@@ -334,7 +330,7 @@ public sealed class CarryingSystem : EntitySystem
 
     private void ApplyCarrySlowdown(EntityUid carrier, EntityUid carried)
     {
-        var massRatio = MassContest(carrier, carried);
+        var massRatio = _contests.MassContest(carrier, carried);
 
         if (massRatio == 0)
             massRatio = 1;
@@ -360,24 +356,12 @@ public sealed class CarryingSystem : EntitySystem
             _hands.CountFreeHands(carrier) >= carried.Comp.FreeHandsRequired;
     }
 
-    private float MassContest(EntityUid roller, EntityUid target)
-    {
-        if (!_physicsQuery.TryComp(roller, out var rollerPhysics) || !_physicsQuery.TryComp(target, out var targetPhysics))
-            return 1f;
-
-        if (targetPhysics.FixturesMass == 0)
-            return 1f;
-
-        return rollerPhysics.FixturesMass / targetPhysics.FixturesMass;
-    }
-
     private TimeSpan GetPickupDuration(EntityUid carrier, EntityUid carried)
     {
         var length = TimeSpan.FromSeconds(3);
 
-        var mod = MassContest(carrier, carried);
-        if (mod != 0)
-            length /= mod;
+        var mod = _contests.MassContest(carried, carrier);
+        length *= mod;
 
         return length;
     }
