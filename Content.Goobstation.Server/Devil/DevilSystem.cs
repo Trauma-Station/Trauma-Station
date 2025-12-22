@@ -183,6 +183,19 @@ public sealed partial class DevilSystem : EntitySystem
         if (!_prototype.TryIndex(devil.Comp.DevilBranchPrototype, out var proto))
             return;
 
+        ProtoId<PolymorphPrototype> protoId;
+        switch (devil.Comp.PowerLevel)
+        {
+            case DevilPowerLevel.Powerful:
+                // Change sprite to archdevil and cause demonic incursion
+                protoId = new ProtoId<PolymorphPrototype>("MobArchDevil");
+                break;
+            case DevilPowerLevel.Moderate:
+                // Change sprite to archdevil and cause demonic incursion
+                protoId = new ProtoId<PolymorphPrototype>("MobLesserDevil");
+                break;
+        };
+
         foreach (var ability in proto.PowerActions)
         {
             if (args.NewLevel != ability.Key)
