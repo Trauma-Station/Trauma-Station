@@ -115,6 +115,9 @@
   id: CartridgeG8
 
 - type: Tag
+  id: CameraElectronics
+
+- type: Tag
   id: CannotSuicideAny
 
 - type: Tag
@@ -232,9 +235,6 @@
   id: EnergyMagAmmo
 
 - type: Tag
-  id: FelinidEmotes
-
-- type: Tag
   id: FitsInCharger
 
 - type: Tag
@@ -323,6 +323,9 @@
 
 - type: Tag
   id: HEVSuit
+
+- type: Tag
+  id: Holosign
 
 - type: Tag
   id: HolyClaymore
@@ -506,9 +509,6 @@
   id: NunHood
 
 - type: Tag
-  id: Oni # for oni shitcode
-
-- type: Tag
   id: Organ
 
 - type: Tag
@@ -516,6 +516,9 @@
 
 - type: Tag
   id: Poppy
+
+- type: Tag
+  id: RatvarianSpear
 
 - type: Tag
   id: ReptilianEmotes
@@ -552,6 +555,9 @@
 
 - type: Tag
   id: SiliconMob
+
+- type: Tag
+  id: SkeletonMotorcycleKeys
 
 - type: Tag
   id: SnapPop
@@ -741,3 +747,9 @@
 
 - type: Tag
   id: ChaplainsHolster
+
+- type: Tag
+  id: ForkliftKeys
+
+- type: Tag
+  id: Crate

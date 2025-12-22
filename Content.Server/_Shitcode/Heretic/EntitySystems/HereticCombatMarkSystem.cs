@@ -97,8 +97,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
 
             case "Flesh":
                 {
-                    if (_ability.CreateFleshMimic(target, user, false, true, 50, null) is { } mimic)
-                        EnsureComp<FleshMimickedComponent>(target).FleshMimics.Add(mimic);
+                    _ability.CreateFleshMimic(target, user, false, true, 50, null);
                 }
                 break;
 

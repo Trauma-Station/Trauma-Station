@@ -316,6 +316,7 @@
     - HeadTop
     - HeadSide
     - FacialHair
+  - type: FaceHuggerBlocker # Goobstation
 
 - type: entity
   abstract: true

@@ -883,6 +883,10 @@
         damage:
           types:
             Caustic: 0.3
+      # Goobstation
+      - !type:DiseaseProgressChange
+        affectedType: OwnCells
+        progressModifier: -0.07 # anti-cancer
 
 - type: reagent
   id: PolypyryliumOligomers
@@ -1479,6 +1483,8 @@
   metabolisms:
     Drink:
       effects:
+      - !type:HolyIgnite # Trauma
+        stacks: 10
       - !type:SatiateThirst
         factor: 3
       - !type:AddComponents # DeltaV - Cosmic Cult
@@ -1514,6 +1520,11 @@
       methods: [ Touch ]
       effects:
       - !type:Extinguish
+    Acidic: # Trauma
+      methods: [ Touch ]
+      effects:
+      - !type:HolyIgnite
+        stacks: 3
 #    Acidic:  # Goobstation - Removing holy water damage on touch pending rework.
 #      methods: [ Touch ]
 #      effects:
@@ -1830,6 +1841,10 @@
         effectProto: StatusEffectDrowsiness
         time: 4
         type: Add
+        conditions: # Goob
+        - !type:ReagentCondition
+          reagent: Haloperidol
+          min: 5
       - !type:GenericStatusEffect
         key: Jitter
         time: 4.0

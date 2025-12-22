@@ -206,6 +206,7 @@
     - Recyclable
     - WhitelistChameleon
 
+# TODO: Make a single ClothingHeadHatArmoreredBeret in goob namespace so all these items dont need to have armor values listed seperately, since they wont have seperate armor values ANYWAY!
 - type: entity
   parent: [ClothingHeadHatBeret, BaseSecurityContraband] #goobstation - contraband marking
   id: ClothingHeadHatBeretSecurity

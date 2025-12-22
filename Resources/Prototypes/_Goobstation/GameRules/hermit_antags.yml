@@ -27,11 +27,11 @@
     - id: SpiderClownSpawnHermit
     - id: SpiderSpawnHermit
     - id: VentClog
-    - id: TidemindDevelop # Goobstation - Tidemind
-    - id: MothroachSpawn # DeltaV
-    - id: DerelictCyborgSyndicateSpawnHermit # Goobstation - usually calm
-    - id: MalignRiftSpawn # DeltaV
-    - id: FloorGoblinSpawn # Goobstation
+    - id: TidemindDevelop
+    - id: MothmaggotSpawn
+    - id: DerelictCyborgSyndicateSpawnHermit
+    - id: MalignRiftSpawn
+    - id: FloorGoblinSpawn
 
 - type: entityTable
   id: HermitAntagEventsTable

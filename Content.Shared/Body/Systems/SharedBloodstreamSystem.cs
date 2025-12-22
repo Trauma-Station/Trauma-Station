@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Bloodstream;
+using Content.Goobstation.Common.CCVar;
 using Content.Shared._Shitmed.Body;
 using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Medical.Surgery.Consciousness;
@@ -50,6 +51,8 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed 
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
 
+    private float _bloodlossMultiplier = 4f; // Goobstation
+
     public override void Initialize()
     {
         base.Initialize();
@@ -65,6 +68,8 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed 
         SubscribeLocalEvent<BloodstreamComponent, RejuvenateEvent>(OnRejuvenate);
 
         InitializeWounds(); // Shitmed
+
+        Subs.CVar(_cfg, GoobCVars.BleedMultiplier, value => _bloodlossMultiplier = value, true); // Goobstation
     }
 
     public override void Update(float frameTime)
@@ -109,7 +114,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed 
             if (bloodPercentage < bloodstream.BloodlossThreshold && !_mobStateSystem.IsDead(uid))
             {
                 // bloodloss damage is based on the base value, and modified by how low your blood level is.
-                var amt = bloodstream.BloodlossDamage / (0.1f + bloodPercentage);
+                var amt = bloodstream.BloodlossDamage * (1 - bloodPercentage) * 10f * _bloodlossMultiplier; // Goobstation
 
                 // Goobstation start
                 var multiplierEv = new GetBloodlossDamageMultiplierEvent();
@@ -117,7 +122,8 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed 
                 amt *= multiplierEv.Multiplier;
                 // Goobstation end
 
-                _damageableSystem.TryChangeDamage(uid, amt, ignoreResistances: false, interruptsDoAfters: false);
+                _damageableSystem.TryChangeDamage(uid, amt, ignoreResistances: false, interruptsDoAfters: false,
+                    splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.All); // Goobstation
 
                 // Apply dizziness as a symptom of bloodloss.
                 // The effect is applied in a way that it will never be cleared without being healthy.
@@ -129,7 +135,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed 
                 // If they're healthy, we'll try and heal some bloodloss instead.
                 _damageableSystem.TryChangeDamage(
                     uid,
-                    bloodstream.BloodlossHealDamage * bloodPercentage,
+                    bloodstream.BloodlossHealDamage * bloodPercentage * _bloodlossMultiplier, // Goobstation
                     ignoreResistances: true,
                     interruptsDoAfters: false,
                     ignoreBlockers: true,

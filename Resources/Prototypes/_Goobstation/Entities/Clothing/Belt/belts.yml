@@ -259,3 +259,10 @@
         - id: TirimolChemistryVial
         - id: OmnizineChemistryVial
         - id: ProcenylLazideChemistryVial
+
+- type: entity
+  parent: ClothingBeltUtilityFilled
+  id: ClothingBeltUtilityFilledUnremoveable
+  suffix: Unremoveable
+  components:
+  - type: Unremoveable

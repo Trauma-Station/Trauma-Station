@@ -83,6 +83,9 @@ uplink-magazine-nailgun-desc = Almost like a normal magazine for your nail gun. 
 uplink-pressure-modkit-name = Pressure Modkit
 uplink-pressure-modkit-desc = This illegal modkit takes 30 capacity of your proto-kinetic accelerator and overclocks it to deal full damage even in unsuitable pressure.
 
+uplink-grey-tide-name = Grey Tide
+uplink-grey-tide-desc = An antient artifact with magical properties. Identical to plasma spear but capable of summoning illusions upon hitting living mob if wielder is an Assistant.
+
 # Weapons
 
 uplink-contractor-baton-name = Contractor Baton
@@ -346,3 +349,6 @@ uplink-bloodred-cassette-desc = Provided by the most egotistical fashion designe
 
 uplink-syndiedrobe-name = Syndiedrobe
 uplink-syndiedrobe-desc = A vending machine stocked with Syndicate-branded clothing. Simple, sharp, and unmistakably red-and-black, it offers operatives a way to dress with Syndicate style.
+
+uplink-customboard-name = Custom Syndicate Lawboard
+uplink-customboard-desc = A modified lawboard that allows the user to change the laws to anything they want. Comes with Antimov pre-installed.

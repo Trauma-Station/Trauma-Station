@@ -529,6 +529,8 @@
     - ConstructionBagOfHolding
     # Einstein Engines Packs
     - Translators
+    # Botany Trauma
+    - BotanyTrauma # Trauma
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - SecurityAmmo
@@ -714,8 +716,6 @@
   - type: EmagLatheRecipes
     emagStaticPacks:
     - HostileCubesStatic
-    # Goobstation Packs
-    - EmagCubesStatic
 
 - type: entity
   id: SecurityTechFab

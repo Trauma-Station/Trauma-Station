@@ -65,24 +65,6 @@
   name: foreigner's translator
   description: A special-issue translator that helps foreigner's speak and understand this station's primary language.
 
-
-- type: entity
-  id: CanilunztTranslator
-  parent: [ TranslatorPoweredBase ]
-  name: Canilunzt translator
-  description: Translates speech between Canilunzt and Galactic Common, allowing your local yeepers to communicate with the locals and vice versa!
-  components:
-  - type: HandheldTranslator
-    spoken:
-    - TauCetiBasic
-    - Canilunzt
-    understood:
-    - TauCetiBasic
-    - Canilunzt
-    requires:
-    - TauCetiBasic
-    - Canilunzt
-
 - type: entity
   id: BubblishTranslator
   parent: [ TranslatorPoweredBase ]
@@ -99,23 +81,6 @@
     requires:
     - TauCetiBasic
     - Bubblish
-
-- type: entity
-  id: NekomimeticTranslator
-  parent: [ TranslatorPoweredBase ]
-  name: Nekomimetic translator
-  description: Translates speech between Nekomimetic and Galactic Common, enabling you to communicate with your pet cats.
-  components:
-  - type: HandheldTranslator
-    spoken:
-    - TauCetiBasic
-    - Nekomimetic
-    understood:
-    - TauCetiBasic
-    - Nekomimetic
-    requires:
-    - TauCetiBasic
-    - Nekomimetic
 
 - type: entity
   id: DraconicTranslator
@@ -280,57 +245,6 @@
     - Draconic
     - Azaziba
 
-- type: entity
-  id: ChittinTranslator
-  parent: [ TranslatorPoweredBase ]
-  name: Chittin translator
-  description: Translates speech between Chittin and Tau-Ceti Basic. For talking to Chitinids!
-  components:
-  - type: HandheldTranslator
-    spoken:
-    - TauCetiBasic
-    - Chittin
-    understood:
-    - TauCetiBasic
-    - Chittin
-    requires:
-    - TauCetiBasic
-    - Chittin
-
-- type: entity
-  id: SiikMaasTranslator
-  parent: [ TranslatorPoweredBase ]
-  name: Siik'maas translator
-  description: Translates speech between Siik'maas and Tau-Ceti Basic. For talking to Tajara!
-  components:
-  - type: HandheldTranslator
-    spoken:
-    - TauCetiBasic
-    - SiikMaas
-    understood:
-    - TauCetiBasic
-    - SiikMaas
-    requires:
-    - TauCetiBasic
-    - SiikMaas
-
-- type: entity
-  id: MarishTranslator
-  parent: [ TranslatorPoweredBase ]
-  name: Marish translator
-  description: Translates speech between Marish and Tau-Ceti Basic. For talking to Shadowkin!
-  components:
-  - type: HandheldTranslator
-    spoken:
-    - TauCetiBasic
-    - Marish
-    understood:
-    - TauCetiBasic
-    - Marish
-    requires:
-    - TauCetiBasic
-    - Marish
-
 - type: entity                      # taken from Floofstation
   id: NewKinPidginTranslator
   parent: [ TranslatorPoweredBase ]
@@ -347,37 +261,3 @@
     requires:
     - TauCetiBasic
     - NewKinPidgin
-
-- type: entity                      # Language taken from Floofstation but the proto is goob
-  id: SchechiTranslator
-  parent: [ TranslatorPoweredBase ]
-  name: Schechi translator
-  description: Interprets the birdsong known as Schechi and translates it to Galactic Common. Primarily spoken by Resomi.
-  components:
-  - type: HandheldTranslator
-    spoken:
-    - TauCetiBasic
-    - Schechi
-    understood:
-    - Schechi
-    - TauCetiBasic
-    requires:
-    - TauCetiBasic
-    - Schechi
-
-- type: entity                      # Language of onis
-  id: GruntishTranslator
-  parent: [ TranslatorPoweredBase ]
-  name: Gruntish translator
-  description: Interprets the mess known as Gruntish and translates it to Galactic Common. Primarily spoken by oni.
-  components:
-  - type: HandheldTranslator
-    spoken:
-    - TauCetiBasic
-    - Gruntish
-    understood:
-    - Gruntish
-    - TauCetiBasic
-    requires:
-    - TauCetiBasic
-    - Gruntish

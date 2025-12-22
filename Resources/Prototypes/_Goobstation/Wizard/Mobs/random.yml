@@ -28,17 +28,6 @@
     - IpcFirst
 
 - type: entity
-  parent: MobOni
-  id: MobOniRandom
-  name: Urist McOni
-  suffix: Random Appearance
-  components:
-  - type: RandomHumanoidAppearance
-  - type: RandomMetadata
-    nameSegments:
-    - NamesOniLast
-
-- type: entity
   parent: MobCluwne
   id: MobCluwneRandom
   suffix: Random Appearance
@@ -48,4 +37,4 @@
     nameSegments:
     - NamesFirst
     - NamesLast
-    nameFormat: name-format-standard 
+    nameFormat: name-format-standard

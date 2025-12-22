@@ -1,3 +1,11 @@
+// <Trauma>
+using Content.Shared._Shitmed.Medical.Surgery.Consciousness;
+using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
+using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Systems;
+using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Body.Components;
+using Content.Shared.Mobs.Systems;
+// </Trauma>
 using System.Linq;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -5,13 +13,6 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Prototypes;
-
-// Shitmed Change
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Systems;
-using Content.Shared.Body.Components;
-using Content.Shared._Shitmed.Targeting;
 
 namespace Content.Shared.Chat;
 
@@ -22,6 +23,7 @@ public sealed class SharedSuicideSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly ConsciousnessSystem _consciousness = default!; // Shitmed Change
+    [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!; // Goobstation
 
     /// <summary>
     /// Applies lethal damage spread out across the damage types given.
@@ -40,7 +42,7 @@ public sealed class SharedSuicideSystem : EntitySystem
         // Mob thresholds are sorted from alive -> crit -> dead,
         // grabbing the last key will give us how much damage is needed to kill a target from zero
         // The exact lethal damage amount is adjusted based on their current damage taken
-        var lethalAmountOfDamage = mobThresholds.Thresholds.Keys.Last() - target.Comp.TotalDamage;
+        var lethalAmountOfDamage = mobThresholds.Thresholds.Keys.Last() - _mobThresholdSystem.CheckVitalDamage(target, target.Comp); // Goobstation
         var totalDamage = appliedDamageSpecifier.GetTotal();
 
         // Removing structural because it causes issues against entities that cannot take structural damage,
@@ -71,7 +73,7 @@ public sealed class SharedSuicideSystem : EntitySystem
         // Mob thresholds are sorted from alive -> crit -> dead,
         // grabbing the last key will give us how much damage is needed to kill a target from zero
         // The exact lethal damage amount is adjusted based on their current damage taken
-        var lethalAmountOfDamage = mobThresholds.Thresholds.Keys.Last() - target.Comp.TotalDamage;
+        var lethalAmountOfDamage = mobThresholds.Thresholds.Keys.Last() - _mobThresholdSystem.CheckVitalDamage(target, target.Comp); // Goobstation
 
         // We don't want structural damage for the same reasons listed above
         if (!_prototypeManager.TryIndex(damageType, out var damagePrototype) || damagePrototype.ID == "Structural")

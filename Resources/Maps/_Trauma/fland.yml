@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 11/28/2025 19:02:56
-  entityCount: 37822
+  entityCount: 37823
 maps:
 - 1
 grids:
@@ -237792,5 +237792,12 @@ entities:
     components:
     - type: Transform
       pos: 37.49601,38.54368
+      parent: 2
+- proto: SpawnPointVirologist
+  entities:
+  - uid: 37885
+    components:
+    - type: Transform
+      pos: 29.5,40.5
       parent: 2
 ...
