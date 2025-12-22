@@ -1,0 +1,5 @@
+- type: clause
+  id: buckling
+  clauseWeight: 5
+  addedComponents:
+  - type: PreventBuckling
