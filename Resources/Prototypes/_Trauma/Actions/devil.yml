@@ -1,0 +1,39 @@
+# Greater forms
+
+- type: entity
+  id: ActionSummonPitchfork
+  name: Summon pitchfork
+  description: A devil's weapon of choice. Use this to summon/unsummon your pitchfork.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Actions/devil.rsi
+      state: pitchfork
+  - type: InstantAction
+    event: !type:SlasherSummonMacheteEvent
+
+- type: entity
+  parent: ActionFireball
+  id: ActionHellFire
+  name: Hellfire
+  description: This spell launches hellfire at the target.
+  components:
+  - type: Action
+    useDelay: 20
+    itemIconStyle: BigAction
+    raiseOnUser: true
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/fireball.ogg
+    icon:
+      sprite: _Goobstation/Actions/devil.rsi
+      state: hellfire
+  - type: TargetAction
+    range: 60
+    checkCanAccess: false
+  - type: EntityTargetAction
+    canTargetSelf: false
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: ProjectileHellfire
+      speed: 20

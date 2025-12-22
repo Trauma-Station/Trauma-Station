@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Sprited by SolsticeOfTheWinter",
+  "copyright": "Sprited by SolsticeOfTheWinter and OnsenCapy",
   "size": {
     "x": 32,
     "y": 32
@@ -10,19 +10,25 @@
     {
       "name": "base-devil-icon"
     },
-	{
+    {
       "name": "shadow-jaunt"
+    },
+    {
+      "name": "hellfire"
+    },
+    {
+      "name": "pitchfork"
     },
     {
       "name": "summon-contract"
     },
-	{
-	  "name": "summon-contract-revival"
-	},
-	{
-	  "name": "cheat-death"
-	},
-	{
+    {
+      "name": "summon-contract-revival"
+    },
+  	{
+  	  "name": "cheat-death"
+  	},
+  	{
       "name": "devil-grip"
     },
     {
