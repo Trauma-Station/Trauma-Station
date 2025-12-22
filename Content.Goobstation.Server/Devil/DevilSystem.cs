@@ -44,7 +44,6 @@ using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
-using Content.Shared.Polymorph;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Speech;
@@ -163,16 +162,9 @@ public sealed partial class DevilSystem : EntitySystem
         devil.Comp.Souls += args.Amount;
         _popup.PopupEntity(Loc.GetString("contract-soul-added"), args.User, args.User, PopupType.MediumCaution);
 
-        DevilPowerLevel currentPower = devil.Comp.Souls switch
+        if (devil.Comp.Souls is > 1 and < 7 && devil.Comp.Souls % 2 == 0)
         {
-            >= 13 => DevilPowerLevel.Powerful,
-            > 7 => DevilPowerLevel.Moderate,
-            > 1 => DevilPowerLevel.Weak,
-            _ => DevilPowerLevel.None
-        };
-        if (devil.Comp.PowerLevel != currentPower)
-        {
-            devil.Comp.PowerLevel = currentPower;
+            devil.Comp.PowerLevel = (DevilPowerLevel)(devil.Comp.Souls / 2); // malicious casting to enum
 
             // Raise event
             var ev = new PowerLevelChangedEvent(args.User, devil.Comp.PowerLevel);
@@ -195,17 +187,11 @@ public sealed partial class DevilSystem : EntitySystem
         switch (devil.Comp.PowerLevel)
         {
             case DevilPowerLevel.Powerful:
-<<<<<<< Updated upstream
-                protoId = new ProtoId<PolymorphPrototype>("MobArchDevil");
-                break;
-            case DevilPowerLevel.Moderate:
-=======
                 // Change sprite to archdevil and cause demonic incursion
                 protoId = new ProtoId<PolymorphPrototype>("MobArchDevil");
                 break;
             case DevilPowerLevel.Moderate:
                 // Change sprite to archdevil and cause demonic incursion
->>>>>>> Stashed changes
                 protoId = new ProtoId<PolymorphPrototype>("MobLesserDevil");
                 break;
         };
