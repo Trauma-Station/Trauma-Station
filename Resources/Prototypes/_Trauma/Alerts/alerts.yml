@@ -1,0 +1,6 @@
+- type: alert
+  id: HolyFire
+  icons: [ /Textures/_Trauma/Interface/Alerts/HolyFire/holyfire.png ]
+  clickEvent: !type:ResistHolyFireAlertEvent
+  name: alerts-on-holy-fire-name
+  description: alerts-on-holy-fire-desc

@@ -18,10 +18,6 @@
   path: /Fonts/_Goobstation/ChelseaMarket/ChelseaMarket.ttf
 
 - type: font
-  id: Schoolbell # Used for resomi font
-  path: /Fonts/_Goobstation/Schoolbell/Schoolbell.ttf
-
-- type: font
   id: NotoSansSCBold
   path: /Fonts/NotoSans/NotoSansSC-Bold.ttf
 
@@ -44,8 +40,7 @@
   id: MonospaceBold
   path: /Fonts/_Goobstation/NotoSansMono/NotoSansMono-Bold.ttf
 
-# Valyrian Standard (Harpies/Squackroaches)
+# Valyrian Standard (Harpies)
 - type: font
   id: Delius
   path: /Fonts/_Goobstation/Delius/Delius-Regular.ttf
-

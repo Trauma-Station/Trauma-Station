@@ -75,14 +75,7 @@
     MobBananaMen: 1
     MobYowieRandom: 1
     MobHarpyRandom: 1
-    MobRodentiaRandom: 1
-    MobVulpkaninRandom: 1
     MobIPCRandom: 1
-    MobFelinidRandom: 1 # le funny
-    MobTajaranRandom: 1
-    MobOniRandom: 1
-    MobChitinidRandom: 1
-    MobShadowkinRandom: 1
     MobAbductor: 0.1
     MobShadowling: 0.01
 
@@ -109,6 +102,7 @@
     MobMouse: 0.25
     MobMouse1: 0.25
     MobMouse2: 0.25
+    MobMousePlague: 0.25
     MobMouseCancer: 0.25
     MobLizard: 1
     MobSlug: 1

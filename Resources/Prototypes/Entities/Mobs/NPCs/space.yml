@@ -77,8 +77,11 @@
   parent: MobSpaceBasic
   description: It looks friendly. Why don't you give it a hug?
   components:
-  - type: Body # Shitmed Change
+  # <Goob>
+  - type: Body
     prototype: SpaceBear
+  - type: Fauna
+  # </Goob>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/bear.rsi
@@ -115,7 +118,6 @@
     interactFailureString: petting-failure-bear
     interactSuccessSound:
       path: /Audio/Animals/sloth_squeak.ogg
-  - type: Fauna # Lavaland Change
 
 - type: entity
   id: MobBearSpaceSalvage
@@ -170,7 +172,7 @@
   - type: Vocal
     sounds:
       Unsexed: Kangaroo
-  - type: FootstepModifier
+  - type: FootstepModifier # Trauma - revert upstream removal
     footstepSoundCollection:
       collection: FootstepBounce
   - type: LanguageKnowledge # Einstein Engines - Language
@@ -203,9 +205,14 @@
   parent: MobSpaceBasic
   description: It's so glowing, it looks dangerous.
   components:
-  - type: VentCrawler # goobstation - Ventcrawl
-  - type: Body # Shitmed Change
+  # <Goob>
+  - type: VentCrawler
+  - type: Body
     prototype: SpaceSpider
+  - type: Fauna
+  - type: CombatPower
+    factor: 1.5 # times more dangerous than a crew-member
+  # </Goob>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/spacespider.rsi
@@ -296,9 +303,6 @@
       Unsexed: UnisexArachnid
   - type: TypingIndicator
     proto: spider
-  - type: Fauna # Lavaland Change
-  - type: CombatPower # Goobstation
-    factor: 1.5 # times more dangerous than a crew-member
 
 - type: entity
   id: MobSpiderSpaceSalvage
@@ -322,6 +326,9 @@
       - Xeno
       understands:
       - Xeno
+    - type: NpcFactionMember
+      factions:
+      - Xeno # Aligning them with Space Adders
     # </Goob>
     - type: Sprite
       drawdepth: Mobs
@@ -458,7 +465,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 100
+        density: 10 # Goob edit
         mask:
         - SmallMobMask
         layer:
@@ -577,7 +584,7 @@
   - type: MobStateActions
     actions:
       Alive:
-      - ActionSmite
+      - ActionSmite # Trauma - was ActionSmiteNoReq?
       Critical:
       - ActionCritSuccumb
       - ActionCritFakeDeath

@@ -68,3 +68,20 @@
     deconstructionTarget: null
     graph: RevGuns
     node: Flamethrower
+
+- type: entity
+  parent: ClothingBackpackFirefighterTank
+  id: ClothingBackpackHolyFirefighterTank
+  name: holy water tank backpack
+  description: A refrigerated water tank backpack that can launch Holy Water or work as a high pressure extinguisher.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Back/Backpacks/holybackpacktank.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 1200
+        reagents:
+        - ReagentId: Holywater
+          Quantity: 1200

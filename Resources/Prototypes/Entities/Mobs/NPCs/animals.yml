@@ -379,7 +379,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 100
+        density: 2 # Goob edit
         mask:
         - SmallMobMask
         layer:
@@ -516,7 +516,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 120
+        density: 12 # Goob edit
         mask:
         - SmallMobMask
         layer:
@@ -1548,6 +1548,7 @@
     hasPainScreams: false
     threshold: 70
     cap: 140
+  - type: DiseaseCarrier
   # </Goob>
   - type: StatusIcon
 
@@ -1853,7 +1854,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 100
+        density: 10 # Goob eedit
         mask:
         - SmallMobMask
         layer:
@@ -1985,7 +1986,7 @@
     deactivateSound: null
   - type: EggLayer
     eggSpawn:
-    - id: MobMouse
+    - id: SpawnMobMouse
     hungerUsage: 20
     eggLayAction: MouseMultiply
     hungerRequired: true
@@ -2017,7 +2018,15 @@
     - Mousemind
   - type: FaxSlip
     slipChance: 0.3
-  # </Goobstation>
+  # does not infect you unless the mouse has any diseases, which it doesn't by default
+  - type: DiseaseOnHit
+    spreadParams:
+      chance: 0.05 # 1984 lower chance for normal mice so creating the turboplague horde is not as strong
+      power: 1
+      spreadType: Blood
+  - type: DiseaseCarrier
+    effectImmune: true
+  - type: ShowDiseaseIcons # they sense it
   - type: Destructible # Shitmed Change
     thresholds:
     - trigger:
@@ -2028,6 +2037,7 @@
       - !type:GibBehavior
         gibContents: Skip
         recursive: false
+  # </Goobstation>
 
 - type: entity
   parent: MobMouse
@@ -3653,7 +3663,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 120
+        density: 12 # Goob edit
         mask:
         - SmallMobMask
         layer:

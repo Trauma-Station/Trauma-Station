@@ -2,6 +2,7 @@ using Content.Server.Botany;
 using Content.Server.Botany.Components;
 using Content.Shared.EntityEffects;
 using Content.Shared.EntityEffects.Effects.Botany;
+using Content.Trauma.Common.Botany; // Trauma
 
 namespace Content.Server.EntityEffects.Effects.Botany;
 

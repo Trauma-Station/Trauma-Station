@@ -38,28 +38,12 @@
     implant: BubblishTranslatorImplant
 
 - type: entity
-  id: NekomimeticTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
-  suffix: Nekomimetic
-  components:
-  - type: Implanter
-    implant: NekomimeticTranslatorImplant
-
-- type: entity
   id: DraconicTranslatorImplanter
   parent: [ BaseTranslatorImplanter ]
   suffix: Draconic
   components:
   - type: Implanter
     implant: DraconicTranslatorImplant
-
-- type: entity
-  id: CanilunztTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
-  suffix: Canilunzt
-  components:
-  - type: Implanter
-    implant: CanilunztTranslatorImplant
 
 - type: entity
   id: SolCommonTranslatorImplanter
@@ -110,49 +94,9 @@
     implant: AzazibaTranslatorImplant
 
 - type: entity
-  id: ChittinTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
-  suffix: Chittin
-  components:
-  - type: Implanter
-    implant: ChittinTranslatorImplant
-
-- type: entity
-  id: SiikMaasTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
-  suffix: Siik'Maas
-  components:
-  - type: Implanter
-    implant: SiikMaasTranslatorImplant
-
-- type: entity
-  id: MarishTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
-  suffix: Marish
-  components:
-  - type: Implanter
-    implant: MarishTranslatorImplant
-
-- type: entity
-  id: SchechiTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
-  suffix: Schechi
-  components:
-  - type: Implanter
-    implant: SchechiTranslatorImplant
-
-- type: entity
   id: NewKinPidginTranslatorImplanter
   parent: [ BaseTranslatorImplanter ]
   suffix: Ka'Rakk
   components:
   - type: Implanter
     implant: NewKinPidginTranslatorImplant
-
-- type: entity
-  id: GruntishTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
-  suffix: Gruntish
-  components:
-  - type: Implanter
-    implant: GruntishTranslatorImplant

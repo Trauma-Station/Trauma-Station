@@ -417,7 +417,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 30 #Bulky by mouse standards...
+        density: 15 # Goob edit #Bulky by mouse standards...
         mask:
         - SmallMobMask
         layer:
@@ -504,7 +504,6 @@
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Mouse_burning
-  - type: FelinidFood # Nyanotrasen - Felinid, ability to eat rat, see Content.Server/Nyanotrasen/Abilities/Felinid/FelinidSystem.cs
   - type: Edible
     edible: Food
   - type: Item

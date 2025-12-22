@@ -22,6 +22,12 @@ public sealed partial class Flammable : EntityEffectBase<Flammable>
     [DataField]
     public float? MultiplierOnExisting;
 
+    /// <summary>
+    /// Goob - How much fire protection is mitigated (e.g. atmos firesuit+helmet is 1.0) when adding firestacks
+    /// </summary>
+    [DataField]
+    public float FireProtectionPenetration;
+
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-flammable-reaction", ("chance", Probability));
 

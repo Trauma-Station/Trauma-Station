@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Created by @ShootsTheMoon (github) for GoobStation",
+    "copyright": "Created by @ShootsTheMoon (github) for GoobStation | viro made by Ilya246 and Gallagin based on the other sprites.",
     "size": {
         "x": 32,
         "y": 32
@@ -42,6 +42,44 @@
                     0.3,
                     0.3,
                     0.3
+                ]
+            ]
+        },
+        {
+            "name": "viro",
+            "directions": 4,
+            "delays": [
+                [
+                    0.25,
+                    0.25,
+                    0.25,
+                    0.25,
+                    0.25,
+                    0.25
+                ],
+                [
+                    0.25,
+                    0.25,
+                    0.25,
+                    0.25,
+                    0.25,
+                    0.25
+                ],
+                [
+                    0.25,
+                    0.25,
+                    0.25,
+                    0.25,
+                    0.25,
+                    0.25
+                ],
+                [
+                    0.25,
+                    0.25,
+                    0.25,
+                    0.25,
+                    0.25,
+                    0.25
                 ]
             ]
         }

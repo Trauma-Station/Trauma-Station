@@ -165,6 +165,7 @@ public sealed partial class DamageableSystem
         if (damage.Empty)
             return damageDone;
 
+        var vitalDamage = GetVitalDamage(damage); // Goob
         var before = new BeforeDamageChangedEvent(damage, origin,
             false, canBeCancelled, targetPart); // Shitmed
         RaiseLocalEvent(ent, ref before);
@@ -172,14 +173,26 @@ public sealed partial class DamageableSystem
         if (before.Cancelled)
             return damageDone;
 
-        // <Shitmed> - For entities with a body, route damage through body parts and then sum it up
+        // <Goob> - For entities with a body, route damage through body parts and then sum it up
         if (_bodyQuery.TryComp(ent, out var body) && body.BodyType == BodyType.Complex)
         {
-            return ApplyDamageToBodyParts(ent, damage, origin, ignoreResistances,
-                interruptsDoAfters, targetPart, partMultiplier, ignoreBlockers, splitDamage, canMiss);
-        }
+            damage -= vitalDamage;
+            damage.TrimZeros();
 
-        // </Shitmed>
+            var appliedDamage = ApplyDamageToBodyParts(ent, damage, origin, ignoreResistances,
+                interruptsDoAfters, targetPart, partMultiplier, ignoreBlockers, splitDamage, canMiss);
+
+            var appliedVitalDamage = ApplyDamageToBodyParts(ent, vitalDamage, origin, ignoreResistances,
+                interruptsDoAfters, TargetBodyPart.Vital, partMultiplier, ignoreBlockers, splitDamage, canMiss);
+
+            if (appliedDamage != null)
+                damageDone += appliedDamage;
+            if (appliedVitalDamage != null)
+                damageDone += appliedVitalDamage;
+
+            return damageDone;
+        }
+        // </Goob>
 
         // Apply resistances
         if (!ignoreResistances)

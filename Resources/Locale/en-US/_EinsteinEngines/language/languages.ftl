@@ -10,9 +10,6 @@ language-Bubblish-description = The language of Slimes. Being a mixture of bubbl
 language-RootSpeak-name = Rootspeak
 language-RootSpeak-description = The strange whistling-style language spoken by the Diona.
 
-language-Nekomimetic-name = Nekomimetic
-language-Nekomimetic-description = To the casual observer, this language is an incomprehensible mess of broken Japanese. To the Felinids, it's somehow comprehensible.
-
 language-Draconic-name = Sinta'Unathi
 language-Draconic-description =
     The common language of Moghes - composed of sibilant hisses and rattles. Spoken natively by Unathi.
@@ -56,11 +53,6 @@ language-Elyran-description =
     Elyran Standard is the official tongue of the Republic of Elyra. Constructed using elements of Farsi - Arabic - and Turkish.
     Influence from all three of these languages can be seen throughout its grammar and vocabulary.
 
-language-Canilunzt-name = Canilunzt
-language-Canilunzt-description =
-    The guttural language spoken and utilized by the inhabitants of the Vazzend system,
-    composed of growls, barks, yaps, and heavy utilization of ears and tail movements. Vulpkanin speak this language with ease.
-
 language-Moffic-name = Moffic
 language-Moffic-description = The language of the mothpeople borders on complete unintelligibility.
 
@@ -70,25 +62,11 @@ language-RobotTalk-description = A language consisting of harsh binary chirps, w
 language-Calcic-name = Calcic
 language-Calcic-description = The bone-rattling language of Skeletons and Plasmamen. It sounds like a harmonic trousle of bones with a humerus tone, sans any off-tune ribbing.
 
-# Tau-Ceti Basic Sign Language - Removed prefix for better readability.
-language-Sign-name = Sign Language
-language-Sign-description =
-    Tau-Ceti Basic Sign Language.
-    TCB-SL for short, this sign language is prevalent among mute and deaf people.
-
-language-Marish-name = Marish
-language-Marish-description =  A language spoken only by Shadowkin, one that is unable to be replicated by normal tongues.
-
 language-ValyrianStandard-name = Valyrian Standard
 language-ValyrianStandard-description =
     A language descended from eastern european languages of old earth - Valyrian Standard is the commonly spoken tongue of Harpies brought up on their homeworld of Valyrian 4b
     It is rarely spoken outside of the worlds of its native speakers, and has in modern times been supplanted by the 'Conlangs of the Sol Alliance.
     Its speakers are those who wish to uphold the traditions and beliefs of ancient peoples from before the colonial era.
-
-language-Chittin-name = Chittin
-language-Chittin-description =
-    A language consisting of clicks, buzzes, and some variety of harsh insect sounds.
-    Most of what makes up their speech comes from their antennae, making it a near-impossible language for those without to learn.
 
 language-Xeeplian-name = Xeeplian
 language-Xeeplian-description =
@@ -155,40 +133,6 @@ language-Penguin-description = Bwaap!
 
 language-DroneTalk-name = Drone
 language-DroneTalk-description = Incomprehensible to most non-drones!
-
-# Tajaran and Shadow stuffs
-language-SiikMaas-name = Siik'maas
-language-SiikMaas-description =
-    The ancient religious tongue of the Tajara, now the most widely spoken and taught language on Adhomai.
-
-language-NalRasan-name = Nal'rasan
-language-NalRasan-description =
-    A body-language-heavy dialect created by M'sai hunters for stealth, later adopted by rebels for covert communication during the Great War.
-
-language-SiikTajr-name = Siik'tajr
-language-SiikTajr-description =
-    A revolutionary language blending Siik'maas and Nal'rasan, designed for secrecy during the overthrow of the plutocracy and used heavily in the Great War.
-
-language-YaSsa-name = Ya'ssa
-language-YaSsa-description =
-    A refined Siik'maas dialect once spoken by Njarir nobility, revived by the New Kingdom of Adhomai after centuries of disuse.
-
-language-Delvahii-name = Delvahii
-language-Delvahii-description =
-    A Zhan-Khazan language tied to Ma'take worship, still used in religious rites and favored by farmers resisting government control.
-
-language-Shadowmind-name = Shadowmind
-language-Shadowmind-description =
-    A language spoken by the shadowlings. Not much is known about it, except that Thralls can understand it.
-language-Qiilour-name = Qiilour
-language-Qiilour-description =
-    The native and principal language of the Xelthia, Qiilour is spoken by nearly all members of their species to some degree. It is a refined fusion of several ancient tongues—such as Telenarii, Voskarn, and Old Xelthec—each now lost to history.
-
-# Ported from Floofstation:
-
-language-Schechi-name = Schechi
-language-Schechi-description =
-    The language of Resomi, primarily featuring frontal sounds made without rounding. Fluent speakers sound quite close to birdsong.
 
 language-NewKinPidgin-name = Ka'rakk
 language-NewKinPidgin-description = A debased dialect cobbled together by lower-caste Vox, mangled beyond recognition.

@@ -7,9 +7,7 @@
 - type: latheRecipePack
   id: Translators
   recipes:
-  - CanilunztTranslator
   - BubblishTranslator
-  - NekomimeticTranslator
   - DraconicTranslator
   - SolCommonTranslator
   - RootSpeakTranslator
@@ -17,12 +15,7 @@
   - XenoTranslator
   - AnimalTranslator
   - ValyrianStandardTranslator
-  - ChittinTranslator
-  - SiikMaasTranslator
-  - MarishTranslator
   - NewKinPidginTranslator
-  - SchechiTranslator
-  - GruntishTranslator
   - YowKriolTranslator # goob edit - yowie language
 
 - type: latheRecipePack
@@ -30,19 +23,12 @@
   recipes:
   - BasicGalaticCommonTranslatorImplanter
   - AdvancedGalaticCommonTranslatorImplanter
-  - CanilunztTranslatorImplanter
   - BubblishTranslatorImplanter
-  - NekomimeticTranslatorImplanter
   - DraconicTranslatorImplanter
   - SolCommonTranslatorImplanter
   - RootSpeakTranslatorImplanter
   - MofficTranslatorImplanter
   - ValyrianStandardTranslatorImplanter
-  - ChittinTranslatorImplanter
-  - SiikMaasTranslatorImplanter
-  - MarishTranslatorImplanter
   - ChevalTranslatorImplanter
   - NewKinPidginTranslatorImplanter
-  - SchechiTranslatorImplanter
-  - GruntishTranslatorImplanter
   - YowKriolTranslatorImplanter # goob edit - yowie language

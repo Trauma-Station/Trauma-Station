@@ -70,3 +70,6 @@
 
 - type: playTimeTracker
   id: JobRoboticist
+
+- type: playTimeTracker
+  id: JobVirologist

@@ -487,7 +487,6 @@
     #- id: WeaponDisabler # Goobstation (Disablers in belts)
     - id: WantedListCartridge
     - id: DrinkHosFlask
-    - id: ReinforcementCallerHos # Trauma
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable

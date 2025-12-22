@@ -161,7 +161,7 @@
   - MagazinePistolCaselessRifle
   - MagazinePistolCaselessRifle #Trauma - Replace CQC with capoeira, extra cobra mag and energy dagger to rebalance price.
   - CapoeiraManual
-  - EnergyDaggerBox 
+  - EnergyDaggerBox
   - ClothingOuterArmourInvisibleSyndie
   - ClothingShoesBootsJack
   - CigPackSyndicate
@@ -199,7 +199,7 @@
     state: std_mod
   content:
   - EncryptionKeySyndie
-  - AntimovCircuitBoard
+  - SyndicateCustomLawboard
   - AccessBreaker
   - Emag
   - RadioJammer
@@ -254,7 +254,7 @@
   - ClothingBackpackDuffelSyndicateHardsuitBundle
   - ClothingUniformJumpsuitOperative
   - SyndiPDANukie
-  - ClothingEyesNightVisionGogglesNukie
+  - ClothingEyesThermalVisionGogglesSyndie
   - ClothingShoesBootsCombatFilled
   - ClothingBeltMilitaryWebbing
 

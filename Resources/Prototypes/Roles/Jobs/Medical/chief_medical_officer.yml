@@ -145,15 +145,18 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 10h
-    - !type:SpeciesRequirement # Goob - None Felinid
-      inverted: true
-      species:
-      - Felinid
   weight: 10
   startingGear: CMOGear
   icon: "JobIconChiefMedicalOfficer"
   supervisors: job-supervisors-captain
   canBeAntag: false
+  guides: # goobstation
+  - Medical
+  - SOPChiefMedicalOfficer
+  - SOPMedical
+  - Command
+  - Chemicals
+  - Virology
   goobcoins: 40 #Goob content
   access:
   - Medical

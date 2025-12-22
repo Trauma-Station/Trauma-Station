@@ -338,7 +338,7 @@
       - NamesMilitaryLast
       nameFormat: name-format-ert
     - type: Loadout
-      prototypes: [ ERTChaplainGear ]
+      prototypes: [ ERTChaplainGear, ERTChaplainGearTank ] # Trauma
       roleLoadout: [ RoleSurvivalExtended ]
 
 - type: entity

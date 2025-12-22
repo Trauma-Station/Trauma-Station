@@ -87,7 +87,7 @@ public abstract class SharedBerserkerImplantSystem : EntitySystem
         if (!TryComp<DamageableComponent>(ent, out var damageable))
             return;
 
-        if (damageable.TotalDamage + args.Damage.GetTotal() < threshold)
+        if (_mobThreshold.CheckVitalDamage(ent, damageable) + args.Damage.GetTotal() < threshold)
             return;
 
         args.Cancelled = true;

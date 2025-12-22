@@ -109,6 +109,7 @@
         types:
         - Mousetrap
     - type: Mousetrap
+      massBalance: 0 # Trauma - make it not instagib mice
     - type: ItemToggle
       soundActivate: "/Audio/Items/Handcuffs/cuff_end.ogg"
       soundDeactivate: "/Audio/Items/snap.ogg"
@@ -125,7 +126,7 @@
       targetPart: Feet # Trauma
       damage:
         types:
-          Blunt: 2 # base damage, scales based on mass
+          Blunt: 1 # Trauma - was 2, it instagibbed mice
     - type: Item
       sprite: Objects/Devices/mousetrap.rsi
     - type: Appearance

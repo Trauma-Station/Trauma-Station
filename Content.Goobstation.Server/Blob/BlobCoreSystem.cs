@@ -303,7 +303,7 @@ public sealed class BlobCoreSystem : EntitySystem
             blobTileComponent.Color = component.ChemСolors[newChem];
             Dirty(blobTile, blobTileComponent);
 
-            ChangeBlobEntChem(blobTile, newChem);
+            ChangeBlobEntChem(blobTile, newChem, blobTileComponent);
 
             if (!_factory.TryGetComponent(blobTile, out var blobFactoryComponent))
                 continue;
@@ -328,8 +328,11 @@ public sealed class BlobCoreSystem : EntitySystem
         }
     }
 
-    private void ChangeBlobEntChem(EntityUid uid, BlobChemType newChem)
+    private void ChangeBlobEntChem(EntityUid uid, BlobChemType newChem, BlobTileComponent? compo = null )
     {
+        // No change for reflective blobs! SPCR-2025
+        if(compo is not null && compo.BlobTileType == BlobTileType.Reflective)
+            return;
         switch (newChem)
         {
             case BlobChemType.ExplosiveLattice:
@@ -380,7 +383,7 @@ public sealed class BlobCoreSystem : EntitySystem
         }
 
         ConnectBlobTile((blobTileUid, blobTileComp), blobCore, nearNode);
-        ChangeBlobEntChem(blobTileUid, blobCoreComp.CurrentChem);
+        ChangeBlobEntChem(blobTileUid, blobCoreComp.CurrentChem, blobTileComp);
 
         Dirty(blobTileUid, blobTileComp);
 

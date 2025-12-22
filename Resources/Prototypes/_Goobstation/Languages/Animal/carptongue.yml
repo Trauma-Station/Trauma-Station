@@ -1,4 +1,4 @@
-# language for carp and dragons (primarily made so goldfish can actually use translators)
+# language for carp and dragons
 - type: language
   id: Carptongue
   isVisibleLanguage: true
