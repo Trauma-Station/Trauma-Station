@@ -41,11 +41,6 @@
     symmetry: Left
     slotId: hands # Shitmed
   - type: Devil
-  - type: BodyPart
-    partType: Hand
-    symmetry: Right
-    slotId: hands # Shitmed
-  - type: Devil
 
 - type: entity
   name: archdevil
@@ -53,12 +48,9 @@
   parent: MobLesserDevil
   description: Daemon qui formam ultimam attigit.
   components:
-  - type: ActionGrant
-    actions:
-    - ActionHellFire
   - type: Sprite
     drawdepth: Mobs
-    sprite: _Trauma/Devil/32x64.rsi
+    sprite: _Goobstation/Devil/32x64.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: arch_devil
@@ -93,3 +85,6 @@
         volume: 8
         maxDistance: 60
         pitch: 0.2
+  - type: ActionGrant
+    actions:
+    - ActionHellFire
