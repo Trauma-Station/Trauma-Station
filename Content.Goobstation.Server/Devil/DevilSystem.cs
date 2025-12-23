@@ -125,6 +125,9 @@ public sealed partial class DevilSystem : EntitySystem
         EnsureComp<PreventChasmFallingComponent>(devil).DeleteOnUse = false;
         EnsureComp<FTLSmashImmuneComponent>(devil);
 
+        // Ensure that the devil has a pitchfork
+        EnsureComp<DevilSummonPitchforkComponent>(devil);
+
         // Allow infinite revival
         var revival = EnsureComp<CheatDeathComponent>(devil);
         revival.InfiniteRevives = true;
@@ -197,10 +200,16 @@ public sealed partial class DevilSystem : EntitySystem
             case DevilPowerLevel.Powerful:
                 // Change sprite to archdevil and cause demonic incursion
                 protoId = new ProtoId<PolymorphPrototype>("MobArchDevil");
+                if (TryComp<DevilSummonPitchforkComponent>(devil, out var pitchforkComp))
+                {
+                    pitchforkComp.PitchforkPrototype = "GreaterDevilPitchfork";
+                }
+                _poly.PolymorphEntity(devil, protoId);
                 break;
             case DevilPowerLevel.Moderate:
                 // Change sprite to archdevil and cause demonic incursion
                 protoId = new ProtoId<PolymorphPrototype>("MobLesserDevil");
+                _poly.PolymorphEntity(devil, protoId);
                 break;
         };
 

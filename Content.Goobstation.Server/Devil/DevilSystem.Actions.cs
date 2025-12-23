@@ -11,8 +11,12 @@ using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Devil.Actions;
 using Content.Goobstation.Shared.Devil.Condemned;
 using Content.Goobstation.Shared.Devil.Contract;
+using Content.Goobstation.Shared.Slasher.Components;
+using Content.Goobstation.Shared.Slasher.Events;
 using Content.Shared.Cuffs.Components;
+using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
+using JetBrains.FormatRipper.Elf;
 
 namespace Content.Goobstation.Server.Devil;
 
@@ -25,6 +29,7 @@ public sealed partial class DevilSystem
         SubscribeLocalEvent<DevilComponent, ShadowJauntEvent>(OnShadowJaunt);
         SubscribeLocalEvent<DevilComponent, DevilGripEvent>(OnDevilGrip);
         SubscribeLocalEvent<DevilComponent, DevilPossessionEvent>(OnPossess);
+        SubscribeLocalEvent<DevilSummonPitchforkComponent, SlasherSummonMacheteEvent>(OnSummonPitchfork);
     }
 
     private void OnContractCreated(Entity<DevilComponent> devil, ref CreateContractEvent args)
@@ -122,5 +127,39 @@ public sealed partial class DevilSystem
         Spawn(devil.Comp.PentagramEffectProto, Transform(args.Target).Coordinates);
 
         args.Handled = true;
+    }
+
+    // Check machete to increase damage bonus
+    private EntityUid? GetPitchfork(EntityUid user)
+    {
+        if (TryComp<DevilSummonPitchforkComponent>(user, out var summon) && summon.PitchforkUid != null && Exists(summon.PitchforkUid.Value))
+            return summon.PitchforkUid.Value;
+
+        if (!TryComp<HandsComponent>(user, out var hands))
+            return null;
+
+        foreach (var held in _hands.EnumerateHeld((user, hands)))
+        {
+            if (HasComp<DevilPitchforkComponent>(held))
+                return held;
+        }
+
+        return null;
+    }
+
+
+    private void OnSummonPitchfork(Entity<DevilSummonPitchforkComponent> ent, ref SlasherSummonMacheteEvent args)
+    {
+        var pitchfork = GetPitchfork(ent.Owner);
+
+        if (!TryUseAbility(args))
+            return;
+
+        if (pitchfork == null)
+        {
+            pitchfork = Spawn(ent.Comp.PitchforkPrototype, Transform(ent).Coordinates);
+        }
+        _hands.TryPickupAnyHand(ent, pitchfork.Value);
+        PlayFwooshSound(ent);
     }
 }
