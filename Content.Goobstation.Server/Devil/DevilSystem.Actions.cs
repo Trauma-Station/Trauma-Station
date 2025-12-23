@@ -159,7 +159,8 @@ public sealed partial class DevilSystem
         {
             pitchfork = Spawn(ent.Comp.PitchforkPrototype, Transform(ent).Coordinates);
         }
-        _hands.TryPickupAnyHand(ent, pitchfork.Value);
+        ent.Comp.PitchforkUid = pitchfork;
+        _hands.TryPickupAnyHand(ent, ent.Comp.PitchforkUid.Value);
         PlayFwooshSound(ent);
     }
 }

@@ -67,7 +67,7 @@
   - type: DevilPitchfork
 
 - type: entity
-  name: Devil's Pitchfork
+  name: Devil's Greater Pitchfork
   parent: DevilPitchfork
   id: GreaterDevilPitchfork
   description: A Devil's pitchfork.

@@ -36,36 +36,26 @@
   - type: ActionGrant
     actions:
     - ActionSummonPitchfork
-    - ActionCreateContract
-    - ActionShadowJaunt
-    - ActionDevilGrip
+  - type: BodyPart
+    partType: Hand
+    symmetry: Left
+    slotId: hands # Shitmed
+  - type: Devil
+  - type: BodyPart
+    partType: Hand
+    symmetry: Right
+    slotId: hands # Shitmed
+  - type: Devil
 
 - type: entity
   name: archdevil
   id: MobArchDevil
-  parent: [ SimpleSpaceMobBase, MobCombat ]
+  parent: MobLesserDevil
   description: Daemon qui formam ultimam attigit.
   components:
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 4
-    baseSprintSpeed: 4
-  - type: HTN
-    rootTask:
-      task: SimpleHostileCompound
-  - type: NpcFactionMember
-    factions:
-    - SimpleHostile
-  - type: Hands
-  - type: ComplexInteraction
-  - type: ReplacementAccent
-    accent: genericAggressive
   - type: ActionGrant
     actions:
-    - ActionSummonPitchfork
     - ActionHellFire
-    - ActionCreateContract
-    - ActionShadowJaunt
-    - ActionDevilGrip
   - type: Sprite
     drawdepth: Mobs
     sprite: _Trauma/Devil/32x64.rsi
