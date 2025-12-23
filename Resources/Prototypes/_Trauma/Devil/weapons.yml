@@ -71,7 +71,8 @@
   parent: DevilPitchfork
   id: GreaterDevilPitchfork
   description: A Devil's pitchfork.
-  - type: DamageOtherOnHit
+  components:
+  - type: MeleeWeapon
     damage:
       types:
         Piercing: 24
