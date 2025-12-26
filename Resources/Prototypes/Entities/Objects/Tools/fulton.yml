@@ -71,6 +71,11 @@
   description: Used to extract containers, items, or forcibly recruit people into your base of operations.
   components:
   - type: Fulton
+    whitelist: # Trauma - allow mobs to be directly fultoned without needing to build a chair
+      components:
+      - Item
+      - Anchorable
+      - Body
   - type: Item
     size: Normal
   - type: Stack
