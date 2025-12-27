@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="../Content.Goobstation.Shared/Content.Goobstation.Shared.csproj" />
 		<ProjectReference Include="../Content.Shared/Content.Shared.csproj" />
 		<ProjectReference Include="../RobustToolbox/Robust.Shared/Robust.Shared.csproj" Private="false" />
 	</ItemGroup>

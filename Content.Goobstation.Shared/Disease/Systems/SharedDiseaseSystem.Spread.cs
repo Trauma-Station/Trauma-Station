@@ -16,8 +16,8 @@ public partial class SharedDiseaseSystem
             return null;
 
         var ent = EntityManager.PredictedSpawn(BaseDisease);
-        var ev = new DiseaseCloneEvent((source, source.Comp));
-        RaiseLocalEvent(ent, ref ev);
+        var ev = new DiseaseCloneEvent((ent, Comp<DiseaseComponent>(ent)));
+        RaiseLocalEvent(source, ref ev);
         return ent;
     }
 
