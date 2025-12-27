@@ -23,3 +23,16 @@
       amount: 5
   products:
     Johntonite: 10
+
+- type: reaction
+  id: NitricAcid
+  impact: Medium
+  minTemp: 357
+  reactants:
+    Saltpeter:
+      amount: 2
+    SulfuricAcid:
+      amount: 1
+  products:
+    NitricAcid: 2
+    PotassiumSulfate: 1
