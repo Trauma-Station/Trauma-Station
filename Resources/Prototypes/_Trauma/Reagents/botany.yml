@@ -14,7 +14,7 @@
       effects:
       - !type:SatiateHunger
         conditions:
-        - !type:MetabilizerTypeCondition
+        - !type:MetabolizerTypeCondition
           type: [ Plant ]
 
 - type: reagent

@@ -11,7 +11,7 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:MetabilizerTypeCondition
+        - !type:MetabolizerTypeCondition
             type: [ Yowie ]
             inverted: true
         damage:
@@ -40,7 +40,7 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:MetabilizerTypeCondition
+        - !type:MetabolizerTypeCondition
           type: [ Yowie ]
           inverted: true
         damage:
@@ -60,7 +60,7 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:MetabilizerTypeCondition
+        - !type:MetabolizerTypeCondition
           type: [ Yowie ]
           inverted: true
         damage:
@@ -80,7 +80,7 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:MetabilizerTypeCondition
+        - !type:MetabolizerTypeCondition
           type: [ Yowie ]
           inverted: true
         damage:
