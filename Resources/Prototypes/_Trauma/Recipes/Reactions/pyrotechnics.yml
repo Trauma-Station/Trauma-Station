@@ -42,6 +42,7 @@
 
 - type: reaction
   id: Octogen
+  priority: 5 # god please let this react BEFORE cyclonite
   reactants:
     NitricAcid:
       amount: 1
