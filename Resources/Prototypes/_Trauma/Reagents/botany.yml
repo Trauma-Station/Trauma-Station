@@ -14,8 +14,8 @@
       effects:
       - !type:SatiateHunger
         conditions:
-        - !type:OrganType
-          type: Plant
+        - !type:MetabilizerTypeCondition
+          type: [ Plant ]
 
 - type: reagent
   id: AmmoniumNitrate
