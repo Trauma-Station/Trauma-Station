@@ -1335,10 +1335,10 @@
       metabolismRate: 0.03 # trauma - harder to make, buffed to 33s/u
       effects:
       - !type:HealthChange
-        damage:
-          conditions: # trauma - this shouldn't be a magic RR unless liver transplant chem
+        conditions: # trauma - this shouldn't be a magic RR unless liver transplant chem
           - !type:MobStateCondition
             mobstate: Alive
+        damage:
           types:
             Poison: 0.1 # trauma
     Medicine:
