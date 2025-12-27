@@ -10,6 +10,7 @@
   recipeUnlocks:
   - NuclearFabricatorMachineCircuitboard
   - NuclearReactorMonitorComputerCircuitboard
+  - GasTurbineMonitorComputerCircuitboard
   - UraniumReactorFuelRod
   - PlasmaReactorFuelRod
   - UraniumGlassReactorFuelRod
@@ -31,7 +32,7 @@
   id: NuclearPowerRecycling
   name: research-technology-nuclear-recycling
   icon:
-    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/nuclear_waste.rsi
+    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_parts.rsi
     state: nuclear_waste
   discipline: Industrial
   tier: 2

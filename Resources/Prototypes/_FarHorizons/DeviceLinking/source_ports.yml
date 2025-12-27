@@ -1,3 +1,9 @@
+- type: sourcePort
+  id: VitalsMonitorSender
+  name: signal-port-name-vitals-monitor-sender
+  description: signal-port-description-vitals-monitor-sender
+  defaultLinks: [ VitalsMonitorReceiverMed, VitalsMonitorReceiverStasis, BodyScannerReceiver ]
+
   # Nuclear Reactor
 - type: sourcePort
   id: NuclearReactorDataSender
@@ -15,3 +21,9 @@
   id: TurbineSpeedLow
   name: signal-port-name-gas-turbine-speed-low
   description: signal-port-description-gas-turbine-speed-low
+
+- type: sourcePort
+  id: GasTurbineDataSender
+  name: signal-port-name-gas-turbine-data-sender
+  description: signal-port-description-gas-turbine-data-sender
+  defaultLinks: [ GasTurbineDataReceiver ]
