@@ -1325,9 +1325,9 @@
   id: Formaldehyde
   name: reagent-name-formaldehyde
   group: Medicine
-  desc: reagent-desc-formaldehyde-trauma # Trauma
+  desc: reagent-desc-formaldehyde
   physicalDesc: reagent-physical-desc-thick
-  flavor: medicine
+  flavor: medicines
   color: "#FFA500"
   worksOnTheDead: true
   metabolisms:
