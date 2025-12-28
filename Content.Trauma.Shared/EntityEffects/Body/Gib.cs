@@ -65,7 +65,7 @@ public sealed class GibEffectSystem : EntityEffectSystem<TransformComponent, Gib
 
         var outer = _partQuery.TryComp(ent, out var part) && part.Body is {} bodyUid
             ? (bodyUid, null)
-            : (ent, ent.Comp);
+            : ent.AsNullable();
         _dropped.Clear();
         var contents = GibContentsOption.Drop;
         _gibbing.TryGibEntity(outer, (ent, gibbable), effect.GibType,
