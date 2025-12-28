@@ -1327,7 +1327,7 @@
   group: Medicine
   desc: reagent-desc-formaldehyde
   physicalDesc: reagent-physical-desc-thick
-  flavor: medicines
+  flavor: strange
   color: "#FFA500"
   worksOnTheDead: true
   metabolisms:
