@@ -1325,22 +1325,22 @@
   id: Formaldehyde
   name: reagent-name-formaldehyde
   group: Medicine
-  desc: reagent-desc-formaldehyde-trauma # trauma
+  desc: reagent-desc-formaldehyde-trauma # Trauma
   physicalDesc: reagent-physical-desc-thick
   flavor: medicine
   color: "#FFA500"
   worksOnTheDead: true
   metabolisms:
     Poison:
-      metabolismRate: 0.03 # trauma - harder to make, buffed to 33s/u
+      metabolismRate: 0.03 # Trauma - harder to make, buffed to 33s/u
       effects:
       - !type:HealthChange
-        conditions: # trauma - this shouldn't be a magic RR unless liver transplant chem
+        conditions: # Trauma - this shouldn't be a magic RR unless liver transplant chem
           - !type:MobStateCondition
             mobstate: Alive
         damage:
           types:
-            Poison: 0.1 # trauma
+            Poison: 0.1 # Trauma
     Medicine:
       metabolismRate: 0.03
       effects:

@@ -12,8 +12,8 @@
   physicalDesc: reagent-physical-desc-powdery
   color: white
   flavor: salty
-  boilingPoint: 881.4
-  meltingPoint: 324
+  boilingPoint: 1154.4
+  meltingPoint: 597
 
 - type: reagent
   id: Methane
@@ -22,8 +22,8 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#c4f5ff"
-  boilingPoint: -161.5
-  meltingPoint: -182.5
+  boilingPoint: 111.5
+  meltingPoint: 90.5
   metabolisms:
     Poison:
       metabolismRate: 0.5
@@ -40,8 +40,8 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#c4f5ff"
-  boilingPoint: -56.1
-  meltingPoint: -150.5
+  boilingPoint: 223.9
+  meltingPoint: 199.5
   metabolisms:
     Poison:
       metabolismRate: 0.5
@@ -58,8 +58,8 @@
   physicalDesc: reagent-physical-desc-sour
   flavor: sour
   color: tan
-  boilingPoint: 139.8
-  meltingPoint: -73.1
+  boilingPoint: 412.8
+  meltingPoint: 199.9
   metabolisms:
     Poison:
       metabolismRate: 0.5

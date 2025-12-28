@@ -45,8 +45,8 @@
   physicalDesc: reagent-physical-desc-abrasive
   flavor: acid
   color: "#FAFAFA"
-  boilingPoint: 83
-  meltingPoint: -42
+  boilingPoint: 356
+  meltingPoint: 231
   plantMetabolism:
   - !type:PlantAdjustToxins
     amount: 10
