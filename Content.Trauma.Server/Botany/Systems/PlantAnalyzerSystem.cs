@@ -177,13 +177,6 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 seedComp.Seed.Mutations.Clear();
             }
         }
-        else if (TryComp<PlantHolderComponent>(target, out var plantComp))
-        {
-            if (plantComp.Seed != null)
-            {
-                plantComp.Seed.Mutations.Clear();
-            }
-        }
         _audio.PlayPvs(ent.Comp.DeleteMutationEndSound, ent);
     }
     public void ReadScannedPlant(Entity<PlantAnalyzerComponent> ent, EntityUid target)  //Funkystation - Renamed to match plants instead of copying HealthAnalyzer func names
