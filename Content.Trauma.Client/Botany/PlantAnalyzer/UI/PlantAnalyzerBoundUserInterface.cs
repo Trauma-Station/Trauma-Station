@@ -76,7 +76,7 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
         if (_window != null)
         {
             _window._internalDatabaseNumber += -1;
-            SendMessage(new PlantAnalyzerDeleteDatabankEntry(index));
+            SendMessage(new PlantAnalyzerDeleteDatabankEntry(index - 1));
         }
     }
 
