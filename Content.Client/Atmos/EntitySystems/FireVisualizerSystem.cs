@@ -121,8 +121,8 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
             {
                 if (component.LightEntityHoly != null)
                 {
-                Del(component.LightEntityHoly.Value);
-                component.LightEntityHoly = null;
+                    Del(component.LightEntityHoly.Value);
+                    component.LightEntityHoly = null;
                 }
             }
             else
