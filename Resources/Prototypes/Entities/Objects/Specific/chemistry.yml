@@ -928,9 +928,6 @@
   - type: Storage
     grid:
     - 0,0,4,2 # Goobstation
-    whitelist:
-      tags:
-        - Pill # Trauma - Whitelisting storage
     quickInsert: true
     areaInsert: true
     areaInsertRadius: 1
