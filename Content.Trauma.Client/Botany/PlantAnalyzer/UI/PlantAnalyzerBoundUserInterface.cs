@@ -71,7 +71,7 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
     }
     public void DeleteDatabaseEntry(int index)
     {
-        if (index < -1)
+        if (index < 0)
             return;
         if (_window != null)
         {
@@ -82,7 +82,7 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
 
     public void SetGeneIndex(int index)
     {
-        if (index < -1)
+        if (index < 0)
             return;
         if (_window != null)
         {
@@ -93,7 +93,7 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
 
     public void SetDatabaseIndex(int index)
     {
-        if (index < -1)
+        if (index < 0)
             return;
         if (_window != null)
         {
