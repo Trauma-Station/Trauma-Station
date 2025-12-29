@@ -46,9 +46,9 @@
     - 0,0,4,1
     whitelist:
       tags:
-      - Bottle
+#      - Bottle # Trauma - Syringecase only stores syringes (no I dont care about the sprites, no I am not fixing them)
       - CentrifugeCompatible
-      - Dropper
+#      - Dropper # Trauma - Syringecase only stores syringes
       - Syringe
       - Medipen
 
