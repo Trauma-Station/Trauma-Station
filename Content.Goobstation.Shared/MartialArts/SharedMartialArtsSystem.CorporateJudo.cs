@@ -144,14 +144,7 @@ public partial class SharedMartialArtsSystem
             || !TryComp<PullableComponent>(target, out var pullable))
             return;
 
-        var knockdownTime = proto.ParalyzeTime;
-
-        var ev = new BeforeStaminaDamageEvent(1f);
-        RaiseLocalEvent(target, ref ev);
-
-        knockdownTime *= ev.Value;
-
-        _stun.TryKnockdown(target, knockdownTime, true, drop: proto.DropItems);
+        _stun.TryKnockdown(target, proto.ParalyzeTime, true, drop: proto.DropItems);
 
         _stamina.TakeStaminaDamage(target, proto.StaminaDamage);
 

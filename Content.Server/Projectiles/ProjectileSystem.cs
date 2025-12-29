@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Projectiles;
 using Content.Goobstation.Common.Weapons.Penetration;
+using Content.Shared._Shitmed.Targeting;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Destructible;
@@ -11,7 +12,6 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Goobstation.Maths.FixedPoint;
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Projectiles;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
@@ -26,7 +26,6 @@ public sealed class ProjectileSystem : SharedProjectileSystem
     [Dependency] private readonly DestructibleSystem _destructibleSystem = default!;
     [Dependency] private readonly GunSystem _guns = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
 
     public override void Initialize()
     {
@@ -69,15 +68,11 @@ public sealed class ProjectileSystem : SharedProjectileSystem
         if (TryComp(uid, out ProjectileMissTargetPartChanceComponent? missComp) &&
             !missComp.PerfectHitEntities.Contains(target))
             targetPart = TargetBodyPart.Chest;
-        var modifiedDamage = _damageableSystem.ChangeDamage((target, damageableComponent),
-            ev.Damage,
-            component.IgnoreResistances,
-            origin: component.Shooter,
-            targetPart: targetPart);
         // </Goob>
         var deleted = Deleted(target);
 
-        if (_damageableSystem.TryChangeDamage((target, damageableComponent), ev.Damage, out var damage, component.IgnoreResistances, origin: component.Shooter) && Exists(component.Shooter))
+        // Trauma - added targetPart
+        if (_damageableSystem.TryChangeDamage((target, damageableComponent), ev.Damage, out var damage, component.IgnoreResistances, origin: component.Shooter, targetPart: targetPart) && Exists(component.Shooter))
         {
             if (!deleted)
             {
