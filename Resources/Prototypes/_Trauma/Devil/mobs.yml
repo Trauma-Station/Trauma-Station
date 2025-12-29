@@ -41,6 +41,7 @@
     symmetry: Left
     slotId: hands # Shitmed
   - type: Devil
+    souls: 13
 
 - type: entity
   name: archdevil
@@ -88,3 +89,5 @@
   - type: ActionGrant
     actions:
     - ActionHellFire
+  - type: Devil
+    souls: 7

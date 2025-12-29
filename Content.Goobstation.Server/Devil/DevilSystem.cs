@@ -173,7 +173,7 @@ public sealed partial class DevilSystem : EntitySystem
             > 1 => DevilPowerLevel.Weak,
             _ => DevilPowerLevel.None
         };
-        if (devil.Comp.PowerLevel != currentPower)
+        if (devil.Comp.PowerLevel != currentPower && devil.Comp.PowerLevel != DevilPowerLevel.Powerful)
         {
             devil.Comp.PowerLevel = currentPower;
 
@@ -205,9 +205,10 @@ public sealed partial class DevilSystem : EntitySystem
                     pitchforkComp.PitchforkPrototype = "GreaterDevilPitchfork";
                 }
                 _poly.PolymorphEntity(devil, protoId);
+                // Spawn incursion
                 break;
             case DevilPowerLevel.Moderate:
-                // Change sprite to archdevil and cause demonic incursion
+                // Change sprite to devil
                 protoId = new ProtoId<PolymorphPrototype>("MobLesserDevil");
                 _poly.PolymorphEntity(devil, protoId);
                 break;
