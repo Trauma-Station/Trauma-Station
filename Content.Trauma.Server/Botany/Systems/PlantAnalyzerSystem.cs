@@ -135,14 +135,6 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 Del(target);
             }
         }
-        else if (TryComp<PlantHolderComponent>(target, out var plantComp))
-        {
-            if (plantComp.Seed != null)
-            {
-                // Copy genes to databank.
-                GetGeneFromInteger(ent, plantComp.Seed);
-            }
-        }
         _audio.PlayPvs(ent.Comp.ExtractEndSound, ent);
         SendDatabase(ent);
     }
@@ -163,13 +155,6 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                     return;
                 seedComp.Seed = protoSeed.Clone();
                 SetGeneFromInteger(ent, ref seedComp.Seed);
-            }
-        }
-        else if (TryComp<PlantHolderComponent>(target, out var plantComp))
-        {
-            if (plantComp.Seed != null)
-            {
-                SetGeneFromInteger(ent, ref plantComp.Seed);
             }
         }
         _audio.PlayPvs(ent.Comp.InjectEndSound, ent);
