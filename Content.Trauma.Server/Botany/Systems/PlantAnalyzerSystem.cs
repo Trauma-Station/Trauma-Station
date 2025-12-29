@@ -344,7 +344,8 @@ public sealed class PlantAnalyzerSystem : EntitySystem
 
     public void OnDeleteDatabaseEntry(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerDeleteDatabankEntry args)
     {
-        if (ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count <= 0)
+        int totalCount = ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count;
+        if (totalCount <= 0 || totalCount <= ent.Comp.DatabankIndex)
         {
             //SendCurrentIndex(ent);
             return;
