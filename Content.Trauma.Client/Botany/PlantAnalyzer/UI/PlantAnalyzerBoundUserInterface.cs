@@ -71,18 +71,18 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
     }
     public void DeleteDatabaseEntry(int index)
     {
-        if (index < 0)
+        if (index < -1)
             return;
         if (_window != null)
         {
             _window._internalDatabaseNumber += -1;
-            SendMessage(new PlantAnalyzerDeleteDatabankEntry(index - 1));
+            SendMessage(new PlantAnalyzerDeleteDatabankEntry(index));
         }
     }
 
     public void SetGeneIndex(int index)
     {
-        if (index < 0)
+        if (index < -1)
             return;
         if (_window != null)
         {
@@ -93,12 +93,12 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
 
     public void SetDatabaseIndex(int index)
     {
-        if (index <= 0)
+        if (index < -1)
             return;
         if (_window != null)
         {
             _window._internalGeneNumber = index - 1;
-            SendMessage(new PlantAnalyzerSetGeneIndex(index - 1, true));
+            SendMessage(new PlantAnalyzerSetGeneIndex(index, true));
         }
     }
 }
