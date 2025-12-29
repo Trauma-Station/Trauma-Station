@@ -1,0 +1,44 @@
+- type: entity
+  parent: [BaseWeaponLauncher, BaseSecurityEngineeringContraband, BaseGunWieldable]
+  id: WeaponLauncherSingularityBuster
+  name: singularity buster rocket launcher
+  description: An experimental rocket launcher designed to fire rockets capable of decomposing a singularity or tesla.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Launchers/buster_rocket.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Launchers/buster_rocket.rsi
+    slots:
+    - Back
+    - suitStorage #note the speed malus
+  - type: Item
+    shape:
+    - 0,0,5,2
+  - type: Gun
+    fireRate: 0.5
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CartridgeRocket
+    proto: CartridgeRocketSingularityBuster
+    capacity: 1
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+  - type: Appearance
+  - type: StaticPrice
+    price: 1000
+  - type: GunRequiresWield
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: ClothingSpeedModifier #Look at the size of this thing, absolute unit to carry on you
+    walkModifier: 0.7
+    sprintModifier: 0.7

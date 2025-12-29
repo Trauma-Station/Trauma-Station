@@ -126,7 +126,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifle
         priority: 1
         whitelist:
           tags:
@@ -197,7 +196,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifle
         priority: 1
         whitelist:
           tags:
@@ -241,7 +239,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifle
         priority: 1
         whitelist:
           tags:
@@ -291,7 +288,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifle
         priority: 1
         whitelist:
           tags:
@@ -379,7 +375,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifle
         priority: 1
         whitelist:
           tags:
@@ -413,6 +408,7 @@
     sprite: Objects/Weapons/Guns/Rifles/foam_rifle.rsi
   - type: Item
     sprite: Objects/Fun/Foam/foam_rifle_inhand_64x.rsi
+    size: Normal
     shape:
     - 0,0,3,0
   - type: BallisticAmmoProvider
@@ -433,3 +429,5 @@
       path: /Audio/Weapons/Guns/Empty/empty.ogg
     clumsyProof: true
   - type: PacifismAllowedGun
+  - type: StaticPrice
+    price: 100

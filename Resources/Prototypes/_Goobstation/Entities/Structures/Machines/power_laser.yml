@@ -103,6 +103,7 @@
 - type: entity
   parent: BasicHitscan
   id: HitscanPTL
+  name: PTL beam
   categories: [ HideSpawnMenu ]
   components:
   - type: HitscanBasicDamage

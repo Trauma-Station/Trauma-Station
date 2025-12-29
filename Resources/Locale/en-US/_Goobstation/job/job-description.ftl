@@ -34,3 +34,8 @@ job-description-roboticist = Build and maintain borgs and mechs. Keep the AI in 
 
 # Viro
 job-description-virologist = Study spreading viruses, produce cures for ailing crewmembers, experiment in creating beneficial viruses. Make sure pandemics don't spread.
+
+# Event restricted
+job-description-command-maid = Clean the bridge, command rooms, and everything else that command tells you to.
+job-description-security-clown = Do security's job, but don't forget to do it with your clown spice.
+job-description-party-maker = Throw the biggest party ever at this station!

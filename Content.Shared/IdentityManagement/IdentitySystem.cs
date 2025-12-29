@@ -1,4 +1,6 @@
-using Content.Goobstation.Common.Identity; // Goob
+// <Trauma>
+using Content.Goobstation.Common.Identity;
+// </Trauma>
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing;
@@ -9,6 +11,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.VoiceMask;
 using Robust.Shared.Containers;
 using Robust.Shared.Enums;
 using Robust.Shared.GameObjects.Components.Localization;
@@ -29,7 +32,6 @@ public sealed class IdentitySystem : EntitySystem
     [Dependency] private readonly SharedCriminalRecordsConsoleSystem _criminalRecordsConsole = default!;
     [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private readonly SharedIdCardSystem _idCard = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!; // Goobstation - Update component state on component toggle
 
     // The name of the container holding the identity entity
     private const string SlotName = "identity";
@@ -55,9 +57,7 @@ public sealed class IdentitySystem : EntitySystem
         SubscribeLocalEvent<IdentityComponent, DidUnequipHandEvent>((uid, _, _) => QueueIdentityUpdate(uid));
         SubscribeLocalEvent<IdentityComponent, WearerMaskToggledEvent>((uid, _, _) => QueueIdentityUpdate(uid));
         SubscribeLocalEvent<IdentityComponent, EntityRenamedEvent>((uid, _, _) => QueueIdentityUpdate(uid));
-
-        SubscribeLocalEvent<IdentityBlockerComponent, ComponentInit>(BlockerUpdateIdentity); // Goobstation - Update component state on component toggle
-        SubscribeLocalEvent<IdentityBlockerComponent, ComponentRemove>(BlockerUpdateIdentity); // Goobstation - Update component state on component toggle
+        SubscribeLocalEvent<IdentityComponent, VoiceMaskNameUpdatedEvent>((uid, _, _) => QueueIdentityUpdate(uid));
     }
 
     /// <summary>
@@ -213,7 +213,7 @@ public sealed class IdentitySystem : EntitySystem
         var ev = new SeeIdentityAttemptEvent();
 
         RaiseLocalEvent(target, ev);
-        return representation.ToStringKnown(!ev.Cancelled);
+        return representation.ToStringKnown(!ev.Cancelled, ev.NameOverride);
     }
 
     /// <summary>
@@ -262,17 +262,6 @@ public sealed class IdentitySystem : EntitySystem
 
         // If it didn't find a job, that's fine.
         return new(trueName, gender, ageString, presumedName, presumedJob);
-    }
-
-    // Goobstation - Update component state on component toggle
-    private void BlockerUpdateIdentity(EntityUid uid, IdentityBlockerComponent component, EntityEventArgs args)
-    {
-        var target = uid;
-
-        if (_inventory.TryGetContainingEntity(uid, out var containing))
-            target = containing.Value;
-
-        QueueIdentityUpdate(target);
     }
 
     #endregion

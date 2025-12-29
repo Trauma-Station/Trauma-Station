@@ -17,6 +17,21 @@ entity-effect-guidebook-insert-new-organ = {$chance ->
     *[other] insert
 } a {$organ} into the target part
 
+entity-effect-guidebook-add-to-chemicals = { $chance ->
+    [1] { $deltasign ->
+            [1] Adds
+            *[-1] Removes
+        }
+    *[other]
+        { $deltasign ->
+            [1] add
+            *[-1] remove
+        }
+} {NATURALFIXED($amount, 2)}u of {$reagent} { $deltasign ->
+    [1] to
+    *[-1] from
+} the solution
+
 entity-effect-guidebook-speak = Causes involuntary speech
 
 entity-effect-guidebook-scale-entity = Scales the target's size by ({$x}, {y})

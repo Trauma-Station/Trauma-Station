@@ -3,7 +3,8 @@ using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
 using Content.Shared.Cuffs;
 using Content.Shared.Body.Components;
-using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Body.Systems;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Actions;
@@ -15,7 +16,7 @@ namespace Content.Goobstation.Server.Slasher.Systems;
 // TODO: this can all go in shared
 public sealed class SlasherRegenerateSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
+    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
@@ -73,12 +74,8 @@ public sealed class SlasherRegenerateSystem : EntitySystem
     /// <param name="comp">The SlasherRegenerateComponent</param>
     private void TryInjectReagent(EntityUid target, SlasherRegenerateComponent comp)
     {
-        if (!TryComp<BloodstreamComponent>(target, out var bloodstream))
-            return;
-
-        if (!_solutions.ResolveSolution(target, bloodstream.ChemicalSolutionName, ref bloodstream.ChemicalSolution))
-            return;
-
-        _solutions.TryAddReagent(bloodstream.ChemicalSolution.Value, new ReagentId(comp.Reagent, null), FixedPoint2.New(comp.ReagentAmount), out _);
+        var solution = new Solution();
+        solution.AddReagent(comp.Reagent, FixedPoint2.New(comp.ReagentAmount));
+        _bloodstream.TryAddToBloodstream(target, solution);
     }
 }

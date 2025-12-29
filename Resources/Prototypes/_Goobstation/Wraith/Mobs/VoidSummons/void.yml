@@ -282,8 +282,6 @@
     understands:
     - Dog
     - TauCetiBasic
-  - type: Sprinter
-    staminaDrainRate: 3
   - type: MovementSpeedModifier
     baseWalkSpeed: 5
     baseSprintSpeed: 5

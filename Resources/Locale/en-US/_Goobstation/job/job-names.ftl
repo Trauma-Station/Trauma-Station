@@ -16,6 +16,11 @@ job-name-tider = Tider
 
 job-name-exec = Executive Access
 
+# event-resctricted jobs
+job-name-security-clown = Security Clown
+job-name-command-maid = Command Maid
+job-name-party-maker = Party Maker
+
 # Navy Stuff
 
 job-name-navy-officer = Navy Officer
@@ -42,6 +47,7 @@ job-name-mercenarycaptain = Mercenary Captain
 # Role timers - Make these alphabetical or I cut you (dont listen to upstream, i copied and pasted this, make it very un-alphabetical :godo:)
 
 JobBlueshieldOfficer = Blueshield Officer
+JobCommandMaid = Command Maid
 JobNanotrasenRepresentative = Nanotrasen Representative
 JobNanotrasenCareerTrainer = Nanotrasen Career Trainer
 JobHecuOperative = HECU Operative
@@ -53,6 +59,7 @@ JobGovernmentMan = The G-Man
 JobConquest = Conquest
 JobInspector = Central Command Auditor
 JobMercenaryCaptain = Mercenary Captain
+JobPartyMaker = Party Maker
 JobRoboticist = Roboticist
-
+JobSecurityClown = Security Clown
 JobVirologist = Virologist

@@ -95,6 +95,7 @@
     # - StypticStimulatorImplant # Uncomment if given to traitors, currently it's DS only implant
     - BinaryImplant
     - ChameleonControllerImplant
+    - VoiceMaskImplant
     deimplantFailureDamage:
       types:
         Caustic: 5 # Goobstation - unnerf implanters (why was it 50 genetic??)
@@ -307,6 +308,14 @@
   components:
   - type: Implanter
     implant: ChameleonControllerImplant
+
+- type: entity
+  id: VoiceMaskImplanter
+  name: voice mask implanter
+  parent: BaseImplantOnlyImplanterSyndi
+  components:
+  - type: Implanter
+    implant: VoiceMaskImplant
 
 #Nuclear Operative/Special implanters
 

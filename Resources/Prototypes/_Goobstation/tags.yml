@@ -401,9 +401,6 @@
   id: MagazineMagnumLeverRifle
 
 - type: Tag
-  id: MagazineMagnumSubMachineGun
-
-- type: Tag
   id: MagazineNailgun
 
 - type: Tag

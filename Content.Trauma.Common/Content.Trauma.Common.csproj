@@ -10,6 +10,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="../Content.ModuleManager/Content.ModuleManager.csproj" />
+		<ProjectReference Include="../Content.Goobstation.Maths/Content.Goobstation.Maths.csproj" />
 		<ProjectReference Include="../RobustToolbox/Robust.Shared/Robust.Shared.csproj" />
 	</ItemGroup>
 

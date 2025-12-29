@@ -133,10 +133,14 @@
     ClothingHeadHatCowboyBountyHunter: 1
     ToyFigurineBoxer: 1
     ToyFigurineMusician: 1
-    # <Goob>
+    # <Trauma>
     WeaponLauncherTaiwanPond: 1
     GrenadeToy: 5
     ClothingShoesResonant: 1
     ClothingNeckCloakResonant: 1
     ClothingUniformJumpsuitResonant: 1
-    # </Goob>
+    ClothingHeadHatPirate: 2
+    ClothingOuterCoatPirate: 2
+    ClothingUniformJumpsuitPirate: 2
+    ClothingEyesEyepatch: 2
+    # </Trauma>

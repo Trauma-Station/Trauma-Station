@@ -438,7 +438,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
             case SeedDataTypes.SeedDataType.Chemical:
                 foreach (var chemical in seed.Chemicals)
                 {
-                    ent.Comp.ChemicalBank.Add(new ChemData(chemical.Key, new SeedChemQuantityHelper(chemical.Value.Min, chemical.Value.Max, chemical.Value.PotencyDivisor, chemical.Value.Inherent)));
+                    ent.Comp.ChemicalBank.Add(new ChemData(chemical.Key, chemical.Value));
                 }
                 break;
             case SeedDataTypes.SeedDataType.GasConsume:

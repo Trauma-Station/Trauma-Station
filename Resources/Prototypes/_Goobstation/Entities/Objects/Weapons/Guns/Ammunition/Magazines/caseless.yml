@@ -15,14 +15,6 @@
     proto: null
 
 - type: entity
-  id: MagazineCaselessRifleEmpty
-  name: magazine (9.5mm any)
-  parent: BaseMagazineCaselessRifle
-  components:
-  - type: BallisticAmmoProvider
-    proto: null
-
-- type: entity
   id: MagazinePistolCaselessRifleSAPHE
   name: "pistol magazine (9.5mm SAP-HE)"
   parent: BaseMagazinePistolCaselessRifle

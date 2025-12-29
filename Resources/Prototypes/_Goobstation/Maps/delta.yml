@@ -57,7 +57,6 @@
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 1, 1 ]
             Botanist: [ 3, 4 ]
-            Boxer: [ 2, 2 ]
             Chaplain: [ 1, 1 ]
             Chef: [ 2, 3 ]
             Clown: [ 1, 1 ]
@@ -68,7 +67,6 @@
             Musician: [ 2, 2 ]
             Reporter: [ 2, 2 ]
             ServiceWorker: [ 3, 3 ]
-            Zookeeper: [ 1, 1 ]
             Passenger: [ -1, -1 ]
             # silicon
             StationAi: [ 1, 1 ]

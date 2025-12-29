@@ -46,6 +46,7 @@ using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Changeling.Systems;
 using Content.Goobstation.Shared.MartialArts.Components;
 using Content.Server.Actions;
+using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
 using Content.Shared.Emp;
@@ -64,6 +65,7 @@ using Content.Shared.Actions;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Body.Components;
 using Content.Shared.Camera;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -847,8 +849,13 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         // show alerts
         UpdateChemicals(uid, comp, 0);
+
+        if (!TryComp<BloodstreamComponent>(uid, out var blood))
+            return;
+
         // make their blood unreal
-        _blood.ChangeBloodReagent(uid, "BloodChangeling");
+        var volume = blood.BloodReferenceSolution.Volume;
+        _blood.ChangeBloodReagents((uid, blood), new([new("BloodChangeling", volume)]));
     }
 
     private void OnMobStateChange(EntityUid uid, ChangelingIdentityComponent comp, ref MobStateChangedEvent args)
