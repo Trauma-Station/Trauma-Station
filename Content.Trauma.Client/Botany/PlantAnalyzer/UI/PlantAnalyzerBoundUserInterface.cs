@@ -98,7 +98,7 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
         if (_window != null)
         {
             _window._internalGeneNumber = index - 1;
-            SendMessage(new PlantAnalyzerSetGeneIndex(index, true));
+            SendMessage(new PlantAnalyzerSetGeneIndex(index - 1, true));
         }
     }
 }
