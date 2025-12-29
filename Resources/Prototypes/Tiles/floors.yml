@@ -129,7 +129,7 @@
 - type: tile
   id: FloorSteel
   name: tiles-steel-floor
-  sprite: /Textures/Tiles/steel.png
+  sprite: /Textures/_Trauma/Tiles/steel.png # Trauma
   variants: 4
   placementVariants:
   - 1.0
@@ -398,7 +398,7 @@
 - type: tile
   id: FloorWhite
   name: tiles-white-floor
-  sprite: /Textures/Tiles/white.png
+  sprite: /Textures/_Trauma/Tiles/white.png # Trauma
   variants: 4
   placementVariants:
   - 1.0
@@ -582,7 +582,7 @@
 - type: tile
   id: FloorDark
   name: tiles-dark-floor
-  sprite: /Textures/Tiles/dark.png
+  sprite: /Textures/_Trauma/Tiles/dark.png # Trauma
   variants: 4
   placementVariants:
   - 1.0
