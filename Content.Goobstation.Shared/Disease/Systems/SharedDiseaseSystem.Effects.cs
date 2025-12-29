@@ -193,7 +193,7 @@ public partial class SharedDiseaseSystem
 
         if (effects.Count < 1)
         {
-            Log.Error($"Disease {ToPrettyString(ent)} attempted to remove a random effect, but had either no or only positive effects left.");
+            Log.Warning($"Disease {ToPrettyString(ent)} attempted to remove a random effect, but had either no or only positive effects left.");
             return null;
         }
 
@@ -226,7 +226,7 @@ public partial class SharedDiseaseSystem
 
         if (weights.Count == 0)
         {
-            Log.Error($"Disease {ToPrettyString(ent)} attempted to mutate to add an effect, but it has all available effects.");
+            Log.Warning($"Disease {ToPrettyString(ent)} attempted to mutate to add an effect, but it has all available effects.");
             return null;
         }
 
