@@ -169,14 +169,14 @@ public sealed class HoloCigarSystem : EntitySystem
         ent.Comp.Lit = !ent.Comp.Lit;
         Dirty(ent);
 
-        var state = ent.Comp.Lit ? SmokableState.Unlit : SmokableState.Lit;
-        var prefix = ent.Comp.Lit ? UnlitPrefix : LitPrefix;
+        var state = ent.Comp.Lit ? SmokableState.Lit : SmokableState.Unlit;
+        var prefix = ent.Comp.Lit ? LitPrefix : UnlitPrefix;
 
         _appearance.SetData(ent, SmokingVisuals.Smoking, state);
         _clothing.SetEquippedPrefix(ent, prefix);
         _items.SetHeldPrefix(ent, prefix);
 
-        if (ent.Comp.Lit)
+        if (!ent.Comp.Lit)
         {
             ent.Comp.MusicEntity = _audio.Stop(ent.Comp.MusicEntity);
             return;

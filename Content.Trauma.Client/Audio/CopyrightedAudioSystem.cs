@@ -9,14 +9,18 @@ namespace Content.Trauma.Client.Audio;
 
 public sealed class CopyrightedAudioSystem : EntitySystem
 {
-// entire thing is disabled on debug because its evil and debug asserts
-#if DEBUG
+// entire thing is disabled on debug because its evil and debug asserts immediately without engine update
+#if !DEBUG
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     private EntityQuery<AudioComponent> _query;
 
-    private bool _streamerMode;
+    /// <summary>
+    /// Whether streamer mode is enabled.
+    /// </summary>
+    [ViewVariables]
+    public bool StreamerMode;
 
     public override void Initialize()
     {
@@ -24,29 +28,29 @@ public sealed class CopyrightedAudioSystem : EntitySystem
 
         _query = GetEntityQuery<AudioComponent>();
 
-        SubscribeLocalEvent<CopyrightedAudioComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<CopyrightedAudioComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<CopyrightedAudioComponent, ComponentShutdown>(OnShutdown);
-        _cfg.OnValueChanged(TraumaCVars.StreamerMode, x => { _streamerMode = x; UpdateSounds(); }, true);
-        //Subs.CVar(_cfg, TraumaCVars.StreamerMode, x => { _streamerMode = x; UpdateSounds(); }, true);
+        //_cfg.OnValueChanged(TraumaCVars.StreamerMode, x => { StreamerMode = x; UpdateSounds(); }, true);
+        Subs.CVar(_cfg, TraumaCVars.StreamerMode, x => { StreamerMode = x; UpdateSounds(); }, true);
     }
 
+    // total dmca ANNIHILATION
     public override void FrameUpdate(float frameTime)
     {
         base.FrameUpdate(frameTime);
 
-        // TODO: this is fucking evil, but theres no way to set audio data without server overriding it
         UpdateSounds();
     }
 
-    private void OnInit(Entity<CopyrightedAudioComponent> ent, ref ComponentInit args)
+    private void OnStartup(Entity<CopyrightedAudioComponent> ent, ref ComponentStartup args)
     {
-        Update(ent.Owner);
+        SetMuted(ent);
     }
 
     private void OnShutdown(Entity<CopyrightedAudioComponent> ent, ref ComponentShutdown args)
     {
         if (!TerminatingOrDeleted(ent))
-            Update(ent.Owner);
+            SetMuted(ent, false);
     }
 
     /// <summary>
@@ -57,16 +61,21 @@ public sealed class CopyrightedAudioSystem : EntitySystem
         var query = AllEntityQuery<CopyrightedAudioComponent>();
         while (query.MoveNext(out var uid, out _))
         {
-            Update(uid);
+            SetMuted(uid);
         }
     }
 
-    public void Update(EntityUid uid)
+    public void SetMuted(EntityUid uid, bool muted = true)
     {
-        var state = _streamerMode ? AudioState.Paused : AudioState.Playing;
+        muted &= StreamerMode;
+        var state = muted ? AudioState.Paused : AudioState.Playing;
         var audio = _query.Comp(uid);
-        _audio.SetState(uid, state, component: audio);
-        audio.NetSyncEnabled = _streamerMode; // prevent server trolling it
+        _audio.SetState(uid, state, force: true, component: audio);
+
+        // prevent server state trolling it (jukebox mostly)
+        // TODO: uncomment and remove DEBUG check if engine pr goidamerged
+        //EntityManager.SetComponentNetSync(uid, audio, !muted);
+        audio.NetSyncEnabled = !muted;
     }
 #endif
 }
