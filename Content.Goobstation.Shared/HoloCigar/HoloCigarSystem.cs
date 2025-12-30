@@ -22,11 +22,10 @@ using Content.Shared.Smoking;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameStates;
 using Robust.Shared.Network;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.HoloCigar;
@@ -40,9 +39,8 @@ public sealed class HoloCigarSystem : EntitySystem
     [Dependency] private readonly ClothingSystem _clothing = default!;
     [Dependency] private readonly SharedItemSystem _items = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
 
     private const string LitPrefix = "lit";
@@ -53,7 +51,6 @@ public sealed class HoloCigarSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<HoloCigarComponent, GetVerbsEvent<AlternativeVerb>>(OnAddInteractVerb);
-        SubscribeLocalEvent<HoloCigarComponent, ComponentHandleState>(OnComponentHandleState);
 
         SubscribeLocalEvent<HoloCigarAffectedGunComponent, DroppedEvent>(OnDroppedEvent);
 
@@ -70,12 +67,7 @@ public sealed class HoloCigarSystem : EntitySystem
 
         AlternativeVerb verb = new()
         {
-            Act = () =>
-            {
-                HandleToggle(ent);
-                ent.Comp.Lit = !ent.Comp.Lit;
-                Dirty(ent);
-            },
+            Act = () => Toggle(ent),
             Message = Loc.GetString("holo-cigar-verb-desc"),
             Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/clock.svg.192dpi.png")),
             Text = Loc.GetString("holo-cigar-verb-text"),
@@ -91,11 +83,12 @@ public sealed class HoloCigarSystem : EntitySystem
         if (!TryComp<HoloCigarComponent>(ent.Comp.HoloCigarEntity, out var holoCigarComponent))
             return;
 
-        if (args.NewMobState == MobState.Dead)
-            _audio.Stop(holoCigarComponent.MusicEntity); // no music out of mouth duh
+        if (args.NewMobState != MobState.Dead)
+            return;
 
-        if (_net.IsServer)
-            _audio.PlayPvs(ent.Comp.DeathAudio, ent, AudioParams.Default.WithVolume(3f));
+        _audio.Stop(holoCigarComponent.MusicEntity); // no music out of mouth duh
+
+        _audio.PlayPredicted(ent.Comp.DeathAudio, ent, ent, AudioParams.Default.WithVolume(3f));
     }
 
     private void OnComponentShutdown(Entity<TheManWhoSoldTheWorldComponent> ent, ref ComponentShutdown args)
@@ -171,47 +164,30 @@ public sealed class HoloCigarSystem : EntitySystem
         _gun.RefreshModifiers(args.Item);
     }
 
-    private void HandleToggle(Entity<HoloCigarComponent> ent,
-        AppearanceComponent? appearance = null,
-        ClothingComponent? clothing = null)
+    private void Toggle(Entity<HoloCigarComponent> ent)
     {
-        if (!Resolve(ent, ref appearance, ref clothing) ||
-            !_gameTiming.IsFirstTimePredicted) // fuck predicting this shit
-            return;
+        ent.Comp.Lit = !ent.Comp.Lit;
+        Dirty(ent);
 
-        var state = ent.Comp.Lit ? SmokableState.Unlit : SmokableState.Lit;
-        var prefix = ent.Comp.Lit ? UnlitPrefix : LitPrefix;
+        var state = ent.Comp.Lit ? SmokableState.Lit : SmokableState.Unlit;
+        var prefix = ent.Comp.Lit ? LitPrefix : UnlitPrefix;
 
-        _appearance.SetData(ent, SmokingVisuals.Smoking, state, appearance);
-        _clothing.SetEquippedPrefix(ent, prefix, clothing);
+        _appearance.SetData(ent, SmokingVisuals.Smoking, state);
+        _clothing.SetEquippedPrefix(ent, prefix);
         _items.SetHeldPrefix(ent, prefix);
 
-        if (!_net.IsServer) // mary copium right here
-            return;
-
-        if (ent.Comp.Lit == false)
+        if (!ent.Comp.Lit)
         {
-            var audio = _audio.PlayPvs(ent.Comp.Music, ent);
-
-            if (audio is null)
-                return;
-            ent.Comp.MusicEntity = audio.Value.Entity;
+            ent.Comp.MusicEntity = _audio.Stop(ent.Comp.MusicEntity);
             return;
         }
 
-        _audio.Stop(ent.Comp.MusicEntity);
-    }
-
-    private void OnComponentHandleState(Entity<HoloCigarComponent> ent, ref ComponentHandleState args)
-    {
-        if (args.Current is not HoloCigarComponentState state)
+        // playing is not predicted as it spawns phantom audio for some reason
+        if (_net.IsClient || _audio.PlayPvs(ent.Comp.Music, ent)?.Entity is not {} audio)
             return;
 
-        if (ent.Comp.Lit == state.Lit)
-            return;
-
-        ent.Comp.Lit = state.Lit;
-        HandleToggle(ent);
+        EnsureComp<CopyrightedAudioComponent>(audio); // even a midi can cause copyright claims
+        ent.Comp.MusicEntity = audio;
     }
 
     #endregion

@@ -117,10 +117,13 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
             _sprite.LayerSetVisible((uid, sprite), indexHoly, onFireHoly);
 
             // If entity is not on fire, no need for light effects.
-            if (!onFireHoly && component.LightEntityHoly != null)
+            if (!onFireHoly)
             {
-                Del(component.LightEntityHoly.Value);
-                component.LightEntityHoly = null;
+                if (component.LightEntityHoly != null)
+                {
+                    Del(component.LightEntityHoly.Value);
+                    component.LightEntityHoly = null;
+                }
             }
             else
             {

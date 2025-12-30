@@ -122,6 +122,12 @@ public sealed partial class AlertPrototype : IPrototype, IInheritingPrototype
     public List<SpriteSpecifier> Icons = new();
 
     /// <summary>
+    /// Trauma - icon to use if severity is out of bounds.
+    /// </summary>
+    [DataField]
+    public SpriteSpecifier FallbackIcon = new SpriteSpecifier.Rsi(new("error.rsi"), "error");
+
+    /// <summary>
     /// An entity used for displaying the <see cref="Icons"/> in the UI control.
     /// </summary>
     [DataField]
@@ -208,12 +214,12 @@ public sealed partial class AlertPrototype : IPrototype, IInheritingPrototype
 
         if (severity < MinSeverity)
         {
-            throw new ArgumentOutOfRangeException(nameof(severity), $"Severity below minimum severity in {AlertKey}.");
+            return FallbackIcon; // Trauma - fallback instead of fucking the entire client
         }
 
         if (severity > MaxSeverity)
         {
-            throw new ArgumentOutOfRangeException(nameof(severity), $"Severity above maximum severity in {AlertKey}.");
+            return FallbackIcon; // Trauma - fallback instead of fucking the entire client
         }
 
         return Icons[severity.Value - _minSeverity];

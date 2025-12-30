@@ -1252,13 +1252,13 @@
   name: solid wall
   components:
   - type: Sprite
-    sprite: Structures/Walls/solid.rsi
+    sprite: _Trauma/Structures/Walls/solid.rsi # Trauma fuck you chud
   - type: WallReplacementMarker
   - type: Construction
     graph: Girder
     node: wall
   - type: Icon
-    sprite: Structures/Walls/solid.rsi
+    sprite: _Trauma/Structures/Walls/solid.rsi # Trauma fuck you chud
   - type: RCDDeconstructable
     cost: 6
     delay: 8

@@ -111,7 +111,7 @@ public sealed partial class PoweredSealableClothingSystem : SharedPoweredSealabl
             return;
         }
 
-        var severity = _battery.GetRemainingUses(battery.Value.AsNullable(), battery.Value.Comp.MaxCharge / 6f);
+        var severity = _battery.GetRemainingUses(battery.Value.AsNullable(), battery.Value.Comp.MaxCharge / 5f);
         _alertsSystem.ShowAlert(controlComp.WearerEntity.Value, comp.SuitPowerAlert, (short) severity);
     }
 
