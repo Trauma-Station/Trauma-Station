@@ -158,7 +158,7 @@
     spawned:
     - id: FoodMeatChicken
       amount: 5
-    - id: Bones # Trauma - Bones on butchering humanoids
+    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
       amount: 2 # birds have light bones, thus 1 less than other species.
   - type: Damageable
     damageContainer: Biological

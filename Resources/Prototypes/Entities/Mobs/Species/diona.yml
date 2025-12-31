@@ -73,7 +73,7 @@
     spawned:
       - id: FoodMeatPlant
         amount: 5
-      - id: Wood # Trauma - Bones on butchering humanoids. I AM NO TREE IM AN ENT.
+      - id: MaterialWoodPlank # Trauma - Bones on butchering humanoids. I AM NO TREE IM AN ENT.
         amount: 3
   - type: Bloodstream
     bloodReferenceSolution:
