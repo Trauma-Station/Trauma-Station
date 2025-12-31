@@ -179,22 +179,3 @@
         reagent: XenobioFelinidToxin
         amount: -50.0
       # TODO: add cat ears and tail
-
-- type: reagent
-  parent: Slime
-  id: XenobioGenderFluid
-  name: xenobio-reagent-genderfluid-name
-  desc: xenobio-reagent-genderfluid-desc
-  color: "#FF4DD2"
-  metabolisms:
-    Narcotic:
-      metabolismRate: 1
-      conditions:
-      - !type:ReagentCondition
-        reagent: XenobioGenderFluid
-        min: 5
-      effects:
-      - !type:AdjustReagent
-        reagent: XenobioGenderFluid
-        amount: -50.0
-      - !type:SexChange
