@@ -23,27 +23,7 @@ public sealed class FultonSystem : SharedFultonSystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<FultonedComponent, ComponentStartup>(OnFultonedStartup);
-        SubscribeLocalEvent<FultonedComponent, ComponentShutdown>(OnFultonedShutdown);
-    }
-
-    private void OnFultonedShutdown(EntityUid uid, FultonedComponent component, ComponentShutdown args)
-    {
-        Del(component.Effect);
-        component.Effect = EntityUid.Invalid;
-    }
-
-    private void OnFultonedStartup(EntityUid uid, FultonedComponent component, ComponentStartup args)
-    {
-        if (Exists(component.Effect))
-            return;
-
-        component.Effect = Spawn(EffectProto, new EntityCoordinates(uid, EffectOffset));
-        Dirty(uid, component);
-    }
+    // Trauma - moved initialize/startup/shutdown to trauma.shared
 
     public override void Update(float frameTime)
     {
