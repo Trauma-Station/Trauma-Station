@@ -1,0 +1,9 @@
+- type: entity
+  parent: SheetSteel
+  id: SheetSteel15
+  suffix: 15
+  components:
+  - type: Sprite
+    state: steel_2
+  - type: Stack
+    count: 15

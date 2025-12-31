@@ -1,3 +1,11 @@
+// <Trauma>
+using Content.Server._White.StoreDiscount;
+using Content.Server._White.StoreDiscount;
+using Content.Server.Polymorph.Systems;
+using Content.Shared.Mind;
+using Content.Shared.Polymorph;
+using System.Linq;
+// </Trauma>
 using System.Linq;
 using Content.Server.Store.Components;
 using Content.Goobstation.Maths.FixedPoint;
@@ -6,7 +14,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Store.Components;
-using Content.Server._White.StoreDiscount; // Goob
 using Content.Shared.Store.Events;
 using Content.Shared.UserInterface;
 using Robust.Shared.Prototypes;
@@ -26,6 +33,7 @@ public sealed partial class StoreSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StoreDiscountSystem _storeDiscount = default!; // WD EDIT
+    [Dependency] private readonly PolymorphSystem _polymorph = default!; // goob edit
 
     public override void Initialize()
     {
@@ -41,9 +49,17 @@ public sealed partial class StoreSystem : EntitySystem
         SubscribeLocalEvent<StoreComponent, OpenUplinkImplantEvent>(OnImplantActivate);
         SubscribeLocalEvent<StoreComponent, IntrinsicStoreActionEvent>(OnIntrinsicStoreAction);
 
+        SubscribeLocalEvent<StoreComponent, PolymorphedEvent>(OnPolymorphed); // goob edit
+
         InitializeUi();
         InitializeCommand();
         InitializeRefund();
+    }
+
+    // goob edit - store now transfers on pm
+    private void OnPolymorphed(Entity<StoreComponent> ent, ref PolymorphedEvent args)
+    {
+        _polymorph.CopyPolymorphComponent<StoreComponent>(ent, args.NewEntity);
     }
 
     private void OnMapInit(EntityUid uid, StoreComponent component, MapInitEvent args)

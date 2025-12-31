@@ -1,6 +1,8 @@
 ## Static
 
 - type: latheRecipePack
+  parent:
+  - BioGenIngredientsStaticTrauma # Trauma
   id: BioGenIngredientsStatic
   recipes:
   - BioGenMilk
@@ -31,6 +33,7 @@
   - BioGenPaperRolling1
 
 - type: latheRecipePack
+  abstract: true # Trauma - mutagen moved to non emag recipes
   id: BioGenEmagStatic
   recipes:
   - BioGenUnstableMutagen

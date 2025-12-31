@@ -199,6 +199,18 @@
   - BrigmedicEnvirogloves
   - ExclusiveItems # Trauma
 
+- type: roleLoadout
+  id: JobRadioHost
+  groups:
+  - CommonBackpack
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - Glasses
+  - ServiceWorkerEnvirohelm
+  - ServiceWorkerEnvirosuit
+  - ServiceWorkerEnvirogloves
+  - ExclusiveItems # Trauma
 
 # gives plasmaman a plasma breathing tank
 # other species get nothing
@@ -234,15 +246,16 @@
 - type: roleLoadout
   id: JobVirologist
   groups:
-   - GroupTankHarness
-   - MedicalDoctorHead
-   - MedicalMask
-   - VirologistJumpsuit
-   - MedicalGloves
-   - VirologistBackpack
-   - VirologistOuterClothing
-   - MedicalShoes
-   - VirologistPDA
-   - SurvivalMedical
-   - Trinkets
-   - GroupSpeciesBreathToolMedical
+  - GroupTankHarness
+  - MedicalDoctorHead
+  - MedicalMask
+  - VirologistJumpsuit
+  - MedicalGloves
+  - VirologistBackpack
+  - VirologistOuterClothing
+  - MedicalShoes
+  - VirologistPDA
+  - SurvivalMedical
+  - Trinkets
+  - GroupSpeciesBreathToolMedical
+  - ExclusiveItems # Trauma
