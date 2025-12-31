@@ -8,6 +8,34 @@
 # WallSolid: Window
 # Table: null
 
+# <Trauma> - too lazy to port debugoks multi migration thing
+# 2025-10-30
+DVSmartFridgeMedical: SmartFridgeMedical
+
+# 2025-11-12
+Terminus: null
+
+# 2025-11-23
+MiniatureEnergyCrossbow: WeaponEnergyCrossbow
+
+# 2025-11-28
+PlushieXeve: null
+# 2025-12-08
+SuitStorageBlueshield: null # it didnt fucking have anything
+
+# 2025-12-19
+FelinidCube: HumanCube
+TajaranCube: HumanCube
+VulpkaninCube: HumanCube
+OrganFelinidEars: ClothingHeadHatCatEars
+PlushieMnwaar: null # fuck you
+
+# 2025-12-28
+MagazineCaselessRifleShortPractice: MagazinePistolPractice
+MagazineMagnumSubMachineGunPractice: MagazinePistolPractice
+BoxMagazineMagnumSubMachineGun: BoxMagazineRifle
+# </Trauma>
+
 # Goobstation - Submarine from DeltaV
 AirlockBoxerGlassLocked: AirlockServiceGlassLocked
 AirlockClownGlassLocked: AirlockServiceGlassLocked
@@ -232,7 +260,7 @@ lanternextrabright: LanternFlash
 
 # 2023-08-04
 BoxMagazineLightRifleHighVelocity: BoxMagazineLightRifle
-BoxMagazineMagnumSubMachineGunHighVelocity: BoxMagazineMagnumSubMachineGun
+BoxMagazineMagnumSubMachineGunHighVelocity: null
 BoxMagazinePistolCaselessRifleHighVelocity: BoxMagazinePistolCaselessRifle
 BoxMagazinePistolHighCapacityHighVelocity: BoxMagazinePistolHighCapacity
 BoxMagazinePistolHighVelocity: BoxMagazinePistol
@@ -253,17 +281,17 @@ MagazineBoxLightRifleHighVelocity: MagazineBoxLightRifle
 MagazineBoxMagnumHighVelocity: MagazineBoxMagnum
 MagazineBoxPistolHighVelocity: MagazineBoxPistol
 MagazineBoxRifleHighVelocity: MagazineBoxRifle
-MagazineCaselessRifleHighVelocity: MagazineCaselessRifle
-MagazineCaselessRifleShortHighVelocity: MagazineCaselessRifleShort
+MagazineCaselessRifleHighVelocity: MagazinePistolCaselessRifle
+MagazineCaselessRifleShortHighVelocity: null
 MagazineLightRifleHighVelocity: MagazineLightRifle
-MagazineMagnumSubMachineGunHighVelocity: MagazineMagnumSubMachineGun
+MagazineMagnumSubMachineGunHighVelocity: null
 MagazinePistolCaselessRifleHighVelocity: MagazinePistolCaselessRifle
 MagazinePistolHighCapacityHighVelocity: MagazinePistolHighCapacity
 MagazinePistolHighVelocity: MagazinePistol
 MagazinePistolSubMachineGunHighVelocity: MagazinePistolSubMachineGun
 MagazineRifleHighVelocity: MagazineRifle
 SpeedLoaderMagnumHighVelocity: SpeedLoaderMagnum
-SpeedLoaderPistolHighVelocity: SpeedLoaderPistol
+SpeedLoaderPistolHighVelocity: null
 
 # 2023-08-07
 #If the name is anything to go off of, these are presumably just CEV-Eris versions of the snow rock (which we already have.)
@@ -500,12 +528,12 @@ MagazinePistolRubber: MagazinePistol
 MagazinePistolSubMachineGunRubber: MagazinePistolSubMachineGun
 MagazinePistolCaselessRifleRubber: MagazinePistolCaselessRifle
 MagazineMagnumRubber: MagazineMagnum
-MagazineMagnumSubMachineGunRubber: MagazineMagnumSubMachineGun
+MagazineMagnumSubMachineGunRubber: null
 MagazineLightRifleRubber: MagazineLightRifle
 MagazineRifleRubber: MagazineRifle
-MagazineCaselessRifleRubber: MagazineCaselessRifle
-MagazineCaselessRifleShortRubber: MagazineCaselessRifleShort
-SpeedLoaderPistolRubber: SpeedLoaderPistol
+MagazineCaselessRifleRubber: MagazinePistolCaselessRifle
+MagazineCaselessRifleShortRubber: null
+SpeedLoaderPistolRubber: null
 SpeedLoaderMagnumRubber: SpeedLoaderMagnum
 MagazineBoxPistolRubber: MagazineBoxPistol
 # RIP box of magnum rubbers 202X to 2024
@@ -521,7 +549,7 @@ BoxMagazinePistolSubMachineGunRubber: BoxMagazinePistolSubMachineGun
 BoxMagazineLightRifleRubber: BoxMagazineLightRifle
 BoxMagazineRifleRubber: BoxMagazineRifle
 BoxMagazineCaselessRifleRubber: BoxMagazinePistolCaselessRifle
-BoxMagazineMagnumSubMachineGunRubber: BoxMagazineMagnumSubMachineGun
+BoxMagazineMagnumSubMachineGunRubber: null
 WeaponPistolMk58Nonlethal: WeaponPistolMk58
 WeaponPistolN1984Nonlethal: WeaponPistolN1984
 WeaponSubMachineGunDrozdRubber: WeaponSubMachineGunDrozd
@@ -938,7 +966,6 @@ PrefilledSyringe: Syringe
 BibleTanakh: null
 BibleSatanic: null
 
-
 # 2025-10-08
 ClothingBeltAssault: ClothingBeltMilitaryWebbing
 WarpPointBombing: null
@@ -958,24 +985,24 @@ AirlockBlueshieldOfficerCommandGlassLocked: AirlockCentralCommandGlassLocked
 # 2025-10-28
 DrinkKiraSpecial: DrinkOrangeLimeSodaGlass
 
-# Trauma - 2025-10-30
-DVSmartFridgeMedical: SmartFridgeMedical
+# 2025-11-08
+DebugSMES: SMESBasicEmpty
+DebugSubstation: SubstationBasicEmpty
+DebugSubstationWall: BaseSubstationWall
+DebugAPC: BaseAPC
+MagazineCaselessRifle: MagazinePistolCaselessRifle
+MagazineCaselessRiflePractice: MagazinePistolCaselessRiflePractice
+SpeedLoaderPistol: null
+SpeedLoaderPistolPractice: null
 
-# Trauma - 2025-11-12
-Terminus: null
+# 2025-12-05
+GlowstickBase: GlowstickGreen
 
-# Trauma - 2025-11-23
-MiniatureEnergyCrossbow: WeaponEnergyCrossbow
+# 2025-12-06
+SpawnPointZookeeper: null
+SpawnPointBoxer: null
 
-# Trauma - 2025-11-28
-PlushieXeve: null
-
-# Trauma - 2025-12-08
-SuitStorageBlueshield: null # it didnt fucking have anything
-
-# Trauma - 2025-12-19
-FelinidCube: HumanCube
-TajaranCube: HumanCube
-VulpkaninCube: HumanCube
-OrganFelinidEars: ClothingHeadHatCatEars
-PlushieMnwaar: null # fuck you
+# 2025-12-07
+FigureSpawner: MechFigurineSpawner50
+ToySpawner: PlushieSpawner50
+SpacemenFigureSpawner: SpacemenFigurineSpawner90

@@ -15,7 +15,7 @@
 
 - type: edgeSpreader
   id: Smoke
-  updatesPerSecond: 16 # goob edit - this isn't even used anywhere.
+  updatesPerSecond: 8
 
 - type: edgeSpreader
   id: MetalFoam

@@ -1,0 +1,8 @@
+- type: entity
+  parent: MeleeDebugInfectFlu
+  id: MeleeDebugInfectQuiet
+  name: quiet stick
+  description: I did not choose to be Quiet.
+  components:
+  - type: DiseaseOnHit
+    disease: DiseaseVocalParasitesTauCetiBasic

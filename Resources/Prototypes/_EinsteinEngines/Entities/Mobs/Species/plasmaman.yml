@@ -77,8 +77,10 @@
     bloodlossHealDamage:
       types:
         Blunt: 0
-    bloodRefreshAmount: 0
-    bloodMaxVolume: 0
+    bloodReferenceSolution: # just so they can metabolise stuff, no damage etc
+      reagents:
+        - ReagentId: Plasma
+          Quantity: 300
   - type: Damageable
     damageModifierSet: Plasmaman
 

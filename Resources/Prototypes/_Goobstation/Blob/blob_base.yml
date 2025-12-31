@@ -21,7 +21,6 @@
       - SlowedDown
       - Electrocution
       - PressureImmunity
-      - StaminaModifier
       - SeeAll
       - Flashed
     - type: Reactive

@@ -13,7 +13,6 @@ public sealed class XenomorphInfectionSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;

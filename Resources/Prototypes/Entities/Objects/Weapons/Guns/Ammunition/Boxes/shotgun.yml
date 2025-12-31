@@ -1,24 +1,7 @@
-# SPDX-FileCopyrightText: 2024 Boaz1111 <149967078+Boaz1111@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Plykiya <plykiya@protonmail.com>
-# SPDX-FileCopyrightText: 2024 SpaceRox1244 <138547931+SpaceRox1244@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 K-Dynamic <20566341+K-Dynamic@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ps3Moira <113228053+ps3moira@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
+  abstract: true
   parent: BaseItem
   id: BaseAmmoProvider
-  abstract: true
   components:
   - type: ContainerContainer
     containers:
@@ -29,9 +12,9 @@
     sprite: Objects/Storage/boxes.rsi
 
 - type: entity
+  abstract: true
   parent: BaseAmmoProvider
   id: AmmoProviderShotgunShell
-  abstract: true
   components:
     # Goobstation edit start
     - type: EmitSoundOnPickup
@@ -63,6 +46,7 @@
   parent: AmmoProviderShotgunShell
   id: BoxBeanbag
   name: ammunition box (12 Gauge beanbag) # Goob edit
+  description: A cardboard box of 12 Gauge shotgun shells. Intended to hold less-than-lethal beanbag ammunition. # Goob
   components:
     - type: BallisticAmmoProvider
       proto: ShellShotgunBeanbag
@@ -75,9 +59,10 @@
       - state: beanbag
 
 - type: entity
-  name: ammunition box (12 Gauge pellet) # Goob edit
   parent: AmmoProviderShotgunShell
   id: BoxLethalshot
+  name: ammunition box (12 Gauge pellet) # Goob edit
+  description: A cardboard box of 12 Gauge shotgun shells. Intended to hold general-purpose kinetic ammunition. # Goob
   components:
     - type: BallisticAmmoProvider
       proto: ShellShotgun
@@ -90,9 +75,10 @@
       - state: lethal
 
 - type: entity
-  name: ammunition box (12 Gauge slug) # Goob edit
   parent: AmmoProviderShotgunShell
   id: BoxShotgunSlug
+  name: ammunition box (12 Gauge slug) # Goob edit
+  description: A cardboard box of 12 Gauge shotgun shells. Intended to hold long-ranged slug ammunition. # Goob
   components:
     - type: BallisticAmmoProvider
       proto: ShellShotgunSlug
@@ -109,9 +95,10 @@
       - state: slug
 
 - type: entity
-  name: ammunition box (12 Gauge flare) # Goob edit
   parent: AmmoProviderShotgunShell
   id: BoxShotgunFlare
+  name: ammunition box (12 Gauge flare) # Goob edit
+  description: A cardboard box of 12 Gauge shotgun shells. Intended to hold illuminating flare ammunition. # Goob
   components:
     - type: BallisticAmmoProvider
       proto: ShellShotgunFlare
@@ -124,9 +111,10 @@
       - state: flare
 
 - type: entity
-  name: ammunition box (12 Gauge incendiary) # Goob edit
   parent: AmmoProviderShotgunShell
   id: BoxShotgunIncendiary
+  name: ammunition box (12 Gauge incendiary) # Goob edit
+  description: A cardboard box of 12 Gauge shotgun shells. Intended to hold self-igniting incendiary ammunition. # Goob
   components:
     - type: BallisticAmmoProvider
       proto: ShellShotgunIncendiary
@@ -139,9 +127,10 @@
       - state: incendiary
 
 - type: entity
-  name: ammunition box (12 Gauge uranium) # Goob edit
   parent: AmmoProviderShotgunShell
   id: BoxShotgunUranium
+  name: ammunition box (12 Gauge uranium) # Goob edit
+  description: A cardboard box of 12 Gauge shotgun shells. Intended to hold exotic uranium-core ammunition. # Goob
   components:
     - type: BallisticAmmoProvider
       proto: ShellShotgunUranium
@@ -158,9 +147,10 @@
       - state: uranium
 
 - type: entity
-  name: ammunition box (12 Gauge practice) # Goob edit
   parent: AmmoProviderShotgunShell
   id: BoxShotgunPractice
+  name: ammunition box (12 Gauge practice) # Goob edit
+  description: A cardboard box of 12 Gauge shotgun shells. Intended to hold harmless practice ammunition.
   components:
     - type: BallisticAmmoProvider
       proto: ShellShotgunPractice
@@ -173,9 +163,10 @@
       - state: practice
 
 - type: entity
-  name: ammunition box (12 Gauge tranquilizer) # Goob edit
   parent: AmmoProviderShotgunShell
   id: BoxShellTranquilizer
+  name: ammunition box (12 Gauge tranquilizer) # Goob edit
+  description: A cardboard box of 12 Gauge shotgun shells. Intended to hold nonlethal tranquilizer ammunition. # Goob
   components:
     - type: BallisticAmmoProvider
       proto: ShellTranquilizer

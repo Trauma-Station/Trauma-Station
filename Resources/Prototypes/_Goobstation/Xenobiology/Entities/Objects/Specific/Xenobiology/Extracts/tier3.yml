@@ -1,0 +1,172 @@
+- type: entity
+  id: RedSlimeExtract
+  parent: BaseSlimeExtract
+  name: red slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _Goobstation/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#ff3333"
+  - type: Reactive
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReaction
+      - !type:SpawnEntity
+        entity: XenobioVolatileRedExtractJelly
+    - reagents: [ Plasma ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReagent
+      - !type:AdjustReagent
+        reagent: XenobioJellyRed
+        amount: 1
+    - reagents: [ Blood ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReaction
+      - !type:RelayNearby
+        compName: NpcFactionMember
+        range: 3
+        effect: !type:ChangeFaction
+          newFaction: AllHostile # BILLIONS MUST KILL
+          duration: 30
+  - type: Tag
+    tags:
+    - XenobiologyRedExtract
+
+- type: entity
+  id: GreenSlimeExtract
+  parent: BaseSlimeExtract
+  name: green slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _Goobstation/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#4dff4d"
+  - type: Reactive
+    reactions:
+    - reagents: [ Radium ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReagent
+      - !type:AdjustReagent
+        reagent: XenobioFelinidToxin # EVIL
+        amount: 5
+    - reagents: [ Plasma ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReagent
+      - !type:AdjustReagent
+        reagent: XenobioJellyGreen
+        amount: 5
+    - reagents: [ Blood ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReagent
+      - !type:AdjustReagent
+        reagent: XenobioHumanToxin
+        amount: 5
+  - type: Tag
+    tags:
+    - XenobiologyGreenExtract
+
+- type: entity
+  id: PinkSlimeExtract
+  parent: BaseSlimeExtract
+  name: pink slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _Goobstation/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#ff33cc"
+  - type: Reactive
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReaction
+      - !type:RelayNearby
+        compName: PlantHolder # TODO: may need to change this if botany ecs ever gets merged
+        range: 5
+        effect: !type:PlantAdjustMutationLevel
+    - reagents: [ Plasma ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReagent
+      - !type:AdjustReagent
+        reagent: XenobioJellyPink
+        amount: 10
+    - reagents: [ Blood ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReagent
+      - !type:AdjustReagent
+        reagent: XenobioGenderFluid
+        amount: 5
+  - type: Tag
+    tags:
+    - XenobiologyPinkExtract
+
+- type: entity
+  id: GoldSlimeExtract
+  parent: BaseSlimeExtract
+  name: gold slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _Goobstation/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#e8b923"
+      shader: XenoMetallic
+  - type: Reactive
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractEvil
+      - !type:Jitter
+        time: 3
+        frequency: 20
+      - !type:SpawnEntity
+        entity: RPassiveMobSpawner
+        number: 5
+    - reagents: [ Plasma ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractEvil
+      - !type:Jitter
+        time: 3
+        frequency: 20
+      - !type:SpawnEntity
+        entity: RHostileMobSpawner
+        number: 5
+    - reagents: [ Blood ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractEvil
+      - !type:Jitter
+        time: 3
+        frequency: 20
+      - !type:SpawnEntity
+        entity: RNeutralMobSpawner
+        number: 5
+  - type: Tag
+    tags:
+    - XenobiologyGoldExtract

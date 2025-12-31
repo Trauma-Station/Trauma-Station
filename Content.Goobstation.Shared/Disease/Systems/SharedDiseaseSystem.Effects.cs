@@ -185,7 +185,7 @@ public partial class SharedDiseaseSystem
             * (effect.ProgressScale ? args.Disease.Comp.InfectionProgress : 1f);
     }
 
-    private Entity<DiseaseEffectComponent>? RemoveRandomEffect(Entity<DiseaseComponent> ent, bool negativeOnly = false)
+    private Entity<DiseaseEffectComponent>? RemoveRandomEffect(Entity<DiseaseComponent> ent, bool negativeOnly = false, bool allowFail = false)
     {
         // evil linq but how often is this gonna be called
         var effects = negativeOnly ? ent.Comp.Effects.Where(e => _effectQuery.TryComp(e, out var eff) && eff.Complexity > 0).ToList()
@@ -193,7 +193,8 @@ public partial class SharedDiseaseSystem
 
         if (effects.Count < 1)
         {
-            Log.Error($"Disease {ToPrettyString(ent)} attempted to remove a random effect, but had either no or only positive effects left.");
+            if (!allowFail)
+                Log.Error($"Disease {ToPrettyString(ent)} attempted to remove a random effect, but had either no or only positive effects left.");
             return null;
         }
 
@@ -226,7 +227,7 @@ public partial class SharedDiseaseSystem
 
         if (weights.Count == 0)
         {
-            Log.Error($"Disease {ToPrettyString(ent)} attempted to mutate to add an effect, but it has all available effects.");
+            Log.Warning($"Disease {ToPrettyString(ent)} attempted to mutate to add an effect, but it has all available effects.");
             return null;
         }
 

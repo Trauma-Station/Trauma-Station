@@ -21,7 +21,7 @@ namespace Content.Shared._EinsteinEngines.Flight;
 
 /// <summary>
 ///     Adds an action that allows the user to become temporarily
-///     weightless at the cost of stamina and hand usage.
+///     weightless at the cost of hand usage.
 /// </summary>
 [RegisterComponent, NetworkedComponent(), AutoGenerateComponentState]
 public sealed partial class FlightComponent : Component
@@ -37,33 +37,6 @@ public sealed partial class FlightComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool On;
-
-    /// <summary>
-    ///     Stamina drain per second when flying
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float StaminaDrainRate = 13.0f;
-
-    /// <summary>
-    ///     By how much do we multiply stamina recovery while flying?
-    /// </summary>
-    /// <remarks>
-    ///     This is used to compensate for our reduction of stamina drains below.
-    /// </remarks>
-    [DataField, AutoNetworkedField]
-    public float StaminaRegenMultiplier = 0.25f;
-
-    /// <summary>
-    ///     How much do we multiply stamina drains while theres a StaminaModifierComponent?
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float StaminaDrainMultiplier = 0.85f;
-
-    /// <summary>
-    ///     String key to identify the stamina drain within the dictionary.
-    /// </summary>
-    [DataField]
-    public string StaminaDrainKey = "flight";
 
     /// <summary>
     ///     DoAfter delay until the user becomes weightless.

@@ -87,6 +87,7 @@
     - localdelete
     - fullstatereset
     - dumpentities
+    - showwallmounts
     - showaccessreaders
     - quickinspect
     - showaudiomuffle # Trauma
@@ -99,6 +100,7 @@
     - showsubfloorforever
     - toggleautosave
     - toggledecals
+    - showwallmounts
     - showaccessreaders
 
 - Flags: QUERY

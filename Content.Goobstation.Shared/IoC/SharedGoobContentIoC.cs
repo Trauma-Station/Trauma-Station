@@ -10,8 +10,7 @@ namespace Content.Goobstation.Shared.IoC;
 
 internal static class SharedGoobContentIoC
 {
-    internal static void Register()
+    internal static void Register(IDependencyCollection collection)
     {
-        var instance = IoCManager.Instance!;
     }
 }

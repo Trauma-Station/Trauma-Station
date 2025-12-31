@@ -19,20 +19,27 @@
   - quantity: 5
     weight: 0.5
     reagents:
-    - Omnizine
-    - Nocturine
-    - Lexorin
-    - Honk
-    - BuzzochloricBees
+    # <Trauma>
     - Stimulants
-    # Goobstation
+    - Nocturine
     - Tranquility
     - BingleJuice
     - JuiceThatMakesYouHew
     - Carpolin
+    # </Trauma>
+    - Omnizine
+    - Impedrezene
+    - Fresium
+    - HeartbreakerToxin
+    - Honk
+    - BuzzochloricBees
   - quantity: 5
     weight: 1
     reagents:
+    # <Trauma>
+    - Genecide
+    - Fentanyl
+    # </Trauma>
     - Cognizine
     - Toxin
     - Leporazine
@@ -51,12 +58,16 @@
     - ChangelingSting
     - CogChamp
     - JuiceThatMakesYouWeh
-    # Goobstation
-    - Genecide
-    - Fentanyl
+    - TearGas
+    - Lipolicide
+    - Benzene
   - quantity: 5
     weight: 2
     reagents:
+    # <Trauma>
+    - Ibuprofen
+    - Tilenol
+    # </Trauma>
     - Desoxyephedrine
     - ChloralHydrate
     - Ipecac
@@ -80,12 +91,15 @@
     - Cola
     - Diphenhydramine
     - Iron
-    # Goobstation
-    - Ibuprofen
-    - Tilenol
+    - Bleach
+    - Mannitol
   - quantity: 10
     weight: 3
     reagents:
+    # <Trauma>
+    - Tirimol
+    - Probital
+    # </Trauma>
     - Bicaridine
     - Dermaline
     - Ephedrine
@@ -104,7 +118,7 @@
     - Ash
     - SodiumCarbonate
     - SpaceDrugs
-    - MuteToxin
+    - SpaceGlue
     - JuiceBerryPoison
     - Pilk
     - Posca
@@ -117,9 +131,9 @@
     - Potassium
     - Fluorine
     - Aluminium
-    # Goobstation
-    - Tirimol
-    - Probital
+    - Wine
+    - Coffee
+    - Beer
   - quantity: 10
     weight: 3.5
     reagents:
@@ -142,3 +156,23 @@
     - TableSalt
     - Chlorine
     - Mercury
+
+- type: weightedRandomFillSolution
+  id: EvilRandomFillSolution
+  fills:
+  - quantity: 0.1 # Common but low quantity
+    weight: 20
+    reagents:
+    - Vestine
+  - quantity: 0.5 # High quantity but uncommon
+    weight: 10
+    reagents:
+    - Stimulants
+    - MuteToxin
+  - quantity: 0.5 # High quantity but very rare
+    weight: 1
+    reagents:
+    - Tazinide
+    - Lead
+    - Nocturine
+    - Lexorin

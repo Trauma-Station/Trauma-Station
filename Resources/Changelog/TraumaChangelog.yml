@@ -862,3 +862,79 @@ Entries:
       message: Added pirate clothes to hacked autodrobes.
   id: 98
   time: '2025-12-22T16:02:57.0000000+00:00'
+- author: Speebro
+  changes:
+    - type: Add
+      message: >-
+        Ported Tryded's chemical explosives PR, adding three new explosives and
+        a long list of chemicals to make them!
+    - type: Tweak
+      message: >-
+        Formaldehyde's recipe is more difficult, to make creating the new
+        explosives harder
+    - type: Tweak
+      message: >-
+        In exchange, formaldehyde is ~60% longer lasting in corpses, and no
+        longer deals poison damage to the dead
+  id: 99
+  time: '2025-12-28T13:57:42.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Harpy flight no longer has any stamina interactions.
+    - type: Tweak
+      message: Botany can still mutate hyperzine and nocturine using mutagen.
+    - type: Tweak
+      message: All borgs still have their tool modules.
+  id: 100
+  time: '2025-12-29T01:11:44.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Added streamer mode for muting copyrighted audio.
+  id: 101
+  time: '2025-12-29T15:52:06.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed kudzu spreading way too fast.
+  id: 102
+  time: '2025-12-29T18:06:11.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: Matchboxes can now only contain matches
+    - type: Tweak
+      message: Large Cigarette cartons can only store cigarette packs
+    - type: Tweak
+      message: Syringe Case can now only store syringes, medipens, and vials.
+  id: 103
+  time: '2025-12-29T20:33:40.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed medborg surgery UI being buggy.
+  id: 104
+  time: '2025-12-29T20:35:16.0000000+00:00'
+- author: GeneRickUsername
+  changes:
+    - type: Fix
+      message: Fixed Shitcode that keeps light on when no fire active.
+  id: 105
+  time: '2025-12-29T20:36:19.0000000+00:00'
+- author: Fixed Index
+  changes: []
+  id: 106
+  time: '2025-12-29T20:37:48.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed not being able to use kammerer shotguns.
+  id: 107
+  time: '2025-12-29T23:52:47.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed modsuit power alert.
+  id: 108
+  time: '2025-12-30T04:49:08.0000000+00:00'

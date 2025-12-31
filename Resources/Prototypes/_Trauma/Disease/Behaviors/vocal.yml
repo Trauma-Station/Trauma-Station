@@ -1,0 +1,67 @@
+- type: entity
+  parent: DiseaseBehaviorCough
+  id: DiseaseBehaviorVocalCough
+  name: Intense Cough
+  components:
+  - type: DiseaseEffect
+    complexity: 8
+  - type: DiseasePeriodicCondition
+    delayMin: 2
+    delayMax: 10
+  - type: DiseaseProgressCondition
+    minProgress: 0.2 # never ever cough while dormant
+    maxProgress: 0.9 # lungs no worky
+
+- type: entity
+  parent: DiseaseBehaviorVocalCough
+  id: DiseaseBehaviorVocalCoughBlood
+  name: Bloody Cough
+  components:
+  - type: DiseaseEffect
+    complexity: 10
+  - type: DiseasePeriodicCondition
+    delayMin: 8
+    delayMax: 30
+  - type: DiseaseProgressCondition
+    minProgress: 0.5
+  - type: DiseaseEntityEffect
+    effects:
+    - !type:SpillBlood
+      amount: 40
+
+- type: entity
+  parent: DiseaseBehaviorBase
+  id: DiseaseBehaviorVocalDestroyLungs
+  name: Lung Rupture
+  description: Parasites feed on alveoli, destroying the lungs.
+  components:
+  - type: DiseaseEffect
+    complexity: 16
+  - type: DiseasePeriodicCondition # random death time
+    delayMin: 1
+    delayMax: 8
+  - type: DiseaseProgressCondition
+    minProgress: 0.99
+  - type: DiseaseSpreadEffect # final spread AOE
+    arc: 360
+    range: 4
+  - type: DiseaseEntityEffect
+    effects:
+    - !type:RelayOrgans
+      slot: lungs
+      effects:
+      - !type:Gib
+      guidebookText: entity-effect-guidebook-rupture-lungs
+    - !type:HealthChange # kill the host immediately
+      targetPart: Chest
+      damage:
+        types:
+          Blunt: 100
+          Asphyxiation: 100
+    - !type:HealthChange
+      targetPart: Head
+      damage:
+        types:
+          Blunt: 100
+          Asphyxiation: 100
+  - type: DiseaseRemoveEffect # it has spread, lungs are gone: time to go. prevents immediately killing the host upon revival

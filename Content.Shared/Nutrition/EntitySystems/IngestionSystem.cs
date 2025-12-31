@@ -1,4 +1,8 @@
-using Content.Trauma.Common.Nutrition; // Trauma
+// <Trauma>
+using Content.Trauma.Common.Nutrition;
+using Content.Shared.Clothing.EntitySystems;
+using Content.Shared.Heretic;
+// </Trauma>
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Organ;
@@ -12,7 +16,6 @@ using Content.Shared.DoAfter;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Forensics;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Heretic;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -21,6 +24,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Tools.EntitySystems;
+using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -70,8 +74,9 @@ public sealed partial class IngestionSystem : EntitySystem
         SubscribeLocalEvent<EdibleComponent, ComponentInit>(OnEdibleInit);
 
         // Interactions
-        SubscribeLocalEvent<EdibleComponent, UseInHandEvent>(OnUseEdibleInHand, after: new[] { typeof(OpenableSystem), typeof(InventorySystem) });
-        SubscribeLocalEvent<EdibleComponent, AfterInteractEvent>(OnEdibleInteract, after: new[] { typeof(ToolOpenableSystem) });
+        // Trauma - ClothingSystem handles equipping on use, not InventorySystem
+        SubscribeLocalEvent<EdibleComponent, UseInHandEvent>(OnUseEdibleInHand, after: [typeof(OpenableSystem), typeof(ClothingSystem), typeof(ActivatableUISystem)]);
+        SubscribeLocalEvent<EdibleComponent, AfterInteractEvent>(OnEdibleInteract, after: [typeof(ToolOpenableSystem)]);
 
         // Generic Eating Handlers
         SubscribeLocalEvent<EdibleComponent, BeforeIngestedEvent>(OnBeforeIngested);

@@ -93,7 +93,7 @@
 - type: gameMap
   id: Loop
   mapName: 'Loop Station'
-  mapPath: /Maps/_Goobstation/loop.yml
+  mapPath: /Maps/_Trauma/loop.yml # Trauma
   minPlayers: 35
   maxPlayers: 70
   stations:
@@ -156,6 +156,7 @@
             Mime: [ 1, 1 ]
             Musician: [ 1, 1 ]
             Reporter: [ 1, 1 ]
+            #RadioHost: [ 1, 1 ] # Trauma - not mapped yet
             #silicon
             StationAi: [ 1, 1 ]
             Borg: [ 2, 3 ]

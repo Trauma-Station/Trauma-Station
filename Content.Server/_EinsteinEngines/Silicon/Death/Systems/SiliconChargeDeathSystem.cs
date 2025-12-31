@@ -12,7 +12,6 @@ using Content.Shared.Humanoid;
 using Content.Shared.Power.Components;
 using Content.Shared.StatusEffectNew;
 // Goobstation Start - Energycrit
-using Content.Goobstation.Shared.Sprinting;
 using Content.Server.Radio;
 using Content.Shared._EinsteinEngines.Silicon.Death;
 using Content.Shared.Actions;
@@ -92,13 +91,6 @@ public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
         if (siliconDeadComp.Dead)
             return;
 
-        // Disable sprinting.
-        if (TryComp<SprinterComponent>(uid, out var sprint))
-        {
-            sprint.CanSprint = false;
-            Dirty(uid, sprint);
-        }
-
         // Disable combat mode
         if (TryComp<CombatModeComponent>(uid, out var combatMode))
         {
@@ -132,13 +124,6 @@ public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
     {
         if (!siliconDeadComp.Dead)
             return;
-
-        // Enable sprinting
-        if (TryComp<SprinterComponent>(uid, out var sprint))
-        {
-            sprint.CanSprint = true;
-            Dirty(uid, sprint);
-        }
 
         // Enable combat mode
         if (TryComp<CombatModeComponent>(uid, out var combatMode))

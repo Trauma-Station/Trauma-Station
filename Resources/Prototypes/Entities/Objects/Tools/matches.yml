@@ -145,6 +145,9 @@
   - type: Storage
     grid:
     - 0,0,2,1
+    whitelist: # Trauma - Whitelisting storage
+      tags:
+        - Matchstick
   - type: EntityTableContainerFill
     containers:
       storagebase:

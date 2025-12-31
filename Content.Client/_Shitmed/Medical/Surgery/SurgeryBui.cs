@@ -286,11 +286,10 @@ public sealed class SurgeryBui : BoundUserInterface
             || !_window.IsOpen
             || _part == null
             || !_entities.HasComponent<SurgeryComponent>(_surgery?.Ent)
-            || !_entities.TryGetComponent(_player.LocalEntity, out SurgeryTargetComponent? surgeryComp)
-            || !surgeryComp.CanOperate)
+            || _player.LocalEntity is not {} player)
             return;
 
-        var next = _system.GetNextStep(Owner, _part.Value, _surgery.Value.Ent, _player.LocalEntity.Value);
+        var next = _system.GetNextStep(Owner, _part.Value, _surgery.Value.Ent, player);
         var i = 0;
         foreach (var child in _window.Steps.Children)
         {
@@ -322,7 +321,7 @@ public sealed class SurgeryBui : BoundUserInterface
             {
                 stepButton.Button.Modulate = Color.White;
                 if (status == StepStatus.Next
-                    && !_system.CanPerformStepWithHeld(_player.LocalEntity.Value, Owner, _part.Value, stepButton.Step, false, out var popup))
+                    && !_system.CanPerformStepWithHeld(player, Owner, _part.Value, stepButton.Step, false, out var popup))
                     stepButton.ToolTip = popup;
             }
 

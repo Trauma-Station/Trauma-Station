@@ -40,8 +40,10 @@
     maxIntensity: 0.01
     intensitySlope: 1
     totalIntensity: 0.01
-  # Goobstation
-  - type: Tag
+  - type: Construction
+    graph: SnapPopExplosiveGraph
+    node: snapPop
+  - type: Tag # Goob
     tags:
     - SnapPop
 

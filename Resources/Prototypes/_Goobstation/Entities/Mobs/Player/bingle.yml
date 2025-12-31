@@ -81,11 +81,10 @@
       Dead:
         Base: dead
   - type: Bloodstream
-    bloodMaxVolume: 100
-    bloodReagents:
+    bloodReferenceSolution:
       reagents:
       - ReagentId: Nitrogen
-        Quantity: 1
+        Quantity: 100
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
@@ -102,7 +101,7 @@
     baseWalkSpeed : 2 # same as slime
     baseSprintSpeed : 4
   - type: Stamina
-    critThreshold: 120
+    baseCritThreshold: 120
   - type: StaminaDamageOnHit # from stunbaton
     damage: 15
     overtime: 40

@@ -1,9 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Barks;
-using Content.Goobstation.Common.CCVar;
-using Content.Shared._EinsteinEngines.HeightAdjust;
 using Content.Shared._Shitmed.Humanoid.Events;
-using Content.Trauma.Common.CCVar;
 // </Trauma>
 using System.IO;
 using System.Linq;
@@ -26,6 +23,7 @@ using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Utility;
 using YamlDotNet.RepresentationModel;
+using Robust.Shared.Enums;
 
 namespace Content.Shared.Humanoid;
 
@@ -40,7 +38,6 @@ namespace Content.Shared.Humanoid;
 /// </summary>
 public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 {
-    [Dependency] private readonly HeightAdjustSystem _heightAdjust = default!; // Goobstation: port EE height/width sliders
     [Dependency] private readonly IConfigurationManager _cfgManager = default!;
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
@@ -52,16 +49,12 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     public static readonly ProtoId<SpeciesPrototype> DefaultSpecies = "Human";
     public static readonly ProtoId<BarkPrototype> DefaultBarkVoice = "Alto"; // Goob Station - Barks
 
-    private bool _heightSlidersEnabled; // Trauma
-
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<HumanoidAppearanceComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<HumanoidAppearanceComponent, ExaminedEvent>(OnExamined);
-
-        Subs.CVar(_cfgManager, TraumaCVars.HeightSliders, value => _heightSlidersEnabled = value, true); // Trauma
     }
 
     public DataNode ToDataNode(HumanoidCharacterProfile profile)
@@ -175,8 +168,6 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         targetHumanoid.SkinColor = sourceHumanoid.SkinColor;
         targetHumanoid.EyeColor = sourceHumanoid.EyeColor;
         targetHumanoid.Age = sourceHumanoid.Age;
-        targetHumanoid.Height = sourceHumanoid.Height; // Goobstation: port EE height/width sliders
-        targetHumanoid.Width = sourceHumanoid.Width; // Goobstation: port EE height/width sliders
         SetSex(target, sourceHumanoid.Sex, false, targetHumanoid);
         targetHumanoid.CustomBaseLayers = new(sourceHumanoid.CustomBaseLayers);
         targetHumanoid.MarkingSet = new(sourceHumanoid.MarkingSet);
@@ -388,67 +379,21 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         }
     }
 
-    // begin Goobstation: port EE height/width sliders
-
     /// <summary>
-    ///     Set the height of a humanoid mob
+    /// Goob - Set an entity's gender for humanoid and grammar.
     /// </summary>
-    /// <param name="uid">The humanoid mob's UID</param>
-    /// <param name="height">The height to set the mob to</param>
-    /// <param name="sync">Whether to immediately synchronize this to the humanoid mob, or not</param>
-    /// <param name="humanoid">Humanoid component of the entity</param>
-    public void SetHeight(EntityUid uid, float height, bool sync = true, HumanoidAppearanceComponent? humanoid = null)
+    public void SetGender(EntityUid uid, Gender gender, bool sync = true, HumanoidAppearanceComponent? humanoid = null)
     {
-        if (!Resolve(uid, ref humanoid) || MathHelper.CloseTo(humanoid.Height, height, 0.001f))
+        if (!Resolve(uid, ref humanoid) || humanoid.Gender == gender)
             return;
 
-        var species = _proto.Index(humanoid.Species);
-        humanoid.Height = Math.Clamp(height, species.MinHeight, species.MaxHeight);
+        humanoid.Gender = gender;
+        if (TryComp<GrammarComponent>(uid, out var grammar))
+            _grammarSystem.SetGender((uid, grammar), gender);
 
         if (sync)
             Dirty(uid, humanoid);
     }
-
-    /// <summary>
-    ///     Set the width of a humanoid mob
-    /// </summary>
-    /// <param name="uid">The humanoid mob's UID</param>
-    /// <param name="width">The width to set the mob to</param>
-    /// <param name="sync">Whether to immediately synchronize this to the humanoid mob, or not</param>
-    /// <param name="humanoid">Humanoid component of the entity</param>
-    public void SetWidth(EntityUid uid, float width, bool sync = true, HumanoidAppearanceComponent? humanoid = null)
-    {
-        if (!Resolve(uid, ref humanoid) || MathHelper.CloseTo(humanoid.Width, width, 0.001f))
-            return;
-
-        var species = _proto.Index(humanoid.Species);
-        humanoid.Width = Math.Clamp(width, species.MinWidth, species.MaxWidth);
-
-        if (sync)
-            Dirty(uid, humanoid);
-    }
-
-    /// <summary>
-    ///     Set the scale of a humanoid mob
-    /// </summary>
-    /// <param name="uid">The humanoid mob's UID</param>
-    /// <param name="scale">The scale to set the mob to</param>
-    /// <param name="sync">Whether to immediately synchronize this to the humanoid mob, or not</param>
-    /// <param name="humanoid">Humanoid component of the entity</param>
-    public void SetScale(EntityUid uid, Vector2 scale, bool sync = true, HumanoidAppearanceComponent? humanoid = null)
-    {
-        if (!Resolve(uid, ref humanoid))
-            return;
-
-        var species = _proto.Index(humanoid.Species);
-        humanoid.Height = Math.Clamp(scale.Y, species.MinHeight, species.MaxHeight);
-        humanoid.Width = Math.Clamp(scale.X, species.MinWidth, species.MaxWidth);
-
-        if (sync)
-            Dirty(uid, humanoid);
-    }
-
-    // end Goobstation: port EE height/width sliders
 
     /// <summary>
     ///     Loads a humanoid character profile directly onto this humanoid mob.
@@ -534,17 +479,6 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         }
 
         humanoid.Age = profile.Age;
-
-        // begin Goobstation: port EE height/width sliders
-        var species = _proto.Index(humanoid.Species);
-
-        if (!_heightSlidersEnabled || profile.Height <= 0 || profile.Width <= 0)
-            SetScale(uid, new Vector2(species.DefaultWidth, species.DefaultHeight), true, humanoid);
-        else
-            SetScale(uid, new Vector2(profile.Width, profile.Height), true, humanoid);
-
-        _heightAdjust.SetScale(uid, new Vector2(humanoid.Width, humanoid.Height));
-        // end Goobstation: port EE height/width sliders
 
         RaiseLocalEvent(uid, new ProfileLoadFinishedEvent()); // Shitmed Change
         Dirty(uid, humanoid);

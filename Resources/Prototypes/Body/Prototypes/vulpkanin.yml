@@ -27,7 +27,7 @@
       - right leg
       - left leg
       organs:
-        stomach: OrganAnimalStomach
+        stomach: OrganVulpkaninStomach
         liver: OrganAnimalLiver
         kidneys: OrganHumanKidneys
     # </Trauma>

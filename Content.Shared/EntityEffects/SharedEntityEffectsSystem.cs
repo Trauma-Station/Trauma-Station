@@ -2,6 +2,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.EntityConditions;
+using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -26,9 +27,10 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
 
     private void OnReactive(Entity<ReactiveComponent> entity, ref ReactionEntityEvent args)
     {
-        var scale = args.ReagentQuantity.Quantity.Float();
+        var scale = entity.Comp.ScaleOverride ?? args.ReagentQuantity.Quantity.Float(); // Trauma - use ScaleOverride
 
-        if (args.Reagent.ReactiveEffects != null && entity.Comp.ReactiveGroups != null)
+        if (args.Reagent.ReactiveEffects != null && entity.Comp.ReactiveGroups != null
+            && AllowedToReact(entity)) // Trauma
         {
             foreach (var (key, val) in args.Reagent.ReactiveEffects)
             {
@@ -56,6 +58,12 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
                     ApplyEffects(entity, entry.Effects, scale);
             }
         }
+    }
+
+    /// <inheritdoc cref="ApplyEffects(EntityUid,EntityEffect[],float,EntityUid?)"/>
+    public void ApplyEffects(EntityUid target, EntityEffect[] effects, FixedPoint2 scale, EntityUid? user = null)
+    {
+        ApplyEffects(target, effects, scale.Float());
     }
 
     /// <summary>

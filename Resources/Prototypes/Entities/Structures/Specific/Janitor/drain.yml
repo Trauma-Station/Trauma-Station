@@ -26,6 +26,7 @@
     - type: Physics
       bodyType: Static
       canCollide: false
+    - type: Fixtures # Trauma - stop trolling my map yml
     - type: AmbientSound
       enabled: false
       volume: -8

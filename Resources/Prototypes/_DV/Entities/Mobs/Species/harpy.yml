@@ -76,7 +76,6 @@
         type: WizardTeleportBoundUserInterface
         requireInputValidation: false
   - type: Sprite
-    # scale: 0.9, 0.9 # Goobstation: port EE height/width sliders
     layers:
       - map: [ "enum.HumanoidVisualLayers.Groin" ]
       - map: [ "enum.HumanoidVisualLayers.Chest" ]
@@ -236,7 +235,6 @@
             sprite: _DV/Mobs/Species/Harpy/displacement.rsi
             state: jumpsuit
   - type: Sprite
-    # scale: 0.9, 0.9 # Goobstation: port EE height/width sliders
     layers:
       - map: [ "enum.HumanoidVisualLayers.Chest" ]
       - map: [ "enum.HumanoidVisualLayers.Groin" ]

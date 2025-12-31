@@ -228,7 +228,20 @@
     sprite: Clothing/Belt/militarywebbingmed.rsi
   - type: Clothing
     sprite: Clothing/Belt/militarywebbingmed.rsi
-  - type: Item # Goob
+  # <Goob>
+  - type: Item
     size: Huge
-  - type: ExplosionResistance # Goob
+  - type: ExplosionResistance
     damageCoefficient: 0.1
+  # </Goob>
+
+- type: entity
+  parent: ClothingBeltMilitaryWebbing
+  id: ClothingBeltMilitaryWebbingERT
+  name: ERT chest rig
+  description: A set of tactical webbing worn by Emergency Response Team operatives.
+  components:
+  - type: Sprite
+    sprite: Clothing/Belt/militarywebbingert.rsi
+  - type: Clothing
+    sprite: Clothing/Belt/militarywebbingert.rsi

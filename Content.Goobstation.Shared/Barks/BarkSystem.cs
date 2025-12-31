@@ -2,6 +2,7 @@ using Content.Goobstation.Common.Barks;
 using Content.Goobstation.Common.CCVar;
 using Content.Shared.Chat;
 using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 
 namespace Content.Goobstation.Shared.Barks;
 
@@ -27,6 +28,6 @@ public sealed class BarkSystem : EntitySystem
             return;
 
         var sourceEntity = GetNetEntity(uid);
-        RaiseNetworkEvent(new PlayBarkEvent(sourceEntity, args.Message, args.IsWhisper));
+        RaiseNetworkEvent(new PlayBarkEvent(sourceEntity, args.Message, args.IsWhisper), Filter.Pvs(uid));
     }
 }

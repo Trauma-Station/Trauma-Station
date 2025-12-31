@@ -587,6 +587,7 @@
     - SharedBoardsStatic
     - MedicalBoardsStaticGoob
     - SecurityBoardsStaticGoob
+    - ServiceBoardsStaticGoob
     dynamicPacks:
     - EngineeringBoards
     - CargoBoards
@@ -982,7 +983,7 @@
     - BioGenMaterialsStatic
   - type: EmagLatheRecipes
     emagStaticPacks:
-    - BioGenEmagStatic
+    #- BioGenEmagStatic # Trauma - mutagen moved to non emag
     - HostileCubesStatic
 
 - type: entity

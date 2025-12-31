@@ -17,11 +17,10 @@ namespace Content.Goobstation.Common.TheManWhoSoldTheWorld;
 [RegisterComponent]
 public sealed partial class TheManWhoSoldTheWorldComponent : Component
 {
-    [ViewVariables]
+    [DataField]
     public EntityUid? HoloCigarEntity = null;
 
-    [DataField("deathAudio")]
-    [ViewVariables]
+    [DataField]
     public SoundSpecifier DeathAudio = new SoundPathSpecifier("/Audio/_Goobstation/Items/TheManWhoSoldTheWorld/ouchies.ogg");
 
     [DataField]
