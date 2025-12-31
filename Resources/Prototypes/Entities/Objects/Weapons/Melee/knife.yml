@@ -240,10 +240,14 @@
     guides:
     - Chef
     - FoodRecipes
-  - type: Scalpel # Shitmed
+  # <Trauma>
+  - type: Sharp
+    butcherDelayModifier: 0.75 # it's designed for butchering
+  - type: Scalpel
     speed: 0.3
-  - type: BoneSaw # Shitmed: Better than tg 25% because its a cleaver its meant to hack off limbs
+  - type: BoneSaw # Better than tg 25% because its a cleaver its meant to hack off limbs
     speed: 0.5
+  # </Trauma>
 
 - type: entity
   name: combat knife
