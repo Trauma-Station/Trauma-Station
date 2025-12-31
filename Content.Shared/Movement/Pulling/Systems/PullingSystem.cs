@@ -11,6 +11,7 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Effects;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Speech;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Throwing;
@@ -18,7 +19,6 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Dynamics.Joints;
 using Robust.Shared.Random;
 // </Trauma>
@@ -78,8 +78,6 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
     // <Goob>
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -110,7 +108,6 @@ public sealed class PullingSystem : EntitySystem
         SubscribeLocalEvent<PullerComponent, AfterAutoHandleStateEvent>(OnAfterState);
         SubscribeLocalEvent<PullerComponent, EntGotInsertedIntoContainerMessage>(OnPullerContainerInsert);
         SubscribeLocalEvent<PullerComponent, EntityUnpausedEvent>(OnPullerUnpaused);
-        SubscribeLocalEvent<PullerComponent, VirtualItemDeletedEvent>(OnVirtualItemDeleted);
         SubscribeLocalEvent<PullerComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
         SubscribeLocalEvent<PullerComponent, DropHandItemsEvent>(OnDropHandItems);
         SubscribeLocalEvent<PullerComponent, StopPullingAlertEvent>(OnStopPullingAlert);
@@ -138,7 +135,9 @@ public sealed class PullingSystem : EntitySystem
             || !TryComp(args.User, out PullableComponent? pullable))
             return;
 
-        if (_random.Prob(pullable.GrabEscapeChance))
+        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
+        var rand = new System.Random(seed);
+        if (rand.Prob(pullable.GrabEscapeChance))
             TryLowerGrabStage((args.User, pullable), (ent.Owner, ent.Comp), true);
     }
 
@@ -151,8 +150,7 @@ public sealed class PullingSystem : EntitySystem
             && TryComp<PullableComponent>(ent.Comp.Pulling, out var comp)
             && ent.Comp.Pulling != null)
         {
-            if(_net.IsServer)
-                StopPulling(ent.Comp.Pulling.Value, comp);
+            StopPulling(ent.Comp.Pulling.Value, comp);
         }
     }
     // Goobstation
@@ -309,28 +307,6 @@ public sealed class PullingSystem : EntitySystem
     }
 
     // <Goob> - Grab Intent Refactor
-    private void OnVirtualItemDeleted(Entity<PullerComponent> ent, ref VirtualItemDeletedEvent args)
-    {
-        // If client deletes the virtual hand then stop the pull.
-        if (ent.Comp.Pulling == null)
-            return;
-
-        if (ent.Comp.Pulling != args.BlockingEntity)
-            return;
-
-        if (TryComp(args.BlockingEntity, out PullableComponent? comp))
-        {
-            TryStopPull(ent.Comp.Pulling.Value, comp, ent);
-        }
-
-        foreach (var item in ent.Comp.GrabVirtualItems)
-        {
-            if(TryComp<VirtualItemComponent>(ent, out var virtualItemComponent))
-                _virtual.DeleteVirtualItem((item,virtualItemComponent), ent);
-        }
-        ent.Comp.GrabVirtualItems.Clear();
-    }
-
     private void OnVirtualItemThrown(EntityUid uid, PullerComponent component, ref VirtualItemThrownEvent args)
     {
         if (!TryComp<PhysicsComponent>(uid, out var throwerPhysics)
@@ -540,8 +516,7 @@ public sealed class PullingSystem : EntitySystem
         if (TryComp<PullerComponent>(oldPuller, out var pullerComp))
         {
             var pullerUid = oldPuller.Value;
-            if (_net.IsServer)
-                _alertsSystem.ClearAlert(pullerUid, pullerComp.PullingAlert);
+            _alertsSystem.ClearAlert(pullerUid, pullerComp.PullingAlert);
             pullerComp.Pulling = null;
             // Goobstation - Grab Intent
             pullerComp.GrabStage = GrabStage.No;
@@ -562,8 +537,7 @@ public sealed class PullingSystem : EntitySystem
             RaiseLocalEvent(pullableUid, message);
         }
 
-        if (_net.IsServer)
-            _alertsSystem.ClearAlert(pullableUid, pullableComp.PulledAlert);
+        _alertsSystem.ClearAlert(pullableUid, pullableComp.PulledAlert);
     }
 
     public bool IsPulled(EntityUid uid, PullableComponent? component = null)
@@ -718,15 +692,13 @@ public sealed class PullingSystem : EntitySystem
             if (!TryStopPull(pullableUid, pullableComp, pullableComp.Puller))
             {
                 // Not succeed to retake grabbed entity
-                if (!_net.IsServer)
-                    return false;
                 _popup.PopupEntity(Loc.GetString("popup-grab-retake-fail",
                         ("puller", Identity.Entity(pullableComp.Puller.Value, EntityManager)),
                         ("pulled", Identity.Entity(pullableUid, EntityManager))),
                     pullerUid,
                     pullerUid,
                     PopupType.MediumCaution);
-                _popup.PopupEntity(Loc.GetString("popup-grab-retake-fail-puller",
+                _popup.PopupClient(Loc.GetString("popup-grab-retake-fail-puller",
                         ("puller", Identity.Entity(pullerUid, EntityManager)),
                         ("pulled", Identity.Entity(pullableUid, EntityManager))),
                     pullableComp.Puller.Value,
@@ -738,21 +710,18 @@ public sealed class PullingSystem : EntitySystem
             if (pullableComp.GrabStage != GrabStage.No)
             {
                 // Successful retake
-                if (_net.IsServer)
-                {
-                    _popup.PopupEntity(Loc.GetString("popup-grab-retake-success",
-                        ("puller", Identity.Entity(pullableComp.Puller.Value, EntityManager)),
-                        ("pulled", Identity.Entity(pullableUid, EntityManager))),
-                        pullerUid,
-                        pullerUid,
-                        PopupType.MediumCaution);
-                    _popup.PopupEntity(Loc.GetString("popup-grab-retake-success-puller",
-                        ("puller", Identity.Entity(pullerUid, EntityManager)),
-                        ("pulled", Identity.Entity(pullableUid, EntityManager))),
-                        pullableComp.Puller.Value,
-                        pullableComp.Puller.Value,
-                        PopupType.MediumCaution);
-                }
+                _popup.PopupEntity(Loc.GetString("popup-grab-retake-success",
+                    ("puller", Identity.Entity(pullableComp.Puller.Value, EntityManager)),
+                    ("pulled", Identity.Entity(pullableUid, EntityManager))),
+                    pullerUid,
+                    pullerUid,
+                    PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("popup-grab-retake-success-puller",
+                    ("puller", Identity.Entity(pullerUid, EntityManager)),
+                    ("pulled", Identity.Entity(pullableUid, EntityManager))),
+                    pullableComp.Puller.Value,
+                    pullableComp.Puller.Value,
+                    PopupType.MediumCaution);
             }
             // </Goob>
         }
@@ -856,9 +825,6 @@ public sealed class PullingSystem : EntitySystem
 
         var releaseAttempt = AttemptGrabRelease(pullableUid);
 
-        if (!_net.IsServer)
-            return false;
-
         switch (releaseAttempt)
         {
             case GrabResistResult.Failed:
@@ -880,7 +846,7 @@ public sealed class PullingSystem : EntitySystem
             pullableUid,
             PopupType.SmallCaution);
 
-        _popup.PopupEntity(
+        _popup.PopupClient(
             Loc.GetString("popup-grab-release-success-puller",
                 ("target", Identity.Entity(pullableUid, EntityManager))),
             pullerUid,
@@ -951,8 +917,7 @@ public sealed class PullingSystem : EntitySystem
 
             var comboEv = new ComboAttackPerformedEvent(puller.Owner, pullable.Owner, puller.Owner, ComboAttackType.Grab);
             RaiseLocalEvent(puller.Owner, comboEv);
-            if (_net.IsServer)
-                _audio.PlayPvs(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), pullable);
+            _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), pullable, puller);
 
             Dirty(pullable);
             Dirty(puller);
@@ -1040,29 +1005,24 @@ public sealed class PullingSystem : EntitySystem
         _blocker.UpdateCanMove(pullable);
         _modifierSystem.RefreshMovementSpeedModifiers(puller);
 
-        // I'm lazy to write client code
-        if (_net.IsServer)
-        {
-            _popup.PopupEntity(Loc.GetString($"popup-grab-{puller.Comp.GrabStage.ToString().ToLower()}-target",
-                    ("puller", Identity.Entity(puller, EntityManager))),
-                pullable,
-                pullable,
-                popupType);
-            _popup.PopupEntity(Loc.GetString($"popup-grab-{puller.Comp.GrabStage.ToString().ToLower()}-self",
-                    ("target", Identity.Entity(pullable, EntityManager))),
-                pullable,
-                puller,
-                PopupType.Medium);
-            _popup.PopupEntity(Loc.GetString($"popup-grab-{puller.Comp.GrabStage.ToString().ToLower()}-others",
-                    ("target", Identity.Entity(pullable, EntityManager)),
-                    ("puller", Identity.Entity(puller, EntityManager))),
-                pullable,
-                filter,
-                true,
-                popupType);
-            _audio.PlayPvs(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), pullable);
-        }
-
+        _popup.PopupEntity(Loc.GetString($"popup-grab-{puller.Comp.GrabStage.ToString().ToLower()}-target",
+                ("puller", Identity.Entity(puller, EntityManager))),
+            pullable,
+            pullable,
+            popupType);
+        _popup.PopupClient(Loc.GetString($"popup-grab-{puller.Comp.GrabStage.ToString().ToLower()}-self",
+                ("target", Identity.Entity(pullable, EntityManager))),
+            pullable,
+            puller,
+            PopupType.Medium);
+        _popup.PopupEntity(Loc.GetString($"popup-grab-{puller.Comp.GrabStage.ToString().ToLower()}-others",
+                ("target", Identity.Entity(pullable, EntityManager)),
+                ("puller", Identity.Entity(puller, EntityManager))),
+            pullable,
+            filter,
+            true,
+            popupType);
+        _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), pullable, puller);
 
         var comboEv = new ComboAttackPerformedEvent(puller.Owner, pullable.Owner, puller.Owner, ComboAttackType.Grab);
         RaiseLocalEvent(puller.Owner, comboEv);
@@ -1093,17 +1053,14 @@ public sealed class PullingSystem : EntitySystem
                 var emptyHand = _handsSystem.TryGetEmptyHand(puller.Owner, out _);
                 if (!emptyHand)
                 {
-                    if (_net.IsServer)
-                        _popup.PopupEntity(Loc.GetString("popup-grab-need-hand"), puller, puller, PopupType.Medium);
+                    _popup.PopupClient(Loc.GetString("popup-grab-need-hand"), puller, puller, PopupType.Medium);
 
                     return false;
                 }
 
                 if (!_virtual.TrySpawnVirtualItemInHand(pullable, puller.Owner, out var item, true))
                 {
-                    // I'm lazy write client code
-                    if (_net.IsServer)
-                        _popup.PopupEntity(Loc.GetString("popup-grab-need-hand"), puller, puller, PopupType.Medium);
+                    _popup.PopupClient(Loc.GetString("popup-grab-need-hand"), puller, puller, PopupType.Medium);
 
                     return false;
                 }
@@ -1139,7 +1096,9 @@ public sealed class PullingSystem : EntitySystem
             || _timing.CurTime < pullable.Comp.NextEscapeAttempt)
             return GrabResistResult.TooSoon;
 
-        if (_random.Prob(pullable.Comp.GrabEscapeChance))
+        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(pullable).Id);
+        var rand = new System.Random(seed);
+        if (rand.Prob(pullable.Comp.GrabEscapeChance))
             return GrabResistResult.Succeeded;
 
         pullable.Comp.NextEscapeAttempt = _timing.CurTime.Add(TimeSpan.FromSeconds(pullable.Comp.EscapeAttemptCooldown));
