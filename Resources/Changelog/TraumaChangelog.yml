@@ -954,3 +954,15 @@ Entries:
       message: Being fultoned while injured can now hurt you from the shock.
   id: 110
   time: '2025-12-31T20:27:12.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Butchering with a cleaver is now 25% faster.
+  id: 111
+  time: '2025-12-31T21:21:35.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Xenobio slimes can no longer become zombies.
+  id: 112
+  time: '2025-12-31T21:44:16.0000000+00:00'
