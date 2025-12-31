@@ -35,7 +35,7 @@
     - id: FoodMeatHuman
       amount: 5
     - id: MaterialBones1 # Trauma - Bones on butchering humanoids
-      amound: 3
+      amount: 3
   - type: LanguageKnowledge # Einstein Engines - Language
     speaks:
     - TauCetiBasic
