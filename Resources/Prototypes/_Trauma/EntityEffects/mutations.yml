@@ -257,3 +257,59 @@
     - MutationElvis-popup-move-5
     - MutationElvis-popup-move-6
     - MutationElvis-popup-move-7
+
+# Internal Martyrdom
+
+- type: entityEffect
+  id: MutationInternalMartyrdom
+  effects:
+  - !type:RelayBodyParts
+    partType: Head
+    guidebookText: entity-effect-guidebook-delete-head
+    effects:
+    - !type:Gib # your head explodes, don't drop brain when gibbing
+  - !type:SpawnEntity # flash instead of an explosion
+    entity: ReactionFlash
+  - !type:RelayNearby # blind and stun people
+    compName: AwakeMob
+    range: 2
+    blacklist: # never double dip, borgs get their own thing
+      components:
+      - BorgChassis
+    effect: !type:NestedEffect
+      proto: StunBlindMob
+  - !type:RelayNearby # paralyze borgs
+    compName: BorgChassis
+    range: 2
+    effect: !type:NestedEffect
+      proto: ParalyzeBorg
+  - !type:Gib # bye bye
+    gibOrgans: true
+
+- type: entityEffect
+  id: StunBlindMob
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-martyrdom-blinded
+  - !type:GenericStatusEffect
+    key: BlurryVision
+    component: BlurryVision
+    time: 40
+  - !type:GenericStatusEffect
+    key: TemporaryBlindness
+    component: TemporaryBlindness
+    time: 5 # few seconds of blindness instead of eye damage
+  - !type:ModifyKnockdown
+    time: 2
+  - !type:ModifyParalysis
+    time: 2
+
+- type: entityEffect
+  id: ParalyzeBorg
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-martyrdom-borg-disabled
+  - !type:ModifyParalysis
+    time: 6

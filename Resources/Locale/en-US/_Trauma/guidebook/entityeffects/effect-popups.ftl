@@ -22,3 +22,5 @@ entity-effect-popup-dusted = {CAPITALIZE($entity)} gets turned into dust!
 entity-effect-popup-skeletonized = {CAPITALIZE($entity)}'s skin melts off!
 entity-effect-popup-look-up = LOOK UP!
 entity-effect-popup-eyes-melt = {CAPITALIZE($entity)} looks up and {POSS-ADJ($entity)} eyes melt away!
+entity-effect-popup-martyrdom-blinded = You are blinded by a shower of blood!
+entity-effect-popup-martyrdom-borg-disabled = Your sensors are disabled by a shower of blood!

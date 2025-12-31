@@ -33,7 +33,7 @@ public sealed class ThrowRandomItemEffectSystem : EntityEffectSystem<HandsCompon
     protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<ThrowRandomItem> args)
     {
         _items.Clear();
-        foreach (var held in _hands.EnumerateHeld((ent, ent.Comp)))
+        foreach (var held in _hands.EnumerateHeld(ent.AsNullable()))
         {
             _items.Add(held);
         }
@@ -45,6 +45,9 @@ public sealed class ThrowRandomItemEffectSystem : EntityEffectSystem<HandsCompon
         var seed = SharedRandomExtensions.HashCodeCombine((int)_timing.CurTick.Value, GetNetEntity(ent).Id);
         var rand = new Random(seed);
         var item = rand.Pick(_items);
+        if (!_hands.TryDrop(ent.AsNullable(), item)) // glued etc
+            return;
+
         var angle = rand.NextAngle();
         var direction = angle.ToVec();
         _throwing.TryThrow(item,

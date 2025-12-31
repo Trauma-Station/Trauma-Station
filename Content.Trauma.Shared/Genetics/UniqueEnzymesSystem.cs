@@ -76,8 +76,6 @@ public sealed class UniqueEnzymesSystem : EntitySystem
             enzymes.Name, // this was already changed
             flavortext,
             humanoid.Species,
-            humanoid.Height,
-            humanoid.Width,
             humanoid.Age,
             // below actually get changed
             enzymes.Sex ?? humanoid.Sex,

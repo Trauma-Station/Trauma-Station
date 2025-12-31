@@ -2,6 +2,7 @@
 using Content.Goobstation.Common.Changeling;
 using Content.Shared._Shitmed.Body.Organ;
 using Content.Shared.Body.Systems;
+using Robust.Shared.Timing;
 // </Trauma>
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
@@ -17,6 +18,7 @@ public sealed class BrainSystem : EntitySystem
 {
     // <Trauma>
     [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     // </Trauma>
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
 
@@ -31,6 +33,7 @@ public sealed class BrainSystem : EntitySystem
 
     private void HandleMind(EntityUid newEntity, EntityUid oldEntity)
     {
+        if (_timing.ApplyingState) return; // Trauma
         if (TerminatingOrDeleted(newEntity) || TerminatingOrDeleted(oldEntity))
             return;
 

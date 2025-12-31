@@ -21,3 +21,8 @@ entity-effect-guidebook-melts-brain = {$chance ->
     [1] melts
     *[other] melt
 } the target's brain
+
+entity-effect-guidebook-delete-head = {$chance ->
+    [1] explodes
+    *[other] explode
+} the target's head

@@ -384,7 +384,13 @@
   components:
   - type: Mutation
     instability: -40
-  # TODO
+  - type: TriggerOnMobstateChange
+    mobState: [ Dead ] # TODO: add hardcrit when implemented
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        proto: MutationInternalMartyrdom
 
 - type: entity
   parent: BaseMutation
