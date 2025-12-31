@@ -34,6 +34,8 @@
     spawned:
     - id: FoodMeatHuman
       amount: 5
+    - id: Bones # Trauma - Bones on butchering humanoids
+      amound: 3
   - type: LanguageKnowledge # Einstein Engines - Language
     speaks:
     - TauCetiBasic
