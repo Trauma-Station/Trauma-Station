@@ -34,6 +34,9 @@ PlushieMnwaar: null # fuck you
 MagazineCaselessRifleShortPractice: MagazinePistolPractice
 MagazineMagnumSubMachineGunPractice: MagazinePistolPractice
 BoxMagazineMagnumSubMachineGun: BoxMagazineRifle
+
+# 2025-01-01 Trauma Remove scurret poster
+PosterLegitHelio: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
@@ -1006,6 +1009,3 @@ SpawnPointBoxer: null
 FigureSpawner: MechFigurineSpawner50
 ToySpawner: PlushieSpawner50
 SpacemenFigureSpawner: SpacemenFigurineSpawner90
-
-# 2025-01-01 Trauma Remove scurret poster
-PosterLegitHelio: null
