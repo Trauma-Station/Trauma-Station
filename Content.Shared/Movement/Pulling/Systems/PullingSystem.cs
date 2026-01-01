@@ -522,7 +522,7 @@ public sealed class PullingSystem : EntitySystem
             pullerComp.GrabStage = GrabStage.No;
             var virtItems = pullerComp.GrabVirtualItems;
             foreach (var item in virtItems)
-                QueueDel(item);
+                PredictedQueueDel(item); // Trauma - why was this not predicted
 
             pullerComp.GrabVirtualItems.Clear();
             // Goobstation
