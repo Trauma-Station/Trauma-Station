@@ -43,7 +43,6 @@ public sealed class PredictedProjectileSystem : EntitySystem
 
     private void OnStartCollide(EntityUid uid, ProjectileComponent component, ref StartCollideEvent args)
     {
-        Log.Debug($"Projectile {ToPrettyString(uid)} collided! client: {_net.IsClient}");
         // This is so entities that shouldn't get a collision are ignored.
         if (args.OurFixtureId != SharedProjectileSystem.ProjectileFixture || !args.OtherFixture.Hard
             || component.ProjectileSpent || component is { Weapon: null, OnlyCollideWhenShot: true })
@@ -186,7 +185,7 @@ public sealed class PredictedProjectileSystem : EntitySystem
 
         if (component.ImpactEffect != null && TryComp(uid, out TransformComponent? xform))
         {
-            RaiseNetworkEvent(new ImpactEffectEvent(component.ImpactEffect, GetNetCoordinates(xform.Coordinates)), Filter.Pvs(xform.Coordinates, entityMan: EntityManager));
+            RaiseLocalEvent(new ImpactEffectEvent(component.ImpactEffect, GetNetCoordinates(xform.Coordinates)));
         }
     }
 }
