@@ -4,8 +4,8 @@ meta:
   engineVersion: 268.0.0
   forkId: ""
   forkVersion: ""
-  time: 01/02/2026 04:10:07
-  entityCount: 18031
+  time: 01/02/2026 05:11:38
+  entityCount: 18034
 maps:
 - 1
 grids:
@@ -7215,7 +7215,7 @@ entities:
       pos: -30.5,13.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -69322.445
+      secondsUntilStateChange: -69739.34
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11400,6 +11400,13 @@ entities:
     - type: Transform
       pos: -49.5,40.5
       parent: 2
+- proto: BiomassReclaimer
+  entities:
+  - uid: 18011
+    components:
+    - type: Transform
+      pos: 28.5,31.5
+      parent: 2
 - proto: BlastDoor
   entities:
   - uid: 15844
@@ -12025,7 +12032,7 @@ entities:
   - uid: 4148
     components:
     - type: Transform
-      pos: 29.151949,31.889046
+      pos: 29.317316,31.891779
       parent: 2
 - proto: BoxCandle
   entities:
@@ -12309,7 +12316,7 @@ entities:
   - uid: 4152
     components:
     - type: Transform
-      pos: 29.183199,31.482796
+      pos: 29.379816,31.469904
       parent: 2
 - proto: BoxZiptie
   entities:
@@ -24472,6 +24479,16 @@ entities:
     components:
     - type: Transform
       pos: 39.5,35.5
+      parent: 2
+  - uid: 18033
+    components:
+    - type: Transform
+      pos: 30.5,32.5
+      parent: 2
+  - uid: 18034
+    components:
+    - type: Transform
+      pos: 29.5,32.5
       parent: 2
 - proto: CableApcStack
   entities:
@@ -43793,7 +43810,7 @@ entities:
       pos: -9.5,51.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -317078
+      secondsUntilStateChange: -317494.9
       state: Opening
   - uid: 6747
     components:
@@ -43801,7 +43818,7 @@ entities:
       pos: -8.5,51.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -317078.72
+      secondsUntilStateChange: -317495.62
       state: Opening
   - uid: 6749
     components:
@@ -43809,7 +43826,7 @@ entities:
       pos: -6.5,51.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -317077.28
+      secondsUntilStateChange: -317494.2
       state: Opening
   - uid: 6750
     components:
@@ -43817,7 +43834,7 @@ entities:
       pos: -5.5,51.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -317076.66
+      secondsUntilStateChange: -317493.56
       state: Opening
   - uid: 9721
     components:
@@ -49183,7 +49200,7 @@ entities:
   - uid: 17996
     components:
     - type: Transform
-      pos: 30.702604,33.762287
+      pos: 30.716852,35.77125
       parent: 2
 - proto: DrinkWaterBottleFull
   entities:
@@ -52839,6 +52856,11 @@ entities:
     components:
     - type: Transform
       pos: -34.5,67.5
+      parent: 2
+  - uid: 17862
+    components:
+    - type: Transform
+      pos: 28.5,31.5
       parent: 2
 - proto: FloraTree
   entities:
@@ -78768,7 +78790,7 @@ entities:
   - uid: 4145
     components:
     - type: Transform
-      pos: 28.59474,31.6134
+      pos: 30.216852,33.548027
       parent: 2
 - proto: MopBucket
   entities:
@@ -93708,7 +93730,7 @@ entities:
   - uid: 4147
     components:
     - type: Transform
-      pos: 28.272154,31.83368
+      pos: 30.544977,33.798027
       parent: 2
 - proto: StairStageWood
   entities:
@@ -96654,12 +96676,6 @@ entities:
     components:
     - type: Transform
       pos: -17.5,-5.5
-      parent: 2
-  - uid: 17862
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 28.5,31.5
       parent: 2
   - uid: 17863
     components:
