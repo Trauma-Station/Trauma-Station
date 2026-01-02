@@ -34,6 +34,9 @@ PlushieMnwaar: null # fuck you
 MagazineCaselessRifleShortPractice: MagazinePistolPractice
 MagazineMagnumSubMachineGunPractice: MagazinePistolPractice
 BoxMagazineMagnumSubMachineGun: BoxMagazineRifle
+
+# 2025-01-01 Trauma Remove scurret poster
+PosterLegitHelio: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
