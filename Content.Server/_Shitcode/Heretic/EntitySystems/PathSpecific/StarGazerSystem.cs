@@ -450,8 +450,7 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
                     recoil: false,
                     animated: false,
                     doSpin: false,
-                    playSound: false,
-                    predicted: false);
+                    playSound: false);
             }
         }
     }

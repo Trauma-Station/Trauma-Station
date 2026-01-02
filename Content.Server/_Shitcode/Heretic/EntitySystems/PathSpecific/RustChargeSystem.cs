@@ -1,5 +1,4 @@
 using Content.Server.Destructible;
-using Content.Shared.Destructible;
 using Content.Shared._Shitcode.Heretic.Systems;
 
 namespace Content.Server._Shitcode.Heretic.EntitySystems.PathSpecific;

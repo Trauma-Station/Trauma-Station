@@ -154,8 +154,7 @@ namespace Content.Server.Disposal.Unit
                     {
                         var directionAngle = direction.ToAngle();
                         directionAngle += _xformSystem.GetWorldRotation(gridXform);
-                        _throwing.TryThrow(entity, directionAngle.ToWorldVec() * 3f, 10f,
-                            predicted: false); // Trauma
+                        _throwing.TryThrow(entity, directionAngle.ToWorldVec() * 3f, 10f);
                     }
                 }
             }

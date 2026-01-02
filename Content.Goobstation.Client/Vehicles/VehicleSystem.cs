@@ -18,22 +18,18 @@ public sealed class VehicleSystem : SharedVehicleSystem
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
-    private EntityQuery<SpriteComponent> _spriteQuery;
-
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<VehicleComponent, AppearanceChangeEvent>(OnAppearanceChange);
         SubscribeLocalEvent<VehicleComponent, MoveEvent>(OnMove);
-
-        _spriteQuery = GetEntityQuery<SpriteComponent>();
     }
 
     private void OnAppearanceChange(Entity<VehicleComponent> ent, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null
             || !_appearance.TryGetData(ent, VehicleState.Animated, out bool animated)
-            || !_spriteQuery.TryComp(ent, out var spriteComp))
+            || !TryComp<SpriteComponent>(ent, out var spriteComp))
             return;
 
         SpritePos(ent);
@@ -51,7 +47,7 @@ public sealed class VehicleSystem : SharedVehicleSystem
 
     private void SpritePos(Entity<VehicleComponent> ent)
     {
-        if (!_spriteQuery.TryComp(ent, out var spriteComp)
+        if (!TryComp<SpriteComponent>(ent, out var spriteComp)
             || !_appearance.TryGetData(ent, VehicleState.DrawOver, out _))
             return;
 

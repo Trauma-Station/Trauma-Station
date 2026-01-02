@@ -1,6 +1,6 @@
 namespace Content.Shared.Destructible;
 
-public abstract partial class SharedDestructibleSystem : EntitySystem // Trauma - made partial
+public abstract class SharedDestructibleSystem : EntitySystem
 {
     /// <summary>
     /// Force entity to be destroyed and deleted.

@@ -21,7 +21,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<ImpactEffectEvent>(OnProjectileImpact); // Trauma - it's local now
+        SubscribeNetworkEvent<ImpactEffectEvent>(OnProjectileImpact);
     }
 
     private void OnProjectileImpact(ImpactEffectEvent ev)

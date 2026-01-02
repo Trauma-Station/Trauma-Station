@@ -279,8 +279,7 @@ namespace Content.Server.VendingMachines
             {
                 var range = vendComponent.NonLimitedEjectRange;
                 var direction = new Vector2(_random.NextFloat(-range, range), _random.NextFloat(-range, range));
-                _throwingSystem.TryThrow(ent, direction, vendComponent.NonLimitedEjectForce,
-                    predicted: false); // Trauma
+                _throwingSystem.TryThrow(ent, direction, vendComponent.NonLimitedEjectForce);
             }
 
             vendComponent.NextItemToEject = null;

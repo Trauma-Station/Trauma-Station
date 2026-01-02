@@ -335,7 +335,7 @@ public sealed class PullingSystem : EntitySystem
             component.GrabThrownSpeed,
             damage * component.GrabThrowDamageModifier); // Throwing the grabbed person
         _throwing.TryThrow(uid, -direction * throwerPhysics.InvMass); // Throws back the grabber
-        _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), uid, uid);
+        _audio.PlayPvs(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), uid);
         component.NextStageChange = _timing.CurTime.Add(TimeSpan.FromSeconds(3f)); // To avoid grab and throw spamming
     }
     // </Goob>
@@ -522,7 +522,7 @@ public sealed class PullingSystem : EntitySystem
             pullerComp.GrabStage = GrabStage.No;
             var virtItems = pullerComp.GrabVirtualItems;
             foreach (var item in virtItems)
-                PredictedQueueDel(item); // Trauma - why was this not predicted
+                QueueDel(item);
 
             pullerComp.GrabVirtualItems.Clear();
             // Goobstation

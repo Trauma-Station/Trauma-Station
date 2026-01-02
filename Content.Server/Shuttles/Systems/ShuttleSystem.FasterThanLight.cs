@@ -779,8 +779,7 @@ public sealed partial class ShuttleSystem
         if (throwDirection == Vector2.Zero)
             return;
 
-        _throwing.TryThrow(tossed, throwDirection.Normalized() * 10.0f, 50.0f,
-            predicted: false); // Trauma
+        _throwing.TryThrow(tossed, throwDirection.Normalized() * 10.0f, 50.0f);
     }
 
     /// <summary>

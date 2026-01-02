@@ -988,21 +988,3 @@ Entries:
         department playtime.
   id: 115
   time: '2026-01-01T16:00:47.0000000+00:00'
-- author: TurboTrackerss14
-  changes:
-    - type: Remove
-      message: AI Scurret hologram
-    - type: Remove
-      message: Cargo Scurret purchase.
-    - type: Remove
-      message: Scurret posters no longer in legit poster spawntable.
-    - type: Tweak
-      message: Scurrets are now near impossible to pet.
-  id: 116
-  time: '2026-01-01T18:40:19.0000000+00:00'
-- author: deltanedas
-  changes:
-    - type: Fix
-      message: Throwing is no longer affected by lag, it's all predicted now.
-  id: 117
-  time: '2026-01-02T01:33:15.0000000+00:00'

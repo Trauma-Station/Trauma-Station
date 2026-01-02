@@ -514,8 +514,7 @@ public sealed partial class ExplosionSystem
                 physics,
                 xform,
                 _projectileQuery,
-                throwForce,
-                predicted: false); // Trauma
+                throwForce);
         }
     }
 

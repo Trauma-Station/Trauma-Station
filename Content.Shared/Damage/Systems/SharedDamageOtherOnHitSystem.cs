@@ -4,7 +4,7 @@ using Content.Shared.Damage.Events;
 
 namespace Content.Shared.Damage.Systems;
 
-public abstract partial class SharedDamageOtherOnHitSystem : EntitySystem // Trauma - made partial
+public abstract class SharedDamageOtherOnHitSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly DamageExamineSystem _damageExamine = default!;
@@ -12,7 +12,6 @@ public abstract partial class SharedDamageOtherOnHitSystem : EntitySystem // Tra
     public override void Initialize()
     {
         base.Initialize();
-        InitializeTrauma(); // Trauma
 
         SubscribeLocalEvent<DamageOtherOnHitComponent, DamageExamineEvent>(OnDamageExamine);
         SubscribeLocalEvent<DamageOtherOnHitComponent, AttemptPacifiedThrowEvent>(OnAttemptPacifiedThrow);

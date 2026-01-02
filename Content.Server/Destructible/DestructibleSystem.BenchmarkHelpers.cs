@@ -1,5 +1,4 @@
 using Content.Shared.Damage;
-using Content.Shared.Destructible; // Trauma
 
 namespace Content.Server.Destructible;
 

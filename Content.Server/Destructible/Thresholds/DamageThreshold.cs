@@ -1,11 +1,8 @@
-using Content.Shared.Destructible.Thresholds.Behaviors;
+using Content.Server.Destructible.Thresholds.Behaviors;
 using Content.Shared.Destructible.Thresholds.Triggers;
 
-namespace Content.Shared.Destructible.Thresholds;
+namespace Content.Server.Destructible.Thresholds;
 
-/// <summary>
-/// Trauma - moved to shared
-/// </summary>
 [DataDefinition]
 public sealed partial class DamageThreshold
 {
@@ -41,6 +38,6 @@ public sealed partial class DamageThreshold
     /// Behaviors to activate once this threshold is triggered.
     /// TODO: Replace with EntityEffects.
     /// </summary>
-    [DataField(serverOnly: true)] // Trauma - all behaviors are server only
+    [DataField]
     public List<IThresholdBehavior> Behaviors = new();
 }

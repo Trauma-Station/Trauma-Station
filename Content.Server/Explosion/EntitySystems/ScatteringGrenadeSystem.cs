@@ -86,8 +86,7 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
                     else
                         direction *= component.Distance;
 
-                    _throwingSystem.TryThrow(contentUid, direction, component.Velocity,
-                        predicted: false); // Trauma
+                    _throwingSystem.TryThrow(contentUid, direction, component.Velocity);
 
                     if (component.TriggerContents && TryComp<TimerTriggerComponent>(contentUid, out var contentTimer))
                     {

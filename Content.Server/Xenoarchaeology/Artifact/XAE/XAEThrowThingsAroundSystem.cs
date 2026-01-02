@@ -66,8 +66,7 @@ public sealed class XAEThrowThingsAroundSystem : BaseXAESystem<XAEThrowThingsAro
             var tempXform = Transform(entity);
 
             var foo = _transform.GetWorldPosition(tempXform) - _transform.GetWorldPosition(xform);
-            _throwing.TryThrow(entity, foo * 2, component.ThrowStrength, ent, 0,
-                predicted: false); // Trauma
+            _throwing.TryThrow(entity, foo * 2, component.ThrowStrength, ent, 0);
         }
     }
 }
