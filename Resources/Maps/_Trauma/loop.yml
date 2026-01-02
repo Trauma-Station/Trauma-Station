@@ -4,7 +4,7 @@ meta:
   engineVersion: 268.0.0
   forkId: ""
   forkVersion: ""
-  time: 01/02/2026 22:51:22
+  time: 01/02/2026 23:21:23
   entityCount: 18329
 maps:
 - 1
@@ -97063,13 +97063,8 @@ entities:
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 22.5,36.5
+      pos: 22.5,35.5
       parent: 2
-    - type: SurveillanceCamera
-      setupAvailableNetworks:
-      - SurveillanceCameraScience
-      nameSet: True
-      id: Sci Main room east
   - uid: 18098
     components:
     - type: MetaData
