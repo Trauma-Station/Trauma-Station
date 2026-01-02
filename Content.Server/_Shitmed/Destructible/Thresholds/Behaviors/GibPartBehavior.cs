@@ -5,6 +5,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Body.Part;
+using Content.Shared.Destructible;
+using Content.Shared.Destructible.Thresholds.Behaviors;
 using JetBrains.Annotations;
 
 // Leaving this one in the default namespace because I am afraid to test it
@@ -15,7 +17,7 @@ namespace Content.Server.Destructible.Thresholds.Behaviors;
 [DataDefinition]
 public sealed partial class GibPartBehavior : IThresholdBehavior
 {
-    public void Execute(EntityUid owner, DestructibleSystem system, EntityUid? cause = null)
+    public void Execute(EntityUid owner, SharedDestructibleSystem system, EntityUid? cause = null)
     {
         if (!system.EntityManager.TryGetComponent(owner, out BodyPartComponent? part))
             return;

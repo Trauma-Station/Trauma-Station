@@ -1,7 +1,11 @@
 using Content.Shared.Destructible;
+using Content.Shared.Destructible.Thresholds.Behaviors;
 
-namespace Content.Server.Destructible.Thresholds.Behaviors
+namespace Content.Shared.Destructible.Thresholds.Behaviors
 {
+    /// <summary>
+    /// Trauma - moved to shared
+    /// </summary>
     [Serializable]
     [DataDefinition]
     public sealed partial class DoActsBehavior : IThresholdBehavior
@@ -17,7 +21,7 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
             return (Acts & act) != 0;
         }
 
-        public void Execute(EntityUid owner, DestructibleSystem system, EntityUid? cause = null)
+        public void Execute(EntityUid owner, SharedDestructibleSystem system, EntityUid? cause = null)
         {
             if (HasAct(ThresholdActs.Breakage))
             {
