@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Robust.Shared.Serialization;
 
-namespace Content.Trauma.Common.Projectiles;
+namespace Content.Trauma.Shared.Projectiles;
 
 /// <summary>
 /// Event sent to the client that shot a predicted projectile.

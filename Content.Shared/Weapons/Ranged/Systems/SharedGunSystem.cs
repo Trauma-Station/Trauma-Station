@@ -694,14 +694,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (targetCoordinates is {} target)
             projectile.TargetCoordinates = target;
 
-        // this lets the client ignore the server-spawned projectile that it predicted shooting
-        if (user is {} userUid && _netManager.IsServer)
+        if (user is {} userUid)
         {
-            var ev = new ShotPredictedProjectileEvent()
-            {
-                Projectile = GetNetEntity(uid)
-            };
-            RaiseNetworkEvent(ev, userUid);
+            var ev = new PlayerShotProjectileEvent(uid, userUid);
+            RaiseLocalEvent(ref ev);
         }
         // </Trauma>
     }
