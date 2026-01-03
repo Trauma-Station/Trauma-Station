@@ -301,6 +301,7 @@ public partial class SharedGunSystem
         var mapCoordinates = TransformSystem.GetMapCoordinates(revolverUid);
         var anyEmpty = false;
 
+        var rand = Random(revolverUid); // Trauma
         for (var i = 0; i < component.Capacity; i++)
         {
             var chamber = component.Chambers[i];
@@ -311,16 +312,14 @@ public partial class SharedGunSystem
                 if (chamber == null)
                     continue;
 
-                // Too lazy to make a new method don't sue me.
-                if (!_netManager.IsClient)
-                {
-                    var uid = Spawn(component.FillPrototype, mapCoordinates);
+                // <Trauma> - predicted this shit
+                var uid = EntityManager.PredictedSpawn(component.FillPrototype, mapCoordinates);
 
-                    if (TryComp<CartridgeAmmoComponent>(uid, out var cartridge))
-                        SetCartridgeSpent(uid, cartridge, !(bool) chamber);
+                if (TryComp<CartridgeAmmoComponent>(uid, out var cartridge))
+                    SetCartridgeSpent(uid, cartridge, !(bool) chamber);
 
-                    EjectCartridge(uid);
-                }
+                EjectCartridge(rand, uid);
+                // </Trauma>
 
                 component.Chambers[i] = null;
                 anyEmpty = true;
@@ -331,8 +330,7 @@ public partial class SharedGunSystem
                 Containers.Remove(slot.Value, component.AmmoContainer);
                 component.Chambers[i] = null;
 
-                if (!_netManager.IsClient)
-                    EjectCartridge(slot.Value);
+                EjectCartridge(rand, slot.Value); // Trauma - predicted this shit
 
                 anyEmpty = true;
             }
@@ -358,10 +356,21 @@ public partial class SharedGunSystem
         Appearance.SetData(uid, AmmoVisuals.AmmoMax, component.Capacity, appearance);
     }
 
-    protected virtual void SpinRevolver(EntityUid revolverUid, RevolverAmmoProviderComponent component, EntityUid? user = null)
+    /// <summary>
+    /// Made concrete, predicted the actual spinning logic
+    /// </summary>
+    protected void SpinRevolver(EntityUid revolverUid, RevolverAmmoProviderComponent component, EntityUid? user = null)
     {
         Audio.PlayPredicted(component.SoundSpin, revolverUid, user);
         Popup(Loc.GetString("gun-revolver-spun"), revolverUid, user);
+
+        var index = Random(revolverUid).Next(component.Capacity);
+
+        if (component.CurrentIndex == index)
+            return;
+
+        component.CurrentIndex = index;
+        Dirty(revolverUid, component);
     }
 
     private void OnRevolverTakeAmmo(EntityUid uid, RevolverAmmoProviderComponent component, TakeAmmoEvent args)
@@ -388,13 +397,11 @@ public partial class SharedGunSystem
                 if (chamber == true)
                 {
                     // Pretend it's always been there.
-                    ent = Spawn(component.FillPrototype, args.Coordinates);
-
-                    if (!_netManager.IsClient)
-                    {
-                        component.AmmoSlots[index] = ent;
-                        Containers.Insert(ent.Value, component.AmmoContainer);
-                    }
+                    // <Trauma> - predicted this shit
+                    ent = PredictedSpawnAtPosition(component.FillPrototype, args.Coordinates);
+                    component.AmmoSlots[index] = ent;
+                    Containers.Insert(ent.Value, component.AmmoContainer);
+                    // </Trauma>
 
                     component.Chambers[index] = false;
                 }
@@ -411,7 +418,7 @@ public partial class SharedGunSystem
 
                 // Mark cartridge as spent and if it's caseless delete from the chamber slot.
                 SetCartridgeSpent(ent.Value, cartridge, true);
-                var spawned = Spawn(cartridge.Prototype, args.Coordinates);
+                var spawned = PredictedSpawnAtPosition(cartridge.Prototype, args.Coordinates); // Trauma - predicted this shit
                 args.Ammo.Add((spawned, EnsureComp<AmmoComponent>(spawned)));
 
                 if (cartridge.DeleteOnSpawn)
@@ -428,10 +435,12 @@ public partial class SharedGunSystem
             }
 
             // Delete the cartridge entity on client
+            /* Trauma - no
             if (_netManager.IsClient)
             {
                 QueueDel(ent);
             }
+            */
         }
 
         UpdateAmmoCount(uid, prediction: false);

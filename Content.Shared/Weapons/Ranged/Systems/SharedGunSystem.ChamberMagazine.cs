@@ -130,15 +130,9 @@ public abstract partial class SharedGunSystem
 
         if (TryTakeChamberEntity(uid, out var chamberEnt))
         {
-            if (_netManager.IsServer)
-            {
-                EjectCartridge(chamberEnt.Value);
-            }
-            else
-            {
-                // Similar to below just due to prediction.
-                TransformSystem.DetachEntity(chamberEnt.Value, Transform(chamberEnt.Value));
-            }
+            // <Trauma> - replace shit fake prediction
+            EjectCartridge(Random(uid), chamberEnt.Value);
+            // </Trauma>
         }
 
         if (!CycleCartridge(uid, component, user))
@@ -200,18 +194,9 @@ public abstract partial class SharedGunSystem
         {
             if (TryTakeChamberEntity(uid, out var chambered))
             {
-                if (_netManager.IsServer)
-                {
-                    EjectCartridge(chambered.Value);
-                }
-                else
-                {
-                    // Prediction moment
-                    // The problem is client will dump the cartridge on the ground and the new server state
-                    // won't correspond due to randomness so looks weird
-                    // but we also need to always take it from the chamber or else ammocount won't be correct.
-                    TransformSystem.DetachEntity(chambered.Value, Transform(chambered.Value));
-                }
+                // <Trauma> - replace shitty fake prediction
+                EjectCartridge(Random(uid), chambered.Value);
+                // </Trauma>
 
                 UpdateAmmoCount(uid);
             }
@@ -261,6 +246,7 @@ public abstract partial class SharedGunSystem
                 UpdateAmmoCount(uid);
 
                 // Clientside reconciliation things
+                /* Trauma - no
                 if (_netManager.IsClient)
                 {
                     foreach (var (ent, _) in relayedArgs.Ammo)
@@ -270,7 +256,7 @@ public abstract partial class SharedGunSystem
 
                         Del(ent.Value);
                     }
-                }
+                }*/
             }
             else
             {

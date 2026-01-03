@@ -5,7 +5,7 @@ using Robust.Client.Physics;
 namespace Content.Trauma.Client.Throwing;
 
 /// <summary>
-/// Lets thrown items' physics be predicted.
+/// Lets thrown items and projectiles' physics be predicted.
 /// </summary>
 public sealed class PredictedThrowingSystem : EntitySystem
 {

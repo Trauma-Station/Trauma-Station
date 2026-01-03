@@ -1006,3 +1006,9 @@ Entries:
       message: Throwing is no longer affected by lag, it's all predicted now.
   id: 117
   time: '2026-01-02T01:33:15.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Plague mice now spawn from a random event instead of roundstart.
+  id: 118
+  time: '2026-01-02T17:58:22.0000000+00:00'
