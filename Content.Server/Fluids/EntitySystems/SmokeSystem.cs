@@ -248,8 +248,13 @@ public sealed class SmokeSystem : EntitySystem
     /// </summary>
     public void SmokeReact(EntityUid entity, EntityUid smokeUid, SmokeComponent? component = null)
     {
-        if (!Resolve(smokeUid, ref component))
+        // <Trauma> - remove SmokeAffected if the smoke doesnt exist
+        if (!Resolve(smokeUid, ref component, false))
+        {
+            RemCompDeferred<SmokeAffectedComponent>(entity);
             return;
+        }
+        // </Trauma>
 
         if (!_solutionContainerSystem.ResolveSolution(smokeUid, SmokeComponent.SolutionName, ref component.Solution, out var solution) ||
             solution.Contents.Count == 0)
