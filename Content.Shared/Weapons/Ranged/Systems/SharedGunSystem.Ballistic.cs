@@ -283,7 +283,7 @@ public abstract partial class SharedGunSystem
             {
                 component.UnspawnedCount--;
                 DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.UnspawnedCount));
-                ammoEntity = PredictedSpawnAtPosition(component.Proto, args.Coordinates);
+                ammoEntity = PredictedSpawnAtPosition(component.Proto, args.Coordinates); // Trauma - predicted this shit
                 // <Goob> - put spent ammo back in the gun if it doesn't autocycle
                 if (!component.AutoCycle)
                 {
