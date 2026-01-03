@@ -35,7 +35,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
 
         if (TryComp<SpriteComponent>(ent, out var sprite))
         {
-            sprite[EffectLayers.Unshaded].AutoAnimated = false;
+            //sprite[EffectLayers.Unshaded].AutoAnimated = false; // Trauma - this makes it look shit
             _sprite.LayerMapTryGet((ent, sprite), EffectLayers.Unshaded, out var layer, false);
             var state = _sprite.LayerGetRsiState((ent, sprite), layer);
             var lifetime = 0.5f;

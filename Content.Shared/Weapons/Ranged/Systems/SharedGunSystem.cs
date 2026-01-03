@@ -5,6 +5,7 @@ using Content.Shared._Lavaland.Weapons.Ranged.Events;
 using Content.Shared._Shitmed.Weapons.Ranged.Events;
 using Content.Shared.Mech.Components;
 using Content.Shared.Weapons.Hitscan.Events;
+using Content.Trauma.Common.Projectiles;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
@@ -689,10 +690,20 @@ public abstract partial class SharedGunSystem : EntitySystem
         Physics.UpdateIsPredicted(uid, physics); // Trauma - predict this shit
 
         TransformSystem.SetWorldRotation(uid, direction.ToWorldAngle() + projectile.Angle);
-        // <Goob>
+        // <Trauma>
         if (targetCoordinates is {} target)
             projectile.TargetCoordinates = target;
-        // </Goob>
+
+        // this lets the client ignore the server-spawned projectile that it predicted shooting
+        if (user is {} userUid && _netManager.IsServer)
+        {
+            var ev = new ShotPredictedProjectileEvent()
+            {
+                Projectile = GetNetEntity(uid)
+            };
+            RaiseNetworkEvent(ev, userUid);
+        }
+        // </Trauma>
     }
 
     protected abstract void Popup(string message, EntityUid? uid, EntityUid? user);
