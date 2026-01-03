@@ -1012,3 +1012,9 @@ Entries:
       message: Plague mice now spawn from a random event instead of roundstart.
   id: 118
   time: '2026-01-02T17:58:22.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Guns are now predicted.
+  id: 119
+  time: '2026-01-03T03:58:35.0000000+00:00'
