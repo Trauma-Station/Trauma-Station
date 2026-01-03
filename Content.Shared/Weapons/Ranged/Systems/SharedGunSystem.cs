@@ -519,13 +519,17 @@ public abstract partial class SharedGunSystem : EntitySystem
                 return;
         }
 
-        userImpulse = true;
-
         var fromMap = TransformSystem.ToMapCoordinates(fromCoordinates);
         var toMap = TransformSystem.ToMapCoordinates(toCoordinates).Position;
         var mapDirection = toMap - fromMap.Position;
+        // <Trauma> - prevent shooting with 0,0 direction
+        if (mapDirection == Vector2.Zero)
+            return;
+        // </Trauma>
         var mapAngle = mapDirection.ToAngle();
         var angle = GetRecoilAngle(Timing.CurTime, (gunUid, gun), mapDirection.ToAngle(), user); // Trauma - pass gunUid and user
+
+        userImpulse = true;
 
         // If applicable, this ensures the projectile is parented to grid on spawn, instead of the map.
         var fromEnt = MapManager.TryFindGridAt(fromMap, out var gridUid, out _)
