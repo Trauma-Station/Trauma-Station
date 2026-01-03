@@ -2,8 +2,10 @@
 using Content.Server.Movement.Components;
 using Content.Server.Movement.Systems;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Projectiles;
+using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 
@@ -15,6 +17,7 @@ namespace Content.Trauma.Server.Projectiles;
 /// </summary>
 public sealed class LagCompProjectileSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly LagCompensationSystem _lag = default!;
     [Dependency] private readonly PredictedProjectileSystem _projectile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -25,7 +28,7 @@ public sealed class LagCompProjectileSystem : EntitySystem
     /// <summary>
     /// If a projectile is within this distance of a lag-comp'd position for a target, it counts as a hit.
     /// </summary>
-    public const float Range = 0.3f;
+    public float Range = 0.6f;
 
     public override void Initialize()
     {
@@ -37,6 +40,8 @@ public sealed class LagCompProjectileSystem : EntitySystem
         SubscribeLocalEvent<PlayerShotProjectileEvent>(OnShotProjectile);
         SubscribeLocalEvent<LagCompProjectileComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<LagCompProjectileComponent, EndCollideEvent>(OnEndCollide);
+
+        Subs.CVar(_cfg, TraumaCVars.GunLagCompRange, x => Range = x, true);
     }
 
     public override void Update(float frameTime)
