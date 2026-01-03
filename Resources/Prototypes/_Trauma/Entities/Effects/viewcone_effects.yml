@@ -12,6 +12,7 @@
   components:
   - type: ViewconeOccludable
     inverted: true
+    overrideBaseAlpha: true
   - type: Sprite
     sprite: _Trauma/Effects/viewcone_effects.rsi
     drawdepth: Effects
