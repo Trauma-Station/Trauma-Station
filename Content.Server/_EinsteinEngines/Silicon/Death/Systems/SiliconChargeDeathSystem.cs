@@ -79,11 +79,8 @@ public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
     private void OnStandAttempt(Entity<SiliconDownOnDeadComponent> ent, ref StandAttemptEvent args)
     {
         // Prevent standing up if discharged
-        if (args.Cancelled || !ent.Comp.Dead)
-            return;
-
-        EnsureComp<KnockedDownComponent>(ent);
-        args.Cancel();
+        if (ent.Comp.Dead)
+            args.Cancel();
     }
 
     private void SiliconDead(EntityUid uid, SiliconDownOnDeadComponent siliconDeadComp, Entity<PredictedBatteryComponent>? battery)

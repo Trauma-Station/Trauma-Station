@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Trauma.Common.Throwing;
 using Robust.Shared.Network;
 // </Trauma>
 using System.Numerics;
@@ -182,7 +183,7 @@ public sealed class ThrowingSystem : EntitySystem
 
         var comp = new ThrownItemComponent
         {
-            Thrower = user,
+            Thrower = TerminatingOrDeleted(user) ? null : user, // Trauma - don't network a deleted entity
             Animate = animated,
 
         };
@@ -253,7 +254,7 @@ public sealed class ThrowingSystem : EntitySystem
 
         // <Trauma> - its really not that hard
         if (predicted)
-            _physics.UpdateIsPredicted(uid, physics);
+            EnsureComp<PredictedThrownItemComponent>(uid);
         // </Trauma>
 
         if (user == null)

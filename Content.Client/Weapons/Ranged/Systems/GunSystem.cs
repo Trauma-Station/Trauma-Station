@@ -87,7 +87,7 @@ public sealed partial class GunSystem : SharedGunSystem
         SubscribeAllEvent<MuzzleFlashEvent>(OnMuzzleFlash);
 
         // Plays animated effects on the client.
-        SubscribeNetworkEvent<HitscanEvent>(OnHitscan);
+        SubscribeAllEvent<HitscanEvent>(OnHitscan); // Trauma - all instead of network
 
         InitializeMagazineVisuals();
         InitializeSpentAmmo();

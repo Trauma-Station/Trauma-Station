@@ -1018,3 +1018,29 @@ Entries:
       message: Guns are now predicted.
   id: 119
   time: '2026-01-03T03:58:35.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed laser guns.
+  id: 120
+  time: '2026-01-03T22:02:18.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Guns are now lag compensated.
+  id: 121
+  time: '2026-01-03T22:10:06.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed throwing rubber banding.
+  id: 122
+  time: '2026-01-04T02:14:51.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Fix
+      message: >-
+        Station Radios respect their toggle/powered states on new music being
+        played.
+  id: 123
+  time: '2026-01-04T04:52:35.0000000+00:00'
