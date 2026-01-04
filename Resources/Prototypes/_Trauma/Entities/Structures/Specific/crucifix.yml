@@ -10,6 +10,7 @@
     layers:
     - state: icon
       # TODO: when crucifying a monkey hide the monkey and use monkey state
+  - type: InteractionOutline
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
