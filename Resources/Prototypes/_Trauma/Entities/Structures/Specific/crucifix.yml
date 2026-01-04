@@ -26,6 +26,9 @@
     buckleOffset: "0,0.1"
     buckleDoAfterTime: 5 # hard to be a shitter with it
     selfUnBuckleDelay: 10 # only works before you get nailed onto it
+    whitelist:
+      components:
+      - HumanoidAppearance # monkey/kobold has this too, dont worry
   - type: StrapLock
   - type: ChangeNodeOnUnstrap
     node: cross # revert to uncrucified if entity is deleted or whatever

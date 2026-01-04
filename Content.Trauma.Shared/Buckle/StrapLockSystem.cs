@@ -20,7 +20,6 @@ namespace Content.Trauma.Shared.Buckle;
 // all the loc is specific to crucifixion, so if you want to reuse this youll want to tie loc strings to the component
 public sealed class StrapLockSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly NestedEffectSystem _nestedEffect = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
@@ -55,9 +54,6 @@ public sealed class StrapLockSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-
-        if (_net.IsClient) // cbf
-            return;
 
         var query = EntityQueryEnumerator<StrapLockHoldingComponent>();
         while (query.MoveNext(out var uid, out var holding))
@@ -289,7 +285,7 @@ public sealed class StrapLockSystem : EntitySystem
         var buckled = strap.BuckledEntities;
         foreach (var target in buckled)
         {
-            RemComp<StrapLockHeldComponent>(target);
+            RemCompDeferred<StrapLockHeldComponent>(target);
         }
     }
 
