@@ -3,6 +3,7 @@ using Content.Shared.Throwing;
 using Content.Trauma.Common.Throwing;
 using Robust.Client.Physics;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Throwing;
 
@@ -17,8 +18,8 @@ public sealed class PredictedThrowingSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PredictedThrownItemComponent, ComponentStartup>(UpdatePredicted);
-        SubscribeLocalEvent<PredictedThrownItemComponent, ComponentShutdown>(UpdatePredicted);
+        SubscribeLocalEvent<PredictedThrownItemComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<PredictedThrownItemComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<PredictedThrownItemComponent, UpdateIsPredictedEvent>(OnUpdateIsPredicted);
     }
 
@@ -27,9 +28,15 @@ public sealed class PredictedThrowingSystem : EntitySystem
         args.IsPredicted = true;
     }
 
-    private void UpdatePredicted(EntityUid uid, PredictedThrownItemComponent comp, EntityEventArgs args)
+    private void OnStartup(Entity<PredictedThrownItemComponent> ent, ref ComponentStartup args)
     {
-        // start/stop predicting physics when added/removed
-        _physics.UpdateIsPredicted(uid);
+        // start predicted physics immediately
+        _physics.UpdateIsPredicted(ent.Owner);
+    }
+
+    private void OnShutdown(Entity<PredictedThrownItemComponent> ent, ref ComponentShutdown args)
+    {
+        // stop predicted physics after a brief delay so it doesn't rubber band with client-server ping
+        Timer.Spawn(1000, () => _physics.UpdateIsPredicted(ent.Owner));
     }
 }
