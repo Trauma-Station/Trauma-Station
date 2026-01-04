@@ -79,7 +79,7 @@
         icon:
           sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
           state: icon
-      - tool: Hammer
+      - tool: Hammering
         doAfter: 3
 
   - node: right hand
@@ -91,7 +91,7 @@
       steps:
       - tool: Prying
         doAfter: 2
-    - to: feet
+    - to: crucified
       conditions:
       - !type:HasStrappedEntity
       completed:
@@ -120,10 +120,10 @@
         icon:
           sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
           state: icon
-      - tool: Hammer
+      - tool: Hammering
         doAfter: 5
 
-  - node: feet
+  - node: crucified
     edges:
     - to: right hand
       completed:

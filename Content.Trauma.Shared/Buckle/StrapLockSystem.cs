@@ -1,19 +1,26 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+using Content.Shared._DV.Carrying;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.VirtualItem;
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Popups;
+using Content.Shared.Standing;
+using Content.Shared.Throwing;
 using Content.Trauma.Shared.EntityEffects;
 using Robust.Shared.Player;
+using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Buckle;
 
 // all the loc is specific to crucifixion, so if you want to reuse this youll want to tie loc strings to the component
 public sealed class StrapLockSystem : EntitySystem
 {
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly NestedEffectSystem _nestedEffect = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
@@ -33,15 +40,24 @@ public sealed class StrapLockSystem : EntitySystem
 
         SubscribeLocalEvent<StrapLockComponent, ComponentShutdown>(OnShutdown);
 
+        SubscribeLocalEvent<StrapLockHeldComponent, CarryAttemptEvent>(OnHeldCarryAttempt);
         SubscribeLocalEvent<StrapLockHeldComponent, ComponentShutdown>(OnHeldShutdown);
 
         SubscribeLocalEvent<StrapLockHoldingComponent, VirtualItemDeletedEvent>(OnVirtualItemDeleted);
         SubscribeLocalEvent<StrapLockHoldingComponent, ComponentShutdown>(OnHoldingShutdown);
+
+        SubscribeLocalEvent<StrapLockedComponent, InteractionAttemptEvent>(OnLockedInteractionAttempt);
+        SubscribeLocalEvent<StrapLockedComponent, ThrowAttemptEvent>(OnLockedThrowAttempt);
+        SubscribeLocalEvent<StrapLockedComponent, PullAttemptEvent>(OnLockedPullAttempt);
+        SubscribeLocalEvent<StrapLockedComponent, CarryAttemptEvent>(OnLockedCarryAttempt);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        if (_net.IsClient) // cbf
+            return;
 
         var query = EntityQueryEnumerator<StrapLockHoldingComponent>();
         while (query.MoveNext(out var uid, out var holding))
@@ -120,13 +136,17 @@ public sealed class StrapLockSystem : EntitySystem
             return;
 
         var buckled = Identity.Entity(args.Buckle, EntityManager);
-        var msg = Loc.GetString("strap-lock-unstrap-locked", ("buckled", buckled));
+        var key = args.User == args.Buckle.Owner ? "you" : "others";
+        var msg = Loc.GetString($"strap-lock-unstrap-locked-{key}", ("buckled", buckled), ("strap", ent.Owner));
         _popup.PopupClient(msg, ent, args.User);
     }
 
     private void OnUnstrapped(Entity<StrapLockComponent> ent, ref UnstrappedEvent args)
     {
+        UnlockStrap(ent); // can't be locked if johnny is unstrapped from it
+
         ClearVirtualItems(ent.AsNullable());
+        RemComp<StrapLockedComponent>(args.Buckle);
         if (!TryComp<StrapLockHeldComponent>(args.Buckle, out var held))
             return;
 
@@ -166,6 +186,12 @@ public sealed class StrapLockSystem : EntitySystem
         StopHoldingStrapped(ent);
     }
 
+    private void OnHeldCarryAttempt(Entity<StrapLockHeldComponent> ent, ref CarryAttemptEvent args)
+    {
+        // can't carry someone being held by someone else chud
+        args.Cancelled = true;
+    }
+
     private void OnHeldShutdown(Entity<StrapLockHeldComponent> ent, ref ComponentShutdown args)
     {
         RemCompDeferred<StrapLockHoldingComponent>(ent.Comp.Holder);
@@ -182,10 +208,36 @@ public sealed class StrapLockSystem : EntitySystem
         StopHolding(ent);
     }
 
+    private void OnLockedInteractionAttempt(Entity<StrapLockedComponent> ent, ref InteractionAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnLockedThrowAttempt(Entity<StrapLockedComponent> ent, ref ThrowAttemptEvent args)
+    {
+        args.Cancel();
+    }
+
+    private void OnLockedPullAttempt(Entity<StrapLockedComponent> ent, ref PullAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnLockedCarryAttempt(Entity<StrapLockedComponent> ent, ref CarryAttemptEvent args)
+    {
+        // can't carry someone nailed to a cross, get them down
+        args.Cancelled = true;
+    }
+
     #endregion
 
     private void StartHolding(Entity<StrapLockComponent> ent, EntityUid user, EntityUid target)
     {
+        // no holding items your hands are getting nailed
+        var ev = new DropHandItemsEvent();
+        RaiseLocalEvent(target, ref ev);
+        EnsureComp<StrapLockedComponent>(target); // prevent them doing anything
+
         var userIdent = Identity.Entity(user, EntityManager);
         var buckled = Identity.Entity(target, EntityManager);
         var you = Loc.GetString("strap-lock-raising-you", ("buckled", buckled), ("strap", ent.Owner));
@@ -212,9 +264,10 @@ public sealed class StrapLockSystem : EntitySystem
         ClearVirtualItems(ent.Comp.Strap);
 
         ent.Comp.Buckled = EntityUid.Invalid; // prevent effect/popup stacking if called multiple times
-        _buckle.TryUnbuckle(target, null);
         if (CompOrNull<StrapLockComponent>(ent.Comp.Strap)?.Locked == true)
             return; // locked so don't actually do anything
+
+        _buckle.TryUnbuckle(target, null);
 
         if (CompOrNull<StrapLockHeldComponent>(target)?.Unsafe != true)
             return; // no effects if it is missing the component or marked as safe
@@ -247,7 +300,7 @@ public sealed class StrapLockSystem : EntitySystem
 
         foreach (var item in ent.Comp.VirtualItems)
         {
-            QueueDel(item);
+            PredictedQueueDel(item);
         }
 
         ent.Comp.VirtualItems.Clear();
