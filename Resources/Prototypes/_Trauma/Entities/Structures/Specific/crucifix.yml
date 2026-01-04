@@ -33,7 +33,7 @@
   - type: Strap
     position: Stand
     buckleOffset: "0,0.1"
-    buckleDoAfterTime: 5 # hard to be a shitter with it
+    buckleDoafterTime: 5 # hard to be a shitter with it
     selfUnBuckleDelay: 10 # only works before you get nailed onto it
     whitelist:
       components:

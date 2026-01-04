@@ -38,7 +38,7 @@
             damage:
               types:
                 Piercing: 15
-            targetBodyPart: LeftHand
+            targetPart: LeftHand
       steps:
       - tag: Nail
         name: construction-graph-tag-nail
@@ -72,7 +72,7 @@
             damage:
               types:
                 Piercing: 15
-            targetBodyPart: RightHand
+            targetPart: RightHand
       steps:
       - tag: Nail
         name: construction-graph-tag-nail
@@ -106,7 +106,7 @@
             damage:
               types:
                 Piercing: 15
-            targetBodyPart: Feet
+            targetPart: Feet
           - !type:ModifyBleed
             amount: 10 # perish
           - !type:PopupMessage
