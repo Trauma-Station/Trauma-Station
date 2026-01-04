@@ -11,6 +11,14 @@
     - state: icon
       # TODO: when crucifying a monkey hide the monkey and use monkey state
   - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.4
+        density: 100
+        mask:
+        - TableMask
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood

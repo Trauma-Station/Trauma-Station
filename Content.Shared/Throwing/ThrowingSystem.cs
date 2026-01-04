@@ -181,6 +181,13 @@ public sealed class ThrowingSystem : EntitySystem
         if (projectileQuery.TryGetComponent(uid, out var proj) && !proj.OnlyCollideWhenShot)
             return;
 
+        // <Trauma>
+        var attemptEv = new BeingThrownAttemptEvent();
+        RaiseLocalEvent(uid, ref attemptEv);
+        if (attemptEv.Cancelled)
+            return;
+        // </Trauma>
+
         var comp = new ThrownItemComponent
         {
             Thrower = TerminatingOrDeleted(user) ? null : user, // Trauma - don't network a deleted entity
