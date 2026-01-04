@@ -468,4 +468,5 @@
   - type: Mutation
     instability: 25
     difficulty: 24
-  # TODO GOIDAMED: disable softcrit
+  - type: MobThresholdMutation
+    removed: SoftCrit
