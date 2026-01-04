@@ -1,0 +1,14 @@
+- type: entityEffect
+  id: CrucifixDropped
+  effects:
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 10
+    ignoreResistances: false
+    ignoreBlockers: false
+    targetPart: Chest # Dropped on your back
+  - !type:ModifyKnockdown
+    time: 4
+  - !type:ModifyParalysis
+    time: 2
