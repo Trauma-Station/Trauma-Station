@@ -172,7 +172,7 @@ public sealed class DamageOverlay : Overlay
         }
         // Goobstation end
 
-        level = State != MobState.Critical ? _oldOxygenLevel : 1f;
+        level = (State == MobState.Alive || State == MobState.Dead) ? _oldOxygenLevel : 1f; // Trauma - max level for softcrit too
 
         if (level > 0f)
         {

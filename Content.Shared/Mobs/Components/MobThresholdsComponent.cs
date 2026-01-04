@@ -42,6 +42,7 @@ public sealed partial class MobThresholdsComponent : Component
     public Dictionary<MobState, ProtoId<AlertPrototype>> StateAlertDict = new()
     {
         {MobState.Alive, "HumanHealth"},
+        {MobState.SoftCrit, "HumanCrit"}, // Trauma - reusing real crit because idc
         {MobState.Critical, "HumanCrit"},
         {MobState.Dead, "HumanDead"},
     };

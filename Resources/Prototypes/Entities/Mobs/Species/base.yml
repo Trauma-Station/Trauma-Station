@@ -242,6 +242,18 @@
     damagePenalty: 0.2
   - type: ExaminableCharacter
   - type: MindControllable
+  - type: MobState # humanoids can be in softcrit
+    allowedStates:
+    - Alive
+    - SoftCrit
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: SoftCrit
+      150: Critical
+      200: Dead
   # </Trauma>
 
 - type: entity
