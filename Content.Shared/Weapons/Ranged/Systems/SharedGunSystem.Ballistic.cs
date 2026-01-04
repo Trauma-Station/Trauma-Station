@@ -199,7 +199,7 @@ public abstract partial class SharedGunSystem
         Audio.PlayPredicted(component.SoundRack, uid, user);
 
         var shots = GetBallisticShots(component);
-        Cycle(uid, component, coordinates);
+        Cycle(uid, component, coordinates, user); // Trauma - added user
 
         var text = Loc.GetString(shots == 0 ? "gun-ballistic-cycled-empty" : "gun-ballistic-cycled");
 
@@ -211,7 +211,7 @@ public abstract partial class SharedGunSystem
     /// <summary>
     /// Trauma - moved server implementation here and predicted it
     /// </summary>
-    protected void Cycle(EntityUid uid, BallisticAmmoProviderComponent component, MapCoordinates coordinates)
+    protected void Cycle(EntityUid uid, BallisticAmmoProviderComponent component, MapCoordinates coordinates, EntityUid? user = null)
     {
         // TODO: Combine with TakeAmmo
         if (component.Entities.Count > 0)
@@ -229,7 +229,7 @@ public abstract partial class SharedGunSystem
             DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.UnspawnedCount));
             var ent = EntityManager.PredictedSpawn(component.Proto, coordinates);
             EnsureShootable(ent);
-            EjectCartridge(Random(uid), ent);
+            EjectCartridge(Random(uid), user, ent);
         }
 
         var cycledEvent = new GunCycledEvent();

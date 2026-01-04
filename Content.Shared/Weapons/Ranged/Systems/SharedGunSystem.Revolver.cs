@@ -318,7 +318,7 @@ public partial class SharedGunSystem
                 if (TryComp<CartridgeAmmoComponent>(uid, out var cartridge))
                     SetCartridgeSpent(uid, cartridge, !(bool) chamber);
 
-                EjectCartridge(rand, uid);
+                EjectCartridge(rand, user, uid);
                 // </Trauma>
 
                 component.Chambers[i] = null;
@@ -330,7 +330,7 @@ public partial class SharedGunSystem
                 Containers.Remove(slot.Value, component.AmmoContainer);
                 component.Chambers[i] = null;
 
-                EjectCartridge(rand, slot.Value); // Trauma - predicted this shit
+                EjectCartridge(rand, user, slot.Value); // Trauma - predicted this shit
 
                 anyEmpty = true;
             }
