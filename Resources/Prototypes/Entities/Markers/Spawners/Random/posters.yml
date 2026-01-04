@@ -200,6 +200,6 @@
       - PosterContrabandGoobYakub # Goobstation
       - PosterLegitOppenhopper
       - PosterLegitTyrone
-      - PosterLegitHelio
+#      - PosterLegitHelio # Trauma - Cull scurret references ingame.
       - PosterLegitBotanyFear
     chance: 1

@@ -77,6 +77,8 @@
     spawned:
       - id: FoodMeatSpider
         amount: 5
+      - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+        amount: 3
   - type: Reactive
     reactions:
     - reagents: [Water]

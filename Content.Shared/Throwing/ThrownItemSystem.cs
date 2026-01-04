@@ -174,6 +174,7 @@ namespace Content.Shared.Throwing
             var ev = new StopThrowEvent(thrownItemComponent.Thrower);
             RaiseLocalEvent(uid, ref ev);
             RemComp<ThrownItemComponent>(uid);
+            _physics.UpdateIsPredicted(uid, physics); // Trauma
         }
 
         public void LandComponent(EntityUid uid, ThrownItemComponent thrownItem, PhysicsComponent physics, bool playSound)

@@ -27,6 +27,8 @@
     spawned:
     - id: FoodMeatHuman
       amount: 5
+    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+      amount: 2 # Short kings give less bones. don't question it
   - type: Fixtures
     fixtures: # TODO: This needs a second fixture just for mob collisions.
       fix1:

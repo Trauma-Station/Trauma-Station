@@ -380,22 +380,6 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     }
 
     /// <summary>
-    /// Goob - Set an entity's gender for humanoid and grammar.
-    /// </summary>
-    public void SetGender(EntityUid uid, Gender gender, bool sync = true, HumanoidAppearanceComponent? humanoid = null)
-    {
-        if (!Resolve(uid, ref humanoid) || humanoid.Gender == gender)
-            return;
-
-        humanoid.Gender = gender;
-        if (TryComp<GrammarComponent>(uid, out var grammar))
-            _grammarSystem.SetGender((uid, grammar), gender);
-
-        if (sync)
-            Dirty(uid, humanoid);
-    }
-
-    /// <summary>
     ///     Loads a humanoid character profile directly onto this humanoid mob.
     /// </summary>
     /// <param name="uid">The mob's entity UID.</param>

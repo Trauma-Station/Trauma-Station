@@ -938,3 +938,95 @@ Entries:
       message: Fixed modsuit power alert.
   id: 108
   time: '2025-12-30T04:49:08.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Made hardgrabs not laggy, they're fully predicted now.
+  id: 109
+  time: '2025-12-31T19:28:33.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Fultons can be now be used on mobs directly, though it will you them
+        down.
+    - type: Tweak
+      message: Being fultoned while injured can now hurt you from the shock.
+  id: 110
+  time: '2025-12-31T20:27:12.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Butchering with a cleaver is now 25% faster.
+  id: 111
+  time: '2025-12-31T21:21:35.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Xenobio slimes can no longer become zombies.
+  id: 112
+  time: '2025-12-31T21:44:16.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Add
+      message: All butcherable humanoids now drop Bones.
+    - type: Add
+      message: Butchered dionas now drop wood.
+  id: 113
+  time: '2025-12-31T22:29:53.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Removed ERP and herobrine.
+  id: 114
+  time: '2026-01-01T00:19:02.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: >-
+        Service Worker is now an intern role locked after 5 hours service
+        department playtime.
+  id: 115
+  time: '2026-01-01T16:00:47.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Remove
+      message: AI Scurret hologram
+    - type: Remove
+      message: Cargo Scurret purchase.
+    - type: Remove
+      message: Scurret posters no longer in legit poster spawntable.
+    - type: Tweak
+      message: Scurrets are now near impossible to pet.
+  id: 116
+  time: '2026-01-01T18:40:19.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Throwing is no longer affected by lag, it's all predicted now.
+  id: 117
+  time: '2026-01-02T01:33:15.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Plague mice now spawn from a random event instead of roundstart.
+  id: 118
+  time: '2026-01-02T17:58:22.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Guns are now predicted.
+  id: 119
+  time: '2026-01-03T03:58:35.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed laser guns.
+  id: 120
+  time: '2026-01-03T22:02:18.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Guns are now lag compensated.
+  id: 121
+  time: '2026-01-03T22:10:06.0000000+00:00'

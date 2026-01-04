@@ -111,6 +111,8 @@
     spawned:
     - id: SheetPlasma1
       amount: 8
+    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+      amount: 3
   - type: Inventory
     templateId: plasmaman
   - type: Temperature

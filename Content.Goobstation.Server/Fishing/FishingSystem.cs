@@ -127,7 +127,7 @@ public sealed class FishingSystem : SharedFishingSystem
             direction = Vector2.UnitX; // If the user somehow manages to click directly in the center of themself, just toss it to the right i guess.
 
         // Yeet
-        Throwing.TryThrow(fishFloat, direction, 15f, player, 2f, null, true);
+        Throwing.TryThrow(fishFloat, direction, 15f, player, 2f, null, true, predicted: false);
 
         // Set up lure component
         var fishLureComp = EnsureComp<FishingLureComponent>(fishFloat);
@@ -153,7 +153,7 @@ public sealed class FishingSystem : SharedFishingSystem
         var distance = Math.Clamp(length, 0.5f, 15f);
         direction *= distance / length;
 
-        Throwing.TryThrow(fish, direction, 7f);
+        Throwing.TryThrow(fish, direction, 7f, predicted: false);
     }
 
     protected override void CalculateFightingTimings(Entity<ActiveFisherComponent> fisher, ActiveFishingSpotComponent activeSpotComp)

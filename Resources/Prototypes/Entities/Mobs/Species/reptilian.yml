@@ -157,6 +157,8 @@
     spawned:
     - id: FoodMeatLizard
       amount: 5
+    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+      amount: 3
   - type: LizardAccent
   - type: Speech
     speechSounds: Lizard

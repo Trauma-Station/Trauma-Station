@@ -1,0 +1,34 @@
+- type: entity
+  parent: [ StatusEffectSpeed, StatusEffectDelayBase ]
+  id: BeingFultonedStatusEffect
+  name: fulton attached
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.65
+    walkSpeedModifier: 0.65
+  - type: EntityEffectOnTrigger
+    effects:
+    # if you are fucked you will definitely die, will likely combine with below
+    # has to be done first or the other one will guarantee this one will work
+    - !type:HealthChange
+      conditions:
+      - !type:TotalDamageCondition
+        min: 110
+        max: 200
+      probability: 0.95 # xcom 95%
+      damage:
+        types:
+          Blunt: 300 # spread evenly across all limbs, its not as bad for vitals
+      ignoreBlockers: false
+    # fultoning an injured person is likely to hurt them
+    - !type:HealthChange
+      conditions:
+      - !type:TotalDamageCondition
+        min: 50 # moderately injured -> the shock of being fultoned can hurt you
+        max: 200 # leave corpses alone
+      probability: 0.7 # low level support team :(
+      damage:
+        types:
+          Blunt: 65
+      useTargeting: false # maybe you instacrit, maybe you break an arm
+      ignoreBlockers: false

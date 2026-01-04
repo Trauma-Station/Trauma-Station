@@ -127,10 +127,8 @@ public sealed partial class XenoVacuumSystem : EntitySystem
             var popup = Loc.GetString("xeno-vacuum-clear-popup", ("ent", removedEnt));
             _popup.PopupEntity(popup, ent, args.User);
 
-            if (args.Target is { } thrown)
-                _throw.TryThrow(removedEnt, thrown.ToCoordinates());
-            else
-                _throw.TryThrow(removedEnt, args.ClickLocation);
+            var coords = args.Target?.ToCoordinates() ?? args.ClickLocation;
+            _throw.TryThrow(removedEnt, coords, predicted: false);
             _stun.TryUpdateParalyzeDuration(removedEnt, TimeSpan.FromSeconds(2));
             _htn.SetHTNEnabled(removedEnt, true,2f);
         }
