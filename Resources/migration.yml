@@ -37,6 +37,9 @@ BoxMagazineMagnumSubMachineGun: BoxMagazineRifle
 
 # 2025-01-01 Trauma Remove scurret poster
 PosterLegitHelio: null
+
+# 2024-01-05 Actually use the ToiletCisternLoot table. 
+ToiletEmpty: ToiletFilled
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

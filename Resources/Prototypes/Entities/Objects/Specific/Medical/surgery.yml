@@ -170,7 +170,7 @@
 - type: entity
   name: shiv
   id: ScalpelShiv
-  parent: Scalpel
+  parent: [ Scalpel, BaseMinorContraband ] # Trauma - Contraband the prison shiv.
   description: A pointy piece of glass, abraded to an edge and wrapped in tape for a handle. # Could become a decent tool or weapon with right tool mods.
   components:
   - type: Sprite
