@@ -93211,7 +93211,6 @@ entities:
         stash: !type:ContainerSlot
           showEnts: False
           occludes: True
-          ent: 5454
         disposals: !type:Container
           showEnts: False
           occludes: True
