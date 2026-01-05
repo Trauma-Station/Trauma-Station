@@ -1068,3 +1068,11 @@ Entries:
         hardcrit at 150 damage.
   id: 126
   time: '2026-01-05T02:43:28.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: >-
+        Adjusted contraband markings from items that are inconsistent. See PR
+        for full details.
+  id: 127
+  time: '2026-01-05T23:03:36.0000000+00:00'

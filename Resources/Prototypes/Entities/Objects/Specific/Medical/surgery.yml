@@ -170,7 +170,7 @@
 - type: entity
   name: shiv
   id: ScalpelShiv
-  parent: [ Scalpel, BaseMinorContraband ] # Trauma - Contraband the prison shiv.
+  parent: [Scalpel, BaseMinorContraband] # Trauma - Contraband the prison shiv.
   description: A pointy piece of glass, abraded to an edge and wrapped in tape for a handle. # Could become a decent tool or weapon with right tool mods.
   components:
   - type: Sprite
@@ -297,7 +297,7 @@
 - type: entity
   name: choppa
   id: SawImprov
-  parent: Saw
+  parent: [Saw, BaseMinorContraband] # Trauma - add contraband mark
   description: A wicked serrated blade made of whatever nasty sharp things you could find. # It would make a pretty decent weapon, given there are more space for some tool mods too.
   components:
   - type: Sprite
