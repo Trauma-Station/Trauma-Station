@@ -267,6 +267,6 @@
   icon:
     sprite: Objects/Specific/Chemistry/bottle.rsi
     state: bottle-1
-  completetime: 5
+  completetime: 1 # Trauma - was 5
   materials:
-    Biomass: 20
+    Biomass: 12 # Trauma - was 20

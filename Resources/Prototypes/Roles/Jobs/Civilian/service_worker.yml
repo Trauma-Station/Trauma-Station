@@ -82,6 +82,10 @@
   - !type:DepartmentTimeRequirement
     department: Civilian
     time: 0.5h
+  - !type:DepartmentTimeRequirement # Trauma - Service worker is an intern role.
+    department: Civilian
+    time: 5h
+    inverted: true
   startingGear: ServiceWorkerGear
   icon: "JobIconServiceWorker"
   supervisors: job-supervisors-service

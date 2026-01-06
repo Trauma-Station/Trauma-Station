@@ -35,10 +35,10 @@ public record struct DiseaseGainedEvent(Entity<DiseaseComponent> Disease);
 public record struct DiseaseCuredEvent(Entity<DiseaseComponent> Disease);
 
 /// <summary>
-/// Raised on a newly created base disease entity to clone the provided entity onto it.
+/// Raised on the original disease to copy its data to a newly created base disease entity.
 /// </summary>
 [ByRefEvent]
-public record struct DiseaseCloneEvent(Entity<DiseaseComponent> Source);
+public record struct DiseaseCloneEvent(Entity<DiseaseComponent> Cloned);
 
 /// <summary>
 /// This event is raised on an entity just before it's infected. Set <see cref="CanInfect"/> to false to prevent the infection.

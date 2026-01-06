@@ -1,0 +1,41 @@
+- type: latheRecipe
+  abstract: true
+  id: BioGenBottleBase
+  categories: [ Chemicals ]
+  icon:
+    sprite: Objects/Specific/Chemistry/bottle.rsi
+    state: bottle-1
+  completetime: 1
+  materials:
+    Biomass: 15
+
+- type: latheRecipe
+  parent: BioGenBottleBase
+  id: BioGenDylo
+  resultReagents:
+    Dylovene: 10
+
+- type: latheRecipe
+  parent: BioGenBottleBase
+  id: BioGenPhalanx
+  resultReagents:
+    Phalanximine: 10
+  materials:
+    Biomass: 20
+
+- type: latheRecipe
+  parent: BioGenBottleBase
+  id: BioGenDiethyl
+  resultReagents:
+    Diethylamine: 10
+  materials:
+    Biomass: 25
+
+- type: latheRecipe
+  id: BioGenEgg
+  result: FoodEgg
+  categories:
+  - Materials
+  completetime: 3
+  materials:
+    Biomass: 6

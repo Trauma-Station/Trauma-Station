@@ -77,6 +77,8 @@
     spawned:
       - id: FoodMeatSpider
         amount: 5
+      - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+        amount: 3
   - type: Reactive
     reactions:
     - reagents: [Water]
@@ -91,10 +93,10 @@
       - !type:WashCreamPie
   # Damage (Self)
   - type: Bloodstream
-    bloodReagents:
+    bloodReferenceSolution:
       reagents:
       - ReagentId: CopperBlood
-        Quantity: 1
+        Quantity: 300
   # Damage (Others)
   - type: MeleeWeapon
     animation: WeaponArcBite

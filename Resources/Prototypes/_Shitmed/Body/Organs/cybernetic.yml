@@ -128,9 +128,7 @@
       Damaged: 9
       Destroyed: 0
     slotId: heart
-    onAdd:
-    - type: StaminaModifier
-      modifier: 1.35
+    # TODO: 1.35x stamina i dont care
   - type: Metabolizer
     maxPoisonsProcessable: 2
     metabolizerTypes: [ Cybernetic ]
@@ -165,9 +163,7 @@
       Damaged: 9
       Destroyed: 0
     slotId: heart
-    onAdd:
-    - type: StaminaModifier
-      modifier: 1.7
+    # TODO: 1.7x stamina i dont care
   - type: Metabolizer
     maxPoisonsProcessable: 2
     metabolizerTypes: [ Cybernetic ]

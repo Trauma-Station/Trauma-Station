@@ -160,7 +160,7 @@ public sealed partial class BatterySystem : SharedBatterySystem
 
         var newValue = Math.Clamp(battery.CurrentCharge + value, 0, battery.MaxCharge);
         battery.CurrentCharge = newValue;
-        var ev = new ChargeChangedEvent(battery.CurrentCharge, battery.MaxCharge);
+        var ev = new ChargeChangedEvent(battery.CurrentCharge, value, battery.MaxCharge);
         RaiseLocalEvent(uid, ref ev);
         return newValue;
     }

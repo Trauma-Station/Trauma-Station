@@ -11,8 +11,8 @@ using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared._White.Xenomorphs.Xenomorph;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Robust.Shared.Network;
@@ -31,8 +31,8 @@ public sealed class XenomorphSystem : SharedXenomorphSystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly LanguageSystem _language = default!;
     [Dependency] private readonly WoundSystem _wounds = default!; // Goobstation
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!; // Goobstation
     [Dependency] private readonly BodySystem _body = default!; // Goobstation
+    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
 
     public override void Initialize()
     {
@@ -107,14 +107,8 @@ public sealed class XenomorphSystem : SharedXenomorphSystem
     // Slowly heal bloodloss
     private void ProcessBloodLoss(EntityUid uid, BloodstreamComponent bloodstream)
     {
-        if (!_solutionContainer.ResolveSolution(uid,
-                bloodstream.BloodSolutionName,
-                ref bloodstream.BloodSolution,
-                out var bloodSolution)
-                || bloodSolution.Volume >= bloodstream.BloodMaxVolume)
-        {
+        if (_bloodstream.GetBloodLevel((uid, bloodstream)) > 0.99f)
             return;
-        }
 
         var bloodloss = new DamageSpecifier();
         bloodloss.DamageDict["Bloodloss"] = -0.2f;  // Heal blood per tick

@@ -262,7 +262,7 @@ namespace Content.Server.Construction
         /// <param name="construction">The construction component of the target entity. Will be resolved if null.</param>
         /// <returns>Whether the node change succeeded or not. Also returns false if the entity does not have a <see cref="ConstructionComponent"/>.</returns>
         /// <remarks>This method also updates the construction pathfinding automatically, if the node change succeeds.</remarks>
-        public bool ChangeNode(EntityUid uid, EntityUid? userUid, string id, bool performActions = true, ConstructionComponent? construction = null)
+        public bool ChangeNode(EntityUid uid, EntityUid? userUid, string id, bool performActions, ConstructionComponent? construction) // Trauma - remove default values for overloading
         {
             if (!Resolve(uid, ref construction))
                 return false;

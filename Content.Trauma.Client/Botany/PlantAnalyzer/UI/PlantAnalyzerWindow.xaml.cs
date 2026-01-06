@@ -90,7 +90,6 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
                 break;
             case PlantAnalyzerModes.Implant:
                 DatabaseList.Clear();
-                DatabaseList.AddItem(Loc.GetString("plant-analyzer-invalid-database"));
                 foreach (var gene in _internalGeneDatabank)
                 {
                     int mutationID = gene.GeneID;

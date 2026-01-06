@@ -37,7 +37,7 @@ public enum ReactionMethod
 Touch,
 Injection,
 Ingestion,
-Eyes,
+Eyes, // Goob
 }
 
 [ByRefEvent]

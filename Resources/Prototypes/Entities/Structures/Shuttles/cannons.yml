@@ -378,9 +378,12 @@
     count: 5
   - type: Machine
     board: ShuttleGunKineticCircuitboard
-  - type: PressureDamageChange # Goobstation
-  - type: UpgradeableGun # Goobstation
+  # <Trauma>
+  - type: ItemSlots # for upgrades
+  - type: PressureDamageChange
+  - type: UpgradeableGun
     maxUpgradeCapacity: 40
     whitelist:
       tags:
       - PKAUpgrade
+  # </Trauma>

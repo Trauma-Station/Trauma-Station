@@ -72,7 +72,7 @@
     damageContainer: Biological
     damageModifierSet: Xenomorph
   - type: Stamina
-    critThreshold: 500
+    baseCritThreshold: 500
   - type: Fixtures
     fixtures:
       fix1:
@@ -85,11 +85,10 @@
         layer:
         - MobLayer
   - type: Bloodstream
-    bloodReagents:
+    bloodReferenceSolution:
       reagents:
       - ReagentId: FluorosulfuricAcid
-        Quantity: 1
-    bloodMaxVolume: 250
+        Quantity: 250
     bloodlossDamage:
       types:
         Bloodloss: 0.05

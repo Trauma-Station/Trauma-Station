@@ -2,7 +2,7 @@ using Content.Server.Atmos.Piping.Components;
 using Content.Server.Atmos.Piping.EntitySystems;
 using Content.Server.Charges;
 using Content.Server.Decals;
-using Content.Server.Destructible;
+using Content.Shared.Destructible; // Trauma - moved to shared
 using Content.Server.Popups;
 using Content.Shared.Atmos.Piping.Unary.Components;
 using Content.Shared.Charges.Components;

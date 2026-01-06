@@ -1,0 +1,47 @@
+- type: entity
+  parent: BaseStructure
+  id: Crucifix
+  name: wooden cross
+  description: A sturdy wooden cross. You could probably nail someone onto it...
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _Trauma/Structures/crucifix.rsi
+    layers:
+    - state: icon
+      # TODO: when crucifying a monkey hide the monkey and use monkey state
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.4
+        density: 100
+        mask:
+        - TableMask
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Strap
+    position: Stand
+    buckleOffset: "0,0.1"
+    buckleDoafterTime: 5 # hard to be a shitter with it
+    selfUnBuckleDelay: 10 # only works before you get nailed onto it
+    whitelist:
+      components:
+      - HumanoidAppearance # monkey/kobold has this too, dont worry
+  - type: StrapLock
+  - type: ChangeNodeOnUnstrap
+    node: cross # revert to uncrucified if entity is deleted or whatever
+  - type: Construction
+    graph: Crucifix
+    node: cross
+    defaultTarget: crucified

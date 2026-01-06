@@ -147,6 +147,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         if (component.EmbeddedIntoUid == null)
             return; // the entity is not embedded, so do nothing
 
+        var embeddedInto = component.EmbeddedIntoUid;
+
         if (TryComp<EmbeddedContainerComponent>(component.EmbeddedIntoUid.Value, out var embeddedContainer))
         {
             embeddedContainer.EmbeddedObjects.Remove(uid);
@@ -179,6 +181,9 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
             Dirty(uid, projectile);
         }
+
+        var ev = new EmbedDetachEvent(user, embeddedInto.Value);
+        RaiseLocalEvent(uid, ref ev);
 
         if (user != null)
         {

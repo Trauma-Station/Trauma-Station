@@ -42,7 +42,6 @@ public abstract class SharedFlightSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly SharedGravitySystem _gravity = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
-    [Dependency] private readonly SharedStaminaSystem _staminaSystem = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -59,7 +58,6 @@ public abstract class SharedFlightSystem : EntitySystem
         SubscribeLocalEvent<FlightComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<FlightComponent, ToggleFlightEvent>(OnToggleFlight);
         SubscribeLocalEvent<FlightComponent, RefreshWeightlessModifiersEvent>(OnRefreshWeightlessMoveSpeed);
-        SubscribeLocalEvent<FlightComponent, BeforeStaminaDamageEvent>(OnBeforeStaminaDamage);
         SubscribeLocalEvent<CuffableComponent, FlightAttemptEvent>(OnCuffableFlightAttempt);
         SubscribeLocalEvent<StandingStateComponent, FlightAttemptEvent>(OnStandingStateFlightAttempt);
         SubscribeLocalEvent<ZombieComponent, FlightAttemptEvent>(OnZombieFlightAttempt);
@@ -90,12 +88,6 @@ public abstract class SharedFlightSystem : EntitySystem
                 _audio.PlayPredicted(component.FlapSound, uid, uid);
                 component.TimeUntilFlap = component.FlapInterval;
             }
-
-            // We make it 0.7f to compensate by how comparatively lame it is vs sprinting while on stimulants as another species.
-            if (TryComp<StaminaModifierComponent>(uid, out var staminaComp))
-                _staminaSystem.ModifyStaminaDrain(uid,
-                    component.StaminaDrainKey,
-                    component.StaminaDrainRate * staminaComp.Modifier * component.StaminaDrainMultiplier);
         }
     }
 
@@ -119,7 +111,6 @@ public abstract class SharedFlightSystem : EntitySystem
         _actionsSystem.SetToggled(component.ToggleActionEntity, component.On);
         RaiseLocalEvent(uid, new FlightEvent(uid, component.On, component.IsAnimated));
         _gravity.RefreshWeightless(uid);
-        _staminaSystem.ToggleStaminaDrain(uid, component.StaminaDrainRate, active, false, component.StaminaDrainKey, uid);
         _movementSpeed.RefreshWeightlessModifiers(uid);
         ToggleCollisionMasks(uid, component);
         UpdateHands(uid, active);
@@ -236,15 +227,6 @@ public abstract class SharedFlightSystem : EntitySystem
 
         args.ModifyAcceleration(component.SpeedModifier);
         args.ModifyFriction(component.FrictionModifier, component.FrictionNoInputModifier);
-    }
-
-    private void OnBeforeStaminaDamage(EntityUid uid, FlightComponent component, ref BeforeStaminaDamageEvent args)
-    {
-        if (!component.On
-            || args.Value > 0)
-            return;
-
-        args.Value *= component.StaminaRegenMultiplier;
     }
 
     #endregion

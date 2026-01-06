@@ -43,6 +43,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <CheckBox Name="EventMusicCheckBox" Text="{Loc 'ui-options-event-music'}" />
                 <CheckBox Name="AdminSoundsCheckBox" Text="{Loc 'ui-options-admin-sounds'}" />
                 <CheckBox Name="BwoinkSoundCheckBox" Text="{Loc 'ui-options-bwoink-sound'}" />
+                <CheckBox Name="StreamerModeCheckBox" Text="{Loc 'ui-options-streamer-mode'}" /> <!-- Trauma -->
             </BoxContainer>
         </BoxContainer>
         <ui:OptionsTabControlRow Name="Control" Access="Public" />

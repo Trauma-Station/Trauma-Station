@@ -136,7 +136,9 @@ public sealed class EntityHealthBarOverlay : Overlay
             if (dmg.HealthBarThreshold != null && totalDamage < dmg.HealthBarThreshold) // GoobStation
                 return null;
 
-            if (!_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var threshold, thresholds) &&
+            // Trauma - check softcrit first so it looks like old behaviour
+            if (!_mobThresholdSystem.TryGetThresholdForState(uid, MobState.SoftCrit, out var threshold, thresholds) &&
+                !_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out threshold, thresholds) &&
                 !_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Dead, out threshold, thresholds))
                 return (1, false);
 
@@ -146,7 +148,9 @@ public sealed class EntityHealthBarOverlay : Overlay
 
         if (_mobStateSystem.IsCritical(uid, component))
         {
-            if (!_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var critThreshold, thresholds) ||
+            // Trauma - check softcrit first so it looks like old behaviour
+            if (!(_mobThresholdSystem.TryGetThresholdForState(uid, MobState.SoftCrit, out var critThreshold, thresholds) ||
+                _mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out critThreshold, thresholds)) ||
                 !_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Dead, out var deadThreshold, thresholds))
             {
                 return (1, true);

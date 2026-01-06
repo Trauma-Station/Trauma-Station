@@ -125,6 +125,8 @@
   - SpeedLoaderMagnumUranium
 
 - type: latheRecipePack
+  parent:
+  - TraumaSecurityWeapons # Trauma
   id: SecurityWeapons
   recipes:
   - Truncheon
@@ -132,8 +134,6 @@
   - WeaponLaserCannon
   - WeaponLaserCarbine
   - WeaponXrayCannon
-  - PolymerBaton #goob
-  - SpearTelescopic #goob
 
 - type: latheRecipePack
   id: SecurityDisablers

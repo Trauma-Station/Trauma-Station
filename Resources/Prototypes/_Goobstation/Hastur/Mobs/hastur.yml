@@ -118,11 +118,10 @@
       alwaysTakeHoly: true
     - type: NoSlip
     - type: Bloodstream
-      bloodMaxVolume: 300
-      bloodReagents:
+      bloodReferenceSolution:
         reagents:
         - ReagentId: Haloperidol
-          Quantity: 1
+          Quantity: 300
     - type: FootstepModifier
       footstepSoundCollection:
         collection: TentacleWalk
@@ -145,7 +144,6 @@
       tags:
       - DoorBumpOpener
       - FootstepSound
-    - type: Sprinter
     - type: CombatPower
       factor: 10 # times more dangerous than a crew-member
 

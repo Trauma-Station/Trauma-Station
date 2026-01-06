@@ -96,7 +96,7 @@ public abstract partial class SharedBuckleSystem
     /// <summary>
     /// Remove everything attached to the strap
     /// </summary>
-    private void StrapRemoveAll(EntityUid uid, StrapComponent strapComp)
+    public void StrapRemoveAll(EntityUid uid, StrapComponent strapComp) // Trauma - made public
     {
         foreach (var entity in strapComp.BuckledEntities.ToArray())
         {

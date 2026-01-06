@@ -139,7 +139,7 @@ public abstract class SharedChangelingBiomassSystem : EntitySystem
                 return;
             }
 
-            var cough = bloodComp.BloodReagents;
+            var cough = bloodComp.BloodReferenceSolution;
             cough = cough.Clone(); // don't modify the original blood...
             cough.ScaleTo(ent.Comp.BloodCoughAmount);
 

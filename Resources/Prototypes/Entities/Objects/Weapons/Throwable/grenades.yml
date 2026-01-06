@@ -492,7 +492,7 @@
       params:
         volume: 12
   - type: StaticPrice
-    price: 1000
+    price: 50
   - type: Construction # Trauma
     graph: SyndicateTrickybombGraph
     node: start

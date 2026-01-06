@@ -1,0 +1,9 @@
+- type: entity
+  parent: SheetGlass
+  id: SheetGlass15
+  suffix: 15
+  components:
+  - type: Sprite
+    state: glass_2
+  - type: Stack
+    count: 15

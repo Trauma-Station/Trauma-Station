@@ -71,7 +71,7 @@
       projectile:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.1,-0.10,0.1,0.30" # Goobstation - Fast Bullets
+          bounds: "-0.1,-0.10,0.1,0.30"
         hard: false
         mask:
         #- Opaque # Goob
@@ -1150,6 +1150,17 @@
         - HighImpassable
   - type: GrapplingProjectile
   - type: SmartLinkBlacklist  # Goobstation
+
+- type: entity
+  parent: GrapplingHook
+  id: StickyHandPalm
+  name: sticky hand palm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Launchers/sticky_hand.rsi
+  - type: Ammo
+    muzzleFlash: null
 
 - type: entity
   name : disabler bolt smg

@@ -6,6 +6,7 @@
 - type: entity
   parent: RedLightLaser
   id: SmallRedLaser
+  name: small red laser
   categories: [ HideSpawnMenu ]
   components:
   - type: HitscanBasicVisuals
@@ -22,6 +23,7 @@
 - type: entity
   parent: BasicHitscan
   id: SmallIonLaser
+  name: small ion laser
   categories: [ HideSpawnMenu ]
   components:
   - type: HitscanBasicDamage
@@ -42,6 +44,7 @@
 - type: entity
   parent: BasicHitscan
   id: SmallXrayLaser
+  name: small x-ray laser
   categories: [ HideSpawnMenu ]
   components:
   - type: HitscanBasicDamage
@@ -63,6 +66,7 @@
 - type: entity
   parent: BasicHitscan
   id: SmallOverchargedLaser
+  name: small overcharged laser
   categories: [ HideSpawnMenu ]
   components:
   - type: HitscanBasicDamage
@@ -88,6 +92,7 @@
 - type: entity
   parent: BasicHitscan
   id: SmallPulseLaser
+  name: small pulse laser
   categories: [ HideSpawnMenu ]
   components:
   - type: HitscanBasicDamage
@@ -108,6 +113,7 @@
 - type: entity
   parent: BasicHitscan
   id: MediumRedLaser
+  name: medium red laser
   categories: [ HideSpawnMenu ]
   components:
   - type: HitscanBasicDamage
@@ -128,6 +134,7 @@
 - type: entity
   parent: BasicHitscan
   id: MediumIonLaser
+  name: medium ion laser
   categories: [ HideSpawnMenu ]
   components:
   - type: HitscanBasicDamage
@@ -148,6 +155,7 @@
 - type: entity
   parent: BasicHitscan
   id: MediumXrayLaser
+  name: medium x-ray laser
   categories: [ HideSpawnMenu ]
   components:
   - type: HitscanBasicDamage
@@ -169,6 +177,7 @@
 - type: entity
   parent: BasicHitscan
   id: MediumOverchargedLaser
+  name: medium overcharged laser
   categories: [ HideSpawnMenu ]
   components:
   - type: HitscanBasicDamage
@@ -194,6 +203,7 @@
 - type: entity
   parent: BasicHitscan
   id: MediumPulseLaser
+  name: medium pulse laser
   categories: [ HideSpawnMenu ]
   components:
   - type: HitscanBasicDamage
@@ -214,6 +224,7 @@
 - type: entity
   parent: RedHeavyLaser
   id: RedHeavyLaserShock
+  name: red heavy shock laser
   categories: [ HideSpawnMenu ]
   components:
   - type: HitscanBasicDamage

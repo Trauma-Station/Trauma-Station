@@ -37,10 +37,18 @@ public sealed class BloodstreamCountConditionSystem : EntityConditionSystem<Bloo
 
     protected override void Condition(Entity<BloodstreamComponent> ent, ref EntityConditionEvent<BloodstreamCountCondition> args)
     {
-        if (!_solution.ResolveSolution(ent.Owner, ent.Comp.ChemicalSolutionName, ref ent.Comp.ChemicalSolution, out var solution))
+        if (!_solution.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution, out var solution))
             return;
 
-        var count = solution.Contents.Count;
+        // ignore the blood's expected reagents
+        int count = 0;
+        var blood = ent.Comp.BloodReferenceSolution;
+        foreach (var quantity in solution.Contents)
+        {
+            var id = quantity.Reagent.Prototype;
+            if (!blood.ContainsPrototype(id))
+                count++;
+        }
         var min = args.Condition.Min;
         var max = args.Condition.Max;
         args.Result = count > min && count < max;
