@@ -1,7 +1,7 @@
 - type: entity
-  name: billy club
   parent: [BaseItem, BaseSecurityContraband]
   id: WeaponBillyClub
+  name: billy club
   description: A lightweight wooden baton for incapacitating people with. Delivers less-than-lethal force for incapacitation.
   components:
   - type: Sprite
@@ -28,8 +28,8 @@
   - type: Tag
     tags:
     - SecBeltEquip
-  - type: MartialArtBlocked # Goobstation - Martial Arts, TraumaStation change
-    form: CorporateJudo # Goobstation - Martial Arts, TraumaStation change
+  - type: MartialArtBlocked 
+    form: CorporateJudo 
   - type: GuideHelp
     guides:
     - Security

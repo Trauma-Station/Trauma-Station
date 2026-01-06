@@ -65,7 +65,7 @@
   recipeUnlocks:
   - ClothingMaskMuzzleSecure
   - ClothingMaskMuzzleShock
-  - WeaponBillyClub # TraumaStation
+  - WeaponBillyClub 
   position: 1,1
   technologyPrerequisites:
   - SalvageWeapons

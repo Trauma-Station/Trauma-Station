@@ -34,8 +34,8 @@
   - type: Tag
     tags:
     - SecBeltEquip
-  - type: MartialArtBlocked # Goobstation - Martial Arts, TraumaStation change
-    form: CorporateJudo # Goobstation - Martial Arts, TraumaStation change
+  - type: MartialArtBlocked 
+    form: CorporateJudo 
 
 - type: entity
   id: SpearTelescopic
