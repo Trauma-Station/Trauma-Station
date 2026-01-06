@@ -728,7 +728,7 @@
     - Security
     - Antagonists
   - type: PacifismAllowedGun
-  - type: MartialArtBlocked # Goobstation - Martial Arts, Trauma
+  - type: MartialArtBlocked # Trauma
     form: CorporateJudo
   # Goobstation start
   - type: Tag

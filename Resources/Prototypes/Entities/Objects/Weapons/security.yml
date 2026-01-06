@@ -145,7 +145,7 @@
   - type: Appearance
   - type: StaticPrice
     price: 80
-  - type: MartialArtBlocked # Goobstation - Martial Arts, Trauma
+  - type: MartialArtBlocked # Trauma
     form: CorporateJudo
   - type: GuideHelp
     guides:
