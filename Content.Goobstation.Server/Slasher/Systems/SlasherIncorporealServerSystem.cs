@@ -5,6 +5,7 @@ using Content.Shared.SurveillanceCamera.Components;
 using Content.Server.Light.Components;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
+using Content.Server.Atmos;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Interaction;
@@ -12,6 +13,7 @@ using Content.Shared.Physics;
 using Content.Shared.Light;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
+using Content.Shared.Atmos;
 using Robust.Server.GameObjects;
 using Robust.Shared.Spawners;
 
@@ -51,6 +53,9 @@ public sealed class SlasherIncorporealCameraSystem : EntitySystem
         SubscribeLocalEvent<SlasherIncorporealCameraCheckEvent>(OnCameraCheck);
         SubscribeLocalEvent<SlasherIncorporealComponent, EventHorizonAttemptConsumeEntityEvent>(OnSingularityAttemptConsume);
         SubscribeLocalEvent<SlasherIncorporealComponent, SlasherIncorporealEnteredEvent>(OnIncorporealEntered);
+
+        SubscribeLocalEvent<SlasherIncorporealComponent, IgnitedEvent>(OnIgnited);
+        SubscribeLocalEvent<SlasherIncorporealComponent, TileFireEvent>(OnTileFire);
     }
 
     private void OnCameraCheck(ref SlasherIncorporealCameraCheckEvent args)
@@ -147,6 +152,31 @@ public sealed class SlasherIncorporealCameraSystem : EntitySystem
         {
             timedDespawn.Lifetime = 0;
             return;
+        }
+    }
+
+    private void OnIgnited(EntityUid uid, SlasherIncorporealComponent comp, ref IgnitedEvent args)
+    {
+        // If incorporeal, immediately extinguish any fire that was just applied
+        if (comp.IsIncorporeal)
+        {
+            if (TryComp<FlammableComponent>(uid, out var flammable))
+            {
+                _flammable.Extinguish(uid, flammable);
+            }
+        }
+    }
+
+    private void OnTileFire(EntityUid uid, SlasherIncorporealComponent comp, ref TileFireEvent args)
+    {
+        // Prevent tile fires from adding fire stacks to incorporeal slashers
+        if (comp.IsIncorporeal)
+        {
+            // Set firestacks to 0 if they were just modified
+            if (TryComp<FlammableComponent>(uid, out var flammable) && flammable.FireStacks > 0)
+            {
+                _flammable.SetFireStacks(uid, 0, flammable);
+            }
         }
     }
 }

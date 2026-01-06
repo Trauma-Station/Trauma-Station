@@ -215,7 +215,7 @@
   - type: PointLight
     enabled: true
   - type: PoweredLight
-    hasLampOnSpawn: LightTube
+    hasLampOnSpawn: LedLightTube # Trauma
   - type: AmbientOnPowered
   - type: AmbientSound
     volume: -15

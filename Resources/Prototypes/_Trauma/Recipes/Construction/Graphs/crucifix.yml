@@ -1,0 +1,138 @@
+- type: constructionGraph
+  id: Crucifix
+  graph:
+  - node: start
+    actions:
+    - !type:DestroyEntity
+    edges:
+    - to: cross
+      completed:
+      - !type:SnapToGrid
+      steps:
+      - material: WoodPlank
+        amount: 10
+        doAfter: 5
+
+  - node: cross
+    entity: Crucifix
+    edges:
+    - to: start
+      completed:
+      - !type:GivePrototype
+        prototype: MaterialWoodPlank10
+      steps:
+      - tool: Prying
+        doAfter: 4
+    # TODO: make it so you can use nailgun with limb targeting to do this step
+    - to: left hand
+      conditions:
+      - !type:HasStrappedEntity
+      completed:
+      - !type:AdminLog
+        message: 'Crucifixion started'
+      - !type:EffectGraphAction
+        effects:
+        - !type:RelayStrapped
+          effects:
+          - !type:HealthChange
+            damage:
+              types:
+                Piercing: 15
+            targetPart: LeftHand
+      steps:
+      - tag: Nail
+        name: construction-graph-tag-nail
+        icon:
+          sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+          state: icon
+      - tool: Hammering
+        doAfter: 3
+
+  - node: left hand
+    edges:
+    - to: cross
+      completed:
+      - !type:EffectGraphAction
+        effects:
+        - !type:UnbuckleStrapped
+      - !type:GivePrototype
+        prototype: Nail
+      steps:
+      - tool: Prying
+        doAfter: 2
+    - to: right hand
+      conditions:
+      - !type:HasStrappedEntity
+      completed:
+      - !type:EffectGraphAction
+        effects:
+        - !type:RelayStrapped
+          effects:
+          - !type:HealthChange
+            damage:
+              types:
+                Piercing: 15
+            targetPart: RightHand
+      steps:
+      - tag: Nail
+        name: construction-graph-tag-nail
+        icon:
+          sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+          state: icon
+      - tool: Hammering
+        doAfter: 3
+
+  - node: right hand
+    edges:
+    - to: left hand
+      completed:
+      - !type:GivePrototype
+        prototype: Nail
+      steps:
+      - tool: Prying
+        doAfter: 2
+    - to: crucified
+      conditions:
+      - !type:HasStrappedEntity
+      completed:
+      - !type:AdminLog
+        message: 'Crucifixion finished'
+      - !type:EffectGraphAction
+        effects:
+        - !type:StrapLock
+        - !type:RelayStrapped
+          effects:
+          - !type:HealthChange
+            damage:
+              types:
+                Piercing: 15
+            targetPart: Feet
+          - !type:ModifyBleed
+            amount: 10 # perish
+          - !type:PopupMessage
+            type: Pvs
+            visualType: LargeCaution
+            messages:
+            - entity-effect-popup-crucified
+      steps:
+      - tag: Nail
+        name: construction-graph-tag-nail
+        icon:
+          sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+          state: icon
+      - tool: Hammering
+        doAfter: 5
+
+  - node: crucified
+    edges:
+    - to: right hand
+      completed:
+      - !type:GivePrototype
+        prototype: Nail
+      - !type:EffectGraphAction
+        effects:
+        - !type:StrapLock
+          unlock: true
+      steps:
+      - tool: Prying
+        doAfter: 2

@@ -159,8 +159,6 @@
     clothingVisuals:
       back:
       - state: equipped-BACKPACK
-      back-resomi:
-      - state: equipped-BACKPACK-resomi
   - type: Sprite
     sprite: _Goobstation/Clothing/Back/Modsuits/headofsecurity.rsi
   - type: ToggleableClothing
@@ -177,8 +175,6 @@
     clothingVisuals:
       back:
       - state: equipped-BACKPACK-sealed
-      back-resomi:
-      - state: equipped-BACKPACK-sealed-resomi
 
 - type: entity
   parent: ClothingModsuitHeadOfSecurity
@@ -260,8 +256,6 @@
     clothingVisuals:
       back:
       - state: equipped-BACKPACK-sealed
-      back-resomi:
-      - state: equipped-BACKPACK-sealed-resomi
 
 - type: entity
   parent: ClothingModsuitEngineer
@@ -300,8 +294,6 @@
     clothingVisuals:
       back:
       - state: equipped-BACKPACK-sealed
-      back-resomi:
-      - state: equipped-BACKPACK-sealed-resomi
 
 - type: entity
   parent: ClothingModsuitAtmostech
@@ -383,8 +375,6 @@
     clothingVisuals:
       back:
       - state: equipped-BACKPACK-sealed
-      back-resomi:
-      - state: equipped-BACKPACK-sealed-resomi
 
 - type: entity
   parent: ClothingModsuitCaptain

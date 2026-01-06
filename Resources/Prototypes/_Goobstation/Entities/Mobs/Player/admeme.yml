@@ -23,17 +23,12 @@
   - Diona
   - Harpy
   - Vox # Pasha
-  - Tajaran # Specism.
-  - Resomi # Sprites look shit on them.
-  - Oni # Same as above, plus it fucks over ERTs.
   - Gingerbread # Soecusn
   - Plasmaman
   - Reptilian
   - Moth
-  - Shadowkin # One flash is all it takes...
   - Arachnid
   - Vulpkanin
-  - Rodentia
   - SlimePerson
   - Dwarf
   components:
@@ -492,7 +487,7 @@
       1000: 1.5
       1500: 2
   - type: Stamina
-    critThreshold: 100000
+    baseCritThreshold: 100000
   - type: PassiveDamage
     allowedStates:
     - Alive

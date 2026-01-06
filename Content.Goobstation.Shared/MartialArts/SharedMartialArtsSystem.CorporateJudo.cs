@@ -144,14 +144,7 @@ public partial class SharedMartialArtsSystem
             || !TryComp<PullableComponent>(target, out var pullable))
             return;
 
-        var knockdownTime = proto.ParalyzeTime;
-
-        var ev = new BeforeStaminaDamageEvent(1f);
-        RaiseLocalEvent(target, ref ev);
-
-        knockdownTime *= ev.Value;
-
-        _stun.TryKnockdown(target, knockdownTime, true, drop: proto.DropItems);
+        _stun.TryKnockdown(target, proto.ParalyzeTime, true, drop: proto.DropItems);
 
         _stamina.TakeStaminaDamage(target, proto.StaminaDamage);
 
@@ -171,13 +164,6 @@ public partial class SharedMartialArtsSystem
             || !TryComp<PullableComponent>(target, out var pullable))
             return;
 
-        var knockdownTime = proto.ParalyzeTime;
-
-        var ev = new BeforeStaminaDamageEvent(1f);
-        RaiseLocalEvent(target, ref ev);
-
-        knockdownTime *= ev.Value;
-
         if (!HasComp<ArmbarredComponent>(target))
         {
             _stamina.TakeStaminaDamage(target, proto.StaminaDamage);
@@ -189,7 +175,7 @@ public partial class SharedMartialArtsSystem
             || pullable.GrabStage != GrabStage.Suffocate)
             _pulling.TrySetGrabStages((ent, puller), (target, pullable), GrabStage.Suffocate);
 
-        _stun.TryKnockdown(target, knockdownTime, true, drop: proto.DropItems);
+        _stun.TryKnockdown(target, proto.ParalyzeTime, true, drop: proto.DropItems);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/genhit3.ogg"), target);
         ComboPopup(ent, target, proto.Name);

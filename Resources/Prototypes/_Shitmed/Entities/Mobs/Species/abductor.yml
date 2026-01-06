@@ -71,10 +71,10 @@
 #        Brute: -0.14
   - type: Targeting
   - type: Bloodstream
-    bloodReagents:
+    bloodReferenceSolution:
       reagents:
       - ReagentId: AlienBlood
-        Quantity: 1
+        Quantity: 300
 
 - type: entity
   parent: BaseSpeciesDummy

@@ -79,20 +79,6 @@
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
-  id: ClothingBackpackDuffelSyndicateFilledWSPR
-  name: WSPR bundle
-  description: "A bundle carrying the syndicate's WSPR assault rifle, packed with 2 spare magazines."
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponRifleWSPR
-        - id: MagazineCaselessRifle
-          amount: 2
-
-- type: entity
-  parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledWhimsy
   name: syndicate joy & whimsy bundle
   description: "A bundle containing everything a syndicate needs to have a jolly good time."

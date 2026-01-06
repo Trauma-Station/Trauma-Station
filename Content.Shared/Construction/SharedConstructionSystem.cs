@@ -27,7 +27,7 @@ using static Content.Shared.Interaction.SharedInteractionSystem;
 
 namespace Content.Shared.Construction
 {
-    public abstract class SharedConstructionSystem : EntitySystem
+    public abstract partial class SharedConstructionSystem : EntitySystem // Trauma - made partial
     {
         [Dependency] private readonly IMapManager _mapManager = default!;
         [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;

@@ -846,3 +846,233 @@ Entries:
   changes: []
   id: 95
   time: '2025-12-19T09:15:43.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: You can no longer play as oni or vulp.
+  id: 96
+  time: '2025-12-21T13:37:16.0000000+00:00'
+- author: Added Holy
+  changes: []
+  id: 97
+  time: '2025-12-21T13:39:14.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Added pirate clothes to hacked autodrobes.
+  id: 98
+  time: '2025-12-22T16:02:57.0000000+00:00'
+- author: Speebro
+  changes:
+    - type: Add
+      message: >-
+        Ported Tryded's chemical explosives PR, adding three new explosives and
+        a long list of chemicals to make them!
+    - type: Tweak
+      message: >-
+        Formaldehyde's recipe is more difficult, to make creating the new
+        explosives harder
+    - type: Tweak
+      message: >-
+        In exchange, formaldehyde is ~60% longer lasting in corpses, and no
+        longer deals poison damage to the dead
+  id: 99
+  time: '2025-12-28T13:57:42.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Harpy flight no longer has any stamina interactions.
+    - type: Tweak
+      message: Botany can still mutate hyperzine and nocturine using mutagen.
+    - type: Tweak
+      message: All borgs still have their tool modules.
+  id: 100
+  time: '2025-12-29T01:11:44.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Added streamer mode for muting copyrighted audio.
+  id: 101
+  time: '2025-12-29T15:52:06.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed kudzu spreading way too fast.
+  id: 102
+  time: '2025-12-29T18:06:11.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: Matchboxes can now only contain matches
+    - type: Tweak
+      message: Large Cigarette cartons can only store cigarette packs
+    - type: Tweak
+      message: Syringe Case can now only store syringes, medipens, and vials.
+  id: 103
+  time: '2025-12-29T20:33:40.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed medborg surgery UI being buggy.
+  id: 104
+  time: '2025-12-29T20:35:16.0000000+00:00'
+- author: GeneRickUsername
+  changes:
+    - type: Fix
+      message: Fixed Shitcode that keeps light on when no fire active.
+  id: 105
+  time: '2025-12-29T20:36:19.0000000+00:00'
+- author: Fixed Index
+  changes: []
+  id: 106
+  time: '2025-12-29T20:37:48.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed not being able to use kammerer shotguns.
+  id: 107
+  time: '2025-12-29T23:52:47.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed modsuit power alert.
+  id: 108
+  time: '2025-12-30T04:49:08.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Made hardgrabs not laggy, they're fully predicted now.
+  id: 109
+  time: '2025-12-31T19:28:33.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Fultons can be now be used on mobs directly, though it will you them
+        down.
+    - type: Tweak
+      message: Being fultoned while injured can now hurt you from the shock.
+  id: 110
+  time: '2025-12-31T20:27:12.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Butchering with a cleaver is now 25% faster.
+  id: 111
+  time: '2025-12-31T21:21:35.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Xenobio slimes can no longer become zombies.
+  id: 112
+  time: '2025-12-31T21:44:16.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Add
+      message: All butcherable humanoids now drop Bones.
+    - type: Add
+      message: Butchered dionas now drop wood.
+  id: 113
+  time: '2025-12-31T22:29:53.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Removed ERP and herobrine.
+  id: 114
+  time: '2026-01-01T00:19:02.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: >-
+        Service Worker is now an intern role locked after 5 hours service
+        department playtime.
+  id: 115
+  time: '2026-01-01T16:00:47.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Remove
+      message: AI Scurret hologram
+    - type: Remove
+      message: Cargo Scurret purchase.
+    - type: Remove
+      message: Scurret posters no longer in legit poster spawntable.
+    - type: Tweak
+      message: Scurrets are now near impossible to pet.
+  id: 116
+  time: '2026-01-01T18:40:19.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Throwing is no longer affected by lag, it's all predicted now.
+  id: 117
+  time: '2026-01-02T01:33:15.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Plague mice now spawn from a random event instead of roundstart.
+  id: 118
+  time: '2026-01-02T17:58:22.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Guns are now predicted.
+  id: 119
+  time: '2026-01-03T03:58:35.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed laser guns.
+  id: 120
+  time: '2026-01-03T22:02:18.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Guns are now lag compensated.
+  id: 121
+  time: '2026-01-03T22:10:06.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed throwing rubber banding.
+  id: 122
+  time: '2026-01-04T02:14:51.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Fix
+      message: >-
+        Station Radios respect their toggle/powered states on new music being
+        played.
+  id: 123
+  time: '2026-01-04T04:52:35.0000000+00:00'
+- author: Nousagi37
+  changes:
+    - type: Add
+      message: Radio host enabled on Loop
+    - type: Add
+      message: Xenobio added east of Science though maintenance on Loop
+    - type: Tweak
+      message: Armory Alert level safes standardized to match Fland
+  id: 124
+  time: '2026-01-04T20:53:55.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: You can now build wooden crosses to crucify people with.
+  id: 125
+  time: '2026-01-04T20:54:02.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: >-
+        Added softcrit, you can crawl around and whisper at 100 damage until you
+        hardcrit at 150 damage.
+  id: 126
+  time: '2026-01-05T02:43:28.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: >-
+        Adjusted contraband markings from items that are inconsistent. See PR
+        for full details.
+  id: 127
+  time: '2026-01-05T23:03:36.0000000+00:00'

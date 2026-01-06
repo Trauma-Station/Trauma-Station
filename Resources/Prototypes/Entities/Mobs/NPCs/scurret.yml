@@ -78,7 +78,7 @@
   - type: TypingIndicator
     proto: moth
   - type: InteractionPopup
-    successChance: 0.99 # Imagine not being allowed to headpat a scurret, chat
+    successChance: 0.01 # Imagine not being allowed to headpat a scurret, chat. # Trauma - haha yeah imagine.
     interactDelay: 2.25
     interactSuccessString: petting-success-scurret
     interactFailureString: petting-failure-scurret

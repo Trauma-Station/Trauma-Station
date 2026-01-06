@@ -46,4 +46,21 @@ public sealed partial class FireVisualsComponent : Component
     ///     the burning entity as entities don't support having multiple point-lights.
     /// </summary>
     public EntityUid? LightEntity;
+
+    /// <summary>
+    /// Trauma - Hardlink for the holy fire effect to be used in tandem with the fire effect.
+    /// </summary>
+    [DataField]
+    public string? SpriteHoly;
+
+    /// <summary>
+    /// Trauma - Color for the holy fire light.
+    /// </summary>
+    [DataField]
+    public Color LightColorHoly = Color.Blue;
+
+    /// <summary>
+    /// Trauma - This is a light entity, same as the LightEntity variable above.
+    /// </summary>
+    public EntityUid? LightEntityHoly;
 }

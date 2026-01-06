@@ -73,11 +73,13 @@
     spawned:
       - id: FoodMeatPlant
         amount: 5
+      - id: MaterialWoodPlank1 # Trauma - Bones on butchering humanoids. I AM NO TREE IM AN ENT.
+        amount: 3
   - type: Bloodstream
-    bloodReagents:
+    bloodReferenceSolution:
       reagents:
       - ReagentId: Sap
-        Quantity: 1
+        Quantity: 300
   - type: Reactive
     groups:
       Flammable: [ Touch ]

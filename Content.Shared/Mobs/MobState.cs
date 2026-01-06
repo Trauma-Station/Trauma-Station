@@ -21,8 +21,9 @@ public enum MobState : byte
 {
     Invalid = 0,
     Alive = 1,
-    Critical = 2,
-    Dead = 3
+    SoftCrit = 2, // Trauma
+    Critical = 3, // Trauma - was 3
+    Dead = 4 // Trauma - was 4
 }
 
 /// <summary>

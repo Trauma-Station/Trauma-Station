@@ -77,6 +77,8 @@
     spawned:
       - id: FoodMeatSpider
         amount: 5
+      - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+        amount: 3
   - type: Reactive
     reactions:
     - reagents: [Water]
@@ -91,10 +93,10 @@
       - !type:WashCreamPie
   # Damage (Self)
   - type: Bloodstream
-    bloodReagents:
+    bloodReferenceSolution:
       reagents:
       - ReagentId: CopperBlood
-        Quantity: 1
+        Quantity: 300
   # Damage (Others)
   - type: MeleeWeapon
     animation: WeaponArcBite
@@ -125,10 +127,8 @@
   - type: LanguageKnowledge # Einstein Engines - Language
     speaks:
     - TauCetiBasic
-    - Chittin # Until they have a species-specific
     understands:
     - TauCetiBasic
-    - Chittin # Until they have a species-specific
   - type: Sprite # I'd prefer if these maps were better. Insert map pun here.
     layers:
       - map: [ "enum.HumanoidVisualLayers.Groin" ]

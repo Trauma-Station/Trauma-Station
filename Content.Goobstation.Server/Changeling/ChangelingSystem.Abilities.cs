@@ -44,6 +44,7 @@ using Content.Shared.Light.Components;
 using Content.Shared._Goobstation.Weapons.AmmoSelector;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared._Shitmed.Targeting; // Shitmed Change
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reagent;
@@ -188,7 +189,11 @@ public sealed partial class ChangelingSystem
 
         var dmg = new DamageSpecifier(_proto.Index(AbsorbedDamageGroup), 200);
         _damage.TryChangeDamage(target, dmg, true, false, targetPart: TargetBodyPart.All); // Shitmed Change
-        _blood.ChangeBloodReagent(target, "FerrochromicAcid");
+        if (TryComp<BloodstreamComponent>(target, out var blood))
+        {
+            var volume = blood.BloodReferenceSolution.Volume;
+            _blood.ChangeBloodReagents((target, blood), new([new("FerrochromicAcid", volume)]));
+        }
         _blood.SpillAllSolutions(target);
 
         EnsureComp<AbsorbedComponent>(target);
@@ -724,7 +729,11 @@ public sealed partial class ChangelingSystem
         EnsureComp<AbsorbedComponent>(target);
         var dmg = new DamageSpecifier(_proto.Index(AbsorbedDamageGroup), 200);
         _damage.TryChangeDamage(target, dmg, false, false, targetPart: TargetBodyPart.All); // Shitmed Change
-        _blood.ChangeBloodReagent(target, "FerrochromicAcid");
+        if (TryComp<BloodstreamComponent>(target, out var blood))
+        {
+            var volume = blood.BloodReferenceSolution.Volume;
+            _blood.ChangeBloodReagents((target, blood), new([new("FerrochromicAcid", volume)]));
+        }
         _blood.SpillAllSolutions(target);
 
         PlayMeatySound(uid, comp);

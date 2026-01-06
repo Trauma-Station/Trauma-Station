@@ -80,8 +80,7 @@ public sealed class GrabThrownSystem : EntitySystem
         if (comp.DamageOnCollide != null)
             _damageable.TryChangeDamage(uid, comp.DamageOnCollide);
 
-        if (HasComp<GrabThrownComponent>(uid))
-            RemComp<GrabThrownComponent>(uid);
+        RemCompDeferred(uid, comp);
     }
 
     /// <summary>

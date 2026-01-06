@@ -1,0 +1,50 @@
+# From Metal Gear Solid V: The Phantom Pain, created by Hideo Kojima
+
+- type: entity
+  abstract: true
+  parent: DiseaseBase
+  id: DiseaseVocalParasitesBase
+  name: vocal parasites
+  description: A parasite attached to the host's vocal folds.
+  components:
+  - type: Disease
+    diseaseType: Parasite
+    genotype: 150901
+    canGainImmunity: false # lol no
+    infectionRate: 0 # dormant until spoken
+    mutationRate: 0.001 # need huey to mutate it
+    immunityGainRate: 0
+    infectionProgress: 0.01 # to not immediately be cured
+    effects:
+      DiseaseBehaviorVocalCough: 1
+      DiseaseBehaviorVocalCoughBlood: 1
+      DiseaseBehaviorVocalDestroyLungs: 1
+      # TODO: spread eggs through touch or something if someone makes it
+  - type: LanguageDisease
+
+- type: entity
+  parent: DiseaseVocalParasitesBase
+  id: DiseaseVocalParasitesSolCommon
+  components:
+  - type: LanguageDisease
+    languages:
+    - SolCommon
+
+- type: entity
+  parent: DiseaseVocalParasitesBase
+  id: DiseaseVocalParasitesTauCetiBasic
+  components:
+  - type: Disease
+    genotype: 150902
+  - type: LanguageDisease
+    languages:
+    - TauCetiBasic
+
+- type: entity
+  parent: DiseaseVocalParasitesSolCommon
+  id: DiseaseVocalParasitesEthnicCleanser
+  components:
+  - type: Disease
+    genotype: 130327
+  - type: LanguageDisease
+    inverted: true

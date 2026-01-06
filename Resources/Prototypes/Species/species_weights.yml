@@ -22,11 +22,11 @@
     Human: 5
     Reptilian: 4
     SlimePerson: 4
+    Moth: 4
+    Dwarf: 2
     Diona: 2
-    Vulpkanin: 3 # Trauma - was 4
-    # <Goob>
+    Vox: 1
+    # <Trauma>
+    #Vulpkanin: 4
     Harpy: 3
-    Rodentia: 3
-    #Tajaran: 3 # Trauma
-    Chitinid: 2
-    # </Goob>
+    # </Trauma>

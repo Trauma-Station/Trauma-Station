@@ -136,6 +136,7 @@
         - id: HydroponicsToolHatchet
         - id: ClothingOuterApronBotanist
         - id: ClothingHandsGlovesLeather
+        - id: PlantAnalyzer # Trauma
         - id: ChemistryBottleEZNutrient
           amount: 2
 

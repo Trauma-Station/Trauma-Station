@@ -105,7 +105,7 @@
 
 - type: entity
   id: PaperMailNFVagueThreat8
-  categories: [ HideSpawnMenu ] 
+  categories: [ HideSpawnMenu ]
   suffix: "vague mail threat 8, formatted"
   parent: Paper
   components:
@@ -271,7 +271,7 @@
 
 - type: entity
   id: PaperMailNTSoapAd2
-  categories: [ HideSpawnMenu ] 
+  categories: [ HideSpawnMenu ]
   suffix: "soap ad 2" #DeltaV - Edited to not be addressed to Frontier Citizens, localized
   parent: Paper
   components:
@@ -316,7 +316,7 @@
 - type: entity
   id: PaperMailNFPaperPusherAd
   categories: [ HideSpawnMenu ]
-  suffix: "paper pusher" 
+  suffix: "paper pusher"
   parent: Paper
   components:
   - type: Paper
@@ -340,7 +340,7 @@
   components:
   - type: Paper
     content: |2
-      
+
       [head=1]HÖGANÄS[/head]
 
       [italic](There is a black and white picture of a pet bed on the first page.)[/italic]
@@ -348,20 +348,6 @@
       [italic](On the next few pages, you see a list of materials and a happy stick figure assembling furniture.)[/italic]
 
       [italic](On the pages after that, you see a set of instructions to assemble a pet bed. You're sure you don't need them, how hard could it be?)[/italic]
-
-- type: entity
-  id: PaperMailNTBoxer
-  categories: [ HideSpawnMenu ]
-  suffix: "boxer"
-  parent: Paper
-  components:
-  - type: Paper
-    content: |2
-          [head=2]You've gotta defend your belt, champ.
-      [/head]
-                [head=1]They're coming for you.[/head]
-
-                  [head=2]This should help. Knock 'em out.[/head]
 
 # Placeholder for an arm-on-use, flashbang fakeout pipebomb
 - type: entity
@@ -439,7 +425,7 @@
       stampedName: Chief Friendship Officer
     - stampedColor: '#333333FF'
       stampedName: Cuts-With-Scalpel
-#      stampType: Signature  #DeltaV - Not compatible with our signatures code stuff apparently. 
+#      stampType: Signature  #DeltaV - Not compatible with our signatures code stuff apparently.
     content: |2
 
       [head=1]Note of Adoption[/head]

@@ -50,10 +50,10 @@
         Brute: -0.14
   - type: Targeting
   - type: Bloodstream
-    bloodReagents:
+    bloodReferenceSolution:
       reagents:
       - ReagentId: FluorosulfuricAcid
-        Quantity: 1
+        Quantity: 300
   - type: NightVision
     color: "#BF40BF"
     activateSound: null

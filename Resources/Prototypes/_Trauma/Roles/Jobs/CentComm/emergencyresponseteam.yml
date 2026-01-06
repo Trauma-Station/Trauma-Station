@@ -1,0 +1,16 @@
+- type: startingGear
+  id: ERTChaplainGearTank
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitERTChaplain
+    back: ClothingBackpackHolyFirefighterTank
+    shoes: ClothingShoesBootsMagEmergencyResponseTeam
+    head: ClothingHeadHatFez
+    eyes: ClothingEyesGlasses
+    neck: ClothingNeckStoleChaplain
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterArmourDurathread
+    id: ERTChaplainPDA
+    ears: ClothingHeadsetAltCentCom
+    belt: ClothingBeltStorageWaistbag
+    pocket1: WeaponPulsePistol
+    pocket2: DrinkWaterBottleFull

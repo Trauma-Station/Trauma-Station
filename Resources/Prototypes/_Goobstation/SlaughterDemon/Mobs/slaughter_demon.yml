@@ -16,7 +16,7 @@
     sprite: _Goobstation/SlaughterDemon/demon.rsi
     state: daemon
   - type: Stamina
-    critThreshold: 150
+    baseCritThreshold: 150
   - type: NightVision
     color: "#AA4A44"
     activateSound: null
@@ -169,11 +169,10 @@
     speedModifierThresholds:
       200: 1
   - type: Bloodstream
-    bloodMaxVolume: 300
-    bloodReagents:
+    bloodReferenceSolution:
       reagents:
       - ReagentId: Sulfur
-        Quantity: 1
+        Quantity: 300
     bleedReductionAmount: 5
   - type: Temperature
     coldDamage:

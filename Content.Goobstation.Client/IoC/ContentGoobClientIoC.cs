@@ -21,10 +21,8 @@ namespace Content.Goobstation.Client.IoC;
 
 internal static class ContentGoobClientIoC
 {
-    internal static void Register()
+    internal static void Register(IDependencyCollection collection)
     {
-        var collection = IoCManager.Instance!;
-
         collection.Register<RedialManager>();
         collection.Register<PollManager>();
         collection.Register<IVoiceChatManager, VoiceChatClientManager>();

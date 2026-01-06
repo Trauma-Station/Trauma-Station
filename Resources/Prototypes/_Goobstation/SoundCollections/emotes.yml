@@ -19,21 +19,6 @@
   files:
     - /Audio/_Goobstation/Voice/sound_items_weapons_thudswoosh.ogg
 
-- type: soundCollection
-  id: Trill
-  files:
-    - /Audio/_Goobstation/Voice/Resomi/trill.ogg
-
-- type: soundCollection
-  id: Warble
-  files:
-    - /Audio/_Goobstation/Voice/Resomi/warble.ogg
-
-- type: soundCollection
-  id: Wurble
-  files:
-    - /Audio/_Goobstation/Voice/Resomi/wurble.ogg
-
 - type: soundCollection # Mono
   id: Bagawk
   files:

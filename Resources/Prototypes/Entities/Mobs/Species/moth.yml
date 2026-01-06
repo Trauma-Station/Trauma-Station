@@ -39,11 +39,13 @@
     spawned:
     - id: FoodMeat
       amount: 5
+    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+      amount: 3
   - type: Bloodstream
-    bloodReagents:
+    bloodReferenceSolution:
       reagents:
       - ReagentId: InsectBlood
-        Quantity: 1
+        Quantity: 300
   #- type: DamageVisuals # Goob
   #  damageOverlayGroups:
   #    Brute:

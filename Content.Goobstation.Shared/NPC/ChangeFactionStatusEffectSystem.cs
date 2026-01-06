@@ -1,0 +1,68 @@
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Prototypes;
+using Content.Shared.NPC.Systems;
+using Content.Shared.StatusEffectNew;
+using Robust.Shared.Prototypes;
+
+namespace Content.Goobstation.Shared.NPC;
+
+public sealed partial class ChangeFactionStatusEffectSystem : EntitySystem
+{
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly NpcFactionSystem _npc = default!;
+
+    public static readonly EntProtoId ChangeFactionStatusEffect = "ChangeFactionStatusEffect";
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<ChangeFactionStatusEffectComponent, StatusEffectAppliedEvent>(OnStatusApplied);
+        SubscribeLocalEvent<ChangeFactionStatusEffectComponent, StatusEffectRemovedEvent>(OnStatusRemoved);
+    }
+
+    public void TryChangeFaction(Entity<NpcFactionMemberComponent> ent, ProtoId<NpcFactionPrototype> newFaction, TimeSpan? duration)
+    {
+        if (duration == null)
+        {
+            SwapFactions(ent.AsNullable(), newFaction);
+            return;
+        }
+
+        _status.TryAddStatusEffect(ent.Owner, ChangeFactionStatusEffect, out var statusEffect, duration);
+        if (statusEffect.HasValue && TryComp<ChangeFactionStatusEffectComponent>(statusEffect, out var f))
+        {
+            f.NewFaction = newFaction;
+            var args = new StatusEffectAppliedEvent(ent);
+            OnStatusApplied((statusEffect.Value, f), ref args); // mango code
+        }
+    }
+
+    private void OnStatusApplied(Entity<ChangeFactionStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
+    {
+        if (ent.Comp.NewFaction is not {} faction)
+            return;
+
+        var npc = EnsureComp<NpcFactionMemberComponent>(args.Target);
+        ent.Comp.OldFactions = npc.Factions;
+        SwapFactions((args.Target, npc), faction);
+    }
+
+    private void OnStatusRemoved(Entity<ChangeFactionStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
+    {
+        var npc = EnsureComp<NpcFactionMemberComponent>(args.Target);
+        SwapFactions((args.Target, npc), ent.Comp.OldFactions);
+    }
+
+    private void SwapFactions(Entity<NpcFactionMemberComponent?> ent, string faction)
+    {
+        _npc.ClearFactions(ent);
+        _npc.AddFaction(ent, faction);
+    }
+
+    private void SwapFactions(Entity<NpcFactionMemberComponent?> ent, HashSet<ProtoId<NpcFactionPrototype>> factions)
+    {
+        _npc.ClearFactions(ent);
+        _npc.AddFactions(ent, factions);
+    }
+}

@@ -1,0 +1,17 @@
+# keep the weight synced with AllPlushiesTable
+- type: entityTable
+  id: AllPlushiesTrauma
+  table: !type:GroupSelector
+    children:
+    - id: PlushieBingle
+    - id: PlushieAbductor
+    - id: FaceHuggerToys
+
+# keep the weight synced with AllFigurinesTable
+- type: entityTable
+  id: AllFigurinesTrauma
+  table: !type:GroupSelector
+    children:
+    - id: ToyFigurineDevil
+    - id: ToyFigurineBrigmedic
+    - id: ToyFigurineCosmicCultist

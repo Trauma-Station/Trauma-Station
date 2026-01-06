@@ -34,6 +34,7 @@
     - id: ClothingBeltMilitaryWebbingCMOFilled
     - id: DiseaseDiagnoserFlatPack
     - id: VaccinatorFlatPack
+
 - type: entityTable
   id: LockerFillResearchDirectorTrauma
   table: !type:AllSelector

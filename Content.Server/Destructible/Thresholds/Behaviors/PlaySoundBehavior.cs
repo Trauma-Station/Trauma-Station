@@ -1,4 +1,6 @@
 using Content.Shared.Audio;
+using Content.Shared.Destructible;
+using Content.Shared.Destructible.Thresholds.Behaviors;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
@@ -14,7 +16,7 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
         /// </summary>
         [DataField("sound", required: true)] public SoundSpecifier Sound { get; set; } = default!;
 
-        public void Execute(EntityUid owner, DestructibleSystem system, EntityUid? cause = null)
+        public void Execute(EntityUid owner, SharedDestructibleSystem system, EntityUid? cause = null)
         {
             var pos = system.EntityManager.GetComponent<TransformComponent>(owner).Coordinates;
             system.EntityManager.System<SharedAudioSystem>().PlayPvs(Sound, pos);

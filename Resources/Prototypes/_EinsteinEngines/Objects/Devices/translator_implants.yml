@@ -46,21 +46,6 @@
 
 - type: entity
   parent: BaseSubdermalImplant
-  id: NekomimeticTranslatorImplant
-  name: nekomimetic translator implant
-  description: A translator implant intially designed to help domestic cat owners understand their pets, now granting the ability to understand and speak to Felinids!
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: TranslatorImplant
-    understood:
-    - Nekomimetic
-    spoken:
-    - Nekomimetic
-    requires:
-    - TauCetiBasic
-
-- type: entity
-  parent: BaseSubdermalImplant
   id: DraconicTranslatorImplant
   name: draconic translator implant
   description: A translator implant giving the ability to speak to dragons! Subsequently, also allows to communicate with the Unathi.
@@ -71,21 +56,6 @@
     - Draconic
     spoken:
     - Draconic
-    requires:
-    - TauCetiBasic
-
-- type: entity
-  parent: BaseSubdermalImplant
-  id: CanilunztTranslatorImplant
-  name: canilunzt translator implant
-  description: A translator implant that helps you communicate with your local yeepers. Yeep!
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: TranslatorImplant
-    understood:
-    - Canilunzt
-    spoken:
-    - Canilunzt
     requires:
     - TauCetiBasic
 
@@ -181,66 +151,6 @@
 
 - type: entity
   parent: BaseSubdermalImplant
-  id: ChittinTranslatorImplant
-  name: chittin translator implant
-  description: An implant giving the ability to understand and speak Chittin.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: TranslatorImplant
-    understood:
-    - Chittin
-    spoken:
-    - Chittin
-    requires:
-    - TauCetiBasic
-
-- type: entity
-  parent: BaseSubdermalImplant
-  id: SiikMaasTranslatorImplant
-  name: siik'maas translator implant
-  description: An implant giving the ability to understand and speak Siik'maas.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: TranslatorImplant
-    understood:
-    - SiikMaas
-    spoken:
-    - SiikMaas
-    requires:
-    - TauCetiBasic
-
-- type: entity
-  parent: BaseSubdermalImplant
-  id: MarishTranslatorImplant
-  name: marish translator implant
-  description: An implant giving the ability to understand and speak Marish.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: TranslatorImplant
-    understood:
-    - Marish
-    spoken:
-    - Marish
-    requires:
-    - TauCetiBasic
-
-- type: entity
-  parent: BaseSubdermalImplant
-  id: SchechiTranslatorImplant
-  name: schechi translator implant
-  description: An implant giving the ability to understand and speak Schechi.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: TranslatorImplant
-    understood:
-    - Schechi
-    spoken:
-    - Schechi
-    requires:
-    - TauCetiBasic
-
-- type: entity
-  parent: BaseSubdermalImplant
   id: NewKinPidginTranslatorImplant
   name: ka'rakk translator implant
   description: An implant giving the ability to understand and speak Ka'rakk.
@@ -251,20 +161,5 @@
     - NewKinPidgin
     spoken:
     - NewKinPidgin
-    requires:
-    - TauCetiBasic
-
-- type: entity
-  parent: BaseSubdermalImplant
-  id: GruntishTranslatorImplant
-  name: Gruntish translator implant
-  description: An implant giving the ability to understand and speak Gruntish.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: TranslatorImplant
-    understood:
-    - Gruntish
-    spoken:
-    - Gruntish
     requires:
     - TauCetiBasic

@@ -18,10 +18,6 @@
   path: /Fonts/_Goobstation/ChelseaMarket/ChelseaMarket.ttf
 
 - type: font
-  id: Schoolbell # Used for resomi font
-  path: /Fonts/_Goobstation/Schoolbell/Schoolbell.ttf
-
-- type: font
   id: NotoSansSCBold
   path: /Fonts/NotoSans/NotoSansSC-Bold.ttf
 

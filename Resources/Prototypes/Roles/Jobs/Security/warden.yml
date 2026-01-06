@@ -141,10 +141,6 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 10h
-    - !type:SpeciesRequirement # Goob - None Felinid
-      inverted: true
-      species:
-      - Felinid
   weight: 5
   startingGear: WardenGear
   icon: "JobIconWarden"

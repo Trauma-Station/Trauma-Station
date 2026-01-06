@@ -15,7 +15,7 @@ namespace Content.IntegrationTests;
 public sealed class PoolManagerTestEventHandler
 {
     // This value is completely arbitrary.
-    private static TimeSpan MaximumTotalTestingTimeLimit => TimeSpan.FromMinutes(30); // Trauma - give it more time??
+    private static TimeSpan MaximumTotalTestingTimeLimit => TimeSpan.FromMinutes(35); // Trauma - give it more time??
     private static TimeSpan HardStopTimeLimit => MaximumTotalTestingTimeLimit.Add(TimeSpan.FromMinutes(1));
 
     [OneTimeSetUp]

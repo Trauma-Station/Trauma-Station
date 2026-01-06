@@ -361,16 +361,6 @@
   - UplinkWeaponry
 
 - type: listing
-  id: UplinkWSPR
-  name: uplink-WSPR-name
-  description: uplink-WSPR-desc
-  productEntity: WeaponRifleWSPR
-  cost:
-    Telecrystal: 65 # fire
-  categories:
-  - UplinkWeaponry
-
-- type: listing
   id: UplinkWeaponRifleBurner
   name: uplink-weapon-burner-name
   description: uplink-weapon-burner-desc
@@ -380,17 +370,6 @@
     Telecrystal: 100 # don't kill me piras
   categories:
   - UplinkWeaponry
-
-#- type: listing - Trauma, does not fit server vision
-#  id: UplinkWeaponShotgunHeavy
-#  name: uplink-weapon-heavy-shotgun-name
-#  description: uplink-weapon-heavy-shotgun-desc
-#  icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Guns/Shotguns/magshot.rsi, state: icon }
-#  productEntity: WeaponShotgunHeavy
-#  cost:
-#    Telecrystal: 200
-#  categories:
-#  - UplinkWeaponry
 
 - type: listing
   id: UplinkBowHardlight
@@ -707,7 +686,6 @@
   - !type:BuyerJobCondition
     whitelist:
     - Botanist
-    - Zookeeper
 
 - type: listing
   id: UplinkDartGun
@@ -1184,18 +1162,6 @@
 #    Telecrystal: 40
 #  categories:
 #  - UplinkAmmo
-
-# 弾薬
-- type: listing
-  id: UplinkCaselessRifleMag
-  name: uplink-rifle-caseless-mag-name
-  description: uplink-rifle-caseless-mag-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_rifle_mag.rsi, state: base }
-  productEntity: MagazineCaselessRifle
-  cost:
-    Telecrystal: 8 # Much more damage than C20 or M90 (780, 98 dmg per TC), but hollow-point
-  categories:
-  - UplinkAmmo
 
 - type: listing
   id: UplinkHighCapacityMagazinePistol

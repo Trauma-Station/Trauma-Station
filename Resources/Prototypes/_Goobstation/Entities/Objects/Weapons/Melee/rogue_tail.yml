@@ -1,6 +1,6 @@
 - type: entity
   name: rogue king's tail
-  parent: BaseSword
+  parent: [BaseSword, BaseMajorContraband] # Trauma - Contraband marker. good job killing him, now run from security.
   id: RogueTailWeapon
   description: The severed tail of the ancient Rogue Xeno King, a brutal trophy prized by only the boldest hunters. Grants its wielder the power to dash forward in relentless bursts.
   components:

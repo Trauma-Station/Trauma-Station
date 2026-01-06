@@ -20,6 +20,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared._White.Xenomorphs.Infection;
 using Content.Shared.Body.Components; // Goobstation start
+using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -41,8 +42,8 @@ public sealed class FaceHuggerSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ReactiveSystem _reactiveSystem = default!; // Goobstation
     [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!; // Goobstation
+    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!; // Goobstation
 
     [Dependency] private readonly AudioSystem _audio = default!;
@@ -301,8 +302,8 @@ public sealed class FaceHuggerSystem : EntitySystem
 
         // Check if target already has the sleep chemical
         if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
-            _solutions.ResolveSolution(target, bloodstream.ChemicalSolutionName, ref bloodstream.ChemicalSolution, out var chemSolution) &&
-            chemSolution.TryGetReagentQuantity(new ReagentId(component.SleepChem, null), out var quantity) &&
+            _solutions.ResolveSolution(target, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution) &&
+            bloodSolution.TryGetReagentQuantity(new ReagentId(component.SleepChem, null), out var quantity) &&
             quantity > FixedPoint2.New(component.MinChemicalThreshold))
         {
             return false;
@@ -321,24 +322,6 @@ public sealed class FaceHuggerSystem : EntitySystem
     }
 
     /// <summary>
-    /// Attempts to inject the solution into the target's bloodstream
-    /// </summary>
-    public bool TryInjectIntoBloodstream(EntityUid target, Solution solution, string chemName, float chemAmount)
-    {
-        if (!TryComp<BloodstreamComponent>(target, out var bloodstream))
-            return false;
-
-        if (!_solutions.TryGetSolution(target, bloodstream.ChemicalSolutionName, out var chemSolution, out _))
-            return false;
-
-        if (!_solutions.TryAddSolution(chemSolution.Value, solution))
-            return false;
-
-        _reactiveSystem.DoEntityReaction(target, solution, ReactionMethod.Injection);
-        return true;
-    }
-
-    /// <summary>
     /// Main method to handle chemical injection
     /// </summary>
     public void InjectChemicals(EntityUid uid, FaceHuggerComponent component, EntityUid target)
@@ -346,8 +329,8 @@ public sealed class FaceHuggerSystem : EntitySystem
         if (!CanInject(uid, component, target))
             return;
 
-        var sleepChem = CreateSleepChemicalSolution(component, component.SleepChemAmount);
-        TryInjectIntoBloodstream(target, sleepChem, component.SleepChem, component.SleepChemAmount);
+        var solution = CreateSleepChemicalSolution(component, component.SleepChemAmount);
+        _bloodstream.TryAddToBloodstream(target, solution);
     }
     #endregion
 
