@@ -134,6 +134,7 @@
   - WeaponXrayCannon
   - PolymerBaton #goob
   - SpearTelescopic #goob
+  - WeaponBillyClub # TraumaStation
 
 - type: latheRecipePack
   id: SecurityDisablers
