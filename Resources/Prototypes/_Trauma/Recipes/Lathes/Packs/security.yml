@@ -1,6 +1,6 @@
 - type: latheRecipePack
   id: TraumaSecurityWeapons
   recipes:
-  - PolymerBaton #goob
-  - SpearTelescopic #goob
-  - WeaponBillyClub # TraumaStation
+  - PolymerBaton 
+  - SpearTelescopic 
+  - WeaponBillyClub
