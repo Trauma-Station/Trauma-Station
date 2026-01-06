@@ -1076,3 +1076,11 @@ Entries:
         for full details.
   id: 127
   time: '2026-01-05T23:03:36.0000000+00:00'
+- author: GoidaYAMLWarrior
+  changes:
+    - type: Add
+      message: Added billy club, a sidegrade to the baton locked behind research.
+    - type: Tweak
+      message: Judo users can no longer shoot disablers.
+  id: 128
+  time: '2026-01-06T22:25:19.0000000+00:00'
