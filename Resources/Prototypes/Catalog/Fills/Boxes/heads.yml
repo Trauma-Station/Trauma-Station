@@ -148,7 +148,10 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: ScienceTechFabCircuitboard # Goob - replaces circuit printer and protolathe
+        # <Trauma>
+        - id: XenobiologyBountyComputerCircuitboard
+        - id: ScienceTechFabCircuitboard # replaces circuit printer and protolathe
+        # </Trauma>
         - id: ResearchComputerCircuitboard
         - id: CargoRequestScienceComputerCircuitboard
         - id: RoboticsConsoleCircuitboard

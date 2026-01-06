@@ -24,4 +24,16 @@ public sealed partial class RadioSpeakerComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Enabled;
+
+    /// <summary>
+    /// Goob - Speaks normally when true, whispers when false
+    /// </summary>
+    [DataField]
+    public bool SpeakNormally;
+
+    /// <summary>
+    /// Goob - Does the radio need to be on a power grid to work?
+    /// </summary>
+    [DataField]
+    public bool PowerRequired;
 }

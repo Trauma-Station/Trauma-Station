@@ -29,6 +29,14 @@
     - id: ContrabandDetectorFlatpack
     - id: SecurityMegaphone
 
+- type: entityTable
+  id: FillLockerSecurityTrauma
+  table: !type:AllSelector
+    children:
+    - id: ClothingHeadsetAltSecurityRegular
+    - id: PanicButton
+    - id: PepperSpray
+
 - type: entity
   parent: [BaseTraumaGunSafe] # WWDP
   id: GunSafeLaserCarbine

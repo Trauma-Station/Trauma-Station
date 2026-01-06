@@ -83,6 +83,9 @@
   - type: Storage
     grid:
     - 0,0,4,1
+    whitelist: # Trauma - Whitelisting storage
+      tags:
+        - CigPack
   - type: EntityTableContainerFill
     containers:
       storagebase:

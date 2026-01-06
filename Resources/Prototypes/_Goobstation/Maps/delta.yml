@@ -66,6 +66,7 @@
             Mime: [ 1, 1 ]
             Musician: [ 2, 2 ]
             Reporter: [ 2, 2 ]
+            RadioHost: [ 1, 1 ]
             ServiceWorker: [ 3, 3 ]
             Passenger: [ -1, -1 ]
             # silicon

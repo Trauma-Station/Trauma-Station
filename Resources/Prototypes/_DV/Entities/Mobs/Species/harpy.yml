@@ -208,6 +208,13 @@
       - Shard
       - Landmine
       - Mousetrap
+  - type: Butcherable # Trauma - Bones to butcherable humanoids
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatHuman
+      amount: 5
+    - id: MaterialBones1
+      amount: 2 # birds have light bones, thus 1 less than other species.
 
 - type: entity
   save: false

@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Goobstation.Common.Effects;
 using Content.Server._Goobstation.Wizard.Components;
 using Content.Server.Beam.Components;
 using Robust.Shared.Spawners;
@@ -42,6 +43,10 @@ namespace Content.Server.Electrocution;
 
 public sealed class ElectrocutionSystem : SharedElectrocutionSystem
 {
+    // <Trauma>
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly SparksSystem _sparks = default!;
+    // </Trauma>
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -60,7 +65,6 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!; // Goobstation - Add Cooldown to shock to prevent entity overload
 
     private static readonly ProtoId<StatusEffectPrototype> StatusKeyIn = "Electrocution";
     private static readonly ProtoId<DamageTypePrototype> DamageType = "Shock";
@@ -445,6 +449,7 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
 
 
         // TODO: Sparks here.
+        _sparks.DoSparks(Transform(uid).Coordinates); // goob edit - DONE! I HATE YOU AVIU
 
         if (shockDamage is { } dmg)
         {

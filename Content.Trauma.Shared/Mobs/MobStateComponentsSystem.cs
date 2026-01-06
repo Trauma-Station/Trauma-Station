@@ -26,6 +26,7 @@ public sealed class MobStateComponentsSystem : EntitySystem
         SubscribeLocalEvent<MobStateComponent, MapInitEvent>(OnMapInit);
 
         SubscribeLocalEvent<AliveMobComponent, MobStateChangedEvent>(OnStateChanged);
+        SubscribeLocalEvent<SoftCritMobComponent, MobStateChangedEvent>(OnStateChanged);
         SubscribeLocalEvent<CriticalMobComponent, MobStateChangedEvent>(OnStateChanged);
         SubscribeLocalEvent<DeadMobComponent, MobStateChangedEvent>(OnStateChanged);
 
@@ -79,6 +80,9 @@ public sealed class MobStateComponentsSystem : EntitySystem
         {
             case MobState.Alive:
                 EnsureComp<AliveMobComponent>(uid);
+                break;
+            case MobState.SoftCrit:
+                EnsureComp<SoftCritMobComponent>(uid);
                 break;
             case MobState.Critical:
                 EnsureComp<CriticalMobComponent>(uid);

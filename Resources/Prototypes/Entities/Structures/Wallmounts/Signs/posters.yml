@@ -1229,6 +1229,7 @@
 
 - type: entity
   parent: PosterBase
+  abstract: true # Trauma - Cull Scurret reference ingame.
   id: PosterLegitHelio
   name: Helio Logistics ad
   description: "A poster advertising Helio Logistics and their adorable mascot. The slogan reads 'Come rain or shine, we deliver on time.'"

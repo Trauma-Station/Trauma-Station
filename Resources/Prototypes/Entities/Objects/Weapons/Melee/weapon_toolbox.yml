@@ -11,7 +11,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, BaseMajorContraband] # Trauma - Contraband marker "BUT I GOT IT FROM LOTTO!!!! SHITSEC!!"
   id: WeaponMeleeToolboxRobust
   name: robust toolbox
   description: A tider's weapon.

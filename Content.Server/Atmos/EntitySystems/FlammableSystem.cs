@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
+using Content.Goobstation.Common.Flammability;
 using Content.Server._Goobstation.Wizard.Systems;
 using Content.Shared._Goobstation.Wizard.Spellblade;
 // </Trauma>
@@ -491,6 +492,11 @@ namespace Content.Server.Atmos.EntitySystems
                 }
 
                 _alertsSystem.ShowAlert(uid, flammable.FireAlert);
+
+                // goob edit - fire immunity
+                if (HasComp<FireImmunityComponent>(uid))
+                    continue;
+                // goob edit end
 
                 if (flammable.FireStacks > 0)
                 {

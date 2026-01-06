@@ -135,14 +135,6 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 Del(target);
             }
         }
-        else if (TryComp<PlantHolderComponent>(target, out var plantComp))
-        {
-            if (plantComp.Seed != null)
-            {
-                // Copy genes to databank.
-                GetGeneFromInteger(ent, plantComp.Seed);
-            }
-        }
         _audio.PlayPvs(ent.Comp.ExtractEndSound, ent);
         SendDatabase(ent);
     }
@@ -165,13 +157,6 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                 SetGeneFromInteger(ent, ref seedComp.Seed);
             }
         }
-        else if (TryComp<PlantHolderComponent>(target, out var plantComp))
-        {
-            if (plantComp.Seed != null)
-            {
-                SetGeneFromInteger(ent, ref plantComp.Seed);
-            }
-        }
         _audio.PlayPvs(ent.Comp.InjectEndSound, ent);
         SendDatabase(ent);
     }
@@ -190,13 +175,6 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                     return;
                 seedComp.Seed = protoSeed.Clone();
                 seedComp.Seed.Mutations.Clear();
-            }
-        }
-        else if (TryComp<PlantHolderComponent>(target, out var plantComp))
-        {
-            if (plantComp.Seed != null)
-            {
-                plantComp.Seed.Mutations.Clear();
             }
         }
         _audio.PlayPvs(ent.Comp.DeleteMutationEndSound, ent);
@@ -366,7 +344,8 @@ public sealed class PlantAnalyzerSystem : EntitySystem
 
     public void OnDeleteDatabaseEntry(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerDeleteDatabankEntry args)
     {
-        if (ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count <= 0)
+        int totalCount = ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count;
+        if (totalCount <= 0 || totalCount <= ent.Comp.DatabankIndex)
         {
             //SendCurrentIndex(ent);
             return;

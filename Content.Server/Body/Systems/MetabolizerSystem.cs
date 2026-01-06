@@ -229,7 +229,6 @@ public sealed class MetabolizerSystem : SharedMetabolizerSystem
                         continue;
 
                     ApplyEffect(effect);
-
                 }
 
                 // TODO: We should have to do this with metabolism. ReagentEffect struct needs refactoring and so does metabolism!

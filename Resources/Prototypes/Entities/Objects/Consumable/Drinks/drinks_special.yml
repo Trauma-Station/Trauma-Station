@@ -36,6 +36,9 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 100 # Goob - was 75
+  - type: Tag # Goob
+    tags:
+    - IceBucket
 
 - type: entity
   parent: [DrinkBaseMaterialPorcelain, DrinkBase]

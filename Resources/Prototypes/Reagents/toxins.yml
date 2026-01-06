@@ -641,8 +641,8 @@
     Poison:
       metabolismRate: 0.05
       effects:
-      - !type:Polymorph # Goob
-        prototype: Bananamen
+      - !type:SpeciesChange # Goob
+        newSpecies: BananaMen
         conditions:
         - !type:ReagentCondition
           reagent: Honk

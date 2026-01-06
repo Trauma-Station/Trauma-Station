@@ -145,6 +145,8 @@
   - type: Appearance
   - type: StaticPrice
     price: 80
+  - type: MartialArtBlocked # Trauma
+    form: CorporateJudo
   - type: GuideHelp
     guides:
     - Security

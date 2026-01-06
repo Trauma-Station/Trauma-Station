@@ -16,3 +16,6 @@ construction-graph-tag-QMBoard = the requisition digi-board
 
 # tools
 construction-graph-tag-welder-experimental = an experimental welding tool
+
+# structures
+construction-graph-tag-nail = a nail

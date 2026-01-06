@@ -496,7 +496,7 @@ public abstract partial class SharedBuckleSystem
                 break;
         }
 
-        var ev = new StrappedEvent(strap, buckle);
+        var ev = new StrappedEvent(strap, buckle, user); // Trauma - added user
         RaiseLocalEvent(strap, ref ev);
 
         var gotEv = new BuckledEvent(strap, buckle);
@@ -607,7 +607,7 @@ public abstract partial class SharedBuckleSystem
         var buckleEv = new UnbuckledEvent(strap, buckle);
         RaiseLocalEvent(buckle, ref buckleEv);
 
-        var strapEv = new UnstrappedEvent(strap, buckle);
+        var strapEv = new UnstrappedEvent(strap, buckle, user); // Trauma - added user
         RaiseLocalEvent(strap, ref strapEv);
     }
 

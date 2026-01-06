@@ -8,6 +8,7 @@
     - id: MalignRiftSpawn
     - id: FloorGoblinMidRound
     - id: ClownGoblinMigration
+    - id: PlagueMiceSpawn
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
@@ -32,3 +33,27 @@
     - id: HereticMidround
     - id: Devilmidround
     #- id: SlasherSpawn # TODO: when slasher is ready
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: PlagueMiceSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    earliestStart: 20
+    minimumPlayers: 15
+    weight: 4 # annoying
+    reoccurrenceDelay: 60 # no spamming them
+    duration: 30
+    chaos:
+      Hostile: 20
+      Medical: 100
+    eventType: HostilesSpawn
+  - type: GameRule
+    chaosScore: 200
+  - type: VentCrittersRule
+    min: 1
+    max: 3
+    playerRatio: 50
+    table:
+      id: MobMousePlague

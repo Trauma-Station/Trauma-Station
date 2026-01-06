@@ -93,7 +93,7 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
 
     public void SetDatabaseIndex(int index)
     {
-        if (index <= 0)
+        if (index < 0)
             return;
         if (_window != null)
         {

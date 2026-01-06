@@ -1,4 +1,8 @@
-using Content.Shared._Shitmed.Body.Organ; // Shitmed
+// <Trauma>
+using Content.Goobstation.Common.Changeling;
+using Content.Shared._Shitmed.Body.Organ;
+using Content.Shared.Body.Systems;
+// </Trauma>
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
 using Content.Shared.Ghost;
@@ -7,16 +11,14 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Pointing;
 
-// Shitmed Change
-using Content.Shared.Body.Systems;
-using Content.Goobstation.Common.Changeling;
-
 namespace Content.Shared.Body.Systems;
 
 public sealed class BrainSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly SharedBodySystem _body = default!;
+    // </Trauma>
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!; // Shitmed Change
 
     public override void Initialize()
     {
