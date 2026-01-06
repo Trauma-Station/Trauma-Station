@@ -1,0 +1,31 @@
+- type: entity
+  parent: MobSiliconBase
+  id: MobBeepsky
+  name: officer beepsky
+  description: The best security officer you'll ever find.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/officerbeepsky.rsi
+    state: cleanbot
+  - type: Construction
+    graph: Beepsky
+    node: bot
+  - type: SentienceTarget
+    flavorKind: station-event-random-sentience-flavor-mechanical
+  - type: Absorbent
+    pickupAmount: 10
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3
+  - type: HTN
+    rootTask:
+      task: BeepskyCompound
+  - type: InteractionPopup
+    interactSuccessString: petting-success-beepsky
+    interactFailureString: petting-failure-beepsky
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: Item
+    size: Large
+  - type: StationAiVision
+    range: 0

@@ -1,0 +1,13 @@
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobBeepsky
+  name: officer beepsky
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _Trauma/Mobs/Silicon/Bots/officerbeepsky.rsi
+      state: cleanbot
+  - type: ConditionalSpawner
+    prototypes:
+    - MobBeepsky

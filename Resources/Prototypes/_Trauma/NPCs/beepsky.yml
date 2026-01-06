@@ -1,0 +1,9 @@
+- type: htnCompound
+  id: BeepskyCompound
+  branches:
+    - tasks:
+        - !type:HTNCompoundTask
+          task: MeleeAttackTargetCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: IdleCompound
