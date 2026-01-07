@@ -1,7 +1,7 @@
-﻿using Robust.Shared.Containers;
+using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 
-namespace Content.Goobstation.Common.Knowledge.Components;
+namespace Content.Trauma.Common.Knowledge.Components;
 
 /// <summary>
 /// Contains knowledge entities inside with <see cref="KnowledgeComponent"/>.

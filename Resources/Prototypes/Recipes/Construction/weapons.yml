@@ -201,6 +201,10 @@
   targetNode: cardShield
   category: construction-category-weapons
   objectType: Item
+  # Goobstation start
+  groups:
+  - SurvivalWeaponsHandmade
+  # Goobstation end
 
 - type: construction
   id: MakeshiftShield
@@ -269,6 +273,10 @@
   targetNode: CardArrow
   category: construction-category-weapons
   objectType: Item
+  # Goobstation start
+  groups:
+  - SurvivalWeaponsHandmade
+  # Goobstation end
 
 - type: construction
   id: ImprovisedBow

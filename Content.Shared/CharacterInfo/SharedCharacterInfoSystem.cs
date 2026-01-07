@@ -9,7 +9,7 @@
 //
 // SPDX-License-Identifier: MIT
 
-using Content.Goobstation.Common.Knowledge;
+using Content.Trauma.Common.Knowledge;
 using Content.Shared.Objectives;
 using Robust.Shared.Serialization;
 

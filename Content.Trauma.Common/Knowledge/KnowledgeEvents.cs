@@ -1,4 +1,4 @@
-﻿namespace Content.Goobstation.Common.Knowledge;
+namespace Content.Trauma.Common.Knowledge;
 
 /// <summary>
 /// Raised on a knowledge unit entity when it's added to some container entity.

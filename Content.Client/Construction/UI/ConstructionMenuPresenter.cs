@@ -68,6 +68,7 @@ namespace Content.Client.Construction.UI
         [Dependency] private readonly IPlacementManager _placementManager = default!;
         [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
+        [Dependency] private readonly ILogManager _logger = default!;
         [Dependency] private readonly IClientPreferencesManager _preferencesManager = default!;
         private readonly SpriteSystem _spriteSystem;
 
@@ -308,11 +309,11 @@ namespace Content.Client.Construction.UI
             var isEmptyCategory = string.IsNullOrEmpty(category) || category == ForAllCategoryName;
             _selectedCategory = isEmptyCategory ? string.Empty : category;
 
-            // Goobstation start
+            // Trauma start
             if (_playerManager.LocalEntity == null)
                 return recipes;
             var availableGroups = _constructionSystem!.AvailableConstructionGroups(_playerManager.LocalEntity.Value);
-            // Goobstation end
+            // Trauma end
 
             foreach (var recipe in _prototypeManager.EnumeratePrototypes<ConstructionPrototype>())
             {
@@ -322,7 +323,7 @@ namespace Content.Client.Construction.UI
                 if (_playerManager.LocalSession == null
                     || _playerManager.LocalEntity == null
                     || _whitelistSystem.IsWhitelistFail(recipe.EntityWhitelist, _playerManager.LocalEntity.Value)
-                    || !availableGroups.Overlaps(recipe.Groups)) // Goobstation edit
+                    || !recipe.Groups.All(group => availableGroups.Contains(group))) // Trauma edit
                     continue;
 
                 if (!string.IsNullOrEmpty(search) && (recipe.Name is { } name &&

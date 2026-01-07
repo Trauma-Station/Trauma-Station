@@ -1,9 +1,11 @@
+using System.Linq;
+using System.Text;
+using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Knowledge.Systems;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared.GameTicking;
 using Robust.Shared.Prototypes;
-using System.Linq;
-using System.Text;
 
 namespace Content.Shared._EinsteinEngines.Language.Systems;
 
@@ -34,10 +36,13 @@ public abstract class SharedLanguageSystem : EntitySystem
     /// </summary>
     public static LanguagePrototype Universal { get; private set; } = default!;
 
+    public static readonly EntProtoId LanguageKnowledgeId = "LanguageKnowledge"; // Trauma edit
+
     private StringBuilder _builder = new();
 
     [Dependency] protected readonly IPrototypeManager _prototype = default!;
     [Dependency] protected readonly SharedGameTicker _ticker = default!;
+    [Dependency] protected readonly CommonKnowledgeSystem _knowledge = default!; // Trauma edit
 
     public override void Initialize()
     {
@@ -95,6 +100,8 @@ public abstract class SharedLanguageSystem : EntitySystem
     {
         if (string.IsNullOrEmpty(ent.Comp.CurrentLanguage))
             ent.Comp.CurrentLanguage = ent.Comp.SpokenLanguages.FirstOrDefault(UniversalPrototype);
+
+        _knowledge.OnSpeakerInit(ent, LanguageKnowledgeId);
 
         UpdateEntityLanguages((ent, ent.Comp));
     }
@@ -189,7 +196,12 @@ public abstract class SharedLanguageSystem : EntitySystem
         bool addSpoken = true,
         bool addUnderstood = true)
     {
-        var knowledge = EnsureComp<LanguageKnowledgeComponent>(uid);
+        // Goobstation edit start
+        if (!_knowledge.TryEnsureKnowledgeUnit(uid, LanguageKnowledgeId, out var knowledgeEnt))
+            return;
+
+        var knowledge = EnsureComp<LanguageKnowledgeComponent>(knowledgeEnt.Value);
+        // Goobstation edit end
         var speaker = EnsureComp<LanguageSpeakerComponent>(uid);
 
         if (addSpoken && !knowledge.SpokenLanguages.Contains(language))
@@ -213,6 +225,10 @@ public abstract class SharedLanguageSystem : EntitySystem
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return;
+
+        if (_knowledge.TryGetKnowledgeUnit(ent.Owner, LanguageKnowledgeId) is not { } knowledgeEnt)
+            return;
+        var knowledge = EnsureComp<LanguageKnowledgeComponent>(knowledgeEnt);
 
         if (removeSpoken)
             ent.Comp.SpokenLanguages.Remove(language);
@@ -255,7 +271,7 @@ public abstract class SharedLanguageSystem : EntitySystem
 
         var ev = new DetermineEntityLanguagesEvent();
         // We add the intrinsically known languages first so other systems can manipulate them easily
-        if (TryComp<LanguageKnowledgeComponent>(ent, out var knowledge))
+        if (_knowledge.TryGetKnowledgeUnit(ent.Owner, LanguageKnowledgeId) is { } knowledgeEnt && TryComp<LanguageKnowledgeComponent>(ent, out var knowledge)) // Trauma edit
         {
             foreach (var spoken in knowledge.SpokenLanguages)
                 ev.SpokenLanguages.Add(spoken);
@@ -275,6 +291,31 @@ public abstract class SharedLanguageSystem : EntitySystem
         EnsureValidLanguage(ent);
 
         Dirty(ent);
+    }
+
+    /// <summary>
+    ///     Removes a language from the respective lists of intrinsically known languages of the given entity.
+    /// </summary>
+    public void RemoveLanguage(
+        EntityUid ent, // Goobstation edit
+        ProtoId<LanguagePrototype> language,
+        bool removeSpoken = true,
+        bool removeUnderstood = true)
+    {
+        // Goobstation edit start
+        if (_knowledge.TryGetKnowledgeUnit(ent, LanguageKnowledgeId) is not { } knowledgeEnt)
+            return;
+        var knowledge = EnsureComp<LanguageKnowledgeComponent>(knowledgeEnt);
+        // Goobstation edit end
+
+        if (removeSpoken)
+            knowledge.SpokenLanguages.Remove(language); // Goobstation edit
+
+        if (removeUnderstood)
+            knowledge.UnderstoodLanguages.Remove(language); // Goobstation edit
+
+        // We don't ensure that the entity has a speaker comp. If it doesn't... Well, woe be the caller of this method.
+        UpdateEntityLanguages(ent);
     }
 
     #endregion

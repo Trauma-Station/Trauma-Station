@@ -12,6 +12,8 @@
         doAfter: 10
   - node: finished
     entity: RevSword
+  groups:
+  - Technological
 
 - type: constructionGraph
   id: RevMace
@@ -26,6 +28,8 @@
         doAfter: 10
   - node: finished
     entity: RevMace
+  groups:
+  - Technological
 
 - type: constructionGraph
   id: RevKnife
@@ -40,6 +44,8 @@
         doAfter: 10
   - node: finished
     entity: RevKnife
+  groups:
+  - Technological
 
 - type: constructionGraph
   id: RevPitchfork
@@ -54,6 +60,8 @@
         doAfter: 10
   - node: finished
     entity: RevPitchfork
+  groups:
+  - Technological
 
 - type: constructionGraph
   id: RevTorch
@@ -68,6 +76,8 @@
         doAfter: 10
   - node: finished
     entity: RevTorch
+  groups:
+  - Technological
 
 - type: constructionGraph
   id: RevGuns
@@ -303,6 +313,8 @@
     entity: WeaponLauncherRPG2
   - node: Flamethrower
     entity: ClothingBackpackFlamethrower # Temp
+  groups:
+  - Technological
 
 - type: constructionGraph
   id: RevIED
@@ -330,3 +342,5 @@
         amount: 5
   - node: IED
     entity: GrenadeShrapnelRev
+  groups:
+  - Technological

@@ -1,6 +1,6 @@
-﻿using Robust.Shared.Prototypes;
+using Robust.Shared.Prototypes;
 
-namespace Content.Goobstation.Common.Knowledge.Prototypes;
+namespace Content.Trauma.Common.Knowledge.Prototypes;
 
 /// <summary>
 /// Specifies a category of knowledge, for example is it a skill or a memory.

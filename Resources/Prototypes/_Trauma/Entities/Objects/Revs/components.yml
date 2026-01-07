@@ -18,6 +18,8 @@
     graph: RevParts
     deconstructionTarget: null
   - type: Appearance
+  groups:
+  - Technological
 
 - type: entity
   parent: BaseRevComponent

@@ -249,6 +249,10 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # Goobstation start
+  groups:
+  - SimpleFurniture
+  # Goobstation end
 
 - type: construction
   id: ChairWoodBench
@@ -360,6 +364,10 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # Goobstation start
+  groups:
+  - Furniture
+  # Goobstation end
 
 - type: construction
   id: TableReinforcedGlass
@@ -487,6 +495,10 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # Goobstation start
+  groups:
+  - Furniture
+  # Goobstation end
 
 - type: construction
   id: TableFancyCyan
@@ -811,6 +823,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # Goobstation start
+  groups:
+  - Furniture
+  # Goobstation end
 
 - type: construction
   id: CurtainsCyan

@@ -54,6 +54,7 @@
   - type: ConsciousnessRequired
     identifier: "nerveSystem"
     causesDeath: true
+  - type: KnowledgeContainer # Trauma - Knowledge
 
 - type: entity
   id: OrganAnimalEyes

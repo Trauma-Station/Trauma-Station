@@ -5,3 +5,5 @@
   targetNode: paper sheet
   category: construction-category-materials
   objectType: Item
+  groups:
+  - Technologic

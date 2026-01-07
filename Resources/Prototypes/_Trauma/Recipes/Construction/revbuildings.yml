@@ -13,6 +13,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological
 
 - type: construction
   id: RevPrintingPress
@@ -29,6 +31,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological
 
 - type: construction
   id: RevTelecommsWorkbench
@@ -45,6 +49,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological
 
 - type: construction
   id: RevTelesphere
@@ -61,6 +67,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological
 
 - type: construction
   id: Rev3DPrinter
@@ -77,6 +85,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological
 
 - type: construction
   id: RevBulletPress
@@ -93,6 +103,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological
 
 - type: construction
   id: RevMicroelectronicsAssembler
@@ -109,6 +121,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological
 
 - type: construction
   id: RevUniformPrinter
@@ -125,6 +139,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological
 
 - type: construction
   id: RevTechAnalyzer
@@ -141,6 +157,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological
 
 - type: construction
   id: RevTurretPistol
@@ -157,6 +175,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological
 
 - type: construction
   id: RevTurretSMG
@@ -173,6 +193,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological
 
 - type: construction
   id: RevPlasmaFoundry
@@ -189,3 +211,5 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological

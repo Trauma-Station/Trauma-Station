@@ -1,20 +1,22 @@
-﻿using Robust.Shared.Prototypes;
+using Content.Trauma.Common.Knowledge.Prototypes;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-namespace Content.Goobstation.Common.Knowledge.Prototypes;
+namespace Content.Trauma.Common.Knowledge.Components;
 
 /// <summary>
-/// Prototype that specifies how hard it is to "forget" some memories or skills.
-/// For example, lobotomy will remove all your job skills, but will keep all memories on their place,
-/// while cloning will remove only most recent skills that still didn't settle.
-/// Also controls visibility in the character menu.
+/// Stores information about a set of knowledge units, assigned
+/// to a dummy entity that is parented to some entity with <see cref="KnowledgeContainerComponent"/>, usually a brain.
 /// </summary>
-[Prototype]
-public sealed partial class KnowledgeMemoryPrototype : IPrototype
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
+public sealed partial class KnowledgeComponent : Component
 {
-    /// <inheritdoc/>
-    [IdDataField]
-    public string ID { get; } = default!;
+    /// <summary>
+    /// The entity that this knowledge is applied to. (Entity with <see cref="KnowledgeContainerComponent"/>)
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? AppliedTo;
 
     /// <summary>
     /// Category of that knowledge. Used for distinguishing memories from skills.

@@ -375,6 +375,7 @@
   # Goobstation start
   groups:
   - Walls
+  - Bananium
   # Goobstation end
 
 - type: construction
@@ -406,6 +407,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  # Goobstation start
+  groups:
+  - Walls
+  # Goobstation end
 
 - type: construction
   id: Grille
@@ -1747,6 +1752,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
+  # Goobstation start
+  groups:
+  - Doors
+  # Goobstation end
 
 - type: construction
   id: PlasticFlapsClear

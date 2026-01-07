@@ -9,6 +9,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological
 
 - type: construction
   id: RevRPG2AP
@@ -21,6 +23,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological
 
 - type: construction
   id: RevFlamethrowerAmmo
@@ -33,3 +37,5 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technological

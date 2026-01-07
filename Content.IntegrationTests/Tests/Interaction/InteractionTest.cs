@@ -167,7 +167,10 @@ public abstract partial class InteractionTest
     - CanPilot
   - type: UserInterface
   - type: CombatMode
-";
+  - type: KnowledgeGrant
+    table: !type:NestedSelector
+      tableId: AllConstructions
+"; // Goobstation edit - added KnowledgeGrant
 
     protected static PoolSettings Default => new() { Connected = true, Dirty = true };
     protected virtual PoolSettings Settings => Default;

@@ -31,3 +31,5 @@
         doAfter: 5
   - node: hammer
     entity: MeleeHammer
+  groups:
+  - Technological

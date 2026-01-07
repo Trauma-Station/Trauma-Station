@@ -16,8 +16,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Knowledge;
-using Content.Goobstation.Common.Knowledge.Systems;
+using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Knowledge.Systems;
 using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
@@ -35,7 +35,7 @@ public sealed class CharacterInfoSystem : EntitySystem
     [Dependency] private readonly MindSystem _minds = default!;
     [Dependency] private readonly RoleSystem _roles = default!;
     [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
-    [Dependency] private readonly KnowledgeSystem _knowledge = default!; // Goobstation edit
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!; // Goobstation edit
     [Dependency] private readonly IPrototypeManager _proto = default!; // Goobstation edit
 
     public override void Initialize()
@@ -81,11 +81,11 @@ public sealed class CharacterInfoSystem : EntitySystem
 
         // Goobstation edit start
         var knowledge = new Dictionary<string, List<KnowledgeInfo>>();
-        if (_knowledge.TryGetAllKnowledgeUnits(entity, out var found))
+        if (_knowledge.TryGetAllKnowledgeUnits(entity) is { } found)
         {
             foreach (var unit in found)
             {
-                if (_proto.Index(unit.Comp.MemoryLevel).Hidden)
+                if (unit.Comp.Hidden)
                     continue;
 
                 var (category, info) = _knowledge.GetKnowledgeInfo(unit);

@@ -25,9 +25,11 @@
           sprite: Objects/Materials/Shards/shard.rsi
           state: shard1
         doAfter: 0.5
-
+  
   - node: ImprovisedArrow
     entity: ArrowImprovised
+  group:
+  - Technological
 
 - type: constructionGraph
   id: ImprovisedArrowPlasma
@@ -52,6 +54,8 @@
 
   - node: ImprovisedArrowPlasma
     entity: ArrowImprovisedPlasma
+  group:
+  - Technological
 
 - type: constructionGraph
   id: ImprovisedArrowUranium
@@ -76,6 +80,8 @@
 
   - node: ImprovisedArrowUranium
     entity: ArrowImprovisedUranium
+  group:
+  - Technological
 
 - type: constructionGraph
   id: ImprovisedArrowCarp
@@ -97,6 +103,8 @@
 
   - node: ImprovisedArrowCarp
     entity: ArrowImprovisedCarp
+  group:
+  - Technological
 
 - type: constructionGraph
   id: CardArrow
@@ -115,4 +123,5 @@
 
   - node: CardArrow
     entity: ArrowCard
-
+  group:
+  - Technological

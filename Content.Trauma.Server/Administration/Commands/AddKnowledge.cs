@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using Content.Goobstation.Common.Knowledge.Systems;
+using System.Linq;
+using Content.Trauma.Common.Knowledge.Systems;
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 using Robust.Shared.Prototypes;
 
-namespace Content.Goobstation.Server.Administration.Commands;
+namespace Content.Trauma.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
 public sealed class AddKnowledge : LocalizedCommands
@@ -17,7 +17,7 @@ public sealed class AddKnowledge : LocalizedCommands
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        var knowledgeSystem = _entMan.System<KnowledgeSystem>();
+        var knowledgeSystem = _entMan.System<CommonKnowledgeSystem>();
 
         if (args.Length < 2)
         {
@@ -32,7 +32,7 @@ public sealed class AddKnowledge : LocalizedCommands
             return;
         }
 
-        var target  = targetEntity.Value;
+        var target = targetEntity.Value;
         knowledgeSystem.TryEnsureKnowledgeUnit(target, args[1], out var knowledge);
 
         if (knowledge != null)

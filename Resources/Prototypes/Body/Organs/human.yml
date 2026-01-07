@@ -244,6 +244,7 @@
   - type: NerveSystem # Goob
   - type: ConsciousnessRequired # Goob
     identifier: "nerveSystem"
+  - type: KnowledgeContainer # Trauma
 
 - type: entity
   id: OrganHumanEyes

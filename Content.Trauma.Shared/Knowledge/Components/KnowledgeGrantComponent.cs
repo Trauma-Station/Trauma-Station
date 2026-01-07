@@ -1,7 +1,7 @@
-﻿using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
+using Content.Shared.EntityTable.EntitySelectors;
+using Robust.Shared.GameStates;
 
-namespace Content.Goobstation.Shared.Knowledge.Components;
+namespace Content.Trauma.Shared.Knowledge.Components;
 
 /// <summary>
 /// Grants knowledge to the entity automatically on mapinit, then removes itself.
@@ -12,6 +12,6 @@ public sealed partial class KnowledgeGrantComponent : Component
     /// <summary>
     /// Knowledge that will be added.
     /// </summary>
-    [DataField(required:true)]
-    public List<EntProtoId> ToAdd = new();
+    [DataField(required: true)]
+    public EntityTableSelector Table;
 }

@@ -9,6 +9,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technologic
 
 - type: construction
   id: RevResistance
@@ -21,6 +23,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technologic
 
 - type: construction
   id: RPG2
@@ -33,6 +37,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technologic
 
 - type: construction
   id: Flamethrower
@@ -45,6 +51,8 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technologic
 
 - type: construction
   id: RevIED
@@ -57,3 +65,5 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+  groups:
+  - Technologic

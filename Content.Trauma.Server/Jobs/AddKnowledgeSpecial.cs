@@ -1,9 +1,9 @@
-using Content.Goobstation.Common.Knowledge.Systems;
+using Content.Trauma.Common.Knowledge.Systems;
 using Content.Shared.Roles;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 
-namespace Content.Goobstation.Server.Jobs;
+namespace Content.Trauma.Server.Jobs;
 
 /// <summary>
 /// Adds knowledge on spawn to the entity
@@ -17,7 +17,7 @@ public sealed partial class AddKnowledgeSpecial : JobSpecial
     public override void AfterEquip(EntityUid mob)
     {
         var entMan = IoCManager.Resolve<IEntityManager>();
-        var knowledgeSystem = entMan.System<KnowledgeSystem>();
+        var knowledgeSystem = entMan.System<CommonKnowledgeSystem>();
         knowledgeSystem.AddKnowledgeUnits(mob, Knowledge);
     }
 }
