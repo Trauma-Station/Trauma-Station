@@ -1,0 +1,45 @@
+## PARITY
+
+- type: scrollPrayer
+  id: Ale
+  verb: GIVE
+  subjects: [ "ALE" ]
+  items:
+    id: DrinkAleBottleFull
+
+- type: scrollPrayer
+  id: Tobacco
+  verb: GIVE
+  subjects: [ "TOBACCO" ]
+  items:
+    id: GroundTobacco
+
+- type: scrollPrayer
+  id: Opium
+  verb: GIVE
+  subjects: [ "OPIUM", "OPIUM POWDER" ]
+  items:
+    id: FoodPoppy # theres no powder sorry
+
+- type: scrollPrayer
+  id: Whiskey
+  verb: GIVE
+  subjects: [ "WHISKEY" ]
+  items:
+    id: DrinkWhiskeyBottleFull
+
+## NON PARITY
+
+- type: scrollPrayer
+  id: BacchusBlessing
+  verb: GIVE
+  subjects: [ "BACCHUS BLESSING" ]
+  items:
+    id: DrinkBacchusBlessing
+
+- type: scrollPrayer
+  id: Fent
+  verb: GIVE
+  subjects: [ "FENT", "FENTANYL" ]
+  items:
+    id: SyringePoisonFent

@@ -1,0 +1,43 @@
+## PARITY
+
+- type: scrollPrayer
+  id: BearTrap
+  verb: GIVE
+  subjects: [ "BEAR TRAP" ]
+  items:
+    id: ReverseBearTrap # key not included :)
+
+- type: scrollPrayer
+  id: GlassVial
+  verb: GIVE
+  subjects: [ "GLASS VIAL" ]
+  items:
+    id: BaseChemistryEmptyVial
+
+- type: scrollPrayer
+  id: Pipe
+  verb: GIVE
+  subjects: [ "PIPE" ]
+  items:
+    id: SmokingPipe
+
+- type: scrollPrayer
+  id: SkinningKnife
+  verb: GIVE
+  subjects: [ "SKINNING KNIFE" ]
+  items:
+    id: CarvingKnife # :)
+
+- type: scrollPrayer
+  id: Tinderbox
+  verb: GIVE
+  subjects: [ "TINDERBOX" ]
+  items:
+    id: Matchbox
+
+- type: scrollPrayer
+  id: Torch
+  verb: GIVE
+  subjects: [ "TORCH" ]
+  items:
+    id: Torch
