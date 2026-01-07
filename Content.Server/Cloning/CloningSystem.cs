@@ -31,6 +31,12 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Goobstation.Common.Knowledge.Components;
+using Content.Goobstation.Common.Knowledge.Systems;
+using Content.Goobstation.Shared.CloneProjector.Clone;
+using Content.Shared._EinsteinEngines.Silicon.Components;
+using Content.Shared.Radio.Components; // Goobstation
+using Content.Shared.Radio.EntitySystems; // Goobstation
 
 namespace Content.Server.Cloning;
 
@@ -55,6 +61,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
     [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
     [Dependency] private readonly NameModifierSystem _nameMod = default!;
     [Dependency] private readonly Shared.StatusEffectNew.StatusEffectsSystem _statusEffects = default!; //TODO: This system has to support both the old and new status effect systems, until the old is able to be fully removed.
+    [Dependency] private readonly KnowledgeSystem _knowledge = default!; // Goobstation
 
     /// <summary>
     ///     Spawns a clone of the given humanoid mob at the specified location or in nullspace.
@@ -110,6 +117,11 @@ public sealed partial class CloningSystem : SharedCloningSystem
         // Copy permanent status effects
         if (settings.CopyStatusEffects)
             CopyStatusEffects(original, clone.Value);
+
+        // Goobstation start
+        if (settings.CopyKnowledge)
+            CopyKnowledge(original, clone.Value);
+        // Goobstation end
 
         var originalName = _nameMod.GetBaseName(original);
 
@@ -438,6 +450,33 @@ public sealed partial class CloningSystem : SharedCloningSystem
                 continue;
 
             _statusEffects.TrySetStatusEffectDuration(target, effectProto);
+        }
+    }
+
+    /// <summary>
+    ///    Grabs knowledge attached to original entity and transfers it to the clone.
+    /// </summary>
+    public void CopyKnowledge(EntityUid original, EntityUid target)
+    {
+        if (!_knowledge.TryGetAllKnowledgeUnits(original, out var found))
+            return; // No knowledge to copy!
+
+        foreach (var originalKnowledge in found)
+        {
+            if (!HasComp<KnowledgeComponent>(originalKnowledge))
+                continue;
+
+            var knowledgeId = MetaData(originalKnowledge).EntityPrototype?.ID;
+
+            if (knowledgeId == null)
+                continue;
+
+            if (!_knowledge.TryAddKnowledgeUnit(target, knowledgeId, out var targetKnowledge))
+                continue;
+
+            // copy over important component data
+            var ev = new CloningItemEvent(targetKnowledge.Value);
+            RaiseLocalEvent(targetKnowledge.Value, ref ev);
         }
     }
 }
