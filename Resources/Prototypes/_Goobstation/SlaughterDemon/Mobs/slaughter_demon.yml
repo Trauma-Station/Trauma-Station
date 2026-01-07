@@ -174,7 +174,7 @@
       - ReagentId: Sulfur
         Quantity: 300
     bleedReductionAmount: 5
-  - type: Temperature
+  - type: TemperatureDamage
     coldDamage:
       types:
         Cold: 0

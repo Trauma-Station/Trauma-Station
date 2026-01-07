@@ -3,6 +3,71 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  name: chair
+  id: RollingOfficeChairBase
+  description: Scoot from desk to desk because standing is for interns.
+  parent: BaseVehicle
+  abstract: true
+  components:
+  - type: Anchorable
+  - type: Rotatable
+    rotateWhileAnchored: true
+  - type: Sprite
+    sprite: Structures/Furniture/chairs.rsi
+    noRot: true
+  - type: Strap
+    position: Stand
+    buckleOffset: "0,-0.05"
+  - type: Vehicle
+    requiredHands: 0
+    engineRunning: true
+    renderOver: North, NorthEast, NorthWest
+  - type: MovementSpeedModifier
+    acceleration: 10
+    friction: 3.5
+    baseSprintSpeed: 2.5
+    baseWalkSpeed: 1.5
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 75
+        mask:
+        - TableMask
+  - type: StaticPrice
+    price: 50
+  - type: VehicleWallPush # Goob - Ability to push yourself off walls.
+    actionProto: ActionVehicleWallPush
+    kickSpeed: 10
+    minDistance: 0
+    maxDistance: 1.5
+  - type: SprayPushableVehicle # Goob - Allows pushing yourself with a fire extinguisher
+    multiplier: 0.05
+    impulseDuration: 0.3
+
+- type: entity
   parent: ChairOfficeLight
   id: ChairOfficeRocketBase
   description: Launch from department to department because walking is for interns.

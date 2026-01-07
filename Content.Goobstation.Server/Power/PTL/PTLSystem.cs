@@ -19,6 +19,7 @@ using Content.Shared.Emag.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Radiation.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
@@ -26,7 +27,6 @@ using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
@@ -49,6 +49,7 @@ public sealed partial class PTLSystem : EntitySystem
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly AudioSystem _aud = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private readonly SharedBatterySystem _battery = default!;
 
     private static readonly EntProtoId _credits = "SpaceCash";
     private static readonly ProtoId<TagPrototype> _tagScrewdriver = "Screwdriver";
@@ -104,20 +105,22 @@ public sealed partial class PTLSystem : EntitySystem
 
     private void Tick(Entity<PTLComponent> ent)
     {
-        if (!TryComp<BatteryComponent>(ent, out var battery)
-        || battery.CurrentCharge < ent.Comp.MinShootPower)
+        if (!TryComp<BatteryComponent>(ent, out var battery))
             return;
 
-        Shoot((ent, ent.Comp, battery));
+        var charge = _battery.GetCharge((ent, battery));
+        if (charge < ent.Comp.MinShootPower)
+            return;
+
+        Shoot((ent, ent.Comp, battery), charge);
         Dirty(ent);
     }
 
-    private void Shoot(Entity<PTLComponent, BatteryComponent> ent)
+    private void Shoot(Entity<PTLComponent, BatteryComponent> ent, float chargeBefore)
     {
         var megajoule = 1e6;
 
         // Measure battery before firing.
-        var chargeBefore = ent.Comp2.CurrentCharge;
         if (chargeBefore <= 0)
             return;
 
@@ -148,7 +151,7 @@ public sealed partial class PTLSystem : EntitySystem
         }
 
         // Determine actual energy used.
-        var chargeAfter = ent.Comp2.CurrentCharge;
+        var chargeAfter = _battery.GetCharge((ent, ent.Comp2));
         var energyUsed = Math.Max(0.0, chargeBefore - chargeAfter);
         if (energyUsed <= 0)
             return;

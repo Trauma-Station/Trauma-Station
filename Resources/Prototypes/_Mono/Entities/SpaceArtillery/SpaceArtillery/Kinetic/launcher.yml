@@ -12,9 +12,11 @@
     sprite: _Mono/Objects/ShuttleWeapons/50cal.rsi
     layers:
     - state: space_artillery
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 20000
     startingCharge: 20000
+  - type: ApcPowerReceiver
+    powerLoad: 200
   - type: ExaminableBattery
   - type: Appearance
   - type: AutoShootGun
@@ -31,7 +33,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/slammer.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 550
   - type: SpaceArtillery
     powerChargeRate: 100
@@ -69,9 +71,11 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 30000
     startingCharge: 30000
+  - type: ApcPowerReceiver
+    powerLoad: 970
   - type: ExaminableBattery
   - type: WirelessNetworkConnection
     range: 500
@@ -82,7 +86,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/mortar.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 220
   - type: SpaceArtillery
     powerChargeRate: 220
@@ -116,9 +120,11 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 40000
     startingCharge: 40000
+  - type: ApcPowerReceiver
+    powerLoad: 725
   - type: ExaminableBattery
   - type: WirelessNetworkConnection
     range: 500
@@ -134,7 +140,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/120mm_mortar.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 125
   - type: SpaceArtillery
     powerChargeRate: 125
@@ -168,9 +174,11 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 40000
     startingCharge: 40000
+  - type: ApcPowerReceiver
+    powerLoad: 3714
   - type: ExaminableBattery
   - type: WirelessNetworkConnection
     range: 500
@@ -181,7 +189,7 @@
       path: /Audio/Weapons/Guns/Gunshots/ship_duster.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 214
   - type: SpaceArtillery
     powerChargeRate: 214
@@ -216,9 +224,11 @@
     scale: 1, 1
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 12000
     startingCharge: 12000
+  - type: ApcPowerReceiver
+    powerLoad: 13500
   - type: ExaminableBattery
   - type: WirelessNetworkConnection
     range: 500
@@ -245,7 +255,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 12000
   - type: SpaceArtillery
     powerChargeRate: 12000
@@ -280,9 +290,11 @@
     scale: 1.15, 1.15
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 12000
     startingCharge: 12000
+  - type: ApcPowerReceiver
+    powerLoad: 13500
   - type: ExaminableBattery
   - type: WirelessNetworkConnection
     range: 500
@@ -309,7 +321,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 12000
   - type: SpaceArtillery
     powerChargeRate: 12000
@@ -343,9 +355,11 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 40000
     startingCharge: 40000
+  - type: ApcPowerReceiver
+    powerLoad: 1350
   - type: ExaminableBattery
   - type: WirelessNetworkConnection
     range: 500
@@ -356,7 +370,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/leviathan_fire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 350
   - type: SpaceArtillery
     powerChargeRate: 350
@@ -419,9 +433,11 @@
     scale: 1, 1
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 40000
     startingCharge: 40000
+  - type: ApcPowerReceiver
+    powerLoad: 2300
   - type: ExaminableBattery
   - type: WirelessNetworkConnection
     range: 500
@@ -443,7 +459,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 12000
   - type: SpaceArtillery
     powerChargeRate: 800
@@ -478,9 +494,11 @@
     scale: 1, 1
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 40000
     startingCharge: 40000
+  - type: ApcPowerReceiver
+    powerLoad: 2200
   - type: ExaminableBattery
   - type: WirelessNetworkConnection
     range: 500
@@ -502,7 +520,7 @@
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 12000
   - type: SpaceArtillery
     powerChargeRate: 700

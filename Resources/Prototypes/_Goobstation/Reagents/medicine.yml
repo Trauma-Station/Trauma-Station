@@ -215,7 +215,7 @@
           inverted: true
         amount: 5 # effectively 3 "sleeps" per 20OD, but only 1 on 10 (like with 2 syringes)
         immediate: false
-      - !type:MovespeedModifier # kinda sleepiness
+      - !type:ModifyStatusEffect # kinda sleepiness
         conditions:
         - !type:StaminaDamageCondition
           min: 80
@@ -225,8 +225,7 @@
         - !type:MetabolizerTypeCondition # Goob - Yowie
           type: [ Yowie ]
           inverted: true
-        walkSpeedModifier: 0.8
-        sprintSpeedModifier: 0.8
+        effectProto: ProbitalSlowdownStatusEffect
       - !type:GenericStatusEffect
         conditions:
         - !type:StaminaDamageCondition
@@ -335,13 +334,12 @@
           inverted: true
         amount: 3 # full syringe doesn't stamcrit (maybe it should?)
         immediate: false
-      - !type:MovespeedModifier
+      - !type:ModifyStatusEffect
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Yowie ]
           inverted: true
-        walkSpeedModifier: 0.75
-        sprintSpeedModifier: 0.75
+        effectProto: TirimolSlowdownStatusEffect
       - !type:ModifyParalysis # more severe effect when overdosing, doesn't matter since you want to use it on crit ppl
         conditions:
         - !type:MetabolizerTypeCondition
@@ -1055,13 +1053,12 @@
           reagent: Atropine
           min: 0
           max: 35
-      - !type:MovespeedModifier # and basically every visual/combat side effect that can be reasonably put
+      - !type:ModifyStatusEffect # and basically every visual/combat side effect that can be reasonably put
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Yowie ]
           inverted: true
-        walkSpeedModifier: 0.75
-        sprintSpeedModifier: 0.75
+        effectProto: AtropineSlowdownStatusEffect
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent

@@ -95,7 +95,7 @@ public sealed class SpellsSystem : SharedSpellsSystem
     [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly PredictedBatterySystem _battery = default!;
+    [Dependency] private readonly SharedBatterySystem _battery = default!;
     [Dependency] private readonly SharedRandomTeleportSystem _teleport = default!;
     [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -640,7 +640,7 @@ public sealed class SpellsSystem : SharedSpellsSystem
 
     protected override bool ChargeItem(EntityUid uid, ChargeMagicEvent ev)
     {
-        if (!TryComp(uid, out PredictedBatteryComponent? battery))
+        if (!TryComp(uid, out BatteryComponent? battery))
             return false;
 
         var current = _battery.GetCharge((uid, battery));

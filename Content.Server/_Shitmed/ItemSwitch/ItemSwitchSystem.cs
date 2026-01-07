@@ -38,10 +38,8 @@ public sealed class ItemSwitchSystem : SharedItemSwitchSystem
     /// </summary>
     private void OnExamined(Entity<ItemSwitchComponent> ent, ref ExaminedEvent args)
     {
-        if (!ent.Comp.NeedsPower
-        || !TryComp<BatteryComponent>(ent, out var battery)
-        || !ent.Comp.States.TryGetValue(ent.Comp.State, out var state))
-        return;
+        if (!ent.Comp.NeedsPower || !ent.Comp.States.TryGetValue(ent.Comp.State, out var state))
+            return;
 
         // If the current state is the default state, which is also the off state, show off. Else, show on.
         var onMsg = ent.Comp.State != ent.Comp.DefaultState
@@ -54,18 +52,17 @@ public sealed class ItemSwitchSystem : SharedItemSwitchSystem
         if (ent.Comp.State == ent.Comp.DefaultState)
             return;
 
-        var count = (int) (battery.CurrentCharge / state.EnergyPerUse);
+        var count = _battery.GetRemainingUses(ent.Owner, state.EnergyPerUse);
         args.PushMarkup(Loc.GetString("melee-battery-examine", ("color", "yellow"), ("count", count)));
     }
 
     private void CheckPowerAndSwitchState(EntityUid uid, ItemSwitchComponent component)
     {
         if (!component.NeedsPower
-            || !TryComp<BatteryComponent>(uid, out var battery)
             || !component.States.TryGetValue(component.State, out var state))
             return;
 
-        component.IsPowered = battery.CurrentCharge >= state.EnergyPerUse;
+        component.IsPowered = _battery.GetCharge(uid) >= state.EnergyPerUse;
 
         if (component is { IsPowered: false, DefaultState: { } defaultState } && component.State != defaultState)
             Switch((uid, component), defaultState);

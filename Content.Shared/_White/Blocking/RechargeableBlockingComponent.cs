@@ -23,5 +23,5 @@ public sealed partial class RechargeableBlockingComponent : Component
     public float RechargePercentage = 0.1f;
 
     [DataField]
-    public bool Discharged;
+    public bool Discharged = true;
 }

@@ -13,6 +13,13 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<bool> AntagPityEnabled =
         CVarDef.Create("trauma.pity_enabled", false, CVar.SERVER | CVar.REPLICATED);
 
+    /// <summary>
+    /// Whether to enable the ghost bar.
+    /// This is not implemented in the UI, it is just to make tests not take 500 years to run.
+    /// </summary>
+    public static readonly CVarDef<bool> GhostBarEnabled =
+        CVarDef.Create("trauma.ghost_bar_enabled", true, CVar.SERVER | CVar.REPLICATED);
+
     #endregion
 
     #region Mining rewards

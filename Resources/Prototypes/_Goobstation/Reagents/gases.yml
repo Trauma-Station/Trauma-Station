@@ -89,8 +89,7 @@
         - !type:ReagentCondition
           reagent: NitrosylPlasmide
           max: 0.1
-        walkSpeedModifier: 0.65
-        sprintSpeedModifier: 0.65
+        speedModifier: 0.65
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentCondition
@@ -187,8 +186,7 @@
         - !type:ReagentCondition
           reagent: NitrosylPlasmide
           max: 0.1
-        walkSpeedModifier: 0.65
-        sprintSpeedModifier: 0.65
+        speedModifier: 0.65
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentCondition
@@ -339,23 +337,20 @@
           reagent: Nitrium
           min: 1
           max: 8
-        walkSpeedModifier: 1.25
-        sprintSpeedModifier: 1.25
+        speedModifier: 1.25
       - !type:NitriumMovespeedModifier
         conditions:
         - !type:ReagentCondition
           reagent: Nitrium
           min: 8
           max: 12
-        walkSpeedModifier: 1.4
-        sprintSpeedModifier: 1.4
+        speedModifier: 1.4
       - !type:NitriumMovespeedModifier
         conditions:
         - !type:ReagentCondition
           reagent: Nitrium
           min: 12
-        walkSpeedModifier: 1.6
-        sprintSpeedModifier: 1.6
+        speedModifier: 1.6
       - !type:AddReagentToBlood
         conditions:
         - !type:ReagentCondition
@@ -388,23 +383,20 @@
           reagent: Nitrium
           min: 1
           max: 8
-        walkSpeedModifier: 1.25
-        sprintSpeedModifier: 1.25
+        speedModifier: 1.25
       - !type:NitriumMovespeedModifier
         conditions:
         - !type:ReagentCondition
           reagent: Nitrium
           min: 8
           max: 12
-        walkSpeedModifier: 1.4
-        sprintSpeedModifier: 1.4
+        speedModifier: 1.4
       - !type:NitriumMovespeedModifier
         conditions:
         - !type:ReagentCondition
           reagent: Nitrium
           min: 12
-        walkSpeedModifier: 1.6
-        sprintSpeedModifier: 1.6
+        speedModifier: 1.6
       - !type:AddReagentToBlood
         conditions:
         - !type:ReagentCondition

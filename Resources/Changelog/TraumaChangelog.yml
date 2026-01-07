@@ -1084,3 +1084,11 @@ Entries:
       message: Judo users can no longer shoot disablers.
   id: 128
   time: '2026-01-06T22:25:19.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: No jet injectors, meaningless quirky syringe.
+    - type: Remove
+      message: 'Removed examine showing in chat due to insane shitcode. '
+  id: 129
+  time: '2026-01-07T12:55:16.0000000+00:00'

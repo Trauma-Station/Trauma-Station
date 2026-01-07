@@ -26,18 +26,18 @@ public sealed class BatteryElectrocuteChargeSystem : EntitySystem
         SubscribeLocalEvent<BatteryComponent, ElectrocutedEvent>(OnElectrocuted);
     }
 
-    private void OnElectrocuted(EntityUid uid, BatteryComponent battery, ElectrocutedEvent args)
+    private void OnElectrocuted(Entity<BatteryComponent> ent, ref ElectrocutedEvent args)
     {
         if (args.ShockDamage == null || args.ShockDamage <= 0)
             return;
 
         var charge = Math.Min(args.ShockDamage.Value * args.SiemensCoefficient
             / ElectrocutionSystem.ElectrifiedDamagePerWatt * 2,
-                battery.MaxCharge * 0.25f)
+                ent.Comp.MaxCharge * 0.25f)
             * _random.NextFloat(0.75f, 1.25f);
 
-        _battery.SetCharge(uid, battery.CurrentCharge + charge);
+        _battery.ChangeCharge(ent.AsNullable(), charge);
 
-        _popup.PopupEntity(Loc.GetString("battery-electrocute-charge"), uid, uid);
+        _popup.PopupEntity(Loc.GetString("battery-electrocute-charge"), ent, ent);
     }
 }

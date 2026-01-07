@@ -6,7 +6,7 @@
 namespace Content.Goobstation.Common.Chemistry;
 
 /// <summary>
-/// Raised on a hypospray when it successfully injects.
+/// Raised on an injector when it successfully injects a target.
 /// </summary>
 [ByRefEvent]
-public readonly record struct AfterHyposprayInjectsEvent(EntityUid User, EntityUid Target);
+public readonly record struct AfterInjectedEvent(EntityUid User, EntityUid Target);

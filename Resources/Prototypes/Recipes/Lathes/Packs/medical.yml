@@ -48,6 +48,7 @@
   - WhiteCane
   - OffsetCane
   - OffsetCaneWood
+  #- JetInjector # Trauma - le quirky syringe
 
 - type: latheRecipePack
   id: RollerBedsStatic
@@ -90,14 +91,17 @@
 
 # Shared with protolathe
 - type: latheRecipePack
+  parent:
+  - TraumaChemistry # Trauma
   id: Chemistry
   recipes:
   - CryostasisBeaker
   - SyringeCryostasis
   - BluespaceBeaker
   - SyringeBluespace
-  - MedkitCombat #goob - Move combat kit to research
-  - VialBluespace # goob edit - bluespace vials
+  #- LauncherSyringe # Trauma - goob syringe gun instead
+  #- MiniSyringe # Trauma
+  #- AdvancedJetInjector # Trauma - le quirky syringe
 
 - type: latheRecipePack
   id: MedicalBoards

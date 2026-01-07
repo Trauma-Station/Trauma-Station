@@ -82,4 +82,4 @@ public sealed class WeightedRandomEffectSystem : EntityEffectSystem<MetaDataComp
 }
 
 [DataRecord]
-public record struct WeightedEffect(float Weight, EntityEffect Effect);
+public partial record struct WeightedEffect(float Weight, EntityEffect Effect);
