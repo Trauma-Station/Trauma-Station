@@ -42318,14 +42318,6 @@ entities:
     - type: Transform
       pos: -36.359966,52.553024
       parent: 2
-- proto: ClothingUniformJumpskirtJanimaid
-  entities:
-  - uid: 5454
-    components:
-    - type: Transform
-      parent: 5453
-    - type: Physics
-      canCollide: False
 - proto: ClothingUniformJumpskirtPerformer
   entities:
   - uid: 5455
@@ -93211,7 +93203,6 @@ entities:
         stash: !type:ContainerSlot
           showEnts: False
           occludes: True
-          ent: 5454
         disposals: !type:Container
           showEnts: False
           occludes: True

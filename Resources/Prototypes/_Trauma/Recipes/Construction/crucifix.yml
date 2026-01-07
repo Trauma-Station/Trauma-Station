@@ -1,0 +1,11 @@
+- type: construction
+  id: Crucifix
+  graph: Crucifix
+  startNode: start
+  targetNode: crucified
+  placementMode: SnapgridCenter
+  category: construction-category-structures
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked

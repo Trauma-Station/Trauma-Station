@@ -728,6 +728,8 @@
     - Security
     - Antagonists
   - type: PacifismAllowedGun
+  - type: MartialArtBlocked # Trauma
+    form: CorporateJudo
   # Goobstation start
   - type: Tag
     tags:

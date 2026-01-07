@@ -10,7 +10,7 @@
 
 - type: entity
   name: entropic blade
-  parent: BaseSword
+  parent: [BaseSword, BaseMagicalContraband] # Trauma - Contraband marker (no I am not making a new one)
   id: SwordCosmicCult
   description: An eerie greatsword wrought of indescribable material, forcibly extruded down into reality. Your instincts tell you that it does not belong here.
   components:
@@ -88,7 +88,7 @@
 
 - type: entity
   name: vacuous lance
-  parent: BaseItem
+  parent: [BaseItem, BaseMagicalContraband]
   id: SpearCosmicCult
   description: An unnerving spear, wrought of indescribable material. Being near it feels like a prickle of static spreading through your nerves.
   components:
@@ -187,7 +187,7 @@
 
 - type: entity
   name: astral razor
-  parent: BaseItem
+  parent: [BaseItem, BaseMagicalContraband]
   id: ScytheCosmicCult
   components:
   - type: CosmicEquipment

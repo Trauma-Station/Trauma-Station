@@ -1,0 +1,35 @@
+- type: entity
+  parent: [BaseItem, BaseSecurityContraband]
+  id: WeaponBillyClub
+  name: billy club
+  description: A lightweight wooden baton for incapacitating people with. Delivers less-than-lethal force for incapacitation.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/billy_club.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Melee/billy_club.rsi
+    quickEquip: false
+    slots:
+      - belt
+  - type: MeleeWeapon
+    animationRotation: -45
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 7
+    bluntStaminaDamageFactor: 2.0
+    soundHit:
+      path: /Audio/_Goobstation/Weapons/Baton/woodhit.ogg
+  - type: StaminaDamageOnHit
+    damage: 6
+  - type: Item
+    size: Normal
+  - type: Tag
+    tags:
+    - SecBeltEquip
+  - type: MartialArtBlocked 
+    form: CorporateJudo 
+  - type: GuideHelp
+    guides:
+    - Security
