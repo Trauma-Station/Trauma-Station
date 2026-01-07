@@ -111,7 +111,7 @@
   effects:
   - !type:MakeTraitor
     probability: 0.65
-    giveUplink: false
+    rule: TraitorReinforcement # no uplink chud
 
 - type: scrollPrayer
   id: Mime

@@ -9,6 +9,9 @@ namespace Content.Trauma.Shared.EntityEffects;
 /// </summary>
 public sealed partial class MakeTraitor : EntityEffectBase<MakeTraitor>
 {
+    [DataField]
+    public EntProtoId Rule = "Traitor";
+
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-make-traitor", ("chance", Probability));
 }
