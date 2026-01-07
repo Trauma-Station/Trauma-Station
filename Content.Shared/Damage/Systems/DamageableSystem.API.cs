@@ -555,9 +555,9 @@ public sealed partial class DamageableSystem
             return;
 
         // <Shitmed> - If entity has a body, set damage on all body parts
-        if (_bodyQuery.HasComp(ent))
+        if (_bodyQuery.TryComp(ent, out var body))
         {
-            foreach (var (part, _) in _body.GetBodyChildren(ent.Owner))
+            foreach (var (part, _) in _body.GetBodyChildren(ent.Owner, body))
             {
                 if (!_damageableQuery.TryComp(part, out var partDamageable))
                     continue;
@@ -579,17 +579,15 @@ public sealed partial class DamageableSystem
         OnEntityDamageChanged((ent, ent.Comp), new DamageSpecifier());
 
         // <Shitmed>
-        if (_woundableQuery.TryComp(ent, out var woundable))
+        if (!_woundableQuery.TryComp(ent, out var woundable) || !woundable.AllowWounds)
+            return;
+
+        _wounds.UpdateWoundableIntegrity(ent, woundable);
+
+        foreach (var (type, value) in ent.Comp.Damage.DamageDict)
         {
-            if (!woundable.AllowWounds) return;
-
-            _wounds.UpdateWoundableIntegrity(ent, woundable);
-
-            foreach (var (type, value) in ent.Comp.Damage.DamageDict)
-            {
-                var mul = ent.Comp.Damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
-                _wounds.TryInduceWound(ent, type, value * mul, out _, woundable);
-            }
+            var mul = ent.Comp.Damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
+            _wounds.TryInduceWound(ent, type, value * mul, out _, woundable);
         }
         // </Shitmed>
     }
