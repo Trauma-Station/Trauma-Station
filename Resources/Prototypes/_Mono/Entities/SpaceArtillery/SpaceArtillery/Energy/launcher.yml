@@ -14,7 +14,7 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 2000
     startingCharge: 2000
   - type: ExaminableBattery
@@ -76,7 +76,7 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 3000
     startingCharge: 3000
   - type: ExaminableBattery
@@ -89,7 +89,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon2.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
-  #- type: PredictedBatterySelfRecharger
+  #- type: BatterySelfRecharger
   #  autoRechargeRate: 350
   - type: SpaceArtillery
     powerChargeRate: 100
@@ -139,7 +139,7 @@
     state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 20000
     startingCharge: 20000
   - type: ExaminableBattery

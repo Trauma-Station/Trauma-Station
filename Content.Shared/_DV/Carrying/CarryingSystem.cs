@@ -343,7 +343,10 @@ public sealed class CarryingSystem : EntitySystem
 
     public bool CanCarry(EntityUid carrier, Entity<CarriableComponent> carried)
     {
+        var ev = new CarryAttemptEvent(carrier);
+        RaiseLocalEvent(carried, ref ev);
         return
+            !ev.Cancelled &&
             carrier != carried.Owner &&
             // can't carry multiple people, even if you have 4 hands it will break invariants when removing carryingcomponent for first carried person
             !HasComp<CarryingComponent>(carrier) &&
@@ -396,3 +399,9 @@ public sealed class CarryingSystem : EntitySystem
         }
     }
 }
+
+/// <summary>
+/// Raised on a mob to check if it can be carried.
+/// </summary>
+[ByRefEvent]
+public record struct CarryAttemptEvent(EntityUid Carrier, bool Cancelled = false);

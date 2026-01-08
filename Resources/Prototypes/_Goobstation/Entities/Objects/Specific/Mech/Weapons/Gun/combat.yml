@@ -282,7 +282,7 @@
   - type: BatteryAmmoProvider
     proto: GrenadeBlast
     fireCost: 300
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 300 # Battery is charged by mech
     startingCharge: 300
   - type: Appearance

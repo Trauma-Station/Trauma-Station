@@ -18,7 +18,7 @@ public sealed class AugmentPowerCellSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly PredictedBatterySystem _battery = default!;
+    [Dependency] private readonly SharedBatterySystem _battery = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
@@ -175,7 +175,7 @@ public sealed class AugmentPowerCellSystem : EntitySystem
     /// 2. that augment has a power cell installed
     /// Returns null otherwise.
     /// </summary>
-    public Entity<PredictedBatteryComponent>? GetBodyCell(EntityUid body)
+    public Entity<BatteryComponent>? GetBodyCell(EntityUid body)
     {
         if (GetBodyAugment(body) is not {} augment)
             return null;

@@ -39,7 +39,7 @@
       machine_board: !type:Container
       machine_parts: !type:Container
   - type: ExaminableBattery
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
   - type: StaticPrice
     price: 100
   - type: ActivatableUI

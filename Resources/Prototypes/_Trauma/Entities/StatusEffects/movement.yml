@@ -58,3 +58,29 @@
   - type: MovementModStatusEffect
     sprintSpeedModifier: 0.3
     walkSpeedModifier: 0.3
+
+- type: entity
+  parent: StatusEffectSpeed
+  id: NitriumStatusEffect
+  name: nitrium speedup
+  # modifier set dynamically by the effect
+
+# hyper disease behaviour
+- type: entity
+  parent: StatusEffectSpeed
+  id: HyperStatusEffect
+  name: hyper
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 1.35
+    walkSpeedModifier: 1.35
+
+# sluggish disease behaviour
+- type: entity
+  parent: StatusEffectSlowdown
+  id: SluggishStatusEffect
+  name: sluggish
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.65
+    walkSpeedModifier: 0.65

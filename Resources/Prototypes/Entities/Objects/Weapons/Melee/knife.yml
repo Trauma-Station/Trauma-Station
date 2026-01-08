@@ -320,7 +320,7 @@
 
 - type: entity
   name: kukri knife
-  parent: [BaseSecurityCargoContraband, CombatKnife]
+  parent: [CombatKnife, BaseMajorContraband] # Trauma - contraband tweak, maint loot evil but used in ghostrole
   id: KukriKnife
   description: Professionals have standards. Be polite. Be efficient. Have a plan to kill everyone you meet.
   components:

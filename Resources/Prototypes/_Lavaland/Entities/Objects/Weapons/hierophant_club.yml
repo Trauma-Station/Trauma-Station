@@ -21,7 +21,7 @@
 
 - type: entity
   id: LavalandHierophantClub
-  parent: BaseItem
+  parent: [BaseItem, BaseMajorContraband] # Trauma - Contraband marker (salvagers must learn not to bring contra onto station)
   name: hierophant club
   description: Get item'ed lol
   components:

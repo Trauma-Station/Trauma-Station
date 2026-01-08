@@ -183,7 +183,7 @@
   - type: Flammable
     damage:
       types: {}
-  - type: Temperature
+  - type: TemperatureDamage
     damageCap: 0 # immune to temperature damage
   - type: Puller
     needsHands: false

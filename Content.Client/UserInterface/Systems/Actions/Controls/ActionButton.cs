@@ -222,8 +222,16 @@ public sealed class ActionButton : Control, IEntityControl
         if (!_entities.TryGetComponent(Action, out MetaDataComponent? metadata))
             return null;
 
-        var name = FormattedMessage.FromMarkupPermissive(Loc.GetString(metadata.EntityName));
-        var desc = FormattedMessage.FromMarkupPermissive(Loc.GetString(metadata.EntityDescription));
+        // <Trauma> - don't localize non-loc it spams logs, use non-logging version instead since it will almost never be a loc string
+        var nameStr = metadata.EntityName;
+        var descStr = metadata.EntityDescription;
+        if (Loc.TryGetString(nameStr, out var nameLoc))
+            nameStr = nameLoc;
+        if (Loc.TryGetString(descStr, out var descLoc))
+            descStr = descLoc;
+        var name = FormattedMessage.FromMarkupPermissive(nameStr);
+        var desc = FormattedMessage.FromMarkupPermissive(descStr);
+        // </Trauma>
 
         if (_player.LocalEntity is null)
             return null;

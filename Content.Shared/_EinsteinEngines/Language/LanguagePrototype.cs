@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._EinsteinEngines.Language;
 
-[Prototype("language")]
+[Prototype]
 public sealed partial class LanguagePrototype : IPrototype
 {
     [IdDataField]

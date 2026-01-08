@@ -67,14 +67,14 @@
   suffix: Battery
   id: MedicalBeamGunBattery
   components:
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 20
     startingCharge: 20
   - type: RechargeableBlocking
     chargedRechargeRate: 0
     dischargedRechargeRate: 1
-  - type: PredictedBatterySelfRecharger
-    autoRechargeRate: 0
+  - type: BatterySelfRecharger
+    autoRechargeRate: 1
 
 - type: entity
   name: syndicate medical beam gun
@@ -108,11 +108,11 @@
   id: MedicalBeamGunSyndicateBattery
   components:
   # Less overall battery, faster recharging
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 15
     startingCharge: 15
   - type: RechargeableBlocking
     chargedRechargeRate: 0
     dischargedRechargeRate: 1.5
-  - type: PredictedBatterySelfRecharger
-    autoRechargeRate: 0
+  - type: BatterySelfRecharger
+    autoRechargeRate: 1.5

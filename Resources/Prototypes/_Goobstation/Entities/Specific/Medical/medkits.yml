@@ -34,11 +34,6 @@
           Quantity: 35
         - ReagentId: TranexamicAcid
           Quantity: 5
-  - type: Hypospray
-    solutionName: pen
-    transferAmount: 40
-    onlyAffectsMobs: false
-    injectOnly: true
   - type: StaticPrice
     price: 500
   - type: Tag

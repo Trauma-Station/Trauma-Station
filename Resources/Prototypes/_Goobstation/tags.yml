@@ -67,9 +67,6 @@
   id: AntagGateway
 
 - type: Tag
-  id: AutoinjectorCartridge
-
-- type: Tag
   id: BindSoulAction
 
 - type: Tag

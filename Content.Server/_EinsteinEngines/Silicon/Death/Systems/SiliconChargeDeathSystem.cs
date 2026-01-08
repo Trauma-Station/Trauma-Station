@@ -83,7 +83,7 @@ public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
             args.Cancel();
     }
 
-    private void SiliconDead(EntityUid uid, SiliconDownOnDeadComponent siliconDeadComp, Entity<PredictedBatteryComponent>? battery)
+    private void SiliconDead(EntityUid uid, SiliconDownOnDeadComponent siliconDeadComp, Entity<BatteryComponent>? battery)
     {
         if (siliconDeadComp.Dead)
             return;
@@ -117,7 +117,7 @@ public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
         RaiseLocalEvent(uid, ref ev);
     }
 
-    private void SiliconUnDead(EntityUid uid, SiliconDownOnDeadComponent siliconDeadComp, Entity<PredictedBatteryComponent>? battery)
+    private void SiliconUnDead(EntityUid uid, SiliconDownOnDeadComponent siliconDeadComp, Entity<BatteryComponent>? battery)
     {
         if (!siliconDeadComp.Dead)
             return;
@@ -146,10 +146,10 @@ public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
 ///     An event raised after a Silicon has gone down due to charge.
 /// </summary>
 [ByRefEvent]
-public readonly record struct SiliconChargeDeathEvent(EntityUid Silicon, Entity<PredictedBatteryComponent>? Battery);
+public readonly record struct SiliconChargeDeathEvent(EntityUid Silicon, Entity<BatteryComponent>? Battery);
 
 /// <summary>
 ///     An event raised after a Silicon has reawoken due to an increase in charge.
 /// </summary>
 [ByRefEvent]
-public readonly record struct SiliconChargeAliveEvent(EntityUid Silicon, Entity<PredictedBatteryComponent>? Battery);
+public readonly record struct SiliconChargeAliveEvent(EntityUid Silicon, Entity<BatteryComponent>? Battery);

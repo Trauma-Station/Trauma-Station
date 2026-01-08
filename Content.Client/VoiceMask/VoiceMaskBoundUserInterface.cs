@@ -34,7 +34,9 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
 
         _window.OnNameChange += OnNameSelected;
         _window.OnVerbChange += verb => SendMessage(new VoiceMaskChangeVerbMessage(verb));
-        _window.OnJobIconChanged += OnJobIconChanged; // GabyStation -> Radio icons
+        _window.OnToggle += OnToggle;
+        _window.OnAccentToggle += OnAccentToggle;
+        _window.OnJobIconChanged += id => SendMessage(new VoiceMaskChangeJobIconMessage(id)); // Goob
     }
 
     private void OnNameSelected(string name)
@@ -42,12 +44,15 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
         SendMessage(new VoiceMaskChangeNameMessage(name));
     }
 
-    // GabyStation Radio icons start
-    public void OnJobIconChanged(ProtoId<JobIconPrototype> newJobIconId)
+    private void OnToggle()
     {
-        SendMessage(new VoiceMaskChangeJobIconMessage(newJobIconId));
+        SendMessage(new VoiceMaskToggleMessage());
     }
-    // GabyStation Radio icons end
+
+    private void OnAccentToggle()
+    {
+        SendMessage(new VoiceMaskAccentToggleMessage());
+    }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
@@ -56,7 +61,7 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
             return;
         }
 
-        _window.UpdateState(cast.Name, cast.Verb);
+        _window.UpdateState(cast.Name, cast.Verb, cast.Active, cast.AccentHide);
         _window.SetCurrentJobIcon(cast.JobIcon); // GabyStation -> Radio icons
     }
 

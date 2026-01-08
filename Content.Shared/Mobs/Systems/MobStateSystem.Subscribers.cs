@@ -27,7 +27,7 @@ public partial class MobStateSystem
     private void SubscribeEvents()
     {
         SubscribeLocalEvent<MobStateComponent, BeforeGettingStrippedEvent>(OnGettingStripped);
-        SubscribeLocalEvent<MobStateComponent, ChangeDirectionAttemptEvent>(CheckAct);
+        SubscribeLocalEvent<MobStateComponent, ChangeDirectionAttemptEvent>(CheckActHardcrit); // Trauma - you can crawl around in softcrit
         SubscribeLocalEvent<MobStateComponent, UseAttemptEvent>(CheckAct);
         SubscribeLocalEvent<MobStateComponent, AttackAttemptEvent>(CheckAct);
         SubscribeLocalEvent<MobStateComponent, ConsciousAttemptEvent>(CheckConcious);
@@ -39,7 +39,7 @@ public partial class MobStateSystem
         SubscribeLocalEvent<MobStateComponent, DropAttemptEvent>(CheckAct);
         SubscribeLocalEvent<MobStateComponent, PickupAttemptEvent>(CheckAct);
         SubscribeLocalEvent<MobStateComponent, StartPullAttemptEvent>(CheckAct);
-        SubscribeLocalEvent<MobStateComponent, UpdateCanMoveEvent>(CheckAct);
+        SubscribeLocalEvent<MobStateComponent, UpdateCanMoveEvent>(CheckActHardcrit); // Trauma - you can crawl around in softcrit
         SubscribeLocalEvent<MobStateComponent, StandAttemptEvent>(CheckAct);
         SubscribeLocalEvent<MobStateComponent, PointAttemptEvent>(CheckAct);
         SubscribeLocalEvent<MobStateComponent, TryingToSleepEvent>(OnSleepAttempt);
@@ -83,6 +83,7 @@ public partial class MobStateSystem
             case MobState.Alive:
                 //unused
                 break;
+            case MobState.SoftCrit: // Trauma - can't stand in softcrit
             case MobState.Critical:
                 _standing.Stand(target);
                 break;
@@ -114,6 +115,7 @@ public partial class MobStateSystem
                 _appearance.SetData(target, MobStateVisuals.State, MobState.Alive);
                 break;
             }
+            case MobState.SoftCrit: // Trauma - can't stand while softcrit and if you give it to a simplemob i guess its fine to look the same as crit
             case MobState.Critical:
             {
                 Down(target);
@@ -164,7 +166,7 @@ public partial class MobStateSystem
             return;
         }
 
-        CheckAct(uid, component, args);
+        CheckActHardcrit(uid, component, args); // Trauma - you can whisper while softcrit
     }
 
     private void CheckAct(EntityUid target, MobStateComponent component, CancellableEntityEventArgs args)
@@ -172,6 +174,7 @@ public partial class MobStateSystem
         switch (component.CurrentState)
         {
             case MobState.Dead:
+            case MobState.SoftCrit: // Trauma - softcrit prevents most things
             case MobState.Critical:
                 args.Cancel();
                 break;

@@ -6,7 +6,6 @@ using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Body.Part;
 // </Trauma>
 using System.Linq;
-using System.Net.Sockets;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Goobstation.Maths.FixedPoint;
@@ -128,7 +127,7 @@ public sealed partial class DamageableSystem
         // If you deal 0.0 of some damage type, Empty will be false!
         newDamage = ChangeDamage(ent, damage, ignoreResistances, interruptsDoAfters, origin, ignoreGlobalModifiers,
             canBeCancelled, partMultiplier, targetPart, ignoreBlockers, splitDamage, canMiss); // Shitmed
-        return !damage.Empty;
+        return !newDamage.Empty;
     }
 
     /// <summary>
@@ -555,9 +554,9 @@ public sealed partial class DamageableSystem
             return;
 
         // <Shitmed> - If entity has a body, set damage on all body parts
-        if (_bodyQuery.HasComp(ent))
+        if (_bodyQuery.TryComp(ent, out var body))
         {
-            foreach (var (part, _) in _body.GetBodyChildren(ent.Owner))
+            foreach (var (part, _) in _body.GetBodyChildren(ent.Owner, body))
             {
                 if (!_damageableQuery.TryComp(part, out var partDamageable))
                     continue;
@@ -579,17 +578,15 @@ public sealed partial class DamageableSystem
         OnEntityDamageChanged((ent, ent.Comp), new DamageSpecifier());
 
         // <Shitmed>
-        if (_woundableQuery.TryComp(ent, out var woundable))
+        if (!_woundableQuery.TryComp(ent, out var woundable) || !woundable.AllowWounds)
+            return;
+
+        _wounds.UpdateWoundableIntegrity(ent, woundable);
+
+        foreach (var (type, value) in ent.Comp.Damage.DamageDict)
         {
-            if (!woundable.AllowWounds) return;
-
-            _wounds.UpdateWoundableIntegrity(ent, woundable);
-
-            foreach (var (type, value) in ent.Comp.Damage.DamageDict)
-            {
-                var mul = ent.Comp.Damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
-                _wounds.TryInduceWound(ent, type, value * mul, out _, woundable);
-            }
+            var mul = ent.Comp.Damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
+            _wounds.TryInduceWound(ent, type, value * mul, out _, woundable);
         }
         // </Shitmed>
     }

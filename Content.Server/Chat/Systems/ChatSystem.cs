@@ -232,6 +232,12 @@ public sealed partial class ChatSystem : SharedChatSystem
             message = message[1..];
         }
 
+        // <Trauma> - let softcrit change speaking to whisper
+        var typeEv = new SpeechTypeOverrideEvent(desiredType);
+        RaiseLocalEvent(source, ref typeEv);
+        desiredType = typeEv.DesiredType;
+        // </Trauma>
+
         var language = languageOverride ?? _language.GetLanguage(source); // Einstein Engines - Language
 
         bool shouldCapitalize = (desiredType != InGameICChatType.Emote);
@@ -1021,7 +1027,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             return message; // Do not apply speech accents if there's no speech involved.
 
         var ev = new TransformSpeechEvent(sender, message);
-        RaiseLocalEvent(ev);
+        RaiseLocalEvent(sender, ev, true);
 
         return ev.Message;
     }

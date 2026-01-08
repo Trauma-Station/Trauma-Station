@@ -57,7 +57,7 @@ public partial class SharedGunSystem
         args.Handled = true;
 
         Cycle(component);
-        UpdateAmmoCount(uid, prediction: false);
+        UpdateAmmoCount(uid); // Trauma - do predict it
         Dirty(uid, component);
     }
 
@@ -105,7 +105,7 @@ public partial class SharedGunSystem
         // Handle spins
         if (oldIndex != state.CurrentIndex)
         {
-            UpdateAmmoCount(uid, prediction: false);
+            UpdateAmmoCount(uid); // Trauma - do predict it
         }
     }
 
@@ -318,7 +318,7 @@ public partial class SharedGunSystem
                 if (TryComp<CartridgeAmmoComponent>(uid, out var cartridge))
                     SetCartridgeSpent(uid, cartridge, !(bool) chamber);
 
-                EjectCartridge(rand, uid);
+                EjectCartridge(rand, user, uid);
                 // </Trauma>
 
                 component.Chambers[i] = null;
@@ -330,7 +330,7 @@ public partial class SharedGunSystem
                 Containers.Remove(slot.Value, component.AmmoContainer);
                 component.Chambers[i] = null;
 
-                EjectCartridge(rand, slot.Value); // Trauma - predicted this shit
+                EjectCartridge(rand, user, slot.Value); // Trauma - predicted this shit
 
                 anyEmpty = true;
             }
@@ -339,7 +339,7 @@ public partial class SharedGunSystem
         if (anyEmpty)
         {
             Audio.PlayPredicted(component.SoundEject, revolverUid, user);
-            UpdateAmmoCount(revolverUid, prediction: false);
+            UpdateAmmoCount(revolverUid); // Trauma - do predict it
             UpdateRevolverAppearance(revolverUid, component);
             Dirty(revolverUid, component);
         }
@@ -443,7 +443,7 @@ public partial class SharedGunSystem
             */
         }
 
-        UpdateAmmoCount(uid, prediction: false);
+        UpdateAmmoCount(uid); // Trauma - do predict it
         UpdateRevolverAppearance(uid, component);
         Dirty(uid, component);
     }
@@ -481,6 +481,7 @@ public partial class SharedGunSystem
         }
 
         DebugTools.Assert(component.AmmoSlots.Count == component.Capacity);
+        UpdateAmmoCount(uid); // Trauma - lets client predict the first shot, shitcode
     }
 
     [Serializable, NetSerializable]

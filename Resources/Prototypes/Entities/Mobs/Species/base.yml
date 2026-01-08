@@ -242,6 +242,18 @@
     damagePenalty: 0.2
   - type: ExaminableCharacter
   - type: MindControllable
+  - type: MobState # humanoids can be in softcrit
+    allowedStates:
+    - Alive
+    - SoftCrit
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: SoftCrit
+      150: Critical
+      200: Dead
   # </Trauma>
 
 - type: entity
@@ -276,10 +288,11 @@
   - type: Blindable
   # Other
   - type: Temperature
-    heatDamageThreshold: 325
-    coldDamageThreshold: 260
     currentTemperature: 310.15
     specificHeat: 42
+  - type: TemperatureDamage
+    heatDamageThreshold: 325
+    coldDamageThreshold: 260
     coldDamage:
       types:
         Cold: 0.1 #per second, scales with temperature & other constants

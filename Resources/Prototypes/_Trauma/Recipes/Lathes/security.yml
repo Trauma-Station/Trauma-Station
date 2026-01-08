@@ -1,0 +1,6 @@
+- type: latheRecipe
+  parent: BaseWeaponRecipe
+  id: WeaponBillyClub
+  result: WeaponBillyClub
+  materials:
+    Wood: 400

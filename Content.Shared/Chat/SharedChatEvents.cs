@@ -28,8 +28,9 @@ public sealed class TransformSpeakerNameEvent : EntityEventArgs, IInventoryRelay
 /// <summary>
 /// Raised broadcast in order to transform speech.transmit
 /// </summary>
-public sealed class TransformSpeechEvent : EntityEventArgs
+public sealed class TransformSpeechEvent : CancellableEntityEventArgs, IInventoryRelayEvent
 {
+    public SlotFlags TargetSlots { get; } = SlotFlags.WITHOUT_POCKET;
     public EntityUid Sender;
     public string Message;
 
@@ -78,3 +79,10 @@ public sealed class EntitySpokeEvent : EntityEventArgs
         Language = language; // EE
     }
 }
+
+/// <summary>
+/// Raised on a speaking entity to allow overriding the chat type.
+/// Can't be put in common because it uses <see cref="InGameICChatType"/>.
+/// </summary>
+[ByRefEvent]
+public record struct SpeechTypeOverrideEvent(InGameICChatType DesiredType);

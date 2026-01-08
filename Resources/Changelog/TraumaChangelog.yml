@@ -1030,3 +1030,65 @@ Entries:
       message: Guns are now lag compensated.
   id: 121
   time: '2026-01-03T22:10:06.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed throwing rubber banding.
+  id: 122
+  time: '2026-01-04T02:14:51.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Fix
+      message: >-
+        Station Radios respect their toggle/powered states on new music being
+        played.
+  id: 123
+  time: '2026-01-04T04:52:35.0000000+00:00'
+- author: Nousagi37
+  changes:
+    - type: Add
+      message: Radio host enabled on Loop
+    - type: Add
+      message: Xenobio added east of Science though maintenance on Loop
+    - type: Tweak
+      message: Armory Alert level safes standardized to match Fland
+  id: 124
+  time: '2026-01-04T20:53:55.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: You can now build wooden crosses to crucify people with.
+  id: 125
+  time: '2026-01-04T20:54:02.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: >-
+        Added softcrit, you can crawl around and whisper at 100 damage until you
+        hardcrit at 150 damage.
+  id: 126
+  time: '2026-01-05T02:43:28.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: >-
+        Adjusted contraband markings from items that are inconsistent. See PR
+        for full details.
+  id: 127
+  time: '2026-01-05T23:03:36.0000000+00:00'
+- author: GoidaYAMLWarrior
+  changes:
+    - type: Add
+      message: Added billy club, a sidegrade to the baton locked behind research.
+    - type: Tweak
+      message: Judo users can no longer shoot disablers.
+  id: 128
+  time: '2026-01-06T22:25:19.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: No jet injectors, meaningless quirky syringe.
+    - type: Remove
+      message: 'Removed examine showing in chat due to insane shitcode. '
+  id: 129
+  time: '2026-01-07T12:55:16.0000000+00:00'

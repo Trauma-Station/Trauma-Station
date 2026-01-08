@@ -374,7 +374,7 @@ public sealed partial class WoundSystem
         WoundableComponent? woundable = null)
     {
         woundInduced = null;
-        if (!Resolve(uid, ref woundable))
+        if (severity == FixedPoint2.Zero || !Resolve(uid, ref woundable))
             return false;
 
         if (TryContinueWound(uid, woundId, severity, out woundInduced, woundable))
@@ -450,8 +450,9 @@ public sealed partial class WoundSystem
         WoundableComponent? woundable = null)
     {
         woundContinued = null;
-        if (!IsWoundPrototypeValid(id)
-            || !Resolve(uid, ref woundable))
+        if (severity == FixedPoint2.Zero ||
+            !IsWoundPrototypeValid(id) ||
+            !Resolve(uid, ref woundable))
             return false;
 
         var proto = _prototype.Index(id);
