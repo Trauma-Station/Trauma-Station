@@ -2,6 +2,7 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.EntityTable;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Paper;
 using Robust.Shared.Timing;
@@ -16,11 +17,12 @@ public sealed class EmptyScrollSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     /// <summary>
     /// Every prayer indexed by the FullPrayer string.
     /// </summary>
-    public Dictionary<string, ScrollPrayerPrototypes> AllPrayers = new();
+    public Dictionary<string, ScrollPrayerPrototype> AllPrayers = new();
 
     public override void Initialize()
     {
@@ -70,7 +72,7 @@ public sealed class EmptyScrollSystem : EntitySystem
     }
 
     public ScrollPrayerPrototype? GetPrayer(string text)
-        => AllPrayers.TryGetValue(out var prayer) ? prayer : null;
+        => AllPrayers.TryGetValue(text, out var prayer) ? prayer : null;
 
     public void Pray(EntityUid target, ScrollPrayerPrototype prayer)
     {

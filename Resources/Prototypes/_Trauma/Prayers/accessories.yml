@@ -41,4 +41,3 @@
     probability: 0.2
     components:
     - type: GrantCqc
-      startingStage: Hard

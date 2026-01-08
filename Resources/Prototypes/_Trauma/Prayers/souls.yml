@@ -1,6 +1,6 @@
 ## PARITY
 
-- type: scrollPlayer
+- type: scrollPrayer
   id: SoulButterfly
   verb: GIVE
   subjects: [ "BUTTERFLY" ]

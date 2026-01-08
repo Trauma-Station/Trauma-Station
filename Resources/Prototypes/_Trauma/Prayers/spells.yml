@@ -37,17 +37,12 @@
         - HumanoidAppearance
       stomachStorageWhitelist:
         components:
-        - MobState
-        - Item
+        - HumanoidAppearance
       chemical: Ichor
       healRate: 7.5
       whitelist:
         components:
-        - MobState
-        - Door
-        - Item
-        tags:
-        - Wall
+        - HumanoidAppearance # can only eat people/monkey
 
 - type: scrollPrayer
   id: Lockpicking
@@ -112,6 +107,14 @@
   - !type:MakeTraitor
     probability: 0.65
     rule: TraitorReinforcement # no uplink chud
+
+- type: scrollPrayer
+  id: DAGD
+  verb: GIVE
+  subjects: [ "DAGD" ]
+  effects:
+  - !type:GiveObjective
+    objective: DieObjective
 
 - type: scrollPrayer
   id: Mime
