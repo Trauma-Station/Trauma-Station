@@ -62,6 +62,8 @@
     state: "skull_icon"
   - type: Input
     context: "human"
+  - type: Physics # Trauma - fix stupid chud thing
+    bodyType: KinematicController
   - type: Speech
     speechVerb: Skeleton
   - type: SkeletonAccent

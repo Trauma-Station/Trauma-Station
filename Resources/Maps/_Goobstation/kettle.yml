@@ -117649,8 +117649,6 @@ entities:
     - type: Transform
       pos: 48.439938,56.562828
       parent: 2
-    - type: Tag
-      tags: []
 - proto: HeatExchanger
   entities:
   - uid: 2468
