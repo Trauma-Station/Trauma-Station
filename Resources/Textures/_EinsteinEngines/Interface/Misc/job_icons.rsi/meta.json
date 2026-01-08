@@ -1,17 +1,28 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
+<<<<<<< HEAD:Resources/Textures/_EinsteinEngines/Interface/Misc/job_icons.rsi/meta.json
     "copyright": "",
+=======
+    "copyright": "BloodBrother made by Ermucat (GitHub). Conspirator made by SuperGDPWYL (GitHub).",
+>>>>>>> 53dbf50bc7 (Conspirators (#1122)):Resources/Textures/_Harmony/Interface/Misc/job_icons.rsi/meta.json
     "size": {
         "x": 8,
         "y": 8
     },
     "states": [
         {
+<<<<<<< HEAD:Resources/Textures/_EinsteinEngines/Interface/Misc/job_icons.rsi/meta.json
             "name": "Shadowling"
         },
         {
             "name": "Thrall"
+=======
+            "name": "BloodBrother"
+        },
+        {
+            "name": "Conspirator"
+>>>>>>> 53dbf50bc7 (Conspirators (#1122)):Resources/Textures/_Harmony/Interface/Misc/job_icons.rsi/meta.json
         }
     ]
 }

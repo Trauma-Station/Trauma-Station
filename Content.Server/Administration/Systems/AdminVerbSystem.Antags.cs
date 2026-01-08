@@ -34,7 +34,12 @@ public sealed partial class AdminVerbSystem
     //private static readonly EntProtoId DefaultChangelingRule = "Changeling"; // Trauma - goob ling used instead
     private static readonly EntProtoId ParadoxCloneRuleId = "ParadoxCloneSpawn";
     private static readonly EntProtoId DefaultWizardRule = "Wizard";
+<<<<<<< HEAD
     private static readonly EntProtoId DefaultNinjaRule = "NinjaSpawn";
+=======
+    private static readonly EntProtoId DefaultBloodBrotherRule = "BloodBrothers"; // Harmony
+    private static readonly EntProtoId DefaultConspiratorRule = "Conspirators"; // Harmony
+>>>>>>> 53dbf50bc7 (Conspirators (#1122))
     private static readonly ProtoId<StartingGearPrototype> PirateGearId = "PirateGear";
 
     // All antag verbs have names so invokeverb works.
@@ -208,6 +213,7 @@ public sealed partial class AdminVerbSystem
             Impact = LogImpact.High,
             Message = string.Join(": ", ninjaName, Loc.GetString("admin-verb-make-space-ninja")),
         };
+<<<<<<< HEAD
         args.Verbs.Add(ninja);
 
         if (HasComp<HumanoidProfileComponent>(args.Target)) // only humanoids can be cloned
@@ -217,6 +223,25 @@ public sealed partial class AdminVerbSystem
         var ev = new GetAntagVerbsEvent(args.Target, player, args);
         RaiseLocalEvent(ref ev);
         // </Trauma>
+=======
+        args.Verbs.Add(bloodBrother);
+
+        var conspiratorName = Loc.GetString("admin-verb-text-make-conspirator");
+        Verb conspirator = new()
+        {
+            Text = conspiratorName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/_Harmony/Interface/Misc/job_icons.rsi"), "Conspirator"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<ConspiratorRuleComponent>(targetPlayer, DefaultConspiratorRule);
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", conspiratorName, Loc.GetString("admin-verb-make-conspirator")),
+        };
+        args.Verbs.Add(conspirator);
+        // Harmony end
+>>>>>>> 53dbf50bc7 (Conspirators (#1122))
     }
 }
 
