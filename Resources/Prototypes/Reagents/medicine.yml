@@ -508,10 +508,10 @@
         key: Adrenaline # Guess what epinephrine is...
         component: IgnoreSlowOnDamage
         time: 5 # lingers less than hivemind reagent to give it a niche
-      - !type:MovespeedModifier # Goob edit
-        walkSpeedModifier: 1.1
-        sprintSpeedModifier: 1.1
-      - !type:AdjustConsciousness # Goob
+      # <Goob>
+      - !type:ModifyStatusEffect
+        effectProto: EpinephrineStatusEffect
+      - !type:AdjustConsciousness
         conditions:
         - !type:ReagentCondition
           reagent: Epinephrine
@@ -521,6 +521,7 @@
         identifier: Suffocation
         amount: -2.4
         time: 12
+      # </Goob>
 
 - type: reagent
   id: Hyronalin

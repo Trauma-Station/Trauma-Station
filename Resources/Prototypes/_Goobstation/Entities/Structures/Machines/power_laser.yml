@@ -42,7 +42,8 @@
   - type: Appearance
   - type: PowerNetworkBattery
     maxChargeRate: 5000000 # 5MJ
-  - type: PredictedBattery
+  - type: Battery
+    netsync: false
     startingCharge: 0
     maxCharge: 100000000 # 100MJ
   - type: ExaminableBattery

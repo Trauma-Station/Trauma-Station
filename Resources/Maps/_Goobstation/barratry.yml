@@ -74648,6 +74648,8 @@ entities:
       baseSprintSpeed: 2.5
     - type: GhostTakeoverAvailable
     - type: MindContainer
+    - type: Physics
+      bodyType: KinematicController
     - type: InputMover
     - type: MobMover
     - type: MovementAlwaysTouching

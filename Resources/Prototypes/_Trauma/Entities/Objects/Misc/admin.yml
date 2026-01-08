@@ -1,0 +1,19 @@
+- type: entity
+  parent: BaseItem
+  id: DebugEffectStick
+  name: debug effect stick
+  description: The monolith is calling... you want to be rich
+  suffix: DEBUG
+  categories: [ DoNotMap ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Tools/sonic_screwdriver.rsi
+    state: icon
+  - type: Item
+    sprite: _Goobstation/Objects/Tools/sonic_screwdriver.rsi
+    size: Small
+  - type: DebugEffectStick
+  - type: UserInterface
+    interfaces:
+      enum.DebugEffectStickUiKey.Key:
+        type: DebugEffectStickBUI

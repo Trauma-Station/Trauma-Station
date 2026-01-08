@@ -22,10 +22,10 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Melee/justice.rsi
     state: icon
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 1000
     startingCharge: 1000
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 50
     autoRechargePauseTime: 40
   - type: DisarmMalus

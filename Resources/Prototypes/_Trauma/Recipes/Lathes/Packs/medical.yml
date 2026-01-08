@@ -18,3 +18,9 @@
   id: TraumaCybernetics
   recipes:
   - HypoportSecure
+
+- type: latheRecipePack
+  id: TraumaChemistry
+  recipes:
+  - MedkitCombat
+  - VialBluespace

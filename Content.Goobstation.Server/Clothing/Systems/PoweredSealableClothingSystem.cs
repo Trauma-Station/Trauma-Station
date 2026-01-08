@@ -25,7 +25,7 @@ public sealed partial class PoweredSealableClothingSystem : SharedPoweredSealabl
 {
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly PredictedBatterySystem _battery = default!;
+    [Dependency] private readonly SharedBatterySystem _battery = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
 
     public override void Initialize()

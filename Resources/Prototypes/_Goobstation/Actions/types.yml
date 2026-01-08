@@ -172,7 +172,7 @@
       sprite: Structures/Piping/Atmospherics/vent.rsi
       state: vent_off
   - type: InstantAction
-    event: !type:ToggleCrawlingStateEvent
+    event: !type:ToggleFloorCrawlingEvent
 
 - type: entity
   parent: BaseAction

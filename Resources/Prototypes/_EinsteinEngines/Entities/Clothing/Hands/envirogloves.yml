@@ -214,7 +214,7 @@
 - type: entity
   parent: ClothingHandsGlovesEnviroglovesBase
   id: ClothingHandsGlovesEnviroglovesCargo
-  name: logistics envirogloves
+  name: cargo envirogloves
   description: Covers up those scandalous boney hands.
   components:
   - type: Sprite

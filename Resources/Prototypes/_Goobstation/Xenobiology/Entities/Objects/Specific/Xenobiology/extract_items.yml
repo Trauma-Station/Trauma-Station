@@ -13,11 +13,11 @@
     visuals: {} # disable battery visuals
   - type: Item
     size: Normal
-  - type: PredictedBattery
+  - type: Battery
     pricePerJoule: 0.15
     maxCharge: 5200
     startingCharge: 5200
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 40
   - type: EmpImmune
   - type: SolutionContainerManager

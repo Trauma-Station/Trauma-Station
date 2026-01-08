@@ -42,7 +42,7 @@
   description: The most important part of the Blob. This is the brain and heart of the Blob.
   save: false
   components:
-  - type: Temperature
+  - type: TemperatureDamage
     heatDamage:
       types:
         Heat: 5
@@ -123,7 +123,7 @@
   categories: [ HideSpawnMenu ]
   description: An ordinary part of yours required for the construction of more advanced tiles.
   components:
-  - type: Temperature
+  - type: TemperatureDamage
     heatDamage:
       types:
         Heat: 5
@@ -187,7 +187,7 @@
   description: The so-called BlobPods come out of the factory and attack passers-by and zombify the corpses of these same passers-by. One factory produces 3 of these BlobPods; they cannot be placed next to each other at a distance of 7 tiles; one factory can produce only one Blobbernaut.
   categories: [ HideSpawnMenu ]
   components:
-    - type: Temperature
+    - type: TemperatureDamage
       heatDamage:
         types:
           Heat: 5
@@ -225,7 +225,7 @@
   name: Resource Blob
   categories: [ HideSpawnMenu ]
   components:
-    - type: Temperature
+    - type: TemperatureDamage
       heatDamage:
         types:
           Heat: 5
@@ -265,7 +265,7 @@
   description: The second, but mini, Blob core, near which you can place factories and resource blobs. Required to split the core.
   categories: [ HideSpawnMenu ]
   components:
-    - type: Temperature
+    - type: TemperatureDamage
       heatDamage:
         types:
           Heat: 5

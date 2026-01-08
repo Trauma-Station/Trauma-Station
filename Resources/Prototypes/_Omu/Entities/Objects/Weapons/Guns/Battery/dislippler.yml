@@ -34,7 +34,7 @@
     - type: Multishot
       spreadMultiplier: 1.25
       spreadAddition: 10
-    - type: PredictedBatterySelfRecharger
+    - type: BatterySelfRecharger
       autoRechargeRate: 50
 
 - type: entity

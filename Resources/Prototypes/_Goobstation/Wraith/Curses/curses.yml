@@ -8,10 +8,10 @@
     - !type:PopupMessage
       type: Local
       messages: [ "curse-weakness-slow" ]
-    - !type:MovespeedModifier
-      walkSpeedModifier: 0.5
-      sprintSpeedModifier: 0.5
-      statusLifetime: 8
+    - !type:ModifyStatusEffect
+      effectProto: WraithWeaknessSlowdownStatusEffect
+      type: Add
+      time: 8
     0.3:
     - !type:PopupMessage
       type: Local

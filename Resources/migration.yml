@@ -38,8 +38,13 @@ BoxMagazineMagnumSubMachineGun: BoxMagazineRifle
 # 2025-01-01 Trauma Remove scurret poster
 PosterLegitHelio: null
 
-# 2024-01-05 Actually use the ToiletCisternLoot table. 
+# 2026-01-05 Actually use the ToiletCisternLoot table.
 ToiletEmpty: ToiletFilled
+
+# 2026-01-08 back to wizden mail
+MailTeleporter: CargoMailTeleporter
+MailMetricsCartridge: null
+ComputerShuttleSalvage: ComputerShuttleMiningLavaland # 2 maps had this for some reason...
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
@@ -816,8 +821,6 @@ MuteToxinChemistryBottle: ChemistryBottleMuteToxin
 LeadChemistryBottle: ChemistryBottleLead
 ToxinChemistryBottle: ChemistryBottleToxin
 
-# Goob - making wizden maps compatible to support mapping efforts. 2025-04-13.
-CargoMailTeleporter: MailTeleporter
 ClothingMaskBlushingMime: ClothingMaskSexyMime
 ClothingMaskBlushingClown: ClothingMaskSexyMime
 MachineMaterialSilo: null

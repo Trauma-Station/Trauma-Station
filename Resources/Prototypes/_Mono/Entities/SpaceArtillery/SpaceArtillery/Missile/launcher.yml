@@ -14,9 +14,11 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 40000
     startingCharge: 40000
+  - type: ApcPowerReceiver
+    powerLoad: 950
   - type: ExaminableBattery
   - type: WirelessNetworkConnection
     range: 500
@@ -27,7 +29,7 @@
       path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 200
   - type: SpaceArtillery
     powerChargeRate: 200
@@ -61,9 +63,11 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 40000
     startingCharge: 40000
+  - type: ApcPowerReceiver
+    powerLoad: 450
   - type: ExaminableBattery
   - type: WirelessNetworkConnection
     range: 500
@@ -77,7 +81,7 @@
   - type: SpaceArtillery
     powerChargeRate: 250
     powerUsePassive: 200
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 60
   - type: Actions
   - type: BatteryAmmoProvider
@@ -107,9 +111,11 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 40000
     startingCharge: 40000
+  - type: ApcPowerReceiver
+    powerLoad: 950
   - type: ExaminableBattery
   - type: WirelessNetworkConnection
     range: 500
@@ -120,7 +126,7 @@
       path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 60
   - type: Actions
   - type: BatteryAmmoProvider
@@ -171,9 +177,11 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 40000
     startingCharge: 40000
+  - type: ApcPowerReceiver
+    powerLoad: 3000
   - type: ExaminableBattery
   - type: WirelessNetworkConnection
     range: 500
@@ -184,7 +192,7 @@
       path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 500
   - type: SpaceArtillery
     powerChargeRate: 500

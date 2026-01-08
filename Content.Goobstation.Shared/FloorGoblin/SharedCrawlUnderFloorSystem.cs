@@ -2,7 +2,6 @@
 // SPDX-FileCopyrightText: 2025 RichardBlonski <48651647+RichardBlonski@users.noreply.github.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.Abilities;
 using Content.Shared._Starlight.VentCrawling;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Climbing.Events;
@@ -51,7 +50,7 @@ public abstract class SharedCrawlUnderFloorSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<CrawlUnderFloorComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<CrawlUnderFloorComponent, ToggleCrawlingStateEvent>(OnAbilityToggle);
+        SubscribeLocalEvent<CrawlUnderFloorComponent, ToggleFloorCrawlingEvent>(OnAbilityToggle);
         SubscribeLocalEvent<CrawlUnderFloorComponent, AttemptClimbEvent>(OnAttemptClimb);
         SubscribeLocalEvent<MapGridComponent, TileChangedEvent>(OnTileChanged);
         SubscribeLocalEvent<CrawlUnderFloorComponent, MoveEvent>(OnMove);
@@ -73,7 +72,7 @@ public abstract class SharedCrawlUnderFloorSystem : EntitySystem
         }
     }
 
-    private void OnAbilityToggle(EntityUid uid, CrawlUnderFloorComponent component, ToggleCrawlingStateEvent args)
+    private void OnAbilityToggle(EntityUid uid, CrawlUnderFloorComponent component, ToggleFloorCrawlingEvent args)
     {
         if (args.Handled)
             return;
@@ -392,3 +391,5 @@ public abstract class SharedCrawlUnderFloorSystem : EntitySystem
         return true;
     }
 }
+
+public sealed partial class ToggleFloorCrawlingEvent : InstantActionEvent;

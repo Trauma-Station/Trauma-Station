@@ -338,9 +338,10 @@ public sealed partial class MobThresholdSystem : EntitySystem // Trauma - made p
     private void CheckThresholds(EntityUid target, MobStateComponent mobStateComponent,
         MobThresholdsComponent thresholdsComponent, DamageableComponent damageableComponent, EntityUid? origin = null)
     {
+        var damage = CheckVitalDamage(target, damageableComponent); // Trauma - check vital damage instead of total
         foreach (var (threshold, mobState) in thresholdsComponent.Thresholds.Reverse())
         {
-            if (CheckVitalDamage(target, damageableComponent) < threshold) // Goob - check vital damage instead of total
+            if (damage < threshold) // Trauma - use damage from above
                 continue;
 
             TriggerThreshold(target, mobState, mobStateComponent, thresholdsComponent, origin);

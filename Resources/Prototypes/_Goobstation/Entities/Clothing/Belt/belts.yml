@@ -49,16 +49,15 @@
         - Dropper
         - Tourniquet #Goobstation
         - MedicalPatch # Goobstation
-        - AutoinjectorCartridge # Goobstation
         - HandheldCrewMonitor # Goobstation
       components:
-        - Hypospray
         - Injector
         - Pill
         - HandLabeler
         - SurgeryTool # Shitmed Change
         - Defibrillator # Goobstation
         - GunApplySolution # Goobstation - Syndicate dart gun
+        - SolutionCartridge
   - type: ExplosionResistance
     damageCoefficient: 0.25
 
@@ -161,7 +160,7 @@
         - Ointment
       components:
         - Pill
-        - Hypospray
+        - Injector
         - SyringeGun
         - SurgeryTool
         - Defibrillator
@@ -276,7 +275,6 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: CombatInjector
         - id: TirimolChemistryVial
         - id: OmnizineChemistryVial
         - id: ProcenylLazideChemistryVial

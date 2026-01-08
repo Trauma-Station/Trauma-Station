@@ -25014,7 +25014,7 @@ entities:
   - uid: 848
     components:
     - type: MetaData
-      name: North Logistics APC
+      name: North Cargo APC
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -23.5,-22.5
@@ -25022,7 +25022,7 @@ entities:
   - uid: 1537
     components:
     - type: MetaData
-      name: South Logistics APC
+      name: South Cargo APC
     - type: Transform
       pos: -12.5,-31.5
       parent: 2
@@ -126234,7 +126234,7 @@ entities:
       pos: -14.5,-25.5
       parent: 2
     - type: FaxMachine
-      name: Logistics
+      name: Cargo
   - uid: 8856
     components:
     - type: Transform
@@ -126337,7 +126337,7 @@ entities:
       pos: -27.5,-23.5
       parent: 2
     - type: FaxMachine
-      name: Head of Logistics
+      name: Quartermaster
   - uid: 23440
     components:
     - type: Transform
@@ -239795,7 +239795,7 @@ entities:
   - uid: 6009
     components:
     - type: MetaData
-      name: Logistics Substation
+      name: Cargo Substation
     - type: Transform
       pos: -26.5,-28.5
       parent: 2
@@ -241051,7 +241051,7 @@ entities:
       setupAvailableNetworks:
       - SurveillanceCameraGeneral
       nameSet: True
-      id: West Logistics Front
+      id: West Cargo Front
   - uid: 32412
     components:
     - type: Transform
@@ -242292,7 +242292,7 @@ entities:
       setupAvailableNetworks:
       - SurveillanceCameraSupply
       nameSet: True
-      id: Logistics Lounge
+      id: Cargo Lounge
   - uid: 29117
     components:
     - type: Transform

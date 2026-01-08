@@ -19,6 +19,16 @@ namespace Content.Goobstation.UIKit.UserInterface.Controls;
 
 internal struct CustomRichTextEntry
 {
+    public static readonly Type[] DefaultTags =
+    [
+        typeof(BoldItalicTag),
+        typeof(BoldTag),
+        typeof(BulletTag),
+        typeof(ColorTag),
+        typeof(HeadingTag),
+        typeof(ItalicTag)
+    ];
+
     private readonly Color _defaultColor;
     private readonly Type[]? _tagsAllowed;
 
@@ -50,9 +60,17 @@ internal struct CustomRichTextEntry
     public CustomRichTextEntry(
             FormattedMessage message,
             Control parent,
+            MarkupTagManager tagMan,
+            IEntityManager entMan,
+            Color? defaultColor = null)
+        : this(message, parent, tagMan, entMan, DefaultTags, defaultColor) {}
+
+    public CustomRichTextEntry(
+            FormattedMessage message,
+            Control parent,
             MarkupTagManager tagManager,
             IEntityManager entManager,
-            Type[]? tagsAllowed = null,
+            Type[]? tagsAllowed,
             Color? defaultColor = null)
     {
         Message = message;

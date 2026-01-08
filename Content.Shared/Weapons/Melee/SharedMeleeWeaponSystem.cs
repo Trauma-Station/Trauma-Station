@@ -997,12 +997,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         ICommonSession? session) // Goobstation - Shove Rework
     {
         if (!ev.Target.HasValue)
-            return false;
+            return true; // Trauma - still do the animation if you missed a shove
 
         var target = GetEntity(ev.Target.Value);
 
         if (Deleted(target))
-            return false;
+            return true; // Trauma - still do the animation
 
         if (user == target) // Goobstation
         {

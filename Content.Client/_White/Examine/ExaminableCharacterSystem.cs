@@ -18,7 +18,7 @@ public sealed class ExaminableCharacterSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeNetworkEvent<ExaminableCharacterInfoMessage>(OnExamineRichInfoResponse);
+        //SubscribeNetworkEvent<ExaminableCharacterInfoMessage>(OnExamineRichInfoResponse); // Trauma - disabled until shitcode can be fixed
     }
 
     private void OnExamineRichInfoResponse(ExaminableCharacterInfoMessage ev)

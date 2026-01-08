@@ -36,11 +36,6 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: survivalpen_empty
-  - type: Hypospray
-    solutionName: pen
-    transferAmount: 40
-    onlyAffectsMobs: false
-    injectOnly: true
   - type: SolutionContainerManager
     solutions:
       pen:
@@ -70,11 +65,6 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: luxpen_empty
-  - type: Hypospray
-    solutionName: pen
-    transferAmount: 180
-    onlyAffectsMobs: false
-    injectOnly: true
   - type: SolutionContainerManager
     solutions:
       pen:

@@ -9,9 +9,8 @@
   - type: DiseaseEntityEffect
     timeScale: false
     effects:
-    - !type:MovespeedModifier
-      walkSpeedModifier: 1.35
-      sprintSpeedModifier: 1.35
+    - !type:ModifyStatusEffect
+      effectProto: HyperStatusEffect
     - !type:GenericStatusEffect
       key: Stutter
       component: StutteringAccent

@@ -88,10 +88,10 @@
         startValue: 0.1
         endValue: 2.0
         isLooped: true
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 100
     startingCharge: 100
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 5
   - type: UnholyItem # Goobstation Shitchap
 

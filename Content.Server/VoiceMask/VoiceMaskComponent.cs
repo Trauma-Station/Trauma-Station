@@ -1,19 +1,7 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 GabyChangelog <agentepanela2@gmail.com>
-// SPDX-FileCopyrightText: 2025 Kyoth25f <kyoth25f@gmail.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Shared.StatusIcon;
+// </Trauma>
 using Content.Shared.Speech;
-using Content.Shared.StatusIcon; // Goobstation
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.VoiceMask;
@@ -58,11 +46,24 @@ public sealed partial class VoiceMaskComponent : Component
     /// </summary>
     [DataField]
     public EntityUid? ActionEntity;
+
     /// <summary>
-    ///     if UI Action shud be added on equipt
+    /// Goob - Whether the action should be granted when equipped.
     /// </summary>
     [DataField]
-    public bool EnableAction = true; //Goobstation
+    public bool EnableAction = true;
+
+    /// <summary>
+    ///     If user's voice is getting changed when they speak.
+    /// </summary>
+    [DataField]
+    public bool Active = true;
+
+    /// <summary>
+    ///     If user's accent is getting hidden when they speak.
+    /// </summary>
+    [DataField]
+    public bool AccentHide = true;
 
     #region GabyStation
     /// <summary>

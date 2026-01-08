@@ -160011,23 +160011,6 @@ entities:
     - type: Transform
       pos: 1.5,54.5
       parent: 2
-    - type: MindContainer
-    - type: InputMover
-    - type: MobMover
-    - type: MovementSpeedModifier
-    - type: Speech
-      suffixSpeechVerbs:
-        chat-speech-verb-suffix-exclamation-strong: DefaultExclamationStrong
-        chat-speech-verb-suffix-exclamation: DefaultExclamation
-        chat-speech-verb-suffix-question: DefaultQuestion
-        chat-speech-verb-suffix-stutter: DefaultStutter
-        chat-speech-verb-suffix-mumble: DefaultMumble
-      allowedEmotes: []
-    - type: Emoting
-    - type: Examiner
-    - type: Eye
-    - type: TypingIndicator
-    - type: Appearance
   - uid: 24260
     components:
     - type: Transform

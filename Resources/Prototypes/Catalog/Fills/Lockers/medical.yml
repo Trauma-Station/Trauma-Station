@@ -97,6 +97,7 @@
       - id: UniformScrubsColorPurple
         weight: 0.05
     - id: ClothingMaskSterile
+    #- id: JetInjector # Trauma - le quirky syringe
 
 - type: entity
   parent: LockerMedical
@@ -167,6 +168,7 @@
     - id: HandheldGPSBasic
     - id: MedkitFilled
       prob: 0.3
+    #- id: JetInjector # Trauma - le quirky syringe
 
 - type: entity
   parent: LockerParamedic

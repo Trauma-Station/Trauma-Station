@@ -1,0 +1,7 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<controls:FancyWindow xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Title="{Loc 'debug-effect-stick-window-title'}"
+        MinSize="200 120">
+    <OptionButton Name="Effects" SetHeight="80" Margin="4"/> <!-- Populated at runtime -->
+</controls:FancyWindow>

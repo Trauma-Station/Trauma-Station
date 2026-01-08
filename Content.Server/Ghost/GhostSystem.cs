@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Server._Goobstation.Wizard.Systems;
 using Content.Shared._White.Xenomorphs.Infection;
 using Content.Shared._Shitmed.Body;
 using Content.Shared._Shitmed.Damage;
@@ -10,7 +11,6 @@ using Robust.Shared.Utility;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
-using Content.Server._Goobstation.Wizard.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
@@ -54,6 +54,10 @@ namespace Content.Server.Ghost
 {
     public sealed class GhostSystem : SharedGhostSystem
     {
+        // <Trauma>
+        [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+        [Dependency] private readonly GhostVisibilitySystem _ghostVisibility = default!;
+        // </Trauma>
         [Dependency] private readonly SharedActionsSystem _actions = default!;
         [Dependency] private readonly IAdminLogManager _adminLog = default!;
         [Dependency] private readonly SharedEyeSystem _eye = default!;
@@ -79,14 +83,13 @@ namespace Content.Server.Ghost
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
-        [Dependency] private readonly GhostVisibilitySystem _ghostVisibility = default!;
-        [Dependency] private readonly SharedBodySystem _bodySystem = default!; // Shitmed Change
+
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
 
         private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
         private static readonly ProtoId<DamageTypePrototype> AsphyxiationDamageType = "Asphyxiation";
-        private static readonly ProtoId<DamageTypePrototype> IonDamageType = "Ion";
+        private static readonly ProtoId<DamageTypePrototype> IonDamageType = "Ion"; // Trauma
 
         public override void Initialize()
         {
@@ -208,7 +211,8 @@ namespace Content.Server.Ghost
             // Allow this entity to be seen by other ghosts.
             var visibility = EnsureComp<VisibilityComponent>(uid);
 
-            if (_gameTicker.RunLevel != GameRunLevel.PostRound && !_ghostVisibility.IsVisible(component))
+            if (_gameTicker.RunLevel != GameRunLevel.PostRound
+                && !_ghostVisibility.IsVisible(component)) // Goob
             {
                 _visibilitySystem.AddLayer((uid, visibility), (int) VisibilityFlags.Ghost, false);
                 _visibilitySystem.RemoveLayer((uid, visibility), (int) VisibilityFlags.Normal, false);
