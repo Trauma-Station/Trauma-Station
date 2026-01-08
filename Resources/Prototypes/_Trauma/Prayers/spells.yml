@@ -113,7 +113,7 @@
   verb: GIVE
   subjects: [ "DAGD" ]
   effects:
-  - !type:GiveObjective
+  - !type:AddObjective
     objective: DieObjective
 
 - type: scrollPrayer

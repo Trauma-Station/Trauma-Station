@@ -63,7 +63,7 @@
   verb: GIVE
   subjects: [ "MEATPIE" ]
   items:
-    id: FoodMeatPie
+    id: FoodPieMeat
 
 - type: scrollPrayer
   id: MixNMatch

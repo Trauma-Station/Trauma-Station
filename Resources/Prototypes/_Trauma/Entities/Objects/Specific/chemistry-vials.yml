@@ -207,6 +207,20 @@
 
 - type: entity
   parent: BaseChemistryEmptyVial
+  id: VialWhite
+  name: white vial
+  suffix: Omnizine
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 30
+        reagents:
+        - ReagentId: Omnizine
+          Quantity: 30
+
+- type: entity
+  parent: BaseChemistryEmptyVial
   id: VialWormJuice
   name: worm juice
   components:
