@@ -1393,7 +1393,7 @@
   table: !type:GroupSelector
     children:
     - !type:NestedSelector # Trauma
-      id: CoreMedicineReagentBottleTrauma
+      tableId: CoreMedicineReagentBottleTrauma
       weight: 3 # keep in sync with the table
     - id: ChemistryBottleBicaridine
     - id: ChemistryBottleKelotane
@@ -1423,7 +1423,7 @@
   table: !type:GroupSelector
     children:
     - !type:NestedSelector # Trauma
-      id: CoreMedicineReagentBottleTrauma
+      tableId: CoreMedicineReagentBottleTrauma
       weight: 3 # keep in sync with the table and weight above, because shityml doesnt just include it
     - id: ChemistryBottleAloxadone
     - id: ChemistryBottleAmbuzol

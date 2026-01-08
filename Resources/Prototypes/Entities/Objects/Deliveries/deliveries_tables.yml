@@ -62,6 +62,9 @@
   id: LetterCommonEntityTable # Basically trash and spam mail, maybe something barely useful here and there
   table: !type:GroupSelector
     children:
+    - !type:NestedSelector # Trauma
+      tableId: LetterCommonTrauma
+      weight: 6 # keep in sync with contents
     - !type:NestedSelector # Don't you love getting mailed trash?
       tableId: GenericTrashItems
     - !type:NestedSelector
@@ -81,6 +84,9 @@
   id: LetterUncommonEntityTable # Some more varied things, should never be more expensive than 100 spesos
   table: !type:GroupSelector
     children:
+    - !type:NestedSelector # Trauma
+      tableId: LetterUncommonTrauma
+      weight: 7 # keep in sync with contents
     - !type:NestedSelector
       tableId: RandomSafePillTable
     - !type:NestedSelector
@@ -94,6 +100,9 @@
   id: LetterRareEntityTable # Interesting things that can actually be of use, should never be more expensive than 500 spesos
   table: !type:GroupSelector
     children:
+    - !type:NestedSelector # Trauma
+      tableId: LetterRareTrauma
+      weight: 9 # keep in sync with contents
     - id: ResearchDisk5000
     - id: JointRainbow
     - id: StrangePill
@@ -114,6 +123,9 @@
   id: PackageCommonEntityTable
   table: !type:GroupSelector
     children:
+    - !type:NestedSelector # Trauma
+      tableId: PackageCommonTrauma
+      weight: 5 # keep in sync with contents
     - !type:NestedSelector
       tableId: MaintToolsTable
       rolls: !type:RangeNumberSelector
@@ -127,6 +139,9 @@
   id: PackageUncommonEntityTable
   table: !type:GroupSelector
     children:
+    - !type:NestedSelector # Trauma
+      tableId: PackageUncommonTrauma
+      weight: 11 # keep in sync with contents
     - !type:NestedSelector
       tableId: MaintFluffTable
       weight: 0.4
@@ -148,6 +163,9 @@
   id: PackageRareEntityTable
   table: !type:GroupSelector
     children:
+    - !type:NestedSelector # Trauma
+      tableId: PackageRareTrauma
+      weight: 8 # keep in sync with contents
     - id: MedkitAdvancedFilled # TODO: Replace with PackageRareGeneralBundlesTable for when something doesn't fit with a department. (Like a bundle of bed sheets, dunno)
     - id: PipeBomb # TODO: PackageRarePunishmentTable, including things like pipebombs and other potentially harmful things (the pipebomb should also get primed when unpacked)
     - !type:NestedSelector
@@ -162,4 +180,3 @@
     - !type:NestedSelector
       tableId: SyndieMaintLoot
       weight: 0.5
-      

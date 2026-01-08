@@ -84,12 +84,12 @@
         proto: Slime
 
 - type: entity
-  suffix: Vulpkanin
+  suffix: Vox
   parent: BoxBuildABuddyHuman
-  id: BoxBuildABuddyVulpkanin
-  description: "\"Valerie the Vulpkanin\" Build-a-Buddy kit. Some assembly required."
+  id: BoxBuildABuddyVox
+  description: "\"Vitikiki the Vox\" Build-a-Buddy kit. Some assembly required."
   components:
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:BodyPartsSelector
-        proto: Vulpkanin
+        proto: Vox
