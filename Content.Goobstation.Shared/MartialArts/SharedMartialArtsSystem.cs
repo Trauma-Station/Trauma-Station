@@ -277,7 +277,7 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
     {
         if (ent.Comp.Blocked)
         {
-            var ev = new CanDoCQCEvent();
+            var ev = new CanDoCQCEvent(ent.Comp.MartialArtsForm);
             RaiseLocalEvent(ent, ev);
             if (!ev.Handled)
                 return;
@@ -530,7 +530,7 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
                     0.75f,
                     null,
                     null,
-                    new CanDoCQCEvent()));
+                    new CanDoCQCEvent(comp.MartialArtsForm)));
                 break;
         }
 
@@ -596,8 +596,7 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
         if (!knowledgeComponent.Blocked)
             return true;
 
-        // TODO: fix blocked martial art supercode
-        var ev = new CanDoCQCEvent();
+        var ev = new CanDoCQCEvent(proto.MartialArtsForm);
         RaiseLocalEvent(ent, ev);
         return ev.Handled;
     }

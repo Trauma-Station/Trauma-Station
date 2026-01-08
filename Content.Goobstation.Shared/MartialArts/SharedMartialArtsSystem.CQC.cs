@@ -51,34 +51,11 @@ public partial class SharedMartialArtsSystem
         SubscribeLocalEvent<CanPerformComboComponent, CqcPressurePerformedEvent>(OnCQCPressure);
         SubscribeLocalEvent<CanPerformComboComponent, CqcConsecutivePerformedEvent>(OnCQCConsecutive);
 
-        SubscribeLocalEvent<MartialArtsKnowledgeComponent, CanDoCQCEvent>(OnCQCCheck);
-
         SubscribeLocalEvent<GrantCqcComponent, UseInHandEvent>(OnGrantCQCUse);
         SubscribeLocalEvent<GrantCqcComponent, MapInitEvent>(OnMapInitEvent);
     }
 
     #region Generic Methods
-
-    private void OnCQCCheck(Entity<MartialArtsKnowledgeComponent> ent, ref CanDoCQCEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        if (!ent.Comp.Blocked)
-        {
-            args.Handled = true;
-            return;
-        }
-
-        foreach (var entInRange in _lookup.GetEntitiesInRange(ent, 8f))
-        {
-            if (!TryPrototype(entInRange, out var entProto) || entProto.ID != "SpawnPointChef")
-                continue;
-
-            args.Handled = true;
-            return;
-        }
-    }
 
     private void OnMapInitEvent(Entity<GrantCqcComponent> ent, ref MapInitEvent args)
     {
