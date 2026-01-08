@@ -1,0 +1,12 @@
+- type: entityEffect
+  id: AreaTest
+  effects:
+  - !type:PopupMessage
+    conditions:
+    - !type:InsideAreaCondition
+    messages: [ "you are in an area"]
+  - !type:PopupMessage
+    conditions:
+    - !type:InsideAreaCondition
+      inverted: true
+    messages: [ "you are not in an area"]

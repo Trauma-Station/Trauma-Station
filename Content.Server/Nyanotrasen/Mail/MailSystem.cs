@@ -13,6 +13,7 @@
 // SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
+// TODO MAIL: kill this shit
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -60,6 +61,7 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
 using Content.Shared.Storage;
 using Content.Shared.Tag;
+using Content.Trauma.Common.Mail;
 using Robust.Shared.Audio.Systems;
 using Timer = Robust.Shared.Timing.Timer;
 using Content.Server._DV.Cargo.Systems;
@@ -407,7 +409,9 @@ namespace Content.Server.Mail
         public bool IsEntityFragile(EntityUid uid, int fragileDamageThreshold)
         {
             // It takes damage on falling.
-            if (HasComp<DamageOnLandComponent>(uid))
+            var ev = new MailFragileEvent();
+            RaiseLocalEvent(uid, ref ev);
+            if (ev.Fragile)
                 return true;
 
             // It can be spilled easily and has something to spill.

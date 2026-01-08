@@ -15,7 +15,7 @@ public sealed partial class DebugEffectStickWindow : FancyWindow
     [Dependency] private readonly IEntityManager _ent = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
-    public event Action<string>? OnSetEffect;
+    public event Action<string?>? OnSetEffect;
 
     public DebugEffectStickWindow()
     {
@@ -42,6 +42,7 @@ public sealed partial class DebugEffectStickWindow : FancyWindow
         {
             effects.Add(proto.ID);
         }
+
         if (selected == null)
             Effects.Select(0);
 
@@ -51,7 +52,7 @@ public sealed partial class DebugEffectStickWindow : FancyWindow
         {
             var idx = Effects.ItemCount;
             Effects.AddItem(effect);
-            Effects.SetItemMetadata(idx, (string?) effect);
+            Effects.SetItemMetadata(idx, (string) effect);
             if (effect == selected)
                 Effects.Select(idx);
         }
