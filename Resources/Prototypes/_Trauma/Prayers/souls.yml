@@ -9,7 +9,7 @@
 
 ## NON PARITY
 
-- type: scrollPlayer
+- type: scrollPrayer
   id: FloorGoblin
   verb: GIVE
   subjects: [ "FLOOR GOBLIN" ]
