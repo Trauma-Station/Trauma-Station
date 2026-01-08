@@ -36,3 +36,8 @@ entity-effect-guidebook-make-traitor = { $chance ->
     [1] makes
     *[other] make
 } the target a traitor
+
+entity-effect-guidebook-infect-disease = { $chance ->
+    [1] infects
+    *[other] infect
+} the target with {$disease}

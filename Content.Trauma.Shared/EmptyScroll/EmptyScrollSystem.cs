@@ -40,15 +40,16 @@ public sealed class EmptyScrollSystem : EntitySystem
 
         // if you have a written empty scroll prototype (no user) it spawns items etc on itself.
         var target = args.User ?? ent.Owner;
+        var coords = Transform(ent).Coordinates;
+        var answered = false;
         if (GetPrayer(args.Content.Trim()) is {} prayer)
         {
             Pray(target, prayer);
-            _popup.PopupClient(Loc.GetString("empty-scroll-prayer-answered"), target, target);
+            answered = true;
         }
-        else
-        {
-            _popup.PopupClient(Loc.GetString("empty-scroll-prayer-failed"), target, target);
-        }
+
+        LocId msg = "empty-scroll-prayer-" + (answered ? "answered" : "failed");
+        _popup.PopupCoordinates(Loc.GetString(msg), coords, answered ? PopupType.Large : PopupType.Medium);
 
         QueueDel(ent);
     }

@@ -127,6 +127,15 @@
       preventWriting: true
     - type: FrenchAccent
 
+# I did infact choose to be quiet
+- type: scrollPrayer
+  id: VocalParasites
+  verb: GIVE
+  subjects: [ "SILENCE" ]
+  effects:
+  - !type:InfectDisease
+    disease: DiseaseVocalParasitesTauCetiBasic
+
 - type: scrollPrayer
   id: PhaseStep
   verb: TEACH

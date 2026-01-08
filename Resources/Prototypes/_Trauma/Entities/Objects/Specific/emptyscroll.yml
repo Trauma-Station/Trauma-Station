@@ -6,7 +6,16 @@
   suffix: DO NOT MAP
   categories: [ DoNotMap ]
   components:
-  # TODO: custom sprite
+  - type: Sprite
+    layers:
+    - state: icon
+      sprite: _Trauma/Objects/Specific/empty_scroll.rsi
+    - state: paper_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      visible: false
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
   - type: Item
     size: Small
   - type: EmptyScroll
