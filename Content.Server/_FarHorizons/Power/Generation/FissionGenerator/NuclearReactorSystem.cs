@@ -35,7 +35,6 @@ using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Throwing;
 using Content.Shared.Damage;
-using JetBrains.FormatRipper.Elf;
 using NAudio.CoreAudioApi;
 using System.Diagnostics.CodeAnalysis;
 
