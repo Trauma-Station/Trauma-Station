@@ -24,7 +24,7 @@
     allowMovement: true
     name: ghost-role-information-facehugger-name
     description: ghost-role-information-facehugger-description
-    rules: ghost-role-information-rules-team-antagonist
+    rules: ghost-role-information-rules-default-xeno
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
     raffle:
