@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from /tg/station at commit https://github.com/tgstation/tgstation/commit/6cdc0503d32e249125151e369edf951e93bccd1a",
+  "copyright": "Taken from /tg/station at commit https://github.com/tgstation/tgstation/commit/6cdc0503d32e249125151e369edf951e93bccd1a , equipped-NECK by asardonicsailor",
   "size": {
     "x": 32,
     "y": 32
@@ -16,6 +16,10 @@
     },
     {
       "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "equipped-NECK",
       "directions": 4
     }
   ]
