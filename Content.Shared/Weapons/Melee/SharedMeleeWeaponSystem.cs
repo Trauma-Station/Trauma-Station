@@ -1146,6 +1146,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         var userPos = TransformSystem.ToMapCoordinates(user.ToCoordinates()).Position;
         var targetPos = TransformSystem.ToMapCoordinates(target.ToCoordinates()).Position;
+        if (userPos == targetPos) return; // Trauma - no NaN
         var pushVector = (targetPos - userPos).Normalized() * force;
 
         var animated = HasComp<ItemComponent>(target);
