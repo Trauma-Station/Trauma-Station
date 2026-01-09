@@ -73,7 +73,7 @@
   - type: Speech
     speechVerb: Bingle
     speechSounds: Slime
-  - type: LanguageGrant
+  - type: LanguageSpeaker
     speaks:
     - Bingle
     understands:

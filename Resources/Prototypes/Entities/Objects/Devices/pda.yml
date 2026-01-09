@@ -300,7 +300,6 @@
   - type: Speech
     speechVerb: Robotic
   - type: LanguageSpeaker # Einstein Engines - Language
-  - type: LanguageGrant # Einstein Engines - Language
     speaks:
     - TauCetiBasic
     - RobotTalk

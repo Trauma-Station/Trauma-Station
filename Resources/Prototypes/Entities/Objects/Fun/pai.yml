@@ -219,7 +219,7 @@
         - SecretStash
         - WrappedParcel
   # Einstein Engines - Language begin
-  - type: LanguageGrant
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic # Add individual languages so they can speak in said language for privacy.
     - Bubblish

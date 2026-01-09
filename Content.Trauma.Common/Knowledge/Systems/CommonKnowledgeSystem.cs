@@ -117,9 +117,4 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract Entity<KnowledgeContainerComponent> EnsureKnowledgeContainer(EntityUid uid);
     /// <inheritdoc cref="EnsureKnowledgeContainer(Robust.Shared.GameObjects.EntityUid)"/>
     public abstract void EnsureKnowledgeContainer(EntityUid uid, out Entity<KnowledgeContainerComponent> container);
-
-    /// <summary>
-    /// Helper function for Map Init
-    /// </summary>
-    public abstract void OnSpeakerInit(EntityUid ent, EntProtoId languageKnowledgeId);
 }

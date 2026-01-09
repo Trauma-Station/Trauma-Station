@@ -56,7 +56,7 @@
       Male: Skeleton
       Female: Skeleton
       Unsexed: Skeleton
-  - type: LanguageGrant # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - TauCetiBasic
     - Calcic

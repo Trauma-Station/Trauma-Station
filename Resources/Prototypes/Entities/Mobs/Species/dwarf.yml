@@ -50,7 +50,7 @@
     accent: dwarf
   - type: Speech
     speechSounds: Bass
-  - type: LanguageGrant # Einstein Engines - Languages
+  - type: LanguageSpeaker # Einstein Engines - Languages
     speaks:
     - TauCetiBasic
     - SolCommon

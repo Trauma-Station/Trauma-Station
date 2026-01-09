@@ -128,7 +128,6 @@
       - Xenomorph
   # Einstein Engines - Language begin
   - type: LanguageSpeaker
-  - type: LanguageGrant
     speaks:
     - TauCetiBasic
     understands:

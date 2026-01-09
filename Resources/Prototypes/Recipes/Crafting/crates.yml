@@ -111,6 +111,10 @@
   targetNode: boxcardboardsmall
   category: construction-category-storage
   objectType: Item
+  # Goobstation start
+  groups:
+  - AdvancedHandmade
+  # Goobstation end
 
 - type: construction
   id: ToteBase

@@ -175,7 +175,7 @@
   - type: FootstepModifier # Trauma - revert upstream removal
     footstepSoundCollection:
       collection: FootstepBounce
-  - type: LanguageGrant # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Kangaroo
     understands:
@@ -276,7 +276,7 @@
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 4
-  - type: LanguageGrant # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Xeno
     understands:
@@ -320,7 +320,7 @@
     - type: Body
       prototype: SpaceCobra
     - type: Fauna
-    - type: LanguageGrant
+    - type: LanguageSpeaker
       speaks:
       - Xeno
       understands:

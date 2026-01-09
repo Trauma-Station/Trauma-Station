@@ -42,7 +42,6 @@
   - StutteringAccent
   # Einstein Engines - Language begin
   - LanguageSpeaker
-  - LanguageGrant
   - ForeignerTrait
   # Einstein Engines - Language end
   blacklist:

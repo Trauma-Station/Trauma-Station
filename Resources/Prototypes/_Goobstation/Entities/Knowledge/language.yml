@@ -6,6 +6,6 @@
   components:
   - type: Knowledge
     category: Skills
-    level: 800
+    level: 100
     color: "#0b30a8"
-  - type: LanguageGrant
+  - type: LanguageKnowledge

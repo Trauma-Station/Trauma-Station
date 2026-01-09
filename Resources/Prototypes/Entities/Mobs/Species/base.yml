@@ -211,7 +211,7 @@
       Male: MaleHuman
       Female: FemaleHuman
       Unsexed: MaleHuman
-  - type: LanguageGrant # Einstein Engines - Languages (all mobs should speak TauCeti unless otherwise specified, to prevent universal.)
+  - type: LanguageSpeaker # Einstein Engines - Languages (all mobs should speak TauCeti unless otherwise specified, to prevent universal.)
     speaks:
     - TauCetiBasic
     understands:

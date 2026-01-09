@@ -1,17 +1,22 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._EinsteinEngines.Language.Components;
+using Content.Shared._EinsteinEngines.Language.Events;
+using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Construction;
 using Content.Shared.Construction.Prototypes;
+using Content.Shared.EntityEffects.Effects.EntitySpawning;
 using Content.Shared.Mind;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
+using YamlDotNet.Core.Tokens;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
@@ -23,7 +28,10 @@ public sealed partial class KnowledgeSystem : CommonKnowledgeSystem
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly SharedLanguageSystem _language = default!;
 
+
+    public static readonly EntProtoId LanguageKnowledgeId = "LanguageKnowledge";
     private EntityQuery<KnowledgeComponent> _knowledgeQuery;
     private EntityQuery<KnowledgeContainerComponent> _containerQuery;
 
@@ -37,6 +45,10 @@ public sealed partial class KnowledgeSystem : CommonKnowledgeSystem
         SubscribeLocalEvent<KnowledgeContainerComponent, EntRemovedFromContainerMessage>(OnEntityRemoved);
         SubscribeLocalEvent<KnowledgeContainerComponent, ConstructionGetGroupsEvent>(OnConstructionGetGroupEvent);
         SubscribeLocalEvent<BodyComponent, ConstructionGetGroupsEvent>(OnConstructionGetGroupEventBodyPart);
+        SubscribeLocalEvent<LanguageSpeakerComponent, MapInitEvent>(OnSpeakerInit);
+        SubscribeLocalEvent<LanguageSpeakerComponent, AddLanguageEvent>(OnLanguageAdded);
+        SubscribeLocalEvent<LanguageSpeakerComponent, RemoveLanguageEvent>(OnLanguageRemoved);
+        SubscribeLocalEvent<LanguageSpeakerComponent, UpdateLanguageEvent>(OnLanguageUpdated);
 
         _knowledgeQuery = GetEntityQuery<KnowledgeComponent>();
         _containerQuery = GetEntityQuery<KnowledgeContainerComponent>();
@@ -108,6 +120,200 @@ public sealed partial class KnowledgeSystem : CommonKnowledgeSystem
         }
     }
 
+    public void OnSpeakerInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
+    {
+        if (!TryComp<LanguageSpeakerComponent>(ent, out var languageSpeakerComponent))
+            return;
+
+
+        if (TryGetKnowledgeEntity(ent) is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainer))
+            return;
+        //Log.Error($"Entity {ToPrettyString(ent)} failed to setup {nameof(KnowledgeContainerComponent)} properly!");
+
+        if (knowledgeContainer.KnowledgeContainer == null)
+            knowledgeContainer.KnowledgeContainer = _container.MakeContainer<Container>(knowledgeEnt, LanguageKnowledgeId);
+
+        Log.Debug($"Entity {ToPrettyString(ent)} has {languageSpeakerComponent.SpokenLanguages.Count()} speaks and {languageSpeakerComponent.UnderstoodLanguages.Count()} understands.");
+        foreach (var spoken in languageSpeakerComponent.SpokenLanguages)
+        {
+            EntityUid entity = Spawn("LanguageKnowledge");
+            if (TryComp<LanguageKnowledgeComponent>(entity, out var langComp))
+            {
+                langComp.LanguageId = spoken;
+                langComp.Speaks = true;
+
+                if (languageSpeakerComponent.UnderstoodLanguages.Contains(spoken))
+                    langComp.Understands = true;
+
+                Dirty(entity, langComp);
+                _container.Insert(entity, knowledgeContainer.KnowledgeContainer);
+            }
+        }
+
+        foreach (var understood in languageSpeakerComponent.UnderstoodLanguages.Except(languageSpeakerComponent.SpokenLanguages))
+        {
+            EntityUid entity = Spawn("LanguageKnowledge");
+            if (TryComp<LanguageKnowledgeComponent>(entity, out var langComp))
+            {
+                langComp.LanguageId = understood;
+                langComp.Understands = true;
+                Dirty(entity, langComp);
+                _container.Insert(entity, knowledgeContainer.KnowledgeContainer);
+            }
+        }
+
+        UpdateEntityLanguages(ent);
+    }
+
+    public void OnLanguageAdded(Entity<LanguageSpeakerComponent> ent, ref AddLanguageEvent args)
+    {
+        // We add the intrinsically known languages first so other systems can manipulate them easily
+        if (TryGetKnowledgeEntity(ent) is { } knowledgeEnt && TryComp<KnowledgeContainerComponent>(ent, out var knowledge) && knowledge.KnowledgeContainer != null)
+        {
+            var knownLanguages = TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(knowledgeEnt);
+
+            if (knownLanguages != null)
+            {
+                EntityUid? languageToAdd = null;
+                foreach (var language in knownLanguages)
+                {
+                    if (language.Comp1.LanguageId == args.Language)
+                    {
+                        languageToAdd = language;
+                        break;
+                    }
+                }
+
+                if (languageToAdd == null)
+                {
+                    languageToAdd = Spawn("LanguageKnowledge");
+                }
+                if (TryComp<LanguageKnowledgeComponent>(languageToAdd, out var langComp))
+                {
+                    langComp.LanguageId = args.Language;
+                    langComp.Understands = args.AddUnderstood;
+                    langComp.Speaks = args.AddSpoken;
+                    Dirty(languageToAdd.Value, langComp);
+                    _container.Insert(languageToAdd.Value, knowledge.KnowledgeContainer);
+                }
+            }
+
+            else
+            {
+                EntityUid entity = Spawn("LanguageKnowledge");
+                if (TryComp<LanguageKnowledgeComponent>(entity, out var langComp))
+                {
+                    langComp.LanguageId = args.Language;
+                    langComp.Understands = args.AddUnderstood;
+                    langComp.Speaks = args.AddSpoken;
+                    Dirty(entity, langComp);
+                    _container.Insert(entity, knowledge.KnowledgeContainer);
+                }
+            }
+            Dirty(ent);
+            UpdateEntityLanguages(ent);
+        }
+    }
+
+    public void OnLanguageRemoved(Entity<LanguageSpeakerComponent> ent, ref RemoveLanguageEvent args)
+    {
+
+        if (TryGetKnowledgeEntity(ent) is { } knowledgeEnt && TryComp<KnowledgeContainerComponent>(ent, out var knowledge) && knowledge.KnowledgeContainer != null)
+        {
+            var knownLanguages = TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(knowledgeEnt);
+
+            if (knownLanguages != null)
+            {
+                foreach (var language in knownLanguages)
+                {
+                    if (language.Comp1.LanguageId == args.Language)
+                    {
+                        if (args.RemoveSpoken && args.RemoveUnderstood)
+                        {
+                            _container.Remove(language.Owner, knowledge.KnowledgeContainer);
+                            PredictedQueueDel(language.Owner);
+                        }
+                        else
+                        {
+                            language.Comp1.Speaks = !args.RemoveSpoken;
+                            language.Comp1.Understands = !args.RemoveSpoken;
+                            Dirty(language.Owner, language.Comp1);
+                        }
+                        // We don't ensure that the entity has a speaker comp. If it doesn't... Well, woe be the caller of this method.
+                        UpdateEntityLanguages(ent);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    public void OnLanguageUpdated(Entity<LanguageSpeakerComponent> ent, ref UpdateLanguageEvent args)
+    {
+        UpdateEntityLanguages(ent);
+    }
+
+    public void UpdateEntityLanguages(Entity<LanguageSpeakerComponent> ent)
+    {
+        var ev = new DetermineEntityLanguagesEvent();
+        // We add the intrinsically known languages first so other systems can manipulate them easily
+        if (TryGetKnowledgeEntity(ent) is { } knowledgeEnt && TryComp<LanguageKnowledgeComponent>(ent, out var knowledgeEntity)) // Trauma edit
+        {
+            var knownLanguages = TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(knowledgeEnt);
+
+            if (knownLanguages != null)
+            {
+                foreach (var language in knownLanguages)
+                {
+                    if (language.Comp1.Speaks == true)
+                        ev.SpokenLanguages.Add(language.Comp1.LanguageId);
+                    if (language.Comp1.Understands == true)
+                        ev.UnderstoodLanguages.Add(language.Comp1.LanguageId);
+                }
+            }
+        }
+        else
+        {
+            // Fallback for anything that doesn't have a knowledge component.
+            foreach (var spoken in ent.Comp.SpokenLanguages)
+            {
+                ev.SpokenLanguages.Add(spoken);
+            }
+            foreach (var understood in ent.Comp.SpokenLanguages)
+            {
+                ev.UnderstoodLanguages.Add(understood);
+            }
+        }
+
+        RaiseLocalEvent(ent, ref ev);
+
+        ent.Comp.SpokenLanguages.Clear();
+        ent.Comp.UnderstoodLanguages.Clear();
+
+        ent.Comp.SpokenLanguages.AddRange(ev.SpokenLanguages);
+        ent.Comp.UnderstoodLanguages.AddRange(ev.UnderstoodLanguages);
+
+        _language.EnsureValidLanguage(ent);
+
+        Dirty(ent);
+    }
+
+    public EntityUid? TryGetKnowledgeEntity(Entity<LanguageSpeakerComponent> ent)
+    {
+        if (TryComp<KnowledgeContainerComponent>(ent, out var knowledgeContainer1))
+        {
+            return ent.Owner;
+        }
+        foreach (var part in _body.GetBodyOrgans(ent))
+        {
+            if (TryComp<KnowledgeContainerComponent>(part.Id, out var knowledgeContainer))
+            {
+                return part.Id;
+            }
+        }
+        return null;
+    }
+
     public override (string Category, KnowledgeInfo Info) GetKnowledgeInfo(Entity<KnowledgeComponent> knowledge)
     {
         var (uid, comp) = knowledge;
@@ -117,14 +323,20 @@ public sealed partial class KnowledgeSystem : CommonKnowledgeSystem
         RaiseLocalEvent(uid, ref ev);
         var description = ev.Description ?? Description(uid);
         var knowledgeInfo = new KnowledgeInfo("Blank", "Blank", comp.Color, comp.Sprite);
-        if (TryComp<LanguageGrantComponent>(uid, out var languageKnowledge))
+        if (TryComp<LanguageKnowledgeComponent>(uid, out var languageKnowledge))
         {
-            knowledgeInfo.Name = languageKnowledge.SpokenLanguages.Count > 0
-                ? "Speaks" + languageKnowledge.SpokenLanguages[0].ToString() + " "
+            knowledgeInfo.Name = languageKnowledge.Speaks
+                ? "Speaks "
                 : "";
-            knowledgeInfo.Name = languageKnowledge.UnderstoodLanguages.Count > 0
-                ? knowledgeInfo.Name + "Understands" + languageKnowledge.UnderstoodLanguages[0].ToString()
+            if (languageKnowledge.Speaks && languageKnowledge.Understands)
+            {
+                knowledgeInfo.Name += "and ";
+            }
+            knowledgeInfo.Name += languageKnowledge.Understands
+                ? knowledgeInfo.Name + "Understands "
                 : knowledgeInfo.Name;
+            //knowledgeInfo.Name += Loc.GetString(_protoMan.Index<LanguagePrototype>(languageKnowledge.LanguageId).Name);
+            knowledgeInfo.Name += languageKnowledge.LanguageId.ToString();
         }
         else if (TryComp<ConstructionKnowledgeComponent>(uid, out var constructionKnowledge))
         {
@@ -464,29 +676,6 @@ public sealed partial class KnowledgeSystem : CommonKnowledgeSystem
         // If not found just give up and ensure it on the entity itself
         var knowledge = EnsureComp<KnowledgeContainerComponent>(uid);
         container = (uid, knowledge);
-    }
-
-    public override void OnSpeakerInit(EntityUid ent, EntProtoId languageKnowledgeId)
-    {
-        if (!TryComp<LanguageSpeakerComponent>(ent, out var languageSpeakerComponent))
-            return;
-
-        if (TryComp(ent, out LanguageGrantComponent? grant))
-        {
-            if (!TryEnsureKnowledgeUnit(ent, languageKnowledgeId, out var knowledgeEnt))
-            {
-                Log.Error($"Entity {ToPrettyString(ent)} failed to setup {nameof(KnowledgeContainerComponent)} properly!");
-                return;
-            }
-
-            var knowledge = EnsureComp<LanguageKnowledgeComponent>(knowledgeEnt.Value);
-
-            foreach (var spoken in grant.SpokenLanguages)
-                knowledge.SpokenLanguages.Add(spoken);
-
-            foreach (var understood in grant.UnderstoodLanguages)
-                knowledge.UnderstoodLanguages.Add(understood);
-        }
     }
 
     private void RecursiveRaiseRelayEvent(EntityUid uid, ref KnowledgeContainerRelayEvent ev)

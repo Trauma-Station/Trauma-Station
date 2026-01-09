@@ -80,7 +80,7 @@
         - CannotSuicide
     # - type: ReplacementAccent
     #   accent: genericAggressive
-    - type: LanguageGrant # Trauma - swap replacement accent for language
+    - type: LanguageSpeaker # Trauma - swap replacement accent for language
       speaks:
       - Carptongue
       understands:

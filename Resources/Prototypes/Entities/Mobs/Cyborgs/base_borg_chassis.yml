@@ -267,7 +267,7 @@
     guides:
     - Cyborgs
     - Robotics
-  - type: LanguageGrant # Einstein Engines - Languages
+  - type: LanguageSpeaker # Einstein Engines - Languages
     speaks:
     - TauCetiBasic
     - RobotTalk

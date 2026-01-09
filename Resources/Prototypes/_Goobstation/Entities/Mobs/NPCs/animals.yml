@@ -129,7 +129,6 @@
   - type: ReplacementAccent
     accent: gondola
   - type: LanguageSpeaker # Einstein Engines - Language
-  - type: LanguageGrant # Einstein Engines - Language
     speaks:
     - TauCetiBasic # Replacement Accent will have to do for now until custom language.
     understands:
@@ -184,7 +183,7 @@
   - type: NpcFactionMember
     factions:
     - Syndicate
-  - type: LanguageGrant # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Moffic
     understands:
@@ -261,7 +260,6 @@
     speechSounds: Squeak
     allowedEmotes: ['Squeak']
   - type: LanguageSpeaker # Einstein Engines - Language
-  - type: LanguageGrant # Einstein Engines - Language
     speaks:
     - TauCetiBasic
     understands:
@@ -406,7 +404,7 @@
     color: "#808080"
     activateSound: null
     deactivateSound: null
-  - type: LanguageGrant
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic # Is sentient, should have TauCeti since it's the norm.
     understands:
@@ -509,7 +507,7 @@
         Slash: 10
   - type: Item
     size: Tiny
-  - type: LanguageGrant # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - TauCetiBasic # Is sentient, should have TauCeti since it is norm.
     understands:
@@ -737,7 +735,7 @@
       spawned:
       - id: FoodMeat
         amount: 1
-    - type: LanguageGrant # Einstein Engines - Language
+    - type: LanguageSpeaker # Einstein Engines - Language
       speaks:
       - Dog
       understands:
@@ -763,7 +761,6 @@
     speechVerb: HorseVerb
     speechSounds: HorseSpeech
   - type: LanguageSpeaker # Einstein Engines - Language
-  - type: LanguageGrant # Einstein Engines - Language
     speaks:
     - Cheval
     understands:
