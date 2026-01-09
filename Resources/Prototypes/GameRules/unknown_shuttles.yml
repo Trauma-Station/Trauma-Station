@@ -98,7 +98,7 @@
     startAnnouncement: station-event-unknown-shuttle-incoming
     maxOccurrences: 2
   - type: LoadMapRule
-    gridPath: /Maps/Shuttles/ShuttleEvent/traveling_china_cuisine.yml
+    gridPath: /Maps/_Trauma/Shuttles/ShuttleEvent/traveling_china_cuisine.yml # Trauma
 
 - type: entity
   parent: BaseUnknownShuttleRule
