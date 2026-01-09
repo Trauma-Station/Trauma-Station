@@ -29,8 +29,8 @@ public sealed class ExaminableCharacterSystem : EntitySystem
 
     public override void Initialize()
     {
-        //SubscribeLocalEvent<ExaminableCharacterComponent, ExaminedEvent>(HandleExamine); // Trauma - disabled, engine fucking murdered its formatting
-        //SubscribeLocalEvent<MetaDataComponent, ExamineCompletedEvent>(HandleExamine); // Trauma - disabled, engine fucking murdered its formatting
+        SubscribeLocalEvent<ExaminableCharacterComponent, ExaminedEvent>(HandleExamine);
+        SubscribeLocalEvent<MetaDataComponent, ExamineCompletedEvent>(HandleExamine);
     }
 
     private void HandleExamine(EntityUid uid, ExaminableCharacterComponent comp, ExaminedEvent args)
