@@ -81,12 +81,13 @@
 			<!--Blade / Stator info-->
 			<BoxContainer Name="PartInfo" Orientation="Horizontal" VerticalExpand="True" Margin="4">
 				<PanelContainer StyleClasses="Inset" HorizontalExpand="True" Margin="4">
+					<TextureRect Name="BladeTexture" SetSize="128 128" TextureScale="2 2" HorizontalAlignment="Center" VerticalAlignment="Center"
+									 TexturePath="/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/turbine_parts/blade.png"/>
+					
 					<BoxContainer Name="BladeInfo" Orientation="Vertical" HorizontalExpand="True" Margin="4">
 						<Label Name="BladeInfoName" Text="{Loc 'comp-turbine-ui-blade'}" StyleClasses="LabelKeyText" HorizontalAlignment="Center" HorizontalExpand="True"/>
 						
-						<TextureRect Name="BladeTexture" SetSize="128 128" TextureScale="2 2" HorizontalAlignment="Center"
-									 TexturePath="/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/turbine_parts/blade.png"/>
-
+						<SpriteView Name="BladeEntityView" SetSize="128 128" Scale="2 2" OverrideDirection="South" Margin="15" />
 						<BoxContainer VerticalExpand="True"/>
 
 						<GridContainer Columns="2">
@@ -99,12 +100,13 @@
 				</PanelContainer>
 				
 				<PanelContainer StyleClasses="Inset" HorizontalExpand="True" Margin="4">
+					<TextureRect Name="StatorTexture" SetSize="128 128" TextureScale="2 2" HorizontalAlignment="Center"
+								 TexturePath="/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/turbine_parts/stator.png"/>
+					
 					<BoxContainer Name="StatorInfo" Orientation="Vertical" HorizontalExpand="True" Margin="4">
 						<Label Name="StatorInfoName" Text="{Loc 'comp-turbine-ui-stator'}" StyleClasses="LabelKeyText" HorizontalAlignment="Center" HorizontalExpand="True"/>
 						
-						<TextureRect Name="StatorTexture" SetSize="128 128" TextureScale="2 2" HorizontalAlignment="Center"
-									 TexturePath="/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/turbine_parts/stator.png"/>
-
+						<SpriteView Name="StatorEntityView" SetSize="128 128" Scale="2 2" OverrideDirection="South" Margin="15" />
 						<BoxContainer VerticalExpand="True"/>
 
 						<GridContainer Columns="2">

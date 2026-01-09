@@ -1,4 +1,3 @@
-using Robust.Shared.Prototypes;
 using Robust.Shared.Map;
 using Robust.Client.GameObjects;
 using Content.Shared.Repairable;
@@ -6,6 +5,8 @@ using Content.Shared._FarHorizons.Power.Generation.FissionGenerator;
 using Content.Client.Popups;
 using Content.Client.Examine;
 using Robust.Client.Animations;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Popups;
 
 namespace Content.Client._FarHorizons.Power.Generation.FissionGenerator;
 
@@ -16,9 +17,11 @@ namespace Content.Client._FarHorizons.Power.Generation.FissionGenerator;
 public sealed class TurbineSystem : SharedTurbineSystem
 {
     [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
     [Dependency] private readonly AnimationPlayerSystem _animationPlayer = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+
+    private readonly float _threshold = 1f;
+    private float _accumulator = 0;
 
     public override void Initialize()
     {
@@ -26,57 +29,69 @@ public sealed class TurbineSystem : SharedTurbineSystem
 
         SubscribeLocalEvent<TurbineComponent, ClientExaminedEvent>(TurbineExamined);
 
-        SubscribeLocalEvent<TurbineComponent, AppearanceChangeEvent>(OnAppearanceChange);
         SubscribeLocalEvent<TurbineComponent, AnimationCompletedEvent>(OnAnimationCompleted);
+
+        SubscribeLocalEvent<TurbineComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
+        SubscribeLocalEvent<TurbineComponent, ItemSlotEjectAttemptEvent>(OnEjectAttempt);
     }
 
-    protected override void OnRepairTurbineFinished(Entity<TurbineComponent> ent, ref RepairFinishedEvent args)
+    protected override void OnRepairTurbineFinished(EntityUid uid, TurbineComponent comp, ref RepairFinishedEvent args)
     {
         if (args.Cancelled)
             return;
 
-        if (!TryComp(ent.Owner, out TurbineComponent? comp))
-            return;
-
-        _popupSystem.PopupClient(Loc.GetString("turbine-repair", ("target", ent.Owner), ("tool", args.Used!)), ent.Owner, args.User);
+        _popupSystem.PopupClient(Loc.GetString("turbine-repair", ("target", uid), ("tool", args.Used!)), uid, args.User);
     }
 
     private void TurbineExamined(EntityUid uid, TurbineComponent comp, ClientExaminedEvent args) => Spawn(comp.ArrowPrototype, new EntityCoordinates(uid, 0, 0));
 
-    private void OnAnimationCompleted(Entity<TurbineComponent> ent, ref AnimationCompletedEvent args) => PlayAnimation(ent);
+    #region Animation
+    private void OnAnimationCompleted(EntityUid uid, TurbineComponent comp, ref AnimationCompletedEvent args) => PlayAnimation(uid, comp);
 
-    private void OnAppearanceChange(Entity<TurbineComponent> ent, ref AppearanceChangeEvent args) => PlayAnimation(ent);
+    public override void FrameUpdate(float frameTime)
+    {
+        _accumulator += frameTime;
+        if (_accumulator >= _threshold)
+        {
+            AccUpdate();
+            _accumulator = 0;
+        }
+    }
 
-    protected override void AccUpdate()
+    private void AccUpdate()
     {
         var query = EntityQueryEnumerator<TurbineComponent>();
         while (query.MoveNext(out var uid, out var component))
         {
             // Makes sure the anim doesn't get stuck at low RPM
-            if (Math.Abs(component.RPM - component.AnimRPM) > component.BestRPM * 0.1)
-                PlayAnimation((uid, component));
+            PlayAnimation(uid, component);
         }
     }
 
-    private void PlayAnimation(Entity<TurbineComponent> ent)
+    private void PlayAnimation(EntityUid uid, TurbineComponent comp)
     {
-        if (ent.Comp.RPM < 1)
-            return;
-
-        if (!TryComp<SpriteComponent>(ent.Owner, out var sprite) || !_sprite.TryGetLayer((ent.Owner,sprite), TurbineVisualLayers.TurbineSpeed, out var layer, false))
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || !_sprite.TryGetLayer((uid,sprite), TurbineVisualLayers.TurbineSpeed, out var layer, false))
             return;
 
         var state = "speedanim";
-        if (_animationPlayer.HasRunningAnimation(ent.Owner, state))
-            _animationPlayer.Stop(ent.Owner, state);
+        if (comp.RPM < 1)
+        {
+            _animationPlayer.Stop(uid, state);
+            _sprite.LayerSetRsiState(layer, "turbine");
+            comp.AnimRPM = -comp.BestRPM; // Primes it to start the instant it's spinning again
+            return;
+        }
 
-        if (_animationPlayer.HasRunningAnimation(ent.Owner, state)) // Despite what you'd think, this is not always true
+        if (Math.Abs(comp.RPM - comp.AnimRPM) > comp.BestRPM * 0.1) 
+            _animationPlayer.Stop(uid, state); // Current anim is stale, time for a new one
+
+        if (_animationPlayer.HasRunningAnimation(uid, state))
             return;
 
-        ent.Comp.AnimRPM = ent.Comp.RPM;
+        comp.AnimRPM = comp.RPM;
         var layerKey = TurbineVisualLayers.TurbineSpeed;
-        var time = 0.5f * ent.Comp.BestRPM / ent.Comp.RPM;
-        var timestep = time/12;
+        var time = 0.5f * comp.BestRPM / comp.RPM;
+        var timestep = time / 12;
         var animation = new Animation
         {
             Length = TimeSpan.FromSeconds(time),
@@ -104,6 +119,27 @@ public sealed class TurbineSystem : SharedTurbineSystem
             }
         };
         _sprite.LayerSetVisible(layer, true);
-        _animationPlayer.Play(ent.Owner, animation, state);
+        _animationPlayer.Play(uid, animation, state);
+    }
+    #endregion
+
+    private void OnEjectAttempt(EntityUid uid, TurbineComponent comp, ref ItemSlotEjectAttemptEvent args)
+    {
+        if (comp.RPM < 1)
+            return;
+
+        args.Cancelled = true;
+        if (args.User != null)
+            _popupSystem.PopupClient(Loc.GetString("gas-turbine-eject-fail-speed", ("item", args.Item)), args.User.Value, PopupType.Medium);
+    }
+
+    private void OnInsertAttempt(EntityUid uid, TurbineComponent comp, ref ItemSlotInsertAttemptEvent args)
+    {
+        if (comp.RPM < 1)
+            return;
+
+        args.Cancelled = true;
+        if (args.User != null)
+            _popupSystem.PopupClient(Loc.GetString("gas-turbine-insert-fail-speed", ("item", args.Item)), args.User.Value, PopupType.Medium);
     }
 }

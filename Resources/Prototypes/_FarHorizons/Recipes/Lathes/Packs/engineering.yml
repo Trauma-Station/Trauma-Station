@@ -20,6 +20,8 @@
   - SteelReactorHeatExchanger
   - BrassReactorHeatExchanger
   - GlassReactorHeatExchanger
+  - SteelGasTurbineBlade
+  - SteelGasTurbineStator
 
 - type: latheRecipePack
   id: ReactorFuelRods
@@ -56,3 +58,17 @@
   - PlasteelReactorHeatExchanger
   - PlasmaGlassReactorHeatExchanger
   - DiamondReactorHeatExchanger
+
+- type: latheRecipePack
+  id: GasTurbineBlades
+  recipes:
+  - BrassGasTurbineBlade
+  - DiamondGasTurbineBlade
+  - GoldGasTurbineBlade
+  - PlasteelGasTurbineBlade
+ 
+- type: latheRecipePack
+  id: GasTurbineStators
+  recipes:
+  - SilverGasTurbineStator
+  - GoldGasTurbineStator

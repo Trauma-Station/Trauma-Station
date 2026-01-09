@@ -38,6 +38,10 @@ public sealed class TurbineBuiState : BoundUserInterfaceState
     // Health
     public float Health;
     public float HealthMax;
+
+    // Parts
+    public NetEntity? Blade;
+    public NetEntity? Stator;
 }
 
 [Serializable, NetSerializable]

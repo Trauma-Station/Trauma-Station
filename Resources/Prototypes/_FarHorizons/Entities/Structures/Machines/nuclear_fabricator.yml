@@ -38,6 +38,8 @@
     - ReactorControlRods
     - ReactorGasChannels
     - ReactorHeatExchangers
+    - GasTurbineBlades
+    - GasTurbineStators
   # - type: EmagLatheRecipes
   #   emagStaticPacks:
   #   - StarlightSecurityEmagWeaponsStatic

@@ -11,14 +11,28 @@
 				
 				<!--Insert/remove controls-->
 			    <BoxContainer Name="Controls" Orientation="Vertical">
-				    <GridContainer Name="ControlGrid" Columns="3" Margin="2 2 2 2">
-					    <Button Name="XDecrement" Text="-X" Disabled="true"/>
-					    <Label Name="XPos" Text="0" StyleClasses="LabelKeyText" HorizontalExpand="True" HorizontalAlignment="Center"/>
-					    <Button Name="XIncrement" Text="+X"/>
-					    <Button Name="YDecrement" Text="-Y" Disabled="true"/>
-					    <Label Name="YPos" Text="0" StyleClasses="LabelKeyText" HorizontalExpand="True" HorizontalAlignment="Center"/>
-					    <Button Name="YIncrement" Text="+Y"/>
-				    </GridContainer>
+					<GridContainer Name="ControlGrid" Columns="3" Margin="2 2 2 2">
+						<PanelContainer/>
+						<Button Name="YDecrement" Disabled="true">
+							<TextureRect SetSize="16 16" TextureScale="0.5 0.5" Margin="0 2 0 2"
+								TexturePath="/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_part_inserted/arrow_up.png"/>
+						</Button>
+						<PanelContainer/>
+						<Button Name="XDecrement" Disabled="true">
+							<TextureRect SetSize="16 16" TextureScale="0.5 0.5" Margin="0 2 0 2"
+									TexturePath="/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_part_inserted/arrow_left.png"/>
+						</Button>
+						<Label Name="TargetPos" Text="0,0" StyleClasses="LabelKeyText" HorizontalExpand="True" HorizontalAlignment="Center"/>
+						<Button Name="XIncrement">
+							<TextureRect SetSize="16 16" TextureScale="0.5 0.5" Margin="0 2 0 2"
+									TexturePath="/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_part_inserted/arrow_right.png"/>
+						</Button>
+						<PanelContainer/>
+						<Button Name="YIncrement">
+							<TextureRect SetSize="16 16" TextureScale="0.5 0.5" Margin="0 2 0 2"
+									TexturePath="/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_part_inserted/arrow_down.png"/>
+						</Button>
+					</GridContainer>
 					<controls:StripeBack>
 						<Button Name="ItemAction" Text="{Loc comp-nuclear-reactor-ui-insert-button}"/>
 						<Label Name="ItemActionLock" Text="{Loc comp-nuclear-reactor-ui-locked}" Visible="false" HorizontalAlignment="Center" VerticalAlignment="Center" />

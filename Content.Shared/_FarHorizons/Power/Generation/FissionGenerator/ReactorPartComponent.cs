@@ -16,6 +16,8 @@ namespace Content.Shared._FarHorizons.Power.Generation.FissionGenerator;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ReactorPartComponent : Component
 {
+    [Dependency] private IPrototypeManager _proto = default!;
+
     /// <summary>
     /// The entity prototype name this component results from.
     /// </summary>
@@ -113,8 +115,19 @@ public sealed partial class ReactorPartComponent : Component
     [DataField("material")]
     public ProtoId<MaterialPrototype> Material = "Steel";
 
-    [DataField]
-    public MaterialProperties? Properties;
+    public MaterialProperties Properties
+    {
+        get
+        {
+            IoCManager.Resolve(ref _proto);
+            _properties ??= new MaterialProperties(_proto.Index(Material).Properties);
+
+            return _properties;
+        }
+        set => _properties = value;
+    }
+    [DataField("properties")]
+    private MaterialProperties? _properties;
 
     #region Type specific
     /// <summary>
@@ -158,7 +171,7 @@ public sealed partial class ReactorPartComponent : Component
         ThermalMass = source.ThermalMass;
 
         Material = source.Material;
-        Properties = source.Properties != null ? new MaterialProperties(source.Properties) : null;
+        _properties = source._properties;
 
         ConfiguredInsertionLevel = source.ConfiguredInsertionLevel;
         GasThermalCrossSection = source.GasThermalCrossSection;
