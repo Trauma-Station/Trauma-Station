@@ -1,15 +1,7 @@
 using Content.Shared.Atmos;
-using Content.Shared.Damage.Components;
-using Content.Shared.Examine;
-using Content.Shared.Radiation.Components;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Audio;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
-using Content.Shared._FarHorizons.Materials;
 using Content.Shared._FarHorizons.Materials.Systems;
-using Content.Shared.Nutrition;
-using Content.Shared.Damage;
 
 namespace Content.Shared._FarHorizons.Power.Generation.FissionGenerator;
 
@@ -19,10 +11,7 @@ namespace Content.Shared._FarHorizons.Power.Generation.FissionGenerator;
 
 public abstract class SharedReactorPartSystem : EntitySystem
 {
-    [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPointLightSystem _lightSystem = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
     /// <summary>
@@ -44,158 +33,6 @@ public abstract class SharedReactorPartSystem : EntitySystem
     /// The amount of a property resultant from a reaction
     /// </summary>
     private readonly float _product = 0.005f;
-
-    private readonly float _threshold  = 0.5f;
-    private float _accumulator = 0f;
-
-    #region Item Methods
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ReactorPartComponent, ExaminedEvent>(OnExamine);
-        SubscribeLocalEvent<ReactorPartComponent, IngestedEvent>(OnIngest);
-    }
-
-    private void OnExamine(Entity<ReactorPartComponent> ent, ref ExaminedEvent args)
-    {
-        var comp = ent.Comp;
-        if (!args.IsInDetailsRange)
-            return;
-
-        if (comp.Properties == null)
-            SetProperties(comp, out comp.Properties);
-
-        using (args.PushGroup(nameof(ReactorPartComponent)))
-        {
-            switch (comp.Properties.NeutronRadioactivity)
-            {
-                case > 8:
-                    args.PushMarkup(Loc.GetString("reactor-part-nrad-5"));
-                    break;
-                case > 6:
-                    args.PushMarkup(Loc.GetString("reactor-part-nrad-4"));
-                    break;
-                case > 4:
-                    args.PushMarkup(Loc.GetString("reactor-part-nrad-3"));
-                    break;
-                case > 2:
-                    args.PushMarkup(Loc.GetString("reactor-part-nrad-2"));
-                    break;
-                case > 1:
-                    args.PushMarkup(Loc.GetString("reactor-part-nrad-1"));
-                    break;
-                case > 0:
-                    args.PushMarkup(Loc.GetString("reactor-part-nrad-0"));
-                    break;
-            }
-
-            switch (comp.Properties.Radioactivity)
-            {
-                case > 8:
-                    args.PushMarkup(Loc.GetString("reactor-part-rad-5"));
-                    break;
-                case > 6:
-                    args.PushMarkup(Loc.GetString("reactor-part-rad-4"));
-                    break;
-                case > 4:
-                    args.PushMarkup(Loc.GetString("reactor-part-rad-3"));
-                    break;
-                case > 2:
-                    args.PushMarkup(Loc.GetString("reactor-part-rad-2"));
-                    break;
-                case > 1:
-                    args.PushMarkup(Loc.GetString("reactor-part-rad-1"));
-                    break;
-                case > 0:
-                    args.PushMarkup(Loc.GetString("reactor-part-rad-0"));
-                    break;
-            }
-
-            if (comp.Temperature > Atmospherics.T0C + 500)
-                args.PushMarkup(Loc.GetString("reactor-part-burning"));
-            else if (comp.Temperature > Atmospherics.T0C + 80)
-                args.PushMarkup(Loc.GetString("reactor-part-hot"));
-        }
-    }
-
-    private void OnIngest(Entity<ReactorPartComponent> ent, ref IngestedEvent args)
-    {
-        var comp = ent.Comp;
-        if (comp.Properties == null)
-            return;
-
-        var properties = comp.Properties;
-
-        if (!_entityManager.TryGetComponent<DamageableComponent>(args.Target, out var damageable) || damageable.Damage.DamageDict == null)
-            return;
-
-        var dict = damageable.Damage.DamageDict;
-
-        var dmgKey = "Radiation";
-        var dmg = properties.NeutronRadioactivity * 20 + properties.Radioactivity * 10 + properties.FissileIsotopes * 5;
-
-        if (!dict.TryAdd(dmgKey, dmg))
-        {
-            var prev = dict[dmgKey];
-            dict.Remove(dmgKey);
-            dict.Add(dmgKey, prev + dmg);
-        }
-    }
-
-    public override void Update(float frameTime)
-    {
-        _accumulator += frameTime;
-        if (_accumulator > _threshold)
-        {
-            AccUpdate();
-            _accumulator = 0;
-        }
-    }
-
-    protected virtual void AccUpdate()
-    {
-        var query = EntityQueryEnumerator<ReactorPartComponent>();
-        while (query.MoveNext(out var uid, out var component))
-        {
-            if (component.Properties == null)
-                SetProperties(component, out component.Properties);
-
-            if (!_entityManager.HasComponent<RadiationSourceComponent>(uid))
-            {
-                var radcomp = EnsureComp<RadiationSourceComponent>(uid);
-                radcomp.Intensity = (component.Properties.Radioactivity * 0.1f) + (component.Properties.NeutronRadioactivity * 0.15f) + (component.Properties.FissileIsotopes * 0.125f);
-            }
-
-            if (component.Properties.NeutronRadioactivity > 0 && !_lightSystem.TryGetLight(uid, out _))
-            {
-                var lightcomp = _lightSystem.EnsureLight(uid);
-                _lightSystem.SetEnergy(uid, component.Properties.NeutronRadioactivity, lightcomp);
-                _lightSystem.SetColor(uid, Color.FromHex("#22bbff"), lightcomp);
-                _lightSystem.SetRadius(uid, 1.2f, lightcomp);
-            }
-
-            var burncomp = EnsureComp<DamageOnInteractComponent>(uid);
-
-            if (component.Temperature == Atmospherics.T20C)
-            {
-                burncomp.IsDamageActive = false;
-                continue;
-            }
-
-            if (Math.Abs(component.Temperature - Atmospherics.T20C)>0.1)
-                component.Temperature -= (component.Temperature - Atmospherics.T20C) * 0.01f;
-            else
-                component.Temperature = Atmospherics.T20C;
-
-            var damage = Math.Max((component.Temperature - Atmospherics.T0C - 80) / 20, 0);
-            burncomp.IgnoreResistances = component.Temperature > Atmospherics.T0C + 500;
-            burncomp.IsDamageActive = true;
-            burncomp.Damage = new() { DamageDict = new() { { "Heat", damage } } };
-            Dirty(uid, burncomp);
-        }
-    }
-    #endregion
 
     #region Methods
     /// <summary>
@@ -230,17 +67,11 @@ public abstract class SharedReactorPartSystem : EntitySystem
     /// <exception cref="Exception">Calculations resulted in a sub-zero value</exception>
     public void ProcessHeat(ReactorPartComponent reactorPart, Entity<NuclearReactorComponent> reactorEnt, List<ReactorPartComponent?> AdjacentComponents, SharedNuclearReactorSystem reactorSystem)
     {
-        if (reactorPart.Properties == null)
-            SetProperties(reactorPart, out reactorPart.Properties);
-
         // Intercomponent calculation
         foreach (var RC in AdjacentComponents)
         {
             if (RC == null)
                 continue;
-
-            if (RC.Properties == null)
-                SetProperties(RC, out RC.Properties);
 
             var DeltaT = reactorPart.Temperature - RC.Temperature;
             var k = MaterialSystem.CalculateHeatTransferCoefficient(reactorPart.Properties, RC.Properties);
@@ -290,9 +121,6 @@ public abstract class SharedReactorPartSystem : EntitySystem
     {
         var preCalcTemp = reactorPart.Temperature;
         var flux = new List<ReactorNeutron>(neutrons);
-
-        if (reactorPart.Properties == null)
-            SetProperties(reactorPart, out reactorPart.Properties);
 
         foreach (var neutron in flux)
         {
@@ -388,8 +216,6 @@ public abstract class SharedReactorPartSystem : EntitySystem
     /// <param name="neutrons">List of neutrons to be processed</param>
     /// <returns>Post-processing list of neutrons</returns>
     public virtual List<ReactorNeutron> ProcessNeutronsGas(ReactorPartComponent reactorPart, List<ReactorNeutron> neutrons) => neutrons;
-
-    public void SetProperties(ReactorPartComponent reactorPart, out MaterialProperties properties) => properties = new MaterialProperties(_proto.Index(reactorPart.Material).Properties);
 
     /// <summary>
     /// Returns true according to a percent chance.

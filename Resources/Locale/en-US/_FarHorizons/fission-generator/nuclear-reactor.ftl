@@ -34,6 +34,7 @@ comp-nuclear-reactor-ui-view-change = Change View
 comp-nuclear-reactor-ui-view-temp = Temperature View
 comp-nuclear-reactor-ui-view-neutron = Neutron View
 comp-nuclear-reactor-ui-view-target = Target View
+comp-nuclear-reactor-ui-view-fuel = Fuel View
 
 comp-nuclear-reactor-ui-status-panel = Reactor Status
 comp-nuclear-reactor-ui-reactor-temp = Temperature

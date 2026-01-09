@@ -82,7 +82,27 @@
         layer:
         - MachineLayer
         - HighImpassable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralReactorCasing
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          NuclearReactorMelted:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
   - type: Anchorable
+    delay: 10
   - type: AtmosDevice
   - type: AtmosMonitoringConsoleDevice # TODO: this doesn't work?
     navMapBlip: Thermoregulator
@@ -169,17 +189,37 @@
     prefab: ReactorPrefab7x7Meltdown
 
 - type: entity
-  id: NuclearReactorMelted
-  parent: NuclearReactorEmpty
+  id: NuclearReactorMelted # This is more of a decoration than anything else
+  parent: BaseStructure
   suffix: Melted
-  description: A nuclear reactor vessel, long since melted down. It still glows with residual heat and radiation.
+  name: nuclear reactor
+  description: A broken nuclear reactor vessel. It glows with heat and radiation.
   components:
   - type: Sprite
+    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/nuclear_reactor.rsi
     layers:
     - state: reactorbroken
-  - type: NuclearReactor
-    melted: true
-    meltdownRadiation: 3.5
+  - type: Rotatable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-2.5,-2.5,2.5,2"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - HighImpassable
+  - type: RadiationSource
+    intensity: 7
+  - type: InteractionOutline
+  - type: PointLight
+    energy: 0.1
+    falloff: 2
+    radius: 3.5
+    color: "#FFAAAAFF"
 
 # Small crew nuclear reactors
 - type: entity
@@ -223,17 +263,17 @@
 
 - type: entity
   id: NuclearReactorSmallMelted
-  parent: NuclearReactorSmall
+  parent: NuclearReactorMelted
   suffix: Melted
-  description: A nuclear reactor vessel, long since melted down. It still glows with residual heat and radiation.
+  name: small nuclear reactor
+  description: A broken nuclear reactor vessel. It glows with heat and radiation.
   components:
   - type: Sprite
-    layers:
-    - state: reactorbroken
-  - type: NuclearReactor
-    prefab: ReactorPrefabEmpty
-    melted: true
-    meltdownRadiation: 2.5
+    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/small_nuclear_reactor.rsi
+  - type: RadiationSource
+    intensity: 5
+  - type: PointLight
+    radius: 2.5
 
 # Salvage nuclear reactors
 - type: entity
@@ -265,16 +305,14 @@
 
 - type: entity
   id: NuclearReactorMeltedSalvage
-  parent: NuclearReactorEmpty
+  parent: NuclearReactorMelted
   suffix: "Melted, Salvage"
   description: A nuclear reactor vessel, long since melted down. It still glows with residual heat and radiation.
   components:
-  - type: Sprite
-    layers:
-    - state: reactorbroken
-  - type: NuclearReactor
-    melted: true
-    meltdownRadiation: 3.5
+  - type: RadiationSource
+    intensity: 3.5
+  - type: PointLight
+    energy: 0.025
 
 # Small salvage nuclear reactors
 - type: entity
@@ -319,17 +357,14 @@
 
 - type: entity
   id: NuclearReactorSmallMeltedSalvage
-  parent: NuclearReactorSmall
+  parent: NuclearReactorSmallMelted
   suffix: "Melted, Salvage"
   description: A nuclear reactor vessel, long since melted down. It still glows with residual heat and radiation.
   components:
-  - type: Sprite
-    layers:
-    - state: reactorbroken
-  - type: NuclearReactor
-    prefab: ReactorPrefabEmpty
-    melted: true
-    meltdownRadiation: 2.5
+  - type: RadiationSource
+    intensity: 2.5
+  - type: PointLight
+    energy: 0.025
 
 # Nuclear debris resultant from a meltdown
 - type: entity

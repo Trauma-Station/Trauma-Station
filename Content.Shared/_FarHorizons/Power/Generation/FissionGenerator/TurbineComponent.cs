@@ -31,7 +31,7 @@ public sealed partial class TurbineComponent : Component
     /// Maximum setting of stator load
     /// </summary>
     [DataField]
-    public float StatorLoadMax = 500000;
+    public float StatorLoadMax = 500000; // TODO: smite this out of existance
 
     /// <summary>
     /// Current RPM of turbine
@@ -123,13 +123,13 @@ public sealed partial class TurbineComponent : Component
     public bool Overspeed = false;
 
     /// <summary>
-    /// Flag for gas tempurature being > MaxTemp - 500
+    /// Flag for gas temperature being > MaxTemp - 500
     /// </summary>
     [ViewVariables]
     public bool Overtemp = false;
 
     /// <summary>
-    /// Flag for gas tempurature being < MinTemp
+    /// Flag for gas temperature being < MinTemp
     /// </summary>
     [ViewVariables]
     public bool Undertemp = false;
@@ -162,6 +162,18 @@ public sealed partial class TurbineComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<ToolQualityPrototype> RepairTool = "Welding";
+
+    /// <summary>
+    /// The blade currently installed in the turbine
+    /// </summary>
+    [ViewVariables, AutoNetworkedField]
+    public EntityUid? CurrentBlade;
+
+    /// <summary>
+    /// The stator currently installed in the turbine
+    /// </summary>
+    [ViewVariables, AutoNetworkedField]
+    public EntityUid? CurrentStator;
 
     #region Pipe Connections
     /// <summary>

@@ -49,7 +49,11 @@
         - MachineMask
         layer:
         - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
   - type: Anchorable
+    delay: 10
   - type: NodeContainer
     examinable: true
     nodes:
@@ -70,6 +74,22 @@
   - type: Electrified
     enabled: false
     requirePower: false
+  - type: ContainerContainer
+    containers:
+      blade_slot: !type:ContainerSlot {}
+      stator_slot: !type:ContainerSlot {}
+  - type: ItemSlots
+    slots:
+      blade_slot:
+        startingItem: SteelGasTurbineBlade
+        whitelist:
+          components:
+            - GasTurbineBlade
+      stator_slot:
+        startingItem: SteelGasTurbineStator
+        whitelist:
+          components:
+            - GasTurbineStator
   - type: Turbine
   - type: DeviceNetwork
     deviceNetId: Wireless
@@ -106,6 +126,7 @@
   id: TurbineSmall
   parent: Turbine
   name: small gas turbine
+  description: A small turbine used for generating power using hot gas.
   components:
   - type: Sprite
     sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/small_turbine.rsi
@@ -115,7 +136,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-1.5,-1.5,0.5,0.5"
+          bounds: "-1.5,-1.5,1.5,0.5"
         density: 190
         mask:
         - MachineMask

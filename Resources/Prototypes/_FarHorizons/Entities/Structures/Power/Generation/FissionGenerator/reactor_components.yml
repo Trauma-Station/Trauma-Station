@@ -53,6 +53,9 @@
         canReact: false
   - type: StealTarget
     stealGroup: ReactorFuelRodSteal
+  - type: SentienceTarget
+    flavorKind: station-event-random-sentience-flavor-inanimate
+    weight: 0.2
 
 - type: entity
   id: CerenkiteReactorFuelRod
@@ -77,6 +80,17 @@
   components:
   - type: ReactorPart
     material: Plutonium
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: false
+    name: ghost-role-information-plutonium-rod-name
+    description: ghost-role-information-plutonium-rod-description
+    rules: ghost-role-information-plutonium-rod-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgentHarmless
+  - type: SentienceTarget
+    weight: 2
 
 - type: entity
   id: BananiumReactorFuelRod

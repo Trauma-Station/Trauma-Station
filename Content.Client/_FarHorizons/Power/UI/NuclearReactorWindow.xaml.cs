@@ -1,3 +1,4 @@
+using System.IO;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._FarHorizons.Power.Generation.FissionGenerator;
 using Content.Shared.Atmos;
@@ -37,7 +38,8 @@ public sealed partial class NuclearReactorWindow : FancyWindow
     {
         Temperature = 1 << 0,
         Neutron = 1 << 1,
-        Target = 1 << 2
+        Target = 1 << 2,
+        Fuel = 1 << 3
     }
 
     private byte _temperatureMode = 1 << 0;
@@ -216,13 +218,17 @@ public sealed partial class NuclearReactorWindow : FancyWindow
                         box.BackgroundColor = y == _targetX && x == _targetY ? Color.Yellow : Color.Gray;
                         ViewLabel.Text = Loc.GetString("comp-nuclear-reactor-ui-view-target");
                         break;
+                    case (byte)DisplayModes.Fuel:
+                        box.BackgroundColor = Color.InterpolateBetween(Color.Gray, Color.FromHex("#22bbff"), exists && _data[vect].SpentFuel > 0 ? (float)GetFuelLevel(_data[vect]) : 0);
+                        ViewLabel.Text = Loc.GetString("comp-nuclear-reactor-ui-view-fuel");
+                        break;
                 }
 
                 var icon = exists ? _data[vect].IconName : "base";
                 _reactorRect[vect].TexturePath = "/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_part_inserted/" +  icon + ".png";
                 
                 _reactorButton[vect].ToolTip = exists && _data[vect].SpentFuel > 0
-                    ? "Fuel Level: " + (int)Math.Round((1 - (_data[vect].SpentFuel / (_data[vect].SpentFuel + (_data[vect].Radioactivity * 0.5) + (_data[vect].NeutronRadioactivity * 0.25)))) * 100) + "%"
+                    ? "Fuel Level: " + (int)Math.Round(GetFuelLevel(_data[vect]) * 100) + "%"
                     : "";
             }
         }
@@ -338,8 +344,7 @@ public sealed partial class NuclearReactorWindow : FancyWindow
         _targetX = Math.Clamp(x, 0, _gridWidth - 1);
         _targetY = Math.Clamp(y, 0, _gridHeight - 1);
 
-        XPos.Text = _targetX.ToString();
-        YPos.Text = _targetY.ToString();
+        TargetPos.Text = _targetX.ToString() +"," + _targetY.ToString();
 
         XIncrement.Disabled = _targetX >= _gridWidth - 1;
         XDecrement.Disabled = _targetX <= 0;
@@ -350,6 +355,8 @@ public sealed partial class NuclearReactorWindow : FancyWindow
     public void SetItemName(string? itemName) => ItemName.Text = itemName ?? "empty";
 
     private static string FormatPower(float power) => Loc.GetString("comp-nuclear-reactor-ui-therm-format", ("power", power));
+
+    private static double GetFuelLevel(ReactorSlotBUIData data) => Math.Max(1 - (data.SpentFuel / (data.SpentFuel + (data.Radioactivity * 0.5) + (data.NeutronRadioactivity * 0.25))), 0);
 
     private void AdjustControlRods(float amount) => ControlRodModify?.Invoke(amount);
 }
