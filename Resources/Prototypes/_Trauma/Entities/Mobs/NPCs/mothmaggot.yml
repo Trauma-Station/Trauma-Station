@@ -33,7 +33,6 @@
   components:
   - type: Action
     useDelay: 5
-    itemActionStyle: BigItem
   - type: TargetAction
     range: 1.1
   - type: EntityTargetAction
