@@ -63,8 +63,17 @@
         reagents:
           - ReagentId: Nicotine
             Quantity: 15
-  - type: Extractable # TraumaStation
+  # <Trauma>
+  - type: Extractable
     grindableSolutionName: smokable
+  - type: Cautery
+    speed: 0.4
+  - type: SurgeryTool
+    startSound:
+      path: /Audio/Effects/cig_light.ogg
+    endSound:
+      path: /Audio/Effects/cig_snuff.ogg
+  # </Trauma>
 
 - type: entity
   parent: BaseSmokable
