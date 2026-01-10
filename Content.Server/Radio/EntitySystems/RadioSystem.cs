@@ -193,6 +193,7 @@ public sealed partial class RadioSystem : EntitySystem
         var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
         RaiseLocalEvent(ref sendAttemptEv);
         RaiseLocalEvent(radioSource, ref sendAttemptEv);
+        RaiseLocalEvent(messageSource, ref sendAttemptEv); // Trauma
         var canSend = !sendAttemptEv.Cancelled;
 
         var sourceMapId = Transform(radioSource).MapID;
