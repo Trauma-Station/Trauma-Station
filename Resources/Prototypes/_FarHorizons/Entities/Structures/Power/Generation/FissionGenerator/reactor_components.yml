@@ -89,6 +89,7 @@
     rules: ghost-role-information-plutonium-rod-rules
     mindRoles:
     - MindRoleGhostRoleFreeAgentHarmless
+  - type: GhostTakeoverAvailable
   - type: SentienceTarget
     weight: 2
 
