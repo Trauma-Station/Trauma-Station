@@ -6,7 +6,6 @@
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Xenos/facehugger.rsi
-    #<trauma>
     layers:
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: facehugger
@@ -32,7 +31,6 @@
   - type: Clothing
     sprite: _Trauma/Mobs/Xenos/clothing/facehuggermask.rsi
     slots: [mask]
-    #</trauma>
   - type: IngestionBlocker
   - type: Blindfold
   - type: AddAccentClothing
@@ -96,6 +94,9 @@
         Slash: 5 # Damage dealt when blocked by a breathable mask
     maskBlockSound:
       collection: MetalThud # Sound collection for when the facehugger hits the mask - Goobstation end
+  - type: Tag
+    tags:
+    - XenomorphItem
   - type: StepTrigger
     intersectRatio: 0.2
     requiredTriggeredSpeed: 0.0
