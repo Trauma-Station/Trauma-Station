@@ -41,3 +41,12 @@ entity-effect-guidebook-infect-disease = { $chance ->
     [1] infects
     *[other] infect
 } the target with {$disease}
+
+entity-effect-guidebook-add-marking = { $chance ->
+    [1] adds
+    *[other] add
+} {$marking} to the target
+entity-effect-guidebook-remove-marking = { $chance ->
+    [1] removes
+    *[other] remove
+} {$marking} to the target

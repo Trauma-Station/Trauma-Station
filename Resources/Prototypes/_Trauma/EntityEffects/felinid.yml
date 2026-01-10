@@ -1,0 +1,56 @@
+- type: entityEffect
+  id: MakeFelinid
+  guidebookText: entity-effect-guidebook-make-felinid
+  conditions:
+  - !type:NestedCondition # for debug effect stick
+    proto: IsHumanoid
+  - !type:HasMarking
+    category: Special
+    marking: CatEars
+    inverted: true
+  effects:
+  - !type:AddMarking
+    marking: CatEars
+    forced: true
+  - !type:AddMarking
+    marking: CatTail
+    forced: true
+  - !type:RelayOrgans
+    whitelist:
+      components:
+      - Metabolizer
+    effects:
+    - !type:AddMetabolizerType
+      type: Animal
+  - !type:PopupMessage
+    type: Pvs
+    visualType: LargeCaution
+    messages:
+    - entity-effect-popup-make-felinid
+
+- type: entityEffect
+  id: RevertFelinid
+  guidebookText: entity-effect-guidebook-revert-felinid
+  conditions:
+  - !type:NestedCondition # for debug effect stick
+    proto: IsHumanoid
+  - !type:HasMarking
+    category: Special
+    marking: CatEars
+  effects:
+  - !type:RemoveMarking
+    marking: CatEars
+  - !type:RemoveMarking
+    marking: CatTail
+  - !type:RelayOrgans
+    whitelist:
+      components:
+      - Metabolizer
+    effects:
+    - !type:RemoveMetabolizerType
+      type: Animal
+  - !type:PopupMessage
+    type: Pvs
+    visualType: MediumCaution
+    messages:
+    - entity-effect-popup-revert-felinid
