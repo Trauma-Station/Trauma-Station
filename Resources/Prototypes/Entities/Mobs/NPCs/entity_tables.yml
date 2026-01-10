@@ -2,7 +2,7 @@
   id: SmallCritterEntityTable
   table: !type:GroupSelector
     children:
-    - id: MobMothroach
+    - id: MobMothmaggot # Trauma - was MobMothroach
     - id: MobCockroach
     - !type:GroupSelector
       children:

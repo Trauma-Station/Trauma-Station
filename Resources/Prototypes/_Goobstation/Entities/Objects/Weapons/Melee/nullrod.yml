@@ -157,7 +157,7 @@
     sprite: _ShitChap/Objects/Weapons/Nullrod/rosary.rsi
   - type: Clothing
     slots:
-    - Belt
+    - NECK # Trauma - Rosary wearable on neck
   - type: Nullrod
     DamageOnUntrainedUse:
       types:
@@ -241,7 +241,7 @@
         Slash: 20
     UntrainedUseString: nullrod-arrythmicknife-untrained-usage-popup
   - type: Item
-    size: Huge
+    size: Normal # Trauma - Reduce arrythmic knife size
     sprite: _ShitChap/Objects/Weapons/Nullrod/arrythmic.rsi
   - type: Sprite
     sprite: _ShitChap/Objects/Weapons/Nullrod/arrythmic.rsi
@@ -302,6 +302,11 @@
   - type: Tag
     tags:
     - MonkStaff
+  - type: Clothing # Trauma - Monkstaff suitstorage slot
+    sprite: _ShitChap/Objects/Weapons/Nullrod/monkstaff.rsi
+    quickEquip: false
+    slots:
+    - SUITSTORAGE
 
 - type: entity
   name: Atheist's Fedora
@@ -416,6 +421,12 @@
   - type: Damageable
     damageContainer: Shield
   - type: MultiHandedItem
+  - type: DivineIntervention # Trauma - Bulwark blocks magic from bagslot
+    validSpellDenialSlots:
+    - BACK
+  - type: Reflect
+    slotFlags:
+    - BACK
 
 - type: entity
   name: Honkmother's Maw
@@ -734,7 +745,7 @@
     slots:
     - suitStorage
     - back
-    - belt
+#    - belt # Trauma - Nullrod balance (huge spear doesn't fit in your belt)
   - type: MeleeWeapon
     range: 2.2 # Goob
     attackRate: 0.8 # Goob

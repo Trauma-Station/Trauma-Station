@@ -1,0 +1,15 @@
+## PARITY
+
+- type: scrollPrayer
+  id: AncientBook
+  verb: GIVE
+  subjects: [ "ANCIENT BOOK" ]
+  items:
+    id: BibleNecronomicon
+
+- type: scrollPrayer
+  id: EmptyScroll
+  verb: GIVE
+  subjects: [ "EMPTY SCROLL" ]
+  items:
+    id: EmptyScroll # back to square 1

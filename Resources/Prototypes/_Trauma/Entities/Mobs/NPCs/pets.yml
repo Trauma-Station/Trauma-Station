@@ -1,0 +1,5 @@
+- type: entity
+  parent: MobPig
+  id: MobPigPinecone
+  name: pinecone
+  description: Pinecone pig. Oink!

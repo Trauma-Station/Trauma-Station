@@ -26,7 +26,12 @@ internal struct CustomRichTextEntry
         typeof(BulletTag),
         typeof(ColorTag),
         typeof(HeadingTag),
-        typeof(ItalicTag)
+        typeof(ItalicTag),
+        typeof(ButtonTag),
+        typeof(IconTag),
+        typeof(EntityTextureTag),
+        typeof(RadioIconTag),
+        typeof(TextureTag),
     ];
 
     private readonly Color _defaultColor;
@@ -424,7 +429,14 @@ internal struct CustomRichTextEntry
             return tag.TextBefore(node);
         }
 
-        tag.PopDrawContext(node, context);
+        try
+        {
+            tag.PopDrawContext(node, context);
+        }
+        catch
+        {
+            throw new Exception($"Bad closing tag for {node.Name}");
+        }
         return tag.TextAfter(node);
     }
 

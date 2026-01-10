@@ -1,0 +1,7 @@
+- type: polymorph
+  id: MothroachPermanent
+  configuration:
+    entity: MobMothroach
+    forced: true
+    polymorphSound:
+      path: /Audio/Voice/Moth/moth_chitter.ogg

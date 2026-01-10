@@ -553,7 +553,7 @@
       movement:
         state: mothroach
   - type: Item
-    size: Normal
+    size: Small # Trauma - was Normal, let it fit in chest cavity
   - type: Clothing
     quickEquip: false
     sprite: Mobs/Animals/mothroach/mothroach.rsi

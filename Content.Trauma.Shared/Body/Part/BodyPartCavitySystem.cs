@@ -60,6 +60,8 @@ public sealed class BodyPartCavitySystem : EntitySystem
 
         // this will give a mob inserted into someones chest an action to burst out
         _insideBodyPart.InsertedIntoPart(args.Entity, ent);
+        var ev = new InsertedIntoCavityEvent(ent);
+        RaiseLocalEvent(args.Entity, ref ev);
     }
 
     private void OnRemoved(Entity<BodyPartCavityComponent> ent, ref EntRemovedFromContainerMessage args)
@@ -69,5 +71,19 @@ public sealed class BodyPartCavitySystem : EntitySystem
 
         // this will remove the chest burst action
         _insideBodyPart.RemovedFromPart(args.Entity);
+        var ev = new RemovedFromCavityEvent(ent);
+        RaiseLocalEvent(args.Entity, ref ev);
     }
 }
+
+/// <summary>
+/// Raised on the item after it is inserted into a body part cavity.
+/// </summary>
+[ByRefEvent]
+public record struct InsertedIntoCavityEvent(EntityUid Part);
+
+/// <summary>
+/// Raised on the item after it is removed from a body part cavity.
+/// </summary>
+[ByRefEvent]
+public record struct RemovedFromCavityEvent(EntityUid Part);

@@ -1,0 +1,21 @@
+- type: entity
+  parent: [ Paper, BaseMagicalContraband ]
+  id: EmptyScroll
+  name: empty scroll
+  description: Who would keep such a useless thing, it doesn't even have anything written on it!
+  suffix: DO NOT MAP
+  categories: [ DoNotMap ]
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      sprite: _Trauma/Objects/Specific/empty_scroll.rsi
+    - state: paper_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      visible: false
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+  - type: Item
+    size: Small
+  - type: EmptyScroll

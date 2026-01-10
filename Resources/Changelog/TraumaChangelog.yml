@@ -1116,3 +1116,41 @@ Entries:
       message: Removed stinky nyano mail.
   id: 132
   time: '2026-01-08T16:46:47.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: >-
+        Added mothmaggots which can now burrow into peoples' chests to mature
+        into mothroaches.
+  id: 133
+  time: '2026-01-09T10:13:29.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Tweak
+      message: Changed the lights back to LightTube instead of LED's
+    - type: Tweak
+      message: Changed the plating texture
+  id: 134
+  time: '2026-01-09T15:39:41.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: Rosary can now be worn as a necklace
+    - type: Tweak
+      message: Arrythmic knife is smaller
+    - type: Tweak
+      message: Monkstaff can be stored in suitstorage slot.
+    - type: Tweak
+      message: 'Bulwark can now reflect magic when in bagslot. '
+    - type: Fix
+      message: Casul and Jackal pistols reverted to hellsing themed sprites.
+    - type: Remove
+      message: Ratvar spear can no longer be stored in beltslot.
+  id: 135
+  time: '2026-01-09T16:02:15.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed russian shitcode examining.
+  id: 136
+  time: '2026-01-09T20:15:52.0000000+00:00'
