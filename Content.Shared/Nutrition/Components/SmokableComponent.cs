@@ -20,6 +20,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.Nutrition.Components
 {
     [RegisterComponent, NetworkedComponent]
+    [AutoGenerateComponentState] // Trauma
     public sealed partial class SmokableComponent : Component
     {
         [DataField("solution")]
@@ -31,7 +32,7 @@ namespace Content.Shared.Nutrition.Components
         [DataField("inhaleAmount"), ViewVariables(VVAccess.ReadWrite)]
         public FixedPoint2 InhaleAmount { get; private set; } = FixedPoint2.New(0.05f);
 
-        [DataField("state")]
+        [DataField, AutoNetworkedField] // Trauma - network ts
         public SmokableState State { get; set; } = SmokableState.Unlit;
 
         [DataField("exposeTemperature"), ViewVariables(VVAccess.ReadWrite)]
