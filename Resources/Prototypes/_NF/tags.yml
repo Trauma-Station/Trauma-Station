@@ -34,9 +34,6 @@
   id: LavaMercenary
 
 - type: Tag
-  id: Mail
-
-- type: Tag
   id: MailCapsule
 
 - type: Tag

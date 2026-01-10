@@ -73,8 +73,7 @@ public sealed class UpgradeKitSystem : EntitySystem
 
         // do the upgrading now
         EntityManager.AddComponents(target, ent.Comp.Components);
-        if (_net.IsServer)
-            QueueDel(ent);
+        PredictedQueueDel(ent);
     }
 
     /// <summary>

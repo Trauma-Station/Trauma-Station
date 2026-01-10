@@ -1,0 +1,162 @@
+## PARITY
+
+- type: scrollPrayer
+  id: Counter
+  verb: TEACH
+  subjects: [ "COUNTER" ]
+  items:
+    id: TableCounterMetal
+
+- type: scrollPrayer
+  id: CounterMagic
+  verb: TEACH
+  subjects: [ "COUNTER-MAGIC", "COUNTER MAGIC" ]
+  items:
+    id: CosmicTable
+
+- type: scrollPrayer
+  id: Dash
+  verb: TEACH
+  subjects: [ "DASH" ]
+  effects:
+  - !type:AddComponents
+    components:
+    - type: DashAction
+      actionProto: ActionDashMoth
+
+- type: scrollPrayer
+  id: Devour
+  verb: TEACH
+  subjects: [ "DEVOUR" ]
+  effects:
+  - !type:AddComponents
+    components:
+    - type: Devourer # vore
+      foodPreferenceWhitelist:
+        components:
+        - HumanoidAppearance
+      stomachStorageWhitelist:
+        components:
+        - HumanoidAppearance
+      chemical: Ichor
+      healRate: 7.5
+      whitelist:
+        components:
+        - HumanoidAppearance # can only eat people/monkey
+
+- type: scrollPrayer
+  id: Lockpicking
+  verb: TEACH
+  subjects: [ "LOCKPICKING" ]
+  items:
+    id: Emag
+
+- type: scrollPrayer
+  id: LegSweep
+  verb: TEACH
+  subjects: [ "LEG SWEEP" ]
+  effects:
+  - !type:AddComponents
+    components:
+    - type: KravMaga # it has leg sweep
+
+- type: scrollPrayer
+  id: Steal
+  verb: TEACH
+  subjects: [ "STEAL" ]
+  effects:
+  - !type:AddComponents
+    components:
+    - type: Thieving
+      stealthy: true
+
+## NON PARITY
+
+- type: scrollPrayer
+  id: AllAccess
+  verb: GIVE
+  subjects: [ "ALL ACCESS", "AA", "FREE AA" ]
+  items: !type:GroupSelector
+    children:
+    # FREE AA!!
+    - id: CaptainIDCard
+      weight: 0.6
+    # DIY AA
+    - !type:AllSelector
+      weight: 0.4
+      children:
+      - id: BoxID
+        amount: 4
+      - id: IDComputerCircuitboard
+      - id: KitchenMicrowave # fuck it you get a whole ass microwave
+
+- type: scrollPrayer
+  id: KillSign
+  verb: GIVE
+  subjects: [ "KILLSIGN" ]
+  effects:
+  - !type:AddComponents
+    components:
+    - type: KillSign
+
+- type: scrollPrayer
+  id: Traitor
+  verb: GIVE
+  subjects: [ "ONTAG", "ANTAG", "65" ]
+  effects:
+  - !type:MakeTraitor
+    probability: 0.65
+    rule: TraitorReinforcement # no uplink chud
+
+- type: scrollPrayer
+  id: DAGD
+  verb: GIVE
+  subjects: [ "DAGD" ]
+  effects:
+  - !type:AddObjective
+    objective: DieObjective
+
+- type: scrollPrayer
+  id: Mime
+  verb: TEACH
+  subjects: [ "SILENCE" ]
+  effects:
+  - !type:AddComponents
+    components:
+    - type: MimePowers
+      preventWriting: true
+    - type: FrenchAccent
+
+# I did infact choose to be quiet
+- type: scrollPrayer
+  id: VocalParasites
+  verb: GIVE
+  subjects: [ "SILENCE" ]
+  effects:
+  - !type:InfectDisease
+    disease: DiseaseVocalParasitesTauCetiBasic
+
+- type: scrollPrayer
+  id: PhaseStep
+  verb: TEACH
+  subjects: [ "PHASE STEP", "PHASE" ]
+  items:
+    id: ExperimentalSyndicateTeleporter
+
+- type: scrollPrayer
+  id: Jaunt
+  verb: TEACH
+  subjects: [ "JAUNT" ]
+  effects:
+  - !type:AddComponents
+    components:
+    - type: BloodCrawl
+      blood:
+      - Blood
+      - AmmoniaBlood
+      - InsectBlood
+      - CopperBlood
+      - ZombieBlood
+      - AlienBlood
+      - BlackBlood
+      - BloodChangeling

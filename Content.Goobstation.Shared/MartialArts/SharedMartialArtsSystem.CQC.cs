@@ -88,7 +88,7 @@ public partial class SharedMartialArtsSystem
         if (!TryGrantMartialArt(ent, ent.Comp))
             return;
 
-        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var knowledge))
+        if (ent.Comp.IsBlocked && TryComp<MartialArtsKnowledgeComponent>(ent, out var knowledge))
             knowledge.Blocked = true;
     }
 

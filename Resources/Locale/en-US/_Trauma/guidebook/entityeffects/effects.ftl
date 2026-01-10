@@ -32,6 +32,16 @@ entity-effect-guidebook-add-to-chemicals = { $chance ->
     *[-1] from
 } the solution
 
+entity-effect-guidebook-make-traitor = { $chance ->
+    [1] makes
+    *[other] make
+} the target a traitor
+
+entity-effect-guidebook-infect-disease = { $chance ->
+    [1] infects
+    *[other] infect
+} the target with {$disease}
+
 entity-effect-guidebook-speak = Causes involuntary speech
 
 entity-effect-guidebook-scale-entity = Scales the target's size by ({$x}, {y})

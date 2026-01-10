@@ -48,7 +48,7 @@
 - type: entity
   parent: ClothingHeadEnvirohelmBase
   id: ClothingHeadEnvirohelmCargo
-  name: logistics envirosuit helmet
+  name: cargo envirosuit helmet
   description: A Plasmaman envirohelmet designed for cargo technicians.
   components:
   - type: Sprite
@@ -891,8 +891,8 @@
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
   id: ClothingHeadEnvirohelmQM
-  name: logistics officer's envirosuit helmet
-  description: A special containment helmet designed for the Logistics Officer.
+  name: quartermaster's envirosuit helmet
+  description: A special containment helmet designed for the Quartermaster.
   components:
   - type: Sprite
     layers:

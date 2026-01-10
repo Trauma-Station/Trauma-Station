@@ -1,4 +1,42 @@
 - type: entity
   parent: MobMothroach
   id: MobMothmaggot
-  # TODO: actually port mothmaggot
+  name: moth maggot
+  description: This is the adorable by-product of multiple attempts at genetically mixing mothpeople with maggots.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Animals/mothmaggot.rsi
+  - type: Item
+    size: Small
+  - type: EnterBodyPart
+    part: Chest
+  - type: TriggerInsideBodyPart
+    keyOut: mature
+    delay: 40
+  - type: EntityEffectOnTrigger
+    keysIn:
+    - mature
+    effects:
+    - !type:PopupMessage
+      type: Pvs
+      method: PopupCoordinates
+      messages:
+      - entity-effect-popup-mothmaggot-matured
+    - !type:Polymorph
+      prototype: MothroachPermanent
+
+- type: entity
+  parent: BaseAction
+  id: ActionEnterBodyPart
+  name: Burrow into host
+  description: Crawl into someone's mouth to burrow into their chest cavity. After 40 seconds you will mature into a beautiful mothroach!
+  components:
+  - type: Action
+    useDelay: 5
+  - type: TargetAction
+    range: 1.1
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - HumanoidAppearance
+    event: !type:EnterBodyPartActionEvent

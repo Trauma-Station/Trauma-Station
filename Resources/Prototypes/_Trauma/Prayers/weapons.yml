@@ -1,0 +1,93 @@
+## PARITY
+
+- type: scrollPrayer
+  id: BoneShears
+  verb: GIVE
+  subjects: [ "BONE SHEARS" ]
+  items:
+    id: BarberScissors # 50% miss chance
+
+- type: scrollPrayer
+  id: Claymore
+  verb: GIVE
+  subjects: [ "CLAYMORE" ]
+  items: !type:GroupSelector
+    children:
+    - id: Claymore
+    - id: HolyClaymore
+      weight: 0.1
+
+- type: scrollPrayer
+  id: Dagger
+  verb: GIVE
+  subjects: [ "DAGGER" ]
+  items:
+    id: CombatKnife
+
+- type: scrollPrayer
+  id: IronMace
+  verb: GIVE
+  subjects: [ "IRON MACE", "MORNING STAR" ]
+  items:
+    id: RevMace # erm its made of steel
+
+- type: scrollPrayer
+  id: IronSpear
+  verb: GIVE
+  subjects: [ "IRON SPEAR" ]
+  items:
+    id: RevPitchfork # it's basically a spear
+
+- type: scrollPrayer
+  id: LongSword
+  verb: GIVE
+  subjects: [ "LONG SWORD" ]
+  items:
+    id: RevSword
+
+- type: scrollPrayer
+  id: MeatCleaver
+  verb: GIVE
+  subjects: [ "MEAT CLEAVER" ]
+  items:
+    id: ButchCleaver
+
+- type: scrollPrayer
+  id: RitualSpear
+  verb: GIVE
+  subjects: [ "RITUAL SPEAR" ]
+  items:
+    id: SpearSharkMinnow # closest thing ig
+
+- type: scrollPrayer
+  id: ShortBow
+  verb: GIVE
+  subjects: [ "SHORT BOW" ]
+  items:
+    id: BowImprovised
+
+- type: scrollPrayer
+  id: ShortSword
+  verb: GIVE
+  subjects: [ "SHORT SWORD" ]
+  items:
+    id: Machete
+
+- type: scrollPrayer
+  id: SharkTeeth
+  verb: GIVE
+  subjects: [ "SHARK TEETH" ]
+  items:
+    id: MaterialToothSharkminnow1
+
+- type: scrollPrayer
+  id: WarScythe
+  verb: GIVE
+  subjects: [ "WAR SCYTHE" ]
+  items: !type:GroupSelector
+    children:
+    - id: ScytheCosmicCult
+    - id: HydroponicsToolScythe
+      weight: 0.4 # trolled
+    - id: ReverbScythe
+      weight: 0.1 # it's crazy strong

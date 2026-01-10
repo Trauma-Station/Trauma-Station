@@ -1,0 +1,82 @@
+## PARITY
+
+- type: scrollPrayer
+  id: Cloth
+  verb: GIVE
+  subjects: [ "CLOTH" ]
+  items:
+    id: MaterialCloth10
+
+- type: scrollPrayer
+  id: Diamond
+  verb: GIVE
+  subjects: [ "DIAMOND" ]
+  items:
+    id: MaterialDiamond1
+
+- type: scrollPrayer
+  id: Fetus
+  verb: GIVE
+  subjects: [ "FETUS" ]
+  effects:
+  - !type:Gib # no.
+    gibOrgans: true
+
+- type: scrollPrayer
+  id: IronArrow
+  verb: GIVE
+  subjects: [ "IRON ARROW" ]
+  items:
+    id: ArrowRegular
+
+- type: scrollPrayer
+  id: Lantern
+  verb: GIVE
+  subjects: [ "LANTERN", "LAMP" ]
+  items:
+    id: LanternFlash
+
+- type: scrollPrayer
+  id: Nitroglycerin
+  verb: GIVE
+  subjects: [ "NITROGLYCERIN" ]
+  items:
+    id: C4 # no nitro guess this will do
+
+- type: scrollPrayer
+  id: SilverCoin
+  verb: GIVE
+  subjects: [ "SILVER COIN" ]
+  items:
+    id: TreasureCoinSilver
+
+- type: scrollPrayer
+  id: Stick
+  verb: GIVE
+  subjects: [ "STICK" ]
+  items:
+    id: PartRodMetal1
+
+- type: scrollPrayer
+  id: Stone
+  verb: GIVE
+  subjects: [ "STONE" ]
+  items:
+    id: AsteroidRock
+
+## NON PARITY
+
+- type: scrollPrayer
+  id: Metal
+  verb: GIVE
+  subjects: [ "METAL" ]
+  items:
+    id: SheetSteel # 30 sheets
+
+# to make up for no guard or pale skin
+- type: scrollPrayer
+  id: CorgiSkin
+  verb: GIVE
+  subjects: [ "CORGI SKIN" ]
+  items:
+    id: MaterialHideCorgi

@@ -7,7 +7,7 @@ station-report-text =
     >[mono][/mono]
     • [color=#ff5c5c][bold]Security Department Report[/bold][/color]
     >[mono][/mono]
-    • [color=#d28150][bold]Logistics Department Report[/bold][/color]
+    • [color=#d28150][bold]Supply Department Report[/bold][/color]
     >[mono][/mono]
     • [color=#f2e052][bold]Engineering Department Report[/bold][/color]
     >[mono][/mono]

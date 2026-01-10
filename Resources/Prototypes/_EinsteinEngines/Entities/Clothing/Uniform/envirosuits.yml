@@ -1060,8 +1060,8 @@
 - type: entity
   parent: ClothingUniformEnvirosuitCustomBase
   id: ClothingUniformEnvirosuitQM
-  name: logistics officer's envirosuit
-  description: An air-tight suit designed to be used by Plasmamen insane enough to achieve the rank of "Logistics Officer".
+  name: quartermaster's envirosuit
+  description: An air-tight suit designed to be used by Plasmamen insane enough to achieve the rank of "Quartermaster".
   components:
   - type: Sprite
     layers:

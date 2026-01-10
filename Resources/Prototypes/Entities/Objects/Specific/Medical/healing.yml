@@ -1072,4 +1072,44 @@
         maxVol: 15
         reagents:
         - ReagentId: Stimulants
-          Quantity: 5 # Goobstation edit
+          Quantity: 5 # Goob - was 15
+
+# Entity Tables
+- type: entityTable
+  id: RandomSafePillTable
+  table: !type:GroupSelector
+    children:
+    - !type:NestedSelector # Trauma
+      tableId: RandomSafePillTrauma
+      weight: 3 # keep synced with the table
+    - id: PillBicaridine
+    - id: PillCharcoal
+    - id: PillCopper
+    - id: PillDermaline
+    - id: PillDexalin
+    - id: PillDylovene
+    - id: PillHyronalin
+    - id: PillIron
+    - id: PillKelotane
+    - id: PillPotassiumIodide
+    - id: PillTricordrazine
+    - id: StrangePill
+
+- type: entityTable
+  id: RandomSafeSyringeTable
+  table: !type:GroupSelector
+    children:
+    - !type:NestedSelector # Trauma
+      tableId: RandomSafeSyringeTrauma
+      weight: 3 # keep synced with the table
+    - id: SyringeBicaridine
+    - id: SyringeDermaline
+    - id: SyringeEphedrine
+    - id: SyringeEthylredoxrazine
+    - id: SyringeHyronalin
+    - id: SyringeInaprovaline
+    - id: SyringeIpecac
+    - id: SyringePhalanximine
+    - id: SyringeSaline
+    - id: SyringeSigynate
+    - id: SyringeTranexamicAcid

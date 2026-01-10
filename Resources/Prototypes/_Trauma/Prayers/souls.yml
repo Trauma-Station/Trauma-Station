@@ -1,0 +1,17 @@
+## PARITY
+
+- type: scrollPrayer
+  id: SoulButterfly
+  verb: GIVE
+  subjects: [ "BUTTERFLY" ]
+  items:
+    id: MobButterfly # it has a soul inside
+
+## NON PARITY
+
+- type: scrollPrayer
+  id: FloorGoblin
+  verb: GIVE
+  subjects: [ "FLOOR GOBLIN" ]
+  items:
+    id: MobFloorGoblin # it also has a soul inside

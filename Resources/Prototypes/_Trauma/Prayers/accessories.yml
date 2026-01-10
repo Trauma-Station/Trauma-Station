@@ -1,0 +1,43 @@
+## PARITY
+
+- type: scrollPrayer
+  id: Eyeglasses
+  verb: GIVE
+  subjects: [ "EYEGLASSES" ]
+  items:
+    id: ClothingEyesPrescriptionGlasses
+
+- type: scrollPrayer
+  id: PeculiarDoll
+  verb: GIVE
+  subjects: [ "PECULIAR DOLL" ]
+  items:
+    id: PlushieHuman
+
+- type: scrollPrayer
+  id: PineconePig
+  verb: GIVE
+  subjects: [ "PINECONE PIG" ]
+  items:
+    id: MobPigPinecone # trolled
+
+## NON PARITY
+
+- type: scrollPrayer
+  id: Sunglasses
+  verb: GIVE
+  subjects: [ "SUNGLASSES" ]
+  items:
+    id: ClothingEyesGlassesSunglasses
+
+- type: scrollPrayer
+  id: SolidHeadband
+  verb: GIVE
+  subjects: [ "INFINITE AMMO", "INVISIBLE", "CQC" ]
+  items:
+    id: ClothingHeadHatSolidHeadband
+  effects:
+  - !type:AddComponents
+    probability: 0.2
+    components:
+    - type: GrantCqc

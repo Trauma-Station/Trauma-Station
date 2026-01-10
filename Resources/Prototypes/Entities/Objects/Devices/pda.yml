@@ -670,7 +670,6 @@
     - NanoTaskCartridge
     - NewsReaderCartridge
     - AstroNavCartridge
-    - MailMetricsCartridge
     - NanoChatCartridge # DeltaV
 
 - type: entity

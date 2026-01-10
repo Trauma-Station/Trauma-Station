@@ -105,8 +105,7 @@
   - !type:AddComponentSpecial
     components:
       - type: GrantCqc
-        startingStage: Hard
-        isBlocked: true
+        isBlocked: true # can only use it in kitchen
   - !type:AddImplantSpecial # Chefs speak space italian
     implants: [ SpaceItalianTranslatorImplant ]
 
