@@ -51,6 +51,21 @@ public sealed class EffectDataSystem : EntitySystem
 
     public void ClearTool(EntityUid target)
         => RemComp<EntityEffectToolComponent>(target);
+
+    public void CopyData(EntityUid src, EntityUid target)
+    {
+        // TODO: if you add any more data change these 2 methods to raise events
+        if (GetUser(src) is {} user)
+            SetUser(target, user);
+        if (GetTool(src) is {} tool)
+            SetTool(target, tool);
+    }
+
+    public void ClearData(EntityUid target)
+    {
+        ClearUser(target);
+        ClearTool(target);
+    }
 }
 
 /// <summary>

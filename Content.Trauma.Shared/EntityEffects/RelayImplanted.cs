@@ -22,11 +22,16 @@ public sealed partial class RelayImplanted : EntityEffectBase<RelayImplanted>
 
 public sealed class RelayImplantedEffectSystem : EntityEffectSystem<SubdermalImplantComponent, RelayImplanted>
 {
+    [Dependency] private readonly EffectDataSystem _data = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
 
     protected override void Effect(Entity<SubdermalImplantComponent> ent, ref EntityEffectEvent<RelayImplanted> args)
     {
-        if (ent.Comp.ImplantedEntity is {} user)
-            _effects.TryApplyEffect(user, args.Effect.Effect, args.Scale);
+        if (ent.Comp.ImplantedEntity is not {} user)
+            return;
+
+        _data.CopyData(ent, user);
+        _effects.TryApplyEffect(user, args.Effect.Effect, args.Scale);
+        _data.ClearData(user);
     }
 }
