@@ -15,6 +15,7 @@
 - type: speciesBaseSprites
   id: MobMothSprites
   sprites:
+    Special: MobHumanoidAnyMarking # Trauma
     Head: MobMothHead
     Face: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking

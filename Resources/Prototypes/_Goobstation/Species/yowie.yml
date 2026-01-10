@@ -33,6 +33,7 @@
 - type: speciesBaseSprites
   id: MobYowieSprites
   sprites:
+    Special: MobHumanoidAnyMarking
     Head: MobYowieHead
     Face: MobHumanoidAnyMarking
     Hair: MobHumanoidAnyMarking

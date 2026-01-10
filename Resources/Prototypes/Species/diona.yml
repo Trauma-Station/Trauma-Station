@@ -35,6 +35,10 @@
 - type: speciesBaseSprites
   id: MobDionaSprites
   sprites:
+    # <Trauma>
+    Tail: MobHumanoidAnyMarking
+    Special: MobHumanoidAnyMarking
+    # </Trauma>
     Head: MobDionaHead
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking

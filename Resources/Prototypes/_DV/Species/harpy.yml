@@ -30,6 +30,8 @@
 - type: speciesBaseSprites
   id: MobHarpySprites
   sprites:
+    Tail: MobHumanoidAnyMarking
+    Special: MobHumanoidAnyMarking
     Head: MobHarpyHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking

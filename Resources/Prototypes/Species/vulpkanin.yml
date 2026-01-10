@@ -15,6 +15,7 @@
 - type: speciesBaseSprites
   id: MobVulpkaninSprites
   sprites:
+    Special: MobHumanoidAnyMarking # Trauma
     Head: MobVulpkaninHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
