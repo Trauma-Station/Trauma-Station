@@ -1,5 +1,6 @@
 using Content.Shared.EntityTable.EntitySelectors;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Components;
 
@@ -12,6 +13,6 @@ public sealed partial class KnowledgeGrantComponent : Component
     /// <summary>
     /// Knowledge that will be added.
     /// </summary>
-    [DataField(required: true)]
-    public EntityTableSelector Table;
+    [DataField(required: true), AlwaysPushInheritance]
+    public Dictionary<EntProtoId, int> Skills = new();
 }

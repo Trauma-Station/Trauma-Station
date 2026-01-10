@@ -12,7 +12,12 @@
     size: Small
   - type: StaticPrice
     price: 3000
-  - type: GrantNinjutsu
+  - type: KnowledgeGrantOnUse
+    skills:
+      MartialArtNinjutsu: 26
+    experience:
+      MartialArtNinjutsu: 10
+    doAfter: 2
   - type: GuideHelp
     guides:
     - Ninjutsu

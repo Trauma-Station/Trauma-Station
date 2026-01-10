@@ -11,10 +11,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Goobstation.Shared.Clothing.Components;
-using Content.Goobstation.Shared.MartialArts.Components;
 using Content.Server.Body.Components;
 using Content.Server.Ghost.Roles.Components;
 using Content.Shared._Shitcode.Heretic.Components;
@@ -32,8 +31,8 @@ using Content.Shared.Heretic;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Components;
-using Content.Shared.Stunnable;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio;

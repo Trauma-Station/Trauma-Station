@@ -1,0 +1,90 @@
+- type: entity
+  id: BaseKnowledge
+  name: BaseKnowledge
+  categories: [ Knowledge ]
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Skills
+    level: 0
+    experienceCost: 1 # We're fucked if its 0 or lower. Do not change lmao.
+
+- type: entity
+  parent: BaseKnowledge
+  id: MeleeKnowledge
+  name: Melee Knowledge
+  components:
+  - type: Knowledge
+    experienceCost: 10
+
+- type: entity
+  parent: BaseKnowledge
+  id: ShootingKnowledge
+  name: ShootingKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 10
+
+- type: entity
+  parent: BaseKnowledge
+  id: SurgeryKnowledge
+  name: SurgeryKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 18
+
+- type: entity
+  parent: BaseKnowledge
+  id: FirstAidKnowledge
+  name: FirstAidKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 14
+
+- type: entity
+  parent: BaseKnowledge
+  id: ToughnessKnowledge
+  name: ToughnessKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 6
+
+- type: entity
+  parent: BaseKnowledge
+  id: StrengthKnowledge
+  name: StrengthKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 7
+
+- type: entity
+  parent: BaseKnowledge
+  id: AthleticsKnowledge
+  name: AthleticsKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 7
+
+- type: entity
+  parent: BaseKnowledge
+  id: MagicalLiteracyKnowledge
+  name: MagicalLiteracyKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 30
+
+- type: entity
+  parent: BaseKnowledge
+  id: LiteracyKnowledge
+  name: LiteracyKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 20
+
+- type: entity
+  parent: BaseKnowledge
+  id: JanitorKnowledge
+  name: JanitorKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 5

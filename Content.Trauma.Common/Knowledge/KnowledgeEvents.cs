@@ -1,3 +1,5 @@
+using Robust.Shared.Serialization;
+
 namespace Content.Trauma.Common.Knowledge;
 
 /// <summary>
@@ -23,3 +25,13 @@ public record struct KnowledgeContainerRelayEvent(EntityUid Target, EntityUid? F
 /// </summary>
 [ByRefEvent]
 public record struct KnowledgeGetDescriptionEvent(string? Description, bool Handled = false);
+
+/// <summary>
+/// Event that sends the client's wanted martial art entity to the server to update the martial art skill of the knowledge container component.  
+/// </summary>
+/// <param name="knowledge"></param>
+[Serializable, NetSerializable]
+public sealed class KnowledgeUpdateMartialArts(NetEntity? knowledge) : EntityEventArgs
+{
+    public NetEntity? Knowledge = knowledge;
+}

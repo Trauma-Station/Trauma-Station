@@ -85,6 +85,18 @@
         AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
         />
     <!-- </EE> -->
+    <!-- <Trauma> -->
+    <ui:MenuButton
+        Name="MartialArtsButton"
+        Access="Internal"
+        Icon="{xe:Tex '/Textures/Interface/emotes.svg.192dpi.png'}"
+        ToolTip="{Loc 'game-hud-open-martial-arts-menu-button-tooltip'}"
+        BoundKey = "{x:Static is:ContentKeyFunctions.OpenMartialArtsMenu}"
+        MinSize="42 64"
+        HorizontalExpand="True"
+        AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
+        />
+    <!-- </Trauma> -->
     <ui:MenuButton
         Name="AdminButton"
         Access="Internal"

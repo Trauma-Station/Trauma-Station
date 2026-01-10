@@ -58,7 +58,9 @@
   effects:
   - !type:AddComponents
     components:
-    - type: KravMaga # it has leg sweep
+    - type: KnowledgeGrantOnUse # it has leg sweep
+      experience:
+        MartialArtKravMaga: 100
 
 - type: scrollPrayer
   id: Steal

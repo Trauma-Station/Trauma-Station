@@ -116,7 +116,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
 
         // Goobstation start
         if (settings.CopyKnowledge)
-            CopyKnowledge(original, clone.Value);
+            TransferKnowledge(original, clone.Value);
         // Goobstation end
 
         var originalName = _nameMod.GetBaseName(original);
@@ -452,27 +452,19 @@ public sealed partial class CloningSystem : SharedCloningSystem
     /// <summary>
     ///    Grabs knowledge attached to original entity and transfers it to the clone.
     /// </summary>
-    public void CopyKnowledge(EntityUid original, EntityUid target)
+
+    public void TransferKnowledge(EntityUid original, EntityUid target)
     {
-        if (_knowledge.TryGetAllKnowledgeUnits(original) is not { } found)
-            return; // No knowledge to copy!
-
-        foreach (var originalKnowledge in found)
+        if (_knowledge.TryGetKnowledgeEntity(original) is not { } originalEntity || _knowledge.TryGetKnowledgeEntity(target) is not { } targetEntity)
+            return;
+        if (_knowledge.TryGetAllKnowledgeUnits(originalEntity) is not { } found)
+            return;
+        var targetContainer = _knowledge.EnsureKnowledgeContainer(targetEntity);
+        if (targetContainer.Comp.KnowledgeContainer == null)
+            return;
+        foreach (var knowledgeEnt in found)
         {
-            if (!HasComp<KnowledgeComponent>(originalKnowledge))
-                continue;
-
-            var knowledgeId = MetaData(originalKnowledge).EntityPrototype?.ID;
-
-            if (knowledgeId == null)
-                continue;
-
-            if (!_knowledge.TryAddKnowledgeUnit(target, knowledgeId, out var targetKnowledge))
-                continue;
-
-            // copy over important component data
-            var ev = new CloningItemEvent(targetKnowledge.Value);
-            RaiseLocalEvent(targetKnowledge.Value, ref ev);
+            _container.Insert(knowledgeEnt.Owner, targetContainer.Comp.KnowledgeContainer);
         }
     }
 }

@@ -1,7 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
-using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
@@ -26,15 +27,15 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     /// <returns>
     /// False if container already has knowledge entity with that ID.
     /// </returns>
-    public abstract bool TryAddKnowledgeUnit(EntityUid target, EntProtoId knowledgeId);
+    public abstract bool TryAddKnowledgeUnit(EntityUid target, KeyValuePair<EntProtoId, int> knowledgeId);
 
-    /// <inheritdoc cref="TryAddKnowledgeUnit(Robust.Shared.GameObjects.EntityUid,Robust.Shared.Prototypes.EntProtoId)"/>
-    public abstract bool TryAddKnowledgeUnit(EntityUid target, EntProtoId knowledgeId, [NotNullWhen(true)] out EntityUid? found);
+    /// <inheretdoc cref="TryAddKnowledgeUnit(Robust.Shared.GameObjects.EntityUid, System.Collections.Generic.KeyValuePair{Content.Shared.EntityTable.EntitySelectors.EntProtoId, int})"/>
+    public abstract bool TryAddKnowledgeUnit(EntityUid target, KeyValuePair<EntProtoId, int> knowledgeId, [NotNullWhen(true)] out EntityUid? found);
 
     /// <summary>
     /// Adds a list of knowledge units to a knowledge container.
     /// </summary>
-    public abstract void AddKnowledgeUnits(EntityUid target, List<EntProtoId> knowledgeList);
+    public abstract void AddKnowledgeUnits(EntityUid target, Dictionary<EntProtoId, int> knowledgeList);
 
     /// <summary>
     /// Removes a knowledge unit from a container. This version takes into account levels and categories of knowledge.
@@ -79,14 +80,6 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract EntityUid? TryGetKnowledgeUnit(EntityUid target, EntProtoId knowledgeUnit);
 
     /// <summary>
-    /// Checks if that knowledge unit already exists inside a knowledge container.
-    /// </summary>
-    /// <returns>
-    /// False if the target is not a knowledge container, and true if knowledge unit with that ID was found.
-    /// </returns>
-    public abstract EntityUid? HasKnowledgeUnit(EntityUid target, EntProtoId knowledgeUnit);
-
-    /// <summary>
     /// Returns all knowledge units inside the container component.
     /// </summary>
     public abstract List<Entity<KnowledgeComponent>>? TryGetAllKnowledgeUnits(EntityUid target);
@@ -117,4 +110,24 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract Entity<KnowledgeContainerComponent> EnsureKnowledgeContainer(EntityUid uid);
     /// <inheritdoc cref="EnsureKnowledgeContainer(Robust.Shared.GameObjects.EntityUid)"/>
     public abstract void EnsureKnowledgeContainer(EntityUid uid, out Entity<KnowledgeContainerComponent> container);
+
+    /// <summary>
+    /// Returns the KnowledgeEntity that holds the character's knowledge. Null if there is non knowledge entity found.
+    /// </summary>
+    public abstract EntityUid? TryGetKnowledgeEntity(EntityUid ent);
+
+    /// <summary>
+    /// Changes the martial art of the entity. This is used for example when changing the character's class, to change their martial art as well.
+    /// </summary>
+    public abstract void ChangeMartialArts(EntityUid knowledgeEntity, Entity<MartialArtsKnowledgeComponent>? martialArt);
+
+    /// <summary>
+    /// Returns the martial arts that a knowledge entity has, along with some helper data for the client.
+    /// </summary>
+    /// <param name="knowledgeEntity"></param>
+    /// <returns></returns>
+    public abstract List<(EntityUid, string)> GetMartialArtsForClientDoohickey(EntityUid knowledgeEntity);
 }
+
+[ByRefEvent]
+public record struct AddExperience(EntProtoId KnowledgeType, int Experience);

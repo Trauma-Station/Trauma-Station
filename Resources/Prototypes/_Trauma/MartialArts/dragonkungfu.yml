@@ -1,0 +1,37 @@
+- type: combo
+  id: DragonClaw
+  name: Dragon Claw
+  attacks:
+  - Disarm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  staminaDamage: 50
+
+- type: combo
+  id: DragonTail
+  name: Dragon Tail
+  attacks:
+  - Disarm
+  - Grab
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  extraDamage: 15
+  staminaDamage: 30
+  paralyzeTime: 6
+
+- type: combo
+  id: DragonStrike
+  name: Dragon Strike
+  attacks:
+  - Disarm
+  - Harm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit1.ogg
+  extraDamage: 40
+  paralyzeTime: 2 # Actual paralyze

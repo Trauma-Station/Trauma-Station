@@ -13,11 +13,6 @@
   - type: Sprite # For guidebook
     sprite: _Goobstation/Actions/kravmaga.rsi
     state: legsweep
-  - type: InstantAction
-    event: !type:KravMagaActionEvent { }
-  - type: KravMagaAction
-    configuration: LegSweep
-    name: Leg Sweep
 
 - type: entity
   parent: BaseAction
@@ -34,12 +29,6 @@
   - type: Sprite # For guidebook
     sprite: _Goobstation/Actions/kravmaga.rsi
     state: neckchop
-  - type: InstantAction
-    event: !type:KravMagaActionEvent { }
-  - type: KravMagaAction
-    configuration: NeckChop
-    name: Neck Chop
-    effectTime: 20
 
 - type: entity
   parent: BaseAction
@@ -56,10 +45,3 @@
   - type: Sprite # For guidebook
     sprite: _Goobstation/Actions/kravmaga.rsi
     state: lungpunch
-  - type: InstantAction
-    event: !type:KravMagaActionEvent { }
-  - type: KravMagaAction
-    configuration: LungPunch
-    name: Lung Punch
-    staminaDamage: 40
-    effectTime: 10

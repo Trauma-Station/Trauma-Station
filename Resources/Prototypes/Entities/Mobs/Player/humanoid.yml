@@ -55,7 +55,9 @@
   - type: AutoImplant
     implants:
     - SpaceItalianTranslatorImplant   #chefs should speak space italian
-  - type: GrantCqc                    #Chefs should have CqC
+  - type: KnowledgeGrant
+    skills:
+      MartialArtCQCChef: 26
 # Goobstation end
 
 - type: randomHumanoidSettings

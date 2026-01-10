@@ -1,6 +1,6 @@
 using System.Linq;
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;

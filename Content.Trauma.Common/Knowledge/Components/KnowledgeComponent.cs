@@ -25,13 +25,22 @@ public sealed partial class KnowledgeComponent : Component
     public ProtoId<KnowledgeCategoryPrototype> Category;
 
     /// <summary>
-    /// Relative level of how easy it is to forget this type of knowledge.
+    /// Current Mastery of this knowledge.
     /// </summary>
-    /// <remarks>
-    /// It should've been FixedPoint2 but for some damn reason it's not available in Goobstation.Common module. AAAAAAAAAAAAAA
-    /// </remarks>
     [DataField(required: true)]
     public int Level;
+
+    /// <summary>
+    /// Current Stored experience.
+    /// </summary>
+    [DataField]
+    public int Experience;
+
+    /// <summary>
+    /// Sprite to display in the character UI.
+    /// </summary>
+    [DataField]
+    public int ExperienceCost;
 
     /// <summary>
     /// If true, this knowledge will become permanent, unless a system removes them forcefully.

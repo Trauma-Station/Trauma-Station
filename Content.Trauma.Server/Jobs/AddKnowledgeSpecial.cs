@@ -12,7 +12,7 @@ namespace Content.Trauma.Server.Jobs;
 public sealed partial class AddKnowledgeSpecial : JobSpecial
 {
     [DataField]
-    public List<EntProtoId> Knowledge { get; private set; } = new();
+    public Dictionary<EntProtoId, int> Knowledge { get; private set; } = new();
 
     public override void AfterEquip(EntityUid mob)
     {

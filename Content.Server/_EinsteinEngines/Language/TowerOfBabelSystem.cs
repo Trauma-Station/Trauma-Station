@@ -22,13 +22,13 @@ public sealed class TowerOfBabelSystem : EntitySystem
         if (!TryComp(ent, out LanguageSpeakerComponent? speaker))
             return;
 
-        var spoken = speaker.SpokenLanguages;
+        var spoken = speaker.Speaks;
         spoken.Clear();
         foreach (var proto in _proto.EnumeratePrototypes<LanguagePrototype>())
         {
             spoken.Add(proto.ID);
         }
-        var understood = speaker.UnderstoodLanguages;
+        var understood = speaker.Understands;
         understood.Clear();
         understood.AddRange(spoken);
         Dirty(ent.Owner, speaker);

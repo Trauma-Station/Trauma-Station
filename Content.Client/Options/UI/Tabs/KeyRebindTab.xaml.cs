@@ -245,6 +245,8 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.WindowCloseRecent);
             AddButton(EngineKeyFunctions.EscapeMenu);
             AddButton(ContentKeyFunctions.EscapeContext);
+            AddButton(ContentKeyFunctions.OpenMartialArtsMenu); // Trauma
+
 
             // Shitmed Change Start - TODO: Add hands, feet and groin targeting.
             AddHeader("ui-options-header-targeting");

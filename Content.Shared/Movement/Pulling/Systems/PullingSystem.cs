@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Hands;
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Shared._EinsteinEngines.Contests;
 using Content.Shared._White.Grab;
 using Content.Shared.CombatMode;
@@ -935,8 +935,7 @@ public sealed class PullingSystem : EntitySystem
 
         var newStage = puller.Comp.GrabStage + nextStageAddition;
 
-        if (HasComp<MartialArtsKnowledgeComponent>(puller) // i really hate this solution holy fuck
-            && TryComp<RequireProjectileTargetComponent>(pullable, out var layingDown)
+        if (TryComp<RequireProjectileTargetComponent>(pullable, out var layingDown)
             && layingDown.Active)
         {
             var ev = new CheckGrabOverridesEvent(newStage);

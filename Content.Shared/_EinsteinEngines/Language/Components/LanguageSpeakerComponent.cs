@@ -35,11 +35,11 @@ public sealed partial class LanguageSpeakerComponent : Component
     ///     List of languages this entity can speak at the current moment.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<ProtoId<LanguagePrototype>> SpokenLanguages = new();
+    public List<ProtoId<LanguagePrototype>> Speaks = new();
 
     /// <summary>
     ///     List of languages this entity can understand at the current moment.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<ProtoId<LanguagePrototype>> UnderstoodLanguages = new();
+    public List<ProtoId<LanguagePrototype>> Understands = new();
 }

@@ -55,7 +55,7 @@ using Robust.Shared.Player;
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.CCVar;
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Shared._EinsteinEngines.Contests;
 using Content.Shared.Chat; // Einstein Engines - Languages
 using Content.Shared.Coordinates;

@@ -38,6 +38,8 @@
     id: ClothingHeadHatSolidHeadband
   effects:
   - !type:AddComponents
-    probability: 0.2
+    probability: 1
     components:
-    - type: GrantCqc
+    - type: KnowledgeGrantOnWear
+      experience:
+        MartialArtCQC: 10

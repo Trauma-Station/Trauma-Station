@@ -121,7 +121,7 @@ public sealed class TranslatorSystem : SharedTranslatorSystem
             && TryComp<LanguageSpeakerComponent>(holder, out var languageComp))
         {
             // The first new spoken language added by this translator, or null
-            var firstNewLanguage = translatorComp.SpokenLanguages.FirstOrDefault(it => !languageComp.SpokenLanguages.Contains(it));
+            var firstNewLanguage = translatorComp.SpokenLanguages.FirstOrDefault(it => !languageComp.Speaks.Contains(it));
             _language.UpdateEntityLanguages(holder);
 
             // Update the current language of the entity if necessary
@@ -175,8 +175,8 @@ public sealed class TranslatorSystem : SharedTranslatorSystem
 
     private void CopyLanguages(BaseTranslatorComponent from, DetermineEntityLanguagesEvent to, LanguageSpeakerComponent knowledge)
     {
-        var addSpoken = CheckLanguagesMatch(from.RequiredLanguages, knowledge.SpokenLanguages, from.RequiresAllLanguages);
-        var addUnderstood = CheckLanguagesMatch(from.RequiredLanguages, knowledge.UnderstoodLanguages, from.RequiresAllLanguages);
+        var addSpoken = CheckLanguagesMatch(from.RequiredLanguages, knowledge.Speaks, from.RequiresAllLanguages);
+        var addUnderstood = CheckLanguagesMatch(from.RequiredLanguages, knowledge.Understands, from.RequiresAllLanguages);
 
         if (addSpoken)
             foreach (var language in from.SpokenLanguages)

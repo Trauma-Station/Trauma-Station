@@ -37,7 +37,7 @@ public sealed partial class ForeignerTraitSystem : EntitySystem
             return;
         }
 
-        var spoken = speaker.SpokenLanguages;
+        var spoken = speaker.Speaks;
         var alternateLanguage = spoken.Find(it => it != entity.Comp.BaseLanguage);
         if (alternateLanguage == default)
         {

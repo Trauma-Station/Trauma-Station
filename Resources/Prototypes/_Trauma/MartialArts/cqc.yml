@@ -1,0 +1,139 @@
+# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
+# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Baptr0b0t <152836416+baptr0b0t@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
+# SPDX-FileCopyrightText: 2025 Lincoln McQueen <lincoln.mcqueen@gmail.com>
+# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
+# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: combo
+  id: CQCSlam
+  name: Slam
+  attacks:
+  - Grab
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+      cqc-slam
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 12
+  - !type:Knockdown
+    amount: 2
+  levelRequired: 26
+
+- type: combo
+  id: CQCKick
+  name: Kick
+  attacks:
+  - Harm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+      cqc-kick
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 12
+  - !type:Knockdown
+    amount: 2
+  levelRequired: 26
+
+- type: combo
+  id: CQCRestrain
+  name: Restrain
+  attacks:
+  - Grab
+  - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+      cqc-restrain
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 30
+  - !type:Knockdown
+    amount: 1
+  levelRequired: 26
+
+- type: combo
+  id: CQCPressure
+  name: Pressure
+  attacks:
+  - Disarm
+  - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+      cqc-pressure
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 60
+  levelRequired: 26
+
+- type: combo
+  id: CQCConsecutive
+  name: Consecutive
+  attacks:
+  - Disarm
+  - Hug
+  - Hug
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit1.ogg
+  - !type:PopupMessage
+    messages:
+      cqc-consecutive
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 40
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 10
+  levelRequired: 26
+  levelExceeded: 60
+
+- type: combo
+  id: CQCConsecutiveAdvanced
+  name: Consecutive
+  attacks:
+  - Disarm
+  - Hug
+  - Hug
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit1.ogg
+  - !type:PopupMessage
+    messages:
+      cqc-consecutive
+  opponentEffects:
+  - !type:ForcedSleep
+    amount: 70
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 30
+  - !type:Knockdown
+    amount: 20
+  - !type:ForcedSleep
+    amount: 20
+  levelRequired: 50

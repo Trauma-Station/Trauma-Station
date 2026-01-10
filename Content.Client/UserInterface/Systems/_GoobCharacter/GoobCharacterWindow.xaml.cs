@@ -128,7 +128,7 @@ public sealed partial class GoobCharacterWindow : DefaultWindow
             var objectiveControl = new CharacterKnowledgeControl()
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
-                Modulate = Color.Gray
+                Modulate = Color.White
             };
 
 
@@ -148,13 +148,14 @@ public sealed partial class GoobCharacterWindow : DefaultWindow
                 var conditionControl = new KnowledgeEntryControl();
                 if (condition.Sprite != null)
                     conditionControl.Texture.Texture = _sprite.Frame0(condition.Sprite);
+
                 var titleMessage = new FormattedMessage();
                 var descriptionMessage = new FormattedMessage();
 
                 titleMessage.AddText(condition.Name);
-                descriptionMessage.AddText(condition.Description);
+                descriptionMessage.AddText("    " + condition.Description);
 
-                conditionControl.Title.SetMessage(titleMessage);
+                conditionControl.Title.SetMessage(titleMessage, condition.Color);
                 conditionControl.Description.SetMessage(descriptionMessage);
 
                 objectiveControl.AddChild(conditionControl);

@@ -1,0 +1,119 @@
+- type: entity
+  parent: BaseKnowledge
+  id: BaseMartialArtsKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    experienceCost: 10
+    color: "#c70000"
+  - type: MartialArtsKnowledge
+    blocked: false
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtCQC
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - CQCConsecutive
+    - CQCPressure
+    - CQCRestrain
+    - CQCKick
+    - CQCSlam
+    - CQCConsecutiveAdvanced
+
+- type: entity
+  parent: MartialArtCQC
+  id: MartialArtCQCChef
+  components:
+  - type: MartialArtsKnowledge
+    blocked: true
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtCorporateJudo
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - JudoGoldenBlast
+    - JudoThrow
+    - JudoArmbar
+    - JudoDiscombobulate # Due to supercode this needs to be below Armbar, otherwise it takes priority
+    - JudoWheelThrow
+    - JudoEyePoke # Same here, must be below WheelThrow
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtKravMaga
+  name: MartialArtKravMaga
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtCapoeira
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - PushKick
+    - SweepKick
+    - CircleKick
+    - SpinKick
+    - KickUp
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtHellRip
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - DropKick
+    - HeadRip
+    - Slam
+    - TearDown
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtNinjutsu
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - BiteTheDust
+    - DirtyKill
+    - NinjutsuTakedown
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtDragon
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - DragonClaw
+    - DragonTail
+    - DragonStrike
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtSleepingCarp
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - SleepingCarpGnashingTeeth
+    - SleepingCarpKneeHaul
+    - SleepingCarpCrashingWaves
+    randomSayings:
+    - carp-saying-huah
+    - carv-vaying-hya
+    - carp-saying-choo
+    - carp-saying-wuo
+    - carp-saying-kya
+    - carp-saying-huh
+    - carp-saying-hiyoh
+    - carp-saying-strike
+    - carp-saying-bite
+    randomSayingsDowned:
+    - carp-saying-banzai
+    - carp-saying-kiya
+    - carp-saying-omae
+    - carp-saying-see
+    - carp-saying-time
+    - carp-saying-cowabunga
+  - type: NoGun

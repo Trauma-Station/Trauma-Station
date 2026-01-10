@@ -1,0 +1,119 @@
+- type: cargoProduct
+  id: RandomSkillbooks
+  icon:
+    sprite: Objects/Misc/books.rsi
+    state: book_icon
+  product: CrateRandomSkillbooks
+  cost: 2000
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CrateRandomSkillbooks
+  name: skillbooks crate
+  description: Contains skillbooks.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: BookStrength
+        - id: BookAthletics
+        - id: BookToughness
+        - id: BookMelee
+
+- type: entityTable
+  id: RandomSkillbook
+  table: !type:GroupSelector
+    children:
+    - id: BookStrength
+    - id: BookAthletics
+    - id: BookToughness
+    - id: BookMelee
+
+- type: entity
+  parent: BaseItem
+  id: BookSkillbook
+  components:
+  - type: Tag
+    tags:
+    - Book
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: BookSkillbook
+  id: BookStrength
+  name: old book
+  description: A small, black manual. There are drawn instructions of curl-ups and sit-ups.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 3000
+  - type: KnowledgeGrantOnUse
+    skills:
+      StrengthKnowledge: 26
+    experience:
+      StrengthKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookAthletics
+  name: old book
+  description: A small, black manual. There are drawn instructions of a man running.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 3000
+  - type: KnowledgeGrantOnUse
+    skills:
+      AthleticsKnowledge: 43
+    experience:
+      AthleticsKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookToughness
+  name: old book
+  description: A small, black manual. There are drawn instructions of a man getting lashed.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 3000
+  - type: KnowledgeGrantOnUse
+    skills:
+      ToughnessKnowledge: 30
+    experience:
+      ToughnessKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookMelee
+  name: old book
+  description: A small, black manual. There are drawn instructions of a man in fisticuffs.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 3000
+  - type: KnowledgeGrantOnUse
+    skills:
+      MeleeKnowledge: 41
+    experience:
+      MeleeKnowledge: 1
+    doAfter: 2

@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Common.Weapons;
 using Content.Shared._EinsteinEngines.Contests;
 using Content.Shared._Shitmed.Targeting;

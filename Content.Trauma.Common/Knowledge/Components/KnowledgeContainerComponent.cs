@@ -1,5 +1,6 @@
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Common.Knowledge.Components;
 
@@ -7,7 +8,7 @@ namespace Content.Trauma.Common.Knowledge.Components;
 /// Contains knowledge entities inside with <see cref="KnowledgeComponent"/>.
 /// Assigned to some physical bodies, for example brains.
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class KnowledgeContainerComponent : Component
 {
     public const string ContainerId = "knowledge";
@@ -17,4 +18,22 @@ public sealed partial class KnowledgeContainerComponent : Component
     /// </summary>
     [ViewVariables]
     public Container? KnowledgeContainer;
+
+    /// <summary>
+    /// Contains a dictionary of added EntProtoIds.
+    /// </summary>
+    [ViewVariables]
+    public Dictionary<EntProtoId, EntityUid> KnowledgeContainerIDs = new();
+
+    /// <summary>
+    ///    The skill entity that links to the current Language.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? LanguageSkillUid;
+
+    /// <summary>
+    ///    The skill entity that links to the current MartialArt.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? MartialArtSkillUid;
 }

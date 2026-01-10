@@ -103,7 +103,9 @@
     sprite: _Goobstation/Clothing/Belt/judobelt.rsi
   - type: Clothing
     sprite: _Goobstation/Clothing/Belt/judobelt.rsi
-  - type: GrantCorporateJudo
+  - type: KnowledgeGrantOnWear
+    experience:
+      MartialArtCorporateJudo: 2
   - type: Storage
     whitelist:
       tags:

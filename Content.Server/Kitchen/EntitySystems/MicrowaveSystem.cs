@@ -1,46 +1,51 @@
+using System.Linq;
+using Content.Goobstation.Maths.FixedPoint;
 using Content.Server.Administration.Logs;
 using Content.Server.Body.Systems;
 using Content.Server.Construction;
-using Content.Server.Explosion.EntitySystems;
+using Content.Server.Construction.Components;
 using Content.Server.DeviceLinking.Systems;
+using Content.Server.Explosion.EntitySystems;
 using Content.Server.Hands.Systems;
 using Content.Server.Kitchen.Components;
+using Content.Server.Lightning;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Temperature.Systems;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
+using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Construction.EntitySystems;
+using Content.Shared.Damage.Components;
 using Content.Shared.Database;
-using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Destructible;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
-using Robust.Shared.Random;
-using Robust.Shared.Audio;
-using Content.Server.Lightning;
 using Content.Shared.Item;
 using Content.Shared.Kitchen;
 using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
 using Content.Shared.Power;
+using Content.Shared.Stacks;
 using Content.Shared.Tag;
+using Content.Shared.Temperature.Components;
+using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.MartialArts;
+using Microsoft.EntityFrameworkCore;
+using NetCord;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
-using System.Linq;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Shared.Stacks;
-using Content.Server.Construction.Components;
-using Content.Shared.Chat;
-using Content.Shared.Damage.Components;
-using Content.Shared.Temperature.Components;
+using Content.Trauma.Common.Knowledge.Systems;
 
 namespace Content.Server.Kitchen.EntitySystems
 {
@@ -68,6 +73,7 @@ namespace Content.Server.Kitchen.EntitySystems
         [Dependency] private readonly IPrototypeManager _prototype = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
         [Dependency] private readonly SharedSuicideSystem _suicide = default!;
+        [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
         private static readonly EntProtoId MalfunctionSpark = "Spark";
 
@@ -670,6 +676,21 @@ namespace Content.Server.Kitchen.EntitySystems
 
                 if (active.PortionedRecipe.Item1 != null)
                 {
+                    // Trauma edit - Chef Experience
+                    var nearbyEntities = _lookup.GetEntitiesInRange(uid, 8.0f);
+                    foreach (var userUid in nearbyEntities)
+                    {
+                        if (!TryComp<KnowledgeHolderComponent>(userUid, out var knowledgeHolderComponent) || knowledgeHolderComponent.KnowledgeEntity is not { } knowledgeEnt)
+                            continue;
+                        if (!TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComponent) || knowledgeContainerComponent.MartialArtSkillUid is not { } martialSkillUid)
+                            continue;
+                        if (!TryComp<MartialArtsKnowledgeComponent>(martialSkillUid, out var martialArtsComponent) || !martialArtsComponent.Blocked)
+                            continue;
+                        var ev = new AddExperience("MartialArtCQCChef", active.PortionedRecipe.Item2);
+                        RaiseLocalEvent(userUid, ev);
+                    }
+                    // Trauma edit end
+
                     var coords = Transform(uid).Coordinates;
                     for (var i = 0; i < active.PortionedRecipe.Item2; i++)
                     {

@@ -108,7 +108,7 @@
   components:
   - type: ComponentsImplant
     added:
-    - type: KravMaga
+    # - type: KravMaga
 
 - type: entity
   parent: BaseSubdermalImplant

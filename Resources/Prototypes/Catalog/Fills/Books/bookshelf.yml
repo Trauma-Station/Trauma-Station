@@ -27,6 +27,11 @@
       rolls: !type:RangeNumberSelector
         range: 0, 3
       tableId: RandomHandwrittenBookTable
+    # Trauma - Skillbooks
+    - !type:NestedSelector
+      rolls: !type:RangeNumberSelector
+        range: 0, 10
+      tableId: RandomSkillbook
 
 - type: entityTable
   id: RandomHandwrittenBookTable
@@ -91,3 +96,5 @@
       tableId: RandomGuidebookTable
     - !type:NestedSelector
       tableId: RandomHandwrittenBookTable
+    - !type:NestedSelector
+      tableId: RandomSkillbook # Trauma - Knowledge

@@ -180,6 +180,7 @@
       - type: Condemned # Goobstation - Nanotrasen owns your soul pal.
         soulOwnedNotDevil: true
 
+
 - type: startingGear
   id: CaptainGear
   equipment:

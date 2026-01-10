@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Body.Components;
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Shared.Body;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._Shitmed.Targeting;

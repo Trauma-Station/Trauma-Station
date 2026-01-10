@@ -148,7 +148,7 @@
       - DemonicWhisperAction
   - type: ReplacementAccent
     accent: slaughterDemon
-  - type: GrantHellRip
+  # - type: GrantHellRip
   - type: WeakToHoly
     alwaysTakeHoly: true
   - type: Hands

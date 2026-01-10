@@ -15,7 +15,7 @@
 
 using System.Numerics;
 using Content.Client.Hands.Systems;
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Shared._Goobstation.Weapons.AmmoSelector;
 using Content.Shared.CCVar;
 using Robust.Client.GameObjects;
@@ -29,6 +29,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Graphics;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Toolshed.Commands.Generic;
 using Robust.Shared.Utility;
 using Direction = Robust.Shared.Maths.Direction;
 

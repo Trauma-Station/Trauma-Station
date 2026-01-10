@@ -115,9 +115,9 @@
     implants: [ FreedomImplant, ScramImplant, NutrimentPumpImplant, SpaceProofImplant, StypticStimulatorImplant, DeathAcidifierImplant, UplinkImplant ]
   - !type:AddComponentSpecial
     components:
-    - type: GrantCqc
-      startingStage: Hard
-      isBlocked: false
+    - type: KnowledgeGrant
+      skills:
+        MartialArtCQC: 50
     - type: NpcFactionMember
       factions:
       - Syndicate

@@ -16,7 +16,6 @@ namespace Content.Server._EinsteinEngines.Language;
 public sealed class TranslatorImplantSystem : EntitySystem
 {
     [Dependency] private readonly LanguageSystem _language = default!;
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!; // Trauma edit
 
     public override void Initialize()
     {
@@ -38,10 +37,10 @@ public sealed class TranslatorImplantSystem : EntitySystem
         // To operate an implant, you need to know its required language intrinsically, because like... it connects to your brain or something,
         // so external translators or other implants can't help you operate it.
         component.SpokenRequirementSatisfied = TranslatorSystem.CheckLanguagesMatch(
-            component.RequiredLanguages, speaker.SpokenLanguages, component.RequiresAllLanguages);
+            component.RequiredLanguages, speaker.Speaks, component.RequiresAllLanguages);
 
         component.UnderstoodRequirementSatisfied = TranslatorSystem.CheckLanguagesMatch(
-            component.RequiredLanguages, speaker.UnderstoodLanguages, component.RequiresAllLanguages);
+            component.RequiredLanguages, speaker.Understands, component.RequiresAllLanguages);
 
         _language.UpdateEntityLanguages(implantee);
     }

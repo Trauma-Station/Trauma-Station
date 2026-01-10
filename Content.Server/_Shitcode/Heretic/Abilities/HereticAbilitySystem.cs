@@ -25,7 +25,7 @@
 // the fucking eye of the shitcode storm
 
 using System.Linq;
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Goobstation.Shared.Overlays;
 using Content.Server.Atmos.EntitySystems;

@@ -121,7 +121,7 @@ public abstract class SharedLanguageSystem : EntitySystem
         if (language == PsychomanticPrototype || language == UniversalPrototype || TryComp<UniversalLanguageSpeakerComponent>(ent, out var uni) && uni.Enabled)
             return true;
 
-        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.UnderstoodLanguages.Contains(language);
+        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.Understands.Contains(language);
     }
 
     public bool CanSpeak(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)
@@ -129,7 +129,7 @@ public abstract class SharedLanguageSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, logMissing: false))
             return false;
 
-        return ent.Comp.SpokenLanguages.Contains(language);
+        return ent.Comp.Speaks.Contains(language);
     }
 
     /// <summary>
@@ -151,7 +151,7 @@ public abstract class SharedLanguageSystem : EntitySystem
     /// <remarks>This simply returns the value of <see cref="LanguageSpeakerComponent.SpokenLanguages"/>.</remarks>
     public List<ProtoId<LanguagePrototype>> GetSpokenLanguages(EntityUid uid)
     {
-        return TryComp<LanguageSpeakerComponent>(uid, out var component) ? component.SpokenLanguages : [];
+        return TryComp<LanguageSpeakerComponent>(uid, out var component) ? component.Speaks : [];
     }
 
     /// <summary>
@@ -160,7 +160,7 @@ public abstract class SharedLanguageSystem : EntitySystem
     /// <remarks>This simply returns the value of <see cref="LanguageSpeakerComponent.SpokenLanguages"/>.</remarks>
     public List<ProtoId<LanguagePrototype>> GetUnderstoodLanguages(EntityUid uid)
     {
-        return TryComp<LanguageSpeakerComponent>(uid, out var component) ? component.UnderstoodLanguages : [];
+        return TryComp<LanguageSpeakerComponent>(uid, out var component) ? component.Understands : [];
     }
 
     public void SetLanguage(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)
@@ -204,9 +204,9 @@ public abstract class SharedLanguageSystem : EntitySystem
     /// <returns>True if the current language was modified, false otherwise.</returns>
     public bool EnsureValidLanguage(Entity<LanguageSpeakerComponent> ent)
     {
-        if (!ent.Comp.SpokenLanguages.Contains(ent.Comp.CurrentLanguage))
+        if (!ent.Comp.Speaks.Contains(ent.Comp.CurrentLanguage))
         {
-            ent.Comp.CurrentLanguage = ent.Comp.SpokenLanguages.FirstOrDefault(UniversalPrototype);
+            ent.Comp.CurrentLanguage = ent.Comp.Speaks.FirstOrDefault(UniversalPrototype);
             Dirty(ent);
             return true;
         }

@@ -44,9 +44,28 @@
     - Started
     - Completed
     - Failed
-  - type: KnowledgeGrant
-    table: !type:NestedSelector
-      tableId: AllConstructions
   # Power
   - type: ApcPowerReceiver
     powerLoad: 1000
+  - type: KnowledgeGrant
+    skills:
+      ConstructionSimpleHandmade: 100
+      ConstructionAdvancedHandmade: 100
+      ConstructionSurvivalWeaponsHandmade: 100
+      ConstructionSurvivalWeaponsHandmadeAdvanced: 100
+      ConstructionTechnological: 100
+      ConstructionMaterials: 100
+      ConstructionDoors: 100
+      ConstructionAirlocks: 100
+      ConstructionToys: 100
+      ConstructionBots: 100
+      ConstructionSimpleFurniture: 100
+      ConstructionFurniture: 100
+      ConstructionInfrastructure: 100
+      ConstructionElectronics: 100
+      ConstructionWalls: 100
+      ConstructionAdvancedWalls: 100
+      ConstructionScience: 100
+      ConstructionWindows: 100
+      ConstructionAdvancedWindows: 100
+      ConstructionSmokeables: 100
