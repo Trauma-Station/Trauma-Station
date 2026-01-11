@@ -19,3 +19,9 @@ construction-graph-tag-welder-experimental = an experimental welding tool
 
 # structures
 construction-graph-tag-nail = a nail
+
+# robots
+
+construction-graph-tag-butt = a butt
+construction-graph-tag-cyber-butt = an ipc groin
+construction-graph-tag-egg = any egg

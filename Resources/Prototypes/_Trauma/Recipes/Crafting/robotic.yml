@@ -1,0 +1,27 @@
+- type: construction
+  id: ButtBot
+  graph: ButtBot
+  targetNode: bot
+  category: construction-category-utilities
+  objectType: Item
+
+- type: construction
+  id: CyberButtBot
+  graph: CyberButtBot
+  targetNode: bot
+  category: construction-category-utilities
+  objectType: Item
+
+- type: construction
+  id: DuckBot
+  graph: DuckBot
+  targetNode: bot
+  category: construction-category-utilities
+  objectType: Item
+
+- type: construction
+  id: BoogieBot
+  graph: BoogieBot
+  targetNode: bot
+  category: construction-category-utilities
+  objectType: Item
