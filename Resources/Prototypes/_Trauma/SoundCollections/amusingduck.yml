@@ -1,0 +1,4 @@
+- type: soundCollection
+  id: AmusingDuckCollection
+  files:
+  - /Audio/_Trauma/Mobs/Bots/amusingduck.ogg

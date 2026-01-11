@@ -60,3 +60,9 @@
 
 - type: Tag
   id: WelderExperimental
+
+- type: Tag
+  id: Butt
+
+- type: Tag
+  id: CyberButt
