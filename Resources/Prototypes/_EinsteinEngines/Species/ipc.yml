@@ -35,6 +35,7 @@
 - type: speciesBaseSprites
   id: MobIPCSprites
   sprites:
+    Special: MobHumanoidAnyMarking # fuck it make the clankers catmen
     Head: MobIPCHead
     Face: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking

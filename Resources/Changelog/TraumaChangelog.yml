@@ -1154,3 +1154,33 @@ Entries:
       message: Fixed russian shitcode examining.
   id: 136
   time: '2026-01-09T20:15:52.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed cigars/cigarettes not being usable as a cautery in surgery.
+  id: 137
+  time: '2026-01-10T11:57:19.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Tweak
+      message: Changed all the xenomorph sprites to be from CM-13
+    - type: Tweak
+      message: >-
+        Changed it so facehuggers are a ghost role and need to be controlled by
+        a player to latch onto people
+  id: 138
+  time: '2026-01-10T13:32:27.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Reimplemented Felinid mutation toxin to give anything cat ears and tail.
+  id: 139
+  time: '2026-01-10T14:34:18.0000000+00:00'
+- author: Jackgoob14
+  changes:
+    - type: Remove
+      message: Removed insulated gloves from EngiVend and YouTool.
+    - type: Remove
+      message: Removed armor vests from BarDrobe.
+  id: 140
+  time: '2026-01-11T04:52:16.0000000+00:00'

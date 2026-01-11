@@ -29,6 +29,10 @@
 - type: speciesBaseSprites
   id: MobSlimeSprites
   sprites:
+    # <Trauma>
+    Special: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    # </Trauma>
     Face: MobHumanoidAnyMarking
     Head: MobSlimeHead
     HeadSide: MobHumanoidAnyMarking

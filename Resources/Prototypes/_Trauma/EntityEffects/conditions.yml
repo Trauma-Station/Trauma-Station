@@ -10,10 +10,17 @@
       guidebookText: entity-condition-guidebook-pressure-protection
 
 - type: entityCondition
-  id: IsAwake
+  id: IsHumanoid
   condition: !type:WhitelistCondition
-    inverted: true
-    guidebookText: entity-condition-guidebook-is-awake
     whitelist:
       components:
-      - Sleeping
+      - HumanoidAppearance
+    guidebookText: entity-condition-guidebook-is-humanoid
+
+- type: entityCondition
+  id: IsAwake
+  condition: !type:WhitelistCondition
+    whitelist:
+      components:
+      - AwakeMob
+    guidebookText: entity-condition-guidebook-is-awake

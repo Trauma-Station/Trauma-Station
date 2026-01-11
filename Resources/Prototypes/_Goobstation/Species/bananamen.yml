@@ -17,6 +17,7 @@
 - type: speciesBaseSprites
   id: MobBananaMenSprites
   sprites:
+    Special: MobHumanoidAnyMarking
     Head: MobBananaMenHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking

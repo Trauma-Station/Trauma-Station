@@ -7,7 +7,7 @@
   components:
   - type: Sprite
     drawdepth: SmallMobs
-    sprite: _White/Mobs/Aliens/Xenomorphs/larva.rsi
+    sprite: _Trauma/Mobs/Xenos/larva.rsi
     layers:
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: xenomorph

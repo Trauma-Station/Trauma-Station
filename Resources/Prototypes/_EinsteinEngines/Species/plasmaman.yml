@@ -20,6 +20,8 @@
 - type: speciesBaseSprites
   id: MobPlasmamanSprites
   sprites:
+    Tail: MobHumanoidAnyMarking
+    Special: MobHumanoidAnyMarking
     Head: MobPlasmamanHead
     Face: MobHumanoidAnyMarking
     Chest: MobPlasmamanChest

@@ -35,6 +35,7 @@
 - type: speciesBaseSprites
   id: MobVoxSprites
   sprites:
+    Special: MobHumanoidAnyMarking # Trauma
     Head: MobVoxHead
     Snout: MobHumanoidAnyMarking
     Hair: MobHumanoidAnyMarking

@@ -42,6 +42,15 @@ entity-effect-guidebook-infect-disease = { $chance ->
     *[other] infect
 } the target with {$disease}
 
+entity-effect-guidebook-add-marking = { $chance ->
+    [1] adds
+    *[other] add
+} {$marking} to the target
+entity-effect-guidebook-remove-marking = { $chance ->
+    [1] removes
+    *[other] remove
+} {$marking} to the target
+
 entity-effect-guidebook-speak = Causes involuntary speech
 
 entity-effect-guidebook-scale-entity = Scales the target's size by ({$x}, {y})

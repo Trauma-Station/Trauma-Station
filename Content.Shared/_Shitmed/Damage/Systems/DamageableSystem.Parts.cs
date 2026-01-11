@@ -236,6 +236,7 @@ public sealed partial class DamageableSystem
         // Reset the parent's damage values
         foreach (var type in bodyDamage.Damage.DamageDict.Keys.ToList())
             bodyDamage.Damage.DamageDict[type] = FixedPoint2.Zero;
+        Dirty(body, bodyDamage);
 
         // Sum up damage from all body parts
         foreach (var (partId, _) in _body.GetBodyChildren(body))

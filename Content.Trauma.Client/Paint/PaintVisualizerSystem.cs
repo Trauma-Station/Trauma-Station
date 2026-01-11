@@ -64,11 +64,8 @@ public sealed class PaintVisualizerSystem : EntitySystem
         var spriteEnt = new Entity<SpriteComponent?>(ent, sprite);
         foreach (var (key, color) in ent.Comp.LayerColors)
         {
-            if (!sprite.LayerMapTryGet(key, out var index))
-                continue;
-
-            sprite.LayerSetShader(index, null, null);
-            _sprite.LayerSetColor(spriteEnt, index, color);
+            sprite.LayerSetShader(key, null, null);
+            _sprite.LayerSetColor(spriteEnt, key, color);
         }
     }
 

@@ -21,6 +21,8 @@
 - type: speciesBaseSprites
   id: CyborgSprites
   sprites:
+    Tail: MobHumanoidAnyMarking # ????? idk just incase
+    Special: MobHumanoidAnyMarking
     Head: CyborgHead
     Chest: CyborgTorso
     LArm: CyborgLArm
