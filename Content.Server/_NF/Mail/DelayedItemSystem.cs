@@ -30,7 +30,7 @@ namespace Content.Server.Mail
         /// </summary>
         private void OnRemovedFromContainer(EntityUid uid, DelayedItemComponent component, ContainerModifiedMessage args)
         {
-            if (!TerminatingOrDeleted(uid))
+            if (TerminatingOrDeleted(uid))
                 return;
 
             Spawn(component.Item, Transform(uid).Coordinates);
