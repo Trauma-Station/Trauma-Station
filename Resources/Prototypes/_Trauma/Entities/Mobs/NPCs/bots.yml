@@ -183,7 +183,6 @@
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: boogie-d2
 
-
 - type: entity
   parent: BaseMobBoogieBot
   id: MobBoogieBotD3
