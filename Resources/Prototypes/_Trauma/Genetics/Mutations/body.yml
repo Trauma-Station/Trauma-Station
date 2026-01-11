@@ -470,3 +470,19 @@
     difficulty: 24
   - type: MobThresholdMutation
     removed: SoftCrit
+
+- type: entity
+  parent: BaseMutation
+  id: MutationFelinized
+  name: Felinized
+  description: Unknown
+  components:
+  - type: Mutation
+    instability: -10 # disgusting - naked snake, mgs3
+  - type: EffectsMutation
+    added:
+    - !type:NestedEffect
+      proto: MakeFelinid
+    removed:
+    - !type:NestedEffect
+      proto: RevertFelinid
