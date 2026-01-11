@@ -117,7 +117,7 @@
           shader: unshaded
           visible: false
     - type: Icon
-      sprite: Structures/Walls/grille.rsi
+      sprite: _Trauma/Structures/Walls/grille.rsi #Trauma
       state: grille
     - type: Construction
       graph: Grille
