@@ -4,8 +4,8 @@ meta:
   engineVersion: 270.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/12/2026 22:11:23
-  entityCount: 32477
+  time: 01/12/2026 23:02:38
+  entityCount: 32480
 maps:
 - 1
 grids:
@@ -14983,7 +14983,7 @@ entities:
       pos: 26.5,17.5
       parent: 12
     - type: Door
-      secondsUntilStateChange: -87480.12
+      secondsUntilStateChange: -88034.91
       state: Opening
     - type: DeviceLinkSink
       invokeCounter: 1
@@ -16130,7 +16130,7 @@ entities:
       pos: 41.5,62.5
       parent: 12
     - type: Door
-      secondsUntilStateChange: -44746.8
+      secondsUntilStateChange: -45301.594
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -18904,6 +18904,11 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 9.5,64.5
       parent: 12
+  - uid: 12568
+    components:
+    - type: Transform
+      pos: -14.5,-67.5
+      parent: 12
   - uid: 12616
     components:
     - type: Transform
@@ -19218,12 +19223,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 34.5,-12.5
-      parent: 12
-  - uid: 32398
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -14.5,-67.5
       parent: 12
 - proto: APCElectronics
   entities:
@@ -86558,6 +86557,17 @@ entities:
       rot: 3.141592653589793 rad
       pos: -8.5,50.5
       parent: 12
+  - uid: 32477
+    components:
+    - type: Transform
+      pos: -20.5,14.5
+      parent: 12
+  - uid: 32478
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -22.5,4.5
+      parent: 12
 - proto: CryoPod
   entities:
   - uid: 2798
@@ -153090,10 +153100,66 @@ entities:
       rot: 3.141592653589793 rad
       pos: 70.5,48.5
       parent: 12
+  - uid: 23778
+    components:
+    - type: Transform
+      pos: -14.5,-73.5
+      parent: 12
   - uid: 23879
     components:
     - type: Transform
       pos: 78.5,47.5
+      parent: 12
+  - uid: 32345
+    components:
+    - type: Transform
+      pos: 54.5,49.5
+      parent: 12
+  - uid: 32346
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.5,-67.5
+      parent: 12
+  - uid: 32347
+    components:
+    - type: Transform
+      pos: 5.5,-64.5
+      parent: 12
+  - uid: 32348
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,-74.5
+      parent: 12
+  - uid: 32349
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -3.5,-74.5
+      parent: 12
+  - uid: 32350
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.5,-74.5
+      parent: 12
+  - uid: 32398
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -3.5,-71.5
+      parent: 12
+  - uid: 32458
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -13.5,-77.5
+      parent: 12
+  - uid: 32479
+    components:
+    - type: Transform
+      pos: 61.5,43.5
       parent: 12
 - proto: Poweredlight
   entities:
@@ -155666,12 +155732,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -52.5,-14.5
       parent: 12
-  - uid: 12568
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -13.5,-77.5
-      parent: 12
   - uid: 12710
     components:
     - type: Transform
@@ -155915,11 +155975,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 14.5,35.5
       parent: 12
-  - uid: 23778
-    components:
-    - type: Transform
-      pos: 54.5,49.5
-      parent: 12
   - uid: 25007
     components:
     - type: Transform
@@ -156114,46 +156169,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -11.5,-13.5
-      parent: 12
-  - uid: 32345
-    components:
-    - type: Transform
-      pos: 5.5,-64.5
-      parent: 12
-  - uid: 32346
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 8.5,-67.5
-      parent: 12
-  - uid: 32347
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,-74.5
-      parent: 12
-  - uid: 32348
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 4.5,-74.5
-      parent: 12
-  - uid: 32349
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -3.5,-74.5
-      parent: 12
-  - uid: 32350
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -3.5,-71.5
-      parent: 12
-  - uid: 32458
-    components:
-    - type: Transform
-      pos: -14.5,-73.5
       parent: 12
 - proto: PoweredSmallLightEmpty
   entities:
