@@ -8,16 +8,17 @@
   color: "#1f0a0a"
   metabolisms:
     Food:
-      metabolismRate: 0.01 # Effectively once every 100 seconds.
+      metabolismRate: 0.01 # Effectively one unit every 100 seconds.
       effects:
       - !type:SatiateHunger
-        factor: 0.3
-      - !type:MovementSpeedModifier
-        walkSpeedModifier: 0.9
-        sprintSpeedModifier: 0.9
+        factor: 10
+      - !type:ModifyStatusEffect
+        effectProto: MicroplasticsStatusEffect
+      - !type:Vomit
+        probability: 0.005
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
+        - !type:MetabolizerTypeCondition
           type: [ Yowie ]
           inverted: true
         damage:
