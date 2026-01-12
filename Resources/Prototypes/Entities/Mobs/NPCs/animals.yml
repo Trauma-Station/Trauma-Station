@@ -444,7 +444,7 @@
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 10
+        damage: 3 # Trauma
       behaviors:
       - !type:GibBehavior
         gibContents: Skip # Shitmed Change
@@ -468,6 +468,9 @@
     damage:
       types:
         Piercing: 0
+  - type: Body
+    prototype: Rat
+    requiredLegs: 0
 
 - type: entity
   name: glockroach
@@ -3816,6 +3819,16 @@
       behaviors:
       - !type:GibBehavior
         recursive: false
+  - type: StepTrigger #Trauma
+    requiredTriggeredSpeed: 1
+  - type: Slippery
+  - type: TriggerOnStepTrigger
+  - type: GibOnTrigger
+  - type: EmitSoundOnTrigger
+    sound:
+      path: "/Audio/Animals/mouse_squeak.ogg"
+    positional: true
+    predicted: true  #/Trauma
 
 - type: entity
   name: pig
