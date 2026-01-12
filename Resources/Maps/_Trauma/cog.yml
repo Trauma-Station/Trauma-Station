@@ -4,8 +4,8 @@ meta:
   engineVersion: 270.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/12/2026 23:02:38
-  entityCount: 32480
+  time: 01/12/2026 23:18:08
+  entityCount: 32489
 maps:
 - 1
 grids:
@@ -9865,7 +9865,7 @@ entities:
             0: 61133
           8,-8:
             0: 61747
-            6: 136
+            3: 136
           8,-7:
             0: 4095
           8,-6:
@@ -9885,11 +9885,11 @@ entities:
             0: 4369
             2: 50244
           6,-3:
-            3: 48
-            4: 12288
+            4: 48
+            5: 12288
             2: 34952
           6,-2:
-            5: 48
+            6: 48
             1: 12288
             2: 34952
           6,-1:
@@ -10029,16 +10029,16 @@ entities:
             0: 44943
           8,-9:
             0: 12799
-            6: 32768
+            3: 32768
           9,-8:
-            6: 375
+            3: 375
             0: 28672
           9,-7:
             0: 1919
           9,-6:
             0: 20222
           9,-9:
-            6: 28672
+            3: 28672
             0: 255
           9,-5:
             0: 3822
@@ -11621,6 +11621,10 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles:
+            Nitrogen: 103.92799
+        - volume: 2500
+          temperature: 293.15
+          moles:
             Oxygen: 6666.982
         - volume: 2500
           temperature: 293.15
@@ -11630,10 +11634,6 @@ entities:
           temperature: 293.15
           moles:
             Plasma: 6666.982
-        - volume: 2500
-          temperature: 293.15
-          moles:
-            Nitrogen: 103.92799
         - volume: 2500
           temperature: 235
           moles:
@@ -14983,7 +14983,7 @@ entities:
       pos: 26.5,17.5
       parent: 12
     - type: Door
-      secondsUntilStateChange: -88034.91
+      secondsUntilStateChange: -88058.36
       state: Opening
     - type: DeviceLinkSink
       invokeCounter: 1
@@ -16130,7 +16130,7 @@ entities:
       pos: 41.5,62.5
       parent: 12
     - type: Door
-      secondsUntilStateChange: -45301.594
+      secondsUntilStateChange: -45325.05
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -170487,6 +170487,53 @@ entities:
     components:
     - type: Transform
       pos: 45.5,20.5
+      parent: 12
+- proto: SpawnPointLatejoin
+  entities:
+  - uid: 32480
+    components:
+    - type: Transform
+      pos: -17.5,0.5
+      parent: 12
+  - uid: 32481
+    components:
+    - type: Transform
+      pos: -17.5,1.5
+      parent: 12
+  - uid: 32482
+    components:
+    - type: Transform
+      pos: -13.5,1.5
+      parent: 12
+  - uid: 32483
+    components:
+    - type: Transform
+      pos: -11.5,1.5
+      parent: 12
+  - uid: 32484
+    components:
+    - type: Transform
+      pos: -17.5,3.5
+      parent: 12
+  - uid: 32485
+    components:
+    - type: Transform
+      pos: -17.5,2.5
+      parent: 12
+  - uid: 32486
+    components:
+    - type: Transform
+      pos: -14.5,3.5
+      parent: 12
+  - uid: 32487
+    components:
+    - type: Transform
+      pos: -17.5,-2.5
+      parent: 12
+  - uid: 32488
+    components:
+    - type: Transform
+      pos: -17.5,-3.5
       parent: 12
 - proto: SpawnPointLawyer
   entities:
