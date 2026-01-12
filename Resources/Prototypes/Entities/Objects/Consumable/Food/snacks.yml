@@ -164,6 +164,17 @@
   - type: Edible
     trash:
     - FoodPacketBoritosTrash
+# <Trauma>
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: LabGrownNutriment
+          Quantity: 1
+# </Trauma>
 
 - type: entity
   name: C&Ds
@@ -181,6 +192,17 @@
   - type: Edible
     trash:
     - FoodPacketCnDsTrash
+# <Trauma>
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: LabGrownNutriment
+          Quantity: 1
+# </Trauma>
 
 - type: entity
   name: cheesie honkers
@@ -199,6 +221,17 @@
   - type: Edible
     trash:
     - FoodPacketCheesieTrash
+# <Trauma>
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: LabGrownNutriment
+          Quantity: 1
+# </Trauma>
 
 - type: entity
   name: chips
@@ -218,6 +251,17 @@
   - type: Edible
     trash:
     - FoodPacketChipsTrash
+# <Trauma>
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: LabGrownNutriment
+          Quantity: 1
+# </Trauma>
 
 - type: entity
   parent: BaseItem
@@ -307,6 +351,17 @@
   - type: Item
     heldPrefix: energybar-open
     storedOffset: 0,-2
+# <Trauma>
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: LabGrownNutriment
+          Quantity: 1
+# </Trauma>
 
 - type: entity
   parent: FoodSnackBase
@@ -330,6 +385,17 @@
     tags:
     - Fruit # Seed of a fruit, you can yell at me
     - Pistachios # Added tag due to CrateFoodGetMore interaction with BountyFruit.
+# <Trauma>
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: LabGrownNutriment
+          Quantity: 1
+# </Trauma>
 
 - type: entity
   name: popcorn
@@ -369,6 +435,17 @@
   - type: Tag
     tags:
     - Fruit
+# <Trauma>
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: LabGrownNutriment
+          Quantity: 1
+# </Trauma>
 
 - type: entity
   parent: FoodSnackBase
@@ -387,6 +464,17 @@
   - type: Edible
     trash:
     - FoodPacketSemkiTrash
+# <Trauma>
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: LabGrownNutriment
+          Quantity: 1
+# </Trauma>
 
 - type: entity
   name: sus jerky
@@ -407,6 +495,17 @@
   - type: Tag
     tags:
     - Meat
+# <Trauma>
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: LabGrownNutriment
+          Quantity: 1
+# </Trauma>
 
 - type: entity
   name: syndi-cakes
@@ -441,7 +540,9 @@
         maxVol: 50 #big cup
         reagents:
         - ReagentId: DryRamen
-          Quantity: 30
+          Quantity: 29 # Trauma 30 > 29
+        - ReagentId: LabGrownNutriment # Trauma
+          Quantity: 1
         - ReagentId: Soysauce
           Quantity: 5
   - type: Sprite
@@ -465,7 +566,9 @@
         maxVol: 50
         reagents:
         - ReagentId: DryRamen
-          Quantity: 30
+          Quantity: 29 # Trauma 30 > 29
+        - ReagentId: LabGrownNutriment # Trauma
+          Quantity: 1
         - ReagentId: CapsaicinOil
           Quantity: 5
 
@@ -491,7 +594,9 @@
         maxVol: 30 # Room for extra condiments
         reagents:
         - ReagentId: Nutriment
-          Quantity: 10
+          Quantity: 9 # Trauma 10 > 9
+        - ReagentId: LabGrownNutriment # Trauma
+          Quantity: 1
         - ReagentId: Soysauce
           Quantity: 2
   - type: Edible
@@ -520,7 +625,9 @@
         maxVol: 30 # Room for extra condiments
         reagents:
         - ReagentId: Nutriment
-          Quantity: 10
+          Quantity: 9 # Trauma 10 > 9
+        - ReagentId: LabGrownNutriment # Trauma
+          Quantity: 1
         - ReagentId: CapsaicinOil
           Quantity: 2
         - ReagentId: Soysauce
@@ -545,7 +652,7 @@
       food:
         maxVol: 1
         reagents:
-        - ReagentId: Nutriment
+        - ReagentId: LabGrownNutriment # Trauma
           Quantity: 1
   - type: Item
     sprite: Objects/Consumable/Food/snacks.rsi
@@ -603,7 +710,9 @@
         maxVol: 25
         reagents:
         - ReagentId: Nutriment
-          Quantity: 20
+          Quantity: 19 # Trauma, was 20
+        - ReagentId: LabGrownNutriment # Trauma
+          Quantity: 1
 
 - type: entity
   parent: BaseItem

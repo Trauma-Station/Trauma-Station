@@ -9,9 +9,8 @@
   components:
   - type: Sprite
     state: kitchen
-  # TODO: add once areas are on all maps
-  #- type: MartialArtArea
-  #  art: CloseQuartersCombat
+  - type: MartialArtArea
+    form: CloseQuartersCombat
 
 # For the seating area between kitchen and bar
 - type: entity

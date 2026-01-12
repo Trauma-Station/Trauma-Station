@@ -32,4 +32,10 @@
       - VendingMachineChang
       - VendingMachineDonut
       - VendingMachineSweetToof # Goobstation
+# <Trauma>
+      - VendingMachineSustenance
+      - VendingMachineHotfood 
+      - VendingMachineFitness 
+      - VendingMachineWeeb
+# </Trauma>
     chance: 1

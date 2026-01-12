@@ -73,4 +73,21 @@ public sealed partial class TraumaCVars
         CVarDef.Create("trauma.gun_lag_comp_range", 0.6f, CVar.SERVER);
 
     #endregion
+
+    #region Softcrit
+
+    /// <summary>
+    /// Speed modifier for softcrit mobs, on top of being forced to crawl.
+    /// </summary>
+    public static readonly CVarDef<float> SoftCritMoveSpeed =
+        CVarDef.Create("trauma.softcrit_move_speed", 0.5f, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// Inhaled gas modifier for softcrit mobs, makes it harder to breathe.
+    /// This means you can't just crawl around forever if you aren't bleeding out.
+    /// </summary>
+    public static readonly CVarDef<float> SoftCritInhaleModifier =
+        CVarDef.Create("trauma.softcrit_inhale_modifier", 0.3f, CVar.SERVER | CVar.REPLICATED);
+
+    #endregion
 }

@@ -50,7 +50,6 @@ public sealed class FaceHuggerSystem : EntitySystem
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -67,14 +66,32 @@ public sealed class FaceHuggerSystem : EntitySystem
         SubscribeLocalEvent<FaceHuggerComponent, StepTriggeredOffEvent>(OnStepTriggered);
         SubscribeLocalEvent<FaceHuggerComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<FaceHuggerComponent, BeingUnequippedAttemptEvent>(OnBeingUnequippedAttempt);
+        SubscribeLocalEvent<FaceHuggerComponent, PlayerAttachedEvent>(OnPlayerAttached);
+        SubscribeLocalEvent<FaceHuggerComponent, PlayerDetachedEvent>(OnPlayerDetached);
 
         // Goobstation - Throwing behavior
         SubscribeLocalEvent<ThrowableFacehuggerComponent, ThrownEvent>(OnThrown);
         SubscribeLocalEvent<ThrowableFacehuggerComponent, ThrowDoHitEvent>(OnThrowDoHit);
     }
 
+    private void OnPlayerAttached(EntityUid uid, FaceHuggerComponent component, PlayerAttachedEvent args) // Trauma, player controlled facehuggers
+    {
+        component.PlayerControlled = true;
+    }
+
+    private void OnPlayerDetached(EntityUid uid, FaceHuggerComponent component, PlayerDetachedEvent args) // Trauma, player controlled facehuggers
+    {
+        component.PlayerControlled = false;
+    }
+
     private void OnCollideEvent(EntityUid uid, FaceHuggerComponent component, StartCollideEvent args)
-        => TryEquipFaceHugger(uid, args.OtherEntity, component);
+    {
+        if(!component.PlayerControlled) // Trauma, player controlled facehuggers
+            return;
+
+        TryEquipFaceHugger(uid, args.OtherEntity, component);
+    }
+
 
     private void OnMeleeHit(EntityUid uid, FaceHuggerComponent component, MeleeHitEvent args)
     {
@@ -89,7 +106,7 @@ public sealed class FaceHuggerSystem : EntitySystem
 
     private void OnStepTriggered(EntityUid uid, FaceHuggerComponent component, ref StepTriggeredOffEvent args)
     {
-        if (component.Active)
+        if (component.Active && component.PlayerControlled) // Trauma, player controlled facehuggers
             TryEquipFaceHugger(uid, args.Tripper, component);
     }
 
@@ -175,17 +192,6 @@ public sealed class FaceHuggerSystem : EntitySystem
                 }
             }
             // Goobstaion end
-
-            // Check for nearby entities to latch onto
-            if (faceHugger.Active && clothing?.InSlot == null)
-            {
-                foreach (var entity in _entityLookup.GetEntitiesInRange<InventoryComponent>(Transform(uid).Coordinates,
-                             1.5f))
-                {
-                    if (TryEquipFaceHugger(uid, entity, faceHugger))
-                        break;
-                }
-            }
         }
     }
 

@@ -201,6 +201,9 @@ public sealed partial class MarkingSet
         {
             foreach (var (category, list) in Markings)
             {
+                if (category.IgnoresMatchSkin()) // Trauma
+                    continue;
+
                 foreach (var marking in list)
                 {
                     if (markingManager.TryGetMarking(marking, out var prototype) &&
@@ -266,10 +269,12 @@ public sealed partial class MarkingSet
                     continue;
                 }
 
-                if (marking.Sprites.Count != list[i].MarkingColors.Count)
+                // <Trauma> - replaced Sprites.Count with ColorCount
+                if (marking.ColorCount != list[i].MarkingColors.Count)
                 {
-                    list[i] = new Marking(marking.ID, marking.Sprites.Count);
+                    list[i] = new Marking(marking.ID, marking.ColorCount);
                 }
+                // </Trauma>
             }
 
             foreach (var i in toRemove)
