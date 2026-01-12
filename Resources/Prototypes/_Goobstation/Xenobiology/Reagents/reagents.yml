@@ -178,4 +178,5 @@
       - !type:AdjustReagent
         reagent: XenobioFelinidToxin
         amount: -50.0
-      # TODO: add cat ears and tail
+      - !type:NestedEffect
+        proto: MakeFelinid

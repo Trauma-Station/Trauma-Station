@@ -4,12 +4,13 @@
 // SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
+using Robust.Shared.GameStates;
 
-namespace Content.Goobstation.Server.Flashbang;
+namespace Content.Goobstation.Shared.Flashbang;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class FlashSoundSuppressionComponent : Component
 {
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float ProtectionRange = 2f;
 }

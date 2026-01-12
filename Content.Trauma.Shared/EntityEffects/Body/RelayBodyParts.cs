@@ -40,6 +40,7 @@ public sealed partial class RelayBodyParts : EntityEffectBase<RelayBodyParts>
 
 public sealed class RelayBodyPartsEffectSystem : EntityEffectSystem<BodyComponent, RelayBodyParts>
 {
+    [Dependency] private readonly EffectDataSystem _data = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
 
@@ -48,9 +49,11 @@ public sealed class RelayBodyPartsEffectSystem : EntityEffectSystem<BodyComponen
         var effects = args.Effect.Effects;
         var partType = args.Effect.PartType;
         var symmetry = args.Effect.PartSymmetry;
-        foreach (var part in _body.GetBodyChildrenOfType(ent, partType, ent.Comp, symmetry))
+        foreach (var (part, _) in _body.GetBodyChildrenOfType(ent, partType, ent.Comp, symmetry))
         {
-            _effects.ApplyEffects(part.Id, effects, args.Scale);
+            _data.CopyData(ent, part);
+            _effects.ApplyEffects(part, effects, args.Scale);
+            _data.ClearData(part);
         }
     }
 }

@@ -1,0 +1,92 @@
+- type: entity
+  parent: EdibleBase
+  id: FoodRot
+  name: rotten slop
+  description: Disgusting.
+  components:
+  - type: Tag
+    tags:
+    - Raw
+    - Trash
+    - Recyclable
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Effects/gib2.ogg
+      params:
+        volume: -7
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Effects/gib1.ogg
+      params:
+        volume: -7
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/rot.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: Ipecac
+          Quantity: 7
+        - ReagentId: Mold
+          Quantity: 7
+  - type: Item
+    size: Tiny
+    storedOffset: -2,1
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: SpaceGarbage
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Mold
+        Quantity: 10
+      - ReagentId: RobustHarvest
+        Quantity: 10
+  - type: Damageable
+  - type: DamageOverTime
+    damage:
+      types:
+        Slash: 1
+    interval: 15
+    ignoreResistances: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpawnGasBehavior
+        gasMixture:
+          moles:
+            Ammonia: 25
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/gib1.ogg
+      - !type:SpillBehavior
+        solution: food
+      - !type:SpawnEntitiesBehavior
+         spawn:
+          MobCockroach:
+            min: 0
+            max: 1
+  - type: DamageOnHighSpeedImpact
+    minimumSpeed: 0.1
+    damage:
+      types:
+        Blunt: 10
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 10
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Poison: 1

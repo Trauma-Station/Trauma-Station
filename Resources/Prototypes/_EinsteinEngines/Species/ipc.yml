@@ -35,7 +35,10 @@
 - type: speciesBaseSprites
   id: MobIPCSprites
   sprites:
-    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
+    # <Trauma>
+    HairSpecial: MobHumanoidAnyMarking
+    Special: MobHumanoidAnyMarking # fuck it make the clankers catmen
+    # </Trauma>
     Head: MobIPCHead
     Face: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking

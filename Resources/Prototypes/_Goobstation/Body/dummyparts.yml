@@ -6,8 +6,13 @@
 - type: entity
   id: Butt
   name: "butt"
-  parent: [BaseItem]
+  parent: [BaseItem, ClothingHeadBase]
   components:
   - type: Sprite
     sprite: _Goobstation/Mobs/butt.rsi
     state: "butt"
+  - type: Tag
+    tags:
+    - Butt
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Helmets/butt_hat.rsi

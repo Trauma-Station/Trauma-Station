@@ -1,0 +1,194 @@
+- type: entity
+  parent: MobSiliconBase
+  id: MobButtBot
+  name: butt bot
+  description: A robot which farts
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/buttbot.rsi
+    state: buttbot
+  - type: AutoEmote
+    emotes:
+    - Fart
+  - type: HTN
+    rootTask:
+      task: RuminantCompound
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
+  - type: Construction
+    graph: ButtBot
+    node: bot
+  - type: Fart
+  - type: EmoteOnDamage
+    emotes:
+    - Fart
+
+- type: entity
+  parent: MobButtBot
+  id: MobButtBotCyber
+  name: cyber butt bot
+  components:
+  - type: Sprite
+    state: cyberbuttbot
+  - type: Construction
+    graph: CyberButtBot
+    node: bot
+
+- type: entity
+  parent: MobSiliconBase
+  id: MobDuckBot
+  name: duck bot
+  description: An amusing duck
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/duckbot.rsi
+    state: duckbot
+  - type: HTN
+    rootTask:
+      task: RuminantCompound
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      30: Dead
+  - type: Construction
+    graph: DuckBot
+    node: bot
+  - type: EggLayer
+    eggSpawn:
+    - id: FoodEgg
+  - type: SpamEmitSound
+    minInterval: 15
+    maxInterval: 30
+    sound:
+      collection: AmusingDuckCollection
+  - type: InteractionPopup
+    successChance: 0.5
+    interactSuccessString: petting-success-duckbot
+    interactFailureString: petting-failure-duckbot
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+
+- type: entity
+  id: BoogieBotSpawner
+  name: boogie bot
+  description: Get down on it!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/boogiebot.rsi
+    state: icon
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+    - MobBoogieBotD1
+    - MobBoogieBotD2
+    - MobBoogieBotD3
+  - type: Construction
+    graph: BoogieBot
+    node: bot
+
+- type: entity
+  parent: MobSiliconBase
+  id: BaseMobBoogieBot
+  name: boogie bot
+  description: Get down on it!
+  categories: [ HideSpawnMenu ]
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/boogiebot.rsi
+    state: icon
+  - type: HTN
+    rootTask:
+      task: RuminantCompound
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageStateVisuals
+    states:
+      Dead:
+        Base: dead
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      50: Dead
+  - type: Construction
+    graph: BoogieBot
+    node: bot
+  - type: InteractionPopup
+    successChance: 0.9
+    interactSuccessString: petting-success-boogiebot
+    interactFailureString: petting-failure-boogiebot
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+
+- type: entity
+  parent: BaseMobBoogieBot
+  id: MobBoogieBotD1
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: boogie-d1
+
+- type: entity
+  parent: BaseMobBoogieBot
+  id: MobBoogieBotD2
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: boogie-d2
+
+- type: entity
+  parent: BaseMobBoogieBot
+  id: MobBoogieBotD3
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: boogie-d3

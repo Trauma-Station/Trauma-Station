@@ -12,19 +12,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Flash;
-using Content.Goobstation.Shared.Flashbang;
-using Content.Server.Flash;
-using Content.Server.Stunnable;
 using Content.Shared.Examine;
 using Content.Shared.Flash;
 using Content.Shared.Inventory;
 using Content.Shared.Tag;
+using Content.Shared.Stunnable;
 
-namespace Content.Goobstation.Server.Flashbang;
+namespace Content.Goobstation.Shared.Flashbang;
 
 public sealed class FlashbangSystem : EntitySystem
 {
-    [Dependency] private readonly StunSystem _stun = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly TagSystem _tag = default!;
 
     public override void Initialize()
@@ -67,7 +65,7 @@ public sealed class FlashbangSystem : EntitySystem
             return;
 
         var protectionRange = args.Range;
-        if (!_tag.HasTag(ent, FlashSystem.IgnoreResistancesTag)
+        if (!_tag.HasTag(ent, SharedFlashSystem.IgnoreResistancesTag)
             && !HasComp<FlashVulnerableComponent>(args.Target))
         {
             var ev = new GetFlashbangedEvent(MathF.Max(args.Range, ent.Comp.MinProtectionRange + 1f));

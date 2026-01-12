@@ -18,6 +18,7 @@
     # <Trauma>
     HairSpecial: MobHumanoidAnyMarking
     FacialHairSpecial: MobHumanoidAnyMarking
+    Special: MobHumanoidAnyMarking
     # </Trauma>
     Head: MobVulpkaninHead
     Hair: MobHumanoidAnyMarking

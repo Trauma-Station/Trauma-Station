@@ -8,3 +8,11 @@
         components:
         - PressureProtection
       guidebookText: entity-effect-condition-guidebook-pressure-protection
+
+- type: entityCondition
+  id: IsHumanoid
+  condition: !type:WhitelistCondition
+    whitelist:
+      components:
+      - HumanoidAppearance
+    guidebookText: entity-condition-guidebook-is-humanoid

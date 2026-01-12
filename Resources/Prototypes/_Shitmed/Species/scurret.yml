@@ -12,6 +12,7 @@
 - type: speciesBaseSprites
   id: MobScurretSprites
   sprites:
+    Special: MobHumanoidAnyMarking
     Head: MobScurretHead
     Chest: MobScurretChest
     Groin: MobScurretGroin

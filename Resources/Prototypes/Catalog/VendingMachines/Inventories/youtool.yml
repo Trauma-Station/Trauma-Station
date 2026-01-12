@@ -50,4 +50,4 @@
   contrabandInventory:
     Multitool: 2
     ClothingBeltUtility: 3
-    ClothingHandsGlovesColorYellow: 1
+    # ClothingHandsGlovesColorYellow: 1 # Trauma

@@ -317,6 +317,8 @@ public sealed class PullingSystem : EntitySystem
         if (!TryComp(args.BlockingEntity, out PullableComponent? comp))
             return;
 
+        TryStopPull(args.BlockingEntity, comp, uid, true);
+
         if (!_combatMode.IsInCombatMode(uid)
             || HasComp<GrabThrownComponent>(args.BlockingEntity)
             || component.GrabStage <= GrabStage.Soft)
@@ -328,7 +330,6 @@ public sealed class PullingSystem : EntitySystem
         var damage = new DamageSpecifier();
         damage.DamageDict.Add("Blunt", 5);
 
-        TryStopPull(args.BlockingEntity, comp, uid, true);
         _grabThrown.Throw(args.BlockingEntity,
             uid,
             direction,

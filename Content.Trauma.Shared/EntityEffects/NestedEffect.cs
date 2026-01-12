@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 using Content.Shared.Localizations;
 using Robust.Shared.Prototypes;
@@ -19,6 +20,9 @@ public sealed partial class NestedEffect : EntityEffectBase<NestedEffect>
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         var proto = prototype.Index(Proto);
+        if (proto.GuidebookText is {} key)
+            return Loc.GetString(key, ("chance", Probability));
+
         var effects = new List<string>();
         foreach (var effect in proto.Effects)
         {
@@ -36,6 +40,7 @@ public sealed partial class NestedEffect : EntityEffectBase<NestedEffect>
 public sealed class NestedEffectSystem : EntityEffectSystem<TransformComponent, NestedEffect>
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<NestedEffect> args)
@@ -46,6 +51,7 @@ public sealed class NestedEffectSystem : EntityEffectSystem<TransformComponent, 
     public void ApplyNestedEffect(EntityUid target, ProtoId<EntityEffectPrototype> id, float scale = 1f)
     {
         var proto = _proto.Index(id);
-        _effects.ApplyEffects(target, proto.Effects, scale);
+        if (_conditions.TryConditions(target, proto.Conditions))
+            _effects.ApplyEffects(target, proto.Effects, scale);
     }
 }

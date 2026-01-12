@@ -2,10 +2,16 @@
   id: AdvancedMagboots
 
 - type: Tag
+  id: Butt
+
+- type: Tag
   id: CartridgeRPG2
 
 - type: Tag
   id: CartridgeTurret
+
+- type: Tag
+  id: CyberButt
 
 - type: Tag
   id: DataChip

@@ -154,6 +154,7 @@ namespace Content.Server.Nutrition.EntitySystems
                 return;
 
             smokable.State = state;
+            Dirty(uid, smokable); // Trauma - holy shitcode
             _appearance.SetData(uid, SmokingVisuals.Smoking, state, appearance);
 
             var newState = state switch

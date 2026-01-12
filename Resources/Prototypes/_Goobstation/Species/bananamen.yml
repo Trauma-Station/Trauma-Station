@@ -20,6 +20,7 @@
     # <Trauma>
     HairSpecial: MobHumanoidAnyMarking
     FacialHairSpecial: MobHumanoidAnyMarking
+    Special: MobHumanoidAnyMarking
     # </Trauma>
     Head: MobBananaMenHead
     Hair: MobHumanoidAnyMarking

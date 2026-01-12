@@ -35,7 +35,10 @@
   id: MobArachnidSprites
   sprites:
     Hair: MobHumanoidAnyMarking # imp, arachnid hair arachnid hair!
-    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
+    # <Trauma>
+    HairSpecial: MobHumanoidAnyMarking
+    Special: MobHumanoidAnyMarking
+    # </Trauma>
     Head: MobArachnidHead
     Snout: MobHumanoidAnyMarking
     Underwear: MobHumanoidAnyMarking

@@ -1154,3 +1154,87 @@ Entries:
       message: Fixed russian shitcode examining.
   id: 136
   time: '2026-01-09T20:15:52.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed cigars/cigarettes not being usable as a cautery in surgery.
+  id: 137
+  time: '2026-01-10T11:57:19.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Tweak
+      message: Changed all the xenomorph sprites to be from CM-13
+    - type: Tweak
+      message: >-
+        Changed it so facehuggers are a ghost role and need to be controlled by
+        a player to latch onto people
+  id: 138
+  time: '2026-01-10T13:32:27.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Reimplemented Felinid mutation toxin to give anything cat ears and tail.
+  id: 139
+  time: '2026-01-10T14:34:18.0000000+00:00'
+- author: Jackgoob14
+  changes:
+    - type: Remove
+      message: Removed insulated gloves from EngiVend and YouTool.
+    - type: Remove
+      message: Removed armor vests from BarDrobe.
+  id: 140
+  time: '2026-01-11T04:52:16.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Add
+      message: Added ButtBot
+    - type: Add
+      message: Added DuckBot
+    - type: Add
+      message: Added BoogieBot
+    - type: Tweak
+      message: You can now wear butts as hats
+  id: 141
+  time: '2026-01-11T15:16:24.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Add
+      message: >-
+        Added new reagent, NanoMachines, turns people into cyborgs when enough
+        is consumed
+  id: 142
+  time: '2026-01-12T02:25:03.0000000+00:00'
+- author: Nousagi37
+  changes:
+    - type: Remove
+      message: Removed extra SecTechFab on Fland
+  id: 143
+  time: '2026-01-12T03:19:53.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: 'Food now rots into slop if left out of refrigeration '
+    - type: Add
+      message: >-
+        Slop will rot away, deleting excess entities, it has a chance to spawn a
+        roach when rotted.
+    - type: Fix
+      message: Roaches no longer randomly die and are poison immune.
+    - type: Fix
+      message: Roaches go around and eat other food, clearing up more entities.
+  id: 144
+  time: '2026-01-12T04:56:55.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed bodypart health examine.
+  id: 145
+  time: '2026-01-12T05:56:06.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: >-
+        Fixed being able to buckle yourself or use some actions while in
+        softcrit.
+  id: 146
+  time: '2026-01-12T07:21:22.0000000+00:00'

@@ -12,6 +12,7 @@
 - type: speciesBaseSprites
   id: MobShadowlingSprites
   sprites:
+    Special: MobHumanoidAnyMarking
     Head: MobShadowlingHead
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
