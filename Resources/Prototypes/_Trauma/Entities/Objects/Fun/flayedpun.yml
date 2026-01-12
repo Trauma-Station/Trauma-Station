@@ -1,0 +1,24 @@
+- type: entity
+  name: cheesie honkers
+  parent: FoodSnackBase
+  id: FoodSnackCheesie
+  description: Bite sized cheesie snacks that will honk all over your mouth.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - cheesy
+      - funny
+  - type: Sprite
+    sprite: _Trauma/Objects/Fun/flayedpunpun.rsi
+    scale: 0.1, 0.1
+  - type: ScaleData # Goobstation
+    scale: 0.1, 0.1
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: LabGrownNutriment
+          Quantity: 1
