@@ -4,8 +4,8 @@ meta:
   engineVersion: 270.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/08/2026 15:17:51
-  entityCount: 38149
+  time: 01/12/2026 02:53:47
+  entityCount: 38147
 maps:
 - 1
 grids:
@@ -21081,7 +21081,7 @@ entities:
       pos: -40.5,39.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -4573.8906
+      secondsUntilStateChange: -4675.677
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -21679,7 +21679,7 @@ entities:
       pos: 72.5,-11.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -85127.234
+      secondsUntilStateChange: -85229.02
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -82554,6 +82554,13 @@ entities:
     components:
     - type: Transform
       pos: 72.5,-18.5
+      parent: 2
+- proto: CargoMailTeleporter
+  entities:
+  - uid: 24795
+    components:
+    - type: Transform
+      pos: 18.5,-11.5
       parent: 2
 - proto: CargoTechFab
   entities:
@@ -165808,13 +165815,6 @@ entities:
     - type: Transform
       pos: 37.581806,-4.4282417
       parent: 2
-- proto: HeadSkeleton
-  entities:
-  - uid: 37027
-    components:
-    - type: Transform
-      pos: -43.489475,45.51848
-      parent: 2
 - proto: HeatExchanger
   entities:
   - uid: 22475
@@ -169128,13 +169128,6 @@ entities:
     - type: Configuration
       config:
         tag: Engineering
-- proto: MailTeleporter
-  entities:
-  - uid: 24795
-    components:
-    - type: Transform
-      pos: 18.5,-11.5
-      parent: 2
 - proto: MaintenanceFluffSpawner
   entities:
   - uid: 24796
@@ -188041,19 +188034,6 @@ entities:
       parent: 2
 - proto: SecurityTechFab
   entities:
-  - uid: 27660
-    components:
-    - type: Transform
-      pos: 27.5,20.5
-      parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
-    - type: Pullable
-      prevFixedRotation: True
   - uid: 27661
     components:
     - type: Transform
