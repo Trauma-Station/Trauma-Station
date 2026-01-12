@@ -20,7 +20,6 @@ public class StaticSpriteView : Control
     private SharedTransformSystem? _transform;
     protected readonly IEntityManager EntMan;
 
-    private SpriteComponent? _cachedSprite;
     private readonly Angle _cachedWorldRotation = Angle.Zero;
 
     [ViewVariables]
@@ -266,7 +265,7 @@ public class StaticSpriteView : Control
 
     protected override void Draw(IRenderHandle renderHandle)
     {
-        if (ResolveEntity() is not {} ent || _cachedSprite == null)
+        if (ResolveEntity() is not {} ent)
             return;
 
         SpriteSystem ??= EntMan.System<SpriteSystem>();
@@ -282,7 +281,7 @@ public class StaticSpriteView : Control
 
         var offset = SpriteOffset
             ? Vector2.Zero
-            : - (-_eyeRotation).RotateVec(_cachedSprite.Offset * _scale) * new Vector2(1, -1) * EyeManager.PixelsPerMeter;
+            : - (-_eyeRotation).RotateVec(ent.Comp.Offset * _scale) * new Vector2(1, -1) * EyeManager.PixelsPerMeter;
 
         var position = PixelSize / 2 + offset * stretch * UIScale;
         var scale = Scale * UIScale * stretch;
