@@ -15,6 +15,7 @@
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Hair: MobHumanoidAnyMarking
+    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     Snout: MobHumanoidAnyMarking
     Chest: MobShadowChest
     Groin: MobShadowGroin

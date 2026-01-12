@@ -24,6 +24,8 @@ namespace Content.Shared.Humanoid.Markings
         Special,
         Hair,
         FacialHair,
+        HairSpecial, // Trauma - gradients
+        FacialHairSpecial, // Trauma - gradients
         Head,
         HeadTop,
         HeadSide,
@@ -49,6 +51,20 @@ namespace Content.Shared.Humanoid.Markings
         Overlay
     }
 
+    // Trauma
+    public static class MarkingCategoriesExtension
+    {
+        public static bool IgnoresMatchSkin(MarkingCategories category)
+        {
+            return category switch
+            {
+                MarkingCategories.HairSpecial => true,
+                MarkingCategories.FacialHairSpecial => true,
+                _ => false
+            };
+        }
+    }
+
     public static class MarkingCategoriesConversion
     {
         public static MarkingCategories FromHumanoidVisualLayers(HumanoidVisualLayers layer)
@@ -59,6 +75,8 @@ namespace Content.Shared.Humanoid.Markings
                 HumanoidVisualLayers.Face => MarkingCategories.Face, // Plasmeme Port
                 HumanoidVisualLayers.Hair => MarkingCategories.Hair,
                 HumanoidVisualLayers.FacialHair => MarkingCategories.FacialHair,
+                HumanoidVisualLayers.HairSpecial => MarkingCategories.HairSpecial, // Trauma - gradients
+                HumanoidVisualLayers.FacialHairSpecial => MarkingCategories.FacialHairSpecial, // Trauma - gradients
                 HumanoidVisualLayers.Head => MarkingCategories.Head,
                 HumanoidVisualLayers.HeadTop => MarkingCategories.HeadTop,
                 HumanoidVisualLayers.HeadSide => MarkingCategories.HeadSide,

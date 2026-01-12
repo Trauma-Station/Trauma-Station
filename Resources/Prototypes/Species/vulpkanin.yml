@@ -18,6 +18,8 @@
     Head: MobVulpkaninHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
+    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
+    FacialHairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     Snout: MobHumanoidAnyMarking
     SnoutCover: MobHumanoidAnyMarking
     #UndergarmentTop: MobHumanoidAnyMarking # Trauma - wasn't cherry picked
@@ -47,6 +49,14 @@
       points: 1
       onlyWhitelisted: true # Beards lack displacement maps and are impossible to displace onto a snout.
       required: false
+    # Trauma start
+    HairSpecial:
+      points: 1
+      required: false
+    FacialHairSpecial:
+      points: 1
+      required: false
+    # Trauma end
     Snout:
       points: 1
       required: true

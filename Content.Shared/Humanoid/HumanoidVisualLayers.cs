@@ -38,6 +38,8 @@ namespace Content.Shared.Humanoid
         Wings, // For IPC wings porting from SimpleStation
         Hair,
         FacialHair,
+        HairSpecial, // Trauma - gradients
+        FacialHairSpecial, // Trauma - gradients
         Face, // EE Plasmeme Port
         Chest,
         Underwear,

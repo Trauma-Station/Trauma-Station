@@ -21,6 +21,8 @@
     Head: MobHumanHead
     Face: MobHumanoidAnyMarking
     Hair: MobHumanoidAnyMarking
+    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
+    FacialHairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Underwear: MobHumanoidAnyMarking
@@ -47,6 +49,14 @@
     FacialHair:
       points: 1
       required: false
+    # Trauma start
+    HairSpecial:
+      points: 1
+      required: false
+    FacialHairSpecial:
+      points: 1
+      required: false
+    # Trauma end
     Snout:
       points: 1
       required: false

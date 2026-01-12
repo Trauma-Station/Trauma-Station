@@ -41,6 +41,7 @@
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
     Hair: MobHumanoidMarkingMatchSkin
+    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     Chest: MobIPCChest
     Groin: MobIPCGroin
     LArm: MobIPCLArm
@@ -63,6 +64,11 @@
     Hair:
       points: 1
       required: false
+    # Trauma start
+    HairSpecial:
+      points: 1
+      required: false
+    # Trauma end
     Face:
       points: 1
       required: false

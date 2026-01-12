@@ -33,6 +33,8 @@
     Head: MobHarpyHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
+    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
+    FacialHairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     Snout: MobHumanoidAnyMarking
     Chest: MobHarpyChest
     Groin: MobHarpyGroin

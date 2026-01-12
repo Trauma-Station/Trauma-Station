@@ -41,6 +41,7 @@
     Chest: MobArachnidChest
     Groin: MobArachnidGroin
     Hair: MobHumanoidAnyMarking # imp, arachnid hair arachnid hair!
+    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     HeadTop: MobHumanoidAnyMarking
     Eyes: MobArachnidEyes
     HeadSide: MobHumanoidAnyMarking
@@ -67,6 +68,11 @@
     Hair:
       points: 1
       required: false
+    # Trauma start
+    HairSpecial:
+      points: 1
+      required: false
+    # Trauma end
     Tail:
       points: 1
       required: true

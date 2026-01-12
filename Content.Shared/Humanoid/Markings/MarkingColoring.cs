@@ -4,6 +4,7 @@
 //
 // SPDX-License-Identifier: MIT
 
+using System.Linq;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Humanoid.Markings;
@@ -54,6 +55,14 @@ public static class MarkingColoring
             }
             return colors;
         }
+        // Trauma edit start
+        else if (prototype.Sprites.Count == 0)
+        {
+            return prototype.Coloring.Layers.OrderBy(x => x.Key)
+                .Select(x => x.Value.GetColor(skinColor, eyeColor, markingSet))
+                .ToList();
+        }
+        // Trauma edit end
         else
         {
             // If some layers are specified.

@@ -56,8 +56,12 @@ namespace Content.Shared.Humanoid.Markings
         [DataField]
         public bool CanBeDisplaced { get; private set; } = true;
 
-        [DataField("sprites", required: true)]
-        public List<SpriteSpecifier> Sprites { get; private set; } = default!;
+        // Trauma edit start
+        [DataField("sprites")]
+        public List<SpriteSpecifier> Sprites { get; private set; } = new();
+
+        public int ColorCount => Sprites.Count > 0 ? Sprites.Count : Coloring.Layers?.Count ?? 0;
+        // Trauma edit end
 
         /// Impstation start
         [DataField]
@@ -67,7 +71,7 @@ namespace Content.Shared.Humanoid.Markings
 
         public Marking AsMarking()
         {
-            return new Marking(ID, Sprites.Count);
+            return new Marking(ID, ColorCount); // Trauma edit
         }
     }
 }

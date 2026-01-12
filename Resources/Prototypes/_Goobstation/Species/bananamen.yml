@@ -20,6 +20,8 @@
     Head: MobBananaMenHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
+    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
+    FacialHairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     Snout: MobHumanoidAnyMarking
     Chest: MobBananaMenChest
     Groin: MobBananaMenGroin

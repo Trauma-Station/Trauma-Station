@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Numerics;
 using Content.Client.DisplacementMap;
 using Content.Shared.CCVar;
@@ -7,6 +9,7 @@ using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Inventory;
 using Content.Shared.Preferences;
 using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -259,7 +262,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         {
             foreach (var marking in markingList)
             {
-                RemoveMarking(marking, (entity, sprite));
+                RemoveMarking(marking, entity); // Trauma edit
             }
         }
 
@@ -269,15 +272,49 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         {
             foreach (var marking in markingList)
             {
-                RemoveMarking(marking, (entity, sprite));
+                RemoveMarking(marking, entity); // Trauma edit
             }
         }
     }
 
-    private void RemoveMarking(Marking marking, Entity<SpriteComponent> spriteEnt)
+    private bool TryGetParentMarking(MarkingPrototype markingPrototype,
+        HumanoidAppearanceComponent humanoid,
+        [NotNullWhen(true)] out SpriteSpecifier.Rsi? rsi,
+        [NotNullWhen(true)] out string? layerId) // Trauma
+    {
+        rsi = null;
+        layerId = null;
+
+        var category = MarkingCategoriesConversion.FromHumanoidVisualLayers(markingPrototype.BodyPart);
+        var marking = humanoid.MarkingSet.Markings.GetValueOrDefault(category)?.FirstOrDefault();
+
+        if (marking == null || !_markingManager.Markings.TryGetValue(marking.MarkingId, out var proto))
+            return false;
+
+        rsi = proto.Sprites.FirstOrDefault() as SpriteSpecifier.Rsi;
+
+        if (rsi == null)
+            return false;
+
+        layerId = $"{proto.ID}-{rsi.RsiState}";
+        return true;
+    }
+
+    private void RemoveMarking(Marking marking, Entity<HumanoidAppearanceComponent, SpriteComponent> ent) // Trauma edit
     {
         if (!_markingManager.TryGetMarking(marking, out var prototype))
             return;
+
+        // Trauma start
+        var humanoid = ent.Comp1;
+        var spriteComp = ent.Comp2;
+        Entity<SpriteComponent> spriteEnt = (ent, spriteComp);
+
+        if (prototype.Sprites.Count == 0 && prototype.Shader != null &&
+            TryGetParentMarking(prototype, humanoid, out _, out var id) &&
+            _sprite.LayerMapTryGet(spriteEnt.AsNullable(), id, out var ind, false))
+            spriteComp.LayerSetShader(ind, null, null);
+        // Trauma end
 
         foreach (var sprite in prototype.Sprites)
         {
@@ -313,6 +350,33 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         visible &= !IsHidden(humanoid, markingPrototype.BodyPart);
         visible &= humanoid.BaseLayers.TryGetValue(markingPrototype.BodyPart, out var setting)
            && setting.AllowsMarkings;
+
+        // Trauma start
+        if (markingPrototype.Sprites.Count == 0 && markingPrototype.Shader is { } shaderProto)
+        {
+            var shader = _prototypeManager.Index<ShaderPrototype>(shaderProto).InstanceUnique();
+            if (markingPrototype.Coloring.Layers is { } layers)
+            {
+                foreach (var (key, def) in layers)
+                {
+                    shader.SetParameter(key,
+                        def.GetColor(humanoid.SkinColor, humanoid.EyeColor, humanoid.MarkingSet).RGBA);
+                }
+            }
+
+            if (!TryGetParentMarking(markingPrototype, humanoid, out var rsi, out var layerId))
+                sprite.LayerSetShader(targetLayer, shader, shaderProto);
+            else
+            {
+                if (!_sprite.LayerMapTryGet((entity.Owner, sprite), layerId, out var layer, false))
+                {
+                    layer = _sprite.AddLayer((entity.Owner, sprite), rsi);
+                    _sprite.LayerMapSet((entity.Owner, sprite), layerId, layer);
+                }
+                sprite.LayerSetShader(layerId, shader, shaderProto);
+            }
+        }
+        // Trauma end
 
         for (var j = 0; j < markingPrototype.Sprites.Count; j++)
         {
