@@ -9,6 +9,16 @@
     - Raw
     - Trash
     - Recyclable
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Effects/gib2.ogg
+      params:
+        volume: -7
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Effects/gib1.ogg
+      params:
+        volume: -7
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/rot.rsi
     state: icon
@@ -55,12 +65,27 @@
       - !type:SpawnGasBehavior
         gasMixture:
           moles:
-            Ammonia: 100
+            Ammonia: 25
       - !type:PlaySoundBehavior
         sound:
           path: /Audio/Effects/gib1.ogg
+      - !type:SpillBehavior
+        solution: food
       - !type:SpawnEntitiesBehavior
          spawn:
           MobCockroach:
             min: 0
             max: 1
+  - type: DamageOnHighSpeedImpact
+    minimumSpeed: 0.1
+    damage:
+      types:
+        Blunt: 10
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 10
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Poison: 1

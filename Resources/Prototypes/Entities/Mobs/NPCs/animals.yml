@@ -444,7 +444,7 @@
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 3 # Trauma
+        damage: 3 # Trauma, was 10
       behaviors:
       - !type:GibBehavior
         gibContents: Skip # Shitmed Change
@@ -471,6 +471,10 @@
   - type: Body # Trauma
     prototype: Rat
     requiredLegs: 0
+  - type: ThermalRegulator # Trauma - Fix roaches melting for no reason
+    metabolismHeat: 300
+  - type: StaticPrice # Trauma, stupid fucking organ fix
+    price: -520
 
 - type: entity
   name: glockroach
@@ -2021,9 +2025,6 @@
   - type: MeleeChemicalInjector
     transferAmount: 1
     solution: melee
-  - type: GibThisGuy
-    ocNames:
-    - Gallagin
   - type: DodgeWideswing
     staminaRatio: 1 # mice are small so can probably evade without much stamina drain
   - type: Stamina

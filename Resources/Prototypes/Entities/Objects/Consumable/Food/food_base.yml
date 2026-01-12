@@ -42,12 +42,12 @@
   id: FoodBase
   components:
   - type: SpaceGarbage
-  - type: Perishable #Trauma
+  - type: Perishable #<Trauma>
     rotAfter: 300
     molsPerSecondPerUnitMass: 0
   - type: RotInto
     entity: FoodRot
-    stage: 1 #/Trauma
+    stage: 1 #</Trauma>
 
 # This base type is used to cover all of the "obvious" things that should be doable to open-package food.
 # Practically this means injection.
