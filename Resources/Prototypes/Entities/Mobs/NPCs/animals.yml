@@ -3819,16 +3819,6 @@
       behaviors:
       - !type:GibBehavior
         recursive: false
-  - type: StepTrigger #Trauma
-    requiredTriggeredSpeed: 1
-  - type: Slippery
-  - type: TriggerOnStepTrigger
-  - type: GibOnTrigger
-  - type: EmitSoundOnTrigger
-    sound:
-      path: "/Audio/Animals/mouse_squeak.ogg"
-    positional: true
-    predicted: true  #/Trauma
 
 - type: entity
   name: pig
