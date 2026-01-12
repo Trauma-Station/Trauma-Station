@@ -346,9 +346,11 @@ namespace Content.IntegrationTests.Tests
 
                 // makes an announcement on mapInit.
                 "AnnounceOnSpawn",
-
+                // <Trauma>
                 "PendingSlimeSpawn", // shut the fuck up please
-                "Slime" // please
+                "Slime",
+                "Anomaly", // they can spawn spark effects
+                // </Trauma>
             };
 
             Assert.That(server.CfgMan.GetCVar(CVars.NetPVS), Is.False);
