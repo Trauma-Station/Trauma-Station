@@ -9,6 +9,7 @@ using Content.Shared._Shitmed.Body.Organ;
 using Content.Shared._Shitmed.Medical.Surgery.Consciousness;
 using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Systems;
 using Content.Shared.Movement.Pulling.Components;
+using Content.Trauma.Common.Body;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
@@ -117,7 +118,7 @@ public sealed class RespiratorSystem : EntitySystem
             // End DeltaV Code
             UpdateSaturation(uid,  multiplier * (float) respirator.UpdateInterval.TotalSeconds, respirator); // DeltaV: use multiplier instead of negating
 
-            if (!_mobState.IsIncapacitated(uid) && !HasComp<DebrainedComponent>(uid)) // Shitmed Change - Cannot breathe in crit or when no brain.
+            if (!_mobState.IsHardCrit(uid) && !HasComp<DebrainedComponent>(uid)) // Trauma - Cannot breathe in hardcrit or when no brain.
             {
                 switch (respirator.Status)
                 {
@@ -177,7 +178,11 @@ public sealed class RespiratorSystem : EntitySystem
         if (ev.Gas is null)
             return;
 
-        var gas = ev.Gas.RemoveVolume(entity.Comp.BreathVolume);
+        // <Trauma> - let event change how much you inhale
+        var volumeEv = new ModifyInhaledVolumeEvent(entity.Comp.BreathVolume);
+        RaiseLocalEvent(entity, ref volumeEv);
+        var gas = ev.Gas.RemoveVolume(volumeEv.Volume);
+        // </Trauma>
 
         var inhaleEv = new InhaledGasEvent(gas);
         RaiseLocalEvent(entity, ref inhaleEv);
@@ -222,7 +227,7 @@ public sealed class RespiratorSystem : EntitySystem
     /// </summary>
     public bool IsBreathing(Entity<RespiratorComponent?> ent)
     {
-        if (_mobState.IsIncapacitated(ent))
+        if (_mobState.IsIncapacitated(ent) && !_mobState.IsSoftCrit(ent.Owner)) // Trauma - can still breathe in softcrit
             return false;
 
         if (!Resolve(ent, ref ent.Comp))
