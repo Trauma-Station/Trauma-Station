@@ -468,7 +468,7 @@
     damage:
       types:
         Piercing: 0
-  - type: Body
+  - type: Body # Trauma
     prototype: Rat
     requiredLegs: 0
 
