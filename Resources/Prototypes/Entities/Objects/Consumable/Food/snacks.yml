@@ -564,6 +564,7 @@
     solutions:
       food:
         maxVol: 50
+        reagents:
         - ReagentId: DryRamen
           Quantity: 29 # Trauma 30 > 29
         - ReagentId: LabGrownNutriment # Trauma
