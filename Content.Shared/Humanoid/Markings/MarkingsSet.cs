@@ -201,7 +201,7 @@ public sealed partial class MarkingSet
         {
             foreach (var (category, list) in Markings)
             {
-                if (TraumaMarkingCategories.IgnoresMatchSkin(category)) // Trauma
+                if (category.IgnoresMatchSkin()) // Trauma
                     continue;
 
                 foreach (var marking in list)

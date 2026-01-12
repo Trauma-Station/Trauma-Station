@@ -2,7 +2,7 @@ namespace Content.Shared.Humanoid.Markings;
 
 public static class TraumaMarkingCategories
 {
-    public static bool IgnoresMatchSkin(MarkingCategories category)
+    public static bool IgnoresMatchSkin(this MarkingCategories category)
     {
         return category switch
         {

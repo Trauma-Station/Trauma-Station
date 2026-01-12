@@ -510,7 +510,7 @@ public sealed partial class MarkingPicker : Control
             markingSet.AddBack(MarkingCategories.FacialHair, FacialHairMarking);
         }
 
-        if (TraumaMarkingCategories.IgnoresMatchSkin(marking.MarkingCategory) || // Trauma
+        if (marking.MarkingCategory.IgnoresMatchSkin() || // Trauma
             !_markingManager.MustMatchSkin(_currentSpecies, marking.BodyPart, out var _, _prototypeManager))
         {
             // Do default coloring
