@@ -1,8 +1,8 @@
 - type: entity
-  name: cheesie honkers
+  name: Pun Pun
   parent: BaseItem
-  id: FoodSnackCheesie
-  description: Bite sized cheesie snacks that will honk all over your mouth.
+  id: PunPunSkinGod
+  description: What the fuck is that think
   components:
   - type: FlavorProfile
     flavors:
