@@ -458,7 +458,8 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                         19 => (float) Convert.ToInt16(seed.Viable),
                         20 => (float) Convert.ToInt16(seed.Ligneous),
                         21 => (float) Convert.ToInt16(seed.CanScream),
-                        22 => (float) Convert.ToInt16(seed.TurnIntoKudzu)
+                        22 => (float) Convert.ToInt16(seed.TurnIntoKudzu),
+                        _ => 0f
                     };
                     ent.Comp.GeneBank.Add(new GeneData(index, value));
                     break;
