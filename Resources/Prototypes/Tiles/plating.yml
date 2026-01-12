@@ -33,12 +33,6 @@
   id: Plating
   name: tiles-plating
   sprite: /Textures/_Trauma/Tiles/plating.png #Trauma
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0 #Trauma End
   baseTurf: Lattice
   isSubfloor: true
   # Goobstation - Fireaxe plating prying
@@ -52,7 +46,7 @@
 - type: tile
   id: PlatingDamaged
   name: tiles-plating
-  sprite: /Textures/Tiles/plating_damaged.png
+  sprite: /Textures/_Trauma/Tiles/plating_damaged.png
   variants: 3
   placementVariants:
   - 1.0
@@ -71,7 +65,7 @@
 - type: tile
   id: PlatingBurnt
   name: tiles-plating
-  sprite: /Textures/Tiles/plating_burnt.png
+  sprite: /Textures/_Trauma/Tiles/plating_burnt.png
   baseTurf: Lattice
   isSubfloor: true
   # Goobstation - Fireaxe plating prying

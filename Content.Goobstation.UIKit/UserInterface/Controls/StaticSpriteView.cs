@@ -266,7 +266,7 @@ public class StaticSpriteView : Control
 
     protected override void Draw(IRenderHandle renderHandle)
     {
-        if (ResolveEntity() is not {} ent)
+        if (ResolveEntity() is not {} ent || _cachedSprite == null)
             return;
 
         SpriteSystem ??= EntMan.System<SpriteSystem>();

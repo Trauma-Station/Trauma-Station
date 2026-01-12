@@ -1196,3 +1196,11 @@ Entries:
       message: You can now wear butts as hats
   id: 141
   time: '2026-01-11T15:16:24.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Add
+      message: >-
+        Added new reagent, NanoMachines, turns people into cyborgs when enough
+        is consumed
+  id: 142
+  time: '2026-01-12T02:25:03.0000000+00:00'

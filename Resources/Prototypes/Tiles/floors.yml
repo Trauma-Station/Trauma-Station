@@ -148,7 +148,7 @@
 - type: tile
   id: FloorSteelCheckerLight
   name: tiles-steel-floor-checker-light
-  sprite: /Textures/Tiles/cafeteria.png
+  sprite: /Textures/_Trauma/Tiles/cafeteria.png #Trauma
   variants: 4
   placementVariants:
   - 1.0
@@ -186,7 +186,7 @@
 - type: tile
   id: FloorSteelMini
   name: tiles-steel-floor-mini
-  sprite: /Textures/Tiles/steel_mini.png
+  sprite: /Textures/_Trauma/Tiles/steel_mini.png #Trauma
   variants: 4
   placementVariants:
   - 1.0
@@ -205,7 +205,7 @@
 - type: tile
   id: FloorSteelPavement
   name: tiles-steel-floor-pavement
-  sprite: /Textures/Tiles/steel_pavement.png
+  sprite: /Textures/_Trauma/Tiles/steel_pavement.png #Trauma
   variants: 4
   placementVariants:
   - 1.0
@@ -294,7 +294,7 @@
 - type: tile
   id: FloorSteelHerringbone
   name: tiles-steel-floor-herringbone
-  sprite: /Textures/Tiles/steel_herringbone.png
+  sprite: /Textures/_Trauma/Tiles/steel_herringbone.png #Trauma
   variants: 4
   placementVariants:
   - 1.0
@@ -436,7 +436,7 @@
 - type: tile
   id: FloorWhitePavement
   name: tiles-white-floor-pavement
-  sprite: /Textures/Tiles/white_pavement.png
+  sprite: /Textures/_Trauma/Tiles/white_pavement.png #Trauma
   variants: 4
   placementVariants:
   - 1.0
@@ -620,7 +620,7 @@
 - type: tile
   id: FloorDarkPavement
   name: tiles-dark-floor-pavement
-  sprite: /Textures/Tiles/dark_pavement.png
+  sprite: /Textures/_Trauma/Tiles/dark_pavement.png #Trauma
   variants: 4
   placementVariants:
   - 1.0
@@ -792,7 +792,7 @@
 - type: tile
   id: FloorReinforced
   name: tiles-reinforced-floor
-  sprite: /Textures/Tiles/reinforced.png
+  sprite: /Textures/_Trauma/Tiles/reinforced.png #Trauma
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -994,7 +994,7 @@
 - type: tile
   id: FloorBar
   name: tiles-bar-floor
-  sprite: /Textures/Tiles/bar.png
+  sprite: /Textures/_Trauma/Tiles/bar.png #Trauma
   variants: 4
   placementVariants:
   - 1.0
@@ -1026,7 +1026,7 @@
 - type: tile
   id: FloorMime
   name: tiles-mime-floor
-  sprite: /Textures/Tiles/mime.png
+  sprite: /Textures/_Trauma/Tiles/mime.png #Trauma
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -2058,7 +2058,7 @@
 - type: tile
   id: FloorWoodTile
   name: tiles-wood2
-  sprite: /Textures/Tiles/wood_tile.png
+  sprite: /Textures/_Trauma/Tiles/wood_tile.png #Trauma
   variants: 4
   placementVariants:
   - 1.0
@@ -2302,7 +2302,7 @@
 - type: tile
   id: FloorWoodLarge
   name: tiles-wood-large
-  sprite: /Textures/Tiles/wood_large.png
+  sprite: /Textures/_Trauma/Tiles/wood_large.png #Trauma
   variants: 4
   placementVariants:
   - 1.0
