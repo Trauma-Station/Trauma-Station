@@ -1,6 +1,6 @@
 - type: entity
   name: cheesie honkers
-  parent: FoodSnackBase
+  parent: BaseItem
   id: FoodSnackCheesie
   description: Bite sized cheesie snacks that will honk all over your mouth.
   components:
