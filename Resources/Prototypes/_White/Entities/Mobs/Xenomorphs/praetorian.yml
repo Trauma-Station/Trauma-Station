@@ -6,7 +6,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Mobs/Xenos/praetorian.rsi
+    sprite: _White/Mobs/Aliens/Xenomorphs/praetorian.rsi
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: xenomorph

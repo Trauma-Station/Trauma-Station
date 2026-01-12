@@ -16,6 +16,3 @@ ghost-role-information-reinforcement-salv-name = Station Reinforcement (Salvage)
 
 ghost-role-information-reinforcement-description = You're a reinforcement sent to the nanotrasen station, transit to the station takes three minutes.
 ghost-role-information-DClass-description = The science team wants to use you for its experiments, comply or risk death.
-
-ghost-role-information-facehugger-name = facehugger
-ghost-role-information-facehugger-description = A writhing nightmare. The facehugger clings to its victim's face, forcibly inserting a xenomorph fetus.

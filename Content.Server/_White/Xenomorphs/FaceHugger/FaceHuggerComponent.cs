@@ -89,9 +89,6 @@ public string SleepChem = "Nocturine";
     [ViewVariables]
     public bool Active = true;
 
-    [DataField]
-    public bool PlayerControlled;
-
     [ViewVariables]
     public TimeSpan InfectIn = TimeSpan.Zero;
 

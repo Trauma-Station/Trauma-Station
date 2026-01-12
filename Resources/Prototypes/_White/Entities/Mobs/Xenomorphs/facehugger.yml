@@ -5,37 +5,20 @@
   description: A writhing nightmare. The facehugger clings to its victim's face, forcibly inserting a xenomorph fetus.
   components:
   - type: Sprite
-    sprite: _Trauma/Mobs/Xenos/facehugger.rsi
+    sprite: _White/Mobs/Aliens/Xenomorphs/facehugger.rsi
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
+    - map: ["enum.DamageStateVisualLayers.Base"]
       state: facehugger
-  - type: SpriteMovement
-    movementLayers:
-      movement:
-        state: facehugger-moving
-    noMovementLayers:
-      movement:
-        state: facehugger
-  - type: GhostTakeoverAvailable
-  - type: GhostRole
-    makeSentient: true
-    allowSpeech: true
-    allowMovement: true
-    name: ghost-role-information-facehugger-name
-    description: ghost-role-information-facehugger-description
-    rules: ghost-role-information-rules-default-xeno
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: default
   - type: Clothing
-    sprite: _Trauma/Mobs/Xenos/clothing/facehuggermask.rsi
+    sprite: _White/Mobs/Aliens/Xenomorphs/facehugger.rsi
     slots: [mask]
   - type: IngestionBlocker
   - type: Blindfold
   - type: AddAccentClothing
     accent: ReplacementAccent
     replacement: mumble
+  - type: ThrowableFacehugger # Goobstation
+    minThrowForce: 5.0 # Goobstation
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Xenomorph
@@ -94,9 +77,6 @@
         Slash: 5 # Damage dealt when blocked by a breathable mask
     maskBlockSound:
       collection: MetalThud # Sound collection for when the facehugger hits the mask - Goobstation end
-  - type: Tag
-    tags:
-    - XenomorphItem
   - type: StepTrigger
     intersectRatio: 0.2
     requiredTriggeredSpeed: 0.0
@@ -105,6 +85,9 @@
   - type: NpcFactionMember
     factions:
     - Xeno
+  - type: Tag
+    tags:
+    - XenomorphItem
   - type: Physics
     bodyType: KinematicController
   - type: CollisionWake
