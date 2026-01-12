@@ -153,15 +153,16 @@ public sealed partial class StoreSystem
             return;
 
         // updating restocktime
+        var now = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan);
         if (prototype.ResetRestockOnPurchase)
         {
             var restockDuration = prototype.RestockDuration;
-            listing.RestockTime = _timing.CurTime + restockDuration;
+            listing.RestockTime = now + restockDuration;
         }
         if (listing.ResetRestockOnPurchase)
         {
             var restockDuration = listing.RestockAfterPurchase ?? listing.RestockDuration;
-            listing.RestockTime = _timing.CurTime + restockDuration;
+            listing.RestockTime = now + restockDuration;
         }
     }// goob end
 }

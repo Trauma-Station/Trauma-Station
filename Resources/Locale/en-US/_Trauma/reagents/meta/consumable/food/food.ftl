@@ -1,0 +1,3 @@
+reagent-name-lab-grown-nutriment = lab grown nutriment
+reagent-desc-lab-grown-nutriment = You aren't really sure where this comes from...
+reagent-popup-lab-grown-nutriment = Your heart hurts after eating that.

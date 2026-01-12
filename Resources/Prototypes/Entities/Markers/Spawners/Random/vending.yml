@@ -47,8 +47,13 @@
     - VendingMachineSpaceUp
     - VendingMachineStarkist
     - VendingMachineSweetToof # Goobstation
+# <Trauma>
+    - VendingMachineSustenance 
+    - VendingMachineHotfood 
+    - VendingMachineFitness 
+    - VendingMachineWeeb 
     chance: 1
-
+# </Trauma>
 
 - type: entityTable
   id: ClothingVendorTable

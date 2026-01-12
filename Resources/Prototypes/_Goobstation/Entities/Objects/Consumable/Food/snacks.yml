@@ -101,7 +101,9 @@
         maxVol: 15
         reagents:
         - ReagentId: Nutriment
-          Quantity: 4
+          Quantity: 3 # Trauma, 4 > 3
+        - ReagentId: LabGrownNutriment # Trauma
+          Quantity: 1
         - ReagentId: Protein
           Quantity: 4
         - ReagentId: CocoaPowder
@@ -145,6 +147,15 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: lunacake
   - type: Item
+  - type: SolutionContainerManager # Trauma
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: LabGrownNutriment 
+          Quantity: 1
 
 - type: entity
   parent: BaseItem
@@ -357,6 +368,15 @@
   - type: Edible
     trash:
     - FoodPacketRedalertnutsTrash
+  - type: SolutionContainerManager # Trauma
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9 
+        - ReagentId: LabGrownNutriment 
+          Quantity: 1
 
 - type: entity
   parent: FoodSnackBase
@@ -371,6 +391,15 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: ricecake
   - type: Item
+  - type: SolutionContainerManager # Trauma
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9 
+        - ReagentId: LabGrownNutriment 
+          Quantity: 1
 
 - type: entity
   parent: FoodSnackBase
@@ -386,6 +415,15 @@
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: pokeys
   - type: Item
+  - type: SolutionContainerManager # Trauma
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9 
+        - ReagentId: LabGrownNutriment 
+          Quantity: 1
 
 - type: entity
   parent: FoodSnackBase
@@ -404,6 +442,15 @@
   - type: Edible
     trash:
     - FoodPacketStickTrash
+  - type: SolutionContainerManager # Trauma
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: LabGrownNutriment 
+          Quantity: 1
 
 - type: entity
   parent: FoodSnackBase
@@ -422,7 +469,16 @@
   - type: Edible
     trash:
     - FoodPacketStickTrash
-
+  - type: SolutionContainerManager # Trauma
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9 
+        - ReagentId: LabGrownNutriment 
+          Quantity: 1
+          
 # Old food
 - type: entity
   parent: FoodSnackBase

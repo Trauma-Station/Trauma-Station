@@ -1,0 +1,36 @@
+- type: reagent
+  id: LabGrownNutriment
+  name: reagent-name-lab-grown-nutriment
+  group: Foods
+  desc: reagent-desc-lab-grown-nutriment
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: nutriment
+  color: "#1f0a0a"
+  plantMetabolism:
+  - !type:PlantAdjustNutrition
+    amount: 1.5
+  - !type:PlantAdjustHealth
+    amount: -0.75
+  metabolisms:
+    Food:
+      metabolismRate: 0.01 # Effectively one unit every 100 seconds.
+      effects:
+      - !type:SatiateHunger
+        factor: 10
+      - !type:ModifyStatusEffect
+        effectProto: MicroplasticsStatusEffect
+      - !type:Vomit
+        probability: 0.005
+      - !type:HealthChange
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
+        damage:
+          types:
+            Poison: 0.05
+      - !type:PopupMessage
+        type: Local
+        messages: [ "reagent-popup-lab-grown-nutriment" ]
+        probability: 0.05
+  pricePerUnit: -300
