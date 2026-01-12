@@ -22,8 +22,8 @@ public sealed class EntryPoint : GameClient
     {
         base.Init();
 
-        IoCManager.BuildGraph();
-        IoCManager.InjectDependencies(this);
+        Dependencies.BuildGraph();
+        Dependencies.InjectDependencies(this);
     }
 
     public override void PostInit()

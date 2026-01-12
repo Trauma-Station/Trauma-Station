@@ -259,7 +259,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         {
             foreach (var marking in markingList)
             {
-                RemoveMarking(marking, entity); // Trauma edit
+                RemoveMarking(marking, entity); // Trauma - removed sprite
             }
         }
 
@@ -269,12 +269,12 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         {
             foreach (var marking in markingList)
             {
-                RemoveMarking(marking, entity); // Trauma edit
+                RemoveMarking(marking, entity); // Trauma - removed sprite
             }
         }
     }
 
-    private void RemoveMarking(Marking marking, Entity<HumanoidAppearanceComponent, SpriteComponent> ent) // Trauma edit
+    private void RemoveMarking(Marking marking, Entity<HumanoidAppearanceComponent, SpriteComponent> ent) // Trauma - renamed spriteEnt to ent, added humanoid
     {
         if (!_markingManager.TryGetMarking(marking, out var prototype))
             return;

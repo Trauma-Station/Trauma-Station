@@ -34,8 +34,8 @@
 - type: speciesBaseSprites
   id: MobArachnidSprites
   sprites:
-    Hair: MobHumanoidAnyMarking # imp, arachnid hair arachnid hair!
     # <Trauma>
+    Hair: MobHumanoidAnyMarking
     HairSpecial: MobHumanoidAnyMarking
     Special: MobHumanoidAnyMarking
     # </Trauma>
