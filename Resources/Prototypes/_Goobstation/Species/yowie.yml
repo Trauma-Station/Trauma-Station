@@ -33,12 +33,14 @@
 - type: speciesBaseSprites
   id: MobYowieSprites
   sprites:
+    # <Trauma>
+    HairSpecial: MobHumanoidAnyMarking
+    FacialHairSpecial: MobHumanoidAnyMarking
+    # </Trauma>
     Head: MobYowieHead
     Face: MobHumanoidAnyMarking
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
-    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
-    FacialHairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     Snout: MobHumanoidAnyMarking
     Underwear: MobHumanoidAnyMarking
     Undershirt: MobHumanoidAnyMarking
@@ -59,20 +61,20 @@
 - type: markingPoints
   id: MobYowieMarkingLimits
   points:
-    Hair:
-      points: 1
-      required: false
-    FacialHair:
-      points: 1
-      required: false
-    # Trauma start
+    # <Trauma>
     HairSpecial:
       points: 1
       required: false
     FacialHairSpecial:
       points: 1
       required: false
-    # Trauma end
+    # </Trauma>
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 1
+      required: false
     Snout:
       points: 1
       required: false

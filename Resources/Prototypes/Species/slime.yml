@@ -29,13 +29,15 @@
 - type: speciesBaseSprites
   id: MobSlimeSprites
   sprites:
+    # <Trauma>
+    HairSpecial: MobHumanoidAnyMarking
+    FacialHairSpecial: MobHumanoidAnyMarking
+    # </Trauma>
     Face: MobHumanoidAnyMarking
     Head: MobSlimeHead
     HeadSide: MobHumanoidAnyMarking
     Hair: MobSlimeMarkingFollowSkin
     FacialHair: MobSlimeMarkingFollowSkin
-    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
-    FacialHairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     Underwear: MobHumanoidAnyMarking
     Undershirt: MobHumanoidAnyMarking
     Chest: MobSlimeChest
@@ -53,6 +55,14 @@
 - type: markingPoints
   id: MobSlimeMarkingLimits
   points:
+    # <Trauma>
+    HairSpecial:
+      points: 1
+      required: false
+    FacialHairSpecial:
+      points: 1
+      required: false
+    # </Trauma>
     Hair:
       points: 1
       required: false
@@ -62,14 +72,6 @@
     FacialHair:
       points: 1
       required: false
-    # Trauma start
-    HairSpecial:
-      points: 1
-      required: false
-    FacialHairSpecial:
-      points: 1
-      required: false
-    # Trauma end
     Chest:
       points: 8
       required: false

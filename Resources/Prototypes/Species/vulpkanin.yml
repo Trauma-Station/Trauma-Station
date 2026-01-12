@@ -15,11 +15,13 @@
 - type: speciesBaseSprites
   id: MobVulpkaninSprites
   sprites:
+    # <Trauma>
+    HairSpecial: MobHumanoidAnyMarking
+    FacialHairSpecial: MobHumanoidAnyMarking
+    # </Trauma>
     Head: MobVulpkaninHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
-    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
-    FacialHairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     Snout: MobHumanoidAnyMarking
     SnoutCover: MobHumanoidAnyMarking
     #UndergarmentTop: MobHumanoidAnyMarking # Trauma - wasn't cherry picked
@@ -42,6 +44,14 @@
 - type: markingPoints # 6 points on arms and legs due to the "expected" marking usage. Two for hands, two for arms and 2 for claws. Can be lower once we have a distinction between LeftArm and RightArm instead of just Arms.
   id: MobVulpkaninMarkingLimits
   points:
+    # <Trauma>
+    HairSpecial:
+      points: 1
+      required: false
+    FacialHairSpecial:
+      points: 1
+      required: false
+    # </Trauma>
     Hair:
       points: 1
       required: false
@@ -49,14 +59,6 @@
       points: 1
       onlyWhitelisted: true # Beards lack displacement maps and are impossible to displace onto a snout.
       required: false
-    # Trauma start
-    HairSpecial:
-      points: 1
-      required: false
-    FacialHairSpecial:
-      points: 1
-      required: false
-    # Trauma end
     Snout:
       points: 1
       required: true

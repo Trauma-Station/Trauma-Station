@@ -35,13 +35,13 @@
 - type: speciesBaseSprites
   id: MobIPCSprites
   sprites:
+    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     Head: MobIPCHead
     Face: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
     Hair: MobHumanoidMarkingMatchSkin
-    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     Chest: MobIPCChest
     Groin: MobIPCGroin
     LArm: MobIPCLArm
@@ -57,6 +57,11 @@
 - type: markingPoints
   id: MobIPCMarkingLimits
   points:
+    # <Trauma>
+    HairSpecial:
+      points: 1
+      required: false
+    # </Trauma>
     Head:
       points: 1
       required: true
@@ -64,11 +69,6 @@
     Hair:
       points: 1
       required: false
-    # Trauma start
-    HairSpecial:
-      points: 1
-      required: false
-    # Trauma end
     Face:
       points: 1
       required: false

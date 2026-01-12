@@ -9,21 +9,18 @@
 
 using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
 using Content.Shared.Humanoid.Prototypes;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Humanoid.Markings
 {
-    public sealed class MarkingManager
+    public sealed partial class MarkingManager // Trauma - made partial
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
         private readonly List<MarkingPrototype> _index = new();
         public FrozenDictionary<MarkingCategories, FrozenDictionary<string, MarkingPrototype>> CategorizedMarkings = default!;
         public FrozenDictionary<string, MarkingPrototype> Markings = default!;
-
-        public Func<MarkingPrototype, int, MarkingSet, Dictionary<string, Vector3>?>? GetMarkingShaderParams; // Trauma
 
         public void Initialize()
         {
@@ -193,7 +190,7 @@ namespace Content.Shared.Humanoid.Markings
                 return false;
             }
 
-            if (marking.MarkingColors.Count != proto.ColorCount) // Trauma edit
+            if (marking.MarkingColors.Count != proto.ColorCount) // Trauma - replaced Sprites.Count with ColorCount
             {
                 return false;
             }

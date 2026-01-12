@@ -13,6 +13,11 @@ public sealed class ShaderMarkingManager
         _markingManager.GetMarkingShaderParams += GetMarkingShaderParams;
     }
 
+    public void Shutdown()
+    {
+        _markingManager.GetMarkingShaderParams -= GetMarkingShaderParams;
+    }
+
     private Dictionary<string, Vector3>? GetMarkingShaderParams(MarkingPrototype proto,
         int index,
         MarkingSet markingSet)

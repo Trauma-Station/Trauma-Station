@@ -8,6 +8,9 @@ namespace Content.Trauma.Client.Entry;
 
 public sealed class EntryPoint : GameClient
 {
+    [Dependency] private readonly ShaderMarkingManager _shaderMarking = default!;
+
+
     public override void PreInit()
     {
         base.PreInit();
@@ -15,10 +18,25 @@ public sealed class EntryPoint : GameClient
         ContentTraumaClientIoC.Register(Dependencies);
     }
 
+    public override void Init()
+    {
+        base.Init();
+
+        IoCManager.BuildGraph();
+        IoCManager.InjectDependencies(this);
+    }
+
     public override void PostInit()
     {
         base.PostInit();
 
-        Dependencies.Resolve<ShaderMarkingManager>().Initialize();
+        _shaderMarking.Initialize();
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+
+        _shaderMarking.Shutdown();
     }
 }

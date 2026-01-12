@@ -34,14 +34,14 @@
 - type: speciesBaseSprites
   id: MobArachnidSprites
   sprites:
+    Hair: MobHumanoidAnyMarking # imp, arachnid hair arachnid hair!
+    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     Head: MobArachnidHead
     Snout: MobHumanoidAnyMarking
     Underwear: MobHumanoidAnyMarking
     Undershirt: MobHumanoidAnyMarking
     Chest: MobArachnidChest
     Groin: MobArachnidGroin
-    Hair: MobHumanoidAnyMarking # imp, arachnid hair arachnid hair!
-    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     HeadTop: MobHumanoidAnyMarking
     Eyes: MobArachnidEyes
     HeadSide: MobHumanoidAnyMarking
@@ -65,14 +65,14 @@
   id: MobArachnidMarkingLimits
   onlyWhitelisted: true
   points:
-    Hair:
-      points: 1
-      required: false
-    # Trauma start
+    # <Trauma>
     HairSpecial:
       points: 1
       required: false
-    # Trauma end
+    # </Trauma>
+    Hair:
+      points: 1
+      required: false
     Tail:
       points: 1
       required: true

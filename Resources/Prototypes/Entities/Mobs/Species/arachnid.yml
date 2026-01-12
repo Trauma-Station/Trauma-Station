@@ -158,7 +158,9 @@
       - map: [ "neck" ]
       - map: [ "enum.HumanoidVisualLayers.SnoutCover" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+      - map: [ "enum.HumanoidVisualLayers.FacialHairSpecial" ] # Trauma
       - map: [ "enum.HumanoidVisualLayers.Hair" ] # Do these need to be here? (arachnid hair arachnid hair)
+      - map: [ "enum.HumanoidVisualLayers.HairSpecial" ] # Trauma
       - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
       - map: [ "ears" ]
       - map: [ "eyes" ]

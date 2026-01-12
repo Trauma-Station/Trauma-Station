@@ -35,12 +35,14 @@
 - type: speciesBaseSprites
   id: MobVoxSprites
   sprites:
+    # <Trauma>
+    HairSpecial: MobHumanoidAnyMarking
+    FacialHairSpecial: MobHumanoidAnyMarking
+    # </Trauma>
     Head: MobVoxHead
     Snout: MobHumanoidAnyMarking
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
-    HairSpecial: MobHumanoidAnyMarking # Trauma - gradients
-    FacialHairSpecial: MobHumanoidAnyMarking # Trauma - gradients
     Chest: MobVoxChest
     Groin: MobVoxGroin
     Eyes: MobVoxEyes
@@ -58,20 +60,20 @@
   id: MobVoxMarkingLimits
   onlyWhitelisted: true
   points:
-    Hair:
-      points: 1
-      required: false
-    FacialHair:
-      points: 1
-      required: false
-    # Trauma start
+    # <Trauma>
     HairSpecial:
       points: 1
       required: false
     FacialHairSpecial:
       points: 1
       required: false
-    # Trauma end
+    # </Trauma>
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 1
+      required: false
     Head:
       points: 4
       required: true
