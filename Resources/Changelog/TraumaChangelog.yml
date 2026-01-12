@@ -1230,3 +1230,11 @@ Entries:
       message: Fixed bodypart health examine.
   id: 145
   time: '2026-01-12T05:56:06.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: >-
+        Fixed being able to buckle yourself or use some actions while in
+        softcrit.
+  id: 146
+  time: '2026-01-12T07:21:22.0000000+00:00'

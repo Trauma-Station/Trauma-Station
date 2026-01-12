@@ -92,6 +92,11 @@ public abstract partial class SharedBuckleSystem
         if (!TryComp(args.User, out BuckleComponent? buckle))
             return;
 
+        // <Trauma>
+        if (!ActionBlocker.CanInteract(args.User, uid))
+            return;
+        // </Trauma>
+
         // Buckle self
         if (buckle.BuckledTo == null && component.BuckleOnInteractHand && StrapHasSpace(uid, buckle, component))
         {
