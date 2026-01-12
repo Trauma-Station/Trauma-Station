@@ -47,6 +47,10 @@
     - VendingMachineSpaceUp
     - VendingMachineStarkist
     - VendingMachineSweetToof # Goobstation
+    - VendingMachineSustenance # Trauma
+    - VendingMachineHotfood # Trauma
+    - VendingMachineFitness # Trauma
+    - VendingMachineWeeb # Trauma
     chance: 1
 
 

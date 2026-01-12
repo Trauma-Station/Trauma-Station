@@ -1,0 +1,35 @@
+- type: reagent
+  id: LabGrownNutriment
+  name: reagent-name-lab-grown-nutriment
+  group: Foods
+  desc: reagent-desc-lab-grown-nutriment
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: nutriment
+  color: "#1f0a0a"
+  metabolisms:
+    Food:
+      metabolismRate: 0.01 # Effectively once every 100 seconds.
+      effects:
+      - !type:SatiateHunger
+        factor: 0.3
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 0.9
+        sprintSpeedModifier: 0.9
+      - !type:HealthChange
+        conditions:
+        - !type:MetabolizerTypeCondition # Goob - Yowie
+          type: [ Yowie ]
+          inverted: true
+        damage:
+          types:
+            Poison: 0.05
+      - !type:PopupMessage
+          type: Local
+          messages: [ "reagent-popup-lab-grown-nutriment" ]
+          probability: 0.05
+  plantMetabolism:
+  - !type:PlantAdjustNutrition
+    amount: 1.5
+  - !type:PlantAdjustHealth
+    amount: -0.75
+  pricePerUnit: 0.5
