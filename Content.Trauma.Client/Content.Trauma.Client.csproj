@@ -3,7 +3,7 @@
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<OutputPath>../bin/Content.Client/</OutputPath>
 		<OutputType Condition="'$(FullRelease)' != 'True'">Exe</OutputType>
-		<WarningsAsErrors>nullable</WarningsAsErrors>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<Configurations>Debug;Release;Tools;DebugOpt</Configurations>
 		<Platforms>AnyCPU</Platforms>
 	</PropertyGroup>

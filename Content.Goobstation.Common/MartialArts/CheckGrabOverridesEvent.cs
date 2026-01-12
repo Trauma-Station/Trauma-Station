@@ -6,16 +6,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.MartialArts;
+namespace Content.Goobstation.Common.MartialArts;
 
-namespace Content.Shared.Movement.Pulling.Events;
-
-public sealed class CheckGrabOverridesEvent : EntityEventArgs
-{
-    public CheckGrabOverridesEvent(GrabStage stage)
-    {
-        Stage = stage;
-    }
-
-    public GrabStage Stage { get; set; }
-}
+[ByRefEvent]
+public record struct CheckGrabOverridesEvent(GrabStage Stage);
