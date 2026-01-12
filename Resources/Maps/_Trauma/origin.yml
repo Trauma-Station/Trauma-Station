@@ -4,8 +4,8 @@ meta:
   engineVersion: 270.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/11/2026 23:38:27
-  entityCount: 32674
+  time: 01/12/2026 00:29:56
+  entityCount: 32676
 maps:
 - 1
 grids:
@@ -9627,7 +9627,7 @@ entities:
           -12,-9:
             0: 32768
             2: 2
-            4: 136
+            3: 136
           -11,-8:
             0: 64985
           -11,-7:
@@ -9636,7 +9636,7 @@ entities:
             0: 26224
           -11,-9:
             0: 47240
-            4: 51
+            3: 51
           -10,-8:
             0: 64432
           -10,-7:
@@ -9705,17 +9705,17 @@ entities:
             2: 8738
             0: 34952
           -13,-12:
-            3: 224
-            4: 57344
+            4: 224
+            3: 57344
           -12,-11:
             2: 34
             0: 64136
           -13,-11:
-            4: 224
+            3: 224
             0: 57344
           -12,-10:
             0: 143
-            4: 32768
+            3: 32768
           -13,-10:
             0: 65518
           -13,-9:
@@ -9729,7 +9729,7 @@ entities:
             0: 16383
           -11,-10:
             0: 33211
-            4: 12288
+            3: 12288
           -11,-13:
             0: 65535
           -10,-12:
@@ -9758,7 +9758,7 @@ entities:
             5: 224
             6: 57344
           -13,-13:
-            4: 57568
+            3: 57568
           -11,-15:
             0: 65280
             2: 1
@@ -10056,7 +10056,7 @@ entities:
             2: 8750
           -20,-11:
             2: 4369
-            4: 52416
+            3: 52416
           -20,-10:
             2: 273
             0: 61152
@@ -10069,7 +10069,7 @@ entities:
           -19,-12:
             0: 56784
           -19,-11:
-            4: 4368
+            3: 4368
             0: 52940
           -19,-10:
             0: 56796
@@ -10668,11 +10668,11 @@ entities:
           moles: {}
         - volume: 2500
           temperature: 293.15
-          moles:
-            Plasma: 6666.982
+          moles: {}
         - volume: 2500
           temperature: 293.15
-          moles: {}
+          moles:
+            Plasma: 6666.982
         - volume: 2500
           temperature: 293.15
           moles:
@@ -17629,6 +17629,11 @@ entities:
     components:
     - type: Transform
       pos: -39.5,-21.5
+      parent: 2
+  - uid: 32675
+    components:
+    - type: Transform
+      pos: -23.5,14.5
       parent: 2
 - proto: APCSuperCapacity
   entities:
@@ -39269,11 +39274,6 @@ entities:
     - type: Transform
       pos: -23.5,17.5
       parent: 2
-  - uid: 5188
-    components:
-    - type: Transform
-      pos: -24.5,8.5
-      parent: 2
   - uid: 5189
     components:
     - type: Transform
@@ -50759,6 +50759,11 @@ entities:
     - type: Transform
       pos: 55.5,-56.5
       parent: 2
+  - uid: 32674
+    components:
+    - type: Transform
+      pos: -23.5,14.5
+      parent: 2
 - proto: CableApcStack
   entities:
   - uid: 7424
@@ -59115,6 +59120,11 @@ entities:
     components:
     - type: Transform
       pos: -34.5,-8.5
+      parent: 2
+  - uid: 5188
+    components:
+    - type: Transform
+      pos: -23.5,14.5
       parent: 2
   - uid: 6162
     components:
@@ -82641,7 +82651,7 @@ entities:
       pos: -36.5,-19.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -11916.974
+      secondsUntilStateChange: -12029.034
       state: Closing
 - proto: d10Dice
   entities:
