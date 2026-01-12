@@ -495,6 +495,14 @@
     slots:
     - HEAD
     quickEquip: false
+#<Trauma>
+  - type: Perishable
+    rotAfter: 300
+    molsPerSecondPerUnitMass: 0
+  - type: RotInto
+    entity: FoodRot
+    stage: 1
+#</Trauma>
 
 - type: entity
   parent: TrashBananaPeel

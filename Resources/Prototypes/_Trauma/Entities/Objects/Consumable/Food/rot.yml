@@ -33,6 +33,7 @@
         - ReagentId: Mold
           Quantity: 7
   - type: Item
+    size: Tiny
     storedOffset: -2,1
     inhandVisuals:
       left:
