@@ -96,6 +96,7 @@
             Mime: [ 1, 1 ]
             Musician: [ 2, 2 ]
             Reporter: [ 1, 1 ]
+            RadioHost: [ 1, 1 ]
 
         # Goobstation blob-config-start HUGE
         - type: StationBlobConfig
