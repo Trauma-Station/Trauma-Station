@@ -262,7 +262,7 @@
       amount: 2
   effects:
     - !type:SpawnEntity
-      entity: FoodSnackChocolateBar
+      entity: FoodSnackChocolateBarOrganic # Trauma - homemade chocolate isnt slop
 
 # Condiments
 

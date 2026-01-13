@@ -1,25 +1,16 @@
 - type: entity
-  name: Pun Pun
-  parent: BaseItem
+  parent: FoodSnackBase
   id: PunPunSkinGod
+  name: Pun Pun
   description: What the fuck is that thing
   components:
   - type: FlavorProfile
     flavors:
-      - cheesy
-      - funny
+    - cheesy
+    - funny
   - type: Sprite
     sprite: _Trauma/Objects/Fun/flayedpunpun.rsi
     state: flayedpun
     scale: 0.05, 0.05
-  - type: ScaleData # Goobstation
+  - type: ScaleData
     scale: 0.05, 0.05
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 9
-        - ReagentId: LabGrownNutriment
-          Quantity: 1

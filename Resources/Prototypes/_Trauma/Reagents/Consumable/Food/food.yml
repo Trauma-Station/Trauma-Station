@@ -16,7 +16,7 @@
       metabolismRate: 0.01 # Effectively one unit every 100 seconds.
       effects:
       - !type:SatiateHunger
-        factor: 10
+        factor: 0.015 # same as regular nutriment per u
       - !type:ModifyStatusEffect
         effectProto: MicroplasticsStatusEffect
       - !type:Vomit
