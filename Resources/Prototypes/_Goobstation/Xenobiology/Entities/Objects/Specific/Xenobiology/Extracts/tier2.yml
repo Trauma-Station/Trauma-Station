@@ -86,9 +86,12 @@
       effects:
       - !type:NestedEffect
         proto: XenobioExtractReagent
-      - !type:AdjustReagent
-        reagent: XenobioJellyDarkBlue
-        amount: 1
+      - !type:RelaySolution
+        name: extract
+        effects:
+        - !type:AdjustReagent
+          reagent: XenobioJellyDarkBlue
+          amount: 1
     - reagents: [ Plasma ]
       methods: [ Touch, Injection ]
       effects:
@@ -102,9 +105,12 @@
       effects:
       - !type:NestedEffect
         proto: XenobioExtractReagent
-      - !type:AdjustReagent
-        reagent: Leporazine
-        amount: 100
+      - !type:RelaySolution
+        name: extract
+        effects:
+        - !type:AdjustReagent
+          reagent: Leporazine
+          amount: 100
   - type: Tag
     tags:
     - XenobiologyDarkBlueExtract
@@ -213,9 +219,12 @@
       effects:
       - !type:NestedEffect
         proto: XenobioExtractReagent
-      - !type:AdjustReagent
-        reagent: Tilenol
-        amount: 100
+      - !type:RelaySolution
+        name: extract
+        effects:
+        - !type:AdjustReagent
+          reagent: Tilenol
+          amount: 100
     - reagents: [ Plasma ]
       methods: [ Touch, Injection ]
       effects:
@@ -274,9 +283,12 @@
       effects:
       - !type:NestedEffect
         proto: XenobioExtractReagent
-      - !type:AdjustReagent
-        reagent: XenobioJellyCerulean
-        amount: 1
+      - !type:RelaySolution
+        name: extract
+        effects:
+        - !type:AdjustReagent
+          reagent: XenobioJellyCerulean
+          amount: 1
   - type: Tag
     tags:
     - XenobiologyCeruleanExtract

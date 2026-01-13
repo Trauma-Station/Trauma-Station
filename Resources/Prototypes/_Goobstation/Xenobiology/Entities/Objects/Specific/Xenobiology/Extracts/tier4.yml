@@ -16,9 +16,12 @@
       effects:
       - !type:NestedEffect
         proto: XenobioExtractReagent
-      - !type:AdjustReagent
-        reagent: SpaceLube
-        amount: 100
+      - !type:RelaySolution
+        name: extract
+        effects:
+        - !type:AdjustReagent
+          reagent: SpaceLube
+          amount: 100
     - reagents: [ Plasma ]
       methods: [ Touch, Injection ]
       effects:
@@ -69,9 +72,12 @@
       effects:
       - !type:NestedEffect
         proto: XenobioExtractReagent
-      - !type:AdjustReagent
-        reagent: Cognizine
-        amount: 10
+      - !type:RelaySolution
+        name: extract
+        effects:
+        - !type:AdjustReagent
+          reagent: Cognizine
+          amount: 10
     - reagents: [ Blood ]
       methods: [ Touch, Injection ]
       effects:
@@ -110,9 +116,12 @@
       effects:
       - !type:NestedEffect
         proto: XenobioExtractReagent
-      - !type:AdjustReagent
-        reagent: AdvancedMutationToxin
-        amount: 5
+      - !type:RelaySolution
+        name: extract
+        effects:
+        - !type:AdjustReagent
+          reagent: AdvancedMutationToxin
+          amount: 5
     - reagents: [ Blood ]
       methods: [ Touch, Injection ]
       effects:
