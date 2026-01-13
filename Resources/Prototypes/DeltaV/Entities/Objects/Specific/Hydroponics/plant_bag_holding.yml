@@ -17,3 +17,4 @@
   - type: Storage
     grid:
     - 0,0,19,9
+  - type: AntiRottingContainer #Trauma

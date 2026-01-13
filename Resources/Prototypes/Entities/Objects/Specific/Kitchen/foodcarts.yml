@@ -158,6 +158,7 @@
         hotsauce_slot: !type:ContainerSlot {}
         bbqsauce_slot: !type:ContainerSlot {}
         ketchup_slot: !type:ContainerSlot {}
+    - type: AntiRottingContainer #Trauma
 
 - type: entity
   name: cold food cart
