@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Shared.EntityEffects;
+using Content.Trauma.Shared.EntityEffects;
 using Content.Trauma.Shared.Genetics.Mutations;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;
@@ -9,6 +10,7 @@ namespace Content.Trauma.Shared.Genetics.Abilities;
 /// </summary>
 public sealed class EffectsMutationSystem : EntitySystem
 {
+    [Dependency] private readonly EffectDataSystem _data = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
@@ -24,7 +26,10 @@ public sealed class EffectsMutationSystem : EntitySystem
         if (args.Automatic && ent.Comp.IgnoreAutomatic)
             return;
 
-        _effects.ApplyEffects(args.Target, ent.Comp.Added);
+        var target = args.Target;
+        _data.SetUser(target, target);
+        _effects.ApplyEffects(target, ent.Comp.Added);
+        _data.ClearUser(target);
     }
 
     private void OnRemoved(Entity<EffectsMutationComponent> ent, ref MutationRemovedEvent args)
@@ -32,6 +37,9 @@ public sealed class EffectsMutationSystem : EntitySystem
         if (args.Automatic && ent.Comp.IgnoreAutomatic)
             return;
 
-        _effects.ApplyEffects(args.Target, ent.Comp.Removed);
+        var target = args.Target;
+        _data.SetUser(target, target);
+        _effects.ApplyEffects(target, ent.Comp.Removed);
+        _data.ClearUser(target);
     }
 }

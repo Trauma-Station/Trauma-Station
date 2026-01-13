@@ -59,7 +59,10 @@
     damage:
       types:
         Caustic: 15 # TODO: random scale
-  # TODO: play sear sound
+  - !type:PlaySoundEffect
+    sound:
+      path: /Audio/_Trauma/Effects/sear.ogg
+    positional: false
 
 # Spastic
 
@@ -89,7 +92,9 @@
   - !type:PopupMessage
     messages:
     - entity-effect-popup-spasm-leg
-  # TODO
+  - !type:ThrowRandomly
+    speed: 1.5 # just a spasm
+  # TODO - this would be much better with proper tile movement key queue system
 
 - type: entityEffect
   id: SpasmAttackSelf
@@ -123,7 +128,9 @@
   - !type:PopupMessage
     messages:
     - entity-effect-popup-spasm-arm
-  - !type:ThrowRandomItem
+  - !type:DropRandomItem
+    effects:
+    - !type:ThrowRandomly
 
 # Two Left Feet
 

@@ -3,7 +3,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Random.Helpers;
-using Content.Shared.Throwing;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -11,26 +10,31 @@ using Robust.Shared.Timing;
 namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
-/// Makes the target throw a random item in a random direction.
+/// Makes the target drop a random item, then run entity effects on it.
+/// The effects have this mob set as the user.
 /// </summary>
-public sealed partial class ThrowRandomItem : EntityEffectBase<ThrowRandomItem>
+public sealed partial class DropRandomItem : EntityEffectBase<DropRandomItem>
 {
+    /// <summary>
+    /// Effects to run on the item after dropping it.
+    /// </summary>
     [DataField]
-    public float Force = 10f;
+    public EntityEffect[] Effects = [];
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("reagent-effect-guidebook-throw-random-item", ("chance", Probability));
+        => null; // not used by reagents idc
 }
 
-public sealed class ThrowRandomItemEffectSystem : EntityEffectSystem<HandsComponent, ThrowRandomItem>
+public sealed class DropRandomItemEffectSystem : EntityEffectSystem<HandsComponent, DropRandomItem>
 {
+    [Dependency] private readonly EffectDataSystem _data = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
 
     private List<EntityUid> _items = new();
 
-    protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<ThrowRandomItem> args)
+    protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<DropRandomItem> args)
     {
         _items.Clear();
         foreach (var held in _hands.EnumerateHeld(ent.AsNullable()))
@@ -48,11 +52,8 @@ public sealed class ThrowRandomItemEffectSystem : EntityEffectSystem<HandsCompon
         if (!_hands.TryDrop(ent.AsNullable(), item)) // glued etc
             return;
 
-        var angle = rand.NextAngle();
-        var direction = angle.ToVec();
-        _throwing.TryThrow(item,
-            direction,
-            args.Effect.Force,
-            user: ent);
+        _data.SetUser(item, ent); // this mob is doing whatever
+        _effects.ApplyEffects(item, args.Effect.Effects);
+        _data.ClearUser(item);
     }
 }

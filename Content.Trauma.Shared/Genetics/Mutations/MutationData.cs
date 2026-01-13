@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.Genetics.Mutations;
 /// Data every mutation prototype has, changes every round.
 /// </summary>
 [DataRecord]
-public sealed class MutationData
+public sealed partial class MutationData
 {
     public static readonly char[] AGCT = new[] { 'A', 'G', 'C', 'T' };
     public const int PairCount = 16;

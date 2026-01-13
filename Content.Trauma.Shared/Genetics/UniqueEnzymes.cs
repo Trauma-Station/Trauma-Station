@@ -10,4 +10,4 @@ namespace Content.Trauma.Shared.Genetics;
 /// Hair isn't included since you can do that with barber scissors / mirror.
 /// </summary>
 [DataRecord, Serializable, NetSerializable]
-public record struct UniqueEnzymes(string Name, string? Prints, Sex? Sex, Gender? Gender, Color? EyeColor, Color? SkinColor);
+public partial record struct UniqueEnzymes(string Name, string? Prints, Sex? Sex, Gender? Gender, Color? EyeColor, Color? SkinColor);

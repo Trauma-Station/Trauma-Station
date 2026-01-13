@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.Genetics.Abilties;
 
 public sealed class MobThresholdMutationSystem : EntitySystem
 {
-    [Dependency] private readonly MobThresholdsSystem _thresholds = default!;
+    [Dependency] private readonly MobThresholdSystem _threshold = default!;
 
     public override void Initialize()
     {
@@ -24,7 +24,7 @@ public sealed class MobThresholdMutationSystem : EntitySystem
         if (!TryComp<MobStateComponent>(target, out var mob))
             return;
 
-        var states = mob.AllowedStates
+        var states = mob.AllowedStates;
         var state = ent.Comp.Removed;
         if (!states.Contains(state))
             return;
@@ -35,7 +35,7 @@ public sealed class MobThresholdMutationSystem : EntitySystem
         if (!TryComp<MobThresholdsComponent>(target, out var thresholds))
             return;
 
-        var threshold = _thresholds.GetThresholdForState(target, state, thresholds);
+        var threshold = _threshold.GetThresholdForState(target, state, thresholds);
         if (threshold == FixedPoint2.Zero)
             return;
 
