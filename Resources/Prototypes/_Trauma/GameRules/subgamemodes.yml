@@ -1,0 +1,47 @@
+- type: entity
+  parent: BaseTraitorRule
+  id: SubTraitor
+  components:
+  - type: GameRule
+    minPlayers: 5
+  - type: AntagSelection
+    selectionTime: IntraPlayerSpawn # Goobstation
+    definitions:
+    - prefRoles: [ Traitor ]
+      max: 2
+      playerRatio: 40
+      chaosScore: 150 # Goobstation
+      blacklist:
+        components:
+        - CommandStaff # Goobstation
+        - AntagImmune
+        - Changeling # Goobstation
+      lateJoinAdditional: false
+      mindRoles:
+      - MindRoleTraitor
+
+- type: entity
+  parent: BaseGameRule
+  id: ShadowlingGamemode
+  components:
+  - type: ShadowlingRule
+  - type: GameRule
+    minPlayers: 30
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ Shadowling ]
+      max: 3
+      playerRatio: 25
+      chaosScore: 500
+      jobBlacklist: [ Chaplain ] # GOOBSTATION
+      blacklist:
+        components:
+        - CommandStaff
+      mindRoles:
+      - MindRoleShadowling
+  - type: AntagObjectives
+    objectives:
+    - ShadowlingAscendObjective
+  - type: Tag
+    tags:
+      - RoundstartAntag
