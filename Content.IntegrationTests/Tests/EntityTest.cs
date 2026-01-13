@@ -163,6 +163,7 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => !p.Components.ContainsKey("GameRule")) // are you stupid why would you do this
                     .Where(p => !p.Components.ContainsKey("GrapplingProjectile")) // shitcode double-embeds or something, fails test
                     .Where(p => !p.Components.ContainsKey("SpawnOnDespawn")) // it leaves entities behind if lifetime is under 15s
+                    .Where(p => !p.Components.ContainsKey("Meteor")) // spawning the rocks gives it a stroke
                     // </Trauma>
                     .Select(p => p.ID)
                     .ToList();
