@@ -19,7 +19,7 @@
           availableJobs:
             #service
             Captain: [ 1, 1 ]
-            NanotrasenRepresentative: [ 1, 1 ] # Goobstation
+            NanotrasenRepresentative: [ 1, 1 ]
             #BlueshieldOfficer: [ 1, 1 ] # Trauma
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 2, 2 ]
@@ -29,8 +29,8 @@
             Chaplain: [ 1, 1 ]
             Librarian: [ 1, 1 ]
             ServiceWorker: [ 2, 2 ]
-            RadioHost: [ 1, 1 ] # Goobstation
-            Reporter: [ 1, 1 ] #Goobstation
+            RadioHost: [ 1, 1 ]
+            Reporter: [ 1, 1 ]
             #engineering
             ChiefEngineer: [ 1, 1 ]
             AtmosphericTechnician: [ 3, 3 ]
