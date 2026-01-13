@@ -1,8 +1,8 @@
 - type: entity
-  name: laser sidearm
+  name: phaser
   parent: [ WeaponDisablerPractice, BaseSecurityContraband ]
   id: WeaponLaserSidearm
-  description: A repurposed disabler used by mall cops all across nanotrasens stations, has lethal and nonlethal modes.
+  description: A trusty sidearm used by most space cops. Can be set to disable for wrangling criminals, and lethal for when the going gets tough.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/disabler.rsi
