@@ -21,6 +21,12 @@
     slots:
       - suitStorage
       - Belt
+  - type: AmmoSelectorMagazineVisuals
+    zeroVisible: true
+    magSteps: 5
+    magStates:
+      BulletDisablerSidearm: mag
+      BulletLethalSidearm: mag-lethal
   - type: BatteryAmmoProvider
     proto: SidearmDisable
     fireCost: 80
