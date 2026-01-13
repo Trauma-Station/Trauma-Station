@@ -1196,3 +1196,143 @@ Entries:
       message: You can now wear butts as hats
   id: 141
   time: '2026-01-11T15:16:24.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Add
+      message: >-
+        Added new reagent, NanoMachines, turns people into cyborgs when enough
+        is consumed
+  id: 142
+  time: '2026-01-12T02:25:03.0000000+00:00'
+- author: Nousagi37
+  changes:
+    - type: Remove
+      message: Removed extra SecTechFab on Fland
+  id: 143
+  time: '2026-01-12T03:19:53.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: 'Food now rots into slop if left out of refrigeration '
+    - type: Add
+      message: >-
+        Slop will rot away, deleting excess entities, it has a chance to spawn a
+        roach when rotted.
+    - type: Fix
+      message: Roaches no longer randomly die and are poison immune.
+    - type: Fix
+      message: Roaches go around and eat other food, clearing up more entities.
+  id: 144
+  time: '2026-01-12T04:56:55.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed bodypart health examine.
+  id: 145
+  time: '2026-01-12T05:56:06.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: >-
+        Fixed being able to buckle yourself or use some actions while in
+        softcrit.
+  id: 146
+  time: '2026-01-12T07:21:22.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: >-
+        Fixed reinforcement callers and NTRs briefcase having wrong cooldowns on
+        items.
+  id: 147
+  time: '2026-01-12T09:26:18.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Chefs can only use CQC inside the kitchen areas now, not just around
+        their spawnpoints.
+  id: 148
+  time: '2026-01-12T09:59:41.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        You can now breathe in softcrit at 30% efficiency. Give people internals
+        to keep them alive longer.
+  id: 149
+  time: '2026-01-12T11:14:42.0000000+00:00'
+- author: Aviu
+  changes:
+    - type: Add
+      message: >-
+        Added hair color gradients. Check markings tab in character creator
+        (Hair/Facial Hair Special) to apply them.
+  id: 150
+  time: '2026-01-12T12:47:11.0000000+00:00'
+- author: ciaran
+  changes:
+    - type: Add
+      message: >-
+        other people still touching a body when a defib is used will be shocked
+        too
+  id: 151
+  time: '2026-01-12T14:55:58.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Re-enabled Leonid station, redid its armory.
+  id: 152
+  time: '2026-01-12T16:25:48.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Add
+      message: Added facehuggers can now jump
+  id: 153
+  time: '2026-01-12T20:08:45.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Tweak
+      message: Vending machines give you cancer
+  id: 154
+  time: '2026-01-12T21:53:12.0000000+00:00'
+- author: Nousagi37
+  changes:
+    - type: Add
+      message: Cog has been localized with Trauma content.
+    - type: Tweak
+      message: >-
+        Cog botany has been moved above Kitchen, and bigger maintenance in the
+        place of old botany
+    - type: Tweak
+      message: Medical maintenance is a bit bigger
+    - type: Tweak
+      message: Xenobio now has a freezer and a biomass reclaimer.
+  id: 155
+  time: '2026-01-13T07:25:57.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed some xenobio extracts not doing anything.
+    - type: Fix
+      message: Fixed engiborgs not being able to pick up steel.
+  id: 156
+  time: '2026-01-13T08:16:48.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Chef now makes organic chocolate and popcorn, vending machine versions
+        are slop.
+    - type: Fix
+      message: Fixed some vending machine snacks being healthy when they shouldn't.
+  id: 157
+  time: '2026-01-13T09:10:55.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: CQC still has ripostee. 🥚
+    - type: Tweak
+      message: Ghost bar still exists. 🥚
+  id: 158
+  time: '2026-01-13T14:24:47.0000000+00:00'

@@ -6,12 +6,12 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Mobs/Xenos/hunter.rsi
+    sprite: _White/Mobs/Aliens/Xenomorphs/hunter.rsi
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: xenomorph
     - map: [ "enum.JumpLayers.Jumping" ]
-      sprite: _Trauma/Mobs/Xenos/hunter_jump.rsi
+      sprite: _White/Mobs/Aliens/Xenomorphs/hunter_jump.rsi
       state: xenomorph_jump
       visible: false
     - map: [ "pocket1" ]

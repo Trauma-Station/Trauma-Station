@@ -1,9 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Pain.Components;
 using Content.Goobstation.Maths.FixedPoint;
-using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 
 namespace Content.Shared._Shitmed.Medical.Surgery.Consciousness.Systems;

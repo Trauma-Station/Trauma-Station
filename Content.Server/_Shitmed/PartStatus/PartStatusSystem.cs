@@ -205,7 +205,7 @@ public sealed class PartStatusSystem : EntitySystem
             titlestring += "-styleless";
         }
 
-        message.AddText(Loc.GetString(titlestring, ("entity", Identity.Name(entity, EntityManager))));
+        message.AddMarkupPermissive(Loc.GetString(titlestring, ("entity", FormattedMessage.EscapeText(Identity.Name(entity, EntityManager)))));
         message.PushNewline();
         AddLine(message);
         CreateBodyPartMessage(partStatusSet, entity == examiner, ref message, !styling);
@@ -244,7 +244,7 @@ public sealed class PartStatusSystem : EntitySystem
                 locString += "-styleless";
             }
 
-            message.AddText("    " + Loc.GetString(locString,
+            message.AddMarkupPermissive("    " + Loc.GetString(locString,
                 ("possessive", possessive),
                 ("part", partStatus.PartName),
                 ("status", statusDescription)));

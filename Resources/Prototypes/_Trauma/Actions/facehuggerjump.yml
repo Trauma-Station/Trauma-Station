@@ -1,0 +1,16 @@
+- type: entity
+  id: ActionJumpFacehugger
+  parent: BaseAction
+  name: Jump
+  description: Jump towards your prey.
+  components:
+  - type: Action
+    priority: 0
+    useDelay: 10
+    icon: { sprite : _White/Interface/Actions/xenomorph.rsi, state: leap_off }
+    iconOn: { sprite : _White/Interface/Actions/xenomorph.rsi, state: leap_on }
+  - type: TargetAction
+    range: 15
+  - type: WorldTargetAction
+    event: !type:DashActionEvent
+      emote: null

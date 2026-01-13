@@ -265,7 +265,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return;
         }
 
-        var organSlotIdToOrgan = _body.GetPartOrgans(args.Part, part).ToDictionary(o => o.Item2.SlotId, o => o.Item2);
+        var organSlotIdToOrgan = _body.GetPartOrgans(args.Part, part).ToDictionary(o => o.Component.SlotId, o => o.Component);
 
         var allOnAddFound = true;
         var zeroOnAddFound = true;
@@ -275,15 +275,9 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             if (!organSlotIdToOrgan.TryGetValue(organSlotId, out var organ))
                 continue;
 
-            if (organ.OnAdd == null)
-            {
-                allOnAddFound = false;
-                continue;
-            }
-
             foreach (var key in components.Keys)
             {
-                if (!organ.OnAdd.ContainsKey(key))
+                if (!organ.AddedKeys.Contains(key))
                     allOnAddFound = false;
                 else
                     zeroOnAddFound = false;

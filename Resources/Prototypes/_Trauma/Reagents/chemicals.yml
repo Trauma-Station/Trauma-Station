@@ -68,3 +68,46 @@
         damage:
           types:
             Caustic: 1
+
+- type: reagent
+  id: NanoMachines
+  name: reagent-name-nanomachines
+  desc: reagent-desc-nanomachines
+  physicalDesc: reagent-physical-desc-metallic
+  flavor: metallic
+  color: black
+  boilingPoint: 563.7
+  meltingPoint: 353.5
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      - !type:Polymorph
+        prototype: Cyborg
+        conditions:
+        - !type:ReagentCondition
+          reagent: NanoMachines
+          min: 40
+      - !type:PopupMessage
+        type: Local
+        visualType: MediumCaution
+        probability: 0.03
+        messages:
+        - generic-reagent-effect-burning-insides
+        - generic-reagent-effect-tearing-up
+      - !type:Jitter
+      - !type:Vomit
+        probability: 0.2
+      - !type:Emote
+        emote: Scream
+        probability: 0.1
+
+- type: reagent
+  id: NanoProcessor
+  name: reagent-name-nanoprocessor
+  desc: reagent-desc-nanoprocessor
+  physicalDesc: reagent-physical-desc-metallic
+  flavor: metallic
+  color: white
+  meltingPoint: 97.8
+  boilingPoint: 883.0

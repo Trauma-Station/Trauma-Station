@@ -444,7 +444,7 @@
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 10
+        damage: 3 # Trauma, was 10
       behaviors:
       - !type:GibBehavior
         gibContents: Skip # Shitmed Change
@@ -468,6 +468,13 @@
     damage:
       types:
         Piercing: 0
+  - type: Body # <Trauma>
+    prototype: Rat
+    requiredLegs: 0
+  - type: ThermalRegulator
+    metabolismHeat: 300
+  - type: StaticPrice
+    price: -520 # </Trauma>
 
 - type: entity
   name: glockroach
@@ -1466,9 +1473,11 @@
     - map: [ "neck" ]
     - map: [ "back" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHairSpecial" ] # Trauma
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "maskalt" ]
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "enum.HumanoidVisualLayers.HairSpecial" ] # Trauma
     - map: [ "mask" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
@@ -2027,9 +2036,6 @@
   - type: MeleeChemicalInjector
     transferAmount: 1
     solution: melee
-  - type: GibThisGuy
-    ocNames:
-    - Gallagin
   - type: DodgeWideswing
     staminaRatio: 1 # mice are small so can probably evade without much stamina drain
   - type: Stamina

@@ -23,6 +23,7 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private TimeSpan _lastUpdated = TimeSpan.FromSeconds(0);
+    private List<Entity<DiseaseCarrierComponent>> _carriers = new();
 
     protected static readonly EntProtoId BaseDisease = "DiseaseBase";
 
@@ -31,8 +32,9 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
     /// </summary>
     private readonly TimeSpan _updateInterval = TimeSpan.FromSeconds(0.5f); // update every half-second to not lag the game
 
-    protected EntityQuery<DiseaseComponent> _query;
-    protected EntityQuery<DiseaseEffectComponent> _effectQuery;
+    private EntityQuery<DiseaseComponent> _query;
+    private EntityQuery<DiseaseCarrierComponent> _carrierQuery;
+    protected EntityQuery<DiseaseEffectComponent> EffectQuery;
 
     public override void Initialize()
     {
@@ -40,15 +42,18 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
 
         SubscribeLocalEvent<DiseaseCarrierComponent, MapInitEvent>(OnDiseaseCarrierInit);
         SubscribeLocalEvent<DiseaseCarrierComponent, DiseaseCuredEvent>(OnDiseaseCured);
+        SubscribeLocalEvent<DiseaseCarrierComponent, ComponentStartup>(OnDiseaseCarrierStartup);
         SubscribeLocalEvent<DiseaseCarrierComponent, RejuvenateEvent>(OnRejuvenate);
 
         SubscribeLocalEvent<DiseaseComponent, ComponentInit>(OnDiseaseInit);
         SubscribeLocalEvent<DiseaseComponent, MapInitEvent>(OnDiseaseMapInit);
+        SubscribeLocalEvent<DiseaseComponent, ComponentShutdown>(OnDiseaseShutdown);
         SubscribeLocalEvent<DiseaseComponent, DiseaseUpdateEvent>(OnUpdateDisease);
         SubscribeLocalEvent<DiseaseComponent, DiseaseCloneEvent>(OnClonedInto);
 
         _query = GetEntityQuery<DiseaseComponent>();
-        _effectQuery = GetEntityQuery<DiseaseEffectComponent>();
+        _carrierQuery = GetEntityQuery<DiseaseCarrierComponent>();
+        EffectQuery = GetEntityQuery<DiseaseEffectComponent>();
 
         InitializeConditions();
         InitializeEffects();
@@ -68,23 +73,23 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        var diseaseCarriers = EntityQueryEnumerator<DiseaseCarrierComponent>();
-        // so that we can EnsureComp disease carriers while we're looping over them without erroring
-        List<Entity<DiseaseCarrierComponent>> carriers = new();
-        while (diseaseCarriers.MoveNext(out var uid, out var diseaseCarrier))
+        var query = EntityQueryEnumerator<DiseaseCarrierComponent>();
+        // add to a list so that we can EnsureComp disease carriers while we're looping over them without erroring
+        _carriers.Clear();
+        while (query.MoveNext(out var uid, out var comp))
         {
-            carriers.Add((uid, diseaseCarrier));
+            _carriers.Add((uid, comp));
         }
-        for (var i = 0; i < carriers.Count; i++)
+
+        foreach (var carrier in _carriers)
         {
-            UpdateDiseases(carriers[i]);
+            UpdateDiseases(carrier);
         }
     }
 
     private void UpdateDiseases(Entity<DiseaseCarrierComponent> ent)
     {
-        // not foreach since it can be cured and deleted from the list while inside the loop
-        var diseases = new List<EntityUid>(ent.Comp.Diseases);
+        var diseases = new List<EntityUid>(ent.Comp.Diseases.ContainedEntities);
         foreach (var diseaseUid in diseases)
         {
             var ev = new DiseaseUpdateEvent(ent);
@@ -92,17 +97,20 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
         }
     }
 
+    private void OnDiseaseCarrierStartup(Entity<DiseaseCarrierComponent> ent, ref ComponentStartup args)
+    {
+        ent.Comp.Diseases = _container.EnsureContainer<Container>(ent.Owner, DiseaseCarrierComponent.DiseaseContainerId);
+    }
+
     private void OnDiseaseCarrierInit(Entity<DiseaseCarrierComponent> ent, ref MapInitEvent args)
     {
         foreach (var diseaseId in ent.Comp.StartingDiseases)
-        {
             TryInfect((ent, ent.Comp), diseaseId, out _);
-        }
     }
 
     private void OnDiseaseInit(Entity<DiseaseComponent> ent, ref ComponentInit args)
     {
-        ent.Comp.EffectsContainer = _container.EnsureContainer<Container>(ent.Owner, ent.Comp.EffectsContainerId);
+        ent.Comp.Effects = _container.EnsureContainer<Container>(ent.Owner, ent.Comp.EffectContainerId);
     }
 
     private void OnDiseaseMapInit(Entity<DiseaseComponent> ent, ref MapInitEvent args)
@@ -123,6 +131,25 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
         Dirty(ent);
     }
 
+    private void OnDiseaseShutdown(Entity<DiseaseComponent> ent, ref ComponentShutdown args)
+    {
+        var carrier = Transform(ent).ParentUid;
+        if (!_carrierQuery.TryComp(carrier, out var carrierComp))
+            return;
+
+        var failEv = new DiseaseEffectFailedEvent(default!, ent, (carrier, carrierComp));
+        // it's assumed that fail handlers won't remove effects
+        foreach (var effect in ent.Comp.Effects.ContainedEntities)
+        {
+            if (!EffectQuery.TryComp(effect, out var effectComp))
+                continue;
+
+            failEv.Comp = effectComp;
+            RaiseLocalEvent(effect, ref failEv);
+        }
+        _container.ShutdownContainer(ent.Comp.Effects);
+    }
+
     private void OnDiseaseCured(Entity<DiseaseCarrierComponent> ent, ref DiseaseCuredEvent args)
     {
         TryCure(ent.AsNullable(), args.Disease);
@@ -140,9 +167,9 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
 
         if (!args.Ent.Comp.EffectImmune)
         {
-            foreach (var effectUid in ent.Comp.Effects)
+            foreach (var effectUid in ent.Comp.Effects.ContainedEntities)
             {
-                if (!_effectQuery.TryComp(effectUid, out var effect))
+                if (!EffectQuery.TryComp(effectUid, out var effect))
                     continue;
 
                 if (!alive)
@@ -190,9 +217,9 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
 
     private void OnClonedInto(Entity<DiseaseComponent> ent, ref DiseaseCloneEvent args)
     {
-        foreach (var effectUid in ent.Comp.Effects)
+        foreach (var effectUid in ent.Comp.Effects.ContainedEntities)
         {
-            if (!_effectQuery.TryComp(effectUid, out var effectComp) || Prototype(effectUid) is not {} proto)
+            if (!EffectQuery.TryComp(effectUid, out var effectComp) || Prototype(effectUid) is not {} proto)
                 continue;
 
             TryAdjustEffect(args.Cloned.AsNullable(), proto.ID, out _, effectComp.Severity);
@@ -219,7 +246,7 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
         Dirty(args.Cloned);
     }
 
-    #region public API
+    #region Public API
 
     #region disease
 
@@ -277,7 +304,7 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, false))
             return false;
 
-        foreach (var diseaseUid in ent.Comp.Diseases)
+        foreach (var diseaseUid in ent.Comp.Diseases.ContainedEntities)
         {
             if (!_query.TryComp(diseaseUid, out var diseaseComp) || diseaseComp.Genotype != genotype)
                 continue;
@@ -299,14 +326,10 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
     /// </summary>
     public bool TryCure(Entity<DiseaseCarrierComponent?> ent, EntityUid disease)
     {
-        if (!Resolve(ent, ref ent.Comp))
-            return false;
-
-        if (!ent.Comp.Diseases.Remove(disease))
+        if (!Resolve(ent, ref ent.Comp) || !_container.Remove(disease, ent.Comp.Diseases))
             return false;
 
         PredictedQueueDel(disease);
-        Dirty(ent, ent.Comp);
         return true;
     }
 
@@ -318,9 +341,10 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, false))
             return false;
 
-        while (ent.Comp.Diseases.Count != 0)
+        var diseases = new List<EntityUid>(ent.Comp.Diseases.ContainedEntities);
+        foreach (var disease in diseases)
         {
-            if (!TryCure(ent, ent.Comp.Diseases[0]))
+            if (!TryCure(ent, disease))
                 return false;
         }
 
@@ -351,11 +375,9 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
         if (!force && (HasDisease(ent, diseaseComp.Genotype) || !checkEv.CanInfect))
             return false;
 
-        _transform.SetCoordinates(disease, new EntityCoordinates(ent, Vector2.Zero));
-        ent.Comp.Diseases.Add(disease);
+        _container.Insert(disease, ent.Comp.Diseases);
         var ev = new DiseaseGainedEvent((disease, diseaseComp));
         RaiseLocalEvent(ent, ref ev);
-        Dirty(ent, ent.Comp);
         return true;
     }
 

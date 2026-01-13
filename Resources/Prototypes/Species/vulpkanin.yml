@@ -15,7 +15,11 @@
 - type: speciesBaseSprites
   id: MobVulpkaninSprites
   sprites:
-    Special: MobHumanoidAnyMarking # Trauma
+    # <Trauma>
+    HairSpecial: MobHumanoidAnyMarking
+    FacialHairSpecial: MobHumanoidAnyMarking
+    Special: MobHumanoidAnyMarking
+    # </Trauma>
     Head: MobVulpkaninHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
@@ -41,6 +45,14 @@
 - type: markingPoints # 6 points on arms and legs due to the "expected" marking usage. Two for hands, two for arms and 2 for claws. Can be lower once we have a distinction between LeftArm and RightArm instead of just Arms.
   id: MobVulpkaninMarkingLimits
   points:
+    # <Trauma>
+    HairSpecial:
+      points: 1
+      required: false
+    FacialHairSpecial:
+      points: 1
+      required: false
+    # </Trauma>
     Hair:
       points: 1
       required: false

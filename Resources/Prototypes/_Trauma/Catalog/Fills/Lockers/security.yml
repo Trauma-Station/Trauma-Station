@@ -1,4 +1,5 @@
 - type: entity
+  abstract: true
   parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
   id: BaseTraumaGunSafe
   name: gun safe
@@ -38,7 +39,7 @@
     - id: PepperSpray
 
 - type: entity
-  parent: [BaseTraumaGunSafe] # WWDP
+  parent: BaseTraumaGunSafe
   id: GunSafeLaserCarbine
   name: laser safe
   components:
@@ -48,10 +49,9 @@
         tableId: FillGunSafeLaserT1
 
 - type: entity
-  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  parent: BaseTraumaGunSafe
   id: GunSafeShotguns
   name: shotgun safe
-  suffix: Alert Level Lock # WWDP
   components:
   - type: EntityTableContainerFill
     containers:
@@ -63,10 +63,9 @@
     - yellow
 
 - type: entity
-  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  parent: BaseTraumaGunSafe
   id: GunSafeLaserSpec
   name: specialist laser safe
-  suffix: Alert Level Lock # WWDP
   components:
   - type: EntityTableContainerFill
     containers:
@@ -78,10 +77,9 @@
     - yellow
 
 - type: entity
-  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  parent: BaseTraumaGunSafe
   id: GunSafeMelee
   name: melee weapon safe
-  suffix: Alert Level Lock # WWDP
   components:
   - type: EntityTableContainerFill
     containers:
@@ -93,49 +91,33 @@
     - yellow
 
 - type: entity
-  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  parent: BaseTraumaGunSafe
   id: GunSafeJudo
   name: judo safe
-  suffix: Alert Level Lock # WWDP
   components:
   - type: EntityTableContainerFill
     containers:
       entity_storage: !type:NestedSelector
         tableId: FillGunSafeJudoT1
-  - type: StationAlertLevelLock
-    lockedAlertLevels:
-    - green
-    - yellow
-    - blue
 
 - type: entity
-  parent: [BaseTraumaGunSafe, BaseSecurityContraband, AlertLevelLock] # WWDP
+  parent: BaseTraumaGunSafe
   id: GunSafeRiotLauncher
   name: riot launcher safe
-  suffix: Alert Level Lock # WWDP
   components:
   - type: EntityTableContainerFill
     containers:
       entity_storage: !type:NestedSelector
         tableId: FillGunSafeRiot
-  - type: StationAlertLevelLock
-    lockedAlertLevels:
-    - green
-    - yellow
-    - blue
 
 - type: entityTable
   id: FillGunSafeRiot
   table: !type:AllSelector
     children:
     - id: WeaponLauncherNonLethal
-      amount: 1
     - id: BoxGrenadesBaton
-      amount: 1
     - id: BoxGrenadesFlash
-      amount: 1
     - id: BoxGrenadesTeargas
-      amount: 1
 
 - type: entityTable
   id: FillGunSafeLaserT1
@@ -158,9 +140,7 @@
   table: !type:AllSelector
     children:
     - id: WeaponTemperatureGun
-      amount: 1
     - id: WeaponEnergyIonRifle
-      amount: 1
 
 - type: entityTable
   id: FillGunSafeMeleeT1

@@ -28,6 +28,8 @@
     - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
+  - type: Jump
+    jumpAction: ActionJumpFacehugger
   - type: Clothing
     sprite: _Trauma/Mobs/Xenos/clothing/facehuggermask.rsi
     slots: [mask]

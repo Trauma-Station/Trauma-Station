@@ -31,7 +31,7 @@ public sealed class RelayStrappedEffectSystem : EntityEffectSystem<StrapComponen
         {
             _data.CopyData(ent, strapped);
             _effects.ApplyEffects(strapped, args.Effect.Effects, args.Scale);
-            _data.ClearData(ent);
+            _data.ClearData(strapped);
         }
     }
 }

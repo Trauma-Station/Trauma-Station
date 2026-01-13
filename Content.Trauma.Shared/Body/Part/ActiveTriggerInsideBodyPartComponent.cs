@@ -12,6 +12,6 @@ namespace Content.Trauma.Shared.Body.Part;
 public sealed partial class ActiveTriggerInsideBodyPartComponent : Component
 {
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    [AutoNetworkedField]
+    [AutoNetworkedField, AutoPausedField]
     public TimeSpan NextTrigger;
 }

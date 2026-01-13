@@ -71,6 +71,7 @@ public partial class MobStateSystem
         {
             case MobState.Dead:
             case MobState.Critical:
+            case MobState.SoftCrit: // Trauma - softcrit prevents interaction, conscious actions (too hard to do)
                 args.Cancelled = true;
                 break;
         }
