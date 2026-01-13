@@ -1,0 +1,47 @@
+- type: entity
+  id: EDShell
+  name: ED-209 shell part
+  parent: BaseItem
+  components:
+    - type: Sprite
+      sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
+      state: ed209_shell
+    - type: Tag
+      tags:
+      - ed209_shell
+
+- type: entity
+  id: EDLegR
+  name: ED-209 left leg part
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
+    state: edleg_R
+  - type: Tag
+    tags:
+    - edleg_R
+
+- type: entity
+  id: EDLegL
+  name: ED-209 right leg part
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
+    state: edleg_L
+  - type: Tag
+    tags:
+    - edleg_L
+
+- type: entity
+  id: EDHead
+  name: ED-209 head part
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
+    state: ed209_prox
+  - type: Tag
+    tags:
+    - ed209_prox
