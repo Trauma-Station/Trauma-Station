@@ -66,3 +66,5 @@
   - type: StationEvent
     weight: 50
     duration: 1
+  - type: GameRule
+    chaosScore: 200
