@@ -1,105 +1,79 @@
 - type: entity
   name: anomaly
-  parent:
-  - BaseSimpleMob
-  - MobCombat
-  - MobBloodstream
-  id: MobAnomMeatbeast
-  description: An unstoppable force of carnage.
+  parent: [ SimpleSpaceMobBase, MobCombat ]
+  id: MobMeatBallEvil
+  description: What is this thing?
   components:
-  - type: GhostRole
-    allowMovement: true
-    makeSentient: true
-    name: ghost-role-information-hellspawn-name
-    description: ghost-role-information-hellspawn-description
-    rules: ghost-role-information-antagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
-    raffle:
-      settings: default
-  - type: RotationVisuals
-    defaultRotation: 90
-    horizontalRotation: 90
-  - type: GhostTakeoverAvailable
   - type: HTN
     rootTask:
-      task: SimpleHostileCompound
+     task: SimpleHostileCompound
   - type: NpcFactionMember
     factions:
-      - SimpleHostile
-  - type: Body
-    prototype: Animal
-    bodyType: Simple
-  - type: Damageable
-    damageContainer: BiologicalMetaphysical
-    damageModifierSet: HellSpawn
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 3
+    - SimpleHostile
   - type: Sprite
-    sprite: _Trauma\Mobs\Anoms\meatball.rsi
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Anoms/meatball.rsi
     layers:
-      - map: [ "enum.DamageStateVisualLayers.Base" ]
-        state: alive
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
   - type: DamageStateVisuals
     states:
       Alive:
         Base: alive
-      Dead:
+      Critical:
         Base: dead
-  - type: Firestarter
-  - type: NameIdentifier
-    group: GenericNumber
-  - type: SlowOnDamage
-    speedModifierThresholds:
-      100: 1
-      300: 2
-  - type: MobPrice
-    price: -50000
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.9
-        density: 300
-        mask:
-        - MobMask
-        layer:
-        - MobLayer
-  - type: MobState
-  - type: Tag
-    tags:
-      - CannotSuicide
-      - DoorBumpOpener
-      - FootstepSound
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 1
+    baseSprintSpeed : 1
   - type: MobThresholds
     thresholds:
       0: Alive
-      600: Critical
+      800: Critical
   - type: MeleeWeapon
-    attackRate: 1
-    hidden: true
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcBite
     soundHit:
-      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+      path: /Audio/Effects/bite.ogg
     damage:
       types:
         Slash: 50
-        Structural: 100
-  - type: FlashImmunity
-  - type: PassiveDamage #passive Healing
+        Structural: 50
+  - type: NoSlip
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      0: 1
+      300: 6
+      500: 30
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 2000
+    bleedReductionAmount: 0.5
+  - type: ZombieImmune
+  - type: PassiveDamage
     allowedStates:
     - Alive
     - Critical
+    damageCap: 9999
     damage:
       types:
-        Poison: -5
-        Genetic: -5
-        Radiation: -5
+        Poison: -10
+        Genetic: -10
+        Radiation: -10
       groups:
         Brute: -5
         Burn: -5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 99999999
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
   - type: ResearchPointSource # Goobstation
-    pointspersecond: 100
+    pointspersecond: 200
     active: true
-
