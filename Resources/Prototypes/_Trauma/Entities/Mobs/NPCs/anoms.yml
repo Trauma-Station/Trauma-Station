@@ -1,0 +1,105 @@
+- type: entity
+  name: anomaly
+  parent:
+  - BaseSimpleMob
+  - MobCombat
+  - MobBloodstream
+  id: MobAnomMeatbeast
+  description: An unstoppable force of carnage.
+  components:
+  - type: GhostRole
+    allowMovement: true
+    makeSentient: true
+    name: ghost-role-information-hellspawn-name
+    description: ghost-role-information-hellspawn-description
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: default
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: GhostTakeoverAvailable
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: NpcFactionMember
+    factions:
+      - SimpleHostile
+  - type: Body
+    prototype: Animal
+    bodyType: Simple
+  - type: Damageable
+    damageContainer: BiologicalMetaphysical
+    damageModifierSet: HellSpawn
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3
+  - type: Sprite
+    sprite: _Trauma\Mobs\Anoms\meatball.rsi
+    layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: Firestarter
+  - type: NameIdentifier
+    group: GenericNumber
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      100: 1
+      300: 2
+  - type: MobPrice
+    price: -50000
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.9
+        density: 300
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobState
+  - type: Tag
+    tags:
+      - CannotSuicide
+      - DoorBumpOpener
+      - FootstepSound
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      600: Critical
+  - type: MeleeWeapon
+    attackRate: 1
+    hidden: true
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    damage:
+      types:
+        Slash: 50
+        Structural: 100
+  - type: FlashImmunity
+  - type: PassiveDamage #passive Healing
+    allowedStates:
+    - Alive
+    - Critical
+    damage:
+      types:
+        Poison: -5
+        Genetic: -5
+        Radiation: -5
+      groups:
+        Brute: -5
+        Burn: -5
+  - type: ResearchPointSource # Goobstation
+    pointspersecond: 100
+    active: true
+
