@@ -19,6 +19,10 @@
     solutions:
       hypospray:
         maxVol: 0 # prevent any funnies
+  - type: Injector
+    activeModeProtoId: HyposprayInjectMode
+    allowedModes:
+    - HyposprayInjectMode
   - type: VialHypospray
     slot: vial
   - type: UseDelay
