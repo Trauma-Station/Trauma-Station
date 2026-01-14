@@ -8,7 +8,7 @@
     - to: ed209
       steps:
       - assemblyId: generic
-        guideString: borg-construction-guide-string
+        guideString: ed209-construction-guide-string
 
       - tool: Screwing
         doAfter: 1
@@ -17,8 +17,8 @@
       - tool: Cutting
         doAfter: 1
 
-      - tag: GygaxCentralControlModule
-        name: construction-graph-tag-gygax-central-control-module
+      - tag: edAiControl
+        name: construction-graph-tag-ed-ai-control-module
         icon:
           sprite: "Objects/Misc/module.rsi"
           state: "mainboard"
@@ -26,8 +26,8 @@
       - tool: Screwing
         doAfter: 1
 
-      - tag: GygaxPeripheralsControlModule
-        name: construction-graph-tag-gygax-peripherals-control-module
+      - tag: edIFF
+        name: construction-graph-tag-ed-iff-module
         icon:
           sprite: "Objects/Misc/module.rsi"
           state: id_mod
@@ -35,8 +35,8 @@
       - tool: Screwing
         doAfter: 1
 
-      - tag: GygaxTargetingControlModule
-        name: construction-graph-tag-gygax-targeting-control-module
+      - tag: edWeaponsControl
+        name: construction-graph-tag-ed-weapon-control-module
         icon:
           sprite: "Objects/Misc/module.rsi"
           state: mcontroller
@@ -81,11 +81,8 @@
       - tool: Anchoring
         doAfter: 1
 
-      - tag: GygaxArmor
-        name: construction-graph-tag-gygax-armor
-        icon:
-          sprite: "_Goobstation/Objects/Specific/Mech/gygax_construction.rsi"
-          state: gygax_armor
+      - material: Plasteel
+        amount: 20
 
       - tool: Anchoring
         doAfter: 2

@@ -219,15 +219,15 @@
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
   - type: Gun
-    fireRate: 10
+    fireRate: 15
     useKey: false
     selectedMode: FullAuto
     availableModes:
     - FullAuto
     soundGunshot: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
   - type: BallisticAmmoProvider
-    proto: CartridgeCaselessRifle
-    capacity: 100
+    proto: CartridgeRifle
+    capacity: 150
   - type: CombatMode
   - type: HTN
     rootTask:

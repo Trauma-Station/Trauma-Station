@@ -32,6 +32,15 @@
   id: edleg_L
 
 - type: Tag
+  id: edAiControl
+
+- type: Tag
+  id: edIFF
+
+- type: Tag
+  id: edWeaponsControl
+
+- type: Tag
   id: EncryptionRevolutionary
 
 - type: Tag

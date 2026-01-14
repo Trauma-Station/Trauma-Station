@@ -45,3 +45,53 @@
   - type: Tag
     tags:
     - ed209_prox
+
+- type: entity
+  id: EDAiCoreElectronics
+  parent: BaseElectronics
+  name: ED-209 AI core module
+  description: The AI control center for the ED-209.
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: mainboard
+  - type: Tag
+    tags:
+    - edAiControl
+  - type: GuideHelp
+    guides:
+    - Robotics
+
+- type: entity
+  id: EDIFFElectronics
+  parent: BaseElectronics
+  name: ED-209 IFF module
+  description: The electrical IFF module for the ED-209.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: id_mod
+  - type: Tag
+    tags:
+    - edIFF
+  - type: GuideHelp
+    guides:
+    - Robotics
+
+- type: entity
+  id: EDWeaponControlsElectronics
+  parent: BaseElectronics
+  name: ED-209 weapon control and targeting module
+  description: The electrical targeting control for the ED-209.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: mcontroller
+  - type: Tag
+    tags:
+    - edWeaponsControl
+  - type: GuideHelp
+    guides:
+    - Robotics
