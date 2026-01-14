@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Client.Weapons.Ranged.Components;
 using Content.Shared._Goobstation.Weapons.AmmoSelector;
 using Content.Shared.Rounding;
@@ -19,13 +20,13 @@ public sealed class AmmoSelectorMagazineVisualizerSystem : VisualizerSystem<Ammo
 
         if (!args.AppearanceData.TryGetValue(AmmoSelectorVisuals.Selected, out var selection))
         {
-            DebugTools.Assert($"Gun ({uid}) does not have AmmoSelectorVisuals.Selected appearance data set. Does it have the AmmoSelectorComponent?");
+            Log.Warning($"{ToPrettyString(uid)} does not have AmmoSelectorVisuals.Selected appearance data set. Does it have the AmmoSelectorComponent?");
             return;
         }
 
         if (!component.MagStates.TryGetValue((string) selection, out var state))
         {
-            DebugTools.Assert($"Gun ({uid}) cannot handle ammo selection {selection}.");
+            Log.Error($"{ToPrettyString(uid)} cannot handle ammo selection {selection}.");
             return;
         }
 
@@ -43,17 +44,16 @@ public sealed class AmmoSelectorMagazineVisualizerSystem : VisualizerSystem<Ammo
             return;
         }
 
-        var fullStateMag = $"{state}-{step}";
-        var fullStateMagUnshaded = $"{state}-unshaded-{step}";
-
         if (mag)
         {
+            var fullStateMag = $"{state}-{step}";
             SpriteSystem.LayerSetVisible(uid, GunVisualLayers.Mag, true);
             SpriteSystem.LayerSetRsiState(uid, GunVisualLayers.Mag, fullStateMag);
         }
 
         if (magUnshaded)
         {
+            var fullStateMagUnshaded = $"{state}-unshaded-{step}";
             SpriteSystem.LayerSetVisible(uid, GunVisualLayers.MagUnshaded, true);
             SpriteSystem.LayerSetRsiState(uid, GunVisualLayers.MagUnshaded, fullStateMagUnshaded);
         }
