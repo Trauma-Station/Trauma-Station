@@ -141,12 +141,14 @@
   showInVote: true # Trauma
   description: secret-description
   rules:
-    - Secret # Trauma
-    - BasicRoundstartVariation # Trauma
-    - SpaceTrafficControlEventScheduler # Trauma
-    - BasicStationEventScheduler # Goob
-    - Insurgency # Trauma - Always some shitters for sec to deal with
-    - SubTraitorRandom # Trauma - Always 50% chance of at least one traitor
+  # <Trauma> - completely changed every rule
+  - Secret
+  - BasicRoundstartVariation
+  - SpaceTrafficControlEventScheduler
+  - BasicStationEventScheduler
+  - Insurgency # Always some shitters for sec to deal with
+  - SubTraitorRandom # Always 50% chance of at least one traitor
+  # </Trauma>
 
 - type: gamePreset
   id: Sandbox

@@ -71,7 +71,7 @@ public sealed class SelectableAmmoSystem : EntitySystem
 
     public bool TrySetProto(Entity<AmmoSelectorComponent> ent, ProtoId<SelectableAmmoPrototype> proto)
     {
-        if (!_protoManager.TryIndex(proto, out var index))
+        if (!_protoManager.Resolve(proto, out var index))
             return false;
 
         if (!SetProviderProto(ent, index))
@@ -102,13 +102,13 @@ public sealed class SelectableAmmoSystem : EntitySystem
     private string? GetProviderProtoName(EntityUid uid)
     {
         if (TryComp(uid, out BasicEntityAmmoProviderComponent? basic) && basic.Proto != null)
-            return _protoManager.TryIndex(basic.Proto, out var index) ? index.Name : null;
+            return _protoManager.Resolve(basic.Proto, out var index) ? index.Name : null;
 
         if (TryComp(uid, out BatteryAmmoProviderComponent? battery))
-            return _protoManager.TryIndex(battery.Prototype, out var index) ? index.Name : null;
+            return _protoManager.Resolve(battery.Prototype, out var index) ? index.Name : null;
 
         if (TryComp(uid, out ChangelingChemicalsAmmoProviderComponent? chemicals))
-            return _protoManager.TryIndex(chemicals.Proto, out var index) ? index.Name : null;
+            return _protoManager.Resolve(chemicals.Proto, out var index) ? index.Name : null;
 
         // Add more providers if needed
 
@@ -173,7 +173,7 @@ public sealed class SelectableAmmoSystem : EntitySystem
 }
 
 [Serializable, NetSerializable]
-public enum AmmoSelectorVisuals
+public enum AmmoSelectorVisuals : byte
 {
     Selected
 }

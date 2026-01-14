@@ -28,3 +28,31 @@
   - SubGamemodesRule
   - SecretPlusRampingMid
   - BasicRoundstartVariation
+
+- type: gamePreset
+  id: Heretics
+  alias:
+  - heretic
+  - heretics
+  name: heretics-title
+  description: heretics-description
+  showInVote: false
+  rules:
+  - HereticGamemode
+  - BasicStationEventScheduler
+  - BasicRoundstartVariation
+  - SubGamemodesRule
+
+- type: gamePreset
+  id: Shadowlings
+  alias:
+  - shadowling
+  - shadowlings
+  name: shadowling-title
+  description: shadowling-description
+  showInVote: false
+  rules:
+  - ShadowlingGamemode
+  - BasicStationEventScheduler
+  - BasicRoundstartVariation
+  - SubGamemodesRule

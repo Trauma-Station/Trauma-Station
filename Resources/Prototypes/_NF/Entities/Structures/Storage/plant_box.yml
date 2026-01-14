@@ -38,7 +38,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Climbable
-  - type: AntiRottingContainer #Trauma
+  - type: AntiRottingContainer # Trauma
 
   # plantbox-specific
   - type: Sprite

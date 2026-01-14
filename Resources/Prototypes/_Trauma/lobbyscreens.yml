@@ -1,0 +1,29 @@
+- type: lobbyBackground
+  id: hereticLobbyArt
+  background: /Textures/_Trauma/LobbyScreens/hereticLobbyArt.webp
+  name: The Heretic
+  artist: asardonicsailor
+
+- type: lobbyBackground
+  id: changelingLobbyArt
+  background: /Textures/_Trauma/LobbyScreens/changeling_lobby_art.webp
+  name: The Changeling
+  artist: asardonicsailor
+
+- type: lobbyBackground
+  id: hereticLobbyArt2
+  background: /Textures/_Trauma/LobbyScreens/heretic_lobby_art2.webp
+  name: The Mansus
+  artist: asardonicsailor
+
+- type: lobbyBackground
+  id: revLobbyArt
+  background: /Textures/_Trauma/LobbyScreens/rev_lobby_art.webp
+  name: The Revolution
+  artist: asardonicsailor
+
+- type: lobbyBackground
+  id: syndicateLobbyArt
+  background: /Textures/_Trauma/LobbyScreens/syndicate_lobby_art.webp
+  name: The Syndicate
+  artist: asardonicsailor

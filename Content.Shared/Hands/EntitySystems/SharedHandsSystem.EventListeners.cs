@@ -1,4 +1,4 @@
-﻿using Content.Shared.Hands.Components;
+using Content.Shared.Hands.Components;
 using Content.Shared.Stunnable;
 
 namespace Content.Shared.Hands.EntitySystems;
@@ -11,7 +11,7 @@ public abstract partial class SharedHandsSystem
     private void InitializeEventListeners()
     {
         SubscribeLocalEvent<HandsComponent, GetStandUpTimeEvent>(OnStandupArgs);
-        SubscribeLocalEvent<HandsComponent, KnockedDownRefreshEvent>(OnKnockedDownRefresh);
+        //SubscribeLocalEvent<HandsComponent, KnockedDownRefreshEvent>(OnKnockedDownRefresh); // Trauma - using custom crawl speed logic
     }
 
     /// <summary>
