@@ -128,32 +128,6 @@
     - id: SubTraitor
       prob: 0.5
 
-- type: gamePreset
-  id: Heretics
-  alias:
-    - heretics
-  name: heretics-title
-  description: heretics-description
-  showInVote: false
-  rules:
-    - HereticGamemode
-    - BasicStationEventScheduler
-    - BasicRoundstartVariation
-    - SubGamemodesRule
-
-- type: gamePreset
-  id: Shadowlings
-  alias:
-    - shadowlings
-  name: shadowling-title
-  description: shadowling-description
-  showInVote: false
-  rules:
-    - ShadowlingGamemode
-    - BasicStationEventScheduler
-    - BasicRoundstartVariation
-    - SubGamemodesRule
-
 - type: entity
   parent: BaseGameRule
   id: HereticGamemode
@@ -175,7 +149,7 @@
       playerRatio: 10
       chaosScore: 250
       lateJoinAdditional: true
-      jobBlacklist: [ Chaplain, ] # GOOBSTATION
+      jobBlacklist: [ Chaplain ]
       blacklist:
         components:
         - CommandStaff
@@ -186,7 +160,7 @@
       - type: CanEnchant
   - type: Tag
     tags:
-      - RoundstartAntag
+    - RoundstartAntag
 
 - type: entity
   parent: BaseGameRule
@@ -201,7 +175,7 @@
       max: 3
       playerRatio: 25
       chaosScore: 500
-      jobBlacklist: [ Chaplain ] # GOOBSTATION
+      jobBlacklist: [ Chaplain ]
       blacklist:
         components:
         - CommandStaff
@@ -212,4 +186,4 @@
     - ShadowlingAscendObjective
   - type: Tag
     tags:
-      - RoundstartAntag
+    - RoundstartAntag

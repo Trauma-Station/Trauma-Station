@@ -5,19 +5,17 @@
   - type: GameRule
     minPlayers: 5
   - type: AntagSelection
-    selectionTime: IntraPlayerSpawn # Goobstation
+    selectionTime: IntraPlayerSpawn
     definitions:
     - prefRoles: [ Traitor ]
       max: 2
       playerRatio: 40
-      chaosScore: 150 # Goobstation
+      chaosScore: 150
       blacklist:
         components:
-        - CommandStaff # Goobstation
+        - CommandStaff
         - AntagImmune
-        - Changeling # Goobstation
+        - Changeling
       lateJoinAdditional: false
       mindRoles:
       - MindRoleTraitor
-
-
