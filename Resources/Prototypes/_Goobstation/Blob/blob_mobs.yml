@@ -127,6 +127,7 @@
     - type: GuideHelp
       guides:
       - Blob
+    - type: MovementIgnoreGravity # Trauma
 
 # Blobbernaut
 - type: entity
@@ -246,6 +247,7 @@
         - ReagentId: Blood
           Quantity: 300
       bleedReductionAmount: 5
+    - type: MovementIgnoreGravity # Trauma
 
 # Observer
 - type: entity

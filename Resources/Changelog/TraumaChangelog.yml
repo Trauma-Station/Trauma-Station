@@ -1360,3 +1360,23 @@ Entries:
       message: Grey slime extract makes slime food instead of monkies to reduce lag.
   id: 162
   time: '2026-01-13T23:56:23.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: >-
+        Egg cartons, donut boxes, pizza boxes, food carts, and plant bags all
+        prevent food rot.
+    - type: Tweak
+      message: Blob mobs can move in zero-G
+    - type: Fix
+      message: blob mobs can heal poison, genetic, and radiation damage.
+  id: 163
+  time: '2026-01-14T00:37:08.0000000+00:00'
+- author: Nousagi37
+  changes:
+    - type: Tweak
+      message: >-
+        Updated Box with localized content, and re-enabled it back in the map
+        pool.
+  id: 164
+  time: '2026-01-14T08:40:37.0000000+00:00'
