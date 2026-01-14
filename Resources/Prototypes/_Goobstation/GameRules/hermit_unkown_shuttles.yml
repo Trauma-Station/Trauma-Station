@@ -20,10 +20,6 @@
     - id: UnknownShuttleMicroshuttleHermit
     - id: UnknownShuttleSpacebus
     - id: UnknownShuttleAlienTouristHermit # Goobstation
-    # <Trauma>
-    - id: UnknownShuttleKoboldShittle
-    - id: UnknownShuttleMonkeyShittle
-    # </Trauma>
 
 - type: entityTable
   id: UnknownShuttlesFreelanceTableHermit
