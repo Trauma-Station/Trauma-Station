@@ -21,6 +21,7 @@
     - !type:GroupSelector
       weight: 0.7
       children:
+      - id: MobAnomMeatbeast
       - id: AnomalyPyroclastic
       - id: AnomalyGravity
       - id: AnomalyElectricity

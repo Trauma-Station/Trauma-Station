@@ -9,7 +9,6 @@
   "states": [
     {
       "name": "alive",
-      "directions": 1,
       "delays": [
         [
           0.3,
@@ -50,7 +49,6 @@
     },
     {
       "name": "dead",
-      "directions": 1,
       "delays": [
         [
           0.3,
