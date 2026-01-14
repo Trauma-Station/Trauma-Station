@@ -1392,3 +1392,9 @@ Entries:
         of preventing you from moving entirely.
   id: 165
   time: '2026-01-14T18:30:39.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed hyposprays.
+  id: 166
+  time: '2026-01-14T22:26:35.0000000+00:00'

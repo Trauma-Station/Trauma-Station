@@ -6,3 +6,5 @@ hypoport-detail-examine = {CAPITALIZE(POSS-ADJ($target))} {$part ->
     [head] neck
     *[other] {$part}
 } has a [color=blue]hypoport[/color] for use with hyposprays.
+
+item-slot-name-vial = Vial
