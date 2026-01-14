@@ -1,23 +1,39 @@
 - type: entity
-  name: laser sidearm
-  parent: [ WeaponDisablerPractice, BaseSecurityContraband ]
+  name: phaser
+  parent: [ BaseWeaponBatterySmall, BaseSecurityContraband ]
   id: WeaponLaserSidearm
-  description: A repurposed disabler used by mall cops all across nanotrasens stations, has lethal and nonlethal modes.
+  description: A trusty sidearm used by most space cops. Can be set to disable for wrangling criminals, and lethal for when the going gets tough.
   components:
+  - type: Appearance
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/disabler.rsi
     layers:
       - state: base
         map: ["enum.GunVisualLayers.Base"]
-      - state: mag-unshaded-0
+      - state: mag-unshaded-4
         map: ["enum.GunVisualLayers.MagUnshaded"]
         shader: unshaded
+  - type: Item
+    storedOffset: -1,-5
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/disabler.rsi
     quickEquip: false
     slots:
       - suitStorage
       - Belt
+  - type: AmmoSelectorMagazineVisuals
+    zeroVisible: true
+    magSteps: 5
+    magStates:
+      BulletDisablerSidearm: mag
+      BulletLethalSidearm: mag-lethal
+  - type: BatteryAmmoProvider
+    proto: SidearmDisable
+    fireCost: 80
+  - type: Tag
+    tags:
+    - Taser
+    - Sidearm
   - type: Battery
     maxCharge: 1000
     startingCharge: 1000
@@ -32,12 +48,6 @@
   - type: ActivatableUI
     inHandsOnly: true
     key: enum.AmmoSelectorUiKey.Key
-  - type: ItemToggle
-    activated: true
-    onActivate: false
-    onUse: false
-    wieldToggle: false
-  - type: ItemToggleColor
   - type: GuideHelp
     guides:
     - Security
