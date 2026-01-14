@@ -70,6 +70,7 @@
     - box5
     - pink-box6
   - type: Appearance
+  - type: AntiRottingContainer #Trauma
 
 # Egg
 
@@ -159,6 +160,7 @@
     - box11
     - box12
   - type: Appearance
+  - type: AntiRottingContainer # Trauma
   # Someday...
   # - type: DamageOnLand
   # - type: DamageOtherOnHit
@@ -240,6 +242,8 @@
     stateDoorClosed: box
   - type: StaticPrice
     price: 0
+  - type: AntiRottingContainer #Trauma
+
 
 - type: entity
   parent: FoodBoxPizza

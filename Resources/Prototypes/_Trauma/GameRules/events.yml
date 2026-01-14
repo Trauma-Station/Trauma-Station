@@ -20,18 +20,19 @@
     - id: BingleSpawn
     - id: SlaughterDemonMidround
     - id: XenomorphsInfestation
-    # TOOD: see if good or slop
-    #- id: GreyTideAntagMidround
-    #- id: SingulothKnightsMidround
-    #- id: DarkLordMidround
-    #- id: MimeAssassinMidround
-    #- id: DarkPriestMidround
-    #- id: VoxRaidersMidround
-    #- id: TunnelClownMidround
+    # TOOD: remove these if they fucking suck lmao
+    - id: GreyTideAntagMidround
+    - id: SingulothKnightsMidround
+    - id: DarkLordMidround
+    - id: MimeAssassinMidround
+    - id: DarkPriestMidround
+    - id: VoxRaidersMidround
+    - id: TunnelClownMidround
     #- id: WraithMidround # if someone makes it less chuddy
     - id: ChangelingMidround
     - id: HereticMidround
     - id: Devilmidround
+    - id: Dud50
     #- id: SlasherSpawn # TODO: when slasher is ready
 
 - type: entity
@@ -57,3 +58,13 @@
     playerRatio: 50
     table:
       id: MobMousePlague
+
+- type: entity
+  parent: BaseGameRule
+  id: Dud50
+  components:
+  - type: StationEvent
+    weight: 50
+    duration: 1
+  - type: GameRule
+    chaosScore: 200

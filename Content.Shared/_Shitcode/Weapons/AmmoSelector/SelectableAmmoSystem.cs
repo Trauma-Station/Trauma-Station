@@ -18,6 +18,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._Goobstation.Weapons.AmmoSelector;
 
@@ -92,6 +93,7 @@ public sealed class SelectableAmmoSystem : EntitySystem
 
         if (index.Color != null && TryComp(ent, out AppearanceComponent? appearance))
             _appearance.SetData(ent, ToggleableVisuals.Color, index.Color, appearance);
+        _appearance.SetData(ent, AmmoSelectorVisuals.Selected, proto.Id);
 
         Dirty(ent);
         return true;
@@ -168,4 +170,10 @@ public sealed class SelectableAmmoSystem : EntitySystem
     {
         return (proto.Flags & (int) SelectableAmmoFlags.ChangeWeaponFireRate) != 0;
     }
+}
+
+[Serializable, NetSerializable]
+public enum AmmoSelectorVisuals
+{
+    Selected
 }
