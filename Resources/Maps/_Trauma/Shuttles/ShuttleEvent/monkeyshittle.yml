@@ -4,8 +4,8 @@ meta:
   engineVersion: 270.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/14/2026 19:44:31
-  entityCount: 51
+  time: 01/14/2026 23:15:38
+  entityCount: 46
 maps: []
 grids:
 - 1
@@ -77,27 +77,16 @@ entities:
     - type: GasTileOverlay
     - type: ExplosionAirtightGrid
     - type: RadiationGridResistance
-- proto: AirAlarm
-  entities:
-  - uid: 2
-    components:
-    - type: Transform
-      pos: -1.5,1.5
-      parent: 1
-    - type: DeviceList
-      devices:
-      - 31
-      - 30
 - proto: AirCanister
   entities:
-  - uid: 3
+  - uid: 2
     components:
     - type: Transform
       pos: -1.5,-1.5
       parent: 1
 - proto: AirlockGlassShuttle
   entities:
-  - uid: 34
+  - uid: 3
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -226,39 +215,17 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 0.5,-0.5
       parent: 1
-- proto: GasPassiveVent
+- proto: GasPipeBend
   entities:
   - uid: 24
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: 0.5,1.5
-      parent: 1
-- proto: GasPipeBend
-  entities:
-  - uid: 25
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -0.5,-1.5
-      parent: 1
-  - uid: 26
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -1.5,1.5
-      parent: 1
-- proto: GasPipeStraight
-  entities:
-  - uid: 27
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,1.5
       parent: 1
 - proto: GasPort
   entities:
-  - uid: 28
+  - uid: 25
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -266,7 +233,7 @@ entities:
       parent: 1
 - proto: GasPressurePump
   entities:
-  - uid: 29
+  - uid: 26
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -274,37 +241,21 @@ entities:
       parent: 1
 - proto: GasVentPump
   entities:
-  - uid: 30
+  - uid: 27
     components:
     - type: Transform
       pos: -0.5,0.5
       parent: 1
-    - type: DeviceNetwork
-      deviceLists:
-      - 2
-- proto: GasVentScrubber
-  entities:
-  - uid: 31
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -1.5,0.5
-      parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 2
 - proto: GeneratorBasic15kW
   entities:
-  - uid: 32
+  - uid: 28
     components:
     - type: Transform
       pos: -2.5,0.5
       parent: 1
 - proto: Gyroscope
   entities:
-  - uid: 33
+  - uid: 29
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -312,7 +263,7 @@ entities:
       parent: 1
 - proto: SpawnMobMonkeyGhostrole
   entities:
-  - uid: 35
+  - uid: 30
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -320,7 +271,7 @@ entities:
       parent: 1
 - proto: SubstationWallBasic
   entities:
-  - uid: 36
+  - uid: 31
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -328,24 +279,24 @@ entities:
       parent: 1
 - proto: Thruster
   entities:
-  - uid: 37
+  - uid: 32
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 0.5,0.5
       parent: 1
-  - uid: 38
+  - uid: 33
     components:
     - type: Transform
       pos: -0.5,1.5
       parent: 1
-  - uid: 39
+  - uid: 34
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -1.5,-2.5
       parent: 1
-  - uid: 40
+  - uid: 35
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -353,63 +304,63 @@ entities:
       parent: 1
 - proto: WallReinforced
   entities:
-  - uid: 41
+  - uid: 36
     components:
     - type: Transform
       pos: -3.5,0.5
       parent: 1
-  - uid: 42
+  - uid: 37
     components:
     - type: Transform
       pos: -2.5,1.5
       parent: 1
-  - uid: 43
+  - uid: 38
     components:
     - type: Transform
       pos: -1.5,1.5
       parent: 1
-  - uid: 44
+  - uid: 39
     components:
     - type: Transform
       pos: -2.5,-0.5
       parent: 1
-  - uid: 45
+  - uid: 40
     components:
     - type: Transform
       pos: 0.5,-2.5
       parent: 1
-  - uid: 46
+  - uid: 41
     components:
     - type: Transform
       pos: -0.5,-2.5
       parent: 1
 - proto: WindowReinforcedDirectional
   entities:
-  - uid: 47
+  - uid: 42
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -1.5,-1.5
       parent: 1
-  - uid: 48
+  - uid: 43
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -0.5,0.5
       parent: 1
-  - uid: 49
+  - uid: 44
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 0.5,-0.5
       parent: 1
-  - uid: 50
+  - uid: 45
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -0.5,0.5
       parent: 1
-  - uid: 51
+  - uid: 46
     components:
     - type: Transform
       pos: -1.5,-1.5
