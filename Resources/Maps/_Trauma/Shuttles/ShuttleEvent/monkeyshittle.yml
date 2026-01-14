@@ -4,7 +4,7 @@ meta:
   engineVersion: 270.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/13/2026 20:58:55
+  time: 01/14/2026 19:44:31
   entityCount: 51
 maps: []
 grids:
@@ -94,6 +94,14 @@ entities:
     components:
     - type: Transform
       pos: -1.5,-1.5
+      parent: 1
+- proto: AirlockGlassShuttle
+  entities:
+  - uid: 34
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,-1.5
       parent: 1
 - proto: APCBasic
   entities:
@@ -301,13 +309,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -1.5,-0.5
-      parent: 1
-- proto: InflatableDoor
-  entities:
-  - uid: 34
-    components:
-    - type: Transform
-      pos: 0.5,-1.5
       parent: 1
 - proto: SpawnMobMonkeyGhostrole
   entities:
