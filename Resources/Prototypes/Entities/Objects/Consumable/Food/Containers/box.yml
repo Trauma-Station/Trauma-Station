@@ -70,7 +70,7 @@
     - box5
     - pink-box6
   - type: Appearance
-  - type: AntiRottingContainer #Trauma
+  - type: AntiRottingContainer # Trauma
 
 # Egg
 
@@ -242,7 +242,7 @@
     stateDoorClosed: box
   - type: StaticPrice
     price: 0
-  - type: AntiRottingContainer #Trauma
+  - type: AntiRottingContainer # Trauma
 
 
 - type: entity

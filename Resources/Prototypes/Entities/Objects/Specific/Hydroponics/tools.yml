@@ -186,8 +186,10 @@
         - Produce
         - Seed
   - type: Dumpable
-  - type: RelayInteractionStorage # Goobstation
+  # <Trauma>
+  - type: RelayInteractionStorage
     whitelist:
       components:
       - ProduceMaterialExtractor
-  - type: AntiRottingContainer #Trauma
+  - type: AntiRottingContainer
+  # </Trauma>
