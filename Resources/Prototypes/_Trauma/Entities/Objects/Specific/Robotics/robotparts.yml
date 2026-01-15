@@ -3,12 +3,12 @@
   name: ED-209 shell part
   parent: BaseItem
   components:
-    - type: Sprite
-      sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
-      state: ed209_shell
-    - type: Tag
-      tags:
-      - ed209_shell
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
+    state: ed209_shell
+  - type: Tag
+    tags:
+    - Ed209Shell
 
 - type: entity
   id: EDLegR
@@ -20,7 +20,7 @@
     state: edleg_R
   - type: Tag
     tags:
-    - edleg_R
+    - Ed209LegR
 
 - type: entity
   id: EDLegL
@@ -32,7 +32,7 @@
     state: edleg_L
   - type: Tag
     tags:
-    - edleg_L
+    - Ed209LegL
 
 - type: entity
   id: EDHead
@@ -44,7 +44,7 @@
     state: ed209_prox
   - type: Tag
     tags:
-    - ed209_prox
+    - Ed209Prox
 
 - type: entity
   id: EDAiCoreElectronics
@@ -59,7 +59,7 @@
     state: mainboard
   - type: Tag
     tags:
-    - edAiControl
+    - Ed209AiControl
   - type: GuideHelp
     guides:
     - Robotics
@@ -75,7 +75,7 @@
     state: id_mod
   - type: Tag
     tags:
-    - edIFF
+    - Ed209IFF
   - type: GuideHelp
     guides:
     - Robotics
@@ -91,7 +91,7 @@
     state: mcontroller
   - type: Tag
     tags:
-    - edWeaponsControl
+    - Ed209WeaponsControl
   - type: GuideHelp
     guides:
     - Robotics

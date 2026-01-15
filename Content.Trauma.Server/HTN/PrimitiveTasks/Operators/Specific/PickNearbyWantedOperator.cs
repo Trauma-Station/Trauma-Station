@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN.PrimitiveTasks;
+using Content.Shared.Coordinates;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
@@ -36,8 +37,19 @@ public sealed partial class PickNearbyWantedOperator : HTNOperator
     [DataField(required: true)]
     public string TargetMoveKey = string.Empty;
 
+    /// <summary>
+    /// The criminal status the target has to be for it to be a target
+    /// </summary>
+    [DataField(required: true)]
+    public string CriminalStatus = string.Empty;
+
+    /// <summary>
+    /// The sound to play when it finds a target
+    /// </summary>
     [DataField]
-    public string? TargetFoundSoundKey;
+    public SoundCollectionSpecifier? TargetFoundSound;
+
+    private HashSet<Entity<CriminalRecordComponent>> _entities = new();
 
     public override void Initialize(IEntitySystemManager sysManager)
     {
@@ -55,12 +67,14 @@ public sealed partial class PickNearbyWantedOperator : HTNOperator
             return (false, null);
 
         var cuffableQuery = _entManager.GetEntityQuery<CuffableComponent>();
-        var criminalRecordQuery = _entManager.GetEntityQuery<CriminalRecordComponent>();
         var mobStateQuery = _entManager.GetEntityQuery<MobStateComponent>();
 
-        foreach (var entity in _lookup.GetEntitiesInRange(owner, range))
+        _entities.Clear();
+        _lookup.GetEntitiesInRange(owner.ToCoordinates(), range, _entities);
+
+        foreach (var entity in _entities)
         {
-            if (!criminalRecordQuery.TryGetComponent(entity, out var criminalRecord) || criminalRecord.StatusIcon != "SecurityIconHostile")
+            if (!_entManager.TryGetComponent<CriminalRecordComponent>(entity, out var criminalRecord) || criminalRecord.StatusIcon != CriminalStatus)
                 continue;
 
             if (!mobStateQuery.TryGetComponent(entity, out var state) || state.CurrentState != MobState.Alive)
@@ -77,17 +91,17 @@ public sealed partial class PickNearbyWantedOperator : HTNOperator
             if (path.Result != PathResult.Path)
                 continue;
 
-            if (TargetFoundSoundKey != null &&
+            if (TargetFoundSound != null &&
                 (!blackboard.TryGetValue<EntityUid>(TargetKey, out var oldTarget, _entManager) ||
-                 oldTarget != entity) &&
-                blackboard.TryGetValue<SoundSpecifier>(TargetFoundSoundKey, out var targetFoundSound, _entManager))
+                 oldTarget != entity.Owner))  // ← Changed to || and entity
             {
+                var targetFoundSound = _audio.ResolveSound(TargetFoundSound);
                 _audio.PlayPvs(targetFoundSound, owner);
             }
 
             return (true, new Dictionary<string, object>()
             {
-                {TargetKey, entity},
+                {TargetKey, entity.Owner},
                 {TargetMoveKey, _entManager.GetComponent<TransformComponent>(entity).Coordinates},
                 {NPCBlackboard.PathfindKey, path},
             });

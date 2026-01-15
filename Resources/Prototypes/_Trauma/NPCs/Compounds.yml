@@ -17,7 +17,9 @@
       operator: !type:PickNearbyWantedOperator
         targetKey: Target
         targetMoveKey: TargetCoordinates
-        targetFoundSoundKey: TargetFoundSound
+        criminalStatus: SecurityIconHostile
+        targetFoundSound: !type:SoundCollectionSpecifier
+          collection: Ed209TargetFound
 
     - !type:HTNPrimitiveTask
       operator: !type:SpeakOperator

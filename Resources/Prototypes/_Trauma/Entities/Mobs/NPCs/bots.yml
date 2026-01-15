@@ -194,9 +194,9 @@
       state: boogie-d3
 
 - type: entity
-  name: ED-209
   parent: [MobSiliconBase, MobCombat]
   id: MobED209
+  name: ED-209
   description: Officer Beepsky's bigger brother
   components:
   - type: Sprite
@@ -219,7 +219,7 @@
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
   - type: Gun
-    fireRate: 15
+    fireRate: 5
     useKey: false
     selectedMode: FullAuto
     availableModes:
@@ -227,14 +227,10 @@
     soundGunshot: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
   - type: BallisticAmmoProvider
     proto: CartridgeRifle
-    capacity: 150
-  - type: CombatMode
+    capacity: 125
   - type: HTN
     rootTask:
       task: ED209Compound
-    blackboard:
-      TargetFoundSound: !type:SoundCollectionSpecifier
-        collection: Ed209TargetFound
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -245,6 +241,11 @@
   - type: Construction
     graph: ED209
     node: ed209
+  - type: ChangeFactionOnEmag
+    faction: Syndicate
+  - type: ChangeHtnOnEmag
+    task: !type:HTNCompoundTask
+      task: ED209EmagedCompound
 
 - type: entity
   id: ED209Endoskeleton

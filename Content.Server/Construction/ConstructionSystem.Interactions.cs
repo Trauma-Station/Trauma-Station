@@ -511,7 +511,7 @@ namespace Content.Server.Construction
                         break;
 
                     if (partAssemblyStep.Condition(uid, EntityManager))
-                        return validation ? HandleResult.Validated : HandleResult.True;
+                        return validation ? HandleResult.Validated : HandleResult.True; // Trauma, fix borgs crashing when in debug
                     return HandleResult.False;
                 }
 
