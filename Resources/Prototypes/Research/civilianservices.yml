@@ -193,7 +193,7 @@
   position: -1,4
   technologyPrerequisites:
   - AdvancedEntertainment
-  - BasicRobotics
+  - BasicAnomalousResearch
   # Goobstation R&D Console rework end
 
 - type: technology

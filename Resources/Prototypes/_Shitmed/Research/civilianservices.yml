@@ -70,7 +70,7 @@
   position: -2,5
   technologyPrerequisites:
   - AdvancedTreatment
-  - BasicRobotics
+  - BasicAnomalousResearch
 
 - type: technology
   id: Autodoc

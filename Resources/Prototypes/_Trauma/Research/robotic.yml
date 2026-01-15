@@ -4,8 +4,8 @@
   icon:
     sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
     state: ed209
-  discipline: Arsenal
-  tier: 2
+  discipline: Robotic
+  tier: 1
   cost: 20000
   recipeUnlocks:
   - ED209Endoskeleton
@@ -16,6 +16,6 @@
   - EDAiCoreElectronics
   - EDIFFElectronics
   - EDWeaponControlsElectronics
+  position: -6,2
   technologyPrerequisites:
-  - Gygax
-  position: 3,-3
+  - BasicRobotics

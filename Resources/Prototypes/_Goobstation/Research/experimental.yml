@@ -27,7 +27,7 @@
   - PinpointerArtifact
   - PinpointerAnomaly
   - PinpointerBorg
-  position: -3,-3
+  position: -3,-4
   technologyPrerequisites:
   - DeterrenceTechnologies
 
@@ -47,7 +47,7 @@
   - ModsuitGauntlets
   - ModsuitShell
   - ModsuitPlatingExternal
-  position: -4,-1
+  position: -4,-2
   technologyPrerequisites:
   - MagnetsTech
 
@@ -63,7 +63,7 @@
   recipeUnlocks:
   - SlimeGrinderMachineCircuitboard
   - ClothingBackpackXenoBioTank
-  position: -3,3
+  position: -2,1
   technologyPrerequisites:
   - BasicXenoArcheology
 
@@ -78,7 +78,7 @@
   cost: 5000
   recipeUnlocks:
   - MaterialBSCrystal
-  position: -4,-2
+  position: -4,-3
   technologyPrerequisites:
   - DeterrenceTechnologies
 
@@ -93,7 +93,7 @@
   cost: 7500
   recipeUnlocks:
   - ExperimentalCircuitBoard
-  position: -4,0
+  position: -4,-1
   technologyPrerequisites:
   - AdvancedAnomalyResearch
 
@@ -108,6 +108,6 @@
   cost: 15000
   recipeUnlocks:
   - XenoCompatibilityImplanter
-  position: -5,0
+  position: -5,-1
   technologyPrerequisites:
   - ExperimentalScience
