@@ -1,4 +1,3 @@
-using Content.Shared.Emag.Components;
 using Content.Shared.Emag.Systems;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
@@ -8,6 +7,7 @@ namespace Content.Trauma.Shared.ChangeFactionOnEmag;
 public sealed class ChangeFactionOnEmagSystem : EntitySystem
 {
     [Dependency] private readonly NpcFactionSystem _factionSystem = default!;
+    [Dependency] private readonly EmagSystem _emag = default!;
 
     public override void Initialize()
     {
@@ -16,7 +16,10 @@ public sealed class ChangeFactionOnEmagSystem : EntitySystem
 
     private void OnEmagged(Entity<ChangeFactionOnEmagComponent> ent, ref GotEmaggedEvent args)
     {
-        if (HasComp<EmaggedComponent>(ent) || args.Type == EmagType.Access)
+        if (!_emag.CompareFlag(args.Type, EmagType.Interaction))
+            return;
+
+        if (_emag.CheckFlag(ent, EmagType.Interaction))
             return;
 
         args.Handled = true;
