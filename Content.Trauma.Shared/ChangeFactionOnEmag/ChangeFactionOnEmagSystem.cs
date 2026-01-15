@@ -16,13 +16,12 @@ public sealed class ChangeFactionOnEmagSystem : EntitySystem
 
     private void OnEmagged(Entity<ChangeFactionOnEmagComponent> ent, ref GotEmaggedEvent args)
     {
-        if(HasComp<EmaggedComponent>(ent) || args.Type == EmagType.Access)
+        if (HasComp<EmaggedComponent>(ent) || args.Type == EmagType.Access)
             return;
 
         args.Handled = true;
 
         EnsureComp<NpcFactionMemberComponent>(ent, out var factioncomp);
-        EnsureComp<EmaggedComponent>(ent);
 
         _factionSystem.ClearFactions((ent.Owner, factioncomp));
         _factionSystem.AddFaction((ent.Owner, factioncomp), ent.Comp.Faction);

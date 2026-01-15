@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN.PrimitiveTasks;
 using Content.Shared.Coordinates;
+using Content.Shared.StatusIcon;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.HTN.PrimitiveTasks.Operators.Specific;
 
@@ -41,7 +43,7 @@ public sealed partial class PickNearbyWantedOperator : HTNOperator
     /// The criminal status the target has to be for it to be a target
     /// </summary>
     [DataField(required: true)]
-    public string CriminalStatus = string.Empty;
+    public ProtoId<SecurityIconPrototype> CriminalStatus;
 
     /// <summary>
     /// The sound to play when it finds a target
@@ -74,7 +76,7 @@ public sealed partial class PickNearbyWantedOperator : HTNOperator
 
         foreach (var entity in _entities)
         {
-            if (!_entManager.TryGetComponent<CriminalRecordComponent>(entity, out var criminalRecord) || criminalRecord.StatusIcon != CriminalStatus)
+            if (entity.Comp.StatusIcon != CriminalStatus)
                 continue;
 
             if (!mobStateQuery.TryGetComponent(entity, out var state) || state.CurrentState != MobState.Alive)
@@ -93,7 +95,7 @@ public sealed partial class PickNearbyWantedOperator : HTNOperator
 
             if (TargetFoundSound != null &&
                 (!blackboard.TryGetValue<EntityUid>(TargetKey, out var oldTarget, _entManager) ||
-                 oldTarget != entity.Owner))  // ← Changed to || and entity
+                 oldTarget != entity.Owner))
             {
                 var targetFoundSound = _audio.ResolveSound(TargetFoundSound);
                 _audio.PlayPvs(targetFoundSound, owner);

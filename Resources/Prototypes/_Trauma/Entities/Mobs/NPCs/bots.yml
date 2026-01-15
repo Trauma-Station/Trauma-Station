@@ -282,29 +282,29 @@
       edleg_L:
         whitelist:
           tags:
-          - edleg_L
+          - Ed209LegL
       edleg_R:
         whitelist:
           tags:
-          - edleg_R
+          - Ed209LegR
       ed209_prox:
         whitelist:
           tags:
-          - ed209_prox
+          - Ed209Hat
       ed209_shell:
         whitelist:
           tags:
-          - ed209_shell
+          - Ed209Shell
   - type: ContainerContainer
     containers:
       part-container: !type:Container
   - type: PartAssembly
     parts:
       generic:
-      - edleg_L
-      - edleg_R
-      - ed209_prox
-      - ed209_shell
+      - Ed209LegL
+      - Ed209LegR
+      - Ed209Hat
+      - Ed209Shell
   - type: Construction
     graph: ED209
     node: start

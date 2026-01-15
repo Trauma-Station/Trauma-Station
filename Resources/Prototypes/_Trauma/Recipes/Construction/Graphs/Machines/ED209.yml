@@ -17,7 +17,7 @@
       - tool: Cutting
         doAfter: 1
 
-      - tag: edAiControl
+      - tag: Ed209AiControl
         name: construction-graph-tag-ed-ai-control-module
         icon:
           sprite: "Objects/Misc/module.rsi"
@@ -26,7 +26,7 @@
       - tool: Screwing
         doAfter: 1
 
-      - tag: edIFF
+      - tag: Ed209IFF
         name: construction-graph-tag-ed-iff-module
         icon:
           sprite: "Objects/Misc/module.rsi"
@@ -35,7 +35,7 @@
       - tool: Screwing
         doAfter: 1
 
-      - tag: edWeaponsControl
+      - tag: Ed209WeaponsControl
         name: construction-graph-tag-ed-weapon-control-module
         icon:
           sprite: "Objects/Misc/module.rsi"

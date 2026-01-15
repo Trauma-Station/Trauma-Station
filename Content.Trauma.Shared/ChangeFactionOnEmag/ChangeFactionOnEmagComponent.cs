@@ -1,4 +1,6 @@
+using Content.Shared.NPC.Prototypes;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.ChangeFactionOnEmag;
 
@@ -8,6 +10,6 @@ namespace Content.Trauma.Shared.ChangeFactionOnEmag;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ChangeFactionOnEmagComponent : Component
 {
-    [DataField]
-    public string Faction;
+    [DataField(required: true)]
+    public ProtoId<NpcFactionPrototype> Faction;
 }
