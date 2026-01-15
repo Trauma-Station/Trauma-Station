@@ -25,7 +25,7 @@
     },
     {
       "name": "janitor_moving",
-	    "directions": 4
+      "directions": 4
     }
   ]
 }
