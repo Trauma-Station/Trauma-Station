@@ -17,6 +17,30 @@
   id: DataChip
 
 - type: Tag
+  id: Ed209Prox
+
+- type: Tag
+  id: Ed209Shell
+
+- type: Tag
+  id: Ed209Hat
+
+- type: Tag
+  id: Ed209LegR
+
+- type: Tag
+  id: Ed209LegL
+
+- type: Tag
+  id: Ed209AiControl
+
+- type: Tag
+  id: Ed209IFF
+
+- type: Tag
+  id: Ed209WeaponsControl
+
+- type: Tag
   id: EncryptionRevolutionary
 
 - type: Tag

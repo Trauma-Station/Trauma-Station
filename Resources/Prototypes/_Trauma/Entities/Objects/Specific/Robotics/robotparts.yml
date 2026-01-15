@@ -1,0 +1,97 @@
+- type: entity
+  id: EDShell
+  name: ED-209 shell part
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
+    state: ed209_shell
+  - type: Tag
+    tags:
+    - Ed209Shell
+
+- type: entity
+  id: EDLegR
+  name: ED-209 left leg part
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
+    state: edleg_R
+  - type: Tag
+    tags:
+    - Ed209LegR
+
+- type: entity
+  id: EDLegL
+  name: ED-209 right leg part
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
+    state: edleg_L
+  - type: Tag
+    tags:
+    - Ed209LegL
+
+- type: entity
+  id: EDHead
+  name: ED-209 head part
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
+    state: ed209_prox
+  - type: Tag
+    tags:
+    - Ed209Prox
+
+- type: entity
+  id: EDAiCoreElectronics
+  parent: BaseElectronics
+  name: ED-209 AI core module
+  description: The AI control center for the ED-209.
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: mainboard
+  - type: Tag
+    tags:
+    - Ed209AiControl
+  - type: GuideHelp
+    guides:
+    - Robotics
+
+- type: entity
+  id: EDIFFElectronics
+  parent: BaseElectronics
+  name: ED-209 IFF module
+  description: The electrical IFF module for the ED-209.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: id_mod
+  - type: Tag
+    tags:
+    - Ed209IFF
+  - type: GuideHelp
+    guides:
+    - Robotics
+
+- type: entity
+  id: EDWeaponControlsElectronics
+  parent: BaseElectronics
+  name: ED-209 weapon control and targeting module
+  description: The electrical targeting control for the ED-209.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: mcontroller
+  - type: Tag
+    tags:
+    - Ed209WeaponsControl
+  - type: GuideHelp
+    guides:
+    - Robotics
