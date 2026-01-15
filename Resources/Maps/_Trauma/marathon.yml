@@ -4,8 +4,8 @@ meta:
   engineVersion: 270.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/15/2026 18:55:10
-  entityCount: 23356
+  time: 01/15/2026 19:18:48
+  entityCount: 23354
 maps:
 - 1
 grids:
@@ -11071,7 +11071,7 @@ entities:
       pos: -1.5,18.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -10169.602
+      secondsUntilStateChange: -10205.968
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11570,7 +11570,7 @@ entities:
       pos: 40.5,11.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -13915.427
+      secondsUntilStateChange: -13951.793
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11607,7 +11607,7 @@ entities:
       pos: 41.5,8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -10763.967
+      secondsUntilStateChange: -10800.333
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -65942,7 +65942,7 @@ entities:
       pos: 12.5,-12.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -9131.935
+      secondsUntilStateChange: -9168.301
       state: Closing
     - type: Firelock
       emergencyCloseCooldown: 1795.33154
@@ -143924,27 +143924,6 @@ entities:
     - type: Transform
       pos: -5.5,78.5
       parent: 2
-- proto: WeaponEnergyTurretSecurity
-  entities:
-  - uid: 18811
-    components:
-    - type: Transform
-      pos: -39.5,54.5
-      parent: 2
-    - type: DeviceNetwork
-      deviceLists:
-      - 17264
-- proto: WeaponEnergyTurretSecurityControlPanel
-  entities:
-  - uid: 17264
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -41.5,50.5
-      parent: 2
-    - type: DeviceList
-      devices:
-      - 18811
 - proto: WeaponLaserCarbinePractice
   entities:
   - uid: 22749
