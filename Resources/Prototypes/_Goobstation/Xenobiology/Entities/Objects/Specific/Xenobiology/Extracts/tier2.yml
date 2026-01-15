@@ -194,6 +194,9 @@
         proto: XenobioExtractReaction
       - !type:RelayNearby
         compName: MobState
+        blacklist:
+          components:
+          - BorgBrain # no teleporting MMIs
         range: 7
         effect: !type:RandomTeleport
         # TODO: in the future check that its not occluded, i dont care to port it rn

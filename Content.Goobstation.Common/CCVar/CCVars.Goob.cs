@@ -657,4 +657,10 @@ public sealed partial class GoobCVars
         CVarDef.Create("flash.direction_check", true, CVar.ARCHIVE | CVar.REPLICATED);
 
     #endregion
+
+    /// <summary>
+    /// Controls how often GPS updates.
+    /// </summary>
+    public static readonly CVarDef<float> GpsUpdateRate =
+        CVarDef.Create("gps.update_rate", 1f, CVar.SERVER | CVar.REPLICATED);
 }

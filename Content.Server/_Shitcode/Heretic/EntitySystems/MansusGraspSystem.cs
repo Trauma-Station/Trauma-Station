@@ -19,6 +19,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using Content.Goobstation.Common.Religion;
 using Content.Server.Chat.Systems;
 using Content.Server.Heretic.Abilities;
@@ -79,6 +80,7 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
         base.Initialize();
 
         SubscribeLocalEvent<MansusGraspComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<MansusGraspComponent, MeleeHitEvent>(OnMelee);
         SubscribeLocalEvent<TagComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<RustGraspComponent, AfterInteractEvent>(OnRustInteract);
         SubscribeLocalEvent<HereticComponent, DrawRitualRuneDoAfterEvent>(OnRitualRuneDoAfter);
@@ -163,50 +165,41 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
         }
     }
 
-    private void OnAfterInteract(Entity<MansusGraspComponent> ent, ref AfterInteractEvent args)
+    private bool GraspTarget(Entity<MansusGraspComponent> grasp, EntityUid user, EntityUid target)
     {
-        if (!args.CanReach)
-            return;
+        var (uid, comp) = grasp;
 
-        if (args.Target == null || args.Target == args.User)
-            return;
-
-        var (uid, comp) = ent;
-
-        if (!TryComp<HereticComponent>(args.User, out var hereticComp))
+        if (!TryComp<HereticComponent>(user, out var hereticComp))
         {
             QueueDel(uid);
-            args.Handled = true;
-            return;
+            return true;
         }
 
-        var target = args.Target.Value;
         if (_whitelist.IsWhitelistPass(comp.Blacklist, target))
-            return;
+            return false;
 
-        var beforeEvent = new BeforeHarmfulActionEvent(args.User, HarmfulActionType.MansusGrasp);
+        var beforeEvent = new BeforeHarmfulActionEvent(user, HarmfulActionType.MansusGrasp);
         RaiseLocalEvent(target, beforeEvent);
         var cancelled = beforeEvent.Cancelled;
         if (!cancelled)
         {
-            var ev = new BeforeCastTouchSpellEvent(args.Target.Value);
+            var ev = new BeforeCastTouchSpellEvent(target);
             RaiseLocalEvent(target, ev, true);
             cancelled = ev.Cancelled;
         }
 
         if (cancelled)
         {
-            _actions.SetCooldown(hereticComp.MansusGrasp, ent.Comp.CooldownAfterUse);
+            _actions.SetCooldown(hereticComp.MansusGrasp, comp.CooldownAfterUse);
             hereticComp.MansusGrasp = EntityUid.Invalid;
-            InvokeGrasp(args.User, ent);
-            QueueDel(ent);
-            args.Handled = true;
-            return;
+            InvokeGrasp(user, grasp);
+            QueueDel(grasp);
+            return true;
         }
 
         // upgraded grasp
-        if (!TryApplyGraspEffectAndMark(args.User, hereticComp, target, ent, out var triggerGrasp))
-            return;
+        if (!TryApplyGraspEffectAndMark(user, hereticComp, target, grasp, out var triggerGrasp))
+            return false;
 
         if (triggerGrasp && TryComp(target, out StatusEffectsComponent? status))
         {
@@ -215,16 +208,38 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
             _language.DoRatvarian(target, comp.SpeechTime, true, status);
             _statusEffect.TryAddStatusEffect<MansusGraspAffectedComponent>(target,
                 "MansusGraspAffected",
-                ent.Comp.AffectedTime,
+                comp.AffectedTime,
                 true,
                 status);
         }
 
-        _actions.SetCooldown(hereticComp.MansusGrasp, ent.Comp.CooldownAfterUse);
+        _actions.SetCooldown(hereticComp.MansusGrasp, comp.CooldownAfterUse);
         hereticComp.MansusGrasp = EntityUid.Invalid;
-        InvokeGrasp(args.User, ent);
-        QueueDel(ent);
-        args.Handled = true;
+        InvokeGrasp(user, grasp);
+        QueueDel(grasp);
+        return true;
+    }
+
+    private void OnMelee(Entity<MansusGraspComponent> ent, ref MeleeHitEvent args)
+    {
+        if (args.HitEntities.Count == 0)
+            return;
+        // blocked from wide attacks in YAML. should never have more than 1
+        if (args.HitEntities.Count > 1)
+            return;
+        var target = args.HitEntities.First();
+        // no fumbling!
+        if (target == args.User)
+            return;
+        args.Handled = GraspTarget(ent, args.User,target);
+    }
+
+    private void OnAfterInteract(Entity<MansusGraspComponent> ent, ref AfterInteractEvent args)
+    {
+        if (!args.CanReach || args.Target is not {} target || target == args.User)
+            return;
+
+        args.Handled = GraspTarget(ent, args.User, target);
     }
 
     public void InvokeGrasp(EntityUid user, Entity<MansusGraspComponent>? ent)

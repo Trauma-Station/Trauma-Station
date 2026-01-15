@@ -15,13 +15,10 @@ public sealed partial class DiseaseComponent : Component
     /// Name of the container that stores effect entities.
     /// </summary>
     [DataField]
-    public string EffectsContainerId = "disease_effects";
+    public string EffectContainerId = "diseaseEffectContainer";
 
     [ViewVariables]
-    public Container EffectsContainer = default!;
-
-    [ViewVariables]
-    public IReadOnlyList<EntityUid> Effects => EffectsContainer.ContainedEntities;
+    public Container Effects = default!;
 
     /// <summary>
     /// Current strength of the organism's immunity against this disease

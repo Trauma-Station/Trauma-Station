@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ MobBloodstream, MobRespirator, MobAtmosStandard, MobFlammable, BaseMobSpecies ] # Goobstation - unperishable voxes
+  parent: BaseMobSpeciesOrganicUnperishable # Trauma - vox don't rot
   id: BaseMobVox
   abstract: true
   components:
@@ -203,70 +203,12 @@
           32:
             sprite: Mobs/Species/Vox/displacement.rsi
             state: shoes
-  # Goobstation start - voxes are uncloneable but do not rot - all the stuff from BaseMobSpeciesOrganic
-  - type: Uncloneable
-  - type: Absorbable # Goobstation - changelings
-  - type: Barotrauma
-    damage:
-      types:
-        Blunt: 0.50 #per second, scales with pressure and other constants.
-        Heat: 0.1
-  #- type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute. # Specified above already
-  #  allowedStates:
-  #  - Alive
-  #  damageCap: 20
-  #  damage:
-  #    types:
-  #      Heat: -0.07
-  #    groups:
-  #      Brute: -0.07
-  - type: Fingerprint
-  - type: Blindable
-  # Other
-  - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 42
-  - type: TemperatureDamage
-    heatDamageThreshold: 325
-    coldDamageThreshold: 260
-    coldDamage:
-      types:
-        Cold: 0.1 #per second, scales with temperature & other constants
-    heatDamage:
-      types:
-        Heat: 1.0 # Goob edit #per second, scales with temperature & other constants
-  - type: TemperatureSpeed
-    thresholds:
-      293: 0.8
-      280: 0.6
-      260: 0.4
-  - type: ThermalRegulator
-    metabolismHeat: 800
-    radiatedHeat: 100
-    implicitHeatRegulation: 500
-    sweatHeatRegulation: 2000
-    shiveringHeatRegulation: 2000
-    normalBodyTemperature: 310.15
-    thermalRegulationTemperatureThreshold: 2
-  # - type: Perishable # Nuh uh
-  # - type: Butcherable # Specified above already
-  #  butcheringType: Spike # TODO human.
-  #  spawned:
-  #  - id: FoodMeat
-  #    amount: 5
-  - type: Respirator
-    damage:
-      types:
-        Asphyxiation: 1.0
-    damageRecovery:
-      types:
-        Asphyxiation: -1.0
-  - type: FireVisuals
-    alternateState: Standing
-  - type: FootprintOwner # Corvax-Next-Footprints
-  - type: Carriable # Goobstation
-  - type: CPRTraining # Goobstation - Just give to everyone! This ain't MRP.
-  # Goobstation end
+      outerClothing: # Goob
+        sizeMaps:
+          32:
+            sprite: _Goobstation/Mobs/Species/Vox/displacement.rsi
+            state: outerClothing
+  - type: Uncloneable # Goob
   - type: Hands
     leftHandDisplacement:
       sizeMaps:
@@ -339,6 +281,11 @@
           32:
             sprite: Mobs/Species/Vox/displacement.rsi
             state: shoes
+      outerClothing: # Goob
+        sizeMaps:
+          32:
+            sprite: _Goobstation/Mobs/Species/Vox/displacement.rsi
+            state: outerClothing
   - type: Hands
     leftHandDisplacement:
       sizeMaps:

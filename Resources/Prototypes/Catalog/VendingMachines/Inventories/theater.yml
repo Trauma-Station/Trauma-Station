@@ -87,4 +87,7 @@
     ClothingOuterCoatPirate: 2
     ClothingUniformJumpsuitPirate: 2
     ClothingEyesEyepatch: 2
+  emaggedInventory:
+    ClothingOuterPonchoClassicRobust: 1
+    ClothingHeadHatCowboyBrownRobust: 1
     # </Trauma>

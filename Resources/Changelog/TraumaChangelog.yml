@@ -1328,3 +1328,35 @@ Entries:
       message: Fixed some vending machine snacks being healthy when they shouldn't.
   id: 157
   time: '2026-01-13T09:10:55.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: CQC still has ripostee. 🥚
+    - type: Tweak
+      message: Ghost bar still exists. 🥚
+  id: 158
+  time: '2026-01-13T14:24:47.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Updated and re-enabled Bagel Station.
+  id: 159
+  time: '2026-01-13T18:07:36.0000000+00:00'
+- author: Joel
+  changes:
+    - type: Add
+      message: 4 new lobby arts
+  id: 160
+  time: '2026-01-13T22:08:57.0000000+00:00'
+- author: SpeltIncorrectyl
+  changes:
+    - type: Tweak
+      message: Security sidearm now goes red when set to lethal mode.
+  id: 161
+  time: '2026-01-13T22:11:02.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Grey slime extract makes slime food instead of monkies to reduce lag.
+  id: 162
+  time: '2026-01-13T23:56:23.0000000+00:00'

@@ -266,7 +266,7 @@
   - MobAtmosStandard
   - MobFlammable
   - BaseMobSpecies
-  id: BaseMobSpeciesOrganic
+  id: BaseMobSpeciesOrganicUnperishable # Trauma - made unperishable for vox
   abstract: true
   components:
   - type: Absorbable # Goobstation - changelings
@@ -313,7 +313,7 @@
     shiveringHeatRegulation: 2000
     normalBodyTemperature: 310.15
     thermalRegulationTemperatureThreshold: 2
-  - type: Perishable
+  #- type: Perishable # Trauma - moved to BaseMobSpeciesOrganic
   - type: Butcherable
     butcheringType: Spike # TODO human.
     spawned:

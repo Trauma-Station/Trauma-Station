@@ -26,7 +26,7 @@ public sealed class LanguageDiseaseSystem : EntitySystem
 
     private void OnCarrierSpoke(Entity<DiseaseCarrierComponent> ent, ref EntitySpokeEvent args)
     {
-        foreach (var disease in ent.Comp.Diseases)
+        foreach (var disease in ent.Comp.Diseases.ContainedEntities)
         {
             RaiseLocalEvent(disease, args);
         }
