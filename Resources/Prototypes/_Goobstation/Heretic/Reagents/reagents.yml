@@ -43,6 +43,7 @@
       - !type:ModifyBleed
         amount: -1
       - !type:CleanBloodstream
+        excluded: EldritchEssence # Trauma - Exclude from chempurge
         cleanseRate: 3
       - !type:GenericStatusEffect
         key: SeeingRainbows

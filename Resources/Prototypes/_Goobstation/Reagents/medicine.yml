@@ -372,6 +372,7 @@
           types:
             Poison: -1
       - !type:CleanBloodstream
+        excluded: Musiver # Trauma - Exclude from chempurge
         cleanseRate: 1
       - !type:HealthChange
         damage:
