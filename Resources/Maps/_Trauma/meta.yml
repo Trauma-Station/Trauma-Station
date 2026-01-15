@@ -4,7 +4,7 @@ meta:
   engineVersion: 270.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/14/2026 22:08:19
+  time: 01/15/2026 18:48:22
   entityCount: 27961
 maps:
 - 1
@@ -11271,7 +11271,7 @@ entities:
       pos: -42.5,29.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -22792.018
+      secondsUntilStateChange: -22993.342
       state: Opening
     - type: DeviceLinkSink
       invokeCounter: 2
@@ -12102,14 +12102,6 @@ entities:
       name: Jani Closet
     - type: Transform
       pos: -24.5,25.5
-      parent: 2
-- proto: AirlockJournalismGlassLocked
-  entities:
-  - uid: 25171
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,-67.5
       parent: 2
 - proto: AirlockMaintAtmoLocked
   entities:
@@ -13077,6 +13069,11 @@ entities:
     components:
     - type: Transform
       pos: 27.5,-14.5
+      parent: 2
+  - uid: 22157
+    components:
+    - type: Transform
+      pos: -0.5,-67.5
       parent: 2
 - proto: AirlockServiceLocked
   entities:
@@ -169235,14 +169232,12 @@ entities:
       parent: 2
 - proto: WeaponEnergyTurretSecurity
   entities:
-  - uid: 22157
+  - uid: 25171
     components:
     - type: Transform
       pos: -1.5,40.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 21315
 - proto: WeaponEnergyTurretSecurityControlPanel
@@ -169254,7 +169249,7 @@ entities:
       parent: 2
     - type: DeviceList
       devices:
-      - 22157
+      - 25171
 - proto: WeaponLaserCarbinePractice
   entities:
   - uid: 27047
