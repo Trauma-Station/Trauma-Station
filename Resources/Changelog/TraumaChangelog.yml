@@ -1408,3 +1408,15 @@ Entries:
       message: Removed BSO
   id: 167
   time: '2026-01-15T08:36:02.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Add
+      message: Added ED-209, beepskys bigger brother
+  id: 168
+  time: '2026-01-15T19:03:07.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Fix
+      message: Pentenic Acid no longer purges itself from your bloodstream.
+  id: 169
+  time: '2026-01-15T19:10:58.0000000+00:00'
