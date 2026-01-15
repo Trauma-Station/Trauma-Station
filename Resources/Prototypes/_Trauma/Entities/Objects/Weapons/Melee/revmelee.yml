@@ -172,6 +172,12 @@
     tags:
     - Knife
   - type: Sharp
+  - type: Utensil
+    types:
+      - Knife
+  - type: Tool
+    qualities:
+      - Slicing
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/bladeslice.ogg
   - type: DamageOtherOnHit
