@@ -1392,3 +1392,47 @@ Entries:
         of preventing you from moving entirely.
   id: 165
   time: '2026-01-14T18:30:39.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed hyposprays.
+  id: 166
+  time: '2026-01-14T22:26:35.0000000+00:00'
+- author: MayasMischief
+  changes:
+    - type: Fix
+      message: >-
+        The forged knife can now be used for slicing, and also the sword too I
+        guess.
+    - type: Remove
+      message: Removed BSO
+  id: 167
+  time: '2026-01-15T08:36:02.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Add
+      message: Added ED-209, beepskys bigger brother
+  id: 168
+  time: '2026-01-15T19:03:07.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Fix
+      message: Pentenic Acid no longer purges itself from your bloodstream.
+  id: 169
+  time: '2026-01-15T19:10:58.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Fix
+      message: >-
+        Musiver, EldritchEssence, and Mugwort no longer purge themselves when
+        used.
+  id: 170
+  time: '2026-01-15T19:29:59.0000000+00:00'
+- author: Nousagi37
+  changes:
+    - type: Tweak
+      message: >-
+        Updated Marathon with localized content, and re-enabled it back in the
+        map pool.
+  id: 171
+  time: '2026-01-15T19:45:47.0000000+00:00'

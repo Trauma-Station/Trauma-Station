@@ -1,0 +1,19 @@
+- type: htnCompound
+  id: ED209Compound
+  branches:
+  - tasks:
+    - !type:HTNCompoundTask
+      task: WantedInnateRangedCombatCompound
+  - tasks:
+    - !type:HTNCompoundTask
+      task: IdleCompound
+
+- type: htnCompound
+  id: ED209EmagedCompound
+  branches:
+  - tasks:
+    - !type:HTNCompoundTask
+      task: InnateRangedCombatCompound
+  - tasks:
+    - !type:HTNCompoundTask
+      task: IdleCompound
