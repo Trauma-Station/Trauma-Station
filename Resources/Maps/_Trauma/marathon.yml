@@ -4,7 +4,7 @@ meta:
   engineVersion: 270.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/14/2026 22:31:18
+  time: 01/15/2026 18:55:10
   entityCount: 23356
 maps:
 - 1
@@ -6654,18 +6654,18 @@ entities:
             2: 34952
           6,-6:
             2: 61440
-            6: 224
+            4: 224
           6,-5:
             0: 112
             2: 2184
           6,-8:
             3: 224
-            4: 57344
-          6,-7:
-            4: 224
             5: 57344
+          6,-7:
+            5: 224
+            6: 57344
           6,-9:
-            4: 57568
+            5: 57568
           7,-5:
             2: 4080
           7,-8:
@@ -7737,15 +7737,15 @@ entities:
             Plasma: 6666.982
         - volume: 2500
           temperature: 293.15
+          moles:
+            Nitrogen: 6666.982
+        - volume: 2500
+          temperature: 293.15
           moles: {}
         - volume: 2500
           temperature: 293.15
           moles:
             Oxygen: 6666.982
-        - volume: 2500
-          temperature: 293.15
-          moles:
-            Nitrogen: 6666.982
         chunkSize: 4
     - type: BecomesStation
       id: Marathon
@@ -11071,7 +11071,7 @@ entities:
       pos: -1.5,18.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -10129.655
+      secondsUntilStateChange: -10169.602
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11570,7 +11570,7 @@ entities:
       pos: 40.5,11.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -13875.48
+      secondsUntilStateChange: -13915.427
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11607,7 +11607,7 @@ entities:
       pos: 41.5,8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -10724.0205
+      secondsUntilStateChange: -10763.967
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -65942,7 +65942,7 @@ entities:
       pos: 12.5,-12.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -9091.988
+      secondsUntilStateChange: -9131.935
       state: Closing
     - type: Firelock
       emergencyCloseCooldown: 1795.33154
@@ -143929,12 +143929,9 @@ entities:
   - uid: 18811
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -39.5,54.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 17264
 - proto: WeaponEnergyTurretSecurityControlPanel
