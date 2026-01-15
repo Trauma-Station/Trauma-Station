@@ -919,7 +919,7 @@
     account: Engineering
     announcementChannel: Engineering
     removeLimitAccess: [ "ChiefEngineer" ]
-    mode: SendToPrimary
+    #mode: SendToPrimary # Trauma - ungimp dept economy
   - type: ActiveRadio
     channels:
     - Engineering
@@ -928,7 +928,7 @@
   - type: PointLight
     color: "#c9c042"
   - type: AccessReader
-    access: [["Engineering"]]
+    access: [["ChiefEngineer"]] # Trauma - use head access
 
 - type: entity
   id: ComputerCargoOrdersMedical
@@ -952,7 +952,7 @@
     account: Medical
     announcementChannel: Medical
     removeLimitAccess: [ "ChiefMedicalOfficer" ]
-    mode: SendToPrimary
+    #mode: SendToPrimary # Trauma - ungimp dept economy
   - type: ActiveRadio
     channels:
     - Medical
@@ -961,7 +961,7 @@
   - type: PointLight
     color: "#41e0fc"
   - type: AccessReader
-    access: [["Medical"]]
+    access: [["ChiefMedicalOfficer"]] # Trauma - use head access
 
 - type: entity
   id: ComputerCargoOrdersScience
@@ -985,7 +985,7 @@
     account: Science
     announcementChannel: Science
     removeLimitAccess: [ "ResearchDirector" ]
-    mode: SendToPrimary
+    #mode: SendToPrimary # Trauma - ungimp dept economy
   - type: ActiveRadio
     channels:
     - Science
@@ -994,7 +994,7 @@
   - type: PointLight
     color: "#b53ca1"
   - type: AccessReader
-    access: [["Research"]]
+    access: [["ResearchDirector"]] # Trauma - use head access
 
 - type: entity
   id: ComputerCargoOrdersSecurity
@@ -1018,7 +1018,7 @@
     account: Security
     announcementChannel: Security
     removeLimitAccess: [ "HeadOfSecurity" ]
-    mode: SendToPrimary
+    #mode: SendToPrimary # Trauma - ungimp dept economy
   - type: ActiveRadio
     channels:
     - Security
@@ -1027,7 +1027,7 @@
   - type: PointLight
     color: "#d11d00"
   - type: AccessReader
-    access: [["Security"]]
+    access: [["HeadOfSecurity"]] # Trauma - use head access
 
 - type: entity
   id: ComputerCargoOrdersService
@@ -1051,7 +1051,7 @@
     account: Service
     announcementChannel: Service
     removeLimitAccess: [ "HeadOfPersonnel" ]
-    mode: SendToPrimary
+    #mode: SendToPrimary # Trauma - ungimp dept economy
   - type: ActiveRadio
     channels:
     - Service
@@ -1060,7 +1060,7 @@
   - type: PointLight
     color: "#afe837"
   - type: AccessReader
-    access: [["Service"], ["Theatre"]]
+    access: [["HeadOfPersonnel"]] # Trauma - use head access
 
 - type: entity
   id: ComputerCargoBounty

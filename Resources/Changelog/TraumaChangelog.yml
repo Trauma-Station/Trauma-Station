@@ -1436,3 +1436,11 @@ Entries:
         map pool.
   id: 171
   time: '2026-01-15T19:45:47.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Changed department economy so that heads approve their departments
+        orders, not cargo approving everyone's orders.
+  id: 172
+  time: '2026-01-15T19:49:19.0000000+00:00'
