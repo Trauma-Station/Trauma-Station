@@ -1011,6 +1011,7 @@
       metabolismRate: 0.25
       effects:
       - !type:CleanBloodstream
+        excluded: PentenicAcid # Trauma - Exclude pentacid from its own chem purge
       - !type:HealthChange
         damage:
           types:
