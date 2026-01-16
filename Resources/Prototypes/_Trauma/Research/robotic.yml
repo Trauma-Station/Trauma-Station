@@ -67,6 +67,29 @@
   - CritterMechs
 
 - type: technology
+  id: CritterMechs
+  name: research-technology-critter-mechs
+  icon:
+    sprite: Objects/Specific/Mech/mecha.rsi
+    state: hamtr
+  discipline: Robotic
+  tier: 1
+  cost: 7500
+  recipeUnlocks:
+  - HamtrHarness
+  - HamtrLArm
+  - HamtrRArm
+  - HamtrLLeg
+  - HamtrRLeg
+  - HamtrCentralElectronics
+  - HamtrPeripheralsElectronics
+  - MechEquipmentGrabberSmall
+  - VimHarness
+  position: -6,1
+  technologyPrerequisites:
+  - RipleyAPLU
+
+- type: technology
   id: RipleyAPLU
   name: research-technology-ripley-aplu
   icon:
@@ -148,31 +171,6 @@
   technologyPrerequisites:
   - PushHorn
   - RipleyAPLU
-
-- type: technology
-  id: CritterMechs
-  name: research-technology-critter-mechs
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: hamtr
-  discipline: Robotic
-  tier: 1
-  cost: 7500
-  recipeUnlocks:
-  - HamtrHarness
-  - HamtrLArm
-  - HamtrRArm
-  - HamtrLLeg
-  - HamtrRLeg
-  - HamtrCentralElectronics
-  - HamtrPeripheralsElectronics
-  - MechEquipmentGrabberSmall
-  - VimHarness
-  # Goobstation R&D Console rework start
-  position: -6,1
-  technologyPrerequisites:
-  - RipleyAPLU
-  # Goobstation R&D Console rework end
 
 - type: technology
   id: HONKWeapons
@@ -306,7 +304,7 @@
   - BasicCyberneticHeart
   - BasicCyberneticLungs
   - BasicCyberneticLiver
-  - HypoportSecure # Trauma
+  - HypoportSecure
   position: -6,4
   technologyPrerequisites:
   - BasicAugmentation
