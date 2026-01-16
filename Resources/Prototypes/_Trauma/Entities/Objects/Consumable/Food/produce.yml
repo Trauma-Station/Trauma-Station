@@ -1,0 +1,22 @@
+# FoodProduceBase without perishable stuff
+- type: entity
+  abstract: true
+  parent: EdibleBase
+  id: FoodProduceUnperishableBase
+  components:
+  # FoodBase, no perishable stuff
+  - type: SpaceGarbage
+  # FoodInjectableBase
+  - type: InjectableSolution
+    solution: food
+  - type: RefillableSolution
+    solution: food
+  # FoodProduceBase
+  - type: SolutionContainerManager
+  - type: Sprite
+    state: produce
+  - type: Produce
+  - type: PotencyVisuals
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: food

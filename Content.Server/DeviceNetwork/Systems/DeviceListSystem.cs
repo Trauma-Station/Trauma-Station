@@ -1,19 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 vulppine <vulppine@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2023 Julian Giebel <juliangiebel@live.de>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 Andrew <blackledgecreates@gmail.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Diagnostics;
 using System.Linq;
 using Content.Shared.DeviceNetwork.Components;
@@ -41,24 +25,13 @@ public sealed class DeviceListSystem : SharedDeviceListSystem
 
     // Goobstation - Fix desync of configurator lists
     [Conditional("DEBUG")]
-    public void VerifyDeviceList(EntityUid? uid, DeviceListComponent? listComp = null)
+    public void VerifyDeviceList(EntityUid listUid, DeviceListComponent? listComp = null)
     {
-        if (uid is not {} listUid)
-        {
-            Log.Error("VerifyDeviceList was passed a null uid");
+        if (TerminatingOrDeleted(listUid))
             return;
-        }
 
-
-        if (listComp == null)
-        {
-            if (Deleted(uid)) return;
-            if (!Resolve(listUid, ref listComp))
-            {
-                Log.Error("Failed to resolve DeviceListComponent for verification");
-                return;
-            }
-        }
+        if (!Resolve(listUid, ref listComp))
+            return;
 
         var config_query = GetEntityQuery<NetworkConfiguratorComponent>();
         foreach (var conf_enty in listComp.Configurators)
@@ -81,7 +54,7 @@ public sealed class DeviceListSystem : SharedDeviceListSystem
                 Log.Error("Failed to find DeviceNetworkComponent in DeviceListComponent Devices");
                 continue;
             }
-            DebugTools.Assert(dev_comp.DeviceLists.Contains(listUid));
+            DebugTools.Assert(dev_comp.DeviceLists.Contains(listUid), $"{ToPrettyString(listUid)} is missing from {ToPrettyString(dev_enty)}'s device list");
         }
     }
 
