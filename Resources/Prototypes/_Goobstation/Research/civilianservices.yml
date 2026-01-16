@@ -31,7 +31,7 @@
   - PrescriptionGlasses
   - EnvirosuitExtinguisherRefill
   - TinfoilHats
-  position: 3,4
+  position: 3,6
   technologyPrerequisites:
   - AdvancedEntertainment
 
@@ -46,7 +46,7 @@
   cost: 5000
   recipeUnlocks:
   - SyringeGun
-  position: 3,6
+  position: 3,8
   technologyPrerequisites:
   - BiochemicalStasis
 
@@ -61,7 +61,7 @@
   cost: 7500
   recipeUnlocks:
   - HandheldCrewMonitor
-  position: 4,6
+  position: 4,8
   technologyPrerequisites:
   - BiochemicalStasis
 
@@ -78,7 +78,7 @@
   cost: 10000
   recipeUnlocks:
   - TelecomTransmitterCircuitboard
-  position: 2,5
+  position: 2,7
   technologyPrerequisites:
   - AudioVisualCommunication
 
@@ -96,24 +96,8 @@
   - TapeDeckCircuitboard
   - StationRadioServerCircuitboard
   - StationRadioRigCircuitboard
-  position: 2,6
+  position: 2,8
   technologyPrerequisites:
   - ExtendedCommunications
-
-- type: technology
-  id: HONKWeapons
-  name: research-technology-honk-weapons
-  icon:
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
-    state: mecha_bananamrtr
-  discipline: CivilianServices
-  tier: 2
-  cost: 6000
-  recipeUnlocks:
-  - MechEquipmentHonkerBananaMortar
-  - MechEquipmentHonkerMousetrapMortar
-  position: 0,7
-  technologyPrerequisites:
-  - HONKMech
 
 # Tier 3

@@ -89,7 +89,7 @@
   - ClothingMaskWeldingGas
   - ClothingShoesBootsJump
   # Goobstation R&D Console rework start
-  position: 0,-4
+  position: 0,-8
   technologyPrerequisites:
   - SpaceScanning
   # Goobstation R&D Console rework end
@@ -107,7 +107,7 @@
   - RadarConsoleCircuitboard
   - HandHeldMassScanner
   # Goobstation R&D Console rework start
-  position: 0,-3
+  position: 0,-7
   technologyPrerequisites:
   - PowerGeneration
   # Goobstation R&D Console rework end
@@ -126,7 +126,7 @@
   - TurboItemRechargerCircuitboard
   - SMESAdvancedMachineCircuitboard
   # Goobstation R&D Console rework start
-  position: 1,-6
+  position: 1,-10
   technologyPrerequisites:
   - IndustrialEngineering
   # Goobstation R&D Console rework end
@@ -143,7 +143,7 @@
   recipeUnlocks:
   - FlatpackerMachineCircuitboard
   # Goobstation R&D Console rework start
-  position: 1,-4
+  position: 1,-8
   technologyPrerequisites:
   - SpaceScanning
   # Goobstation R&D Console rework end
@@ -176,7 +176,7 @@
   # End Goobstation Additions
   - SheetifierMachineCircuitboard
   # Goobstation R&D Console rework start
-  position: 1,-5
+  position: 1,-9
   technologyPrerequisites:
   - MechanicalCompression
   # Goobstation R&D Console rework end
@@ -197,7 +197,7 @@
   - SolarControlComputerCircuitboard
   - SolarTrackerElectronics
   - EmitterCircuitboard
-  position: 0,-2
+  position: 0,-6
 
 - type: technology
   id: AtmosphericTech
@@ -212,33 +212,9 @@
   - ThermomachineFreezerMachineCircuitBoard
   - GasRecyclerMachineCircuitboard
   # Goobstation R&D Console rework start
-  position: -2,-4
+  position: -1,-8
   technologyPrerequisites:
   - SpaceScanning
-  # Goobstation R&D Console rework end
-
-- type: technology
-  id: RipleyAPLU
-  name: research-technology-ripley-aplu
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: ripley
-  discipline: Industrial
-  tier: 1
-  cost: 7500
-  recipeUnlocks:
-  - RipleyHarness
-  - RipleyLArm
-  - RipleyRArm
-  - RipleyLLeg
-  - RipleyRLeg
-  - RipleyCentralElectronics
-  - RipleyPeripheralsElectronics
-  - MechEquipmentGrabber
-  # Goobstation R&D Console rework start
-  position: 0,-5
-  technologyPrerequisites:
-  - SalvageEquipment
   # Goobstation R&D Console rework end
 
 # Tier 2
@@ -259,7 +235,7 @@
   - MiniGravityGeneratorCircuitboard
   - MachineFTLDriveCircuitboard # Frontier
   # Goobstation R&D Console rework start
-  position: 2,-4
+  position: 2,-8
   technologyPrerequisites:
   - MechanicalCompression
   # Goobstation R&D Console rework end
@@ -280,7 +256,7 @@
   technologyPrerequisites:
   - AtmosphericTech
   # Goobstation R&D Console rework start
-  position: -2,-5
+  position: -1,-9
   # Goobstation R&D Console rework end
 
 - type: technology
@@ -298,7 +274,7 @@
     - JawsOfLife
     - BorgModuleAdvancedTool
   # Goobstation R&D Console rework start
-  position: 2,-5
+  position: 2,-9
   technologyPrerequisites:
   - Shuttlecraft
   # Goobstation R&D Console rework end
@@ -317,11 +293,10 @@
     - MiningDrillDiamond
     - AdvancedMineralScannerEmpty
     - BorgModuleAdvancedMining
-    - MechEquipmentDrillDiamond # Goobstation
   # Goobstation R&D Console rework start
-  position: 0,-6
+  position: 0,-9
   technologyPrerequisites:
-  - RipleyAPLU
+  - SalvageEquipment
   # Goobstation R&D Console rework end
 
 # Tier 3
@@ -341,7 +316,7 @@
   - ClothingBackpackDuffelHolding
   - ClothingBackpackMessengerHolding # Frontier
   # Goobstation R&D Console rework start
-  position: 2,-7
+  position: 2,-11
   technologyPrerequisites:
    - OptimizedMicrogalvanism
   # Goobstation R&D Console rework end
@@ -361,4 +336,4 @@
   technologyPrerequisites:
   - AdvancedToolsTechnology  # Goobstation R&D Console rework
   - AdvancedPowercells  # Goobstation R&D Console rework
-  position: 2,-6
+  position: 2,-10

@@ -16,35 +16,9 @@
   - ReagentGrinderIndustrialMachineCircuitboard
   - PlantAnalyzer # Frontier
   # Goobstation R&D Console rework start
-  position: -3,4
+  position: -2,6
   technologyPrerequisites:
   - AdvancedEntertainment
-  # Goobstation R&D Console rework end
-
-- type: technology
-  id: CritterMechs
-  name: research-technology-critter-mechs
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: hamtr
-  discipline: CivilianServices
-  tier: 1
-  cost: 7500
-  recipeUnlocks:
-  - HamtrHarness
-  - HamtrLArm
-  - HamtrRArm
-  - HamtrLLeg
-  - HamtrRLeg
-  - HamtrCentralElectronics
-  - HamtrPeripheralsElectronics
-  - MechEquipmentGrabberSmall
-  - VimHarness
-  # Goobstation R&D Console rework start
-  position: 0,4
-  technologyPrerequisites:
-  - AdvancedEntertainment
-  - RipleyAPLU
   # Goobstation R&D Console rework end
 
 - type: technology
@@ -66,7 +40,7 @@
   - TelecomServerCircuitboard
   - HolopadMachineCircuitboard
   # Goobstation R&D Console rework start
-  position: 1,4
+  position: 1,6
   technologyPrerequisites:
   - AdvancedEntertainment
   # Goobstation R&D Console rework end
@@ -87,7 +61,7 @@
     - MassMediaCircuitboard
     - JukeboxCircuitBoard
     - BorgModuleLollypop # Goobstation
-  position: 0,2
+  position: 0,5
 
 - type: technology
   id: MeatManipulation
@@ -103,7 +77,7 @@
   - BiofabricatorMachineCircuitboard
   - BiomassReclaimerMachineCircuitboard
   # Goobstation R&D Console rework start
-  position: -3,5
+  position: -2,7
   technologyPrerequisites:
   - Hydroponics
   # Goobstation R&D Console rework end
@@ -130,7 +104,7 @@
   - FauxTileAstroAsteroidSand
   - FauxTileDesertAstroSand
   # Goobstation R&D Console rework start
-  position: 1,5
+  position: 1,7
   technologyPrerequisites:
   - AudioVisualCommunication
   # Goobstation R&D Console rework end
@@ -151,7 +125,7 @@
   - CryostasisBeaker
   - SyringeCryostasis
   # Goobstation R&D Console rework start
-  position: 3,5
+  position: 3,7
   technologyPrerequisites:
   - AccessibilityTech
   # Goobstation R&D Console rework end
@@ -190,36 +164,9 @@
   - MegaSprayBottle
   - BorgModuleAdvancedCleaning
   # Goobstation R&D Console rework start
-  position: -1,4
-  technologyPrerequisites:
-  - AdvancedEntertainment
-  - BasicAnomalousResearch
-  # Goobstation R&D Console rework end
-
-- type: technology
-  id: HONKMech
-  name: research-technology-honk-mech
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: honker
-  discipline: CivilianServices
-  tier: 2
-  cost: 7500
-  recipeUnlocks:
-  - HonkerHarness
-  - HonkerLArm
-  - HonkerRArm
-  - HonkerLLeg
-  - HonkerRLeg
-  - HonkerCentralElectronics
-  - HonkerPeripheralsElectronics
-  - HonkerTargetingElectronics
-  - MechEquipmentHorn
-  # Goobstation R&D Console rework start
   position: 0,6
   technologyPrerequisites:
-  - PushHorn
-  - RipleyAPLU
+  - AdvancedEntertainment
   # Goobstation R&D Console rework end
 
 - type: technology
@@ -235,7 +182,7 @@
   - WeaponSprayNozzle
   - ClothingBackpackWaterTank
   # Goobstation R&D Console rework start
-  position: -1,6
+  position: 0,7
   technologyPrerequisites:
   - AdvancedCleaning
   # Goobstation R&D Console rework end
@@ -256,24 +203,6 @@
   technologyPrerequisites:
   - MeatManipulation
   - FauxAstroTiles
-  # Goobstation R&D Console rework end
-
-- type: technology
-  id: PushHorn
-  name: research-technology-clowning-utilities
-  icon:
-    sprite: Objects/Fun/push_horn.rsi
-    state: icon
-  discipline: CivilianServices
-  tier: 2
-  cost: 4000
-  recipeUnlocks:
-  - PushHorn
-  - BorgModuleAdvancedClowning
-  # Goobstation R&D Console rework start
-  position: 0,5
-  technologyPrerequisites:
-  - CritterMechs
   # Goobstation R&D Console rework end
 
 # Tier 3
@@ -311,7 +240,7 @@
   - MedkitCombat # Goobstation - remove medkitcombat from static to research
   - VialBluespace # goob edit - bluespace vials
   # Goobstation R&D Console rework start
-  position: 4,5
+  position: 4,7
   technologyPrerequisites:
   - BiochemicalStasis
   # Goobstation R&D Console rework end

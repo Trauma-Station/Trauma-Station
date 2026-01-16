@@ -6,7 +6,7 @@
   - WeaponBillyClub
 
 - type: latheRecipePack
-  id: TraumaSecurityMechParts
+  id: TraumaMechParts
   recipes:
   - EDHead
   - EDLegL
