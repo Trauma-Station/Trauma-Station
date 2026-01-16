@@ -1,5 +1,5 @@
 Name: Traumalog
-Order: -1
+Order: -2
 Entries:
 - author: Durk
   changes:
@@ -1360,3 +1360,137 @@ Entries:
       message: Grey slime extract makes slime food instead of monkies to reduce lag.
   id: 162
   time: '2026-01-13T23:56:23.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: >-
+        Egg cartons, donut boxes, pizza boxes, food carts, and plant bags all
+        prevent food rot.
+    - type: Tweak
+      message: Blob mobs can move in zero-G
+    - type: Fix
+      message: blob mobs can heal poison, genetic, and radiation damage.
+  id: 163
+  time: '2026-01-14T00:37:08.0000000+00:00'
+- author: Nousagi37
+  changes:
+    - type: Tweak
+      message: >-
+        Updated Box with localized content, and re-enabled it back in the map
+        pool.
+  id: 164
+  time: '2026-01-14T08:40:37.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Harmpack will double crawl speed, losing all your hands still lets you
+        crawl at 10% speed.
+    - type: Tweak
+      message: >-
+        Crawling with items in your hands now scales based off item size instead
+        of preventing you from moving entirely.
+  id: 165
+  time: '2026-01-14T18:30:39.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed hyposprays.
+  id: 166
+  time: '2026-01-14T22:26:35.0000000+00:00'
+- author: MayasMischief
+  changes:
+    - type: Fix
+      message: >-
+        The forged knife can now be used for slicing, and also the sword too I
+        guess.
+    - type: Remove
+      message: Removed BSO
+  id: 167
+  time: '2026-01-15T08:36:02.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Add
+      message: Added ED-209, beepskys bigger brother
+  id: 168
+  time: '2026-01-15T19:03:07.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Fix
+      message: Pentenic Acid no longer purges itself from your bloodstream.
+  id: 169
+  time: '2026-01-15T19:10:58.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Fix
+      message: >-
+        Musiver, EldritchEssence, and Mugwort no longer purge themselves when
+        used.
+  id: 170
+  time: '2026-01-15T19:29:59.0000000+00:00'
+- author: Nousagi37
+  changes:
+    - type: Tweak
+      message: >-
+        Updated Marathon with localized content, and re-enabled it back in the
+        map pool.
+  id: 171
+  time: '2026-01-15T19:45:47.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Changed department economy so that heads approve their departments
+        orders, not cargo approving everyone's orders.
+  id: 172
+  time: '2026-01-15T19:49:19.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Fix
+      message: Fixed borg sprites displaying errors sometimes (hopefully)
+  id: 173
+  time: '2026-01-15T21:28:56.0000000+00:00'
+- author: MayasMischief
+  changes:
+    - type: Tweak
+      message: Monkeys and Kobolds are ghostroles more often.
+    - type: Remove
+      message: Removed BSO
+  id: 174
+  time: '2026-01-16T07:32:17.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: >-
+        Food that rots in containers like mail won't teleport slop outside of
+        the container.
+    - type: Fix
+      message: Fixed plastic bananas rotting.
+    - type: Tweak
+      message: Plastic bananas are now made of microplastics.
+    - type: Fix
+      message: Fixed clowns shooting guns mispredicting.
+    - type: Fix
+      message: Fixed crew reinforcements' IDs having no name.
+  id: 175
+  time: '2026-01-16T07:49:29.0000000+00:00'
+- author: Nousagi37
+  changes:
+    - type: Tweak
+      message: >-
+        Updated Metastation with localized content, and re-enabled it back in
+        the map pool.
+  id: 176
+  time: '2026-01-16T08:40:55.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Fix
+      message: Fixed Crit killing just ghosting you
+  id: 177
+  time: '2026-01-16T15:48:49.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Added Hideo Kojima to the credits.
+  id: 178
+  time: '2026-01-16T17:03:56.0000000+00:00'

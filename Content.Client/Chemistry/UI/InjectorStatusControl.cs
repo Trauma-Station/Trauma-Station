@@ -16,7 +16,7 @@ public sealed class InjectorStatusControl : Control
     private readonly IPrototypeManager _prototypeManager;
 
     private readonly Entity<InjectorComponent> _parent;
-    private readonly SharedSolutionContainerSystem _solutionContainers;
+    private readonly InjectorSystem _injector; // Trauma - replace _solutionContainers with _injector
     private readonly RichTextLabel _label;
 
     private FixedPoint2 _prevVolume;
@@ -24,12 +24,13 @@ public sealed class InjectorStatusControl : Control
     private FixedPoint2? _prevTransferAmount;
     private InjectorBehavior _prevBehavior;
 
-    public InjectorStatusControl(Entity<InjectorComponent> parent, SharedSolutionContainerSystem solutionContainers, IPrototypeManager prototypeManager)
+    // Trauma - replace solutionContainers with injector
+    public InjectorStatusControl(Entity<InjectorComponent> parent, InjectorSystem injector, IPrototypeManager prototypeManager)
     {
         _prototypeManager  = prototypeManager;
 
         _parent = parent;
-        _solutionContainers = solutionContainers;
+        _injector = injector; // Trauma - was solutionContainers
         _label = new RichTextLabel { StyleClasses = { StyleClass.ItemStatus } };
         AddChild(_label);
     }
@@ -38,7 +39,7 @@ public sealed class InjectorStatusControl : Control
     {
         base.FrameUpdate(args);
 
-        if (!_solutionContainers.TryGetSolution(_parent.Owner, _parent.Comp.SolutionName, out _, out var solution)
+        if (_injector.GetSolution(_parent) is not {} solution // Trauma - use GetSolution
             || !_prototypeManager.Resolve(_parent.Comp.ActiveModeProtoId, out var activeMode))
             return;
 

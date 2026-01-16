@@ -5,12 +5,12 @@
   #- Atlas
   #- Amber
   - Bagel
-  #- Box
+  - Box
   #- Cluster
   - Fland
   - FlandHighPop
   - Loop
-  #- Marathon
+  - Marathon
   #- Meta
   #- Oasis
   #- OasisHighPop

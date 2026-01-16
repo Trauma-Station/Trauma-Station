@@ -8,13 +8,14 @@ namespace Content.Client.Chemistry.EntitySystems;
 
 public sealed class InjectorStatusControlSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainers = default!;
+    [Dependency] private readonly InjectorSystem _injector = default!; // Trauma - replaced _solutionContainers with _injector
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
 
     public override void Initialize()
     {
         base.Initialize();
-        Subs.ItemStatus<InjectorComponent>(injector => new InjectorStatusControl(injector, _solutionContainers, _prototypeManager));
+        // Trauma - replace _solutionContainers with _injector
+        Subs.ItemStatus<InjectorComponent>(injector => new InjectorStatusControl(injector, _injector, _prototypeManager));
     }
 }

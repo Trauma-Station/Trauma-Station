@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/431bf75d533771479c4ba28484041ecc752764b8/icons/mob/silicon/aibots.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ed209",
+      "directions": 4
+    },
+    {
+      "name": "ed209_frame"
+    },
+    {
+      "name": "ed209_hat"
+    },
+    {
+      "name": "ed209_prox"
+    },
+    {
+      "name": "ed209_shell"
+    },
+    {
+      "name": "edleg_R"
+    },
+    {
+      "name": "edleg_L"
+    }
+  ]
+}

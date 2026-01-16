@@ -138,12 +138,17 @@
     - secret
     - sekrit
   name: secret-title
-  showInVote: false # Goob - Game Director
+  showInVote: true # Trauma
   description: secret-description
   rules:
-    - Secret
-    - BasicStationEventScheduler # Goob
-    - Insurgency # Trauma
+  # <Trauma> - completely changed every rule
+  - Secret
+  - BasicRoundstartVariation
+  - SpaceTrafficControlEventScheduler
+  - BasicStationEventScheduler
+  - Insurgency # Always some shitters for sec to deal with
+  - SubTraitorRandom # Always 50% chance of at least one traitor
+  # </Trauma>
 
 - type: gamePreset
   id: Sandbox
@@ -232,7 +237,7 @@
   - DummyNonAntagChance
   - SubGamemodesRuleNoWizardNoXenoborg # no two motherships
   - BasicStationEventScheduler
-  - MeteorSwarmScheduler
+  # - MeteorSwarmScheduler - Trauma
   - SpaceTrafficControlEventScheduler
   - BasicRoundstartVariation
 

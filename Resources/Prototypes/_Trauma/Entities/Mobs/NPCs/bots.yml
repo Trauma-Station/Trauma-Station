@@ -192,3 +192,127 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: boogie-d3
+
+- type: entity
+  parent: [MobSiliconBase, MobCombat]
+  id: MobED209
+  name: ED-209
+  description: Officer Beepsky's bigger brother
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
+    state: ed209
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 2.2
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+  - type: Gun
+    fireRate: 5
+    useKey: false
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifle
+    capacity: 125
+  - type: HTN
+    rootTask:
+      task: ED209Compound
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: Construction
+    graph: ED209
+    node: ed209
+  - type: ChangeFactionOnEmag
+    faction: Syndicate
+  - type: ChangeHtnOnEmag
+    task: !type:HTNCompoundTask
+      task: ED209EmagedCompound
+
+- type: entity
+  id: ED209Endoskeleton
+  name: ED-209 endoskeleton
+  description: A frame that the ED-209 is built on.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 100
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+        restitution: 0.3
+        friction: 0.2
+  - type: Sprite
+    noRot: true
+    drawdepth: Items
+    sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
+    state: ed209_frame
+  - type: Appearance
+  - type: ItemMapper
+    sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
+    mapLayers:
+      edleg_L:
+        whitelist:
+          tags:
+          - Ed209LegL
+      edleg_R:
+        whitelist:
+          tags:
+          - Ed209LegR
+      ed209_prox:
+        whitelist:
+          tags:
+          - Ed209Hat
+      ed209_shell:
+        whitelist:
+          tags:
+          - Ed209Shell
+  - type: ContainerContainer
+    containers:
+      part-container: !type:Container
+  - type: PartAssembly
+    parts:
+      generic:
+      - Ed209LegL
+      - Ed209LegR
+      - Ed209Hat
+      - Ed209Shell
+  - type: Construction
+    graph: ED209
+    node: start
+    defaultTarget: ed209
+    containers:
+    - part-container
+  - type: Pullable
+  - type: GuideHelp
+    guides:
+    - Robotics
+    - Cyborgs

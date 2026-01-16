@@ -27,6 +27,9 @@ public sealed partial class BlobMobComponent : Component
             { "Heat", -4 },
             { "Cold", -4 },
             { "Shock", -4 },
+            { "Poison", -4 }, //Trauma
+            { "Genetic", -4 }, //Trauma
+            { "Radiation", -4 }, //Trauma
         }
     };
 }

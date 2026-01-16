@@ -76,6 +76,12 @@
     tags:
     - Knife
   - type: Sharp
+  - type: Utensil
+    types:
+      - Knife
+  - type: Tool
+    qualities:
+      - Slicing
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Goobstation/Items/handling/knife_pickup.ogg
@@ -172,6 +178,12 @@
     tags:
     - Knife
   - type: Sharp
+  - type: Utensil
+    types:
+      - Knife
+  - type: Tool
+    qualities:
+      - Slicing
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/bladeslice.ogg
   - type: DamageOtherOnHit
