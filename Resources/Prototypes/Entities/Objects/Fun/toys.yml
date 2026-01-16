@@ -939,7 +939,7 @@
 
 - type: entity
   name: banana
-  parent: FoodProduceBase
+  parent: FoodProduceUnperishableBase # Trauma - plastic banana takes 5000 years to decompose
   id: PlasticBanana
   description: A plastic banana.
   suffix: Plastic
@@ -955,7 +955,9 @@
       food:
         reagents:
         - ReagentId: Nothing
-          Quantity: 100
+          Quantity: 90 # Trauma - was 100
+        - ReagentId: Microplastics # Trauma - plastic banana may contain plastic
+          Quantity: 10
   - type: Tag
     tags:
     - Banana
