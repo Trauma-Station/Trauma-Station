@@ -30,19 +30,15 @@
   result: CartridgeLightRifle
 
 - type: latheRecipe
-  abstract: true
-  parent: BaseRevWeapon
+  parent: BaseRevBullet
   id: RevBuckShell
-  completetime: 1.5
   materials:
     Steel: 20
   result: ShellShotgun
 
 - type: latheRecipe
-  abstract: true
-  parent: BaseRevWeapon
+  parent: BaseRevBullet
   id: RevSlugShell
-  completetime: 1.5
   materials:
     Steel: 15
     Plastic: 5
