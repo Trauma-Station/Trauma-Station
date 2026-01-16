@@ -9,10 +9,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.UIKit.UserInterface.RichText;
 
-public sealed class IconTag : IMarkupTagHandler
+public sealed class IconTag : IMarkupTag
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
     private SpriteSystem? _spriteSystem;
 
     public string Name => "icon";
@@ -24,10 +24,12 @@ public sealed class IconTag : IMarkupTagHandler
             control = null;
             return false;
         }
-        _spriteSystem ??= _entMan.System<SpriteSystem>();
+
+        _spriteSystem ??= _entitySystem.GetEntitySystem<SpriteSystem>();
         var texture = _prototype.TryIndex<JobIconPrototype>(id.StringValue, out var iconPrototype)
-                ? _spriteSystem.Frame0(iconPrototype.Icon)
-                : null;
+            ? _spriteSystem.Frame0(iconPrototype.Icon)
+            : null;
+
         var icon = new TextureRect
         {
             Texture = texture,
@@ -36,8 +38,10 @@ public sealed class IconTag : IMarkupTagHandler
             Stretch = TextureRect.StretchMode.Scale,
             MouseFilter = Control.MouseFilterMode.Stop,
         };
+
         if (node.Attributes.TryGetValue("tooltip", out var tooltip) && tooltip.StringValue != null)
             icon.ToolTip = tooltip.StringValue;
+
         control = icon;
         return true;
     }
