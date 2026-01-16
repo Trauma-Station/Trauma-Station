@@ -295,6 +295,43 @@
         doAfter: 10
       - tool: Screwing
         doAfter: 3
+    - to: Devastator
+      steps:
+      - material: RevGunParts
+        amount: 4
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tool: Anchoring
+        doAfter: 1
+      - material: WoodPlank
+        amount: 5
+        doAfter: 1
+      - tool: Slicing
+        doAfter: 1
+      - tag: ModularReceiver
+        name: construction-graph-tag-modular-receiver
+        icon:
+          sprite: Objects/Misc/modular_receiver.rsi
+          state: icon
+      - material: RevBolt
+        amount: 5
+        doAfter: 1
+      - material: RevNut
+        amount: 5
+        doAfter: 1
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - material: RevGunParts
+
   - node: liberator
     entity: WeaponPistolLiberatorEmpty
   - node: resistance
@@ -303,6 +340,8 @@
     entity: WeaponLauncherRPG2
   - node: Flamethrower
     entity: ClothingBackpackFlamethrower # Temp
+  - node: Devastator
+    entity: WeaponShotgunDevastatorEmpty
 
 - type: constructionGraph
   id: RevIED
