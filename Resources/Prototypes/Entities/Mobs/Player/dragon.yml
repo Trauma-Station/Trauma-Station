@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ AppearanceDragon, SimpleSpaceMobBase, FlyingMobBase ] # Shitmed
+  parent: [ SimpleSpaceMobBase, FlyingMobBase ]
   id: BaseMobDragon
   suffix: ""
   name: space dragon
@@ -7,7 +7,6 @@
   abstract: true
   components:
   - type: Bloodstream
-    bleedReductionAmount: 5 #goob
     bloodReferenceSolution:
       reagents:
       - ReagentId: Blood
@@ -23,9 +22,6 @@
     - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
-    requirements: # Goobstation - ghost roles requirements
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
   - type: GhostTakeoverAvailable
   - type: HTN
     rootTask:
@@ -119,7 +115,9 @@
     solutionOnBody: false
     updateInterval: 0.25
     metabolizerTypes: [ Dragon ]
-    stages: [ Digestion, Bloodstream ]
+    groups:
+    - id: Medicine
+    - id: Poison
   - type: Butcherable
     spawned:
     - id: FoodMeatDragon
@@ -142,18 +140,16 @@
   - type: Devourer
     foodPreferenceWhitelist:
       components:
-      - HumanoidProfile
+      - HumanoidAppearance
     stomachStorageWhitelist:
       components:
       - MobState
-      - Item
     chemical: Ichor
     healRate: 7.5
     whitelist:
       components:
       - MobState
       - Door
-      - Item
       tags:
       - Wall
   - type: Tag
@@ -161,14 +157,6 @@
     - CannotSuicide
     - DoorBumpOpener
     - StunImmune
-  # Goobstation - Collective mind
-  - type: CollectiveMind
-    defaultChannel: Dragonmind
-    channels:
-    - Dragonmind
-  - type: Damageable # Goobstation
-    damageContainer: Biological
-    damageModifierSet: Dragon
   - type: Puller
     needsHands: false
   - type: RandomMetadata
@@ -176,24 +164,14 @@
     - NamesDragon
     - NamesDragonTitle
     nameFormat: name-format-dragon
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
-  - type: Fauna # Lavaland Change
   - type: Prying
     pryPowered: true
     force: true
     speedModifier: 2.5 # fast because dragon strong
     useSound:
       path: /Audio/Items/crowbar.ogg
-  - type: LanguageSpeaker # Trauma - carp language (keeping basic as an option because the space monster gloating is funny)
-    speaks:
-    - TauCetiBasic
-    - Carptongue
-    understands:
-    - TauCetiBasic
-    - Carptongue
+  - type: Waypointer
+    waypointerProtoId: StationAnchorWaypointer
 
 - type: entity
   parent: BaseMobDragon
@@ -201,17 +179,12 @@
   components:
   - type: Dragon
     spawnRiftAction: ActionSpawnRift
-    carpRiftHealing:
-      groups:
-        Brute: -4
-        Burn: -4
-        Airloss: -3
   - type: GhostRole
     mindRoles:
     - MindRoleDragon
-  #- type: ActionGun # Goobstation - remove fireball because it's tied to lungs now
-  #  action: ActionDragonsBreath
-  #  gunProto: DragonsBreathGun
+  - type: ActionGun
+    action: ActionDragonsBreath
+    gunProto: DragonsBreathGun
   - type: GuideHelp
     guides:
     - MinorAntagonists
@@ -296,7 +269,6 @@
       components:
       - MobState
       - Door
-      - Item # Goobstation
       tags:
       - Wall
     event: !type:DevourActionEvent
@@ -317,35 +289,3 @@
     range: 0
   - type: WorldTargetAction
     event: !type:ActionGunShootEvent
-
-# Goobstation start: dragon rework
-- type: entity
-  parent: BaseAction
-  id: ActionRiseFish
-  name: Summon Carp Horde
-  description: Summons 3 carps on the spot to protect you from danger!
-  components:
-  - type: Action
-    icon:
-      sprite: _Goobstation/Actions/dragon.rsi
-      state: carp_horde
-    useDelay: 90
-    priority: 4
-  - type: InstantAction
-    event: !type:DragonSpawnCarpHordeActionEvent
-
-- type: entity
-  parent: BaseAction
-  id: ActionDragonRoar
-  name: Wing flap
-  description: Flap your wings to stun all enemies around you!
-  components:
-  - type: Action
-    icon:
-      sprite: _Goobstation/Actions/dragon.rsi
-      state: wing_flap
-    useDelay: 45
-    priority: 5
-  - type: InstantAction
-    event: !type:DragonRoarActionEvent
-# Goobstation end
