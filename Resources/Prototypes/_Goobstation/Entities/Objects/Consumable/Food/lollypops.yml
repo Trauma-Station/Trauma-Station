@@ -32,7 +32,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  parent: [FoodBase, FoodInjectableBase]
+  parent: [FoodUnperishableBase, FoodInjectableBase] # Trauma - Update lollypops to not rot
   id: FoodSnackLollypopBase
   abstract: true
   description: A plain old lollypop. It's cherry flavoured.

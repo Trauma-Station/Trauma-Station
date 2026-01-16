@@ -1482,3 +1482,27 @@ Entries:
         the map pool.
   id: 176
   time: '2026-01-16T08:40:55.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Fix
+      message: Fixed Crit killing just ghosting you
+  id: 177
+  time: '2026-01-16T15:48:49.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Added Hideo Kojima to the credits.
+  id: 178
+  time: '2026-01-16T17:03:56.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed Box station's power in medbay.
+  id: 179
+  time: '2026-01-16T19:38:27.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Fix
+      message: Tinned food and lollypops no longer rot into slop.
+  id: 180
+  time: '2026-01-16T19:55:09.0000000+00:00'
