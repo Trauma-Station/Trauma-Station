@@ -93,6 +93,7 @@
   cost: 7500
   recipeUnlocks:
   - ExperimentalCircuitBoard
+  - AiRemoteBrain # Trauma - Move boris module further down techtree
   position: -4,0
   technologyPrerequisites:
   - AdvancedAnomalyResearch
