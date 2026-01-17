@@ -1670,7 +1670,8 @@ public sealed partial class WoundSystem
 
         foreach (var woundEntity in targetWoundable.Wounds.ContainedEntities.ToList())
         {
-            yield return (woundEntity, Comp<WoundComponent>(woundEntity));
+            if (!Deleted(woundEntity))
+                yield return (woundEntity, Comp<WoundComponent>(woundEntity));
         }
     }
 
