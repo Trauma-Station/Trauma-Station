@@ -4,3 +4,12 @@
   result: WeaponBillyClub
   materials:
     Wood: 400
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeSidearm
+  id: WeaponLaserSidearm
+  result: WeaponLaserSidearm
+  materials:
+    Steel: 500
+    Glass: 500
+    Plastic: 500

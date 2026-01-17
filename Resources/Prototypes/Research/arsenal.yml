@@ -266,6 +266,7 @@
   recipeUnlocks:
   - WeaponLaserCannon
   - WeaponMechCombatSolarisLaser # Goobstation
+  - WeaponLaserSidearm # Trauma
   # Goobstation R&D Console rework start
   position: 5,0
   technologyPrerequisites:
