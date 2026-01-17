@@ -10,6 +10,6 @@
   id: WeaponLaserSidearm
   result: WeaponLaserSidearm
   materials:
-    Steel: 500
-    Glass: 500
+    Steel: 1000
+    Glass: 800
     Plastic: 500
