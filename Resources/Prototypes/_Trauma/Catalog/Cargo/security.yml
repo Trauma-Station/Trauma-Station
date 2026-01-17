@@ -1,0 +1,9 @@
+- type: cargoProduct
+  id: SecurityWeaponLaserSidearm
+  icon:
+    sprite: Objects/Weapons/Guns/Battery/disabler.rsi
+    state: base
+  product: CrateSecurityWeaponLaserSidearm
+  cost: 4000
+  category: cargoproduct-category-name-security
+  group: market
