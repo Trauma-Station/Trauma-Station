@@ -192,23 +192,6 @@
         tableId: FillGunSafeDisabler
 
 - type: entityTable
-  id: FillGunSafeDisabler
-  table: !type:AllSelector
-    children:
-    - id: WeaponDisabler
-      amount: 5
-
-- type: entity
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
-  id: GunSafePhaser
-  name: phaser safe
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:NestedSelector
-        tableId: FillGunSafePhaser
-
-- type: entityTable
   id: FillGunSafePhaser
   table: !type:AllSelector
     children:

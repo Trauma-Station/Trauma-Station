@@ -110,6 +110,18 @@
       entity_storage: !type:NestedSelector
         tableId: FillGunSafeRiot
 
+- type: entity
+  parent: BaseTraumaGunSafe
+  id: GunSafePhaser
+  name: phaser safe
+  components:
+  - type: StationAlertLevelLock
+    lockedAlertLevels: []
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillGunSafePhaser
+
 - type: entityTable
   id: FillGunSafeRiot
   table: !type:AllSelector
@@ -155,3 +167,10 @@
     children:
     - id: ClothingBeltCorporateJudo
       amount: 2
+
+- type: entityTable
+  id: FillGunSafeDisabler
+  table: !type:AllSelector
+    children:
+    - id: WeaponDisabler
+      amount: 5
