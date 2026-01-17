@@ -29,6 +29,7 @@ using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Gibbing.Events;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Standing;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
@@ -42,6 +43,7 @@ public sealed partial class WoundSystem
 {
     private const string WoundContainerId = "Wounds";
     private const string BoneContainerId = "Bone";
+
     private void InitWounding()
     {
         SubscribeLocalEvent<WoundableComponent, ComponentInit>(OnWoundableInit);
@@ -124,8 +126,7 @@ public sealed partial class WoundSystem
         var ev = new WoundRemovedEvent(wound, oldParentWoundable, oldWoundableRoot);
         RaiseLocalEvent(wound.HoldingWoundable, ref ev);
 
-        if (_net.IsServer && !IsClientSide(woundableEntity))
-            QueueDel(woundableEntity);
+        PredictedQueueDel(woundableEntity);
     }
 
     private void OnWoundableInserted(EntityUid parentEntity, WoundableComponent parentWoundable, EntInsertedIntoContainerMessage args)
@@ -264,8 +265,7 @@ public sealed partial class WoundSystem
     {
         // Skip if there was no damage delta or if wounds aren't allowed
         if (args.UncappedDamage == null // Goobstation
-            || !component.AllowWounds
-            || !_net.IsServer)
+            || !component.AllowWounds)
             return;
 
         // Create or update wounds based on damage changes
@@ -412,11 +412,10 @@ public sealed partial class WoundSystem
     {
         woundCreated = null;
 
-        if (!IsWoundPrototypeValid(woundProtoId)
-            || !Resolve(uid, ref woundable))
+        if (!IsWoundPrototypeValid(woundProtoId) || !Resolve(uid, ref woundable) || !_timing.IsFirstTimePredicted)
             return false;
 
-        var wound = Spawn(woundProtoId);
+        var wound = EntityManager.PredictedSpawn(woundProtoId);
         if (AddWound(uid, wound, severity, damageGroup))
         {
             woundCreated = (wound, Comp<WoundComponent>(wound));
@@ -424,8 +423,7 @@ public sealed partial class WoundSystem
         else
         {
             // The wound failed some important checks, and we cannot let an invalid wound to be spawned!
-            if (_net.IsServer && !IsClientSide(wound))
-                QueueDel(wound);
+            PredictedQueueDel(wound);
 
             return false;
         }
@@ -654,15 +652,13 @@ public sealed partial class WoundSystem
         string identifier,
         WoundableComponent? component = null)
     {
-        if (!Resolve(uid, ref component)
-            || component.Wounds == null
-            || !_net.IsServer)
+        if (!Resolve(uid, ref component) || component.Wounds is not {} wounds)
             return false;
 
         if (!component.SeverityMultipliers.TryAdd(owner, new WoundableSeverityMultiplier(change, identifier)))
             return false;
 
-        foreach (var wound in component.Wounds.ContainedEntities)
+        foreach (var wound in wounds.ContainedEntities)
             CheckSeverityThresholds(wound, uid, woundableComp: component);
 
         UpdateWoundableIntegrity(uid, component);
@@ -682,17 +678,18 @@ public sealed partial class WoundSystem
         string identifier,
         WoundableComponent? component = null)
     {
-        if (!Resolve(uid, ref component)
-            || component.Wounds == null
-            || !_net.IsServer)
+        if (!Resolve(uid, ref component) || component.Wounds is not {} wounds)
             return false;
 
-        foreach (var multiplier in component.SeverityMultipliers.Where(multiplier => multiplier.Value.Identifier == identifier))
+        foreach (var multiplier in component.SeverityMultipliers)
         {
+            if (multiplier.Value.Identifier != identifier)
+                continue;
+
             if (!component.SeverityMultipliers.Remove(multiplier.Key, out _))
                 return false;
 
-            foreach (var wound in component.Wounds.ContainedEntities)
+            foreach (var wound in wounds.ContainedEntities)
                 CheckSeverityThresholds(wound, uid, woundableComp: component);
 
             UpdateWoundableIntegrity(uid, component);
@@ -717,19 +714,20 @@ public sealed partial class WoundSystem
         FixedPoint2 change,
         WoundableComponent? component = null)
     {
-        if (!Resolve(uid, ref component)
-            || component.Wounds == null
-            || !_net.IsServer)
+        if (!Resolve(uid, ref component) || component.Wounds is not {} wounds)
             return false;
 
-        foreach (var multiplier in component.SeverityMultipliers.Where(multiplier => multiplier.Value.Identifier == identifier))
+        foreach (var multiplier in component.SeverityMultipliers)
         {
+            if (multiplier.Value.Identifier != identifier)
+                continue;
+
             component.SeverityMultipliers.Remove(multiplier.Key, out var value);
 
             value.Change = change;
             component.SeverityMultipliers.Add(multiplier.Key, value);
 
-            foreach (var wound in component.Wounds.ContainedEntities.ToList())
+            foreach (var wound in wounds.ContainedEntities.ToList())
                 CheckSeverityThresholds(wound, uid, woundableComp: component);
 
             UpdateWoundableIntegrity(uid, component);
@@ -751,137 +749,117 @@ public sealed partial class WoundSystem
         if (!TryComp<BodyPartComponent>(woundableEntity, out var bodyPart))
             return;
 
-        if (bodyPart.Body == null)
+        if (bodyPart.Body is not {} body)
         {
             DropWoundableOrgans(woundableEntity, woundableComp);
-            if (_net.IsServer && !IsClientSide(woundableEntity))
-                QueueDel(woundableEntity);
+            PredictedQueueDel(woundableEntity);
+            return;
         }
-        else
+
+        if (bodyPart.ToHumanoidLayers() == null) // TODO: why is this shitcode here
+            return;
+
+        // if wounds amount somehow changes it triggers an enumeration error. owch
+        woundableComp.WoundableSeverity = WoundableSeverity.Severed;
+
+        if (TryComp<TargetingComponent>(body, out var targeting))
         {
-            var body = bodyPart.Body.Value;
-            var key = bodyPart.ToHumanoidLayers();
-            if (key == null)
-                return;
+            targeting.BodyStatus = GetWoundableStatesOnBodyPainFeels(body);
+            Dirty(body, targeting);
 
-            // if wounds amount somehow changes it triggers an enumeration error. owch
-            woundableComp.WoundableSeverity = WoundableSeverity.Severed;
+            if (_net.IsServer)
+                RaiseNetworkEvent(new TargetIntegrityChangeEvent(GetNetEntity(body)), body);
+        }
 
-            if (TryComp<TargetingComponent>(body, out var targeting))
+        _audio.PlayPvs(woundableComp.WoundableDestroyedSound, body);
+        _appearance.SetData(woundableEntity,
+            WoundableVisualizerKeys.Wounds,
+            new WoundVisualizerGroupData(GetWoundableWounds(woundableEntity).Select(ent => GetNetEntity(ent)).ToList()));
+
+        if (TryInduceWound(parentWoundableEntity, "Blunt", 0f, out var woundInduced))
+        {
+            var traumaInflicter = EnsureComp<TraumaInflicterComponent>(woundInduced.Value.Owner);
+
+            _trauma.AddTrauma(
+                parentWoundableEntity,
+                (parentWoundableEntity, Comp<WoundableComponent>(parentWoundableEntity)),
+                (woundInduced.Value.Owner, traumaInflicter),
+                TraumaType.Dismemberment,
+                15f,
+                (bodyPart.PartType, bodyPart.Symmetry));
+
+            // Goobstation start
+            var bleedInflicter = EnsureComp<BleedInflicterComponent>(woundInduced.Value.Owner);
+            bleedInflicter.BleedingAmountRaw += 20f;
+            bleedInflicter.Scaling = 1f;
+            bleedInflicter.ScalingLimit = 1f;
+            bleedInflicter.IsBleeding = true;
+            // Goobstation end
+        }
+
+        Dirty(woundableEntity, woundableComp);
+
+        if (IsWoundableRoot(woundableEntity, woundableComp))
+        {
+            /*DropWoundableOrgans(woundableEntity, woundableComp);
+            DestroyWoundableChildren(woundableEntity, woundableComp);
+            _body.GibBody(bodyPart.Body.Value);
+
+            if (_net.IsServer)
             {
-                targeting.BodyStatus = GetWoundableStatesOnBodyPainFeels(body);
-                Dirty(body, targeting);
+                if (!IsClientSide(woundableEntity))
+                    QueueDel(woundableEntity); // More blood for the blood God!
 
-                if (_net.IsServer)
-                    RaiseNetworkEvent(new TargetIntegrityChangeEvent(GetNetEntity(body)), body);
-            }
-
-            _audio.PlayPvs(woundableComp.WoundableDestroyedSound, body);
-            _appearance.SetData(woundableEntity,
-                WoundableVisualizerKeys.Wounds,
-                new WoundVisualizerGroupData(GetWoundableWounds(woundableEntity).Select(ent => GetNetEntity(ent)).ToList()));
-
-            if (TryInduceWound(parentWoundableEntity, "Blunt", 0f, out var woundInduced))
-            {
-                var traumaInflicter = EnsureComp<TraumaInflicterComponent>(woundInduced.Value.Owner);
-
-                _trauma.AddTrauma(
-                    parentWoundableEntity,
-                    (parentWoundableEntity, Comp<WoundableComponent>(parentWoundableEntity)),
-                    (woundInduced.Value.Owner, traumaInflicter),
-                    TraumaType.Dismemberment,
-                    15f,
-                    (bodyPart.PartType, bodyPart.Symmetry));
-
-                // Goobstation start
-                var bleedInflicter = EnsureComp<BleedInflicterComponent>(woundInduced.Value.Owner);
-                bleedInflicter.BleedingAmountRaw += 20f;
-                bleedInflicter.Scaling = 1f;
-                bleedInflicter.ScalingLimit = 1f;
-                bleedInflicter.IsBleeding = true;
-                // Goobstation end
-            }
-
-            Dirty(woundableEntity, woundableComp);
-
-            if (IsWoundableRoot(woundableEntity, woundableComp))
-            {
-                /*DropWoundableOrgans(woundableEntity, woundableComp);
-                DestroyWoundableChildren(woundableEntity, woundableComp);
                 _body.GibBody(bodyPart.Body.Value);
-
-                if (_net.IsServer)
-                {
-                    if (!IsClientSide(woundableEntity))
-                        QueueDel(woundableEntity); // More blood for the blood God!
-
-                    _body.GibBody(bodyPart.Body.Value);
-                }
-                }*/
             }
-            else
+            }*/
+            return;
+        }
+
+        if (!_container.TryGetContainingContainer(parentWoundableEntity, woundableEntity, out var container))
+            return;
+
+        if (TryComp<InventoryComponent>(body, out var inventory) // Prevent error for non-humanoids
+            && _body.GetBodyPartCount(body, bodyPart.PartType) == 1
+            && _body.TryGetPartSlotContainerName(bodyPart.PartType, out var containerNames))
+        {
+            foreach (var containerName in containerNames)
             {
-                if (!_container.TryGetContainingContainer(parentWoundableEntity, woundableEntity, out var container))
-                    return;
-
-                if (TryComp<InventoryComponent>(body, out var inventory) // Prevent error for non-humanoids
-                    && _body.GetBodyPartCount(body, bodyPart.PartType) == 1
-                    && _body.TryGetPartSlotContainerName(bodyPart.PartType, out var containerNames))
-                {
-                    foreach (var containerName in containerNames)
-                    {
-                        _inventory.DropSlotContents(body, containerName, inventory);
-                    }
-                }
-                var bodyPartId = container.ID;
-
-                // Prevent anomalous behaviour
-                if (bodyPart.PartType is BodyPartType.Hand or BodyPartType.Arm)
-                    _hands.TryDrop(body, woundableEntity);
-
-                DropWoundableOrgans(woundableEntity, woundableComp);
-
-                if (TryInduceWound(parentWoundableEntity, "Blunt", 0f, out var woundEnt))
-                {
-                    _trauma.AddTrauma(
-                        parentWoundableEntity,
-                        (parentWoundableEntity, Comp<WoundableComponent>(parentWoundableEntity)),
-                        (woundEnt.Value.Owner, EnsureComp<TraumaInflicterComponent>(woundEnt.Value.Owner)),
-                        TraumaType.Dismemberment,
-                        15f);
-
-                    // Goobstation start
-                    var bleedInflicter = EnsureComp<BleedInflicterComponent>(parentWoundableEntity);
-                    bleedInflicter.BleedingAmountRaw += 20f;
-                    bleedInflicter.Scaling = 1f;
-                    bleedInflicter.ScalingLimit = 1f;
-                    bleedInflicter.IsBleeding = true;
-                    // Goobstation end
-                }
-                // Goobstation start - commented out
-                /*foreach (var wound in GetWoundableWounds(parentWoundableEntity))
-                {
-                    if (!TryComp<BleedInflicterComponent>(wound, out var bleeds)
-                        || !TryComp<WoundableComponent>(parentWoundableEntity, out var parentWoundable)
-                        || !parentWoundable.CanBleed)
-                        continue;
-
-                    // Bleeding :3
-                    //bleeds.ScalingLimit += 6;
-                }*/
-                // Goobstation end
-
-                _body.DetachPart(parentWoundableEntity, bodyPartId.Remove(0, 15), woundableEntity);
-                DestroyWoundableChildren(woundableEntity, woundableComp);
-
-
-                foreach (var wound in GetWoundableWounds(woundableEntity, woundableComp))
-                    TransferWoundDamage(parentWoundableEntity, woundableEntity, wound, body);
-
-                if (_net.IsServer && !IsClientSide(woundableEntity))
-                    QueueDel(woundableEntity);
+                _inventory.DropSlotContents(body, containerName, inventory);
             }
         }
+        var bodyPartId = container.ID;
+
+        // Prevent anomalous behaviour
+        if (bodyPart.PartType is BodyPartType.Hand or BodyPartType.Arm)
+            _hands.TryDrop(body, woundableEntity);
+
+        DropWoundableOrgans(woundableEntity, woundableComp);
+
+        if (TryInduceWound(parentWoundableEntity, "Blunt", 0f, out var woundEnt))
+        {
+            _trauma.AddTrauma(
+                parentWoundableEntity,
+                (parentWoundableEntity, Comp<WoundableComponent>(parentWoundableEntity)),
+                (woundEnt.Value.Owner, EnsureComp<TraumaInflicterComponent>(woundEnt.Value.Owner)),
+                TraumaType.Dismemberment,
+                15f);
+
+            var bleedInflicter = EnsureComp<BleedInflicterComponent>(parentWoundableEntity);
+            bleedInflicter.BleedingAmountRaw += 20f;
+            bleedInflicter.Scaling = 1f;
+            bleedInflicter.ScalingLimit = 1f;
+            bleedInflicter.IsBleeding = true;
+        }
+
+        _body.DetachPart(parentWoundableEntity, bodyPartId.Remove(0, 15), woundableEntity);
+        DestroyWoundableChildren(woundableEntity, woundableComp);
+
+
+        foreach (var wound in GetWoundableWounds(woundableEntity, woundableComp))
+            TransferWoundDamage(parentWoundableEntity, woundableEntity, wound, body);
+
+        PredictedQueueDel(woundableEntity);
     }
 
     /// <summary>
@@ -932,18 +910,15 @@ public sealed partial class WoundSystem
             // Goobstation end
         }
 
-
-        if (!_net.IsServer)
-            return;
-
-        var direction = _random.NextAngle().ToWorldVec();
-        var dropAngle = _random.NextFloat(0.8f, 1.2f);
+        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(woundableEntity).Id);
+        var rand = new System.Random(seed);
+        var direction = rand.NextAngle().ToWorldVec();
         var worldRotation = _transform.GetWorldRotation(woundableEntity).ToVec();
 
         _throwing.TryThrow(
             woundableEntity,
-            _random.NextAngle().ToWorldVec() * _random.NextFloat(0.8f, 5f),
-            _random.NextFloat(0.5f, 1f),
+            direction,
+            rand.NextFloat(0.5f, 1f),
             pushbackRatio: 0.3f
         );
     }
@@ -1019,14 +994,16 @@ public sealed partial class WoundSystem
             {
                 // TODO: SFX for organs getting not destroyed, but thrown out
                 _body.RemoveOrgan(organ.Id, organ.Component);
-                var direction = _random.NextAngle().ToWorldVec();
-                var dropAngle = _random.NextFloat(0.8f, 1.2f);
+                var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(woundable).Id);
+                var rand = new System.Random(seed);
+                var direction = rand.NextAngle().ToWorldVec();
+                var dropAngle = rand.NextFloat(0.8f, 1.2f);
                 var worldRotation = _transform.GetWorldRotation(organ.Id).ToVec();
 
                 _throwing.TryThrow(
                     organ.Id,
-                    _random.NextAngle().RotateVec(direction / dropAngle + worldRotation / 50),
-                    0.5f * dropAngle * _random.NextFloat(-0.9f, 1.1f),
+                    rand.NextAngle().RotateVec(direction / dropAngle + worldRotation / 50),
+                    0.5f * dropAngle * rand.NextFloat(-0.9f, 1.1f),
                     doSpin: false,
                     pushbackRatio: 0
                 );
@@ -1137,8 +1114,7 @@ public sealed partial class WoundSystem
         WoundableComponent? woundableComponent = null,
         WoundComponent? woundComponent = null)
     {
-        if (!_net.IsServer
-            || !Resolve(target, ref woundableComponent)
+        if (!Resolve(target, ref woundableComponent)
             || !Resolve(wound, ref woundComponent)
             || woundableComponent.Wounds == null
             || woundableComponent.Wounds.Contains(wound)
@@ -1288,9 +1264,7 @@ public sealed partial class WoundSystem
         WoundComponent? component = null,
         WoundableComponent? woundableComp = null)
     {
-        if (!Resolve(wound, ref component, false)
-            || !Resolve(woundable, ref woundableComp)
-            || !_net.IsServer)
+        if (!Resolve(wound, ref component, false) || !Resolve(woundable, ref woundableComp))
             return;
 
         var nearestSeverity = component.WoundSeverity;
@@ -1313,6 +1287,7 @@ public sealed partial class WoundSystem
             RaiseLocalEvent(wound, ref ev);
         }
         component.WoundSeverity = nearestSeverity;
+        Dirty(wound, component);
 
         if (!TerminatingOrDeleted(component.HoldingWoundable))
         {

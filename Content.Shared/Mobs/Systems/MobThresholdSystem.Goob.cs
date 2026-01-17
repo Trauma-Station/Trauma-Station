@@ -7,8 +7,18 @@ using Content.Shared.Body.Part;
 
 namespace Content.Shared.Mobs.Systems;
 
+/// <summary>
+/// Goob - vital damage API.
+/// </summary>
 public sealed partial class MobThresholdSystem
 {
+    private static readonly BodyPartType[] _criticalParts = new[]
+    {
+        BodyPartType.Head,
+        BodyPartType.Chest,
+        BodyPartType.Groin
+    };
+
     /// <summary>
     /// Calculates the total damage from vital body parts (Head, Chest, Groin), for complex-bodies.
     /// For non-complex bodies or if no vital parts are found, returns the total damage from the target entity.
@@ -20,33 +30,22 @@ public sealed partial class MobThresholdSystem
     {
         var damage = damageableComponent.TotalDamage;
 
-        if (!TryComp(target, out BodyComponent? body) ||
-            body.BodyType != BodyType.Complex)
+        if (!_bodyQuery.TryComp(target, out var body) || body.BodyType != BodyType.Complex)
             return damage;
 
         if (body.RootContainer?.ContainedEntity is not { } rootPart)
             return damage;
 
-        FixedPoint2 result = FixedPoint2.Zero;
-
-        var criticalParts = new[]
-        {
-            BodyPartType.Head,
-            BodyPartType.Chest,
-            BodyPartType.Groin
-        };
-
+        var result = FixedPoint2.Zero;
         foreach (var (woundable, _) in _wound.GetAllWoundableChildren(rootPart))
         {
-            if (!TryComp(woundable, out DamageableComponent? wdc) ||
-                !TryComp(woundable, out BodyPartComponent? bpc))
+            if (!_partQuery.TryComp(woundable, out var part))
                 continue;
 
-            if (criticalParts.Contains(bpc.PartType))
-                result += wdc.TotalDamage;
+            if (_criticalParts.Contains(part.PartType) && _damageQuery.TryComp(woundable, out var partDamage))
+                result += partDamage.TotalDamage;
         }
 
         return result;
     }
-
 }

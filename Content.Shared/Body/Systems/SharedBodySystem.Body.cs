@@ -25,6 +25,7 @@ using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Systems;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Humanoid;
@@ -34,7 +35,6 @@ using Content.Shared.Standing;
 using Robust.Shared.Network;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Popups;
-using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 using Content.Goobstation.Maths.FixedPoint;
 
@@ -57,12 +57,10 @@ public partial class SharedBodySystem
     [Dependency] private readonly WoundSystem _woundSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TraumaSystem _trauma = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
     // Shitmed Change End
 
     private const float GibletLaunchImpulse = 8;
     private const float GibletLaunchImpulseVariance = 3;
-    private float _medicalHealingTickrate = 2f;
 
     private void InitializeBody()
     {
@@ -79,8 +77,7 @@ public partial class SharedBodySystem
         SubscribeLocalEvent<BodyComponent, AttemptStopPullingEvent>(OnAttemptStopPulling); // Goobstation
 
         // Shitmed Change: to prevent people from falling immediately as rejuvenated
-        SubscribeLocalEvent<BodyComponent, RejuvenateEvent>(OnRejuvenate);
-        Subs.CVar(_cfg, SurgeryCVars.MedicalHealingTickrate, val => _medicalHealingTickrate = val, true);
+        SubscribeLocalEvent<BodyComponent, RejuvenateEvent>(OnRejuvenate, before: [ typeof(DamageableSystem) ]);
     }
 
     private void OnAttemptStopPulling(Entity<BodyComponent> ent, ref AttemptStopPullingEvent args) // Goobstation
@@ -527,6 +524,10 @@ public partial class SharedBodySystem
     private void OnRejuvenate(EntityUid ent, BodyComponent body, ref RejuvenateEvent args)
     {
         RestoreBody((ent, body)); // Goobstation
+        foreach (var part in GetBodyChildren(ent, body))
+        {
+            RaiseLocalEvent(part.Id, args);
+        }
     }
 
     // Goob edit start

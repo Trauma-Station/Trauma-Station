@@ -395,7 +395,7 @@ public partial class WoundSystem
 
     public bool TryAddHealingRateMultiplier(EntityUid owner, EntityUid woundable, string identifier, FixedPoint2 change, WoundableComponent? component = null)
     {
-        if (!Resolve(woundable, ref component) || !_net.IsServer)
+        if (!Resolve(woundable, ref component))
             return false;
 
         return component.HealingMultipliers.TryAdd(owner, new WoundableHealingMultiplier(change, identifier));
@@ -403,7 +403,7 @@ public partial class WoundSystem
 
     public bool TryRemoveHealingRateMultiplier(EntityUid owner, EntityUid woundable, WoundableComponent? component = null)
     {
-        if (!Resolve(woundable, ref component)  || !_net.IsServer)
+        if (!Resolve(woundable, ref component))
             return false;
 
         return component.HealingMultipliers.Remove(owner);
