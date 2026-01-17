@@ -37,6 +37,7 @@
     - id: ClothingHeadsetAltSecurityRegular
     - id: PanicButton
     - id: PepperSpray
+    - id: WeaponLaserSidearm
 
 - type: entity
   parent: BaseTraumaGunSafe
