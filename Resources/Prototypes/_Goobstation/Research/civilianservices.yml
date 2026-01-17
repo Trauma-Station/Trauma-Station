@@ -31,7 +31,7 @@
   - PrescriptionGlasses
   - EnvirosuitExtinguisherRefill
   - TinfoilHats
-  position: 3,6
+  position: 3,4
   technologyPrerequisites:
   - AdvancedEntertainment
 
@@ -46,7 +46,7 @@
   cost: 5000
   recipeUnlocks:
   - SyringeGun
-  position: 3,8
+  position: 3,6
   technologyPrerequisites:
   - BiochemicalStasis
 
@@ -61,7 +61,7 @@
   cost: 7500
   recipeUnlocks:
   - HandheldCrewMonitor
-  position: 4,8
+  position: 4,6
   technologyPrerequisites:
   - BiochemicalStasis
 
@@ -78,7 +78,7 @@
   cost: 10000
   recipeUnlocks:
   - TelecomTransmitterCircuitboard
-  position: 2,7
+  position: 2,5
   technologyPrerequisites:
   - AudioVisualCommunication
 
@@ -96,7 +96,7 @@
   - TapeDeckCircuitboard
   - StationRadioServerCircuitboard
   - StationRadioRigCircuitboard
-  position: 2,8
+  position: 2,6
   technologyPrerequisites:
   - ExtendedCommunications
 

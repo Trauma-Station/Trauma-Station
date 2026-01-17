@@ -24,7 +24,7 @@
   recipeUnlocks:
   - TeslaCoilCircuitboard
   - RadiationCollectorCircuitboard
-  position: 1,-7
+  position: 1,-2
   technologyPrerequisites:
   - PowerGeneration
 
@@ -41,7 +41,7 @@
   - ConstructionBagOfHolding
   technologyPrerequisites:
   - AdvancedToolsTechnology
-  position: 3, -9
+  position: 3, -4
 
 - type: technology
   id: Plumbing
@@ -54,6 +54,6 @@
   cost: 6500
   recipeUnlocks:
   - PlumbingPumpCircuitboard
-  position: 1,-11
+  position: 1,-4
   technologyPrerequisites:
   - IndustrialEngineering

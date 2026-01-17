@@ -10,7 +10,6 @@
   recipeUnlocks:
   - ProximitySensor
   - Drone
-  - AiRemoteBrain
   position: -4,2
 
 - type: technology
