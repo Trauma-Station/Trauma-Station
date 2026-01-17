@@ -132,6 +132,7 @@
   - WeaponLaserCarbine
   - WeaponMechCombatFiredartLaser # Goobstation
   - PowerCellIonRevolver # Goobstation
+  - WeaponLaserSidearm # Trauma
   # Goobstation R&D Console rework start
   position: 4,0
   technologyPrerequisites:
@@ -266,7 +267,6 @@
   recipeUnlocks:
   - WeaponLaserCannon
   - WeaponMechCombatSolarisLaser # Goobstation
-  - WeaponLaserSidearm # Trauma
   # Goobstation R&D Console rework start
   position: 5,0
   technologyPrerequisites:
