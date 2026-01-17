@@ -217,6 +217,28 @@
   - SpaceScanning
   # Goobstation R&D Console rework end
 
+- type: technology
+  id: RipleyAPLU
+  name: research-technology-ripley-aplu
+  icon:
+    sprite: Objects/Specific/Mech/mecha.rsi
+    state: ripley
+  discipline: Robotics # Trauma
+  tier: 1
+  cost: 7500
+  recipeUnlocks:
+  - RipleyHarness
+  - RipleyLArm
+  - RipleyRArm
+  - RipleyLLeg
+  - RipleyRLeg
+  - RipleyCentralElectronics
+  - RipleyPeripheralsElectronics
+  - MechEquipmentGrabber
+  position: -6,2
+  technologyPrerequisites:
+  - BasicRobotics
+
 # Tier 2
 
 - type: technology

@@ -35,7 +35,7 @@
   icon:
     sprite: Structures/Machines/exosuit_fabricator.rsi
     state: fab-idle
-  discipline: Robotics
+  discipline: Robotics # Trauma
   tier: 1
   cost: 5000
   recipeUnlocks:

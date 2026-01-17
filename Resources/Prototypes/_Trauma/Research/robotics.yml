@@ -36,28 +36,6 @@
   - RipleyAPLU
 
 - type: technology
-  id: RipleyAPLU
-  name: research-technology-ripley-aplu
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: ripley
-  discipline: Robotics
-  tier: 1
-  cost: 7500
-  recipeUnlocks:
-  - RipleyHarness
-  - RipleyLArm
-  - RipleyRArm
-  - RipleyLLeg
-  - RipleyRLeg
-  - RipleyCentralElectronics
-  - RipleyPeripheralsElectronics
-  - MechEquipmentGrabber
-  position: -6,2
-  technologyPrerequisites:
-  - BasicRobotics
-
-- type: technology
   id: Ripley2
   name: research-technology-ripley-mkii
   icon:

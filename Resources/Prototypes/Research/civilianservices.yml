@@ -27,7 +27,7 @@
   icon:
     sprite: Objects/Specific/Mech/mecha.rsi
     state: hamtr
-  discipline: Robotics
+  discipline: Robotics # Trauma
   tier: 1
   cost: 7500
   recipeUnlocks:
@@ -198,7 +198,7 @@
   icon:
     sprite: Objects/Specific/Mech/mecha.rsi
     state: honker
-  discipline: Robotics
+  discipline: Robotics # Trauma
   tier: 2
   cost: 7500
   recipeUnlocks:
@@ -215,22 +215,6 @@
   technologyPrerequisites:
   - PushHorn
   - RipleyAPLU
-
-- type: technology
-  id: PushHorn
-  name: research-technology-clowning-utilities
-  icon:
-    sprite: Objects/Fun/push_horn.rsi
-    state: icon
-  discipline: Robotics
-  tier: 2
-  cost: 4000
-  recipeUnlocks:
-  - PushHorn
-  - BorgModuleAdvancedClowning
-  position: -7,0
-  technologyPrerequisites:
-  - CritterMechs
 
 - type: technology
   id: AdvancedSpray
@@ -267,6 +251,22 @@
   - MeatManipulation
   - FauxAstroTiles
   # Goobstation R&D Console rework end
+
+- type: technology
+  id: PushHorn
+  name: research-technology-clowning-utilities
+  icon:
+    sprite: Objects/Fun/push_horn.rsi
+    state: icon
+  discipline: Robotics # Trauma
+  tier: 2
+  cost: 4000
+  recipeUnlocks:
+  - PushHorn
+  - BorgModuleAdvancedClowning
+  position: -7,0
+  technologyPrerequisites:
+  - CritterMechs
 
 # Tier 3
 
