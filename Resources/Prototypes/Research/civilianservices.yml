@@ -40,9 +40,11 @@
   - HamtrPeripheralsElectronics
   - MechEquipmentGrabberSmall
   - VimHarness
+  # Goobstation R&D Console rework start
   position: -6,1
   technologyPrerequisites:
   - RipleyAPLU
+  # Goobstation R&D Console rework end
 
 - type: technology
   id: AudioVisualCommunication
@@ -84,7 +86,9 @@
     - MassMediaCircuitboard
     - JukeboxCircuitBoard
     - BorgModuleLollypop # Goobstation
+  # Goobstation R&D Console rework start
   position: 0,3
+  # Goobstation R&D Console rework end
 
 - type: technology
   id: MeatManipulation
@@ -211,10 +215,12 @@
   - HonkerPeripheralsElectronics
   - HonkerTargetingElectronics
   - MechEquipmentHorn
+  # Goobstation R&D Console rework start
   position: -8,0
   technologyPrerequisites:
   - PushHorn
   - RipleyAPLU
+  # Goobstation R&D Console rework end
 
 - type: technology
   id: AdvancedSpray
@@ -264,9 +270,11 @@
   recipeUnlocks:
   - PushHorn
   - BorgModuleAdvancedClowning
+  # Goobstation R&D Console rework start
   position: -7,0
   technologyPrerequisites:
   - CritterMechs
+  # Goobstation R&D Console rework end
 
 # Tier 3
 

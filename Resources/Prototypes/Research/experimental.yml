@@ -41,7 +41,9 @@
   recipeUnlocks:
   - ProximitySensor
   - Drone
+  # Goobstation R&D Console rework start
   position: -4,2
+  # Goobstation R&D Console rework end
 
 - type: technology
   id: BasicAnomalousResearch
