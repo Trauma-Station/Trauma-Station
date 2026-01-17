@@ -4,7 +4,7 @@
   icon:
     sprite: Structures/Machines/exosuit_fabricator.rsi
     state: fab-idle
-  discipline: Robotic
+  discipline: Robotics
   tier: 1
   cost: 5000
   recipeUnlocks:
@@ -18,7 +18,7 @@
   icon:
     sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
     state: ed209
-  discipline: Robotic
+  discipline: Robotics
   tier: 1
   cost: 20000
   recipeUnlocks:
@@ -40,7 +40,7 @@
   icon:
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_diamond_drill
-  discipline: Robotic
+  discipline: Robotics
   tier: 2
   cost: 5000
   recipeUnlocks:
@@ -50,51 +50,12 @@
   - RipleyAPLU
 
 - type: technology
-  id: PushHorn
-  name: research-technology-clowning-utilities
-  icon:
-    sprite: Objects/Fun/push_horn.rsi
-    state: icon
-  discipline: Robotic
-  tier: 2
-  cost: 4000
-  recipeUnlocks:
-  - PushHorn
-  - BorgModuleAdvancedClowning
-  position: -7,0
-  technologyPrerequisites:
-  - CritterMechs
-
-- type: technology
-  id: CritterMechs
-  name: research-technology-critter-mechs
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: hamtr
-  discipline: Robotic
-  tier: 1
-  cost: 7500
-  recipeUnlocks:
-  - HamtrHarness
-  - HamtrLArm
-  - HamtrRArm
-  - HamtrLLeg
-  - HamtrRLeg
-  - HamtrCentralElectronics
-  - HamtrPeripheralsElectronics
-  - MechEquipmentGrabberSmall
-  - VimHarness
-  position: -6,1
-  technologyPrerequisites:
-  - RipleyAPLU
-
-- type: technology
   id: RipleyAPLU
   name: research-technology-ripley-aplu
   icon:
     sprite: Objects/Specific/Mech/mecha.rsi
     state: ripley
-  discipline: Robotic
+  discipline: Robotics
   tier: 1
   cost: 7500
   recipeUnlocks:
@@ -116,7 +77,7 @@
   icon:
     sprite: Objects/Specific/Mech/mecha.rsi
     state: ripleymkii
-  discipline: Robotic
+  discipline: Robotics
   tier: 2
   cost: 8000
   recipeUnlocks:
@@ -132,7 +93,7 @@
   icon:
     sprite: Objects/Specific/Mech/mecha.rsi
     state: clarke
-  discipline: Robotic
+  discipline: Robotics
   tier: 2
   cost: 10000
   recipeUnlocks:
@@ -148,36 +109,12 @@
   position: -7,1
 
 - type: technology
-  id: HONKMech
-  name: research-technology-honk-mech
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: honker
-  discipline: Robotic
-  tier: 2
-  cost: 7500
-  recipeUnlocks:
-  - HonkerHarness
-  - HonkerLArm
-  - HonkerRArm
-  - HonkerLLeg
-  - HonkerRLeg
-  - HonkerCentralElectronics
-  - HonkerPeripheralsElectronics
-  - HonkerTargetingElectronics
-  - MechEquipmentHorn
-  position: -8,0
-  technologyPrerequisites:
-  - PushHorn
-  - RipleyAPLU
-
-- type: technology
   id: HONKWeapons
   name: research-technology-honk-weapons
   icon:
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_bananamrtr
-  discipline: Robotic
+  discipline: Robotics
   tier: 2
   cost: 6000
   recipeUnlocks:
@@ -193,7 +130,7 @@
   icon:
     sprite: Objects/Specific/Mech/mecha.rsi
     state: gygax
-  discipline: Robotic
+  discipline: Robotics
   tier: 2
   cost: 20000
   recipeUnlocks:
@@ -220,7 +157,7 @@
   icon:
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_missilerack
-  discipline: Robotic
+  discipline: Robotics
   tier: 3
   cost: 30000
   recipeUnlocks:
@@ -236,7 +173,7 @@
   icon:
     sprite: Objects/Specific/Mech/mecha.rsi
     state: durand
-  discipline: Robotic
+  discipline: Robotics
   tier: 3
   cost: 40000
   recipeUnlocks:
@@ -262,7 +199,7 @@
   icon:
     sprite: _Shitmed/Mobs/Species/Misc/Cybernetics/organs.rsi
     state: heart-u-on
-  discipline: Robotic
+  discipline: Robotics
   tier: 3
   cost: 15000
   recipeUnlocks:
@@ -287,7 +224,7 @@
   icon:
     sprite: _Shitmed/Mobs/Species/Misc/Cybernetics/organs.rsi
     state: eyes
-  discipline: Robotic
+  discipline: Robotics
   tier: 2
   cost: 10000
   recipeUnlocks:
@@ -314,7 +251,7 @@
   icon:
     sprite: _Shitmed/Objects/Augments/power.rsi
     state: cell
-  discipline: Robotic
+  discipline: Robotics
   tier: 2
   cost: 5000
   position: -5,3
@@ -330,7 +267,7 @@
   icon:
     sprite: _Shitmed/Objects/Augments/arm.rsi
     state: base
-  discipline: Robotic
+  discipline: Robotics
   tier: 2
   cost: 10000
   position: -5,5
@@ -349,7 +286,7 @@
   icon:
     sprite: _Shitmed/Objects/Augments/arm.rsi
     state: strength
-  discipline: Robotic
+  discipline: Robotics
   tier: 2
   cost: 10000
   position: -6,5

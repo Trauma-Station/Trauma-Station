@@ -76,7 +76,7 @@
     - Industrial
     - Arsenal
     - Experimental
-    - Robotic # Trauma
+    - Robotics # Trauma
     - CivilianServices
   - type: ApcPowerReceiver
     powerLoad: 200
