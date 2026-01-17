@@ -338,6 +338,7 @@ public sealed partial class MobThresholdSystem : EntitySystem // Trauma - made p
     private void CheckThresholds(EntityUid target, MobStateComponent mobStateComponent,
         MobThresholdsComponent thresholdsComponent, DamageableComponent damageableComponent, EntityUid? origin = null)
     {
+        if (_net.IsClient) return; // Trauma - don't predict it, it doesnt get networked somehow and mispredicts badly from shitmed
         var damage = CheckVitalDamage(target, damageableComponent); // Trauma - check vital damage instead of total
         foreach (var (threshold, mobState) in thresholdsComponent.Thresholds.Reverse())
         {
