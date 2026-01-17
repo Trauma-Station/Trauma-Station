@@ -24,7 +24,7 @@
   recipeUnlocks:
   - TeslaCoilCircuitboard
   - RadiationCollectorCircuitboard
-  position: 1,-2
+  position: 1,1
   technologyPrerequisites:
   - PowerGeneration
 
