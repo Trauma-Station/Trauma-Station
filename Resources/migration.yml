@@ -8,11 +8,12 @@
 # WallSolid: Window
 # Table: null
 
-# <Trauma> - replacing disablers with phasers
+# <Trauma> - too lazy to port debugoks multi migration thing
+
+# 2026-01-07
 GunSafeDisabler: GunSafePhaser
 WeaponDisabler: WeaponLaserSidearm
 
-# <Trauma> - too lazy to port debugoks multi migration thing
 # 2025-10-30
 DVSmartFridgeMedical: SmartFridgeMedical
 
