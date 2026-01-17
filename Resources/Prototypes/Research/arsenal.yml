@@ -151,7 +151,7 @@
   - MagazineShotgunBeanbag
   - BoxShellTranquilizer
   - BoxBeanbag
-  - WeaponDisabler
+  # - WeaponDisabler # Trauma
   - WeaponMechCombatDisabler # Goobstation
   # Goobstation R&D Console rework start
   position: 2,3
@@ -198,7 +198,7 @@
   - Truncheon
   - TelescopicShield
   - HoloprojectorSecurity
-  - WeaponDisablerSMG
+  # - WeaponDisablerSMG # Trauma
   - PolymerBaton #goob
   - SpearTelescopic #goob
   # Goobstation R&D Console rework start

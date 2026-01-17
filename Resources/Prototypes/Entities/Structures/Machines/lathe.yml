@@ -766,7 +766,7 @@
     - SecurityExplosives
     - SecurityAmmo
     - SecurityWeapons
-    - SecurityDisablers
+    # - SecurityDisablers # Trauma - disablers replaced with phasers
     # <Goob>
     - SecurityWeaponsGoob
     - RestraintTechnology
