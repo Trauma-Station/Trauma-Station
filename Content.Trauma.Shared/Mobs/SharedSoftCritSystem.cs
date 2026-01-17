@@ -41,7 +41,7 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
         SubscribeLocalEvent<SoftCritMobComponent, ModifyInhaledVolumeEvent>(OnModifyInhaledVolume);
 
         Subs.CVar(_cfg, TraumaCVars.SoftCritMoveSpeed, x => SoftCritSpeed = x, true);
-        Subs.CVar(_cfg, TraumaCVars.SoftCritMoveSpeed, x => InhaleVolumeModifier = x, true);
+        Subs.CVar(_cfg, TraumaCVars.SoftCritInhaleModifier, x => InhaleVolumeModifier = x, true);
     }
 
     private void RefreshSpeed(EntityUid uid, SoftCritMobComponent ent, EntityEventArgs args)
