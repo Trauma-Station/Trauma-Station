@@ -1,18 +1,4 @@
 - type: technology
-  id: BasicRobotics
-  name: research-technology-basic-robotics
-  icon:
-    sprite: Structures/Machines/exosuit_fabricator.rsi
-    state: fab-idle
-  discipline: Robotics
-  tier: 1
-  cost: 5000
-  recipeUnlocks:
-  - ProximitySensor
-  - Drone
-  position: -4,2
-
-- type: technology
   id: ED208
   name: research-technology-military-bots
   icon:
