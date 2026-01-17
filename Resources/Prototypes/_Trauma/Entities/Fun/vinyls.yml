@@ -1,7 +1,7 @@
 - type: entity
-  name: "vinyl disk: TRAUMA"
-  id: VinylDiskTrauma
   parent: BaseVinylDisk
+  id: VinylDiskTrauma
+  name: "vinyl disk: TRAUMA"
   components:
   - type: Sprite
     state: green-vinyl-disk
