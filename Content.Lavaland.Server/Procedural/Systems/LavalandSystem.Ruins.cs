@@ -302,6 +302,8 @@ public sealed partial class LavalandSystem
         var box = grid.Comp.LocalAABB.Translated(offset);
         var center = box.Center;
         var roomTransform = Matrix3Helpers.CreateTranslation(center.X, center.Y);
+        var seed = _random.Next();
+        var random = new System.Random(seed);
 
         // Copy all tiles
         _tiles.Clear();
@@ -383,8 +385,7 @@ public sealed partial class LavalandSystem
                     _map.SetTile(grid,
                         grid,
                         tilePos,
-                        _tile.GetVariantTile((ContentTileDefinition) _tiledef[DungeonSystem.FallbackTileId],
-                            _random.GetRandom()));
+                        _tile.GetVariantTile((ContentTileDefinition) _tiledef[DungeonSystem.FallbackTileId], random));
                 }
 
                 _decals.TryAddDecal(

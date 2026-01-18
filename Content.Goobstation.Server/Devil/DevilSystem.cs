@@ -121,7 +121,9 @@ public sealed partial class DevilSystem : EntitySystem
         EnsureComp<CrematoriumImmuneComponent>(devil);
         EnsureComp<AntagImmuneComponent>(devil);
         EnsureComp<SupermatterImmuneComponent>(devil);
-        EnsureComp<PreventChasmFallingComponent>(devil).DeleteOnUse = false;
+        var jaunter = EnsureComp<PreventChasmFallingComponent>(devil);
+        jaunter.DeleteOnUse = false;
+        Dirty(devil, jaunter);
         EnsureComp<FTLSmashImmuneComponent>(devil);
 
         // Allow infinite revival

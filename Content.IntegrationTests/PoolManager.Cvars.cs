@@ -1,5 +1,6 @@
 #nullable enable
 // <Trauma>
+using Content.Lavaland.Shared.CCVar;
 using Content.Trauma.Common.CCVar;
 // </Trauma>
 using Content.Shared.CCVar;

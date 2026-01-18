@@ -26,6 +26,8 @@ namespace Content.Lavaland.Client.Weapons;
 
 public sealed class WeaponAttachmentSystem : SharedWeaponAttachmentSystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -37,8 +39,9 @@ public sealed class WeaponAttachmentSystem : SharedWeaponAttachmentSystem
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
-        sprite.LayerSetVisible(WeaponVisualLayers.Bayonet, component.BayonetAttached);
-        sprite.LayerSetVisible(WeaponVisualLayers.FlightOff, component.LightAttached && !component.LightOn);
-        sprite.LayerSetVisible(WeaponVisualLayers.FlightOn, component.LightAttached && component.LightOn);
+        var ent = (uid, sprite);
+        _sprite.LayerSetVisible(ent, WeaponVisualLayers.Bayonet, component.BayonetAttached);
+        _sprite.LayerSetVisible(ent, WeaponVisualLayers.FlightOff, component.LightAttached && !component.LightOn);
+        _sprite.LayerSetVisible(ent, WeaponVisualLayers.FlightOn, component.LightAttached && component.LightOn);
     }
 }

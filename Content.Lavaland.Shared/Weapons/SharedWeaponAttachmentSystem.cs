@@ -40,7 +40,10 @@ public abstract partial class SharedWeaponAttachmentSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+
+    private static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
+    private static readonly ProtoId<DamageTypePrototype> Slash = "Slash";
 
     public override void Initialize()
     {
@@ -134,20 +137,21 @@ public abstract partial class SharedWeaponAttachmentSystem : EntitySystem
         // JFC this is shitcode
         if (attached)
         {
-            meleeComp.Damage = new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>("Slash"), 12);
+            meleeComp.Damage = new DamageSpecifier(_proto.Index(Slash), 12);
             meleeComp.AttackRate = 1.5f;
             meleeComp.HitSound = new SoundPathSpecifier("/Audio/Weapons/bladeslice.ogg");
             EnsureComp<SharpComponent>(uid);
         }
         else
         {
-            meleeComp.Damage = new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>("Blunt"), 5);
+            meleeComp.Damage = new DamageSpecifier(_proto.Index(Blunt), 5);
             meleeComp.AttackRate = 1f;
             meleeComp.HitSound = null;
             RemComp<SharpComponent>(uid);
         }
 
         Dirty(uid, component);
+        Dirty(uid, meleeComp);
     }
 
     private void AttachLight(EntityUid uid, EntityUid light, WeaponAttachmentComponent component)

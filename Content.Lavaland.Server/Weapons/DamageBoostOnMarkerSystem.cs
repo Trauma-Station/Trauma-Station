@@ -30,6 +30,7 @@ public sealed class DamageBoostOnMarkerSystem : EntitySystem
         {
             damage += backstab;
         }
+        damage *= _pressure.GetModifier(ent.Owner);
 
         _damageable.ChangeDamage(args.Target, damage, origin: args.User);
     }

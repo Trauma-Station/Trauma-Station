@@ -49,37 +49,39 @@ public sealed class PreventChasmFallingSystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, BeforeChasmFallingEvent>(Relay);
     }
 
+    private HashSet<Entity<ChasmComponent>> _chasms = new();
+
     private void OnBeforeFall(EntityUid uid, PreventChasmFallingComponent comp, ref BeforeChasmFallingEvent args)
     {
         if (TryComp<UseDelayComponent>(uid, out var useDelay) && _delay.IsDelayed((uid, useDelay)))
             return;
 
         args.Cancelled = true;
-        var coordsValid = false;
         var coords = Transform(args.Entity).Coordinates;
 
+        // tries20 my beloved
         const int attempts = 20;
-        var curAttempts = 0;
-        while (!coordsValid)
+        for (int i = 0; i < attempts; i++)
         {
-            curAttempts++;
-            if (curAttempts > attempts)
-                return; // Just to be safe from stack overflow
-
+            // TODO: use predicted random if ChasmSystem gets predicted
             var newCoords = new EntityCoordinates(Transform(args.Entity).ParentUid, coords.X + _random.NextFloat(-5f, 5f), coords.Y + _random.NextFloat(-5f, 5f));
-            if (!_interaction.InRangeUnobstructed(args.Entity, newCoords, -1f) ||
-                _lookup.GetEntitiesInRange<ChasmComponent>(newCoords, 1f).Count > 0)
+            if (!_interaction.InRangeUnobstructed(args.Entity, newCoords, -1f))
+                continue;
+
+            _chasms.Clear();
+            _lookup.GetEntitiesInRange(newCoords, 1f, _chasms);
+            if (_chasms.Count > 0) // no teleporting onto another chasm
                 continue;
 
             _transform.SetCoordinates(args.Entity, newCoords);
             _transform.AttachToGridOrMap(args.Entity, Transform(args.Entity));
-            _audio.PlayPvs("/Audio/Items/Mining/fultext_launch.ogg", args.Entity);
+            _audio.PlayPvs(comp.TeleportSound, args.Entity);
             if (args.Entity != uid && comp.DeleteOnUse)
                 QueueDel(uid);
             else if (useDelay != null)
                 _delay.TryResetDelay((uid, useDelay));
 
-            coordsValid = true;
+            return;
         }
     }
 
