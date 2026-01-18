@@ -175,3 +175,10 @@
     children:
     - id: WeaponDisabler
       amount: 5
+
+- type: entityTable
+  id: FillGunSafePhaser
+  table: !type:AllSelector
+    children:
+    - id: WeaponLaserSidearm
+      amount: 5
