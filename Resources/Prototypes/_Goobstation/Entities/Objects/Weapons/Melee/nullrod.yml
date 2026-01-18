@@ -80,8 +80,6 @@
       types:
         Slash: 10
         Holy: 13
-      woundSeverityMultipliers:
-        Slash: 2.5
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Wieldable
