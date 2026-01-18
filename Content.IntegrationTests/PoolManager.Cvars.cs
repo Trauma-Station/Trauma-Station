@@ -15,7 +15,7 @@ public static partial class PoolManager
     {
         // @formatter:off
         // <Trauma>
-        (CCVars.LavalandEnabled.Name, "false"),
+        (LavalandCVars.LavalandEnabled.Name, "false"),
         (TraumaCVars.GhostBarEnabled.Name, "false"),
         // </Trauma>
         (CCVars.DatabaseSynchronous.Name,     "true"),

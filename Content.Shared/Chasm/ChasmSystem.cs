@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Lavaland.Common.Chasm;
+// </Trauma>
 using Content.Shared.ActionBlocker;
 using Content.Shared.Movement.Events;
 using Content.Shared.StepTrigger.Systems;
@@ -42,16 +45,16 @@ public sealed class ChasmSystem : EntitySystem
             if (_timing.CurTime < chasm.NextDeletionTime)
                 continue;
 
-            // Lavaland Change start: Jaunter
-            var ev = new _Lavaland.Chasm.BeforeChasmFallingEvent(uid);
+            // <Lavaland>
+            var ev = new BeforeChasmFallingEvent(uid);
             RaiseLocalEvent(uid, ref ev);
             if (ev.Cancelled)
             {
-                RemComp<ChasmFallingComponent>(uid);
+                RemCompDeferred<ChasmFallingComponent>(uid);
                 _blocker.UpdateCanMove(uid);
                 continue;
             }
-            // Lavaland Change end: Jaunter
+            // </Lavaland>
 
             QueueDel(uid);
         }

@@ -30,7 +30,7 @@ using Content.Server.Popups;
 using Content.Server.Stunnable;
 using Content.Server.Temperature.Components;
 using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared._Lavaland.Chasm;
+using Content.Lavaland.Shared.Chasm;
 using Content.Shared._Shitmed.Body.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
 using Content.Shared.Actions;
