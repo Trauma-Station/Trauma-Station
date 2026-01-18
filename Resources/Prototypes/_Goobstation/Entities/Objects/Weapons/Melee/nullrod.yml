@@ -297,8 +297,10 @@
     attackRate: 3
     damage:
       types:
-        Holy: 6
-        Blunt: 2.5
+        # <Trauma>
+        Holy: 7
+        Blunt: 1
+        # </Trauma>
     soundHit:
       collection: BoxingHit
   - type: StaminaDamageOnHit
