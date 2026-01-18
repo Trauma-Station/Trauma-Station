@@ -13,6 +13,7 @@ using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Body.Systems;
 using Content.Shared.Database;
 using Content.Shared.Heretic;
 using Content.Shared.Mind.Components;
@@ -43,6 +44,7 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly SharedBodySystem _body = default!;
 
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedAdminLogManager _admin = default!;
@@ -388,9 +390,9 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
 
                 _mark.TryApplyStarMark((noob, mobState));
                 _dmg.TryChangeDamage(noob,
-                    starGaze.Damage,
+                    starGaze.Damage * _body.GetVitalBodyPartRatio(noob),
                     origin: uid,
-                    targetPart: TargetBodyPart.Vital,
+                    targetPart: TargetBodyPart.All,
                     splitDamage: SplitDamageBehavior.SplitEnsureAll);
 
                 if (_random.Prob(starGaze.ScreamProb))
