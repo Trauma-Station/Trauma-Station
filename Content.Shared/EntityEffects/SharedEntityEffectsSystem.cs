@@ -100,7 +100,7 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
         {
             var seed = SharedRandomExtensions.HashCodeCombine((int)_timing.CurTick.Value, GetNetEntity(target).Id, 0);
             var rand = new System.Random(seed);
-            if (!rand.Prob(effect.Probability))
+            if (!rand.Prob(effect.Probability * (effect.ScaleProbability ? scale : 1f))) // Trauma - multiply by scale if ScaleProbability is true
                 return false;
         }
 
