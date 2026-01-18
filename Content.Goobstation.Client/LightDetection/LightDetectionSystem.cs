@@ -1,4 +1,4 @@
-﻿using Content.Goobstation.Shared.LightDetection.Systems;
+using Content.Goobstation.Shared.LightDetection.Systems;
 
 namespace Content.Goobstation.Client.LightDetection;
 

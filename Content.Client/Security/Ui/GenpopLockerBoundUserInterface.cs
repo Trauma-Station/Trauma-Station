@@ -33,4 +33,3 @@ public sealed class GenpopLockerBoundUserInterface(EntityUid owner, Enum uiKey) 
         _menu = null;
     }
 }
-

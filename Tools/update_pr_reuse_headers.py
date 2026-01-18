@@ -134,7 +134,7 @@ def matches_pattern(file_path, pattern):
 
 def get_author_and_license_for_file(file_path):
     normalized_path = file_path.replace("\\", "/")
-    
+
     for rule in DIRECTORY_RULES:
         pattern = rule["pattern"]
         if matches_pattern(normalized_path, pattern):
@@ -142,7 +142,7 @@ def get_author_and_license_for_file(file_path):
             license_label = rule.get("license", DEFAULT_LICENSE_LABEL)
             print(f"  Matched pattern '{pattern}' -> Author: {author}, License: {license_label}")
             return author, license_label
-    
+
     print(f"  No pattern match, using defaults -> Author: {DEFAULT_AUTHOR}, License: {DEFAULT_LICENSE_LABEL}")
     return DEFAULT_AUTHOR, DEFAULT_LICENSE_LABEL
 
@@ -356,4 +356,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

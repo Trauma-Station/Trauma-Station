@@ -1,4 +1,4 @@
-﻿namespace Content.Goobstation.Shared.Communications;
+namespace Content.Goobstation.Shared.Communications;
 
 /// <summary>
 /// Entities with <see cref="TelecomTransmitterComponent"/> are needed to transmit messages using headsets BETWEEN MAPS.

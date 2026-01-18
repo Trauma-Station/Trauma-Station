@@ -24,7 +24,7 @@
         - ReagentId: Protein
           Quantity: 9 # Trauma, 10 > 9
         - ReagentId: Fentanyl # Trauma
-          Quantity: 1 
+          Quantity: 1
   - type: Icon
     state: packet-greygoo
   - type: Appearance

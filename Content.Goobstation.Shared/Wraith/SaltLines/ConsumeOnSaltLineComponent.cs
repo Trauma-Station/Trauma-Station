@@ -18,4 +18,3 @@ public sealed partial class ConsumeOnSaltLineComponent : Component
 /// </summary>
 [ByRefEvent]
 public record struct AttemptSaltLineEvent(EntityUid User,bool Cancelled = false);
-

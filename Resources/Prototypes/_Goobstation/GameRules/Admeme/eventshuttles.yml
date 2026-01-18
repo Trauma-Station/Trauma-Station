@@ -101,5 +101,3 @@
     maxOccurrences: 1
   - type: LoadMapRule
     preloadedGrid: RetortShuttleChaplain
-
-

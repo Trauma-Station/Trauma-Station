@@ -21,7 +21,7 @@ public sealed partial class NavMapSystem
 
     public override void Update(float frameTime)
     {
-        // To prevent compute spikes, only one region is flood filled per frame 
+        // To prevent compute spikes, only one region is flood filled per frame
         var query = AllEntityQuery<NavMapComponent>();
 
         while (query.MoveNext(out var ent, out var entNavMapRegions))
@@ -104,7 +104,7 @@ public sealed partial class NavMapSystem
                 if (visitedTiles.Count > regionProperties.MaxArea)
                     return (new(), new());
 
-                // Pop the top tile from the stack 
+                // Pop the top tile from the stack
                 var current = tilesToVisit.Pop();
 
                 // If the current tile position has already been visited,
@@ -141,7 +141,7 @@ public sealed partial class NavMapSystem
                 visitedChunks.Add(chunkOrigin);
 
                 // Determine if we can propagate the region into its cardinally adjacent neighbors
-                // To propagate to a neighbor, movement into the neighbors closest edge must not be 
+                // To propagate to a neighbor, movement into the neighbors closest edge must not be
                 // blocked, and vice versa
 
                 foreach (var (direction, tileOffset, reverseDirection) in _regionPropagationTable)

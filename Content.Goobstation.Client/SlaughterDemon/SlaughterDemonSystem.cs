@@ -6,5 +6,3 @@ public sealed class SlaughterDemonSystem : SharedSlaughterDemonSystem
 {
     protected override void RemoveBlood(EntityUid uid) {} // do nothing
 }
-
-

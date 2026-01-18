@@ -120,4 +120,3 @@ public sealed partial class MedicalPatchComponent : Component
     [DataField]
     public FixedPoint2 InjectPercentageOnAttatch = FixedPoint2.New(0);
 }
-

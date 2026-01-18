@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Goobstation.Maths.FixedPoint;
 using Robust.Shared.GameStates;
 
