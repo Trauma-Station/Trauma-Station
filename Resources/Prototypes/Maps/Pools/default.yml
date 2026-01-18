@@ -4,13 +4,13 @@
   maps:
   #- Atlas
   #- Amber
-  #- Bagel
-  #- Box
+  - Bagel
+  - Box
   #- Cluster
   - Fland
   - FlandHighPop
   - Loop
-  #- Marathon
+  - Marathon
   #- Meta
   #- Oasis
   #- OasisHighPop

@@ -13,43 +13,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: technology
-  id: Ripley2
-  name: research-technology-ripley-mkii
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: ripleymkii
-  discipline: Industrial
-  tier: 2
-  cost: 8000
-  recipeUnlocks:
-  - RipleyMKIIHarness
-  - RipleyUpgradeKit
-  technologyPrerequisites:
-  - RipleyAPLU
-  position: -1,-6
-
-- type: technology
-  id: Clarke
-  name: research-technology-clarke
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: clarke
-  discipline: Industrial
-  tier: 2
-  cost: 10000
-  recipeUnlocks:
-  - ClarkeHarness
-  - ClarkeHead
-  - ClarkeLArm
-  - ClarkeRArm
-  - ClarkeTreads
-  - ClarkeCentralElectronics
-  - ClarkePeripheralsElectronics
-  technologyPrerequisites:
-  - Ripley2
-  position: -1,-7
-
-- type: technology
   id: AdvancedPowerGeneration
   name: research-technology-advanced-power-generation
   icon:
@@ -61,7 +24,7 @@
   recipeUnlocks:
   - TeslaCoilCircuitboard
   - RadiationCollectorCircuitboard
-  position: 1,-2
+  position: 1,1
   technologyPrerequisites:
   - PowerGeneration
 
@@ -78,7 +41,7 @@
   - ConstructionBagOfHolding
   technologyPrerequisites:
   - AdvancedToolsTechnology
-  position: 3, -5
+  position: 3, -4
 
 - type: technology
   id: Plumbing
@@ -91,6 +54,6 @@
   cost: 6500
   recipeUnlocks:
   - PlumbingPumpCircuitboard
-  position: 1,-7
+  position: 1,-4
   technologyPrerequisites:
   - IndustrialEngineering

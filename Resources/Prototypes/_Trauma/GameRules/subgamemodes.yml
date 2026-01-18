@@ -1,0 +1,21 @@
+- type: entity
+  parent: BaseTraitorRule
+  id: SubTraitor
+  components:
+  - type: GameRule
+    minPlayers: 5
+  - type: AntagSelection
+    selectionTime: IntraPlayerSpawn
+    definitions:
+    - prefRoles: [ Traitor ]
+      max: 2
+      playerRatio: 40
+      chaosScore: 150
+      blacklist:
+        components:
+        - CommandStaff
+        - AntagImmune
+        - Changeling
+      lateJoinAdditional: false
+      mindRoles:
+      - MindRoleTraitor

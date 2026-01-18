@@ -16,7 +16,7 @@
   - ReagentGrinderIndustrialMachineCircuitboard
   - PlantAnalyzer # Frontier
   # Goobstation R&D Console rework start
-  position: -3,4
+  position: -2,4
   technologyPrerequisites:
   - AdvancedEntertainment
   # Goobstation R&D Console rework end
@@ -27,7 +27,7 @@
   icon:
     sprite: Objects/Specific/Mech/mecha.rsi
     state: hamtr
-  discipline: CivilianServices
+  discipline: Robotics # Trauma
   tier: 1
   cost: 7500
   recipeUnlocks:
@@ -41,9 +41,8 @@
   - MechEquipmentGrabberSmall
   - VimHarness
   # Goobstation R&D Console rework start
-  position: 0,4
+  position: -6,1
   technologyPrerequisites:
-  - AdvancedEntertainment
   - RipleyAPLU
   # Goobstation R&D Console rework end
 
@@ -87,7 +86,9 @@
     - MassMediaCircuitboard
     - JukeboxCircuitBoard
     - BorgModuleLollypop # Goobstation
-  position: 0,2
+  # Goobstation R&D Console rework start
+  position: 0,3
+  # Goobstation R&D Console rework end
 
 - type: technology
   id: MeatManipulation
@@ -103,7 +104,7 @@
   - BiofabricatorMachineCircuitboard
   - BiomassReclaimerMachineCircuitboard
   # Goobstation R&D Console rework start
-  position: -3,5
+  position: -2,5
   technologyPrerequisites:
   - Hydroponics
   # Goobstation R&D Console rework end
@@ -190,10 +191,9 @@
   - MegaSprayBottle
   - BorgModuleAdvancedCleaning
   # Goobstation R&D Console rework start
-  position: -1,4
+  position: 0,4
   technologyPrerequisites:
   - AdvancedEntertainment
-  - BasicRobotics
   # Goobstation R&D Console rework end
 
 - type: technology
@@ -202,7 +202,7 @@
   icon:
     sprite: Objects/Specific/Mech/mecha.rsi
     state: honker
-  discipline: CivilianServices
+  discipline: Robotics # Trauma
   tier: 2
   cost: 7500
   recipeUnlocks:
@@ -216,7 +216,7 @@
   - HonkerTargetingElectronics
   - MechEquipmentHorn
   # Goobstation R&D Console rework start
-  position: 0,6
+  position: -8,0
   technologyPrerequisites:
   - PushHorn
   - RipleyAPLU
@@ -235,7 +235,7 @@
   - WeaponSprayNozzle
   - ClothingBackpackWaterTank
   # Goobstation R&D Console rework start
-  position: -1,6
+  position: 0,5
   technologyPrerequisites:
   - AdvancedCleaning
   # Goobstation R&D Console rework end
@@ -252,7 +252,7 @@
   recipeUnlocks:
   - CargoTelepadMachineCircuitboard
   # Goobstation R&D Console rework start
-  position: 1,8
+  position: 1,6
   technologyPrerequisites:
   - MeatManipulation
   - FauxAstroTiles
@@ -264,14 +264,14 @@
   icon:
     sprite: Objects/Fun/push_horn.rsi
     state: icon
-  discipline: CivilianServices
+  discipline: Robotics # Trauma
   tier: 2
   cost: 4000
   recipeUnlocks:
   - PushHorn
   - BorgModuleAdvancedClowning
   # Goobstation R&D Console rework start
-  position: 0,5
+  position: -7,0
   technologyPrerequisites:
   - CritterMechs
   # Goobstation R&D Console rework end

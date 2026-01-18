@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2024 beck <163376292+widgetbeck@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.CCVar;
 using Content.Shared.Chemistry.Events;
 using Content.Shared.Climbing.Components;
@@ -137,16 +126,27 @@ public sealed class ClumsySystem : EntitySystem
         if (!rand.Prob(ent.Comp.ClumsyDefaultCheck))
             return;
 
+        // <Trauma> - don't spam sounds on client but do predict the paralyze here
+        _stun.TryUpdateParalyzeDuration(ent, ent.Comp.GunShootFailStunTime);
+
+        if (!_timing.IsFirstTimePredicted)
+        {
+            args.Cancel();
+            return;
+        }
+        // </Trauma>
+
         if (ent.Comp.GunShootFailDamage != null)
             _damageable.ChangeDamage(ent.Owner, ent.Comp.GunShootFailDamage, origin: ent);
 
-        _stun.TryUpdateParalyzeDuration(ent, ent.Comp.GunShootFailStunTime);
-
         // Apply salt to the wound ("Honk!") (No idea what this comment means)
-        _audio.PlayPvs(ent.Comp.GunShootFailSound, ent);
-        _audio.PlayPvs(ent.Comp.ClumsySound, ent);
+        // <Trauma> - use predicted versions
+        var user = args.Shooter;
+        _audio.PlayPredicted(ent.Comp.GunShootFailSound, ent, user);
+        _audio.PlayPredicted(ent.Comp.ClumsySound, ent, user);
 
-        _popup.PopupEntity(Loc.GetString(ent.Comp.GunFailedMessage), ent, ent);
+        _popup.PopupPredicted(Loc.GetString(ent.Comp.GunFailedMessage), ent, user);
+        // </Trauma>
         args.Cancel();
     }
 

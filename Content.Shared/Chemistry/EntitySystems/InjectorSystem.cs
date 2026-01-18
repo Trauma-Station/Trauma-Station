@@ -216,7 +216,7 @@ public sealed partial class InjectorSystem : EntitySystem
         if (doAfterTime == TimeSpan.Zero)
             return true;
 
-        if (!_solutionContainer.ResolveSolution(injector.Owner, injector.Comp.SolutionName, ref injector.Comp.Solution, out var injectorSolution)
+        if (GetSolution(injector) is not {} injectorSolution // Trauma - use GetSolution
             || !_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
             return false;
 
@@ -272,7 +272,7 @@ public sealed partial class InjectorSystem : EntitySystem
         doAfterTime = TimeSpan.Zero;
         amount = FixedPoint2.Zero;
 
-        if (!_solutionContainer.ResolveSolution(injector.Owner, injector.Comp.SolutionName, ref injector.Comp.Solution, out var injectorSolution)
+        if (GetSolution(injector) is not {} injectorSolution // Trauma - use GetSolution
             || !_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
             return false;
 
@@ -495,6 +495,13 @@ public sealed partial class InjectorSystem : EntitySystem
         // Jugsuit blocking Hyposprays when
         if (ev.Cancelled)
         {
+            // <Trauma> - use the fucking override message!?
+            if (ev.OverrideMessage is {} msg)
+            {
+                _popup.PopupPredicted(msg, user, user);
+                return true;
+            }
+            // </Trauma>
             var userMessage = Loc.GetString("injector-component-blocked-user");
             var otherMessage = Loc.GetString("injector-component-blocked-other", ("target", target), ("user", user));
             _popup.PopupPredicted(userMessage, otherMessage, target, user, PopupType.SmallCaution);
@@ -674,7 +681,7 @@ public sealed partial class InjectorSystem : EntitySystem
         _useDelay.TryResetDelay(injector);
 
         // Automatically set syringe to draw after completely draining it.
-        if (!_solutionContainer.ResolveSolution(injector.Owner, injector.Comp.SolutionName, ref injector.Comp.Solution, out var solution)
+        if (GetSolution(injector) is not {} solution // Trauma - use GetSolution
             || solution.Volume != 0)
             return;
 
@@ -705,7 +712,7 @@ public sealed partial class InjectorSystem : EntitySystem
         _forensics.TransferDna(injector, target);
 
         // Automatically set the syringe to inject after completely filling it.
-        if (!_solutionContainer.ResolveSolution(injector.Owner, injector.Comp.SolutionName, ref injector.Comp.Solution, out var solution)
+        if (GetSolution(injector) is not {} solution // Trauma - use GetSolution
             || solution.AvailableVolume != 0)
             return;
 

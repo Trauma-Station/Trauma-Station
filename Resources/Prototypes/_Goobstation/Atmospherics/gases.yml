@@ -6,6 +6,10 @@
   specificHeat: 20
   heatCapacityRatio: 1.6
   molarMass: 12
+  # <Trauma>
+  gasOverlaySprite: /Textures/Effects/atmospherics.rsi
+  gasOverlayState: water_vapor # Is it THE FOG or is it INSTANT DEATH?
+  # </Trauma>
   color: '#9370db'
   reagent: BZ
   pricePerMole: 2

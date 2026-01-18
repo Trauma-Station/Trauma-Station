@@ -68,6 +68,7 @@
       - !type:ModifyBleed
         amount: -1.5
       - !type:CleanBloodstream
+        excluded: Mugwort # Trauma - Exclude from chempurge
         cleanseRate: 6
       - !type:GenericStatusEffect
         key: SeeingRainbows

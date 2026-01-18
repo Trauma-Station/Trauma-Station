@@ -11,6 +11,7 @@
     nameFormat: name-format-standard
   - type: RandomHumanoidAppearance
     randomizeName: true
+  - type: IdBind # set id name to the mob's random name
 
 # Sec Reinforcements
 

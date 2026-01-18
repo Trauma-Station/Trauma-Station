@@ -18,6 +18,7 @@ public sealed class VialHypospraySystem : EntitySystem
 
     private void OnGetSolution(Entity<VialHyposprayComponent> ent, ref InjectorGetSolutionEvent args)
     {
+        Log.Debug($"GetSolution for {ToPrettyString(ent)}");
         if (args.Handled)
             return;
 
@@ -25,7 +26,9 @@ public sealed class VialHypospraySystem : EntitySystem
         if (_slots.GetItemOrNull(ent.Owner, ent.Comp.Slot) is not {} vial)
             return;
 
+        Log.Debug($"Vial {ToPrettyString(vial)}");
         _solution.TryGetDrawableSolution(vial, out var solution, out _);
+        Log.Debug($"Solution {ToPrettyString(solution)}");
         args.Solution = solution;
     }
 }

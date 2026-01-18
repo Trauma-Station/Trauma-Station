@@ -15,6 +15,7 @@
   id: Small
   weight: 2
   name: item-component-size-Small
+  crawlSpeedModifier: 0.85 # Trauma
   defaultShape:
   - 0,0,0,1
 
@@ -23,6 +24,7 @@
   id: Normal
   weight: 4
   name: item-component-size-Normal
+  crawlSpeedModifier: 0.7 # Trauma
   defaultShape:
   - 0,0,1,1
 
@@ -31,6 +33,7 @@
   id: Large
   weight: 8
   name: item-component-size-Large
+  crawlSpeedModifier: 0.6 # Trauma
   defaultShape:
   - 0,0,3,1
 
@@ -39,6 +42,7 @@
   id: Huge
   weight: 16
   name: item-component-size-Huge
+  crawlSpeedModifier: 0.4 # Trauma
   defaultShape:
   - 0,0,3,3
 
@@ -47,5 +51,6 @@
   id: Ginormous
   weight: 32
   name: item-component-size-Ginormous
+  crawlSpeedModifier: 0.2 # Trauma
   defaultShape:
   - 0,0,5,5

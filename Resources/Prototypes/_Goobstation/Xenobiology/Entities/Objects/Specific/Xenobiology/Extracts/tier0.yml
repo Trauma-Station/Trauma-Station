@@ -38,7 +38,7 @@
       - !type:NestedEffect
         proto: XenobioExtractReaction
       - !type:SpawnEntity
-        entity: MonkeyCube
+        entity: Nutrislime # Trauma
         number: 3
   - type: Tag
     tags:

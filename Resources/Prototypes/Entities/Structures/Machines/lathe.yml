@@ -665,6 +665,7 @@
     - ToolAugments
     - PowerCells
     - TraumaCybernetics # Trauma
+    - TraumaMechParts # Trauma
   - type: EmagLatheRecipes # Goobstation
     emagStaticPacks:
     - MechWeaponsSecurityStatic

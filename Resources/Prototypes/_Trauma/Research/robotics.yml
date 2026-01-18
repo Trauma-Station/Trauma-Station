@@ -1,0 +1,261 @@
+- type: technology
+  id: ED209
+  name: research-technology-military-bots
+  icon:
+    sprite: _Trauma/Mobs/Silicon/Bots/ed209.rsi
+    state: ed209
+  discipline: Robotics
+  tier: 1
+  cost: 20000
+  recipeUnlocks:
+  - ED209Endoskeleton
+  - EDShell
+  - EDLegR
+  - EDLegL
+  - EDHead
+  - EDAiCoreElectronics
+  - EDIFFElectronics
+  - EDWeaponControlsElectronics
+  position: -9,1
+  technologyPrerequisites:
+  - Gygax
+
+- type: technology
+  id: BasicMechEquipment
+  name: research-technology-mech-basic-equipment
+  icon:
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_diamond_drill
+  discipline: Robotics
+  tier: 2
+  cost: 5000
+  recipeUnlocks:
+  - MechEquipmentDrillDiamond
+  position: -6,3
+  technologyPrerequisites:
+  - RipleyAPLU
+
+- type: technology
+  id: Ripley2
+  name: research-technology-ripley-mkii
+  icon:
+    sprite: Objects/Specific/Mech/mecha.rsi
+    state: ripleymkii
+  discipline: Robotics
+  tier: 2
+  cost: 8000
+  recipeUnlocks:
+  - RipleyMKIIHarness
+  - RipleyUpgradeKit
+  technologyPrerequisites:
+  - RipleyAPLU
+  position: -7,2
+
+- type: technology
+  id: Clarke
+  name: research-technology-clarke
+  icon:
+    sprite: Objects/Specific/Mech/mecha.rsi
+    state: clarke
+  discipline: Robotics
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - ClarkeHarness
+  - ClarkeHead
+  - ClarkeLArm
+  - ClarkeRArm
+  - ClarkeTreads
+  - ClarkeCentralElectronics
+  - ClarkePeripheralsElectronics
+  technologyPrerequisites:
+  - Ripley2
+  position: -7,1
+
+- type: technology
+  id: HONKWeapons
+  name: research-technology-honk-weapons
+  icon:
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_bananamrtr
+  discipline: Robotics
+  tier: 2
+  cost: 6000
+  recipeUnlocks:
+  - MechEquipmentHonkerBananaMortar
+  - MechEquipmentHonkerMousetrapMortar
+  position: -7,3
+  technologyPrerequisites:
+  - BasicMechEquipment
+
+- type: technology
+  id: Gygax
+  name: research-technology-gygax
+  icon:
+    sprite: Objects/Specific/Mech/mecha.rsi
+    state: gygax
+  discipline: Robotics
+  tier: 2
+  cost: 20000
+  recipeUnlocks:
+  - GygaxHarness
+  - GygaxArmor
+  - GygaxHead
+  - GygaxLArm
+  - GygaxLLeg
+  - GygaxRArm
+  - GygaxRLeg
+  - GygaxCentralElectronics
+  - GygaxPeripheralsElectronics
+  - GygaxTargetingElectronics
+  - WeaponMechCombatUltraRifle
+  technologyPrerequisites:
+  - RipleyAPLU
+  - PortableMicrofusionWeaponry
+  - SmartWeaponry
+  position: -8,2
+
+- type: technology
+  id: ExplosiveMechAmmunition
+  name: research-technology-explosive-mech-ammunition
+  icon:
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_missilerack
+  discipline: Robotics
+  tier: 3
+  cost: 30000
+  recipeUnlocks:
+  - WeaponMechCombatMissileRack8
+  technologyPrerequisites:
+  - Gygax
+  - BasicMechEquipment
+  position: -8,3
+
+- type: technology
+  id: Durand
+  name: research-technology-durand
+  icon:
+    sprite: Objects/Specific/Mech/mecha.rsi
+    state: durand
+  discipline: Robotics
+  tier: 3
+  cost: 40000
+  recipeUnlocks:
+  - DurandHarness
+  - DurandArmor
+  - DurandHead
+  - DurandLArm
+  - DurandLLeg
+  - DurandRArm
+  - DurandRLeg
+  - DurandCentralElectronics
+  - DurandPeripheralsElectronics
+  - DurandTargetingElectronics
+  - WeaponMechCombatShotgun
+  - WeaponMechCombatShotgunIncendiary
+  technologyPrerequisites:
+  - Gygax
+  position: -9,2
+
+- type: technology
+  id: AdvancedCybernetics
+  name: research-technology-advanced-cybernetics
+  icon:
+    sprite: _Shitmed/Mobs/Species/Misc/Cybernetics/organs.rsi
+    state: heart-u-on
+  discipline: Robotics
+  tier: 3
+  cost: 15000
+  recipeUnlocks:
+  - UpgradedCyberneticHeart
+  - UpgradedCyberneticLungs
+  - JawsOfLifeLeftArm
+  - JawsOfLifeRightArm
+  - SpeedLeftLeg
+  - SpeedRightLeg
+  - DexLeftHand
+  - DexRightHand
+  - DiagnosticCyberneticEyes
+  - SecurityCyberneticEyes
+  - MedicalCyberneticEyes
+  position: -7,4
+  technologyPrerequisites:
+  - BasicCybernetics
+
+- type: technology
+  id: BasicCybernetics
+  name: research-technology-basic-cybernetics
+  icon:
+    sprite: _Shitmed/Mobs/Species/Misc/Cybernetics/organs.rsi
+    state: eyes
+  discipline: Robotics
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - LeftArmCybernetic
+  - RightArmCybernetic
+  - LeftHandCybernetic
+  - RightHandCybernetic
+  - LeftLegCybernetic
+  - RightLegCybernetic
+  - LeftFootCybernetic
+  - RightFootCybernetic
+  - BasicCyberneticEyes
+  - BasicCyberneticHeart
+  - BasicCyberneticLungs
+  - BasicCyberneticLiver
+  - HypoportSecure
+  position: -6,4
+  technologyPrerequisites:
+  - BasicAugmentation
+
+- type: technology
+  id: BasicAugmentation
+  name: research-technology-basic-augmentation
+  icon:
+    sprite: _Shitmed/Objects/Augments/power.rsi
+    state: cell
+  discipline: Robotics
+  tier: 2
+  cost: 5000
+  position: -5,3
+  technologyPrerequisites:
+  - BasicRobotics
+  recipeUnlocks:
+  - AugmentPowerCellSlotCasing
+  - AugmentRechargerCasing
+
+- type: technology
+  id: ImplantedTools
+  name: research-technology-implanted-tools
+  icon:
+    sprite: _Shitmed/Objects/Augments/arm.rsi
+    state: base
+  discipline: Robotics
+  tier: 2
+  cost: 10000
+  position: -5,5
+  technologyPrerequisites:
+  - BasicAugmentation
+  recipeUnlocks:
+  - AugmentToolPanelCasing
+  - AugmentUtilityPanelElectronics
+  - AugmentBotanyPanelElectronics
+  - AugmentSurgeryPanelElectronics
+  - AugmentPaperworkPanelElectronics
+
+- type: technology
+  id: CombatAugmentation
+  name: research-technology-combat-augmentation
+  icon:
+    sprite: _Shitmed/Objects/Augments/arm.rsi
+    state: strength
+  discipline: Robotics
+  tier: 2
+  cost: 10000
+  position: -6,5
+  technologyPrerequisites:
+  - ImplantedTools
+  recipeUnlocks:
+  - AugmentStrengthCasing
+  - AugmentStrengthElectronics
