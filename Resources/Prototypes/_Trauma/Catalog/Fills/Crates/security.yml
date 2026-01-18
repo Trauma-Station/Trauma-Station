@@ -1,6 +1,6 @@
 - type: entity
   parent: CrateSecgear
-  id: CreateSecurityWeaponLaserSidearm
+  id: CrateSecurityWeaponLaserSidearm
   name: phaser crate
   description: Contains three phasers. Requires security access to open.
   components:
