@@ -1,0 +1,32 @@
+- type: entity
+  parent: [ClothingHandsBase, BaseSecurityContraband]
+  id: ClothingHandsGlovesSecurity
+  name: security gloves
+  description: Standard issue security gloves. Designed to be durable and keep your hands clean when the situation gets dirty.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Hands/Gloves/securitygloves.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Hands/Gloves/securitygloves.rsi
+  - type: Fiber
+    fiberMaterial: fibers-red-and-black-woven
+  - type: FingerprintMask
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.90
+        Piercing: 0.95
+        Heat: 0.90
+
+- type: entity
+  parent: ClothingHandsGlovesSecurity
+  id: ClothingHandsGlovesSecurityBlue
+  suffix: Blue
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Hands/Gloves/securityglovesblue.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Hands/Gloves/securityglovesblue.rsi
+  - type: Fiber
+    fiberMaterial: fibers-blue-and-black-woven
