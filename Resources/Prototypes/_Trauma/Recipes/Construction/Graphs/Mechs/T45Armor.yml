@@ -1,0 +1,26 @@
+- type: constructionGraph
+  id: T45Armor
+  start: start
+  graph:
+  - node: start
+    entity: PowerArmorFrame
+    edges:
+    - to: T45
+      steps:
+      - assemblyId: generic
+        guideString: t45-construction-guide-string
+
+      - tool: Screwing
+        doAfter: 1
+
+      - material: Plasteel
+        amount: 20
+
+      - tool: Anchoring
+        doAfter: 2
+
+      - tool: Welding
+        doAfter: 1
+
+  - node: T45
+    entity: T45PowerArmor

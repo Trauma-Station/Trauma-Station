@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from mojave-sun-13 at https://github.com/Mojave-Sun/mojave-sun-13/blob/428b74c6e06eca2a3b916adb004331244a9cfa27/mojave/icons/objects/crafting/components_inventory.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "fusion_core"
+    },
+    {
+      "name": "o1"
+    },
+    {
+      "name": "o2"
+    }
+  ]
+}

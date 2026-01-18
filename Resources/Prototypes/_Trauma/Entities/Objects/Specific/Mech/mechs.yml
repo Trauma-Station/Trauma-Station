@@ -131,3 +131,114 @@
   components:
   - type: BallisticAmmoProvider
     proto: null
+
+- type: entity
+  id: PowerArmorFrame
+  name: P.O.W.A.R armor frame
+  description: Precise Orbital WAR, armor
+  parent: BaseRevMajorContraband
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Objects/Specific/Mech/PowerArmorFrame.rsi
+    state: frame
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+  - type: Appearance
+  - type: ItemMapper
+    sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
+    mapLayers:
+      t45_lefthand:
+        whitelist:
+          tags:
+          - T45ArmR
+      t45_righthand:
+        whitelist:
+          tags:
+          - T45ArmL
+      t45_chest:
+        whitelist:
+          tags:
+          - T45Chest
+      t45_helmet:
+        whitelist:
+          tags:
+          - T45Helmet
+      t45_rightleg:
+        whitelist:
+          tags:
+          - T45LegR
+      t45_leftleg:
+        whitelist:
+          tags:
+          - T45LegL
+  - type: ContainerContainer
+    containers:
+      part-container: !type:Container
+  - type: PartAssembly
+    parts:
+      generic:
+      - T45LegL
+      - T45LegR
+      - T45Helmet
+      - T45Chest
+      - T45ArmL
+      - T45ArmR
+  - type: Construction
+    graph: T45Armor
+    node: start
+    defaultTarget: T45
+    containers:
+    - part-container
+  - type: Pullable
+
+- type: entity
+  id: T45PowerArmor
+  parent: [ BaseMech, BaseRevMajorContraband ]
+  name: T-45 P.O.W.A.R armor
+  description: Precise Orbital Worn Armor (for) Revolutionaries
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
+    state: T45Armor
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepHeavySuit
+  - type: Mech
+    baseState: T45Armor
+    openState: T45Armor
+    brokenState: T45Armor
+    mechToPilotDamageMultiplier: 0.01
+    airtight: false
+    maxIntegrity: 600
+    maxEquipmentAmount: 1
+    pilotWhitelist:
+      components:
+      - HumanoidAppearance
+    startingEquipment:
+    - WeaponMechCombatUltraRifle
+  - type: MeleeWeapon
+    hidden: true
+    attackRate: 0.5
+    damage:
+      types:
+        Structural: 20
+        Blunt: 35
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 2
+  - type: Damageable
+    damageModifierSet: HeavyArmorNT
+  - type: StaticPrice
+    price: 1000
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: Construction
+    graph: T45Armor
+    deconstructionTarget: null
+    node: T45Armor

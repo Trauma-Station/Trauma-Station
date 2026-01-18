@@ -1,0 +1,93 @@
+- type: entity
+  id: T45Helmet
+  name: T-45 Helmet
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
+    state: t45_helmet
+  - type: Tag
+    tags:
+    - T45Helmet
+
+- type: entity
+  id: T45Chest
+  name: T-45 Chest
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
+    state: t45_chest
+  - type: Tag
+    tags:
+    - T45Chest
+
+- type: entity
+  id: T45ArmL
+  name: T-45 left arm
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
+    state: t45_lefthand
+  - type: Tag
+    tags:
+    - T45ArmL
+
+- type: entity
+  id: T45ArmR
+  name: T-45 right arm
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
+    state: t45_righthand
+  - type: Tag
+    tags:
+    - T45ArmR
+
+- type: entity
+  id: T45LegR
+  name: T-45 right leg
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
+    state: t45_rightleg
+  - type: Tag
+    tags:
+    - T45LegR
+
+- type: entity
+  id: T45LegL
+  name: T-45 left leg
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
+    state: t45_leftleg
+  - type: Tag
+    tags:
+    - T45LegL
+
+- type: entity
+  name: fusion core
+  description: A fusion core, can be used as a battery with a very high capacity, but is more often used to power, P.O.W.A.R armor suits.
+  id: FusionCore
+  suffix: Full
+  parent: BasePowerCell
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/fusionCore.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: fusion_core
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+  - type: Battery
+    maxCharge: 2200
+    startingCharge: 2200
+  - type: BatteryAmmoProvider
+    proto: RedHeavyLaserShock
+    fireCost: 225

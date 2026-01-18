@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from mojave-sun-13 at https://github.com/Mojave-Sun/mojave-sun-13/blob/8fb5efc941504c6ad498acc48eccfc892398c287/mojave/icons/mob/large-worn-icons/32x48/armor.dmi",
+  "size": {
+    "x": 32,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "frame",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from mojave-sun-13 at https://github.com/Mojave-Sun/mojave-sun-13/blob/8fb5efc941504c6ad498acc48eccfc892398c287/mojave/icons/mob/large-worn-icons/32x48/armor.dmi",
+  "size": {
+    "x": 32,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "t45_chest",
+      "directions": 4
+    },
+    {
+      "name": "t45_rightleg",
+      "directions": 4
+    },
+    {
+      "name": "t45_leftleg",
+      "directions": 4
+    },
+    {
+      "name": "t45_righthand",
+      "directions": 4
+    },
+    {
+      "name": "t45_lefthand",
+      "directions": 4
+    },
+    {
+      "name": "t45_helmet",
+      "directions": 4
+    },
+    {
+      "name": "T45Armor",
+      "directions": 4
+    }
+  ]
+}
