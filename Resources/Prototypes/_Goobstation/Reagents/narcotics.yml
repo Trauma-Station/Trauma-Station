@@ -108,9 +108,8 @@
           min: 5
         probability: 0.05
         time: 4
-      - !type:GenericStatusEffect # tripping balls, duh
-        key: SeeingRainbows
-        component: SeeingRainbows
+      - !type:ModifyStatusEffect # tripping balls, duh
+        effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 20
       - !type:Drunk
@@ -461,13 +460,12 @@
         - !type:MetabolizerTypeCondition
           type: [ Yowie ]
           inverted: true
-      - !type:GenericStatusEffect # tripping balls
+      - !type:ModifyStatusEffect # tripping balls
         conditions:
         - !type:ReagentCondition
           reagent: Heroin
           min: 10.5
-        key: SeeingRainbows
-        component: SeeingRainbows
+        effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 20
       - !type:Drunk

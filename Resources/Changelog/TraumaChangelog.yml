@@ -1562,3 +1562,9 @@ Entries:
       message: Updated and re-enabled Delta station.
   id: 188
   time: '2026-01-18T13:27:47.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed BZ and other gases not making you high, go to sleep, etc.
+  id: 189
+  time: '2026-01-18T16:04:52.0000000+00:00'

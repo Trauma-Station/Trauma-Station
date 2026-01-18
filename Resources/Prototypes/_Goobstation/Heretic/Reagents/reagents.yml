@@ -45,9 +45,9 @@
       - !type:CleanBloodstream
         excluded: EldritchEssence # Trauma - Exclude from chempurge
         cleanseRate: 3
-      - !type:GenericStatusEffect
-        key: SeeingRainbows
-        time: 50.0
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
+        time: 50
         type: Remove
       - !type:TakeStaminaDamage
         amount: -10
