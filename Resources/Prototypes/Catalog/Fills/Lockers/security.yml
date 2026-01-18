@@ -191,6 +191,13 @@
       entity_storage: !type:NestedSelector
         tableId: FillGunSafeDisabler
 
+- type: entityTable
+  id: FillGunSafeDisabler
+  table: !type:AllSelector
+    children:
+    - id: WeaponDisabler
+      amount: 5
+
 - type: entity
   parent: [GunSafeBaseSecure, BaseSecurityContraband]
   id: GunSafePistolMk58

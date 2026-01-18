@@ -170,13 +170,6 @@
       amount: 2
 
 - type: entityTable
-  id: FillGunSafeDisabler
-  table: !type:AllSelector
-    children:
-    - id: WeaponDisabler
-      amount: 5
-
-- type: entityTable
   id: FillGunSafePhaser
   table: !type:AllSelector
     children:
