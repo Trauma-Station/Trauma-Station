@@ -49,8 +49,10 @@
     SurveillanceWirelessCameraBodySecurity: 5 # Goobstation
     ClothingMaskGasSecurity: 5 # Goobstation
     ClothingMaskNeckGaiterRed: 3
-    ClothingHandsGlovesColorBlack: 3
-    ClothingHandsGlovesFingerless: 3
+    # ClothingHandsGlovesColorBlack: 3 # Trauma
+    # ClothingHandsGlovesFingerless: 3 # Trauma
+    ClothingHandsGlovesSecurity: 3 # Trauma
+    ClothingHandsGlovesSecurityBlue: 3 # Trauma
     ClothingUniformJumpskirtSec: 3
     ClothingUniformJumpsuitSecGrey: 3
     ClothingUniformJumpskirtSecGrey: 3
