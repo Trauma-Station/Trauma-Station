@@ -24,6 +24,9 @@
   - type: Loadout
     prototypes: [ReinforcementOfficer]
     roleLoadout: [ RoleSurvivalSecurity ]
+  - type: AutoImplant
+    implants:
+    - MindShieldImplant
 
 - type: entity
   parent: BaseReinforcement
@@ -34,6 +37,9 @@
   - type: Loadout
     prototypes: [ReinforcementOfficerSpec]
     roleLoadout: [ RoleSurvivalSecurity ]
+  - type: AutoImplant
+    implants:
+    - MindShieldImplant
 
 # Service Reinforcements
 
@@ -167,8 +173,7 @@
     id: SecurityPDA
     ears: ClothingHeadsetAltSecurityRegular
     back: ClothingBackpackSecurity
-  inhand:
-  - MindShieldImplanter
+    eyes: ClothingEyesHudSecurity
 
 - type: startingGear
   id: ReinforcementOfficerSpec
@@ -181,11 +186,10 @@
     pocket1: WeaponLaserSidearm
     outerClothing: ClothingOuterArmorBasic
     head: ClothingHeadHelmetBasic
+    eyes: ClothingEyesHudSecurity
   storage:
     back:
     - WeaponLaserCarbine
-  inhand:
-  - MindShieldImplanter
 
 # StartingGear Others
 
