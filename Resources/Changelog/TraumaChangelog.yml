@@ -1576,3 +1576,9 @@ Entries:
       message: Removed wound multiplier from Holy Chainsaw and Holy Claymore.
   id: 190
   time: '2026-01-18T17:33:49.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Updated Kettle station and added it back to the pool.
+  id: 191
+  time: '2026-01-19T08:44:10.0000000+00:00'
