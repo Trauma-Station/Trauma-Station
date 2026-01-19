@@ -1582,3 +1582,9 @@ Entries:
       message: Updated Kettle station and added it back to the pool.
   id: 191
   time: '2026-01-19T08:44:10.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: NanoTask printing delay increased from 5 to 20 seconds.
+  id: 192
+  time: '2026-01-19T15:18:45.0000000+00:00'
