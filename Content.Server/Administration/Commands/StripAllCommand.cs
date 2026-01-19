@@ -64,4 +64,3 @@ public sealed class StripAllCommand : LocalizedEntityCommands
         return CompletionResult.Empty;
     }
 }
-

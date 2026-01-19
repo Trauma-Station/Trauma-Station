@@ -313,7 +313,7 @@
     tags:
     - DroneUsable
     - WeldingTool
-    - WelderExperimental 
+    - WelderExperimental
 
 - type: entity
   name: emergency welding tool

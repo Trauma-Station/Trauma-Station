@@ -11,7 +11,7 @@
   - FlandHighPop
   - Loop
   - Marathon
-  #- Meta
+  - Meta
   #- Oasis
   #- OasisHighPop
   #- Omega
@@ -22,7 +22,7 @@
   #- Kettle
   #- Submarine
   - Leonid
-  #- Delta
+  - Delta
   #- Chloris
   - Cog
   #- Serpentcrest

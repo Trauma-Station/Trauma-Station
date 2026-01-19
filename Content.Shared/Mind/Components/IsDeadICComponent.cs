@@ -13,4 +13,3 @@ public sealed partial class IsDeadICComponent : Component
     [DataField]
     public bool Dead = true;
 }
-

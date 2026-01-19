@@ -4,9 +4,10 @@
   - PolymerBaton
   - SpearTelescopic
   - WeaponBillyClub
+  - WeaponLaserSidearm
 
 - type: latheRecipePack
-  id: TraumaSecurityMechParts
+  id: TraumaMechParts
   recipes:
   - EDHead
   - EDLegL

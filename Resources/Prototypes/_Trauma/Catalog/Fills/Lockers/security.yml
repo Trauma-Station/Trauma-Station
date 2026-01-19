@@ -37,6 +37,7 @@
     - id: ClothingHeadsetAltSecurityRegular
     - id: PanicButton
     - id: PepperSpray
+    - id: WeaponLaserSidearm
 
 - type: entity
   parent: BaseTraumaGunSafe
@@ -110,6 +111,18 @@
       entity_storage: !type:NestedSelector
         tableId: FillGunSafeRiot
 
+- type: entity
+  parent: BaseTraumaGunSafe
+  id: GunSafePhaser
+  name: phaser safe
+  components:
+  - type: StationAlertLevelLock
+    lockedAlertLevels: []
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillGunSafePhaser
+
 - type: entityTable
   id: FillGunSafeRiot
   table: !type:AllSelector
@@ -155,3 +168,10 @@
     children:
     - id: ClothingBeltCorporateJudo
       amount: 2
+
+- type: entityTable
+  id: FillGunSafePhaser
+  table: !type:AllSelector
+    children:
+    - id: WeaponLaserSidearm
+      amount: 5

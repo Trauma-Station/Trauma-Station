@@ -42,35 +42,7 @@
   - BorgModuleAdvancedSurgery # Shitmed
   technologyPrerequisites:
   - AdvancedEntertainment
-  position: -2,4
-
-- type: technology
-  id: BasicCybernetics
-  name: research-technology-basic-cybernetics
-  icon:
-    sprite: _Shitmed/Mobs/Species/Misc/Cybernetics/organs.rsi
-    state: eyes
-  discipline: CivilianServices
-  tier: 2
-  cost: 10000
-  recipeUnlocks:
-  - LeftArmCybernetic
-  - RightArmCybernetic
-  - LeftHandCybernetic
-  - RightHandCybernetic
-  - LeftLegCybernetic
-  - RightLegCybernetic
-  - LeftFootCybernetic
-  - RightFootCybernetic
-  - BasicCyberneticEyes
-  - BasicCyberneticHeart
-  - BasicCyberneticLungs
-  - BasicCyberneticLiver
-  - HypoportSecure # Trauma
-  position: -2,5
-  technologyPrerequisites:
-  - AdvancedTreatment
-  - BasicRobotics
+  position: -1,4
 
 - type: technology
   id: Autodoc
@@ -83,87 +55,11 @@
   cost: 10000
   recipeUnlocks:
   - AutodocCircuitboard
-  position: -2,6
+  position: -1,5
   technologyPrerequisites:
-  - BasicCybernetics
-
-- type: technology
-  id: BasicAugmentation
-  name: research-technology-basic-augmentation
-  icon:
-    sprite: _Shitmed/Objects/Augments/power.rsi
-    state: cell
-  discipline: CivilianServices
-  tier: 2
-  cost: 5000
-  position: -5,6
-  technologyPrerequisites:
-  - BasicCybernetics
-  recipeUnlocks:
-  - AugmentPowerCellSlotCasing
-  - AugmentRechargerCasing
-
-- type: technology
-  id: ImplantedTools
-  name: research-technology-implanted-tools
-  icon:
-    sprite: _Shitmed/Objects/Augments/arm.rsi
-    state: base
-  discipline: CivilianServices
-  tier: 2
-  cost: 10000
-  position: -5,7
-  technologyPrerequisites:
-  - BasicAugmentation
-  recipeUnlocks:
-  - AugmentToolPanelCasing
-  - AugmentUtilityPanelElectronics
-  - AugmentBotanyPanelElectronics
-  - AugmentSurgeryPanelElectronics
-  - AugmentPaperworkPanelElectronics
-
-- type: technology
-  id: CombatAugmentation
-  name: research-technology-combat-augmentation
-  icon:
-    sprite: _Shitmed/Objects/Augments/arm.rsi
-    state: strength
-  discipline: CivilianServices
-  tier: 2
-  cost: 10000
-  position: -6,7
-  technologyPrerequisites:
-  - BasicAugmentation
-  recipeUnlocks:
-  - AugmentStrengthCasing
-  - AugmentStrengthElectronics
+  - AdvancedTreatment
 
 # Tier 3
-
-- type: technology
-  id: AdvancedCybernetics
-  name: research-technology-advanced-cybernetics
-  icon:
-    sprite: _Shitmed/Mobs/Species/Misc/Cybernetics/organs.rsi
-    state: heart-u-on
-  discipline: CivilianServices
-  tier: 3
-  cost: 15000
-  recipeUnlocks:
-  - UpgradedCyberneticHeart
-  - UpgradedCyberneticLungs
-  - JawsOfLifeLeftArm
-  - JawsOfLifeRightArm
-  - SpeedLeftLeg
-  - SpeedRightLeg
-  - DexLeftHand
-  - DexRightHand
-  - DiagnosticCyberneticEyes
-  - SecurityCyberneticEyes
-  - MedicalCyberneticEyes
-  position: -2,7
-  technologyPrerequisites:
-  - Autodoc
 
 - type: technology
   id: HighEndSurgery
@@ -179,5 +75,5 @@
   - AutodocUpgradeKitBluespace # Goobstation
   - OmnimedTool # Trauma - moved out of the 5m in tech
   technologyPrerequisites:
-  - AdvancedCybernetics
-  position: -2,9
+  - Autodoc
+  position: -1,6

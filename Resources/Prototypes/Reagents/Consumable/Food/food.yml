@@ -55,7 +55,7 @@
             Burn: -0.7 # Trauma - 0.5 to 0.7 healing buff.
       # Helps you stop bleeding to an extent.
       - !type:ModifyBleed
-        amount: -0.35 # Trauma - was 0.25. 
+        amount: -0.35 # Trauma - was 0.25.
       - !type:ModifyBloodLevel # Trauma - Moved here from nutriment.
         amount: 0.25
       - !type:SatiateHunger #Numbers are balanced with this in mind + it helps limit how much healing you can get from food

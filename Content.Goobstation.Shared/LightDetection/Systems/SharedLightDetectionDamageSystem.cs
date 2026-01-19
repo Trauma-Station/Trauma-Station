@@ -1,4 +1,4 @@
-﻿using Content.Goobstation.Shared.LightDetection.Components;
+using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Shared.Alert;
 
 namespace Content.Goobstation.Shared.LightDetection.Systems;

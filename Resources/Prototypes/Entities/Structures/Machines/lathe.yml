@@ -665,7 +665,7 @@
     - ToolAugments
     - PowerCells
     - TraumaCybernetics # Trauma
-    - TraumaSecurityMechParts # Trauma
+    - TraumaMechParts # Trauma
   - type: EmagLatheRecipes # Goobstation
     emagStaticPacks:
     - MechWeaponsSecurityStatic
@@ -766,7 +766,7 @@
     - SecurityExplosives
     - SecurityAmmo
     - SecurityWeapons
-    - SecurityDisablers
+    # - SecurityDisablers # Trauma - disablers replaced with phasers
     # <Goob>
     - SecurityWeaponsGoob
     - RestraintTechnology

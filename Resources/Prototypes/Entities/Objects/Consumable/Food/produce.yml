@@ -497,7 +497,7 @@
     quickEquip: false
 #<Trauma>
   - type: Perishable
-    rotAfter: 300
+    rotAfter: 900 # won't someone please think of the clowns
     molsPerSecondPerUnitMass: 0
   - type: RotInto
     entity: FoodRot

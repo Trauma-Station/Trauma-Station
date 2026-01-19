@@ -247,5 +247,3 @@ public sealed class PoissonDiskSampler
         public int GridWidth, GridHeight;
     }
 }
-
-

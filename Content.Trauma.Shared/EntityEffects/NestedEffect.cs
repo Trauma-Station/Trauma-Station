@@ -3,6 +3,8 @@ using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 using Content.Shared.Localizations;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
+using System.Text;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -17,20 +19,40 @@ public sealed partial class NestedEffect : EntityEffectBase<NestedEffect>
     [DataField(required: true)]
     public ProtoId<EntityEffectPrototype> Proto;
 
+    private List<string> _conditions = new();
+    private List<string> _effects = new();
+
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         var proto = prototype.Index(Proto);
         if (proto.GuidebookText is {} key)
             return Loc.GetString(key, ("chance", Probability));
 
-        var effects = new List<string>();
+        _effects.Clear();
         foreach (var effect in proto.Effects)
         {
-            if (effect.EntityEffectGuidebookText(prototype, entSys) is {} text)
-                effects.Add(text);
+            if (effect.EntityEffectGuidebookText(prototype, entSys) is not {} text)
+                continue;
+
+            // basically GuidebookReagentEffectDescription but independent of reagents and no linq
+            _conditions.Clear();
+            if (effect.Conditions is {} conditions)
+            {
+                foreach (var condition in conditions)
+                {
+                    _conditions.Add(condition.EntityConditionGuidebookText(prototype));
+                }
+            }
+
+            var desc = Loc.GetString("guidebook-nested-effect-description",
+                ("effect", text),
+                ("chance", effect.Probability),
+                ("conditionCount", _conditions.Count),
+                ("conditions", ContentLocalizationManager.FormatList(_conditions)));
+            _effects.Add(desc);
         }
 
-        return effects.Count == 0 ? null : ContentLocalizationManager.FormatList(effects);
+        return _effects.Count == 0 ? null : string.Join("\n", _effects);
     }
 }
 

@@ -42,10 +42,10 @@ using Content.Shared.Cluwne;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
+using Content.Shared.EntityEffects;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Goobstation.Maths.FixedPoint;
-using Content.Shared._Lavaland.Movement;
 using Content.Shared.Ghost;
 using Content.Shared.Gibbing.Events;
 using Content.Shared.Hands.Components;
@@ -113,6 +113,7 @@ public abstract class SharedSpellsSystem : EntitySystem
     [Dependency] protected readonly IPrototypeManager ProtoMan = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] protected readonly EntityLookupSystem Lookup = default!;
+    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] protected readonly SharedMapSystem Map = default!;
     [Dependency] protected readonly SharedStunSystem Stun = default!;
     [Dependency] protected readonly SharedPhysicsSystem Physics = default!;
@@ -189,8 +190,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         SubscribeLocalEvent<ThrownLightningEvent>(OnThrownLightning);
         SubscribeLocalEvent<ChargeMagicEvent>(OnCharge);
         SubscribeLocalEvent<BlinkSpellEvent>(OnBlink);
-        SubscribeLocalEvent<TileToggleSpellEvent>(OnTileToggle);
-        SubscribeLocalEvent<PredictionToggleSpellEvent>(OnPredictionToggle);
+        SubscribeLocalEvent<EntityEffectSpellEvent>(OnEntityEffect);
         SubscribeAllEvent<SetSwapSecondaryTarget>(OnSwapSecondaryTarget);
     }
 
@@ -1195,7 +1195,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         ev.Handled = true;
     }
 
-    private void OnTileToggle(TileToggleSpellEvent ev)
+    private void OnEntityEffect(EntityEffectSpellEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
             return;
@@ -1206,29 +1206,7 @@ public abstract class SharedSpellsSystem : EntitySystem
             return;
         }
 
-        if (HasComp<HierophantBeatComponent>(ev.Target))
-            RemComp<HierophantBeatComponent>(ev.Target);
-        else
-            EnsureComp<HierophantBeatComponent>(ev.Target);
-
-        ev.Handled = true;
-    }
-
-    private void OnPredictionToggle(PredictionToggleSpellEvent ev)
-    {
-        if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
-            return;
-
-        if (IsTouchSpellDenied(ev.Target))
-        {
-            ev.Handled = true;
-            return;
-        }
-
-        if (HasComp<CurseOfByondComponent>(ev.Target))
-            RemComp<CurseOfByondComponent>(ev.Target);
-        else
-            EnsureComp<CurseOfByondComponent>(ev.Target);
+        _effects.ApplyEffects(ev.Target, ev.Effects);
 
         ev.Handled = true;
     }

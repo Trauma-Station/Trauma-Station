@@ -1,4 +1,4 @@
-      
+
 # SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Aidenkrz <28298836+Aidenkrz@users.noreply.github.com>
 #
@@ -50,7 +50,7 @@ jobs:
             echo "Error fetching PR files from GitHub API."
             exit 1
           fi
-          
+
           if ! echo "$PR_FILES_JSON" | jq -e . > /dev/null; then
              echo "Warning: Received empty or invalid JSON from GitHub API for PR files."
              PR_FILES="" # Set PR_FILES to empty to avoid errors below
@@ -112,5 +112,3 @@ jobs:
           commit_author: ${{ vars.CHANGELOG_USER }} <${{ vars.CHANGELOG_EMAIL }}>
           skip_dirty_check: false
           skip_fetch: true
-
-    
