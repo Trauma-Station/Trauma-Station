@@ -29,17 +29,13 @@
     - MindShieldImplant
 
 - type: entity
-  parent: BaseReinforcement
+  parent: SecurityReinforcement
   id: SecurityReinforcementSpecialist
   name: reinforcement security officer specialist
   categories: [ HideSpawnMenu ]
   components:
   - type: Loadout
     prototypes: [ReinforcementOfficerSpec]
-    roleLoadout: [ RoleSurvivalSecurity ]
-  - type: AutoImplant
-    implants:
-    - MindShieldImplant
 
 # Service Reinforcements
 
@@ -176,17 +172,12 @@
     eyes: ClothingEyesHudSecurity
 
 - type: startingGear
+  parent: ReinforcementOfficer
   id: ReinforcementOfficerSpec
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
-    shoes: ClothingShoesBootsCombat
-    id: SecurityPDA
-    ears: ClothingHeadsetAltSecurityRegular
-    back: ClothingBackpackSecurity
     pocket1: WeaponLaserSidearm
     outerClothing: ClothingOuterArmorBasic
     head: ClothingHeadHelmetBasic
-    eyes: ClothingEyesHudSecurity
   storage:
     back:
     - WeaponLaserCarbine
