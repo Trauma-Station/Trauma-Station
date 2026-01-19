@@ -30,7 +30,7 @@
 
 - type: entity
   parent: BaseReinforcement
-  id: MSecurityReinforcementSpecialist
+  id: SecurityReinforcementSpecialist
   name: reinforcement security officer specialist
   categories: [ HideSpawnMenu ]
   components:
