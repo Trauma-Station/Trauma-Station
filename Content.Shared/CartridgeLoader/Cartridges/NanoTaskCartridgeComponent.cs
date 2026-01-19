@@ -30,7 +30,7 @@ public sealed partial class NanoTaskCartridgeComponent : Component
     /// How long in between each time the user can print out a task
     /// </summary>
     [DataField]
-    public TimeSpan PrintDelay = TimeSpan.FromSeconds(5);
+    public TimeSpan PrintDelay = TimeSpan.FromSeconds(20); # Trauma - Increase PrintDelay from 5 to 20
 }
 
 /// <summary>
