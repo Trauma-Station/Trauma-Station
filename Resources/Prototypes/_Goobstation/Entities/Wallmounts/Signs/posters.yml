@@ -175,13 +175,3 @@
   - type: Sprite
     sprite: _Goobstation/Structures/posters.rsi
     state: goob_poster1_contraband
-
-- type: entity
-  parent: PosterBase
-  id: PosterContrabandGoobYakub
-  name: "Yakub Poster"
-  description: "Your yakubian powers of tricknology imbued into you by Yakub strengthen as you stare into the poster"
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Structures/posters.rsi
-    state: goob_poster2_contraband
