@@ -48,6 +48,10 @@
   <Project Path="Content.Goobstation.Common/Content.Goobstation.Common.csproj" />
   <Project Path="Content.Goobstation.Maths/Content.Goobstation.Maths.csproj" />
   <Project Path="Content.Goobstation.UIKit/Content.Goobstation.UIKit.csproj" />
+  <Project Path="Content.Lavaland.Server/Content.Lavaland.Server.csproj" />
+  <Project Path="Content.Lavaland.Shared/Content.Lavaland.Shared.csproj" />
+  <Project Path="Content.Lavaland.Client/Content.Lavaland.Client.csproj" />
+  <Project Path="Content.Lavaland.Common/Content.Lavaland.Common.csproj" />
   <Project Path="Content.ModuleManager/Content.ModuleManager.csproj" />
   <!-- </Trauma> -->
   <Project Path="Content.Tests/Content.Tests.csproj" />

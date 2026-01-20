@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Weapons.Multishot;
 using Content.Goobstation.Common.Weapons.Ranged;
-using Content.Shared._Lavaland.Weapons.Ranged.Events;
+using Content.Lavaland.Common.Weapons.Ranged;
 using Content.Shared._Shitmed.Weapons.Ranged.Events;
 using Content.Shared.Mech.Components;
 using Content.Shared.Weapons.Hitscan.Events;
@@ -653,11 +653,10 @@ public abstract partial class SharedGunSystem : EntitySystem
                 for (var i = 1; i < ammoSpreadComp.Count; i++)
                 {
                     var newuid = PredictedSpawnAtPosition(ammoSpreadComp.Proto, fromEnt);
-                    // Lavaland Change: Raise event when a projectile/pellet is fired from a gun.
-                    RaiseLocalEvent(gunUid, new ProjectileShotEvent()
-                    {
-                        FiredProjectile = newuid
-                    });
+                    // <Lavaland>
+                    var shotEv = new ProjectileShotEvent(newuid);
+                    RaiseLocalEvent(gunUid, ref shotEv);
+                    // </Lavaland>
                     SetProjectilePerfectHitEntities(newuid, user, new MapCoordinates(toMap, fromMap.MapId)); // Goob
                     ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation
                     shotProjectiles.Add(newuid);
@@ -665,6 +664,10 @@ public abstract partial class SharedGunSystem : EntitySystem
             }
             else
             {
+                // <Lavaland>
+                var shotEv = new ProjectileShotEvent(ammoEnt);
+                RaiseLocalEvent(gunUid, ref shotEv);
+                // </Lavaland>
                 ShootOrThrow(ammoEnt, mapDirection, gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation
                 shotProjectiles.Add(ammoEnt);
             }

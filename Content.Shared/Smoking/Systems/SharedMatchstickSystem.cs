@@ -21,5 +21,5 @@ public abstract class SharedMatchstickSystem : EntitySystem
         Dirty(ent);
         return true;
     }
-} 
+}
 // Shitmed Change End

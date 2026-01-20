@@ -30,7 +30,7 @@ using Content.Server.Popups;
 using Content.Server.Stunnable;
 using Content.Server.Temperature.Components;
 using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared._Lavaland.Chasm;
+using Content.Lavaland.Shared.Chasm;
 using Content.Shared._Shitmed.Body.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
 using Content.Shared.Actions;
@@ -121,7 +121,9 @@ public sealed partial class DevilSystem : EntitySystem
         EnsureComp<CrematoriumImmuneComponent>(devil);
         EnsureComp<AntagImmuneComponent>(devil);
         EnsureComp<SupermatterImmuneComponent>(devil);
-        EnsureComp<PreventChasmFallingComponent>(devil).DeleteOnUse = false;
+        var jaunter = EnsureComp<PreventChasmFallingComponent>(devil);
+        jaunter.DeleteOnUse = false;
+        Dirty(devil, jaunter);
         EnsureComp<FTLSmashImmuneComponent>(devil);
 
         // Allow infinite revival

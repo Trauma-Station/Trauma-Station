@@ -34,4 +34,3 @@
   - type: EntityTargetAction
     canTargetSelf: false
     event: !type:DemonicWhisperEvent
-

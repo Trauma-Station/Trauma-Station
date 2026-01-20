@@ -126,6 +126,7 @@
   - type: UIFragment
     ui: !type:NanoTaskUi
   - type: NanoTaskCartridge
+    printDelay: 20 # Trauma - change base print delay for nanotask to 20
 
 - type: entity
   parent: BasePDACartridge

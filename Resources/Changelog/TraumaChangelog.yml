@@ -1568,3 +1568,33 @@ Entries:
       message: Fixed BZ and other gases not making you high, go to sleep, etc.
   id: 189
   time: '2026-01-18T16:04:52.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: Nullrod forms tweaked to do majority holy damage, rather than brute.
+    - type: Remove
+      message: Removed wound multiplier from Holy Chainsaw and Holy Claymore.
+  id: 190
+  time: '2026-01-18T17:33:49.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Updated Kettle station and added it back to the pool.
+  id: 191
+  time: '2026-01-19T08:44:10.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: NanoTask printing delay increased from 5 to 20 seconds.
+  id: 192
+  time: '2026-01-19T15:18:45.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Fix
+      message: Reinforcement Security Officers are mindshielded on arrival.
+    - type: Add
+      message: SecHud to Reinforcement Security Officers loadout.
+    - type: Fix
+      message: Specialist reinforcement now spawns the correct loadout.
+  id: 193
+  time: '2026-01-19T21:03:25.0000000+00:00'

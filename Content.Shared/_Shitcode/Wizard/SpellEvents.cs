@@ -13,6 +13,7 @@ using Content.Shared.Atmos;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Destructible.Thresholds;
+using Content.Shared.EntityEffects;
 using Content.Shared.Explosion;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Item;
@@ -466,10 +467,13 @@ public sealed partial class BlinkSpellEvent : InstantActionEvent
     public MinMax Radius = new(0, 6);
 }
 
-public sealed partial class TileToggleSpellEvent : EntityTargetActionEvent
+public sealed partial class EntityEffectSpellEvent : EntityTargetActionEvent
 {
     [DataField]
     public SoundSpecifier? Sound;
+
+    [DataField(required: true)]
+    public EntityEffect[] Effects = default!;
 }
 
 [DataDefinition]
@@ -477,12 +481,6 @@ public sealed partial class GlobalTileToggleEvent : EntityEventArgs
 {
     [DataField]
     public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/_Goobstation/Wizard/ghost.ogg");
-}
-
-public sealed partial class PredictionToggleSpellEvent : EntityTargetActionEvent
-{
-    [DataField]
-    public SoundSpecifier? Sound;
 }
 
 [DataDefinition]

@@ -144,4 +144,3 @@ public sealed class EquipTo : LocalizedCommands
         return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-equipto-hint"));
     }
 }
-

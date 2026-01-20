@@ -78,10 +78,8 @@
     attackRate: 0.8
     damage:
       types:
-        Slash: 13
-        Holy: 10
-      woundSeverityMultipliers:
-        Slash: 2.5
+        Slash: 10
+        Holy: 13
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Wieldable
@@ -199,8 +197,7 @@
     damage:
       types:
         Heat: 10
-        Slash: 4
-        Holy: 10
+        Holy: 14
     soundHit:
       path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
   - type: IgniteOnMeleeHit # emphasis on FLAMING GIFT!!
@@ -252,8 +249,8 @@
     attackRate: 1.5
     damage:
       types:
-        Slash: 9
-        Holy: 10
+        Slash: 7
+        Holy: 12
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: ItemRandomizeMovementspeed
@@ -292,8 +289,8 @@
     attackRate: 3
     damage:
       types:
-        Holy: 6
-        Blunt: 2.5
+        Holy: 7
+        Blunt: 1
     soundHit:
       collection: BoxingHit
   - type: StaminaDamageOnHit
@@ -324,8 +321,8 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Slash: 12
-        Holy: 12
+        Slash: 10
+        Holy: 14
   - type: MeleeWeapon
     attackRate: 1.5
     damage:
@@ -449,8 +446,8 @@
     attackRate: 0.8
     damage:
       types:
-        Holy: 10
-        Blunt: 12
+        Holy: 12
+        Blunt: 10
     soundHit:
       collection: RubberHammer
       params:
@@ -597,9 +594,6 @@
         Slash: 3
         Structural: 20
         Holy: 6
-      woundSeverityMultipliers:
-        Slash: 2
-        Blunt: 2
     soundHit:
       path: /Audio/Weapons/chainsaw.ogg
       params:
@@ -753,8 +747,8 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 18
-        Holy: 10
+        Piercing: 10
+        Holy: 18
     angle: 0
     animation: WeaponArcThrust
     soundHit:
@@ -765,8 +759,8 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 25
-        Holy: 15
+        Piercing: 15
+        Holy: 25
   - type: EmbeddableProjectile
     offset: -0.15,0.0
   - type: ThrowingAngle

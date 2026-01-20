@@ -8,5 +8,5 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <controls:GrabStageEnums
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Goobstation.Common.MartialArts">
-    
+
 </controls:GrabStageEnums>

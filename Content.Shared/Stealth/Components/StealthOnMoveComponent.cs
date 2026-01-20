@@ -50,7 +50,7 @@ namespace Content.Shared.Stealth.Components
         [AutoNetworkedField] // Goobstation
         public float MaxInvisibilityPenalty = 0.5f;
 
-        // Goobstation - Wait before stealth start accumulating 
+        // Goobstation - Wait before stealth start accumulating
         /// <summary>
         /// How long you shouldn't move to start accumulating stealth.
         /// </summary>

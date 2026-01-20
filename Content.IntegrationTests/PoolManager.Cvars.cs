@@ -1,5 +1,6 @@
 #nullable enable
 // <Trauma>
+using Content.Lavaland.Shared.CCVar;
 using Content.Trauma.Common.CCVar;
 // </Trauma>
 using Content.Shared.CCVar;
@@ -15,7 +16,7 @@ public static partial class PoolManager
     {
         // @formatter:off
         // <Trauma>
-        (CCVars.LavalandEnabled.Name, "false"),
+        (LavalandCVars.LavalandEnabled.Name, "false"),
         (TraumaCVars.GhostBarEnabled.Name, "false"),
         // </Trauma>
         (CCVars.DatabaseSynchronous.Name,     "true"),
