@@ -44,7 +44,7 @@
     state: ed209_prox
   - type: Tag
     tags:
-    - Ed209Prox
+    - Ed209Hat
 
 - type: entity
   id: EDAiCoreElectronics
