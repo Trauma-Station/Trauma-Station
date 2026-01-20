@@ -298,18 +298,6 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed 
             TryBleedOut(ent.AsNullable(), total / 5);
             _audio.PlayPredicted(ent.Comp.InstantBloodSound, ent, args.Origin);
         }
-
-        // Heat damage will cauterize, causing the bleed rate to be reduced.
-        else if (totalFloat <= ent.Comp.BloodHealedSoundThreshold && oldBleedAmount > 0)
-        {
-            // Magically, this damage has healed some bleeding, likely
-            // because it's burn damage that cauterized their wounds.
-
-            // We'll play a special sound and popup for feedback.
-            _popup.PopupPredicted(Loc.GetString("bloodstream-component-wounds-cauterized"), ent,
-                    ent, PopupType.Medium); // only the burned entity can see this
-            _audio.PlayPredicted(ent.Comp.BloodHealedSound, ent, args.Origin);
-        }
     }
 
     /// <summary>
