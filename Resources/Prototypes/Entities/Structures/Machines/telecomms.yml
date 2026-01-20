@@ -75,10 +75,10 @@
         whitelist:
           tags:
           - EncryptionCargo
-      variant-revolutionary: #Trauma
+      variant-revolutionary: # trauma
         whitelist:
           tags:
-          - EncryptionRevolutionary #Trauma
+          - EncryptionRevolutionary # trauma
       variant-engineering:
         whitelist:
           tags:

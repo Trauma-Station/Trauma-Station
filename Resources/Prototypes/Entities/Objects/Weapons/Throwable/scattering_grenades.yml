@@ -87,7 +87,7 @@
     sound:
       path: "/Audio/Machines/door_lock_off.ogg"
     positional: true
-  - type: Construction #Trauma
+  - type: Construction # trauma
     graph: ClusterBangGraph
     node: start
     deconstructionTarget: null

@@ -513,7 +513,7 @@
     graph: UraniumShiv
     node: icon
   - type: MeleeWeapon
-    attackRate: 2 #Trauma Was 1.5
+    attackRate: 2 # trauma Was 1.5
     damage:
       types:
         Slash: 3 # Trauma edit

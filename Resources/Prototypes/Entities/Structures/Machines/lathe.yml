@@ -448,7 +448,7 @@
     - SecurityAmmoStatic
     - SyndicateAmmoStatic
     # Goobstation
-    # - SecurityAmmoStaticGoob #Trauma Remove 8 Gauge
+    # - SecurityAmmoStaticGoob # trauma Remove 8 Gauge
     - SyndicateAmmoLightStatic
     - ScienceExplosives
   - type: BlueprintReceiver

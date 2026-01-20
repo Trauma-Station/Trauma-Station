@@ -243,7 +243,7 @@
   description: A cyborg-mounted weapon system based on the Viper pistol. Creates ammunition on the fly from an internal fabricator, which slowly self-charges.
   components:
   - type: Gun
-    fireRate: 4 #trauma
+    fireRate: 4 # trauma
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -340,7 +340,7 @@
   - type: Item
     storedOffset: 0,-2
   - type: Gun
-    fireRate: 3 #trauma
+    fireRate: 3 # trauma
     availableModes:
     - SemiAuto
     soundGunshot:
