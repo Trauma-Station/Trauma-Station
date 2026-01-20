@@ -302,7 +302,6 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed 
 
         /* Trauma - shitmed popup spam
         // Heat damage will cauterize, causing the bleed rate to be reduced.
-
         else if (totalFloat <= ent.Comp.BloodHealedSoundThreshold && oldBleedAmount > 0)
         {
             // Magically, this damage has healed some bleeding, likely
