@@ -281,18 +281,6 @@
 
 # Decorations (bonfire, fireplace)
 - type: construction
-  id: Bonfire
-  graph: FiresGraph
-  startNode: start
-  targetNode: BonfireNode
-  category: construction-category-furniture
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
-
-- type: construction
   id: Fireplace
   graph: FiresGraph
   startNode: start

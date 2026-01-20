@@ -2,7 +2,7 @@ using System.Linq;
 using Content.Shared.Chemistry;
 using Content.Shared.Damage.Components;
 using Content.Shared.Explosion.EntitySystems;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameStates;

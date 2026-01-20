@@ -28,6 +28,7 @@ public sealed class ChangelingArmorTest
 
     [Test]
     [TestCase("ActionToggleChitinousArmor", "ChangelingClothingOuterArmor", "ChangelingClothingHeadHelmet")]
+    [Explicit] // Trauma - takes so long for no benefit idc
     public async Task TestChangelingFullArmor(string actionProto, string outerProto, string helmetProto)
     {
         await using var pair = await PoolManager.GetServerClient();

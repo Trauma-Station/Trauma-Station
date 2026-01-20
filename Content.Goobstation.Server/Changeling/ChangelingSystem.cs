@@ -37,7 +37,7 @@ using System.Numerics;
 using Content.Goobstation.Common.Actions;
 using Content.Goobstation.Common.Changeling;
 using Content.Goobstation.Common.MartialArts;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Goobstation.Server.Changeling.Objectives.Components;
 using Content.Goobstation.Server.Changeling.GameTicking.Rules;
 using Content.Goobstation.Shared.Flashbang;

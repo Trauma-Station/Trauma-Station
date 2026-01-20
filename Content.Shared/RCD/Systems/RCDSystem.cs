@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;

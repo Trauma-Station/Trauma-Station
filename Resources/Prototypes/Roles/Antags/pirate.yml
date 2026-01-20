@@ -37,3 +37,16 @@
   equipment:
     head: ClothingHeadHatPirateTricord
     outerClothing: ClothingOuterCoatGentle
+
+- type: chameleonOutfit
+  id: PirateChameleonOutfit
+  name: roles-antag-pirate-name
+  icon: "JobIconPirate"
+  startingGear: PirateFirstmateGear
+  equipment:
+    eyes: ClothingEyesEyepatch
+    ears: ClothingHeadsetFreelance
+    mask: ClothingMaskNeckGaiter
+    neck: ClothingNeckBling
+    gloves: ClothingHandsGlovesColorLightBrown
+    outerClothing: ClothingOuterCoatPirate

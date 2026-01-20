@@ -35,7 +35,6 @@ using Content.Shared.Access.Components;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clumsy;
 using Content.Shared.Cluwne;
@@ -45,9 +44,9 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.EntityEffects;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Ghost;
-using Content.Shared.Gibbing.Events;
+using Content.Shared.Gibbing;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
@@ -121,7 +120,7 @@ public abstract class SharedSpellsSystem : EntitySystem
     [Dependency] protected readonly SharedContainerSystem Container = default!;
     [Dependency] protected readonly SharedHandsSystem Hands = default!;
     [Dependency] protected readonly MetaDataSystem Meta = default!;
-    [Dependency] protected readonly SharedBodySystem Body = default!;
+    [Dependency] protected readonly GibbingSystem Gibbing = default!;
     [Dependency] protected readonly NpcFactionSystem Faction = default!;
     [Dependency] protected readonly SharedRoleSystem Role = default!;
     [Dependency] protected readonly DamageableSystem Damageable = default!;
@@ -387,7 +386,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         var coords = TransformSystem.GetMapCoordinates(ev.Target);
 
         if (Timing.IsFirstTimePredicted)
-            Body.GibBody(ev.Target, contents: GibContentsOption.Gib);
+            Gibbing.Gib(ev.Target);
 
         ExplodeCorpse(ev);
 
@@ -1089,7 +1088,7 @@ public abstract class SharedSpellsSystem : EntitySystem
                 new DamageSpecifier(ProtoMan.Index(ev.KillDamage), 666),
                 true);
             if (dmg.GetTotal() > 1)
-                Body.GibBody(ev.Performer, contents: GibContentsOption.Gib);
+                Gibbing.Gib(ev.Performer);
         }
 
         if (_mobState.IsDead(ev.Performer))

@@ -544,8 +544,8 @@
   id: UplinkPistol9mmMagazine
   name: uplink-pistol-magazine-name
   description: uplink-pistol-magazine-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: red-icon }
-  productEntity: MagazinePistol
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi, state: base-icon }
+  productEntity: MagazinePistolHighCapacity
   cost:
     Telecrystal: 2 # goob - Ammo should be cheap.
   categories:
@@ -737,7 +737,7 @@
   description: uplink-stimpack-desc
   productEntity: Stimpack
   cost:
-    Telecrystal: 10 # goob - 1 TC per 3 seconds.
+    Telecrystal: 10 # Trauma - was 2, 5x (1 TC per 3 seconds)
   categories:
   - UplinkChemicals
 
@@ -748,7 +748,7 @@
   description: uplink-stimkit-desc
   productEntity: StimkitFilled
   cost:
-    Telecrystal: 40 # goob
+    Telecrystal: 25 # Trauma - was 5, 5x
   categories:
   - UplinkChemicals
 
@@ -823,7 +823,7 @@
   description: uplink-chameleon-projector-desc
   productEntity: ChameleonProjector
   cost:
-    Telecrystal: 30 # goob - Basically a meme item at 35 TC to be real.
+    Telecrystal: 15 # Trauma - was 3, 5x
   categories:
   - UplinkDeception
 
@@ -2230,7 +2230,7 @@
   description: uplink-smuggler-satchel-desc
   productEntity: ClothingBackpackSatchelSmugglerUnanchored
   cost:
-    Telecrystal: 10 # Goobstation
+    Telecrystal: 5 # Trauma - was 1, 5x
   categories:
   - UplinkDeception
 

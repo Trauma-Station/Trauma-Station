@@ -25,6 +25,7 @@ repos:
   - id: end-of-file-fixer
   - id: trailing-whitespace
   - id: fix-byte-order-marker
+    exclude: "^Resources/Changelog/Changelog.yml$" # BOM removal farms conflicts for every pr changelog
 
 ci:
   autofix_commit_msg: "[pre-commit] automated pr fixes"

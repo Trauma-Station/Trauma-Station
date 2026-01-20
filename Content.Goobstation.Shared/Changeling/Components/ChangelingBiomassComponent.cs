@@ -1,4 +1,4 @@
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Alert;
 using Content.Shared.Chat.Prototypes;
 using Robust.Shared.GameStates;

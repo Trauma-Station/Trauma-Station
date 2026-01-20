@@ -12,6 +12,7 @@
   description: Equipment for combat exosuits. This is the mechanical chainsword that'll pierce the heavens!
   components:
   - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_chainsword
   - type: MeleeWeapon
     autoAttack: true

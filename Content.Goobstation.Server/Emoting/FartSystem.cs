@@ -17,7 +17,7 @@ using Content.Goobstation.Shared.Emoting;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Popups;
 using Content.Shared.Atmos;
-using Content.Shared.Body.Systems;
+using Content.Shared.Gibbing;
 using Content.Shared.Chat;
 using Content.Shared.Camera;
 using Robust.Server.Audio;
@@ -41,7 +41,7 @@ public sealed partial class FartSystem : SharedFartSystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _recoilSystem = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
 
 
     private readonly string[] _fartSounds = [
@@ -229,7 +229,7 @@ public sealed partial class FartSystem : SharedFartSystem
 
             var ev = new BibleFartSmiteEvent(GetNetEntity(near));
             RaiseNetworkEvent(ev);
-            _bodySystem.GibBody(ent, splatModifier: 15);
+            _gibbing.Gib(ent);
             _audio.PlayEntity(ent.Comp.BibleSmiteSnd, Filter.Pvs(near), near, true);
             if (!ent.Comp.SuperFarted)
             {
