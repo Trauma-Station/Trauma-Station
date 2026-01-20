@@ -247,8 +247,8 @@
 - type: entity
   parent: SyndiCdDisk
   name: cd disk (Numbers)
-  id: JVNECdDiskNumber
-  description: All around the mulberry bush, the monkey chased the weasel...
+  id: CdDiskNumber
+  description: Contact the nearest syndicate listening post for reinforcements!
   components:
   - type: Vinyl
     song:
