@@ -91,6 +91,7 @@
 - type: entity
   name: kobold
   id: MobKoboldAngry
+  suffix: Angry # Trauma, this one wasn't suffixed for some reason.
   parent: MobBaseKobold
   description: Cousins to the sentient race of lizard people, kobolds blend in with their natural habitat and are as nasty as monkeys; ready to pull out your hair and stab you to death.
   components:

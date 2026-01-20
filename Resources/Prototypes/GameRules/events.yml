@@ -49,7 +49,7 @@
     - id: ParadoxCloneSpawn
     #- id: RevenantSpawn  # GoobStation - removed till rework
     - id: SleeperAgents
-    - id: ZombieOutbreak
+    #- id: ZombieOutbreak Trauma - we dont want this as a midround
     - id: LoneOpsSpawn
     #- id: WizardSpawn # Trauma - chud wizard removed pending rework
     - !type:NestedSelector

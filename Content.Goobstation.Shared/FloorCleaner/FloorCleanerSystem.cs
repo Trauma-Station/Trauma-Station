@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Footprints;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Decals;
 using Content.Shared.DoAfter;
@@ -141,6 +141,6 @@ public sealed class FloorCleanerSystem : EntitySystem
         _absorbent.Mop((uid,absorb), uid, target );
         _useDelay.CancelDelay((uid, useDelay)); // prevents cleaning loop from being aborted
 
-        return true; 
+        return true;
     }
 }

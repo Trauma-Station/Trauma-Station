@@ -183,14 +183,14 @@ public abstract class SharedContrabandDetectorSystem : EntitySystem
     }
 
     /// <summary>
-    /// Checks permission for user to have contraband. 
+    /// Checks permission for user to have contraband.
     /// </summary>
     /// <param name="contraband"></param>
     /// <param name="user"></param>
     /// <returns></returns>
     public bool CheckContrabandPermission(EntityUid contraband, EntityUid user, ContrabandComponent? component = null)
     {
-        // No contraband = have permission 
+        // No contraband = have permission
         if (!Resolve(contraband, ref component))
             return true;
 

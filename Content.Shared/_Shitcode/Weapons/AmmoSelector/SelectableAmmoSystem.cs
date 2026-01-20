@@ -18,6 +18,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._Goobstation.Weapons.AmmoSelector;
 
@@ -70,7 +71,7 @@ public sealed class SelectableAmmoSystem : EntitySystem
 
     public bool TrySetProto(Entity<AmmoSelectorComponent> ent, ProtoId<SelectableAmmoPrototype> proto)
     {
-        if (!_protoManager.TryIndex(proto, out var index))
+        if (!_protoManager.Resolve(proto, out var index))
             return false;
 
         if (!SetProviderProto(ent, index))
@@ -92,6 +93,7 @@ public sealed class SelectableAmmoSystem : EntitySystem
 
         if (index.Color != null && TryComp(ent, out AppearanceComponent? appearance))
             _appearance.SetData(ent, ToggleableVisuals.Color, index.Color, appearance);
+        _appearance.SetData(ent, AmmoSelectorVisuals.Selected, proto.Id);
 
         Dirty(ent);
         return true;
@@ -100,13 +102,13 @@ public sealed class SelectableAmmoSystem : EntitySystem
     private string? GetProviderProtoName(EntityUid uid)
     {
         if (TryComp(uid, out BasicEntityAmmoProviderComponent? basic) && basic.Proto != null)
-            return _protoManager.TryIndex(basic.Proto, out var index) ? index.Name : null;
+            return _protoManager.Resolve(basic.Proto, out var index) ? index.Name : null;
 
         if (TryComp(uid, out BatteryAmmoProviderComponent? battery))
-            return _protoManager.TryIndex(battery.Prototype, out var index) ? index.Name : null;
+            return _protoManager.Resolve(battery.Prototype, out var index) ? index.Name : null;
 
         if (TryComp(uid, out ChangelingChemicalsAmmoProviderComponent? chemicals))
-            return _protoManager.TryIndex(chemicals.Proto, out var index) ? index.Name : null;
+            return _protoManager.Resolve(chemicals.Proto, out var index) ? index.Name : null;
 
         // Add more providers if needed
 
@@ -168,4 +170,10 @@ public sealed class SelectableAmmoSystem : EntitySystem
     {
         return (proto.Flags & (int) SelectableAmmoFlags.ChangeWeaponFireRate) != 0;
     }
+}
+
+[Serializable, NetSerializable]
+public enum AmmoSelectorVisuals : byte
+{
+    Selected
 }

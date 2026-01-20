@@ -121,5 +121,3 @@
   - type: Loadout
     prototypes: [ VisitorCaptain ]
     roleLoadout: [ RoleSurvivalExtended ]
-
-

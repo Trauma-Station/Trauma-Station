@@ -64,7 +64,7 @@
     state: banner
   - type: Construction # Frontier
     graph: BannersGraph # Frontier
-    node: BannerNanotrasenNode # Frontier    
+    node: BannerNanotrasenNode # Frontier
 
 - type: entity
   id: BannerCargo
@@ -77,7 +77,7 @@
     state: banner_cargo
   - type: Construction # Frontier
     graph: BannersGraph # Frontier
-    node: BannerCargoNode # Frontier    
+    node: BannerCargoNode # Frontier
 
 - type: entity
   id: BannerEngineering
@@ -208,4 +208,3 @@
   - type: Construction # Frontier
     graph: BannersGraph # Frontier
     node: BannerGreenNode # Frontier
-

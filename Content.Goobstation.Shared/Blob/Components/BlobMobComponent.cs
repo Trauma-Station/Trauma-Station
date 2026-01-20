@@ -8,7 +8,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Blob.Components;
@@ -27,6 +27,9 @@ public sealed partial class BlobMobComponent : Component
             { "Heat", -4 },
             { "Cold", -4 },
             { "Shock", -4 },
+            { "Poison", -4 }, //Trauma
+            { "Genetic", -4 }, //Trauma
+            { "Radiation", -4 }, //Trauma
         }
     };
 }

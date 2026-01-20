@@ -422,7 +422,7 @@ public sealed partial class PathfindingSystem
         sw.Start();
         var points = chunk.Points;
         var gridOrigin = chunk.Origin * ChunkSize;
-        var tileEntities = new ValueList<EntityUid>();
+        var tileEntities = new ValueList<Entity<FixturesComponent>>(); // Trauma - keep the component bruh
         var chunkPolys = chunk.BufferPolygons;
 
         for (var i = 0; i < chunkPolys.Length; i++)
@@ -431,6 +431,7 @@ public sealed partial class PathfindingSystem
         }
 
         var tilePolys = new ValueList<Box2i>(SubStep);
+        HashSet<Entity<FixturesComponent>> available = new(); // Trauma - reused hashset
 
         // Need to get the relevant polygons in each tile.
         // If we wanted to create a larger navmesh we could triangulate these points but in our case we're just going
@@ -448,13 +449,15 @@ public sealed partial class PathfindingSystem
                 // var isBorder = x < 0 || y < 0 || x == ChunkSize - 1 || y == ChunkSize - 1;
 
                 tileEntities.Clear();
-                var available = _lookup.GetLocalEntitiesIntersecting(tile, flags: LookupFlags.Dynamic | LookupFlags.Static);
+                // <Trauma> - optimised by reusing hashset and quering FixturesComponent specifically and passing grid.Comp
+                available.Clear();
+                _lookup.GetLocalEntitiesIntersecting(grid, tile.GridIndices, available, flags: LookupFlags.Dynamic | LookupFlags.Static, gridComp: grid.Comp);
+                // </Trauma>
 
                 foreach (var ent in available)
                 {
                     // Irrelevant for pathfinding
-                    if (!_fixturesQuery.TryGetComponent(ent, out var fixtures) ||
-                        !IsBodyRelevant(fixtures))
+                    if (!IsBodyRelevant(ent.Comp)) // Trauma - use comp from the lookup
                     {
                         continue;
                     }
@@ -485,8 +488,7 @@ public sealed partial class PathfindingSystem
 
                         foreach (var ent in tileEntities)
                         {
-                            if (!_fixturesQuery.TryGetComponent(ent, out var fixtures))
-                                continue;
+                            var fixtures = ent.Comp; // Trauma - reuse it instead of trycomping again
 
                             var colliding = false;
 
@@ -648,6 +650,10 @@ public sealed partial class PathfindingSystem
 
         // Log.Debug($"Built breadcrumbs in {sw.Elapsed.TotalMilliseconds}ms");
         SendBreadcrumbs(chunk, grid);
+        // <Trauma>
+        if (sw.Elapsed.TotalMilliseconds > 1000)
+            Log.Error($"Took way too long ({sw.Elapsed.TotalMilliseconds}ms) building breadcrumbs for grid {ToPrettyString(grid)}!");
+        // </Trauma>
     }
 
     /// <summary>

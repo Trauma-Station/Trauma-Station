@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Goobstation.Shared.MisandryBox.JobObjective;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;

@@ -25,7 +25,7 @@ using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Server.Construction.Conditions;
 using Content.Shared._White.Xenomorphs.FaceHugger;
@@ -55,6 +55,7 @@ public sealed class FaceHuggerSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly StunSystem _stun = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
 
     public override void Initialize()
     {
@@ -160,6 +161,9 @@ public sealed class FaceHuggerSystem : EntitySystem
         var query = EntityQueryEnumerator<FaceHuggerComponent>();
         while (query.MoveNext(out var uid, out var faceHugger))
         {
+            if (!faceHugger.PlayerControlled)
+                return;
+
             if (!faceHugger.Active && time > faceHugger.RestIn)
                 faceHugger.Active = true;
 
@@ -192,6 +196,16 @@ public sealed class FaceHuggerSystem : EntitySystem
                 }
             }
             // Goobstaion end
+
+            if (faceHugger.Active && clothing?.InSlot == null)
+            {
+                foreach (var entity in _entityLookup.GetEntitiesInRange<InventoryComponent>(Transform(uid).Coordinates,
+                             1.3f))
+                {
+                    if (TryEquipFaceHugger(uid, entity, faceHugger))
+                        break;
+                }
+            }
         }
     }
 

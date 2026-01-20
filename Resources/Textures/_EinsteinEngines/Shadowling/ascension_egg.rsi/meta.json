@@ -12,7 +12,7 @@
         },
         {
             "name": "closed",
-            "delays": 
+            "delays":
             [
                 [1.0, 1.0]
             ]

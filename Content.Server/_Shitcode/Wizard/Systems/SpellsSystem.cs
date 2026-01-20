@@ -39,9 +39,8 @@ using Content.Shared.Abilities.Mime;
 using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Coordinates.Helpers;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Emp;
-using Content.Shared.Gibbing.Events;
 using Content.Shared.Hands.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
@@ -362,7 +361,7 @@ public sealed class SpellsSystem : SharedSpellsSystem
                 MagicSchool.Necromancy);
         }
 
-        Body.GibBody(oldEnt, contents: GibContentsOption.Gib);
+        Gibbing.Gib(oldEnt);
 
         if (!_player.TryGetSessionById(mindComponent.UserId, out var session))
             return;

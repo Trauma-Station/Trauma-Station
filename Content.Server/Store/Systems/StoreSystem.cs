@@ -8,7 +8,7 @@ using System.Linq;
 // </Trauma>
 using System.Linq;
 using Content.Server.Store.Components;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;

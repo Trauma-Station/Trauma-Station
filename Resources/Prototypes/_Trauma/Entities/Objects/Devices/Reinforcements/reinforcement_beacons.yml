@@ -91,7 +91,7 @@
     raffle:
       settings: reinforcement
   - type: GhostRoleMobSpawner
-    prototype: SecurityReinforcement
+    prototype: SecurityReinforcementSpecialist
 
 # Civ
 

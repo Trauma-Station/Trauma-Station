@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-status = [ 
+status = [
   "Build & Test Debug",
   "Build & Test Release",
   "Test Packaging",

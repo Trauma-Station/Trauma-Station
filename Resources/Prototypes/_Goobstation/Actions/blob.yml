@@ -77,7 +77,7 @@
   - type: TargetAction
     range: 200
   - type: WorldTargetAction
-    event: !type:BlobCreateBlobbernautActionEvent    
+    event: !type:BlobCreateBlobbernautActionEvent
 
 - type: entity
   parent: BaseAction

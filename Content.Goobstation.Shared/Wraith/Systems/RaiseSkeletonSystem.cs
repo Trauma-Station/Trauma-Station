@@ -1,6 +1,6 @@
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
-using Content.Shared.Body.Systems;
+using Content.Shared.Gibbing;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
@@ -14,7 +14,7 @@ public sealed class RaiseSkeletonSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
 
     public override void Initialize()
@@ -58,7 +58,7 @@ public sealed class RaiseSkeletonSystem : EntitySystem
 
         // since both conditions passed, deploy the skeleton and gib them
         PredictedSpawnAtPosition(ent.Comp.SkeletonProto, coords);
-        _body.GibBody(args.Target);
+        _gibbing.Gib(args.Target);
 
         args.Handled = true;
     }

@@ -16,7 +16,7 @@ public sealed class SaltLineSystem : EntitySystem
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
-    
+
     public override void Initialize()
     {
         base.Initialize();
@@ -82,7 +82,7 @@ public sealed class SaltLineSystem : EntitySystem
         var reagentsalt = "TableSalt";
         var solution = sol.Value;
         var saltAmount = solution.Comp.Solution.GetTotalPrototypeQuantity(reagentsalt);
-        
+
         if (saltAmount < ent.Comp.Amount)
         {
             _popupSystem.PopupEntity(Loc.GetString("consume-on-salt-line-component-not-enough-salt-message"), ent.Owner, args.User);

@@ -48,4 +48,3 @@
     useDelay: 1
   - type: InstantAction
     event: !type:DrivingWithStyleActionEvent
-

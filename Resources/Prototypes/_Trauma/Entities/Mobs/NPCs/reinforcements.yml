@@ -11,6 +11,7 @@
     nameFormat: name-format-standard
   - type: RandomHumanoidAppearance
     randomizeName: true
+  - type: IdBind # set id name to the mob's random name
 
 # Sec Reinforcements
 
@@ -23,16 +24,18 @@
   - type: Loadout
     prototypes: [ReinforcementOfficer]
     roleLoadout: [ RoleSurvivalSecurity ]
+  - type: AutoImplant
+    implants:
+    - MindShieldImplant
 
 - type: entity
-  parent: BaseReinforcement
-  id: MSecurityReinforcementSpecialist
+  parent: SecurityReinforcement
+  id: SecurityReinforcementSpecialist
   name: reinforcement security officer specialist
   categories: [ HideSpawnMenu ]
   components:
   - type: Loadout
     prototypes: [ReinforcementOfficerSpec]
-    roleLoadout: [ RoleSurvivalSecurity ]
 
 # Service Reinforcements
 
@@ -166,25 +169,18 @@
     id: SecurityPDA
     ears: ClothingHeadsetAltSecurityRegular
     back: ClothingBackpackSecurity
-  inhand:
-  - MindShieldImplanter
+    eyes: ClothingEyesHudSecurity
 
 - type: startingGear
+  parent: ReinforcementOfficer
   id: ReinforcementOfficerSpec
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
-    shoes: ClothingShoesBootsCombat
-    id: SecurityPDA
-    ears: ClothingHeadsetAltSecurityRegular
-    back: ClothingBackpackSecurity
     pocket1: WeaponLaserSidearm
     outerClothing: ClothingOuterArmorBasic
     head: ClothingHeadHelmetBasic
   storage:
     back:
     - WeaponLaserCarbine
-  inhand:
-  - MindShieldImplanter
 
 # StartingGear Others
 

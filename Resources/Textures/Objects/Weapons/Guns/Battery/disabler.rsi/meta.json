@@ -32,6 +32,27 @@
             ]
         },
         {
+            "name": "mag-lethal-unshaded-4"
+        },
+        {
+            "name": "mag-lethal-unshaded-3"
+        },
+        {
+            "name": "mag-lethal-unshaded-2"
+        },
+        {
+            "name": "mag-lethal-unshaded-1"
+        },
+        {
+            "name": "mag-lethal-unshaded-0",
+            "delays": [
+                [
+                    0.3,
+                    0.3
+                ]
+            ]
+        },
+        {
             "name": "inhand-left",
             "directions": 4
         },

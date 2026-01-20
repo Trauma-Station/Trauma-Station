@@ -33,4 +33,3 @@ public sealed partial class StoreCategoryPrototype : IPrototype
     [DataField]
     public bool Evil { get; private set; } = false; // Goobstation
 }
-

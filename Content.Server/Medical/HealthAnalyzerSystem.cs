@@ -1,4 +1,7 @@
-using Content.Server.Body.Components;
+// <Trauma>
+using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Shared.FixedPoint;
+// </Trauma>
 using Content.Server.Medical.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -21,35 +24,10 @@ using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 using Content.Server.Body.Systems;
 
-// Shitmed Change
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Pain.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Systems;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
-using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
-using Content.Goobstation.Maths.FixedPoint;
-using System.Linq;
-using Content.Shared.Mobs.Systems; // Goobstation
-
 namespace Content.Server.Medical;
 
-public sealed class HealthAnalyzerSystem : EntitySystem
+public sealed partial class HealthAnalyzerSystem : EntitySystem // Trauma - made partial
 {
-    // <Trauma>
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly TraumaSystem _trauma = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
-    // </Trauma>
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly PowerCellSystem _cell = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -63,18 +41,12 @@ public sealed class HealthAnalyzerSystem : EntitySystem
 
     public override void Initialize()
     {
+        InitializeTrauma(); // Trauma
         SubscribeLocalEvent<HealthAnalyzerComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<HealthAnalyzerComponent, HealthAnalyzerDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<HealthAnalyzerComponent, EntGotInsertedIntoContainerMessage>(OnInsertedIntoContainer);
         SubscribeLocalEvent<HealthAnalyzerComponent, ItemToggledEvent>(OnToggled);
         SubscribeLocalEvent<HealthAnalyzerComponent, DroppedEvent>(OnDropped);
-        // Shitmed Change Start
-        Subs.BuiEvents<HealthAnalyzerComponent>(HealthAnalyzerUiKey.Key, subs =>
-        {
-            subs.Event<HealthAnalyzerPartMessage>(OnHealthAnalyzerPartSelected);
-            subs.Event<HealthAnalyzerModeSelectedMessage>(OnHealthAnalyzerModeSelected);
-        });
-        // Shitmed Change End
     }
 
     public override void Update(float frameTime)
@@ -95,16 +67,13 @@ public sealed class HealthAnalyzerSystem : EntitySystem
                 continue;
             }
 
-            // Shitmed Change Start
-            if (component.CurrentBodyPart != null
-                && (Deleted(component.CurrentBodyPart)
-                || TryComp(component.CurrentBodyPart, out BodyPartComponent? bodyPartComponent)
-                && bodyPartComponent.Body is null))
+            // <Shitmed>
+            if (IsPartInvalid(component.CurrentBodyPart))
             {
                 BeginAnalyzingEntity((uid, component), patient, null);
                 continue;
             }
-            // Shitmed Change End
+            // </Shitmed>
 
             component.NextUpdate = _timing.CurTime + component.UpdateInterval;
 
@@ -118,7 +87,8 @@ public sealed class HealthAnalyzerSystem : EntitySystem
                 continue;
             }
 
-            UpdateScannedUser(uid, patient, true, component.CurrentMode, component.CurrentBodyPart); // Shitmed Change
+            UpdateScannedUser(uid, patient, true,
+                component.CurrentMode, component.CurrentBodyPart); // Shitmed Change
         }
     }
 
@@ -207,7 +177,8 @@ public sealed class HealthAnalyzerSystem : EntitySystem
 
         _toggle.TryActivate(healthAnalyzer.Owner);
 
-        UpdateScannedUser(healthAnalyzer, target, true, healthAnalyzer.Comp.CurrentMode, part); // Shitmed Change
+        UpdateScannedUser(healthAnalyzer, target, true,
+            healthAnalyzer.Comp.CurrentMode, part); // Shitmed Change
     }
 
     /// <summary>
@@ -222,47 +193,9 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         healthAnalyzer.Comp.CurrentBodyPart = null; // Shitmed Change
         _toggle.TryDeactivate(healthAnalyzer.Owner);
 
-        UpdateScannedUser(healthAnalyzer, target, false, healthAnalyzer.Comp.CurrentMode);
+        UpdateScannedUser(healthAnalyzer, target, false,
+            healthAnalyzer.Comp.CurrentMode); // Shitmed
     }
-
-    // Shitmed Change Start
-    /// <summary>
-    /// Shitmed Change: Handle the selection of a body part on the health analyzer
-    /// </summary>
-    /// <param name="healthAnalyzer">The health analyzer that's receiving the updates</param>
-    /// <param name="args">The message containing the selected part</param>
-    private void OnHealthAnalyzerPartSelected(Entity<HealthAnalyzerComponent> healthAnalyzer, ref HealthAnalyzerPartMessage args)
-    {
-        if (!TryGetEntity(args.Owner, out var owner))
-            return;
-
-        healthAnalyzer.Comp.CurrentMode = HealthAnalyzerMode.Body; // If you press a part ye get redirected bozo.
-        if (args.BodyPart == null)
-        {
-            BeginAnalyzingEntity(healthAnalyzer, owner.Value, null);
-        }
-        else
-        {
-            var (targetType, targetSymmetry) = _body.ConvertTargetBodyPart(args.BodyPart.Value);
-            if (_body.GetBodyChildrenOfType(owner.Value, targetType, symmetry: targetSymmetry) is { } part)
-                BeginAnalyzingEntity(healthAnalyzer, owner.Value, part.FirstOrDefault().Id);
-        }
-    }
-
-    /// <summary>
-    /// Shitmed Change: Handle the selection of a different health analyzer mode
-    /// </summary>
-    /// <param name="healthAnalyzer">The health analyzer that's receiving the updates</param>
-    /// <param name="args">The message containing the selected mode</param>
-    private void OnHealthAnalyzerModeSelected(Entity<HealthAnalyzerComponent> healthAnalyzer, ref HealthAnalyzerModeSelectedMessage args)
-    {
-        if (!TryGetEntity(args.Owner, out var owner))
-            return;
-
-        healthAnalyzer.Comp.CurrentMode = args.Mode; // If you press a part ye get redirected bozo.
-        BeginAnalyzingEntity(healthAnalyzer, owner.Value);
-    }
-    // Shitmed Change End
 
     /// <summary>
     /// Send an update for the target to the healthAnalyzer
@@ -274,207 +207,90 @@ public sealed class HealthAnalyzerSystem : EntitySystem
     public void UpdateScannedUser(EntityUid healthAnalyzer, EntityUid target, bool scanMode, HealthAnalyzerMode mode, EntityUid? part = null)
     {
         if (!_uiSystem.HasUi(healthAnalyzer, HealthAnalyzerUiKey.Key)
-            || !TryComp<BodyComponent>(target, out var body))
+            || !HasComp<DamageableComponent>(target))
             return;
 
+        var uiState = GetHealthAnalyzerUiState(target,
+            mode, part); // Shitmed
+        uiState.ScanMode = scanMode; // Shitmed
+
+        _uiSystem.ServerSendUiMessage(
+            healthAnalyzer,
+            HealthAnalyzerUiKey.Key,
+            new HealthAnalyzerScannedUserMessage(uiState)
+        );
+    }
+
+    /// <summary>
+    /// Creates a HealthAnalyzerState based on the current state of an entity.
+    /// </summary>
+    /// <param name="target">The entity being scanned</param>
+    /// <returns></returns>
+    public HealthAnalyzerUiState GetHealthAnalyzerUiState(EntityUid? target,
+        HealthAnalyzerMode mode, EntityUid? part) // Shitmed
+    {
+        if (!target.HasValue || !HasComp<DamageableComponent>(target))
+            return new HealthAnalyzerUiState();
+
+        var entity = target.Value;
         var bodyTemperature = float.NaN;
 
-        if (TryComp<TemperatureComponent>(target, out var temp))
+        if (TryComp<TemperatureComponent>(entity, out var temp))
             bodyTemperature = temp.CurrentTemperature;
 
         var bloodAmount = float.NaN;
+        //var bleeding = false; // Shitmed - bleeding is stored per-part not global
+        var unrevivable = false;
 
-        if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
-            _solutionContainerSystem.ResolveSolution(target, bloodstream.BloodSolutionName,
+        if (TryComp<BloodstreamComponent>(entity, out var bloodstream) &&
+            _solutionContainerSystem.ResolveSolution(entity, bloodstream.BloodSolutionName,
                 ref bloodstream.BloodSolution, out var bloodSolution))
-            bloodAmount = _bloodstreamSystem.GetBloodLevel(target);
+        {
+            bloodAmount = _bloodstreamSystem.GetBloodLevel(entity);
+            // Shitmed - bleeding is stored per-part not global
+            //bleeding = bloodstream.BleedAmount > 0;
+        }
 
-        var bodyStatus = _wound.GetDamageableStatesOnBody(target);
-        Dictionary<TargetBodyPart, bool> bleeding; // Goobstation - removed unnecessary allocation
+        var bodyStatus = _wound.GetDamageableStatesOnBody(entity);
 
-        // Goobstation start
+        // <Goob>
         var vitalDamage = FixedPoint2.Zero;
-        if (TryComp<DamageableComponent>(target, out var damageableComponent))
-            vitalDamage = _threshold.CheckVitalDamage(target, damageableComponent);
-        // Goobstation end
+        if (_damageQuery.TryComp(entity, out var damageable))
+            vitalDamage = _threshold.CheckVitalDamage(entity, damageable);
+        // </Goob>
 
+        if (TryComp<UnrevivableComponent>(entity, out var unrevivableComp) && unrevivableComp.Analyzable)
+            unrevivable = true;
+
+        // <Shitmed> - multimodal health analyzer
+        var state = new HealthAnalyzerUiState(
+            GetNetEntity(target),
+            bodyTemperature,
+            bloodAmount,
+            null,
+            new(), // not fetched until it's needed below
+            unrevivable,
+            bodyStatus,
+            vitalDamage,
+            part != null ? GetNetEntity(part) : null);
         switch (mode)
         {
             case HealthAnalyzerMode.Body:
-                var unrevivable = false;
-                FetchBodyData(target, body, out var traumas, out var pain, out bleeding);
-                if (TryComp<UnrevivableComponent>(target, out var unrevivableComp) && unrevivableComp.Analyzable)
-                    unrevivable = true;
-
-                _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, new HealthAnalyzerBodyMessage(
-                    GetNetEntity(target),
-                    bodyTemperature,
-                    bloodAmount,
-                    scanMode,
-                    unrevivable,
-                    bodyStatus,
-                    bleeding,
-                    vitalDamage, // Goobstation
-                    traumas,
-                    pain,
-                    part != null ? GetNetEntity(part) : null
-                ));
+                FetchBodyData(entity, out var traumas, out var pain, out state.Bleeding);
+                state.ScanState = new HealthAnalyzerBodyState(traumas, pain);
                 break;
-
             case HealthAnalyzerMode.Organs:
-                bleeding = FetchBleedData(body);
-                var organs = FetchOrganData(target);
-                _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, new HealthAnalyzerOrgansMessage(
-                    GetNetEntity(target),
-                    bodyTemperature,
-                    bloodAmount,
-                    scanMode,
-                    bleeding,
-                    vitalDamage, // Goobstation
-                    bodyStatus,
-                    organs
-                ));
+                state.Bleeding = FetchBleedData(entity);
+                var organs = FetchOrganData(entity);
+                state.ScanState = new HealthAnalyzerOrgansState(organs);
                 break;
-
             case HealthAnalyzerMode.Chemicals:
-                bleeding = FetchBleedData(body);
-                var chemicals = FetchChemicalData(target);
-                _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, new HealthAnalyzerChemicalsMessage(
-                    GetNetEntity(target),
-                    bodyTemperature,
-                    bloodAmount,
-                    scanMode,
-                    bleeding,
-                    vitalDamage, // Goobstation
-                    bodyStatus,
-                    chemicals
-                ));
+                state.Bleeding = FetchBleedData(entity);
+                var chemicals = FetchChemicalData(entity);
+                state.ScanState = new HealthAnalyzerChemicalsState(chemicals);
                 break;
         }
-    }
-
-    private void FetchBodyData(EntityUid target,
-        BodyComponent body,
-        out Dictionary<NetEntity, List<WoundableTraumaData>> traumas,
-        out Dictionary<NetEntity, FixedPoint2> pain,
-        out Dictionary<TargetBodyPart, bool> bleeding)
-    {
-        traumas = new();
-        pain = new();
-        bleeding = new();
-
-        if (body.RootContainer.ContainedEntity is not { } rootPart)
-            return;
-
-        foreach (var (woundable, component) in _wound.GetAllWoundableChildren(rootPart))
-        {
-            traumas.Add(GetNetEntity(woundable), FetchTraumaData(woundable, component));
-            pain.Add(GetNetEntity(woundable), FetchPainData(woundable, component));
-            bleeding.Add(_body.GetTargetBodyPart(woundable), component.Bleeds > 0);
-        }
-    }
-
-    private Dictionary<TargetBodyPart, bool> FetchBleedData(BodyComponent body)
-    {
-        var bleeding = new Dictionary<TargetBodyPart, bool>();
-
-        if (body.RootContainer.ContainedEntity is not { } rootPart)
-            return bleeding;
-
-        foreach (var (woundable, component) in _wound.GetAllWoundableChildren(rootPart))
-            bleeding.Add(_body.GetTargetBodyPart(woundable), component.Bleeds > 0);
-
-        return bleeding;
-    }
-
-    private List<WoundableTraumaData> FetchTraumaData(EntityUid target,
-        WoundableComponent woundable)
-    {
-        var traumasList = new List<WoundableTraumaData>();
-
-        if (_trauma.TryGetWoundableTrauma(target, out var traumasFound))
-        {
-            foreach (var trauma in traumasFound)
-            {
-                if (trauma.Comp.TraumaType == TraumaType.BoneDamage
-                    && trauma.Comp.TraumaTarget is { } boneWoundable
-                    && TryComp(boneWoundable, out BoneComponent? boneComp))
-                {
-                    traumasList.Add(new WoundableTraumaData(ToPrettyString(target),
-                        trauma.Comp.TraumaType.ToString(), trauma.Comp.TraumaSeverity, boneComp.BoneSeverity.ToString(), trauma.Comp.TargetType));
-
-                    continue;
-                }
-
-                traumasList.Add(new WoundableTraumaData(ToPrettyString(trauma),
-                        trauma.Comp.TraumaType.ToString(), trauma.Comp.TraumaSeverity, targetType: trauma.Comp.TargetType));
-            }
-        }
-
-        return traumasList;
-    }
-
-    private FixedPoint2 FetchPainData(EntityUid target,
-        WoundableComponent woundable)
-    {
-        var pain = FixedPoint2.Zero;
-
-        if (!TryComp<NerveComponent>(target, out var nerve))
-            return pain;
-
-        return nerve.PainFeels;
-    }
-
-    private Dictionary<NetEntity, OrganTraumaData> FetchOrganData(EntityUid target)
-    {
-        var organs = new Dictionary<NetEntity, OrganTraumaData>();
-        if (!TryComp<BodyComponent>(target, out var body))
-            return organs;
-
-        foreach (var (organId, organComp) in _body.GetBodyOrgans(target))
-        {
-            organs.Add(GetNetEntity(organId), new OrganTraumaData(organComp.OrganIntegrity,
-                organComp.IntegrityCap,
-                organComp.OrganSeverity,
-                organComp.IntegrityModifiers
-                    .Select(x => (x.Key.Item1, x.Value))
-                    .ToList()));
-        }
-
-        return organs;
-    }
-
-    private Dictionary<NetEntity, Solution> FetchChemicalData(EntityUid target)
-    {
-        var solutionsList = new Dictionary<NetEntity, Solution>();
-
-        if (!TryComp(target, out SolutionContainerManagerComponent? container) || container.Containers.Count == 0)
-            return solutionsList;
-
-        foreach (var (name, solution) in _solutionContainerSystem.EnumerateSolutions((target, container)))
-        {
-            if (name is null
-                || name == BloodstreamComponent.DefaultBloodTemporarySolutionName
-                || name == "print" // I hate this so fucking much.
-                || !TryGetNetEntity(solution, out var netSolution))
-                continue;
-
-            solutionsList.Add(netSolution.Value, solution.Comp.Solution);
-        }
-
-        if (TryComp<BodyComponent>(target, out var body)
-            && _body.TryGetBodyOrganEntityComps<StomachComponent>((target, body), out var stomachs))
-        {
-            foreach (var stomach in stomachs)
-            {
-                if (stomach.Comp1.Solution is null
-                    || !TryGetNetEntity(stomach.Comp1.Solution, out var netSolution))
-                    continue;
-
-                solutionsList.Add(netSolution.Value, stomach.Comp1.Solution.Value.Comp.Solution); // This is horrible.
-            }
-        }
-
-        return solutionsList;
+        return state;
+        // </Shitmed>
     }
 }

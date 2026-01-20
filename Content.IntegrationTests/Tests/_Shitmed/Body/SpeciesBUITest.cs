@@ -45,7 +45,7 @@ public sealed class SpeciesBUiTest
         {
             var bUiSys = server.System<SharedUserInterfaceSystem>();
 
-            Assert.That(proto.TryIndex("BaseMobSpeciesTest", out var baseEnt), Is.True);
+            var baseEnt = proto.Index("BaseMobSpeciesTest");
             Assert.That(baseEnt, Is.Not.Null);
             Assert.That(baseEnt.TryGetComponent<UserInterfaceComponent>(out var bUiBase, factoryComp), Is.True);
             Assert.That(bUiBase, Is.Not.Null);

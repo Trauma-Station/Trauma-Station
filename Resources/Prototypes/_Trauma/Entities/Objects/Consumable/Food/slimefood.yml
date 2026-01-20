@@ -1,0 +1,16 @@
+- type: entity
+  parent: FoodBase
+  id: Nutrislime
+  name: nutrislime
+  description: Perfect for feeding slimes, one clump should be enough for a baby slime to grow up and replicate.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/nutrislime.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 150 # TODO: change to 15
+        reagents:
+        - ReagentId: Nutriment # TODO: change to some slime food reagent, which metabolizes into nutriment in slime stomachs at 10x ratio
+          Quantity: 150 # TODO: change to 15

@@ -5,13 +5,13 @@
   #- Atlas
   #- Amber
   - Bagel
-  #- Box
+  - Box
   #- Cluster
   - Fland
   - FlandHighPop
   - Loop
-  #- Marathon
-  #- Meta
+  - Marathon
+  - Meta
   #- Oasis
   #- OasisHighPop
   #- Omega
@@ -19,10 +19,10 @@
   #- Saltern
   #- Packed
   #- Barratry
-  #- Kettle
+  - Kettle
   #- Submarine
   - Leonid
-  #- Delta
+  - Delta
   #- Chloris
   - Cog
   #- Serpentcrest

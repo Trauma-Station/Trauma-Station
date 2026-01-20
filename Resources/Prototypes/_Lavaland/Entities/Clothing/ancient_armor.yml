@@ -2,7 +2,7 @@
   parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseCargoContraband ]
   id: LavalandEquipmentAncientArmor
   name: predecessor armor
-  description: Ancient armor that is fully made out of strong goliath plates. 
+  description: Ancient armor that is fully made out of strong goliath plates.
   components:
   - type: Sprite
     sprite: _Lavaland/Clothing/OuterClothing/Hardsuits/ancient_armor.rsi
