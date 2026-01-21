@@ -651,7 +651,7 @@ public sealed partial class PathfindingSystem
         // Log.Debug($"Built breadcrumbs in {sw.Elapsed.TotalMilliseconds}ms");
         SendBreadcrumbs(chunk, grid);
         // <Trauma>
-        if (sw.Elapsed.TotalMilliseconds > 1000)
+        if (sw.Elapsed.TotalMilliseconds > 30000)
             Log.Error($"Took way too long ({sw.Elapsed.TotalMilliseconds}ms) building breadcrumbs for grid {ToPrettyString(grid)}!");
         // </Trauma>
     }
