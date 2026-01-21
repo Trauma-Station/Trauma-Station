@@ -15,6 +15,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Preferences;
 using Robust.Shared;
 using Robust.Shared.Configuration;
+using Robust.Shared.Enums;
 using Robust.Shared.GameObjects.Components.Localization;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -23,7 +24,6 @@ using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Utility;
 using YamlDotNet.RepresentationModel;
-using Robust.Shared.Enums;
 
 namespace Content.Shared.Humanoid;
 
@@ -123,9 +123,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem // T
         if (args.Examiner == args.Examined) // Use the selfaware locale when examining yourself
             locale += "-selfaware";
 
-        // Goob Sanitize Text
-        var escapedIdentity = FormattedMessage.EscapeText(identity.ToString());
-        args.PushText(Loc.GetString(locale, ("user", escapedIdentity), ("age", age), ("species", species)),
+        args.PushText(Loc.GetString(locale, ("user", identity), ("age", age), ("species", species)),
             100); // priority for examine
         // WWDP EDIT END
     }
