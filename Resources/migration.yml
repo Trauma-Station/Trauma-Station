@@ -50,6 +50,22 @@ ToiletEmpty: ToiletFilled
 MailTeleporter: CargoMailTeleporter
 MailMetricsCartridge: null
 ComputerShuttleSalvage: ComputerShuttleMiningLavaland # 2 maps had this for some reason...
+
+# 2026-01-19 Goob reference purge
+PlushieBingleYakub: null
+PosterContrabandGoobYakub: null
+PosterLegitGoobDurkPlush: null
+PosterLegitGoobLouieVote: null
+PlushieSamantha: null
+PlushieBoggle: null
+PlushieDurk: null
+PlushieBrizby: null
+PlushieBaldzby: null
+PlushieLouie: null
+PlushieJvne: null
+PlushieFern: null
+PlushieNigel: null
+PlushieLehmin: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
