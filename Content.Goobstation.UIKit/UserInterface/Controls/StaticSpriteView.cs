@@ -161,9 +161,9 @@ public class StaticSpriteView : Control
         SetEntity(uid);
     }
 
-    protected override void Dispose(bool disposing)
+    protected override void Deparented()
     {
-        base.Dispose(disposing);
+        base.Deparented();
 
         Reset();
     }
@@ -206,7 +206,7 @@ public class StaticSpriteView : Control
         var fake = Entity?.Owner ?? EntMan.Spawn();
         var fakeSprite = EntMan.EnsureComponent<SpriteComponent>(fake);
         Entity = (fake, fakeSprite);
-        SpriteSystem.CopySprite((uid.Value, sprite), Entity.Value);
+        SpriteSystem.CopySprite((uid.Value, sprite), Entity.Value.AsNullable());
 
         NetEnt = EntMan.GetNetEntity(uid);
         RealEntity = uid;
