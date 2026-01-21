@@ -1,7 +1,6 @@
-# TODO: size=10,11,11 after engine updated
-inspect-part-status-line = [font]{$possessive} [bold]{$part}[/bold] is {$status}.[/font]
-inspect-part-status-title = [font][color=DarkGray]You check yourself for injuries.[/color][/font]
-inspect-part-status-title-other = [font][color=DarkGray]You check {$entity} for injuries.[/color][/font]
+inspect-part-status-line = [font size=10]{$possessive} [bold]{$part}[/bold] is {$status}.[/font]
+inspect-part-status-title = [font size=11][color=DarkGray]You check yourself for injuries.[/color][/font]
+inspect-part-status-title-other = [font size=11][color=DarkGray]You check {$entity} for injuries.[/color][/font]
 inspect-part-status-line-styleless = {$possessive} {$part} is {$status}.
 inspect-part-status-title-styleless = You check yourself for injuries.
 inspect-part-status-title-other-styleless = You check {$entity} for injuries.

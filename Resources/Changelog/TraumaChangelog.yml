@@ -1673,3 +1673,15 @@ Entries:
       message: Fixed the round end summary not showing purchased items.
   id: 202
   time: '2026-01-21T12:12:13.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Added a button to view the source code to the escape menu.
+  id: 203
+  time: '2026-01-21T14:00:39.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Clowns now speak in comic sans.
+  id: 204
+  time: '2026-01-21T14:28:55.0000000+00:00'
