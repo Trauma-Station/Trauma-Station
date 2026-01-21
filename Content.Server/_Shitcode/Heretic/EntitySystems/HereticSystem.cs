@@ -103,7 +103,12 @@ public sealed class HereticSystem : EntitySystem
     }
 
     private void OnPolymorphed(Entity<HereticComponent> ent, ref PolymorphedEvent args)
-        => _polymorph.CopyPolymorphComponent<HereticComponent>(ent, args.NewEntity);
+    {
+        if (args.IsRevert)
+            return;
+
+        _polymorph.CopyPolymorphComponent<HereticComponent>(ent, args.NewEntity);
+    }
 
     private void OnRestart(RoundRestartCleanupEvent ev)
     {
@@ -227,8 +232,8 @@ public sealed class HereticSystem : EntitySystem
         if (TryComp<EyeComponent>(ent, out var eye))
             _eye.SetVisibilityMask(ent, eye.VisibilityMask & ~HereticVisFlags, eye);
 
-        foreach (var action in ent.Comp.ProvidedActions)
-            _actions.RemoveAction(action);
+        //foreach (var action in ent.Comp.ProvidedActions)
+            //_actions.RemoveAction(action);
     }
 
     private void OnGetVisMask(Entity<HereticComponent> uid, ref GetVisMaskEvent args)
