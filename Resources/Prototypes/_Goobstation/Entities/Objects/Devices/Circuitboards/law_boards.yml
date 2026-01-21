@@ -1,0 +1,37 @@
+- type: entity
+  abstract: true
+  parent: BaseElectronics
+  id: BaseSiliconLawboard
+  description: An electronics board containing a silicon lawset.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: std_mod
+  - type: SiliconLawProvider
+    laws: NTDefault
+  - type: GuideHelp
+    guides:
+    - Lawsets
+
+- type: entity
+  id: RDCustomLawboard
+  parent: BaseElectronics
+  name: freeform lawboard
+  description: A strange looking experimental lawboard. Judging by the Syndicate display on it, it's probaly used for nefarious purposes.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: std_mod
+  - type: SiliconLawProvider
+    laws: Crewsimov
+    lawUploadSound: /Audio/Ambience/Antag/emagged_borg.ogg
+  - type: UserInterface
+    interfaces:
+      enum.CustomLawboardUiKey.Key:
+        type: CustomLawboardBoundInterface
+  - type: CustomLawboard
+  - type: ActivatableUI
+    inHandsOnly: false
+    key: enum.CustomLawboardUiKey.Key
+  - type: StaticPrice
+    price: 10000

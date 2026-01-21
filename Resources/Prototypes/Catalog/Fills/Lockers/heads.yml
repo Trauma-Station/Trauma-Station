@@ -275,6 +275,7 @@
     - id: DoorRemoteResearch
     - id: HandTeleporter
     - id: RubberStampRd
+    - id: RDCustomLawboard
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
