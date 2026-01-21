@@ -22,13 +22,4 @@
         order: 3
         lawString: law-antimov-3
     lawUploadSound: /Audio/Ambience/Antag/emagged_borg.ogg # Antimov's sound IS pretty cool but it'd be a bit misleading
-  - type: UserInterface
-    interfaces:
-      enum.CustomLawboardUiKey.Key:
-        type: CustomLawboardBoundInterface
-  - type: CustomLawboard
-  - type: ActivatableUI
-    inHandsOnly: false
-    key: enum.CustomLawboardUiKey.Key
-  - type: StaticPrice
-    price: 10000
+
