@@ -2451,7 +2451,7 @@
 
 - type: entity
   name: bungo pit
-  parent: FoodInjectableBase
+  parent: FoodUnperishableBase # Trauma - Huge seed doesn't rot, also poison hoarding.
   id: FoodBungoPit
   components:
   - type: Sprite
@@ -2756,7 +2756,7 @@
 
 - type: entity
   name: cherry pit
-  parent: FoodInjectableBase
+  parent: FoodUnperishableBase # Trauma - Basically a seed.
   id: TrashCherryPit
   components:
   - type: Sprite
