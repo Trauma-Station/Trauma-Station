@@ -579,7 +579,7 @@
         sound: /Audio/Misc/thief_greeting.ogg
   - type: AntagObjectives
     objectives:
-    - EscapeVoxShuttleObjective
+    - EscapeThiefObjective
   - type: AntagRandomObjectives
     sets:
     - groups: ThiefBigObjectiveGroups

@@ -27,6 +27,7 @@
   - MagazinePistolPractice
   - SpeedLoaderMagnumPractice
   - MagazinePistolSubMachineGunPractice
+  # - WeaponFlareGunSecurity # Trauma
 
 # Shared between secfab and emagged autolathe
 - type: latheRecipePack

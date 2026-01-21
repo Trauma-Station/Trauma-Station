@@ -141,13 +141,13 @@
   - type: LanguageKnowledge
     speaks:
     - Xeno
-#    - XenoHivemind # Goobstation - collective mind
+#    - XenoHivemind # Trauma
     understands:
     - Xeno
-#    - XenoHivemind # Goobstation - collective mind
+#    - XenoHivemind # Trauma
     - Hissing
     - Draconic
-  - type: CollectiveMind # Goobstation
+  - type: CollectiveMind # Trauma
     defaultChannel: Xenomorphivemind
     channels:
     - Xenomorphivemind
