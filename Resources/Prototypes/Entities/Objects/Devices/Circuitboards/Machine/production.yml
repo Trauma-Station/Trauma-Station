@@ -93,7 +93,7 @@
         GlassBeaker:
           amount: 2
           defaultPrototype: Beaker
-    - type: Tag # trauma
+    - type: Tag # Trauma
       tags:
       - TechfabMachineBoard
       - DroneUsable
@@ -129,7 +129,7 @@
           defaultPrototype: Beaker
     - type: StealTarget
       stealGroup: MedicalTechFabCircuitboard
-    - type: Tag # trauma
+    - type: Tag # Trauma
       tags:
       - TechfabMachineBoard
       - DroneUsable

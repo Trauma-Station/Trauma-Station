@@ -323,7 +323,7 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
-  - type: Construction # trauma
+  - type: Construction # Trauma
     graph: NuclearOptionGraph
     node: start
     deconstructionTarget: null
@@ -398,7 +398,7 @@
       path: /Audio/Effects/countdown.ogg
   - type: StaticPrice
     price: 666 # 2000 for 3, I love fractions
-  - type: Construction # trauma
+  - type: Construction # Trauma
     graph: EMPGrenadeGraph
     node: start
     deconstructionTarget: null
