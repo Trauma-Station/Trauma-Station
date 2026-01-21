@@ -71,12 +71,6 @@
 
 - type: borgSubtype
   parentBorgType: service
-  id: service_brobot
-  spritePath: _Goobstation/Mobs/Silicon/Service/standart.rsi
-  dummyPrototype: BorgChassisServiceBrobot
-
-- type: borgSubtype
-  parentBorgType: service
   id: service_waitress
   spritePath: _Goobstation/Mobs/Silicon/Service/waitress.rsi
   dummyPrototype: BorgChassisServiceWaitress
