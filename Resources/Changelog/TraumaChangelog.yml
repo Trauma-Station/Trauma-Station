@@ -1506,3 +1506,148 @@ Entries:
       message: Tinned food and lollypops no longer rot into slop.
   id: 180
   time: '2026-01-16T19:55:09.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: Boris Module unlock moved to a tier 2 research.
+  id: 181
+  time: '2026-01-17T09:21:36.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Add
+      message: 'Added Trauma by shellknight to lobby and vinyl '
+  id: 182
+  time: '2026-01-17T09:22:03.0000000+00:00'
+- author: MayasMischief
+  changes:
+    - type: Tweak
+      message: BZ made from invisible instakill gas to visible instakill gas.
+    - type: Remove
+      message: Removed BSO
+  id: 183
+  time: '2026-01-18T07:18:04.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Add
+      message: Added Robotics tech tree section
+    - type: Tweak
+      message: Moved the tech tree around to make it look better
+  id: 184
+  time: '2026-01-18T07:50:43.0000000+00:00'
+- author: catboycorporate
+  changes:
+    - type: Tweak
+      message: 'Banana peels take longer to rot. '
+    - type: Tweak
+      message: There is a heightened chance of (mapped) banana peels being explosive.
+  id: 185
+  time: '2026-01-18T08:45:12.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Renamed Ammonia gas to Miasma.
+  id: 186
+  time: '2026-01-18T08:53:47.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: >-
+        Breathing miasma can now give you diseases, as predicted by 19th century
+        doctors.
+  id: 187
+  time: '2026-01-18T09:43:13.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Updated and re-enabled Delta station.
+  id: 188
+  time: '2026-01-18T13:27:47.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed BZ and other gases not making you high, go to sleep, etc.
+  id: 189
+  time: '2026-01-18T16:04:52.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: Nullrod forms tweaked to do majority holy damage, rather than brute.
+    - type: Remove
+      message: Removed wound multiplier from Holy Chainsaw and Holy Claymore.
+  id: 190
+  time: '2026-01-18T17:33:49.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Updated Kettle station and added it back to the pool.
+  id: 191
+  time: '2026-01-19T08:44:10.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: NanoTask printing delay increased from 5 to 20 seconds.
+  id: 192
+  time: '2026-01-19T15:18:45.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Fix
+      message: Reinforcement Security Officers are mindshielded on arrival.
+    - type: Add
+      message: SecHud to Reinforcement Security Officers loadout.
+    - type: Fix
+      message: Specialist reinforcement now spawns the correct loadout.
+  id: 193
+  time: '2026-01-19T21:03:25.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Changed stimkit price from 40 to 25 TC, nobody was buying that slop for
+        that much.
+    - type: Tweak
+      message: >-
+        Mediborg first aid module gets crew hypo and syringe instead of chud
+        injector. The hypo still needs a hypoport so use the syringe as a
+        backup.
+  id: 194
+  time: '2026-01-20T18:09:23.0000000+00:00'
+- author: Fardownup
+  changes:
+    - type: Add
+      message: Added Security gloves! in secDrobe and security lockers.
+  id: 195
+  time: '2026-01-20T18:11:00.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Fix
+      message: Fixed cauterized wound popup appearing for everyone
+  id: 196
+  time: '2026-01-20T19:03:11.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Remove
+      message: Rulebreak bait (ooc in ic) ionlaws.
+    - type: Remove
+      message: Goob self-insert plushies/posters.
+    - type: Remove
+      message: yakub references.
+  id: 197
+  time: '2026-01-20T20:31:21.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: reinforced and normal secret wall sprites
+  id: 198
+  time: '2026-01-20T20:48:14.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Fix
+      message: Fixed ED-209 being uncraftable
+  id: 199
+  time: '2026-01-21T00:20:24.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: You can go to red alert after 5 minutes, down from 10.
+  id: 200
+  time: '2026-01-21T00:37:37.0000000+00:00'

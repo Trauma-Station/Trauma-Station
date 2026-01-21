@@ -7,12 +7,11 @@
 using Content.Goobstation.Shared.Shadowling;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.Ascension;
-using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Actions;
 using Content.Shared.Explosion;
-using Content.Shared.Gibbing.Events;
+using Content.Shared.Gibbing;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Prototypes;
 
@@ -24,7 +23,7 @@ namespace Content.Goobstation.Server.Shadowling.Systems.Abilities.Ascension;
 /// </summary>
 public sealed class ShadowlingAnnihilateSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
@@ -69,7 +68,7 @@ public sealed class ShadowlingAnnihilateSystem : EntitySystem
             maxTileIntensity: 1,
             canCreateVacuum: false);
 
-        _body.GibBody(target, contents: GibContentsOption.Gib);
+        _gibbing.Gib(target);
         args.Handled = true;
     }
 }

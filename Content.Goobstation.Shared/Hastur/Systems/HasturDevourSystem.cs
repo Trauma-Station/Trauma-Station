@@ -2,10 +2,10 @@ using Content.Goobstation.Shared.Hastur.Components;
 using Content.Goobstation.Shared.Hastur.Events;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Body.Systems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.Gibbing;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
@@ -17,7 +17,7 @@ public sealed class HasturDevourSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
@@ -71,7 +71,7 @@ public sealed class HasturDevourSystem : EntitySystem
             return;
         }
 
-        _bodySystem.GibBody(target); // Actually devour the target
+        _gibbing.Gib(target); // Actually devour the target
         _admin.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(ent.Owner)} devoured {ToPrettyString(target)} as a Hastur, gibbing them in the process.");
 
         _damage.TryChangeDamage(ent.Owner, ent.Comp.Healing, targetPart: TargetBodyPart.All); // Shitmed Change

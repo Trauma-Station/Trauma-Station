@@ -42,7 +42,7 @@
   - BorgModuleAdvancedCleaning
   - BorgModuleAdvancedTool
   - BorgModuleAdvancedClowning
-  #- BorgModuleAdvancedChemical # Goob
+  #- BorgModuleAdvancedTopical # Goob
   - BorgModuleAdvancedMining
 
 - type: latheRecipePack

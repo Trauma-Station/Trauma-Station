@@ -70,7 +70,7 @@
       - !type:CleanBloodstream
         excluded: Mugwort # Trauma - Exclude from chempurge
         cleanseRate: 6
-      - !type:GenericStatusEffect
-        key: SeeingRainbows
-        time: 100.0
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
+        time: 100
         type: Remove

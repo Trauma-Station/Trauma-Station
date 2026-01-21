@@ -422,7 +422,7 @@
         Structural: 400
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
-    baseSprintSpeed: 2.2 
+    baseSprintSpeed: 2.2
   - type: Damageable
     damageModifierSet: HeavyArmorNT
   - type: CanMoveInAir

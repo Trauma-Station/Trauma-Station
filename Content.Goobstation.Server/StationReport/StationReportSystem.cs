@@ -25,7 +25,7 @@ public sealed class StationReportSystem : EntitySystem
         {
             if (!TryComp<PaperComponent>(uid, out var paper))
                return;
-            
+
             stationReportText = paper.Content;
             break;
         }

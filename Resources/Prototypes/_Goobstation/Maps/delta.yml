@@ -7,7 +7,7 @@
 - type: gameMap
   id: Delta
   mapName: 'Delta Station'
-  mapPath: /Maps/_Goobstation/delta.yml
+  mapPath: /Maps/_Trauma/delta.yml
   minPlayers: 55
   stations:
     Delta:
@@ -25,7 +25,6 @@
             # command
             Captain: [ 1, 1 ]
             NanotrasenRepresentative: [ 1, 1 ]
-            #BlueshieldOfficer: [ 1, 1 ] # Trauma
             # cargo
             Quartermaster: [ 1, 1 ]
             SalvageSpecialist: [ 6, 6 ]
@@ -42,6 +41,7 @@
             Psychologist: [ 1, 1 ]
             Paramedic: [ 1, 1 ]
             Chemist: [ 2, 2 ]
+            Virologist: [ 1, 1 ]
             # science
             ResearchDirector: [ 1, 1 ]
             Scientist: [ 6, 7 ]
@@ -72,10 +72,7 @@
             # silicon
             StationAi: [ 1, 1 ]
             Borg: [ 2, 3 ]
-
-        # Goobstation blob-config-start HUGE
         - type: StationBlobConfig
           stageBegin: 40
           stageCritical: 450
           stageTheEnd: 900
-        # backmen blob-config-end

@@ -28,7 +28,7 @@
   - type: Sprite
     state: bso
   - type: SpawnItemsOnUse
-    items: 
+    items:
     - id: UniqueLockerBlueshieldOfficerFilled
 
 - type: entity
@@ -52,7 +52,7 @@
   - type: Sprite
     state: ntr
   - type: SpawnItemsOnUse
-    items: 
+    items:
     - id: UniqueLockerNanorepFilled
 
 - type: entity

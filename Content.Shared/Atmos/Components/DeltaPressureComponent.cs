@@ -1,6 +1,6 @@
 using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.Damage;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Guidebook;
 using Robust.Shared.GameStates;
 

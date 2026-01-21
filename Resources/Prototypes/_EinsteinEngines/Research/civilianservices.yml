@@ -25,7 +25,7 @@
   - ChevalTranslatorImplanter
   - NewKinPidginTranslator
   - YowKriolTranslator # goob edit - yowie language
-  position: -4, 4
+  position: -3, 4
   technologyPrerequisites:
   - AdvancedEntertainment
 
@@ -51,6 +51,6 @@
   - AnimalTranslator
   - XenoTranslator
   - YowKriolTranslatorImplanter # goob edit - yowie language
-  position: -4, 5
+  position: -3, 5
   technologyPrerequisites:
   - BasicTranslation

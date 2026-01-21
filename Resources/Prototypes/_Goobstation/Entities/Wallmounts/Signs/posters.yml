@@ -128,16 +128,6 @@
 
 - type: entity
   parent: PosterBase
-  id: PosterLegitGoobDurkPlush
-  name: "Durk Plushie Advertisement"
-  description: "A poster depicting some sort of plush character being delivered soon to a station near you"
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Structures/posters.rsi
-    state: goob_poster13_legit
-
-- type: entity
-  parent: PosterBase
   id: PosterLegitGoobWelderBomb
   name: "Dangers of Fuel Tanks"
   description: "A poster depicting a leaking fuel tank... something inside you wonders what would happen if you put a welding torch near it"
@@ -155,16 +145,6 @@
   - type: Sprite
     sprite: _Goobstation/Structures/posters.rsi
     state: goob_poster15_legit
-
-- type: entity
-  parent: PosterBase
-  id: PosterLegitGoobLouieVote
-  name: "Political Advertisement"
-  description: "A poster for a political advertisement to promote a rat called Louie's campaign... You feel like you should vote for him"
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Structures/posters.rsi
-    state: goob_poster16_legit
 
 - type: entity
   parent: PosterBase
@@ -195,13 +175,3 @@
   - type: Sprite
     sprite: _Goobstation/Structures/posters.rsi
     state: goob_poster1_contraband
-
-- type: entity
-  parent: PosterBase
-  id: PosterContrabandGoobYakub
-  name: "Yakub Poster"
-  description: "Your yakubian powers of tricknology imbued into you by Yakub strengthen as you stare into the poster"
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Structures/posters.rsi
-    state: goob_poster2_contraband

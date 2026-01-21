@@ -486,8 +486,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 5
-        Holy: 4
+        Piercing: 3
+        Holy: 6
 
 - type: entity
   name : stun bolt

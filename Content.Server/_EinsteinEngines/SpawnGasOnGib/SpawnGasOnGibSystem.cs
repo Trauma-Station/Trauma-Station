@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Atmos.EntitySystems;
-using Content.Shared.Body.Events;
+using Content.Shared.Gibbing;
 
 namespace Content.Server._EinsteinEngines.SpawnGasOnGib;
 

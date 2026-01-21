@@ -58,8 +58,8 @@ jobs:
 
           # Set to true to ignore PRs in a milestone (defaults to false)
           exempt-all-pr-milestones: true
-          
+
           # Remove stale label from PRs on update (default is true)
           remove-pr-stale-when-updated: true
-          
+
           ascending: true

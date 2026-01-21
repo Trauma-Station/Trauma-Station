@@ -15,4 +15,3 @@ public enum EquipAbility : int
     MissingSlot = 3,
     CanEquip = 4,
 }
-

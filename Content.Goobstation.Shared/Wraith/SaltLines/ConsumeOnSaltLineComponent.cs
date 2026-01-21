@@ -1,4 +1,4 @@
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Wraith.SaltLines;
@@ -18,4 +18,3 @@ public sealed partial class ConsumeOnSaltLineComponent : Component
 /// </summary>
 [ByRefEvent]
 public record struct AttemptSaltLineEvent(EntityUid User,bool Cancelled = false);
-

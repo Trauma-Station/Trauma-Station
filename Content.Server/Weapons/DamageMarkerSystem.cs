@@ -1,47 +1,8 @@
-// <Trauma>
-using Content.Server._Lavaland.Pressure;
-using Content.Shared._Lavaland.Weapons.Marker;
-using Content.Shared._White.BackStab;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
-using Content.Shared.Stunnable;
-// </Trauma>
 using Content.Shared.Weapons.Marker;
 
 namespace Content.Server.Weapons;
 
 public sealed class DamageMarkerSystem : SharedDamageMarkerSystem
 {
-    // Lavaland Change Start
-    [Dependency] private readonly PressureEfficiencyChangeSystem _pressure = default!;
-    [Dependency] private readonly BackStabSystem _backstab = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    public override void Initialize()
-    {
-        base.Initialize();
 
-        SubscribeLocalEvent<DamageMarkerComponent, ApplyMarkerBonusEvent>(OnApplyMarkerBonus);
-    }
-
-    private void OnApplyMarkerBonus(EntityUid uid, DamageMarkerComponent component, ref ApplyMarkerBonusEvent args)
-    {
-        if (!TryComp<DamageableComponent>(uid, out var damageable))
-            return;
-
-        if (!TryComp<DamageBoostOnMarkerComponent>(args.Weapon, out var boost))
-            return;
-        var pressureMultiplier = 1f;
-
-        if (TryComp<PressureDamageChangeComponent>(args.Weapon, out var pressure)
-            && _pressure.ApplyModifier((args.Weapon, pressure)))
-            pressureMultiplier = pressure.AppliedModifier;
-
-        if (boost.BackstabBoost != null
-            && _backstab.TryBackstab(uid, args.User, Angle.FromDegrees(45d), playSound: false))
-            _damageable.TryChangeDamage((uid, damageable), (boost.BackstabBoost + boost.Boost) * pressureMultiplier, origin: args.User);
-        else
-            _damageable.TryChangeDamage((uid, damageable), boost.Boost * pressureMultiplier, origin: args.User);
-    }
-    // Lavaland Change End
 }

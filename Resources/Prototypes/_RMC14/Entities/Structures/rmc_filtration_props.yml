@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCFiltration
   name: water filtration system
   description: A water filter that separates both organic and inorganic matter, hazardous waste, and corrosive acids from water so it may be further processed.
@@ -65,7 +65,7 @@
   id: RMCFiltrationSedimentation
   name: sedimentation filter
   description: A water filter specifically designed to capture and remove sediment, such as sand, silt, dirt, and rust, from water without removing the nutritious minerals for that crisp, clean taste every time.
-  components:  
+  components:
   - type: Sprite
     sprite: _RMC14/Structures/Filtration/96x96.rsi
     state: sedimentation

@@ -1,7 +1,7 @@
 using Content.Server.Botany.Components;
 using Content.Shared.EntityEffects;
 using Content.Shared.Examine;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 
 namespace Content.Server.Botany.Systems;
 

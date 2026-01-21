@@ -183,4 +183,3 @@ public sealed class PowerStateTest
         await pair.CleanReturnAsync();
     }
 }
-
