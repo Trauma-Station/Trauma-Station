@@ -644,7 +644,7 @@ public sealed partial class PolymorphSystem : EntitySystem
             var newComp = (Component) Factory.GetComponent(compType);
             var temp = (object) newComp;
             _serialization.CopyTo(comp, ref temp, notNullableOverride: true);
-            EntityManager.AddComponent(@new, (Component) temp!);
+            EntityManager.AddComponent(@new, (Component) temp!, overwrite: true);
             return temp as IComponent;
         }
 
