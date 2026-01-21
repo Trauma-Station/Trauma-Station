@@ -275,23 +275,18 @@
       path: /Audio/Voice/Vox/vox_laugh.ogg
     Bagawk: # Mono
       collection: Bagawk # Mono
-    Cough:
-      path: /Audio/Voice/Vox/vox_cough.ogg
-    Sigh:
-      path: /Audio/Voice/Vox/vox_sigh.ogg
     Honk:
       collection: BikeHorn
-    Crying:
-      path: /Audio/Voice/Vox/vox_cry.ogg
     Weh:
       collection: Weh
     Hew:
       collection: Hew
-    # <Goob>
     CatMeow:
-      collection: CatMeows
+      collection: CatMeows #Goob content start
     Sneeze:
       path: /Audio/_Goobstation/Voice/Vox/vox_sneeze.ogg
+    Cough:
+      path: /Audio/_Goobstation/Voice/Vox/vox_cough.ogg
     CatHisses:
       collection: CatHisses
     MonkeyScreeches:
@@ -302,17 +297,20 @@
       path: /Audio/_Goobstation/Voice/Vox/vox_yawn.ogg
     Snore:
       path: /Audio/_Goobstation/Voice/Vox/vox_snore.ogg
+    Sigh:
+      path: /Audio/_Goobstation/Voice/Vox/vox_sigh.ogg
+    Crying:
+      path: /Audio/_Goobstation/Voice/Vox/vox_cry.ogg
     Whistle:
       collection: Whistles
-    Gulp:
-      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
-    Surprised:
-      path: /Audio/_Goobstation/Voice/surprised.ogg
-    # </Goob>
     Gasp:
-      path: /Audio/Effects/Gasp/vox_gasp.ogg
+      path: /Audio/_Goobstation/Voice/Vox/vox_gasp.ogg
     DefaultDeathgasp:
-      path: /Audio/Effects/Gasp/vox_DeathGasp.ogg
+      path: /Audio/_Goobstation/Voice/Vox/vox_deathgasp.ogg
+    Gulp: # Goob
+      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
+    Surprised: # Goob
+      path: /Audio/_Goobstation/Voice/surprised.ogg
   params:
     variation: 0.125
 
