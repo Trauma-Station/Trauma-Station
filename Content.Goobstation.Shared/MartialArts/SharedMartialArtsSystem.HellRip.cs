@@ -20,7 +20,7 @@ using Content.Goobstation.Shared.MartialArts.Components;
 using Content.Goobstation.Shared.MartialArts.Events;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;

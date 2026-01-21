@@ -7,7 +7,7 @@ using Content.Server.Mech.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mech;

@@ -122,7 +122,7 @@ public sealed class HolyFlammableSystem : EntitySystem
         if (otherUid.Id < uid.Id)
             return;
 
-            
+
         if (!TryComp<WeakToHolyComponent>(otherUid, out var otherWeak))
             return;
 

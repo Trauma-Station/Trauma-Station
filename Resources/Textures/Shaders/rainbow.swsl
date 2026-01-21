@@ -1,4 +1,4 @@
-﻿uniform sampler2D SCREEN_TEXTURE;
+uniform sampler2D SCREEN_TEXTURE;
 // Strength of the rainbow color effect. Between 0 and 1.
 uniform highp float colorScale;
 // Strength of the screen warping effect. Between 0 and 1.

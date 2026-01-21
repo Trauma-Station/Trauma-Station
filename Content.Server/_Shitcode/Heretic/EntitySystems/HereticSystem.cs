@@ -21,7 +21,7 @@
 
 using System.Text.RegularExpressions;
 using Content.Server.Store.Systems;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Eye;
 using Content.Shared.Heretic;
 using Content.Shared.Mind;

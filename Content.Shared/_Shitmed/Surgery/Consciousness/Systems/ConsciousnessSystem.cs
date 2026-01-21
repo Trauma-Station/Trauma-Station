@@ -1,4 +1,4 @@
-﻿using Content.Shared._Shitmed.Medical.Surgery.Pain.Systems;
+using Content.Shared._Shitmed.Medical.Surgery.Pain.Systems;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;

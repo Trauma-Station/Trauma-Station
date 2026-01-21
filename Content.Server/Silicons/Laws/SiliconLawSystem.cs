@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Silicons.Components;
 using Content.Goobstation.Shared.CustomLawboard;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Research.Systems;
 using Content.Shared._CorvaxNext.Silicons.Borgs.Components;

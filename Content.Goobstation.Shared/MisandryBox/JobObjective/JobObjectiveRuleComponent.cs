@@ -1,4 +1,4 @@
-﻿using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 

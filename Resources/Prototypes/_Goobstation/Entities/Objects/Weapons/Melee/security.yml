@@ -34,8 +34,8 @@
   - type: Tag
     tags:
     - SecBeltEquip
-  - type: MartialArtBlocked 
-    form: CorporateJudo 
+  - type: MartialArtBlocked
+    form: CorporateJudo
 
 - type: entity
   id: SpearTelescopic

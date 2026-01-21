@@ -29,7 +29,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using FixedPoint2 = Content.Goobstation.Maths.FixedPoint.FixedPoint2;
+using FixedPoint2 = Content.Shared.FixedPoint.FixedPoint2;
 using System.Linq;
 using Content.Shared.Light.Components;
 using Robust.Server.GameObjects;

@@ -7,7 +7,7 @@ using Content.Shared.Body.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Radiation.Events;
 using Content.Shared.Rejuvenate;
@@ -235,16 +235,32 @@ public record struct BeforeDamageChangedEvent(DamageSpecifier Damage, EntityUid?
 public sealed class DamageModifyEvent(EntityUid target, DamageSpecifier damage, EntityUid? origin = null, TargetBodyPart? targetPart = null)
     : EntityEventArgs, IInventoryRelayEvent
 {
-    // Whenever locational damage is a thing, this should just check only that bit of armour.
+    /// <inheritdoc/>
+    /// <remarks>
+    ///     Whenever locational damage is a thing, this should just check only that bit of armor.
+    /// </remarks>
     public SlotFlags TargetSlots => ~SlotFlags.POCKET;
 
     // <Goob>
     public readonly EntityUid Target = target;
-    public readonly EntityUid? Origin = origin; // Why was this not a field already?
     public readonly TargetBodyPart? TargetPart = targetPart;
     // </Goob>
+
+    /// <summary>
+    ///     Contains the original damage, prior to any modifers.
+    /// </summary>
     public readonly DamageSpecifier OriginalDamage = damage;
+
+    /// <summary>
+    ///     Contains the damage after modifiers have been applied.
+    ///     This is the damage that will be inflicted.
+    /// </summary>
     public DamageSpecifier Damage = damage;
+
+    /// <summary>
+    ///     Contains the entity which caused the damage, if any was responsible.
+    /// </summary>
+    public readonly EntityUid? Origin = origin;
 }
 
 public sealed class DamageChangedEvent : EntityEventArgs

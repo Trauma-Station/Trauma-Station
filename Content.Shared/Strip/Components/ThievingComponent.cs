@@ -49,4 +49,3 @@ public sealed partial class ThievingComponent : Component
 /// Event raised to toggle the thieving component.
 /// </summary>
 public sealed partial class ToggleThievingEvent : BaseAlertEvent;
-

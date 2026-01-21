@@ -52,8 +52,8 @@
     sprite: _Goobstation/Mobs/Species/BananaMen/organs.rsi
     layers:
       - state: organ
-          
-   
+
+
 - type: entity
   id: OrganBananaMenKidneys
   parent: [ OrganHumanKidneys, FoodBanana ]

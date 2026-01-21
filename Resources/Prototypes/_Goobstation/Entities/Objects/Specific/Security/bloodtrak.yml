@@ -11,13 +11,14 @@
     sprite: Objects/Devices/pinpointer.rsi
     layers:
     - state: pinpointer-detective
+      sprite: _Goobstation/Objects/Devices/pinpointer.rsi
       map: ["enum.PinpointerLayers.Base"]
     - state: pinonnull
       map: ["enum.PinpointerLayers.Screen"]
       shader: unshaded
       visible: false
   - type: Icon
-    sprite: Objects/Devices/pinpointer.rsi
+    sprite: _Goobstation/Objects/Devices/pinpointer.rsi
     state: pinpointer-detective
   - type: Item
     sprite: Objects/Devices/pinpointer.rsi

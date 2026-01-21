@@ -25,8 +25,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
-using Content.Goobstation.Maths.FixedPoint;
-using Content.Shared.Gibbing.Events;
+using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.Standing;
@@ -50,7 +49,6 @@ public sealed partial class WoundSystem
         SubscribeLocalEvent<WoundableComponent, EntRemovedFromContainerMessage>(OnWoundableRemoved);
         SubscribeLocalEvent<WoundComponent, EntGotInsertedIntoContainerMessage>(OnWoundInserted);
         SubscribeLocalEvent<WoundComponent, EntGotRemovedFromContainerMessage>(OnWoundRemoved);
-        SubscribeLocalEvent<WoundableComponent, AttemptEntityContentsGibEvent>(OnWoundableContentsGibAttempt);
         SubscribeLocalEvent<WoundComponent, WoundSeverityChangedEvent>(OnWoundSeverityChanged);
         SubscribeLocalEvent<WoundComponent, WoundSeverityPointChangedEvent>(OnWoundSeverityPointChanged);
         SubscribeLocalEvent<WoundableComponent, BeforeDamageChangedEvent>(DudeItsJustLikeMatrix);
@@ -152,14 +150,6 @@ public sealed partial class WoundSystem
         if (TryComp<BodyPartComponent>(parentEntity, out var bodyPart)
             && bodyPart.Body is { } body)
             _trauma.UpdateBodyBoneAlert(body);
-    }
-
-    private void OnWoundableContentsGibAttempt(EntityUid uid, WoundableComponent comp, ref AttemptEntityContentsGibEvent args)
-    {
-        if (args.ExcludedContainers == null)
-            args.ExcludedContainers = new List<string> { WoundContainerId, BoneContainerId };
-        else
-            args.ExcludedContainers.AddRange(new List<string> { WoundContainerId, BoneContainerId });
     }
 
     private void DudeItsJustLikeMatrix(EntityUid uid, WoundableComponent comp, ref BeforeDamageChangedEvent args)
@@ -808,14 +798,12 @@ public sealed partial class WoundSystem
             {
                 /*DropWoundableOrgans(woundableEntity, woundableComp);
                 DestroyWoundableChildren(woundableEntity, woundableComp);
-                _body.GibBody(bodyPart.Body.Value);
+                _gibbing.Gib(bodyPart.Body.Value);
 
                 if (_net.IsServer)
                 {
                     if (!IsClientSide(woundableEntity))
                         QueueDel(woundableEntity); // More blood for the blood God!
-
-                    _body.GibBody(bodyPart.Body.Value);
                 }
                 }*/
             }

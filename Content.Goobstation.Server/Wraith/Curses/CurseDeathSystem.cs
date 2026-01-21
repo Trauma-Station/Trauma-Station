@@ -1,11 +1,11 @@
 using Content.Goobstation.Shared.Wraith.Curses;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Goobstation.Shared.Wraith.WraithPoints;
-using Content.Server.Body.Systems;
 using Content.Server.Fluids.EntitySystems;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Gibbing;
 using Content.Shared.Mobs;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
@@ -21,7 +21,7 @@ public sealed class CurseDeathSystem : EntitySystem
     [Dependency] private readonly SmokeSystem _smokeSystem = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly WraithPointsSystem _wraithPoints = default!;
-    [Dependency] private readonly BodySystem _bodySystem = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
@@ -56,7 +56,7 @@ public sealed class CurseDeathSystem : EntitySystem
         if (curseHolder.Curser != null)
             _wraithPoints.AdjustWpGenerationRate(ent.Comp.WpGeneration, curseHolder.Curser.Value); // wraith gets extra regen rate
 
-        _bodySystem.GibBody(ent.Owner);
+        _gibbing.Gib(ent.Owner);
         RemCompDeferred<CurseHolderComponent>(ent.Owner);
     }
 

@@ -1,4 +1,4 @@
-﻿using Content.Shared.Shuttles.Systems;
+using Content.Shared.Shuttles.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -44,7 +44,4 @@ public partial record struct FTLDriveData
 
     [DataField]
     public float? ArrivalTime;
-
-    [DataField]
-    public float? CooldownTime;
 }

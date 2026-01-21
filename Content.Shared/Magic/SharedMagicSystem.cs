@@ -11,9 +11,9 @@ using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Actions;
 using Content.Shared.Damage.Systems;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Ghost;
-using Content.Shared.Gibbing.Events;
+using Content.Shared.Gibbing;
 using Content.Shared.Heretic;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Components;
@@ -24,14 +24,13 @@ using Content.Shared.Zombies;
 using System.Linq;
 // </Trauma>
 using System.Numerics;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Examine;
+using Content.Shared.Gibbing;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -76,7 +75,7 @@ public abstract class SharedMagicSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -550,11 +549,10 @@ public abstract class SharedMagicSystem : EntitySystem
 
         _physics.ApplyLinearImpulse(ev.Target, impulseVector);
 
-        if (!TryComp<BodyComponent>(ev.Target, out var body))
-            return;
-
-        if (_timing.IsFirstTimePredicted) // Goobstation
-            _body.GibBody(ev.Target, true, body, splatModifier: 10f, contents: GibContentsOption.Skip); // Goob edit
+        // <Goob> - check FirstTimePredicted
+        if (_timing.IsFirstTimePredicted)
+            _gibbing.Gib(ev.Target);
+        // </Goob>
     }
     // End Smite Spells
     #endregion

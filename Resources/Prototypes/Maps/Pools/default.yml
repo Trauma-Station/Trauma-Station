@@ -11,7 +11,7 @@
   - FlandHighPop
   - Loop
   - Marathon
-  #- Meta
+  - Meta
   #- Oasis
   #- OasisHighPop
   #- Omega
@@ -19,10 +19,10 @@
   #- Saltern
   #- Packed
   #- Barratry
-  #- Kettle
+  - Kettle
   #- Submarine
   - Leonid
-  #- Delta
+  - Delta
   #- Chloris
   - Cog
   #- Serpentcrest

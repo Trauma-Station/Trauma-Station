@@ -318,9 +318,8 @@
         - !type:MetabolizerTypeCondition
           type: [ Yowie ]
           inverted: true
-      - !type:GenericStatusEffect
-        key: SeeingRainbows
-        component: SeeingRainbows
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 20
       - !type:ModifyParalysis

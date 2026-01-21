@@ -18,7 +18,7 @@ public sealed class GetMotdCommand : LocalizedCommands
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
     public override string Command => "get-motd";
-    
+
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         _entityManager.EntitySysManager.GetEntitySystem<MOTDSystem>().TrySendMOTD(shell);

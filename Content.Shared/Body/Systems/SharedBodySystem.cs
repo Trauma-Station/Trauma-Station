@@ -40,10 +40,7 @@ public abstract partial class SharedBodySystem : EntitySystem
     [Dependency] protected readonly SharedContainerSystem Containers = default!;
     [Dependency] protected readonly SharedTransformSystem SharedTransform = default!;
     [Dependency] protected readonly StandingStateSystem Standing = default!;
-    // <Shitmed>
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    // </Shitmed>
+    [Dependency] private readonly IRobustRandom _random = default!; // Shitmed
 
     public override void Initialize()
     {

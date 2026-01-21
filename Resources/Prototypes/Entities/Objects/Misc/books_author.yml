@@ -31,7 +31,7 @@
       - state: icon_pentagramm
         color: "#911129"
       - state: detail_bookmark
-        color: red 
+        color: red
     - type: Paper
       content: book-text-narsielegend
 
@@ -372,7 +372,9 @@
   parent: BookBase
   id: BookIanArctic
   name: the adventures of ian and renault - an arctic journey of courage and friendship
-  description: The book looks new and adventurous, with a picture of Ian and Renault standing in front of an icy landscape with snowflakes falling all around them. The title, "The Adventures of Ian and Renault," is written in bold letters at the top, with a subtitle that reads, "An Arctic Journey of Courage and Friendship."
+  description: |
+    The book looks new and adventurous, with a picture of Ian and Renault standing in front of an icy landscape with snowflakes falling all around them. The title, "The Adventures of Ian and Renault," is written in bold letters at the top, with a subtitle that reads, "An Arctic Journey of Courage and Friendship."
+    2nd Edition.
   components:
     - type: Sprite
       sprite: Objects/Misc/books.rsi
@@ -463,9 +465,9 @@
       - state: cover_base
         color: "#0f204f"
       - state: decor_vertical_middle
-        color: "#3c6ab0" 
+        color: "#3c6ab0"
       - state: decor_spine
-        color: "#3c6ab0" 
+        color: "#3c6ab0"
       - state: icon_stars2
       - state: icon_aurora
       - state: detail_bookmark
@@ -655,7 +657,7 @@
   parent: BookBase
   id: BookJanitorTale
   name: the tales of a tired janitor
-  description: A clean looking book, smelling vaguely of soap and bleach. 
+  description: A clean looking book, smelling vaguely of soap and bleach.
   components:
   - type: Sprite
     sprite: Objects/Misc/books.rsi

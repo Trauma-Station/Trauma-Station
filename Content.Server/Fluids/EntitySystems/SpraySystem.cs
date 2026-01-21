@@ -10,7 +10,7 @@ using Content.Server.Gravity;
 using Content.Server.Popups;
 using Content.Shared.CCVar;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Fluids;
 using Content.Shared.Interaction;
 using Content.Shared.Timing;
@@ -102,7 +102,7 @@ public sealed class SpraySystem : SharedSpraySystem
     {
         // Assmos - Extinguisher Nozzle
         var sprayOwner = entity.Owner;
-        var solutionName = SprayComponent.SolutionName;
+        var solutionName = entity.Comp.Solution;
 
         if (entity.Comp.ExternalContainer == true && user != null)
         {
@@ -145,7 +145,8 @@ public sealed class SpraySystem : SharedSpraySystem
 
         if (!_solutionContainer.TryGetSolution(sprayOwner, solutionName, out var soln, out var solution)) return;
         // End of assmos changes
-        //if (!_solutionContainer.TryGetSolution(entity.Owner, SprayComponent.SolutionName, out var soln, out var solution)) return;
+        //if (!_solutionContainer.TryGetSolution(entity.Owner, entity.Comp.Solution, out var soln, out var solution))
+            return;
 
         var ev = new SprayAttemptEvent(user);
         RaiseLocalEvent(entity, ref ev);
