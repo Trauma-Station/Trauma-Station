@@ -293,7 +293,6 @@
     Gold: 500
 
 - type: latheRecipe
-  abstract: true # Trauma
   parent: BaseWeaponRecipeSidearm
   id: WeaponFlareGunSecurity
   result: WeaponFlareGunSecurity
