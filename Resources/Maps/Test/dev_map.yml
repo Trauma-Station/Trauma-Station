@@ -1838,7 +1838,6 @@ entities:
     - type: BecomesStation
       id: Dev
     - type: ImplicitRoof
-    - type: FTLDrive
   - uid: 23
     components:
     - type: MetaData
@@ -1975,7 +1974,6 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
-    - type: FTLDrive
   - uid: 2869
     components:
     - type: MetaData
@@ -2050,7 +2048,6 @@ entities:
     - type: IFF
       flags: HideLabel
     - type: ImplicitRoof
-    - type: FTLDrive
 - proto: AirAlarm
   entities:
   - uid: 1270

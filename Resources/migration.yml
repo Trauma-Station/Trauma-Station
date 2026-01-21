@@ -66,6 +66,14 @@ PlushieJvne: null
 PlushieFern: null
 PlushieNigel: null
 PlushieLehmin: null
+
+# 2026-01-21 remove ftl drives
+MachineFTLDrive: null
+MachineFTLDriveHigh: null
+MachineFTLDriveAutomated: null
+MachineFTLDriveDebug: null
+MachineFTLDriveCircuitboard: null
+MachineFTLDriveHighCircuitboard: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

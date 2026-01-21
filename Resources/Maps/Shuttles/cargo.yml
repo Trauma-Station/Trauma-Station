@@ -176,7 +176,6 @@ entities:
       shakeTimes: 10
     - type: GasTileOverlay
     - type: ImplicitRoof
-    - type: FTLDrive
 - proto: AirCanister
   entities:
   - uid: 2

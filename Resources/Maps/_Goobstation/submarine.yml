@@ -15048,7 +15048,6 @@ entities:
       id: Submarine
     - type: NavMap
     - type: ImplicitRoof
-    - type: FTLDrive
   - uid: 18185
     components:
     - type: MetaData

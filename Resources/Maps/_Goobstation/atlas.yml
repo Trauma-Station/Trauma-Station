@@ -3052,7 +3052,6 @@ entities:
     - type: RadiationGridResistance
     - type: NavMap
     - type: ImplicitRoof
-    - type: FTLDrive
 - proto: AirAlarm
   entities:
   - uid: 3

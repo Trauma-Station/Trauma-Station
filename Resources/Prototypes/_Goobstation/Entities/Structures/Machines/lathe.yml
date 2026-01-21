@@ -70,7 +70,6 @@
     - SharedBoards
     - CameraBoards
     - ShuttleBoards
-    - ShuttleBoardsGoob
     - BluespaceTheory
     - ScienceClothing
     - UpgradeKits
@@ -135,7 +134,6 @@
     - CargoBoards
     - SharedBoards
     - ShuttleBoards
-    - ShuttleBoardsGoob
     - BluespaceTheory
     - ScienceClothing
     - ConstructionBagOfHolding
@@ -213,7 +211,6 @@
     - SharedBoards
     - ScienceBoards
     - ShuttleBoards
-    - ShuttleBoardsGoob
     - MedicalBoardsGoob
     - BluespaceTheory
     - ExperimentalScienceGoob

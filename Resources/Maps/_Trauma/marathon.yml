@@ -7764,7 +7764,6 @@ entities:
     - type: SpreaderGrid
     - type: GridPathfinding
     - type: ImplicitRoof
-    - type: FTLDrive
     - type: ExplosionAirtightGrid
 - proto: AcousticGuitarInstrument
   entities:
