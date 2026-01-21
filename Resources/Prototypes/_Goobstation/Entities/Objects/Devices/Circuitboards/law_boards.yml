@@ -1,8 +1,8 @@
 - type: entity
-  id: RDCustomLawboard
-  parent: BaseElectronics
+  id: FreeformLawboard
+  parent: [BaseElectronics]
   name: freeform lawboard
-  description: A freeform lawboard for the research director to use on the AI.
+  description: The RD's freeform law board for setting custom laws.
   components:
   - type: Sprite
     sprite: Objects/Misc/module.rsi
