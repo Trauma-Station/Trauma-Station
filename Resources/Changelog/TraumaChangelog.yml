@@ -1651,3 +1651,25 @@ Entries:
       message: You can go to red alert after 5 minutes, down from 10.
   id: 200
   time: '2026-01-21T00:37:37.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: >-
+        Donuts no longer rot into slop. Secoffs get a reliable mini meal at
+        brig.
+    - type: Tweak
+      message: >-
+        Donkpockets no longer rot into slop. Tiders get a reliable mini meal in
+        maint.
+    - type: Tweak
+      message: >-
+        Bungo and cherry pits no longer rot into slop, remaining a viable poison
+        for annoying chefs/botanists.
+  id: 201
+  time: '2026-01-21T10:02:09.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed the round end summary not showing purchased items.
+  id: 202
+  time: '2026-01-21T12:12:13.0000000+00:00'
