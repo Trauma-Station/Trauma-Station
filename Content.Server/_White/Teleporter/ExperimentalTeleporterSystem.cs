@@ -7,10 +7,10 @@
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Server.Body.Systems;
 using Content.Shared._White.Standing;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Gibbing;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
 using Content.Shared.Tag;
@@ -26,7 +26,7 @@ namespace Content.Server._White.Teleporter;
 public sealed class ExperimentalTeleporterSystem : EntitySystem
 {
     [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly BodySystem _bodySystem = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
@@ -70,7 +70,7 @@ public sealed class ExperimentalTeleporterSystem : EntitySystem
             || EmergencyTeleportation(args.User, uid, component, xform, oldCoords, newOffset))
             return;
 
-        _bodySystem.GibBody(args.User, true, splatModifier: 3F);
+        _gibbing.Gib(args.User);
     }
 
     private bool EmergencyTeleportation(EntityUid uid, EntityUid teleporterUid, ExperimentalTeleporterComponent component, TransformComponent xform, EntityCoordinates oldCoords, Vector2 offset)

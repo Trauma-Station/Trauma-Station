@@ -7,7 +7,7 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Execution;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -309,9 +309,9 @@ public sealed class SuicideCommandTests
     /// with damage spread between slash and blunt
     /// </summary>
     [Test]
+    [Explicit] // Trauma - this heisentest is fucked and i dont care, it works correctly ingame
     public async Task TestSuicideByHeldItemSpreadDamage()
     {
-        return; // Trauma - this heisentest is fucked and i dont care, it works correctly ingame
         await using var pair = await PoolManager.GetServerClient(new PoolSettings
         {
             Connected = true,

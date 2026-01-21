@@ -14,6 +14,7 @@
   - type: Sprite
     layers:
     - state: pinpointer-science
+      sprite: _Goobstation/Objects/Devices/pinpointer.rsi
       map: ["enum.PinpointerLayers.Base"]
     - state: pinonnull
       map: ["enum.PinpointerLayers.Screen"]
@@ -21,10 +22,11 @@
       visible: false
   - type: Icon
     state: pinpointer-science
+    sprite: _Goobstation/Objects/Devices/pinpointer.rsi
   - type: Pinpointer
     updateTargetName: true
     canRetarget: true
-    retargetingWhitelist: # Goob edit: pinpointer whitelist
+    retargetingWhitelist:
       components:
       - Anomaly
 
@@ -37,6 +39,7 @@
   - type: Sprite
     layers:
     - state: pinpointer-science
+      sprite: _Goobstation/Objects/Devices/pinpointer.rsi
       map: ["enum.PinpointerLayers.Base"]
     - state: pinonnull
       map: ["enum.PinpointerLayers.Screen"]
@@ -44,6 +47,7 @@
       visible: false
   - type: Icon
     state: pinpointer-science
+    sprite: _Goobstation/Objects/Devices/pinpointer.rsi
   - type: Pinpointer
     targetName: artifacts
     whitelist: # Goob edit: pinpointer whitelist
@@ -83,6 +87,7 @@
   - type: Sprite
     layers:
     - state: pinpointer-universal
+      sprite: _Goobstation/Objects/Devices/pinpointer.rsi
       map: ["enum.PinpointerLayers.Base"]
     - state: pinonnull
       map: ["enum.PinpointerLayers.Screen"]
@@ -90,6 +95,7 @@
       visible: false
   - type: Icon
     state: pinpointer-universal
+    sprite: _Goobstation/Objects/Devices/pinpointer.rsi
   - type: Pinpointer
     updateTargetName: true
     canRetarget: true

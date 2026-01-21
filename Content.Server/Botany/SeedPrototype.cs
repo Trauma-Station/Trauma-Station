@@ -3,7 +3,7 @@ using Content.Trauma.Common.Botany;
 // </Trauma>
 using Content.Shared.Atmos;
 using Content.Shared.Database;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Random;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;

@@ -164,7 +164,7 @@
   - type: GameRule
     minPlayers: 30
   - type: LoadMapRule
-    mapPath: /Maps/_Goobstation/Nonstations/nukieplanet.yml
+    mapPath: /Maps/_Trauma/Nonstations/nukieplanet.yml
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
     definitions:
@@ -327,7 +327,7 @@
   - type: NukeopsRule
     localePrefix: "honkops-"
   - type: LoadMapRule
-    mapPath: /Maps/_Goobstation/Nonstations/nukieplanet-honkops.yml
+    mapPath: /Maps/_Trauma/Nonstations/nukieplanet-honkops.yml
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
     definitions:

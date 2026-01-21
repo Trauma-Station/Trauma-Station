@@ -118,7 +118,6 @@
     speechSounds: SlaughterDemon
   - type: TypingIndicator
     proto: guardian
-  - type: Gibbable
   - type: Crawler
   - type: RotationVisuals
     defaultRotation: 90

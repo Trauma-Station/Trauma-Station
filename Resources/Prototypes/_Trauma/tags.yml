@@ -17,9 +17,6 @@
   id: DataChip
 
 - type: Tag
-  id: Ed209Prox
-
-- type: Tag
   id: Ed209Shell
 
 - type: Tag

@@ -168,7 +168,7 @@
 #  tier: 2
 #  cost: 5000
 #  recipeUnlocks:
-#  - BorgModuleAdvancedChemical
+#  - BorgModuleAdvancedTopical
 #  - AdvancedJetInjector
 #  # Goobstation R&D Console rework start
 #  position: -1, 4

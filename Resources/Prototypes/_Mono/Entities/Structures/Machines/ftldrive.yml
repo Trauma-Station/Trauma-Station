@@ -71,7 +71,6 @@
     data:
       range: 512
       ftlToSameMap: true
-      cooldownTime: 120
 
 - type: entity
   id: MachineFTLDriveHigh
@@ -101,7 +100,6 @@
     data:
       range: 2048
       ftlToSameMap: true
-      cooldownTime: 180
 
 - type: entity
   id: MachineFTLDriveAutomated
@@ -128,7 +126,6 @@
     priority: 1
     data:
       ftlToSameMap: false
-      cooldownTime: 20
       startupTime: 5
       knockdownTime: 2
       travelTime: 15
@@ -162,4 +159,3 @@
       knockdownTime: 1
       travelTime: 5
       arrivalTime: 1
-      cooldownTime: 0.5

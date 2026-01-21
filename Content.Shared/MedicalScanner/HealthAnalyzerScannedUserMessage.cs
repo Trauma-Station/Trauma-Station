@@ -1,58 +1,69 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Rainfey <rainfey0+github@gmail.com>
-// SPDX-FileCopyrightText: 2024 Saphire Lattice <lattice@saphi.re>
-// SPDX-FileCopyrightText: 2024 Whisper <121047731+QuietlyWhisper@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 kurokoTurbo <92106367+kurokoTurbo@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Trest <144359854+trest100@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 Kayzel <43700376+KayzelW@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Shared._Shitmed.Medical.Surgery.Wounds; // Shitmed Change
-using Content.Shared._Shitmed.Targeting; // Shitmed Change
+// <Trauma>
+using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Shared._Shitmed.Medical.Surgery.Wounds;
+using Content.Shared._Shitmed.Targeting;
+using Content.Shared.FixedPoint;
+// </Trauma>
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.MedicalScanner;
 
 /// <summary>
-///     On interacting with an entity retrieves the entity UID for use with getting the current damage of the mob.
+/// On interacting with an entity retrieves the entity UID for use with getting the current damage of the mob.
 /// </summary>
 [Serializable, NetSerializable]
 public sealed class HealthAnalyzerScannedUserMessage : BoundUserInterfaceMessage
+{
+    public HealthAnalyzerUiState State;
+
+    public HealthAnalyzerScannedUserMessage(HealthAnalyzerUiState state)
+    {
+        State = state;
+    }
+}
+
+/// <summary>
+/// Contains the current state of a health analyzer control. Used for the health analyzer and cryo pod.
+/// </summary>
+[Serializable, NetSerializable]
+public struct HealthAnalyzerUiState
 {
     public readonly NetEntity? TargetEntity;
     public float Temperature;
     public float BloodLevel;
     public bool? ScanMode;
-    public bool? Bleeding;
+    // <Shitmed>
+    public Dictionary<TargetBodyPart, WoundableSeverity>? Body;
+    public Dictionary<TargetBodyPart, bool> Bleeding = new(); // per-part instead of global
+    public FixedPoint2 VitalDamage;
+    public NetEntity? Part;
+    public HealthAnalyzerScanState? ScanState;
+    // </Shitmed>
     public bool? Unrevivable;
-    public Dictionary<TargetBodyPart, WoundableSeverity>? Body; // Shitmed Change
-    public NetEntity? Part; // Shitmed Change
-    public HealthAnalyzerScannedUserMessage(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, Dictionary<TargetBodyPart, WoundableSeverity>? body, NetEntity? part = null) // Shitmed Change
+
+    public HealthAnalyzerUiState() {}
+
+    public HealthAnalyzerUiState(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode,
+        // <Shitmed>
+        Dictionary<TargetBodyPart, bool> bleeding,
+        bool? unrevivable,
+        Dictionary<TargetBodyPart, WoundableSeverity>? body,
+        FixedPoint2 vitalDamage,
+        NetEntity? part = null,
+        HealthAnalyzerScanState? scanState = null)
+        // </Shitmed>
     {
+        // <Shitmed>
+        Body = body;
+        VitalDamage = vitalDamage;
+        Part = part;
+        ScanState = scanState;
+        // </Shitmed>
         TargetEntity = targetEntity;
         Temperature = temperature;
         BloodLevel = bloodLevel;
         ScanMode = scanMode;
         Bleeding = bleeding;
-        Body = body; // Shitmed Change
-        Part = part; // Shitmed Change
         Unrevivable = unrevivable;
     }
 }
-
-// Shitmed Change Start
-[Serializable, NetSerializable]
-public sealed class HealthAnalyzerPartMessage(NetEntity? owner, TargetBodyPart? bodyPart) : BoundUserInterfaceMessage
-{
-    public readonly NetEntity? Owner = owner;
-    public readonly TargetBodyPart? BodyPart = bodyPart;
-
-}
-// Shitmed Change End

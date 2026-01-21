@@ -44,7 +44,4 @@ public partial record struct FTLDriveData
 
     [DataField]
     public float? ArrivalTime;
-
-    [DataField]
-    public float? CooldownTime;
 }
