@@ -1717,3 +1717,21 @@ Entries:
       message: RD gets a custom law board in thier locker
   id: 209
   time: '2026-01-21T22:56:12.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Fix
+      message: Sprays work again
+    - type: Fix
+      message: Sec can no longer print shotguns
+    - type: Fix
+      message: Bananium peels no longer rot
+    - type: Fix
+      message: Vox raiders get objectives and cannot remove hardsuits
+    - type: Fix
+      message: remove a ton of buggy / weird looking borg skins
+    - type: Fix
+      message: xenovac fits on back
+    - type: Fix
+      message: facehuggers speak xeno and have hivemind
+  id: 210
+  time: '2026-01-21T23:20:28.0000000+00:00'

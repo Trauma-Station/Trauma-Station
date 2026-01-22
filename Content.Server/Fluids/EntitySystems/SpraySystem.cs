@@ -145,8 +145,7 @@ public sealed class SpraySystem : SharedSpraySystem
 
         if (!_solutionContainer.TryGetSolution(sprayOwner, solutionName, out var soln, out var solution)) return;
         // End of assmos changes
-        //if (!_solutionContainer.TryGetSolution(entity.Owner, entity.Comp.Solution, out var soln, out var solution))
-            return;
+        //if (!_solutionContainer.TryGetSolution(entity.Owner, entity.Comp.Solution, out var soln, out var solution)) return;
 
         var ev = new SprayAttemptEvent(user);
         RaiseLocalEvent(entity, ref ev);
