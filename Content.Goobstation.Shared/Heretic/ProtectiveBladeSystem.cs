@@ -10,8 +10,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Heretic.Components;
-using Content.Server.Weapons.Ranged.Systems;
+using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Follower;
 using Content.Shared.Follower.Components;
@@ -21,12 +20,13 @@ using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
 using System.Linq;
 using System.Numerics;
-using Content.Server.Buckle.Systems;
-using Content.Server.Hands.Systems;
-using Content.Server.Heretic.Abilities;
+using Content.Shared.Buckle;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared._Goobstation.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared._Shitcode.Heretic.Systems.Abilities;
 using Content.Shared.Damage.Components;
+using Content.Shared.Heretic.Components;
 using Content.Shared.Input;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
@@ -40,18 +40,18 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
-namespace Content.Server.Heretic.EntitySystems;
+namespace Content.Goobstation.Shared.Heretic;
 
-public sealed class ProtectiveBladeUsedEvent : EntityEventArgs
-{
-    public Entity<ProtectiveBladeComponent>? Used;
-}
+[ByRefEvent]
+public record struct ProtectiveBladeUsedEvent(Entity<ProtectiveBladeComponent> Used);
 
 public sealed class ProtectiveBladeSystem : EntitySystem
 {
     [Dependency] private readonly FollowerSystem _follow = default!;
-    [Dependency] private readonly GunSystem _gun = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -71,22 +71,22 @@ public sealed class ProtectiveBladeSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ProtectiveBladeComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<ProtectiveBladeComponent, ComponentShutdown>(OnBladeShutdown);
         SubscribeLocalEvent<ProtectiveBladeComponent, InteractHandEvent>(OnInteract,
-            after: [typeof(BuckleSystem)]);
+            after: [typeof(SharedBuckleSystem)]);
 
         SubscribeLocalEvent<HereticComponent, InteractHandEvent>(OnHereticInteract,
-            after: [typeof(BuckleSystem)]);
+            after: [typeof(SharedBuckleSystem)]);
         SubscribeLocalEvent<HereticComponent, BeforeDamageChangedEvent>(OnTakeDamage);
         SubscribeLocalEvent<HereticComponent, BeforeHarmfulActionEvent>(OnBeforeHarmfulAction,
-            after: [typeof(HereticAbilitySystem), typeof(RiposteeSystem)]);
+            after: [typeof(SharedHereticAbilitySystem), typeof(RiposteeSystem)]);
         SubscribeLocalEvent<HereticComponent, ProjectileReflectAttemptEvent>(OnProjectileReflectAttempt);
         SubscribeLocalEvent<HereticComponent, HitScanReflectAttemptEvent>(OnHitscanReflectAttempt);
 
         CommandBinds.Builder
             .BindAfter(ContentKeyFunctions.ThrowItemInHand,
                 new PointerInputCmdHandler(HandleThrowBlade),
-                typeof(HandsSystem))
+                typeof(SharedHandsSystem))
             .Register<ProtectiveBladeComponent>();
     }
 
@@ -96,6 +96,9 @@ public sealed class ProtectiveBladeSystem : EntitySystem
             !coords.IsValid(EntityManager) || !HasComp<HereticComponent>(player) ||
             HasComp<BlockProtectiveBladeShootComponent>(player))
             return false;
+
+        if (!_timing.IsFirstTimePredicted) // prevent mispredict throwing your held item
+            return true;
 
         var blades = GetBlades(player);
         if (blades.Count == 0)
@@ -127,7 +130,7 @@ public sealed class ProtectiveBladeSystem : EntitySystem
                 continue;
 
             args.Cancelled = true;
-            RemoveProtectiveBlade(blade);
+            PredictedQueueDel(blade);
             break;
         }
     }
@@ -155,7 +158,7 @@ public sealed class ProtectiveBladeSystem : EntitySystem
 
             args.Direction = dir.Value;
             args.Reflected = true;
-            RemoveProtectiveBlade(blade);
+            PredictedQueueDel(blade);
             break;
         }
     }
@@ -170,37 +173,16 @@ public sealed class ProtectiveBladeSystem : EntitySystem
             return;
 
         var blade = blades[0];
-        RemoveProtectiveBlade(blade);
+        PredictedQueueDel(blade);
 
         _audio.PlayPvs(BladeBlockSound, ent);
 
         args.Cancel();
     }
 
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var eqe = EntityQueryEnumerator<ProtectiveBladeComponent>();
-        while (eqe.MoveNext(out var uid, out var pbc))
-        {
-            pbc.Timer -= frameTime;
-
-            if (pbc.Timer <= 0)
-            {
-                RemoveProtectiveBlade((uid, pbc));
-            }
-        }
-    }
-
-    private void OnInit(Entity<ProtectiveBladeComponent> ent, ref ComponentInit args)
-    {
-        ent.Comp.Timer = ent.Comp.Lifetime;
-    }
-
     private void OnTakeDamage(Entity<HereticComponent> ent, ref BeforeDamageChangedEvent args)
     {
-        if (args.Cancelled || args.Damage.GetTotal() < 5f)
+        if (args.Cancelled || args.Damage.GetTotal() < 5)
             return;
 
         var blades = GetBlades(ent);
@@ -208,7 +190,7 @@ public sealed class ProtectiveBladeSystem : EntitySystem
             return;
 
         var blade = blades[0];
-        RemoveProtectiveBlade(blade);
+        PredictedQueueDel(blade);
 
         _audio.PlayPvs(BladeBlockSound, ent);
 
@@ -269,12 +251,14 @@ public sealed class ProtectiveBladeSystem : EntitySystem
 
     public void AddProtectiveBlade(EntityUid ent, bool playSound = true)
     {
+        // TODO: predict the code calling this in the future
         var pblade = Spawn(BladePrototype, Transform(ent).Coordinates);
         _follow.StartFollowingEntity(pblade, ent);
         if (playSound)
             _audio.PlayPvs(BladeAppearSound, ent);
 
         /* Upstream removed this, but they randomise the start point so it's w/e
+        // TODO: readd this in client startup, fucking idiot
         if (TryComp<OrbitVisualsComponent>(pblade, out var vorbit))
         {
             // test scenario: 4 blades are currently following our heretic.
@@ -283,15 +267,14 @@ public sealed class ProtectiveBladeSystem : EntitySystem
         }
         */
     }
-    public void RemoveProtectiveBlade(Entity<ProtectiveBladeComponent> blade)
+
+    protected void OnBladeShutdown(Entity<ProtectiveBladeComponent> blade, ref ComponentShutdown args)
     {
         if (!TryComp<FollowerComponent>(blade, out var follower))
             return;
 
-        var ev = new ProtectiveBladeUsedEvent() { Used = blade };
-        RaiseLocalEvent(follower.Following, ev);
-
-        QueueDel(blade);
+        var ev = new ProtectiveBladeUsedEvent(blade);
+        RaiseLocalEvent(follower.Following, ref ev);
     }
 
     public bool TryThrowProtectiveBlade(EntityUid origin, Entity<ProtectiveBladeComponent>? pblade, EntityUid? target = null)
@@ -338,16 +321,14 @@ public sealed class ProtectiveBladeSystem : EntitySystem
         var pos = _xform.GetWorldPosition(origin);
         var direction = target - pos;
 
-        var proj = Spawn(BladeProjecilePrototype, Transform(origin).Coordinates);
+        var proj = PredictedSpawnAtPosition(BladeProjecilePrototype, Transform(origin).Coordinates);
         _gun.ShootProjectile(proj, direction, Vector2.Zero, origin, origin);
         if (targetEntity != EntityUid.Invalid)
             _gun.SetTarget(proj, targetEntity, out _);
 
-        var ev = new ProtectiveBladeUsedEvent() { Used = pblade.Value };
-        RaiseLocalEvent(origin, ev);
+        PredictedQueueDel(pblade.Value);
 
-        QueueDel(pblade.Value);
-
+        // TODO: status effect entities
         _status.TryAddStatusEffect<BlockProtectiveBladeShootComponent>(origin,
             "BlockProtectiveBladeShoot",
             TimeSpan.FromSeconds(0.25f),

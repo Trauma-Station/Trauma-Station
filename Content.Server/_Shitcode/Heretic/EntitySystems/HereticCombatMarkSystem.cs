@@ -12,6 +12,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.Heretic;
 using Content.Server.Body.Systems;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;

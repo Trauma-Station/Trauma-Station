@@ -1,3 +1,4 @@
+using Content.Goobstation.Shared.Heretic;
 using Content.Server.Buckle.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared._Shitcode.Heretic.Components;
