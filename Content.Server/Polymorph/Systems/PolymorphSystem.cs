@@ -373,11 +373,13 @@ public sealed partial class PolymorphSystem : EntitySystem
         {
             foreach (var data in configuration.ComponentsToTransfer)
             {
+                // <Trauma>
                 if (!Factory.TryGetRegistration(data.Component, out var registration))
                 {
                     Log.Error($"Unknown component name: {data.Component}");
                     continue;
                 }
+                // </Trauma>
 
                 var type = registration.Type;
 
