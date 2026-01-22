@@ -59,7 +59,7 @@ public abstract class SharedXenoVacuumSystem : EntitySystem
         _tankQuery = GetEntityQuery<XenoVacuumTankComponent>();
 
         // Init
-        SubscribeLocalEvent<XenoVacuumTankComponent, MapInitEvent>(OnTankInit);
+        SubscribeLocalEvent<XenoVacuumTankComponent, ComponentInit>(OnTankInit);
 
         // Interaction
         SubscribeLocalEvent<XenoVacuumTankComponent, ExaminedEvent>(OnTankExamined);
@@ -69,7 +69,7 @@ public abstract class SharedXenoVacuumSystem : EntitySystem
         SubscribeLocalEvent<XenoVacuumComponent, AfterInteractEvent>(OnAfterInteract);
     }
 
-    private void OnTankInit(Entity<XenoVacuumTankComponent> ent, ref MapInitEvent args)
+    private void OnTankInit(Entity<XenoVacuumTankComponent> ent, ref ComponentInit args)
     {
         ent.Comp.StorageTank = _container.EnsureContainer<Container>(ent, ent.Comp.TankContainerName);
     }
