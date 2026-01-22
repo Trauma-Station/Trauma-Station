@@ -133,10 +133,10 @@
     proto: null
 
 - type: entity
+  parent: BaseRevMajorContraband
   id: PowerArmorFrame
   name: P.O.W.A.R armor frame
   description: Precise Orbital WAR, armor
-  parent: BaseRevMajorContraband
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -206,8 +206,8 @@
     - T45Frame
 
 - type: entity
-  id: T45PowerArmor
   parent: [ BaseMech, BaseRevMajorContraband, CombatMech ]
+  id: T45PowerArmor
   name: T-45 P.O.W.A.R armor
   description: Precise Orbital Worn Armor (for) Revolutionaries
   components:

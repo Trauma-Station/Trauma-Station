@@ -1,8 +1,8 @@
 - type: entity
+  abstract: true
   parent: [BaseItem, BaseRevMajorContraband]
   id: T45PartBase
   description: A part for the T-45 P.O.W.A.R armor.
-  abstract: true
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
