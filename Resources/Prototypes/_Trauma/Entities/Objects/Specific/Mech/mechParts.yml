@@ -1,11 +1,13 @@
 - type: entity
   id: T45Helmet
   name: T-45 Helmet
-  parent: BaseItem
+  parent: [BaseItem, BaseRevMajorContraband]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
     state: t45_helmet
+  - type: Item
+    size: Ginormous
   - type: Tag
     tags:
     - T45Helmet
@@ -13,11 +15,13 @@
 - type: entity
   id: T45Chest
   name: T-45 Chest
-  parent: BaseItem
+  parent: [BaseItem, BaseRevMajorContraband]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
     state: t45_chest
+  - type: Item
+    size: Ginormous
   - type: Tag
     tags:
     - T45Chest
@@ -25,11 +29,13 @@
 - type: entity
   id: T45ArmL
   name: T-45 left arm
-  parent: BaseItem
+  parent: [BaseItem, BaseRevMajorContraband]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
     state: t45_lefthand
+  - type: Item
+    size: Ginormous
   - type: Tag
     tags:
     - T45ArmL
@@ -37,11 +43,13 @@
 - type: entity
   id: T45ArmR
   name: T-45 right arm
-  parent: BaseItem
+  parent: [BaseItem, BaseRevMajorContraband]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
     state: t45_righthand
+  - type: Item
+    size: Ginormous
   - type: Tag
     tags:
     - T45ArmR
@@ -49,11 +57,13 @@
 - type: entity
   id: T45LegR
   name: T-45 right leg
-  parent: BaseItem
+  parent: [BaseItem, BaseRevMajorContraband]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
     state: t45_rightleg
+  - type: Item
+    size: Ginormous
   - type: Tag
     tags:
     - T45LegR
@@ -61,11 +71,13 @@
 - type: entity
   id: T45LegL
   name: T-45 left leg
-  parent: BaseItem
+  parent: [BaseItem, BaseRevMajorContraband]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
     state: t45_leftleg
+  - type: Item
+    size: Ginormous
   - type: Tag
     tags:
     - T45LegL
@@ -75,7 +87,7 @@
   description: A fusion core, can be used as a battery with a very high capacity, but is more often used to power, P.O.W.A.R armor suits.
   id: FusionCore
   suffix: Full
-  parent: BasePowerCell
+  parent: [PowerCellHyper, BaseRevMajorContraband]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Devices/fusionCore.rsi
@@ -85,19 +97,15 @@
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
       state: o2
       shader: unshaded
-  - type: Battery
-    maxCharge: 2200
-    startingCharge: 2200
-  - type: BatteryAmmoProvider
-    proto: RedHeavyLaserShock
-    fireCost: 225
+  - type: Item
+    size: Normal
   - type: Tag
     tags:
     - FusionCore
 
 - type: entity
   id: WeaponMechMeleePowerFist
-  parent: [BaseMechWeaponMelee, CombatMechEquipment]
+  parent: [BaseMechWeaponMelee, CombatMechEquipment, BaseRevMajorContraband]
   name: power fist
   suffix: Mech Weapon, Melee
   description: An armored gauntlet, with a powered ram or similar device which improves the impact of the wielder's strikes, used in the T-45 P.O.W.A.R armor.
@@ -126,7 +134,7 @@
   name: fO-46 mk3 heavy flamer
   description: Fires flame from it's thrower, can be used in the T-45 P.O.W.A.R armor.
   suffix: Mech Weapon, Gun, Combat, Flame
-  parent: [ BaseMechWeaponRange, CombatMechEquipment ]
+  parent: [ BaseMechWeaponRange, CombatMechEquipment, BaseRevMajorContraband ]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Flamethrower/flamethrower.rsi

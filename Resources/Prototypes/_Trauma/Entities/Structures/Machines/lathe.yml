@@ -347,6 +347,7 @@
     - state: station
       map: ["station"]
   - type: Construction
+    graph: PowerArmorFrame
     node: PowerArmorStand
   - type: Strap
     buckleOnInteractHand: false

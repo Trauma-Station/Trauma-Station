@@ -248,5 +248,5 @@
     - T45Frame
   - type: Construction
     graph: T45Armor
-    node: T45Armor
+    node: start
   - type: Buckle
