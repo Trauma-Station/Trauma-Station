@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Grid
-  engineVersion: 262.0.0
+  category: Map
+  engineVersion: 271.1.0
   forkId: ""
   forkVersion: ""
-  time: 06/09/2025 19:22:10
-  entityCount: 962
-maps: []
+  time: 01/22/2026 23:26:54
+  entityCount: 1055
+maps:
+- 114
 grids:
 - 1
-orphans:
-- 1
+orphans: []
 nullspace: []
 tilemap:
   0: Space
@@ -36,7 +36,7 @@ entities:
       name: NT Evac Meta
     - type: Transform
       pos: -2.4375,0.859375
-      parent: invalid
+      parent: 114
     - type: MapGrid
       chunks:
         0,0:
@@ -76,6 +76,11 @@ entities:
     - type: SpreaderGrid
       updateAccumulator: 0.18502522
     - type: Shuttle
+      dampingModifiers:
+        Cruise: 0.0075
+        Dampen: 0.25
+        Anchor: 2
+        None: 0.25
       dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity
@@ -486,78 +491,57 @@ entities:
             0: 4368
           4,-2:
             0: 61697
-            2: 192
+            1: 192
           4,-1:
             0: 56781
           -2,-3:
             0: 16448
-            1: 8
+            2: 8
           -2,-2:
             0: 68
           -2,-1:
             0: 1092
           -2,0:
             0: 4
-            1: 128
+            2: 128
           5,0:
             0: 5
           5,-1:
             0: 20821
           5,-2:
-            2: 16
+            1: 16
             0: 5184
         uniqueMixes:
         - volume: 2500
           temperature: 293.15
           moles:
-          - 21.824879
-          - 82.10312
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
-          immutable: True
-          moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
         - volume: 2500
           temperature: 293.15
           moles:
-          - 1400.0662
-          - 5266.916
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 1400.0662
+            Nitrogen: 5266.916
+        - volume: 2500
+          immutable: True
+          moles: {}
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: GravityShake
       shakeTimes: 10
     - type: ImplicitRoof
+    - type: ExplosionAirtightGrid
+  - uid: 114
+    components:
+    - type: MetaData
+      name: Map Entity
+    - type: Transform
+    - type: Map
+      mapPaused: True
+    - type: GridTree
+    - type: Broadphase
+    - type: OccluderTree
 - proto: AirCanister
   entities:
   - uid: 55
@@ -757,17 +741,61 @@ entities:
       canCollide: False
 - proto: APCHighCapacity
   entities:
-  - uid: 114
+  - uid: 437
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
+      pos: 0.5,-1.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Engineering
+  - uid: 850
+    components:
+    - type: Transform
+      pos: -1.5,-8.5
+      parent: 1
+  - uid: 935
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,-9.5
+      parent: 1
+  - uid: 963
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,-7.5
+      parent: 1
+  - uid: 964
+    components:
+    - type: Transform
+      pos: 11.5,-6.5
+      parent: 1
+  - uid: 965
+    components:
+    - type: Transform
+      pos: 15.5,1.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal:
+      - - Engineering
+  - uid: 1021
+    components:
+    - type: Transform
+      pos: 4.5,-2.5
+      parent: 1
+- proto: APCHyperCapacity
+  entities:
+  - uid: 175
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
       pos: 21.5,-3.5
       parent: 1
-    - type: PowerNetworkBattery
-      loadingNetworkDemand: 18077
-      currentReceiving: 18076.947
-      currentSupply: 18077
-      supplyRampPosition: 0.052734375
+    - type: AccessReader
+      accessListsOriginal:
+      - - Engineering
 - proto: AtmosDeviceFanDirectional
   entities:
   - uid: 4
@@ -872,18 +900,8 @@ entities:
         immutable: False
         temperature: 293.14963
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -902,8 +920,6 @@ entities:
           - 120
           - 121
           - 119
-    - type: ApcPowerReceiver
-      powerLoad: 0
 - proto: BorgChargerCircuitboard
   entities:
   - uid: 118
@@ -1049,15 +1065,10 @@ entities:
     - type: Transform
       pos: 20.5,0.5
       parent: 1
-  - uid: 175
-    components:
-    - type: Transform
-      pos: 19.5,-4.5
-      parent: 1
   - uid: 176
     components:
     - type: Transform
-      pos: 18.5,-4.5
+      pos: 20.5,-4.5
       parent: 1
   - uid: 177
     components:
@@ -1077,7 +1088,7 @@ entities:
   - uid: 180
     components:
     - type: Transform
-      pos: 15.5,-3.5
+      pos: 7.5,-3.5
       parent: 1
   - uid: 181
     components:
@@ -1152,7 +1163,7 @@ entities:
   - uid: 195
     components:
     - type: Transform
-      pos: 3.5,-0.5
+      pos: 6.5,-3.5
       parent: 1
   - uid: 196
     components:
@@ -1172,7 +1183,7 @@ entities:
   - uid: 199
     components:
     - type: Transform
-      pos: 1.5,-2.5
+      pos: 1.5,-0.5
       parent: 1
   - uid: 200
     components:
@@ -1192,7 +1203,7 @@ entities:
   - uid: 203
     components:
     - type: Transform
-      pos: 2.5,-5.5
+      pos: 1.5,-2.5
       parent: 1
   - uid: 204
     components:
@@ -1217,7 +1228,7 @@ entities:
   - uid: 208
     components:
     - type: Transform
-      pos: 2.5,-10.5
+      pos: 1.5,-4.5
       parent: 1
   - uid: 209
     components:
@@ -1257,12 +1268,12 @@ entities:
   - uid: 216
     components:
     - type: Transform
-      pos: 8.5,-5.5
+      pos: 1.5,-10.5
       parent: 1
   - uid: 217
     components:
     - type: Transform
-      pos: 8.5,-6.5
+      pos: 11.5,-6.5
       parent: 1
   - uid: 218
     components:
@@ -1282,7 +1293,7 @@ entities:
   - uid: 221
     components:
     - type: Transform
-      pos: 15.5,-6.5
+      pos: 8.5,-5.5
       parent: 1
   - uid: 222
     components:
@@ -1389,6 +1400,21 @@ entities:
     - type: Transform
       pos: -3.5,-2.5
       parent: 1
+  - uid: 433
+    components:
+    - type: Transform
+      pos: 14.5,-3.5
+      parent: 1
+  - uid: 434
+    components:
+    - type: Transform
+      pos: 1.5,-6.5
+      parent: 1
+  - uid: 435
+    components:
+    - type: Transform
+      pos: 19.5,-6.5
+      parent: 1
   - uid: 812
     components:
     - type: Transform
@@ -1398,11 +1424,6 @@ entities:
     components:
     - type: Transform
       pos: 0.5,-3.5
-      parent: 1
-  - uid: 850
-    components:
-    - type: Transform
-      pos: 1.5,-6.5
       parent: 1
   - uid: 912
     components:
@@ -1474,11 +1495,6 @@ entities:
     - type: Transform
       pos: -1.5,-4.5
       parent: 1
-  - uid: 935
-    components:
-    - type: Transform
-      pos: 20.5,-4.5
-      parent: 1
   - uid: 936
     components:
     - type: Transform
@@ -1488,6 +1504,191 @@ entities:
     components:
     - type: Transform
       pos: 20.5,-6.5
+      parent: 1
+  - uid: 994
+    components:
+    - type: Transform
+      pos: 15.5,0.5
+      parent: 1
+  - uid: 1018
+    components:
+    - type: Transform
+      pos: -1.5,-8.5
+      parent: 1
+  - uid: 1019
+    components:
+    - type: Transform
+      pos: 0.5,-9.5
+      parent: 1
+  - uid: 1020
+    components:
+    - type: Transform
+      pos: 1.5,-9.5
+      parent: 1
+  - uid: 1022
+    components:
+    - type: Transform
+      pos: 5.5,-3.5
+      parent: 1
+  - uid: 1023
+    components:
+    - type: Transform
+      pos: 15.5,1.5
+      parent: 1
+  - uid: 1025
+    components:
+    - type: Transform
+      pos: 4.5,-2.5
+      parent: 1
+  - uid: 1026
+    components:
+    - type: Transform
+      pos: 4.5,-3.5
+      parent: 1
+  - uid: 1027
+    components:
+    - type: Transform
+      pos: 8.5,-3.5
+      parent: 1
+  - uid: 1028
+    components:
+    - type: Transform
+      pos: 5.5,-4.5
+      parent: 1
+  - uid: 1029
+    components:
+    - type: Transform
+      pos: 5.5,-5.5
+      parent: 1
+  - uid: 1030
+    components:
+    - type: Transform
+      pos: 11.5,-7.5
+      parent: 1
+  - uid: 1031
+    components:
+    - type: Transform
+      pos: 11.5,-8.5
+      parent: 1
+  - uid: 1032
+    components:
+    - type: Transform
+      pos: 11.5,-9.5
+      parent: 1
+  - uid: 1033
+    components:
+    - type: Transform
+      pos: 13.5,-8.5
+      parent: 1
+  - uid: 1034
+    components:
+    - type: Transform
+      pos: 13.5,-7.5
+      parent: 1
+  - uid: 1035
+    components:
+    - type: Transform
+      pos: 13.5,-10.5
+      parent: 1
+  - uid: 1036
+    components:
+    - type: Transform
+      pos: 11.5,-10.5
+      parent: 1
+  - uid: 1037
+    components:
+    - type: Transform
+      pos: 15.5,-10.5
+      parent: 1
+  - uid: 1038
+    components:
+    - type: Transform
+      pos: 12.5,-3.5
+      parent: 1
+  - uid: 1039
+    components:
+    - type: Transform
+      pos: 6.5,-5.5
+      parent: 1
+  - uid: 1040
+    components:
+    - type: Transform
+      pos: 10.5,-3.5
+      parent: 1
+  - uid: 1041
+    components:
+    - type: Transform
+      pos: 10.5,-5.5
+      parent: 1
+  - uid: 1042
+    components:
+    - type: Transform
+      pos: 13.5,-5.5
+      parent: 1
+  - uid: 1043
+    components:
+    - type: Transform
+      pos: 4.5,0.5
+      parent: 1
+  - uid: 1044
+    components:
+    - type: Transform
+      pos: 6.5,-1.5
+      parent: 1
+  - uid: 1045
+    components:
+    - type: Transform
+      pos: 9.5,0.5
+      parent: 1
+  - uid: 1046
+    components:
+    - type: Transform
+      pos: 10.5,-1.5
+      parent: 1
+  - uid: 1047
+    components:
+    - type: Transform
+      pos: 12.5,0.5
+      parent: 1
+  - uid: 1048
+    components:
+    - type: Transform
+      pos: 12.5,-1.5
+      parent: 1
+  - uid: 1049
+    components:
+    - type: Transform
+      pos: 3.5,-8.5
+      parent: 1
+  - uid: 1050
+    components:
+    - type: Transform
+      pos: 4.5,-8.5
+      parent: 1
+  - uid: 1051
+    components:
+    - type: Transform
+      pos: 4.5,-7.5
+      parent: 1
+  - uid: 1052
+    components:
+    - type: Transform
+      pos: 4.5,-9.5
+      parent: 1
+  - uid: 1053
+    components:
+    - type: Transform
+      pos: 4.5,-10.5
+      parent: 1
+  - uid: 1054
+    components:
+    - type: Transform
+      pos: 3.5,-10.5
+      parent: 1
+  - uid: 1055
+    components:
+    - type: Transform
+      pos: 1.5,0.5
       parent: 1
 - proto: CableApcStack1
   entities:
@@ -1676,6 +1877,271 @@ entities:
     - type: Transform
       pos: 21.5,-3.5
       parent: 1
+  - uid: 436
+    components:
+    - type: Transform
+      pos: 4.5,-3.5
+      parent: 1
+  - uid: 966
+    components:
+    - type: Transform
+      pos: 0.5,-1.5
+      parent: 1
+  - uid: 967
+    components:
+    - type: Transform
+      pos: 0.5,-2.5
+      parent: 1
+  - uid: 968
+    components:
+    - type: Transform
+      pos: 1.5,-2.5
+      parent: 1
+  - uid: 969
+    components:
+    - type: Transform
+      pos: -1.5,-8.5
+      parent: 1
+  - uid: 970
+    components:
+    - type: Transform
+      pos: -1.5,-7.5
+      parent: 1
+  - uid: 971
+    components:
+    - type: Transform
+      pos: -0.5,-7.5
+      parent: 1
+  - uid: 972
+    components:
+    - type: Transform
+      pos: -0.5,-6.5
+      parent: 1
+  - uid: 973
+    components:
+    - type: Transform
+      pos: -0.5,-5.5
+      parent: 1
+  - uid: 974
+    components:
+    - type: Transform
+      pos: -0.5,-4.5
+      parent: 1
+  - uid: 975
+    components:
+    - type: Transform
+      pos: -0.5,-3.5
+      parent: 1
+  - uid: 976
+    components:
+    - type: Transform
+      pos: -0.5,-2.5
+      parent: 1
+  - uid: 977
+    components:
+    - type: Transform
+      pos: 1.5,-3.5
+      parent: 1
+  - uid: 978
+    components:
+    - type: Transform
+      pos: 1.5,-4.5
+      parent: 1
+  - uid: 979
+    components:
+    - type: Transform
+      pos: 4.5,-4.5
+      parent: 1
+  - uid: 980
+    components:
+    - type: Transform
+      pos: 2.5,-5.5
+      parent: 1
+  - uid: 981
+    components:
+    - type: Transform
+      pos: 0.5,-9.5
+      parent: 1
+  - uid: 982
+    components:
+    - type: Transform
+      pos: 1.5,-9.5
+      parent: 1
+  - uid: 983
+    components:
+    - type: Transform
+      pos: 2.5,-9.5
+      parent: 1
+  - uid: 984
+    components:
+    - type: Transform
+      pos: 2.5,-8.5
+      parent: 1
+  - uid: 985
+    components:
+    - type: Transform
+      pos: 2.5,-7.5
+      parent: 1
+  - uid: 986
+    components:
+    - type: Transform
+      pos: 2.5,-6.5
+      parent: 1
+  - uid: 987
+    components:
+    - type: Transform
+      pos: 3.5,-4.5
+      parent: 1
+  - uid: 988
+    components:
+    - type: Transform
+      pos: 4.5,-5.5
+      parent: 1
+  - uid: 989
+    components:
+    - type: Transform
+      pos: 5.5,-5.5
+      parent: 1
+  - uid: 990
+    components:
+    - type: Transform
+      pos: 6.5,-5.5
+      parent: 1
+  - uid: 991
+    components:
+    - type: Transform
+      pos: 5.5,-6.5
+      parent: 1
+  - uid: 992
+    components:
+    - type: Transform
+      pos: 5.5,-7.5
+      parent: 1
+  - uid: 993
+    components:
+    - type: Transform
+      pos: 2.5,-4.5
+      parent: 1
+  - uid: 995
+    components:
+    - type: Transform
+      pos: 6.5,-4.5
+      parent: 1
+  - uid: 996
+    components:
+    - type: Transform
+      pos: 7.5,-4.5
+      parent: 1
+  - uid: 997
+    components:
+    - type: Transform
+      pos: 8.5,-4.5
+      parent: 1
+  - uid: 998
+    components:
+    - type: Transform
+      pos: 9.5,-4.5
+      parent: 1
+  - uid: 999
+    components:
+    - type: Transform
+      pos: 10.5,-4.5
+      parent: 1
+  - uid: 1000
+    components:
+    - type: Transform
+      pos: 13.5,-4.5
+      parent: 1
+  - uid: 1001
+    components:
+    - type: Transform
+      pos: 12.5,-4.5
+      parent: 1
+  - uid: 1002
+    components:
+    - type: Transform
+      pos: 14.5,-4.5
+      parent: 1
+  - uid: 1003
+    components:
+    - type: Transform
+      pos: 11.5,-4.5
+      parent: 1
+  - uid: 1004
+    components:
+    - type: Transform
+      pos: 15.5,-4.5
+      parent: 1
+  - uid: 1005
+    components:
+    - type: Transform
+      pos: 16.5,-4.5
+      parent: 1
+  - uid: 1006
+    components:
+    - type: Transform
+      pos: 17.5,-4.5
+      parent: 1
+  - uid: 1007
+    components:
+    - type: Transform
+      pos: 18.5,-4.5
+      parent: 1
+  - uid: 1008
+    components:
+    - type: Transform
+      pos: 19.5,-4.5
+      parent: 1
+  - uid: 1009
+    components:
+    - type: Transform
+      pos: 15.5,1.5
+      parent: 1
+  - uid: 1010
+    components:
+    - type: Transform
+      pos: 15.5,0.5
+      parent: 1
+  - uid: 1011
+    components:
+    - type: Transform
+      pos: 14.5,0.5
+      parent: 1
+  - uid: 1012
+    components:
+    - type: Transform
+      pos: 14.5,-0.5
+      parent: 1
+  - uid: 1013
+    components:
+    - type: Transform
+      pos: 14.5,-1.5
+      parent: 1
+  - uid: 1014
+    components:
+    - type: Transform
+      pos: 14.5,-2.5
+      parent: 1
+  - uid: 1015
+    components:
+    - type: Transform
+      pos: 14.5,-3.5
+      parent: 1
+  - uid: 1016
+    components:
+    - type: Transform
+      pos: 11.5,-6.5
+      parent: 1
+  - uid: 1017
+    components:
+    - type: Transform
+      pos: 11.5,-5.5
+      parent: 1
+  - uid: 1024
+    components:
+    - type: Transform
+      pos: 4.5,-2.5
+      parent: 1
 - proto: CableMVStack1
   entities:
   - uid: 289
@@ -1846,36 +2312,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 18.5,-3.5
-      parent: 1
-- proto: ChairOfficeDark
-  entities:
-  - uid: 433
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -2.5,-3.5
-      parent: 1
-  - uid: 434
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -2.5,-2.5
-      parent: 1
-  - uid: 435
-    components:
-    - type: Transform
-      pos: -2.5,-1.5
-      parent: 1
-  - uid: 436
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -1.5,-0.5
-      parent: 1
-  - uid: 437
-    components:
-    - type: Transform
-      pos: -1.5,-4.5
       parent: 1
 - proto: ChairPilotSeat
   entities:
@@ -2209,18 +2645,8 @@ entities:
         immutable: False
         temperature: 293.14963
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -2261,6 +2687,9 @@ entities:
     - type: Physics
       canCollide: False
     - type: AttachedClothing
+    - type: ContainerContainer
+      containers:
+        replaced-clothing: !type:ContainerSlot {}
   - uid: 487
     components:
     - type: Transform
@@ -2501,18 +2930,8 @@ entities:
         immutable: False
         temperature: 293.14963
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -4488,7 +4907,7 @@ entities:
             radius: 0.35
             position: 0,0
           mask:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -4528,7 +4947,7 @@ entities:
             radius: 0.35
             position: 0,0
           mask:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -4568,7 +4987,7 @@ entities:
             radius: 0.35
             position: 0,0
           mask:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -4608,7 +5027,7 @@ entities:
             radius: 0.35
             position: 0,0
           mask:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -4648,7 +5067,7 @@ entities:
             radius: 0.35
             position: 0,0
           mask:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -4688,7 +5107,7 @@ entities:
             radius: 0.35
             position: 0,0
           mask:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -4728,7 +5147,7 @@ entities:
             radius: 0.35
             position: 0,0
           mask:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -4768,7 +5187,7 @@ entities:
             radius: 0.35
             position: 0,0
           mask:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -4808,7 +5227,7 @@ entities:
             radius: 0.35
             position: 0,0
           mask:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -4848,7 +5267,7 @@ entities:
             radius: 0.35
             position: 0,0
           mask:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -4915,7 +5334,7 @@ entities:
             radius: 0.35
             position: 0,0
           mask:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -4955,7 +5374,7 @@ entities:
             radius: 0.35
             position: 0,0
           mask:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -6260,8 +6679,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 7.5,-10.5
       parent: 1
-    - type: Drain
-      accumulator: 0.814998
 - proto: SMESBasic
   entities:
   - uid: 279
@@ -6416,18 +6833,8 @@ entities:
         immutable: False
         temperature: 293.14963
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -6450,18 +6857,8 @@ entities:
         immutable: False
         temperature: 293.14963
         moles:
-        - 1.7459903
-        - 6.568249
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -6638,10 +7035,10 @@ entities:
             - -0.45,0.45
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           layer:
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           density: 60
           hard: True
@@ -6658,7 +7055,7 @@ entities:
           mask: []
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
@@ -6700,10 +7097,10 @@ entities:
             - -0.45,0.45
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           layer:
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           density: 60
           hard: True
@@ -6720,7 +7117,7 @@ entities:
           mask: []
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
@@ -6762,10 +7159,10 @@ entities:
             - -0.45,0.45
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           layer:
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           density: 60
           hard: True
@@ -6782,7 +7179,7 @@ entities:
           mask: []
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
@@ -6835,10 +7232,10 @@ entities:
             - -0.45,0.45
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           layer:
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           density: 60
           hard: True
@@ -6855,7 +7252,7 @@ entities:
           mask: []
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
@@ -6962,10 +7359,10 @@ entities:
             - -0.45,0.45
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           layer:
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           density: 60
           hard: True
@@ -6982,7 +7379,7 @@ entities:
           mask: []
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
@@ -7024,10 +7421,10 @@ entities:
             - -0.45,0.45
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           layer:
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           density: 60
           hard: True
@@ -7044,7 +7441,7 @@ entities:
           mask: []
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
@@ -7108,10 +7505,10 @@ entities:
             - -0.45,0.45
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           layer:
-          - TableLayer
+          - MidImpassable
           - LowImpassable
           density: 60
           hard: True
@@ -7128,7 +7525,7 @@ entities:
           mask: []
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
@@ -7934,8 +8331,6 @@ entities:
           - 303
           - 304
           - 302
-    - type: ApcPowerReceiver
-      powerLoad: 0
   - uid: 306
     components:
     - type: Transform
@@ -7959,8 +8354,6 @@ entities:
           - 308
           - 309
           - 307
-    - type: ApcPowerReceiver
-      powerLoad: 0
 - proto: WeaponCapacitorRechargerCircuitboard
   entities:
   - uid: 305
