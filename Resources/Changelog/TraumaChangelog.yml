@@ -1777,3 +1777,17 @@ Entries:
       message: Fixed delimbing not working.
   id: 215
   time: '2026-01-22T14:19:25.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed CPR not working.
+    - type: Tweak
+      message: >-
+        CPR now actually makes you breathe instead of magically removing airloss
+        damage.
+    - type: Remove
+      message: CPR no longer removes rotting, use stasis instead.
+    - type: Tweak
+      message: CPR is much more reliable now, especially for the CMO and paramedics.
+  id: 216
+  time: '2026-01-22T21:28:10.0000000+00:00'
