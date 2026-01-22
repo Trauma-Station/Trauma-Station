@@ -5,3 +5,15 @@
   targetNode: paper sheet
   category: construction-category-materials
   objectType: Item
+
+- type: construction
+  id: PowerArmorStand
+  graph: PowerArmorStand
+  startNode: start
+  targetNode: PowerArmorStand
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary

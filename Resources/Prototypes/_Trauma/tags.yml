@@ -53,6 +53,9 @@
   id: FlamethrowerTank
 
 - type: Tag
+  id: FusionCore
+
+- type: Tag
   id: ForgeMold
 
 - type: Tag
@@ -87,6 +90,9 @@
 
 - type: Tag
   id: TechfabMachineBoard
+
+- type: Tag
+  id: T45Frame
 
 - type: Tag
   id: T45LegL

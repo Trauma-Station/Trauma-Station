@@ -91,3 +91,65 @@
   - type: BatteryAmmoProvider
     proto: RedHeavyLaserShock
     fireCost: 225
+  - type: Tag
+    tags:
+    - FusionCore
+
+- type: entity
+  id: WeaponMechMeleePowerFist
+  parent: [BaseMechWeaponMelee, CombatMechEquipment]
+  name: power fist
+  suffix: Mech Weapon, Melee
+  description: An armored gauntlet, with a powered ram or similar device which improves the impact of the wielder's strikes, used in the T-45 P.O.W.A.R armor.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/powerfist.rsi
+    state: powerfist
+  - type: MeleeThrowOnHit
+    distance: 5
+    speed: 30
+  - type: MeleeWeapon
+    canWideSwing: false
+    angle: 0
+    wideAnimationRotation: -90
+    soundHit:
+      collection: PowerFistHit
+    attackRate: 0.5
+    damage:
+      groups:
+        Brute: 30
+      types:
+        Structural: 60
+
+- type: entity
+  id: WeaponMechCombatFlameThrower
+  name: fO-46 mk3 heavy flamer
+  description: Fires flame from it's thrower, can be used in the T-45 P.O.W.A.R armor.
+  suffix: Mech Weapon, Gun, Combat, Flame
+  parent: [ BaseMechWeaponRange, CombatMechEquipment ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Flamethrower/flamethrower.rsi
+    state: icon
+  - type: BasicEntityAmmoProvider
+    proto: FlameThrowerBullet
+    capacity: 250
+    count: 250
+  - type: Buckleable
+  - type: Gun
+    minAngle: 0
+    maxAngle: 0
+    fireRate: 5
+    burstFireRate: 5
+    burstCooldown: .5
+    shotsPerBurst: 5
+    projectileSpeed: 20
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_Trauma/Revs/flamethrower.ogg
+  - type: AmmoCounter
+  - type: UseDelay
+    delay: 1

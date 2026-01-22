@@ -144,7 +144,15 @@
     state: frame
   - type: Clickable
   - type: InteractionOutline
+  - type: Buckleable
   - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        density: 500
+        mask:
+        - ItemMask
   - type: Appearance
   - type: ItemMapper
     sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
@@ -191,11 +199,15 @@
     defaultTarget: T45
     containers:
     - part-container
+  - type: Buckle
   - type: Pullable
+  - type: Tag
+    tags:
+    - T45Frame
 
 - type: entity
   id: T45PowerArmor
-  parent: [ BaseMech, BaseRevMajorContraband ]
+  parent: [ BaseMech, BaseRevMajorContraband, CombatMech ]
   name: T-45 P.O.W.A.R armor
   description: Precise Orbital Worn Armor (for) Revolutionaries
   components:
@@ -204,6 +216,7 @@
     noRot: true
     sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
     state: T45Armor
+  - type: Buckleable
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepHeavySuit
@@ -213,20 +226,14 @@
     brokenState: T45Armor
     mechToPilotDamageMultiplier: 0.01
     airtight: false
-    maxIntegrity: 600
-    maxEquipmentAmount: 1
+    maxIntegrity: 250
+    maxEquipmentAmount: 2
     pilotWhitelist:
       components:
       - HumanoidAppearance
     startingEquipment:
-    - WeaponMechCombatUltraRifle
-  - type: MeleeWeapon
-    hidden: true
-    attackRate: 0.5
-    damage:
-      types:
-        Structural: 20
-        Blunt: 35
+    - WeaponMechMeleePowerFist
+    - WeaponMechCombatFlameThrower
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 2
@@ -238,7 +245,9 @@
     tags:
     - DoorBumpOpener
     - FootstepSound
+    - T45Frame
   - type: Construction
     graph: T45Armor
     deconstructionTarget: null
     node: T45Armor
+  - type: Buckle

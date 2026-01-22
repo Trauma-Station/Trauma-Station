@@ -337,7 +337,7 @@
   parent: BaseRevIndustry
   id: RevPowerArmorStand
   name: P.O.W.A.R armor stand
-  description: A P.O.W.A.R armor stand, required to build a T-45 P.O.W.A.R armor.
+  description: A P.O.W.A.R armor stand, used for showing off P.O.W.A.R armor.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Machines/powerarmorstand.rsi
@@ -346,12 +346,12 @@
       map: [ "chains" ]
     - state: station
       map: ["station"]
-  - type: Lathe
-    staticPacks:
-    - RevPrintingPress
-  - type: MaterialStorage
+  - type: Construction
+    node: PowerArmorStand
+  - type: Strap
+    buckleOnInteractHand: false
+    addBuckleverb: false
+    buckleOffset: "0, 0.2"
     whitelist:
       tags:
-      - Sheet
-  - type: Construction
-    node: printing press
+      - T45Frame
