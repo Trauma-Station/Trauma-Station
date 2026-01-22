@@ -15,9 +15,11 @@ using Content.Shared.Armor;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Inventory;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
@@ -29,6 +31,9 @@ public partial class TraumaSystem
 {
     private const string TraumaContainerId = "Traumas";
     public static readonly TraumaType[] TraumasBlockingHealing = { TraumaType.BoneDamage, TraumaType.OrganDamage, TraumaType.Dismemberment };
+
+    public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
+    public static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
 
     private void InitProcess()
     {
@@ -749,20 +754,18 @@ public partial class TraumaSystem
                     break;
 
                 case TraumaType.Dismemberment:
-                    Logger.Debug("Attempting to trigger dismemberment");
                     if (!_wound.IsWoundableRoot(target)
-                        && _wound.TryInduceWound(targetChosen.Value, "Blunt", 0f, out var woundInduced)) // We need this to add the trauma into.
+                        && _wound.TryCreateWound(targetChosen.Value, Blunt, 0, out var woundCreated, Brute)) // We need this to add the trauma into.
                     {
                         AddTrauma(
                             targetChosen.Value,
                             (targetChosen.Value, Comp<WoundableComponent>(targetChosen.Value)),
-                            (woundInduced.Value.Owner, EnsureComp<TraumaInflicterComponent>(woundInduced.Value.Owner)),
+                            (woundCreated.Value.Owner, EnsureComp<TraumaInflicterComponent>(woundCreated.Value.Owner)),
                             TraumaType.Dismemberment,
                             severity,
                             (bodyPart.PartType, bodyPart.Symmetry));
 
                         _wound.AmputateWoundable(targetChosen.Value, target, target);
-                        Logger.Debug($"Amputating woundable.");
                     }
                     break;
             }
