@@ -21,7 +21,7 @@ public sealed partial class XenoVacuumTankComponent : Component
     /// <summary>
     /// The ID of the tank's container.
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
+    [ViewVariables]
     public Container StorageTank = new();
 
     /// <summary>
@@ -34,6 +34,6 @@ public sealed partial class XenoVacuumTankComponent : Component
     /// <summary>
     /// The EntityUid of the nozzle attached to this tank.
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public EntityUid? LinkedNozzle;
 }
