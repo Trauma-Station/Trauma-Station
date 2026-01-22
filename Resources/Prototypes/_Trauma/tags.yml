@@ -53,10 +53,10 @@
   id: FlamethrowerTank
 
 - type: Tag
-  id: FusionCore
+  id: ForgeMold
 
 - type: Tag
-  id: ForgeMold
+  id: FusionCore
 
 - type: Tag
   id: HandTeleporter
