@@ -248,6 +248,5 @@
     - T45Frame
   - type: Construction
     graph: T45Armor
-    deconstructionTarget: null
     node: T45Armor
   - type: Buckle
