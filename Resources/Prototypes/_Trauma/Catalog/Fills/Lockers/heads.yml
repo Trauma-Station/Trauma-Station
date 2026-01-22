@@ -45,6 +45,7 @@
     - id: ClothingBeltGeminiHoloProjector # Who better to do science with than yourself?
     - id: MMI
     - id: FreeformLawboard
+    - id: StationAiFixerCircuitboard # TODO: remove after mapped everywhere
 
 - type: entityTable
   id: LockerFillHeadOfSecurityTrauma
