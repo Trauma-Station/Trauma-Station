@@ -1651,3 +1651,87 @@ Entries:
       message: You can go to red alert after 5 minutes, down from 10.
   id: 200
   time: '2026-01-21T00:37:37.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: >-
+        Donuts no longer rot into slop. Secoffs get a reliable mini meal at
+        brig.
+    - type: Tweak
+      message: >-
+        Donkpockets no longer rot into slop. Tiders get a reliable mini meal in
+        maint.
+    - type: Tweak
+      message: >-
+        Bungo and cherry pits no longer rot into slop, remaining a viable poison
+        for annoying chefs/botanists.
+  id: 201
+  time: '2026-01-21T10:02:09.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed the round end summary not showing purchased items.
+  id: 202
+  time: '2026-01-21T12:12:13.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Added a button to view the source code to the escape menu.
+  id: 203
+  time: '2026-01-21T14:00:39.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Clowns now speak in comic sans.
+  id: 204
+  time: '2026-01-21T14:28:55.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Removed FTL drives.
+  id: 205
+  time: '2026-01-21T15:36:03.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed traitor dart guns not having inhand sprites.
+  id: 206
+  time: '2026-01-21T16:05:37.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed borgs being affected by language-related traits.
+  id: 207
+  time: '2026-01-21T20:09:23.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed xeno actions not using any plasma.
+    - type: Fix
+      message: Fixed ashen passage round removing you.
+  id: 208
+  time: '2026-01-21T20:22:33.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: RD gets a custom law board in thier locker
+  id: 209
+  time: '2026-01-21T22:56:12.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Fix
+      message: Sprays work again
+    - type: Fix
+      message: Sec can no longer print shotguns
+    - type: Fix
+      message: Bananium peels no longer rot
+    - type: Fix
+      message: Vox raiders get objectives and cannot remove hardsuits
+    - type: Fix
+      message: remove a ton of buggy / weird looking borg skins
+    - type: Fix
+      message: xenovac fits on back
+    - type: Fix
+      message: facehuggers speak xeno and have hivemind
+  id: 210
+  time: '2026-01-21T23:20:28.0000000+00:00'

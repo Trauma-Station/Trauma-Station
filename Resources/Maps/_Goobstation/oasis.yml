@@ -8404,7 +8404,6 @@ entities:
     - type: BecomesStation
       id: Oasis
     - type: ImplicitRoof
-    - type: FTLDrive
   - uid: 22618
     components:
     - type: MetaData
@@ -9964,7 +9963,6 @@ entities:
     - type: RadiationGridResistance
     - type: NavMap
     - type: ImplicitRoof
-    - type: FTLDrive
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 3

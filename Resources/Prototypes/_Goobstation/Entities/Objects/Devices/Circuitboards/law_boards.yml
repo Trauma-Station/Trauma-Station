@@ -1,0 +1,21 @@
+- type: entity
+  id: FreeformLawboard
+  parent: [BaseElectronics]
+  name: freeform lawboard
+  description: The RD's freeform law board for setting custom laws.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: std_mod
+  - type: SiliconLawProvider
+    laws: Crewsimov
+  - type: UserInterface
+    interfaces:
+      enum.CustomLawboardUiKey.Key:
+        type: CustomLawboardBoundInterface
+  - type: CustomLawboard
+  - type: ActivatableUI
+    inHandsOnly: false
+    key: enum.CustomLawboardUiKey.Key
+  - type: StaticPrice
+    price: 10000

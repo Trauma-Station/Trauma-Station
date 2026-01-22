@@ -163,11 +163,11 @@
   categories:
   - UplinkWeaponry
  # Goobstation - no
- #conditions:
- #  - !type:StoreWhitelistCondition
- #    blacklist:
- #      tags:
- #        - NukeOpsUplink
+#  conditions:
+#   - !type:StoreWhitelistCondition
+#     blacklist:
+#       tags:
+#         - NukeOpsUplink
 
 
 - type: listing
@@ -177,10 +177,14 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
   productEntity: EnergyShield
   cost:
-    Telecrystal: 15 # goob
+    Telecrystal: 30 # Trauma, was 15
   categories:
   - UplinkWeaponry
-
+  conditions: # Trauma, more expensive for nukies
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkSniperBundle

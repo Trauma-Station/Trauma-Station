@@ -736,7 +736,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-    - type: FTLDrive
     - type: ImplicitRoof
     - type: ExplosionAirtightGrid
 - proto: AirAlarm

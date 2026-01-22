@@ -259,7 +259,6 @@ entities:
     - type: SpreaderGrid
     - type: GridPathfinding
     - type: ImplicitRoof
-    - type: FTLDrive
 - proto: AirlockExternalShuttleSyndicateLocked
   entities:
   - uid: 3

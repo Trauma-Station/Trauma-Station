@@ -9140,7 +9140,6 @@ entities:
     - type: GridPathfinding
     - type: NavMap
     - type: ImplicitRoof
-    - type: FTLDrive
     - type: ExplosionAirtightGrid
   - uid: 24729
     components:
@@ -9381,7 +9380,6 @@ entities:
     - type: RadiationGridResistance
     - type: GridPathfinding
     - type: ImplicitRoof
-    - type: FTLDrive
     - type: ExplosionAirtightGrid
   - uid: 25060
     components:
@@ -9423,7 +9421,6 @@ entities:
         version: 2
         nodes: []
     - type: ImplicitRoof
-    - type: FTLDrive
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 3
