@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 270.1.0
+  engineVersion: 271.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/12/2026 23:45:48
-  entityCount: 32489
+  time: 01/22/2026 20:38:55
+  entityCount: 32484
 maps:
 - 1
 grids:
@@ -14976,7 +14976,7 @@ entities:
       pos: 26.5,17.5
       parent: 12
     - type: Door
-      secondsUntilStateChange: -88500.71
+      secondsUntilStateChange: -88911.836
       state: Opening
     - type: DeviceLinkSink
       invokeCounter: 1
@@ -16123,7 +16123,7 @@ entities:
       pos: 41.5,62.5
       parent: 12
     - type: Door
-      secondsUntilStateChange: -45767.402
+      secondsUntilStateChange: -46178.527
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -22347,20 +22347,6 @@ entities:
     components:
     - type: Transform
       pos: 64.5,50.5
-      parent: 12
-- proto: BaseChemistryEmptyVial
-  entities:
-  - uid: 7000
-    components:
-    - type: Transform
-      rot: -18.84955592153876 rad
-      pos: 45.553024,64.45146
-      parent: 12
-  - uid: 14949
-    components:
-    - type: Transform
-      rot: -18.84955592153876 rad
-      pos: 45.846558,64.679924
       parent: 12
 - proto: BaseComputer
   entities:
@@ -81424,6 +81410,20 @@ entities:
     - type: Transform
       pos: -52.436638,28.570076
       parent: 12
+- proto: ChemistryEmptyVial
+  entities:
+  - uid: 7000
+    components:
+    - type: Transform
+      rot: -18.84955592153876 rad
+      pos: 45.553024,64.45146
+      parent: 12
+  - uid: 14949
+    components:
+    - type: Transform
+      rot: -18.84955592153876 rad
+      pos: 45.846558,64.679924
+      parent: 12
 - proto: ChemistryHotplate
   entities:
   - uid: 19950
@@ -85047,12 +85047,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -42.5,-23.5
-      parent: 12
-  - uid: 1702
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -40.5,-23.5
       parent: 12
   - uid: 1704
     components:
@@ -136919,6 +136913,9 @@ entities:
     - type: Transform
       pos: -52.5,18.5
       parent: 12
+    - type: AccessReader
+      accessListsOriginal:
+      - - Captain
 - proto: GlassBoxLawbringerFilled
   entities:
   - uid: 23374
@@ -145666,13 +145663,6 @@ entities:
       rot: -6.283185307179586 rad
       pos: -53.61752,54.792152
       parent: 12
-- proto: GunSafeDisabler
-  entities:
-  - uid: 24239
-    components:
-    - type: Transform
-      pos: -38.5,50.5
-      parent: 12
 - proto: GunSafeJudo
   entities:
   - uid: 7586
@@ -145700,6 +145690,13 @@ entities:
     components:
     - type: Transform
       pos: -37.5,66.5
+      parent: 12
+- proto: GunSafePhaser
+  entities:
+  - uid: 24239
+    components:
+    - type: Transform
+      pos: -38.5,50.5
       parent: 12
 - proto: GunSafeRiotLauncher
   entities:
@@ -145775,17 +145772,15 @@ entities:
       rot: -12.566370614359172 rad
       pos: -5.6384325,-38.454876
       parent: 12
-  - uid: 13831
-    components:
-    - type: Transform
-      pos: 31.56834,36.946865
-      parent: 12
-- proto: HandheldHealthAnalyzerUnpowered
-  entities:
   - uid: 13126
     components:
     - type: Transform
       pos: 40.641838,28.76833
+      parent: 12
+  - uid: 13831
+    components:
+    - type: Transform
+      pos: 31.56834,36.946865
       parent: 12
 - proto: HandheldStationMapUnpowered
   entities:
@@ -151334,29 +151329,11 @@ entities:
       parent: 12
 - proto: PlasmaWindoorSecureScienceLocked
   entities:
-  - uid: 1106
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -39.5,-48.5
-      parent: 12
-  - uid: 11183
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -43.5,-45.5
-      parent: 12
-  - uid: 17061
+  - uid: 1702
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -39.5,-45.5
-      parent: 12
-  - uid: 20847
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -43.5,-48.5
       parent: 12
 - proto: PlasticFlapsAirtightClear
   entities:
@@ -151489,13 +151466,6 @@ entities:
     - type: Transform
       pos: 57.5,64.5
       parent: 12
-- proto: PlushieBaldzby
-  entities:
-  - uid: 17088
-    components:
-    - type: Transform
-      pos: 23.405094,54.25958
-      parent: 12
 - proto: PlushieBee
   entities:
   - uid: 4061
@@ -151512,13 +151482,6 @@ entities:
     components:
     - type: Transform
       pos: -0.7321365,28.633253
-      parent: 12
-- proto: PlushieBingleYakub
-  entities:
-  - uid: 23838
-    components:
-    - type: Transform
-      pos: 60.492558,51.517128
       parent: 12
 - proto: PlushieCarp
   entities:
@@ -151572,16 +151535,6 @@ entities:
     - type: Transform
       pos: 12.612823,66.654175
       parent: 12
-- proto: PlushieNigel
-  entities:
-  - uid: 21406
-    components:
-    - type: MetaData
-      desc: the patient needs lexorin to live
-      name: ugly fucking plushie
-    - type: Transform
-      pos: 23.747175,53.78041
-      parent: 12
 - proto: PlushiePenguin
   entities:
   - uid: 16578
@@ -151589,13 +151542,6 @@ entities:
     - type: Transform
       rot: -12.566370614359172 rad
       pos: -11.731569,-12.627775
-      parent: 12
-- proto: PlushieSamantha
-  entities:
-  - uid: 940
-    components:
-    - type: Transform
-      pos: -27.534794,31.526585
       parent: 12
 - proto: PlushieSharkBlue
   entities:
@@ -152218,13 +152164,6 @@ entities:
     components:
     - type: Transform
       pos: 27.5,39.5
-      parent: 12
-- proto: PosterLegitGoobLouieVote
-  entities:
-  - uid: 14605
-    components:
-    - type: Transform
-      pos: -25.5,35.5
       parent: 12
 - proto: PosterLegitGoobWallMeat
   entities:
@@ -157248,6 +157187,12 @@ entities:
     - type: Transform
       pos: -31.5,-9.5
       parent: 12
+  - uid: 1106
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -43.5,-48.5
+      parent: 12
   - uid: 4065
     components:
     - type: Transform
@@ -157294,6 +157239,12 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -36.5,-9.5
       parent: 12
+  - uid: 11183
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -43.5,-45.5
+      parent: 12
   - uid: 11362
     components:
     - type: Transform
@@ -157317,6 +157268,12 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -20.5,-14.5
+      parent: 12
+  - uid: 14605
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -39.5,-48.5
       parent: 12
   - uid: 14992
     components:
@@ -165121,6 +165078,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: Screen
   entities:
@@ -165356,6 +165314,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
     - type: SiloUtilizer
       silo: 2277
@@ -165378,6 +165337,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: ShardGlass
   entities:
@@ -171637,6 +171597,14 @@ entities:
     components:
     - type: Transform
       pos: -13.5,-51.5
+      parent: 12
+- proto: StationAiFixerComputer
+  entities:
+  - uid: 940
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -40.5,-23.5
       parent: 12
 - proto: StationAiUploadComputer
   entities:
@@ -179675,6 +179643,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: UniformShortsRed
   entities:
@@ -202003,13 +201972,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -25.5,65.5
       parent: 12
-- proto: WeaponDisabler
-  entities:
-  - uid: 15104
-    components:
-    - type: Transform
-      pos: -41.606297,54.760395
-      parent: 12
 - proto: WeaponDisablerPractice
   entities:
   - uid: 29226
@@ -202168,6 +202130,13 @@ entities:
     components:
     - type: Transform
       pos: -28.088718,65.63953
+      parent: 12
+- proto: WeaponLaserSidearm
+  entities:
+  - uid: 15104
+    components:
+    - type: Transform
+      pos: -41.606297,54.760395
       parent: 12
 - proto: WeaponMailLake
   entities:
