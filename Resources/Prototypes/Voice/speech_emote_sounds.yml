@@ -275,18 +275,20 @@
       path: /Audio/Voice/Vox/vox_laugh.ogg
     Bagawk: # Mono
       collection: Bagawk # Mono
-    Cough:
-      path: /Audio/Voice/Vox/vox_cough.ogg
-    Sigh:
-      path: /Audio/Voice/Vox/vox_sigh.ogg
+# Trauma - Revert back to goob vox sounds
+#    Cough:
+#      path: /Audio/Voice/Vox/vox_cough.ogg
+#    Sigh:
+#      path: /Audio/Voice/Vox/vox_sigh.ogg
     Click:
       path: /Audio/Voice/Vox/vox_click.ogg
     Chitter:
       path: /Audio/Voice/Vox/vox_chitter.ogg
     Honk:
       collection: BikeHorn
-    Crying:
-      path: /Audio/Voice/Vox/vox_cry.ogg
+# Trauma - Revert back to goob vox sounds
+#    Crying:
+#      path: /Audio/Voice/Vox/vox_cry.ogg
     Weh:
       collection: Weh
     Hew:
@@ -298,6 +300,8 @@
       path: /Audio/_Goobstation/Voice/Vox/vox_sneeze.ogg
     CatHisses:
       collection: CatHisses
+    Cough:
+      path: /Audio/_Goobstation/Voice/Vox/vox_cough.ogg
     MonkeyScreeches:
       collection: MonkeyScreeches
     RobotBeep:
@@ -306,15 +310,19 @@
       path: /Audio/_Goobstation/Voice/Vox/vox_yawn.ogg
     Snore:
       path: /Audio/_Goobstation/Voice/Vox/vox_snore.ogg
+    Sigh:
+      path: /Audio/_Goobstation/Voice/Vox/vox_sigh.ogg
+    Crying:
+      path: /Audio/_Goobstation/Voice/Vox/vox_cry.ogg
     Whistle:
       collection: Whistles
     Gulp:
       path: /Audio/_Goobstation/Voice/gulpexotic.ogg
     Surprised:
       path: /Audio/_Goobstation/Voice/surprised.ogg
-    # </Goob>
     Gasp:
-      path: /Audio/Effects/Gasp/vox_gasp.ogg
+      path: /Audio/_Goobstation/Voice/VoxEffects/Gasp/vox_gasp.ogg
+    # </Goob>
     DefaultDeathgasp:
       path: /Audio/Effects/Gasp/vox_DeathGasp.ogg
   params:
