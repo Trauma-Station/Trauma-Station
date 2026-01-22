@@ -91,5 +91,3 @@ public sealed partial class SlaughterDemonComponent : Component
     [DataField]
     public float BloodCrawlSoundChance = 0.25f;
 }
-
-

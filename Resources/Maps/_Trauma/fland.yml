@@ -16438,7 +16438,6 @@ entities:
     - type: GridPathfinding
     - type: NavMap
     - type: ImplicitRoof
-    - type: FTLDrive
     - type: ExplosionAirtightGrid
 - proto: AcousticGuitarInstrument
   entities:

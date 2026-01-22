@@ -124,4 +124,3 @@ public sealed partial class GridSpawnGroup : IGridSpawnGroup
     public bool NameGrid { get; set; } = true;
     public bool StationGrid { get; set; } = true;
 }
-

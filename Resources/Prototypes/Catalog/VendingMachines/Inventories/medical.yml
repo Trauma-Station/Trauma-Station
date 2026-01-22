@@ -52,7 +52,7 @@
     ClothingEyesEyepatchHudMedical: 2
     # <Trauma>
     MedicalHyposprayFilled: 4
-    BaseChemistryEmptyVial: 4
+    ChemistryEmptyVial: 4
     # </Trauma>
     # <Goob>
     MedicalPatchPrefilledBicaridine: 3

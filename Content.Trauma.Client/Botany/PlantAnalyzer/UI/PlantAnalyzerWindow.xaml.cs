@@ -234,7 +234,7 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
         }
 
         Traits.Text = Loc.GetString("plant-analyzer-plant-mutations-text", ("traits", mutations.ToString()));
-        
+
         StringBuilder speciation = new();
         if (msg.Speciation is null)
         {

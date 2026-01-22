@@ -132,6 +132,7 @@
   - WeaponLaserCarbine
   - WeaponMechCombatFiredartLaser # Goobstation
   - PowerCellIonRevolver # Goobstation
+  - WeaponLaserSidearm # Trauma
   # Goobstation R&D Console rework start
   position: 7,0
   technologyPrerequisites:
@@ -151,7 +152,7 @@
   - MagazineShotgunBeanbag
   - BoxShellTranquilizer
   - BoxBeanbag
-  - WeaponDisabler
+  # - WeaponDisabler # Trauma
   - WeaponMechCombatDisabler # Goobstation
   # Goobstation R&D Console rework start
   position: 6,3
@@ -198,7 +199,7 @@
   - Truncheon
   - TelescopicShield
   - HoloprojectorSecurity
-  - WeaponDisablerSMG
+  # - WeaponDisablerSMG # Trauma
   - PolymerBaton #goob
   - SpearTelescopic #goob
   # Goobstation R&D Console rework start

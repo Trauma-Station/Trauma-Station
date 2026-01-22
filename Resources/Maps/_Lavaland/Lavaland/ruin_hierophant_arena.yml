@@ -76,7 +76,6 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
-    - type: FTLDrive
 - proto: LavalandHierophantMarker
   entities:
   - uid: 91

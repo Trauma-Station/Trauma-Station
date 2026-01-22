@@ -1,0 +1,26 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/blob/ce91a98e55dac583f3450f616f52b54802e8cb7f/icons/mob/clothing/hands.dmi and https://github.com/tgstation/tgstation/blob/ce91a98e55dac583f3450f616f52b54802e8cb7f/icons/obj/clothing/gloves.dmi",
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "states": [
+      {
+        "name": "icon"
+      },
+      {
+        "name": "equipped-HAND",
+        "directions": 4
+      },
+      {
+        "name": "inhand-left",
+        "directions": 4
+      },
+      {
+        "name": "inhand-right",
+        "directions": 4
+      }
+    ]
+  }

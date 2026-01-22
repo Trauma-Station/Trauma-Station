@@ -37,3 +37,8 @@
     useDelay: 1
   - type: InstantAction
     event: !type:PumpHeartActionEvent
+      damage:
+        groups:
+          Brute: -5
+          Airloss: -5
+          Burn: -8

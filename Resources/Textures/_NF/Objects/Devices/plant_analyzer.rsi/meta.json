@@ -6,14 +6,14 @@
     },
     "license": "CC-BY-SA-3.0",
     "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/c05f8ea57da3bba0f45bf5e1e5f176055674b7a2/icons/obj/devices/scanner.dmi",
-    "states": 
+    "states":
     [
         {
             "name": "plantanalyzer"
         },
         {
             "name": "unlit",
-            "delays": 
+            "delays":
             [
                 [
                     0.1,
@@ -30,11 +30,11 @@
                     0.1
                 ]
             ]
-            
+
         },
         {
             "name": "icon"
         }
     ]
-        
+
 }

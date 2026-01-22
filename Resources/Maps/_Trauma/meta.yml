@@ -8633,7 +8633,6 @@ entities:
     - type: SpreaderGrid
     - type: GridPathfinding
     - type: ImplicitRoof
-    - type: FTLDrive
     - type: ExplosionAirtightGrid
   - uid: 27737
     components:
@@ -8682,7 +8681,6 @@ entities:
     - type: IFF
       flags: HideLabel
     - type: ImplicitRoof
-    - type: FTLDrive
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 3

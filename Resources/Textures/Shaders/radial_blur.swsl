@@ -1,4 +1,4 @@
-﻿uniform sampler2D SCREEN_TEXTURE;
+uniform sampler2D SCREEN_TEXTURE;
 uniform highp float Strength;
 const highp int SampleCount = 10; // a higher number makes the shader look better, but has a big performance impact
 

@@ -378,8 +378,8 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitVoxRaiderStealth
-  - type: VoxRestricted
-
+  # - type: VoxRestricted
+  - type: Unremoveable #Vox restricted does not work, this does in the meantime.
 # Detective's Hardsuit
 
 - type: entity

@@ -20,7 +20,6 @@
   subjects: [ "FETUS" ]
   effects:
   - !type:Gib # no.
-    gibOrgans: true
 
 - type: scrollPrayer
   id: IronArrow

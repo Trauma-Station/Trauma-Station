@@ -30,6 +30,21 @@
   result: CartridgeLightRifle
 
 - type: latheRecipe
+  parent: BaseRevBullet
+  id: RevBuckShell
+  materials:
+    Steel: 20
+  result: ShellShotgun
+
+- type: latheRecipe
+  parent: BaseRevBullet
+  id: RevSlugShell
+  materials:
+    Steel: 15
+    Plastic: 5
+  result: ShellShotgunSlug
+
+- type: latheRecipe
   parent: BaseRevMagazine
   id: RevTurretMagazine
   result: BaseMagazineTurretEmpty

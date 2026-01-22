@@ -36,7 +36,7 @@
 - type: gameMap
   id: Kettle
   mapName: 'Kettle'
-  mapPath: /Maps/_Goobstation/kettle.yml
+  mapPath: /Maps/_Trauma/kettle.yml
   minPlayers: 35
   stations:
     Kettle:
@@ -53,7 +53,6 @@
           availableJobs:
             #service
             NanotrasenRepresentative: [ 1, 1 ]
-            #BlueshieldOfficer: [ 1, 1 ] # Trauma
             Captain: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 1, 2 ]
@@ -97,11 +96,10 @@
             Clown: [ 1, 2 ]
             Mime: [ 1, 2 ]
             Musician: [ 1, 2 ]
+            RadioHost: [ 1, 1 ]
+            Reporter: [ 1, 1 ]
             StationAi: [ 1, 1 ]
-
-        # Goobstation blob-config-start HUGE
         - type: StationBlobConfig
           stageBegin: 40
           stageCritical: 450
           stageTheEnd: 900
-        # Goobstation blob-config-end

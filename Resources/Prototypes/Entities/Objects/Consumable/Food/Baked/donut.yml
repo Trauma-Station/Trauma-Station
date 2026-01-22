@@ -25,7 +25,7 @@
 # Base
 
 - type: entity
-  parent: FoodInjectableBase
+  parent: FoodUnperishableBase # Trauma - Highly processed slop for the secoffs.
   id: FoodDonutBase
   abstract: true
   description: Goes great with robust coffee.

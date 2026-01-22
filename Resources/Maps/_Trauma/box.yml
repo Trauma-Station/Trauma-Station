@@ -8467,7 +8467,6 @@ entities:
     - type: GridPathfinding
     - type: NavMap
     - type: ImplicitRoof
-    - type: FTLDrive
     - type: ExplosionAirtightGrid
   - uid: 3
     components:
@@ -8534,7 +8533,6 @@ entities:
     - type: SpreaderGrid
     - type: GridPathfinding
     - type: ImplicitRoof
-    - type: FTLDrive
     - type: ExplosionAirtightGrid
 - proto: AcousticGuitarInstrument
   entities:

@@ -222,12 +222,12 @@ public partial class RadiationSystem
             yield return (new Vector2i((int)Math.Floor(sourceGridPos.X), (int)Math.Floor(sourceGridPos.Y)), 0f);
             yield break;
         }
-        
+
         var currentX = (int)Math.Floor(sourceGridPos.X);
         var currentY = (int)Math.Floor(sourceGridPos.Y);
         var destX = (int)Math.Floor(destGridPos.X);
         var destY = (int)Math.Floor(destGridPos.Y);
-        
+
         var stepX = 0;
         float tDeltaX = 0, tMaxX = float.MaxValue;
         if (delta.X != 0)
@@ -237,7 +237,7 @@ public partial class RadiationSystem
             tMaxX = (xEdge - sourceGridPos.X) / delta.X;
             tDeltaX = stepX / delta.X;
         }
-        
+
         var stepY = 0;
         float tDeltaY = 0, tMaxY = float.MaxValue;
         if (delta.Y != 0)
@@ -247,16 +247,16 @@ public partial class RadiationSystem
             tMaxY = (yEdge - sourceGridPos.Y) / delta.Y;
             tDeltaY = stepY / delta.Y;
         }
-        
+
         var entry = sourceGridPos;
         var maxIterations = Math.Abs(destX - currentX) + Math.Abs(destY - currentY) + 2;
         var iterations = 0;
-        
+
         while (true)
         {
             if (++iterations > maxIterations)
                 yield break;
-            
+
             var tExit = Math.Min(tMaxX, tMaxY);
             var exitIsX = tMaxX < tMaxY;
             if (tExit > 1f)
@@ -264,10 +264,10 @@ public partial class RadiationSystem
             var exit = sourceGridPos + delta * tExit;
             var cell = new Vector2i(currentX, currentY);
             yield return (cell, (exit - entry).Length());
-            
+
             if (tExit >= 1f - 1e-6f)
                 break;
-                
+
             if (exitIsX)
             {
                 currentX += stepX;

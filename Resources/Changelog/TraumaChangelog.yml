@@ -1556,3 +1556,182 @@ Entries:
         doctors.
   id: 187
   time: '2026-01-18T09:43:13.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Updated and re-enabled Delta station.
+  id: 188
+  time: '2026-01-18T13:27:47.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed BZ and other gases not making you high, go to sleep, etc.
+  id: 189
+  time: '2026-01-18T16:04:52.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: Nullrod forms tweaked to do majority holy damage, rather than brute.
+    - type: Remove
+      message: Removed wound multiplier from Holy Chainsaw and Holy Claymore.
+  id: 190
+  time: '2026-01-18T17:33:49.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Updated Kettle station and added it back to the pool.
+  id: 191
+  time: '2026-01-19T08:44:10.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: NanoTask printing delay increased from 5 to 20 seconds.
+  id: 192
+  time: '2026-01-19T15:18:45.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Fix
+      message: Reinforcement Security Officers are mindshielded on arrival.
+    - type: Add
+      message: SecHud to Reinforcement Security Officers loadout.
+    - type: Fix
+      message: Specialist reinforcement now spawns the correct loadout.
+  id: 193
+  time: '2026-01-19T21:03:25.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Changed stimkit price from 40 to 25 TC, nobody was buying that slop for
+        that much.
+    - type: Tweak
+      message: >-
+        Mediborg first aid module gets crew hypo and syringe instead of chud
+        injector. The hypo still needs a hypoport so use the syringe as a
+        backup.
+  id: 194
+  time: '2026-01-20T18:09:23.0000000+00:00'
+- author: Fardownup
+  changes:
+    - type: Add
+      message: Added Security gloves! in secDrobe and security lockers.
+  id: 195
+  time: '2026-01-20T18:11:00.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Fix
+      message: Fixed cauterized wound popup appearing for everyone
+  id: 196
+  time: '2026-01-20T19:03:11.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Remove
+      message: Rulebreak bait (ooc in ic) ionlaws.
+    - type: Remove
+      message: Goob self-insert plushies/posters.
+    - type: Remove
+      message: yakub references.
+  id: 197
+  time: '2026-01-20T20:31:21.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: reinforced and normal secret wall sprites
+  id: 198
+  time: '2026-01-20T20:48:14.0000000+00:00'
+- author: JohnJJohn
+  changes:
+    - type: Fix
+      message: Fixed ED-209 being uncraftable
+  id: 199
+  time: '2026-01-21T00:20:24.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: You can go to red alert after 5 minutes, down from 10.
+  id: 200
+  time: '2026-01-21T00:37:37.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Tweak
+      message: >-
+        Donuts no longer rot into slop. Secoffs get a reliable mini meal at
+        brig.
+    - type: Tweak
+      message: >-
+        Donkpockets no longer rot into slop. Tiders get a reliable mini meal in
+        maint.
+    - type: Tweak
+      message: >-
+        Bungo and cherry pits no longer rot into slop, remaining a viable poison
+        for annoying chefs/botanists.
+  id: 201
+  time: '2026-01-21T10:02:09.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed the round end summary not showing purchased items.
+  id: 202
+  time: '2026-01-21T12:12:13.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Added a button to view the source code to the escape menu.
+  id: 203
+  time: '2026-01-21T14:00:39.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: Clowns now speak in comic sans.
+  id: 204
+  time: '2026-01-21T14:28:55.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Removed FTL drives.
+  id: 205
+  time: '2026-01-21T15:36:03.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed traitor dart guns not having inhand sprites.
+  id: 206
+  time: '2026-01-21T16:05:37.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed borgs being affected by language-related traits.
+  id: 207
+  time: '2026-01-21T20:09:23.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed xeno actions not using any plasma.
+    - type: Fix
+      message: Fixed ashen passage round removing you.
+  id: 208
+  time: '2026-01-21T20:22:33.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: RD gets a custom law board in thier locker
+  id: 209
+  time: '2026-01-21T22:56:12.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Fix
+      message: Sprays work again
+    - type: Fix
+      message: Sec can no longer print shotguns
+    - type: Fix
+      message: Bananium peels no longer rot
+    - type: Fix
+      message: Vox raiders get objectives and cannot remove hardsuits
+    - type: Fix
+      message: remove a ton of buggy / weird looking borg skins
+    - type: Fix
+      message: xenovac fits on back
+    - type: Fix
+      message: facehuggers speak xeno and have hivemind
+  id: 210
+  time: '2026-01-21T23:20:28.0000000+00:00'

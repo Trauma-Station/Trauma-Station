@@ -132,7 +132,7 @@ public sealed class ExaminableCharacterSystem : EntitySystem
         message.Pop();
         if (showExamine && _netConfigManager.GetClientCVar(actorComponent.PlayerSession.Channel, GoobCVars.LogInChat))
         {
-            _chatManager.ChatMessageToOne(ChatChannel.Emotes, message.ToString(), ToMarkup(message), EntityUid.Invalid, false, actorComponent.PlayerSession.Channel, recordReplay: false, canCoalesce: false); // Goobstation Edit
+            _chatManager.ChatMessageToOne(ChatChannel.Emotes, message.ToString(), message.ToMarkup(), EntityUid.Invalid, false, actorComponent.PlayerSession.Channel, recordReplay: false, canCoalesce: false); // Goobstation Edit
         }
     }
 
@@ -166,7 +166,7 @@ public sealed class ExaminableCharacterSystem : EntitySystem
             AddLine(message);
             message.Pop();
 
-            _chatManager.ChatMessageToOne(ChatChannel.Emotes, message.ToString(), ToMarkup(message), EntityUid.Invalid, false, actorComponent.PlayerSession.Channel, recordReplay: false, canCoalesce: false); // Goobstation Edit
+            _chatManager.ChatMessageToOne(ChatChannel.Emotes, message.ToString(), message.ToMarkup(), EntityUid.Invalid, false, actorComponent.PlayerSession.Channel, recordReplay: false, canCoalesce: false); // Goobstation Edit
         }
     }
 
@@ -176,33 +176,5 @@ public sealed class ExaminableCharacterSystem : EntitySystem
         message.AddText(Loc.GetString("examine-border-line"));
         message.PushNewline();
         message.Pop();
-    }
-
-    // TODO ENGINE: kill this after next engine update
-    private System.Text.StringBuilder _sb = new();
-    private string ToMarkup(FormattedMessage message)
-    {
-        _sb.Clear();
-        foreach (var node in message.Nodes)
-        {
-            if (node.Name is not {} name)
-            {
-                _sb.Append(FormattedMessage.EscapeText(node.Value.StringValue ?? ""));
-                continue;
-            }
-
-            _sb.Append('[');
-            if (node.Closing)
-                _sb.Append('/');
-            _sb.Append(name);
-            _sb.Append(node.Value.ToString().ReplaceLineEndings("\\n"));
-            foreach (var (k, v) in node.Attributes)
-            {
-                _sb.Append($" {k}{v}");
-            }
-
-            _sb.Append(']');
-        }
-        return _sb.ToString();
     }
 }

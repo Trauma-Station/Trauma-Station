@@ -36,7 +36,7 @@ using Content.Goobstation.Common.Atmos;
 using Content.Goobstation.Common.Body.Components;
 using Content.Goobstation.Common.Changeling;
 using Content.Goobstation.Common.Temperature.Components;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Goobstation.Server.Changeling.Objectives.Components;
 using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
@@ -56,6 +56,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
 using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
@@ -79,6 +80,7 @@ public sealed partial class ChangelingSystem
 {
     #region Dependencies
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     #endregion
 
     public void SubscribeAbilities()
@@ -738,7 +740,7 @@ public sealed partial class ChangelingSystem
 
         PlayMeatySound(uid, comp);
 
-        Body.GibBody(uid);
+        _gibbing.Gib(uid);
     }
 
     #endregion
