@@ -121,8 +121,9 @@ public abstract class SharedXenoVacuumSystem : EntitySystem
 
         foreach (var removedEnt in _container.EmptyContainer(tank.Comp.StorageTank))
         {
-            var popup = Loc.GetString("xeno-vacuum-clear-popup", ("ent", removedEnt));
-            _popup.PopupEntity(popup, ent, args.User);
+            var identity = Identity.Entity(removedEnt, EntityManager);
+            var popup = Loc.GetString("xeno-vacuum-clear-popup", ("ent", identity));
+            _popup.PopupClient(popup, ent, args.User);
 
             var coords = args.Target?.ToCoordinates() ?? args.ClickLocation;
             _throw.TryThrow(removedEnt, coords, predicted: false);
@@ -182,7 +183,7 @@ public abstract class SharedXenoVacuumSystem : EntitySystem
         if (!_emaggedQuery.HasComp(vacuum) && isAlive && _whitelist.IsWhitelistFail(vacuum.Comp.EntityWhitelist, target))
         {
             var invalidEntityPopup = Loc.GetString("xeno-vacuum-suction-fail-invalid-entity-popup", ("ent", identity));
-            _popup.PopupEntity(invalidEntityPopup, vacuum, user);
+            _popup.PopupClient(invalidEntityPopup, vacuum, user);
 
             return false;
         }
@@ -190,7 +191,7 @@ public abstract class SharedXenoVacuumSystem : EntitySystem
         if (tank.Comp.StorageTank.ContainedEntities.Count > tank.Comp.MaxEntities)
         {
             var tankFullPopup = Loc.GetString("xeno-vacuum-suction-fail-tank-full-popup");
-            _popup.PopupEntity(tankFullPopup, vacuum, user);
+            _popup.PopupClient(tankFullPopup, vacuum, user);
 
             return false;
         }
