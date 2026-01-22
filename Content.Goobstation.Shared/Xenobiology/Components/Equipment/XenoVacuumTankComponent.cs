@@ -22,7 +22,7 @@ public sealed partial class XenoVacuumTankComponent : Component
     /// The ID of the tank's container.
     /// </summary>
     [ViewVariables]
-    public Container StorageTank = new();
+    public Container StorageTank = default!;
 
     /// <summary>
     /// The maximum amount of entities in this tank at a time.
