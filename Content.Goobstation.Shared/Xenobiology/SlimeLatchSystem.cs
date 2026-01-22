@@ -53,8 +53,8 @@ public sealed partial class SlimeLatchSystem : EntitySystem
         SubscribeLocalEvent<SlimeComponent, PullAttemptEvent>(OnPullAttempt);
         SubscribeLocalEvent<SlimeComponent, BeingThrownAttemptEvent>(OnBeingThrownAttempt);
         SubscribeLocalEvent<SlimeComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
-        SubscribeLocalEvent<SlimeComponent, EntRemovedFromContainerMessage>(OnEntRemovedFromContainer);
-        SubscribeLocalEvent<SlimeComponent, EntInsertedIntoContainerMessage>(OnEntInsertedIntoContainer);
+        SubscribeLocalEvent<SlimeComponent, EntGotRemovedFromContainerMessage>(OnRemovedFromContainer);
+        SubscribeLocalEvent<SlimeComponent, EntGotInsertedIntoContainerMessage>(OnInsertedIntoContainer);
     }
 
     public override void Update(float frameTime)
@@ -121,18 +121,17 @@ public sealed partial class SlimeLatchSystem : EntitySystem
             args.Cancel();
     }
 
-    private void OnEntRemovedFromContainer(Entity<SlimeComponent> ent, ref EntRemovedFromContainerMessage args)
+    private void OnRemovedFromContainer(Entity<SlimeComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
-        // these checks are probably useless but jic
+        // this check is probably useless but jic
         if (!HasComp<XenoVacuumTankComponent>(args.Container.Owner))
             return;
 
         Unlatch(ent);
     }
 
-    private void OnEntInsertedIntoContainer(Entity<SlimeComponent> ent, ref EntInsertedIntoContainerMessage args)
+    private void OnInsertedIntoContainer(Entity<SlimeComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
-        // these checks are probably useless but jic
         if (!HasComp<XenoVacuumTankComponent>(args.Container.Owner))
             return;
 
