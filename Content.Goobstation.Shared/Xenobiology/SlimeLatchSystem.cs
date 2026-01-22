@@ -241,10 +241,11 @@ public sealed partial class SlimeLatchSystem : EntitySystem
 
         _xform.SetCoordinates(ent, Transform(target).Coordinates);
         _xform.SetParent(ent, target);
-        _actionBlocker.UpdateCanMove(ent.Owner);
 
         ent.Comp.LatchedTarget = target;
         Dirty(ent);
+
+        _actionBlocker.UpdateCanMove(ent.Owner);
 
         EnsureComp(target, out SlimeDamageOvertimeComponent comp);
         comp.SourceEntityUid = ent;
