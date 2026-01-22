@@ -17,6 +17,7 @@ using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.Verbs;
+using Content.Trauma.Common.Body;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
@@ -37,6 +38,11 @@ public abstract class SharedCPRSystem : EntitySystem
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+
+    /// <summary>
+    /// Modifier for inhale volume on mobs that have CPR being done on them.
+    /// </summary>
+    public const float InhaleModifier = 3f;
 
     private EntityQuery<ActiveCPRComponent> _activeQuery;
     private EntityQuery<CPRTrainingComponent> _trainingQuery;
@@ -62,7 +68,14 @@ public abstract class SharedCPRSystem : EntitySystem
 
         SubscribeLocalEvent<ActiveCPRComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<ActiveCPRComponent, CPRDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<ActiveCPRComponent, ModifyInhaledVolumeEvent>(OnModifyInhaledVolume);
     }
+
+    /// <summary>
+    /// Returns true if a mob is having CPR done on it.
+    /// </summary>
+    public bool IsCPRActive(EntityUid uid)
+        => _activeQuery.HasComp(uid);
 
     private void OnGetVerbs(Entity<CPRTrainingComponent> ent, ref GetVerbsEvent<InnateVerb> args)
     {
@@ -193,6 +206,11 @@ public abstract class SharedCPRSystem : EntitySystem
         args.Repeat = !isAlive;
         if (isAlive)
             RemCompDeferred(ent, ent.Comp);
+    }
+
+    private void OnModifyInhaledVolume(Entity<ActiveCPRComponent> ent, ref ModifyInhaledVolumeEvent args)
+    {
+        args.Volume *= InhaleModifier; // you are being assisted
     }
 
     private bool HasHealthyLungs(EntityUid uid)
