@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Map
+  category: Grid
   engineVersion: 271.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/22/2026 23:26:54
-  entityCount: 1055
-maps:
-- 114
+  time: 01/22/2026 23:41:04
+  entityCount: 1054
+maps: []
 grids:
 - 1
-orphans: []
+orphans:
+- 1
 nullspace: []
 tilemap:
   0: Space
@@ -36,7 +36,7 @@ entities:
       name: NT Evac Meta
     - type: Transform
       pos: -2.4375,0.859375
-      parent: 114
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -532,16 +532,6 @@ entities:
       shakeTimes: 10
     - type: ImplicitRoof
     - type: ExplosionAirtightGrid
-  - uid: 114
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: GridTree
-    - type: Broadphase
-    - type: OccluderTree
 - proto: AirCanister
   entities:
   - uid: 55
