@@ -4,8 +4,8 @@ meta:
   engineVersion: 271.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/22/2026 22:11:59
-  entityCount: 32485
+  time: 01/22/2026 22:25:44
+  entityCount: 32509
 maps:
 - 1
 grids:
@@ -107,7 +107,7 @@ entities:
           version: 7
         -1,-2:
           ind: -1,-2
-          tiles: LAAAAAACACwAAAAAAQAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACwAAAAAAgAsAAAAAAEALAAAAAACACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAEALAAAAAACACwAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAADACwAAAAAAQAsAAAAAAEALAAAAAACACwAAAAAAQAsAAAAAAAALAAAAAAAACwAAAAAAgAsAAAAAAIALAAAAAADACwAAAAAAwAsAAAAAAMALAAAAAAAACwAAAAAAgAsAAAAAAEAKgAAAAAAACwAAAAAAQAsAAAAAAEALAAAAAAAACwAAAAAAAAsAAAAAAAALAAAAAABACwAAAAAAAAsAAAAAAEALAAAAAACACwAAAAAAAAsAAAAAAIALAAAAAACACwAAAAAAQAsAAAAAAAALAAAAAABACwAAAAAAwAsAAAAAAMALAAAAAABACwAAAAAAwAsAAAAAAEALAAAAAAAACwAAAAAAgAsAAAAAAAALAAAAAACACwAAAAAAAAsAAAAAAMALAAAAAACACwAAAAAAwAsAAAAAAIALAAAAAAAACwAAAAAAAAsAAAAAAMALAAAAAAAACwAAAAAAwAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAAAACwAAAAAAgAsAAAAAAEALAAAAAADACwAAAAAAQAsAAAAAAMAKgAAAAAAACwAAAAAAwAsAAAAAAMALAAAAAAAACwAAAAAAwAsAAAAAAAALAAAAAABACwAAAAAAgA0AAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAEALAAAAAADACwAAAAAAgAsAAAAAAAALAAAAAAAACwAAAAAAgAsAAAAAAEANQAAAAAAAC8AAAAAAAA1AAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAAAACwAAAAAAAAqAAAAAAAALAAAAAABACwAAAAAAwAsAAAAAAIALAAAAAADACoAAAAAAAA1AAAAAAAALAAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACwAAAAAAgAsAAAAAAIAKgAAAAAAACwAAAAAAwAsAAAAAAEALAAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAAALAAAAAACACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAACACwAAAAAAgAsAAAAAAMAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACwAAAAAAQAsAAAAAAIAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAAALAAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACwAAAAAAgAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAMAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAAA==
+          tiles: LAAAAAACACwAAAAAAQAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACwAAAAAAgAsAAAAAAEALAAAAAACACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAEALAAAAAACACwAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAADACwAAAAAAQAsAAAAAAEALAAAAAACACwAAAAAAQAsAAAAAAAALAAAAAAAACwAAAAAAgAsAAAAAAIALAAAAAADACwAAAAAAwAsAAAAAAMALAAAAAAAACwAAAAAAgAsAAAAAAEAKgAAAAAAACwAAAAAAQAsAAAAAAEALAAAAAAAACwAAAAAAAAsAAAAAAAALAAAAAABACwAAAAAAAAsAAAAAAEALAAAAAACACwAAAAAAAAsAAAAAAIALAAAAAACACwAAAAAAQAsAAAAAAAALAAAAAABACwAAAAAAwAsAAAAAAMALAAAAAABACwAAAAAAwAsAAAAAAEALAAAAAAAACwAAAAAAgAsAAAAAAAALAAAAAACACwAAAAAAAAsAAAAAAMALAAAAAACACwAAAAAAwAsAAAAAAIALAAAAAAAACwAAAAAAAAsAAAAAAMALAAAAAAAACwAAAAAAwAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAAAACwAAAAAAgAsAAAAAAEALAAAAAADACwAAAAAAQAsAAAAAAMAKgAAAAAAACwAAAAAAwAsAAAAAAMALAAAAAAAACwAAAAAAwAsAAAAAAAALAAAAAABACwAAAAAAgA0AAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAEALAAAAAADACwAAAAAAgAsAAAAAAAALAAAAAAAACwAAAAAAgAsAAAAAAEANQAAAAAAAC8AAAAAAAA1AAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAAAACwAAAAAAAAqAAAAAAAALAAAAAABACwAAAAAAwAsAAAAAAIALAAAAAADACwAAAAAAAA1AAAAAAAALAAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACwAAAAAAgAsAAAAAAIAKgAAAAAAACwAAAAAAwAsAAAAAAEALAAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAAALAAAAAACACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAACACwAAAAAAgAsAAAAAAMAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACwAAAAAAQAsAAAAAAIAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAAALAAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACwAAAAAAgAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAMAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAAA==
           version: 7
         0,-2:
           ind: 0,-2
@@ -9203,7 +9203,7 @@ entities:
           -5,-8:
             0: 56784
           -4,-7:
-            0: 62463
+            0: 46079
           -5,-7:
             0: 64973
           -4,-6:
@@ -9223,7 +9223,7 @@ entities:
           -2,-7:
             0: 3839
           -2,-6:
-            0: 63931
+            0: 63675
           -2,-9:
             0: 56829
           -1,-8:
@@ -9579,7 +9579,8 @@ entities:
           -11,-13:
             0: 65067
           -10,-12:
-            0: 1888
+            0: 256
+            3: 1632
           -10,-11:
             0: 10103
           -10,-13:
@@ -9866,7 +9867,7 @@ entities:
             0: 61133
           8,-8:
             0: 61747
-            3: 136
+            7: 136
           8,-7:
             0: 4095
           8,-6:
@@ -10030,16 +10031,16 @@ entities:
             0: 44943
           8,-9:
             0: 12799
-            3: 32768
+            7: 32768
           9,-8:
-            3: 375
+            7: 375
             0: 28672
           9,-7:
             0: 1919
           9,-6:
             0: 20222
           9,-9:
-            3: 28672
+            7: 28672
             0: 255
           9,-5:
             0: 3822
@@ -10097,9 +10098,9 @@ entities:
             0: 4113
             2: 2248
           9,-11:
-            0: 4081
+            0: 36849
           9,-10:
-            0: 35771
+            0: 35835
           9,-13:
             0: 4113
             2: 35016
@@ -11033,7 +11034,7 @@ entities:
           4,14:
             0: 61166
           3,14:
-            7: 65520
+            3: 65520
             0: 2
           4,15:
             0: 65534
@@ -11083,7 +11084,7 @@ entities:
             0: 65535
           2,14:
             0: 13107
-            7: 34944
+            3: 34944
           2,15:
             0: 8179
           2,16:
@@ -11620,9 +11621,10 @@ entities:
           immutable: True
           moles: {}
         - volume: 2500
-          temperature: 293.15
+          temperature: 235
           moles:
-            Nitrogen: 103.92799
+            Oxygen: 27.225372
+            Nitrogen: 102.419266
         - volume: 2500
           temperature: 293.15
           moles:
@@ -11636,10 +11638,9 @@ entities:
           moles:
             Plasma: 6666.982
         - volume: 2500
-          temperature: 235
+          temperature: 293.15
           moles:
-            Oxygen: 27.225372
-            Nitrogen: 102.419266
+            Nitrogen: 103.92799
         chunkSize: 4
     - type: BecomesStation
       id: Cog
@@ -13377,6 +13378,29 @@ entities:
       - 29100
       - 27918
       - 13593
+  - uid: 30545
+    components:
+    - type: Transform
+      pos: -7.5,-21.5
+      parent: 12
+    - type: DeviceList
+      devices:
+      - 32508
+      - 31374
+      - 32020
+      - 32492
+  - uid: 31363
+    components:
+    - type: Transform
+      pos: -10.5,-20.5
+      parent: 12
+    - type: DeviceList
+      devices:
+      - 23921
+      - 32490
+      - 32491
+      - 32489
+      - 32508
   - uid: 31755
     components:
     - type: Transform
@@ -14982,7 +15006,7 @@ entities:
       pos: 26.5,17.5
       parent: 12
     - type: Door
-      secondsUntilStateChange: -89989.76
+      secondsUntilStateChange: -90229.71
       state: Opening
     - type: DeviceLinkSink
       invokeCounter: 1
@@ -16124,7 +16148,7 @@ entities:
       pos: 41.5,62.5
       parent: 12
     - type: Door
-      secondsUntilStateChange: -47256.45
+      secondsUntilStateChange: -47496.402
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -18461,6 +18485,24 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 3983
+  - uid: 32491
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -11.5,-22.5
+      parent: 12
+    - type: DeviceNetwork
+      deviceLists:
+      - 31363
+  - uid: 32492
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -8.5,-23.5
+      parent: 12
+    - type: DeviceNetwork
+      deviceLists:
+      - 30545
 - proto: AirSensorFreezer
   entities:
   - uid: 19717
@@ -100221,6 +100263,15 @@ entities:
     - type: Transform
       pos: -63.5,-27.5
       parent: 12
+  - uid: 32508
+    components:
+    - type: Transform
+      pos: -9.5,-23.5
+      parent: 12
+    - type: DeviceNetwork
+      deviceLists:
+      - 31363
+      - 30545
 - proto: FirelockEdge
   entities:
   - uid: 2114
@@ -102867,6 +102918,7 @@ entities:
       deviceLists:
       - 23925
       - 28360
+      - 31363
   - uid: 23922
     components:
     - type: Transform
@@ -107698,6 +107750,29 @@ entities:
       parent: 12
     - type: AtmosPipeColor
       color: '#990000FF'
+  - uid: 32496
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -11.5,-24.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#990000FF'
+  - uid: 32498
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,-23.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#990000FF'
+  - uid: 32507
+    components:
+    - type: Transform
+      pos: -7.5,-22.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#0335FCFF'
 - proto: GasPipeFourway
   entities:
   - uid: 2577
@@ -110784,14 +110859,6 @@ entities:
       parent: 12
     - type: AtmosPipeColor
       color: '#0335FCFF'
-  - uid: 3748
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -14.5,-22.5
-      parent: 12
-    - type: AtmosPipeColor
-      color: '#0335FCFF'
   - uid: 3749
     components:
     - type: Transform
@@ -110892,13 +110959,6 @@ entities:
     components:
     - type: Transform
       pos: -15.5,-25.5
-      parent: 12
-    - type: AtmosPipeColor
-      color: '#990000FF'
-  - uid: 3763
-    components:
-    - type: Transform
-      pos: -15.5,-24.5
       parent: 12
     - type: AtmosPipeColor
       color: '#990000FF'
@@ -129730,6 +129790,86 @@ entities:
       parent: 12
     - type: AtmosPipeColor
       color: '#990000FF'
+  - uid: 32493
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -14.5,-24.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#990000FF'
+  - uid: 32494
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -13.5,-24.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#990000FF'
+  - uid: 32495
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -12.5,-24.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#990000FF'
+  - uid: 32499
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.5,-23.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#990000FF'
+  - uid: 32500
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -10.5,-23.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#990000FF'
+  - uid: 32502
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -13.5,-22.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#0335FCFF'
+  - uid: 32503
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -12.5,-22.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#0335FCFF'
+  - uid: 32504
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -10.5,-22.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#0335FCFF'
+  - uid: 32505
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -9.5,-22.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#0335FCFF'
+  - uid: 32506
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -8.5,-22.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#0335FCFF'
 - proto: GasPipeTJunction
   entities:
   - uid: 103
@@ -130153,6 +130293,22 @@ entities:
       parent: 12
     - type: AtmosPipeColor
       color: '#0335FCFF'
+  - uid: 3748
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -14.5,-22.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#0335FCFF'
+  - uid: 3763
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -15.5,-24.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#990000FF'
   - uid: 3928
     components:
     - type: Transform
@@ -132644,6 +132800,21 @@ entities:
       parent: 12
     - type: AtmosPipeColor
       color: '#0335FCFF'
+  - uid: 32497
+    components:
+    - type: Transform
+      pos: -11.5,-23.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#990000FF'
+  - uid: 32501
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -11.5,-22.5
+      parent: 12
+    - type: AtmosPipeColor
+      color: '#0335FCFF'
 - proto: GasPort
   entities:
   - uid: 794
@@ -134968,6 +135139,17 @@ entities:
       parent: 12
     - type: AtmosPipeColor
       color: '#0335FCFF'
+  - uid: 32020
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,-23.5
+      parent: 12
+    - type: DeviceNetwork
+      deviceLists:
+      - 30545
+    - type: AtmosPipeColor
+      color: '#0335FCFF'
   - uid: 32067
     components:
     - type: Transform
@@ -135008,6 +135190,16 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 32231
+    - type: AtmosPipeColor
+      color: '#0335FCFF'
+  - uid: 32489
+    components:
+    - type: Transform
+      pos: -11.5,-21.5
+      parent: 12
+    - type: DeviceNetwork
+      deviceLists:
+      - 31363
     - type: AtmosPipeColor
       color: '#0335FCFF'
 - proto: GasVentPumpVox
@@ -136500,6 +136692,16 @@ entities:
       - 30445
     - type: AtmosPipeColor
       color: '#990000FF'
+  - uid: 31374
+    components:
+    - type: Transform
+      pos: -8.5,-22.5
+      parent: 12
+    - type: DeviceNetwork
+      deviceLists:
+      - 30545
+    - type: AtmosPipeColor
+      color: '#990000FF'
   - uid: 31480
     components:
     - type: Transform
@@ -136565,6 +136767,17 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 32231
+    - type: AtmosPipeColor
+      color: '#990000FF'
+  - uid: 32490
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -12.5,-23.5
+      parent: 12
+    - type: DeviceNetwork
+      deviceLists:
+      - 31363
     - type: AtmosPipeColor
       color: '#990000FF'
 - proto: GasVentScrubberVox
