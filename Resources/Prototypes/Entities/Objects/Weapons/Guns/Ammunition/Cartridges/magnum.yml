@@ -29,7 +29,7 @@
 - type: entity
   parent: BaseCartridgeMagnum
   id: CartridgeMagnumPractice
-  name: cartridge (.44 magnum practice) # Trauma 
+  name: cartridge (.44 magnum practice) # Trauma
   description: Heavy magnum cartridge mostly used by revolvers. Practice ammunition fires a chalk projectile that stings a little, but otherwise causes no lasting damage.
   components:
   - type: CartridgeAmmo
