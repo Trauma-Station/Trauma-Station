@@ -31,7 +31,7 @@
   parent: BaseBullet
   id: BulletPistol
   categories: [ HideSpawnMenu ]
-  name: bullet (.35 auto)
+  name: bullet (9x19mm) # Trauma
   components:
   - type: Projectile
     damage:
@@ -42,7 +42,7 @@
   parent: BaseBulletPractice
   id: BulletPistolPractice
   categories: [ HideSpawnMenu ]
-  name: bullet (.35 auto practice)
+  name: bullet (9x19mm practice) # Trauma
   components:
   - type: Projectile
     damage:
@@ -53,7 +53,7 @@
   parent: BaseBulletIncendiary
   id: BulletPistolIncendiary
   categories: [ HideSpawnMenu ]
-  name: bullet (.35 auto incendiary)
+  name: bullet (9x19mm incendiary) # Trauma
   components:
   - type: Projectile
     damage:
@@ -65,7 +65,7 @@
   parent: BaseBulletUranium
   id: BulletPistolUranium
   categories: [ HideSpawnMenu ]
-  name: bullet (.35 auto uranium)
+  name: bullet (9x19mm uranium) # Trauma
   components:
   - type: Projectile
     damage:

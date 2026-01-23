@@ -172,7 +172,9 @@ uplink-high-caliber-explosive-magazine-desc = Heavy rifle magazine with 15 High 
 uplink-high-caliber-box-name = .50 Ammo box
 uplink-high-caliber-box-desc = A box of 30 .50 caliber anti-materiel rounds.
 
-uplink-highcap-pistol-mag-name = High Capacity Pistol Magazine (.35 auto)
+# <Trauma>
+uplink-highcap-pistol-mag-name = High Capacity Pistol Magazine (9x19mm)
+# </Trauma>
 uplink-highcap-pistol-mag-desc = High capacity pistol magazine holds 4 extra bullets for a total of 16 rounds.
 
 uplink-heavy-shotgun-magazine-name = Heavy Shotgun Drum (2 gauge HE pellet)
