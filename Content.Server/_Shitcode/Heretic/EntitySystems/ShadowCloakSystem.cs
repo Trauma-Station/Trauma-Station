@@ -1,11 +1,8 @@
 using Content.Goobstation.Shared.Heretic;
-using Content.Server.Buckle.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.FixedPoint;
-using Content.Shared.Heretic;
-using Content.Shared.Interaction;
 
 namespace Content.Server.Heretic.EntitySystems;
 
@@ -16,28 +13,6 @@ public sealed class ShadowCloakSystem : SharedShadowCloakSystem
 
     private const float SustainedDamageReductionInterval = 1f;
     private float _accumulator;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ShadowCloakEntityComponent, InteractHandEvent>(OnInteractHand,
-            after: [typeof(BuckleSystem)]);
-    }
-
-    private void OnInteractHand(Entity<ShadowCloakEntityComponent> ent, ref InteractHandEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        var parent = Transform(ent).ParentUid;
-
-        if (args.User != parent || !HasComp<HereticComponent>(parent))
-            return;
-
-        if (_blade.TryThrowProtectiveBlade(parent, null))
-            args.Handled = true;
-    }
 
     protected override void Startup(Entity<ShadowCloakedComponent> ent)
     {

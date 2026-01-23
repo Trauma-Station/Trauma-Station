@@ -49,6 +49,7 @@ knowledge-path-blade-s4-desc =
     Your Mansus Grasp now applies the Mark of the Blade.
     Triggering the mark will summon a knife that will orbit you for a short time.
     The knife will block any attack directed towards you, but is consumed on use.
+    Additionally, you can use throw key with an empty active hand to fire the knife, dealing heavy damage.
 
 knowledge-path-blade-s5-name = Realignment
 knowledge-path-blade-s5-desc =
@@ -77,7 +78,6 @@ knowledge-path-blade-s8-desc =
     Without thinking, I took the knife of a fallen soldier and threw with all my might. My aim was true! The Torn Champion smiled at their first taste of agony, and with a nod, their blades became my own.
 
     Grants you Furious Steel, a targeted spell. Using it will summon three orbiting blades around you. These blades will protect you from all attacks, but are consumed on use.
-    Additionally, you can click on the blade or on yourself to fire the blades at a nearest target, dealing heavy damage.
 
 knowledge-path-blade-s9-name = Maelstrom of Silver
 knowledge-path-blade-s9-desc =

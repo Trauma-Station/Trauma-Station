@@ -9,6 +9,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using Content.Goobstation.Shared.Heretic;
 using Content.Shared._Goobstation.Heretic.Components;
 
@@ -41,10 +42,10 @@ public sealed class SilverMaelstromSystem : EntitySystem
             {
                 smc.RespawnTimer = smc.RespawnCooldown;
 
-                if (smc.ActiveBlades < smc.MaxBlades)
+                if (smc.ActiveBlades.Count < smc.MaxBlades)
                 {
-                    _pblade.AddProtectiveBlade(uid);
-                    smc.ActiveBlades += 1;
+                    var blade = _pblade.AddProtectiveBlade(uid);
+                    smc.ActiveBlades.Add(blade);
                 }
             }
         }
@@ -52,7 +53,7 @@ public sealed class SilverMaelstromSystem : EntitySystem
 
     private void OnBladeUsed(Entity<SilverMaelstromComponent> ent, ref ProtectiveBladeUsedEvent args)
     {
-        // using max since ascended heretic can spawn more blades with furious steel action
-        ent.Comp.ActiveBlades = Math.Max(ent.Comp.ActiveBlades - 1, 0);
+        ent.Comp.ActiveBlades.Remove(args.Used);
+        ent.Comp.ActiveBlades = ent.Comp.ActiveBlades.Where(Exists).ToList();
     }
 }
