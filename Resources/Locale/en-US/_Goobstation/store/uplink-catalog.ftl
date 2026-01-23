@@ -148,8 +148,10 @@ uplink-frag-grenade-desc = Lower damage, bigger radius. Compatible with the Chin
 uplink-mpapers-grenade-name = MP-APERS shell (40mm)
 uplink-mpapers-grenade-desc = Fires out 20 small pellets to turn your grenade launcher into a shotgun. Compatible with the China-Lake.
 
-uplink-rifle-mag-name = Rifle Magazine (.20)
-uplink-rifle-mag-desc = A 25 round magazine containing .20 rifle bullets. Supports the Lecter and M-90.
+# <Trauma>
+uplink-rifle-mag-name = Rifle Magazine (5.56x45mm)
+uplink-rifle-mag-desc = A 25 round magazine containing 5.56x45mm bullets. Supports the Lecter and M-90.
+# </Trauma>
 
 uplink-pistol-magazine-caseless-saphe-name = Pistol Magazine (9.5mm SAP-HE)
 uplink-pistol-magazine-caseless-saphe-desc = 10 rounds of 9.5mm caseless magnum semi-armor-piercing high-explosive ammunition. It is exactly what you have read. Compatible with the Cobra.
@@ -204,7 +206,9 @@ uplink-high-caliber-shotgun-box-flash-slug-desc = 16 shells of 8 Gauge flashbang
 uplink-high-caliber-shotgun-box-sarin-name = 8 Gauge sarin gas shell box
 uplink-high-caliber-shotgun-box-sarin-desc = 16 shells of 8 Gauge sarin shells for the combat shotgun, which release a small plus-shaped cloud of sarin gas.
 
-uplink-estoc-ammo-name = Rifle Magazine (.20 rifle)
+# <Trauma>
+uplink-estoc-ammo-name = Rifle Magazine (5.56x45mm)
+# </Trauma>
 uplink-estoc-ammo-desc = Rifle magazine with 25 rounds. Compatable with the Estoc.
 
 # Grenades
