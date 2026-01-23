@@ -3,21 +3,22 @@
 # SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
 #
 # SPDX-License-Identifier: MIT
-
-- type: constructionGraph
-  id: Durathread
-  start: start
-  graph:
-    - node: start
-      edges:
-        - to: MaterialDurathread
-          completed:
-            - !type:SetStackCount
-              amount: 1
-          steps:
-            - material: Cloth
-              amount: 1
-            - material: Plastic
-              amount: 1
-    - node: MaterialDurathread
-      entity: MaterialDurathread
+# <Trauma> - Remove Durathread hand craft
+#- type: constructionGraph
+#  id: Durathread
+#  start: start
+#  graph:
+#    - node: start
+#      edges:
+#        - to: MaterialDurathread
+#          completed:
+#            - !type:SetStackCount
+#              amount: 1
+#          steps:
+#            - material: Cloth
+#              amount: 1
+#            - material: Plastic
+#              amount: 1
+#    - node: MaterialDurathread
+#      entity: MaterialDurathread
+# </Trauma>
