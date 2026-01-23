@@ -30,7 +30,7 @@ public sealed partial class RelayBodyParts : EntityEffectBase<RelayBodyParts>
     /// Text to use for the guidebook entry for reagents.
     /// </summary>
     [DataField]
-    public LocId GuidebookText;
+    public LocId? GuidebookText;
 
     [DataField(required: true)]
     public EntityEffect[] Effects = default!;
