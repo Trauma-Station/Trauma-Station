@@ -243,14 +243,14 @@ public sealed class ExecutionSystem : EntitySystem
 
                 break;
 
-            case AmmoComponent newAmmo:
+            case AmmoComponent:
                 if (TryComp<ProjectileComponent>(ammoUid, out var projectileB))
                     damage = projectileB.Damage;
 
                 Del(ammoUid);
                 break;
 
-            case HitscanAmmoComponent hitscan:
+            case HitscanAmmoComponent:
                 if (TryComp<HitscanBasicDamageComponent>(ammoUid, out var hitscanDamage))
                     damage = hitscanDamage.Damage;
 
