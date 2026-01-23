@@ -133,7 +133,7 @@ public abstract class SharedTurbineSystem : EntitySystem
 
     protected static bool AdjustStatorLoad(TurbineComponent turbine, float change)
     { 
-        var newSet = Math.Clamp(turbine.StatorLoad + change, 1000f, turbine.StatorLoadMax);
+        var newSet = Math.Max(turbine.StatorLoad + change, 1000f);
         if (turbine.StatorLoad != newSet)
         {
             turbine.StatorLoad = newSet;

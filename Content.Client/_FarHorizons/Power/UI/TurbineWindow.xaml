@@ -62,7 +62,6 @@
 										<Label Text="{Loc comp-turbine-ui-stator-load}" StyleClasses="StatusFieldTitle" HorizontalExpand="True" />
 										<LineEdit Name="TurbineStatorLoadLabel" MinSize="70 0"/>
 									</BoxContainer>
-									<Slider Name="TurbineStatorLoadSlider" />
 									<BoxContainer Orientation="Horizontal">
 										<Button Name="StatorLoadDecreaseLarge" Text="-1000"/>
 										<Button Name="StatorLoadDecrease" Text="-100"/>

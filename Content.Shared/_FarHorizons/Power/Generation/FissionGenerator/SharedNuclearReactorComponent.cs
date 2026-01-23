@@ -20,6 +20,7 @@ public sealed class NuclearReactorBuiState : BoundUserInterfaceState
 
     public float ReactorTemp = 0;
     public float ReactorRads = 0;
+    public float ReactorRadsMax = 0;
     public float ReactorTherm = 0;
     public float ControlRodActual = 0;
     public float ControlRodSet = 0;

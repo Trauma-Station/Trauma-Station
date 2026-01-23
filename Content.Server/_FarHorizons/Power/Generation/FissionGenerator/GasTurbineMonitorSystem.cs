@@ -125,7 +125,7 @@ public sealed partial class GasTurbineMonitorSystem : EntitySystem
         if (!TryGetTurbineComp(comp, out var turbine) || !_entityManager.TryGetEntity(comp.turbine, out var turbineUid))
             return;
 
-        turbine.StatorLoad = Math.Clamp(args.StatorLoad, 1000f, turbine.StatorLoadMax);
+        turbine.StatorLoad = Math.Max(args.StatorLoad, 1000f);
         Dirty(turbineUid.Value, turbine);
         _turbineSystem.UpdateUI(uid, turbine);
         _adminLog.Add(LogType.AtmosDeviceSetting, LogImpact.Medium,

@@ -498,3 +498,14 @@
   - type: Tag
     tags:
       - HideContextMenu
+
+- type: entity
+  id: ReactorAlarmEntity
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: AmbientSound
+    volume: -3
+    range: 15
+    enabled: false
+    sound:
+      path: /Audio/_FarHorizons/Machines/reactor_alarm_1.ogg

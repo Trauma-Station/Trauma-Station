@@ -226,3 +226,14 @@
   - type: Tag
     tags:
       - HideContextMenu
+
+- type: entity
+  id: GasTurbineAlarmEntity
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: AmbientSound
+    volume: -2
+    range: 15
+    enabled: false
+    sound:
+      path: /Audio/_FarHorizons/Machines/alarm_buzzer.ogg

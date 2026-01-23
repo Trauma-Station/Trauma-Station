@@ -21,7 +21,7 @@
 # Fuel Rods
 - type: entity
   id: BaseReactorFuelRod
-  parent: BaseReactorPart
+  parent: [ BaseReactorPart, BaseEngineeringContraband ]
   categories: [ HideSpawnMenu ]
   name: fuel rod
   description: A fuel rod for a nuclear reactor.

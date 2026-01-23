@@ -82,6 +82,7 @@
     flammable: 8
     chemical: 5
     radioactive: 2
+    plasma_offgas: 10
 
 - type: material
   id: Plastic
