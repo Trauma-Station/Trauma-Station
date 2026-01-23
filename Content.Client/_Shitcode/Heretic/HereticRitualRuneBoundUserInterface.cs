@@ -39,8 +39,8 @@ public sealed class HereticRitualRuneBoundUserInterface : BoundUserInterface
         _hereticRitualMenu.OpenCenteredAt(_inputManager.MouseScreenPosition.Position / vpSize);
     }
 
-    private void SendHereticRitualMessage(ProtoId<HereticRitualPrototype> protoId)
+    private void SendHereticRitualMessage(NetEntity ritual)
     {
-        SendMessage(new HereticRitualMessage(protoId));
+        SendMessage(new HereticRitualMessage(ritual));
     }
 }

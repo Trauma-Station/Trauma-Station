@@ -7,6 +7,7 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+heretic-ritual-none = None
 heretic-ritual-unknown = Unknown Ritual
 heretic-ritual-switch = Selected {$name}
 heretic-ritual-success = Ritual successful
@@ -41,6 +42,7 @@ heretic-ritual-basic-owls-desc =
     Allows you to undergo a ritual that gives you 5 knowledge points but locks you out of ascension. This can only be done once and cannot be reverted.
 
 heretic-ritual-fail-sacrifice = There is no corpse to sacrifice.
+heretic-ritual-fail-sacrifice-not-enough = There is not enough corpses.
 heretic-ritual-fail-sacrifice-ineligible = The rune refuses to accept this sacrifice.
 heretic-ritual-fail-reagentpuddle = There is no {$reagentname} present.
 heretic-ritual-fail-temperature-hot = It is too hot here.
@@ -54,6 +56,8 @@ heretic-ritual-fail-no-lost-blades = No lost blades can be found.
 heretic-ritual-fail-already-ascended = You are already ascended.
 heretic-ritual-fail-cannot-ascend = You cannot ascend.
 heretic-ritual-fail-cannot-ascend-objectives = You must complete your objectives in order to ascend.
+heretic-ritual-fail-lookup-empty = There's nothing on the rune.
+heretic-ritual-fail-ghoulify = There is no corpse to ghoulify.
 
 ## side quests
 heretic-ritual-side-knowledge = Ritual of Knowledge

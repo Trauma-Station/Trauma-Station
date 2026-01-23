@@ -8,7 +8,9 @@ using Content.Shared.Eui;
 using Content.Shared.Heretic;
 using Content.Shared.Heretic.Messages;
 using Content.Shared.Interaction;
+using Content.Shared.Tag;
 using Robust.Server.GameObjects;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._Shitcode.Heretic.Ui;
 
@@ -21,6 +23,9 @@ public sealed class FeastOfOwlsEui : BaseEui
     private readonly EntityUid _rune;
 
     private readonly IEntityManager _entityManager;
+
+    private readonly ProtoId<TagPrototype> _feastOfOwlsTag = "RitualFeastOfOwls";
+    private readonly ProtoId<TagPrototype> _ascensionTag = "RitualAscension";
 
     public FeastOfOwlsEui(EntityUid heretic,
         Entity<HereticComponent> mind,
@@ -76,7 +81,7 @@ public sealed class FeastOfOwlsEui : BaseEui
 
         _mind.Comp.CanAscend = false;
         _mind.Comp.ChosenRitual = null;
-        _mind.Comp.KnownRituals.Remove("FeastOfOwls");
+        _entityManager.System<HereticSystem>().RemoveRituals(_mind, [_feastOfOwlsTag, _ascensionTag]);
         _entityManager.Dirty(_mind);
 
         _entityManager.System<HereticRitualSystem>().RitualSuccess(_rune, _heretic);

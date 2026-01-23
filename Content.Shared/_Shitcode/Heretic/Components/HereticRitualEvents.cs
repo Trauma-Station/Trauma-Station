@@ -13,9 +13,9 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._Goobstation.Heretic.Components;
 
 [Serializable, NetSerializable]
-public sealed class HereticRitualMessage(ProtoId<HereticRitualPrototype> protoId) : BoundUserInterfaceMessage
+public sealed class HereticRitualMessage(NetEntity ritual) : BoundUserInterfaceMessage
 {
-    public ProtoId<HereticRitualPrototype> ProtoId = protoId;
+    public NetEntity Ritual = ritual;
 }
 
 [Serializable, NetSerializable]

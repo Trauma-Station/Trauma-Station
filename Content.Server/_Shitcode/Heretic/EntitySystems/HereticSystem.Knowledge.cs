@@ -18,7 +18,9 @@ namespace Content.Server.Heretic.EntitySystems;
 public sealed partial class HereticSystem
 {
     public HereticKnowledgePrototype GetKnowledge(ProtoId<HereticKnowledgePrototype> id)
-        => _proto.Index(id);
+    {
+        return _proto.Index(id);
+    }
 
     public void RaiseKnowledgeEvent(EntityUid uid, HereticKnowledgeEvent ev, bool negative)
     {
@@ -31,21 +33,21 @@ public sealed partial class HereticSystem
         RaiseLocalEvent(uid, (object) ev, true);
     }
 
-    public bool TryAddKnowledge(Entity<HereticComponent?> ent,
+    public bool TryAddKnowledge(Entity<MindComponent?, HereticComponent?> ent,
         ProtoId<HereticKnowledgePrototype> id,
         EntityUid? body = null)
     {
-        if (!Resolve(ent, ref ent.Comp, false))
+        if (!Resolve(ent, ref ent.Comp1, ref ent.Comp2, false) || ent.Comp1.UserId is not { } userId)
             return false;
 
-        body ??= CompOrNull<MindComponent>(ent.Owner)?.CurrentEntity;
+        body ??= ent.Comp1.OwnedEntity;
 
         var data = GetKnowledge(id);
 
         if (data.Event != null && body != null)
         {
             RaiseKnowledgeEvent(body.Value, data.Event, false);
-            ent.Comp.KnowledgeEvents.Add(data.Event);
+            ent.Comp2.KnowledgeEvents.Add(data.Event);
         }
 
         if (data.ActionPrototypes is { Count: > 0 })
@@ -60,22 +62,24 @@ public sealed partial class HereticSystem
         {
             foreach (var ritual in data.RitualPrototypes)
             {
-                ent.Comp.KnownRituals.Add(_ritual.GetRitual(ritual));
+                var ritUid = Spawn(ritual);
+                _override.AddSessionOverride(ritUid, _playerMan.GetSessionById(userId));
+                ent.Comp2.Rituals.Add(ritUid);
             }
         }
 
-        Dirty(ent);
+        Dirty(ent, ent.Comp2);
 
         // set path if out heretic doesn't have it, or if it's different from whatever he has atm
-        if (string.IsNullOrWhiteSpace(ent.Comp.CurrentPath))
+        if (string.IsNullOrWhiteSpace(ent.Comp2.CurrentPath))
         {
-            if (!data.SideKnowledge && ent.Comp.CurrentPath != data.Path)
-                ent.Comp.CurrentPath = data.Path;
+            if (!data.SideKnowledge && ent.Comp2.CurrentPath != data.Path)
+                ent.Comp2.CurrentPath = data.Path;
         }
 
         // make sure we only progress when buying current path knowledge
-        if (data.Stage > ent.Comp.PathStage && data.Path == ent.Comp.CurrentPath)
-            ent.Comp.PathStage = data.Stage;
+        if (data.Stage > ent.Comp2.PathStage && data.Path == ent.Comp2.CurrentPath)
+            ent.Comp2.PathStage = data.Stage;
 
         return true;
     }

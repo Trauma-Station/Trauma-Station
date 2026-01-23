@@ -79,7 +79,6 @@ using Content.Shared.Standing;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Body.Components;
 using Content.Shared.Hands.Components;
-using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Tag;
 using Robust.Server.Containers;
 
@@ -128,7 +127,9 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
 
-    private static readonly ProtoId<HereticRitualPrototype> BladeBladeRitual = "BladeBlade";
+    private static readonly ProtoId<TagPrototype> BladeBladeRitualTag = "RitualBladeBlade";
+
+    private static readonly ProtoId<TagPrototype> BladeBladeTag = "HereticBladeBlade";
 
     private const float LeechingWalkUpdateInterval = 1f;
     private float _accumulator;
@@ -236,7 +237,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
         bool InfuseOurBlades()
         {
-            if (!heretic.LimitedTransmutations.TryGetValue(BladeBladeRitual, out var blades))
+            if (!Heretic.TryGetRitual((ent, heretic), BladeBladeRitualTag, out var ritual))
                 return false;
 
             var xformQuery = GetEntityQuery<TransformComponent>();
@@ -245,12 +246,12 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
                 containerEnt = container.Owner;
 
             var success = false;
-            foreach (var blade in blades)
+            foreach (var blade in ritual.Value.Comp.LimitedOutput)
             {
                 if (!EntityManager.EntityExists(blade))
                     continue;
 
-                if (!_tag.HasTag(blade, "HereticBladeBlade"))
+                if (!_tag.HasTag(blade, BladeBladeTag))
                     continue;
 
                 if (TryComp(blade, out MansusInfusedComponent? infused) &&
