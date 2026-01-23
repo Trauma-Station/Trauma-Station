@@ -8,8 +8,10 @@ const MainCategoryPath = "TraumaChangelog.yml";
 const CategoryPaths = {
 	[MainCategory]: MainCategoryPath,
 	WIZDEN: "Changelog.yml",
+    WIZDENADMIN: "Admin.yml",
 	GOOB: "GoobChangelog.yml",
     MAPS: "Maps.yml",
+    ADMIN: "TraumaAdmin.yml",
     RULES: "Rules.yml",
 };
 
