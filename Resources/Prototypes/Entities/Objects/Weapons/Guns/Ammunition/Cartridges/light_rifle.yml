@@ -65,7 +65,7 @@
 
 - type: entity
   parent: BaseCartridgeLightRifle
-  id: CartridgeLightRifleIncendiary 
+  id: CartridgeLightRifleIncendiary
   name: cartridge (7.62x39mm incendiary) # Trauma
   description: A classic intermediate cartridge used by many combat rifles and LMGs. Incendiary ammunition contains a self-igniting compound that sets targets ablaze.
   components:
