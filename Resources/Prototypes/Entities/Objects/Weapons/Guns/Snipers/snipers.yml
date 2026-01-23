@@ -260,7 +260,7 @@
   name: flintlock pistol
   parent: [BaseWeaponSniper, BaseMajorContraband]
   id: WeaponPistolFlintlock
-  description: A pirate's companion. Yarrr! Uses .45 magnum ammo.
+  description: A pirate's companion. Yarrr! Uses .44 magnum ammo. # Trauma
   components:
   - type: Gun
     minAngle: 0
