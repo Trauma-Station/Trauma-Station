@@ -76,7 +76,7 @@
         amount: 3
 
 - type: entity
-  name: box of pistol 9x19mm magazines # Trauma 
+  name: box of pistol 9x19mm magazines # Trauma
   parent: BoxMagazine
   id: BoxMagazinePistol
   description: A box full of pistol 9x19mm magazines. # Trauma
