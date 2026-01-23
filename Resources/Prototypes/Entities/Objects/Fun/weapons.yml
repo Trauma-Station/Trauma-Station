@@ -10,7 +10,6 @@
   - type: PacifismAllowedGun # They don't hurt!
   - type: Gun
     clumsyProof: true # Clown proficiency
-  - type: GunExecutionBlacklist # Goob
 
 - type: entity
   parent: [ BaseItem, BaseToyGun ]
