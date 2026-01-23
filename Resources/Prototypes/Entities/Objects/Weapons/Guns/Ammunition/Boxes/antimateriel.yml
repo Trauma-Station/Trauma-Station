@@ -32,7 +32,7 @@
   abstract: true
   parent: [ BaseItem, BaseSecurityContraband ]
   id: BaseMagazineBoxAntiMateriel
-  name: ammunition box (.60 anti-materiel)
+  name: ammunition box (.50 BMG) # Trauma
   components:
   # Goobstation edit start
   - type: EmitSoundOnPickup
@@ -69,7 +69,7 @@
 - type: entity
   parent: BaseMagazineBoxAntiMateriel
   id: MagazineBoxAntiMaterielBig
-  name: ammunition box (.60 anti-materiel)
+  name: ammunition box (.50 BMG) # Trauma
   components:
   - type: BallisticAmmoProvider
     capacity: 30
@@ -89,8 +89,10 @@
 - type: entity
   parent: BaseMagazineBoxAntiMateriel
   id: MagazineBoxAntiMateriel
-  name: ammunition box (.60 anti-materiel)
-  description: A cardboard box of .60 anti-materiel rounds.
+  # <Trauma>
+  name: ammunition box (.50 BMG)
+  description: A cardboard box of .50 BMG rounds.
+  # </Trauma>
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeAntiMateriel

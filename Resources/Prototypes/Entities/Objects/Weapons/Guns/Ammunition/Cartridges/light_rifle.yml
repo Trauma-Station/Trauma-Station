@@ -23,7 +23,7 @@
   abstract: true
   parent: [ BaseCartridge, BaseSecurityContraband ]
   id: BaseCartridgeLightRifle
-  name: cartridge (7.62x39mm) # Trauma
+  name: cartridge (7.62x51mm) # Trauma
   components:
   - type: Tag
     tags:
@@ -41,7 +41,7 @@
 - type: entity
   parent: BaseCartridgeLightRifle
   id: CartridgeLightRifle
-  name: cartridge (7.62x39mm) # Trauma
+  name: cartridge (7.62x51mm) # Trauma
   description: A classic intermediate cartridge used by many combat rifles and LMGs. Standard kinetic ammunition is common and useful in most situations.
   components:
   - type: CartridgeAmmo
@@ -50,7 +50,7 @@
 - type: entity
   parent: BaseCartridgeLightRifle
   id: CartridgeLightRiflePractice
-  name: cartridge (7.62x39mm practice) # Trauma
+  name: cartridge (7.62x51mm practice) # Trauma
   description: A classic intermediate cartridge used by many combat rifles and LMGs. Practice ammunition fires a chalk projectile that stings a little, but otherwise causes no lasting damage.
   components:
   - type: CartridgeAmmo
@@ -65,8 +65,8 @@
 
 - type: entity
   parent: BaseCartridgeLightRifle
-  id: CartridgeLightRifleIncendiary
-  name: cartridge (7.62x39mm incendiary) # Trauma
+  id: CartridgeLightRifleIncendiary 
+  name: cartridge (7.62x51mm incendiary) # Trauma
   description: A classic intermediate cartridge used by many combat rifles and LMGs. Incendiary ammunition contains a self-igniting compound that sets targets ablaze.
   components:
   - type: CartridgeAmmo
@@ -82,7 +82,7 @@
 - type: entity
   parent: BaseCartridgeLightRifle
   id: CartridgeLightRifleUranium
-  name: cartridge (7.62x39mm uranium) # Trauma
+  name: cartridge (7.62x51mm uranium) # Trauma
   description: A classic intermediate cartridge used by many combat rifles and LMGs. Uranium ammunition replaces the lead core of the bullet with fissile material, irradiating targets from the inside.
   components:
   - type: CartridgeAmmo

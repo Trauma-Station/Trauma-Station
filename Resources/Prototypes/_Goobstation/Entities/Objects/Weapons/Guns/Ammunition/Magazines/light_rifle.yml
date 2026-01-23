@@ -1,7 +1,7 @@
 - type: entity
   parent: MagazineLightRifleBox
   id: MagazineLightRifleBoxEmpty
-  name: "L6 SAW magazine box (7.62x39mm any)" # Trauma
+  name: "L6 SAW magazine box (7.62x51mm any)" # Trauma
   components:
   - type: BallisticAmmoProvider
     proto: null
@@ -9,7 +9,7 @@
 - type: entity
   parent: BaseMagazineLightRifle
   id: MagazineLightRifleMaxim
-  name: "pan magazine (7.62x39mm)" # Trauma
+  name: "pan magazine (7.62x51mm)" # Trauma
   components:
   - type: BallisticAmmoProvider
     capacity: 96
@@ -19,7 +19,7 @@
 - type: entity
   parent: BaseMagazineLightRifle
   id: MagazineLightRiflePkBox
-  name: "PK munitions box (7.62x39mm)" # Trauma
+  name: "PK munitions box (7.62x51mm)" # Trauma
   components:
   - type: Tag
     tags:

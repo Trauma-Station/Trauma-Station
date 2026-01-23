@@ -117,7 +117,7 @@
 
 - type: entity
   id: MagazineAntiMateriel
-  name: "magazine (.60 anti-materiel)"
+  name: "magazine (.50 BMG)" # Trauma
   parent: BaseMagazineAntiMateriel
   components:
   - type: BallisticAmmoProvider

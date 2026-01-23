@@ -115,7 +115,7 @@ uplink-speedloader-magnum-name = Speedloader (.44 magnum AP)
 uplink-speedloader-magnu-desc = Revolver speedloader with 6 armor-piercing catridges, capable of ignoring armor entirely. Compatible with the Python.
 
 # <Trauma>
-uplink-mosin-ammo-name = Ammunition box (7.62x39mm)
+uplink-mosin-ammo-name = Ammunition box (7.62x51mm)
 # </Trauma>
 uplink-mosin-ammo-desc = A box of 60 cartridges for the surplus rifle.
 

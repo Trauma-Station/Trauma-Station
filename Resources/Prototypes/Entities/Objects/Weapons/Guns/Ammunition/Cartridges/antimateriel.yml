@@ -24,8 +24,8 @@
 - type: entity
   parent: [ BaseCartridge, BaseMajorContraband ]
   id: CartridgeAntiMateriel
-  name: cartridge (.60 anti-materiel)
-  description: A high-power cartridge used by high-precision rifles.
+  name: cartridge (.50 BMG) # Trauma
+  description: A high-power cartridge used by high-precision rifles, despite originally being built for a machine gun. # Trauma, hee hoo .50 BMG
   components:
   - type: Tag
     tags:

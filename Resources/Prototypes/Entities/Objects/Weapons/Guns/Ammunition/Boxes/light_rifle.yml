@@ -23,7 +23,7 @@
   abstract: true
   parent: BaseItem
   id: BaseMagazineBoxLightRifle
-  name: ammunition box (7.62x39mm) # Trauma
+  name: ammunition box (7.62x51mm) # Trauma
   components:
   # Goobstation edit start
   - type: EmitSoundOnPickup
@@ -60,7 +60,7 @@
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifleBig
-  name: ammunition box (7.62x39mm) # Trauma
+  name: ammunition box (7.62x51mm) # Trauma
   components:
   - type: BallisticAmmoProvider
     capacity: 200
@@ -81,8 +81,8 @@
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifle
   # <Trauma>
-  name: ammunition box (7.62x39mm)
-  description: A cardboard box of 7.62x39mm rounds. Intended to hold general-purpose kinetic ammunition.
+  name: ammunition box (7.62x51mm)
+  description: A cardboard box of 7.62x51mm rounds. Intended to hold general-purpose kinetic ammunition.
   # </Trauma>
   components:
   - type: BallisticAmmoProvider
@@ -98,8 +98,8 @@
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRiflePractice
   # <Trauma>
-  name: ammunition box (7.62x39mm practice)
-  description: A cardboard box of 7.62x39mm rounds. Intended to hold harmless practice ammunition.
+  name: ammunition box (7.62x51mm practice)
+  description: A cardboard box of 7.62x51mm rounds. Intended to hold harmless practice ammunition.
   # </Trauma>
   components:
   - type: BallisticAmmoProvider
@@ -116,8 +116,8 @@
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifleIncendiary
   # <Trauma>
-  name: ammunition box (7.62x39mm incendiary)
-  description: A cardboard box of 7.62x39mm rounds. Intended to hold self-igniting incendiary ammunition.
+  name: ammunition box (7.62x51mm incendiary)
+  description: A cardboard box of 7.62x51mm rounds. Intended to hold self-igniting incendiary ammunition.
   # </Trauma>
   components:
   - type: BallisticAmmoProvider
@@ -134,8 +134,8 @@
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifleUranium
   # <Trauma>
-  name: ammunition box (7.62x39mm uranium)
-  description: A cardboard box of 7.62x39mm rounds. Intended to hold exotic uranium-core ammunition.
+  name: ammunition box (7.62x51mm uranium)
+  description: A cardboard box of 7.62x51mm rounds. Intended to hold exotic uranium-core ammunition.
   # </Trauma>
   components:
   - type: BallisticAmmoProvider
