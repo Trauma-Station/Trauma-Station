@@ -113,7 +113,8 @@ public sealed class ExecutionSystem : EntitySystem
 
     private bool CanExecuteWithGun(EntityUid weapon, EntityUid victim, EntityUid user)
     {
-        if (!CanExecuteWithAny(weapon, victim, user)) return false;
+        if (!_execution.CanBeExecuted(victim, user))
+            return false;
 
         // We must be able to actually fire the gun
         if (!TryComp<GunComponent>(weapon, out var gun) || !_gunSystem.CanShoot(gun!))
@@ -260,9 +261,14 @@ public sealed class ExecutionSystem : EntitySystem
                 throw new InvalidOperationException($"Unknown shootable type [{ev.Ammo[0].Shootable}]");
         }
 
+        if (TryComp<ProjectileSpreadComponent>(ammoUid, out var projectilespread))
+        {
+            damage *= projectilespread.Count;
+        }
+
         // Clumsy people have a chance to shoot themselves (not in the head)
         if (!component.ClumsyProof &&
-            TryComp<ClumsyComponent>(attacker, out _) && _random.Prob(1f / 3f))
+            TryComp<ClumsyComponent>(attacker, out var clumsy) && _random.Prob(clumsy.ClumsyDefaultCheck))
         {
             _execution.ShowExecutionInternalPopup("execution-popup-gun-clumsy-internal", attacker, victim, weapon);
             _execution.ShowExecutionExternalPopup("execution-popup-gun-clumsy-external", attacker, victim, weapon);
