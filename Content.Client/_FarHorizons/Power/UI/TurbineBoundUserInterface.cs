@@ -78,7 +78,7 @@ public sealed class TurbineBoundUserInterface : BoundUserInterface, IBuiPreTickU
                     break;
 
                 case TurbineChangeStatorLoadMessage setStatorLoad:
-                    turbineState.StatorLoad = Math.Clamp(setStatorLoad.StatorLoad, 1000f, comp.StatorLoadMax);
+                    turbineState.StatorLoad = Math.Max(setStatorLoad.StatorLoad, 1000f);
                     break;
             }
         }

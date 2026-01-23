@@ -125,21 +125,23 @@ public sealed class TurbineSystem : SharedTurbineSystem
 
     private void OnEjectAttempt(EntityUid uid, TurbineComponent comp, ref ItemSlotEjectAttemptEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         if (comp.RPM < 1)
             return;
 
         args.Cancelled = true;
-        if (args.User != null)
-            _popupSystem.PopupClient(Loc.GetString("gas-turbine-eject-fail-speed", ("item", args.Item)), args.User.Value, PopupType.Medium);
     }
 
     private void OnInsertAttempt(EntityUid uid, TurbineComponent comp, ref ItemSlotInsertAttemptEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         if (comp.RPM < 1)
             return;
 
         args.Cancelled = true;
-        if (args.User != null)
-            _popupSystem.PopupClient(Loc.GetString("gas-turbine-insert-fail-speed", ("item", args.Item)), args.User.Value, PopupType.Medium);
     }
 }

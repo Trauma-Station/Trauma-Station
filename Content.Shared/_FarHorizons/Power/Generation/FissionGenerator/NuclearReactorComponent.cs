@@ -59,7 +59,7 @@ public sealed partial class NuclearReactorComponent : Component
     public float RadiationLevel = 0;
 
     /// <summary>
-    /// Gas mixtrue currently in the reactor
+    /// Gas mixture currently in the reactor
     /// </summary>
     public GasMixture? AirContents;
 
@@ -154,7 +154,7 @@ public sealed partial class NuclearReactorComponent : Component
     public float RadiationStability = 2;
 
     /// <summary>
-    /// The maximum radiation the reactor can emit during normal operation
+    /// The soft maximum radiation the reactor is expected to produce, beyond which radiation increases logarithmically. Also used for alarms and UI.
     /// </summary>
     [DataField]
     public float MaximumRadiation = 50;

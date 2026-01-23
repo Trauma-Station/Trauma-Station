@@ -30,8 +30,8 @@ public sealed partial class TurbineComponent : Component
     /// <summary>
     /// Maximum setting of stator load
     /// </summary>
-    [DataField]
-    public float StatorLoadMax = 500000; // TODO: smite this out of existance
+    // [DataField]
+    // public float StatorLoadMax = 500000; 
 
     /// <summary>
     /// Current RPM of turbine

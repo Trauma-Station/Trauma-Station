@@ -28,7 +28,6 @@ public sealed class TurbineBuiState : BoundUserInterfaceState
 
     // Stator load
     public float StatorLoadMin;
-    public float StatorLoadMax;
     public float StatorLoad;
 
     // Power generation

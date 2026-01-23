@@ -1,4 +1,3 @@
-using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._FarHorizons.Power.Generation.FissionGenerator;
 using Content.Shared.IdentityManagement;
@@ -26,41 +25,43 @@ public sealed partial class TurbineWindow : FancyWindow
     #region Variables
     //Colors for the RPM meter. (lit)
     private static readonly Color[] _speedColors = [
-        StyleNano.DangerousRedFore,
-        StyleNano.DangerousRedFore,
-        StyleNano.DangerousRedFore,
+        Color.FromHex("#BB3232"),
+        Color.FromHex("#BB3232"),
+        Color.FromHex("#BB3232"),
         Color.FromHex("#C49438"),
         Color.FromHex("#C49438"),
         Color.FromHex("#C49438"),
         Color.FromHex("#B3BF28"),
         Color.FromHex("#B3BF28"),
         Color.FromHex("#B3BF28"),
-        StyleNano.GoodGreenFore,
+        Color.FromHex("#6FC938"),
         Color.FromHex("#C49438"),
-        StyleNano.DangerousRedFore,
+        Color.FromHex("#BB3232"),
     ];
 
     //Colors for the RPM meter. (unlit)
     private static readonly Color[] _speedColorsDim =
     [
-        DimStorageColor(_speedColors[0]),
-        DimStorageColor(_speedColors[1]),
-        DimStorageColor(_speedColors[2]),
-        DimStorageColor(_speedColors[3]),
-        DimStorageColor(_speedColors[4]),
-        DimStorageColor(_speedColors[5]),
-        DimStorageColor(_speedColors[6]),
-        DimStorageColor(_speedColors[7]),
-        DimStorageColor(_speedColors[8]),
-        DimStorageColor(_speedColors[9]),
-        DimStorageColor(_speedColors[10]),
-        DimStorageColor(_speedColors[11]),
+        DimGaugeColor(_speedColors[0]),
+        DimGaugeColor(_speedColors[1]),
+        DimGaugeColor(_speedColors[2]),
+        DimGaugeColor(_speedColors[3]),
+        DimGaugeColor(_speedColors[4]),
+        DimGaugeColor(_speedColors[5]),
+        DimGaugeColor(_speedColors[6]),
+        DimGaugeColor(_speedColors[7]),
+        DimGaugeColor(_speedColors[8]),
+        DimGaugeColor(_speedColors[9]),
+        DimGaugeColor(_speedColors[10]),
+        DimGaugeColor(_speedColors[11]),
     ];
 
     // Style boxes for the RPM meter.
     private StyleBoxFlat[] _speedMeter;
 
     private int _speedLevel;
+    private float _flowRate = 0;
+    private float _statorLevel = 0;
 
     private EntityUid _turbine;
 
@@ -96,23 +97,18 @@ public sealed partial class TurbineWindow : FancyWindow
             if (!_suppressSliderEvents)
                 TurbineFlowRateChanged?.Invoke(TurbineFlowRateSlider.Value);
         };
-        FlowRateDecrease.OnPressed += _ => TurbineFlowRateChanged?.Invoke(TurbineFlowRateSlider.Value - 100);
-        FlowRateIncrease.OnPressed += _ => TurbineFlowRateChanged?.Invoke(TurbineFlowRateSlider.Value + 100);
+        FlowRateDecrease.OnPressed += _ => TurbineFlowRateChanged?.Invoke(_flowRate - 100);
+        FlowRateIncrease.OnPressed += _ => TurbineFlowRateChanged?.Invoke(_flowRate + 100);
 
         // Handle stator load
         TurbineStatorLoadLabel.OnFocusEnter += _ => _suppressStatorUpdate = true;
         TurbineStatorLoadLabel.OnFocusExit += _ => StatorTextChanged();
         TurbineStatorLoadLabel.OnTextEntered += _ => StatorTextChanged(true);
 
-        TurbineStatorLoadSlider.OnValueChanged += _ =>
-        {
-            if (!_suppressSliderEvents)
-                TurbineStatorLoadChanged?.Invoke(TurbineStatorLoadSlider.Value);
-        };
-        StatorLoadDecreaseLarge.OnPressed += _ => TurbineStatorLoadChanged?.Invoke(TurbineStatorLoadSlider.Value - 1000);
-        StatorLoadDecrease.OnPressed += _ => TurbineStatorLoadChanged?.Invoke(TurbineStatorLoadSlider.Value - 100);
-        StatorLoadIncrease.OnPressed += _ => TurbineStatorLoadChanged?.Invoke(TurbineStatorLoadSlider.Value + 100);
-        StatorLoadIncreaseLarge.OnPressed += _ => TurbineStatorLoadChanged?.Invoke(TurbineStatorLoadSlider.Value + 1000);
+        StatorLoadDecreaseLarge.OnPressed += _ => TurbineStatorLoadChanged?.Invoke(_statorLevel - 1000);
+        StatorLoadDecrease.OnPressed += _ => TurbineStatorLoadChanged?.Invoke(_statorLevel - 100);
+        StatorLoadIncrease.OnPressed += _ => TurbineStatorLoadChanged?.Invoke(_statorLevel + 100);
+        StatorLoadIncreaseLarge.OnPressed += _ => TurbineStatorLoadChanged?.Invoke(_statorLevel + 1000);
 
         CTabContainer.SetTabTitle(0, Loc.GetString("comp-turbine-ui-tab-main"));
         CTabContainer.SetTabTitle(1, Loc.GetString("comp-turbine-ui-tab-parts"));
@@ -174,7 +170,7 @@ public sealed partial class TurbineWindow : FancyWindow
         }
     }
 
-    private static Color DimStorageColor(Color color)
+    private static Color DimGaugeColor(Color color)
     {
         var hsv = Color.ToHsv(color);
         hsv.Z /= 5;
@@ -198,10 +194,9 @@ public sealed partial class TurbineWindow : FancyWindow
         TurbineFlowRateSlider.MaxValue = msg.FlowRateMax;
         TurbineFlowRateSlider.MinValue = msg.FlowRateMin;
         TurbineFlowRateSlider.Value = msg.FlowRate;
+        _flowRate = msg.FlowRate;
+        _statorLevel = msg.StatorLoad;
 
-        TurbineStatorLoadSlider.MaxValue = msg.StatorLoadMax;
-        TurbineStatorLoadSlider.MinValue = msg.StatorLoadMin;
-        TurbineStatorLoadSlider.Value = msg.StatorLoad;
         _suppressSliderEvents = false;
 
         _speedLevel = ContentHelpers.RoundToNearestLevels(msg.RPM, msg.BestRPM * 1.2, _speedMeter.Length);
