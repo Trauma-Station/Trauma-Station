@@ -81,7 +81,7 @@
 #  targetNode: MaterialDurathread
 #  category: construction-category-materials
 #  objectType: Item
-# </Trauma> 
+# </Trauma>
 
 - type: construction
   id: SheetUGlass
