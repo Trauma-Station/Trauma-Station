@@ -2,7 +2,7 @@
   abstract: true
   parent: [ BaseMagazinePistol, BaseSecurityContraband ]
   id: BaseMagazineMagnum
-  name: pistol magazine (.45 magnum)
+  name: pistol magazine (.44 magnum) # Trauma
   components:
   - type: Tag
     tags:
@@ -17,7 +17,7 @@
 - type: entity
   parent: BaseMagazineMagnum
   id: MagazineMagnumEmpty
-  name: pistol magazine (.45 magnum any)
+  name: pistol magazine (.44 magnum any) # Trauma
   suffix: empty
   description: 7-round single stack magazine for large-caliber pistols.
   components:
@@ -39,7 +39,7 @@
 - type: entity
   parent: BaseMagazineMagnum
   id: MagazineMagnum
-  name: pistol magazine (.45 magnum)
+  name: pistol magazine (.44 magnum) # Trauma
   description: 7-round single stack magazine for large-caliber pistols. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
@@ -60,7 +60,7 @@
 - type: entity
   parent: BaseMagazineMagnum
   id: MagazineMagnumPractice
-  name: pistol magazine (.45 magnum practice)
+  name: pistol magazine (.44 magnum practice) # Trauma
   description: 7-round single stack magazine for large-caliber pistols. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
@@ -87,7 +87,7 @@
 - type: entity
   parent: BaseMagazineMagnum
   id: MagazineMagnumUranium
-  name: pistol magazine (.45 magnum uranium)
+  name: pistol magazine (.44 magnum uranium) # Trauma
   description: 7-round single stack magazine for large-caliber pistols. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
@@ -114,7 +114,7 @@
 - type: entity
   parent: BaseMagazineMagnum
   id: MagazineMagnumAP
-  name: pistol magazine (.45 magnum armor-piercing)
+  name: pistol magazine (.44 magnum armor-piercing) # Trauma
   description: 7-round single stack magazine for large-caliber pistols. Intended to hold specialized armor-piercing ammunition.
   components:
   - type: BallisticAmmoProvider

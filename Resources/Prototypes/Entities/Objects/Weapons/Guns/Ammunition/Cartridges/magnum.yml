@@ -2,7 +2,7 @@
   abstract: true
   parent: [ BaseCartridge, BaseSecurityCommandContraband ] # Goob edit - captain's N1984
   id: BaseCartridgeMagnum
-  name: cartridge (.45 magnum)
+  name: cartridge (.44 magnum) # Trauma
   components:
   - type: Tag
     tags:
@@ -20,7 +20,7 @@
 - type: entity
   parent: BaseCartridgeMagnum
   id: CartridgeMagnum
-  name: cartridge (.45 magnum)
+  name: cartridge (.44 magnum) # Trauma
   description: Heavy magnum cartridge mostly used by revolvers. Standard kinetic ammunition is common and useful in most situations.
   components:
   - type: CartridgeAmmo
@@ -29,7 +29,7 @@
 - type: entity
   parent: BaseCartridgeMagnum
   id: CartridgeMagnumPractice
-  name: cartridge (.45 magnum practice)
+  name: cartridge (.44 magnum practice) # Trauma 
   description: Heavy magnum cartridge mostly used by revolvers. Practice ammunition fires a chalk projectile that stings a little, but otherwise causes no lasting damage.
   components:
   - type: CartridgeAmmo
@@ -45,7 +45,7 @@
 - type: entity
   parent: BaseCartridgeMagnum
   id: CartridgeMagnumIncendiary
-  name: cartridge (.45 magnum incendiary)
+  name: cartridge (.44 magnum incendiary) # Trauma
   description: Heavy magnum cartridge mostly used by revolvers. Incendiary ammunition contains a self-igniting compound that sets targets ablaze.
   components:
   - type: CartridgeAmmo
@@ -61,7 +61,7 @@
 - type: entity
   parent: BaseCartridgeMagnum
   id: CartridgeMagnumAP
-  name: cartridge (.45 magnum armor-piercing)
+  name: cartridge (.44 magnum armor-piercing) # Trauma
   description: Heavy magnum cartridge mostly used by revolvers. Armor-piercing ammunition is renowned for its ability to cut straight through body armor.
   components:
   - type: CartridgeAmmo
@@ -77,7 +77,7 @@
 - type: entity
   parent: BaseCartridgeMagnum
   id: CartridgeMagnumUranium
-  name: cartridge (.45 magnum uranium)
+  name: cartridge (.44 magnum uranium) # Trauma
   description: Heavy magnum cartridge mostly used by revolvers. Uranium ammunition replaces the lead core of the bullet with fissile material, irradiating targets from the inside.
   components:
   - type: CartridgeAmmo
