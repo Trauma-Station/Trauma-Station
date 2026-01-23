@@ -156,7 +156,9 @@ uplink-rifle-mag-desc = A 25 round magazine containing 5.56x45mm bullets. Suppor
 uplink-pistol-magazine-caseless-saphe-name = Pistol Magazine (9.5mm SAP-HE)
 uplink-pistol-magazine-caseless-saphe-desc = 10 rounds of 9.5mm caseless magnum semi-armor-piercing high-explosive ammunition. It is exactly what you have read. Compatible with the Cobra.
 
-uplink-l6-box-name = Magazine Box (.30 rifle)
+# <Trauma>
+uplink-l6-box-name = Magazine Box (7.62x39mm)
+# </Trauma>
 uplink-l6-box-desc = Magazine box with 100 catridges. Compatible with the L6 SAW.
 
 uplink-shotgun-magazine-name = Shotgun Drum (12 gauge pellet)

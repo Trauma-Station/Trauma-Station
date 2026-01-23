@@ -3,7 +3,7 @@
   abstract: true
   parent: [ BaseItem, BaseSecurityContraband ]
   id: BaseMagazineLightRifle
-  name: "magazine (.30 rifle)"
+  name: "magazine (7.62x39mm)" # Trauma
   components:
   - type: Tag
     tags:
@@ -37,8 +37,10 @@
 - type: entity
   parent: BaseMagazineLightRifle
   id: MagazineLightRifleBox
-  name: "L6 SAW magazine box (.30 rifle)"
-  description: Box containing a 100-round belt of linked .30 rifle rounds, used by light machine guns such as the L6. Intended to hold general-purpose kinetic ammunition.
+  # <Trauma>
+  name: "L6 SAW magazine box (7.62x39mm)"
+  description: Box containing a 100-round belt of linked 7.62x39mm rounds, used by light machine guns such as the L6. Intended to hold general-purpose kinetic ammunition.
+  # </Trauma>
   components:
   - type: Tag
     tags:
@@ -58,7 +60,7 @@
 - type: entity
   parent: BaseMagazineLightRifle
   id: MagazineLightRifle
-  name: "magazine (.30 rifle)"
+  name: "magazine (7.62x39mm)" # Trauma
   description: Curved 30-round double stack magazine for combat rifles. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
@@ -79,7 +81,7 @@
 - type: entity
   parent: MagazineLightRifle
   id: MagazineLightRifleEmpty
-  name: "magazine (.30 rifle any)"
+  name: "magazine (7.62x39mm any)" # Trauma
   suffix: empty
   description: Curved 30-round double stack magazine for combat rifles.
   components:
@@ -101,7 +103,7 @@
 - type: entity
   parent: BaseMagazineLightRifle
   id: MagazineLightRiflePractice
-  name: "magazine (.30 rifle practice)"
+  name: "magazine (7.62x39mm practice)" # Trauma
   description: Curved 30-round double stack magazine for combat rifles. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
@@ -128,7 +130,7 @@
 - type: entity
   parent: BaseMagazineLightRifle
   id: MagazineLightRifleUranium
-  name: "magazine (.30 rifle uranium)"
+  name: "magazine (7.62x39mm uranium)" # Trauma
   description: Curved 30-round double stack magazine for combat rifles. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
@@ -155,7 +157,7 @@
 - type: entity
   parent: MagazineLightRifle
   id: MagazineLightRifleIncendiary
-  name: "magazine (.30 rifle incendiary)"
+  name: "magazine (7.62x39mm incendiary)" # Trauma
   description: Curved 30-round double stack magazine for combat rifles. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
