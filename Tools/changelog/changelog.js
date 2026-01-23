@@ -1,28 +1,82 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <92357316+Piras314@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
+/* Category structure data: category and entry types */
 
-// From https://github.com/DeltaV-Station/Delta-v/
+// The default category, and a map of category cl name to filename in Resources/Changelog
+const ChangelogsDir = "../../Resources/Changelog/"; // must have trailing /
+// IF YOU ARE A FORK, CHANGE THESE!!!!!!!!!!!!
+const MainCategory = "TRAUMA";
+const MainCategoryPath = "TraumaChangelog.yml";
+const CategoryPaths = {
+	[MainCategory]: MainCategoryPath,
+	WIZDEN: "Changelog.yml",
+	GOOB: "GoobChangelog.yml",
+    MAPS: "Maps.yml",
+    RULES: "Rules.yml",
+};
+
+// All allowed entry types and the final string to use in the changelog yml
+const AllowedEntries = {
+	add: "Add",
+	remove: "Remove",
+	tweak: "Tweak",
+	fix: "Fix",
+	bugfix: "Fix", // never seen anyone use these 2 but its SS14.Changelog parity
+	bug: "Fix",
+};
+const FallbackEntryType = "Tweak";
+
+// Returns true if a category is present in CategoryPaths, thus exists
+function categoryExists(category) {
+	return CategoryPaths[category] !== undefined;
+}
+
+// Options for saving the changelog yml files
+const YamlOptions = { indent: 2, noArrayIndent: true };
+
 // Dependencies
 const fs = require("fs");
 const yaml = require("js-yaml");
-const axios = require("axios");
-
-// Use GitHub token if available
-if (process.env.GITHUB_TOKEN) axios.defaults.headers.common["Authorization"] = `Bearer ${process.env.GITHUB_TOKEN}`;
 
 // Regexes
-const HeaderRegex = /^\s*(?::cl:|🆑) *([a-z0-9_\- ,]+)?\s+/im; // :cl: or 🆑 [0] followed by optional author name [1]
-const EntryRegex = /^ *[*-]? *(add|remove|tweak|fix): *([^\n\r]+)\r?$/img; // * or - followed by change type [0] and change message [1]
+const HeaderRegex = /^\s*(?::cl:|🆑) *([a-z0-9_\- ,]+)?\s+(.+)/ims; // :cl: or 🆑 [0] followed by optional author name [1] and the changelog [2]
+const LineRegex = /\r?\n/;
+const CategoryRegex = /^([a-zA-Z]+)\s*:/;
+const EntryRegex = /^ *[*-]? *(add|remove|tweak|fix): *([^\n\r]+)\r?$/im; // * or - followed by change type [0] and change message [1]
 const CommentRegex = /<!--.*?-->/gs; // HTML comments
 
 // Main function
 async function main() {
+    const prnum = process.env.PR_NUMBER;
+    if (prnum === undefined)
+    	throw new Error(`Run from an action`);
+
+	const repo = process.env.GITHUB_REPOSITORY;
+    const prUrl = `https://github.com/${repo}/pull/${prnum}`;
+
     // Get PR details
-    const pr = await axios.get(`https://api.github.com/repos/${process.env.GITHUB_REPOSITORY}/pulls/${process.env.PR_NUMBER}`);
-    const { merged_at, body, user } = pr.data;
+	const uri = `https://api.github.com/repos/${repo}/pulls/${prnum}`;
+	const token = process.env.GITHUB_TOKEN;
+	const req = {
+    	headers: {
+    		Accept: 'application/vnd.github+json'
+		}
+	};
+	if (token !== undefined)
+		req.headers.Authorization = "Bearer " + token;
+    const res = await fetch(uri, req);
+	if (!res.ok)
+		throw new Error(`Failed to fetch PR information for #${prnum}: ${res.status}`);
+
+    const { merged_at, body, user } = await res.json();
+
+    // Time is something like 2021-08-29T20:00:00Z
+    // Time should be something like 2023-02-18T00:00:00.0000000+00:00
+    let time = merged_at;
+    if (!time) {
+        console.log("Pull request was not merged, skipping");
+        return;
+    }
+
+    time = time.replace("z", ".0000000+00:00").replace("Z", ".0000000+00:00");
 
     // Remove comments from the body
     commentlessBody = body.replace(CommentRegex, '');
@@ -40,38 +94,29 @@ async function main() {
         author = user.login;
     }
 
-    // Get all changes from the body
-    const entries = getChanges(commentlessBody);
+    // Get all changes from the changelog body
+    const changelog = headerMatch[2];
+    const entries = getChanges(changelog);
+    if (entries === null)
+    	return;
 
-
-    // Time is something like 2021-08-29T20:00:00Z
-    // Time should be something like 2023-02-18T00:00:00.0000000+00:00
-    let time = merged_at;
-    if (time)
-    {
-        time = time.replace("z", ".0000000+00:00").replace("Z", ".0000000+00:00");
-    }
-    else
-    {
-        console.log("Pull request was not merged, skipping");
-        return;
-    }
-
-
-    // Construct changelog yml entry
-    const entry = {
-        author: author,
-        changes: entries,
-        id: getHighestCLNumber() + 1,
-        time: time,
-    };
-
-    console.log('entry (line 63): ', entry);
-
+    // Construct changelog yml entries
     // Write changelogs
-    writeChangelog(entry);
+    for (const category in entries)
+    {
+    	const changes = entries[category];
+    	const path = ChangelogsDir + CategoryPaths[category];
+	    const entry = {
+	        author: author,
+	        changes: changes,
+	        id: -1, // set inside writeChangelog
+	        time: time,
+	        url: prUrl
+	    };
+	    writeChangelog(path, entry);
+    }
 
-    console.log(`Changelog updated with changes from PR #${process.env.PR_NUMBER}`);
+    console.log(`Changelog updated with changes from PR #${prnum}`);
 }
 
 
@@ -79,85 +124,89 @@ async function main() {
 
 // Get all changes from the PR body
 function getChanges(body) {
-    const matches = [];
-    const entries = [];
+    const entries = {};
+    let category = MainCategory;
+    let empty = true;
 
-    for (const match of body.matchAll(EntryRegex)) {
-        matches.push([match[1], match[2]]);
+    for (const line of body.split(LineRegex)) {
+    	if (line === "")
+    		continue;
+
+    	const matchedCat = CategoryRegex.exec(line);
+    	if (matchedCat !== null) {
+    		const name = matchedCat[1].toUpperCase();
+    		if (!categoryExists(name))
+    		{
+    			console.log("Invalid changelog category:", name);
+    			continue;
+			}
+
+    		category = name;
+    		continue;
+    	}
+
+    	const match = EntryRegex.exec(line);
+    	if (match === null) {
+    		console.log("Invalid line in changelog:", line);
+    		continue;
+    	}
+
+        (entries[category] ??= [])
+        	.push({ type: match[1], message: match[2] });
+        empty = false;
     }
 
-    if (!matches)
+    if (empty)
     {
         console.log("No changes found, skipping");
-        return;
+        return null;
     }
 
-
-    // Check change types and construct changelog entry
-    matches.forEach((entry) => {
-        let type;
-
-        switch (entry[0].toLowerCase()) {
-            case "add":
-                type = "Add";
-                break;
-            case "remove":
-                type = "Remove";
-                break;
-            case "tweak":
-                type = "Tweak";
-                break;
-            case "fix":
-                type = "Fix";
-                break;
-            default:
-                break;
+    // Check change types to finish the entries
+    for (const category in entries) {
+    	const changes = entries[category];
+    	for (const entry of changes) {
+    		// map dev-facing string to the yml entry string
+    		entry.type = AllowedEntries[entry.type] ?? FallbackEntryType;
         }
-
-        if (type) {
-            entries.push({
-                type: type,
-                message: entry[1],
-            });
-        }
-    });
+    }
 
     return entries;
 }
 
-// Get the highest changelog number from the changelogs file
-function getHighestCLNumber() {
-    // Read changelogs file
-    const file = fs.readFileSync(`../../${process.env.CHANGELOG_DIR}`, "utf8");
+// Get the highest changelog number from a list of entries
+function getHighestCLNumber(entries) {
+    let max = 0;
+    for (const entry of entries) {
+    	const id = entry.id;
+    	if (id > max)
+    		max = id;
+	}
 
-    // Get list of CL numbers
-    const data = yaml.load(file);
-    const entries = data && data.Entries ? Array.from(data.Entries) : [];
-    const clNumbers = entries.map((entry) => entry.id);
-
-    // Return highest changelog number
-    return Math.max(...clNumbers, 0);
+	return max;
 }
 
-function writeChangelog(entry) {
-    let data = { Entries: [] };
-
-    // Create a new changelogs file if it does not exist
-    if (fs.existsSync(`../../${process.env.CHANGELOG_DIR}`)) {
-        const file = fs.readFileSync(`../../${process.env.CHANGELOG_DIR}`, "utf8");
-        data = yaml.load(file);
+// Append a changelog entry to a given file
+function writeChangelog(path, entry) {
+    if (!fs.existsSync(path)) {
+    	console.log('skipping nonexistent changelog: ', path);
+    	return;
     }
 
-    console.log('entry (line 145): ', entry);
-    console.log('data (line 146): ', data);
+    const file = fs.readFileSync(path, "utf8");
+    const data = yaml.load(file);
+
+	entry.id = getHighestCLNumber(data.Entries) + 1;
+
+    console.log('entry (line 183): ', entry);
+    console.log('data (line 184): ', data);
 
     data.Entries.push(entry);
 
     // Write updated changelogs file
     fs.writeFileSync(
-        `../../${process.env.CHANGELOG_DIR}`,
-        "Name: Traumalog\nOrder: -1\nEntries:\n" + // IF YOU ARE A FORK, CHANGE THIS!!!!!!!!!!!!
-            yaml.dump(data.Entries, { indent: 2 }).replace(/^---/, "")
+        path,
+        yaml.dump(data, YamlOptions).replace(/^---/, "")
     );
 }
 
