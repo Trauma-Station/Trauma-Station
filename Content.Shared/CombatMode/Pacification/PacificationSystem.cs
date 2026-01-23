@@ -212,7 +212,7 @@ public sealed class PacificationSystem : EntitySystem
 
         // Tell the player why they can’t throw stuff:
         var cannotThrowMessage = ev.CancelReasonMessageId ?? "pacified-cannot-throw";
-        _popup.PopupEntity(Loc.GetString(cannotThrowMessage, ("projectile", itemName)), ent, ent);
+        _popup.PopupClient(Loc.GetString(cannotThrowMessage, ("projectile", itemName)), ent, ent); // Trauma - PopupClient not PopupEntity
     }
 
     private void OnPacifiedDangerousAttack(Entity<PacifismDangerousAttackComponent> ent, ref AttemptPacifiedAttackEvent args)

@@ -9,13 +9,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: trait
-  id: UltraVision
-  name: trait-ultravision-name
-  description: trait-ultravision-desc
-  components:
-    - type: UltraVision
-
-- type: trait
   id: DogVision
   name: trait-deuteranopia-name
   description: trait-deuteranopia-desc

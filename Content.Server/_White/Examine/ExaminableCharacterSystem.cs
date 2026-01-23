@@ -22,7 +22,6 @@ public sealed class ExaminableCharacterSystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly IdentitySystem _identitySystem = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
 
@@ -89,16 +88,16 @@ public sealed class ExaminableCharacterSystem : EntitySystem
             if (!_inventorySystem.TryGetSlotEntity(uid, slotName, out var slotEntity))
                 continue;
 
-            if (_entityManager.TryGetComponent<MetaDataComponent>(slotEntity, out var metaData)
-                && !HasComp<StripMenuInvisibleComponent>(slotEntity))
-            {
-                var itemName = FormattedMessage.EscapeText(metaData.EntityName);
-                var itemTex = Loc.GetString(slotLabel, ("item", itemName), ("ent", uid), ("id", GetNetEntity(slotEntity.Value, metaData).Id), ("size", 14));
-                if (showExamine)
-                    args.PushMarkup($"[font size=10]{Loc.GetString(slotLabel, ("item", itemName), ("ent", uid), ("id", "empty"))}[/font]", priority);
-                _logLines.Add($"[color=DarkGray][font size=10]{itemTex}[/font][/color]");
-                priority--;
-            }
+            if (HasComp<StripMenuInvisibleComponent>(slotEntity))
+                continue;
+
+            var meta = MetaData(slotEntity.Value);
+            var itemName = FormattedMessage.EscapeText(meta.EntityName);
+            var itemTex = Loc.GetString(slotLabel, ("item", itemName), ("ent", uid), ("id", GetNetEntity(slotEntity.Value, meta).Id), ("size", 14));
+            if (showExamine)
+                args.PushMarkup($"[font size=10]{Loc.GetString(slotLabel, ("item", itemName), ("ent", uid), ("id", "empty"))}[/font]", priority);
+            _logLines.Add($"[color=DarkGray][font size=10]{itemTex}[/font][/color]");
+            priority--;
         }
 
         if (priority < 13) // If nothing is worn dont show

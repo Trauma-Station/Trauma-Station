@@ -90,6 +90,7 @@
   - type: Clickable
   - type: InteractionOutline
   - type: ProtectiveBlade
+  - type: TimedDespawn
     lifetime: 60
   - type: Physics
     bodyType: Dynamic

@@ -246,18 +246,6 @@ public sealed partial class DamageableSystem
 
         damageDone.DamageDict.EnsureCapacity(damage.DamageDict.Count);
 
-        // <Shitmed> - Check for integrity cap on body parts
-        bool isWoundable = false;
-        FixedPoint2? damageCap = null;
-        FixedPoint2? remainingCap = null;
-        if (_woundableQuery.TryComp(ent, out var woundable))
-        {
-            isWoundable = true;
-            damageCap = woundable.IntegrityCap;
-            remainingCap = woundable.IntegrityCap - ent.Comp.TotalDamage;
-        }
-        // </Shitmed>
-
         var dict = ent.Comp.Damage.DamageDict;
         foreach (var (type, value) in damage.DamageDict)
         {
@@ -265,47 +253,12 @@ public sealed partial class DamageableSystem
             if (!dict.TryGetValue(type, out var oldValue))
                 continue;
 
-            // <Shitmed> - damage cap
-            // For positive damage, we need to check if we've hit the cap
-            if (value > 0)
-            {
-                // Delta ignores this stuff since we need it for effects.
-                damageDone.DamageDict[type] = value;
+            var newValue = FixedPoint2.Max(FixedPoint2.Zero, oldValue + value);
+            if (newValue == oldValue)
+                continue;
 
-                // If we're not a woundable or we don't have a cap, apply the damage normally
-                if (!isWoundable
-                    || remainingCap is null)
-                {
-                    dict[type] = oldValue + value;
-                    continue;
-                }
-
-                // If we've already hit the cap, skip this damage type
-                if (remainingCap.Value <= 0)
-                    continue;
-
-                // Calculate how much of this damage type we can apply
-                var damageToApply = FixedPoint2.Min(value, remainingCap.Value);
-                var newValue = FixedPoint2.Max(FixedPoint2.Zero, oldValue + damageToApply);
-
-                // Update remaining cap
-                remainingCap -= damageToApply;
-
-                // Only update the dict if the value actually changed
-                if (newValue != oldValue)
-                    dict[type] = newValue;
-            }
-            else
-            {
-                // For negative damage (healing), apply normally
-                var newValue = FixedPoint2.Max(FixedPoint2.Zero, oldValue + value);
-                if (newValue != oldValue)
-                {
-                    dict[type] = newValue;
-                    damageDone.DamageDict[type] = newValue - oldValue;
-                }
-            }
-            // </Shitmed>
+            dict[type] = newValue;
+            damageDone.DamageDict[type] = newValue - oldValue;
         }
 
         // <Shitmed> - add ignoreGlobalModifiers, check woundable
@@ -313,7 +266,7 @@ public sealed partial class DamageableSystem
             return damageDone;
 
         OnEntityDamageChanged((ent, ent.Comp), damageDone, interruptsDoAfters, origin, ignoreGlobalModifiers);
-        if (isWoundable)
+        if (_woundableQuery.HasComp(ent))
         {
             // This means that the damaged part was a woundable
             // which also means we send that shit to refresh the body.

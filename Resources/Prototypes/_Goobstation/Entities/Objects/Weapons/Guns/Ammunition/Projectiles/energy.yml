@@ -91,6 +91,7 @@
     range: 1.5
     energyConsumption: 1000
     disableDuration: 1
+  - type: DeleteOnTrigger
 
 - type: entity
   name: Rifle disabler bolt

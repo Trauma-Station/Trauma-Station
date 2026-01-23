@@ -1406,7 +1406,6 @@
           whitelist:
             components:
             - CosmicCult
-            - RogueAscendedInfection
           blacklist:
             components:
             - CleanseCult

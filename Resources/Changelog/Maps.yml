@@ -2,9 +2,47 @@ Order: 2
 Entries:
 - author: ArtisticRoomba
   changes:
-  - message: The mapping changelog has been added! This primarily serves as a way
-      to make players aware of large changes or important fixes to maps, without cluttering
-      the main changelog.
+  - message: >-
+      The mapping changelog has been added! This primarily serves as a way to
+      make players aware of large changes or important fixes to maps, without
+      cluttering the main changelog.
     type: Add
   id: 1
   time: '2025-02-03T01:29:24.112Z'
+- author: Nousagi37
+  changes:
+  - type: Add
+    message: >-
+      Cog, AI restoration console to R&D Office, and the board is added to Tech
+      Vault
+  - type: Tweak
+    message: Cog, Tech Vault has been moved to a more open area by Science
+  - type: Tweak
+    message: >-
+      Cog, Xenobio cages now have rails rather than slide doors, except the
+      freezer cage
+  id: 2
+  time: '2026-01-22T23:26:45.0000000+00:00'
+- author: Nousagi37
+  changes:
+  - type: Add
+    message: >-
+      Meta, AI restoration console to R&D Office, and the board is added to Tech
+      Vault!
+  - type: Add
+    message: Meta, Armory now has a security turret
+  - type: Remove
+    message: Meta, Extra SecTechFab and Spare robotics console
+  - type: Fix
+    message: Meta, The floating grill and the lattice in Engi has been removed
+  - type: Fix
+    message: Meta, APC in Radio Host now has power
+  id: 3
+  time: '2026-01-22T23:36:56.0000000+00:00'
+- author: Nousagi37
+  changes:
+  - type: Fix
+    message: Meta's Emergency Shuttle now has power
+  id: 4
+  time: '2026-01-23T06:03:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/460

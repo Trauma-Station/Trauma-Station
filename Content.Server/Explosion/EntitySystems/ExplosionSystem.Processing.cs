@@ -1,12 +1,7 @@
 // <Trauma>
-using Content.Shared.FixedPoint;
-using Content.Shared._Shitmed.Body;
 using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Targeting;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
-using Content.Shared.Body.Components;
-using Content.Server.Destructible;
-using Content.Shared.Destructible.Thresholds.Triggers;
+//using Content.Shared.Destructible.Thresholds.Triggers;
 // </Trauma>
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
@@ -403,15 +398,7 @@ public sealed partial class ExplosionSystem
         if (resistanceEv.DamageCoefficient != 1)
             damage *= resistanceEv.DamageCoefficient;
 
-        // Goob edit start
-        damage *= _damageableSystem.UniversalExplosionDamageModifier;
-        if (damage.PartDamageVariation == 0f)
-            damage.PartDamageVariation = PartVariation;
-        foreach (var type in new List<string> {"Blunt", "Slash", "Piercing", "Heat", "Cold"})
-        {
-            damage.WoundSeverityMultipliers.TryAdd(type, WoundMultiplier);
-        }
-        // Goob edit end
+        ModifyWoundSeverities(damage); // Trauma
 
         return damage;
     }
@@ -502,7 +489,7 @@ public sealed partial class ExplosionSystem
             && throwForce > 0
             && !EntityManager.IsQueuedForDeletion(uid)
             && _physicsQuery.TryGetComponent(uid, out var physics)
-            && physics.BodyType == Robust.Shared.Physics.BodyType.Dynamic) // Shitmed Change
+            && physics.BodyType == BodyType.Dynamic)
         {
             var pos = _transformSystem.GetWorldPosition(xform);
             var dir = pos - epicenter.Position;

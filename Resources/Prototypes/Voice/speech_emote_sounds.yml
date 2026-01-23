@@ -276,9 +276,9 @@
     Bagawk: # Mono
       collection: Bagawk # Mono
     Cough:
-      path: /Audio/Voice/Vox/vox_cough.ogg
+      path: /Audio/_Goobstation/Voice/Vox/vox_cough.ogg # Trauma - return to Goob sounds
     Sigh:
-      path: /Audio/Voice/Vox/vox_sigh.ogg
+      path: /Audio/_Goobstation/Voice/Vox/vox_sigh.ogg # Trauma - return to Goob sounds
     Click:
       path: /Audio/Voice/Vox/vox_click.ogg
     Chitter:
@@ -286,7 +286,7 @@
     Honk:
       collection: BikeHorn
     Crying:
-      path: /Audio/Voice/Vox/vox_cry.ogg
+      path: /Audio/_Goobstation/Voice/Vox/vox_cry.ogg # Trauma - return to Goob sounds
     Weh:
       collection: Weh
     Hew:
@@ -312,9 +312,9 @@
       path: /Audio/_Goobstation/Voice/gulpexotic.ogg
     Surprised:
       path: /Audio/_Goobstation/Voice/surprised.ogg
-    # </Goob>
     Gasp:
-      path: /Audio/Effects/Gasp/vox_gasp.ogg
+      path: /Audio/_Goobstation/Voice/Vox/vox_gasp.ogg # Trauma - return to Goob sounds (nested comment award)
+    # </Goob>
     DefaultDeathgasp:
       path: /Audio/Effects/Gasp/vox_DeathGasp.ogg
   params:
