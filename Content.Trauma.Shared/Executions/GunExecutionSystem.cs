@@ -80,10 +80,10 @@ public sealed class ExecutionSystem : EntitySystem
 
         var prototype = _proto.Index(ent.Comp.Prototype);
 
-        if(prototype.TryGetComponent<ProjectileComponent>(out var projectileA, Factory)) // sloth forgive me
+        if (prototype.TryGetComponent<ProjectileComponent>(out var projectileA, Factory)) // sloth forgive me
             args.Damage = projectileA.Damage;
 
-        if(prototype.TryGetComponent<ProjectileSpreadComponent>(out var projectileSpread, Factory)) // sloth forgive me
+        if (prototype.TryGetComponent<ProjectileSpreadComponent>(out var projectileSpread, Factory)) // sloth forgive me
             args.Damage *= projectileSpread.Count;
 
         args.Delete = false;
@@ -165,21 +165,6 @@ public sealed class ExecutionSystem : EntitySystem
 
         if (!CanExecuteWithGun(victim, attacker, component)) return;
 
-        // Check if any systems want to block our shot
-        var prevention = new ShotAttemptedEvent
-        {
-            User = attacker,
-            Used = new Entity<GunComponent>(weapon, gunComp)
-        };
-
-        RaiseLocalEvent(weapon, ref prevention);
-        if (prevention.Cancelled)
-            return;
-
-        RaiseLocalEvent(attacker, ref prevention);
-        if (prevention.Cancelled)
-            return;
-
         // Not sure what this is for but gunsystem uses it so ehhh
         var attemptEv = new AttemptShootEvent(attacker, null);
         RaiseLocalEvent(weapon, ref attemptEv);
@@ -189,8 +174,8 @@ public sealed class ExecutionSystem : EntitySystem
             if (attemptEv.Message != null)
             {
                 _popup.PopupClient(attemptEv.Message, weapon, attacker);
-                return;
             }
+            return;
         }
 
         // Get the direction for the recoil
@@ -212,6 +197,23 @@ public sealed class ExecutionSystem : EntitySystem
             DoEmptyGunLogic(component, weapon, attacker, victim);
             return;
         }
+
+        var selfPrevention = new SelfBeforeGunShotEvent(attacker, (weapon, gunComp), ev.Ammo);
+
+        // Check if any systems want to block our shot
+        var prevention = new ShotAttemptedEvent
+        {
+            User = attacker,
+            Used = new Entity<GunComponent>(weapon, gunComp)
+        };
+
+        RaiseLocalEvent(weapon, ref prevention);
+        if (prevention.Cancelled)
+            return;
+
+        RaiseLocalEvent(attacker, selfPrevention);
+        if (selfPrevention.Cancelled)
+            return;
 
         // Information about the ammo like damage
         DamageSpecifier damage = new DamageSpecifier();
@@ -273,5 +275,6 @@ public sealed class ExecutionSystem : EntitySystem
     {
         _audio.PlayPredicted(guncomp.SoundEmpty, weapon, attacker);
         _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
+        _execution.ShowExecutionExternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
     }
 }
