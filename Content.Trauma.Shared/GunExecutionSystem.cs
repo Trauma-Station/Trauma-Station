@@ -35,7 +35,6 @@ public sealed class ExecutionSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -89,28 +88,6 @@ public sealed class ExecutionSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
-    private bool CanExecuteWithAny(EntityUid weapon, EntityUid victim, EntityUid attacker)
-    {
-        // No point executing someone if they can't take damage
-        if (!TryComp<DamageableComponent>(victim, out _))
-            return false;
-
-        // You can't execute something that cannot die
-        if (!TryComp<MobStateComponent>(victim, out _))
-            return false;
-
-        // You must be able to attack people to execute
-        if (!_actionBlockerSystem.CanAttack(attacker, victim))
-            return false;
-
-        // The victim must be incapacitated to be executed
-        if (victim != attacker && _actionBlockerSystem.CanInteract(victim, null))
-            return false;
-
-        // All checks passed
-        return true;
-    }
-
     private bool CanExecuteWithGun(EntityUid weapon, EntityUid victim, EntityUid user)
     {
         if (!_execution.CanBeExecuted(victim, user))
@@ -130,17 +107,18 @@ public sealed class ExecutionSystem : EntitySystem
 
         var executionTime = weapon.Comp.ExecutionTime;
 
+        string prefix;
+
         if (attacker == victim)
         {
-            _execution.ShowExecutionInternalPopup("suicide-popup-gun-initial-internal", attacker, victim, weapon);
-            _execution.ShowExecutionExternalPopup("suicide-popup-gun-initial-external", attacker, victim, weapon);
+            prefix = "suicide";
             executionTime = weapon.Comp.SuicideTime;
         }
         else
-        {
-            _execution.ShowExecutionInternalPopup("execution-popup-gun-initial-internal", attacker, victim, weapon);
-            _execution.ShowExecutionExternalPopup("execution-popup-gun-initial-external", attacker, victim, weapon);
-        }
+            prefix = "execution";
+
+        _execution.ShowExecutionInternalPopup(prefix + "-popup-gun-initial-internal", attacker, victim, weapon);
+        _execution.ShowExecutionExternalPopup(prefix + "-popup-gun-initial-external", attacker, victim, weapon);
 
         var doAfter =
             new DoAfterArgs(EntityManager, attacker, executionTime, new ExecutionDoAfterEvent(), weapon, target: victim, used: weapon) // Mono - GunExecutionTime -> executionTime
@@ -287,17 +265,17 @@ public sealed class ExecutionSystem : EntitySystem
         _audioSystem.PlayPredicted(component.SoundGunshot, weapon, attacker);
 
         // Popups
+        string prefix;
         if (attacker != victim)
         {
             if (_net.IsClient && direction != Vector2.Zero)
                 _recoil.KickCamera(attacker, direction);
-            _execution.ShowExecutionInternalPopup("execution-popup-gun-complete-internal", attacker, victim, weapon);
-            _execution.ShowExecutionExternalPopup("execution-popup-gun-complete-external", attacker, victim, weapon);
+            prefix = "execution";
         }
         else
-        {
-            _execution.ShowExecutionInternalPopup("suicide-popup-gun-complete-internal", attacker, victim, weapon);
-            _execution.ShowExecutionExternalPopup("suicide-popup-gun-complete-external", attacker, victim, weapon);
-        }
+            prefix = "suicide";
+
+        _execution.ShowExecutionInternalPopup(prefix + "-popup-gun-complete-internal", attacker, victim, weapon);
+        _execution.ShowExecutionExternalPopup(prefix + "-popup-gun-complete-external", attacker, victim, weapon);
     }
 }
