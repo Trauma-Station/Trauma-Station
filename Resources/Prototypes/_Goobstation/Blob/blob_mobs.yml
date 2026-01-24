@@ -43,8 +43,7 @@
         - HEAD
     - type: Tag
       tags:
-        - HidesHair
-        - BlobMob
+      - HidesHair
     - type: CollectiveMind
       defaultChannel: Blobmind
       channels:
@@ -143,8 +142,7 @@
       damageModifierSet: BlobBlobbernaut
     - type: Tag
       tags:
-        - Blobbernaut
-        - BlobMob
+      - Blobbernaut
     - type: CollectiveMind
       defaultChannel: Blobmind
       channels:

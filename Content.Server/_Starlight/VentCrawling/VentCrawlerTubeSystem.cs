@@ -64,7 +64,7 @@ public sealed class VentCrawlerTubeSystem : EntitySystem
         if (!TryComp<VentCrawlerComponent>(args.User, out var ventCrawlerComponent) || HasComp<BeingVentCrawlerComponent>(args.User))
             return;
 
-        if (TryComp<TransformComponent>(uid, out var transformComponent) && !transformComponent.Anchored)
+        if (!Transform(uid).Anchored)
             return;
 
         AlternativeVerb verb = new()

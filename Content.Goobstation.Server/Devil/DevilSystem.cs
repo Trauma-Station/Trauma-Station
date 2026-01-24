@@ -292,13 +292,15 @@ public sealed partial class DevilSystem : EntitySystem
         var flavor = Loc.GetString("contract-summon-flavor", ("name", name));
         _popup.PopupEntity(flavor, devil, PopupType.Medium);
     }
-    private void GenerateTrueName(DevilComponent comp)
+    private void GenerateTrueName(Entity<DevilComponent> ent)
     {
+        var comp = ent.Comp;
         // Generate true name.
         var firstNameOptions = _prototype.Index(comp.FirstNameTrue);
         var lastNameOptions = _prototype.Index(comp.LastNameTrue);
 
         comp.TrueName = string.Concat(_random.Pick(firstNameOptions.Values), " ", _random.Pick(lastNameOptions.Values));
+        Dirty(ent);
     }
 
     #endregion

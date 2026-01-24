@@ -378,8 +378,12 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitVoxRaiderStealth
-  # - type: VoxRestricted
-  - type: Unremoveable #Vox restricted does not work, this does in the meantime.
+  - type: ClothingConditions
+    reason: entity-condition-popup-not-vox-raider
+    conditions:
+    - !type:SpeciesCondition
+      species: Vox
+
 # Detective's Hardsuit
 
 - type: entity

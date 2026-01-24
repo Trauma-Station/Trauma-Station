@@ -155,16 +155,16 @@
 #    walkSpeedModifier: 0.3
 #    sprintSpeedModifier: 0.3
 #    ignoreWhitelist:
-#      tags:
-#        - BlobMob
+#      components:
+#      - BlobMob
 #  - type: DamageContacts
 #    damage:
 #      types:
 #        Poison: 1.5
 #        Piercing: 1.5
 #    ignoreWhitelist:
-#      tags:
-#        - BlobMob
+#      components:
+#      - BlobMob
 #  - type: Fixtures
 #    fixtures:
 #      fix1:

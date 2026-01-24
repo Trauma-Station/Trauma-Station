@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -16,7 +6,7 @@ namespace Content.Shared.GameTicking.Prototypes;
 /// <summary>
 /// Prototype for a lobby background the game can choose.
 /// </summary>
-[Prototype("lobbyBackground")]
+[Prototype]
 public sealed partial class LobbyBackgroundPrototype : IPrototype
 {
     /// <inheritdoc/>
@@ -26,12 +16,18 @@ public sealed partial class LobbyBackgroundPrototype : IPrototype
     /// <summary>
     /// The sprite to use as the background. This should ideally be 1920x1080.
     /// </summary>
-    [DataField("background", required: true)]
+    [DataField(required: true)]
     public ResPath Background = default!;
 
-    [DataField("name")]
-    public string? Name;
+    /// <summary>
+    /// The title of the background to be displayed in the lobby.
+    /// </summary>
+    [DataField]
+    public LocId Title = "lobby-state-background-unknown-title";
 
-    [DataField("artist")]
-    public string? Artist;
+    /// <summary>
+    /// The artist who made the art for the background.
+    /// </summary>
+    [DataField]
+    public LocId Artist = "lobby-state-background-unknown-artist";
 }

@@ -4,7 +4,7 @@
   id: MaterialsStatic
   recipes:
   - SheetRGlass
-  - MaterialDurathread
+ # - MaterialDurathread # Trauma - remove durathread lathe print
 
 - type: latheRecipePack
   id: PartsStatic

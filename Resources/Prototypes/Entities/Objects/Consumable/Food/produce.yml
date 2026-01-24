@@ -550,7 +550,7 @@
         volume: -100
 
 - type: entity
-  parent: BaseItem
+  parent: TrashBananaPeel
   id: TrashBananiumPeel
   name: bananium peel
   components:
@@ -564,54 +564,16 @@
   - type: Clothing
     sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     equippedPrefix: peel
-#<Trauma>
-  - type: StepTrigger
-    intersectRatio: 0.2
-    triggerGroups: # Goobstation
-      types:
-      - SlipEntity
-  - type: CollisionWake
-    enabled: false
-  - type: Physics
-    bodyType: Dynamic
-  - type: Fixtures
-    fixtures:
-      slips:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.2,0.2,0.2"
-        hard: false
-        layer:
-        - SlipLayer
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.2,0.2,0.2"
-        density: 30
-        mask:
-        - ItemMask
-  - type: Tag
-    tags:
-    - Recyclable
-    - Trash
-    - BananaPeel
-    - Ruminant
-    - WhitelistChameleon
-    - HamsterWearable
-    - RotHulkTrash # Goobstation - Wraith
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 4
-        reagents:
-        - ReagentId: PulpedBananaPeel
-          Quantity: 4
-  - type: Extractable
-    grindableSolutionName: food
-  - type: SpaceGarbage
-  - type: Edible
-    requiresSpecialDigestion: true
-#</Trauma>
+# <Trauma>
+  - type: Perishable
+    rotAfter: 999999999 # I am a hero
+    molsPerSecondPerUnitMass: 0
+  - type: RotInto
+    entity: FoodRot
+    stage: 1
+# </Trauma>
+
+
 
 - type: entity
   name: carrot

@@ -19,15 +19,17 @@ namespace Content.Goobstation.Server.Administration.Commands;
 [AdminCommand(AdminFlags.Spawn)]
 public sealed class EquipTo : LocalizedCommands
 {
+    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     public const string CommandName = "equipto";
     public override string Command => CommandName;
 
+    public static readonly ProtoId<InventoryTemplatePrototype> HumanTemplate = "human";
+
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        var entityManager = IoCManager.Resolve<IEntityManager>();
-        var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
-        var invSystem = entityManager.System<InventorySystem>();
+        var invSystem = _entMan.System<InventorySystem>();
 
         if (args.Length < 3)
         {
@@ -36,7 +38,7 @@ public sealed class EquipTo : LocalizedCommands
         }
 
         if (!NetEntity.TryParse(args[0], out var targetNet)
-            || !entityManager.TryGetEntity(targetNet, out var targetEntity))
+            || !_entMan.TryGetEntity(targetNet, out var targetEntity))
         {
             shell.WriteLine(Loc.GetString("cmd-equipto-bad-target", ("target", args[0])));
             return;
@@ -45,13 +47,13 @@ public sealed class EquipTo : LocalizedCommands
 
         EntityUid item;
         if (NetEntity.TryParse(args[1], out var itemNet) &&
-            entityManager.TryGetEntity(itemNet, out var itemEntity))
+            _entMan.TryGetEntity(itemNet, out var itemEntity))
         {
             item = itemEntity.Value;
         }
-        else if (prototypeManager.TryIndex(args[1], out var prototype))
+        else if (_proto.TryIndex(args[1], out var prototype))
         {
-            item = entityManager.SpawnEntity(prototype.ID, entityManager.GetComponent<TransformComponent>(target).Coordinates);
+            item = _entMan.SpawnEntity(prototype.ID, _entMan.GetComponent<TransformComponent>(target).Coordinates);
         }
         else
         {
@@ -71,18 +73,18 @@ public sealed class EquipTo : LocalizedCommands
             {
                 if (deletePrevious
                     && existing != null)
-                    entityManager.DeleteEntity(existing.Value);
+                    _entMan.DeleteEntity(existing.Value);
 
                 shell.WriteLine(Loc.GetString("cmd-equipto-success",
-                    ("item", entityManager.ToPrettyString(item)),
-                    ("target", entityManager.ToPrettyString(target)),
+                    ("item", _entMan.ToPrettyString(item)),
+                    ("target", _entMan.ToPrettyString(target)),
                     ("targetSlot", targetSlot)));
             }
             else
             {
                 shell.WriteLine(Loc.GetString("cmd-equipto-failure",
-                    ("item", entityManager.ToPrettyString(item)),
-                    ("target", entityManager.ToPrettyString(target)),
+                    ("item", _entMan.ToPrettyString(item)),
+                    ("target", _entMan.ToPrettyString(target)),
                     ("targetSlot", targetSlot)));
             }
             return;
@@ -90,7 +92,7 @@ public sealed class EquipTo : LocalizedCommands
 
         var equipped = false;
         if (invSystem.TryGetSlots(target, out var slots)
-            && entityManager.TryGetComponent<ClothingComponent>(item, out var clothingComponent))
+            && _entMan.TryGetComponent<ClothingComponent>(item, out var clothingComponent))
         {
             foreach (var slot in slots)
             {
@@ -99,22 +101,22 @@ public sealed class EquipTo : LocalizedCommands
 
                 if (deletePrevious
                     && invSystem.TryGetSlotEntity(target, slot.Name, out var existing))
-                    entityManager.DeleteEntity(existing.Value);
+                    _entMan.DeleteEntity(existing.Value);
                 else
                     invSystem.TryUnequip(target, slot.Name, true, true);
 
                 invSystem.TryEquip(target, item, slot.Name, force: true, silent: true);
 
                 if (slot.Name == "id" &&
-                    entityManager.TryGetComponent(item, out PdaComponent? pdaComponent) &&
-                    entityManager.TryGetComponent<IdCardComponent>(pdaComponent.ContainedId, out var id))
+                    _entMan.TryGetComponent(item, out PdaComponent? pdaComponent) &&
+                    _entMan.TryGetComponent<IdCardComponent>(pdaComponent.ContainedId, out var id))
                 {
-                    id.FullName = entityManager.GetComponent<MetaDataComponent>(target).EntityName;
+                    id.FullName = _entMan.GetComponent<MetaDataComponent>(target).EntityName;
                 }
 
                 shell.WriteLine(Loc.GetString("cmd-equipto-success",
-                    ("item", entityManager.ToPrettyString(item)),
-                    ("target", entityManager.ToPrettyString(target)),
+                    ("item", _entMan.ToPrettyString(item)),
+                    ("target", _entMan.ToPrettyString(target)),
                     ("targetSlot", slot.Name)));
 
                 equipped = true;
@@ -126,18 +128,16 @@ public sealed class EquipTo : LocalizedCommands
             return;
 
         shell.WriteLine(Loc.GetString("cmd-equipto-total-failure",
-            ("item", entityManager.ToPrettyString(item)),
-            ("target", entityManager.ToPrettyString(target))));
+            ("item", _entMan.ToPrettyString(item)),
+            ("target", _entMan.ToPrettyString(target))));
 
-        entityManager.DeleteEntity(item);
+        _entMan.DeleteEntity(item);
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
     {
-        var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
-
         if (args.Length != 4
-            || !prototypeManager.TryIndex<InventoryTemplatePrototype>("human", out var inventoryTemplate))
+            || !_proto.Resolve(HumanTemplate, out var inventoryTemplate))
             return CompletionResult.Empty;
 
         var options = inventoryTemplate.Slots.Select(c => c.Name).OrderBy(c => c).ToArray();
