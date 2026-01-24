@@ -53,17 +53,20 @@ public sealed class SpeciesBUiTest
             Assert.That(bUiBase, Is.Not.Null);
             var baseKeys = GetInterfaces(bUiBase).Keys.ToArray();
 
-            foreach (var species in proto.EnumeratePrototypes<SpeciesPrototype>())
+            Assert.Multiple(() =>
             {
-                var ent = proto.Index(species.Prototype);
-                Assert.That(ent.TryGetComponent<UserInterfaceComponent>(out var bUi, factoryComp), Is.True);
-                Assert.That(bUi, Is.Not.Null);
-                var states = GetInterfaces(bUi);
-                foreach (var key in baseKeys)
+                foreach (var species in proto.EnumeratePrototypes<SpeciesPrototype>())
                 {
-                    Assert.That(states.ContainsKey(key), Is.True, $"Species {species.ID} is missing UserInterface for enum.{key.GetType().Name}.{key}");
+                    var ent = proto.Index(species.Prototype);
+                    Assert.That(ent.TryGetComponent<UserInterfaceComponent>(out var bUi, factoryComp), Is.True);
+                    Assert.That(bUi, Is.Not.Null);
+                    var states = GetInterfaces(bUi);
+                    foreach (var key in baseKeys)
+                    {
+                        Assert.That(states.ContainsKey(key), Is.True, $"Species {species.ID} is missing UserInterface for enum.{key.GetType().Name}.{key}");
+                    }
                 }
-            }
+            });
         });
         await pair.CleanReturnAsync();
     }

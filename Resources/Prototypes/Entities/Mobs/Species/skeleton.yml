@@ -152,6 +152,8 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
+      enum.StoreUiKey.Key: # Goob - changelings
+        type: StoreBoundUserInterface
   - type: FacehuggerImmune # Goobstation - Xenomorphs
 
 - type: entity
