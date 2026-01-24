@@ -29,7 +29,7 @@ namespace Content.Trauma.Shared.Executions;
 /// </summary>
 public sealed class ExecutionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter= default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -41,7 +41,7 @@ public sealed class ExecutionSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedExecutionSystem _execution = default!;
     [Dependency] private readonly SharedExplosionSystem _explosion = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -68,39 +68,43 @@ public sealed class ExecutionSystem : EntitySystem
 
     private void OnTakeAmmoCartridge(Entity<CartridgeAmmoComponent> ent, ref TakeAmmoGetDamageFromProjectileEvent args)
     {
+        if (ent.Comp.Spent)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         ent.Comp.Spent = true;
         _appearance.SetData(ent, AmmoVisuals.Spent, true);
         Dirty(ent, ent.Comp);
 
-        var prototype = _prototypeManager.Index<EntityPrototype>(ent.Comp.Prototype);
+        var prototype = _proto.Index(ent.Comp.Prototype);
 
-        prototype.TryGetComponent<ProjectileComponent>(out var projectileA, Factory); // sloth forgive me
-        if (projectileA != null)
+        if(prototype.TryGetComponent<ProjectileComponent>(out var projectileA, Factory)) // sloth forgive me
             args.Damage = projectileA.Damage;
+
+        if(prototype.TryGetComponent<ProjectileSpreadComponent>(out var projectileSpread, Factory)) // sloth forgive me
+            args.Damage *= projectileSpread.Count;
 
         args.Delete = false;
     }
 
-    private void OnGetInteractionVerbsGun(
-        EntityUid uid,
-        GunComponent component,
-        GetVerbsEvent<UtilityVerb> args)
+    private void OnGetInteractionVerbsGun(Entity<GunComponent> ent, ref GetVerbsEvent<UtilityVerb> args)
     {
-        if (args.Hands == null || args.Using == null || !args.CanAccess || !args.CanInteract)
+        if (args.Hands == null || args.Using is not {} weapon || !args.CanAccess || !args.CanInteract)
             return;
 
         var attacker = args.User;
-        var weapon = args.Using!.Value;
         var victim = args.Target;
 
-        if (!CanExecuteWithGun(weapon, victim, attacker))
+        if (!CanExecuteWithGun(victim, attacker, ent.Comp))
             return;
 
         UtilityVerb verb = new()
         {
             Act = () =>
             {
-                TryStartGunExecutionDoafter((weapon, component), victim, attacker);
+                TryStartGunExecutionDoafter((weapon, ent.Comp), victim, attacker, ent.Comp);
             },
             Impact = LogImpact.High,
             Text = Loc.GetString("execution-verb-name"),
@@ -110,21 +114,18 @@ public sealed class ExecutionSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
-    private bool CanExecuteWithGun(EntityUid weapon, EntityUid victim, EntityUid user)
+    private bool CanExecuteWithGun(EntityUid victim, EntityUid user, GunComponent guncomp)
     {
         if (!_execution.CanBeExecuted(victim, user))
             return false;
 
         // We must be able to actually fire the gun
-        if (!TryComp<GunComponent>(weapon, out var gun) || !_gun.CanShoot(gun!))
-            return false;
-
-        return true;
+        return _gun.CanShoot(guncomp);
     }
 
-    private void TryStartGunExecutionDoafter(Entity<GunComponent> weapon, EntityUid victim, EntityUid attacker)
+    private void TryStartGunExecutionDoafter(Entity<GunComponent> weapon, EntityUid victim, EntityUid attacker, GunComponent guncomp)
     {
-        if (!CanExecuteWithGun(weapon, victim, attacker))
+        if (!CanExecuteWithGun(victim, attacker, guncomp))
             return;
 
         var executionTime = weapon.Comp.ExecutionTime;
@@ -162,7 +163,7 @@ public sealed class ExecutionSystem : EntitySystem
 
         var victim = args.Target!.Value;
 
-        if (!CanExecuteWithGun(weapon, victim, attacker)) return;
+        if (!CanExecuteWithGun(victim, attacker, component)) return;
 
         // Check if any systems want to block our shot
         var prevention = new ShotAttemptedEvent
@@ -208,59 +209,51 @@ public sealed class ExecutionSystem : EntitySystem
         // Check if there's any ammo left
         if (ev.Ammo.Count <= 0)
         {
-            _audio.PlayPredicted(component.SoundEmpty, weapon, attacker);
-            _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
+            DoEmptyGunLogic(component, weapon, attacker, victim);
             return;
         }
 
         // Information about the ammo like damage
         DamageSpecifier damage = new DamageSpecifier();
-        var count = 1;
 
         // Get some information from IShootable
-        var ammoUid = ev.Ammo[0].Entity;
 
-
-        if (TryComp<ProjectileSpreadComponent>(ammoUid, out var projectilespread))
-        {
-            count = projectilespread.Count;
-        }
-
-        // Explode if the projective is explosive for mgsGZ helicopter scene parody
-        if (TryComp<ExplosiveComponent>(ammoUid, out var explosive))
-        {
-            _explosion.QueueExplosion(ammoUid.Value, explosive.ExplosionType, explosive.TotalIntensity, explosive.IntensitySlope, explosive.MaxIntensity, canCreateVacuum: explosive.CanCreateVacuum);
-        }
-
-        if (ammoUid == null)
+        if (ev.Ammo[0].Entity is not {} ammo)
             return;
 
+        // Explode if the projective is explosive for mgsGZ helicopter scene parody
+        if (TryComp<ExplosiveComponent>(ammo, out var explosive))
+        {
+            _explosion.QueueExplosion(ammo, explosive.ExplosionType, explosive.TotalIntensity, explosive.IntensitySlope, explosive.MaxIntensity, canCreateVacuum: explosive.CanCreateVacuum);
+        }
+
         var ammoEvent = new TakeAmmoGetDamageFromProjectileEvent(damage, true);
-        RaiseLocalEvent(ammoUid.Value, ammoEvent);
+        RaiseLocalEvent(ammo, ref ammoEvent);
+
+        if (ammoEvent.Cancelled)
+        {
+            DoEmptyGunLogic(component, weapon, attacker, victim);
+            return;
+        }
+
         damage = ammoEvent.Damage;
 
         if(ammoEvent.Delete)
-            PredictedDel(ammoUid);
+            PredictedDel(ammo);
 
         var selfEvent = new SelfBeforeGunShotEvent(attacker, (weapon, gunComp), ev.Ammo);
         RaiseLocalEvent(attacker, selfEvent);
-        if (selfEvent.Cancelled && !component.ClumsyProof && TryComp<ClumsyComponent>(attacker, out _))
+        if (selfEvent.Cancelled && !component.ClumsyProof && HasComp<ClumsyComponent>(attacker))
         {
-            _execution.ShowExecutionInternalPopup("execution-popup-gun-clumsy-internal", attacker, victim, weapon);
-            _execution.ShowExecutionExternalPopup("execution-popup-gun-clumsy-external", attacker, victim, weapon);
-
             // You shoot yourself with the gun (no damage multiplier)
             _damageable.TryChangeDamage(attacker, damage, origin: attacker);
-            _audio.PlayPredicted(component.SoundGunshot, weapon, attacker);
         }
 
         if (selfEvent.Cancelled)
             return;
 
-        for (int i = 0; i < count; i++)
-        {
-            _damageable.TryChangeDamage(victim, damage * component.ExecutionModifier, true, targetPart: TargetBodyPart.Head);
-        }
+        _damageable.TryChangeDamage(victim, damage * component.ExecutionModifier, true, targetPart: TargetBodyPart.Head);
+
         _audio.PlayPredicted(component.SoundGunshot, weapon, attacker);
 
         // Popups
@@ -274,5 +267,11 @@ public sealed class ExecutionSystem : EntitySystem
 
         _execution.ShowExecutionInternalPopup(prefix + "-popup-gun-complete-internal", attacker, victim, weapon);
         _execution.ShowExecutionExternalPopup(prefix + "-popup-gun-complete-external", attacker, victim, weapon);
+    }
+
+    private void DoEmptyGunLogic(GunComponent guncomp, EntityUid weapon, EntityUid attacker, EntityUid victim)
+    {
+        _audio.PlayPredicted(guncomp.SoundEmpty, weapon, attacker);
+        _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, weapon);
     }
 }

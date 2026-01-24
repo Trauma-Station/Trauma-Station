@@ -1,17 +1,12 @@
 using Content.Shared.Damage;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Executions;
 
-[Serializable, NetSerializable]
-public sealed class TakeAmmoGetDamageFromProjectileEvent : EntityEventArgs
-{
-    public DamageSpecifier Damage;
-    public bool Delete;
-    public TakeAmmoGetDamageFromProjectileEvent(DamageSpecifier damage, bool delete)
-    {
-        Damage = damage;
-        Delete = delete;
-
-    }
-}
+/// <summary>
+/// Used to take ammo and get the damage of that ammo, used in the gunexecution system.
+/// </summary>
+/// <param name="Damage"></param>
+/// <param name="Delete"></param>
+/// <param name="Cancelled"></param>
+[ByRefEvent]
+public record struct TakeAmmoGetDamageFromProjectileEvent(DamageSpecifier Damage, bool Delete = true, bool Cancelled = false);
