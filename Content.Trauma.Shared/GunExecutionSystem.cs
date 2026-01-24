@@ -107,15 +107,13 @@ public sealed class ExecutionSystem : EntitySystem
 
         var executionTime = weapon.Comp.ExecutionTime;
 
-        string prefix;
+        string prefix = "execution";
 
         if (attacker == victim)
         {
             prefix = "suicide";
             executionTime = weapon.Comp.SuicideTime;
         }
-        else
-            prefix = "execution";
 
         _execution.ShowExecutionInternalPopup(prefix + "-popup-gun-initial-internal", attacker, victim, weapon);
         _execution.ShowExecutionExternalPopup(prefix + "-popup-gun-initial-external", attacker, victim, weapon);
@@ -265,15 +263,13 @@ public sealed class ExecutionSystem : EntitySystem
         _audioSystem.PlayPredicted(component.SoundGunshot, weapon, attacker);
 
         // Popups
-        string prefix;
+        string prefix = "suicide";
         if (attacker != victim)
         {
             if (_net.IsClient && direction != Vector2.Zero)
                 _recoil.KickCamera(attacker, direction);
             prefix = "execution";
         }
-        else
-            prefix = "suicide";
 
         _execution.ShowExecutionInternalPopup(prefix + "-popup-gun-complete-internal", attacker, victim, weapon);
         _execution.ShowExecutionExternalPopup(prefix + "-popup-gun-complete-external", attacker, victim, weapon);
