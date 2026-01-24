@@ -144,7 +144,7 @@
   showInVote: false
   rules:
     - Honkops
-    - SubGamemodesRule
+    # - SubGamemodesRule # Trauma - No random heretics / crew sided emag fucking shit up
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     - SpaceTrafficControlEventScheduler
