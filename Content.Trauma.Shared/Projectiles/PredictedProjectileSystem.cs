@@ -126,7 +126,7 @@ public sealed class PredictedProjectileSystem : EntitySystem
         }
 
         // <Goob>
-        TargetBodyPart? targetPart = null;
+        TargetBodyPart? targetPart = _gun.GetTargetPart(shooter, target);
         if (TryComp(uid, out ProjectileMissTargetPartChanceComponent? missComp) &&
             !missComp.PerfectHitEntities.Contains(target))
             targetPart = TargetBodyPart.Chest;
