@@ -6,6 +6,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: emoteSounds
+  parent: BaseEmotes
   id: EmoteC4
   params:
     variation: 0
@@ -16,6 +17,7 @@
       path: /Audio/Machines/Nuke/general_beep.ogg
 
 - type: emoteSounds
+  parent: BaseMobEmotes
   id: ShadowCloak
   params:
     variation: 0.125
@@ -44,6 +46,7 @@
       path: /Audio/_Goobstation/Heretic/hiss/lowHiss1.ogg
 
 - type: emoteSounds
+  parent: BaseMobEmotes
   id: Duende
   params:
     variation: 0.125
@@ -56,6 +59,7 @@
       path: /Audio/_Goobstation/FloorGoblin/laugh.ogg
 
 - type: emoteSounds
+  parent: BaseMobEmotes
   id: ClownGoblin
   params:
     variation: 0.125
@@ -64,6 +68,7 @@
       collection: ClownGoblinScream
 
 - type: emoteSounds
+  parent: MaleHuman
   id: MonkeyMode
   params:
     variation: 0.125
@@ -72,142 +77,55 @@
       collection: MonkeyScreeches
     Laugh:
       collection: MonkeyScreeches
-    Sneeze:
-      collection: MaleSneezes
-    Cough:
-      collection: MaleCoughs
-    CatMeow:
-      collection: CatMeows
-    CatHisses:
-      collection: CatHisses
     MonkeyScreeches:
       collection: MonkeyScreeches
-    RobotBeep:
-      collection: RobotBeeps
     Yawn:
       collection: MonkeyScreeches
     Snore:
       collection: MonkeyScreeches
-    Honk:
-      collection: BikeHorn
-    Sigh:
-      collection: MaleSigh
     Crying:
       collection: MonkeyScreeches
-    Whistle:
-      collection: Whistles
-    Weh:
-      collection: Weh
-    Hew:
-      collection: Hew
-    Gasp:
-      collection: MaleGasp
-    DefaultDeathgasp:
-      collection: MaleDeathGasp
-    Gulp:
-      path: /Audio/_Goobstation/Voice/Human/gulp.ogg
 
 - type: emoteSounds
+  parent: UnisexMoth
   id: MaleMoth
-  params:
-    variation: 0.125
   sounds:
-    Buzz:
-      path: /Audio/Voice/Moth/moth_scream.ogg
-    Scream:
-      collection: MothScreams
-    Laugh:
-      path: /Audio/Voice/Moth/moth_laugh.ogg
-    Chitter:
-      path: /Audio/Voice/Moth/moth_chitter.ogg
-    Squeak:
-      path: /Audio/Voice/Moth/moth_squeak.ogg
-    Weh:
-      collection: Weh
-    Hew:
-      collection: Hew
-    Honk:
-      collection: BikeHorn
-    CatMeow:
-      collection: CatMeows
     Gasp:
       collection: MaleGasp
     DefaultDeathgasp:
       collection: MothDeathGasp
-    Flap:
-      path: /Audio/_Goobstation/Voice/Moth/moth_flap.ogg
-    Gulp:
-      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
-    Surprised:
-      path: /Audio/_Goobstation/Voice/surprised.ogg
-    RobotBeep:
-      collection: RobotBeeps
     Yawn:
       collection: MaleYawn
-    Snore:
-      collection: Snores
     Sigh:
       collection: MaleSigh
     Crying:
       collection: MaleCry
-    Whistle:
-      collection: Whistles
     Sneeze:
       collection: MaleSneezes
     Cough:
       collection: MaleCoughs
 
 - type: emoteSounds
+  parent: UnisexMoth
   id: FemaleMoth
-  params:
-    variation: 0.125
   sounds:
-    Buzz:
-      path: /Audio/Voice/Moth/moth_scream.ogg
     Scream:
       collection: MothScreams
-    Laugh:
-      path: /Audio/Voice/Moth/moth_laugh.ogg
-    Chitter:
-      path: /Audio/Voice/Moth/moth_chitter.ogg
-    Squeak:
-      path: /Audio/Voice/Moth/moth_squeak.ogg
-    Weh:
-      collection: Weh
-    Hew:
-      collection: Hew
-    Honk:
-      collection: BikeHorn
-    CatMeow:
-      collection: CatMeows
     Gasp:
       collection: FemaleGasp
-    DefaultDeathgasp:
-      collection: MothDeathGasp
-    Flap:
-      path: /Audio/_Goobstation/Voice/Moth/moth_flap.ogg
-    Gulp:
-      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
-    Surprised:
-      path: /Audio/_Goobstation/Voice/surprised.ogg
-    RobotBeep:
-      collection: RobotBeeps
     Yawn:
       collection: FemaleYawn
-    Snore:
-      collection: Snores
     Sigh:
       collection: FemaleSigh
     Crying:
       collection: FemaleCry
-    Whistle:
-      collection: Whistles
     Sneeze:
       collection: FemaleSneezes
     Cough:
       collection: FemaleCoughs
 
 - type: emoteSounds
+  parent: BaseMobEmotes
   id: Brullbar
   sound:
     path: /Audio/_Goobstation/Animals/Meatzone_Howl.ogg

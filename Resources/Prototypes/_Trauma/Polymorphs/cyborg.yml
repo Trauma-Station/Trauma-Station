@@ -4,4 +4,4 @@
     entity: BorgChassisSelectable
     forced: true
     polymorphSound:
-      path: /Audio/_Goobstation/Voice/Cyborg/borgscream.ogg
+      collection: SiliconScreams
