@@ -8,36 +8,36 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Polymorph;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Goobstation.Server.Possession;
+namespace Content.Goobstation.Shared.Possession;
 
-
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentPause, AutoGenerateComponentState]
 public sealed partial class PossessedComponent : Component
 {
-    [ViewVariables]
+    [DataField]
     public EntityUid OriginalMindId;
 
-    [ViewVariables]
+    [DataField]
     public EntityUid OriginalEntity;
 
-    [ViewVariables]
+    [DataField]
     public EntityUid PossessorMindId;
 
-    [ViewVariables]
+    [DataField]
     public EntityUid PossessorOriginalEntity;
 
-    [ViewVariables]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField, AutoNetworkedField]
     public TimeSpan PossessionEndTime;
 
-    [ViewVariables]
-    public TimeSpan PossessionTimeRemaining;
-
-    [ViewVariables]
+    [DataField]
     public bool WasPacified;
 
-    [ViewVariables]
+    [DataField]
     public bool WasWeakToHoly;
 
     [ViewVariables]
@@ -49,18 +49,18 @@ public sealed partial class PossessedComponent : Component
     [DataField]
     public bool HideActions = true;
 
-    [ViewVariables]
-    public EntityUid? ActionEntity = null;
+    [DataField, AutoNetworkedField]
+    public EntityUid? ActionEntity;
 
-    [ViewVariables]
-    public EntityUid[] HiddenActions;
+    [DataField] // not networked because of engine bug
+    public EntityUid[] HiddenActions = default!;
 
     [DataField]
     public bool PolymorphEntity = true;
 
     [DataField]
-    public ProtoId<PolymorphPrototype> Polymorph = new ("ShadowJauntPermanent");
+    public ProtoId<PolymorphPrototype> Polymorph = "ShadowJauntPermanent";
 
-    [ViewVariables]
-    public readonly SoundPathSpecifier PossessionSoundPath = new ("/Audio/_Goobstation/Effects/bone_crack.ogg");
+    [DataField]
+    public SoundPathSpecifier PossessionSound = new("/Audio/_Goobstation/Effects/bone_crack.ogg");
 }
