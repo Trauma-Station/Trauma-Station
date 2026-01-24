@@ -1,4 +1,4 @@
-﻿using Content.Shared.Weather;
+using Content.Shared.Weather;
 
 namespace Content.Client.Weather;
 

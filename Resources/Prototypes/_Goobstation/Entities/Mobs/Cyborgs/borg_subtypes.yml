@@ -23,42 +23,6 @@
   spritePath: _Goobstation/Mobs/Silicon/Miner/basic.rsi
   dummyPrototype: BorgChassisMiningBasic
 
-- type: borgSubtype
-  parentBorgType: mining
-  id: mining_advanced
-  spritePath: _Goobstation/Mobs/Silicon/Miner/advanced.rsi
-  dummyPrototype: BorgChassisMiningAdvanced
-
-- type: borgSubtype
-  parentBorgType: mining
-  id: mining_coffin
-  spritePath: _Goobstation/Mobs/Silicon/Miner/coffin.rsi
-  dummyPrototype: BorgChassisMiningCoffin
-
-- type: borgSubtype
-  parentBorgType: mining
-  id: mining_lavaland
-  spritePath: _Goobstation/Mobs/Silicon/Miner/lavaland.rsi
-  dummyPrototype: BorgChassisMiningLavaland
-
-- type: borgSubtype
-  parentBorgType: mining
-  id: mining_noble
-  spritePath: _Goobstation/Mobs/Silicon/Miner/noble.rsi
-  dummyPrototype: BorgChassisMiningNoble
-
-- type: borgSubtype
-  parentBorgType: mining
-  id: mining_cricket
-  spritePath: _Goobstation/Mobs/Silicon/Miner/cricket.rsi
-  dummyPrototype: BorgChassisMiningCricket
-
-- type: borgSubtype
-  parentBorgType: mining
-  id: mining_squat
-  spritePath: _Goobstation/Mobs/Silicon/Miner/squat.rsi
-  dummyPrototype: BorgChassisMiningSquat
-
 # Engineer subtypes
 - type: borgSubtype
   parentBorgType: engineering
@@ -71,36 +35,6 @@
   id: engineer_basic
   spritePath: _Goobstation/Mobs/Silicon/Engineering/basic.rsi
   dummyPrototype: BorgChassisEngineerBasic
-
-- type: borgSubtype
-  parentBorgType: engineering
-  id: engineer_antique
-  spritePath: _Goobstation/Mobs/Silicon/Engineering/antique.rsi
-  dummyPrototype: BorgChassisEngineerAntique
-
-- type: borgSubtype
-  parentBorgType: engineering
-  id: engineer_standart
-  spritePath: _Goobstation/Mobs/Silicon/Engineering/standart.rsi
-  dummyPrototype: BorgChassisEngineerStandart
-
-- type: borgSubtype
-  parentBorgType: engineering
-  id: engineer_noble
-  spritePath: _Goobstation/Mobs/Silicon/Engineering/noble.rsi
-  dummyPrototype: BorgChassisEngineerNoble
-
-- type: borgSubtype
-  parentBorgType: engineering
-  id: engineer_cricket
-  spritePath: _Goobstation/Mobs/Silicon/Engineering/cricket.rsi
-  dummyPrototype: BorgChassisEngineerCricket
-
-- type: borgSubtype
-  parentBorgType: engineering
-  id: engineer_rover
-  spritePath: _Goobstation/Mobs/Silicon/Engineering/rover.rsi
-  dummyPrototype: BorgChassisEngineerRover
 
 # Janitor subtypes
 - type: borgSubtype
@@ -115,42 +49,6 @@
   spritePath: _Goobstation/Mobs/Silicon/Janitor/basic.rsi
   dummyPrototype: BorgChassisJanitorBasic
 
-- type: borgSubtype
-  parentBorgType: janitor
-  id: janitor_mopbot
-  spritePath: _Goobstation/Mobs/Silicon/Janitor/mopbot.rsi
-  dummyPrototype: BorgChassisJanitorMopbot
-
-- type: borgSubtype
-  parentBorgType: janitor
-  id: janitor_standart
-  spritePath: _Goobstation/Mobs/Silicon/Janitor/standart.rsi
-  dummyPrototype: BorgChassisJanitorStandart
-
-- type: borgSubtype
-  parentBorgType: janitor
-  id: janitor_custodi
-  spritePath: _Goobstation/Mobs/Silicon/Janitor/custodi.rsi
-  dummyPrototype: BorgChassisJanitorCustodi
-
-- type: borgSubtype
-  parentBorgType: janitor
-  id: janitor_noble
-  spritePath: _Goobstation/Mobs/Silicon/Janitor/noble.rsi
-  dummyPrototype: BorgChassisJanitorNoble
-
-- type: borgSubtype
-  parentBorgType: janitor
-  id: janitor_cricket
-  spritePath: _Goobstation/Mobs/Silicon/Janitor/cricket.rsi
-  dummyPrototype: BorgChassisJanitorCricket
-
-- type: borgSubtype
-  parentBorgType: janitor
-  id: janitor_rover
-  spritePath: _Goobstation/Mobs/Silicon/Janitor/rover.rsi
-  dummyPrototype: BorgChassisJanitorRover
-
 # Medical subtypes
 - type: borgSubtype
   parentBorgType: medical
@@ -160,51 +58,9 @@
 
 - type: borgSubtype
   parentBorgType: medical
-  id: medical_standart
-  spritePath: _Goobstation/Mobs/Silicon/Medical/standart.rsi
-  dummyPrototype: BorgChassisMedicalStandart
-
-- type: borgSubtype
-  parentBorgType: medical
   id: medical_medbot
   spritePath: _Goobstation/Mobs/Silicon/Medical/medbot.rsi
   dummyPrototype: BorgChassisMedicalMedbot
-
-- type: borgSubtype
-  parentBorgType: medical
-  id: medical_needles
-  spritePath: _Goobstation/Mobs/Silicon/Medical/needles.rsi
-  dummyPrototype: BorgChassisMedicalNeedles
-
-- type: borgSubtype
-  parentBorgType: medical
-  id: medical_advanced
-  spritePath: _Goobstation/Mobs/Silicon/Medical/advanced.rsi
-  dummyPrototype: BorgChassisMedicalAdvanced
-
-- type: borgSubtype
-  parentBorgType: medical
-  id: medical_qualified
-  spritePath: _Goobstation/Mobs/Silicon/Medical/qualified.rsi
-  dummyPrototype: BorgChassisMedicalQualified
-
-- type: borgSubtype
-  parentBorgType: medical
-  id: medical_noble
-  spritePath: _Goobstation/Mobs/Silicon/Medical/noble.rsi
-  dummyPrototype: BorgChassisMedicalNoble
-
-- type: borgSubtype
-  parentBorgType: medical
-  id: medical_cricket
-  spritePath: _Goobstation/Mobs/Silicon/Medical/cricket.rsi
-  dummyPrototype: BorgChassisMedicalCricket
-
-- type: borgSubtype
-  parentBorgType: medical
-  id: medical_rover
-  spritePath: _Goobstation/Mobs/Silicon/Medical/rover.rsi
-  dummyPrototype: BorgChassisMedicalRover
 
 # Service subtypes
 - type: borgSubtype
@@ -215,14 +71,8 @@
 
 - type: borgSubtype
   parentBorgType: service
-  id: service_standart
-  spritePath: _Goobstation/Mobs/Silicon/Service/standart.rsi
-  dummyPrototype: BorgChassisServiceStandart
-
-- type: borgSubtype
-  parentBorgType: service
   id: service_brobot
-  spritePath: _Goobstation/Mobs/Silicon/Service/standart.rsi
+  spritePath: _Goobstation/Mobs/Silicon/Service/brobot.rsi
   dummyPrototype: BorgChassisServiceBrobot
 
 - type: borgSubtype
@@ -233,30 +83,6 @@
 
 - type: borgSubtype
   parentBorgType: service
-  id: service_cricket
-  spritePath: _Goobstation/Mobs/Silicon/Service/cricket.rsi
-  dummyPrototype: BorgChassisServiceCricket
-
-- type: borgSubtype
-  parentBorgType: service
-  id: service_kent
-  spritePath: _Goobstation/Mobs/Silicon/Service/kent.rsi
-  dummyPrototype: BorgChassisServiceKent
-
-- type: borgSubtype
-  parentBorgType: service
-  id: service_noble
-  spritePath: _Goobstation/Mobs/Silicon/Service/noble.rsi
-  dummyPrototype: BorgChassisServiceNoble
-
-- type: borgSubtype
-  parentBorgType: service
   id: service_rich
   spritePath: _Goobstation/Mobs/Silicon/Service/rich.rsi
   dummyPrototype: BorgChassisServiceRich
-
-- type: borgSubtype
-  parentBorgType: service
-  id: service_rover
-  spritePath: _Goobstation/Mobs/Silicon/Service/rover.rsi
-  dummyPrototype: BorgChassisServiceRover

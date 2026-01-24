@@ -47,6 +47,18 @@
     - Revolutionary
 
 - type: construction
+  id: Devastator
+  graph: RevGuns
+  startNode: start
+  targetNode: Devastator
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary
+
+- type: construction
   id: RevIED
   graph: RevIED
   startNode: start

@@ -4,7 +4,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Body.Systems;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Popups;
 using Content.Server.Tools.Innate;
@@ -14,6 +13,7 @@ using Content.Shared._Imp.Drone;
 using Content.Shared.Emoting;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
+using Content.Shared.Gibbing;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -33,7 +33,7 @@ namespace Content.Server._Imp.Drone
 {
     public sealed class DroneSystem : SharedDroneSystem
     {
-        [Dependency] private readonly BodySystem _bodySystem = default!;
+        [Dependency] private readonly GibbingSystem _gibbing = default!;
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly TagSystem _tagSystem = default!;
         [Dependency] private readonly EntityLookupSystem _lookup = default!;
@@ -120,8 +120,7 @@ namespace Content.Server._Imp.Drone
                 if (TryComp<InnateToolComponent>(uid, out var innate))
                     _innateToolSystem.Cleanup(uid, innate);
 
-                if (TryComp<BodyComponent>(uid, out var body))
-                    _bodySystem.GibBody(uid, body: body);
+                _gibbing.Gib(uid);
                 QueueDel(uid);
             }
         }

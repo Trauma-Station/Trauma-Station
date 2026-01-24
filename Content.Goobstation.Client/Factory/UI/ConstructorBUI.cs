@@ -132,7 +132,7 @@ public sealed class ConstructorBUI : BoundUserInterface
             if (_whitelist.IsWhitelistFail(recipe.EntityWhitelist, user))
                 continue;
 
-            if (searching 
+            if (searching
                 && recipe.Name != null
                 && !recipe.Name.ToLowerInvariant().Contains(search))
                 continue;

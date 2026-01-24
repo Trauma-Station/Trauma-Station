@@ -1,21 +1,4 @@
-using System.Linq;
-using System.Numerics;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Organ;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Prototypes;
-using Content.Shared.DragDrop;
-using Content.Shared.Gibbing.Components;
-using Content.Shared.Gibbing.Events;
-using Content.Shared.Gibbing.Systems;
-using Content.Shared.Inventory;
-using Robust.Shared.Audio;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
-using Robust.Shared.Map;
-using Robust.Shared.Utility;
-
-// Shitmed Change
+// <Trauma>
 using Content.Shared._Shitmed.Body.Events;
 using Content.Shared._Shitmed.Body.Part;
 using Content.Shared._Shitmed.CCVar;
@@ -25,18 +8,32 @@ using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Systems;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
-using Content.Shared.Silicons.Borgs.Components;
-using Content.Shared.Mobs.Systems;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
+using Content.Shared.Rejuvenate;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Standing;
 using Robust.Shared.Network;
-using Content.Shared.Rejuvenate;
-using Content.Shared.Popups;
-using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
+// </Trauma>
+using System.Linq;
+using System.Numerics;
+using Content.Shared.Body.Components;
+using Content.Shared.Body.Organ;
+using Content.Shared.Body.Part;
+using Content.Shared.Body.Prototypes;
+using Content.Shared.DragDrop;
+using Content.Shared.Gibbing;
+using Content.Shared.Inventory;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
+using Robust.Shared.Map;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.Body.Systems;
 
@@ -49,20 +46,17 @@ public partial class SharedBodySystem
      * - Each "connection" is a body part (e.g. arm, hand, etc.) and each part can also contain organs.
      */
 
-    [Dependency] private readonly GibbingSystem _gibbingSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
 
     // Shitmed Change Start
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly WoundSystem _woundSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TraumaSystem _trauma = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
     // Shitmed Change End
 
     private const float GibletLaunchImpulse = 8;
     private const float GibletLaunchImpulseVariance = 3;
-    private float _medicalHealingTickrate = 2f;
 
     private void InitializeBody()
     {
@@ -73,14 +67,14 @@ public partial class SharedBodySystem
         SubscribeLocalEvent<BodyComponent, ComponentInit>(OnBodyInit);
         SubscribeLocalEvent<BodyComponent, MapInitEvent>(OnBodyMapInit);
         SubscribeLocalEvent<BodyComponent, CanDragEvent>(OnBodyCanDrag);
+        SubscribeLocalEvent<BodyComponent, BeingGibbedEvent>(OnBeingGibbed);
         SubscribeLocalEvent<BodyComponent, StandAttemptEvent>(OnStandAttempt); // Shitmed Change
         SubscribeLocalEvent<BodyComponent, ProfileLoadFinishedEvent>(OnProfileLoadFinished); // Shitmed change
         SubscribeLocalEvent<BodyComponent, IsEquippingAttemptEvent>(OnBeingEquippedAttempt); // Shitmed Change
         SubscribeLocalEvent<BodyComponent, AttemptStopPullingEvent>(OnAttemptStopPulling); // Goobstation
 
         // Shitmed Change: to prevent people from falling immediately as rejuvenated
-        SubscribeLocalEvent<BodyComponent, RejuvenateEvent>(OnRejuvenate);
-        Subs.CVar(_cfg, SurgeryCVars.MedicalHealingTickrate, val => _medicalHealingTickrate = val, true);
+        SubscribeLocalEvent<BodyComponent, RejuvenateEvent>(OnRejuvenate, before: [ typeof(DamageableSystem) ]);
     }
 
     private void OnAttemptStopPulling(Entity<BodyComponent> ent, ref AttemptStopPullingEvent args) // Goobstation
@@ -368,117 +362,26 @@ public partial class SharedBodySystem
         }
     }
 
-    public virtual HashSet<EntityUid> GibBody(
-        EntityUid bodyId,
-        bool gibOrgans = false,
-        BodyComponent? body = null,
-        bool launchGibs = true,
-        Vector2? splatDirection = null,
-        float splatModifier = 1,
-        Angle splatCone = default,
-        SoundSpecifier? gibSoundOverride = null,
-        // Shitmed Change
-        GibType gib = GibType.Gib,
-        GibContentsOption contents = GibContentsOption.Drop,
-        List<string>? allowedContainers = null,
-        List<string>? excludedContainers = null)
+    private void OnBeingGibbed(Entity<BodyComponent> ent, ref BeingGibbedEvent args)
     {
-        var gibs = new HashSet<EntityUid>();
-
-        if (!Resolve(bodyId, ref body, logMissing: false))
-            return gibs;
-
-        if (TryGetRootPart(bodyId, out var root) && TryComp(root.Value.Owner, out GibbableComponent? gibbable)) // ShitMed - TryGet
-            gibSoundOverride ??= gibbable.GibSound;
-
-
-        var parts = GetBodyChildren(bodyId, body).ToArray();
-        gibs.EnsureCapacity(parts.Length);
+        var parts = GetBodyChildren(ent, ent).ToArray();
+        args.Giblets.EnsureCapacity(args.Giblets.Capacity + parts.Length);
         foreach (var part in parts)
         {
-
-            _gibbingSystem.TryGibEntityWithRef(bodyId, part.Id, gib, contents, ref gibs, playAudio: false,
-                launchGibs: true, launchDirection: splatDirection, launchImpulse: GibletLaunchImpulse * splatModifier,
-                launchImpulseVariance: GibletLaunchImpulseVariance, launchCone: splatCone,
-                allowedContainers: allowedContainers, excludedContainers: excludedContainers);
-
-            if (!gibOrgans)
-                continue;
-
             foreach (var organ in GetPartOrgans(part.Id, part.Component))
             {
-                _gibbingSystem.TryGibEntityWithRef(bodyId, organ.Id, GibType.Drop, GibContentsOption.Skip,
-                    ref gibs, playAudio: false, launchImpulse: GibletLaunchImpulse * splatModifier,
-                    launchImpulseVariance: GibletLaunchImpulseVariance, launchCone: splatCone,
-                    allowedContainers: allowedContainers, excludedContainers: excludedContainers);
+                args.Giblets.Add(organ.Id);
             }
+            PredictedQueueDel(part.Id);
         }
 
-        var bodyTransform = Transform(bodyId);
-        if (TryComp<InventoryComponent>(bodyId, out var inventory))
+        foreach (var item in _inventory.GetHandOrInventoryEntities(ent.Owner))
         {
-            foreach (var item in _inventory.GetHandOrInventoryEntities(bodyId))
-            {
-                SharedTransform.DropNextTo(item, (bodyId, bodyTransform));
-                gibs.Add(item);
-            }
+            args.Giblets.Add(item);
         }
-        _audioSystem.PlayPredicted(gibSoundOverride, bodyTransform.Coordinates, null);
-        return gibs;
     }
 
     // Shitmed Change Start
-
-    public virtual HashSet<EntityUid> GibPart(
-        EntityUid partId,
-        BodyPartComponent? part = null,
-        bool launchGibs = true,
-        Vector2? splatDirection = null,
-        float splatModifier = 1,
-        Angle splatCone = default,
-        SoundSpecifier? gibSoundOverride = null)
-    {
-        var gibs = new HashSet<EntityUid>();
-
-        if (!Resolve(partId, ref part, logMissing: false)
-            || part.Body is not null)
-            return gibs;
-
-        _gibbingSystem.TryGibEntityWithRef(partId, partId, GibType.Gib, GibContentsOption.Drop, ref gibs,
-                playAudio: true, launchGibs: true, launchDirection: splatDirection, launchImpulse: GibletLaunchImpulse * splatModifier,
-                launchImpulseVariance: GibletLaunchImpulseVariance, launchCone: splatCone);
-
-        if (HasComp<InventoryComponent>(partId))
-        {
-            foreach (var item in _inventory.GetHandOrInventoryEntities(partId))
-            {
-                SharedTransform.AttachToGridOrMap(item);
-                gibs.Add(item);
-            }
-        }
-        _audioSystem.PlayPredicted(gibSoundOverride, Transform(partId).Coordinates, null);
-        return gibs;
-    }
-
-    public virtual bool BurnPart(EntityUid partId,
-        BodyPartComponent? part = null)
-    {
-        if (!Resolve(partId, ref part, logMissing: false))
-            return false;
-
-        if (part.Body is { } bodyEnt)
-        {
-            if (IsPartRoot(bodyEnt, partId, part: part))
-                return false;
-
-            DropSlotContents((partId, part));
-            QueueDel(partId);
-            return true;
-        }
-
-        return false;
-    }
-
     private void OnProfileLoadFinished(EntityUid uid, BodyComponent component, ProfileLoadFinishedEvent args)
     {
         if (!TryComp<HumanoidAppearanceComponent>(uid, out var humanoid)
@@ -527,6 +430,10 @@ public partial class SharedBodySystem
     private void OnRejuvenate(EntityUid ent, BodyComponent body, ref RejuvenateEvent args)
     {
         RestoreBody((ent, body)); // Goobstation
+        foreach (var part in GetBodyChildren(ent, body))
+        {
+            RaiseLocalEvent(part.Id, args);
+        }
     }
 
     // Goob edit start

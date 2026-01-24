@@ -3053,7 +3053,6 @@ entities:
     - type: SpreaderGrid
     - type: GridPathfinding
     - type: ImplicitRoof
-    - type: FTLDrive
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 2742
@@ -27346,7 +27345,7 @@ entities:
       - stampedColor: '#006600FF'
         stampedName: stamp-component-stamped-name-centcom
       content: >-
-        ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀ 
+        ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀
 
         ║░██░░░░██░║
 
@@ -27356,7 +27355,7 @@ entities:
 
         ║░██░░░███░║─ Central Field Command
 
-        ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀ 
+        ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀
 
         ────────────────────⋆⋅☆⋅⋆──────────────────
 

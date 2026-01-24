@@ -11,7 +11,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Goobstation.Common.NTR;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.NTR;
 using Content.Goobstation.Shared.NTR.Documents;
 using Content.Goobstation.Shared.NTR.Events;
@@ -26,6 +26,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
+using Content.Shared.NameIdentifier;
 using Content.Shared.Paper;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
@@ -52,7 +53,9 @@ public sealed class NtrTaskSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly TagSystem _tag = default!;
 
-    private const string NameIdentifierGroup = "Task";
+    public static readonly ProtoId<NameIdentifierGroupPrototype> NameIdentifierGroup = "Task";
+    public static readonly ProtoId<TagPrototype> Bottle = "Bottle";
+    public static readonly ProtoId<TagPrototype> Vial = "Vial";
 
     public override void Initialize()
     {
@@ -270,7 +273,7 @@ public sealed class NtrTaskSystem : EntitySystem
 
     private bool TryHandleVial(EntityUid item, EntityUid console, NtrTaskConsoleComponent component)
     {
-        if (!_tag.HasTag(item, "Vial") && !_tag.HasTag(item, "Bottle"))
+        if (!_tag.HasTag(item, Vial) && !_tag.HasTag(item, Bottle))
             return false;
 
         var station = _station.GetOwningStation(console);

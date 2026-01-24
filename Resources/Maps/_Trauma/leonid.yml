@@ -14544,7 +14544,6 @@ entities:
     - type: BecomesStation
       id: Leonid
     - type: ImplicitRoof
-    - type: FTLDrive
     - type: ExplosionAirtightGrid
   - uid: 4
     components:

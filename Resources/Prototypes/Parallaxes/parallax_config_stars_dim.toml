@@ -76,4 +76,3 @@ seed = 3748
 # Colour-to-alpha.
 [[layers]]
 type = "toalpha"
-

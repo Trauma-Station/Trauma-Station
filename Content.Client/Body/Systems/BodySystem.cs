@@ -76,10 +76,5 @@ public sealed class BodySystem : SharedBodySystem
                 ApplyMarkingToPart(markingPrototype, marking.MarkingColors, marking.Visible, sprite);
             }
     }
-
-    protected override void RemoveBodyMarkings(EntityUid target, BodyPartAppearanceComponent partAppearance, HumanoidAppearanceComponent bodyAppearance)
-    {
-        return;
-    }
     // Shitmed Change End
 }

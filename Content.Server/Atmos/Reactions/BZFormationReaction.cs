@@ -33,7 +33,7 @@ public sealed partial class BZFormationReaction : IGasReactionEffect
         var nitrousOxideDecomposed =  Math.Max(4f * (initPlasma / (initN2O + initPlasma) - 0.75f), 0);
         var nitrogenAdded = 0f;
         var oxygenAdded = 0f;
-        if (nitrousOxideDecomposed > 0) 
+        if (nitrousOxideDecomposed > 0)
         {
             var amountDecomposed = 0.4f * bzFormed * nitrousOxideDecomposed;
             nitrogenAdded = amountDecomposed;

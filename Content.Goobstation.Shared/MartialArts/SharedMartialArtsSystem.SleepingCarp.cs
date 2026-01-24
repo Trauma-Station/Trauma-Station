@@ -22,14 +22,18 @@ using Content.Goobstation.Shared.MartialArts.Events;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.NPC.Prototypes;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Reflect;
 using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.MartialArts;
 
 public partial class SharedMartialArtsSystem
 {
+    public static readonly ProtoId<NpcFactionPrototype> DragonFaction = "Dragon";
+
     private void InitializeSleepingCarp()
     {
         SubscribeLocalEvent<CanPerformComboComponent, SleepingCarpGnashingTeethPerformedEvent>(OnSleepingCarpGnashing);
@@ -86,7 +90,7 @@ public partial class SharedMartialArtsSystem
             case >= 3:
                 if (!TryGrantMartialArt(args.User, ent.Comp))
                     return;
-                _faction.AddFaction(args.User, "Dragon");
+                _faction.AddFaction(args.User, DragonFaction);
                 var userReflect = EnsureComp<ReflectComponent>(args.User);
                 userReflect.Examinable = false; // no doxxing scarp users by examining lmao
                 userReflect.ReflectProb = 1;

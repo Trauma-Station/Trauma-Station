@@ -66,6 +66,8 @@
   - RevTurretBullet
   - RevPistolBullet
   - RevRifleBullet
+  - RevBuckShell
+  - RevSlugShell
 
 - type: latheRecipePack
   id: RevMicroElectronicsStatic

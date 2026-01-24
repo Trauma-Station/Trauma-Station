@@ -497,7 +497,7 @@
     quickEquip: false
 #<Trauma>
   - type: Perishable
-    rotAfter: 300
+    rotAfter: 900 # won't someone please think of the clowns
     molsPerSecondPerUnitMass: 0
   - type: RotInto
     entity: FoodRot
@@ -564,6 +564,16 @@
   - type: Clothing
     sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     equippedPrefix: peel
+# <Trauma>
+  - type: Perishable
+    rotAfter: 999999999 # I am a hero
+    molsPerSecondPerUnitMass: 0
+  - type: RotInto
+    entity: FoodRot
+    stage: 1
+# </Trauma>
+
+
 
 - type: entity
   name: carrot
@@ -2451,7 +2461,7 @@
 
 - type: entity
   name: bungo pit
-  parent: FoodInjectableBase
+  parent: FoodUnperishableBase # Trauma - Huge seed doesn't rot, also poison hoarding.
   id: FoodBungoPit
   components:
   - type: Sprite
@@ -2756,7 +2766,7 @@
 
 - type: entity
   name: cherry pit
-  parent: FoodInjectableBase
+  parent: FoodUnperishableBase # Trauma - Basically a seed.
   id: TrashCherryPit
   components:
   - type: Sprite

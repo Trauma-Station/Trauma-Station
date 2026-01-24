@@ -29,4 +29,3 @@ comp-solution-transfer-verb-toggle = Toggle to {$amount}u
 comp-solution-transfer-set-amount = Transfer amount set to {$amount}u.
 comp-solution-transfer-set-amount-max = Max: {$amount}u
 comp-solution-transfer-set-amount-min = Min: {$amount}u
-

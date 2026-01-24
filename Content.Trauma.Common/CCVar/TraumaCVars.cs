@@ -20,6 +20,12 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<bool> GhostBarEnabled =
         CVarDef.Create("trauma.ghost_bar_enabled", true, CVar.SERVER | CVar.REPLICATED);
 
+    /// <summary>
+    /// Whether to disable pathfinding, used for tests to not balloon memory usage and runtime.
+    /// </summary>
+    public static readonly CVarDef<bool> DisablePathfinding =
+        CVarDef.Create("trauma.disable_pathfinding", false, CVar.SERVER);
+
     #endregion
 
     #region Mining rewards

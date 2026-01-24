@@ -70,6 +70,7 @@
     range: 4
     energyConsumption: 2700000
     disableDuration: 5
+  - type: DeleteOnTrigger
 
 # DYMERE
 

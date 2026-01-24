@@ -12,19 +12,20 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Goobstation.Common.Heretic;
 using Content.Server._Goobstation.Objectives.Components;
-using Content.Server.Body.Systems;
 using Content.Server.Heretic.Components;
 using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Prototypes;
+using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Server.Revolutionary.Components;
 using Content.Shared.Mind;
 using Content.Shared.Heretic;
 using Content.Server.Heretic.EntitySystems;
-using Content.Shared.Gibbing.Events;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.Store.Components;
 
 namespace Content.Server.Heretic.Ritual;
 
@@ -62,7 +63,7 @@ namespace Content.Server.Heretic.Ritual;
     // this is awful but it works so i'm not complaining
     protected SharedMindSystem _mind = default!;
     protected HereticSystem _heretic = default!;
-    protected BodySystem _body = default!;
+    protected GibbingSystem _gibbing = default!;
     protected EntityLookupSystem _lookup = default!;
     [Dependency] protected IPrototypeManager _proto = default!;
     [Dependency] protected ILogManager _log = default!;
@@ -75,18 +76,12 @@ namespace Content.Server.Heretic.Ritual;
     {
         _mind = args.EntityManager.System<SharedMindSystem>();
         _heretic = args.EntityManager.System<HereticSystem>();
-        _body = args.EntityManager.System<BodySystem>();
+        _gibbing = args.EntityManager.System<GibbingSystem>();
         _lookup = args.EntityManager.System<EntityLookupSystem>();
-        _proto = IoCManager.Resolve<IPrototypeManager>();
-        _log = IoCManager.Resolve<ILogManager>();
 
         uids = new();
 
-        if (!args.EntityManager.TryGetComponent<HereticComponent>(args.Performer, out var hereticComp))
-        {
-            outstr = string.Empty;
-            return false;
-        }
+        var hereticComp = args.Mind.Comp;
 
         var lookup = _lookup.GetEntitiesInRange(args.Platform, 1.5f);
         if (lookup.Count == 0)
@@ -103,7 +98,7 @@ namespace Content.Server.Heretic.Ritual;
             || args.EntityManager.HasComponent<BorgChassisComponent>(look) // no borgs
             || OnlyTargets
                 && hereticComp.SacrificeTargets.All(x => x.Entity != args.EntityManager.GetNetEntity(look)) // only targets
-                && !args.EntityManager.HasComponent<HereticComponent>(look)) // or other heretics
+                && !_heretic.TryGetHereticComponent(look, out _, out _)) // or other heretics
                 continue;
 
             if (mobstate.CurrentState != Shared.Mobs.MobState.Alive)
@@ -122,11 +117,11 @@ namespace Content.Server.Heretic.Ritual;
 
     public override void Finalize(RitualData args)
     {
-        if (!args.EntityManager.TryGetComponent(args.Performer, out HereticComponent? heretic))
-        {
-            uids = new();
+        var heretic = args.Mind.Comp;
+
+        if (!args.EntityManager.TryGetComponent(args.Mind, out StoreComponent? store) ||
+            !args.EntityManager.TryGetComponent(args.Mind, out MindComponent? mind))
             return;
-        }
 
         var knowledgeGain = 0f;
         for (var i = 0; i < Max && i < uids.Count; i++)
@@ -138,7 +133,7 @@ namespace Content.Server.Heretic.Ritual;
 
             var isCommand = args.EntityManager.HasComponent<CommandStaffComponent>(uid);
             var isSec = args.EntityManager.HasComponent<SecurityStaffComponent>(uid);
-            var isHeretic = args.EntityManager.HasComponent<HereticComponent>(uid);
+            var isHeretic = _heretic.TryGetHereticComponent(uid, out var otherHeretic, out var otherMind);
             knowledgeGain +=
                 isHeretic ||
                 heretic.SacrificeTargets.Any(x => x.Entity == args.EntityManager.GetNetEntity(uid))
@@ -148,7 +143,7 @@ namespace Content.Server.Heretic.Ritual;
             try
             {
                 // YES!!! GIB!!!
-                _body.GibBody(uid, true);
+                _gibbing.Gib(uid);
             }
             catch (Exception e)
             {
@@ -159,26 +154,27 @@ namespace Content.Server.Heretic.Ritual;
                 _sawmill.Error(e.Message);
             }
 
-            // update objectives
-            if (_mind.TryGetMind(args.Performer, out var mindId, out var mind))
-            {
-                // this is godawful dogshit. but it works :)
-                if (_mind.TryFindObjective((mindId, mind), "HereticSacrificeObjective", out var crewObj)
-                && args.EntityManager.TryGetComponent<HereticSacrificeConditionComponent>(crewObj, out var crewObjComp))
-                    crewObjComp.Sacrificed += 1;
+            // Sacrificed heretics lose their powers forever
+            if (otherMind != EntityUid.Invalid && otherHeretic is { } h)
+                args.EntityManager.RemoveComponentDeferred(otherMind, h);
 
-                if (_mind.TryFindObjective((mindId, mind), "HereticSacrificeHeadObjective", out var crewHeadObj)
-                && args.EntityManager.TryGetComponent<HereticSacrificeConditionComponent>(crewHeadObj, out var crewHeadObjComp)
-                && isCommand)
-                    crewHeadObjComp.Sacrificed += 1;
-            }
+            // update objectives
+            // this is godawful dogshit. but it works :)
+            if (_mind.TryFindObjective((args.Mind, mind), "HereticSacrificeObjective", out var crewObj)
+            && args.EntityManager.TryGetComponent<HereticSacrificeConditionComponent>(crewObj, out var crewObjComp))
+                crewObjComp.Sacrificed += 1;
+
+            if (_mind.TryFindObjective((args.Mind, mind), "HereticSacrificeHeadObjective", out var crewHeadObj)
+            && args.EntityManager.TryGetComponent<HereticSacrificeConditionComponent>(crewHeadObj, out var crewHeadObjComp)
+            && isCommand)
+                crewHeadObjComp.Sacrificed += 1;
         }
 
         if (knowledgeGain > 0)
-            _heretic.UpdateKnowledge(args.Performer, heretic, knowledgeGain);
+            _heretic.UpdateMindKnowledge((args.Mind, args.Mind.Comp, store, mind), args.Performer, knowledgeGain);
 
         // reset it because it refuses to work otherwise.
         uids = new();
-        args.EntityManager.EventBus.RaiseLocalEvent(args.Performer, new EventHereticUpdateTargets());
+        args.EntityManager.EventBus.RaiseLocalEvent(args.Mind, new EventHereticUpdateTargets());
     }
 }

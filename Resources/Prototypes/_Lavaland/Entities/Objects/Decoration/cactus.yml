@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   name: fruiting cacti
   parent: BaseStructure
   id: FruitCactus

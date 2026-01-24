@@ -1,0 +1,105 @@
+<BoxContainer
+    xmlns="https://spacestation14.io"
+    xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    VerticalExpand="True"
+    Orientation="Vertical">
+    <!-- <Shitmed> - multimodal health analyzer, buttons to select each mode -->
+    <BoxContainer Orientation="Horizontal" Margin="8 10 8 10">
+        <!-- TODO SHITMED: loc strings for Text -->
+        <Button Name="BodyButton" Text="Body" MinWidth="130" MinHeight="30" HorizontalExpand="True" StyleClasses="OpenRight"/>
+        <Button Name="OrgansButton" Text="Organs" MinWidth="130" MinHeight="30" HorizontalExpand="True" StyleClasses="OpenBoth"/>
+        <Button Name="ChemicalsButton" Text="Chemicals" MinWidth="130" MinHeight="30" HorizontalExpand="True" StyleClasses="OpenLeft"/>
+    </BoxContainer>
+    <!-- </Shitmed> -->
+    <PanelContainer StyleClasses="LowDivider"/>
+    <BoxContainer Orientation="Horizontal" VerticalExpand="True">
+        <BoxContainer VerticalExpand="True" Orientation="Vertical">
+            <Label Name="NoPatientDataText" Text="{Loc health-analyzer-window-no-patient-data-text}" />
+            <Button Name="ReturnButton" Text="{Loc 'health-analyzer-window-return-button-text'}" Margin="0 0 0 10" HorizontalExpand="False"/> <!-- Shitmed -->
+
+	        <BoxContainer Name="PatientDataContainer" Margin="0 0 0 5" Orientation="Vertical">
+	            <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
+		            <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
+		                <PanelContainer>
+		                    <SpriteView OverrideDirection="South" Name="SpriteView" Access="Public" SetSize="96 96" /> <!-- Shitmed - 96x96, remove scale due to shitcode -->
+		                    <!-- <Shitmed> - targeting doll (holy shit fuck you mocho) -->
+		                    <PanelContainer Name="PartView" SetSize="57 96" Margin="18 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left">
+		                        <PanelContainer SetSize="15 33" Margin="4 0 0 0" HorizontalAlignment="Left">
+		                            <TextureButton Name="RightArmButton" MinSize="15 25" StyleClasses="TargetDollButtonRightArm" VerticalAlignment="Top"/>
+		                            <TextureButton Name="RightHandButton" MinSize="15 15" VerticalAlignment="Bottom" StyleClasses="TargetDollButtonRightHand"/>
+		                        </PanelContainer>
+			                    <PanelContainer SetSize="43 75" Margin="0 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
+			                        <TextureButton Name="HeadButton" MinSize="28 23" VerticalAlignment="Top" HorizontalAlignment="Center" StyleClasses="TargetDollButtonHead"/>
+			                        <TextureButton Name="ChestButton" SetSize="28 30" Margin="0 18 0 0" VerticalAlignment="Top" HorizontalAlignment="Center" StyleClasses="TargetDollButtonChest"/>
+			                        <PanelContainer MinSize="38 35" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+			                            <TextureButton Name="GroinButton" MinSize="28 15" VerticalAlignment="Top" HorizontalAlignment="Center" StyleClasses="TargetDollButtonGroin"/>
+			                            <PanelContainer MinSize="20 30" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+			                                <TextureButton Name="LeftLegButton" MinSize="15 28" VerticalAlignment="Top" HorizontalAlignment="Left" StyleClasses="TargetDollButtonLeftLeg"/>
+			                                <TextureButton Name="LeftFootButton" MinSize="20 10" VerticalAlignment="Bottom" StyleClasses="TargetDollButtonLeftFoot"/>
+			                            </PanelContainer>
+			                            <PanelContainer MinSize="20 30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+			                                <TextureButton Name="RightLegButton" MinSize="15 28" VerticalAlignment="Top" HorizontalAlignment="Right" StyleClasses="TargetDollButtonRightLeg"/>
+			                                <TextureButton Name="RightFootButton" MinSize="20 10" VerticalAlignment="Bottom" HorizontalAlignment="Center" StyleClasses="TargetDollButtonRightFoot"/>
+			                            </PanelContainer>
+			                        </PanelContainer>
+			                    </PanelContainer>
+			                    <PanelContainer SetSize="15 33" Margin="0 0 4 0" HorizontalAlignment="Right">
+			                        <TextureButton Name="LeftArmButton" MinSize="15 25" StyleClasses="TargetDollButtonLeftArm" VerticalAlignment="Top"/>
+			                        <TextureButton Name="LeftHandButton" MinSize="15 15" VerticalAlignment="Bottom" StyleClasses="TargetDollButtonLeftHand"/>
+			                    </PanelContainer>
+			                </PanelContainer>
+			                <!-- </Shitmed> -->
+		                </PanelContainer>
+		            </BoxContainer>
+		            <TextureRect Name="NoDataTex" Access="Public" SetSize="96 96" Visible="false" Stretch="KeepAspectCentered" TexturePath="/Textures/Interface/Misc/health_analyzer_out_of_range.png"/>
+		            <BoxContainer Margin="5 0 0 0" Orientation="Vertical" VerticalAlignment="Top">
+		                <RichTextLabel Name="NameLabel" SetWidth="150" />
+		                <Label Name="SpeciesLabel" VerticalAlignment="Top" StyleClasses="LabelSubText" />
+		                <Label Name="PartNameLabel" VerticalAlignment="Bottom" StyleClasses="LabelSubText"/> <!-- Shitmed -->
+		            </BoxContainer>
+		            <Label Margin="0 0 5 0" HorizontalExpand="True" HorizontalAlignment="Right" VerticalExpand="True"
+		               VerticalAlignment="Top" Name="ScanModeLabel"
+		               Text="{Loc 'health-analyzer-window-entity-unknown-text'}" />
+		        </BoxContainer>
+
+		        <PanelContainer StyleClasses="LowDivider" />
+		        <GridContainer Margin="0 5 0 0" Columns="2">
+		            <Label Text="{Loc 'health-analyzer-window-entity-status-text'}" />
+		            <Label Name="StatusLabel" />
+		            <Label Text="{Loc 'health-analyzer-window-entity-temperature-text'}" />
+		            <Label Name="TemperatureLabel" />
+		            <Label Text="{Loc 'health-analyzer-window-entity-blood-level-text'}" />
+		            <Label Name="BloodLabel" />
+		            <Label Name="DamageLabelHeading" Text="{Loc 'health-analyzer-window-entity-damage-total-text'}" /> <!-- Shitmed - added Name -->
+		            <Label Name="DamageLabel" />
+		            <!-- <Goob> - vital damage readout -->
+		            <Label Name="DamageLabelHeadingVital" Text="{Loc 'health-analyzer-window-entity-damage-vital-text'}"/>
+		            <Label Name="DamageLabelVital"/>
+		            <!-- </Goob> -->
+		        </GridContainer>
+		    </BoxContainer>
+
+		    <PanelContainer Name="AlertsDivider" Visible="False" StyleClasses="LowDivider" />
+
+		    <BoxContainer Name="AlertsContainer" Visible="False" Margin="0 5" Orientation="Vertical" HorizontalAlignment="Center"/>
+
+		    <PanelContainer StyleClasses="LowDivider" />
+
+		    <BoxContainer Name="GroupsContainer" Margin="0 5 0 5" Orientation="Vertical"/>
+		    <!-- <Goob> - diseases -->
+		    <PanelContainer Name="DiseasesDivider" Visible="False" StyleClasses="LowDivider"/>
+		    <BoxContainer Name="DiseasesContainer" Visible="False" Margin="0 5" Orientation="Vertical"/>
+		    <!-- </Goob> -->
+	    </BoxContainer>
+	    <customControls:VSeparator VerticalExpand="True" StyleClasses="LowDivider" />
+	    <!-- <Shitmed> - conditions readout -->
+	    <ScrollContainer Margin="16 16 16 16" ReturnMeasure="True" VerticalExpand="True" HorizontalExpand="True">
+	        <BoxContainer Name="ConditionsContainer" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+	            <!-- TODO SHITMED: loc string for Text -->
+	            <RichTextLabel Name="ConditionsLabel" Text="Conditions" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalExpand="True"/>
+	            <BoxContainer Name="ConditionsListContainer" Orientation="Vertical" HorizontalExpand="True" HorizontalAlignment="Left"/>
+	        </BoxContainer>
+	    </ScrollContainer>
+    </BoxContainer>
+    <!-- </Shitmed> -->
+</BoxContainer>

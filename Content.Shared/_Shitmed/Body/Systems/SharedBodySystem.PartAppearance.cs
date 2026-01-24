@@ -217,7 +217,21 @@ public partial class SharedBodySystem
         RemoveBodyMarkings(entity, component, bodyAppearance);
     }
 
-    protected abstract void ApplyPartMarkings(EntityUid target, BodyPartAppearanceComponent component);
+    protected virtual void ApplyPartMarkings(EntityUid target, BodyPartAppearanceComponent component)
+    {
+        // done clientside
+    }
 
-    protected abstract void RemoveBodyMarkings(EntityUid target, BodyPartAppearanceComponent partAppearance, HumanoidAppearanceComponent bodyAppearance);
+    private void RemoveBodyMarkings(EntityUid target, BodyPartAppearanceComponent partAppearance, HumanoidAppearanceComponent bodyAppearance)
+    {
+        foreach (var (visualLayer, markingList) in partAppearance.Markings)
+        {
+            foreach (var marking in markingList)
+            {
+                _humanoid.RemoveMarking(target, marking.MarkingId, sync: false, humanoid: bodyAppearance);
+            }
+        }
+
+        Dirty(target, bodyAppearance);
+    }
 }

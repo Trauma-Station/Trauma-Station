@@ -19,4 +19,3 @@ public interface IFullScreenImageJumpscare
     /// </summary>
     public void Jumpscare(SpriteSpecifier.Texture image, ICommonSession? session = null);
 }
-

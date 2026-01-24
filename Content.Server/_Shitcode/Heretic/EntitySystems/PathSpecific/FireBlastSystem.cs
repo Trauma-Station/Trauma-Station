@@ -8,11 +8,9 @@ using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Atmos.Components;
-using Content.Shared.Damage.Components;
 using Content.Shared.Heretic;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
-using Content.Shared.StatusEffect;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics;
@@ -27,6 +25,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
     [Dependency] private readonly FlammableSystem _flammable = default!;
     [Dependency] private readonly StunSystem _stun = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly SharedHereticSystem _heretic = default!;
 
     public override void Initialize()
     {
@@ -56,7 +55,6 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         _audio.PlayPvs(origin.Comp.Sound, pos);
 
         var ghoulQuery = GetEntityQuery<GhoulComponent>();
-        var hereticQuery = GetEntityQuery<HereticComponent>();
         var flammableQuery = GetEntityQuery<FlammableComponent>();
         var mobStateQuery = GetEntityQuery<MobStateComponent>();
 
@@ -64,7 +62,8 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         var result = _lookup.GetEntitiesInRange(origin, origin.Comp.BonusRange, flags: LookupFlags.Dynamic)
             .Select(x => (x, flammableQuery.CompOrNull(x)))
             .Where(x => x.Item2 != null && x.Item1 != origin.Owner &&
-                        (!hereticQuery.TryComp(x.Item1, out var heretic) || heretic.CurrentPath != "Ash") &&
+                        (!_heretic.TryGetHereticComponent(x.Item1, out var heretic, out _) ||
+                         heretic.CurrentPath != "Ash") &&
                         !ghoulQuery.HasComp(x.Item1) &&
                         mobStateQuery.HasComp(x.Item1));
 
@@ -75,7 +74,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
             _stun.KnockdownOrStun(uid, origin.Comp.BonusKnockdownTime);
 
             Dmg.TryChangeDamage(uid,
-                origin.Comp.FireBlastBonusDamage,
+                origin.Comp.FireBlastBonusDamage * Body.GetVitalBodyPartRatio(uid),
                 false,
                 false,
                 targetPart: TargetBodyPart.All,
@@ -101,7 +100,6 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         }
 
         var ghoulQuery = GetEntityQuery<GhoulComponent>();
-        var hereticQuery = GetEntityQuery<HereticComponent>();
         var flammableQuery = GetEntityQuery<FlammableComponent>();
         var mobStateQuery = GetEntityQuery<MobStateComponent>();
 
@@ -113,7 +111,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
             .Select(x => (x, flammableQuery.CompOrNull(x), mobStateQuery.CompOrNull(x),
                 (Xform.GetWorldPosition(x) - pos).LengthSquared()))
             .Where(x => x is { Item2: not null, Item3: not null } && x.Item1 != origin.Owner &&
-                        (!hereticQuery.TryComp(x.Item1, out var heretic) || heretic.CurrentPath != "Ash") &&
+                        (!_heretic.TryGetHereticComponent(x.Item1, out var heretic, out _) || heretic.CurrentPath != "Ash") &&
                         !ghoulQuery.HasComp(x.Item1) &&
                         !Status.HasEffectComp<FireBlastedStatusEffectComponent>(x.Item1) &&
                         !origin.Comp.HitEntities.Contains(x.Item1))
@@ -162,7 +160,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         _flammable.AdjustFireStacks(target, origin.Comp.FireStacks, flam, true, origin.Comp.FireProtectionPenetration);
 
         Dmg.TryChangeDamage(target,
-            origin.Comp.FireBlastDamage,
+            origin.Comp.FireBlastDamage * Body.GetVitalBodyPartRatio(target),
             origin: origin,
             targetPart: TargetBodyPart.All,
             splitDamage: SplitDamageBehavior.SplitEnsureAll,
@@ -185,7 +183,6 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
 
         var flammableQuery = GetEntityQuery<FlammableComponent>();
         var ghoulQuery = GetEntityQuery<GhoulComponent>();
-        var hereticQuery = GetEntityQuery<HereticComponent>();
         var mobStateQuery = GetEntityQuery<MobStateComponent>();
 
         foreach (var ent in result)
@@ -199,14 +196,14 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
             if (ghoulQuery.HasComp(ent.HitEntity))
                 continue;
 
-            if (hereticQuery.TryComp(ent.HitEntity, out var heretic) && heretic.CurrentPath == "Ash")
+            if (_heretic.TryGetHereticComponent(ent.HitEntity, out var heretic, out _) && heretic.CurrentPath == "Ash")
                 continue;
 
             if (flammableQuery.TryComp(ent.HitEntity, out var flam))
                 _flammable.AdjustFireStacks(ent.HitEntity, origin.Comp.CollisionFireStacks, flam, true, origin.Comp.FireProtectionPenetration);
 
             Dmg.TryChangeDamage(ent.HitEntity,
-                origin.Comp.FireBlastBeamCollideDamage,
+                origin.Comp.FireBlastBeamCollideDamage * Body.GetVitalBodyPartRatio(ent.HitEntity),
                 false,
                 false,
                 targetPart: TargetBodyPart.All,

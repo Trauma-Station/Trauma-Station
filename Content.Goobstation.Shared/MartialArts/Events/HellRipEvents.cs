@@ -26,4 +26,3 @@ public sealed partial class HellRipHeadRipPerformedEvent : EntityEventArgs;
 
 [Serializable, NetSerializable, DataDefinition]
 public sealed partial class HellRipTearDownPerformedEvent : EntityEventArgs;
-

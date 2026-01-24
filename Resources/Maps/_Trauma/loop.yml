@@ -5146,7 +5146,6 @@ entities:
     - type: BecomesStation
       id: Loop
     - type: ImplicitRoof
-    - type: FTLDrive
     - type: ExplosionAirtightGrid
 - proto: AcousticGuitarInstrument
   entities:

@@ -37,7 +37,7 @@
     - tasks:
         - !type:HTNCompoundTask
           task: IdleSpinCompound
-          
+
 - type: htnCompound
   id: EnergyTurretCompound
   branches:
@@ -45,7 +45,7 @@
         - !type:HTNPrimitiveTask
           operator: !type:UtilityOperator
             proto: NearbyGunTargets
-        
+
         - !type:HTNPrimitiveTask
           preconditions:
             - !type:KeyExistsPrecondition

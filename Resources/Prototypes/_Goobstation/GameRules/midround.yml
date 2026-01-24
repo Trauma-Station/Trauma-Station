@@ -546,17 +546,6 @@
   parent: BaseGameRule
   id: VoxRaidersMidround
   components:
-  - type: AntagObjectives
-    objectives:
-    - EscapeThiefShuttleObjective
-  - type: AntagRandomObjectives
-    sets:
-    - groups: ThiefBigObjectiveGroups
-      prob: 0.7
-      maxPicks: 2
-    - groups: ThiefObjectiveGroups
-      maxPicks: 15
-    maxDifficulty: 2
   - type: StationEvent
     earliestStart: 35
     weight: 2.5
@@ -578,16 +567,27 @@
     agentName: ghost-role-information-vox-raider-name
     definitions:
     - spawnerPrototype: SpawnPointGhostVoxRaider
-      min: 3
-      max: 4
+      min: 2
+      max: 3
       pickPlayer: false
       mindRoles:
       - MindRoleGhostRoleTeamAntagonist
+      - MindRoleThief
       briefing:
         text: vox-raider-role-greeting
         color: Purple
         sound: /Audio/Misc/thief_greeting.ogg
-
+  - type: AntagObjectives
+    objectives:
+    - EscapeThiefShuttleObjective
+  - type: AntagRandomObjectives
+    sets:
+    - groups: ThiefBigObjectiveGroups
+      prob: 0.7
+      maxPicks: 2
+    - groups: ThiefObjectiveGroups
+      maxPicks: 15
+    maxDifficulty: 4
 
 - type: entity
   id: ClownGoblinMigration

@@ -27,7 +27,7 @@
   - PinpointerArtifact
   - PinpointerAnomaly
   - PinpointerBorg
-  position: -3,-3
+  position: -7,-6
   technologyPrerequisites:
   - DeterrenceTechnologies
 
@@ -47,7 +47,7 @@
   - ModsuitGauntlets
   - ModsuitShell
   - ModsuitPlatingExternal
-  position: -4,-1
+  position: -6,-7
   technologyPrerequisites:
   - MagnetsTech
 
@@ -63,7 +63,7 @@
   recipeUnlocks:
   - SlimeGrinderMachineCircuitboard
   - ClothingBackpackXenoBioTank
-  position: -3,3
+  position: -6,-2
   technologyPrerequisites:
   - BasicXenoArcheology
 
@@ -78,7 +78,7 @@
   cost: 5000
   recipeUnlocks:
   - MaterialBSCrystal
-  position: -4,-2
+  position: -8,-6
   technologyPrerequisites:
   - DeterrenceTechnologies
 
@@ -94,7 +94,7 @@
   recipeUnlocks:
   - ExperimentalCircuitBoard
   - AiRemoteBrain # Trauma - Move boris module further down techtree
-  position: -4,0
+  position: -7,-5
   technologyPrerequisites:
   - AdvancedAnomalyResearch
 
@@ -109,6 +109,6 @@
   cost: 15000
   recipeUnlocks:
   - XenoCompatibilityImplanter
-  position: -5,0
+  position: -8,-5
   technologyPrerequisites:
   - ExperimentalScience

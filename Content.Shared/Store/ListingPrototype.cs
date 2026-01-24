@@ -20,7 +20,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Heretic.Prototypes; // Goob
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -274,6 +274,6 @@ public partial class ListingData : IEquatable<ListingData>, ICloneable
 /// <summary>
 ///     Defines a set item listing that is available in a store
 /// </summary>
-[Prototype("listing")]
+[Prototype]
 [DataDefinition]
 public sealed partial class ListingPrototype : ListingData, IPrototype;

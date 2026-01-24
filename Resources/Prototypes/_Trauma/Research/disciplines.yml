@@ -1,0 +1,12 @@
+- type: techDiscipline
+  id: Robotics
+  name: research-discipline-robotic
+  color: "#eeac34"
+  icon:
+    sprite: Interface/Misc/job_icons.rsi
+    state: Roboticist
+  tierPrerequisites:
+    1: 0
+    2: 0.75
+    3: 0.75
+  uiName: RBT

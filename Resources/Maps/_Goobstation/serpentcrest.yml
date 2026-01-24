@@ -7359,7 +7359,6 @@ entities:
       id: Serpentcrest
     - type: ImplicitRoof
     - type: NavMap
-    - type: FTLDrive
   - uid: 26286
     components:
     - type: MetaData
@@ -7508,7 +7507,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-    - type: FTLDrive
   - uid: 26470
     components:
     - type: MetaData
@@ -7565,7 +7563,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-    - type: FTLDrive
   - uid: 27950
     components:
     - type: MetaData
@@ -7622,7 +7619,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-    - type: FTLDrive
   - uid: 27997
     components:
     - type: MetaData
@@ -7679,7 +7675,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-    - type: FTLDrive
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 6092

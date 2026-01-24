@@ -4,10 +4,9 @@
   priority: 11
   showTo:
     components:
-      - CosmicCult
-      - CosmicAstralBody
-      - ShowAntagIcons
-      - RogueAscended
+    - CosmicCult
+    - CosmicAstralBody
+    - ShowAntagIcons
   icon:
     sprite: /Textures/_DV/CosmicCult/Icons/antag_icons.rsi
     state: CosmicCult
@@ -18,10 +17,9 @@
   priority: 11
   showTo:
     components:
-      - CosmicCult
-      - CosmicAstralBody
-      - ShowAntagIcons
-      - RogueAscended
+    - CosmicCult
+    - CosmicAstralBody
+    - ShowAntagIcons
   icon:
     sprite: /Textures/_DV/CosmicCult/Icons/antag_icons.rsi
     state: CosmicCultLead

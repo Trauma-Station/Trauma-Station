@@ -65,4 +65,3 @@ reagent-desc-fourteen-loko = A highly processed liquid substance barely-passing 
 
 reagent-name-shamblers-juice = Shambler's Juice
 reagent-desc-shamblers-juice = ~Shake me up some of that Shambler's Juice!~
-

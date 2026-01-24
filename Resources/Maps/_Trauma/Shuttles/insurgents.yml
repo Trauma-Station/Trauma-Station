@@ -75,7 +75,6 @@ entities:
         nodes: []
     - type: SpreaderGrid
     - type: ImplicitRoof
-    - type: FTLDrive
     - type: GridAtmosphere
       version: 2
       data:

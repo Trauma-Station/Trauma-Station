@@ -8,7 +8,7 @@ using System.Linq;
 // </Trauma>
 using System.Linq;
 using Content.Server.Store.Components;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -59,6 +59,9 @@ public sealed partial class StoreSystem : EntitySystem
     // goob edit - store now transfers on pm
     private void OnPolymorphed(Entity<StoreComponent> ent, ref PolymorphedEvent args)
     {
+        if (args.IsRevert)
+            return;
+
         _polymorph.CopyPolymorphComponent<StoreComponent>(ent, args.NewEntity);
     }
 

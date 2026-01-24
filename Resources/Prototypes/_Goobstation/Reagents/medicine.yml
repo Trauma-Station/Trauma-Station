@@ -79,9 +79,9 @@
             Cellular: -3
             Radiation: -3
       - !type:PopupMessage
-          type: Local
-          messages: [ "reagent-popup-panacea" ]
-          probability: 0.2
+        type: Local
+        messages: [ "reagent-popup-panacea" ]
+        probability: 0.2
       - !type:AdjustReagent
         reagent: Pax
         amount: -7.5
@@ -89,17 +89,17 @@
         reagent: BZ
         amount: -7.5
       - !type:GenericStatusEffect
-          key: Jitter
-          time: 10.0
-          type: Remove
-      - !type:GenericStatusEffect
-          key: SeeingRainbows
-          time: 10.0
-          type: Remove
-      - !type:GenericStatusEffect
-          key: Drunk
-          time: 10.0
-          type: Remove
+        key: Jitter
+        time: 10.0
+        type: Remove
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
+        time: 10.0
+        type: Remove
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDrunk
+        time: 10
+        type: Remove
       - !type:EyeDamage
       - !type:RemoveComponents
         components:

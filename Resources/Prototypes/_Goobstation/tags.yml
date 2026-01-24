@@ -116,9 +116,6 @@
   id: CameraElectronics
 
 - type: Tag
-  id: CannotSuicideAny
-
-- type: Tag
   id: Chair
 
 - type: Tag
@@ -829,7 +826,7 @@
   id: HereticCostume
 
 - type: Tag
-  id: VinylSleeveFit  
+  id: VinylSleeveFit
 
 - type: Tag
   id: CD

@@ -57,6 +57,9 @@ public abstract partial class SharedSurgerySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
+    public static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
+    public static readonly ProtoId<DamageTypePrototype> Poison = "Poison";
+
     private EntityQuery<BodyPartComponent> _partQuery;
     private EntityQuery<SurgeryIgnoreClothingComponent> _ignoreQuery;
     private EntityQuery<SurgeryStepComponent> _stepQuery;
@@ -313,7 +316,7 @@ public abstract partial class SharedSurgerySystem
         if (targetPart != default)
         {
             // We reward players for properly affixing the parts by healing a little bit of damage, and enabling the part temporarily.
-            _wounds.TryHealWoundsOnWoundable(targetPart.Id, 12f, out _, damageGroup: _prototypes.Index<DamageGroupPrototype>("Brute"));
+            _wounds.TryHealWoundsOnWoundable(targetPart.Id, 12f, out _, damageGroup: _prototypes.Index(Brute));
             RemComp<BodyPartReattachedComponent>(targetPart.Id);
         }
     }
@@ -704,7 +707,7 @@ public abstract partial class SharedSurgerySystem
             surgeryTargetComponent.SepsisImmune)
             return;
 
-        var sepsis = new DamageSpecifier(_prototypes.Index<DamageTypePrototype>("Poison"), 5);
+        var sepsis = new DamageSpecifier(_prototypes.Index(Poison), 5);
         var ev = new SurgeryStepDamageEvent(args.User, args.Body, args.Part, args.Surgery, sepsis, 0.5f);
         RaiseLocalEvent(args.Body, ref ev);
     }

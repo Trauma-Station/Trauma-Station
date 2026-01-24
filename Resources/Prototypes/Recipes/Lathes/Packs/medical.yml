@@ -15,8 +15,9 @@
   - Syringe
   - PillCanister
   - HandLabeler
-  - ChemicalPayload
-  - BaseChemistryEmptyVial
+  - ChemicalPayload # Goob
+  - ChemistryEmptyVial
+  - ChemistryEmptyVialSmall
   - Dropper
 
 - type: latheRecipePack

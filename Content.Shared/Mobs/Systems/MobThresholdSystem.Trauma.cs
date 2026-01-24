@@ -5,10 +5,12 @@ using Content.Shared._Shitmed.Medical.Surgery.Wounds;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs.Components;
+using Robust.Shared.Network;
 
 namespace Content.Shared.Mobs.Systems;
 
@@ -17,11 +19,20 @@ namespace Content.Shared.Mobs.Systems;
 /// </summary>
 public sealed partial class MobThresholdSystem
 {
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly WoundSystem _wound = default!;
 
+    private EntityQuery<BodyComponent> _bodyQuery;
+    private EntityQuery<BodyPartComponent> _partQuery;
+    private EntityQuery<DamageableComponent> _damageQuery;
+
     private void InitializeTrauma()
     {
+        _bodyQuery = GetEntityQuery<BodyComponent>();
+        _partQuery = GetEntityQuery<BodyPartComponent>();
+        _damageQuery = GetEntityQuery<DamageableComponent>();
+
         SubscribeLocalEvent<MobThresholdsComponent, WoundableIntegrityChangedOnBodyEvent>(OnWoundableDamage);
     }
 
@@ -53,11 +64,11 @@ public sealed partial class MobThresholdSystem
     private Dictionary<TargetBodyPart, DamageSpecifier>? GetScaledPartsDamage(EntityUid target1, EntityUid target2)
     {
         // If the receiver is a simplemob, we don't care about any of this. Just grab the damage and go.
-        if (!TryComp<BodyComponent>(target2, out var body) || body.BodyType != BodyType.Complex)
+        if (!_bodyQuery.TryComp(target2, out var body) || body.BodyType != BodyType.Complex)
             return null;
 
         // However if they are valid for woundmed, we first check if the sender is also valid for it to build a dict.
-        if (!TryComp<BodyComponent>(target1, out var oldBody) ||
+        if (!_bodyQuery.TryComp(target1, out var oldBody) ||
             oldBody.BodyType != BodyType.Complex ||
             !_body.TryGetRootPart(target1, out var parentRootPart))
             return null;
@@ -72,7 +83,7 @@ public sealed partial class MobThresholdSystem
         foreach (var woundable in _wound.GetAllWoundableChildren(parentRootPart.Value))
         {
             if (woundable.Comp.WoundableIntegrity >= woundable.Comp.IntegrityCap
-                || !TryComp<DamageableComponent>(parentRootPart.Value, out var damageable)
+                || !_damageQuery.TryComp(parentRootPart.Value, out var damageable)
                 || damageable.Damage.GetTotal() == 0)
                 continue;
 

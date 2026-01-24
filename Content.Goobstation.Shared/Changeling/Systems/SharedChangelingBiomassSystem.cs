@@ -1,5 +1,5 @@
 using Content.Goobstation.Common.Changeling;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Targeting;

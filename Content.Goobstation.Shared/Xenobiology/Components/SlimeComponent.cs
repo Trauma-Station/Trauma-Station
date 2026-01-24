@@ -75,7 +75,7 @@ public sealed partial class SlimeComponent : Component
     /// <summary>
     /// The entity which has tamed this slime.
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public EntityUid? Tamer;
 
     [DataField]
@@ -84,7 +84,7 @@ public sealed partial class SlimeComponent : Component
     /// <summary>
     /// The entity, if any, currently being consumed by the slime.
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField, AutoNetworkedField]
     public EntityUid? LatchedTarget;
 
     /// <summary>

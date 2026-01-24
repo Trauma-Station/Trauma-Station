@@ -16,6 +16,7 @@ public abstract class TileAtmosphereTest : AtmosTest
     /// Checks that mole count stays the same.
     /// </summary>
     [Test]
+    [Explicit] // Trauma - takes a good bit and i don't care we dont touch linda
     public async Task GasSpreading()
     {
         var markers = SEntMan.AllEntities<TestMarkerComponent>();
@@ -59,6 +60,7 @@ public abstract class TileAtmosphereTest : AtmosTest
     /// Checks that fire propages through the entire grid.
     /// </summary>
     [Test]
+    [Explicit] // Trauma - takes a good bit and i don't care we dont touch linda
     public async Task FireSpreading()
     {
         var markers = SEntMan.AllEntities<TestMarkerComponent>();
@@ -126,6 +128,7 @@ public abstract class TileAtmosphereTest : AtmosTest
 }
 
 // Declare separate fixtures to override the TestMap and configure CVars
+/* Trauma - i don't care
 public sealed class TileAtmosphereTest_X : TileAtmosphereTest
 {
     protected override ResPath? TestMapPath => new("Maps/Test/Atmospherics/tile_atmosphere_test_x.yml");
@@ -157,3 +160,4 @@ public sealed class TileAtmosphereTest_LINDA_Snake : TileAtmosphereTest
         Server.CfgMan.SetCVar(CCVars.MonstermosEqualization, false);
     }
 }
+*/

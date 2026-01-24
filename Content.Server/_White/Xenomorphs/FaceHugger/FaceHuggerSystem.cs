@@ -25,7 +25,7 @@ using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Server.Construction.Conditions;
 using Content.Shared._White.Xenomorphs.FaceHugger;
