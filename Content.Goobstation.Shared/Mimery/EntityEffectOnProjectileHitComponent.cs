@@ -1,8 +1,9 @@
 using Content.Shared.EntityEffects;
+using Robust.Shared.GameStates;
 
-namespace Content.Goobstation.Server.Mimery;
+namespace Content.Goobstation.Shared.Mimery;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class EntityEffectOnProjectileHitComponent : Component
 {
     [DataField]

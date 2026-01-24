@@ -1,6 +1,6 @@
+using Robust.Shared.GameStates;
+
 namespace Content.Goobstation.Shared.Mimery;
 
-[RegisterComponent]
-public sealed partial class AdvancedMimeryActionComponent : Component
-{
-}
+[RegisterComponent, NetworkedComponent]
+public sealed partial class AdvancedMimeryActionComponent : Component;
