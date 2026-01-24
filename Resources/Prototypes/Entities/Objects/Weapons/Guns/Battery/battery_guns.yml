@@ -1039,20 +1039,13 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/energy_shotgun.rsi
   - type: Gun
-    fireRate: 2
+    fireRate: 1.25 # Trauma, was 2
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider
     proto: BulletLaserSpreadNarrow
     fireCost: 80
   # Goob edit start
-  #- type: BatteryWeaponFireModes
-  #  fireModes:
-  #  - proto: BulletLaserSpreadNarrow
-  #    fireCost: 80
-  #  - proto: BulletDisablerSmgSpread
-  #    fireCost: 48
-  #    pacifismAllowedMode: true
   - type: AmmoSelector
     prototypes:
       - BulletLaserSpread
@@ -1076,8 +1069,8 @@
     heldPrefix: energy
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Battery
-    maxCharge: 480
-    startingCharge: 480
+    maxCharge: 1600 # Trauma, was 480 (4 shots > 16 shots)
+    startingCharge: 1600 # Trauma, was 480
 
 - type: entity
   name: energy magnum
