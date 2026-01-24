@@ -4,8 +4,8 @@ meta:
   engineVersion: 270.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/13/2026 20:29:54
-  entityCount: 27861
+  time: 01/16/2026 19:15:28
+  entityCount: 27869
 maps:
 - 1
 grids:
@@ -5939,7 +5939,7 @@ entities:
             0: 61423
           8,-1:
             0: 12320
-            4: 34944
+            2: 34944
           -8,-4:
             0: 30583
           -8,-5:
@@ -6290,7 +6290,7 @@ entities:
             0: 30583
           6,-12:
             1: 4369
-            2: 204
+            4: 204
             3: 49152
           6,-11:
             1: 61713
@@ -6299,10 +6299,10 @@ entities:
             0: 29424
           6,-13:
             1: 4369
-            2: 49152
+            4: 49152
             3: 204
           7,-12:
-            2: 17
+            4: 17
             3: 4096
             1: 17476
           7,-11:
@@ -6311,7 +6311,7 @@ entities:
           7,-10:
             0: 61680
           7,-13:
-            2: 4096
+            4: 4096
             1: 17476
             3: 17
           8,-12:
@@ -6349,7 +6349,7 @@ entities:
             1: 8704
           8,0:
             0: 63523
-            4: 8
+            2: 8
           8,1:
             0: 61440
           8,2:
@@ -6629,24 +6629,24 @@ entities:
             1: 35064
             0: 771
           9,0:
-            4: 15
+            2: 15
             0: 65296
           9,1:
             0: 47232
           9,2:
             0: 48955
           9,-1:
-            4: 65520
+            2: 65520
             0: 1
           10,0:
-            4: 1
+            2: 1
             0: 65292
           10,1:
             0: 56789
           10,2:
             0: 64961
           10,-1:
-            4: 4368
+            2: 4368
             0: 57548
           11,0:
             0: 30543
@@ -7554,7 +7554,7 @@ entities:
           16,-12:
             0: 61166
           15,-12:
-            4: 14
+            2: 14
             0: 65521
           16,-11:
             0: 65262
@@ -7622,7 +7622,7 @@ entities:
             0: 65294
           15,-13:
             0: 4383
-            4: 60928
+            2: 60928
           16,-16:
             0: 60338
           15,-16:
@@ -8417,17 +8417,17 @@ entities:
           immutable: True
           moles: {}
         - volume: 2500
-          temperature: 293.15
-          moles:
-            Plasma: 6666.982
-        - volume: 2500
-          temperature: 293.15
-          moles: {}
-        - volume: 2500
           temperature: 235
           moles:
             Oxygen: 27.225372
             Nitrogen: 102.419266
+        - volume: 2500
+          temperature: 293.15
+          moles: {}
+        - volume: 2500
+          temperature: 293.15
+          moles:
+            Plasma: 6666.982
         - volume: 2500
           temperature: 293.15
           moles:
@@ -11458,12 +11458,6 @@ entities:
     - type: Transform
       pos: 24.5,16.5
       parent: 2
-    - type: Door
-      secondsUntilStateChange: -47579.832
-      state: Opening
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
   - uid: 318
     components:
     - type: Transform
@@ -14413,6 +14407,22 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 54.5,-50.5
+      parent: 2
+  - uid: 27862
+    components:
+    - type: MetaData
+      name: Cryonics APC
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 33.5,-37.5
+      parent: 2
+  - uid: 27869
+    components:
+    - type: MetaData
+      name: CMO Office APC
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 38.5,-41.5
       parent: 2
 - proto: APCElectronics
   entities:
@@ -34232,16 +34242,6 @@ entities:
     - type: Transform
       pos: 36.5,-31.5
       parent: 2
-  - uid: 4399
-    components:
-    - type: Transform
-      pos: 36.5,-32.5
-      parent: 2
-  - uid: 4400
-    components:
-    - type: Transform
-      pos: 37.5,-32.5
-      parent: 2
   - uid: 4401
     components:
     - type: Transform
@@ -34947,16 +34947,6 @@ entities:
     - type: Transform
       pos: 25.5,-31.5
       parent: 2
-  - uid: 4542
-    components:
-    - type: Transform
-      pos: 24.5,-31.5
-      parent: 2
-  - uid: 4543
-    components:
-    - type: Transform
-      pos: 26.5,-31.5
-      parent: 2
   - uid: 4544
     components:
     - type: Transform
@@ -34966,11 +34956,6 @@ entities:
     components:
     - type: Transform
       pos: 27.5,-33.5
-      parent: 2
-  - uid: 4546
-    components:
-    - type: Transform
-      pos: 27.5,-32.5
       parent: 2
   - uid: 4547
     components:
@@ -35051,11 +35036,6 @@ entities:
     components:
     - type: Transform
       pos: 33.5,-26.5
-      parent: 2
-  - uid: 4563
-    components:
-    - type: Transform
-      pos: 35.5,-32.5
       parent: 2
   - uid: 4564
     components:
@@ -36042,11 +36022,6 @@ entities:
     - type: Transform
       pos: 24.5,-60.5
       parent: 2
-  - uid: 4761
-    components:
-    - type: Transform
-      pos: 34.5,-32.5
-      parent: 2
   - uid: 4762
     components:
     - type: Transform
@@ -36072,11 +36047,6 @@ entities:
     - type: Transform
       pos: 37.5,-35.5
       parent: 2
-  - uid: 4767
-    components:
-    - type: Transform
-      pos: 38.5,-35.5
-      parent: 2
   - uid: 4768
     components:
     - type: Transform
@@ -36086,21 +36056,6 @@ entities:
     components:
     - type: Transform
       pos: 35.5,-33.5
-      parent: 2
-  - uid: 4770
-    components:
-    - type: Transform
-      pos: 37.5,-33.5
-      parent: 2
-  - uid: 4771
-    components:
-    - type: Transform
-      pos: 38.5,-34.5
-      parent: 2
-  - uid: 4772
-    components:
-    - type: Transform
-      pos: 38.5,-36.5
       parent: 2
   - uid: 4773
     components:
@@ -40076,6 +40031,21 @@ entities:
     components:
     - type: Transform
       pos: 6.5,-61.5
+      parent: 2
+  - uid: 27863
+    components:
+    - type: Transform
+      pos: 33.5,-36.5
+      parent: 2
+  - uid: 27864
+    components:
+    - type: Transform
+      pos: 33.5,-37.5
+      parent: 2
+  - uid: 27868
+    components:
+    - type: Transform
+      pos: 38.5,-41.5
       parent: 2
 - proto: CableApcStack
   entities:
@@ -47438,6 +47408,61 @@ entities:
       parent: 2
 - proto: CableMV
   entities:
+  - uid: 4399
+    components:
+    - type: Transform
+      pos: 29.5,-35.5
+      parent: 2
+  - uid: 4400
+    components:
+    - type: Transform
+      pos: 29.5,-34.5
+      parent: 2
+  - uid: 4542
+    components:
+    - type: Transform
+      pos: 33.5,-36.5
+      parent: 2
+  - uid: 4543
+    components:
+    - type: Transform
+      pos: 33.5,-35.5
+      parent: 2
+  - uid: 4546
+    components:
+    - type: Transform
+      pos: 32.5,-35.5
+      parent: 2
+  - uid: 4563
+    components:
+    - type: Transform
+      pos: 30.5,-35.5
+      parent: 2
+  - uid: 4761
+    components:
+    - type: Transform
+      pos: 31.5,-35.5
+      parent: 2
+  - uid: 4767
+    components:
+    - type: Transform
+      pos: 27.5,-33.5
+      parent: 2
+  - uid: 4770
+    components:
+    - type: Transform
+      pos: 29.5,-33.5
+      parent: 2
+  - uid: 4771
+    components:
+    - type: Transform
+      pos: 28.5,-33.5
+      parent: 2
+  - uid: 4772
+    components:
+    - type: Transform
+      pos: 26.5,-33.5
+      parent: 2
   - uid: 7029
     components:
     - type: Transform
@@ -57067,6 +57092,21 @@ entities:
     components:
     - type: Transform
       pos: 54.5,-50.5
+      parent: 2
+  - uid: 27865
+    components:
+    - type: Transform
+      pos: 33.5,-37.5
+      parent: 2
+  - uid: 27866
+    components:
+    - type: Transform
+      pos: 38.5,-41.5
+      parent: 2
+  - uid: 27867
+    components:
+    - type: Transform
+      pos: 39.5,-41.5
       parent: 2
 - proto: CableMVStack
   entities:
@@ -82821,7 +82861,7 @@ entities:
       pos: -34.5,-14.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -41768.37
+      secondsUntilStateChange: -41948.152
       state: Closing
   - uid: 13064
     components:
@@ -83314,7 +83354,7 @@ entities:
       pos: -4.5,-71.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -33516.11
+      secondsUntilStateChange: -33695.89
       state: Closing
   - uid: 13162
     components:

@@ -1551,19 +1551,6 @@
   - UplinkDisruption
 
 - type: listing
-  id: UplinkCdDiskSyndicate
-  name: uplink-cddisksyndicate-name
-  description: uplink-cddisksyndicate-desc
-  productEntity: JVNECdDiskSyndicate
-  cost:
-    Telecrystal: 1
-  categories:
-  - UplinkPointless
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-
-- type: listing
   id: UplinkCdDiskNumber
   name: uplink-cddisknumber-name
   description: uplink-cddisknumber-desc
