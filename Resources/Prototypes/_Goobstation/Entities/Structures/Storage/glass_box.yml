@@ -8,7 +8,7 @@
 - type: entity
   id: GlassBoxLawbringer
   parent: GlassBox
-  suffix: Lawbringer
+  suffix: Order
   components:
   - type: Sprite
     noRot: true
@@ -40,7 +40,7 @@
 - type: entity
   id: GlassBoxLawbringerFilled
   parent: GlassBoxLawbringer
-  suffix: Lawbringer, Filled
+  suffix: Order, Filled
   components:
   - type: ContainerFill
     containers:
