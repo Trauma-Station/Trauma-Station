@@ -102,7 +102,7 @@ public abstract class SharedDevilContractSystem : EntitySystem
         if (contract.Comp.IsVictimSigned && user != contract.Comp.ContractOwner)
         {
             var invalidUserPopup = Loc.GetString("devil-sign-invalid-user");
-            _popup.PopupEntity(invalidUserPopup, contract, user);
+            _popup.PopupClient(invalidUserPopup, contract, user);
 
             args.Cancelled = true;
             return;
