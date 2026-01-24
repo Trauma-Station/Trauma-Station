@@ -4,8 +4,8 @@ meta:
   engineVersion: 271.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/24/2026 09:43:08
-  entityCount: 30328
+  time: 01/24/2026 10:08:15
+  entityCount: 30330
 maps:
 - 1
 grids:
@@ -70004,7 +70004,7 @@ entities:
   - uid: 30323
     components:
     - type: Transform
-      pos: -20.453568,-4.478104
+      pos: -20.56152,-4.358922
       parent: 2
 - proto: CargoTechFab
   entities:
@@ -152078,7 +152078,7 @@ entities:
   - uid: 30322
     components:
     - type: Transform
-      pos: -20.468315,-2.4777522
+      pos: -20.566994,-2.3927484
       parent: 2
 - proto: Retractor
   entities:
@@ -153514,6 +153514,11 @@ entities:
     components:
     - type: Transform
       pos: -47.570698,-18.444723
+      parent: 2
+  - uid: 30329
+    components:
+    - type: Transform
+      pos: -20.274965,-4.620509
       parent: 2
 - proto: SignAi
   entities:
@@ -159753,6 +159758,13 @@ entities:
     components:
     - type: Transform
       pos: -15.5,-29.5
+      parent: 2
+- proto: StationAiFixerCircuitboard
+  entities:
+  - uid: 30330
+    components:
+    - type: Transform
+      pos: -20.394056,-2.6950917
       parent: 2
 - proto: StationAiFixerComputer
   entities:
