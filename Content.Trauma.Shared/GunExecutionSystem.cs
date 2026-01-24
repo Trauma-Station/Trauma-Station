@@ -217,9 +217,16 @@ public sealed class ExecutionSystem : EntitySystem
 
         // Information about the ammo like damage
         DamageSpecifier damage = new DamageSpecifier();
+        var count = 1;
 
         // Get some information from IShootable
         var ammoUid = ev.Ammo[0].Entity;
+
+
+        if (TryComp<ProjectileSpreadComponent>(ammoUid, out var projectilespread))
+        {
+            count = projectilespread.Count;
+        }
 
         // Explode if the projective is explosive for mgsGZ helicopter scene parody
         if (TryComp<ExplosiveComponent>(ammoUid, out var explosive))
@@ -260,12 +267,6 @@ public sealed class ExecutionSystem : EntitySystem
             default:
                 throw new InvalidOperationException($"Unknown shootable type [{ev.Ammo[0].Shootable}]");
         }
-
-        if (TryComp<ProjectileSpreadComponent>(ammoUid, out var projectilespread))
-        {
-            damage *= projectilespread.Count;
-        }
-
         // Clumsy people have a chance to shoot themselves (not in the head)
         if (!component.ClumsyProof &&
             TryComp<ClumsyComponent>(attacker, out var clumsy) && _random.Prob(clumsy.ClumsyDefaultCheck))
@@ -279,8 +280,10 @@ public sealed class ExecutionSystem : EntitySystem
             return;
         }
 
-        _damageableSystem.TryChangeDamage(victim, damage * component.ExecutionModifier, true, targetPart: TargetBodyPart.Head); // Mono - ExecutionModifier
-
+        for (int i = 0; i < count; i++)
+        {
+            _damageableSystem.TryChangeDamage(victim, damage * component.ExecutionModifier, true, targetPart: TargetBodyPart.Head); // Mono - ExecutionModifier
+        }
         _audioSystem.PlayPredicted(component.SoundGunshot, weapon, attacker);
 
         // Popups

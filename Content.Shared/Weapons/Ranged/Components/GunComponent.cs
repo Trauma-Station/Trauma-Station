@@ -311,7 +311,7 @@ public sealed partial class GunComponent : Component
     /// Damage multiplier when performing an execution
     /// </summary>
     [DataField]
-    public float ExecutionModifier = 9.0f;
+    public float ExecutionModifier = 11.0f;
 }
 
 [Flags]
