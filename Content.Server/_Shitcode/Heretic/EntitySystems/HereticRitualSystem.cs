@@ -426,7 +426,13 @@ public sealed class HereticRitualSystem : EntitySystem
 
     private void OnRaiseEvent(Entity<HereticRitualComponent> ent, ref RaiseHereticEventRitualEvent args)
     {
-        RaiseLocalEvent(args.Mind, args.Event, true);
+        if (args.Event is not { } ev)
+        {
+            args.Cancel();
+            return;
+        }
+
+        RaiseLocalEvent(args.Mind, ev, true);
     }
 
     private void OnProcessIngredients(Entity<HereticRitualComponent> ent, ref ProcessIngredientsRitualEvent args)

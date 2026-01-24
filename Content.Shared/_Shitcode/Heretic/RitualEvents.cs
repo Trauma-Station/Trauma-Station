@@ -117,8 +117,8 @@ public sealed partial class ProcessIngredientsRitualEvent : InputHereticRitualEv
 
 public sealed partial class RaiseHereticEventRitualEvent : BaseHereticRitualEvent
 {
-    [DataField(required: true)]
-    public object Event;
+    [DataField(required: true), NonSerialized]
+    public object? Event;
 }
 
 public sealed partial class AddKnowledgeRitualEvent : BaseHereticRitualEvent
