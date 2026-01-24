@@ -153,7 +153,6 @@ public sealed class ActionContainerSystem : EntitySystem
 
     /// <summary>
     /// Transfers an action from one container to another, while keeping the attached entity the same.
-
     /// </summary>
     /// <remarks>
     /// While the attached entity should be the same at the end, this will actually remove and then re-grant the action.

@@ -14,7 +14,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.Magic.Events;
 
 [Virtual]
-public partial class ProjectileSpellEvent : WorldTargetActionEvent // Goob edit
+public partial class ProjectileSpellEvent : WorldTargetActionEvent // Goob edit - made virtual
 {
     /// <summary>
     /// What entity should be spawned.
