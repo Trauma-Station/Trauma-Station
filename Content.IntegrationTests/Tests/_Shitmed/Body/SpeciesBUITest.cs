@@ -61,7 +61,7 @@ public sealed class SpeciesBUiTest
                 var states = GetInterfaces(bUi);
                 foreach (var key in baseKeys)
                 {
-                    Assert.That(states.ContainsKey(key), Is.True, $"Species {species.ID} has not UserInterface of type enum.{key.GetType().Name}");
+                    Assert.That(states.ContainsKey(key), Is.True, $"Species {species.ID} is missing UserInterface for enum.{key.GetType().Name}.{key}");
                 }
             }
         });

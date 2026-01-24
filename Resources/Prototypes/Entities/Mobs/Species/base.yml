@@ -199,9 +199,6 @@
       # Goobstation - changelings
       enum.StoreUiKey.Key:
         type: StoreBoundUserInterface
-      enum.WizardTeleportUiKey.Key: # Goobstation - wizard
-        type: WizardTeleportBoundUserInterface
-        requireInputValidation: false
   - type: Puller
   - type: Speech
     speechSounds: Alto
