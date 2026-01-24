@@ -9,6 +9,7 @@ using Content.Shared.Execution;
 using Content.Shared.PneumaticCannon;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Throwing;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Hitscan.Events;
@@ -44,11 +45,16 @@ public sealed class GunExecutionSystem : EntitySystem
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
+
+    private EntityQuery<ProjectileComponent> _projectileQuery;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
+
+        _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
         /* Interaction */
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<UtilityVerb>>(OnGetVerbs);
@@ -56,6 +62,7 @@ public sealed class GunExecutionSystem : EntitySystem
 
         /* AmmoImpactEvent */
         SubscribeLocalEvent<CartridgeAmmoComponent, AmmoImpactEvent>(OnCartridgeAmmoImpact);
+        SubscribeLocalEvent<ProjectileSpreadComponent, AmmoImpactEvent>(OnSpreadAmmoImpact);
         SubscribeLocalEvent<HitscanAmmoComponent, AmmoImpactEvent>(OnHitscanAmmoImpact);
 
         /* Damage modifying */
@@ -134,7 +141,8 @@ public sealed class GunExecutionSystem : EntitySystem
         var coords = Transform(args.Shooter).Coordinates;
         var projectile = PredictedSpawnAtPosition(ent.Comp.Prototype, coords);
         // now have the actual projectile impact the target
-        _projectile.DoHit(projectile, args.Target);
+        // for most bullets this just does hit, shotguns will do it for each pellet
+        DoImpact(args.Weapon, projectile, args.Shooter, args.Target);
 
         // done with the cartridge, now for caseless ammo
         if (ent.Comp.DeleteOnSpawn)
@@ -150,6 +158,16 @@ public sealed class GunExecutionSystem : EntitySystem
         var direction = GetDirection(args.Target, args.Shooter);
         var angle = _gun.GetRecoilAngle(_timing.CurTime, args.Weapon, direction.ToAngle(), args.Shooter);
         _gun.EjectCartridge(_gun.Random(args.Weapon), args.Shooter, ent, angle);
+    }
+
+    private void OnSpreadAmmoImpact(Entity<ProjectileSpreadComponent> ent, ref AmmoImpactEvent args)
+    {
+        for (var i = 1; i < ent.Comp.Count; i++)
+        {
+            // assuming that the spread entity is the same as this one, which it is for shotguns
+            // therefore just apply its effects again without spawning anything
+            _projectile.DoHit(ent, args.Target);
+        }
     }
 
     private void OnDamageModify(Entity<BeingExecutedComponent> ent, ref DamageModifyEvent args)
@@ -261,7 +279,10 @@ public sealed class GunExecutionSystem : EntitySystem
         }
 
         if (ev.Ammo[0].Entity is not {} ammo)
-            return false; // ??? shitcode
+        {
+            Log.Error($"TakeAmmoEvent for {ToPrettyString(weapon)} gave invalid ammo!");
+            return false;
+        }
 
         // let clumsy etc. cancel it now
         var selfPrevention = new SelfBeforeGunShotEvent(attacker, weapon, ev.Ammo);
@@ -283,10 +304,11 @@ public sealed class GunExecutionSystem : EntitySystem
             targeting.Target = TargetBodyPart.Head;
         }
 
+        bool success;
         // incase there's an exception
         try
         {
-            return DoImpact(weapon, ammo, attacker, victim);
+            success = DoImpact(weapon, ammo, attacker, victim);
         }
         finally
         {
@@ -295,10 +317,18 @@ public sealed class GunExecutionSystem : EntitySystem
             // restore target part as well
             targeting?.Target = oldTarget;
         }
+
+        // popups and sounds
+        if (success)
+            DoShotLogic(weapon, attacker, victim);
+        else
+            DoEmptyLogic(weapon, attacker, victim);
+
+        return success;
     }
 
     /// <summary>
-    /// Fake an impact with the bullet/item, doing popups and sound for it.
+    /// Fake an impact with the bullet/item.
     /// </summary>
     public bool DoImpact(Entity<GunComponent> gun, EntityUid ammo, EntityUid shooter, EntityUid target)
     {
@@ -306,14 +336,26 @@ public sealed class GunExecutionSystem : EntitySystem
         var ev = new AmmoImpactEvent(gun, shooter, target);
         RaiseLocalEvent(ammo, ref ev);
 
-        if (!ev.Handled) // for a gun that shoots knives etc (pneumatic cannon)
-            _projectile.DoHit(ammo, target);
+        if (!ev.Handled)
+        {
+            if (_projectileQuery.HasComp(ammo))
+                _projectile.DoHit(ammo, target); // bullets
+            else
+                DoThrowHit(ammo, shooter, target); // knives (pneumatic cannon)
+        }
 
-        if (ev.Failed)
-            DoEmptyLogic(gun, shooter, target);
-        else
-            DoShotLogic(gun, shooter, target);
         return !ev.Failed;
+    }
+
+    /// <summary>
+    /// Fake an impact with a thrown item aka non projectile.
+    /// </summary>
+    public void DoThrowHit(EntityUid ammo, EntityUid shooter, EntityUid target)
+    {
+        var thrown = EnsureComp<ThrownItemComponent>(ammo);
+        thrown.Thrower = shooter;
+        _thrownItem.ThrowCollideInteraction(thrown, ammo, target);
+        RemComp(ammo, thrown);
     }
 
     #endregion
