@@ -59,13 +59,11 @@ public sealed class ExecutionSystem : EntitySystem
     private void OnTakeAmmoHitscanBasic(Entity<HitscanBasicDamageComponent> ent, ref TakeAmmoGetDamageFromProjectileEvent args)
     {
         args.Damage = ent.Comp.Damage;
-        PredictedDel(ent.Owner);
     }
 
     private void OnTakeAmmoProjectile(Entity<ProjectileComponent> ent, ref TakeAmmoGetDamageFromProjectileEvent args)
     {
         args.Damage = ent.Comp.Damage;
-        PredictedDel(ent.Owner);
     }
 
     private void OnTakeAmmoCartridge(Entity<CartridgeAmmoComponent> ent, ref TakeAmmoGetDamageFromProjectileEvent args)
@@ -79,6 +77,8 @@ public sealed class ExecutionSystem : EntitySystem
         prototype.TryGetComponent<ProjectileComponent>(out var projectileA, Factory); // sloth forgive me
         if (projectileA != null)
             args.Damage = projectileA.Damage;
+
+        args.Delete = false;
     }
 
     private void OnGetInteractionVerbsGun(
@@ -235,10 +235,12 @@ public sealed class ExecutionSystem : EntitySystem
         if (ammoUid == null)
             return;
 
-        var ammoEvent = new TakeAmmoGetDamageFromProjectileEvent(damage);
+        var ammoEvent = new TakeAmmoGetDamageFromProjectileEvent(damage, true);
         RaiseLocalEvent(ammoUid.Value, ammoEvent);
         damage = ammoEvent.Damage;
 
+        if(ammoEvent.Delete)
+            PredictedDel(ammoUid);
 
         var selfEvent = new SelfBeforeGunShotEvent(attacker, (weapon, gunComp), ev.Ammo);
         RaiseLocalEvent(attacker, selfEvent);

@@ -7,8 +7,11 @@ namespace Content.Trauma.Shared.Executions;
 public sealed class TakeAmmoGetDamageFromProjectileEvent : EntityEventArgs
 {
     public DamageSpecifier Damage;
-    public TakeAmmoGetDamageFromProjectileEvent(DamageSpecifier damage)
+    public bool Delete;
+    public TakeAmmoGetDamageFromProjectileEvent(DamageSpecifier damage, bool delete)
     {
         Damage = damage;
+        Delete = delete;
+
     }
 }
