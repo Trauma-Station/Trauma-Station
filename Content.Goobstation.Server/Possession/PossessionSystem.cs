@@ -27,10 +27,10 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Zombies;
-using Robust.Server.Containers;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Content.Shared.Follower;
@@ -48,12 +48,15 @@ public sealed partial class PossessionSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StunSystem _stun = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ISharedAdminLogManager _admin = default!;
     [Dependency] private readonly ActionsSystem _action = default!;
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly FollowerSystem _follower = default!;
+
+    // TODO: if someone makes a suicide attempt event handle it for the comp instead of this slop
+    public static readonly ProtoId<TagPrototype> CannotSuicideAny = "CannotSuicideAny";
 
     public override void Initialize()
     {
@@ -92,7 +95,7 @@ public sealed partial class PossessionSystem : EntitySystem
 
         _action.AddAction(possessed, ref possessed.Comp.ActionEntity, possessed.Comp.EndPossessionAction);
 
-        _tag.AddTag(possessed, "CannotSuicideAny");
+        _tag.AddTag(possessed, CannotSuicideAny);
 
         possessed.Comp.PossessedContainer = _container.EnsureContainer<Container>(possessed, "PossessedContainer");
     }
@@ -120,7 +123,7 @@ public sealed partial class PossessionSystem : EntitySystem
         if (possessed.Comp.PolymorphEntity && HasComp<PolymorphedEntityComponent>(possessed))
             _polymorph.Revert(possessed.Owner);
 
-        _tag.RemoveTag(possessed, "CannotSuicideAny");
+        _tag.RemoveTag(possessed, CannotSuicideAny);
 
         // Remove associated components.
         if (!possessed.Comp.WasPacified)

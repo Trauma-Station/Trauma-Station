@@ -76,17 +76,15 @@ public sealed class ChangelingRuleSystem : GameRuleSystem<ChangelingRuleComponen
         _role.MindAddRole(mindId, mindRole.Id, mind, true);
 
         // briefing
-        // Everypony has a metadata component, why are you trycomp'ing it?
-        if (TryComp<MetaDataComponent>(target, out var metaData))
-        {
-            var briefing = Loc.GetString("changeling-role-greeting", ("name", metaData?.EntityName ?? "Unknown"));
-            var briefingShort = Loc.GetString("changeling-role-greeting-short", ("name", metaData?.EntityName ?? "Unknown"));
+        var name = Name(target) ?? Loc.GetString("generic-unknown-title");
+        var briefing = Loc.GetString("changeling-role-greeting", ("name", name));
+        var briefingShort = Loc.GetString("changeling-role-greeting-short", ("name", name));
 
-            _antag.SendBriefing(target, briefing, Color.Yellow, BriefingSound);
+        _antag.SendBriefing(target, briefing, Color.Yellow, BriefingSound);
 
-            if (_role.MindHasRole<ChangelingRoleComponent>(mindId, out var mr))
-                AddComp(mr.Value, new RoleBriefingComponent { Briefing = briefingShort }, overwrite: true);
-        }
+        if (_role.MindHasRole<ChangelingRoleComponent>(mindId, out var mr))
+            AddComp(mr.Value, new RoleBriefingComponent { Briefing = briefingShort }, overwrite: true);
+
         // hivemind stuff
         _npcFaction.RemoveFaction(target, NanotrasenFactionId, false);
         _npcFaction.AddFaction(target, ChangelingFactionId);
@@ -107,30 +105,29 @@ public sealed class ChangelingRuleSystem : GameRuleSystem<ChangelingRuleComponen
         return true;
     }
 
-    private void OnTextPrepend(EntityUid uid, ChangelingRuleComponent comp, ref ObjectivesTextPrependEvent args)
+    private void OnTextPrepend(Entity<ChangelingRuleComponent> ent, ref ObjectivesTextPrependEvent args)
     {
         var mostAbsorbedName = string.Empty;
         var mostStolenName = string.Empty;
         var mostAbsorbed = 0f;
         var mostStolen = 0f;
 
-        foreach (var ling in EntityQuery<ChangelingIdentityComponent>())
+        var query = EntityQueryEnumerator<ChangelingIdentityComponent>();
+        while (query.MoveNext(out var uid, out var ling))
         {
-            if (!_mind.TryGetMind(ling.Owner, out var mindId, out var mind))
+            if (!_mind.TryGetMind(uid, out var mindId, out var mind))
                 continue;
 
-            if (!TryComp<MetaDataComponent>(ling.Owner, out var metaData))
-                continue;
-
+            var name = Name(uid);
             if (ling.TotalAbsorbedEntities > mostAbsorbed)
             {
                 mostAbsorbed = ling.TotalAbsorbedEntities;
-                mostAbsorbedName = _objective.GetTitle((mindId, mind), metaData.EntityName);
+                mostAbsorbedName = _objective.GetTitle((mindId, mind), name);
             }
             if (ling.TotalStolenDNA > mostStolen)
             {
                 mostStolen = ling.TotalStolenDNA;
-                mostStolenName = _objective.GetTitle((mindId, mind), metaData.EntityName);
+                mostStolenName = _objective.GetTitle((mindId, mind), name);
             }
         }
 

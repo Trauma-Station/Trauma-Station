@@ -59,7 +59,7 @@ public sealed class StationReportDiscordIntergrationSystem : EntitySystem
             return;
 
         foreach (var replacement in _replacements)
-            report = Regex.Replace(report, replacement.Tag, replacement.Replacement);
+            report = replacement.Tag.Replace(report, replacement.Replacement);
 
         // Run async without blocking
         _ = SendMessageAsync(report);
@@ -87,10 +87,11 @@ public sealed class StationReportDiscordIntergrationSystem : EntitySystem
 
     public struct TagReplacement
     {
-        public string Tag, Replacement;
+        public Regex Tag;
+        public string Replacement;
         public TagReplacement(string tag, string replacement)
         {
-            Tag = tag;
+            Tag = new Regex(tag);
             Replacement = replacement;
         }
     }

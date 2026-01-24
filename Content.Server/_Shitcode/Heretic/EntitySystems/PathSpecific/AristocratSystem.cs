@@ -12,6 +12,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.Heretic;
 using Content.Server._Goobstation.Heretic.EntitySystems.PathSpecific;
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
@@ -82,12 +83,16 @@ public sealed class AristocratSystem : EntitySystem
     [Dependency] private readonly HereticSystem _heretic = default!;
 
     private static readonly EntProtoId IceTilePrototype = "IceCrust";
-    private static readonly ProtoId<ContentTileDefinition> SnowTilePrototype = "FloorAstroSnow";
     private static readonly EntProtoId IceWallPrototype = "WallIce";
+    private static readonly ProtoId<WeatherPrototype> SnowfallMagic = "SnowfallMagic";
+    private static readonly ProtoId<ContentTileDefinition> SnowTilePrototype = "FloorAstroSnow";
+    private static readonly ProtoId<TagPrototype> Window = "Window";
 
     private const float ConduitDelay = 1f;
 
     private float _accumulator;
+
+    private HashSet<Entity<FreezableWallComponent>> _walls = new();
 
     public override void Initialize()
     {
@@ -226,7 +231,7 @@ public sealed class AristocratSystem : EntitySystem
 
         // the fog (snow) is coming
         var xform = Transform(ent);
-        _weather.SetWeather(xform.MapID, _prot.Index<WeatherPrototype>("SnowfallMagic"), null);
+        _weather.SetWeather(xform.MapID, _prot.Index(SnowfallMagic), null);
     }
 
     private void EndWaltz(Entity<AristocratComponent> ent)
@@ -365,7 +370,7 @@ public sealed class AristocratSystem : EntitySystem
                             conduit.MinMaxAirlockDamageMultiplier.Y),
                         origin: ent);
                 }
-                else if (_tag.HasTag(ent, "Window"))
+                else if (_tag.HasTag(ent, Window))
                 {
                     _audio.PlayPvs(conduit.WindowDamageSound, Transform(ent).Coordinates);
                     ignored.Add(ent);
@@ -530,13 +535,12 @@ public sealed class AristocratSystem : EntitySystem
 
         var coords = ent.Comp2.Coordinates;
 
-        var tags = _lookup.GetEntitiesInRange<TagComponent>(coords, ent.Comp1.Range, LookupFlags.Static);
+        _walls.Clear();
+        _lookup.GetEntitiesInRange(coords, ent.Comp1.Range, _walls, LookupFlags.Static);
 
-        foreach (var (uid, tag) in tags)
+        foreach (var uid in _walls)
         {
-            // walls
-            if (!_tag.HasTag(tag, "Wall") || !_rand.Prob(.45f) ||
-                (Prototype(uid)?.ID ?? string.Empty) == IceWallPrototype) // /!\ SHITCODE ALERT /!\
+            if (!_rand.Prob(.45f))
                 continue;
 
             Spawn(IceWallPrototype, Transform(uid).Coordinates);

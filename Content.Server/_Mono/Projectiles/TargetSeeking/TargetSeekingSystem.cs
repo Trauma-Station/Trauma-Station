@@ -163,7 +163,7 @@ public sealed class TargetSeekingSystem : EntitySystem
     /// </summary>
     public void ApplyPredictiveTracking(EntityUid uid, TargetSeekingComponent comp, TransformComponent xform, float frameTime)
     {
-        if (!comp.CurrentTarget.HasValue || !TryComp<TransformComponent>(comp.CurrentTarget.Value, out var targetXform))
+        if (!comp.CurrentTarget.HasValue || !TryComp(comp.CurrentTarget.Value, out TransformComponent? targetXform))
         {
             return;
         }
@@ -211,7 +211,7 @@ public sealed class TargetSeekingSystem : EntitySystem
     /// </summary>
     public void ApplyDirectTracking(EntityUid uid, TargetSeekingComponent comp, TransformComponent xform, float frameTime)
     {
-        if (!comp.CurrentTarget.HasValue || !TryComp<TransformComponent>(comp.CurrentTarget.Value, out var targetXform))
+        if (!comp.CurrentTarget.HasValue || !TryComp(comp.CurrentTarget.Value, out TransformComponent? targetXform))
         {
             return;
         }

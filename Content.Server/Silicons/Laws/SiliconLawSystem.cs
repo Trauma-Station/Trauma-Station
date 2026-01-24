@@ -10,7 +10,6 @@ using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Research.Components;
 using Content.Shared.Silicons.StationAi;
-using Content.Shared.Tag;
 using Robust.Shared.Random;
 // </Trauma>
 using System.Linq;
@@ -41,7 +40,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 {
     // <Trauma>
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IonStormSystem _ionStorm = default!;
     [Dependency] private readonly ResearchSystem _research = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
@@ -83,7 +81,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
         // Corvax-Next-AiRemoteControl-Start
         if (HasComp<AiRemoteControllerComponent>(uid)
-            || _tag.HasTag(uid, "StationAi")) // skip a law's notification for remotable and AI
+            || HasComp<StationAiCustomizationComponent>(uid)) // skip a law's notification for remotable and AI
             return;
         // Corvax-Next-AiRemoteControl-End
 

@@ -247,10 +247,10 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
             var success = false;
             foreach (var blade in blades)
             {
-                if (!EntityManager.EntityExists(blade))
+                if (!Exists(blade))
                     continue;
 
-                if (!_tag.HasTag(blade, "HereticBladeBlade"))
+                if (!_tag.HasTag(blade, MansusGraspSystem.HereticBladeBlade))
                     continue;
 
                 if (TryComp(blade, out MansusInfusedComponent? infused) &&

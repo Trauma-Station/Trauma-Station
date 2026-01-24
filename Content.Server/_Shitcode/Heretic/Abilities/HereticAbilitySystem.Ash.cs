@@ -106,13 +106,14 @@ public sealed partial class HereticAbilitySystem
         if (!Transform(args.Performer).GridUid.HasValue || !TryUseAbility(args))
             return;
 
-        CombustArea(args.Performer, 9, false);
+        _ = CombustArea(args.Performer, 9, false);
     }
 
     #region Helper methods
 
-    [ValidatePrototypeId<EntityPrototype>] private static readonly EntProtoId FirePrototype = "HereticFireAA";
+    private static readonly EntProtoId FirePrototype = "HereticFireAA";
 
+    // TODO: kill this dogshit with hammers
     public async Task CombustArea(EntityUid ent, int range = 1, bool hollow = true)
     {
         // we need this beacon in order for damage box to not break apart
@@ -124,7 +125,7 @@ public sealed partial class HereticAbilitySystem
             await Task.Delay((int) 500f);
         }
 
-        EntityManager.DeleteEntity(beacon); // cleanup
+        Del(beacon); // cleanup
     }
 
     public void SpawnFireBox(EntityUid relative, int range = 0, bool hollow = true)
