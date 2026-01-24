@@ -564,6 +564,5 @@
     - !type:GenericStatusEffect
       key: Muted
       component: Muted
-      type: Add
+      type: Update
       time: 20
-      refresh: true
