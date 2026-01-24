@@ -324,7 +324,7 @@
             - EnergyMagAmmo
 
 - type: entity
-  name: DT-12 "Order"
+  name: Order
   parent: [BaseWeaponBatterySmall, BaseGrandTheftContraband]
   id: WeaponEnergyGunLawbringer
   description: A versatile energy gun, with many different modes. The owner of this gun embodies order itself.
