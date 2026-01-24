@@ -35,6 +35,7 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.Throwing;
 using Content.Shared.Damage.Systems;
 using System.Diagnostics.CodeAnalysis;
+using Robust.Shared.Timing;
 
 namespace Content.Server._FarHorizons.Power.Generation.FissionGenerator;
 
@@ -68,6 +69,15 @@ public sealed class NuclearReactorSystem : SharedNuclearReactorSystem
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedPointLightSystem _lightSystem = default!;
     [Dependency] private readonly AmbientSoundSystem _ambientSoundSystem = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+
+    private sealed class LogData
+    {
+        public TimeSpan CreationTime;
+        public float? SetControlRodInsertion;
+    }
+
+    private readonly Dictionary<KeyValuePair<EntityUid, EntityUid>, LogData> _logQueue = [];
 
     public override void Initialize()
     {
@@ -820,8 +830,46 @@ public sealed class NuclearReactorSystem : SharedNuclearReactorSystem
     private void OnControlRodMessage(Entity<NuclearReactorComponent> ent, ref ReactorControlRodModifyMessage args)
     {
         if(AdjustControlRods(ent.Comp, args.Change))
-            _adminLog.Add(LogType.Action, $"{ToPrettyString(args.Actor):actor} set control rod insertion of {ToPrettyString(ent):target} to {ent.Comp.ControlRodInsertion}");
+            // Data is sent to a log queue to avoid spamming the admin log when adjusting values rapidly
+            if(!_logQueue.TryGetValue(new(args.Actor, ent.Owner), out var value))
+                _logQueue.Add(new(args.Actor, ent.Owner), new LogData {
+                    CreationTime = _gameTiming.RealTime, 
+                    SetControlRodInsertion = ent.Comp.ControlRodInsertion
+                });
+            else
+                value.SetControlRodInsertion = ent.Comp.ControlRodInsertion;
+
         UpdateUI(ent.Owner, ent.Comp);
+    }
+
+    private float _accumulator = 0f;
+    private readonly float _threshold = 0.5f;
+
+    public override void Update(float frameTime)
+    {
+        _accumulator += frameTime;
+        if (_accumulator > _threshold)
+        {
+            UpdateLogs();
+            _accumulator = 0;
+        }
+
+        return;
+
+        void UpdateLogs()
+        {
+            var toRemove = new List<KeyValuePair<EntityUid, EntityUid>>();
+            foreach (var log in _logQueue.Where(log => !((_gameTiming.RealTime - log.Value.CreationTime).TotalSeconds < 2)))
+            {
+                toRemove.Add(log.Key);
+
+                if (log.Value.SetControlRodInsertion != null)
+                    _adminLog.Add(LogType.Action, $"{ToPrettyString(log.Key.Key):actor} set control rod insertion of {ToPrettyString(log.Key.Value):target} to {log.Value.SetControlRodInsertion}");
+            }
+
+            foreach (var kvp in toRemove)
+                _logQueue.Remove(kvp);
+        }
     }
     #endregion
 
@@ -903,7 +951,7 @@ public sealed class NuclearReactorSystem : SharedNuclearReactorSystem
 
         if (!Transform(comp.InletEnt.Value).Anchored || !Transform(comp.OutletEnt.Value).Anchored)
         {
-            _popupSystem.PopupEntity(Loc.GetString("turbine-anchor-warning"), uid, PopupType.MediumCaution);
+            _popupSystem.PopupEntity(Loc.GetString("reactor-unanchor-warning"), uid, PopupType.MediumCaution);
             CleanUp(comp);
             _transform.Unanchor(uid);
             return false;

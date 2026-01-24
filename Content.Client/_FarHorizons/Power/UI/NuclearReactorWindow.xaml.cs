@@ -64,6 +64,9 @@ public sealed partial class NuclearReactorWindow : FancyWindow
     private bool _isMonitor = false;
     private EntityUid _monitor;
 
+    private readonly float _repeatDelay = 0.5f;
+    private readonly Dictionary<Button, float> _repeatQueue = [];
+
     public NuclearReactorWindow()
     {
         RobustXamlLoader.Load(this);
@@ -84,9 +87,20 @@ public sealed partial class NuclearReactorWindow : FancyWindow
         EjectItem.OnPressed += _ => EjectButtonPressed?.Invoke();
 
         ControlRodsInsertLarge.OnPressed += _ => AdjustControlRods(0.1f);
+        ControlRodsInsertLarge.OnButtonDown += _ => _repeatQueue.Add(ControlRodsInsertLarge, _repeatDelay);
+        ControlRodsInsertLarge.OnButtonUp += _ => _repeatQueue.Remove(ControlRodsInsertLarge);
+
         ControlRodsInsert.OnPressed += _ => AdjustControlRods(0.01f);
+        ControlRodsInsert.OnButtonDown += _ => _repeatQueue.Add(ControlRodsInsert, _repeatDelay);
+        ControlRodsInsert.OnButtonUp += _ => _repeatQueue.Remove(ControlRodsInsert);
+
         ControlRodsRemove.OnPressed += _ => AdjustControlRods(-0.01f);
+        ControlRodsRemove.OnButtonDown += _ => _repeatQueue.Add(ControlRodsRemove, _repeatDelay);
+        ControlRodsRemove.OnButtonUp += _ => _repeatQueue.Remove(ControlRodsRemove);
+
         ControlRodsRemoveLarge.OnPressed += _ => AdjustControlRods(-0.1f);
+        ControlRodsRemoveLarge.OnButtonDown += _ => _repeatQueue.Add(ControlRodsRemoveLarge, _repeatDelay);
+        ControlRodsRemoveLarge.OnButtonUp += _ => _repeatQueue.Remove(ControlRodsRemoveLarge);
 
         TargetTemperature.OnPressed += _ => ChangeTemp();
     }
@@ -235,6 +249,32 @@ public sealed partial class NuclearReactorWindow : FancyWindow
 
         UpdateTargetInfo();
         UpdateItemAction();
+
+        // Handle repeat buttons
+        foreach ( var kvp in _repeatQueue)
+        {
+            if(kvp.Value > 0)
+            {
+                _repeatQueue[kvp.Key] -= args.DeltaSeconds;
+                continue;
+            }
+
+            switch (kvp.Key)
+            {
+                case var _ when kvp.Key == ControlRodsInsertLarge:
+                    AdjustControlRods(0.1f);
+                    break;
+                case var _ when kvp.Key == ControlRodsInsert:
+                    AdjustControlRods(0.01f);
+                    break;
+                case var _ when kvp.Key == ControlRodsRemove:
+                    AdjustControlRods(-0.01f);
+                    break;
+                case var _ when kvp.Key == ControlRodsRemoveLarge:
+                    AdjustControlRods(-0.1f);
+                    break;
+            }
+        }
     }
 
     private static Color GetColor(double pointA, double pointB, double value)

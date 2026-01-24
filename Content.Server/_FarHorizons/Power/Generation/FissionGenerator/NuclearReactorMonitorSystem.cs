@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.DeviceLinking.Systems;
 using Content.Shared._FarHorizons.Power.Generation.FissionGenerator;
@@ -6,6 +7,7 @@ using Content.Shared.Database;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Robust.Server.GameObjects;
+using Robust.Shared.Timing;
 
 namespace Content.Server._FarHorizons.Power.Generation.FissionGenerator;
 
@@ -17,9 +19,19 @@ public sealed partial class NuclearReactorMonitorSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly DeviceLinkSystem _signal = default!;
     [Dependency] private readonly UserInterfaceSystem _uiSystem = null!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     private readonly float _threshold = 0.5f;
     private float _accumulator = 0f;
+
+    private sealed class LogData
+    {
+        public TimeSpan CreationTime;
+        public NetEntity Reactor;
+        public float? SetControlRodInsertion;
+    }
+
+    private readonly Dictionary<KeyValuePair<EntityUid, EntityUid>, LogData> _logQueue = [];
 
     public override void Initialize()
     {
@@ -89,9 +101,28 @@ public sealed partial class NuclearReactorMonitorSystem : EntitySystem
         if (_accumulator > _threshold)
         {
             AccUpdate();
+            UpdateLogs();
             _accumulator = 0;
         }
+
+        return;
+
+        void UpdateLogs()
+        {
+            var toRemove = new List<KeyValuePair<EntityUid, EntityUid>>();
+            foreach (var log in _logQueue.Where(log => !((_gameTiming.RealTime - log.Value.CreationTime).TotalSeconds < 2)))
+            {
+                toRemove.Add(log.Key);
+
+                if (log.Value.SetControlRodInsertion != null)
+                    _adminLog.Add(LogType.Action, $"{ToPrettyString(log.Key.Key):actor} set control rod insertion of {ToPrettyString(log.Value.Reactor):target} to {log.Value.SetControlRodInsertion} through {ToPrettyString(log.Key.Value):monitor}");
+            }
+
+            foreach (var kvp in toRemove)
+                _logQueue.Remove(kvp);
+        }
     }
+
     private void AccUpdate()
     {
         var query = EntityQueryEnumerator<NuclearReactorMonitorComponent>();
@@ -111,8 +142,20 @@ public sealed partial class NuclearReactorMonitorSystem : EntitySystem
         if (!TryGetReactorComp(comp, out var reactor))
             return;
 
-        if (SharedNuclearReactorSystem.AdjustControlRods(reactor, args.Change))
-            _adminLog.Add(LogType.Action, $"{ToPrettyString(args.Actor):actor} set control rod insertion of {ToPrettyString(comp.reactor):target} to {reactor.ControlRodInsertion} through {ToPrettyString(uid):monitor}");
+        if(SharedNuclearReactorSystem.AdjustControlRods(reactor, args.Change))
+        {
+            // Data is sent to a log queue to avoid spamming the admin log when adjusting values rapidly
+            var key = new KeyValuePair<EntityUid, EntityUid>(args.Actor, uid);
+            if(!_logQueue.TryGetValue(key, out var value))
+                _logQueue.Add(key, new LogData {
+                    CreationTime = _gameTiming.RealTime, 
+                    Reactor = comp.reactor!.Value,
+                    SetControlRodInsertion = reactor.ControlRodInsertion
+                });
+            else
+                value.SetControlRodInsertion = reactor.ControlRodInsertion;
+        }
+
         _reactorSystem.UpdateUI(uid, reactor);
     }
     #endregion

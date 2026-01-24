@@ -71,6 +71,9 @@ public sealed partial class TurbineWindow : FancyWindow
     private bool _suppressSliderEvents;
     private bool _suppressStatorUpdate;
     private bool _suppressFlowUpdate;
+
+    private readonly float _repeatDelay = 0.5f;
+    private readonly Dictionary<Button, float> _repeatQueue = [];
     #endregion
 
     #region Events
@@ -98,7 +101,12 @@ public sealed partial class TurbineWindow : FancyWindow
                 TurbineFlowRateChanged?.Invoke(TurbineFlowRateSlider.Value);
         };
         FlowRateDecrease.OnPressed += _ => TurbineFlowRateChanged?.Invoke(_flowRate - 100);
+        FlowRateDecrease.OnButtonDown += _ => _repeatQueue.Add(FlowRateDecrease, _repeatDelay);
+        FlowRateDecrease.OnButtonUp += _ => _repeatQueue.Remove(FlowRateDecrease);
+
         FlowRateIncrease.OnPressed += _ => TurbineFlowRateChanged?.Invoke(_flowRate + 100);
+        FlowRateIncrease.OnButtonDown += _ => _repeatQueue.Add(FlowRateIncrease, _repeatDelay);
+        FlowRateIncrease.OnButtonUp += _ => _repeatQueue.Remove(FlowRateIncrease);
 
         // Handle stator load
         TurbineStatorLoadLabel.OnFocusEnter += _ => _suppressStatorUpdate = true;
@@ -106,9 +114,20 @@ public sealed partial class TurbineWindow : FancyWindow
         TurbineStatorLoadLabel.OnTextEntered += _ => StatorTextChanged(true);
 
         StatorLoadDecreaseLarge.OnPressed += _ => TurbineStatorLoadChanged?.Invoke(_statorLevel - 1000);
+        StatorLoadDecreaseLarge.OnButtonDown += _ => _repeatQueue.Add(StatorLoadDecreaseLarge, _repeatDelay);
+        StatorLoadDecreaseLarge.OnButtonUp += _ => _repeatQueue.Remove(StatorLoadDecreaseLarge);
+
         StatorLoadDecrease.OnPressed += _ => TurbineStatorLoadChanged?.Invoke(_statorLevel - 100);
+        StatorLoadDecrease.OnButtonDown += _ => _repeatQueue.Add(StatorLoadDecrease, _repeatDelay);
+        StatorLoadDecrease.OnButtonUp += _ => _repeatQueue.Remove(StatorLoadDecrease);
+
         StatorLoadIncrease.OnPressed += _ => TurbineStatorLoadChanged?.Invoke(_statorLevel + 100);
+        StatorLoadIncrease.OnButtonDown += _ => _repeatQueue.Add(StatorLoadIncrease, _repeatDelay);
+        StatorLoadIncrease.OnButtonUp += _ => _repeatQueue.Remove(StatorLoadIncrease);
+
         StatorLoadIncreaseLarge.OnPressed += _ => TurbineStatorLoadChanged?.Invoke(_statorLevel + 1000);
+        StatorLoadIncreaseLarge.OnButtonDown += _ => _repeatQueue.Add(StatorLoadIncreaseLarge, _repeatDelay);
+        StatorLoadIncreaseLarge.OnButtonUp += _ => _repeatQueue.Remove(StatorLoadIncreaseLarge);
 
         CTabContainer.SetTabTitle(0, Loc.GetString("comp-turbine-ui-tab-main"));
         CTabContainer.SetTabTitle(1, Loc.GetString("comp-turbine-ui-tab-parts"));
@@ -117,14 +136,14 @@ public sealed partial class TurbineWindow : FancyWindow
 
         void FlowTextChanged(bool suppress = false)
         {
-            if (float.TryParse(TurbineFlowRateLabel.Text, out var num))
+            if (float.TryParse(TurbineFlowRateLabel.Text, out var num) && !float.IsNaN(num))
                 TurbineFlowRateChanged?.Invoke(num);
             _suppressFlowUpdate = suppress;
         }
 
         void StatorTextChanged(bool suppress = false)
         {
-            if (float.TryParse(TurbineStatorLoadLabel.Text, out var num))
+            if (float.TryParse(TurbineStatorLoadLabel.Text, out var num) && !float.IsNaN(num))
                 TurbineStatorLoadChanged?.Invoke(num);
             _suppressStatorUpdate = suppress;
         }
@@ -241,14 +260,37 @@ public sealed partial class TurbineWindow : FancyWindow
         for (var i = 0; i < _speedMeter.Length; i++)
         {
             var box = _speedMeter[i];
-            if (_speedLevel > i)
+            box.BackgroundColor = _speedLevel > i ? _speedColors[i] : _speedColorsDim[i];
+        }
+
+        foreach (var kvp in _repeatQueue)
+        {
+            if(kvp.Value > 0)
             {
-                // On
-                box.BackgroundColor = _speedColors[i];
+                _repeatQueue[kvp.Key] -= args.DeltaSeconds;
+                continue;
             }
-            else
+
+            switch (kvp.Key)
             {
-                box.BackgroundColor = _speedColorsDim[i];
+                case var _ when kvp.Key == FlowRateDecrease:
+                    TurbineFlowRateChanged?.Invoke(_flowRate - 100);
+                    break;
+                case var _ when kvp.Key == FlowRateIncrease:
+                    TurbineFlowRateChanged?.Invoke(_flowRate + 100);
+                    break;
+                case var _ when kvp.Key == StatorLoadDecreaseLarge:
+                    TurbineStatorLoadChanged?.Invoke(_statorLevel - 1000);
+                    break;
+                case var _ when kvp.Key == StatorLoadDecrease:
+                    TurbineStatorLoadChanged?.Invoke(_statorLevel - 100);
+                    break;
+                case var _ when kvp.Key == StatorLoadIncrease:
+                    TurbineStatorLoadChanged?.Invoke(_statorLevel + 100);
+                    break;
+                case var _ when kvp.Key == StatorLoadIncreaseLarge:
+                    TurbineStatorLoadChanged?.Invoke(_statorLevel + 1000);
+                    break;
             }
         }
     }

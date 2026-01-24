@@ -1,5 +1,6 @@
 using Content.Shared.Administration.Logs;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
@@ -34,7 +35,7 @@ public abstract class SharedTurbineSystem : EntitySystem
         SubscribeLocalEvent<TurbineComponent, ExaminedEvent>(OnExamined);
 
         SubscribeLocalEvent<TurbineComponent, InteractUsingEvent>(RepairTurbine);
-        SubscribeLocalEvent<TurbineComponent, RepairFinishedEvent>(OnRepairTurbineFinished);
+        SubscribeLocalEvent<TurbineComponent, RepairDoAfterEvent>(OnRepairTurbineFinished);
     }
 
     private void OnExamined(Entity<TurbineComponent> ent, ref ExaminedEvent args)
@@ -47,19 +48,11 @@ public abstract class SharedTurbineSystem : EntitySystem
         {
             if(comp.CurrentStator == null)
                 args.PushMarkup(Loc.GetString("gas-turbine-examine-stator-null"));
-            else
-            // Doesn't work right due to LOC
-            //args.PushMarkup(Loc.GetString("gas-turbine-examine-stator", ("material", _proto.Index(_entityManager.GetComponent<GasTurbineStatorComponent>(comp.CurrentStator.Value).Material).Name)));
-            args.PushMarkup(Loc.GetString("gas-turbine-examine-stator"));
 
             if (comp.CurrentBlade == null)
                 args.PushMarkup(Loc.GetString("gas-turbine-examine-blade-null"));
             else
             {
-                // Doesn't work right due to LOC
-                //args.PushMarkup(Loc.GetString("gas-turbine-examine-blade", ("material", _proto.Index(_entityManager.GetComponent<GasTurbineBladeComponent>(comp.CurrentBlade.Value).Material).Name)));
-                args.PushMarkup(Loc.GetString("gas-turbine-examine-blade"));
-
                 switch (comp.RPM)
                 {
                     case float n when n is >= 0 and <= 1:
@@ -167,16 +160,13 @@ public abstract class SharedTurbineSystem : EntitySystem
             if (comp.BladeHealth >= comp.BladeHealthMax && !comp.Ruined)
                 return;
 
-            args.Handled = _toolSystem.UseTool(args.Used, args.User, uid, comp.RepairDelay, comp.RepairTool, new RepairFinishedEvent(), comp.RepairFuelCost);
+            args.Handled = _toolSystem.UseTool(args.Used, args.User, uid, comp.RepairDelay, comp.RepairTool, new RepairDoAfterEvent(), comp.RepairFuelCost);
         }
     }
 
     //Gotta love server/client desync
-    protected virtual void OnRepairTurbineFinished(EntityUid uid, TurbineComponent comp, ref RepairFinishedEvent args)
+    protected virtual void OnRepairTurbineFinished(EntityUid uid, TurbineComponent comp, ref RepairDoAfterEvent args)
     {
-        if (args.Cancelled)
-            return;
-
         if (comp.Ruined)
         {
             comp.Ruined = false;
@@ -196,7 +186,7 @@ public abstract class SharedTurbineSystem : EntitySystem
         if (!_entityManager.TryGetComponent<DamageableComponent>(uid, out var damageableComponent))
             return;
 
-        _damageableSystem.SetAllDamage(uid, damageableComponent, 0);
+        _damageableSystem.SetAllDamage((uid, damageableComponent), 0);
     }
 
     protected void UpdateHealthIndicators(EntityUid uid, TurbineComponent comp)
