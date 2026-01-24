@@ -37,6 +37,24 @@
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 15
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Piercing
+        damage: 200 # needs to be blown clean off
+      behaviors:
+      - !type:GibBehavior
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MeatBulletImpact
+    - trigger: !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 250 # we'll assume the bones are all broken by now
+      behaviors:
+      - !type:GibBehavior
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MeatBulletImpact
   # </Goob>
 
 # organic torsos have higher health
