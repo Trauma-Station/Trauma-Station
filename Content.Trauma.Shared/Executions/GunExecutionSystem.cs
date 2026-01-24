@@ -163,7 +163,19 @@ public sealed class ExecutionSystem : EntitySystem
 
         var victim = args.Target!.Value;
 
-        if (!CanExecuteWithGun(victim, attacker, component)) return;
+        if (!CanExecuteWithGun(victim, attacker, component))
+            return;
+
+        // Check if any systems want to block our shot
+        var prevention = new ShotAttemptedEvent
+        {
+            User = attacker,
+            Used = new Entity<GunComponent>(weapon, gunComp)
+        };
+
+        RaiseLocalEvent(weapon, ref prevention);
+        if (prevention.Cancelled)
+            return;
 
         // Not sure what this is for but gunsystem uses it so ehhh
         var attemptEv = new AttemptShootEvent(attacker, null);
@@ -199,17 +211,6 @@ public sealed class ExecutionSystem : EntitySystem
         }
 
         var selfPrevention = new SelfBeforeGunShotEvent(attacker, (weapon, gunComp), ev.Ammo);
-
-        // Check if any systems want to block our shot
-        var prevention = new ShotAttemptedEvent
-        {
-            User = attacker,
-            Used = new Entity<GunComponent>(weapon, gunComp)
-        };
-
-        RaiseLocalEvent(weapon, ref prevention);
-        if (prevention.Cancelled)
-            return;
 
         RaiseLocalEvent(attacker, selfPrevention);
         if (selfPrevention.Cancelled)
