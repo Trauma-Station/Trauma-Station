@@ -16,6 +16,6 @@ public sealed partial class HereticKnowledgeRitualComponent : Component
     /// <summary>
     /// Required tags for ritual of knowledge
     /// </summary>
-    [DataField]
+    [ViewVariables]
     public HashSet<ProtoId<TagPrototype>> KnowledgeRequiredTags = new();
 }
