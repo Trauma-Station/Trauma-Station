@@ -201,7 +201,7 @@
   rules:
   - Nukeops
   - DummyNonAntagChance
-  # - SubGamemodesRule # Trauma - no random heretics / crew sided emag fucking shit up
+  # - SubGamemodesRule
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler

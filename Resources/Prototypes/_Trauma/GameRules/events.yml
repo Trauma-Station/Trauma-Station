@@ -15,7 +15,7 @@
   table: !type:AllSelector
     children:
     - id: BlobSpawn
-    # - id: LoneAbductorSpawn # Trauma, Duo only
+    # - id: LoneAbductorSpawn
     - id: DuoAbductorSpawn
     - id: BingleSpawn
     # - id: SlaughterDemonMidround - Wizard/Ninja only antag, maybe devil eventually
