@@ -9,6 +9,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Execution;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Explosion.EntitySystems;
+using Content.Shared.PneumaticCannon;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Verbs;
@@ -177,6 +178,10 @@ public sealed class ExecutionSystem : EntitySystem
         if (prevention.Cancelled)
             return;
 
+        RaiseLocalEvent(attacker, ref prevention);
+        if (prevention.Cancelled)
+            return;
+
         // Not sure what this is for but gunsystem uses it so ehhh
         var attemptEv = new AttemptShootEvent(attacker, null);
         RaiseLocalEvent(weapon, ref attemptEv);
@@ -241,7 +246,7 @@ public sealed class ExecutionSystem : EntitySystem
 
         damage = ammoEvent.Damage;
 
-        if(ammoEvent.Delete)
+        if (ammoEvent.Delete)
             PredictedDel(ammo);
 
         var selfEvent = new SelfBeforeGunShotEvent(attacker, (weapon, gunComp), ev.Ammo);
@@ -254,6 +259,9 @@ public sealed class ExecutionSystem : EntitySystem
 
         if (selfEvent.Cancelled)
             return;
+
+        if (TryComp<PneumaticCannonComponent>(weapon, out var pneumaticCannonComponent) && pneumaticCannonComponent.ProjectileSpeed != null)
+            damage *= pneumaticCannonComponent.ProjectileSpeed.Value;
 
         _damageable.TryChangeDamage(victim, damage * component.ExecutionModifier, true, targetPart: TargetBodyPart.Head);
 
