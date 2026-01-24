@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using System.Numerics;
 using Content.Shared._Shitmed.Targeting;
+using Content.Shared._Shitmed.Weapons.Ranged.Events;
 using Content.Shared.Camera;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -162,12 +163,16 @@ public sealed class GunExecutionSystem : EntitySystem
 
     private void OnSpreadAmmoImpact(Entity<ProjectileSpreadComponent> ent, ref AmmoImpactEvent args)
     {
+        var proj = _projectileQuery.Comp(ent);
+        var wasSpent = proj.ProjectileSpent;
         for (var i = 1; i < ent.Comp.Count; i++)
         {
-            // assuming that the spread entity is the same as this one, which it is for shotguns
-            // therefore just apply its effects again without spawning anything
+            // reuse the same spread entity, this only works because every pellet spread prototype behaves like the pellets it spawns
+            // however we need to reset spent so it doesn't just get ignored
+            proj.ProjectileSpent = false;
             _projectile.DoHit(ent, args.Target);
         }
+        proj.ProjectileSpent = wasSpent;
     }
 
     private void OnDamageModify(Entity<BeingExecutedComponent> ent, ref DamageModifyEvent args)
@@ -320,7 +325,7 @@ public sealed class GunExecutionSystem : EntitySystem
 
         // popups and sounds
         if (success)
-            DoShotLogic(weapon, attacker, victim);
+            DoShotLogic(weapon, attacker, victim, ev.Ammo);
         else
             DoEmptyLogic(weapon, attacker, victim);
 
@@ -374,13 +379,20 @@ public sealed class GunExecutionSystem : EntitySystem
 
     private void DoEmptyLogic(Entity<GunComponent> gun, EntityUid attacker, EntityUid victim)
     {
+        var ev = new OnEmptyGunShotEvent(attacker);
+        RaiseLocalEvent(gun, ref ev);
         _audio.PlayPredicted(gun.Comp.SoundEmpty, gun, attacker);
         _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, gun);
         _execution.ShowExecutionExternalPopup("execution-popup-gun-empty", attacker, victim, gun);
     }
 
-    private void DoShotLogic(Entity<GunComponent> gun, EntityUid attacker, EntityUid victim)
+    private void DoShotLogic(Entity<GunComponent> gun, EntityUid attacker, EntityUid victim, List<(EntityUid? Uid, IShootable Shootable)> ammo)
     {
+        var ev = new GunShotEvent(attacker, ammo);
+        RaiseLocalEvent(gun, ref ev);
+        var userEv = new GunShotBodyEvent(gun, gun.Comp);
+        RaiseLocalEvent(attacker, userEv);
+
         _audio.PlayPredicted(gun.Comp.SoundGunshot, gun, attacker);
 
         // special text for suicide
