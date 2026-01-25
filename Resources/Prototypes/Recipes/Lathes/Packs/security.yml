@@ -35,6 +35,7 @@
   recipes:
   - BoxLethalshot
   - BoxShotgunSlug
+  - BoxShotgunBreaching # Trauma
   # - MagazineBoxLightRifle # Goobstation - remove light rifle
   - MagazineBoxMagnum
   - MagazineBoxPistol
