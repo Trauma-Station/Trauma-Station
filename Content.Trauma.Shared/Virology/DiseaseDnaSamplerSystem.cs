@@ -9,6 +9,7 @@ using Content.Shared.Popups;
 using Content.Trauma.Shared.Disease;
 using Content.Trauma.Shared.Mobs;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
@@ -20,6 +21,7 @@ namespace Content.Trauma.Shared.Virology;
 public sealed class DiseaseDnaSamplerSystem : EntitySystem
 {
     [Dependency] private readonly DnaTargetDiseaseSystem _target = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -94,6 +96,10 @@ public sealed class DiseaseDnaSamplerSystem : EntitySystem
 
     public void SampleDna(Entity<DiseaseDnaSamplerComponent> ent, EntityUid target, EntityUid user)
     {
+        // currently forensics dnas dont get networked so let server do it
+        if (_net.IsClient)
+            return;
+
         ent.Comp.TargetDnas.Clear();
         Dirty(ent);
 
@@ -101,11 +107,11 @@ public sealed class DiseaseDnaSamplerSystem : EntitySystem
         AddSamples(ent, target);
         if (ent.Comp.TargetDnas.Count == 0) // found nothing
         {
-            _popup.PopupClient(Loc.GetString("disease-dna-sampler-failed", ("target", identity)), target, user);
+            _popup.PopupEntity(Loc.GetString("disease-dna-sampler-failed", ("target", identity)), target, user);
             return;
         }
 
-        _popup.PopupClient(Loc.GetString("disease-dna-sampler-success", ("target", identity)), target, user);
+        _popup.PopupEntity(Loc.GetString("disease-dna-sampler-success", ("target", identity)), target, user);
         _audio.PlayPredicted(ent.Comp.SampleSound, target, user);
     }
 
