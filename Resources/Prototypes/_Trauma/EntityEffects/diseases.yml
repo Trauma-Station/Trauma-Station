@@ -1,0 +1,23 @@
+  # not exactly a heart attack but this is ss14, 1 defib and you're back in action.
+  # also your heart's tissues would be fucking dead so...
+- type: entityEffect
+  id: HeartAttack
+  conditions:
+  - !type:HasOrgan # need a heart to have a heart attack
+    whitelist:
+      components:
+      - Heart
+  effects:
+  - !type:PopupMessage
+    visualType: LargeCaution
+    messages:
+    - entity-effect-popup-heart-stops
+  - !type:RelayOrgans
+    whitelist:
+      components:
+      - Heart
+    effects:
+    - !type:Gib
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectHeartAttack
+    time: 10 # for drama, rather than running around for a minute before dying randomly
