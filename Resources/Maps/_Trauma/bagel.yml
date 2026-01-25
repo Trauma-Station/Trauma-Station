@@ -4,7 +4,7 @@ meta:
   engineVersion: 271.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/25/2026 01:15:06
+  time: 01/25/2026 01:19:23
   entityCount: 25307
 maps:
 - 1
@@ -131857,6 +131857,7 @@ entities:
     - type: Transform
       pos: -42.5,9.5
       parent: 2
+    - type: AccessReader
       accessListsOriginal:
       - - ResearchDirector
 - proto: StationAiUploadComputer
