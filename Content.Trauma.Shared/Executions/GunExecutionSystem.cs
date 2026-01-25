@@ -300,6 +300,7 @@ public sealed class GunExecutionSystem : EntitySystem
         RaiseLocalEvent(weapon, ref modifyEv);
         var executed = EnsureComp<BeingExecutedComponent>(victim);
         executed.Modifier = modifyEv.Modifier;
+        // TODO: set target part
 
         // target head for this because that's what the loc strings say
         var oldTarget = TargetBodyPart.Head;
