@@ -1354,16 +1354,16 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 13
+        Heat: 9
 
 - type: entity
   name: wide laser barrage
   id: BulletLaserSpread
   categories: [ HideSpawnMenu ]
-  parent: BulletLaserShotgun # Trauma
+  parent: BulletLaser # Trauma
   components:
   - type: ProjectileSpread
-    proto: BulletLaserShotgun # Trauma
+    proto: BulletLaser # Trauma
     count: 5 #45 heat damage if you hit all your shots, but wide spread
     spread: 30
 
@@ -1371,10 +1371,10 @@
   name: lethal laser barrage
   id: BulletLaserSpreadNarrow
   categories: [ HideSpawnMenu ]
-  parent: BulletLaserShotgun # Trauma
+  parent: BulletLaser # Trauma
   components:
   - type: ProjectileSpread
-    proto: BulletLaserShotgun # Trauma
+    proto: BulletLaser # Trauma
     count: 4 #36 heat damage if you hit all your shots, but narrower spread
     spread: 10
 
