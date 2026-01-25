@@ -787,7 +787,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         RemCompDeferred<AmmoComponent>(uid);
     }
 
-    protected void MuzzleFlash(EntityUid gun, AmmoComponent component, Angle worldAngle, EntityUid? user = null)
+    public void MuzzleFlash(EntityUid gun, AmmoComponent component, Angle worldAngle, EntityUid? user = null) // Trauma - made public
     {
         var attemptEv = new GunMuzzleFlashAttemptEvent();
         RaiseLocalEvent(gun, ref attemptEv);

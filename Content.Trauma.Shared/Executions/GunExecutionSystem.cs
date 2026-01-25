@@ -395,12 +395,16 @@ public sealed class GunExecutionSystem : EntitySystem
         RaiseLocalEvent(attacker, userEv);
 
         _audio.PlayPredicted(gun.Comp.SoundGunshot, gun, attacker);
+        var direction = GetDirection(target: victim, shooter: attacker);
+        // do muzzle flash for bullets and stuff
+        if (ammo[0].Shootable is AmmoComponent ammoComp)
+            _gun.MuzzleFlash(gun, ammoComp, direction.ToAngle(), attacker);
 
         // special text for suicide
         var prefix = "suicide";
         if (attacker != victim)
         {
-            DoRecoil(attacker, victim);
+            DoRecoil(attacker, victim, direction);
             prefix = "execution";
         }
 
@@ -408,18 +412,15 @@ public sealed class GunExecutionSystem : EntitySystem
         _execution.ShowExecutionExternalPopup(prefix + "-popup-gun-complete-external", attacker, victim, gun);
     }
 
-    private void DoRecoil(EntityUid attacker, EntityUid victim)
+    private void DoRecoil(EntityUid attacker, EntityUid victim, Vector2 direction)
     {
         // client predicts it instead
         if (_net.IsServer)
             return;
 
         // opposite direction for recoil
-        var direction = GetDirection(target: attacker, shooter: victim);
-        if (direction == Vector2.Zero)
-            return;
-
-        _recoil.KickCamera(attacker, direction);
+        if (direction != Vector2.Zero)
+            _recoil.KickCamera(attacker, -direction);
     }
 
     #endregion
