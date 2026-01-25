@@ -11,6 +11,7 @@ namespace Content.Trauma.Client.Projectiles;
 /// </summary>
 public sealed class PredictedProjectileSystem : EntitySystem
 {
+    [Dependency] private readonly PointLightSystem _light = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
     public override void Initialize()
@@ -29,7 +30,10 @@ public sealed class PredictedProjectileSystem : EntitySystem
     private void OnShotPredictedProjectile(ShotPredictedProjectileEvent args)
     {
         var uid = GetEntity(args.Projectile);
-        if (uid.IsValid()) // client may not have received the projectile state yet
-            _sprite.SetVisible(uid, false);
+        if (!uid.IsValid())
+            return; // client may not have received the projectile state yet
+
+        _sprite.SetVisible(uid, false);
+        _light.SetEnabled(uid, false);
     }
 }
