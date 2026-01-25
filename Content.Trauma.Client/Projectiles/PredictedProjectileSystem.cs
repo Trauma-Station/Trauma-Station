@@ -11,17 +11,13 @@ namespace Content.Trauma.Client.Projectiles;
 /// </summary>
 public sealed class PredictedProjectileSystem : EntitySystem
 {
-    [Dependency] private readonly PointLightSystem _light = default!;
-
     private EntityQuery<HiddenProjectileComponent> _hiddenQuery;
-    private EntityQuery<PointLightComponent> _lightQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _hiddenQuery = GetEntityQuery<HiddenProjectileComponent>();
-        _lightQuery = GetEntityQuery<PointLightComponent>();
 
         SubscribeLocalEvent<ProjectileComponent, UpdateIsPredictedEvent>(OnUpdateIsPredicted);
         SubscribeLocalEvent<HiddenProjectileComponent, AttemptPointLightToggleEvent>(OnAttemptLightToggle);
