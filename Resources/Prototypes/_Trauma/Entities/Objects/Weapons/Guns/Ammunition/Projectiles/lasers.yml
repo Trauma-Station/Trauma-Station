@@ -13,7 +13,7 @@
         hard: false
         mask:
         - Opaque
-      fly-by: &flybyfixture
+      fly-by: *flybyfixture
         shape: !type:PhysShapeCircle
           radius: 1.5
         layer:
@@ -59,7 +59,7 @@
         hard: false
         mask:
         - Opaque
-      fly-by: &flybyfixture
+      fly-by: *flybyfixture
         shape: !type:PhysShapeCircle
           radius: 1.5
         layer:
@@ -107,7 +107,7 @@
         hard: false
         mask:
         - Opaque
-      fly-by: &flybyfixture
+      fly-by: *flybyfixture
         shape: !type:PhysShapeCircle
           radius: 1.5
         layer:
@@ -209,7 +209,7 @@
         hard: false
         mask:
         - Opaque
-      fly-by: &flybyfixture
+      fly-by: *flybyfixture
         shape: !type:PhysShapeCircle
           radius: 1.5
         layer:
