@@ -4,7 +4,7 @@ meta:
   engineVersion: 271.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/25/2026 01:09:17
+  time: 01/25/2026 01:15:06
   entityCount: 25307
 maps:
 - 1
@@ -114640,13 +114640,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 3.5,17.5
       parent: 2
-- proto: PowerComputerCircuitboard
-  entities:
-  - uid: 17290
-    components:
-    - type: Transform
-      pos: 24.52998,14.559716
-      parent: 2
 - proto: PowerDrill
   entities:
   - uid: 17291
@@ -119062,6 +119055,11 @@ entities:
       parent: 2
 - proto: RandomBoard
   entities:
+  - uid: 11277
+    components:
+    - type: Transform
+      pos: 22.5,18.5
+      parent: 2
   - uid: 17969
     components:
     - type: Transform
@@ -131847,10 +131845,10 @@ entities:
       parent: 2
 - proto: StationAiFixerCircuitboard
   entities:
-  - uid: 16744
+  - uid: 11470
     components:
     - type: Transform
-      pos: 22.51755,18.523844
+      pos: 24.50302,14.49158
       parent: 2
 - proto: StationAiFixerComputer
   entities:
@@ -131859,6 +131857,8 @@ entities:
     - type: Transform
       pos: -42.5,9.5
       parent: 2
+      accessListsOriginal:
+      - - ResearchDirector
 - proto: StationAiUploadComputer
   entities:
   - uid: 20168
