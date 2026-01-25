@@ -13,16 +13,31 @@ public sealed class PredictedProjectileSystem : EntitySystem
 {
     [Dependency] private readonly PointLightSystem _light = default!;
 
+    private EntityQuery<HiddenProjectileComponent> _hiddenQuery;
     private EntityQuery<PointLightComponent> _lightQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        _hiddenQuery = GetEntityQuery<HiddenProjectileComponent>();
         _lightQuery = GetEntityQuery<PointLightComponent>();
 
         SubscribeLocalEvent<ProjectileComponent, UpdateIsPredictedEvent>(OnUpdateIsPredicted);
+        SubscribeLocalEvent<HiddenProjectileComponent, AttemptPointLightToggleEvent>(OnAttemptLightToggle);
         SubscribeNetworkEvent<ShotPredictedProjectileEvent>(OnShotPredictedProjectile);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        // incase the light gets added after it's shot??
+        var query = EntityQueryEnumerator<HiddenProjectileComponent>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            RemComp<PointLightComponent>(uid);
+        }
     }
 
     private void OnUpdateIsPredicted(Entity<ProjectileComponent> ent, ref UpdateIsPredictedEvent args)
@@ -30,22 +45,21 @@ public sealed class PredictedProjectileSystem : EntitySystem
         args.IsPredicted = true;
     }
 
+    private void OnAttemptLightToggle(Entity<HiddenProjectileComponent> ent, ref AttemptPointLightToggleEvent args)
+    {
+        // don't let it be turned on
+        args.Cancelled |= args.Enabled;
+    }
+
     private void OnShotPredictedProjectile(ShotPredictedProjectileEvent args)
     {
         var uid = GetEntity(args.Projectile);
+        Log.Debug($"Got {ToPrettyString(uid)}");
         if (!uid.IsValid())
             return; // client may not have received the projectile state yet
 
         RemComp<SpriteComponent>(uid);
-        // TODO: engine desync thing
-        #if !DEBUG
-        if (_lightQuery.TryComp(uid, out var light))
-        {
-            // TODO
-            //EntityManager.SetComponentNetSync(uid, light, false);
-            light.NetSyncEnabled = false; // don't let server show it again
-            _light.SetEnabled(uid, false, light);
-        }
-        #endif
+        EnsureComp<HiddenProjectileComponent>(uid);
+        RemComp<PointLightComponent>(uid);
     }
 }
