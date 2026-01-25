@@ -4,8 +4,8 @@ meta:
   engineVersion: 271.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/25/2026 00:45:50
-  entityCount: 25308
+  time: 01/25/2026 01:09:17
+  entityCount: 25307
 maps:
 - 1
 grids:
@@ -133602,17 +133602,6 @@ entities:
       - SurveillanceCameraMedical
       nameSet: True
       id: Medbay North
-  - uid: 20384
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 37.5,-19.5
-      parent: 2
-    - type: SurveillanceCamera
-      setupAvailableNetworks:
-      - SurveillanceCameraMedical
-      nameSet: True
-      id: Clinic
   - uid: 20385
     components:
     - type: Transform
