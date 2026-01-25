@@ -358,7 +358,7 @@
     fireRate: 1.5 # Trauma, was 2
   - type: BatteryAmmoProvider
     proto: LaserCarbineBullet
-    fireCost: 20
+    fireCost: 20 # Trauma was 25
   - type: Item
     size: Large
   - type: Sprite
@@ -549,7 +549,7 @@
   name: laser cannon
   parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponLaserCannon
-  description: A heavy duty, high powered laser weapon, it burns hot enough to ignite on hit.
+  description: A heavy duty, high powered laser weapon.
   components:
   - type: Item
     size: Huge
@@ -1047,6 +1047,13 @@
     proto: BulletLaserSpreadNarrow
     fireCost: 80
   # Goob edit start
+  # - type: BatteryWeaponFireModes
+  #   fireModes:
+  #  - proto: BulletLaserSpreadNarrow
+  #    fireCost: 80
+  #  - proto: BulletDisablerSmgSpread
+  #    fireCost: 48
+  #    pacifismAllowedMode: true
   - type: AmmoSelector
     prototypes:
       - BulletLaserSpread

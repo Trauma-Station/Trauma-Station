@@ -1,8 +1,7 @@
 - type: entity
-  id: SidearmDisable
-  name: disable
+  id: SidearmBulletBase
   parent: BaseBullet
-  categories: [ HideSpawnMenu ]
+  abstract: true
   components:
   - type: Fixtures
     fixtures:
@@ -13,14 +12,15 @@
         hard: false
         mask:
         - Opaque
-      fly-by: *flybyfixture
-      shape: !type:PhysShapeCircle
-        radius: 1.5
-      layer:
+      fly-by: &flybyfixture
+        shape: !type:PhysShapeCircle
+          radius: 1.5
+        layer:
         - Impassable
         - MidImpassable
         - HighImpassable
         - LowImpassable
+        hard: False
       hard: False
   - type: Reflective
     reflective:
@@ -41,41 +41,22 @@
     damage:
       types:
         Heat: 2
+
+- type: entity
+  id: SidearmDisable
+  name: disable
+  parent: SidearmBulletBase
+  categories: [ HideSpawnMenu ]
+  components:
   - type: StaminaDamageOnCollide
     damage: 33
 
 - type: entity
   id: SidearmHarm
   name: harm
-  parent: BaseBullet
+  parent: SidearmBulletBase
   categories: [ HideSpawnMenu ]
   components:
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.2,0.2,0.2"
-        hard: false
-        mask:
-        - Opaque
-      fly-by: *flybyfixture
-      shape: !type:PhysShapeCircle
-        radius: 1.5
-      layer:
-        - Impassable
-        - MidImpassable
-        - HighImpassable
-        - LowImpassable
-      hard: False
-  - type: Reflective
-    reflective:
-    - Energy
-  - type: FlyBySound
-    sound:
-      collection: EnergyMiss
-      params:
-        volume: 5
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
@@ -96,7 +77,7 @@
   id: BaseLaserLongarmBullet
   name: laser
   parent: BaseBullet
-  categories: [ HideSpawnMenu ]
+  abstract: true
   components:
   - type: Fixtures
     fixtures:
@@ -108,14 +89,6 @@
         mask:
         - Opaque
       fly-by: *flybyfixture
-      shape: !type:PhysShapeCircle
-        radius: 1.5
-      layer:
-        - Impassable
-        - MidImpassable
-        - HighImpassable
-        - LowImpassable
-      hard: False
   - type: Reflective
     reflective:
     - Energy
@@ -198,7 +171,7 @@
   id: MagFedLaserBase
   name: laser
   parent: BaseBullet
-  categories: [ HideSpawnMenu ]
+  abstract: true
   components:
   - type: Fixtures
     fixtures:
@@ -210,14 +183,6 @@
         mask:
         - Opaque
       fly-by: *flybyfixture
-      shape: !type:PhysShapeCircle
-        radius: 1.5
-      layer:
-        - Impassable
-        - MidImpassable
-        - HighImpassable
-        - LowImpassable
-      hard: False
   - type: Reflective
     reflective:
     - Energy

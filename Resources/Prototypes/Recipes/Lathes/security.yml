@@ -226,15 +226,16 @@
     Glass: 800
     Plastic: 500
 
-# - type: latheRecipe # Trauma, no longer has a niche
-#   parent: BaseWeaponRecipeLong
-#   id: WeaponAdvancedLaser
-#   result: WeaponAdvancedLaser
-#   materials:
-#     Steel: 1500
-#     Glass: 1000
-#     Gold: 500
-#     Uranium: 300
+- type: latheRecipe # Trauma, no longer has a niche
+  abstract: true
+  parent: BaseWeaponRecipeLong
+  id: WeaponAdvancedLaser
+  result: WeaponAdvancedLaser
+  materials:
+    Steel: 1500
+    Glass: 1000
+    Gold: 500
+    Uranium: 300
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong

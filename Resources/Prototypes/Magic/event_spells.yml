@@ -145,7 +145,7 @@
         orGroup: Guns
       - id: WeaponAntiqueLaser
         orGroup: Guns
-      - id: WeaponAdvancedLaser # Might as well leave this one in
+      - id: WeaponAdvancedLaser
         orGroup: Guns
       - id: WeaponPistolCHIMP
         orGroup: Guns
