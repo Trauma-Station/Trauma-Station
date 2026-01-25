@@ -32,13 +32,10 @@ using Content.Server.Heretic.Components;
 using Content.Server.Antag;
 using Robust.Shared.Random;
 using System.Linq;
-using Content.Goobstation.Common.CCVar;
 using Content.Server._Goobstation.Objectives.Components;
 using Content.Server.Actions;
 using Content.Server.Chat.Managers;
-using Content.Server.Objectives;
 using Content.Shared.Humanoid;
-using Robust.Server.Player;
 using Content.Server.Revolutionary.Components;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Chat;
@@ -49,7 +46,6 @@ using Content.Shared.Preferences;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Roles.Jobs;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -61,12 +57,13 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Server.Hands.Systems;
+using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared.Tag;
 using Robust.Server.GameStates;
 
 namespace Content.Server.Heretic.EntitySystems;
 
-public sealed partial class HereticSystem : SharedHereticSystem
+public sealed class HereticSystem : SharedHereticSystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
@@ -76,21 +73,17 @@ public sealed partial class HereticSystem : SharedHereticSystem
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly ObjectivesSystem _objectives = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly PvsOverrideSystem _override = default!;
 
     [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly IPlayerManager _playerMan = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     private float _timer;
     private const float PassivePointCooldown = 20f * 60f;
-    private bool _ascensionRequiresObjectives;
 
     private const int HereticVisFlags = (int) VisibilityFlags.EldritchInfluence;
 
@@ -122,8 +115,6 @@ public sealed partial class HereticSystem : SharedHereticSystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRestart);
 
         SubscribeLocalEvent<HereticKnowledgeRitualComponent, ComponentStartup>(OnKnowledgeStartup);
-
-        Subs.CVar(_cfg, GoobCVars.AscensionRequiresObjectives, value => _ascensionRequiresObjectives = value, true);
     }
 
     private void OnMindAdded(Entity<HereticComponent> ent, ref MindGotAddedEvent args)
@@ -183,6 +174,31 @@ public sealed partial class HereticSystem : SharedHereticSystem
         }
     }
 
+    public override void RaiseKnowledgeEvent(EntityUid uid, HereticKnowledgeEvent ev, bool negative)
+    {
+        if (negative)
+            EntityManager.RemoveComponents(uid, ev.AddedComponents);
+        else
+            EntityManager.AddComponents(uid, ev.AddedComponents);
+        ev.Negative = negative;
+        ev.Heretic = uid;
+        RaiseLocalEvent(uid, (object) ev, true);
+    }
+
+    protected override void SpawnRituals(HereticComponent heretic,
+        List<EntProtoId<HereticRitualComponent>> rituals,
+        ICommonSession session)
+    {
+        base.SpawnRituals(heretic, rituals, session);
+
+        foreach (var ritual in rituals)
+        {
+            var ritUid = Spawn(ritual);
+            _override.AddSessionOverride(ritUid, session);
+            heretic.Rituals.Add(ritUid);
+        }
+    }
+
     private void OnHereticStartup(HereticStartupEvent ev)
     {
         foreach (var item in _hands.EnumerateHeld(ev.Heretic))
@@ -230,32 +246,14 @@ public sealed partial class HereticSystem : SharedHereticSystem
         }
     }
 
-    public bool ObjectivesAllowAscension(Entity<HereticComponent, MindComponent?> ent)
-    {
-        if (!_ascensionRequiresObjectives)
-            return true;
-
-        if (!Resolve(ent, ref ent.Comp2))
-            return false;
-
-        Entity<MindComponent> mindEnt = (ent, ent.Comp2);
-
-        foreach (var objId in ent.Comp1.AllObjectives)
-        {
-            if (_mind.TryFindObjective(mindEnt.AsNullable(), objId, out var obj) &&
-                !_objectives.IsCompleted(obj.Value, mindEnt))
-                return false;
-        }
-
-        return true;
-    }
-
-    public void UpdateMindKnowledge(Entity<HereticComponent, StoreComponent, MindComponent> ent,
+    public override void UpdateMindKnowledge(Entity<HereticComponent, StoreComponent, MindComponent> ent,
         EntityUid? user,
         float amount,
         bool showText = true,
         bool playSound = true)
     {
+        base.UpdateMindKnowledge(ent, user, amount, showText, playSound);
+
         var (mindId, heretic, store, mind) = ent;
         var uid = user ?? mind.OwnedEntity;
 
@@ -268,7 +266,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
         if (!showText && !playSound)
             return;
 
-        if (!_playerMan.TryGetSessionById(mind.UserId, out var session))
+        if (!PlayerMan.TryGetSessionById(mind.UserId, out var session))
             return;
 
         if (playSound)
@@ -289,19 +287,6 @@ public sealed partial class HereticSystem : SharedHereticSystem
             false,
             session.Channel,
             canCoalesce: false);
-    }
-
-    public void UpdateKnowledge(EntityUid uid,
-        float amount,
-        bool showText = true,
-        bool playSound = true,
-        MindContainerComponent? mindContainer = null)
-    {
-        if (!_mind.TryGetMind(uid, out var mindId, out var mind, mindContainer) ||
-            !TryComp(mindId, out StoreComponent? store) || !TryComp(mindId, out HereticComponent? heretic))
-            return;
-
-        UpdateMindKnowledge((mindId, heretic, store, mind), uid, amount, showText, playSound);
     }
 
     private void OnKnowledgeStartup(Entity<HereticKnowledgeRitualComponent> ent, ref ComponentStartup args)
@@ -371,7 +356,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
         // welcome to my linq smorgasbord of doom
         // have fun figuring that out
 
-        var targets = _antag.GetAliveConnectedPlayers(_playerMan.Sessions)
+        var targets = _antag.GetAliveConnectedPlayers(PlayerMan.Sessions)
             .Where(IsSessionValid)
             .Select(x => x.AttachedEntity!.Value)
             .ToList();
@@ -485,7 +470,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
             return;
 
         ent.Comp.Ascended = true;
-        RemoveRituals(ent, [AscensionRitualTag, FeastOfOwlsRitualTag]);
+        RemoveRituals(ent.AsNullable(), [AscensionRitualTag, FeastOfOwlsRitualTag]);
         ent.Comp.ChosenRitual = null;
         Dirty(ent);
 

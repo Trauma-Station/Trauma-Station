@@ -17,10 +17,6 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Goobstation.Objectives.Systems;
 
-
-[ByRefEvent]
-public readonly record struct IncrementHereticObjectiveProgressEvent(EntProtoId Proto, int Amount = 1);
-
 public sealed class HereticObjectiveSystem : EntitySystem
 {
     [Dependency] private readonly NumberObjectiveSystem _number = default!;

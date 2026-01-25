@@ -1,7 +1,7 @@
-using Content.Shared.Heretic;
+using Content.Shared.EntityConditions;
 using Content.Shared.Whitelist;
 
-namespace Content.Shared._Shitcode.Heretic.Components;
+namespace Content.Shared._Shitcode.Heretic.Rituals;
 
 [RegisterComponent]
 public sealed partial class HereticRitualComponent : Component
@@ -23,14 +23,14 @@ public sealed partial class HereticRitualComponent : Component
     /// Events that get raised on the ritual entity
     /// </summary>
     [DataField(required: true), NonSerialized]
-    public List<BaseHereticRitualEvent> Events = new();
+    public List<EntityCondition> Conditions = new();
 
     /// <summary>
     /// Events that are raised if <see cref="Limit"/> has reached <see cref="LimitedOutput"/> count
     /// If this is empty, ritual gets canceled normally
     /// </summary>
     [DataField, NonSerialized]
-    public List<BaseHereticRitualEvent> LimitReachedEvents = new();
+    public List<EntityCondition> LimitReachedConditions = new();
 
     /// <summary>
     /// Should this ritual play success animation if <see cref="Events"/> succeeded
