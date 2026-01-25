@@ -116,9 +116,6 @@
   id: CameraElectronics
 
 - type: Tag
-  id: CannotSuicideAny
-
-- type: Tag
   id: Chair
 
 - type: Tag

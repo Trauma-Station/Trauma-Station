@@ -78,8 +78,6 @@ namespace Content.Server.Heretic.Ritual;
         _heretic = args.EntityManager.System<HereticSystem>();
         _gibbing = args.EntityManager.System<GibbingSystem>();
         _lookup = args.EntityManager.System<EntityLookupSystem>();
-        _proto = IoCManager.Resolve<IPrototypeManager>();
-        _log = IoCManager.Resolve<ILogManager>();
 
         uids = new();
 

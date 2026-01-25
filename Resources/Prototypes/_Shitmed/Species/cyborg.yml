@@ -9,7 +9,7 @@
   id: Cyborg
   name: species-name-human
   roundStart: false
-  prototype: BorgChassisSelectable
+  prototype: MobHuman # idc
   sprites: CyborgSprites
   defaultSkinTone: "#fff9e2"
   markingLimits: MobHumanMarkingLimits

@@ -90,7 +90,7 @@
 - type: tile
   id: Lattice
   name: tiles-lattice
-  sprite: /Textures/Tiles/lattice.png
+  sprite: /Textures/_Trauma/Tiles/lattice.png # Trauma
   baseTurf: Space
   isSubfloor: true
   deconstructTools: [ Cutting ]

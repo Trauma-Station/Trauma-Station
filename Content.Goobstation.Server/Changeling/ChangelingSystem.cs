@@ -588,7 +588,6 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     public bool TryStealDNA(EntityUid uid, EntityUid target, ChangelingIdentityComponent comp, bool countObjective = false)
     {
         if (!TryComp<HumanoidAppearanceComponent>(target, out var appearance)
-        || !TryComp<MetaDataComponent>(target, out var metadata)
         || !TryComp<DnaComponent>(target, out var dna)
         || !TryComp<FingerprintComponent>(target, out var fingerprint))
         {
@@ -607,7 +606,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         var data = new TransformData
         {
-            Name = metadata.EntityName,
+            Name = Name(target),
             DNA = dna.DNA ?? Loc.GetString("forensics-dna-unknown"),
             Appearance = appearance
         };

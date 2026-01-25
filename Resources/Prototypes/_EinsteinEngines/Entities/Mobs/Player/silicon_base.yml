@@ -226,9 +226,6 @@
           type: StrippableBoundUserInterface
         enum.StoreUiKey.Key: # Goobstation - changelings
           type: StoreBoundUserInterface
-        enum.WizardTeleportUiKey.Key: # Goobstation - wizard
-          type: WizardTeleportBoundUserInterface
-          requireInputValidation: false
     - type: Emoting
     - type: Grammar
       attributes:

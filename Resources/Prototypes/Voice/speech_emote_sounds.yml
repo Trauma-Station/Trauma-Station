@@ -1,4 +1,6 @@
+# species
 - type: emoteSounds
+  parent: BaseHuman # Trauma
   id: MaleHuman
   params:
     variation: 0.125
@@ -39,12 +41,9 @@
       collection: MaleGasp
     DefaultDeathgasp:
       collection: MaleDeathGasp
-    Gulp: # Goob
-      path: /Audio/_Goobstation/Voice/Human/gulp.ogg
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
 
 - type: emoteSounds
+  parent: BaseHuman # Trauma
   id: FemaleHuman
   params:
     variation: 0.125
@@ -85,12 +84,9 @@
       collection: FemaleGasp
     DefaultDeathgasp:
       collection: FemaleDeathGasp
-    Gulp: # Goob
-      path: /Audio/_Goobstation/Voice/Human/gulp.ogg
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
 
 - type: emoteSounds
+  parent: BaseReptilian # Trauma
   id: MaleReptilian
   params:
     variation: 0.125
@@ -109,24 +105,13 @@
       collection: Weh
     Hew:
       collection: Hew
-    CatMeow:
-      collection: CatMeows # Goobstation - effect standardization
     Gasp:
       collection: MaleGasp
     DefaultDeathgasp:
       collection: DeathGasp
-    # Floof
-    Yip:
-      collection: Yip
-    Hiss:
-      collection: ReptilianHiss
-    # Floof end
-    Gulp: # Goob
-      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
 
 - type: emoteSounds
+  parent: BaseReptilian # Trauma
   id: FemaleReptilian
   params:
     variation: 0.125
@@ -145,36 +130,21 @@
       collection: Weh
     Hew:
       collection: Hew
-    CatMeow:
-      collection: CatMeows # Goobstation - effect standardization
     Gasp:
       collection: FemaleGasp
     DefaultDeathgasp:
       collection: FemaleDeathGasp
-    # Floof
-    Yip:
-      collection: Yip
-    Hiss:
-      collection: ReptilianHiss
-    # Floof end
-    Gulp: # Goob
-      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
 
 - type: emoteSounds
+  parent: BaseSlime # Trauma
   id: MaleSlime
   sounds:
     Squish:
       collection: Squishes
-    Bubble: # Imp
-      collection: Bubbles # Imp
-    Pop: # Imp
-      collection: Pops # Imp
     Scream:
-      collection: SlimeMaleScreams
+      collection: SlimeMaleScreams # Trauma
     Laugh:
-      collection: SlimeMaleLaughs
+      collection: SlimeMaleLaughs # Trauma
     Sneeze:
       collection: MaleSneezes
     Cough:
@@ -207,26 +177,19 @@
       collection: MaleGasp
     DefaultDeathgasp:
       collection: MaleDeathGasp
-    Gulp: # Goob
-      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
   params:
     variation: 0.125
 
 - type: emoteSounds
+  parent: BaseSlime # Trauma
   id: FemaleSlime
   sounds:
     Squish:
       collection: Squishes
-    Bubble: # Imp
-      collection: Bubbles # Imp
-    Pop: # Imp
-      collection: Pops # Imp
     Scream:
-      collection: SlimeFemaleScreams
+      collection: SlimeFemaleScreams # Trauma
     Laugh:
-      collection: SlimeFemaleLaughs
+      collection: SlimeFemaleLaughs # Trauma
     Sneeze:
       collection: FemaleSneezes
     Cough:
@@ -259,22 +222,17 @@
       collection: FemaleGasp
     DefaultDeathgasp:
       collection: FemaleDeathGasp
-    Gulp: # Goob
-      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
   params:
     variation: 0.125
 
 - type: emoteSounds
+  parent: BaseVox # Trauma
   id: UnisexVox
   sounds:
     Scream:
-      collection: VoxScreams
+      collection: VoxScreams # Trauma
     Laugh:
       path: /Audio/Voice/Vox/vox_laugh.ogg
-    Bagawk: # Mono
-      collection: Bagawk # Mono
     Cough:
       path: /Audio/_Goobstation/Voice/Vox/vox_cough.ogg # Trauma - return to Goob sounds
     Sigh:
@@ -291,36 +249,16 @@
       collection: Weh
     Hew:
       collection: Hew
-    # <Goob>
-    CatMeow:
-      collection: CatMeows
-    Sneeze:
-      path: /Audio/_Goobstation/Voice/Vox/vox_sneeze.ogg
-    CatHisses:
-      collection: CatHisses
-    MonkeyScreeches:
-      collection: MonkeyScreeches
-    RobotBeep:
-      collection: RobotBeeps
-    Yawn:
-      path: /Audio/_Goobstation/Voice/Vox/vox_yawn.ogg
-    Snore:
-      path: /Audio/_Goobstation/Voice/Vox/vox_snore.ogg
-    Whistle:
-      collection: Whistles
-    Gulp:
-      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
-    Surprised:
-      path: /Audio/_Goobstation/Voice/surprised.ogg
     Gasp:
-      path: /Audio/_Goobstation/Voice/Vox/vox_gasp.ogg # Trauma - return to Goob sounds (nested comment award)
-    # </Goob>
+      path: /Audio/_Goobstation/Voice/Vox/vox_gasp.ogg # Trauma - return to Goob sounds
     DefaultDeathgasp:
       path: /Audio/Effects/Gasp/vox_DeathGasp.ogg
   params:
     variation: 0.125
+    # TODO: We need vox sounds for the other emotes
 
 - type: emoteSounds
+  parent: BaseDiona # Trauma
   id: UnisexDiona
   sounds:
     Scream:
@@ -335,30 +273,15 @@
       collection: Weh
     Hew:
       collection: Hew
-    CatMeow:
-      collection: CatMeows # Goobstation - effect standardization
     Gasp:
       collection: MaleGasp
     DefaultDeathgasp:
       collection: DeathGasp
-    Gulp: # Goob
-      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
-    Crying: #goob
-      collection: Dionacry
-    Whistle: #goob
-      collection: Dionawhistle
-    Cough: #goob
-      collection: Dionacough
-    Yawn: #goob
-      collection: Dionayawn
-    Sigh: #goob
-      collection: Dionasigh
   params:
     variation: 0.125
 
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: UnisexArachnid
   params:
     variation: 0.125
@@ -377,18 +300,13 @@
       collection: Hew
     Honk:
       collection: BikeHorn
-    CatMeow:
-      collection: CatMeows # Goobstation - effect standardization
     Gasp:
       collection: MaleGasp
     DefaultDeathgasp:
       collection: DeathGasp
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
-    Gulp: # Goob
-      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
 
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: UnisexDwarf
   sounds:
     Scream:
@@ -427,15 +345,12 @@
       collection: MaleGasp
     DefaultDeathgasp:
       collection: MaleDeathGasp
-    Gulp: # Goob
-      path: /Audio/_Goobstation/Voice/Human/gulp.ogg
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
   params:
     variation: 0.125
     pitch: 0.75
 
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: FemaleDwarf
   sounds:
     Scream:
@@ -474,15 +389,12 @@
       collection: FemaleGasp
     DefaultDeathgasp:
       collection: FemaleDeathGasp
-    Gulp: # Goob
-      path: /Audio/_Goobstation/Voice/Human/gulp.ogg
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
   params:
     variation: 0.125
     pitch: 0.75
 
 - type: emoteSounds
+  parent: BaseMoth # Trauma
   id: UnisexMoth
   params:
     variation: 0.125
@@ -503,36 +415,13 @@
       collection: Hew
     Honk:
       collection: BikeHorn
-    CatMeow:
-      collection: CatMeows # Goobstation - effect standardization
     Gasp:
       collection: MaleGasp
     DefaultDeathgasp:
       collection: MothDeathGasp
-    Flap: # Goobstation - Add flap to moths.
-      path: /Audio/_Goobstation/Voice/Moth/moth_flap.ogg
-    Gulp: # Goob
-      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
-    RobotBeep:
-      collection: RobotBeeps
-    Yawn:
-      collection: MaleYawn
-    Snore:
-      collection: Snores
-    Sigh:
-      collection: MaleSigh
-    Crying:
-      collection: MaleCry
-    Whistle:
-      collection: Whistles
-    Sneeze:
-      collection: MaleSneezes
-    Cough:
-      collection: MaleCoughs
 
 - type: emoteSounds
+  parent: BaseSilicon # Trauma
   id: UnisexSilicon
   params:
     variation: 0.05
@@ -551,36 +440,9 @@
       path: /Audio/Items/bikehorn.ogg
     Ping:
       path: /Audio/Effects/Cargo/ping.ogg
-    Boop: # Goobstation - IPC sounds
-      path: /Audio/_EinsteinEngines/Voice/IPC/beep_500.ogg
-    Whirr: # Goobstation - IPC sounds
-      collection: IPCWhirrs
-      params:
-        variation: 0
-    #Scream: # Goobstation - Cyborg Scream
-    #  path: /Audio/_Goobstation/Voice/Cyborg/borgscream.ogg
-
-    # Goobstation - Cyborg emote sounds
-    Laugh:
-      path: /Audio/_EinsteinEngines/Voice/IPC/robot-laugh_3.ogg
-      params:
-        variation: 0.125
-    Sigh:
-      path: /Audio/Voice/Talk/pai.ogg
-      params:
-        variation: 0.125
-    Crying:
-      path: /Audio/_EinsteinEngines/Voice/IPC/cry_robot_1.ogg
-      params:
-        variation: 0.125
-    Whistle:
-      path: /Audio/_EinsteinEngines/Voice/IPC/pai_whistle.ogg
-      params:
-        variation: 0.125
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
 
 - type: emoteSounds
+  parent: BaseSilicon # Trauma
   id: UnisexSiliconSyndicate
   params:
     variation: 0.05
@@ -601,26 +463,9 @@
       path: /Audio/Items/bikehorn.ogg
     Ping:
       path: /Audio/Effects/Cargo/ping.ogg
-    #Scream: # Goobstation - Cyborg Scream
-    #  path: /Audio/_Goobstation/Voice/Cyborg/borgscream.ogg
-
-    # Goobstation - Cyborg emote sounds
-    Sigh:
-      path: /Audio/Voice/Talk/pai.ogg
-      params:
-        variation: 0.125
-    Crying:
-      path: /Audio/_EinsteinEngines/Voice/IPC/cry_robot_1.ogg
-      params:
-        variation: 0.125
-    Whistle:
-      path: /Audio/_EinsteinEngines/Voice/IPC/pai_whistle.ogg
-      params:
-        variation: 0.125
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
 
 - type: emoteSounds
+  parent: BaseSilicon # Trauma
   id: UnisexSiliconXenoborg
   params:
     variation: 0.05
@@ -641,24 +486,10 @@
       collection: XenoborgBikeHorn
     Ping:
       collection: XenoborgPing
-    # Goobstation - Cyborg emote sounds
-    Sigh:
-      path: /Audio/Voice/Xenoborg/xenoborg_buzz-sigh.ogg
-      params:
-        variation: 0.125
-    Crying:
-      path: /Audio/Voice/Xenoborg/cry_robot_xenoborg.ogg
-      params:
-        variation: 0.125
-    Whistle:
-      path: /Audio/Voice/Xenoborg/xenoborg_chime.ogg
-      params:
-        variation: 0.125
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
 
 # Vulp Sounds
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: MaleVulpkanin
   params:
     variation: 0.125
@@ -699,6 +530,7 @@
       collection: MaleDeathGasp
 
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: FemaleVulpkanin
   params:
     variation: 0.125
@@ -796,6 +628,7 @@
       variation: 0.125
 
 - type: emoteSounds
+  parent: BaseEmotes # Trauma
   id: Skeleton
   sound:
     path: /Audio/Voice/Skeleton/skeleton_scream.ogg
@@ -803,6 +636,7 @@
       variation: 0.125
 
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: Mouse
   sound:
     path: /Audio/Animals/mouse_squeak.ogg
@@ -810,6 +644,7 @@
       variation: 0.125
 
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: Cluwne
   sound:
     collection: CluwneScreams
@@ -817,6 +652,7 @@
       variation: 0.125
 
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: Bear
   sound:
     path: /Audio/Animals/bear.ogg
@@ -824,6 +660,7 @@
       variation: 0.125
 
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: Cerberus
   sound:
     path: /Audio/Animals/cerberus.ogg
@@ -831,6 +668,7 @@
       variation: 0.125
 
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: Kangaroo
   sound:
     path: /Audio/Animals/kangaroo_grunt.ogg
@@ -838,12 +676,14 @@
       variation: 0.125
 
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: Nymph
   sounds:
     Chirp:
       path: /Audio/Animals/nymph_chirp.ogg
 
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: Parrot
   sound:
     path: /Audio/Animals/parrot_raught.ogg
@@ -851,6 +691,7 @@
       variation: 0.125
 
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: Goat
   sound:
     path: /Audio/Animals/goat_bah.ogg
@@ -858,6 +699,7 @@
       variation: 0.125
 
 - type: emoteSounds
+  parent: BaseMobEmotes # Trauma
   id: Scurret
   params:
     variation: 0.125

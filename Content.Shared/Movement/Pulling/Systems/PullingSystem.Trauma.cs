@@ -29,6 +29,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics.Joints;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
+using System.Numerics;
 
 namespace Content.Shared.Movement.Pulling.Systems;
 
@@ -39,11 +40,14 @@ public sealed partial class PullingSystem
 {
     [Dependency] private readonly ContestsSystem _contests = default!;
     [Dependency] private readonly GrabThrownSystem _grabThrown = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
+
+    public const float NudgeImpulse = 2f;
 
     private void InitializeTrauma()
     {
@@ -275,6 +279,13 @@ public sealed partial class PullingSystem
         {
             distJoint.MaxLength = stageLength;
             Dirty(pullable, jointComp);
+            // nudge the puller in the pulled entity's direction to ensure it snaps without having to move
+            var nudge = _transform.GetWorldPosition(pullable) - _transform.GetWorldPosition(puller);
+            if (nudge != Vector2.Zero)
+            {
+                nudge = Vector2.Normalize(nudge) * NudgeImpulse;
+                _physics.ApplyLinearImpulse(puller, nudge);
+            }
         }
 
         if (!TryUpdateGrabVirtualItems(puller, pullable))

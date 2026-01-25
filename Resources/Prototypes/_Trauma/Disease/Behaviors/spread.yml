@@ -1,0 +1,19 @@
+- type: entity
+  parent: DiseaseBehaviorBase
+  id: DiseaseBehaviorBreathSpread
+  name: Breath Spreading
+  description: Retrovirus particles are exhaled in your breath, potentially infecting anyone nearby.
+  components:
+  - type: DiseaseEffect
+    complexity: 8
+  - type: DiseasePeriodicCondition # roughly the same as breathing cycle
+    delayMin: 2
+    delayMax: 4
+  - type: DiseaseSpreadEffect
+    arc: 360 # diffusion
+    range: 1 # not coughing so it doesn't go far
+    timeScale: false
+    spreadParams:
+      power: 1
+      chance: 0.2 # coughing has more droplets, easier to spread
+      spreadType: Aerial

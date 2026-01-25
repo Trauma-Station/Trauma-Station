@@ -6,6 +6,7 @@
 
 using Content.Shared.Polymorph;
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Devil.Condemned;
@@ -17,7 +18,8 @@ namespace Content.Goobstation.Shared.Devil.Condemned;
 /// <remarks>
 /// This should *really* be two components.
 /// </remarks>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class CondemnedComponent : Component
 {
     /// <summary>
@@ -59,7 +61,7 @@ public sealed partial class CondemnedComponent : Component
     /// <summary>
     /// Should this entity be sent to hell on death?
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool CondemnOnDeath;
 
     /// <summary>

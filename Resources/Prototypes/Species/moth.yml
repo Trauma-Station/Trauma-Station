@@ -15,12 +15,14 @@
 - type: speciesBaseSprites
   id: MobMothSprites
   sprites:
-    Special: MobHumanoidAnyMarking # Trauma
-    Head: MobMothHead
+    # <Trauma>
+    Special: MobHumanoidAnyMarking
     Face: MobHumanoidAnyMarking
+    # </Trauma>
+    Head: MobMothHead
     Snout: MobHumanoidAnyMarking
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobMothChest
     Groin: MobMothGroin
     HeadTop: MobHumanoidAnyMarking
@@ -60,24 +62,25 @@
       points: 1
       required: false
     HeadTop:
-      points: 6
+      points: 6 # Trauma - was 1
       required: true
       defaultMarkings: [ MothAntennasDefault ]
     HeadSide:
-      points: 8
+      points: 8 # Trauma - was 1
       required: false
     Head:
-      points: 8
+      points: 8 # Trauma - was 1
+      required: false
+    UndergarmentTop:
+      points: 1
+      required: false
+    UndergarmentBottom:
+      points: 1
       required: false
     Chest:
-      points: 8
+      points: 8 # Trauma - was 2
       required: false
-    Underwear:
-      points: 1
-      required: false
-    Undershirt:
-      points: 1
-      required: false
+    # <Trauma>
     RightLeg:
       points: 2
       required: false
@@ -102,6 +105,7 @@
     LeftHand:
       points: 2
       required: false
+    # </Trauma>
 
 - type: humanoidBaseSprite
   id: MobMothHead

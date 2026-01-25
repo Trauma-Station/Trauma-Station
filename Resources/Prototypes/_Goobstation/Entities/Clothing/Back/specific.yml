@@ -108,8 +108,8 @@
 - type: entity
   parent: [Clothing, ClothingSlotBase]
   id: ClothingBackpackLMGBattery
-  name: EL-20 storage
-  description: Accepts specialized car batteries to power the EL-20 HAMRR LMG.
+  name: energy LMG powerbank
+  description: Accepts specialized car batteries to power the energy LMG.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/Back/Backpacks/lmg_backpack.rsi

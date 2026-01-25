@@ -135,8 +135,7 @@ public sealed partial class StoryPrototype : IPrototype
 ///   endIfAllBetter is suitable for when you want the station to reach a given level of peace before you subject them to
 ///   the next round of chaos.
 /// </summary>
-[DataDefinition]
-[Prototype("storyBeat")]
+[Prototype]
 public sealed partial class StoryBeatPrototype : IPrototype
 {
     [IdDataField]
@@ -145,8 +144,8 @@ public sealed partial class StoryBeatPrototype : IPrototype
     /// <summary>
     ///   A human-readable description string for logging / admins
     /// </summary>
-    [DataField]
-    public string Description;
+    [DataField(required: true)]
+    public string Description = string.Empty;
 
     /// <summary>
     ///   Which chaos levels we are driving in this beat and the values we are aiming for

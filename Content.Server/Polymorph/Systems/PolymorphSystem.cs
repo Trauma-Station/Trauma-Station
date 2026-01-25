@@ -437,7 +437,7 @@ public sealed partial class PolymorphSystem : EntitySystem
     public EntityUid? Revert(Entity<PolymorphedEntityComponent?> ent)
     {
         var (uid, component) = ent;
-        if (!Resolve(ent, ref component))
+        if (!Resolve(ent, ref component, false)) // Trauma - add false so it doesn't error for non polymorphed entities
             return null;
 
         if (Deleted(uid))

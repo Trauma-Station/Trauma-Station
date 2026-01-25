@@ -281,7 +281,12 @@ namespace Content.Shared.Interaction
 
             //is this user trying to pull themself?
             if (userEntity.Value == uid)
+            // <Trauma> - add popup, CDDA parity
+            {
+                _popupSystem.PopupClient(Loc.GetString("interaction-system-pull-self"), uid, uid);
                 return false;
+            }
+            // </Trauma>
 
             if (Deleted(uid))
                 return false;
