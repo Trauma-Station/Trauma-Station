@@ -1,6 +1,7 @@
 - type: entity
   id: SidearmBulletBase
   parent: BaseBullet
+  name: phaser bolt
   abstract: true
   components:
   - type: Fixtures
@@ -21,7 +22,6 @@
         - HighImpassable
         - LowImpassable
         hard: False
-      hard: False
   - type: Reflective
     reflective:
     - Energy
@@ -44,7 +44,6 @@
 
 - type: entity
   id: SidearmDisable
-  name: disable
   parent: SidearmBulletBase
   categories: [ HideSpawnMenu ]
   components:
@@ -52,8 +51,7 @@
     damage: 33
 
 - type: entity
-  id: SidearmHarm
-  name: harm
+  id: SidearmLethal
   parent: SidearmBulletBase
   categories: [ HideSpawnMenu ]
   components:
