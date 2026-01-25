@@ -54,7 +54,7 @@ public partial class SharedBodySystem
         Dirty(organEnt, organEnt.Comp);
     }
 
-    private void RemoveOrgan(Entity<OrganComponent> organEnt, EntityUid parentPartUid)
+    public void RemoveOrgan(Entity<OrganComponent> organEnt, EntityUid parentPartUid) // Trauma - made public
     {
         var removedEv = new OrganRemovedEvent(parentPartUid, organEnt.Comp.Body); // Shitmed - add body
         RaiseLocalEvent(organEnt, ref removedEv);
