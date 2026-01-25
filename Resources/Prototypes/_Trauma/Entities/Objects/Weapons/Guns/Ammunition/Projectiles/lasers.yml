@@ -14,14 +14,14 @@
         mask:
         - Opaque
       fly-by: *flybyfixture
-        shape: !type:PhysShapeCircle
-          radius: 1.5
-        layer:
+      shape: !type:PhysShapeCircle
+        radius: 1.5
+      layer:
         - Impassable
         - MidImpassable
         - HighImpassable
         - LowImpassable
-        hard: False
+      hard: False
   - type: Reflective
     reflective:
     - Energy
@@ -60,14 +60,14 @@
         mask:
         - Opaque
       fly-by: *flybyfixture
-        shape: !type:PhysShapeCircle
-          radius: 1.5
-        layer:
+      shape: !type:PhysShapeCircle
+        radius: 1.5
+      layer:
         - Impassable
         - MidImpassable
         - HighImpassable
         - LowImpassable
-        hard: False
+      hard: False
   - type: Reflective
     reflective:
     - Energy
@@ -108,14 +108,14 @@
         mask:
         - Opaque
       fly-by: *flybyfixture
-        shape: !type:PhysShapeCircle
-          radius: 1.5
-        layer:
+      shape: !type:PhysShapeCircle
+        radius: 1.5
+      layer:
         - Impassable
         - MidImpassable
         - HighImpassable
         - LowImpassable
-        hard: False
+      hard: False
   - type: Reflective
     reflective:
     - Energy
@@ -210,14 +210,14 @@
         mask:
         - Opaque
       fly-by: *flybyfixture
-        shape: !type:PhysShapeCircle
-          radius: 1.5
-        layer:
+      shape: !type:PhysShapeCircle
+        radius: 1.5
+      layer:
         - Impassable
         - MidImpassable
         - HighImpassable
         - LowImpassable
-        hard: False
+      hard: False
   - type: Reflective
     reflective:
     - Energy
