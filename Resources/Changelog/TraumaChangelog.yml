@@ -1871,3 +1871,52 @@ Entries:
   id: 229
   time: '2026-01-24T23:59:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/482
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Re-enabled limb targeting random miss chances.
+  - type: Remove
+    message: The Phantom Pain
+  id: 230
+  time: '2026-01-25T09:30:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/490
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed bullets having 2 lights instead of 1.
+  id: 231
+  time: '2026-01-25T10:41:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/496
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      All crew get hypoports by default. The No Hypoport trait is now an
+      opt-out.
+  id: 232
+  time: '2026-01-25T10:59:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/497
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Nukies no longer get xenobio or maxcaps for free.
+  id: 233
+  time: '2026-01-25T11:27:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/498
+- author: deltanedas
+  changes:
+  - type: Add
+    message: You can now get a hold of yourself.
+  id: 234
+  time: '2026-01-25T11:34:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/500
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the FOXDIE retrovirus, traitor virologists can buy it and sample a
+      target's DNA. It will only kill targets with sampled DNA, being
+      transmitted harmlessly by everyone else.
+  id: 235
+  time: '2026-01-25T15:36:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/501

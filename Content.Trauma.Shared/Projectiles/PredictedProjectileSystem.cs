@@ -13,6 +13,7 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Shared.Executions;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -125,17 +126,16 @@ public sealed class PredictedProjectileSystem : EntitySystem
             damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
         }
 
-        // <Goob>
-        var targetPart = shooter is {} user
-            ? _gun.GetTargetPart(user, target)
-            : null;
+        var targetPart = _gun.GetTargetPart(shooter, target);
         if (TryComp(uid, out ProjectileMissTargetPartChanceComponent? missComp) &&
             !missComp.PerfectHitEntities.Contains(target))
             targetPart = TargetBodyPart.Chest;
-        // </Goob>
+        if (TryComp<BeingExecutedComponent>(target, out var executed)) // TODO: make this better idk why its shooting groin and shit
+            targetPart = executed.TargetPart;
         var deleted = Deleted(target);
 
-        if (_damageable.TryChangeDamage((target, damageable), ev.Damage, out var damage, comp.IgnoreResistances, origin: shooter, targetPart: targetPart) && Exists(shooter))
+        var canMiss = executed == null; // if you are executing someone its PB, no missing
+        if (_damageable.TryChangeDamage((target, damageable), ev.Damage, out var damage, comp.IgnoreResistances, origin: shooter, targetPart: targetPart, canMiss: canMiss) && Exists(shooter))
         {
             if (!deleted && _net.IsServer) // intentionally not predicting so you know if color flashes its 100% a hit
             {

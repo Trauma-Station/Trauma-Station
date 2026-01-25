@@ -17,6 +17,8 @@ public sealed class LanguageDiseaseSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<DiseaseCarrierComponent, EntitySpokeEvent>(OnCarrierSpoke);
 
         SubscribeLocalEvent<LanguageDiseaseComponent, MapInitEvent>(OnDiseaseInit);

@@ -832,25 +832,8 @@ public sealed partial class WoundSystem
 
         DropWoundableOrgans(woundableEntity, woundableComp);
 
-        if (TryCreateWound(parentWoundableEntity, Blunt, 0f, out var woundEnt, Brute))
-        {
-            _trauma.AddTrauma(
-                parentWoundableEntity,
-                (parentWoundableEntity, Comp<WoundableComponent>(parentWoundableEntity)),
-                (woundEnt.Value.Owner, EnsureComp<TraumaInflicterComponent>(woundEnt.Value.Owner)),
-                TraumaType.Dismemberment,
-                15f);
-
-            var bleedInflicter = EnsureComp<BleedInflicterComponent>(parentWoundableEntity);
-            bleedInflicter.BleedingAmountRaw += 20f;
-            bleedInflicter.Scaling = 1f;
-            bleedInflicter.ScalingLimit = 1f;
-            bleedInflicter.IsBleeding = true;
-            Dirty(parentWoundableEntity, bleedInflicter);
-        }
-
-        _body.DetachPart(parentWoundableEntity, bodyPartId.Remove(0, 15), woundableEntity);
         DestroyWoundableChildren(woundableEntity, woundableComp);
+        _body.DetachPart(parentWoundableEntity, bodyPartId.Remove(0, 15), woundableEntity);
 
         foreach (var wound in GetWoundableWounds(woundableEntity, woundableComp))
             TransferWoundDamage(parentWoundableEntity, woundableEntity, wound, body);
@@ -1219,6 +1202,7 @@ public sealed partial class WoundSystem
             || TerminatingOrDeleted(parentEntity))
             return;
 
+        Log.Debug($"Removing woundable {ToPrettyString(childEntity)} from {ToPrettyString(parentEntity)}");
         parentWoundable.ChildWoundables.Remove(childEntity);
         childWoundable.ParentWoundable = null;
         childWoundable.RootWoundable = childEntity;

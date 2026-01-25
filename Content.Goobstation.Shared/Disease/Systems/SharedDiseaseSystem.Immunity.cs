@@ -19,7 +19,7 @@ public partial class SharedDiseaseSystem
 
     private void OnImmunityDiseaseGained(Entity<ImmunityComponent> ent, ref DiseaseGainedEvent args)
     {
-        if (!args.Disease.Comp.CanGainImmunity)
+        if (ent.Owner != args.Carrier.Owner || !args.Disease.Comp.CanGainImmunity)
             return;
 
         TryAddImmunity((ent, ent.Comp), (args.Disease, args.Disease.Comp));
