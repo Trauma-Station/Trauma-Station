@@ -1,9 +1,10 @@
 using Content.Shared.EntityConditions;
 using Content.Shared.Whitelist;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._Shitcode.Heretic.Rituals;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class HereticRitualComponent : Component
 {
     /// <summary>
@@ -16,20 +17,20 @@ public sealed partial class HereticRitualComponent : Component
     /// All entities created by this ritual.
     /// Used for limit check.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<EntityUid> LimitedOutput = new();
 
     /// <summary>
     /// Events that get raised on the ritual entity
     /// </summary>
-    [DataField(required: true), NonSerialized]
+    [DataField(required: true)]
     public List<EntityCondition> Conditions = new();
 
     /// <summary>
     /// Events that are raised if <see cref="Limit"/> has reached <see cref="LimitedOutput"/> count
     /// If this is empty, ritual gets canceled normally
     /// </summary>
-    [DataField, NonSerialized]
+    [DataField]
     public List<EntityCondition> LimitReachedConditions = new();
 
     /// <summary>

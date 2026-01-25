@@ -105,7 +105,7 @@ public abstract class SharedHereticSystem : EntitySystem
                 ent.Comp.ChosenRitual = null;
 
             ent.Comp.Rituals.Remove(ritual);
-            QueueDel(ritual);
+            PredictedQueueDel(ritual);
         }
 
         Dirty(ent);
@@ -173,8 +173,6 @@ public abstract class SharedHereticSystem : EntitySystem
         if (data.RitualPrototypes is { Count: > 0 })
             SpawnRituals(ent.Comp2, data.RitualPrototypes, PlayerMan.GetSessionById(userId));
 
-        Dirty(ent, ent.Comp2);
-
         // set path if out heretic doesn't have it, or if it's different from whatever he has atm
         if (string.IsNullOrWhiteSpace(ent.Comp2.CurrentPath))
         {
@@ -186,6 +184,7 @@ public abstract class SharedHereticSystem : EntitySystem
         if (data.Stage > ent.Comp2.PathStage && data.Path == ent.Comp2.CurrentPath)
             ent.Comp2.PathStage = data.Stage;
 
+        Dirty(ent, ent.Comp2);
         return true;
     }
 

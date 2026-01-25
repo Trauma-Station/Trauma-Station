@@ -70,7 +70,7 @@ public sealed partial class FilterMobStateCondition : InputOutputCondition<Filte
     public MobState MobState = MobState.Alive;
 
     [DataField]
-    public bool InvertCheck;
+    public bool InvertCheck = true;
 }
 
 public sealed partial class FilterTargetsCondition : InputOutputCondition<FilterTargetsCondition>;

@@ -1,10 +1,11 @@
 using Content.Shared.Dataset;
 using Content.Shared.Tag;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Shitcode.Heretic.Components;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class HereticKnowledgeRitualComponent : Component
 {
     [DataField]
@@ -16,6 +17,6 @@ public sealed partial class HereticKnowledgeRitualComponent : Component
     /// <summary>
     /// Required tags for ritual of knowledge
     /// </summary>
-    [ViewVariables]
+    [ViewVariables, AutoNetworkedField]
     public HashSet<ProtoId<TagPrototype>> KnowledgeRequiredTags = new();
 }

@@ -13,6 +13,7 @@ using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Heretic.EntitySystems;
+using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;

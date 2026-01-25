@@ -285,7 +285,7 @@ public abstract class SharedHereticRitualSystem : EntitySystem
 
         foreach (var uid in input)
         {
-            QueueDel(uid);
+            PredictedQueueDel(uid);
         }
 
         args.Result = true;
@@ -510,7 +510,7 @@ public abstract class SharedHereticRitualSystem : EntitySystem
         {
             foreach (var uid in toDelete)
             {
-                QueueDel(uid);
+                PredictedQueueDel(uid);
             }
 
             foreach (var (stackEnt, amount) in toSplit)
@@ -547,9 +547,9 @@ public abstract class SharedHereticRitualSystem : EntitySystem
 
         EntityUid spawned;
         if (heretic.CurrentPath is { } path && args.Condition.Output.TryGetValue(path, out var toSpawn))
-            spawned = Spawn(toSpawn, coords);
+            spawned = PredictedSpawnAtPosition(toSpawn, coords);
         else
-            spawned = Spawn(args.Condition.FallbackOutput, coords);
+            spawned = PredictedSpawnAtPosition(args.Condition.FallbackOutput, coords);
 
         args.Result = true;
 
@@ -568,12 +568,12 @@ public abstract class SharedHereticRitualSystem : EntitySystem
             return;
         }
 
-        var coords = _transform.GetMapCoordinates(platform);
+        var coords = Transform(platform).Coordinates;
         foreach (var (obj, amount) in args.Condition.Output)
         {
             for (var i = 0; i < amount; i++)
             {
-                var spawned = Spawn(obj, coords);
+                var spawned = PredictedSpawnAtPosition(obj, coords);
 
                 if (_ghoulQuery.HasComp(spawned))
                 {
@@ -589,6 +589,8 @@ public abstract class SharedHereticRitualSystem : EntitySystem
                     break;
             }
         }
+
+        args.Result = true;
     }
 
 
@@ -811,9 +813,7 @@ public abstract class SharedHereticRitualSystem : EntitySystem
         return true;
     }
 
-    private bool TryDoRitual(Entity<HereticRitualComponent> ent,
-        EntityUid performer,
-        EntityUid platform)
+    private bool TryDoRitual(Entity<HereticRitualComponent> ent)
     {
         if (ent.Comp.Limit > 0)
         {
@@ -825,7 +825,7 @@ public abstract class SharedHereticRitualSystem : EntitySystem
                     return ApplyConditions(ent, ent.Comp.LimitReachedConditions);
                 }
 
-                _popup.PopupClient(Loc.GetString("heretic-ritual-fail-limit"), platform, performer);
+                ent.Comp.Blackboard[CancelString] = Loc.GetString("heretic-ritual-fail-limit");
                 return false;
             }
         }
@@ -868,10 +868,11 @@ public abstract class SharedHereticRitualSystem : EntitySystem
     {
         var user = args.Actor;
 
-        if (!_heretic.TryGetHereticComponent(user, out var heretic, out _))
+        if (!_heretic.TryGetHereticComponent(user, out var heretic, out var mind))
             return;
 
         heretic.ChosenRitual = GetEntity(args.Ritual);
+        Dirty(mind, heretic);
 
         var ritualName = Name(heretic.ChosenRitual.Value);
         _popup.PopupClient(Loc.GetString("heretic-ritual-switch", ("name", ritualName)), user, user);
@@ -895,7 +896,7 @@ public abstract class SharedHereticRitualSystem : EntitySystem
 
         SetupBlackboard(ritEnt, args.User, mind, ent);
 
-        if (TryDoRitual(ritEnt, args.User, ent))
+        if (TryDoRitual(ritEnt))
         {
             if (ritual.PlaySuccessAnimation)
                 RitualSuccess(ent, args.User, true);
@@ -904,6 +905,7 @@ public abstract class SharedHereticRitualSystem : EntitySystem
             _popup.PopupClient(cancelStr, ent, args.User);
 
         ritual.Blackboard.Clear();
+        Dirty(ritEnt);
     }
 
     private void OnExamine(Entity<HereticRitualRuneComponent> ent, ref ExaminedEvent args)

@@ -42,7 +42,7 @@ public sealed partial class HereticComponent : Component
     [DataField, AutoNetworkedField]
     public List<EntityUid> Rituals = new();
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? ChosenRitual;
 
     /// <summary>

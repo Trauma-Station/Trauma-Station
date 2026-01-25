@@ -21,7 +21,7 @@
   components:
   - type: HereticRitualRune
   - type: Sprite
-    drawdepth: HighFloorObjects
+    drawdepth: FloorEffects
     sprite: _Goobstation/Heretic/ritual_rune.rsi
     layers:
     - state: overlay # Required so that you don't miss the rune when clicking on it
@@ -61,7 +61,8 @@
         sound:
           path: /Audio/_Goobstation/Heretic/runebreak.ogg
   - type: EnchantingTable
-  - tyoe: TemperatureTracker
+  - type: AtmosExposed
+  - type: TemperatureTracker
 
 - type: entity
   id: HereticRuneRitualDrawAnimation
@@ -72,7 +73,7 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    drawdepth: HighFloorObjects
+    drawdepth: FloorEffects
     sprite: _Goobstation/Heretic/ritual_rune.rsi
     state: icon_drawanim
 
@@ -98,6 +99,6 @@
   - type: TimedDespawn
     lifetime: 1
   - type: Sprite
-    drawdepth: FloorEffects
+    drawdepth: HighFloorObjects
     sprite: _Goobstation/Heretic/ritual_rune.rsi
     state: icon_ritualanim

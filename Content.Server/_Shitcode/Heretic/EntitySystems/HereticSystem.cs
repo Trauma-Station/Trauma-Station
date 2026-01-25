@@ -296,6 +296,8 @@ public sealed class HereticSystem : SharedHereticSystem
         {
             ent.Comp.KnowledgeRequiredTags.Add(_rand.Pick(dataset));
         }
+
+        Dirty(ent);
     }
 
     private void OnCompStartup(Entity<HereticComponent> ent, ref ComponentStartup args)

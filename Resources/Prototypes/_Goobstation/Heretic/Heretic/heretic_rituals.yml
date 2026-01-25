@@ -797,20 +797,16 @@
       inputKey: Look
       outputKey: Humanoid
       whitelist:
+        requireAll: true
         components:
         - HumanoidAppearance
+        - StarMark
+      cancelLoc: heretic-ritual-fail-sacrifice-cosmos
     - !type:FilterMobStateCondition
       inputKey: Humanoid
       outputKey: Dead
-    - !type:FilterCondition
-      inputKey: Dead
-      outputKey: StarMarked
-      whitelist:
-        components:
-        - StarMark
-      cancelLoc: heretic-ritual-fail-sacrifice-cosmos
     - !type:TakeNumberCondition
-      inputKey: StarMarked
+      inputKey: Dead
       outputKey: Result
       number: 3
       cancelLoc: heretic-ritual-fail-sacrifice-cosmos
