@@ -12,11 +12,14 @@ namespace Content.Trauma.Client.Projectiles;
 public sealed class PredictedProjectileSystem : EntitySystem
 {
     [Dependency] private readonly PointLightSystem _light = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+
+    private EntityQuery<PointLightComponent> _lightQuery;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _lightQuery = GetEntityQuery<PointLightComponent>();
 
         SubscribeLocalEvent<ProjectileComponent, UpdateIsPredictedEvent>(OnUpdateIsPredicted);
         SubscribeNetworkEvent<ShotPredictedProjectileEvent>(OnShotPredictedProjectile);
@@ -33,7 +36,16 @@ public sealed class PredictedProjectileSystem : EntitySystem
         if (!uid.IsValid())
             return; // client may not have received the projectile state yet
 
-        _sprite.SetVisible(uid, false);
-        _light.SetEnabled(uid, false);
+        RemComp<SpriteComponent>(uid);
+        // TODO: engine desync thing
+        #if !DEBUG
+        if (_lightQuery.TryComp(uid, out var light))
+        {
+            // TODO
+            //EntityManager.SetComponentNetSync(uid, light, false);
+            light.NetSyncEnabled = false; // don't let server show it again
+            _light.SetEnabled(uid, false, light);
+        }
+        #endif
     }
 }
