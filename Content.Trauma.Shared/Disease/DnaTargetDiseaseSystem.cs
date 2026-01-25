@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
-using Content.Goobstation.Shared.Disease.Systems;
 using Content.Shared.Forensics.Components;
 
 namespace Content.Trauma.Shared.Disease;
@@ -11,8 +10,6 @@ namespace Content.Trauma.Shared.Disease;
 /// </summary>
 public sealed class DnaTargetDiseaseSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDiseaseSystem _disease = default!;
-
     private EntityQuery<DnaComponent> _dnaQuery;
     private EntityQuery<DnaTargetDiseaseComponent> _query;
 
