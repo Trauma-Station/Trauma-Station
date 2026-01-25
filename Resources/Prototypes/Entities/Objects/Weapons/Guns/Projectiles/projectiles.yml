@@ -1356,24 +1356,11 @@
       types:
         Heat: 13
 
-# <Trauma>
-- type: entity
-  parent: BulletLaser
-  id: BulletLaserShotgun
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    impactEffect: BulletImpactEffectOrangeDisabler
-    damage:
-      types:
-        Heat: 9
-# </Trauma>
-
 - type: entity
   name: wide laser barrage
   id: BulletLaserSpread
   categories: [ HideSpawnMenu ]
-  parent: BulletLaser
+  parent: BulletLaserShotgun # Trauma
   components:
   - type: ProjectileSpread
     proto: BulletLaserShotgun # Trauma
@@ -1384,7 +1371,7 @@
   name: lethal laser barrage
   id: BulletLaserSpreadNarrow
   categories: [ HideSpawnMenu ]
-  parent: BulletLaser
+  parent: BulletLaserShotgun # Trauma
   components:
   - type: ProjectileSpread
     proto: BulletLaserShotgun # Trauma

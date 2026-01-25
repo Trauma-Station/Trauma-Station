@@ -13,6 +13,15 @@
         hard: false
         mask:
         - Opaque
+      fly-by: &flybyfixture
+        shape: !type:PhysShapeCircle
+          radius: 1.5
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: False
   - type: Reflective
     reflective:
     - Energy
@@ -50,6 +59,15 @@
         hard: false
         mask:
         - Opaque
+      fly-by: &flybyfixture
+        shape: !type:PhysShapeCircle
+          radius: 1.5
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: False
   - type: Reflective
     reflective:
     - Energy
@@ -89,6 +107,15 @@
         hard: false
         mask:
         - Opaque
+      fly-by: &flybyfixture
+        shape: !type:PhysShapeCircle
+          radius: 1.5
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: False
   - type: Reflective
     reflective:
     - Energy
@@ -182,6 +209,15 @@
         hard: false
         mask:
         - Opaque
+      fly-by: &flybyfixture
+        shape: !type:PhysShapeCircle
+          radius: 1.5
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: False
   - type: Reflective
     reflective:
     - Energy
@@ -432,3 +468,16 @@
     layers:
     - state: lightbolt
       color: "#fc5d52"
+
+# Warden shotgun
+
+- type: entity
+  parent: BulletLaser
+  id: BulletLaserShotgun
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 9
