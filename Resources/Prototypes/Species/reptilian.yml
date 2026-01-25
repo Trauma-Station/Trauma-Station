@@ -1,25 +1,3 @@
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Adrian16199 <144424013+Adrian16199@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ubaser <134914314+UbaserB@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 coolsurf6 <coolsurf24@yahoo.com.au>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Froffy025 <scotttaco025@gmail.com>
-# SPDX-FileCopyrightText: 2025 BloodfiendishOperator <141253729+Diggy0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 MarkerWicker <markerWicker@proton.me>
-# SPDX-FileCopyrightText: 2025 MilenVolf <63782763+MilenVolf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 PuroSlavKing <103608145+PuroSlavKing@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Sapphire <98045970+sapphirescript@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Skubman <ba.fallaria@gmail.com>
-# SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 VMSolidus <evilexecutive@gmail.com>
-# SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: species
   id: Reptilian
   name: species-name-reptilian
@@ -37,12 +15,14 @@
 - type: speciesBaseSprites
   id: MobReptilianSprites
   sprites:
-    Special: MobHumanoidAnyMarking # Trauma
-    Head: MobReptilianHead
+    # <Trauma>
+    Special: MobHumanoidAnyMarking
     Face: MobHumanoidAnyMarking
+    # </Trauma>
+    Head: MobReptilianHead
     Snout: MobHumanoidAnyMarking
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobReptilianChest
     Groin: MobReptilianGroin
     HeadTop: MobHumanoidAnyMarking
@@ -53,10 +33,12 @@
     RArm: MobReptilianRArm
     LHand: MobReptilianLHand
     RHand: MobReptilianRHand
-    LLeg: MobReptilianLLegDigi # WWDP-Edit
-    RLeg: MobReptilianRLegDigi # WWDP-Edit
-    LFoot: MobReptilianLFootDigi # WWDP-Edit
-    RFoot: MobReptilianRFootDigi # WWDP-Edit
+    # <Trauma> - use digigrade versions
+    LLeg: MobReptilianLLegDigi
+    RLeg: MobReptilianRLegDigi
+    LFoot: MobReptilianLFootDigi
+    RFoot: MobReptilianRFootDigi
+    # </Trauma>
 
 - type: markingPoints
   id: MobReptilianMarkingLimits
@@ -77,20 +59,21 @@
       required: true
       defaultMarkings: [ LizardSnoutRound ]
     HeadTop:
-      points: 3
+      points: 3 # Trauma - was 2
       required: false
     HeadSide:
-      points: 6 # WWDP-Edit
+      points: 6 # Trauma - was 1
+      required: false
+    UndergarmentTop:
+      points: 1
+      required: false
+    UndergarmentBottom:
+      points: 1
       required: false
     Chest:
-      points: 8
+      points: 8 # Trauma - was 3
       required: false
-    Underwear:
-      points: 1
-      required: false
-    Undershirt:
-      points: 1
-      required: false
+    # <Trauma>
     RightLeg:
       points: 2
       required: false
@@ -115,6 +98,7 @@
     LeftHand:
       points: 3
       required: false
+    # </Trauma>
 
 - type: humanoidBaseSprite
   id: MobReptilianHead

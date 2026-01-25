@@ -71,6 +71,7 @@ using Content.Shared._Shitcode.Heretic.Systems.Abilities;
 using Content.Shared.Damage.Components;
 using Content.Shared.FixedPoint;
 using Content.Server.Cloning;
+using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Heretic.Components;
 using Content.Shared.Movement.Pulling.Systems;
@@ -128,8 +129,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
 
     private static readonly ProtoId<TagPrototype> BladeBladeRitualTag = "RitualBladeBlade";
-
-    private static readonly ProtoId<TagPrototype> BladeBladeTag = "HereticBladeBlade";
 
     private const float LeechingWalkUpdateInterval = 1f;
     private float _accumulator;
@@ -248,10 +247,10 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
             var success = false;
             foreach (var blade in ritual.Value.Comp.LimitedOutput)
             {
-                if (!EntityManager.EntityExists(blade))
+                if (!Exists(blade))
                     continue;
 
-                if (!_tag.HasTag(blade, BladeBladeTag))
+                if (!_tag.HasTag(blade, SharedMansusGraspSystem.HereticBladeBlade))
                     continue;
 
                 if (TryComp(blade, out MansusInfusedComponent? infused) &&

@@ -131,3 +131,122 @@
   components:
   - type: BallisticAmmoProvider
     proto: null
+
+- type: entity
+  parent: BaseRevMajorContraband
+  id: PowerArmorFrame
+  name: P.O.W.A.R armor frame
+  description: Precise Orbital WAR, armor
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Objects/Specific/Mech/PowerArmorFrame.rsi
+    state: frame
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Buckleable
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        density: 500
+        mask:
+        - ItemMask
+  - type: Appearance
+  - type: ItemMapper
+    sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
+    mapLayers:
+      t45_lefthand:
+        whitelist:
+          tags:
+          - T45ArmR
+      t45_righthand:
+        whitelist:
+          tags:
+          - T45ArmL
+      t45_chest:
+        whitelist:
+          tags:
+          - T45Chest
+      t45_helmet:
+        whitelist:
+          tags:
+          - T45Helmet
+      t45_rightleg:
+        whitelist:
+          tags:
+          - T45LegR
+      t45_leftleg:
+        whitelist:
+          tags:
+          - T45LegL
+  - type: ContainerContainer
+    containers:
+      part-container: !type:Container
+  - type: PartAssembly
+    parts:
+      generic:
+      - T45LegL
+      - T45LegR
+      - T45Helmet
+      - T45Chest
+      - T45ArmL
+      - T45ArmR
+  - type: Construction
+    graph: T45Armor
+    node: start
+    defaultTarget: T45
+    containers:
+    - part-container
+  - type: Buckle
+  - type: Pullable
+  - type: Tag
+    tags:
+    - T45Frame
+
+- type: entity
+  parent: [ BaseMech, BaseRevMajorContraband, CombatMech ]
+  id: T45PowerArmor
+  name: T-45 P.O.W.A.R armor
+  description: Precise Orbital Worn Armor (for) Revolutionaries
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
+    state: T45Armor
+  - type: Buckleable
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepHeavySuit
+  - type: Mech
+    baseState: T45Armor
+    openState: T45Armor
+    brokenState: T45Armor
+    mechToPilotDamageMultiplier: 0.01
+    airtight: false
+    maxIntegrity: 250
+    maxEquipmentAmount: 2
+    pilotWhitelist:
+      components:
+      - HumanoidAppearance
+    startingEquipment:
+    - WeaponMechMeleePowerFist
+    - WeaponMechCombatFlameThrower
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 2
+  - type: Damageable
+    damageModifierSet: HeavyArmorNT
+  - type: StaticPrice
+    price: 1000
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+    - T45Frame
+  - type: Construction
+    graph: T45Armor
+    node: start
+  - type: Buckle

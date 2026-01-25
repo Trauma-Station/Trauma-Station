@@ -20,6 +20,7 @@ using Content.Shared.Verbs;
 using Content.Trauma.Common.Body;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
@@ -32,6 +33,7 @@ public abstract class SharedCPRSystem : EntitySystem
     [Dependency] private readonly IngestionSystem _ingestion = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -120,7 +122,8 @@ public abstract class SharedCPRSystem : EntitySystem
             return;
 
         var active = EnsureComp<ActiveCPRComponent>(target);
-        if (_audio.PlayPredicted(ent.Comp.Sound, ent, ent, ent.Comp.Sound.Params.WithLoop(true)) is not {} audio)
+        // PlayPredicted is shitcode and doesnt spawn the same entity for client, can't do it nicely
+        if (_net.IsClient || _audio.PlayPredicted(ent.Comp.Sound, ent, ent, ent.Comp.Sound.Params.WithLoop(true)) is not {} audio)
             return;
 
         active.Sound = audio.Entity;

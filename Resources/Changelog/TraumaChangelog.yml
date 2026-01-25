@@ -1,5 +1,5 @@
 Name: Traumalog
-Order: -1
+Order: -2
 Entries:
 - author: Durk
   changes:
@@ -1779,3 +1779,95 @@ Entries:
   id: 217
   time: '2026-01-23T08:45:16.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/463
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Predicted reverse beartraps.
+  id: 218
+  time: '2026-01-23T12:56:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/464
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Changed undergarments to be the same as on wizden.
+  id: 219
+  time: '2026-01-23T16:05:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/468
+- author: TurboTrackerss14
+  changes:
+  - type: Remove
+    message: Durathread crafts through lathe and construction menu.
+  id: 220
+  time: '2026-01-23T22:27:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/471
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Made hardgrabs feel less jank.
+  id: 221
+  time: '2026-01-24T13:25:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/476
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Signing paper is now fully predicted.
+  id: 222
+  time: '2026-01-24T19:26:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/480
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: Made gun executions more real (you can now execute with any gun)
+  id: 223
+  time: '2026-01-24T19:27:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/470
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed slime wizards not being able to use the teleport spell.
+  id: 224
+  time: '2026-01-24T19:30:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/478
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Most mobs now have sounds for gulp/surprised emotes instead of squeaking
+      or whatever.
+  id: 225
+  time: '2026-01-24T19:39:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/481
+- author: Joel and Armok
+  changes:
+  - type: Add
+    message: Tons of sprites
+  - type: Remove
+    message: Midround changelings, heretics, devils, and demons
+  - type: Tweak
+    message: Midround antag rates
+  id: 226
+  time: '2026-01-24T23:13:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/485
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added T-45 P.O.W.A.R Armor, a new mech for revs
+  id: 227
+  time: '2026-01-24T23:14:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/456
+- author: SpeltIncorrectyl
+  changes:
+  - type: Tweak
+    message: Renamed 'Law Bringer' to 'Order' to fit in more with the 'Justice'
+  id: 228
+  time: '2026-01-24T23:44:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/484
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed bullets always targeting a random part, now they will go where you
+      aim if you are very close.
+  id: 229
+  time: '2026-01-24T23:59:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/482

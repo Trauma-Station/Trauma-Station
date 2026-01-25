@@ -21,7 +21,6 @@
     containers:
       ballistic-ammo: !type:Container
         ents: []
-  - type: GunExecutionBlacklist # Goobstation
 
 - type: entity
   name: china lake

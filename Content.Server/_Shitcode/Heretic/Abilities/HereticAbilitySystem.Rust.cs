@@ -20,6 +20,7 @@ using Content.Shared.Flash;
 using Content.Shared.Heretic;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
+using Content.Shared.Tag;
 using Content.Shared.Tiles;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -37,6 +38,8 @@ public sealed partial class HereticAbilitySystem
         { "WallSolid", "WallSolidRust" },
         { "WallReinforced", "WallReinforcedRust" },
     };
+
+    public static readonly ProtoId<TagPrototype> Wall = "Wall";
 
     protected override void SubscribeRust()
     {
@@ -231,7 +234,7 @@ public sealed partial class HereticAbilitySystem
             targetEntity = Spawn(transformation, coords, rotation: rotation);
         }
 
-        if (TerminatingOrDeleted(targetEntity) || !_tag.HasTag(targetEntity, "Wall"))
+        if (TerminatingOrDeleted(targetEntity) || !_tag.HasTag(targetEntity, Wall))
             return false;
 
         if (targetEntity == target && !canRust)

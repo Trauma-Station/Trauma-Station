@@ -118,7 +118,7 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
         }
 
         // Death to catwalks
-        if (_tag.HasTag(args.Target.Value, "Catwalk"))
+        if (_tag.HasTag(args.Target.Value, Catwalk))
         {
             args.Handled = true;
             InvokeGrasp(args.User, (uid, grasp));

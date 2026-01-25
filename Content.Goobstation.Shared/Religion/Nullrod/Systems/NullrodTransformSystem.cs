@@ -10,16 +10,16 @@ using Content.Shared.Storage;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Religion.Nullrod;
 
 public sealed class NullrodTransformSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
 
+    public static readonly ProtoId<TagPrototype> NullrodTag = "Nullrod";
 
     public override void Initialize()
     {
@@ -29,21 +29,19 @@ public sealed class NullrodTransformSystem : EntitySystem
 
     private void OnInteractUsing(EntityUid uid, AltarSourceComponent component, InteractUsingEvent args)
     {
-        if (args.Handled
-        || _netManager.IsClient
-        || HasComp<StorageComponent>(args.Target) // If it's a storage component like a bag, we ignore usage so it can be stored.
-        || !_tagSystem.HasTag(args.Used, "Nullrod")) // Checks used entity for the tag we need.
-        return;
+        // Checks used entity for the tag we need.
+        if (args.Handled || !_tag.HasTag(args.Used, NullrodTag))
+            return;
 
         // *flaaavor*
-        Spawn(component.EffectProto, Transform(uid).Coordinates);
-        _audio.PlayPvs(component.SoundPath, uid, AudioParams.Default.WithVolume(-4f));
+        PredictedSpawnAtPosition(component.EffectProto, Transform(uid).Coordinates);
+        _audio.PlayPredicted(component.SoundPath, uid, args.User, AudioParams.Default.WithVolume(-4f));
 
         // Spawn proto associated with the altar.
-        Spawn(component.RodProto, args.ClickLocation.SnapToGrid(EntityManager));
+        PredictedSpawnAtPosition(component.RodProto, args.ClickLocation.SnapToGrid(EntityManager));
 
         // Remove the nullrod
-        QueueDel(args.Used);
+        PredictedQueueDel(args.Used);
         args.Handled = true;
     }
 }

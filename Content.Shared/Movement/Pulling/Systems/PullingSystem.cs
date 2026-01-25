@@ -259,6 +259,7 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
 
     private void OnVirtualItemDeleted(EntityUid uid, PullerComponent component, VirtualItemDeletedEvent args)
     {
+        if (_timing.ApplyingState) return; // Trauma - this happens while predicting starting pulling and makes everything jank
         // If client deletes the virtual hand then stop the pull.
         if (component.Pulling == null)
             return;

@@ -1,6 +1,8 @@
+// <Trauma>
+using Content.Goobstation.Common.Interactions;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Goobstation.Common.Interactions;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
@@ -170,8 +172,7 @@ namespace Content.Shared.Interaction
                 // We permit ghosts to open uis unless explicitly blocked
                 if (ev.Message is not OpenBoundInterfaceMessage
                     || !HasComp<GhostComponent>(ev.Actor)
-                    || aUiComp?.BlockSpectators == true
-                    || _tagSystem.HasTag(ev.Actor, "CantInteract")) // Shitmed change
+                    || aUiComp?.BlockSpectators == true)
                 {
                     ev.Cancel();
                     return;
@@ -223,8 +224,6 @@ namespace Content.Shared.Interaction
         /// <summary>
         ///     Prevents an item with the Unremovable component from being removed from a container by almost any means
         /// </summary>
-        ///
-        ///
         private void OnRemoveAttempt(EntityUid uid, UnremoveableComponent item, ContainerGettingRemovedAttemptEvent args)
         {
             // don't prevent the server state for the container from being applied to the client correctly
@@ -1242,13 +1241,13 @@ namespace Content.Shared.Interaction
             if (checkCanUse && !_actionBlockerSystem.CanUseHeldEntity(user, used))
                 return false;
 
-            // Goobstation [
+            // <Goob>
             var useAttemptEv = new UseInHandAttemptEvent(user);
             RaiseLocalEvent(used, useAttemptEv);
 
             if (useAttemptEv.Cancelled)
                 return false;
-            // ] Goobstation
+            // </Goob>
 
             var useMsg = new UseInHandEvent(user);
             RaiseLocalEvent(used, useMsg, true);

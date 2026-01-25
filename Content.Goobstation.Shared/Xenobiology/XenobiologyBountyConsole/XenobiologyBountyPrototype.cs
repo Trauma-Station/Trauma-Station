@@ -1,6 +1,5 @@
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Xenobiology.XenobiologyBountyConsole;
@@ -10,7 +9,7 @@ namespace Content.Goobstation.Shared.Xenobiology.XenobiologyBountyConsole;
 /// from an alien creature (Currently, Just slime extracts)
 /// that can be exchanged for research points.
 /// </summary>
-[Prototype, Serializable, NetSerializable]
+[Prototype]
 public sealed partial class XenobiologyBountyPrototype : IPrototype
 {
     /// <inheritdoc/>
@@ -36,30 +35,30 @@ public sealed partial class XenobiologyBountyPrototype : IPrototype
     public string IdPrefix = "NT";
 }
 
-[DataDefinition, Serializable, NetSerializable]
-public readonly partial record struct XenobiologyBountyItemEntry()
+[DataDefinition]
+public partial record struct XenobiologyBountyItemEntry()
 {
     /// <summary>
     /// A whitelist for determining what items satisfy the entry.
     /// </summary>
     [DataField(required: true)]
-    public EntityWhitelist Whitelist { get; init; } = default!;
+    public EntityWhitelist Whitelist = default!;
 
     /// <summary>
     /// A blacklist that can be used to exclude items in the whitelist.
     /// </summary>
     [DataField]
-    public EntityWhitelist? Blacklist { get; init; } = null;
+    public EntityWhitelist? Blacklist;
 
     /// <summary>
     /// How much of the item must be present to satisfy the entry
     /// </summary>
     [DataField]
-    public int Amount { get; init; } = 1;
+    public int Amount = 1;
 
     /// <summary>
     /// A player-facing name for the item.
     /// </summary>
     [DataField]
-    public LocId Name { get; init; } = string.Empty;
+    public LocId Name;
 }

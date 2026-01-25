@@ -3,9 +3,11 @@ using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Fluids;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Slasher.Systems;
@@ -23,6 +25,8 @@ public sealed class SlasherBloodTrailSystem : EntitySystem
 
     // Next time at which we should drop a blood puddle for an entity.
     private readonly Dictionary<EntityUid, TimeSpan> _nextDropAt = new();
+
+    public static readonly ProtoId<ReagentPrototype> Blood = "Blood";
 
     public override void Initialize()
     {
@@ -122,7 +126,7 @@ public sealed class SlasherBloodTrailSystem : EntitySystem
             // Spill a small amount of generic blood at the entity's feet.
             var solution = new Solution();
             var amount = FixedPoint2.Max(FixedPoint2.Zero, comp.VolumePerDrop);
-            solution.AddReagent("Blood", amount);
+            solution.AddReagent(Blood, amount);
 
             _puddles.TrySpillAt(uid, solution, out _, sound: false);
         }
