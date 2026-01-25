@@ -58,13 +58,11 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: heavybolt
       shader: unshaded
       color: "#fc5d52"
   - type: Projectile
-    impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
         Heat: 10
@@ -116,7 +114,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: heavybolt
       shader: unshaded
@@ -133,7 +130,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: heavybolt
       shader: unshaded
@@ -152,7 +148,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: heavybolt
       shader: unshaded
@@ -198,7 +193,6 @@
       shader: unshaded
       color: "#fc5d52"
   - type: Projectile
-    impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
         Heat: 8
@@ -216,7 +210,6 @@
       types:
         Heat: 10
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: lightbolt
       shader: unshaded
@@ -228,12 +221,10 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
-    impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
         Ion: 10
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: lightbolt
       shader: unshaded
@@ -253,7 +244,6 @@
         Heat: 5
         Radiation: 5
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: lightbolt
       shader: unshaded
@@ -271,7 +261,6 @@
       types:
         Heat: 8
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: lightbolt
       color: "#ff6122"
@@ -291,7 +280,6 @@
       types:
         Heat: 5
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: lightbolt
       color: "#fc5d52"
@@ -306,7 +294,6 @@
       types:
         Ion: 5
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: lightbolt
       color: "#2684ff"
@@ -324,7 +311,6 @@
       types:
         Heat: 5
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: lightbolt
       color: "#27ff4b"
@@ -340,7 +326,6 @@
       types:
         Heat: 4
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: lightbolt
       color: "#fc5d52"
@@ -429,7 +414,6 @@
       types:
         Heat: 3
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: lightbolt
       color: "#fc5d52"

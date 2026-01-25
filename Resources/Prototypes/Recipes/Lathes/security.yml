@@ -226,8 +226,8 @@
     Glass: 800
     Plastic: 500
 
-- type: latheRecipe # Trauma, no longer has a niche
-  abstract: true
+- type: latheRecipe
+  abstract: true # Trauma, no longer has a niche
   parent: BaseWeaponRecipeLong
   id: WeaponAdvancedLaser
   result: WeaponAdvancedLaser
