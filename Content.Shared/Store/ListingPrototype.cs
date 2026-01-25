@@ -274,6 +274,6 @@ public partial class ListingData : IEquatable<ListingData>, ICloneable
 /// <summary>
 ///     Defines a set item listing that is available in a store
 /// </summary>
-[Prototype("listing")]
+[Prototype]
 [DataDefinition]
 public sealed partial class ListingPrototype : ListingData, IPrototype;

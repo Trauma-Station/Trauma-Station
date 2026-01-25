@@ -16,9 +16,9 @@ namespace Content.Goobstation.Client.ChronoLegionnaire.Overlays;
 
 public sealed class StasisOverlay : Overlay
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
 
     public override bool RequestScreenTexture => true;
 
@@ -26,15 +26,17 @@ public sealed class StasisOverlay : Overlay
 
     private readonly ShaderInstance _coloredScreenBorder;
 
+    public static readonly ProtoId<ShaderPrototype> WideColoredScreenBorder = "WideColoredScreenBorder";
+
     public StasisOverlay()
     {
         IoCManager.InjectDependencies(this);
-        _coloredScreenBorder = _prototypeManager.Index<ShaderPrototype>("WideColoredScreenBorder").InstanceUnique();
+        _coloredScreenBorder = _proto.Index(WideColoredScreenBorder).InstanceUnique();
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
     {
-        if (_entityManager.HasComponent<InsideStasisComponent>(_playerManager.LocalSession?.AttachedEntity))
+        if (_entMan.HasComponent<InsideStasisComponent>(_player.LocalSession?.AttachedEntity))
             return true;
 
         return false;

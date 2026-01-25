@@ -58,6 +58,7 @@
   - type: Tag
     tags:
     - Wonderprod
+  - type: PacifismDangerousAttack
   - type: Multihit
     multihitWhitelist:
       tags:

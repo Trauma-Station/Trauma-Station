@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 270.1.0
+  engineVersion: 271.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/12/2026 02:53:47
-  entityCount: 38147
+  time: 01/22/2026 20:30:37
+  entityCount: 38146
 maps:
 - 1
 grids:
@@ -21080,7 +21080,7 @@ entities:
       pos: -40.5,39.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -4675.677
+      secondsUntilStateChange: -4850.226
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -21678,7 +21678,7 @@ entities:
       pos: 72.5,-11.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -85229.02
+      secondsUntilStateChange: -85403.57
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -29808,11 +29808,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -19.5,57.5
-      parent: 2
-  - uid: 2237
-    components:
-    - type: Transform
-      pos: 49.5,-37.5
       parent: 2
   - uid: 2238
     components:
@@ -165655,16 +165650,6 @@ entities:
     - type: Transform
       pos: 16.5,75.5
       parent: 2
-- proto: GunSafeDisabler
-  entities:
-  - uid: 24401
-    components:
-    - type: Transform
-      pos: 20.5,15.5
-      parent: 2
-    - type: AccessReader
-      accessListsOriginal:
-      - - Armory
 - proto: GunSafeJudo
   entities:
   - uid: 24782
@@ -165693,6 +165678,16 @@ entities:
     - type: Transform
       pos: 17.5,11.5
       parent: 2
+- proto: GunSafePhaser
+  entities:
+  - uid: 24401
+    components:
+    - type: Transform
+      pos: 20.5,15.5
+      parent: 2
+    - type: AccessReader
+      accessListsOriginal:
+      - - Armory
 - proto: GunSafeRiotLauncher
   entities:
   - uid: 24774
@@ -171984,13 +171979,6 @@ entities:
     components:
     - type: Transform
       pos: -18.528942,-20.489607
-      parent: 2
-- proto: PlushieBingleYakub
-  entities:
-  - uid: 36477
-    components:
-    - type: Transform
-      pos: -52.517273,27.422241
       parent: 2
 - proto: PlushieLamp
   entities:
@@ -181833,11 +181821,6 @@ entities:
     - type: Transform
       pos: 58.5,-4.5
       parent: 2
-  - uid: 26561
-    components:
-    - type: Transform
-      pos: 61.5,1.5
-      parent: 2
   - uid: 26562
     components:
     - type: Transform
@@ -187841,6 +187824,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: ScrapAirlock1
   entities:
@@ -188043,6 +188027,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: SeedExtractor
   entities:
@@ -188073,6 +188058,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: ShardGlass
   entities:
@@ -195367,6 +195353,20 @@ entities:
     components:
     - type: Transform
       pos: 21.5,49.5
+      parent: 2
+- proto: StationAiFixerCircuitboard
+  entities:
+  - uid: 26561
+    components:
+    - type: Transform
+      pos: 61.531956,1.5304916
+      parent: 2
+- proto: StationAiFixerComputer
+  entities:
+  - uid: 2237
+    components:
+    - type: Transform
+      pos: 49.5,-37.5
       parent: 2
 - proto: StationAiUploadCircuitboard
   entities:
@@ -205568,6 +205568,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: UniformScrubsColorBlue
   entities:

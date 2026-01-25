@@ -577,6 +577,7 @@
     range: 3
     energyConsumption: 50000
     disableDuration: 15
+  - type: DeleteOnTrigger
 
 - type: entity
   id: ProjectileSmokeBolt

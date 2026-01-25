@@ -19,7 +19,7 @@ public abstract partial class SharedGunSystem
     /// <summary>
     /// Get a predicted random instance for an entity, specific to this tick.
     /// </summary>
-    private System.Random Random(EntityUid uid)
+    public System.Random Random(EntityUid uid)
     {
         var seed = SharedRandomExtensions.HashCodeCombine((int) Timing.CurTick.Value, GetNetEntity(uid).Id);
         return new System.Random(seed);
@@ -74,9 +74,9 @@ public abstract partial class SharedGunSystem
     }
 
     /// <summary>
-    /// Trauma - changed component to Entity, added user
+    /// Trauma - changed component to Entity, added user, made public
     /// </summary>
-    private Angle GetRecoilAngle(TimeSpan curTime, Entity<GunComponent> ent, Angle direction, EntityUid? user = null)
+    public Angle GetRecoilAngle(TimeSpan curTime, Entity<GunComponent> ent, Angle direction, EntityUid? user = null)
     {
         var (uid, comp) = ent;
         var timeSinceLastFire = (curTime - comp.LastFire).TotalSeconds;

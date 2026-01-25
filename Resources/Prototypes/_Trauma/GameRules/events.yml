@@ -15,10 +15,10 @@
   table: !type:AllSelector
     children:
     - id: BlobSpawn
-    - id: LoneAbductorSpawn
+    # - id: LoneAbductorSpawn
     - id: DuoAbductorSpawn
     - id: BingleSpawn
-    - id: SlaughterDemonMidround
+    # - id: SlaughterDemonMidround - Wizard/Ninja only antag, maybe devil eventually
     - id: XenomorphsInfestation
     # TOOD: remove these if they fucking suck lmao
     - id: GreyTideAntagMidround
@@ -29,9 +29,9 @@
     - id: VoxRaidersMidround
     - id: TunnelClownMidround
     #- id: WraithMidround # if someone makes it less chuddy
-    - id: ChangelingMidround
-    - id: HereticMidround
-    - id: Devilmidround
+    # - id: ChangelingMidround # Trauma - We dont want lings in other game modes people hate it
+    # - id: HereticMidround # Trauma - Heretics scale too slowly here to do this
+    # - id: Devilmidround # Trauma - Devil midround does not make sense and is kinda weird
     - id: Dud50
     #- id: SlasherSpawn # TODO: when slasher is ready
 

@@ -1,0 +1,10 @@
+Order: -1
+AdminOnly: true
+Entries:
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added the Trauma Admin changelog.
+  id: 1
+  time: '2026-01-23T13:28:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/466

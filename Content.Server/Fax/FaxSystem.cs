@@ -363,15 +363,16 @@ public sealed class FaxSystem : EntitySystem
 
     private void OnSendButtonPressed(EntityUid uid, FaxMachineComponent component, FaxSendMessage args)
     {
-        // Goobstation
-        if (component.PaperSlot.Item != null)
+        // <Goob>
+        if (component.PaperSlot.Item is {} item)
         {
-            var sentEv = new GettingFaxedSentEvent((uid, component), args);
-            RaiseLocalEvent(component.PaperSlot.Item.Value, ref sentEv);
+            var sentEv = new GettingFaxedSentEvent((uid, component), args.Actor);
+            RaiseLocalEvent(item, ref sentEv);
 
             if (sentEv.Handled)
                 return;
         }
+        // </Goob>
 
         if (HasComp<MobStateComponent>(component.PaperSlot.Item))
             _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.

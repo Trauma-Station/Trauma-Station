@@ -249,7 +249,6 @@
         - HumanoidAppearance
     blacklist:
       components:
-        - RogueAscendedInfection
         - CosmicCult
         - BibleUser
     event: !type:EventRogueInfection {}
@@ -275,7 +274,6 @@
         - HumanoidAppearance
     blacklist:
       components:
-        - RogueAscendedInfection
         - CosmicCult
         - BibleUser
     event: !type:EventRogueSlumber {}

@@ -53,6 +53,9 @@
   id: ForgeMold
 
 - type: Tag
+  id: FusionCore
+
+- type: Tag
   id: HandTeleporter
 
 - type: Tag
@@ -84,6 +87,27 @@
 
 - type: Tag
   id: TechfabMachineBoard
+
+- type: Tag
+  id: T45Frame
+
+- type: Tag
+  id: T45LegL
+
+- type: Tag
+  id: T45LegR
+
+- type: Tag
+  id: T45ArmR
+
+- type: Tag
+  id: T45ArmL
+
+- type: Tag
+  id: T45Chest
+
+- type: Tag
+  id: T45Helmet
 
 - type: Tag
   id: WelderExperimental
