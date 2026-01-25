@@ -220,8 +220,8 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/energy_cell_revolver.rsi
   - type: Battery
-    maxCharge: 500
-    startingCharge: 500
+    maxCharge: 480
+    startingCharge: 480
   - type: BatteryDrinkerSource
     maxAmount: 100
   - type: Tag
@@ -239,7 +239,7 @@
 
 - type: entity
   name: revolver power cell
-  description: A militarized power cell compatible with laser revolvers.
+  description: A power cell compatible with laser revolvers.
   id: PowerCellIRRevolver
   suffix: Full
   parent: BaseMilitaryPowerCellRevolver
@@ -257,8 +257,8 @@
           Neither: { state: lethal_charge, shader: unshaded }
           Empty: { state: lethal, shader: null }
   - type: BatteryAmmoProvider
-    proto: MediumRedLaser
-    fireCost: 62.5
+    proto: RevolverBullet
+    fireCost: 40
 
 - type: entity
   name: x-ray revolver power cell

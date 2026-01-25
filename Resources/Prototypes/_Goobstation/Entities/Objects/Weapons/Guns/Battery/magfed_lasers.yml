@@ -128,10 +128,10 @@
 
 
 - type: entity
-  name: EG-1 Taro
+  name: energy revolver
   parent: [ BaseWeaponCustomCellSmall, BaseSecurityContraband ]
   id: WeaponLaserCellRevolver
-  description: A high-tech laser revolver, compatible with specialized revolver power cells.
+  description: A laser revolver, compatible with specialized revolver power cells.
   components:
   - type: Item
     size: Small
@@ -143,7 +143,7 @@
     - Sidearm
   - type: Gun
     selectedMode: SemiAuto
-    fireRate: 1.5 # Goobstation
+    fireRate: 2 # Trauma, was 1.5
     availableModes:
     - SemiAuto
     soundGunshot:
