@@ -49,4 +49,58 @@
     sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: laser
-      color: "#ff4242"
+      color: "#ff2222"
+
+- type: entity
+  id: RevolverBulletIon
+  name: laser
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Ion: 10
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    layers:
+    - state: laser
+      color: "#2684ff"
+
+- type: entity
+  id: RevolverBulletXray
+  name: laser
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 5
+        Radiation: 5
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    layers:
+    - state: laser
+      color: "#27ff4b"
+
+- type: entity
+  id: RevolverBulletOverclocked
+  name: laser
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 10
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    layers:
+    - state: laser
+      color: "#ff2222"
+  - type: IgniteOnCollide
+    fireStacks: 0.5

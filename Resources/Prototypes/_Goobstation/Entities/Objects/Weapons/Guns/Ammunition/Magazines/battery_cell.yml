@@ -262,7 +262,7 @@
 
 - type: entity
   name: x-ray revolver power cell
-  description: A militarized power cell compatible with laser revolvers that fires x-rays.
+  description: A power cell compatible with laser revolvers, this one fires Xrays.
   id: PowerCellXrayRevolver
   suffix: Full
   parent: BaseMilitaryPowerCellRevolver
@@ -280,12 +280,12 @@
           Neither: { state: xray_charge, shader: unshaded }
           Empty: { state: xray, shader: null }
   - type: BatteryAmmoProvider
-    proto: MediumXrayLaser
-    fireCost: 62.5
+    proto: RevolverBulletXray
+    fireCost: 40
 
 - type: entity
   name: overclocked revolver power cell
-  description: A militarized power cell compatible with laser revolvers that has been overclocked.
+  description: A power cell compatible with laser revolvers, this one burns hot enough to ignite targets.
   id: PowerCellOverchargedRevolver
   suffix: Full
   parent: BaseMilitaryPowerCellRevolver
@@ -303,8 +303,8 @@
           Neither: { state: overcharge_charge, shader: unshaded }
           Empty: { state: overcharge, shader: null }
   - type: BatteryAmmoProvider
-    proto: MediumOverchargedLaser
-    fireCost: 125
+    proto: RevolverBulletOverclocked
+    fireCost: 40
 
 - type: entity
   name: pulse revolver power cell
@@ -327,11 +327,11 @@
           Empty: { state: pulse, shader: null }
   - type: BatteryAmmoProvider
     proto: MediumPulseLaser
-    fireCost: 62.5
+    fireCost: 40
 
 - type: entity
   name: ion revolver power cell
-  description: A militarized power cell compatible with laser revolvers that fires ion beams.
+  description: A power cell compatible with laser revolvers, this one fires ion beams.
   id: PowerCellIonRevolver
   suffix: Full
   parent: BaseMilitaryPowerCellRevolver
@@ -349,8 +349,8 @@
           Neither: { state: ion_charge, shader: unshaded }
           Empty: { state: ion, shader: null }
   - type: BatteryAmmoProvider
-    proto: MediumIonLaser
-    fireCost: 62.5
+    proto: RevolverBulletIon
+    fireCost: 40
 
 # LMG
 
