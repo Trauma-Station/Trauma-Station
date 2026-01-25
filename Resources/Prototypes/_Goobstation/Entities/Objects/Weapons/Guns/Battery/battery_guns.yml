@@ -281,10 +281,10 @@
     autoRechargeRate: 80
 
 - type: entity
-  name: CR-2 energy assault rifle
+  name: energy rifle
   parent: [ BaseWeaponCustomCell, BaseGunWieldable, BaseSecurityContraband ]
   id: WeaponEnergyRifle
-  description: An advanced energy rifle capable of firing various bolts depending on the powercell magazine.
+  description: An energy rifle capable of firing various bolts depending on the powercell magazine.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Battery/energy_rifle.rsi

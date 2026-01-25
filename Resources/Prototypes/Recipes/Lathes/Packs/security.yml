@@ -130,7 +130,7 @@
   id: SecurityWeapons
   recipes:
   - Truncheon
-  - WeaponAdvancedLaser
+  # - WeaponAdvancedLaser # Trauma, No longer has a niche
   - WeaponLaserCannon
   - WeaponLaserCarbine
   - WeaponXrayCannon

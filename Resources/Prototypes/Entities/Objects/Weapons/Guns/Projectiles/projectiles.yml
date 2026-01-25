@@ -148,11 +148,11 @@
       types:
         Piercing: 10
         Heat: 4
-  - type: PointLight
-    enabled: true
-    color: "#ff4300"
-    radius: 2.0
-    energy: 7.0
+  # - type: PointLight # Trauma, preciction
+  #   enabled: true
+  #   color: "#ff4300"
+  #   radius: 2.0
+  #   energy: 7.0
   - type: IgniteOnCollide
     fireStacks: 0.5 # Goob - was 0.25
 
@@ -255,11 +255,11 @@
     layers:
     - state: tesla_projectile
       shader: unshaded
-  - type: PointLight
-    enabled: true
-    color: "#ffff33"
-    radius: 2.0
-    energy: 7.01
+  # - type: PointLight # Trauma, prediction
+  #   enabled: true
+  #   color: "#ffff33"
+  #   radius: 2.0
+  #   energy: 7.01
   - type: TimedDespawn
     lifetime: 1.0 # Not so short range
   - type: StunOnCollide
@@ -561,10 +561,10 @@
     muzzleFlash: HitscanEffect
   - type: TimedDespawn
     lifetime: 0.3 # Goobstation edit
-  - type: PointLight
-    radius: 2.5
-    color: white
-    energy: 0.5
+  # - type: PointLight # Trauma, prediction
+  #   radius: 2.5
+  #   color: white
+  #   energy: 0.5
   - type: GatheringProjectile
 
 - type: entity
@@ -647,11 +647,11 @@
   name: delta particles
   categories: [ HideSpawnMenu ]
   components:
-  - type: PointLight
-    enabled: true
-    color: "#c2385d"
-    radius: 2.0
-    energy: 7.0
+  # - type: PointLight # Trauma, prediction
+  #   enabled: true
+  #   color: "#c2385d"
+  #   radius: 2.0
+  #   energy: 7.0
   - type: AnomalousParticle
     particleType: Delta
   - type: Sprite
@@ -702,11 +702,11 @@
   name: epsilon particles
   categories: [ HideSpawnMenu ]
   components:
-  - type: PointLight
-    enabled: true
-    color: "#38c296"
-    radius: 2.0
-    energy: 7.0
+  # - type: PointLight # Trauma, prediction
+  #   enabled: true
+  #   color: "#38c296"
+  #   radius: 2.0
+  #   energy: 7.0
   - type: Sprite
     layers:
     - state: magicm_cyan
@@ -734,11 +734,11 @@
   name: zeta particles
   categories: [ HideSpawnMenu ]
   components:
-  - type: PointLight
-    enabled: true
-    color: "#b9c238"
-    radius: 2.0
-    energy: 7.0
+  # - type: PointLight # Trauma, prediction
+  #   enabled: true
+  #   color: "#b9c238"
+  #   radius: 2.0
+  #   energy: 7.0
   - type: Sprite
     layers:
     - state: magicm_yellow
@@ -766,11 +766,11 @@
   name: omega particles
   categories: [ HideSpawnMenu ]
   components:
-  - type: PointLight
-    enabled: true
-    color: "#38c24f"
-    radius: 2.0
-    energy: 7.0
+  # - type: PointLight # Trauma, prediction
+  #   enabled: true
+  #   color: "#38c24f"
+  #   radius: 2.0
+  #   energy: 7.0
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
     layers:
@@ -796,11 +796,11 @@
   name: sigma particles
   categories: [ HideSpawnMenu ]
   components:
-  - type: PointLight
-    enabled: true
-    color: "#8d38c2"
-    radius: 2.0
-    energy: 7.0
+  # - type: PointLight # Trauma, prediction
+  #   enabled: true
+  #   color: "#8d38c2"
+  #   radius: 2.0
+  #   energy: 7.0
   - type: Sprite
     layers:
     - state: magicm
@@ -837,10 +837,10 @@
     intensitySlope: 6
     totalIntensity: 200
     maxTileBreak: 1
-  - type: PointLight
-    radius: 3.5
-    color: orange
-    energy: 0.5
+  # - type: PointLight # Trauma, prediction
+  #   radius: 3.5
+  #   color: orange
+  #   energy: 0.5
   - type: SmartLinkBlacklist  # Goobstation
 
 - type: entity
@@ -860,10 +860,10 @@
     intensitySlope: 1
     totalIntensity: 4 # 60 total damage to distribute over tiles
     maxTileBreak: 1
-  - type: PointLight
-    radius: 3.5
-    color: orange
-    energy: 0.5
+  # - type: PointLight # Trauma, prediction
+  #   radius: 3.5
+  #   color: orange
+  #   energy: 0.5
   - type: SmartLinkBlacklist  # Goobstation
 
 - type: entity
@@ -998,10 +998,10 @@
     disableDuration: 10
   - type: Ammo
     muzzleFlash: null
-  - type: PointLight
-    radius: 3.5
-    color: blue
-    energy: 0.5
+  # - type: PointLight # Trauma, prediction
+  #   radius: 3.5
+  #   color: blue
+  #   energy: 0.5
   - type: SmartLinkBlacklist  # Goobstation
 
 - type: entity
@@ -1111,10 +1111,10 @@
     intensitySlope: 6
     totalIntensity: 60
     maxTileBreak: 0
-  - type: PointLight
-    radius: 1
-    color: orange
-    energy: 0.5
+  # - type: PointLight # Trauma, prediction
+  #   radius: 1
+  #   color: orange
+  #   energy: 0.5
   - type: SmartLinkBlacklist  # Goobstation
 
 - type: entity
@@ -1413,9 +1413,9 @@
     layers:
     - state: magnum
       shader: unshaded
-  - type: PointLight
-    enabled: true
-    color: "#ff4300"
+  # - type: PointLight # Trauma, prediction
+  #   enabled: true
+  #   color: "#ff4300"
   - type: Projectile
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
@@ -1433,9 +1433,9 @@
     layers:
     - state: magnum_piercing
       shader: unshaded
-  - type: PointLight
-    enabled: true
-    color: "#ff4300"
+  # - type: PointLight # Trauma, prediction
+  #   enabled: true
+  #   color: "#ff4300"
   - type: Projectile
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
