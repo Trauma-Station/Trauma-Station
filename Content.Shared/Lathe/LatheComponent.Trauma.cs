@@ -1,4 +1,4 @@
-namespace Content.Shared.Lathe
+namespace Content.Shared.Lathe;
 
 /// <summary>
 /// Trauma - fields added to LatheComponent.
@@ -11,4 +11,11 @@ public sealed partial class LatheComponent
     /// </summary>
     [DataField]
     public bool OutputToStorage;
+
+    /// <summary>
+    /// The producing sound entity being played.
+    /// Used to stop it when producing stops.
+    /// </summary>
+    [DataField]
+    public EntityUid? SoundEntity;
 }

@@ -1,10 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.NTR.Scan;
-using Content.Goobstation.Shared.Lathe;
-using Content.Server.AlertLevel;
-using Content.Server.Chat.Systems;
-using Content.Server.Station.Systems;
-using Content.Shared.Chat;
+using Content.Trauma.Common.Lathe;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -42,12 +37,8 @@ using Robust.Shared.Timing;
 namespace Content.Server.Lathe
 {
     [UsedImplicitly]
-    public sealed class LatheSystem : SharedLatheSystem
+    public sealed partial class LatheSystem : SharedLatheSystem // Trauma - made partial
     {
-        // <Trauma>
-        [Dependency] private readonly ChatSystem _chat = default!;
-        [Dependency] private readonly StationSystem _station = default!;
-        // </Trauma>
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly IPrototypeManager _proto = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
@@ -73,6 +64,7 @@ namespace Content.Server.Lathe
         public override void Initialize()
         {
             base.Initialize();
+            InitializeTrauma(); // Trauma
             SubscribeLocalEvent<LatheComponent, GetMaterialWhitelistEvent>(OnGetWhitelist);
             SubscribeLocalEvent<LatheComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<LatheComponent, PowerChangedEvent>(OnPowerChanged);
@@ -81,7 +73,6 @@ namespace Content.Server.Lathe
 
             SubscribeLocalEvent<LatheComponent, LatheQueueRecipeMessage>(OnLatheQueueRecipeMessage);
             SubscribeLocalEvent<LatheComponent, LatheSyncRequestMessage>(OnLatheSyncRequestMessage);
-            SubscribeLocalEvent<LatheComponent, LatheQueueResetMessage>(OnLatheQueueResetMessage); // Goobstation
             SubscribeLocalEvent<LatheComponent, LatheDeleteRequestMessage>(OnLatheDeleteRequestMessage);
             SubscribeLocalEvent<LatheComponent, LatheMoveRequestMessage>(OnLatheMoveRequestMessage);
             SubscribeLocalEvent<LatheComponent, LatheAbortFabricationMessage>(OnLatheAbortFabricationMessage);
@@ -187,11 +178,7 @@ namespace Content.Server.Lathe
                 return false;
             quantity = int.Min(quantity, MaxItemsPerRequest);
 
-            // <Trauma> - get alertLevel for the recipe
-            var station = _station.GetOwningStation(uid);
-            var alertLevel = CompOrNull<AlertLevelComponent>(station)?.CurrentLevel;
-            if (!CanProduce(uid, recipe, quantity, component, alertLevel))
-            // </Trauma>
+            if (!CanProduce(uid, recipe, quantity, component, GetAlertLevel(uid))) //  Trauma - get alertLevel for the recipe
                 return false;
 
             foreach (var (mat, amount) in GetAdjustedAmount(component, recipe))
@@ -205,7 +192,8 @@ namespace Content.Server.Lathe
             return true;
         }
 
-        public bool TryStartProducing(EntityUid uid, LatheComponent? component = null)
+        public bool TryStartProducing(EntityUid uid, LatheComponent? component = null,
+            bool wasCancelled = false) // Trauma
         {
             if (!Resolve(uid, ref component))
                 return false;
@@ -233,7 +221,10 @@ namespace Content.Server.Lathe
             var ev = new LatheStartPrintingEvent(recipe);
             RaiseLocalEvent(uid, ref ev);
 
-            _audio.PlayPvs(component.ProducingSound, uid);
+            // <Trauma> - don't spam sounds when canceling
+            if (!wasCancelled)
+                component.SoundEntity = _audio.PlayPvs(component.ProducingSound, uid)?.Entity;
+            // </Trauma>
             UpdateRunningAppearance(uid, true);
             UpdateUserInterfaceState(uid, component);
 
@@ -244,7 +235,8 @@ namespace Content.Server.Lathe
             return true;
         }
 
-        public void FinishProducing(EntityUid uid, LatheComponent? comp = null, LatheProducingComponent? prodComp = null)
+        public void FinishProducing(EntityUid uid, LatheComponent? comp = null, LatheProducingComponent? prodComp = null,
+            bool wasCancelled = false) // Trauma
         {
             if (!Resolve(uid, ref comp, ref prodComp, false))
                 return;
@@ -254,7 +246,7 @@ namespace Content.Server.Lathe
                 var currentRecipe = _proto.Index(comp.CurrentRecipe.Value);
                 if (currentRecipe.Result is { } resultProto)
                 {
-                    // Goobstation, output to material storage instead of spawning
+                    // <Goob> - try output to material storage instead of spawning
                     var prototype = _proto.Index(resultProto);
                     if (comp.OutputToStorage && prototype.TryGetComponent<PhysicalCompositionComponent>(out var composition, Factory))
                     {
@@ -264,9 +256,12 @@ namespace Content.Server.Lathe
                     {
                         var result = Spawn(resultProto, Transform(uid).Coordinates);
                         _stack.TryMergeToContacts(result);
-                        if (TryComp<ScannableForPointsComponent>(result, out var scannable)) // Goobstation
-                            scannable.Points = 0; // Goobstation, this thing is to prevent ntr duping points via an emagged lathe
+                        // <Trauma>
+                        var ev = new ProducedByLatheEvent();
+                        RaiseLocalEvent(result, ref ev);
+                        // </Trauma>
                     }
+                    // </Goob>
                 }
 
                 if (currentRecipe.ResultReagents is { } resultReagents &&
@@ -293,7 +288,7 @@ namespace Content.Server.Lathe
             comp.CurrentRecipe = null;
             prodComp.StartTime = _timing.CurTime;
 
-            if (!TryStartProducing(uid, comp))
+            if (!TryStartProducing(uid, comp, wasCancelled)) // Trauma - pass wasCancelled
             {
                 RemCompDeferred(uid, prodComp);
                 UpdateUserInterfaceState(uid, comp);
@@ -310,11 +305,8 @@ namespace Content.Server.Lathe
             if (producing == null && component.Queue.First is { } node)
                 producing = node.Value.Recipe;
 
-            // <Trauma> - pass alertLevel to the ui
-            var station = _station.GetOwningStation(uid);
-            var alertLevel = CompOrNull<AlertLevelComponent>(station)?.CurrentLevel;
-            var state = new LatheUpdateState(GetAvailableRecipes(uid, component), component.Queue.ToArray(), producing, alertLevel);
-            // </Trauma>
+            var state = new LatheUpdateState(GetAvailableRecipes(uid, component), component.Queue.ToArray(), producing,
+                GetAlertLevel(uid)); // Trauma
             _uiSys.SetUiState(uid, LatheUiKey.Key, state);
         }
 
@@ -401,60 +393,8 @@ namespace Content.Server.Lathe
         {
             UpdateUserInterfaceState(uid, component);
 
-            // Goobstation - Lathe message on recipes update - Start
-            if (args.UnlockedRecipes == null || args.UnlockedRecipes.Count == 0)
-                return;
-
-            var recipesCount = 0;
-
-            foreach (var pack in component.DynamicPacks)
-            {
-                _proto.TryIndex(pack, out var proto);
-                if (proto is null)
-                    continue;
-                recipesCount += proto.Recipes.Intersect(args.UnlockedRecipes).Count(); // which recipes we can use are the ones just unlocked?
-            }
-
-            if (recipesCount > 0)
-                _chat.TrySendInGameICMessage(uid, Loc.GetString("lathe-technology-recipes-update-message", ("count", recipesCount)), InGameICChatType.Speak, hideChat: true);
-            // Goobstation - Lathe message on recipes update - End
+            AnnounceAddedRecipes((uid, component), args.UnlockedRecipes); // Trauma
         }
-
-
-        // Goobstation - Lathe Queue Reset
-        private void OnLatheQueueResetMessage(EntityUid uid, LatheComponent component, LatheQueueResetMessage args)
-        {
-            if (component.Queue.Count == 0)
-                return;
-            var totalMaterials = new Dictionary<string, int>();
-
-            // refund remaining items in the batch
-            // there is no test to make sure this doesn't give infinite mats... goida
-            foreach (var batch in component.Queue)
-            {
-                var recipe = _proto.Index(batch.Recipe);
-                var count = batch.ItemsRequested - batch.ItemsPrinted;
-                foreach (var (mat, amount) in recipe.Materials)
-                {
-                    if (!totalMaterials.ContainsKey(mat))
-                        totalMaterials[mat] = 0;
-                    totalMaterials[mat] += amount * count;
-                }
-            }
-
-            if (_materialStorage.CanChangeMaterialAmount(uid, totalMaterials))
-            {
-                foreach (var (mat, amount) in totalMaterials)
-                {
-                    _materialStorage.TryChangeMaterialAmount(uid, mat, amount);
-                }
-                component.Queue.Clear();
-                UpdateUserInterfaceState(uid, component);
-            } else {
-                _popup.PopupEntity(Loc.GetString("lathe-queue-reset-material-overflow"), uid);
-            }
-        }
-        // Goobstation - Lathe Queue Reset
 
         private void OnResearchRegistrationChanged(EntityUid uid, LatheComponent component, ref ResearchRegistrationChangedEvent args)
         {
@@ -645,7 +585,8 @@ namespace Content.Server.Lathe
 
             RefundCurrentRecipe(uid, component);
             component.CurrentRecipe = null;
-            FinishProducing(uid, component);
+            FinishProducing(uid, component,
+                wasCancelled: true); // Trauma - don't spam sound when canceling 10 times
         }
         #endregion
     }
