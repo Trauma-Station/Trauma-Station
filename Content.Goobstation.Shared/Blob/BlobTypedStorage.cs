@@ -16,30 +16,30 @@ using Robust.Shared.Prototypes;
 namespace Content.Goobstation.Shared.Blob;
 
 #region BlobTypedStorage
-[DataDefinition]
+[ImplicitDataDefinitionForInheritors]
 public abstract partial class BlobTypedStorage<T> : IEnumerable<KeyValuePair<BlobTileType, T>>
 {
     [DataField]
-    public virtual T Core { get; set; } = default!;
+    public T Core { get; set; } = default!;
     [DataField]
-    public virtual T Invalid  { get; set; } = default!;
+    public T Invalid  { get; set; } = default!;
     [DataField]
-    public virtual T Resource  { get; set; } = default!;
+    public T Resource  { get; set; } = default!;
     [DataField]
-    public virtual T Factory  { get; set; } = default!;
+    public T Factory  { get; set; } = default!;
     [DataField]
-    public virtual T Node  { get; set; } = default!;
+    public T Node  { get; set; } = default!;
     [DataField]
-    public virtual T Reflective  { get; set; } = default!;
+    public T Reflective  { get; set; } = default!;
     [DataField]
-    public virtual T Strong  { get; set; } = default!;
+    public T Strong  { get; set; } = default!;
     [DataField]
-    public virtual T Normal { get; set; } = default!;
+    public T Normal { get; set; } = default!;
     /*
     [DataField]
-    public virtual T Storage  { get; set; }
+    public T Storage  { get; set; }
     [DataField]
-    public virtual T Turret { get; set; }
+    public T Turret { get; set; }
 */
     // Method for accessing fields through the indexer
     [Pure]
@@ -131,12 +131,6 @@ public abstract partial class BlobTypedStorage<T> : IEnumerable<KeyValuePair<Blo
 }
 #endregion
 
-[DataDefinition]
-public sealed partial class BlobTileCosts : BlobTypedStorage<FixedPoint2>
-{
-}
+public sealed partial class BlobTileCosts : BlobTypedStorage<FixedPoint2>;
 
-[DataDefinition]
-public sealed partial class BlobTileProto : BlobTypedStorage<EntProtoId<BlobTileComponent>>
-{
-}
+public sealed partial class BlobTileProto : BlobTypedStorage<EntProtoId<BlobTileComponent>>;
