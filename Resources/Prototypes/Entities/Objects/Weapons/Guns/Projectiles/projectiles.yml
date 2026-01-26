@@ -170,7 +170,7 @@
     damage:
       types:
         Piercing: 11 # 20% decrease
-    ignoreResistances: true
+    increaseOnly: true # Trauma - apply modifiers, but ignore decreases
 
 - type: entity
   id: BaseBulletUranium

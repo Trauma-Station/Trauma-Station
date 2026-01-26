@@ -135,7 +135,7 @@ public sealed class PredictedProjectileSystem : EntitySystem
         var deleted = Deleted(target);
 
         var canMiss = executed == null; // if you are executing someone its PB, no missing
-        if (_damageable.TryChangeDamage((target, damageable), ev.Damage, out var damage, comp.IgnoreResistances, origin: shooter, targetPart: targetPart, canMiss: canMiss) && Exists(shooter))
+        if (_damageable.TryChangeDamage((target, damageable), ev.Damage, out var damage, comp.IgnoreResistances, origin: shooter, targetPart: targetPart, canMiss: canMiss, increaseOnly: comp.IncreaseOnly) && Exists(shooter))
         {
             if (!deleted && _net.IsServer) // intentionally not predicting so you know if color flashes its 100% a hit
             {

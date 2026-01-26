@@ -63,7 +63,8 @@ public sealed partial class DamageableSystem
         float partMultiplier,
         bool ignoreBlockers = false,
         SplitDamageBehavior splitDamageBehavior = SplitDamageBehavior.Split,
-        bool canMiss = true)
+        bool canMiss = true,
+        bool increaseOnly = false)
     {
         var adjustedDamage = damage * partMultiplier;
         // This cursed shitcode lets us know if the target part is a power of 2
@@ -195,7 +196,7 @@ public sealed partial class DamageableSystem
         var rand = new System.Random(seed);
         var chosenTarget = rand.PickAndTake(possibleTargets);
         return ChangeDamage(chosenTarget.Id, adjustedDamage, ignoreResistances,
-            interruptsDoAfters, origin, ignoreBlockers: ignoreBlockers);
+            interruptsDoAfters, origin, ignoreBlockers: ignoreBlockers, increaseOnly: increaseOnly);
     }
 
     public List<float> GetDamageVariationMultipliers(EntityUid uid, float variation, int count)

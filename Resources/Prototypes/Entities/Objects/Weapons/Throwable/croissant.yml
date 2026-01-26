@@ -26,7 +26,7 @@
     sound: /Audio/Weapons/star_hit.ogg
   - type: LandAtCursor
   - type: DamageOtherOnHit
-    ignoreResistances: true
+    increaseOnly: true # Trauma - apply modifiers, but ignore decreases
     damage:
       types:
         Slash: 5
