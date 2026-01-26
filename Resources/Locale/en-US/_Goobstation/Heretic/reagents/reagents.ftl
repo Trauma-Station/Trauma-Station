@@ -9,6 +9,26 @@ reagent-desc-eldritch = A strange liquid that defies the laws of physics. It re-
 entity-condition-guidebook-heretic-or-ghoul = target is a heretic or ghoul
 entity-condition-guidebook-not-heretic-or-ghoul = target is not a heretic or ghoul
 
+entity-condition-guidebook-environment-temperature = environment temperature is
+    { $invert ->
+        [true] at least
+        *[false] at most
+    } {$threshold} degrees
+
+entity-condition-guidebook-has-body-part = target
+    { $invert ->
+        [true] has no
+        *[false] has
+    } {$part}
+
+entity-condition-guidebook-on-fire = target is
+    { $invert ->
+        [true] not on fire
+        *[false] on fire
+    }
+
+entity-condition-guidebook-any-condition = any of the following conditions is true:
+
 reagent-physical-desc-eldritch = eldritch
 
 flavor-complex-eldritch = Ag'hsj'saje'sh

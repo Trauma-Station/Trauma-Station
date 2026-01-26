@@ -1,4 +1,5 @@
 using Content.Shared.EntityConditions;
+using Content.Shared.EntityEffects;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 
@@ -24,14 +25,14 @@ public sealed partial class HereticRitualComponent : Component
     /// Events that get raised on the ritual entity
     /// </summary>
     [DataField(required: true)]
-    public List<EntityCondition> Conditions = new();
+    public EntityEffect[] Effects = default!;
 
     /// <summary>
     /// Events that are raised if <see cref="Limit"/> has reached <see cref="LimitedOutput"/> count
     /// If this is empty, ritual gets canceled normally
     /// </summary>
     [DataField]
-    public List<EntityCondition> LimitReachedConditions = new();
+    public EntityEffect[]? LimitReachedEffects;
 
     /// <summary>
     /// Should this ritual play success animation if <see cref="Events"/> succeeded
@@ -51,6 +52,8 @@ public sealed partial class HereticRitualComponent : Component
     /// </summary>
     [DataField]
     public LocId? CancelLoc;
+
+    public HereticRitualRaiser Raiser = default!;
 }
 
 [DataDefinition]

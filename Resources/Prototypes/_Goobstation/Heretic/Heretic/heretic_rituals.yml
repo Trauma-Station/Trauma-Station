@@ -8,35 +8,44 @@
     state: heart-on
   - type: HereticRitual
     cancelLoc: heretic-ritual-fail-sacrifice
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-    - !type:FilterCondition
-      inputKey: Look
-      outputKey: Humanoid
-      whitelist:
-        components:
-        - HumanoidAppearance
-    - !type:FilterMobStateCondition
-      inputKey: Humanoid
-      outputKey: Dead
-    - !type:FilterTargetsCondition
-      inputKey: Dead
-      outputKey: Targets
-      cancelOnEmptyOutput: false
-    - !type:FilterHereticsCondition
-      inputKey: Dead
-      outputKey: Heretics
-      cancelOnEmptyOutput: false
-    - !type:CombineCondition
-      inputKey: Targets
-      inputKey2: Heretics
-      outputKey: Result
-      cancelLoc: heretic-ritual-fail-sacrifice-ineligible
-    - !type:SacrificeCondition
-      inputKey: Result
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticUpdateTargets
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Targets
+      individualConditions:
+      - !type:WhitelistCondition
+        guidebookText: ""
+        whitelist:
+          components:
+          - HumanoidAppearance
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+      - !type:ConditionsRitualCondition
+        requireAll: false
+        conditions:
+        - !type:IsTargetCondition
+        - !type:WhitelistCondition
+          guidebookText: ""
+          checkMind: true
+          whitelist:
+            components:
+            - Heretic
+    - !type:SacrificeEffect
+      applyOn: Targets
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Targets
+        min: 1
+    - !type:EffectsRitualEffect
+      applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:EventHereticUpdateTargets
 
 - type: entity
   id: RitualAmberFocus
@@ -47,22 +56,32 @@
     sprite: _Goobstation/Heretic/amber_focus.rsi
     state: icon
   - type: HereticRitual
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - SheetGlass
-        name: heretic-ritual-ingredient-glass-sheet
-      - whitelist:
-          components:
-          - Eyes
-        name: heretic-ritual-ingredient-eyes
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - SheetGlass
+          name: heretic-ritual-ingredient-glass-sheet
+        - whitelist:
+            components:
+            - Eyes
+          name: heretic-ritual-ingredient-eyes
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         ClothingNeckAmberFocus: 1
 
@@ -75,27 +94,40 @@
     sprite: _Goobstation/Heretic/items.rsi
     state: living_heart
   - type: HereticRitual
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - Paper
-        name: heretic-ritual-ingredient-paper
-      - whitelist:
-          tags:
-          - Pen
-        name: heretic-ritual-ingredient-pen
-      - whitelist:
-          components:
-          - Heart
-        name: heretic-ritual-ingredient-heart
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticRerollTargets
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Paper
+          name: heretic-ritual-ingredient-paper
+        - whitelist:
+            tags:
+            - Pen
+          name: heretic-ritual-ingredient-pen
+        - whitelist:
+            components:
+            - Heart
+          name: heretic-ritual-ingredient-heart
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:EffectsRitualEffect
+      applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:EventHereticRerollTargets
 
 - type: entity
   id: RitualCodexCicatrix
@@ -106,26 +138,36 @@
     sprite: _Goobstation/Heretic/book.rsi
     state: icon-on
   - type: HereticRitual
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - Meat
-        name: heretic-ritual-ingredient-meat
-      - whitelist:
-          tags:
-          - Pen
-        name: heretic-ritual-ingredient-pen
-      - whitelist:
-          tags:
-          - Book
-        name: heretic-ritual-ingredient-book
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Meat
+          name: heretic-ritual-ingredient-meat
+        - whitelist:
+            tags:
+            - Pen
+          name: heretic-ritual-ingredient-pen
+        - whitelist:
+            tags:
+            - Book
+          name: heretic-ritual-ingredient-book
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         CodexCicatrix: 1
 
@@ -139,11 +181,14 @@
     state: god_transmit
   - type: HereticRitual
     playSuccessAnimation: false
-    conditions:
-    - !type:CanAscendCondition
-      cancelLoc: heretic-ritual-fail-cannot-ascend
-    - !type:OpenRuneBuiCondition
+    effects:
+    - !type:OpenRuneBuiEffect
+      applyOn: Performer
       key: enum.FeastOfOwlsUiKey.Key
+      conditions:
+      - !type:CanAscendCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend
   - type: Tag
     tags:
     - RitualFeastOfOwls
@@ -159,34 +204,51 @@
     state: icon
   - type: HereticRitual
     limit: 2
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - Knife
-        name: heretic-ritual-ingredient-knife
-      - whitelist:
-          tags:
-          - Matchstick
-        name: heretic-ritual-ingredient-matchstick
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+        - whitelist:
+            tags:
+            - Matchstick
+          name: heretic-ritual-ingredient-matchstick
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         HereticBladeAsh: 1
-    limitReachedConditions:
-    - !type:FindLostLimitedOutputCondition
-      outputKey: Lost
-      cancelLoc: heretic-ritual-fail-no-lost-blades
+    limitReachedEffects:
+    - !type:FindLostLimitedOutputEffect
+      applyOn: Platform
+      result: Lost
       minRange: 3.5
-    - !type:ApplyConditionsCondition
-      fromIndex: 0
-      toIndex: 2
-    - !type:TeleportToRuneCondition
-      inputKey: Lost
+    - !type:TeleportToRuneEffect
+      applyOn: Result
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Lost
+        result: Result
+        min: 1
+        max: 1
+        cancelLoc: heretic-ritual-fail-no-lost-blades
+      - !type:TryApplyEffectSequenceCondition
+        from: 0
+        to: 3
 
 - type: entity
   id: RitualMaskOfMadness
@@ -197,34 +259,44 @@
     sprite: _Goobstation/Heretic/mad_mask.rsi
     state: icon
   - type: HereticRitual
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          components:
-          - Mask
-        name: heretic-ritual-ingredient-mask
-      - whitelist:
-          tags:
-          - Flare
-        name: heretic-ritual-ingredient-flare
-      - whitelist:
-          tags:
-          - Lighter
-        name: heretic-ritual-ingredient-lighter
-      - whitelist:
-          tags:
-          - Ash
-        name: heretic-ritual-ingredient-ash
-      - whitelist:
-          components:
-          - Stunbaton
-        name: heretic-ritual-ingredient-stun-baton
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - Mask
+          name: heretic-ritual-ingredient-mask
+        - whitelist:
+            tags:
+            - Flare
+          name: heretic-ritual-ingredient-flare
+        - whitelist:
+            tags:
+            - Lighter
+          name: heretic-ritual-ingredient-lighter
+        - whitelist:
+            tags:
+            - Ash
+          name: heretic-ritual-ingredient-ash
+        - whitelist:
+            components:
+            - Stunbaton
+          name: heretic-ritual-ingredient-stun-baton
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         ClothingMaskMadHeretic: 1
 
@@ -238,39 +310,49 @@
     state: ashlord_rite2
   - type: HereticRitual
     cancelLoc: heretic-ritual-fail-sacrifice-not-enough
-    conditions:
-    - !type:CanAscendCondition
-      cancelLoc: heretic-ritual-fail-cannot-ascend
-    - !type:ObjectivesCompleteCondition
-      cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
-    - !type:LookupCondition
-      outputKey: Look
-    - !type:FilterCondition
-      inputKey: Look
-      outputKey: Humanoid
-      whitelist:
-        components:
-        - HumanoidAppearance
-    - !type:FilterMobStateCondition
-      inputKey: Humanoid
-      outputKey: Dead
-    - !type:FilterOnFireCondition
-      inputKey: Dead
-      outputKey: OnFire
-      cancelLoc: heretic-ritual-fail-sacrifice-ash
-    - !type:TakeNumberCondition
-      inputKey: OnFire
-      outputKey: Result
-      number: 3
-      cancelLoc: heretic-ritual-fail-sacrifice-ash
-    - !type:SacrificeCondition
-      inputKey: Result
-    - !type:AddKnowledgeCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+      conditions:
+      - !type:CanAscendCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend
+      - !type:ObjectivesCompleteCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Eligible
+      individualConditions:
+      - !type:WhitelistCondition
+        guidebookText: ""
+        whitelist:
+          components:
+          - HumanoidAppearance
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+      - !type:OnFireCondition
+    - !type:SacrificeEffect
+      applyOn: Targets
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Eligible
+        result: Targets
+        min: 3
+        max: 3
+        cancelLoc: heretic-ritual-fail-sacrifice-ash
+    - !type:AddKnowledgeEffect
+      applyOn: Mind
       knowledge: AshlordRite
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticAscension
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticUpdateTargets
+    - !type:EffectsRitualEffect
+      applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:EventHereticAscension
+        - !type:EventHereticUpdateTargets
   - type: Tag
     tags:
     - RitualAscension
@@ -282,38 +364,52 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Icon
-    sprite: _Goobstation/Heretic/Blades/blade_blade.rsi
+    sprite: _Goobstation/Heretic/Blades/blade_ash.rsi
     state: icon
   - type: HereticRitual
     limit: 4
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - Knife
-        name: heretic-ritual-ingredient-knife
-        amount: 2
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+          amount: 2
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         HereticBladeBlade: 1
-    limitReachedConditions:
-    - !type:FindLostLimitedOutputCondition
-      outputKey: Lost
-      cancelLoc: heretic-ritual-fail-no-lost-blades
+    limitReachedEffects:
+    - !type:FindLostLimitedOutputEffect
+      applyOn: Platform
+      result: Lost
       minRange: 3.5
-    - !type:ApplyConditionsCondition
-      fromIndex: 0
-      toIndex: 2
-    - !type:TeleportToRuneCondition
-      inputKey: Lost
-  - type: Tag
-    tags:
-    - RitualBladeBlade
+    - !type:TeleportToRuneEffect
+      applyOn: Result
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Lost
+        result: Result
+        min: 1
+        max: 1
+        cancelLoc: heretic-ritual-fail-no-lost-blades
+      - !type:TryApplyEffectSequenceCondition
+        from: 0
+        to: 3
 
 - type: entity
   id: RitualAscensionBlade
@@ -325,39 +421,51 @@
     state: protective_blade
   - type: HereticRitual
     cancelLoc: heretic-ritual-fail-sacrifice-not-enough
-    conditions:
-    - !type:CanAscendCondition
-      cancelLoc: heretic-ritual-fail-cannot-ascend
-    - !type:ObjectivesCompleteCondition
-      cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
-    - !type:LookupCondition
-      outputKey: Look
-    - !type:FilterCondition
-      inputKey: Look
-      outputKey: Humanoid
-      whitelist:
-        components:
-        - HumanoidAppearance
-    - !type:FilterMobStateCondition
-      inputKey: Humanoid
-      outputKey: Dead
-    - !type:FilterHeadlessCondition
-      inputKey: Dead
-      outputKey: Headless
-      cancelLoc: heretic-ritual-fail-sacrifice-blade
-    - !type:TakeNumberCondition
-      inputKey: Headless
-      outputKey: Result
-      number: 3
-      cancelLoc: heretic-ritual-fail-sacrifice-blade
-    - !type:SacrificeCondition
-      inputKey: Result
-    - !type:AddKnowledgeCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+      conditions:
+      - !type:CanAscendCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend
+      - !type:ObjectivesCompleteCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Eligible
+      individualConditions:
+      - !type:WhitelistCondition
+        guidebookText: ""
+        whitelist:
+          components:
+          - HumanoidAppearance
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+      - !type:HasBodyPartCondition
+        part: Head
+        inverted: true
+    - !type:SacrificeEffect
+      applyOn: Targets
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Eligible
+        result: Targets
+        min: 3
+        max: 3
+        cancelLoc: heretic-ritual-fail-sacrifice-blade
+    - !type:AddKnowledgeEffect
+      applyOn: Mind
       knowledge: MaelstromOfSilver
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticAscension
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticUpdateTargets
+    - !type:EffectsRitualEffect
+      applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:EventHereticAscension
+        - !type:EventHereticUpdateTargets
   - type: Tag
     tags:
     - RitualAscension
@@ -373,35 +481,66 @@
     state: icon
   - type: HereticRitual
     limit: 2
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:FilterReagentPuddleCondition
-      inputKey: Look
-      outputKey: Puddle
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - Knife
-        name: heretic-ritual-ingredient-knife
-    - !type:DeleteEntityHashsetCondition
-      inputKey: Puddle
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Puddles
+      individualConditions:
+      - !type:WhitelistCondition
+        guidebookText: ""
+        whitelist:
+          components:
+          - Puddle
+      - !type:ReagentsCondition
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Puddles
+        result: Delete2
+        min: 1
+        cancelLoc: heretic-ritual-fail-reagent-blood
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:EffectsRitualEffect
+      applyOn: Delete2
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         HereticBladeFlesh: 1
-    limitReachedConditions:
-    - !type:FindLostLimitedOutputCondition
-      outputKey: Lost
-      cancelLoc: heretic-ritual-fail-no-lost-blades
+    limitReachedEffects:
+    - !type:FindLostLimitedOutputEffect
+      applyOn: Platform
+      result: Lost
       minRange: 3.5
-    - !type:ApplyConditionsCondition
-      fromIndex: 0
-      toIndex: 4
-    - !type:TeleportToRuneCondition
-      inputKey: Lost
+    - !type:TeleportToRuneEffect
+      applyOn: Result
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Lost
+        result: Result
+        min: 1
+        max: 1
+        cancelLoc: heretic-ritual-fail-no-lost-blades
+      - !type:TryApplyEffectSequenceCondition
+        from: 0
+        to: 5
 
 - type: entity
   id: RitualImperfect
@@ -414,33 +553,53 @@
   - type: HereticRitual
     limit: 2
     cancelLoc: heretic-ritual-fail-ghoulify
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-    - !type:FilterCondition
-      inputKey: Look
-      outputKey: NonGhouls
-      blacklist:
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:AddToLimitRitualEffect
+      applyOn: Look
+      result: Targets
+      individualConditions:
+      - !type:WhitelistCondition
+        guidebookText: ""
+        blacklist:
+          components:
+          - Ghoul
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Muzzle
+          name: heretic-ritual-ingredient-muzzle
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Targets
+        result: Result
+        min: 1
+        cancelLoc: heretic-ritual-fail-ghoulify
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:GhoulifyEffect
+      applyOn: Result
+    - !type:EffectsRitualEffect
+      applyOn: Result
+      effects:
+      - !type:AddComponents
         components:
-        - Ghoul
-    - !type:FilterMobStateCondition
-      inputKey: NonGhouls
-      outputKey: Dead
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - Muzzle
-        name: heretic-ritual-ingredient-muzzle
-    - !type:GhoulifyCondition
-      inputKey: Dead
-      outputKey: Ghoul
-    - !type:AddComponentsCondition
-      inputKey: Ghoul
-      components:
-      - type: Muted
-      - type: HereticBladeUserBonusDamage
+        - type: Muted
+        - type: HereticBladeUserBonusDamage
 
 - type: entity
   id: RitualRaw
@@ -452,27 +611,51 @@
     state: raw_prophet
   - type: HereticRitual
     limit: 2
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:FilterReagentPuddleCondition
-      inputKey: Look
-      outputKey: Puddle
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Puddles
+      individualConditions:
+      - !type:WhitelistCondition
+        guidebookText: ""
+        whitelist:
           components:
-          - Eyes
-        name: heretic-ritual-ingredient-eyes
-      - whitelist:
-          components:
-          - Stomach
-        name: heretic-ritual-ingredient-stomach
-    - !type:DeleteEntityHashsetCondition
-      inputKey: Puddle
-    - !type:SpawnCondition
+          - Puddle
+      - !type:ReagentsCondition
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Puddles
+        result: Delete2
+        min: 1
+        cancelLoc: heretic-ritual-fail-reagent-blood
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - Eyes
+          name: heretic-ritual-ingredient-eyes
+        - whitelist:
+            components:
+            - Stomach
+          name: heretic-ritual-ingredient-stomach
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:EffectsRitualEffect
+      applyOn: Delete2
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         MobGhoulProphet: 1
 
@@ -485,38 +668,61 @@
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: stalker
   - type: HereticRitual
-    limit: 2
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:FilterReagentPuddleCondition
-      inputKey: Look
-      outputKey: Puddle
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - Pen
-        name: heretic-ritual-ingredient-pen
-      - whitelist:
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Puddles
+      individualConditions:
+      - !type:WhitelistCondition
+        guidebookText: ""
+        whitelist:
           components:
-          - Heart
-        name: heretic-ritual-ingredient-heart
-      - whitelist:
-          components:
-          - Stomach
-        name: heretic-ritual-ingredient-stomach
-      - whitelist:
-          components:
-          - Lung
-        name: heretic-ritual-ingredient-lung
-    - !type:DeleteEntityHashsetCondition
-      inputKey: Puddle
-    - !type:SpawnCondition
+          - Puddle
+      - !type:ReagentsCondition
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Puddles
+        result: Delete2
+        min: 1
+        cancelLoc: heretic-ritual-fail-reagent-blood
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Pen
+          name: heretic-ritual-ingredient-pen
+        - whitelist:
+            components:
+            - Heart
+          name: heretic-ritual-ingredient-heart
+        - whitelist:
+            components:
+            - Stomach
+          name: heretic-ritual-ingredient-stomach
+        - whitelist:
+            components:
+            - Lung
+          name: heretic-ritual-ingredient-lung
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:EffectsRitualEffect
+      applyOn: Delete2
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
-        MobGhoulStalker: 1
+        MobGhoulProphet: 1
 
 - type: entity
   id: RitualAscensionFlesh
@@ -528,34 +734,48 @@
     state: final_hymn
   - type: HereticRitual
     cancelLoc: heretic-ritual-fail-sacrifice-not-enough
-    conditions:
-    - !type:CanAscendCondition
-      cancelLoc: heretic-ritual-fail-cannot-ascend
-    - !type:ObjectivesCompleteCondition
-      cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
-    - !type:LookupCondition
-      outputKey: Look
-    - !type:FilterCondition
-      inputKey: Look
-      outputKey: Humanoid
-      whitelist:
-        components:
-        - HumanoidAppearance
-    - !type:FilterMobStateCondition
-      inputKey: Humanoid
-      outputKey: Dead
-    - !type:TakeNumberCondition
-      inputKey: Dead
-      outputKey: Result
-      number: 4
-    - !type:SacrificeCondition
-      inputKey: Result
-    - !type:AddKnowledgeCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+      conditions:
+      - !type:CanAscendCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend
+      - !type:ObjectivesCompleteCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Eligible
+      individualConditions:
+      - !type:WhitelistCondition
+        guidebookText: ""
+        whitelist:
+          components:
+          - HumanoidAppearance
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+    - !type:SacrificeEffect
+      applyOn: Targets
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Eligible
+        result: Targets
+        min: 4
+        max: 4
+        cancelLoc: heretic-ritual-fail-sacrifice-not-enough
+    - !type:AddKnowledgeEffect
+      applyOn: Mind
       knowledge: PriestFinalHymn
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticAscension
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticUpdateTargets
+    - !type:EffectsRitualEffect
+      applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:EventHereticAscension
+        - !type:EventHereticUpdateTargets
   - type: Tag
     tags:
     - RitualAscension
@@ -571,32 +791,52 @@
     state: icon
   - type: HereticRitual
     limit: 2
-    conditions:
-    - !type:LowTemperatureCondition
-      cancelLoc: heretic-ritual-fail-temperature-hot
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - Knife
-        name: heretic-ritual-ingredient-knife
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ConditionsRitualCondition
+        applyOn: Platform
+        conditions:
+        - !type:EnvironmentTemperatureCondition
+        cancelLoc: heretic-ritual-fail-temperature-hot
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         HereticBladeVoid: 1
-    limitReachedConditions:
-    - !type:FindLostLimitedOutputCondition
-      outputKey: Lost
-      cancelLoc: heretic-ritual-fail-no-lost-blades
+    limitReachedEffects:
+    - !type:FindLostLimitedOutputEffect
+      applyOn: Platform
+      result: Lost
       minRange: 3.5
-    - !type:ApplyConditionsCondition
-      fromIndex: 0
-      toIndex: 3
-    - !type:TeleportToRuneCondition
-      inputKey: Lost
+    - !type:TeleportToRuneEffect
+      applyOn: Result
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Lost
+        result: Result
+        min: 1
+        max: 1
+        cancelLoc: heretic-ritual-fail-no-lost-blades
+      - !type:TryApplyEffectSequenceCondition
+        from: 0
+        to: 3
 
 - type: entity
   id: RitualAscensionVoid
@@ -608,36 +848,53 @@
     state: cold3
   - type: HereticRitual
     cancelLoc: heretic-ritual-fail-sacrifice-not-enough
-    conditions:
-    - !type:CanAscendCondition
-      cancelLoc: heretic-ritual-fail-cannot-ascend
-    - !type:ObjectivesCompleteCondition
-      cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
-    - !type:LowTemperatureCondition
-      cancelLoc: heretic-ritual-fail-temperature-hot
-    - !type:LookupCondition
-      outputKey: Look
-    - !type:FilterCondition
-      inputKey: Look
-      outputKey: Humanoid
-      whitelist:
-        components:
-        - HumanoidAppearance
-    - !type:FilterMobStateCondition
-      inputKey: Humanoid
-      outputKey: Dead
-    - !type:TakeNumberCondition
-      inputKey: Dead
-      outputKey: Result
-      number: 3
-    - !type:SacrificeCondition
-      inputKey: Result
-    - !type:AddKnowledgeCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+      conditions:
+      - !type:CanAscendCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend
+      - !type:ObjectivesCompleteCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
+      - !type:ConditionsRitualCondition
+        applyOn: Platform
+        conditions:
+        - !type:EnvironmentTemperatureCondition
+        cancelLoc: heretic-ritual-fail-temperature-hot
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Eligible
+      individualConditions:
+      - !type:WhitelistCondition
+        guidebookText: ""
+        whitelist:
+          components:
+          - HumanoidAppearance
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+    - !type:SacrificeEffect
+      applyOn: Targets
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Eligible
+        result: Targets
+        min: 3
+        max: 3
+        cancelLoc: heretic-ritual-fail-sacrifice-not-enough
+    - !type:AddKnowledgeEffect
+      applyOn: Mind
       knowledge: WaltzAtTheEndOfTime
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticAscension
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticUpdateTargets
+    - !type:EffectsRitualEffect
+      applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:EventHereticAscension
+        - !type:EventHereticUpdateTargets
   - type: Tag
     tags:
     - RitualAscension
@@ -653,34 +910,51 @@
     state: icon
   - type: HereticRitual
     limit: 2
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - Knife
-        name: heretic-ritual-ingredient-knife
-      - whitelist:
-          tags:
-          - Trash
-        name: heretic-ritual-ingredient-trash
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+        - whitelist:
+            tags:
+            - Trash
+          name: heretic-ritual-ingredient-trash
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         HereticBladeRust: 1
-    limitReachedConditions:
-    - !type:FindLostLimitedOutputCondition
-      outputKey: Lost
-      cancelLoc: heretic-ritual-fail-no-lost-blades
+    limitReachedEffects:
+    - !type:FindLostLimitedOutputEffect
+      applyOn: Platform
+      result: Lost
       minRange: 3.5
-    - !type:ApplyConditionsCondition
-      fromIndex: 0
-      toIndex: 2
-    - !type:TeleportToRuneCondition
-      inputKey: Lost
+    - !type:TeleportToRuneEffect
+      applyOn: Result
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Lost
+        result: Result
+        min: 1
+        max: 1
+        cancelLoc: heretic-ritual-fail-no-lost-blades
+      - !type:TryApplyEffectSequenceCondition
+        from: 0
+        to: 3
 
 - type: entity
   id: RitualAscensionRust
@@ -692,44 +966,56 @@
     state: ascension_rust
   - type: HereticRitual
     cancelLoc: heretic-ritual-fail-sacrifice-not-enough
-    conditions:
-    - !type:CanAscendCondition
-      cancelLoc: heretic-ritual-fail-cannot-ascend
-    - !type:ObjectivesCompleteCondition
-      cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
-    - !type:LookupCondition
-      outputKey: Look
-    - !type:FilterCondition
-      inputKey: Look
-      outputKey: Humanoid
-      whitelist:
-        components:
-        - HumanoidAppearance
-    - !type:FilterMobStateCondition
-      inputKey: Humanoid
-      outputKey: Dead
-    - !type:FilterCondition
-      inputKey: Dead
-      outputKey: Rotten
-      whitelist:
-        components:
-        - Rotting
-        - Silicon
-      cancelLoc: heretic-ritual-fail-sacrifice-rust
-    - !type:TakeNumberCondition
-      inputKey: Rotten
-      outputKey: Result
-      number: 3
-      cancelLoc: heretic-ritual-fail-sacrifice-rust
-    - !type:SacrificeCondition
-      inputKey: Result
-    - !type:AddKnowledgeCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+      conditions:
+      - !type:CanAscendCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend
+      - !type:ObjectivesCompleteCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Eligible
+      individualConditions:
+      - !type:WhitelistCondition
+        guidebookText: ""
+        whitelist:
+          components:
+          - HumanoidAppearance
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+      - !type:WhitelistCondition
+        guidebookText: ""
+        whitelist:
+          components:
+          - Rotting
+          - Silicon
+    - !type:SacrificeEffect
+      applyOn: Targets
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Eligible
+        result: Targets
+        min: 3
+        max: 3
+        cancelLoc: heretic-ritual-fail-sacrifice-rust
+    - !type:AddKnowledgeEffect
+      applyOn: Mind
       knowledge: RustbringersOath
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticAscension
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticUpdateTargets
-    - !type:SpawnCondition
+    - !type:EffectsRitualEffect
+      applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:EventHereticAscension
+        - !type:EventHereticUpdateTargets
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         HereticRustAscensionSpreader: 1
   - type: Tag
@@ -747,34 +1033,52 @@
     state: icon
   - type: HereticRitual
     limit: 2
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - Knife
-        name: heretic-ritual-ingredient-knife
-      - whitelist:
-          tags:
-          - SheetGlass
-        name: heretic-ritual-ingredient-glass-sheet
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+        - whitelist:
+            tags:
+            - SheetGlass
+          name: heretic-ritual-ingredient-glass-sheet
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         HereticBladeCosmos: 1
-    limitReachedConditions:
-    - !type:FindLostLimitedOutputCondition
-      outputKey: Lost
-      cancelLoc: heretic-ritual-fail-no-lost-blades
+    limitReachedEffects:
+    - !type:FindLostLimitedOutputEffect
+      applyOn: Platform
+      result: Lost
       minRange: 3.5
-    - !type:ApplyConditionsCondition
-      fromIndex: 0
-      toIndex: 2
-    - !type:TeleportToRuneCondition
-      inputKey: Lost
+    - !type:TeleportToRuneEffect
+      applyOn: Result
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Lost
+        result: Result
+        min: 1
+        max: 1
+        cancelLoc: heretic-ritual-fail-no-lost-blades
+      - !type:TryApplyEffectSequenceCondition
+        from: 0
+        to: 3
+
 
 - type: entity
   id: RitualAscensionCosmos
@@ -786,40 +1090,51 @@
     state: stargazer
   - type: HereticRitual
     cancelLoc: heretic-ritual-fail-sacrifice-not-enough
-    conditions:
-    - !type:CanAscendCondition
-      cancelLoc: heretic-ritual-fail-cannot-ascend
-    - !type:ObjectivesCompleteCondition
-      cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
-    - !type:LookupCondition
-      outputKey: Look
-    - !type:FilterCondition
-      inputKey: Look
-      outputKey: Humanoid
-      whitelist:
-        requireAll: true
-        components:
-        - HumanoidAppearance
-        - StarMark
-      cancelLoc: heretic-ritual-fail-sacrifice-cosmos
-    - !type:FilterMobStateCondition
-      inputKey: Humanoid
-      outputKey: Dead
-    - !type:TakeNumberCondition
-      inputKey: Dead
-      outputKey: Result
-      number: 3
-      cancelLoc: heretic-ritual-fail-sacrifice-cosmos
-    - !type:SacrificeCondition
-      inputKey: Result
-    - !type:AddKnowledgeCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+      conditions:
+      - !type:CanAscendCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend
+      - !type:ObjectivesCompleteCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Eligible
+      individualConditions:
+      - !type:WhitelistCondition
+        guidebookText: ""
+        whitelist:
+          requireAll: true
+          components:
+          - HumanoidAppearance
+          - StarMark
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+    - !type:SacrificeEffect
+      applyOn: Targets
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Eligible
+        result: Targets
+        min: 3
+        max: 3
+        cancelLoc: heretic-ritual-fail-sacrifice-cosmos
+    - !type:AddKnowledgeEffect
+      applyOn: Mind
       knowledge: CreatorsGift
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticAscension
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticUpdateTargets
-    - !type:RaiseHereticEventCondition
-      event: !type:EventHereticResolveStarGazer
+    - !type:EffectsRitualEffect
+      applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:EventHereticAscension
+        - !type:EventHereticUpdateTargets
+        - !type:EventHereticResolveStarGazer
   - type: Tag
     tags:
     - RitualAscension
@@ -834,19 +1149,24 @@
     sprite: _Goobstation/Heretic/book.rsi
     state: icon
   - type: HereticRitual
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:FilterKnowledgeTagsCondition
-      inputKey: Look
-      outputKey: Result
-    - !type:DeleteEntityHashsetCondition
-      inputKey: Result
-    - !type:RemoveRitualsCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+      conditions:
+      - !type:FilterKnowledgeTagsCondition
+        applyOn: Look
+        result: Delete
+    - !type:RemoveRitualsEffect
+      applyOn: Mind
       ritualTags:
       - RitualKnowledge
-    - !type:UpdateKnowledgeCondition
+    - !type:UpdateKnowledgeEffect
+      applyOn: Mind
       amount: 5
   - type: HereticKnowledgeRitual
   - type: Tag
@@ -863,22 +1183,32 @@
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/eldritch_armor.rsi
     state: icon
   - type: HereticRitual
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - Table
-        name: heretic-ritual-ingredient-table
-      - whitelist:
-          tags:
-          - GasMask
-        name: heretic-ritual-ingredient-gas-mask
-    - !type:PathBasedSpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Table
+          name: heretic-ritual-ingredient-table
+        - whitelist:
+            tags:
+            - GasMask
+          name: heretic-ritual-ingredient-gas-mask
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:PathBasedSpawnEffect
+      applyOn: Platform
       fallbackOutput: ClothingOuterArmorHeretic
       output:
         Ash: ClothingOuterArmorHereticAsh
@@ -897,22 +1227,32 @@
     sprite: _Goobstation/Heretic/items.rsi
     state: eldritch_flask
   - type: HereticRitual
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - WaterTank
-        name: heretic-ritual-ingredient-water-tank
-      - whitelist:
-          tags:
-          - GlassShard
-        name: heretic-ritual-ingredient-glass-shard
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - WaterTank
+          name: heretic-ritual-ingredient-water-tank
+        - whitelist:
+            tags:
+            - GlassShard
+          name: heretic-ritual-ingredient-glass-shard
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         HereticEldritchFlask: 1
 
@@ -925,26 +1265,36 @@
     sprite: _Goobstation/Heretic/eldritch_medalion.rsi
     state: icon
   - type: HereticRitual
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - GlassShard
-        name: heretic-ritual-ingredient-glass-shard
-      - whitelist:
-          components:
-          - Eyes
-        name: heretic-ritual-ingredient-eyes
-      - whitelist:
-          tags:
-          - Flare
-        name: heretic-ritual-ingredient-flare
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - GlassShard
+          name: heretic-ritual-ingredient-glass-shard
+        - whitelist:
+            components:
+            - Eyes
+          name: heretic-ritual-ingredient-eyes
+        - whitelist:
+            tags:
+            - Flare
+          name: heretic-ritual-ingredient-flare
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         ClothingEldritchMedalion: 1
 
@@ -957,26 +1307,36 @@
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_cloak.rsi
     state: icon
   - type: HereticRitual
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - GlassShard
-        name: heretic-ritual-ingredient-glass-shard
-      - whitelist:
-          tags:
-          - Bedsheet
-        name: heretic-ritual-ingredient-bedsheet
-      - whitelist:
-          tags:
-          - WinterCoat
-        name: heretic-ritual-ingredient-winter-coat
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - GlassShard
+          name: heretic-ritual-ingredient-glass-shard
+        - whitelist:
+            tags:
+            - Bedsheet
+          name: heretic-ritual-ingredient-bedsheet
+        - whitelist:
+            tags:
+            - WinterCoat
+          name: heretic-ritual-ingredient-winter-coat
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         ClothingOuterArmorCloakVoid: 1
 
@@ -990,28 +1350,38 @@
     state: fire_shark_icon
   - type: HereticRitual
     limit: 15
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - Ash
-        name: heretic-ritual-ingredient-ash
-        amount: 3
-      - whitelist:
-          components:
-          - Liver
-        name: heretic-ritual-ingredient-liver
-      - whitelist:
-          tags:
-          - SheetPlasma
-        name: heretic-ritual-ingredient-plasma-sheet
-        amount: 3
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Ash
+          name: heretic-ritual-ingredient-ash
+          amount: 3
+        - whitelist:
+            components:
+            - Liver
+          name: heretic-ritual-ingredient-liver
+        - whitelist:
+            tags:
+            - SheetPlasma
+          name: heretic-ritual-ingredient-plasma-sheet
+          amount: 3
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         MobGhoulFireShark: 3
 
@@ -1025,32 +1395,55 @@
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: rust_walker
   - type: HereticRitual
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:FilterReagentPuddleCondition
-      inputKey: Look
-      outputKey: Puddle
-      reagents:
-      - Vomit
-      reagentLoc: reagent-name-vomit
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - Steel
-        name: heretic-ritual-ingredient-steel
-        amount: 10
-      - whitelist:
-          tags:
-          - CableCoil
-        name: heretic-ritual-ingredient-cable-coil
-        amount: 15
-    - !type:DeleteEntityHashsetCondition
-      inputKey: Puddle
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Puddles
+      individualConditions:
+      - !type:WhitelistCondition
+        guidebookText: ""
+        whitelist:
+          components:
+          - Puddle
+      - !type:ReagentsCondition
+        reagents:
+        - Vomit
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Puddles
+        result: Delete2
+        min: 1
+        cancelLoc: heretic-ritual-fail-reagent-vomit
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Steel
+          name: heretic-ritual-ingredient-steel
+          amount: 10
+        - whitelist:
+            tags:
+            - CableCoil
+          name: heretic-ritual-ingredient-cable-coil
+          amount: 15
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:EffectsRitualEffect
+      applyOn: Delete2
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         MobGhoulRustWalker: 1
 
@@ -1063,25 +1456,35 @@
     sprite: _Goobstation/Heretic/items.rsi
     state: rune_carver
   - type: HereticRitual
-    conditions:
-    - !type:LookupCondition
-      outputKey: Look
-      cancelOnEmptyOutput: false
-    - !type:ProcessIngredientsCondition
-      inputKey: Look
-      ingredients:
-      - whitelist:
-          tags:
-          - GlassShard
-        name: heretic-ritual-ingredient-glass-shard
-      - whitelist:
-          tags:
-          - Paper
-        name: heretic-ritual-ingredient-paper
-      - whitelist:
-          tags:
-          - Knife
-        name: heretic-ritual-ingredient-knife
-    - !type:SpawnCondition
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - GlassShard
+          name: heretic-ritual-ingredient-glass-shard
+        - whitelist:
+            tags:
+            - Paper
+          name: heretic-ritual-ingredient-paper
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
       output:
         CarvingKnife: 1

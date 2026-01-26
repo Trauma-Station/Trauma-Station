@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Shitcode.Heretic.Components;
 
@@ -11,11 +12,11 @@ public sealed partial class TemperatureTrackerComponent : Component
     [DataField]
     public TimeSpan UpdateDelay = TimeSpan.FromSeconds(1);
 
-    [DataField, AutoPausedField]
+   [DataField(customTypeSerializer:typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextUpdate = TimeSpan.Zero;
 
     /// <summary>
-    /// Environment temperature, null if space
+    /// Environment temperature
     /// </summary>
     [DataField, AutoNetworkedField]
     public float Temperature;

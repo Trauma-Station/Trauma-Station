@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Heretic.Components;
 using Content.Server.Revolutionary.Components;
 using Content.Shared._Shitcode.Heretic.Rituals;

@@ -20,7 +20,7 @@ public sealed partial class FleshPassiveComponent : Component
     [DataField]
     public float MimicHealMultiplier = 5f;
 
-    [DataField, NonSerialized]
+    [ViewVariables]
     public ContainerSlot? StomachContainer;
 
     [DataField]
