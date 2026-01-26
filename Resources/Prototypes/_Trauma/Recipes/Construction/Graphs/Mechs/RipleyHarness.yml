@@ -5,7 +5,7 @@
     edges:
     - to: ripleymkiiHarness
       steps:
-      - assemblyId: generic
+      - assemblyId: RipleyMkIIChassis
         guideString: ripleymkii-construction-guide-string
 
       - tool: Screwing

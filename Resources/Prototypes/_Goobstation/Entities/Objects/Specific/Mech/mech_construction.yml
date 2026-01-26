@@ -52,7 +52,7 @@
   - type: PartAssembly
     containerId: mech-assembly-container
     parts:
-      generic:
+      RipleyMkIIChassis:
       - RipleyMKIIUpgradeKit
       - RipleyLArm
       - RipleyRArm
