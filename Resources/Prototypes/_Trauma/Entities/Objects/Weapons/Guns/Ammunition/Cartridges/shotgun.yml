@@ -7,8 +7,8 @@
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Casings/shotgun_shell.rsi
     layers:
-      - state: breach
-        map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: breach
+      map: [ "enum.AmmoVisualLayers.Base" ]
   - type: CartridgeAmmo
     proto: PelletShotgunBreachingSpread
   - type: SpentAmmoVisuals
