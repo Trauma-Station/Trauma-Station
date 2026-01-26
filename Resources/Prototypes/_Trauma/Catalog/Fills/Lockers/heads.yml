@@ -10,6 +10,7 @@
     children:
     - id: ClothingHeadsetAltCommand
     - id: CommandMegaphone
+    - id: CargoRequestServiceComputerCircuitboard
 
 - type: entityTable
   id: LockerFillChiefEngineerTrauma
@@ -22,6 +23,7 @@
     - id: CartridgeRocketSingularityBuster
     - id: WeaponLauncherSingularityBuster
     - id: MachinePowerTransmissionLaserFlatpack
+    - id: CargoRequestEngineeringComputerCircuitboard
 
 - type: entityTable
   id: LockerFillChiefMedicalOfficerTrauma
@@ -34,6 +36,7 @@
     - id: ClothingBeltMilitaryWebbingCMOFilled
     - id: DiseaseDiagnoserFlatPack
     - id: VaccinatorFlatPack
+    - id: CargoRequestMedicalComputerCircuitboard
 
 - type: entityTable
   id: LockerFillResearchDirectorTrauma
@@ -45,6 +48,7 @@
     - id: ClothingBeltGeminiHoloProjector # Who better to do science with than yourself?
     - id: MMI
     - id: FreeformLawboard
+    - id: CargoRequestScienceComputerCircuitboard
 
 - type: entityTable
   id: LockerFillHeadOfSecurityTrauma
@@ -53,3 +57,4 @@
     - id: ClothingBeltSheathHeadOfSecurityFilled
     - id: ReinforcementCallerHos
     - id: TelescopicShield
+    - id: CargoRequestSecurityComputerCircuitboard
