@@ -17,4 +17,3 @@ public sealed partial class RaiseEvents : EntityEffectBase<RaiseEvents>
     [DataField(required: true), NonSerialized]
     public object[] Events = default!;
 }
-
