@@ -17,7 +17,6 @@
       result: Targets
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - HumanoidAppearance
@@ -29,7 +28,6 @@
         conditions:
         - !type:IsTargetCondition
         - !type:WhitelistCondition
-          guidebookText: entity-condition-guidebook-empty
           checkMind: true
           whitelist:
             components:
@@ -327,7 +325,6 @@
       result: Eligible
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - HumanoidAppearance
@@ -441,7 +438,6 @@
       result: Eligible
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - HumanoidAppearance
@@ -494,7 +490,6 @@
       result: Puddles
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - Puddle
@@ -566,7 +561,6 @@
       result: Targets
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: entity-condition-guidebook-empty
         blacklist:
           components:
           - Ghoul
@@ -624,7 +618,6 @@
       result: Puddles
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - Puddle
@@ -681,7 +674,6 @@
       result: Puddles
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - Puddle
@@ -754,7 +746,6 @@
       result: Eligible
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - HumanoidAppearance
@@ -873,7 +864,6 @@
       result: Eligible
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - HumanoidAppearance
@@ -986,7 +976,6 @@
       result: Eligible
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - HumanoidAppearance
@@ -994,7 +983,6 @@
         mobstate: Alive
         inverted: true
       - !type:WhitelistCondition
-        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - Rotting
@@ -1110,7 +1098,6 @@
       result: Eligible
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: entity-condition-guidebook-empty
         whitelist:
           requireAll: true
           components:
@@ -1408,7 +1395,6 @@
       result: Puddles
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - Puddle

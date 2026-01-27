@@ -27,10 +27,6 @@ entity-condition-guidebook-on-fire = target is
         *[false] on fire
     }
 
-entity-condition-guidebook-any-condition = any of the following conditions is true:
-
-entity-condition-guidebook-empty = {""}
-
 reagent-physical-desc-eldritch = eldritch
 
 flavor-complex-eldritch = Ag'hsj'saje'sh

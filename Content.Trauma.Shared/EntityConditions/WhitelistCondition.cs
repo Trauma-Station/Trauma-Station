@@ -26,8 +26,8 @@ public sealed partial class WhitelistCondition : EntityConditionBase<WhitelistCo
     /// <summary>
     /// Guidebook text explaining this whitelist.
     /// </summary>
-    [DataField(required: true)]
-    public LocId GuidebookText;
+    [DataField]
+    public LocId? GuidebookText;
 
     /// <summary>
     /// Whether it should also check if mind entity passes for whitelist
@@ -36,7 +36,9 @@ public sealed partial class WhitelistCondition : EntityConditionBase<WhitelistCo
     public bool CheckMind;
 
     public override string EntityConditionGuidebookText(IPrototypeManager prototype)
-        => Loc.GetString(GuidebookText);
+    {
+        return GuidebookText == null ? string.Empty : Loc.GetString(GuidebookText);
+    }
 }
 
 public sealed class WhitelistConditionSystem : EntityConditionSystem<MetaDataComponent, WhitelistCondition>
