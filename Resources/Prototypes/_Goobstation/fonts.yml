@@ -38,7 +38,7 @@
 # Monospace (Silicon)
 - type: font
   id: MonospaceBold
-  path: /Fonts/_Goobstation/NotoSansMono/NotoSansMono-Bold.ttf
+  path: /Fonts/NotoSansMono/NotoSansMono-Bold.ttf
 
 # Valyrian Standard (Harpies)
 - type: font
