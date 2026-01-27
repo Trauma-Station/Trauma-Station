@@ -55,3 +55,16 @@
       coefficients:
         Blunt: 0.85
         Heat: 0.85
+
+- type: entity
+  parent: [ ClothingUniformBase, ClothingUniformFoldableBase ]
+  id: ClothingUniformJumpsuitOliveDrabs
+  name: olive drabs
+  description: Standard-issue military uniform in a plain olive pattern. Lacks a good camo index.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/olivedrabs.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/olivedrabs.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: naked

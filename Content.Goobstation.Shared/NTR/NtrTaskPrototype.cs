@@ -2,15 +2,15 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.NTR;
+
 /// <summary>
 /// This is a prototype for a cargo bounty, a set of items
 /// that must be sold together in a labeled container in order
 /// to receive a monetary reward.
 /// </summary>
-[Prototype, Serializable, NetSerializable]
+[Prototype]
 public sealed partial class NtrTaskPrototype : IPrototype
 {
     /// <inheritdoc/>
@@ -66,7 +66,7 @@ public sealed partial class NtrTaskPrototype : IPrototype
     public int Penalty = 1;
 }
 
-[DataDefinition, Serializable, NetSerializable]
+[DataDefinition]
 public partial record struct NtrTaskItemEntry()
 {
     [DataField]
@@ -94,12 +94,14 @@ public partial record struct NtrTaskItemEntry()
     public LocId Name;
 }
 
-// [DataDefinition, Serializable, NetSerializable]
-// public sealed partial class NtrTaskReagentEntry
-// {
-//     [DataField("reagent")]
-//     public string Reagent = string.Empty;
+/*
+[DataDefinition]
+public sealed partial class NtrTaskReagentEntry
+{
+    [DataField]
+    public string Reagent = string.Empty;
 
-//     [DataField("amount")]
-//     public int Amount;
-// }
+    [DataField]
+    public int Amount;
+}
+*/

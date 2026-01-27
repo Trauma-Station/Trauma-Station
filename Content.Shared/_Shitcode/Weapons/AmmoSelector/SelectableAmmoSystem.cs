@@ -101,6 +101,7 @@ public sealed class SelectableAmmoSystem : EntitySystem
 
     private string? GetProviderProtoName(EntityUid uid)
     {
+        // TODO: fuck you, event
         if (TryComp(uid, out BasicEntityAmmoProviderComponent? basic) && basic.Proto != null)
             return _protoManager.Resolve(basic.Proto, out var index) ? index.Name : null;
 

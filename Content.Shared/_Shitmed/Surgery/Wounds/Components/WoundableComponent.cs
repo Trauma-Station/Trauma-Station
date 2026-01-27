@@ -195,6 +195,8 @@ public sealed class WoundableComponentState : ComponentState
     public HashSet<NetEntity> ChildWoundables = [];
 
     public bool AllowWounds = true;
+    public bool CanRemove = true;
+    public bool CanBleed = true;
 
     public ProtoId<DamageContainerPrototype>? DamageContainerID;
 

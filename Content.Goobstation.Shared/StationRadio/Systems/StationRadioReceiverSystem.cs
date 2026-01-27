@@ -1,5 +1,6 @@
 using Content.Goobstation.Shared.StationRadio.Components;
 using Content.Goobstation.Shared.StationRadio.Events;
+using Content.Trauma.Common.Audio;
 using Content.Shared.Interaction;
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
@@ -41,6 +42,7 @@ public sealed class StationRadioReceiverSystem : EntitySystem
             return;
 
         comp.SoundEntity = audio.Entity;
+        EnsureComp<CopyrightedAudioComponent>(audio.Entity);
 
         if (!_power.IsPowered(uid) || !comp.Active)
             _audio.SetGain(comp.SoundEntity, 0);

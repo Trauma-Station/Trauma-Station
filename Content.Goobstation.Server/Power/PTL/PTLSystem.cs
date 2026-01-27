@@ -134,21 +134,17 @@ public sealed partial class PTLSystem : EntitySystem
         provider.FireCost = desiredFireCost;
         Dirty(ent, provider);
 
-        if (TryComp<GunComponent>(ent, out var gun))
-        {
-            if (!TryComp<TransformComponent>(ent, out var xform))
-                return;
+        var gun = Comp<GunComponent>(ent);
+        var xform = Transform(ent);
 
-            var localDirectionVector = Vector2.UnitY * -1;
-            if (ent.Comp1.ReversedFiring)
-                localDirectionVector *= -1f;
+        var localDirectionVector = Vector2.UnitY * -1;
+        if (ent.Comp1.ReversedFiring)
+            localDirectionVector *= -1f;
 
-            var directionInParentSpace = xform.LocalRotation.RotateVec(localDirectionVector);
-
-            var targetCoords = xform.Coordinates.Offset(directionInParentSpace);
-
-            _gun.AttemptShoot(ent, ent, gun, targetCoords);
-        }
+        // shoot the laser
+        var directionInParentSpace = xform.LocalRotation.RotateVec(localDirectionVector);
+        var targetCoords = xform.Coordinates.Offset(directionInParentSpace);
+        _gun.AttemptShoot(ent, ent, gun, targetCoords);
 
         // Determine actual energy used.
         var chargeAfter = _battery.GetCharge((ent, ent.Comp2));

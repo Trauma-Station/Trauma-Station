@@ -83,6 +83,9 @@ public sealed partial class ChangelingSystem
     [Dependency] private readonly GibbingSystem _gibbing = default!;
     #endregion
 
+    public static readonly EntProtoId ActionLayEgg = "ActionLayEgg";
+    public static readonly ProtoId<ReagentPrototype> PolytrinicAcid = "PolytrinicAcid";
+
     public void SubscribeAbilities()
     {
         SubscribeLocalEvent<ChangelingIdentityComponent, OpenEvolutionMenuEvent>(OnOpenEvolutionMenu);
@@ -784,7 +787,7 @@ public sealed partial class ChangelingSystem
         }
 
         var soln = new Solution();
-        soln.AddReagent("PolytrinicAcid", 10f);
+        soln.AddReagent(PolytrinicAcid, 10f);
 
         if (_pull.IsPulled(uid))
         {
@@ -915,7 +918,7 @@ public sealed partial class ChangelingSystem
             slope: 4,
             maxTileIntensity: 2);
 
-        _actions.AddAction((EntityUid) newUid, "ActionLayEgg");
+        _actions.AddAction((EntityUid) newUid, ActionLayEgg);
 
         PlayMeatySound((EntityUid) newUid, comp);
     }

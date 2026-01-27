@@ -59,6 +59,15 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
     [Dependency] private readonly NpcFactionSystem _faction = default!;
 
+    public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
+    public static readonly ProtoId<DamageTypePrototype> Slash = "Slash";
+
+    public static readonly ProtoId<TagPrototype> Bot = "Bot";
+    public static readonly ProtoId<TagPrototype> Catwalk = "Catwalk";
+    public static readonly ProtoId<TagPrototype> HereticBladeBlade = "HereticBladeBlade";
+    public static readonly ProtoId<TagPrototype> Meat = "Meat";
+    public static readonly ProtoId<TagPrototype> Wall = "Wall";
+
     public bool TryApplyGraspEffectAndMark(EntityUid user,
         HereticComponent hereticComp,
         EntityUid target,
@@ -72,7 +81,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
         if (hereticComp.PathStage >= 2)
         {
-            if (!ApplyGraspEffect((user, hereticComp), target, grasp, out var applyMark, out triggerGrasp))
+            if (!ApplyGraspEffect(user, hereticComp, target, grasp, out var applyMark, out triggerGrasp))
                 return false;
 
             if (!applyMark)
@@ -98,7 +107,8 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         return true;
     }
 
-    public bool ApplyGraspEffect(Entity<HereticComponent> user,
+    public bool ApplyGraspEffect(EntityUid performer,
+        HereticComponent heretic,
         EntityUid target,
         EntityUid? grasp,
         out bool applyMark,
@@ -106,7 +116,6 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     {
         applyMark = true;
         triggerGrasp = true;
-        var (performer, heretic) = user;
 
         switch (heretic.CurrentPath)
         {
@@ -123,7 +132,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
             case "Blade":
             {
-                if (grasp != null && heretic.PathStage >= 7 && _tag.HasTag(target, "HereticBladeBlade"))
+                if (grasp != null && heretic.PathStage >= 7 && _tag.HasTag(target, HereticBladeBlade))
                 {
                     // empowering blades and shit
                     var infusion = EnsureComp<MansusInfusedComponent>(target);
@@ -136,7 +145,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 {
                     _stun.TryUpdateParalyzeDuration(target, TimeSpan.FromSeconds(1.5f));
                     _damage.TryChangeDamage(target,
-                        new DamageSpecifier(_proto.Index<DamageTypePrototype>("Slash"), 10),
+                        new DamageSpecifier(_proto.Index(Slash), 10),
                         ignoreResistances: true,
                         origin: performer,
                         targetPart: TargetBodyPart.Chest);
@@ -156,7 +165,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 _door.StartOpening(target, door);
                 _audio.PlayPredicted(new SoundPathSpecifier("/Audio/_Goobstation/Heretic/hereticknock.ogg"),
                     target,
-                    user);
+                    performer);
                 break;
             }
 
@@ -168,19 +177,20 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                     if (HasComp<GhoulComponent>(target))
                     {
                         if (_net.IsServer)
-                            _popup.PopupEntity(Loc.GetString("heretic-ability-fail-target-ghoul"), user, user);
+                            _popup.PopupEntity(Loc.GetString("heretic-ability-fail-target-ghoul"), performer, performer);
                         break;
                     }
 
                     if (!_mind.TryGetMind(target, out _, out _))
                     {
                         if (_net.IsServer)
-                            _popup.PopupEntity(Loc.GetString("heretic-ability-fail-target-no-mind"), user, user);
+                            _popup.PopupEntity(Loc.GetString("heretic-ability-fail-target-no-mind"), performer, performer);
                         break;
                     }
 
+                    EnsureComp<HereticMinionComponent>(target).BoundHeretic = performer;
+
                     var ghoul = _compFactory.GetComponent<GhoulComponent>();
-                    ghoul.BoundHeretic = performer;
                     ghoul.GiveBlade = true;
 
                     AddComp(target, ghoul);
@@ -201,19 +211,19 @@ public abstract class SharedMansusGraspSystem : EntitySystem
             {
                 if (TryComp(target, out StationAiHolderComponent? aiHolder)) // Kill AI
                     QueueDel(aiHolder.Slot.ContainerSlot?.ContainedEntity);
-                else if (HasComp<RustGraspComponent>(grasp) && _tag.HasAnyTag(target, "Wall", "Catwalk") ||
+                else if (HasComp<RustGraspComponent>(grasp) && _tag.HasAnyTag(target, Wall, Catwalk) ||
                          HasComp<HereticRitualRuneComponent>(
                              target)) // If we have rust grasp and targeting a wall (or a catwalk) - do nothing, let other methods handle that. Also don't damage transmutation rune.
                     return false;
                 else if (TryComp(target, out DamageableComponent? damageable) && // Is it even damageable?
-                         !_tag.HasTag(target, "Meat") && // Is it not organic body part or organ?
+                         !_tag.HasTag(target, Meat) && // Is it not organic body part or organ?
                          !HasComp<ShadowCloakEntityComponent>(target) && // No instakilling shadow cloak heretics
                          (!HasComp<MobStateComponent>(target) || HasComp<SiliconComponent>(target) ||
                           HasComp<BorgChassisComponent>(target) ||
-                          _tag.HasTag(target, "Bot"))) // Check for ingorganic target
+                          _tag.HasTag(target, Bot))) // Check for ingorganic target
                 {
                     _damage.ChangeDamage((target, damageable),
-                        new DamageSpecifier(_proto.Index<DamageGroupPrototype>("Brute"), 500),
+                        new DamageSpecifier(_proto.Index(Blunt), 500),
                         ignoreResistances: true,
                         origin: performer,
                         targetPart: TargetBodyPart.Chest);

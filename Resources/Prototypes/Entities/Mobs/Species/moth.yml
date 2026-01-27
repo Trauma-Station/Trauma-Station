@@ -24,7 +24,7 @@
     accent: zombieMoth
   - type: Speech
     speechVerb: Moth
-    allowedEmotes: ['Chitter', 'Squeak', 'Flap'] #flap is from goob
+    allowedEmotes: ['Chitter', 'Squeak', 'Flap'] # Goob - added flap
   - type: LanguageKnowledge # Einstein Engines - Languages
     speaks:
     - TauCetiBasic
@@ -60,7 +60,7 @@
       Female: FemaleMoth
       Unsexed: UnisexMoth
   - type: MovementSpeedModifier
-    baseWeightlessAcceleration: 3 # Goobstation value
+    baseWeightlessAcceleration: 3 # Goob - was 1.5
     baseWeightlessFriction: 1
     baseWeightlessModifier: 1
   - type: Flammable
@@ -78,7 +78,7 @@
         Cold : 0.05 #per second, scales with temperature & other constants
     heatDamage:
       types:
-        Heat : 2 # Goob edit #per second, scales with temperature & other constants
+        Heat: 2 # Goob - was 3
   - type: TemperatureSpeed
     thresholds:
       289: 0.9
@@ -97,8 +97,8 @@
       - map: [ "enum.HumanoidVisualLayers.LArm" ]
       - map: [ "enum.HumanoidVisualLayers.RLeg" ]
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-      - map: [ "enum.HumanoidVisualLayers.Underwear" ]
-      - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
       - map: [ "jumpsuit" ]
       - map: [ "enum.HumanoidVisualLayers.LHand" ]
       - map: [ "enum.HumanoidVisualLayers.RHand" ]
@@ -119,12 +119,12 @@
       - map: [ "enum.HumanoidVisualLayers.Tail" ] #in the utopian future we should probably have a wings enum inserted here so everyhting doesn't break
       - map: [ "back" ]
       - map: [ "neck" ]
-      - map: [ "enum.HumanoidVisualLayers.Face" ] # Goob ???
+      - map: [ "enum.HumanoidVisualLayers.Face" ] # Trauma
       - map: [ "enum.HumanoidVisualLayers.SnoutCover" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHairSpecial" ] # Trauma
       - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
-      - map: [ "maskalt" ]
+      - map: [ "maskalt" ] # Trauma
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
       - map: [ "enum.HumanoidVisualLayers.HairSpecial" ] # Trauma
       - map: [ "mask" ]

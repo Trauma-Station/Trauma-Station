@@ -309,6 +309,8 @@ public sealed partial class WoundSystem : EntitySystem
             // Attached and Detached -Woundable events are handled on client with containers
 
             AllowWounds = comp.AllowWounds,
+            CanRemove = comp.CanRemove,
+            CanBleed = comp.CanBleed,
 
             DamageContainerID = comp.DamageContainerID,
 
@@ -352,6 +354,8 @@ public sealed partial class WoundSystem : EntitySystem
         // Attached and Detached -Woundable events are handled on client with containers
 
         component.AllowWounds = state.AllowWounds;
+        component.CanRemove = state.CanRemove;
+        component.CanBleed = state.CanBleed;
 
         component.DamageContainerID = state.DamageContainerID;
 

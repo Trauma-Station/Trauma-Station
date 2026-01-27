@@ -69,7 +69,7 @@ public sealed class FaxSlipSystem : EntitySystem
 
             _deviceNetwork.QueuePacket(args.Fax, args.Fax.Comp.DestinationFaxAddress, payload);
 
-            var actor = args.Args.Actor;
+            var actor = args.Actor;
             if (actor.IsValid())
                 _adminLogger.Add(LogType.Action,
                     LogImpact.Low,

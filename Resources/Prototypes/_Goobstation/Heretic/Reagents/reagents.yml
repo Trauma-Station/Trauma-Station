@@ -23,6 +23,7 @@
     Medicine:
       conditions:
       - !type:WhitelistCondition
+        checkMind: true
         whitelist:
           components:
           - Heretic

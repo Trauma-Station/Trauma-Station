@@ -1,17 +1,9 @@
 // <Trauma>
-using Content.Goobstation.Common.CCVar;
-using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Common.Weapons;
-using Content.Shared._EinsteinEngines.Contests;
+using Content.Goobstation.Common.MartialArts;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Coordinates;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Events;
-using Content.Shared.Item;
 using Content.Shared.Random.Helpers;
-using Content.Shared.Tag;
-using Content.Shared.Throwing;
-using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
@@ -59,15 +51,8 @@ using ItemToggleMeleeWeaponComponent = Content.Shared.Item.ItemToggle.Components
 
 namespace Content.Shared.Weapons.Melee;
 
-public abstract class SharedMeleeWeaponSystem : EntitySystem
+public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma - made partial
 {
-    // <Trauma>
-    [Dependency] private   readonly ContestsSystem _contests = default!;
-    [Dependency] private   readonly ThrowingSystem _throwing = default!;
-    [Dependency] private   readonly IConfigurationManager _config = default!;
-    [Dependency] private   readonly TagSystem _tag = default!;
-    [Dependency] private   readonly DamageExamineSystem _damageExamine = default!;
-    // </Trauma>
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly IMapManager MapManager = default!;
     [Dependency] private   readonly INetManager _netMan = default!;
@@ -87,14 +72,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private   readonly DamageExamineSystem _damageExamine = default!;
 
     public const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque); // WD EDIT: private -> public
-
-    // <Goob> - Shove
-    private float _shoveRange;
-    private float _shoveSpeed;
-    private float _shoveMass;
-    // </Goob> - Shove
 
     /// <summary>
     /// Maximum amount of targets allowed for a wide-attack.
@@ -109,11 +89,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+        InitializeTrauma(); // Trauma
 
         SubscribeLocalEvent<MeleeWeaponComponent, HandSelectedEvent>(OnMeleeSelected);
         SubscribeLocalEvent<MeleeWeaponComponent, ShotAttemptedEvent>(OnMeleeShotAttempted);
         SubscribeLocalEvent<MeleeWeaponComponent, GunShotEvent>(OnMeleeShot);
-        SubscribeLocalEvent<MeleeWeaponComponent, DamageExamineEvent>(OnMeleeExamineDamage); // Trauma
+        SubscribeLocalEvent<MeleeWeaponComponent, DamageExamineEvent>(OnMeleeExamineDamage);
         SubscribeLocalEvent<BonusMeleeDamageComponent, GetMeleeDamageEvent>(OnGetBonusMeleeDamage);
         SubscribeLocalEvent<BonusMeleeDamageComponent, GetHeavyDamageModifierEvent>(OnGetBonusHeavyDamageModifier);
         SubscribeLocalEvent<BonusMeleeAttackRateComponent, GetMeleeAttackRateEvent>(OnGetBonusMeleeAttackRate);
@@ -124,12 +105,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         SubscribeAllEvent<LightAttackEvent>(OnLightAttack);
         SubscribeAllEvent<DisarmAttackEvent>(OnDisarmAttack);
         SubscribeAllEvent<StopAttackEvent>(OnStopAttack);
-
-        // <Goob>
-        Subs.CVar(_config, GoobCVars.ShoveRange, x => _shoveRange = x, true);
-        Subs.CVar(_config, GoobCVars.ShoveSpeed, x => _shoveSpeed = x, true);
-        Subs.CVar(_config, GoobCVars.ShoveMassFactor, x => _shoveMass = x, true);
-        // </Goob>
 
 #if DEBUG
         SubscribeLocalEvent<MeleeWeaponComponent, MapInitEvent>(OnMapInit);
@@ -160,9 +135,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         }
     }
 
-    /// <summary>
-    /// Trauma - upstream reverted predicted examine for some reason
-    /// </summary>
     private void OnMeleeExamineDamage(EntityUid uid, MeleeWeaponComponent component, ref DamageExamineEvent args)
     {
         if (component.Hidden)
@@ -249,7 +221,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
     private void OnLightAttack(LightAttackEvent msg, EntitySessionEventArgs args)
     {
-        if (args.SenderSession.AttachedEntity is not { } user
+        if (args.SenderSession.AttachedEntity is not {} user
             || TerminatingOrDeleted(user)) // Goob change
             return;
 
@@ -264,8 +236,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
     private void OnHeavyAttack(HeavyAttackEvent msg, EntitySessionEventArgs args)
     {
+        // <Goob> - rewrote weapon finding logic
         var weapon = GetEntity(msg.Weapon);
-        if (args.SenderSession.AttachedEntity is not { } user
+        if (args.SenderSession.AttachedEntity is not {} user
             || TerminatingOrDeleted(user)
             || TerminatingOrDeleted(weapon)) // Goobstation Change
             return;
@@ -276,12 +249,13 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return;
 
         AttemptAttack(user, weaponUid, weaponComp, msg, args.SenderSession);
+        // </Goob>
     }
 
     private void OnDisarmAttack(DisarmAttackEvent msg, EntitySessionEventArgs args)
     {
-        if (args.SenderSession.AttachedEntity is not { } user
-            || TerminatingOrDeleted(user)) // Goobstation Change
+        if (args.SenderSession.AttachedEntity is not {} user
+            || TerminatingOrDeleted(user)) // Goob
             return;
 
         if (TryGetWeapon(user, out var weaponUid, out var weapon))
@@ -410,16 +384,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         return AttemptAttack(user, weaponUid, weapon, new LightAttackEvent(GetNetEntity(target), GetNetEntity(weaponUid), GetNetCoordinates(targetXform.Coordinates)), null);
     }
 
-    // Goobstation
-    public bool AttemptHeavyAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, List<EntityUid> targets, EntityCoordinates coordinates)
-    {
-        return AttemptAttack(user,
-            weaponUid,
-            weapon,
-            new HeavyAttackEvent(GetNetEntity(weaponUid), GetNetEntityList(targets), GetNetCoordinates(coordinates)),
-            null);
-    }
-
     public bool AttemptDisarmAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityUid target)
     {
         if (!TryComp(target, out TransformComponent? targetXform))
@@ -530,7 +494,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                     DoLightAttack(user, light, weaponUid, weapon, session);
                     break;
                 case DisarmAttackEvent disarm:
-                    if (!DoDisarm(user, disarm, weaponUid, weapon, session)) // Goob edit
+                    if (!DoDisarm(user, disarm, weaponUid, weapon, session))
                         return false;
 
                     animation = weapon.DisarmAnimation; // WWDP
@@ -899,7 +863,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 range,
                 ignore,
                 false)
-                .Where(x => !_tag.HasTag(x.HitEntity, "WideSwingIgnore")) // Goobstation
+                .Where(x => !_tag.HasTag(x.HitEntity, WideSwingIgnore)) // Goobstation
                 .ToList();
 
             if (res.Count != 0)
@@ -982,19 +946,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
     }
 
-    // Goob - Shove Rework shove stamina damage based on mass
-    private float CalculateShoveStaminaDamage(EntityUid disarmer, EntityUid disarmed)
-    {
-        var baseStaminaDamage = TryComp<ShovingComponent>(disarmer, out var shoving) ? shoving.StaminaDamage : ShovingComponent.DefaultStaminaDamage;
-
-        return baseStaminaDamage * _contests.MassContest(disarmer, disarmed);
-    }
-
-    protected virtual bool DoDisarm(EntityUid user,
-        DisarmAttackEvent ev,
-        EntityUid meleeUid,
-        MeleeWeaponComponent component,
-        ICommonSession? session) // Goobstation - Shove Rework
+    private bool DoDisarm(EntityUid user, DisarmAttackEvent ev, EntityUid meleeUid, MeleeWeaponComponent component, ICommonSession? session)
     {
         if (!ev.Target.HasValue)
             return true; // Trauma - still do the animation if you missed a shove
@@ -1138,20 +1090,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             localPos = localPos.Normalized() * visualLength;
 
         DoLunge(user, weapon, angle, localPos, animation, spriteRotation, flipAnimation);
-    }
-
-    private void PhysicalShove(EntityUid user, EntityUid target)
-    {
-        var force = _shoveRange * _contests.MassContest(user, target, rangeFactor: _shoveMass);
-
-        var userPos = TransformSystem.ToMapCoordinates(user.ToCoordinates()).Position;
-        var targetPos = TransformSystem.ToMapCoordinates(target.ToCoordinates()).Position;
-        if (userPos == targetPos) return; // Trauma - no NaN
-        var pushVector = (targetPos - userPos).Normalized() * force;
-
-        var animated = HasComp<ItemComponent>(target);
-
-        _throwing.TryThrow(target, pushVector, force * _shoveSpeed, animated: animated);
     }
 
     public abstract void DoLunge(EntityUid user, EntityUid weapon, Angle angle, Vector2 localPos, string? animation, Angle spriteRotation, bool flipAnimation, bool predicted = true);

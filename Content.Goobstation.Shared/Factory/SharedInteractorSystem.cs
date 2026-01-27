@@ -107,8 +107,9 @@ public abstract class SharedInteractorSystem : EntitySystem
         var alt = state switch
         {
             SignalState.Momentary => !ent.Comp.AltInteract,
+            SignalState.High => true,
             SignalState.Low => false,
-            SignalState.High => true
+            _ => false
         };
         SetAltInteract(ent, alt);
     }

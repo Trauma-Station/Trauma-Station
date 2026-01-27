@@ -63,6 +63,9 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
     private const int ClimbingCollisionGroup = (int) (CollisionGroup.BlobImpassable);
 
     private readonly GasMixture _normalAtmos;
+
+    public static readonly ProtoId<NpcFactionPrototype> BlobFaction = "Blob";
+
     public ZombieBlobSystem()
     {
         _normalAtmos = new GasMixture(Atmospherics.CellVolume)
@@ -132,13 +135,11 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
             oldFactions.Add(factionId);
             _faction.RemoveFaction(uid, factionId);
         }
-        _faction.AddFaction(uid, "Blob");
+        _faction.AddFaction(uid, BlobFaction);
         component.OldFactions = oldFactions;
 
         // var accent = EnsureComp<ReplacementAccentComponent>(uid); // Languages - No need for accents.
         // accent.Accent = "genericAggressive";
-
-        _tagSystem.AddTag(uid, "BlobMob");
 
         EnsureComp<PressureImmunityComponent>(uid);
 
@@ -205,8 +206,6 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
             tempDamage.ColdDamageThreshold = component.OldColdDamageThreshold.Value;
         }
 
-        _tagSystem.RemoveTag(uid, "BlobMob");
-
         /*
         var mindComp = EnsureComp<MindContainerComponent>(uid);
         if (mindComp.Mind != null)
@@ -222,7 +221,7 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
         {
             _faction.AddFaction(uid, factionId);
         }
-        _faction.RemoveFaction(uid, "Blob");
+        _faction.RemoveFaction(uid, BlobFaction);
 
         if (TryComp<FixturesComponent>(uid, out var fixtures))
         {

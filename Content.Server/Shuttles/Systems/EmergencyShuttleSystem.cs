@@ -1,4 +1,3 @@
-using Content.Server.Explosion.EntitySystems; // Goob
 using System.Linq;
 using System.Numerics;
 using System.Threading;
@@ -68,7 +67,6 @@ public sealed partial class EmergencyShuttleSystem : SharedEmergencyShuttleSyste
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!; // Goob edit
 
     private const float ShuttleSpawnBuffer = 1f;
 

@@ -15,12 +15,14 @@ namespace Content.IntegrationTests.Tests._Shitmed.Body;
 [TestFixture]
 public sealed class SpeciesBUiTest
 {
+    private const string BaseMobSpeciesTest = "BaseMobSpeciesTest";
+
     [TestPrototypes]
-    private const string Prototypes = @"
+    private const string Prototypes = $@"
 - type: entity
-  name: BaseMobSpeciesTest
-  id: BaseMobSpeciesTest
   parent: BaseMobSpecies
+  id: {BaseMobSpeciesTest}
+  name: {BaseMobSpeciesTest}
 ";
 
     private Dictionary<Enum, InterfaceData> GetInterfaces(UserInterfaceComponent comp) =>
@@ -45,23 +47,26 @@ public sealed class SpeciesBUiTest
         {
             var bUiSys = server.System<SharedUserInterfaceSystem>();
 
-            var baseEnt = proto.Index("BaseMobSpeciesTest");
+            var baseEnt = proto.Index(BaseMobSpeciesTest);
             Assert.That(baseEnt, Is.Not.Null);
             Assert.That(baseEnt.TryGetComponent<UserInterfaceComponent>(out var bUiBase, factoryComp), Is.True);
             Assert.That(bUiBase, Is.Not.Null);
             var baseKeys = GetInterfaces(bUiBase).Keys.ToArray();
 
-            foreach (var species in proto.EnumeratePrototypes<SpeciesPrototype>())
+            Assert.Multiple(() =>
             {
-                var ent = proto.Index(species.Prototype);
-                Assert.That(ent.TryGetComponent<UserInterfaceComponent>(out var bUi, factoryComp), Is.True);
-                Assert.That(bUi, Is.Not.Null);
-                var states = GetInterfaces(bUiBase);
-                foreach (var key in baseKeys)
+                foreach (var species in proto.EnumeratePrototypes<SpeciesPrototype>())
                 {
-                    Assert.That(states.ContainsKey(key), Is.True, $"Species {species.ID} has not UserInterface of type enum.{key.GetType().Name}");
+                    var ent = proto.Index(species.Prototype);
+                    Assert.That(ent.TryGetComponent<UserInterfaceComponent>(out var bUi, factoryComp), Is.True);
+                    Assert.That(bUi, Is.Not.Null);
+                    var states = GetInterfaces(bUi);
+                    foreach (var key in baseKeys)
+                    {
+                        Assert.That(states.ContainsKey(key), Is.True, $"Species {species.ID} is missing UserInterface for enum.{key.GetType().Name}.{key}");
+                    }
                 }
-            }
+            });
         });
         await pair.CleanReturnAsync();
     }

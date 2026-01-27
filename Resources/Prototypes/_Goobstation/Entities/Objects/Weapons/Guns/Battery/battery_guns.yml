@@ -281,10 +281,10 @@
     autoRechargeRate: 80
 
 - type: entity
-  name: CR-2 energy assault rifle
+  name: energy rifle
   parent: [ BaseWeaponCustomCell, BaseGunWieldable, BaseSecurityContraband ]
   id: WeaponEnergyRifle
-  description: An advanced energy rifle capable of firing various bolts depending on the powercell magazine.
+  description: An energy rifle capable of firing various bolts depending on the powercell magazine.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Battery/energy_rifle.rsi
@@ -324,10 +324,10 @@
             - EnergyMagAmmo
 
 - type: entity
-  name: DT-12 "Lawbringer"
+  name: Order
   parent: [BaseWeaponBatterySmall, BaseGrandTheftContraband]
   id: WeaponEnergyGunLawbringer
-  description: A versatile energy gun, with many different modes. The owner of this gun embodies the law itself.
+  description: A versatile energy gun, with many different modes. The owner of this gun embodies order itself.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Battery/lawbringer.rsi

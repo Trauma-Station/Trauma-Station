@@ -20,6 +20,8 @@ namespace Content.Shared.Store;
 // do not touch unless you want to shoot yourself in the leg
 public static class ListingLocalisationHelpers
 {
+    public static readonly ProtoId<DatasetPrototype> UplinkDiscountFluff = "UplinkDiscountFluff"; // Trauma
+
     /// <summary>
     /// ListingData's Name field can be either a localisation string or the actual entity's name.
     /// This function gets a localised name from the localisation string if it exists, and if not, it gets the entity's name.
@@ -55,7 +57,7 @@ public static class ListingLocalisationHelpers
         var _protoMan = IoCManager.Resolve<IPrototypeManager>();
         var _rand = IoCManager.Resolve<IRobustRandom>();
 
-        var discountFluff = _rand.Pick(_protoMan.Index<DatasetPrototype>("UplinkDiscountFluff").Values);
+        var discountFluff = _rand.Pick(_protoMan.Index(UplinkDiscountFluff).Values);
         var discountString = $"{Loc.GetString("store-sales-amount", ("amount", listingData.DiscountValue))} {discountFluff}";
 
         if (listingData.DiscountValue > 0)

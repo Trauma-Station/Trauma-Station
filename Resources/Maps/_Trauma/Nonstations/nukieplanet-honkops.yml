@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 270.1.0
+  engineVersion: 271.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/19/2026 11:45:03
+  time: 01/25/2026 10:58:54
   entityCount: 2457
 maps:
 - 1
@@ -736,7 +736,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-    - type: FTLDrive
     - type: ImplicitRoof
     - type: ExplosionAirtightGrid
 - proto: AirAlarm
@@ -746,6 +745,13 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -2.5,-18.5
+      parent: 2
+- proto: AirCanister
+  entities:
+  - uid: 1024
+    components:
+    - type: Transform
+      pos: 1.5,-13.5
       parent: 2
 - proto: AirlockExternalGlassNukeopLocked
   entities:
@@ -3582,6 +3588,13 @@ entities:
     - type: Transform
       pos: 6.5,-13.5
       parent: 2
+- proto: CarbonDioxideCanister
+  entities:
+  - uid: 1023
+    components:
+    - type: Transform
+      pos: 0.5,-13.5
+      parent: 2
 - proto: Catwalk
   entities:
   - uid: 538
@@ -5529,17 +5542,17 @@ entities:
     - type: Transform
       pos: -1.5,-17.5
       parent: 2
-- proto: GasThermoMachineHellfireFreezer
+- proto: GasThermoMachineFreezer
   entities:
-  - uid: 826
+  - uid: 827
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -4.5,-11.5
       parent: 2
-- proto: GasThermoMachineHellfireHeater
+- proto: GasThermoMachineHeater
   entities:
-  - uid: 827
+  - uid: 826
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -6730,18 +6743,6 @@ entities:
       angularDamping: 0
       linearDamping: 0
       canCollide: False
-- proto: PlasmaCanister
-  entities:
-  - uid: 1023
-    components:
-    - type: Transform
-      pos: 0.5,-13.5
-      parent: 2
-  - uid: 1024
-    components:
-    - type: Transform
-      pos: 1.5,-13.5
-      parent: 2
 - proto: PlushieLizard
   entities:
   - uid: 1025

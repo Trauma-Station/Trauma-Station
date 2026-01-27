@@ -24,7 +24,7 @@ public sealed class ActionsSystem : EntitySystem
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly PlasmaCostActionSystem _plasmaCost = default!; // Goobstation=
+    [Dependency] private readonly PlasmaCostActionSystem _plasmaCost = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
     public override void Initialize()

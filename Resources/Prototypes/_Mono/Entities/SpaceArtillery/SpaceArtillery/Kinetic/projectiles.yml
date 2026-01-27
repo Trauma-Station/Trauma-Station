@@ -209,6 +209,7 @@
     range: 10
     energyConsumption: 2700000
     disableDuration: 7.5
+  - type: DeleteOnTrigger
 
 # 220mm Cyrexa
 

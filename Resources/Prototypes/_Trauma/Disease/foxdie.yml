@@ -1,0 +1,20 @@
+# From Metal Gear Solid, created by Hideo Kojima
+
+- type: entity
+  parent: DiseaseBase
+  id: DiseaseFoxDie
+  name: FOXDIE
+  description: A genetically engineered retrovirus, designed to kill based on the target's DNA.
+  components:
+  - type: Disease
+    diseaseType: Viral
+    genotype: 280205
+    immunityGainRate: 0.1 # it'll last a while
+    mutationRate: 0.001 # need to wait 9 years to mutate, I'm afraid
+    infectionRate: 0.1 # target dies within seconds of infection
+    effects:
+      DiseaseBehaviorBreathSpread: 1
+      DiseaseBehaviorHeartAttack: 1
+  - type: DnaTargetDisease
+  # TODO: aerial tranmission through exhaling
+  # TODO: make Ethylredoxrazine inhibit it, rough Diazepam analogue

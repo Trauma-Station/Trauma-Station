@@ -10404,7 +10404,6 @@ entities:
     - type: GasTileOverlay
     - type: SpreaderGrid
     - type: ImplicitRoof
-    - type: FTLDrive
     - type: ExplosionAirtightGrid
 - proto: AccordionInstrument
   entities:

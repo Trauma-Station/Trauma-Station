@@ -4766,7 +4766,6 @@ entities:
     - type: SpreaderGrid
     - type: GridPathfinding
     - type: ImplicitRoof
-    - type: FTLDrive
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 3

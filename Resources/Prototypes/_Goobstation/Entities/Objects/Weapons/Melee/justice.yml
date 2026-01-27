@@ -10,7 +10,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: DT-2 'Justice'
+  name: Justice
   parent: [BaseItem, BaseGrandTheftContraband]
   id: Justice
   description: An expensive & self-recharging energy sword, designed specifically for the Head of Security. If it were not for injustice, man would not know justice.

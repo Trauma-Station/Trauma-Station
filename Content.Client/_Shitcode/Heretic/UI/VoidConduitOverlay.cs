@@ -13,13 +13,15 @@ public sealed class VoidConduitOverlay : Overlay
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
 
     [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly TransformSystem _xform;
     private readonly SpriteSystem _sprite;
 
     private readonly ShaderInstance _unshadedShader;
+
+    public static readonly ProtoId<ShaderPrototype> Unshaded = "unshaded";
 
     public VoidConduitOverlay()
     {
@@ -29,7 +31,7 @@ public sealed class VoidConduitOverlay : Overlay
         _xform = _entMan.System<TransformSystem>();
         _sprite = _entMan.System<SpriteSystem>();
 
-        _unshadedShader = _prototype.Index<ShaderPrototype>("unshaded").Instance();
+        _unshadedShader = _proto.Index(Unshaded).Instance();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
