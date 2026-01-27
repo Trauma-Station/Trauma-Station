@@ -29,7 +29,7 @@ public sealed class GeneticsConsoleBUI : BoundUserInterface
         _window.OnPrint += p => SendPredictedMessage(new GeneticsConsolePrintMessage(p));
         _window.OnCombine += i => SendPredictedMessage(new GeneticsConsoleCombineMessage(i));
         _window.OnSaveEnzymes += () => SendPredictedMessage(new GeneticsConsoleSaveEnzymesMessage());
-        _window.OnPrintIncubator += () => SendPredictedMessage(new GeneticsConsolePrintIncubatorMessage());
+        _window.OnApplyEnzymes += () => SendPredictedMessage(new GeneticsConsoleApplyEnzymesMessage());
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

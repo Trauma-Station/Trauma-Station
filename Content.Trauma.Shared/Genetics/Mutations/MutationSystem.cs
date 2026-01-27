@@ -234,7 +234,7 @@ public sealed partial class MutationSystem : EntitySystem
     /// On server, gets the round data for a given mutation or creates it if it doesn't exist.
     /// On client, this always returns null, it can only be gotten through BUI state.
     /// </summary>
-    public MutationData? GetRoundData(EntProtoId<MutationComponent>? id)
+    public MutationData? GetRoundData([ForbidLiteral] EntProtoId<MutationComponent>? id)
     {
         if (_net.IsClient || id is null) return null;
 
@@ -271,7 +271,7 @@ public sealed partial class MutationSystem : EntitySystem
     /// <summary>
     /// Returns true if a mutation is foreign to an entity, i.e. not present in Dormant.
     /// </summary>
-    public bool IsForeign(MutatableComponent comp, EntProtoId<MutationComponent> id)
+    public bool IsForeign(MutatableComponent comp, [ForbidLiteral] EntProtoId<MutationComponent> id)
         => !comp.Dormant.Contains(id);
 
     /// <summary>
@@ -285,6 +285,12 @@ public sealed partial class MutationSystem : EntitySystem
     /// Returns true if an entity has <see cref="MutatableComponent"/>.
     /// </summary>
     public bool IsMutatable(EntityUid uid) => _mutatableQuery.HasComp(uid);
+
+    /// <summary>
+    /// Returns true if an entity has a specific mutation active.
+    /// </summary>
+    public bool HasMutation(Entity<MutatableComponent?> ent, [ForbidLiteral] EntProtoId<MutationComponent> id)
+        => _mutatableQuery.Resolve(ent, ref ent.Comp) && ent.Comp.Mutations.ContainsKey(id);
 
     /// <summary>
     /// Returns true if an entity can currently mutate.
@@ -306,7 +312,7 @@ public sealed partial class MutationSystem : EntitySystem
     /// Instability increases if the mutation <see cref="IsForeign"/>.
     /// Automatic mutations (from DefaultMutations etc) don't show a popup or polymorph etc.
     /// </summary>
-    public bool AddMutation(Entity<MutatableComponent?> ent, EntProtoId<MutationComponent> id, bool automatic = false, bool predicted = false)
+    public bool AddMutation(Entity<MutatableComponent?> ent, [ForbidLiteral] EntProtoId<MutationComponent> id, bool automatic = false, bool predicted = false)
     {
         if (!_mutatableQuery.Resolve(ent, ref ent.Comp))
             return false;
@@ -347,7 +353,7 @@ public sealed partial class MutationSystem : EntitySystem
     /// <summary>
     /// Add multiple mutations, returning true if any of them succeeded.
     /// </summary>
-    public bool AddMutations(Entity<MutatableComponent?> ent, IEnumerable<EntProtoId<MutationComponent>> ids, bool automatic = false, bool predicted = false)
+    public bool AddMutations(Entity<MutatableComponent?> ent, [ForbidLiteral] IEnumerable<EntProtoId<MutationComponent>> ids, bool automatic = false, bool predicted = false)
     {
         if (!_mutatableQuery.Resolve(ent, ref ent.Comp))
             return false;
@@ -367,7 +373,7 @@ public sealed partial class MutationSystem : EntitySystem
     /// Tries to activate a dormant mutation, does nothing if the mutation is not present in Dormant.
     /// Won't add instability to the entity.
     /// </summary>
-    public bool ActivateMutation(Entity<MutatableComponent?> ent, EntProtoId<MutationComponent> id, bool automatic = false, bool predicted = false)
+    public bool ActivateMutation(Entity<MutatableComponent?> ent, [ForbidLiteral] EntProtoId<MutationComponent> id, bool automatic = false, bool predicted = false)
     {
         if (!_mutatableQuery.Resolve(ent, ref ent.Comp))
             return false;
@@ -379,7 +385,7 @@ public sealed partial class MutationSystem : EntitySystem
     /// <see cref="AddMutations"/> for activation.
     /// Returns true if any dormant mutations were added.
     /// </summary>
-    public bool ActivateMutations(Entity<MutatableComponent> ent, IEnumerable<EntProtoId<MutationComponent>> ids, bool automatic = false, bool predicted = false)
+    public bool ActivateMutations(Entity<MutatableComponent> ent, [ForbidLiteral] IEnumerable<EntProtoId<MutationComponent>> ids, bool automatic = false, bool predicted = false)
     {
         if (_mob.IsDead(ent))
             return false;
@@ -396,12 +402,12 @@ public sealed partial class MutationSystem : EntitySystem
     /// <summary>
     /// Get a mutation by id, or null if it isn't present.
     /// </summary>
-    public Entity<MutationComponent>? GetMutation(Entity<MutatableComponent> ent, EntProtoId<MutationComponent> id)
+    public Entity<MutationComponent>? GetMutation(Entity<MutatableComponent> ent, [ForbidLiteral] EntProtoId<MutationComponent> id)
         => ent.Comp.Mutations.TryGetValue(id, out var uid) && _query.TryComp(uid, out var comp)
             ? (uid, comp)
             : null;
 
-    public bool RemoveMutation(Entity<MutatableComponent?> ent, EntProtoId<MutationComponent> id, bool automatic = false, bool predicted = false)
+    public bool RemoveMutation(Entity<MutatableComponent?> ent, [ForbidLiteral] EntProtoId<MutationComponent> id, bool automatic = false, bool predicted = false)
     {
         if (!_mutatableQuery.Resolve(ent, ref ent.Comp))
             return false;
@@ -437,7 +443,7 @@ public sealed partial class MutationSystem : EntitySystem
     /// <summary>
     /// Removes multiple mutations, returning true if any of them succeeded.
     /// </summary>
-    public bool RemoveMutations(Entity<MutatableComponent?> ent, IEnumerable<EntProtoId<MutationComponent>> ids, bool automatic = false, bool predicted = false)
+    public bool RemoveMutations(Entity<MutatableComponent?> ent, [ForbidLiteral] IEnumerable<EntProtoId<MutationComponent>> ids, bool automatic = false, bool predicted = false)
     {
         if (!_mutatableQuery.Resolve(ent, ref ent.Comp))
             return false;
@@ -456,8 +462,11 @@ public sealed partial class MutationSystem : EntitySystem
     /// <summary>
     /// Removes all active and dormant mutations from a mob.
     /// </summary>
-    public void ClearMutations(Entity<MutatableComponent> ent, bool automatic = false, bool predicted = false)
+    public void ClearMutations(Entity<MutatableComponent?> ent, bool automatic = false, bool predicted = false)
     {
+        if (!_mutatableQuery.Resolve(ent, ref ent.Comp))
+            return;
+
         foreach (var mutation in ent.Comp.Mutations.Values)
         {
             if (_query.TryComp(mutation, out var mutationComp))
@@ -479,7 +488,7 @@ public sealed partial class MutationSystem : EntitySystem
     public void Scramble(Entity<MutatableComponent> ent, bool clear = true, bool automatic = false, bool predicted = false)
     {
         if (clear)
-            ClearMutations(ent, automatic, predicted);
+            ClearMutations(ent.AsNullable(), automatic, predicted);
 
         // don't scramble existing mutations
         if (ent.Comp.Mutations.Count > 0)
@@ -502,7 +511,7 @@ public sealed partial class MutationSystem : EntitySystem
     public void TransferMutations(Entity<MutatableComponent> ent, Entity<MutatableComponent> target, bool predicted = false)
     {
         // remove any mutations it had previously
-        ClearMutations(target, automatic: true, predicted: predicted);
+        ClearMutations(target.AsNullable(), automatic: true, predicted: predicted);
 
         // replace dormant mutations in the target entity
         foreach (var dormant in ent.Comp.Dormant)

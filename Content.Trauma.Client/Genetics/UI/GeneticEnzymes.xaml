@@ -26,8 +26,8 @@
                 <Label Text="Skin Color:"/>
                 <Label Name="DiskSkinLabel" Text="{Loc 'generic-not-available-shorthand'}"/>
             </GridContainer>
-            <controls:StripeBack MaxWidth="220"> <!-- sanabi -->
-                <Button Name="PrintButton" Margin="4" Text="{Loc 'genetics-console-print-incubator'}" MaxWidth="200" Disabled="True"/>
+            <controls:StripeBack MaxWidth="250"> <!-- sanabi -->
+                <Button Name="ApplyButton" Margin="4" Text="{Loc 'genetics-console-apply-enzymes'}" MaxWidth="220" Disabled="True"/>
             </controls:StripeBack>
         </BoxContainer>
     </BoxContainer>

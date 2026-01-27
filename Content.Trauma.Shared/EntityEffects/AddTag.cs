@@ -19,11 +19,11 @@ public sealed partial class AddTag : EntityEffectBase<AddTag>
     /// <summary>
     /// Text to use for the guidebook entry for reagents.
     /// </summary>
-    [DataField(required: true)]
-    public LocId GuidebookText;
+    [DataField]
+    public LocId? GuidebookText;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString(GuidebookText, ("chance", Probability));
+        => GuidebookText is {} loc ? Loc.GetString(loc, ("chance", Probability)) : null;
 }
 
 public sealed class AddTagEffectSystem : EntityEffectSystem<TagComponent, AddTag>

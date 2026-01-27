@@ -10,6 +10,9 @@ genetics-console-chat-combine-failed = MUTATION COMBINATION INTERRUPTED
 genetics-console-chat-combine-none = NO COMBINATION FOUND
 genetics-console-chat-combine-present = COMBINATION ALREADY PRESENT
 genetics-console-chat-combined = MUTATION COMBINATION COMPLETED
+genetics-console-chat-applying-enzymes = APPLYING UNIQUE ENZYMES
+genetics-console-chat-apply-enzymes-failed = FAILED TO APPLY UNIQUE ENZYMES
+genetics-console-chat-applied-enzymes = UNIQUE ENZYMES APPLIED
 
 genetics-console-radio-message = {CAPITALIZE($mutation)} has been sequenced, {$points} points have been added to the R&D server!
 
@@ -65,5 +68,5 @@ genetics-console-disk-empty = Disk has no mutation!
 genetics-console-scanned-mob = Scanned Mob
 genetics-console-save-enzymes = Save to Disk
 genetics-console-disk-enzymes = Disk Unique Enzymes
-genetics-console-print-incubator = Print Enzyme Incubator
+genetics-console-apply-enzymes = Apply Enzymes to Subject
 genetics-console-color = R{$r}/G{$g}/B{$b}

@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Goobstation.Common.Barks;
 using Content.Shared._Shitmed.Humanoid.Events;
 // </Trauma>
 using System.IO;
@@ -47,7 +46,6 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem // T
     [Dependency] private readonly IdentitySystem _identity = default!;
 
     public static readonly ProtoId<SpeciesPrototype> DefaultSpecies = "Human";
-    public static readonly ProtoId<BarkPrototype> DefaultBarkVoice = "Alto"; // Goob Station - Barks
 
     public override void Initialize()
     {
@@ -166,16 +164,12 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem // T
         targetHumanoid.SkinColor = sourceHumanoid.SkinColor;
         targetHumanoid.EyeColor = sourceHumanoid.EyeColor;
         targetHumanoid.Age = sourceHumanoid.Age;
-        SetSex(target, sourceHumanoid.Sex, false, targetHumanoid);
         targetHumanoid.CustomBaseLayers = new(sourceHumanoid.CustomBaseLayers);
         targetHumanoid.MarkingSet = new(sourceHumanoid.MarkingSet);
 
-        targetHumanoid.Gender = sourceHumanoid.Gender;
+        SetSex(target, sourceHumanoid.Sex, false, targetHumanoid);
+        SetGender((target, targetHumanoid), sourceHumanoid.Gender);
 
-        if (TryComp<GrammarComponent>(target, out var grammar))
-            _grammarSystem.SetGender((target, grammar), sourceHumanoid.Gender);
-
-        _identity.QueueIdentityUpdate(target);
         Dirty(target, targetHumanoid);
     }
 
@@ -276,6 +270,23 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem // T
 
         if (sync)
             Dirty(uid, humanoid);
+    }
+
+    /// <summary>
+    /// Sets the gender in the entity's HumanoidAppearanceComponent and GrammarComponent.
+    /// </summary>
+    public void SetGender(Entity<HumanoidAppearanceComponent?> ent, Gender gender)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        ent.Comp.Gender = gender;
+        Dirty(ent);
+
+        if (TryComp<GrammarComponent>(ent, out var grammar))
+            _grammarSystem.SetGender((ent, grammar), gender);
+
+        _identity.QueueIdentityUpdate(ent);
     }
 
     /// <summary>
@@ -532,35 +543,6 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem // T
         if (sync)
             Dirty(uid, humanoid);
     }
-
-    //  Goob Station - Barks Start
-    #region Goob - Barks
-    public void SetBarkVoice(EntityUid uid, string? barkvoiceId, HumanoidAppearanceComponent humanoid)
-    {
-        var voicePrototypeId = DefaultBarkVoice;
-
-        if (barkvoiceId != null &&
-            _proto.TryIndex<BarkPrototype>(barkvoiceId, out var bark) &&
-            (bark.SpeciesWhitelist == null || bark.SpeciesWhitelist.Contains(humanoid.Species)))
-        {
-            voicePrototypeId = barkvoiceId;
-        }
-        else
-        {
-            var barks = _proto.EnumeratePrototypes<BarkPrototype>()
-                .Where(o => o.RoundStart && (o.SpeciesWhitelist is null || o.SpeciesWhitelist.Contains(humanoid.Species)))
-                .ToList();
-
-            voicePrototypeId = _proto.Index(barks.Count > 0 ? barks[0] : DefaultBarkVoice);
-        }
-
-        EnsureComp<SpeechSynthesisComponent>(uid, out var comp);
-        comp.VoicePrototypeId = voicePrototypeId;
-        humanoid.BarkVoice = voicePrototypeId;
-        Dirty(uid, comp);
-    }
-    #endregion
-    // Goob Station - Barks End
 
     /// <summary>
     /// Takes ID of the species prototype, returns UI-friendly name of the species.

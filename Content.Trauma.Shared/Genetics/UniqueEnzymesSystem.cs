@@ -53,53 +53,15 @@ public sealed class UniqueEnzymesSystem : EntitySystem
         if (!_humanoidQuery.TryComp(mob, out var humanoid))
             return;
 
-        // i hate this
-        var hairStyle = HairStyles.DefaultHairStyle;
-        var facialHairStyle = HairStyles.DefaultFacialHairStyle;
-        var markings = humanoid.MarkingSet.Markings;
-        if (markings.TryGetValue(MarkingCategories.Hair, out var hairs) && hairs.Count > 0)
-            hairStyle = hairs[0].MarkingId;
-        if (markings.TryGetValue(MarkingCategories.FacialHair, out var facialHairs) && facialHairs.Count > 0)
-            facialHairStyle = facialHairs[0].MarkingId;
-
-        var appearance = new HumanoidCharacterAppearance(
-            hairStyleId: hairStyle,
-            hairColor: humanoid.CachedHairColor ?? Color.Black,
-            facialHairStyleId: facialHairStyle,
-            facialHairColor: humanoid.CachedFacialHairColor ?? Color.Black,
-            eyeColor: enzymes.EyeColor ?? humanoid.EyeColor,
-            skinColor: enzymes.SkinColor ?? humanoid.SkinColor,
-            markings: humanoid.MarkingSet.GetForwardEnumerator().ToList());
-
-        var flavortext = _detailQuery.CompOrNull(mob)?.Content;
-        var profile = new HumanoidCharacterProfile(
-            enzymes.Name, // this was already changed
-            flavortext,
-            humanoid.Species,
-            humanoid.Age,
-            // below actually get changed
-            enzymes.Sex ?? humanoid.Sex,
-            enzymes.Gender ?? humanoid.Gender,
-            appearance,
-            // below aren't used
-            SpawnPriorityPreference.None,
-            new(),
-            PreferenceUnavailableMode.SpawnAsOverflow,
-            new(),
-            new(),
-            new(),
-            humanoid.BarkVoice);
-
-        // need this shitcode so the limbs dont overwrite the new skin colour
-        foreach (var part in _body.GetBodyChildren(mob))
-        {
-            RemComp<BodyPartAppearanceComponent>(part.Id);
-        }
-
-        humanoid.ProfileLoaded = false;
-        Dirty(mob, humanoid);
-
-        _humanoid.LoadProfile(mob, profile, humanoid);
+        if (enzymes.EyeColor is {} eyeColor)
+            humanoid.EyeColor = eyeColor;
+        if (enzymes.SkinColor is {} skinColor)
+            _humanoid.SetSkinColor(mob, skinColor, humanoid: humanoid);
+        if (enzymes.Sex is {} sex)
+            _humanoid.SetSex(mob, sex, humanoid: humanoid);
+        if (enzymes.Gender is {} gender)
+            _humanoid.SetGender((mob, humanoid), gender);
+        return;
     }
 
     /// <summary>

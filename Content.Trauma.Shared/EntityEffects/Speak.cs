@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
 /// Makes the target entity say a random line from a localized dataset.
-/// It can also have a string prepended.
+/// It can also have a string prefixed.
 /// </summary>
 public sealed partial class Speak : EntityEffectBase<Speak>
 {
@@ -40,7 +40,7 @@ public sealed class SpeakEffectSystem : EntityEffectSystem<SpeechComponent, Spea
     protected override void Effect(Entity<SpeechComponent> ent, ref EntityEffectEvent<Speak> args)
     {
         var proto = _proto.Index(args.Effect.Id);
-        var picked = _random.Pick(proto);
+        var picked = _random.Pick(proto); // predicting rng doesn't matter, chat isn't predicted
 
         // prepend the prefix
         if (args.Effect.Prefix is {} prefix)

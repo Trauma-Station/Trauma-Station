@@ -1,0 +1,5 @@
+- type: entity
+  parent: OrganHumanTongue
+  id: OrganDionaTongue
+  name: diona tongue
+  # TODO: unique lol

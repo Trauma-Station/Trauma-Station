@@ -16,7 +16,7 @@ public sealed partial class GeneticEnzymes : BoxContainer
     [Dependency] private readonly IEntityManager _entMan = default!;
 
     public event Action? OnSave;
-    public event Action? OnPrint;
+    public event Action? OnApply;
 
     private readonly string _na;
     private bool _busy;
@@ -33,7 +33,7 @@ public sealed partial class GeneticEnzymes : BoxContainer
         _na = Loc.GetString("generic-not-available-shorthand");
 
         SaveButton.OnPressed += _ => OnSave?.Invoke();
-        PrintButton.OnPressed += _ => OnPrint?.Invoke();
+        ApplyButton.OnPressed += _ => OnApply?.Invoke();
     }
 
     public void SetBusy(bool busy)
@@ -52,7 +52,7 @@ public sealed partial class GeneticEnzymes : BoxContainer
     public void UpdateCooldown(bool cooldown)
     {
         _cooldown = cooldown;
-        UpdatePrintButton();
+        UpdateApplyButton();
     }
 
     public void UpdateDisk(Entity<GeneticsDiskComponent>? disk)
@@ -71,7 +71,7 @@ public sealed partial class GeneticEnzymes : BoxContainer
 
         _enzymes = enzymes;
         UpdateSaveButton();
-        UpdatePrintButton();
+        UpdateApplyButton();
 
         DiskNameLabel.Text = enzymes?.Name ?? _na;
         DiskSexLabel.Text = enzymes?.Sex is {} sex ? Loc.GetString($"humanoid-profile-editor-sex-{sex.ToString().ToLower()}-text") : _na;
@@ -89,8 +89,8 @@ public sealed partial class GeneticEnzymes : BoxContainer
         SaveButton.Disabled = _busy || _disk == null || _enzymes?.Name == _mobName;
     }
 
-    private void UpdatePrintButton()
+    private void UpdateApplyButton()
     {
-        PrintButton.Disabled = _cooldown || _enzymes == null;
+        ApplyButton.Disabled = _cooldown || _mobName == null || _enzymes == null;
     }
 }

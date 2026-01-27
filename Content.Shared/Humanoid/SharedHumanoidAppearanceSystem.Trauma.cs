@@ -1,12 +1,45 @@
+using Content.Goobstation.Common.Barks;
 using Content.Shared.Humanoid.Markings;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Humanoid;
 
 /// <summary>
-/// Trauma - methods moved from shared
+/// Trauma - barks and methods moved from server
 /// </summary>
 public abstract partial class SharedHumanoidAppearanceSystem
 {
+    public static readonly ProtoId<BarkPrototype> DefaultBarkVoice = "Alto";
+
+    public void SetBarkVoice(EntityUid uid, string? barkvoiceId, HumanoidAppearanceComponent humanoid)
+    {
+        var voicePrototypeId = DefaultBarkVoice;
+
+        if (barkvoiceId != null &&
+            _proto.TryIndex<BarkPrototype>(barkvoiceId, out var bark) &&
+            bark.SpeciesWhitelist?.Contains(humanoid.Species) != false)
+        {
+            voicePrototypeId = barkvoiceId;
+        }
+        else
+        {
+            // find first valid roundstart bark to use
+            foreach (var proto in _proto.EnumeratePrototypes<BarkPrototype>())
+            {
+                if (proto.RoundStart && proto.SpeciesWhitelist?.Contains(humanoid.Species) != false)
+                {
+                    voicePrototypeId = proto.ID;
+                    break;
+                }
+            }
+        }
+
+        EnsureComp<SpeechSynthesisComponent>(uid, out var comp);
+        comp.VoicePrototypeId = voicePrototypeId;
+        humanoid.BarkVoice = voicePrototypeId;
+        Dirty(uid, comp);
+    }
+
     /// <summary>
     ///     Removes a marking from a humanoid by ID.
     /// </summary>

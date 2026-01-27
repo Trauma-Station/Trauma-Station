@@ -28,7 +28,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     public event Action<uint>? OnPrint;
     public event Action<uint>? OnCombine;
     public event Action? OnSaveEnzymes;
-    public event Action? OnPrintIncubator;
+    public event Action? OnApplyEnzymes;
 
     private EntityQuery<GeneticsConsoleComponent> _query;
     private EntityQuery<GeneticsConsoleEnzymesComponent> _enzymesQuery;
@@ -47,7 +47,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     private int _scrambleCooldown;
     private bool _writeCooldown;
     private bool _printCooldown;
-    private bool _incubatorCooldown;
+    private bool _enzymesCooldown;
 
     public GeneticsConsoleWindow()
     {
@@ -77,7 +77,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         Combiner.OnCombine += i => OnCombine?.Invoke(i);
 
         Enzymes.OnSave += () => OnSaveEnzymes?.Invoke();
-        Enzymes.OnPrint += () => OnPrintIncubator?.Invoke();
+        Enzymes.OnApply += () => OnApplyEnzymes?.Invoke();
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
@@ -124,7 +124,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         UpdateScrambleCooldown(comp.NextScramble);
         UpdateWriteCooldown(comp.NextWrite);
         UpdatePrintCooldown(comp.NextPrint);
-        UpdatePrintIncubatorCooldown(enzymes.NextPrint);
+        UpdateEnzymesCooldown(enzymes.NextApply);
 
         if (_mob is not {} mob)
             return;
@@ -245,13 +245,13 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         Storage.UpdateCooldowns(_printCooldown = cooldown);
     }
 
-    private void UpdatePrintIncubatorCooldown(TimeSpan nextPrint)
+    private void UpdateEnzymesCooldown(TimeSpan nextApply)
     {
-        var cooldown = OnCooldown(nextPrint);
-        if (cooldown == _incubatorCooldown)
+        var cooldown = OnCooldown(nextApply);
+        if (cooldown == _enzymesCooldown)
             return;
 
-        Enzymes.UpdateCooldown(_incubatorCooldown = cooldown);
+        Enzymes.UpdateCooldown(_enzymesCooldown = cooldown);
     }
 
     private void UpdateInstability()
