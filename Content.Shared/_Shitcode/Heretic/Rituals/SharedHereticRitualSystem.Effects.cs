@@ -73,7 +73,11 @@ public abstract partial class SharedHereticRitualSystem
     private void OnUpdateKnowledge(Entity<HereticComponent> ent,
         ref HereticRitualEffectEvent<UpdateKnowledgeEffect> args)
     {
-        _heretic.UpdateKnowledge(ent, args.Effect.Amount);
+        if (!TryComp(ent, out MindComponent? mind) ||
+            !TryComp(ent, out StoreComponent? store))
+            return;
+
+        _heretic.UpdateMindKnowledge((ent, ent, store, mind), null, args.Effect.Amount);
     }
 
     private void OnGhoulify(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<GhoulifyEffect> args)

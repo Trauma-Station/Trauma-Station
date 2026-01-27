@@ -12,7 +12,7 @@ public sealed partial class TemperatureTrackerComponent : Component
     [DataField]
     public TimeSpan UpdateDelay = TimeSpan.FromSeconds(1);
 
-   [DataField(customTypeSerializer:typeof(TimeOffsetSerializer)), AutoPausedField]
+    [DataField(customTypeSerializer:typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextUpdate = TimeSpan.Zero;
 
     /// <summary>

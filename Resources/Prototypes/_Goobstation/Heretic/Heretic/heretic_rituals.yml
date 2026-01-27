@@ -17,7 +17,7 @@
       result: Targets
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: ""
+        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - HumanoidAppearance
@@ -29,7 +29,7 @@
         conditions:
         - !type:IsTargetCondition
         - !type:WhitelistCondition
-          guidebookText: ""
+          guidebookText: entity-condition-guidebook-empty
           checkMind: true
           whitelist:
             components:
@@ -40,6 +40,7 @@
       - !type:InputCountCondition
         applyOn: Targets
         min: 1
+        cancelLoc: heretic-ritual-fail-sacrifice-ineligible
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -326,7 +327,7 @@
       result: Eligible
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: ""
+        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - HumanoidAppearance
@@ -364,7 +365,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Icon
-    sprite: _Goobstation/Heretic/Blades/blade_ash.rsi
+    sprite: _Goobstation/Heretic/Blades/blade_blade.rsi
     state: icon
   - type: HereticRitual
     limit: 4
@@ -410,6 +411,9 @@
       - !type:TryApplyEffectSequenceCondition
         from: 0
         to: 3
+  - type: Tag
+    tags:
+    - RitualBladeBlade
 
 - type: entity
   id: RitualAscensionBlade
@@ -437,7 +441,7 @@
       result: Eligible
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: ""
+        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - HumanoidAppearance
@@ -490,7 +494,7 @@
       result: Puddles
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: ""
+        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - Puddle
@@ -562,7 +566,7 @@
       result: Targets
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: ""
+        guidebookText: entity-condition-guidebook-empty
         blacklist:
           components:
           - Ghoul
@@ -620,7 +624,7 @@
       result: Puddles
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: ""
+        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - Puddle
@@ -677,7 +681,7 @@
       result: Puddles
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: ""
+        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - Puddle
@@ -750,7 +754,7 @@
       result: Eligible
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: ""
+        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - HumanoidAppearance
@@ -869,7 +873,7 @@
       result: Eligible
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: ""
+        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - HumanoidAppearance
@@ -982,7 +986,7 @@
       result: Eligible
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: ""
+        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - HumanoidAppearance
@@ -990,7 +994,7 @@
         mobstate: Alive
         inverted: true
       - !type:WhitelistCondition
-        guidebookText: ""
+        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - Rotting
@@ -1106,7 +1110,7 @@
       result: Eligible
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: ""
+        guidebookText: entity-condition-guidebook-empty
         whitelist:
           requireAll: true
           components:
@@ -1404,7 +1408,7 @@
       result: Puddles
       individualConditions:
       - !type:WhitelistCondition
-        guidebookText: ""
+        guidebookText: entity-condition-guidebook-empty
         whitelist:
           components:
           - Puddle

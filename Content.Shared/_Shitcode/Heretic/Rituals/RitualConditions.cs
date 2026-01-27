@@ -25,16 +25,18 @@ public abstract partial class BaseRitualCondition<T> : EntityConditionBase<T>, I
         if (raiser is not HereticRitualRaiser ritualRaiser)
             return base.RaiseEvent(target, raiser);
 
-        if (CancelLoc != null)
-            ritualRaiser.SaveResult(SharedHereticRitualSystem.CancelString, Loc.GetString(CancelLoc));
-
         if (ApplyOn == string.Empty || ForceApplyOnRitual)
             return base.RaiseEvent(target, raiser);
 
         foreach (var t in ritualRaiser.GetTargets<EntityUid>(ApplyOn))
         {
-            if (!base.RaiseEvent(t, raiser))
-                return false;
+            if (base.RaiseEvent(t, raiser))
+                continue;
+
+            if (CancelLoc != null)
+                ritualRaiser.SaveResult(SharedHereticRitualSystem.CancelString, Loc.GetString(CancelLoc));
+
+            return false;
         }
 
         return true;
@@ -57,9 +59,6 @@ public sealed partial class InputCountCondition : BaseRitualCondition<InputCount
         if (raiser is not HereticRitualRaiser ritualRaiser)
             return false;
 
-        if (CancelLoc != null)
-            ritualRaiser.SaveResult(SharedHereticRitualSystem.CancelString, Loc.GetString(CancelLoc));
-
         if (ApplyOn == string.Empty || ForceApplyOnRitual)
             return false;
 
@@ -71,7 +70,12 @@ public sealed partial class InputCountCondition : BaseRitualCondition<InputCount
         var toSave = Max >= Min ? input.Take(Max).ToHashSet() : input.ToHashSet();
 
         if (toSave.Count < Min)
+        {
+            if (CancelLoc != null)
+                ritualRaiser.SaveResult(SharedHereticRitualSystem.CancelString, Loc.GetString(CancelLoc));
+
             return false;
+        }
 
         ritualRaiser.SaveResult(Result, toSave);
         return true;
