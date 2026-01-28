@@ -224,7 +224,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Rat ] 
+          type: [ Rat ]
           inverted: true
         - !type:ReagentCondition
           reagent: Ammonia
