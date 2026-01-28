@@ -32,9 +32,6 @@
             Bloodloss: -5
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Artiplates
           min: 11
