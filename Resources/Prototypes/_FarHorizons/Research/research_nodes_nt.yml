@@ -9,6 +9,8 @@
   requires:
   - NuclearPowerGeneration
   unlocks:
+  - NuclearReactorMonitorComputerCircuitboard
+  - GasTurbineMonitorComputerCircuitboard
   - NuclearCentrifugeMachineCircuitboard
   - PlutoniumReactorFuelRod
   - BananiumReactorFuelRod
