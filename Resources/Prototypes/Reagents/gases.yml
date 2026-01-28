@@ -76,7 +76,7 @@
           types:
             Poison: 0.7
       - !type:AdjustAlert
-        alertType: HighOxygen
+        alertType: HighOxygen # Goob - was Toxins
         minScale: 0.5
         conditions:
           - !type:MetabolizerTypeCondition

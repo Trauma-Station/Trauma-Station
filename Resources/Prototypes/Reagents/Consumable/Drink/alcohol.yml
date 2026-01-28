@@ -239,7 +239,7 @@
         - !type:ReagentCondition
           reagent: Ethanol
           min: 15
-        - !type:MetabolizerTypeCondition
+        - !type:MetabolizerTypeCondition # Goob - added Cybernetic
           type: [ Dwarf, Cybernetic ]
           inverted: true
         damage:
@@ -292,7 +292,7 @@
           reagent: Ethanol
           min: 12
         # dwarves immune to vomiting from alcohol
-        - !type:MetabolizerTypeCondition
+        - !type:MetabolizerTypeCondition # Goob - added Cybernetic
           type: [ Dwarf, Cybernetic ]
           inverted: true
       - !type:Drunk

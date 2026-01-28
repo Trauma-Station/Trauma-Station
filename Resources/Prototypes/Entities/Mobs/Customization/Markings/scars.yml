@@ -19,7 +19,7 @@
   id: ScarEyeRight
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf, Harpy ] # Trauma - Harpy
+  speciesRestriction: [Human, Dwarf, Harpy] # Trauma - Harpy
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi

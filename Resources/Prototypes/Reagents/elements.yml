@@ -255,7 +255,6 @@
     Poison:
       effects:
       - !type:HealthChange
-
         damage:
           types:
             Poison: 1
