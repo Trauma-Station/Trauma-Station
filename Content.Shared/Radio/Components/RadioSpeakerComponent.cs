@@ -36,4 +36,10 @@ public sealed partial class RadioSpeakerComponent : Component
     /// </summary>
     [DataField]
     public bool PowerRequired;
+
+    /// <summary>
+    /// Trauma - hidelog?
+    /// </summary>
+    [DataField]
+    public bool HideChat;
 }
