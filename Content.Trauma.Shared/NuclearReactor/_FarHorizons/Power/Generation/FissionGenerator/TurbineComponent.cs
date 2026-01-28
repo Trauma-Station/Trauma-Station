@@ -31,7 +31,7 @@ public sealed partial class TurbineComponent : Component
     /// Maximum setting of stator load
     /// </summary>
     // [DataField]
-    // public float StatorLoadMax = 500000; 
+    // public float StatorLoadMax = 500000;
 
     /// <summary>
     /// Current RPM of turbine

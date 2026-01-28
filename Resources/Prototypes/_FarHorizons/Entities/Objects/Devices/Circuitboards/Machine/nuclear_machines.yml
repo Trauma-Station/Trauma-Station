@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: NuclearFabricatorMachineCircuitboard
   parent: BaseMachineCircuitboard
   name: nuclear fabricator machine board
