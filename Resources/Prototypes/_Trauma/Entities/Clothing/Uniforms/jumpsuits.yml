@@ -68,3 +68,14 @@
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/olivedrabs.rsi
   - type: FoldableClothing
     foldedEquippedPrefix: naked
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingNavyBlueSweatshirt
+  name: navy blue sweatshirt
+  description: Only the most corrupted officials wear this fit. Could you please give us your name?
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/navyblue_sweatshirt.rsi
+  - type: Clothing
+    sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/navyblue_sweatshirt.rsi
