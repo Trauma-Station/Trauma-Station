@@ -148,11 +148,11 @@
     turbineMass: 400
     powerMultiplier: 0.4
     inletPos: 1, -1
-    inletRot: 0 
+    inletRot: 0
     outletPos: -1, -1
-    outletRot: 0 
+    outletRot: 0
     arrowPrototype: TurbineSmallFlowArrow
-  
+
 # Arrow to indicate flow
 - type: entity
   id: TurbineFlowArrow

@@ -2,8 +2,6 @@
   parent: BaseThiefStealCollectionObjective
   id: ReactorFuelRodStealCollectionObjective
   components:
-  - type: NotJobRequirement
-    job: StationEngineer #TODO: make it so this also includes AtmosphericTechnician
   - type: StealCondition
     stealGroup: ReactorFuelRodSteal
     minCollectionSize: 1

@@ -14,7 +14,7 @@
     4,2: SteelReactorGasChannel
     4,4: SteelReactorGasChannel
     4,6: SteelReactorGasChannel
-    
+
     2,1: SteelReactorHeatExchanger
     2,3: SteelReactorHeatExchanger
     2,5: SteelReactorHeatExchanger
@@ -38,7 +38,7 @@
     4,2: SteelReactorGasChannel
     4,4: SteelReactorGasChannel
     4,6: SteelReactorGasChannel
-    
+
     2,1: SteelReactorHeatExchanger
     2,3: SteelReactorHeatExchanger
     2,5: SteelReactorHeatExchanger
@@ -65,7 +65,7 @@
     4,0: PlutoniumReactorFuelRod
     5,0: PlutoniumReactorFuelRod
     6,0: PlutoniumReactorFuelRod
-    
+
     0,1: PlutoniumReactorFuelRod
     1,1: PlutoniumReactorFuelRod
     2,1: PlutoniumReactorFuelRod
@@ -73,7 +73,7 @@
     4,1: PlutoniumReactorFuelRod
     5,1: PlutoniumReactorFuelRod
     6,1: PlutoniumReactorFuelRod
-    
+
     0,2: PlutoniumReactorFuelRod
     1,2: PlutoniumReactorFuelRod
     2,2: PlutoniumReactorFuelRod
@@ -89,7 +89,7 @@
     4,3: PlutoniumReactorFuelRod
     5,3: PlutoniumReactorFuelRod
     6,3: PlutoniumReactorFuelRod
-    
+
     0,4: PlutoniumReactorFuelRod
     1,4: PlutoniumReactorFuelRod
     2,4: PlutoniumReactorFuelRod
@@ -97,7 +97,7 @@
     4,4: PlutoniumReactorFuelRod
     5,4: PlutoniumReactorFuelRod
     6,4: PlutoniumReactorFuelRod
-    
+
     0,5: PlutoniumReactorFuelRod
     1,5: PlutoniumReactorFuelRod
     2,5: PlutoniumReactorFuelRod
@@ -105,7 +105,7 @@
     4,5: PlutoniumReactorFuelRod
     5,5: PlutoniumReactorFuelRod
     6,5: PlutoniumReactorFuelRod
-    
+
     0,6: PlutoniumReactorFuelRod
     1,6: PlutoniumReactorFuelRod
     2,6: PlutoniumReactorFuelRod
@@ -160,7 +160,7 @@
     4,5: BohrumReactorControlRod
     5,2: BohrumReactorControlRod
     5,4: BohrumReactorControlRod
-    
+
     1,1: CerenkiteReactorFuelRod
     1,3: CerenkiteReactorFuelRod
     1,5: CerenkiteReactorFuelRod
@@ -219,7 +219,7 @@
     4,5: BohrumReactorControlRod
     5,2: BohrumReactorControlRod
     5,4: BohrumReactorControlRod
-    
+
     1,1: CerenkiteReactorFuelRod
     1,5: CerenkiteReactorFuelRod
     3,3: CerenkiteReactorFuelRod
@@ -237,7 +237,7 @@
     4,0: SteelReactorGasChannel
     4,2: SteelReactorGasChannel
     4,4: SteelReactorGasChannel
-    
+
     0,1: SteelReactorHeatExchanger
     0,3: SteelReactorHeatExchanger
     1,0: SteelReactorHeatExchanger

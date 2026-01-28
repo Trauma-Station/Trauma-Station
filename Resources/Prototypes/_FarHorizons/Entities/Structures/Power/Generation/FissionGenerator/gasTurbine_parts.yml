@@ -14,7 +14,7 @@
     guides:
     - NuclearReactor
     - Power
- 
+
 # Blades
 - type: entity
   id: BaseGasTurbineBlade
