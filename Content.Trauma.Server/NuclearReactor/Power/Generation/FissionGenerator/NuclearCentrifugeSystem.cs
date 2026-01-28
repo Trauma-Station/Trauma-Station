@@ -3,6 +3,7 @@ using Content.Server.Power.EntitySystems;
 using Content.Server.Stack;
 using Content.Shared.Interaction;
 using Content.Shared.Power;
+using Content.Shared.Stacks;
 using Content.Trauma.Shared.NuclearReactor._FarHorizons.Power.Generation.FissionGenerator;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -65,7 +66,12 @@ public sealed class NuclearCentrifugeSystem : EntitySystem
                     while (comp.ExtractedFuel > 1)
                     {
                         var plutoniumStack = Spawn("IngotPlutonium1", Transform(uid).Coordinates);
-                        _stackSystem.SetCount(plutoniumStack, Math.Clamp((int)Math.Floor(comp.ExtractedFuel), 1, _stackSize));
+
+                        if(!TryComp<StackComponent>(plutoniumStack, out var stack))
+                            return;
+
+                        var stackEnt = new Entity<StackComponent?>(plutoniumStack, stack);
+                        _stackSystem.SetCount(stackEnt, Math.Clamp((int)Math.Floor(comp.ExtractedFuel), 1, _stackSize));
                         comp.ExtractedFuel -= _stackSystem.GetCount(plutoniumStack);
                         _stackSystem.TryMergeToContacts(plutoniumStack);
                     }

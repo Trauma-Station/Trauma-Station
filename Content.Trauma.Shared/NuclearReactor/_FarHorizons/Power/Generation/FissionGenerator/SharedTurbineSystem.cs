@@ -116,9 +116,7 @@ public abstract class SharedTurbineSystem : EntitySystem
         }
 
         var loop = audioParams.Value.WithLoop(true);
-        var stream = false
-            ? _audio.PlayPredicted(sound, uid, uid, loop)
-            : _audio.PlayPvs(sound, uid, loop);
+        var stream = _audio.PlayPredicted(sound, uid, uid, loop);
         audioStream = stream?.Entity is { } entity ? entity : null;
     }
 
