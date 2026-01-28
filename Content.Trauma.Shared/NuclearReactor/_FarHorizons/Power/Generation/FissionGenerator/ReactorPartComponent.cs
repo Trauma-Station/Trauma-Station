@@ -1,5 +1,6 @@
 using Content.Shared.Atmos;
 using Content.Shared.Materials;
+using Content.Trauma.Common.NuclearReactor;
 using Content.Trauma.Shared.NuclearReactor._FarHorizons.Materials;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;

@@ -1,3 +1,5 @@
+using Content.Trauma.Common.NuclearReactor;
+
 namespace Content.Trauma.Shared.NuclearReactor._FarHorizons.Materials.Systems;
 
 public sealed class MaterialSystem
