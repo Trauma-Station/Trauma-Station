@@ -31,6 +31,7 @@
   cost: 5000
   recipeUnlocks:
   - MechEquipmentDrillDiamond
+  - MechEquipmentDrill
   position: -6,3
   technologyPrerequisites:
   - RipleyAPLU
