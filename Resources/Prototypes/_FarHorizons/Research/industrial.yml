@@ -23,11 +23,10 @@
   - SilverReactorHeatExchanger
   - PlasteelReactorHeatExchanger
   - PlasmaGlassReactorHeatExchanger
+  position: 3,1
   technologyPrerequisites:
   - PowerGeneration
-  radioChannels:
-  - Engineering
- 
+
 - type: technology
   id: NuclearPowerRecycling
   name: research-technology-nuclear-recycling
@@ -47,7 +46,6 @@
   - DiamondReactorGasChannel
   - GoldReactorHeatExchanger
   - DiamondReactorHeatExchanger
+  position: 4,1
   technologyPrerequisites:
   - NuclearPowerGeneration
-  radioChannels:
-  - Engineering

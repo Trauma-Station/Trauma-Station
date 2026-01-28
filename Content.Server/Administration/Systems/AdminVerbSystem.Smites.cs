@@ -1110,7 +1110,7 @@ public sealed partial class AdminVerbSystem
             Icon = new SpriteSpecifier.Rsi(new("/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_parts.rsi"), "default_rod"),
             Act = () =>
             {
-                _bodySystem.GibBody(args.Target);
+                _gibbing.Gib(args.Target);
                 _polymorphSystem.PolymorphEntity(args.Target, "AdminFuelRodSmite");
             },
             Impact = LogImpact.Extreme,
