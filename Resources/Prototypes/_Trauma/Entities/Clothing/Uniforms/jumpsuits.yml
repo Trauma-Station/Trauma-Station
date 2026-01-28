@@ -76,6 +76,6 @@
   description: Only the most corrupted officials wear this fit. Could you please give us your name?
   components:
   - type: Sprite
-    sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/navyblue_sweatshirt.rsi
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/navyblue_sweatshirt.rsi
   - type: Clothing
-    sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/navyblue_sweatshirt.rsi
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/navyblue_sweatshirt.rsi
