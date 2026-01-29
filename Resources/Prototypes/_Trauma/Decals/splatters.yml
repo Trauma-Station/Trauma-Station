@@ -1,0 +1,53 @@
+- type: decal
+  id: bloodSplatter1
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: splatter1
+
+- type: decal
+  id: bloodSplatter2
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: splatter2
+
+- type: decal
+  id: bloodSplatter3
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: splatter3
+
+- type: decal
+  id: bloodSplatter4
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: splatter4
+
+- type: decal
+  id: bloodSplatter5
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: splatter5
+
+- type: decal
+  id: bloodSplatter6
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: splatter6

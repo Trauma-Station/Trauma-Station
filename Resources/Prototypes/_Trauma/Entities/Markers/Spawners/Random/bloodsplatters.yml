@@ -1,0 +1,22 @@
+- type: entity
+  parent: DecalSpawnerBase
+  id: DecalSpawnerBloodSplattersTrauma
+  suffix: Blood Splatters
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - splatter
+    - bloodSplatter1
+    - bloodSplatter2
+    - bloodSplatter3
+    - bloodSplatter4
+    - bloodSplatter5
+    - bloodSplatter6
+    radius: 2
+    randomRotation: true
+    maxDecals: 2
+    prob: 0.5
+    zIndex: 5
+    color: '#9900007F'
+    cleanable: true
+    deleteSpawnerAfterSpawn: true

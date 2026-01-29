@@ -324,6 +324,7 @@
   - type: FireVisuals
     alternateState: Standing
   # <Trauma>
+  - type: BloodSplatterer
   - type: Carriable
   - type: FootprintOwner
   - type: CPRTraining
