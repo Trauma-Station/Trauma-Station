@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Server.Decals;
 using Content.Server.Spawners.Components;
+using Content.Shared.Spawners.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -20,19 +21,19 @@ public sealed class RandomDecalSpawnerSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<Shared.Spawners.Components.RandomDecalSpawnerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RandomDecalSpawnerComponent, MapInitEvent>(OnMapInit);
     }
 
-    private void OnMapInit(EntityUid uid, Shared.Spawners.Components.RandomDecalSpawnerComponent component, MapInitEvent args)
+    private void OnMapInit(EntityUid uid, RandomDecalSpawnerComponent component, MapInitEvent args)
     {
         TrySpawn(uid);
         if (component.DeleteSpawnerAfterSpawn)
             QueueDel(uid);
     }
 
-    public bool TrySpawn(Entity<Shared.Spawners.Components.RandomDecalSpawnerComponent?> ent)
+    public bool TrySpawn(Entity<RandomDecalSpawnerComponent?> ent)
     {
-        if (!TryComp<Shared.Spawners.Components.RandomDecalSpawnerComponent>(ent, out var comp))
+        if (!TryComp<RandomDecalSpawnerComponent>(ent, out var comp))
             return false;
 
         if (comp.Decals.Count == 0)
