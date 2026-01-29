@@ -19,9 +19,9 @@
     - bloodFloor5
     - bloodFloor6
     - bloodFloor7
-    radius: 1
+    radius: 1.5
     randomRotation: true
-    maxDecals: 2
+    maxDecals: 1
     prob: 1
     zIndex: 5
     color: '#9900007F'
