@@ -1,13 +1,14 @@
-using Robust.Shared.Prototypes;
-using Content.Shared.Maps;
 using Content.Shared.Decals;
+using Content.Shared.Maps;
+using Robust.Shared.Prototypes;
 
-namespace Content.Server.Spawners.Components;
+namespace Content.Shared.Spawners.Components;
 
 /// <summary>
 /// This component spawns decals around the entity on MapInit.
 /// See doc strings for the various parameters for more information.
 /// </summary>
+/// TRAUMA - had to move from server to get bloodsplatter to work properly, (why tf was a component like ts in server anyway?), also delta I can't put it in common or trauma shared so don't shout at me
 [RegisterComponent, EntityCategory("Spawner")]
 public sealed partial class RandomDecalSpawnerComponent : Component
 {

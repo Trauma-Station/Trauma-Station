@@ -20,19 +20,19 @@ public sealed class RandomDecalSpawnerSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RandomDecalSpawnerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<Shared.Spawners.Components.RandomDecalSpawnerComponent, MapInitEvent>(OnMapInit);
     }
 
-    private void OnMapInit(EntityUid uid, RandomDecalSpawnerComponent component, MapInitEvent args)
+    private void OnMapInit(EntityUid uid, Shared.Spawners.Components.RandomDecalSpawnerComponent component, MapInitEvent args)
     {
         TrySpawn(uid);
         if (component.DeleteSpawnerAfterSpawn)
             QueueDel(uid);
     }
 
-    public bool TrySpawn(Entity<RandomDecalSpawnerComponent?> ent)
+    public bool TrySpawn(Entity<Shared.Spawners.Components.RandomDecalSpawnerComponent?> ent)
     {
-        if (!TryComp<RandomDecalSpawnerComponent>(ent, out var comp))
+        if (!TryComp<Shared.Spawners.Components.RandomDecalSpawnerComponent>(ent, out var comp))
             return false;
 
         if (comp.Decals.Count == 0)
