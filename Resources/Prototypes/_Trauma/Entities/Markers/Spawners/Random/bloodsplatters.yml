@@ -19,7 +19,7 @@
     - bloodFloor5
     - bloodFloor6
     - bloodFloor7
-    radius: 1.5
+    radius: 1
     randomRotation: true
     maxDecals: 1
     prob: 1

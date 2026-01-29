@@ -17,8 +17,12 @@ public sealed class BloodSplatterSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
 
+    private const string SlashDict = "Slash";
+    private const string PierceDict = "Piercing";
+
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<BloodSplattererComponent, DamageChangedEvent>(OnDamage);
         SubscribeLocalEvent<BloodSplattererComponent, BeingGibbedEvent>(OnGib);
     }
@@ -32,11 +36,7 @@ public sealed class BloodSplatterSystem : EntitySystem
         if (!TryComp<BloodstreamComponent>(ent.Owner, out var bloodstream))
             return;
 
-        var entitybloodstream = bloodstream.BloodReferenceSolution;
-
-        spawner.Color = entitybloodstream.GetColor(_prototypes);
-
-        Spawn(ent.Comp.GibbedDecal, ent.Owner.ToCoordinates());
+        SpawnDecal(ent, bloodstream, ent.Comp.GibbedDecal);
     }
 
     private void OnDamage(Entity<BloodSplattererComponent> ent, ref DamageChangedEvent args)
@@ -46,15 +46,11 @@ public sealed class BloodSplatterSystem : EntitySystem
         if (ent.Comp.NextSplashAvailable > time)
             return;
 
-        if (!_prototypes.TryIndex(ent.Comp.Decal, out var prototype)
-            || !prototype.TryGetComponent(out RandomDecalSpawnerComponent? spawner, Factory))
-            return;
-
         if (!args.DamageIncreased || args.DamageDelta == null)
             return;
 
-        args.DamageDelta.DamageDict.TryGetValue("Piercing", out var piercing);
-        args.DamageDelta.DamageDict.TryGetValue("Slash", out var slash);
+        args.DamageDelta.DamageDict.TryGetValue(PierceDict, out var piercing);
+        args.DamageDelta.DamageDict.TryGetValue(SlashDict, out var slash);
 
         if (args.DamageDelta.GetTotal() < ent.Comp.MinimalTriggerDamage
             || piercing == 0 && slash == 0)
@@ -72,12 +68,25 @@ public sealed class BloodSplatterSystem : EntitySystem
         if (!_random.Prob(ent.Comp.Chance))
             return;
 
-        var entitybloodstream = bloodstream.BloodReferenceSolution;
-
-        spawner.Color = entitybloodstream.GetColor(_prototypes);
-
-        Spawn(ent.Comp.Decal, ent.Owner.ToCoordinates());
+        SpawnDecal(ent, bloodstream, ent.Comp.Decal);
 
         ent.Comp.NextSplashAvailable = _timing.CurTime + ent.Comp.SplashCooldown;
+    }
+
+    private void SpawnDecal(Entity<BloodSplattererComponent> ent, BloodstreamComponent bloodstream, string decal)
+    {
+        if (!_prototypes.Resolve(decal, out var prototype)
+            || !prototype.TryGetComponent(out RandomDecalSpawnerComponent? _, Factory))
+            return;
+
+        var entitybloodstream = bloodstream.BloodReferenceSolution;
+        var spawnedDecal = EntityManager.CreateEntityUninitialized(decal, ent.Owner.ToCoordinates());
+
+        if (TryComp<RandomDecalSpawnerComponent>(spawnedDecal, out var randomDecal))
+        {
+            randomDecal.Color = entitybloodstream.GetColor(_prototypes);
+        }
+
+        EntityManager.InitializeAndStartEntity(spawnedDecal);
     }
 }
