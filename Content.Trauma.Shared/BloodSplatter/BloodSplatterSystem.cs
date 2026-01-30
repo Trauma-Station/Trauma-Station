@@ -53,7 +53,7 @@ public sealed class BloodSplatterSystem : EntitySystem
             return;
 
         if (!TryComp<BloodstreamComponent>(ent.Owner, out var bloodstream)
-            || _bloodstream.GetBloodLevel(ent.Owner) <= 0.5f)
+            || _bloodstream.GetBloodLevel((ent.Owner, bloodstream)) <= 0.5f)
             return;
 
         ent.Comp.Chance += (float)args.DamageDelta.GetTotal() / 50; // Higher damage has higher change to splatter
