@@ -21,6 +21,7 @@ public sealed partial class GeneticEnzymes : BoxContainer
     private readonly string _na;
     private bool _busy;
     private bool _cooldown;
+    private bool _scanned;
     private Entity<GeneticsDiskComponent>? _disk;
     private string? _mobName;
     private UniqueEnzymes? _enzymes;
@@ -40,6 +41,7 @@ public sealed partial class GeneticEnzymes : BoxContainer
     {
         _busy = busy;
         UpdateSaveButton();
+        UpdateApplybutton();
     }
 
     public void SetMob(EntityUid? mob)
@@ -62,6 +64,12 @@ public sealed partial class GeneticEnzymes : BoxContainer
             ?? Loc.GetString("genetics-console-no-disk");
         UpdateEnzymes(disk?.Comp.Enzymes);
         UpdateSaveButton();
+    }
+
+    public void UpdateScanned(bool scanned)
+    {
+        _scanned = scanned;
+        UpdateApplyButton();
     }
 
     public void UpdateEnzymes(UniqueEnzymes? enzymes)
@@ -91,6 +99,6 @@ public sealed partial class GeneticEnzymes : BoxContainer
 
     private void UpdateApplyButton()
     {
-        ApplyButton.Disabled = _cooldown || _mobName == null || _enzymes == null;
+        ApplyButton.Disabled = _busy || _cooldown || !_scanned || _mobName == null || _enzymes == null;
     }
 }

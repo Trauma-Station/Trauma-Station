@@ -147,6 +147,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
             _scanned = scanned;
             Sequencer.UpdateScanButton();
             Combiner.UpdateScanButton();
+            Enzymes.UpdateScanned(scanned);
         }
     }
 
