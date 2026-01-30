@@ -149,7 +149,7 @@ public abstract class SharedXenoVacuumSystem : EntitySystem
 
         _useDelay.TryResetDelay((ent, delay), false, ReleaseDelayId);
 
-        _audio.PlayEntity(ent.Comp.ClearSound, ent, args.User, AudioParams.Default.WithVolume(-2f));
+        _audio.PlayPredicted(ent.Comp.ClearSound, ent, args.User, AudioParams.Default.WithVolume(-2f));
     }
 
     #region Helpers
