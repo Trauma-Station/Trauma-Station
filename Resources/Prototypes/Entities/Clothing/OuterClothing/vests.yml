@@ -71,7 +71,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 #Elite web vest
 - type: entity
@@ -113,7 +113,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 #Mercenary web vest
 - type: entity

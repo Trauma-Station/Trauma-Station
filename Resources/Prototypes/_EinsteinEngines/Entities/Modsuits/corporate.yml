@@ -38,7 +38,7 @@
       grid:
         - 0,0,7,6
     - type: ExplosionResistance
-      damageCoefficient: 0.1
+      damageCoefficient: 0.5
     - type: SealableClothingVisuals
       spriteLayer: sealed
       clothingVisuals:

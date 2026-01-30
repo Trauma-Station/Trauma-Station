@@ -114,7 +114,7 @@
     soundHit:
       collection: MetalThud
   - type: ExplosionResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: Airtight
 
 - type: entity

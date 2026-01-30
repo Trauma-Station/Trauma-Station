@@ -237,7 +237,7 @@
     grid:
     - 0,0,8,3
   - type: ExplosionResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 - type: entity
   parent: ClothingBackpackERTLeader
@@ -303,7 +303,7 @@
       grid:
       - 0,0,10,7 # Goobstation
     - type: ExplosionResistance # Goobstation
-      damageCoefficient: 0.1
+      damageCoefficient: 0.5
     - type: Tag
       tags: [] # ignore "WhitelistChameleon" tag
 
@@ -317,7 +317,7 @@
   - type: Sprite
     sprite: Clothing/Back/Backpacks/syndicate.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: Storage
     grid:
     - 0,0,7,3

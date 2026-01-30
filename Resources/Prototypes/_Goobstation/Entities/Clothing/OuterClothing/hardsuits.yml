@@ -120,7 +120,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 # Cybersun Stealth
 
@@ -176,7 +176,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 # cybersun dreadnought suit
 
@@ -198,7 +198,7 @@
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.1 # chinalake meta would go hard
+    damageCoefficient: 0.5 # chinalake meta would go hard
   - type: FireProtection
     reduction: 0.9 # atmos fire suit is 0.8, so i guess this is fine? Reduction goes the opossite way right?
   - type: Armor
@@ -236,7 +236,7 @@
       interval: 1.0
       ignoreResistances: true
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown
     cancel: true
 

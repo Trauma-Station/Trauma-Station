@@ -222,7 +222,7 @@
   - type: Sprite
     sprite: Clothing/Back/Duffels/syndicate.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: Storage
     grid:
     - 0,0,8,4
@@ -333,6 +333,6 @@
     sprintModifier: 1
   - type: HeldSpeedModifier
   - type: ExplosionResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   #- type: Tag # Goobstation - Fuck you
   #  tags: [] # ignore "WhitelistChameleon" tag
