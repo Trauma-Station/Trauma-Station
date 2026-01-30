@@ -194,7 +194,7 @@ public abstract partial class SharedHereticRitualSystem
 
         var knowledgeGain = 0f;
         var (isCommand, isSec) = IsCommandOrSec(ent);
-        var isHeretic = _heretic.TryGetHereticComponent(ent, out _, out _);
+        var isHeretic = _heretic.TryGetHereticComponent(ent.Owner, out _, out _);
         knowledgeGain += isHeretic || IsSacrificeTarget((mind, heretic), ent)
             ? isCommand || isSec || isHeretic ? 3f : 2f
             : 0f;
