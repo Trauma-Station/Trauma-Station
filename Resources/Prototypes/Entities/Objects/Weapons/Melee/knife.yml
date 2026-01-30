@@ -430,7 +430,7 @@
     removalTime: 1.5
   - type: LandAtCursor
   - type: DamageOtherOnHit
-    ignoreResistances: true
+    increaseOnly: true # Trauma - apply modifiers, but ignore decreases
     damage:
       types:
         Slash: 10

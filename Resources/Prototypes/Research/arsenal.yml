@@ -340,13 +340,13 @@
   id: PortableMicrofusionWeaponry
   name: research-technology-portable-microfusion-weaponry
   icon:
-    sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
-    state: icon
+    sprite: Objects/Power/portable_recharger.rsi # Trauma
+    state: charging
   discipline: Arsenal
   tier: 3
   cost: 20000 # Goobstation 15000 -> 20000
   recipeUnlocks:
-  - WeaponAdvancedLaser
+  # - WeaponAdvancedLaser # Trauma, No longer has a niche
   - PortableRecharger
   - WeaponMechCombatImmolationGun # Goobstation
   - EnergyMagRifleOverchargeLethal # Goobstation - CR second energy bolt update(and ion)

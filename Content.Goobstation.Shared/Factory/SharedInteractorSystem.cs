@@ -14,12 +14,20 @@ using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Popups;
 using Content.Shared.Throwing;
+using Content.Shared.Tools;
+using Content.Shared.Tools.Systems;
+using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Factory;
+
+internal delegate bool Toggle();
 
 public abstract class SharedInteractorSystem : EntitySystem
 {
@@ -31,6 +39,8 @@ public abstract class SharedInteractorSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] protected readonly StartableMachineSystem Machine = default!;
 
     private EntityQuery<ActiveDoAfterComponent> _doAfterQuery;
@@ -39,6 +49,9 @@ public abstract class SharedInteractorSystem : EntitySystem
     private EntityQuery<ThrownItemComponent> _thrownQuery;
 
     private readonly HashSet<EntityUid> _targets = new();
+
+    public static readonly SpriteSpecifier VerbIcon = new SpriteSpecifier.Rsi(new("Objects/Tools/screwdriver.rsi"), "screwdriver-map");
+    public static readonly ProtoId<ToolQualityPrototype> Screwing = "Screwing";
 
     public override void Initialize()
     {
@@ -51,6 +64,7 @@ public abstract class SharedInteractorSystem : EntitySystem
 
         SubscribeLocalEvent<InteractorComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<InteractorComponent, ExaminedEvent>(OnExamined);
+        SubscribeLocalEvent<InteractorComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
         SubscribeLocalEvent<InteractorComponent, DoAfterEndedEvent>(OnDoAfterEnded);
         SubscribeLocalEvent<InteractorComponent, SignalReceivedEvent>(OnSignalReceived);
         // hand visuals
@@ -73,9 +87,35 @@ public abstract class SharedInteractorSystem : EntitySystem
             : Loc.GetString("robotic-arm-examine-no-filter"));
     }
 
-    public bool IsValidTarget(Entity<InteractorComponent> ent, EntityUid target)
-        => !_thrownQuery.HasComp(target) // thrown items move too fast to be "clicked" on...
-            && _filter.IsAllowed(_filter.GetSlot(ent), target); // ignore non-filtered entities
+    private void OnGetVerbs(Entity<InteractorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract)
+            return;
+
+        // need to use a screwdriver to adjust the settings (or a multitool+signaller)
+        var noScrewdriver = args.Using is not {} tool || !_tool.HasQuality(tool, Screwing);
+
+        var user = args.User;
+        (string, Toggle)[] options = [
+            ("alt-interact", () => SetAltInteract(ent, !ent.Comp.AltInteract)),
+            ("use-in-hand", () => SetUseInHand(ent, !ent.Comp.UseInHand))
+        ];
+        foreach (var (id, toggle) in options)
+        {
+            args.Verbs.Add(new()
+            {
+                Act = () =>
+                {
+                    var value = toggle();
+                    _popup.PopupClient(Loc.GetString($"interactor-verb-toggled-{id}", ("enabled", value)), ent, user);
+                },
+                Text = Loc.GetString($"interactor-verb-toggle-{id}"),
+                Icon = VerbIcon,
+                Disabled = noScrewdriver,
+                Message = noScrewdriver ? Loc.GetString("interactor-verb-no-screwdriver") : null
+            });
+        }
+    }
 
     private void OnItemModified<T>(Entity<InteractorComponent> ent, ref T args) where T: ContainerModifiedMessage
     {
@@ -99,22 +139,46 @@ public abstract class SharedInteractorSystem : EntitySystem
 
     private void OnSignalReceived(Entity<InteractorComponent> ent, ref SignalReceivedEvent args)
     {
-        if (args.Port != ent.Comp.AltInteractPort)
+        var alt = args.Port == ent.Comp.AltInteractPort;
+        if (!alt && args.Port != ent.Comp.UseInHandPort)
             return;
 
         var state = SignalState.Momentary;
         args.Data?.TryGetValue<SignalState>("logic_state", out state);
-        var alt = state switch
+        var current = alt ? ent.Comp.AltInteract : ent.Comp.UseInHand;
+        var value = state switch
         {
-            SignalState.Momentary => !ent.Comp.AltInteract,
+            SignalState.Momentary => !current,
             SignalState.High => true,
             SignalState.Low => false,
             _ => false
         };
-        SetAltInteract(ent, alt);
+        if (alt)
+            SetAltInteract(ent, value);
+        else
+            SetUseInHand(ent, value);
     }
 
+    public bool IsValidTarget(Entity<InteractorComponent> ent, EntityUid target)
+        => !_thrownQuery.HasComp(target) // thrown items move too fast to be "clicked" on...
+            && _filter.IsAllowed(_filter.GetSlot(ent), target); // ignore non-filtered entities
+
     protected bool HasDoAfter(EntityUid uid) => _doAfterQuery.HasComp(uid);
+
+    protected bool TryInteractWith(Entity<InteractorComponent> ent, EntityUid? target)
+    {
+        // ignore target entirely for use in hand.
+        if (ent.Comp.UseInHand)
+        {
+            if (!_hands.TryGetActiveItem(ent.Owner, out var tool))
+                return false;
+
+            _interaction.UserInteraction(ent, Transform(tool.Value).Coordinates, tool, ent.Comp.AltInteract);
+            return true; // no real idea if a system handled it so just hope it did
+        }
+
+        return target is {} uid && InteractWith(ent, uid);
+    }
 
     protected bool InteractWith(Entity<InteractorComponent> ent, EntityUid target)
     {
@@ -151,13 +215,27 @@ public abstract class SharedInteractorSystem : EntitySystem
     /// <summary>
     /// Set <see cref="InteractorComponent.AltInteract"> and dirty it.
     /// </summary>
-    public void SetAltInteract(Entity<InteractorComponent> ent, bool alt)
+    public bool SetAltInteract(Entity<InteractorComponent> ent, bool alt)
     {
         if (ent.Comp.AltInteract == alt)
-            return;
+            return alt;
 
         ent.Comp.AltInteract = alt;
         Dirty(ent);
+        return alt;
+    }
+
+    /// <summary>
+    /// Set <see cref="InteractorComponent.UseInHand"> and dirty it.
+    /// </summary>
+    public bool SetUseInHand(Entity<InteractorComponent> ent, bool use)
+    {
+        if (ent.Comp.UseInHand == use)
+            return use;
+
+        ent.Comp.UseInHand = use;
+        Dirty(ent);
+        return use;
     }
 
     public EntityCoordinates TargetsPosition(EntityUid uid)

@@ -224,7 +224,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Rat, Yowie ] # Goob - added Yowie
+          type: [ Rat ]
           inverted: true
         - !type:ReagentCondition
           reagent: Ammonia
@@ -237,7 +237,7 @@
         probability: 0.12
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Rat, Vox, Yowie ] # Goob - added Yowie
+          type: [ Rat, Vox ]
           inverted: true
         - !type:ReagentCondition
           reagent: Ammonia
@@ -283,7 +283,7 @@
         scaleProbability: true # more moles more disease
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Rat, Vox, Yowie ]
+          type: [ Rat, Vox ]
           inverted: true
         - !type:ReagentCondition
           reagent: Ammonia

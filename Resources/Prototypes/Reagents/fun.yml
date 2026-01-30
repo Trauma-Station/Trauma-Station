@@ -163,20 +163,6 @@
           types:
             Poison: 2
             Piercing: 2
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie takes no poison damage from bees
-          type: [ Yowie ]
-          inverted: true
-        - !type:TagCondition
-          inverted: true
-          tag: Bee
-      - !type:HealthChange # Goob - Yowie takes no poison damage from bees
-        damage:
-          types:
-            Piercing: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
 
 - type: reagent
   id: GroundBee

@@ -326,9 +326,18 @@ namespace Content.Client.RoundEnd
         }
         private BoxContainer MakeStationReportTab()
         {
+            string stationReportText = Loc.GetString("no-station-report-summited");
             //gets the stationreport varibible and sets the station report tab text to it if the map doesn't have a tablet will say No station report submitted
-            var stationReportSystem = _entityManager.System<Content.Goobstation.Common.StationReport.StationReportSystem>();
-            string stationReportText = stationReportSystem.StationReportText ?? Loc.GetString("no-station-report-summited");
+            var stationReportSystem = _entityManager.System<Goobstation.Common.StationReport.StationReportSystem>();
+            if (!string.IsNullOrWhiteSpace(stationReportSystem.StationReportText) && stationReportSystem.StationReportText != Loc.GetString("station-report-text"))
+            {
+                stationReportText = Loc.GetString(
+                    "station-report-end-round-text",
+                    ("bodytext", stationReportSystem.StationReportText),
+                    ("roundid", RoundId)
+                );
+            }
+
             var stationReportTab = new BoxContainer
             {
                 Orientation = LayoutOrientation.Vertical,
