@@ -214,7 +214,7 @@
   - type: Clothing
     sprite: Clothing/Belt/militarywebbing.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.1
   - type: StaticPrice
     price: 500
 
@@ -232,7 +232,7 @@
   - type: Item
     size: Huge
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.1
   # </Goob>
 
 - type: entity

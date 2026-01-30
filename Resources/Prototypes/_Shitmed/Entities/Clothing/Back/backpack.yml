@@ -12,4 +12,4 @@
   - type: Sprite
     sprite: _Shitmed/Clothing/Back/Backpacks/abductor.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.1

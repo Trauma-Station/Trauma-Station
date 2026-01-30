@@ -6,7 +6,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.1
   - type: Sprite
     sprite: Objects/Weapons/Grenades/syndgrenade.rsi
     state: icon

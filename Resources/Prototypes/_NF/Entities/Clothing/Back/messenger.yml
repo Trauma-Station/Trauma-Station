@@ -547,7 +547,7 @@
       - state: clasp-inhand-right
         color: "#c60200"
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.1
   - type: Storage
     grid:
     - 0,0,8,0
