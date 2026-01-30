@@ -229,6 +229,7 @@
     - DoorBumpOpener
     - AnomalyHost
   # <Trauma>
+  - type: BloodSplatterer
   - type: Targeting
   - type: CanEscapeInventory
   - type: Consciousness

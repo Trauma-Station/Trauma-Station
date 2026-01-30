@@ -10,4 +10,3 @@ lathe-recipe-MofficTranslatorImplanter-subname = moffic translator implant
 lathe-recipe-ValyrianStandardTranslatorImplanter-subname = valyrian standard translator implant
 lathe-recipe-NewKinPidginTranslatorImplanter-subname = ka'rakk translator implant
 lathe-recipe-ChevalTranslatorImplanter-subname = cheval translator implant
-lathe-recipe-YowKriolTranslatorImplanter-subname = yow kriol translator implant

@@ -79,8 +79,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         foreach (var (key, info) in component.CustomBaseLayers)
         {
             oldLayers.Remove(key);
-            SetLayerData(entity, key, info.Id, sexMorph: false, color: info.Color,
-                overrideSkin: true); // Shitmed
+            SetLayerData(entity, key, info.Id, sexMorph: false, color: info.Color);
         }
 
         // hide old layers
@@ -97,8 +96,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         HumanoidVisualLayers key,
         string? protoId,
         bool sexMorph = false,
-        Color? color = null,
-        bool overrideSkin = false) // Shitmed
+        Color? color = null)
     {
         var component = entity.Comp1;
         var sprite = entity.Comp2;
@@ -119,8 +117,8 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         var proto = _prototypeManager.Index<HumanoidSpeciesSpriteLayer>(protoId);
         component.BaseLayers[key] = proto;
 
-        if (proto.MatchSkin && !overrideSkin) // Shitmed - check overrideSkin
-            layer.Color = component.SkinColor.WithAlpha(proto.LayerAlpha);
+        if (proto.MatchSkin)
+            layer.Color = (color ?? component.SkinColor).WithAlpha(proto.LayerAlpha); // Trauma - use layer color first if it's defined, for part transplants to keep original skin
 
         if (proto.BaseSprite != null)
             _sprite.LayerSetSprite((entity.Owner, sprite), layerIndex, proto.BaseSprite);

@@ -44,10 +44,10 @@ public abstract partial class SharedGunSystem
         args.Message.AddMarkupPermissive("\n" + Loc.GetString("armor-penetration", ("arg", ap/abs), ("abs", abs)));
     }
 
-    public TargetBodyPart? GetTargetPart(Entity<TargetingComponent?> shooter, EntityUid target)
-        => GetTargetPart(shooter,
-            TransformSystem.GetMapCoordinates(shooter),
-            TransformSystem.GetMapCoordinates(target));
+    public TargetBodyPart? GetTargetPart(EntityUid? shooter, EntityUid target)
+        => shooter is {} targeting
+            ? GetTargetPart(targeting, TransformSystem.GetMapCoordinates(targeting), TransformSystem.GetMapCoordinates(target))
+            : null;
 
     public TargetBodyPart? GetTargetPart(Entity<TargetingComponent?>? targeting,
         MapCoordinates shootCoords,

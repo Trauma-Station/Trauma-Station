@@ -8,7 +8,6 @@
       effects:
       - !type:ModifyStatusEffect
         conditions:
-        # this intentionally has no yowie condition so abductors can sleep disgruntled yowies
         - !type:ReagentCondition
           reagent: NocturineWonderprod
           min: 8

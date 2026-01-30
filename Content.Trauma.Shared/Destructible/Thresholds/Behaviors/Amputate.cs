@@ -21,6 +21,6 @@ public sealed partial class Amputate : IThresholdBehavior
             return;
 
         var woundSys = entMan.System<WoundSystem>();
-        woundSys.AmputateWoundable(parent, owner, comp);
+        woundSys.DestroyWoundable(parent, owner, comp);
     }
 }

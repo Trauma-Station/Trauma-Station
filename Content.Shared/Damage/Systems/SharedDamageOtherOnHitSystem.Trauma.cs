@@ -46,11 +46,9 @@ public abstract partial class SharedDamageOtherOnHitSystem
         if (args.Target == args.Component.Thrower) // Goobstation - Mjolnir
             return;
 
-        var targetPart = args.Component.Thrower is {} thrower
-            ? _gun.GetTargetPart(thrower, args.Target)
-            : null;
+        var targetPart = _gun.GetTargetPart(args.Component.Thrower, args.Target);
         var dmg = _damageable.ChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances,
-            targetPart: targetPart, origin: args.Component.Thrower);
+            targetPart: targetPart, origin: args.Component.Thrower, increaseOnly: component.IncreaseOnly);
 
         // <Goob>
         // For stuff that cares about it being attacked.

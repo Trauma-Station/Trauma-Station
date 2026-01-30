@@ -28,10 +28,6 @@
   metabolisms:
     Poison:
       metabolismRate: 0.05
-      conditions:
-      - !type:MetabolizerTypeCondition
-        type: [ Yowie ]
-        inverted: true
       effects:
       - !type:HealthChange
         damage:
@@ -82,27 +78,16 @@
         messages: ["fentanyl-effect-skinworms","fentanyl-effect-breathingrazors","fentanyl-effect-lungstight","fentanyl-effect-observed"]
         probability: 0.05
       - !type:ModifyStatusEffect # you didn't think this would improve your abilities right?
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         effectProto: FentanylSlowdownStatusEffect
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
       - !type:Jitter
       - !type:ModifyParalysis # loss of muscle control
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         probability: 0.05
         time: 2
       - !type:ModifyParalysis # more severe effects when you are overdosing
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Fentanyl
           min: 5
@@ -137,10 +122,6 @@
     Narcotic:
       effects:
       - !type:GenericStatusEffect
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         key: TemporaryBlindness
         component: TemporaryBlindness
         type: Add
@@ -166,10 +147,6 @@
         key: Stutter
         component: StutteringAccent
       - !type:TakeStaminaDamage
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         amount: 7
         immediate: false
       - !type:PopupMessage
@@ -197,18 +174,12 @@
         time: 4
       - !type:ModifyStatusEffect # You can't quite remember how to walk properly.
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Amnestizine
           min: 4
         effectProto: AmnestizineSlowdownStatusEffect
       - !type:GenericStatusEffect
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Amnestizine
           min: 10
@@ -227,9 +198,6 @@
             Poison: 0.25
             Asphyxiation: 0.25
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Amnestizine
           min: 15
@@ -239,19 +207,12 @@
             Cellular: 1
             Asphyxiation: 1
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Amnestizine
           min: 30
       - !type:Flammable
         multiplier: 0.3
       - !type:ModifyParalysis
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         probability: 0.05
         time: 2
   reactiveEffects:
@@ -275,18 +236,6 @@
     Narcotic:
       metabolismRate: 1
       effects:
-      - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-        damage:
-          groups:
-            Brute: -1
-          types:
-            Heat: -0.5
-            Shock: -0.5
-            Cold: -0.5
-            Radiation: -0.5
       - !type:ModifyStatusEffect
         effectProto: AranespStatusEffect
       - !type:GenericStatusEffect
@@ -323,15 +272,8 @@
         damage:
           types:
             Asphyxiation: 0.5
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Amnestizine
           min: 50
@@ -341,9 +283,6 @@
       - !type:Emote
         emote: Gasp
         probability: 0.1
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
 
 - type: reagent
   id: MouseBites
@@ -457,9 +396,6 @@
         - !type:ReagentCondition
           reagent: Heroin
           min: 10.5
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:ModifyStatusEffect # tripping balls
         conditions:
         - !type:ReagentCondition

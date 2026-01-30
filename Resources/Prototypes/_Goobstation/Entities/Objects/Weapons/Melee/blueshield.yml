@@ -53,8 +53,7 @@
       types:
         Heat: 1
   - type: Stunbaton
-    energyPerUse: 40
-    lightAttackEnergyMultiplier: 2
+    energyPerUse: 80
   - type: MeleeWeapon
     angle: 0
     wideAnimationRotation: -135

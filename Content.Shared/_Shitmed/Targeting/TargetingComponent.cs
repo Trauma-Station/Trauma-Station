@@ -29,8 +29,8 @@ public sealed partial class TargetingComponent : Component
         {
             TargetBodyPart.Head, new Dictionary<TargetBodyPart, float>
             {
-                { TargetBodyPart.Head, 0.0f }, // Trauma 0.3 > 0
-                { TargetBodyPart.Chest, 1.0f }, // Trauma 0.7 > 1
+                { TargetBodyPart.Head, 0.3f },
+                { TargetBodyPart.Chest, 0.7f },
             }
         },
         {
@@ -42,80 +42,80 @@ public sealed partial class TargetingComponent : Component
         {
             TargetBodyPart.Groin, new Dictionary<TargetBodyPart, float>
             {
-                { TargetBodyPart.Groin, 0.0f }, // Trauma 0.4 > 0
-                { TargetBodyPart.Chest, 1.0f }, // Trauma 0.6 > 1
+                { TargetBodyPart.Groin, 0.4f },
+                { TargetBodyPart.Chest, 0.6f },
             }
         },
         {
             TargetBodyPart.RightArm, new Dictionary<TargetBodyPart, float>
             {
-                { TargetBodyPart.RightArm, 0.0f }, // Trauma 0.25 > 0
-                { TargetBodyPart.Chest, 1.0f }, // Trauma 0.6 > 1
-                { TargetBodyPart.Groin, 0.0f }, // Trauma 0.1 > 0
-                { TargetBodyPart.RightHand, 0.0f }, // Trauma 0.05 > 0
+                { TargetBodyPart.RightArm, 0.25f },
+                { TargetBodyPart.Chest, 0.6f },
+                { TargetBodyPart.Groin, 0.1f },
+                { TargetBodyPart.RightHand, 0.05f },
             }
         },
         {
             TargetBodyPart.LeftArm, new Dictionary<TargetBodyPart, float>
             {
-                { TargetBodyPart.LeftArm, 0.0f }, // Trauma 0.25 > 0
-                { TargetBodyPart.Chest, 1.0f }, // Trauma 0.6 > 1
-                { TargetBodyPart.Groin, 0.0f }, // Trauma 0.1 > 0
-                { TargetBodyPart.LeftHand, 0.0f }, // Trauma 0.05 > 0
+                { TargetBodyPart.LeftArm, 0.25f },
+                { TargetBodyPart.Chest, 0.6f },
+                { TargetBodyPart.Groin, 0.1f },
+                { TargetBodyPart.LeftHand, 0.05f },
             }
         },
         {
             TargetBodyPart.RightHand, new Dictionary<TargetBodyPart, float>
             {
-                { TargetBodyPart.RightHand, 0.0f }, // Trauma 0.2 > 0
-                { TargetBodyPart.Chest, 1.0f }, // Trauma 0.6 > 1
-                { TargetBodyPart.Groin, 0.0f }, // Trauma 0.1 > 0
-                { TargetBodyPart.RightArm, 0.0f }, // Trauma 0.1 > 0
+                { TargetBodyPart.RightHand, 0.2f },
+                { TargetBodyPart.Chest, 0.6f },
+                { TargetBodyPart.Groin, 0.1f },
+                { TargetBodyPart.RightArm, 0.1f },
             }
         },
         {
             TargetBodyPart.LeftHand, new Dictionary<TargetBodyPart, float>
             {
-                { TargetBodyPart.LeftHand, 0.0f }, // Trauma 0.2 > 0
-                { TargetBodyPart.Chest, 1.0f }, // Trauma 0.6 > 1
-                { TargetBodyPart.Groin, 0.0f }, // Trauma 0.1 > 0
-                { TargetBodyPart.LeftArm, 0.0f }, // Trauma 0.1 > 0
+                { TargetBodyPart.LeftHand, 0.2f },
+                { TargetBodyPart.Chest, 0.6f },
+                { TargetBodyPart.Groin, 0.1f },
+                { TargetBodyPart.LeftArm, 0.1f },
             }
         },
         {
             TargetBodyPart.RightLeg, new Dictionary<TargetBodyPart, float>
             {
-                { TargetBodyPart.RightLeg, 0.0f }, // Trauma 0.25 > 0
-                { TargetBodyPart.Chest, 1.0f }, // Trauma 0.6 > 1
-                { TargetBodyPart.Groin, 0.0f }, // Trauma 0.1 > 0
-                { TargetBodyPart.RightFoot, 0.0f }, // Trauma 0.05 > 0
+                { TargetBodyPart.RightLeg, 0.25f },
+                { TargetBodyPart.Chest, 0.6f },
+                { TargetBodyPart.Groin, 0.1f },
+                { TargetBodyPart.RightFoot, 0.05f },
             }
         },
         {
             TargetBodyPart.LeftLeg, new Dictionary<TargetBodyPart, float>
             {
-                { TargetBodyPart.LeftLeg, 0.0f }, // Trauma 0.25 > 0
-                { TargetBodyPart.Chest, 1.0f }, // Trauma 0.6 > 1
-                { TargetBodyPart.Groin, 0.0f }, // Trauma 0.1 > 0
-                { TargetBodyPart.LeftFoot, 0.0f }, // Trauma 0.05 > 0
+                { TargetBodyPart.LeftLeg, 0.25f },
+                { TargetBodyPart.Chest, 0.6f },
+                { TargetBodyPart.Groin, 0.1f },
+                { TargetBodyPart.LeftFoot, 0.05f },
             }
         },
         {
             TargetBodyPart.RightFoot, new Dictionary<TargetBodyPart, float>
             {
-                { TargetBodyPart.RightFoot, 0.0f }, // Trauma 0.2 > 0
-                { TargetBodyPart.Chest, 1.0f }, // Trauma 0.6 > 1
-                { TargetBodyPart.Groin, 0.0f }, // Trauma 0.1 > 0
-                { TargetBodyPart.RightLeg, 0.0f }, // Trauma 0.1 > 0
+                { TargetBodyPart.RightFoot, 0.2f },
+                { TargetBodyPart.Chest, 0.6f },
+                { TargetBodyPart.Groin, 0.1f },
+                { TargetBodyPart.RightLeg, 0.1f },
             }
         },
         {
             TargetBodyPart.LeftFoot, new Dictionary<TargetBodyPart, float>
             {
-                { TargetBodyPart.LeftFoot, 0.0f }, // Trauma 0.2 > 0
-                { TargetBodyPart.Chest, 1.0f }, // Trauma 0.6 > 1
-                { TargetBodyPart.Groin, 0.0f }, // Trauma 0.1 > 0
-                { TargetBodyPart.LeftLeg, 0.0f }, // Trauma 0.1 > 0
+                { TargetBodyPart.LeftFoot, 0.2f },
+                { TargetBodyPart.Chest, 0.6f },
+                { TargetBodyPart.Groin, 0.1f },
+                { TargetBodyPart.LeftLeg, 0.1f },
             }
         },
     };

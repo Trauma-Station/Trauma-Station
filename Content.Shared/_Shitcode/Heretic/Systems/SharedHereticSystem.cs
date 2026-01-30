@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.Common.CCVar;
+using Content.Goobstation.Common.Conversion;
 using Content.Goobstation.Common.Heretic;
 using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared.Actions;
@@ -39,7 +40,7 @@ public abstract class SharedHereticSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<HereticCheckEvent>(OnCheck);
+        SubscribeLocalEvent<MindContainerComponent, BeforeConversionEvent>(OnConversionAttempt);
 
         Subs.CVar(_cfg, GoobCVars.AscensionRequiresObjectives, value => _ascensionRequiresObjectives = value, true);
 
@@ -47,18 +48,19 @@ public abstract class SharedHereticSystem : EntitySystem
         _ghoulQuery = GetEntityQuery<GhoulComponent>();
     }
 
-    private void OnCheck(ref HereticCheckEvent ev)
+    private void OnConversionAttempt(Entity<MindContainerComponent> ent, ref BeforeConversionEvent args)
     {
-        ev.Result = TryGetHereticComponent(ev.Uid, out _, out _);
+        if (TryGetHereticComponent(ent.AsNullable(), out _, out _))
+            args.Blocked = true;
     }
 
     public bool TryGetHereticComponent(
-        EntityUid uid,
+        Entity<MindContainerComponent?> ent,
         [NotNullWhen(true)] out HereticComponent? heretic,
         out EntityUid mind)
     {
         heretic = null;
-        return _mind.TryGetMind(uid, out mind, out _) && _hereticQuery.TryComp(mind, out heretic);
+        return _mind.TryGetMind(ent, out mind, out _, ent.Comp) && _hereticQuery.TryComp(mind, out heretic);
     }
 
     public bool IsHereticOrGhoul(EntityUid uid)

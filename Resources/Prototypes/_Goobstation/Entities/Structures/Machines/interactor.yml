@@ -115,6 +115,7 @@
     - Start
     - AutoStart
     - AltInteract
+    - UseInHand
   - type: DeviceLinkSource
     ports:
     - Started

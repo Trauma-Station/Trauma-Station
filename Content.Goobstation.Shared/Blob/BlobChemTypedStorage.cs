@@ -16,19 +16,20 @@ using Robust.Shared.Serialization;
 namespace Content.Goobstation.Shared.Blob;
 
 #region BlobChemTypedStorage
-[DataDefinition, Serializable, NetSerializable]
+
+[ImplicitDataDefinitionForInheritors, Serializable, NetSerializable]
 public abstract partial class BlobChemTypedStorage<T> : IEnumerable
 {
     [DataField]
-    public virtual T BlazingOil { get; set; } = default!;
+    public T BlazingOil { get; set; } = default!;
     [DataField]
-    public virtual T ReactiveSpines { get; set; }= default!;
+    public T ReactiveSpines { get; set; }= default!;
     [DataField]
-    public virtual T RegenerativeMateria { get; set; }= default!;
+    public T RegenerativeMateria { get; set; }= default!;
     [DataField]
-    public virtual T ExplosiveLattice { get; set; }= default!;
+    public T ExplosiveLattice { get; set; }= default!;
     [DataField]
-    public virtual T ElectromagneticWeb { get; set; }= default!;
+    public T ElectromagneticWeb { get; set; }= default!;
 
     // Indexer to access fields via BlobChemType enumeration
     [Pure]
@@ -88,14 +89,8 @@ public abstract partial class BlobChemTypedStorage<T> : IEnumerable
 }
 #endregion
 
-[DataDefinition, Serializable, NetSerializable]
-public sealed partial class BlobChemColors : BlobChemTypedStorage<Color>
-{
+[Serializable, NetSerializable]
+public sealed partial class BlobChemColors : BlobChemTypedStorage<Color>;
 
-}
-
-[DataDefinition, Serializable, NetSerializable]
-public sealed partial class BlobChemDamage : BlobChemTypedStorage<DamageSpecifier>
-{
-
-}
+[Serializable, NetSerializable]
+public sealed partial class BlobChemDamage : BlobChemTypedStorage<DamageSpecifier>;

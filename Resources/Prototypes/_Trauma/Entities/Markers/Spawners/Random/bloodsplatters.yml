@@ -1,0 +1,55 @@
+- type: entity
+  parent: DecalSpawnerBase
+  id: DecalSpawnerBloodSplattersTrauma
+  suffix: Blood Splatters
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - splatter
+    - bloodSplatter1
+    - bloodSplatter2
+    - bloodSplatter3
+    - bloodSplatter4
+    - bloodSplatter5
+    - bloodSplatter6
+    - bloodFloor1
+    - bloodFloor2
+    - bloodFloor3
+    - bloodFloor4
+    - bloodFloor5
+    - bloodFloor6
+    - bloodFloor7
+    radius: 1
+    randomRotation: true
+    maxDecals: 1
+    prob: 1
+    zIndex: 5
+    color: '#9900007F'
+    cleanable: true
+    deleteSpawnerAfterSpawn: true
+
+- type: entity
+  parent: DecalSpawnerBase
+  id: DecalSpawnerGibBloodSplatters
+  suffix: Blood Splatters
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - giblet1
+    - giblet2
+    - giblet3
+    - giblet4
+    - giblet5
+    - bloodSplatter4
+    - bloodSplatter5
+    - bloodSplatter6
+    - bloodFloor6
+    - bloodFloor7
+    radius: 3
+    randomRotation: true
+    maxDecals: 25
+    prob: 0.6
+    zIndex: 5
+    color: '#9900007F'
+    cleanable: true
+    deleteSpawnerAfterSpawn: true

@@ -63,6 +63,9 @@ public sealed partial class PickSurgeryWindow : FancyWindow
 
         foreach (var part in Enum.GetValues<BodyPartType>())
         {
+            if (part == BodyPartType.Vital) // shitcode but i hate this
+                continue;
+
             var name = Loc.GetString("autodoc-body-part-" + part.ToString());
             Parts.AddItem(name, metadata: part);
         }

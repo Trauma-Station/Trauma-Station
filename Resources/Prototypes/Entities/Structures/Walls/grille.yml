@@ -16,7 +16,7 @@
     - type: CanBuildWindowOnTop
     - type: Sprite
       drawdepth: Walls
-      sprite: Structures/Walls/grille.rsi
+      sprite: _Trauma/Structures/Walls/grille.rsi # Trauma
       layers:
         - state: grille
         - state: electrified
@@ -116,10 +116,10 @@
   components:
   - type: Sprite
     drawdepth: Walls
-    sprite: Structures/Walls/grille.rsi
+    sprite: _Trauma/Structures/Walls/grille.rsi # Trauma
     state: grille_broken
   - type: Icon
-    sprite: Structures/Walls/grille.rsi
+    sprite: _Trauma/Structures/Walls/grille.rsi # Trauma
     state: grille_broken
   - type: RCDDeconstructable
     cost: 6
@@ -174,7 +174,7 @@
   components:
   - type: Sprite
     drawdepth: Walls
-    sprite: Structures/Walls/grille.rsi
+    sprite:  _Trauma/Structures/Walls/grille.rsi # Trauma
     layers:
     - state: grille_diagonal
     - state: electrified_diagonal
@@ -183,7 +183,7 @@
       shader: unshaded
       visible: false
   - type: Icon
-    sprite: Structures/Walls/grille.rsi
+    sprite:  _Trauma/Structures/Walls/grille.rsi # Trauma
     state: grille_diagonal
   - type: Tag
     tags:

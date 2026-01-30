@@ -158,7 +158,7 @@ public sealed partial class AccessReaderSystem : EntitySystem // Trauma - made p
         if (accessReader.Value.Comp.AccessLists.Count < 1)
             return;
 
-        args.Repeatable = true;
+        //args.Repeatable = true; // Trauma - still mark it as emagged
         args.Handled = true;
         accessReader.Value.Comp.AccessLists.Clear();
         accessReader.Value.Comp.AccessLog.Clear();

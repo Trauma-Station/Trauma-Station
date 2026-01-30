@@ -70,10 +70,6 @@
     Poison:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Caustic: 1
@@ -204,10 +200,6 @@
     Poison:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Heat: 1.5
@@ -215,9 +207,6 @@
       effects:
       - !type:Vomit
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: SodiumHydroxide
           min: 5

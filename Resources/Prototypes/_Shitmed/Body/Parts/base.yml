@@ -41,12 +41,12 @@
     thresholds:
     - trigger: !type:DamageTypeTrigger
         damageType: Piercing
-        damage: 200 # needs to be blown clean off
+        damage: 600 # needs to be blown clean off by a shotgun
       behaviors:
       - !type:Amputate
     - trigger: !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 250 # we'll assume the bones are all broken by now
+        damage: 400 # we'll assume the bones are all broken by now
       behaviors:
       - !type:Amputate
   # </Goob>

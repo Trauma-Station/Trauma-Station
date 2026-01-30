@@ -50,18 +50,6 @@
     Piercing: 5
 
 - type: damageModifierSet
-  id: Yowie
-  coefficients:
-    Blunt: 0.75
-    Slash: 0.75
-    Piercing: 0.75
-    Cold: 0.9
-    Bloodloss: 0.9
-    Poison: 0.0 # Yea, heroin is heaps good for ya
-    Radiation: 0.7 # Engie yowies need some help against anti-rads
-  ignoreArmorPierceFlags: All
-
-- type: damageModifierSet
   id: FireShark
   coefficients:
     Heat: 0.25

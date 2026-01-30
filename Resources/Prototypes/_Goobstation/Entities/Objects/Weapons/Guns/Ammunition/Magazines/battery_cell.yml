@@ -63,8 +63,8 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/energy_cell_pistol_lethal.rsi
   - type: BatteryAmmoProvider
-    proto: SmallRedLaser
-    fireCost: 50
+    proto: SMGLaser
+    fireCost: 25
 
 - type: entity
   name: x-ray SMG power cell
@@ -76,8 +76,8 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/energy_cell_pistol_xray.rsi
   - type: BatteryAmmoProvider
-    proto: SmallXrayLaser
-    fireCost: 50
+    proto: SMGLaserXray
+    fireCost: 25
 
 - type: entity
   name: overclocked SMG power cell
@@ -89,8 +89,8 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/energy_cell_pistol_overcharge.rsi
   - type: BatteryAmmoProvider
-    proto: SmallOverchargedLaser
-    fireCost: 100
+    proto: SMGLaserOvercharge
+    fireCost: 25
 
 - type: entity
   name: pulse SMG power cell
@@ -115,8 +115,8 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/energy_cell_pistol_ion.rsi
   - type: BatteryAmmoProvider
-    proto: SmallIonLaser
-    fireCost: 50
+    proto: SMGLaserIon
+    fireCost: 25
 
 # Sniper
 
@@ -153,8 +153,8 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/energy_cell_rifle_lethal.rsi
   - type: BatteryAmmoProvider
-    proto: MediumRedLaser
-    fireCost: 100
+    proto: SniperLaser
+    fireCost: 300
 
 - type: entity
   name: x-ray sniper power cell
@@ -166,8 +166,8 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/energy_cell_rifle_xray.rsi
   - type: BatteryAmmoProvider
-    proto: MediumXrayLaser
-    fireCost: 100
+    proto: SniperLaserXray
+    fireCost: 300
 
 - type: entity
   name: overclocked sniper power cell
@@ -179,8 +179,8 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/energy_cell_rifle_overcharge.rsi
   - type: BatteryAmmoProvider
-    proto: MediumOverchargedLaser
-    fireCost: 200
+    proto: SniperLaserOvercharge
+    fireCost: 300
 
 - type: entity
   name: pulse sniper power cell
@@ -205,8 +205,8 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/energy_cell_rifle_ion.rsi
   - type: BatteryAmmoProvider
-    proto: MediumIonLaser
-    fireCost: 100
+    proto: SniperLaserIon
+    fireCost: 300
 
 # Revolver
 
@@ -220,8 +220,8 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/energy_cell_revolver.rsi
   - type: Battery
-    maxCharge: 500
-    startingCharge: 500
+    maxCharge: 480
+    startingCharge: 480
   - type: BatteryDrinkerSource
     maxAmount: 100
   - type: Tag
@@ -239,7 +239,7 @@
 
 - type: entity
   name: revolver power cell
-  description: A militarized power cell compatible with laser revolvers.
+  description: A power cell compatible with laser revolvers.
   id: PowerCellIRRevolver
   suffix: Full
   parent: BaseMilitaryPowerCellRevolver
@@ -257,12 +257,12 @@
           Neither: { state: lethal_charge, shader: unshaded }
           Empty: { state: lethal, shader: null }
   - type: BatteryAmmoProvider
-    proto: MediumRedLaser
-    fireCost: 62.5
+    proto: RevolverLaser
+    fireCost: 40
 
 - type: entity
   name: x-ray revolver power cell
-  description: A militarized power cell compatible with laser revolvers that fires x-rays.
+  description: A power cell compatible with laser revolvers, this one fires Xrays.
   id: PowerCellXrayRevolver
   suffix: Full
   parent: BaseMilitaryPowerCellRevolver
@@ -280,12 +280,12 @@
           Neither: { state: xray_charge, shader: unshaded }
           Empty: { state: xray, shader: null }
   - type: BatteryAmmoProvider
-    proto: MediumXrayLaser
-    fireCost: 62.5
+    proto: RevolverLaserXray
+    fireCost: 40
 
 - type: entity
   name: overclocked revolver power cell
-  description: A militarized power cell compatible with laser revolvers that has been overclocked.
+  description: A power cell compatible with laser revolvers, this one burns hot enough to ignite targets.
   id: PowerCellOverchargedRevolver
   suffix: Full
   parent: BaseMilitaryPowerCellRevolver
@@ -303,8 +303,8 @@
           Neither: { state: overcharge_charge, shader: unshaded }
           Empty: { state: overcharge, shader: null }
   - type: BatteryAmmoProvider
-    proto: MediumOverchargedLaser
-    fireCost: 125
+    proto: RevolverLaserOverclocked
+    fireCost: 40
 
 - type: entity
   name: pulse revolver power cell
@@ -327,11 +327,11 @@
           Empty: { state: pulse, shader: null }
   - type: BatteryAmmoProvider
     proto: MediumPulseLaser
-    fireCost: 62.5
+    fireCost: 40
 
 - type: entity
   name: ion revolver power cell
-  description: A militarized power cell compatible with laser revolvers that fires ion beams.
+  description: A power cell compatible with laser revolvers, this one fires ion beams.
   id: PowerCellIonRevolver
   suffix: Full
   parent: BaseMilitaryPowerCellRevolver
@@ -349,8 +349,8 @@
           Neither: { state: ion_charge, shader: unshaded }
           Empty: { state: ion, shader: null }
   - type: BatteryAmmoProvider
-    proto: MediumIonLaser
-    fireCost: 62.5
+    proto: RevolverLaserIon
+    fireCost: 40
 
 # LMG
 
@@ -372,8 +372,8 @@
   - type: BatteryDrinkerSource
     maxAmount: 500
   - type: BatteryAmmoProvider
-    proto: SmallRedLaser
-    fireCost: 15
+    proto: LMGLaser
+    fireCost: 5
   - type: Tag
     tags:
     - MilitaryPowerCellLMG

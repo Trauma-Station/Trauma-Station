@@ -8,7 +8,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Goobstation.Common.Changeling;
 using Content.Shared._Shitmed.CCVar;
 using Content.Shared._Shitmed.DoAfter;
 using Content.Shared._Shitmed.Medical.Surgery.Pain.Components;
@@ -35,6 +34,8 @@ using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
+using Content.Goobstation.Common.Medical;
 
 namespace Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 
@@ -832,25 +833,8 @@ public sealed partial class WoundSystem
 
         DropWoundableOrgans(woundableEntity, woundableComp);
 
-        if (TryCreateWound(parentWoundableEntity, Blunt, 0f, out var woundEnt, Brute))
-        {
-            _trauma.AddTrauma(
-                parentWoundableEntity,
-                (parentWoundableEntity, Comp<WoundableComponent>(parentWoundableEntity)),
-                (woundEnt.Value.Owner, EnsureComp<TraumaInflicterComponent>(woundEnt.Value.Owner)),
-                TraumaType.Dismemberment,
-                15f);
-
-            var bleedInflicter = EnsureComp<BleedInflicterComponent>(parentWoundableEntity);
-            bleedInflicter.BleedingAmountRaw += 20f;
-            bleedInflicter.Scaling = 1f;
-            bleedInflicter.ScalingLimit = 1f;
-            bleedInflicter.IsBleeding = true;
-            Dirty(parentWoundableEntity, bleedInflicter);
-        }
-
-        _body.DetachPart(parentWoundableEntity, bodyPartId.Remove(0, 15), woundableEntity);
         DestroyWoundableChildren(woundableEntity, woundableComp);
+        _body.DetachPart(parentWoundableEntity, bodyPartId.Remove(0, 15), woundableEntity);
 
         foreach (var wound in GetWoundableWounds(woundableEntity, woundableComp))
             TransferWoundDamage(parentWoundableEntity, woundableEntity, wound, body);
@@ -878,9 +862,13 @@ public sealed partial class WoundSystem
 
         _audio.PlayPvs(woundableComp.WoundableDelimbedSound, bodyPart.Body.Value);
 
+        // goob edit
+        var ampEv = new BeforeAmputationDamageEvent();
+        RaiseLocalEvent(bodyPart.Body.Value, ref ampEv);
+
         if (woundableComp.DamageOnAmputate != null
             && _body.TryGetRootPart(bodyPart.Body.Value, out var rootPart)
-            && !HasComp<ChangelingComponent>(bodyPart.Body.Value)) // TODO SHITMED: make this more maintainable
+            && !ampEv.Cancelled) // goob edit
             _damageable.TryChangeDamage(bodyPart.Body.Value,
                 woundableComp.DamageOnAmputate,
                 targetPart: _body.GetTargetBodyPart(rootPart));
@@ -1219,6 +1207,7 @@ public sealed partial class WoundSystem
             || TerminatingOrDeleted(parentEntity))
             return;
 
+        Log.Debug($"Removing woundable {ToPrettyString(childEntity)} from {ToPrettyString(parentEntity)}");
         parentWoundable.ChildWoundables.Remove(childEntity);
         childWoundable.ParentWoundable = null;
         childWoundable.RootWoundable = childEntity;

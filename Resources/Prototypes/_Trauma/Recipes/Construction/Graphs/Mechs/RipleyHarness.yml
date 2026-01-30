@@ -1,0 +1,19 @@
+- type: constructionGraph
+  id: RipleyMKIIHarness
+  graph:
+  - node: start
+    edges:
+    - to: ripleymkiiHarness
+      steps:
+      - assemblyId: RipleyMkIIChassis
+        guideString: ripleymkii-construction-guide-string
+
+      - tool: Screwing
+        doAfter: 1
+        completed:
+        - !type:VisualizerDataInt
+          key: "enum.MechAssemblyVisuals.State"
+          data: 2
+
+  - node: ripleymkiiHarness
+    entity: RipleyMKIIChassis

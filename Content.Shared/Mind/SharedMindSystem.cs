@@ -1,7 +1,3 @@
-// <Trauma>
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Systems;
-// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Administration.Logs;
@@ -39,7 +35,6 @@ public abstract partial class SharedMindSystem : EntitySystem
     [Dependency] private readonly SharedPlayerSystem _player = default!;
     [Dependency] private readonly MetaDataSystem _metadata = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!; // Trauma
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
     [ViewVariables]
@@ -58,7 +53,7 @@ public abstract partial class SharedMindSystem : EntitySystem
         SubscribeLocalEvent<VisitingMindComponent, EntityTerminatingEvent>(OnVisitingTerminating);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnReset);
         SubscribeLocalEvent<MindComponent, ComponentStartup>(OnMindStartup);
-        SubscribeLocalEvent<MindContainerComponent, EntityRenamedEvent>(OnRenamed); // Goob edit
+        SubscribeLocalEvent<MindContainerComponent, EntityRenamedEvent>(OnRenamed); // Goob - subscribe for MindContainer instead of Mind
 
         InitializeRelay();
     }
@@ -180,14 +175,15 @@ public abstract partial class SharedMindSystem : EntitySystem
             args.Handled = true;
     }
 
-    private void OnRenamed(Entity<MindContainerComponent> ent, ref EntityRenamedEvent args) // Goob edit start
+    private void OnRenamed(Entity<MindContainerComponent> ent, ref EntityRenamedEvent args) // Goob - subscribe for MindContainer instead of Mind
     {
-        if (!TryComp(ent.Comp.Mind, out MindComponent? mind))
+        // <Goob> - get mind from this entity and rename it
+        if (ent.Comp.Mind is not {} mindId || !TryComp(mindId, out MindComponent? mind))
             return;
 
         mind.CharacterName = args.NewName;
-        // Goob edit end
-        Dirty(ent);
+        Dirty(mindId, mind);
+        // </Goob>
     }
 
     public EntityUid? GetMind(EntityUid uid, MindContainerComponent? mind = null)
@@ -368,9 +364,6 @@ public abstract partial class SharedMindSystem : EntitySystem
         var title = Name(objective);
         _adminLogger.Add(LogType.Mind, LogImpact.Low, $"Objective {objective} ({title}) added to mind of {MindOwnerLoggingString(mind)}");
         mind.Objectives.Add(objective);
-        // Shitmed Change - Raise an event on the mind ent with the objective.
-        var ev = new ObjectiveAddedEvent(objective);
-        RaiseLocalEvent(mindId, ev);
     }
 
     /// <summary>
@@ -427,21 +420,6 @@ public abstract partial class SharedMindSystem : EntitySystem
         objective = default;
         return false;
     }
-
-    // Begin DeltaV - Cosmic Cult Deconversion
-    public void ClearObjectives(EntityUid mind, MindComponent? comp = null)
-    {
-        if (!Resolve(mind, ref comp))
-            return;
-
-        foreach (var obj in comp.Objectives)
-        {
-            QueueDel(obj);
-        }
-        comp.Objectives.Clear();
-        Dirty(mind, comp);
-    }
-    // End DeltaV - Cosmic Cult Deconversion
 
     /// <summary>
     /// Copies objectives from one mind to another, so that they are shared between two players.
@@ -704,14 +682,7 @@ public abstract partial class SharedMindSystem : EntitySystem
 
         if (allowSpeech)
         {
-            // <Trauma> - ensure they have the default language
-            var speaker = EnsureComp<LanguageSpeakerComponent>(uid);
-
-            // If the entity already speaks some language (like monkey or robot), we do nothing else.
-            // Otherwise, we give them the fallback language
-            if (speaker.SpokenLanguages.Count == 0)
-                _language.AddLanguage(uid, SharedLanguageSystem.FallbackLanguagePrototype);
-            // </Trauma>
+            EnsureDefaultLanguage(uid); // Trauma
             EnsureComp<SpeechComponent>(uid);
             EnsureComp<EmotingComponent>(uid);
         }
@@ -727,12 +698,6 @@ public abstract partial class SharedMindSystem : EntitySystem
 /// <param name="Dead"></param>
 [ByRefEvent]
 public record struct GetCharactedDeadIcEvent(bool? Dead);
-
-/// <summary>
-///     Shitmed Change: Raised on an entity to notify that an objective has been added to the mind.
-/// </summary>
-/// <param name="Objective"></param>
-public record struct ObjectiveAddedEvent(EntityUid Objective);
 
 /// <summary>
 /// Raised on an entity to determine whether or not they are "unrevivable" in IC-logic.
