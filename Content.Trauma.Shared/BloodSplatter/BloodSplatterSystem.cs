@@ -17,8 +17,8 @@ public sealed class BloodSplatterSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
 
-    private const string SlashDict = "Slash";
-    private const string PierceDict = "Piercing";
+    private static readonly EntProtoId SlashProto = "Slash";
+    private static readonly EntProtoId PierceProto = "Piercing";
 
     public override void Initialize()
     {
@@ -29,10 +29,6 @@ public sealed class BloodSplatterSystem : EntitySystem
 
     private void OnGib(Entity<BloodSplattererComponent> ent, ref BeingGibbedEvent args)
     {
-        if (!_prototypes.TryIndex(ent.Comp.GibbedDecal, out var prototype)
-            || !prototype.TryGetComponent(out RandomDecalSpawnerComponent? spawner, Factory))
-            return;
-
         if (!TryComp<BloodstreamComponent>(ent.Owner, out var bloodstream))
             return;
 
@@ -49,8 +45,8 @@ public sealed class BloodSplatterSystem : EntitySystem
         if (!args.DamageIncreased || args.DamageDelta == null)
             return;
 
-        args.DamageDelta.DamageDict.TryGetValue(PierceDict, out var piercing);
-        args.DamageDelta.DamageDict.TryGetValue(SlashDict, out var slash);
+        args.DamageDelta.DamageDict.TryGetValue(PierceProto, out var piercing);
+        args.DamageDelta.DamageDict.TryGetValue(SlashProto, out var slash);
 
         if (args.DamageDelta.GetTotal() < ent.Comp.MinimalTriggerDamage
             || piercing == 0 && slash == 0)
@@ -75,10 +71,6 @@ public sealed class BloodSplatterSystem : EntitySystem
 
     private void SpawnDecal(Entity<BloodSplattererComponent> ent, BloodstreamComponent bloodstream, string decal)
     {
-        if (!_prototypes.Resolve(decal, out var prototype)
-            || !prototype.TryGetComponent(out RandomDecalSpawnerComponent? _, Factory))
-            return;
-
         var entitybloodstream = bloodstream.BloodReferenceSolution;
         var spawnedDecal = EntityManager.CreateEntityUninitialized(decal, ent.Owner.ToCoordinates());
 
