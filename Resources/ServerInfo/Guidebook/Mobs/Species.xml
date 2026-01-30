@@ -32,7 +32,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   <Box>
     <GuideEntityEmbed Entity="MobHarpy" Caption="Harpy"/>
     <GuideEntityEmbed Entity="MobVox" Caption="Vox"/>
-    <GuideEntityEmbed Entity="MobYowie" Caption="Yowie"/>
     <GuideEntityEmbed Entity="MobGingerbread" Caption="Gingerbread"/>
   </Box>
 

@@ -24,7 +24,7 @@ public sealed class HeartSystem : EntitySystem
 
     private void HandleRemoval(EntityUid uid, HeartComponent _, ref OrganRemovedFromBodyEvent args)
     {
-        if (TerminatingOrDeleted(uid) || TerminatingOrDeleted(args.OldBody))
+        if (TerminatingOrDeleted(args.OldBody))
             return;
 
         // TODO: Add some form of very violent bleeding effect.

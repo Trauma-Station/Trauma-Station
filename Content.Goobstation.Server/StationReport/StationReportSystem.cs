@@ -36,6 +36,5 @@ public sealed class StationReportSystem : EntitySystem
     public void BroadcastStationReport(string? stationReportText)
     {
         RaiseNetworkEvent(new StationReportEvent(stationReportText));//to send to client
-        RaiseLocalEvent(new StationReportEvent(stationReportText));//to send to discord intergration
     }
 }

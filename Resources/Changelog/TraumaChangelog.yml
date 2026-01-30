@@ -1855,3 +1855,248 @@ Entries:
   id: 227
   time: '2026-01-24T23:14:35.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/456
+- author: SpeltIncorrectyl
+  changes:
+  - type: Tweak
+    message: Renamed 'Law Bringer' to 'Order' to fit in more with the 'Justice'
+  id: 228
+  time: '2026-01-24T23:44:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/484
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed bullets always targeting a random part, now they will go where you
+      aim if you are very close.
+  id: 229
+  time: '2026-01-24T23:59:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/482
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Re-enabled limb targeting random miss chances.
+  - type: Remove
+    message: The Phantom Pain
+  id: 230
+  time: '2026-01-25T09:30:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/490
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed bullets having 2 lights instead of 1.
+  id: 231
+  time: '2026-01-25T10:41:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/496
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      All crew get hypoports by default. The No Hypoport trait is now an
+      opt-out.
+  id: 232
+  time: '2026-01-25T10:59:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/497
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Nukies no longer get xenobio or maxcaps for free.
+  id: 233
+  time: '2026-01-25T11:27:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/498
+- author: deltanedas
+  changes:
+  - type: Add
+    message: You can now get a hold of yourself.
+  id: 234
+  time: '2026-01-25T11:34:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/500
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the FOXDIE retrovirus, traitor virologists can buy it and sample a
+      target's DNA. It will only kill targets with sampled DNA, being
+      transmitted harmlessly by everyone else.
+  id: 235
+  time: '2026-01-25T15:36:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/501
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: NTR report now shows the round ID at the end
+  id: 236
+  time: '2026-01-25T19:17:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/486
+- author: Armok
+  changes:
+  - type: Tweak
+    message: 'Warden shotgun: Damage decreased'
+  - type: Tweak
+    message: 'Warden shotgun: Ammo Cap increased'
+  - type: Tweak
+    message: >-
+      adjusted almost every single laser weapon to be in line with laser sec and
+      occupy its own niche
+  - type: Add
+    message: grille and lattice sprites
+  id: 237
+  time: '2026-01-25T19:49:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/488
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Station Radios can now be muted by streamer mode.
+  id: 238
+  time: '2026-01-25T22:55:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/517
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: Facehuggers can now infect if manually put onto someone.
+  id: 239
+  time: '2026-01-26T08:24:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/523
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed canceling lathe recipes spamming sounds.
+  id: 240
+  time: '2026-01-26T10:57:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/526
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed ancient xenos attacking real xenos.
+  id: 241
+  time: '2026-01-26T11:48:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/528
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Lighters can be toggled faster.
+  - type: Tweak
+    message: Made PKA sounds much quieter.
+  id: 242
+  time: '2026-01-26T12:01:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/529
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed ripleyMK2 being unbuildable
+  id: 243
+  time: '2026-01-26T12:25:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/530
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed AP weapons ignoring damage increases like species downsides or
+      executions.
+  id: 244
+  time: '2026-01-26T13:11:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/531
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Massively nerfed firelock health, it now takes 100 damage (before
+      modifiers) to break instead of 500.
+  id: 245
+  time: '2026-01-26T15:23:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/532
+- author: Rouden
+  changes:
+  - type: Fix
+    message: Fixed GPS showing the station's beacons on lavaland.
+  id: 246
+  time: '2026-01-26T20:36:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/534
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed slime steroids letting you make infinite slimes, it's capped to 6
+      max now.
+  - type: Tweak
+    message: Capped slime extracts to 8 max.
+  id: 247
+  time: '2026-01-27T09:42:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/543
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to print nails below red alert.
+  id: 248
+  time: '2026-01-27T09:46:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/544
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed drones t-ray scanners not working.
+  id: 249
+  time: '2026-01-27T12:23:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/545
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added a Use In Hand mode to the interactor.
+  - type: Add
+    message: >-
+      Added verbs for the interactor to toggle settings without needing to link
+      anything.
+  id: 250
+  time: '2026-01-27T13:26:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/546
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed issues with autodoc not finishing surgeries.
+  id: 251
+  time: '2026-01-27T20:06:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/547
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed batong having half as many uses as advertised when left clicking.
+  id: 252
+  time: '2026-01-27T20:12:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/549
+- author: JohnJJohn
+  changes:
+  - type: Remove
+    message: >-
+      Removed sci from the cuck chair (they can now build all the MechBoards in
+      the exosuit fab)
+  - type: Tweak
+    message: The normal mech drill is now in the basic mech equipment research
+  id: 253
+  time: '2026-01-28T14:22:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/552
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed station radio, radio's spamming ghost chat
+  id: 254
+  time: '2026-01-28T15:45:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/551
+- author: JohnJJohn
+  changes:
+  - type: Remove
+    message: Removed Power game species (Yowie)
+  id: 255
+  time: '2026-01-28T18:32:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/553
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added splitter  facepaint marking.
+  id: 256
+  time: '2026-01-29T18:41:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/559
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed access breakers not working on cargo request consoles.
+  id: 257
+  time: '2026-01-29T19:21:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/561

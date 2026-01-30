@@ -210,9 +210,6 @@
         - !type:ReagentCondition
           reagent: Probital
           min: 20
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         amount: 5 # effectively 3 "sleeps" per 20OD, but only 1 on 10 (like with 2 syringes)
         immediate: false
       - !type:ModifyStatusEffect # kinda sleepiness
@@ -222,9 +219,6 @@
         - !type:ReagentCondition
           reagent: Probital
           min: 20
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         effectProto: ProbitalSlowdownStatusEffect
       - !type:GenericStatusEffect
         conditions:
@@ -242,9 +236,6 @@
         - !type:ReagentCondition
           reagent: Probital
           min: 20
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         key: ForcedSleep
         component: ForcedSleeping
         type: Add
@@ -256,9 +247,6 @@
         - !type:ReagentCondition
           reagent: Probital
           min: 20
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         amount: -100 # power nap
         immediate: true
       - !type:AdjustReagent
@@ -282,9 +270,6 @@
         - !type:ReagentCondition
           reagent: Mitogen
           min: 10
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         probability: 0.15
 
 - type: reagent
@@ -328,23 +313,12 @@
           types:
             Asphyxiation: -6 # intended to be stronger, but more annoying than inapr
       - !type:TakeStaminaDamage
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         amount: 3 # full syringe doesn't stamcrit (maybe it should?)
         immediate: false
       - !type:ModifyStatusEffect
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         effectProto: TirimolSlowdownStatusEffect
       - !type:ModifyParalysis # more severe effect when overdosing, doesn't matter since you want to use it on crit ppl
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Tirimol
           min: 15
@@ -378,18 +352,11 @@
         damage:
           groups:
             Brute: 0.1
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Musiver
           min: 20
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Blunt: 5
@@ -414,18 +381,11 @@
         damage:
           groups:
             Brute: 0.1
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Tehifin
           min: 10
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Blunt: 5
@@ -501,18 +461,11 @@
         damage:
           types:
             Radiation: 0.05 # very slight side effect
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Bozaide
           min: 20
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Radiation: 5
@@ -564,10 +517,6 @@
         damage:
           groups:
             Brute: 0.5
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
 
 - type: reagent
   id: Monover
@@ -601,9 +550,6 @@
         conditions:
         - !type:BloodstreamCountCondition
           min: 1 # potential use for checking bloodstream cleanliness?
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
 
 - type: reagent
   id: Calomel
@@ -640,9 +586,6 @@
         conditions:
         - !type:MobStateCondition
           mobstate: Alive
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:HealthChange
         damage:
           types:
@@ -651,9 +594,6 @@
         - !type:ReagentCondition
           reagent: Calomel
           min: 15
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:AdjustReagent
         reagent: Calomel
         amount: -2
@@ -692,9 +632,6 @@
         - !type:ReagentCondition
           reagent: AmmoniatedMercury
           min: 10
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:HealthChange
         damage:
           types:
@@ -788,9 +725,6 @@
         - !type:ReagentCondition
           reagent: Ibuprofen
           min: 20
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:AdjustConsciousness
         conditions:
         - !type:ReagentCondition
@@ -936,9 +870,6 @@
         - !type:ReagentCondition
           reagent: SalicylicAcid
           min: 25
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
 
 - type: reagent
   id: Oxandrolone
@@ -990,9 +921,6 @@
         - !type:ReagentCondition
           reagent: Oxandrolone
           min: 25
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
 
 - type: reagent
   id: PentenicAcid
@@ -1056,10 +984,6 @@
           min: 0
           max: 35
       - !type:ModifyStatusEffect # and basically every visual/combat side effect that can be reasonably put
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         effectProto: AtropineSlowdownStatusEffect
       - !type:GenericStatusEffect
         key: Stutter
@@ -1067,9 +991,6 @@
       - !type:Jitter
       - !type:ModifyParalysis
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Atropine
           min: 35
@@ -1085,9 +1006,6 @@
         - !type:ReagentCondition
           reagent: Atropine
           min: 35
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:ModifyBloodLevel
         amount: 5
       - !type:ModifyBleed
@@ -1272,9 +1190,6 @@
         - !type:ReagentCondition
           reagent: Tramadol
           min: 15.5
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:AdjustConsciousness
         allowNewModifiers: true
         modifierType: Pain
@@ -1309,9 +1224,6 @@
         - !type:ReagentCondition
           reagent: Oxycodone
           min: 10.5
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:AdjustConsciousness
         allowNewModifiers: true
         modifierType: Pain

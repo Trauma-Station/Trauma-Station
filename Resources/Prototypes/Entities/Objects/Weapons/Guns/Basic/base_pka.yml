@@ -38,6 +38,8 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/kinetic_accel.ogg
+      params: # Trauma - no earrape
+        volume: -5
     projectileSpeed: 25
   - type: AmmoCounter
   - type: Appearance
@@ -52,6 +54,8 @@
     rechargeCooldown: 0.5 #Goobstation
     rechargeSound:
       path: /Audio/Weapons/Guns/MagIn/kinetic_reload.ogg
+      params: # Trauma - no earrape
+        volume: -5
   - type: BasicEntityAmmoProvider
     proto: BulletKinetic
     capacity: 1

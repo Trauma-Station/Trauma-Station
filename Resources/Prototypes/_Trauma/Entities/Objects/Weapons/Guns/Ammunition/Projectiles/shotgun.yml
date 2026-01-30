@@ -1,0 +1,22 @@
+- type: entity
+  parent: BaseBullet
+  id: PelletShotgunBreaching
+  categories: [ HideSpawnMenu ]
+  name: pellet (.50)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 5
+        Structural: 35
+      armorPenetration: 0.5 # Give it some use in actual combat
+
+- type: entity
+  parent: PelletShotgunBreaching
+  id: PelletShotgunBreachingSpread
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: PelletShotgunBreaching
+    count: 6
+    spread: 15

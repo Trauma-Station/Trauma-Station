@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: ER-5 Torrent
+  name: energy SMG
   parent: [ BaseWeaponCustomCell, BaseSecurityContraband ]
   id: WeaponLaserCellSMG
-  description: A high-tech laser SMG, compatible with specialized SMG power cells.
+  description: A laser SMG, compatible with specialized SMG power cells.
   components:
   - type: Item
     size: Large
@@ -61,24 +61,25 @@
 
 
 - type: entity
-  name:  ES-7 Multilens
+  name:  energy sniper
   parent: [ BaseWeaponCustomCell, BaseGunWieldable, BaseSecurityContraband ]
   id: WeaponLaserCellSniper
-  description: A high-tech burst laser sniper rifle, compatible with specialized sniper power cells.
+  description: A laser sniper rifle, very heavy and slow to fire but excellent for holding a position.
   components:
   - type: Item
     size: Huge
     shape:
     - 0,0,6,1
+  - type: ClothingSpeedModifier
+    walkModifier: 0.75
+    sprintModifier: 0.75
+  - type: HeldSpeedModifier
   - type: Gun
-    burstFireRate: 10
-    shotsPerBurst: 3
-    burstCooldown: 0.8
-    fireRate: 0.8
-    lockOnTargetBurst: true
-    selectedMode: Burst
+    projectileSpeed: 60
+    fireRate: 0.25
+    selectedMode: FullAuto
     availableModes:
-    - Burst
+    - FullAuto
     soundGunshot:
       path: /Audio/_Goobstation/Weapons/Guns/Gunshots/laser_lmg.ogg
   - type: ItemSlots
@@ -128,10 +129,10 @@
 
 
 - type: entity
-  name: EG-1 Taro
+  name: energy revolver
   parent: [ BaseWeaponCustomCellSmall, BaseSecurityContraband ]
   id: WeaponLaserCellRevolver
-  description: A high-tech laser revolver, compatible with specialized revolver power cells.
+  description: A laser revolver, compatible with specialized revolver power cells.
   components:
   - type: Item
     size: Small
@@ -143,7 +144,7 @@
     - Sidearm
   - type: Gun
     selectedMode: SemiAuto
-    fireRate: 1.5 # Goobstation
+    fireRate: 2 # Trauma, was 1.5
     availableModes:
     - SemiAuto
     soundGunshot:
@@ -202,7 +203,7 @@
 
 
 - type: entity
-  name: EL-20 HAMRR
+  name: energy LMG
   parent: [BaseItem, BaseSecurityContraband]
   id: WeaponLaserLMG
   description: A high-tech laser LMG, that draws power from specialized backpack.

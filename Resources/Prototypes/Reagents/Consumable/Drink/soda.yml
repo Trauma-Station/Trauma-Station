@@ -310,7 +310,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [Slime,  Yowie] # Goob - added Yowie
+          type: [Slime]
           inverted: true
         damage:
           types:

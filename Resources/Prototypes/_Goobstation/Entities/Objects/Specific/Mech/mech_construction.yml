@@ -61,6 +61,10 @@
   - type: Sprite
     state: ripleymkii_harness+o
     noRot: true
+  - type: Construction
+    graph: RipleyMKIIHarness
+    node: start
+    defaultTarget: ripleymkiiHarness
 
 - type: entity
   id: RipleyMKIIChassis

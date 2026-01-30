@@ -9,3 +9,4 @@ entity-effect-condition-guidebook-cosmic-cultist = the target is a cosmic cultis
 entity-effect-condition-shadowling-or-thrall = target is a shadowling or thrall
 entity-effect-condition-not-shadowling-or-thrall = target is not a shadowling or thrall
 entity-condition-guidebook-is-humanoid = target is humanoid
+entity-condition-guidebook-hypoport-target = target can receive a hypoport

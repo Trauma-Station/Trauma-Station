@@ -23,10 +23,10 @@ public record struct DiseaseEffectEvent(DiseaseEffectComponent Comp, Entity<Dise
 public record struct DiseaseEffectFailedEvent(DiseaseEffectComponent Comp, Entity<DiseaseComponent> Disease, Entity<DiseaseCarrierComponent> Ent);
 
 /// <summary>
-/// This event is raised on entities that got a new disease.
+/// This event is raised on the carrier and disease after being infected with a new disease.
 /// </summary>
 [ByRefEvent]
-public record struct DiseaseGainedEvent(Entity<DiseaseComponent> Disease);
+public record struct DiseaseGainedEvent(Entity<DiseaseComponent> Disease, Entity<DiseaseCarrierComponent> Carrier);
 
 /// <summary>
 /// This event is raised on entities which just lost a disease.

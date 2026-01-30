@@ -282,7 +282,8 @@
         components:
         - type: Emag
           emagType: Access
-          validTargets:
+        - type: EmagWhitelist
+          whitelist:
             components:
             - Airlock
         soundStateActivate:

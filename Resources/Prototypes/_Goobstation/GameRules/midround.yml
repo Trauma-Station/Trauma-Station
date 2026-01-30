@@ -628,7 +628,6 @@
   - type: AntagLoadProfileRule
     speciesOverride: Human
     speciesOverrideBlacklist:
-    - Yowie
     - IPC
     - Diona
     - Harpy

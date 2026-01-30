@@ -112,7 +112,7 @@ public abstract class SharedWieldableSystem : EntitySystem
     {
         if (TryComp<WieldableComponent>(uid, out var wieldable) &&
             !wieldable.Wielded &&
-            !HasComp<NoWieldNeededComponent>(args.User) // Goobstation - Yowies
+            !HasComp<NoWieldNeededComponent>(args.User) // Goobstation
             )
         {
             args.Cancel();
