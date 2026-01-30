@@ -229,6 +229,7 @@
     - DoorBumpOpener
     - AnomalyHost
   # <Trauma>
+  - type: BloodSplatterer
   - type: Targeting
   - type: CanEscapeInventory
   - type: Consciousness
@@ -324,7 +325,6 @@
   - type: FireVisuals
     alternateState: Standing
   # <Trauma>
-  - type: BloodSplatterer
   - type: Carriable
   - type: FootprintOwner
   - type: CPRTraining

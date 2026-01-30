@@ -157,6 +157,7 @@
     enabled: true
     groups:
     - XenomorphAccess
+  - type: BloodSplatterer # Trauma
 
 
 - type: entity
