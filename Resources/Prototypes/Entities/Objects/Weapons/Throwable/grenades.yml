@@ -94,7 +94,7 @@
   - type: Sprite
     sprite: Objects/Weapons/Grenades/syndgrenade.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.1
   - type: TimerTrigger
     delay: 5
   - type: ExplodeOnTrigger

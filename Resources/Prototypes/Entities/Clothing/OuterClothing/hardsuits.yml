@@ -1116,9 +1116,9 @@
   - type: ModifyDelayedKnockdown # Goobstation
     cancel: true
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.5
+    damageCoefficient: 0.1
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.1
   - type: Tag # Goobstation
     tags:
     - Hardsuit
@@ -1356,7 +1356,7 @@
     heatingCoefficient: 0.001
     coolingCoefficient: 0.001
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.1
   - type: FireProtection
     reduction: 0.8
   - type: StaminaResistance # Goobstation - Start
