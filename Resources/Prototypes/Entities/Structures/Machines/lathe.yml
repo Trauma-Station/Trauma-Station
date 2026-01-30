@@ -380,8 +380,12 @@
     - PowerAugments
     - ToolAugments
     - PowerCells
-    - TraumaCybernetics # Trauma
-    - TraumaMechParts # Trauma
+    # <Trauma>
+    - TraumaCybernetics
+    - TraumaMechParts
+    - MechBoardsCargo
+    - MechBoardsSecurity
+    # </Trauma>
   - type: EmagLatheRecipes # Goobstation
     emagStaticPacks:
     - MechWeaponsSecurityStatic

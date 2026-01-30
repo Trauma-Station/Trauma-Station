@@ -16,7 +16,6 @@
   - AnimalTranslator
   - ValyrianStandardTranslator
   - NewKinPidginTranslator
-  - YowKriolTranslator # goob edit - yowie language
 
 - type: latheRecipePack
   id: TranslatorImplanters
@@ -31,4 +30,3 @@
   - ValyrianStandardTranslatorImplanter
   - ChevalTranslatorImplanter
   - NewKinPidginTranslatorImplanter
-  - YowKriolTranslatorImplanter # goob edit - yowie language

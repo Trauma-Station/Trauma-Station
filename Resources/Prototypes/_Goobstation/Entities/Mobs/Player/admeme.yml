@@ -18,7 +18,6 @@
   - Monkey
   - Kobold
   - Abductor
-  - Yowie
   - IPC
   - Diona
   - Harpy
@@ -31,6 +30,8 @@
   - Vulpkanin
   - SlimePerson
   - Dwarf
+  - Feroxi
+  - Chitinid
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false

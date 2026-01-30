@@ -1,5 +1,5 @@
 - type: entity
-  id: WeaponProtoKineticAcceleratorBase
+  id: WeaponProtoKineticAcceleratorBaseFake # Trauma - use _Lavaland one
   abstract: true
   parent: BaseItem
   components:
@@ -7,39 +7,23 @@
     sprite: Objects/Weapons/Guns/Basic/kinetic_accelerator.rsi
   - type: Item
     sprite: Objects/Weapons/Guns/Basic/kinetic_accelerator.rsi
-    size: Large # Lavaland Change
+    size: Large
     shape:
-    - 0,0,1,1
-  # Lavaland Change start
-  - type: WeaponAttachment
-    lightActionPrototype: ActionTogglePKALight
-  - type: PressureDamageChange
-    applyToMelee: false
-  - type: Multishot # Goobstation V
-    missChance: 0.4
-    spreadMultiplier: 3
-    spreadAddition: 20
-  - type: UpgradeableGun
-    whitelist:
-      tags:
-      - PKAUpgrade
-  #- type: GunWieldBonus
-  #  minAngle: -43
-  #  maxAngle: -43
-  #- type: Wieldable
-  # Lavaland Change end
+    - 0,0,2,1
+  - type: GunWieldBonus
+    minAngle: -43
+    maxAngle: -43
+  - type: Wieldable
   - type: Gun
-    fireRate: 0.7 # Goobstation - if pkas are performing too well just revert this to 0.5 for a universal 30% nerf
+    fireRate: 0.5
     selectedMode: SemiAuto
-    #angleDecay: 45 # Lavaland Change
-    minAngle: 3 # Lavaland Change
-    maxAngle: 5 # Lavaland Change
+    angleDecay: 45
+    minAngle: 44
+    maxAngle: 45
     availableModes:
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/kinetic_accel.ogg
-      params: # Trauma - no earrape
-        volume: -5
     projectileSpeed: 25
   - type: AmmoCounter
   - type: Appearance
@@ -51,11 +35,9 @@
           False: { visible: True }
         #todo: add other 'empty' animations
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 0.5 #Goobstation
+    rechargeCooldown: 0.75
     rechargeSound:
       path: /Audio/Weapons/Guns/MagIn/kinetic_reload.ogg
-      params: # Trauma - no earrape
-        volume: -5
   - type: BasicEntityAmmoProvider
     proto: BulletKinetic
     capacity: 1
@@ -68,19 +50,3 @@
     - Belt
   - type: UseDelay
     delay: 1
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Steel: 250
-      Glass: 125
-      Silver: 25
-  - type: ItemSlots # Trauma
-  - type: MeleeWeapon
-    wideAnimationRotation: 270
-    attackRate: 1
-    angle: 0
-    range: 1.1
-    damage:
-      types:
-        Blunt: 5
-  - type: AltFireMelee
-    attackType: Heavy

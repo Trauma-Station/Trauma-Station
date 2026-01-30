@@ -25,7 +25,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Popups;
-using Content.Shared.Weapons.Marker;
 using Robust.Shared.Timing;
 
 namespace Content.Lavaland.Shared.Weapons.Block;

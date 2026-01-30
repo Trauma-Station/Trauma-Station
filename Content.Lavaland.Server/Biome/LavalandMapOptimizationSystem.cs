@@ -40,12 +40,13 @@ public sealed class LavalandMapOptimizationSystem : EntitySystem
 
     private void OnChunkUnloadAttempt(Entity<BiomeOptimizeComponent> ent, ref ChunkUnloadAttemptEvent args)
     {
+        // We don't unload chunks in the preloaded area since it's expensive.
         args.Cancelled |= ent.Comp.LoadedChunks.Contains(args.Chunk);
     }
 
     private void OnChunkLoadAttempt(Entity<BiomeOptimizeComponent> ent, ref ChunkLoadAttemptEvent args)
     {
-        // We load only specified area.
+        // We load only specified area around the origin.
         args.Cancelled |= !ent.Comp.LoadArea.Contains(args.Chunk);
     }
 }

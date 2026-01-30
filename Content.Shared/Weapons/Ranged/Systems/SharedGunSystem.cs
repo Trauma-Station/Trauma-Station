@@ -653,10 +653,6 @@ public abstract partial class SharedGunSystem : EntitySystem
                 for (var i = 1; i < ammoSpreadComp.Count; i++)
                 {
                     var newuid = PredictedSpawnAtPosition(ammoSpreadComp.Proto, fromEnt);
-                    // <Lavaland>
-                    var shotEv = new ProjectileShotEvent(newuid);
-                    RaiseLocalEvent(gunUid, ref shotEv);
-                    // </Lavaland>
                     SetProjectilePerfectHitEntities(newuid, user, new MapCoordinates(toMap, fromMap.MapId)); // Goob
                     ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation
                     shotProjectiles.Add(newuid);
@@ -664,10 +660,6 @@ public abstract partial class SharedGunSystem : EntitySystem
             }
             else
             {
-                // <Lavaland>
-                var shotEv = new ProjectileShotEvent(ammoEnt);
-                RaiseLocalEvent(gunUid, ref shotEv);
-                // </Lavaland>
                 ShootOrThrow(ammoEnt, mapDirection, gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation
                 shotProjectiles.Add(ammoEnt);
             }
@@ -705,6 +697,11 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             var ev = new PlayerShotProjectileEvent(uid, userUid);
             RaiseLocalEvent(ref ev);
+        }
+        if (gunUid is {} gun)
+        {
+            var shotEv = new ProjectileShotEvent(uid);
+            RaiseLocalEvent(gun, ref shotEv);
         }
         // </Trauma>
     }

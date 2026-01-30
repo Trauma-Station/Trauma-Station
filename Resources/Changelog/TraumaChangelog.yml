@@ -2011,3 +2011,105 @@ Entries:
   id: 246
   time: '2026-01-26T20:36:04.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/534
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed slime steroids letting you make infinite slimes, it's capped to 6
+      max now.
+  - type: Tweak
+    message: Capped slime extracts to 8 max.
+  id: 247
+  time: '2026-01-27T09:42:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/543
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to print nails below red alert.
+  id: 248
+  time: '2026-01-27T09:46:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/544
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed drones t-ray scanners not working.
+  id: 249
+  time: '2026-01-27T12:23:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/545
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added a Use In Hand mode to the interactor.
+  - type: Add
+    message: >-
+      Added verbs for the interactor to toggle settings without needing to link
+      anything.
+  id: 250
+  time: '2026-01-27T13:26:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/546
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed issues with autodoc not finishing surgeries.
+  id: 251
+  time: '2026-01-27T20:06:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/547
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed batong having half as many uses as advertised when left clicking.
+  id: 252
+  time: '2026-01-27T20:12:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/549
+- author: JohnJJohn
+  changes:
+  - type: Remove
+    message: >-
+      Removed sci from the cuck chair (they can now build all the MechBoards in
+      the exosuit fab)
+  - type: Tweak
+    message: The normal mech drill is now in the basic mech equipment research
+  id: 253
+  time: '2026-01-28T14:22:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/552
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed station radio, radio's spamming ghost chat
+  id: 254
+  time: '2026-01-28T15:45:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/551
+- author: JohnJJohn
+  changes:
+  - type: Remove
+    message: Removed Power game species (Yowie)
+  id: 255
+  time: '2026-01-28T18:32:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/553
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added splitter  facepaint marking.
+  id: 256
+  time: '2026-01-29T18:41:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/559
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed access breakers not working on cargo request consoles.
+  id: 257
+  time: '2026-01-29T19:21:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/561
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: 'Lavaland 2: No job split between salvage specialists.'
+  - type: Tweak
+    message: 'Lavaland 2: Points vendor is mostly untouched.'
+  - type: Remove
+    message: Reverted passive regen and other slop.
+  - type: Tweak
+    message: Increased default wideswing stamina cost to 10, up from 5.
+  id: 258
+  time: '2026-01-30T08:01:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/557

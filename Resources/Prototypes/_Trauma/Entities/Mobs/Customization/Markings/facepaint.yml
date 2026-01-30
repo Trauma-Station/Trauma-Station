@@ -1,0 +1,9 @@
+- type: marking
+  id: FacePaintSplitter
+  bodyPart: Face
+  markingCategory: Overlay
+  speciesRestriction: [Human, Dwarf]
+  forcedColoring: true
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/facepaint.rsi
+    state: splitter

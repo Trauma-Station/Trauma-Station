@@ -11,7 +11,6 @@ public enum GpsUiKey
 }
 
 [Serializable, NetSerializable]
-
 public sealed class GpsEntry(
     NetEntity netEntity,
     string? name,

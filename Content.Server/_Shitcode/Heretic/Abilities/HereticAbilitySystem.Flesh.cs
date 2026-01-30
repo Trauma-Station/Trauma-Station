@@ -83,7 +83,7 @@ public sealed partial class HereticAbilitySystem
         if (args.Volume <= FixedPoint2.Zero)
             return;
 
-        if (!Heretic.TryGetHereticComponent(ent, out var heretic, out _) || heretic.PathStage <= 0)
+        if (!Heretic.TryGetHereticComponent(ent.Owner, out var heretic, out _) || heretic.PathStage <= 0)
             return;
 
         var multiplier = GetMultiplier((ent.Owner, ent.Comp), heretic, ref args, out var stage, out var multipliersApplied);
@@ -203,7 +203,7 @@ public sealed partial class HereticAbilitySystem
         if (damage <= 0)
             return;
 
-        if (!Heretic.TryGetHereticComponent(ent, out var heretic, out _) || !heretic.Ascended)
+        if (!Heretic.TryGetHereticComponent(ent.Owner, out var heretic, out _) || !heretic.Ascended)
             return;
 
         ent.Comp.TrackedDamage += damage;

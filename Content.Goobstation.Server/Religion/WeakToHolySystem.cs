@@ -110,7 +110,7 @@ public sealed class WeakToHolySystem : EntitySystem
             return;
         }
 
-        if (_heretic.TryGetHereticComponent(uid, out var heretic, out _) && heretic.Ascended)
+        if (_heretic.TryGetHereticComponent(uid.Owner, out var heretic, out _) && heretic.Ascended)
         {
             args.ShouldTakeHoly = true;
             return;
