@@ -1,5 +1,5 @@
-using Content.Shared.Maps;
 using Robust.Shared.Prototypes;
+using Content.Shared.Maps;
 using Content.Shared.Decals;
 
 namespace Content.Shared.Spawners.Components;
