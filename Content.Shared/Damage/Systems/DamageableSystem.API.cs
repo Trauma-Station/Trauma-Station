@@ -78,20 +78,21 @@ public sealed partial class DamageableSystem
         bool interruptsDoAfters = true,
         EntityUid? origin = null,
         bool ignoreGlobalModifiers = false,
-        // <Shitmed>
+        // <Trauma>
         bool canBeCancelled = false,
         float partMultiplier = 1.00f,
         TargetBodyPart? targetPart = null,
         bool ignoreBlockers = false,
         SplitDamageBehavior splitDamage = SplitDamageBehavior.Split,
-        bool canMiss = true
-        // </Shitmed>
+        bool canMiss = true,
+        bool increaseOnly = false
+        // </Trauma>
     )
     {
         //! Empty just checks if the DamageSpecifier is _literally_ empty, as in, is internal dictionary of damage types is empty.
         // If you deal 0.0 of some damage type, Empty will be false!
         return TryChangeDamage(ent, damage, out _, ignoreResistances, interruptsDoAfters, origin, ignoreGlobalModifiers,
-            canBeCancelled, partMultiplier, targetPart, ignoreBlockers, splitDamage, canMiss); // Shitmed
+            canBeCancelled, partMultiplier, targetPart, ignoreBlockers, splitDamage, canMiss, increaseOnly); // Trauma
     }
 
     /// <summary>
@@ -113,20 +114,21 @@ public sealed partial class DamageableSystem
         bool interruptsDoAfters = true,
         EntityUid? origin = null,
         bool ignoreGlobalModifiers = false,
-        // <Shitmed>
+        // <Trauma>
         bool canBeCancelled = false,
         float partMultiplier = 1.00f,
         TargetBodyPart? targetPart = null,
         bool ignoreBlockers = false,
         SplitDamageBehavior splitDamage = SplitDamageBehavior.Split,
-        bool canMiss = true
-        // </Shitmed>
+        bool canMiss = true,
+        bool increaseOnly = false
+        // </Trauma>
     )
     {
         //! Empty just checks if the DamageSpecifier is _literally_ empty, as in, is internal dictionary of damage types is empty.
         // If you deal 0.0 of some damage type, Empty will be false!
         newDamage = ChangeDamage(ent, damage, ignoreResistances, interruptsDoAfters, origin, ignoreGlobalModifiers,
-            canBeCancelled, partMultiplier, targetPart, ignoreBlockers, splitDamage, canMiss); // Shitmed
+            canBeCancelled, partMultiplier, targetPart, ignoreBlockers, splitDamage, canMiss, increaseOnly); // Trauma
         return !newDamage.Empty;
     }
 
@@ -148,14 +150,15 @@ public sealed partial class DamageableSystem
         bool interruptsDoAfters = true,
         EntityUid? origin = null,
         bool ignoreGlobalModifiers = false,
-        // <Shitmed>
+        // <Trauma>
         bool canBeCancelled = false,
         float partMultiplier = 1.00f,
         TargetBodyPart? targetPart = null,
         bool ignoreBlockers = false,
         SplitDamageBehavior splitDamage = SplitDamageBehavior.Split,
-        bool canMiss = true
-        // </Shitmed>
+        bool canMiss = true,
+        bool increaseOnly = false // for ignoreResistances=false, only use increased damage modifiers.
+        // </Trauma>
     )
     {
         var damageDone = new DamageSpecifier();
@@ -181,10 +184,10 @@ public sealed partial class DamageableSystem
             damage.TrimZeros();
 
             var appliedDamage = ApplyDamageToBodyParts(ent, damage, origin, ignoreResistances,
-                interruptsDoAfters, targetPart, partMultiplier, ignoreBlockers, splitDamage, canMiss);
+                interruptsDoAfters, targetPart, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly);
 
             var appliedVitalDamage = ApplyDamageToBodyParts(ent, vitalDamage, origin, ignoreResistances,
-                interruptsDoAfters, TargetBodyPart.Vital, partMultiplier, ignoreBlockers, splitDamage, canMiss);
+                interruptsDoAfters, TargetBodyPart.Vital, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly);
 
             if (appliedDamage != null)
                 damageDone += appliedDamage;
@@ -198,12 +201,14 @@ public sealed partial class DamageableSystem
         // Apply resistances
         if (!ignoreResistances)
         {
+            // <Trauma> - for increaseOnly, ignore damage reductions. replaced damage with modified everywhere below this
+            var modified = increaseOnly ? new DamageSpecifier(damage) : damage;
             if (
                 ent.Comp.DamageModifierSetId != null &&
                 _prototypeManager.Resolve(ent.Comp.DamageModifierSetId, out var modifierSet)
             )
-                damage = DamageSpecifier.ApplyModifierSet(damage,
-                    DamageSpecifier.PenetrateArmor(modifierSet, damage.ArmorPenetration)); // Goob edit
+                modified = DamageSpecifier.ApplyModifierSet(modified,
+                    DamageSpecifier.PenetrateArmor(modifierSet, modified.ArmorPenetration)); // Goob edit
 
             // <Shitmed>
             if (TryComp<BodyPartComponent>(ent, out var bodyPart))
@@ -212,24 +217,40 @@ public sealed partial class DamageableSystem
                 if (bodyPart.Body != null)
                 {
                     // First raise the event on the parent to apply any parent modifiers
-                    var parentEv = new DamageModifyEvent(bodyPart.Body.Value, damage, origin, target);
+                    var parentEv = new DamageModifyEvent(bodyPart.Body.Value, modified, origin, target);
                     RaiseLocalEvent(bodyPart.Body.Value, parentEv);
-                    damage = parentEv.Damage;
+                    modified = parentEv.Damage;
                 }
 
                 // Then raise on the part itself for any part-specific modifiers
-                var ev = new DamageModifyEvent(ent, damage, origin, target);
+                var ev = new DamageModifyEvent(ent, modified, origin, target);
                 RaiseLocalEvent(ent, ev);
-                damage = ev.Damage;
+                modified = ev.Damage;
             }
             else
             {
                 // Not a body part, just apply modifiers normally
-                var ev = new DamageModifyEvent(ent, damage, origin);
+                var ev = new DamageModifyEvent(ent, modified, origin);
                 RaiseLocalEvent(ent, ev);
-                damage = ev.Damage;
+                modified = ev.Damage;
             }
             // </Shitmed>
+
+            if (increaseOnly)
+            {
+                // now change damage only where it increased
+                var dest = damage.DamageDict;
+                foreach (var (type, value) in modified.DamageDict)
+                {
+                    if (value > dest[type])
+                        dest[type] = value;
+                }
+            }
+            else
+            {
+                damage = modified;
+            }
+            // </Trauma>
 
             if (damage.Empty)
                 return damageDone;

@@ -192,7 +192,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
         spawned = false;
 
         if (!Resolve(summoner, ref summoner.Comp, false) ||
-            !_heretic.TryGetHereticComponent(summoner, out var heretic, out var mind) ||
+            !_heretic.TryGetHereticComponent(summoner.Owner, out var heretic, out var mind) ||
             heretic.CurrentPath != "Cosmos" || checkAscend && !heretic.Ascended)
             return null;
 

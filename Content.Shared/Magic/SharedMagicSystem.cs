@@ -1,7 +1,7 @@
 // <Trauma>
 // holy shit just make your own system, shitters
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Goobstation.Common.Changeling;
+using Content.Goobstation.Common.Magic;
 using Content.Goobstation.Common.Religion;
 using Content.Shared._Goobstation.Wizard;
 using Content.Shared._Goobstation.Wizard.BindSoul;
@@ -678,9 +678,12 @@ public abstract class SharedMagicSystem : EntitySystem
             return;
         }
 
+        // raise blocker event (why the fuck was this done as a list lol)
+        var blockEv = new BeforeMindSwappedEvent();
+        RaiseLocalEvent(ev.Target, ref blockEv);
+
         List<(Type, string)> blockers = new()
         {
-            (typeof(ChangelingComponent), "changeling"), // TODO change to ChangelingIdentityComponent
             (typeof(GhoulComponent), "ghoul"),
             // Mindswapping with aghost real.
             (typeof(GhostComponent), "ghost"),
@@ -688,6 +691,13 @@ public abstract class SharedMagicSystem : EntitySystem
             (typeof(TimedDespawnComponent), "temporary"),
             (typeof(FadingTimedDespawnComponent), "temporary"),
         };
+
+        // someone should nuke the list and make all of the components use the event. that someone is not me.
+        if (blockEv.Cancelled)
+        {
+            _popup.PopupClient(Loc.GetString($"spell-fail-mindswap-{blockEv.Message}"), ev.Performer, ev.Performer);
+            return;
+        }
 
         if (blockers.Any(x => CheckMindswapBlocker(x.Item1, x.Item2)))
             return;

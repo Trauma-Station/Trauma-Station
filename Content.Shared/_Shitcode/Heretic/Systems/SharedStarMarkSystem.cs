@@ -245,7 +245,7 @@ public abstract class SharedStarMarkSystem : EntitySystem
     public bool TryApplyStarMark(Entity<MobStateComponent?> entity)
     {
         if (!Resolve(entity, ref entity.Comp, false) ||
-            _heretic.TryGetHereticComponent(entity, out var heretic, out _) && heretic.CurrentPath == "Cosmos" ||
+            _heretic.TryGetHereticComponent(entity.Owner, out var heretic, out _) && heretic.CurrentPath == "Cosmos" ||
             HasComp<GhoulComponent>(entity))
             return false;
 

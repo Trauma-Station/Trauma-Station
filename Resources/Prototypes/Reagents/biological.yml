@@ -154,18 +154,10 @@
     Poison:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Poison: 4
       - !type:Vomit
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         probability: 0.25
 
 - type: reagent

@@ -318,12 +318,6 @@
   name: guide-entry-sop-ntr
   text: "/ServerInfo/_Goobstation/Guidebook/SoP/Jobs/Command/NanotrasenRepSOP.xml"
 
-# Trauma - removed BSO
-#- type: guideEntry
-#  id: SOPBlueshieldOfficer
-#  name: guide-entry-sop-bso
-#  text: "/ServerInfo/_Goobstation/Guidebook/SoP/Jobs/Command/BlueshieldOfficerSOP.xml"
-
 - type: guideEntry
   id: SOPCaptain
   name: guide-entry-sop-captain

@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.Changeling;
+using Content.Goobstation.Common.Body;
 using Content.Shared._Shitmed.Body.Organ;
 using Content.Shared.Body.Systems;
 // </Trauma>
@@ -49,8 +49,13 @@ public sealed class BrainSystem : EntitySystem
     // <Shitmed> - do nothing for lings, use Active logic and don't do anything if a body already has a brain
     private void OnRemoved(EntityUid uid, BrainComponent brain, ref OrganRemovedFromBodyEvent args)
     {
-        if (HasComp<ChangelingComponent>(args.OldBody)) // no cheesing lings by removing brain
+        // <Goob>
+        var attemptEv = new BeforeBrainRemovedEvent();
+        RaiseLocalEvent(args.OldBody, ref attemptEv);
+
+        if (attemptEv.Blocked)
             return;
+        // </Goob>
 
         brain.Active = false;
         Dirty(uid, brain);
@@ -65,8 +70,13 @@ public sealed class BrainSystem : EntitySystem
 
     private void OnAdded(EntityUid uid, BrainComponent brain, ref OrganAddedToBodyEvent args)
     {
-        if (HasComp<ChangelingComponent>(args.Body)) // no powergaming crew becoming lings
+        // <Goob>
+        var attemptEv = new BeforeBrainAddedEvent();
+        RaiseLocalEvent(args.Body, ref attemptEv);
+
+        if (attemptEv.Blocked)
             return;
+        // </Goob>
 
         brain.Active = true;
         Dirty(uid, brain);

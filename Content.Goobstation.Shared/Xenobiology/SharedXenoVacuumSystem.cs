@@ -9,6 +9,7 @@
 using Content.Goobstation.Shared.Xenobiology.Components;
 using Content.Goobstation.Shared.Xenobiology.Components.Equipment;
 using Content.Shared.Coordinates;
+using Content.Shared.Destructible;
 using Content.Shared.Emag.Components;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Examine;
@@ -18,10 +19,10 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Timing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -35,19 +36,23 @@ namespace Content.Goobstation.Shared.Xenobiology;
 /// </summary>
 public abstract class SharedXenoVacuumSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly ThrowingSystem _throw = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+
+    private const string ReleaseDelayId = "release";
+    private const string SuctionDelayId = "suction";
 
     private EntityQuery<EmaggedComponent> _emaggedQuery;
     private EntityQuery<MobStateComponent> _mobQuery;
+    private EntityQuery<UseDelayComponent> _delayQuery;
     private EntityQuery<XenoVacuumTankComponent> _tankQuery;
 
     public override void Initialize()
@@ -56,13 +61,13 @@ public abstract class SharedXenoVacuumSystem : EntitySystem
 
         _emaggedQuery = GetEntityQuery<EmaggedComponent>();
         _mobQuery = GetEntityQuery<MobStateComponent>();
+        _delayQuery = GetEntityQuery<UseDelayComponent>();
         _tankQuery = GetEntityQuery<XenoVacuumTankComponent>();
 
-        // Init
         SubscribeLocalEvent<XenoVacuumTankComponent, ComponentInit>(OnTankInit);
-
-        // Interaction
         SubscribeLocalEvent<XenoVacuumTankComponent, ExaminedEvent>(OnTankExamined);
+        SubscribeLocalEvent<XenoVacuumTankComponent, DestructionEventArgs>(OnDestruction);
+
         SubscribeLocalEvent<XenoVacuumComponent, GotEmaggedEvent>(OnGotEmagged);
         SubscribeLocalEvent<XenoVacuumComponent, GotEquippedHandEvent>(OnEquippedHand);
         SubscribeLocalEvent<XenoVacuumComponent, GotUnequippedHandEvent>(OnUnequippedHand);
@@ -83,6 +88,12 @@ public abstract class SharedXenoVacuumSystem : EntitySystem
         args.PushMarkup(text);
     }
 
+    private void OnDestruction(Entity<XenoVacuumTankComponent> ent, ref DestructionEventArgs args)
+    {
+        // apparently ContainerManager doesn't automatically release them so
+        _container.EmptyContainer(ent.Comp.StorageTank);
+    }
+
     private void OnEquippedHand(Entity<XenoVacuumComponent> ent, ref GotEquippedHandEvent args)
     {
         SetTankNozzle(args.User, ent);
@@ -100,9 +111,9 @@ public abstract class SharedXenoVacuumSystem : EntitySystem
 
     private void OnGotEmagged(Entity<XenoVacuumComponent> ent, ref GotEmaggedEvent args)
     {
-        if (!_emag.CompareFlag(args.Type, EmagType.Interaction)
-        || _emag.CheckFlag(ent, EmagType.Interaction)
-        || _emaggedQuery.HasComp(ent))
+        if (!_emag.CompareFlag(args.Type, EmagType.Interaction) ||
+            _emag.CheckFlag(ent, EmagType.Interaction) ||
+            _emaggedQuery.HasComp(ent))
             return;
 
         args.Handled = true;
@@ -110,9 +121,13 @@ public abstract class SharedXenoVacuumSystem : EntitySystem
 
     private void OnAfterInteract(Entity<XenoVacuumComponent> ent, ref AfterInteractEvent args)
     {
+        var delay = _delayQuery.Comp(ent);
+        if (CheckDelays((ent, delay))) return;
+
         if (args.CanReach && args.Target is {} target && _mobQuery.HasComp(target))
         {
             TryDoSuction(args.User, target, ent);
+            _useDelay.TryResetDelay((ent, delay), false, SuctionDelayId);
             return;
         }
 
@@ -126,15 +141,22 @@ public abstract class SharedXenoVacuumSystem : EntitySystem
             _popup.PopupClient(popup, ent, args.User);
 
             var coords = args.Target?.ToCoordinates() ?? args.ClickLocation;
-            _throw.TryThrow(removedEnt, coords, predicted: false);
+            _throw.TryThrow(removedEnt, coords);
+
             _stun.TryUpdateParalyzeDuration(removedEnt, TimeSpan.FromSeconds(2));
             SetHTNEnabled(removedEnt, true, 2f);
         }
+
+        _useDelay.TryResetDelay((ent, delay), false, ReleaseDelayId);
 
         _audio.PlayEntity(ent.Comp.ClearSound, ent, args.User, AudioParams.Default.WithVolume(-2f));
     }
 
     #region Helpers
+
+    private bool CheckDelays(Entity<UseDelayComponent?> ent)
+        => _useDelay.IsDelayed(ent, SuctionDelayId)
+        || _useDelay.IsDelayed(ent, ReleaseDelayId);
 
     private Entity<XenoVacuumTankComponent>? GetTank(EntityUid user)
     {
@@ -177,10 +199,8 @@ public abstract class SharedXenoVacuumSystem : EntitySystem
             return false;
         }
 
-        var isAlive = _mob.IsAlive(target);
         var identity = Identity.Entity(target, EntityManager);
-        // emagging lets you suck up living people, non emagged only lets you suck up whitelisted mobs or crit/dead
-        if (!_emaggedQuery.HasComp(vacuum) && isAlive && _whitelist.IsWhitelistFail(vacuum.Comp.EntityWhitelist, target))
+        if (!_emaggedQuery.HasComp(vacuum) && _whitelist.IsWhitelistFail(vacuum.Comp.EntityWhitelist, target))
         {
             var invalidEntityPopup = Loc.GetString("xeno-vacuum-suction-fail-invalid-entity-popup", ("ent", identity));
             _popup.PopupClient(invalidEntityPopup, vacuum, user);

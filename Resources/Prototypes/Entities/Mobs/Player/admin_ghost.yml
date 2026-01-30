@@ -4,6 +4,22 @@
   name: admin observer
   categories: [ HideSpawnMenu ]
   components:
+  # <Trauma>
+  - type: Body
+    prototype: Aghost
+    thermalVisibility: false # so you can't see aghost with thermals...
+  - type: SupermatterImmune
+  - type: Speech
+    speechVerb: HolierThanThou
+  - type: Eye
+    visMask:
+      - Ghost
+      - Normal
+      - CosmicCultMonument
+      - Abductor
+  - type: Emagged # so cargo orders aren't announced and can bypass alert levels
+    emagType: All
+  # </Trauma>
   - type: ContentEye
     maxZoom: 8.916104, 8.916104
   - type: Tag
@@ -38,9 +54,6 @@
   - type: Physics
     bodyType: Kinematic # Admin ghosts should ignore the laws of physics.
     ignorePaused: true
-  - type: Body
-    prototype: Aghost
-    thermalVisibility: false # WD EDIT
   - type: Access
     groups:
     - AllAccess
@@ -111,15 +124,6 @@
   - type: Loadout
     prototypes: [ MobAghostGear ]
   - type: BypassInteractionChecks
-  - type: SupermatterImmune # Goobstation
-  - type: Speech # Goobstation
-    speechVerb: HolierThanThou
-  - type: Eye
-    visMask:
-      - Ghost
-      - Normal
-      - CosmicCultMonument # DeltaV - Cosmic Cult
-      - Abductor
   - type: ExplosionResistance
     damageCoefficient: 0
 

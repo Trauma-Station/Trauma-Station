@@ -92,3 +92,14 @@
     Steel: 50
     Plastic: 50
     Gold: 25
+
+- type: latheRecipe
+  id: FusionCore
+  parent: BaseRevGadget
+  result: FusionCore
+  materials:
+    Steel: 1000
+    Plastic: 500
+    Glass: 250
+    Gold: 750
+    Uranium: 1000

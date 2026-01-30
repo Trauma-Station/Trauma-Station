@@ -89,10 +89,6 @@
     Poison:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Poison: 2
@@ -114,7 +110,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Arachnid, Yowie ] # Goob - added Yowie
+          type: [ Arachnid ]
           inverted: true
         damage:
           types:
@@ -150,10 +146,6 @@
     Poison:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Caustic: 0.5
@@ -237,18 +229,10 @@
       metabolismRate: 0.1
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Poison: 0.05
       - !type:Emote
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         emote: Scream
         probability: 0.05
       - !type:Emote
@@ -271,10 +255,6 @@
     Poison:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Poison: 1
@@ -337,10 +317,6 @@
     Poison:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Poison: 1.5

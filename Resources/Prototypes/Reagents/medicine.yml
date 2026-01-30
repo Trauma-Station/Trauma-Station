@@ -35,9 +35,6 @@
             Poison: -1.5 # Was 1, Slight Buff as it should heal for half the amount as Dip or Stelli(GoobStation)
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Dylovene
           min: 20
@@ -60,9 +57,6 @@
         probability: 0.2
       - !type:Vomit
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Dylovene
           min: 20
@@ -116,18 +110,10 @@
     Medicine:
       effects:
       - !type:ModifyStatusEffect
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         effectProto: StatusEffectDrunk
         time: 6.0
         type: Remove
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Poison: -0.5
@@ -177,9 +163,6 @@
           Brute: -2.0 # Trauma - was -1.5
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Bicaridine
           min: 15
@@ -189,9 +172,6 @@
             Poison: 1.5
       - !type:Vomit
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Bicaridine
           min: 30
@@ -299,9 +279,6 @@
             Cold: -2 # Was 1.5, Buffed due to limb damage changes(GoobStation)
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Dermaline
           min: 10
@@ -344,9 +321,6 @@
             Bloodloss: -0.5
       - !type:HealthChange
         conditions:
-          - !type:MetabolizerTypeCondition # Goob - Yowie
-            type: [ Yowie ]
-            inverted: true
           - !type:ReagentCondition
             reagent: Dexalin
             min: 20
@@ -395,9 +369,6 @@
         amount: -3
       - !type:HealthChange
         conditions:
-          - !type:MetabolizerTypeCondition # Goob - Yowie
-            type: [ Yowie ]
-            inverted: true
           - !type:ReagentCondition
             reagent: DexalinPlus
             min: 25
@@ -469,9 +440,6 @@
             Burn: -1 # Was .5, Buffed due to limb damage changes(GoobStation)
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Epinephrine
           min: 20
@@ -539,16 +507,9 @@
           types:
             Radiation: -1
       - !type:Vomit
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         probability: 0.02
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Hyronalin
           min: 30
@@ -576,9 +537,6 @@
       effects:
       - !type:Vomit
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Ipecac
           min: 4
@@ -695,19 +653,12 @@
       metabolismRate: 0.25 #goob
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         probability: 0.3
         damage:
           types:
             Heat: 0.5
       - !type:HealthChange
         conditions:
-          - !type:MetabolizerTypeCondition # Goob - Yowie
-            type: [ Yowie ]
-            inverted: true
           - !type:ReagentCondition
             reagent: Barozine
             min: 30
@@ -717,9 +668,6 @@
       - !type:Vomit
         probability: 0.15
         conditions:
-          - !type:MetabolizerTypeCondition # Goob - Yowie
-            type: [ Yowie ]
-            inverted: true
           - !type:ReagentCondition
             reagent: Barozine
             min: 30
@@ -731,17 +679,9 @@
         component: StutteringAccent
       - !type:Jitter
       - !type:Emote
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         emote: Scream
         probability: 0.2
       - !type:PopupMessage
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         type: Local
         visualType: Large
         messages: [ "barozine-effect-skin-burning", "barozine-effect-muscle-contract" ]
@@ -810,9 +750,6 @@
             Asphyxiation: -2.5
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: PolypyryliumOligomers
           min: 30
@@ -941,9 +878,6 @@
             Poison: -4
       - !type:AdjustReagent
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Amatoxin
           min: 1
@@ -963,9 +897,6 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Poison: 2
@@ -1238,9 +1169,6 @@
             Caustic: -1.25 # 5 per u
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Sigynate
           min: 16
@@ -1263,9 +1191,6 @@
         probability: 0.2
       - !type:Vomit
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Sigynate
           min: 30
@@ -1275,9 +1200,6 @@
         - !type:ReagentCondition
           reagent: Arithrazine
           min: 1
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         probability: 0.1
       - !type:PopupMessage
         conditions:
@@ -1308,9 +1230,6 @@
             Heat: 0.2 # 0.8 per u
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Lacerinol
           min: 12
@@ -1337,9 +1256,6 @@
             Radiation: 0.05 # 0.2 per u, 3 for 15u
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Puncturase
           min: 12
@@ -1367,9 +1283,6 @@
         factor: -1
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Bruizine
           min: 10.5
@@ -1466,9 +1379,6 @@
       # od causes massive bleeding
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Pyrazine
           min: 20
@@ -1478,18 +1388,12 @@
             Piercing: 0.5
       - !type:Vomit
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Pyrazine
           min: 15
         probability: 0.1
       - !type:Emote
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Pyrazine
           min: 20
@@ -1525,9 +1429,6 @@
       # od makes you freeze to death
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Insuzine
           min: 12
@@ -1705,9 +1606,6 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Psicodine
           min: 30
@@ -1761,9 +1659,6 @@
         type: Add
       - !type:HealthChange
         conditions:
-          - !type:MetabolizerTypeCondition # Goob - Yowie
-            type: [ Yowie ]
-            inverted: true
           - !type:ReagentCondition
             reagent: PotassiumIodide
             min: 20

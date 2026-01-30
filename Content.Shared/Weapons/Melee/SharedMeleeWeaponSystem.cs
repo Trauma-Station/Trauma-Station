@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Weapons;
 using Content.Goobstation.Common.MartialArts;
+using Content.Lavaland.Common.Weapons;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Coordinates;
 using Content.Shared.Random.Helpers;
@@ -344,6 +345,17 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             if (TryComp(held, out melee) &&
                 !melee.MustBeEquippedToUse)
             {
+                // <Lavaland>
+                var relay = new GetRelayMeleeWeaponEvent();
+                RaiseLocalEvent(weaponUid, ref relay);
+                if (relay.Handled && TryComp<MeleeWeaponComponent>(relay.Found, out var relayMelee))
+                {
+                    weaponUid = relay.Found.Value;
+                    melee = relayMelee;
+                    return true;
+                }
+                // </Lavaland>
+
                 weaponUid = held.Value;
                 return true;
             }

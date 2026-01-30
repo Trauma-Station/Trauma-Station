@@ -2,7 +2,7 @@
 using Content.Goobstation.Common.Changeling;
 using Content.Goobstation.Shared.Changeling.Components;
 // </Trauma>
-﻿using Content.Shared.Administration.Logs;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
@@ -75,7 +75,7 @@ public sealed class SharpSystem : EntitySystem
 
         // <Goob> - can't butcher lings or their victims
         // this intentionally uses the same message so you have to use 1% brainpower to deduce if the non-hollow body is a ling or not
-        if (HasComp<ChangelingIdentityComponent>(target))
+        if (HasComp<ChangelingComponent>(target))
         {
             _popupSystem.PopupEntity(Loc.GetString("comp-kitchen-spike-deny-absorbed", ("victim", Identity.Entity(target, EntityManager))), target, user);
             return false;

@@ -59,6 +59,11 @@
     - Mouse
     understands:
     - Mouse
+    - TauCetiBasic
+  - type: NightVision # Goobstation - Nightvision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Effects/bite.ogg
@@ -84,10 +89,6 @@
   - type: Tag
     tags:
     - VimPilot
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
 
 - type: entity
   name: bee
@@ -120,7 +121,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      5: Dead # Goob edit
+      5: Dead # Goob - was 10
   - type: Stamina
     baseCritThreshold: 10
     animationThreshold: 1
@@ -289,6 +290,7 @@
     - Chicken
     understands:
     - Chicken
+    - TauCetiBasic
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -368,6 +370,21 @@
   id: MobCockroach
   description: This station is just crawling with bugs.
   components:
+  # <Trauma>
+  - type: LanguageKnowledge
+    speaks:
+    - Hissing
+    understands:
+    - Hissing
+    - TauCetiBasic
+  - type: Body
+    prototype: Rat
+    requiredLegs: 0
+  - type: ThermalRegulator
+    metabolismHeat: 300
+  - type: StaticPrice
+    price: -520
+  # </Trauma>
   - type: Sprite
     drawdepth: SmallMobs
     sprite: Mobs/Animals/cockroach.rsi
@@ -387,7 +404,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 2 # Goob edit
+        density: 2 # Goob - was 100
         mask:
         - SmallMobMask
         layer:
@@ -449,9 +466,6 @@
       - !type:GibBehavior
         recursive: false
   - type: NonSpreaderZombie
-  - type: LanguageKnowledge # Einstein Engines - Languages
-    speaks: [Hissing]
-    understands: [Hissing]
   - type: StepTrigger
     requiredTriggeredSpeed: 1
   - type: TriggerOnStepTrigger
@@ -467,13 +481,6 @@
     damage:
       types:
         Piercing: 0
-  - type: Body # <Trauma>
-    prototype: Rat
-    requiredLegs: 0
-  - type: ThermalRegulator
-    metabolismHeat: 300
-  - type: StaticPrice
-    price: -520 # </Trauma>
 
 - type: entity
   name: glockroach
@@ -529,7 +536,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 12 # Goob edit
+        density: 12 # Goob - was 120
         mask:
         - SmallMobMask
         layer:
@@ -538,7 +545,7 @@
   - type: Speech
     speechVerb: Moth
     speechSounds: Squeak
-    allowedEmotes: ['Chitter', 'Squeak', 'Flap'] #flap is from goob
+    allowedEmotes: ['Chitter', 'Squeak', 'Flap'] # Goob - added Flap
   - type: FaxableObject
     insertingState: inserting_mothroach
   - type: FaxSlip # Goobstation
@@ -613,6 +620,7 @@
     - Moffic
     understands:
     - Moffic
+    - TauCetiBasic
   - type: ZombieAccentOverride
     accent: zombieMoth
   - type: Vocal
@@ -764,6 +772,7 @@
     - Duck
     understands:
     - Duck
+    - TauCetiBasic
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -1047,6 +1056,7 @@
     - Crab
     understands:
     - Crab
+    - TauCetiBasic
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -1338,6 +1348,7 @@
     - Kangaroo
     understands:
     - Kangaroo
+    - TauCetiBasic
   - type: Butcherable
     spawned:
     - id: FoodMeat
@@ -1598,6 +1609,7 @@
     understands:
     - Monkey
     - Kobold
+    - TauCetiBasic
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
   - type: AlwaysRevolutionaryConvertible
@@ -1696,6 +1708,7 @@
     understands:
     - Kobold
     - Monkey
+    - TauCetiBasic
   # Shitmed Change Start
   - type: HumanoidAppearance
     species: Kobold
@@ -1961,6 +1974,7 @@
     - Mouse
     understands:
     - Mouse
+    - TauCetiBasic
   - type: Tag
     tags:
     - Trash
@@ -2072,6 +2086,14 @@
       - !type:GibBehavior
         deleteGibs: true # Trauma
         recursive: false
+  - type: ActionGrant
+    actions:
+    - ActionMouseCall
+  - type: MobCallSource
+    whitelist:
+      tags:
+      - Mouse
+  - type: MobCallable
   # </Goobstation>
 
 - type: entity
@@ -2551,8 +2573,11 @@
       types:
         Heat : 0.2 #per second, scales with temperature & other constants
   - type: LanguageKnowledge # Einstein Engines - Language
-    speaks: [Penguin]
-    understands: [Penguin]
+    speaks:
+    - Penguin
+    understands:
+    - Penguin
+    - TauCetiBasic
 
 # TODO: Make grenade penguin voice activated like the rest of the stealth items.
 - type: entity
@@ -2682,8 +2707,11 @@
     damageContainer: Biological
     damageModifierSet: Scale
   - type: LanguageKnowledge # Einstein Engines - Language
-    speaks: [Hissing]
-    understands: [Hissing]
+    speaks:
+    - Hissing
+    understands:
+    - Hissing
+    - TauCetiBasic
 
 # Code unique spider prototypes or combine them all into one spider and get a
 # random sprite state when you spawn it.
@@ -2734,6 +2762,7 @@
     - Xeno
     understands:
     - Xeno
+    - TauCetiBasic
   - type: InteractionPopup
     successChance: 0.5
     interactSuccessString: petting-success-tarantula
@@ -2974,6 +3003,7 @@
     - Hissing
     understands:
     - Hissing
+    - TauCetiBasic
 
 - type: entity
   name: possum
@@ -3053,6 +3083,7 @@
     - Hissing
     understands:
     - Hissing
+    - TauCetiBasic
 
 - type: entity
   name: fox
@@ -3140,6 +3171,7 @@
     - Fox
     understands:
     - Fox
+    - TauCetiBasic
 
 - type: entity
   abstract: true
@@ -3206,6 +3238,7 @@
     - Dog
     understands:
     - Dog
+    - TauCetiBasic
   #- type: ReplacementAccent # Trauma - uses languages instead
   #  accent: dog
   - type: Tag
@@ -3352,6 +3385,7 @@
     - Cat
     understands:
     - Cat
+    - TauCetiBasic
   - type: InteractionPopup
     successChance: 0.7
     interactSuccessString: petting-success-cat
@@ -3612,6 +3646,7 @@
     - Hissing
     understands:
     - Hissing
+    - TauCetiBasic
 
 - type: entity
   name: ferret
@@ -3671,6 +3706,7 @@
     - Hissing
     understands:
     - Hissing
+    - TauCetiBasic
 
 - type: entity
   name: hamster
@@ -3777,6 +3813,7 @@
     - Mouse
     understands:
     - Mouse
+    - TauCetiBasic
   - type: Tag
     tags:
     - VimPilot
@@ -3899,6 +3936,7 @@
     - Pig
     understands:
     - Pig
+    - TauCetiBasic
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -4074,6 +4112,7 @@
     - Deer
     understands:
     - Deer
+    - TauCetiBasic
 
 - type: entity
   name: reindeer doe

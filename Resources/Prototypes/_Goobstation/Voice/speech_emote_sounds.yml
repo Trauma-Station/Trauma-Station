@@ -109,8 +109,6 @@
   parent: UnisexMoth
   id: FemaleMoth
   sounds:
-    Scream:
-      collection: MothScreams
     Gasp:
       collection: FemaleGasp
     Yawn:

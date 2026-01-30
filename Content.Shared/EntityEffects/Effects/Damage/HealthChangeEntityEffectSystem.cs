@@ -56,7 +56,8 @@ public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<
                 interruptsDoAfters: false,
                 targetPart: args.Effect.UseTargeting ? args.Effect.TargetPart : null,
                 ignoreBlockers: args.Effect.IgnoreBlockers,
-                splitDamage: args.Effect.SplitDamage);
+                splitDamage: args.Effect.SplitDamage,
+                increaseOnly: args.Effect.IncreaseOnly); // Trauma
     }
 }
 
@@ -90,7 +91,10 @@ public sealed partial class HealthChange : EntityEffectBase<HealthChange>
 
     [DataField]
     public bool IgnoreBlockers = true;
-    // </Shitmed>
+
+    [DataField]
+    public bool IncreaseOnly;
+    // </Trauma>
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         {

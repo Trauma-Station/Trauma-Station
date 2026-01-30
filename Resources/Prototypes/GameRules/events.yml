@@ -292,7 +292,6 @@
     # Goobstation start
     speciesOverride: Human
     speciesOverrideBlacklist:
-    - Yowie
     - IPC
     - Diona
     - Abductor

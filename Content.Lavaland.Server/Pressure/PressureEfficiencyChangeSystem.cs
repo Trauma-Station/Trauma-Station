@@ -23,6 +23,7 @@
 
 using Content.Lavaland.Common.Weapons.Ranged;
 using Content.Lavaland.Shared.Pressure;
+using Content.Lavaland.Shared.Weapons.Upgrades;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Armor;
 using Content.Shared.Body.Systems;
@@ -31,6 +32,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Wieldable;
 
 namespace Content.Lavaland.Server.Pressure;
 
@@ -49,9 +51,10 @@ public sealed class PressureEfficiencyChangeSystem : SharedPressureEfficiencyCha
         _query = GetEntityQuery<PressureDamageChangeComponent>();
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
-        SubscribeLocalEvent<PressureDamageChangeComponent, GetMeleeDamageEvent>(OnGetDamage);
-        SubscribeLocalEvent<PressureDamageChangeComponent, GunShotEvent>(OnGunShot);
-        SubscribeLocalEvent<PressureDamageChangeComponent, ProjectileShotEvent>(OnProjectileShot);
+        SubscribeLocalEvent<PressureDamageChangeComponent, GetMeleeDamageEvent>(OnGetDamage,
+            after: [ typeof(GunUpgradeSystem), typeof(SharedWieldableSystem) ]);
+        SubscribeLocalEvent<PressureDamageChangeComponent, ProjectileShotEvent>(OnProjectileShot,
+            after: [ typeof(GunUpgradeSystem) ]); // let this system reduce damage upgrades' added damage automatically
 
         SubscribeLocalEvent<PressureArmorChangeComponent, InventoryRelayedEvent<DamageModifyEvent>>(OnArmorRelayDamageModify, before: [typeof(SharedArmorSystem)]);
     }
@@ -63,17 +66,6 @@ public sealed class PressureEfficiencyChangeSystem : SharedPressureEfficiencyCha
             return;
 
         args.Damage *= ent.Comp.AppliedModifier;
-    }
-
-    private void OnGunShot(Entity<PressureDamageChangeComponent> ent, ref GunShotEvent args)
-    {
-        if (!ApplyModifier(ent)
-            || !ent.Comp.ApplyToProjectiles)
-            return;
-
-        foreach (var (uid, _) in args.Ammo)
-            if (_projectileQuery.TryComp(uid, out var projectile))
-                projectile.Damage *= ent.Comp.AppliedModifier;
     }
 
     private void OnProjectileShot(Entity<PressureDamageChangeComponent> ent, ref ProjectileShotEvent args)
@@ -98,12 +90,6 @@ public sealed class PressureEfficiencyChangeSystem : SharedPressureEfficiencyCha
     /// </summary>
     public float GetModifier(Entity<PressureDamageChangeComponent?> ent)
         => _query.Resolve(ent, ref ent.Comp) ? ent.Comp.AppliedModifier : 1f;
-
-    public void SetModifierEnabled(Entity<PressureDamageChangeComponent?> ent, bool enabled)
-    {
-        if (_query.Resolve(ent, ref ent.Comp, false))
-            ent.Comp.Enabled = enabled;
-    }
 
     private void OnArmorRelayDamageModify(Entity<PressureArmorChangeComponent> ent, ref InventoryRelayedEvent<DamageModifyEvent> args)
     {

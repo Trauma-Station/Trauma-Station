@@ -8,3 +8,10 @@ Entries:
   id: 1
   time: '2026-01-23T13:28:42.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/466
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed aghost cargo orders action announcing your orders.
+  id: 2
+  time: '2026-01-26T11:46:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/527

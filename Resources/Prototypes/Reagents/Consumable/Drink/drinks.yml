@@ -260,10 +260,6 @@
     Poison:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Poison: 1
@@ -405,10 +401,6 @@
     Poison:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Poison: 1

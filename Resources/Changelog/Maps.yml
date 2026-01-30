@@ -63,3 +63,20 @@ Entries:
   id: 5
   time: '2026-01-24T10:29:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/474
+- author: Nousagi37
+  changes:
+  - type: Tweak
+    message: Bagel, Added AI Restoration board to Tech vault
+  - type: Tweak
+    message: Bagel, Added AI Restoration Console to R&D Office
+  - type: Tweak
+    message: Bagel, Added ID Card Computer into every head office
+  - type: Tweak
+    message: >-
+      Bagel, Deleted BSO Job Spawner and turned the bedroom into a maintenance
+      room
+  - type: Remove
+    message: Bagel, Christmas Tree
+  id: 6
+  time: '2026-01-25T01:42:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/493
