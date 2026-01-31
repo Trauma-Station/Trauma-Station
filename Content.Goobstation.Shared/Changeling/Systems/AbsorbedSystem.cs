@@ -9,7 +9,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Changeling;
+using Content.Goobstation.Shared.Changeling.Components;
 using Content.Shared.Examine;
 using Content.Shared.Mobs;
 
