@@ -27,6 +27,19 @@
   - type: UseDelay
     delay: 1.5
   # <Goob>
+  - type: UserInterface
+    interfaces:
+      enum.PenSpinUiKey.Key:
+        type: PenSpinBoundUserInterface
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.PenSpinUiKey.Key
+    inHandsOnly: true
+    requireActiveHand: false
+    singleUser: false
+    verbOnly: true
+  - type: Pen
   - type: EmbeddableProjectile
     offset: 0.3,0.0
     removalTime: 0.0

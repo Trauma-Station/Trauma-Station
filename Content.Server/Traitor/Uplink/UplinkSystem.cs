@@ -1,4 +1,5 @@
 // <Trauma>
+
 using System.Linq;
 using Content.Server.StoreDiscount.Systems;
 // </Trauma>
@@ -33,43 +34,42 @@ public sealed class UplinkSystem : EntitySystem
     private static readonly ProtoId<ListingPrototype> FallbackUplinkCatalog = "UplinkUplinkImplanter";
 
     /// <summary>
+<<<<<<< HEAD
     /// Adds an uplink to the target
     /// </summary>
     /// <param name="user">The person who is getting the uplink</param>
     /// <param name="balance">The amount of currency on the uplink. If null, will just use the amount specified in the preset.</param>
     /// <param name="uplinkEntity">The entity that will actually have the uplink functionality. Defaults to the PDA if null.</param>
     /// <param name="giveDiscounts">Marker that enables discounts for uplink items.</param>
-    /// <param name="preference">The preferred uplink location. Defaults to PDA.</param>
     /// <returns>Whether or not the uplink was added successfully</returns>
     public bool AddUplink(
         EntityUid user,
         FixedPoint2 balance,
+        ProtoId<UplinkPreferencePrototype>? preferenceId,
+        out EntityUid? uplinkTarget,
+        out SetupUplinkEvent? setupEvent,
         EntityUid? uplinkEntity = null,
-        bool giveDiscounts = false,
-        UplinkPreference preference = UplinkPreference.Pda) // Goob - added preference
+        bool giveDiscounts = false
+        ) // Goob - added preference, uplinkTarget, setupEvent
     {
         // Try to find target item if none passed
 
-        // <Goob>
-        /*if (uplinkEntity == null)
-        {
-            switch (preference)
-            {
-                case UplinkPreference.Pda:
-                    uplinkEntity = FindUplinkTarget(user);
-                    break;
-                case UplinkPreference.Pen:
-                    uplinkEntity = _goobUplink.FindPenUplinkTarget(user);
-                    if (uplinkEntity != null)
-                        _goobUplink.SetupPenUplink(uplinkEntity.Value);
-                    break;
-                case UplinkPreference.Implant:
-                    return ImplantUplink(user, balance, giveDiscounts);
-            }
+        var preference = _proto.Index(preferenceId);
+        uplinkTarget = uplinkEntity;
+        setupEvent = null;
 
-            uplinkEntity ??= FindUplinkTarget(user);
-        }*/
-        // </Goob>
+        if (uplinkTarget == null && preference?.SearchComponents != null)
+            uplinkTarget = _goobUplink.FindUplinkTarget(user, preference.SearchComponents);
+
+        if (uplinkTarget == null)
+            return ImplantUplink(user, balance, giveDiscounts);
+
+        EnsureComp<UplinkComponent>(uplinkTarget.Value);
+        SetUplink(user, uplinkTarget.Value, balance, giveDiscounts);
+
+        var ev = new SetupUplinkEvent { User = user };
+        RaiseLocalEvent(uplinkTarget.Value, ref ev);
+        setupEvent = ev;
 
         if (uplinkEntity == null)
             return ImplantUplink(user, balance, giveDiscounts);
@@ -137,6 +137,7 @@ public sealed class UplinkSystem : EntitySystem
         SetUplink(user, implant.Value, balance, giveDiscounts);
         return true;
     }
+<<<<<<< HEAD
 
     /// <summary>
     /// Finds the entity that can hold an uplink for a user.
@@ -165,4 +166,6 @@ public sealed class UplinkSystem : EntitySystem
 
         return null;
     }
+=======
+>>>>>>> 1bf2fdf1c5 (ooplink cleanup (#5915))
 }
