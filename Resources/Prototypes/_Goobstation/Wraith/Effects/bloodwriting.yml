@@ -3,6 +3,7 @@
 # Numbers
 - type: entity
   id: BloodWriting0
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -11,6 +12,7 @@
 
 - type: entity
   id: BloodWriting1
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -19,6 +21,7 @@
 
 - type: entity
   id: BloodWriting2
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -27,6 +30,7 @@
 
 - type: entity
   id: BloodWriting3
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -35,6 +39,7 @@
 
 - type: entity
   id: BloodWriting4
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -43,6 +48,7 @@
 
 - type: entity
   id: BloodWriting5
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -51,6 +57,7 @@
 
 - type: entity
   id: BloodWriting6
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -59,6 +66,7 @@
 
 - type: entity
   id: BloodWriting7
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -67,6 +75,7 @@
 
 - type: entity
   id: BloodWriting8
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -75,6 +84,7 @@
 
 - type: entity
   id: BloodWriting9
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -84,6 +94,7 @@
 # Letters
 - type: entity
   id: BloodWritingA
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -92,6 +103,7 @@
 
 - type: entity
   id: BloodWritingB
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -100,6 +112,7 @@
 
 - type: entity
   id: BloodWritingC
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -108,6 +121,7 @@
 
 - type: entity
   id: BloodWritingD
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -116,6 +130,7 @@
 
 - type: entity
   id: BloodWritingE
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -124,6 +139,7 @@
 
 - type: entity
   id: BloodWritingF
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -132,6 +148,7 @@
 
 - type: entity
   id: BloodWritingG
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -140,6 +157,7 @@
 
 - type: entity
   id: BloodWritingH
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -148,6 +166,7 @@
 
 - type: entity
   id: BloodWritingI
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -156,6 +175,7 @@
 
 - type: entity
   id: BloodWritingJ
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -164,6 +184,7 @@
 
 - type: entity
   id: BloodWritingK
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -172,6 +193,7 @@
 
 - type: entity
   id: BloodWritingL
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -180,6 +202,7 @@
 
 - type: entity
   id: BloodWritingM
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -188,6 +211,7 @@
 
 - type: entity
   id: BloodWritingN
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -196,6 +220,7 @@
 
 - type: entity
   id: BloodWritingO
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -204,6 +229,7 @@
 
 - type: entity
   id: BloodWritingP
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -212,6 +238,7 @@
 
 - type: entity
   id: BloodWritingQ
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -220,6 +247,7 @@
 
 - type: entity
   id: BloodWritingR
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -228,6 +256,7 @@
 
 - type: entity
   id: BloodWritingS
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -236,6 +265,7 @@
 
 - type: entity
   id: BloodWritingT
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -244,6 +274,7 @@
 
 - type: entity
   id: BloodWritingU
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -252,6 +283,7 @@
 
 - type: entity
   id: BloodWritingV
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -260,6 +292,7 @@
 
 - type: entity
   id: BloodWritingW
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -268,6 +301,7 @@
 
 - type: entity
   id: BloodWritingX
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -276,6 +310,7 @@
 
 - type: entity
   id: BloodWritingY
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -284,6 +319,7 @@
 
 - type: entity
   id: BloodWritingZ
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -293,6 +329,7 @@
 # Symbols & Drawings
 - type: entity
   id: BloodWritingAmpersand
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -301,6 +338,7 @@
 
 - type: entity
   id: BloodWritingArrowEast
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -309,6 +347,7 @@
 
 - type: entity
   id: BloodWritingArrowNorth
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -317,6 +356,7 @@
 
 - type: entity
   id: BloodWritingArrowSouth
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -325,6 +365,7 @@
 
 - type: entity
   id: BloodWritingArrowWest
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -333,6 +374,7 @@
 
 - type: entity
   id: BloodWritingBee
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -341,6 +383,7 @@
 
 - type: entity
   id: BloodWritingCircle
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -349,6 +392,7 @@
 
 - type: entity
   id: BloodWritingColon
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -357,6 +401,7 @@
 
 - type: entity
   id: BloodWritingComma
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -365,6 +410,7 @@
 
 - type: entity
   id: BloodWritingDivided
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -373,6 +419,7 @@
 
 - type: entity
   id: BloodWritingDollar
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -381,6 +428,7 @@
 
 - type: entity
   id: BloodWritingEquals
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -389,6 +437,7 @@
 
 - type: entity
   id: BloodWritingEuro
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -397,6 +446,7 @@
 
 - type: entity
   id: BloodWritingExclamationPoint
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -405,6 +455,7 @@
 
 - type: entity
   id: BloodWritingFrown
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -413,6 +464,7 @@
 
 - type: entity
   id: BloodWritingGreaterThan
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -421,6 +473,7 @@
 
 - type: entity
   id: BloodWritingHeart
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -429,6 +482,7 @@
 
 - type: entity
   id: BloodWritingLeftBracket
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -437,6 +491,7 @@
 
 - type: entity
   id: BloodWritingLeftParenthesis
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -445,6 +500,7 @@
 
 - type: entity
   id: BloodWritingLessThan
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -453,6 +509,7 @@
 
 - type: entity
   id: BloodWritingMinus
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -461,6 +518,7 @@
 
 - type: entity
   id: BloodWritingNeutralFace
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -469,6 +527,7 @@
 
 - type: entity
   id: BloodWritingPentagram
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -477,6 +536,7 @@
 
 - type: entity
   id: BloodWritingPercent
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -485,6 +545,7 @@
 
 - type: entity
   id: BloodWritingPeriod
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -493,6 +554,7 @@
 
 - type: entity
   id: BloodWritingPlus
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -501,6 +563,7 @@
 
 - type: entity
   id: BloodWritingQuestionMark
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -509,6 +572,7 @@
 
 - type: entity
   id: BloodWritingRightBracket
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -517,6 +581,7 @@
 
 - type: entity
   id: BloodWritingRightParenthesis
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -525,6 +590,7 @@
 
 - type: entity
   id: BloodWritingSemicolon
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -533,6 +599,7 @@
 
 - type: entity
   id: BloodWritingSkull
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -541,6 +608,7 @@
 
 - type: entity
   id: BloodWritingSmile
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -549,6 +617,7 @@
 
 - type: entity
   id: BloodWritingSquare
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -557,6 +626,7 @@
 
 - type: entity
   id: BloodWritingStar
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -565,6 +635,7 @@
 
 - type: entity
   id: BloodWritingTimes
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
@@ -573,6 +644,7 @@
 
 - type: entity
   id: BloodWritingTriangle
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Wraith/bloodwriting.rsi
