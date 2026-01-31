@@ -4,6 +4,7 @@ using Content.Shared.Destructible;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
+using Content.Trauma.Common.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -53,9 +54,11 @@ public sealed class VinylPlayerSystem : EntitySystem
         if (!TryComp(args.Entity, out VinylComponent? vinylcomp) || _net.IsClient || vinylcomp.Song == null || !_power.IsPowered(uid))
             return;
 
-        var audio = _audio.PlayPredicted(vinylcomp.Song, uid, uid, AudioParams.Default.WithVolume(3f).WithMaxDistance(4.5f));
-        if (audio != null)
-            comp.SoundEntity = audio.Value.Entity;
+        if (_audio.PlayPredicted(vinylcomp.Song, uid, uid, AudioParams.Default.WithVolume(3f).WithMaxDistance(4.5f)) is not {} audio)
+            return;
+
+        comp.SoundEntity = audio.Entity;
+        EnsureComp<CopyrightedAudioComponent>(audio.Entity);
 
         // Used by VinylSummonRuleSystem
         var ev = new VinylInsertedEvent(args.Entity);
