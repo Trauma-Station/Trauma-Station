@@ -129,6 +129,35 @@
       collection: Screwdriver
     endSound:
       path: /Audio/_Shitmed/Medical/Surgery/retractor2.ogg
+  # <Trauma>
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PolygonShape
+          radius: 0.01
+          vertices:
+          - -0.475,-0.225
+          - -0.225,-0.475
+          - 0.525,0.275
+          - 0.275,0.525
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: ThrowingAngle
+    angle: -90
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+    removalTime: 1.5
+  - type: LandAtCursor
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 8
+        Structural: 1 # Go on, throw 500 screwdrivers at a wall.
+  # </Trauma>
 
 - type: entity
   name: wrench
