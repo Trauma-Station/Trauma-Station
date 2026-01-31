@@ -25,7 +25,7 @@ public sealed class StationReportSystem : EntitySystem
         {
             if (!TryComp<PaperComponent>(uid, out var paper))
                return;
-            
+
             stationReportText = paper.Content;
             break;
         }
@@ -36,6 +36,5 @@ public sealed class StationReportSystem : EntitySystem
     public void BroadcastStationReport(string? stationReportText)
     {
         RaiseNetworkEvent(new StationReportEvent(stationReportText));//to send to client
-        RaiseLocalEvent(new StationReportEvent(stationReportText));//to send to discord intergration
     }
 }

@@ -70,6 +70,12 @@ public sealed partial class HealthAnalyzerComponent : Component
     public EntityUid? CurrentBodyPart;
 
     /// <summary>
+    /// Shitmed Change: The current mode of the scanner.
+    /// </summary>
+    [DataField]
+    public HealthAnalyzerMode CurrentMode = HealthAnalyzerMode.Body;
+
+    /// <summary>
     /// The maximum range in tiles at which the analyzer can receive continuous updates, a value of null will be infinite range
     /// </summary>
     [DataField]
@@ -92,10 +98,4 @@ public sealed partial class HealthAnalyzerComponent : Component
     /// </summary>
     [DataField]
     public bool Silent;
-
-    /// <summary>
-    /// Shitmed Change: The current mode of the scanner.
-    /// </summary>
-    [DataField]
-    public HealthAnalyzerMode CurrentMode = HealthAnalyzerMode.Body;
 }

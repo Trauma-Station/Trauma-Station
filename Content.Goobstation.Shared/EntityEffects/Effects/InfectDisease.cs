@@ -13,6 +13,12 @@ public sealed partial class InfectDisease : EntityEffectBase<InfectDisease>
     [DataField(required: true)]
     public EntProtoId Disease;
 
+    [DataField]
+    public bool Mutate;
+
+    [DataField]
+    public float? MutationRate;
+
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-infect-disease", ("chance", Probability), ("disease", prototype.Index(Disease).Name));
 }
@@ -23,6 +29,8 @@ public sealed class InfectDiseaseEffectSystem : EntityEffectSystem<DiseaseCarrie
 
     protected override void Effect(Entity<DiseaseCarrierComponent> ent, ref EntityEffectEvent<InfectDisease> args)
     {
-        _disease.TryInfect(ent.AsNullable(), args.Effect.Disease, out _);
+        var effect = args.Effect;
+        if (_disease.TryInfect(ent.AsNullable(), effect.Disease, out var disease) && effect.Mutate)
+            _disease.MutateDisease(disease.Value, effect.MutationRate);
     }
 }

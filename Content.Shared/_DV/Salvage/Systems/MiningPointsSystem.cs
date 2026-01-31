@@ -24,7 +24,7 @@
 
 using Content.Goobstation.Common.Silo;
 using Content.Shared._DV.Salvage.Components;
-using Content.Shared._Lavaland.UnclaimedOre;
+using Content.Lavaland.Common.Mining;
 using Content.Shared.Access.Systems;
 using Content.Shared.Lathe;
 using Content.Shared.Materials;

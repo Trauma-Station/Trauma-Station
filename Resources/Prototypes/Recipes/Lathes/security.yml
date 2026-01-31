@@ -227,6 +227,7 @@
     Plastic: 500
 
 - type: latheRecipe
+  abstract: true # Trauma, no longer has a niche
   parent: BaseWeaponRecipeLong
   id: WeaponAdvancedLaser
   result: WeaponAdvancedLaser
@@ -292,10 +293,10 @@
     Steel: 2000
     Gold: 500
 
-- type: latheRecipe
-  parent: BaseWeaponRecipeSidearm
-  id: WeaponFlareGunSecurity
-  result: WeaponFlareGunSecurity
-  materials:
-    Plastic: 100
-    Steel: 400
+# - type: latheRecipe # Trauma
+#   parent: BaseWeaponRecipeSidearm
+#   id: WeaponFlareGunSecurity
+#   result: WeaponFlareGunSecurity
+#   materials:
+#     Plastic: 100
+#     Steel: 400

@@ -19,6 +19,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # species
 - type: emoteSounds
+  parent: BaseMobEmotes
   id: SoundsHarpyFemale
   params:
     variation: 0.125
@@ -71,8 +72,6 @@
       collection: VulpkaninHowls
     Honk:
       collection: HarpyHonks
-    Weh:
-      collection: Weh
     CatMeow:
       collection: CatMeows # Goobstation - effect standardization
     Coo: #Floofstation
@@ -81,14 +80,11 @@
       collection: FemaleGasp
     DefaultDeathgasp:
       collection: FemaleDeathGasp
-    Gulp: # Goob
-      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
     Yip:
       collection: Yip
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
 
 - type: emoteSounds
+  parent: BaseMobEmotes
   id: SoundsHarpyMale
   params:
     variation: 0.125
@@ -141,8 +137,6 @@
       collection: VulpkaninHowls
     Honk:
       collection: HarpyHonks
-    Weh:
-      collection: Weh
     CatMeow:
       collection: CatMeows # Goobstation - effect standardization
     Coo: #Floofstation
@@ -151,25 +145,5 @@
       collection: MaleGasp
     DefaultDeathgasp:
       collection: MaleDeathGasp
-    Gulp: # Goob
-      path: /Audio/_Goobstation/Voice/gulpexotic.ogg
     Yip:
       collection: Yip
-    Surprised: # Goob
-      path: /Audio/_Goobstation/Voice/surprised.ogg
-
-- type: emoteSounds
-  id: MobDog
-  params:
-    variation: 0.125
-  sounds:
-    Growl:
-      collection: VulpkaninGrowls
-    Snarl:
-      collection: VulpkaninSnarls
-    Bark:
-      collection: VulpkaninBarks
-    Whine:
-      collection: VulpkaninWhines
-    Howl:
-      collection: VulpkaninHowls

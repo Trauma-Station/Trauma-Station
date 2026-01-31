@@ -73,13 +73,15 @@
   category: construction-category-materials
   objectType: Item
 
-- type: construction
-  id: MaterialDurathread
-  graph: Durathread
-  startNode: start
-  targetNode: MaterialDurathread
-  category: construction-category-materials
-  objectType: Item
+# <Trauma> remove durathread handcraft
+#- type: construction
+#  id: MaterialDurathread
+#  graph: Durathread
+#  startNode: start
+#  targetNode: MaterialDurathread
+#  category: construction-category-materials
+#  objectType: Item
+# </Trauma>
 
 - type: construction
   id: SheetUGlass

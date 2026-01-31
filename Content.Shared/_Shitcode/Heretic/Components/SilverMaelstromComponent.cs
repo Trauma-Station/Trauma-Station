@@ -14,9 +14,17 @@ namespace Content.Shared._Goobstation.Heretic.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class SilverMaelstromComponent : Component
 {
-    [DataField] public float RespawnCooldown = 7.5f;
-    [ViewVariables(VVAccess.ReadWrite)] public float RespawnTimer = 0f;
+    public override bool SessionSpecific => true;
 
-    [ViewVariables(VVAccess.ReadOnly)] public int ActiveBlades = 0;
-    [DataField] public int MaxBlades = 5;
+    [DataField]
+    public float RespawnCooldown = 7.5f;
+
+    [DataField]
+    public float RespawnTimer = 0f;
+
+    [DataField]
+    public List<EntityUid> ActiveBlades = new();
+
+    [DataField]
+    public int MaxBlades = 5;
 }

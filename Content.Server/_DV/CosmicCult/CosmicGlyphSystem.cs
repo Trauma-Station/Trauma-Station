@@ -52,10 +52,6 @@ public sealed class CosmicGlyphSystem : EntitySystem
 
             args.PushMarkup(Loc.GetString("cosmic-examine-glyph-cultcount", ("COUNT", requiredCultists)));
         }
-        else
-        {
-            args.PushMarkup(Loc.GetString("cosmic-examine-text-glyphs"));
-        }
     }
 
     private void OnUseGlyph(Entity<CosmicGlyphComponent> uid, ref ActivateInWorldEvent args)

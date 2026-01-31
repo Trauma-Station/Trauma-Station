@@ -1,0 +1,29 @@
+- type: entity
+  parent: BasePlushie
+  id: PatreonTia
+  name: tia plushie
+  description: It is made out of human.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/tia.rsi
+    state: icon
+  - type: Clothing
+    quickEquip: false
+    sprite: _Trauma/Objects/Patreon/tia.rsi
+    slots:
+    - HEAD
+
+- type: entity
+  parent: ClothingHeadHelmetBase
+  id: PatreonTenshi
+  name: silver halo
+  description: Holy moly.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/tenshi.rsi
+    state: icon
+  - type: Clothing
+    quickEquip: false
+    sprite: _Trauma/Objects/Patreon/tenshi.rsi
+    slots:
+    - HEAD

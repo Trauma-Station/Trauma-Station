@@ -154,7 +154,7 @@ public sealed partial class TurretControllerWindow : BaseWindow
             var text = Loc.GetString(
                 "turret-controls-window-turret-status",
                 ("device", address),
-                ("status", Loc.GetString(state))
+                ("status", state) // Trauma - don't double loc, its already localized
             );
 
             var label = new Label

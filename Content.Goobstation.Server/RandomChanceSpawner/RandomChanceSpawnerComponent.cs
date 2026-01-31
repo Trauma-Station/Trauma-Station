@@ -12,7 +12,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Goobstation.Server.RandomChanceSpawner;
 
 /// <summary>
-/// Shitcode my beloved 
+/// Shitcode my beloved
 /// </summary>
 [RegisterComponent, EntityCategory("Spawner")]
 public sealed partial class RandomChanceSpawnerComponent : Component

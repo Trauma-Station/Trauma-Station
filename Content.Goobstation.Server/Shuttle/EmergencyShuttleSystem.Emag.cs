@@ -70,9 +70,9 @@ public sealed class GoobEmergencyShuttleSystem : EntitySystem
             args.UserUid,
             component.EmagTime,
             new EmergencyShuttleConsoleEmagDoAfterEvent(),
-            uid,
-            uid,
-            args.EmagUid)
+            eventTarget: uid,
+            target: uid,
+            used: args.EmagUid)
         {
             DistanceThreshold = 1.5f,
             NeedHand = true,

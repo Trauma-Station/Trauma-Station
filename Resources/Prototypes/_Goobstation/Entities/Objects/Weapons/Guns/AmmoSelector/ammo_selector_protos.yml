@@ -15,7 +15,7 @@
     sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/selectable_ammo.rsi
     state: heavylaser-wide
   protoId: BulletLaserSpread
-  fireCost: 100
+  fireCost: 30
 
 - type: selectableAmmo
   id: BulletLaserSpreadNarrow
@@ -24,7 +24,7 @@
     sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/selectable_ammo.rsi
     state: heavylaser-narrow
   protoId: BulletLaserSpreadNarrow
-  fireCost: 100
+  fireCost: 30
 
 - type: selectableAmmo
   id: BulletDisablerSmgSpread
@@ -33,7 +33,7 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     state: omnilaser
   protoId: BulletDisablerSmgSpread
-  fireCost: 100
+  fireCost: 30
 
 - type: selectableAmmo
   id: BulletDisabler

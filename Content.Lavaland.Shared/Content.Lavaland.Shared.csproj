@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
+	<Import Project="../MSBuild/Content.props" />
+
+	<ItemGroup>
+    	<PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
+
+		<ProjectReference Include="../Content.Shared/Content.Shared.csproj" />
+	</ItemGroup>
+
+	<Import Project="../RobustToolbox/Imports/Shared.props" />
+	<Import Project="../RobustToolbox/MSBuild/Robust.Properties.targets" />
+	<Import Project="../RobustToolbox/MSBuild/Robust.CompNetworkGenerator.targets" />
+</Project>

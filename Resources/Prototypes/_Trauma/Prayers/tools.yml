@@ -12,7 +12,7 @@
   verb: GIVE
   subjects: [ "GLASS VIAL" ]
   items:
-    id: BaseChemistryEmptyVial
+    id: ChemistryEmptyVial
 
 - type: scrollPrayer
   id: Pipe

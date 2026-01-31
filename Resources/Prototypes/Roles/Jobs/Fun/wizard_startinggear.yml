@@ -91,6 +91,7 @@
   id: WizardChameleonOutfit
   name: roles-antag-wizard-name
   startingGear: WizardBlueGear
+  icon: "JobIconWizard"
   equipment:
     eyes: ClothingEyesGlassesCheapSunglasses
     mask: ClothingMaskBreath

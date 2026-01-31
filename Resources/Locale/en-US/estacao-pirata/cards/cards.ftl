@@ -93,4 +93,3 @@ card-sc-joker = joker
 
 container-sealed = A holographic security seal is on it. Opening it will have the seal dissipate.
 container-unsealed = The seal attached to it dissipates.
-

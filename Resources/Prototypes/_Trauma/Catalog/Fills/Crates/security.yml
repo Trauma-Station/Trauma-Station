@@ -1,0 +1,12 @@
+- type: entity
+  parent: CrateSecgear
+  id: CrateSecurityWeaponLaserSidearm
+  name: phaser crate
+  description: Contains three phasers. Requires security access to open.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponLaserSidearm
+          amount: 3

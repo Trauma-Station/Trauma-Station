@@ -53,7 +53,7 @@
   id: EnergyMagRifleIon
   parent: [ EnergyRifleMagBase, BaseSecurityContraband ]
   name: energy rifle magazine (Ion)
-  description: Powercell with an attached power converter that create Ionize bolt at the end of energy rifle.
+  description: Powercell with an attached power converter that create Ionize bolt at the end of energy rifle, extremely energy intensive.
   components:
   - type: Sprite
     layers:
@@ -61,7 +61,7 @@
       map: [ "enum.GunVisualLayers.Base" ]
   - type: BatteryAmmoProvider
     proto: RifleBulletEnergyGunIon
-    fireCost: 50
+    fireCost: 200
 
 - type: entity
   id: EnergyMagRifleOverchargeLethal

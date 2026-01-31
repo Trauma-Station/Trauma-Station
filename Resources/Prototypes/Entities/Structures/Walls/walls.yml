@@ -53,14 +53,14 @@
     price: 75
   - type: BlockWeather
   - type: SunShadowCast
-  # <Goobstation>
+  # <Trauma>
   - type: Penetratable
     penetrateDamage: 50
     damagePenalty: 0.1
   - type: ExaminableDamage
     messages: WindowMessages
-  # </Goobstation>
-  - type: SoundBlocker # Trauma
+  - type: SoundBlocker
+  # </Trauma>
 
 - type: entity
   abstract: true
@@ -68,6 +68,7 @@
   id: BaseWall
   components:
   - type: Occluder # Breaks on diagonal walls
+  - type: FreezableWall # Trauma - all non diagonal walls can be frozen by artistocrat's way
 
 - type: entity
   abstract: true
@@ -405,7 +406,7 @@
     convertTo: WallCosmicCult
 
 - type: entity
-  parent: BaseWall
+  parent: BaseStructureWall # Trauma - don't inherit FreezableWall
   id: WallIce
   name: ice wall
   components:
@@ -429,10 +430,13 @@
   - type: IconSmooth
     key: walls
     base: ice
-  - type: RustRequiresPathStage # Goobstation
+  # <Trauma>
+  - type: RustRequiresPathStage
     pathStage: 4 # Mark of rust
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
+  - type: CosmicCorruptible
     convertTo: WallCosmicCult
+  - type: Occluder # from BaseWall
+  # </Trauma>
 
 - type: entity
   parent: BaseWall

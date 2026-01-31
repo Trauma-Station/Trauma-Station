@@ -80,7 +80,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 
 namespace Content.Goobstation.Server.MedicalPatch;
 
@@ -120,4 +120,3 @@ public sealed partial class MedicalPatchComponent : Component
     [DataField]
     public FixedPoint2 InjectPercentageOnAttatch = FixedPoint2.New(0);
 }
-

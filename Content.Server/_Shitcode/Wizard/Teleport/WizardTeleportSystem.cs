@@ -150,19 +150,12 @@ public sealed class WizardTeleportSystem : SharedWizardTeleportSystem
 
     public override void OnTeleportSpell(EntityUid performer, EntityUid action)
     {
-        if (!_uiSystem.HasUi(performer, WizardTeleportUiKey.Key))
+        var key = WizardTeleportUiKey.Key;
+        if (!_uiSystem.TryToggleUi(action, key, performer))
             return;
-
-        if (!_uiSystem.IsUiOpen(performer, WizardTeleportUiKey.Key, performer))
-            _uiSystem.OpenUi(performer, WizardTeleportUiKey.Key, performer);
-        else
-        {
-            _uiSystem.CloseUi(performer, WizardTeleportUiKey.Key);
-            return;
-        }
 
         var state = new WizardTeleportState(GetWizardTeleportLocations().ToList(), GetNetEntity(action));
-        _uiSystem.SetUiState(performer, WizardTeleportUiKey.Key, state);
+        _uiSystem.SetUiState(action, key, state);
     }
 
     private void OnAfterUIOpen(Entity<TeleportScrollComponent> ent, ref AfterActivatableUIOpenEvent args)

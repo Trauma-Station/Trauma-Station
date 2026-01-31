@@ -13,4 +13,3 @@ public record struct ClothingAutoInjectRelayedEvent(EntityUid Target, MobState N
 {
     public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
-

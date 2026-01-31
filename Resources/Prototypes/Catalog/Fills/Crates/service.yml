@@ -9,7 +9,7 @@
       entity_storage: !type:AllSelector
         children:
         - !type:NestedSelector
-          tableId: AllSoapsTable
+          tableId: AllSoapsCheap # Trauma - use cheap soaps to avoid 1/250 heisentest
         - id: MopItem
         - id: MopBucketCubeWrapped
         - id: Bucket

@@ -144,7 +144,7 @@
   showInVote: false
   rules:
     - Honkops
-    - SubGamemodesRule
+    # - SubGamemodesRule
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     - SpaceTrafficControlEventScheduler
@@ -157,7 +157,7 @@
     - calmdynamic
   name: sleeper-title
   description: sleeper-description
-  showInVote: false #Trauma
+  showInVote: false # Trauma
   minPlayers: 5
   rules:
     - CalmDynamic
@@ -192,7 +192,7 @@
     - turbulence
   name: secretplus-low-title
   description: secretplus-low-description
-  showInVote: false #Trauma
+  showInVote: false # Trauma
   rules:
     - SecretPlusLow
     - BasicRoundstartVariation # Trauma
@@ -206,7 +206,7 @@
     - entropy
   name: secretplus-mid-title
   description: secretplus-mid-description
-  showInVote: false #Trauma
+  showInVote: false # Trauma
   rules:
     - SecretPlusMid
     - BasicRoundstartVariation # Trauma
@@ -235,7 +235,7 @@
     - survivalnew
   name: survivalplus-title
   description: survivalplus-description
-  showInVote: false #Trauma
+  showInVote: false # Trauma
   rules:
     - SecretPlusRampingMid
     - BasicRoundstartVariation # Trauma
@@ -249,7 +249,7 @@
     - Ingress
   name: hermitplus-title
   description: hermitplus-description
-  showInVote: false #Trauma
+  showInVote: false # Trauma
   rules:
     - SecretPlusHermit
 

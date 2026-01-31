@@ -8,16 +8,21 @@
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Dataset;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Polymorph;
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Devil;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class DevilComponent : Component
 {
+    // no doxxing devils
+    public override bool SendOnlyToOwner => true;
+
     [DataField]
     public List<EntProtoId> BaseDevilActions = new()
     {
@@ -42,7 +47,7 @@ public sealed partial class DevilComponent : Component
     /// The true name of the devil.
     /// This is auto-generated from a list in the system.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public string TrueName = string.Empty;
 
     /// <summary>

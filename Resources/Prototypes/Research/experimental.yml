@@ -35,13 +35,15 @@
   icon:
     sprite: Structures/Machines/exosuit_fabricator.rsi
     state: fab-idle
-  discipline: Experimental
+  discipline: Robotics # Trauma
   tier: 1
   cost: 5000
   recipeUnlocks:
   - ProximitySensor
-  - Drone # Goobstation
-  position: -1,0
+  - Drone
+  # Goobstation R&D Console rework start
+  position: -4,2
+  # Goobstation R&D Console rework end
 
 - type: technology
   id: BasicAnomalousResearch
@@ -59,9 +61,7 @@
   - APECircuitboard
   - AnomalyVesselCircuitboard
   # Goobstation R&D Console rework start
-  position: -2,0
-  technologyPrerequisites:
-  - BasicRobotics
+  position: -4,-2
   # Goobstation R&D Console rework end
 
 - type: technology
@@ -78,9 +78,9 @@
   - AnalysisComputerCircuitboard
   - ArtifactAnalyzerMachineCircuitboard
   # Goobstation R&D Console rework start
-  position: -2,2
+  position: -5,-5
   technologyPrerequisites:
-  - BasicRobotics
+  - BasicAnomalousResearch
   # Goobstation R&D Console rework end
 
 - type: technology
@@ -96,8 +96,8 @@
   - TechDiskComputerCircuitboard
   # Goobstation R&D Console rework start
   technologyPrerequisites:
-  - BasicRobotics
-  position: -2,-1
+  - BasicAnomalousResearch
+  position: -5,-6
   # Goobstation R&D Console rework end
 
 - type: technology
@@ -113,7 +113,7 @@
   - ClothingShoesBootsMagSci
   - ClothingShoesBootsMoon
   # Goobstation R&D Console rework start
-  position: -3,-1
+  position: -5,-7
   technologyPrerequisites:
   - AlternativeResearch
   # Goobstation R&D Console rework end
@@ -130,7 +130,7 @@
   recipeUnlocks:
   - WeaponGauntletGorilla
   # Goobstation R&D Console rework start
-  position: -3,1
+  position: -6,-4
   technologyPrerequisites:
   - BasicAnomalousResearch
   # Goobstation R&D Console rework end
@@ -149,7 +149,7 @@
   recipeUnlocks:
   - ArtifactCrusherMachineCircuitboard
   # Goobstation R&D Console rework start
-  position: -3,2
+  position: -6,-3
   technologyPrerequisites:
   - BasicXenoArcheology
   # Goobstation R&D Console rework end
@@ -168,8 +168,8 @@
   - AnomalySynchronizerCircuitboard
   - AnomalyVesselExperimentalCircuitboard
   technologyPrerequisites:
-  - BasicAnomalousResearch
-  position: -3,0
+  - BasicXenoArcheology
+  position: -6,-5
 
 - type: technology
   id: DeterrenceTechnologies
@@ -184,7 +184,7 @@
   - WeaponParticleDecelerator
   - HoloprojectorField
   # Goobstation R&D Console rework start
-  position: -3,-2
+  position: -6,-6
   technologyPrerequisites:
   - AlternativeResearch
   # Goobstation R&D Console rework end
@@ -202,7 +202,7 @@
     - WeaponForceGun
     - WeaponTetherGun
   # Goobstation R&D Console rework start
-  position: -4,2
+  position: -7,-4
   technologyPrerequisites:
   - AbnormalArtifactManipulation
   - AnomalyCoreHarnessing
@@ -222,7 +222,7 @@
   recipeUnlocks:
   - DeviceQuantumSpinInverter
   # Goobstation R&D Console rework start
-  position: -5,2
+  position: -9,-4
   technologyPrerequisites:
   - GravityManipulation
   # Goobstation R&D Console rework end
@@ -239,7 +239,7 @@
   recipeUnlocks:
   - DeviceDesynchronizer
   # Goobstation R&D Console rework start
-  position: -5,3
+  position: -8,-4
   technologyPrerequisites:
   - GravityManipulation
   # Goobstation R&D Console rework end

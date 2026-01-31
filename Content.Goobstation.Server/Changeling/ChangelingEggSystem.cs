@@ -10,7 +10,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Changeling.Components;
-using Content.Server.Body.Systems;
+using Content.Shared.Gibbing;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Robust.Shared.Timing;
@@ -20,7 +20,7 @@ namespace Content.Goobstation.Server.Changeling;
 public sealed class ChangelingEggSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly BodySystem _bodySystem = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly ChangelingSystem _changeling = default!;
 
@@ -50,7 +50,7 @@ public sealed class ChangelingEggSystem : EntitySystem
 
         if (TerminatingOrDeleted(comp.lingMind))
         {
-            _bodySystem.GibBody(uid);
+            _gibbing.Gib(uid);
             return;
         }
 
@@ -66,6 +66,6 @@ public sealed class ChangelingEggSystem : EntitySystem
         if (comp.AugmentedEyesightPurchased)
             _changeling.InitializeAugmentedEyesight(newUid);
 
-        _bodySystem.GibBody(uid);
+        _gibbing.Gib(uid);
     }
 }

@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Lavaland.Common.Chasm;
+// </Trauma>
 using Content.Shared.ActionBlocker;
 using Content.Shared.Movement.Events;
 using Content.Shared.StepTrigger.Systems;
@@ -28,6 +31,7 @@ public sealed class ChasmSystem : EntitySystem
         SubscribeLocalEvent<ChasmFallingComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
     }
 
+    private List<Entity<ChasmFallingComponent>> _jaunted =  new(); // Trauma
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -36,25 +40,33 @@ public sealed class ChasmSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        _jaunted.Clear(); // Trauma
         var query = EntityQueryEnumerator<ChasmFallingComponent>();
         while (query.MoveNext(out var uid, out var chasm))
         {
             if (_timing.CurTime < chasm.NextDeletionTime)
                 continue;
 
-            // Lavaland Change start: Jaunter
-            var ev = new _Lavaland.Chasm.BeforeChasmFallingEvent(uid);
+            // <Lavaland>
+            var ev = new BeforeChasmFallingEvent(uid);
             RaiseLocalEvent(uid, ref ev);
             if (ev.Cancelled)
             {
-                RemComp<ChasmFallingComponent>(uid);
-                _blocker.UpdateCanMove(uid);
+                _jaunted.Add((uid, chasm));
                 continue;
             }
-            // Lavaland Change end: Jaunter
+            // </Lavaland>
 
             QueueDel(uid);
         }
+
+        // <Trauma> - do this instead of deferring so it can immediately be updated correctly
+        foreach (var ent in _jaunted)
+        {
+            RemComp(ent, ent.Comp);
+            _blocker.UpdateCanMove(ent.Owner);
+        }
+        // </Trauma>
     }
 
     private void OnStepTriggered(EntityUid uid, ChasmComponent component, ref StepTriggeredOffEvent args)

@@ -138,3 +138,16 @@
         layer:
         - LowImpassable
         hard: false
+  - type: LanguageKnowledge
+    speaks:
+    - Xeno
+#    - XenoHivemind # Trauma
+    understands:
+    - Xeno
+#    - XenoHivemind # Trauma
+    - Hissing
+    - Draconic
+  - type: CollectiveMind # Trauma
+    defaultChannel: Xenomorphivemind
+    channels:
+    - Xenomorphivemind

@@ -16,6 +16,7 @@ using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Timing;
 using Robust.Shared.Timing;
+using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Bloodtrak;
 
@@ -28,6 +29,8 @@ public sealed class BloodtrakSystem : SharedBloodtrakSystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly UseDelaySystem _delaySystem = default!;
+
+    public static readonly ProtoId<TagPrototype> ScannableTag = "DNASolutionScannable";
 
     public override void Initialize()
     {
@@ -42,7 +45,7 @@ public sealed class BloodtrakSystem : SharedBloodtrakSystem
     /// </summary>
     private (EntityUid, TimeSpan)? GetPuddleDnaOwner(EntityUid target, BloodtrakComponent component, EntityUid user)
     {
-        if (!_tag.HasTag(target, "DNASolutionScannable") || !HasComp<PuddleComponent>(target))
+        if (!_tag.HasTag(target, ScannableTag) || !HasComp<PuddleComponent>(target))
         {
             _popupSystem.PopupEntity(Loc.GetString("bloodtrak-scan-failed"), user, user);
             return null;

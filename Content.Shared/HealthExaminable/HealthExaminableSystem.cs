@@ -1,7 +1,7 @@
 using Content.Goobstation.Common.Examine; // Goob
 using Content.Shared.Damage.Components;
 using Content.Shared.Examine;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;

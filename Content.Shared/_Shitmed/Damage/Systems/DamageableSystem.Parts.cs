@@ -1,4 +1,4 @@
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared._Shitmed.Body;
 using Content.Shared._Shitmed.Body.Part;
 using Content.Shared._Shitmed.Damage;
@@ -32,6 +32,25 @@ public sealed partial class DamageableSystem
     private List<float> _weights = new();
 
     /// <summary>
+    /// TargetBodyPart values that aren't a combination of others.
+    /// Basically BodyPartType??
+    /// </summary>
+    public static readonly TargetBodyPart[] PrimitiveParts =
+    [
+        TargetBodyPart.Head,
+        TargetBodyPart.Chest,
+        TargetBodyPart.Groin,
+        TargetBodyPart.LeftArm,
+        TargetBodyPart.LeftHand,
+        TargetBodyPart.RightArm,
+        TargetBodyPart.RightHand,
+        TargetBodyPart.LeftLeg,
+        TargetBodyPart.LeftFoot,
+        TargetBodyPart.RightLeg,
+        TargetBodyPart.RightFoot
+    ];
+
+    /// <summary>
     /// Applies damage to an entity with body parts, targeting specific parts as needed.
     /// </summary>
     private DamageSpecifier ApplyDamageToBodyParts(
@@ -44,7 +63,8 @@ public sealed partial class DamageableSystem
         float partMultiplier,
         bool ignoreBlockers = false,
         SplitDamageBehavior splitDamageBehavior = SplitDamageBehavior.Split,
-        bool canMiss = true)
+        bool canMiss = true,
+        bool increaseOnly = false)
     {
         var adjustedDamage = damage * partMultiplier;
         // This cursed shitcode lets us know if the target part is a power of 2
@@ -58,22 +78,19 @@ public sealed partial class DamageableSystem
                 DamageableComponent Damageable)>();
 
             // Get only the primitive flags (powers of 2) - these are the actual individual body parts
-            var primitiveFlags = Enum.GetValues<TargetBodyPart>()
-                .Where(flag => flag != 0 && (flag & (flag - 1)) == 0) // Power of 2 check
-                .ToList();
-
-            foreach (var flag in primitiveFlags)
+            foreach (var flag in PrimitiveParts)
             {
                 // Check if this specific flag is set in our targetPart bitmask
-                if (targetPart.Value.HasFlag(flag))
-                {
-                    var query = _body.ConvertTargetBodyPart(flag);
-                    var parts = _body.GetBodyChildrenOfTypeWithComponent<DamageableComponent>(uid, query.Type,
-                        symmetry: query.Symmetry).ToList();
+                if (!targetPart.Value.HasFlag(flag))
+                    continue;
 
-                    if (parts.Count > 0)
-                        targetedBodyParts.AddRange(parts);
-                }
+                // and that it exists on the target
+                var query = _body.ConvertTargetBodyPart(flag);
+                var parts = _body.GetBodyChildrenOfTypeWithComponent<DamageableComponent>(uid, query.Type,
+                    symmetry: query.Symmetry).ToList();
+
+                if (parts.Count > 0)
+                    targetedBodyParts.AddRange(parts);
             }
 
             // If we couldn't find any of the targeted parts, fall back to all body parts
@@ -179,7 +196,7 @@ public sealed partial class DamageableSystem
         var rand = new System.Random(seed);
         var chosenTarget = rand.PickAndTake(possibleTargets);
         return ChangeDamage(chosenTarget.Id, adjustedDamage, ignoreResistances,
-            interruptsDoAfters, origin, ignoreBlockers: ignoreBlockers);
+            interruptsDoAfters, origin, ignoreBlockers: ignoreBlockers, increaseOnly: increaseOnly);
     }
 
     public List<float> GetDamageVariationMultipliers(EntityUid uid, float variation, int count)

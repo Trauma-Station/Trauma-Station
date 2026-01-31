@@ -45,7 +45,7 @@
       prob: 0.1
     - id: RubberStampCaptain
     - id: SpaceCash1000
-    - id: WeaponDisabler
+    # - id: WeaponDisabler # Trauma no disabler when you have telebatong
     - id: ClothingEyesGlassesCommand
     - id: HeadSkeleton # A skull to accompany your skeleton crew
       conditions:
@@ -131,7 +131,7 @@
     - id: ClothingNeckGoldmedal
     - id: DoorRemoteService
     - id: HoPIDCard
-    - id: WeaponDisabler
+    # - id: WeaponDisabler # Trauma
     - id: ClothingEyesHudCommand
     - id: ReinforcementCallerHoP # Trauma
 

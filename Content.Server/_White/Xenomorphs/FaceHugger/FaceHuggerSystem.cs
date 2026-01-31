@@ -25,7 +25,7 @@ using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Server.Construction.Conditions;
 using Content.Shared._White.Xenomorphs.FaceHugger;
@@ -161,9 +161,6 @@ public sealed class FaceHuggerSystem : EntitySystem
         var query = EntityQueryEnumerator<FaceHuggerComponent>();
         while (query.MoveNext(out var uid, out var faceHugger))
         {
-            if (!faceHugger.PlayerControlled)
-                return;
-
             if (!faceHugger.Active && time > faceHugger.RestIn)
                 faceHugger.Active = true;
 
@@ -196,6 +193,9 @@ public sealed class FaceHuggerSystem : EntitySystem
                 }
             }
             // Goobstaion end
+
+            if (!faceHugger.PlayerControlled) // Trauma, no auto jumping facehuggers without player
+                return;
 
             if (faceHugger.Active && clothing?.InSlot == null)
             {

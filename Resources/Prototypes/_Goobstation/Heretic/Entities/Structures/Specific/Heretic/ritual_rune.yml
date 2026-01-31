@@ -21,7 +21,7 @@
   components:
   - type: HereticRitualRune
   - type: Sprite
-    drawdepth: WallMountedItems
+    drawdepth: FloorEffects
     sprite: _Goobstation/Heretic/ritual_rune.rsi
     layers:
     - state: overlay # Required so that you don't miss the rune when clicking on it
@@ -30,8 +30,10 @@
   - type: Clickable
   - type: UserInterface
     interfaces:
-       enum.HereticRitualRuneUiKey.Key:
+      enum.HereticRitualRuneUiKey.Key:
         type: HereticRitualRuneBoundUserInterface
+      enum.FeastOfOwlsUiKey.Key:
+        type: FeastOfOwlsBoundUserInterface
   - type: IgnoresFingerprints
   - type: Damageable
     damageContainer: Inorganic
@@ -58,7 +60,9 @@
       - !type:PlaySoundBehavior
         sound:
           path: /Audio/_Goobstation/Heretic/runebreak.ogg
-  - type: EnchantingTable # Goobstation
+  - type: EnchantingTable
+  - type: AtmosExposed
+  - type: TemperatureTracker
 
 - type: entity
   id: HereticRuneRitualDrawAnimation
@@ -69,7 +73,7 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    drawdepth: WallMountedItems
+    drawdepth: FloorEffects
     sprite: _Goobstation/Heretic/ritual_rune.rsi
     state: icon_drawanim
 
@@ -95,6 +99,6 @@
   - type: TimedDespawn
     lifetime: 1
   - type: Sprite
-    drawdepth: WallMountedItems
+    drawdepth: HighFloorObjects
     sprite: _Goobstation/Heretic/ritual_rune.rsi
     state: icon_ritualanim

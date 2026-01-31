@@ -130,7 +130,6 @@
       #- BorgChassis # Goob - allow self unlock
       - RoboticsConsole
   - type: WiresPanel
-    openingTool: Screwing #Goob Edit
   - type: ActivatableUIRequiresPanel
   - type: NameIdentifier
     group: Silicon
@@ -279,12 +278,19 @@
     damageProtection:
       flatReductions:
         Heat: 10 # capable of touching light bulbs and stoves without feeling pain!
-  - type: Penetratable # Goobstation - Better snipers
+  - type: BypassLock
+  - type: BypassLockRequiresMobState
+    requiredMobState:
+    - Critical
+    - Dead
+  # <Goob>
+  - type: Penetratable # Better snipers
     penetrateDamage: 75 # It's harder to kill iron golem
     damagePenalty: 0.25
-  - type: MiningPoints # goobstation borgs can claim mining points
-  - type: SpeechSynthesis # Corvax-Frontier-Barks
+  - type: MiningPoints
+  - type: SpeechSynthesis
     voice: Borg
+  # </Goob>
 
 - type: entity
   abstract: true
@@ -336,6 +342,7 @@
     nameSet: True
     mobile: True # Goobstation - mobile cameras fix, borg camera not really relevant since monitor doesn't see it anyways but eh
     id: Xenoborg
+    useEntityNameAsCameraId: true
   - type: Explosive
     explosionType: Minibomb
     deleteAfterExplosion: false # let damage threshold gib the borg
@@ -414,14 +421,18 @@
       Unsexed: UnisexSiliconSyndicate
   - type: PointLight
     color: "#dd200b"
-  - type: Damageable #Goobstation - Ion Damage
+  - type: BypassLock
+    bypassDelay: 15 # We don't want people to easily be able to remove syndieborg brains.
+  # <Goob>
+  - type: Damageable
     damageContainer: Silicon
     damageModifierSet: SiliconProtected
-  - type: ExplosionResistance #Goobstation - Ion Damage
+  - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: FlashImmunity
-  - type: SpeechSynthesis # Corvax-Frontier-Barks
+  - type: SpeechSynthesis
     voice: BorgSyndie
+  # </Goob>
 
 - type: entity
   id: BaseBorgChassisDerelict
@@ -473,6 +484,8 @@
       Unsexed: UnisexSiliconSyndicate
   - type: PointLight
     color: "#dd200b"
+  - type: BypassLock
+    bypassDelay: 15 # We don't want people to easily be able to remove syndieborg brains.
 
 - type: entity
   parent: BaseBorgChassisNotIonStormable
@@ -572,7 +585,7 @@
           collection: MetalBreak
       - !type:SpawnEntitiesBehavior
         spawn:
-          PinpointerMothership: # drop a pinpointer to the mothership upon being destructed
+          PinpointerMothershipPiece: # drop a piece of core pinpointer upon being destructed (4 pieces to make a core pinpointer)
             min: 1
             max: 1
       - !type:EmptyContainersBehaviour
@@ -600,3 +613,5 @@
     interactSuccessSound:
       path: /Audio/Ambience/Objects/periodic_beep.ogg
   - type: Xenoborg
+  - type: BypassLock
+    bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.

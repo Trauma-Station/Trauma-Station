@@ -6459,7 +6459,6 @@ entities:
     - type: SpreaderGrid
     - type: ImplicitRoof
     - type: NavMap
-    - type: FTLDrive
 - proto: AccordionInstrument
   entities:
   - uid: 3

@@ -368,7 +368,7 @@
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitSalvage
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -413,7 +413,7 @@
     graph: HardsuitGoliath
     node: hardsuitGoliath
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -463,7 +463,7 @@
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitMaxim
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -505,7 +505,7 @@
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitSecurity
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -547,7 +547,7 @@
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitBrigmedic
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -589,7 +589,7 @@
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitWarden
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -632,7 +632,7 @@
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitCap
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -746,7 +746,7 @@
         Heat: 0.4
         Radiation: 0.05
   - type: ExplosionResistance
-    damageCoefficient: 0.15 #Goob - Modsuits
+    damageCoefficient: 0.55 #Goob - Modsuits
   - type: ClothingSpeedModifier
     walkModifier: 0.85 #Goob - Modsuits
     sprintModifier: 0.85 #Goob - Modsuits
@@ -810,7 +810,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 #Luxury Mining Hardsuit
 - type: entity
@@ -848,7 +848,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 #ANTAG HARDSUITS
 #Blood-red Hardsuit
@@ -870,7 +870,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
-    damageCoefficient: 0.1 # Goob edit
+    damageCoefficient: 0.5 # Goob edit
   - type: Armor
     traumaDeductions:
       Dismemberment: 0.5
@@ -927,7 +927,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 #Syndicate Elite Hardsuit
 - type: entity
@@ -951,7 +951,7 @@
   - type: FireProtection
     reduction: 0.8
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
-    damageCoefficient: 0.1 # Goob edit
+    damageCoefficient: 0.5 # Goob edit
   - type: Armor
     traumaDeductions:
       Dismemberment: 0.5
@@ -997,7 +997,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
-    damageCoefficient: 0.1 # Goob edit
+    damageCoefficient: 0.5 # Goob edit
   - type: Armor
     traumaDeductions:
       Dismemberment: 0.6
@@ -1045,7 +1045,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.2
   - type: StaminaResistance # Goobstation uncommented
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: Armor
     traumaDeductions: # prevents traumas at all (kinda)
       Dismemberment: 1
@@ -1198,7 +1198,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 #Pirate Captain Hardsuit
 - type: entity
@@ -1239,7 +1239,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 #CENTCOMM / ERT HARDSUITS
 #ERT Leader Hardsuit
@@ -1439,7 +1439,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 #MISC. HARDSUITS
 #Clown Hardsuit

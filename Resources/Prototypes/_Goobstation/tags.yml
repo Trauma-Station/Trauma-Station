@@ -116,9 +116,6 @@
   id: CameraElectronics
 
 - type: Tag
-  id: CannotSuicideAny
-
-- type: Tag
   id: Chair
 
 - type: Tag
@@ -609,6 +606,9 @@
   id: SyringeArmor
 
 - type: Tag
+  id: SyringeCase
+
+- type: Tag
   id: Table
 
 - type: Tag
@@ -829,7 +829,7 @@
   id: HereticCostume
 
 - type: Tag
-  id: VinylSleeveFit  
+  id: VinylSleeveFit
 
 - type: Tag
   id: CD

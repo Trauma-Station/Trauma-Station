@@ -10,7 +10,7 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-    - UniqueMarkerNanorepLocker 
+    - UniqueMarkerNanorepLocker
 
 - type: entity
   abstract: true # Trauma

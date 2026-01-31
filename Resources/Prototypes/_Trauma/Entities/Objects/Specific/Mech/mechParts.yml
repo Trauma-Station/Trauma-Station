@@ -1,0 +1,156 @@
+- type: entity
+  abstract: true
+  parent: [BaseItem, BaseRevMajorContraband]
+  id: T45PartBase
+  description: A part for the T-45 P.O.W.A.R armor.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Mech/T45Armor.rsi
+  - type: Item
+    size: Ginormous
+
+- type: entity
+  parent: T45PartBase
+  id: T45Helmet
+  name: T-45 Helmet
+  components:
+  - type: Sprite
+    state: t45_helmet
+  - type: Tag
+    tags:
+    - T45Helmet
+
+- type: entity
+  parent: T45PartBase
+  id: T45Chest
+  name: T-45 Chest
+  components:
+  - type: Sprite
+    state: t45_chest
+  - type: Tag
+    tags:
+    - T45Chest
+
+- type: entity
+  parent: T45PartBase
+  id: T45ArmL
+  name: T-45 left arm
+  components:
+  - type: Sprite
+    state: t45_lefthand
+  - type: Tag
+    tags:
+    - T45ArmL
+
+- type: entity
+  parent: T45PartBase
+  id: T45ArmR
+  name: T-45 right arm
+  components:
+  - type: Sprite
+    state: t45_righthand
+  - type: Tag
+    tags:
+    - T45ArmR
+
+- type: entity
+  parent: T45PartBase
+  id: T45LegR
+  name: T-45 right leg
+  components:
+  - type: Sprite
+    state: t45_rightleg
+  - type: Tag
+    tags:
+    - T45LegR
+
+- type: entity
+  parent: T45PartBase
+  id: T45LegL
+  name: T-45 left leg
+  components:
+  - type: Sprite
+    state: t45_leftleg
+  - type: Tag
+    tags:
+    - T45LegL
+
+- type: entity
+  parent: [PowerCellHyper, BaseRevMajorContraband]
+  id: FusionCore
+  name: fusion core
+  suffix: Full
+  description: A fusion core, can be used as a battery with a very high capacity, but is more often used to power, P.O.W.A.R armor suits.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/fusionCore.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: fusion_core
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+  - type: Item
+    size: Normal
+  - type: Tag
+    tags:
+    - FusionCore
+
+- type: entity
+  parent: [BaseMechWeaponMelee, CombatMechEquipment, BaseRevMajorContraband]
+  id: WeaponMechMeleePowerFist
+  name: power fist
+  suffix: Mech Weapon, Melee
+  description: An armored gauntlet, with a powered ram or similar device which improves the impact of the wielder's strikes, used in the T-45 P.O.W.A.R armor.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/powerfist.rsi
+    state: powerfist
+  - type: MeleeThrowOnHit
+    distance: 5
+    speed: 30
+  - type: MeleeWeapon
+    canWideSwing: false
+    angle: 0
+    wideAnimationRotation: -90
+    soundHit:
+      collection: PowerFistHit
+    attackRate: 0.5
+    damage:
+      groups:
+        Brute: 30
+      types:
+        Structural: 60
+
+- type: entity
+  parent: [ BaseMechWeaponRange, CombatMechEquipment, BaseRevMajorContraband ]
+  id: WeaponMechCombatFlameThrower
+  name: fO-46 mk3 heavy flamer
+  suffix: Mech Weapon, Gun, Combat, Flame
+  description: Fires flame from its thrower, can be used in the T-45 P.O.W.A.R armor.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Flamethrower/flamethrower.rsi
+    state: icon
+  - type: BasicEntityAmmoProvider
+    proto: FlameThrowerBullet
+    capacity: 250
+    count: 250
+  - type: Buckleable
+  - type: Gun
+    minAngle: 0
+    maxAngle: 0
+    fireRate: 5
+    burstFireRate: 5
+    burstCooldown: .5
+    shotsPerBurst: 5
+    projectileSpeed: 20
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_Trauma/Revs/flamethrower.ogg
+  - type: AmmoCounter
+  - type: UseDelay
+    delay: 1

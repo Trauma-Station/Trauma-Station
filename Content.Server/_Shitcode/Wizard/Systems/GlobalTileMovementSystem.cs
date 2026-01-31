@@ -15,7 +15,6 @@ using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles.Events;
-using Content.Shared._Lavaland.Movement;
 using Content.Shared.Chat;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind.Components;
@@ -46,20 +45,21 @@ public sealed class GlobalTileMovementSystem : EntitySystem
         SubscribeLocalEvent<GhostRoleSpawnerUsedEvent>(OnGhostRoleSpawnerUsed);
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawn);
     }
-    public bool GlobalTileMovementIsActive()
+
+    public Entity<GlobalTileMovementRuleComponent>? GetRule()
     {
-        var query = EntityQueryEnumerator<GlobalTileMovementRuleComponent, ActiveGameRuleComponent, GameRuleComponent>();
-        while (query.MoveNext(out _, out _, out _, out _))
+        var query = EntityQueryEnumerator<GlobalTileMovementRuleComponent, ActiveGameRuleComponent>();
+        while (query.MoveNext(out var uid, out var comp, out _))
         {
-            return true;
+            return (uid, comp);
         }
 
-        return false;
+        return null;
     }
 
     private void OnGlobalTileToggle(GlobalTileToggleEvent ev)
     {
-        if (GlobalTileMovementIsActive())
+        if (GetRule() != null)
             return;
 
         _gameTicker.StartGameRule(GameRule);
@@ -85,25 +85,25 @@ public sealed class GlobalTileMovementSystem : EntitySystem
             if (TerminatingOrDeleted(uid))
                 continue;
 
-            EnsureComp<HierophantBeatComponent>(uid);
+            EntityManager.AddComponents(uid, ent.Comp.Components);
         }
     }
 
     private void OnGhostRoleSpawnerUsed(GhostRoleSpawnerUsedEvent args)
     {
-        if (!GlobalTileMovementIsActive())
+        if (GetRule() is not {} rule)
             return;
 
-        EnsureComp<HierophantBeatComponent>(args.Spawned);
+        EntityManager.AddComponents(args.Spawned, rule.Comp.Components);
     }
 
     private void OnPlayerSpawn(PlayerSpawnCompleteEvent ev)
     {
-        if (!GlobalTileMovementIsActive()
-            || !ev.LateJoin
-            || TerminatingOrDeleted(ev.Mob))
+        if (GetRule() is not {} rule ||
+            !ev.LateJoin ||
+            TerminatingOrDeleted(ev.Mob))
             return;
 
-        EnsureComp<HierophantBeatComponent>(ev.Mob);
+        EntityManager.AddComponents(ev.Mob, rule.Comp.Components);
     }
 }

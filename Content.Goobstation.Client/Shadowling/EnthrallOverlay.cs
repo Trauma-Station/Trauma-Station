@@ -14,10 +14,10 @@ namespace Content.Goobstation.Client.Shadowling;
 
 public sealed class EnthrallOverlay : Overlay
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     public override bool RequestScreenTexture => true;
@@ -25,15 +25,17 @@ public sealed class EnthrallOverlay : Overlay
     private double _startTime = -1;
     private double _lastsFor = 1;
 
+    public static readonly ProtoId<ShaderPrototype> EnthrallEffect = "EnthrallEffect";
+
     public EnthrallOverlay()
     {
         IoCManager.InjectDependencies(this);
-        _shader = _prototypeManager.Index<ShaderPrototype>("EnthrallEffect").Instance().Duplicate();
+        _shader = _proto.Index(EnthrallEffect).Instance().Duplicate();
     }
 
     public void ReceiveEnthrall(double duration)
     {
-        _startTime = _gameTiming.CurTime.TotalSeconds;
+        _startTime = _timing.CurTime.TotalSeconds;
         _lastsFor = duration;
     }
 
@@ -42,7 +44,7 @@ public sealed class EnthrallOverlay : Overlay
         if (ScreenTexture == null)
             return;
 
-        var percentComplete = (float) ((_gameTiming.CurTime.TotalSeconds - _startTime) / _lastsFor);
+        var percentComplete = (float) ((_timing.CurTime.TotalSeconds - _startTime) / _lastsFor);
         if (percentComplete >= 1.0f)
             return;
 
@@ -56,7 +58,7 @@ public sealed class EnthrallOverlay : Overlay
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
     {
-        if (!_entityManager.TryGetComponent(_playerManager.LocalEntity, out EyeComponent? eyeComp))
+        if (!_entMan.TryGetComponent(_player.LocalEntity, out EyeComponent? eyeComp))
             return false;
 
         if (args.Viewport.Eye != eyeComp.Eye)

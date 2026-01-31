@@ -5,6 +5,7 @@ using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Random;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
@@ -901,6 +902,27 @@ public partial class SharedBodySystem
         return !Resolve(bodyId, ref body, logMissing: false) ? 0 : GetBodyChildren(bodyId, body).Count(part => part.Component.PartType == partType);
     }
 
+    public float GetVitalBodyPartRatio(EntityUid bodyId, BodyComponent? body = null)
+    {
+        if (!Resolve(bodyId, ref body, logMissing: false))
+            return 1f;
+
+        var children = GetBodyChildren(bodyId, body);
+        var vitalCount = 0;
+        var count = 0;
+        foreach (var child in children)
+        {
+            count++;
+            if ((int) (child.Component.PartType & BodyPartType.Vital) != 0)
+                vitalCount++;
+        }
+
+        if (vitalCount == 0)
+            return 1f;
+
+        return (float) count / vitalCount;
+    }
+
     public string GetSlotFromBodyPart(BodyPartComponent? part)
     {
         var slotName = "";
@@ -1009,21 +1031,7 @@ public partial class SharedBodySystem
             || !Resolve(attacker, ref attackerComp, false))
             return TargetBodyPart.Chest;
 
-        if (_mobState.IsIncapacitated(target)
-            || Standing.IsDown(target))
-            return attackerComp.Target;
-
-        var totalWeight = targetComp.TargetOdds[attackerComp.Target].Values.Sum();
-        var randomValue = _random.NextFloat() * totalWeight;
-
-        foreach (var (part, weight) in targetComp.TargetOdds[attackerComp.Target])
-        {
-            if (randomValue <= weight)
-                return part;
-            randomValue -= weight;
-        }
-
-        return TargetBodyPart.Chest; // Default to torso if something goes wrong
+        return GetRandomBodyPart(target, attackerComp.Target, targetComp);
     }
 
     public TargetBodyPart GetRandomBodyPart(EntityUid target,
@@ -1038,7 +1046,9 @@ public partial class SharedBodySystem
             return targetPart;
 
         var totalWeight = targetComp.TargetOdds[targetPart].Values.Sum();
-        var randomValue = _random.NextFloat() * totalWeight;
+        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(target).Id);
+        var rand = new System.Random(seed);
+        var randomValue = rand.NextFloat() * totalWeight;
 
         foreach (var (part, weight) in targetComp.TargetOdds[targetPart])
         {
@@ -1047,7 +1057,7 @@ public partial class SharedBodySystem
             randomValue -= weight;
         }
 
-        return targetPart;
+        return TargetBodyPart.Chest;
     }
 
     public TargetBodyPart GetRandomBodyPart(EntityUid target)
@@ -1056,7 +1066,9 @@ public partial class SharedBodySystem
         if (children.Count == 0)
             return TargetBodyPart.Chest;
 
-        return GetTargetBodyPart(_random.PickAndTake(children));
+        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(target).Id);
+        var rand = new System.Random(seed);
+        return GetTargetBodyPart(rand.PickAndTake(children));
     }
 
     public TargetBodyPart GetRandomBodyPart(EntityUid target,

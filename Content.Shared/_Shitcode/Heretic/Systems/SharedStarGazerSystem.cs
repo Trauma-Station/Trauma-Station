@@ -5,7 +5,9 @@ using Content.Shared._Shitcode.Heretic.Systems.Abilities;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Heretic;
+using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mind;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
@@ -14,6 +16,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._Shitcode.Heretic.Systems;
 
@@ -23,7 +26,8 @@ public abstract class SharedStarGazerSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem Xform = default!;
 
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedHereticAbilitySystem _heretic = default!;
+    [Dependency] private readonly SharedHereticAbilitySystem _hereticAbility = default!;
+    [Dependency] private readonly SharedHereticSystem _heretic = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -36,7 +40,6 @@ public abstract class SharedStarGazerSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<StarGazerComponent, StarGazeEvent>(OnStarGaze);
-        SubscribeLocalEvent<StarGazerComponent, AttackAttemptEvent>(OnStarGazerAttackAttempt);
         SubscribeLocalEvent<StarGazerComponent, MeleeHitEvent>(OnStarGazerHit);
 
         SubscribeLocalEvent<StarGazeComponent, StarGazeDoAfterEvent>(OnStarGazeDoAfter);
@@ -45,7 +48,17 @@ public abstract class SharedStarGazerSystem : EntitySystem
         SubscribeLocalEvent<StarGazeComponent, ComponentShutdown>(OnStarGazeShutdown);
         SubscribeLocalEvent<StarGazeComponent, AttackAttemptEvent>(OnStarGazeAttackAttempt);
 
+        SubscribeLocalEvent<HereticComponent, EventHereticResolveStarGazer>(OnResolveStarGazer);
+
         SubscribeAllEvent<LaserBeamEndpointPositionEvent>(OnGetPosition);
+    }
+
+    private void OnResolveStarGazer(Entity<HereticComponent> ent, ref EventHereticResolveStarGazer args)
+    {
+        if (!TryComp(ent, out MindComponent? mind) || mind.OwnedEntity is not { } uid)
+            return;
+
+        ResolveStarGazer(uid, out _, false);
     }
 
     private void OnStarGazerHit(Entity<StarGazerComponent> ent, ref MeleeHitEvent args)
@@ -54,13 +67,6 @@ public abstract class SharedStarGazerSystem : EntitySystem
         {
             _starMark.TryApplyStarMark(uid);
         }
-    }
-
-    private void OnStarGazerAttackAttempt(Entity<StarGazerComponent> ent, ref AttackAttemptEvent args)
-    {
-        if (args.Target == ent.Comp.Summoner || HasComp<ShadowCloakEntityComponent>(args.Target) &&
-            Transform(args.Target.Value).ParentUid == ent.Comp.Summoner)
-            args.Cancel();
     }
 
     private void OnStarGazeAttackAttempt(Entity<StarGazeComponent> ent, ref AttackAttemptEvent args)
@@ -162,7 +168,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
 
     private void OnStarGaze(Entity<StarGazerComponent> ent, ref StarGazeEvent args)
     {
-        if (!_heretic.TryUseAbility(ent, args))
+        if (!_hereticAbility.TryUseAbility(args, false))
             return;
 
         var orbEffect = PredictedSpawnAttachedTo(args.OrbEffect, ent.Owner.ToCoordinates());
@@ -190,38 +196,54 @@ public abstract class SharedStarGazerSystem : EntitySystem
         args.Handled = true;
     }
 
-    public Entity<StarGazerComponent>? ResolveStarGazer(Entity<HereticComponent?, CosmosPassiveComponent?> summoner,
+    public Entity<StarGazerComponent>? ResolveStarGazer(Entity<CosmosPassiveComponent?> summoner,
         out bool spawned,
         bool checkAscend = true,
         EntityCoordinates? spawnCoords = null)
     {
         spawned = false;
 
-        if (!Resolve(summoner, ref summoner.Comp1, ref summoner.Comp2, false) ||
-            summoner.Comp1.CurrentPath != "Cosmos" || checkAscend && !summoner.Comp1.Ascended)
+        if (!Resolve(summoner, ref summoner.Comp, false) ||
+            !_heretic.TryGetHereticComponent(summoner.Owner, out var heretic, out var mind) ||
+            heretic.CurrentPath != "Cosmos" || checkAscend && !heretic.Ascended)
             return null;
 
         StarGazerComponent? comp;
-        if (!Exists(summoner.Comp2.StarGazer))
+        HereticMinionComponent? minion;
+
+        var starGazer = summoner.Comp.StarGazer;
+        if (!Exists(starGazer))
+            starGazer = heretic.Minions.FirstOrNull(x => Exists(x) && HasComp<StarGazerComponent>(x));
+
+        if (starGazer == null)
         {
-            var starGazer =
-                PredictedSpawnAtPosition(summoner.Comp2.StarGazerId, spawnCoords ?? Transform(summoner).Coordinates);
-            Xform.AttachToGridOrMap(starGazer);
-            comp = EnsureComp<StarGazerComponent>(starGazer);
-            comp.Summoner = summoner;
-            summoner.Comp2.StarGazer = starGazer;
-            Dirty(summoner, summoner.Comp2);
-            Dirty(starGazer, comp);
+            starGazer = PredictedSpawnAtPosition(summoner.Comp.StarGazerId,
+                spawnCoords ?? Transform(summoner).Coordinates);
+            Xform.AttachToGridOrMap(starGazer.Value);
+            comp = EnsureComp<StarGazerComponent>(starGazer.Value);
+            minion = EnsureComp<HereticMinionComponent>(starGazer.Value);
+            minion.BoundHeretic = summoner;
+            summoner.Comp.StarGazer = starGazer.Value;
+            heretic.Minions.Add(starGazer.Value);
+            Dirty(mind, heretic);
+            Dirty(summoner, summoner.Comp);
+            Dirty(starGazer.Value, minion);
             spawned = true;
-            return (starGazer, comp);
+            return (starGazer.Value, comp);
         }
 
-        if (EnsureComp<StarGazerComponent>(summoner.Comp2.StarGazer.Value, out comp) && comp.Summoner == summoner.Owner)
-            return (summoner.Comp2.StarGazer.Value, comp);
+        heretic.Minions.Add(starGazer.Value);
+        Dirty(mind, heretic);
 
-        comp.Summoner = summoner;
-        Dirty(summoner.Comp2.StarGazer.Value, comp);
+        comp = EnsureComp<StarGazerComponent>(starGazer.Value);
 
-        return (summoner.Comp2.StarGazer.Value, comp);
+        if (EnsureComp<HereticMinionComponent>(starGazer.Value, out minion) &&
+            minion.BoundHeretic == summoner.Owner)
+            return (starGazer.Value, comp);
+
+        minion.BoundHeretic = summoner.Owner;
+        Dirty(starGazer.Value, minion);
+
+        return (starGazer.Value, comp);
     }
 }

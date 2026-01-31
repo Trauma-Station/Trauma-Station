@@ -39,6 +39,12 @@ public sealed partial class ActiveAutodocComponent : Component
     public bool Waiting;
 
     /// <summary>
+    /// Set to true when doing the last step of the desired surgery.
+    /// </summary>
+    [DataField]
+    public bool Final;
+
+    /// <summary>
     /// The current body, part and surgery being done, if any.
     /// </summary>
     [DataField]

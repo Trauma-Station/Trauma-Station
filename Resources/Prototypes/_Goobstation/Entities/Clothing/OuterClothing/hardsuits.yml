@@ -120,7 +120,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 # Cybersun Stealth
 
@@ -176,7 +176,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 # cybersun dreadnought suit
 
@@ -236,7 +236,7 @@
       interval: 1.0
       ignoreResistances: true
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown
     cancel: true
 
@@ -378,7 +378,11 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitVoxRaiderStealth
-  - type: VoxRestricted
+  - type: ClothingConditions
+    reason: entity-condition-popup-not-vox-raider
+    conditions:
+    - !type:SpeciesCondition
+      species: Vox
 
 # Detective's Hardsuit
 

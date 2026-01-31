@@ -1,4 +1,4 @@
-custom-lawboard-ui-title = experimental syndicate lawboard
+custom-lawboard-ui-title = freeform lawboard
 
 custom-lawboard-up-arrow = ↑
 custom-lawboard-down-arrow = ↓

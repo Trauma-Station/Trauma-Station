@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Verm <32827189+Vermidia@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Server.Speech.Components;
@@ -82,7 +75,7 @@ public sealed class MobsterAccentSystem : EntitySystem
             var suffix = "";
             if (component.IsBoss)
             {
-                var pick = _random.Next(1, 4);
+                var pick = _random.Next(1, 6); // Goob - 4 -> 6
                 suffix = Loc.GetString($"accent-mobster-suffix-boss-{pick}");
             }
             else

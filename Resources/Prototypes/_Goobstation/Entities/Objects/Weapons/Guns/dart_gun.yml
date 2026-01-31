@@ -16,6 +16,7 @@
     sprite: _Goobstation/Objects/Weapons/Guns/Cannons/dart_gun.rsi
     state: icon
   - type: Item
+    sprite: _Goobstation/Objects/Weapons/Guns/Cannons/syringe_gun.rsi # use syringe gun inhands, it looks close enough
     size: Small
     storedRotation: -90
   - type: Gun
