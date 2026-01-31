@@ -133,13 +133,10 @@
   - type: Fixtures
     fixtures:
       fix1:
-        shape: !type:PolygonShape
-          radius: 0.01
-          vertices:
-          - -0.475,-0.225
-          - -0.225,-0.475
-          - 0.525,0.275
-          - 0.275,0.525
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        hard: false
         density: 20
         mask:
         - ItemMask
