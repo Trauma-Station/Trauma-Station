@@ -19,7 +19,7 @@ public sealed class MapRestrictedGunSystem : EntitySystem
         var xform = Transform(ent);
         if (args.Cancelled
             || xform.MapUid is not {} map
-            || !_whitelist.CheckBoth(map, blacklist: ent.Comp.PlanetBlacklist, whitelist: ent.Comp.PlanetWhitelist))
+            || _whitelist.CheckBoth(map, blacklist: ent.Comp.PlanetBlacklist, whitelist: ent.Comp.PlanetWhitelist))
             return;
 
         args.Cancelled = true;
