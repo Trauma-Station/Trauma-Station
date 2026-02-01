@@ -312,18 +312,18 @@ public sealed class FaceHuggerSystem : EntitySystem
     /// </summary>
     public bool CanInject(EntityUid uid, FaceHuggerComponent component, EntityUid target)
     {
+        // injection disabled
+        if (component.SleepChem is not {} reagent)
+            return false;
+
         // Check if facehugger is properly equipped
         if (!TryComp<ClothingComponent>(uid, out var clothingComp) || clothingComp.InSlot == null)
-        {
-            if (!component.Active)
-                return false;
-            return true;
-        }
+            return component.Active;
 
         // Check if target already has the sleep chemical
         if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
             _solutions.ResolveSolution(target, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution) &&
-            bloodSolution.TryGetReagentQuantity(new ReagentId(component.SleepChem, null), out var quantity) &&
+            bloodSolution.TryGetReagentQuantity(new ReagentId(reagent, null), out var quantity) &&
             quantity > FixedPoint2.New(component.MinChemicalThreshold))
         {
             return false;
@@ -337,7 +337,8 @@ public sealed class FaceHuggerSystem : EntitySystem
     public Solution CreateSleepChemicalSolution(FaceHuggerComponent component, float amount)
     {
         var solution = new Solution();
-        solution.AddReagent(component.SleepChem, amount);
+        if (component.SleepChem is {} reagent)
+            solution.AddReagent(reagent, amount);
         return solution;
     }
 
