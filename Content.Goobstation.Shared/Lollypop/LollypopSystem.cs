@@ -60,15 +60,8 @@ public sealed class LollypopSystem : EntitySystem
         equipped.NextBite = _timing.CurTime + ent.Comp.BiteInterval;
         Dirty(ent, equipped);
 
-        // add popup of taste
-        if (!TryComp<EdibleComponent>(ent.Owner, out var edible))
-            return;
-        if (!_solution.TryGetSolution(ent.Owner, edible.Solution, out _, out var soln))
-            return;
-
-        var flavors = _flavorProfile.GetLocalizedFlavorsMessage(user, soln);
-        var proto = _proto.Index(edible.Edible);
-        _popup.PopupClient(Loc.GetString(proto.Message, ("food", ent.Owner), ("flavors", flavors)), user, user);
+        // add popup of taste immediately
+        TastePopup(ent, user, predicted: true);
     }
 
     private void OnUnequipped(Entity<EquippedLollypopComponent> ent, ref ClothingGotUnequippedEvent args)
@@ -95,10 +88,28 @@ public sealed class LollypopSystem : EntitySystem
             DoAfter = new(0, fakeArgs, now)
         };
         RaiseLocalEvent(user, ev);
+        // ingestion always assumes it's predicted so it doesnt do a popup itself
+        TastePopup(ent, user, predicted: false);
 
         ent.Comp2.NextBite = TerminatingOrDeleted(ent)
             ? null // lollypop is empty stop updating
             : now + ent.Comp1.BiteInterval;
         Dirty(ent, ent.Comp2);
+    }
+
+    private void TastePopup(EntityUid uid, EntityUid user, bool predicted)
+    {
+        if (!TryComp<EdibleComponent>(uid, out var edible))
+            return;
+        if (!_solution.TryGetSolution(uid, edible.Solution, out _, out var soln))
+            return;
+
+        var flavors = _flavorProfile.GetLocalizedFlavorsMessage(user, soln);
+        var proto = _proto.Index(edible.Edible);
+        var msg = Loc.GetString(proto.Message, ("food", uid), ("flavors", flavors));
+        if (predicted)
+            _popup.PopupClient(msg, user, user);
+        else
+            _popup.PopupEntity(msg, user, user);
     }
 }
