@@ -686,6 +686,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (shooter != null)
             Projectiles.SetShooter(uid, projectile, shooter.Value);
 
+        Log.Debug($"client={_netManager.IsClient} Shot projectile {ToPrettyString(uid)}");
         Physics.UpdateIsPredicted(uid, physics); // Trauma - predict this shit
 
         TransformSystem.SetWorldRotation(uid, direction.ToWorldAngle() + projectile.Angle);
