@@ -170,7 +170,11 @@ public sealed class PredictedProjectileSystem : EntitySystem
         }
 
         if ((comp.DeleteOnCollide && comp.ProjectileSpent) || (comp.NoPenetrateMask & otherFixture.CollisionLayer) != 0) // Goobstation - Make x-ray arrows not penetrate blob
+        {
+            var deleteEv = new DeletingProjectileEvent(uid);
+            RaiseLocalEvent(ref deleteEv);
             PredictedQueueDel(uid);
+        }
 
         if (comp.ImpactEffect != null && TryComp(uid, out TransformComponent? xform) && _timing.IsFirstTimePredicted)
         {
