@@ -2095,6 +2095,7 @@
       tags:
       - Mouse
   - type: MobCallable
+  - type: XenoCompatible # to let egg sack surgeries work nicely...
   # </Goobstation>
 
 - type: entity
