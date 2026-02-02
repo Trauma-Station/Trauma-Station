@@ -12,6 +12,7 @@ construction-graph-tag-RevID = a revolutionary ID card
 construction-graph-tag-RocketFrame = a rocket frame
 construction-graph-tag-FlamethrowerTank = an empty fuel tank
 construction-graph-tag-QMBoard = the requisition digi-board
+construction-graph-tag-fusion-core = a fusion core
 
 # tools
 construction-graph-tag-welder-experimental = an experimental welding tool

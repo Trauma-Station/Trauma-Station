@@ -5,6 +5,60 @@
   - !type:PlayerGUIDLoadoutEffect
     guid: bb948988-53ed-4985-aec0-2ca378f7f8b1
 
+# - type: loadoutEffectGroup
+#   id: TurboTracker
+#   effects:
+#   - !type:PlayerGUIDLoadoutEffect
+#     guid:
+
+# - type: loadoutEffectGroup
+#   id: Weax
+#   effects:
+#   - !type:PlayerGUIDLoadoutEffect
+#     guid:
+
+- type: loadoutEffectGroup
+  id: Tia_Zoh
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 1c4e135f-839f-4494-b740-fdbacce313be
+
+# - type: loadoutEffectGroup
+#   id: OwenCarpenter
+#   effects:
+#   - !type:PlayerGUIDLoadoutEffect
+#     guid:
+
+- type: loadoutEffectGroup
+  id: Tenshi
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 553a2f9c-4584-4396-963a-017efdf812f5
+
+# - type: loadoutEffectGroup
+#   id: Parorya
+#   effects:
+#   - !type:PlayerGUIDLoadoutEffect
+#     guid:
+
+# - type: loadoutEffectGroup
+#   id: DiaAWAY
+#   effects:
+#   - !type:PlayerGUIDLoadoutEffect
+#     guid:
+
+- type: loadoutEffectGroup
+  id: Yonsim
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 86e10de7-0259-498b-87c6-45739aa1e18d
+
+# - type: loadoutEffectGroup
+#   id: Cog
+#   effects:
+#   - !type:PlayerGUIDLoadoutEffect
+#     guid:
+
 #Items
 - type: loadout
   id: CybersunFlippo
@@ -14,3 +68,21 @@
   storage:
     back:
     - CybersunFlippo
+
+- type: loadout
+  id: PatreonTia
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Tia_Zoh
+  storage:
+    back:
+    - PatreonTia
+
+- type: loadout
+  id: PatreonTenshi
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Tenshi
+  storage:
+    back:
+    - PatreonTenshi

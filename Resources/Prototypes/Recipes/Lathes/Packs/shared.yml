@@ -4,7 +4,7 @@
   id: MaterialsStatic
   recipes:
   - SheetRGlass
-  - MaterialDurathread
+ # - MaterialDurathread # Trauma - remove durathread lathe print
 
 - type: latheRecipePack
   id: PartsStatic
@@ -69,3 +69,6 @@
   id: SalvageSecurityWeapons
   recipes:
   - WeaponProtoKineticAccelerator
+  - WeaponProtoKineticShotgun
+  - WeaponProtoKineticRepeater
+  - WeaponProtoKineticPistol

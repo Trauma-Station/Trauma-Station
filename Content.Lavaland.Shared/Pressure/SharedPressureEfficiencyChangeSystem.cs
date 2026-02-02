@@ -41,7 +41,7 @@ public abstract class SharedPressureEfficiencyChangeSystem : EntitySystem
 
     private void ExamineHelper(double min, double max, double modifier, string localeKey, ref ExaminedEvent args)
     {
-        localeKey += modifier > 0f ? "debuff" : "buff";
+        localeKey += modifier > 1f ? "debuff" : "buff";
         modifier = Math.Abs(modifier);
         args.PushMarkup(Loc.GetString(localeKey, ("min", min), ("max", max), ("modifier", modifier)));
     }

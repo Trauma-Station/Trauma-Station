@@ -47,7 +47,7 @@ public partial class SharedBodySystem
             return;
         }
 
-        if (part.Body is not { Valid: true } body
+        if (part.Body is not {} body
             || !TryComp(body, out HumanoidAppearanceComponent? bodyAppearance))
             return;
 
@@ -111,30 +111,30 @@ public partial class SharedBodySystem
         if (!Resolve(partAppearance, ref partAppearance.Comp))
             return;
 
-        if (!remove)
+        if (remove)
         {
-
-            if (!_markingManager.Markings.TryGetValue(markingId, out var prototype))
-                return;
-
-            var markingColors = MarkingColoring.GetMarkingLayerColors(
-                    prototype,
-                    bodyAppearance.SkinColor,
-                    bodyAppearance.EyeColor,
-                    bodyAppearance.MarkingSet
-                );
-
-            var marking = new Marking(markingId, markingColors);
-
-            _humanoid.SetLayerVisibility((uid, bodyAppearance), targetLayer, true);
-            _humanoid.AddMarking(uid, markingId, markingColors, true, true, bodyAppearance);
-            if (!partAppearance.Comp.Markings.ContainsKey(targetLayer))
-                partAppearance.Comp.Markings[targetLayer] = new List<Marking>();
-
-            partAppearance.Comp.Markings[targetLayer].Add(marking);
-        }
-        //else
             //RemovePartMarkings(uid, component, bodyAppearance);
+            return;
+        }
+
+        if (!_markingManager.Markings.TryGetValue(markingId, out var prototype))
+            return;
+
+        var markingColors = MarkingColoring.GetMarkingLayerColors(
+                prototype,
+                bodyAppearance.SkinColor,
+                bodyAppearance.EyeColor,
+                bodyAppearance.MarkingSet
+            );
+
+        var marking = new Marking(markingId, markingColors);
+
+        _humanoid.SetLayerVisibility((uid, bodyAppearance), targetLayer, true);
+        _humanoid.AddMarking(uid, markingId, markingColors, true, true, bodyAppearance);
+        if (!partAppearance.Comp.Markings.ContainsKey(targetLayer))
+            partAppearance.Comp.Markings[targetLayer] = new List<Marking>();
+
+        partAppearance.Comp.Markings[targetLayer].Add(marking);
     }
 
     private void HandleState(EntityUid uid, BodyPartAppearanceComponent component, ref AfterAutoHandleStateEvent args) =>
@@ -166,12 +166,7 @@ public partial class SharedBodySystem
             || _timing.ApplyingState)
             return;
 
-        BodyPartAppearanceComponent? partAppearance = null;
-        // We check for this conditional here since some entities may not have a profile... If they dont
-        // have one, and their part is gibbed, the markings will not be removed or applied properly.
-        if (!TryComp<BodyPartAppearanceComponent>(args.Part, out partAppearance))
-            partAppearance = EnsureComp<BodyPartAppearanceComponent>(args.Part);
-
+        var partAppearance = EnsureComp<BodyPartAppearanceComponent>(args.Part);
         RemoveAppearance(uid, partAppearance, args.Part);
     }
 
@@ -187,7 +182,9 @@ public partial class SharedBodySystem
             _humanoid.SetLayerVisibility((target, bodyAppearance), HumanoidVisualLayers.Eyes, true);
         }
 
-        if (component.Color != null)
+        // only override skin color for a limb if it's actually different.
+        // this lets it get changed easily
+        if (component.Color != null && component.Color != bodyAppearance.SkinColor)
             _humanoid.SetBaseLayerColor(target, component.Type, component.Color, true, bodyAppearance);
 
         _humanoid.SetLayerVisibility((target, bodyAppearance), component.Type, true);

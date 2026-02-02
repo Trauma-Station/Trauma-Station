@@ -116,9 +116,6 @@
   id: CameraElectronics
 
 - type: Tag
-  id: CannotSuicideAny
-
-- type: Tag
   id: Chair
 
 - type: Tag
@@ -607,6 +604,9 @@
 
 - type: Tag
   id: SyringeArmor
+
+- type: Tag
+  id: SyringeCase
 
 - type: Tag
   id: Table

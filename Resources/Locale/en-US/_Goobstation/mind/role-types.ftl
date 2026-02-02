@@ -7,3 +7,4 @@ role-subtype-pirate = Pirate
 role-subtype-brainwashed = Brainwashed
 role-subtype-slaughter-demon = Slaughter Demon
 role-subtype-slasher = The Slasher
+role-subtype-contractor = Contractor

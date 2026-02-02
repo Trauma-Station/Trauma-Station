@@ -29,6 +29,7 @@
     - id: Wrench
     - id: ContrabandDetectorFlatpack
     - id: SecurityMegaphone
+    - id: WeaponEnergyShotgun
 
 - type: entityTable
   id: FillLockerSecurityTrauma

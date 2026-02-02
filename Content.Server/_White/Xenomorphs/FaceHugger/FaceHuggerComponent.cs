@@ -1,4 +1,5 @@
 using Content.Shared.Body.Part;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
@@ -50,7 +51,7 @@ public sealed partial class FaceHuggerComponent : Component
 
     // Goobstation start
     [DataField]
-public string SleepChem = "Nocturine";
+    public ProtoId<ReagentPrototype>? SleepChem = "Nocturine";
 
     [DataField]
     public float SleepChemAmount = 10f;

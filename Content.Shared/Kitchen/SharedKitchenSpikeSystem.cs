@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Kitchen;
+// </Trauma>
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -282,6 +285,16 @@ public sealed class SharedKitchenSpikeSystem : EntitySystem
             return;
 
         var victimIdentity = Identity.Entity(args.Target.Value, EntityManager);
+        // <Trauma> - lets the target mob prevent being butchered
+        var target = args.Target.Value; // 3 month old shitcode award
+        var attemptEv = new ButcherAttemptEvent();
+        RaiseLocalEvent(target, ref attemptEv);
+        if (attemptEv.CancelPopup is {} loc)
+        {
+            _popupSystem.PopupClient(Loc.GetString(loc, ("victim", victimIdentity)), target, args.User);
+            return;
+        }
+        // </Trauma>
 
         _popupSystem.PopupPredicted(Loc.GetString("comp-kitchen-spike-butcher-self", ("victim", victimIdentity)),
             Loc.GetString("comp-kitchen-spike-butcher", ("user", Identity.Entity(args.User, EntityManager)), ("victim", victimIdentity)),

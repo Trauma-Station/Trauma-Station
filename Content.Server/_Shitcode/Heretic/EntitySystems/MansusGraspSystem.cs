@@ -23,11 +23,12 @@ using System.Linq;
 using Content.Goobstation.Common.Religion;
 using Content.Server.Chat.Systems;
 using Content.Server.Heretic.Abilities;
-using Content.Server.Heretic.Components;
 using Content.Server.Heretic.Components.PathSpecific;
 using Content.Server.Popups;
 using Content.Server.Speech.EntitySystems;
 using Content.Shared._Goobstation.Heretic.Components;
+using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Chat;
@@ -118,7 +119,7 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
         }
 
         // Death to catwalks
-        if (_tag.HasTag(args.Target.Value, "Catwalk"))
+        if (_tag.HasTag(args.Target.Value, Catwalk))
         {
             args.Handled = true;
             InvokeGrasp(args.User, (uid, grasp));

@@ -1,0 +1,161 @@
+- type: decal
+  id: bloodSplatter1
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: splatter1
+
+- type: decal
+  id: bloodSplatter2
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: splatter2
+
+- type: decal
+  id: bloodSplatter3
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: splatter3
+
+- type: decal
+  id: bloodSplatter4
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: splatter4
+
+- type: decal
+  id: bloodSplatter5
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: splatter5
+
+- type: decal
+  id: bloodSplatter6
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: splatter6
+
+- type: decal
+  id: bloodFloor1
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: floor1
+
+- type: decal
+  id: bloodFloor2
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: floor2
+
+- type: decal
+  id: bloodFloor3
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: floor3
+
+- type: decal
+  id: bloodFloor4
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: floor4
+
+- type: decal
+  id: bloodFloor5
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: floor5
+
+- type: decal
+  id: bloodFloor6
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: floor6
+
+- type: decal
+  id: bloodFloor7
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: floor7
+
+- type: decal
+  id: giblet1
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: giblet1
+
+- type: decal
+  id: giblet2
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: giblet2
+
+- type: decal
+  id: giblet3
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: giblet3
+
+- type: decal
+  id: giblet4
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: giblet4
+
+- type: decal
+  id: giblet5
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/blood.rsi
+    state: giblet5

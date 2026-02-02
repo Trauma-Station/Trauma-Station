@@ -425,7 +425,7 @@
     - SurgeryStepInsertFeature
     - SurgeryStepSealWounds
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Groin, Chest ]
   - type: SurgeryPartRemovedCondition
     connection: legs
     part: Leg
@@ -667,7 +667,7 @@
   name: Remove Liver
   components:
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Groin, Chest ]
   - type: SurgeryOrganCondition
     organ:
     - type: Liver
@@ -682,7 +682,7 @@
     - SurgeryStepInsertLiver
     - SurgeryStepSealOrganWound
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Groin, Chest ]
   - type: SurgeryOrganSlotCondition
     organSlot: liver
   - type: SurgeryOrganCondition
@@ -727,7 +727,7 @@
   name: Remove Stomach
   components:
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Groin, Chest ]
   - type: SurgeryOrganCondition
     organ:
     - type: Stomach
@@ -742,7 +742,7 @@
     - SurgeryStepInsertOrgan
     - SurgeryStepSealOrganWound
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Groin, Chest ]
   - type: SurgeryOrganSlotCondition
     organSlot: stomach
   - type: SurgeryOrganCondition

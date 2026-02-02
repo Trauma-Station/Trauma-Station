@@ -128,7 +128,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
                     break;
 
                 var targetCoords = Transform(target).Coordinates;
-                _starMark.SpawnCosmicField(targetCoords, heretic.PathStage);
+                _starMark.SpawnCosmicField(targetCoords, heretic.PathStage, predicted: false);
 
                 if (Exists(cosmicMark.CosmicDiamondUid))
                 {

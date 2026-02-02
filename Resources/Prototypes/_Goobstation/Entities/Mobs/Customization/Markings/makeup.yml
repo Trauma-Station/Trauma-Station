@@ -2,7 +2,7 @@
   id: MakeupLips
   bodyPart: Face
   markingCategory: Face
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachne, Harpy, Yowie]
+  speciesRestriction: [Dwarf, Human, SlimePerson, Arachne, Harpy]
   coloring:
     default:
       type:
@@ -16,7 +16,7 @@
   id: MakeupBlush
   bodyPart: Face
   markingCategory: Face
-  speciesRestriction: [Dwarf, Human, Reptilian, SlimePerson, Arachne, Harpy, Yowie]
+  speciesRestriction: [Dwarf, Human, Reptilian, SlimePerson, Arachne, Harpy]
   coloring:
     default:
       type:
@@ -30,7 +30,7 @@
   id: MakeupNailPolishRight
   bodyPart: RHand
   markingCategory: RightHand
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, SlimePerson, Arachne, Yowie]
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, SlimePerson, Arachne]
   coloring:
     default:
       type:
@@ -44,7 +44,7 @@
   id: MakeupNailPolishLeft
   bodyPart: LHand
   markingCategory: LeftHand
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, SlimePerson, Arachne, Yowie]
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, SlimePerson, Arachne]
   coloring:
     default:
       type:

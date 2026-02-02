@@ -74,14 +74,6 @@
     Plasma: 250
 
 - type: latheRecipe
-  id: YowieCube
-  result: YowieCube
-  completetime: 30
-  materials:
-    Biomass: 70
-    Plasma: 250
-
-- type: latheRecipe
   id: VoxCube
   result: VoxCube
   completetime: 30

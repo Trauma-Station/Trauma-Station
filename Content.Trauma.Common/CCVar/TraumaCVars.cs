@@ -47,12 +47,6 @@ public sealed partial class TraumaCVars
     #region AudioMuffle
 
     /// <summary>
-    /// Is audio muffle raycast behavior enabled?
-    /// </summary>
-    public static readonly CVarDef<bool> AudioMuffleRaycast =
-        CVarDef.Create("trauma.audio_muffle_raycast", true, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
     /// Is audio muffle pathfinding behavior enabled?
     /// </summary>
     public static readonly CVarDef<bool> AudioMufflePathfinding =

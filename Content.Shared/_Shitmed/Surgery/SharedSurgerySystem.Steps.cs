@@ -57,6 +57,9 @@ public abstract partial class SharedSurgerySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
+    public static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
+    public static readonly ProtoId<DamageTypePrototype> Poison = "Poison";
+
     private EntityQuery<BodyPartComponent> _partQuery;
     private EntityQuery<SurgeryIgnoreClothingComponent> _ignoreQuery;
     private EntityQuery<SurgeryStepComponent> _stepQuery;
@@ -313,7 +316,7 @@ public abstract partial class SharedSurgerySystem
         if (targetPart != default)
         {
             // We reward players for properly affixing the parts by healing a little bit of damage, and enabling the part temporarily.
-            _wounds.TryHealWoundsOnWoundable(targetPart.Id, 12f, out _, damageGroup: _prototypes.Index<DamageGroupPrototype>("Brute"));
+            _wounds.TryHealWoundsOnWoundable(targetPart.Id, 12f, out _, damageGroup: _prototypes.Index(Brute));
             RemComp<BodyPartReattachedComponent>(targetPart.Id);
         }
     }
@@ -704,7 +707,7 @@ public abstract partial class SharedSurgerySystem
             surgeryTargetComponent.SepsisImmune)
             return;
 
-        var sepsis = new DamageSpecifier(_prototypes.Index<DamageTypePrototype>("Poison"), 5);
+        var sepsis = new DamageSpecifier(_prototypes.Index(Poison), 5);
         var ev = new SurgeryStepDamageEvent(args.User, args.Body, args.Part, args.Surgery, sepsis, 0.5f);
         RaiseLocalEvent(args.Body, ref ev);
     }
@@ -907,12 +910,8 @@ public abstract partial class SharedSurgerySystem
         var targetName = Identity.Entity(body, EntityManager);
 
         var locName = $"surgery-popup-procedure-{surgeryId}-step-{stepId}";
-        var locResult = Loc.GetString(locName,
-            ("user", userName), ("target", targetName), ("part", part));
-
-        if (locResult == locName)
-            locResult = Loc.GetString($"surgery-popup-step-{stepId}",
-                ("user", userName), ("target", targetName), ("part", part));
+        if (!Loc.TryGetString(locName, out var locResult, ("user", userName), ("target", targetName), ("part", part)))
+            locResult = Loc.GetString($"surgery-popup-step-{stepId}", ("user", userName), ("target", targetName), ("part", part));
 
         _popup.PopupPredicted(locResult, user, user);
         return true;

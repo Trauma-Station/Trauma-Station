@@ -144,7 +144,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         foreach (var look in lookup)
         {
             // ignore heretics with the same path*, affect everyone else
-            if (Heretic.TryGetHereticComponent(look, out var th, out _) && th.CurrentPath == path ||
+            if (Heretic.TryGetHereticComponent(look.Owner, out var th, out _) && th.CurrentPath == path ||
                 HasComp<GhoulComponent>(look))
                 continue;
 

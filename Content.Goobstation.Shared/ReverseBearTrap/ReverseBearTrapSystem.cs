@@ -21,9 +21,10 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
-using Content.Shared.Item;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
+using Content.Shared.Tools;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
@@ -31,6 +32,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
@@ -50,17 +52,20 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedToolSystem _toolSystem = default!;
+    [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly WoundSystem _wound = default!; // Shitmed Change
     [Dependency] private readonly SharedBodySystem _body = default!; // Shitmed Change
+
+    public static readonly ProtoId<TagPrototype> KeyTag = "ReverseBearTrapKey";
+    public static readonly ProtoId<ToolQualityPrototype> Welding = "Welding";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -78,10 +83,10 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
 
     private void OnEquipped(EntityUid uid, ReverseBearTrapComponent trap, GotEquippedEvent args)
     {
-        if (args.Slot != "head")
+        if (args.Slot != "head" || _timing.ApplyingState)
             return;
 
-        ArmTrap(uid, trap, args.Equipee);
+        ArmTrap(uid, trap, args.Equipee, args.Equipee);
     }
 
     private void OnMeleeHit(EntityUid uid, ReverseBearTrapComponent trap, MeleeHitEvent args)
@@ -112,7 +117,7 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
         {
             _popup.PopupClient(Loc.GetString("reverse-bear-trap-component-start-cuffing-target",
                 ("targetName", Identity.Name(target, EntityManager, user))), user, user);
-            _popup.PopupClient(Loc.GetString("reverse-bear-trap-component-start-cuffing-by-other",
+            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-start-cuffing-by-other",
                 ("otherName", Identity.Name(user, EntityManager, target))), target, target, PopupType.Large);
         }
 
@@ -134,10 +139,10 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
         if (!_actionBlockerSystem.CanComplexInteract(args.User))
             return;
 
-        if (trap.Ticking && trap.Wearer.HasValue)
+        if (trap.Ticking && trap.Wearer is {} target)
         {
             var activeItem = _handsSystem.GetActiveItem(args.User);
-            if (args.User == trap.Wearer)
+            if (args.User == target)
             {
                 args.Verbs.Add(new Verb()
                 {
@@ -152,11 +157,10 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
                 {
                     DoContactInteraction = true,
                     Text = "Remove trap",
-                    Disabled = !activeItem.HasValue || !_toolSystem.HasQuality(activeItem.Value, "Welding"),
+                    Disabled = activeItem is not {} tool || !_tool.HasQuality(tool, Welding),
                     Act = () =>
                     {
                         var user = args.User;
-                        var target = trap.Wearer.Value;
                         _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-start-welding-observer",
                             ("user", Identity.Name(user, EntityManager)), ("target", Identity.Name(target, EntityManager))),
                             target, Filter.Pvs(target, entityManager: EntityManager)
@@ -164,17 +168,15 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
 
                         _popup.PopupClient(Loc.GetString("reverse-bear-trap-component-start-welding-target",
                             ("targetName", Identity.Name(target, EntityManager, user))), user, user);
-                        _popup.PopupClient(Loc.GetString("reverse-bear-trap-component-start-welding-by-other",
+                        _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-start-welding-by-other",
                             ("otherName", Identity.Name(user, EntityManager, target))), target, target, PopupType.Large);
 
-                        _toolSystem.UseTool(activeItem!.Value, args.User, uid, 5f, "Welding", new WeldFinishedEvent(), 3f);
+                        _tool.UseTool(activeItem!.Value, args.User, uid, 5f, Welding, new WeldFinishedEvent(), 3f);
                     }
                 });
             }
 
-            if (activeItem.HasValue
-                && TryComp<TagComponent>(activeItem, out var tagComponent)
-                && _tag.HasTag(tagComponent, "ReverseBearTrapKey"))
+            if (activeItem is {} key && _tag.HasTag(key, KeyTag))
             {
                 args.Verbs.Add(new Verb()
                 {
@@ -183,7 +185,6 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
                     Act = () =>
                     {
                         var user = args.User;
-                        var target = trap.Wearer.Value;
                         _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-start-unlocking-observer",
                             ("user", Identity.Name(user, EntityManager)), ("target", Identity.Name(target, EntityManager))),
                             target, Filter.Pvs(target, entityManager: EntityManager)
@@ -197,7 +198,7 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
                         {
                             _popup.PopupClient(Loc.GetString("reverse-bear-trap-component-start-unlocking-target",
                                 ("targetName", Identity.Name(target, EntityManager, user))), user, user);
-                            _popup.PopupClient(Loc.GetString("reverse-bear-trap-component-start-unlocking-by-other",
+                            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-start-unlocking-by-other",
                                 ("otherName", Identity.Name(user, EntityManager, target))), target, target, PopupType.Large);
                         }
 
@@ -221,14 +222,15 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
 
             foreach (var option in trap.DelayOptions)
             {
-                if (MathHelper.CloseTo(option, trap.CountdownDuration))
+                var secs = option.TotalSeconds;
+                if (MathHelper.CloseTo(secs, trap.CountdownDuration.TotalSeconds))
                 {
                     args.Verbs.Add(new Verb()
                     {
                         Category = TimerOptions,
                         Text = Loc.GetString("verb-trigger-timer-set-current", ("time", option)),
                         Disabled = true,
-                        Priority = (int) (-100 * option)
+                        Priority = (int) (-100 * secs)
                     });
                     continue;
                 }
@@ -237,13 +239,13 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
                 {
                     Category = TimerOptions,
                     Text = Loc.GetString("verb-trigger-timer-set", ("time", option)),
-                    Priority = (int) (-100 * option),
+                    Priority = (int) (-100 * secs),
 
                     Act = () =>
                     {
                         trap.CountdownDuration = option;
-                        if (_net.IsServer)
-                            _popup.PopupEntity(Loc.GetString("popup-trigger-timer-set", ("time", option)), args.User, args.User);
+                        Dirty(uid, trap);
+                        _popup.PopupClient(Loc.GetString("popup-trigger-timer-set", ("time", option)), args.User, args.User);
                     },
                 });
             }
@@ -252,33 +254,30 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
 
     private void OnBearTrapEscape(EntityUid uid, ReverseBearTrapComponent trap, BearTrapEscapeDoAfterEvent args)
     {
-        if (_net.IsClient || args.Cancelled || trap.Wearer == null)
-            return;
-
         trap.Struggling = false;
 
-        if (_random.NextFloat() * 100 < trap.CurrentEscapeChance)
+        // TODO: predict this shit lmao
+        if (args.Cancelled || trap.Wearer is not {} target)
+            return;
+
+        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(uid).Id);
+        var rand = new System.Random(seed);
+
+        var prefix = "";
+        if (rand.Prob(trap.CurrentEscapeChance))
         {
-            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-unlocked-trap-observer",
-                    ("user", Identity.Name(trap.Wearer.Value, EntityManager))),
-                uid, Filter.Pvs(uid, entityManager: EntityManager)
-                    .RemoveWhere(e => e.AttachedEntity == uid || e.AttachedEntity == trap.Wearer), true);
-
-            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-unlocked-trap-self"), trap.Wearer.Value, trap.Wearer.Value);
-
             ResetTrap(uid, trap);
         }
         else
         {
-            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-failed-unlocked-trap-observer",
-                    ("user", Identity.Name(trap.Wearer.Value, EntityManager))),
-                uid, Filter.Pvs(uid, entityManager: EntityManager)
-                    .RemoveWhere(e => e.AttachedEntity == uid || e.AttachedEntity == trap.Wearer), true);
-
-            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-failed-unlocked-trap-self"), trap.Wearer.Value, trap.Wearer.Value);
-
+            prefix = "failed-";
             trap.CurrentEscapeChance += 0.25f;
         }
+
+        var identity = Identity.Name(target, EntityManager);
+        var you = Loc.GetString($"reverse-bear-trap-component-{prefix}unlocked-trap-self");
+        var others = Loc.GetString($"reverse-bear-trap-component-{prefix}unlocked-trap-observer", ("user", identity));
+        _popup.PopupPredicted(you, others, target, args.User);
     }
 
     private void OnBearTrapApply(EntityUid uid, ReverseBearTrapComponent trap, BearTrapApplyDoAfterEvent args)
@@ -288,92 +287,84 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
 
         if (!_inventory.TryGetSlotEntity(target, "head", out var _)
             && _inventory.TryEquip(target, used, "head", true, true))
-            ArmTrap(used, trap, target);
+            ArmTrap(used, trap, target, args.User);
     }
 
     private void OnWeldFinished(EntityUid uid, ReverseBearTrapComponent trap, WeldFinishedEvent args)
     {
-        if (_net.IsClient || args.Cancelled || args.Used == null || trap.Wearer is not {} target)
+        if (args.Cancelled || trap.Wearer is not {} target)
             return;
 
-        var damage = new DamageSpecifier();
-        damage.DamageDict.Add("Heat", 50);
-        _damageable.TryChangeDamage(target, damage, true, origin: args.Used, targetPart: TargetBodyPart.Head);
+        var user = args.User;
+        _damageable.ChangeDamage(target, trap.WeldDamage, true, origin: user, targetPart: TargetBodyPart.Head);
 
-        _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-trap-fall-observer",
-                    ("user", Identity.Name(trap.Wearer.Value, EntityManager))),
-                uid, Filter.Pvs(uid, entityManager: EntityManager)
-                    .RemoveWhere(e => e.AttachedEntity == uid || e.AttachedEntity == trap.Wearer), true);
-
-        _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-trap-fall-self"), trap.Wearer.Value, trap.Wearer.Value);
+        var identity = Identity.Name(target, EntityManager);
+        var you = Loc.GetString("reverse-bear-trap-component-trap-fall-self");
+        var others = Loc.GetString("reverse-bear-trap-component-trap-fall-observer", ("user", identity));
+        _popup.PopupPredicted(you, others, uid, user);
 
         ResetTrap(uid, trap);
     }
 
     private void OnBearTrapUnlock(EntityUid uid, ReverseBearTrapComponent trap, BearTrapUnlockDoAfterEvent args)
     {
-        if (_net.IsClient || args.Cancelled || !trap.Wearer.HasValue)
+        if (args.Cancelled || trap.Wearer is not {} wearer || !_timing.IsFirstTimePredicted)
             return;
 
-        _audio.PlayPredicted(trap.StartCuffSound, trap.Wearer.Value, null);
+        _audio.PlayPredicted(trap.StartCuffSound, wearer, args.User);
 
-        _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-trap-fall-observer",
-                    ("user", Identity.Name(trap.Wearer.Value, EntityManager))),
-                uid, Filter.Pvs(uid, entityManager: EntityManager)
-                    .RemoveWhere(e => e.AttachedEntity == uid || e.AttachedEntity == trap.Wearer), true);
-
-        _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-trap-fall-self"), trap.Wearer.Value, trap.Wearer.Value);
+        var identity = Identity.Name(wearer, EntityManager);
+        var you = Loc.GetString("reverse-bear-trap-component-trap-fall-self");
+        var others = Loc.GetString("reverse-bear-trap-component-trap-fall-observer", ("user", identity));
+        _popup.PopupPredicted(you, others, wearer, args.User);
 
         ResetTrap(uid, trap);
     }
 
-    private void ArmTrap(EntityUid uid, ReverseBearTrapComponent trap, EntityUid wearer)
+    private void ArmTrap(EntityUid uid, ReverseBearTrapComponent trap, EntityUid wearer, EntityUid user)
     {
-        if (trap.Ticking || !EntityManager.EntityExists(wearer) || !_interaction.InRangeUnobstructed(uid, wearer))
+        if (trap.Ticking || !Exists(wearer) || !_interaction.InRangeUnobstructed(uid, wearer))
             return;
 
-        trap.Ticking = true;
-        trap.ActivateTime = _gameTiming.CurTime;
+        trap.NextTrigger = _timing.CurTime + trap.CountdownDuration;
         trap.Wearer = wearer;
         trap.CurrentEscapeChance = trap.BaseEscapeChance;
         EnsureComp<UnremoveableComponent>(uid);
 
         Dirty(uid, trap);
 
+        _audio.PlayPredicted(trap.BeepSound, uid, user,
+            AudioParams.Default.WithVolume(-5f));
+
         if (_net.IsServer)
         {
-            _audio.PlayPredicted(trap.BeepSound, uid, null,
-                AudioParams.Default.WithVolume(-5f));
-
-            trap.LoopSoundStream = _audio.PlayPredicted(trap.LoopSound, uid, null,
-            AudioParams.Default.WithLoop(true))?.Entity;
-
-            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-trap-click-observer",
-                ("user", Identity.Name(trap.Wearer.Value, EntityManager))),
-                uid, Filter.Pvs(uid, entityManager: EntityManager)
-                .RemoveWhere(e => e.AttachedEntity == uid || e.AttachedEntity == trap.Wearer), true);
-
-            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-trap-click-self"), trap.Wearer.Value, trap.Wearer.Value);
+            trap.LoopSoundStream = _audio.PlayPvs(trap.LoopSound, uid,
+                AudioParams.Default.WithLoop(true))?.Entity;
         }
+
+        var identity = Identity.Entity(wearer, EntityManager);
+        var you = Loc.GetString("reverse-bear-trap-component-trap-click-self");
+        var others = Loc.GetString("reverse-bear-trap-component-trap-click-observer", ("user", identity));
+        _popup.PopupPredicted(you, others, wearer, wearer);
     }
 
-    private void ResetTrap(EntityUid? uid, ReverseBearTrapComponent trap)
+    private void ResetTrap(EntityUid uid, ReverseBearTrapComponent trap)
     {
-        if (!trap.Ticking || !uid.HasValue)
+        if (!trap.Ticking)
             return;
 
         var oldWearer = trap.Wearer;
 
         trap.LoopSoundStream = _audio.Stop(trap.LoopSoundStream);
-        trap.Ticking = false;
+        trap.NextTrigger = null;
         trap.Wearer = null;
         trap.Struggling = false;
         trap.CurrentEscapeChance = trap.BaseEscapeChance;
-        RemComp<UnremoveableComponent>(uid.Value);
+        RemComp<UnremoveableComponent>(uid);
 
-        Dirty(uid.Value, trap);
+        Dirty(uid, trap);
 
-        if (oldWearer != null && TryComp<ItemComponent>(uid, out var _))
+        if (oldWearer != null)
             _inventory.TryUnequip(oldWearer.Value, "head", true, true);
     }
 
@@ -381,18 +372,15 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
     {
         base.Update(frameTime);
 
+        var now = _timing.CurTime;
         var query = EntityQueryEnumerator<ReverseBearTrapComponent>();
         while (query.MoveNext(out var uid, out var trap))
         {
             if (!trap.Ticking || trap.Wearer == null)
                 continue;
 
-            var remaining = trap.CountdownDuration - (float) (_gameTiming.CurTime - trap.ActivateTime).TotalSeconds;
-            if (remaining <= 0)
-            {
+            if (now >= trap.NextTrigger)
                 SnapTrap(uid, trap);
-                continue;
-            }
         }
     }
 
@@ -439,11 +427,11 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
     }
 
     [Serializable, NetSerializable]
-    private sealed partial class BearTrapEscapeDoAfterEvent : SimpleDoAfterEvent { }
+    private sealed partial class BearTrapEscapeDoAfterEvent : SimpleDoAfterEvent;
     [Serializable, NetSerializable]
-    private sealed partial class BearTrapApplyDoAfterEvent : SimpleDoAfterEvent { }
+    private sealed partial class BearTrapApplyDoAfterEvent : SimpleDoAfterEvent;
     [Serializable, NetSerializable]
-    private sealed partial class BearTrapUnlockDoAfterEvent : SimpleDoAfterEvent { }
+    private sealed partial class BearTrapUnlockDoAfterEvent : SimpleDoAfterEvent;
 
     private static readonly VerbCategory TimerOptions = new("verb-categories-timer", "/Textures/Interface/VerbIcons/clock.svg.192dpi.png");
 }

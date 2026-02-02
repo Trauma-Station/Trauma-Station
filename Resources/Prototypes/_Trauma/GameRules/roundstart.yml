@@ -12,6 +12,9 @@
     - InsurgentEscapeObjective
     #- InsurgentAllSurviveObjective # TODO
   - type: AntagLoadProfileRule
+    speciesOverride: Human
+    speciesOverrideBlacklist:
+    - Plasmaman # instantly dies
   - type: AntagSelection
     selectionTime: PrePlayerSpawn # need to move them to their shittle
     agentName: insurgent-round-end-agent-name

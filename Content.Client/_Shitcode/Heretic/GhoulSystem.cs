@@ -11,14 +11,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared.Heretic;
+using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._Shitcode.Heretic;
 
-public sealed class GhoulSystem : EntitySystem
+public sealed class GhoulSystem : SharedGhoulSystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IPlayerManager _player = default!;

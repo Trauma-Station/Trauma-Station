@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Numerics;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Movement.Components;
-using Content.Shared.Physics;
 using Content.Shared.StationAi;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.AudioMuffle;
 using Robust.Client.Audio;
 using Robust.Client.GameObjects;
-using Robust.Client.GameStates;
 using Robust.Client.Physics;
 using Robust.Client.Player;
+using Robust.Shared;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -19,7 +19,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Player;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.AudioMuffle;
 
@@ -32,7 +31,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
     [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IClientGameStateManager _stateMan = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
@@ -40,17 +38,11 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     private static EntityQuery<SpectralComponent> _spectralQuery;
     private static EntityQuery<RelayInputMoverComponent> _relayedQuery;
     private static EntityQuery<AiEyeComponent> _aiEyeQuery;
-    private static EntityQuery<AudioComponent> _audioQuery;
     private static EntityQuery<SoundBlockerComponent> _blockerQuery;
 
     // Tile indices -> blocker entities
     [ViewVariables]
     public readonly Dictionary<Vector2i, HashSet<Entity<SoundBlockerComponent>>> ReverseBlockerIndicesDict = new();
-
-    // Tile indices -> list of audio entities
-    [ViewVariables]
-    public readonly Dictionary<Vector2i, HashSet<Entity<AudioComponent, AudioMuffleComponent>>> ReverseAudioPosDict =
-        new();
 
     // Tile indices -> data
     [ViewVariables]
@@ -62,30 +54,13 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     [ViewVariables]
     public Vector2i? OldPlayerTile;
 
-    private readonly HashSet<Entity<StationAiVisionComponent>> _nearestVisionEntities = new();
-
-    private readonly List<Entity<AudioComponent, AudioMuffleComponent>> _audioToRemove = new();
-
-    private readonly List<Entity<SoundBlockerComponent>> _blockersToRemove = new();
-
     private const int AudioRange = (int) SharedAudioSystem.DefaultSoundRange;
 
     // sqrt(2 * AudioRange^2)
     private const int PathfindingRange = 22;
 
-    private bool _raycastEnabled = true;
-
     private bool _pathfindingEnabled = true;
-
-    private bool _shouldResetRaycastFully;
-
-    [Flags]
-    private enum AudioProcessBehavior : byte
-    {
-        None = 0,
-        Reset,
-        Recalculate,
-    }
+    private float _maxRayLength;
 
     public override void Initialize()
     {
@@ -95,11 +70,9 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         _spectralQuery = GetEntityQuery<SpectralComponent>();
         _relayedQuery = GetEntityQuery<RelayInputMoverComponent>();
         _aiEyeQuery = GetEntityQuery<AiEyeComponent>();
-        _audioQuery = GetEntityQuery<AudioComponent>();
         _blockerQuery = GetEntityQuery<SoundBlockerComponent>();
 
         _xform.OnGlobalMoveEvent += OnMove;
-        _stateMan.GameStateApplied += OnGameStateApplied;
 
         UpdatesOutsidePrediction = true;
 
@@ -110,21 +83,12 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         SubscribeLocalEvent<SoundBlockerComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SoundBlockerComponent, AfterAutoHandleStateEvent>(OnBlockerState);
 
-        SubscribeLocalEvent<AudioComponent, ComponentInit>(OnInit);
-
-        SubscribeLocalEvent<AudioMuffleComponent, ComponentShutdown>(OnMuffleShutdown);
-
         SubscribeNetworkEvent<RoundRestartCleanupEvent>(OnRestart);
 
-        Subs.CVar(_cfg, TraumaCVars.AudioMuffleRaycast, value => _raycastEnabled = value, true);
-        Subs.CVar(_cfg, TraumaCVars.AudioMufflePathfinding, value => _pathfindingEnabled = value, true);
-    }
+        _audio.GetOcclusionOverride += OnOcclusion;
 
-    private void OnRestart(RoundRestartCleanupEvent ev)
-    {
-        PlayerGrid = null;
-        OldPlayerTile = null;
-        ClearDicts();
+        Subs.CVar(_cfg, TraumaCVars.AudioMufflePathfinding, value => _pathfindingEnabled = value, true);
+        Subs.CVar(_cfg, CVars.AudioRaycastLength, value => _maxRayLength = value, true);
     }
 
     public override void Shutdown()
@@ -136,97 +100,26 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         ClearDicts();
 
         _xform.OnGlobalMoveEvent -= OnMove;
-        _stateMan.GameStateApplied -= OnGameStateApplied;
+
+        _audio.GetOcclusionOverride -= OnOcclusion;
     }
 
-    public override void Update(float frameTime)
+    private void OnRestart(RoundRestartCleanupEvent ev)
     {
-        base.Update(frameTime);
-
-        EntityUid? player = null;
-
-        var raycastBehavior = AudioProcessBehavior.Reset;
-        if (_shouldResetRaycastFully)
-        {
-            raycastBehavior |= AudioProcessBehavior.Recalculate;
-            player = ResolvePlayer();
-        }
-        _shouldResetRaycastFully = false;
-
-        ReCalculateAllAudio(player, raycastBehavior, AudioProcessBehavior.Reset);
+        PlayerGrid = null;
+        OldPlayerTile = null;
+        ClearDicts();
     }
-
-    private void OnInit(Entity<AudioComponent> ent, ref ComponentInit args)
-    {
-        if (!_pathfindingEnabled && !_raycastEnabled)
-            return;
-
-        if (!CanMuffle(ent.Comp))
-            return;
-
-        if (ResolvePlayer() is not { } player)
-            return;
-
-        var muffle = EnsureComp<AudioMuffleComponent>(ent);
-        muffle.OriginalVolume = ent.Comp.Params.Volume;
-        ReCalculateAudioMuffle(player, (ent, ent.Comp, muffle), _xform.GetMapCoordinates(ent), false);
-    }
-
-    private void OnMuffleShutdown(Entity<AudioMuffleComponent> ent, ref ComponentShutdown args)
-    {
-        RemoveAudioMuffle(ent);
-    }
-
-    private void RemoveAudioMuffle(Entity<AudioMuffleComponent> ent)
-    {
-        if (!_audioQuery.TryComp(ent, out var audio) ||
-            ent.Comp.Indices is not {} indices ||
-            !ReverseAudioPosDict.TryGetValue(indices, out var set))
-            return;
-
-        set.Remove((ent, audio, ent.Comp));
-        if (set.Count == 0)
-            ReverseAudioPosDict.Remove(indices);
-    }
-
 
     private void ResetImmediate(EntityUid player)
     {
         ClearDicts();
-
-        if (!_pathfindingEnabled && !_raycastEnabled)
-            return;
-
         ResetAllBlockers(player);
-        ReCalculateAllAudio(player);
-    }
-
-    private void ReCalculateAllAudio(EntityUid? player,
-        AudioProcessBehavior raycastBehavior = AudioProcessBehavior.Recalculate,
-        AudioProcessBehavior pathfindingBehavior = AudioProcessBehavior.Recalculate)
-    {
-        if (!_pathfindingEnabled && !_raycastEnabled ||
-            raycastBehavior == AudioProcessBehavior.None && pathfindingBehavior == AudioProcessBehavior.None)
-            return;
-
-        var query = EntityQueryEnumerator<AudioMuffleComponent, AudioComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var muffle, out var audio, out var xform))
-        {
-            var hasIndices = muffle.Indices != null;
-            var behavior = hasIndices ? pathfindingBehavior : raycastBehavior;
-            var recalc = (behavior & AudioProcessBehavior.Recalculate) != 0x0;
-            var reset = (behavior & AudioProcessBehavior.Reset) != 0x0;
-
-            if (recalc && player != null)
-                ReCalculateAudioMuffle(player.Value, (uid, audio), _xform.GetMapCoordinates(uid, xform), reset);
-            else if (reset)
-                ResetAudioMuffle((uid, audio, muffle));
-        }
     }
 
     private void ResetAllBlockers(EntityUid player)
     {
-        if (!_pathfindingEnabled && !_raycastEnabled)
+        if (!_pathfindingEnabled)
             return;
 
         var query = EntityQueryEnumerator<SoundBlockerComponent, TransformComponent>();
@@ -252,7 +145,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             return;
 
         ResetBlockerMuffle(player, (ent, null, ent));
-        _shouldResetRaycastFully = true;
     }
 
     private void OnShutdown(Entity<SoundBlockerComponent> ent, ref ComponentShutdown args)
@@ -262,7 +154,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
     private void OnLocalPlayerAttached(LocalPlayerAttachedEvent ev)
     {
-        ResetImmediate(ev.Entity);
+        TileDataDict.Clear();
 
         if (!_pathfindingEnabled)
             return;
@@ -286,7 +178,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
     private void OnMove(ref MoveEvent ev)
     {
-        if (!_raycastEnabled && !_pathfindingEnabled)
+        if (!_pathfindingEnabled)
             return;
 
         if (ev.OldPosition == ev.NewPosition)
@@ -341,63 +233,12 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         if (_blockerQuery.TryComp(uid, out var blocker))
         {
             ResetBlockerMuffle(player, (uid, null, blocker), oldPosition, newPosition);
-            _shouldResetRaycastFully = true;
-        }
-
-        if (_audioQuery.TryComp(uid, out var audio))
-            ReCalculateAudioMuffle(player, (uid, audio), newPosition, reset: false);
-    }
-
-    private void OnGameStateApplied(GameStateAppliedArgs args)
-    {
-        if (ResolvePlayer() is not { } player)
-            return;
-
-        foreach (var states in args.AppliedState.EntityStates.Value)
-        {
-            if (!TryGetEntity(states.NetEntity, out var ent))
-                continue;
-
-            if (!_audioQuery.TryComp(ent.Value, out var audioComp))
-                continue;
-
-            if (!CanMuffle(audioComp))
-                continue;
-
-            var muffle = EnsureComp<AudioMuffleComponent>(ent.Value);
-
-            float? volume = null;
-
-            foreach (var change in states.ComponentChanges.Value)
-            {
-                if (change.State is not AudioComponent.AudioComponent_AutoState state)
-                    continue;
-
-                volume = state.Params.Volume;
-                break;
-            }
-
-            if (volume != null && !float.IsInfinity(volume.Value))
-                muffle.OriginalVolume = volume.Value;
-            else if (muffle.OriginalVolume == null)
-            {
-                if (float.IsInfinity(audioComp.Params.Volume))
-                    continue;
-
-                muffle.OriginalVolume = audioComp.Params.Volume;
-            }
-
-            ReCalculateAudioMuffle(player,
-                (ent.Value, audioComp, muffle),
-                _xform.GetMapCoordinates(ent.Value),
-                ignorePredictionReset: true);
         }
     }
 
     private void ClearDicts()
     {
         TileDataDict.Clear();
-        ReverseAudioPosDict.Clear();
         ReverseBlockerIndicesDict.Clear();
     }
 
@@ -423,11 +264,10 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     public EntityUid? FindNearestAiVisionEntity(EntityUid player)
     {
         var coords = _xform.GetMapCoordinates(player);
-        _nearestVisionEntities.Clear();
-        _lookup.GetEntitiesInRange(coords, AudioRange, _nearestVisionEntities);
+        var nearest = _lookup.GetEntitiesInRange<StationAiVisionComponent>(coords, AudioRange);
         EntityUid? result = null;
         var distance = float.MaxValue;
-        foreach (var (uid, vision) in _nearestVisionEntities)
+        foreach (var (uid, vision) in nearest)
         {
             if (!vision.Enabled)
                 continue;
@@ -441,7 +281,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             distance = dist;
         }
 
-        _nearestVisionEntities.Clear();
         return result;
     }
 
@@ -461,17 +300,12 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 
     private void RemoveBlocker(Entity<SoundBlockerComponent> blocker)
     {
-        _shouldResetRaycastFully = true;
-
         if (blocker.Comp.Indices is { } blockerIndices)
             AddOrRemoveBlocker(blocker, blockerIndices, false, true);
     }
 
     private void PlayerMoved(EntityUid player, MapCoordinates oldPos, MapCoordinates newPos)
     {
-        if (_raycastEnabled)
-            _shouldResetRaycastFully = true;
-
         if (!_pathfindingEnabled)
             return;
 
@@ -487,9 +321,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
                 PlayerGrid = (g, gC);
                 var tile = _map.TileIndicesFor((g, gC), newPos);
                 Expand(tile);
-                ReCalculateAllAudio(player,
-                    AudioProcessBehavior.None,
-                    AudioProcessBehavior.Reset | AudioProcessBehavior.Recalculate);
                 return;
             }
 
@@ -510,18 +341,12 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         {
             PlayerGrid = (grid, gridComp);
             Expand(tileNew);
-            ReCalculateAllAudio(player,
-                AudioProcessBehavior.None,
-                AudioProcessBehavior.Reset | AudioProcessBehavior.Recalculate);
             return;
         }
 
         if (oldPos == MapCoordinates.Nullspace)
         {
             Expand(tileNew);
-            ReCalculateAllAudio(player,
-                AudioProcessBehavior.None,
-                AudioProcessBehavior.Reset | AudioProcessBehavior.Recalculate);
             return;
         }
 
@@ -533,17 +358,13 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             {
                 RebuildAndExpand(tileNew, OldPlayerTile.Value);
                 OldPlayerTile = tileNew;
-                ReCalculateAllAudio(player, AudioProcessBehavior.None, AudioProcessBehavior.Reset);
-                return;
             }
 
-            ReCalculateAllAudio(player, AudioProcessBehavior.None, AudioProcessBehavior.Reset);
             return;
         }
 
         OldPlayerTile = tileNew;
         RebuildAndExpand(tileNew, tileOld);
-        ReCalculateAllAudio(player, AudioProcessBehavior.None, AudioProcessBehavior.Reset);
     }
 
     private void ResetBlockerMuffle(EntityUid player,
@@ -637,113 +458,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         AddOrRemoveBlocker(blocker, indices, true, true);
     }
 
-    private void ReCalculateAudioMuffle(EntityUid player,
-        Entity<AudioComponent?, AudioMuffleComponent?> audio,
-        MapCoordinates audioPos,
-        bool reset = true,
-        bool ignorePredictionReset = false)
-    {
-        if (!Resolve(audio, ref audio.Comp1, ref audio.Comp2, false))
-            return;
-
-        Entity<AudioComponent, AudioMuffleComponent> audioEnt = (audio, audio.Comp1, audio.Comp2);
-
-        var playerPos = _xform.GetMapCoordinates(player);
-
-        if (audioPos.MapId != playerPos.MapId)
-        {
-            RemoveAudioMuffle((audio, audio.Comp2));
-            return;
-        }
-
-        if (_pathfindingEnabled)
-        {
-            if (TryFindCommonPlayerGrid(playerPos, audioPos) is { } grid)
-            {
-                var audioIndices = _map.TileIndicesFor(grid, audioPos);
-                if (audio.Comp2.Indices is { } oldIndices)
-                {
-                    if (audioIndices == oldIndices)
-                    {
-                        if (reset)
-                            ResetAudioMuffle(audio, ignorePredictionReset);
-                        return;
-                    }
-
-                    if (ReverseAudioPosDict.TryGetValue(oldIndices, out var oldSet))
-                    {
-                        oldSet.Remove(audioEnt);
-                        if (oldSet.Count == 0)
-                            ReverseAudioPosDict.Remove(oldIndices);
-                    }
-                }
-
-                audio.Comp2.Indices = audioIndices;
-                if (ReverseAudioPosDict.TryGetValue(audioIndices, out var audioSet))
-                    audioSet.Add(audioEnt);
-                else
-                {
-                    ReverseAudioPosDict[audioIndices] = new HashSet<Entity<AudioComponent, AudioMuffleComponent>>
-                        { audioEnt };
-                }
-
-                if (reset)
-                    ResetAudioMuffle(audio, ignorePredictionReset);
-                return;
-            }
-        }
-
-        if (!_raycastEnabled)
-            return;
-
-        if (audioPos.Position.EqualsApprox(playerPos.Position))
-        {
-            if (reset)
-                ResetAudioMuffle(audio, ignorePredictionReset);
-            return;
-        }
-
-        if (audio.Comp2.Indices is { } audioCoords &&
-            ReverseAudioPosDict.TryGetValue(audioCoords, out var set))
-        {
-            set.Remove(audioEnt);
-            if (set.Count == 0)
-                ReverseAudioPosDict.Remove(audioCoords);
-        }
-
-        var dir = audioPos.Position - playerPos.Position;
-        var len = dir.Length();
-        var norm = dir / len;
-
-        var range = MathF.Min(len, AudioRange);
-
-        var ray = new CollisionRay(playerPos.Position, norm, (int) CollisionGroup.Impassable);
-        var result = _physics.IntersectRay(playerPos.MapId, ray, range, player, false);
-
-        var hashSet = audioEnt.Comp2.RayBlockers;
-        hashSet.Clear();
-        foreach (var hitResult in result)
-        {
-            var potentialBlocker = hitResult.HitEntity;
-
-            if (potentialBlocker == audio.Owner)
-                continue;
-
-            if (!_blockerQuery.TryComp(potentialBlocker, out var blockerComp))
-                continue;
-
-            if (_xform.GetWorldPosition(potentialBlocker).EqualsApprox(audioPos.Position))
-                continue;
-
-            Entity<SoundBlockerComponent> blockerEnt = (potentialBlocker, blockerComp);
-
-            hashSet.Add(blockerEnt);
-        }
-
-        if (reset)
-            ResetAudioMuffle(audio, ignorePredictionReset);
-    }
-
     public Entity<MapGridComponent>? TryFindCommonPlayerGrid(MapCoordinates pos, MapCoordinates other)
     {
         if (ResolvePlayerGrid(pos) is { } grid &&
@@ -753,128 +467,29 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         return null;
     }
 
-    private void ResetAudioMuffle(Entity<AudioComponent?, AudioMuffleComponent?> audio,
-        bool ignorePredictionReset = false)
-    {
-        if (!Exists(audio) || !Resolve(audio, ref audio.Comp1, ref audio.Comp2, false))
-            return;
-
-        if (!CanMuffle(audio.Comp1) || !audio.Comp1.Loaded || ResolvePlayer() is not { } player)
-            return;
-
-        var xform = Transform(player);
-        var playerPos = _xform.GetMapCoordinates(player, xform);
-
-        if (Vector2.Distance(_xform.GetWorldPosition(audio), playerPos.Position) > AudioRange)
-        {
-            SetVolume(audio, 0f, 16f);
-            return;
-        }
-
-        if (!ignorePredictionReset && _stateMan is ClientGameStateManager { PredictionNeedsResetting: true })
-            return;
-
-        var muffleLevel = 0f;
-
-        // ResolvePlayer returns nearest entity that provides ai vision, if it cannot find any, it returns ai eye
-        // itself, which means no cameras nearby => all audio is muffled
-        if (_aiEyeQuery.HasComp(player))
-            muffleLevel = 16f;
-        else if (_pathfindingEnabled && ResolvePlayerGrid(playerPos) is { } grid &&
-                 audio.Comp2.Indices is { } pos && TileDataDict.TryGetValue(pos, out var tileData))
-        {
-            var playerIndices = _map.TileIndicesFor(grid, playerPos);
-            var playerDist = (float) ManhattanDistance(pos, playerIndices);
-            muffleLevel = tileData.TotalCost + (playerDist - AudioRange) / 4f - GetTotalTileCost(pos);
-            var playerTilePos = _map.GridTileToWorldPos(grid, grid, playerIndices);
-            var diff1 = playerPos.Position - playerTilePos;
-            var diff2 = (Vector2) (playerIndices - pos);
-            var len = diff2.Length();
-            if (!MathHelper.CloseToPercent(len, 0f))
-                muffleLevel += Vector2.Dot(diff1, diff2) / len;
-        }
-        else if (_raycastEnabled)
-        {
-            var data = audio.Comp2.RayBlockers;
-            _blockersToRemove.Clear();
-            foreach (var blocker in data)
-            {
-                if (!Exists(blocker))
-                {
-                    _blockersToRemove.Add(blocker);
-                    continue;
-                }
-
-                muffleLevel += GetBlockerCost(blocker.Comp);
-            }
-
-            foreach (var remove in _blockersToRemove)
-            {
-                remove.Comp.Indices = null;
-                data.Remove(remove);
-            }
-
-            _blockersToRemove.Clear();
-        }
-        else
-            muffleLevel = 0f;
-
-        SetVolume(audio, audio.Comp2.OriginalVolume ?? audio.Comp1.Params.Volume, muffleLevel);
-    }
-
-    private void ResetAudioOnPos(Vector2i pos)
-    {
-        if (!ReverseAudioPosDict.TryGetValue(pos, out var audioSet))
-            return;
-
-        _audioToRemove.Clear();
-        foreach (var audio in audioSet)
-        {
-            if (!Exists(audio))
-            {
-                _audioToRemove.Add(audio);
-                continue;
-            }
-
-            ResetAudioMuffle(audio.AsNullable());
-        }
-
-        foreach (var remove in _audioToRemove)
-        {
-            audioSet.Remove(remove);
-        }
-
-        _audioToRemove.Clear();
-
-        if (audioSet.Count == 0)
-            ReverseAudioPosDict.Remove(pos);
-    }
-
     public float GetTotalTileCost(Vector2i tile)
     {
         if (!ReverseBlockerIndicesDict.TryGetValue(tile, out var blockers))
             return 0f;
 
         var total = 0f;
-        _blockersToRemove.Clear();
+        var toRemove = new List<Entity<SoundBlockerComponent>>();
         foreach (var blocker in blockers)
         {
             if (!Exists(blocker))
             {
-                _blockersToRemove.Add(blocker);
+                toRemove.Add(blocker);
                 continue;
             }
 
             total += GetBlockerCost(blocker.Comp);
         }
 
-        foreach (var remove in _blockersToRemove)
+        foreach (var remove in toRemove)
         {
             remove.Comp.Indices = null;
             blockers.Remove(remove);
         }
-
-        _blockersToRemove.Clear();
 
         if (blockers.Count == 0)
             ReverseBlockerIndicesDict.Remove(tile);
@@ -896,35 +511,71 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         return blocker.CachedBlockerCost.Value;
     }
 
-    private void SetVolume(Entity<AudioComponent?> audio, float volume, float muffleLevel)
+    private float OnOcclusion(MapCoordinates listener, Vector2 delta, float distance, EntityUid? ignoredEnt)
     {
-        if (TerminatingOrDeleted(audio))
-            return;
+        if (distance < 0.1f || ResolvePlayer() is not { } player)
+            return 0f;
 
-        if (!Resolve(audio, ref audio.Comp, false))
-            return;
+        // ResolvePlayer returns nearest entity that provides ai vision, if it cannot find any, it returns ai eye
+        // itself, which means no cameras nearby => all audio is muffled
+        if (distance > AudioRange || _aiEyeQuery.HasComp(player))
+            return 100f;
 
-        switch (muffleLevel)
-        {
-            case <= 0f:
-                break;
-            case >= 16f:
-                volume = -100f;
-                break;
-            default:
-                var gain = SharedAudioSystem.VolumeToGain(volume) / MathF.Pow(muffleLevel / 16f + 1f, 4f);
-                volume = SharedAudioSystem.GainToVolume(gain);
-                break;
-        }
+        if (!_pathfindingEnabled)
+            return CalculateRaycastOcclusion(listener, delta, distance, ignoredEnt);
 
-        _audio.SetVolume(audio, volume, audio);
+        var xform = Transform(player);
+        var playerPos = _xform.GetMapCoordinates(player, xform);
+        var audioPos = new MapCoordinates(listener.Position + delta, listener.MapId);
+        delta = audioPos.Position - playerPos.Position;
+        distance = delta.Length();
+
+        if (TryFindCommonPlayerGrid(playerPos, audioPos) is not { } grid)
+            return CalculateRaycastOcclusion(listener, delta, distance, ignoredEnt);
+
+        var tile = _map.TileIndicesFor(grid, audioPos);
+
+        return !TileDataDict.TryGetValue(tile, out var data)
+            ? CalculateRaycastOcclusion(listener, delta, distance, ignoredEnt)
+            : CalculatePathfindingOcclusion(grid, playerPos, tile, data);
     }
 
-    private static bool CanMuffle(AudioComponent audio)
+    private float CalculatePathfindingOcclusion(Entity<MapGridComponent> grid,
+        MapCoordinates playerPos,
+        Vector2i pos,
+        MuffleTileData tileData)
     {
-        if (audio.LifeStage > ComponentLifeStage.Running)
-            return false;
+        var playerIndices = _map.TileIndicesFor(grid, playerPos);
+        var playerDist = (float) ManhattanDistance(pos, playerIndices);
+        var muffleLevel = tileData.TotalCost + (playerDist - AudioRange) / 4f - GetTotalTileCost(pos);
+        return CalculateOcclusion(muffleLevel);
+    }
 
-        return !audio.Global;
+    private float CalculateRaycastOcclusion(MapCoordinates listener,
+        Vector2 delta,
+        float distance,
+        EntityUid? ignoredEnt)
+    {
+        var rayLength = MathF.Min(distance, _maxRayLength);
+        var ray = new CollisionRay(listener.Position, delta / distance, _audio.OcclusionCollisionMask);
+
+        var results = _physics.IntersectRayWithPredicate(listener.MapId,
+            ray,
+            rayLength,
+            x => x == ignoredEnt || !_blockerQuery.HasComp(x),
+            false);
+
+        var muffleLevel = 0f;
+        foreach (var result in results)
+        {
+            muffleLevel += GetBlockerCost(_blockerQuery.Comp(result.HitEntity));
+        }
+
+        return CalculateOcclusion(muffleLevel + distance);
+    }
+
+    private static float CalculateOcclusion(float muffleLevel)
+    {
+        return MathF.Pow(muffleLevel / 8f, 4f);
     }
 }

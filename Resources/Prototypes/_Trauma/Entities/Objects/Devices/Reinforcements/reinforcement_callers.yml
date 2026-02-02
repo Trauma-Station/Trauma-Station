@@ -20,7 +20,7 @@
     key: enum.StoreUiKey.Key
   - type: Store
     balance:
-      Spesos: 0
+      Spesos: 2500
 
 - type: entity
   parent: BaseReinforcementCallerEmpty

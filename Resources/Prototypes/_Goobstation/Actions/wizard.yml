@@ -751,6 +751,11 @@
     requiresSpeech: true
     requiresClothes: true
     school: Translocation
+  - type: UserInterface
+    interfaces:
+      enum.WizardTeleportUiKey.Key:
+        type: WizardTeleportBoundUserInterface
+        requireInputValidation: false
   - type: ActionUpgrade
     effectedLevels:
       2: ActionTeleportII

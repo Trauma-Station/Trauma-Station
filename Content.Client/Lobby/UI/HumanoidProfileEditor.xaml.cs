@@ -711,13 +711,40 @@ namespace Content.Client.Lobby.UI
 
                 antagContainer.AddChild(selector);
 
-                antagContainer.AddChild(new Button()
+                var loadoutWindowBtn = new Button() // Goob - store it in a variable instead of immediately adding it
                 {
-                    Disabled = true,
                     Text = Loc.GetString("loadout-window"),
                     HorizontalAlignment = HAlignment.Right,
                     Margin = new Thickness(3f, 0f, 0f, 0f),
-                });
+                };
+
+                // <Goob>
+                var antagLoadout = "Antag" + antag.ID;
+                if (!_prototypeManager.TryIndex<RoleLoadoutPrototype>(antagLoadout, out var roleLoadoutProto))
+                {
+                    loadoutWindowBtn.Disabled = true;
+                }
+                else
+                {
+                    loadoutWindowBtn.OnPressed += _ =>
+                    {
+                        RoleLoadout? loadout = null;
+
+                        Profile?.Loadouts.TryGetValue(antagLoadout, out loadout);
+                        loadout = loadout?.Clone();
+
+                        if (loadout == null)
+                        {
+                            loadout = new RoleLoadout(roleLoadoutProto.ID);
+                            loadout.SetDefault(Profile, _playerManager.LocalSession, _prototypeManager);
+                        }
+
+                        OpenLoadout(null, loadout, roleLoadoutProto, Loc.GetString(antag.Name));
+                    };
+                }
+
+                antagContainer.AddChild(loadoutWindowBtn);
+                // </Goob>
 
                 AntagList.AddChild(antagContainer);
             }
@@ -1038,7 +1065,8 @@ namespace Content.Client.Lobby.UI
             UpdateJobPriorities();
         }
 
-        private void OpenLoadout(JobPrototype? jobProto, RoleLoadout roleLoadout, RoleLoadoutPrototype roleLoadoutProto)
+        private void OpenLoadout(JobPrototype? jobProto, RoleLoadout roleLoadout, RoleLoadoutPrototype roleLoadoutProto,
+            string? title = null) // Goob
         {
             _loadoutWindow?.Dispose();
             _loadoutWindow = null;
@@ -1052,7 +1080,8 @@ namespace Content.Client.Lobby.UI
 
             _loadoutWindow = new LoadoutWindow(Profile, roleLoadout, roleLoadoutProto, _playerManager.LocalSession, collection)
             {
-                Title = Loc.GetString("loadout-window-title-loadout", ("job", $"{jobProto?.LocalizedName}")),
+                // Goob - use title override first if given
+                Title = title ?? Loc.GetString("loadout-window-title-loadout", ("job", $"{jobProto?.LocalizedName}")),
             };
 
             // Refresh the buttons etc.

@@ -13,9 +13,6 @@
   metabolisms:
     Poison:
       conditions:
-      - !type:MetabolizerTypeCondition
-        type: [ Yowie ]
-        inverted: true
       - !type:WhitelistCondition
         blacklist:
           components:

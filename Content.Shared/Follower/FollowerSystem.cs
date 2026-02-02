@@ -34,6 +34,7 @@ public sealed class FollowerSystem : EntitySystem
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly ISharedAdminManager _adminManager = default!;
 
+    private static readonly ProtoId<TagPrototype> FollowerStayOnPolymorph = "FollowerStayOnPolymorph"; // Trauma
     private static readonly ProtoId<TagPrototype> ForceableFollowTag = "ForceableFollow";
     private static readonly ProtoId<TagPrototype> PreventGhostnadoWarpTag = "NotGhostnadoWarpable";
 
@@ -161,8 +162,10 @@ public sealed class FollowerSystem : EntitySystem
     {
         foreach (var follower in entity.Comp.Following)
         {
-            if (_tagSystem.HasTag(follower, "FollowerStayOnPolymorph"))
+            // <Trauma> - for heretic blade
+            if (_tagSystem.HasTag(follower, FollowerStayOnPolymorph))
                 continue;
+            // </Trauma>
             // Stop following the target's old entity and start following the new one
             StartFollowingEntity(follower, args.NewEntity);
         }

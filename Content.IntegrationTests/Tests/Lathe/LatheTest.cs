@@ -14,7 +14,6 @@ namespace Content.IntegrationTests.Tests.Lathe;
 public sealed class LatheTest
 {
     [Test]
-    [Explicit] // Trauma - 10 MINUTE TEST GG SPED
     public async Task TestLatheRecipeIngredientsFitLathe()
     {
         await using var pair = await PoolManager.GetServerClient();
@@ -32,19 +31,26 @@ public sealed class LatheTest
         await server.WaitAssertion(() =>
         {
             // Find all the lathes
-            var latheProtos = protoMan.EnumeratePrototypes<EntityPrototype>()
-                .Where(p => !p.Abstract)
-                .Where(p => !pair.IsTestPrototype(p))
-                .Where(p => p.HasComponent<LatheComponent>());
+            // <Trauma> - remove linq jesus christ
+            var latheName = compFactory.GetComponentName<LatheComponent>();
+            var materialName = compFactory.GetComponentName<PhysicalCompositionComponent>();
+            var latheProtos = new List<EntityPrototype>();
+            var materialEntityProtos = new List<EntityPrototype>();
+            foreach (var p in protoMan.EnumeratePrototypes<EntityPrototype>())
+            {
+                if (p.Abstract || pair.IsTestPrototype(p))
+                    continue;
 
-            // Find every EntityPrototype that can be inserted into a MaterialStorage
-            var materialEntityProtos = protoMan.EnumeratePrototypes<EntityPrototype>()
-                .Where(p => !p.Abstract)
-                .Where(p => !pair.IsTestPrototype(p))
-                .Where(p => p.HasComponent<PhysicalCompositionComponent>());
+                if (p.Components.ContainsKey(latheName))
+                    latheProtos.Add(p);
+                else if (p.Components.ContainsKey(materialName))
+                    materialEntityProtos.Add(p);
+            }
+            var compositionQuery = entMan.GetEntityQuery<PhysicalCompositionComponent>();
+            // </Trauma>
 
             // Spawn all of the above material EntityPrototypes - we need actual entities to do whitelist checks
-            var materialEntities = new List<EntityUid>(materialEntityProtos.Count());
+            var materialEntities = new List<EntityUid>(materialEntityProtos.Count); // Trauma - remove () from Count it's a list now
             foreach (var materialEntityProto in materialEntityProtos)
             {
                 materialEntities.Add(entMan.SpawnEntity(materialEntityProto.ID, mapData.GridCoords));
@@ -65,7 +71,7 @@ public sealed class LatheTest
                     var acceptedMaterials = new HashSet<ProtoId<MaterialPrototype>>();
                     foreach (var materialEntity in materialEntities)
                     {
-                        Assert.That(entMan.TryGetComponent<PhysicalCompositionComponent>(materialEntity, out var compositionComponent));
+                        Assert.That(compositionQuery.TryComp(materialEntity, out var compositionComponent)); // Trauma - use query from above
                         if (whitelistSystem.IsWhitelistFail(storageComp.Whitelist, materialEntity))
                             continue;
 

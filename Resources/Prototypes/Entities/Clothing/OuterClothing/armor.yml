@@ -188,7 +188,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 #Standard armor vest, allowed for security and bartenders
 - type: entity
@@ -249,7 +249,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 - type: entity
   parent: ClothingOuterArmorBase
@@ -281,7 +281,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.8
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 - type: entity
   parent: ClothingOuterArmorBase
@@ -309,7 +309,7 @@
     - Energy
     reflectingInHands: false
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseSyndicateContraband ]
@@ -351,7 +351,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.35
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
-    damageCoefficient: 0.1 # Goob edit
+    damageCoefficient: 0.5 # Goob edit
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -441,7 +441,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ExplosionResistance
     damageCoefficient: 0.9
 
@@ -483,9 +483,9 @@
   - type: ModifyDelayedKnockdown # Goobstation
     cancel: true
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ExplosionResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 - type: entity
   parent: ClothingOuterArmorHeavy
@@ -538,9 +538,9 @@
   - type: ModifyDelayedKnockdown # Goobstation
     cancel: true
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ExplosionResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 - type: entity
   parent: ClothingOuterArmorMagusblue # Goob edit
@@ -590,7 +590,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: StaticPrice # Goob
     price: 1000
   - type: Tag
@@ -654,7 +654,7 @@
   - type: ModifyDelayedKnockdown
     cancel: true
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: HideClothingLayerClothing # Goobstation
     hiddenSlots:
     - jumpsuit
@@ -703,7 +703,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: HideClothingLayerClothing # Goobstation
     hiddenSlots:
     - jumpsuit
@@ -744,7 +744,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: HideClothingLayerClothing # Goobstation
     hiddenSlots:
     - jumpsuit

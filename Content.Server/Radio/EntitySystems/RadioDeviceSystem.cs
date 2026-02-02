@@ -194,7 +194,7 @@ public sealed class RadioDeviceSystem : SharedRadioDeviceSystem
         _chat.TrySendInGameICMessage(uid,
             message,
             component.SpeakNormally ? InGameICChatType.Speak : InGameICChatType.Whisper, // Goobstation - radio host
-            ChatTransmitRange.GhostRangeLimit,
+            component.HideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.GhostRangeLimit, // Trauma - no radio host spam
             nameOverride: name,
             checkRadioPrefix: component.SpeakNormally,
             languageOverride: args.Language); // Einstein Engines - Languages

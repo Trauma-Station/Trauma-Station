@@ -45,6 +45,14 @@
   result: ShellShotgunSlug
 
 - type: latheRecipe
+  parent: BaseRevBullet
+  id: RevBreachShell
+  materials:
+    Steel: 15
+    Plasteel: 5
+  result: ShellShotgunBreaching
+
+- type: latheRecipe
   parent: BaseRevMagazine
   id: RevTurretMagazine
   result: BaseMagazineTurretEmpty

@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Goobstation.Common.NTR.Scan;
 using Content.Trauma.Common.Botany;
 // </Trauma>
 using Content.Server.Botany.Components;
@@ -176,8 +175,10 @@ public sealed partial class BotanySystem : EntitySystem
             var entity = Spawn(product, position);
             _randomHelper.RandomOffset(entity, 0.25f);
             products.Add(entity);
-            if (TryComp<ScannableForPointsComponent>(entity, out var scannable)) // Goobstation
-                scannable.Points = 0; // Goobstation, to prevent ntr duping points with botanists
+            // <Trauma>
+            var ev = new ProduceGrownEvent();
+            RaiseLocalEvent(entity, ref ev);
+            // </Trauma>
             var produce = EnsureComp<ProduceComponent>(entity);
 
             produce.Seed = proto;

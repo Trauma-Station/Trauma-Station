@@ -106,7 +106,8 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
             store.Categories.Add(category);
         }
         store.CurrencyWhitelist.Add(Currency);
-        store.Balance.Add(Currency, 2);
+        if (!store.Balance.TryAdd(Currency, 2))
+            store.Balance[Currency] += 2;
 
         rule.Minds.Add(mindId);
 

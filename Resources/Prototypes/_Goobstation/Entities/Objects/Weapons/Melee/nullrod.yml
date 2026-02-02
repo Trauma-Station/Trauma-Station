@@ -83,10 +83,6 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Wieldable
-  - type: DamageBoostOnMarker
-    boost:
-      types:
-        Holy: 15
   - type: LeechOnMarker
     leech:
       groups:
@@ -570,7 +566,6 @@
       params:
         volume: 1
   - type: MeleeRequiresWield
-    fumbleOnAttempt: true
   - type: Nullrod
     DamageOnUntrainedUse:
       types:

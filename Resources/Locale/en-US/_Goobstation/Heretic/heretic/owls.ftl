@@ -1,5 +1,4 @@
-feast-of-owls-eui-far-away = Rune is gone or too far away!
-feast-of-owls-eui-briefing = Your ambition is ravaged, but something powerful remains in its wake...
+feast-of-owls-briefing = Your ambition is ravaged, but something powerful remains in its wake...
 
 feast-of-owls-knowledge-gaim-message = You feel something invisible tearing away at your very essence!
 

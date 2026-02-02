@@ -40,7 +40,7 @@ public sealed partial class DevilContractSystem
         if (!TryComp<BodyComponent>(args.Target, out var body))
             return;
 
-        var hands = _bodySystem.GetBodyChildrenOfType(args.Target, BodyPartType.Hand, body).ToList();
+        var hands = _body.GetBodyChildrenOfType(args.Target, BodyPartType.Hand, body).ToList();
 
         if (hands.Count <= 0)
             return;
@@ -55,7 +55,7 @@ public sealed partial class DevilContractSystem
         QueueDel(pick.Id);
 
         Dirty(args.Target, body);
-        _sawmill.Debug($"Removed part {ToPrettyString(pick.Id)} from {ToPrettyString(args.Target)}");
+        Log.Debug($"Removed part {ToPrettyString(pick.Id)} from {ToPrettyString(args.Target)}");
         QueueDel(pick.Id);
     }
 
@@ -64,7 +64,7 @@ public sealed partial class DevilContractSystem
         if (!TryComp<BodyComponent>(args.Target, out var body))
             return;
 
-        var legs = _bodySystem.GetBodyChildrenOfType(args.Target, BodyPartType.Leg, body).ToList();
+        var legs = _body.GetBodyChildrenOfType(args.Target, BodyPartType.Leg, body).ToList();
 
         if (legs.Count <= 0)
             return;
@@ -78,14 +78,14 @@ public sealed partial class DevilContractSystem
         _wounds.AmputateWoundableSafely(woundable.ParentWoundable.Value, pick.Id, woundable);
 
         Dirty(args.Target, body);
-        _sawmill.Debug($"Removed part {ToPrettyString(pick.Id)} from {ToPrettyString(args.Target)}");
+        Log.Debug($"Removed part {ToPrettyString(pick.Id)} from {ToPrettyString(args.Target)}");
         QueueDel(pick.Id);
     }
 
     private void OnLoseOrgan(DevilContractLoseOrganEvent args)
     {
         // don't remove the brain, as funny as that is.
-        var eligibleOrgans = _bodySystem.GetBodyOrgans(args.Target)
+        var eligibleOrgans = _body.GetBodyOrgans(args.Target)
             .Where(o => !HasComp<BrainComponent>(o.Id))
             .ToList();
 
@@ -94,8 +94,8 @@ public sealed partial class DevilContractSystem
 
         var pick = _random.Pick(eligibleOrgans);
 
-        _bodySystem.RemoveOrgan(pick.Id, pick.Component);
-        _sawmill.Debug($"Removed part {ToPrettyString(pick.Id)} from {ToPrettyString(args.Target)}");
+        _body.RemoveOrgan(pick.Id, pick.Component);
+        Log.Debug($"Removed part {ToPrettyString(pick.Id)} from {ToPrettyString(args.Target)}");
         QueueDel(pick.Id);
     }
 

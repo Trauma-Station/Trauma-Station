@@ -7,11 +7,43 @@
 
 - type: jobIcon
   parent: JobIcon
+  id: JobIconFuture
+  icon:
+    sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
+    state: Future
+  jobName: job-name-futureagent
+
+- type: jobIcon
+  parent: JobIcon
   id: JobIconLambda
   icon:
     sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
     state: lambda
   jobName: job-name-governmentman
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconNanotrasenRepresentative
+  icon:
+    sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
+    state: nanotrasenrepresentative
+  jobName: job-name-ntr
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconBlueshield
+  icon:
+    sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
+    state: blueshield
+  jobName: job-name-bs
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconRadioHost
+  icon:
+    sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
+    state: radiohost
+  jobName: job-name-radiohost
 
 - type: jobIcon
   parent: JobIcon
@@ -25,7 +57,7 @@
   parent: JobIcon
   id: JobIconCommandMaid
   icon:
-    sprite: _Goobstation/Interface/Misc/job_icons.rsi
+    sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
     state: CommandMaid
   allowSelection: false
 
@@ -33,7 +65,7 @@
   parent: JobIcon
   id: JobIconPartyMaker
   icon:
-    sprite: _Goobstation/Interface/Misc/job_icons.rsi
+    sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
     state: PartyMaker
   allowSelection: false
 
@@ -41,6 +73,6 @@
   parent: JobIcon
   id: JobIconSecurityClown
   icon:
-    sprite: _Goobstation/Interface/Misc/job_icons.rsi
+    sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
     state: SecurityClown
   allowSelection: false

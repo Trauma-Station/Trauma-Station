@@ -1,5 +1,14 @@
 - type: reagent
-  parent: Slime
+  id: BaseXenobioReagent
+  abstract: true
+  group: Biological
+  flavor: horrible
+  physicalDesc: reagent-physical-desc-viscous
+  recognizable: false
+  viscosity: 0.25
+
+- type: reagent
+  parent: BaseXenobioReagent
   id: XenobioJellyPurple
   name: xenobio-reagent-jelly-purple-name
   desc: xenobio-reagent-jelly-purple-desc
@@ -16,7 +25,7 @@
         extractBonus: 1
 
 - type: reagent
-  parent: Slime
+  parent: BaseXenobioReagent
   id: XenobioJellyBlue
   name: xenobio-reagent-jelly-blue-name
   desc: xenobio-reagent-jelly-blue-desc
@@ -33,7 +42,7 @@
         chanceModifier: -0.25
 
 - type: reagent
-  parent: Slime
+  parent: BaseXenobioReagent
   id: XenobioJellyDarkBlue
   name: xenobio-reagent-jelly-darkblue-name
   desc: xenobio-reagent-jelly-darkblue-desc
@@ -52,7 +61,7 @@
         type: Add
 
 - type: reagent
-  parent: Slime
+  parent: BaseXenobioReagent
   id: XenobioJellyCerulean
   name: xenobio-reagent-jelly-cerulean-name
   desc: xenobio-reagent-jelly-cerulean-desc
@@ -69,7 +78,7 @@
         offspringBonus: 2
 
 - type: reagent
-  parent: Slime
+  parent: BaseXenobioReagent
   id: XenobioJellyRed
   name: xenobio-reagent-jelly-red-name
   desc: xenobio-reagent-jelly-red-desc
@@ -86,7 +95,7 @@
         chanceModifier: 0.25
 
 - type: reagent
-  parent: Slime
+  parent: BaseXenobioReagent
   id: XenobioJellyGreen
   name: xenobio-reagent-jelly-green-name
   desc: xenobio-reagent-jelly-green-desc
@@ -97,16 +106,16 @@
       conditions:
       - !type:ReagentCondition
         reagent: XenobioJellyGreen
-        min: 15
+        min: 10
       effects:
+      - !type:SpeciesChange
+        newSpecies: SlimePerson
       - !type:AdjustReagent
         reagent: XenobioJellyGreen
         amount: -50.0
-      - !type:SpeciesChange
-        newSpecies: SlimePerson
 
 - type: reagent
-  parent: Slime
+  parent: BaseXenobioReagent
   id: XenobioHumanToxin
   name: xenobio-reagent-toxin-human-name
   desc: xenobio-reagent-toxin-human-desc
@@ -117,16 +126,16 @@
       conditions:
       - !type:ReagentCondition
         reagent: XenobioHumanToxin
-        min: 15
+        min: 10
       effects:
+      - !type:SpeciesChange
+        newSpecies: Human
       - !type:AdjustReagent
         reagent: XenobioHumanToxin
         amount: -50.0
-      - !type:SpeciesChange
-        newSpecies: Human
 
 - type: reagent
-  parent: Slime
+  parent: BaseXenobioReagent
   id: XenobioJellyPink
   name: xenobio-reagent-jelly-pink-name
   desc: xenobio-reagent-jelly-pink-desc
@@ -143,7 +152,7 @@
         newFaction: Passive
 
 - type: reagent
-  parent: Slime
+  parent: BaseXenobioReagent
   id: AdvancedMutationToxin
   name: xenobio-reagent-toxin-advanced-name
   desc: xenobio-reagent-toxin-advanced-desc
@@ -154,15 +163,15 @@
       conditions:
       - !type:ReagentCondition
         reagent: AdvancedMutationToxin
-        min: 15
+        min: 10
       effects:
+      - !type:RandomSpeciesChange
       - !type:AdjustReagent
         reagent: AdvancedMutationToxin
         amount: -50.0
-      - !type:RandomSpeciesChange
 
 - type: reagent
-  parent: Slime
+  parent: BaseXenobioReagent
   id: XenobioFelinidToxin
   name: xenobio-reagent-toxin-felinid-name
   desc: xenobio-reagent-toxin-felinid-desc
@@ -173,10 +182,10 @@
       conditions:
       - !type:ReagentCondition
         reagent: XenobioFelinidToxin
-        min: 15
+        min: 10
       effects:
+      - !type:NestedEffect
+        proto: MakeFelinid
       - !type:AdjustReagent
         reagent: XenobioFelinidToxin
         amount: -50.0
-      - !type:NestedEffect
-        proto: MakeFelinid

@@ -8,16 +8,17 @@ using Robust.Shared.Prototypes;
 namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
-/// Relays entity effects to all body parts of a given type.
+/// Relays entity effects to all body parts of a given type, or all parts.
 /// </summary>
 public sealed partial class RelayBodyParts : EntityEffectBase<RelayBodyParts>
 {
     /// <summary>
     /// The body part type to run effects on.
     /// It will run on all of them if there are multiple.
+    /// If this is null it will run on all body parts.
     /// </summary>
-    [DataField(required: true)]
-    public BodyPartType PartType;
+    [DataField]
+    public BodyPartType? PartType;
 
     /// <summary>
     /// Optional part symmetry to require.
@@ -28,14 +29,14 @@ public sealed partial class RelayBodyParts : EntityEffectBase<RelayBodyParts>
     /// <summary>
     /// Text to use for the guidebook entry for reagents.
     /// </summary>
-    [DataField(required: true)]
-    public LocId GuidebookText;
+    [DataField]
+    public LocId? GuidebookText;
 
     [DataField(required: true)]
     public EntityEffect[] Effects = default!;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString(GuidebookText, ("chance", Probability));
+        => GuidebookText is {} key ? Loc.GetString(key, ("chance", Probability)) : null;
 }
 
 public sealed class RelayBodyPartsEffectSystem : EntityEffectSystem<BodyComponent, RelayBodyParts>
@@ -46,14 +47,29 @@ public sealed class RelayBodyPartsEffectSystem : EntityEffectSystem<BodyComponen
 
     protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<RelayBodyParts> args)
     {
-        var effects = args.Effect.Effects;
-        var partType = args.Effect.PartType;
-        var symmetry = args.Effect.PartSymmetry;
-        foreach (var (part, _) in _body.GetBodyChildrenOfType(ent, partType, ent.Comp, symmetry))
+        var effect = args.Effect;
+        var effects = effect.Effects;
+        var symmetry = effect.PartSymmetry;
+        if (effect.PartType is {} partType)
         {
-            _data.CopyData(ent, part);
-            _effects.ApplyEffects(part, effects, args.Scale);
-            _data.ClearData(part);
+            foreach (var (part, _) in _body.GetBodyChildrenOfType(ent, partType, ent.Comp, symmetry))
+            {
+                _data.CopyData(ent, part);
+                _effects.ApplyEffects(part, effects, args.Scale);
+                _data.ClearData(part);
+            }
+        }
+        else
+        {
+            foreach (var (part, partComp) in _body.GetBodyChildren(ent, ent.Comp))
+            {
+                if (symmetry != null && partComp.Symmetry != symmetry)
+                    continue;
+
+                _data.CopyData(ent, part);
+                _effects.ApplyEffects(part, effects, args.Scale);
+                _data.ClearData(part);
+            }
         }
     }
 }

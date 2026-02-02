@@ -1,5 +1,5 @@
 Name: Traumalog
-Order: -1
+Order: -2
 Entries:
 - author: Durk
   changes:
@@ -1779,3 +1779,477 @@ Entries:
   id: 217
   time: '2026-01-23T08:45:16.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/463
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Predicted reverse beartraps.
+  id: 218
+  time: '2026-01-23T12:56:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/464
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Changed undergarments to be the same as on wizden.
+  id: 219
+  time: '2026-01-23T16:05:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/468
+- author: TurboTrackerss14
+  changes:
+  - type: Remove
+    message: Durathread crafts through lathe and construction menu.
+  id: 220
+  time: '2026-01-23T22:27:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/471
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Made hardgrabs feel less jank.
+  id: 221
+  time: '2026-01-24T13:25:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/476
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Signing paper is now fully predicted.
+  id: 222
+  time: '2026-01-24T19:26:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/480
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: Made gun executions more real (you can now execute with any gun)
+  id: 223
+  time: '2026-01-24T19:27:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/470
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed slime wizards not being able to use the teleport spell.
+  id: 224
+  time: '2026-01-24T19:30:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/478
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Most mobs now have sounds for gulp/surprised emotes instead of squeaking
+      or whatever.
+  id: 225
+  time: '2026-01-24T19:39:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/481
+- author: Joel and Armok
+  changes:
+  - type: Add
+    message: Tons of sprites
+  - type: Remove
+    message: Midround changelings, heretics, devils, and demons
+  - type: Tweak
+    message: Midround antag rates
+  id: 226
+  time: '2026-01-24T23:13:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/485
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added T-45 P.O.W.A.R Armor, a new mech for revs
+  id: 227
+  time: '2026-01-24T23:14:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/456
+- author: SpeltIncorrectyl
+  changes:
+  - type: Tweak
+    message: Renamed 'Law Bringer' to 'Order' to fit in more with the 'Justice'
+  id: 228
+  time: '2026-01-24T23:44:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/484
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed bullets always targeting a random part, now they will go where you
+      aim if you are very close.
+  id: 229
+  time: '2026-01-24T23:59:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/482
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Re-enabled limb targeting random miss chances.
+  - type: Remove
+    message: The Phantom Pain
+  id: 230
+  time: '2026-01-25T09:30:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/490
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed bullets having 2 lights instead of 1.
+  id: 231
+  time: '2026-01-25T10:41:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/496
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      All crew get hypoports by default. The No Hypoport trait is now an
+      opt-out.
+  id: 232
+  time: '2026-01-25T10:59:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/497
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Nukies no longer get xenobio or maxcaps for free.
+  id: 233
+  time: '2026-01-25T11:27:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/498
+- author: deltanedas
+  changes:
+  - type: Add
+    message: You can now get a hold of yourself.
+  id: 234
+  time: '2026-01-25T11:34:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/500
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the FOXDIE retrovirus, traitor virologists can buy it and sample a
+      target's DNA. It will only kill targets with sampled DNA, being
+      transmitted harmlessly by everyone else.
+  id: 235
+  time: '2026-01-25T15:36:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/501
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: NTR report now shows the round ID at the end
+  id: 236
+  time: '2026-01-25T19:17:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/486
+- author: Armok
+  changes:
+  - type: Tweak
+    message: 'Warden shotgun: Damage decreased'
+  - type: Tweak
+    message: 'Warden shotgun: Ammo Cap increased'
+  - type: Tweak
+    message: >-
+      adjusted almost every single laser weapon to be in line with laser sec and
+      occupy its own niche
+  - type: Add
+    message: grille and lattice sprites
+  id: 237
+  time: '2026-01-25T19:49:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/488
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Station Radios can now be muted by streamer mode.
+  id: 238
+  time: '2026-01-25T22:55:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/517
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: Facehuggers can now infect if manually put onto someone.
+  id: 239
+  time: '2026-01-26T08:24:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/523
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed canceling lathe recipes spamming sounds.
+  id: 240
+  time: '2026-01-26T10:57:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/526
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed ancient xenos attacking real xenos.
+  id: 241
+  time: '2026-01-26T11:48:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/528
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Lighters can be toggled faster.
+  - type: Tweak
+    message: Made PKA sounds much quieter.
+  id: 242
+  time: '2026-01-26T12:01:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/529
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed ripleyMK2 being unbuildable
+  id: 243
+  time: '2026-01-26T12:25:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/530
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed AP weapons ignoring damage increases like species downsides or
+      executions.
+  id: 244
+  time: '2026-01-26T13:11:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/531
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Massively nerfed firelock health, it now takes 100 damage (before
+      modifiers) to break instead of 500.
+  id: 245
+  time: '2026-01-26T15:23:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/532
+- author: Rouden
+  changes:
+  - type: Fix
+    message: Fixed GPS showing the station's beacons on lavaland.
+  id: 246
+  time: '2026-01-26T20:36:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/534
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed slime steroids letting you make infinite slimes, it's capped to 6
+      max now.
+  - type: Tweak
+    message: Capped slime extracts to 8 max.
+  id: 247
+  time: '2026-01-27T09:42:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/543
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to print nails below red alert.
+  id: 248
+  time: '2026-01-27T09:46:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/544
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed drones t-ray scanners not working.
+  id: 249
+  time: '2026-01-27T12:23:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/545
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added a Use In Hand mode to the interactor.
+  - type: Add
+    message: >-
+      Added verbs for the interactor to toggle settings without needing to link
+      anything.
+  id: 250
+  time: '2026-01-27T13:26:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/546
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed issues with autodoc not finishing surgeries.
+  id: 251
+  time: '2026-01-27T20:06:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/547
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed batong having half as many uses as advertised when left clicking.
+  id: 252
+  time: '2026-01-27T20:12:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/549
+- author: JohnJJohn
+  changes:
+  - type: Remove
+    message: >-
+      Removed sci from the cuck chair (they can now build all the MechBoards in
+      the exosuit fab)
+  - type: Tweak
+    message: The normal mech drill is now in the basic mech equipment research
+  id: 253
+  time: '2026-01-28T14:22:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/552
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed station radio, radio's spamming ghost chat
+  id: 254
+  time: '2026-01-28T15:45:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/551
+- author: JohnJJohn
+  changes:
+  - type: Remove
+    message: Removed Power game species (Yowie)
+  id: 255
+  time: '2026-01-28T18:32:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/553
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added splitter  facepaint marking.
+  id: 256
+  time: '2026-01-29T18:41:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/559
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed access breakers not working on cargo request consoles.
+  id: 257
+  time: '2026-01-29T19:21:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/561
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: 'Lavaland 2: No job split between salvage specialists.'
+  - type: Tweak
+    message: 'Lavaland 2: Points vendor is mostly untouched.'
+  - type: Remove
+    message: Reverted passive regen and other slop.
+  - type: Tweak
+    message: Increased default wideswing stamina cost to 10, up from 5.
+  id: 258
+  time: '2026-01-30T08:01:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/557
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: >-
+      Added Blood splatters, blood will now splatter out of people (and
+      monkeys), when slashing or piercing damage is taken, gibbing makes a
+      bigger splatter
+  id: 259
+  time: '2026-01-30T16:16:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/562
+- author: Aviu
+  changes:
+  - type: Add
+    message: Predicted heretic rituals.
+  - type: Remove
+    message: >-
+      Reminiscence ritual removed, blades can be still recalled by performing
+      blade creation ritual again.
+  id: 260
+  time: '2026-01-30T17:25:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/472
+- author: Armok
+  changes:
+  - type: Add
+    message: Added some patreon custom items!
+  - type: Tweak
+    message: Reinforcement callers start with 2.5K spesos.
+  - type: Tweak
+    message: Lowered stam/explosive resist of most armors.
+  id: 261
+  time: '2026-01-30T17:58:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/563
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Insurgents can no longer be plasmamen.
+  - type: Fix
+    message: Fixed job icons from job malfunction event.
+  - type: Fix
+    message: Fixed not being able to make nailgun magazines specifically.
+  - type: Fix
+    message: Fixed station radio sounding weird.
+  id: 262
+  time: '2026-01-31T13:32:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/581
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed the AI being able to knock on shutters and blast doors.
+  id: 263
+  time: '2026-01-31T13:48:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/583
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to move after using a lavaland jaunter.
+  id: 264
+  time: '2026-01-31T14:25:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/585
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed splashing liquids on people being silent.
+  id: 265
+  time: '2026-01-31T15:08:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/587
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to butcher lings and absorbed bodies.
+  id: 266
+  time: '2026-01-31T16:07:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/588
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Screwdrivers now deal damage when thrown
+  - type: Remove
+    message: Removed BSO
+  id: 267
+  time: '2026-01-31T17:27:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/580
+- author: Aviu
+  changes:
+  - type: Add
+    message: Improved audio muffle, it should be more smooth now.
+  id: 268
+  time: '2026-02-01T11:13:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/598
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed abductors console not working.
+  id: 269
+  time: '2026-02-01T11:53:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/600
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lollypops being eaten instantly.
+  id: 270
+  time: '2026-02-01T13:06:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/601
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Predicted space dragon's fireball action.
+  id: 271
+  time: '2026-02-01T14:29:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/602
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Mice no longer have a groin part so you can't cheese the egg sack.
+  id: 272
+  time: '2026-02-01T17:21:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/605
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed deltarune reference not working on lavaland and working on station.
+  id: 273
+  time: '2026-02-01T17:28:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/606
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Toy facehuggers no longer inject nocturine.
+  id: 274
+  time: '2026-02-01T21:42:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/609
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: >-
+      Capoeria sweepkick now properly applies its grabspeed increase, instead of
+      reducing it.
+  id: 275
+  time: '2026-02-01T21:59:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/607

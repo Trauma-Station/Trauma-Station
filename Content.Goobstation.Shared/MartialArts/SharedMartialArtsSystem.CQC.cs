@@ -41,6 +41,7 @@ namespace Content.Goobstation.Shared.MartialArts;
 public partial class SharedMartialArtsSystem
 {
     private readonly ProtoId<DamageTypePrototype> Asphyxiation = "Asphyxiation";
+    private readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
     private readonly EntProtoId ForcedSleeping = "StatusEffectForcedSleeping";
 
     private void InitializeCqc()
@@ -118,7 +119,7 @@ public partial class SharedMartialArtsSystem
                 {
                     _pulling.TryStopPull(args.Target, pullable);
 
-                    var blunt = new DamageSpecifier(_proto.Index<DamageTypePrototype>("Blunt"), damageToKill.Value);
+                    var blunt = new DamageSpecifier(_proto.Index(Blunt), damageToKill.Value);
                     _damageable.TryChangeDamage(args.Target, blunt, true, targetPart: TargetBodyPart.Chest);
 
                     var (partType, symmetry) = _body.ConvertTargetBodyPart(targeting.Target);
