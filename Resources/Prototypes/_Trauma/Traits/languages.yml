@@ -111,19 +111,3 @@
     - NewKinPidgin
   languagesUnderstood:
     - NewKinPidgin
-
-- type: trait
-  id: RobotTalk
-  name: language-RobotTalk-name
-  description: language-RobotTalk-description
-  category: LanguageTraits
-  cost: 2
-  blacklist:
-    components:
-      - BorgChassis
-  components:
-  - type: LanguageSpeaker
-  languagesSpoken:
-    - RobotTalk
-  languagesUnderstood:
-    - RobotTalk
