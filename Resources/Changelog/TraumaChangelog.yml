@@ -2253,3 +2253,60 @@ Entries:
   id: 275
   time: '2026-02-01T21:59:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/607
+- author: Aviu
+  changes:
+  - type: Add
+    message: 'New mime exclusive traitor item: guide to advanced mimery.'
+  id: 276
+  time: '2026-02-02T07:07:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/473
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed smart equip trying to take mags out of guns instead of equipping
+      them.
+  id: 277
+  time: '2026-02-02T08:11:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/612
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed some holy fire shitcode that made you stay on fire forever.
+  - type: Tweak
+    message: Blood can now extinguish fires, albeit worse than water.
+  - type: Tweak
+    message: Holy water holy firestacks when drank decreased from 10 to 3 per unit.
+  id: 278
+  time: '2026-02-02T11:29:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/618
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed agent and revolutionary IDs only having maints access.
+  id: 279
+  time: '2026-02-02T11:39:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/621
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Hid crew cassette players when equipped, its sprite was too distracting.
+  id: 280
+  time: '2026-02-02T14:44:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/626
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: You can now chose other species' language in character editor
+  id: 281
+  time: '2026-02-02T16:00:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/625
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Cosmic cultists can see their own monument again.
+  - type: Fix
+    message: Heretics can see reality shifts again.
+  id: 282
+  time: '2026-02-02T16:21:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/628

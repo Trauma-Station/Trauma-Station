@@ -290,7 +290,7 @@ public abstract class SharedMagicSystem : EntitySystem
     ///     Gets spawn positions listed on <see cref="InstantSpawnSpellEvent"/>
     /// </summary>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    private List<EntityCoordinates> GetInstantSpawnPositions(TransformComponent casterXform, MagicInstantSpawnData data)
+    public List<EntityCoordinates> GetInstantSpawnPositions(TransformComponent casterXform, MagicInstantSpawnData data) // Goob edit - made public
     {
         switch (data)
         {
@@ -405,15 +405,12 @@ public abstract class SharedMagicSystem : EntitySystem
     // End World Spawn Spells
     #endregion
     #region Projectile Spells
-    private void OnProjectileSpell(ProjectileSpellEvent ev)
+    public void OnProjectileSpell(ProjectileSpellEvent ev) // Goob edit - made public
     {
         if (ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer)) // Goob edit
             return;
 
         ev.Handled = true;
-
-        if (_net.IsClient) // Goobstation
-            return;
 
         var xform = Transform(ev.Performer);
         var fromCoords = xform.Coordinates;
@@ -426,7 +423,7 @@ public abstract class SharedMagicSystem : EntitySystem
             : new(_mapSystem.GetMap(fromMap.MapId), fromMap.Position);
         var userVelocity = _physics.GetMapLinearVelocity(spawnCoords); // Goob edit
 
-        var ent = Spawn(ev.Prototype, fromMap);
+        var ent = PredictedSpawnAtPosition(ev.Prototype, _transform.ToCoordinates(fromMap)); // Trauma
         var direction = _transform.ToMapCoordinates(ev.Target).Position -
                         fromMap.Position;
         _gunSystem.ShootProjectile(ent, direction, userVelocity, ev.Performer, ev.Performer, ev.Speed); // Goob - put speed in event instead of hardcoded
