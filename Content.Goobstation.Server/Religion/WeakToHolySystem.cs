@@ -96,6 +96,7 @@ public sealed class WeakToHolySystem : EntitySystem
         if (!_body.TryGetRootPart(ent, out var rootPart, body: body))
             return;
 
+        // TODO: hello why the fuck are you doing this!?
         foreach (var woundable in _wound.GetAllWoundableChildren(rootPart.Value))
         {
             if (HasComp<DamageableComponent>(woundable))

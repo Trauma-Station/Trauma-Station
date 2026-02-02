@@ -63,6 +63,10 @@
     - HereticKnowledgeObjective
     - HereticSacrificeObjective
     - HereticSacrificeHeadObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:SetDamageContainer
+      container: BiologicalMetaphysical # allow heretics to take holy damage, crazy
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn
     agentName: heretic-roundend-name
