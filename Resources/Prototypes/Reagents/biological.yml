@@ -14,6 +14,12 @@
   recognizable: true
   standsout: true
   physicalDesc: reagent-physical-desc-ferrous
+  reactiveEffects: # Trauma - blood can extinguish fires, worse than water though
+    Extinguish:
+      methods: [ Touch ]
+      effects:
+      - !type:Extinguish
+        fireStacksAdjustment: -0.5 # 1/3 as good as water, maybe it makes sense
   metabolisms:
     Drink:
       effects:
