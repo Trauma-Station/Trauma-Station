@@ -1303,7 +1303,7 @@
     Drink:
       effects:
       - !type:HolyIgnite # Trauma
-        stacks: 10
+        stacks: 3
       - !type:SatiateThirst
         factor: 3
       - !type:AddComponents # DeltaV - Cosmic Cult
