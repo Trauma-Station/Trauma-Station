@@ -23,7 +23,7 @@
   components:
   - type: Action
     raiseOnUser: true
-    useDelay: 0.25 # use delay is controlled by FingerGunsActionComponent
+    useDelay: 0.25
     itemIconStyle: BigAction
     icon:
       sprite: _Goobstation/Actions/mime.rsi
@@ -36,7 +36,17 @@
   - type: EntityTargetAction
     canTargetSelf: false
   - type: WorldTargetAction
-    event: !type:FingerGunsActionEvent
+    event: !type:ProjectileSpellEvent
       prototype: BulletMime
   - type: AdvancedMimeryAction
-  - type: FingerGunsAction
+  - type: LimitedCharges
+    maxCharges: 3
+  - type: AutoRecharge
+    rechargeDuration: 10
+  - type: ActionRequiresEmptyHand
+    popupMessage: finger-guns-event-need-hand
+  - type: EntityEffectOnAction
+    effects:
+    - !type:Chat
+      message: finger-guns-event-shoot
+      type: Emote

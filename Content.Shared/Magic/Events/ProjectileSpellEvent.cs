@@ -13,8 +13,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Magic.Events;
 
-[Virtual]
-public partial class ProjectileSpellEvent : WorldTargetActionEvent // Goob edit - made virtual
+public sealed partial class ProjectileSpellEvent : WorldTargetActionEvent
 {
     /// <summary>
     /// What entity should be spawned.

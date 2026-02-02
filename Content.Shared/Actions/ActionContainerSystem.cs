@@ -16,7 +16,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Goobstation.Common.Mimery;
 using Content.Shared.Actions.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
@@ -340,10 +339,6 @@ public sealed class ActionContainerSystem : EntitySystem
 
         var ev = new ActionAddedEvent(args.Entity, action);
         RaiseLocalEvent(uid, ref ev);
-        // Goob edit start
-        var ev2 = new ActionGotAddedEvent(uid);
-        RaiseLocalEvent(args.Entity, ref ev2);
-        // Goob edit end
     }
 
     private void OnEntityRemoved(EntityUid uid, ActionsContainerComponent component, EntRemovedFromContainerMessage args)
