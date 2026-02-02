@@ -946,14 +946,16 @@
     - AllAccess
     - Silicon
     tags:
+    # <Trauma>
+    - BlueshieldOfficer
+    - NanotrasenRepresentative
+    - Revolutionary
+    # </Trauma>
     - CentralCommand
     - NuclearOperative
     - SyndicateAgent
     - Wizard
     - Xenoborg
-    # Goobstation
-    - NanotrasenRepresentative
-    - BlueshieldOfficer
   - type: NanoChatCard # DeltaV
     notificationsMuted: true
     listNumber: false
