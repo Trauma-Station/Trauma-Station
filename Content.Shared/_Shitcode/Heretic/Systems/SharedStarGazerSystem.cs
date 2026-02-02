@@ -213,7 +213,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
 
         var starGazer = summoner.Comp.StarGazer;
         if (!Exists(starGazer))
-            starGazer = heretic.Minions.Keys.FirstOrNull(x => Exists(x) && HasComp<StarGazerComponent>(x));
+            starGazer = heretic.Minions.FirstOrNull(x => Exists(x) && HasComp<StarGazerComponent>(x));
 
         if (starGazer == null)
         {
@@ -224,7 +224,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
             minion = EnsureComp<HereticMinionComponent>(starGazer.Value);
             minion.BoundHeretic = summoner;
             summoner.Comp.StarGazer = starGazer.Value;
-            heretic.Minions.Add(starGazer.Value, null);
+            heretic.Minions.Add(starGazer.Value);
             Dirty(mind, heretic);
             Dirty(summoner, summoner.Comp);
             Dirty(starGazer.Value, minion);
@@ -232,7 +232,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
             return (starGazer.Value, comp);
         }
 
-        heretic.Minions.Add(starGazer.Value, null);
+        heretic.Minions.Add(starGazer.Value);
         Dirty(mind, heretic);
 
         comp = EnsureComp<StarGazerComponent>(starGazer.Value);

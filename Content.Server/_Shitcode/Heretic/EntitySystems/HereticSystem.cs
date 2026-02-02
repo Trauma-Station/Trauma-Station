@@ -132,7 +132,7 @@ public sealed class HereticSystem : SharedHereticSystem
                 return;
 
             var ev = new HereticMindDetachedEvent(ent);
-            foreach (var minion in ent.Comp.Minions.Keys)
+            foreach (var minion in ent.Comp.Minions)
             {
                 RaiseLocalEvent(minion, ref ev);
             }
@@ -157,8 +157,8 @@ public sealed class HereticSystem : SharedHereticSystem
 
     private void SetMinionsMaster(Entity<HereticComponent> ent, EntityUid? newMaster)
     {
-        ent.Comp.Minions = ent.Comp.Minions.Where(x => Exists(x.Key)).ToDictionary();
-        foreach (var uid in ent.Comp.Minions.Keys)
+        ent.Comp.Minions = ent.Comp.Minions.Where(Exists).ToHashSet();
+        foreach (var uid in ent.Comp.Minions)
         {
             var minion = EnsureComp<HereticMinionComponent>(uid);
             minion.BoundHeretic = newMaster;

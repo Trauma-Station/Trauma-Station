@@ -264,18 +264,10 @@ public sealed class GhoulSystem : SharedGhoulSystem
         EntityUid? ritual = null,
         bool dirty = true)
     {
-        if (!_heretic.TryGetHereticComponent(heretic, out var hereticComp, out var mind))
-            return;
-
-        if (!hereticComp.Minions.TryGetValue(ent.Owner, out var rit) || rit == null)
-        {
-            hereticComp.Minions[ent.Owner] = ritual;
-            Dirty(mind, hereticComp);
-        }
-
         if (!Resolve(ent, ref ent.Comp1, false))
             ent.Comp1 = AddComp<HereticMinionComponent>(ent);
 
+        ent.Comp1.CreationRitual ??= ritual;
         ent.Comp1.BoundHeretic = heretic;
         _npc.SetBlackboard(ent, NPCBlackboard.FollowTarget, heretic.ToCoordinates(), ent.Comp2);
 
@@ -337,18 +329,21 @@ public sealed class GhoulSystem : SharedGhoulSystem
         if (_mind.TryGetMind(ent, out var mindId, out var mind))
             _role.MindRemoveRole<GhoulComponent>((mindId, mind));
 
-        if (TryComp(ent, out HereticMinionComponent? minion) && Exists(minion.BoundHeretic) &&
-            _heretic.TryGetHereticComponent(minion.BoundHeretic.Value, out var heretic, out var masterMind) &&
-            heretic.Minions.TryGetValue(ent, out var ritual))
+        if (TryComp(ent, out HereticMinionComponent? minion))
         {
-            if (TryComp(ritual, out HereticRitualComponent? ritComp))
+            if (Exists(minion.BoundHeretic) &&
+                _heretic.TryGetHereticComponent(minion.BoundHeretic.Value, out var heretic, out var masterMind))
             {
-                ritComp.LimitedOutput.Remove(ent);
-                Dirty(ritual.Value, ritComp);
+                heretic.Minions.Remove(ent);
+                Dirty(masterMind, heretic);
             }
 
-            heretic.Minions.Remove(ent);
-            Dirty(masterMind, heretic);
+            if (Exists(minion.CreationRitual) &&
+                TryComp(minion.CreationRitual.Value, out HereticRitualComponent? ritual))
+            {
+                ritual.LimitedOutput.Remove(ent);
+                Dirty(minion.CreationRitual.Value, ritual);
+            }
         }
 
         if (TryComp(ent, out HolyFlammableComponent? holyFlam))
