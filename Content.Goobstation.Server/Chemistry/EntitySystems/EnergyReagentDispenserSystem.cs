@@ -44,7 +44,6 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
-using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Power;
 using JetBrains.Annotations;
@@ -108,10 +107,10 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
             var idleUse = 0f;
             var hasPower = false;
 
-            if (TryComp<BatteryComponent>(reagentDispenser, out var battery))
+            if (TryComp<BatteryComponent>(reagentDispenser, out var batteryComp))
             {
-                batteryCharge = battery.CurrentCharge;
-                batteryMaxCharge = battery.MaxCharge;
+                batteryCharge = _battery.GetCharge((reagentDispenser, batteryComp));
+                batteryMaxCharge = batteryComp.MaxCharge;
             }
 
             if (TryComp<ApcPowerReceiverBatteryComponent>(reagentDispenser, out var apcPower))
@@ -193,13 +192,14 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
                 || !_solutionContainerSystem.TryGetFitsInDispenser(outputContainer.Value, out var solution, out _))
                 return;
 
-            if (!TryComp<BatteryComponent>(reagentDispenser, out var battery))
+            if (!TryComp<BatteryComponent>(reagentDispenser, out var batteryComp))
                 return;
 
             var amount = (int) reagentDispenser.Comp.DispenseAmount;
             var powerRequired = GetPowerCostForReagent(message.ReagentId, amount, reagentDispenser.Comp);
+            var currentCharge = _battery.GetCharge((reagentDispenser, batteryComp));
 
-            if (battery.CurrentCharge < powerRequired)
+            if (currentCharge < powerRequired)
             {
                 _audioSystem.PlayPvs(reagentDispenser.Comp.PowerSound, reagentDispenser, AudioParams.Default.WithVolume(-2f));
                 return;
@@ -210,7 +210,7 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
             if (!_solutionContainerSystem.TryAddSolution(solution.Value, sol))
                 return;
 
-            _battery.SetCharge(reagentDispenser.Owner, battery.CurrentCharge - powerRequired);
+            _battery.SetCharge(reagentDispenser.Owner, currentCharge - powerRequired);
             ClickSound(reagentDispenser);
             UpdateUiState(reagentDispenser);
         }
@@ -223,8 +223,9 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
                 return;
 
             var refundedPower = soln.Sum(reagent => GetPowerCostForReagent(reagent.Reagent.Prototype, (int) reagent.Quantity, reagentDispenser));
+            var currentCharge = _battery.GetCharge(reagentDispenser.Owner);
             if (refundedPower > 0)
-                _battery.AddCharge(reagentDispenser, refundedPower);
+                _battery.SetCharge(reagentDispenser.Owner, currentCharge + refundedPower);
 
             _solutionContainerSystem.RemoveAllSolution(solution.Value);
             UpdateUiState(reagentDispenser);
