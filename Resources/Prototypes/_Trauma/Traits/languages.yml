@@ -1,0 +1,129 @@
+# TODO: A trait that removes your secondary language so that players have options besides taking foreigner
+
+- type: trait
+  id: Calcic
+  name: language-Calcic-name # The other language traits have identical name and desc anyway, so why bother copy-pasting locale?
+  description: language-Calcic-desc
+  category: LanguageTraits
+  cost: 2
+  blacklist:
+    components:
+      - BorgChassis
+  components:
+  - type: LanguageSpeaker
+  languagesSpoken:
+    - Calcic
+  languagesUnderstood:
+    - Calcic
+
+- type: trait
+  id: ValyrianStandard
+  name: language-ValyrianStandard-name
+  description: language-ValyrianStandard-desc
+  category: LanguageTraits
+  cost: 2
+  blacklist:
+    components:
+      - BorgChassis
+  components:
+  - type: LanguageSpeaker
+  languagesSpoken:
+    - ValyrianStandard
+  languagesUnderstood:
+    - ValyrianStandard
+
+- type: trait
+  id: RootSpeak
+  name: language-RootSpeak-name
+  description: language-RootSpeak-desc
+  category: LanguageTraits
+  cost: 2
+  blacklist:
+    components:
+      - BorgChassis
+  components:
+  - type: LanguageSpeaker
+  languagesSpoken:
+    - RootSpeak
+  languagesUnderstood:
+    - RootSpeak
+
+- type: trait
+  id: Moffic
+  name: language-Moffic-name
+  description: language-Moffic-desc
+  category: LanguageTraits
+  cost: 2
+  blacklist:
+    components:
+      - BorgChassis
+  components:
+  - type: LanguageSpeaker
+  languagesSpoken:
+    - Moffic
+  languagesUnderstood:
+    - Moffic
+
+- type: trait
+  id: Draconic
+  name: language-Draconic-name
+  description: language-Draconic-desc
+  category: LanguageTraits
+  cost: 2
+  blacklist:
+    components:
+      - BorgChassis
+  components:
+  - type: LanguageSpeaker
+  languagesSpoken:
+    - Draconic
+  languagesUnderstood:
+    - Draconic
+
+- type: trait
+  id: Bubblish
+  name: language-Bubblish-name
+  description: language-Bubblish-desc
+  category: LanguageTraits
+  cost: 2
+  blacklist:
+    components:
+      - BorgChassis
+  components:
+  - type: LanguageSpeaker
+  languagesSpoken:
+    - Bubblish
+  languagesUnderstood:
+    - Bubblish
+
+- type: trait
+  id: NewKinPidgin
+  name: language-NewKinPidgin-name
+  description: language-NewKinPidgin-desc
+  category: LanguageTraits
+  cost: 2
+  blacklist:
+    components:
+      - BorgChassis
+  components:
+  - type: LanguageSpeaker
+  languagesSpoken:
+    - NewKinPidgin
+  languagesUnderstood:
+    - NewKinPidgin
+
+- type: trait
+  id: RobotTalk
+  name: language-RobotTalk-name
+  description: language-RobotTalk-desc
+  category: LanguageTraits
+  cost: 2
+  blacklist:
+    components:
+      - BorgChassis
+  components:
+  - type: LanguageSpeaker
+  languagesSpoken:
+    - RobotTalk
+  languagesUnderstood:
+    - RobotTalk
