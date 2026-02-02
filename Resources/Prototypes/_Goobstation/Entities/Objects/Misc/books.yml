@@ -23,7 +23,6 @@
 
 - type: entity
   id: AdvMimeryVol1
-
   parent: [BaseSyndicateContraband, BaseSpellbook]
   name: Guide to Advanced Mimery Vol 1
   description: The pages don't make any sound when turned.
