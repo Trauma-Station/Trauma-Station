@@ -3,7 +3,7 @@
 - type: trait
   id: Calcic
   name: language-Calcic-name # The other language traits have identical name and desc anyway, so why bother copy-pasting locale?
-  description: language-Calcic-desc
+  description: language-Calcic-description
   category: LanguageTraits
   cost: 2
   blacklist:
@@ -19,7 +19,7 @@
 - type: trait
   id: ValyrianStandard
   name: language-ValyrianStandard-name
-  description: language-ValyrianStandard-desc
+  description: language-ValyrianStandard-description
   category: LanguageTraits
   cost: 2
   blacklist:
@@ -35,7 +35,7 @@
 - type: trait
   id: RootSpeak
   name: language-RootSpeak-name
-  description: language-RootSpeak-desc
+  description: language-RootSpeak-description
   category: LanguageTraits
   cost: 2
   blacklist:
@@ -51,7 +51,7 @@
 - type: trait
   id: Moffic
   name: language-Moffic-name
-  description: language-Moffic-desc
+  description: language-Moffic-description
   category: LanguageTraits
   cost: 2
   blacklist:
@@ -67,7 +67,7 @@
 - type: trait
   id: Draconic
   name: language-Draconic-name
-  description: language-Draconic-desc
+  description: language-Draconic-description
   category: LanguageTraits
   cost: 2
   blacklist:
@@ -83,7 +83,7 @@
 - type: trait
   id: Bubblish
   name: language-Bubblish-name
-  description: language-Bubblish-desc
+  description: language-Bubblish-description
   category: LanguageTraits
   cost: 2
   blacklist:
@@ -99,7 +99,7 @@
 - type: trait
   id: NewKinPidgin
   name: language-NewKinPidgin-name
-  description: language-NewKinPidgin-desc
+  description: language-NewKinPidgin-description
   category: LanguageTraits
   cost: 2
   blacklist:
@@ -115,7 +115,7 @@
 - type: trait
   id: RobotTalk
   name: language-RobotTalk-name
-  description: language-RobotTalk-desc
+  description: language-RobotTalk-description
   category: LanguageTraits
   cost: 2
   blacklist:
