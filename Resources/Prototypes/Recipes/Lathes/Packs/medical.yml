@@ -83,7 +83,7 @@
   recipes:
   - ElectrolysisUnitMachineCircuitboard
   - CentrifugeMachineCircuitboard
-  - ChemDispenserMachineCircuitboard
+#  - ChemDispenserMachineCircuitboard # Trauma - we using energy chem now!!!
   - ChemMasterMachineCircuitboard
   - CondenserMachineCircuitBoard
   - HotplateMachineCircuitboard
