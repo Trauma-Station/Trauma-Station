@@ -1,0 +1,72 @@
+- type: entity
+  id: KitchenDeepFryer
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: deep fryer
+  description: You can deep fry anything! I really mean ANYTHING.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/Service/deep_fryer.rsi
+    layers:
+    - state: deep_fryer_open
+      map: ["fryer_open"]
+    - state: deep_fryer_closed
+      visible: false
+      map: ["fryer_closed"]
+    - state: deep_fryer_closed_big
+      visible: false
+      map: ["fryer_closed_big"]
+  - type: DeepFryer
+    componentsToAdd:
+    - type: DeepFried
+  - type: EntityStorage
+    openOnMove: false
+    isCollidableWhenOpen: true
+    showContents: false
+    capacity: 1
+    airtight: true
+    open: true
+    closeSound:
+      path: /Audio/Items/deconstruct.ogg
+    openSound:
+      path: /Audio/Items/deconstruct.ogg
+  - type: ContainerContainer
+    containers:
+      entity_storage: !type:Container
+  - type: Climbable
+    delay: 1.5
+  - type: AmbientSound
+    enabled: false
+    volume: 7
+    range: 10
+    sound:
+      path: /Audio/_Trauma/Machines/DeepFryer/deep_fryer_ambience.ogg
+  - type: ApcPowerReceiver
+    powerLoad: 700
+  - type: SolutionContainerManager
+    solutions:
+      fryer:
+        maxVol: 300
+  - type: MixableSolution
+    solution: fryer
+  - type: RefillableSolution
+    solution: fryer
+  - type: ExaminableSolution
+    solution: fryer
+    exactVolume: true
+  - type: DrawableSolution
+    solution: fryer
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.DeepFryerVisuals.Open:
+        fryer_open:
+          True: { visible: true }
+          False: { visible: false }
+      enum.DeepFryerVisuals.Frying:
+        fryer_closed:
+          True: { visible: true }
+          False: { visible: false }
+      enum.DeepFryerVisuals.BigFrying:
+        fryer_closed_big:
+          True: { visible: true }
+          False: { visible: false }
