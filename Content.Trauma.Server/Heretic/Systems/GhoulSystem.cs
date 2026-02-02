@@ -18,18 +18,13 @@
 
 using System.Linq;
 using Content.Server.Antag;
-using Content.Server.Atmos.Components;
-using Content.Server.Body.Components;
-using Content.Server.Dragon;
 using Content.Server.Ghost.Roles.Components;
 using Content.Shared.Hands.Components;
 using Content.Server.Hands.Systems;
 using Content.Server.Humanoid;
 using Content.Server.Storage.EntitySystems;
-using Content.Shared._White.Xenomorphs.Xenomorph;
 using Content.Shared.Body.Systems;
 using Content.Shared.CombatMode;
-using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Examine;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Heretic;
@@ -42,9 +37,6 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
-using Content.Shared.Nutrition.AnimalHusbandry;
-using Content.Shared.Nutrition.Components;
-using Content.Shared.RatKing;
 using Robust.Server.Audio;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
@@ -56,7 +48,6 @@ using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Roles;
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Coordinates;
 using Content.Shared.Roles;
@@ -75,9 +66,9 @@ using Content.Shared.Gibbing;
 using Content.Shared.NPC.Components;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Roles.Components;
-using Content.Shared.Temperature.Components;
 using Content.Trauma.Server.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
+using Content.Trauma.Shared.Heretic.Prototypes;
 using Content.Trauma.Shared.Heretic.Systems;
 
 namespace Content.Trauma.Server.Heretic.Systems;
@@ -87,7 +78,11 @@ public sealed class GhoulSystem : SharedGhoulSystem
     private static readonly ProtoId<HTNCompoundPrototype> Compound = "HereticSummonCompound";
     private static readonly EntProtoId<MindRoleComponent> GhoulRole = "MindRoleGhoul";
 
-    [Dependency] private readonly IComponentFactory _compFact = default!;
+    private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnGhoulify =
+        "ComponentsToRemoveOnGhoulify";
+    private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnUnGhoulify =
+        "ComponentsToRemoveOnUnGhoulify";
+
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly JitteringSystem _jitter = default!;
     [Dependency] private readonly StutteringSystem _stutter = default!;
@@ -109,35 +104,6 @@ public sealed class GhoulSystem : SharedGhoulSystem
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
     [Dependency] private readonly HereticSystem _heretic = default!;
     [Dependency] private readonly HolyFlammableSystem _holyFlam = default!;
-
-    private readonly List<Type> _componentsToRemoveOnGhoulify =
-    [
-        typeof(RespiratorComponent),
-        typeof(BarotraumaComponent),
-        typeof(HungerComponent),
-        typeof(ThirstComponent),
-        typeof(ReproductiveComponent),
-        typeof(ReproductivePartnerComponent),
-        typeof(TemperatureComponent),
-        typeof(ConsciousnessComponent),
-        typeof(PacifiedComponent),
-        typeof(XenomorphComponent),
-        typeof(RatKingComponent),
-        typeof(DragonComponent),
-    ];
-
-    private readonly List<Type> _componentsToRemoveOnUnGhoulify =
-    [
-        typeof(GhoulComponent),
-        typeof(HereticMinionComponent),
-        typeof(WeakToHolyComponent),
-        typeof(GhostTakeoverAvailableComponent),
-        typeof(VoicelessDeadComponent),
-        typeof(HereticBladeUserBonusDamageComponent),
-        typeof(GhoulDeconvertComponent),
-        typeof(HolyIgniteOnCollideComponent),
-        typeof(HolyFlammableComponent),
-    ];
 
     public override void Initialize()
     {
@@ -307,15 +273,15 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
         var species = _proto.Index(humanoid.Species);
         var prototype = _proto.Index(species.Prototype);
-        foreach (var comp in _componentsToRemoveOnGhoulify.Concat([typeof(MobThresholdsComponent)]))
-        {
-            var name = _compFact.GetComponentName(comp);
-            if (!prototype.Components.TryGetValue(name, out var reg))
-                continue;
 
-            var newComp = _compFact.GetComponent(reg);
-            AddComp(ent, newComp, true);
-        }
+        var comps = prototype.Components
+            .IntersectBy(_proto.Index(ComponentsToRemoveOnGhoulify).Components.Keys, x => x.Key)
+            .ToDictionary();
+
+        EntityManager.AddComponents(ent, new ComponentRegistry(comps));
+        if (prototype.Components.TryGetComponent(Factory.GetComponentName<MobThresholdsComponent>(),
+                out var thresholds))
+            AddComp(ent, thresholds, true);
 
         if (TryComp(ent, out CollectiveMindComponent? collective))
             collective.Channels.Remove(HereticAbilitySystem.MansusLinkMind);
@@ -349,18 +315,12 @@ public sealed class GhoulSystem : SharedGhoulSystem
         if (TryComp(ent, out HolyFlammableComponent? holyFlam))
             _holyFlam.HolyExtinguish(ent, holyFlam);
 
-        foreach (var component in _componentsToRemoveOnUnGhoulify)
-        {
-            RemCompDeferred(ent, component);
-        }
+        EntityManager.RemoveComponents(ent, _proto.Index(ComponentsToRemoveOnUnGhoulify).Components);
     }
 
     public void GhoulifyEntity(Entity<GhoulComponent> ent)
     {
-        foreach (var component in _componentsToRemoveOnGhoulify)
-        {
-            RemCompDeferred(ent, component);
-        }
+        EntityManager.RemoveComponents(ent, _proto.Index(ComponentsToRemoveOnGhoulify).Components);
 
         EnsureComp<CombatModeComponent>(ent);
 

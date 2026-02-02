@@ -317,7 +317,7 @@ public partial class SharedBodySystem
             return false;
 
         var ev = new TryRemoveOrganEvent(organId, organ);
-        RaiseLocalEvent(organId, ref ev, true);
+        RaiseLocalEvent(organId, ref ev, true); // Trauma - broadcast
 
         if (ev.Cancelled)
             return false;

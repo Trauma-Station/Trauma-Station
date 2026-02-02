@@ -9,6 +9,7 @@ using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Exorcism;
 using Content.Goobstation.Shared.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
@@ -39,12 +40,16 @@ public sealed partial class GoobBibleSystem : EntitySystem
         if (!Resolve(bible, ref useDelay, ref bibleComp))
             return false;
 
-        if (!TryComp<WeakToHolyComponent>(target, out var weakToHoly)
-            || weakToHoly is {AlwaysTakeHoly: false}
+        if (!HasComp<ShouldTakeHolyComponent>(target)
             || !HasComp<BibleUserComponent>(performer)
             || !_timing.IsFirstTimePredicted
             || _delay.IsDelayed(bible)
             || !_netManager.IsServer)
+            return false;
+
+        var ev = new BibleSmiteAttemptEvent(target);
+        RaiseLocalEvent(target, ref ev);
+        if (!ev.ShouldSmite)
             return false;
 
         var multiplier = 1f;

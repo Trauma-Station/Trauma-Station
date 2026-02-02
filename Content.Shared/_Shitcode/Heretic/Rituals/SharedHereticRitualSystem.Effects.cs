@@ -28,7 +28,7 @@ public abstract partial class SharedHereticRitualSystem
 
     private void OnIfElse(Entity<HereticRitualComponent> ent, ref HereticRitualEffectEvent<IfElseRitualEffect> args)
     {
-        var result = false;
+        bool result;
         if (_effects.TryConditions(ent, args.Effect.IfConditions, args.Ritual))
             result = _effects.TryEffects(ent, args.Effect.EffectsA, args.Ritual, args.User);
         else if (args.Effect.EffectsB != null)

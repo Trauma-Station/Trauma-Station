@@ -47,17 +47,50 @@ public sealed class WeakToHolySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<WeakToHolyComponent, DamageUnholyEvent>(OnUnholyItemDamage);
-        SubscribeLocalEvent<WeakToHolyComponent, InteractUsingEvent>(AfterBibleUse);
+        SubscribeLocalEvent<ShouldTakeHolyComponent, DamageUnholyEvent>(OnUnholyItemDamage);
+        SubscribeLocalEvent<ShouldTakeHolyComponent, InteractUsingEvent>(AfterBibleUse);
 
         SubscribeLocalEvent<HereticRitualRuneComponent, StartCollideEvent>(OnCollide);
         SubscribeLocalEvent<HereticRitualRuneComponent, EndCollideEvent>(OnCollideEnd);
 
         SubscribeLocalEvent<DamageableComponent, DamageModifyEvent>(OnHolyDamageModify);
 
+        SubscribeLocalEvent<AlwaysTakeHolyComponent, MapInitEvent>(OnInit);
+        SubscribeLocalEvent<AlwaysTakeHolyComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<AlwaysTakeHolyComponent, UserShouldTakeHolyEvent>(OnStatusChanged);
+        SubscribeLocalEvent<AlwaysTakeHolyComponent, BibleSmiteAttemptEvent>(OnSmiteAttempt);
     }
 
-    private void AfterBibleUse(Entity<WeakToHolyComponent> ent, ref InteractUsingEvent args)
+    private void OnSmiteAttempt(Entity<AlwaysTakeHolyComponent> ent, ref BibleSmiteAttemptEvent args)
+    {
+        args.ShouldSmite = ent.Comp.ShouldBibleSmite;
+    }
+
+    private void OnStatusChanged(Entity<AlwaysTakeHolyComponent> ent, ref UserShouldTakeHolyEvent args)
+    {
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
+            return;
+
+        args.ShouldTakeHoly = true;
+    }
+
+    private void OnShutdown(Entity<AlwaysTakeHolyComponent> ent, ref ComponentShutdown args)
+    {
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        var ev = new UnholyStatusChangedEvent(ent, ent, false);
+        RaiseLocalEvent(ent, ref ev);
+    }
+
+    private void OnInit(Entity<AlwaysTakeHolyComponent> ent, ref MapInitEvent args)
+    {
+        EnsureComp<WeakToHolyComponent>(ent);
+        var ev = new UnholyStatusChangedEvent(ent, ent, true);
+        RaiseLocalEvent(ent, ref ev);
+    }
+
+    private void AfterBibleUse(Entity<ShouldTakeHolyComponent> ent, ref InteractUsingEvent args)
     {
         if (!TryComp<BibleComponent>(args.Used, out var bibleComp))
             return;
@@ -103,24 +136,9 @@ public sealed class WeakToHolySystem : EntitySystem
         }
     }
 
-    private void OnUnholyItemDamage(Entity<WeakToHolyComponent> uid, ref DamageUnholyEvent args)
+    private void OnUnholyItemDamage(Entity<ShouldTakeHolyComponent> uid, ref DamageUnholyEvent args)
     {
-        if (uid.Comp.AlwaysTakeHoly)
-        {
-            args.ShouldTakeHoly = true;
-            return;
-        }
-
-        if (_heretic.TryGetHereticComponent(uid.Owner, out var heretic, out _) && heretic.Ascended)
-        {
-            args.ShouldTakeHoly = true;
-            return;
-        }
-
-        // If any item in hand or in inventory has Unholy item, shouldtakeholy is true.
-        if (_inventorySystem.GetHandOrInventoryEntities(args.Target, SlotFlags.WITHOUT_POCKET)
-            .Any(HasComp<UnholyItemComponent>))
-            args.ShouldTakeHoly = true;
+        args.ShouldTakeHoly = true;
     }
 
     #endregion

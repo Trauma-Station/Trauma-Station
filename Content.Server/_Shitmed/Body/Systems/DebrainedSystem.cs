@@ -74,6 +74,6 @@ public sealed class DebrainedSystem : EntitySystem
 
     private void OnRejuvenate(Entity<DebrainedComponent> ent, ref RejuvenateEvent args)
     {
-        RemComp(ent, ent.Comp);
+        RemCompDeferred(ent, ent.Comp);
     }
 }
