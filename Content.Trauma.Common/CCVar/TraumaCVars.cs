@@ -5,13 +5,7 @@ namespace Content.Trauma.Common.CCVar;
 [CVarDefs]
 public sealed partial class TraumaCVars
 {
-    #region Slop
-
-    /// <summary>
-    ///     Is antag pity enabled
-    /// </summary>
-    public static readonly CVarDef<bool> AntagPityEnabled =
-        CVarDef.Create("trauma.pity_enabled", false, CVar.SERVER | CVar.REPLICATED);
+    #region Disabling features
 
     /// <summary>
     /// Whether to enable the ghost bar.
