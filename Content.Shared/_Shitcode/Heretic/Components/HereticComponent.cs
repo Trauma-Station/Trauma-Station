@@ -130,9 +130,10 @@ public sealed partial class HereticComponent : Component
 
     /// <summary>
     /// Minions summoned by this heretic
+    /// Minion -> ritual that has summoned it
     /// </summary>
     [DataField, AutoNetworkedField]
-    public HashSet<EntityUid> Minions = new();
+    public Dictionary<EntityUid, EntityUid?> Minions = new();
 }
 
 [DataDefinition, Serializable, NetSerializable]

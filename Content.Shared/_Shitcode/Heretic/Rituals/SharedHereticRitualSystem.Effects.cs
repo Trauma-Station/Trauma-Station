@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Heretic;
 using Content.Shared.Mind;
@@ -24,6 +23,18 @@ public abstract partial class SharedHereticRitualSystem
         SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<UpdateKnowledgeEffect>>(OnUpdateKnowledge);
         SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<RemoveRitualsEffect>>(OnRemoveRituals);
         SubscribeLocalEvent<HereticRitualComponent, HereticRitualEffectEvent<SplitIngredientsRitualEffect>>(OnSplit);
+        SubscribeLocalEvent<HereticRitualComponent, HereticRitualEffectEvent<IfElseRitualEffect>>(OnIfElse);
+    }
+
+    private void OnIfElse(Entity<HereticRitualComponent> ent, ref HereticRitualEffectEvent<IfElseRitualEffect> args)
+    {
+        var result = false;
+        if (_effects.TryCondition(ent, args.Effect.IfCondition, args.Ritual))
+            result = _effects.TryEffects(ent, args.Effect.EffectsA, args.Ritual, args.User);
+        else if (args.Effect.EffectsB != null)
+            result = _effects.TryEffects(ent, args.Effect.EffectsB, args.Ritual, args.User);
+        if (args.Effect.SaveResultKey is { } key)
+            ent.Comp.Blackboard[key] = result;
     }
 
     private void OnEffects(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<EffectsRitualEffect> args)
@@ -92,6 +103,7 @@ public abstract partial class SharedHereticRitualSystem
         var ghoul = _compFact.GetComponent<GhoulComponent>();
         ghoul.TotalHealth = args.Effect.Health;
         ghoul.GiveBlade = args.Effect.GiveBlade;
+        ghoul.CanDeconvert = args.Effect.CanDeconvert;
         AddComp(ent, ghoul, true);
     }
 
@@ -170,7 +182,7 @@ public abstract partial class SharedHereticRitualSystem
 
                 if (_ghoulQuery.HasComp(spawned))
                 {
-                    var ev = new SetGhoulBoundHereticEvent(performer);
+                    var ev = new SetGhoulBoundHereticEvent(performer, args.Ritual);
                     RaiseLocalEvent(spawned, ref ev);
                 }
 
