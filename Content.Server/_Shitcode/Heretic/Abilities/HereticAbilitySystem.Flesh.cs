@@ -195,7 +195,7 @@ public sealed partial class HereticAbilitySystem
         metabolizer.MetabolizerTypes = ["Vox"];
         metabolizer.SolutionOnBody = false;
         metabolizer.RemoveEmpty = true;
-        metabolizer.SolutionName = solName;
+        metabolizer.SolutionName = BloodstreamComponent.DefaultBloodSolutionName;
         return (stomach.Value, stomachComp, organ);
     }
 

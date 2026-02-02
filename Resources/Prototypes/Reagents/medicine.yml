@@ -1302,8 +1302,21 @@
   metabolisms:
     Drink:
       effects:
-      - !type:HolyIgnite # Trauma
+      # <Trauma>
+      - !type:DeconvertGhoul
+        conditions:
+        - !type:ReagentCondition
+          reagent: Holywater
+          min: 20
+      - !type:HolyIgnite
         stacks: 10
+        conditions:
+        - !type:WhitelistCondition
+          blacklist:
+            components:
+            - GhoulDeconvert
+            - CleanseCult
+      # </Trauma>
       - !type:SatiateThirst
         factor: 3
       - !type:AddComponents # DeltaV - Cosmic Cult
@@ -1333,11 +1346,6 @@
             Heat: -0.2
             Shock: -0.2
             Cold: -0.2
-      - !type:DeconvertGhoul # Trauma
-        conditions:
-        - !type:ReagentCondition
-          reagent: Holywater
-          min: 20
   reactiveEffects:
     Extinguish:
       methods: [ Touch ]
@@ -1348,6 +1356,12 @@
       effects:
       - !type:HolyIgnite
         stacks: 3
+        conditions:
+        - !type:WhitelistCondition
+          blacklist:
+            components:
+            - GhoulDeconvert
+            - CleanseCult
 #    Acidic:  # Goobstation - Removing holy water damage on touch pending rework.
 #      methods: [ Touch ]
 #      effects:

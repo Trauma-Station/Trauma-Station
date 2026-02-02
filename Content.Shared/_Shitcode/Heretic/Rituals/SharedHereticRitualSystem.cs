@@ -112,6 +112,8 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
                     return false;
                 }
             }
+            else
+                result = _effects.TryEffects(ent, ent.Comp.Effects, ent, user);
         }
         else
             result = _effects.TryEffects(ent, ent.Comp.Effects, ent, user);

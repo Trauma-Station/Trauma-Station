@@ -29,10 +29,13 @@ public abstract partial class SharedHereticRitualSystem
     private void OnIfElse(Entity<HereticRitualComponent> ent, ref HereticRitualEffectEvent<IfElseRitualEffect> args)
     {
         var result = false;
-        if (_effects.TryCondition(ent, args.Effect.IfCondition, args.Ritual))
+        if (_effects.TryConditions(ent, args.Effect.IfConditions, args.Ritual))
             result = _effects.TryEffects(ent, args.Effect.EffectsA, args.Ritual, args.User);
         else if (args.Effect.EffectsB != null)
             result = _effects.TryEffects(ent, args.Effect.EffectsB, args.Ritual, args.User);
+        else
+            return;
+
         if (args.Effect.SaveResultKey is { } key)
             ent.Comp.Blackboard[key] = result;
     }
@@ -96,15 +99,15 @@ public abstract partial class SharedHereticRitualSystem
         if (!TryGetValue(args.Ritual, Performer, out EntityUid performer))
             return;
 
-        var minion = _compFact.GetComponent<HereticMinionComponent>();
-        minion.BoundHeretic = performer;
-        AddComp(ent, minion, true);
-
         var ghoul = _compFact.GetComponent<GhoulComponent>();
         ghoul.TotalHealth = args.Effect.Health;
         ghoul.GiveBlade = args.Effect.GiveBlade;
         ghoul.CanDeconvert = args.Effect.CanDeconvert;
+        ghoul.DeathBehavior = args.Effect.DeathBehavior;
         AddComp(ent, ghoul, true);
+
+        var ev = new SetGhoulBoundHereticEvent(performer, args.Ritual);
+        RaiseLocalEvent(ent, ref ev);
     }
 
     private void OnFindLimited(Entity<TransformComponent> ent,

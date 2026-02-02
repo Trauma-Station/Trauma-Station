@@ -1,5 +1,6 @@
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
+using Content.Shared.Heretic;
 using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
@@ -182,6 +183,9 @@ public sealed partial class GhoulifyEffect : BaseRitualEffect<GhoulifyEffect>
 
     [DataField]
     public bool CanDeconvert = true;
+
+    [DataField]
+    public GhoulDeathBehavior DeathBehavior = GhoulDeathBehavior.NoGib;
 }
 
 public sealed partial class SplitIngredientsRitualEffect : BaseRitualEffect<SplitIngredientsRitualEffect>
@@ -197,7 +201,7 @@ public sealed partial class IfElseRitualEffect : BaseRitualEffect<IfElseRitualEf
     public EntityEffect[] EffectsA;
 
     [DataField(required: true)]
-    public EntityCondition IfCondition;
+    public EntityCondition[] IfConditions;
 
     [DataField]
     public EntityEffect[]? EffectsB;

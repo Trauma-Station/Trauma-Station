@@ -47,7 +47,9 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.RatKing;
 using Robust.Server.Audio;
 using Content.Goobstation.Shared.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Heretic.Abilities;
+using Content.Server.Heretic.EntitySystems;
 using Content.Server.Jittering;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN;
@@ -71,12 +73,16 @@ using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Gibbing;
 using Content.Shared.NPC.Components;
+using Content.Shared.Rejuvenate;
 using Content.Shared.Roles.Components;
 using Content.Shared.Temperature.Components;
+using Content.Trauma.Server.Chaplain;
+using Content.Trauma.Shared.Chaplain.Components;
+using Content.Trauma.Shared.Heretic.Systems;
 
-namespace Content.Server.Heretic.EntitySystems;
+namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class GhoulSystem : EntitySystem
+public sealed class GhoulSystem : SharedGhoulSystem
 {
     private static readonly ProtoId<HTNCompoundPrototype> Compound = "HereticSummonCompound";
     private static readonly EntProtoId<MindRoleComponent> GhoulRole = "MindRoleGhoul";
@@ -102,6 +108,7 @@ public sealed class GhoulSystem : EntitySystem
     [Dependency] private readonly SharedRoleSystem _role = default!;
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
     [Dependency] private readonly HereticSystem _heretic = default!;
+    [Dependency] private readonly HolyFlammableSystem _holyFlam = default!;
 
     private readonly List<Type> _componentsToRemoveOnGhoulify =
     [
@@ -119,10 +126,24 @@ public sealed class GhoulSystem : EntitySystem
         typeof(DragonComponent),
     ];
 
+    private readonly List<Type> _componentsToRemoveOnUnGhoulify =
+    [
+        typeof(GhoulComponent),
+        typeof(HereticMinionComponent),
+        typeof(WeakToHolyComponent),
+        typeof(GhostTakeoverAvailableComponent),
+        typeof(VoicelessDeadComponent),
+        typeof(HereticBladeUserBonusDamageComponent),
+        typeof(GhoulDeconvertComponent),
+        typeof(HolyIgniteOnCollideComponent),
+        typeof(HolyFlammableComponent),
+    ];
+
     public override void Initialize()
     {
         base.Initialize();
 
+        UpdatesAfter.Add(typeof(HolyFlammableSystem));
         SubscribeLocalEvent<GhoulComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<GhoulComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<GhoulComponent, ExaminedEvent>(OnExamine);
@@ -130,6 +151,9 @@ public sealed class GhoulSystem : EntitySystem
         SubscribeLocalEvent<GhoulComponent, SetGhoulBoundHereticEvent>(OnBound);
 
         SubscribeLocalEvent<GhoulDeconvertComponent, ComponentStartup>(OnDeconvertStartup);
+        SubscribeLocalEvent<GhoulDeconvertComponent, RejuvenateEvent>(OnRejuvenate);
+        SubscribeLocalEvent<GhoulDeconvertComponent, DamageUnholyEvent>(OnDamageUnholy,
+            after: [typeof(WeakToHolySystem)]);
 
         SubscribeLocalEvent<GhoulRoleComponent, GetBriefingEvent>(OnGetBriefing);
 
@@ -142,12 +166,6 @@ public sealed class GhoulSystem : EntitySystem
         SubscribeLocalEvent<HereticMinionComponent, TakeGhostRoleEvent>(OnTakeGhostRole);
 
         SubscribeLocalEvent<TryRemoveOrganEvent>(OnRemoveOrganAttempt);
-    }
-
-    private void OnRemoveOrganAttempt(TryRemoveOrganEvent ev)
-    {
-        if (HasComp<VoicelessDeadComponent>(ev.Organ?.Body))
-            ev.Cancelled = true;
     }
 
     public override void Update(float frameTime)
@@ -163,8 +181,23 @@ public sealed class GhoulSystem : EntitySystem
                 continue;
 
             UnGhoulifyEntity((uid, ghoul));
-            RemCompDeferred(uid, deconvert);
         }
+    }
+
+    private void OnDamageUnholy(Entity<GhoulDeconvertComponent> ent, ref DamageUnholyEvent args)
+    {
+        args.ShouldTakeHoly = false;
+    }
+
+    private void OnRejuvenate(Entity<GhoulDeconvertComponent> ent, ref RejuvenateEvent args)
+    {
+        RemCompDeferred(ent, ent.Comp);
+    }
+
+    private void OnRemoveOrganAttempt(ref TryRemoveOrganEvent ev)
+    {
+        if (HasComp<VoicelessDeadComponent>(ev.Organ?.Body))
+            ev.Cancelled = true;
     }
 
     private void OnDeconvertStartup(Entity<GhoulDeconvertComponent> ent, ref ComponentStartup args)
@@ -255,6 +288,7 @@ public sealed class GhoulSystem : EntitySystem
         if (!ent.Comp.CanDeconvert)
             return;
 
+        // You can't have non-humanoid deconvertible ghouls normally, but this is here just in case
         if (!TryComp(ent, out HumanoidAppearanceComponent? humanoid))
         {
             if (Prototype(ent) is not { } proto)
@@ -307,7 +341,7 @@ public sealed class GhoulSystem : EntitySystem
             _heretic.TryGetHereticComponent(minion.BoundHeretic.Value, out var heretic, out var masterMind) &&
             heretic.Minions.TryGetValue(ent, out var ritual))
         {
-            if ( TryComp(ritual, out HereticRitualComponent? ritComp))
+            if (TryComp(ritual, out HereticRitualComponent? ritComp))
             {
                 ritComp.LimitedOutput.Remove(ent);
                 Dirty(ritual.Value, ritComp);
@@ -317,17 +351,20 @@ public sealed class GhoulSystem : EntitySystem
             Dirty(masterMind, heretic);
         }
 
-        RemComp<GhostTakeoverAvailableComponent>(ent);
-        RemComp<GhoulComponent>(ent);
-        RemComp<VoicelessDeadComponent>(ent);
-        RemComp<HereticBladeUserBonusDamageComponent>(ent);
+        if (TryComp(ent, out HolyFlammableComponent? holyFlam))
+            _holyFlam.HolyExtinguish(ent, holyFlam);
+
+        foreach (var component in _componentsToRemoveOnUnGhoulify)
+        {
+            RemCompDeferred(ent, component);
+        }
     }
 
     public void GhoulifyEntity(Entity<GhoulComponent> ent)
     {
         foreach (var component in _componentsToRemoveOnGhoulify)
         {
-            RemComp(ent, component);
+            RemCompDeferred(ent, component);
         }
 
         EnsureComp<CombatModeComponent>(ent);
