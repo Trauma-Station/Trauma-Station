@@ -57,6 +57,10 @@ public sealed class HolyFlammableSystem : EntitySystem
 
     private void OnExtinguishEvent(Entity<HolyFlammableComponent> ent, ref ExtinguishEvent args)
     {
+        // holy water will ignite, don't troll it
+        if (args.Holy)
+            return;
+
         // You know I'm really not sure if having AdjustFireStacks *after* Extinguish,
         // but I'm just moving this code, not questioning it.
         HolyExtinguish(ent, ent.Comp);

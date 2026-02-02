@@ -1338,6 +1338,7 @@
       methods: [ Touch ]
       effects:
       - !type:Extinguish
+        holy: true # Trauma - don't let it extinguish its own holy fire
     Acidic: # Trauma
       methods: [ Touch ]
       effects:
