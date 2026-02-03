@@ -7,14 +7,10 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
-using Content.Shared.Nutrition.Components;
-using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Content.Trauma.Shared.DeepFryer.Components;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -82,7 +78,7 @@ public abstract class DeepFryerSystem : EntitySystem
                 ent.Comp.FryerSolution,
                 out _,
                 out var deepFryerSolution)
-            || deepFryerSolution.Volume <= 0.75)
+            || deepFryerSolution.Volume <= 0.2f)
         {
             args.Cancelled = true;
             _popup.PopupEntity(Loc.GetString("deep-fryer-not-enough-liquid"), ent.Owner);
@@ -104,8 +100,15 @@ public abstract class DeepFryerSystem : EntitySystem
 
     protected void DeepFryItems(Entity<DeepFryerComponent> ent)
     {
+        ent.Comp.FryFinishTime = TimeSpan.Zero;
+
+        _popup.PopupPredicted(Loc.GetString("deep-fryer-item-cooked"), ent.Owner, ent.Owner);
+
         foreach (var storedObject in ent.Comp.StoredObjects)
         {
+            if (HasComp<DeepFriedComponent>(storedObject))
+                return;
+
             DeepFryItem(storedObject, ent);
 
             if (TryComp<InventoryComponent>(storedObject, out var inventory))
@@ -123,5 +126,13 @@ public abstract class DeepFryerSystem : EntitySystem
     {
         EntityManager.AddComponents(item, ent.Comp.ComponentsToAdd, false);
         EntityManager.RemoveComponents(item, ent.Comp.ComponentsToRemove);
+
+        if (!_solutionContainer.TryGetSolution(item, ent.Comp.SolutionContainer, out var solutionRef, out var solution) || !_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.FryerSolution, out var fryerSolution))
+            return;
+
+        var usedSolution = _solutionContainer.SplitSolution(fryerSolution.Value, ent.Comp.SolutionSpentPerFry); // spend a little solution to deep-fry
+
+        _solutionContainer.SetCapacity(solutionRef.Value, solution.MaxVolume + ent.Comp.SolutionIncrease);
+        _solutionContainer.AddSolution(solutionRef.Value, usedSolution);
     }
 }

@@ -1,24 +1,15 @@
 using Content.Trauma.Shared.DeepFryer.Components;
 using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.DeepFryer;
 
 public sealed class DeepFriedSystem : EntitySystem
 {
-    private static readonly ProtoId<ShaderPrototype> Shader = "Fried";
-
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
-
-    private ShaderInstance _shader = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _shader = _protoMan.Index(Shader).InstanceUnique();
 
         SubscribeLocalEvent<DeepFriedComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<DeepFriedComponent, ComponentShutdown>(OnShutdown);

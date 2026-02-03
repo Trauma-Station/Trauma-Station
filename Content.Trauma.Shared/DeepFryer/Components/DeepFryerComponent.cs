@@ -1,3 +1,4 @@
+using Content.Shared.Chemistry.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -17,6 +18,12 @@ public sealed partial class DeepFryerComponent : Component
     public float HeatDamage = 15f;
 
     [DataField]
+    public float SolutionIncrease = 15f;
+
+    [DataField]
+    public float SolutionSpentPerFry = 10f;
+
+    [DataField]
     public string FryerSolution = "fryer";
 
     [DataField]
@@ -33,6 +40,12 @@ public sealed partial class DeepFryerComponent : Component
 
     [DataField]
     public List<EntityUid> StoredObjects = new();
+
+    [DataField]
+    public string SolutionContainer = "food";
+
+    [DataField]
+    public string FryerSolutionContainer = "fryer";
 
     [DataField]
     public EntityUid? SoundEntity;

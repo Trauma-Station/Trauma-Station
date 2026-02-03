@@ -19,13 +19,26 @@
     componentsToAdd:
     - type: DeepFried
     - type: Edible
-    - type: MetaData
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          maxVol: 15
     - type: FlavorProfile
       flavors:
       - DeepFried
       - oily
-    componentsToRemove:
+    componentsToRemove: # I love that you have to map the variables even if you're just removing them
+    - type: Perishable
+    - type: RotInto
+      entity: FoodRot
+      stage: 1
+    - type: ItemToggle
+    - type: Explosive
+      explosionType: HardBomb
+    - type: AmmoCounter
+    - type: Battery
     - type: Gun
+    - type: RCD
   - type: EntityStorage
     openOnMove: false
     isCollidableWhenOpen: true
