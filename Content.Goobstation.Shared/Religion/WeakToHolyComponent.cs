@@ -17,8 +17,6 @@ namespace Content.Goobstation.Shared.Religion;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class WeakToHolyComponent : Component
 {
-    public override bool SessionSpecific => true;
-
     /// <summary>
     /// Is the entity currently standing on a rune?
     /// </summary>

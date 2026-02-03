@@ -1,5 +1,7 @@
-- type: componentRegistry
+- type: entity
   id: ComponentsToRemoveOnGhoulify
+  save: false
+  categories: [ HideSpawnMenu ]
   components:
   - type: Respirator
     damage: !type:DamageSpecifier
@@ -24,8 +26,10 @@
   - type: Dragon
     carpRiftHealing: !type:DamageSpecifier
 
-- type: componentRegistry
+- type: entity
   id: ComponentsToRemoveOnUnGhoulify
+  save: false
+  categories: [ HideSpawnMenu ]
   components:
   - type: Ghoul
   - type: HereticMinion

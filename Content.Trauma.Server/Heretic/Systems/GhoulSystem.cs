@@ -78,10 +78,10 @@ public sealed class GhoulSystem : SharedGhoulSystem
     private static readonly ProtoId<HTNCompoundPrototype> Compound = "HereticSummonCompound";
     private static readonly EntProtoId<MindRoleComponent> GhoulRole = "MindRoleGhoul";
 
-    private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnGhoulify =
-        "ComponentsToRemoveOnGhoulify";
-    private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnUnGhoulify =
-        "ComponentsToRemoveOnUnGhoulify";
+    private static readonly EntProtoId ComponentsToRemoveOnGhoulify = "ComponentsToRemoveOnGhoulify";
+    private static readonly EntProtoId ComponentsToRemoveOnUnGhoulify = "ComponentsToRemoveOnUnGhoulify";
+
+    private string[] IgnoredComponentsOnTransfer = ["Transform", "MetaData"];
 
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly JitteringSystem _jitter = default!;
@@ -285,7 +285,8 @@ public sealed class GhoulSystem : SharedGhoulSystem
         var prototype = _proto.Index(species.Prototype);
 
         var comps = prototype.Components
-            .IntersectBy(_proto.Index(ComponentsToRemoveOnGhoulify).Components.Keys, x => x.Key)
+            .IntersectBy(_proto.Index(ComponentsToRemoveOnGhoulify).Components.Keys.Except(IgnoredComponentsOnTransfer),
+                x => x.Key)
             .ToDictionary();
 
         EntityManager.AddComponents(ent, new ComponentRegistry(comps));
@@ -325,12 +326,18 @@ public sealed class GhoulSystem : SharedGhoulSystem
         if (TryComp(ent, out HolyFlammableComponent? holyFlam))
             _holyFlam.HolyExtinguish(ent, holyFlam);
 
-        EntityManager.RemoveComponents(ent, _proto.Index(ComponentsToRemoveOnUnGhoulify).Components);
+        var comps2 = _proto.Index(ComponentsToRemoveOnUnGhoulify)
+            .Components.ExceptBy(IgnoredComponentsOnTransfer, x => x.Key)
+            .ToDictionary();
+        EntityManager.RemoveComponents(ent, new ComponentRegistry(comps2));
     }
 
     public void GhoulifyEntity(Entity<GhoulComponent> ent)
     {
-        EntityManager.RemoveComponents(ent, _proto.Index(ComponentsToRemoveOnGhoulify).Components);
+        var comps = _proto.Index(ComponentsToRemoveOnGhoulify)
+            .Components.ExceptBy(IgnoredComponentsOnTransfer, x => x.Key)
+            .ToDictionary();
+        EntityManager.RemoveComponents(ent, new ComponentRegistry(comps));
 
         EnsureComp<WeakToHolyComponent>(ent);
         var ev = new UnholyStatusChangedEvent(ent, ent, true);
