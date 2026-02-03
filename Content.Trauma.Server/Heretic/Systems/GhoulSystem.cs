@@ -68,7 +68,6 @@ using Content.Shared.Rejuvenate;
 using Content.Shared.Roles.Components;
 using Content.Trauma.Server.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
-using Content.Trauma.Shared.Heretic.Prototypes;
 using Content.Trauma.Shared.Heretic.Systems;
 
 namespace Content.Trauma.Server.Heretic.Systems;
