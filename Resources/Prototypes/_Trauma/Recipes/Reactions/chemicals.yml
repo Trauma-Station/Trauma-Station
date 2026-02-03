@@ -82,4 +82,4 @@
     CalciumHydroxide: 1
   effects:
     - !type:AdjustTemperature
-      amount: 10 # kelvin, kilojoules? WHO KNOWS!
+      amount: 25 # kelvin, kilojoules? WHO KNOWS!
