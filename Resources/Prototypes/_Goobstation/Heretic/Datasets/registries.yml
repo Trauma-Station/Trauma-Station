@@ -22,6 +22,7 @@
     hungerPerDomainUse: 50
     hungerPerArmyUse: 25
   - type: Dragon
+    carpRiftHealing: !type:DamageSpecifier
 
 - type: componentRegistry
   id: ComponentsToRemoveOnUnGhoulify
