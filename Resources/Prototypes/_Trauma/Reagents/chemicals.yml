@@ -111,3 +111,10 @@
   color: white
   meltingPoint: 97.8
   boilingPoint: 883.0
+
+- type: reagent
+  id: CalciumCarbonate
+  name: reagent-name-sodium-bicarbonate
+  desc: reagent-desc-sodium-bicarbonate
+  physicalDesc: reagent-physical-desc-powdery
+  color: white

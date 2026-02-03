@@ -48,3 +48,6 @@ reagent-desc-rororium = A strange substance which fills the cores of the hivelor
 
 reagent-name-lye = lye
 reagent-desc-lye = A translucent, orange, alkaline solution used in traditional soap production.
+
+reagent-name-calcium-carbonate = calcium carbonate
+reagent-desc-calcium-carbonate = A translucent, orange, alkaline solution used in traditional soap production.
