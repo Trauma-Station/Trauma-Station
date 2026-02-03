@@ -18,11 +18,19 @@
   - type: DeepFryer
     componentsToAdd:
     - type: DeepFried
+    - type: Edible
+    - type: MetaData
+    - type: FlavorProfile
+      flavors:
+      - DeepFried
+      - oily
+    componentsToRemove:
+    - type: Gun
   - type: EntityStorage
     openOnMove: false
     isCollidableWhenOpen: true
     showContents: false
-    capacity: 1
+    capacity: 2
     airtight: true
     open: true
     closeSound:
@@ -32,12 +40,13 @@
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
+      solutions: !type:Container
   - type: Climbable
     delay: 1.5
   - type: AmbientSound
     enabled: false
-    volume: 7
-    range: 10
+    volume: 0.5
+    range: 5
     sound:
       path: /Audio/_Trauma/Machines/DeepFryer/deep_fryer_ambience.ogg
   - type: ApcPowerReceiver

@@ -9,13 +9,12 @@ namespace Content.Trauma.Shared.DeepFryer.Components;
 public sealed partial class DeepFryerComponent : Component
 {
     [DataField]
-    public TimeSpan TimeToCookMob = TimeSpan.FromSeconds(15);
+    public TimeSpan TimeToDeepFry = TimeSpan.FromSeconds(10);
+
+    public TimeSpan FryFinishTime = TimeSpan.Zero;
 
     [DataField]
-    public TimeSpan TimeToCookObject = TimeSpan.FromSeconds(10);
-
-    [DataField]
-    public float MinimumTempToStartCook = 500f;
+    public float HeatDamage = 15f;
 
     [DataField]
     public string FryerSolution = "fryer";
@@ -31,6 +30,12 @@ public sealed partial class DeepFryerComponent : Component
 
     [DataField]
     public SoundPathSpecifier FinishSound = new("/Audio/_Trauma/Machines/DeepFryer/deep_fryer_done.ogg");
+
+    [DataField]
+    public List<EntityUid> StoredObjects = new();
+
+    [DataField]
+    public EntityUid? SoundEntity;
 }
 
 [Serializable, NetSerializable]
