@@ -6,5 +6,5 @@ namespace Content.Goobstation.Shared.Religion;
 public sealed partial class AlwaysTakeHolyComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public bool ShouldBibleSmite;
+    public bool ShouldBibleSmite = true;
 }

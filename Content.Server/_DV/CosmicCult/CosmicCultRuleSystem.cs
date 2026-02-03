@@ -771,6 +771,11 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             EnsureComp<CosmicStarMarkComponent>(uid);
             EnsureComp<PressureImmunityComponent>(uid);
             EnsureComp<TemperatureImmunityComponent>(uid);
+
+            // <Trauma>
+            var ev = new UnholyStatusChangedEvent(uid, uid, true);
+            RaiseLocalEvent(uid, ref ev);
+            // </Trauma>
         }
         else if (cosmicGamerule.CurrentTier == 2)
         {
@@ -828,11 +833,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         // <Trauma>
         var ev = new UnholyStatusChangedEvent(uid, uid, false);
         RaiseLocalEvent(uid, ref ev);
-
-        var ev2 = new UserShouldTakeHolyEvent(uid);
-        RaiseLocalEvent(uid, ref ev2);
-        if (!ev2.WeakToHoly)
-            RemCompDeferred<WeakToHolyComponent>(uid);
         // </Trauma>
 
         _damage.SetDamageContainerID(uid.Owner, uid.Comp.StoredDamageContainer);

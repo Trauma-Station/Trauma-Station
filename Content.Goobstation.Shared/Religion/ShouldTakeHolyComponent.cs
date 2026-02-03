@@ -2,9 +2,9 @@ using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Religion;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class ShouldTakeHolyComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [ViewVariables]
     public HashSet<EntityUid> Sources = new();
 }

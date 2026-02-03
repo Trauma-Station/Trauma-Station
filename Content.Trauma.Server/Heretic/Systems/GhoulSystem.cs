@@ -115,6 +115,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         SubscribeLocalEvent<GhoulComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<GhoulComponent, MobStateChangedEvent>(OnMobStateChange);
         SubscribeLocalEvent<GhoulComponent, SetGhoulBoundHereticEvent>(OnBound);
+        SubscribeLocalEvent<GhoulComponent, UserShouldTakeHolyEvent>(OnShouldTakeHoly);
 
         SubscribeLocalEvent<GhoulDeconvertComponent, ComponentStartup>(OnDeconvertStartup);
         SubscribeLocalEvent<GhoulDeconvertComponent, RejuvenateEvent>(OnRejuvenate);
@@ -148,6 +149,15 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
             UnGhoulifyEntity((uid, ghoul));
         }
+    }
+
+    private void OnShouldTakeHoly(Entity<GhoulComponent> ent, ref UserShouldTakeHolyEvent args)
+    {
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
+            return;
+
+        args.WeakToHoly = true;
+        args.ShouldTakeHoly = true;
     }
 
     private void OnDamageUnholy(Entity<GhoulDeconvertComponent> ent, ref DamageUnholyEvent args)
@@ -322,6 +332,10 @@ public sealed class GhoulSystem : SharedGhoulSystem
     {
         EntityManager.RemoveComponents(ent, _proto.Index(ComponentsToRemoveOnGhoulify).Components);
 
+        EnsureComp<WeakToHolyComponent>(ent);
+        var ev = new UnholyStatusChangedEvent(ent, ent, true);
+        RaiseLocalEvent(ent, ref ev);
+
         EnsureComp<CombatModeComponent>(ent);
 
         EnsureComp<CollectiveMindComponent>(ent).Channels.Add(HereticAbilitySystem.MansusLinkMind);
@@ -422,17 +436,17 @@ public sealed class GhoulSystem : SharedGhoulSystem
     private void OnStartup(Entity<GhoulComponent> ent, ref ComponentStartup args)
     {
         GhoulifyEntity(ent);
-        var unholy = EnsureComp<WeakToHolyComponent>(ent);
-        unholy.AlwaysTakeHoly = true;
     }
 
     private void OnShutdown(Entity<GhoulComponent> ent, ref ComponentShutdown args)
     {
-        if (ent.Comp.BoundWeapon == null || TerminatingOrDeleted(ent.Comp.BoundWeapon.Value))
+        DestroyGhoulWeapon(ent);
+
+        if (TerminatingOrDeleted(ent))
             return;
 
-        _audio.PlayPvs(ent.Comp.BladeDeleteSound, Transform(ent.Comp.BoundWeapon.Value).Coordinates);
-        QueueDel(ent.Comp.BoundWeapon.Value);
+        var ev = new UnholyStatusChangedEvent(ent, ent, false);
+        RaiseLocalEvent(ent, ref ev);
     }
 
     private void OnTakeGhostRole(Entity<HereticMinionComponent> ent, ref TakeGhostRoleEvent args)

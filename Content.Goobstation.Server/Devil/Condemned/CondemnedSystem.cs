@@ -38,13 +38,7 @@ public sealed partial class CondemnedSystem : EntitySystem
         SubscribeLocalEvent<CondemnedComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<CondemnedComponent, UpdateCanMoveEvent>(OnMoveAttempt);
         SubscribeLocalEvent<CondemnedComponent, UserShouldTakeHolyEvent>(OnShouldTakeHoly);
-        SubscribeLocalEvent<CondemnedComponent, BibleSmiteAttemptEvent>(OnSmiteAttempt);
         InitializeOnDeath();
-    }
-
-    private void OnSmiteAttempt(Entity<CondemnedComponent> ent, ref BibleSmiteAttemptEvent args)
-    {
-        args.ShouldSmite = !ent.Comp.SoulOwnedNotDevil;
     }
 
     private void OnShouldTakeHoly(Entity<CondemnedComponent> ent, ref UserShouldTakeHolyEvent args)
@@ -80,6 +74,7 @@ public sealed partial class CondemnedSystem : EntitySystem
         if (condemned.Comp.SoulOwnedNotDevil)
             return;
 
+        EnsureComp<WeakToHolyComponent>(condemned);
         var ev = new UnholyStatusChangedEvent(condemned, condemned, true);
         RaiseLocalEvent(condemned, ref ev);
     }

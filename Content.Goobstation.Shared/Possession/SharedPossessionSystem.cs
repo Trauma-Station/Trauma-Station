@@ -50,6 +50,7 @@ public abstract class SharedPossessionSystem : EntitySystem
 
     private void OnMapInit(Entity<PossessedComponent> possessed, ref MapInitEvent args)
     {
+        EnsureComp<WeakToHolyComponent>(possessed);
         var ev = new UnholyStatusChangedEvent(possessed, possessed, true);
         RaiseLocalEvent(possessed, ref ev);
 

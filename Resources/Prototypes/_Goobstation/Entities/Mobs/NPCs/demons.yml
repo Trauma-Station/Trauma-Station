@@ -60,8 +60,7 @@
   - type: Damageable
     damageContainer: BiologicalMetaphysical
     damageModifierSet: AdvancedSpirit
-  - type: WeakToHoly
-    alwaysTakeHoly: true
+  - type: AlwaysTakeHoly
   - type: NoSlip
   - type: MovementSpeedModifier
     baseWalkSpeed : 1

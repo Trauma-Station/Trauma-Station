@@ -118,7 +118,7 @@ public sealed partial class DevilSystem : EntitySystem
         EnsureComp<BreathingImmunityComponent>(devil);
         EnsureComp<PressureImmunityComponent>(devil);
         EnsureComp<ActiveListenerComponent>(devil);
-        EnsureComp<AlwaysTakeHolyComponent>(devil).ShouldBibleSmite = true;
+        EnsureComp<AlwaysTakeHolyComponent>(devil);
         EnsureComp<CrematoriumImmuneComponent>(devil);
         EnsureComp<AntagImmuneComponent>(devil);
         EnsureComp<SupermatterImmuneComponent>(devil);
