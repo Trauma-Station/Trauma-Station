@@ -114,7 +114,21 @@
 
 - type: reagent
   id: CalciumCarbonate
-  name: reagent-name-sodium-bicarbonate
-  desc: reagent-desc-sodium-bicarbonate
+  name: reagent-name-calcium-carbonate
+  desc: reagent-desc-calcium-carbonate
+  physicalDesc: reagent-physical-desc-powdery
+  color: white
+
+- type: reagent
+  id: CalciumOxide
+  name: reagent-name-calcium-oxide
+  desc: reagent-desc-calcium-oxide
+  physicalDesc: reagent-physical-desc-powdery
+  color: white
+
+- type: reagent
+  id: CalciumHydroxide
+  name: reagent-name-calcium-hydroxide
+  desc: reagent-desc-calcium-hydroxide
   physicalDesc: reagent-physical-desc-powdery
   color: white

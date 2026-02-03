@@ -60,3 +60,26 @@
   products:
     AceticAnhydride: 1
     Water: 1
+
+- type: reaction
+  id: CalciumCarbonateDecomposition
+  minTemp: 1013
+  reactants:
+    CalciumCarbonate:
+      amount: 1
+  products:
+    CalciumOxide: 1
+    CarbonDioxide: 1
+
+- type: reaction
+  id: CalciumOxideHydration
+  reactants:
+    CalciumOxide:
+      amount: 1
+    Water:
+      amount: 1
+  products:
+    CalciumHydroxide: 1
+  effects:
+    - !type:AdjustTemperature
+      amount: 10 # kelvin, kilojoules? WHO KNOWS!
