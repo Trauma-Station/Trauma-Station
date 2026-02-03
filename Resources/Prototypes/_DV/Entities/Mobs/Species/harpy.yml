@@ -99,6 +99,16 @@
       - map: [ "gloves" ]
       - map: [ "ears" ]
       - map: [ "outerClothing" ]
+      - map: [ "enum.HumanoidVisualEmoteLayers.Blush" ] # Trauma
+        color: red
+        sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+        state: blush
+        visible: false
+      - map: [ "enum.HumanoidVisualEmoteLayers.Cry" ] # Trauma
+        color: darkcyan
+        sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+        state: tears
+        visible: false
       - map: [ "eyes" ]
       - map: [ "belt" ]
       - map: [ "neck" ]
@@ -116,6 +126,11 @@
         visible: false
 # Yes, RArm has to be down here
       - map: [ "enum.HumanoidVisualLayers.RArm" ]
+      - map: [ "enum.HumanoidVisualEmoteLayers.Tongue" ] # Trauma
+        color: deeppink
+        sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+        state: tongue
+        visible: false
       - map: [ "maskalt" ]
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
       - map: [ "enum.HumanoidVisualLayers.HairSpecial" ] # Trauma
@@ -125,6 +140,11 @@
       - map: [ "singingLayer" ]
         sprite: _DV/Effects/harpysinger.rsi
         state: singing_music_notes
+        visible: false
+      - map: [ "enum.HumanoidVisualEmoteLayers.Sigh" ] # Trauma
+        loop: false
+        sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+        state: sigh
         visible: false
   - type: HumanoidAppearance
     species: Harpy

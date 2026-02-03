@@ -33,6 +33,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
     [Dependency] private readonly RaysSystem _rays = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private const int TweakAnimationDurationMs = 1100; // 11 frames * 100ms per frame
     private const int FlexAnimationDurationMs = 200 * 7; // 7 frames * 200ms per frame
@@ -48,6 +49,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         SubscribeLocalEvent<AnimatedEmotesComponent, AnimationJumpEmoteEvent>(OnJump);
         SubscribeLocalEvent<AnimatedEmotesComponent, AnimationTweakEmoteEvent>(OnTweak);
         SubscribeLocalEvent<AnimatedEmotesComponent, AnimationFlexEmoteEvent>(OnFlex);
+        SubscribeLocalEvent<AnimatedEmotesComponent, AnimationVisualEmoteEvent>(OnVisualEmote);
         SubscribeNetworkEvent<BibleFartSmiteEvent>(OnBibleSmite);
     }
 
@@ -86,6 +88,31 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
     {
         if (_proto.TryIndex(ent.Comp.Emote, out var emote) && emote.Event is {} ev)
             RaiseLocalEvent(ent, ev);
+    }
+
+    private void OnVisualEmote(Entity<AnimatedEmotesComponent> ent, ref AnimationVisualEmoteEvent args)
+    {
+        if (!TryComp(ent, out SpriteComponent? sprite) ||
+            !_sprite.TryGetLayer((ent, sprite), args.Layer, out var layer, false) || layer.Visible == args.SetVisible)
+            return;
+
+        var a = new Animation
+        {
+            Length = args.Time,
+            AnimationTracks =
+            {
+                new AnimationTrackShowSpriteLayer
+                {
+                    LayerKey = args.Layer,
+                    KeyFrames =
+                    {
+                        new AnimationTrackShowSpriteLayer.KeyFrame(args.SetVisible, 0f),
+                        new AnimationTrackShowSpriteLayer.KeyFrame(!args.SetVisible, (float) args.Time.TotalSeconds),
+                    }
+                }
+            }
+        };
+        PlayEmote(ent, a, args.Key);
     }
 
     private void OnFlip(Entity<AnimatedEmotesComponent> ent, ref AnimationFlipEmoteEvent args)

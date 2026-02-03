@@ -1500,6 +1500,16 @@
     - map: [ "ears" ]
     - map: [ "id" ]
     - map: [ "outerClothing" ]
+    - map: [ "enum.HumanoidVisualEmoteLayers.Blush" ] # Trauma
+      color: red
+      sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+      state: blush
+      visible: false
+    - map: [ "enum.HumanoidVisualEmoteLayers.Cry" ] # Trauma
+      color: darkcyan
+      sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+      state: tears
+      visible: false
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "neck" ]
@@ -1507,6 +1517,11 @@
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHairSpecial" ] # Trauma
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "enum.HumanoidVisualEmoteLayers.Tongue" ] # Trauma
+      color: deeppink
+      sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+      state: tongue
+      visible: false
     - map: [ "maskalt" ]
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HairSpecial" ] # Trauma
@@ -1516,6 +1531,11 @@
     - map: [ "head" ]
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
+    - map: [ "enum.HumanoidVisualEmoteLayers.Sigh" ] # Trauma
+      loop: false
+      sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+      state: sigh
+      visible: false
   # Shitmed Change End
   - type: Hands
   - type: ComplexInteraction

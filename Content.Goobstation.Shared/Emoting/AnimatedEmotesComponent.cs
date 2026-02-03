@@ -25,6 +25,22 @@ namespace Content.Goobstation.Shared.Emoting;
 [Serializable, NetSerializable, DataDefinition] public sealed partial class AnimationTweakEmoteEvent : EntityEventArgs;
 [Serializable, NetSerializable, DataDefinition] public sealed partial class AnimationFlexEmoteEvent : EntityEventArgs;
 
+[Serializable, NetSerializable, DataDefinition]
+public sealed partial class AnimationVisualEmoteEvent : EntityEventArgs
+{
+    [DataField(required: true)]
+    public HumanoidVisualEmoteLayers Layer;
+
+    [DataField(required: true)]
+    public TimeSpan Time;
+
+    [DataField(required: true)]
+    public string Key;
+
+    [DataField]
+    public bool SetVisible = true;
+}
+
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAnimatedEmotesSystem))]
 [AutoGenerateComponentState(true)]
 public sealed partial class AnimatedEmotesComponent : Component
@@ -53,4 +69,12 @@ public sealed partial class AnimatedEmotesComponent : Component
     public string? FlexDefaultDamageState;
 
     #endregion
+}
+
+public enum HumanoidVisualEmoteLayers : byte
+{
+    Sigh = 0,
+    Cry,
+    Blush,
+    Tongue,
 }

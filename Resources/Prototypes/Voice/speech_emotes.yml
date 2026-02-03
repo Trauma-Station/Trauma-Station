@@ -159,6 +159,10 @@
     - sigh
     - sighs
     - sighed
+  event: !type:AnimationVisualEmoteEvent # Trauma
+    layer: Sigh
+    time: 1.5
+    key: emoteAnimSigh
 
 - type: emote
   id: Whistle
@@ -196,6 +200,10 @@
     - sob
     - sobs
     - sobbing
+  event: !type:AnimationVisualEmoteEvent # Trauma
+    layer: Cry
+    time: 3.2
+    key: emoteAnimCry
 
 - type: emote
   id: Squish

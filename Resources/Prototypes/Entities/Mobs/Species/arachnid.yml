@@ -115,6 +115,16 @@
       - map: [ "enum.HumanoidVisualLayers.HairSpecial" ] # Trauma
       - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
       - map: [ "ears" ]
+      - map: [ "enum.HumanoidVisualEmoteLayers.Blush" ] # Trauma
+        color: "#162581"
+        sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+        state: blush
+        visible: false
+      - map: [ "enum.HumanoidVisualEmoteLayers.Cry" ] # Trauma
+        color: darkcyan
+        sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+        state: tears
+        visible: false
       - map: [ "eyes" ]
       - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
       - map: [ "maskalt" ] # Trauma
@@ -130,6 +140,11 @@
       - map: [ "clownedon" ] # Dynamically generated
         sprite: "Effects/creampie.rsi"
         state: "creampie_arachnid"
+        visible: false
+      - map: [ "enum.HumanoidVisualEmoteLayers.Sigh" ] # Trauma
+        loop: false
+        sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+        state: sigh
         visible: false
   - type: Inventory
     templateId: arachnid

@@ -483,6 +483,12 @@
         - !type:ReagentCondition
           reagent: TearGas
           min: 4
+      # <Trauma>
+      - !type:ModifyStatusEffect
+        effectProto: VisualTearsStatusEffect
+        type: Update
+        time: 5.2
+      # </Trauma>
 
 - type: reagent
   id: Happiness

@@ -64,6 +64,11 @@
       sprite: "Effects/creampie.rsi"
       state: "creampie_human"
       visible: false
+    - map: [ "enum.HumanoidVisualEmoteLayers.Sigh" ] # Trauma
+      loop: false
+      sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+      state: sigh
+      visible: false
   - type: Carriable
   - type: Body
     prototype: Plasmaman

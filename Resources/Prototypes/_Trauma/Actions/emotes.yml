@@ -1,0 +1,43 @@
+- type: emote
+  id: Blush
+  name: chat-emote-name-blush
+  chatMessages: ["chat-emote-msg-blush"]
+  whitelist:
+    components:
+    - HumanoidAppearance
+  blacklist:
+    tags:
+    - SiliconEmotes
+  chatTriggers:
+    - blush
+    - blush.
+    - blush!
+    - blushes
+    - blushes.
+    - blushes!
+  event: !type:AnimationVisualEmoteEvent # Trauma
+    layer: Blush
+    time: 5.2
+    key: emoteAnimBlush
+
+- type: emote
+  id: Tongue
+  name: chat-emote-name-tongue
+  chatMessages: ["chat-emote-msg-tongue"]
+  whitelist:
+    components:
+    - HumanoidAppearance
+  blacklist:
+    tags:
+    - SiliconEmotes
+  chatTriggers:
+    - tongue
+    - sticks tongue out
+    - sticks his tongue out
+    - sticks her tongue out
+    - sticks their tongue out
+    - sticks its tongue out
+  event: !type:AnimationVisualEmoteEvent # Trauma
+    layer: Tongue
+    time: 5.2
+    key: emoteAnimTongue

@@ -22,6 +22,7 @@ namespace Content.Server.Entry
             "OptionsVisualizer",
             "AnomalyScannerScreen",
             "MultipartMachineGhost",
+            "ShowSpriteLayerStatusEffect", // Trauma
             "RotationDrawDepth", // RMC14
             "ToggleableLightWieldable", // Goobstation
             "HideClothingLayerClothing", // Goobstation
