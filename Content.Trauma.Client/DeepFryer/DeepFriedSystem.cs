@@ -26,6 +26,13 @@ public sealed class DeepFriedSystem : EntitySystem
         SubscribeLocalEvent<DeepFriedComponent, AppearanceChangeEvent>(OnAppearanceChange);
         SubscribeLocalEvent<DeepFriedComponent, EquipmentVisualsUpdatedEvent>(OnEquipmentVisualsUpdated);
         SubscribeLocalEvent<DeepFriedComponent, ComponentStartup>(OnStartUp);
+        SubscribeLocalEvent<DeepFriedComponent, ComponentShutdown>(OnShutdown);
+    }
+
+    private void OnShutdown(Entity<DeepFriedComponent> ent, ref ComponentShutdown args)
+    {
+        if (!Terminating(ent.Owner))
+            SetShader(ent, false);
     }
 
     private void OnStartUp(Entity<DeepFriedComponent> ent, ref ComponentStartup args)

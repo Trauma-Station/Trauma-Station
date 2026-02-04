@@ -58,4 +58,4 @@
         type: Local
         messages: [ "reagent-popup-deep-fried-oils" ]
         probability: 0.01
-  pricePerUnit: 20
+  pricePerUnit: 0.1

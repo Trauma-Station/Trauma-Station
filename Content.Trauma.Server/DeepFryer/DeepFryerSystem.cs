@@ -1,4 +1,3 @@
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
@@ -6,14 +5,11 @@ using Content.Shared.Damage.Systems;
 using Content.Trauma.Shared.DeepFryer.Components;
 using Content.Trauma.Shared.DeepFryer.Systems;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.DeepFryer;
 
 public sealed class DeepFryerSystem : SharedDeepFryerSystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
@@ -22,8 +18,8 @@ public sealed class DeepFryerSystem : SharedDeepFryerSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        var query1 = EntityQueryEnumerator<DeepFryerComponent>();
-        while (query1.MoveNext(out var fryerUid, out var fryer))
+        var query = EntityQueryEnumerator<DeepFryerComponent>();
+        while (query.MoveNext(out var fryerUid, out var fryer))
         {
             if (!fryer.Closed)
                 continue;
@@ -35,7 +31,7 @@ public sealed class DeepFryerSystem : SharedDeepFryerSystem
 
             AddHeatDamage((fryerUid, fryer), frameTime);
 
-            if (fryer.FryFinishTime < _gameTiming.CurTime && fryer.FryFinishTime != TimeSpan.Zero)
+            if (fryer.FryFinishTime < _timing.CurTime && fryer.FryFinishTime != TimeSpan.Zero)
             {
                 DeepFryItems((fryerUid,fryer));
             }
@@ -44,12 +40,12 @@ public sealed class DeepFryerSystem : SharedDeepFryerSystem
 
     private void AddHeatToSolution(Entity<DeepFryerComponent> ent, float frameTime, float heatToAdd)
     {
-        if (_solutionContainer.TryGetSolution(ent.Owner,
+        if (_solution.TryGetSolution(ent.Owner,
                 ent.Comp.FryerSolutionContainer,
                 out var solutionRef,
                 out _))
         {
-            _solutionContainer.AddThermalEnergyClamped(solutionRef.Value, heatToAdd * frameTime, 293f, ent.Comp.MaxHeat);
+            _solution.AddThermalEnergyClamped(solutionRef.Value, heatToAdd * frameTime, 293f, ent.Comp.MaxHeat);
         }
     }
 

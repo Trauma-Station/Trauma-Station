@@ -18,12 +18,12 @@ namespace Content.Trauma.Shared.DeepFryer.Systems;
 
 public abstract class SharedDeepFryerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] protected readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] protected readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
 
@@ -49,11 +49,11 @@ public abstract class SharedDeepFryerSystem : EntitySystem
         _appearance.SetData(ent.Owner, DeepFryerVisuals.BigFrying, false);
 
         if (TryComp<SolutionContainerManagerComponent>(ent.Owner, out _)
-            && _solutionContainer.TryGetSolution(ent.Owner,
+            && _solution.TryGetSolution(ent.Owner,
                 ent.Comp.FryerSolutionContainer,
                 out var solution,
                 out _))
-            _solutionContainer.SetTemperature(solution.Value, 293.7f); // Reset the temp when its opened
+            _solution.SetTemperature(solution.Value, 293.7f); // Reset the temp when its opened
     }
 
     private void OnClose(Entity<DeepFryerComponent> ent, ref StorageAfterCloseEvent args)
@@ -65,7 +65,7 @@ public abstract class SharedDeepFryerSystem : EntitySystem
 
         _ambientSound.SetAmbience(ent.Owner, true);
         _audio.PlayPredicted(ent.Comp.StartSound, ent.Owner, ent.Owner);
-        ent.Comp.FryFinishTime = _gameTiming.CurTime + ent.Comp.TimeToDeepFry;
+        ent.Comp.FryFinishTime = _timing.CurTime + ent.Comp.TimeToDeepFry;
         foreach (var entity in entStorage.Contents.ContainedEntities)
         {
             ent.Comp.StoredObjects.Add(entity);
@@ -82,7 +82,7 @@ public abstract class SharedDeepFryerSystem : EntitySystem
     private void OnTryClose(Entity<DeepFryerComponent> ent, ref StorageCloseAttemptEvent args)
     {
         if (!TryComp<SolutionContainerManagerComponent>(ent.Owner, out _)
-            || !_solutionContainer.TryGetSolution(ent.Owner,
+            || !_solution.TryGetSolution(ent.Owner,
                 ent.Comp.FryerSolutionContainer,
                 out _,
                 out var deepFryerSolution)
@@ -104,7 +104,7 @@ public abstract class SharedDeepFryerSystem : EntitySystem
     #region Helper Methods
     protected void DeepFryItems(Entity<DeepFryerComponent> ent)
     {
-        ent.Comp.FryFinishTime = _gameTiming.CurTime + ent.Comp.TimeToDeepFry;
+        ent.Comp.FryFinishTime = _timing.CurTime + ent.Comp.TimeToDeepFry;
 
         _popup.PopupPredicted(Loc.GetString("deep-fryer-item-cooked"), ent.Owner, ent.Owner);
 
@@ -148,14 +148,14 @@ public abstract class SharedDeepFryerSystem : EntitySystem
         RaiseLocalEvent(item, ref ev, true);
         _nameModifier.RefreshNameModifiers(item);
 
-        if (!_solutionContainer.TryGetSolution(item, ent.Comp.SolutionContainer, out var solutionRef, out var solution)
-            || !_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.FryerSolutionContainer, out var fryerSolution))
+        if (!_solution.TryGetSolution(item, ent.Comp.SolutionContainer, out var solutionRef, out var solution)
+            || !_solution.TryGetSolution(ent.Owner, ent.Comp.FryerSolutionContainer, out var fryerSolution))
             return;
 
-        var usedSolution = _solutionContainer.SplitSolution(fryerSolution.Value, ent.Comp.SolutionSpentPerFry); // spend a little solution to deep-fry
+        var usedSolution = _solution.SplitSolution(fryerSolution.Value, ent.Comp.SolutionSpentPerFry); // spend a little solution to deep-fry
 
-        _solutionContainer.SetCapacity(solutionRef.Value, solution.MaxVolume + ent.Comp.SolutionSpentPerFry);
-        _solutionContainer.AddSolution(solutionRef.Value, usedSolution);
+        _solution.SetCapacity(solutionRef.Value, solution.MaxVolume + ent.Comp.SolutionSpentPerFry);
+        _solution.AddSolution(solutionRef.Value, usedSolution);
     }
 
     #endregion
