@@ -67,9 +67,6 @@ public sealed partial class DeepFryerComponent : Component
     public string FryerSolutionContainer = "fryer";
 
     [DataField]
-    public SolutionComponent FryerSolution = new ();
-
-    [DataField]
     public EntityUid? SoundEntity;
 }
 

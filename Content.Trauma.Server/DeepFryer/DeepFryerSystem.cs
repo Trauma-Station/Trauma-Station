@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.DeepFryer;
 
-public sealed class ServerDeepFryerSystem : DeepFryerSystem
+public sealed class DeepFryerSystem : SharedDeepFryerSystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;

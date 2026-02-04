@@ -40,9 +40,7 @@
     - type: GunWieldBonus
     - type: Perishable
     - type: MeleeWeapon
-      damage:
-        types:
-          Blunt: 15
+      damage: {}
     - type: RotInto
       entity: FoodRot
       stage: 1
@@ -78,7 +76,21 @@
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
+        showEnts: False
+        occludes: True
+        ents: [ ]
       solutions: !type:Container
+        showEnts: False
+        occludes: True
+        ents: [ ]
+      machine_board: !type:Container
+        showEnts: False
+        occludes: True
+        ents: [ ]
+      machine_parts: !type:Container
+        showEnts: False
+        occludes: True
+        ents: [ ]
   - type: Climbable
     delay: 1.5
   - type: AmbientSound

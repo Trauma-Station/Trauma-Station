@@ -1,32 +1,103 @@
+using System.Linq;
+using Content.Shared.Clothing;
+using Content.Shared.Hands;
 using Content.Trauma.Shared.DeepFryer.Components;
 using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.DeepFryer;
 
 public sealed class DeepFriedSystem : EntitySystem
 {
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+
+    private static readonly ProtoId<ShaderPrototype> ShaderName = "Fried";
+    private ShaderInstance _shader = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DeepFriedComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<DeepFriedComponent, ComponentShutdown>(OnShutdown);
+        _shader = _protoMan.Index(ShaderName).InstanceUnique();
+
+        SubscribeLocalEvent<DeepFriedComponent, HeldVisualsUpdatedEvent>(OnHeldVisualsUpdated);
+        SubscribeLocalEvent<DeepFriedComponent, AppearanceChangeEvent>(OnAppearanceChange);
+        SubscribeLocalEvent<DeepFriedComponent, EquipmentVisualsUpdatedEvent>(OnEquipmentVisualsUpdated);
+        SubscribeLocalEvent<DeepFriedComponent, ComponentStartup>(OnStartUp);
     }
 
-    private void OnStartup(Entity<DeepFriedComponent> ent, ref ComponentStartup args)
+    private void OnStartUp(Entity<DeepFriedComponent> ent, ref ComponentStartup args)
     {
         if (!TryComp<SpriteComponent>(ent.Owner, out var sprite))
             return;
 
-        ent.Comp.OriginalColor = sprite.Color;
-        _sprite.SetColor(ent.Owner, ent.Comp.DeepFriedColor); // Don't use a shader for this cuz it won't appear in the icons for the items, and it gets rid of the green outline
+        for (var i = 0; i < sprite.AllLayers.Count(); ++i)
+        {
+            sprite.LayerSetShader(i, ShaderName);
+        }
+
+        SetShader(ent, true);
     }
 
-    private void OnShutdown(Entity<DeepFriedComponent> ent, ref ComponentShutdown args)
+    private void SetShader(Entity<DeepFriedComponent> ent, bool enabled)
     {
-        if (!Terminating(ent.Owner))
-            _sprite.SetColor(ent.Owner, ent.Comp.OriginalColor);
+        if (!TryComp<SpriteComponent>(ent.Owner, out var sprite))
+            return;
+
+        sprite.PostShader = enabled ? _shader : null;
+        sprite.GetScreenTexture = enabled;
+        sprite.RaiseShaderEvent = enabled;
+    }
+
+    private void OnHeldVisualsUpdated(Entity<DeepFriedComponent> ent, ref HeldVisualsUpdatedEvent args)
+    {
+        if (args.RevealedLayers.Count == 0)
+        {
+            return;
+        }
+
+        if (!TryComp(args.User, out SpriteComponent? sprite))
+            return;
+
+        foreach (var key in args.RevealedLayers)
+        {
+            if (!_sprite.LayerMapTryGet((args.User, sprite), key, out var index, true) || sprite[index] is not SpriteComponent.Layer layer)
+                continue;
+
+            sprite.LayerSetShader(index, ShaderName);
+        }
+    }
+
+    private void OnEquipmentVisualsUpdated(Entity<DeepFriedComponent> ent, ref EquipmentVisualsUpdatedEvent args)
+    {
+        if (args.RevealedLayers.Count == 0)
+        {
+            return;
+        }
+
+        if (!TryComp(args.Equipee, out SpriteComponent? sprite))
+            return;
+
+        foreach (var key in args.RevealedLayers)
+        {
+            if (!_sprite.LayerMapTryGet((args.Equipee, sprite), key, out var index, true) || sprite[index] is not SpriteComponent.Layer)
+                continue;
+
+            sprite.LayerSetShader(index, ShaderName);
+        }
+    }
+
+
+    private void OnAppearanceChange(Entity<DeepFriedComponent> ent, ref AppearanceChangeEvent args)
+    {
+        if (args.Sprite == null)
+            return;
+
+        for (var i = 0; i < args.Sprite.AllLayers.Count(); ++i)
+        {
+            args.Sprite.LayerSetShader(i, ShaderName);
+        }
     }
 }

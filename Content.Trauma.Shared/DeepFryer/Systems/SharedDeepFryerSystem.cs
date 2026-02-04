@@ -1,4 +1,5 @@
 using Content.Shared.Audio;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Coordinates;
@@ -15,7 +16,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.DeepFryer.Systems;
 
-public abstract class DeepFryerSystem : EntitySystem
+public abstract class SharedDeepFryerSystem : EntitySystem
 {
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -136,7 +137,7 @@ public abstract class DeepFryerSystem : EntitySystem
     {
         EntityManager.AddComponents(item, ent.Comp.ComponentsToAdd, false);
         EntityManager.RemoveComponents(item, ent.Comp.ComponentsToRemove);
-        if (!HasComp<MindContainerComponent>(item))
+        if (!HasComp<BodyComponent>(item))
         {
             EntityManager.AddComponents(item, ent.Comp.ComponentsToAddObjects, false);
         }

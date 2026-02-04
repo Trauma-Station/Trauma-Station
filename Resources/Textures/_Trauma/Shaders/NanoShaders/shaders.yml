@@ -1,0 +1,7 @@
+- type: shader
+  id: Holographic
+  kind: source
+  path: "/Textures/Nyanotrasen/Shaders/holographic.swsl"
+  params:
+    textureHeight: 32
+    hue: 0.64
