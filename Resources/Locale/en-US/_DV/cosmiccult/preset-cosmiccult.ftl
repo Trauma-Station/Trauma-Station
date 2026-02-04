@@ -129,6 +129,7 @@ cosmiccult-rift-purge = {$NAME} purges the malign rift from reality!
 ## CHANTRY
 
 cosmiccult-chantry-location = A dangerous increase in Λ-CDM has been detected {$location}! Intercept and intervene immediately.
+cosmiccult-chantry-destruction = The sudden Λ-CDM spike has been neutralized. Ongoing vigilance is advised.
 cosmiccult-chantry-powerup = The vacuous chantry flares to life!
 
 ## UI / BASE POPUP
