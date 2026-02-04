@@ -58,6 +58,11 @@
   - type: Electrified
     enabled: false
     usesApcPower: true
+  - type: Construction
+    containers:
+    - machine_parts
+    - machine_board
+    - entity_storage
   - type: LitOnPowered
   - type: PointLight
     color: "#d49f34"
