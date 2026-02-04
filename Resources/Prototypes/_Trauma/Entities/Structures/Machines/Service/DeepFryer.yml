@@ -15,21 +15,34 @@
     - state: deep_fryer_closed_big
       visible: false
       map: ["fryer_closed_big"]
+  # Deep fryer stuff
   - type: DeepFryer
     componentsToAdd:
     - type: DeepFried
-    - type: Edible
     - type: SolutionContainerManager
       solutions:
         food:
           maxVol: 15
     - type: NameModifier
+    componentsToAddObjects:
+    - type: Edible
     - type: FlavorProfile
       flavors:
       - DeepFried
       - oily
     componentsToRemove: # I love that you have to map the variables even if you're just removing them
+    - type: Tool
+    - type: RadioSpeaker
+    - type: RadioMicrophone
+    - type: ActiveListener
+    - type: AmmoSelector
+    - type: Multishot
+    - type: GunWieldBonus
     - type: Perishable
+    - type: MeleeWeapon
+      damage:
+        types:
+          Blunt: 15
     - type: RotInto
       entity: FoodRot
       stage: 1
@@ -40,6 +53,17 @@
     - type: Battery
     - type: Gun
     - type: RCD
+  # -----------------
+  - type: Electrified
+    enabled: false
+    usesApcPower: true
+  - type: LitOnPowered
+  - type: PointLight
+    color: "#d49f34"
+    enabled: false
+    castShadows: false
+    radius: 2
+    energy: 10
   - type: EntityStorage
     openOnMove: false
     isCollidableWhenOpen: true

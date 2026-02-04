@@ -2,18 +2,15 @@ using Content.Shared.Audio;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Coordinates;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Prototypes;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
+using Content.Shared.Mind.Components;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Storage.Components;
 using Content.Trauma.Shared.DeepFryer.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.DeepFryer.Systems;
@@ -23,14 +20,11 @@ public abstract class DeepFryerSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-
-    private ProtoId<DamageTypePrototype> damageType = "Heat";
+    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
 
     public override void Initialize()
     {
@@ -52,6 +46,13 @@ public abstract class DeepFryerSystem : EntitySystem
         _appearance.SetData(ent.Owner, DeepFryerVisuals.Open, true);
         _appearance.SetData(ent.Owner, DeepFryerVisuals.Frying, false);
         _appearance.SetData(ent.Owner, DeepFryerVisuals.BigFrying, false);
+
+        if (TryComp<SolutionContainerManagerComponent>(ent.Owner, out _)
+            && _solutionContainer.TryGetSolution(ent.Owner,
+                ent.Comp.FryerSolutionContainer,
+                out var solution,
+                out _))
+            _solutionContainer.SetTemperature(solution.Value, 293.7f); // Reset the temp when its opened
     }
 
     private void OnClose(Entity<DeepFryerComponent> ent, ref StorageAfterCloseEvent args)
@@ -84,26 +85,22 @@ public abstract class DeepFryerSystem : EntitySystem
                 ent.Comp.FryerSolutionContainer,
                 out _,
                 out var deepFryerSolution)
-            || deepFryerSolution.Volume <= 0.2f)
+            || deepFryerSolution.Volume <= 100f)
         {
             args.Cancelled = true;
             _popup.PopupEntity(Loc.GetString("deep-fryer-not-enough-liquid"), ent.Owner);
+            return;
         }
-    }
 
-    protected void AddHeatDamage(Entity<DeepFryerComponent> ent, float frameTime)
-    {
-        var heatProto = _prototypeManager.Index(damageType);
-
-        foreach (var entity in ent.Comp.StoredObjects)
+        if (!_power.IsPowered(ent.Owner))
         {
-            if (!TryComp<DamageableComponent>(entity, out _))
-                continue;
-
-            _damageable.TryChangeDamage(entity, new DamageSpecifier(heatProto, ent.Comp.HeatDamage * frameTime));
+            args.Cancelled = true;
+            _popup.PopupEntity(Loc.GetString("deep-fryer-no-power"), ent.Owner);
         }
+
     }
 
+    #region Helper Methods
     protected void DeepFryItems(Entity<DeepFryerComponent> ent)
     {
         ent.Comp.FryFinishTime = _gameTiming.CurTime + ent.Comp.TimeToDeepFry;
@@ -112,10 +109,10 @@ public abstract class DeepFryerSystem : EntitySystem
 
         foreach (var storedObject in ent.Comp.StoredObjects)
         {
-            if (!Exists(storedObject))
+            if (!Exists(storedObject) || HasComp<DeepFryerImmuneComponent>(storedObject))
                 continue;
 
-            if (HasComp<DeepFriedComponent>(storedObject))
+            if (HasComp<DeepFriedComponent>(storedObject) && !HasComp<MindContainerComponent>(storedObject)) // any twice deep-fried items get... OverCooked..? say that again
             {
                 Spawn(ent.Comp.AshedItemToSpawn, ent.Owner.ToCoordinates());
                 PredictedDel(storedObject);
@@ -139,6 +136,10 @@ public abstract class DeepFryerSystem : EntitySystem
     {
         EntityManager.AddComponents(item, ent.Comp.ComponentsToAdd, false);
         EntityManager.RemoveComponents(item, ent.Comp.ComponentsToRemove);
+        if (!HasComp<MindContainerComponent>(item))
+        {
+            EntityManager.AddComponents(item, ent.Comp.ComponentsToAddObjects, false);
+        }
 
         EnsureComp<MetaDataComponent>(item, out var meta);
 
@@ -146,7 +147,8 @@ public abstract class DeepFryerSystem : EntitySystem
         RaiseLocalEvent(item, ref ev, true);
         _nameModifier.RefreshNameModifiers(item);
 
-        if (!_solutionContainer.TryGetSolution(item, ent.Comp.SolutionContainer, out var solutionRef, out var solution) || !_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.FryerSolutionContainer, out var fryerSolution))
+        if (!_solutionContainer.TryGetSolution(item, ent.Comp.SolutionContainer, out var solutionRef, out var solution)
+            || !_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.FryerSolutionContainer, out var fryerSolution))
             return;
 
         var usedSolution = _solutionContainer.SplitSolution(fryerSolution.Value, ent.Comp.SolutionSpentPerFry); // spend a little solution to deep-fry
@@ -154,4 +156,6 @@ public abstract class DeepFryerSystem : EntitySystem
         _solutionContainer.SetCapacity(solutionRef.Value, solution.MaxVolume + ent.Comp.SolutionSpentPerFry);
         _solutionContainer.AddSolution(solutionRef.Value, usedSolution);
     }
+
+    #endregion
 }
