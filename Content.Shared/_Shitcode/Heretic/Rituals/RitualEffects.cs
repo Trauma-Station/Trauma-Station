@@ -140,12 +140,6 @@ public sealed partial class PathBasedSpawnEffect : BaseRitualEffect<PathBasedSpa
     public Dictionary<string, EntProtoId> Output;
 }
 
-public sealed partial class AddKnowledgeEffect : BaseRitualEffect<AddKnowledgeEffect>
-{
-    [DataField(required: true)]
-    public ProtoId<HereticKnowledgePrototype> Knowledge;
-}
-
 public sealed partial class FindLostLimitedOutputEffect : OutputRitualEffect<FindLostLimitedOutputEffect>
 {
     [DataField]

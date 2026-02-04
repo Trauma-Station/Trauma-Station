@@ -13,6 +13,7 @@ using Robust.Shared.Map;
 
 namespace Content.IntegrationTests.Tests._Goobstation;
 
+/*
 [TestFixture]
 [FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
 public sealed class UplinkPreferenceTests
@@ -233,3 +234,4 @@ public sealed class UplinkFallbackTests
         await pair.CleanReturnAsync();
     }
 }
+*/

@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Fildrance <fildrance@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 pa.pecherskij <pa.pecherskij@interfax.ru>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -17,15 +7,12 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
-//using Content.Shared.StoreDiscount.Components;
+using Content.Shared.StoreDiscount.Components;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.IntegrationTests.Tests;
-
-// gobo edit - fuck newstore
-// do not touch unless you want to shoot yourself in the leg.
 
 [TestFixture]
 public sealed class StoreTests
@@ -44,8 +31,6 @@ public sealed class StoreTests
     - idcard
   - type: Pda
 ";
-    /* Goob - fuck newstore
-    do not touch unless you want to shoot yourself in the leg.
     [Test]
     public async Task StoreDiscountAndRefund()
     {
@@ -112,7 +97,7 @@ public sealed class StoreTests
                 + $"flag as 'true'. This marks the fact that cost modifier of discount is not applied properly!"
             );
 
-             Refund action requests re-generation of listing items so we will be re-acquiring items from component a lot of times.
+            // Refund action requests re-generation of listing items so we will be re-acquiring items from component a lot of times.
             var itemIds = discountedListingItems.Select(x => x.ID);
             foreach (var itemId in itemIds)
             {
@@ -127,27 +112,27 @@ public sealed class StoreTests
 
                     var prototypeCost = prototype.Cost[UplinkSystem.TelecrystalCurrencyPrototype];
                     var discountDownTo = prototype.DiscountDownTo[UplinkSystem.TelecrystalCurrencyPrototype];
-                    Assert.That(plainDiscountedCost.Value, Is.GreaterThanOrEqualTo(discountDownTo.Value), $"Expected discounted cost of {discountedListingItem.Name} to be greater then DiscountDownTo value."); // Goobstation
-                    Assert.That(plainDiscountedCost.Value, Is.LessThan(prototypeCost.Value), $"Expected discounted cost of {discountedListingItem.Name} to be lower then prototype cost."); // Goobstation
+                    Assert.That(plainDiscountedCost.Value, Is.GreaterThanOrEqualTo(discountDownTo.Value), "Expected discounted cost to be greater then DiscountDownTo value.");
+                    Assert.That(plainDiscountedCost.Value, Is.LessThan(prototypeCost.Value), "Expected discounted cost to be lower then prototype cost.");
 
 
                     var buyMsg = new StoreBuyListingMessage(discountedListingItem.ID){Actor = human};
-                    server.EntMan.EventBus.RaiseLocalEvent(pda, buyMsg);
+                    server.EntMan.EventBus.RaiseComponentEvent(pda, storeComponent, buyMsg);
 
                     var newBalance = storeComponent.Balance[UplinkSystem.TelecrystalCurrencyPrototype];
-                    Assert.That(newBalance.Value, Is.EqualTo((originalBalance - plainDiscountedCost).Value), $"Expected to have balance reduced by discounted cost: {discountedListingItem.Name}"); // Goobstation
+                    Assert.That(newBalance.Value, Is.EqualTo((originalBalance - plainDiscountedCost).Value), "Expected to have balance reduced by discounted cost");
                     Assert.That(
                         discountedListingItem.IsCostModified,
                         Is.False,
-                        $"Expected item cost of {discountedListingItem.Name} to not be modified after Buying discounted item." // Goobstation
+                        $"Expected item cost to not be modified after Buying discounted item."
                     );
                     var costAfterBuy = discountedListingItem.Cost[UplinkSystem.TelecrystalCurrencyPrototype];
                     Assert.That(costAfterBuy.Value, Is.EqualTo(prototypeCost.Value), "Expected cost after discount refund to be equal to prototype cost.");
 
                     var refundMsg = new StoreRequestRefundMessage { Actor = human };
-                    server.EntMan.EventBus.RaiseLocalEvent(pda, refundMsg);
+                    server.EntMan.EventBus.RaiseComponentEvent(pda, storeComponent, refundMsg);
 
-                     get refreshed item after refund re-generated items
+                    // get refreshed item after refund re-generated items
                     discountedListingItem = storeComponent.FullListingsCatalog.First(x => x.ID == itemId);
 
                     var afterRefundBalance = storeComponent.Balance[UplinkSystem.TelecrystalCurrencyPrototype];
@@ -155,13 +140,13 @@ public sealed class StoreTests
                     Assert.That(
                         discountComponent.Discounts.First(x => x.ListingId == discountedListingItem.ID).Count,
                         Is.EqualTo(0),
-                        $"Discounted count should still be zero even after refund: {discountedListingItem.Name}." // Goobstation
+                        "Discounted count should still be zero even after refund."
                     );
 
                     Assert.That(
                         discountedListingItem.IsCostModified,
                         Is.False,
-                        $"Expected item cost of {discountedListingItem.Name} to not be modified after Buying discounted item (even after refund was done)." // Goobstation
+                        $"Expected item cost to not be modified after Buying discounted item (even after refund was done)."
                     );
                     var costAfterRefund = discountedListingItem.Cost[UplinkSystem.TelecrystalCurrencyPrototype];
                     Assert.That(costAfterRefund.Value, Is.EqualTo(prototypeCost.Value), "Expected cost after discount refund to be equal to prototype cost.");
@@ -172,5 +157,4 @@ public sealed class StoreTests
 
         await pair.CleanReturnAsync();
     }
-    */
 }
