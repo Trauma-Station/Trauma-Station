@@ -53,6 +53,7 @@
     - type: RCD
     - type: UserInterface
     - type: HealthAnalyzer
+    - type: CablePlacer
   # -----------------
   - type: Electrified
     enabled: false
@@ -105,6 +106,8 @@
   - type: DrawableSolution
     solution: fryer
   - type: Appearance
+  - type: Machine
+    board: DeepFryerCircuitboard
   - type: GenericVisualizer
     visuals:
       enum.DeepFryerVisuals.Open:
@@ -119,3 +122,16 @@
         fryer_closed_big:
           True: { visible: true }
           False: { visible: false }
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpillBehavior
+        solution: fryer
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
