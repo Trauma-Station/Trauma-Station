@@ -12,19 +12,26 @@ public sealed partial class DeepFryerComponent : Component
     [DataField]
     public TimeSpan TimeToDeepFry = TimeSpan.FromSeconds(10);
 
+    [DataField]
     public TimeSpan FryFinishTime = TimeSpan.Zero;
+
+    [DataField]
+    public bool Closed;
 
     [DataField]
     public float HeatDamage = 15f;
 
     [DataField]
-    public float SolutionIncrease = 15f;
-
-    [DataField]
     public float SolutionSpentPerFry = 10f;
 
     [DataField]
-    public string FryerSolution = "fryer";
+    public float HeatToAddToSolution = 500f;
+
+    [DataField]
+    public float MaxHeat = 5000f;
+
+    [DataField]
+    public EntProtoId AshedItemToSpawn = "Ash";
 
     [DataField]
     public ComponentRegistry ComponentsToRemove = new();
@@ -46,6 +53,9 @@ public sealed partial class DeepFryerComponent : Component
 
     [DataField]
     public string FryerSolutionContainer = "fryer";
+
+    [DataField]
+    public SolutionComponent FryerSolution = new ();
 
     [DataField]
     public EntityUid? SoundEntity;

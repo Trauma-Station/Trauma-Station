@@ -32,10 +32,10 @@
   pricePerUnit: -300
 
 - type: reagent
-  id: DeepFriedOils
-  name: reagent-name-deep-fried-oils
+  id: FullFatOils
+  name: reagent-name-full-fat-oils
   group: Foods
-  desc: reagent-desc-deep-fried-oils
+  desc: reagent-desc-full-fat-oils
   physicalDesc: reagent-physical-desc-opaque
   flavor: DeepFried
   color: "#d49f34"
@@ -49,7 +49,7 @@
       metabolismRate: 0.5
       effects:
       - !type:SatiateHunger
-        factor: 0.02
+        factor: 0.010
       - !type:HealthChange
         damage:
           types:
@@ -57,5 +57,5 @@
       - !type:PopupMessage
         type: Local
         messages: [ "reagent-popup-deep-fried-oils" ]
-        probability: 0.07
+        probability: 0.01
   pricePerUnit: 20

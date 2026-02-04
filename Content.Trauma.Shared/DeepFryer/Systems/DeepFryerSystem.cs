@@ -1,12 +1,14 @@
 using Content.Shared.Audio;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
+using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Content.Trauma.Shared.DeepFryer.Components;
@@ -26,6 +28,7 @@ public abstract class DeepFryerSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
 
     private ProtoId<DamageTypePrototype> damageType = "Heat";
 
@@ -40,6 +43,7 @@ public abstract class DeepFryerSystem : EntitySystem
 
     private void OnOpen(Entity<DeepFryerComponent> ent, ref StorageAfterOpenEvent args)
     {
+        ent.Comp.Closed = false;
 
         _ambientSound.SetAmbience(ent.Owner, false);
         _audio.PlayPredicted(ent.Comp.FinishSound, ent.Owner, ent.Owner);
@@ -52,6 +56,8 @@ public abstract class DeepFryerSystem : EntitySystem
 
     private void OnClose(Entity<DeepFryerComponent> ent, ref StorageAfterCloseEvent args)
     {
+        ent.Comp.Closed = true;
+
         if (!TryComp<EntityStorageComponent>(ent.Owner, out var entStorage))
             return;
 
@@ -75,7 +81,7 @@ public abstract class DeepFryerSystem : EntitySystem
     {
         if (!TryComp<SolutionContainerManagerComponent>(ent.Owner, out _)
             || !_solutionContainer.TryGetSolution(ent.Owner,
-                ent.Comp.FryerSolution,
+                ent.Comp.FryerSolutionContainer,
                 out _,
                 out var deepFryerSolution)
             || deepFryerSolution.Volume <= 0.2f)
@@ -85,29 +91,36 @@ public abstract class DeepFryerSystem : EntitySystem
         }
     }
 
-    protected void AddHeatDamage(DeepFryerComponent comp, float frameTime)
+    protected void AddHeatDamage(Entity<DeepFryerComponent> ent, float frameTime)
     {
         var heatProto = _prototypeManager.Index(damageType);
 
-        foreach (var entity in comp.StoredObjects)
+        foreach (var entity in ent.Comp.StoredObjects)
         {
             if (!TryComp<DamageableComponent>(entity, out _))
                 continue;
 
-            _damageable.TryChangeDamage(entity, new DamageSpecifier(heatProto, comp.HeatDamage * frameTime));
+            _damageable.TryChangeDamage(entity, new DamageSpecifier(heatProto, ent.Comp.HeatDamage * frameTime));
         }
     }
 
     protected void DeepFryItems(Entity<DeepFryerComponent> ent)
     {
-        ent.Comp.FryFinishTime = TimeSpan.Zero;
+        ent.Comp.FryFinishTime = _gameTiming.CurTime + ent.Comp.TimeToDeepFry;
 
         _popup.PopupPredicted(Loc.GetString("deep-fryer-item-cooked"), ent.Owner, ent.Owner);
 
         foreach (var storedObject in ent.Comp.StoredObjects)
         {
+            if (!Exists(storedObject))
+                continue;
+
             if (HasComp<DeepFriedComponent>(storedObject))
-                return;
+            {
+                Spawn(ent.Comp.AshedItemToSpawn, ent.Owner.ToCoordinates());
+                PredictedDel(storedObject);
+                continue;
+            }
 
             DeepFryItem(storedObject, ent);
 
@@ -127,12 +140,18 @@ public abstract class DeepFryerSystem : EntitySystem
         EntityManager.AddComponents(item, ent.Comp.ComponentsToAdd, false);
         EntityManager.RemoveComponents(item, ent.Comp.ComponentsToRemove);
 
-        if (!_solutionContainer.TryGetSolution(item, ent.Comp.SolutionContainer, out var solutionRef, out var solution) || !_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.FryerSolution, out var fryerSolution))
+        EnsureComp<MetaDataComponent>(item, out var meta);
+
+        var ev = new EntityRenamedEvent(item, meta.EntityName, Loc.GetString("deep-fried-item", ("name", meta.EntityName)));
+        RaiseLocalEvent(item, ref ev, true);
+        _nameModifier.RefreshNameModifiers(item);
+
+        if (!_solutionContainer.TryGetSolution(item, ent.Comp.SolutionContainer, out var solutionRef, out var solution) || !_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.FryerSolutionContainer, out var fryerSolution))
             return;
 
         var usedSolution = _solutionContainer.SplitSolution(fryerSolution.Value, ent.Comp.SolutionSpentPerFry); // spend a little solution to deep-fry
 
-        _solutionContainer.SetCapacity(solutionRef.Value, solution.MaxVolume + ent.Comp.SolutionIncrease);
+        _solutionContainer.SetCapacity(solutionRef.Value, solution.MaxVolume + ent.Comp.SolutionSpentPerFry);
         _solutionContainer.AddSolution(solutionRef.Value, usedSolution);
     }
 }

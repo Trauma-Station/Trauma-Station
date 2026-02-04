@@ -23,6 +23,7 @@
       solutions:
         food:
           maxVol: 15
+    - type: NameModifier
     - type: FlavorProfile
       flavors:
       - DeepFried
