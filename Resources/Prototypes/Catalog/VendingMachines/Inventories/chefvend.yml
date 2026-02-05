@@ -97,6 +97,7 @@
     FoodCondimentBottleBBQ: 1
     FoodCondimentBottleVinegar: 2
     ReagentContainerOliveoil: 2
+    DrinkFullFatCarton: 3 # Trauma
     ReagentContainerMayo: 1
     VariantCubeBox: 1
     FoodContainerEgg: 1

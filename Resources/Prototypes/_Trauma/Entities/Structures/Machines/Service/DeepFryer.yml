@@ -1,0 +1,142 @@
+- type: entity
+  id: KitchenDeepFryer
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: deep fryer
+  description: You can deep fry anything! I really mean ANYTHING.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/Service/deep_fryer.rsi
+    layers:
+    - state: deep_fryer_open
+      map: ["fryer_open"]
+    - state: deep_fryer_closed
+      visible: false
+      map: ["fryer_closed"]
+    - state: deep_fryer_closed_big
+      visible: false
+      map: ["fryer_closed_big"]
+  # Deep fryer stuff
+  - type: DeepFryer
+    componentsToAdd:
+    - type: DeepFried
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          maxVol: 15
+    - type: NameModifier
+    componentsToAddObjects:
+    - type: Edible
+    - type: FlavorProfile
+      flavors:
+      - DeepFried
+      - oily
+    componentsToRemove: # I love that you have to map the variables even if you're just removing them
+    - type: Tool
+    - type: RadioSpeaker
+    - type: RadioMicrophone
+    - type: ActiveListener
+    - type: AmmoSelector
+    - type: Multishot
+    - type: GunWieldBonus
+    - type: Perishable
+    - type: MeleeWeapon
+      damage: {}
+    - type: RotInto
+      entity: FoodRot
+      stage: 1
+    - type: ItemToggle
+    - type: Explosive
+      explosionType: HardBomb
+    - type: AmmoCounter
+    - type: Battery
+    - type: Gun
+    - type: RCD
+    - type: UserInterface
+    - type: HealthAnalyzer
+    - type: CablePlacer
+  # -----------------
+  - type: Electrified
+    enabled: false
+    usesApcPower: true
+  - type: Construction
+    containers:
+    - machine_parts
+    - machine_board
+    - entity_storage
+  - type: LitOnPowered
+  - type: PointLight
+    color: "#d49f34"
+    enabled: false
+    castShadows: false
+    radius: 2
+    energy: 10
+  - type: EntityStorage
+    openOnMove: false
+    isCollidableWhenOpen: true
+    showContents: false
+    capacity: 2
+    airtight: true
+    open: true
+    closeSound:
+      path: /Audio/Items/deconstruct.ogg
+    openSound:
+      path: /Audio/Items/deconstruct.ogg
+  - type: ContainerContainer
+    containers:
+      entity_storage: !type:Container
+      solutions: !type:Container
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Climbable
+    delay: 1.5
+  - type: AmbientSound
+    enabled: false
+    volume: 0.5
+    range: 5
+    sound:
+      path: /Audio/_Trauma/Machines/DeepFryer/deep_fryer_ambience.ogg
+  - type: ApcPowerReceiver
+    powerLoad: 700
+  - type: SolutionContainerManager
+    solutions:
+      fryer:
+        maxVol: 300
+  - type: MixableSolution
+    solution: fryer
+  - type: RefillableSolution
+    solution: fryer
+  - type: ExaminableSolution
+    solution: fryer
+    exactVolume: true
+  - type: DrawableSolution
+    solution: fryer
+  - type: Appearance
+  - type: Machine
+    board: DeepFryerCircuitboard
+  - type: GenericVisualizer
+    visuals:
+      enum.DeepFryerVisuals.Open:
+        fryer_open:
+          True: { visible: true }
+          False: { visible: false }
+      enum.DeepFryerVisuals.Frying:
+        fryer_closed:
+          True: { visible: true }
+          False: { visible: false }
+      enum.DeepFryerVisuals.BigFrying:
+        fryer_closed_big:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpillBehavior
+        solution: fryer
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak

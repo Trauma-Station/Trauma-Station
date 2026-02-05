@@ -2287,3 +2287,42 @@ Entries:
   id: 279
   time: '2026-02-02T11:39:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/621
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Hid crew cassette players when equipped, its sprite was too distracting.
+  id: 280
+  time: '2026-02-02T14:44:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/626
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: You can now chose other species' language in character editor
+  id: 281
+  time: '2026-02-02T16:00:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/625
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Cosmic cultists can see their own monument again.
+  - type: Fix
+    message: Heretics can see reality shifts again.
+  id: 282
+  time: '2026-02-02T16:21:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/628
+- author: Aviu
+  changes:
+  - type: Add
+    message: Reality fractures are visible to everyone now.
+  - type: Fix
+    message: Fix chaplain being able to see reality shifts,
+  id: 283
+  time: '2026-02-03T08:12:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/629
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added Deep fryer, you can deep fry ANYTHING
+  id: 284
+  time: '2026-02-04T21:02:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/637

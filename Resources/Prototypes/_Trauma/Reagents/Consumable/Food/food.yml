@@ -30,3 +30,32 @@
         messages: [ "reagent-popup-lab-grown-nutriment" ]
         probability: 0.05
   pricePerUnit: -300
+
+- type: reagent
+  id: FullFatOils
+  name: reagent-name-full-fat-oils
+  group: Foods
+  desc: reagent-desc-full-fat-oils
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: DeepFried
+  color: "#d49f34"
+  plantMetabolism:
+  - !type:PlantAdjustNutrition
+    amount: -1
+  - !type:PlantAdjustHealth
+    amount: -1.5
+  metabolisms:
+    Food:
+      metabolismRate: 0.5
+      effects:
+      - !type:SatiateHunger
+        factor: 0.010
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 0.15
+      - !type:PopupMessage
+        type: Local
+        messages: [ "reagent-popup-deep-fried-oils" ]
+        probability: 0.01
+  pricePerUnit: 0.1
