@@ -1,7 +1,6 @@
 using Content.Server._DV.Objectives.Events;
 using Content.Server.Actions;
 using Content.Server.Antag;
-using Content.Server.Polymorph.Systems;
 using Content.Server.Popups;
 using Content.Shared.Radio.Components;
 using Content.Shared._DV.CosmicCult;
@@ -26,7 +25,6 @@ public sealed class CosmicFragmentationSystem : EntitySystem
     [Dependency] private readonly CosmicCultSystem _cult = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
@@ -78,17 +76,13 @@ public sealed class CosmicFragmentationSystem : EntitySystem
     // TODO: refactor ts.
     private void OnFragmentBorg(Entity<BorgChassisComponent> ent, ref MalignFragmentationEvent args)
     {
-        if (_polymorph.PolymorphEntity(args.Target, "CosmicFragmentationWisp") is not { } polyVictim)
-            return;
-
-        var chantry = Spawn("CosmicBorgChantry", Transform(polyVictim).Coordinates);
+        var chantry = Spawn("CosmicBorgChantry", Transform(ent).Coordinates);
         EnsureComp<CosmicChantryComponent>(chantry, out var chantryComponent);
-        chantryComponent.InternalVictim = polyVictim;
-        chantryComponent.Victim = args.Target;
+        chantryComponent.Victim = ent;
 
         var mins = chantryComponent.EventTime.Minutes;
         var secs = chantryComponent.EventTime.Seconds;
-        _antag.SendBriefing(polyVictim, Loc.GetString("cosmiccult-silicon-chantry-briefing", ("minutesandseconds", $"{mins} minutes and {secs} seconds")), Color.FromHex("#4cabb3"), null);
+        _antag.SendBriefing(chantryComponent.Victim, Loc.GetString("cosmiccult-silicon-chantry-briefing", ("minutesandseconds", $"{mins} minutes and {secs} seconds")), Color.FromHex("#4cabb3"), null);
     }
 
     private void OnFragmentAi(Entity<SiliconLawUpdaterComponent> ent, ref MalignFragmentationEvent args)

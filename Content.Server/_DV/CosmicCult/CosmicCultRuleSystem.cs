@@ -363,7 +363,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         TryStartCult(args.EntityUid, uid);
 
 
-    private void SpawnRift()
+    public void SpawnRift()
     {
         if (TryFindRandomTile(out var _, out var _, out var _, out var coords))
         {

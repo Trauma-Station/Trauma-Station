@@ -3,13 +3,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later OR MIT
 
 using System.Linq;
+using Content.Server._DV.CosmicCult;
 using Content.Server._DV.CosmicCult.Components;
 using Content.Server._DV.CosmicCult.EntitySystems;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
-using Content.Server.Light.Components;
-using Content.Server.Station.Components;
+using Content.Shared.Light.Components;
+using Content.Shared.Station.Components;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
 using Content.Shared.Database;
@@ -29,7 +30,7 @@ public sealed class MalignRiftSpawnRule : StationEventSystem<MalignRiftSpawnRule
     [Dependency] private readonly GameTicker _ticker = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly CosmicRiftSystem _malignRift = default!;
+    [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
     [Dependency] private readonly IRobustRandom _rand = default!;
     [Dependency] private readonly IPlayerManager _playerMan = default!;
@@ -51,7 +52,7 @@ public sealed class MalignRiftSpawnRule : StationEventSystem<MalignRiftSpawnRule
         if (!TryComp<StationDataComponent>(chosenStation, out var stationData))
             return;
 
-        var grid = StationSystem.GetLargestGrid(stationData);
+        var grid = StationSystem.GetLargestGrid((chosenStation.Value, stationData));
 
         if (grid is null)
             return;
@@ -79,7 +80,7 @@ public sealed class MalignRiftSpawnRule : StationEventSystem<MalignRiftSpawnRule
 
             for (var i = 0; i < Convert.ToInt16(totalCrew / 6); i++) // spawn # malign rifts equal to 16.67% of the playercount
             {
-                _malignRift.SpawnRift(grid.Value);
+                _cultRule.SpawnRift();
             }
         }
     }

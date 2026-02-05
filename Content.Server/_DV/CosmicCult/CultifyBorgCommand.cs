@@ -13,6 +13,7 @@ using Content.Shared.Administration;
 using Content.Shared.Mind;
 using Content.Shared.Silicons.Borgs.Components;
 using Robust.Shared.Console;
+using Robust.Shared.Containers;
 using Robust.Shared.Player;
 
 [AdminCommand(AdminFlags.Fun)]
@@ -22,6 +23,7 @@ public sealed class CultifyBorgCommand : LocalizedEntityCommands
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly ISharedPlayerManager _players = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     public override string Command => "cultifyborg";
     public override string Description => "Imprisons a given borg in a chantry.";
     public override string Help => "Usage: cultifyborg <entity uid>";
@@ -56,16 +58,13 @@ public sealed class CultifyBorgCommand : LocalizedEntityCommands
         }
 
         var entityCoordinates = _entities.GetComponent<TransformComponent>(victim.Value).Coordinates;
-        var wisp = _entities.SpawnEntity("CosmicChantryWisp", entityCoordinates);
         var chantry = _entities.SpawnEntity("CosmicBorgChantry", entityCoordinates);
         _entities.EnsureComponent<CosmicChantryComponent>(chantry, out var chantryComponent);
-        chantryComponent.InternalVictim = wisp;
-        chantryComponent.VictimBody = victim.Value;
-        _mind.TransferTo(mindId, wisp, mind: mind);
+        chantryComponent.Victim = victim.Value;
 
         var mins = chantryComponent.EventTime.Minutes;
         var secs = chantryComponent.EventTime.Seconds;
-        _antag.SendBriefing(wisp, Loc.GetString("cosmiccult-silicon-chantry-briefing", ("minutesandseconds", $"{mins} minutes and {secs} seconds")), Color.FromHex("#4cabb3"), null);
+        _antag.SendBriefing(chantryComponent.Victim, Loc.GetString("cosmiccult-silicon-chantry-briefing", ("minutesandseconds", $"{mins} minutes and {secs} seconds")), Color.FromHex("#4cabb3"), null);
     }
 
     private bool TryGetVictimFromUidOrUsername(

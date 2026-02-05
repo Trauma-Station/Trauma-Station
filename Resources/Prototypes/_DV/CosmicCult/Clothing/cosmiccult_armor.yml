@@ -131,6 +131,6 @@
     proto: CosmicTyping
   - type: SpeechOverride
     overrideIDs:
-    Unsexed: CosmicEmotesMale # Humans use male soudns for unsexed so here we are.
-    Female: CosmicEmotesFemale
-    Male: CosmicEmotesMale
+      Unsexed: CosmicEmotesMale # Humans use male soudns for unsexed so here we are.
+      Female: CosmicEmotesFemale
+      Male: CosmicEmotesMale
