@@ -5,12 +5,20 @@ using Content.Server.Pinpointer;
 using Content.Server.Popups;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
@@ -31,6 +39,9 @@ public sealed class CosmicChantrySystem : EntitySystem
     [Dependency] private readonly SharedRoleSystem _role = default!;
     [Dependency] private readonly NavMapSystem _navMap = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private readonly MobThresholdSystem _threshold = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
 
     /// <summary>
     /// Mind role to add to colossi.
@@ -41,8 +52,10 @@ public sealed class CosmicChantrySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CosmicChantryComponent, ComponentInit>(OnChantryStarted);
-        SubscribeLocalEvent<CosmicChantryComponent, ComponentShutdown>(OnChantryDestroyed);
+        SubscribeLocalEvent<CosmicChantryComponent, ComponentStartup>(OnChantryStarted);
+        SubscribeLocalEvent<CosmicChantryComponent, DestructionEventArgs>(OnChantryDestroyed);
+        SubscribeLocalEvent<CosmicChantryComponent, CosmicChantryDoAfter>(OnDoAfter);
+        //SubscribeLocalEvent<CosmicChantryVictimComponent, MindRemovedMessage>(OnMindLeftVictim); //TODO: automatically make the contained posibrain a ghost role to prevent shitters ghosting
     }
 
     public override void Update(float frameTime)
@@ -52,13 +65,26 @@ public sealed class CosmicChantrySystem : EntitySystem
         var chantryQuery = EntityQueryEnumerator<CosmicChantryComponent>();
         while (chantryQuery.MoveNext(out var uid, out var comp))
         {
+            if (comp.Container.Count <= 1 && comp.Victim != default!) // Doing this on component startup doesn't put borg into the container properly so we do it on next update instead
+                _containerSystem.Insert(comp.Victim, comp.Container);
             if (_timing.CurTime >= comp.SpawnTimer && !comp.Spawned)
             {
                 _appearance.SetData(uid, ChantryVisuals.Status, ChantryStatus.On);
                 _popup.PopupCoordinates(Loc.GetString("cosmiccult-chantry-powerup"), Transform(uid).Coordinates, PopupType.LargeCaution);
                 comp.Spawned = true;
                 
-                var doAfterArgs = new DoAfterArgs(EntityManager, uid, comp.EventTime, new CosmicChantryDoAfter(), uid, comp.InternalVictim)
+                if (!_threshold.TryGetThresholdForState(comp.Victim, MobState.Critical, out var damage)
+                || !TryComp<DamageableComponent>(comp.Victim, out var damageable)
+                || damage < _damage.GetDamage((comp.Victim, damageable)).GetTotal())
+                    return;
+                damage -= _damage.GetDamage((comp.Victim, damageable)).GetTotal();
+                if (damage <= 0)
+                    return;
+                DamageSpecifier dspec = new();
+                dspec.DamageDict.Add("Slash", damage.Value);
+                _damage.TryChangeDamage(comp.Victim, dspec, true);
+                
+                var doAfterArgs = new DoAfterArgs(EntityManager, uid, comp.EventTime, new CosmicChantryDoAfter(), uid, comp.Victim)
                 {
                     NeedHand = false,
                     BreakOnWeightlessMove = false,
@@ -75,9 +101,8 @@ public sealed class CosmicChantrySystem : EntitySystem
 
     private void OnDoAfter(Entity<CosmicChantryComponent> ent, ref CosmicChantryDoAfter args)
     {
-        if (!_mind.TryGetMind(ent.Comp.InternalVictim, out var mindEnt, out var mind))
+        if (!_mind.TryGetMind(ent.Comp.Victim, out var mindEnt, out var mind))
             return;
-        mind.PreventGhosting = false;
         var tgtpos = Transform(ent).Coordinates;
         var colossus = Spawn(ent.Comp.Colossus, tgtpos);
         _mind.TransferTo(mindEnt, colossus);
@@ -85,42 +110,44 @@ public sealed class CosmicChantrySystem : EntitySystem
         _role.MindAddRole(mindEnt, MindRole, mind, true);
         _antag.SendBriefing(colossus, Loc.GetString("cosmiccult-silicon-colossus-briefing"), Color.FromHex("#4cabb3"), null);
         Spawn(ent.Comp.SpawnVFX, tgtpos);
-        QueueDel(ent.Comp.InternalVictim);
+
+        _containerSystem.EmptyContainer(ent.Comp.Container);
+        if (TryComp<CosmicColossusComponent>(colossus, out var colossusComp))
+        {
+            colossusComp.Container = _containerSystem.EnsureContainer<Container>(colossus, colossusComp.ContainerId);
+            _containerSystem.Insert(ent.Comp.Victim, colossusComp.Container);
+            colossusComp.ImprisonedEntity = ent.Comp.Victim;
+        }
+
         QueueDel(ent);
     }
 
-    private void OnChantryStarted(Entity<CosmicChantryComponent> ent, ref ComponentInit args)
+    private void OnChantryStarted(Entity<CosmicChantryComponent> ent, ref ComponentStartup args)
     {
-        var indicatedLocation = FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((ent, Transform(ent))));
         var comp = ent.Comp;
-
+        var indicatedLocation = FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((ent, Transform(ent))));
+        comp.Container = _containerSystem.EnsureContainer<Container>(ent, comp.ContainerId);
         comp.SpawnTimer = _timing.CurTime + comp.SpawningTime;
-        comp.CountdownTimer = _timing.CurTime + comp.EventTime;
-
         _sound.PlayGlobalOnStation(ent, _audio.ResolveSound(comp.ChantryAlarm));
         _chatSystem.DispatchStationAnnouncement(ent,
         Loc.GetString("cosmiccult-chantry-location", ("location", indicatedLocation)),
         null, false, null,
         Color.FromHex("#cae8e8"));
-
-        if (_mind.TryGetMind(comp.InternalVictim, out _, out var mind))
-            mind.PreventGhosting = true;
     }
 
-    private void OnChantryDestroyed(Entity<CosmicChantryComponent> ent, ref ComponentShutdown args)
+    private void OnChantryDestroyed(Entity<CosmicChantryComponent> ent, ref DestructionEventArgs args)
     {
+        var comp = ent.Comp;
+        _containerSystem.EmptyContainer(comp.Container);
         _sound.PlayGlobalOnStation(ent, _audio.ResolveSound(comp.ChantryDestructionAnnouncement));
         _chatSystem.DispatchStationAnnouncement(ent,
         Loc.GetString("cosmiccult-chantry-destruction"),
         null, false, null,
         Color.FromHex("#cae8e8"));
-
-        var comp = ent.Comp;
-        if (!_mind.TryGetMind(comp.InternalVictim, out var mindId, out var mind))
-            return;
-
-        mind.PreventGhosting = false;
-        _mind.TransferTo(mindId, comp.Victim);
-        QueueDel(comp.InternalVictim);
     }
+
+    //TODO: automatically make the contained posibrain a ghost role to prevent shitters ghosting
+    //private void OnMindLeftVictim(Entity<CosmicChantryVictimComponent> ent, ref MindRemovedMessage args)
+    //{
+    //}
 }

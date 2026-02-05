@@ -1,4 +1,5 @@
 using Robust.Shared.Audio;
+using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -27,8 +28,6 @@ public sealed partial class CosmicChantryComponent : Component
 
     [DataField] public bool Completed;
 
-    [DataField] public EntityUid InternalVictim;
-
     [DataField] public EntityUid Victim;
 
     [DataField] public SoundSpecifier ChantryAlarm = new SoundPathSpecifier("/Audio/_DV/CosmicCult/chantry_alarm.ogg");
@@ -38,6 +37,12 @@ public sealed partial class CosmicChantryComponent : Component
     [DataField] public EntProtoId Colossus = "MobCosmicColossus";
 
     [DataField] public EntProtoId SpawnVFX = "CosmicGlareAbilityVFX";
+
+    [ViewVariables]
+    public Container Container = default!;
+
+    [ViewVariables]
+    public string ContainerId = "container";
 }
 
 [Serializable, NetSerializable]

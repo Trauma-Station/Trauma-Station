@@ -7,6 +7,7 @@ using Content.Shared.Audio;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -15,6 +16,7 @@ using Content.Shared.Throwing;
 using Content.Shared.Warps;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
@@ -35,6 +37,8 @@ public sealed class CosmicColossusSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ThrowingSystem _throw = default!;
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {
@@ -85,7 +89,7 @@ public sealed class CosmicColossusSystem : EntitySystem
         ent.Comp.DeathTimer = _timing.CurTime + ent.Comp.DeathWait;
         if (_station.GetStationInMap(Transform(ent).MapID) is { } station && TryComp<StationDataComponent>(station, out var stationData))
         {
-            var stationGrid = _station.GetLargestGrid(station);
+            var stationGrid = _station.GetLargestGrid((station, stationData));
             _throw.TryThrow(ent, Transform(stationGrid!.Value).Coordinates, baseThrowSpeed: 30, null, 0, 0, false, false, false, false, false);
         }
         if (ent.Comp.Timed)
@@ -113,5 +117,9 @@ public sealed class CosmicColossusSystem : EntitySystem
         RemComp<PointLightComponent>(ent);
         RemComp<WarpPointComponent>(ent);
         RemComp<CosmicCorruptingComponent>(ent);
+        if (ent.Comp.Container != default!)
+            _containerSystem.EmptyContainer(ent.Comp.Container);
+        if (_mind.TryGetMind(ent, out var mindEnt, out _) && ent.Comp.ImprisonedEntity != null)
+            _mind.TransferTo(mindEnt, ent.Comp.ImprisonedEntity);
     }
 }

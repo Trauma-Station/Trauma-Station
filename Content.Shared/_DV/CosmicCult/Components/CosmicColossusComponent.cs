@@ -1,4 +1,5 @@
 using Robust.Shared.Audio;
+using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -59,6 +60,20 @@ public sealed partial class CosmicColossusComponent : Component
     [DataField] public bool Hibernating;
 
     [DataField] public bool Timed;
+
+    /// <summary>
+    /// If the colossus was creted during a round, the borg goes into this container.
+    /// Midround colossi are so ancient the original borg has long decayed into dust or something.
+    /// Does that make the colossus a gundam?
+    /// </summary>
+    [ViewVariables]
+    public Container Container = default!;
+
+    [ViewVariables]
+    public string ContainerId = "container";
+
+    [ViewVariables]
+    public EntityUid? ImprisonedEntity;
 }
 
 [Serializable, NetSerializable]
