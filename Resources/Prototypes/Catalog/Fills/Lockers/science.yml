@@ -41,4 +41,5 @@
     - id: ClothingOuterCoatRobo
     - id: ClothingOuterWinterRobo
     - id: ClothingBeltUtilityFilled
+    - id: ClothingEyesHudDiagnostic
       prob: 0.5
