@@ -1074,8 +1074,8 @@
     sprite: Structures/Doors/Airlocks/Standard/maint.rsi
 
 - type: entity
-  parent: AirlockRobotics
-  id: AirlockRoboticsLocked
+  parent: AirlockRoboticsLocked
+  id: AirlockMaintRoboticsLocked
   components:
   - type: Sprite
     sprite: Structures/Doors/Airlocks/Standard/maint.rsi
