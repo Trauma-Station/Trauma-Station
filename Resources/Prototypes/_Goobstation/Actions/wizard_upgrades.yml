@@ -669,16 +669,16 @@
   id: ActionSpellCardsII
   name: Spell Cards II
   components:
-  - type: SpellCardsAction
-    useDelay: 4
+  - type: AutoRecharge
+    rechargeDuration: 1.5
 
 - type: entity
   parent: ActionSpellCards
   id: ActionSpellCardsIII
   name: Spell Cards III
   components:
-  - type: SpellCardsAction
-    useDelay: 2
+  - type: AutoRecharge
+    rechargeDuration: 1
 
 # Rod Form
 - type: entity

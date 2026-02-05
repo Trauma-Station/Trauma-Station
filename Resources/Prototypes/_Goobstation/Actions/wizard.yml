@@ -526,7 +526,7 @@
   - type: Action
     raiseOnUser: true
     checkCanInteract: false
-    useDelay: 0.5 # SpellCardsEvent handles use delay
+    useDelay: 0.5
     itemIconStyle: BigAction
     sound:
       path: /Audio/Magic/staff_healing.ogg
@@ -552,6 +552,10 @@
     requiresSpeech: true
     school: Evocation
   - type: SpellCardsAction
+  - type: LimitedCharges
+    maxCharges: 5
+  - type: AutoRecharge
+    rechargeDuration: 2
   - type: LockOnMarkAction
   - type: ActionUpgrade
     effectedLevels:
@@ -756,6 +760,7 @@
       enum.WizardTeleportUiKey.Key:
         type: WizardTeleportBoundUserInterface
         requireInputValidation: false
+        interactionRange: -1
   - type: ActionUpgrade
     effectedLevels:
       2: ActionTeleportII

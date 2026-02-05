@@ -31,11 +31,8 @@ using Content.Shared._Goobstation.Wizard;
 using Content.Shared._Goobstation.Wizard.BindSoul;
 using Content.Shared._Goobstation.Wizard.Chuuni;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
-using Content.Shared._Goobstation.Wizard.SpellCards;
-using Content.Shared._Shitcode.Roles;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared._Shitmed.Damage; // Shitmed Change
-using Content.Shared.Abilities.Mime;
 using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Coordinates.Helpers;
@@ -48,7 +45,6 @@ using Content.Shared.Magic.Components;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
-using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Power.Components;
@@ -56,7 +52,6 @@ using Content.Shared.Power.EntitySystems;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Roles.Components;
 using Content.Shared.Speech.Components;
-using Content.Shared.Weapons.Ranged.Components;
 using Robust.Server.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.GameObjects.Components.Localization;
@@ -64,7 +59,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
@@ -72,7 +66,6 @@ using Robust.Shared.Utility;
 using Content.Shared.Actions.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Construction.Components;
-using Content.Shared.Friction;
 using Content.Shared.Item;
 using Content.Shared.Tag;
 using Content.Goobstation.Shared.Teleportation.Systems;
@@ -100,7 +93,6 @@ public sealed class SpellsSystem : SharedSpellsSystem
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly TileFrictionController _tileFriction = default!;
 
     public override void Initialize()
     {
@@ -414,55 +406,6 @@ public sealed class SpellsSystem : SharedSpellsSystem
                 var toSpeak = speech == null ? string.Empty : Loc.GetString(speech);
                 SpeakSpell(speaker, caster, toSpeak, school);
             });
-    }
-
-    protected override void ShootSpellCards(SpellCardsEvent ev, EntProtoId proto)
-    {
-        base.ShootSpellCards(ev, proto);
-
-        var targetMap = TransformSystem.ToMapCoordinates(ev.Target);
-
-        var (_, mapCoords, spawnCoords, velocity) = GetProjectileData(ev.Performer);
-
-        var mapDirection = targetMap.Position - mapCoords.Position;
-        if (mapDirection == Vector2.Zero)
-            return;
-        var mapAngle = mapDirection.ToAngle();
-
-        var angles = _gun.LinearSpread(mapAngle - ev.Spread / 2, mapAngle + ev.Spread / 2, ev.ProjectilesAmount);
-
-        var linearDamping = Random.NextFloat(ev.MinMaxLinearDamping.X, ev.MinMaxLinearDamping.Y);
-
-        var setHoming = Exists(ev.Entity) && ev.Entity != ev.Performer && HasComp<MobStateComponent>(ev.Entity);
-
-        for (var i = 0; i < ev.ProjectilesAmount; i++)
-        {
-            var newUid = Spawn(proto, spawnCoords);
-            _gun.ShootProjectile(newUid, angles[i].ToVec(), velocity, ev.Performer, ev.Performer, ev.ProjectileSpeed);
-
-            if (!TryComp(newUid, out PhysicsComponent? physics))
-                continue;
-
-            Physics.SetAngularVelocity(newUid,
-                Random.NextFloat(-ev.MaxAngularVelocity, ev.MaxAngularVelocity),
-                false,
-                body: physics);
-            Physics.SetLinearDamping(newUid, physics, linearDamping, false);
-            _tileFriction.SetModifier(newUid, linearDamping);
-
-            var spellCard = EnsureComp<SpellCardComponent>(newUid);
-            if (!setHoming)
-            {
-                Dirty(newUid, physics);
-                continue;
-            }
-
-            spellCard.Target = ev.Entity;
-            _gun.SetTarget(newUid, ev.Entity, out var targeted, false);
-            Entity<SpellCardComponent, PhysicsComponent, TargetedProjectileComponent> ent = (newUid, spellCard, physics,
-                targeted);
-            Dirty(ent);
-        }
     }
 
     protected override void Speak(EntityUid uid, string message)
