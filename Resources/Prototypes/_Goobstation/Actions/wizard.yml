@@ -970,7 +970,7 @@
   - type: Action
     raiseOnUser: true
     checkCanInteract: false
-    useDelay: 25
+    useDelay: 15
     itemIconStyle: BigAction
     icon:
       sprite: _Goobstation/Wizard/actions.rsi

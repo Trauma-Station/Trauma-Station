@@ -179,11 +179,21 @@
     MobGhoulRustWalker: 0.33
     MobMonkeyAngry: 1
     MobKoboldAngry: 1
+    Moblavalandgoliath: 0.5
+    MoblavalandgoliathAncient: 0.5
+    LavalandEliteLegionnaire: 1
+    LavalandEliteHerald: 1
+    LavalandEliteBroodMother: 1
+    LavalandMobBrimdemon: 1
 
 - type: weightedRandomEntity
   id: WabbajackSpecial
   weights:
     MobBinglePrime: 1
+    LavalandBossMegaLegion: 1
+    LavalandBossColossus: 1
+    LavalandBossAshDrake: 1
+    LavalandBossBubblegum: 1
 
 - type: weightedRandomEntity
   id: WabbajackXeno

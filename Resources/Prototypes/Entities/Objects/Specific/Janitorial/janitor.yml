@@ -57,7 +57,8 @@
     - Janitorial
   - type: DnaSubstanceTrace
   - type: FloorCleaner # Goobstation
-    radius: 2
+    radius: 1
+    cleanDelay: 1
 
 - type: entity
   parent: MopItem
@@ -100,8 +101,8 @@
         Glass: 25
         Steel: 25
     - type: FloorCleaner # Goobstation
-      radius: 3
-      cleanDelay: 6
+      radius: 1
+      cleanDelay: 0.5
 
 - type: entity
   name: wet floor sign

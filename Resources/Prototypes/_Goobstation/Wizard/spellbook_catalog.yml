@@ -436,7 +436,7 @@
   description: spellbook-bind-soul-desc
   productAction: ActionBindSoul
   cost:
-    WizCoin: 2
+    WizCoin: 4
   categories:
   - SpellbookDefensive
   conditions:
@@ -667,7 +667,7 @@
   description: spellbook-echo-katana-desc
   productEntity: EchoKatana
   cost:
-    WizCoin: 2
+    WizCoin: 1
   categories:
   - SpellbookEquipment
 
@@ -695,11 +695,14 @@
   id: SpellbookPaperRobe
   name: spellbook-paper-robe-name
   description: spellbook-paper-robe-desc
-  productEntity: ClothingOuterWizardPaperReal
+  productEntity: ClothingBackpackPaper
   cost:
     WizCoin: 1
   categories:
   - SpellbookEquipment
+  icon:
+    sprite: _Goobstation/Wizard/Clothing/OuterClothing/paperwizard.rsi
+    state: icon
 
 - type: listing
   id: SpellbookHighFrequencyBlade
@@ -799,17 +802,6 @@
     WizCoin: 2
   categories:
   - SpellbookEquipment
-
-- type: listing
-  id: SpellbookNinjutsuScroll
-  name: spellbook-ninjutsu-name
-  description: spellbook-ninjutsu-desc
-  productEntity: NinjutsuScroll
-  cost:
-    WizCoin: 2
-  categories:
-  - SpellbookEquipment
-  disableRefund: true
 
 # Summons
 - type: listing

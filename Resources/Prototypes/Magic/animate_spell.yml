@@ -33,6 +33,8 @@
       - TegCirculator
       - XenoArtifact
       - MaterialReclaimer
+      - StationAlertLevelLock # Trauma
+
     event: !type:ChangeComponentsSpellEvent
       toAdd:
       - type: Animate

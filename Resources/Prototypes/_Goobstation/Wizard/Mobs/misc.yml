@@ -119,7 +119,7 @@
   - type: FactionException
   - type: NpcFactionMember
     factions:
-      - Wizard
+    - SimpleHostile
   - type: HTN
     rootTask:
       task: SimpleHumanoidHostileCompound # Humanoid for staff of change shenanigans

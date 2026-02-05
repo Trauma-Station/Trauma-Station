@@ -20,10 +20,10 @@
       path: /Audio/Weapons/Guns/Gunshots/Magic/staff_change.ogg
   - type: BasicEntityAmmoProvider
     proto: ProjectileWabbajack
-    capacity: 10
-    count: 10
+    capacity: 6
+    count: 6
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 15
+    rechargeCooldown: 10
 
 - type: entity
   name: staff of chaos
