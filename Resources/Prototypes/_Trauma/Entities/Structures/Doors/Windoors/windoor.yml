@@ -1,5 +1,4 @@
 # Windoors (alphabetical)
-
 - type: entity
   parent: WindoorSecure
   id: WindoorSecureRoboticsLocked
