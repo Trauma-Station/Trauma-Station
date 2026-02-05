@@ -707,7 +707,7 @@
   description: spellbook-high-freq-desc
   productEntity: HighFrequencyBlade
   cost:
-    WizCoin: 3
+    WizCoin: 2
   categories:
   - SpellbookEquipment
 
