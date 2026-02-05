@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 271.1.0
+  engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 01/22/2026 20:30:37
+  time: 02/05/2026 12:39:09
   entityCount: 38146
 maps:
 - 1
@@ -21080,7 +21080,7 @@ entities:
       pos: -40.5,39.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -4850.226
+      secondsUntilStateChange: -4926.907
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -21678,7 +21678,7 @@ entities:
       pos: 72.5,-11.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -85403.57
+      secondsUntilStateChange: -85480.25
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -167362,6 +167362,13 @@ entities:
     - type: Transform
       pos: -21.5,21.5
       parent: 2
+- proto: KitchenDeepFryer
+  entities:
+  - uid: 29316
+    components:
+    - type: Transform
+      pos: -5.5,19.5
+      parent: 2
 - proto: KitchenKnife
   entities:
   - uid: 24573
@@ -167798,7 +167805,7 @@ entities:
   - uid: 24646
     components:
     - type: Transform
-      pos: -6.6480103,17.598469
+      pos: -6.5545363,17.753525
       parent: 2
   - uid: 24647
     components:
@@ -199638,6 +199645,11 @@ entities:
     - type: Transform
       pos: 35.5,1.5
       parent: 2
+  - uid: 27660
+    components:
+    - type: Transform
+      pos: -6.5,17.5
+      parent: 2
   - uid: 28790
     components:
     - type: Transform
@@ -199660,11 +199672,6 @@ entities:
     - type: Transform
       pos: -7.5,17.5
       parent: 2
-  - uid: 29316
-    components:
-    - type: Transform
-      pos: -6.5,17.5
-      parent: 2
   - uid: 29317
     components:
     - type: Transform
@@ -199684,11 +199691,6 @@ entities:
     components:
     - type: Transform
       pos: -7.5,20.5
-      parent: 2
-  - uid: 29321
-    components:
-    - type: Transform
-      pos: -5.5,19.5
       parent: 2
   - uid: 29322
     components:
