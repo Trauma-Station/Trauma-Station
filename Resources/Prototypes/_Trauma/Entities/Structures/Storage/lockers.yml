@@ -1,12 +1,7 @@
 - type: entity
   id: LockerRoboticist
-  parent: LockerBase
+  parent: LockerScientist
   name: roboticist's locker
   components:
-  - type: Appearance
-  - type: EntityStorageVisuals
-    stateBaseClosed: science
-    stateDoorOpen: science_open
-    stateDoorClosed: science_door
   - type: AccessReader
     access: [ [ "Robotics" ] ]
