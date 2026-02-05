@@ -15,6 +15,7 @@
 - files:
   - a_new_dawn.ogg
   - premonition.ogg
+  - premonition_loop.ogg
   - finale.ogg
   license: "CC-BY-SA-3.0"
   copyright: "Custom music composed by Nahu Pyrope for Cosmic Cult."
@@ -60,9 +61,8 @@
   - ability_glare.ogg
   - ability_blank.ogg
   - ability_siphon.ogg
+  - ability_sunder.ogg
   - ascendant_noise.ogg
-  - ascendant_shatter.ogg
-  - ascendant_shunt.ogg
   license: "CC-BY-SA-3.0"
   copyright: "By AftrLite(GitHub) for Cosmic Cult. Made using a combination of (Creative Commons 0) samples from freesound.org and personally-recorded foley."
   source: "https://freesound.org/"
