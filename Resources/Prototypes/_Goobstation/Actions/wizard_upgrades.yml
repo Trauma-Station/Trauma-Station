@@ -10,7 +10,7 @@
   name: Mime Malaise II
   components:
   - type: Action
-    useDelay: 25
+    useDelay: 20
 
 - type: entity
   parent: ActionMimeMalaise
@@ -18,7 +18,7 @@
   name: Mime Malaise III
   components:
   - type: Action
-    useDelay: 20
+    useDelay: 10
 
 - type: entity
   parent: ActionMimeMalaise
@@ -26,7 +26,7 @@
   name: Mime Malaise IV
   components:
   - type: Action
-    useDelay: 15
+    useDelay: 5
 
 - type: entity
   parent: ActionMimeMalaise
@@ -34,7 +34,7 @@
   name: Mime Malaise V
   components:
   - type: Action
-    useDelay: 10
+    useDelay: 1
 
 # Curse of the Cluwne
 - type: entity
@@ -43,7 +43,7 @@
   name: Curse of the Cluwne II
   components:
   - type: Action
-    useDelay: 40
+    useDelay: 20
 
 - type: entity
   parent: ActionCluwneCurse
@@ -51,7 +51,7 @@
   name: Curse of the Cluwne III
   components:
   - type: Action
-    useDelay: 20
+    useDelay: 10
 
 # Banana Touch
 - type: entity
@@ -336,7 +336,7 @@
   - type: Action
     useDelay: 2
 
-- type: entitya
+- type: entity
   parent: ActionHomingToolbox
   id: ActionHomingToolboxV
   name: Homing Toolbox V
@@ -402,7 +402,7 @@
   name: Scream For Me II
   components:
   - type: Action
-    useDelay: 50
+    useDelay: 40
 
 - type: entity
   parent: ActionScreamForMe
@@ -410,7 +410,7 @@
   name: Scream For Me III
   components:
   - type: Action
-    useDelay: 40
+    useDelay: 30
 
 - type: entity
   parent: ActionScreamForMe
@@ -418,7 +418,7 @@
   name: Scream For Me IV
   components:
   - type: Action
-    useDelay: 30
+    useDelay: 20
 
 - type: entity
   parent: ActionScreamForMe
@@ -426,7 +426,7 @@
   name: Scream For Me V
   components:
   - type: Action
-    useDelay: 20
+    useDelay: 10
 
 # Teleport
 - type: entity

@@ -49,7 +49,7 @@
   components:
   - type: Action
     raiseOnUser: true
-    useDelay: 60
+    useDelay: 30
     itemIconStyle: BigAction
     sound: !type:SoundCollectionSpecifier
       collection: CluwneHorn
