@@ -1,0 +1,15 @@
+- type: entity
+  parent: Airlock
+  id: AirlockRobotics
+  suffix: Robotics
+  components:
+  - type: Sprite
+    sprite: _Trauma\Structures\Doors\Airlocks\StandardAirlock\robotics.rsi
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockRoboticsGlass
+  suffix: Robotics
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Structures/Doors/Airlocks/Glass/robotics.rsi

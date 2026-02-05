@@ -1,0 +1,11 @@
+- type: entity
+  parent: CrateBaseSecure
+  id: CrateRoboticsSecure
+  name: secure robotics crate
+  components:
+  - type: Icon
+    sprite: Structures/Storage/Crates/scicrate_secure.rsi
+  - type: Sprite
+    sprite: Structures/Storage/Crates/scicrate_secure.rsi
+  - type: AccessReader
+    access: [["Robotics"]]

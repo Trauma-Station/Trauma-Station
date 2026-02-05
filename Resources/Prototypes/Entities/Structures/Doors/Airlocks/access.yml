@@ -348,15 +348,6 @@
       board: [ DoorElectronicsMedicalResearch ]
 
 - type: entity
-  parent: AirlockRobotics
-  id: AirlockRoboticsLocked
-  suffix: Robotics, Locked
-  components:
-  - type: ContainerFill
-    containers:
-      board: [ DoorElectronicsRobotics ]
-
-- type: entity
   parent: AirlockCentralCommand
   id: AirlockCentralCommandLocked
   suffix: Central Command, Locked
@@ -751,15 +742,6 @@
       board: [ DoorElectronicsResearch ]
 
 - type: entity
-  parent: AirlockRoboticsGlass
-  id: AirlockRoboticsGlassLocked
-  suffix: Robotics, Locked
-  components:
-  - type: ContainerFill
-    containers:
-      board: [ DoorElectronicsRobotics ]
-
-- type: entity
   parent: AirlockScienceGlass
   id: AirlockMedicalScienceGlassLocked
   suffix: Medical/Science, Locked
@@ -1069,13 +1051,6 @@
 - type: entity
   parent: AirlockChemistryLocked
   id: AirlockMaintChemLocked
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/maint.rsi
-
-- type: entity
-  parent: AirlockRoboticsLocked
-  id: AirlockMaintRoboticsLocked
   components:
   - type: Sprite
     sprite: Structures/Doors/Airlocks/Standard/maint.rsi

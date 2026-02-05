@@ -162,7 +162,7 @@
   - ResearchDirector
   - Brig
   - Cryogenics
-  - Robotics
+  - Robotics # Trauma
   - External # Goobstation
   special:
   - !type:AddImplantSpecial

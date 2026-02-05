@@ -1390,7 +1390,7 @@
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
-    access: [["Robotics"]]
+    access: [["Robotics"]] # was Research
   - type: PointLight
     radius: 2
     energy: 1.6
@@ -2088,7 +2088,7 @@
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
-    access: [["Research"]]
+    access: [["Robotics"]] # was Research
 
 - type: entity
   parent: VendingMachine
