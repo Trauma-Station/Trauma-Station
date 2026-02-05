@@ -18,6 +18,7 @@
     science: AirlockScience
     security: AirlockSecurity
     virology: AirlockVirology
+    robotics: AirlockRobotics
 
 - type: paintableGroup
   id: AirlockGlass
@@ -38,3 +39,4 @@
     science: AirlockScienceGlass
     security: AirlockSecurityGlass
     virology: AirlockVirologyGlass
+    robotics: AirlockRoboticsGlass
