@@ -34,6 +34,6 @@
     plasma: CratePlasma
     private: CratePrivateSecure
     science: CrateScienceSecure
-    Robotics: CrateRoboticsSecure
+    robotics: CrateRoboticsSecure
     secgear: CrateSecgear
     weapon: CrateWeaponSecure
