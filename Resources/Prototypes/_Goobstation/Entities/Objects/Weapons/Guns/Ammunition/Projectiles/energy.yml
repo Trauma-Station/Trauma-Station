@@ -46,7 +46,7 @@
     impactEffect: BulletImpactEffectRedDisabler
     damage:
       types:
-        Heat: 17
+        Heat: 10
     soundHit:
       collection: MeatLaserImpact
 
@@ -207,6 +207,8 @@
     impactEffect: BulletImpactEffectRedDisabler
     damage:
       types:
-        Heat: 25
+        Heat: 10
     soundHit:
       collection: MeatLaserImpact
+  - type: IgniteOnCollide
+    fireStacks: 0.5

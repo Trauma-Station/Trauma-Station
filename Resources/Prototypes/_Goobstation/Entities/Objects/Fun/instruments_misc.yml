@@ -27,9 +27,12 @@
       "Synth": { 62: 0 }
       "Friend": { 2: 0 }
       "Overdriven": { 29: 0 }
+  - type: Sprite
+    state: icon
   - type: Item
     size: Small
   - type: Clothing
+    quickEquip: false
     slots:
     - neck
   - type: ActivatableUI
@@ -43,11 +46,9 @@
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Fun/bloodred_cassette_player.rsi
-    state: icon
   - type: Item
     sprite: _Goobstation/Objects/Fun/bloodred_cassette_player.rsi
   - type: Clothing
-    quickEquip: false
     sprite: _Goobstation/Objects/Fun/bloodred_cassette_player.rsi
 
 - type: entity
@@ -56,14 +57,12 @@
   name: cassette player
   description: Regular old cassette player to enjoy your tunes on the go.
   components:
-    - type: Sprite
-      sprite: _Goobstation/Objects/Fun/crew_cassette_player.rsi
-      state: icon
-    - type: Item
-      sprite: _Goobstation/Objects/Fun/crew_cassette_player.rsi
-    - type: Clothing
-      quickEquip: false
-      sprite: _Goobstation/Objects/Fun/crew_cassette_player.rsi
+  - type: Sprite
+    sprite: _Goobstation/Objects/Fun/crew_cassette_player.rsi
+  - type: Item
+    sprite: _Goobstation/Objects/Fun/crew_cassette_player.rsi
+  - type: Clothing
+    sprite: _Goobstation/Objects/Fun/crew_cassette_player.rsi
 
 - type: entity
   parent: BaseCassette
@@ -71,11 +70,9 @@
   name: executive cassette player
   description: Perfect to make you look like you do mergers and acquisitions.
   components:
-    - type: Sprite
-      sprite: _Goobstation/Objects/Fun/executive_cassette_player.rsi
-      state: icon
-    - type: Item
-      sprite: _Goobstation/Objects/Fun/executive_cassette_player.rsi
-    - type: Clothing
-      quickEquip: false
-      sprite: _Goobstation/Objects/Fun/executive_cassette_player.rsi
+  - type: Sprite
+    sprite: _Goobstation/Objects/Fun/executive_cassette_player.rsi
+  - type: Item
+    sprite: _Goobstation/Objects/Fun/executive_cassette_player.rsi
+  - type: Clothing
+    sprite: _Goobstation/Objects/Fun/executive_cassette_player.rsi

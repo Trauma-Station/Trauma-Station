@@ -57,6 +57,7 @@ using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Roles;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Body.Components;
@@ -68,7 +69,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Heretic.EntitySystems;
 
-public sealed class GhoulSystem : EntitySystem
+public sealed class GhoulSystem : SharedGhoulSystem
 {
     private static readonly ProtoId<HTNCompoundPrototype> Compound = "HereticSummonCompound";
     private static readonly EntProtoId<MindRoleComponent> GhoulRole = "MindRoleGhoul";
@@ -104,6 +105,13 @@ public sealed class GhoulSystem : EntitySystem
 
         SubscribeLocalEvent<HereticMinionComponent, AttackAttemptEvent>(OnTryAttack);
         SubscribeLocalEvent<HereticMinionComponent, TakeGhostRoleEvent>(OnTakeGhostRole);
+
+        SubscribeLocalEvent<GhoulComponent, SetGhoulBoundHereticEvent>(OnBound);
+    }
+
+    private void OnBound(Entity<GhoulComponent> ent, ref SetGhoulBoundHereticEvent args)
+    {
+        SetBoundHeretic(ent.Owner, args.Heretic);
     }
 
     private void OnGetBriefing(Entity<GhoulRoleComponent> ent, ref GetBriefingEvent args)

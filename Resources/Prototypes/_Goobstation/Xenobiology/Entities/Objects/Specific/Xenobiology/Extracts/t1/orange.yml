@@ -1,0 +1,53 @@
+- type: entity
+  id: OrangeSlimeExtract
+  parent: BaseSlimeExtract
+  name: orange slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _Goobstation/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#ff9f1a"
+  - type: Reactive
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReaction
+      - !type:DoSmokeEffect
+        duration: 10
+        spreadAmount: 75
+        smokePrototype: Smoke
+        solution:
+          reagents:
+          - ReagentId: TearGas
+            Quantity: 20
+    - reagents: [ Plasma ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReaction
+      - !type:RelayNearby
+        compName: Flammable
+        range: 3
+        effect: !type:NestedEffect
+          proto: Ignite5
+      - !type:Flash
+        maxRange: 7
+        rangePerUnit: 7
+        sound: /Audio/_Goobstation/Wizard/zapbang.ogg
+    - reagents: [ Blood ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReagent
+      - !type:RelaySolution
+        name: extract
+        effects:
+        - !type:AdjustReagent
+          reagent: CapsaicinOil
+          amount: 15
+  - type: Tag
+    tags:
+    - XenobiologyOrangeExtract

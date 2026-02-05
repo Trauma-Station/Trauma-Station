@@ -5,13 +5,7 @@ namespace Content.Trauma.Common.CCVar;
 [CVarDefs]
 public sealed partial class TraumaCVars
 {
-    #region Slop
-
-    /// <summary>
-    ///     Is antag pity enabled
-    /// </summary>
-    public static readonly CVarDef<bool> AntagPityEnabled =
-        CVarDef.Create("trauma.pity_enabled", false, CVar.SERVER | CVar.REPLICATED);
+    #region Disabling features
 
     /// <summary>
     /// Whether to enable the ghost bar.
@@ -45,12 +39,6 @@ public sealed partial class TraumaCVars
     #endregion
 
     #region AudioMuffle
-
-    /// <summary>
-    /// Is audio muffle raycast behavior enabled?
-    /// </summary>
-    public static readonly CVarDef<bool> AudioMuffleRaycast =
-        CVarDef.Create("trauma.audio_muffle_raycast", true, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     /// Is audio muffle pathfinding behavior enabled?

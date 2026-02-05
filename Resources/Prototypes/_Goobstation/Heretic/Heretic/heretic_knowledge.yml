@@ -35,22 +35,22 @@
 - type: hereticKnowledge
   id: HeartbeatOfMansus
   ritualPrototypes:
-  - Sacrifice
+  - RitualSacrifice
 
 - type: hereticKnowledge
   id: AmberFocus
   ritualPrototypes:
-  - AmberFocus
+  - RitualAmberFocus
 
 - type: hereticKnowledge
   id: CodexCicatrix
   ritualPrototypes:
-  - CodexCicatrix
+  - RitualCodexCicatrix
 
 - type: hereticKnowledge
   id: LivingHeart
   ritualPrototypes:
-  - LivingHeart
+  - RitualLivingHeart
   actionPrototypes:
   - ActionHereticLivingHeart
 
@@ -60,14 +60,9 @@
   - ActionHereticShadowCloak
 
 - type: hereticKnowledge
-  id: Reminiscence
-  ritualPrototypes:
-  - Reminiscence
-
-- type: hereticKnowledge
   id: FeastOfOwls
   ritualPrototypes:
-  - FeastOfOwls
+  - RitualFeastOfOwls
 
 ### ash path
 - type: hereticKnowledge
@@ -75,7 +70,7 @@
   path: Ash
   stage: 1
   ritualPrototypes:
-  - BladeAsh
+  - RitualBladeAsh
 
 - type: hereticKnowledge
   id: GraspOfAsh
@@ -108,7 +103,7 @@
   sideKnowledge: true
   stage: 6
   ritualPrototypes:
-  - MaskOfMadness
+  - RitualMaskOfMadness
 
 - type: hereticKnowledge
   id: FieryBlade
@@ -128,7 +123,7 @@
   path: Ash
   stage: 9
   ritualPrototypes:
-  - AscensionAsh
+  - RitualAscensionAsh
 
 - type: hereticKnowledge
   id: AshlordRite
@@ -151,7 +146,7 @@
   path: Blade
   stage: 1
   ritualPrototypes:
-  - BladeBlade
+  - RitualBladeBlade
 
 - type: hereticKnowledge
   id: GraspOfBlade
@@ -205,7 +200,7 @@
   path: Blade
   stage: 9
   ritualPrototypes:
-  - AscensionBlade
+  - RitualAscensionBlade
 
 - type: hereticKnowledge
   id: MaelstromOfSilver
@@ -221,7 +216,7 @@
   path: Flesh
   stage: 1
   ritualPrototypes:
-  - BladeFlesh
+  - RitualBladeFlesh
 
 - type: hereticKnowledge
   id: GraspOfFlesh
@@ -237,7 +232,7 @@
   sideKnowledge: true
   stage: 3
   ritualPrototypes:
-  - ImperfectRitual
+  - RitualImperfect
 
 - type: hereticKnowledge
   id: MarkOfFlesh
@@ -257,7 +252,7 @@
   sideKnowledge: true
   stage: 6
   ritualPrototypes:
-  - RawRitual
+  - RitualRaw
 
 - type: hereticKnowledge
   id: BleedingSteel
@@ -270,14 +265,14 @@
   sideKnowledge: true
   stage: 8
   ritualPrototypes:
-  - LonelyRitual
+  - RitualLonely
 
 - type: hereticKnowledge
   id: AscensionFlesh
   path: Flesh
   stage: 9
   ritualPrototypes:
-  - AscensionFlesh
+  - RitualAscensionFlesh
 
 - type: hereticKnowledge
   id: PriestFinalHymn
@@ -296,7 +291,7 @@
   path: Void
   stage: 1
   ritualPrototypes:
-  - BladeVoid
+  - RitualBladeVoid
 
 - type: hereticKnowledge
   id: GraspOfVoid
@@ -369,7 +364,7 @@
   stage: 9
   path: Void
   ritualPrototypes:
-  - AscensionVoid
+  - RitualAscensionVoid
 
 - type: hereticKnowledge
   id: WaltzAtTheEndOfTime
@@ -400,7 +395,7 @@
   path: Rust
   stage: 1
   ritualPrototypes:
-  - BladeRust
+  - RitualBladeRust
 
 - type: hereticKnowledge
   id: GraspOfRust
@@ -456,7 +451,7 @@
   stage: 9
   path: Rust
   ritualPrototypes:
-  - AscensionRust
+  - RitualAscensionRust
 
 - type: hereticKnowledge
   id: RustbringersOath
@@ -473,7 +468,7 @@
   path: Cosmos
   stage: 1
   ritualPrototypes:
-  - BladeCosmos
+  - RitualBladeCosmos
 
 - type: hereticKnowledge
   id: GraspOfCosmos
@@ -529,7 +524,7 @@
   stage: 9
   path: Cosmos
   ritualPrototypes:
-  - AscensionCosmos
+  - RitualAscensionCosmos
 
 - type: hereticKnowledge
   id: CreatorsGift
@@ -553,7 +548,7 @@
   id: RitualOfKnowledge
   sideKnowledge: true
   ritualPrototypes:
-  - RitualOfKnowledge
+  - RitualKnowledge
 
 ## stage 3
 - type: hereticKnowledge
@@ -561,35 +556,35 @@
   sideKnowledge: true
   stage: 3
   ritualPrototypes:
-  - ArmorerRitual
+  - RitualArmorer
 
 - type: hereticKnowledge
   id: AshenEyesRitual
   sideKnowledge: true
   stage: 3
   ritualPrototypes:
-  - AshenEyesRitual
+  - RitualAshenEyes
 
 - type: hereticKnowledge
   id: PriestRitual
   sideKnowledge: true
   stage: 3
   ritualPrototypes:
-  - PriestRitual
+  - RitualPriest
 
 - type: hereticKnowledge
   id: VoidCloak
   sideKnowledge: true
   stage: 3
   ritualPrototypes:
-  - VoidCloak
+  - RitualVoidCloak
 
 - type: hereticKnowledge
   id: ScorchingShark
   sideKnowledge: true
   stage: 3
   ritualPrototypes:
-  - ScorchingShark
+  - RitualScorchingShark
 
 ## stage 6
 - type: hereticKnowledge
@@ -597,14 +592,14 @@
   sideKnowledge: true
   stage: 6
   ritualPrototypes:
-  - RustedRitual
+  - RitualRusted
 
 - type: hereticKnowledge
   id: CarvingKnife
   sideKnowledge: true
   stage: 6
   ritualPrototypes:
-  - CarvingKnife
+  - RitualCarvingKnife
 
 - type: hereticKnowledge
   id: MysteriesOfCreation

@@ -1,0 +1,18 @@
+- type: entity
+  abstract: true
+  parent: StorePresetUplink
+  id: BasePenUplink
+  components:
+  - type: UserInterface
+    interfaces:
+      enum.PenSpinUiKey.Key:
+        type: PenSpinBoundUserInterface
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.PenSpinUiKey.Key
+    inHandsOnly: true
+    requireActiveHand: false
+    singleUser: false
+    verbOnly: true
+  - type: PenSpin

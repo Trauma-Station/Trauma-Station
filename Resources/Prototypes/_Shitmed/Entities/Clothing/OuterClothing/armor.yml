@@ -90,7 +90,7 @@
               Radiation: 0.1
               Caustic: 0.4
         - type: StaminaResistance
-          damageCoefficient: 0.1
+          damageCoefficient: 0.5
         - type: ExplosionResistance
           damageCoefficient: 0.5
         - type: Clothing

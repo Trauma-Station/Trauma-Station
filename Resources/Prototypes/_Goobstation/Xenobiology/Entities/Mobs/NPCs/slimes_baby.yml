@@ -14,8 +14,7 @@
   - type: TimedDespawn
     lifetime: 3
   - type: SpawnOnDespawn
-    prototypes:
-    - MobSlimeXenobioBabyGrey
+    prototype: MobSlimeXenobioBabyGrey
 
 - type: entity
   parent: MobSlimeXenobioBabyPending

@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Goobstation.Common.Traitor;
+using Content.Shared.PDA.Ringer;
+// </Trauma>
 using Content.Server.Antag;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Mind;
@@ -7,7 +11,6 @@ using Content.Server.Traitor.Uplink;
 using Content.Shared.Mind;
 using Content.Shared.NPC.Systems;
 using Content.Shared.PDA;
-using Content.Shared.PDA.Ringer;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
@@ -27,6 +30,9 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
 {
     private static readonly Color TraitorCodewordColor = Color.FromHex("#cc3b3b");
 
+    // <Trauma>
+    [Dependency] private readonly GoobCommonUplinkSystem _goobUplink = default!;
+    // </Trauma>
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
@@ -66,6 +72,8 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         var issuer = _random.Pick(_prototypeManager.Index(component.ObjectiveIssuers));
 
         Note[]? code = null;
+        // <Goob> - shitcode to support pen spin codes
+        int[]? spinCode = null;
 
         if (component.GiveUplink)
         {
@@ -73,18 +81,39 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             var startingBalance = component.StartingBalance;
             if (_jobs.MindTryGetJob(mindId, out var prototype))
                 startingBalance = Math.Max(startingBalance - prototype.AntagAdvantage, 0);
+
+            var uplinkPreference = _goobUplink.GetUplinkPreference(mindId);
+
             // creadth: we need to create uplink for the antag.
-            // PDA should be in place already
-            var pda = _uplink.FindUplinkTarget(traitor);
-            if (pda == null || !_uplink.AddUplink(traitor, startingBalance))
+            EntityUid? uplinkTarget = uplinkPreference switch
+            {
+                UplinkPreference.Pda => _uplink.FindPdaUplinkTarget(traitor),
+                UplinkPreference.Pen => _goobUplink.FindPenUplinkTarget(traitor),
+                _ => null // Implant doesn't need a target entity
+            };
+
+            if (!_uplink.AddUplink(traitor, startingBalance, uplinkPreference))
                 return false;
 
-            // Give traitors their codewords and uplink code to keep in their character info menu
-            EnsureComp<RingerUplinkComponent>(pda.Value);
-            var ev = new GenerateUplinkCodeEvent();
-            RaiseLocalEvent(pda.Value, ref ev);
-            code = Comp<RingerUplinkComponent>(pda.Value).Code;
+            if (uplinkTarget != null)
+            {
+                switch (uplinkPreference)
+                {
+                    case UplinkPreference.Pda:
+                        EnsureComp<RingerUplinkComponent>(uplinkTarget.Value);
+                        var ringerEv = new GenerateUplinkCodeEvent();
+                        RaiseLocalEvent(uplinkTarget.Value, ref ringerEv);
+                        code = Comp<RingerUplinkComponent>(uplinkTarget.Value).Code;
+                        break;
+                    case UplinkPreference.Pen:
+                        var spinEv = new GeneratePenSpinCodeEvent();
+                        RaiseLocalEvent(uplinkTarget.Value, ref spinEv);
+                        spinCode = spinEv.Code;
+                        break;
+                }
+            }
         }
+        // </Goob>
 
         string[]? codewords = null;
         if (component.GiveCodewords)
@@ -97,7 +126,8 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
 
         if (component.GiveBriefing)
         {
-            _antag.SendBriefing(traitor, GenerateBriefing(codewords, code, issuer), null, component.GreetSoundNotification);
+            // Goob - add spinCode
+            _antag.SendBriefing(traitor, GenerateBriefing(codewords, code, spinCode, issuer), null, component.GreetSoundNotification);
             Log.Debug($"MakeTraitor {ToPrettyString(traitor)} - Sent the Briefing");
         }
 
@@ -113,7 +143,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             Log.Debug($"MakeTraitor {ToPrettyString(traitor)} - Add traitor briefing components");
             EnsureComp<RoleBriefingComponent>(traitorRole.Value.Owner, out var briefingComp);
             // Goobstation Change - If you remove this, we lose ringtones and flavor in char menu. Upstream's version sucks.
-            briefingComp.Briefing = GenerateBriefingCharacter(codewords, code, issuer);
+            briefingComp.Briefing = GenerateBriefingCharacter(codewords, code, spinCode, issuer);
         }
         else
         {
@@ -141,7 +171,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     }
 
     // TODO: figure out how to handle this? add priority to briefing event?
-    private string GenerateBriefing(string[]? codewords, Note[]? uplinkCode, string objectiveIssuer)
+    private string GenerateBriefing(string[]? codewords, Note[]? uplinkCode, int[]? penSpinCode, string objectiveIssuer)
     {
         var sb = new StringBuilder();
         sb.AppendLine(Loc.GetString("traitor-role-greeting", ("corporation", objectiveIssuer ?? Loc.GetString("objective-issuer-unknown"))));
@@ -149,6 +179,10 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             sb.AppendLine(Loc.GetString("traitor-role-codewords", ("codewords", string.Join(", ", codewords))));
         if (uplinkCode != null)
             sb.AppendLine(Loc.GetString("traitor-role-uplink-code", ("code", string.Join("-", uplinkCode).Replace("sharp", "#"))));
+        // <Goob>
+        else if (penSpinCode != null)
+            sb.AppendLine(Loc.GetString("traitor-role-uplink-pen-code", ("code", string.Join("-", penSpinCode))));
+        // </Goob>
         else
             sb.AppendLine(Loc.GetString("traitor-role-uplink-implant"));
 
@@ -157,13 +191,15 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     }
 
     // Goobstation Change - Readd the character briefing text.
-    private string GenerateBriefingCharacter(string[]? codewords, Note[]? uplinkCode, string objectiveIssuer)
+    private string GenerateBriefingCharacter(string[]? codewords, Note[]? uplinkCode, int[]? penSpinCode, string objectiveIssuer)
     {
         var sb = new StringBuilder();
         sb.AppendLine("\n" + Loc.GetString($"traitor-{objectiveIssuer.Replace(" ", "").ToLower()}-intro"));
 
         if (uplinkCode != null)
             sb.AppendLine(Loc.GetString($"traitor-role-uplink-code-short", ("code", string.Join("-", uplinkCode).Replace("sharp", "#"))));
+        else if (penSpinCode != null)
+            sb.AppendLine(Loc.GetString($"traitor-role-uplink-pen-code-short", ("code", string.Join("-", penSpinCode))));
         else sb.AppendLine("\n" + Loc.GetString($"traitor-role-nouplink"));
 
         if (codewords != null)

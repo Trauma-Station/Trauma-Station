@@ -19,6 +19,12 @@ public struct ExtinguishEvent : IInventoryRelayEvent
     /// </summary>
     public float FireStacksAdjustment;
 
+    /// <summary>
+    /// Trauma - true if extinguished by holy source, e.g. holy water.
+    /// Used to prevent holy fire being extinguished.
+    /// </summary>
+    public bool Holy;
+
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
 

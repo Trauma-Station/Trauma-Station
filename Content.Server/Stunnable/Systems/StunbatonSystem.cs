@@ -33,14 +33,8 @@ namespace Content.Server.Stunnable.Systems
 
         private void OnStaminaHitAttempt(Entity<StunbatonComponent> entity, ref StaminaDamageOnHitAttemptEvent args)
         {
-            // <Goob> - different energy use for light attacks
-            var energy = entity.Comp.EnergyPerUse;
-            if (args.LightAttack)
-                energy *= entity.Comp.LightAttackEnergyMultiplier;
-
             if (!_itemToggle.IsActivated(entity.Owner) ||
-            !TryComp<BatteryComponent>(entity.Owner, out var battery) || !_battery.TryUseCharge((entity.Owner, battery), energy))
-            // </Goob>
+            !TryComp<BatteryComponent>(entity.Owner, out var battery) || !_battery.TryUseCharge((entity.Owner, battery), entity.Comp.EnergyPerUse))
             {
                 args.Cancelled = true;
             }

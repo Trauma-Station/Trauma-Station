@@ -222,7 +222,11 @@ public sealed partial class StoreSystem
             var mind = CompOrNull<MindComponent>(mindId);
 
             if (mind != null || _mind.TryGetMind(buyer, out mindId, out mind))
-                _heretic.TryAddKnowledge(mindId, listing.ProductHereticKnowledge.Value, mind.CurrentEntity);
+            {
+                _heretic.TryAddKnowledge((mindId, mind, null),
+                    listing.ProductHereticKnowledge.Value,
+                    mind.CurrentEntity);
+            }
         }
 
         //spawn entity

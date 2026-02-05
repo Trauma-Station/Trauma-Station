@@ -118,7 +118,7 @@
   - type: Projectile
     damage:
       types:
-        Heat: 5
+        Heat: 10
   - type: Trail
     color: "#FF0033DD"
     scale: 0.08
@@ -149,7 +149,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SpellCard
-    rotateTime: 0.2
+    updateTime: 0.2
     flippedTrailColor: "#AA00FFDD"
   - type: HomingProjectile
     homingTime: 0.2

@@ -312,7 +312,8 @@ public abstract class SharedAutodocSystem : EntitySystem
         if (_surgery.GetSingleton(surgery) is not {} singleton)
             throw new AutodocError("reality-breaking");
 
-        if (_surgery.GetNextStep(patient, part, singleton, ent) is not {} pair)
+        var comp = Comp<ActiveAutodocComponent>(ent);
+        if (comp.Final || _surgery.GetNextStep(patient, part, singleton, ent) is not {} pair)
             return false;
 
         var nextSurgery = pair.Item1;
@@ -335,9 +336,10 @@ public abstract class SharedAutodocSystem : EntitySystem
                 throw new AutodocError($"step-invalid-{error}"); // no trying again just fail
         }
 
-        var comp = Comp<ActiveAutodocComponent>(ent);
         comp.CurrentSurgery = (patient, part, surgery);
         comp.Waiting = true; // don't go onto next step until doafter finishes
+        // track final step so it can not go back to the start e.g. for limb removal
+        comp.Final = surgeryId == surgery && index == Comp<SurgeryComponent>(singleton).Steps.Count - 1;
         return true;
     }
 

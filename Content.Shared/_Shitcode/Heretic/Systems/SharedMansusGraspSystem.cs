@@ -8,6 +8,7 @@ using Content.Server.Heretic.Components.PathSpecific;
 using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared._Goobstation.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared._White.BackStab;
 using Content.Shared.Damage;
@@ -59,7 +60,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
     [Dependency] private readonly NpcFactionSystem _faction = default!;
 
-    public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
+    public static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
     public static readonly ProtoId<DamageTypePrototype> Slash = "Slash";
 
     public static readonly ProtoId<TagPrototype> Bot = "Bot";
@@ -223,7 +224,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                           _tag.HasTag(target, Bot))) // Check for ingorganic target
                 {
                     _damage.ChangeDamage((target, damageable),
-                        new DamageSpecifier(_proto.Index(Blunt), 500),
+                        new DamageSpecifier(_proto.Index(Brute), 500),
                         ignoreResistances: true,
                         origin: performer,
                         targetPart: TargetBodyPart.Chest);
@@ -235,7 +236,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
             case "Cosmos":
             {
                 if (_starMark.TryApplyStarMark(target))
-                    _starMark.SpawnCosmicField(Transform(performer).Coordinates, heretic.PathStage);
+                    _starMark.SpawnCosmicField(Transform(performer).Coordinates, heretic.PathStage, predicted: false);
                 break;
             }
             default:

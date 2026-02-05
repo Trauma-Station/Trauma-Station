@@ -104,7 +104,7 @@
         Heat: 0.90
         Caustic: 0.90
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown
     cancel: true
 

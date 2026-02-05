@@ -150,7 +150,11 @@
   - type: ThrowingAngle
     angle: 225
   - type: ThrowableBlocked # Goobstation
-  - type: AttachmentBayonet # Lavaland Change
+  - type: GunUpgrade # Lavaland Change
+    name: gun-upgrade-bayonet-name
+    examineTextType: gun-upgrade-examine-type-can-use
+    insertedTextType: gun-upgrade-inserted-examine-type-attached
+  - type: GunUpgradeBayonet # Lavaland Change
   - type: Fixtures
     fixtures:
       fix1:
@@ -430,7 +434,7 @@
     removalTime: 1.5
   - type: LandAtCursor
   - type: DamageOtherOnHit
-    ignoreResistances: true
+    increaseOnly: true # Trauma - apply modifiers, but ignore decreases
     damage:
       types:
         Slash: 10

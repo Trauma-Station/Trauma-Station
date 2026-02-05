@@ -23,3 +23,24 @@
       slot: hypoport
     - !type:InsertNewOrgan
       organ: HypoportSecureNukie
+
+# Give all crew a hypoport unless they opt out.
+- type: playerEffects
+  id: InstallHypoports
+  conditions:
+  - !type:WhitelistCondition
+    whitelist:
+      components:
+      - HumanoidAppearance # no corgis or whatever the fuck
+    blacklist:
+      components:
+      - NoHypoport # to let people opt out for schizo characters via trait
+      - Silicon
+      - BorgChassis
+    guidebookText: entity-condition-guidebook-hypoport-target
+  effects:
+  - !type:NestedEffect
+    proto: InstallHypoport
+  - !type:RemoveComponents
+    components:
+    - type: NoHypoport # leave no trace

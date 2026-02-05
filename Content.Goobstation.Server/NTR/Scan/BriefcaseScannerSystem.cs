@@ -7,7 +7,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.NTR.Scan;
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.NTR.Scan;
 using Content.Server.Chat.Systems;

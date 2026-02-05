@@ -1,6 +1,6 @@
 - type: entity
   name: pen
-  parent: BaseItem
+  parent: [BaseItem, BasePenUplink] # Goob - pen uplinks
   id: Pen
   description: A dark ink pen.
   components:

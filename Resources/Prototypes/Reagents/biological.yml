@@ -14,6 +14,12 @@
   recognizable: true
   standsout: true
   physicalDesc: reagent-physical-desc-ferrous
+  reactiveEffects: # Trauma - blood can extinguish fires, worse than water though
+    Extinguish:
+      methods: [ Touch ]
+      effects:
+      - !type:Extinguish
+        fireStacksAdjustment: -0.5 # 1/3 as good as water, maybe it makes sense
   metabolisms:
     Drink:
       effects:
@@ -154,18 +160,10 @@
     Poison:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Poison: 4
       - !type:Vomit
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         probability: 0.25
 
 - type: reagent

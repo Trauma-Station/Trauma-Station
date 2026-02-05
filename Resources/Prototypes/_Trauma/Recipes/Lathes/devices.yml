@@ -118,3 +118,11 @@
     Steel: 300
     Plastic: 200
     Gold: 100
+
+- type: latheRecipe
+  id: DeepFryerCircuitboard
+  result: DeepFryerCircuitboard
+  completetime: 3
+  materials:
+    Steel: 300
+    Plastic: 200

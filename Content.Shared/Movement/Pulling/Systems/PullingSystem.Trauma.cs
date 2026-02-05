@@ -203,7 +203,7 @@ public sealed partial class PullingSystem
         var now = _timing.CurTime;
         var attackRateEv = new GetMeleeAttackRateEvent(puller, meleeWeapon.AttackRate, 1, puller);
         RaiseLocalEvent(puller, ref attackRateEv);
-        meleeWeapon.NextAttack = now + puller.Comp.StageChangeCooldown * attackRateEv.Multipliers;
+        meleeWeapon.NextAttack = now + puller.Comp.StageChangeCooldown / attackRateEv.Multipliers;
         DirtyField(puller, meleeWeapon, nameof(MeleeWeaponComponent.NextAttack));
 
         var beforeEvent = new BeforeHarmfulActionEvent(puller, HarmfulActionType.Grab);

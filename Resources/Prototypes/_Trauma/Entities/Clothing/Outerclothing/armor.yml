@@ -34,7 +34,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 - type: entity
   parent: [ ClothingOuterStorageBase, AllowSuitStorageClothing, BaseRevMajorContraband ]
@@ -67,7 +67,7 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: Construction
     graph: RevVest
     deconstructionTarget: null

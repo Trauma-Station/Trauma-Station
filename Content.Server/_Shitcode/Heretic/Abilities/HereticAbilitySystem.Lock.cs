@@ -9,10 +9,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.GameTicking.Rules;
 using Content.Server.Heretic.EntitySystems;
-using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared.Actions.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Components;

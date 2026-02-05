@@ -1,0 +1,17 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<controls:FancyWindow xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Title="{Loc 'disease-dna-sampler-window-title'}"
+        SetSize="600 300">
+    <BoxContainer Orientation="Horizontal">
+        <BoxContainer Orientation="Vertical">
+            <Label Name="DiseaseLabel" Text="{Loc 'disease-dna-sampler-no-disease'}" Margin="4"/>
+            <Button Name="CreateInjector" Text="{Loc 'disease-dna-sampler-create-injector'}" Margin="4" Disabled="True"/>
+        </BoxContainer>
+        <ScrollContainer HorizontalExpand="True">
+            <PanelContainer HorizontalExpand="True">
+                <Label Name="TargetsLabel" Text="{Loc 'disease-dna-sampler-no-dna'}" Margin="8"/>
+            </PanelContainer>
+        </ScrollContainer>
+    </BoxContainer>
+</controls:FancyWindow>

@@ -13,6 +13,7 @@ using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Heretic.EntitySystems;
+using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -110,7 +111,7 @@ public sealed class WeakToHolySystem : EntitySystem
             return;
         }
 
-        if (_heretic.TryGetHereticComponent(uid, out var heretic, out _) && heretic.Ascended)
+        if (_heretic.TryGetHereticComponent(uid.Owner, out var heretic, out _) && heretic.Ascended)
         {
             args.ShouldTakeHoly = true;
             return;

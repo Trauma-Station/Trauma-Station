@@ -74,6 +74,10 @@ MachineFTLDriveAutomated: null
 MachineFTLDriveDebug: null
 MachineFTLDriveCircuitboard: null
 MachineFTLDriveHighCircuitboard: null
+
+# 2026-01-29 migrate away water vapor tanks because some chud mapped it
+DoubleEmergencyWaterVaporTankFilled: DoubleEmergencyOxygenTankFilled
+LockerShaftMinerFilledHardsuit: LockerSalvageSpecialistFilledHardsuit
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

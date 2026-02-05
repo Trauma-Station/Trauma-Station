@@ -47,7 +47,7 @@ public sealed class HolyFlammableSystem : EntitySystem
         SubscribeLocalEvent<HolyFlammableComponent, StartCollideEvent>(OnCollide);
         SubscribeLocalEvent<HolyFlammableComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<HolyFlammableComponent, ResistHolyFireAlertEvent>(OnResistFireAlert);
-        Subs.SubscribeWithRelay<HolyFlammableComponent, HolyExtinguishEvent>(OnExtinguishEvent);
+        Subs.SubscribeWithRelay<HolyFlammableComponent, ExtinguishEvent>(OnExtinguishEvent);
         Subs.SubscribeWithRelay<WeakToHolyComponent, HolyIgniteEvent>(OnHolyIgniteEvent);
 
         SubscribeLocalEvent<HolyIgniteOnCollideComponent, StartCollideEvent>(HolyIgniteOnCollide);
@@ -55,8 +55,12 @@ public sealed class HolyFlammableSystem : EntitySystem
         SubscribeLocalEvent<IgniteOnHolyDamageComponent, DamageChangedEvent>(OnDamageChanged);
     }
 
-    private void OnExtinguishEvent(Entity<HolyFlammableComponent> ent, ref HolyExtinguishEvent args)
+    private void OnExtinguishEvent(Entity<HolyFlammableComponent> ent, ref ExtinguishEvent args)
     {
+        // holy water will ignite, don't troll it
+        if (args.Holy)
+            return;
+
         // You know I'm really not sure if having AdjustFireStacks *after* Extinguish,
         // but I'm just moving this code, not questioning it.
         HolyExtinguish(ent, ent.Comp);
@@ -308,14 +312,17 @@ public sealed class HolyFlammableSystem : EntitySystem
             _ => InitialGrowthRate * 4 + IntermediateGrowthRate * (40 - 4) + LateGrowthRate + (x - 40),
         };
     }
+
     public override void Update(float frameTime)
     {
+        base.Update(frameTime);
+
         var query = EntityQueryEnumerator<OnHolyFireComponent>();
-        while (query.MoveNext(out var uid, out _))
+        while (query.MoveNext(out var uid, out var comp))
         {
             if (!TryComp(uid, out HolyFlammableComponent? flammable))
             {
-                RemCompDeferred<OnHolyFireComponent>(uid);
+                RemCompDeferred(uid, comp);
                 continue;
             }
 
@@ -353,7 +360,7 @@ public sealed class HolyFlammableSystem : EntitySystem
             if (flammable.FireStacks > 0)
             {
                 _damageable.TryChangeDamage(uid, flammable.Damage * DamageCurve(flammable), interruptsDoAfters: false, partMultiplier: 2f);
-                AdjustFireStacks(uid, (flammable.FireStacks - 5f) / (50f - 5f) + flammable.FirestackFade * (flammable.Resisting ? 20f : 0f), flammable, flammable.OnFire);
+                AdjustFireStacks(uid, flammable.FirestackFade * (flammable.Resisting ? 20f : 1f), flammable, flammable.OnFire);
             }
             else
             {

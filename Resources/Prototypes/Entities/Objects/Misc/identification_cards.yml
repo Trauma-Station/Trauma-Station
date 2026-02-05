@@ -621,10 +621,15 @@
     tags: [] # ignore "WhitelistChameleon" tag
 
 - type: entity
-  parent: [PassengerIDCard, BaseChameleon]
+  parent: [IDCardStandard, BaseChameleon] # Trauma - don't parent passenger id
   id: AgentIDCard
+  name: assistant ID card # Trauma - i hate this
   suffix: Agent
   components:
+  - type: Sprite # Trauma - i hate this
+    layers:
+    - state: default
+    - state: idpassenger
   - type: Access
     tags:
     - Maintenance
@@ -946,14 +951,16 @@
     - AllAccess
     - Silicon
     tags:
+    # <Trauma>
+    - BlueshieldOfficer
+    - NanotrasenRepresentative
+    - Revolutionary
+    # </Trauma>
     - CentralCommand
     - NuclearOperative
     - SyndicateAgent
     - Wizard
     - Xenoborg
-    # Goobstation
-    - NanotrasenRepresentative
-    - BlueshieldOfficer
   - type: NanoChatCard # DeltaV
     notificationsMuted: true
     listNumber: false
