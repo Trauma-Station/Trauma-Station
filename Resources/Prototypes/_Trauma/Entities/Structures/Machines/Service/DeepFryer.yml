@@ -70,6 +70,8 @@
     castShadows: false
     radius: 2
     energy: 10
+  - type: Transform
+    noRot: false
   - type: EntityStorage
     openOnMove: false
     isCollidableWhenOpen: true
