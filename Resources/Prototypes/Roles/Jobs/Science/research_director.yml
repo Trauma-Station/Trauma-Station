@@ -162,6 +162,7 @@
   - ResearchDirector
   - Brig
   - Cryogenics
+  - Robotics
   - External # Goobstation
   special:
   - !type:AddImplantSpecial
