@@ -140,6 +140,7 @@ public abstract class SharedDeepFryerSystem : EntitySystem
         if (!HasComp<BodyComponent>(item))
         {
             EntityManager.AddComponents(item, ent.Comp.ComponentsToAddObjects, false);
+            EntityManager.RemoveComponents(item, ent.Comp.ComponentsToRemoveObjects);
         }
 
         EnsureComp<MetaDataComponent>(item, out var meta);

@@ -51,6 +51,12 @@ public sealed partial class DeepFryerComponent : Component
     [DataField]
     public ComponentRegistry ComponentsToAddObjects = new();
 
+    /// <summary>
+    /// which components get removed to any non-sentient objects (doesn't have a mind container)
+    /// </summary>
+    [DataField]
+    public ComponentRegistry ComponentsToRemoveObjects = new();
+
     [DataField]
     public SoundPathSpecifier StartSound = new("/Audio/_Trauma/Machines/DeepFryer/deep_fryer_initial.ogg");
 
