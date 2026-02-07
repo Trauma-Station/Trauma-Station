@@ -24,7 +24,6 @@
     # Goob edit start
     canTargetSelf: false
     whitelist:
-      requireAll: false
       components:
       - Body
       - MobState
