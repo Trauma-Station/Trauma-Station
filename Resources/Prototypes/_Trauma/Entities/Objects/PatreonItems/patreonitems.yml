@@ -1,7 +1,7 @@
 - type: entity
   parent: BasePlushie
   id: PatreonTia
-  name: tia plushie
+  name: lenore plushie
   description: It is made out of human.
   components:
   - type: Sprite
@@ -23,7 +23,51 @@
     sprite: _Trauma/Objects/Patreon/tenshi.rsi
     state: icon
   - type: Clothing
-    quickEquip: false
+    quickEquip: true
     sprite: _Trauma/Objects/Patreon/tenshi.rsi
     slots:
     - HEAD
+
+- type: entity
+  parent: ClothingNeckBase
+  id: PatreonTurboTracker
+  name: clown vomit cloak
+  description: The red spots are human blood.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/turbo.rsi
+  - type: Clothing
+    quickEquip: true
+    sprite: _Trauma/Objects/Patreon/turbo.rsi
+    slots:
+    - NECK
+
+- type: entity
+  parent: [BasePlushie,BaseMajorContraband]
+  id: PatreonWeax
+  name: armok's decapitated skull
+  description: It is of the lowest quality.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/weax.rsi
+    state: icon
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+  - type: Edible
+    requiresSpecialDigestion: true
+    useSound:
+      path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+  - type: MeleeWeapon
+    wideAnimationRotation: 180
+    soundHit:
+      path: /Audio/Voice/Skeleton/skeleton_scream.ogg
