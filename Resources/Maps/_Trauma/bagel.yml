@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 271.1.0
+  engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 01/25/2026 01:19:23
+  time: 02/07/2026 14:50:32
   entityCount: 25307
 maps:
 - 1
@@ -109698,6 +109698,13 @@ entities:
     - type: Transform
       pos: 5.43841,-38.31682
       parent: 2
+- proto: KitchenDeepFryer
+  entities:
+  - uid: 16736
+    components:
+    - type: Transform
+      pos: 25.5,-35.5
+      parent: 2
 - proto: KitchenElectricGrill
   entities:
   - uid: 16538
@@ -134369,11 +134376,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 26.5,-30.5
-      parent: 2
-  - uid: 20482
-    components:
-    - type: Transform
-      pos: 25.5,-35.5
       parent: 2
   - uid: 20483
     components:

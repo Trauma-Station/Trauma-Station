@@ -15,6 +15,8 @@
     - state: deep_fryer_closed_big
       visible: false
       map: ["fryer_closed_big"]
+  - type: Transform
+    noRot: false
   # Deep fryer stuff
   - type: DeepFryer
     componentsToAdd:
