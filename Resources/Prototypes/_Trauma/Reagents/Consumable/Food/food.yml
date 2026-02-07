@@ -56,6 +56,6 @@
             Poison: 0.15
       - !type:PopupMessage
         type: Local
-        messages: [ "reagent-popup-deep-fried-oils" ]
+        messages: [ "reagent-popup-full-fat-oils" ]
         probability: 0.01
   pricePerUnit: 0.1
