@@ -436,7 +436,7 @@
   description: spellbook-bind-soul-desc
   productAction: ActionBindSoul
   cost:
-    WizCoin: 4
+    WizCoin: 2
   categories:
   - SpellbookDefensive
   conditions:
@@ -667,7 +667,7 @@
   description: spellbook-echo-katana-desc
   productEntity: EchoKatana
   cost:
-    WizCoin: 1
+    WizCoin: 2
   categories:
   - SpellbookEquipment
 
