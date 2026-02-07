@@ -101,12 +101,10 @@ public abstract class SharedTemperatureSystem : EntitySystem
     /// Band-aid for unpredicted atmos. Delays the application for a short period so that laggy clients can get the replicated temperature.
     /// </summary>
     private static readonly TimeSpan SlowdownApplicationDelay = TimeSpan.FromSeconds(1f);
-    private EntityQuery<TemperatureImmunityComponent> _immuneQuery; // DeltaV
 
     public override void Initialize()
     {
         base.Initialize();
-        _immuneQuery = GetEntityQuery<TemperatureImmunityComponent>(); // DeltaV
 
         SubscribeLocalEvent<TemperatureSpeedComponent, OnTemperatureChangeEvent>(OnTemperatureChanged);
         SubscribeLocalEvent<TemperatureSpeedComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeedModifiers);
@@ -116,17 +114,6 @@ public abstract class SharedTemperatureSystem : EntitySystem
 
     private void OnTemperatureChanged(Entity<TemperatureSpeedComponent> ent, ref OnTemperatureChangeEvent args)
     {
-        // Begin DeltaV Additions - no slowdown for temp immune cultists
-        if (_immuneQuery.HasComp(ent))
-        {
-            if (ent.Comp.CurrentSpeedModifier != 1f)
-            {
-                ent.Comp.CurrentSpeedModifier = 1f;
-                Dirty(ent);
-            }
-            return;
-        }
-        // End DeltaV Additions
         foreach (var (threshold, modifier) in ent.Comp.Thresholds)
         {
             if (args.CurrentTemperature < threshold && args.LastTemperature > threshold ||
