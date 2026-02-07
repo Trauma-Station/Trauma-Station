@@ -10,7 +10,7 @@ namespace Content.Shared._DV.CosmicCult.Components;
 /// <summary>
 /// Component for Cosmic Cult's entropic colossus.
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [AutoGenerateComponentPause]
 public sealed partial class CosmicColossusComponent : Component
 {
@@ -18,10 +18,13 @@ public sealed partial class CosmicColossusComponent : Component
     public TimeSpan AttackHoldTimer = default!;
 
     [AutoPausedField, DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    public TimeSpan HibernationTimer = default!;
+    public TimeSpan AttackAnimationTimer = default!;
 
     [AutoPausedField, DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan DeathTimer = default!;
+
+    [AutoPausedField, DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    public TimeSpan DissolveTimer = default!;
 
     [DataField] public SoundSpecifier ReawakenSfx = new SoundPathSpecifier("/Audio/_DV/CosmicCult/colossus_spawn.ogg");
 
@@ -31,13 +34,19 @@ public sealed partial class CosmicColossusComponent : Component
 
     [DataField] public SoundSpecifier DoAfterSfx = new SoundPathSpecifier("/Audio/Machines/airlock_creaking.ogg");
 
+    [DataField] public SoundSpecifier SunderSfx = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ability_sunder.ogg");
+
+    [DataField] public SoundSpecifier DissolveSfx = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ability_lapse.ogg");
+
     [DataField] public EntProtoId CultVfx = "CosmicGenericVFX";
 
     [DataField] public EntProtoId CultBigVfx = "CosmicGlareAbilityVFX";
 
     [DataField] public EntProtoId Attack1Vfx = "CosmicColossusAttack1Vfx";
 
-    [DataField] public EntProtoId TileDetonations = "MobTileDamageZone";
+    [DataField] public EntProtoId SunderVfx = "CosmicSunderAbilityVFX";
+
+    [DataField] public EntProtoId DissolveVfx = "CosmicLapseAbilityVFX";
 
     [DataField] public EntProtoId EffigyPrototype = "CosmicEffigy";
 
@@ -45,35 +54,49 @@ public sealed partial class CosmicColossusComponent : Component
 
     [DataField] public EntProtoId EffigyPlaceAction = "ActionCosmicColossusEffigy";
 
+    [DataField] public EntProtoId Mindsink = "CosmicCultMindSink";
+
     [DataField] public EntityUid? EffigyPlaceActionEntity;
+
+    [DataField] public float SunderRange = 2.5f;
+
+    [DataField] public float SunderThrowDistance = 3f;
+
+    [DataField] public TimeSpan SunderStun = TimeSpan.FromSeconds(2);
 
     [DataField] public TimeSpan IngressDoAfter = TimeSpan.FromSeconds(4);
 
     [DataField] public TimeSpan AttackWait = TimeSpan.FromSeconds(1.5);
 
+    [DataField] public TimeSpan AttackAnimation = TimeSpan.FromSeconds(0.45);
+
     [DataField] public TimeSpan HibernationWait = TimeSpan.FromSeconds(20);
 
     [DataField] public TimeSpan DeathWait = TimeSpan.FromMinutes(15);
 
-    [DataField] public bool Attacking;
+    [DataField] public TimeSpan DissolveWait = TimeSpan.FromSeconds(10);
 
-    [DataField] public bool Hibernating;
+    [DataField, AutoNetworkedField] public bool Attacking;
+
+    [DataField, AutoNetworkedField] public bool AttackCharge;
+
+    [DataField, AutoNetworkedField] public bool Hibernating;
 
     [DataField] public bool Timed;
 
     /// <summary>
-    /// If the colossus was creted during a round, the borg goes into this container.
+    /// If the colossus was creted by a chantry, the borg goes into this container.
     /// Midround colossi are so ancient the original borg has long decayed into dust or something.
     /// Does that make the colossus a gundam?
     /// </summary>
     [ViewVariables]
-    public Container Container = default!;
+    public ContainerSlot Container = default!;
 
     [ViewVariables]
     public string ContainerId = "container";
 
     [ViewVariables]
-    public EntityUid? ImprisonedEntity;
+    public EntityUid? ImprisonedEntity => Container?.ContainedEntity;
 }
 
 [Serializable, NetSerializable]

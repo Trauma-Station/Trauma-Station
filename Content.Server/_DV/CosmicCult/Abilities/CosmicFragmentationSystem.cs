@@ -1,4 +1,3 @@
-using Content.Server._DV.Objectives.Events;
 using Content.Server.Actions;
 using Content.Server.Antag;
 using Content.Server.Popups;
@@ -23,6 +22,7 @@ public sealed class CosmicFragmentationSystem : EntitySystem
 {
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly CosmicCultSystem _cult = default!;
+    [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -43,20 +43,6 @@ public sealed class CosmicFragmentationSystem : EntitySystem
         SubscribeLocalEvent<CosmicCultComponent, EventCosmicFragmentation>(OnCosmicFragmentation);
     }
 
-/* // Trauma: kill this shit
-    private void UnEmpower(Entity<CosmicCultComponent> ent)
-    {
-        var comp = ent.Comp;
-        comp.CosmicEmpowered = false; // empowerment spent! Now we set all the values back to their default.
-        comp.CosmicSiphonQuantity = CosmicCultComponent.DefaultCosmicSiphonQuantity;
-        comp.CosmicGlareRange = CosmicCultComponent.DefaultCosmicGlareRange;
-        comp.CosmicGlareDuration = CosmicCultComponent.DefaultCosmicGlareDuration;
-        comp.CosmicGlareStun = CosmicCultComponent.DefaultCosmicGlareStun;
-        comp.CosmicImpositionDuration = CosmicCultComponent.DefaultCosmicImpositionDuration;
-        comp.CosmicBlankDuration = CosmicCultComponent.DefaultCosmicBlankDuration;
-        comp.CosmicBlankDelay = CosmicCultComponent.DefaultCosmicBlankDelay;
-    }
-*/
     private void OnCosmicFragmentation(Entity<CosmicCultComponent> ent, ref EventCosmicFragmentation args)
     {
         if (args.Handled || HasComp<ActiveNPCComponent>(args.Target))
@@ -65,24 +51,34 @@ public sealed class CosmicFragmentationSystem : EntitySystem
             return;
         }
         
-        args.Handled = true;
         var evt = new MalignFragmentationEvent(ent, args.Target);
         RaiseLocalEvent(args.Target, ref evt);
+        if (evt.Canceled) return;
+
+        args.Handled = true;
         _cult.MalignEcho(ent);
-        //UnEmpower(ent); // Trauma: commented out
         _actions.RemoveAction(ent.Owner, ent.Comp.CosmicFragmentationActionEntity);
+        ent.Comp.CosmicFragmentationActionEntity = default!;
     }
 
-    // TODO: refactor ts.
     private void OnFragmentBorg(Entity<BorgChassisComponent> ent, ref MalignFragmentationEvent args)
     {
+        if (_cultRule.AssociatedGamerule(args.User) is { } cult && Exists(cult.Comp.ActiveChantry))
+        {
+            _popup.PopupEntity(Loc.GetString("cosmicability-chantry-active"), args.User, args.User);
+            args.Canceled = true;
+            return;
+        }
+
         var chantry = Spawn("CosmicBorgChantry", Transform(ent).Coordinates);
         EnsureComp<CosmicChantryComponent>(chantry, out var chantryComponent);
-        chantryComponent.Victim = ent;
-
+        chantryComponent.Container = _container.EnsureContainer<ContainerSlot>(chantry, chantryComponent.ContainerId);
+        _container.Insert(ent.Owner, chantryComponent.Container);
+        _cultRule.TransferCultAssociation(args.User, chantry);
+        if (chantryComponent.Victim is not { } victim) return;
         var mins = chantryComponent.EventTime.Minutes;
         var secs = chantryComponent.EventTime.Seconds;
-        _antag.SendBriefing(chantryComponent.Victim, Loc.GetString("cosmiccult-silicon-chantry-briefing", ("minutesandseconds", $"{mins} minutes and {secs} seconds")), Color.FromHex("#4cabb3"), null);
+        _antag.SendBriefing(victim, Loc.GetString("cosmiccult-silicon-chantry-briefing", ("minutesandseconds", $"{mins} minutes and {secs} seconds")), Color.FromHex("#4cabb3"), null);
     }
 
     private void OnFragmentAi(Entity<SiliconLawUpdaterComponent> ent, ref MalignFragmentationEvent args)
@@ -114,4 +110,4 @@ public sealed class CosmicFragmentationSystem : EntitySystem
 }
 
 [ByRefEvent]
-public record struct MalignFragmentationEvent(Entity<CosmicCultComponent> User, EntityUid Target);
+public record struct MalignFragmentationEvent(Entity<CosmicCultComponent> User, EntityUid Target, bool Canceled = false);

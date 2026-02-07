@@ -1,7 +1,7 @@
 using Content.Shared.Silicons.Laws;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._DV.Objectives.Events;
+namespace Content.Server._DV.CosmicCult;
 
 /// <summary>
 ///     This event gets called whenever an AIs laws are actually updated.

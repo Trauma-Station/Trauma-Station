@@ -87,6 +87,13 @@
     speechSounds: ColossusSpeech
     speechVerb: Robotic
     allowedEmotes: []
+  - type: LanguageKnowledge # TODO: coscult language
+    speaks:
+    - TauCetiBasic
+    - RobotTalk # It still has a borg inside
+    understands:
+    - TauCetiBasic
+    - RobotTalk
   - type: TypingIndicator
     proto: CosmicTyping
   - type: Grammar
@@ -115,7 +122,7 @@
     - Unimplantable
   - type: Damageable
     damageContainer: InorganicMetaphysical
-    damageModifierSet: Metallic
+    damageModifierSet: CosmicColossus
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -124,31 +131,20 @@
     allowedStates:
     - Alive
     - Dead
-  - type: PointLight
-    color: "#42a4ae"
-    radius: 4
-    energy: 4
-    castShadows: true
-  - type: LightBehaviour
-    behaviours:
-    - !type:FadeBehaviour
-      interpolate: Linear
-      minDuration: 4.5
-      maxDuration: 5.5
-      startValue: 2
-      endValue: 4
-      property: Energy
-      enabled: true
-      isLooped: true
-      reverseWhenFinished: true
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      groups: # This is split across damage types, so it's only about 30 damage per minute per type, which means more than 10 minutes to reach full HP (assuming one damage type)
+        Brute: -1.5
+        Burn: -2
   - type: Eye
     visMask:
       - Normal
       - CosmicCultMonument
   - type: StatusEffects
     allowed:
-    - Stutter
-    - Stun
+    - ForcedSleep
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:
@@ -182,11 +178,10 @@
     range: 2
     damage:
       types:
-        Blunt: 45
-        Asphyxiation: 5
-        Cold: 5
-        Ion: 5
-        Structural: 60
+        Blunt: 50
+        Cold: 2.5
+        Ion: 2.5
+        Structural: 80
     soundHit:
       path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
       params:
@@ -212,6 +207,10 @@
   - type: GuideHelp
     guides:
     - CosmicColossus
+  - type: NightVision
+    color: "#42a4ae"
+    activateSound: null
+    deactivateSound: null
 
 - type: entity
   parent: [ MobCosmicColossusBase ]
@@ -225,10 +224,6 @@
     - ColossusNames
     - ColossusTitlesLone
     nameFormat: name-format-colossus
-  - type: CosmicCorrupting
-    mobile: true
-    autoDisable: false
-    corruptionReduction: 0
 
 - type: entity
   parent: [ MobCosmicColossusBase ]

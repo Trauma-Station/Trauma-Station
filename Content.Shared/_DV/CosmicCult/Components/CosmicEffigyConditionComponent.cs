@@ -1,6 +1,6 @@
 using Content.Shared.Whitelist;
 
-namespace Content.Server.Objectives.Components;
+namespace Content.Shared._DV.CosmicCult.Components;
 
 [RegisterComponent]
 public sealed partial class CosmicEffigyConditionComponent : Component

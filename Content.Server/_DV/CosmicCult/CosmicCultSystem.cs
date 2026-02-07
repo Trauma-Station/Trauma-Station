@@ -90,7 +90,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         SubscribeLocalEvent<CosmicCultComponent, ComponentInit>(OnStartCultist);
         SubscribeLocalEvent<CosmicCultLeadComponent, ComponentInit>(OnStartCultLead);
         SubscribeLocalEvent<CosmicCultLeadComponent, ComponentShutdown>(OnCultLeadShutdown);
-        //SubscribeLocalEvent<CosmicCultLeadComponent, CosmicCultLeadChangedEvent>(OnCultLeadChanged); // Trauma: steward isn't real
+        SubscribeLocalEvent<CosmicCultLeadComponent, CosmicCultLeadChangedEvent>(OnCultLeadChanged);
         SubscribeLocalEvent<CosmicCultComponent, GetVisMaskEvent>(OnGetVisMask);
 
         SubscribeLocalEvent<CosmicEquipmentComponent, GotEquippedEvent>(OnGotCosmicItemEquipped);
@@ -107,8 +107,6 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         SubscribeLocalEvent<CosmicEmpoweredSpeedComponent, ComponentInit>(OnStartCosmicEmpowered);
         SubscribeLocalEvent<CosmicEmpoweredSpeedComponent, ComponentRemove>(OnEndCosmicEmpowered);
         SubscribeLocalEvent<CosmicEmpoweredSpeedComponent, RefreshMovementSpeedModifiersEvent>(OnCosmicEmpoweredMove);
-
-        SubscribeLocalEvent<CosmicCultExamineComponent, ExaminedEvent>(OnCosmicCultExamined);
 
         SubscribeLocalEvent<CosmicCultComponent, PolymorphedEvent>(OnCultistPolymorphed);
         SubscribeLocalEvent<SpeechOverrideComponent, GotEquippedEvent>(OnGotSpeechOverrideEquipped);
@@ -152,15 +150,13 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     private void OnStartCultist(Entity<CosmicCultComponent> uid, ref ComponentInit args)
     {
         _eye.RefreshVisibilityMask(uid.Owner);
-        //_alerts.ShowAlert(uid, uid.Comp.EntropyAlert); // Trauma: entropy alert isn't real
+        _alerts.ShowAlert(uid.Owner, uid.Comp.EntropyAlert);
         if (!HasComp<HumanoidAppearanceComponent>(uid)) return; // Non-humanoids don't get abilities
         foreach (var actionId in uid.Comp.CosmicCultActions)
         {
             var actionEnt = _actions.AddAction(uid, actionId);
             uid.Comp.ActionEntities.Add(actionEnt);
         }
-
-        //_alerts.ShowAlert(uid.Owner, uid.Comp.EntropyAlert); // Trauma: entropy alert isn't real
 
         if (TryComp(uid, out EyeComponent? eyeComp))
             _eye.SetVisibilityMask(uid, eyeComp.VisibilityMask | (int) VisibilityFlags.CosmicCultMonument);
@@ -174,7 +170,6 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         _actions.AddAction(uid, ref uid.Comp.CosmicMonumentPlaceActionEntity, uid.Comp.CosmicMonumentPlaceAction, uid);
     }
 
-/* // Trauma: kill this shit
     private void OnCultLeadChanged(Entity<CosmicCultLeadComponent> uid, ref CosmicCultLeadChangedEvent args)
     {
         if (_cultRule.AssociatedGamerule(uid) is not { } cult)
@@ -207,7 +202,6 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
 
         cult.Comp.CultLeader = uid;
     }
-*/
 
     private void OnGetVisMask(Entity<CosmicCultComponent> uid, ref GetVisMaskEvent args)
     {

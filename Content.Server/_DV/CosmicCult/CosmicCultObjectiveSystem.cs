@@ -1,5 +1,6 @@
 using Content.Server.Objectives.Components;
 using Content.Shared._DV.Roles;
+using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Roles;
 using Content.Shared.Warps;

@@ -58,7 +58,7 @@ public sealed class CosmicRiftSystem : EntitySystem
             return;
         }
 
-        if (cultist.CosmicEmpowered)
+        if (cultist.CosmicFragmentationActionEntity != default!)
         {
             _popup.PopupEntity(Loc.GetString("cosmiccult-rift-alreadyempowered"), args.User, args.User);
             return;

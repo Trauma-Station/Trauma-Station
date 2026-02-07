@@ -60,11 +60,12 @@ public sealed class CultifyBorgCommand : LocalizedEntityCommands
         var entityCoordinates = _entities.GetComponent<TransformComponent>(victim.Value).Coordinates;
         var chantry = _entities.SpawnEntity("CosmicBorgChantry", entityCoordinates);
         _entities.EnsureComponent<CosmicChantryComponent>(chantry, out var chantryComponent);
-        chantryComponent.Victim = victim.Value;
+        chantryComponent.Container = _containerSystem.EnsureContainer<ContainerSlot>(chantry, chantryComponent.ContainerId);
+        _containerSystem.Insert(victim.Value, chantryComponent.Container);
 
         var mins = chantryComponent.EventTime.Minutes;
         var secs = chantryComponent.EventTime.Seconds;
-        _antag.SendBriefing(chantryComponent.Victim, Loc.GetString("cosmiccult-silicon-chantry-briefing", ("minutesandseconds", $"{mins} minutes and {secs} seconds")), Color.FromHex("#4cabb3"), null);
+        _antag.SendBriefing(victim.Value, Loc.GetString("cosmiccult-silicon-chantry-briefing", ("minutesandseconds", $"{mins} minutes and {secs} seconds")), Color.FromHex("#4cabb3"), null);
     }
 
     private bool TryGetVictimFromUidOrUsername(

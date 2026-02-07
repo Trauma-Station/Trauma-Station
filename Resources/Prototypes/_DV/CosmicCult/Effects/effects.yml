@@ -388,3 +388,24 @@
       enabled: true
       isLooped: true
       reverseWhenFinished: true
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseCosmicVFX
+  id: CosmicSunderAbilityVFX
+  components:
+  - type: Transform
+    noRot: true
+  - type: TimedDespawn
+    lifetime: 0.6
+  - type: Sprite
+    drawdepth: 5
+    layers:
+    - sprite: _DV/CosmicCult/Effects/ability_sundervfx.rsi
+      state: vfx
+      shader: unshaded
+  - type: PointLight
+    color: "#42a4ae"
+    radius: 10
+    energy: 10
+    castShadows: true

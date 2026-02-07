@@ -10,6 +10,14 @@ ghost-role-information-colossus-name = Entropic Colossus
 ghost-role-information-colossus-description = Call upon an Effigy of Entropy to perpetuate your existence and accelerate the end of all things! You have 15 minutes to do so or your energies will be extinguished.
 ghost-role-information-colossus-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color] with any cosmic cultists that may be present.
 
+ghost-role-information-chantry-victim-name = Vacuous Chantry Prisoner
+ghost-role-information-chantry-victim-description = A cyborg trapped inside a Vacuous Chantry. If the ritual completes, you will transform into an Entropic Colossus.
+
+ghost-role-information-custodian-name = Malign Custodian
+ghost-role-information-lodestar-name = Malign Lodestar
+ghost-role-information-colossus-summon-description = Help the Colossus defend it's Effigy.
+
+
 terror-colossus = Attention crew, it appears that someone on your station has drawn the attention of an enormous malign anomaly.
 
 ghost-role-colossus-charactermenu = You must usher in the end of all things. Wreak untold havoc upon all before you.
@@ -19,7 +27,7 @@ ghost-role-colossus-briefing =
     Your objectives are listed in the character menu.
     Read more about your role in the guidebook entry.
 
-ghost-role-colossus-death = The colossus collapses, its light extinguished.
+ghost-role-colossus-death = The colossus collapses, its surface desintegrating rapidly.
 ghost-role-colossus-hibernate = The colossus begins drawing in energy!
 ghost-role-colossus-effigy-confirm = If placement is  valid, press again to Beckon an Effigy.
 

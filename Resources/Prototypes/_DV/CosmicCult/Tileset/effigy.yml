@@ -1,4 +1,3 @@
-##################### PILLAR
 - type: entity
   parent: BaseStructure
   id: CosmicEffigy

@@ -28,9 +28,9 @@ public sealed partial class CosmicChantryComponent : Component
 
     [DataField] public bool Completed;
 
-    [DataField] public EntityUid Victim;
-
     [DataField] public SoundSpecifier ChantryAlarm = new SoundPathSpecifier("/Audio/_DV/CosmicCult/chantry_alarm.ogg");
+
+    [DataField] public SoundSpecifier BriefingSfx = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_AI_briefing.ogg");
 
     [DataField] public SoundSpecifier ChantryDestructionAnnouncement = new SoundPathSpecifier("/Audio/Announcements/announce.ogg");
 
@@ -38,11 +38,13 @@ public sealed partial class CosmicChantryComponent : Component
 
     [DataField] public EntProtoId SpawnVFX = "CosmicGlareAbilityVFX";
 
-    [ViewVariables]
-    public Container Container = default!;
+    [DataField] public EntProtoId Mindsink = "CosmicCultMindSink";
 
-    [ViewVariables]
-    public string ContainerId = "container";
+    [DataField] public ContainerSlot Container = default!;
+
+    [DataField] public string ContainerId = "container";
+
+    [ViewVariables] public EntityUid? Victim => Container?.ContainedEntity;
 }
 
 [Serializable, NetSerializable]
