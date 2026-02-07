@@ -156,7 +156,7 @@
       params:
         variation: 0.125
         volume: -4
-  
+
 - type: entity
   parent: MobCosmicBase
   id: MobCosmicLodestar
