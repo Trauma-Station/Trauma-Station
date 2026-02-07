@@ -30,7 +30,7 @@
       flavors:
       - DeepFried
       - oily
-    componentsToRemoveObject:
+    componentsToRemoveObjects:
     - type: Tool
     - type: RadioSpeaker
     - type: RadioMicrophone
