@@ -183,7 +183,7 @@
     MobLavalandGoliathAncient: 0.5
     LavalandEliteLegionnaire: 1
     LavalandEliteHerald: 1
-    LavalandEliteGoliathBroodMother: 1
+    LavalandEliteGoliathBroodmother: 1
     LavalandMobBrimdemon: 1
 
 - type: weightedRandomEntity
