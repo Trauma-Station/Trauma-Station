@@ -6,7 +6,7 @@
   components:
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/cosmiceffigy.rsi
-    offset: 0, 0
+    offset: 0, 1
     layers:
     - state: unshaded_bg
       shader: unshaded
@@ -40,14 +40,25 @@
         - FlyingMobMask
         layer:
         - FlyingMobLayer
-  - type: Clickable
   - type: Damageable
-    damageContainer: StructuralInorganic
+    damageContainer: InorganicMetaphysical
     damageModifierSet: Metallic
-  - type: DamageOnAttacked
-    damage:
-      types:
-        Cold: 10
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 400
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CosmicGlareAbilityVFX:
+                min: 1
+                max: 1
+          - !type:PlaySoundBehavior
+            sound:
+              path: /Audio/_DV/CosmicCult/effigy_supercritical.ogg
   - type: PointLight
     color: "#42a4ae"
     radius: 4
@@ -67,47 +78,6 @@
       reverseWhenFinished: true
   - type: GuideHelp
     guides:
-    - AnomalousResearch
     - CosmicCult
-  - type: Anomaly
-    pulseSound:
-      path: /Audio/_DV/CosmicCult/effigy_pulse.ogg
-    supercriticalSound:
-      path: /Audio/_DV/CosmicCult/effigy_supercritical.ogg
-    nextPulseTime: 1
-    minPulseLength: 60
-    maxPulseLength: 80
-    minContituty: 0.4
-    maxContituty: 0.8
-    growthThreshold: 0.35
-  - type: EntitySpawnAnomaly
-    entries:
-    - settings:
-        spawnOnPulse: true
-        minAmount: 2
-        maxAmount: 3
-        minRange: 3
-        maxRange: 4.5
-      spawns:
-      - MobCosmicCustodianHostile
-      - MobCosmicOracleHostile
-      - MobCosmicLodestarHostile
-    - settings:
-        spawnOnSuperCritical: true
-        minAmount: 4
-        maxAmount: 7
-        maxRange: 8
-      spawns:
-      - MobCosmicCustodianHostile
-      - MobCosmicOracleHostile
-      - MobCosmicLodestarHostile
-      - CosmicMalignRift
-    - settings:
-        spawnOnShutdown: true
-        minAmount: 1
-        maxAmount: 2
-        maxRange: 1
-      spawns:
-      - MobCosmicLodestarHostile
   - type: WarpPoint
-    follow: true
+  - type: CosmicEffigy
