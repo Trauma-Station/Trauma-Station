@@ -52,3 +52,5 @@ ghost-role-mindsink-wiped-device = The mind was snuffed out.
 ghost-role-mindsink-stop-searching-verb-text = Stop Seeking
 ghost-role-mindsink-stopped-searching = Noöspheric resonance halted.
 ghost-role-mindsink-slot-component-slot-name-brain = Brain
+
+name-identifier-format-mindsink = ASTRAL-{$number}
