@@ -135,6 +135,9 @@ public abstract class SharedDeepFryerSystem : EntitySystem
 
     private void DeepFryItem(EntityUid item, Entity<DeepFryerComponent> ent)
     {
+        if (HasComp<DeepFriedComponent>(item))
+            return;
+
         EntityManager.AddComponents(item, ent.Comp.ComponentsToAdd, false);
         EntityManager.RemoveComponents(item, ent.Comp.ComponentsToRemove);
         if (!HasComp<BodyComponent>(item))
