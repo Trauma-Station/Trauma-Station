@@ -45,7 +45,7 @@
   priority: 30
   text: "/ServerInfo/Guidebook/ServerRules/CoreRules/RuleC0.xml"
   children:
-  - Admins
+  - RuleC0
   - RuleC1
   - RuleC2
   - RuleC3
@@ -60,7 +60,7 @@
   - RuleC12
 
 - type: guideEntry
-  id: Admins
+  id: RuleC0
   name: guide-entry-rules-c0
   ruleEntry: true
   priority: 1
