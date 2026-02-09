@@ -150,8 +150,6 @@ public abstract class SharedDeepFryerSystem : EntitySystem
 
             if (_container.TryGetContainer(item, ent.Comp.ContainerId, out var container))
                 _container.EmptyContainer(container);
-            else
-                Log.Debug("Could not find container for item " + item);
 
         }
 
