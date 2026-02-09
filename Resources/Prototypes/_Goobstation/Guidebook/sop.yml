@@ -14,10 +14,10 @@
 #   name: guide-entry-sop
 #   text: "/ServerInfo/_Goobstation/Guidebook/SoP/SoP.xml"
 #   children:
-#   - SOPAlertLevels
+#   AlertLevels# Trauma, no SOP
 #   - SOPEmergencies
 #   - SOPJobs
-#   - SOPLegal
+#   Legal# Trauma, no SOP
 #   - SOPStandardProcedures
 #   - SOPSuccession
 
@@ -75,7 +75,7 @@
 #   - SOPExecution
 #   - SOPPermaBrig
 #   - SOPPunishments
-#   - SOPSearches
+#   Searches# Trauma, no SOP
 
 # # Jobs Main Directory and Subdirectories
 # - type: guideEntry
@@ -109,7 +109,7 @@
 #   #- BlueshieldOfficer # Trauma - removed BSO
 #   - SOPCaptain
 #   - SOPHeadOfPersonnel
-#   - SOPHeadOfSecurity
+#   HeadOfSecurity # Trauma, no SOP
 #   - SOPResearchDirector
 #   - SOPChiefMedicalOfficer
 #   - SOPChiefEngineer
@@ -145,9 +145,9 @@
 #   text: "/ServerInfo/_Goobstation/Guidebook/SoP/Jobs/Security/SecuritySOP.xml"
 #   children:
 #   - SOPBrigmedic
-#   - SOPWarden
-#   - SOPOfficerCadet
-#   - SOPDetective
+#   Warden# Trauma, no SOP
+#   OfficerCadet# Trauma, no SOP
+#   Detective # Trauma, no SOP
 
 # - type: guideEntry
 #   id: SOPService
