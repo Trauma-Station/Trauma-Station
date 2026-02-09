@@ -12,6 +12,7 @@ using Content.Shared.Power.EntitySystems;
 using Content.Shared.Storage.Components;
 using Content.Trauma.Shared.DeepFryer.Components;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.DeepFryer.Systems;
@@ -21,6 +22,7 @@ public abstract class SharedDeepFryerSystem : EntitySystem
     [Dependency] protected readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] protected readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
@@ -138,12 +140,19 @@ public abstract class SharedDeepFryerSystem : EntitySystem
         if (HasComp<DeepFriedComponent>(item))
             return;
 
+
         EntityManager.AddComponents(item, ent.Comp.ComponentsToAdd, false);
         EntityManager.RemoveComponents(item, ent.Comp.ComponentsToRemove);
         if (!HasComp<BodyComponent>(item))
         {
             EntityManager.AddComponents(item, ent.Comp.ComponentsToAddObjects, false);
             EntityManager.RemoveComponents(item, ent.Comp.ComponentsToRemoveObjects);
+
+            if (_container.TryGetContainer(item, ent.Comp.ContainerId, out var container))
+                _container.EmptyContainer(container);
+            else
+                Log.Debug("Could not find container for item " + item);
+
         }
 
         EnsureComp<MetaDataComponent>(item, out var meta);
