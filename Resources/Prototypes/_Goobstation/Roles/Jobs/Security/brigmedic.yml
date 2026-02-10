@@ -21,7 +21,6 @@
   canBeAntag: false
   guides:
   - MedicalDoctor
-  - SOPBrigmedic
   - Medicine
   goobcoins: 35
   access: # intentionally no medical access, not even hos has it, ask chemists instead of silently stealing meds

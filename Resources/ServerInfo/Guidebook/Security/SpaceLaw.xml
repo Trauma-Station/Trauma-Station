@@ -9,283 +9,136 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <Document>
   # Space Law
-  Goob Station operates under abbreviated space law. All crew, passengers, and visitors aboard the station are expected to know and follow these laws.
+  The charter of corporate rights grants the following rights to Nanotrasen Employees, in order of importance.
 
-  - [color=red][bold]Head of Security[/bold][/color] and especially [color=red][bold]Warden[/bold][/color] should be very familiar with space law.
-  - Security players should strive to fully comprehend Space Law.
-  - [bold]Ignoring or misuse of Space Law may be subject to punishment under incompetence. Do not play security if you do not plan to follow the rules[/bold]
+  1. The right to follow corporate law.
+  2. The right to work towards the greater wealth and prosperity of Nanotrasen.
+  3. The right to respect one’s superiors in management and understand the hard work they accomplished to achieve their position.
+  4. The right to a Nanotrasen appointed public defender. If no lawyer is currently available, then the security officer who arrested the employee will be appointed as their defender.
 
   ## Treatment Of Prisoners
 
-  Prisoners still have rights that must be upheld by law enforcement:
+  The charter of corporate rights grants the following rights to Nanotrasen Prisoners, in order of importance.
 
-  - Prisoners must be granted adequate medical care. They should also be provided psychiatric and spiritual counselling if requested.
-  - Prisoners must be allowed access to communications equipment (Radios) so long as they are not abused.
-  - Prisoners must be granted clothing, food, water, shelter and safety. If the brig is no longer safe, confinement must be established in another location.
-  - Prisoners must be given access to legal counsel during an interrogation if requested and available.
-  - Prisoners must be given their shift mandated PDA during confinement. Unless there is solid proof of PDA tampering, in which case the PDA is to be secured and replaced with a fresh one
-  - Prisoners must be granted freedom of movement, and should not be restrained with handcuffs or other devices after incarceration unless there is an undue risk to life and limb. Similarly, any prisoners held for extended or permanent confinement should be held in the communal brig, and should not be confined to a solitary cell unless they pose a risk to life and limb.
+  1. The right to medical treatment.
+  2. The right to communcations equipment, if not abused.
+  3. The right to food and water.
+  4. The right to their shift mandated PDA, unless tampered with; in which case a replacement will be issued.
+  5. The right to freedom of movement within the designated brig.
 
-  ## Searches
+  ## Security
 
-  - A personnel search is a seizure of the objects in a person's backpack, hands, coat, belt, pockets, and hat. If any contraband is found during a search the officer may choose to further the search into a detainment or simply confiscate the restricted items. After the search is conducted all legal items are to be returned to the person.
+  The charter of corporate rights grants the following rights to Security Employees, in order of importance.
 
-  - A crewmate may legally decline any search conducted without a warrant while the alert level is green. Should be noted that if the alert level is blue or above all personnel searches are legal and no longer require a warrant.
-
-  ## Implantation
-
-  - Any prisoner in custody can be subjected to implantation or implant removal procedures, so long as there's proof, or reasonable suspicion of an implant. The process of removing an implant should be done quickly, not holding the detainee for longer than their stated sentence. A prisoner can still be subject to receive an implant/removal if there has been clear permission given.
-
-  - [bold]Mind Shields[/bold]: Shields can be administered to any inmate who has been clearly mind controlled, lost control of themselves, or a suspect charged with unlawful control. Unlike standard implantation you may hold a prisoner until you finish issuing Mind Shields, so long as it's done in a timely fashion. If a suspect refuses cooperate or the implant fails to function they can be charged with Refusal of Mental Shielding.
-
-  # Removal
-
-  - A suspect can be forced to receive implant removal if there is strong reasonable proof that they have been implanted, such as an officer seeing them use one or their prints being on a discarded injector. Unlike implantation procedure a prisoner can have their sentence entirely delayed or extended until they comply with the procedure, as long as security are actively making attempts to preform it. Akin to implanting, if an inmate gives their clear permission, implant removal can proceed without proof.
+  1. The right to search employees posessions on blue or higher alert, and to secure any contraband.
+  2. The right to search employees suspected of a crime on any alert, and to secure any contraband.
+  3. The right to check and remove any suspected illegal implants from crewmates suspected of possessing one.
+  4. The right to implant any crewmate convicted of any crime with tracking and/or mindshield implants.
+  5. The right to execute any crewmate refusing a mindshield implant.
+  6. The right to waive brig time for corporal punishment, not exceeding critical condition.
 
   ## Sentencing
-  - All sentencing is to be handled by the Warden, if no Warden is available the HoS is to take over that duty, if there's no HoS it falls onto the highest ranking security member.
 
-  - Use common sense and humanity when issuing punishments. You should not always seek out the highest punishment you can, you don't have to always give the maximum time or always look to demote someone. Always take in account the severity and only charge for what is needed for someone to learn their lesson.
+  The charter of corporate rights grants the following rights to the Warden, Head of Security, and in their absense other security employees.
 
-  - [bold]Accessory, Attempting, And Intention:[/bold] If someone intentionally, knowingly and substantially assists someone in enacting a crime they can be charged with the relevant crimes, such as an engineer giving someone tools, who says they are going to break into an area. Same goes for a clear and solid attempt at a crime, or a person who shows clear intent to act out a crime, such as a syndicate nuclear operative arming a nuke but getting arrested before it goes off, they can still be charged with terrorism. Does not apply to crimes that have an attempted listing already, like attempted murder.
+  1. The right to sentence crewmates convicted of a crime for an appropriate time in the brig.
+  2. The right to extend brig times for trouble caused.
+  3. The right to use corporal punishment to retaliate against trouble caused.
+  4. The right to the responsibility to preserve the life of all captured terrorists, magic users, and alien creatures for study at centcom.
 
-  - [bold]Stackable Crimes:[/bold] Crimes are to be considered 'stackable' in the sense that if you charge someone with two or more different crimes, you should combine the times you would give them for each crime.
+  ## [color=red][bold]"YOU MAY NOT EXCEED 5 MINUTES AS A BRIG TIME"[/bold][/color]
 
-  # [color=red][bold]"YOU MAY NOT EXCEED 10 MINUTES AS A BRIG TIME"[/bold][/color]
+  ## Any total brig time that adds up to above 5 minutes will be shortened to meet this limit.
 
-  # Any total brig time that adds up to above 10 minutes will be shortened to meet this limit.
-
-  # If it goes above 20 minutes, you may perma the person.
-
-
+  ## If it goes above 20 minutes, you may perma the person.
 
   # Crimes
 
-  # I Degree
+  # I. Criminal Violations (Law Code CX)
 
-  For minor crimes, fix the issue then warn the person to not attempt the crime again, if they still proceed to do it at a later date, a brig time may be better.
+  - Criminal violations are those that involve the employee themselves becoming classified as a criminal of some kind through their actions. Along with taboo violations, these are the only actual laws that security cadets are expected to learn and remember, and should be prioritized.
 
-  ## Disturbance
+  ## No Penalty Criminal Violations:
 
-  [bold]Description[/bold]: To cause a public disturbance.
+  C0: Contraband Possession: Having any item classified as contraband. This usually doesn’t have a sentence other than taking away the contraband, but employees may be subject to monitoring and being suspected of being a member of the organization they possessed the contraband from.
 
-  [bold]Maximum Punishment:[/bold] 2:00
+  ## Max 3 Minute Timer Criminal Violations:
 
-  [bold]Notes:[/bold] Sometimes referred to as hooliganism. The catch-all for obnoxious crewmates. Covers things such as public nudity, needless insults, obstructing authorities, and inciting crime or violence.
+  C1: Mail Tampering: Opening mail that is addressed to another employee, or tampering with the mail incurring a loss of funds. Anyone who does this will be considered a thief and be subject to monitoring by security at their discretion.
+  C2: Theft: Taking personal or departmental items without permission. Anyone who does this will be considered a thief and be subject to monitoring by security at their discretion.
+  C3: Recreational Drug Possession, Usage or Sale: Possession, usage, or sale of any recreational drug besides nicotine or alcohol.
+  C4: Vandalism: Purposefully defacing Nanotrasen property in order to lower its aesthetic value.
 
-  ## Petty Theft
+  ## Max 5 Minute Timer Criminal Violations:
 
-  [bold]Description[/bold]: To take non-vital or inexpensive property of another individual, organization, or common property, without consent.
+  C5: Secure Trespass: Trespass into a security or command area.
+  C6: Kidnapping: Using non-lethal means to capture a member of the crew and hold them hostage.
+  C7: Assault Any assault on a member of the crew.
+  C8: Grand Theft: Stealing any high value or importance item.
+  C9: Destruction of Property. This includes killing any of the station-wide “pets” without a good reason.
 
-  [bold]Maximum Punishment:[/bold] 3:00
+  ## D-Class Criminal Violations:
 
-  [bold]Notes:[/bold] The difference between petty theft and grand theft is based on how crucial the stolen item is, things like instruments, clothing and tools fall under petty theft. In most cases all you need to do is detain the thief, return the stolen item and let them go with a warning.
+  - These are violations that specifically warrant reducing an employee's job position to Disposable Class, eliminating all their privileges as a normal crew member.
 
-  ## Possession/Use of Illegal Substances
+  C10 Murder: Purposefully killing someone with no intent to revive.
+  C11 Treason: Knowingly allying with or being a member of any organization or cult opposed to Nanotrasen.
+  C12 Grand Assault: Any assault on a member of security, the captain, or the corporate liaison, whether the intent is to murder or not.
+  C13 Prevention of Revival: Hiding bodies or using deception to prevent the revival of someone on the station who has not been given a do not revive order.
+  C14 Breach of Custody: Removal of anyone who has been arrested from a secure area with the intent to free them, or preventing a security officer from making an arrest.
+  C15 Embezzlement: Stealing funding from Nanotrasen for the purpose of self-enrichment.
 
-  [bold]Description[/bold]: To make, hold, or abuse restricted drugs or chemicals.
+  # II. Taboo Violations (Law Code TX)
 
-  [bold]Maximum Punishment:[/bold] 3:00
+  - Under corporate law, violation of a taboo is the most serious violation possible.
 
-  [bold]Notes: This is to be followed in accordance with Standard Operating Procedure. If anything questionable is not brought up in SOP the captain or highest standing command staff may publicly restrict it.[/bold]
+  - The penalties can range from public execution of an individual, to the purging of an entire department or even station depending on the severity of the violation and how many people were involved.
 
-  ## Tresspass
+  - Those who engage in taboo violation are classified beyond just being criminals. Their very existence is seen as a threat to the health and stability of the corporation.
 
-  [bold]Description[/bold]: To enter a non-secured area without permission.
+  - Those who engage in taboo violations open themself up to immidiate execution by security team members.
 
-  [bold]Maximum Punishment:[/bold] 2:00
+  - Security team members should strive to capture alive those who violate taboo for study.
 
-  [bold]Notes:[/bold] It's best to just remove them from the area unless this is a repeated crime.
+  T1: Usage of Magic: Demonstrating usage of magic or usage of a magical item.
+  T2: Conspiracy to Unionize: Conspiring with employees to unionize or asking for ‘workers rights’, which are a violation of corporate rights.
+  T3: Possession of Psionic Capabilities: Being capable of powers that mimic magic through the mind itself.
+  T4: Possession of Illegal and dangerous DNA Modification: Commonly known as changelings and shadowlings.
 
-  ## Vandalism
+  # III. Protocol Violations (Law Code PX)
 
-  [bold]Description[/bold]: To intentionally deface or superficially damage public or private property.
+  - Protocol violations are generally the least serious and least likely to be punished violations of corporate law.
 
-  [bold]Maximum Punishment:[/bold] 2:00
+  - When and if they are punished is usually at the discretion of the Corporate Liaison, who may request an officer from the HoS to help enforce the punishment.
 
-  [bold]Notes:[/bold] Painting graffiti, smashing bar glasses, and cracking internal windows is vandalism, breaking a window into space or secure areas is not.
+  P1: Time Theft: Any extended use of company time for purposes other than productive work. This generally means spending 15 minutes or more doing things other than one’s job-related duties. The typical punishment is having to repay this time through salvage work, or being placed on a work plan that involves direct supervision.
+  P2: Unsanctioned Social Gatherings:  Attending and organizing parties, weddings, funerals, ect, that have not been written off by management staff.
 
+  # IV. Disciplinary Violations (Law Code DX)
 
+  - Disciplinary violations are those that may be enforced at the discretion of security personnel or management staff. The typical punishment for them is corporal punishment.
 
-  # II Degree
+  D1: Excessive Public Drunkenness: Those who show excessive public drunkenness through vomiting and slurring of words are assumed to be impeding their ability to work.
+  D2: Insubordination: Failure to follow instructions from one’s head is considered insubordination. Their head is allowed to institute corporal punishment through use of a batong to re-instill a sense of discipline within them. In the case of security officers being insubordinate to the Head of Security, insubordination is considered much more severe and additional actions may be taken at the Head of Security’s discretion.
+  D3: Disrespecting Corporate Authority: Disrespecting either the company, or a security officer acting on behalf of the company, shall result in swift corporal punishment, as well as a public apology being made. If the employee refuses to apologize for their transgression, more serious punishments such as brig time may be enacted.
+  D4: Departmental Trespassing: Entering a department one does not have access to without explicit approval of a member of that department. Heads of staff can overrule any approvals given by members of their department.
 
-  ## Animal Cruelty
+  # V. Special Disciplinary Violations (Law Code SDX)
 
-  [bold]Description[/bold]: To inflict unnecessary suffering or harm on a non-sapient being with malicious intent.
+  - These are violations specifically by management staff.
 
-  [bold]Maximum Punishment:[/bold] 3:00
+  SD1: Managerial Incompetence: When a command member is deemed incompetent at their job by either a member of CentComm, or by a vote among the heads, they shall be immediately stripped of their head of staff equipment, banished to salvage-work, and considered a D-Class employee from then on.
+  SD2: Insanity: When a command member is deemed as acting “insane” rather than incompetent, such as engaging in excessively silly behavior, they shall be required to submit to either the psychologist or the Chief Medical Officer for a psychological evaluation. They may then either prescribe a treatment plan, have the head of staff committed to the brig, or perform a lobotomy and have them work in salvage.
+  SD3: Conspiracy: Conspiring against the captain to unlawfully seize power without a proper justification shall result in all command members involved being stripped of their head of staff equipment, banished to salvage-work, and considered D-Class employees.
 
-  [bold]Notes:[/bold] This doesn't include legitimate and authorized animal testing and usually doesn't extend to vermin or creatures that could pose a threat to the station.
+  # VI. Work Agreement Violations (Law Code WX)
 
-  ## Damage/Destruction of Property
+  - These are violations specific to workers who are not employees of Nanotrasen.
+  - This includes visitors, salvagers, and other foreign agents.
+  - Punishment is at the discretion of the officer who finds individuals in violation of the code.
 
-  [bold]Description[/bold]: To maliciously damage or deface public or private property or equipment.
-
-  [bold]Maximum Punishment:[/bold] 4:00
-
-  [bold]Notes:[/bold] Step up from vandalism but a step down from mass destruction.
-
-  ## Endangerment
-
-  [bold]Description[/bold]: To recklessly put yourself or others in danger, either through direct action, or failure to act.
-
-  [bold]Maximum Punishment:[/bold] 4:00
-
-  [bold]Notes:[/bold] Covers industrial accidents, industrial negligence, self-experimentation, or even medical malpractice.
-
-  ## Failure to Comply
-
-  [bold]Description[/bold]: To resist reasonable orders given by an authority. This extends to warrants and authorized searches.
-
-  [bold]Maximum Punishment:[/bold] 2:00
-
-  [bold]Notes:[/bold] The order has to be reasonable and the person has to receive a good amount of warning before the arrest is issued.
-
-  ## Posession of Restricted Gear
-
-  [bold]Description[/bold]: To hold or use non-lethal items or objects that are restricted or illegal.
-
-  [bold]Maximum Punishment:[/bold] 5:00
-
-  [bold]Notes:[/bold] This is mostly for syndicate contraband; EMAGs, syndicate gas masks, bloodred hardsuits, hijacked PDAs, or implants, however can sometimes extend to things the individual shouldn't possess like kevlar vests and security gear.
-
-  ## Rioting
-
-  [bold]Description[/bold]: To take part in a large group of personnel creating an unlawful public disturbance.
-
-  [bold]Maximum Punishment:[/bold] 4:00
-
-  [bold]Notes:[/bold] Crimes like damage of property or battery are expected to be thrown on top of this charge. Leaders of a riot can be charged with all crimes that happen under their lead.
-
-
-
-  # III Degree
-
-  ## Assault/Battery
-
-  [bold]Description[/bold]: To threaten to or to use physical force against someone without the intent to kill.
-
-  [bold]Maximum Punishment:[/bold] 6:00
-
-  [bold]Notes:[/bold] Attempted murder and battery are different, make sure you've got it right.
-
-  ## Breach of Arrest
-
-  [bold]Description[/bold]: To intentionally resist and flee arrest or detainment by an authorized staff.
-
-  [bold]Maximum Punishment:[/bold] 4:00
-
-  [bold]Notes:[/bold] This only applies if the person is actively being physically arrested. Includes people uncuffing or assisting others out of an arrest. Breach of custody is a separate crime.
-
-  ## Grand Theft
-
-  [bold]Description[/bold]: To take critical or unreplaceable property of another individual or organization without consent.
-
-  [bold]Maximum Punishment:[/bold] 6:00
-
-  [bold]Notes:[/bold] The difference between petty theft and grand theft is based on how crucial the stolen item is, this mostly is used for the theft of command staff items, things like door remotes, hardsuits, jetpacks, and unreplaceable machine parts.
-
-  ## Manslaughter
-
-  [bold]Description[/bold]: To incidentally kill a sapient being without intent.
-
-  [bold]Maximum Punishment:[/bold] 8:00
-
-  [bold]Notes:[/bold] Includes manslaughter in self-defense and negligent manslaughter.
-
-  ## Mass Destruction
-
-  [bold]Description[/bold]: To cause massive damage to an area or major station system.
-
-  [bold]Maximum Punishment:[/bold] 10:00
-
-  [bold]Notes:[/bold] This is mostly used for deadly bombings or sabotage of major station systems such as power production, cloning, substations, or atmos.
-
-  ## Posession of Restricted Weaponry
-
-  [bold]Description[/bold]: To hold or use a weapon that is unlawful or contraband.
-
-  [bold]Maximum Punishment:[/bold] 6:00
-
-  [bold]Notes:[/bold] Everything from guns without a permit, deadly blades, explosives, syndicate firearms to explosive implants.
-
-  ## Secure Tresspass
-
-  [bold]Description[/bold]: To enter a secured area without permission.
-
-  [bold]Maximum Punishment:[/bold] 6:00
-
-  [bold]Notes:[/bold] This covers places like telecomms, head offices, security zones, command areas, the vault and armory.
-
-  ## Breach of Custody
-
-  [bold]Description[/bold]: To break out of a cell or custody with the intention of escaping.
-
-  [bold]Maximum Punishment:[/bold] 5:00
-
-  [bold]Notes:[/bold] This time should be added on top of a prisoners current brig time. While rare, this charge can be bumped to permanent brig if the suspect has repeatedly attempted to break out of the permanent brig. Includes people breaking others out.
-
-
-
-  # IV Degree
-
-  ## Attempted Murder
-
-  [bold]Description[/bold]: To make an attempt to use physical force against someone with the clear intent to kill.
-
-  [bold]Maximum Punishment:[/bold] 10:00
-
-  [bold]Notes:[/bold] Make sure you've got the proof to back up the intention claims.
-
-  ## Unlawful Control/Kidnapping/Hostage Taking
-
-  [bold]Description[/bold]: To unlawfully restrain, transport, control or confine a sapient being against that individual's will.
-
-  [bold]Maximum Punishment:[/bold] 10:00
-
-  [bold]Notes:[/bold] A large range of things, used mostly as a catch all when dealing with unlawful control of another being.
-
-  ## Murder
-
-  [bold]Description[/bold]: To kill a sapient being with malicious intent.
-
-  [bold]Maximum Punishment:[/bold] 10:00
-
-  [bold]Notes:[/bold] This only changes from attempted to full on murder if the victim enters a state of being deceased, having to be resurrected.
-
-
-
-  # V Degree
-
-  ## Mass Murder
-
-  [bold]Description[/bold]: To kill three or more sapient beings with malicious intent.
-
-  [bold]Maximum Punishment:[/bold] Permanent
-
-  [bold]Notes:[/bold] Only applies when there have been multiple killings with intention.
-
-  ## Prevention of Revival
-
-  [bold]Description[/bold]: To render a body unresurrectable.
-
-  [bold]Maximum Punishment:[/bold] Permanent
-
-  [bold]Notes:[/bold] This covers gibbing, spacing, intentionally hiding a body leading to it rotting, or other ways of preventing a body with a soul from being resurrected.
-
-  ## Refusal of Mental Shielding
-
-  [bold]Description[/bold]: To refuse to comply with a reasonable Mind Shielding procedure.
-
-  [bold]Maximum Punishment:[/bold] Permanent
-
-  [bold]Notes:[/bold] Applies if the suspect is excessively uncooperative or the implant fails to function due to the mental state of the prisoner already being too far gone. If the implant fails the maximum punishment is upped to Expedited Execution.
-
-  ## Terrorism
-
-  [bold]Description[/bold]: To engage in maliciously destructive actions which threaten to destroy, or successfully destroy a vessel or habitat.
-
-  [bold]Maximum Punishment:[/bold] Execution
-
-  [bold]Notes:[/bold] Summed up; extreme sabotage of station systems or setting off self-destruction systems.
+  W1: Fraternization: Socializing with actual Nanotrasen Employees.
+  W2: Corporate Espionage: Taking proprietary Nanotrasen technology. Contractors should be searched before they get on the shuttle.
+  W3. Solicitation: Offering services to an employee for spesos or favors outside the scope of their contract, such as a mercenary contractor offering to act as a bodyguard for a Nanotrasen employee.
+  W4. Poaching: Trying to get a Nanotrasen employee to join their company.
 </Document>

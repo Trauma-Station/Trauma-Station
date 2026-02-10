@@ -20,8 +20,6 @@
   canBeAntag: false
   guides: # goobstation
   - Medical
-  - SOPChiefMedicalOfficer
-  - SOPMedical
   - Command
   - Chemicals
   - Virology
