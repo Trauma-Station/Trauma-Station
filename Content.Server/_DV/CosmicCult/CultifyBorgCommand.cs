@@ -16,6 +16,8 @@ using Robust.Shared.Console;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 
+namespace Content.Server._DV.CosmicCult;
+
 [AdminCommand(AdminFlags.Fun)]
 public sealed class CultifyBorgCommand : LocalizedEntityCommands
 {
