@@ -1,16 +1,8 @@
-<!--
-SPDX-FileCopyrightText: 2024 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-
-SPDX-License-Identifier: AGPL-3.0-or-later
--->
-
 <Document>
-  # Silicon Rule 2 - Laws must be prioritized by their order
-  Most laws will be numbered, with higher number laws appearing last. Laws with a lower number take priority over laws with larger numbers.
+  # Passenger
 
-  Occasionally you may have laws which have some scrambled text instead of a number and appear in front of other laws, these take priority over all other laws. If you have multiple laws like this, the order that they listed in determine priority: laws listed first are prioritized over other laws.
+  - This is a role intended for new players to learn how to play the game.
+  - Hyjakcing this role to self antag will result in a server ban.
+  - If you want to freely self antag, enable insurgent in settings. It is passenger with self-antag rights.
 
-  ## Examples
-  - Law 1 says to not kill any crew. Law 2 says to kill all chefs. You cannot kill any chefs that are crew, but must kill any that are not crew.
 </Document>

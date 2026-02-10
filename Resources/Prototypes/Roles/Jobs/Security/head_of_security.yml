@@ -164,11 +164,7 @@
   guides: # goobstation
   - Security
   - SpaceLaw
-  - SOPLegal
   - Command
-  - SOPHeadOfSecurity
-  - SOPSecurity
-  - SOPAlertLevels
   goobcoins: 45 #Goob content
   access:
   - HeadOfSecurity

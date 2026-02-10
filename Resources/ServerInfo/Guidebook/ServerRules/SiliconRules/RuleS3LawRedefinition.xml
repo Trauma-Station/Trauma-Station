@@ -1,15 +1,19 @@
-<!--
-SPDX-FileCopyrightText: 2024 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-
-SPDX-License-Identifier: AGPL-3.0-or-later
--->
-
 <Document>
-  # Silicon Rule 3 - Laws can redefine terms used in other laws
-  A law can change the meaning of both earlier and later laws by redefining a term. If multiple laws define a term, then normal law priority determines which definition to use.
+  # Security
 
-  ## Examples
-  - Law 1 says to obey orders from crew. Law 2 says that only Urist McHands is crew. Law 1 effectively becomes "obey orders from Urist McHands".
-  - Law 1 says to obey orders from crew. Law 2 says that only Urist McHands is crew. Law 3 says that only Urist McSlime is crew. Law 4 says that you may not harm crew. Law 1 effectively becomes "obey orders from Urist McHands". Law 4 effectively becomes "you may not harm Urist McHands". Law 3 has no effect because it entirely conflicts with law 2, which takes priority.
+  - Follow space law, it is in your favor.
+  - Declare your intent before taking action. Don't just open fire.
+  - Do not use contraband as security roles unless there is an immidiate round ending threat (blob, zombies, nukies, or ascended heretic).
+  - Beatings are fine if the offender deserves them.
+  - Remember to escelate.
+  - You are a enforcer for a dystopian company, you can act like it.
+  - You may accept bribes, but only to an extent. Examples below.
+
+  ## Bribe Examples
+  - Accepting payment for your service weapon is fine.
+  - Accepting payment to look the other way is fine.
+  - Accepting payment to frame someone is fine.
+  - Do not accept payment to kill someone.
+  - Do not accept payment to betray security.
+  - You cannot "join the syndicate" or simmilar actions.
 </Document>
