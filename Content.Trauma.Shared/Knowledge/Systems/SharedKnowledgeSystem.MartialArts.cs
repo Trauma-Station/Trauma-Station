@@ -217,9 +217,6 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnTakeDamage(Entity<KnowledgeHolderComponent> ent, ref BeforeDamageChangedEvent args)
     {
-        if (ent.Comp.KnowledgeEntity is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComp))
-            return;
-
         if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "ToughnessKnowledge"), out var toughness))
         {
             if (args.Damage.GetTotal() > 0)
