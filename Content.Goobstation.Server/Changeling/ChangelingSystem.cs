@@ -36,29 +36,16 @@ using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.Actions;
 using Content.Goobstation.Common.Body;
-using Content.Goobstation.Common.Changeling;
-<<<<<<< HEAD
 using Content.Trauma.Common.MartialArts;
-using Content.Goobstation.Maths.FixedPoint;
-using Content.Goobstation.Server.Changeling.GameTicking.Rules;
-using Content.Goobstation.Server.Changeling.Objectives.Components;
-=======
 using Content.Goobstation.Common.Conversion;
 using Content.Goobstation.Common.Magic;
-using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Common.Medical;
 using Content.Goobstation.Server.Changeling.GameTicking.Rules;
 using Content.Goobstation.Server.Changeling.Objectives.Components;
-using Content.Goobstation.Shared.Changeling;
->>>>>>> upstream/HEAD
 using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Changeling.Systems;
 using Content.Goobstation.Shared.Flashbang;
-<<<<<<< HEAD
-=======
-using Content.Goobstation.Shared.MartialArts.Components;
->>>>>>> upstream/HEAD
 using Content.Server.Actions;
 using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
@@ -767,19 +754,10 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
     private void OnIdentityMapInit(Entity<ChangelingIdentityComponent> ent, ref MapInitEvent args)
     {
-<<<<<<< HEAD
-        RemComp<HungerComponent>(uid);
-        RemComp<ThirstComponent>(uid);
-        RemComp<CanHostGuardianComponent>(uid);
-        EnsureComp<ZombieImmuneComponent>(uid);
-=======
         RemComp<HungerComponent>(ent);
         RemComp<ThirstComponent>(ent);
         RemComp<CanHostGuardianComponent>(ent);
-        RemComp<MartialArtsKnowledgeComponent>(ent);
-        RemComp<CanPerformComboComponent>(ent);
         EnsureComp<ZombieImmuneComponent>(ent);
->>>>>>> upstream/HEAD
 
         // add actions
         foreach (var actionId in ent.Comp.BaseChangelingActions)

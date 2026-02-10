@@ -1,11 +1,7 @@
 // <Trauma>
-<<<<<<< HEAD
 using Content.Goobstation.Common.CCVar;
 using Content.Trauma.Common.MartialArts;
-=======
->>>>>>> upstream/HEAD
 using Content.Goobstation.Common.Weapons;
-using Content.Goobstation.Common.MartialArts;
 using Content.Lavaland.Common.Weapons;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Coordinates;

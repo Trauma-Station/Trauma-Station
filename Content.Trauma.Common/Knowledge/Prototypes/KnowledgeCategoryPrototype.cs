@@ -10,7 +10,7 @@ public sealed partial class KnowledgeCategoryPrototype : IPrototype
 {
     /// <inheritdoc/>
     [IdDataField]
-    public string ID { get; } = default!;
+    public string ID { get; private set; } = default!;
 
     /// <summary>
     /// Localized name of that category to use in the character menu.

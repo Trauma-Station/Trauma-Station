@@ -1,8 +1,13 @@
 using System.Linq;
+using System.Net.NetworkInformation;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Chat;
+using Content.Shared.Damage;
+using Content.Shared.Inventory;
+using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Prototypes;
@@ -11,6 +16,11 @@ using YamlDotNet.Core.Tokens;
 namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
 {
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
+
+    private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die" };
 
     private void InitializeLanguage()
     {
@@ -201,15 +211,57 @@ public abstract partial class SharedKnowledgeSystem
 
         if (knownLanguage is { } knownLanguageTrue && TryComp<LanguageKnowledgeComponent>(knownLanguageTrue, out var languageKnowledgeComponent))
         {
+            // Add Send Damage to all who hear.
+            if (GetMastery(knownLanguageTrue) >= 5)
+            {
+                if (ContainsCursedWord(args.Message) && TryComp<KnowledgeComponent>(knownLanguage, out var knowledgeComponent))
+                {
+                    // 1. Find everyone within earshot (usually 7-10 meters for normal speech)
+                    var range = 7f;
+                    var entitiesNearby = _lookup.GetEntitiesInRange(ent, range);
+
+                    var damage = new DamageSpecifier();
+                    var modifier = Math.Clamp((80f - ((float) knowledgeComponent.Level) / 20f), 0, 1f);
+                    damage.DamageDict.Add("Brute", 20 * modifier);
+
+                    foreach (var hearer in entitiesNearby)
+                    {
+                        if (hearer == ent.Owner) continue; // Don't curse yourself
+
+                        if (_inventory.TryGetSlotEntity(hearer, "ears", out var earItem))
+                            continue;
+
+                        if (_language.CanUnderstand(hearer, args.Language))
+                        {
+
+                            _damageable.TryChangeDamage(hearer, damage, ignoreResistances: false);
+                            _status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
+
+                            _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
+                        }
+                    }
+                }
+            }
             Log.Debug($" Time between messages: {_timing.CurTick.Value - languageKnowledgeComponent.LastSentMessage}");
             if (_timing.CurTick.Value - languageKnowledgeComponent.LastSentMessage >= 250)
             {
                 var ev = new AddExperience($"language-{args.Language.ID}", Math.Clamp((int) (_timing.CurTick.Value - languageKnowledgeComponent.LastSentMessage - 250) / 100, 1, 4));
-                RaiseLocalEvent(ent, ev);
+                RaiseLocalEvent(ent, ref ev);
                 languageKnowledgeComponent.LastSentMessage = _timing.CurTick.Value;
                 UpdateEntityLanguages(ent);
             }
             return;
         }
+    }
+    private bool ContainsCursedWord(string message)
+    {
+        // Split message into individual words to avoid catching "it" in "shit"
+        var words = message.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        foreach (var word in words)
+        {
+            if (CursedWords.Contains(word))
+                return true;
+        }
+        return false;
     }
 }

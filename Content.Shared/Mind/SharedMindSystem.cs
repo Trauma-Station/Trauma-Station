@@ -682,18 +682,7 @@ public abstract partial class SharedMindSystem : EntitySystem
 
         if (allowSpeech)
         {
-<<<<<<< HEAD
-            // <Trauma> - ensure they have the default language
-            var speaker = EnsureComp<LanguageSpeakerComponent>(uid);
-
-            // If the entity already speaks some language (like monkey or robot), we do nothing else.
-            // Otherwise, we give them the fallback language
-            if (speaker.Speaks.Count == 0)
-                _language.AddLanguage(uid, SharedLanguageSystem.FallbackLanguagePrototype);
-            // </Trauma>
-=======
             EnsureDefaultLanguage(uid); // Trauma
->>>>>>> upstream/HEAD
             EnsureComp<SpeechComponent>(uid);
             EnsureComp<EmotingComponent>(uid);
         }

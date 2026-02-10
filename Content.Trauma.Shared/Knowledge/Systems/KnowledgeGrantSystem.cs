@@ -1,7 +1,6 @@
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.DoAfter;
-using Content.Shared.EntityTable;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Trauma.Common.Knowledge.Components;
@@ -17,7 +16,6 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public sealed class KnowledgeGrantSystem : EntitySystem
 {
-    [Dependency] private readonly EntityTableSystem _table = default!;
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -78,19 +76,12 @@ public sealed class KnowledgeGrantSystem : EntitySystem
             if (TryComp<KnowledgeComponent>(foundSkill, out var foundComp) && (!ent.Comp.Skills.TryGetValue(skill.Key, out var skillCap) || (foundComp.Level < skillCap || skillCap < 0)))
             {
                 var ev = new AddExperience(skill.Key, skill.Value);
-                RaiseLocalEvent(args.User, ev);
-                if (TryComp<LanguageKnowledgeComponent>(foundSkill, out _))
-                    _popup.PopupPredicted(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
-                else
-                    _popup.PopupPredicted(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"knowledge-{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
+                RaiseLocalEvent(args.User, ref ev);
             }
+            if (TryComp<LanguageKnowledgeComponent>(foundSkill, out _))
+                _popup.PopupEntity(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
             else
-            {
-                if (TryComp<LanguageKnowledgeComponent>(foundSkill, out _))
-                    _popup.PopupPredicted(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
-                else
-                    _popup.PopupPredicted(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"knowledge-{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
-            }
+                _popup.PopupEntity(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"knowledge-{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
         }
         args.Handled = true;
     }

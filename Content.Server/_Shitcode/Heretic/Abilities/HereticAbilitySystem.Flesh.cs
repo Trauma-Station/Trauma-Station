@@ -11,13 +11,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-<<<<<<< HEAD
 using Content.Trauma.Common.MartialArts;
-using Content.Goobstation.Maths.FixedPoint;
-=======
-using Content.Goobstation.Common.MartialArts;
 using Content.Shared.FixedPoint;
->>>>>>> upstream/HEAD
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Server.Body.Components;
 using Content.Server.Ghost.Roles.Components;

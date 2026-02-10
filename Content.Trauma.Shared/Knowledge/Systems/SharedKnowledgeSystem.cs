@@ -1,24 +1,21 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Body.Components;
-using Content.Shared.Body.Organ;
-using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.Construction;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
-using Content.Trauma.Shared.MartialArts;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
@@ -34,8 +31,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     private EntityQuery<KnowledgeComponent> _knowledgeQuery;
     private EntityQuery<KnowledgeContainerComponent> _containerQuery;
@@ -161,7 +157,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             knowledgeComponent.Level = 100;
         if (getMastery != GetMastery(knowledge))
         {
-            _popup.PopupPredicted(Loc.GetString("knowledge-level-up-popup", ("knowledge", Name(ent)), ("mastery", GetCurrentMastery(knowledge).ToLower())), ent, ent, PopupType.Medium);
+            var knowledgePrototype = MetaData(knowledgeUnit).EntityPrototype?.ID;
+            _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgePrototype}")), ("mastery", GetCurrentMastery(knowledge).ToLower())), ent, ent, PopupType.Medium);
         }
         Dirty(ent);
     }
@@ -259,14 +256,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 Dirty(knowledgeUnitVerified, knowledgeComp);
             }
             ent.Comp.KnowledgeContainerIDs[knowledgeId.Key] = knowledgeUnitVerified;
-            if (TryComp<LanguageKnowledgeComponent>(knowledgeUnitVerified, out var langComp))
+            if (TryComp<LanguageKnowledgeComponent>(knowledgeUnitVerified, out _))
             {
                 EnsureComp<LanguageSpeakerComponent>(target);
-                _popup.PopupPredicted(Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Loc.GetString($"{knowledgeId.Key.ToString()}"))), target, target, PopupType.Medium);
+                _popup.PopupEntity(Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Loc.GetString($"{knowledgeId.Key.ToString()}"))), target, target, PopupType.Medium);
             }
             else
             {
-                _popup.PopupPredicted(Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgeId.Key.ToString()}"))), target, target, PopupType.Medium);
+                _popup.PopupEntity(Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgeId.Key.ToString()}"))), target, target, PopupType.Medium);
 
             }
             return true;
@@ -585,6 +582,34 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             >= 1 => 1,
             _ => 0,
         };
+    }
+
+    public int GetMastery(EntityUid uid)
+    {
+        if (TryComp<KnowledgeComponent>(uid, out var comp))
+        {
+            return comp.Level switch
+            {
+                >= 88 => 5,
+                >= 76 => 4,
+                >= 51 => 3,
+                >= 26 => 2,
+                >= 1 => 1,
+                _ => 0,
+            };
+        }
+        else
+            return 0;
+    }
+
+    public int GetMastery(EntityUid? uid)
+    {
+        if (uid is { })
+        {
+            return GetMastery(uid);
+        }
+        else
+            return 0;
     }
 
     public int RollPenetrating(int sides)

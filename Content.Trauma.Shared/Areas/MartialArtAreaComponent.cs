@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Goobstation.Common.MartialArts;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -16,5 +15,5 @@ public sealed partial class MartialArtAreaComponent : Component
     /// The martial art form allowed by this area.
     /// </summary>
     [DataField(required: true)]
-    public MartialArtsForms Form = default!;
+    public EntProtoId Form = default!;
 }

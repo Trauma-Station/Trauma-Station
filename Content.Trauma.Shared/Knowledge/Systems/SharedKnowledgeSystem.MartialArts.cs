@@ -1,8 +1,10 @@
-using System.Linq;
-using Content.Goobstation.Shared.Enchanting.Components;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Events;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Common.Knowledge;
@@ -10,11 +12,17 @@ using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
-using Robust.Shared.Toolshed.Syntax;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
 {
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+
+    private readonly SoundSpecifier _clumsySound = new SoundPathSpecifier("/Audio/Weapons/rubberhammer.ogg");
     private void InitializeMartialArts()
     {
         SubscribeLocalEvent<KnowledgeHolderComponent, ShotAttemptedEvent>(OnShotAttempt);
@@ -24,6 +32,8 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeHolderComponent, ResetLastAttacksEvent>(OnReset);
         SubscribeLocalEvent<KnowledgeHolderComponent, LoadLastAttacksEvent>(OnLoad);
         SubscribeLocalEvent<MeleeHitEvent>(OnMeleeHit);
+        SubscribeLocalEvent<KnowledgeHolderComponent, BeforeStaminaDamageEvent>(OnStaminaTakeDamage);
+        SubscribeLocalEvent<KnowledgeHolderComponent, BeforeDamageChangedEvent>(OnTakeDamage);
 
         SubscribeNetworkEvent<KnowledgeUpdateMartialArts>(OnUpdateMartialArts);
     }
@@ -62,7 +72,7 @@ public abstract partial class SharedKnowledgeSystem
         if (knowledgeContainerComp.MartialArtSkillUid is not { } martialArtSkillUid || !TryComp<MartialArtsKnowledgeComponent>(martialArtSkillUid, out var martialArtComp))
             return;
 
-        RaiseLocalEvent(martialArtSkillUid, ref args);
+        RaiseLocalEvent(martialArtSkillUid, args);
     }
 
     private void OnSave(Entity<KnowledgeHolderComponent> ent, ref SaveLastAttacksEvent args)
@@ -73,7 +83,7 @@ public abstract partial class SharedKnowledgeSystem
         if (knowledgeContainerComp.MartialArtSkillUid is not { } martialArtSkillUid || !TryComp<MartialArtsKnowledgeComponent>(martialArtSkillUid, out var martialArtComp))
             return;
 
-        RaiseLocalEvent(martialArtSkillUid, ref args);
+        RaiseLocalEvent(martialArtSkillUid, args);
     }
     private void OnReset(Entity<KnowledgeHolderComponent> ent, ref ResetLastAttacksEvent args)
     {
@@ -83,7 +93,7 @@ public abstract partial class SharedKnowledgeSystem
         if (knowledgeContainerComp.MartialArtSkillUid is not { } martialArtSkillUid || !TryComp<MartialArtsKnowledgeComponent>(martialArtSkillUid, out var martialArtComp))
             return;
 
-        RaiseLocalEvent(martialArtSkillUid, ref args);
+        RaiseLocalEvent(martialArtSkillUid, args);
     }
 
     private void OnLoad(Entity<KnowledgeHolderComponent> ent, ref LoadLastAttacksEvent args)
@@ -94,7 +104,7 @@ public abstract partial class SharedKnowledgeSystem
         if (knowledgeContainerComp.MartialArtSkillUid is not { } martialArtSkillUid || !TryComp<MartialArtsKnowledgeComponent>(martialArtSkillUid, out var martialArtComp))
             return;
 
-        RaiseLocalEvent(martialArtSkillUid, ref args);
+        RaiseLocalEvent(martialArtSkillUid, args);
     }
 
     private void OnMeleeHit(MeleeHitEvent args)
@@ -111,50 +121,116 @@ public abstract partial class SharedKnowledgeSystem
         if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "StrengthKnowledge"), out var strength))
         {
             var ev = new AddExperience("StrengthKnowledge", 1);
-            RaiseLocalEvent(ent, ev);
+            RaiseLocalEvent(ent, ref ev);
             bonus += 3 * ((float) strength.Level / 100.0f) * ((float) strength.Level / 100.0f);
             args.ModifiersList.Add(new DamageModifierSet()
             {
                 FlatReduction = new Dictionary<string, float>()
                 {
-                    ["Brute"] = -5 * ((float) strength.Level / 100.0f) * ((float) strength.Level / 100.0f) * Math.Clamp(GetMastery(strength) - 3, 0, GetMastery(strength)) * Math.Clamp(GetMastery(strength) - 3, 0, GetMastery(strength))
+                    ["Brute"] = -5 * ((float) strength.Level / 100.0f) * ((float) strength.Level / 100.0f) * Math.Min(GetMastery(strength) - 3, 0) * Math.Min(GetMastery(strength) - 3, 0)
                 }
             }); //Provide Armor Piercing at high strength
-            Log.Debug((-5 * ((float) strength.Level / 100.0f) * ((float) strength.Level / 100.0f) * Math.Clamp(GetMastery(strength) - 3, 0, GetMastery(strength)) * Math.Clamp(GetMastery(strength) - 3, 0, GetMastery(strength))).ToString());
         }
         if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "AthleticsKnowledge"), out var athletics))
         {
-            var ev = new AddExperience("AthleticsKnowledge", 1);
-            RaiseLocalEvent(ent, ev);
             bonus += 0.7f * ((float) athletics.Level / 100.0f) * ((float) athletics.Level / 100.0f);
         }
         if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "ToughnessKnowledge"), out var toughness))
         {
-            var ev = new AddExperience("ToughnessKnowledge", 1);
-            RaiseLocalEvent(ent, ev);
             bonus += 1.5f * ((float) toughness.Level / 100.0f) * ((float) toughness.Level / 100.0f);
             args.ModifiersList.Add(new DamageModifierSet()
             {
                 FlatReduction = new Dictionary<string, float>()
                 {
-                    ["Brute"] = -2 * ((float) toughness.Level / 100.0f) * ((float) toughness.Level / 100.0f) * Math.Clamp(GetMastery(toughness) - 3, 0, GetMastery(toughness)) * Math.Clamp(GetMastery(toughness) - 3, 0, GetMastery(toughness))
+                    ["Brute"] = -2 * ((float) toughness.Level / 100.0f) * ((float) toughness.Level / 100.0f) * Math.Min(GetMastery(toughness) - 3, 0) * Math.Min(GetMastery(toughness) - 3, 0)
                 }
             }); //Provide Armor Piercing at high toughness
         }
         if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "MeleeKnowledge"), out var melee))
         {
-            var ev = new AddExperience("MeleeKnowledge", 1);
-            RaiseLocalEvent(ent, ev);
+            var expToSend = 0;
+            foreach (var hitEntity in args.HitEntities)
+            {
+                if (!HasComp<MobStateComponent>(hitEntity))
+                    continue;
+
+                if (_mobState.IsDead(hitEntity))
+                    continue;
+
+                if (hitEntity == ent)
+                    continue;
+                expToSend += 1;
+            }
+            if (expToSend > 0)
+            {
+                var ev = new AddExperience("MeleeKnowledge", expToSend);
+                RaiseLocalEvent(ent, ref ev);
+            }
             bonus += 2 * ((float) melee.Level / 100.0f) * ((float) melee.Level / 100.0f);
             args.ModifiersList.Add(new DamageModifierSet()
             {
                 FlatReduction = new Dictionary<string, float>()
                 {
-                    ["Brute"] = -1 * ((float) melee.Level / 100.0f) * ((float) melee.Level / 100.0f) * Math.Clamp(GetMastery(melee) - 3, 0, GetMastery(melee)) * Math.Clamp(GetMastery(melee) - 3, 0, GetMastery(melee))
+                    ["Brute"] = -1 * ((float) melee.Level / 100.0f) * ((float) melee.Level / 100.0f) * Math.Min(GetMastery(melee) - 3, 0) * Math.Min(GetMastery(melee) - 3, 0)
                 }
             }); //Provide Armor Piercing at high melee
         }
+
         args.BonusDamage += (args.BaseDamage * bonus / 100);
+
+        if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "MeleeKnowledge"), out melee))
+        {
+            if (GetMastery(melee) < 2)
+            {
+                float failChance = Math.Clamp(1f - ((float) melee.Level / 26f), 0, 1f);
+
+                if (_random.Prob(failChance))
+                {
+                    _damageable.TryChangeDamage(ent, args.BaseDamage + args.BonusDamage);
+
+                    // 3. Visual/Audio Feedback
+                    _popup.PopupEntity(Loc.GetString("melee-clumsy-self-hit"), ent, ent, PopupType.LargeCaution);
+                    _audio.PlayPvs(_clumsySound, ent);
+
+                    args.Handled = true;
+                    return;
+                }
+            }
+        }
+    }
+
+    private void OnStaminaTakeDamage(Entity<KnowledgeHolderComponent> ent, ref BeforeStaminaDamageEvent args)
+    {
+        if (ent.Comp.KnowledgeEntity is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComp))
+            return;
+
+        if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "AthleticsKnowledge"), out var athletics))
+        {
+            if (args.Value > 0)
+                args.Value *= 1 - 1.1f * ((float) athletics.Level / 100.0f) * ((float) athletics.Level / 100.0f);
+            else
+                args.Value *= 10 * ((float) athletics.Level / 100.0f) * ((float) athletics.Level / 100.0f);
+            var ev = new AddExperience("AthleticsKnowledge", 1);
+            RaiseLocalEvent(ent, ref ev);
+        }
+    }
+
+    private void OnTakeDamage(Entity<KnowledgeHolderComponent> ent, ref BeforeDamageChangedEvent args)
+    {
+        if (ent.Comp.KnowledgeEntity is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComp))
+            return;
+
+        if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "ToughnessKnowledge"), out var toughness))
+        {
+            if (args.Damage.GetTotal() > 0)
+            {
+                args.Damage *= 1 - 1.1f * ((float) toughness.Level / 100.0f) * ((float) toughness.Level / 100.0f);
+                var ev = new AddExperience("ToughnessKnowledge", Math.Max((int) args.Damage.GetTotal() / 10, 10));
+                RaiseLocalEvent(ent, ref ev);
+            }
+            else
+                args.Damage *= 10 * ((float) toughness.Level / 100.0f) * ((float) toughness.Level / 100.0f);
+        }
     }
 
     private void OnUpdateMartialArts(KnowledgeUpdateMartialArts ev, EntitySessionEventArgs args)

@@ -58,6 +58,17 @@ public partial class MartialArtsSystem
 
     private void OnComboAttackPerformed(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
     {
+        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && martialArtsComp.Blocked)
+        {
+            var entProto = MetaData(ent).EntityPrototype?.ID;
+            if (entProto == null)
+                return;
+            var ev = new CanDoCQCEvent(entProto);
+            RaiseLocalEvent(ent, ev);
+            if (!ev.Handled)
+                return;
+        }
+
         if (!TryComp<MobStateComponent>(args.Target, out var targetState))
             return;
 
@@ -76,7 +87,7 @@ public partial class MartialArtsSystem
                 ent.Comp.LastAttacks.RemoveRange(0, difference);
         }
         CheckCombo(ent, args.Target, ent.Comp, ref args);
-        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && !martialArtsComp.Blocked && targetState.CurrentState == MobState.Alive && args.Type != ComboAttackType.Hug)
+        if (targetState.CurrentState == MobState.Alive && args.Type != ComboAttackType.Hug)
         {
             var prototypeId = MetaData(ent.Owner).EntityPrototype?.ID;
             if (prototypeId != null)

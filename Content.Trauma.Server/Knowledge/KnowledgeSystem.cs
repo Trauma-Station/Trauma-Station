@@ -8,7 +8,6 @@ namespace Content.Trauma.Server.Knowledge;
 public sealed class KnowledgeSystem : SharedKnowledgeSystem
 {
     [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
 
     public override void Initialize()
     {

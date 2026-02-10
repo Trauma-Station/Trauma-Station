@@ -1,5 +1,4 @@
 using System.Linq;
-using Content.Goobstation.Maths.FixedPoint;
 using Content.Server.Administration.Logs;
 using Content.Server.Body.Systems;
 using Content.Server.Construction;
@@ -22,11 +21,8 @@ using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
-<<<<<<< HEAD
 using Content.Shared.DeviceLinking.Events;
-=======
 using Content.Shared.FixedPoint;
->>>>>>> upstream/HEAD
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;

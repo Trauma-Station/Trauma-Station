@@ -15,7 +15,7 @@
   name: Melee Knowledge
   components:
   - type: Knowledge
-    experienceCost: 10
+    experienceCost: 15
 
 - type: entity
   parent: BaseKnowledge
@@ -23,7 +23,7 @@
   name: ShootingKnowledge
   components:
   - type: Knowledge
-    experienceCost: 10
+    experienceCost: 15
 
 - type: entity
   parent: BaseKnowledge
@@ -31,7 +31,7 @@
   name: SurgeryKnowledge
   components:
   - type: Knowledge
-    experienceCost: 18
+    experienceCost: 24
 
 - type: entity
   parent: BaseKnowledge
@@ -39,7 +39,7 @@
   name: FirstAidKnowledge
   components:
   - type: Knowledge
-    experienceCost: 14
+    experienceCost: 19
 
 - type: entity
   parent: BaseKnowledge
@@ -47,7 +47,7 @@
   name: ToughnessKnowledge
   components:
   - type: Knowledge
-    experienceCost: 6
+    experienceCost: 11
 
 - type: entity
   parent: BaseKnowledge
@@ -55,7 +55,7 @@
   name: StrengthKnowledge
   components:
   - type: Knowledge
-    experienceCost: 7
+    experienceCost: 12
 
 - type: entity
   parent: BaseKnowledge
@@ -63,7 +63,7 @@
   name: AthleticsKnowledge
   components:
   - type: Knowledge
-    experienceCost: 7
+    experienceCost: 12
 
 - type: entity
   parent: BaseKnowledge

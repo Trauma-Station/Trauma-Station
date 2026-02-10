@@ -1,5 +1,5 @@
 using Content.Goobstation.Common.Hands;
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Shared._EinsteinEngines.Contests;
 using Content.Shared._White.Grab;
 using Content.Shared.CombatMode;

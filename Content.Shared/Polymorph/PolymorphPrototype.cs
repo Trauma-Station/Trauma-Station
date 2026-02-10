@@ -158,21 +158,6 @@ public sealed partial record PolymorphConfiguration
     [DataField]
     public SoundSpecifier? ExitPolymorphSound;
 
-<<<<<<< HEAD
-    // Einstein Engines - Language begin
-    /// <summary>
-    /// The exact names of components to copy over when this polymorph is applied.
-    /// </summary>
-    [DataField(serverOnly: true)]
-    public HashSet<string> CopiedComponents = new()
-    {
-        "LanguageSpeaker",
-        "Grammar"
-    };
-    // Einstein Engines - Language end
-
-=======
->>>>>>> upstream/HEAD
     /// <summary>
     ///     If not null, this popup will be displayed when being polymorphed into something.
     /// </summary>
