@@ -160,7 +160,7 @@
   name: syndicate medic
   components:
   - type: Loadout
-    prototypes: [SyndicateReinforcementMedic]
+    prototypes: [MobHumanSyndicateAgentMedic]
     roleLoadout: [ RoleSurvivalSyndicate ]
 
 - type: entity
