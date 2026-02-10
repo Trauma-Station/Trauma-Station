@@ -140,7 +140,6 @@ public abstract class SharedDeepFryerSystem : EntitySystem
         if (HasComp<DeepFriedComponent>(item))
             return;
 
-
         EntityManager.AddComponents(item, ent.Comp.ComponentsToAdd, false);
         EntityManager.RemoveComponents(item, ent.Comp.ComponentsToRemove);
         if (!HasComp<BodyComponent>(item))
@@ -148,10 +147,13 @@ public abstract class SharedDeepFryerSystem : EntitySystem
             EntityManager.AddComponents(item, ent.Comp.ComponentsToAddObjects, false);
             EntityManager.RemoveComponents(item, ent.Comp.ComponentsToRemoveObjects);
 
-            if (_container.TryGetContainer(item, ent.Comp.ContainerId, out var container))
+            foreach (var container in ent.Comp.ContainersToRemove)
             {
-                _container.EmptyContainer(container);
-                _container.ShutdownContainer(container);
+                if (_container.TryGetContainer(item, container, out var containerId))
+                {
+                    _container.EmptyContainer(containerId);
+                    _container.ShutdownContainer(containerId);
+                }
             }
 
         }

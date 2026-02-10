@@ -72,8 +72,11 @@ public sealed partial class DeepFryerComponent : Component
     [DataField]
     public string FryerSolutionContainer = "fryer";
 
+    /// <summary>
+    /// Name of the containers to remove e.g bag storage
+    /// </summary>
     [DataField]
-    public string ContainerId = "storagebase";
+    public List<string> ContainersToRemove = new ();
 
     [DataField]
     public EntityUid? SoundEntity;
