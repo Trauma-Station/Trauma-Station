@@ -69,11 +69,12 @@
 - type: startingGear
   id: StartingGearDroneTools
   equipment:
-    pocket1: trayScannerUnremoveable
-    pocket2: PinpointerStationUnremoveable
     back: DroneSatchelUnremovable
   inhand:
   - OmnitoolUnremoveable
   - WelderExperimentalUnremoveable
   - RCDRechargingUnremoveable
   - NetworkConfiguratorUnremoveable
+  storage:
+    back:
+    - trayScanner
