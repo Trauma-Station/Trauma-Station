@@ -25,7 +25,7 @@
           sprite: Objects/Materials/Shards/shard.rsi
           state: shard1
         doAfter: 0.5
-  
+
   - node: ImprovisedArrow
     entity: ArrowImprovised
   group:
