@@ -72,7 +72,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         _sprite.LayerMapSet((ent, sprite), CultSiphonedVisuals.Key, layer);
         _sprite.LayerSetOffset((ent, sprite), layer, new Vector2(0, 0.8f));
         _sprite.LayerSetScale((ent, sprite), layer, new Vector2(0.65f, 0.65f));
-        _sprite.LayerSetShader((ent, sprite), layer, "unshaded");
+        sprite.LayerSetShader(layer, "unshaded");
 
         Timer.Spawn(TimeSpan.FromSeconds(2), () => _sprite.RemoveLayer((ent, sprite), CultSiphonedVisuals.Key));
         _audio.PlayLocal(_siphonSFX, ent, ent, AudioParams.Default.WithVariation(0.1f));
@@ -84,55 +84,55 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
             return;
         var entropy = Math.Clamp(ent.Comp.EntropyStored, 0, 14);
         var sprite = args.SpriteViewEnt.Comp;
-        _sprite.LayerSetState((ent, sprite), AlertVisualLayers.Base, $"base{entropy}");
-        _sprite.LayerSetState((ent, sprite), CultAlertVisualLayers.Counter, $"num{entropy}");
+        _sprite.LayerSetRsiState((ent, sprite), AlertVisualLayers.Base, $"base{entropy}");
+        _sprite.LayerSetRsiState((ent, sprite), CultAlertVisualLayers.Counter, $"num{entropy}");
     }
     #endregion
 
     #region Layer Additions
     private void OnCosmicStarMarkAdded(Entity<CosmicStarMarkComponent> uid, ref ComponentStartup args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), CosmicRevealedKey.Key, out _))
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), CosmicRevealedKey.Key, out _, logMissing: true))
             return;
 
         var layer = _sprite.AddLayer((uid, sprite), uid.Comp.Sprite);
         _sprite.LayerMapSet((uid, sprite), CosmicRevealedKey.Key, layer);
-        _sprite.LayerSetShader((uid, sprite), layer, "unshaded");
+        sprite.LayerSetShader(layer, "unshaded");
 
         if (TryComp<CosmicMarkVisualsComponent>(uid, out var offset))
         {
             _sprite.LayerSetOffset((uid, sprite), CosmicRevealedKey.Key, offset.Offset);
-            _sprite.LayerSetState((uid, sprite), layer, offset.StarState);
+            _sprite.LayerSetRsiState((uid, sprite), layer, offset.StarState);
         }
     }
 
     private void OnCosmicSubtleMarkAdded(Entity<CosmicSubtleMarkComponent> uid, ref ComponentStartup args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), CosmicRevealedKey.Key, out _))
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), CosmicRevealedKey.Key, out _, logMissing: true))
             return;
 
         var layer = _sprite.AddLayer((uid, sprite), uid.Comp.Sprite);
         _sprite.LayerMapSet((uid, sprite), CosmicRevealedKey.Key, layer);
-        _sprite.LayerSetShader((uid, sprite), layer, "unshaded");
+        sprite.LayerSetShader(layer, "unshaded");
 
         UpdateSubtleMarkVisibility(uid);
 
         if (TryComp<CosmicMarkVisualsComponent>(uid, out var offset))
         {
             _sprite.LayerSetOffset((uid, sprite), CosmicRevealedKey.Key, offset.Offset);
-            _sprite.LayerSetState((uid, sprite), layer, offset.SubtleState);
+            _sprite.LayerSetRsiState((uid, sprite), layer, offset.SubtleState);
         }
     }
 
     private void OnCosmicImpositionAdded(Entity<CosmicImposingComponent> uid, ref ComponentStartup args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), CosmicImposingKey.Key, out _))
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), CosmicImposingKey.Key, out _, logMissing: true))
             return;
 
-        var layer = _sprite.AddLayer(uid.Comp.Sprite);
+        var layer = _sprite.AddLayer((uid, sprite), uid.Comp.Sprite);
 
         _sprite.LayerMapSet((uid, sprite), CosmicImposingKey.Key, layer);
-        _sprite.LayerSetShader((uid, sprite), layer, "unshaded");
+        sprite.LayerSetShader(layer, "unshaded");
     }
     #endregion
 
@@ -188,7 +188,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     #region Mark updates
     private void UpdateSubtleMarkVisibility(EntityUid uid)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite) || !_sprite.LayerMapTryGet(CosmicRevealedKey.Key, out var layer)) return;
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || !_sprite.LayerMapTryGet((uid, sprite), CosmicRevealedKey.Key, out var layer, logMissing: true)) return;
         if (!TryComp<CosmicSubtleMarkComponent>(uid, out var markComp)) return;
         var ev = new SeeIdentityAttemptEvent();
         RaiseLocalEvent(uid, ev);
