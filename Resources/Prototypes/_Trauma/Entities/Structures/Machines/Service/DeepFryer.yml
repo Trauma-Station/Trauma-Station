@@ -33,6 +33,7 @@
       - DeepFried
       - oily
     componentsToRemoveObjects:
+    - type: Storage
     - type: Tool
     - type: RadioSpeaker
     - type: RadioMicrophone

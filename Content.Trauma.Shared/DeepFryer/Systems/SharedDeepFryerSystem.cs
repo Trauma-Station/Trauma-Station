@@ -149,7 +149,10 @@ public abstract class SharedDeepFryerSystem : EntitySystem
             EntityManager.RemoveComponents(item, ent.Comp.ComponentsToRemoveObjects);
 
             if (_container.TryGetContainer(item, ent.Comp.ContainerId, out var container))
+            {
                 _container.EmptyContainer(container);
+                _container.ShutdownContainer(container);
+            }
 
         }
 
