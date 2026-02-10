@@ -6,7 +6,7 @@
   components:
     - type: Sprite
       sprite: _Trauma/Structures/Wallmounts/extinguisher_cabinet.rsi # Trauma
-      snapCardinals: true
+      # snapCardinals: true # Trauma
       layers:
       - state: frame
       - state: extinguisher

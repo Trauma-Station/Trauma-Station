@@ -122,17 +122,18 @@
   components:
     - type: Sprite
       snapCardinals: false
-# [Trauma]
+#     <Trauma>
       sprite: _Trauma/Structures/Wallmounts/signs.rsi
     - type: PointLight
       radius: 1.4
       energy: 7
+      castShadows: false
       color: "#ff8227"
     - type: MeleeSound
       soundGroups:
         Brute:
           collection: GlassSmash
-# [/Trauma]
+#     </Trauma>
 
 - type: entity
   parent: BaseSignDirectional
