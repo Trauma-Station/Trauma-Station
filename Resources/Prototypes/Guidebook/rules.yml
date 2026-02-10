@@ -55,9 +55,9 @@
   - RuleC7
   - RuleC8
   - RuleC9
-  - RuleC10
-  - RuleC11
-  - RuleC12
+  # - RuleC10 # Trauma
+  # - RuleC11
+  # - RuleC12
 
 - type: guideEntry
   id: RuleC0
@@ -163,16 +163,16 @@
   - RuleR4
   - RuleR5
   - RuleR6
-  - RuleR7
-  - RuleR8
-  - RuleR9
-  - RuleR10
-  - RuleR11
-  - RuleR12
-  - RuleR13
-  - RuleR14
-  - RuleR15
-  - RuleR16
+  # - RuleR7 # Trauma
+  # - RuleR8
+  # - RuleR9
+  # - RuleR10
+  # - RuleR11
+  # - RuleR12
+  # - RuleR13
+  # - RuleR14
+  # - RuleR15
+  # - RuleR16
 
 - type: guideEntry
   id: RuleR1
@@ -299,10 +299,10 @@
   - RuleS4
   - RuleS5
   - RuleS6
-  - RuleS7
-  - RuleS8
-  - RuleS9
-  - RuleS10
+  # - RuleS7 # Trauma
+  # - RuleS8
+  # - RuleS9
+  # - RuleS10
 
 - type: guideEntry
   id: RuleS1
