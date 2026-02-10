@@ -25,7 +25,7 @@ using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Server.Construction.Conditions;
 using Content.Shared._White.Xenomorphs.FaceHugger;
@@ -50,12 +50,12 @@ public sealed class FaceHuggerSystem : EntitySystem
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly StunSystem _stun = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
 
     public override void Initialize()
     {
@@ -67,14 +67,32 @@ public sealed class FaceHuggerSystem : EntitySystem
         SubscribeLocalEvent<FaceHuggerComponent, StepTriggeredOffEvent>(OnStepTriggered);
         SubscribeLocalEvent<FaceHuggerComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<FaceHuggerComponent, BeingUnequippedAttemptEvent>(OnBeingUnequippedAttempt);
+        SubscribeLocalEvent<FaceHuggerComponent, PlayerAttachedEvent>(OnPlayerAttached);
+        SubscribeLocalEvent<FaceHuggerComponent, PlayerDetachedEvent>(OnPlayerDetached);
 
         // Goobstation - Throwing behavior
         SubscribeLocalEvent<ThrowableFacehuggerComponent, ThrownEvent>(OnThrown);
         SubscribeLocalEvent<ThrowableFacehuggerComponent, ThrowDoHitEvent>(OnThrowDoHit);
     }
 
+    private void OnPlayerAttached(EntityUid uid, FaceHuggerComponent component, PlayerAttachedEvent args) // Trauma, player controlled facehuggers
+    {
+        component.PlayerControlled = true;
+    }
+
+    private void OnPlayerDetached(EntityUid uid, FaceHuggerComponent component, PlayerDetachedEvent args) // Trauma, player controlled facehuggers
+    {
+        component.PlayerControlled = false;
+    }
+
     private void OnCollideEvent(EntityUid uid, FaceHuggerComponent component, StartCollideEvent args)
-        => TryEquipFaceHugger(uid, args.OtherEntity, component);
+    {
+        if(!component.PlayerControlled) // Trauma, player controlled facehuggers
+            return;
+
+        TryEquipFaceHugger(uid, args.OtherEntity, component);
+    }
+
 
     private void OnMeleeHit(EntityUid uid, FaceHuggerComponent component, MeleeHitEvent args)
     {
@@ -89,7 +107,7 @@ public sealed class FaceHuggerSystem : EntitySystem
 
     private void OnStepTriggered(EntityUid uid, FaceHuggerComponent component, ref StepTriggeredOffEvent args)
     {
-        if (component.Active)
+        if (component.Active && component.PlayerControlled) // Trauma, player controlled facehuggers
             TryEquipFaceHugger(uid, args.Tripper, component);
     }
 
@@ -154,7 +172,7 @@ public sealed class FaceHuggerSystem : EntitySystem
 
             // Handle continuous chemical injection when equipped
             // Goobstation
-            if (TryComp<ClothingComponent>(uid, out var clothing) && clothing.InSlot != null)
+            if (TryComp<ClothingComponent>(uid, out var clothing) && clothing.InSlot != null && !_mobState.IsDead(uid))
             {
                 // Initialize NextInjectionTime if it's zero
                 if (faceHugger.NextInjectionTime == TimeSpan.Zero)
@@ -176,11 +194,13 @@ public sealed class FaceHuggerSystem : EntitySystem
             }
             // Goobstaion end
 
-            // Check for nearby entities to latch onto
+            if (!faceHugger.PlayerControlled) // Trauma, no auto jumping facehuggers without player
+                return;
+
             if (faceHugger.Active && clothing?.InSlot == null)
             {
                 foreach (var entity in _entityLookup.GetEntitiesInRange<InventoryComponent>(Transform(uid).Coordinates,
-                             1.5f))
+                             1.3f))
                 {
                     if (TryEquipFaceHugger(uid, entity, faceHugger))
                         break;
@@ -292,18 +312,18 @@ public sealed class FaceHuggerSystem : EntitySystem
     /// </summary>
     public bool CanInject(EntityUid uid, FaceHuggerComponent component, EntityUid target)
     {
+        // injection disabled
+        if (component.SleepChem is not {} reagent)
+            return false;
+
         // Check if facehugger is properly equipped
         if (!TryComp<ClothingComponent>(uid, out var clothingComp) || clothingComp.InSlot == null)
-        {
-            if (!component.Active)
-                return false;
-            return true;
-        }
+            return component.Active;
 
         // Check if target already has the sleep chemical
         if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
             _solutions.ResolveSolution(target, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution) &&
-            bloodSolution.TryGetReagentQuantity(new ReagentId(component.SleepChem, null), out var quantity) &&
+            bloodSolution.TryGetReagentQuantity(new ReagentId(reagent, null), out var quantity) &&
             quantity > FixedPoint2.New(component.MinChemicalThreshold))
         {
             return false;
@@ -317,7 +337,8 @@ public sealed class FaceHuggerSystem : EntitySystem
     public Solution CreateSleepChemicalSolution(FaceHuggerComponent component, float amount)
     {
         var solution = new Solution();
-        solution.AddReagent(component.SleepChem, amount);
+        if (component.SleepChem is {} reagent)
+            solution.AddReagent(reagent, amount);
         return solution;
     }
 

@@ -1,0 +1,20 @@
+uniform highp vec4 col1;
+uniform highp vec4 col2;
+uniform highp vec4 params;
+
+void fragment() {
+    lowp float pixelSize = 32.0;
+    highp float blur = params.x;
+    highp float prop = params.y;
+
+    highp vec4 sprite = zTexture(UV);
+
+    if (sprite.a == 0.0) {
+        discard;
+    }
+
+    highp float coord = floor(UV2.y * pixelSize) / pixelSize;
+
+    highp float t = smoothstep(prop - blur, prop + blur, coord);
+    COLOR = vec4(mix(col1.rgb, col2.rgb, t) * sprite.rgb, sprite.a);
+}

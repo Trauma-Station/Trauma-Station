@@ -1,7 +1,7 @@
 // <Trauma>
 // holy shit just make your own system, shitters
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Goobstation.Common.Changeling;
+using Content.Goobstation.Common.Magic;
 using Content.Goobstation.Common.Religion;
 using Content.Shared._Goobstation.Wizard;
 using Content.Shared._Goobstation.Wizard.BindSoul;
@@ -11,9 +11,9 @@ using Content.Shared._Shitmed.Damage;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Actions;
 using Content.Shared.Damage.Systems;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Ghost;
-using Content.Shared.Gibbing.Events;
+using Content.Shared.Gibbing;
 using Content.Shared.Heretic;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Components;
@@ -24,14 +24,13 @@ using Content.Shared.Zombies;
 using System.Linq;
 // </Trauma>
 using System.Numerics;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Examine;
+using Content.Shared.Gibbing;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -76,7 +75,7 @@ public abstract class SharedMagicSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -291,7 +290,7 @@ public abstract class SharedMagicSystem : EntitySystem
     ///     Gets spawn positions listed on <see cref="InstantSpawnSpellEvent"/>
     /// </summary>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    private List<EntityCoordinates> GetInstantSpawnPositions(TransformComponent casterXform, MagicInstantSpawnData data)
+    public List<EntityCoordinates> GetInstantSpawnPositions(TransformComponent casterXform, MagicInstantSpawnData data) // Goob edit - made public
     {
         switch (data)
         {
@@ -406,15 +405,12 @@ public abstract class SharedMagicSystem : EntitySystem
     // End World Spawn Spells
     #endregion
     #region Projectile Spells
-    private void OnProjectileSpell(ProjectileSpellEvent ev)
+    public void OnProjectileSpell(ProjectileSpellEvent ev) // Goob edit - made public
     {
         if (ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer)) // Goob edit
             return;
 
         ev.Handled = true;
-
-        if (_net.IsClient) // Goobstation
-            return;
 
         var xform = Transform(ev.Performer);
         var fromCoords = xform.Coordinates;
@@ -427,7 +423,7 @@ public abstract class SharedMagicSystem : EntitySystem
             : new(_mapSystem.GetMap(fromMap.MapId), fromMap.Position);
         var userVelocity = _physics.GetMapLinearVelocity(spawnCoords); // Goob edit
 
-        var ent = Spawn(ev.Prototype, fromMap);
+        var ent = PredictedSpawnAtPosition(ev.Prototype, _transform.ToCoordinates(fromMap)); // Trauma
         var direction = _transform.ToMapCoordinates(ev.Target).Position -
                         fromMap.Position;
         _gunSystem.ShootProjectile(ent, direction, userVelocity, ev.Performer, ev.Performer, ev.Speed); // Goob - put speed in event instead of hardcoded
@@ -550,11 +546,10 @@ public abstract class SharedMagicSystem : EntitySystem
 
         _physics.ApplyLinearImpulse(ev.Target, impulseVector);
 
-        if (!TryComp<BodyComponent>(ev.Target, out var body))
-            return;
-
-        if (_timing.IsFirstTimePredicted) // Goobstation
-            _body.GibBody(ev.Target, true, body, splatModifier: 10f, contents: GibContentsOption.Skip); // Goob edit
+        // <Goob> - check FirstTimePredicted
+        if (_timing.IsFirstTimePredicted)
+            _gibbing.Gib(ev.Target);
+        // </Goob>
     }
     // End Smite Spells
     #endregion
@@ -680,12 +675,12 @@ public abstract class SharedMagicSystem : EntitySystem
             return;
         }
 
+        // raise blocker event (why the fuck was this done as a list lol)
+        var blockEv = new BeforeMindSwappedEvent();
+        RaiseLocalEvent(ev.Target, ref blockEv);
+
         List<(Type, string)> blockers = new()
         {
-            (typeof(ChangelingComponent), "changeling"), // TODO change to ChangelingIdentityComponent
-            // You should be able to mindswap with heretics,
-            // but all of their data and abilities are not tied to their mind, I'm not making this work.
-            (typeof(HereticComponent), "heretic"),
             (typeof(GhoulComponent), "ghoul"),
             // Mindswapping with aghost real.
             (typeof(GhostComponent), "ghost"),
@@ -693,6 +688,13 @@ public abstract class SharedMagicSystem : EntitySystem
             (typeof(TimedDespawnComponent), "temporary"),
             (typeof(FadingTimedDespawnComponent), "temporary"),
         };
+
+        // someone should nuke the list and make all of the components use the event. that someone is not me.
+        if (blockEv.Cancelled)
+        {
+            _popup.PopupClient(Loc.GetString($"spell-fail-mindswap-{blockEv.Message}"), ev.Performer, ev.Performer);
+            return;
+        }
 
         if (blockers.Any(x => CheckMindswapBlocker(x.Item1, x.Item2)))
             return;

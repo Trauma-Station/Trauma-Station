@@ -33,7 +33,7 @@
       Death: 100
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 250
+    chaosScore: 400
   - type: AlertLevelInterceptionRule
   - type: AntagSelection
     selectionTime: PostPlayerSpawn
@@ -75,7 +75,7 @@
       Death: 150
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 300
+    chaosScore: 600
   - type: AlertLevelInterceptionRule
   - type: AntagSelection
     selectionTime: PostPlayerSpawn
@@ -118,7 +118,7 @@
       Death: 200
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 300
+    chaosScore: 500
   - type: AlertLevelInterceptionRule
   - type: AntagSelection
     selectionTime: PostPlayerSpawn
@@ -160,7 +160,7 @@
       Death: 250
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 800
+    chaosScore: 900
   - type: AntagSelection
     selectionTime: PostPlayerSpawn
     definitions:
@@ -194,13 +194,14 @@
     weight: 5
     duration: 1
     minimumPlayers: 15
+    maxOccurrences: 2
     chaos:
       Hostile: 40
       Medical: 40
       Death: 40
     eventType: Chaotic
   - type: GameRule
-    chaosScore: 90
+    chaosScore: 150
   - type: RandomEntityStorageSpawnRule
     prototype: MobSkeletonCloset
   - type: Tag
@@ -224,7 +225,7 @@
       Death: 400
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 1000
+    chaosScore: 1100
   - type: BlobSpawnRule
     carrierBlobProtos:
     - SpawnPointGhostBlobRat
@@ -245,7 +246,7 @@
     maxOccurrences: 2
     eventType: Neutral
   - type: GameRule
-    chaosScore: 0
+    chaosScore: 20
   - type: VentCrittersRule
     max: 1
     table: !type:GroupSelector
@@ -310,7 +311,7 @@
       Combat: 20
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 220
+    chaosScore: 220 # ПРОКЛЯТИЕ 220!
   - type: AntagSpawner
     prototype: MobHumanGreyTide
   - type: AntagSelection
@@ -345,7 +346,7 @@
       Combat: 20
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 200
+    chaosScore: 280
   - type: AntagSpawner
     prototype: MobHumanTunnelClown
   - type: AntagSelection
@@ -380,7 +381,7 @@
       Combat: 40
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 350
+    chaosScore: 420
   - type: AntagSpawner
     prototype: MobHumanSingulothKnight
   - type: AntagSelection
@@ -418,7 +419,7 @@
       Hostile: 40
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 400
+    chaosScore: 550
   - type: AntagSpawner
     prototype: MobHumanDarkLord
   - type: AntagSelection
@@ -481,7 +482,7 @@
       Combat: 50
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 200
+    chaosScore: 300
   - type: AntagSpawner
     prototype: MobHumanMimeAssassin
   - type: AntagSelection
@@ -518,7 +519,7 @@
       Death: 60
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 250
+    chaosScore: 350
   - type: AntagSpawner
     prototype: MobHumanDarkPriest
   - type: AntagSelection
@@ -546,17 +547,6 @@
   parent: BaseGameRule
   id: VoxRaidersMidround
   components:
-  - type: AntagObjectives
-    objectives:
-    - EscapeThiefShuttleObjective
-  - type: AntagRandomObjectives
-    sets:
-    - groups: ThiefBigObjectiveGroups
-      prob: 0.7
-      maxPicks: 2
-    - groups: ThiefObjectiveGroups
-      maxPicks: 15
-    maxDifficulty: 2
   - type: StationEvent
     earliestStart: 35
     weight: 2.5
@@ -578,16 +568,27 @@
     agentName: ghost-role-information-vox-raider-name
     definitions:
     - spawnerPrototype: SpawnPointGhostVoxRaider
-      min: 3
-      max: 4
+      min: 2
+      max: 3
       pickPlayer: false
       mindRoles:
       - MindRoleGhostRoleTeamAntagonist
+      - MindRoleThief
       briefing:
         text: vox-raider-role-greeting
         color: Purple
         sound: /Audio/Misc/thief_greeting.ogg
-
+  - type: AntagObjectives
+    objectives:
+    - EscapeThiefShuttleObjective
+  - type: AntagRandomObjectives
+    sets:
+    - groups: ThiefBigObjectiveGroups
+      prob: 0.7
+      maxPicks: 2
+    - groups: ThiefObjectiveGroups
+      maxPicks: 15
+    maxDifficulty: 4
 
 - type: entity
   id: ClownGoblinMigration
@@ -623,12 +624,11 @@
       Death: 40
     eventType: HostilesSpawn
   - type: GameRule
-    chaosScore: 400
+    chaosScore: 600
   - type: AntagRandomSpawn
   - type: AntagLoadProfileRule
     speciesOverride: Human
     speciesOverrideBlacklist:
-    - Yowie
     - IPC
     - Diona
     - Harpy
@@ -682,6 +682,66 @@
         - NamesSlasherTitle
         - NamesSlasher
         nameFormat: name-format-slasher
+  - type: Tag
+    tags:
+    - MidroundAntag
+
+#Contractor
+- type: entity
+  parent: ContractorSpawn
+  id: ContractorSpawnMidround
+  components:
+  - type: GameRule
+    chaosScore: 400
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Goobstation/Shuttles/ShuttleEvent/Legionnaire.yml
+  - type: StationEvent
+    startAnnouncement: null
+    weight: 1
+    duration: null
+    earliestStart: 30
+    minimumPlayers: 30
+    chaos:
+      Hostile: 40
+      Combat: 40
+      Death: 40
+    eventType: HostilesSpawn
+  - type: AntagLoadProfileRule
+    speciesOverrideBlacklist:
+    - IPC
+    - Diona
+    - Harpy
+    - Plasmaman
+  - type: AntagObjectives
+    objectives:
+    - ContractorRansomObjective
+  - type: AntagSelection
+    selectionTime: PostPlayerSpawn
+    agentName: ghost-role-information-contractor-name
+    definitions:
+    - spawnerPrototype: ContractorSpawner
+      min: 1
+      max: 1
+      pickPlayer: false
+      startingGear: ContractorGear
+      roleLoadout:
+      - RoleSurvivalNukie
+      mindRoles:
+      - MindRoleContractor
+      briefing:
+        text: contractor-role-greeting
+        color: Red
+        sound: /Audio/Ambience/Antag/traitor_wawa.ogg
+      components:
+      - type: RandomMetadata
+        nameSegments:
+        - NamesContractorPrefix
+        - NamesSyndicateElite
+        nameFormat: name-format-standard
+      - type: NpcFactionMember
+        factions:
+        - Syndicate
   - type: Tag
     tags:
     - MidroundAntag

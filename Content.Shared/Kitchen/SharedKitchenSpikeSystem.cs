@@ -1,11 +1,14 @@
+// <Trauma>
+using Content.Trauma.Common.Kitchen;
+// </Trauma>
 using Content.Shared.Administration.Logs;
-using Content.Shared.Body.Systems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
+using Content.Shared.Gibbing;
 using Content.Shared.Hands;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
@@ -41,7 +44,7 @@ public sealed class SharedKitchenSpikeSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
@@ -282,6 +285,16 @@ public sealed class SharedKitchenSpikeSystem : EntitySystem
             return;
 
         var victimIdentity = Identity.Entity(args.Target.Value, EntityManager);
+        // <Trauma> - lets the target mob prevent being butchered
+        var target = args.Target.Value; // 3 month old shitcode award
+        var attemptEv = new ButcherAttemptEvent();
+        RaiseLocalEvent(target, ref attemptEv);
+        if (attemptEv.CancelPopup is {} loc)
+        {
+            _popupSystem.PopupClient(Loc.GetString(loc, ("victim", victimIdentity)), target, args.User);
+            return;
+        }
+        // </Trauma>
 
         _popupSystem.PopupPredicted(Loc.GetString("comp-kitchen-spike-butcher-self", ("victim", victimIdentity)),
             Loc.GetString("comp-kitchen-spike-butcher", ("user", Identity.Entity(args.User, EntityManager)), ("victim", victimIdentity)),
@@ -317,7 +330,7 @@ public sealed class SharedKitchenSpikeSystem : EntitySystem
         // Gib the victim if there is nothing else to butcher.
         if (butcherable.SpawnedEntities.Count == 0)
         {
-            _bodySystem.GibBody(args.Target.Value, true);
+            _gibbing.Gib(args.Target.Value);
 
             var logSeverity = HasComp<HumanoidAppearanceComponent>(args.Target) ? LogImpact.Extreme : LogImpact.High;
 

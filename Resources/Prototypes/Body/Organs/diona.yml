@@ -1,5 +1,5 @@
 - type: entity
-  id: BaseDionaOrganUnGibbable # Shitmed - ungibbable
+  id: BaseDionaOrgan
   parent: BaseItem
   abstract: true
   components:
@@ -39,12 +39,13 @@
 
 - type: entity
   id: OrganDionaBrain
-  parent: BaseDionaOrganUnGibbable
+  parent: BaseDionaOrgan
   name: brain
   description: "The central hub of a diona's pseudo-neurological activity, its root-like tendrils search for its former body."
   components:
   - type: MindContainer
-    showExamineInfo: true
+  - type: MindExaminable # Trauma
+    state: Catatonic
   - type: Speech
     enabled: false
   - type: TypingIndicator

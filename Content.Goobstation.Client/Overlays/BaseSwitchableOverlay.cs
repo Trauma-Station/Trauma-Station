@@ -27,10 +27,12 @@ public sealed class BaseSwitchableOverlay<TComp> : Overlay where TComp : Switcha
 
     public bool IsActive = true;
 
+    public readonly ProtoId<ShaderPrototype> NightVision = "NightVision";
+
     public BaseSwitchableOverlay()
     {
         IoCManager.InjectDependencies(this);
-        _shader = _prototype.Index<ShaderPrototype>("NightVision").InstanceUnique();
+        _shader = _prototype.Index(NightVision).InstanceUnique();
     }
 
     protected override void Draw(in OverlayDrawArgs args)

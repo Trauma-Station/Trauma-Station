@@ -27,7 +27,7 @@
   - MagazinePistolPractice
   - SpeedLoaderMagnumPractice
   - MagazinePistolSubMachineGunPractice
-  - WeaponFlareGunSecurity
+  # - WeaponFlareGunSecurity # Trauma
 
 # Shared between secfab and emagged autolathe
 - type: latheRecipePack
@@ -35,6 +35,7 @@
   recipes:
   - BoxLethalshot
   - BoxShotgunSlug
+  - BoxShotgunBreaching # Trauma
   # - MagazineBoxLightRifle # Goobstation - remove light rifle
   - MagazineBoxMagnum
   - MagazineBoxPistol
@@ -130,7 +131,7 @@
   id: SecurityWeapons
   recipes:
   - Truncheon
-  - WeaponAdvancedLaser
+  # - WeaponAdvancedLaser # Trauma, No longer has a niche
   - WeaponLaserCannon
   - WeaponLaserCarbine
   - WeaponXrayCannon

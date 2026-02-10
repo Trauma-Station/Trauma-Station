@@ -79,3 +79,15 @@
   groups:
   - Electronics
   # Goobstation end
+
+- type: construction
+  id: MakeshiftCentrifuge
+  graph: MakeshiftCentrifuge
+  startNode: start
+  targetNode: makeshiftCentrifuge
+  category: construction-category-tools
+  objectType: Item
+  # Goobstation start
+  groups:
+  - Electronics
+  # Goobstation end

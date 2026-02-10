@@ -42,16 +42,12 @@ public sealed class InteractorSystem : SharedInteractorSystem
             return;
         }
 
-        // nothing there
-        if (FindTarget(ent) is not {} target)
-        {
-            Machine.Failed(ent.Owner);
-            return;
-        }
+        // skip finding a target for use in hand, it's unused.
+        var target = ent.Comp.UseInHand ? null : FindTarget(ent);
 
         _constructionQuery.TryComp(target, out var construction);
         var originalCount = construction?.InteractionQueue.Count ?? 0;
-        if (!InteractWith(ent, target))
+        if (!TryInteractWith(ent, target))
         {
             // have to remove it since user's filter was bad due to unhandled interaction
             Machine.Failed(ent.Owner);

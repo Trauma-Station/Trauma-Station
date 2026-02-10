@@ -635,7 +635,7 @@ public sealed partial class GoobCVars
     /// Should heretic ascension ritual be cancelled if heretic hasn't completed their objectives.
     /// </summary>
     public static readonly CVarDef<bool> AscensionRequiresObjectives =
-        CVarDef.Create("heretic.ascension_requires_objectives", true, CVar.SERVERONLY);
+        CVarDef.Create("heretic.ascension_requires_objectives", true, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     /// A multiplier for bloodloss damage and heal.
@@ -649,6 +649,18 @@ public sealed partial class GoobCVars
     public static readonly CVarDef<float> AdminNotificationVolume =
         CVarDef.Create("admin.notification_volume", 1f, CVar.CLIENT | CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    /// <summary>
+    /// Whether or not to spawn space whales if the entity is too far away from the station
+    /// </summary>
+    public static readonly CVarDef<bool> SpaceWhaleSpawn =
+        CVarDef.Create("misc.space_whale_spawn", true, CVar.SERVER);
+
+    /// <summary>
+    /// The distance to spawn a space whale from the station
+    /// </summary>
+    public static readonly CVarDef<int> SpaceWhaleSpawnDistance =
+        CVarDef.Create("misc.space_whale_spawn_distance", 1965, CVar.SERVER);
+
     #endregion
 
     #region Flash
@@ -657,4 +669,10 @@ public sealed partial class GoobCVars
         CVarDef.Create("flash.direction_check", true, CVar.ARCHIVE | CVar.REPLICATED);
 
     #endregion
+
+    /// <summary>
+    /// Controls how often GPS updates.
+    /// </summary>
+    public static readonly CVarDef<float> GpsUpdateRate =
+        CVarDef.Create("gps.update_rate", 1f, CVar.SERVER | CVar.REPLICATED);
 }

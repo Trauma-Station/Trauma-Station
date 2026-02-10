@@ -29,7 +29,7 @@
   - node: ImprovisedArrow
     entity: ArrowImprovised
   group:
-  - Technological
+  - Revolutionary
 
 - type: constructionGraph
   id: ImprovisedArrowPlasma
@@ -55,7 +55,7 @@
   - node: ImprovisedArrowPlasma
     entity: ArrowImprovisedPlasma
   group:
-  - Technological
+  - Revolutionary
 
 - type: constructionGraph
   id: ImprovisedArrowUranium
@@ -81,7 +81,7 @@
   - node: ImprovisedArrowUranium
     entity: ArrowImprovisedUranium
   group:
-  - Technological
+  - Revolutionary
 
 - type: constructionGraph
   id: ImprovisedArrowCarp
@@ -104,7 +104,7 @@
   - node: ImprovisedArrowCarp
     entity: ArrowImprovisedCarp
   group:
-  - Technological
+  - Revolutionary
 
 - type: constructionGraph
   id: CardArrow
@@ -124,4 +124,4 @@
   - node: CardArrow
     entity: ArrowCard
   group:
-  - Technological
+  - Revolutionary

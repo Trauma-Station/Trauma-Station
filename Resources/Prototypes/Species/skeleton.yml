@@ -23,6 +23,10 @@
 - type: speciesBaseSprites
   id: MobSkeletonSprites
   sprites:
+    # <Trauma>
+    Special: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    # </Trauma>
     Head: MobSkeletonHead
     Chest: MobSkeletonChest
     Groin: MobSkeletonGroin

@@ -8,6 +8,7 @@
 
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Overlays;
+using Content.Trauma.Common.Kitchen;
 using Content.Shared.Body.Systems;
 using Content.Shared.Eye.Blinding.Components;
 
@@ -22,6 +23,8 @@ public abstract class SharedChangelingSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ChangelingIdentityComponent, SwitchableOverlayToggledEvent>(OnVisionToggle);
+        SubscribeLocalEvent<ChangelingIdentityComponent, ButcherAttemptEvent>(OnButcherAttempt);
+        SubscribeLocalEvent<AbsorbedComponent, ButcherAttemptEvent>(OnButcherAttempt);
     }
 
     private void OnVisionToggle(Entity<ChangelingIdentityComponent> ent, ref SwitchableOverlayToggledEvent args)
@@ -36,4 +39,10 @@ public abstract class SharedChangelingSystem : EntitySystem
     }
 
     protected virtual void UpdateFlashImmunity(EntityUid uid, bool active) { }
+
+    private void OnButcherAttempt(EntityUid uid, IComponent comp, ref ButcherAttemptEvent args)
+    {
+        // intentionally using the same popup for both components so you have to use 1% of your brain
+        args.CancelPopup = "butcherable-deny-absorbed";
+    }
 }

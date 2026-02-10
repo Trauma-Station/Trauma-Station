@@ -17894,7 +17894,6 @@ entities:
     - type: BecomesStation
       id: Chloris
     - type: ImplicitRoof
-    - type: FTLDrive
   - uid: 4
     components:
     - type: MetaData

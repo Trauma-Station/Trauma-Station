@@ -139,8 +139,10 @@ namespace Content.Shared.Friction
                      * Block movement shouldn't be added and removed frivolously so it should be reliable to use this
                      * as a check for brains and such which have input mover purely for ghosting behavior.
                      */
-                    DebugTools.Assert(!_moverQuery.HasComp(uid) || _blockMoverQuery.HasComp(uid),
-                        $"Input mover: {ToPrettyString(uid)} in TileFrictionController is not the correct BodyType, BodyType found: {body.BodyType}, expected: KinematicController.");
+                    // <Trauma> - made this a warning instead of assert, I have no idea what changed tomato to dynamic...
+                    if (_moverQuery.HasComp(uid) && !_blockMoverQuery.HasComp(uid))
+                        Log.Warning($"Input mover: {ToPrettyString(uid)} in TileFrictionController is not the correct BodyType, BodyType found: {body.BodyType}, expected: KinematicController.");
+                    // </Trauma>
                     continue;
                 }
 

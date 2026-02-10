@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Weapons.Multishot;
 using Content.Goobstation.Common.Weapons.Ranged;
-using Content.Shared._Lavaland.Weapons.Ranged.Events;
+using Content.Lavaland.Common.Weapons.Ranged;
 using Content.Shared._Shitmed.Weapons.Ranged.Events;
 using Content.Shared.Mech.Components;
 using Content.Shared.Weapons.Hitscan.Events;
@@ -653,11 +653,6 @@ public abstract partial class SharedGunSystem : EntitySystem
                 for (var i = 1; i < ammoSpreadComp.Count; i++)
                 {
                     var newuid = PredictedSpawnAtPosition(ammoSpreadComp.Proto, fromEnt);
-                    // Lavaland Change: Raise event when a projectile/pellet is fired from a gun.
-                    RaiseLocalEvent(gunUid, new ProjectileShotEvent()
-                    {
-                        FiredProjectile = newuid
-                    });
                     SetProjectilePerfectHitEntities(newuid, user, new MapCoordinates(toMap, fromMap.MapId)); // Goob
                     ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation
                     shotProjectiles.Add(newuid);
@@ -703,6 +698,11 @@ public abstract partial class SharedGunSystem : EntitySystem
             var ev = new PlayerShotProjectileEvent(uid, userUid);
             RaiseLocalEvent(ref ev);
         }
+        if (gunUid is {} gun)
+        {
+            var shotEv = new ProjectileShotEvent(uid);
+            RaiseLocalEvent(gun, ref shotEv);
+        }
         // </Trauma>
     }
 
@@ -733,7 +733,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     /// <summary>
     /// Drops a single cartridge / shell
     /// </summary>
-    protected void EjectCartridge(
+    public void EjectCartridge( // Trauma - made public
         // <Trauma>
         System.Random rand, // predicted random instance for the gun
         EntityUid? user,
@@ -784,7 +784,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         RemCompDeferred<AmmoComponent>(uid);
     }
 
-    protected void MuzzleFlash(EntityUid gun, AmmoComponent component, Angle worldAngle, EntityUid? user = null)
+    public void MuzzleFlash(EntityUid gun, AmmoComponent component, Angle worldAngle, EntityUid? user = null) // Trauma - made public
     {
         var attemptEv = new GunMuzzleFlashAttemptEvent();
         RaiseLocalEvent(gun, ref attemptEv);

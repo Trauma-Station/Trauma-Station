@@ -41,12 +41,12 @@ using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.Roles;
 using Content.Shared.Alert;
 using Content.Shared.Audio;
-using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Light.Components;
@@ -106,7 +106,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly ServerGlobalSoundSystem _sound = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
@@ -325,10 +325,27 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         {
             EntityUid picked;
 
-            if (args.Winner == null)
-                picked = (EntityUid) _rand.Pick(args.Winners);
-            else
+            //Here to prevent deleted entitiy
+            if (args.Winner != null && !TerminatingOrDeleted((EntityUid) args.Winner))
+            {
                 picked = (EntityUid) args.Winner;
+            }
+            else
+            {
+                var actualWinners = new List<EntityUid>();
+
+                foreach (var winner in args.Winners)
+                {
+                    if (!TerminatingOrDeleted((EntityUid) winner))
+                        actualWinners.Add((EntityUid) winner);
+                }
+
+                //Just in case
+                if (actualWinners.Count == 0)
+                    return;
+
+                picked = _rand.Pick(actualWinners);
+            }
 
             EnsureComp<CosmicCultLeadComponent>(picked);
             RaiseLocalEvent(picked, new CosmicCultLeadChangedEvent());
@@ -372,7 +389,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
                 var ascendant = Spawn("MobCosmicAstralAscended", Transform(cultist).Coordinates);
                 _mind.TransferTo(mindContainer.Mind.Value, ascendant);
                 _metaData.SetEntityName(ascendant, Loc.GetString("cosmiccult-astral-ascendant", ("name", cultist))); //Renames cultists' ascendant forms to "[CharacterName], Ascendant"
-                _body.GibBody(cultist); // you don't need that body anymore
+                _gibbing.Gib(cultist); // you don't need that body anymore
             }
 
             QueueDel(cultRule.MonumentInGame); // The monument doesn't need to stick around postround! Into the bin with you.
@@ -806,7 +823,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             || !TryComp<MindComponent>(mindId, out var mindComp))
             return;
 
-        _mind.ClearObjectives(mindId, mindComp);
+        _mind.ClearObjectives((mindId, mindComp));
         _role.MindRemoveRole<CosmicCultRoleComponent>(mindId);
         _role.MindRemoveRole<RoleBriefingComponent>(mindId);
 

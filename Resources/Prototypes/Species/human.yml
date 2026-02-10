@@ -17,14 +17,19 @@
 - type: speciesBaseSprites
   id: MobHumanSprites
   sprites:
+    # <Trauma>
+    HairSpecial: MobHumanoidAnyMarking
+    FacialHairSpecial: MobHumanoidAnyMarking
+    Face: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    # </Trauma>
     Special: MobHumanoidAnyMarking
     Head: MobHumanHead
-    Face: MobHumanoidAnyMarking
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobHumanChest
     Groin: MobHumanGroin
     Eyes: MobHumanoidEyes
@@ -41,6 +46,14 @@
 - type: markingPoints
   id: MobHumanMarkingLimits
   points:
+    # <Trauma>
+    HairSpecial:
+      points: 1
+      required: false
+    FacialHairSpecial:
+      points: 1
+      required: false
+    # </Trauma>
     Hair:
       points: 1
       required: false
@@ -51,17 +64,18 @@
       points: 1
       required: false
     HeadTop:
-      points: 8
+      points: 8 # Trauma - was 1
+      required: false
+    UndergarmentTop:
+      points: 1
+      required: false
+    UndergarmentBottom:
+      points: 1
       required: false
     Chest:
-      points: 10
+      points: 10 # Trauma - was 2
       required: false
-    Underwear:
-      points: 1
-      required: false
-    Undershirt:
-      points: 1
-      required: false
+    # <Trauma>
     RightLeg:
       points: 2
       required: false
@@ -86,6 +100,7 @@
     LeftHand:
       points: 3
       required: false
+    # </Trauma>
 
 - type: humanoidBaseSprite
   id: MobHumanoidEyes

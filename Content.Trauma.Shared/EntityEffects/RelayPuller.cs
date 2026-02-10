@@ -22,11 +22,16 @@ public sealed partial class RelayPuller : EntityEffectBase<RelayPuller>
 
 public sealed class RelayPullerEffectSystem : EntityEffectSystem<PullableComponent, RelayPuller>
 {
+    [Dependency] private readonly EffectDataSystem _data = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
 
     protected override void Effect(Entity<PullableComponent> ent, ref EntityEffectEvent<RelayPuller> args)
     {
-        if (ent.Comp.Puller is {} puller)
-            _effects.TryApplyEffect(puller, args.Effect.Effect, args.Scale);
+        if (ent.Comp.Puller is not {} puller)
+            return;
+
+        _data.CopyData(ent, puller);
+        _effects.TryApplyEffect(puller, args.Effect.Effect, args.Scale);
+        _data.ClearData(puller);
     }
 }

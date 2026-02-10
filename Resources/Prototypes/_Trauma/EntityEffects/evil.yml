@@ -3,3 +3,8 @@
   id: Tator
   effects:
   - !type:MakeTraitor
+
+- type: entityEffect
+  id: Vomit
+  effects:
+  - !type:Vomit

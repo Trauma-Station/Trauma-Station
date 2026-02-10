@@ -3,6 +3,10 @@ using Content.Shared.Chat;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Stunnable;
+using Content.Trauma.Common.Body;
+using Content.Trauma.Common.CCVar;
+using Content.Trauma.Shared.Medical;
+using Robust.Shared.Configuration;
 
 namespace Content.Trauma.Shared.Mobs;
 
@@ -11,12 +15,20 @@ namespace Content.Trauma.Shared.Mobs;
 /// </summary>
 public abstract partial class SharedSoftCritSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private readonly SharedCPRSystem _cpr = default!;
 
     /// <summary>
     /// Speed modifier for softcrit mobs, on top of being forced to crawl.
     /// </summary>
-    public const float SoftCritSpeed = 0.5f;
+    public float SoftCritSpeed = 0.5f;
+
+    /// <summary>
+    /// Inhaled gas modifier for softcrit mobs, makes it harder to breathe.
+    /// This means you can't just crawl around forever if you aren't bleeding out.
+    /// </summary>
+    public float InhaleVolumeModifier = 0.3f;
 
     public override void Initialize()
     {
@@ -28,6 +40,10 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
         SubscribeLocalEvent<SoftCritMobComponent, SpeechTypeOverrideEvent>(OnSpeechTypeOverride);
         SubscribeLocalEvent<SoftCritMobComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
         SubscribeLocalEvent<SoftCritMobComponent, StandUpAttemptEvent>(OnStandUpAttempt);
+        SubscribeLocalEvent<SoftCritMobComponent, ModifyInhaledVolumeEvent>(OnModifyInhaledVolume);
+
+        Subs.CVar(_cfg, TraumaCVars.SoftCritMoveSpeed, x => SoftCritSpeed = x, true);
+        Subs.CVar(_cfg, TraumaCVars.SoftCritInhaleModifier, x => InhaleVolumeModifier = x, true);
     }
 
     private void RefreshSpeed(EntityUid uid, SoftCritMobComponent ent, EntityEventArgs args)
@@ -57,5 +73,13 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
     private void OnStandUpAttempt(Entity<SoftCritMobComponent> ent, ref StandUpAttemptEvent args)
     {
         args.Cancelled = true;
+    }
+
+    private void OnModifyInhaledVolume(Entity<SoftCritMobComponent> ent, ref ModifyInhaledVolumeEvent args)
+    {
+        // don't reduce volume if someone else is helping you breathe
+        // ideally there would be code in respirator to check if it's forced to breathe vs lungs working alone
+        if (!_cpr.IsCPRActive(ent))
+            args.Volume *= InhaleVolumeModifier;
     }
 }

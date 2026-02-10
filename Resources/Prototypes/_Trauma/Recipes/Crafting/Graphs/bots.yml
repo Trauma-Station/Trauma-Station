@@ -1,0 +1,106 @@
+- type: constructionGraph
+  id: ButtBot
+  graph:
+  - node: start
+    edges:
+    - to: bot
+      steps:
+      - tag: BorgArm
+        icon:
+          sprite: Mobs/Silicon/drone.rsi
+          state: l_hand
+        name: construction-graph-tag-borg-arm
+        doAfter: 2
+      - tag: ProximitySensor
+        icon:
+          sprite: Objects/Misc/proximity_sensor.rsi
+          state: icon
+        name: construction-graph-tag-proximity-sensor
+      - tag: Butt
+        icon:
+          sprite: _Goobstation/Mobs/butt.rsi
+          state: butt
+        name: construction-graph-tag-butt
+        doAfter: 2
+  - node: bot
+    entity: MobButtBot
+
+- type: constructionGraph
+  id: CyberButtBot
+  graph:
+  - node: start
+    edges:
+    - to: bot
+      steps:
+      - tag: BorgArm
+        icon:
+          sprite: Mobs/Silicon/drone.rsi
+          state: l_hand
+        name: construction-graph-tag-borg-arm
+        doAfter: 2
+      - tag: ProximitySensor
+        icon:
+          sprite: Objects/Misc/proximity_sensor.rsi
+          state: icon
+        name: construction-graph-tag-proximity-sensor
+      - tag: CyberButt
+        icon:
+          sprite: _EinsteinEngines/Mobs/Species/IPC/parts.rsi
+          state: groin_m
+        name: construction-graph-tag-cyber-butt
+        doAfter: 2
+  - node: bot
+    entity: MobButtBotCyber
+
+- type: constructionGraph
+  id: DuckBot
+  graph:
+  - node: start
+    edges:
+    - to: bot
+      steps:
+      - tag: Egg
+        icon:
+          sprite: Objects/Consumable/Food/egg.rsi
+          state: rainbow
+        name: construction-graph-tag-egg
+      - tag: ProximitySensor
+        icon:
+          sprite: Objects/Misc/proximity_sensor.rsi
+          state: icon
+        name: construction-graph-tag-proximity-sensor
+      - tag: BorgArm
+        icon:
+          sprite: Mobs/Silicon/drone.rsi
+          state: l_hand
+        name: construction-graph-tag-borg-arm
+        doAfter: 2
+  - node: bot
+    entity: MobDuckBot
+
+- type: constructionGraph
+  id: BoogieBot
+  graph:
+  - node: start
+    edges:
+    - to: bot
+      steps:
+      - tag: BikeHorn
+        icon:
+          sprite: Objects/Fun/bikehorn.rsi
+          state: icon
+        name: construction-graph-tag-clown-bike-horn
+        doAfter: 2
+      - tag: ProximitySensor
+        icon:
+          sprite: Objects/Misc/proximity_sensor.rsi
+          state: icon
+        name: construction-graph-tag-proximity-sensor
+      - tag: BorgArm
+        icon:
+          sprite: Mobs/Silicon/drone.rsi
+          state: l_hand
+        name: construction-graph-tag-borg-arm
+        doAfter: 2
+  - node: bot
+    entity: BoogieBotSpawner

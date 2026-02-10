@@ -43,8 +43,7 @@
         - HEAD
     - type: Tag
       tags:
-        - HidesHair
-        - BlobMob
+      - HidesHair
     - type: CollectiveMind
       defaultChannel: Blobmind
       channels:
@@ -126,6 +125,7 @@
     - type: GuideHelp
       guides:
       - Blob
+    - type: MovementIgnoreGravity # Trauma
 
 # Blobbernaut
 - type: entity
@@ -141,8 +141,7 @@
       damageModifierSet: BlobBlobbernaut
     - type: Tag
       tags:
-        - Blobbernaut
-        - BlobMob
+      - Blobbernaut
     - type: CollectiveMind
       defaultChannel: Blobmind
       channels:
@@ -244,6 +243,7 @@
         - ReagentId: Blood
           Quantity: 300
       bleedReductionAmount: 5
+    - type: MovementIgnoreGravity # Trauma
 
 # Observer
 - type: entity

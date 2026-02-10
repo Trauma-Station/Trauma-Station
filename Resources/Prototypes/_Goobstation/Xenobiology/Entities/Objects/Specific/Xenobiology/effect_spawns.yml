@@ -15,8 +15,7 @@
   - type: TimedDespawn
     lifetime: 5
   - type: SpawnOnDespawn
-    prototypes:
-    - XenoExtractChronofield
+    prototype: XenoExtractChronofield
 
 - type: entity
   id: XenoGooWall

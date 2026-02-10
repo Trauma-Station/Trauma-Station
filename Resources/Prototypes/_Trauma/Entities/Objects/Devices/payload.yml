@@ -432,9 +432,9 @@
       path: "/Audio/Machines/door_lock_off.ogg"
 
 - type: entity
-  name: plasteel shrapnel payload # Goobstation - shrapnel payload
   parent: [ BasePayload, BaseSyndicateContraband ]
   id: StrongShrapnelPayload
+  name: plasteel shrapnel payload
   description: Launches tons of sharp plasteel shards in all directions.
   components:
   - type: Sprite

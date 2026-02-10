@@ -21,16 +21,22 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Shitmed.Cybernetics;
 
-internal sealed class CyberneticsSystem : EntitySystem
+public sealed class CyberneticsSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
+
+    public static readonly ProtoId<DamageTypePrototype> Shock = "Shock";
+
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<CyberneticsComponent, EmpPulseEvent>(OnEmpPulse);
         SubscribeLocalEvent<CyberneticsComponent, EmpDisabledRemovedEvent>(OnEmpDisabledRemoved);
     }
+
     private void OnEmpPulse(Entity<CyberneticsComponent> cyberEnt, ref EmpPulseEvent ev)
     {
         if (cyberEnt.Comp.Disabled)
@@ -53,7 +59,7 @@ internal sealed class CyberneticsSystem : EntitySystem
 
             if (part.Body is {} body)
             {
-                var shock = new DamageSpecifier(_prototypes.Index<DamageTypePrototype>("Shock"), 30);
+                var shock = new DamageSpecifier(_prototypes.Index(Shock), 30);
                 var targetPart = _body.GetTargetBodyPart(part);
                 _damageable.ChangeDamage(body, shock, ignoreResistances: true, targetPart: targetPart);
             }

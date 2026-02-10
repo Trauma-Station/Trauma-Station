@@ -30,9 +30,16 @@
 - type: speciesBaseSprites
   id: MobHarpySprites
   sprites:
+    # <Trauma>
+    HairSpecial: MobHumanoidAnyMarking
+    FacialHairSpecial: MobHumanoidAnyMarking
+    Special: MobHumanoidAnyMarking
+    # </Trauma>
     Head: MobHarpyHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Chest: MobHarpyChest
     Groin: MobHarpyGroin
@@ -52,6 +59,14 @@
 - type: markingPoints
   id: MobHarpyMarkingLimits
   points:
+    # <Trauma>
+    HairSpecial:
+      points: 1
+      required: false
+    FacialHairSpecial:
+      points: 1
+      required: false
+    # </Trauma>
     Hair:
       points: 1
       required: false
@@ -76,10 +91,10 @@
       points: 1
       required: true
       defaultMarkings: [ HarpyChestDefault ]
-    Underwear:
+    UndergarmentTop:
       points: 1
       required: false
-    Undershirt:
+    UndergarmentBottom:
       points: 1
       required: false
     RightLeg:

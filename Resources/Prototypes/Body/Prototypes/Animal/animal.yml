@@ -40,17 +40,12 @@
   root: chest
   slots:
     chest:
-      part: ChestAnimal
-      connections:
-      - groin
-      organs:
-        lungs: OrganAnimalLungs
-        heart: OrganAnimalHeart
-    groin:
-      part: GroinAnimal
+      part: TorsoMouse
       connections:
       - legs
       organs:
+        lungs: OrganAnimalLungs
+        heart: OrganAnimalHeart
         stomach: OrganMouseStomach
         liver: OrganAnimalLiver
         kidneys: OrganAnimalKidneys

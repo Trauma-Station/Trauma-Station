@@ -18,6 +18,8 @@
 - type: speciesBaseSprites
   id: MobAbductorSprites
   sprites:
+    Tail: MobHumanoidAnyMarking
+    Special: MobHumanoidAnyMarking
     Head: MobAbductorHead
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking

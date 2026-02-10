@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DEATHB4DEFEAT <77995199+DEATHB4DEFEAT@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Morb <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 csqrb <56765288+CaptainSqrBeard@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Linq;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
@@ -198,6 +186,12 @@ public sealed partial class MarkingPicker : Control
     private List<string> GetMarkingStateNames(MarkingPrototype marking)
     {
         List<string> result = new();
+
+        // <Trauma>
+        if (marking.Sprites.Count == 0 && marking.Coloring.Layers is { } layers)
+            return layers.Keys.Select(x => Loc.GetString($"marking-{marking.ID}-{x}")).ToList();
+        // </Trauma>
+
         foreach (var markingState in marking.Sprites)
         {
             switch (markingState)
@@ -240,7 +234,12 @@ public sealed partial class MarkingPicker : Control
                 continue;
             }
 
-            var item = CMarkingsUnused.AddItem($"{GetMarkingName(marking)}", _sprite.Frame0(marking.Sprites[0]));
+            // <Trauma>
+            if (GetMarkingTexture(marking) is not { } texture)
+                continue;
+
+            var item = CMarkingsUnused.AddItem($"{GetMarkingName(marking)}", texture);
+            // </Trauma>
             item.Metadata = marking;
         }
 
@@ -268,13 +267,18 @@ public sealed partial class MarkingPicker : Control
                 continue;
             }
 
+            // <Trauma>
+            if (GetMarkingTexture(newMarking) is not { } texture)
+                continue;
+            // </Trauma>
+
             var text = Loc.GetString(marking.Forced ? "marking-used-forced" : "marking-used", ("marking-name", $"{GetMarkingName(newMarking)}"),
                 ("marking-category", Loc.GetString($"markings-category-{newMarking.MarkingCategory}")));
 
             var _item = new ItemList.Item(CMarkingsUsed)
             {
                 Text = text,
-                Icon = _sprite.Frame0(newMarking.Sprites[0]),
+                Icon = texture, // Trauma
                 Selectable = true,
                 Metadata = newMarking,
                 IconModulate = marking.MarkingColors[0]
@@ -418,7 +422,7 @@ public sealed partial class MarkingPicker : Control
         _currentMarkingColors.Clear();
         CMarkingColors.RemoveAllChildren();
         List<ColorSelectorSliders> colorSliders = new();
-        for (int i = 0; i < prototype.Sprites.Count; i++)
+        for (int i = 0; i < prototype.ColorCount; i++) // Trauma - replace Sprite.Count with ColorCount
         {
             var colorContainer = new BoxContainer
             {
@@ -426,6 +430,9 @@ public sealed partial class MarkingPicker : Control
             };
 
             CMarkingColors.AddChild(colorContainer);
+
+            if (TryCreateShaderParamSliders(prototype, i, colorContainer)) // Trauma
+                continue;
 
             ColorSelectorSliders colorSelector = new ColorSelectorSliders();
             colorSelector.SelectorType = ColorSelectorSliders.ColorSelectorType.Hsv; // defaults color selector to HSV
@@ -487,6 +494,11 @@ public sealed partial class MarkingPicker : Control
         var marking = (MarkingPrototype) _selectedUnusedMarking.Metadata!;
         var markingObject = marking.AsMarking();
 
+        // <Trauma>
+        if (GetMarkingTexture(marking) is not { } texture)
+            return;
+        // </Trauma>
+
         // We need add hair markings in cloned set manually because _currentMarkings doesn't have it
         var markingSet = new MarkingSet(_currentMarkings);
         if (HairMarking != null)
@@ -498,7 +510,8 @@ public sealed partial class MarkingPicker : Control
             markingSet.AddBack(MarkingCategories.FacialHair, FacialHairMarking);
         }
 
-        if (!_markingManager.MustMatchSkin(_currentSpecies, marking.BodyPart, out var _, _prototypeManager))
+        if (marking.MarkingCategory.IgnoresMatchSkin() || // Trauma
+            !_markingManager.MustMatchSkin(_currentSpecies, marking.BodyPart, out var _, _prototypeManager))
         {
             // Do default coloring
             var colors = MarkingColoring.GetMarkingLayerColors(
@@ -531,7 +544,7 @@ public sealed partial class MarkingPicker : Control
         var item = new ItemList.Item(CMarkingsUsed)
         {
             Text = Loc.GetString("marking-used", ("marking-name", $"{GetMarkingName(marking)}"), ("marking-category", Loc.GetString($"markings-category-{marking.MarkingCategory}"))),
-            Icon = _sprite.Frame0(marking.Sprites[0]),
+            Icon = texture, // Trauma
             Selectable = true,
             Metadata = marking,
         };
@@ -555,8 +568,13 @@ public sealed partial class MarkingPicker : Control
 
         if (marking.MarkingCategory == _selectedMarkingCategory)
         {
-            var item = CMarkingsUnused.AddItem($"{GetMarkingName(marking)}", _sprite.Frame0(marking.Sprites[0]));
-            item.Metadata = marking;
+            // </Trauma>
+            if (GetMarkingTexture(marking) is { } texture)
+            {
+                var item = CMarkingsUnused.AddItem($"{GetMarkingName(marking)}", texture);
+                item.Metadata = marking;
+            }
+            // </Trauma>
         }
         _selectedMarking = null;
         CMarkingColors.Visible = false;

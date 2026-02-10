@@ -1,7 +1,3 @@
-// <Trauma>
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Systems;
-// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Administration.Logs;
@@ -33,15 +29,12 @@ namespace Content.Shared.Mind;
 public abstract partial class SharedMindSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
     [Dependency] private readonly SharedPlayerSystem _player = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
     [Dependency] private readonly MetaDataSystem _metadata = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!; // Trauma
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
     [ViewVariables]
@@ -55,12 +48,12 @@ public abstract partial class SharedMindSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MindContainerComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<MindContainerComponent, SuicideEvent>(OnSuicide);
+
         SubscribeLocalEvent<VisitingMindComponent, EntityTerminatingEvent>(OnVisitingTerminating);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnReset);
         SubscribeLocalEvent<MindComponent, ComponentStartup>(OnMindStartup);
-        SubscribeLocalEvent<MindContainerComponent, EntityRenamedEvent>(OnRenamed); // Goob edit
+        SubscribeLocalEvent<MindContainerComponent, EntityRenamedEvent>(OnRenamed); // Goob - subscribe for MindContainer instead of Mind
 
         InitializeRelay();
     }
@@ -169,39 +162,6 @@ public abstract partial class SharedMindSystem : EntitySystem
             UnVisit(component.MindId.Value);
     }
 
-    private void OnExamined(EntityUid uid, MindContainerComponent mindContainer, ExaminedEvent args)
-    {
-        if (!mindContainer.ShowExamineInfo || !args.IsInDetailsRange)
-            return;
-
-        // TODO: Move this out of the SharedMindSystem into its own comp and predict it
-        if (_net.IsClient)
-            return;
-
-        var dead = _mobState.IsDead(uid);
-        var mind = CompOrNull<MindComponent>(mindContainer.Mind);
-        var hasUserId = mind?.UserId;
-        var hasActiveSession = hasUserId != null && _playerManager.ValidSessionId(hasUserId.Value);
-
-        // Scenarios:
-        // 1. Dead + No User ID: Entity is permanently dead with no player ever attached
-        // 2. Dead + Has User ID + No Session: Player died and disconnected
-        // 3. Dead + Has Session: Player is dead but still connected
-        // 4. Alive + No User ID: Entity was never controlled by a player
-        // 5. Alive + No Session: Player disconnected while alive (SSD)
-
-        if (dead && hasUserId == null)
-            args.PushMarkup($"[color=mediumpurple]{Loc.GetString("comp-mind-examined-dead-and-irrecoverable", ("ent", uid))}[/color]");
-        else if (dead && !hasActiveSession)
-            args.PushMarkup($"[color=yellow]{Loc.GetString("comp-mind-examined-dead-and-ssd", ("ent", uid))}[/color]");
-        else if (dead)
-            args.PushMarkup($"[color=red]{Loc.GetString("comp-mind-examined-dead", ("ent", uid))}[/color]");
-        else if (hasUserId == null)
-            args.PushMarkup($"[color=mediumpurple]{Loc.GetString("comp-mind-examined-catatonic", ("ent", uid))}[/color]");
-        else if (!hasActiveSession)
-            args.PushMarkup($"[color=yellow]{Loc.GetString("comp-mind-examined-ssd", ("ent", uid))}[/color]");
-    }
-
     /// <summary>
     /// Checks to see if the user's mind prevents them from suicide
     /// Handles the suicide event without killing the user if true
@@ -215,14 +175,15 @@ public abstract partial class SharedMindSystem : EntitySystem
             args.Handled = true;
     }
 
-    private void OnRenamed(Entity<MindContainerComponent> ent, ref EntityRenamedEvent args) // Goob edit start
+    private void OnRenamed(Entity<MindContainerComponent> ent, ref EntityRenamedEvent args) // Goob - subscribe for MindContainer instead of Mind
     {
-        if (!TryComp(ent.Comp.Mind, out MindComponent? mind))
+        // <Goob> - get mind from this entity and rename it
+        if (ent.Comp.Mind is not {} mindId || !TryComp(mindId, out MindComponent? mind))
             return;
 
         mind.CharacterName = args.NewName;
-        // Goob edit end
-        Dirty(ent);
+        Dirty(mindId, mind);
+        // </Goob>
     }
 
     public EntityUid? GetMind(EntityUid uid, MindContainerComponent? mind = null)
@@ -403,9 +364,6 @@ public abstract partial class SharedMindSystem : EntitySystem
         var title = Name(objective);
         _adminLogger.Add(LogType.Mind, LogImpact.Low, $"Objective {objective} ({title}) added to mind of {MindOwnerLoggingString(mind)}");
         mind.Objectives.Add(objective);
-        // Shitmed Change - Raise an event on the mind ent with the objective.
-        var ev = new ObjectiveAddedEvent(objective);
-        RaiseLocalEvent(mindId, ev);
     }
 
     /// <summary>
@@ -462,21 +420,6 @@ public abstract partial class SharedMindSystem : EntitySystem
         objective = default;
         return false;
     }
-
-    // Begin DeltaV - Cosmic Cult Deconversion
-    public void ClearObjectives(EntityUid mind, MindComponent? comp = null)
-    {
-        if (!Resolve(mind, ref comp))
-            return;
-
-        foreach (var obj in comp.Objectives)
-        {
-            QueueDel(obj);
-        }
-        comp.Objectives.Clear();
-        Dirty(mind, comp);
-    }
-    // End DeltaV - Cosmic Cult Deconversion
 
     /// <summary>
     /// Copies objectives from one mind to another, so that they are shared between two players.
@@ -739,6 +682,7 @@ public abstract partial class SharedMindSystem : EntitySystem
 
         if (allowSpeech)
         {
+<<<<<<< HEAD
             // <Trauma> - ensure they have the default language
             var speaker = EnsureComp<LanguageSpeakerComponent>(uid);
 
@@ -747,6 +691,9 @@ public abstract partial class SharedMindSystem : EntitySystem
             if (speaker.Speaks.Count == 0)
                 _language.AddLanguage(uid, SharedLanguageSystem.FallbackLanguagePrototype);
             // </Trauma>
+=======
+            EnsureDefaultLanguage(uid); // Trauma
+>>>>>>> upstream/HEAD
             EnsureComp<SpeechComponent>(uid);
             EnsureComp<EmotingComponent>(uid);
         }
@@ -762,12 +709,6 @@ public abstract partial class SharedMindSystem : EntitySystem
 /// <param name="Dead"></param>
 [ByRefEvent]
 public record struct GetCharactedDeadIcEvent(bool? Dead);
-
-/// <summary>
-///     Shitmed Change: Raised on an entity to notify that an objective has been added to the mind.
-/// </summary>
-/// <param name="Objective"></param>
-public record struct ObjectiveAddedEvent(EntityUid Objective);
 
 /// <summary>
 /// Raised on an entity to determine whether or not they are "unrevivable" in IC-logic.

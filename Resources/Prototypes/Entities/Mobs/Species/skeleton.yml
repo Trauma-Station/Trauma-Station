@@ -40,8 +40,7 @@
         !type:DamageTrigger
         damage: 150
       behaviors:
-      - !type:GibBehavior # Shitmed Change
-        gibContents: Skip # Shitmed Change
+      - !type:GibBehavior { }
   - type: SlowOnDamage #modified speeds because they're so weak
     speedModifierThresholds:
       60: 0.9
@@ -80,7 +79,7 @@
     groups:
       Flammable: [ Touch ]
       Extinguish: [ Touch ]
-      Acidic: [ Touch, Ingestion ]
+      Acidic: [ Touch, Ingestion ] # Trauma
     reactions:
     - reagents: [ Water, SpaceCleaner ]
       methods: [ Touch ]
@@ -153,6 +152,8 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
+      enum.StoreUiKey.Key: # Goob - changelings
+        type: StoreBoundUserInterface
   - type: FacehuggerImmune # Goobstation - Xenomorphs
 
 - type: entity

@@ -223,3 +223,6 @@
   #      Blunt: 0.11
   - type: StaticPrice
     price: 400
+  - type: FadingTimedDespawn # Trauma, otherwise its too easy to make hell armies
+    lifetime: 180
+    fadeOutTime: 60

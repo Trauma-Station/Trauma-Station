@@ -1,9 +1,3 @@
-// <Trauma>
-using Content.Server._Goobstation.Antag;
-using Content.Trauma.Common.CCVar;
-using Content.Shared.Inventory;
-using Robust.Shared.Configuration;
-// </Trauma>
 using System.Linq;
 using Content.Server.Administration.Managers;
 using Content.Server.Antag.Components;
@@ -19,7 +13,7 @@ using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
-using Content.Server.Shuttles.Components;
+using Content.Server.Shuttles.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Antag;
 using Content.Shared.Clothing;
@@ -46,12 +40,6 @@ namespace Content.Server.Antag;
 
 public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelectionComponent>
 {
-    // <Trauma>
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly LastRolledAntagManager _lastRolled = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playTimeMan = default!;
-    // </Trauma>
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _ban = default!;
     [Dependency] private readonly IChatManager _chat = default!;
@@ -66,11 +54,10 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly ArrivalsSystem _arrivals = default!;
 
     // arbitrary random number to give late joining some mild interest.
     public const float LateJoinRandomChance = 0.5f;
-
-    private static bool _pityEnabled; // Trauma
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -79,7 +66,8 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         Log.Level = LogLevel.Debug;
 
-        SubscribeLocalEvent<GhostRoleAntagSpawnerComponent, TakeGhostRoleEvent>(OnTakeGhostRole, after: new[] {typeof(GhostRoleSystem)}); // WD EDIT
+        SubscribeLocalEvent<GhostRoleAntagSpawnerComponent, TakeGhostRoleEvent>(OnTakeGhostRole,
+            after: new[] {typeof(GhostRoleSystem)}); // WD EDIT
 
         SubscribeLocalEvent<AntagSelectionComponent, ObjectivesTextGetInfoEvent>(OnObjectivesTextGetInfo);
 
@@ -87,8 +75,6 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnPlayerSpawning);
         SubscribeLocalEvent<RulePlayerJobsAssignedEvent>(OnJobsAssigned);
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnSpawnComplete);
-
-        Subs.CVar(_cfg, TraumaCVars.AntagPityEnabled, value => _pityEnabled = value, true); // Trauma
     }
 
     private void OnTakeGhostRole(Entity<GhostRoleAntagSpawnerComponent> ent, ref TakeGhostRoleEvent args)
@@ -184,6 +170,15 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         if (!args.LateJoin)
             return;
 
+        TryMakeLateJoinAntag(args.Player);
+    }
+
+    /// <summary>
+    /// Attempt to make this player be a late-join antag.
+    /// </summary>
+    /// <param name="session">The session to attempt to make antag.</param>
+    public void TryMakeLateJoinAntag(ICommonSession session)
+    {
         // TODO: this really doesn't handle multiple latejoin definitions well
         // eventually this should probably store the players per definition with some kind of unique identifier.
         // something to figure out later.
@@ -199,9 +194,10 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         foreach (var (uid, antag) in rules)
         {
-            // Goob edit
-            // if (!RobustRandom.Prob(LateJoinRandomChance))
-            //    continue;
+            /* Trauma - moved below
+            if (!RobustRandom.Prob(LateJoinRandomChance))
+                continue;
+            */
 
             if (!antag.Definitions.Any(p => p.LateJoinAdditional))
                 continue;
@@ -214,13 +210,14 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             if (!TryGetNextAvailableDefinition((uid, antag), out var def, players))
                 continue;
 
-            // Goobstation
+            // <Trauma> - moved from above, scale by PlayerRatio
             if (!RobustRandom.Prob(def.Value.PlayerRatio == 0
                     ? LateJoinRandomChance
                     : Math.Clamp(1f / def.Value.PlayerRatio, 0f, 1f)))
                 continue;
+            // </Trauma>
 
-            if (TryMakeAntag((uid, antag), args.Player, def.Value))
+            if (TryMakeAntag((uid, antag), session, def.Value))
                 break;
         }
     }
@@ -263,25 +260,6 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         ChooseAntags((uid, component), players, midround: true);
         AssignPreSelectedSessions((uid, component));
-    }
-
-    // Goobstation
-    public Dictionary<ICommonSession, float> ToWeightsDict(IList<ICommonSession> pool)
-    {
-        if (!_pityEnabled) // Trauma
-            return pool.ToDictionary(x => x, _ => 1f);
-
-        Dictionary<ICommonSession, float> weights = new();
-
-        // weight by playtime since last rolled
-        foreach (var se in pool)
-        {
-            var lastRoll = (float)(_playTimeMan.GetOverallPlaytime(se) - _lastRolled.GetLastRolled(se.UserId)).TotalSeconds;
-            //weight clamped between 5 hours and 20 hours
-            weights[se] = float.Clamp(lastRoll, 18000.0f, 72000.0f);
-        }
-
-        return weights;
     }
 
     /// <summary>
@@ -395,16 +373,6 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         if (!IsSessionValid(ent, session, def) || !IsEntityValid(session?.AttachedEntity, def))
             return false;
 
-        // Goobstation
-        if (session != null)
-        {
-            try // tests die without this
-            {
-                _lastRolled.SetLastRolled(session.UserId, _playTimeMan.GetOverallPlaytime(session));
-            }
-            catch { }
-        }
-
         if (onlyPreSelect && session != null)
         {
             if (!ent.Comp.PreSelectedSessions.TryGetValue(def, out var set))
@@ -456,7 +424,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         if (antagEnt is not { } player)
         {
-            // Goob edit start
+            // <Trauma> - moved logs inside the if statement from here
             if (session != null && ent.Comp.RemoveUponFailedSpawn)
             {
                 ent.Comp.AssignedSessions.Remove(session);
@@ -465,21 +433,15 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
                 Log.Error($"Attempted to make {session} antagonist in gamerule {ToPrettyString(ent)} but there was no valid entity for player.");
                 _adminLogger.Add(LogType.AntagSelection, $"Attempted to make {session} antagonist in gamerule {ToPrettyString(ent)} but there was no valid entity for player.");
             }
-            // goob edit end
+            // </Trauma>
 
             return;
         }
 
-        // <Goob>
-        if (def.UnequipOldGear && TryComp(player, out InventoryComponent? inventory) &&
-            _inventory.TryGetSlots(player, out var slots))
-        {
-            foreach (var slot in slots)
-            {
-                _inventory.TryUnequip(player, slot.Name, true, true, inventory: inventory);
-            }
-        }
-        // </Goob>
+        // <Trauma>
+        if (def.UnequipOldGear)
+            UnequipOldGear(player);
+        // </Trauma>
 
         // TODO: This is really messy because this part runs twice for midround events.
         // Once when the ghostrole spawner is created and once when a player takes it.
@@ -548,10 +510,6 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             _adminLogger.Add(LogType.AntagSelection, $"Assigned {ToPrettyString(curMind)} as antagonist: {ToPrettyString(ent)}");
         }
 
-        // goob edit - actual pacifism implant
-        foreach (var special in def.Special)
-            special.AfterEquip(ent);
-
         var afterEv = new AfterAntagEntitySelectedEvent(session, player, ent, def);
         RaiseLocalEvent(ent, ref afterEv, true);
     }
@@ -582,7 +540,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             }
         }
 
-        return new AntagSelectionPlayerPool(new() { ToWeightsDict(preferredList), ToWeightsDict(fallbackList) }); // Goobstation
+        return new AntagSelectionPlayerPool(new() { preferredList, fallbackList });
     }
 
     /// <summary>
@@ -642,7 +600,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         if (entity == null)
             return true;
 
-        if (HasComp<PendingClockInComponent>(entity))
+        if (_arrivals.IsOnArrivals((entity.Value, null)))
             return false;
 
         if (!def.AllowNonHumans && !HasComp<HumanoidAppearanceComponent>(entity))

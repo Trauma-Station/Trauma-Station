@@ -20,11 +20,13 @@
 - type: speciesBaseSprites
   id: MobGingerbreadSprites
   sprites:
+    # <Trauma>
+    Tail: MobHumanoidAnyMarking
+    Special: MobHumanoidAnyMarking
+    # </Trauma>
     Head: MobGingerbreadHead
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
     Chest: MobGingerbreadChest
     Groin: MobGingerbreadGroin
     Eyes: MobGingerbreadEyes

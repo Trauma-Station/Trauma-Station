@@ -274,6 +274,14 @@
   # Goobstation end
 
 - type: construction
+  id: RepairMothershipPinpointer
+  graph: RepairMothershipPinpointer
+  startNode: start
+  targetNode: repairedPinpointer
+  category: construction-category-misc
+  objectType: Item
+
+- type: construction
   id: HardsuitGoliath
   graph: HardsuitGoliath
   startNode: start

@@ -22,6 +22,7 @@ public abstract class SharedHulkSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
+    public static readonly ProtoId<DamageTypePrototype> Structural = "Structural";
 
     public override void Initialize()
     {
@@ -38,7 +39,7 @@ public abstract class SharedHulkSystem : EntitySystem
     private void OnStartup(Entity<HulkComponent> ent, ref ComponentStartup args)
     {
         UpdateColorStartup(ent);
-        ent.Comp.StructuralDamage ??= new DamageSpecifier(_prototype.Index<DamageTypePrototype>("Structural"), 80f);
+        ent.Comp.StructuralDamage ??= new DamageSpecifier(_prototype.Index(Structural), 80f);
     }
 
     private void OnMeleeHit(Entity<HulkComponent> ent, ref MeleeHitEvent args)

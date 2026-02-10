@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Server._Goobstation.Antag;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server.MoMMI;
 // </Trauma>
@@ -86,7 +85,6 @@ internal static class ServerContentIoC
         //deps.Register<DiscordLink>(); // Trauma - wasn't cherry picked
         //deps.Register<DiscordChatLink>(); // Trauma
         deps.Register<IMoMMILink, MoMMILink>(); // Trauma
-        deps.Register<LastRolledAntagManager>(); // Goobstation - antag pity
         deps.Register<LinkAccountManager>(); // RMC - Patreon
     }
 }

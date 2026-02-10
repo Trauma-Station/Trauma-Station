@@ -44,6 +44,7 @@
       prob: 0.15
     - id: ClothingBeltGeminiHoloProjector # Who better to do science with than yourself?
     - id: MMI
+    - id: FreeformLawboard
 
 - type: entityTable
   id: LockerFillHeadOfSecurityTrauma
@@ -51,3 +52,4 @@
     children:
     - id: ClothingBeltSheathHeadOfSecurityFilled
     - id: ReinforcementCallerHos
+    - id: TelescopicShield

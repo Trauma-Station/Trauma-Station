@@ -101,17 +101,19 @@
   - Materials
   # Goobstation end
 
-- type: construction
-  id: MaterialDurathread
-  graph: Durathread
-  startNode: start
-  targetNode: MaterialDurathread
-  category: construction-category-materials
-  objectType: Item
-  # Goobstation start
-  groups: # TODO should reqire tools to make
-  - Materials
-  # Goobstation end
+# <Trauma> remove durathread handcraft
+#- type: construction
+#  id: MaterialDurathread
+#  graph: Durathread
+#  startNode: start
+#  targetNode: MaterialDurathread
+#  category: construction-category-materials
+#  objectType: Item
+#  # Goobstation start
+#  groups: # TODO should reqire tools to make
+#  - Materials
+#  # Goobstation end
+# </Trauma>
 
 - type: construction
   id: SheetUGlass

@@ -5,9 +5,15 @@
   targetNode: Killdozer
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+  - Revolutionary
+
+- type: construction
+  id: PowerArmorFrame
+  graph: PowerArmorFrame
+  startNode: start
+  targetNode: Frame
+  category: construction-category-antagonist
+  objectType: Item
+  groups:
+  - Revolutionary

@@ -7,25 +7,29 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Shared.ReverseBearTrap;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, Access(typeof(ReverseBearTrapSystem))]
+[AutoGenerateComponentPause, AutoGenerateComponentState]
 public sealed partial class ReverseBearTrapComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public float CountdownDuration; //Seconds
+    [DataField(required: true), AutoNetworkedField]
+    public TimeSpan CountdownDuration;
 
     [DataField, AutoNetworkedField]
     public EntityUid? Wearer;
 
-    [DataField, AutoNetworkedField]
-    public bool Ticking;
+    [ViewVariables]
+    public bool Ticking => NextTrigger != null;
 
-    [DataField, AutoNetworkedField]
-    public TimeSpan ActivateTime;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField, AutoNetworkedField]
+    public TimeSpan? NextTrigger;
 
     [DataField, AutoNetworkedField]
     public float CurrentEscapeChance;
@@ -49,8 +53,20 @@ public sealed partial class ReverseBearTrapComponent : Component
     public SoundSpecifier StartCuffSound = new SoundPathSpecifier("/Audio/Items/Handcuffs/cuff_start.ogg");
 
     [DataField]
-    public List<float>? DelayOptions = null;
+    public List<TimeSpan>? DelayOptions = null;
 
     [DataField]
     public float BaseEscapeChance;
+
+    /// <summary>
+    /// Damage dealt to the user's head after welding the trap.
+    /// </summary>
+    [DataField]
+    public DamageSpecifier WeldDamage = new()
+    {
+        DamageDict = new()
+        {
+            { "Heat", 50 }
+        }
+    };
 }

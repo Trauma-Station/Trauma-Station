@@ -160,9 +160,11 @@
         - map: ["back"]
         - map: [ "enum.HumanoidVisualLayers.Face" ]
         - map: ["enum.HumanoidVisualLayers.FacialHair"]
+        - map: [ "enum.HumanoidVisualLayers.FacialHairSpecial" ] # Trauma
         - map: ["enum.HumanoidVisualLayers.HeadSide"]
         - map: [ "maskalt" ]
         - map: ["enum.HumanoidVisualLayers.Hair"]
+        - map: [ "enum.HumanoidVisualLayers.HairSpecial" ] # Trauma
         - map: ["mask"]
         - map: ["enum.HumanoidVisualLayers.HeadTop"]
         - map: ["head"]
@@ -224,11 +226,6 @@
           type: StrippableBoundUserInterface
         enum.StoreUiKey.Key: # Goobstation - changelings
           type: StoreBoundUserInterface
-        enum.HereticLivingHeartKey.Key: # goob edit - heretics
-          type: LivingHeartMenuBoundUserInterface
-        enum.WizardTeleportUiKey.Key: # Goobstation - wizard
-          type: WizardTeleportBoundUserInterface
-          requireInputValidation: false
     - type: Emoting
     - type: Grammar
       attributes:
@@ -236,7 +233,7 @@
     - type: Climbing
     - type: StandingState
     - type: MindContainer
-      showExamineInfo: true
+    - type: MindExaminable
     - type: SSDIndicator
     - type: CanEscapeInventory
     - type: HumanoidAppearance
@@ -298,7 +295,6 @@
         - Stun
         - SlowedDown
         - Stutter
-        - SeeingRainbows
         - Electrocution
         # - Drunk
         - SlurredSpeech

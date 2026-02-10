@@ -47,6 +47,7 @@
     - Xeno
     understands:
     - Xeno
+    - TauCetiBasic
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:

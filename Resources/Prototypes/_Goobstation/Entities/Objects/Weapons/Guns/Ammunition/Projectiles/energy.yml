@@ -46,7 +46,7 @@
     impactEffect: BulletImpactEffectRedDisabler
     damage:
       types:
-        Heat: 17
+        Heat: 10
     soundHit:
       collection: MeatLaserImpact
 
@@ -91,6 +91,7 @@
     range: 1.5
     energyConsumption: 1000
     disableDuration: 1
+  - type: DeleteOnTrigger
 
 - type: entity
   name: Rifle disabler bolt
@@ -206,6 +207,8 @@
     impactEffect: BulletImpactEffectRedDisabler
     damage:
       types:
-        Heat: 25
+        Heat: 10
     soundHit:
       collection: MeatLaserImpact
+  - type: IgniteOnCollide
+    fireStacks: 0.5

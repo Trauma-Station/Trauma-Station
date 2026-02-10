@@ -17,3 +17,19 @@
           state: paper
   - node: paper sheet
     entity: SheetPaper
+
+- type: constructionGraph
+  id: PowerArmorStand
+  start: start
+  graph:
+  - node: start
+    entity: RevPowerArmorStand
+    edges:
+    - to: PowerArmorStand
+      steps:
+        - material: Steel
+          amount: 30
+          doAfter: 20
+
+  - node: PowerArmorStand
+    entity: RevPowerArmorStand

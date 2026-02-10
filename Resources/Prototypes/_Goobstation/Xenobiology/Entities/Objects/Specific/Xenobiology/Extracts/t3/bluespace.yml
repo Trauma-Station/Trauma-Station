@@ -1,0 +1,44 @@
+- type: entity
+  id: BluespaceSlimeExtract
+  parent: BaseSlimeExtract
+  name: bluespace slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _Goobstation/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#f0f8ff"
+      shader: XenoBluespace
+  - type: Reactive
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReaction
+      - !type:SpawnEntity
+        entity: FloorTileItemBluespace30
+    - reagents: [ Plasma ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReaction
+      - !type:SpawnEntity
+        entity: MaterialBSCrystal1
+        number: 5
+    - reagents: [ Blood ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReaction
+      - !type:RelayNearby
+        compName: MobState
+        blacklist:
+          components:
+          - BorgBrain # no teleporting MMIs
+        range: 7
+        effect: !type:RandomTeleport
+        # TODO: in the future check that its not occluded, i dont care to port it rn
+  - type: Tag
+    tags:
+    - XenobiologyBluespaceExtract

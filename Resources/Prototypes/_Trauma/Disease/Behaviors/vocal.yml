@@ -48,7 +48,9 @@
   - type: DiseaseEntityEffect
     effects:
     - !type:RelayOrgans
-      slot: lungs
+      whitelist:
+        components:
+        - Lung
       effects:
       - !type:Gib
       guidebookText: entity-effect-guidebook-rupture-lungs

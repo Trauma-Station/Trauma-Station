@@ -57,6 +57,10 @@
   parent: [ PartIPCBase, BaseGroinInorganic ]
   id: GroinIPC
   name: "ipc groin"
+  components:
+  - type: Tag # Trauma
+    tags:
+    - CyberButt
 
 - type: entity
   parent: [ PartIPCBase, BaseHead ]

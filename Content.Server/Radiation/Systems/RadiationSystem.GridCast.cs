@@ -213,12 +213,20 @@ public partial class RadiationSystem
     /// <param name="sourceGridPos">source of the ray, in grid space</param>
     /// <param name="destGridPos"></param>
     /// <returns></returns>
-    private static IEnumerable<(Vector2i cell, float distInCell)> AdvancedGridRaycast(Vector2 sourceGridPos,Vector2 destGridPos)
+    private static IEnumerable<(Vector2i cell, float distInCell)> AdvancedGridRaycast(Vector2 sourceGridPos, Vector2 destGridPos)
     {
         var delta = destGridPos - sourceGridPos;
 
+        if (delta.LengthSquared() < 0.0001f)
+        {
+            yield return (new Vector2i((int)Math.Floor(sourceGridPos.X), (int)Math.Floor(sourceGridPos.Y)), 0f);
+            yield break;
+        }
+
         var currentX = (int)Math.Floor(sourceGridPos.X);
         var currentY = (int)Math.Floor(sourceGridPos.Y);
+        var destX = (int)Math.Floor(destGridPos.X);
+        var destY = (int)Math.Floor(destGridPos.Y);
 
         var stepX = 0;
         float tDeltaX = 0, tMaxX = float.MaxValue;
@@ -241,17 +249,23 @@ public partial class RadiationSystem
         }
 
         var entry = sourceGridPos;
+        var maxIterations = Math.Abs(destX - currentX) + Math.Abs(destY - currentY) + 2;
+        var iterations = 0;
+
         while (true)
         {
+            if (++iterations > maxIterations)
+                yield break;
+
             var tExit = Math.Min(tMaxX, tMaxY);
             var exitIsX = tMaxX < tMaxY;
             if (tExit > 1f)
                 tExit = 1f;
-
             var exit = sourceGridPos + delta * tExit;
             var cell = new Vector2i(currentX, currentY);
-            yield return (cell,(exit - entry).Length());
-            if (tExit >= 1f)
+            yield return (cell, (exit - entry).Length());
+
+            if (tExit >= 1f - 1e-6f)
                 break;
 
             if (exitIsX)
@@ -264,7 +278,6 @@ public partial class RadiationSystem
                 currentY += stepY;
                 tMaxY += tDeltaY;
             }
-
             entry = exit;
         }
     }

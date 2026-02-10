@@ -14,7 +14,7 @@
     faction: Revolutionary
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckUnbutcherableBase
   id: ClothingNeckBombCollarBroken
   name: disabled bomb collar
   description: A disabled bomb collar, it will no longer explode, but it will give away your criminal history.

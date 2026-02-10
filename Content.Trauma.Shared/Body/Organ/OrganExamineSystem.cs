@@ -41,7 +41,8 @@ public sealed class OrganExamineSystem : EntitySystem
             // cache the identity incase there's multiple OrganExamine organs
             // not done at the start of the function incase there's none to use it
             identity ??= Identity.Entity(ent.Owner, EntityManager);
-            args.Message.PushMarkup(Loc.GetString(comp.Examine, ("target", identity), ("part", part)));
+            args.Message.AddMarkupOrThrow(Loc.GetString(comp.Examine, ("target", identity), ("part", part)));
+            args.Message.PushNewline();
         }
     }
 

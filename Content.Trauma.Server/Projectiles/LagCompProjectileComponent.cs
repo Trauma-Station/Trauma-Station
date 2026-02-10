@@ -17,6 +17,12 @@ public sealed partial class LagCompProjectileComponent : Component
     public ICommonSession? ShooterSession;
 
     /// <summary>
+    /// The mob that shot the projectile.
+    /// </summary>
+    [DataField]
+    public EntityUid Shooter;
+
+    /// <summary>
     /// Entities currently being considered for lag compensated collision.
     /// </summary>
     /// <remarks>

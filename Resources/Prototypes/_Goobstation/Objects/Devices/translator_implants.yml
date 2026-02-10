@@ -29,7 +29,6 @@
       - RootSpeak
       - Draconic # = Sinta'Unathi
       - ValyrianStandard
-      - YowKriol
       - Azaziba # Depricated Languages -
       - Eldritch
       - Cheval # Animal Languages -
@@ -53,7 +52,6 @@
       - RootSpeak
       - Draconic # = Sinta'Unathi
       - ValyrianStandard
-      - YowKriol
       - Azaziba # Depricated Languages -
       - Eldritch
       - Cheval # Animal Languages -
@@ -97,18 +95,3 @@
     - SpaceItalian
     spoken:
     - SpaceItalian
-
-- type: entity
-  parent: BaseSubdermalImplant
-  id: YowKriolTranslatorImplant
-  name: Yow Kriol translator implant
-  description: An implant giving the ability to understand and speak Yow Kriol.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: TranslatorImplant
-    understood:
-    - YowKriol
-    spoken:
-    - YowKriol
-    requires:
-    - TauCetiBasic

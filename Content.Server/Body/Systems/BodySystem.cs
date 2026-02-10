@@ -3,7 +3,6 @@ using Content.Server.Body.Components;
 using System.Numerics;
 using Content.Server.Ghost;
 using Content.Server.Humanoid;
-using Content.Shared._Shitmed.Body.Part;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
 using Content.Shared.Body.Part;
@@ -17,20 +16,17 @@ using Content.Shared.Movement.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Timing;
 
-// Shitmed Change
-using System.Linq;
-using Content.Shared.Body.Events;
-using Content.Shared.Gibbing.Events;
-
 namespace Content.Server.Body.Systems;
 
 public sealed partial class BodySystem : SharedBodySystem // Shitmed change: made partial
 {
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!; // Shitmed Change
+    // <Trauma>
+    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    // </Trauma>
     [Dependency] private readonly GhostSystem _ghostSystem = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly HumanoidAppearanceSystem _humanoidSystem = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!; // Shitmed Change
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
 
@@ -40,7 +36,6 @@ public sealed partial class BodySystem : SharedBodySystem // Shitmed change: mad
 
         SubscribeLocalEvent<BodyComponent, MoveInputEvent>(OnRelayMoveInput);
         SubscribeLocalEvent<BodyComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
-        SubscribeLocalEvent<BodyPartComponent, AttemptEntityGibEvent>(OnGibTorsoAttempt); // Shitmed Change
     }
 
     private void OnRelayMoveInput(Entity<BodyComponent> ent, ref MoveInputEvent args)
@@ -106,106 +101,4 @@ public sealed partial class BodySystem : SharedBodySystem // Shitmed change: mad
         _humanoidSystem.SetLayersVisibility((bodyEnt, humanoid), layers, visible: false);
         _appearance.SetData(bodyEnt, layer, true); // Shitmed Change
     }
-
-    public override HashSet<EntityUid> GibBody(
-        EntityUid bodyId,
-        bool gibOrgans = false,
-        BodyComponent? body = null,
-        bool launchGibs = true,
-        Vector2? splatDirection = null,
-        float splatModifier = 1,
-        Angle splatCone = default,
-        SoundSpecifier? gibSoundOverride = null,
-        // Shitmed Change
-        GibType gib = GibType.Gib,
-        GibContentsOption contents = GibContentsOption.Drop,
-        List<string>? allowedContainers = null,
-        List<string>? excludedContainers = null)
-    {
-        if (!Resolve(bodyId, ref body, logMissing: false)
-            || TerminatingOrDeleted(bodyId)
-            || EntityManager.IsQueuedForDeletion(bodyId))
-        {
-            return new HashSet<EntityUid>();
-        }
-
-        if (HasComp<GodmodeComponent>(bodyId))
-            return new HashSet<EntityUid>();
-
-        var xform = Transform(bodyId);
-        if (xform.MapUid is null)
-            return new HashSet<EntityUid>();
-
-        var gibs = base.GibBody(bodyId, gibOrgans, body, launchGibs: launchGibs, splatDirection: splatDirection,
-            splatModifier: splatModifier, splatCone: splatCone, gib: gib, contents: contents,
-            allowedContainers: allowedContainers, excludedContainers: excludedContainers); // Shitmed Change
-
-        var ev = new BeingGibbedEvent(gibs);
-        RaiseLocalEvent(bodyId, ref ev);
-
-        QueueDel(bodyId);
-
-        return gibs;
-    }
-
-    // Shitmed Change Start
-    public override HashSet<EntityUid> GibPart(
-        EntityUid partId,
-        BodyPartComponent? part = null,
-        bool launchGibs = true,
-        Vector2? splatDirection = null,
-        float splatModifier = 1,
-        Angle splatCone = default,
-        SoundSpecifier? gibSoundOverride = null)
-    {
-        if (!Resolve(partId, ref part, logMissing: false)
-            || TerminatingOrDeleted(partId)
-            || EntityManager.IsQueuedForDeletion(partId))
-            return new HashSet<EntityUid>();
-
-        if (Transform(partId).MapUid is null)
-            return new HashSet<EntityUid>();
-
-        var gibs = base.GibPart(partId, part, launchGibs: launchGibs,
-            splatDirection: splatDirection, splatModifier: splatModifier, splatCone: splatCone);
-
-        var ev = new BeingGibbedEvent(gibs);
-        RaiseLocalEvent(partId, ref ev);
-
-        if (gibs.Any())
-            QueueDel(partId);
-
-        return gibs;
-    }
-
-    public override bool BurnPart(EntityUid partId, BodyPartComponent? part = null)
-    {
-        if (!Resolve(partId, ref part, logMissing: false)
-            || TerminatingOrDeleted(partId)
-            || EntityManager.IsQueuedForDeletion(partId))
-            return false;
-
-        return base.BurnPart(partId, part);
-    }
-
-    protected override void ApplyPartMarkings(EntityUid target, BodyPartAppearanceComponent component)
-    {
-        return;
-    }
-
-    protected override void RemoveBodyMarkings(EntityUid target, BodyPartAppearanceComponent partAppearance, HumanoidAppearanceComponent bodyAppearance)
-    {
-        foreach (var (visualLayer, markingList) in partAppearance.Markings)
-            foreach (var marking in markingList)
-                _humanoidSystem.RemoveMarking(target, marking.MarkingId, sync: false, humanoid: bodyAppearance);
-
-        Dirty(target, bodyAppearance);
-    }
-
-    private void OnGibTorsoAttempt(Entity<BodyPartComponent> ent, ref AttemptEntityGibEvent args)
-    {
-        if (ent.Comp.PartType == BodyPartType.Chest)
-            args.GibType = GibType.Skip;
-    }
-    // Shitmed Change End
 }

@@ -13,6 +13,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Goobstation.Shared.Nutrition.EntitySystems;
+using Content.Goobstation.Shared.Xenobiology;
 using Content.Goobstation.Shared.Xenobiology.Components;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN.PrimitiveTasks;

@@ -1,4 +1,4 @@
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Body.Organ;
 using Content.Shared.Body.Prototypes;
 using Robust.Shared.Prototypes;
@@ -16,3 +16,9 @@ public record struct ImmuneToPoisonDamageEvent(bool Immune = false);
 
 [ByRefEvent]
 public record struct ExcludeMetabolismGroupsEvent(EntityUid Metabolizer, List<ProtoId<MetabolismGroupPrototype>>? Groups = null);
+
+[ByRefEvent]
+public readonly record struct SetGhoulBoundHereticEvent(EntityUid Heretic);
+
+[ByRefEvent]
+public readonly record struct IncrementHereticObjectiveProgressEvent(EntProtoId Proto, int Amount = 1);

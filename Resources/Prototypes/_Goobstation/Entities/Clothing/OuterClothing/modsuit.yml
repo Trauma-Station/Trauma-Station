@@ -525,7 +525,7 @@
       outerClothing-vox:
       - state: equipped-OUTERCLOTHING-sealed-vox
   - type: ExplosionResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: Armor
     traumaDeductions:
       Dismemberment: 0.2

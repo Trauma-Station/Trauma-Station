@@ -154,9 +154,6 @@
       time: 2.5h
   guides: # goobstation
   - Command
-  - SOPSuccession
-  - SOPStandardProcedures
-  - SOPHeadOfPersonnel
   - Writing
   goobcoins: 40 #Goob content
   weight: 20
@@ -191,6 +188,8 @@
   - Cargo
   - Atmospherics
   - Medical
+  - Journalism # Goob
+  - Robotics # Goob
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

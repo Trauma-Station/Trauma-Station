@@ -211,6 +211,7 @@
     sprite: _Goobstation/Wizard/Clothing/OuterClothing/paperwizard.rsi
   - type: Clothing
     sprite: _Goobstation/Wizard/Clothing/OuterClothing/paperwizard.rsi
+    unequipDelay: 5
   - type: ActionGrant
     actions:
     - ActionSummonStickmen
@@ -467,6 +468,30 @@
   - type: FingerprintMask
   - type: StaticPrice
     price: 1000
+
+- type: entity
+  parent: ClothingHandsGlovesWizard
+  id: ClothingHandsGlovesWizardPaper
+  components:
+  - type: Sprite
+    sprite: Clothing/Hands/Gloves/Color/color.rsi
+    layers:
+    - state: icon
+      color: "#ffffff"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#ffffff"
+      right:
+      - state: inhand-right
+        color: "#ffffff"
+  - type: Clothing
+    sprite: Clothing/Hands/Gloves/Color/color.rsi
+    clothingVisuals:
+      gloves:
+      - state: equipped-HAND
+        color: "#ffffff"
 
 # Crimsom
 - type: entity

@@ -18,4 +18,3 @@ cable-multitool-system-statistics = Your multitool shows a list of statistics:
                                     Ideal Consumption: { POWERWATTS($consumption) }
                                     Input Storage: { POWERJOULES($storagec) } / { POWERJOULES($storagem) } ({ TOSTRING($storager, "P1") })
                                     Output Storage: { POWERJOULES($storageoc) } / { POWERJOULES($storageom) } ({ TOSTRING($storageor, "P1") })
-

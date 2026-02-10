@@ -9,7 +9,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Localizations;
 using Robust.Shared.Prototypes;
 
@@ -56,7 +56,8 @@ public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<
                 interruptsDoAfters: false,
                 targetPart: args.Effect.UseTargeting ? args.Effect.TargetPart : null,
                 ignoreBlockers: args.Effect.IgnoreBlockers,
-                splitDamage: args.Effect.SplitDamage);
+                splitDamage: args.Effect.SplitDamage,
+                increaseOnly: args.Effect.IncreaseOnly); // Trauma
     }
 }
 
@@ -90,7 +91,10 @@ public sealed partial class HealthChange : EntityEffectBase<HealthChange>
 
     [DataField]
     public bool IgnoreBlockers = true;
-    // </Shitmed>
+
+    [DataField]
+    public bool IncreaseOnly;
+    // </Trauma>
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {

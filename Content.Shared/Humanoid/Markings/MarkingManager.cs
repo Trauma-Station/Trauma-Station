@@ -14,7 +14,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Humanoid.Markings
 {
-    public sealed class MarkingManager
+    public sealed partial class MarkingManager // Trauma - made partial
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
@@ -190,7 +190,7 @@ namespace Content.Shared.Humanoid.Markings
                 return false;
             }
 
-            if (marking.MarkingColors.Count != proto.Sprites.Count)
+            if (marking.MarkingColors.Count != proto.ColorCount) // Trauma - replaced Sprites.Count with ColorCount
             {
                 return false;
             }

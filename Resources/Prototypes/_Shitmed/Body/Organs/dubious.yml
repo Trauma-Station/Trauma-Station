@@ -257,7 +257,7 @@
         - SlipEntity
         - ContrabandDetector
         - Caltrop # Trauma
-          
+
 - type: entity
   id: OrganDubiousVentcrawler
   parent: OrganDubiousBase

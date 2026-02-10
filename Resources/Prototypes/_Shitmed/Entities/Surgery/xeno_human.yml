@@ -174,7 +174,7 @@
     - SurgeryStepInsertEggSack
     - SurgeryStepSealOrganWound
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Chest, Groin ]
   - type: SurgeryOrganSlotCondition
     organSlot: egg_sack
   - type: SurgeryOrganCondition
@@ -238,7 +238,7 @@
   name: Remove Transplanted Egg Sack
   components:
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Chest, Groin ]
   - type: SurgeryOrganCondition
     organ:
     - type: EggSack

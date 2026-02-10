@@ -8,10 +8,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared._Shitmed.Body;
 using Content.Shared._Shitmed.CCVar;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Systems;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
 using Content.Shared.Body.Components;
@@ -310,6 +309,8 @@ public sealed partial class WoundSystem : EntitySystem
             // Attached and Detached -Woundable events are handled on client with containers
 
             AllowWounds = comp.AllowWounds,
+            CanRemove = comp.CanRemove,
+            CanBleed = comp.CanBleed,
 
             DamageContainerID = comp.DamageContainerID,
 
@@ -353,6 +354,8 @@ public sealed partial class WoundSystem : EntitySystem
         // Attached and Detached -Woundable events are handled on client with containers
 
         component.AllowWounds = state.AllowWounds;
+        component.CanRemove = state.CanRemove;
+        component.CanBleed = state.CanBleed;
 
         component.DamageContainerID = state.DamageContainerID;
 

@@ -34,7 +34,7 @@
       Extinguish: [Touch]
   - type: NpcFactionMember
     factions:
-    - SimpleHostile
+    - Xeno
   - type: Hands
   - type: ComplexInteraction
   - type: Sprite

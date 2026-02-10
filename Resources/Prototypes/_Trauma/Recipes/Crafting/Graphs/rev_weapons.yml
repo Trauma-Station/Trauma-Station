@@ -13,7 +13,7 @@
   - node: finished
     entity: RevSword
   groups:
-  - Technological
+  - Revolutionary
 
 - type: constructionGraph
   id: RevMace
@@ -29,7 +29,7 @@
   - node: finished
     entity: RevMace
   groups:
-  - Technological
+  - Revolutionary
 
 - type: constructionGraph
   id: RevKnife
@@ -45,7 +45,7 @@
   - node: finished
     entity: RevKnife
   groups:
-  - Technological
+  - Revolutionary
 
 - type: constructionGraph
   id: RevPitchfork
@@ -61,7 +61,7 @@
   - node: finished
     entity: RevPitchfork
   groups:
-  - Technological
+  - Revolutionary
 
 - type: constructionGraph
   id: RevTorch
@@ -77,7 +77,7 @@
   - node: finished
     entity: RevTorch
   groups:
-  - Technological
+  - Revolutionary
 
 - type: constructionGraph
   id: RevGuns
@@ -305,6 +305,80 @@
         doAfter: 10
       - tool: Screwing
         doAfter: 3
+    - to: Devastator
+      steps:
+      - tag: Pipe
+        name: construction-graph-tag-pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+      - material: Steel
+        amount: 2
+        doAfter: 1
+      - tag: Pipe
+        name: construction-graph-tag-pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+      - material: Steel
+        amount: 2
+        doAfter: 1
+      - tag: Pipe
+        name: construction-graph-tag-pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+      - material: Steel
+        amount: 2
+        doAfter: 1
+      - tag: ModularReceiver
+        name: construction-graph-tag-modular-receiver
+        icon:
+          sprite: Objects/Misc/modular_receiver.rsi
+          state: icon
+      - material: RevGunParts
+        amount: 2
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tool: Anchoring
+        doAfter: 1
+      - material: WoodPlank
+        amount: 5
+        doAfter: 1
+      - tool: Slicing
+        doAfter: 1
+      - material: RevBolt
+        amount: 2
+        doAfter: 1
+      - material: RevNut
+        amount: 2
+        doAfter: 1
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Anchoring
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Hammering
+        doAfter: 0.5
+      - tool: Slicing
+        doAfter: 1
+
   - node: liberator
     entity: WeaponPistolLiberatorEmpty
   - node: resistance
@@ -313,8 +387,10 @@
     entity: WeaponLauncherRPG2
   - node: Flamethrower
     entity: ClothingBackpackFlamethrower # Temp
+  - node: Devastator
+    entity: WeaponShotgunDevastatorEmpty
   groups:
-  - Technological
+  - Revolutionary
 
 - type: constructionGraph
   id: RevIED
@@ -343,4 +419,4 @@
   - node: IED
     entity: GrenadeShrapnelRev
   groups:
-  - Technological
+  - Revolutionary

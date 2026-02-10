@@ -621,10 +621,15 @@
     tags: [] # ignore "WhitelistChameleon" tag
 
 - type: entity
-  parent: [PassengerIDCard, BaseChameleon]
+  parent: [IDCardStandard, BaseChameleon] # Trauma - don't parent passenger id
   id: AgentIDCard
+  name: assistant ID card # Trauma - i hate this
   suffix: Agent
   components:
+  - type: Sprite # Trauma - i hate this
+    layers:
+    - state: default
+    - state: idpassenger
   - type: Access
     tags:
     - Maintenance
@@ -697,6 +702,8 @@
     layers:
     - state: syndie # Trauma
   - type: AgentIDCard
+  - type: IdCard
+    jobIcon: JobIconSyndicateOperative
 
 - type: entity
   parent: [ SyndiOperativeIDCard, BaseSyndicateContraband ]
@@ -706,6 +713,8 @@
   - type: Sprite
     layers:
     - state: syndie # Trauma
+  - type: IdCard
+    jobIcon: JobIconSyndicateCorpsman
 
 - type: entity
   parent: [ SyndiOperativeIDCard, BaseSyndicateContraband ]
@@ -715,6 +724,34 @@
   - type: Sprite
     layers:
     - state: syndie # Trauma
+  - type: IdCard
+    jobIcon: JobIconSyndicateCommander
+
+- type: entity
+  parent: [ IDCardStandard, BaseHighlyIllegalContraband ]
+  id: NinjaIDCard
+  name: ninja ID card
+  suffix: Ninja
+  components:
+  - type: Sprite # Trauma - not using wizden id card sprites system yet
+    layers:
+    - state: default
+    - state: idpassenger
+  #  - state: stripe_top
+  #    color: "#38D848"
+  #  - state: stripe_bottom
+  #    color: "#309000"
+  #  - sprite: *icon-rsi
+  #    offset: *icon-offset
+  #    state: Ninja
+  - type: Item
+    heldPrefix: green
+  - type: AgentIDCard
+  - type: IdCard
+    jobIcon: JobIconNinja
+  - type: Access
+    tags:
+    - Maintenance
 
 - type: entity
   parent: [ IDCardStandard, BaseMajorContraband ]
@@ -724,6 +761,8 @@
   - type: Sprite
     layers:
     - state: pirate
+  - type: IdCard
+    jobIcon: JobIconPirate
   - type: Access
     tags:
     - NuclearOperative
@@ -812,6 +851,8 @@
     - Recyclable
   - type: StaticPrice # these are infinitely producible.
     price: 0
+
+#ERT/Centcomm
 
 - type: entity
   parent: CentcomIDCard
@@ -910,14 +951,16 @@
     - AllAccess
     - Silicon
     tags:
+    # <Trauma>
+    - BlueshieldOfficer
+    - NanotrasenRepresentative
+    - Revolutionary
+    # </Trauma>
     - CentralCommand
     - NuclearOperative
     - SyndicateAgent
     - Wizard
     - Xenoborg
-    # Goobstation
-    - NanotrasenRepresentative
-    - BlueshieldOfficer
   - type: NanoChatCard # DeltaV
     notificationsMuted: true
     listNumber: false

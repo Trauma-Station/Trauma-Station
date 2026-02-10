@@ -70,11 +70,6 @@
       # Goobstation - changelings
       enum.StoreUiKey.Key:
         type: StoreBoundUserInterface
-      enum.HereticLivingHeartKey.Key: # goob edit - heretics
-        type: LivingHeartMenuBoundUserInterface
-      enum.WizardTeleportUiKey.Key: # Goobstation - wizard
-        type: WizardTeleportBoundUserInterface
-        requireInputValidation: false
   - type: Sprite
     layers:
       - map: [ "enum.HumanoidVisualLayers.Groin" ]
@@ -85,8 +80,8 @@
       - map: [ "enum.HumanoidVisualLayers.LArm" ]
       - map: [ "enum.HumanoidVisualLayers.RLeg" ]
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-      - map: [ "enum.HumanoidVisualLayers.Underwear" ]
-      - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
       - map: [ "underpants" ]
       - map: [ "undershirt" ]
       - map: [ "socks" ]
@@ -110,6 +105,7 @@
       - map: [ "back" ]
       - map: [ "enum.HumanoidVisualLayers.Face" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+      - map: [ "enum.HumanoidVisualLayers.FacialHairSpecial" ] # Trauma
       - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ]
       - map: [ "pocket1" ]
@@ -122,6 +118,7 @@
       - map: [ "enum.HumanoidVisualLayers.RArm" ]
       - map: [ "maskalt" ]
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
+      - map: [ "enum.HumanoidVisualLayers.HairSpecial" ] # Trauma
       - map: [ "mask" ]
       - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
       - map: [ "head" ]
@@ -269,6 +266,7 @@
       - map: [ "back" ]
       - map: [ "enum.HumanoidVisualLayers.Face" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+      - map: [ "enum.HumanoidVisualLayers.FacialHairSpecial" ] # Trauma
       - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
       - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ]
@@ -282,5 +280,6 @@
       - map: [ "enum.HumanoidVisualLayers.RArm" ]
       - map: [ "maskalt" ]
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
+      - map: [ "enum.HumanoidVisualLayers.HairSpecial" ] # Trauma
       - map: [ "mask" ]
       - map: [ "head" ]

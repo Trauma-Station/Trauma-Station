@@ -1,6 +1,6 @@
 using System.Numerics;
 using Content.Server.Decals;
-using Content.Server.Spawners.Components;
+using Content.Shared.Spawners.Components; // Trauma
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;

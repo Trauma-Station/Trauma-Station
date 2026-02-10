@@ -8,14 +8,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server._Goobstation.Objectives.Components;
+using Content.Server._Shitmed.Objectives.Components;
+using Content.Server.Mind;
 using Content.Server.Objectives.Systems;
+using Content.Shared.Heretic;
 using Content.Shared.Objectives.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._Goobstation.Objectives.Systems;
 
-public sealed partial class HereticObjectiveSystem : EntitySystem
+public sealed class HereticObjectiveSystem : EntitySystem
 {
     [Dependency] private readonly NumberObjectiveSystem _number = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
 
     public override void Initialize()
     {
@@ -23,6 +28,16 @@ public sealed partial class HereticObjectiveSystem : EntitySystem
 
         SubscribeLocalEvent<HereticKnowledgeConditionComponent, ObjectiveGetProgressEvent>(OnGetKnowledgeProgress);
         SubscribeLocalEvent<HereticSacrificeConditionComponent, ObjectiveGetProgressEvent>(OnGetSacrificeProgress);
+
+        SubscribeLocalEvent<HereticComponent, IncrementHereticObjectiveProgressEvent>(OnIncrement);
+    }
+
+    private void OnIncrement(Entity<HereticComponent> ent, ref IncrementHereticObjectiveProgressEvent args)
+    {
+        if (!_mind.TryFindObjective(ent.Owner, args.Proto, out var obj))
+            return;
+
+        CompOrNull<HereticSacrificeConditionComponent>(obj.Value)?.Sacrificed += args.Amount;
     }
 
     private void OnGetKnowledgeProgress(Entity<HereticKnowledgeConditionComponent> ent, ref ObjectiveGetProgressEvent args)

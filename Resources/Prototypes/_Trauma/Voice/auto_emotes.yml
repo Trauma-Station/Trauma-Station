@@ -1,0 +1,6 @@
+- type: autoEmote
+  id: Fart
+  emote: Fart
+  interval: 5.0
+  chance: 0.7
+  withChat: false

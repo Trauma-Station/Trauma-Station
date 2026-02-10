@@ -6,12 +6,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client._Shitcode.Heretic.UI;
-using Content.Shared._Goobstation.Heretic.Components;
-using Content.Shared.Heretic.Prototypes;
+using Content.Shared._Shitcode.Heretic.Rituals;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
-using Robust.Shared.Prototypes;
 
 namespace Content.Client._Shitcode.Heretic;
 
@@ -39,8 +37,8 @@ public sealed class HereticRitualRuneBoundUserInterface : BoundUserInterface
         _hereticRitualMenu.OpenCenteredAt(_inputManager.MouseScreenPosition.Position / vpSize);
     }
 
-    private void SendHereticRitualMessage(ProtoId<HereticRitualPrototype> protoId)
+    private void SendHereticRitualMessage(NetEntity ritual)
     {
-        SendMessage(new HereticRitualMessage(protoId));
+        SendPredictedMessage(new HereticRitualMessage(ritual));
     }
 }

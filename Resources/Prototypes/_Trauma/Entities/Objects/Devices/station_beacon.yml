@@ -1,0 +1,7 @@
+- type: entity
+  parent: DefaultStationBeaconScience
+  id: DefaultStationBeaconXenobio
+  suffix: Xenobio
+  components:
+  - type: NavMapBeacon
+    defaultText: station-beacon-xenobio

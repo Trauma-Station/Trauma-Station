@@ -1,17 +1,7 @@
 - type: guideEntry
-  id: Gingerbread
-  name: species-name-gingerbread
-  text: "/ServerInfo/Guidebook/Mobs/Gingerbread.xml"
-
-- type: guideEntry
   id: Harpy
   name: species-name-harpy
   text: "/ServerInfo/Guidebook/Mobs/Harpy.xml"
-
-- type: guideEntry
-  id: Yowie
-  name: species-name-yowie
-  text: "/ServerInfo/Guidebook/Mobs/Yowie.xml"
 
 - type: guideEntry
   id: IPC

@@ -111,6 +111,14 @@
     - Recyclable
     - Trash
     - BananaPeel
+#<Trauma>
+  - type: Perishable
+    rotAfter: 99999 # - should not rot but no remove component function
+    molsPerSecondPerUnitMass: 0
+  - type: RotInto
+    entity: FoodRot
+    stage: 1
+#</Trauma>
 
 - type: entity
   parent: BaseItem

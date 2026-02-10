@@ -59,6 +59,11 @@
     - Mouse
     understands:
     - Mouse
+    - TauCetiBasic
+  - type: NightVision # Goobstation - Nightvision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Effects/bite.ogg
@@ -84,10 +89,6 @@
   - type: Tag
     tags:
     - VimPilot
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
 
 - type: entity
   name: bee
@@ -120,7 +121,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      5: Dead # Goob edit
+      5: Dead # Goob - was 10
   - type: Stamina
     baseCritThreshold: 10
     animationThreshold: 1
@@ -289,6 +290,7 @@
     - Chicken
     understands:
     - Chicken
+    - TauCetiBasic
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -368,6 +370,21 @@
   id: MobCockroach
   description: This station is just crawling with bugs.
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Hissing
+    understands:
+    - Hissing
+    - TauCetiBasic
+  - type: Body
+    prototype: Rat
+    requiredLegs: 0
+  - type: ThermalRegulator
+    metabolismHeat: 300
+  - type: StaticPrice
+    price: -520
+  # </Trauma>
   - type: Sprite
     drawdepth: SmallMobs
     sprite: Mobs/Animals/cockroach.rsi
@@ -387,7 +404,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 2 # Goob edit
+        density: 2 # Goob - was 100
         mask:
         - SmallMobMask
         layer:
@@ -444,15 +461,11 @@
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 10
+        damage: 3 # Trauma, was 10
       behaviors:
       - !type:GibBehavior
-        gibContents: Skip # Shitmed Change
         recursive: false
   - type: NonSpreaderZombie
-  - type: LanguageSpeaker # Einstein Engines - Languages
-    speaks: [Hissing]
-    understands: [Hissing]
   - type: StepTrigger
     requiredTriggeredSpeed: 1
   - type: TriggerOnStepTrigger
@@ -523,7 +536,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 12 # Goob edit
+        density: 12 # Goob - was 120
         mask:
         - SmallMobMask
         layer:
@@ -532,7 +545,7 @@
   - type: Speech
     speechVerb: Moth
     speechSounds: Squeak
-    allowedEmotes: ['Chitter', 'Squeak', 'Flap'] #flap is from goob
+    allowedEmotes: ['Chitter', 'Squeak', 'Flap'] # Goob - added Flap
   - type: FaxableObject
     insertingState: inserting_mothroach
   - type: FaxSlip # Goobstation
@@ -607,6 +620,7 @@
     - Moffic
     understands:
     - Moffic
+    - TauCetiBasic
   - type: ZombieAccentOverride
     accent: zombieMoth
   - type: Vocal
@@ -638,7 +652,7 @@
         damage: 60
       behaviors:
       - !type:GibBehavior
-        gibContents: Skip
+        deleteGibs: true # Trauma
         recursive: false
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
@@ -758,6 +772,7 @@
     - Duck
     understands:
     - Duck
+    - TauCetiBasic
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -1041,6 +1056,7 @@
     - Crab
     understands:
     - Crab
+    - TauCetiBasic
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -1332,6 +1348,7 @@
     - Kangaroo
     understands:
     - Kangaroo
+    - TauCetiBasic
   - type: Butcherable
     spawned:
     - id: FoodMeat
@@ -1399,15 +1416,37 @@
   description: The genetic bipedal ancestor of... Uh... Something. Yeah, there's definitely something on the station that descended from whatever this is.
   abstract: true
   components:
-  - type: VentCrawler # goobstation - Ventcrawl
+  # <Trauma>
+  - type: BloodSplatterer
+  - type: VentCrawler
     allowInventory: false
-  - type: CombatMode
-    canDisarm: true
-  # <Shitmed>
+  - type: GroupRetaliation
+    range: 8
   - type: Targeting
   - type: HumanoidAppearance
     species: Monkey
-  # </Shitmed>
+  - type: Vocal
+    sounds:
+      Male: MonkeyMode
+      Female: MonkeyMode
+      Unsexed: MonkeyMode
+    wilhelmProbability: 0.001
+  - type: Consciousness
+    hasPainScreams: false
+    threshold: 70
+    cap: 140
+  - type: DiseaseCarrier
+  - type: UserInterface
+    interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  # </Trauma>
+  - type: CombatMode
+    canDisarm: true
   - type: Inventory
     templateId: monkey
     speciesId: monkey
@@ -1466,9 +1505,11 @@
     - map: [ "neck" ]
     - map: [ "back" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHairSpecial" ] # Trauma
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "maskalt" ]
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "enum.HumanoidVisualLayers.HairSpecial" ] # Trauma
     - map: [ "mask" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
@@ -1524,9 +1565,6 @@
   - type: CanHostGuardian
   - type: NPCRetaliation
     attackMemoryLength: 10
-  # Goobstation
-  - type: GroupRetaliation
-    range: 8
   - type: FactionException
   - type: NpcFactionMember
     factions:
@@ -1551,20 +1589,9 @@
       effects:
       - !type:WashCreamPie
   - type: Crawler
-  # <Goob>
-  - type: Vocal
-    sounds:
-      Male: MonkeyMode
-      Female: MonkeyMode
-      Unsexed: MonkeyMode
-    wilhelmProbability: 0.001
-  - type: Consciousness
-    hasPainScreams: false
-    threshold: 70
-    cap: 140
-  - type: DiseaseCarrier
-  # </Goob>
   - type: StatusIcon
+
+
 
 - type: entity
   name: monkey
@@ -1583,11 +1610,12 @@
     understands:
     - Monkey
     - Kobold
+    - TauCetiBasic
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
   - type: AlwaysRevolutionaryConvertible
   - type: GhostRole
-    prob: 0.05
+    prob: 0.1 # Trauma, suffer. Was 0.05
     makeSentient: true
     name: ghost-role-information-monkey-name
     description: ghost-role-information-monkey-description
@@ -1633,7 +1661,7 @@
     factions:
     - Syndicate
   - type: GhostRole
-    prob: 0.05
+    prob: 0.1 # Trauma, suffer. Was 0.05
     makeSentient: true
     name: ghost-role-information-monkey-name
     description: ghost-role-information-monkey-description
@@ -1681,6 +1709,7 @@
     understands:
     - Kobold
     - Monkey
+    - TauCetiBasic
   # Shitmed Change Start
   - type: HumanoidAppearance
     species: Kobold
@@ -1743,11 +1772,15 @@
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-kobold
   - type: GhostRole
-    prob: 0.05
+    prob: 0.1 # Trauma, suffer. Was 0.05
     makeSentient: true
     name: ghost-role-information-kobold-name
     description: ghost-role-information-kobold-description
-    rules: ghost-role-information-nonantagonist-rules
+    # <Trauma> Parity with Monkeys being free agents.
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+    # </Trauma>
 
 - type: entity
   name: kobold
@@ -1942,6 +1975,7 @@
     - Mouse
     understands:
     - Mouse
+    - TauCetiBasic
   - type: Tag
     tags:
     - Trash
@@ -2018,9 +2052,6 @@
   - type: MeleeChemicalInjector
     transferAmount: 1
     solution: melee
-  - type: GibThisGuy
-    ocNames:
-    - Gallagin
   - type: DodgeWideswing
     staminaRatio: 1 # mice are small so can probably evade without much stamina drain
   - type: Stamina
@@ -2054,8 +2085,17 @@
         damage: 100
       behaviors:
       - !type:GibBehavior
-        gibContents: Skip
+        deleteGibs: true # Trauma
         recursive: false
+  - type: ActionGrant
+    actions:
+    - ActionMouseCall
+  - type: MobCallSource
+    whitelist:
+      tags:
+      - Mouse
+  - type: MobCallable
+  - type: XenoCompatible # to let egg sack surgeries work nicely...
   # </Goobstation>
 
 - type: entity
@@ -2172,7 +2212,8 @@
     energy: 5
     netsync: false
   - type: RadiationSource
-    intensity: 0.3
+    intensity: 0.5
+    slope: 0.3
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -2534,8 +2575,11 @@
       types:
         Heat : 0.2 #per second, scales with temperature & other constants
   - type: LanguageSpeaker # Einstein Engines - Language
-    speaks: [Penguin]
-    understands: [Penguin]
+    speaks:
+    - Penguin
+    understands:
+    - Penguin
+    - TauCetiBasic
 
 # TODO: Make grenade penguin voice activated like the rest of the stealth items.
 - type: entity
@@ -2665,8 +2709,11 @@
     damageContainer: Biological
     damageModifierSet: Scale
   - type: LanguageSpeaker # Einstein Engines - Language
-    speaks: [Hissing]
-    understands: [Hissing]
+    speaks:
+    - Hissing
+    understands:
+    - Hissing
+    - TauCetiBasic
 
 # Code unique spider prototypes or combine them all into one spider and get a
 # random sprite state when you spawn it.
@@ -2717,6 +2764,7 @@
     - Xeno
     understands:
     - Xeno
+    - TauCetiBasic
   - type: InteractionPopup
     successChance: 0.5
     interactSuccessString: petting-success-tarantula
@@ -2957,6 +3005,7 @@
     - Hissing
     understands:
     - Hissing
+    - TauCetiBasic
 
 - type: entity
   name: possum
@@ -3036,6 +3085,7 @@
     - Hissing
     understands:
     - Hissing
+    - TauCetiBasic
 
 - type: entity
   name: fox
@@ -3123,6 +3173,7 @@
     - Fox
     understands:
     - Fox
+    - TauCetiBasic
 
 - type: entity
   abstract: true
@@ -3189,6 +3240,7 @@
     - Dog
     understands:
     - Dog
+    - TauCetiBasic
   #- type: ReplacementAccent # Trauma - uses languages instead
   #  accent: dog
   - type: Tag
@@ -3335,6 +3387,7 @@
     - Cat
     understands:
     - Cat
+    - TauCetiBasic
   - type: InteractionPopup
     successChance: 0.7
     interactSuccessString: petting-success-cat
@@ -3595,6 +3648,7 @@
     - Hissing
     understands:
     - Hissing
+    - TauCetiBasic
 
 - type: entity
   name: ferret
@@ -3654,6 +3708,7 @@
     - Hissing
     understands:
     - Hissing
+    - TauCetiBasic
 
 - type: entity
   name: hamster
@@ -3760,6 +3815,7 @@
     - Mouse
     understands:
     - Mouse
+    - TauCetiBasic
   - type: Tag
     tags:
     - VimPilot
@@ -3882,6 +3938,7 @@
     - Pig
     understands:
     - Pig
+    - TauCetiBasic
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -4057,6 +4114,7 @@
     - Deer
     understands:
     - Deer
+    - TauCetiBasic
 
 - type: entity
   name: reindeer doe

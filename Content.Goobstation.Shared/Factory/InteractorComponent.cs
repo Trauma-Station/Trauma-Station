@@ -24,10 +24,22 @@ public sealed partial class InteractorComponent : Component
     public ProtoId<SinkPortPrototype> AltInteractPort = "AltInteract";
 
     /// <summary>
+    /// Signal port to toggle or enable/disable <see cref="UseInHand"/>.
+    /// </summary>
+    [DataField]
+    public ProtoId<SinkPortPrototype> UseInHandPort = "UseInHand";
+
+    /// <summary>
     /// Whether to use alt interaction, i.e. use the highest priority verb on the target entity.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool AltInteract;
+
+    /// <summary>
+    /// Whether to use the item inhand, ignores target entities.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool UseInHand;
 }
 
 [Serializable, NetSerializable]

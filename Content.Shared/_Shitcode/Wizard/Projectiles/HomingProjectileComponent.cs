@@ -6,13 +6,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Goobstation.Wizard.Projectiles;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class HomingProjectileComponent : Component
 {
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public EntityUid? Target;
 
     [DataField, AutoNetworkedField]
@@ -21,13 +23,9 @@ public sealed partial class HomingProjectileComponent : Component
     [DataField]
     public Angle Tolerance = Angle.FromDegrees(1);
 
-    /// <summary>
-    /// The less this value is, the smoother homing will be, but also more laggy.
-    /// Changing this also changes homing speed, so you need to tweak <see cref="HomingSpeed"/> datafield.
-    /// </summary>
-    [DataField]
-    public float HomingTime = 0.1f;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan NextUpdate = TimeSpan.Zero;
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    public float HomingAccumulator;
+    [DataField]
+    public TimeSpan HomingTime = TimeSpan.FromMilliseconds(100);
 }

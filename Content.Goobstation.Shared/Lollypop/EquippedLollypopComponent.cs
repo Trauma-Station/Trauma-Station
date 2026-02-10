@@ -1,3 +1,4 @@
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -15,7 +16,11 @@ public sealed partial class EquippedLollypopComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField, AutoNetworkedField]
-    public TimeSpan NextBite = TimeSpan.Zero;
+    public TimeSpan? NextBite;
 
-    public bool InstantEat;
+    /// <summary>
+    /// Max solution of the lollypop to eat for each update.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 MaxEaten = 1;
 }

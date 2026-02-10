@@ -282,7 +282,7 @@
         damage: 15
       behaviors:
       - !type:GibBehavior
-        gibContents: Skip # goob - rat servants dont spawn organs.
+        deleteGibs: true # Trauma - no lag pls
         recursive: false
   - type: Stamina
     baseCritThreshold: 60

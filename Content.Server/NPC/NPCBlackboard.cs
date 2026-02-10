@@ -53,6 +53,8 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
         {"RotateSpeed", float.MaxValue},
         {"VisionRadius", 10f},
         {"AggroVisionRadius", 10f},
+        {SecuritronArrestRange, 12f}, // Trauma
+        {SecuritronPatrolRange, 96f}, // Trauma
     };
 
     /// <summary>
@@ -326,6 +328,8 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
     public const string WeldbotWeldRange = "WeldbotWeldRange"; // Einstein Engines
     public const string FillbotPickupRange = "FillbotPickupRange"; // Einstein Engines
     public const string PlantbotServiceRange = "PlantbotServiceRange"; // Einstein Engines
+    public const string SecuritronArrestRange = "SecuritronArrestRange"; // Trauma
+    public const string SecuritronPatrolRange = "SecuritronPatrolRange"; // Trauma
 
     public const string MeleeMissChance = "MeleeMissChance";
 

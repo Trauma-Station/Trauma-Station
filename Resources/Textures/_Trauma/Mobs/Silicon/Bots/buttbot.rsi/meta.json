@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from goonstation at https://github.com/goonstation/goonstation/blob/c0cd0bdf3ac21fc6d1dd6ab25252861fc1f306e2/icons/obj/bots/aibots.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "buttbot"
+    },
+    {
+      "name": "cyberbuttbot"
+    }
+  ]
+}

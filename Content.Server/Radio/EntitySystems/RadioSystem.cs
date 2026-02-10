@@ -7,6 +7,7 @@ using Content.Shared.Access.Systems;
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.StatusIcon;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Speech;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
@@ -193,6 +194,7 @@ public sealed partial class RadioSystem : EntitySystem
         var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
         RaiseLocalEvent(ref sendAttemptEv);
         RaiseLocalEvent(radioSource, ref sendAttemptEv);
+        RaiseLocalEvent(messageSource, ref sendAttemptEv); // Trauma
         var canSend = !sendAttemptEv.Cancelled;
 
         var sourceMapId = Transform(radioSource).MapID;
@@ -290,10 +292,15 @@ public sealed partial class RadioSystem : EntitySystem
             : Loc.GetString("chat-radio-message-name-with-icon", ("jobIcon", jobIcon), ("jobName", jobName ?? ""), ("name", name));
         // goob end
 
+        // <Trauma> - allow source entity to replace font
+        var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
+        RaiseLocalEvent(source, ref fontEv);
+        // </Trauma>
+
         return Loc.GetString(wrapId,
             ("color", channel.Color),
             ("languageColor", languageColor),
-            ("fontType", language.SpeechOverride.FontId ?? speech.FontId),
+            ("fontType", fontEv.Font), // Trauma - use Font from above
             ("fontSize", loudSpeakFont ?? language.SpeechOverride.FontSize ?? speech.FontSize), // goob edit - "loudSpeakFont"
             ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId), // Goob Edit - Custom Bold Fonts
             ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),

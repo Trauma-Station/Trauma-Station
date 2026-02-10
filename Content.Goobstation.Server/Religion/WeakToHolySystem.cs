@@ -12,6 +12,8 @@ using System.Linq;
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.Religion.Nullrod;
+using Content.Server.Heretic.EntitySystems;
+using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -38,6 +40,9 @@ public sealed class WeakToHolySystem : EntitySystem
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly WoundSystem _wound = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly HereticSystem _heretic = default!;
+
+
     public override void Initialize()
     {
         base.Initialize();
@@ -100,7 +105,13 @@ public sealed class WeakToHolySystem : EntitySystem
 
     private void OnUnholyItemDamage(Entity<WeakToHolyComponent> uid, ref DamageUnholyEvent args)
     {
-        if (uid.Comp.AlwaysTakeHoly || TryComp<HereticComponent>(uid, out var heretic) && heretic.Ascended)
+        if (uid.Comp.AlwaysTakeHoly)
+        {
+            args.ShouldTakeHoly = true;
+            return;
+        }
+
+        if (_heretic.TryGetHereticComponent(uid.Owner, out var heretic, out _) && heretic.Ascended)
         {
             args.ShouldTakeHoly = true;
             return;

@@ -16,5 +16,3 @@ SPDX-License-Identifier: MIT
         <RichTextLabel Name="TextDisplay"></RichTextLabel>
     </BoxContainer>
 </controls:FancyWindow>
-
-

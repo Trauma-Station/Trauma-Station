@@ -49,7 +49,7 @@
   recipeUnlocks:
   - WeaponLaserCellRevolver
   - PowerCellIRRevolver
-  position: 3,0
+  position: 6,0
   technologyPrerequisites:
   - DraconicMunitions
 
@@ -65,8 +65,8 @@
   recipeUnlocks:
   - ClothingMaskMuzzleSecure
   - ClothingMaskMuzzleShock
-  - WeaponBillyClub 
-  position: 1,1
+  - WeaponBillyClub
+  position: 5,3
   technologyPrerequisites:
   - SalvageWeapons
 
@@ -84,38 +84,9 @@
   - WeaponLaserCellSMG
   - PowerCellIRSMG
   - PowerCellIonSMG
-  position: 5,-1
+  position: 8,-1
   technologyPrerequisites:
   - WeaponizedLaserManipulation
-
-- type: technology
-  id: Gygax
-  name: research-technology-gygax
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: gygax
-  discipline: Arsenal
-  tier: 2
-  cost: 20000
-  recipeUnlocks:
-  - GygaxHarness
-  - GygaxArmor
-  - GygaxHead
-  - GygaxLArm
-  - GygaxLLeg
-  - GygaxRArm
-  - GygaxRLeg
-  - GygaxCentralElectronics
-  - GygaxPeripheralsElectronics
-  - GygaxTargetingElectronics
-  - WeaponMechCombatUltraRifle
-  technologyPrerequisites:
-  - RipleyAPLU
-  - AdvancedRiotControl
-  - PortableMicrofusionWeaponry
-  - SmartWeaponry
-  - ThermalVisionTech
-  position: 2,-1
 
 - type: technology
   id: EnergyBoltBasedWeaponry # for future energy bolt weapon
@@ -133,7 +104,7 @@
   - EnergyMagRifleLethal
   technologyPrerequisites:
   - WaveParticleHarnessing
-  position: 6,1
+  position: 9,1
 
 # Tier 3
 
@@ -150,7 +121,7 @@
   - WeaponLaserCellSniper
   - PowerCellIRSniper
   - PowerCellIonSniper
-  position: 6,-1
+  position: 9,-1
   technologyPrerequisites:
   - WeaponLaserCellSMGTech
 
@@ -166,50 +137,9 @@
   recipeUnlocks:
   - ClothingBackpackLMGBattery
   - MilitaryPowerCellLMG
-  position: 6,-2
+  position: 9,-2
   technologyPrerequisites:
   - WeaponLaserCellSMGTech
-
-- type: technology
-  id: ExplosiveMechAmmunition
-  name: research-technology-explosive-mech-ammunition
-  icon:
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
-    state: mecha_missilerack
-  discipline: Arsenal
-  tier: 3
-  cost: 30000
-  recipeUnlocks:
-  - WeaponMechCombatMissileRack8
-  technologyPrerequisites:
-  - Gygax
-  position: 3,-2
-
-- type: technology
-  id: Durand
-  name: research-technology-durand
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: durand
-  discipline: Arsenal
-  tier: 3
-  cost: 40000
-  recipeUnlocks:
-  - DurandHarness
-  - DurandArmor
-  - DurandHead
-  - DurandLArm
-  - DurandLLeg
-  - DurandRArm
-  - DurandRLeg
-  - DurandCentralElectronics
-  - DurandPeripheralsElectronics
-  - DurandTargetingElectronics
-  - WeaponMechCombatShotgun
-  - WeaponMechCombatShotgunIncendiary
-  technologyPrerequisites:
-  - Gygax
-  position: 3,-1
 
 - type: technology
   id: SmartWeaponry
@@ -225,4 +155,4 @@
   - MagazineSmart
   technologyPrerequisites:
   - UraniumMunitions
-  position: 4,2
+  position: 8,2

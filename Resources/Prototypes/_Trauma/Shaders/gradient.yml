@@ -1,0 +1,14 @@
+- type: shader
+  id: GradientRGB2Col
+  kind: source
+  path: "/Textures/_Trauma/Shaders/gradientrgb2col.swsl"
+
+- type: shader
+  id: GradientRGB3Col
+  kind: source
+  path: "/Textures/_Trauma/Shaders/gradientrgb3col.swsl"
+
+- type: shader
+  id: GradientHSV
+  kind: source
+  path: "/Textures/_Trauma/Shaders/gradienthsv.swsl"

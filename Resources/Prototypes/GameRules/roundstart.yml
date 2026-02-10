@@ -24,8 +24,8 @@
       prob: 0.5
     #- id: SubWizard # Trauma - not real
     #  prob: 0.05
-    - id: Xenoborgs
-      prob: 0.05
+    # - id: Xenoborgs # Trauma - no
+    #   prob: 0.05
     # <Goob>
     - id: Heretic
       prob: 0.2
@@ -157,7 +157,6 @@
     #Once the issues are fixed the species should be removed from this list to be enabled.
     #Balance concerns are not a valid reason to disable a species, except for high-impact Nukie-specific exploits.
     #- Vox
-    - Yowie # Goobstation
     - Plasmaman # EE
   - type: AntagObjectives # Goobstation
     objectives:
@@ -174,7 +173,7 @@
   - type: GameRule
     minPlayers: 20
   - type: LoadMapRule
-    mapPath: /Maps/_Goobstation/Nonstations/nukieplanet.yml # goob edit
+    mapPath: /Maps/_Trauma/Nonstations/nukieplanet.yml # Trauma
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
     definitions:
@@ -516,6 +515,12 @@
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: BasicGameRulesTable
+#<Trauma> - These values should make midrounds less chaotic overall
+    minimumTimeUntilFirstEvent: 300 #5 min
+    minMaxEventTiming:
+      min: 300 # 5 min
+      max: 600 # 10 min
+#</Trauma>
 
 - type: entity
   id: DynamicStationEventScheduler # this isn't the dynamic mode, but rather the station event scheduler used for dynamic

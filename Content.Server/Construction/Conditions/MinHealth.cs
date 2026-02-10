@@ -2,7 +2,7 @@ using Content.Shared.Destructible; // Trauma - moved to shared
 using Content.Shared.Construction;
 using Content.Shared.Damage.Components;
 using Content.Shared.Examine;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 
 namespace Content.Server.Construction.Conditions;
 

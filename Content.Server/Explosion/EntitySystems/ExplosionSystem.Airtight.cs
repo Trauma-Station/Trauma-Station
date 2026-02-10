@@ -5,7 +5,7 @@ using Content.Server.Explosion.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Explosion;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Collections;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;

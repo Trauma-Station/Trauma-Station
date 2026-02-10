@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Text;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.ManifestListings;
 using Content.Shared.Actions.Components;
 using Content.Shared.Mind;

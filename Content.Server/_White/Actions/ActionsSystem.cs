@@ -4,7 +4,7 @@ using Content.Shared._White.Actions.Events;
 using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -24,7 +24,7 @@ public sealed class ActionsSystem : EntitySystem
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly PlasmaCostActionSystem _plasmaCost = default!; // Goobstation=
+    [Dependency] private readonly PlasmaCostActionSystem _plasmaCost = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
     public override void Initialize()

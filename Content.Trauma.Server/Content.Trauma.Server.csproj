@@ -5,7 +5,7 @@
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<OutputType Condition="'$(FullRelease)' != 'True'">Exe</OutputType>
 		<NoWarn>1998</NoWarn>
-		<WarningsAsErrors>nullable</WarningsAsErrors>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<ServerGarbageCollection>true</ServerGarbageCollection>
 	</PropertyGroup>
 	<Import Project="../MSBuild/Content.props" />
@@ -13,6 +13,7 @@
 	<ItemGroup>
 		<ProjectReference Include="../Content.Trauma.Shared/Content.Trauma.Shared.csproj" />
 		<ProjectReference Include="../Content.Goobstation.Server/Content.Goobstation.Server.csproj" />
+		<ProjectReference Include="../Content.Lavaland.Server/Content.Lavaland.Server.csproj" />
 		<ProjectReference Include="../Content.Server/Content.Server.csproj" />
 	</ItemGroup>
 

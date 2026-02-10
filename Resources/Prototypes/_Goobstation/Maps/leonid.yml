@@ -41,7 +41,7 @@
 - type: gameMap
   id: Leonid
   mapName: 'Leonid Station'
-  mapPath: /Maps/_Goobstation/leonid.yml
+  mapPath: /Maps/_Trauma/leonid.yml # Trauma
   minPlayers: 50
   stations:
     Leonid:
@@ -97,7 +97,7 @@
             Brigmedic: [ 1, 1 ]
             #supply
             Quartermaster: [ 1, 1 ]
-            SalvageSpecialist: [ 6, 6 ]
+            SalvageSpecialist: [ 3, 3 ]
             CargoTechnician: [ 5, 5 ]
             #civilian
             Passenger: [ -1, -1 ]

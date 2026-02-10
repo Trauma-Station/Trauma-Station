@@ -9,6 +9,11 @@
 # Table: null
 
 # <Trauma> - too lazy to port debugoks multi migration thing
+
+# 2026-01-07
+GunSafeDisabler: GunSafePhaser
+WeaponDisabler: WeaponLaserSidearm
+
 # 2025-10-30
 DVSmartFridgeMedical: SmartFridgeMedical
 
@@ -45,9 +50,41 @@ ToiletEmpty: ToiletFilled
 MailTeleporter: CargoMailTeleporter
 MailMetricsCartridge: null
 ComputerShuttleSalvage: ComputerShuttleMiningLavaland # 2 maps had this for some reason...
+
+# 2026-01-19 Goob reference purge
+PlushieBingleYakub: null
+PosterContrabandGoobYakub: null
+PosterLegitGoobDurkPlush: null
+PosterLegitGoobLouieVote: null
+PlushieSamantha: null
+PlushieBoggle: null
+PlushieDurk: null
+PlushieBrizby: null
+PlushieBaldzby: null
+PlushieLouie: null
+PlushieJvne: null
+PlushieFern: null
+PlushieNigel: null
+PlushieLehmin: null
+
+# 2026-01-21 remove ftl drives
+MachineFTLDrive: null
+MachineFTLDriveHigh: null
+MachineFTLDriveAutomated: null
+MachineFTLDriveDebug: null
+MachineFTLDriveCircuitboard: null
+MachineFTLDriveHighCircuitboard: null
+
+# 2026-01-29 migrate away water vapor tanks because some chud mapped it
+DoubleEmergencyWaterVaporTankFilled: DoubleEmergencyOxygenTankFilled
+LockerShaftMinerFilledHardsuit: LockerSalvageSpecialistFilledHardsuit
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
+
+# 2026-01-10 Goobstation Change Mapped Chem to Energy Chem by default
+ChemDispenser: EnergyChemDispenser
+
 AirlockBoxerGlassLocked: AirlockServiceGlassLocked
 AirlockClownGlassLocked: AirlockServiceGlassLocked
 AirlockClownLocked: AirlockServiceGlassLocked
@@ -829,6 +866,20 @@ CrateMaterialSilo: null
 # 2025-03-29
 ClothingBackpackDuffelSyndicateRaidBundle: ClothingBackpackSyndicateRaidBundle
 
+# 2025-04-14
+MailRobustToolsSpam: MailSpamLetter
+MailNanotrasenSpam: MailSpamLetter
+MailSyndicateSpam: MailSpamLetter
+MailAlternativeDimensionSpam: MailSpamLetter
+MailNarsieCultSpam: MailSpamLetter
+MailRageCageSpam: MailSpamLetter
+MailVoyageAdvertisementSpam: MailSpamLetter
+MailScienceSpiderClanSpam: MailSpamLetter
+MailAllAccessSpam: MailSpamLetter
+MailCentcommRetributionSpam: MailSpamLetter
+MailEvilLizardSpam: MailSpamLetter
+MailParentsNeedMoneySpam: MailSpamLetter
+
 # 2025-04-15
 SimpleXenoArtifact: ComplexXenoArtifact
 MediumXenoArtifact: ComplexXenoArtifact
@@ -971,6 +1022,9 @@ ClothingUniformJumpsuitParamedicNT: ClothingUniformJumpsuitParamedic
 # 2025-08-29
 PrefilledSyringe: Syringe
 
+# 2025-09-12
+BaseChemistryEmptyVial: ChemistryEmptyVial
+
 # 2025-10-6
 BibleTanakh: null
 BibleSatanic: null
@@ -1015,3 +1069,10 @@ SpawnPointBoxer: null
 FigureSpawner: MechFigurineSpawner50
 ToySpawner: PlushieSpawner50
 SpacemenFigureSpawner: SpacemenFigurineSpawner90
+
+# 2026-01-07
+HandheldHealthAnalyzerUnpowered: HandheldHealthAnalyzer
+HandheldHealthAnalyzerEmpty: HandheldHealthAnalyzer
+
+#2026-01-09
+BorgModuleAdvancedChemical: BorgModuleAdvancedTopical

@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.Pirates;
-using Content.Server.AlertLevel;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -151,14 +150,16 @@ namespace Content.Server.Cargo.Systems
             if (component.Mode != CargoOrderConsoleMode.DirectOrder)
                 return;
 
+            /* Trauma - use per-account access below instead
             if (!_accessReaderSystem.IsAllowed(player, uid))
             {
                 ConsolePopup(args.Actor, Loc.GetString("cargo-console-order-not-allowed"));
                 PlayDenySound(uid, component);
                 return;
             }
+            */
 
-            // goob edit - resource siphon blocking access
+            // <Goob> - resource siphon blocking access
             var eqe = EntityQueryEnumerator<ResourceSiphonComponent>();
             while (eqe.MoveNext(out var sip))
             {
@@ -170,7 +171,7 @@ namespace Content.Server.Cargo.Systems
                     return;
                 }
             }
-            // goob edit end
+            // </Goob>
 
             var station = _station.GetOwningStation(uid);
 
@@ -190,6 +191,11 @@ namespace Content.Server.Cargo.Systems
             {
                 return;
             }
+
+            // <Trauma> - check per-account access unless access broken
+            if (!CheckAccessPopup((uid, component), player, account))
+                return;
+            // </Trauma>
 
             // Invalid order
             if (!_protoMan.HasIndex<EntityPrototype>(order.ProductId))
@@ -251,14 +257,8 @@ namespace Content.Server.Cargo.Systems
             }
 
             // <Trauma> can't buy guns on green
-            if (!_emag.CheckFlag(uid, EmagType.Interaction)
-                && order.RequiredAlerts is {} alerts
-                && (CompOrNull<AlertLevelComponent>(station)?.CurrentLevel is not {} current || !alerts.Contains(current)))
-            {
-                ConsolePopup(args.Actor, Loc.GetString("cargo-console-alert-level", ("product", order.ProductName)));
-                PlayDenySound(uid, component);
+            if (!CheckAlertPopup((uid, component), player, order, station.Value))
                 return;
-            }
             // </Trauma>
 
             var ev = new FulfillCargoOrderEvent((station.Value, stationData), order, (uid, component));

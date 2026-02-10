@@ -33,4 +33,3 @@ power = "0.35"
 lacunarity = "1.5"
 frequency = "3"
 threshold = "0.0"
-

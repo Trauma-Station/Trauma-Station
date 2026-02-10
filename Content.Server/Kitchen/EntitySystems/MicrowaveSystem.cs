@@ -22,7 +22,11 @@ using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
+<<<<<<< HEAD
 using Content.Shared.DeviceLinking.Events;
+=======
+using Content.Shared.FixedPoint;
+>>>>>>> upstream/HEAD
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;

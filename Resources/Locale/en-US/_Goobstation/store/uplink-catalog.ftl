@@ -24,6 +24,7 @@
 # SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Weide <64257676+Lyacs@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 absurd-shaman <165011607+absurd-shaman@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 jvne <juneialduncan21@gmail.com>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -84,7 +85,10 @@ uplink-pressure-modkit-name = Pressure Modkit
 uplink-pressure-modkit-desc = This illegal modkit takes 30 capacity of your proto-kinetic accelerator and overclocks it to deal full damage even in unsuitable pressure.
 
 uplink-grey-tide-name = Grey Tide
-uplink-grey-tide-desc = An antient artifact with magical properties. Identical to plasma spear but capable of summoning illusions upon hitting living mob if wielder is an Assistant.
+uplink-grey-tide-desc = An ancient artifact with magical properties. Identical to plasma spear but capable of summoning illusions upon hitting living mob if wielder is an Assistant.
+
+uplink-adv-mimery-name = Guide to Advanced Mimery Series
+uplink-adv-mimery-desc = The classical two part series on how to further hone your mime skills. Upon studying the series, the user should be able to make 3x1 invisible walls, and shoot bullets out of their fingers.
 
 # Weapons
 
@@ -346,3 +350,9 @@ uplink-syndiedrobe-desc = A vending machine stocked with Syndicate-branded cloth
 
 uplink-customboard-name = Custom Syndicate Lawboard
 uplink-customboard-desc = A modified lawboard that allows the user to change the laws to anything they want. Comes with Antimov pre-installed.
+
+uplink-cddisksyndicate-name = Syndicate Advertisement CD
+uplink-cddisksyndicate-desc = 102.9 Syndicate radio
+
+uplink-cddisknumber-name = Number Station CD
+uplink-cddisknumber-desc = Call in a threat to distract the station... good luck playing the whole thing.

@@ -77,6 +77,7 @@
       reagents:
       - ReagentId: Slime
         Quantity: 150
+    smokeImmune: true  #No more 50000 slime extracts midshift
     bloodlossDamage:
       types:
         Bloodloss:
@@ -112,6 +113,12 @@
   - type: Body
     prototype: Slimes
     requiredLegs: 1
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Burn: 5
+    animation: WeaponArcPunch
+    soundHit: /Audio/Weapons/punch3.ogg
   - type: InteractionPopup
     successChance: 0.5
     interactSuccessString: petting-success-slimes
