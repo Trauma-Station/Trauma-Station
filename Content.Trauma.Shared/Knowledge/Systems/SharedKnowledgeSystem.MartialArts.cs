@@ -223,20 +223,21 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnTakeDamage(Entity<KnowledgeHolderComponent> ent, ref BeforeDamageChangedEvent args)
     {
+        if (args.Damage.GetTotal() > 0)
+        {
+            var ev = new AddExperience("ToughnessKnowledge", Math.Max(Math.Abs((int) args.Damage.GetTotal()) / 990, 10));
+            RaiseLocalEvent(ent, ref ev);
+        }
         if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "ToughnessKnowledge"), out var toughness))
         {
             if (args.Damage.GetTotal() > 0)
             {
-                args.Damage *= 1 - 1.1f * ((float) toughness.Level / 100.0f) * ((float) toughness.Level / 100.0f);
+                args.Damage *= 1 - 0.99f * SharpCurve(toughness);
+                Log.Debug($"{args.Damage}");
             }
             else
-                args.Damage *= 10 * ((float) toughness.Level / 100.0f) * ((float) toughness.Level / 100.0f);
+                args.Damage *= 10 * SharpCurve(toughness);
 
-        }
-        if (args.Damage.GetTotal() > 0)
-        {
-            var ev = new AddExperience("ToughnessKnowledge", Math.Max(Math.Abs((int) args.Damage.GetTotal()) / 100, 10));
-            RaiseLocalEvent(ent, ref ev);
         }
     }
 
