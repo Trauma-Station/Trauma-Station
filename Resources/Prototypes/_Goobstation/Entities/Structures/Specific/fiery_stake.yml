@@ -69,3 +69,32 @@
   groups:
   - SimpleFurniture
   # Trauma end
+
+- type: constructionGraph
+  id: FieryStakeGraph
+  startNode: start
+  nodes:
+    - node: start
+      edges:
+        - to: BonfireNode
+          steps:
+            - tag: wood
+              name: wood planks
+              icon:
+                sprite: Objects/Materials/Materials/planks.rsi
+                state: stack_5
+              doAfter: 2
+            - tool: Anchoring
+              doAfter: 5
+
+    - node: BonfireNode
+      entity: FieryStake
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank
+              amount: 3
+          steps:
+            - tool: Prying
+              doAfter: 5
