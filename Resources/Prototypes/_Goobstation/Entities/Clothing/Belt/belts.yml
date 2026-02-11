@@ -105,6 +105,8 @@
   - type: Clothing
     sprite: _Goobstation/Clothing/Belt/judobelt.rsi
   - type: KnowledgeGrantOnWear
+    skills:
+      MartialArtCorporateJudo: 50
     experience:
       MartialArtCorporateJudo: 2
   - type: Storage

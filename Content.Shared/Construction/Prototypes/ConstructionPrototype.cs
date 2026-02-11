@@ -33,6 +33,7 @@
 
 using Content.Shared.Construction.Conditions;
 using Content.Shared.Whitelist;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Construction.Prototypes;
@@ -137,4 +138,11 @@ public enum ConstructionType
 {
     Structure,
     Item,
+}
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class ConstructionExperienceComponent : Component
+{
+    [DataField]
+    public Dictionary<ProtoId<ConstructionGroupPrototype>, int> Groups = new();
 }

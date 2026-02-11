@@ -131,7 +131,7 @@ public partial class MartialArtsSystem
             var beingPerformedEv = new ComboBeingPerformedEvent(proto.ID);
             RaiseLocalEvent(uid, ref beingPerformedEv);
 
-            float scale = Math.Clamp(((float) (skillComponent.Level - proto.LevelRequired)) / 10.0f, 0.1f, 2.0f);
+            float scale = Math.Clamp(((float) (skillComponent.Level + skillComponent.TemporaryLevel - proto.LevelRequired)) / 10.0f, 0.1f, 2.0f);
 
             if (proto.UserEffects != null)
                 _effects.ApplyEffects(args.Performer, proto.UserEffects, scale);

@@ -66,4 +66,14 @@ public sealed partial class KnowledgeComponent : Component
     /// </summary>
     [DataField]
     public SpriteSpecifier? Sprite;
+
+    /// <summary>
+    /// Temporary levels that are granted by certain equipment.
+    /// </summary>
+    public int TemporaryLevel;
+
+    /// <summary>
+    /// Temporary experience boosts that are granted by certain equipment.
+    /// </summary>
+    public int BonusExperience;
 }

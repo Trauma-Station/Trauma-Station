@@ -11,8 +11,14 @@ namespace Content.Trauma.Shared.Knowledge.Components;
 public sealed partial class KnowledgeGrantOnWearComponent : Component
 {
     /// <summary>
+    /// Skills that will be added or boosted upon use.
+    /// </summary>
+    [DataField, AlwaysPushInheritance]
+    public Dictionary<EntProtoId, int> Skills = new();
+
+    /// <summary>
     /// Experience that will be added per use.
     /// </summary>
-    [DataField(required: true), AlwaysPushInheritance]
+    [DataField, AlwaysPushInheritance]
     public Dictionary<EntProtoId, int> Experience = new();
 }

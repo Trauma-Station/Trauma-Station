@@ -42,6 +42,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         base.Initialize();
         InitializeLanguage();
         InitializeMartialArts();
+        InitializeOnWear();
 
         SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnKnowledgeContainerShutdown);
         SubscribeLocalEvent<KnowledgeContainerComponent, EntInsertedIntoContainerMessage>(OnEntityInserted);
@@ -133,7 +134,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         var knowledge = (knowledgeUnit, knowledgeComponent);
 
         var getMastery = GetMastery(knowledge);
-        knowledgeComponent.Experience += args.Experience;
+        knowledgeComponent.Experience += args.Experience + knowledgeComponent.BonusExperience;
         if (knowledgeComponent.Experience >= knowledgeComponent.ExperienceCost || knowledgeComponent.Level < 100)
         {
             _random.SetSeed((int) _timing.CurTick.Value);
@@ -243,6 +244,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (TryGetKnowledgeUnit(ent.Owner, knowledgeId.Key) is { } uid)
         {
             knowledgeUnit = uid;
+            if (TryComp<KnowledgeComponent>(uid, out var knowledgeComp) && knowledgeComp.Level < knowledgeId.Value)
+            {
+                knowledgeComp.Level = knowledgeId.Value;
+            }
             return false;
         }
         else
@@ -289,42 +294,33 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     }
 
     /// <summary>
-    /// Removes a knowledge unit from a container. This version takes into account levels and categories of knowledge.
-    /// If knowledge has higher level than specified in the method, or a different category, it will not be removed.
-    /// </summary>
-    /// <param name="target">Entity to remove a unit from.</param>
-    /// <param name="knowledgeUnit">Knowledge unit to remove.</param>
-    /// <param name="category">Category of knowledge that we are removing.</param>
-    /// <param name="level">Level of removal, that will remove knowledge only if its level is lower or equal to that value.</param>
-    /// <param name="force">If true, will override all checks and will just always remove this knowledge.</param>
-    /// <returns>True if removed successfully.</returns>
-    public override EntityUid? TryRemoveKnowledgeUnit(EntityUid target, EntProtoId knowledgeUnit, ProtoId<KnowledgeCategoryPrototype> category, int level, bool force = false)
-    {
-        if (TryGetKnowledgeUnit(target, knowledgeUnit) is { } unit)
-        {
-            if ((_knowledgeQuery.TryComp(unit, out var knowledge) && knowledge != null) && CanRemoveKnowledge((unit, knowledge), category, level, force) is { })
-            {
-                PredictedQueueDel(unit);
-                return target;
-            }
-        }
-        return null;
-    }
-
-    /// <summary>
     /// Removes a knowledge unit from a container. Will not remove a knowledge unit if it's marked as unremoveable,
     /// unless force parameter is true.
     /// </summary>
     public override EntityUid? TryRemoveKnowledgeUnit(EntityUid target, EntProtoId knowledgeUnit, bool force = false)
     {
-        if (TryGetKnowledgeUnit(target, knowledgeUnit) is not { } unit
-            || !_knowledgeQuery.TryComp(unit, out var knowledge))
+        if (TryGetKnowledgeUnit(target, knowledgeUnit) is not { } unit || !_knowledgeQuery.TryComp(unit, out var knowledge))
             return null;
 
         if (!force && knowledge.Unremoveable)
             return null;
 
+        if (TryGetKnowledgeEntity(target) is { } knowledgeEnt && TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainer))
+        {
+            if (knowledgeContainer.MartialArtSkillUid == unit)
+                knowledgeContainer.MartialArtSkillUid = null;
+            if (knowledgeContainer.LanguageSkillUid == unit)
+                knowledgeContainer.LanguageSkillUid = null;
+            knowledgeContainer.KnowledgeContainerIDs.Remove(knowledgeUnit);
+        }
+
         PredictedQueueDel(unit);
+        if (TryComp<LanguageKnowledgeComponent>(unit, out _))
+        {
+            _popup.PopupEntity(Loc.GetString("knowledge-unit-forgotten-popup", ("knowledge", Loc.GetString($"{knowledgeUnit.ToString()}"))), target, target, PopupType.Medium);
+        }
+        else
+            _popup.PopupEntity(Loc.GetString("knowledge-unit-forgotten-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgeUnit.ToString()}"))), target, target, PopupType.Medium);
         return target;
     }
 

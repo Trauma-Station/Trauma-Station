@@ -6,6 +6,9 @@ knowledge-mastery-novice = Novice
 knowledge-mastery-unskilled = Unskilled
 knowledge-level-up-popup = You gained {$mastery} in {$knowledge}!
 knowledge-unit-learned-popup = You have learned {$knowledge}!
+knowledge-unit-forgotten-popup = You have forgotten the secrets of {$knowledge}!
+knowledge-could-not-learn = You cannot learn any more about { $knowledge } from this.
+knowledge-learn-more = You learn more about { $knowledge }.
 
 knowledge-info-description = Level: {$level} | {$mastery} | Experience: {$exp}
 
@@ -15,8 +18,6 @@ knowledge-language-understands = Understands {$language}
 
 knowledge-construction-name = Construction: {$group}
 knowledge-martial-arts-name = Martial Arts: {$name}
-knowledge-could-not-learn = You cannot learn any more about { $knowledge } from this.
-knowledge-learn-more = You learn more about { $knowledge }.
 
 knowledge-MartialArtCQC = Close Quarters Combat
 knowledge-MartialArtCQCChef = Close Quarters Cooking

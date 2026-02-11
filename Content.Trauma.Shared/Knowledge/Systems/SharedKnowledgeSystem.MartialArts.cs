@@ -107,6 +107,11 @@ public abstract partial class SharedKnowledgeSystem
         RaiseLocalEvent(martialArtSkillUid, args);
     }
 
+    private float SharpCurve(KnowledgeComponent knowledge)
+    {
+        return ((float) knowledge.Level / 100.0f) * ((float) knowledge.Level / 100.0f);
+    }
+
     private void OnMeleeHit(MeleeHitEvent args)
     {
         if (args.Handled)
@@ -122,27 +127,27 @@ public abstract partial class SharedKnowledgeSystem
         {
             var ev = new AddExperience("StrengthKnowledge", 1);
             RaiseLocalEvent(ent, ref ev);
-            bonus += 3 * ((float) strength.Level / 100.0f) * ((float) strength.Level / 100.0f);
+            bonus += 3 * SharpCurve(strength);
             args.ModifiersList.Add(new DamageModifierSet()
             {
                 FlatReduction = new Dictionary<string, float>()
                 {
-                    ["Brute"] = -5 * ((float) strength.Level / 100.0f) * ((float) strength.Level / 100.0f) * Math.Min(GetMastery(strength) - 3, 0) * Math.Min(GetMastery(strength) - 3, 0)
+                    ["Brute"] = -5 * SharpCurve(strength) * Math.Min(GetMastery(strength) - 3, 0) * Math.Min(GetMastery(strength) - 3, 0)
                 }
             }); //Provide Armor Piercing at high strength
         }
         if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "AthleticsKnowledge"), out var athletics))
         {
-            bonus += 0.7f * ((float) athletics.Level / 100.0f) * ((float) athletics.Level / 100.0f);
+            bonus += 0.7f * SharpCurve(athletics);
         }
         if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "ToughnessKnowledge"), out var toughness))
         {
-            bonus += 1.5f * ((float) toughness.Level / 100.0f) * ((float) toughness.Level / 100.0f);
+            bonus += 1.5f * SharpCurve(toughness);
             args.ModifiersList.Add(new DamageModifierSet()
             {
                 FlatReduction = new Dictionary<string, float>()
                 {
-                    ["Brute"] = -2 * ((float) toughness.Level / 100.0f) * ((float) toughness.Level / 100.0f) * Math.Min(GetMastery(toughness) - 3, 0) * Math.Min(GetMastery(toughness) - 3, 0)
+                    ["Brute"] = -2 * SharpCurve(toughness) * Math.Min(GetMastery(toughness) - 3, 0) * Math.Min(GetMastery(toughness) - 3, 0)
                 }
             }); //Provide Armor Piercing at high toughness
         }
@@ -166,12 +171,12 @@ public abstract partial class SharedKnowledgeSystem
                 var ev = new AddExperience("MeleeKnowledge", expToSend);
                 RaiseLocalEvent(ent, ref ev);
             }
-            bonus += 2 * ((float) melee.Level / 100.0f) * ((float) melee.Level / 100.0f);
+            bonus += 2 * SharpCurve(melee);
             args.ModifiersList.Add(new DamageModifierSet()
             {
                 FlatReduction = new Dictionary<string, float>()
                 {
-                    ["Brute"] = -1 * ((float) melee.Level / 100.0f) * ((float) melee.Level / 100.0f) * Math.Min(GetMastery(melee) - 3, 0) * Math.Min(GetMastery(melee) - 3, 0)
+                    ["Brute"] = -1 * SharpCurve(melee) * Math.Min(GetMastery(melee) - 3, 0) * Math.Min(GetMastery(melee) - 3, 0)
                 }
             }); //Provide Armor Piercing at high melee
         }
@@ -182,7 +187,7 @@ public abstract partial class SharedKnowledgeSystem
         {
             if (GetMastery(melee) < 2)
             {
-                float failChance = Math.Clamp(1f - ((float) melee.Level / 26f), 0, 1f);
+                float failChance = Math.Clamp(1f - ((float) (melee.Level + melee.TemporaryLevel) / 26f), 0, 1f);
 
                 if (_random.Prob(failChance))
                 {

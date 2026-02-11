@@ -38,18 +38,6 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract void AddKnowledgeUnits(EntityUid target, Dictionary<EntProtoId, int> knowledgeList);
 
     /// <summary>
-    /// Removes a knowledge unit from a container. This version takes into account levels and categories of knowledge.
-    /// If knowledge has higher level than specified in the method, or a different category, it will not be removed.
-    /// </summary>
-    /// <param name="target">Entity to remove a unit from.</param>
-    /// <param name="knowledgeUnit">Knowledge unit to remove.</param>
-    /// <param name="category">Category of knowledge that we are removing.</param>
-    /// <param name="level">Level of removal, that will remove knowledge only if its level is lower or equal to that value.</param>
-    /// <param name="force">If true, will override all checks and will just always remove this knowledge.</param>
-    /// <returns>True if removed successfully.</returns>
-    public abstract EntityUid? TryRemoveKnowledgeUnit(EntityUid target, EntProtoId knowledgeUnit, ProtoId<KnowledgeCategoryPrototype> category, int level, bool force = false);
-
-    /// <summary>
     /// Removes a knowledge unit from a container. Will not remove a knowledge unit if it's marked as unremoveable,
     /// unless force parameter is true.
     /// </summary>
