@@ -17,13 +17,13 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client.Knowledge;
+namespace Content.Client._Trauma;
 
 [UsedImplicitly]
 public sealed class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
     [UISystemDependency] private readonly CommonKnowledgeSystem _commonKnowledge = default!;
 
     public MenuButton? MartialArtsButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.MartialArtsButton;
@@ -128,7 +128,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
     private IEnumerable<RadialMenuActionOption<EntityUid?>> GetButtons()
     {
         var whitelistSystem = EntitySystemManager.GetEntitySystem<EntityWhitelistSystem>();
-        var player = _playerManager.LocalSession?.AttachedEntity;
+        var player = _player.LocalSession?.AttachedEntity;
 
         var martialArts = new List<RadialMenuActionOption<EntityUid?>>
         {
@@ -166,7 +166,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
 
     private void HandleRadialButtonClick(EntityUid? martialArt)
     {
-        if (_playerManager.LocalSession?.AttachedEntity is not { } player)
+        if (_player.LocalSession?.AttachedEntity is not { } player)
             return;
 
         var netEnt = EntityManager.GetNetEntity(martialArt);

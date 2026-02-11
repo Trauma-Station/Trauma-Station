@@ -72,12 +72,6 @@ public sealed partial class CloningSettingsPrototype : IPrototype, IInheritingPr
     [DataField]
     public bool CopyStatusEffects = true;
 
-    ///     Goobstation
-    ///     Whether or not to copy knowledge.
-    /// </summary>
-    [DataField]
-    public bool CopyKnowledge = true;
-
     /// <summary>
     ///     Whitelist for the equipment allowed to be copied.
     /// </summary>
@@ -108,4 +102,10 @@ public sealed partial class CloningSettingsPrototype : IPrototype, IInheritingPr
     [DataField]
     [AlwaysPushInheritance]
     public HashSet<string> EventComponents = new();
+
+    /// <summary>
+    ///     Whether or not to copy knowledge.
+    /// </summary>
+    [DataField]
+    public bool CopyKnowledge = true;
 }

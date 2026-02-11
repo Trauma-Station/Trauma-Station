@@ -10,6 +10,10 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+//
+using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Knowledge.Systems;
+//
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
@@ -23,6 +27,7 @@ namespace Content.Shared.Revolutionary;
 
 public abstract class SharedRevolutionarySystem : EntitySystem
 {
+    [Dependency] private readonly CommonKnowledgeSystem _commonKnowledge = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedStunSystem _sharedStun = default!;
 
@@ -106,12 +111,14 @@ public abstract class SharedRevolutionarySystem : EntitySystem
         var revComps = AllEntityQuery<RevolutionaryComponent>();
         while (revComps.MoveNext(out var uid, out var comp))
         {
+            _commonKnowledge.TryAddKnowledgeUnit(uid, new KeyValuePair<Robust.Shared.Prototypes.EntProtoId, int>("ConstructionRevolutionary", 20)); // Trauma - Knowledge
             Dirty(uid, comp);
         }
 
         var headRevComps = AllEntityQuery<HeadRevolutionaryComponent>();
         while (headRevComps.MoveNext(out var uid, out var comp))
         {
+            _commonKnowledge.TryAddKnowledgeUnit(uid, new KeyValuePair<Robust.Shared.Prototypes.EntProtoId, int>("ConstructionRevolutionary", 50)); // Trauma - Knowledge
             Dirty(uid, comp);
         }
     }

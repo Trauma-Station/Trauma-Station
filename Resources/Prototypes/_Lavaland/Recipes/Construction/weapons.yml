@@ -4,6 +4,8 @@
   category: construction-category-weapons
   targetNode: axe
   objectType: Item
+  groups:
+  - SurvivalWeaponsHandmade
 
 - type: construction
   id: BoneDaggerConstruction
@@ -11,3 +13,5 @@
   category: construction-category-weapons
   targetNode: dagger
   objectType: Item
+  groups:
+  - SurvivalWeaponsHandmade

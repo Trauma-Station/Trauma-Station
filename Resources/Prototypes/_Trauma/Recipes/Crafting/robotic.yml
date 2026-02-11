@@ -4,6 +4,8 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
+  groups:
+  - Science
 
 - type: construction
   id: CyberButtBot
@@ -11,6 +13,8 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
+  groups:
+  - Science
 
 - type: construction
   id: DuckBot
@@ -18,6 +22,8 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
+  groups:
+  - Science
 
 - type: construction
   id: BoogieBot
@@ -25,3 +31,5 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
+  groups:
+  - Science

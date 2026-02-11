@@ -1,7 +1,8 @@
-<controls:MartialArtsTabControl
+<controls:BaseTabControl
     xmlns="https://spacestation14.io"
-    xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
-    xmlns:controls="clr-namespace:Content.Client._Shitcode.UserActions.Tabs;assembly=Content.Client">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Content.Client._Shitcode.UserActions.Tabs;assembly=Content.Client"
+    x:Class="Content.Trauma.Client.Knowledge.Tabs.MartialArtsTabControl">
 
     <PanelContainer StyleClasses="BackgroundDark">
         <ScrollContainer VerticalExpand="True" HorizontalExpand="True" Margin="2" MinHeight="100" HScrollEnabled="False">
@@ -12,4 +13,4 @@
         </ScrollContainer>
     </PanelContainer>
 
-</controls:MartialArtsTabControl>
+</controls:BaseTabControl>

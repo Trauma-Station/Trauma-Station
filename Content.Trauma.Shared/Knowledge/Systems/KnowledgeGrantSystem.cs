@@ -77,11 +77,18 @@ public sealed class KnowledgeGrantSystem : EntitySystem
             {
                 var ev = new AddExperience(skill.Key, skill.Value);
                 RaiseLocalEvent(args.User, ref ev);
+                if (TryComp<LanguageKnowledgeComponent>(foundSkill, out _))
+                    _popup.PopupEntity(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
+                else
+                    _popup.PopupEntity(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"knowledge-{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
             }
-            if (TryComp<LanguageKnowledgeComponent>(foundSkill, out _))
-                _popup.PopupEntity(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
             else
-                _popup.PopupEntity(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"knowledge-{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
+            {
+                if (TryComp<LanguageKnowledgeComponent>(foundSkill, out _))
+                    _popup.PopupEntity(Loc.GetString("knowledge-could-not-learn", ("knowledge", Loc.GetString($"{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
+                else
+                    _popup.PopupEntity(Loc.GetString("knowledge-could-not-learn", ("knowledge", Loc.GetString($"knowledge-{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
+            }
         }
         args.Handled = true;
     }

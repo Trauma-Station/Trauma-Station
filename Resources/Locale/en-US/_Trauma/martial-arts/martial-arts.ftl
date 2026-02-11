@@ -62,6 +62,6 @@ cqc-restrain = Grab!
 cqc-pressure = Slap!
 cqc-consecutive = CONSECUTIVE! C! Q! C!
 
-no-martial-arts = No Martial Art
+no-martial-art = No Martial Art
 
 melee-clumsy-self-hit = You hit yourself!

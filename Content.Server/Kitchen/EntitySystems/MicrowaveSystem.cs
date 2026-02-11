@@ -687,7 +687,7 @@ namespace Content.Server.Kitchen.EntitySystems
                         if (!TryComp<MartialArtsKnowledgeComponent>(martialSkillUid, out var martialArtsComponent) || !martialArtsComponent.Blocked)
                             continue;
                         var ev = new AddExperience("MartialArtCQCChef", active.PortionedRecipe.Item2);
-                        RaiseLocalEvent(userUid, ev);
+                        RaiseLocalEvent(userUid, ref ev);
                     }
                     // Trauma edit end
 

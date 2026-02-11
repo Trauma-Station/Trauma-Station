@@ -5,6 +5,8 @@
   targetNode: paper sheet
   category: construction-category-materials
   objectType: Item
+  groups:
+  - Revolutionary
 
 - type: construction
   id: PowerArmorStand

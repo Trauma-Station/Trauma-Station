@@ -4,6 +4,8 @@
   category: construction-category-weapons
   targetNode: crystal
   objectType: Item
+  groups:
+  - Technological
 
 - type: construction
   id: CrusherUpgradeLavaCrystalConstruction
@@ -11,6 +13,8 @@
   category: construction-category-weapons
   targetNode: crystal
   objectType: Item
+  groups:
+  - Technological
 
 - type: construction
   id: CrusherUpgradeIceCrystalConstruction
@@ -18,3 +22,5 @@
   category: construction-category-weapons
   targetNode: crystal
   objectType: Item
+  groups:
+  - Technological

@@ -534,6 +534,24 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         knowledgeContainer.MartialArtSkillUid = martialArt;
     }
 
+    public override void ClearKnowledge(EntityUid target, bool deleteAll)
+    {
+        if (TryComp<KnowledgeContainerComponent>(target, out var knowledgeContainer))
+        {
+            knowledgeContainer.KnowledgeContainerIDs.Clear();
+            knowledgeContainer.MartialArtSkillUid = null;
+            knowledgeContainer.LanguageSkillUid = null;
+            var container = knowledgeContainer.KnowledgeContainer;
+            if (container is { } && deleteAll)
+            {
+                foreach (var entity in container.ContainedEntities)
+                {
+                    PredictedQueueDel(entity);
+                }
+            }
+        }
+    }
+
     public override List<(EntityUid, string)> GetMartialArtsForClientDoohickey(EntityUid knowledgeEntity)
     {
         var clientMartialArts = new List<(EntityUid, string)>();

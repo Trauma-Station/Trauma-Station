@@ -40,11 +40,11 @@
   targetNode: bat
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ghost_sheet
@@ -53,11 +53,11 @@
   targetNode: ghost_sheet
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: makeshifthandcuffs
@@ -66,11 +66,11 @@
   targetNode: cuffscable
   category: construction-category-tools
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: makeshiftstunprod
@@ -79,11 +79,11 @@
   targetNode: msstunprod
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: muzzle
@@ -92,11 +92,11 @@
   targetNode: muzzle
   category: construction-category-tools
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: pneumaticcannon
@@ -105,11 +105,11 @@
   targetNode: cannon
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: gauze
@@ -118,10 +118,10 @@
   targetNode: gauze
   category: construction-category-tools
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: blindfold
@@ -130,10 +130,10 @@
   targetNode: blindfold
   category: construction-category-tools
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: flowerwreath
@@ -142,10 +142,10 @@
   targetNode: flowerwreath
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: rag
@@ -154,10 +154,10 @@
   targetNode: rag
   category: construction-category-tools
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: improvisedshotgun
@@ -166,11 +166,11 @@
   targetNode: shotgun
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ShellShotgunImprovised
@@ -179,11 +179,11 @@
   targetNode: shell
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: riflestock
@@ -192,11 +192,11 @@
   targetNode: riflestock
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: firebomb
@@ -205,11 +205,11 @@
   targetNode: firebomb
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: CottonWovenCloth
@@ -218,10 +218,10 @@
   targetNode: cottoncloth
   category: construction-category-misc
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: strawHat
@@ -230,10 +230,10 @@
   targetNode: strawhat
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: pipebomb
@@ -242,11 +242,11 @@
   targetNode: pipebomb
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: rollingpin
@@ -255,10 +255,10 @@
   targetNode: rollingpin
   category: construction-category-tools
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: PetCarrier
@@ -267,11 +267,11 @@
   targetNode: petCarrier
   category: construction-category-misc
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: RepairMothershipPinpointer
@@ -280,6 +280,11 @@
   targetNode: repairedPinpointer
   category: construction-category-misc
   objectType: Item
+  # Trauma start
+  groups:
+  - AdvancedHandmade
+  - Science
+  # Trauma end
 
 - type: construction
   id: HardsuitGoliath
@@ -288,11 +293,11 @@
   targetNode: hardsuitGoliath
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
   - Science
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: scraparmor
@@ -301,10 +306,10 @@
   targetNode: scraparmorfinished
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: scraphelmet
@@ -313,10 +318,10 @@
   targetNode: scraphelmet
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingBagPet
@@ -325,7 +330,7 @@
   targetNode: bagPet
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
-  # Goobstation end
+  # Trauma end

@@ -13,9 +13,11 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+//
+using Content.Trauma.Common.MartialArts;
+//
 using System.Numerics;
 using Content.Client.Hands.Systems;
-using Content.Trauma.Common.MartialArts;
 using Content.Shared._Goobstation.Weapons.AmmoSelector;
 using Content.Shared.CCVar;
 using Robust.Client.GameObjects;

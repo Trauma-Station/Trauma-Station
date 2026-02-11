@@ -122,6 +122,11 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract void ChangeMartialArts(EntityUid knowledgeEntity, Entity<MartialArtsKnowledgeComponent>? martialArt);
 
     /// <summary>
+    /// Clears Knowledge from the target entity.
+    /// </summary>
+    public abstract void ClearKnowledge(EntityUid target, bool deleteAll);
+
+    /// <summary>
     /// Returns the martial arts that a knowledge entity has, along with some helper data for the client.
     /// </summary>
     /// <param name="knowledgeEntity"></param>

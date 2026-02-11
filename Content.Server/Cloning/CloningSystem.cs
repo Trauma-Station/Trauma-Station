@@ -114,10 +114,10 @@ public sealed partial class CloningSystem : SharedCloningSystem
         if (settings.CopyStatusEffects)
             CopyStatusEffects(original, clone.Value);
 
-        // Goobstation start
+        // Trauma start
         if (settings.CopyKnowledge)
             TransferKnowledge(original, clone.Value);
-        // Goobstation end
+        // Trauma end
 
         var originalName = _nameMod.GetBaseName(original);
 
@@ -466,5 +466,6 @@ public sealed partial class CloningSystem : SharedCloningSystem
         {
             _container.Insert(knowledgeEnt.Owner, targetContainer.Comp.KnowledgeContainer);
         }
+        _knowledge.ClearKnowledge(originalEntity, false);
     }
 }

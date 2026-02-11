@@ -12,6 +12,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client._Trauma; // Trauma
 using Content.Client.UserInterface.Systems._GoobCharacter; // Goobstation edit
 using Content.Client.UserInterface.Systems.Actions;
 using Content.Client.UserInterface.Systems.Admin;
@@ -26,7 +27,6 @@ using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Client.UserInterface.Systems.Sandbox;
 using Content.Client.UserInterface.Systems.Language;
 using Robust.Client.UserInterface.Controllers;
-using Content.Client.Knowledge;
 
 namespace Content.Client.UserInterface.Systems.MenuBar;
 
