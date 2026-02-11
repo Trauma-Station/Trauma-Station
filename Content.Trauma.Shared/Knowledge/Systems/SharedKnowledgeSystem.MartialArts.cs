@@ -125,8 +125,6 @@ public abstract partial class SharedKnowledgeSystem
         var bonus = 1f;
         if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "StrengthKnowledge"), out var strength))
         {
-            var ev = new AddExperience("StrengthKnowledge", 1);
-            RaiseLocalEvent(ent, ref ev);
             bonus += 3 * SharpCurve(strength);
             args.ModifiersList.Add(new DamageModifierSet()
             {
@@ -153,24 +151,6 @@ public abstract partial class SharedKnowledgeSystem
         }
         if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "MeleeKnowledge"), out var melee))
         {
-            var expToSend = 0;
-            foreach (var hitEntity in args.HitEntities)
-            {
-                if (!HasComp<MobStateComponent>(hitEntity))
-                    continue;
-
-                if (_mobState.IsDead(hitEntity))
-                    continue;
-
-                if (hitEntity == ent)
-                    continue;
-                expToSend += 1;
-            }
-            if (expToSend > 0)
-            {
-                var ev = new AddExperience("MeleeKnowledge", expToSend);
-                RaiseLocalEvent(ent, ref ev);
-            }
             bonus += 2 * SharpCurve(melee);
             args.ModifiersList.Add(new DamageModifierSet()
             {
@@ -179,6 +159,27 @@ public abstract partial class SharedKnowledgeSystem
                     ["Brute"] = -1 * SharpCurve(melee) * Math.Min(GetMastery(melee) - 3, 0) * Math.Min(GetMastery(melee) - 3, 0)
                 }
             }); //Provide Armor Piercing at high melee
+        }
+
+        var ev = new AddExperience("StrengthKnowledge", 1);
+        RaiseLocalEvent(ent, ref ev);
+        var expToSend = 0;
+        foreach (var hitEntity in args.HitEntities)
+        {
+            if (!HasComp<MobStateComponent>(hitEntity))
+                continue;
+
+            if (_mobState.IsDead(hitEntity))
+                continue;
+
+            if (hitEntity == ent)
+                continue;
+            expToSend += 1;
+        }
+        if (expToSend > 0)
+        {
+            ev = new AddExperience("MeleeKnowledge", expToSend);
+            RaiseLocalEvent(ent, ref ev);
         }
 
         args.BonusDamage += (args.BaseDamage * bonus / 100);
@@ -215,9 +216,9 @@ public abstract partial class SharedKnowledgeSystem
                 args.Value *= 1 - 1.1f * ((float) athletics.Level / 100.0f) * ((float) athletics.Level / 100.0f);
             else
                 args.Value *= 10 * ((float) athletics.Level / 100.0f) * ((float) athletics.Level / 100.0f);
-            var ev = new AddExperience("AthleticsKnowledge", 1);
-            RaiseLocalEvent(ent, ref ev);
         }
+        var ev = new AddExperience("AthleticsKnowledge", 1);
+        RaiseLocalEvent(ent, ref ev);
     }
 
     private void OnTakeDamage(Entity<KnowledgeHolderComponent> ent, ref BeforeDamageChangedEvent args)
@@ -227,11 +228,15 @@ public abstract partial class SharedKnowledgeSystem
             if (args.Damage.GetTotal() > 0)
             {
                 args.Damage *= 1 - 1.1f * ((float) toughness.Level / 100.0f) * ((float) toughness.Level / 100.0f);
-                var ev = new AddExperience("ToughnessKnowledge", Math.Max((int) args.Damage.GetTotal() / 100, 10));
-                RaiseLocalEvent(ent, ref ev);
             }
             else
                 args.Damage *= 10 * ((float) toughness.Level / 100.0f) * ((float) toughness.Level / 100.0f);
+
+        }
+        if (args.Damage.GetTotal() > 0)
+        {
+            var ev = new AddExperience("ToughnessKnowledge", Math.Max(Math.Abs((int) args.Damage.GetTotal()) / 100, 10));
+            RaiseLocalEvent(ent, ref ev);
         }
     }
 

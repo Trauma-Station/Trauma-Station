@@ -22,6 +22,12 @@
         - id: BookAthletics
         - id: BookToughness
         - id: BookMelee
+        - id: BookShooting
+        - id: BookSurgery
+        - id: BookFirstaid
+        - id: BookMagicalLiteracy
+        - id: BookLiteracy
+        - id: BookJanitor
 
 - type: entityTable
   id: RandomSkillbook
@@ -31,11 +37,23 @@
     - id: BookAthletics
     - id: BookToughness
     - id: BookMelee
+    - id: BookShooting
+    - id: BookSurgery
+    - id: BookFirstaid
+    - id: BookMagicalLiteracy
+    - id: BookLiteracy
+    - id: BookJanitor
 
 - type: entity
   parent: BaseItem
   id: BookSkillbook
   components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 20
   - type: Tag
     tags:
     - Book
@@ -48,12 +66,6 @@
   name: old book
   description: A small, black manual. There are drawn instructions of curl-ups and sit-ups.
   components:
-  - type: Sprite
-    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
-    layers:
-    - state: icon
-  - type: StaticPrice
-    price: 3000
   - type: KnowledgeGrantOnUse
     skills:
       StrengthKnowledge: 26
@@ -67,15 +79,9 @@
   name: old book
   description: A small, black manual. There are drawn instructions of a man running.
   components:
-  - type: Sprite
-    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
-    layers:
-    - state: icon
-  - type: StaticPrice
-    price: 3000
   - type: KnowledgeGrantOnUse
     skills:
-      AthleticsKnowledge: 43
+      AthleticsKnowledge: 26
     experience:
       AthleticsKnowledge: 1
     doAfter: 2
@@ -86,15 +92,9 @@
   name: old book
   description: A small, black manual. There are drawn instructions of a man getting lashed.
   components:
-  - type: Sprite
-    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
-    layers:
-    - state: icon
-  - type: StaticPrice
-    price: 3000
   - type: KnowledgeGrantOnUse
     skills:
-      ToughnessKnowledge: 30
+      ToughnessKnowledge: 26
     experience:
       ToughnessKnowledge: 1
     doAfter: 2
@@ -105,15 +105,87 @@
   name: old book
   description: A small, black manual. There are drawn instructions of a man in fisticuffs.
   components:
-  - type: Sprite
-    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
-    layers:
-    - state: icon
-  - type: StaticPrice
-    price: 3000
   - type: KnowledgeGrantOnUse
     skills:
-      MeleeKnowledge: 41
+      MeleeKnowledge: 26
     experience:
       MeleeKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookShooting
+  name: old book
+  description: A small, black manual. There are drawn instructions of a man firing his gun.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      ShootingKnowledge: 26
+    experience:
+      ShootingKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookSurgery
+  name: old book
+  description: A small, black manual. There are drawn instructions of a man operating on a body.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      SurgeryKnowledge: 26
+    experience:
+      SurgeryKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookFirstaid
+  name: old book
+  description: A small, black manual. There are drawn instructions of a man applying bandages to himself.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      SurgeryKnowledge: 26
+    experience:
+      SurgeryKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookMagicalLiteracy
+  name: old book
+  description: A small, black manual. There are drawn instructions of a man watching sigils pop out of the page.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      MagicalLiteracyKnowledge: 26
+    experience:
+      MagicalLiteracyKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookLiteracy
+  name: old book
+  description: A small, black manual. Its a picture book.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      LiteracyKnowledge: 26
+    experience:
+      LiteracyKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookJanitor
+  name: old book
+  description: A small, black manual. Its a picture book.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      JanitorKnowledge: 26
+    experience:
+      JanitorKnowledge: 1
     doAfter: 2

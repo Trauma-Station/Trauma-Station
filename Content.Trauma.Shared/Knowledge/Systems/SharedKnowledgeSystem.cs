@@ -129,8 +129,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (TryGetKnowledgeEntity(ent.Owner) is not { } knowledgeEntity || !TryComp<KnowledgeContainerComponent>(knowledgeEntity, out var knowledgeContainer))
             return;
         if (TryGetKnowledgeUnit(knowledgeEntity, args.KnowledgeType) is not { } knowledgeUnit || !TryComp<KnowledgeComponent>(knowledgeUnit, out var knowledgeComponent))
+        {
+            if (_random.Prob(0.2f))
+                TryAddKnowledgeUnit(ent, new KeyValuePair<EntProtoId, int>(args.KnowledgeType, 0));
             return;
-
+        }
         var knowledge = (knowledgeUnit, knowledgeComponent);
 
         var getMastery = GetMastery(knowledge);

@@ -70,10 +70,12 @@ public sealed partial class KnowledgeComponent : Component
     /// <summary>
     /// Temporary levels that are granted by certain equipment.
     /// </summary>
+    [DataField]
     public int TemporaryLevel;
 
     /// <summary>
     /// Temporary experience boosts that are granted by certain equipment.
     /// </summary>
+    [DataField]
     public int BonusExperience;
 }

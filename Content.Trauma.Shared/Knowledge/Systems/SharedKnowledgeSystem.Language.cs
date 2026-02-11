@@ -211,34 +211,31 @@ public abstract partial class SharedKnowledgeSystem
 
         if (knownLanguage is { } knownLanguageTrue && TryComp<LanguageKnowledgeComponent>(knownLanguageTrue, out var languageKnowledgeComponent))
         {
-            // Add Send Damage to all who hear.
-            if (GetMastery(knownLanguageTrue) >= 5)
+            var entitiesNearby = _lookup.GetEntitiesInRange(ent, 7f);
+            var modifier = 0.0f;
+            bool isCurse = GetMastery(knownLanguageTrue) >= 5 && ContainsCursedWord(args.Message);
+            if (isCurse && TryComp<KnowledgeComponent>(knownLanguage, out var knowledgeComponent))
+                modifier = Math.Clamp((80f - ((float) knowledgeComponent.Level) / 20f), 0, 1f);
+            foreach (var hearer in entitiesNearby)
             {
-                if (ContainsCursedWord(args.Message) && TryComp<KnowledgeComponent>(knownLanguage, out var knowledgeComponent))
+                var ev = new AddExperience($"language-{args.Language.ID}", 1);
+                RaiseLocalEvent(hearer, ref ev);
+                if (isCurse)
                 {
-                    // 1. Find everyone within earshot (usually 7-10 meters for normal speech)
-                    var range = 7f;
-                    var entitiesNearby = _lookup.GetEntitiesInRange(ent, range);
-
                     var damage = new DamageSpecifier();
-                    var modifier = Math.Clamp((80f - ((float) knowledgeComponent.Level) / 20f), 0, 1f);
                     damage.DamageDict.Add("Brute", 20 * modifier);
+                    if (hearer == ent.Owner) continue; // Don't curse yourself
 
-                    foreach (var hearer in entitiesNearby)
+                    if (_inventory.TryGetSlotEntity(hearer, "ears", out var earItem))
+                        continue;
+
+                    if (_language.CanUnderstand(hearer, args.Language))
                     {
-                        if (hearer == ent.Owner) continue; // Don't curse yourself
 
-                        if (_inventory.TryGetSlotEntity(hearer, "ears", out var earItem))
-                            continue;
+                        _damageable.TryChangeDamage(hearer, damage, ignoreResistances: false);
+                        _status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
 
-                        if (_language.CanUnderstand(hearer, args.Language))
-                        {
-
-                            _damageable.TryChangeDamage(hearer, damage, ignoreResistances: false);
-                            _status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
-
-                            _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
-                        }
+                        _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
                     }
                 }
             }
