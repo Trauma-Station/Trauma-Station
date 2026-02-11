@@ -17,10 +17,10 @@
   targetNode: joint
   category: construction-category-misc
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Smokeables
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: smokeableJointRainbow
@@ -30,10 +30,10 @@
   targetNode: jointRainbow
   category: construction-category-misc
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Smokeables
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: smokeableBlunt
@@ -42,10 +42,10 @@
   targetNode: blunt
   category: construction-category-misc
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Smokeables
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: smokeableBluntRainbow
@@ -55,10 +55,10 @@
   targetNode: bluntRainbow
   category: construction-category-misc
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Smokeables
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: smokeableCigarette
@@ -67,10 +67,10 @@
   targetNode: cigarette
   category: construction-category-misc
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Smokeables
-  # Goobstation end
+  # Trauma end
 
 # I wanted to put a hand-grinder here but we need construction graphs that use non-consumed catalysts first.
 
@@ -82,10 +82,10 @@
   category: construction-category-misc
 #    color: darkgreen
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Smokeables
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: smokeableGroundCannabisRainbow
@@ -94,10 +94,10 @@
   targetNode: groundRainbow
   category: construction-category-misc
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Smokeables
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: smokeableGroundTobacco
@@ -107,7 +107,7 @@
   category: construction-category-misc
 #    color: brown
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Smokeables
-  # Goobstation end
+  # Trauma end

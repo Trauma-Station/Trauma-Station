@@ -47,7 +47,7 @@
   # Power
   - type: ApcPowerReceiver
     powerLoad: 1000
-  - type: KnowledgeGrant
+  - type: KnowledgeGrant # Trauma - Knowledge
     skills:
       ConstructionSimpleHandmade: 100
       ConstructionAdvancedHandmade: 100

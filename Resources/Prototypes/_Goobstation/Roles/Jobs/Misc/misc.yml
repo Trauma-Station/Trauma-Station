@@ -115,7 +115,7 @@
     implants: [ FreedomImplant, ScramImplant, NutrimentPumpImplant, SpaceProofImplant, StypticStimulatorImplant, DeathAcidifierImplant, UplinkImplant ]
   - !type:AddComponentSpecial
     components:
-    - type: KnowledgeGrant
+    - type: KnowledgeGrant # Trauma - Knowledge
       skills:
         MartialArtCQC: 50
     - type: NpcFactionMember
