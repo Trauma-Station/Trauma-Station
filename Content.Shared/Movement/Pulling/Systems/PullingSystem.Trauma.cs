@@ -129,20 +129,20 @@ public sealed partial class PullingSystem
         switch (releaseAttempt)
         {
             case GrabResistResult.Failed:
-                _popup.PopupEntity(Loc.GetString("popup-grab-release-fail-self"),
+                _popup.PopupClient(Loc.GetString("popup-grab-release-fail-self"),
                                 pullableUid,
                                 pullableUid,
                                 PopupType.SmallCaution);
                 return false;
             case GrabResistResult.TooSoon:
-                _popup.PopupEntity(Loc.GetString("popup-grab-release-too-soon"),
+                _popup.PopupClient(Loc.GetString("popup-grab-release-too-soon"),
                                 pullableUid,
                                 pullableUid,
                                 PopupType.SmallCaution);
                 return false;
         }
 
-        _popup.PopupEntity(Loc.GetString("popup-grab-release-success-self"),
+        _popup.PopupClient(Loc.GetString("popup-grab-release-success-self"),
             pullableUid,
             pullableUid,
             PopupType.SmallCaution);
