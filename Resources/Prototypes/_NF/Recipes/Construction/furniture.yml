@@ -14,10 +14,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchSofaLeft
@@ -30,10 +30,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchSofaRight
@@ -46,10 +46,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchSofaCorner
@@ -62,10 +62,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchSofaCorpMiddle
@@ -78,10 +78,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchSofaCorpLeft
@@ -94,10 +94,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchSofaCorpRight
@@ -110,10 +110,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchSofaCorpCorner
@@ -126,10 +126,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchSteelMiddle
@@ -142,10 +142,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchSteelRight
@@ -158,10 +158,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchSteelLeft
@@ -174,10 +174,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchPewMiddle
@@ -190,10 +190,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchPewRight
@@ -206,10 +206,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchPewLeft
@@ -222,10 +222,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchParkMiddle
@@ -238,10 +238,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchParkRight
@@ -254,10 +254,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchParkLeft
@@ -270,10 +270,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchSteelWhiteMiddle
@@ -286,10 +286,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchSteelWhiteRight
@@ -302,10 +302,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchSteelWhiteLeft
@@ -318,10 +318,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchParkBambooMiddle
@@ -334,10 +334,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchParkBambooRight
@@ -350,10 +350,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BenchParkBambooLeft
@@ -366,10 +366,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 # Decorations (bonfire, fireplace)
 - type: construction
@@ -383,10 +383,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleFurniture
-  # Goobstation end
+  # Trauma end
 
 # Banners
 - type: construction
@@ -400,10 +400,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BannerCargo
@@ -416,10 +416,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BannerEngineering
@@ -432,10 +432,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BannerMedical
@@ -448,10 +448,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BannerScience
@@ -464,10 +464,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BannerSecurity
@@ -480,10 +480,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BannerBlue
@@ -496,10 +496,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BannerRed
@@ -512,10 +512,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BannerYellow
@@ -528,10 +528,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BannerGreen
@@ -544,10 +544,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BannerRevolution
@@ -560,10 +560,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BannerSyndicate
@@ -576,7 +576,7 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end

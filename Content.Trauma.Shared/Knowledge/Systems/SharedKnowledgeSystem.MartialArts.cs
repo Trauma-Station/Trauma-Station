@@ -222,7 +222,7 @@ public abstract partial class SharedKnowledgeSystem
             if (args.Damage.GetTotal() > 0)
             {
                 args.Damage *= 1 - 1.1f * ((float) toughness.Level / 100.0f) * ((float) toughness.Level / 100.0f);
-                var ev = new AddExperience("ToughnessKnowledge", Math.Max((int) args.Damage.GetTotal() / 50, 10));
+                var ev = new AddExperience("ToughnessKnowledge", Math.Max((int) args.Damage.GetTotal() / 100, 10));
                 RaiseLocalEvent(ent, ref ev);
             }
             else

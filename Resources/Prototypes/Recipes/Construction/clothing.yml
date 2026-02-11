@@ -22,12 +22,12 @@
   targetNode: clownHardsuit
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
   - Technological
   - Toys
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: MimeHardsuit
@@ -36,12 +36,12 @@
   targetNode: mimeHardsuit
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
   - Technological
   - Toys
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BoneArmor
@@ -50,10 +50,10 @@
   targetNode: armor
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmadeAdvanced
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BoneHelmet
@@ -62,10 +62,10 @@
   targetNode: helmet
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmadeAdvanced
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: cardHelmet
@@ -74,10 +74,10 @@
   targetNode: cardhelmet
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmadeAdvanced
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: cardArmour
@@ -86,10 +86,10 @@
   targetNode: cardarmour
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmadeAdvanced
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BananaClownMask
@@ -98,10 +98,10 @@
   targetNode: mask
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Bananium
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BananaClownJumpsuit
@@ -110,10 +110,10 @@
   targetNode: jumpsuit
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Bananium
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BananaClownShoes
@@ -122,10 +122,10 @@
   targetNode: shoes
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Bananium
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingEyesHudMedSec
@@ -134,11 +134,11 @@
   targetNode: medsecHud
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingShoeSlippersDuck
@@ -147,11 +147,11 @@
   targetNode: shoes
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Toys
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingShoeSlippersLizard
@@ -160,11 +160,11 @@
   targetNode: shoes
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Toys
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingEyesGlassesSecurity
@@ -173,11 +173,11 @@
   targetNode: glassesSec
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingBeltQuiver
@@ -186,11 +186,11 @@
   targetNode: Quiver
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingHeadHelmetJustice
@@ -199,8 +199,8 @@
   targetNode: helmet
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
   - Technological
-  # Goobstation end
+  # Trauma end

@@ -65,7 +65,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleFurniture
-  # Goobstation end
+  # Trauma end

@@ -18,11 +18,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BlueLight
@@ -31,11 +31,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: YellowLight
@@ -44,11 +44,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: PinkLight
@@ -57,11 +57,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: OrangeLight
@@ -70,11 +70,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BlackLight
@@ -83,11 +83,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: RedLight
@@ -96,11 +96,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: GreenLight
@@ -109,11 +109,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: CyanLightBulb
@@ -122,11 +122,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BlueLightBulb
@@ -135,11 +135,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: YellowLightBulb
@@ -148,11 +148,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: PinkLightBulb
@@ -161,11 +161,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: OrangeLightBulb
@@ -174,11 +174,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BlackLightBulb
@@ -187,11 +187,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: RedLightBulb
@@ -200,11 +200,11 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: GreenLightBulb
@@ -213,8 +213,8 @@
   targetNode: icon
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end

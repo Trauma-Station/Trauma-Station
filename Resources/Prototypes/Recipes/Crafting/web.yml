@@ -86,10 +86,10 @@
     tags:
     - SpiderCraft
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SpiderCraft
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingOuterWinterWeb
@@ -101,10 +101,10 @@
     tags:
     - SpiderCraft
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SpiderCraft
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingUniformJumpsuitWeb
@@ -116,10 +116,10 @@
     tags:
     - SpiderCraft
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SpiderCraft
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingUniformJumpskirtWeb
@@ -131,10 +131,10 @@
     tags:
     - SpiderCraft
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SpiderCraft
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: SilkWovenCloth
@@ -147,10 +147,10 @@
     tags:
     - SpiderCraft
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SpiderCraft
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: WebShield
@@ -162,10 +162,10 @@
     tags:
     - SpiderCraft
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SpiderCraft
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingShoesBootsWinterWeb
@@ -177,7 +177,7 @@
     tags:
     - SpiderCraft
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SpiderCraft
-  # Goobstation end
+  # Trauma end

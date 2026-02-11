@@ -313,10 +313,10 @@
   targetNode: medicalPatchMakeshift
   category: construction-category-tools
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: constructionGraph
   id: SilkPatchMakeshift
@@ -342,7 +342,7 @@
   entityWhitelist:
     tags:
     - SpiderCraft
-  # Goobstation start
+  # Trauma start
   groups:
   - SpiderCraft
-  # Goobstation end
+  # Trauma end

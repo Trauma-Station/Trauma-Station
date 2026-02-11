@@ -19,10 +19,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: TallCabinet
@@ -35,10 +35,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ChestDrawer
@@ -51,11 +51,11 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleFurniture
   - Technological
-  # Goobstation end
+  # Trauma end
 
 # ItemCabinets
 - type: construction
@@ -69,10 +69,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 # Shelfs
 # Normals
@@ -86,11 +86,11 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleFurniture
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ShelfMetal
@@ -102,10 +102,10 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ShelfGlass
@@ -117,10 +117,10 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 # Reinforced
 - type: construction
@@ -133,11 +133,11 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleFurniture
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ShelfRMetal
@@ -149,10 +149,10 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ShelfRGlass
@@ -164,10 +164,10 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 # Departmental
 - type: construction
@@ -180,10 +180,10 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ShelfKitchen
@@ -195,10 +195,10 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ShelfChemistry
@@ -210,7 +210,7 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
-  # Goobstation start
+  # Trauma start
   groups:
   - Furniture
-  # Goobstation end
+  # Trauma end

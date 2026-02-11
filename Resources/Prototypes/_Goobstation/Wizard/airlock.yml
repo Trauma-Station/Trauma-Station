@@ -98,10 +98,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Airlocks
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: AirlockUraniumGlass
@@ -114,10 +114,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # Goobstation start
+  # Trauma start
   groups:
   - Airlocks
-  # Goobstation end
+  # Trauma end
 
 # Construction
 - type: constructionGraph

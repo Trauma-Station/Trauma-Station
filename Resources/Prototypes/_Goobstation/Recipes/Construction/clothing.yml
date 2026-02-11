@@ -21,10 +21,10 @@
   targetNode: cloak
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: makeshiftvoicechanger
@@ -32,11 +32,11 @@
   targetNode: end
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - AdvancedHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: MedicalGlasses
@@ -44,11 +44,11 @@
   targetNode: glassesMed
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: DiagnosticGlasses
@@ -56,11 +56,11 @@
   targetNode: glassesDiag
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: MedicalSecurityGlasses
@@ -68,11 +68,11 @@
   targetNode: glassesMedSec
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: GlassesMedDiag
@@ -80,11 +80,11 @@
   targetNode: glassesMedDiag
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: HudMedDiagHUD
@@ -92,8 +92,8 @@
   targetNode: meddiagHud
   category: construction-category-clothing
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end

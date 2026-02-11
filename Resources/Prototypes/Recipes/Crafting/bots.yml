@@ -18,10 +18,10 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Bots
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: firebot
@@ -30,10 +30,10 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Bots
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: honkbot
@@ -42,10 +42,10 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Bots
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: jonkbot
@@ -54,10 +54,10 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Bots
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: medibot
@@ -66,10 +66,10 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Bots
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: mimebot
@@ -78,10 +78,10 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Bots
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: supplybot
@@ -90,10 +90,10 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Bots
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: hugbot
@@ -102,7 +102,7 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - Bots
-  # Goobstation end
+  # Trauma end

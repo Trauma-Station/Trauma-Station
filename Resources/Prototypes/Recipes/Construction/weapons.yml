@@ -41,11 +41,11 @@
   targetNode: icon
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: BladedFlatcapBrown
@@ -54,11 +54,11 @@
   targetNode: icon
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: Shiv
@@ -67,10 +67,10 @@
   targetNode: icon
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ReinforcedShiv
@@ -79,10 +79,10 @@
   targetNode: icon
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: PlasmaShiv
@@ -91,10 +91,10 @@
   targetNode: icon
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: UraniumShiv
@@ -103,11 +103,11 @@
   targetNode: icon
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SimpleHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: Spear
@@ -116,10 +116,10 @@
   targetNode: spear
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: SpearReinforced
@@ -128,10 +128,10 @@
   targetNode: spear
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: SpearPlasma
@@ -140,10 +140,10 @@
   targetNode: spear
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: SpearUranium
@@ -152,10 +152,10 @@
   targetNode: spear
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: SpearSharkMinnow
@@ -164,10 +164,10 @@
   targetNode: spear
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: Bola
@@ -176,11 +176,11 @@
   targetNode: bola
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
   - Technological
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: WoodenBuckler
@@ -189,10 +189,10 @@
   targetNode: woodenBuckler
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: CardShield
@@ -201,10 +201,10 @@
   targetNode: cardShield
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: MakeshiftShield
@@ -213,10 +213,10 @@
   targetNode: makeshiftShield
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ImprovisedArrow
@@ -225,10 +225,10 @@
   targetNode: ImprovisedArrow
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ImprovisedArrowCarp
@@ -237,10 +237,10 @@
   targetNode: ImprovisedArrowCarp
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ImprovisedArrowPlasma
@@ -249,10 +249,10 @@
   targetNode: ImprovisedArrowPlasma
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ImprovisedArrowUranium
@@ -261,10 +261,10 @@
   targetNode: ImprovisedArrowUranium
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: CardArrow
@@ -273,10 +273,10 @@
   targetNode: CardArrow
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ImprovisedBow
@@ -285,10 +285,10 @@
   targetNode: ImprovisedBow
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: SpearBone
@@ -297,10 +297,10 @@
   targetNode: spear
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmadeAdvanced
-  # Goobstation end
+  # Trauma end
 
 # - type: construction # Trauma
 #   id: ClothingHandsKnuckleDustersBrass
@@ -317,8 +317,8 @@
   targetNode: cardSword
   category: construction-category-weapons
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SurvivalWeaponsHandmade
   - Technological
-  # Goobstation end
+  # Trauma end

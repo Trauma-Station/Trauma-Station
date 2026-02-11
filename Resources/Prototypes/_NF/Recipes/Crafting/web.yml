@@ -13,10 +13,10 @@
     tags:
     - SpiderCraft
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SpiderCraft
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingNeckClassicPonchoWeb
@@ -28,10 +28,10 @@
     tags:
     - SpiderCraft
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SpiderCraft
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingNeckPonchoWeb
@@ -43,10 +43,10 @@
     tags:
     - SpiderCraft
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SpiderCraft
-  # Goobstation end
+  # Trauma end
 
 - type: construction
   id: ClothingNeckCloakWeb
@@ -58,7 +58,7 @@
     tags:
     - SpiderCraft
   objectType: Item
-  # Goobstation start
+  # Trauma start
   groups:
   - SpiderCraft
-  # Goobstation end
+  # Trauma end
