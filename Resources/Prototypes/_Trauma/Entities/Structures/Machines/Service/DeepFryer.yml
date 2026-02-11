@@ -19,6 +19,8 @@
     noRot: false
   # Deep fryer stuff
   - type: DeepFryer
+    containersToRemove:
+    - storagebase
     componentsToAdd:
     - type: DeepFried
     - type: SolutionContainerManager
@@ -33,6 +35,7 @@
       - DeepFried
       - oily
     componentsToRemoveObjects:
+    - type: Storage
     - type: Tool
     - type: RadioSpeaker
     - type: RadioMicrophone

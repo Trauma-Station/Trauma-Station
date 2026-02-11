@@ -2410,3 +2410,12 @@ Entries:
   id: 294
   time: '2026-02-10T12:05:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/664
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed items possibily being stuck in a deep fried bag
+  - type: Fix
+    message: Deep fried bags can now be eaten!
+  id: 295
+  time: '2026-02-10T20:17:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/660
