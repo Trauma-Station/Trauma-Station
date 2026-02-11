@@ -177,7 +177,7 @@ public sealed partial class DamageableSystem
         if (before.Cancelled)
             return damageDone;
 
-        damage = before.Damage; // Trauma - some guy forgot to grab the damage from BeforeDamageChangedEvent, so it didn't work
+        damage = before.Damage; // Trauma
 
         // <Goob> - For entities with a body, route damage through body parts and then sum it up
         if (_bodyQuery.TryComp(ent, out var body) && body.BodyType == BodyType.Complex)

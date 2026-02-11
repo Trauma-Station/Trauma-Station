@@ -134,10 +134,12 @@ public abstract partial class SharedKnowledgeSystem
                 }
             }); //Provide Armor Piercing at high strength
         }
+
         if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "AthleticsKnowledge"), out var athletics))
         {
             bonus += 0.7f * SharpCurve(athletics);
         }
+
         if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "ToughnessKnowledge"), out var toughness))
         {
             bonus += 1.5f * SharpCurve(toughness);
@@ -149,6 +151,7 @@ public abstract partial class SharedKnowledgeSystem
                 }
             }); //Provide Armor Piercing at high toughness
         }
+
         if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "MeleeKnowledge"), out var melee))
         {
             bonus += 2 * SharpCurve(melee);
@@ -169,7 +172,7 @@ public abstract partial class SharedKnowledgeSystem
             if (!HasComp<MobStateComponent>(hitEntity))
                 continue;
 
-            if (_mobState.IsDead(hitEntity))
+            if (_mobState.IsDead(hitEntity) || _mobState.IsHardCrit(hitEntity))
                 continue;
 
             if (hitEntity == ent)
@@ -184,24 +187,30 @@ public abstract partial class SharedKnowledgeSystem
 
         args.BonusDamage += (args.BaseDamage * bonus / 100);
 
-        if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "MeleeKnowledge"), out melee))
+        if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "MeleeKnowledge"), out melee) && GetMastery(melee) < 2)
         {
-            if (GetMastery(melee) < 2)
-            {
-                float failChance = Math.Clamp(1f - ((float) (melee.Level + melee.TemporaryLevel) / 26f), 0, 1f);
+            FailMelee(melee.Level + melee.TemporaryLevel, args);
+        }
+        else
+        {
+            FailMelee(0, args);
+        }
+    }
 
-                if (_random.Prob(failChance))
-                {
-                    _damageable.TryChangeDamage(ent, args.BaseDamage + args.BonusDamage);
+    private void FailMelee(int level, MeleeHitEvent args)
+    {
+        float failChance = Math.Clamp(1f - ((float) (level) / 26f), 0, 1f);
 
-                    // 3. Visual/Audio Feedback
-                    _popup.PopupEntity(Loc.GetString("melee-clumsy-self-hit"), ent, ent, PopupType.LargeCaution);
-                    _audio.PlayPvs(_clumsySound, ent);
+        if (_random.Prob(failChance))
+        {
+            _damageable.TryChangeDamage(args.User, args.BaseDamage + args.BonusDamage);
 
-                    args.Handled = true;
-                    return;
-                }
-            }
+            // 3. Visual/Audio Feedback
+            _popup.PopupEntity(Loc.GetString("melee-clumsy-self-hit"), args.User, args.User, PopupType.LargeCaution);
+            _audio.PlayPvs(_clumsySound, args.User);
+
+            args.Handled = true;
+            return;
         }
     }
 
@@ -223,21 +232,15 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnTakeDamage(Entity<KnowledgeHolderComponent> ent, ref BeforeDamageChangedEvent args)
     {
-        if (args.Damage.GetTotal() > 0)
-        {
-            var ev = new AddExperience("ToughnessKnowledge", Math.Max(Math.Abs((int) args.Damage.GetTotal()) / 990, 10));
-            RaiseLocalEvent(ent, ref ev);
-        }
-        if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "ToughnessKnowledge"), out var toughness))
+        if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "ToughnessKnowledge"), out var toughness) && _mobState.IsAlive(ent.Owner))
         {
             if (args.Damage.GetTotal() > 0)
-            {
                 args.Damage *= 1 - 0.99f * SharpCurve(toughness);
-                Log.Debug($"{args.Damage}");
-            }
-            else
-                args.Damage *= 10 * SharpCurve(toughness);
-
+        }
+        if (args.Damage.GetTotal() > 0 && _mobState.IsAlive(ent))
+        {
+            var ev = new AddExperience("ToughnessKnowledge", Math.Min((int) args.Damage.GetTotal() / 5, 20));
+            RaiseLocalEvent(ent, ref ev);
         }
     }
 

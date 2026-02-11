@@ -1,10 +1,6 @@
-using System.Linq;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
-using Content.Shared.Chat;
-using Content.Shared.Chat.Prototypes;
-using Content.Shared.EntityEffects.Effects;
 using Content.Shared.Input;
 using Content.Shared.Whitelist;
 using Content.Trauma.Common.Knowledge;
@@ -15,16 +11,14 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input.Binding;
-using Robust.Shared.Prototypes;
 
 namespace Content.Client._Trauma;
 
 [UsedImplicitly]
 public sealed class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
-    [UISystemDependency] private readonly CommonKnowledgeSystem _commonKnowledge = default!;
+    [UISystemDependency] private readonly CommonKnowledgeSystem _knowledge = default!;
 
     public MenuButton? MartialArtsButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.MartialArtsButton;
     private SimpleRadialMenu? _menu;
@@ -139,7 +133,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
             }
         };
 
-        var commonKnowledge = _commonKnowledge;
+        var commonKnowledge = _knowledge;
         if (commonKnowledge == null)
             commonKnowledge = EntityManager.System<CommonKnowledgeSystem>();
 

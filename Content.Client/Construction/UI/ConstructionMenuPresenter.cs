@@ -276,11 +276,11 @@ namespace Content.Client.Construction.UI
             var isEmptyCategory = string.IsNullOrEmpty(category) || category == ForAllCategoryName;
             _selectedCategory = isEmptyCategory ? string.Empty : category;
 
-            //
+            // <Trauma>
             if (_playerManager.LocalEntity == null)
                 return recipes;
             var availableGroups = _constructionSystem!.AvailableConstructionGroups(_playerManager.LocalEntity.Value);
-            //
+            // </Trauma>
 
             foreach (var recipe in _prototypeManager.EnumeratePrototypes<ConstructionPrototype>())
             {

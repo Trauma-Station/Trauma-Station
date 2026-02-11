@@ -23,6 +23,3 @@
       steps:
       - tool: Slicing
         doAfter: 1.2
-  groups:
-  - Technologic
-  - Walls

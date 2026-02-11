@@ -36,6 +36,8 @@ carp-saying-see = YOU CAN'T SEE ME!
 carp-saying-time = MY TIME IS NOW!!
 carp-saying-cowabunga = COWABUNGA!
 
+martial-arts-saying-generic = HA!
+
 krav-maga-ready = You ready a {$action}
 
 martial-arts-action-sender = You hit {$name} with {$move}

@@ -21,4 +21,11 @@ public sealed partial class KnowledgeGrantOnWearComponent : Component
     /// </summary>
     [DataField, AlwaysPushInheritance]
     public Dictionary<EntProtoId, int> Experience = new();
+
+    /// <summary>
+    /// Can use art with this item?
+    /// </summary>
+    [DataField, AlwaysPushInheritance]
+    public Dictionary<EntProtoId, bool> Blocked = new();
+
 }

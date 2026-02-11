@@ -58,7 +58,7 @@ public partial class MartialArtsSystem
 
     private void OnComboAttackPerformed(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
     {
-        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && martialArtsComp.Blocked)
+        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && (martialArtsComp.Blocked || martialArtsComp.TemporaryBlockedCounter > 0))
         {
             var entProto = MetaData(ent).EntityPrototype?.ID;
             if (entProto == null)
@@ -130,13 +130,14 @@ public partial class MartialArtsSystem
 
             var beingPerformedEv = new ComboBeingPerformedEvent(proto.ID);
             RaiseLocalEvent(uid, ref beingPerformedEv);
+            comp.Momentum += 1;
 
-            float scale = Math.Clamp(((float) (skillComponent.Level + skillComponent.TemporaryLevel - proto.LevelRequired)) / 10.0f, 0.1f, 2.0f);
+            float scale = Math.Clamp(((float) (skillComponent.Level + skillComponent.TemporaryLevel - proto.LevelRequired)) / 10.0f, 0.1f, 2.0f) + ((float) comp.Momentum) / 20f;
 
             if (proto.UserEffects != null)
-                _effects.ApplyEffects(args.Performer, proto.UserEffects, scale);
+                _effects.ApplyEffects(args.Performer, proto.UserEffects, scale, args.Target);
             if (proto.OpponentEffects != null)
-                _effects.ApplyEffects(args.Target, proto.OpponentEffects, scale);
+                _effects.ApplyEffects(args.Target, proto.OpponentEffects, scale, args.Performer);
 
             comp.LastAttacks.Clear();
             if (TryComp<MartialArtsKnowledgeComponent>(uid, out var martialArtsComp) && !martialArtsComp.Blocked)

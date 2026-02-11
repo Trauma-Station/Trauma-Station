@@ -287,13 +287,6 @@
 
 - type: entity
   parent: BaseLanguageKnowledge
-  id: language-YowKriol
-  components:
-  - type: LanguageKnowledge
-    languageId: YowKriol
-
-- type: entity
-  parent: BaseLanguageKnowledge
   id: language-Carptongue
   components:
   - type: LanguageKnowledge

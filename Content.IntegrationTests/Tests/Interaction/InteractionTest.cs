@@ -169,6 +169,31 @@ public abstract partial class InteractionTest
     - CanPilot
   - type: UserInterface
   - type: CombatMode
+  - type: KnowledgeHolder # Trauma - Knowledge
+  - type: KnowledgeContainer
+  - type: KnowledgeGrant
+    skills:
+      ConstructionSimpleHandmade: 100
+      ConstructionAdvancedHandmade: 100
+      ConstructionSurvivalWeaponsHandmade: 100
+      ConstructionSurvivalWeaponsHandmadeAdvanced: 100
+      ConstructionTechnological: 100
+      ConstructionMaterials: 100
+      ConstructionDoors: 100
+      ConstructionAirlocks: 100
+      ConstructionToys: 100
+      ConstructionBots: 100
+      ConstructionSimpleFurniture: 100
+      ConstructionFurniture: 100
+      ConstructionInfrastructure: 100
+      ConstructionElectronics: 100
+      ConstructionWalls: 100
+      ConstructionAdvancedWalls: 100
+      ConstructionScience: 100
+      ConstructionWindows: 100
+      ConstructionAdvancedWindows: 100
+      ConstructionSmokeables: 100
+      ConstructionRevolutionary: 100
 ";
 
     protected static PoolSettings Default => new() { Connected = true, Dirty = true };

@@ -9,6 +9,7 @@ knowledge-unit-learned-popup = You have learned {$knowledge}!
 knowledge-unit-forgotten-popup = You have forgotten the secrets of {$knowledge}!
 knowledge-could-not-learn = You cannot learn any more about { $knowledge } from this.
 knowledge-learn-more = You learn more about { $knowledge }.
+knowledge-level-epiphany = You have reached a sudden epiphany regarding { $knowledge }!
 
 knowledge-info-description = Level: {$level} | {$mastery} | Experience: {$exp}
 

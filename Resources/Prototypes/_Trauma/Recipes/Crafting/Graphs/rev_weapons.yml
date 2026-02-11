@@ -12,8 +12,6 @@
         doAfter: 10
   - node: finished
     entity: RevSword
-  groups:
-  - Revolutionary
 
 - type: constructionGraph
   id: RevMace
@@ -28,8 +26,6 @@
         doAfter: 10
   - node: finished
     entity: RevMace
-  groups:
-  - Revolutionary
 
 - type: constructionGraph
   id: RevKnife
@@ -44,8 +40,6 @@
         doAfter: 10
   - node: finished
     entity: RevKnife
-  groups:
-  - Revolutionary
 
 - type: constructionGraph
   id: RevPitchfork
@@ -60,8 +54,6 @@
         doAfter: 10
   - node: finished
     entity: RevPitchfork
-  groups:
-  - Revolutionary
 
 - type: constructionGraph
   id: RevTorch
@@ -76,8 +68,6 @@
         doAfter: 10
   - node: finished
     entity: RevTorch
-  groups:
-  - Revolutionary
 
 - type: constructionGraph
   id: RevGuns
@@ -389,8 +379,6 @@
     entity: ClothingBackpackFlamethrower # Temp
   - node: Devastator
     entity: WeaponShotgunDevastatorEmpty
-  groups:
-  - Revolutionary
 
 - type: constructionGraph
   id: RevIED
@@ -418,5 +406,3 @@
         amount: 5
   - node: IED
     entity: GrenadeShrapnelRev
-  groups:
-  - Revolutionary

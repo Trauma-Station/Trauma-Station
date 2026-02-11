@@ -11,13 +11,13 @@ namespace Content.Shared._EinsteinEngines.Language.Components;
 public sealed partial class LanguageKnowledgeComponent : Component
 {
     /// <summary>
-    ///     List of languages this entity can speak without any external tools.
+    ///     Can this entity speak without any external tools.
     /// </summary>
     [DataField]
     public bool Speaks = false;
 
     /// <summary>
-    ///     List of languages this entity can understand without any external tools.
+    ///     Can this entity this entity understand without any external tools.
     /// </summary>
     [DataField]
     public bool Understands = false;

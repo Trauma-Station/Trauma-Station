@@ -152,9 +152,18 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                     >= 51 => 6,
                     >= 26 => 8,
                     >= 1 => 12,
-                    _ => 12,
+                    _ => 20,
                 };
-                knowledgeComponent.Level += RollPenetrating(diceType);
+                var rollResult = RollPenetrating(diceType);
+                knowledgeComponent.Level += rollResult.Item1;
+                var knowledgePrototype = MetaData(knowledgeUnit).EntityPrototype?.ID;
+                if (rollResult.Item2)
+                {
+                    if (TryComp<LanguageKnowledgeComponent>(knowledgeUnit, out var knowledgeComp))
+                        _popup.PopupEntity(Loc.GetString("knowledge-level-epiphany", ("knowledge", Loc.GetString($"{knowledgeComp.LanguageId.Id}"))), ent, ent, PopupType.Medium);
+                    else
+                        _popup.PopupEntity(Loc.GetString("knowledge-level-epiphany", ("knowledge", Loc.GetString($"knowledge-{knowledgePrototype}"))), ent, ent, PopupType.Medium);
+                }
             }
         }
         if (knowledgeComponent.Level > 100)
@@ -162,7 +171,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (getMastery != GetMastery(knowledge))
         {
             var knowledgePrototype = MetaData(knowledgeUnit).EntityPrototype?.ID;
-            _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgePrototype}")), ("mastery", GetCurrentMastery(knowledge).ToLower())), ent, ent, PopupType.Medium);
+            if (TryComp<LanguageKnowledgeComponent>(knowledgeUnit, out var knowledgeComp))
+                _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString($"{knowledgeComp.LanguageId.Id}")), ("mastery", GetCurrentMastery(knowledge).ToLower())), ent, ent, PopupType.Medium);
+            else
+                _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgePrototype}")), ("mastery", GetCurrentMastery(knowledge).ToLower())), ent, ent, PopupType.Medium);
         }
         Dirty(ent);
     }
@@ -264,10 +276,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 Dirty(knowledgeUnitVerified, knowledgeComp);
             }
             ent.Comp.KnowledgeContainerIDs[knowledgeId.Key] = knowledgeUnitVerified;
-            if (TryComp<LanguageKnowledgeComponent>(knowledgeUnitVerified, out _))
+            if (TryComp<LanguageKnowledgeComponent>(knowledgeUnitVerified, out var languageComp))
             {
                 EnsureComp<LanguageSpeakerComponent>(target);
-                _popup.PopupEntity(Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Loc.GetString($"{knowledgeId.Key.ToString()}"))), target, target, PopupType.Medium);
+                _popup.PopupEntity(Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Loc.GetString($"{languageComp.LanguageId.Id}"))), target, target, PopupType.Medium);
             }
             else
             {
@@ -629,19 +641,30 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return 0;
     }
 
-    public int RollPenetrating(int sides)
+    public (int, bool) RollPenetrating(int sides, bool didCritical = false)
     {
-        int total = 0;
+
+        bool isCritical = false;
+        int penetratingRolls = 0;
         int currentRoll = _random.Next(1, sides + 1);
+        int total = currentRoll;
+        int newSides = sides;
 
-        total += currentRoll;
-
-        if (currentRoll == sides && total < 10 * sides)
+        while (currentRoll == newSides && penetratingRolls < 10)
         {
-            total += (RollPenetrating(sides) - 1);
+            penetratingRolls++;
+            newSides = newSides switch
+            {
+                100 => 20,
+                20 => 6,
+                _ => newSides
+            };
+            currentRoll = _random.Next(1, newSides + 1);
+            total += currentRoll - 1;
+            isCritical = true;
         }
 
-        return total;
+        return (total, isCritical);
     }
 
     private void RecursiveRaiseRelayEvent(EntityUid uid, ref KnowledgeContainerRelayEvent ev)

@@ -727,8 +727,9 @@
     - Security
     - Antagonists
   - type: PacifismAllowedGun
-  - type: MartialArtBlocked # Trauma
-    form: CorporateJudo
+  - type: KnowledgeGrantOnWear # Trauma - Knowledge
+    blocked:
+      MartialArtCorporateJudo: true
   # Goobstation start
   - type: Tag
     tags:

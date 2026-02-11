@@ -20,7 +20,7 @@
     sound: /Audio/Weapons/genhit2.ogg
   - !type:PopupMessage
     messages:
-      cqc-slam
+    - cqc-slam
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 25
@@ -28,8 +28,9 @@
     damage:
       types:
         Blunt: 12
-  - !type:Knockdown
-    amount: 2
+  - !type:GenericStatusEffect
+    key: Knockdown
+    time: 2
   levelRequired: 26
 
 - type: combo
@@ -43,7 +44,7 @@
     sound: /Audio/Weapons/genhit2.ogg
   - !type:PopupMessage
     messages:
-      cqc-kick
+    - cqc-slam
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 25
@@ -51,8 +52,8 @@
     damage:
       types:
         Blunt: 12
-  - !type:Knockdown
-    amount: 2
+  - !type:LegSweep
+    time: 2
   levelRequired: 26
 
 - type: combo
@@ -64,12 +65,13 @@
   userEffects:
   - !type:PopupMessage
     messages:
-      cqc-restrain
+    - cqc-slam
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 30
-  - !type:Knockdown
-    amount: 1
+  - !type:GenericStatusEffect
+    key: Knockdown
+    time: 1
   levelRequired: 26
 
 - type: combo
@@ -81,7 +83,7 @@
   userEffects:
   - !type:PopupMessage
     messages:
-      cqc-pressure
+    - cqc-slam
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 60
@@ -100,7 +102,7 @@
     sound: /Audio/Weapons/genhit1.ogg
   - !type:PopupMessage
     messages:
-      cqc-consecutive
+    - cqc-slam
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 40
@@ -124,16 +126,19 @@
     sound: /Audio/Weapons/genhit1.ogg
   - !type:PopupMessage
     messages:
-      cqc-consecutive
+    - cqc-slam
   opponentEffects:
-  - !type:ForcedSleep
-    amount: 70
+  - !type:GenericStatusEffect
+    key: ForcedSleep
+    time: 70
   - !type:HealthChange
     damage:
       types:
         Blunt: 30
-  - !type:Knockdown
-    amount: 20
-  - !type:ForcedSleep
-    amount: 20
+  - !type:GenericStatusEffect
+    key: Knockdown
+    time: 20
+  - !type:GenericStatusEffect
+    key: ForcedSleep
+    time: 20
   levelRequired: 50

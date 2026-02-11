@@ -63,15 +63,6 @@
   - type: MovementSpeedModifier
   - type: LagCompensation
   - type: StunVisuals
-  # Trauma start
-  - type: KnowledgeGrant
-    skills:
-      ConstructionSimpleHandmade: 26
-      AthleticsKnowledge: 10
-      ToughnessKnowledge: 10
-      StrengthKnowledge: 10
-      MeleeKnowledge: 10
-  # Trauma end
 
 - type: entity
   save: false

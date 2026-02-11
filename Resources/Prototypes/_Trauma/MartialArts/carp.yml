@@ -32,29 +32,60 @@
 - type: combo
   id: SleepingCarpGnashingTeeth
   name: Gnashing Teeth
-  martialArtsForm: SleepingCarp
   attacks:
   - Harm
   - Harm
-  damageType: Slash
-  extraDamage: 20
+  userEffects:
+  - !type:MartialArtsSaying
+    randomSayings:
+    - carp-saying-huah
+    - carv-vaying-hya
+    - carp-saying-choo
+    - carp-saying-wuo
+    - carp-saying-kya
+    - carp-saying-huh
+    - carp-saying-hiyoh
+    - carp-saying-strike
+    - carp-saying-bite
+    randomSayingsDowned:
+    - carp-saying-banzai
+    - carp-saying-kiya
+    - carp-saying-omae
+    - carp-saying-see
+    - carp-saying-time
+    - carp-saying-cowabunga
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 20
+  levelRequired: 26
 
 - type: combo
   id: SleepingCarpKneeHaul
   name: Knee Haul
-  martialArtsForm: SleepingCarp
   attacks:
   - Harm
   - Grab
-  extraDamage: 10
-  paralyzeTime: 6
-  staminaDamage: 60
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 60
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 6
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 10
+  levelRequired: 26
 
 - type: combo
   id: SleepingCarpCrashingWaves
   name: Crashing Waves
-  martialArtsForm: SleepingCarp
   attacks:
   - Harm
   - Disarm
-  staminaDamage: 25
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  levelRequired: 26

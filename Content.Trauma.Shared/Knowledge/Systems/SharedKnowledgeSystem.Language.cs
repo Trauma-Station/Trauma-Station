@@ -3,8 +3,11 @@ using System.Net.NetworkInformation;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Shared._Shitmed.Damage;
+using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
+using Content.Shared.EntityEffects.Effects.Atmos;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
@@ -17,7 +20,6 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die" };
@@ -124,14 +126,14 @@ public abstract partial class SharedKnowledgeSystem
                 if (languageToAdd == null)
                 {
                     if (!TryAddKnowledgeUnit(knowledgeEnt, new KeyValuePair<EntProtoId, int>($"language-{args.Language.Id}", 26)))
-                        Log.Error($"Failed to spawn language entity for language {args.Language.Id} in entity {ToPrettyString(ent)}");
+                        Log.Debug($"Language entity already exists for language {args.Language.Id} in entity {ToPrettyString(ent)}");
                 }
                 // Do nothing if they already know the language
             }
             else
             {
                 if (!TryAddKnowledgeUnit(knowledgeEnt, new KeyValuePair<EntProtoId, int>($"language-{args.Language.Id}", 26)))
-                    Log.Error($"Failed to spawn language entity for language {args.Language.Id} in entity {ToPrettyString(ent)}");
+                    Log.Debug($"Language entity already exists for language {args.Language.Id} in entity {ToPrettyString(ent)}");
             }
             Dirty(ent);
             UpdateEntityLanguages(ent);
@@ -188,13 +190,13 @@ public abstract partial class SharedKnowledgeSystem
         foreach (var spoken in ent.Comp.Speaks)
         {
             if (!TryAddKnowledgeUnit(knowledgeEnt, new KeyValuePair<EntProtoId, int>($"language-{spoken.Id}", 26)))
-                Log.Error($"Failed to spawn language entity for language {spoken.Id} in entity {ToPrettyString(ent)}");
+                Log.Debug($"Language entity already exists for language {spoken.Id} in entity {ToPrettyString(ent)}");
         }
 
         foreach (var understood in ent.Comp.Understands.Except(ent.Comp.Speaks))
         {
             if (TryAddKnowledgeUnit(knowledgeEnt, new KeyValuePair<EntProtoId, int>($"language-{understood.Id}", 26)))
-                Log.Error($"Failed to spawn language entity for language {understood.Id} in entity {ToPrettyString(ent)}");
+                Log.Debug($"FLanguage entity already exists for language {understood.Id} in entity {ToPrettyString(ent)}");
         }
 
         UpdateEntityLanguages(ent);
@@ -214,32 +216,29 @@ public abstract partial class SharedKnowledgeSystem
             var entitiesNearby = _lookup.GetEntitiesInRange(ent, 7f);
             var modifier = 0.0f;
             bool isCurse = GetMastery(knownLanguageTrue) >= 5 && ContainsCursedWord(args.Message);
-            if (isCurse && TryComp<KnowledgeComponent>(knownLanguage, out var knowledgeComponent))
-                modifier = Math.Clamp((80f - ((float) knowledgeComponent.Level) / 20f), 0, 1f);
+            var damage = new DamageSpecifier();
+            if (isCurse && TryComp<KnowledgeComponent>(knownLanguageTrue, out var knowledgeComponent))
+            {
+                modifier = Math.Max(((float) knowledgeComponent.Level - 80f) / 20f, 0f);
+                damage.DamageDict.Add("Brute", 20 * modifier);
+            }
             foreach (var hearer in entitiesNearby)
             {
                 var ev = new AddExperience($"language-{args.Language.ID}", 1);
                 RaiseLocalEvent(hearer, ref ev);
                 if (isCurse)
                 {
-                    var damage = new DamageSpecifier();
-                    damage.DamageDict.Add("Brute", 20 * modifier);
                     if (hearer == ent.Owner) continue; // Don't curse yourself
-
-                    if (_inventory.TryGetSlotEntity(hearer, "ears", out var earItem))
-                        continue;
 
                     if (_language.CanUnderstand(hearer, args.Language))
                     {
-
-                        _damageable.TryChangeDamage(hearer, damage, ignoreResistances: false);
+                        _damageable.TryChangeDamage(hearer, damage, ignoreResistances: false, interruptsDoAfters: false, ignoreBlockers: true, targetPart: TargetBodyPart.Head, splitDamage: SplitDamageBehavior.SplitEnsureAll);
                         _status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
 
                         _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
                     }
                 }
             }
-            Log.Debug($" Time between messages: {_timing.CurTick.Value - languageKnowledgeComponent.LastSentMessage}");
             if (_timing.CurTick.Value - languageKnowledgeComponent.LastSentMessage >= 250)
             {
                 var ev = new AddExperience($"language-{args.Language.ID}", Math.Clamp((int) (_timing.CurTick.Value - languageKnowledgeComponent.LastSentMessage - 250) / 100, 1, 4));
@@ -247,6 +246,7 @@ public abstract partial class SharedKnowledgeSystem
                 languageKnowledgeComponent.LastSentMessage = _timing.CurTick.Value;
                 UpdateEntityLanguages(ent);
             }
+            Dirty(knownLanguageTrue, languageKnowledgeComponent);
             return;
         }
     }

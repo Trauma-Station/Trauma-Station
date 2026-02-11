@@ -58,11 +58,11 @@ public sealed partial class MartialArtsSystem : EntitySystem
             if (comp.CurrentTarget != null && TerminatingOrDeleted(comp.CurrentTarget.Value))
                 comp.CurrentTarget = null;
 
-            if (_timing.CurTime < comp.ResetTime || comp.LastAttacks.Count == 0 && comp.ConsecutiveGnashes == 0)
+            if (_timing.CurTime < comp.ResetTime || comp.LastAttacks.Count == 0 && comp.Momentum == 0)
                 continue;
 
             comp.LastAttacks.Clear();
-            comp.ConsecutiveGnashes = 0;
+            comp.Momentum = 0;
             Dirty(ent, comp);
         }
 

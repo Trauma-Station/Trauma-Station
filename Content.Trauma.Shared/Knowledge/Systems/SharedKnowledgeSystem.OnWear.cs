@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Content.Shared.Clothing;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Components;
 using Robust.Shared.Prototypes;
 
@@ -38,6 +39,11 @@ public abstract partial class SharedKnowledgeSystem
             if (TryGetKnowledgeUnit(wearer, experience.Key) is { } knowledgeUnitActual && TryComp<KnowledgeComponent>(knowledgeUnitActual, out var knowledgeComponent))
                 knowledgeComponent.TemporaryLevel += experience.Value;
         }
+        foreach (var blocked in ent.Comp.Blocked)
+        {
+            if (TryGetKnowledgeUnit(wearer, blocked.Key) is { } knowledgeUnitActual && TryComp<MartialArtsKnowledgeComponent>(knowledgeUnitActual, out var knowledgeComponent))
+                knowledgeComponent.TemporaryBlockedCounter += 1;
+        }
 
     }
 
@@ -66,6 +72,11 @@ public abstract partial class SharedKnowledgeSystem
 
             if (TryGetKnowledgeUnit(args.Wearer, experience.Key) is { } knowledgeUnitActual && TryComp<KnowledgeComponent>(knowledgeUnitActual, out knowledgeComponent))
                 knowledgeComponent.TemporaryLevel -= experience.Value;
+        }
+        foreach (var blocked in ent.Comp.Blocked)
+        {
+            if (TryGetKnowledgeUnit(wearer, blocked.Key) is { } knowledgeUnitActual && TryComp<MartialArtsKnowledgeComponent>(knowledgeUnitActual, out var knowledgeComponent))
+                knowledgeComponent.TemporaryBlockedCounter -= 1;
         }
     }
 }

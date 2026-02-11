@@ -32,12 +32,5 @@ public sealed partial class CanPerformComboComponent : Component
     public TimeSpan ResetTime = TimeSpan.Zero;
 
     [DataField]
-    public int ConsecutiveGnashes;
-
-    [DataField]
-    public List<LocId> RandomSayings = [];
-
-    [DataField]
-    public List<LocId> RandomSayingsDowned = [];
-
+    public int Momentum;
 }

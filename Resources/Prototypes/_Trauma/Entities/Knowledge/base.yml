@@ -47,7 +47,7 @@
   name: ToughnessKnowledge
   components:
   - type: Knowledge
-    experienceCost: 30
+    experienceCost: 20
 
 - type: entity
   parent: BaseKnowledge

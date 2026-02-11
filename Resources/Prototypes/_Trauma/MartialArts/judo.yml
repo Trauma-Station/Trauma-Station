@@ -21,7 +21,13 @@
   attacks:
   - Disarm
   - Harm
-  extraDamage: 5
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 5
 
 - type: combo
   id: JudoThrow
@@ -29,8 +35,16 @@
   attacks:
   - Grab
   - Disarm
-  paralyzeTime: 4
-  staminaDamage: 5
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 4
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 5
+  - !type:TakeStaminaDamage
+    amount: 5
   dropItems: false
   canDoWhileProne: false
 

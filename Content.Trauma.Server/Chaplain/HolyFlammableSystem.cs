@@ -1,6 +1,8 @@
 using Content.Goobstation.Shared.Religion;
 using Content.Server.Administration.Logs;
 using Content.Server.Stunnable;
+using Content.Shared._Shitmed.Damage;
+using Content.Shared._Shitmed.Targeting;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
@@ -16,6 +18,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Chaplain;
 using Content.Trauma.Shared.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 
@@ -36,8 +39,8 @@ public sealed class HolyFlammableSystem : EntitySystem
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
-    private const float InitialGrowthRate = 0.6f;
-    private const float IntermediateGrowthRate = 0.2f;
+    private const float InitialGrowthRate = 1f;
+    private const float IntermediateGrowthRate = 2f;
     private const float LateGrowthRate = 50.0f;
 
     public override void Initialize()
@@ -53,6 +56,7 @@ public sealed class HolyFlammableSystem : EntitySystem
         SubscribeLocalEvent<HolyIgniteOnCollideComponent, StartCollideEvent>(HolyIgniteOnCollide);
         SubscribeLocalEvent<HolyIgniteOnMeleeHitComponent, MeleeHitEvent>(OnMeleeHit);
         SubscribeLocalEvent<IgniteOnHolyDamageComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<WeakToHolyComponent, ComponentStartup>(OnStartup);
     }
 
     private void OnExtinguishEvent(Entity<HolyFlammableComponent> ent, ref ExtinguishEvent args)
@@ -281,6 +285,11 @@ public sealed class HolyFlammableSystem : EntitySystem
 
     }
 
+    public void OnStartup(Entity<WeakToHolyComponent> ent, ref ComponentStartup args)
+    {
+        EnsureComp<HolyFlammableComponent>(ent);
+    }
+
     public void Resist(EntityUid uid,
         HolyFlammableComponent? flammable = null)
     {
@@ -359,7 +368,7 @@ public sealed class HolyFlammableSystem : EntitySystem
             _alerts.ShowAlert(uid, flammable.FireAlert);
             if (flammable.FireStacks > 0)
             {
-                _damageable.TryChangeDamage(uid, flammable.Damage * DamageCurve(flammable), interruptsDoAfters: false, partMultiplier: 2f);
+                _damageable.TryChangeDamage(uid, flammable.Damage * DamageCurve(flammable), interruptsDoAfters: false, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
                 AdjustFireStacks(uid, flammable.FirestackFade * (flammable.Resisting ? 20f : 1f), flammable, flammable.OnFire);
             }
             else
