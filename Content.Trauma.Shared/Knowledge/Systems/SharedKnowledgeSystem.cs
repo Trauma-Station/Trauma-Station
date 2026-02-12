@@ -35,6 +35,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<KnowledgeComponent> _knowledgeQuery;
     private EntityQuery<KnowledgeContainerComponent> _containerQuery;
@@ -159,7 +160,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         var current = child;
 
-        while (current.IsValid() && TryComp<TransformComponent>(current, out var xform))
+        while (current.IsValid() && _transform.TryGetTransform(current, out var xform))
         {
             if (xform.ParentUid == potentialParent)
                 return true;
