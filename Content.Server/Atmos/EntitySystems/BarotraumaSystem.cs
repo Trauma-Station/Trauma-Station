@@ -54,7 +54,7 @@ using Content.Shared.Inventory.Events;
 using Robust.Shared.Containers;
 
 // Shitmed Change
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Goobstation.Common.Atmos;
 
 namespace Content.Server.Atmos.EntitySystems

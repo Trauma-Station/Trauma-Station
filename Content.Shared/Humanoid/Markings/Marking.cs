@@ -53,7 +53,6 @@ namespace Content.Shared.Humanoid.Markings
         {
             MarkingId = other.MarkingId;
             _markingColors = new(other.MarkingColors);
-            Visible = other.Visible;
             Forced = other.Forced;
         }
 
@@ -68,12 +67,6 @@ namespace Content.Shared.Humanoid.Markings
         /// </summary>
         [ViewVariables]
         public IReadOnlyList<Color> MarkingColors => _markingColors;
-
-        /// <summary>
-        ///     If this marking is currently visible.
-        /// </summary>
-        [DataField("visible")]
-        public bool Visible = true;
 
         /// <summary>
         ///     If this marking should be forcefully applied, regardless of points.
@@ -118,7 +111,6 @@ namespace Content.Shared.Humanoid.Markings
             }
             return MarkingId.Equals(other.MarkingId)
                 && _markingColors.SequenceEqual(other._markingColors)
-                && Visible.Equals(other.Visible)
                 && Forced.Equals(other.Forced);
         }
 

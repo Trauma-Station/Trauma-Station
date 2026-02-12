@@ -4,7 +4,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Body;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._EinsteinEngines.Atmos.Components;
 
@@ -18,5 +19,5 @@ public sealed partial class IgniteFromGasImmunityComponent : Component
     //   Which body parts are given ignition immunity.
     // </summary>
     [DataField(required: true)]
-    public HashSet<TargetBodyPart> Parts;
+    public HashSet<ProtoId<OrganCategoryPrototype>> Parts;
 }

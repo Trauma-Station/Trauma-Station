@@ -29,9 +29,8 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Bio/general.rsi
   - type: Armor
-    coverage:
-    - Chest
-    - Groin
+    coverage: # Shitmed
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -112,9 +111,8 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Bio/security.rsi
   - type: Armor
-    coverage:
-    - Chest
-    - Groin
+    coverage: # Shitmed
+    - Torso
     - Arm
     - Hand
     - Leg

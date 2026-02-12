@@ -48,8 +48,6 @@ namespace Content.Goobstation.Shared.Vehicles.Clowncar;
  */
 public abstract partial class SharedClowncarSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _factory = default!;
-
     [Dependency] protected readonly SharedAppearanceSystem AppearanceSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;

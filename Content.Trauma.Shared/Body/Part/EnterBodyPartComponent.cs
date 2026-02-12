@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -16,9 +16,10 @@ public sealed partial class EnterBodyPartComponent : Component
 {
     /// <summary>
     /// The type of body part to burrow into.
+    /// Please do not use a internal organ :)
     /// </summary>
     [DataField(required: true)]
-    public BodyPartType Part = BodyPartType.Other;
+    public ProtoId<OrganCategoryPrototype> Category;
 
     /// <summary>
     /// The action to add.

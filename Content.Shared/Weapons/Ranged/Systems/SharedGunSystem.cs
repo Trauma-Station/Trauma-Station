@@ -2,7 +2,7 @@
 using Content.Goobstation.Common.Weapons.Multishot;
 using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Lavaland.Common.Weapons.Ranged;
-using Content.Shared._Shitmed.Weapons.Ranged.Events;
+using Content.Medical.Common.Weapons;
 using Content.Shared.Mech.Components;
 using Content.Shared.Weapons.Hitscan.Events;
 using Content.Trauma.Common.Projectiles;
@@ -145,14 +145,9 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     private void OnShootRequest(RequestShootEvent msg, EntitySessionEventArgs args)
     {
-        // Goobstation - Multishot - Ensures that guns shooting at same time.
-        var gunUid = GetEntity(msg.Gun);
-
-        if (HasComp<MultishotComponent>(gunUid))
-            return;
-        // Goobstation - End
         var user = args.SenderSession.AttachedEntity;
 
+        // <Goob> - mech relaying, check gun below, multishot, lock-on targeting
         if (user == null ||
             !_combatMode.IsInCombatMode(user))
             return;
@@ -160,20 +155,20 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (TryComp<MechPilotComponent>(user.Value, out var mechPilot))
             user = mechPilot.Mech;
 
-        if (!TryGetGun(user.Value, out var ent, out var gun) ||
-            HasComp<ItemComponent>(user))
+        if (!TryGetGun(user.Value, out var ent, out var gun))
             return;
 
-        if (ent != GetEntity(msg.Gun))
+        if (HasComp<MultishotComponent>(ent)) // let multishot system handle it
             return;
 
         gun.ShootCoordinates = GetCoordinates(msg.Coordinates);
-        // Goob edit start
         var potentialTarget = GetEntity(msg.Target);
         if (gun.Target == null || !gun.BurstActivated || !gun.LockOnTargetBurst)
             gun.Target = potentialTarget;
-        // Goob edit end
         AttemptShoot(user.Value, ent, gun);
+        // </Goob>
+        if (msg.Continuous)
+            gun.ShotCounter = 0;
     }
 
     private void OnStopShootRequest(RequestStopShootEvent ev, EntitySessionEventArgs args)
@@ -467,8 +462,6 @@ public abstract partial class SharedGunSystem : EntitySystem
         Shoot(gunUid, gun, ev.Ammo, fromCoordinates, toCoordinates.Value, out var userImpulse, user, throwItems: attemptEv.ThrowItems);
         var shotEv = new GunShotEvent(user, ev.Ammo);
         RaiseLocalEvent(gunUid, ref shotEv);
-        var shotBodyEv = new GunShotBodyEvent(gunUid, gun); // Shitmed Change
-        RaiseLocalEvent(user, shotBodyEv); // Shitmed Change
 
         UpdateAmmoCount(gunUid); //GoobStation - Multishot
         if (!userImpulse || !TryComp<PhysicsComponent>(user, out var userPhysics))

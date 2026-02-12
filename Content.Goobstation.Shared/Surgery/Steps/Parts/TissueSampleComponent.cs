@@ -1,4 +1,4 @@
-using Content.Shared._Shitmed.Medical.Surgery.Tools;
+using Content.Medical.Common.Surgery.Tools;
 using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Surgery.Steps.Parts;

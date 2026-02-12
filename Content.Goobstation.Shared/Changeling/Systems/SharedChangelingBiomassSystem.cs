@@ -1,8 +1,8 @@
 using Content.Goobstation.Common.Changeling;
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Changeling.Components;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Alert;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;

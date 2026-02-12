@@ -1,0 +1,34 @@
+## Base
+
+# pizza lungs!?
+- type: entity
+  abstract: true
+  parent: OrganBase
+  id: OrganPizza
+  description: For when you want to turn someone into a Space John's.
+  # no suffix pizza is included in the name
+
+# pizza arms...
+- type: entity
+  abstract: true
+  parent: OrganPizza
+  id: OrganPizzaExternal
+  components:
+  - type: Sprite
+    sprite: _Shitmed/Mobs/Species/Misc/Pizza/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Shitmed/Mobs/Species/Misc/Pizza/parts.rsi
+
+## Parts
+
+# TODO SHITMED: ideally pizza slice would directly be a bodypart, no emag slop
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganPizzaExternal ]
+  id: OrganPizzaArmLeft
+  name: left pizza arm
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganPizzaExternal ]
+  id: OrganPizzaArmRight
+  name: right pizza arm

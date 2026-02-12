@@ -11,7 +11,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Shared.MartialArts.Components;
 using Content.Goobstation.Shared.MartialArts.Events;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Content.Shared.Interaction.Events;

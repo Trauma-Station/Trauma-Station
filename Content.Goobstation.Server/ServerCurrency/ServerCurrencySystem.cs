@@ -84,7 +84,7 @@ namespace Content.Goobstation.Server.ServerCurrency
             while (query.MoveNext(out var uid, out var mindContainer))
             {
                 var isBorg = HasComp<BorgChassisComponent>(uid);
-                if (!(HasComp<HumanoidAppearanceComponent>(uid)
+                if (!(HasComp<HumanoidProfileComponent>(uid)
                     || HasComp<BorgBrainComponent>(uid)
                     || isBorg))
                     continue;

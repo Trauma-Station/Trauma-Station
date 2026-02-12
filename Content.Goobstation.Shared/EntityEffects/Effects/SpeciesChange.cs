@@ -21,9 +21,9 @@ public sealed partial class SpeciesChange : EntityEffectBase<SpeciesChange>
         => Loc.GetString("reagent-effect-guidebook-change-species", ("species", prototype.Index(NewSpecies).Name));
 }
 
-public abstract class SharedSpeciesChangeEffectSystem : EntityEffectSystem<HumanoidAppearanceComponent, SpeciesChange>
+public abstract class SharedSpeciesChangeEffectSystem : EntityEffectSystem<HumanoidProfileComponent, SpeciesChange>
 {
-    protected override void Effect(Entity<HumanoidAppearanceComponent> ent, ref EntityEffectEvent<SpeciesChange> args)
+    protected override void Effect(Entity<HumanoidProfileComponent> ent, ref EntityEffectEvent<SpeciesChange> args)
     {
         Polymorph(ent, args.Effect.NewSpecies);
     }

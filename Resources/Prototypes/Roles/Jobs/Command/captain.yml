@@ -154,9 +154,6 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 4h
-      #any MRP using our code might eventually want to use it
-    # - !type:SaturationRequirement # MisandryBox - no neon hair on captain
-    #   hairColorSaturation: 0.30
   guides: # goobstation
   - Command
   goobcoins: 50 #Goob content

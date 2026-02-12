@@ -1,0 +1,85 @@
+- type: entity
+  abstract: true
+  parent: AppearanceXenomorphBase
+  id: AppearanceXenomorphQueen
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganXenomorphTorsoQueen
+      Head: OrganXenomorphHeadLarge
+      ArmLeft: OrganXenomorphArmLeft
+      ArmRight: OrganXenomorphArmRight
+      HandRight: OrganXenomorphHandRight
+      HandLeft: OrganXenomorphHandLeft
+      LegLeft: OrganXenomorphLegLeft
+      LegRight: OrganXenomorphLegRight
+      FootLeft: OrganXenomorphFootLeft
+      FootRight: OrganXenomorphFootRight
+      # Organs
+      Brain: OrganXenomorphBrain
+      Eyes: OrganXenomorphEyes
+      Tongue: OrganXenomorphTongue
+      Stomach: OrganXenomorphStomach
+      Liver: OrganXenomorphLiver
+      Kidneys: OrganXenomorphKidneys
+      HiveNode: OrganXenomorphHiveNode
+      # Caste-Specific
+      ResinSpinner: OrganXenomorphResinSpinner
+      NeurotoxinGland: OrganXenomorphNeurotoxinGland
+      AcidGland: OrganXenomorphAcidGland
+      PlasmaVessel: OrganXenomorphPlasmaVesselLargeQueen
+      EggSack: OrganXenomorphEggSack
+
+## Parts
+
+- type: entity
+  parent: OrganXenomorphTorso
+  id: OrganXenomorphTorsoQueen
+  suffix: xenomorph queen
+  components:
+  - type: BodyPart
+    slots:
+    # Parts
+    - Head
+    - ArmLeft
+    - ArmRight
+    - LegLeft
+    - LegRight
+    # Organs
+    - PlasmaVessel
+    - Stomach
+    - Liver
+    - Kidneys
+    - EggSack
+
+- type: entity
+  parent: OrganXenomorphHead
+  id: OrganXenomorphHeadLarge ## also used by prae
+  name: large xenomorph head
+  description: This xenomorph head is significantly larger than usual, it might have belonged to a ferocious Queen.
+  components:
+  - type: Item
+    size: Large # 2x4 it big
+  - type: BodyPart
+    slots:
+    - Brain
+    - Eyes
+    - HiveNode
+    - ResinSpinner
+    - NeurotoxinGland
+    - AcidGland
+
+## Organs
+
+- type: entity
+  parent: OrganXenomorphPlasmaVesselLarge
+  id: OrganXenomorphPlasmaVesselLargeQueen
+  components:
+  - type: OrganComponents
+    onAdd:
+    - type: PlasmaVessel
+      maxPlasma: 500
+      plasma: 200
+      plasmaPerSecondOffWeed: 1
+      plasmaPerSecondOnWeed: 10

@@ -1,9 +1,4 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
+using System.Linq;
 using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,7 +16,9 @@ public sealed partial class UtilityOperator : HTNOperator
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
 
-    [DataField("key")] public string Key = "Target";
+    [DataField] public string Key = "Target";
+
+    [DataField] public ReturnTypeResult ReturnType = ReturnTypeResult.Highest;
 
     /// <summary>
     /// The EntityCoordinates of the specified target.
@@ -36,19 +33,44 @@ public sealed partial class UtilityOperator : HTNOperator
         CancellationToken cancelToken)
     {
         var result = _entManager.System<NPCUtilitySystem>().GetEntities(blackboard, Prototype);
-        var target = result.GetHighest();
+        Dictionary<string, object> effects;
 
-        if (!target.IsValid())
+        switch (ReturnType)
         {
-            return (false, new Dictionary<string, object>());
+            case ReturnTypeResult.Highest:
+                var target = result.GetHighest();
+
+                if (!target.IsValid())
+                {
+                    return (false, new Dictionary<string, object>());
+                }
+
+                effects = new Dictionary<string, object>()
+                {
+                    {Key, target},
+                    {KeyCoordinates, new EntityCoordinates(target, Vector2.Zero)},
+                };
+
+                return (true, effects);
+
+            case ReturnTypeResult.EnumerableDescending:
+                var targetList = result.GetEnumerable();
+
+                effects = new Dictionary<string, object>()
+                {
+                    {"TargetList", targetList},
+                };
+
+                return (true, effects);
+
+            default:
+                throw new NotImplementedException();
         }
+    }
 
-        var effects = new Dictionary<string, object>()
-        {
-            {Key, target},
-            {KeyCoordinates, new EntityCoordinates(target, Vector2.Zero)}
-        };
-
-        return (true, effects);
+    public enum ReturnTypeResult
+    {
+        Highest,
+        EnumerableDescending
     }
 }

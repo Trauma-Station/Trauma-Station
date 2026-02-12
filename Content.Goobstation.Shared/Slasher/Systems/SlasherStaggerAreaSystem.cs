@@ -1,7 +1,7 @@
 using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
 using Content.Shared.Actions;
-using Content.Shared.Body.Components;
+using Content.Shared.Body;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;

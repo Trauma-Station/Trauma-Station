@@ -20,6 +20,7 @@
     <ProjectReference Include="../Content.Trauma.Server/Content.Trauma.Server.csproj" />
     <ProjectReference Include="../Content.Trauma.Shared/Content.Trauma.Shared.csproj" />
     <ProjectReference Include="../Content.Lavaland.Shared/Content.Lavaland.Shared.csproj" />
+    <ProjectReference Include="../Content.Medical.Shared/Content.Medical.Shared.csproj" />
     <!-- /Trauma -->
     <ProjectReference Include="..\Content.Server\Content.Server.csproj" />
     <ProjectReference Include="..\Content.Shared\Content.Shared.csproj" />

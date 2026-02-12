@@ -1,0 +1,90 @@
+## Mob
+
+- type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceScurret
+  name: scurret appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: OrganScurretTorso
+      Head: OrganScurretHead
+      ArmLeft: OrganScurretArmLeft
+      ArmRight: OrganScurretArmRight
+      HandRight: OrganScurretHandRight
+      HandLeft: OrganScurretHandLeft
+      LegLeft: OrganScurretLegLeft
+      LegRight: OrganScurretLegRight
+      FootLeft: OrganScurretFootLeft
+      FootRight: OrganScurretFootRight
+      Brain: OrganAnimalBrain
+      Eyes: OrganAnimalEyes
+      Tongue: OrganAnimalTongue
+      Appendix: OrganAnimalAppendix
+      Ears: OrganAnimalEars
+      Lungs: OrganAnimalLungs
+      Heart: OrganAnimalHeart
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganScurret
+  suffix: scurret
+
+- type: entity
+  abstract: true
+  parent: OrganScurret
+  id: OrganScurretExternal
+  components:
+  - type: Sprite
+    sprite: _Shitmed/Mobs/Species/Scurret/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Shitmed/Mobs/Species/Scurret/parts.rsi
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganScurretExternal ]
+  id: OrganScurretTorso
+
+- type: entity
+  parent: [ OrganBaseHead, OrganScurretExternal ]
+  id: OrganScurretHead
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganScurretExternal ]
+  id: OrganScurretArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganScurretExternal ]
+  id: OrganScurretArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganScurretExternal ]
+  id: OrganScurretHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganScurretExternal ]
+  id: OrganScurretHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganScurretExternal ]
+  id: OrganScurretLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganScurretExternal ]
+  id: OrganScurretLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganScurretExternal ]
+  id: OrganScurretFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganScurretExternal ]
+  id: OrganScurretFootRight

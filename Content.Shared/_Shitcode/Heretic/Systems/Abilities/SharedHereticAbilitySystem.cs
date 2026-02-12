@@ -1,20 +1,14 @@
 using System.Linq;
 using Content.Goobstation.Common.Religion;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared._Goobstation.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Roles;
-using Content.Shared._Shitmed.Body;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Pain.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Actions;
+using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -80,13 +74,9 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
-    [Dependency] private readonly TraumaSystem _trauma = default!;
-    [Dependency] private readonly PainSystem _pain = default!;
-    [Dependency] private readonly ConsciousnessSystem _consciousness = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedBloodstreamSystem _blood = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SharedEmpSystem _emp = default!;
@@ -302,16 +292,10 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     /// </summary>
     /// <param name="uid">Entity to heal</param>
     /// <param name="toHeal">how much to heal, null = full heal</param>
-    /// <param name="boneHeal">how much to heal bones, null = full heal</param>
-    /// <param name="painHeal">how much to heal pain, null = full heal</param>
-    /// <param name="woundHeal">how much to heal wounds, null = full heal</param>
     /// <param name="bloodHeal">how much to restore blood, null = fully restore</param>
     /// <param name="bleedHeal">how much to heal bleeding, null = full heal</param>
-    public void IHateWoundMed(Entity<DamageableComponent?, BodyComponent?, ConsciousnessComponent?> uid,
+    public void IHateWoundMed(Entity<DamageableComponent?, BodyComponent?> uid,
         DamageSpecifier? toHeal,
-        FixedPoint2? boneHeal,
-        FixedPoint2? painHeal,
-        FixedPoint2? woundHeal,
         FixedPoint2? bloodHeal,
         FixedPoint2? bleedHeal)
     {
@@ -336,97 +320,10 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             _mobThreshold.SetAllowRevives(uid, false, thresholds);
         }
 
-        if (Resolve(uid, ref uid.Comp2, false) && uid.Comp2.BodyType == BodyType.Complex && (boneHeal != FixedPoint2.Zero || woundHeal != FixedPoint2.Zero))
-        {
-            if (_body.TryGetRootPart(uid, out var rootPart, uid.Comp2))
-            {
-                foreach (var woundable in _wound.GetAllWoundableChildren(rootPart.Value))
-                {
-                    if (woundHeal != FixedPoint2.Zero)
-                    {
-                        _wound.TryHaltAllBleeding(woundable.Owner, woundable.Comp, true);
-                        if (woundHeal == null)
-                            _wound.ForceHealWoundsOnWoundable(woundable.Owner, out _, null, woundable.Comp);
-                        else
-                            _wound.TryHealWoundsOnWoundable(woundable.Owner, -woundHeal.Value, out _, woundable.Comp, null, true, true);
-                    }
-
-                    if (boneHeal == FixedPoint2.Zero)
-                        continue;
-
-                    if (woundable.Comp.Bone.ContainedEntities.FirstOrNull() is not { } bone ||
-                        !TryComp(bone, out BoneComponent? boneComp))
-                        continue;
-
-                    if (boneHeal != null)
-                        _trauma.ApplyDamageToBone(bone, boneHeal.Value, boneComp);
-                    else
-                        _trauma.SetBoneIntegrity(bone, boneComp.IntegrityCap, boneComp);
-                }
-            }
-        }
-
-        if (painHeal != FixedPoint2.Zero && Resolve(uid, ref uid.Comp3, false))
-        {
-            if (uid.Comp3.NerveSystem != default)
-            {
-                foreach (var painModifier in uid.Comp3.NerveSystem.Comp.Modifiers)
-                {
-                    if (painHeal != null && painModifier.Value.Change > -painHeal.Value)
-                    {
-                        // This reduces pain maybe, who the hell knows
-                        _pain.TryChangePainModifier(uid.Comp3.NerveSystem.Owner,
-                            painModifier.Key.Item1,
-                            painModifier.Key.Item2,
-                            painModifier.Value.Change + painHeal.Value,
-                            uid.Comp3.NerveSystem.Comp);
-                        continue;
-                    }
-
-                    _pain.TryRemovePainModifier(uid.Comp3.NerveSystem.Owner,
-                        painModifier.Key.Item1,
-                        painModifier.Key.Item2,
-                        uid.Comp3.NerveSystem.Comp);
-                }
-
-                foreach (var painMultiplier in uid.Comp3.NerveSystem.Comp.Multipliers)
-                {
-                    // Uhh... just fucking remove it, who cares
-                    _pain.TryRemovePainMultiplier(uid.Comp3.NerveSystem.Owner,
-                        painMultiplier.Key,
-                        uid.Comp3.NerveSystem.Comp);
-                }
-
-                foreach (var nerve in uid.Comp3.NerveSystem.Comp.Nerves)
-                {
-                    foreach (var painFeelsModifier in nerve.Value.PainFeelingModifiers)
-                    {
-                        // Idk what it does, just remove it
-                        _pain.TryRemovePainFeelsModifier(painFeelsModifier.Key.Item1,
-                            painFeelsModifier.Key.Item2,
-                            nerve.Key,
-                            nerve.Value);
-                    }
-                }
-            }
-
-            foreach (var multiplier in
-                     uid.Comp3.Multipliers.Where(multiplier => multiplier.Value.Type == ConsciousnessModType.Pain))
-            {
-                // Wtf is consciousness???
-                _consciousness.RemoveConsciousnessMultiplier(uid,
-                    multiplier.Key.Item1,
-                    multiplier.Key.Item2,
-                    uid.Comp3);
-            }
-
-            foreach (var modifier in
-                     uid.Comp3.Modifiers.Where(modifier => modifier.Value.Type == ConsciousnessModType.Pain))
-            {
-                // Read this method name
-                _consciousness.RemoveConsciousnessModifier(uid, modifier.Key.Item1, modifier.Key.Item2, uid.Comp3);
-            }
-        }
+        // im too lazy to update some unused shit to reduce pain by an arbitrary number (makes no fucking sense)
+        // have this shit instead
+        var painEv = new LifeStealHealEvent();
+        RaiseLocalEvent(uid, ref painEv);
 
         if (bleedHeal == FixedPoint2.Zero && bloodHeal == FixedPoint2.Zero ||
             !TryComp(uid, out BloodstreamComponent? blood))

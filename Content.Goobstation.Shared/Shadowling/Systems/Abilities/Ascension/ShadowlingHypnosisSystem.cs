@@ -40,7 +40,7 @@ public sealed class ShadowlingHypnosisSystem : EntitySystem
     {
         var target = args.Target;
         if (args.Handled
-            || !HasComp<HumanoidAppearanceComponent>(target)
+            || !HasComp<HumanoidProfileComponent>(target)
             || HasComp<ThrallComponent>(target)
             || HasComp<ShadowlingComponent>(target))
             return;

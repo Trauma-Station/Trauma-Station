@@ -8,6 +8,7 @@ using Robust.Shared.Audio.Systems;
 using Content.Shared.Examine;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
+using Content.Shared.Body;
 using Content.Shared.Gibbing;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
@@ -18,8 +19,6 @@ namespace Content.Shared._Shitcode.Heretic.Rituals;
 
 public abstract partial class SharedHereticRitualSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFact = default!;
-
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -29,6 +28,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly HereticRitualEffectSystem _effects = default!;
 

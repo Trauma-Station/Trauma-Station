@@ -91,10 +91,9 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
             || !args.CanReach
             || !_chargesSystem.HasCharges(entity.Owner, entity.Comp.ConsumesCharges)
             || !HasComp<MindContainerComponent>(args.Target)
-            || !HasComp<HumanoidAppearanceComponent>(args.Target)) // TraumaStation change
+            || !HasComp<HumanoidProfileComponent>(args.Target))
             return;
 
-        // TraumaStation
         if (entity.Comp.ApplyFlashEffect)
             _flash.Flash(args.Target.Value, args.User, entity.Owner, entity.Comp.FlashDuration, entity.Comp.SlowToOnFlashed);
 

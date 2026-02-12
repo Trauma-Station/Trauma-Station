@@ -21,9 +21,9 @@ using Content.Server.Antag;
 using Content.Server.Ghost.Roles.Components;
 using Content.Shared.Hands.Components;
 using Content.Server.Hands.Systems;
-using Content.Server.Humanoid;
 using Content.Server.Storage.EntitySystems;
-using Content.Shared.Body.Systems;
+using Content.Shared._Shitcode.Roles;
+using Content.Shared.Administration.Systems;
 using Content.Shared.CombatMode;
 using Content.Shared.Examine;
 using Content.Shared.Ghost.Roles.Components;
@@ -49,6 +49,7 @@ using Content.Server.NPC.Systems;
 using Content.Server.Roles;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Starlight.CollectiveMind;
+using Content.Shared.Body;
 using Content.Shared.Coordinates;
 using Content.Shared.Roles;
 using Content.Shared.Species.Components;
@@ -58,11 +59,8 @@ using Content.Shared.Polymorph;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Speech.EntitySystems;
 using Content.Shared._Shitcode.Heretic.Rituals;
-using Content.Shared._Shitcode.Roles;
-using Content.Shared._Shitmed.Body.Organ;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared.Administration.Systems;
 using Content.Shared.Gibbing;
+using Content.Shared.Interaction.Components;
 using Content.Shared.NPC.Components;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Roles.Components;
@@ -80,7 +78,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
     private static readonly EntProtoId ComponentsToRemoveOnGhoulify = "ComponentsToRemoveOnGhoulify";
     private static readonly EntProtoId ComponentsToRemoveOnUnGhoulify = "ComponentsToRemoveOnUnGhoulify";
 
-    private string[] IgnoredComponentsOnTransfer = ["Transform", "MetaData"];
+    private readonly string[] IgnoredComponentsOnTransfer = ["Transform", "MetaData"];
 
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly JitteringSystem _jitter = default!;
@@ -88,11 +86,11 @@ public sealed class GhoulSystem : SharedGhoulSystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
     [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
     [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly StorageSystem _storage = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
@@ -130,8 +128,6 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
         SubscribeLocalEvent<HereticMinionComponent, AttackAttemptEvent>(OnTryAttack);
         SubscribeLocalEvent<HereticMinionComponent, TakeGhostRoleEvent>(OnTakeGhostRole);
-
-        SubscribeLocalEvent<TryRemoveOrganEvent>(OnRemoveOrganAttempt);
     }
 
     public override void Update(float frameTime)
@@ -169,12 +165,6 @@ public sealed class GhoulSystem : SharedGhoulSystem
         RemCompDeferred(ent, ent.Comp);
     }
 
-    private void OnRemoveOrganAttempt(ref TryRemoveOrganEvent ev)
-    {
-        if (HasComp<VoicelessDeadComponent>(ev.Organ?.Body))
-            ev.Cancelled = true;
-    }
-
     private void OnDeconvertStartup(Entity<GhoulDeconvertComponent> ent, ref ComponentStartup args)
     {
         var time = TimeSpan.FromSeconds(ent.Comp.Delay);
@@ -202,10 +192,12 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
     private void ProcessVoicelessDeadBody(EntityUid uid, bool makeRemovable)
     {
-        foreach (var (partId, _, woundable) in _body.GetBodyChildrenWithComponent<WoundableComponent>(uid))
+        foreach (var organ in _body.GetOrgans(uid))
         {
-            woundable.CanRemove = makeRemovable;
-            Dirty(partId, woundable);
+            if (makeRemovable)
+                RemCompDeferred<UnremoveableComponent>(organ);
+            else
+                EnsureComp<UnremoveableComponent>(organ);
         }
     }
 
@@ -256,7 +248,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
             return;
 
         // You can't have non-humanoid deconvertible ghouls normally, but this is here just in case
-        if (!TryComp(ent, out HumanoidAppearanceComponent? humanoid))
+        if (!TryComp(ent, out HumanoidProfileComponent? humanoid))
         {
             if (Prototype(ent) is not { } proto)
                 return;
@@ -277,8 +269,12 @@ public sealed class GhoulSystem : SharedGhoulSystem
             return;
         }
 
+        /* TODO NUBODY API
+
         _humanoid.SetSkinColor(ent, ent.Comp.OldSkinColor, true, false, humanoid);
         _humanoid.SetBaseLayerColor(ent, HumanoidVisualLayers.Eyes, ent.Comp.OldEyeColor, true, humanoid);
+
+        */
 
         var species = _proto.Index(humanoid.Species);
         var prototype = _proto.Index(species.Prototype);
@@ -374,16 +370,19 @@ public sealed class GhoulSystem : SharedGhoulSystem
                 SetBoundHeretic((ent.Owner, minion), heretic, null, false);
         }
 
-        if (TryComp<HumanoidAppearanceComponent>(ent, out var humanoid))
+        if (TryComp<HumanoidProfileComponent>(ent, out var humanoid))
         {
+            // make them "have no eyes" and grey
+            // this is clearly a reference to grey tide
+            /* TODO NUBODY API
+
             ent.Comp.OldSkinColor = humanoid.SkinColor;
             ent.Comp.OldEyeColor = humanoid.EyeColor;
 
-            // make them "have no eyes" and grey
-            // this is clearly a reference to grey tide
             var greycolor = Color.FromHex("#505050");
             _humanoid.SetSkinColor(ent, greycolor, true, false, humanoid);
             _humanoid.SetBaseLayerColor(ent, HumanoidVisualLayers.Eyes, greycolor, true, humanoid);
+            */
         }
 
         _rejuvenate.PerformRejuvenate(ent);
@@ -518,6 +517,9 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
         if (ent.Comp.SpawnOnDeathPrototype != null)
             Spawn(ent.Comp.SpawnOnDeathPrototype.Value, Transform(ent).Coordinates);
+
+        if (!HasComp<BodyComponent>(ent))
+            return;
 
         foreach (var giblet in _gibbing.Gib(ent, ent.Comp.DeathBehavior == GhoulDeathBehavior.GibOrgans))
         {

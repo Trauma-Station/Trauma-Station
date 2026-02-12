@@ -27,7 +27,7 @@ public sealed partial class HauntSystem : EntitySystem
     private EntityQuery<HauntedComponent> _hauntQuery;
     private EntityQuery<WraithAbsorbableComponent> _wraithAbsorbableQuery;
 
-    private readonly HashSet<Entity<HumanoidAppearanceComponent>> _humanoid = new();
+    private readonly HashSet<Entity<HumanoidProfileComponent>> _humanoid = new();
     private readonly HashSet<Entity<StatusEffectsComponent>> _statusEffects = new();
     public override void Initialize()
     {

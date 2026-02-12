@@ -1,17 +1,6 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2023 Arendian <137322659+Arendian@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <drsmugleaf@gmail.com>
-// SPDX-FileCopyrightText: 2023 Jezithyr <jezithyr@gmail.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 godisdeadLOL <169250097+godisdeadLOL@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 RichardBlonski <48651647+RichardBlonski@users.noreply.github.com> Goobstation
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Shared.Stealth.Components;
+// </Trauma>
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Shared.NPC.Components;
@@ -21,7 +10,6 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Silicons.Bots;
-using Content.Shared.Stealth.Components; // Goobstation
 using Content.Shared.Emag.Components;
 
 namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
@@ -29,9 +17,15 @@ namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 public sealed partial class PickNearbyInjectableOperator : HTNOperator
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
-    private EntityLookupSystem _lookup = default!;
     private MedibotSystem _medibot = default!;
     private PathfindingSystem _pathfinding = default!;
+
+    private EntityQuery<DamageableComponent> _damageQuery = default!;
+    private EntityQuery<InjectableSolutionComponent> _injectQuery = default!;
+    private EntityQuery<NPCRecentlyInjectedComponent> _recentlyInjected = default!;
+    private EntityQuery<MobStateComponent> _mobState = default!;
+    private EntityQuery<EmaggedComponent> _emaggedQuery = default!;
+    private EntityQuery<StealthComponent> _stealthQuery = default!; // Trauma
 
     [DataField("rangeKey")] public string RangeKey = NPCBlackboard.MedibotInjectRange;
 
@@ -50,9 +44,15 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
     public override void Initialize(IEntitySystemManager sysManager)
     {
         base.Initialize(sysManager);
-        _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _medibot = sysManager.GetEntitySystem<MedibotSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
+
+        _damageQuery = _entManager.GetEntityQuery<DamageableComponent>();
+        _injectQuery = _entManager.GetEntityQuery<InjectableSolutionComponent>();
+        _recentlyInjected = _entManager.GetEntityQuery<NPCRecentlyInjectedComponent>();
+        _mobState = _entManager.GetEntityQuery<MobStateComponent>();
+        _emaggedQuery = _entManager.GetEntityQuery<EmaggedComponent>();
+        _stealthQuery = _entManager.GetEntityQuery<StealthComponent>(); // Trauma
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
@@ -66,20 +66,17 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
         if (!_entManager.TryGetComponent<MedibotComponent>(owner, out var medibot))
             return (false, null);
 
-        var damageQuery = _entManager.GetEntityQuery<DamageableComponent>();
-        var injectQuery = _entManager.GetEntityQuery<InjectableSolutionComponent>();
-        var recentlyInjected = _entManager.GetEntityQuery<NPCRecentlyInjectedComponent>();
-        var mobState = _entManager.GetEntityQuery<MobStateComponent>();
-        var emaggedQuery = _entManager.GetEntityQuery<EmaggedComponent>();
-        var stealthQuery = _entManager.GetEntityQuery<StealthComponent>(); // Goobstation
 
-        foreach (var entity in _lookup.GetEntitiesInRange(owner, range))
+        if (!blackboard.TryGetValue<IEnumerable<KeyValuePair<EntityUid, float>>>("TargetList", out var patients, _entManager))
+            return (false, null);
+
+        foreach (var (entity, _) in patients)
         {
-            if (mobState.TryGetComponent(entity, out var state) &&
-                injectQuery.HasComponent(entity) &&
-                damageQuery.TryGetComponent(entity, out var damage) &&
-                !recentlyInjected.HasComponent(entity) &&
-                !(stealthQuery.TryGetComponent(entity, out var stealth) && stealth.Enabled)) // Goobstation - stealth check
+            if (_mobState.TryGetComponent(entity, out var state) &&
+                _injectQuery.HasComponent(entity) &&
+                _damageQuery.TryGetComponent(entity, out var damage) &&
+                !(_stealthQuery.TryGetComponent(entity, out var stealth) && stealth.Enabled) && // Trauma - stealth check
+                !_recentlyInjected.HasComponent(entity))
             {
                 // no treating dead bodies
                 if (!_medibot.TryGetTreatment(medibot, state.CurrentState, out var treatment))
@@ -88,7 +85,7 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
                 // Only go towards a target if the bot can actually help them or if the medibot is emagged
                 // note: this and the actual injecting don't check for specific damage types so for example,
                 // radiation damage will trigger injection but the tricordrazine won't heal it.
-                if (!emaggedQuery.HasComponent(entity) && !treatment.IsValid(damage.TotalDamage))
+                if (!_emaggedQuery.HasComponent(entity) && !treatment.IsValid(damage.TotalDamage))
                     continue;
 
                 //Needed to make sure it doesn't sometimes stop right outside it's interaction range

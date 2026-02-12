@@ -29,7 +29,6 @@ public sealed class FishingSystem : SharedFishingSystem
 {
     // Here we calculate the start of fishing, because apparently StartCollideEvent
     // works janky on clientside so we can't predict when fishing starts.
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
@@ -69,7 +68,7 @@ public sealed class FishingSystem : SharedFishingSystem
         var fish = spotComp.FishList.GetSpawns(_random.GetRandom(), EntityManager, _proto, new EntityTableContext()).First();
 
         // Get fish difficulty
-        _proto.Index(fish).TryGetComponent(out FishComponent? fishComp, _compFactory);
+        _proto.Index(fish).TryGetComponent(out FishComponent? fishComp, Factory);
 
         // Assign things that depend on the fish
         var activeFishSpot = EnsureComp<ActiveFishingSpotComponent>(attachedEnt);

@@ -1,0 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+using Robust.Shared.GameStates;
+
+namespace Content.Medical.Shared.Surgery.Conditions;
+
+/// <summary>
+/// Requires that this part is attached to a body for the surgery to be done.
+/// </summary>
+[RegisterComponent, NetworkedComponent]
+public sealed partial class SurgeryHasBodyConditionComponent : Component;

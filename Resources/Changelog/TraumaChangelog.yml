@@ -2419,3 +2419,26 @@ Entries:
   id: 295
   time: '2026-02-10T20:17:42.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/660
+- author: The Man Who Sold The World
+  changes:
+  - type: Add
+    message: 50000 bugs
+  - type: Tweak
+    message: >-
+      Upstream: Reverted uplink super surplus, python, necronomicon, flash
+      lantern removal
+  - type: Tweak
+    message: 'Upstream: Reverted towel removal'
+  - type: Remove
+    message: >-
+      Removed groin bodypart, it still has targeting for future use but acts
+      like torso for now.
+  - type: Remove
+    message: Removed gradient hair until it's rewritten.
+  - type: Remove
+    message: Removed glowing markings, go back to Ao3 :)
+  - type: Fix
+    message: Skinning monkeys now works properly with bodyparts.
+  id: 296
+  time: '2026-02-12T15:57:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/633

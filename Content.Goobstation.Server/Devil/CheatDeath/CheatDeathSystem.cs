@@ -7,7 +7,7 @@
 using Content.Goobstation.Common.DelayedDeath;
 using Content.Goobstation.Shared.CheatDeath;
 using Content.Goobstation.Shared.Devour.Events;
-using Content.Server._Shitmed.DelayedDeath;
+using Content.Medical.Shared.DelayedDeath;
 using Content.Server.Actions;
 using Content.Server.Jittering;
 using Content.Shared.Administration.Systems;

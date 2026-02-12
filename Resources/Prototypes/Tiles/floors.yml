@@ -1,5 +1,34 @@
 - type: tile
+  id: BaseStationTile
+  abstract: true
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  heatCapacity: 10000
+  tileRipResistance: 4500 # Goob
+  baseTurf: Plating
+  baseWhitelist:
+  - PlatingBrass
+  - FloorAsteroidIronsand
+  - FloorAsteroidSand
+  - FloorAsteroidSandBorderless
+  - FloorAsteroidIronsandBorderless
+  - FloorAsteroidSandRedBorderless
+  - PlatingAsteroid
+  - PlatingSnow
+  - FloorPlanetDirt
+  - FloorDesert
+  - FloorLowDesert
+  - FloorPlanetGrass
+  - FloorSnow
+  - FloorDirt
+  - PlatingRCD
+  - FloorHullReinforced
+
+- type: tile
   id: FloorSteel
+  parent: BaseStationTile
   name: tiles-steel-floor
   sprite: /Textures/_Trauma/Tiles/steel.png # Trauma
   variants: 4
@@ -8,17 +37,11 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemSteel
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorSteelCheckerLight
+  parent: BaseStationTile
   name: tiles-steel-floor-checker-light
   sprite: /Textures/_Trauma/Tiles/cafeteria.png # Trauma
   variants: 4
@@ -27,17 +50,11 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemSteelCheckerLight
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorSteelCheckerDark
+  parent: BaseStationTile
   name: tiles-steel-floor-checker-dark
   sprite: /Textures/_Trauma/Tiles/checker_dark.png # Trauma
   variants: 4
@@ -46,17 +63,11 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemSteelCheckerDark
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorSteelMini
+  parent: BaseStationTile
   name: tiles-steel-floor-mini
   sprite: /Textures/_Trauma/Tiles/steel_mini.png # Trauma
   variants: 4
@@ -65,17 +76,11 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemSteelMini
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorSteelPavement
+  parent: BaseStationTile
   name: tiles-steel-floor-pavement
   sprite: /Textures/_Trauma/Tiles/steel_pavement.png # Trauma
   variants: 4
@@ -84,17 +89,11 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemSteelPavement
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorSteelDiagonal
+  parent: BaseStationTile
   name: tiles-steel-floor-diagonal
   sprite: /Textures/_Trauma/Tiles/steel_diagonal.png # Trauma
   variants: 4
@@ -103,30 +102,18 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemSteelDiagonal
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorSteelOffset
+  parent: BaseStationTile
   name: tiles-steel-floor-offset
   sprite: /Textures/_Trauma/Tiles/steel_offset.png # Trauma
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemSteelOffset
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorSteelMono
+  parent: BaseStationTile
   name: tiles-steel-floor-mono
   sprite: /Textures/_Trauma/Tiles/steel_mono.png # Trauma
   variants: 4
@@ -135,17 +122,11 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepTile
   itemDrop: FloorTileItemSteelMono
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorSteelPavementVertical
+  parent: BaseStationTile
   name: tiles-steel-floor-pavement-vertical
   sprite: /Textures/_Trauma/Tiles/steel_pavement_vertical.png # Trauma
   variants: 4
@@ -154,17 +135,11 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepTile
   itemDrop: FloorTileItemSteelPavementVertical
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorSteelHerringbone
+  parent: BaseStationTile
   name: tiles-steel-floor-herringbone
   sprite: /Textures/_Trauma/Tiles/steel_herringbone.png # Trauma
   variants: 4
@@ -173,17 +148,11 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepTile
   itemDrop: FloorTileItemSteelHerringbone
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorSteelDiagonalMini
+  parent: BaseStationTile
   name: tiles-steel-floor-diagonal-mini
   sprite: /Textures/_Trauma/Tiles/steel_diagonal_mini.png # Trauma
   variants: 4
@@ -192,43 +161,29 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepTile
   itemDrop: FloorTileItemSteelDiagonalMini
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorBrassFilled
+  parent: BaseStationTile
   name: tiles-brass-floor-filled
   sprite: /Textures/Tiles/Misc/clockwork/clockwork_floor_filled.png
-  baseTurf: PlatingBrass
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemBrassFilled
-  heatCapacity: 10000
-  tileRipResistance: 220
 
 - type: tile
   id: FloorBrassReebe
+  parent: BaseStationTile
   name: tiles-brass-floor-reebe
   sprite: /Textures/Tiles/Misc/clockwork/reebe.png
-  baseTurf: PlatingBrass
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemBrassReebe
-  heatCapacity: 10000
-  tileRipResistance: 220
 
 - type: tile
   id: FloorPlastic
+  parent: BaseStationTile
   name: tiles-plastic-floor
   sprite: /Textures/_Trauma/Tiles/plastic.png # Trauma
   variants: 4
@@ -237,17 +192,12 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemSteel
-  heatCapacity: 10000
-  tileRipResistance: 80
+  tileRipResistance: 80 # Goob
 
 - type: tile
   id: FloorWood
+  parent: BaseStationTile
   name: tiles-wood
   sprite: /Textures/_Trauma/Tiles/wood.png # Trauma
   variants: 4
@@ -256,19 +206,16 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
   itemDrop: FloorTileItemWood
-  heatCapacity: 10000
-  tileRipResistance: 80
+  tileRipResistance: 80 # Goob
 
 - type: tile
   id: FloorWhite
+  parent: BaseStationTile
   name: tiles-white-floor
   sprite: /Textures/_Trauma/Tiles/white.png # Trauma
   variants: 4
@@ -277,17 +224,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhite
-  heatCapacity: 10000
-  tileRipResistance: 80
+  tileRipResistance: 80 # Goob
 
 - type: tile
   id: FloorWhiteMini
+  parent: BaseStationTile
   name: tiles-white-floor-mini
   sprite: /Textures/_Trauma/Tiles/white_mini.png # Trauma
   variants: 4
@@ -296,17 +240,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhiteMini
-  heatCapacity: 10000
-  tileRipResistance: 80
+  tileRipResistance: 80 # Goob
 
 - type: tile
   id: FloorWhitePavement
+  parent: BaseStationTile
   name: tiles-white-floor-pavement
   sprite: /Textures/_Trauma/Tiles/white_pavement.png # Trauma
   variants: 4
@@ -315,17 +256,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhitePavement
-  heatCapacity: 10000
-  tileRipResistance: 80
+  tileRipResistance: 80 # Goob
 
 - type: tile
   id: FloorWhiteDiagonal
+  parent: BaseStationTile
   name: tiles-white-floor-diagonal
   sprite: /Textures/_Trauma/Tiles/white_diagonal.png # Trauma
   variants: 4
@@ -334,30 +272,24 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhiteDiagonal
-  heatCapacity: 10000
-  tileRipResistance: 80
+  tileRipResistance: 80 # Goob
 
 - type: tile
   id: FloorWhiteOffset
+  parent: BaseStationTile
   name: tiles-white-floor-offset
   sprite: /Textures/_Trauma/Tiles/white_offset.png # Trauma
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhiteOffset
-  heatCapacity: 10000
-  tileRipResistance: 80
+  tileRipResistance: 80 # Goob
 
 - type: tile
   id: FloorWhiteMono
+  parent: BaseStationTile
   name: tiles-white-floor-mono
   sprite: /Textures/_Trauma/Tiles/white_mono.png # Trauma
   variants: 4
@@ -366,17 +298,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhiteMono
-  heatCapacity: 10000
-  tileRipResistance: 80
+  tileRipResistance: 80 # Goob
 
 - type: tile
   id: FloorWhitePavementVertical
+  parent: BaseStationTile
   name: tiles-white-floor-pavement-vertical
   sprite: /Textures/_Trauma/Tiles/white_pavement_vertical.png # Trauma
   variants: 4
@@ -385,17 +314,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhitePavementVertical
-  heatCapacity: 10000
-  tileRipResistance: 80
+  tileRipResistance: 80 # Goob
 
 - type: tile
   id: FloorWhiteHerringbone
+  parent: BaseStationTile
   name: tiles-white-floor-herringbone
   sprite: /Textures/_Trauma/Tiles/white_herringbone.png # Trauma
   variants: 4
@@ -404,17 +330,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhiteHerringbone
-  heatCapacity: 10000
-  tileRipResistance: 80
+  tileRipResistance: 80 # Goob
 
 - type: tile
   id: FloorWhiteDiagonalMini
+  parent: BaseStationTile
   name: tiles-white-floor-diagonal-mini
   sprite: /Textures/_Trauma/Tiles/white_diagonal_mini.png # Trauma
   variants: 4
@@ -423,17 +346,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhiteDiagonalMini
-  heatCapacity: 10000
-  tileRipResistance: 80
+  tileRipResistance: 80 # Goob
 
 - type: tile
   id: FloorWhitePlastic
+  parent: BaseStationTile
   name: tiles-plastic-white-floor
   sprite: /Textures/_Trauma/Tiles/white_plastic.png # Trauma
   variants: 4
@@ -442,17 +362,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemWhite
-  heatCapacity: 10000
-  tileRipResistance: 80
+  tileRipResistance: 80 # Goob
 
 - type: tile
   id: FloorDark
+  parent: BaseStationTile
   name: tiles-dark-floor
   sprite: /Textures/_Trauma/Tiles/dark.png # Trauma
   variants: 4
@@ -461,17 +378,13 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDark
-  heatCapacity: 10000
-  tileRipResistance: 100
-
+  tileRipResistance: 100 # Goob
 - type: tile
   id: FloorDarkMini
+  parent: BaseStationTile
   name: tiles-dark-floor-mini
   sprite: /Textures/_Trauma/Tiles/dark_mini.png # Trauma
   variants: 4
@@ -480,17 +393,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkMini
-  heatCapacity: 10000
-  tileRipResistance: 100
+  tileRipResistance: 100 # Goob
 
 - type: tile
   id: FloorDarkPavement
+  parent: BaseStationTile
   name: tiles-dark-floor-pavement
   sprite: /Textures/_Trauma/Tiles/dark_pavement.png # Trauma
   variants: 4
@@ -499,17 +409,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkPavement
-  heatCapacity: 10000
-  tileRipResistance: 100
+  tileRipResistance: 100 # Goob
 
 - type: tile
   id: FloorDarkDiagonal
+  parent: BaseStationTile
   name: tiles-dark-floor-diagonal
   sprite: /Textures/_Trauma/Tiles/dark_diagonal.png # Trauma
   variants: 4
@@ -518,30 +425,24 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkDiagonal
-  heatCapacity: 10000
-  tileRipResistance: 100
+  tileRipResistance: 100 # Goob
 
 - type: tile
   id: FloorDarkOffset
+  parent: BaseStationTile
   name: tiles-dark-floor-offset
   sprite: /Textures/Tiles/dark_offset.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkOffset
-  heatCapacity: 10000
-  tileRipResistance: 100
+  tileRipResistance: 100 # Goob
 
 - type: tile
   id: FloorDarkMono
+  parent: BaseStationTile
   name: tiles-dark-floor-mono
   sprite: /Textures/_Trauma/Tiles/dark_mono.png # Trauma
   variants: 4
@@ -550,17 +451,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkMono
-  heatCapacity: 10000
-  tileRipResistance: 100
+  tileRipResistance: 100 # Goob
 
 - type: tile
   id: FloorDarkPavementVertical
+  parent: BaseStationTile
   name: tiles-dark-floor-pavement-vertical
   sprite: /Textures/_Trauma/Tiles/dark_pavement_vertical.png # Trauma
   variants: 4
@@ -569,17 +467,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkPavementVertical
-  heatCapacity: 10000
-  tileRipResistance: 100
+  tileRipResistance: 100 # Goob
 
 - type: tile
   id: FloorDarkHerringbone
+  parent: BaseStationTile
   name: tiles-dark-floor-herringbone
   sprite: /Textures/_Trauma/Tiles/dark_herringbone.png # Trauma
   variants: 4
@@ -588,17 +483,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkHerringbone
-  heatCapacity: 10000
-  tileRipResistance: 100
+  tileRipResistance: 100 # Goob
 
 - type: tile
   id: FloorDarkDiagonalMini
+  parent: BaseStationTile
   name: tiles-dark-floor-diagonal-mini
   sprite: /Textures/_Trauma/Tiles/dark_diagonal_mini.png # Trauma
   variants: 4
@@ -607,17 +499,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDarkDiagonalMini
-  heatCapacity: 10000
-  tileRipResistance: 100
+  tileRipResistance: 100 # Goob
 
 - type: tile
   id: FloorDarkPlastic
+  parent: BaseStationTile
   name: tiles-plastic-dark-floor
   sprite: /Textures/_Trauma/Tiles/dark_plastic.png # Trauma
   variants: 4
@@ -626,147 +515,117 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemDark
-  heatCapacity: 10000
-  tileRipResistance: 50
+  tileRipResistance: 50 # Goob
 
 - type: tile
   id: FloorTechMaint
+  parent: BaseStationTile
   name: tiles-techmaint-floor
   sprite: /Textures/_Trauma/Tiles/tech_maint.png # Trauma
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemTechmaint
-  heatCapacity: 10000
-  tileRipResistance: 250
+  tileRipResistance: 250 # Goob
 
 - type: tile
   id: FloorTechMaintDark
+  parent: BaseStationTile
   name: tiles-techmaint-floor-dark
   sprite: /Textures/_Trauma/Tiles/tech_maint_dark.png # Trauma
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemTechmaintDark
-  heatCapacity: 10000
-  tileRipResistance: 250
+  tileRipResistance: 250 # Goob
 
 - type: tile
   id: FloorReinforced
+  parent: BaseStationTile
   name: tiles-reinforced-floor
   sprite: /Textures/_Trauma/Tiles/reinforced.png # Trauma
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: PartRodMetal1
-  heatCapacity: 10000
-  reinforced: true
+  reinforced: true # Goob
 
 - type: tile
   id: FloorMono
+  parent: BaseStationTile
   name: tiles-mono-floor
   sprite: /Textures/Tiles/mono.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemMono
-  heatCapacity: 10000
-  tileRipResistance: 100
+  tileRipResistance: 100 # Goob
 
 - type: tile
   id: FloorLino
+  parent: BaseStationTile
   name: tiles-linoleum-floor
   sprite: /Textures/Tiles/lino.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemLino
-  heatCapacity: 10000
-  tileRipResistance: 100
+  tileRipResistance: 100 # Goob
 
 - type: tile
   id: FloorSteelDirty
+  parent: BaseStationTile
   name: tiles-dirty-steel-floor
   sprite: /Textures/Tiles/steel_dirty.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
+  #variants: 4 # Trauma - no
+  ##placementVariants:
+  #- 1.0
+  #- 1.0
+  #- 1.0
+  #- 1.0
   footstepSounds:
     collection: FootstepPlating
   itemDrop: FloorTileItemDirty
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorElevatorShaft
+  parent: BaseStationTile
   name: tiles-elevator-shaft
   sprite: /Textures/Tiles/elevator_shaft.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemElevatorShaft
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorMetalDiamond
+  parent: BaseStationTile
   name: tiles-diamond-plate-floor
   sprite: /Textures/Tiles/metaldiamond.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemMetalDiamond
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorRockVault
+  parent: BaseStationTile
   name: tiles-rock-floor
   sprite: /Textures/Tiles/rock_vault.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepAsteroid
   itemDrop: FloorTileItemRockVault
-  heatCapacity: 10000
-  tileRipResistance:  400
+  tileRipResistance: 400 # Goob
 
 - type: tile
   id: FloorBlue
+  parent: BaseStationTile
   name: tiles-blue-tile
   sprite: /Textures/Tiles/blue.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemBlue
-  heatCapacity: 10000
-  tileRipResistance: 50
+  tileRipResistance: 50 # Goob
 
 - type: tile
   id: FloorSteelLime
+  parent: BaseStationTile
   name: tiles-lime-floor
   sprite: /Textures/Tiles/lime.png
   variants: 4
@@ -775,96 +634,68 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemLime
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorMining
+  parent: BaseStationTile
   name: tiles-mining-tile
   sprite: /Textures/Tiles/mining_floor.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemMining
-  heatCapacity: 10000
-  tileRipResistance: 250
+  tileRipResistance: 250 # Goob
 
 - type: tile
   id: FloorMiningDark
+  parent: BaseStationTile
   name: tiles-mining-dark-tile
   sprite: /Textures/Tiles/mining_floor_dark.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemMiningDark
-  heatCapacity: 10000
-  tileRipResistance: 250
+  tileRipResistance: 250 # Goob
 
 - type: tile
   id: FloorMiningLight
+  parent: BaseStationTile
   name: tiles-mining-light-tile
   sprite: /Textures/Tiles/mining_floor_light.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemMiningLight
-  heatCapacity: 10000
-  tileRipResistance: 250
+  tileRipResistance: 250 # Goob
 
 # Departmental
 - type: tile
   id: FloorFreezer
+  parent: BaseStationTile
   name: tiles-freezer
   sprite: /Textures/Tiles/freezer.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemFreezer
-  heatCapacity: 10000
-  tileRipResistance: 100
+  tileRipResistance: 100 # Goob
 
 - type: tile
   id: FloorShowroom
+  parent: BaseStationTile
   name: tiles-showroom-floor
   sprite: /Textures/Tiles/showroom.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemShowroom
-  heatCapacity: 10000
-  tileRipResistance: 100
+  tileRipResistance: 100 # Goob
 
 - type: tile
   id: FloorHydro
+  parent: BaseStationTile
   name: tiles-hydro-floor
   sprite: /Textures/Tiles/hydro.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemHydro
-  heatCapacity: 10000
-  tileRipResistance: 50
+  tileRipResistance: 50 # Goob
 
 - type: tile
   id: FloorBar
+  parent: BaseStationTile
   name: tiles-bar-floor
   sprite: /Textures/_Trauma/Tiles/bar.png # Trauma
   variants: 4
@@ -873,69 +704,48 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemBar
-  heatCapacity: 10000
-  tileRipResistance: 100
+  tileRipResistance: 100 # Goob
 
 - type: tile
   id: FloorClown
+  parent: BaseStationTile
   name: tiles-clown-floor
   sprite: /Textures/Tiles/clown.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemClown
-  heatCapacity: 10000
-  tileRipResistance: 50
+  tileRipResistance: 50 # Goob
 
 - type: tile
   id: FloorMime
+  parent: BaseStationTile
   name: tiles-mime-floor
   sprite: /Textures/_Trauma/Tiles/mime.png # Trauma
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemMime
-  heatCapacity: 10000
-  tileRipResistance: 50
+  tileRipResistance: 50 # Goob
 
 - type: tile
   id: FloorKitchen
+  parent: BaseStationTile
   name: tiles-kitchen-floor
   sprite: /Textures/Tiles/kitchen.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemKitchen
-  heatCapacity: 10000
-  tileRipResistance: 50
+  tileRipResistance: 50 # Goob
 
 - type: tile
   id: FloorLaundry
+  parent: BaseStationTile
   name: tiles-laundry-floor
   sprite: /Textures/Tiles/laundry.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemLaundry
-  heatCapacity: 10000
-  tileRipResistance: 50
+  tileRipResistance: 50 # Goob
 
 - type: tile
   id: FloorSteelDamaged
+  parent: BaseStationTile
   name: tiles-steel-floor
   sprite: /Textures/_Trauma/Tiles/steel_damaged.png # Trauma
   variants: 5
@@ -945,35 +755,13 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemSteel #This should probably be made null when it becomes possible to make it such, in SS13 prying destroyed tiles wouldn't give you anything.
-  heatCapacity: 10000
-  tileRipResistance: 175
-
-- type: tile
-  id: FloorSteelBurnt
-  name: tiles-steel-floor
-  sprite: /Textures/_Trauma/Tiles/steel_burnt.png # Trauma
-  variants: 2
-  placementVariants:
-  - 1.0
-  - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
-  heatCapacity: 10000
-  tileRipResistance: 175
+  tileRipResistance: 175 # Goob
 
 # Concrete
 - type: tile
   id: FloorConcrete
+  parent: BaseStationTile
   name: tiles-concrete-tile
   sprite: /Textures/Tiles/Planet/Concrete/concrete.png
   variants: 4
@@ -982,18 +770,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemConcrete
-  heatCapacity: 10000
-  weather: true
-  tileRipResistance: 300
+  tileRipResistance: 300 # Goob
 
 - type: tile
   id: FloorConcreteMono
+  parent: BaseStationTile
   name: tiles-concrete-slab
   sprite: /Textures/Tiles/Planet/Concrete/concrete_mono.png
   variants: 4
@@ -1002,18 +786,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemConcreteMono
-  heatCapacity: 10000
-  weather: true
-  tileRipResistance: 300
+  tileRipResistance: 300 # Goob
 
 - type: tile
   id: FloorConcreteSmooth
+  parent: BaseStationTile
   name: tiles-concrete-smooth
   sprite: /Textures/Tiles/Planet/Concrete/concrete_smooth.png
   variants: 4
@@ -1022,18 +802,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemConcreteSmooth
-  heatCapacity: 10000
-  weather: true
-  tileRipResistance: 300
+  tileRipResistance: 300 # Goob
 
 - type: tile
   id: FloorGrayConcrete
+  parent: BaseStationTile
   name: tiles-gray-concrete-tile
   sprite: /Textures/Tiles/Planet/Concrete/grayconcrete.png
   variants: 4
@@ -1042,18 +818,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemGrayConcrete
-  heatCapacity: 10000
-  weather: true
-  tileRipResistance: 300
+  tileRipResistance: 300 # Goob
 
 - type: tile
   id: FloorGrayConcreteMono
+  parent: BaseStationTile
   name: tiles-gray-concrete-slab
   sprite: /Textures/Tiles/Planet/Concrete/grayconcrete_mono.png
   variants: 4
@@ -1062,18 +834,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemGrayConcreteMono
-  heatCapacity: 10000
-  weather: true
-  tileRipResistance: 300
+  tileRipResistance: 300 # Goob
 
 - type: tile
   id: FloorGrayConcreteSmooth
+  parent: BaseStationTile
   name: tiles-gray-concrete-smooth
   sprite: /Textures/Tiles/Planet/Concrete/grayconcrete_smooth.png
   variants: 4
@@ -1082,18 +850,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemGrayConcreteSmooth
-  heatCapacity: 10000
-  weather: true
-  tileRipResistance: 300
+  tileRipResistance: 300 # Goob
 
 - type: tile
   id: FloorOldConcrete
+  parent: BaseStationTile
   name: tiles-old-concrete-tile
   sprite: /Textures/Tiles/Planet/Concrete/oldconcrete.png
   variants: 4
@@ -1102,18 +866,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemOldConcrete
-  heatCapacity: 10000
-  weather: true
-  tileRipResistance: 300
+  tileRipResistance: 300 # Goob
 
 - type: tile
   id: FloorOldConcreteMono
+  parent: BaseStationTile
   name: tiles-old-concrete-slab
   sprite: /Textures/Tiles/Planet/Concrete/oldconcrete_mono.png
   variants: 4
@@ -1122,18 +882,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemOldConcreteMono
-  heatCapacity: 10000
-  weather: true
-  tileRipResistance: 300
+  tileRipResistance: 300 # Goob
 
 - type: tile
   id: FloorOldConcreteSmooth
+  parent: BaseStationTile
   name: tiles-old-concrete-smooth
   sprite: /Textures/Tiles/Planet/Concrete/oldconcrete_smooth.png
   variants: 4
@@ -1142,115 +898,93 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemOldConcreteSmooth
-  heatCapacity: 10000
-  weather: true
-  tileRipResistance: 300
+  tileRipResistance: 300 # Goob
 
 # Carpets (non smoothing)
 - type: tile
   id: FloorArcadeBlue
+  parent: BaseStationTile
   name: tiles-blue-arcade-floor
   sprite: /Textures/Tiles/arcadeblue.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   friction: 1.25
   itemDrop: FloorTileItemArcadeBlue
-  heatCapacity: 10000
-  tileRipResistance: 75
+  tileRipResistance: 75 # Goob
 
 - type: tile
   id: FloorArcadeBlue2
+  parent: BaseStationTile
   name: tiles-blue-arcade-floor
   sprite: /Textures/Tiles/arcadeblue2.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   friction: 1.25
   itemDrop: FloorTileItemArcadeBlue2
-  heatCapacity: 10000
-  tileRipResistance: 75
+  tileRipResistance: 75 # Goob
 
 - type: tile
   id: FloorArcadeRed
+  parent: BaseStationTile
   name: tiles-red-arcade-floor
   sprite: /Textures/Tiles/arcadered.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   friction: 1.25
   itemDrop: FloorTileItemArcadeRed
-  heatCapacity: 10000
-  tileRipResistance: 75
+  tileRipResistance: 75 # Goob
 
 - type: tile
   id: FloorEighties
+  parent: BaseStationTile
   name: tiles-eighties-floor
   sprite: /Textures/Tiles/eighties.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   friction: 1.25
   itemDrop: FloorTileItemEighties
-  heatCapacity: 10000
-  tileRipResistance: 75
+  tileRipResistance: 75 # Goob
 
 - type: tile
   id: FloorCarpetClown
+  parent: BaseStationTile
   name: tiles-clown-carpet-floor
   sprite: /Textures/Tiles/carpetclown.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   friction: 1.25
   itemDrop: FloorTileItemCarpetClown
-  heatCapacity: 10000
-  tileRipResistance: 75
+  tileRipResistance: 75 # Goob
 
 - type: tile
   id: FloorCarpetOffice
+  parent: BaseStationTile
   name: tiles-office-carpet-floor
   sprite: /Textures/Tiles/carpetoffice.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   friction: 1.25
   itemDrop: FloorTileItemCarpetOffice
-  heatCapacity: 10000
-  tileRipResistance: 75
+  tileRipResistance: 75 # Goob
 
 - type: tile
   id: FloorBoxing
+  parent: BaseStationTile
   name: tiles-boxing-ring-floor
   sprite: /Textures/Tiles/boxing.png
   variants: 4
@@ -1259,18 +993,13 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   friction: 1.25
   itemDrop: FloorTileItemBoxing
-  heatCapacity: 10000
-  tileRipResistance: 50
+  tileRipResistance: 50 # Goob
 
 - type: tile
   id: FloorGym
+  parent: BaseStationTile
   name: tiles-gym-floor
   sprite: /Textures/Tiles/gym.png
   variants: 4
@@ -1279,19 +1008,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   friction: 1.25
   itemDrop: FloorTileItemGym
-  heatCapacity: 10000
-  tileRipResistance: 50
+  tileRipResistance: 50 # Goob
 
 # Shuttle
 - type: tile
   id: FloorShuttleWhite
+  parent: BaseStationTile
   name: tiles-white-shuttle-floor
   sprite: /Textures/Tiles/shuttlewhite.png
   variants: 4
@@ -1300,43 +1024,37 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemShuttleWhite
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorShuttleGrey
+  parent: BaseStationTile
   name: tiles-grey-shuttle-floor
   sprite: /Textures/Tiles/shuttlegrey.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  #variants: 4 # Trauma - no
+  #placementVariants:
+  #- 1.0
+  #- 1.0
+  #- 1.0
+  #- 1.0
   itemDrop: FloorTileItemShuttleGrey
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorShuttleBlack
+  parent: BaseStationTile
   name: tiles-black-shuttle-floor
   sprite: /Textures/Tiles/shuttleblack.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  #variants: 4 # Trauma - no
+  #placementVariants:
+  #- 1.0
+  #- 1.0
+  #- 1.0
+  #- 1.0
   itemDrop: FloorTileItemShuttleBlack
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorShuttleBlue
+  parent: BaseStationTile
   name: tiles-blue-shuttle-floor
   sprite: /Textures/Tiles/shuttleblue.png
   variants: 4
@@ -1345,17 +1063,11 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemShuttleBlue
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorShuttleOrange
+  parent: BaseStationTile
   name: tiles-orange-shuttle-floor
   sprite: /Textures/Tiles/shuttleorange.png
   variants: 4
@@ -1364,71 +1076,59 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemShuttleOrange
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorShuttlePurple
+  parent: BaseStationTile
   name: tiles-purple-shuttle-floor
   sprite: /Textures/Tiles/shuttlepurple.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  #variants: 4 # Trauma - no
+  #placementVariants:
+  #- 1.0
+  #- 1.0
+  #- 1.0
+  #- 1.0
   itemDrop: FloorTileItemShuttlePurple
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 - type: tile
   id: FloorShuttleRed
+  parent: BaseStationTile
   name: tiles-red-shuttle-floor
   sprite: /Textures/Tiles/shuttlered.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
+  #variants: 4 # Trauma - no
+  #placementVariants:
+  #- 1.0
+  #- 1.0
+  #- 1.0
+  #- 1.0
   itemDrop: FloorTileItemShuttleRed
-  heatCapacity: 10000
-  tileRipResistance: 4500
 
 
 # Materials
 - type: tile
   id: FloorGold
+  parent: BaseStationTile
   name: tiles-gold-tile
   sprite: /Textures/Tiles/gold.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemGold
-  heatCapacity: 10000
-  tileRipResistance: 600
+  tileRipResistance: 600 # Goob
 
 - type: tile
   id: FloorSilver
+  parent: BaseStationTile
   name: tiles-silver-tile
   sprite: /Textures/Tiles/silver.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemSilver
-  heatCapacity: 10000
-  tileRipResistance: 500
+  tileRipResistance: 500 # Goob
 
 - type: tile
   id: FloorGlass
+  parent: BaseStationTile
   name: tiles-glass-floor
   sprite: /Textures/Tiles/glass.png
   variants: 4
@@ -1437,17 +1137,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: SheetGlass1
-  heatCapacity: 10000
-  tileRipResistance: 150
+  tileRipResistance: 150 # Goob
 
 - type: tile
   id: FloorRGlass
+  parent: BaseStationTile
   name: tiles-reinforced-glass-floor
   sprite: /Textures/Tiles/rglass.png
   variants: 4
@@ -1456,68 +1153,52 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: SheetRGlass1
-  heatCapacity: 10000
-  tileRipResistance: 175
+  tileRipResistance: 175 # Goob
 
 - type: tile
   id: FloorMetalFoam
+  parent: BaseStationTile
   name: tiles-metal-foam
   sprite: /Textures/Tiles/foammetal.png
   variants: 1
   placementVariants:
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: SheetSteel1
-  heatCapacity: 10000
 
 # Circuits
 - type: tile
   id: FloorGreenCircuit
+  parent: BaseStationTile
   name: tiles-green-circuit-floor
   sprite: /Textures/Tiles/green_circuit.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemGCircuit
-  heatCapacity: 10000
-  tileRipResistance: 225
+  tileRipResistance: 225 # Goob
 
 - type: tile
   id: FloorBlueCircuit
+  parent: BaseStationTile
   name: tiles-blue-circuit-floor
   sprite: /Textures/Tiles/blue_circuit.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemBCircuit
-  heatCapacity: 10000
-  tileRipResistance: 225
+  tileRipResistance: 225 # Goob
 
 - type: tile
   id: FloorRedCircuit
+  parent: BaseStationTile
   name: tiles-red-circuit-floor
   sprite: /Textures/Tiles/red_circuit.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemRCircuit
-  heatCapacity: 10000
 
 # Terrain
 - type: tile
@@ -1626,19 +1307,19 @@
   sprite: /Textures/Tiles/Asteroid/asteroid.png
   variants: 13
   placementVariants:
-  - 0.8
-  - 0.0166 #Should be roughly 20%.... I think??? I don't know dude, I'm just a YAML monkey.
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0166
-  - 0.0116
-  - 0.0116
+    - 0.8
+    - 0.0166 #Should be roughly 20%.... I think??? I don't know dude, I'm just a YAML monkey.
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0166
+    - 0.0116
+    - 0.0116
   baseTurf: Space
   isSubfloor: true
   footstepSounds:
@@ -1877,6 +1558,7 @@
 
 - type: tile
   id: FloorFlesh
+  parent: BaseStationTile
   name: tiles-flesh-floor
   sprite: /Textures/Tiles/meat.png
   variants: 4
@@ -1885,31 +1567,25 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepBlood
   itemDrop: FloorTileItemFlesh
-  #friction: 0.25 #slippy Goob station change, no longer slippery
-  heatCapacity: 10000
-  tileRipResistance: 80
+  #friction: 0.25 # Goob - not slippy
+  tileRipResistance: 80 # Goob
 
 - type: tile
   id: FloorTechMaint2
+  parent: BaseStationTile
   name: tiles-techmaint2-floor
   sprite: /Textures/_Trauma/Tiles/steel_maint.png # Trauma
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemSteelMaint
-  heatCapacity: 10000
-  tileRipResistance: 225
+  tileRipResistance: 225 # Goob
 
 - type: tile
   id: FloorTechMaint3
+  parent: BaseStationTile
   name: tiles-techmaint3-floor
   sprite: /Textures/Tiles/grating_maint.png
   variants: 4
@@ -1918,17 +1594,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemGratingMaint
-  heatCapacity: 10000
-  tileRipResistance: 225
+  tileRipResistance: 225 # Goob
 
 - type: tile
   id: FloorWoodTile
+  parent: BaseStationTile
   name: tiles-wood2
   sprite: /Textures/_Trauma/Tiles/wood_tile.png # Trauma
   variants: 4
@@ -1937,19 +1610,16 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
   itemDrop: FloorTileItemWoodPattern
-  heatCapacity: 10000
-  tileRipResistance: 75
+  tileRipResistance: 75 # Goob
 
 - type: tile
   id: FloorBrokenWood
+  parent: BaseStationTile
   name: tiles-wood3
   sprite: /Textures/_Trauma/Tiles/wood_broken.png # Trauma
   variants: 7
@@ -1961,31 +1631,24 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
   itemDrop: MaterialWoodPlank1
-  heatCapacity: 10000
-  tileRipResistance: 60
+  tileRipResistance: 60 # Goob
 
 - type: tile
   id: FloorWebTile
+  parent: BaseStationTile
   name: tiles-web
   sprite: /Textures/Tiles/Misc/Web/web_tile.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
   itemDrop: FloorTileItemWeb
-  heatCapacity: 10000
-  tileRipResistance: 30
+  tileRipResistance: 30 # Goob
 
 - type: tile
   id: FloorChromite
@@ -2009,38 +1672,19 @@
 #Hull tiles
 - type: tile
   id: FloorHull
+  parent: BaseStationTile
   name: tiles-hull
   sprite: /Textures/Tiles/hull.png
-  baseTurf: Plating
-  isSubfloor: false
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemSteel #probably should not be normally obtainable, but the game shits itself and dies when you try to put null here
-  heatCapacity: 10000
-  tileRipResistance: 500
-
-- type: tile
-  id: FloorHullReinforced
-  name: tiles-hull-reinforced
-  sprite: /Textures/Tiles/hull_reinforced.png
-  #goobstation start
-  baseTurf: Lattice
-  isSubfloor: true
-  friction: 1.5 #same as normal plating
-  #goobstation end
-  footstepSounds:
-    collection: FootstepHull
-  itemDrop: FloorTileItemSteel
-  heatCapacity: 100000 #/tg/ has this set as "INFINITY." I don't know if that exists here so I've just added an extra 0
-  indestructible: true
-  reinforced: true
+  tileRipResistance: 500 # Goob
 
 - type: tile
   id: FloorReinforcedHardened
+  parent: BaseStationTile
   name: tiles-super-reinforced-floor
   sprite: /Textures/Tiles/super_reinforced.png
-  baseTurf: Plating
-  isSubfloor: false
   footstepSounds:
     collection: FootstepHull
   itemDrop: PartRodMetal1 #same case as FloorHull
@@ -2050,6 +1694,7 @@
 # Grass
 - type: tile
   id: FloorAstroGrass
+  parent: BaseStationTile
   name: tiles-astro-grass
   sprite: /Textures/Tiles/Planet/Grass/grass.png
   variants: 4
@@ -2068,20 +1713,16 @@
     East: /Textures/Tiles/Planet/Grass/double_edge.png
     North: /Textures/Tiles/Planet/Grass/double_edge.png
     West: /Textures/Tiles/Planet/Grass/double_edge.png
-  baseTurf: Plating
-  isSubfloor: false
   deconstructTools: [ Cutting ]
   footstepSounds:
     collection: FootstepGrass
   itemDrop: FloorTileItemAstroGrass
-  heatCapacity: 10000
-  tileRipResistance: 50
+  tileRipResistance: 50 # Goob
 
 - type: tile
   id: FloorMowedAstroGrass
+  parent: [ BaseStationTile, FloorGrass ]
   name: tiles-mowed-astro-grass
-  parent: FloorGrass
-  baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Cutting ]
   itemDrop: FloorTileItemMowedAstroGrass
@@ -2089,9 +1730,8 @@
 
 - type: tile
   id: FloorJungleAstroGrass
+  parent: [ BaseStationTile, FloorGrassJungle ]
   name: tiles-jungle-astro-grass
-  parent: FloorGrassJungle
-  baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Cutting ]
   itemDrop: FloorTileItemJungleAstroGrass
@@ -2118,13 +1758,10 @@
 # Ice
 - type: tile
   id: FloorAstroIce
+  parent: BaseStationTile
   name: tiles-astro-ice
   sprite: /Textures/Tiles/Planet/Snow/ice.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   friction: 0.05
-  heatCapacity: 10000
   mobFriction: 0.05
   mobAcceleration: 0.1
   itemDrop: FloorTileItemAstroIce
@@ -2132,9 +1769,8 @@
 
 - type: tile
   id: FloorAstroSnow
+  parent: [ BaseStationTile, FloorSnow ]
   name: tiles-astro-snow
-  parent: FloorSnow
-  baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
   itemDrop: FloorTileItemAstroSnow
@@ -2143,9 +1779,8 @@
 # Asteroid Sand
 - type: tile
   id: FloorAstroAsteroidSand
+  parent: [ BaseStationTile, FloorAsteroidSand ]
   name: tiles-astro-asteroid-sand
-  parent: FloorAsteroidSand
-  baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
   itemDrop: FloorTileItemAstroAsteroidSand
@@ -2153,9 +1788,8 @@
 
 - type: tile
   id: FloorAstroAsteroidSandBorderless
+  parent: [ BaseStationTile, FloorAsteroidSandBorderless ]
   name: tiles-astro-asteroid-sand-borderless
-  parent: FloorAsteroidSandBorderless
-  baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
   itemDrop: FloorTileItemAstroAsteroidSand
@@ -2173,6 +1807,7 @@
 
 - type: tile
   id: FloorWoodLarge
+  parent: BaseStationTile
   name: tiles-wood-large
   sprite: /Textures/_Trauma/Tiles/wood_large.png # Trauma
   variants: 4
@@ -2181,15 +1816,11 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
   itemDrop: FloorTileItemWoodLarge
-  heatCapacity: 10000
   tileRipResistance: 100 # Goob
 
 - type: tile
@@ -2206,44 +1837,36 @@
 
 - type: tile
   id: FloorXeno
+  parent: BaseStationTile
   name: tiles-xeno-floor
   sprite: /Textures/Tiles/xeno_flooring.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepBlood
   itemDrop: FloorTileItemXeno
-  heatCapacity: 10000
 
 - type: tile
   id: FloorXenoSteel
+  parent: BaseStationTile
   name: tiles-xeno-steel
   sprite: /Textures/Tiles/xeno_steel.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemXenoSteel
-  heatCapacity: 10000
   allowRotationMirror: true
 
 - type: tile
   id: FloorXenoSteelCorner
+  parent: BaseStationTile
   name: tiles-xeno-steel-corner
   sprite: /Textures/Tiles/xeno_steel_corner.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   itemDrop: FloorTileItemXenoSteelCorner
-  heatCapacity: 10000
   allowRotationMirror: true
 
 - type: tile
   id: FloorDarkSquiggly
+  parent: BaseStationTile
   name: tiles-dark-squiggly
   sprite: /Textures/Tiles/dark_squiggly.png
   variants: 4
@@ -2252,29 +1875,21 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
   itemDrop: FloorTileItemDarkSquiggly
-  heatCapacity: 10000
   allowRotationMirror: true
 
 - type: tile
   id: FloorXenoMaint
+  parent: BaseStationTile
   name: tiles-xeno-maint
   sprite: /Textures/Tiles/xeno_maint.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemXenoMaint
-  heatCapacity: 10000
 
 - type: tile
   id: FloorWhiteMarble
+  parent: BaseStationTile
   name: tiles-white-marble
   sprite: /Textures/Tiles/white_marble.png
   variants: 8
@@ -2287,17 +1902,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   friction: 0.8
   itemDrop: FloorTileItemWhiteMarble
-  heatCapacity: 10000
 
 - type: tile
   id: FloorDarkMarble
+  parent: BaseStationTile
   name: tiles-dark-marble
   sprite: /Textures/Tiles/dark_marble.png
   variants: 8
@@ -2310,17 +1922,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   friction: 0.8
   itemDrop: FloorTileItemDarkMarble
-  heatCapacity: 10000
 
 - type: tile
   id: FloorPlasmaMarble
+  parent: BaseStationTile
   name: tiles-plasma-marble
   sprite: /Textures/Tiles/plasmarble.png
   variants: 8
@@ -2333,17 +1942,14 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   friction: 0.8
   itemDrop: FloorTileItemPlasmaMarble
-  heatCapacity: 10000
 
 - type: tile
   id: FloorUraniumMarble
+  parent: BaseStationTile
   name: tiles-uranium-marble
   sprite: /Textures/Tiles/uranium_marble.png
   variants: 8
@@ -2356,11 +1962,7 @@
   - 1.0
   - 1.0
   - 1.0
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
   friction: 0.8
   itemDrop: FloorTileItemUraniumMarble
-  heatCapacity: 10000

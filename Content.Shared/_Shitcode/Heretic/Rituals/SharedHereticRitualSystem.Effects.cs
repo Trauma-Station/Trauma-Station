@@ -1,4 +1,3 @@
-using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Heretic;
 using Content.Shared.Mind;
 using Content.Shared.Stacks;
@@ -99,7 +98,7 @@ public abstract partial class SharedHereticRitualSystem
         if (!TryGetValue(args.Ritual, Performer, out EntityUid performer))
             return;
 
-        var ghoul = _compFact.GetComponent<GhoulComponent>();
+        var ghoul = Factory.GetComponent<GhoulComponent>();
         ghoul.TotalHealth = args.Effect.Health;
         ghoul.GiveBlade = args.Effect.GiveBlade;
         ghoul.CanDeconvert = args.Effect.CanDeconvert;

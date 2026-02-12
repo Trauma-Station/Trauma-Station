@@ -2,12 +2,12 @@
 - type: entityEffect
   id: InstallHypoport
   effects:
-  - !type:RelayBodyParts
-    partType: Head
+  - !type:RelayOrgan
+    category: Head
     guidebookText: entity-effect-guidebook-install-hypoport
     effects:
     - !type:AddOrganSlot
-      slot: hypoport
+      category: Hypoport
     - !type:InsertNewOrgan
       organ: Hypoport
 
@@ -15,12 +15,12 @@
 - type: entityEffect
   id: InstallHypoportNukie
   effects:
-  - !type:RelayBodyParts
-    partType: Head
+  - !type:RelayOrgan
+    category: Head
     guidebookText: entity-effect-guidebook-install-hypoport
     effects:
     - !type:AddOrganSlot
-      slot: hypoport
+      category: Hypoport
     - !type:InsertNewOrgan
       organ: HypoportSecureNukie
 
@@ -31,7 +31,7 @@
   - !type:WhitelistCondition
     whitelist:
       components:
-      - HumanoidAppearance # no corgis or whatever the fuck
+      - HumanoidProfile # no corgis or whatever the fuck
     blacklist:
       components:
       - NoHypoport # to let people opt out for schizo characters via trait

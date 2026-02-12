@@ -13,6 +13,8 @@ using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.Actions;
 using Content.Goobstation.Common.Bloodstream;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Server._Goobstation.Wizard.Components;
 using Content.Server.Antag;
 using Content.Server.Body.Systems;
@@ -31,8 +33,9 @@ using Content.Shared._Goobstation.Wizard;
 using Content.Shared._Goobstation.Wizard.BindSoul;
 using Content.Shared._Goobstation.Wizard.Chuuni;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared._Shitmed.Damage; // Shitmed Change
+using Content.Shared._Goobstation.Wizard.SpellCards;
+using Content.Shared._Shitcode.Roles;
+using Content.Shared.Abilities.Mime;
 using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Coordinates.Helpers;
@@ -292,12 +295,12 @@ public sealed class SpellsSystem : SharedSpellsSystem
         int? age = null;
         Gender? gender = null;
         Sex? sex = null;
-        if (TryComp(oldEnt, out HumanoidAppearanceComponent? humanoid))
+        if (TryComp(oldEnt, out HumanoidProfileComponent? humanoid))
         {
             age = humanoid.Age;
             gender = humanoid.Gender;
             sex = humanoid.Sex;
-            if (TryComp(newEntity, out HumanoidAppearanceComponent? newHumanoid))
+            if (TryComp(newEntity, out HumanoidProfileComponent? newHumanoid))
             {
                 newHumanoid.Age = age.Value;
                 newHumanoid.Gender = gender.Value;

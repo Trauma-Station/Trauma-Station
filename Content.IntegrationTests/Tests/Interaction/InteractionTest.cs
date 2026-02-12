@@ -277,6 +277,10 @@ public abstract partial class InteractionTest
     [TearDown]
     public async Task TearDownInternal()
     {
+        // <Trauma> - mythical shitcode
+        if (Server == null || MapSystem == null)
+            throw new Exception("Tried to do teardown before setup for {GetType().Name}?!");
+        // </Trauma>
         await Server.WaitPost(() => MapSystem.DeleteMap(MapId));
         await Pair.CleanReturnAsync();
         await TearDown();

@@ -9,14 +9,14 @@
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Overlays;
 using Content.Trauma.Common.Kitchen;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Eye.Blinding.Components;
 
 namespace Content.Goobstation.Shared.Changeling.Systems;
 
 public abstract class SharedChangelingSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedBodySystem Body = default!;
+    [Dependency] protected readonly BodySystem Body = default!;
 
     public override void Initialize()
     {

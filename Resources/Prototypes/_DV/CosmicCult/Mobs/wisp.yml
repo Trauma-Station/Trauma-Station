@@ -1,6 +1,6 @@
 - type: entity
   name: Wisp
-  parent: [ BaseSimpleMob, FlyingMobBase ]
+  parent: [ BaseSimpleMob, FlyingMobBase, BaseMobAnimal ]
   id: MobCosmicWisp
   components:
   - type: AntagImmune
@@ -23,8 +23,6 @@
         - FlyingMobMask
         layer:
         - FlyingMobLayer
-  - type: Body
-    prototype: Animal
   - type: Speech
     speechSounds: Alto
     speechVerb: Ghost

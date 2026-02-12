@@ -1,0 +1,337 @@
+## Mob
+
+# Don't need any species stuff like body visuals / inventory
+- type: entity
+  abstract: true
+  parent: BaseMobBody
+  id: AppearanceXenomorphBase
+  name: xenomorph appearance
+  components:
+  - type: Legs
+    required: 2
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy # i guess??
+  id: OrganXenomorph
+  suffix: xenomorph
+  components:
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: SulfuricAcid
+        Quantity: 3
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 10
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 3
+        - ReagentId: FluorosulfuricAcid
+          Quantity: 2
+
+- type: entity
+  abstract: true
+  parent: OrganXenomorph
+  id: OrganXenomorphInternal
+  components:
+  - type: Sprite
+    sprite: _White/Mobs/Species/Xenomorph/organs.rsi
+
+- type: entity
+  abstract: true
+  id: OrganXenomorphMetabolizer
+  components:
+  - type: Metabolizer
+    metabolizerTypes: [Xenomorph]
+
+- type: entity
+  abstract: true
+  parent: OrganXenomorph
+  id: OrganXenomorphExternal
+  components:
+  # TODO SHITMED: make it immune to barotrauma
+  - type: Sprite
+    sprite: _Shitmed/Mobs/Species/Xenomorph/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Shitmed/Mobs/Species/Xenomorph/parts.rsi
+  - type: XenoBodyPart
+  - type: HasTissueSample
+  - type: Woundable
+    integrity: 750
+    integrityCap: 750
+    thresholds:
+      Minor: 700
+      Moderate: 600
+      Severe: 350
+      Critical: 150
+      Mangled: 0
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganXenomorphExternal ]
+  id: OrganXenomorphTorso
+  components:
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: SulfuricAcid
+        Quantity: 10
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 20
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 1500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: BodyPart
+    slots:
+    # Parts
+    - Head
+    - ArmLeft
+    - ArmRight
+    - LegLeft
+    - LegRight
+    # Organs
+    - PlasmaVessel
+    - Stomach
+    - Liver
+    - Kidneys
+
+- type: entity
+  parent: [ OrganBaseHead, OrganXenomorphExternal ]
+  id: OrganXenomorphHead
+  components:
+  - type: Item
+    size: Normal # big head
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: SulfuricAcid
+        Quantity: 5
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 10
+  - type: BodyPart
+    slots:
+    - Brain
+    - Eyes
+    - HiveNode
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganXenomorphExternal ]
+  id: OrganXenomorphArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganXenomorphExternal ]
+  id: OrganXenomorphArmRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganXenomorphExternal ]
+  id: OrganXenomorphLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganXenomorphExternal ]
+  id: OrganXenomorphLegRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganXenomorphExternal ]
+  id: OrganXenomorphHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganXenomorphExternal ]
+  id: OrganXenomorphHandRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganXenomorphExternal ]
+  id: OrganXenomorphFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganXenomorphExternal ]
+  id: OrganXenomorphFootRight
+
+## Organs
+
+- type: entity
+  parent: [ OrganBaseBrain, OrganXenomorphInternal ]
+  id: OrganXenomorphBrain
+  description: We barely understand the brains of terrestial animals. Who knows what we may find in the brain of such an advanced species?
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: GreyMatter
+          Quantity: 5
+        - ReagentId: FluorosulfuricAcid
+          Quantity: 5
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganXenomorphInternal ]
+  id: OrganXenomorphEyes
+  description: It turned out they had them after all!
+  components:
+  - type: OrganComponents
+    onAdd:
+    - type: ThermalVision
+      toggleAction: ToggleThermalVisionXenomorph
+      color: white
+      drawOverlay: false
+      lightRadius: 10
+      strength: 0
+      noise: 0
+      tint: 3, 3, 3
+
+- type: entity
+  parent: [ OrganBaseTongue, OrganXenomorphInternal ]
+  id: OrganXenomorphTongue
+  description: According to leading xenobiologists the evolutionary benefit of having a second mouth in your mouth is "that it looks badass".
+  # TODO: xeno language
+
+- type: entity
+  parent: [ OrganBaseStomach, OrganXenomorphInternal, OrganXenomorphMetabolizer ]
+  id: OrganXenomorphStomach
+  description: Its walls are capable of both significantly expanding and contracting with enormous force.
+
+- type: entity
+  parent: [ OrganBaseLiver, OrganXenomorphInternal, OrganXenomorphMetabolizer ]
+  id: OrganXenomorphLiver
+  description: A liver that used to belong to a killer alien, who knows what it used to eat.
+
+- type: entity
+  parent: [ OrganBaseKidneys, OrganSpriteHumanInternal, OrganXenomorphInternal, OrganXenomorphMetabolizer ]
+  id: OrganXenomorphKidneys
+  description: These could fetch a pretty penny...
+  components:
+  - type: StaticPrice
+    price: 2000 # xeno organ harvesting!
+  # TODO SHITMED: make butchered/gibbed organs worth less than surgically extracted
+
+- type: entity
+  parent: [ OrganBaseInternal, OrganXenomorphInternal ]
+  id: OrganXenomorphAcidGland
+  name: acid gland
+  description: A specialized tank with acid. The resulting corrosive mixture can melt most known materials.
+  components:
+  - type: Sprite
+    state: acid_gland
+  - type: Organ
+    category: AcidGland
+  - type: ChildOrgan
+    parentCategory: Head
+  - type: OrganComponents
+    onAdd:
+    - type: XenomorphAcid
+      damagePerSecond:
+        types:
+          Caustic: 20
+          Heat: 20
+  - type: OrganActions
+    actions:
+    - ActionAcid
+
+- type: entity
+  parent: [ OrganBaseInternal, OrganXenomorphInternal ]
+  id: OrganXenomorphNeurotoxinGland
+  name: neurotoxin gland
+  description: A specialized tank with neurotoxin. Consists of many microscopic tubes filled with clear liquid.
+  components:
+  - type: Sprite
+    state: neurotoxin_gland
+  - type: Organ
+    category: NeurotoxinGland
+  - type: ChildOrgan
+    parentCategory: Head
+  - type: OrganComponents
+    onAdd:
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 0.75
+    - type: PlasmaAmmoProvider
+      fireCost: 55
+      proto: BulletNeurotoxin
+    - type: Gun
+      fireRate: 0.75
+      useKey: false
+      selectedMode: FullAuto
+      availableModes:
+      - FullAuto
+      soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
+
+- type: entity
+  parent: [ OrganBaseInternal, OrganXenomorphInternal ]
+  id: OrganXenomorphEggSack
+  name: egg sack
+  description: Designed to produce and store eggs containing facehuggers, the organ's enormous size allows the xenomorph queen to lay thousands of eggs in a short period of time.
+  components:
+  - type: Sprite
+    sprite: _White/Mobs/Species/Xenomorph/organs.rsi
+    state: egg_sack
+  - type: Organ
+    category: EggSack
+  - type: ChildOrgan
+    parentCategory: Torso
+  - type: OrganActions
+    actions:
+    - ActionSpawnXenomorphEgg
+
+- type: entity
+  parent: [ OrganBaseInternal, OrganXenomorphInternal ]
+  id: OrganXenomorphResinSpinner
+  name: resin spinner
+  description: Designed for the production and isolation of resin-like biopolymer.
+  components:
+  - type: Sprite
+    state: resin_spinner
+  - type: Organ
+    category: ResinSpinner
+  - type: ChildOrgan
+    parentCategory: Head
+  - type: OrganActions
+    actions:
+    - ActionSpawnWallResin
+    - ActionSpawnResinDoor
+    - ActionSpawnResinNest
+
+- type: entity
+  parent: [ OrganBaseInternal, OrganXenomorphInternal ]
+  id: OrganXenomorphHiveNode
+  name: hive node
+  description: The central organ of the xenomorphs, providing communication with the common mind.
+  components:
+  - type: Sprite
+    state: hive_node
+  - type: Organ
+    category: HiveNode
+  - type: ChildOrgan
+    parentCategory: Head
+    # TODO: Organ should give XenoHivemind language and Xeno faction
+
+- type: entity
+  parent: [ OrganBaseInternal, OrganXenomorphInternal ]
+  id: OrganXenomorphPlasmaVessel
+  name: plasma vessel
+  description: A reservoir containing concentrated and highly active plasma - the main source of energy and raw material for the xenomorph's biological weapons.
+  components:
+  - type: Sprite
+    state: plasma_vessel
+  - type: Organ
+    category: PlasmaVessel
+  - type: ChildOrgan
+    parentCategory: Torso
+  - type: OrganComponents
+    onAdd:
+    - type: PlasmaVessel
+  - type: OrganActions
+    actions:
+    - ActionTransferPlasma
+    - ActionSpawnResinWeedNode

@@ -31,7 +31,7 @@ public sealed class CosmicGlyphSystem : EntitySystem
     [Dependency] private readonly SharedCosmicCultSystem _cosmicCult = default!;
 
     private readonly HashSet<Entity<CosmicCultComponent>> _cultists = [];
-    private readonly HashSet<Entity<HumanoidAppearanceComponent>> _humanoids = [];
+    private readonly HashSet<Entity<HumanoidProfileComponent>> _humanoids = [];
 
     public override void Initialize()
     {
@@ -113,10 +113,10 @@ public sealed class CosmicGlyphSystem : EntitySystem
     /// <param name="uid">The glyph.</param>
     /// <param name="range">Radius for a lookup.</param>
     /// <param name="exclude">Filter to exclude from return.</param>
-    public HashSet<Entity<HumanoidAppearanceComponent>> GetTargetsNearGlyph(EntityUid uid, float range, Predicate<Entity<HumanoidAppearanceComponent>>? exclude = null)
+    public HashSet<Entity<HumanoidProfileComponent>> GetTargetsNearGlyph(EntityUid uid, float range, Predicate<Entity<HumanoidProfileComponent>>? exclude = null)
     {
         _humanoids.Clear();
-        _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(Transform(uid).Coordinates, range, _humanoids);
+        _lookup.GetEntitiesInRange<HumanoidProfileComponent>(Transform(uid).Coordinates, range, _humanoids);
 
         if (exclude != null)
             _humanoids.RemoveWhere(exclude);

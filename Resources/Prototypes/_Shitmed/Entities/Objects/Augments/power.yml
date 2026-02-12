@@ -39,7 +39,8 @@
     sprite: _Shitmed/Objects/Augments/power.rsi
     state: cell
   - type: Organ
-    slotId: powerCell
+    category: AugmentPowerCell
+  - type: OrganComponents
     onAdd:
     - type: HasAugmentPowerCellSlot
   - type: AugmentPowerCellSlot
@@ -76,7 +77,7 @@
     sprite: _Shitmed/Objects/Augments/power.rsi
     state: cell
   - type: Organ
-    slotId: charger
+    category: AugmentCharger
   - type: AugmentCharger
 
 - type: entity
@@ -115,7 +116,7 @@
   components:
   - type: Sprite
     state: apc
-  - type: Organ
+  - type: OrganComponents
     onAdd:
     - type: BatteryDrinker
   - type: Construction
@@ -130,7 +131,7 @@
   components:
   - type: Sprite
     state: station
-  - type: Organ
+  - type: OrganComponents
     onAdd:
     - type: AugmentStationRecharge
   - type: Construction

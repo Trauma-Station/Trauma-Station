@@ -90,7 +90,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Stunnable;
-using Content.Shared._Shitmed.Targeting; // Shitmed Change
+using Content.Medical.Common.Targeting; // Shitmed Change
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems; // Shitmed Change
 

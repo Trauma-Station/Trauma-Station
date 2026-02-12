@@ -1,8 +1,8 @@
 using Content.Goobstation.Common.Identity;
 using Content.Goobstation.Common.Projectiles;
 using Content.Goobstation.Common.Speech;
+using Content.Medical.Common.DoAfter;
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared._Shitmed.DoAfter;
 using Content.Shared.Actions;
 using Content.Shared.Chat;
 using Content.Shared.Coordinates;
@@ -46,7 +46,7 @@ public abstract class SharedShadowCloakSystem : EntitySystem
         SubscribeLocalEvent<ShadowCloakedComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ShadowCloakedComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<ShadowCloakedComponent, ComponentRemove>(OnRemove);
-        SubscribeLocalEvent<ShadowCloakedComponent, GetDoAfterDelayMultiplierEvent>(OnGetDoAfterSpeed);
+        SubscribeLocalEvent<ShadowCloakedComponent, ModifyDoAfterDelayEvent>(OnGetDoAfterSpeed);
         SubscribeLocalEvent<ShadowCloakedComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<ShadowCloakedComponent, TransformSpeakerNameEvent>(OnTransformName);
         SubscribeLocalEvent<ShadowCloakedComponent, TryGetIdentityShortInfoEvent>(OnGetIdentity);
@@ -154,7 +154,7 @@ public abstract class SharedShadowCloakSystem : EntitySystem
             QueueDel(ent);
     }
 
-    private void OnGetDoAfterSpeed(Entity<ShadowCloakedComponent> ent, ref GetDoAfterDelayMultiplierEvent args)
+    private void OnGetDoAfterSpeed(Entity<ShadowCloakedComponent> ent, ref ModifyDoAfterDelayEvent args)
     {
         args.Multiplier *= ent.Comp.DoAfterSlowdown;
     }

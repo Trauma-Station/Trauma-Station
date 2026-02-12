@@ -1,8 +1,10 @@
 // <Trauma>
 using Content.Shared._Shitmed.Medical.HealthAnalyzer;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
+using Content.Medical.Common.Wounds;
 using Content.Shared.FixedPoint;
+using Content.Shared.Body;
+using Robust.Shared.Prototypes;
 // </Trauma>
 using Robust.Shared.Serialization;
 
@@ -33,8 +35,8 @@ public struct HealthAnalyzerUiState
     public float BloodLevel;
     public bool? ScanMode;
     // <Shitmed>
-    public Dictionary<TargetBodyPart, WoundableSeverity>? Body;
-    public Dictionary<TargetBodyPart, bool> Bleeding = new(); // per-part instead of global
+    public Dictionary<ProtoId<OrganCategoryPrototype>, WoundableSeverity>? Body;
+    public HashSet<ProtoId<OrganCategoryPrototype>> Bleeding = new(); // per-part instead of global
     public FixedPoint2 VitalDamage;
     public NetEntity? Part;
     public HealthAnalyzerScanState? ScanState;
@@ -45,9 +47,9 @@ public struct HealthAnalyzerUiState
 
     public HealthAnalyzerUiState(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode,
         // <Shitmed>
-        Dictionary<TargetBodyPart, bool> bleeding,
+        HashSet<ProtoId<OrganCategoryPrototype>> bleeding,
         bool? unrevivable,
-        Dictionary<TargetBodyPart, WoundableSeverity>? body,
+        Dictionary<ProtoId<OrganCategoryPrototype>, WoundableSeverity>? body,
         FixedPoint2 vitalDamage,
         NetEntity? part = null,
         HealthAnalyzerScanState? scanState = null)

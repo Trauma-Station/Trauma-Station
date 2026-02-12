@@ -1,8 +1,6 @@
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
+using Content.Medical.Shared.Wounds;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -13,8 +11,6 @@ namespace Content.Goobstation.Shared.Religion.Nullrod.Systems;
 
 public abstract class SharedWeakToHolySystem : EntitySystem
 {
-    [Dependency] protected readonly SharedBodySystem Body = default!;
-
     [Dependency] private readonly GoobBibleSystem _goobBible = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly WoundSystem _wound = default!;
@@ -98,16 +94,6 @@ public abstract class SharedWeakToHolySystem : EntitySystem
             },
         };
 
-        if (!TryComp<BodyComponent>(ent, out var body))
-            return;
-
-        if (!Body.TryGetRootPart(ent, out var rootPart, body: body))
-            return;
-
-        foreach (var woundable in _wound.GetAllWoundableChildren(rootPart.Value))
-        {
-            if (HasComp<DamageableComponent>(woundable))
-                args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modifierSet);
-        }
+        args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modifierSet);
     }
 }

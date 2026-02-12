@@ -150,16 +150,12 @@ public sealed class HoloCigarSystem : EntitySystem
             affected.OriginalMissChance = multi.MissChance;
             affected.OriginalSpreadModifier = multi.SpreadMultiplier;
             affected.OriginalSpreadAddition = multi.SpreadAddition;
-            affected.OriginalHandDamageAmount = multi.HandDamageAmount; // We don't care about the type though
-            affected.OriginalStaminaDamage = multi.StaminaDamage;
         }
 
         multi = EnsureComp<MultishotComponent>(args.Item);
         multi.MissChance = 0f;
         multi.SpreadMultiplier = 1f; // no extra spread chuds
         multi.SpreadAddition = 0f;
-        multi.HandDamageAmount = 0f;
-        multi.StaminaDamage = 0f;
 
         _gun.RefreshModifiers(args.Item);
     }
@@ -211,8 +207,6 @@ public sealed class HoloCigarSystem : EntitySystem
                 multiShotComp.MissChance = cigarAffectedGunComponent.OriginalMissChance;
                 multiShotComp.SpreadMultiplier = cigarAffectedGunComponent.OriginalSpreadModifier;
                 multiShotComp.SpreadAddition = cigarAffectedGunComponent.OriginalSpreadAddition;
-                multiShotComp.HandDamageAmount = cigarAffectedGunComponent.OriginalHandDamageAmount;
-                multiShotComp.StaminaDamage = cigarAffectedGunComponent.OriginalStaminaDamage;
                 break;
             }
         }

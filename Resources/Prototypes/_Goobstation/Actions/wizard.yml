@@ -27,7 +27,7 @@
     whitelist:
       requireAll: true
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
       - Inventory
     canTargetSelf: false
     event: !type:MimeMalaiseEvent
@@ -62,7 +62,7 @@
     whitelist:
       requireAll: true
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
       - Inventory
     canTargetSelf: false
     event: !type:CluwneCurseEvent
@@ -97,7 +97,7 @@
   - type: EntityTargetAction
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
       - Inventory
     canTargetSelf: false
     event: !type:BananaTouchEvent
@@ -633,7 +633,7 @@
       requireAll: true
       components:
       - Inventory
-      - HumanoidAppearance
+      - HumanoidProfile
     canTargetSelf: false
     event: !type:BarnyardCurseEvent
       masks:

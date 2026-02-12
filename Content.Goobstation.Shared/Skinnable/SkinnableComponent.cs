@@ -8,14 +8,29 @@
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Skinnable;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, Access(typeof(SkinnableSystem))]
+[AutoGenerateComponentState]
 public sealed partial class SkinnableComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool Skinned;
+
+    /// <summary>
+    /// Sprite to set every limb's visuals to which previously had <see cref="UnskinnedSprite"/>.
+    /// </summary>
+    [DataField(required: true)]
+    public string SkinnedSprite = string.Empty;
+
+    /// <summary>
+    /// The sprite to find limbs which are considered unskinned.
+    /// Used to prevent e.g. bionic arms being changed to skinned.
+    /// </summary>
+    [DataField(required: true)]
+    public string UnskinnedSprite = string.Empty;
 
     [DataField]
     public TimeSpan SkinningDoAfterDuation = TimeSpan.FromSeconds(5);

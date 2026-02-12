@@ -8,19 +8,19 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Goobstation.Shared.Religion.Nullrod.Systems;
 using Content.Shared._Shitcode.Heretic.Rituals;
+using Content.Medical.Common.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Timing; // Shitmed Change
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Components;
-using Content.Shared._Shitmed.Damage;
+using Robust.Shared.Timing;
 using Content.Shared.Hands;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Medical.Common.Targeting;
 
 namespace Content.Goobstation.Shared.Religion;
 
@@ -151,8 +151,8 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         base.Update(frameTime);
 
         // Holy damage healing.
-        var query = EntityQueryEnumerator<WeakToHolyComponent, BodyComponent>();
-        while (query.MoveNext(out var uid, out var weakToHoly, out var body))
+        var query = EntityQueryEnumerator<WeakToHolyComponent>();
+        while (query.MoveNext(out var uid, out var weakToHoly))
         {
             if (weakToHoly.NextPassiveHealTick > _timing.CurTime)
                 continue;
@@ -161,17 +161,12 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
             if (!TryComp<DamageableComponent>(uid, out var damageable))
                 continue;
 
-            if (TerminatingOrDeleted(uid)
-                || !Body.TryGetRootPart(uid, out var rootPart, body: body)
-                || !damageable.Damage.DamageDict.TryGetValue("Holy", out _))
+            if (TerminatingOrDeleted(uid) || !damageable.Damage.DamageDict.TryGetValue("Holy", out _))
                 continue;
 
-            // Rune healing.
-            if (weakToHoly.IsColliding)
-                _damageableSystem.TryChangeDamage(uid, weakToHoly.HealAmount, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
-
-            // Passive healing.
-            _damageableSystem.TryChangeDamage(uid, weakToHoly.PassiveAmount, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
+            // Rune healing vs passive healing
+            var healing = weakToHoly.IsColliding ? weakToHoly.HealAmount : weakToHoly.PassiveAmount;
+            _damageableSystem.ChangeDamage(uid, healing, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
         }
 
         if (_toUpdate.Count == 0)

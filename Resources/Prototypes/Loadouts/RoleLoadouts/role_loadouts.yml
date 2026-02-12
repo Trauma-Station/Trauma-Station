@@ -1,0 +1,712 @@
+# Command
+- type: roleLoadout
+  id: JobCaptain
+  groups:
+  - CaptainHead
+  - CaptainNeck
+  - CaptainJumpsuit
+  - CaptainMask # Goobstation - Lollypops!
+  - CaptainBackpack
+  - CaptainOuterClothing
+  - Survival
+  - Trinkets
+  #- CaptainJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - CaptainEnvirohelm
+  - CaptainEnvirosuit
+  - CaptainEnvirogloves
+  - CaptainGloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobHeadOfPersonnel
+  groups:
+  - GroupTankHarness
+  - HoPHead
+  - HoPNeck
+  - HoPJumpsuit
+  - HoPBackpack
+  - HoPOuterClothing
+  - Glasses
+  - Survival
+  - Trinkets
+  #- HoPJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - HoPEnvirohelm
+  - HoPEnvirosuit
+  - HoPEnvirogloves
+  - HoPGloves
+  - ExclusiveItems # Trauma
+
+# Silicons
+- type: roleLoadout
+  id: JobBorg
+  nameDataset: NamesBorg
+  canCustomizeName: true
+
+- type: roleLoadout
+  id: JobStationAi
+  nameDataset: NamesAI
+  canCustomizeName: true
+
+# Civilian
+- type: roleLoadout
+  id: JobPassenger
+  groups:
+  - GroupTankHarness
+  - PassengerJumpsuit
+  - CommonBackpack
+  - PassengerNeck
+  - PassengerFace
+  - PassengerGloves
+  - PassengerOuterClothing
+  - PassengerShoes
+  - Glasses
+  - Survival
+  - Trinkets
+  #- PassengerJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - AssistantEnvirohelm
+  - AssistantEnvirosuit
+  - AssistantEnvirogloves
+  - ExclusiveItems # Trauma
+
+
+- type: roleLoadout
+  id: JobBartender
+  groups:
+  - GroupTankHarness
+  - BartenderHead
+  - BartenderJumpsuit
+  - CommonBackpack
+  - BartenderOuterClothing
+  - Glasses
+  - Survival
+  - Trinkets
+  - BartenderJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - BartenderEnvirohelm
+  - BartenderEnvirosuit
+  - BartenderEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobServiceWorker
+  groups:
+  - GroupTankHarness
+  - BartenderJumpsuit
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  #- ServiceWorkerJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - ServiceWorkerEnvirohelm
+  - ServiceWorkerEnvirosuit
+  - ServiceWorkerEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobChef
+  groups:
+  - GroupTankHarness
+  - ChefHead
+  - ChefMask
+  - ChefJumpsuit
+  - CommonBackpack
+  - ChefOuterClothing
+  - Glasses
+  - Survival
+  - Trinkets
+  #- ChefJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - ChefEnvirohelm
+  - ChefEnvirosuit
+  - ChefEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobLibrarian
+  groups:
+  - GroupTankHarness
+  - LibrarianJumpsuit
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  #- LibrarianJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - LibrarianEnvirohelm
+  - LibrarianEnvirosuit
+  - LibrarianEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobLawyer
+  groups:
+  - GroupTankHarness
+  - LawyerNeck
+  - LawyerJumpsuit
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  #- LawyerJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - LawyerEnvirohelm
+  - LawyerEnvirosuit
+  - LawyerEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobChaplain
+  groups:
+  - GroupTankHarness
+  - ChaplainHead
+  - ChaplainMask
+  - ChaplainNeck
+  - ChaplainJumpsuit
+  - CommonBackpack
+  - ChaplainOuterClothing
+  - Glasses
+  - Survival
+  - Trinkets
+  #- ChaplainJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - ChaplainEnvirohelm
+  - ChaplainEnvirosuit
+  - ChaplainEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobJanitor
+  groups:
+  - GroupTankHarness
+  - JanitorHead
+  - JanitorJumpsuit
+  - JanitorGloves
+  - CommonBackpack
+  - JanitorOuterClothing
+  - Glasses
+  - Survival
+  - Trinkets
+  - JanitorJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - JanitorEnvirohelm
+  - JanitorEnvirosuit
+  - JanitorEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobBotanist
+  groups:
+  - GroupTankHarness
+  - BotanistHead
+  - BotanistJumpsuit
+  - BotanistBackpack
+  - BotanistOuterClothing
+  - Glasses
+  - Survival
+  - Trinkets
+  #- BotanistJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - BotanistEnvirohelm
+  - BotanistEnvirosuit
+  - BotanistEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobClown
+  canCustomizeName: true
+  groups:
+  - GroupTankHarness
+  - ClownHead
+  - ClownJumpsuit
+  - ClownBackpack
+  - ClownOuterClothing
+  - ClownShoes
+  - Glasses
+  - SurvivalClown
+  - Trinkets
+  - ClownJobTrinkets
+  # Goobstation - EE Plasmeme Change.
+  - ClownEnvirohelm
+  - ClownEnvirosuit
+  - ClownEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobMime
+  canCustomizeName: true
+  groups:
+  - GroupTankHarness
+  - MimeHead
+  - MimeMask
+  - MimeJumpsuit
+  - MimeBackpack
+  - MimeOuterClothing
+  - MimeBelt
+  - Glasses
+  - SurvivalMime
+  - Trinkets
+  #- MimeJobTrinkets
+  # Goobstation - EE Plasmeme Change.
+  - MimeEnvirohelm
+  - MimeEnvirosuit
+  - MimeEnvirogloves
+  - MimeGloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobMusician
+  canCustomizeName: true
+  groups:
+  - GroupTankHarness
+  - MusicianJumpsuit
+  - CommonBackpack
+  - MusicianOuterClothing
+  - Glasses
+  - Survival
+  - Trinkets
+  #- MusicianJobTrinkets
+  - Instruments
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - MusicianEnvirohelm
+  - MusicianEnvirosuit
+  - MusicianEnvirogloves
+  - ExclusiveItems # Trauma
+
+# Cargo
+- type: roleLoadout
+  id: JobQuartermaster
+  groups:
+  - GroupTankHarness
+  - QuartermasterHead
+  - QuartermasterNeck
+  - QuartermasterJumpsuit
+  - CargoTechnicianBackpack
+  - QuartermasterOuterClothing
+  - QuartermasterShoes
+  - Glasses
+  - Survival
+  - Trinkets
+  #- QuartermasterJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - QuartermasterEnvirohelm
+  - QuartermasterEnvirosuit
+  - QuartermasterEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobCargoTechnician
+  groups:
+  - GroupTankHarness
+  - CargoTechnicianHead
+  - CargoTechnicianJumpsuit
+  - CargoTechnicianBackpack
+  - CargoTechnicianOuterClothing
+  - CargoTechnicianShoes
+  - CargoTechnicianID
+  - Glasses
+  - Survival
+  - Trinkets
+  #- CargoTechnicianJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - CargoTechnicianEnvirohelm
+  - CargoTechnicianEnvirosuit
+  - CargoTechnicianEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobSalvageSpecialist
+  groups:
+  - GroupTankHarness
+  - SalvageSpecialistNeck # Goobstation
+  - SalvageSpecialistBackpack
+  - SalvageSpecialistOuterClothing
+  - SalvageSpecialistShoes
+  - Glasses
+  - Survival
+  - Trinkets
+  #- SalvageSpecialistJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - SalvageEnvirohelm
+  - SalvageEnvirosuit
+  - SalvageEnvirogloves
+  - ExclusiveItems # Trauma
+
+# Engineering
+- type: roleLoadout
+  id: JobChiefEngineer
+  groups:
+  - GroupTankHarness
+  - ChiefEngineerHead
+  - ChiefEngineerJumpsuit
+  - StationEngineerBackpack
+  - ChiefEngineerNeck
+  - ChiefEngineerOuterClothing
+  - ChiefEngineerShoes
+  - SurvivalExtended
+  - Trinkets
+  #- ChiefEngineerJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - ChiefEngineerEnvirohelm
+  - ChiefEngineerEnvirosuit
+  - ChiefEngineerEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobTechnicalAssistant
+  groups:
+  - GroupTankHarness
+  - TechnicalAssistantJumpsuit
+  - StationEngineerBackpack
+  - SurvivalExtended
+  - Trinkets
+  #- TechnicalAssistantJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - TechnicalAssistantEnvirohelm
+  - TechnicalAssistantEnvirosuit
+  - TechnicalAssistantEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobStationEngineer
+  groups:
+  - GroupTankHarness
+  - StationEngineerHead
+  - StationEngineerJumpsuit
+  - StationEngineerBackpack
+  - StationEngineerOuterClothing
+  - StationEngineerShoes
+  - StationEngineerID
+  - SurvivalExtended
+  - Trinkets
+  #- StationEngineerJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - StationEngineerEnvirohelm
+  - StationEngineerEnvirosuit
+  - StationEngineerEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobAtmosphericTechnician
+  groups:
+  - GroupTankHarness
+  - AtmosphericTechnicianHead # Goobstation
+  - AtmosphericTechnicianJumpsuit
+  - AtmosphericTechnicianBackpack
+  - AtmosphericTechnicianOuterClothing
+  - AtmosphericTechnicianShoes
+  - SurvivalExtended
+  - Trinkets
+  #- AtmosphericTechnicianJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - AtmosEnvirohelm
+  - AtmosEnvirosuit
+  - AtmosEnvirogloves
+  - ExclusiveItems # Trauma
+
+# Science
+- type: roleLoadout
+  id: JobResearchDirector
+  groups:
+  - GroupTankHarness
+  - ResearchDirectorHead
+  - ResearchDirectorNeck
+  - ResearchDirectorJumpsuit
+  - ScientistBackpack
+  - ResearchDirectorOuterClothing
+  - ScientistGloves
+  - ResearchDirectorShoes
+  - Glasses
+  - Survival
+  - Trinkets
+  #- ResearchDirectorJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - ResearchDirectorEnvirosuit
+  - ResearchDirectorEnvirohelm
+  - ResearchDirectorEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobScientist
+  groups:
+  - GroupTankHarness
+  - ScientistHead
+  - ScientistNeck
+  - ScientistJumpsuit
+  - ScientistBackpack
+  - ScientistOuterClothing
+  - ScientistGloves
+  - ScientistShoes
+  - ScientistPDA
+  - Glasses
+  - Survival
+  - Trinkets
+  #- ScientistJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - ScientistEnvirohelm
+  - ScientistEnvirosuit
+  - ScientistEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobResearchAssistant
+  groups:
+  - GroupTankHarness
+  - ResearchAssistantJumpsuit
+  - ScientistBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  #- ResearchAssistantJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - ResearchAssistantEnvirohelm
+  - ResearchAssistantEnvirosuit
+  - ResearchAssistantEnvirogloves
+  - ExclusiveItems # Trauma
+
+# Security
+- type: roleLoadout
+  id: JobHeadOfSecurity
+  groups:
+  - HeadofSecurityHead
+  - HeadofSecurityNeck
+  - HeadofSecurityJumpsuit
+  - SecurityBackpack
+  - SecurityMelee # Goobstation
+  - SecurityBelt
+  - HeadofSecurityOuterClothing
+  - HeadofSecurityShoes # Goobstation edit
+  - SurvivalSecurity
+  - Trinkets
+  - HeadofSecurityJobTrinkets
+  - GroupSpeciesBreathToolSecurity
+  # Goobstation - EE Plasmeme Change.
+  - HeadofSecurityEnvirohelm
+  - HeadofSecurityEnvirosuit
+  - HeadofSecurityEnvirogloves
+  - HeadofSecurityGloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobWarden
+  groups:
+  - WardenHead
+  - WardenJumpsuit
+  - SecurityBackpack
+  - SecurityMelee # Goobstation
+  - SecurityNeck
+  - SecurityBelt
+  - WardenOuterClothing
+  - SecurityShoes
+  - SurvivalSecurity
+  - Trinkets
+  - WardenJobTrinkets
+  - GroupSpeciesBreathToolSecurity
+  # Goobstation - EE Plasmeme Change.
+  - WardenEnvirohelm
+  - WardenEnvirosuit
+  - WardenEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobSecurityOfficer
+  groups:
+  - SecurityHead
+  - SecurityJumpsuit
+  - SecurityBackpack
+  - SecurityMelee # Goobstation
+  - SecurityOuterClothing
+  - SecurityShoes
+  - SecurityNeck
+  - SecurityPDA
+  - SecurityBelt
+  - SurvivalSecurity
+  - Trinkets
+  - SecurityJobTrinkets
+  - GroupSpeciesBreathToolSecurity
+  # Goobstation - EE Plasmeme Change.
+  - SecurityOfficerEnvirohelm
+  - SecurityOfficerEnvirosuit
+  - SecurityOfficerEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobDetective
+  groups:
+  - DetectiveHead
+  - DetectiveNeck
+  - DetectiveJumpsuit
+  - SecurityBackpack
+  - DetectiveOuterClothing
+  - SecurityShoes
+  - SurvivalSecurity
+  - Trinkets
+  - DetectiveJobTrinkets
+  - GroupSpeciesBreathToolSecurity
+  # Goobstation - EE Plasmeme Change.
+  - DetectiveEnvirohelm
+  - DetectiveEnvirosuit
+  - DetectiveEnvirogloves
+  - DetectiveGloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobSecurityCadet
+  groups:
+  - SecurityCadetJumpsuit
+  - SecurityBackpack
+  - SecurityMelee # Goobstation
+  - SurvivalSecurity
+  - SecurityNeck
+  - SecurityOuterClothing # Goobstation - Why not.
+  - Trinkets
+  #- SecurityCadetJobTrinkets
+  - GroupSpeciesBreathToolSecurity
+  # Goobstation - EE Plasmeme Change.
+  - SecurityCadetEnvirohelm
+  - SecurityCadetEnvirosuit
+  - SecurityCadetEnvirogloves
+  - ExclusiveItems # Trauma
+
+# Wildcards
+- type: roleLoadout
+  id: JobReporter
+  groups:
+  - GroupTankHarness
+  - ReporterJumpsuit
+  - ReporterOuterClothing # Goobstation - Bodycams
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  #- ReporterJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - ReporterEnvirohelm
+  - ReporterEnvirosuit
+  - ReporterEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobPsychologist
+  groups:
+  - GroupTankHarness
+  - PsychologistJumpsuit
+  - MedicalBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  #- PsychologistJobTrinkets
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - PsychologistEnvirohelm
+  - PsychologistEnvirosuit
+  - PsychologistEnvirogloves
+  - ExclusiveItems # Trauma
+
+# These loadouts are used for non-crew spawns, like off-station antags and event mobs
+# They will be used without player configuration, thus they will only ever apply what is forced by MinLimit
+
+# gives vox a harness and breathing mask
+# nitrogen tank not included
+- type: roleLoadout
+  id: RoleSurvivalVoxSupport
+  groups:
+  - GroupSpeciesBreathTool
+  - GroupTankHarness
+
+# gives vox a nitrogen breathing tank
+# other species get nothing
+- type: roleLoadout
+  id: RoleSurvivalVoxTank
+  groups:
+  - GroupEVATankVox
+
+- type: roleLoadout
+  id: RoleSurvivalStandard
+  groups:
+  - Survival
+  - GroupSpeciesBreathTool
+  - GroupTankHarness
+
+- type: roleLoadout
+  id: RoleSurvivalClown
+  groups:
+  - SurvivalClown
+  - GroupTankHarness
+
+- type: roleLoadout
+  id: RoleSurvivalExtended
+  groups:
+  - SurvivalExtended
+  - GroupSpeciesBreathTool
+  - GroupTankHarness
+
+- type: roleLoadout
+  id: RoleSurvivalMedical
+  groups:
+  - SurvivalMedical
+  - GroupSpeciesBreathToolMedical
+  - GroupTankHarness
+
+- type: roleLoadout
+  id: RoleSurvivalSecurity
+  groups:
+  - SurvivalSecurity
+  - GroupSpeciesBreathToolSecurity
+  - GroupTankHarness
+
+- type: roleLoadout
+  id: RoleSurvivalSyndicate
+  groups:
+  - SurvivalSyndicate
+  - GroupSpeciesBreathTool
+  - GroupTankHarness
+
+- type: roleLoadout
+  id: RoleSurvivalMilitaryDouble
+  groups:
+  - SurvivalMilitaryDouble
+
+- type: roleLoadout
+  id: RoleSurvivalNukie
+  groups:
+  - SurvivalSyndicate
+  - GroupSpeciesBreathTool
+  - GroupPocketTankDouble
+
+- type: roleLoadout
+  id: RoleSurvivalEVA
+  groups:
+  - GroupEVATank
+  - SurvivalExtended
+
+- type: roleLoadout
+  id: RoleSurvivalSpaceNinja
+  groups:
+  - GroupEVATank
