@@ -1,38 +1,3 @@
-# SPDX-FileCopyrightText: 2022 Chris V <HoofedEar@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Interrobang01 <113810873+Interrobang01@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Kevin Zheng <kevinz5000@gmail.com>
-# SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Morb <14136326+Morb0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 wrexbe <wrexbe@protonmail.com>
-# SPDX-FileCopyrightText: 2023 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 Lei Yunxing <lyx2020@sjtu.edu.cn>
-# SPDX-FileCopyrightText: 2023 Sirionaut <148076704+Sirionaut@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-# SPDX-FileCopyrightText: 2023 kxv <136233650+kxvvv@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 lzk228 <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Adrian16199 <144424013+Adrian16199@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 CatMagic <135462166+CatMagic1@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 FungiFellow <151778459+FungiFellow@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ubaser <134914314+UbaserB@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 august-sun <45527070+august-sun@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 August Sun <45527070+august-sun@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Killerqu00 <47712032+Killerqu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 august-sun <45527070+august.sun@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: construction
   id: bat
   graph: WoodenBat
@@ -40,11 +5,11 @@
   targetNode: bat
   category: construction-category-weapons
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - SurvivalWeaponsHandmade
   - Technological
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: ghost_sheet
@@ -53,11 +18,11 @@
   targetNode: ghost_sheet
   category: construction-category-clothing
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - SimpleHandmade
   - Technological
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: makeshifthandcuffs
@@ -66,11 +31,11 @@
   targetNode: cuffscable
   category: construction-category-tools
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - SimpleHandmade
   - Technological
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: makeshiftstunprod
@@ -79,11 +44,11 @@
   targetNode: msstunprod
   category: construction-category-weapons
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - SurvivalWeaponsHandmade
   - Technological
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: muzzle
@@ -92,11 +57,11 @@
   targetNode: muzzle
   category: construction-category-tools
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - AdvancedHandmade
   - Technological
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: pneumaticcannon
@@ -105,11 +70,11 @@
   targetNode: cannon
   category: construction-category-weapons
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - AdvancedHandmade
   - Technological
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: gauze
@@ -118,10 +83,10 @@
   targetNode: gauze
   category: construction-category-tools
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - SimpleHandmade
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: blindfold
@@ -130,10 +95,10 @@
   targetNode: blindfold
   category: construction-category-tools
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - SimpleHandmade
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: flowerwreath
@@ -142,10 +107,10 @@
   targetNode: flowerwreath
   category: construction-category-clothing
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - SimpleHandmade
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: rag
@@ -154,10 +119,10 @@
   targetNode: rag
   category: construction-category-tools
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - SimpleHandmade
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: improvisedshotgun
@@ -166,11 +131,11 @@
   targetNode: shotgun
   category: construction-category-weapons
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - AdvancedHandmade
   - Technological
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: ShellShotgunImprovised
@@ -179,11 +144,11 @@
   targetNode: shell
   category: construction-category-weapons
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - AdvancedHandmade
   - Technological
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: riflestock
@@ -192,11 +157,11 @@
   targetNode: riflestock
   category: construction-category-weapons
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - SimpleHandmade
   - Technological
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: firebomb
@@ -205,11 +170,11 @@
   targetNode: firebomb
   category: construction-category-weapons
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - AdvancedHandmade
   - Technological
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: CottonWovenCloth
@@ -218,10 +183,10 @@
   targetNode: cottoncloth
   category: construction-category-misc
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - SimpleHandmade
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: strawHat
@@ -230,10 +195,10 @@
   targetNode: strawhat
   category: construction-category-clothing
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - SimpleHandmade
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: pipebomb
@@ -242,11 +207,11 @@
   targetNode: pipebomb
   category: construction-category-weapons
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - AdvancedHandmade
   - Technological
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: rollingpin
@@ -255,10 +220,10 @@
   targetNode: rollingpin
   category: construction-category-tools
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - AdvancedHandmade
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: PetCarrier
@@ -267,11 +232,11 @@
   targetNode: petCarrier
   category: construction-category-misc
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - AdvancedHandmade
   - Technological
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: RepairMothershipPinpointer
@@ -280,11 +245,11 @@
   targetNode: repairedPinpointer
   category: construction-category-misc
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - AdvancedHandmade
   - Science
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: HardsuitGoliath
@@ -293,11 +258,11 @@
   targetNode: hardsuitGoliath
   category: construction-category-clothing
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - AdvancedHandmade
   - Science
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: scraparmor
@@ -306,10 +271,10 @@
   targetNode: scraparmorfinished
   category: construction-category-clothing
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - AdvancedHandmade
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: scraphelmet
@@ -318,10 +283,10 @@
   targetNode: scraphelmet
   category: construction-category-clothing
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - AdvancedHandmade
-  # Trauma end
+  # </Trauma>
 
 - type: construction
   id: ClothingBagPet
@@ -330,7 +295,7 @@
   targetNode: bagPet
   category: construction-category-clothing
   objectType: Item
-  # Trauma start
+  # <Trauma>
   groups:
   - AdvancedHandmade
-  # Trauma end
+  # </Trauma>

@@ -23,6 +23,17 @@
   - !type:AddObjectiveSpecial
     objectives:
     - SalvageMineObjective
+  # <Trauma>
+  - !type:AddComponentSpecial
+    components:
+      - type: DeathSquadMember # Goobstation
+        - type: KnowledgeGrant
+          skills:
+            StrengthKnowledge: 26
+            ToughnessKnowledge: 26
+            MeleeKnowledge: 26
+            AgilityKnowledge: 26
+  # </Trauma>
 
 - type: startingGear
   id: SalvageSpecialistGear

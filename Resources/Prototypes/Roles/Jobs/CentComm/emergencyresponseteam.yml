@@ -21,6 +21,14 @@
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
+  # <Trauma>
+  - !type:AddComponentSpecial
+    components:
+      - type: KnowledgeGrant
+        skills:
+          MeleeKnowledge: 50
+          ShootingKnowledge: 50
+  # </Trauma>
 
 - type: startingGear
   parent: ERTLeaderGearEVA
@@ -124,6 +132,14 @@
     - type: BibleUser #Lets them heal with bibles
     - type: CurseImmune # Goobstation - Wraith
     - type: CanEnchant #GoobStation
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 50
+        ShootingKnowledge: 50
+        MagicalLiteracy: 50
+        Literacy: 50
+    # </Trauma>
   - !type:AddImplantSpecial
      implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
 
@@ -221,6 +237,34 @@
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
+  # <Trauma>
+  - !type:AddComponentSpecial
+    components:
+      - type: KnowledgeGrant
+        skills:
+          MeleeKnowledge: 50
+          ShootingKnowledge: 50
+          ConstructionSimpleHandmade: 50
+          ConstructionAdvancedHandmade: 50
+          ConstructionSurvivalWeaponsHandmade: 50
+          ConstructionSurvivalWeaponsHandmadeAdvanced: 50
+          ConstructionTechnological: 50
+          ConstructionMaterials: 50
+          ConstructionDoors: 50
+          ConstructionAirlocks: 50
+          ConstructionToys: 50
+          ConstructionBots: 50
+          ConstructionSimpleFurniture: 50
+          ConstructionFurniture: 50
+          ConstructionInfrastructure: 50
+          ConstructionElectronics: 50
+          ConstructionWalls: 50
+          ConstructionAdvancedWalls: 50
+          ConstructionScience: 50
+          ConstructionWindows: 50
+          ConstructionAdvancedWindows: 50
+          ConstructionSmokeables: 50
+  # </Trauma>
 
 - type: startingGear
   parent: ERTEngineerGearEVA
@@ -339,6 +383,17 @@
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm]
+  # <Trauma>
+  - !type:AddComponentSpecial
+    components:
+      - type: KnowledgeGrant
+        skills:
+          MeleeKnowledge: 50
+          ShootingKnowledge: 50
+          StrengthKnowledge: 50
+          ToughnessKnowledge: 50
+          AgilityKnowledge: 50
+  # </Trauma>
 
 - type: startingGear
   parent: ERTSecurityGearEVA
@@ -516,6 +571,16 @@
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
+  # <Trauma>
+  - !type:AddComponentSpecial
+    components:
+      - type: KnowledgeGrant
+        skills:
+          MeleeKnowledge: 50
+          ShootingKnowledge: 50
+          SurgeryKnowledge: 50
+          FirstAidKnowledge: 50
+  # </Trauma>
 
 - type: startingGear
   parent: ERTMedicalGearEVA
@@ -622,6 +687,15 @@
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm]
+  # <Trauma>
+  - !type:AddComponentSpecial
+    components:
+      - type: KnowledgeGrant
+        skills:
+          MeleeKnowledge: 50
+          ShootingKnowledge: 50
+          JanitorKnowledge: 50
+  # </Trauma>
 
 - type: startingGear
   parent: ERTJanitorGearEVA

@@ -96,3 +96,19 @@
   components:
   - type: Knowledge
     experienceCost: 5
+
+- type: entity
+  parent: BaseKnowledge
+  id: ChemistryKnowledge
+  name: ChemistryKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 15
+
+- type: entity
+  parent: BaseKnowledge
+  id: TechnologyKnowledge
+  name: TechnologyKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 15

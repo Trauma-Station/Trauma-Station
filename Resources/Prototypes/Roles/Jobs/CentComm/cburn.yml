@@ -29,6 +29,15 @@
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
+  # <Trauma>
+  - !type:AddComponentSpecial
+    components:
+    - type: DeathSquadMember # Goobstation
+      - type: KnowledgeGrant
+        skills:
+          MeleeKnowledge: 50
+          ShootingKnowledge: 50
+  # </Trauma>
 
 - type: startingGear # Goobstation - Start - Sol
   id: CBURNGear

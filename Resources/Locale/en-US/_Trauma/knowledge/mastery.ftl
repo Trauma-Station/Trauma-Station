@@ -11,7 +11,7 @@ knowledge-could-not-learn = You cannot learn any more about { $knowledge } from 
 knowledge-learn-more = You learn more about { $knowledge }.
 knowledge-level-epiphany = You have reached a sudden epiphany regarding { $knowledge }!
 
-knowledge-info-description = Level: {$level} | {$mastery} | Experience: {$exp}
+knowledge-info-description = {$mastery}
 
 knowledge-language-speaks-understands = Speaks and understands {$language}
 knowledge-language-speaks = Speaks {$language}

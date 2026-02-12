@@ -27,6 +27,11 @@
     - type: CPRTraining
       reviveChance: 0.6 # better at chest compressions
       inhaleChance: 0.9 # very good at mouth to mouth res.
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        FirstAidKnowledge: 26
+    # </Trauma>
 
 - type: startingGear
   id: ParamedicGear

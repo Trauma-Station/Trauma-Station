@@ -45,6 +45,10 @@
       - type: CPRTraining
         reviveChance: 0.9 # excellent training and experience
         inhaleChance: 1 # great kisser too
+      - type: KnowledgeGrant
+        skills:
+          FirstAidKnowledge: 50
+          SurgeryKnowledge: 50
       # </Trauma>
 
 - type: startingGear

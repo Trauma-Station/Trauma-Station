@@ -27,6 +27,12 @@
       interval: 10
     - type: SpeechFontOverride # Trauma - ss13 parity
       font: LDFComicSans
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        ConstructionBananium: 26
+    # </Trauma>
+
   - !type:AddImplantSpecial
     implants: [ SadTromboneImplant ]
 
