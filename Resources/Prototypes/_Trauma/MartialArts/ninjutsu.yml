@@ -17,6 +17,7 @@
   - !type:GenericStatusEffect
     key: Paralyze
     time: 2
+    type: Remove
   - !type:HealthChange
     damage:
       types:
@@ -34,6 +35,7 @@
   - !type:GenericStatusEffect
     key: Paralyze
     time: 20
+    type: Remove
   - !type:HealthChange
     damage:
       types:
@@ -51,6 +53,7 @@
   - !type:GenericStatusEffect
     key: Paralyze
     time: 7
+    type: Remove
   - !type:HealthChange
     damage:
       types:

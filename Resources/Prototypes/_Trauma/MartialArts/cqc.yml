@@ -29,8 +29,9 @@
       types:
         Blunt: 12
   - !type:GenericStatusEffect
-    key: Knockdown
+    key: KnockedDown
     time: 2
+    type: Remove
   levelRequired: 26
 
 - type: combo
@@ -70,8 +71,9 @@
   - !type:TakeStaminaDamage
     amount: 30
   - !type:GenericStatusEffect
-    key: Knockdown
+    key: KnockedDown
     time: 1
+    type: Remove
   levelRequired: 26
 
 - type: combo
@@ -136,9 +138,11 @@
       types:
         Blunt: 30
   - !type:GenericStatusEffect
-    key: Knockdown
+    key: KnockedDown
     time: 20
+    type: Remove
   - !type:GenericStatusEffect
     key: ForcedSleep
     time: 20
+    type: Remove
   levelRequired: 50

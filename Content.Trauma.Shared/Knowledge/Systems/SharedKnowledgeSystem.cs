@@ -48,8 +48,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnKnowledgeContainerShutdown);
         SubscribeLocalEvent<KnowledgeContainerComponent, EntInsertedIntoContainerMessage>(OnEntityInserted);
         SubscribeLocalEvent<KnowledgeContainerComponent, EntRemovedFromContainerMessage>(OnEntityRemoved);
+        SubscribeLocalEvent<KnowledgeHolderComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
+        SubscribeLocalEvent<KnowledgeHolderComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
+
         SubscribeLocalEvent<KnowledgeContainerComponent, ConstructionGetGroupsEvent>(OnConstructionGetGroupEvent);
         SubscribeLocalEvent<BodyComponent, ConstructionGetGroupsEvent>(OnConstructionGetGroupEventBodyPart);
+
 
         //Experience Methods
         SubscribeLocalEvent<KnowledgeHolderComponent, AddExperience>(OnAddExperience);
@@ -99,6 +103,26 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         // to another. That might be good to have for polymorphs or something.
         statusComp.AppliedTo = null;
         Dirty(args.Entity, statusComp);
+    }
+
+    private void OnEntInserted(Entity<KnowledgeHolderComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!TryComp<KnowledgeContainerComponent>(args.Entity, out _))
+            return;
+
+        // 3. Link the holder to the knowledge entity
+        ent.Comp.KnowledgeEntity = args.Entity;
+        Dirty(ent);
+    }
+
+    private void OnEntRemoved(Entity<KnowledgeHolderComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+
+        if (ent.Comp.KnowledgeEntity == args.Entity)
+        {
+            ent.Comp.KnowledgeEntity = null;
+        }
+        Dirty(ent);
     }
 
     private void OnHolderStartup(Entity<KnowledgeHolderComponent> ent, ref ComponentStartup args)

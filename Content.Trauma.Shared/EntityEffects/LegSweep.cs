@@ -12,7 +12,7 @@ namespace Content.Trauma.Shared.EntityEffects;
 public sealed partial class LegSweep : EntityEffectBase<LegSweep>
 {
     /// <summary>
-    /// The amount of time to force sleep for.
+    /// The amount of time to knockdown for.
     /// </summary>
     [DataField(required: true)]
     public float Time = default!;
@@ -33,12 +33,12 @@ public sealed class LegSweepEffectSystem : EntityEffectSystem<TransformComponent
             if (_standing.IsDown(user))
             {
                 _standing.Stand(user);
-                _statusEffects.TryAddStatusEffect(ent.Owner, "Knockdown", out _, TimeSpan.FromSeconds(args.Effect.Time * args.Scale * 2));
+                _statusEffects.TryAddStatusEffect(ent.Owner, "KnockedDown", out _, TimeSpan.FromSeconds(args.Effect.Time * args.Scale * 2));
             }
             else
             {
-                if (_random.Prob(Math.Max(0.5f * args.Scale, 1f)))
-                    _statusEffects.TryAddStatusEffect(ent.Owner, "Knockdown", out _, TimeSpan.FromSeconds(args.Effect.Time * args.Scale));
+                if (_random.Prob(Math.Min(0.5f * args.Scale, 1f)))
+                    _statusEffects.TryAddStatusEffect(ent.Owner, "KnockedDown", out _, TimeSpan.FromSeconds(args.Effect.Time * args.Scale));
             }
         }
     }

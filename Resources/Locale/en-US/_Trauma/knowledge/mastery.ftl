@@ -63,5 +63,6 @@ knowledge-StrengthKnowledge = Strength
 knowledge-AthleticsKnowledge = Athletics
 knowledge-MagicalLiteracyKnowledge = Magical Literacy
 knowledge-LiteracyKnowledge = Literacy
+knowledge-JanitorKnowledge = Janitor
 
 language-curse-pain = You hear bad language!
