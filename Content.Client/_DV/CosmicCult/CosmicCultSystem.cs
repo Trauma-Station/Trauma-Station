@@ -83,8 +83,8 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         if (args.Alert.ID != ent.Comp.EntropyAlert)
             return;
         var entropy = Math.Clamp(ent.Comp.EntropyStored, 0, 14);
-        _sprite.LayerSetRsiState(args.SpriteViewEnt, AlertVisualLayers.Base, $"base{entropy}");
-        _sprite.LayerSetRsiState(args.SpriteViewEnt, CultAlertVisualLayers.Counter, $"num{entropy}");
+        _sprite.LayerSetRsiState((args.SpriteViewEnt.Owner, args.SpriteViewEnt.Comp), AlertVisualLayers.Base, $"base{entropy}");
+        _sprite.LayerSetRsiState((args.SpriteViewEnt.Owner, args.SpriteViewEnt.Comp), CultAlertVisualLayers.Counter, $"num{entropy}");
     }
     #endregion
 
