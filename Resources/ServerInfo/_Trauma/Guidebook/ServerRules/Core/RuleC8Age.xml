@@ -5,11 +5,11 @@
 
   ## Examples
 
-  ### [bold] Permitted [/bold]
+  ### Permitted
 
   - Being 18-777 years old.
 
-  ### [bold] Not Permitted [/bold]
+  ### Not Permitted
 
   - Being 0-17 years old.
 </Document>
