@@ -54,9 +54,11 @@
   - type: AutoImplant
     implants:
     - SpaceItalianTranslatorImplant   #chefs should speak space italian
+  # <Trauma>
   - type: KnowledgeGrant
     skills:
       MartialArtCQCChef: 26
+  # </Trauma>
 # Goobstation end
 
 - type: randomHumanoidSettings
