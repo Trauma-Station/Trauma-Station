@@ -18,7 +18,6 @@ namespace Content.Goobstation.Shared.Held;
 
 public sealed class HeldGrantComponentSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly ISerializationManager _serializationManager = default!;
 
     public override void Initialize()
@@ -33,7 +32,7 @@ public sealed class HeldGrantComponentSystem : EntitySystem
     {
         foreach (var (name, data) in ent.Comp.Components)
         {
-            var newComp = (Component) _componentFactory.GetComponent(name);
+            var newComp = (Component) Factory.GetComponent(name);
             if (HasComp(args.User, newComp.GetType()))
                 continue;
 
@@ -41,7 +40,7 @@ public sealed class HeldGrantComponentSystem : EntitySystem
             _serializationManager.CopyTo(data.Component, ref temp);
             EntityManager.AddComponent(args.User, (Component)temp!);
 
-            ent.Comp.Active[name] = true; // Goobstation
+            ent.Comp.Active[name] = true;
         }
     }
 
@@ -56,13 +55,10 @@ public sealed class HeldGrantComponentSystem : EntitySystem
             if (!ent.Comp.Active.ContainsKey(name) || !ent.Comp.Active[name])
                 continue;
 
-            var newComp = (Component) _componentFactory.GetComponent(name);
+            var newComp = (Component) Factory.GetComponent(name);
 
             RemComp(args.User, newComp.GetType());
-            ent.Comp.Active[name] = false; // Goobstation
+            ent.Comp.Active[name] = false;
         }
-
-        // Goobstation
-        //component.IsActive = false;
     }
 }

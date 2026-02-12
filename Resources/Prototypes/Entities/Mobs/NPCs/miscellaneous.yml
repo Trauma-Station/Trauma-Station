@@ -1,11 +1,9 @@
 - type: entity
   name: laser raptor
   id: MobLaserRaptor
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, AppearanceLaserRaptor ] # Shitmed
   description: From the Viking age.
   components:
-    - type: Body # Shitmed Change
-      prototype: LaserRaptor
     - type: NpcFactionMember
       factions:
         - SimpleHostile
@@ -55,8 +53,6 @@
       successChance: 0.3
       interactSuccessString: petting-success-reptile
       interactFailureString: petting-failure-generic
-      interactSuccessSound:
-        path: /Audio/Animals/lizard_happy.ogg
 
 - type: entity
   id: MobTomatoKiller
@@ -135,7 +131,7 @@
   - type: NPCImprintingOnSpawnBehaviour
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
   - type: Sprite
     sprite: Mobs/Demons/tomatokiller.rsi
     noRot: true

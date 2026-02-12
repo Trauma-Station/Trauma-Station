@@ -52,7 +52,7 @@
   - !type:FlammableTileReaction
     temperatureMultiplier: 2
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -83,7 +83,7 @@
       - !type:Flammable
         multiplier: 0.4
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -104,7 +104,7 @@
   flavor: bitter
   color: "#D4872A"
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -136,7 +136,7 @@
   tileReactions:
   - !type:PryTileReaction
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -193,15 +193,13 @@
   tileReactions:
   - !type:FlammableTileReaction {}
   metabolisms:
-    Food:
+    Bloodstream:
       effects:
       - !type:SatiateThirst
         factor: 1
         conditions:
         - !type:MetabolizerTypeCondition
           type: [Vox]
-    Poison:
-      effects:
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition

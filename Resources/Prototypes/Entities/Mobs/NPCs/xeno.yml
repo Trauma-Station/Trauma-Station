@@ -3,12 +3,10 @@
 
 - type: entity
   name: space adder
-  parent: SimpleSpaceMobBase
+  parent: [ SimpleSpaceMobBase, AppearanceSpaceAdder ]
   id: MobPurpleSnake
   description: A menacing purple snake from Kepler-283c.
   components:
-  - type: Body # Shitmed Change
-    prototype: SpaceAdder
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi
@@ -75,13 +73,11 @@
 
 - type: entity
   name: space adder
-  parent: MobPurpleSnake
+  parent: [ MobPurpleSnake, AppearanceSpaceAdder ] # Shitmed
   id: MobSmallPurpleSnake
   suffix: small
   description: A smaller version of the menacing purple snake from Kepler-283c.
   components:
-  - type: Body # Shitmed Change
-    prototype: SpaceAdder
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi

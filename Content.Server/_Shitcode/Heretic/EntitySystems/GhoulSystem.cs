@@ -23,11 +23,10 @@ using Content.Server.Dragon;
 using Content.Server.Ghost.Roles.Components;
 using Content.Shared.Hands.Components;
 using Content.Server.Hands.Systems;
-using Content.Server.Humanoid;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared._Shitcode.Roles;
-using Content.Shared.Administration.Systems;
 using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.Shared.Administration.Systems;
 using Content.Shared.CombatMode;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Examine;
@@ -58,8 +57,9 @@ using Content.Server.NPC.Systems;
 using Content.Server.Roles;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
+using Content.Medical.Shared.Consciousness;
 using Content.Shared._Starlight.CollectiveMind;
+using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Roles;
@@ -77,7 +77,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
     [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
     [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
@@ -200,13 +200,15 @@ public sealed class GhoulSystem : SharedGhoulSystem
                 SetBoundHeretic((ent.Owner, minion), heretic, false);
         }
 
-        if (TryComp<HumanoidAppearanceComponent>(ent, out var humanoid))
+        if (TryComp<HumanoidProfileComponent>(ent, out var humanoid))
         {
             // make them "have no eyes" and grey
             // this is clearly a reference to grey tide
+            /* TODO NUBODY API
             var greycolor = Color.FromHex("#505050");
             _humanoid.SetSkinColor(ent, greycolor, true, false, humanoid);
             _humanoid.SetBaseLayerColor(ent, HumanoidVisualLayers.Eyes, greycolor, true, humanoid);
+            */
         }
 
         if (TryComp<MobThresholdsComponent>(ent, out var th))
@@ -317,7 +319,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         if (ent.Comp.SpawnOnDeathPrototype != null)
             Spawn(ent.Comp.SpawnOnDeathPrototype.Value, Transform(ent).Coordinates);
 
-        if (!TryComp(ent, out BodyComponent? body))
+        if (!HasComp<BodyComponent>(ent))
             return;
 
         foreach (var giblet in _gibbing.Gib(ent))

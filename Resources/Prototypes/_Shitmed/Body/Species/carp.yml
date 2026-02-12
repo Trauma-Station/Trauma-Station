@@ -1,0 +1,95 @@
+## Mob
+
+- type: entity
+  abstract: true
+  parent: BaseMobBody
+  id: AppearanceCarp
+  name: carp appearance
+  components:
+  - type: Legs
+    required: 1 # tail
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganCarpTorso
+      Tail: OrganCarpTail
+      # Organs
+      Heart: OrganCarpHeart
+      Lungs: OrganCarpLungs
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganCarp
+  suffix: carp
+
+- type: entity
+  abstract: true
+  parent: OrganCarp
+  id: OrganCarpExternal
+  components:
+  - type: Sprite
+    sprite: _Shitmed/Mobs/Aliens/Carps/carp_parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Shitmed/Mobs/Aliens/Carps/carp_parts.rsi
+
+- type: entity
+  abstract: true
+  parent: OrganCarp
+  id: OrganCarpInternal
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseTorsoAnimalTailed, OrganCarpExternal ]
+  id: OrganCarpTorso
+
+- type: entity
+  parent: [ OrganBaseTail, OrganCarpExternal ]
+  id: OrganCarpTail
+  name: carp tail
+  description: Unique glands in this tail let space carp fly in a vacuum.
+  components:
+  - type: MovementBodyPart
+    walkSpeed: 2.5
+    sprintSpeed: 3.5
+  # TODO SHITMED: space flight stuff
+
+## Organs
+
+- type: entity
+  parent: [ OrganAnimalLungs, OrganCarpInternal ]
+  id: OrganCarpLungs
+  components:
+  - type: InternalOrgan
+    intCap: 28
+    integrity: 28
+    integrityThresholds:
+      Normal: 28
+      Damaged: 16
+      Destroyed: 0
+  - type: OrganComponents
+    onAdd:
+    - type: BreathingImmunity
+
+- type: entity
+  parent: [ OrganAnimalHeart, OrganCarpInternal ]
+  id: OrganCarpHeart
+  name: space animal heart
+  components:
+  - type: InternalOrgan
+    intCap: 21
+    integrity: 21
+    integrityThresholds:
+      Normal: 21
+      Damaged: 12
+      Destroyed: 0
+  - type: OrganComponents
+    onAdd:
+    - type: PressureImmunity

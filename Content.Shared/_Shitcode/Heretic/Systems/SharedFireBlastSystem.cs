@@ -1,9 +1,9 @@
 using System.Linq;
 using Content.Goobstation.Common.Physics;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -18,7 +18,7 @@ public abstract class SharedFireBlastSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem Xform = default!;
     [Dependency] protected readonly StatusEffectsSystem Status = default!;
     [Dependency] protected readonly DamageableSystem Dmg = default!;
-    [Dependency] protected readonly SharedBodySystem Body = default!;
+    [Dependency] protected readonly BodySystem Body = default!;
 
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedStaminaSystem _stam = default!;

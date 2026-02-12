@@ -1,0 +1,62 @@
+- type: entity
+  abstract: true
+  parent: AppearanceXenomorphBase
+  id: AppearanceXenomorphDrone
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganXenomorphTorso
+      Head: OrganXenomorphHeadDrone
+      ArmLeft: OrganXenomorphArmLeft
+      ArmRight: OrganXenomorphArmRight
+      HandRight: OrganXenomorphHandRight
+      HandLeft: OrganXenomorphHandLeft
+      LegLeft: OrganXenomorphLegLeft
+      LegRight: OrganXenomorphLegRight
+      FootLeft: OrganXenomorphFootLeft
+      FootRight: OrganXenomorphFootRight
+      # Organs
+      Brain: OrganXenomorphBrain
+      Eyes: OrganXenomorphEyes
+      Tongue: OrganXenomorphTongue
+      Stomach: OrganXenomorphStomach
+      Liver: OrganXenomorphLiver
+      Kidneys: OrganXenomorphKidneys
+      HiveNode: OrganXenomorphHiveNode
+      # Caste-Specific
+      ResinSpinner: OrganXenomorphResinSpinner
+      AcidGland: OrganXenomorphAcidGland
+      PlasmaVessel: OrganXenomorphPlasmaVesselLarge
+
+## Parts
+
+- type: entity
+  parent: OrganXenomorphHead
+  id: OrganXenomorphHeadDrone
+  suffix: xenomorph drone
+  components:
+  - type: BodyPart
+    slots:
+    - Brain
+    - Eyes
+    - HiveNode
+    - ResinSpinner
+    - AcidGland
+
+## Organs
+
+- type: entity
+  parent: OrganXenomorphPlasmaVessel
+  id: OrganXenomorphPlasmaVesselLarge
+  name: large plasma vessel
+  components:
+  - type: Sprite
+    state: plasma_vessel_large
+  - type: OrganComponents
+    onAdd:
+    - type: PlasmaVessel
+      maxPlasma: 500
+      plasma: 200
+      plasmaPerSecondOffWeed: 0.75
+      plasmaPerSecondOnWeed: 7.5

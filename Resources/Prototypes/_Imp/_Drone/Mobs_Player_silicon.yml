@@ -71,10 +71,28 @@
   - type: Physics
     bodyType: KinematicController
   - type: Hands
+    hands:
+      # Unremovable tools
+      hand1:
+        location: Right
+      hand2: {}
+      hand3: {}
+      hand4:
+        location: Left
+      # Materials etc
+      hand5:
+        location: Right
+      hand6:
+        location: Left
+    sortedHands:
+    - hand1
+    - hand2
+    - hand3
+    - hand4
+    - hand5
+    - hand6
     showInHands: false
   - type: ComplexInteraction
-  - type: Body
-    prototype: Drone
   - type: IntrinsicRadioReceiver
   #- type: IntrinsicRadioTransmitter
   #  channels:

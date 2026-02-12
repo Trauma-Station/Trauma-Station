@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputPath>../bin/Content.Client/</OutputPath>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<Configurations>Debug;Release;Tools;DebugOpt</Configurations>
+		<Platforms>AnyCPU</Platforms>
+	</PropertyGroup>
+	<Import Project="../MSBuild/Content.props" />
+	<ItemGroup>
+		<ProjectReference Include="../Content.Client/Content.Client.csproj" />
+		<ProjectReference Include="../Content.Medical.Shared/Content.Medical.Shared.csproj" />
+	</ItemGroup>
+
+	<Import Project="../RobustToolbox/Imports/Client.props" />
+	<Import Project="../RobustToolbox/Imports/Shared.props" />
+	<Import Project="../RobustToolbox/MSBuild/Robust.Properties.targets" />
+	<Import Project="../RobustToolbox/MSBuild/XamlIL.targets" />
+</Project>

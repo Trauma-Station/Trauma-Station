@@ -1,17 +1,14 @@
 // <Trauma>
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Healing;
+using Content.Medical.Common.Targeting;
+using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
-using Robust.Shared.Network;
 // </Trauma>
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Components;
@@ -36,6 +33,9 @@ namespace Content.Shared.Medical.Healing;
 
 public sealed class HealingSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly BodySystem _body = default!;
+    // </Trauma>
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
@@ -47,31 +47,20 @@ public sealed class HealingSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
 
-    // Shitmed Change
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedTargetingSystem _targetingSystem = default!;
-    [Dependency] private readonly TraumaSystem _trauma = default!;
-    [Dependency] private readonly WoundSystem _wounds = default!;
-
-    // Goobstation edit
-    [Dependency] private readonly INetManager _net = default!;
-
     // Goobstation start
-    private TargetBodyPart[] _partHealingOrder =
-        {
-            TargetBodyPart.Head,
-            TargetBodyPart.Chest,
-            TargetBodyPart.Groin,
-            TargetBodyPart.LeftArm,
-            TargetBodyPart.LeftHand,
-            TargetBodyPart.RightArm,
-            TargetBodyPart.RightHand,
-            TargetBodyPart.LeftLeg,
-            TargetBodyPart.LeftFoot,
-            TargetBodyPart.RightLeg,
-            TargetBodyPart.RightFoot
-        };
+    private ProtoId<OrganCategoryPrototype>[] _partHealingOrder =
+    {
+        "Head",
+        "Torso",
+        "ArmLeft",
+        "HandLeft",
+        "ArmRight",
+        "HandRight",
+        "LegLeft",
+        "FootLeft",
+        "LegRight",
+        "FootRight"
+    };
     // Goobstation end
 
     public override void Initialize()
@@ -81,6 +70,7 @@ public sealed class HealingSystem : EntitySystem
         SubscribeLocalEvent<HealingComponent, UseInHandEvent>(OnHealingUse);
         SubscribeLocalEvent<HealingComponent, AfterInteractEvent>(OnHealingAfterInteract);
         SubscribeLocalEvent<DamageableComponent, HealingDoAfterEvent>(OnDoAfter);
+        // TODO SHITMED: bruh move this out of here
         SubscribeLocalEvent<BodyComponent, HealingDoAfterEvent>(OnBodyDoAfter); // Shitmed Change
 
     }
@@ -90,10 +80,8 @@ public sealed class HealingSystem : EntitySystem
         if (args.Handled || args.Cancelled)
             return;
 
-        // Shitmed Change: Consciousness check because some body entities don't have Consciousness
         if (!TryComp(args.Used, out HealingComponent? healing)
-            || HasComp<BodyComponent>(target)
-            && HasComp<ConsciousnessComponent>(target))
+            || HasComp<BodyComponent>(target)) // Shitmed - let body handle it separately
             return;
 
         if (healing.DamageContainers is not null &&
@@ -205,67 +193,44 @@ public sealed class HealingSystem : EntitySystem
         return false;
     }
 
-    // Shitmed Change Start
-
-    private string? GetDamageGroupByType(string id)
-        => (from @group in _prototypes.EnumeratePrototypes<DamageGroupPrototype>() where @group.DamageTypes.Contains(id) select @group.ID).FirstOrDefault();
-
-
-    // Goobstation start
+    // TODO SHITMED: get rid of this from here
     /// <summary>
-    /// Method <c>IsBodyDamaged</c> returns if a body part can be healed by the healing component. Returns false part is fully healed too.
+    /// Shitmed - Method <c>IsBodyDamaged</c> returns if a body part can be healed by the healing component. Returns false part is fully healed too.
     /// </summary>
     /// <param name="target">the target Entity</param>
     /// <param name="user">The person trying to heal. (optional)</param>
     /// <param name="healing">The healing component.</param>
     /// <param name="targetedPart">bypasses targeting system to specify a limb. Must be set if user is null. (optional)</param>
     /// <returns> Wether or not the targeted part can be healed. </returns>
-    public bool IsBodyDamaged(Entity<BodyComponent> target, EntityUid? user, HealingComponent healing, EntityUid? targetedPart = null) // Goob edit: private => public, used in RepairableSystems.cs
+    public bool IsBodyDamaged(Entity<BodyComponent> target, EntityUid? user, HealingComponent healing, EntityUid? targetedPart = null)
     {
-        if (user is null && targetedPart is null) // no limb can be targeted at all
-            return false;
-
-        if (user is not null)
+        // try get targeted part from the user if not specified
+        if (targetedPart == null && user != null)
         {
-            if (!TryComp<TargetingComponent>(user, out var targeting))
-                return false;
-
-            var (partType, symmetry) = _bodySystem.ConvertTargetBodyPart(targeting.Target);
-            var targetedBodyPart = _bodySystem.GetBodyChildrenOfType(target, partType, target, symmetry).ToList().FirstOrNull();
-
-            if (targetedBodyPart is not null && targetedPart is null)
-                targetedPart = targetedBodyPart.Value.Id;
+            var partEv = new GetTargetedPartEvent(target);
+            RaiseLocalEvent(user.Value, ref partEv);
+            targetedPart = partEv.Part;
         }
 
-        if (targetedPart == null
-            || !TryComp(targetedPart, out DamageableComponent? damageable))
+        // no limb can be targeted at all
+        if (targetedPart is not {} part || !TryComp<DamageableComponent>(part, out var damageable))
         {
-            if (user is not null)
-                // Goobstation Predicted --> Client
-                _popupSystem.PopupClient(Loc.GetString("missing-body-part"), target, user.Value, PopupType.MediumCaution);
+            _popupSystem.PopupClient(Loc.GetString("missing-body-part"), target, user, PopupType.MediumCaution);
             return false;
         }
 
+        // see if there is any damage that can be healed
         if (healing.Damage.DamageDict.Keys
-            .Any(damageKey => _wounds.GetWoundableSeverityPoint(
-                targetedPart.Value,
-                damageGroup: GetDamageGroupByType(damageKey),
-                healable: true) > 0 || damageable.Damage.DamageDict[damageKey].Value > 0))
+            .Any(damageKey => damageable.Damage.DamageDict[damageKey].Value > 0))
             return true;
 
         if (healing.BloodlossModifier == 0)
             return false;
 
-        foreach (var wound in _wounds.GetWoundableWounds(targetedPart.Value))
-        {
-            if (!TryComp<BleedInflicterComponent>(wound, out var bleeds) || !bleeds.IsBleeding)
-                continue;
-
-            return true;
-        }
-        // Goobstation end
-
-        return false;
+        // see if there are any bleeding wounds to stop
+        var ev = new CheckPartBleedingEvent();
+        RaiseLocalEvent(part, ref ev);
+        return ev.Bleeding;
     }
 
     /// <summary>
@@ -278,11 +243,10 @@ public sealed class HealingSystem : EntitySystem
         if (!TryComp<BodyComponent>(ent, out var body))
             return false;
 
-        var parts = _bodySystem.GetBodyChildren(ent, body).ToArray();
-        foreach (var limb in parts)
+        foreach (var limb in _body.GetExternalOrgans(ent))
         {
-            part = limb.Id;
-            if (IsBodyDamaged((ent, body), null, healing, limb.Id))
+            part = limb;
+            if (IsBodyDamaged((ent, body), null, healing, limb))
                 return true;
         }
         return false;
@@ -292,30 +256,15 @@ public sealed class HealingSystem : EntitySystem
     {
         var dontRepeat = false;
 
-        if (!TryComp(args.Used, out HealingComponent? healing))
+        if (args.Handled || args.Cancelled ||
+            args.Target is not {} target ||
+            !TryComp(args.Used, out HealingComponent? healing))
             return;
 
-        if (args.Handled || args.Cancelled)
-            return;
-
-        var targetedWoundable = EntityUid.Invalid;
-        if (TryComp<TargetingComponent>(args.User, out var targeting))
+        var partEv = new GetTargetedPartEvent(target);
+        RaiseLocalEvent(args.User, ref partEv);
+        if (partEv.Part is not {} targetedWoundable)
         {
-            var (partType, symmetry) = _bodySystem.ConvertTargetBodyPart(targeting.Target);
-            var targetedBodyPart = _bodySystem.GetBodyChildrenOfType(ent, partType, comp, symmetry).ToList().FirstOrDefault();
-            targetedWoundable = targetedBodyPart.Id;
-        }
-
-        // Goobstation - commented out as it is no longer needed due to newer topical application logic
-        // Goobstation start
-        /*if (!IsBodyDamaged((ent, comp), null, healing, targetedWoundable))                          // Check if there is anything to heal on the initial limb target
-            if (TryGetNextDamagedPart(ent, healing, out var limbTemp) && limbTemp is not null)      // If not then get the next limb to heal
-                targetedWoundable = limbTemp.Value;*/
-        // Goobstation end
-
-        if (targetedWoundable == EntityUid.Invalid)
-        {
-            // Goobstation - predicted --> client
             _popupSystem.PopupClient(
                 Loc.GetString("medical-item-cant-use", ("item", args.Used)),
                 ent,
@@ -324,12 +273,11 @@ public sealed class HealingSystem : EntitySystem
             return;
         }
 
-        if (!TryComp<WoundableComponent>(targetedWoundable, out var woundableComp)
-            || !TryComp<DamageableComponent>(targetedWoundable, out var damageableComp))
+        if (!TryComp<DamageableComponent>(targetedWoundable, out var damageableComp))
             return;
 
         var healedBleed = false;
-        var canHeal = true;
+        //var canHeal = true; // Shitmed - not used
         var healedTotal = new DamageSpecifier(); // Goobstation
         FixedPoint2 modifiedBleedStopAbility = 0;
         // Heal some bleeds
@@ -341,7 +289,9 @@ public sealed class HealingSystem : EntitySystem
             if (TryComp<BloodstreamComponent>(ent, out var bloodstream))
                 bleedBefore = bloodstream.BleedAmountFromWounds + bloodstream.BleedAmountNotFromWounds;
             healedBleed = bleedBefore > 0.0;
-            _wounds.TryHealBleedingWounds(targetedWoundable, healing.BloodlossModifier, out modifiedBleedStopAbility, woundableComp);
+            var woundEv = new HealBleedingWoundsEvent(healing.BloodlossModifier, modifiedBleedStopAbility);
+            RaiseLocalEvent(targetedWoundable, ref woundEv);
+            modifiedBleedStopAbility = woundEv.BleedStopAbility;
             if (healing.BloodlossModifier + modifiedBleedStopAbility < 0.0)
                 _bloodstreamSystem.TryModifyBleedAmount(ent, (healing.BloodlossModifier + modifiedBleedStopAbility).Float()); // Use the leftover bleed heal
             if (healedBleed)
@@ -362,49 +312,38 @@ public sealed class HealingSystem : EntitySystem
         var leftoverHealAndTrauma = false;
         var leftoverHealAndBleed = false;
         var healingLeft = healing.Damage * _damageable.UniversalTopicalsHealModifier;
-        if (TryComp<BodyComponent>(ent, out var bodyComp) && bodyComp.BodyType == _Shitmed.Body.BodyType.Complex)
+        if (TryComp<BodyComponent>(ent, out var bodyComp))
         {
-            // Create parts to go over queue: targetted part -> head -> torso -> groin -> everything else
+            // Create parts to go over queue: targetted part -> head -> torso -> everything else
             // Iterate over the parts in the predefined order until we run out of parts or run out of healing
             var woundablesQueue = new Queue<EntityUid>();
             woundablesQueue.Enqueue(targetedWoundable);
-            for (var i = 0; i < _partHealingOrder.Length; i++)
+            foreach (var category in _partHealingOrder)
             {
-                var (partType, symmetry) = _bodySystem.ConvertTargetBodyPart(_partHealingOrder[i]);
-                var targetedBodyPart = _bodySystem.GetBodyChildrenOfType(ent, partType, comp, symmetry).ToList().FirstOrDefault();
-                if (targetedBodyPart.Id == targetedWoundable)
-                    continue;
-                woundablesQueue.Enqueue(targetedBodyPart.Id);
+                if (_body.GetOrgan(ent, category) is {} organ)
+                    woundablesQueue.Enqueue(organ);
             }
             while (woundablesQueue.Count > 0 && healingLeft.GetTotal() < 0.0)
             {
-                canHeal = true;
                 targetedWoundable = woundablesQueue.Dequeue();
-                if (!TryComp<WoundableComponent>(targetedWoundable, out var woundableComp2))
+                var ev = new PartHealAttemptEvent();
+                RaiseLocalEvent(targetedWoundable, ref ev);
+                if (ev.Cancelled)
+                {
+                    // if it wasn't healed then a trauma blocked it? goida
+                    leftoverHealAndTrauma |= !healedBleedLevel;
                     continue;
-                if (TraumaSystem.TraumasBlockingHealing.Any(traumaType => _trauma.HasWoundableTrauma(targetedWoundable, traumaType, woundableComp2, false)))
-                {
-                    canHeal = false;
-
-                    if (!healedBleedLevel)
-                    {
-                        leftoverHealAndTrauma = true;
-                        continue;
-                    }
                 }
 
-                if (canHeal)
+                if (healing.BloodlossModifier == 0 && healing.ModifyBloodLevel >= 0 && ev.Bleeding)  // If the healing item has no bleeding heals, and its bleeding, we raise the alert. Goobstation edit
                 {
-                    if (healing.BloodlossModifier == 0 && healing.ModifyBloodLevel >= 0 && woundableComp2.Bleeds > 0)  // If the healing item has no bleeding heals, and its bleeding, we raise the alert. Goobstation edit
-                    {
-                        leftoverHealAndBleed = true;
-                        continue;
-                    }
-
-                    var damageChanged = _damageable.ChangeDamage(targetedWoundable, healingLeft, true, origin: args.User, ignoreBlockers: healedBleed || healing.BloodlossModifier == 0); // GOOBEDIT
-                    healedTotal -= damageChanged;
-                    healingLeft -= damageChanged;
+                    leftoverHealAndBleed = true;
+                    continue;
                 }
+
+                var damageChanged = _damageable.ChangeDamage(targetedWoundable, healingLeft, true, origin: args.User, ignoreBlockers: healedBleed || healing.BloodlossModifier == 0); // GOOBEDIT
+                healedTotal -= damageChanged;
+                healingLeft -= damageChanged;
             }
         }
         else
@@ -581,8 +520,11 @@ public sealed class HealingSystem : EntitySystem
             return 1;
 
         var percentDamage = (float)(ent.Comp1.TotalDamage / amount);
-        if (TryComp<ConsciousnessComponent>(ent.Owner, out var consciousness)) // Shitmed
-            percentDamage *= (float) (consciousness.Threshold / consciousness.Cap - consciousness.Consciousness);
+        // <Trauma>
+        var ev = new ModifySelfHealSpeedEvent();
+        RaiseLocalEvent(ent, ref ev);
+        percentDamage *= ev.Modifier;
+        // </Trauma>
 
         //basically make it scale from 1 to the multiplier.
         var output = percentDamage * (mod - 1) + 1;

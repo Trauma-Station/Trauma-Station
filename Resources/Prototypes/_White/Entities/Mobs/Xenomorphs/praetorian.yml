@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseMobXenomorphAdult
+  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphPraetorian ]
   id: BaseMobXenomorphPraetorian
   name: xenomorph praetorian
   description: An elite specimen designed to protect the Hive and the Queen, his very presence instills fear and trepidation into the enemy ranks.
@@ -21,15 +21,6 @@
         Brute: 5
     inject:
       ChloralHydrate: 5 # Goobstation - new chemical
-  #- type: ActionGrant # Goobstation - moved to organs
-  #  actions:
-  #  - ActionTransferPlasma
-  #  - ActionSpawnWallResin
-  #  - ActionSpawnResinMembrane
-  #  - ActionSpawnResinNest
-  #  - ActionSpawnResinWeedNode
-  - type: Body
-    prototype: XenomorphPraetorian
   - type: TypingIndicator
     proto: alien_royal
   - type: Fixtures

@@ -1,62 +1,68 @@
-using System.Linq;
 using Content.Goobstation.Common.Weapons.Ranged;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
+using Content.Medical.Common.Body;
+using Content.Medical.Shared.Body;
+using Content.Shared.Body;
 
 namespace Content.Goobstation.Shared.RecoilAbsorber;
 
 public sealed class RecoilAbsorberSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly BodyPartSystem _part = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RecoilAbsorberArmComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<RecoilAbsorberArmComponent, BodyPartAddedEvent>(OnAttach);
-        SubscribeLocalEvent<RecoilAbsorberArmComponent, BodyPartRemovedEvent>(OnRemove);
+        SubscribeLocalEvent<RecoilAbsorberArmComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RecoilAbsorberArmComponent, OrganGotInsertedEvent>(OnAttach);
+        SubscribeLocalEvent<RecoilAbsorberArmComponent, OrganGotRemovedEvent>(OnRemove);
 
         SubscribeLocalEvent<RecoilAbsorberComponent, GetRecoilModifiersEvent>(OnShot);
     }
 
-    private void OnInit(Entity<RecoilAbsorberArmComponent> ent, ref ComponentInit args) => UpdateComp(ent);
-
-    private void OnAttach(Entity<RecoilAbsorberArmComponent> ent, ref BodyPartAddedEvent args) => UpdateComp(ent);
-
-    private void OnRemove(Entity<RecoilAbsorberArmComponent> ent, ref BodyPartRemovedEvent args) => UpdateComp(ent);
-
-    private void UpdateComp(Entity<RecoilAbsorberArmComponent> ent)
+    private void OnMapInit(Entity<RecoilAbsorberArmComponent> ent, ref MapInitEvent args)
     {
-        if (!TryComp<BodyPartComponent>(ent, out var part)
-            || part.Body == null)
+        if (_body.GetBody(ent.Owner) is {} body)
+            UpdateComp(body);
+    }
+
+    private void OnAttach(Entity<RecoilAbsorberArmComponent> ent, ref OrganGotInsertedEvent args)
+    {
+        UpdateComp(args.Target);
+    }
+
+    private void OnRemove(Entity<RecoilAbsorberArmComponent> ent, ref OrganGotRemovedEvent args)
+    {
+        UpdateComp(args.Target);
+    }
+
+    private void UpdateComp(EntityUid body)
+    {
+        var arms = 0;
+        var reduction = 0f;
+        foreach (var part in _part.GetBodyParts(body, BodyPartType.Arm))
+        {
+            arms++;
+            if (TryComp<RecoilAbsorberArmComponent>(part, out var absorber))
+                reduction += 1f - absorber.Modifier;
+        }
+
+        if (arms == 0 || reduction == 0f)
+        {
+            RemComp<RecoilAbsorberComponent>(body);
             return;
-
-        var arms = _body.GetBodyChildrenOfType(part.Body.Value, BodyPartType.Arm).ToList();
-        if (arms.Count == 0)
-        {
-            RemComp<RecoilAbsorberComponent>(part.Body.Value);
-            return;
         }
 
-        // Check if all arms are absorber arms and collect their modifiers
-        var modifiers = new List<float>();
-        foreach (var arm in arms)
-        {
-            if (!TryComp<RecoilAbsorberArmComponent>(arm.Id, out var absorber))
-                // If any arm is not an absorber arm, just return without the component
-                return;
-
-            modifiers.Add(absorber.Modifier);
-        }
-
-        // Only if we have valid modifiers from all arms, add/update the component
-        if (modifiers.Count > 0)
-        {
-            var comp = EnsureComp<RecoilAbsorberComponent>(part.Body.Value);
-            comp.Modifier = modifiers.Min();
-            Dirty(part.Body.Value, comp);
-        }
+        // We have valid modifiers from all arms, add/update the component
+        var comp = EnsureComp<RecoilAbsorberComponent>(body);
+        // it goes from modifier of 0.3 to reduction of 0.7
+        // then for both arms it's 1.4 reduction, halved to 0.7
+        // then turned back into modifier of 0.3
+        // if you only had 1 absorbing arm it would instead be reduction of 0.35, or modifier of 0.65 (funny)
+        reduction /= arms;
+        comp.Modifier = 1f - reduction;
+        Dirty(body, comp);
     }
 
     private void OnShot(Entity<RecoilAbsorberComponent> ent, ref GetRecoilModifiersEvent args)

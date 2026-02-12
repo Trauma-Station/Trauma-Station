@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Random;
-using Content.Shared._Shitmed.Targeting; // Shitmed Change
+using Content.Medical.Common.Targeting; // Shitmed Change
 namespace Content.Server._DV.CosmicCult.EntitySystems;
 
 /// <summary>

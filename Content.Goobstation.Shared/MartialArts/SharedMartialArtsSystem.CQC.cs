@@ -18,12 +18,11 @@ using System.Linq;
 using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Shared.MartialArts.Components;
 using Content.Goobstation.Shared.MartialArts.Events;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Shared.Traumas;
+using Content.Medical.Shared.Wounds;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Bed.Sleep;
-using Content.Shared.Body.Components;
+using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
@@ -42,6 +41,7 @@ public partial class SharedMartialArtsSystem
 {
     private readonly ProtoId<DamageTypePrototype> Asphyxiation = "Asphyxiation";
     private readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
+    private readonly ProtoId<OrganCategoryPrototype> HeadCategory = "Head";
     private readonly EntProtoId ForcedSleeping = "StatusEffectForcedSleeping";
 
     private void InitializeCqc()
@@ -122,18 +122,12 @@ public partial class SharedMartialArtsSystem
                     var blunt = new DamageSpecifier(_proto.Index(Blunt), damageToKill.Value);
                     _damageable.TryChangeDamage(args.Target, blunt, true, targetPart: TargetBodyPart.Chest);
 
-                    var (partType, symmetry) = _body.ConvertTargetBodyPart(targeting.Target);
-                    var targetedBodyPart = _body.GetBodyChildrenOfType(args.Target, partType, body, symmetry)
-                        .ToList()
-                        .FirstOrNull();
-
-                    if (targetedBodyPart == null ||
-                        !TryComp(targetedBodyPart.Value.Id, out WoundableComponent? woundable) ||
-                        woundable.Bone.ContainedEntities.FirstOrNull() is not { } bone ||
-                        !TryComp(bone, out BoneComponent? boneComp) || boneComp.BoneSeverity == BoneSeverity.Broken)
+                    if (_body.GetOrgan(args.Target, HeadCategory) is not {} head ||
+                        _trauma.GetBone(head) is not {} bone)
                         break;
 
-                    _trauma.ApplyDamageToBone(bone, boneComp.BoneIntegrity, boneComp);
+                    // break the head bone (aka skull thanks mocho)
+                    _trauma.ApplyDamageToBone(bone, bone.Comp.BoneIntegrity, bone.Comp);
                     ComboPopup(ent, args.Target, "Neck Snap");
                     break;
                 }

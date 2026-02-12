@@ -49,7 +49,7 @@ public sealed class SpookActionSystem : EntitySystem
     private EntityQuery<ApcComponent> _apcQuery;
     private EntityQuery<ActionComponent> _actionQuery;
     private EntityQuery<FlammableComponent> _flammable;
-    private EntityQuery<HumanoidAppearanceComponent> _humanoidAppearanceQuery;
+    private EntityQuery<HumanoidProfileComponent> _humanoidAppearanceQuery;
 
     public override void Initialize()
     {
@@ -61,7 +61,7 @@ public sealed class SpookActionSystem : EntitySystem
         _apcQuery = GetEntityQuery<ApcComponent>();
         _actionQuery = GetEntityQuery<ActionComponent>();
         _flammable = GetEntityQuery<FlammableComponent>();
-        _humanoidAppearanceQuery = GetEntityQuery<HumanoidAppearanceComponent>();
+        _humanoidAppearanceQuery = GetEntityQuery<HumanoidProfileComponent>();
 
         SubscribeLocalEvent<SpookMarkComponent, SpookEvent>(OnSpookEvent);
 

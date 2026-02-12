@@ -1,0 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+using Content.Shared.Damage;
+
+namespace Content.Medical.Shared.Surgery;
+
+/// <summary>
+///     Raised on the target entity.
+/// </summary>
+[ByRefEvent]
+public record struct SurgeryStepDamageEvent(EntityUid User, EntityUid Body, EntityUid Part, EntityUid Surgery, DamageSpecifier Damage, float PartMultiplier);

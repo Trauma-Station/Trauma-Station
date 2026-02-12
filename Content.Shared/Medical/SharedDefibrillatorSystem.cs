@@ -1,8 +1,6 @@
 // <Trauma>
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Systems;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 // </Trauma>
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Chat;
@@ -30,9 +28,6 @@ namespace Content.Shared.Medical;
 /// </summary>
 public abstract class SharedDefibrillatorSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private readonly ConsciousnessSystem _consciousness = default!;
-    // </Trauma>
     [Dependency] private readonly SharedChatSystem _chat = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -218,13 +213,6 @@ public abstract class SharedDefibrillatorSystem : EntitySystem
             if (_mobState.IsDead(target, targetMobState))
             {
                 // <Shitmed>
-                if (_consciousness.TryGetNerveSystem(target, out _))
-                {
-                    // TODO SHITMED: very fucking suspicious, should this not use TryGetNerveSystem result?
-                    _consciousness.RemoveConsciousnessModifier(target, target, "Suffocation");
-                    _consciousness.RemoveConsciousnessModifier(target, target, "DeathThreshold");
-                }
-
                 _damageable.TryChangeDamage(target, ent.Comp.ZapHeal, true, origin: user,
                     targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
                 // </Shitmed>

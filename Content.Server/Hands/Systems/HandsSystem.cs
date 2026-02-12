@@ -1,11 +1,6 @@
-// <Trauma>
-using Content.Shared._Shitmed.Body.Events;
-using Content.Shared.Body.Systems;
-// </Trauma>
 using Content.Server.Stack;
 using Content.Server.Stunnable;
 using Content.Shared.ActionBlocker;
-using Content.Shared.Body.Part;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Explosion;
@@ -36,7 +31,6 @@ namespace Content.Server.Hands.Systems
         [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
         [Dependency] private readonly PullingSystem _pullingSystem = default!;
         [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
-        [Dependency] private readonly SharedBodySystem _bodySystem = default!; // Shitmed Change
 
         // Trauma - moved query and DropHeldItemsSpread to PredictedHandsSystem
 
@@ -46,14 +40,9 @@ namespace Content.Server.Hands.Systems
 
             // Trauma - moved OnDisarmed to PredictedHandsSystem
 
-            SubscribeLocalEvent<HandsComponent, BodyPartAddedEvent>(HandleBodyPartAdded);
-            SubscribeLocalEvent<HandsComponent, BodyPartRemovedEvent>(HandleBodyPartRemoved);
-
             SubscribeLocalEvent<HandsComponent, ComponentGetState>(GetComponentState);
 
             SubscribeLocalEvent<HandsComponent, BeforeExplodeEvent>(OnExploded);
-            SubscribeLocalEvent<HandsComponent, BodyPartEnabledEvent>(HandleBodyPartEnabled); // Shitmed Change
-            SubscribeLocalEvent<HandsComponent, BodyPartDisabledEvent>(HandleBodyPartDisabled); // Shitmed Change
 
             // Trauma - moved OnDropHandItems and HandleThrowItem to PredictedHandsSystem
         }
@@ -77,60 +66,6 @@ namespace Content.Server.Hands.Systems
             }
         }
 
-        // Trauma - moved OnDisarmed to PredictedHandsSystem
-
-        // Shitmed Change Start
-        private void TryAddHand(EntityUid uid, HandsComponent component, Entity<BodyPartComponent> part, string slot)
-        {
-            if (part.Comp.PartType != BodyPartType.Hand)
-                return;
-
-            // If this annoys you, which it should.
-            // Ping Smugleaf.
-            var location = part.Comp.Symmetry switch
-            {
-                BodyPartSymmetry.None => HandLocation.Middle,
-                BodyPartSymmetry.Left => HandLocation.Left,
-                BodyPartSymmetry.Right => HandLocation.Right,
-                _ => throw new ArgumentOutOfRangeException(nameof(part.Comp.Symmetry))
-            };
-
-            if (part.Comp.Enabled
-                && _bodySystem.TryGetParentBodyPart(part, out var _, out var parentPartComp)
-                && parentPartComp.Enabled)
-                AddHand(uid, slot, location);
-        }
-
-        private void HandleBodyPartAdded(Entity<HandsComponent> ent, ref BodyPartAddedEvent args)
-        {
-            TryAddHand(ent.Owner, ent.Comp, args.Part, args.Slot);
-        }
-
-        private void HandleBodyPartRemoved(EntityUid uid, HandsComponent component, ref BodyPartRemovedEvent args)
-        {
-            if (args.Part.Comp is null
-                || args.Part.Comp.PartType != BodyPartType.Hand)
-                return;
-            RemoveHand(uid, args.Slot);
-        }
-
-        private void HandleBodyPartEnabled(EntityUid uid, HandsComponent component, ref BodyPartEnabledEvent args) =>
-            TryAddHand(uid, component, args.Part, SharedBodySystem.GetPartSlotContainerId(args.Part.Comp.ParentSlot?.Id ?? string.Empty));
-
-        private void HandleBodyPartDisabled(EntityUid uid, HandsComponent component, ref BodyPartDisabledEvent args)
-        {
-            if (TerminatingOrDeleted(uid)
-                || args.Part.Comp is null
-                || args.Part.Comp.PartType != BodyPartType.Hand)
-                return;
-
-            RemoveHand(uid, SharedBodySystem.GetPartSlotContainerId(args.Part.Comp.ParentSlot?.Id ?? string.Empty));
-        }
-
-        #region interactions
-
         // Trauma - moved everything here to PredictedHandsSystem
-
-        #endregion
     }
 }

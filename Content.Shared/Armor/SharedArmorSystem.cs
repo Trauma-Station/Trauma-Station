@@ -1,6 +1,6 @@
 // <Trauma>
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
+using Content.Medical.Common.Body;
+using Content.Shared.Body;
 using System.Linq;
 // </Trauma>
 using Content.Shared.Clothing.Components;
@@ -19,8 +19,10 @@ namespace Content.Shared.Armor;
 /// </summary>
 public abstract class SharedArmorSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly BodySystem _body = default!;
+    // </Trauma>
     [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
 
     /// <inheritdoc />
     public override void Initialize()
@@ -55,10 +57,8 @@ public abstract class SharedArmorSystem : EntitySystem
             return;
 
         // <Goob>
-        if (args.Args.TargetPart == null)
+        if (args.Args.TargetPart is not {} partType)
             return;
-
-        var (partType, _) = _body.ConvertTargetBodyPart(args.Args.TargetPart);
 
         if (component.ArmorCoverage.Contains(partType))
             args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage,

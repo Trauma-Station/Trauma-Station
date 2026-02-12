@@ -47,6 +47,8 @@
       amount: 2
     - id: NetworkConfigurator
     - id: Binoculars
+    - id: PlushieLizardJobWarden
+      prob: 0.02
 
 - type: entityTable
   id: FillLockerWardenHarduit
@@ -93,6 +95,10 @@
       prob: 0.6
     - id: BookSpaceLaw
       prob: 0.5
+    - id: PlushieLizardJobSecuritycadet
+      prob: 0.02
+    - id: PlushieLizardJobSecurityofficer
+      prob: 0.02
 
 - type: entity
   id: LockerBrigmedicFilled
@@ -140,6 +146,11 @@
   id: FillLockerDetective
   table: !type:AllSelector
     children:
+    # <Trauma>
+    - id: BloodTrak
+    - id: Betty
+    - id: BoxTapeRecorder
+    # </Trauma>
     - id: ClothingEyesGlassesNoir
     - id: ClothingHeadHatDetGadget
     - id: ClothingNeckTieDet
@@ -156,9 +167,8 @@
     - id: HoloprojectorSecurity
     - id: BoxEvidenceMarkers
     - id: HandLabeler
-    - id: BloodTrak # Goobstation
-    - id: Betty # Goobstation
-    - id: BoxTapeRecorder # DeltaV
+    - id: PlushieLizardJobDetective
+      prob: 0.02
 
 - type: entity
   id: ClosetBombFilled

@@ -4,8 +4,8 @@ using Content.Goobstation.Shared.Wraith.Events;
 using Content.Goobstation.Shared.Wraith.WraithPoints;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos.Rotting;
+using Content.Shared.Body;
 using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -18,7 +18,7 @@ using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
 
-public sealed partial class AbsorbCorpseSystem : EntitySystem
+public sealed class AbsorbCorpseSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -27,8 +27,7 @@ public sealed partial class AbsorbCorpseSystem : EntitySystem
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly ISharedAdminLogManager _admin = default!;
 

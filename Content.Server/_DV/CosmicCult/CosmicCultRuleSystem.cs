@@ -554,7 +554,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         cult.Comp.TotalCrew = _player.Sessions.Count(session
             => session.Status == SessionStatus.InGame
-                && HasComp<HumanoidAppearanceComponent>(session.AttachedEntity));
+                && HasComp<HumanoidProfileComponent>(session.AttachedEntity));
 
 #if DEBUG
         if (cult.Comp.TotalCrew < 25)

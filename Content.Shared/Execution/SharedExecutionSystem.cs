@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Body;
+// </Trauma>
 using Content.Shared.ActionBlocker;
 using Content.Shared.Chat;
 using Content.Shared.CombatMode;
@@ -20,8 +23,11 @@ namespace Content.Shared.Execution;
 /// <summary>
 ///     Verb for violently murdering cuffed creatures.
 /// </summary>
-public sealed partial class SharedExecutionSystem : EntitySystem // Trauma - made partial
+public sealed class SharedExecutionSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly BodySystem _body = default!;
+    // </Trauma>
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -219,7 +225,7 @@ public sealed partial class SharedExecutionSystem : EntitySystem // Trauma - mad
             _melee.AttemptLightAttack(attacker, weapon, meleeWeaponComp, victim);
             // <Goob>
             if (entity.Comp.Decapitation)
-                Decapitation(victim);
+                _body.TryDecapitate(victim, args.User);
             // </Goob>
         }
 

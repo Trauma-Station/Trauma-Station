@@ -1,0 +1,290 @@
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBase
+  id: OrganCybernetic
+  components:
+  - type: Damageable
+    damageContainer: Silicon
+  - type: Cybernetics
+  - type: Inorganic
+
+- type: entity
+  abstract: true
+  parent: OrganCybernetic
+  id: OrganCyberneticExternal
+  components:
+  - type: Sprite
+    sprite: _EinsteinEngines/Mobs/Species/Cybernetics/bishop/bishop_main.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _EinsteinEngines/Mobs/Species/Cybernetics/bishop/bishop_main.rsi
+  - type: Nerve
+    painMultiplier: 1.5
+  - type: Woundable
+    canBleed: false
+  - type: WoundableVisuals
+    damageOverlayColors:
+      Brute: "#DD8822"
+    bleedingOverlay: null
+
+- type: entity
+  abstract: true
+  parent: OrganCybernetic
+  id: OrganCyberneticInternal
+  components:
+  - type: InternalOrgan
+    intCap: 15
+    integrity: 15
+    integrityThresholds:
+      Normal: 15
+      Damaged: 6
+      Destroyed: 0
+  - type: Sprite
+    sprite: _Shitmed/Mobs/Species/Misc/Cybernetics/organs.rsi
+
+- type: entity
+  abstract: true
+  id: OrganCyberneticMetabolizer
+  components:
+  - type: Metabolizer
+    metabolizerTypes: [ Cybernetic ]
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganCyberneticExternal ]
+  id: OrganCyberneticArmLeft
+  name: cybernetic left arm
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganCyberneticExternal ]
+  id: OrganCyberneticArmRight
+  name: cybernetic right arm
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganCyberneticExternal ]
+  id: OrganCyberneticLegLeft
+  name: cybernetic left leg
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganCyberneticExternal ]
+  id: OrganCyberneticLegRight
+  name: cybernetic right leg
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganCyberneticExternal ]
+  id: OrganCyberneticHandLeft
+  name: cybernetic left hand
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganCyberneticExternal ]
+  id: OrganCyberneticHandRight
+  name: cybernetic right hand
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganCyberneticExternal ]
+  id: OrganCyberneticFootLeft
+  name: cybernetic left foot
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganCyberneticExternal ]
+  id: OrganCyberneticFootRight
+  name: cybernetic right foot
+
+# J.W.L
+
+- type: entity
+  abstract: true
+  id: OrganCyberneticJWL
+  description: A cybernetic arm with the ability to pry doors open.
+  components:
+  - type: OrganComponents
+    onAdd:
+    - type: Prying
+      speedModifier: 1.5 # doesn't stack
+      pryPowered: true
+    - type: UseDelay # For insta prying
+      delay: 1
+
+- type: entity
+  parent: [ OrganCyberneticArmLeft, OrganCyberneticJWL ]
+  id: OrganJWLArmLeft
+  name: J.W.L left arm
+
+- type: entity
+  parent: [ OrganCyberneticArmRight, OrganCyberneticJWL ]
+  id: OrganJWLArmRight
+  name: J.W.L right arm
+
+# W SPEED
+
+- type: entity
+  abstract: true
+  id: OrganCyberneticSpeed
+  description: A cybernetic leg that allows its wearer to run faster.
+  components:
+  - type: MovementBodyPart
+    walkSpeed: 3.125
+    sprintSpeed: 5.175
+
+- type: entity
+  parent: [ OrganCyberneticLegLeft, OrganCyberneticSpeed ]
+  id: OrganSpeedLegLeft
+  name: S.P.E.E.D left leg
+
+- type: entity
+  parent: [ OrganCyberneticLegRight, OrganCyberneticSpeed ]
+  id: OrganSpeedLegRight
+  name: S.P.E.E.D right leg
+
+# D.E.X
+
+- type: entity
+  abstract: true
+  id: OrganCyberneticDex
+  description: A cybernetic hand that allows its wearer to interact faster.
+  components:
+  - type: DoAfterDelayMultiplier
+    multiplier: 0.8
+
+- type: entity
+  parent: [ OrganCyberneticHandLeft, OrganCyberneticDex ]
+  id: OrganDexHandLeft
+  name: D.E.X left hand
+
+- type: entity
+  parent: [ OrganCyberneticHandRight, OrganCyberneticDex ]
+  id: OrganDexHandRight
+  name: D.E.X right hand
+
+## Organs
+
+# Eyes
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganCyberneticInternal ]
+  id: OrganCyberneticEyes
+  name: cybernetic eyes
+  description: A pair of cybernetic eyes that enhance your vision, and protect you from eye damage.
+  components:
+  - type: Sprite
+    layers:
+    - state: eyes # combined
+  - type: InternalOrgan
+    intCap: 21
+    integrity: 21
+    integrityThresholds:
+      Normal: 21
+      Damaged: 11
+      Destroyed: 0
+  - type: OrganComponents
+    onAdd:
+    - type: FlashImmunity
+    - type: EyeProtection
+    # jack of all trades master of none
+
+- type: entity
+  parent: OrganCyberneticEyes
+  id: OrganCyberneticEyesSecurity
+  name: security cybernetic eyes
+  description: A pair of cybernetic eyes that enhance your vision, featuring an integrated SecHUD.
+  components:
+  - type: Sprite
+    layers:
+    - state: eyes-sechud
+  - type: OrganComponents
+    onAdd:
+    # TODO SHITMED: this should add ShowSecurityIcons's components
+    - type: ShowJobIcons
+    - type: ShowMindShieldIcons
+    - type: ShowCriminalRecordIcons
+    - type: ShowContrabandDetails
+    # no flash or welding protection, too op for shitsec
+
+- type: entity
+  parent: OrganCyberneticEyes
+  id: OrganCyberneticEyesMedical
+  name: medical cybernetic eyes
+  description: A pair of cybernetic eyes that enhance your vision, featuring an integrated MedHUD.
+  components:
+  - type: Sprite
+    layers:
+    - state: eyes-medhud
+  - type: OrganComponents
+    onAdd:
+    - type: ShowHealthBars
+      damageContainers:
+      - Biological
+      - BiologicalMetaphysical
+    - type: ShowHealthIcons
+      damageContainers:
+      - Biological
+      - BiologicalMetaphysical
+    - type: ShowDiseaseIcons
+    - type: FlashImmunity
+    # no welding protection
+
+- type: entity
+  parent: OrganCyberneticEyes
+  id: OrganCyberneticEyesDiagnostic
+  name: diagnostic cybernetic eyes
+  description: A pair of cybernetic eyes that enhance your vision, featuring an integrated diagnostic HUD.
+  components:
+  - type: Sprite
+    layers:
+    - state: eyes-medhud
+  - type: OrganComponents
+    onAdd:
+    - type: ShowHealthBars
+      damageContainers:
+      - Inorganic
+      - Silicon
+      - SiliconRadiation
+    - type: ShowHealthIcons
+      damageContainers:
+      - Inorganic
+      - Silicon
+      - SiliconRadiation
+    - type: EyeProtection
+    # no flash protection
+
+# Lungs
+
+- type: entity
+  parent: [ OrganBaseLungs, OrganCyberneticInternal, OrganCyberneticMetabolizer ]
+  id: OrganCyberneticLungs
+  name: cybernetic lungs
+  description: Advanced synthetic lungs that breathe oxygen and nitrogen, ignore CO2, and resist most other atmospheric hazards.
+  components:
+  - type: InternalOrgan
+    intCap: 25
+    integrity: 25
+    integrityThresholds:
+      Normal: 25
+      Damaged: 9
+      Destroyed: 0
+  # TODO SHITMED: write a test that it actually breathes nitrogen and ignores co2 bruh
+
+- type: entity
+  parent: OrganCyberneticLungs
+  id: OrganCyberneticLungsUpgraded
+  name: upgraded cybernetic lungs
+  description: A self-contained respiratory system that eliminates the need to breathe entirely and grants increased stamina recovery.
+  components:
+  - type: Sprite
+    layers:
+    - state: lung-u-l
+    - state: lung-u-r
+  - type: InternalOrgan
+    intCap: 32
+    integrity: 32
+    integrityThresholds:
+      Normal: 32
+      Damaged: 9
+      Destroyed: 0
+  - type: OrganComponents
+    onAdd:
+    - type: StaminaRegeneration
+      regenerationRate: -3.0

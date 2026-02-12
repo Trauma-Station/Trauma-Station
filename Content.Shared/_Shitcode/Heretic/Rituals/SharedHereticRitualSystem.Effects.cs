@@ -85,11 +85,11 @@ public abstract partial class SharedHereticRitualSystem
         if (!TryGetValue(args.Ritual, Performer, out EntityUid performer))
             return;
 
-        var minion = _compFact.GetComponent<HereticMinionComponent>();
+        var minion = Factory.GetComponent<HereticMinionComponent>();
         minion.BoundHeretic = performer;
         AddComp(ent, minion, true);
 
-        var ghoul = _compFact.GetComponent<GhoulComponent>();
+        var ghoul = Factory.GetComponent<GhoulComponent>();
         ghoul.TotalHealth = args.Effect.Health;
         ghoul.GiveBlade = args.Effect.GiveBlade;
         AddComp(ent, ghoul, true);

@@ -1,8 +1,6 @@
 // <Trauma>
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Components;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Targeting;
 // </Trauma>
 using Content.Shared.CCVar;
 using Content.Shared.Damage.Components;
@@ -19,19 +17,13 @@ public sealed partial class DamageableSystem
 {
     public override void Initialize()
     {
+        InitializeTrauma(); // Trauma
         SubscribeLocalEvent<DamageableComponent, ComponentInit>(DamageableInit);
         SubscribeLocalEvent<DamageableComponent, ComponentHandleState>(DamageableHandleState);
         SubscribeLocalEvent<DamageableComponent, ComponentGetState>(DamageableGetState);
         SubscribeLocalEvent<DamageableComponent, OnIrradiatedEvent>(OnIrradiated);
         SubscribeLocalEvent<DamageableComponent, RejuvenateEvent>(OnRejuvenate);
 
-        InitializeTrauma(); // Trauma
-
-        // <Shitmed>
-        _bodyQuery = GetEntityQuery<BodyComponent>();
-        _consciousnessQuery = GetEntityQuery<ConsciousnessComponent>();
-        _woundableQuery = GetEntityQuery<WoundableComponent>();
-        // </Shitmed>
         _appearanceQuery = GetEntityQuery<AppearanceComponent>();
         _damageableQuery = GetEntityQuery<DamageableComponent>();
 
@@ -232,7 +224,7 @@ public record struct BeforeDamageChangedEvent(DamageSpecifier Damage, EntityUid?
 ///     For example, armor.
 /// </summary>
 // Goob - added target, targetPart
-public sealed class DamageModifyEvent(EntityUid target, DamageSpecifier damage, EntityUid? origin = null, TargetBodyPart? targetPart = null)
+public sealed class DamageModifyEvent(EntityUid target, DamageSpecifier damage, EntityUid? origin = null, BodyPartType? targetPart = null)
     : EntityEventArgs, IInventoryRelayEvent
 {
     /// <inheritdoc/>
@@ -243,7 +235,7 @@ public sealed class DamageModifyEvent(EntityUid target, DamageSpecifier damage, 
 
     // <Goob>
     public readonly EntityUid Target = target;
-    public readonly TargetBodyPart? TargetPart = targetPart;
+    public readonly BodyPartType? TargetPart = targetPart;
     // </Goob>
 
     /// <summary>

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Shared.Body.Prototypes;
+using Content.Medical.Common.Body;
+using Content.Shared.Body;
 using Content.Shared.EntityTable;
 using Content.Shared.EntityTable.EntitySelectors;
 using Robust.Shared.Prototypes;
@@ -12,17 +13,25 @@ namespace Content.Trauma.Shared.EntityTable.EntitySelectors;
 public sealed partial class BodyPartsSelector : EntityTableSelector
 {
     [DataField(required: true)]
-    public ProtoId<BodyPrototype> Proto;
+    public EntProtoId<InitialBodyComponent> Proto;
 
     protected override IEnumerable<EntProtoId> GetSpawnsImplementation(System.Random rand,
         IEntityManager entMan,
         IPrototypeManager proto,
         EntityTableContext ctx)
     {
-        foreach (var slot in proto.Index(Proto).Slots.Values)
+        var ent = proto.Index(Proto);
+        var factory = entMan.ComponentFactory;
+        if (!ent.TryGetComponent<InitialBodyComponent>(out var body, factory))
+            yield break; // unreachable
+
+        foreach (var organId in body.Organs.Values)
         {
-            if (slot.Part is {} part)
-                yield return part;
+            // filter out internal organs from the fill
+            var organ = proto.Index(organId);
+            // TODO: change this to .HasComp after engine update
+            if (!organ.TryGetComponent<InternalOrganComponent>(out _, factory))
+                yield return organId;
         }
     }
 }

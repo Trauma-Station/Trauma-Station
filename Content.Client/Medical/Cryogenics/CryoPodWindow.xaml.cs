@@ -1,6 +1,7 @@
 // <Trauma>
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Shared.Body;
+using Robust.Shared.Prototypes;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -28,7 +29,7 @@ public sealed partial class CryoPodWindow : FancyWindow
     public event Action? OnEjectBeakerPressed;
     public event Action<FixedPoint2>? OnInjectPressed;
     // <Shitmed>
-    public event Action<TargetBodyPart?, EntityUid>? OnBodyPartSelected;
+    public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
     public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
     // </Shitmed>
 
@@ -228,7 +229,7 @@ public sealed partial class CryoPodWindow : FancyWindow
 
         float? result = null;
 
-        foreach (var (_, metabolism) in reagentProto.Metabolisms)
+        foreach (var (_, metabolism) in reagentProto.Metabolisms.Metabolisms)
         {
             foreach (var effect in metabolism.Effects)
             {

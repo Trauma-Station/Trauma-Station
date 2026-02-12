@@ -33,7 +33,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Electrocution;
 using Content.Shared.Standing;
 using Content.Goobstation.Shared.Supermatter.Components;
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
 using Content.Shared.Pointing;
 using Robust.Shared.Timing;
 using Robust.Shared.Physics.Components;
@@ -42,6 +42,7 @@ namespace Content.Goobstation.Shared.Slasher.Systems;
 
 public sealed class SlasherIncorporealSystem : EntitySystem
 {
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStealthSystem _stealth = default!;
@@ -434,11 +435,11 @@ public sealed class SlasherIncorporealSystem : EntitySystem
     private void OnBeforeDamageBodyPart(EntityUid uid, DamageableComponent damageable, ref BeforeDamageChangedEvent args)
     {
         // Check if this is a body part, and if so, check if the parent body is an incorporeal slasher
-        if (!TryComp<BodyPartComponent>(uid, out var bodyPart) || bodyPart.Body == null)
+        if (_body.GetBody(uid) is not {} body)
             return;
 
         // Check if the parent body has the incorporeal component and is incorporeal
-        if (TryComp<SlasherIncorporealComponent>(bodyPart.Body.Value, out var slasherComp) && slasherComp.IsIncorporeal)
+        if (TryComp<SlasherIncorporealComponent>(body, out var slasherComp) && slasherComp.IsIncorporeal)
             args.Cancelled = true;
     }
 
@@ -490,7 +491,7 @@ public sealed class SlasherIncorporealSystem : EntitySystem
             if (HasComp<GhostComponent>(other))
                 continue;
 
-            if (!HasComp<HumanoidAppearanceComponent>(other))
+            if (!HasComp<HumanoidProfileComponent>(other))
                 continue;
 
             if (_mobState.IsDead(other))

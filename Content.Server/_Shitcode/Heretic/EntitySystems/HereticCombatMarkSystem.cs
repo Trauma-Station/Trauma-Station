@@ -28,7 +28,7 @@ using Content.Server._Shitcode.Heretic.EntitySystems.PathSpecific;
 using Content.Server.Heretic.Abilities;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Medical;
@@ -153,7 +153,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
 
         // transfers the mark to the next nearby person
         var look = _lookup.GetEntitiesInRange(target, 5f, flags: LookupFlags.Dynamic)
-            .Where(x => x != target && HasComp<HumanoidAppearanceComponent>(x) && !_heretic.IsHereticOrGhoul(x))
+            .Where(x => x != target && HasComp<HumanoidProfileComponent>(x) && !_heretic.IsHereticOrGhoul(x))
             .ToList();
         if (look.Count == 0)
             return true;

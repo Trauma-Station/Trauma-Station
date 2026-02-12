@@ -9,7 +9,7 @@ using Content.Goobstation.Shared.Silicon.Bots;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.HTN.PrimitiveTasks;
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Disposal.Components;
 using Content.Shared.Disposal.Unit;
@@ -21,10 +21,10 @@ namespace Content.Goobstation.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class FillLinkedMachineOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
     private SharedMaterialStorageSystem _sharedMaterialStorage = default!;
     private SharedDisposalUnitSystem _sharedDisposalUnitSystem = default!;
-    private SharedHandsSystem _sharedHandsSystem = default!;
+    private SharedHandsSystem _hands = default!;
 
     /// <summary>
     /// Target entity to inject.
@@ -37,7 +37,7 @@ public sealed partial class FillLinkedMachineOperator : HTNOperator
         base.Initialize(sysManager);
         _sharedMaterialStorage = sysManager.GetEntitySystem<SharedMaterialStorageSystem>();
         _sharedDisposalUnitSystem = sysManager.GetEntitySystem<SharedDisposalUnitSystem>();
-        _sharedHandsSystem = sysManager.GetEntitySystem<SharedHandsSystem>();
+        _hands = sysManager.GetEntitySystem<SharedHandsSystem>();
     }
 
     public override void TaskShutdown(NPCBlackboard blackboard, HTNOperatorStatus status)
@@ -50,38 +50,35 @@ public sealed partial class FillLinkedMachineOperator : HTNOperator
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
-        if (!blackboard.TryGetValue<EntityUid>(TargetKey, out var target, _entManager) || _entManager.Deleted(target)
-            || !_entManager.TryGetComponent(owner, out FillbotComponent? fillbot)
-            || !_entManager.HasComponent<HandsComponent>(owner)
-            || !_entManager.TryGetComponent(owner, out DeviceLinkSourceComponent? fillbotlinks)
+        if (!blackboard.TryGetValue<EntityUid>(TargetKey, out var target, _entMan) || _entMan.Deleted(target)
+            || !_entMan.TryGetComponent(owner, out FillbotComponent? fillbot)
+            || !_entMan.HasComponent<HandsComponent>(owner)
+            || !_entMan.TryGetComponent(owner, out DeviceLinkSourceComponent? fillbotlinks)
             || fillbotlinks.LinkedPorts.Count != 1
             || fillbot.LinkedSinkEntity == null
-            || _entManager.Deleted(fillbot.LinkedSinkEntity))
+            || _entMan.Deleted(fillbot.LinkedSinkEntity))
             return HTNOperatorStatus.Failed;
 
-        _entManager.TryGetComponent(fillbot.LinkedSinkEntity, out MaterialStorageComponent? linkedStorage);
-        _entManager.TryGetComponent(fillbot.LinkedSinkEntity, out DisposalUnitComponent? disposalUnit);
+        _entMan.TryGetComponent(fillbot.LinkedSinkEntity, out MaterialStorageComponent? linkedStorage);
+        _entMan.TryGetComponent(fillbot.LinkedSinkEntity, out DisposalUnitComponent? disposalUnit);
 
-        var heldItem = _sharedHandsSystem.GetActiveItem(owner);
-
-        if (heldItem == null
-            || _entManager.HasComponent<BodyPartComponent>(heldItem))
+        if (_hands.GetActiveItem(owner) is not {} heldItem)
         {
-            _sharedHandsSystem.TryDrop(owner);
+            _hands.TryDrop(owner);
             return HTNOperatorStatus.Failed;
         }
 
         if (linkedStorage is not null
-            && _sharedMaterialStorage.TryInsertMaterialEntity(owner, heldItem.Value, fillbot.LinkedSinkEntity!.Value))
+            && _sharedMaterialStorage.TryInsertMaterialEntity(owner, heldItem, fillbot.LinkedSinkEntity!.Value))
             return HTNOperatorStatus.Finished;
 
         if (disposalUnit is not null)
         {
-            _sharedDisposalUnitSystem.DoInsertDisposalUnit(fillbot.LinkedSinkEntity!.Value, heldItem.Value, owner);
+            _sharedDisposalUnitSystem.DoInsertDisposalUnit(fillbot.LinkedSinkEntity!.Value, heldItem, owner);
             return HTNOperatorStatus.Finished;
         }
 
-        _sharedHandsSystem.TryDrop(owner);
+        _hands.TryDrop(owner);
         return HTNOperatorStatus.Failed;
     }
 }

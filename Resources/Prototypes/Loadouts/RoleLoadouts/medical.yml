@@ -1,0 +1,103 @@
+## Role Loadouts
+
+- type: roleLoadout
+  id: JobChiefMedicalOfficer
+  groups:
+  - GroupTankHarness
+  - ChiefMedicalOfficerHead
+  - MedicalMask
+  - ChiefMedicalOfficerJumpsuit
+  - MedicalBackpack
+  - ChiefMedicalOfficerOuterClothing
+  - ChiefMedicalOfficerNeck
+  - ChiefMedicalOfficerShoes
+  - Glasses
+  - SurvivalMedical
+  - Trinkets
+#  - ChiefMedicalOfficerJobTrinkets
+  - GroupSpeciesBreathToolMedical
+  # Goobstation - EE Plasmeme Change.
+  - ChiefMedicalOfficerEnvirohelm
+  - ChiefMedicalOfficerEnvirosuit
+  - ChiefMedicalOfficerEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobMedicalDoctor
+  groups:
+  - GroupTankHarness
+  - MedicalDoctorHead
+  - MedicalMask
+  - MedicalDoctorJumpsuit
+  - MedicalBackpack
+  - MedicalDoctorOuterClothing
+  - MedicalShoes
+  - MedicalDoctorPDA
+  - Glasses
+  - SurvivalMedical
+  - Trinkets
+#  - MedicalDoctorJobTrinkets
+  - GroupSpeciesBreathToolMedical
+  # Goobstation - EE Plasmeme Change.
+  - MedicalDoctorEnvirohelm
+  - MedicalDoctorEnvirosuit
+  - MedicalDoctorEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobMedicalIntern
+  groups:
+  - GroupTankHarness
+  - MedicalInternJumpsuit
+  - MedicalBackpack
+  - Glasses
+  - SurvivalMedical
+  - Trinkets
+#  - MedicalInternJobTrinkets
+  - GroupSpeciesBreathToolMedical
+  # Goobstation - EE Plasmeme Change.
+  - MedicalInternEnvirohelm
+  - MedicalInternEnvirosuit
+  - MedicalInternEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobChemist
+  groups:
+  - GroupTankHarness
+  - MedicalMask
+  - ChemistJumpsuit
+  - ChemistBackpack
+  - ChemistOuterClothing
+  - MedicalShoes
+  - Glasses
+  - SurvivalMedical
+  - Trinkets
+#  - ChemistJobTrinkets
+  - GroupSpeciesBreathToolMedical
+  # Goobstation - EE Plasmeme Change.
+  - ChemistEnvirohelm
+  - ChemistEnvirosuit
+  - ChemistEnvirogloves
+  - ExclusiveItems # Trauma
+
+- type: roleLoadout
+  id: JobParamedic
+  groups:
+  - GroupTankHarness
+  - ParamedicHead
+  - MedicalMask
+  - ParamedicJumpsuit
+  - MedicalBackpack
+  - ParamedicOuterClothing
+  - ParamedicShoes
+  - Glasses
+  - SurvivalMedical
+  - Trinkets
+#  - ParamedicJobTrinkets
+  - GroupSpeciesBreathToolMedical
+  # Goobstation - EE Plasmeme Change.
+  - ParamedicEnvirohelm
+  - ParamedicEnvirosuit
+  - ParamedicEnvirogloves
+  - ExclusiveItems # Trauma

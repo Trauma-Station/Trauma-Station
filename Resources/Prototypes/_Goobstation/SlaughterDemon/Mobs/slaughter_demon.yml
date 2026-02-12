@@ -5,8 +5,9 @@
 
 - type: entity
   parent:
-    - SimpleSpaceMobBase
-    - MobPolymorphable
+  - SimpleSpaceMobBase
+  - MobPolymorphable
+  - AppearanceSlaughterDemon
   id: BaseMobSlaughterDemon
   name: slaughter demon
   suffix: ""
@@ -122,8 +123,6 @@
   - type: RotationVisuals
     defaultRotation: 90
     horizontalRotation: 90
-  - type: Body
-    prototype: SlaughterDemon
   - type: StandingState
   - type: Fixtures
     fixtures:

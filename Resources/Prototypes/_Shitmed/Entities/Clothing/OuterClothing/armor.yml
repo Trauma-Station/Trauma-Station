@@ -39,8 +39,7 @@
             VeinsDamage: 0
             NerveDamage: 0
           coverage:
-          - Chest
-          - Groin
+          - Torso
           - Arm
           - Leg
           - Tail
@@ -76,8 +75,7 @@
             VeinsDamage: 0
             NerveDamage: 0
           coverage:
-          - Chest
-          - Groin
+          - Torso
           - Arm
           - Leg
           - Tail
@@ -111,8 +109,7 @@
     sprite: _Shitmed/Clothing/OuterClothing/Coats/abductor.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Leg
     - Tail

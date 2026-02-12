@@ -46,9 +46,9 @@
   components:
   - type: Sprite
     state: cyberbuttbot
-  - type: Construction
-    graph: CyberButtBot
-    node: bot
+  #- type: Construction # TODO: add CyberButt actual butt item
+  #  graph: CyberButtBot
+  #  node: bot
 
 - type: entity
   parent: MobSiliconBase

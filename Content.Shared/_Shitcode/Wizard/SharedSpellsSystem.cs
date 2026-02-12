@@ -29,12 +29,11 @@ using Content.Shared._Goobstation.Wizard.SpellCards;
 using Content.Shared._Goobstation.Wizard.Teleport;
 using Content.Shared._Goobstation.Wizard.TeslaBlast;
 using Content.Shared._Goobstation.Wizard.Traps;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Abilities.Mime;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clumsy;
 using Content.Shared.Cluwne;
@@ -397,13 +396,13 @@ public abstract class SharedSpellsSystem : EntitySystem
         var targets = Lookup.GetEntitiesInRange<DamageableComponent>(coords, ev.KnockdownRange);
         var ghostQuery = GetEntityQuery<GhostComponent>();
         var spectralQuery = GetEntityQuery<SpectralComponent>();
-        var bodyPartQuery = GetEntityQuery<BodyPartComponent>();
+        var organQuery = GetEntityQuery<OrganComponent>();
         foreach (var (target, damageable) in targets)
         {
             if (target == ev.Performer || target == ev.Target)
                 continue;
 
-            if (ghostQuery.HasComp(target) || spectralQuery.HasComp(target) || bodyPartQuery.HasComp(target))
+            if (ghostQuery.HasComp(target) || spectralQuery.HasComp(target) || organQuery.HasComp(target))
                 continue;
 
             var range = (TransformSystem.GetMapCoordinates(target).Position - coords.Position).Length();
@@ -1288,12 +1287,12 @@ public abstract class SharedSpellsSystem : EntitySystem
         var managerQuery = GetEntityQuery<ContainerManagerComponent>();
         var xformQuery = GetEntityQuery<TransformComponent>();
         var bodyQuery = GetEntityQuery<BodyComponent>();
-        var bodyPartQuery = GetEntityQuery<BodyPartComponent>();
+        var organQuery = GetEntityQuery<OrganComponent>();
         var inventoryQuery = GetEntityQuery<InventoryComponent>();
         var handsQuery = GetEntityQuery<HandsComponent>();
         var binglePitQuery = GetEntityQuery<BinglePitComponent>();
 
-        while (parent.IsValid() && !bodyQuery.HasComp(parent) && !bodyPartQuery.HasComp(parent) &&
+        while (parent.IsValid() && !bodyQuery.HasComp(parent) && !organQuery.HasComp(parent) &&
                !inventoryQuery.HasComp(parent) && !handsQuery.HasComp(parent) && !binglePitQuery.HasComp(parent))
         {
             if (((EntityManager.MetaQuery.GetComponent(child).Flags & MetaDataFlags.InContainer) ==

@@ -52,6 +52,10 @@
   <Project Path="Content.Lavaland.Shared/Content.Lavaland.Shared.csproj" />
   <Project Path="Content.Lavaland.Client/Content.Lavaland.Client.csproj" />
   <Project Path="Content.Lavaland.Common/Content.Lavaland.Common.csproj" />
+  <Project Path="Content.Medical.Server/Content.Medical.Server.csproj" />
+  <Project Path="Content.Medical.Shared/Content.Medical.Shared.csproj" />
+  <Project Path="Content.Medical.Client/Content.Medical.Client.csproj" />
+  <Project Path="Content.Medical.Common/Content.Medical.Common.csproj" />
   <Project Path="Content.ModuleManager/Content.ModuleManager.csproj" />
   <!-- </Trauma> -->
   <Project Path="Content.Tests/Content.Tests.csproj" />

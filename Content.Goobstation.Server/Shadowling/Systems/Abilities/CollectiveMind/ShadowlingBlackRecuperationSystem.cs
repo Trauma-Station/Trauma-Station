@@ -36,7 +36,6 @@ public sealed class ShadowlingBlackRecuperationSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidAppearance = default!;
     [Dependency] private readonly LightDetectionDamageSystem _light = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
@@ -139,8 +138,10 @@ public sealed class ShadowlingBlackRecuperationSystem : EntitySystem
             var comps = _protoMan.Index(component.LesserSlingComponents);
             EntityManager.AddComponents(newUid.Value, comps);
 
-            if (TryComp<HumanoidAppearanceComponent>(newUid.Value, out var human))
+            /* TODO NUBODY: wait for an actual api :)
+            if (TryComp<HumanoidProfileComponent>(newUid.Value, out var human))
                 _humanoidAppearance.AddMarking(newUid.Value, component.MarkingId, Color.Red, true, true, human);
+            */
 
             Spawn(component.BlackRecuperationEffect, Transform(newUid.Value).Coordinates);
 

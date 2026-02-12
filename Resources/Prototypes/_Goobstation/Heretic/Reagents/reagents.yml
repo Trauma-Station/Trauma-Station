@@ -20,7 +20,7 @@
   flavor: eldritch
   color: "#1f8016"
   metabolisms:
-    Medicine:
+    Bloodstream:
       conditions:
       - !type:WhitelistCondition
         checkMind: true
@@ -53,18 +53,24 @@
       - !type:TakeStaminaDamage
         amount: -10
         immediate: true
-    Poison:
-      conditions:
-      - !type:WhitelistCondition
-        blacklist:
-          components:
-          - Heretic
-          - Ghoul
-        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
-      effects:
+
       - !type:Electrocute
         probability: 0.5
+        conditions:
+        - !type:WhitelistCondition
+          blacklist:
+            components:
+            - Heretic
+            - Ghoul
+          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
       - !type:HealthChange
+        conditions:
+        - !type:WhitelistCondition
+          blacklist:
+            components:
+            - Heretic
+            - Ghoul
+          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
         damage:
           types:
             Poison: 5

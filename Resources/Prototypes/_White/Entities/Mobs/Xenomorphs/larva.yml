@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseMobXenomorph
+  parent: [ BaseMobXenomorph, AppearanceXenomorphLarva ]
   id: BaseMobXenomorphLarva
   name: xenomorph larva
   description: An early stage of development characterized by small size, a worm-like body shape, and the absence of distinct limbs.
@@ -21,12 +21,7 @@
   - type: Xenomorph
     caste: Larva
   - type: XenomorphLarva
-  #- type: ActionGrant # Goobstation - moved to organ
-  #  actions:
-  #  - ActionTransferPlasma
   - type: VentCrawler
-  - type: Body
-    prototype: XenomorphLarva
   - type: Fixtures
     fixtures:
       fix1:
@@ -61,7 +56,7 @@
   - type: MobPrice
     price: 250
   - type: Organ
-    slotId: xenomorph_larva
+    category: XenomorphLarva
   # - type: GuideHelp
   #   guides:
   #   - XenomorphLarva

@@ -1,12 +1,9 @@
 // <Trauma>
+using Content.Medical.Common.Targeting;
 using Content.Server._Goobstation.Wizard.Systems;
-using Content.Shared._White.Xenomorphs.Infection;
-using Content.Shared._Shitmed.Body;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
+using Content.Shared._White.Xenomorphs.Infection;
+using Content.Shared.Body;
 using Robust.Shared.Utility;
 // </Trauma>
 using System.Linq;
@@ -55,7 +52,6 @@ namespace Content.Server.Ghost
     public sealed class GhostSystem : SharedGhostSystem
     {
         // <Trauma>
-        [Dependency] private readonly SharedBodySystem _bodySystem = default!;
         [Dependency] private readonly GhostVisibilitySystem _ghostVisibility = default!;
         // </Trauma>
         [Dependency] private readonly SharedActionsSystem _actions = default!;
@@ -603,22 +599,16 @@ namespace Content.Server.Ghost
                             dealtDamage = playerDeadThreshold - damageable.TotalDamage;
                         }
 
-                        // Shitmed Change Start
+                        // <Trauma>
+                        // TODO SHITMED: make this an event jesus christ
                         var damageType = HasComp<SiliconComponent>(playerEntity)
                             ? IonDamageType
                             : AsphyxiationDamageType;
                         DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>(damageType), dealtDamage);
 
-                        if (TryComp<BodyComponent>(playerEntity, out var body)
-                            && body.BodyType == BodyType.Complex
-                            && body.RootContainer.ContainedEntities.FirstOrNull() is { } root)
-                            _damageable.ChangeDamage(playerEntity.Value,
-                                damage,
-                                true,
-                                targetPart: TargetBodyPart.All);
-                        else
-                            _damageable.ChangeDamage(playerEntity.Value, damage, true);
-                        // Shitmed Change End
+                        TargetBodyPart? targetPart = HasComp<BodyComponent>(playerEntity) ? TargetBodyPart.All : null;
+                        _damageable.ChangeDamage(playerEntity.Value, damage, true, targetPart: targetPart);
+                        // </Trauma>
                     }
                     // </Goob>
                 }

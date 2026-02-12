@@ -68,7 +68,6 @@ public sealed class SecretPlusSystem : GameRuleSystem<SecretPlusComponent>
     [Dependency] private readonly AntagSelectionSystem _antagSelection = default!;
     [Dependency] private readonly EventManagerSystem _event = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IComponentFactory _factory = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -140,8 +139,8 @@ public sealed class SecretPlusSystem : GameRuleSystem<SecretPlusComponent>
     {
         foreach (var proto in _ticker.GetAllGameRulePrototypes())
         {
-            if (!proto.TryGetComponent<GameRuleComponent>(out var gameRule, _factory)
-                || !proto.TryGetComponent<StationEventComponent>(out var stationEvent, _factory)
+            if (!proto.TryGetComponent<GameRuleComponent>(out var gameRule, Factory)
+                || !proto.TryGetComponent<StationEventComponent>(out var stationEvent, Factory)
             )
                 continue;
 
@@ -172,7 +171,7 @@ public sealed class SecretPlusSystem : GameRuleSystem<SecretPlusComponent>
         {
             var proto = entry.Key;
             var stationEvent = entry.Value;
-            if (!proto.TryGetComponent<GameRuleComponent>(out var gameRule, _factory))
+            if (!proto.TryGetComponent<GameRuleComponent>(out var gameRule, Factory))
                 continue;
 
             if (scheduler.Comp.DisallowedEvents.Contains(stationEvent.EventType))
@@ -257,7 +256,7 @@ public sealed class SecretPlusSystem : GameRuleSystem<SecretPlusComponent>
             // on lowpop this may still go no likey even for the primary antag pick and pick thief or something, intended
             GameRuleComponent? ruleComp = null;
             if (!_prototypeManager.TryIndex(pick, out var entProto)
-                || !entProto.TryGetComponent<GameRuleComponent>(out ruleComp, _factory)
+                || !entProto.TryGetComponent<GameRuleComponent>(out ruleComp, Factory)
             )
                 continue;
 
@@ -289,7 +288,7 @@ public sealed class SecretPlusSystem : GameRuleSystem<SecretPlusComponent>
 
             if (weights.Count == 0
                 || (!scheduler.Comp.IgnoreIncompatible
-                    && entProto.TryGetComponent<TagComponent>(out var tagComp, _factory)
+                    && entProto.TryGetComponent<TagComponent>(out var tagComp, Factory)
                     && _tag.HasTag(tagComp, _loneSpawnTag)
                 )
             )
@@ -350,9 +349,9 @@ public sealed class SecretPlusSystem : GameRuleSystem<SecretPlusComponent>
             // TODO: A
             if (player.AttachedEntity != null)
             {
-                // TODO: Consider a custom component here instead of HumanoidAppearanceComponent to represent
+                // TODO: Consider a custom component here instead of HumanoidProfileComponent to represent
                 //        "significant enough to count as a whole player"
-                if (HasComp<HumanoidAppearanceComponent>(player.AttachedEntity))
+                if (HasComp<HumanoidProfileComponent>(player.AttachedEntity))
                     count.Players += 1;
                 // don't count bodyless ghosts aka say roundstart spectators
                 // not reliable but works
@@ -395,10 +394,10 @@ public sealed class SecretPlusSystem : GameRuleSystem<SecretPlusComponent>
 
     public float? GetChaosScore(EntityPrototype ruleProto, GameRuleComponent? ruleComp, int? players = null)
     {
-        if (ruleComp == null && !ruleProto.TryGetComponent<GameRuleComponent>(out ruleComp, _factory))
+        if (ruleComp == null && !ruleProto.TryGetComponent<GameRuleComponent>(out ruleComp, Factory))
             return null;
 
-        if (ruleProto.TryGetComponent<AntagSelectionComponent>(out var selection, _factory))
+        if (ruleProto.TryGetComponent<AntagSelectionComponent>(out var selection, Factory))
         {
             var any = false;
             var score = 0f;

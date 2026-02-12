@@ -11,7 +11,6 @@ namespace Content.Shared.Humanoid
         FacialHairSpecial,
         Wings,
         Face,
-        Groin,
         // </Trauma>
         Special, // for the cat ears
         Tail,
@@ -34,6 +33,7 @@ namespace Content.Shared.Humanoid
         LLeg,
         RFoot,
         LFoot,
+        Overlay,
         Handcuffs,
         StencilMask,
         Ensnare,

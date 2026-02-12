@@ -1,0 +1,190 @@
+## Mob
+
+- type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceAbductor
+  name: abductor appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: OrganAbductorTorso
+      Head: OrganAbductorHead
+      ArmLeft: OrganAbductorArmLeft
+      ArmRight: OrganAbductorArmRight
+      HandRight: OrganAbductorHandRight
+      HandLeft: OrganAbductorHandLeft
+      LegLeft: OrganAbductorLegLeft
+      LegRight: OrganAbductorLegRight
+      FootLeft: OrganAbductorFootLeft
+      FootRight: OrganAbductorFootRight
+      Brain: OrganAbductorBrain
+      Eyes: OrganAbductorEyes
+      Tongue: OrganAbductorTongue
+      Appendix: OrganAbductorAppendix
+      Ears: OrganAbductorEars
+      Lungs: OrganAbductorLungs
+      Heart: OrganAbductorHeart
+      Stomach: OrganAbductorStomach
+      Liver: OrganAbductorLiver
+      Kidneys: OrganAbductorKidneys
+  - type: HumanoidProfile
+    species: Abductor
+
+- type: entity
+  parent:
+  - AppearanceAbductor
+  - MobBloodstream
+  - MobFlammable
+  - BaseSpeciesMob
+  # spaceproof, they're aliens...
+  id: MobAbductor
+  name: Urist McAlien
+  components:
+  - type: Absorbable
+  - type: WraithAbsorbable
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: AlienBlood
+        Quantity: 300
+  - type: CollectiveMind
+    defaultChannel: Abductormind
+    channels:
+    - Abductormind
+  - type: LanguageKnowledge
+    speaks:
+    - Xeeplian
+    understands:
+    - TauCetiBasic # Can understand, but cannot speak it.
+    - Xeeplian
+  - type: Fingerprint
+  - type: Blindable
+  - type: FireVisuals
+    alternateState: Standing
+  - type: Damageable
+    damageContainer: Biological
+  - type: Tag
+    tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+    # No AnomalyHost??
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganAbductor
+  suffix: abductor
+
+- type: entity
+  abstract: true
+  parent: OrganAbductor
+  id: OrganAbductorInternal
+  components:
+  - type: Sprite
+    sprite: _Shitmed/Mobs/Species/Abductor/organs.rsi
+
+- type: entity
+  abstract: true
+  parent: OrganAbductor
+  id: OrganAbductorExternal
+  components:
+  - type: Sprite
+    sprite: _Shitmed/Mobs/Species/Abductor/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Shitmed/Mobs/Species/Abductor/parts.rsi
+  - type: WoundableVisuals
+    damageOverlayColors:
+      Brute: "#878787"
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganAbductorExternal ]
+  id: OrganAbductorTorso
+
+- type: entity
+  parent: [ OrganBaseHead, OrganAbductorExternal ]
+  id: OrganAbductorHead
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganAbductorExternal ]
+  id: OrganAbductorArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganAbductorExternal ]
+  id: OrganAbductorArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganAbductorExternal ]
+  id: OrganAbductorHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganAbductorExternal ]
+  id: OrganAbductorHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganAbductorExternal ]
+  id: OrganAbductorLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganAbductorExternal ]
+  id: OrganAbductorLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganAbductorExternal ]
+  id: OrganAbductorFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganAbductorExternal ]
+  id: OrganAbductorFootRight
+
+## Organs
+
+- type: entity
+  parent: [ OrganBaseBrain, OrganAbductorInternal ]
+  id: OrganAbductorBrain
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganAbductorInternal ]
+  id: OrganAbductorEyes
+  components:
+  - type: Sprite
+    layers:
+    - state: eyeballs # combined sprite
+
+# missing some abductor sprites, TODO SHITMED: get tg sprites for them
+- type: entity
+  parent: [ OrganBaseTongue, OrganSpriteHumanInternal, OrganAbductorInternal ]
+  id: OrganAbductorTongue
+
+- type: entity
+  parent: [ OrganBaseAppendix, OrganSpriteHumanInternal, OrganAbductorInternal ]
+  id: OrganAbductorAppendix
+
+- type: entity
+  parent: [ OrganBaseEars, OrganSpriteHumanInternal, OrganAbductorInternal ]
+  id: OrganAbductorEars
+
+- type: entity
+  parent: [ OrganBaseLungs, OrganAbductorInternal ]
+  id: OrganAbductorLungs
+
+- type: entity
+  parent: [ OrganBaseHeart, OrganAbductorInternal ]
+  id: OrganAbductorHeart
+
+- type: entity
+  parent: [ OrganBaseStomach, OrganAbductorInternal ]
+  id: OrganAbductorStomach
+
+- type: entity
+  parent: [ OrganBaseLiver, OrganAbductorInternal ]
+  id: OrganAbductorLiver
+
+- type: entity
+  parent: [ OrganBaseKidneys, OrganAbductorInternal ]
+  id: OrganAbductorKidneys

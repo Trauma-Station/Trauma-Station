@@ -1,0 +1,367 @@
+## Markings
+
+- type: markingsGroup
+  parent: Undergarments
+  id: Plasmaman
+  onlyGroupWhitelisted: true # Hides the hair and facial hair options
+  limits:
+    enum.HumanoidVisualLayers.Hair:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.Snout:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.Tail:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 2
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 2
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 2
+      required: false
+    enum.HumanoidVisualLayers.LArm:
+      limit: 2
+      required: false
+
+## Mob
+
+- type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearancePlasmaman
+  name: plasmaman appearance
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganPlasmamanTorso
+      Head: OrganPlasmamanHead
+      ArmLeft: OrganPlasmamanArmLeft
+      ArmRight: OrganPlasmamanArmRight
+      HandLeft: OrganPlasmamanHandLeft
+      HandRight: OrganPlasmamanHandRight
+      LegLeft: OrganPlasmamanLegLeft
+      LegRight: OrganPlasmamanLegRight
+      FootLeft: OrganPlasmamanFootLeft
+      FootRight: OrganPlasmamanFootRight
+      # Organs
+      Brain: OrganPlasmamanBrain
+      Eyes: OrganPlasmamanEyes
+      Tongue: OrganPlasmamanTongue
+      Appendix: OrganPlasmamanAppendix
+      Ears: OrganPlasmamanEars
+      Lungs: OrganPlasmamanLungs
+      Heart: OrganPlasmamanHeart
+      Stomach: OrganPlasmamanStomach
+      Liver: OrganPlasmamanLiver
+      Kidneys: OrganPlasmamanKidneys
+  - type: HumanoidProfile
+    species: Plasmaman
+
+- type: entity
+  parent:
+  - AppearancePlasmaman
+  - BaseSpeciesMobOrganic
+  id: MobPlasmaman
+  name: Urist McPlasma
+  components:
+  - type: ZombieImmune
+  - type: Bloodstream
+    bloodlossThreshold: 0
+    bleedReductionAmount: 0
+    maxBleedAmount: 0
+    bloodReferenceSolution: # just so they can metabolise stuff, no bleeding
+      reagents:
+      - ReagentId: Plasma
+        Quantity: 300
+  - type: MeleeWeapon
+    soundHit:
+      collection: FirePunch
+    animation: WeaponArcPurplePunch
+    damage:
+      types: # oooh scarier extra damage~
+        Heat: 5
+        Blunt: 2.25
+  - type: DamageOnHit
+    damage:
+      types:
+        Heat: 2
+    targetParts: Hands
+  - type: Speech
+    speechVerb: Skeleton
+  - type: Vocal
+    wilhelm: "/Audio/_Goobstation/Voice/badtothebone.ogg" # Goobstation
+    wilhelmProbability: 0.1 # Goobstation
+    sounds:
+      Male: UnisexPlasmaman
+      Female: UnisexPlasmaman
+      Unsexed: UnisexPlasmaman
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: SheetPlasma1
+      amount: 8
+    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+      amount: 3
+  - type: Inventory
+    templateId: plasmaman
+  - type: Temperature
+    specificHeat: 46
+    currentTemperature: 270.15  # -3 celsius
+  - type: TemperatureDamage
+    heatDamageThreshold: 308    # 35 celsius, -17 from base heat damage threshold
+    coldDamage:
+      types:
+        Cold: 0
+    heatDamage:
+      types:
+        Heat: 3
+  - type: ThermalRegulator
+    normalBodyTemperature: 270.15
+  - type: Flammable
+    firestackFade: -0.05
+  - type: TypingIndicator
+    proto: plasmaman
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic
+    - Calcic
+    understands:
+    - TauCetiBasic
+    - Calcic
+  - type: SpawnGasOnGib
+    gasMixture:
+      moles:
+        Plasma: 100
+  - type: Fixtures
+    fixtures: # TODO: This needs a second fixture just for mob collisions.
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 160
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 400
+      behaviors:
+      - !type:GibBehavior
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 1500
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawnInContainer: true
+        spawn:
+          Ash:
+            min: 1
+            max: 1
+      - !type:BurnBodyBehavior
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MeatLaserImpact
+      - !type:SpawnGasBehavior
+        gasMixture:
+          moles:
+            Plasma: 80 # Lower than gas on gibbing
+  - type: TemperatureSpeed
+    thresholds:
+      243: 0.8
+  - type: Fart
+    gasToFart: Plasma
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy # vaguely fleshy???
+  id: OrganPlasmaman
+  suffix: plasmaman
+  components:
+  - type: Damageable
+    damageModifierSet: Plasmaman
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Plasma
+          Quantity: 5
+  - type: Extractable
+    grindableSolutionName: food
+    juiceSolution:
+      reagents:
+      - ReagentId: Plasma
+        Quantity: 5
+
+- type: entity
+  abstract: true
+  parent: OrganPlasmaman
+  id: OrganPlasmamanInternal
+  components:
+  - type: Sprite
+    sprite: _EinsteinEngines/Mobs/Species/Plasmaman/organs.rsi
+
+- type: entity
+  abstract: true
+  parent: OrganPlasmaman
+  id: OrganPlasmamanExternal
+  components:
+  - type: Sprite
+    sprite: _EinsteinEngines/Mobs/Species/Plasmaman/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _EinsteinEngines/Mobs/Species/Plasmaman/parts.rsi
+  - type: WoundableVisuals
+    damageOverlayColors:
+      Brute: "#743474"
+  - type: IgniteFromGasPart
+    gas: Oxygen
+    fireStacks: 0.02
+  - type: Butcherable
+    butcheringType: Knife
+    butcherDelay: 4.0
+    spawned:
+    - id: SheetPlasma1
+      amount: 1
+
+- type: entity
+  abstract: true
+  id: OrganPlasmamanMetabolizer
+  components:
+  - type: Metabolizer
+    metabolizerTypes: [ Plasmaman ]
+
+## Parts
+- type: entity
+  parent: [ OrganBaseTorso, OrganPlasmamanExternal ]
+  id: OrganPlasmamanTorso
+  components:
+  - type: IgniteFromGasPart
+    fireStacks: 0.12
+  - type: Butcherable
+    butcherDelay: 6
+    spawned:
+    - id: SheetPlasma1
+      amount: 6
+
+- type: entity
+  parent: [ OrganBaseHead, OrganPlasmamanExternal ]
+  id: OrganPlasmamanHead
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganPlasmamanExternal ]
+  id: OrganPlasmamanArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganPlasmamanExternal ]
+  id: OrganPlasmamanArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganPlasmamanExternal ]
+  id: OrganPlasmamanHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganPlasmamanExternal ]
+  id: OrganPlasmamanHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganPlasmamanExternal ]
+  id: OrganPlasmamanLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganPlasmamanExternal ]
+  id: OrganPlasmamanLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganPlasmamanExternal ]
+  id: OrganPlasmamanFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganPlasmamanExternal ]
+  id: OrganPlasmamanFootRight
+
+## Organs
+
+- type: entity
+  parent: [ OrganBaseBrain, OrganPlasmamanInternal ]
+  id: OrganPlasmamanBrain
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: GreyMatter
+          Quantity: 5
+        - ReagentId: Plasma
+          Quantity: 5
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganPlasmamanInternal ]
+  id: OrganPlasmamanEyes
+  components:
+  - type: Sprite
+    layers:
+    - state: eyes
+
+- type: entity
+  parent: [ OrganBaseTongue, OrganPlasmamanInternal ]
+  id: OrganPlasmamanTongue
+
+- type: entity
+  parent: [ OrganBaseAppendix, OrganSpriteHumanInternal, OrganPlasmamanInternal ]
+  id: OrganPlasmamanAppendix
+
+- type: entity
+  parent: [ OrganBaseEars, OrganSpriteHumanInternal, OrganPlasmamanInternal ]
+  id: OrganPlasmamanEars
+
+- type: entity
+  parent: [ OrganBaseLungs, OrganPlasmamanInternal, OrganPlasmamanMetabolizer ]
+  id: OrganPlasmamanLungs
+  components:
+  - type: Sprite
+    layers:
+    - state: lungs # combined
+  - type: Lung
+    alert: LowPlasma
+
+- type: entity
+  parent: [ OrganBaseHeart, OrganPlasmamanInternal, OrganPlasmamanMetabolizer ]
+  id: OrganPlasmamanHeart
+
+- type: entity
+  parent: [ OrganBaseStomach, OrganPlasmamanInternal, OrganPlasmamanMetabolizer ]
+  id: OrganPlasmamanStomach
+
+- type: entity
+  parent: [ OrganBaseLiver, OrganPlasmamanInternal, OrganPlasmamanMetabolizer ]
+  id: OrganPlasmamanLiver
+
+- type: entity
+  parent: [ OrganBaseKidneys, OrganPlasmamanInternal, OrganPlasmamanMetabolizer ]
+  id: OrganPlasmamanKidneys
+  components:
+  - type: Sprite
+    layers:
+    - state: kidneys # combined

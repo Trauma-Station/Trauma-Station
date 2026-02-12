@@ -1,0 +1,54 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<widgets:PartStatusControl
+    xmlns="https://spacestation14.io"
+    xmlns:gfx="using:Robust.Client.Graphics"
+    xmlns:controls="using:Content.Client.UserInterface.Controls"
+    xmlns:widgets="using:Content.Medical.Client.UserInterface.Systems.PartStatus.Widgets"
+    Name="PartStatusIndicator"
+    VerticalAlignment="Center"
+    HorizontalAlignment="Center">
+    <Control>
+        <PanelContainer>
+            <TextureRect
+                Name="DollHead"
+                Stretch="KeepAspectCentered"
+                SetSize="64 64"/>
+            <TextureRect
+                Name="DollTorso"
+                Stretch="KeepAspectCentered"
+                SetSize="64 64"/>
+            <TextureRect
+                Name="DollLeftArm"
+                Stretch="KeepAspectCentered"
+                SetSize="64 64"/>
+            <TextureRect
+                Name="DollLeftHand"
+                Stretch="KeepAspectCentered"
+                SetSize="64 64"/>
+            <TextureRect
+                Name="DollRightArm"
+                Stretch="KeepAspectCentered"
+                SetSize="64 64"/>
+            <TextureRect
+                Name="DollRightHand"
+                Stretch="KeepAspectCentered"
+                SetSize="64 64"/>
+            <TextureRect
+                Name="DollLeftLeg"
+                Stretch="KeepAspectCentered"
+                SetSize="64 64"/>
+            <TextureRect
+                Name="DollLeftFoot"
+                Stretch="KeepAspectCentered"
+                SetSize="64 64"/>
+            <TextureRect
+                Name="DollRightLeg"
+                Stretch="KeepAspectCentered"
+                SetSize="64 64"/>
+            <TextureRect
+                Name="DollRightFoot"
+                Stretch="KeepAspectCentered"
+                SetSize="64 64"/>
+        </PanelContainer>
+    </Control>
+</widgets:PartStatusControl>

@@ -1,4 +1,4 @@
-using Content.Shared._Shitmed.Medical.Surgery;
+using Content.Medical.Shared.Surgery;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
 

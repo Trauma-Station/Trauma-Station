@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: [ OrganBaseInternal ]
   id: XenomorphInfection
   name: xenomorph larva embryo
   description: A parasitic life form in its early stages of development. It has a worm-like body shape, underdeveloped limbs, and a tail appendage.
@@ -8,7 +8,9 @@
     sprite: _White/Mobs/Species/Xenomorph/organs.rsi
     state: embryon
   - type: Organ
-    slotId: xenomorph_larva
+    category: XenomorphLarva
+  - type: ChildOrgan
+    parentCategory: Torso
   - type: StaticPrice
     price: 2000
   - type: XenomorphInfection

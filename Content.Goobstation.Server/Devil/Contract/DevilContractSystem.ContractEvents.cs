@@ -8,11 +8,10 @@
 
 using System.Linq;
 using Content.Goobstation.Shared.Devil;
-using Content.Server.Body.Components;
-using Content.Shared._Shitmed.Body.Events;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
+using Content.Medical.Common.Body;
+using Content.Medical.Shared.Wounds;
+using Content.Shared.Body;
 using Content.Shared.Body.Components;
-using Content.Shared.Body.Part;
 using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Devil.Contract;
@@ -22,8 +21,7 @@ public sealed partial class DevilContractSystem
     private void InitializeSpecialActions()
     {
         SubscribeLocalEvent<DevilContractSoulOwnershipEvent>(OnSoulOwnership);
-        SubscribeLocalEvent<DevilContractLoseHandEvent>(OnLoseHand);
-        SubscribeLocalEvent<DevilContractLoseLegEvent>(OnLoseLeg);
+        SubscribeLocalEvent<DevilContractLosePartEvent>(OnLosePart);
         SubscribeLocalEvent<DevilContractLoseOrganEvent>(OnLoseOrgan);
         SubscribeLocalEvent<DevilContractChanceEvent>(OnChance);
     }
@@ -35,68 +33,36 @@ public sealed partial class DevilContractSystem
         TryTransferSouls(contractOwner, args.Target, 1);
     }
 
-    private void OnLoseHand(DevilContractLoseHandEvent args)
+    private void OnLosePart(DevilContractLosePartEvent args)
     {
-        if (!TryComp<BodyComponent>(args.Target, out var body))
+        var parts = _part.GetBodyParts(args.Target, BodyPartType.Hand);
+        if (parts.Count <= 0)
             return;
 
-        var hands = _body.GetBodyChildrenOfType(args.Target, BodyPartType.Hand, body).ToList();
+        var pick = _random.Pick(parts);
 
-        if (hands.Count <= 0)
+        if (!TryComp<WoundableComponent>(pick, out var woundable)
+            || woundable.ParentWoundable is not {} parent)
             return;
 
-        var pick = _random.Pick(hands);
+        _wound.AmputateWoundableSafely(parent, pick, woundable);
+        QueueDel(pick);
 
-        if (!TryComp<WoundableComponent>(pick.Id, out var woundable)
-            || !woundable.ParentWoundable.HasValue)
-            return;
-
-        _wounds.AmputateWoundableSafely(woundable.ParentWoundable.Value, pick.Id, woundable);
-        QueueDel(pick.Id);
-
-        Dirty(args.Target, body);
-        Log.Debug($"Removed part {ToPrettyString(pick.Id)} from {ToPrettyString(args.Target)}");
-        QueueDel(pick.Id);
-    }
-
-    private void OnLoseLeg(DevilContractLoseLegEvent args)
-    {
-        if (!TryComp<BodyComponent>(args.Target, out var body))
-            return;
-
-        var legs = _body.GetBodyChildrenOfType(args.Target, BodyPartType.Leg, body).ToList();
-
-        if (legs.Count <= 0)
-            return;
-
-        var pick = _random.Pick(legs);
-
-        if (!TryComp<WoundableComponent>(pick.Id, out var woundable)
-            || !woundable.ParentWoundable.HasValue)
-            return;
-
-        _wounds.AmputateWoundableSafely(woundable.ParentWoundable.Value, pick.Id, woundable);
-
-        Dirty(args.Target, body);
-        Log.Debug($"Removed part {ToPrettyString(pick.Id)} from {ToPrettyString(args.Target)}");
-        QueueDel(pick.Id);
+        Log.Debug($"Removed part {ToPrettyString(pick)} from {ToPrettyString(args.Target)}");
     }
 
     private void OnLoseOrgan(DevilContractLoseOrganEvent args)
     {
+        var eligibleOrgans = _body.GetInternalOrgans(args.Target);
         // don't remove the brain, as funny as that is.
-        var eligibleOrgans = _body.GetBodyOrgans(args.Target)
-            .Where(o => !HasComp<BrainComponent>(o.Id))
-            .ToList();
-
+        eligibleOrgans.RemoveAll(o => HasComp<BrainComponent>(o));
         if (eligibleOrgans.Count <= 0)
             return;
 
         var pick = _random.Pick(eligibleOrgans);
-
-        _body.RemoveOrgan(pick.Id, pick.Component);
-        Log.Debug($"Removed part {ToPrettyString(pick.Id)} from {ToPrettyString(args.Target)}");
-        QueueDel(pick.Id);
+        _body.RemoveOrgan(args.Target, pick.Owner);
+        Log.Debug($"Removed part {ToPrettyString(pick)} from {ToPrettyString(args.Target)}");
+        QueueDel(pick);
     }
 
     // LETS GO GAMBLING!!!!!
