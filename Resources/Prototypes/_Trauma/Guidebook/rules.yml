@@ -39,7 +39,7 @@
   name: guide-entry-rules-core
   ruleEntry: true
   priority: 30
-  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/Core.xml"
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/CoreRules.xml"
   children:
   - RuleC0
   - RuleC1
@@ -137,7 +137,7 @@
   name: guide-entry-rules-roleplay
   ruleEntry: true
   priority: 40
-  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Roleplay/RuleR0.xml"
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Roleplay/RoleplayRules.xml"
   children:
   - RuleR1
   - RuleR2
