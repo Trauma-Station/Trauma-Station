@@ -1,0 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+using Robust.Shared.GameStates;
+
+namespace Content.Medical.Shared.Surgery;
+
+/// <summary>
+///     Allows the entity to do surgery without having to remove clothing.
+/// </summary>
+[RegisterComponent, NetworkedComponent]
+public sealed partial class SurgeryIgnoreClothingComponent : Component;

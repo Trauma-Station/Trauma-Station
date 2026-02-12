@@ -1,0 +1,29 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+using Robust.Shared.Serialization;
+
+namespace Content.Medical.Shared.Abductor;
+
+[Serializable, NetSerializable]
+public enum AbductorExperimentatorVisuals : byte
+{
+    Full
+}
+
+[Serializable, NetSerializable]
+public enum AbductorCameraConsoleUIKey
+{
+    Key
+}
+
+[Serializable, NetSerializable]
+public enum AbductorConsoleUIKey
+{
+    Key
+}
+
+[Serializable, NetSerializable]
+public enum AbductorArmorModeType : byte
+{
+    Combat,
+    Stealth
+}

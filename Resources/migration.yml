@@ -78,6 +78,15 @@ MachineFTLDriveHighCircuitboard: null
 # 2026-01-29 migrate away water vapor tanks because some chud mapped it
 DoubleEmergencyWaterVaporTankFilled: DoubleEmergencyOxygenTankFilled
 LockerShaftMinerFilledHardsuit: LockerSalvageSpecialistFilledHardsuit
+
+# 2026-02-12 renamed a bunch of organs
+BasicCyberneticEyes: OrganCyberneticEyes
+DiagnosticCyberneticEyes: OrganCyberneticEyesDiagnostic
+MedicalCyberneticEyes: OrganCyberneticEyesMedical
+SecurityCyberneticEyes: OrganCyberneticEyesSecurity
+BioSynthHeart: OrganBioSynthHeart
+ChestSkeleton: OrganSkeletonPersonTorso
+ChestHuman: OrganHumanTorso
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
@@ -835,9 +844,6 @@ MagazineBoxCaselessRifle10x24: null
 MagazineBoxCaselessRifleBig: null
 MagazinePistolHighCapacityRubber: null
 
-# 2025-03-09 - Shitmed Woundmed, separating torsos into chest and groin
-TorsoHuman: ChestHuman
-TorsoSkeleton: ChestSkeleton
 # 2025-03-18
 EpinephrineChemistryBottle: ChemistryBottleEpinephrine
 RobustHarvestChemistryBottle: ChemistryBottleRobustHarvest
@@ -1076,3 +1082,39 @@ HandheldHealthAnalyzerEmpty: HandheldHealthAnalyzer
 
 #2026-01-09
 BorgModuleAdvancedChemical: BorgModuleAdvancedTopical
+
+# 2026-01-14
+HeadHuman: OrganHumanHead
+HeadSkeleton: OrganSkeletonPersonHead
+LeftArmHuman: OrganHumanArmLeft
+LeftArmSkeleton: OrganSkeletonPersonArmLeft
+LeftHandSkeleton: OrganSkeletonPersonHandLeft
+LeftLegHuman: OrganHumanLegLeft
+LeftLegSkeleton: OrganSkeletonPersonLegLeft
+RightArmHuman: OrganHumanArmRight
+RightHandSkeleton: OrganSkeletonPersonHandRight
+RightLegHuman: OrganHumanLegRight
+TorsoSkeleton: OrganSkeletonPersonTorso
+RightArmSkeleton: OrganSkeletonPersonArmRight
+
+# 2026-01-19
+#TowelColorOrange: null # Trauma - kept towels
+#TowelColorPurple: null
+#TowelColorRed: null
+#TowelColorBlue: null
+#TowelColorDarkBlue: null
+#TowelColorLightBlue: null
+#TowelColorTeal: null
+#TowelColorBrown: null
+#TowelColorLightBrown: null
+#TowelColorGray: null
+#TowelColorGreen: null
+#TowelColorDarkGreen: null
+#TowelColorGold: null
+#TowelColorOrange: null
+#TowelColorBlack: null
+#TowelColorPink: null
+#TowelColorYellow: null
+#TowelColorMaroon: null
+#TowelColorSilver: null
+#TowelColorMime: null

@@ -1,6 +1,6 @@
 #nullable enable
 // <Trauma>
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 // </Trauma>
 using Content.IntegrationTests.Tests.Interaction;
 using Content.Shared.Damage;

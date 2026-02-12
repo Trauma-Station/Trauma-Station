@@ -14,6 +14,7 @@
 		<ProjectReference Include="../Content.Trauma.Shared/Content.Trauma.Shared.csproj" />
 		<ProjectReference Include="../Content.Goobstation.Server/Content.Goobstation.Server.csproj" />
 		<ProjectReference Include="../Content.Lavaland.Server/Content.Lavaland.Server.csproj" />
+		<ProjectReference Include="../Content.Medical.Server/Content.Medical.Server.csproj" />
 		<ProjectReference Include="../Content.Server/Content.Server.csproj" />
 	</ItemGroup>
 

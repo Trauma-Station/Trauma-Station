@@ -12,13 +12,13 @@
   - !type:PlantAdjustHealth
     amount: -0.75
   metabolisms:
-    Food:
+    Digestion:
       metabolismRate: 0.01 # Effectively one unit every 100 seconds.
+      metabolites:
+        Microplastics: 0.01 # magic
       effects:
       - !type:SatiateHunger
         factor: 0.015 # same as regular nutriment per u
-      - !type:ModifyStatusEffect
-        effectProto: MicroplasticsStatusEffect
       - !type:Vomit
         probability: 0.005
       - !type:HealthChange
@@ -45,8 +45,7 @@
   - !type:PlantAdjustHealth
     amount: -1.5
   metabolisms:
-    Food:
-      metabolismRate: 0.5
+    Digestion:
       effects:
       - !type:SatiateHunger
         factor: 0.010

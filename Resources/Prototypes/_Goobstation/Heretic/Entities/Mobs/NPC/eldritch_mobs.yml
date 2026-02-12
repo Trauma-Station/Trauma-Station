@@ -206,9 +206,6 @@
     description: ghostrole-fire-shark-desc
     mindRoles:
     - MindRoleGhoul
-  - type: Body
-    prototype: null
-    bodyType: Simple
   - type: IgniteOnMeleeHit
     fireStacks: 2
   - type: MovementSpeedModifier
@@ -251,6 +248,7 @@
 - type: entity
   parent:
   - BaseMob
+  - BaseMobAnimal
   - MobCombat
   - MobFlammable
   - MobAtmosExposed
@@ -372,8 +370,6 @@
     doAfterDelay: 8
     fuelCost: 15
   - type: FloatingVisuals
-  - type: Body
-    bodyType: Simple
   - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
   - type: NameIdentifier

@@ -19,7 +19,7 @@
       - !type:WhitelistCondition
         whitelist:
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
@@ -327,7 +327,7 @@
       - !type:WhitelistCondition
         whitelist:
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
@@ -440,12 +440,12 @@
       - !type:WhitelistCondition
         whitelist:
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
-      - !type:HasBodyPartCondition
-        part: Head
+      - !type:HasOrgan
+        organCategory: Head
         inverted: true
     - !type:SacrificeEffect
       applyOn: Targets
@@ -748,7 +748,7 @@
       - !type:WhitelistCondition
         whitelist:
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
@@ -866,7 +866,7 @@
       - !type:WhitelistCondition
         whitelist:
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
@@ -978,7 +978,7 @@
       - !type:WhitelistCondition
         whitelist:
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
@@ -1101,7 +1101,7 @@
         whitelist:
           requireAll: true
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
           - StarMark
       - !type:MobStateCondition
         mobstate: Alive

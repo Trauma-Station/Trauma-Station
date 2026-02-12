@@ -57,7 +57,7 @@ public sealed class CosmicLapseSystem : EntitySystem
             ("target", Identity.Entity(action.Target, EntityManager))),
             uid,
             uid);
-        var species = Comp<HumanoidAppearanceComponent>(action.Target).Species;
+        var species = Comp<HumanoidProfileComponent>(action.Target).Species;
         var polymorphId = "CosmicLapseMob" + species;
 
         if (_prototype.HasIndex<PolymorphPrototype>(polymorphId))

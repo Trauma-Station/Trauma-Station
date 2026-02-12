@@ -26,7 +26,7 @@ using Content.Lavaland.Shared.Pressure;
 using Content.Lavaland.Shared.Weapons.Upgrades;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Armor;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Projectiles;
@@ -39,7 +39,6 @@ namespace Content.Lavaland.Server.Pressure;
 public sealed class PressureEfficiencyChangeSystem : SharedPressureEfficiencyChangeSystem
 {
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
 
     private EntityQuery<PressureDamageChangeComponent> _query;
     private EntityQuery<ProjectileComponent> _projectileQuery;
@@ -61,16 +60,13 @@ public sealed class PressureEfficiencyChangeSystem : SharedPressureEfficiencyCha
 
     private void OnGetDamage(Entity<PressureDamageChangeComponent> ent, ref GetMeleeDamageEvent args)
     {
-        if (!ApplyModifier(ent)
-            || !ent.Comp.ApplyToMelee)
-            return;
-
-        args.Damage *= ent.Comp.AppliedModifier;
+        if (ent.Comp.ApplyToMelee && ApplyModifier(ent.AsNullable()))
+            args.Damage *= ent.Comp.AppliedModifier;
     }
 
     private void OnProjectileShot(Entity<PressureDamageChangeComponent> ent, ref ProjectileShotEvent args)
     {
-        if (!ApplyModifier(ent)
+        if (!ApplyModifier(ent.AsNullable())
             || !ent.Comp.ApplyToProjectiles
             || !_projectileQuery.TryComp(args.FiredProjectile, out var projectile))
             return;
@@ -78,8 +74,11 @@ public sealed class PressureEfficiencyChangeSystem : SharedPressureEfficiencyCha
         projectile.Damage *= ent.Comp.AppliedModifier;
     }
 
-    public bool ApplyModifier(Entity<PressureDamageChangeComponent> ent)
+    public bool ApplyModifier(Entity<PressureDamageChangeComponent?> ent)
     {
+        if (!Resolve(ent, ref ent.Comp))
+            return false;
+
         var pressure = _atmos.GetTileMixture((ent.Owner, Transform(ent)))?.Pressure ?? 0f;
         return ent.Comp.Enabled && ((pressure >= ent.Comp.LowerBound
             && pressure <= ent.Comp.UpperBound) == ent.Comp.ApplyWhenInRange);
@@ -93,15 +92,13 @@ public sealed class PressureEfficiencyChangeSystem : SharedPressureEfficiencyCha
 
     private void OnArmorRelayDamageModify(Entity<PressureArmorChangeComponent> ent, ref InventoryRelayedEvent<DamageModifyEvent> args)
     {
-        var pressure = _atmos.GetTileMixture((ent.Owner, Transform(ent)))?.Pressure ?? 0f;
-        if ((pressure >= ent.Comp.LowerBound && pressure <= ent.Comp.UpperBound) != ent.Comp.ApplyWhenInRange
-            || args.Args.TargetPart == null
-            || !TryComp<ArmorComponent>(ent, out var armor))
+        if (!ApplyModifier(ent.Owner) ||
+            args.Args.TargetPart is not {} part ||
+            !TryComp<ArmorComponent>(ent, out var armor))
             return;
 
-        var (partType, _) = _body.ConvertTargetBodyPart(args.Args.TargetPart); // Woundmed stuff
         var coverage = armor.ArmorCoverage;
-        if (!coverage.Contains(partType))
+        if (!coverage.Contains(part))
             return;
 
         args.Args.Damage.ArmorPenetration += ent.Comp.ExtraPenetrationModifier;

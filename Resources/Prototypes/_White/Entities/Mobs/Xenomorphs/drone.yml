@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseMobXenomorphAdult
+  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphDrone ]
   id: BaseMobXenomorphDrone
   name: xenomorph drone
   description: A specialized individual designed to build and maintain a hive. Less aggressive than other xenomorph forms, but still deadly when approached.
@@ -19,17 +19,8 @@
       visible: false
   - type: Xenomorph
     caste: Drone
-  #- type: ActionGrant # Goobstation - moved to orgnas
-  #  actions:
-  #  - ActionTransferPlasma
-  #  - ActionSpawnWallResin
-  #  - ActionSpawnResinMembrane # no membrane its for chuds
-  #  - ActionSpawnResinNest
-  #  - ActionSpawnResinWeedNode
   - type: VentCrawler
   - type: Cuffable
-  - type: Body
-    prototype: XenomorphDrone
   # - type: GuideHelp
   #   guides:
   #   - XenomorphDrone

@@ -278,8 +278,7 @@
     - type: Tourniquet
       blockedBodyParts:
       - Head
-      - Chest
-      - Groin
+      - Torso
       putOnSound:
         path: "/Audio/Items/Medical/brutepack_begin.ogg"
       putOffSound:
@@ -352,7 +351,13 @@
     state: cream
   - type: Stack
     stackType: AloeCream
-    count: 15 #Was 10, Buffed due to limb damage changes (Goobstation)
+    count: 15 # Goob - was 10, Buffed due to limb damage changes
+  - type: Item
+    storedRotation: 90
+    storedOffset: 4, 0
+    storedSprite:
+      state: cream
+      sprite: Objects/Specific/Hydroponics/aloe.rsi
 
 - type: entity
   parent: BaseHealingItem

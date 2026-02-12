@@ -101,20 +101,11 @@ uplink-weapon-burner-desc = The Burner Heavy Rifle, an excellent breaching and s
 uplink-weapon-heavy-shotgun-name = NZ CSG-242 Heavy Shotgun
 uplink-weapon-heavy-shotgun-desc = Merciless heavy explosive weapon. The recoil when firing it is so extreme that it can knock you off your feet.
 
-uplink-c20r-name = C-20r
-uplink-c20r-desc = Old faithful: The classic C-20r Submachine Gun.
-
-uplink-buldog-name = Bulldog
-uplink-buldog-desc = A magazine fed fullauto shotgun.
-
 uplink-l6-saw-name = L6 Saw
 uplink-l6-saw-desc = More dakka: The iconic L6 light machine gun.
 
 uplink-m90-name = M-90
 uplink-m90-desc = An M-90 combat rifle.
-
-uplink-estoc-name = Estoc
-uplink-estoc-desc = A designated assault rifle, fitted with a mid-range optic for longer-range combat.
 
 uplink-syndicate-disabler-name = Syndicate Disabler
 uplink-syndicate-disabler-desc = An advanced disabler built from a reverse-engineered Nanotrasen prototype. While it lacks a bit of stopping power, it makes up for it with a recharging cell.
@@ -150,9 +141,6 @@ uplink-frag-grenade-desc = Lower damage, bigger radius. Compatible with the Chin
 
 uplink-mpapers-grenade-name = MP-APERS shell (40mm)
 uplink-mpapers-grenade-desc = Fires out 20 small pellets to turn your grenade launcher into a shotgun. Compatible with the China-Lake.
-
-uplink-rifle-mag-name = Rifle Magazine (.20)
-uplink-rifle-mag-desc = A 25 round magazine containing .20 rifle bullets. Supports the Lecter and M-90.
 
 uplink-pistol-magazine-caseless-saphe-name = Pistol Magazine (9.5mm SAP-HE)
 uplink-pistol-magazine-caseless-saphe-desc = 10 rounds of 9.5mm caseless magnum semi-armor-piercing high-explosive ammunition. It is exactly what you have read. Compatible with the Cobra.
@@ -204,9 +192,6 @@ uplink-high-caliber-shotgun-box-flash-slug-desc = 16 shells of 8 Gauge flashbang
 
 uplink-high-caliber-shotgun-box-sarin-name = 8 Gauge sarin gas shell box
 uplink-high-caliber-shotgun-box-sarin-desc = 16 shells of 8 Gauge sarin shells for the combat shotgun, which release a small plus-shaped cloud of sarin gas.
-
-uplink-estoc-ammo-name = Rifle Magazine (.20 rifle)
-uplink-estoc-ammo-desc = Rifle magazine with 25 rounds. Compatable with the Estoc.
 
 # Grenades
 

@@ -88,7 +88,7 @@ public sealed partial class GoobCVars
         CVarDef.Create("atmos.mmos_expensive_airflow", true, CVar.SERVERONLY);
 
     /// <summary>
-    ///     A multiplier on the amount of force applied to Humanoid entities, as tracked by HumanoidAppearanceComponent
+    ///     A multiplier on the amount of force applied to Humanoid entities, which have HumanoidProfileComponent
     ///     This multiplier is added after all other checks are made, and applies to both throwing force, and how easy it is for an entity to be thrown.
     /// </summary>
     public static readonly CVarDef<float> AtmosHumanoidThrowMultiplier =

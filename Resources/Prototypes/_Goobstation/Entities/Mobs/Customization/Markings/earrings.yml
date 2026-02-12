@@ -6,8 +6,7 @@
 - type: marking
   id: EarringsStudLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -20,8 +19,7 @@
 - type: marking
   id: EarringsStudRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -34,8 +32,7 @@
 - type: marking
   id: EarringsHeavyLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -48,8 +45,7 @@
 - type: marking
   id: EarringsHeavyRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -62,8 +58,7 @@
 - type: marking
   id: EarringsDropBasicLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -76,8 +71,7 @@
 - type: marking
   id: EarringsDropBasicRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -90,8 +84,7 @@
 - type: marking
   id: EarringsDropColoredLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -106,8 +99,7 @@
 - type: marking
   id: EarringsDropColoredRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -122,8 +114,7 @@
 - type: marking
   id: EarringsDropLongLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -138,8 +129,7 @@
 - type: marking
   id: EarringsDropLongRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -154,8 +144,7 @@
 - type: marking
   id: EarringsCrescentLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -168,8 +157,7 @@
 - type: marking
   id: EarringsCrescentRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -182,8 +170,7 @@
 - type: marking
   id: EarringsBangleLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -196,8 +183,7 @@
 - type: marking
   id: EarringsBangleRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -210,8 +196,7 @@
 - type: marking
   id: EarringsHoopBasicLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -224,8 +209,7 @@
 - type: marking
   id: EarringsHoopBasicRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -238,8 +222,7 @@
 - type: marking
   id: EarringsHoopMiniLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -252,8 +235,7 @@
 - type: marking
   id: EarringsHoopMiniRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -266,8 +248,7 @@
 - type: marking
   id: EarringsCrossBasicLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -280,8 +261,7 @@
 - type: marking
   id: EarringsCrossBasicRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -294,8 +274,7 @@
 - type: marking
   id: EarringsCrossSaintPeterLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -308,8 +287,7 @@
 - type: marking
   id: EarringsCrossSaintPeterRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -322,8 +300,7 @@
 - type: marking
   id: EarringsGemstoneBasicLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -338,8 +315,7 @@
 - type: marking
   id: EarringsGemstoneBasicRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -354,8 +330,7 @@
 - type: marking
   id: EarringsGemstoneLongLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -370,8 +345,7 @@
 - type: marking
   id: EarringsGemstoneLongRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -386,8 +360,7 @@
 - type: marking
   id: EarringsGemstoneDoubleLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -404,8 +377,7 @@
 - type: marking
   id: EarringsGemstoneDoubleRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -422,8 +394,7 @@
 - type: marking
   id: EarringsDangleBasicLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -438,8 +409,7 @@
 - type: marking
   id: EarringsDangleBasicRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -454,8 +424,7 @@
 - type: marking
   id: EarringsDangleLongLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -470,8 +439,7 @@
 - type: marking
   id: EarringsDangleLongRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -486,8 +454,7 @@
 - type: marking
   id: EarringsEightLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -500,8 +467,7 @@
 - type: marking
   id: EarringsEightRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -514,8 +480,7 @@
 - type: marking
   id: EarringsCrystalBasicLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -530,8 +495,7 @@
 - type: marking
   id: EarringsCrystalBasicRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -546,8 +510,7 @@
 - type: marking
   id: EarringsCrystalLongLeft
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:
@@ -562,8 +525,7 @@
 - type: marking
   id: EarringsCrystalLongRight
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachnid, Reptilian, Diona, Harpy, Gingerbread, Arachne]
+  groupWhitelist: [Human, Slime, Arachnid, Reptilian, Diona, Harpy, Arachnid]
   coloring:
     default:
       type:

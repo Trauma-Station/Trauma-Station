@@ -12,9 +12,10 @@ using System.Linq;
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.Religion.Nullrod;
+using Content.Medical.Common.Damage;
 using Content.Server.Heretic.EntitySystems;
 using Content.Shared._Shitcode.Heretic.Rituals;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
+using Content.Medical.Shared.Wounds;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -23,11 +24,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
-using Content.Shared.Timing; // Shitmed Change
-using Content.Shared._Shitmed.Damage; // Shitmed Change
+using Content.Medical.Common.Targeting;
+using Content.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Religion;
 
@@ -37,11 +35,9 @@ public sealed class WeakToHolySystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly GoobBibleSystem _goobBible = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly WoundSystem _wound = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly HereticSystem _heretic = default!;
-
 
     public override void Initialize()
     {
@@ -90,17 +86,7 @@ public sealed class WeakToHolySystem : EntitySystem
             },
         };
 
-        if (!TryComp<BodyComponent>(ent, out var body))
-            return;
-
-        if (!_body.TryGetRootPart(ent, out var rootPart, body: body))
-            return;
-
-        foreach (var woundable in _wound.GetAllWoundableChildren(rootPart.Value))
-        {
-            if (HasComp<DamageableComponent>(woundable))
-                args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modifierSet);
-        }
+        args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modifierSet);
     }
 
     private void OnUnholyItemDamage(Entity<WeakToHolyComponent> uid, ref DamageUnholyEvent args)
@@ -149,8 +135,8 @@ public sealed class WeakToHolySystem : EntitySystem
         base.Update(frameTime);
 
         // Holy damage healing.
-        var query = EntityQueryEnumerator<WeakToHolyComponent, BodyComponent>();
-        while (query.MoveNext(out var uid, out var weakToHoly, out var body))
+        var query = EntityQueryEnumerator<WeakToHolyComponent>();
+        while (query.MoveNext(out var uid, out var weakToHoly))
         {
             if (weakToHoly.NextPassiveHealTick > _timing.CurTime)
                 continue;
@@ -160,16 +146,12 @@ public sealed class WeakToHolySystem : EntitySystem
                 continue;
 
             if (TerminatingOrDeleted(uid)
-                || !_body.TryGetRootPart(uid, out var rootPart, body: body)
                 || !damageable.Damage.DamageDict.TryGetValue("Holy", out _))
                 continue;
 
-            // Rune healing.
-            if (weakToHoly.IsColliding)
-                _damageableSystem.TryChangeDamage(uid, weakToHoly.HealAmount, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
-
-            // Passive healing.
-            _damageableSystem.TryChangeDamage(uid, weakToHoly.PassiveAmount, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
+            // Rune healing vs passive healing
+            var healing = weakToHoly.IsColliding ? weakToHoly.HealAmount : weakToHoly.PassiveAmount;
+            _damageableSystem.ChangeDamage(uid, healing, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
         }
     }
 

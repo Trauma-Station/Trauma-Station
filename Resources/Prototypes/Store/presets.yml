@@ -21,6 +21,8 @@
     - Telecrystal
     balance:
       Telecrystal: 0
+    expectedFaction:
+    - Syndicate
     sales: # WD EDIT
       enabled: true
       minMultiplier: 0.2
@@ -46,3 +48,16 @@
     - SpellbookBundles      #Goobstation
     currencyWhitelist:
     - WizCoin
+    expectedFaction:
+    - Wizard
+
+- type: entity
+  id: StorePresetChangeling
+  abstract: true
+  components:
+  - type: Store
+    name: store-preset-name-changeling
+    categories:
+    - ChangelingAbilities
+    currencyWhitelist:
+    - ChangelingDNA

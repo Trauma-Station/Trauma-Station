@@ -1,0 +1,161 @@
+## Markings
+
+- type: markingsGroup
+  id: Shadow
+  onlyGroupWhitelisted: true
+  limits:
+    enum.HumanoidVisualLayers.Eyes:
+      limit: 1
+      required: false
+      default: [ LesserShadowlingEyes ]
+
+## Mob
+
+- type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceShadow
+  name: shadow appearance
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganShadowTorso
+      Head: OrganShadowHead
+      ArmLeft: OrganShadowArmLeft
+      ArmRight: OrganShadowArmRight
+      HandLeft: OrganShadowHandLeft
+      HandRight: OrganShadowHandRight
+      LegLeft: OrganShadowLegLeft
+      LegRight: OrganShadowLegRight
+      FootLeft: OrganShadowFootLeft
+      FootRight: OrganShadowFootRight
+      # Organs
+      Brain: OrganHumanBrain
+      Eyes: OrganHumanEyes
+      Tongue: OrganHumanTongue
+      Appendix: OrganHumanAppendix
+      Ears: OrganHumanEars
+      Lungs: OrganHumanLungs
+      Heart: OrganHumanHeart
+      Stomach: OrganHumanStomach
+      Liver: OrganHumanLiver
+      Kidneys: OrganHumanKidneys
+  - type: HumanoidProfile
+    species: Shadow
+
+# used for nightmares and lesser shadowlings
+- type: entity
+  parent:
+  - AppearanceShadow
+  - BaseSpeciesMobOrganic
+  id: MobShadow
+  name: Urist McShadow
+  components:
+  - type: Inventory
+    speciesId: shadowling
+  - type: MeleeWeapon
+    soundHit:
+      collection: FirePunch
+    animation: WeaponArcShadowClaw
+    damage:
+      types:
+        Heat: 10
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damageCap: 40
+    damage:
+      types:
+        Heat: -0.14
+      groups:
+        Brute: -0.14
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 300
+  - type: PressureImmunity
+  - type: NightVision
+    color: "#BF40BF"
+    activateSound: null
+    deactivateSound: null
+  - type: ThermalVision
+    thermalShader: null
+    color: "#BF40BF"
+    activateSound: null
+    deactivateSound: null
+  - type: ZombieImmune
+  - type: Tag
+    tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+    # no AnomalyHost...
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy # idk what the fuck it is???????
+  id: OrganShadow
+  suffix: shadow
+
+- type: entity
+  abstract: true
+  parent: OrganShadow
+  id: OrganShadowExternal
+  components:
+  - type: Sprite
+    sprite: _EinsteinEngines/Mobs/Species/Shadow/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _EinsteinEngines/Mobs/Species/Shadow/parts.rsi
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 10
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganShadowExternal ]
+  id: OrganShadowTorso
+
+- type: entity
+  parent: [ OrganBaseHead, OrganShadowExternal ]
+  id: OrganShadowHead
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganShadowExternal ]
+  id: OrganShadowArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganShadowExternal ]
+  id: OrganShadowArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganShadowExternal ]
+  id: OrganShadowHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganShadowExternal ]
+  id: OrganShadowHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganShadowExternal ]
+  id: OrganShadowLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganShadowExternal ]
+  id: OrganShadowLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganShadowExternal ]
+  id: OrganShadowFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganShadowExternal ]
+  id: OrganShadowFootRight

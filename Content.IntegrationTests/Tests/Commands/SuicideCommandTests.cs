@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
+using Content.Medical.Shared.Consciousness;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Damage;

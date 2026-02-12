@@ -92,8 +92,7 @@
     - WhitelistChameleon
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Leg
     modifiers:

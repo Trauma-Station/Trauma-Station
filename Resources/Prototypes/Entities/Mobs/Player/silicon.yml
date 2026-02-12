@@ -82,6 +82,7 @@
     title: comms-console-announcement-title-station-ai
     color: "#5ed7aa"
   - type: ShowJobIcons
+  - type: ShowCrewIcons
   - type: ShowHealthIcons #Goobstation
   - type: ShowHealthBars #Goobstation
     damageContainers:
@@ -120,6 +121,7 @@
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
   - type: ShowJobIcons
+  - type: ShowCrewIcons
 
 # Ai
 - type: entity

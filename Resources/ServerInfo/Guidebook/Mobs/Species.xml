@@ -1,38 +1,23 @@
-<!--
-SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-SPDX-FileCopyrightText: 2024 BeeRobynn <166929042+BeeRobynn@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 BeeRobynn <robynthewarcrime@proton.me>
-SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 AstroDogeDX <48888500+AstroDogeDX@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-
-SPDX-License-Identifier: AGPL-3.0-or-later
--->
-
 <Document>
   # Species
 
   Nanotrasen employs a variety of sapient species.
 
+  <!-- Trauma - Completely rewritten -->
   <Box>
-    <GuideEntityEmbed Entity="MobHuman" Caption="Human"/>
-    <GuideEntityEmbed Entity="MobIPCDummy" Caption="IPC"/>
-    <GuideEntityEmbed Entity="MobMoth" Caption="Moth Person"/>
-    <GuideEntityEmbed Entity="MobReptilian" Caption="Reptilian"/>
+    <GuideEntityEmbed Entity="AppearanceHuman" Caption="Human"/>
+    <GuideEntityEmbed Entity="AppearanceIPC" Caption="IPC"/>
+    <GuideEntityEmbed Entity="AppearanceMoth" Caption="Moth Person"/>
+    <GuideEntityEmbed Entity="AppearanceReptilian" Caption="Reptilian"/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="MobArachnid" Caption="Arachnid"/>
-    <GuideEntityEmbed Entity="MobDiona" Caption="Diona"/>
-    <GuideEntityEmbed Entity="MobDwarf" Caption="Dwarf"/>
-    <GuideEntityEmbed Entity="MobSlimePerson" Caption="Slime Person"/>
+    <GuideEntityEmbed Entity="AppearanceArachnid" Caption="Arachnid"/>
+    <GuideEntityEmbed Entity="AppearanceDiona" Caption="Diona"/>
+    <GuideEntityEmbed Entity="AppearanceDwarf" Caption="Dwarf"/>
+    <GuideEntityEmbed Entity="AppearanceSlimePerson" Caption="Slime Person"/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="MobHarpy" Caption="Harpy"/>
-    <GuideEntityEmbed Entity="MobVox" Caption="Vox"/>
-    <GuideEntityEmbed Entity="MobGingerbread" Caption="Gingerbread"/>
+    <GuideEntityEmbed Entity="AppearanceHarpy" Caption="Harpy"/>
+    <GuideEntityEmbed Entity="AppearanceVox" Caption="Vox"/>
   </Box>
-
 </Document>

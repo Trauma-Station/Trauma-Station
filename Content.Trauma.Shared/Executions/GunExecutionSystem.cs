@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using System.Numerics;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared._Shitmed.Weapons.Ranged.Events;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Camera;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -391,8 +390,6 @@ public sealed class GunExecutionSystem : EntitySystem
     {
         var ev = new GunShotEvent(attacker, ammo);
         RaiseLocalEvent(gun, ref ev);
-        var userEv = new GunShotBodyEvent(gun, gun.Comp);
-        RaiseLocalEvent(attacker, userEv);
 
         _audio.PlayPredicted(gun.Comp.SoundGunshot, gun, attacker);
         var direction = GetDirection(target: victim, shooter: attacker);

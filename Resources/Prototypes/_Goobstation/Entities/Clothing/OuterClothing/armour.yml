@@ -36,7 +36,7 @@
     sprite: _Goobstation/Clothing/Armor/durathread_web_vest.rsi
   - type: Armor
     coverage:
-    - Chest
+    - Torso
     modifiers:
       coefficients:
         Blunt: 0.7
@@ -64,7 +64,7 @@
     sprite: _Goobstation/Clothing/Armor/durathread_armour.rsi
   - type: Armor
     coverage:
-    - Chest
+    - Torso
     modifiers:
       coefficients:
         Blunt: 0.7
@@ -225,7 +225,7 @@
     sprite: _Goobstation/Clothing/Armor/covert_armor.rsi
   - type: Armor
     coverage:
-    - Chest
+    - Torso
     modifiers:
       coefficients:
         Blunt: 0.35
@@ -273,8 +273,7 @@
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_cloak.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -330,7 +329,7 @@
     sprite: _Goobstation/Clothing/OuterClothing/Armor/queen_carapace.rsi
   - type: Armor
     coverage:
-    - Chest
+    - Torso
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.4
@@ -368,8 +367,7 @@
   components:
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -403,8 +401,7 @@
     sprite: _ShitChap/Clothing/OuterClothing/Misc/templar.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Leg
     - Tail

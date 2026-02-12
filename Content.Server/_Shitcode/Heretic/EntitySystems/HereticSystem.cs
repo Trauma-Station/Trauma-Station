@@ -404,7 +404,7 @@ public sealed class HereticSystem : SharedHereticSystem
 
         bool IsSessionValid(ICommonSession session)
         {
-            if (!HasComp<HumanoidAppearanceComponent>(session.AttachedEntity))
+            if (!HasComp<HumanoidProfileComponent>(session.AttachedEntity))
                 return false;
 
             if (HasComp<GhoulComponent>(session.AttachedEntity.Value))
@@ -420,27 +420,13 @@ public sealed class HereticSystem : SharedHereticSystem
 
     private SacrificeTargetData? GetData(EntityUid uid)
     {
-        if (!TryComp(uid, out HumanoidAppearanceComponent? humanoid))
+        if (!TryComp(uid, out HumanoidProfileComponent? humanoid))
             return null;
 
         if (!_mind.TryGetMind(uid, out var mind, out _) || !_job.MindTryGetJobId(mind, out var jobId) || jobId == null)
             return null;
 
-        var hair = (HairStyles.DefaultHairStyle, humanoid.CachedHairColor ?? Color.Black);
-        if (humanoid.MarkingSet.TryGetCategory(MarkingCategories.Hair, out var hairMarkings) && hairMarkings.Count > 0)
-        {
-            var hairMarking = hairMarkings[0];
-            hair = (hairMarking.MarkingId, hairMarking.MarkingColors.FirstOrNull() ?? Color.Black);
-        }
-
-        var facialHair = (HairStyles.DefaultFacialHairStyle, humanoid.CachedFacialHairColor ?? Color.Black);
-        if (humanoid.MarkingSet.TryGetCategory(MarkingCategories.FacialHair, out var facialHairMarkings) &&
-            facialHairMarkings.Count > 0)
-        {
-            var facialHairMarking = facialHairMarkings[0];
-            facialHair = (facialHairMarking.MarkingId, facialHairMarking.MarkingColors.FirstOrNull() ?? Color.Black);
-        }
-
+        /* TODO NUBODY: use api if it gets made
         var appearance = new HumanoidCharacterAppearance(hair.Item1,
             hair.Item2,
             facialHair.Item1,
@@ -448,13 +434,14 @@ public sealed class HereticSystem : SharedHereticSystem
             humanoid.EyeColor,
             humanoid.SkinColor,
             humanoid.MarkingSet.GetForwardEnumerator().ToList());
+        */
 
         var profile = new HumanoidCharacterProfile().WithGender(humanoid.Gender)
             .WithSex(humanoid.Sex)
             .WithSpecies(humanoid.Species)
             .WithName(MetaData(uid).EntityName)
-            .WithAge(humanoid.Age)
-            .WithCharacterAppearance(appearance);
+            .WithAge(humanoid.Age);
+            //.WithCharacterAppearance(appearance);
 
         var netEntity = GetNetEntity(uid);
 

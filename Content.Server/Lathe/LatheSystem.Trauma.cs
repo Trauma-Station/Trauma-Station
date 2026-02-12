@@ -18,14 +18,9 @@ public sealed partial class LatheSystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly StationSystem _station = default!;
 
-    private EntityQuery<LatheComponent> _latheQuery;
-
     private void InitializeTrauma()
     {
-        _latheQuery = GetEntityQuery<LatheComponent>();
-
         SubscribeLocalEvent<LatheComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<LatheProducingComponent, ComponentShutdown>(OnProducingShutdown);
     }
 
     private void OnShutdown(Entity<LatheComponent> ent, ref ComponentShutdown args)
@@ -33,15 +28,6 @@ public sealed partial class LatheSystem
         // destroying a lathe stops its sound
         _audio.Stop(ent.Comp.SoundEntity);
         ent.Comp.SoundEntity = null;
-    }
-
-    private void OnProducingShutdown(Entity<LatheProducingComponent> ent, ref ComponentShutdown args)
-    {
-        // lathe losing power or finishing stops its sound
-        if (!_latheQuery.TryComp(ent, out var lathe))
-            return;
-        lathe.SoundEntity = _audio.Stop(lathe.SoundEntity);
-        lathe.SoundEntity = null;
     }
 
     private void AnnounceAddedRecipes(Entity<LatheComponent> ent, List<ProtoId<LatheRecipePrototype>> recipes)

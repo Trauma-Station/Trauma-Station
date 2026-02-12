@@ -21,13 +21,6 @@
     sprite: _Imp/Drone/dronesatchel.rsi
 
 - type: entity
-  parent: trayScanner
-  id: trayScannerUnremoveable
-  suffix: Unremoveable
-  components:
-  - type: Unremoveable
-
-- type: entity
   parent: Omnitool
   id: OmnitoolUnremoveable
   suffix: Unremoveable

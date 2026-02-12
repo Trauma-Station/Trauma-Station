@@ -11,8 +11,7 @@
     sprite: _Lavaland/Clothing/OuterClothing/Hardsuits/ancient_armor.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Leg
     - Tail

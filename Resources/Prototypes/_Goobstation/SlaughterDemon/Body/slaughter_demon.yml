@@ -1,37 +1,121 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
+## Mob
 
-- type: body
-  id: SlaughterDemon
-  name: "slaughter demon"
-  root: chest
-  slots:
-    chest:
-      part: ChestSlaughter
-      connections:
-      - groin
-      - right arm
-      - left arm
-      organs:
-        lungs: OrganSpaceAnimalLungs # airloss immunity
-        heart: OrganSlaughterHeart # blood crawl ability
-    groin:
-      part: GroinSlaughter
-      organs:
-        stomach: OrganAnimalStomach
-        liver: OrganAnimalLiver
-        kidneys: OrganAnimalKidneys
-    right arm:
-      part: RightArmSlaughter
-      connections:
-      - right hand
-    left arm:
-      part: LeftArmSlaughter
-      connections:
-      - left hand
-    right hand:
-      part: RightHandSlaughter
-    left hand:
-      part: LeftHandSlaughter
+- type: entity
+  abstract: true
+  parent: BaseMobBody
+  id: AppearanceSlaughterDemon
+  name: slaughter demon appearance
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganSlaughterDemonTorso
+      ArmLeft: OrganSlaughterDemonArmLeft
+      ArmRight: OrganSlaughterDemonArmRight
+      HandLeft: OrganSlaughterDemonHandLeft
+      HandRight: OrganSlaughterDemonHandRight
+      # Organs
+      Heart: OrganSlaughterDemonHeart
+      Lungs: OrganCarpLungs
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBase
+  id: OrganSlaughterDemon
+  suffix: slaughter demon
+
+- type: entity
+  abstract: true
+  parent: OrganSlaughterDemon
+  id: OrganSlaughterDemonInternal
+
+- type: entity
+  abstract: true
+  parent: OrganSlaughterDemon
+  id: OrganSlaughterDemonExternal
+  components:
+  - type: Sprite
+    sprite: _Goobstation/SlaughterDemon/body_parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Goobstation/SlaughterDemon/body_parts.rsi
+  - type: Woundable
+    integrity: 500
+    integrityCap: 500
+    thresholds:
+      Minor: 450
+      Moderate: 350
+      Severe: 200
+      Critical: 100
+      Mangled: 0
+
+## Parts
+
+- type: entity
+  # it has no unique sprite and i cbf
+  parent: [ OrganBaseTorso, OrganAnimalSpriteExternal, OrganSlaughterDemonExternal ]
+  id: OrganSlaughterDemonTorso
+  components:
+  - type: BodyPart
+    slots:
+    # Parts
+    - ArmLeft
+    - ArmRight
+    # Organs
+    - Heart
+    - Lungs
+    - Stomach
+    - Liver
+    - Kidneys
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganSlaughterDemonExternal ]
+  id: OrganSlaughterDemonArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganSlaughterDemonExternal ]
+  id: OrganSlaughterDemonArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganSlaughterDemonExternal ]
+  id: OrganSlaughterDemonHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganSlaughterDemonExternal ]
+  id: OrganSlaughterDemonHandRight
+
+## Organs
+
+- type: entity
+  parent: [ OrganAnimalHeart, OrganSlaughterDemonInternal, BaseMagicalContraband ]
+  id: OrganSlaughterDemonHeart
+  name: demonic heart
+  components:
+  - type: Sprite
+    sprite: _Goobstation/SlaughterDemon/heart.rsi
+  - type: InternalOrgan
+    intCap: 30
+    integrity: 30
+    integrityThresholds:
+      Normal: 30
+      Damaged: 20
+      Destroyed: 0
+  - type: OrganComponents
+    onAdd:
+    - type: BloodCrawl
+      blood:
+      - Blood
+      - AmmoniaBlood
+      - InsectBlood
+      - CopperBlood
+      - ZombieBlood
+      - AlienBlood
+      - BlackBlood
+      - BloodChangeling
+  - type: StaticPrice
+    price: 10000

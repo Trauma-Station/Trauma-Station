@@ -45,8 +45,7 @@
       - state: equipped-belt-buckle
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg

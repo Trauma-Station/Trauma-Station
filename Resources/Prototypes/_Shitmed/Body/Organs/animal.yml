@@ -1,0 +1,19 @@
+- type: entity
+  parent: [ OrganBaseBrain, OrganAnimalInternal ]
+  id: OrganAnimalBrain
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganAnimalInternal ]
+  id: OrganAnimalEyes
+
+- type: entity
+  parent: [ OrganBaseTongue, OrganAnimalInternal ]
+  id: OrganAnimalTongue
+
+- type: entity
+  parent: [ OrganBaseEars, OrganAnimalInternal ]
+  id: OrganAnimalEars
+
+- type: entity
+  parent: [ OrganBaseAppendix, OrganAnimalInternal ]
+  id: OrganAnimalAppendix

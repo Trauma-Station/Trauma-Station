@@ -1,0 +1,93 @@
+## Mob
+
+- type: entity
+  abstract: true
+  parent: BaseMobBody
+  id: AppearanceDragon
+  name: dragon appearance
+  components:
+  - type: Legs
+    required: 1 # tail
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganDragonTorso
+      Tail: OrganDragonTail
+      # Organs
+      Heart: OrganCarpHeart
+      Lungs: OrganDragonLungs # dragons breath
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganDragon
+  suffix: dragon
+
+- type: entity
+  abstract: true
+  parent: OrganDragon
+  id: OrganDragonExternal
+  components:
+  # TODO SHITMED: make dragon specific sprites
+  - type: Sprite
+    sprite: _Shitmed/Mobs/Aliens/Carps/carp_parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Shitmed/Mobs/Aliens/Carps/carp_parts.rsi
+  - type: Woundable
+    integrity: 500
+    integrityCap: 500
+    thresholds:
+      Minor: 450
+      Moderate: 350
+      Severe: 200
+      Critical: 100
+      Mangled: 0
+
+- type: entity
+  abstract: true
+  parent: OrganDragon
+  id: OrganDragonInternal
+  components:
+  - type: InternalOrgan
+    intCap: 28 # TODO UPDATE
+    integrity: 28
+    integrityThresholds:
+      Normal: 28
+      Damaged: 16
+      Destroyed: 0
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseTorsoAnimalTailed, OrganDragonExternal ]
+  id: OrganDragonTorso
+
+- type: entity
+  parent: [ OrganBaseTail, OrganDragonExternal ]
+  id: OrganDragonTail
+  name: dragon tail
+  description: Unique glands in this tail let space carp fly in a vacuum.
+  components:
+  - type: MovementBodyPart
+    walkSpeed: 2.5
+    sprintSpeed: 3.5
+  # TODO SHITMED: space flight stuff, give the funny action?
+
+## Organs
+
+- type: entity
+  parent: [ OrganAnimalLungs, OrganDragonInternal ]
+  id: OrganDragonLungs
+  components:
+  - type: OrganComponents
+    onAdd:
+    - type: ActionGun
+      action: ActionDragonsBreath
+      gunProto: DragonsBreathGun
+    # intentionally no BreathingImmunity

@@ -88,7 +88,7 @@ public sealed partial class GameDirectorSystem
     {
         var proto = _prototypeManager.Index<EntityPrototype>(protoId);
 
-        if (!proto.TryGetComponent<GameRuleComponent>(out var gameRule, _factory))
+        if (!proto.TryGetComponent<GameRuleComponent>(out var gameRule, Factory))
             return false;
 
         return gameRule.MinPlayers <= playerCount;

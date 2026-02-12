@@ -1,5 +1,5 @@
+using Content.Medical.Common.Surgery;
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared._Shitmed.Surgery;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Heretic;
@@ -59,7 +59,7 @@ public abstract partial class SharedHereticAbilitySystem
 
     private void OnPain(Entity<FleshSurgeryComponent> ent, ref HeldRelayedEvent<SurgeryPainEvent> args)
     {
-        args.Args.Cancel();
+        args.Args.Cancelled = true;
     }
 
     private void OnFleshSurgery(EventHereticFleshSurgery args)
@@ -83,7 +83,7 @@ public abstract partial class SharedHereticAbilitySystem
             return;
 
         InvokeTouchSpell<FleshSurgeryComponent>((args.Used.Value, surgery), args.User);
-        IHateWoundMed(args.Target.Value, null, null, null, null, null, null);
+        IHateWoundMed(args.Target.Value, null, null, null);
         args.Handled = true;
     }
 }

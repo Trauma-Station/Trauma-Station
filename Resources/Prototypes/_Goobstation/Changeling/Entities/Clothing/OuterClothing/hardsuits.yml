@@ -31,8 +31,7 @@
     damageCoefficient: 0.2
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg

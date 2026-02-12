@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Shared._Shitmed.Medical.Surgery.Traumas;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Traumas;
 using Content.Shared.Atmos.Rotting;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Organ;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
@@ -21,6 +20,7 @@ using Content.Trauma.Common.Body;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
@@ -30,6 +30,7 @@ namespace Content.Trauma.Shared.Medical;
 
 public abstract class SharedCPRSystem : EntitySystem
 {
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly IngestionSystem _ingestion = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -37,7 +38,6 @@ public abstract class SharedCPRSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
@@ -46,11 +46,13 @@ public abstract class SharedCPRSystem : EntitySystem
     /// </summary>
     public const float InhaleModifier = 3f;
 
+    public static readonly ProtoId<OrganCategoryPrototype> LungsCategory = "Lungs";
+
     private EntityQuery<ActiveCPRComponent> _activeQuery;
     private EntityQuery<CPRTrainingComponent> _trainingQuery;
     private EntityQuery<DamageableComponent> _damageQuery;
     private EntityQuery<MobStateComponent> _mobQuery;
-    private EntityQuery<OrganComponent> _organQuery;
+    private EntityQuery<InternalOrganComponent> _organQuery;
     private EntityQuery<RottingComponent> _rottingQuery;
     private EntityQuery<UnrevivableComponent> _unrevivableQuery;
 
@@ -62,7 +64,7 @@ public abstract class SharedCPRSystem : EntitySystem
         _trainingQuery = GetEntityQuery<CPRTrainingComponent>();
         _damageQuery = GetEntityQuery<DamageableComponent>();
         _mobQuery = GetEntityQuery<MobStateComponent>();
-        _organQuery = GetEntityQuery<OrganComponent>();
+        _organQuery = GetEntityQuery<InternalOrganComponent>();
         _rottingQuery = GetEntityQuery<RottingComponent>();
         _unrevivableQuery = GetEntityQuery<UnrevivableComponent>();
 
@@ -231,14 +233,7 @@ public abstract class SharedCPRSystem : EntitySystem
             _threshold.CheckVitalDamage(uid, damage) < threshold;
 
     private EntityUid? GetLungs(EntityUid mob)
-    {
-        foreach (var organ in _body.GetBodyOrganEntityComps<LungComponent>(mob))
-        {
-            return organ;
-        }
-
-        return null;
-    }
+        => _body.GetOrgan(mob, LungsCategory);
 
     // respiration is serverside :(
     protected virtual void TryInhale(EntityUid uid)

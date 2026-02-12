@@ -27,7 +27,7 @@ using Content.Server._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 
 namespace Content.Goobstation.Server.Blob;
 

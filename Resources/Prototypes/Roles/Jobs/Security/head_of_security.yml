@@ -16,11 +16,6 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 10h
-  #  - !type:StyleRequirement
-  #    styles:
-  #    - HumanHairFloorlengthBedhead
-  #    - HumanHairClassicFloorlengthBedhead
-  #    - HumanHairFloorlengthBraid
   weight: 10
   startingGear: HoSGear
   icon: "JobIconHeadOfSecurity"

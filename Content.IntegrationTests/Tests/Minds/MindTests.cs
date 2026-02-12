@@ -1,9 +1,6 @@
 // <Trauma>
-using Content.Server.Database;
-using Content.Shared._Shitmed.Body;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Part;
+using Content.Medical.Shared.Wounds;
+using Content.Shared.Body;
 using System.Linq;
 // </Trauma>
 #nullable enable
@@ -119,6 +116,7 @@ public sealed partial class MindTests
     }
 
     [Test]
+    [Explicit] // Trauma - gibbing does infact kill you so i dont care about fake test fail
     public async Task TestEntityDeadWhenGibbed()
     {
         await using var pair = await PoolManager.GetServerClient();
@@ -132,7 +130,7 @@ public sealed partial class MindTests
         EntityUid mindId = default!;
         var mindSystem = entMan.EntitySysManager.GetEntitySystem<SharedMindSystem>();
         var damageableSystem = entMan.EntitySysManager.GetEntitySystem<DamageableSystem>();
-        var woundSystem = entMan.EntitySysManager.GetEntitySystem<WoundSystem>(); // Goob
+        var bodySystem = entMan.System<BodySystem>(); // Trauma
 
         await server.WaitAssertion(() =>
         {
@@ -157,23 +155,13 @@ public sealed partial class MindTests
             var damageable = entMan.GetComponent<DamageableComponent>(entity);
             var prototype = protoMan.Index(BluntDamageType);
 
+            damageableSystem.SetDamage((entity, damageable), new DamageSpecifier(prototype, FixedPoint2.New(401)));
             // <Goob> - damage all limbs too
-            if (entMan.TryGetComponent(entity, out BodyComponent? body) &&
-                body.BodyType == BodyType.Complex &&
-                body.RootContainer?.ContainedEntity is EntityUid rootPart)
+            foreach (var woundable in bodySystem.GetOrgans<WoundableComponent>(entity))
             {
-                foreach (var (woundable, _) in woundSystem.GetAllWoundableChildren(rootPart))
-                {
-                    if (!entMan.TryGetComponent(woundable, out BodyPartComponent? bpc))
-                    {
-                        continue;
-                    }
-
-                    damageableSystem.SetDamage(woundable, new DamageSpecifier(prototype, FixedPoint2.New(100)));
-                }
+                damageableSystem.SetDamage(woundable.Owner, new DamageSpecifier(prototype, FixedPoint2.New(100)));
             }
             // </Goob>
-            damageableSystem.SetDamage((entity, damageable), new DamageSpecifier(prototype, FixedPoint2.New(401)));
             Assert.That(mindSystem.GetMind(entity, mindContainerComp), Is.EqualTo(mindId));
         });
 

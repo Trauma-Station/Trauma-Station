@@ -30,7 +30,7 @@
     maxEquipmentAmount: 1
     pilotWhitelist:
       components:
-        - HumanoidAppearance
+        - HumanoidProfile
     startingEquipment:
       - WeaponMechMosinPortsEmpty
   - type: MeleeWeapon
@@ -230,7 +230,7 @@
     maxEquipmentAmount: 2
     pilotWhitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
     startingEquipment:
     - WeaponMechMeleePowerFist
     - WeaponMechCombatFlameThrower

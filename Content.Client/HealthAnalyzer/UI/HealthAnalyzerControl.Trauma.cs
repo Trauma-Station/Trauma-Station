@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Wounds;
+using Content.Medical.Shared.Wounds;
 using Content.Shared._Shitmed.Medical.HealthAnalyzer;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared.Atmos.Rotting;
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Components;
@@ -26,13 +26,13 @@ namespace Content.Client.HealthAnalyzer.UI;
 
 public sealed partial class HealthAnalyzerControl
 {
-    public event Action<TargetBodyPart?, EntityUid>? OnBodyPartSelected;
+    public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
     public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
 
     private WoundSystem _wound = default!;
     private EntityUid? _target;
     private EntityUid? _spriteViewEntity;
-    private Dictionary<TargetBodyPart, TextureButton> _bodyPartControls = default!;
+    private Dictionary<ProtoId<OrganCategoryPrototype>, TextureButton> _bodyPartControls = default!;
 
     private static readonly EntProtoId _bodyView = "AlertSpriteView";
 
@@ -40,19 +40,18 @@ public sealed partial class HealthAnalyzerControl
     {
         _wound = _entityManager.System<WoundSystem>();
 
-        _bodyPartControls = new Dictionary<TargetBodyPart, TextureButton>
+        _bodyPartControls = new Dictionary<ProtoId<OrganCategoryPrototype>, TextureButton>
         {
-            { TargetBodyPart.Head, HeadButton },
-            { TargetBodyPart.Chest, ChestButton },
-            { TargetBodyPart.Groin, GroinButton },
-            { TargetBodyPart.LeftArm, LeftArmButton },
-            { TargetBodyPart.LeftHand, LeftHandButton },
-            { TargetBodyPart.RightArm, RightArmButton },
-            { TargetBodyPart.RightHand, RightHandButton },
-            { TargetBodyPart.LeftLeg, LeftLegButton },
-            { TargetBodyPart.LeftFoot, LeftFootButton },
-            { TargetBodyPart.RightLeg, RightLegButton },
-            { TargetBodyPart.RightFoot, RightFootButton },
+            { "Head", HeadButton },
+            { "Torso", TorsoButton },
+            { "ArmLeft", LeftArmButton },
+            { "HandLeft", LeftHandButton },
+            { "ArmRight", RightArmButton },
+            { "HandRight", RightHandButton },
+            { "LegLeft", LeftLegButton },
+            { "FootLeft", LeftFootButton },
+            { "LegRight", RightLegButton },
+            { "FootRight", RightFootButton },
         };
 
         foreach (var (part, button) in _bodyPartControls)
@@ -66,7 +65,7 @@ public sealed partial class HealthAnalyzerControl
         ChemicalsButton.OnPressed += _ => SetMode(HealthAnalyzerMode.Chemicals);
     }
 
-    public void SetActiveBodyPart(TargetBodyPart part)
+    public void SetActiveBodyPart(ProtoId<OrganCategoryPrototype> part)
     {
         if (_target is {} target)
             OnBodyPartSelected?.Invoke(part, target);
@@ -93,7 +92,7 @@ public sealed partial class HealthAnalyzerControl
     public void PopulateTrauma(EntityUid target, HealthAnalyzerUiState state)
     {
         _target = target;
-        var humanoid = _entityManager.HasComponent<HumanoidAppearanceComponent>(target);
+        var humanoid = _entityManager.HasComponent<HumanoidProfileComponent>(target);
         SetActiveButtons(humanoid);
 
         // Patient Information
@@ -146,10 +145,11 @@ public sealed partial class HealthAnalyzerControl
         DamageLabel.Visible = true;
         DamageLabel.Text = damageable.TotalDamage.ToString();
 
+        var identity = Identity.Name(target, _entityManager);
         if (isPart)
         {
             PartNameLabel.Text = _entityManager.HasComponent<MetaDataComponent>(target)
-                ? Identity.Name(target, _entityManager)
+                ? identity
                 : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
         }
 
@@ -171,16 +171,14 @@ public sealed partial class HealthAnalyzerControl
         if (state.Unrevivable == true)
             ConditionsListContainer.AddChild(new RichTextLabel
             {
-                Text = Loc.GetString("condition-body-unrevivable", ("entity", Identity.Name(target, _entityManager))),
+                Text = Loc.GetString("condition-body-unrevivable", ("entity", identity)),
                 Margin = new Thickness(0, 4),
             });
 
-        foreach (var (bodyPart, isBleeding) in state.Bleeding)
+        foreach (var bleeding in state.Bleeding)
         {
-            if (!isBleeding)
-                continue;
-
-            var locString = Loc.GetString($"condition-body-bleeding-{bodyPart.ToString()}", ("entity", Identity.Name(target, _entityManager)));
+            var name = _prototypes.Index(bleeding).Name.ToLowerInvariant();
+            var locString = Loc.GetString("condition-body-part-bleeding", ("entity", identity), ("part", name));
 
             ConditionsListContainer.AddChild(new RichTextLabel
             {
@@ -333,8 +331,8 @@ public sealed partial class HealthAnalyzerControl
     /// <summary>
     /// Sets up the Body Doll using Alert Entity to use in Health Analyzer.
     /// </summary>
-    private EntityUid? SetupIcon(Dictionary<TargetBodyPart, WoundableSeverity>? body,
-        Dictionary<TargetBodyPart, bool> bleeding)
+    private EntityUid? SetupIcon(Dictionary<ProtoId<OrganCategoryPrototype>, WoundableSeverity>? body,
+        HashSet<ProtoId<OrganCategoryPrototype>> bleeding)
     {
         if (body is null)
             return null;
@@ -348,21 +346,21 @@ public sealed partial class HealthAnalyzerControl
             return null;
 
         int layer = 0;
-        foreach (var (bodyPart, integrity) in body)
+        foreach (var (part, integrity) in body)
         {
             // TODO: PartStatusUIController and make it use layers instead of TextureRects when EE refactors alerts.
-            string enumName = Enum.GetName(typeof(TargetBodyPart), bodyPart) ?? "Unknown";
+            var name = part.ToString().ToLowerInvariant();
             int enumValue = (int) integrity;
-            var baseRsiPath = new ResPath($"/Textures/_Shitmed/Interface/Targeting/Status/{enumName.ToLowerInvariant()}.rsi");
-            var rsi = new SpriteSpecifier.Rsi(baseRsiPath, $"{enumName.ToLowerInvariant()}_{enumValue}");
+            var baseRsiPath = new ResPath($"/Textures/_Shitmed/Interface/Targeting/Status/{name}.rsi");
+            var rsi = new SpriteSpecifier.Rsi(baseRsiPath, $"{enumValue}");
             // Shitcode with love from Russia :)
             // fuck you mocho
             CreateOrAddToLayer(sprite, rsi, layer);
             layer++;
 
-            if (bleeding.TryGetValue(bodyPart, out var isBleeding) && isBleeding)
+            if (bleeding.Contains(part))
             {
-                var bleedRsi = new SpriteSpecifier.Rsi(baseRsiPath, $"{enumName.ToLowerInvariant()}_bleed");
+                var bleedRsi = new SpriteSpecifier.Rsi(baseRsiPath, "bleed");
                 CreateOrAddToLayer(sprite, bleedRsi, layer);
                 layer++;
             }

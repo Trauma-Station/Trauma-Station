@@ -34,15 +34,15 @@
     - type: Devourer # vore
       foodPreferenceWhitelist:
         components:
-        - HumanoidAppearance
+        - HumanoidProfile
       stomachStorageWhitelist:
         components:
-        - HumanoidAppearance
+        - HumanoidProfile
       chemical: Ichor
       healRate: 7.5
       whitelist:
         components:
-        - HumanoidAppearance # can only eat people/monkey
+        - HumanoidProfile # can only eat people/monkey
 
 - type: scrollPrayer
   id: Lockpicking

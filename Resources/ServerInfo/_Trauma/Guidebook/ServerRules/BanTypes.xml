@@ -1,0 +1,14 @@
+<Document>
+  # Ban Types
+
+  <!-- TODO: appeal info -->
+
+  ## Role Ban
+  Also called a "job ban", this ban prevents your character from joining or late-joining a round as one or more jobs or roles. These are often used in response to problematic behavior in particular departments or address gross inexperience in important roles such as heads of staff. These bans do not mechanically prevent you from switching to the role during a round or acting as that role, but doing so is considered ban evasion.
+
+  ## Antag Ban
+  This ban prevents you from playing a type of antagonist. These may be given to e.g. friendly antags.
+
+  ## Game Ban
+  Also called a "server ban", this ban prevents you from connecting to Trauma Station.
+</Document>

@@ -83,7 +83,7 @@
     removeEverything: true
     collidableEntities:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
       - Item
       - KnockedDown
       - Puddle
@@ -142,7 +142,7 @@
     requiredVelocity: 3
     insertableEntities:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
     blacklistedEntities:
       components:
       - KnockedDown

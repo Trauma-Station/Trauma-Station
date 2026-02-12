@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2024 August Eymann <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Steve <marlumpy@gmail.com>
-// SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 marc-pelletier <113944176+marc-pelletier@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Shared.FixedPoint;
 using Content.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Prototypes;
@@ -55,10 +45,16 @@ public sealed partial class RCDPrototype : IPrototype
     public string? Prototype { get; private set; }
 
     /// <summary>
-    /// If the entity can be flipped, this prototype is available as an alternate (mode dependent)
+    /// Goob - If the entity can be flipped, this prototype is available as an alternate (mode dependent)
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     public string? MirrorPrototype { get; private set; }
+
+    /// <summary>
+    /// If true, allows placing the entity once per direction (North, West, South and East)
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
+    public bool AllowMultiDirection { get; private set; }
 
     /// <summary>
     /// Number of charges consumed when the operation is completed

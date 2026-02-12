@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Devil.Contract;
+using Content.Medical.Common.Body;
 using Content.Shared.Inventory;
 using Robust.Shared.Serialization;
 
@@ -57,9 +58,11 @@ public abstract partial class BaseDevilContractEvent : EntityEventArgs
 
 public sealed partial class DevilContractSoulOwnershipEvent : BaseDevilContractEvent;
 
-public sealed partial class DevilContractLoseHandEvent : BaseDevilContractEvent;
-
-public sealed partial class DevilContractLoseLegEvent : BaseDevilContractEvent;
+public sealed partial class DevilContractLosePartEvent : BaseDevilContractEvent
+{
+    [DataField(required: true)]
+    public BodyPartType Part;
+}
 
 public sealed partial class DevilContractLoseOrganEvent : BaseDevilContractEvent;
 

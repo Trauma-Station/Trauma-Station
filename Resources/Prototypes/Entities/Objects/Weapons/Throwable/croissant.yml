@@ -8,7 +8,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: FoodBakedCroissant
+  parent: [ FoodBakedCroissant, ThrowingKnife ]
   id: WeaponCroissant
   suffix: Weapon
   components:
@@ -22,15 +22,6 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
-  - type: EmbeddableProjectile
-    sound: /Audio/Weapons/star_hit.ogg
-  - type: LandAtCursor
-  - type: DamageOtherOnHit
-    increaseOnly: true # Trauma - apply modifiers, but ignore decreases
-    damage:
-      types:
-        Slash: 5
-        Piercing: 10
   - type: ThrowingAngle
     angularVelocity: true # spins
   - type: ThrowableBlocked # Goobstation

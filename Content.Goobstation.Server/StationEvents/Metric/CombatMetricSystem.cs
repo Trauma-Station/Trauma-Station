@@ -129,7 +129,7 @@ public sealed class CombatMetricSystem : ChaosMetricSystem<CombatMetricComponent
         double friendlyInventoryThreat = 0;
 
 
-        // var humanoidQ = GetEntityQuery<HumanoidAppearanceComponent>();
+        // var humanoidQ = GetEntityQuery<HumanoidProfileComponent>();
         var stationGrids = _stationSystem.GetAllStationGrids();
         while (query.MoveNext(out var uid, out var mobState, out var damage, out var transform))
         {

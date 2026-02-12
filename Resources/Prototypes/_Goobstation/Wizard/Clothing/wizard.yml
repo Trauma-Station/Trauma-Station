@@ -79,8 +79,7 @@
   components:
   - type: Armor
     coverage: # full coverage, idk, magic
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -331,8 +330,7 @@
   - type: SupermatterImmune
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg

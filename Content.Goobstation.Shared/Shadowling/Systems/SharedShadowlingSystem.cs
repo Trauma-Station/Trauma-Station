@@ -7,10 +7,12 @@ using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
+using Content.Shared.Body;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Markings;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -26,9 +28,9 @@ namespace Content.Goobstation.Shared.Shadowling.Systems;
 
 public abstract class SharedShadowlingSystem : EntitySystem
 {
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly SharedLightDetectionDamageSystem _lightDamage = default!;
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
@@ -36,6 +38,11 @@ public abstract class SharedShadowlingSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
+
+    public static readonly ProtoId<OrganCategoryPrototype> HeadCategory = "Head";
+    public static readonly ProtoId<OrganCategoryPrototype> TorsoCategory = "Torso";
+    public static readonly ProtoId<MarkingPrototype> AbominationHorns = "AbominationHorns";
+    public static readonly ProtoId<MarkingPrototype> AbominationTorso = "AbominationTorso";
 
     public override void Initialize()
     {
@@ -148,8 +155,9 @@ public abstract class SharedShadowlingSystem : EntitySystem
 
                 // this is such a big L that even the code is losing and all variables are hardcoded.
                 _status.TryAddStatusEffect(uid, "ShadowlingAbominationStatusEffect", out _);
-                _appearance.AddMarking(uid, "AbominationTorso");
-                _appearance.AddMarking(uid, "AbominationHorns");
+                // mfw i have to write my own marking api :face_holding_back_tears:
+                _body.AddOrganMarking(uid, TorsoCategory, AbominationTorso);
+                _body.AddOrganMarking(uid, HeadCategory, AbominationHorns);
 
                 // take another hardcoded variable
                 _damageable.SetDamageModifierSetId(uid, "ShadowlingAbomination");
@@ -195,7 +203,7 @@ public abstract class SharedShadowlingSystem : EntitySystem
             return false;
         }
 
-        if (!HasComp<HumanoidAppearanceComponent>(target))
+        if (!HasComp<HumanoidProfileComponent>(target))
         {
             _popup.PopupPredicted(Loc.GetString("shadowling-enthrall-non-humanoid"), uid, uid, PopupType.SmallCaution);
             return false;

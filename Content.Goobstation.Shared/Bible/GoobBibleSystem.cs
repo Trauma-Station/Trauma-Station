@@ -9,7 +9,7 @@ using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Exorcism;
 using Content.Goobstation.Shared.Religion;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;

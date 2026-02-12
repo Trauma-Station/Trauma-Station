@@ -28,19 +28,8 @@
 
 - type: latheRecipe
   parent: BaseRoboticsRecipe
-  id: ChestIPC
-  result: ChestIPC
-  completetime: 3
-  materials:
-    Steel: 1500
-    Gold: 250
-    Plastic: 250
-    Plasma: 250
-
-- type: latheRecipe
-  parent: BaseRoboticsRecipe
-  id: GroinIPC
-  result: GroinIPC
+  id: TorsoIPC
+  result: OrganIPCTorso
   completetime: 3
   materials:
     Steel: 1500
@@ -53,47 +42,47 @@
 - type: latheRecipe
   parent: BaseIPCLimbRecipe
   id: LeftArmIPC
-  result: LeftArmIPC
+  result: OrganIPCArmLeft
 
 - type: latheRecipe
   parent: BaseIPCLimbRecipe
   id: RightArmIPC
-  result: RightArmIPC
+  result: OrganIPCArmRight
 
 - type: latheRecipe
   parent: BaseIPCLimbRecipe
   id: LeftHandIPC
-  result: LeftHandIPC
+  result: OrganIPCHandLeft
 
 - type: latheRecipe
   parent: BaseIPCLimbRecipe
   id: RightHandIPC
-  result: RightHandIPC
+  result: OrganIPCHandRight
 
 - type: latheRecipe
   parent: BaseBorgLimbRecipe
   id: LeftLegIPC
-  result: LeftLegIPC
+  result: OrganIPCLegLeft
 
 - type: latheRecipe
   parent: BaseBorgLimbRecipe
   id: RightLegIPC
-  result: RightLegIPC
+  result: OrganIPCLegRight
 
 - type: latheRecipe
   parent: BaseIPCLimbRecipe
   id: LeftFootIPC
-  result: LeftFootIPC
+  result: OrganIPCFootLeft
 
 - type: latheRecipe
   parent: BaseIPCLimbRecipe
   id: RightFootIPC
-  result: RightFootIPC
+  result: OrganIPCFootRight
 
 - type: latheRecipe
   parent: BaseIPCLimbRecipe
   id: HeadIPC
-  result: HeadIPC
+  result: OrganIPCHead
 
 - type: latheRecipe
   parent: BaseIPCOrganRecipe
@@ -130,7 +119,7 @@
 
 - type: latheRecipe
   id: RightArmCybernetic
-  result: RightArmCybernetic
+  result: OrganCyberneticArmRight
   categories:
   - Robotics
   completetime: 5
@@ -143,7 +132,7 @@
 
 - type: latheRecipe
   id: LeftArmCybernetic
-  result: LeftArmCybernetic
+  result: OrganCyberneticArmLeft
   categories:
   - Robotics
   completetime: 5
@@ -156,7 +145,7 @@
 
 - type: latheRecipe
   id: RightLegCybernetic
-  result: RightLegCybernetic
+  result: OrganCyberneticArmRight
   categories:
   - Robotics
   completetime: 5
@@ -169,7 +158,7 @@
 
 - type: latheRecipe
   id: LeftLegCybernetic
-  result: LeftLegCybernetic
+  result: OrganCyberneticArmLeft
   categories:
   - Robotics
   completetime: 5
@@ -182,7 +171,7 @@
 
 - type: latheRecipe
   id: RightHandCybernetic
-  result: RightHandCybernetic
+  result: OrganCyberneticHandRight
   categories:
   - Robotics
   completetime: 3
@@ -195,7 +184,7 @@
 
 - type: latheRecipe
   id: LeftHandCybernetic
-  result: LeftHandCybernetic
+  result: OrganCyberneticHandLeft
   categories:
   - Robotics
   completetime: 3
@@ -208,7 +197,7 @@
 
 - type: latheRecipe
   id: RightFootCybernetic
-  result: RightFootCybernetic
+  result: OrganCyberneticFootRight
   categories:
   - Robotics
   completetime: 3
@@ -221,7 +210,7 @@
 
 - type: latheRecipe
   id: LeftFootCybernetic
-  result: LeftFootCybernetic
+  result: OrganCyberneticFootLeft
   categories:
   - Robotics
   completetime: 3
@@ -234,7 +223,7 @@
 
 - type: latheRecipe
   id: JawsOfLifeLeftArm
-  result: JawsOfLifeLeftArm
+  result: OrganJWLArmLeft
   categories:
   - Robotics
   completetime: 10
@@ -247,7 +236,7 @@
 
 - type: latheRecipe
   id: JawsOfLifeRightArm
-  result: JawsOfLifeRightArm
+  result: OrganJWLArmRight
   categories:
   - Robotics
   completetime: 10
@@ -260,7 +249,7 @@
 
 - type: latheRecipe
   id: SpeedLeftLeg
-  result: SpeedLeftLeg
+  result: OrganSpeedLegLeft
   categories:
   - Robotics
   completetime: 10
@@ -273,7 +262,7 @@
 
 - type: latheRecipe
   id: SpeedRightLeg
-  result: SpeedRightLeg
+  result: OrganSpeedLegRight
   categories:
   - Robotics
   completetime: 10
@@ -286,7 +275,7 @@
 
 - type: latheRecipe
   id: BasicCyberneticEyes
-  result: BasicCyberneticEyes
+  result: OrganCyberneticEyes
   categories:
   - Robotics
   completetime: 5
@@ -299,7 +288,7 @@
 
 - type: latheRecipe
   id: DiagnosticCyberneticEyes
-  result: DiagnosticCyberneticEyes
+  result: OrganCyberneticEyesDiagnostic
   categories:
   - Robotics
   completetime: 10
@@ -312,7 +301,7 @@
 
 - type: latheRecipe
   id: DexLeftHand
-  result: DexLeftHand
+  result: OrganDexHandLeft
   categories:
   - Robotics
   completetime: 10
@@ -325,7 +314,7 @@
 
 - type: latheRecipe
   id: DexRightHand
-  result: DexRightHand
+  result: OrganDexHandRight
   categories:
   - Robotics
   completetime: 10
