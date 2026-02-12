@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 271.1.0
+  engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 01/22/2026 22:25:44
-  entityCount: 32509
+  time: 02/07/2026 14:58:51
+  entityCount: 32508
 maps:
 - 1
 grids:
@@ -9867,7 +9867,7 @@ entities:
             0: 61133
           8,-8:
             0: 61747
-            7: 136
+            4: 136
           8,-7:
             0: 4095
           8,-6:
@@ -9887,11 +9887,11 @@ entities:
             0: 4369
             2: 50244
           6,-3:
-            4: 48
-            5: 12288
+            5: 48
+            6: 12288
             2: 34952
           6,-2:
-            6: 48
+            7: 48
             1: 12288
             2: 34952
           6,-1:
@@ -10031,16 +10031,16 @@ entities:
             0: 44943
           8,-9:
             0: 12799
-            7: 32768
+            4: 32768
           9,-8:
-            7: 375
+            4: 375
             0: 28672
           9,-7:
             0: 1919
           9,-6:
             0: 20222
           9,-9:
-            7: 28672
+            4: 28672
             0: 255
           9,-5:
             0: 3822
@@ -11628,6 +11628,10 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles:
+            Nitrogen: 103.92799
+        - volume: 2500
+          temperature: 293.15
+          moles:
             Oxygen: 6666.982
         - volume: 2500
           temperature: 293.15
@@ -11637,10 +11641,6 @@ entities:
           temperature: 293.15
           moles:
             Plasma: 6666.982
-        - volume: 2500
-          temperature: 293.15
-          moles:
-            Nitrogen: 103.92799
         chunkSize: 4
     - type: BecomesStation
       id: Cog
@@ -15006,7 +15006,7 @@ entities:
       pos: 26.5,17.5
       parent: 12
     - type: Door
-      secondsUntilStateChange: -90229.71
+      secondsUntilStateChange: -90281.5
       state: Opening
     - type: DeviceLinkSink
       invokeCounter: 1
@@ -16148,7 +16148,7 @@ entities:
       pos: 41.5,62.5
       parent: 12
     - type: Door
-      secondsUntilStateChange: -47496.402
+      secondsUntilStateChange: -47548.195
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -147075,6 +147075,13 @@ entities:
     - type: Transform
       pos: 17.5,41.5
       parent: 12
+- proto: KitchenDeepFryer
+  entities:
+  - uid: 14155
+    components:
+    - type: Transform
+      pos: 9.5,56.5
+      parent: 12
 - proto: KitchenElectricGrill
   entities:
   - uid: 14154
@@ -147209,11 +147216,6 @@ entities:
     components:
     - type: Transform
       pos: -29.5,-44.5
-      parent: 12
-  - uid: 14155
-    components:
-    - type: Transform
-      pos: 9.5,56.5
       parent: 12
   - uid: 15447
     components:
@@ -175812,11 +175814,6 @@ entities:
     components:
     - type: Transform
       pos: -28.5,-44.5
-      parent: 12
-  - uid: 20900
-    components:
-    - type: Transform
-      pos: 9.5,56.5
       parent: 12
   - uid: 20979
     components:

@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 270.1.0
+  engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 01/12/2026 03:15:42
-  entityCount: 18633
+  time: 02/07/2026 14:52:38
+  entityCount: 18634
 maps:
 - 1
 grids:
@@ -78213,13 +78213,6 @@ entities:
     - type: Transform
       pos: -39.5,-1.5
       parent: 2
-- proto: GunSafeDisabler
-  entities:
-  - uid: 11468
-    components:
-    - type: Transform
-      pos: -19.5,38.5
-      parent: 2
 - proto: GunSafeJudo
   entities:
   - uid: 11081
@@ -78247,6 +78240,13 @@ entities:
     components:
     - type: Transform
       pos: -26.5,39.5
+      parent: 2
+- proto: GunSafePhaser
+  entities:
+  - uid: 11468
+    components:
+    - type: Transform
+      pos: -19.5,38.5
       parent: 2
 - proto: GunSafeRiotLauncher
   entities:
@@ -79118,6 +79118,13 @@ entities:
     components:
     - type: Transform
       pos: 20.5,-8.5
+      parent: 2
+- proto: KitchenDeepFryer
+  entities:
+  - uid: 18634
+    components:
+    - type: Transform
+      pos: -48.5,49.5
       parent: 2
 - proto: KitchenElectricGrill
   entities:
@@ -91490,6 +91497,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: ScrapCamera
   entities:
@@ -91591,6 +91599,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: SeedExtractor
   entities:
@@ -91616,6 +91625,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: ShardGlass
   entities:
@@ -101656,6 +101666,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: UniformShortsRed
   entities:

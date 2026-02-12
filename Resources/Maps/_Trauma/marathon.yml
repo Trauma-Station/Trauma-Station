@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 270.1.0
+  engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 01/15/2026 19:18:48
+  time: 02/07/2026 14:53:27
   entityCount: 23354
 maps:
 - 1
@@ -11070,7 +11070,7 @@ entities:
       pos: -1.5,18.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -10205.968
+      secondsUntilStateChange: -10234.917
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11569,7 +11569,7 @@ entities:
       pos: 40.5,11.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -13951.793
+      secondsUntilStateChange: -13980.742
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11606,7 +11606,7 @@ entities:
       pos: 41.5,8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -10800.333
+      secondsUntilStateChange: -10829.282
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -65941,7 +65941,7 @@ entities:
       pos: 12.5,-12.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -9168.301
+      secondsUntilStateChange: -9197.25
       state: Closing
     - type: Firelock
       emergencyCloseCooldown: 1795.33154
@@ -99169,13 +99169,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 46.5,0.5
       parent: 2
-- proto: GunSafeDisabler
-  entities:
-  - uid: 19476
-    components:
-    - type: Transform
-      pos: -41.5,49.5
-      parent: 2
 - proto: GunSafeJudo
   entities:
   - uid: 20009
@@ -99203,6 +99196,13 @@ entities:
     components:
     - type: Transform
       pos: -43.5,54.5
+      parent: 2
+- proto: GunSafePhaser
+  entities:
+  - uid: 19476
+    components:
+    - type: Transform
+      pos: -41.5,49.5
       parent: 2
 - proto: GunSafeRiotLauncher
   entities:
@@ -101739,6 +101739,13 @@ entities:
           ents:
           - 15646
           - 15701
+- proto: KitchenDeepFryer
+  entities:
+  - uid: 17264
+    components:
+    - type: Transform
+      pos: -15.5,7.5
+      parent: 2
 - proto: KitchenElectricGrill
   entities:
   - uid: 15562
@@ -115327,6 +115334,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: Screen
   entities:
@@ -115454,6 +115462,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
     - type: SiloUtilizer
       silo: 15744
@@ -115486,6 +115495,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: SheetGlass
   entities:
@@ -123868,11 +123878,6 @@ entities:
     - type: Transform
       pos: -15.5,8.5
       parent: 2
-  - uid: 19025
-    components:
-    - type: Transform
-      pos: -15.5,7.5
-      parent: 2
   - uid: 19026
     components:
     - type: Transform
@@ -127445,6 +127450,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
     - type: MaterialStorage
       materialWhiteList:
@@ -143800,23 +143806,6 @@ entities:
     - type: Transform
       pos: -40.5,56.5
       parent: 2
-- proto: WeaponDisabler
-  entities:
-  - uid: 22725
-    components:
-    - type: Transform
-      pos: -32.77784,56.587643
-      parent: 2
-  - uid: 22726
-    components:
-    - type: Transform
-      pos: -32.762215,56.697018
-      parent: 2
-  - uid: 22727
-    components:
-    - type: Transform
-      pos: -32.77784,56.462643
-      parent: 2
 - proto: WeaponDisablerPractice
   entities:
   - uid: 22729
@@ -143929,6 +143918,23 @@ entities:
     components:
     - type: Transform
       pos: -38.316597,60.345554
+      parent: 2
+- proto: WeaponLaserSidearm
+  entities:
+  - uid: 22725
+    components:
+    - type: Transform
+      pos: -32.77784,56.587643
+      parent: 2
+  - uid: 22726
+    components:
+    - type: Transform
+      pos: -32.762215,56.697018
+      parent: 2
+  - uid: 22727
+    components:
+    - type: Transform
+      pos: -32.77784,56.462643
       parent: 2
 - proto: Welder
   entities:

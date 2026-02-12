@@ -58,7 +58,6 @@ using Content.Shared.Item;
 using Content.Shared.Jittering;
 using Content.Shared.Magic;
 using Content.Shared.Magic.Components;
-using Content.Shared.Magic.Events;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
@@ -99,6 +98,9 @@ using Robust.Shared.Timing;
 using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
+using Content.Shared.Friction;
+using Content.Shared.Random.Helpers;
+using Robust.Shared.Physics.Components;
 
 namespace Content.Shared._Goobstation.Wizard;
 
@@ -112,7 +114,6 @@ public abstract class SharedSpellsSystem : EntitySystem
     [Dependency] protected readonly IPrototypeManager ProtoMan = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] protected readonly EntityLookupSystem Lookup = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] protected readonly SharedMapSystem Map = default!;
     [Dependency] protected readonly SharedStunSystem Stun = default!;
     [Dependency] protected readonly SharedPhysicsSystem Physics = default!;
@@ -129,26 +130,29 @@ public abstract class SharedSpellsSystem : EntitySystem
     [Dependency] protected readonly ActionContainerSystem ActionContainer = default!;
     [Dependency] protected readonly TagSystem Tag = default!;
     [Dependency] protected readonly SharedActionsSystem Actions = default!;
-    [Dependency] private   readonly INetManager _net = default!;
-    [Dependency] private   readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private   readonly InventorySystem _inventory = default!;
-    [Dependency] private   readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private   readonly SharedStutteringSystem _stutter = default!;
-    [Dependency] private   readonly SharedMagicSystem _magic = default!;
-    [Dependency] private   readonly SharedPopupSystem _popup = default!;
-    [Dependency] private   readonly SharedGunSystem _gunSystem = default!;
-    [Dependency] private   readonly MobStateSystem _mobState = default!;
-    [Dependency] private   readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private   readonly SharedBindSoulSystem _bindSoul = default!;
-    [Dependency] private   readonly SharedTeslaBlastSystem _teslaBlast = default!;
-    [Dependency] private   readonly ExamineSystemShared _examine = default!;
-    [Dependency] private   readonly ConfirmableActionSystem _confirmableAction = default!;
-    [Dependency] private   readonly SharedWizardTeleportSystem _teleport = default!;
-    [Dependency] private   readonly PullingSystem _pulling = default!;
-    [Dependency] private   readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private   readonly TurfSystem _turf = default!;
-    [Dependency] private   readonly SharedProjectileSystem _projectile = default!;
-    [Dependency] private   readonly SharedChargesSystem _charges = default!;
+
+    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private readonly SharedStutteringSystem _stutter = default!;
+    [Dependency] private readonly SharedMagicSystem _magic = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedBindSoulSystem _bindSoul = default!;
+    [Dependency] private readonly SharedTeslaBlastSystem _teslaBlast = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly ConfirmableActionSystem _confirmableAction = default!;
+    [Dependency] private readonly SharedWizardTeleportSystem _teleport = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly MobThresholdSystem _threshold = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly SharedProjectileSystem _projectile = default!;
+    [Dependency] private readonly SharedChargesSystem _charges = default!;
+    [Dependency] private readonly TileFrictionController _tileFriction = default!;
 
     #endregion
 
@@ -639,19 +643,9 @@ public abstract class SharedSpellsSystem : EntitySystem
         ShootSpellCards(ev, spellCardsAction.PurpleCard ? ev.PurpleProto : ev.RedProto);
 
         spellCardsAction.PurpleCard = !spellCardsAction.PurpleCard;
+        Dirty(ev.Action.Owner, spellCardsAction);
 
         ev.Handled = true;
-        if (_net.IsClient)
-            return;
-        spellCardsAction.UsesLeft--;
-        if (spellCardsAction.UsesLeft > 0)
-            Actions.SetUseDelay(ev.Action.Owner, TimeSpan.FromSeconds(0.5));
-        else
-        {
-            Actions.SetUseDelay(ev.Action.Owner, spellCardsAction.UseDelay);
-            spellCardsAction.UsesLeft = spellCardsAction.CastAmount;
-            RaiseNetworkEvent(new StopTargetingEvent(), ev.Performer);
-        }
     }
 
     private void OnArcaneBarrage(ArcaneBarrageEvent ev)
@@ -1158,7 +1152,7 @@ public abstract class SharedSpellsSystem : EntitySystem
                     basicAmmoComp is { Count: not null, Capacity: not null } &&
                     basicAmmoComp.Count < basicAmmoComp.Capacity)
                 {
-                    _gunSystem.UpdateBasicEntityAmmoCount(item, basicAmmoComp.Capacity.Value, basicAmmoComp);
+                    _gun.UpdateBasicEntityAmmoCount(item, basicAmmoComp.Capacity.Value, basicAmmoComp);
                     PopupCharged(item, ev.Performer);
                     break;
                 }
@@ -1390,12 +1384,12 @@ public abstract class SharedSpellsSystem : EntitySystem
 
         var projectile = PredictedSpawnAtPosition(proto, coords);
 
-        _gunSystem.ShootProjectile(projectile, direction, velocity, user, user, speed);
+        _gun.ShootProjectile(projectile, direction, velocity, user, user, speed);
 
         if (target == null || target == user || checkMobState && !HasComp<MobStateComponent>(target))
             return;
 
-        _gunSystem.SetTarget(projectile, target, out var targeted, false);
+        _gun.SetTarget(projectile, target, out var targeted, false);
 
         var homing = EnsureComp<HomingProjectileComponent>(projectile);
         homing.Target = target;
@@ -1461,6 +1455,57 @@ public abstract class SharedSpellsSystem : EntitySystem
         Dirty(uid, powers);
     }
 
+    private void ShootSpellCards(SpellCardsEvent ev, EntProtoId proto)
+    {
+        var targetMap = TransformSystem.ToMapCoordinates(ev.Target);
+
+        var (_, mapCoords, spawnCoords, velocity) = GetProjectileData(ev.Performer);
+
+        var mapDirection = targetMap.Position - mapCoords.Position;
+        if (mapDirection == Vector2.Zero)
+            return;
+        var mapAngle = mapDirection.ToAngle();
+
+        var angles = _gun.LinearSpread(mapAngle - ev.Spread / 2, mapAngle + ev.Spread / 2, ev.ProjectilesAmount);
+
+        // TODO: PredictedRandom when it's real
+        var seed = SharedRandomExtensions.HashCodeCombine((int) Timing.CurTick.Value, GetNetEntity(ev.Performer).Id);
+        var rand = new System.Random(seed);
+
+        var linearDamping = rand.NextFloat(ev.MinMaxLinearDamping.X, ev.MinMaxLinearDamping.Y);
+
+        var setHoming = Exists(ev.Entity) && ev.Entity != ev.Performer && HasComp<MobStateComponent>(ev.Entity);
+
+        for (var i = 0; i < ev.ProjectilesAmount; i++)
+        {
+            var newUid = PredictedSpawnAtPosition(proto, spawnCoords);
+            _gun.ShootProjectile(newUid, angles[i].ToVec(), velocity, ev.Performer, ev.Performer, ev.ProjectileSpeed);
+
+            if (!TryComp(newUid, out PhysicsComponent? physics))
+                continue;
+
+            Physics.SetAngularVelocity(newUid,
+                Random.NextFloat(-ev.MaxAngularVelocity, ev.MaxAngularVelocity),
+                false,
+                body: physics);
+            Physics.SetLinearDamping(newUid, physics, linearDamping, false);
+            _tileFriction.SetModifier(newUid, linearDamping);
+
+            var spellCard = EnsureComp<SpellCardComponent>(newUid);
+            if (!setHoming)
+            {
+                Dirty(newUid, physics);
+                continue;
+            }
+
+            spellCard.Target = ev.Entity;
+            _gun.SetTarget(newUid, ev.Entity, out var targeted, false);
+            Entity<SpellCardComponent, PhysicsComponent, TargetedProjectileComponent> ent = (newUid, spellCard, physics,
+                targeted);
+            Dirty(ent);
+        }
+    }
+
     #endregion
 
     #region ServerMethods
@@ -1483,8 +1528,6 @@ public abstract class SharedSpellsSystem : EntitySystem
     {
         return true;
     }
-
-    protected virtual void ShootSpellCards(SpellCardsEvent ev, EntProtoId proto) {}
 
     protected virtual void Speak(EntityUid uid, string message) { }
 

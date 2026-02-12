@@ -78,7 +78,6 @@
   supervisors: job-supervisors-hop
   guides: # goobstation
   - SpaceLaw
-  - SOPLegal
   goobcoins: 10 #Goob content
   access:
   - Service

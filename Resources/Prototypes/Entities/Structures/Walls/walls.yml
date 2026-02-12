@@ -1561,7 +1561,7 @@
   name: force wall
   components:
     - type: TimedDespawn
-      lifetime: 30 # Goob edit
+      lifetime: 15 # Goob edit
     - type: Tag
       tags:
         - Wall

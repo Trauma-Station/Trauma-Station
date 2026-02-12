@@ -2310,3 +2310,112 @@ Entries:
   id: 282
   time: '2026-02-02T16:21:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/628
+- author: Aviu
+  changes:
+  - type: Add
+    message: Reality fractures are visible to everyone now.
+  - type: Fix
+    message: Fix chaplain being able to see reality shifts,
+  id: 283
+  time: '2026-02-03T08:12:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/629
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added Deep fryer, you can deep fry ANYTHING
+  id: 284
+  time: '2026-02-04T21:02:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/637
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed wizard teleport spell not working.
+  - type: Fix
+    message: Fixed smartgun homing not working.
+  id: 285
+  time: '2026-02-05T12:40:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/641
+- author: SpeltIncorrectyl
+  changes:
+  - type: Add
+    message: >-
+      Ported energy chem: synthesize precursor chemicals directly from
+      electricity instead of mixing jugs like a caveman.
+  id: 286
+  time: '2026-02-07T06:58:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/645
+- author: Kirikii
+  changes:
+  - type: Fix
+    message: Fixed the wizard's mind swap ability.
+  id: 287
+  time: '2026-02-07T14:24:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/651
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed deep fryer being locked to one direction
+  id: 288
+  time: '2026-02-07T15:29:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/652
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed Deep fryer making people unstripable
+  - type: Fix
+    message: Fixed Deep fried oils popup
+  id: 289
+  time: '2026-02-07T22:19:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/657
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: >-
+      Fixed deep fryer adding "deep fried" more than one time when someone was
+      fried
+  id: 290
+  time: '2026-02-08T20:53:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/659
+- author: Armok, Sssith
+  changes:
+  - type: Add
+    message: New rules for the server, they are a fast read.
+  - type: Add
+    message: Spacelaw, Sec expected to follow.
+  id: 291
+  time: '2026-02-10T00:25:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/662
+- author: Armok and Joel
+  changes:
+  - type: Add
+    message: Tons new decals
+  - type: Tweak
+    message: fix drone bug
+  id: 292
+  time: '2026-02-10T05:40:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/663
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed Grab popup spam
+  id: 293
+  time: '2026-02-10T10:54:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/661
+- author: Armok
+  changes:
+  - type: Add
+    message: Neon sign sprites.
+  - type: Tweak
+    message: Made fire extinguisher sprites directional.
+  id: 294
+  time: '2026-02-10T12:05:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/664
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed items possibily being stuck in a deep fried bag
+  - type: Fix
+    message: Deep fried bags can now be eaten!
+  id: 295
+  time: '2026-02-10T20:17:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/660
