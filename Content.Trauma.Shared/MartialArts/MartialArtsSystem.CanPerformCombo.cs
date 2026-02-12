@@ -1,9 +1,10 @@
 using System.Linq;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Common.Knowledge.Systems;
+using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
 
 namespace Content.Trauma.Shared.MartialArts;
@@ -13,6 +14,8 @@ namespace Content.Trauma.Shared.MartialArts;
 /// </summary>
 public partial class MartialArtsSystem
 {
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+
     private void InitializeCanPerformCombo()
     {
         SubscribeLocalEvent<CanPerformComboComponent, MapInitEvent>(OnMapInit);
@@ -140,7 +143,7 @@ public partial class MartialArtsSystem
                 _effects.ApplyEffects(args.Target, proto.OpponentEffects, scale, args.Performer);
 
             comp.LastAttacks.Clear();
-            if (TryComp<MartialArtsKnowledgeComponent>(uid, out var martialArtsComp) && !martialArtsComp.Blocked)
+            if (TryComp<MartialArtsKnowledgeComponent>(uid, out var martialArtsComp) && !martialArtsComp.Blocked && (!_mobState.IsDead(args.Target) && _mobState.IsCritical(args.Target)))
             {
                 var prototypeId = MetaData(uid).EntityPrototype?.ID;
                 if (prototypeId != null)

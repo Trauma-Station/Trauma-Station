@@ -158,9 +158,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return false;
 
         var current = child;
-        while (current.IsValid())
+
+        while (current.IsValid() && TryComp<TransformComponent>(current, out var xform))
         {
-            var xform = Transform(current);
             if (xform.ParentUid == potentialParent)
                 return true;
 
