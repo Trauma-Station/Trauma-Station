@@ -30,7 +30,6 @@ using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Tag;
-using Content.Shared.Temperature.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -40,14 +39,16 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Content.Shared.Stacks;
 using Content.Server.Construction.Components;
+using Content.Shared.Chat;
+using Content.Shared.Damage.Components;
+using Content.Shared.Power.EntitySystems;
+using Content.Shared.Temperature.Components;
+using System.Diagnostics;
 
 namespace Content.Server.Kitchen.EntitySystems
 {
     public sealed class MicrowaveSystem : EntitySystem
     {
-        // <Trauma>
-        [Dependency] private readonly EntityLookupSystem _lookup = default!;
-        // </Trauma>
         [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
         [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
         [Dependency] private readonly PowerReceiverSystem _power = default!;
@@ -376,6 +377,10 @@ namespace Content.Server.Kitchen.EntitySystems
             args.Handled = true;
             _handsSystem.TryDropIntoContainer(args.User, args.Used, ent.Comp.Storage);
             UpdateUserInterfaceState(ent, ent.Comp);
+
+            // <Trauma>
+            ent.Comp.lastKnownKnowledgeHolder = args.User;
+            // </Trauma>
         }
 
         private void OnBreak(Entity<MicrowaveComponent> ent, ref BreakageEventArgs args)
@@ -658,13 +663,10 @@ namespace Content.Server.Kitchen.EntitySystems
                 if (active.PortionedRecipe.Item1 != null)
                 {
                     // <Trauma>
-                    var nearbyEntities = _lookup.GetEntitiesInRange(uid, 8.0f);
-                    var ev = new AddExperience("MartialArtCQCChef", active.PortionedRecipe.Item2);
-                    foreach (var userUid in nearbyEntities)
+                    if (microwave.lastKnownKnowledgeHolder is { } chef)
                     {
-                        if (!TryComp<KnowledgeHolderComponent>(userUid, out var knowledgeHolderComponent) || knowledgeHolderComponent.KnowledgeEntity is not { } knowledgeEnt)
-                            continue;
-                        RaiseLocalEvent(userUid, ref ev);
+                        var ev = new AddExperience("MartialArtCQCChef", active.PortionedRecipe.Item2);
+                        RaiseLocalEvent(chef, ref ev);
                     }
                     // </Trauma>
 

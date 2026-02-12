@@ -109,5 +109,13 @@ namespace Content.Server.Kitchen.Components
         /// </summary>
         [DataField, ViewVariables(VVAccess.ReadWrite)]
         public bool CanMicrowaveIdsSafely = true;
+
+        // <Trauma>
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataField]
+        public EntityUid? lastKnownKnowledgeHolder;
+        // </Trauma
     }
 }
