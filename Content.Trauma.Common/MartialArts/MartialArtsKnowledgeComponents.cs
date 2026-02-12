@@ -4,7 +4,7 @@ namespace Content.Trauma.Common.MartialArts;
 
 [RegisterComponent]
 [NetworkedComponent]
-public abstract partial class GrabStagesOverrideComponent : Component
+public sealed partial class GrabStagesOverrideComponent : Component
 {
     [DataField]
     public GrabStage StartingStage = GrabStage.Soft;

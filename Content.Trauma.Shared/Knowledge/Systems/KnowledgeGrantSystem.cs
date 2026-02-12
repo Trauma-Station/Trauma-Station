@@ -6,6 +6,7 @@ using Content.Shared.Popups;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Shared.Knowledge.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -19,6 +20,7 @@ public sealed class KnowledgeGrantSystem : EntitySystem
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly INetManager _netManager = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -37,6 +39,23 @@ public sealed class KnowledgeGrantSystem : EntitySystem
         RemComp(ent.Owner, ent.Comp);
     }
 
+    private void StartLearningDoAfter(EntityUid user, Entity<KnowledgeGrantOnUseComponent> ent)
+    {
+        if (ent.Comp.DoAfter == null)
+            return;
+
+        var args = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(ent.Comp.DoAfter.Value), new KnowledgeLearnDoAfterEvent(), ent, ent, ent)
+        {
+            BreakOnDropItem = true,
+            BreakOnHandChange = true,
+            BreakOnDamage = true,
+            BreakOnMove = true,
+            BlockDuplicate = true,
+        };
+
+        _doAfter.TryStartDoAfter(args);
+    }
+
     private void OnUseInHand(Entity<KnowledgeGrantOnUseComponent> ent, ref UseInHandEvent args)
     {
         var (uid, comp) = ent;
@@ -47,22 +66,16 @@ public sealed class KnowledgeGrantSystem : EntitySystem
         }
         else
         {
-            var doAfter = new DoAfterArgs(EntityManager, args.User, TimeSpan.FromSeconds(comp.DoAfter.Value), new KnowledgeLearnDoAfterEvent(), uid, uid, uid)
-            {
-                BreakOnDropItem = true,
-                BreakOnHandChange = true,
-                BreakOnDamage = true,
-                BreakOnMove = true,
-                BlockDuplicate = true,
-            };
-
-            _doAfter.TryStartDoAfter(doAfter);
+            StartLearningDoAfter(args.User, ent);
         }
     }
 
     private void OnDoAfter(Entity<KnowledgeGrantOnUseComponent> ent, ref KnowledgeLearnDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled || args.Target == null || TerminatingOrDeleted(args.Target))
+            return;
+
+        if (_netManager.IsClient)
             return;
 
         foreach (var skill in ent.Comp.Experience)
@@ -78,19 +91,32 @@ public sealed class KnowledgeGrantSystem : EntitySystem
                 var ev = new AddExperience(skill.Key, skill.Value);
                 RaiseLocalEvent(args.User, ref ev);
                 if (TryComp<LanguageKnowledgeComponent>(foundSkill, out var language))
-                    _popup.PopupEntity(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"{language.LanguageId.Id}"))), args.User, args.User, PopupType.Medium);
+                    _popup.PopupEntity(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"{language.LanguageId.Id}"))), args.User, args.User, PopupType.Small);
                 else
-                    _popup.PopupEntity(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"knowledge-{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
+                    _popup.PopupEntity(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"knowledge-{skill.Key.ToString()}"))), args.User, args.User, PopupType.Small);
             }
             else
             {
                 if (TryComp<LanguageKnowledgeComponent>(foundSkill, out var language))
-                    _popup.PopupEntity(Loc.GetString("knowledge-could-not-learn", ("knowledge", Loc.GetString($"{language.LanguageId.Id}"))), args.User, args.User, PopupType.Medium);
+                    _popup.PopupEntity(Loc.GetString("knowledge-could-not-learn", ("knowledge", Loc.GetString($"{language.LanguageId.Id}"))), args.User, args.User, PopupType.Small);
                 else
-                    _popup.PopupEntity(Loc.GetString("knowledge-could-not-learn", ("knowledge", Loc.GetString($"knowledge-{skill.Key.ToString()}"))), args.User, args.User, PopupType.Medium);
+                    _popup.PopupEntity(Loc.GetString("knowledge-could-not-learn", ("knowledge", Loc.GetString($"knowledge-{skill.Key.ToString()}"))), args.User, args.User, PopupType.Small);
             }
         }
         args.Handled = true;
+
+        bool canStillLearn = false;
+        foreach (var skill in ent.Comp.Experience)
+        {
+            if (_knowledge.TryGetKnowledgeUnit(args.User, skill.Key) is { } foundSkill && TryComp<KnowledgeComponent>(foundSkill, out var foundComp) && (!ent.Comp.Skills.TryGetValue(skill.Key, out var skillCap) || (foundComp.Level < skillCap || skillCap < 0)))
+            {
+                canStillLearn = true;
+                break;
+            }
+        }
+
+        if (canStillLearn)
+            StartLearningDoAfter(args.User, ent);
     }
 }
 

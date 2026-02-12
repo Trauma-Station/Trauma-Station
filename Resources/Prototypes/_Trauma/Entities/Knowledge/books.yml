@@ -57,7 +57,6 @@
   - type: Tag
     tags:
     - Book
-    - Paper
   - type: Item
     size: Small
 
@@ -189,4 +188,17 @@
       JanitorKnowledge: 26
     experience:
       JanitorKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookThrowing
+  name: old book
+  description: A small, black manual. Its a picture book.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      ThrowingKnowledge: 26
+    experience:
+      ThrowingKnowledge: 1
     doAfter: 2

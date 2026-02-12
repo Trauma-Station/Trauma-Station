@@ -164,8 +164,11 @@ public abstract partial class SharedKnowledgeSystem
             }); //Provide Armor Piercing at high melee
         }
 
-        var ev = new AddExperience("StrengthKnowledge", 1);
-        RaiseLocalEvent(ent, ref ev);
+        args.BonusDamage += (args.BaseDamage * bonus / 100);
+
+        if (_netManager.IsClient)
+            return;
+
         var expToSend = 0;
         foreach (var hitEntity in args.HitEntities)
         {
@@ -177,27 +180,26 @@ public abstract partial class SharedKnowledgeSystem
 
             if (hitEntity == ent)
                 continue;
-            expToSend += 1;
+            expToSend++;
         }
         if (expToSend > 0)
         {
-            ev = new AddExperience("MeleeKnowledge", expToSend);
+            var ev = new AddExperience("MeleeKnowledge", expToSend);
             RaiseLocalEvent(ent, ref ev);
         }
+        var evStr = new AddExperience("StrengthKnowledge", 1);
+        RaiseLocalEvent(ent, ref evStr);
 
-        args.BonusDamage += (args.BaseDamage * bonus / 100);
-
-        if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "MeleeKnowledge"), out melee) && GetMastery(melee) < 2)
+        if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "MeleeKnowledge"), out melee))
         {
-            FailMelee(melee.Level + melee.TemporaryLevel, args);
+            if (GetMastery(melee) < 2)
+                FailMelee(melee.Level + melee.TemporaryLevel, ref args);
         }
         else
-        {
-            FailMelee(0, args);
-        }
+            FailMelee(0, ref args);
     }
 
-    private void FailMelee(int level, MeleeHitEvent args)
+    private void FailMelee(int level, ref MeleeHitEvent args)
     {
         float failChance = Math.Clamp(1f - ((float) (level) / 26f), 0, 1f);
 
@@ -210,6 +212,7 @@ public abstract partial class SharedKnowledgeSystem
             _audio.PlayPvs(_clumsySound, args.User);
 
             args.Handled = true;
+            Log.Debug($"Melee attack failed due to low skill level. Fail Chance: {failChance * 100}%");
             return;
         }
     }

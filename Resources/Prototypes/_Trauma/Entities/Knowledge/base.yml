@@ -88,3 +88,11 @@
   components:
   - type: Knowledge
     experienceCost: 5
+
+- type: entity
+  parent: BaseKnowledge
+  id: ThrowingKnowledge
+  name: ThrowingKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 5

@@ -32,6 +32,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly INetManager _netManager = default!;
 
     private EntityQuery<KnowledgeComponent> _knowledgeQuery;
     private EntityQuery<KnowledgeContainerComponent> _containerQuery;
@@ -100,6 +101,44 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         Dirty(args.Entity, statusComp);
     }
 
+    private void OnHolderStartup(Entity<KnowledgeHolderComponent> ent, ref ComponentStartup args)
+    {
+        SetupHolder(ent);
+    }
+
+    private void OnContainerStartup(Entity<KnowledgeContainerComponent> ent, ref ComponentStartup args)
+    {
+        FindEntityHolder(ent);
+    }
+
+    public void SetupHolder(Entity<KnowledgeHolderComponent> ent)
+    {
+        var ev = new KnowledgeContainerRelayEvent(ent);
+        RecursiveRaiseRelayEvent(ent, ref ev);
+
+        // Check entity that we have found
+        if (_containerQuery.TryComp(ev.Found, out var knowledgeFound))
+            ent.Comp.KnowledgeEntity = ev.Found;
+        Dirty(ent.Owner, ent.Comp);
+        if (TryComp<LanguageSpeakerComponent>(ent.Owner, out var languageSpeaker))
+            UpdateEntityLanguages((ent, languageSpeaker));
+    }
+
+    public void FindEntityHolder(Entity<KnowledgeContainerComponent> ent)
+    {
+        if (!_container.TryGetContainingContainer((ent.Owner, null, null), out var container))
+            return;
+
+        var bodyUid = container.Owner;
+
+        if (!HasComp<KnowledgeHolderComponent>(bodyUid))
+        {
+            AddComp<KnowledgeHolderComponent>(bodyUid);
+        }
+        if (TryComp<KnowledgeHolderComponent>(bodyUid, out var holder))
+            SetupHolder((bodyUid, holder));
+    }
+
     //public void OnInitContainer(Entity<KnowledgeContainerComponent> ent, ref MapInitEvent args)
     //{
     //    Log.Debug($"Initializing Knowledge Container for {ToPrettyString(ent.Owner)}");
@@ -128,7 +167,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         if (TryGetKnowledgeEntity(ent.Owner) is not { } knowledgeEntity || !TryComp<KnowledgeContainerComponent>(knowledgeEntity, out var knowledgeContainer))
             return;
-        if (TryGetKnowledgeUnit(knowledgeEntity, args.KnowledgeType) is not { } knowledgeUnit || !TryComp<KnowledgeComponent>(knowledgeUnit, out var knowledgeComponent))
+        if (TryGetKnowledgeUnit(ent, args.KnowledgeType) is not { } knowledgeUnit || !TryComp<KnowledgeComponent>(knowledgeUnit, out var knowledgeComponent))
         {
             if (_random.Prob(0.2f))
                 TryAddKnowledgeUnit(ent, new KeyValuePair<EntProtoId, int>(args.KnowledgeType, 0));
@@ -253,6 +292,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override bool TryAddKnowledgeUnit(EntityUid target, KeyValuePair<EntProtoId, int> knowledgeId, [NotNullWhen(true)] out EntityUid? knowledgeUnit)
     {
         knowledgeUnit = null;
+
         EnsureKnowledgeContainer(target, out var ent);
         EnsureContainer(ent);
 
@@ -263,10 +303,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             {
                 knowledgeComp.Level = knowledgeId.Value;
             }
+            Dirty(ent);
             return false;
         }
         else
         {
+            if (_netManager.IsClient)
+                return false;
+
             var result = PredictedTrySpawnInContainer(knowledgeId.Key, ent.Owner, KnowledgeContainerComponent.ContainerId, out knowledgeUnit);
             if (!result || knowledgeUnit is not { } knowledgeUnitVerified)
                 return false;
@@ -286,6 +330,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 _popup.PopupEntity(Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgeId.Key.ToString()}"))), target, target, PopupType.Medium);
 
             }
+            Dirty(ent);
             return true;
         }
     }
@@ -391,9 +436,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </returns>
     public override EntityUid? TryGetKnowledgeUnit(EntityUid target, EntProtoId knowledgeUnit)
     {
-        EnsureKnowledgeContainer(target, out var ent);
+        if (TryGetKnowledgeEntity(target) is not { } ent || !TryComp<KnowledgeContainerComponent>(ent, out var comp))
+            return null;
 
-        if (ent.Comp.KnowledgeContainerIDs.TryGetValue(knowledgeUnit, out var knowledge))
+        if (comp.KnowledgeContainerIDs.TryGetValue(knowledgeUnit, out var knowledge))
             return knowledge;
         else
             return null;
