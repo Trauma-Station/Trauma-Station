@@ -63,7 +63,7 @@ public sealed class MalignRiftSpawnRule : StationEventSystem<MalignRiftSpawnRule
         }
         else
         {
-            var totalCrew = _playerMan.Sessions.Count(session => session.Status == SessionStatus.InGame && HasComp<HumanoidAppearanceComponent>(session.AttachedEntity));
+            var totalCrew = _playerMan.Sessions.Count(session => session.Status == SessionStatus.InGame && HasComp<HumanoidProfileComponent>(session.AttachedEntity));
             var sender = Loc.GetString("cosmiccult-announcement-sender");
 
             _chatSystem.DispatchStationAnnouncement(chosenStation.Value, Loc.GetString("cosmiccult-announce-tier2-progress"), sender, false, null, Color.FromHex("#4cabb3"));
