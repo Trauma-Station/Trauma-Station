@@ -26,7 +26,7 @@
     components:
     - type: EngineeringStaff
       # <Trauma>
-    - type: GrantKnowledge
+    - type: KnowledgeGrant
       ConstructionSimpleHandmade: 26
       ConstructionAdvancedHandmade: 26
       ConstructionSurvivalWeaponsHandmade: 26

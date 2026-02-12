@@ -26,7 +26,6 @@
   # <Trauma>
   - !type:AddComponentSpecial
     components:
-      - type: DeathSquadMember # Goobstation
         - type: KnowledgeGrant
           skills:
             StrengthKnowledge: 26

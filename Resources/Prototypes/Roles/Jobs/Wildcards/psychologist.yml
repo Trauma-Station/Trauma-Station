@@ -16,7 +16,7 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: GrantKnowledge # Trauma - Knowledge
+    - type: KnowledgeGrant
       ChemistryKnowledge: 26
   # </Trauma>
 
