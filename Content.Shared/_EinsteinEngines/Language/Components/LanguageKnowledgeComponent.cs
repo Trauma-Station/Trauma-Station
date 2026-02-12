@@ -1,10 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._EinsteinEngines.Language.Components;
 
 /// <summary>
-/// Trauma edit
 /// Assigned to the knowledge entity that holds information about what languages the parent knows.
 /// </summary>
 [RegisterComponent, NetworkedComponent]

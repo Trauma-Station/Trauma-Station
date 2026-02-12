@@ -1,15 +1,13 @@
 // <Trauma>
 using Content.Trauma.Common.Knowledge.Systems;
+using Content.Trauma.Common.Knowledge.Components;
 // </Trauma>
-using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Construction;
-using Content.Server.Construction.Components;
-using Content.Server.DeviceLinking.Systems;
 using Content.Server.Explosion.EntitySystems;
+using Content.Server.DeviceLinking.Systems;
 using Content.Server.Hands.Systems;
 using Content.Server.Kitchen.Components;
-using Content.Server.Lightning;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Temperature.Systems;
@@ -17,44 +15,39 @@ using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Construction.EntitySystems;
-using Content.Shared.Damage.Components;
 using Content.Shared.Database;
-using Content.Shared.Destructible;
 using Content.Shared.DeviceLinking.Events;
+using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Robust.Shared.Random;
+using Robust.Shared.Audio;
+using Content.Server.Lightning;
 using Content.Shared.Item;
 using Content.Shared.Kitchen;
 using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
 using Content.Shared.Power;
-using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Temperature.Components;
-using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.MartialArts;
-using Microsoft.EntityFrameworkCore;
-using NetCord;
 using Robust.Server.GameObjects;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using System.Linq;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.Stacks;
 using Content.Server.Construction.Components;
-using Content.Shared.Chat;
-using Content.Shared.Damage.Components;
-using Content.Shared.Power.EntitySystems;
-using Content.Shared.Temperature.Components;
 
 namespace Content.Server.Kitchen.EntitySystems
 {
     public sealed class MicrowaveSystem : EntitySystem
     {
+        // <Trauma>
+        [Dependency] private readonly EntityLookupSystem _lookup = default!;
+        // </Trauma>
         [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
         [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
         [Dependency] private readonly PowerReceiverSystem _power = default!;
@@ -77,7 +70,6 @@ namespace Content.Server.Kitchen.EntitySystems
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
         [Dependency] private readonly SharedSuicideSystem _suicide = default!;
         [Dependency] private readonly SharedPowerStateSystem _powerState = default!;
-        [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
         private static readonly EntProtoId MalfunctionSpark = "Spark";
 
@@ -667,11 +659,11 @@ namespace Content.Server.Kitchen.EntitySystems
                 {
                     // <Trauma>
                     var nearbyEntities = _lookup.GetEntitiesInRange(uid, 8.0f);
+                    var ev = new AddExperience("MartialArtCQCChef", active.PortionedRecipe.Item2);
                     foreach (var userUid in nearbyEntities)
                     {
                         if (!TryComp<KnowledgeHolderComponent>(userUid, out var knowledgeHolderComponent) || knowledgeHolderComponent.KnowledgeEntity is not { } knowledgeEnt)
                             continue;
-                        var ev = new AddExperience("MartialArtCQCChef", active.PortionedRecipe.Item2);
                         RaiseLocalEvent(userUid, ref ev);
                     }
                     // </Trauma>

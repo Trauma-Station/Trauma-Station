@@ -12,7 +12,7 @@ using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input.Binding;
 
-namespace Content.Client._Trauma;
+namespace Content.Trauma.Client.Knowledge;
 
 [UsedImplicitly]
 public sealed class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>
@@ -115,7 +115,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         if (_menu == null)
             return;
 
-        _menu.Dispose();
+        _menu.Close();
         _menu = null;
     }
 

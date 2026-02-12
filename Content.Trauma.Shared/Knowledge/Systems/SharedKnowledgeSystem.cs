@@ -28,7 +28,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 {
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly SharedLanguageSystem _language = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -211,19 +210,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             SetupHolder((bodyUid, holder));
     }
 
-    //public void OnInitContainer(Entity<KnowledgeContainerComponent> ent, ref MapInitEvent args)
-    //{
-    //    Log.Debug($"Initializing Knowledge Container for {ToPrettyString(ent.Owner)}");
-    //    if (!TryComp<OrganComponent>(ent, out var organComponent))
-    //        return;
-    //    Log.Debug($"Found Organ Component for {ToPrettyString(ent.Owner)}");
-    //    if (organComponent.Body is not { } ownerUid)
-    //        return;
-    //    Log.Debug($"Initializing Knowledge Container for {ToPrettyString(ownerUid)}");
-    //    EnsureComp<KnowledgeHolderComponent>(ownerUid, out var knowledgeHolder);
-    //    knowledgeHolder.KnowledgeEntity = ent.Owner;
-    //}
-
     public void OnInit(Entity<KnowledgeHolderComponent> ent)
     {
         EnsureKnowledgeContainer(ent.Owner, out var knowledgeContainer);
@@ -247,7 +233,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
         var knowledge = (knowledgeUnit, knowledgeComponent);
 
-        var getMastery = GetMastery(knowledge);
+        var getMastery = GetMastery(knowledgeComponent);
         knowledgeComponent.Experience += args.Experience + knowledgeComponent.BonusExperience;
         if (knowledgeComponent.Experience >= knowledgeComponent.ExperienceCost || knowledgeComponent.Level < 100)
         {
@@ -279,13 +265,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
         if (knowledgeComponent.Level > 100)
             knowledgeComponent.Level = 100;
-        if (getMastery != GetMastery(knowledge))
+        if (getMastery != GetMastery(knowledgeComponent))
         {
             var knowledgePrototype = MetaData(knowledgeUnit).EntityPrototype?.ID;
             if (TryComp<LanguageKnowledgeComponent>(knowledgeUnit, out var knowledgeComp))
-                _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString($"{knowledgeComp.LanguageId.Id}")), ("mastery", GetCurrentMastery(knowledge).ToLower())), ent, ent, PopupType.Medium);
+                _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString($"{knowledgeComp.LanguageId.Id}")), ("mastery", GetMasteryString(knowledge).ToLower())), ent, ent, PopupType.Medium);
             else
-                _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgePrototype}")), ("mastery", GetCurrentMastery(knowledge).ToLower())), ent, ent, PopupType.Medium);
+                _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgePrototype}")), ("mastery", GetMasteryString(knowledge).ToLower())), ent, ent, PopupType.Medium);
         }
         Dirty(ent);
     }
@@ -296,7 +282,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         var knowledgeInfo = new KnowledgeInfo("", "", ent.Comp.Color, ent.Comp.Sprite);
         var knowledgePrototype = MetaData(ent).EntityPrototype?.ID;
-        knowledgeInfo.Description = Loc.GetString("knowledge-info-description", ("level", ent.Comp.Level), ("mastery", GetCurrentMastery(ent)), ("exp", ent.Comp.Experience));
+        knowledgeInfo.Description = Loc.GetString("knowledge-info-description", ("level", ent.Comp.Level), ("mastery", GetMasteryString(ent)), ("exp", ent.Comp.Experience));
         if (TryComp<LanguageKnowledgeComponent>(ent, out var languageKnowledge))
         {
             var langName = _language.GetLanguagePrototype(languageKnowledge.LanguageId)?.Name ?? Loc.GetString("generic-error");
@@ -693,7 +679,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         return clientMartialArts;
     }
 
-    public string GetCurrentMastery(Entity<KnowledgeComponent> ent)
+    public string GetMasteryString(Entity<KnowledgeComponent> ent)
     {
         return ent.Comp.Level switch
         {
@@ -703,18 +689,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             >= 26 => Loc.GetString("knowledge-mastery-average"),
             >= 1 => Loc.GetString("knowledge-mastery-novice"),
             _ => Loc.GetString("knowledge-mastery-unskilled"),
-        };
-    }
-    public int GetMastery(Entity<KnowledgeComponent> ent)
-    {
-        return ent.Comp.Level switch
-        {
-            >= 88 => 5,
-            >= 76 => 4,
-            >= 51 => 3,
-            >= 26 => 2,
-            >= 1 => 1,
-            _ => 0,
         };
     }
 
@@ -751,12 +725,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public int GetMastery(EntityUid? uid)
     {
-        if (uid is { })
-        {
-            return GetMastery(uid);
-        }
-        else
-            return 0;
+        return GetMastery(uid ?? EntityUid.Invalid);
     }
 
     public (int, bool) RollPenetrating(int sides, bool didCritical = false)
