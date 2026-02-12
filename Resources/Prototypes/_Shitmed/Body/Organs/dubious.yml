@@ -1,35 +1,30 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Rinary <72972221+Rinary1@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 ss14-Starlight <ss14-Starlight@outlook.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Abductor glands
+# chicken is best
+
 - type: entity
-  id: OrganDubiousBase
-  parent: [ OrganHumanHeart, BaseMajorContraband ]
-  name: mysterious gland
-  categories: [ HideSpawnMenu ]
   abstract: true
+  id: OrganDubiousBase
+  parent: [ OrganBaseHeart, OrganHumanMetabolizer, BaseMajorContraband ]
+  name: mysterious gland
   description: Suspicious alien gland, replaces the heart.
   components:
   - type: Sprite
     sprite: _Shitmed/Mobs/Species/Misc/Dubious/organs.rsi
-    state: gland
+    layers:
+    - state: health
   - type: AbductorOrgan
 
 - type: entity
-  id: OrganDubiousHealth
   parent: OrganDubiousBase
+  id: OrganDubiousHealth
+  suffix: Healing
   components:
   - type: Sprite
-    state: health
-  - type: Organ
+    layers:
+    - state: health
+  - type: OrganComponents
     onAdd:
     - type: PassiveDamage
       allowedStates:
@@ -45,27 +40,29 @@
           Genetic: -0.14
 
 - type: entity
-  id: OrganDubiousAA
   parent: OrganDubiousBase
+  id: OrganDubiousAA
+  suffix: All Access
   components:
   - type: Sprite
-    state: emp
-  - type: Organ
+    layers:
+    - state: emp
+  - type: OrganComponents
     onAdd:
     - type: Access
       enabled: true
       groups:
       - AllAccess
-    - type: AccessReader
-      access: [["Command"], ["Research"]]
 
 - type: entity
-  id: OrganDubiousShock
   parent: OrganDubiousBase
+  id: OrganDubiousShock
+  suffix: Shocking
   components:
   - type: Sprite
-    state: emp
-  - type: Organ
+    layers:
+    - state: emp
+  - type: OrganComponents
     onAdd:
     - type: Insulated
     - type: LightningArcShooter
@@ -77,12 +74,14 @@
       lightningPrototype: Lightning
 
 - type: entity
-  id: OrganDubiousInvisible
   parent: OrganDubiousBase
+  id: OrganDubiousInvisible
+  suffix: Invisible
   components:
   - type: Sprite
-    state: species
-  - type: Organ
+    layers:
+    - state: species
+  - type: OrganComponents
     onAdd:
     - type: Stealth
       enabledOnDeath: false
@@ -92,158 +91,172 @@
       movementVisibilityRate: 0.25
 
 - type: entity
-  id: OrganDubiousGoliath
   parent: OrganDubiousBase
+  id: OrganDubiousGoliath
+  suffix: Goliath
   components:
   - type: Sprite
-    state: species
-  - type: Organ
+    layers:
+    - state: species
+  - type: OrganComponents
     onAdd:
     - type: GoliathTentacle
 
 - type: entity
-  id: OrganDubiousSpaceAdaptation
   parent: OrganDubiousBase
+  id: OrganDubiousSpaceAdaptation
+  suffix: Space
   components:
   - type: Sprite
-    state: species
-  - type: Organ
+    layers:
+    - state: species
+  - type: OrganComponents
     onAdd:
     - type: PressureImmunity
     - type: BreathingImmunity
 
 - type: entity
-  id: OrganDubiousArtifact
   parent: OrganDubiousBase
+  id: OrganDubiousArtifact
+  suffix: Artifact
   components:
   - type: Sprite
-    state: mindshock
-  - type: Organ
+    layers:
+    - state: mindshock
+  - type: OrganComponents
     onAdd:
     - type: XenoArtifact
-    - type: RandomStatusActivation
-      statusEffects:
-        ActivateArtifactEffect: ActivateArtifactEffect
+  - type: RandomOrganEffects
+    effects:
+    - !type:ActivateArtifact
 
 - type: entity
+  parent: OrganDubiousBase
   id: OrganDubiousScrambleDna
-  parent: OrganDubiousBase
+  suffix: DNA Scrambler
   components:
   - type: Sprite
-    state: species
-  - type: Organ
-    onAdd:
-    - type: RandomStatusActivation
-      statusEffects:
-        ScrambleDnaEffect: ScrambleDnaEffect
+    layers:
+    - state: species
+  - type: RandomOrganEffects
+    effects:
+    - !type:ScrambleDna
 
 - type: entity
+  parent: OrganDubiousBase
   id: OrganDubiousScrambleLocation
-  parent: OrganDubiousBase
+  suffix: Teleport
   components:
   - type: Sprite
-    state: vent
-  - type: Organ
-    onAdd:
-    - type: RandomStatusActivation
-      statusEffects:
-        ScrambleLocationEffect: ScrambleLocationEffect
+    layers:
+    - state: vent
+  - type: RandomOrganEffects
+    effects:
+    - !type:RandomTeleport
 
 - type: entity
+  parent: OrganDubiousBase
   id: OrganDubiousSpiderEggs
-  parent: OrganDubiousBase
+  suffix: Spiders
   components:
   - type: Sprite
-    state: spider
-  - type: Organ
-    onAdd:
-    - type: RandomStatusActivation
-      minActivationTime: 120
-      maxActivationTime: 360
-      statusEffects:
-        SpawnSpiderEggs: SpawnSpiderEggs
+    layers:
+    - state: spider
+  - type: RandomOrganEffects
+    minActivationTime: 120
+    maxActivationTime: 360
+    effects:
+    - !type:SpawnEntity
+      entity: EggSpiderFertilized
 
 - type: entity
+  parent: OrganDubiousBase
   id: OrganDubiousSlimeEggs
-  parent: OrganDubiousBase
+  suffix: Slimes
   components:
   - type: Sprite
-    state: slime
-  - type: Organ
-    onAdd:
-    - type: RandomStatusActivation
-      minActivationTime: 120
-      maxActivationTime: 360
-      statusEffects:
-        SpawnSlimes: SpawnSlimes
+    layers:
+    - state: slime
+  - type: RandomOrganEffects
+    minActivationTime: 120
+    maxActivationTime: 360
+    effects:
+    - !type:SpawnFriendly
+      entity: MobAdultSlimesBlueAngry
 
 - type: entity
+  parent: OrganDubiousBase
   id: OrganDubiousEMP
-  parent: OrganDubiousBase
+  suffix: EMP
   components:
   - type: Sprite
-    state: emp
-  - type: Organ
-    onAdd:
-    - type: RandomStatusActivation
-      statusEffects:
-        SpawnEmp: SpawnEmp
+    layers:
+    - state: emp
+  - type: RandomOrganEffects
+    effects:
+    - !type:SpawnAttached
+      entity: AdminInstantEffectEMP7
 
 - type: entity
+  parent: OrganDubiousBase
   id: OrganDubiousGravityWell
-  parent: OrganDubiousBase
+  suffix: Gravity
   components:
   - type: Sprite
-    state: emp
-  - type: Organ
-    onAdd:
-    - type: RandomStatusActivation
-      statusEffects:
-        SpawnGravityWell: SpawnGravityWell
+    layers:
+    - state: emp
+  - type: RandomOrganEffects
+    effects:
+    - !type:SpawnAttached
+      entity: AdminInstantEffectGravityWell
 
 - type: entity
+  parent: OrganDubiousBase
   id: OrganDubiousFlash
-  parent: OrganDubiousBase
+  suffix: Flash
   components:
   - type: Sprite
-    state: emp
-  - type: Organ
-    onAdd:
-    - type: RandomStatusActivation
-      statusEffects:
-        SpawnFlash: SpawnFlash
+    layers:
+    - state: emp
+  - type: RandomOrganEffects
+    effects:
+    - !type:SpawnAttached
+      entity: AdminInstantEffectFlash
 
 - type: entity
+  parent: OrganDubiousBase
   id: OrganDubiousSmoke
-  parent: OrganDubiousBase
+  suffix: Smoke
   components:
   - type: Sprite
-    state: emp
-  - type: Organ
-    onAdd:
-    - type: RandomStatusActivation
-      statusEffects:
-        SpawnSmoke: SpawnSmoke
+    layers:
+    - state: emp
+  - type: RandomOrganEffects
+    effects:
+    - !type:SpawnAttached
+      entity: AdminInstantEffectSmoke10
 
 - type: entity
+  parent: OrganDubiousBase
   id: OrganDubiousGas
-  parent: OrganDubiousBase
+  suffix: Gases
   components:
   - type: Sprite
-    state: viral
-  - type: Organ
-    onAdd:
-    - type: RandomStatusActivation
-      statusEffects:
-        ExpelGas: ExpelGas
+    layers:
+    - state: viral
+  - type: RandomOrganEffects
+    effects:
+    - !type:ExpelGas
 
 - type: entity
-  id: OrganDubiousSteptriggerImmune
   parent: OrganDubiousBase
+  id: OrganDubiousSteptriggerImmune
+  suffix: Noslip
   components:
   - type: Sprite
-    state: viral
-  - type: Organ
+    layers:
+    - state: viral
+  - type: OrganComponents
     onAdd:
     - type: StepTriggerImmune
       whitelist:
@@ -259,23 +272,27 @@
         - Caltrop # Trauma
 
 - type: entity
-  id: OrganDubiousVentcrawler
   parent: OrganDubiousBase
+  id: OrganDubiousVentcrawler
+  suffix: Ventcrawl
   components:
   - type: Sprite
-    state: viral
-  - type: Organ
+    layers:
+    - state: vent
+  - type: OrganComponents
     onAdd:
     - type: VentCrawler
       allowInventory: false
 
 - type: entity
-  id: OrganDubiousRepairable
   parent: OrganDubiousBase
+  id: OrganDubiousRepairable
+  suffix: Repairable
   components:
   - type: Sprite
-    state: species
-  - type: Organ
+    layers:
+    - state: species
+  - type: OrganComponents
     onAdd:
     - type: Repairable
       fuelCost: 5

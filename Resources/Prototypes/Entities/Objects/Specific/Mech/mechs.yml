@@ -218,7 +218,7 @@
     mechToPilotDamageMultiplier: 0.75
     pilotWhitelist:
       components:
-        - HumanoidAppearance
+        - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -269,7 +269,7 @@
     airtight: true # Goobstation - Space Honk is real.
     pilotWhitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
 
 - type: entity
   parent: MechHonker

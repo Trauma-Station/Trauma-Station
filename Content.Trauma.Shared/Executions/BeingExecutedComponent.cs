@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 
 namespace Content.Trauma.Shared.Executions;
 

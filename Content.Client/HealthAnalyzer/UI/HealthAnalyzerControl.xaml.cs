@@ -80,9 +80,9 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         NameLabel.SetMessage(name);
 
         SpeciesLabel.Text =
-            _entityManager.TryGetComponent<HumanoidAppearanceComponent>(target.Value,
-                out var humanoidAppearanceComponent)
-                ? Loc.GetString(_prototypes.Index<SpeciesPrototype>(humanoidAppearanceComponent.Species).Name)
+            _entityManager.TryGetComponent<HumanoidProfileComponent>(target.Value,
+                out var humanoidComponent)
+                ? Loc.GetString(_prototypes.Index(humanoidComponent.Species).Name)
                 : Loc.GetString("health-analyzer-window-entity-unknown-species-text");
 
         // Basic Diagnostic
@@ -106,7 +106,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
         // Alerts
 
-        var showAlerts = state.Unrevivable == true || state.Bleeding.Values.Any(b => b); // Shitmed - check if any limbs bleeding
+        var showAlerts = state.Unrevivable == true || state.Bleeding.Count > 0; // Shitmed - check if any limbs bleeding
 
         AlertsDivider.Visible = showAlerts;
         AlertsContainer.Visible = showAlerts;
@@ -122,7 +122,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
                 MaxWidth = 300
             });
 
-        if (state.Bleeding.Values.Any(x => x))
+        if (state.Bleeding.Count > 0)
             AlertsContainer.AddChild(new RichTextLabel
             {
                 Text = Loc.GetString("health-analyzer-window-entity-bleeding-text"),

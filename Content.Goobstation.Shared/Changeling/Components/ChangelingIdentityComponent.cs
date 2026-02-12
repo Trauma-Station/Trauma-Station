@@ -22,7 +22,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Humanoid;
+using Content.Shared.Preferences;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -226,6 +226,6 @@ public sealed partial class TransformData
     /// <summary>
     ///     Entity's humanoid appearance component.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadOnly), NonSerialized]
-    public HumanoidAppearanceComponent Appearance;
+    [DataField]
+    public HumanoidCharacterProfile Profile;
 }

@@ -269,7 +269,7 @@ namespace Content.Server.Atmos.EntitySystems
                 && !float.IsPositiveInfinity(component.MoveResist))
             {
                 var moveForce = pressureDifference * MathF.Max(physics.InvMass, SpaceWindMaximumCalculatedInverseMass);
-                if (HasComp<HumanoidAppearanceComponent>(ent)) // Goob
+                if (HasComp<HumanoidProfileComponent>(ent)) // Goob
                     moveForce *= HumanoidThrowMultiplier;
                 if (moveForce > physics.Mass)
                 {

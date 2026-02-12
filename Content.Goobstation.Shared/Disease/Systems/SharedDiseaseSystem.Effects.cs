@@ -72,7 +72,7 @@ public partial class SharedDiseaseSystem
             return;
 
         var sound = ent.Comp.Sound;
-        if (ent.Comp.SoundFemale != null && TryComp<HumanoidAppearanceComponent>(args.Ent, out var humanoid) && humanoid.Sex == Sex.Female)
+        if (ent.Comp.SoundFemale != null && TryComp<HumanoidProfileComponent>(args.Ent, out var humanoid) && humanoid.Sex == Sex.Female)
             sound = ent.Comp.SoundFemale;
 
         _audio.PlayPvs(sound, args.Ent);

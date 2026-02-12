@@ -1,56 +1,9 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Krunklehorn <42424291+Krunklehorn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 to4no_fix <156101927+chavonadelal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marty <martynashagriefer@gmail.com>
-// SPDX-FileCopyrightText: 2025 Martynas6ha4 <martynashagriefer@gmail.com>
-// SPDX-FileCopyrightText: 2025 NotActuallyMarty <martynashagriefer@gmail.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 keronshb <keronshb@live.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Krunklehorn <42424291+Krunklehorn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 to4no_fix <156101927+chavonadelal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marty <martynashagriefer@gmail.com>
-// SPDX-FileCopyrightText: 2025 NotActuallyMarty <martynashagriefer@gmail.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
 using Content.Goobstation.Common.Clothing;
+using Content.Medical.Common.Clothing;
+using System.Linq;
+// </Trauma>
 using Content.Shared.Actions;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
 using Content.Shared.Clothing.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
@@ -58,7 +11,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
-using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Strip;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
@@ -66,8 +18,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Robust.Shared.Prototypes;
-using System.Linq;
+
 namespace Content.Shared.Clothing.EntitySystems;
 
 // GOOBSTATION - MODSUITS - THIS SYSTEM FULLY CHANGED
@@ -82,9 +33,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedStrippableSystem _strippable = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly ClothingSystem _clothing = default!;
 
     public override void Initialize()
@@ -506,7 +455,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         if (comp.ClothingUids.Count == 1)
             ToggleClothing(args.Performer, toggleable, comp.ClothingUids.First().Key);
         else
-            _uiSystem.OpenUi(toggleable.Owner, ToggleClothingUiKey.Key, args.Performer);
+            _ui.OpenUi(toggleable.Owner, ToggleClothingUiKey.Key, args.Performer);
     }
 
     /// <summary>
@@ -752,7 +701,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         {
             if (container.Contains(attached.Key)
                 && unequipping
-                || CheckEquipped(Transform(toggleable).ParentUid, attached.Key, attached.Value) < EquipAbility.MissingSlot)
+                || CheckEquipped(Transform(toggleable).ParentUid, attached.Key, attached.Value))
                 continue;
 
             toggledCount++;
@@ -786,38 +735,20 @@ public sealed class ToggleableClothingSystem : EntitySystem
     /// <param name="equipment">The item to be equipped</param>
     /// <param name="equipTarget">The entity attempting to wear the clothing</param>
     /// <param name="slot">The slot the clothing is being equipped to</param>
-    /// <returns>An enum indicating the equipment ability status</returns>
-    public EquipAbility CheckEquipped(EntityUid equipTarget, EntityUid toEquip, string slot)
+    /// <returns>True if the item could be equipped to this slot</returns>
+    public bool CheckEquipped(EntityUid equipTarget, EntityUid toEquip, string slot)
     {
-        if (!TryComp(equipTarget, out BodyComponent? targetBody)
-            || targetBody.Prototype == null
-            || HasComp<BorgChassisComponent>(equipTarget))
-            return EquipAbility.CannotEquip;
-
         // Does their species proto include the slot?
         if (!_inventorySystem.TryGetSlotContainer(equipTarget, slot, out var slotContainer, out var slotDefinition))
-            return EquipAbility.MissingSlot;
+            return true; // don't care then
 
         // Does the slot NOT have the item equipped?
         if (slotContainer.ContainedEntity != toEquip)
-            return EquipAbility.SlotOccupiedOrEmpty;
+            return false;
 
-        // Is there a body part associated with the slot?
-        if (_body.TryGetPartFromSlotContainer(slot, out var bodyPart)) // If this fails, that means there's not an associated part.
-        {
-            var bodyPartString = bodyPart.Value.ToString().ToLower();
-            var prototype = _prototypes.Index(targetBody.Prototype.Value);
-
-            var hasPartConnection = prototype.Slots.Values.Any(protoSlot =>
-                protoSlot.Connections.Contains(bodyPartString));
-
-            // If this is a slot that requires a body part, and the part is missing
-            if (hasPartConnection && !_body.GetBodyChildrenOfType(equipTarget, bodyPart.Value).Any())
-                return EquipAbility.MissingPart;
-        }
-
-        // If there's no body part associated with the slot, we can equip the clothing.
-        return EquipAbility.CanEquip;
+        var ev = new CheckEquipmentPartEvent(slot);
+        RaiseLocalEvent(equipTarget, ref ev);
+        return ev.Handled;
     }
 }
 

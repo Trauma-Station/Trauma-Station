@@ -1,4 +1,4 @@
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Whitelist;
@@ -11,7 +11,7 @@ namespace Content.Server._White.Xenomorphs.FaceHugger;
 public sealed partial class FaceHuggerComponent : Component
 {
     [DataField]
-    public (BodyPartType Type, BodyPartSymmetry Symmetry) InfectionBodyPart = (BodyPartType.Chest, BodyPartSymmetry.None);
+    public ProtoId<OrganCategoryPrototype> InfectionTarget = "Torso";
 
     [DataField]
     public DamageSpecifier DamageOnImpact = new();
@@ -27,9 +27,6 @@ public sealed partial class FaceHuggerComponent : Component
 
     [DataField]
     public string BlockingSlot = "head";
-
-    [DataField]
-    public string InfectionSlotId = "xenomorph_larva";
 
     [DataField]
     public string Slot = "mask";

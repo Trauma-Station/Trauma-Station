@@ -1,4 +1,4 @@
-using Content.Shared._Shitmed.Targeting; // Trauma
+using Content.Medical.Common.Targeting; // Trauma
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 

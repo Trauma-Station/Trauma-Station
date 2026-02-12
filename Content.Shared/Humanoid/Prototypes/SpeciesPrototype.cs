@@ -1,37 +1,4 @@
-// SPDX-FileCopyrightText: 2022 EmoGarbage404 <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Javier Guardia Fernández <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 T-Stalker <43253663+DogZeroX@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 ZeroDayDaemon <60460608+ZeroDayDaemon@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DEATHB4DEFEAT <77995199+DEATHB4DEFEAT@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Firewatch <54725557+musicmanvr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <koolthunder019@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 ScyronX <166930367+ScyronX@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 portfiend <109661617+portfiend@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 MarkerWicker <markerWicker@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Content.Shared.Body;
 using Content.Shared.Dataset;
 using Content.Shared.Humanoid.Markings;
 using Robust.Shared.Prototypes;
@@ -67,18 +34,6 @@ public sealed partial class SpeciesPrototype : IPrototype
     [DataField(required: true)]
     public bool RoundStart { get; private set; } = false;
 
-    // The below two are to avoid fetching information about the species from the entity
-    // prototype.
-
-    // This one here is a utility field, and is meant to *avoid* having to duplicate
-    // the massive SpriteComponent found in every species.
-    // Species implementors can just override SpriteComponent if they want a custom
-    // sprite layout, and leave this null. Keep in mind that this will disable
-    // sprite accessories.
-
-    [DataField("sprites")]
-    public ProtoId<HumanoidSpeciesBaseSpritesPrototype> SpriteSet { get; private set; } = default!;
-
     /// <summary>
     ///     Default skin tone for this species. This applies for non-human skin tones.
     /// </summary>
@@ -91,12 +46,6 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField]
     public int DefaultHumanSkinTone { get; private set; } = 20;
-
-    /// <summary>
-    ///     The limit of body markings that you can place on this species.
-    /// </summary>
-    [DataField("markingLimits")]
-    public ProtoId<MarkingPointsPrototype> MarkingPoints { get; private set; } = default!;
 
     /// <summary>
     ///     Humanoid species variant used by this entity.

@@ -34,6 +34,7 @@
     - BaseSimpleMob
     - MobBloodstream
     - MobFlammable
+    - BaseMobAnimal
   id: MobGondola
   description: Having no hands he embodies the Taoist principle of wu-wei (non-action) while his smiling facial expression shows his utter and complete acceptance of the world as it is.
   components:
@@ -137,9 +138,6 @@
   - type: HTN
     rootTask:
       task: IdleCompound
-  - type: Body
-    prototype: Animal
-    bodyType: Simple
   - type: Climbing
   - type: NameIdentifier
     group: GenericNumber
@@ -320,7 +318,7 @@
 - type: entity
   name: space carp
   id: MobCarpSentient
-  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat ]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat, AppearanceCarp ]
   description: It's a space carp. Used to be a person.
   components:
   - type: InputMover
@@ -399,9 +397,6 @@
     interactFailureString: petting-failure-carp
     interactFailureSound:
       path: /Audio/Effects/bite.ogg
-  - type: Body
-    prototype: Carp
-    bodyType: Simple
   - type: NightVision
     color: "#808080"
     activateSound: null

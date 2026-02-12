@@ -1,0 +1,112 @@
+## Mob
+
+- type: entity
+  abstract: true
+  parent: BaseMobBody
+  id: AppearanceLaserRaptor
+  name: laser raptor appearance
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Head: OrganRaptorHead # headswap to become a bird
+      Torso: OrganRaptorTorso
+      LegLeft: OrganRaptorLegLeft
+      LegRight: OrganRaptorLegRight
+      FootLeft: OrganRaptorFootLeft
+      FootRight: OrganRaptorFootRight
+      # Organs
+      Eyes: OrganLaserEyes
+      Lungs: OrganAnimalLungs
+      Heart: OrganAnimalHeart
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganRaptor
+  suffix: raptor
+
+- type: entity
+  abstract: true
+  parent: [ OrganRaptor, OrganAnimalSpriteExternal ]
+  id: OrganRaptorExternal
+
+- type: entity
+  abstract: true
+  parent: [ OrganRaptor, OrganSpriteHumanInternal ]
+  id: OrganRaptorInternal
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseHead, OrganRaptorExternal ]
+  id: OrganRaptorHead
+  components:
+  - type: BodyPart
+    slots:
+    - Eyes
+    # head too small for a brain :)
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganRaptorExternal ]
+  id: OrganRaptorTorso
+  components:
+  - type: BodyPart
+    slots:
+    # Parts
+    - Head
+    - LegLeft
+    - LegRight
+    # Organs
+    - Lungs
+    - Heart
+    - Stomach
+    - Liver
+    - Kidneys
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganRaptorExternal ]
+  id: OrganRaptorLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganRaptorExternal ]
+  id: OrganRaptorLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganRaptorExternal ]
+  id: OrganRaptorFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganRaptorExternal ]
+  id: OrganRaptorFootRight
+
+## Organs
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganRaptorInternal, BaseMajorContraband ] #it's a fuckin laser
+  id: OrganLaserEyes
+  name: laser raptor eyes
+  components:
+  - type: OrganComponents
+    onAdd:
+    - type: BatteryAmmoProvider
+      proto: RedLightLaser
+      fireCost: 50
+      examinable: false
+    - type: BatterySelfRecharger
+      autoRechargeRate: 25
+    - type: Battery
+      maxCharge: 100
+      startingCharge: 0
+    - type: Gun
+      fireRate: 1
+      useKey: false
+      selectedMode: SemiAuto
+      availableModes:
+      - SemiAuto
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg

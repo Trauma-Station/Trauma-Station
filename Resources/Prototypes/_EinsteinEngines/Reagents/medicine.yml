@@ -12,7 +12,7 @@
   flavor: medicine
   color: "#35295f"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:ModifyBleed
         conditions:

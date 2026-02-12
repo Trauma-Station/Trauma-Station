@@ -12,15 +12,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.MartialArts;
-using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Clothing.Components;
-using Content.Server.Body.Components;
+using Content.Medical.Common.Body;
+using Content.Shared.FixedPoint;
 using Content.Server.Ghost.Roles.Components;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared.Body;
 using Content.Shared.Body.Components;
-using Content.Shared.Body.Organ;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Cloning;
 using Content.Shared.Coordinates;
@@ -44,6 +42,7 @@ namespace Content.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
+    private static readonly EntProtoId FleshStomach = "OrganFleshHereticStomach";
     private static readonly ProtoId<CloningSettingsPrototype> Settings = "FleshMimic";
     private static readonly SoundSpecifier MimicSpawnSound = new SoundCollectionSpecifier("gib");
 
@@ -53,30 +52,28 @@ public sealed partial class HereticAbilitySystem
 
         SubscribeLocalEvent<FleshPassiveComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<FleshPassiveComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<FleshPassiveComponent, GetBodyOrganOverrideEvent<StomachComponent>>(OnGetStomach);
         SubscribeLocalEvent<FleshPassiveComponent, ConsumingFoodEvent>(OnConsumingFood);
-        SubscribeLocalEvent<FleshPassiveComponent, ExcludeMetabolismGroupsEvent>(OnExclude);
         SubscribeLocalEvent<FleshPassiveComponent, ComponentShutdown>(OnShutdown);
     }
 
     private void OnShutdown(Entity<FleshPassiveComponent> ent, ref ComponentShutdown args)
     {
-        if (ent.Comp.StomachContainer?.ContainedEntity is not { } stomach || TerminatingOrDeleted(stomach))
+        if (ent.Comp.Stomach is not { } stomach || TerminatingOrDeleted(stomach))
             return;
 
         QueueDel(stomach);
     }
 
+    /* TODO SHITMED: something better wtf is this
     private void OnExclude(Entity<FleshPassiveComponent> ent, ref ExcludeMetabolismGroupsEvent args)
     {
-        var stomach = ResolveStomach(ent);
-        if (stomach == null || args.Metabolizer == stomach.Value.Owner)
+        if (ResolveStomach(ent) is not {} stomach || args.Metabolizer == stomach)
             return;
 
         args.Groups ??= [];
         args.Groups.Add("Food");
         args.Groups.Add("Drink");
-    }
+    }*/
 
     private void OnConsumingFood(Entity<FleshPassiveComponent> ent, ref ConsumingFoodEvent args)
     {
@@ -114,10 +111,10 @@ public sealed partial class HereticAbilitySystem
             multiplier *= ent.Comp.MobMultiplier;
         if (HasComp<BrainComponent>(args.Food))
             multiplier *= ent.Comp.BrainMultiplier;
-        if (HasComp<BodyPartComponent>(args.Food))
-            multiplier *= ent.Comp.BodyPartMultiplier;
-        if (HasComp<OrganComponent>(args.Food))
+        if (HasComp<InternalOrganComponent>(args.Food))
             multiplier *= ent.Comp.OrganMultiplier;
+        else if (HasComp<OrganComponent>(args.Food)) // hack but i dont care
+            multiplier *= ent.Comp.BodyPartMultiplier;
         if (HasComp<HumanOrganComponent>(args.Food))
             multiplier *= ent.Comp.HumanMultiplier;
         if (_tag.HasTag(args.Food, ent.Comp.MeatTag))
@@ -146,57 +143,25 @@ public sealed partial class HereticAbilitySystem
         Dirty(uid, multComp);
     }
 
-    private void OnGetStomach(Entity<FleshPassiveComponent> ent, ref GetBodyOrganOverrideEvent<StomachComponent> args)
-    {
-        var stomach = ResolveStomach(ent);
-        if (stomach != null)
-            args.Organ = stomach;
-    }
-
     private void OnMapInit(Entity<FleshPassiveComponent> ent, ref MapInitEvent args)
     {
         ResolveStomach(ent);
     }
 
-    private Entity<StomachComponent, OrganComponent>? ResolveStomach(Entity<FleshPassiveComponent> ent)
+    private EntityUid? ResolveStomach(Entity<FleshPassiveComponent> ent)
     {
-        EntityUid? stomach;
-        StomachComponent? stomachComp;
-        OrganComponent? organ;
-        ent.Comp.StomachContainer = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.StomachContainerId);
-        if (ent.Comp.StomachContainer.ContainedEntity != null)
-        {
-            stomach = ent.Comp.StomachContainer.ContainedEntity.Value;
-            if (TryComp(stomach.Value, out stomachComp) && TryComp(stomach, out organ))
-                return (stomach.Value, stomachComp, organ);
+        if (ent.Comp.Stomach is {} stomach)
+            return stomach;
 
-            QueueDel(stomach);
+        var uid = Spawn(FleshStomach, Transform(ent).Coordinates);
+        if (!_body.ReplaceOrgan(ent.Owner, uid))
+        {
+            // you won't have a stomach left if it failed for some reason, sorry!
+            Del(uid);
+            return null;
         }
 
-        var solName = StomachSystem.DefaultSolutionName;
-
-        if (!TrySpawnInContainer(null, ent, ent.Comp.StomachContainerId, out stomach))
-            return null;
-
-        var solutionContainer = EnsureComp<SolutionContainerManagerComponent>(stomach.Value);
-        _solution.EnsureSolutionPrototype((stomach.Value, solutionContainer), solName, 1984, null, out _);
-        _solution.EnsureAllSolutions((stomach.Value, solutionContainer));
-        stomachComp = EnsureComp<StomachComponent>(stomach.Value);
-        stomachComp.DigestionDelay = TimeSpan.FromSeconds(5);
-        organ = EnsureComp<OrganComponent>(stomach.Value);
-        organ.IntegrityCap = 1984;
-        organ.OrganIntegrity = 1984;
-        organ.Body = ent;
-        Dirty(stomach.Value, organ);
-        var metabolizer = EnsureComp<MetabolizerComponent>(stomach.Value);
-        metabolizer.UpdateInterval = TimeSpan.FromMilliseconds(100);
-        metabolizer.MaxPoisonsProcessable = 10;
-        metabolizer.MetabolismGroups = [new() { Id = "Food" }, new() { Id = "Drink" }];
-        metabolizer.MetabolizerTypes = ["Vox"];
-        metabolizer.SolutionOnBody = false;
-        metabolizer.RemoveEmpty = true;
-        metabolizer.SolutionName = solName;
-        return (stomach.Value, stomachComp, organ);
+        return ent.Comp.Stomach = uid;
     }
 
     private void OnDamageChanged(Entity<FleshPassiveComponent> ent, ref DamageChangedEvent args)
@@ -225,7 +190,7 @@ public sealed partial class HereticAbilitySystem
             ent.Comp.TrackedDamage = FixedPoint2.Zero;
             foreach (var mimic in ent.Comp.FleshMimics)
             {
-                IHateWoundMed(mimic, AllDamage * toHeal, toHeal, toHeal, toHeal, null, null);
+                IHateWoundMed(mimic, AllDamage * toHeal, null, null);
             }
 
             return;
@@ -283,7 +248,7 @@ public sealed partial class HereticAbilitySystem
         minion.BoundHeretic = user;
         Dirty(clone.Value, minion);
 
-        var ghoul = _compFactory.GetComponent<GhoulComponent>();
+        var ghoul = Factory.GetComponent<GhoulComponent>();
         ghoul.GiveBlade = giveBlade;
         ghoul.TotalHealth = hp;
         ghoul.DropOrgansOnDeath = false;

@@ -1,8 +1,8 @@
 // <Trauma>
 using Content.Lavaland.Common.Mobs;
 using Content.Lavaland.Common.Weapons.Marker;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 // </Trauma>
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;

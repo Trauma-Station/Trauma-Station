@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Shared.Access.Systems;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Events;
 using Content.Shared.IdentityManagement;
@@ -16,19 +15,19 @@ namespace Content.Trauma.Shared.Medical.Hypoport;
 public sealed class HypoportSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
 
-    private EntityQuery<HypoportComponent> _query;
     private EntityQuery<IgnoreHypoportComponent> _ignoreQuery;
     private EntityQuery<InjectorComponent> _injectorQuery;
     private EntityQuery<PullerComponent> _pullerQuery;
+
+    public static ProtoId<OrganCategoryPrototype> HypoportCategory = "Hypoport";
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _query = GetEntityQuery<HypoportComponent>();
         _ignoreQuery = GetEntityQuery<IgnoreHypoportComponent>();
         _injectorQuery = GetEntityQuery<InjectorComponent>();
         _pullerQuery = GetEntityQuery<PullerComponent>();
@@ -62,25 +61,23 @@ public sealed class HypoportSystem : EntitySystem
             return;
         }
 
-        // now find a hypoport that allows injection
-        LocId? message = null;
-        foreach (var (id, _) in _body.GetBodyOrgans(ent, ent.Comp))
+        // require a hypoport to be installed
+        if (_body.GetOrgan(target, HypoportCategory) is not {} hypoport)
         {
-            if (!_query.HasComp(id))
-                continue;
-
-            // check if this hypoport is allowed to be used
-            var ev = new HypoportInjectAttemptEvent(target, user, used);
-            RaiseLocalEvent(id, ref ev);
-            if (!ev.Cancelled)
-                return; // this port is valid, let the event go through
-
-            // use the first failing hypoport's message incase there are multiple (evil)
-            message ??= ev.InjectMessageOverride;
+            args.OverrideMessage = Loc.GetString("hypoport-fail-missing", ("target", targetIdent));
+            args.Cancel();
+            return;
         }
 
-        // no valid port found. say there were none unless an existing port prevented injection
-        args.OverrideMessage = Loc.GetString(message ?? "hypoport-fail-missing", ("target", targetIdent));
+        // now check if it allows injection
+        var ev = new HypoportInjectAttemptEvent(target, user, used);
+        RaiseLocalEvent(hypoport, ref ev);
+        if (!ev.Cancelled)
+            return; // allowed to go ahead
+
+        // port prevented injection
+        if (ev.InjectMessageOverride is {} message)
+            args.OverrideMessage = Loc.GetString(message, ("target", targetIdent));
         args.Cancel();
     }
 
@@ -91,7 +88,7 @@ public sealed class HypoportSystem : EntitySystem
 
         if (!_accessReader.IsAllowed(args.User, ent.Owner))
         {
-            args.InjectMessageOverride = "hypoport-fail-access";
+            args.InjectMessageOverride ??= "hypoport-fail-access";
             args.Cancelled = true;
         }
     }

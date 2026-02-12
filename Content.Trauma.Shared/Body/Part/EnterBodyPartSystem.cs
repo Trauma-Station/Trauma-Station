@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Shared.Actions;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
@@ -9,16 +9,18 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Trauma.Common.Body.Part;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Body.Part;
 
 public sealed class EnterBodyPartSystem : EntitySystem
 {
+    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IngestionSystem _ingestion = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -86,9 +88,10 @@ public sealed class EnterBodyPartSystem : EntitySystem
             return; // it will do a popup internally
 
         var targetName = Identity.Entity(target, EntityManager);
-        if (_body.FindPart(target, ent.Comp.Part) is not {} part)
+        if (_body.GetOrgan(target, ent.Comp.Category) is not {} part)
         {
-            _popup.PopupClient(Loc.GetString("enter-body-part-no-part", ("target", targetName), ("part", ent.Comp.Part)), user, user);
+            var partName = _proto.Index(ent.Comp.Category).Name;
+            _popup.PopupClient(Loc.GetString("enter-body-part-no-part", ("target", targetName), ("part", partName)), user, user);
             return; // nothing to enter
         }
 
@@ -96,7 +99,7 @@ public sealed class EnterBodyPartSystem : EntitySystem
         RaiseLocalEvent(part, ref ev);
         if (ev.Container is not {} container)
         {
-            Log.Error("{ToPrettyString(ent)} tried to enter part {ToPrettyString(part)} of {ToPrettyString(target)} with no cavity");
+            Log.Error($"{ToPrettyString(ent)} tried to enter part {ToPrettyString(part)} of {ToPrettyString(target)} with no cavity");
             _popup.PopupClient(Loc.GetString("enter-body-part-no-cavity"), user, user);
             return; // shitcode
         }

@@ -1,8 +1,9 @@
 using System.Linq;
 using Content.Goobstation.Common.Weapons.Ranged;
+using Content.Medical.Common.Body;
+using Content.Medical.Shared.Body;
 using Content.Shared._Goobstation.Wizard.Projectiles;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Timing;
 
@@ -10,7 +11,8 @@ namespace Content.Goobstation.Shared.SmartLinkImplant;
 
 public sealed class SmartLinkSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly BodyPartSystem _part = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -18,32 +20,36 @@ public sealed class SmartLinkSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SmartLinkArmComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<SmartLinkArmComponent, BodyPartAddedEvent>(OnAttach);
-        SubscribeLocalEvent<SmartLinkArmComponent, BodyPartRemovedEvent>(OnRemove);
+        SubscribeLocalEvent<SmartLinkArmComponent, OrganGotInsertedEvent>(OnAttach);
+        SubscribeLocalEvent<SmartLinkArmComponent, OrganGotRemovedEvent>(OnRemove);
 
         SubscribeLocalEvent<SmartLinkComponent, AmmoShotUserEvent>(OnShot);
     }
 
     private void OnInit(Entity<SmartLinkArmComponent> ent, ref ComponentInit args) => UpdateComp(ent);
 
-    private void OnAttach(Entity<SmartLinkArmComponent> ent, ref BodyPartAddedEvent args) => UpdateComp(ent);
+    private void OnAttach(Entity<SmartLinkArmComponent> ent, ref OrganGotInsertedEvent args) => UpdateComp(ent);
 
-    private void OnRemove(Entity<SmartLinkArmComponent> ent, ref BodyPartRemovedEvent args) => UpdateComp(ent);
+    private void OnRemove(Entity<SmartLinkArmComponent> ent, ref OrganGotRemovedEvent args) => UpdateComp(ent);
 
     private void UpdateComp(Entity<SmartLinkArmComponent> ent)
     {
-        if (!TryComp<BodyPartComponent>(ent, out var part)
-            || part.Body == null)
+        if (_body.GetBody(ent.Owner) is not {} body)
             return;
 
-        var arms = _body.GetBodyChildrenOfType(part.Body.Value, BodyPartType.Arm);
-        if (arms.Count() != arms.Where(x => HasComp<SmartLinkArmComponent>(x.Id)).Count())
+        var arms = 0;
+        var linked = 0;
+        foreach (var part in _part.GetBodyParts(body, BodyPartType.Arm))
         {
-            RemComp<SmartLinkComponent>(part.Body.Value);
-            return;
+            arms++;
+            if (HasComp<SmartLinkArmComponent>(part))
+                linked++;
         }
+        // all arms must be smart linked, and you need at least 1 arm
+        if (linked < 1 || linked < arms)
+            RemComp<SmartLinkComponent>(body);
         else
-            EnsureComp<SmartLinkComponent>(part.Body.Value);
+            EnsureComp<SmartLinkComponent>(body);
     }
 
     private void OnShot(Entity<SmartLinkComponent> ent, ref AmmoShotUserEvent args)
@@ -71,6 +77,7 @@ public sealed class SmartLinkSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
         var query = EntityQueryEnumerator<DelayedHomingProjectileComponent>();
         while (query.MoveNext(out var ent, out var comp))
         {

@@ -5,7 +5,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction.Events;

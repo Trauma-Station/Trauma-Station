@@ -1,8 +1,8 @@
 // <Trauma>
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared.FixedPoint;
 using Content.Shared._Goobstation.Wizard.Chuuni;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared._Shitmed.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Magic.Components;
 // </Trauma>

@@ -2,14 +2,13 @@ using System.Linq;
 using Content.Shared.FixedPoint;
 using Content.Server._EinsteinEngines.Language;
 using Content.Server.Administration.Managers;
-using Content.Server.Body.Components;
-using Content.Server.Body.Systems;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
+using Content.Medical.Shared.Traumas;
+using Content.Medical.Shared.Wounds;
 using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
@@ -64,43 +63,7 @@ public sealed class XenomorphSystem : SharedXenomorphSystem
             _damageable.TryChangeDamage(uid, xenomorph.WeedHeal);
 
             // Process bleeding and blood loss in parallel with cached values
-            ProcessBleeding(uid, body);
             ProcessBloodLoss(uid, bloodstream);
-        }
-    }
-
-    // Heal/Seal any bleeding parts over time.
-    private void ProcessBleeding(EntityUid uid, BodyComponent body)
-    {
-        const float bleedReduction = 0.5f;
-        var reduction = FixedPoint2.New(bleedReduction);
-
-        // Get Bodyparts
-        var bodyParts = _body.GetBodyChildren(uid, body).ToList();
-
-        foreach (var part in bodyParts)
-        {
-            // Process all wounds in this part
-            foreach (var wound in _wounds.GetWoundableWounds(part.Id))
-            {
-                if (!TryComp<BleedInflicterComponent>(wound, out var bleedComp) ||
-                    !bleedComp.IsBleeding ||
-                    bleedComp.BleedingAmountRaw <= FixedPoint2.Zero)
-                {
-                    continue;
-                }
-
-                // Calculate new bleed amount
-                var newBleed = FixedPoint2.Max(FixedPoint2.Zero, bleedComp.BleedingAmountRaw - reduction);
-                var amountHealed = bleedComp.BleedingAmountRaw - newBleed;
-
-                if (amountHealed <= FixedPoint2.Zero)
-                    continue;
-
-                // Apply changes
-                bleedComp.BleedingAmountRaw = newBleed;
-                Dirty(wound, bleedComp);
-            }
         }
     }
 
@@ -110,6 +73,7 @@ public sealed class XenomorphSystem : SharedXenomorphSystem
         if (_bloodstream.GetBloodLevel((uid, bloodstream)) > 0.99f)
             return;
 
+        _bloodstream.TryModifyBloodLevel((uid, bloodstream), 0.5);
         var bloodloss = new DamageSpecifier();
         bloodloss.DamageDict["Bloodloss"] = -0.2f;  // Heal blood per tick
         _damageable.TryChangeDamage(uid, bloodloss);

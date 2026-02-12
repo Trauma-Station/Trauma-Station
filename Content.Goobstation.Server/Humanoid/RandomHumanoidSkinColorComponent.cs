@@ -1,3 +1,6 @@
+using Content.Shared.Decals;
+using Robust.Shared.Prototypes;
+
 namespace Content.Goobstation.Server.Humanoid;
 
 /// <summary>
@@ -10,5 +13,5 @@ public sealed partial class RandomHumanoidSkinColorComponent : Component
     ///     The color palette to use.
     /// </summary>
     [DataField(required: true)]
-    public string Palette;
+    public ProtoId<ColorPalettePrototype> Palette;
 }

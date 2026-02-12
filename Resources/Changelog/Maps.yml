@@ -89,3 +89,10 @@ Entries:
   id: 7
   time: '2026-02-02T08:10:05.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/614
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Mapped deep fryer on every map except fland, someone else is doing fland
+  id: 8
+  time: '2026-02-07T15:29:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/652

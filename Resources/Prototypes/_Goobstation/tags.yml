@@ -224,9 +224,6 @@
   id: ExtendedEmergencyPlasmaTank
 
 - type: Tag
-  id: Eyes
-
-- type: Tag
   id: EnergyMagAmmo
 
 - type: Tag
@@ -302,9 +299,6 @@
   id: HarpyEmotes
 
 - type: Tag
-  id: Heart
-
-- type: Tag
   id: HereticBlade
 
 - type: Tag
@@ -359,9 +353,6 @@
   id: Keyring
 
 - type: Tag
-  id: Kidneys
-
-- type: Tag
   id: LaserLMG
 
 - type: Tag
@@ -370,18 +361,12 @@
 - type: Tag
   id: Lighter # for whitelisted cig pack strorage
 
-- type: Tag
-  id: Liver
-
 # tag roundstart rules that should be run alone
 - type: Tag
   id: LoneRunRule
 
 - type: Tag
   id: LoneOpsUplink
-
-- type: Tag
-  id: Lungs
 
 - type: Tag
   id: MagazineAntiMateriel
@@ -577,9 +562,6 @@
 
 - type: Tag
   id: Steel
-
-- type: Tag
-  id: Stomach
 
 - type: Tag
   id: StunBaton # for heretic ritual

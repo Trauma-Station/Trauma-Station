@@ -30,12 +30,7 @@
   equipment:
     id: ChemistryPDA
     ears: ClothingHeadsetMedical
-    belt: ChemBagFilled
-    pocket1: HandLabeler
-    eyes: ClothingEyesGlassesChemical
-  #storage:
-    #back:
-    #- Stuff
+    belt: ChemBagFilled # Goob
 
 - type: chameleonOutfit
   id: ChemistChameleonOutfit

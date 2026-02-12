@@ -51,7 +51,7 @@ public sealed class BindSoulSystem : SharedBindSoulSystem
         if (soulBound.Name != string.Empty)
             Meta.SetEntityName(ent, soulBound.Name);
 
-        if (TryComp(ent, out HumanoidAppearanceComponent? humanoid))
+        if (TryComp(ent, out HumanoidProfileComponent? humanoid))
         {
             if (soulBound.Age != null)
                 humanoid.Age = soulBound.Age.Value;

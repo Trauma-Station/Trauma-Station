@@ -15,7 +15,7 @@
 
 using Content.Goobstation.Common.Bloodstream;
 using Content.Server.Heretic.Components.PathSpecific;
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
@@ -23,7 +23,8 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components; // Shitmed Change
+using Content.Medical.Shared.Wounds; // Shitmed Change
+
 namespace Content.Server.Heretic.EntitySystems.PathSpecific;
 
 public sealed class ChampionStanceSystem : EntitySystem
@@ -43,8 +44,8 @@ public sealed class ChampionStanceSystem : EntitySystem
         SubscribeLocalEvent<ChampionStanceComponent, ModifySlowOnDamageSpeedEvent>(OnChampionModifySpeed);
 
         // if anyone is reading through and does not have EE newmed you can remove these handlers
-        SubscribeLocalEvent<ChampionStanceComponent, BodyPartAddedEvent>(OnBodyPartAdded);
-        SubscribeLocalEvent<ChampionStanceComponent, BodyPartRemovedEvent>(OnBodyPartRemoved);
+        SubscribeLocalEvent<ChampionStanceComponent, OrganInsertedIntoEvent>(OnOrganInsertedInto);
+        SubscribeLocalEvent<ChampionStanceComponent, OrganRemovedFromEvent>(OnOrganRemovedFrom);
     }
 
     private void OnChampionModifySpeed(Entity<ChampionStanceComponent> ent, ref ModifySlowOnDamageSpeedEvent args)
@@ -99,22 +100,23 @@ public sealed class ChampionStanceSystem : EntitySystem
         args.Value *= 0.4f;
     }
 
-    private void OnBodyPartAdded(Entity<ChampionStanceComponent> ent, ref BodyPartAddedEvent args)
+    private void OnOrganInsertedInto(Entity<ChampionStanceComponent> ent, ref OrganInsertedIntoEvent args)
     {
         // can't touch this
-        if (!TryComp(args.Part, out WoundableComponent? woundable))
+        if (!TryComp(args.Organ, out WoundableComponent? woundable))
             return;
 
         woundable.CanRemove = false;
-        Dirty(args.Part);
+        Dirty(args.Organ, woundable);
     }
-    private void OnBodyPartRemoved(Entity<ChampionStanceComponent> ent, ref BodyPartRemovedEvent args)
+
+    private void OnOrganRemovedFrom(Entity<ChampionStanceComponent> ent, ref OrganRemovedFromEvent args)
     {
         // can touch this
-        if (!TryComp(args.Part, out WoundableComponent? woundable))
+        if (!TryComp(args.Organ, out WoundableComponent? woundable))
             return;
 
         woundable.CanRemove = true;
-        Dirty(args.Part);
+        Dirty(args.Organ, woundable);
     }
 }

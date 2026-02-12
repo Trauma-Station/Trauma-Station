@@ -3,10 +3,8 @@
 - type: entityEffect
   id: HeartAttack
   conditions:
-  - !type:HasOrgan # need a heart to have a heart attack
-    whitelist:
-      components:
-      - Heart
+  - !type:HasOrgan
+    organCategory: Heart # need a heart to have a heart attack
   effects:
   - !type:PopupMessage
     visualType: LargeCaution

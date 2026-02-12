@@ -15,8 +15,12 @@
     - state: deep_fryer_closed_big
       visible: false
       map: ["fryer_closed_big"]
+  - type: Transform
+    noRot: false
   # Deep fryer stuff
   - type: DeepFryer
+    containersToRemove:
+    - storagebase
     componentsToAdd:
     - type: DeepFried
     - type: SolutionContainerManager
@@ -30,7 +34,8 @@
       flavors:
       - DeepFried
       - oily
-    componentsToRemove: # I love that you have to map the variables even if you're just removing them
+    componentsToRemoveObjects:
+    - type: Storage
     - type: Tool
     - type: RadioSpeaker
     - type: RadioMicrophone
@@ -38,7 +43,6 @@
     - type: AmmoSelector
     - type: Multishot
     - type: GunWieldBonus
-    - type: Perishable
     - type: MeleeWeapon
       damage: {}
     - type: RotInto
@@ -54,6 +58,8 @@
     - type: UserInterface
     - type: HealthAnalyzer
     - type: CablePlacer
+    componentsToRemove:
+    - type: Perishable
   # -----------------
   - type: Electrified
     enabled: false

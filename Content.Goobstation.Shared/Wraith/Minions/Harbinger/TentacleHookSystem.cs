@@ -1,5 +1,5 @@
 using Content.Goobstation.Shared.Wraith.Events;
-using Content.Shared.Body.Components;
+using Content.Shared.Body;
 using Content.Shared.Physics;
 using Content.Shared.Projectiles;
 using Content.Shared.StatusEffectNew;

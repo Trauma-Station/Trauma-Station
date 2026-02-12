@@ -23,6 +23,7 @@ using Content.Shared.Emag.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.Overlays;
 using Content.Shared.Radio.Components;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
@@ -53,6 +54,9 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
 
+    private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov";
+
+    /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
@@ -361,6 +365,11 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
         while (query.MoveNext(out var update))
         {
+            if (TryComp<ShowCrewIconsComponent>(update, out var crewIconComp))
+            {
+                crewIconComp.UncertainCrewBorder = DefaultCrewLawset != provider.Laws;
+                Dirty(update, crewIconComp);
+            }
             SetLaws(lawset, update, provider.LawUploadSound); // Trauma - lawset itself is a List now
 
             // Corvax-Next-AiRemoteControl-Start

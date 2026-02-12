@@ -12,7 +12,7 @@
   - type: SurgeryPartCondition
     parts: [ Head ]
   - type: SurgeryOrganSlotCondition
-    organSlot: hypoport
+    organSlot: Hypoport
 
 - type: entity
   parent: BaseSurgeryInsertOrgan
@@ -26,10 +26,9 @@
     - SurgeryStepInsertHypoport
     - SurgeryStepSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: hypoport
+    organSlot: Hypoport
   - type: SurgeryOrganCondition
-    organ:
-    - type: Hypoport
+    organ: Hypoport
 
 - type: entity
   parent: BaseSurgeryRemoveOrgan
@@ -37,5 +36,4 @@
   name: Extract Hypoport
   components:
   - type: SurgeryOrganCondition
-    organ:
-    - type: Hypoport
+    organ: Hypoport

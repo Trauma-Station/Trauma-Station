@@ -329,28 +329,6 @@
   - !type:ListingLimitedStockCondition
     stock: 1
 
-#- type: listing - Trauma, need to be readable for how strong it is, read: northstars
-#  id: UplinkGlovesKnuckleDusters
-#  name: uplink-gloves-knuckleduster-name
-#  description: uplink-gloves-knuckleduster-desc
-#  icon: { sprite: _Goobstation/Clothing/Hands/Gloves/knuckleduster.rsi, state: syndicateknuckleduster }
-#  productEntity: ClothingHandsKnuckleDustersSyndicate
-#  cost:
-#    Telecrystal: 20
-#  categories:
-#  - UplinkWeaponry
-
-#- type: listing - Trauma, slop item
-#  id: UplinkSyndicateDisabler
-#  name: uplink-syndicate-disabler-name
-#  description: uplink-syndicate-disabler-desc
-#  icon: { sprite: _EinsteinEngines/Objects/Weapons/Guns/Battery/syndicate-disabler.rsi, state: base }
-#  productEntity: WeaponDisablerSyndicate
-#  cost:
-#    Telecrystal: 20
-#  categories:
-#  - UplinkWeaponry
-
 - type: listing
   id: UplinkFireAxeFlaming
   name: uplink-fire-axe-flaming-name
@@ -1059,28 +1037,6 @@
   productEntity: GrenadeMPAPERS
   cost:
     Telecrystal: 3
-  categories:
-  - UplinkAmmo
-
-- type: listing
-  id: UplinkMagazineShotgun
-  name: uplink-shotgun-magazine-name
-  description: uplink-shotgun-magazine-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: pellets }
-  productEntity: MagazineShotgun
-  cost:
-    Telecrystal: 5
-  categories:
-  - UplinkAmmo
-
-- type: listing
-  id: UplinkMagazineShotgunSlug
-  name: uplink-shotgun-magazine-slug-name
-  description: uplink-shotgun-magazine-slug-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: slug }
-  productEntity: MagazineShotgunSlug
-  cost:
-    Telecrystal: 4 # So little total damage
   categories:
   - UplinkAmmo
 

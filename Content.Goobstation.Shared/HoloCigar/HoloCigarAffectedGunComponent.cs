@@ -13,24 +13,18 @@ namespace Content.Goobstation.Shared.HoloCigar;
 [RegisterComponent]
 public sealed partial class HoloCigarAffectedGunComponent : Component
 {
-    [ViewVariables]
-    public EntityUid GunOwner = EntityUid.Invalid;
+    [DataField]
+    public EntityUid GunOwner;
 
-    [ViewVariables]
-    public bool WasOriginallyMultishot = false;
+    [DataField]
+    public bool WasOriginallyMultishot;
 
-    [ViewVariables]
+    [DataField]
     public float OriginalMissChance;
 
-    [ViewVariables]
+    [DataField]
     public float OriginalSpreadModifier;
 
-    [ViewVariables]
+    [DataField]
     public float OriginalSpreadAddition;
-
-    [ViewVariables]
-    public float OriginalHandDamageAmount;
-
-    [ViewVariables]
-    public float OriginalStaminaDamage;
 }

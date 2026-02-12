@@ -1,10 +1,10 @@
 // <Trauma>
 using Content.Goobstation.Common.Body;
-using Content.Shared._Shitmed.Body.Organ;
-using Content.Shared.Body.Systems;
+using Content.Medical.Common.Body;
+using Content.Shared.Body;
+using Robust.Shared.Timing;
 // </Trauma>
 using Content.Shared.Body.Components;
-using Content.Shared.Body.Events;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -16,7 +16,8 @@ namespace Content.Shared.Body.Systems;
 public sealed class BrainSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     // </Trauma>
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
 
@@ -24,8 +25,8 @@ public sealed class BrainSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<BrainComponent, OrganAddedToBodyEvent>(OnAdded); // Shitmed - actual event handler
-        SubscribeLocalEvent<BrainComponent, OrganRemovedFromBodyEvent>(OnRemoved); // Shitmed - actual event handler
+        SubscribeLocalEvent<BrainComponent, OrganGotInsertedEvent>(OnAdded); // Shitmed - actual event handler
+        SubscribeLocalEvent<BrainComponent, OrganGotRemovedEvent>(OnRemoved); // Shitmed - actual event handler
         SubscribeLocalEvent<BrainComponent, PointAttemptEvent>(OnPointAttempt);
     }
 
@@ -47,11 +48,11 @@ public sealed class BrainSystem : EntitySystem
     }
 
     // <Shitmed> - do nothing for lings, use Active logic and don't do anything if a body already has a brain
-    private void OnRemoved(EntityUid uid, BrainComponent brain, ref OrganRemovedFromBodyEvent args)
+    private void OnRemoved(EntityUid uid, BrainComponent brain, ref OrganGotRemovedEvent args)
     {
         // <Goob>
         var attemptEv = new BeforeBrainRemovedEvent();
-        RaiseLocalEvent(args.OldBody, ref attemptEv);
+        RaiseLocalEvent(args.Target, ref attemptEv);
 
         if (attemptEv.Blocked)
             return;
@@ -59,20 +60,20 @@ public sealed class BrainSystem : EntitySystem
 
         brain.Active = false;
         Dirty(uid, brain);
-        if (!HasBrain(args.OldBody))
+        if (!HasBrain(args.Target))
         {
             // Prevents revival, should kill the user within a given timespan too.
-            if (!TerminatingOrDeleted(args.OldBody))
-                EnsureComp<DebrainedComponent>(args.OldBody);
-            HandleMind(uid, args.OldBody);
+            if (!TerminatingOrDeleted(args.Target) && !_timing.ApplyingState)
+                EnsureComp<DebrainedComponent>(args.Target);
+            HandleMind(uid, args.Target);
         }
     }
 
-    private void OnAdded(EntityUid uid, BrainComponent brain, ref OrganAddedToBodyEvent args)
+    private void OnAdded(EntityUid uid, BrainComponent brain, ref OrganGotInsertedEvent args)
     {
         // <Goob>
         var attemptEv = new BeforeBrainAddedEvent();
-        RaiseLocalEvent(args.Body, ref attemptEv);
+        RaiseLocalEvent(args.Target, ref attemptEv);
 
         if (attemptEv.Blocked)
             return;
@@ -80,10 +81,10 @@ public sealed class BrainSystem : EntitySystem
 
         brain.Active = true;
         Dirty(uid, brain);
-        if (HasBrain(args.Body))
+        if (HasBrain(args.Target))
         {
-            RemComp<DebrainedComponent>(args.Body);
-            HandleMind(args.Body, uid);
+            RemComp<DebrainedComponent>(args.Target);
+            HandleMind(args.Target, uid);
         }
     }
 
@@ -95,9 +96,10 @@ public sealed class BrainSystem : EntitySystem
         if (HasComp<BrainComponent>(entity)) // sentient brain...
             return true;
 
-        foreach (var (organ, _) in _body.GetBodyOrgans(entity, body))
+        // TODO NUBODY: make this an event
+        foreach (var brain in _body.GetOrgans<BrainComponent>((entity, body)))
         {
-            if (TryComp<BrainComponent>(organ, out var brain) && brain.Active)
+            if (brain.Comp.Active)
                 return true;
         }
 

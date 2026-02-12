@@ -80,6 +80,10 @@
   components:
   - type: Surgery
     requirement: SurgeryXenoExposeEndoskeleton
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepInsertOrgan
+    - SurgeryStepXenoSealOrganWound
   - type: SurgeryPartCondition
     parts: [ Head ]
   - type: SurgeryOrganCondition
@@ -93,52 +97,34 @@
   id: SurgeryXenoInsertEyes
   name: Insert Xeno Eyes
   components:
-  - type: Surgery
-    steps:
-    - SurgeryStepXenoOpenIncision
-    - SurgeryStepInsertEyes
-    - SurgeryStepXenoSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: eyes
+    organSlot: Eyes
   - type: SurgeryOrganCondition
-    organ:
-    - type: Eyes
+    organ: Eyes
 
 - type: entity
   parent: BaseSurgeryXenoInsertOrgan
   id: SurgeryXenoInsertLiver
   name: Insert Xeno Liver
   components:
-  - type: Surgery
-    steps:
-    - SurgeryStepXenoOpenIncision
-    - SurgeryStepInsertLiver
-    - SurgeryStepXenoSealOrganWound
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Torso ]
   - type: SurgeryOrganSlotCondition
-    organSlot: liver
+    organSlot: Liver
   - type: SurgeryOrganCondition
-    organ:
-    - type: Liver
+    organ: Liver
 
 - type: entity
   parent: BaseSurgeryXenoInsertOrgan
   id: SurgeryXenoInsertStomach
   name: Insert Xeno Stomach
   components:
-  - type: Surgery
-    steps:
-    - SurgeryStepXenoOpenIncision
-    - SurgeryStepInsertOrgan
-    - SurgeryStepXenoSealOrganWound
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Torso ]
   - type: SurgeryOrganSlotCondition
-    organSlot: stomach
+    organSlot: Stomach
   - type: SurgeryOrganCondition
-    organ:
-    - type: Stomach
+    organ: Stomach
 
 ## Xeno Organs
 
@@ -154,10 +140,9 @@
     - SurgeryStepInsertHiveNode
     - SurgeryStepXenoSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: hive_node
+    organSlot: HiveNode
   - type: SurgeryOrganCondition
-    organ:
-    - type: HiveNode
+    organ: HiveNode
 
 - type: entity
   parent: BaseSurgeryXenoInsertOrgan
@@ -171,10 +156,9 @@
     - SurgeryStepInsertResinSpinner
     - SurgeryStepXenoSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: resin_spinner
+    organSlot: ResinSpinner
   - type: SurgeryOrganCondition
-    organ:
-    - type: ResinSpinner
+    organ: ResinSpinner
 
 - type: entity
   parent: BaseSurgeryXenoInsertOrgan
@@ -188,10 +172,9 @@
     - SurgeryStepInsertNeurotoxinGland
     - SurgeryStepXenoSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: neurotoxin_gland
+    organSlot: NeurotoxinGland
   - type: SurgeryOrganCondition
-    organ:
-    - type: NeurotoxinGland
+    organ: NeurotoxinGland
 
 - type: entity
   parent: BaseSurgeryXenoInsertOrgan
@@ -205,10 +188,9 @@
     - SurgeryStepInsertAcidGland
     - SurgeryStepXenoSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: acid_gland
+    organSlot: AcidGland
   - type: SurgeryOrganCondition
-    organ:
-    - type: AcidGland
+    organ: AcidGland
 
 - type: entity
   parent: BaseSurgeryXenoInsertOrgan
@@ -222,12 +204,11 @@
     - SurgeryStepInsertPlasmaVessel
     - SurgeryStepXenoSealOrganWound
   - type: SurgeryPartCondition
-    parts: [ Chest ]
+    parts: [ Torso ]
   - type: SurgeryOrganSlotCondition
-    organSlot: plasma_vessel
+    organSlot: PlasmaVessel
   - type: SurgeryOrganCondition
-    organ:
-    - type: PlasmaVessel
+    organ: PlasmaVessel
 
 - type: entity
   parent: BaseSurgeryXenoInsertOrgan
@@ -241,12 +222,11 @@
     - SurgeryStepInsertEggSack
     - SurgeryStepXenoSealOrganWound
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Torso ]
   - type: SurgeryOrganSlotCondition
-    organSlot: egg_sack
+    organSlot: EggSack
   - type: SurgeryOrganCondition
-    organ:
-    - type: EggSack
+    organ: EggSack
 
 # Remove organs
 
@@ -272,8 +252,7 @@
   name: Remove Xeno Eyes
   components:
   - type: SurgeryOrganCondition
-    organ:
-    - type: Eyes
+    organ: Eyes
 
 - type: entity
   parent: BaseSurgeryXenoRemoveOrgan
@@ -281,10 +260,9 @@
   name: Remove Xeno Liver
   components:
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Torso ]
   - type: SurgeryOrganCondition
-    organ:
-    - type: Liver
+    organ: Liver
 
 - type: entity
   parent: BaseSurgeryXenoRemoveOrgan
@@ -292,10 +270,9 @@
   name: Remove Xeno Stomach
   components:
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Torso ]
   - type: SurgeryOrganCondition
-    organ:
-    - type: Stomach
+    organ: Stomach
 
 ## Xeno Organs
 
@@ -305,8 +282,7 @@
   name: Remove Hive Node
   components:
   - type: SurgeryOrganCondition
-    organ:
-    - type: HiveNode
+    organ: HiveNode
 
 - type: entity
   parent: BaseSurgeryXenoRemoveOrgan
@@ -314,8 +290,7 @@
   name: Remove Resin Spinner
   components:
   - type: SurgeryOrganCondition
-    organ:
-    - type: ResinSpinner
+    organ: ResinSpinner
 
 - type: entity
   parent: BaseSurgeryXenoRemoveOrgan
@@ -328,8 +303,7 @@
     - SurgeryStepXenoNeutralizeAcid
     - SurgeryStepXenoRemoveOrgan
   - type: SurgeryOrganCondition
-    organ:
-    - type: NeurotoxinGland
+    organ: NeurotoxinGland
 
 - type: entity
   parent: BaseSurgeryXenoRemoveOrgan
@@ -342,8 +316,7 @@
     - SurgeryStepXenoNeutralizeAcid
     - SurgeryStepXenoRemoveOrgan
   - type: SurgeryOrganCondition
-    organ:
-    - type: AcidGland
+    organ: AcidGland
 
 - type: entity
   parent: BaseSurgeryXenoRemoveOrgan
@@ -357,10 +330,9 @@
     - SurgeryStepXenoNeutralizeAcid
     - SurgeryStepXenoRemoveOrgan
   - type: SurgeryPartCondition
-    parts: [ Chest ]
+    parts: [ Torso ]
   - type: SurgeryOrganCondition
-    organ:
-    - type: PlasmaVessel
+    organ: PlasmaVessel
 
 - type: entity
   parent: BaseSurgeryXenoRemoveOrgan
@@ -374,10 +346,9 @@
     - SurgeryStepXenoSeverPlasma
     - SurgeryStepXenoRemoveOrgan
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Torso ]
   - type: SurgeryOrganCondition
-    organ:
-    - type: EggSack
+    organ: EggSack
 
 # Shitty xenobio
 
@@ -392,11 +363,10 @@
     - SurgeryStepXenoOpenIncision
     - SurgeryStepXenoNeutralizeAcid
     - SurgeryStepXenoTakeSample
-  - type: SurgeryBodyComponentCondition
-    inverse: false
-    components:
-    - type: Xenomorph
-      caste: Drone # yml major
+  - type: SurgeryBodyComponentCondition # can't take samples from a person
+    whitelist:
+      components:
+      - Xenomorph
   - type: SurgeryPartComponentCondition
     inverse: false
     components:

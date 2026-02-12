@@ -276,15 +276,15 @@
       ]
     },
     {
-      "name": "Groin_Severe",
+      "name": "Tail_Severe",
       "directions": 4
     },
     {
-      "name": "Groin_Severe_alt",
+      "name": "Tail_Severe_alt",
       "directions": 4
     },
     {
-      "name": "Groin_Minor",
+      "name": "Tail_Minor",
       "directions": 4,
       "delays": [
         [
@@ -346,7 +346,7 @@
       ]
     },
     {
-      "name": "Groin_Minor_alt",
+      "name": "Tail_Minor_alt",
       "directions": 4,
       "delays": [
         [

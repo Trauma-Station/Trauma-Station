@@ -1,4 +1,4 @@
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Whitelist;

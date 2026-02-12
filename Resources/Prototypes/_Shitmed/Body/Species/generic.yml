@@ -1,0 +1,119 @@
+# not really a species but whatever
+
+## Base
+
+# TODO: if anyone makes an organ rejection mechanic, make these immune to it
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganBioSynth
+  suffix: bio-synthetic
+  components:
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Microplastics
+        Quantity: 5
+      - ReagentId: Carbon
+        Quantity: 10
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents: # really bad stuff
+        - ReagentId: Microplastics
+          Quantity: 5
+        - ReagentId: LabGrownNutriment
+          Quantity: 10
+
+- type: entity
+  abstract: true
+  parent: [ OrganBioSynth, OrganHumanExternal ]
+  id: OrganBioSynthExternal
+  description: This synthetic part can be transplanted onto any living organism and it will adapt to its recipient.
+
+- type: entity
+  abstract: true
+  parent: [ OrganBioSynth, OrganSpriteHumanInternal ]
+  id: OrganBioSynthInternal
+  description: This synthetic organ can be transplanted into any living organism and it will adapt to its recipient.
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganBioSynthExternal ]
+  id: OrganBioSynthHead
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganBioSynthExternal ]
+  id: OrganBioSynthArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganBioSynthExternal ]
+  id: OrganBioSynthArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganBioSynthExternal ]
+  id: OrganBioSynthHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganBioSynthExternal ]
+  id: OrganBioSynthHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganBioSynthExternal ]
+  id: OrganBioSynthLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganBioSynthExternal ]
+  id: OrganBioSynthLegRight
+
+# the kojima special
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganBioSynthExternal ]
+  id: OrganBioSynthFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganBioSynthExternal ]
+  id: OrganBioSynthFootRight
+
+## Organs
+
+# no brain because it's not terribly useful
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganBioSynthInternal ]
+  id: OrganBioSynthEyes
+  components:
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Customization/eyes.rsi
+
+- type: entity
+  parent: [ OrganBaseTongue, OrganBioSynthInternal ]
+  id: OrganBioSynthTongue
+
+# no appendix because it's useless
+
+- type: entity
+  parent: [ OrganBaseEars, OrganBioSynthInternal ]
+  id: OrganBioSynthEars
+
+- type: entity
+  parent: [ OrganBaseLungs, OrganBioSynthInternal, OrganHumanMetabolizer ]
+  id: OrganBioSynthLungs
+
+- type: entity
+  parent: [ OrganBaseHeart, OrganBioSynthInternal, OrganHumanMetabolizer ]
+  id: OrganBioSynthHeart
+
+- type: entity
+  parent: [ OrganBaseStomach, OrganBioSynthInternal, OrganHumanMetabolizer ]
+  id: OrganBioSynthStomach
+
+- type: entity
+  parent: [ OrganBaseLiver, OrganBioSynthInternal, OrganHumanMetabolizer ]
+  id: OrganBioSynthLiver
+
+- type: entity
+  parent: [ OrganBaseKidneys, OrganBioSynthInternal, OrganHumanMetabolizer ]
+  id: OrganBioSynthKidneys

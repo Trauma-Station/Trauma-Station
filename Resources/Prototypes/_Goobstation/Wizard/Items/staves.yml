@@ -23,7 +23,7 @@
     capacity: 6
     count: 6
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 8
+    rechargeCooldown: 10
 
 - type: entity
   name: staff of chaos
@@ -47,7 +47,7 @@
     capacity: 10
     count: 10
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 2
+    rechargeCooldown: 4
 
 - type: entity
   name: staff of slipping

@@ -1,0 +1,124 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+using Content.Medical.Common.Wounds;
+using Content.Shared.FixedPoint;
+using Content.Shared.Damage.Prototypes;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+
+namespace Content.Medical.Shared.Wounds;
+
+[RegisterComponent, NetworkedComponent]
+[EntityCategory("Wounds")]
+public sealed partial class WoundComponent : Component
+{
+    /// <summary>
+    /// The organ this wound is applied to.
+    /// </summary>
+    [DataField]
+    public EntityUid HoldingWoundable;
+
+    /// <summary>
+    /// Actual severity of the wound. The more the worse.
+    /// Total amount dictates <see cref="WoundSeverity"/>
+    /// </summary>
+    [DataField]
+    public FixedPoint2 WoundSeverityPoint;
+
+    /// <summary>
+    /// maybe some cool mechanical stuff to treat those wounds later. I genuinely have no idea
+    /// Wound type. External/Internal basically.
+    /// </summary>
+    [DataField]
+    public WoundType WoundType = WoundType.External;
+
+    /// <summary>
+    /// Damage group of this wound.
+    /// </summary>
+    [DataField]
+    [ViewVariables(VVAccess.ReadOnly)]
+    public ProtoId<DamageGroupPrototype>? DamageGroup;
+
+    /// <summary>
+    /// Damage type of this wound.
+    /// </summary>
+    [DataField(required: true)]
+    public ProtoId<DamageTypePrototype> DamageType;
+
+    /// <summary>
+    /// Scar wound prototype, what will be spawned upon healing this wound.
+    /// If null - no scar wound will be spawned.
+    /// </summary>
+    [DataField]
+    public EntProtoId? ScarWound;
+
+    /// <summary>
+    /// Well, name speaks for this.
+    /// </summary>
+    [DataField]
+    public bool IsScar;
+
+    /// <summary>
+    /// Wound severity. Has six severities: Healed/Minor/Moderate/Severe/Critical and Loss.
+    /// Directly depends on <see cref="WoundSeverityPoint"/>
+    /// </summary>
+    [DataField]
+    public WoundSeverity WoundSeverity;
+
+    /// <summary>
+    /// When wound is visible. Always/HandScanner/AdvancedScanner.
+    /// </summary>
+    [DataField]
+    public WoundVisibility WoundVisibility = WoundVisibility.Always;
+
+    /// <summary>
+    /// "Can be healed".
+    /// </summary>
+    [DataField]
+    public bool CanBeHealed = true;
+
+    /// <summary>
+    /// Whether the wound can mangle its woundable, and at which severity.
+    /// </summary>
+    [DataField]
+    public WoundSeverity? MangleSeverity;
+
+    /// <summary>
+    /// String of text used for displaying things about the wound in popups and self inspects.
+    /// </summary>
+    [DataField]
+    public string TextString = "wound";
+
+    /// <summary>
+    /// Multiplier for self-healing.
+    /// </summary>
+    [DataField]
+    public float SelfHealMultiplier = 1.0f;
+}
+
+
+[Serializable, NetSerializable]
+public sealed class WoundComponentState : ComponentState
+{
+    public NetEntity HoldingWoundable;
+
+    public FixedPoint2 WoundSeverityPoint;
+    public FixedPoint2 WoundableIntegrityMultiplier;
+
+    public WoundType WoundType;
+
+    public ProtoId<DamageGroupPrototype>? DamageGroup;
+    public string? DamageType;
+
+    public EntProtoId? ScarWound;
+
+    public bool IsScar;
+
+    public WoundSeverity WoundSeverity;
+
+    public WoundVisibility WoundVisibility;
+
+    public bool CanBeHealed;
+
+    public float SelfHealMultiplier;
+}

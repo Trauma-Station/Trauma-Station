@@ -64,6 +64,22 @@
         - id: ClothingHandsGlovesColorYellow
 
 - type: entity
+  parent: ClothingBackpack
+  id: ClothingBackpackPaper
+  suffix: Wizard Paper Bundle
+  components:
+  - type: Tag
+    tags: [] # ignore "WhitelistChameleon" tag
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingOuterWizardPaperReal
+        - id: ClothingHandsGlovesWizardPaper
+        - id: ClothingUniformJumpsuitColorWhite
+        - id: ClothingHeadHatPaperWizard
+
+- type: entity
   parent: ToolboxMechanical
   id: ToolboxTider
   description: Are you ready for the new tide order?

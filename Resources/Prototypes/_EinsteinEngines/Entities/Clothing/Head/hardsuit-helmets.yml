@@ -20,8 +20,7 @@
     lowPressureMultiplier: 1000
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -61,8 +60,7 @@
     lowPressureMultiplier: 1000
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -92,8 +90,7 @@
     lowPressureMultiplier: 1000
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg

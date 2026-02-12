@@ -43,7 +43,6 @@ public sealed partial class GameDirectorSystem : GameRuleSystem<GameDirectorComp
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IComponentFactory _factory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly IChatManager _chat = default!;

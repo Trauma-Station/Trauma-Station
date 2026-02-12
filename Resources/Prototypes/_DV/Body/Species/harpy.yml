@@ -1,0 +1,350 @@
+## Markings
+
+- type: markingsGroup
+  parent: Undergarments
+  id: Harpy
+  onlyGroupWhitelisted: true
+  limits:
+    enum.HumanoidVisualLayers.Hair:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Snout:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Tail:
+      limit: 1
+      required: true
+      default: [ HarpyTailPhoenix ]
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: true
+      default: [ HarpyEarsDefault ]
+    enum.HumanoidVisualLayers.HeadSide:
+      limit: 8
+      required: false
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
+      required: true
+      default: [ HarpyChestDefault ]
+    enum.HumanoidVisualLayers.UndergarmentTop:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.UndergarmentBottom:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 2
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 2
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 2
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 2
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+      default: [ HarpyWingDefaultHuescale ]
+    enum.HumanoidVisualLayers.RHand:
+      limit: 3
+      required: false
+    enum.HumanoidVisualLayers.LArm:
+      limit: 2
+      required: false
+    enum.HumanoidVisualLayers.LHand:
+      limit: 3
+      required: false
+
+## Mob
+
+- type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceHarpy
+  name: Harpy appearance
+  components:
+  - type: Inventory
+    speciesId: Harpy
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _DV/Mobs/Species/Harpy/displacement.rsi
+            state: jumpsuit
+  - type: InitialBody
+    organs:
+      Torso: OrganHarpyTorso
+      Head: OrganHarpyHead
+      ArmLeft: OrganHarpyArmLeft
+      ArmRight: OrganHarpyArmRight
+      HandRight: OrganHarpyHandRight
+      HandLeft: OrganHarpyHandLeft
+      LegLeft: OrganHarpyLegLeft
+      LegRight: OrganHarpyLegRight
+      FootLeft: OrganHarpyFootLeft
+      FootRight: OrganHarpyFootRight
+      Brain: OrganHarpyBrain
+      Eyes: OrganHarpyEyes
+      Tongue: OrganHarpyTongue
+      Appendix: OrganHarpyAppendix
+      Ears: OrganHarpyEars
+      Lungs: OrganHarpyLungs
+      Heart: OrganHarpyHeart
+      Stomach: OrganHarpyStomach
+      Liver: OrganHarpyLiver
+      Kidneys: OrganHarpyKidneys
+  - type: HumanoidProfile
+    species: Harpy
+
+- type: entity
+  parent:
+  - AppearanceHarpy
+  - BaseSpeciesMobOrganic
+  id: MobHarpy
+  name: Urist McHarpy
+  components:
+  - type: HarpySinger
+    ShutUpDamageThreshold: 5 # Punch does 5 damage
+  - type: Instrument
+    allowPercussion: false
+    program: 52
+  - type: SwappableInstrument
+    instrumentList:
+      "Voice": {52: 0}
+      "Trumpet": {56: 0}
+      "Electric": {27: 0}
+      "Bass": {33: 0}
+      "Rock": {29: 0}
+      "Acoustic": {24: 0}
+      "Flute": {73: 0}
+      "Sax": {66: 0}
+      "Piano": {1: 0}
+      "Church Organ": {19: 0}
+      "Violin": {41: 0}
+  - type: UserInterface
+    interfaces:
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+        requireInputValidation: false
+      enum.VoiceMaskUIKey.Key:
+        type: VoiceMaskBoundUserInterface
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      # Goobstation - changelings
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: Fixtures
+    fixtures: # TODO: This needs a second fixture just for mob collisions.
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 120
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Damageable
+    damageModifierSet: Harpy
+  - type: MeleeWeapon
+    soundHit:
+      collection: AlienClaw
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Piercing: 5
+  - type: Speech
+    speechSounds: Harpy
+    speechVerb: Harpy
+    allowedEmotes: ['Chirp']
+  - type: Vocal
+    sounds:
+      Male: SoundsHarpyMale
+      Female: SoundsHarpyFemale
+      Unsexed: SoundsHarpyFemale
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic
+    - ValyrianStandard
+    understands:
+    - TauCetiBasic
+    - ValyrianStandard
+  - type: GenericVisualizer
+    visuals:
+      enum.HarpyVisualLayers.Singing:
+        singingLayer:
+          False: {visible: false}
+          True: {visible: true}
+  - type: MovementSpeedModifier
+    weightlessAcceleration: 2.5
+    weightlessModifier: 1.12
+  - type: Inventory
+    speciesId: harpy
+    templateId: digitigrade
+  - type: HarpyVisuals
+  - type: Tag
+    tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+    - AnomalyHost
+    - HarpyEmotes
+  - type: StepTriggerImmune
+    whitelist:
+      types:
+      - Shard
+      - Landmine
+      - Mousetrap
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatHuman
+      amount: 5
+    - id: MaterialBones1
+      amount: 2 # birds have light bones, thus 1 less than other species.
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganHarpy
+  suffix: Harpy
+  components:
+  - type: Damageable
+    damageModifierSet: Harpy
+
+- type: entity
+  abstract: true
+  parent: [ OrganHarpy, OrganSpriteHumanInternal ]
+  id: OrganHarpyInternal
+
+- type: entity
+  abstract: true
+  parent: OrganHarpy
+  id: OrganHarpyExternal
+  components:
+  - type: Sprite
+    sprite: _DV/Mobs/Species/Harpy/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _DV/Mobs/Species/Harpy/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: Harpy
+  - type: Woundable
+    boneEntity: BoneWeak
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganHarpyExternal ]
+  id: OrganHarpyTorso
+
+- type: entity
+  parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganHarpyExternal ]
+  id: OrganHarpyHead
+  components:
+  - type: Woundable
+    boneEntity: BoneNeckWeak
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganHarpyExternal ]
+  id: OrganHarpyArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganHarpyExternal ]
+  id: OrganHarpyArmRight
+  components:
+  # TODO SHITMED: move dogshit to wings part
+  - type: OrganComponents
+    onAdd: # Shitmed Change
+    - type: Flight
+      isLayerAnimated: true
+      layer: "/Textures/_EinsteinEngines/Mobs/Customization/Harpy/harpy_wings.rsi"
+      animationKey: "Flap"
+      # Buffed to account for sprinting. Gets to about the same distance as everyone else's sprint, but with faster acceleration.
+      speedModifier: 1.9 # Trauma edit
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganHarpyExternal ]
+  id: OrganHarpyHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganHarpyExternal ]
+  id: OrganHarpyHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganHarpyExternal ]
+  id: OrganHarpyLegLeft
+  components:
+  - type: MovementBodyPart
+    sprintSpeed: 5
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganHarpyExternal ]
+  id: OrganHarpyLegRight
+  components:
+  - type: MovementBodyPart
+    sprintSpeed: 5
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganHarpyExternal ]
+  id: OrganHarpyFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganHarpyExternal ]
+  id: OrganHarpyFootRight
+
+## Organs
+
+- type: entity
+  parent: [ OrganBaseBrain, OrganHarpyInternal ]
+  id: OrganHarpyBrain
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganHarpyInternal ]
+  id: OrganHarpyEyes
+
+- type: entity
+  parent: [ OrganBaseTongue, OrganHarpyInternal ]
+  id: OrganHarpyTongue
+
+- type: entity
+  parent: [ OrganBaseAppendix, OrganHarpyInternal ]
+  id: OrganHarpyAppendix
+
+- type: entity
+  parent: [ OrganBaseEars, OrganHarpyInternal ]
+  id: OrganHarpyEars
+
+- type: entity
+  parent: [ OrganBaseLungs, OrganHarpyInternal, OrganHumanMetabolizer ]
+  id: OrganHarpyLungs
+  components:
+  - type: Metabolizer
+    updateInterval: 2.0
+
+- type: entity
+  parent: [ OrganBaseHeart, OrganHarpyInternal, OrganHumanMetabolizer ]
+  id: OrganHarpyHeart
+
+- type: entity
+  parent: [ OrganBaseStomach, OrganHarpyInternal, OrganHumanMetabolizer ]
+  id: OrganHarpyStomach
+
+- type: entity
+  parent: [ OrganBaseLiver, OrganHarpyInternal, OrganHumanMetabolizer ]
+  id: OrganHarpyLiver
+
+- type: entity
+  parent: [ OrganBaseKidneys, OrganHarpyInternal, OrganHumanMetabolizer ]
+  id: OrganHarpyKidneys

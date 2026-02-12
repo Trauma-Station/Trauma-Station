@@ -11,7 +11,7 @@
   color: "#28005B"
   physicalDesc: reagent-physical-desc-thick
   metabolisms:
-    Poison:
+    Bloodstream:
       conditions:
       - !type:WhitelistCondition
         blacklist:
@@ -43,7 +43,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Medicine:
+    Bloodstream:
       conditions:
       - !type:WhitelistCondition
         whitelist:

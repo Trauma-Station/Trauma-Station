@@ -95,7 +95,7 @@ public sealed class DormNotifier : EntitySystem
 
     private void CheckMarker(EntityUid uid, DormNotifierMarkerComponent comp)
     {
-        var ents = _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(Transform(uid).Coordinates, comp.ProximityRadius);
+        var ents = _lookup.GetEntitiesInRange<HumanoidProfileComponent>(Transform(uid).Coordinates, comp.ProximityRadius);
         var found = Validate(uid, ents, out var condemned);
 
         if (found)
@@ -104,9 +104,9 @@ public sealed class DormNotifier : EntitySystem
         }
     }
 
-    private bool Validate(EntityUid marker, HashSet<Entity<HumanoidAppearanceComponent>> entities, [NotNullWhen(true)] out HashSet<EntityUid> condemned)
+    private bool Validate(EntityUid marker, HashSet<Entity<HumanoidProfileComponent>> entities, [NotNullWhen(true)] out HashSet<EntityUid> condemned)
     {
-        // "0. Mobs in proximity must be humanoid" is handled by Entity<HumanoidAppearanceComponent>
+        // "0. Mobs in proximity must be humanoid" is handled by Entity<HumanoidProfileComponent>
         condemned = [];
 
         // 1. X(>1) amount of humanoids are in a Y distance of tiles away from a marker
@@ -177,7 +177,7 @@ public sealed class DormNotifier : EntitySystem
         try
         {
             var sinners = condemned.Condemned
-                .Select(con => new Entity<HumanoidAppearanceComponent>(con, Comp<HumanoidAppearanceComponent>(con)))
+                .Select(con => new Entity<HumanoidProfileComponent>(con, Comp<HumanoidProfileComponent>(con)))
                 .ToHashSet();
 
             bool valid = Validate(condemned.Marker, sinners, out _);
@@ -190,7 +190,7 @@ public sealed class DormNotifier : EntitySystem
         }
         catch (KeyNotFoundException e)
         {
-            Log.Warning("Entity didn't have HumanoidAppearanceComponent");
+            Log.Warning("Entity didn't have HumanoidProfileComponent");
         }
 
         var current = DetermineExpedited(condemned.Condemned);

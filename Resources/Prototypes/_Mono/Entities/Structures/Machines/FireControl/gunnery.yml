@@ -127,8 +127,8 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: ApcPowerReceiver
-    powerLoad: 200
+  - type: PowerState
+    workingPowerDraw: 200
   - type: ExtensionCableReceiver
   - type: ActivatableUIRequiresPower
   - type: Sprite

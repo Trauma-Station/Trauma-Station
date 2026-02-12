@@ -1,10 +1,9 @@
 using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
+using Content.Medical.Common.Body;
+using Content.Medical.Shared.Wounds;
 using Content.Shared.Actions;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -22,12 +21,12 @@ namespace Content.Goobstation.Shared.Slasher.Systems;
 public sealed class SlasherMassacreSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly WoundSystem _wounds = default!;
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly WoundSystem _wound = default!;
 
     public override void Initialize()
     {
@@ -96,11 +95,11 @@ public sealed class SlasherMassacreSystem : EntitySystem
             return;
         }
 
-        // Only consider humanoid's as targets.
-        EntityUid? victim = null;
+        // Only consider humanoids as targets.
+        var victim = EntityUid.Invalid;
         foreach (var hit in args.HitEntities)
         {
-            if (!HasComp<HumanoidAppearanceComponent>(hit))
+            if (!HasComp<HumanoidProfileComponent>(hit))
                 continue;
 
             victim = hit;
@@ -108,14 +107,14 @@ public sealed class SlasherMassacreSystem : EntitySystem
         }
 
         // If no valid humanoid was hit, treat like a miss and end the chain.
-        if (victim == null)
+        if (victim == EntityUid.Invalid)
         {
             EndChain(args.User, userComp, true);
             return;
         }
 
         // When the target changes reset hitcount.
-        if (userComp.CurrentVictim != null && userComp.CurrentVictim != victim.Value)
+        if (userComp.CurrentVictim != null && userComp.CurrentVictim != victim)
         {
             if (_net.IsServer)
                 _popup.PopupEntity(Loc.GetString("slasher-massacre-target-change"), args.User, args.User, PopupType.MediumCaution);
@@ -123,7 +122,7 @@ public sealed class SlasherMassacreSystem : EntitySystem
             userComp.HitCount = 0;
         }
 
-        userComp.CurrentVictim = victim.Value;
+        userComp.CurrentVictim = victim;
         userComp.HitCount++;
 
         // Calculate damage bonus/penalty.
@@ -136,7 +135,7 @@ public sealed class SlasherMassacreSystem : EntitySystem
         }
 
         // If the victim died end the chain silently.
-        if (_mobState.IsDead(victim.Value))
+        if (_mobState.IsDead(victim))
         {
             EndChain(args.User, userComp);
             return;
@@ -147,18 +146,17 @@ public sealed class SlasherMassacreSystem : EntitySystem
         // Limb severing phase.
         if (userComp.HitCount >= weaponEnt.Comp.LimbSeverHits)
         {
-            if (TrySeverRandomLimb(victim.Value, chance: weaponEnt.Comp.LimbSeverChance))
+            if (TrySeverRandomLimb(victim, chance: weaponEnt.Comp.LimbSeverChance))
                 playedDelimb = true;
         }
 
         // Decapitation.
         if (userComp.HitCount == weaponEnt.Comp.DecapitateHit)
         {
-            if (Decapitate(victim.Value))
+            if (_body.TryDecapitate(victim, args.User))
             {
                 playedDelimb = true;
-                if (_net.IsServer)
-                    _popup.PopupEntity(Loc.GetString("slasher-massacre-decap"), victim.Value, PopupType.Large);
+                _popup.PopupPredicted(Loc.GetString("slasher-massacre-decap"), victim, args.User, PopupType.Large);
             }
             EndChain(args.User, userComp);
         }
@@ -178,54 +176,24 @@ public sealed class SlasherMassacreSystem : EntitySystem
     // Handles severing a random limb.
     private bool TrySeverRandomLimb(EntityUid victim, float chance)
     {
+        if (_net.IsServer) // TODO: use predicted random ffs
+            return false;
+
         if (!_random.Prob(chance))
             return false;
 
-        var parts = _body.GetBodyChildren(victim);
-        var severable = new List<EntityUid>();
-
-        foreach (var part in parts)
-        {
-            if (part.Component.PartType is BodyPartType.Arm or BodyPartType.Leg)
-                severable.Add(part.Id);
-        }
-
+        var severable = _body.GetOrgans<LimbComponent>(victim);
         if (severable.Count == 0)
             return false;
 
         var pickedLimb = _random.Pick(severable);
 
-        if (!TryComp<WoundableComponent>(pickedLimb, out var limbWoundable) || !limbWoundable.ParentWoundable.HasValue)
+        if (!TryComp<WoundableComponent>(pickedLimb, out var woundable) || woundable.ParentWoundable is not {} parent)
             return false;
 
-        _wounds.AmputateWoundableSafely(limbWoundable.ParentWoundable.Value, pickedLimb, limbWoundable);
+        _wound.AmputateWoundableSafely(parent, pickedLimb, woundable);
 
-        if (_net.IsServer)
-            _popup.PopupEntity(Loc.GetString("slasher-massacre-limb"), victim, PopupType.Medium);
-        return true;
-    }
-
-    // Handles decapitation.
-    private bool Decapitate(EntityUid victim)
-    {
-        var parts = _body.GetBodyChildren(victim);
-        EntityUid? head = null;
-        EntityUid? chest = null;
-        foreach (var part in parts)
-        {
-            switch (part.Component.PartType)
-            {
-                case BodyPartType.Head:
-                    head = part.Id;
-                    break;
-                case BodyPartType.Chest:
-                    chest = part.Id;
-                    break;
-            }
-        }
-        if (head == null || chest == null)
-            return false;
-        _wounds.AmputateWoundable(chest.Value, head.Value);
+        _popup.PopupEntity(Loc.GetString("slasher-massacre-limb"), victim, PopupType.Medium);
         return true;
     }
 }

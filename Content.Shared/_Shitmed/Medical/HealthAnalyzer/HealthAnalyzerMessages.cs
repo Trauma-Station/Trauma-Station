@@ -1,16 +1,12 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Shared._Shitmed.Medical.Surgery.Traumas;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds;
-using Content.Shared.Body.Part;
-using Content.Shared.FixedPoint;
-using Robust.Shared.Serialization;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Traumas;
+using Content.Medical.Common.Wounds;
+using Content.Shared.Body;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.FixedPoint;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._Shitmed.Medical.HealthAnalyzer;
 
@@ -71,10 +67,10 @@ public sealed class HealthAnalyzerModeSelectedMessage(NetEntity? owner, HealthAn
 
 // Part selection message (from client to server)
 [Serializable, NetSerializable]
-public sealed class HealthAnalyzerPartMessage(NetEntity? owner, TargetBodyPart? bodyPart) : BoundUserInterfaceMessage
+public sealed class HealthAnalyzerPartMessage(NetEntity? owner, ProtoId<OrganCategoryPrototype>? category) : BoundUserInterfaceMessage
 {
     public readonly NetEntity? Owner = owner;
-    public readonly TargetBodyPart? BodyPart = bodyPart;
+    public readonly ProtoId<OrganCategoryPrototype>? Category = category;
 }
 
 [Serializable, NetSerializable]

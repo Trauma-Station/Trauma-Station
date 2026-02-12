@@ -20,8 +20,6 @@
   canBeAntag: false
   guides: # goobstation
   - Medical
-  - SOPChiefMedicalOfficer
-  - SOPMedical
   - Command
   - Chemicals
   - Virology
@@ -55,7 +53,6 @@
     id: CMOPDA
     ears: ClothingHeadsetAltMedical # Goobstation
     eyes: ClothingEyesGlassesMed # Goobstation
-    belt: ClothingBeltMedicalFilled
   storage:
     back:
     - Flash

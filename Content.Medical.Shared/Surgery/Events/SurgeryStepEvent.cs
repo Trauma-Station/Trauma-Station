@@ -1,0 +1,16 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+using Robust.Shared.Prototypes;
+
+namespace Content.Medical.Shared.Surgery;
+
+/// <summary>
+///     Raised on the step entity and the user after doing a step.
+/// </summary>
+[ByRefEvent]
+public record struct SurgeryStepEvent(EntityUid User, EntityUid Body, EntityUid Part, EntityUid Tool, EntityUid Surgery, EntityUid Step, bool Complete);
+
+/// <summary>
+/// Raised on the user after failing to do a step for any reason.
+/// </summary>
+[ByRefEvent]
+public record struct SurgeryStepFailedEvent(EntityUid User, EntityUid Body, EntProtoId SurgeryId, EntProtoId StepId);

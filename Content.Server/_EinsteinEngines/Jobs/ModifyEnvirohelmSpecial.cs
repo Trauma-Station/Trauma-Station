@@ -37,7 +37,7 @@ public sealed partial class ModifyEnvirohelmSpecial : JobSpecial
     public override void AfterEquip(EntityUid mob)
     {
         var entMan = IoCManager.Resolve<IEntityManager>();
-        if (!entMan.TryGetComponent<HumanoidAppearanceComponent>(mob, out var appearanceComp) ||
+        if (!entMan.TryGetComponent<HumanoidProfileComponent>(mob, out var appearanceComp) ||
             appearanceComp.Species != Species ||
             !entMan.System<InventorySystem>().TryGetSlotEntity(mob, Slot, out var helmet) ||
             helmet is not { } envirohelm ||

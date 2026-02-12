@@ -25,8 +25,7 @@
   boilingPoint: 111.5
   meltingPoint: 90.5
   metabolisms:
-    Poison:
-      metabolismRate: 0.5
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -43,8 +42,7 @@
   boilingPoint: 223.9
   meltingPoint: 199.5
   metabolisms:
-    Poison:
-      metabolismRate: 0.5
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -61,8 +59,7 @@
   boilingPoint: 412.8
   meltingPoint: 199.9
   metabolisms:
-    Poison:
-      metabolismRate: 0.5
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -79,7 +76,7 @@
   boilingPoint: 563.7
   meltingPoint: 353.5
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.1
       effects:
       - !type:Polymorph

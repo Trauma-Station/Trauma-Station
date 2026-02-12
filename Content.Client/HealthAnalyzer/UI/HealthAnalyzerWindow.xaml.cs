@@ -1,6 +1,7 @@
 // <Trauma>
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Shared.Body;
+using Robust.Shared.Prototypes;
 // </Trauma>
 using Content.Client.UserInterface.Controls;
 using Content.Shared.MedicalScanner;
@@ -13,7 +14,7 @@ namespace Content.Client.HealthAnalyzer.UI;
 public sealed partial class HealthAnalyzerWindow : FancyWindow
 {
     // <Shitmed>
-    public event Action<TargetBodyPart?, EntityUid>? OnBodyPartSelected;
+    public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
     public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
     // </Shitmed>
 

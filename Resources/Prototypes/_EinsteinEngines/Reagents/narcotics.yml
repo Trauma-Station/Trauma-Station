@@ -12,7 +12,7 @@
   color: "#ffde7448"
   physicalDesc: reagent-physical-desc-translucent
   metabolisms:
-    Narcotic:
+    Bloodstream:
       metabolismRate: 0.1
       effects:
       - !type:Emote

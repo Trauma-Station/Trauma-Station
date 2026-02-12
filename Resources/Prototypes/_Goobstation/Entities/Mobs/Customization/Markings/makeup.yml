@@ -1,8 +1,7 @@
 - type: marking
   id: MakeupLips
   bodyPart: Face
-  markingCategory: Face
-  speciesRestriction: [Dwarf, Human, SlimePerson, Arachne, Harpy]
+  groupWhitelist: [Human, Slime, Arachnid, Harpy]
   coloring:
     default:
       type:
@@ -15,8 +14,7 @@
 - type: marking
   id: MakeupBlush
   bodyPart: Face
-  markingCategory: Face
-  speciesRestriction: [Dwarf, Human, Reptilian, SlimePerson, Arachne, Harpy]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid, Harpy]
   coloring:
     default:
       type:
@@ -29,8 +27,7 @@
 - type: marking
   id: MakeupNailPolishRight
   bodyPart: RHand
-  markingCategory: RightHand
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, SlimePerson, Arachne]
+  groupWhitelist: [Human, Reptilian, Arachnid, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -43,8 +40,7 @@
 - type: marking
   id: MakeupNailPolishLeft
   bodyPart: LHand
-  markingCategory: LeftHand
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, SlimePerson, Arachne]
+  groupWhitelist: [Human, Reptilian, Arachnid, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -59,8 +55,7 @@
 - type: marking
   id: MakeupMothLips
   bodyPart: Face
-  markingCategory: Face
-  speciesRestriction: [Moth]
+  groupWhitelist: [Moth]
   coloring:
     default:
       type:
@@ -73,8 +68,7 @@
 - type: marking
   id: MakeupMothBlush
   bodyPart: Face
-  markingCategory: Face
-  speciesRestriction: [Moth]
+  groupWhitelist: [Moth]
   coloring:
     default:
       type:

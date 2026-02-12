@@ -16,8 +16,7 @@
 - type: marking
   id: HarpyEarsDefault
   bodyPart: Head
-  markingCategory: HeadTop
-  speciesRestriction: [Harpy]
+  groupWhitelist: [Harpy]
   coloring:
     default:
       type: !type:CategoryColoring
@@ -32,8 +31,7 @@
 - type: marking
   id: HarpyTailPhoenix
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Harpy]
+  groupWhitelist: [Harpy]
   coloring:
     default:
       type: !type:CategoryColoring
@@ -48,8 +46,7 @@
 - type: marking
   id: HarpyTailRooster
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Harpy]
+  groupWhitelist: [Harpy]
   coloring:
     default:
       type: !type:CategoryColoring
@@ -63,8 +60,7 @@
 - type: marking
   id: HarpyTailFinch
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Harpy]
+  groupWhitelist: [Harpy]
   coloring:
     default:
       type: !type:CategoryColoring
@@ -78,8 +74,7 @@
 - type: marking
   id: HarpyChestDefault
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Harpy]
+  groupWhitelist: [Harpy]
   coloring:
     default:
       type: !type:CategoryColoring
@@ -96,8 +91,7 @@
 - type: marking
   id: HarpyLegsDefault
   bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Harpy]
+  groupWhitelist: [Harpy]
   coloring:
     default:
       type: !type:CategoryColoring
@@ -112,8 +106,7 @@
 - type: marking
   id: HarpyFeetDefault
   bodyPart: RFoot
-  markingCategory: Legs
-  speciesRestriction: [Harpy]
+  groupWhitelist: [Harpy]
   coloring:
     default:
       fallbackTypes:
