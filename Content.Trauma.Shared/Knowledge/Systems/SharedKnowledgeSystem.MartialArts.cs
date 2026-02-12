@@ -169,6 +169,22 @@ public abstract partial class SharedKnowledgeSystem
         if (_netManager.IsClient)
             return;
 
+        if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "MeleeKnowledge"), out melee))
+        {
+            if (GetMastery(melee) < 2)
+            {
+                FailMelee(melee.Level + melee.TemporaryLevel, ref args);
+                args.Handled = true;
+                return;
+            }
+        }
+        else
+        {
+            FailMelee(0, ref args);
+            args.Handled = true;
+            return;
+        }
+
         var expToSend = 0;
         foreach (var hitEntity in args.HitEntities)
         {
@@ -189,14 +205,6 @@ public abstract partial class SharedKnowledgeSystem
         }
         var evStr = new AddExperience("StrengthKnowledge", 1);
         RaiseLocalEvent(ent, ref evStr);
-
-        if (TryComp<KnowledgeComponent>(TryGetKnowledgeUnit(ent, "MeleeKnowledge"), out melee))
-        {
-            if (GetMastery(melee) < 2)
-                FailMelee(melee.Level + melee.TemporaryLevel, ref args);
-        }
-        else
-            FailMelee(0, ref args);
     }
 
     private void FailMelee(int level, ref MeleeHitEvent args)
@@ -211,7 +219,6 @@ public abstract partial class SharedKnowledgeSystem
             _popup.PopupEntity(Loc.GetString("melee-clumsy-self-hit"), args.User, args.User, PopupType.LargeCaution);
             _audio.PlayPvs(_clumsySound, args.User);
 
-            args.Handled = true;
             Log.Debug($"Melee attack failed due to low skill level. Fail Chance: {failChance * 100}%");
             return;
         }

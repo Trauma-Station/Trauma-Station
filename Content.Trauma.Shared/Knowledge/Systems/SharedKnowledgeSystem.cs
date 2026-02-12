@@ -12,7 +12,9 @@ using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Containers;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -107,22 +109,68 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     private void OnEntInserted(Entity<KnowledgeHolderComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        if (!TryComp<KnowledgeContainerComponent>(args.Entity, out _))
+        if (!TryFindKnowledgeInEntity(ent, out var brain))
             return;
 
-        // 3. Link the holder to the knowledge entity
-        ent.Comp.KnowledgeEntity = args.Entity;
+        ent.Comp.KnowledgeEntity = brain;
         Dirty(ent);
     }
 
     private void OnEntRemoved(Entity<KnowledgeHolderComponent> ent, ref EntRemovedFromContainerMessage args)
     {
+        if (ent.Comp.KnowledgeEntity == null)
+            return;
 
-        if (ent.Comp.KnowledgeEntity == args.Entity)
+        var brain = ent.Comp.KnowledgeEntity.Value;
+
+        if (args.Entity == brain || !IsDescendantOf(ent, brain))
         {
             ent.Comp.KnowledgeEntity = null;
+            Dirty(ent);
         }
-        Dirty(ent);
+    }
+
+    private bool TryFindKnowledgeInEntity(EntityUid parent, out EntityUid brain)
+    {
+        brain = default;
+
+        if (HasComp<KnowledgeContainerComponent>(parent))
+        {
+            brain = parent;
+            return true;
+        }
+
+        var xform = Transform(parent);
+        var enumerator = xform.ChildEnumerator;
+
+        while (enumerator.MoveNext(out var child))
+        {
+            if (TryFindKnowledgeInEntity(child, out brain))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool IsDescendantOf(EntityUid potentialParent, EntityUid child)
+    {
+        if (!potentialParent.IsValid() || !child.IsValid())
+            return false;
+
+        var current = child;
+        while (current.IsValid())
+        {
+            var xform = Transform(current);
+            if (xform.ParentUid == potentialParent)
+                return true;
+
+            current = xform.ParentUid;
+
+            if (HasComp<MapComponent>(current) || HasComp<MapGridComponent>(current))
+                break;
+        }
+
+        return false;
     }
 
     private void OnHolderStartup(Entity<KnowledgeHolderComponent> ent, ref ComponentStartup args)
