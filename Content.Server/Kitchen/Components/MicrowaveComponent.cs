@@ -112,7 +112,7 @@ namespace Content.Server.Kitchen.Components
 
         // <Trauma>
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [DataField]
         public EntityUid? lastKnownKnowledgeHolder;
