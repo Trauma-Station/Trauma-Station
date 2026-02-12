@@ -33,10 +33,10 @@
   - !type:AddComponentSpecial
     components:
     - type: DeathSquadMember # Goobstation
-      - type: KnowledgeGrant
-        skills:
-          MeleeKnowledge: 50
-          ShootingKnowledge: 50
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 50
+        ShootingKnowledge: 50
   # </Trauma>
 
 - type: startingGear # Goobstation - Start - Sol
