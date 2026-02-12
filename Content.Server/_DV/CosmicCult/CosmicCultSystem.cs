@@ -48,6 +48,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Trauma.Common.Speech;
 
 namespace Content.Server._DV.CosmicCult;
 

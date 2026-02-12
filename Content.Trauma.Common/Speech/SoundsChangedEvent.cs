@@ -1,4 +1,4 @@
-namespace Content.Shared.Speech.Components;
+namespace Content.Trauma.Common.Speech;
 
 /// <summary>
 ///     Raised when the component's Sounds field changes.

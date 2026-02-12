@@ -36,21 +36,12 @@ public sealed partial class CosmicEffigySystem : EntitySystem
             Spawn(comp.ActivationVfx, Transform(ent).Coordinates);
             comp.EffectTimer = _timing.CurTime + comp.EffectTime;
 
-            var custodianAmount = 0;
-            foreach (var mob in comp.SummonedCustodians)
-            {
-                if (Exists(mob) && _mobState.IsAlive(mob)) custodianAmount++;
-                else comp.SummonedCustodians.Remove(mob);
-            }
-            var lodestarAmount = 0;
-            foreach (var mob in comp.SummonedLodestars)
-            {
-                if (Exists(mob) && _mobState.IsAlive(mob)) lodestarAmount++;
-                else comp.SummonedLodestars.Remove(mob);
-            }
-            if (lodestarAmount < comp.LodestarCap && _random.Prob(0.33f)) // 33% for lodestar, 66% for custodian
+            comp.SummonedCustodians.RemoveWhere(mob => !Exists(mob) || _mobState.IsDead(mob));
+            comp.SummonedLodestars.RemoveWhere(mob => !Exists(mob) || _mobState.IsDead(mob));
+
+            if (comp.SummonedLodestars.Count < comp.LodestarCap && _random.Prob(0.33f)) // 33% for lodestar, 66% for custodian
                 comp.SummonedLodestars.Add(Spawn(comp.LodestarProto, Transform(ent).Coordinates));
-            else if (custodianAmount < comp.CustodianCap)
+            else if (comp.SummonedCustodians.Count < comp.CustodianCap)
                 comp.SummonedCustodians.Add(Spawn(comp.CustodianProto, Transform(ent).Coordinates));
 
             _lookup.GetEntitiesInRange<PoweredLightComponent>(Transform(ent).Coordinates, comp.LightShatterRange, _lights);

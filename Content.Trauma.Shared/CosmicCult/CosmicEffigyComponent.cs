@@ -30,7 +30,7 @@ public sealed partial class CosmicEffigyComponent : Component
 
     [DataField] public int LodestarCap = 3;
 
-    [ViewVariables] public HashSet<EntityUid> SummonedCustodians = [];
+    [DataField] public HashSet<EntityUid> SummonedCustodians = [];
 
-    [ViewVariables] public HashSet<EntityUid> SummonedLodestars = [];
+    [DataField] public HashSet<EntityUid> SummonedLodestars = [];
 }
