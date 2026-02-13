@@ -19,7 +19,7 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        ConstructionHandmade: 26
+        HandmadeKnowledge: 26
     # </Trauma>
 
 - type: startingGear
