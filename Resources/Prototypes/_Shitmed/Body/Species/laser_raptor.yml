@@ -35,6 +35,10 @@
   abstract: true
   parent: [ OrganRaptor, OrganAnimalSpriteExternal ]
   id: OrganRaptorExternal
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
 
 - type: entity
   abstract: true

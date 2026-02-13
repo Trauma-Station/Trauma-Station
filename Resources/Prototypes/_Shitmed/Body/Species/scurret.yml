@@ -46,6 +46,9 @@
   - type: VisualOrgan
     data:
       sprite: _Shitmed/Mobs/Species/Scurret/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
 
 ## Parts
 
