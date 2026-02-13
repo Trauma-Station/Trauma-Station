@@ -49,7 +49,6 @@ using Content.Shared.Temperature.Components;
 using Content.Shared.RatKing;
 using Robust.Server.Audio;
 using Content.Goobstation.Shared.Religion;
-using Content.Server.GameTicking.Rules;
 using Content.Server.Heretic.Abilities;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN;
@@ -60,12 +59,12 @@ using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Medical.Shared.Consciousness;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Body;
-using Content.Shared.Body.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Roles;
 using Content.Shared.Species.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
+using Content.Shared.Hands;
 
 namespace Content.Server.Heretic.EntitySystems;
 
@@ -112,6 +111,70 @@ public sealed class GhoulSystem : SharedGhoulSystem
     private void OnBound(Entity<GhoulComponent> ent, ref SetGhoulBoundHereticEvent args)
     {
         SetBoundHeretic(ent.Owner, args.Heretic);
+        SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ShatteredRisenComponent, HandCountChangedEvent>(OnHandCountChanged);
+    }
+
+    private void OnHandCountChanged(Entity<ShatteredRisenComponent> ent, ref HandCountChangedEvent args)
+    {
+        RefreshShatteredHands(ent);
+    }
+
+    private void OnMapInit(Entity<ShatteredRisenComponent> ent, ref MapInitEvent args)
+    {
+        RefreshShatteredHands(ent);
+    }
+
+    // This is stinky but idk how to make it more sane. Shattered risen should have its hands always blocked by its 2 types of weapons
+    private void RefreshShatteredHands(Entity<ShatteredRisenComponent> ent)
+    {
+        if (!TryComp(ent, out HandsComponent? hands) || hands.Count == 0)
+            return;
+
+        var handsEnt = (ent, hands);
+
+        var hasWeapon1 = false;
+
+        foreach (var held in _hands.EnumerateHeld(handsEnt))
+        {
+            var proto = Prototype(held);
+            if (proto == null)
+            {
+                DropOrDelete();
+                continue;
+            }
+
+            if (proto == ent.Comp.Weapon1)
+                hasWeapon1 = true;
+            else if (proto != ent.Comp.Weapon2)
+                DropOrDelete();
+
+            continue;
+
+            void DropOrDelete()
+            {
+                if (!_hands.TryDrop(handsEnt, held, null, false, false))
+                    QueueDel(held);
+            }
+        }
+
+        var coords = Transform(ent).Coordinates;
+
+        foreach (var hand in _hands.EnumerateHands(handsEnt))
+        {
+            if (_hands.TryGetHeldItem(handsEnt, hand, out _))
+                continue;
+
+            var toSpawn = ent.Comp.Weapon1;
+            if (!hasWeapon1)
+                hasWeapon1 = true;
+            else
+                toSpawn = ent.Comp.Weapon2;
+
+            var weapon = Spawn(toSpawn, coords);
+            if (!_hands.TryForcePickup(handsEnt, weapon, hand, false, false, hands))
+                QueueDel(weapon);
+        }
     }
 
     private void OnGetBriefing(Entity<GhoulRoleComponent> ent, ref GetBriefingEvent args)
@@ -200,7 +263,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
                 SetBoundHeretic((ent.Owner, minion), heretic, false);
         }
 
-        if (TryComp<HumanoidProfileComponent>(ent, out var humanoid))
+        if (ent.Comp.ChangeHumanoidAppearance && TryComp<HumanoidProfileComponent>(ent, out var humanoid))
         {
             // make them "have no eyes" and grey
             // this is clearly a reference to grey tide

@@ -16,14 +16,36 @@ using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Emoting;
 
-// use as a template
-//[Serializable, NetSerializable, DataDefinition] public sealed partial class AnimationNameEmoteEvent : EntityEventArgs;
+[Serializable, NetSerializable, ImplicitDataDefinitionForInheritors]
+public abstract partial class AnimationEmoteEvent : EntityEventArgs
+{
+    [DataField]
+    public virtual bool CausesVomit { get; set; }
+}
 
-[Serializable, NetSerializable, DataDefinition] public sealed partial class AnimationFlipEmoteEvent : EntityEventArgs;
-[Serializable, NetSerializable, DataDefinition] public sealed partial class AnimationSpinEmoteEvent : EntityEventArgs;
-[Serializable, NetSerializable, DataDefinition] public sealed partial class AnimationJumpEmoteEvent : EntityEventArgs;
-[Serializable, NetSerializable, DataDefinition] public sealed partial class AnimationTweakEmoteEvent : EntityEventArgs;
-[Serializable, NetSerializable, DataDefinition] public sealed partial class AnimationFlexEmoteEvent : EntityEventArgs;
+[Serializable, NetSerializable]
+public sealed partial class AnimationFlipEmoteEvent : AnimationEmoteEvent
+{
+    public override bool CausesVomit { get; set; } = true;
+}
+
+[Serializable, NetSerializable]
+public sealed partial class AnimationSpinEmoteEvent : AnimationEmoteEvent
+{
+    public override bool CausesVomit { get; set; } = true;
+}
+
+[Serializable, NetSerializable]
+public sealed partial class AnimationJumpEmoteEvent : AnimationEmoteEvent
+{
+    public override bool CausesVomit { get; set; } = true;
+}
+
+[Serializable, NetSerializable]
+public sealed partial class AnimationTweakEmoteEvent : AnimationEmoteEvent;
+
+[Serializable, NetSerializable]
+public sealed partial class AnimationFlexEmoteEvent : AnimationEmoteEvent;
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAnimatedEmotesSystem))]
 [AutoGenerateComponentState(true)]
@@ -32,25 +54,18 @@ public sealed partial class AnimatedEmotesComponent : Component
     [DataField, AutoNetworkedField]
     public ProtoId<EmotePrototype>? Emote;
 
-    /// <summary>
-    /// Optional state for the mouse tweaking emote.
-    /// </summary>
     [DataField]
-    public string? TweakState;
-
-    #region Flex emote states
+    public EntProtoId VomitStatus = "EmoteVomitCounterStatusEffect";
 
     [DataField]
-    public string? FlexState;
+    public EntProtoId BlockVomitEmoteStatus = "BlockVomitEmotesStatusEffect";
 
     [DataField]
-    public string? FlexDefaultState;
+    public TimeSpan VomitStatusTime = TimeSpan.FromSeconds(1);
 
     [DataField]
-    public string? FlexDamageState;
+    public int EmotesToVomit = 5;
 
     [DataField]
-    public string? FlexDefaultDamageState;
-
-    #endregion
+    public TimeSpan BlockVomitStatusTime = TimeSpan.FromSeconds(10);
 }

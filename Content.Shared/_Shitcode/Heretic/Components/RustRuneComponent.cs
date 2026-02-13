@@ -16,20 +16,17 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._Goobstation.Heretic.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RustRuneComponent : Component
 {
     /// <summary>
     /// If there is no rusted wall sprite - add rust overlay.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool RustOverlay;
 
     [DataField]
     public ProtoId<TagPrototype> DiagonalTag = "Diagonal";
-
-    [DataField, AutoNetworkedField]
-    public Vector2 RuneOffset = Vector2.Zero;
 
     [DataField]
     public Vector2 DiagonalOffset = new(0.25f, -0.25f);
@@ -58,12 +55,6 @@ public sealed partial class RustRuneComponent : Component
         new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_11"),
         new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_12"),
     };
-
-    [DataField, AutoNetworkedField]
-    public int RuneIndex;
-
-    [DataField, AutoNetworkedField]
-    public bool AnimationEnded;
 
     [DataField]
     public int LastFrame = 5;

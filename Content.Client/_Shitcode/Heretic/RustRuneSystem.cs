@@ -14,6 +14,7 @@ using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared.Tag;
 using Robust.Client.GameObjects;
 using Robust.Shared.Graphics.RSI;
+using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
 namespace Content.Client._Shitcode.Heretic;
@@ -22,6 +23,7 @@ public sealed class RustRuneSystem : EntitySystem
 {
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -29,18 +31,25 @@ public sealed class RustRuneSystem : EntitySystem
 
         SubscribeLocalEvent<RustRuneComponent, ComponentStartup>(OnStartup, after: new[] { typeof(IconSmoothSystem) });
         SubscribeLocalEvent<RustRuneComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<RustRuneComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
         SubscribeLocalEvent<RustRuneComponent, IconSmoothCornersInitializedEvent>(OnIconSmoothInit);
 
-        SubscribeLocalEvent<SpriteRandomOffsetComponent, AppearanceChangeEvent>(OnAppearanceChange);
+        SubscribeLocalEvent<SpriteRandomOffsetComponent, ComponentStartup>(OnStartup);
     }
 
-    private void OnAppearanceChange(Entity<SpriteRandomOffsetComponent> ent, ref AppearanceChangeEvent args)
-    {
-        if (args.Sprite == null || !args.AppearanceData.TryGetValue(OffsetVisuals.Offset, out var offset))
-            return;
 
-        args.Sprite.Offset = (Vector2) offset;
+    private RustRuneComponent AddRustRune(EntityUid wall)
+    {
+        var rune = EnsureComp<RustRuneComponent>(wall);
+        Dirty(wall, rune);
+
+        return rune;
+    }
+
+    private void OnStartup(Entity<SpriteRandomOffsetComponent> ent, ref ComponentStartup args)
+    {
+        var (uid, comp) = ent;
+
+        _spriteSystem.SetOffset(uid, _random.NextVector2Box(comp.MinX, comp.MinY, comp.MaxX, comp.MaxY));
     }
 
     private void OnIconSmoothInit(Entity<RustRuneComponent> ent, ref IconSmoothCornersInitializedEvent args)
@@ -99,28 +108,23 @@ public sealed class RustRuneSystem : EntitySystem
 
         if (comp.RustOverlay && !sprite.LayerMapTryGet(RustRuneKey.Overlay, out _))
         {
-            var layer = sprite.AddLayer(diagonal ? comp.DiagonalSprite : comp.OverlaySprite);
-            sprite.LayerMapSet(RustRuneKey.Overlay, layer);
+            var layerIndex = sprite.AddLayer(diagonal ? comp.DiagonalSprite : comp.OverlaySprite);
+            sprite.LayerMapSet(RustRuneKey.Overlay, layerIndex);
         }
 
-        if (comp.RuneIndex >= 0 && comp.RuneIndex < comp.RuneSprites.Count)
+        var rune = _random.Pick(comp.RuneSprites);
+
+        if (!sprite.LayerMapTryGet(RustRuneKey.Rune, out var layer))
         {
-            if (!sprite.LayerMapTryGet(RustRuneKey.Rune, out var layer))
-            {
-                layer = sprite.AddLayer(comp.RuneSprites[comp.RuneIndex]);
-                sprite.LayerMapSet(RustRuneKey.Rune, layer);
-                sprite.LayerSetShader(RustRuneKey.Rune, "unshaded");
-            }
-
-            if (comp.AnimationEnded)
-            {
-                sprite.LayerSetTexture(layer,
-                    _spriteSystem.RsiStateLike(comp.RuneSprites[comp.RuneIndex])
-                        .GetFrame(RsiDirection.South, comp.LastFrame));
-            }
-
-            var offset = diagonal ? comp.DiagonalOffset : comp.RuneOffset;
-            sprite.LayerSetOffset(layer, offset);
+            layer = sprite.AddLayer(rune);
+            sprite.LayerMapSet(RustRuneKey.Rune, layer);
+            sprite.LayerSetShader(RustRuneKey.Rune, "unshaded");
         }
+
+        var offset = diagonal ? comp.DiagonalOffset : _random.NextVector2Box(0.25f, 0.25f);
+        sprite.LayerSetOffset(layer, offset);
+
+        if (_spriteSystem.TryGetLayer((uid, sprite), layer, out var spriteLayer, true))
+            spriteLayer.Loop = false;
     }
 }

@@ -41,3 +41,4 @@
     interfaces:
       enum.WizardMirrorUiKey.Key:
         type: WizardMirrorBoundUserInterface
+  - type: ReflectiveSurface # Goob

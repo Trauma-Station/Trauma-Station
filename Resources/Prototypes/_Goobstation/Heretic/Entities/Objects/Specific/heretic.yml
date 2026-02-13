@@ -51,6 +51,7 @@
     tags:
     - HereticItem
     - CodexCicatrix
+    - AnchorHereticStructure
   - type: TransmutationRuneScriber
 
 - type: entity
@@ -121,6 +122,7 @@
   - type: Tag
     tags:
     - HereticItem
+    - AnchorHereticStructure
   - type: Injector
     ignoreClosed: false
     interactionRangeOverride: 16
@@ -179,6 +181,7 @@
   - type: Tag
     tags:
     - HereticItem
+    - EldritchFlask
 
 - type: entity
   id: HereticProtectiveBlade

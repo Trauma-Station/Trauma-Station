@@ -107,6 +107,25 @@
     stage: 3
 
 - type: listing
+  id: HereticSidePath3Ether
+  name: knowledge-path-side-s4-ether-name
+  description: knowledge-path-side-s4-ether-desc
+  icon: { sprite: _Goobstation/Heretic/Entities/Potions/ether.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - EtherOfTheNewborn
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSide
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 2
+
+- type: listing
   id: HereticSidePathKnowledge
   name: knowledge-path-side-knowledge-name
   description: knowledge-path-side-knowledge-desc
@@ -187,7 +206,105 @@
   name: knowledge-path-side-s6-morbus-name
   description: knowledge-path-side-s6-morbus-desc
   icon: { sprite: _Goobstation/Heretic/book_morbus.rsi, state: icon-on }
-  productHereticKnowledge: CodexMorbus
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - CodexMorbus
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSide
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 5
+
+- type: listing
+  id: HereticSidePath6Greaves
+  name: knowledge-path-side-s6-greaves-name
+  description: knowledge-path-side-s6-greaves-desc
+  icon: { sprite: _Goobstation/Heretic/Clothing/Shoes/greaves.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - GreavesOfTheProphet
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSide
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 5
+
+- type: listing
+  id: HereticSidePath6Shattered
+  name: knowledge-path-side-s6-shattered-ritual-name
+  description: knowledge-path-side-s6-shattered-ritual-desc
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: ghoul_shattered }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - ShatteredRitual
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSide
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 5
+
+- type: listing
+  id: HereticSidePath6Crucible
+  name: knowledge-path-side-s6-crucible-name
+  description: knowledge-path-side-s6-crucible-desc
+  icon: { sprite: _Goobstation/Heretic/items.rsi, state: crucible }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - MawedCrucible
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSide
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 5
+
+- type: listing
+  id: HereticSidePath6Sword
+  name: knowledge-path-side-s6-sword-name
+  description: knowledge-path-side-s6-sword-desc
+  icon: { sprite: _Goobstation/Heretic/Entities/sword.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - ThroughTheBoundary
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSide
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 5
+
+- type: listing
+  id: HereticSidePath6Grasp
+  name: knowledge-path-side-s6-grasp-name
+  description: knowledge-path-side-s6-grasp-desc
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: grasp_mind }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - MindGrasp
   cost:
     KnowledgePoint: 1
   categories:
@@ -216,3 +333,41 @@
     stock: 1
   - !type:HereticPathCondition
     stage: 7
+
+- type: listing
+  id: HereticSidePath8SpacePhase
+  name: knowledge-path-side-s8-space-phase-name
+  description: knowledge-path-side-s8-space-phase-desc
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: space_phase }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - SpacePhase
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSide
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 7
+
+- type: listing
+  id: HereticSidePath6Maid
+  name: knowledge-path-side-s8-maid-name
+  description: knowledge-path-side-s8-maid-desc
+  icon: { sprite: _Goobstation/Heretic/eldritch_mobs.rsi, state: maid }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - MaidInTheMirror
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSide
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage:7

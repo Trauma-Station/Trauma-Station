@@ -1,8 +1,11 @@
+using Content.Server.Administration.Toolshed;
+using Content.Server.Body.Systems;
 using Content.Shared._White.Xenomorphs.Infection;
 using Content.Shared._White.Xenomorphs.Larva;
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Rejuvenate;
 using Robust.Server.Containers;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -15,15 +18,31 @@ public sealed class XenomorphInfectionSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+<<<<<<< HEAD
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+=======
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedEntityEffectSystem _effect = default!;
+>>>>>>> a6a400374d (Side stuff)
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenomorphInfectionComponent, ComponentShutdown>(OnShutdown);
+<<<<<<< HEAD
         SubscribeLocalEvent<XenomorphInfectionComponent, OrganGotInsertedEvent>(OnOrganInserted);
         SubscribeLocalEvent<XenomorphInfectionComponent, OrganGotRemovedEvent>(OnOrganRemoved);
+=======
+        SubscribeLocalEvent<XenomorphInfectionComponent, OrganAddedToBodyEvent>(OnOrganAddedToBody);
+        SubscribeLocalEvent<XenomorphInfectionComponent, OrganRemovedFromBodyEvent>(OnOrganRemovedFromBody);
+        SubscribeLocalEvent<XenomorphInfectedComponent, RejuvenateEvent>(OnRejuvenate);
+    }
+
+    private void OnRejuvenate(Entity<XenomorphInfectedComponent> ent, ref RejuvenateEvent args)
+    {
+        _transform.AttachToGridOrMap(ent.Comp.Infection);
+>>>>>>> a6a400374d (Side stuff)
     }
 
     private void OnShutdown(EntityUid uid, XenomorphInfectionComponent component, ComponentShutdown args)

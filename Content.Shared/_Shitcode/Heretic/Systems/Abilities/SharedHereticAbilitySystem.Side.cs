@@ -33,18 +33,16 @@ public abstract partial class SharedHereticAbilitySystem
         if (!TryComp(ent, out HandsComponent? hands))
             return;
 
-        args.Handled = true;
-
-        if (_net.IsClient)
-            return;
-
         if (Exists(spearAction.CreatedSpear))
         {
             var spear = spearAction.CreatedSpear.Value;
 
-            // TODO: When heretic spells are made the way wizard spell works don't handle this action if we can't pick it up.
-            // It is handled now because it always speaks invocation no matter what.
             if (_hands.IsHolding((ent, hands), spear) || !_hands.TryGetEmptyHand((ent, hands), out var hand))
+                return;
+
+            args.Handled = true;
+
+            if (_net.IsClient)
                 return;
 
             if (TryComp(spear, out EmbeddableProjectileComponent? embeddable) && embeddable.EmbeddedIntoUid != null)
@@ -56,12 +54,15 @@ public abstract partial class SharedHereticAbilitySystem
             return;
         }
 
-        var newSpear = Spawn(spearAction.SpearProto, Transform(ent).Coordinates);
+        var newSpear = PredictedSpawnAtPosition(spearAction.SpearProto, Transform(ent).Coordinates);
         if (!_hands.TryForcePickupAnyHand(ent, newSpear, false, hands))
         {
-            QueueDel(newSpear);
+            PredictedQueueDel(newSpear);
+            _actions.SetIfBiggerCooldown(args.Action.AsNullable(), TimeSpan.FromSeconds(1));
             return;
         }
+
+        args.Handled = true;
 
         spearAction.CreatedSpear = newSpear;
         EnsureComp<IceSpearComponent>(newSpear).ActionId = args.Action;
