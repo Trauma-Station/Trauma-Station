@@ -15,13 +15,13 @@ public sealed partial class LanguageKnowledgeComponent : Component
     ///     Can this entity speak without any external tools.
     /// </summary>
     [DataField]
-    public bool Speaks = false;
+    public bool Speaks = true;
 
     /// <summary>
     ///     Can this entity this entity understand without any external tools.
     /// </summary>
     [DataField]
-    public bool Understands = false;
+    public bool Understands = true;
 
     /// <summary>
     ///     Id of the language this knowledge represents.

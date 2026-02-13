@@ -9,8 +9,6 @@
     experienceCost: 4
     color: "#ADD8E6"
   - type: LanguageKnowledge
-    speaks: true
-    understands: true
 
 - type: entity
   parent: BaseLanguageKnowledge
