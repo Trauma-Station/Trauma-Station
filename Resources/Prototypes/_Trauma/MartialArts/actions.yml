@@ -1,6 +1,6 @@
 - type: entity
   id: ActionOpenMartialArts
-  parent: ActionBase
+  parent: BaseAction
   name: Martial Arts Menu
   description: game-hud-open-martial-arts-menu-button-tooltip
   components:

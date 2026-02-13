@@ -64,7 +64,7 @@
   - type: LagCompensation
   - type: StunVisuals
   # <Trauma>
-  - type: ActionContainer
+  - type: ActionGrant
     actions:
     - ActionOpenMartialArts
   - type: KnowledgeGrant

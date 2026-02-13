@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
@@ -53,7 +54,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         if (_menu == null)
         {
             // setup window
-            var models = GetButtons();
+            var models = GetButtons().ToList();
 
             _menu = new SimpleRadialMenu();
             _menu.SetButtons(models);

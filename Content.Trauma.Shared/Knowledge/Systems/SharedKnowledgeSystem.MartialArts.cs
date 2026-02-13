@@ -23,7 +23,6 @@ public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
     private readonly SoundSpecifier _clumsySound = new SoundPathSpecifier("/Audio/Weapons/rubberhammer.ogg");
     private void InitializeMartialArts()
