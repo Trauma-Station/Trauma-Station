@@ -31,6 +31,9 @@
   parent: [ OrganGoliath, OrganAnimalSpriteExternal ]
   id: OrganGoliathExternal
   components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
   - type: Woundable
     integrity: 350
     integrityCap: 350

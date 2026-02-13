@@ -287,6 +287,9 @@
   - type: VisualOrgan
     data:
       sprite: _EinsteinEngines/Mobs/Species/IPC/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: IPC
   - type: WoundableVisuals
     damageOverlayColors:
       Brute: "#DD8822"

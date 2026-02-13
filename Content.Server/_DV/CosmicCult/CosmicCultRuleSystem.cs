@@ -26,6 +26,7 @@ using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
 using Content.Server.Objectives.Components;
+using Content.Server.Polymorph.Components;
 using Content.Server.Popups;
 using Content.Shared.Radio.Components;
 using Content.Server.RoundEnd;
@@ -177,6 +178,11 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             component.StewardVoteTimer = null;
             StewardVote();
         }
+        if (component.ExtraRiftTimer is { } riftTimer && _timing.CurTime >= riftTimer && !component.RiftStop)
+        {
+            component.ExtraRiftTimer = _timing.CurTime + _rand.Next(TimeSpan.FromSeconds(230), TimeSpan.FromSeconds(360)); //3min50 to 6min between new rifts. Seconds instead of minutes for granularity.
+            SpawnRift();
+        }
         if (component.PrepareFinaleTimer is { } finalePrepTimer
             && _timing.CurTime >= finalePrepTimer)
         {
@@ -264,10 +270,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
             for (var i = 0; i < component.TotalCrew / 4; i++) // spawn # malign rifts equal to 25% of the playercount
             {
-                if (!TryFindRandomTile(out var _, out var _, out var _, out var coords))
-                    continue;
-
-                Spawn("CosmicMalignRift", coords);
+                SpawnRift();
             }
 
             var lights = EntityQueryEnumerator<PoweredLightComponent>();
@@ -304,12 +307,14 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         while (cultQuery.MoveNext(out var cult, out var cultComp, out var metadata))
         {
             var playerInfo = metadata.EntityName;
-            cultists.Add((playerInfo, cult));
+            if (TryComp<PolymorphedEntityComponent>(cult, out var polyComp) && polyComp.Parent is { } parent) // If the cultist is polymorphed, we use the original entity instead and hope that they'll polymorph back eventually
+                cultists.Add((playerInfo, parent));
+            else
+                cultists.Add((playerInfo, cult));
         }
 
         var options = new VoteOptions
         {
-            DisplayVotes = false,
             Title = Loc.GetString("cosmiccult-vote-steward-title"),
             InitiatorText = Loc.GetString("cosmiccult-vote-steward-initiator"),
             Duration = _voteTimer,
@@ -356,6 +361,15 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
     private void OnAntagSelect(Entity<CosmicCultRuleComponent> uid, ref AfterAntagEntitySelectedEvent args) =>
         TryStartCult(args.EntityUid, uid);
+
+
+    public void SpawnRift()
+    {
+        if (TryFindRandomTile(out var _, out var _, out var _, out var coords))
+        {
+            Spawn("CosmicMalignRift", coords);
+        }
+    }
 
     private void OnAddedCultist(Entity<CosmicCultRuleComponent> uid, ref CosmicCultAddedCultistEvent args)
     {
@@ -489,6 +503,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             ent.Comp.RoundEndTextAnnouncement);
 
         ent.Comp.RoundEndBehavior = RoundEndBehavior.Nothing; // prevent this being called multiple times.
+        ent.Comp.RiftStop = true; // rifts can stop spawning now.
 
         var gameruleMonument = ent.Comp.MonumentInGame;
         if (TryComp<CosmicFinaleComponent>(gameruleMonument, out var finComp))
@@ -791,7 +806,8 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     {
         if (AssociatedGamerule(uid) is not { } cult)
             return;
-
+        if (TerminatingOrDeleted(uid))
+            return;
         var cosmicGamerule = cult.Comp;
 
         _stun.TryKnockdown(uid.Owner, TimeSpan.FromSeconds(2));

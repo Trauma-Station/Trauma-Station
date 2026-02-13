@@ -1,20 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fildrance <fildrance@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 pa.pecherskij <pa.pecherskij@interfax.ru>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 ActiveMammmoth <140334666+ActiveMammmoth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Shared._White.StoreDiscount;
 using Content.Shared.FixedPoint;
 using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Audio;
@@ -27,8 +10,6 @@ namespace Content.Shared.Store.Components;
 /// This component manages a store which players can use to purchase different listings
 /// through the ui. The currency, listings, and categories are defined in yaml.
 /// </summary>
-// goob edit - fuck newstore
-// do not touch unless you want to shoot yourself in the leg
 [RegisterComponent, NetworkedComponent]
 public sealed partial class StoreComponent : Component
 {
@@ -71,16 +52,16 @@ public sealed partial class StoreComponent : Component
     public EntityUid? AccountOwner = null;
 
     /// <summary>
-    /// All listings, including those that aren't available to the buyer
+    /// Cached list of listings items with modifiers.
     /// </summary>
     [DataField]
-    public HashSet<ListingData> Listings = new();
+    public HashSet<ListingDataWithCostModifiers> FullListingsCatalog = new();
 
     /// <summary>
     /// All available listings from the last time that it was checked.
     /// </summary>
     [ViewVariables]
-    public HashSet<ListingData> LastAvailableListings = new();
+    public HashSet<ListingDataWithCostModifiers> LastAvailableListings = new();
 
     /// <summary>
     ///     All current entities bought from this shop. Useful for keeping track of refunds and upgrades.
@@ -112,10 +93,6 @@ public sealed partial class StoreComponent : Component
     /// </summary>
     [DataField]
     public EntityUid? StartingMap;
-
-    // WD EDIT START
-    [DataField] public SalesSpecifier Sales { get; private set; } = new();
-    // WD EDIT END
 
     #region audio
     /// <summary>

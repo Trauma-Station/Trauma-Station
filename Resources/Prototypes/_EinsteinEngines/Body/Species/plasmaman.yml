@@ -231,6 +231,9 @@
   - type: VisualOrgan
     data:
       sprite: _EinsteinEngines/Mobs/Species/Plasmaman/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: Plasmaman
   - type: WoundableVisuals
     damageOverlayColors:
       Brute: "#743474"

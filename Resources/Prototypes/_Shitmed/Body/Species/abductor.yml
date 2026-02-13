@@ -99,6 +99,9 @@
   - type: WoundableVisuals
     damageOverlayColors:
       Brute: "#878787"
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
 
 ## Parts
 

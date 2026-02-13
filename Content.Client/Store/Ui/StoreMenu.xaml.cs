@@ -1,32 +1,8 @@
-// SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Repo <47093363+Titian3@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 Fildrance <fildrance@gmail.com>
-// SPDX-FileCopyrightText: 2024 J. Brown <DrMelon@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 TGRCDev <tgrc@tgrc.dev>
-// SPDX-FileCopyrightText: 2024 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 pa.pecherskij <pa.pecherskij@interfax.ru>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 LuciferEOS <stepanteliatnik2022@gmail.com>
-// SPDX-FileCopyrightText: 2025 LuciferMkshelter <154002422+LuciferEOS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 LuciferMkshelter <stepanteliatnik2022@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Client.Stylesheets;
+// </Trauma>
 using System.Linq;
+using System.Text;
 using Content.Client.Actions;
 using Content.Client.Message;
 using Content.Shared.FixedPoint;
@@ -41,8 +17,6 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Store.Ui;
 
-// goob edit - fuck newstore
-// do not touch unless you want to shoot yourself in the leg
 [GenerateTypedNameReferences]
 public sealed partial class StoreMenu : DefaultWindow
 {
@@ -52,7 +26,7 @@ public sealed partial class StoreMenu : DefaultWindow
     private StoreWithdrawWindow? _withdrawWindow;
 
     public event EventHandler<string>? SearchTextUpdated;
-    public event Action<BaseButton.ButtonEventArgs, ListingData>? OnListingButtonPressed;
+    public event Action<BaseButton.ButtonEventArgs, ListingDataWithCostModifiers>? OnListingButtonPressed;
     public event Action<BaseButton.ButtonEventArgs, string>? OnCategoryButtonPressed;
     public event Action<BaseButton.ButtonEventArgs, string, int>? OnWithdrawAttempt;
     public event Action<BaseButton.ButtonEventArgs>? OnRefundAttempt;
@@ -60,7 +34,7 @@ public sealed partial class StoreMenu : DefaultWindow
     public Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> Balance = new();
     public string CurrentCategory = string.Empty;
 
-    private List<ListingData> _cachedListings = new();
+    private List<ListingDataWithCostModifiers> _cachedListings = new();
 
     public StoreMenu()
     {
@@ -101,7 +75,7 @@ public sealed partial class StoreMenu : DefaultWindow
         WithdrawButton.Disabled = disabled;
     }
 
-    public void UpdateListing(List<ListingData> listings)
+    public void UpdateListing(List<ListingDataWithCostModifiers> listings)
     {
         _cachedListings = listings;
 
@@ -110,7 +84,9 @@ public sealed partial class StoreMenu : DefaultWindow
 
     public void UpdateListing()
     {
-        var sorted = _cachedListings.OrderBy(l => l.Priority).ThenBy(l => l.Cost.Values.Sum()).ThenBy(l => l.Name == null ? string.Empty : Loc.GetString(l.Name)); // Goob edit
+        var sorted = _cachedListings.OrderBy(l => l.Priority)
+                .ThenBy(l => l.Cost.Values.Sum())
+                .ThenBy(l => l.Name == null ? string.Empty : Loc.GetString(l.Name)); // Trauma
 
         // should probably chunk these out instead. to-do if this clogs the internet tubes.
         // maybe read clients prototypes instead?
@@ -148,13 +124,12 @@ public sealed partial class StoreMenu : DefaultWindow
         OnRefundAttempt?.Invoke(args);
     }
 
-    private void AddListingGui(ListingData listing)
+    private void AddListingGui(ListingDataWithCostModifiers listing)
     {
         if (!listing.Categories.Contains(CurrentCategory))
             return;
 
-        var listingPrice = listing.Cost;
-        var hasBalance = HasListingPrice(Balance, listingPrice);
+        var hasBalance = listing.CanBuyWith(Balance);
 
         var spriteSys = _entityManager.EntitySysManager.GetEntitySystem<SpriteSystem>();
 
@@ -174,10 +149,15 @@ public sealed partial class StoreMenu : DefaultWindow
                 texture = spriteSys.Frame0(icon);
         }
 
-        var newListing = new StoreListingControl(listing, GetListingPriceString(listing), hasBalance, texture);
+        var listingInStock = GetListingPriceString(listing);
+        var discount = GetDiscountString(listing);
 
-        if (listing.DiscountValue > 0) // WD EDIT
-            newListing.StoreItemBuyButton.AddStyleClass("ButtonColorRed");
+        var newListing = new StoreListingControl(listing, listingInStock, discount, hasBalance, texture);
+
+        // <Trauma>
+        if (discount != string.Empty)
+            newListing.StoreItemBuyButton.AddStyleClass(StyleClass.Negative);
+        // </Trauma>
 
         newListing.StoreItemBuyButton.OnButtonDown += args
             => OnListingButtonPressed?.Invoke(args, listing);
@@ -185,20 +165,7 @@ public sealed partial class StoreMenu : DefaultWindow
         StoreListingsContainer.AddChild(newListing);
     }
 
-    public bool HasListingPrice(Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> currency, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> price)
-    {
-        foreach (var type in price)
-        {
-            if (!currency.ContainsKey(type.Key))
-                return false;
-
-            if (currency[type.Key] < type.Value)
-                return false;
-        }
-        return true;
-    }
-
-    private string GetListingPriceString(ListingData listing)
+    private string GetListingPriceString(ListingDataWithCostModifiers listing)
     {
         var text = string.Empty;
 
@@ -221,12 +188,60 @@ public sealed partial class StoreMenu : DefaultWindow
         return text.TrimEnd();
     }
 
+    private string GetDiscountString(ListingDataWithCostModifiers listingDataWithCostModifiers)
+    {
+        string discountMessage;
+
+        if (!listingDataWithCostModifiers.IsCostModified)
+        {
+            return string.Empty;
+        }
+
+        var relativeModifiersSummary = listingDataWithCostModifiers.GetModifiersSummaryRelative();
+        if (relativeModifiersSummary.Count > 1)
+        {
+            var sb = new StringBuilder();
+            sb.Append('(');
+            foreach (var (currency, amount) in relativeModifiersSummary)
+            {
+                var currencyPrototype = _prototypeManager.Index(currency);
+                if (sb.Length != 0)
+                {
+                    sb.Append(", ");
+                }
+                var currentDiscountMessage = Loc.GetString(
+                    "store-ui-discount-display-with-currency",
+                    ("amount", amount.ToString("P0")),
+                    ("currency", Loc.GetString(currencyPrototype.DisplayName))
+                );
+                sb.Append(currentDiscountMessage);
+            }
+
+            sb.Append(')');
+            discountMessage = sb.ToString();
+        }
+        else
+        {
+            // if cost was modified - it should have diff relatively to original cost in 1 or more currency
+            // ReSharper disable once GenericEnumeratorNotDisposed Dictionary enumerator doesn't require dispose
+            var enumerator = relativeModifiersSummary.GetEnumerator();
+            enumerator.MoveNext();
+            var amount = enumerator.Current.Value;
+            discountMessage = Loc.GetString(
+                "store-ui-discount-display",
+                ("amount", (amount.ToString("P0")))
+            );
+        }
+
+        return discountMessage;
+    }
+
     private void ClearListings()
     {
         StoreListingsContainer.Children.Clear();
     }
 
-    public void PopulateStoreCategoryButtons(HashSet<ListingData> listings)
+    public void PopulateStoreCategoryButtons(HashSet<ListingDataWithCostModifiers> listings)
     {
         var allCategories = new List<StoreCategoryPrototype>();
         foreach (var listing in listings)
@@ -266,7 +281,7 @@ public sealed partial class StoreMenu : DefaultWindow
             };
 
             if (proto.Evil) // Goobstation
-                catButton.AddStyleClass("ButtonColorRed");
+                catButton.AddStyleClass(StyleClass.Negative);
 
             catButton.OnPressed += args => OnCategoryButtonPressed?.Invoke(args, catButton.Id);
             CategoryListContainer.AddChild(catButton);

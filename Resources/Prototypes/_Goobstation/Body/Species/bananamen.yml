@@ -79,6 +79,9 @@
   - type: VisualOrgan
     data:
       sprite: _Goobstation/Mobs/Species/BananaMen/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
 
 ## Parts
 
