@@ -59,10 +59,17 @@
   - type: Inventory
     speciesId: reptilian
     femaleDisplacements:
+      # <Trauma>
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _White/Mobs/Species/Reptilian/displacement.rsi
+            state: shoes
+      # <Trauma>
       jumpsuit:
         sizeMaps:
           32:
-            sprite: Mobs/Species/Human/displacement.rsi
+            sprite: Mobs/Species/Reptilian/displacement.rsi # Trauma - use Reptilian not Human ???
             state: jumpsuit-female
       head:
         sizeMaps:
@@ -75,6 +82,18 @@
             sprite: Mobs/Species/Reptilian/displacement.rsi
             state: mask
     displacements:
+      # <Trauma>
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _White/Mobs/Species/Reptilian/displacement.rsi
+            state: shoes
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _White/Mobs/Species/Reptilian/displacement.rsi
+            state: jumpsuit
+      # <Trauma>
       head:
         sizeMaps:
           32:

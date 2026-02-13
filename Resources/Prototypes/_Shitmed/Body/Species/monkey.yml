@@ -50,7 +50,7 @@
       sprite: Mobs/Animals/monkey.rsi
   - type: VisualOrganMarkings
     markingData:
-      group: Reptilian
+      group: None
 
 ## Parts
 
