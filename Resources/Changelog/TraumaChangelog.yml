@@ -2459,3 +2459,10 @@ Entries:
   id: 297
   time: '2026-02-13T08:28:35.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/654
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use Face markings.
+  id: 298
+  time: '2026-02-13T18:20:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/683
