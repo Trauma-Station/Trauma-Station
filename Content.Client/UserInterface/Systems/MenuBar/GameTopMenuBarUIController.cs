@@ -20,7 +20,7 @@ namespace Content.Client.UserInterface.Systems.MenuBar;
 public sealed class GameTopMenuBarUIController : UIController
 {
     // <Trauma>
-    [Dependency] private readonly IMartialArtsUIController _martialArts = default!;
+    private readonly IMartialArtsUIController _martialArts = default!;
     // </Trauma>
     [Dependency] private readonly EscapeUIController _escape = default!;
     [Dependency] private readonly AdminUIController _admin = default!;

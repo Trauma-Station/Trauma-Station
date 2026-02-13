@@ -13,6 +13,5 @@ public sealed class EntryPoint : GameClient
         base.PreInit();
 
         ContentTraumaClientIoC.Register(Dependencies);
-        IoCManager.Register<IMartialArtsUIController, MartialArtsUIController>();
     }
 }

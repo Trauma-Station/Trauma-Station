@@ -75,7 +75,7 @@
   # </Goobstation>
   # Einstein Engines - Language begin
   - LanguageSpeaker
-  - LanguageKnowledge
+  # - LanguageKnowledge # Trauma - Knowledge
   - ForeignerTrait
   # Einstein Engines - Language end
   blacklist:
