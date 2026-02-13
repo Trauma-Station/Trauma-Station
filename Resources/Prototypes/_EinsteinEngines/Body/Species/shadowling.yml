@@ -1,0 +1,135 @@
+## Markings
+
+- type: markingsGroup
+  id: Shadowling
+  onlyGroupWhitelisted: true
+  limits:
+    # for abomination markings
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
+      required: false
+
+## Mob
+
+- type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceShadowling
+  name: shadowling appearance
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganShadowlingTorso
+      Head: OrganShadowlingHead
+      ArmLeft: OrganShadowlingArmLeft
+      ArmRight: OrganShadowlingArmRight
+      HandLeft: OrganShadowlingHandLeft
+      HandRight: OrganShadowlingHandRight
+      LegLeft: OrganShadowlingLegLeft
+      LegRight: OrganShadowlingLegRight
+      FootLeft: OrganShadowlingFootLeft
+      FootRight: OrganShadowlingFootRight
+      # Organs
+      Brain: OrganHumanBrain
+      Eyes: OrganHumanEyes
+      Tongue: OrganHumanTongue
+      Appendix: OrganHumanAppendix
+      Ears: OrganHumanEars
+      Lungs: OrganHumanLungs
+      Heart: OrganHumanHeart
+      Stomach: OrganHumanStomach
+      Liver: OrganHumanLiver
+      Kidneys: OrganHumanKidneys
+  - type: HumanoidProfile
+    species: Shadowling
+
+- type: entity
+  parent:
+  - AppearanceShadowling
+  - MobShadow
+  id: MobShadowling
+  name: Urist McSling
+  components:
+  - type: TypingIndicator
+    proto: alien
+  - type: Damageable
+    damageModifierSet: Shadowling
+  - type: Inventory
+    speciesId: shadowling
+    templateId: shadowling
+  - type: Insulated
+  - type: ProtectedFromStepTriggers
+  - type: LightDetection
+    onLightLevel: 0.25
+  - type: LightDetectionDamage
+  - type: CollectiveMind # goob edit
+    defaultChannel: Shadowmind
+    channels:
+    - Shadowmind
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy # idk what the fuck it is???????
+  id: OrganShadowling
+  suffix: shadowling
+  components:
+  - type: Damageable
+    damageModifierSet: Shadowling
+
+- type: entity
+  abstract: true
+  parent: [ OrganShadowling, OrganShadowExternal ]
+  id: OrganShadowlingExternal
+  components:
+  - type: Sprite
+    sprite: _EinsteinEngines/Mobs/Species/Shadowling/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _EinsteinEngines/Mobs/Species/Shadowling/parts.rsi
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganShadowlingExternal ]
+  id: OrganShadowlingTorso
+
+- type: entity
+  parent: [ OrganBaseHead, OrganShadowlingExternal ]
+  id: OrganShadowlingHead
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganShadowlingExternal ]
+  id: OrganShadowlingArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganShadowlingExternal ]
+  id: OrganShadowlingArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganShadowlingExternal ]
+  id: OrganShadowlingHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganShadowlingExternal ]
+  id: OrganShadowlingHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganShadowlingExternal ]
+  id: OrganShadowlingLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganShadowlingExternal ]
+  id: OrganShadowlingLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganShadowlingExternal ]
+  id: OrganShadowlingFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganShadowlingExternal ]
+  id: OrganShadowlingFootRight

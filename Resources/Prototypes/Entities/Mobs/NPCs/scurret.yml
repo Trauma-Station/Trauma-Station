@@ -4,24 +4,16 @@
 - type: entity
   name: scurret
   id: MobBaseScurret
-  parent: MobBaseAncestor
+  parent: [ MobBaseAncestor, AppearanceScurret ] # Shitmed
   abstract: true
   components:
   # Custom names
   - type: ReplacementAccent
     accent: scurret
-  # Shitmed Start
-  - type: HumanoidAppearance
-    species: Scurret
-  - type: Body
-    prototype: Scurret
-    bodyType: Complex
-    requiredLegs: 2
   - type: AntagImmune # Goob, no evil wawa
   - type: Sprite
     layers:
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
-    - map: [ "enum.HumanoidVisualLayers.Groin" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.RArm" ]
     - map: [ "enum.HumanoidVisualLayers.LArm" ]

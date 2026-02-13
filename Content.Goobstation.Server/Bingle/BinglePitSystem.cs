@@ -169,7 +169,7 @@ public sealed class BinglePitSystem : EntitySystem
             component.BinglePoints += component.PointsForAlive;
         else
             component.BinglePoints++;
-        if (HasComp<HumanoidAppearanceComponent>(tripper))
+        if (HasComp<HumanoidProfileComponent>(tripper))
             component.BinglePoints += component.SpawnNewAt * component.Level; // throwing a humanoid in the pit  will spawn a new bingle
 
         if (_query.HasComp(tripper))

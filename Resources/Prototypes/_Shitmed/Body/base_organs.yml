@@ -1,0 +1,214 @@
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBase
+  id: OrganBaseExternal
+  components:
+  - type: Sprite
+    overrideDir: North
+  - type: ThrowingAngle # We add this so that throwing things doesn't make them freak the fuck out by automatically deciding directions.
+    angle: 90
+  - type: BodyPart
+  - type: VisualOrganMarkings
+    markingData:
+      group: None # to avoid copying it 500 times, default to none
+  - type: Woundable
+    # numbers for an arm/leg since they're the most common and a reasonable default for strange parts
+    integrity: 80
+    integrityCap: 80
+    thresholds:
+      Minor: 70
+      Moderate: 50
+      Severe: 25
+      Critical: 10
+      Mangled: 0
+  - type: WoundableVisuals
+    thresholds: [ 10, 20, 30, 50, 70, 100 ]
+    damageGroupSprites:
+      Brute: _Shitmed/Mobs/Effects/brute_damage.rsi
+      Burn: _Shitmed/Mobs/Effects/burn_damage.rsi
+    damageGroupColors:
+      Brute: "#FF0000"
+  - type: Appearance
+  - type: Nerve
+  - type: ContainerContainer
+    containers:
+      Wounds: !type:Container
+      Bone: !type:Container
+
+- type: entity
+  abstract: true
+  parent: OrganBase
+  id: OrganBaseInternal
+  components:
+  - type: InternalOrgan
+  - type: ChildOrgan # there are no internal organs that are roots
+
+- type: entity
+  abstract: true
+  parent: OrganBase
+  id: OrganBaseFleshy # not bone or metal
+  components:
+  - type: SurgeryTool
+    startSound:
+      path: /Audio/_Shitmed/Medical/Surgery/organ1.ogg
+    endSound:
+      path: /Audio/_Shitmed/Medical/Surgery/organ2.ogg
+  - type: Edible
+  - type: BadFood
+  - type: Extractable
+    grindableSolutionName: food
+    juiceSolution:
+      reagents:
+      - ReagentId: Fat
+        Quantity: 3
+      - ReagentId: Blood
+        Quantity: 10
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 12
+        - ReagentId: Fat
+          Quantity: 3
+
+- type: entity
+  abstract: true
+  parent: OrganBase
+  id: OrganBaseSugary # yum
+  components:
+  - type: Damageable
+    damageModifierSet: Gingerbread
+  - type: Edible
+  # good food for mouse, no BadFood
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 15
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Sugar
+          Quantity: 12
+        - ReagentId: Nutriment
+          Quantity: 3
+
+## Parts
+
+- type: entity
+  abstract: true
+  parent: OrganBaseExternal
+  id: OrganBaseLimb
+  components:
+  - type: ChildOrgan
+    parentCategory: Torso
+  - type: WoundableVisuals
+    bleedingOverlay: _Shitmed/Mobs/Effects/bleeding_damage.rsi
+  - type: Limb
+
+- type: entity
+  abstract: true
+  parent: OrganBaseLimb
+  id: OrganBaseArm
+  components:
+  - type: BodyPart
+    partType: Arm
+  - type: Arm
+
+- type: entity
+  abstract: true
+  parent: OrganBaseLimb
+  id: OrganBaseLeg
+  components:
+  - type: BodyPart
+    partType: Leg
+  - type: MovementBodyPart
+  - type: Woundable
+    integrity: 80
+    integrityCap: 80
+    thresholds:
+      Minor: 70
+      Moderate: 50
+      Severe: 25
+      Critical: 10
+      Mangled: 0
+
+- type: entity
+  abstract: true
+  parent: OrganBaseExternal
+  id: OrganBaseHand
+  components:
+  - type: BodyPart
+    partType: Hand
+    slots: []
+  - type: Woundable
+    integrity: 50
+    integrityCap: 50
+    thresholds:
+      Minor: 42
+      Moderate: 36
+      Severe: 26
+      Critical: 15
+      Mangled: 0
+
+- type: entity
+  abstract: true
+  parent: OrganBaseExternal
+  id: OrganBaseFoot
+  components:
+  - type: BodyPart
+    partType: Foot
+    slots: []
+  - type: Woundable
+    integrity: 60
+    integrityCap: 60
+    thresholds:
+      Minor: 50
+      Moderate: 40
+      Severe: 30
+      Critical: 18
+      Mangled: 0
+
+- type: entity
+  abstract: true
+  parent: OrganBaseTorso
+  id: OrganBaseTorsoAnimalTailed
+  components:
+  - type: BodyPart
+    slots:
+    # Parts
+    - Tail
+    # Organs
+    - Heart
+    - Lungs
+    - Stomach
+    - Liver
+    - Kidneys
+
+- type: entity
+  abstract: true
+  parent: OrganBaseExternal
+  id: OrganBaseTail
+  name: tail
+  components:
+  - type: Sprite
+    state: tail
+  - type: Organ
+    category: Tail
+  - type: ChildOrgan
+    parentCategory: Torso
+  - type: BodyPart
+    partType: Tail
+    slots: []
+  - type: VisualOrgan
+    layer: enum.HumanoidVisualLayers.Tail
+    data:
+      state: tail
+  - type: VisualOrganMarkings
+    markingData:
+      layers:
+      - Tail

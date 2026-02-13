@@ -15,7 +15,7 @@ using Content.Server.Heretic.Components.PathSpecific;
 using Content.Server.Spreader;
 using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Goobstation.Wizard;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Flash;
 using Content.Shared.Heretic;
 using Content.Shared.Maps;

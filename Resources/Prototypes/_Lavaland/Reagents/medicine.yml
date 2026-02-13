@@ -30,7 +30,7 @@
   color: "#f2c777"
   recognizable: true
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:ModifyBloodLevel
         amount: 1.5
@@ -94,7 +94,7 @@
   color: "#302f70"
   recognizable: true
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         conditions:
@@ -124,7 +124,7 @@
   flavor: sweet
   color: "#d3a308"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -144,7 +144,7 @@
   flavor: metallic
   color: "#00767c"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:

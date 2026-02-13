@@ -1,0 +1,92 @@
+## Mob
+
+- type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceMonkey
+  name: monkey appearance
+  components:
+  # TODO SHITMED: displacements??
+  - type: InitialBody
+    organs:
+      Torso: OrganMonkeyTorso
+      Head: OrganMonkeyHead
+      ArmLeft: OrganMonkeyArmLeft
+      ArmRight: OrganMonkeyArmRight
+      HandRight: OrganMonkeyHandRight
+      HandLeft: OrganMonkeyHandLeft
+      LegLeft: OrganMonkeyLegLeft
+      LegRight: OrganMonkeyLegRight
+      FootLeft: OrganMonkeyFootLeft
+      FootRight: OrganMonkeyFootRight
+      Brain: OrganHumanBrain
+      Eyes: OrganHumanEyes
+      Tongue: OrganHumanTongue
+      Ears: OrganHumanEars
+      Lungs: OrganAnimalLungs
+      Heart: OrganAnimalHeart
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys
+  - type: HumanoidProfile
+    species: Monkey
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganMonkey
+  suffix: monkey
+
+- type: entity
+  abstract: true
+  parent: OrganMonkey
+  id: OrganMonkeyExternal
+  components:
+  - type: Sprite
+    sprite: Mobs/Animals/monkey.rsi
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Animals/monkey.rsi
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganMonkeyExternal ]
+  id: OrganMonkeyTorso
+
+- type: entity
+  parent: [ OrganBaseHead, OrganMonkeyExternal ]
+  id: OrganMonkeyHead
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganMonkeyExternal ]
+  id: OrganMonkeyArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganMonkeyExternal ]
+  id: OrganMonkeyArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganMonkeyExternal ]
+  id: OrganMonkeyHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganMonkeyExternal ]
+  id: OrganMonkeyHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganMonkeyExternal ]
+  id: OrganMonkeyLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganMonkeyExternal ]
+  id: OrganMonkeyLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganMonkeyExternal ]
+  id: OrganMonkeyFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganMonkeyExternal ]
+  id: OrganMonkeyFootRight

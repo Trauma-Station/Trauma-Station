@@ -14,6 +14,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Heretic;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -23,8 +25,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using System.Linq;
 using System.Threading.Tasks;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
 
 namespace Content.Server.Heretic.Abilities;
 
@@ -79,7 +79,7 @@ public sealed partial class HereticAbilitySystem
 
             _flammable.AdjustFireStacks(look, args.FireStacks, flam, true, args.FireProtectionPenetration);
             _dmg.ChangeDamage(look.Owner,
-                args.Damage * _body.GetVitalBodyPartRatio(look),
+                args.Damage * _body.GetVitalBodyPartRatio(look.Owner),
                 true,
                 targetPart: TargetBodyPart.All,
                 splitDamage: SplitDamageBehavior.SplitEnsureAll);
@@ -90,7 +90,7 @@ public sealed partial class HereticAbilitySystem
 
         // heals everything by base + power for each burning target
         _stam.TryTakeStamina(args.Performer, toHeal);
-        IHateWoundMed(args.Performer, AllDamage * toHeal, toHeal, toHeal, toHeal, 0, 0);
+        IHateWoundMed(args.Performer, AllDamage * toHeal, 0, 0);
     }
 
     private void OnFlames(EventHereticFlames args)

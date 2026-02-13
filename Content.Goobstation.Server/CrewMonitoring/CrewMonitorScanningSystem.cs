@@ -38,7 +38,7 @@ public sealed class CrewMonitorScanningSystem : EntitySystem
 
     private void OnScanAttempt(EntityUid uid, CrewMonitorScanningComponent comp, AfterInteractEvent args)
     {
-        if (args.Target == null || !args.CanReach || !HasComp<HumanoidAppearanceComponent>(args.Target))
+        if (args.Target == null || !args.CanReach || !HasComp<HumanoidProfileComponent>(args.Target))
             return;
 
         var userName = Identity.Entity(args.User, EntityManager);

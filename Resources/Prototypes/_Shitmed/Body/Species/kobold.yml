@@ -1,0 +1,93 @@
+## Mob
+
+- type: entity
+  abstract: true
+  parent: BaseSpeciesAppearance
+  id: AppearanceKobold
+  name: kobold appearance
+  components:
+  # TODO SHITMED: displacements??
+  - type: InitialBody
+    organs:
+      Torso: OrganKoboldTorso
+      Head: OrganKoboldHead
+      ArmLeft: OrganKoboldArmLeft
+      ArmRight: OrganKoboldArmRight
+      HandRight: OrganKoboldHandRight
+      HandLeft: OrganKoboldHandLeft
+      LegLeft: OrganKoboldLegLeft
+      LegRight: OrganKoboldLegRight
+      FootLeft: OrganKoboldFootLeft
+      FootRight: OrganKoboldFootRight
+      Brain: OrganReptilianBrain
+      Eyes: OrganReptilianEyes
+      Tongue: OrganReptilianTongue
+      Ears: OrganReptilianEars
+      Lungs: OrganAnimalLungs
+      Heart: OrganAnimalHeart
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys
+  - type: HumanoidProfile
+    species: Kobold
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganKobold
+  suffix: kobold
+
+- type: entity
+  abstract: true
+  parent: OrganKobold
+  id: OrganKoboldExternal
+  components:
+  - type: Sprite
+    sprite: Mobs/Animals/kobold.rsi
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Animals/kobold.rsi
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganKoboldExternal ]
+  id: OrganKoboldTorso
+
+- type: entity
+  parent: [ OrganBaseHead, OrganKoboldExternal ]
+  id: OrganKoboldHead
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganKoboldExternal ]
+  id: OrganKoboldArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganKoboldExternal ]
+  id: OrganKoboldArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganKoboldExternal ]
+  id: OrganKoboldHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganKoboldExternal ]
+  id: OrganKoboldHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganKoboldExternal ]
+  id: OrganKoboldLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganKoboldExternal ]
+  id: OrganKoboldLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganKoboldExternal ]
+  id: OrganKoboldFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganKoboldExternal ]
+  id: OrganKoboldFootRight

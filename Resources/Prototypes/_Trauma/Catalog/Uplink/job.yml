@@ -11,3 +11,21 @@
   - !type:BuyerJobCondition
     whitelist:
     - Virologist
+
+- type: listing
+  id: UplinkNecronomicon # dog
+  name: uplink-necronomicon-name
+  description: uplink-necronomicon-desc
+  productEntity: BibleNecronomicon
+  cost:
+    Telecrystal: 20 # 5 dogs
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Chaplain
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle

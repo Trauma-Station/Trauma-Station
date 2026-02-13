@@ -2,7 +2,7 @@
 using Content.Goobstation.Shared.Possession;
 using Content.Shared._White.Xenomorphs.Infection;
 using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
+using Content.Medical.Shared.Consciousness;
 // </Trauma>
 using Content.Server.Ghost;
 using Content.Server.Hands.Systems;

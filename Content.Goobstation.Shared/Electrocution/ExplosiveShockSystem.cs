@@ -1,13 +1,8 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Content.Medical.Common.Body;
+using Content.Medical.Shared.Body;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -23,7 +18,7 @@ namespace Content.Goobstation.Shared.Electrocution;
 
 public sealed class ExplosiveShockSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodyPartSystem _part = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedExplosionSystem _explosion = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -61,26 +56,24 @@ public sealed class ExplosiveShockSystem : EntitySystem
         ignited.ExplodeAt = _timing.CurTime + explosiveShock.ExplosionDelay;
     }
 
-    private void TryExplode(EntityUid uid) {
+    private void TryExplode(EntityUid uid)
+    {
         if (Deleted(uid) || !TryComp<ExplosiveComponent>(uid, out var explosive) || !TryComp<ExplosiveShockComponent>(uid, out var explosiveShock))
             return;
 
-        EntityUid? target = null;
-        if (TryComp<ClothingComponent>(uid, out var clothing) && clothing.InSlot != null)
-            target = Transform(uid).ParentUid;
-
         _explosion.TriggerExplosive(uid, explosive);
+        if (!TryComp<ClothingComponent>(uid, out var clothing) || clothing.InSlot == null)
+            return;
 
-        if (target != null)
-        {
-            // gloves go under armor so ignore resistances
-            foreach (var part in _body.GetBodyChildrenOfType(target.Value, BodyPartType.Hand))
-                _damageable.TryChangeDamage(part.Id, explosiveShock.HandsDamage, true);
+        var target = Transform(uid).ParentUid;
 
-            foreach (var part in _body.GetBodyChildrenOfType(target.Value, BodyPartType.Arm))
-                _damageable.TryChangeDamage(part.Id, explosiveShock.ArmsDamage, true);
+        // gloves go under armor so ignore resistances
+        foreach (var part in _part.GetBodyParts(target, BodyPartType.Hand))
+            _damageable.ChangeDamage(part, explosiveShock.HandsDamage, true);
 
-            _stun.TryKnockdown(target.Value, explosiveShock.KnockdownTime, true);
-        }
+        foreach (var part in _part.GetBodyParts(target, BodyPartType.Arm))
+            _damageable.ChangeDamage(part, explosiveShock.ArmsDamage, true);
+
+        _stun.TryKnockdown(target, explosiveShock.KnockdownTime, true);
     }
 }

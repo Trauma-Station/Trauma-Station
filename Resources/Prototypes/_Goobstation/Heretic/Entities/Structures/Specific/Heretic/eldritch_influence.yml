@@ -94,6 +94,6 @@
     sprite: _Goobstation/Heretic/reality_fracture.rsi
     state: icon_harvested
   - type: Visibility
-    layer: 64
+    layer: 1
   - type: EldritchInfluence
     spent: true

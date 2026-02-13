@@ -130,6 +130,7 @@ public abstract class SharedSprayPainterSystem : EntitySystem
                 subs.Event<SprayPainterSetDecalColorMessage>(OnSetDecalColor);
                 subs.Event<SprayPainterSetDecalAngleMessage>(OnSetDecalAngle);
                 subs.Event<SprayPainterSetDecalSnapMessage>(OnSetDecalSnap);
+                subs.Event<SprayPainterSetDecalColorPickerMessage>(OnSetDecalColorPicker);
             });
     }
 
@@ -373,6 +374,16 @@ public abstract class SharedSprayPainterSystem : EntitySystem
     private void OnSetDecalSnap(Entity<SprayPainterComponent> ent, ref SprayPainterSetDecalSnapMessage args)
     {
         ent.Comp.SnapDecals = args.Snap;
+        Dirty(ent);
+        UpdateUi(ent);
+    }
+
+    /// <summary>
+    /// Enables or disables the decal colour picker.
+    /// </summary>
+    private void OnSetDecalColorPicker(Entity<SprayPainterComponent> ent, ref SprayPainterSetDecalColorPickerMessage args)
+    {
+        ent.Comp.ColorPickerEnabled = args.Toggle;
         Dirty(ent);
         UpdateUi(ent);
     }

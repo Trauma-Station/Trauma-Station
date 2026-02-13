@@ -1,0 +1,4 @@
+- type: flavor
+  id: DeepFried
+  flavorType: Base
+  description: flavor-base-deep-fried

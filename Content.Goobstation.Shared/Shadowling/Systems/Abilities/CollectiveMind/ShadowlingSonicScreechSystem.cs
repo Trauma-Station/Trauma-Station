@@ -85,7 +85,7 @@ public sealed class ShadowlingSonicScreechSystem : EntitySystem
                 continue;
             }
 
-            if (HasComp<HumanoidAppearanceComponent>(entity))
+            if (HasComp<HumanoidProfileComponent>(entity))
                 PredictedSpawnAtPosition(component.ProtoFlash, Transform(entity).Coordinates);
         }
 

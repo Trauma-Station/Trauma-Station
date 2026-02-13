@@ -9,8 +9,7 @@
 - type: marking
   id: WingsRobotic
   bodyPart: Wings
-  markingCategory: Wings
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   sprites:
     - sprite: _SimpleStation/Mobs/Customization/wings96x34.rsi
       state: robotic_base # Goobstation: Split coloring options on ipc wings

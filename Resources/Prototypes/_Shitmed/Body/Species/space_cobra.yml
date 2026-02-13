@@ -1,0 +1,61 @@
+## Mob
+
+- type: entity
+  abstract: true
+  parent: BaseMobBody
+  id: AppearanceSpaceCobra
+  name: space cobra appearance
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganCobraTorso
+      # Organs
+      Heart: OrganCobraHeart # invisible
+      Lungs: OrganCarpLungs
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganCobra
+  suffix: cobra
+
+- type: entity
+  abstract: true
+  parent: OrganCobra
+  id: OrganCobraExternal
+
+- type: entity
+  abstract: true
+  parent: OrganCobra
+  id: OrganCobraInternal
+  components:
+  - type: Sprite
+    sprite: _Shitmed/Mobs/Species/Space/Cobra/organs.rsi
+
+## Parts
+
+- type: entity
+  parent: [ OrganAnimalTorso, OrganCobraExternal ]
+  id: OrganCobraTorso
+  name: snake body
+
+## Organs
+
+- type: entity
+  parent: [ OrganAnimalHeart, OrganCobraInternal, BaseMajorContraband ]
+  id: OrganCobraHeart
+  components:
+  - type: OrganComponents
+    onAdd:
+    - type: Stealth
+      enabledOnDeath: false
+      maxVisibility: 1.2
+    - type: StealthOnMove
+      passiveVisibilityRate: -0.25
+      movementVisibilityRate: 0.25

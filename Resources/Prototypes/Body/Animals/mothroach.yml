@@ -1,0 +1,16 @@
+- type: entity
+  id: BaseMobMothroach
+  abstract: true
+  components:
+  - type: BodyCache # Shitmed
+  - type: Body
+  - type: EntityTableContainerFill
+    containers:
+      body_organs: !type:AllSelector
+        children:
+        - id: OrganAnimalTorso # Shitmed
+        - id: OrganAnimalLungs
+        - id: OrganAnimalHeart
+        - id: OrganMothStomach
+        - id: OrganAnimalLiver
+        - id: OrganAnimalKidneys

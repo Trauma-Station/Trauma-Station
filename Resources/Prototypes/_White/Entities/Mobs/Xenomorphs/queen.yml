@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseMobXenomorphAdult
+  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphQueen ]
   id: BaseMobXenomorphQueen
   name: xenomorph queen
   description: The highest individual, the central element and mother of the Hive. The destruction of the Queen in most cases means the collapse of the Hive.
@@ -22,16 +22,6 @@
         Brute: 5
     inject:
       ChloralHydrate: 10 # Goobstation - new chemical
-  #- type: ActionGrant # Goobstation - moved to organs
-  #  actions:
-  #  - ActionTransferPlasma
-  #  - ActionSpawnWallResin
-  #  - ActionSpawnResinMembrane
-  #  - ActionSpawnResinNest
-  #  - ActionSpawnResinWeedNode
-  #  - ActionSpawnXenomorphEgg
-  - type: Body
-    prototype: XenomorphQueen
   - type: TypingIndicator
     proto: alien_royal
   - type: Fixtures

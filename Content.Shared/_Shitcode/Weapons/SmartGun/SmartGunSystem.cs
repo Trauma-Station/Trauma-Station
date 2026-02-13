@@ -9,6 +9,7 @@ using Content.Shared._Goobstation.Wizard.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Wieldable.Components;
+using Content.Lavaland.Common.Weapons.Ranged;
 
 namespace Content.Shared._Goobstation.Weapons.SmartGun;
 
@@ -18,29 +19,24 @@ public sealed class SmartGunSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SmartGunComponent, AmmoShotEvent>(OnShot);
+        SubscribeLocalEvent<SmartGunComponent, ProjectileShotEvent>(OnShot);
     }
 
-    private void OnShot(Entity<SmartGunComponent> ent, ref AmmoShotEvent args)
+    private void OnShot(Entity<SmartGunComponent> ent, ref ProjectileShotEvent args)
     {
         var (uid, comp) = ent;
 
-        if (!TryComp(uid, out GunComponent? gun) || gun.Target == null)
+        var projectile = args.FiredProjectile;
+
+        if (!TryComp(projectile, out HomingProjectileComponent? homing) ||
+            !TryComp(projectile, out TargetedProjectileComponent? targeted) ||
+            targeted.Target is not { } target || target == Transform(uid).ParentUid)
             return;
 
         if (comp.RequiresWield && !(TryComp(uid, out WieldableComponent? wieldable) && wieldable.Wielded))
             return;
 
-        if (gun.Target == Transform(uid).ParentUid)
-            return;
-
-        foreach (var projectile in args.FiredProjectiles)
-        {
-            if (!TryComp(projectile, out HomingProjectileComponent? homing))
-                continue;
-
-            homing.Target = gun.Target.Value;
-            Dirty(projectile, homing);
-        }
+        homing.Target = target;
+        Dirty(projectile, homing);
     }
 }

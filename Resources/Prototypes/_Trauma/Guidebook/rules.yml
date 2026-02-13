@@ -1,0 +1,255 @@
+- type: guideEntry
+  id: DefaultRuleset
+  name: guide-entry-rules
+  priority: 60
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Rules.xml"
+  children:
+  - CoreRules
+  - RoleplayRules
+  - SpecificRules
+  - RoleTypes
+  - BanTypes
+  - BanDurations
+
+- type: guideEntry
+  id: RoleTypes
+  name: guide-entry-rules-role-types
+  ruleEntry: true
+  priority: 20
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/RoleTypes.xml"
+
+- type: guideEntry
+  id: BanTypes
+  name: guide-entry-rules-ban-types
+  ruleEntry: true
+  priority: 90
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/BanTypes.xml"
+
+- type: guideEntry
+  id: BanDurations
+  name: guide-entry-rules-ban-durations
+  ruleEntry: true
+  priority: 100
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/BanDurations.xml"
+
+## Core Rules
+
+- type: guideEntry
+  id: CoreRules
+  name: guide-entry-rules-core
+  ruleEntry: true
+  priority: 30
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/CoreRules.xml"
+  children:
+  - RuleC0
+  - RuleC1
+  - RuleC2
+  - RuleC3
+  - RuleC4
+  - RuleC5
+  - RuleC6
+  - RuleC7
+  - RuleC8
+  - RuleC9
+  - RuleC10
+
+- type: guideEntry
+  id: RuleC0
+  name: guide-entry-rules-c0
+  ruleEntry: true
+  priority: 1
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/RuleC0Losing.xml"
+
+- type: guideEntry
+  id: RuleC1
+  name: guide-entry-rules-c1
+  ruleEntry: true
+  priority: 2
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/RuleC1DBAD.xml"
+
+- type: guideEntry
+  id: RuleC2
+  name: guide-entry-rules-c2
+  ruleEntry: true
+  priority: 3
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/RuleC2ICKOCK.xml"
+
+- type: guideEntry
+  id: RuleC3
+  name: guide-entry-rules-c3
+  ruleEntry: true
+  priority: 4
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/RuleC3Roleplay.xml"
+
+- type: guideEntry
+  id: RuleC4
+  name: guide-entry-rules-c4
+  ruleEntry: true
+  priority: 5
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/RuleC4VitalJobs.xml"
+
+- type: guideEntry
+  id: RuleC5
+  name: guide-entry-rules-c5
+  ruleEntry: true
+  priority: 6
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/RuleC5AdminRulings.xml"
+
+- type: guideEntry
+  id: RuleC6
+  name: guide-entry-rules-c6
+  ruleEntry: true
+  priority: 7
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/RuleC6English.xml"
+
+- type: guideEntry
+  id: RuleC7
+  name: guide-entry-rules-c7
+  ruleEntry: true
+  priority: 8
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/RuleC7NoERP.xml"
+
+- type: guideEntry
+  id: RuleC8
+  name: guide-entry-rules-c8
+  ruleEntry: true
+  priority: 9
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/RuleC8Age.xml"
+
+- type: guideEntry
+  id: RuleC9
+  name: guide-entry-rules-c9
+  ruleEntry: true
+  priority: 10
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/RuleC9NoBigotry.xml"
+
+- type: guideEntry
+  id: RuleC10
+  name: guide-entry-rules-c10
+  ruleEntry: true
+  priority: 11
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/RuleC10NLR.xml"
+
+## Roleplay Rules
+
+- type: guideEntry
+  id: RoleplayRules
+  name: guide-entry-rules-roleplay
+  ruleEntry: true
+  priority: 40
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Roleplay/RoleplayRules.xml"
+  children:
+  - RuleR1
+  - RuleR2
+  - RuleR3
+  - RuleR4
+  - RuleR5
+
+- type: guideEntry
+  id: RuleR1
+  name: guide-entry-rules-r1
+  ruleEntry: true
+  priority: 1
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Roleplay/RuleR1Roleplay.xml"
+
+- type: guideEntry
+  id: RuleR2
+  name: guide-entry-rules-r2
+  ruleEntry: true
+  priority: 2
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Roleplay/RuleR2Escalation.xml"
+
+- type: guideEntry
+  id: RuleR3
+  name: guide-entry-rules-r3
+  ruleEntry: true
+  priority: 3
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Roleplay/RuleR3Validhunting.xml"
+
+- type: guideEntry
+  id: RuleR4
+  name: guide-entry-rules-r4
+  ruleEntry: true
+  priority: 4
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Roleplay/RuleR4Powergaming.xml"
+
+- type: guideEntry
+  id: RuleR5
+  name: guide-entry-rules-r5
+  ruleEntry: true
+  priority: 5
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Roleplay/RuleR5Character.xml"
+
+## Role-Specific Rules
+
+- type: guideEntry
+  id: SpecificRules
+  name: guide-entry-rules-role-specific
+  ruleEntry: true
+  priority: 50
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Specific/SpecificRules.xml"
+  children:
+  - RuleS1
+  - RuleS2
+  - RuleS3
+  - RuleS4
+  - RuleS5
+  - RuleS6
+
+- type: guideEntry
+  id: RuleS1
+  name: guide-entry-rules-s1
+  ruleEntry: true
+  priority: 1
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Specific/RuleS1Silicons.xml"
+
+- type: guideEntry
+  id: RuleS2
+  name: guide-entry-rules-s2
+  ruleEntry: true
+  priority: 2
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Specific/RuleS2Assistants.xml"
+
+- type: guideEntry
+  id: RuleS3
+  name: guide-entry-rules-s3
+  ruleEntry: true
+  priority: 3
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Specific/RuleS3Security.xml"
+
+- type: guideEntry
+  id: RuleS4
+  name: guide-entry-rules-s4
+  ruleEntry: true
+  priority: 4
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Specific/RuleS4Command.xml"
+
+- type: guideEntry
+  id: RuleS5
+  name: guide-entry-rules-s5
+  ruleEntry: true
+  priority: 5
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Specific/RuleS5Insurgents.xml"
+
+- type: guideEntry
+  id: RuleS6
+  name: guide-entry-rules-s6
+  ruleEntry: true
+  priority: 6
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Specific/RuleS6Antagonists.xml"
+
+## Space Law
+
+- type: guideEntry
+  id: SpaceLaw
+  name: guide-entry-rules-space-law
+  priority: 1
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/SpaceLaw/SpaceLaw.xml"
+  children:
+  - SpaceLawCrimeList
+
+- type: guideEntry
+  id: SpaceLawCrimeList
+  name: guide-entry-rules-sl-crime-list
+  priority: 5
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/SpaceLaw/SLCrimeList.xml"

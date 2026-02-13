@@ -9,7 +9,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Shared.Overlays;
-using Content.Shared.Body.Components;
+using Content.Shared.Body;
 using Content.Shared.Stealth.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;

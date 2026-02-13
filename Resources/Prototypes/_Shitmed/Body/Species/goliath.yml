@@ -1,0 +1,75 @@
+## Mob
+
+- type: entity
+  abstract: true
+  parent: BaseMobBody
+  id: AppearanceGoliath
+  name: goliath appearance
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganGoliathTorso
+      # Organs
+      Heart: OrganGoliathHeart
+      Lungs: OrganAnimalLungs
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganGoliath
+  suffix: goliath
+
+- type: entity
+  abstract: true
+  # TODO SHITMED: unique sprites
+  parent: [ OrganGoliath, OrganAnimalSpriteExternal ]
+  id: OrganGoliathExternal
+  components:
+  - type: Woundable
+    integrity: 350
+    integrityCap: 350
+    thresholds:
+      Minor: 315
+      Moderate: 240
+      Severe: 120
+      Critical: 60
+      Mangled: 0
+
+- type: entity
+  abstract: true
+  parent: OrganGoliath
+  id: OrganGoliathInternal
+  components:
+  - type: Sprite
+    sprite: _Shitmed/Mobs/Species/Space/Goliath/organs.rsi
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganGoliathExternal ]
+  id: OrganGoliathTorso
+  components:
+  - type: BodyPart
+    slots:
+    # Organs
+    - Heart
+    - Lungs
+    - Stomach
+    - Liver
+    - Kidneys
+
+## Organs
+
+- type: entity
+  parent: [ OrganAnimalHeart, OrganGoliathInternal ]
+  id: OrganGoliathHeart
+  components:
+  - type: OrganComponents
+    onAdd:
+    - type: GoliathTentacle

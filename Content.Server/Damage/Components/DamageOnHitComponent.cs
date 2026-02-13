@@ -8,7 +8,7 @@
 // SPDX-License-Identifier: MIT
 
 using Content.Shared.Damage;
-using Content.Shared._Shitmed.Targeting; // EE Plasmeme Change
+using Content.Medical.Common.Targeting; // EE Plasmeme Change
 
 
 // Damages the entity by a set amount when it hits someone.

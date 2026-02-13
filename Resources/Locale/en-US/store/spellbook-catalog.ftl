@@ -76,7 +76,7 @@ spellbook-wand-polymorph-carp-description = For when you need a carp filet quick
 spellbook-wand-locker-name = Staff of the Locker
 spellbook-wand-locker-description =
     Shoot cursed lockers at your enemies and lock em away!
-    Automatically recharges once every 4 seconds.
+    Automatically recharges once every 10 seconds.
 
 # Events
 

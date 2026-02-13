@@ -1,0 +1,22 @@
+# stomach given to ascended flesh heretic
+- type: entity
+  parent: OrganVoxStomach # it had vox metabolizer for some reason
+  id: OrganFleshHereticStomach
+  suffix: flesh heretic
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      stomach:
+        maxVol: 1984
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 100 # yum
+  - type: InternalOrgan
+    intCap: 1984
+    integrity: 1984
+  - type: Metabolizer
+    updateInterval: 0.1
+    maxReagents: 10
+  # TODO: component based way of ignoring other metabolizers
+  - type: Stomach

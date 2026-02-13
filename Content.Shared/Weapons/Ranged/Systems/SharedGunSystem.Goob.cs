@@ -1,7 +1,6 @@
 using Content.Goobstation.Common.Projectiles;
-using Content.Shared._Shitmed.Body;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Components;
+using Content.Medical.Common.Targeting;
+using Content.Shared.Body;
 using Content.Shared.Damage.Events;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Projectiles;
@@ -76,19 +75,15 @@ public abstract partial class SharedGunSystem
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
+        var part = GetTargetPart(shooter, coords, TransformSystem.GetMapCoordinates(ent));
+        if (part is null or TargetBodyPart.Chest)
+            return;
+
         var comp = EnsureComp<ProjectileMissTargetPartChanceComponent>(projectile);
         _bodies.Clear();
         _lookup.GetEntitiesInRange<BodyComponent>(coords, 2f, _bodies, LookupFlags.Dynamic);
         foreach (var (uid, body) in _bodies)
         {
-            if (body.BodyType != BodyType.Complex)
-                continue;
-
-            var part = GetTargetPart(shooter, coords, TransformSystem.GetMapCoordinates(ent));
-
-            if (part is null or TargetBodyPart.Chest)
-                continue;
-
             comp.PerfectHitEntities.Add(uid);
             Dirty(projectile, comp);
         }

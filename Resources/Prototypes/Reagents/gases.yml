@@ -11,7 +11,7 @@
   boilingPoint: -183.0
   meltingPoint: -218.4
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:Oxygenate
         conditions:
@@ -52,12 +52,12 @@
           CarbonDioxide: 0.5
           Oxygen: -0.5
       # </Shitmed>
-    Gas:
+    Respiration:
       effects:
       - !type:Oxygenate
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Human, Animal, Rat, Plant, Cybernetic ] # Goob - add Cybernetic
+          type: [ Human, Animal, Rat, Plant, Arachnid, Moth, Cybernetic ] # Goob - add Cybernetic
       # Convert Oxygen into CO2.
       - !type:ModifyLungGas
         conditions:
@@ -126,7 +126,7 @@
   - !type:FlammableTileReaction
     temperatureMultiplier: 1.5
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         conditions:
@@ -151,7 +151,7 @@
         damage:
           types:
             Poison: 1.5
-    Gas:
+    Respiration:
       effects:
       - !type:HealthChange
         conditions:
@@ -199,9 +199,6 @@
           types:
             Poison:
               0.5
-      # </Goob>
-    Medicine: # EE Plasmeme
-      effects:
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
@@ -215,6 +212,7 @@
             Caustic: -0.66
             Asphyxiation: -0.66
             Poison: -0.66
+      # </Goob>
   reactiveEffects:
     Flammable:
       methods: [ Touch ]
@@ -240,7 +238,7 @@
       - !type:Flammable
         multiplier: 0.8
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange # Goob - cybernetic lungs take less damage from breathing trit
         conditions:
@@ -257,7 +255,7 @@
         damage:
           types:
             Radiation: 1.5
-    Gas:
+    Respiration:
       effects:
       - !type:HealthChange
         conditions:
@@ -294,7 +292,7 @@
   flavor: bitter
   color: "#66ff33"
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:Oxygenate
         conditions:
@@ -316,7 +314,7 @@
           type: [ Plant, Cybernetic ] # Goob - add Cybernetic
           inverted: true
         factor: -4
-    Gas:
+    Respiration:
       effects:
       - !type:Oxygenate
         conditions:
@@ -355,13 +353,13 @@
   boilingPoint: -195.8
   meltingPoint: -210.0
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
           types:
             Cold: 0.5 # liquid nitrogen is cold
-    Gas:
+    Respiration:
       effects:
       - !type:Oxygenate
         conditions:
@@ -400,13 +398,13 @@
   boilingPoint: -88
   meltingPoint: -90
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
           types:
             Poison: 1
-    Gas:
+    Respiration:
       effects:
       - !type:Emote
         minScale: 0.2
@@ -487,7 +485,7 @@
   boilingPoint: -195.8
   meltingPoint: -210.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:HealthChange
         ignoreResistances: true
@@ -512,7 +510,7 @@
         probability: 0.1
         conditions:
         minScale: 2
-    Gas:
+    Respiration:
       effects:
       - !type:HealthChange
         conditions: # Goob

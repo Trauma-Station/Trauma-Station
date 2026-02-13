@@ -9,13 +9,11 @@
         children:
         - id: ClothingUniformEnvirosuitTacticool
         - id: ClothingHeadEnvirohelmTacticool
-        - id: ClothingOuterCoatJensenFilled
         - id: ClothingHandsGlovesCombat
         - id: ClothingEyesGlassesSunglasses
         - id: SpaceCash30000
         - id: EncryptionKeySyndie
         - id: RubberStampTrader
-        - id: PhoneInstrumentSyndicate
 
 - type: entity # No more space in briefcase due to envirohelm so put the syndicate flag in the jensen coat
   id: ClothingOuterCoatJensenFilled

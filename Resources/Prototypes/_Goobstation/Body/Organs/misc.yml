@@ -12,9 +12,10 @@
   - type: Cybernetics
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/sandevistan.rsi
-    state: icon
+    layers:
+    - state: icon
     scale: 0.5, 0.5
-  - type: Organ
+  - type: OrganComponents
     onAdd:
     - type: SandevistanUser
 
@@ -26,7 +27,8 @@
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/berserker_heart.rsi
-    state: icon
+    layers:
+    - state: icon
     scale: 0.5, 0.5
   - type: OrganActions
     actions:
@@ -40,9 +42,10 @@
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/jumpstarter_heart.rsi
-    state: icon
+    layers:
+    - state: icon
     scale: 0.5, 0.5
-  - type: Organ
+  - type: OrganComponents
     onAdd:
     - type: InjectOnMobState
       reagents:

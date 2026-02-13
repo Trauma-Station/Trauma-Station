@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.DoAfter;
-using Content.Shared._Shitmed.DoAfter;
+using Content.Medical.Common.DoAfter;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
@@ -24,6 +24,8 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+
+    private ModifyDoAfterDelayEvent _modifyEv = new(); // Trauma - reused object because it can't be a struct
 
     /// <summary>
     ///     We'll use an excess time so stuff like finishing effects can show.
@@ -231,14 +233,14 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
             return false;
         }
 
-        // Goobstation start
+        // <Trauma>
         if (args.MultiplyDelay)
         {
-            var delayMultiplierEv = new GetDoAfterDelayMultiplierEvent();
-            RaiseLocalEvent(args.User, delayMultiplierEv);
-            args.Delay *= delayMultiplierEv.Multiplier;
+            _modifyEv.Multiplier = 1f;
+            RaiseLocalEvent(args.User, _modifyEv);
+            args.Delay *= _modifyEv.Multiplier;
         }
-        // Goobstation end
+        // </Trauma>
 
         id = new DoAfterId(args.User, comp.NextId++);
         var doAfter = new DoAfter(id.Value.Index, args, GameTiming.CurTime);

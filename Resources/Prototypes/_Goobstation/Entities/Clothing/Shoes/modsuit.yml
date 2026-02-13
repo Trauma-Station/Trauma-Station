@@ -30,8 +30,8 @@
     - WhitelistChameleon
   - type: IgniteFromGasImmunity
     parts:
-    - LeftFoot
-    - RightFoot
+    - FootLeft
+    - FootRight
 
 - type: entity
   parent: ClothingShoesBase

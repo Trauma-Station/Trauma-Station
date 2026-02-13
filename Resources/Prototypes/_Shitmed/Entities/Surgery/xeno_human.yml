@@ -16,8 +16,9 @@
   - type: SurgeryPartCondition
     parts: [ Head ]
   - type: SurgeryBodyComponentCondition
-    components:
-    - type: XenoCompatible
+    whitelist:
+      components:
+      - XenoCompatible
 
 - type: entity
   parent: BaseSurgeryOpenXenoCavity
@@ -25,7 +26,7 @@
   name: Open Hive Node Cavity
   components:
   - type: SurgeryOrganSlotCondition
-    organSlot: hive_node
+    organSlot: HiveNode
 
 - type: entity
   parent: BaseSurgeryOpenXenoCavity
@@ -33,7 +34,7 @@
   name: Open Resin Spinner Cavity
   components:
   - type: SurgeryOrganSlotCondition
-    organSlot: resin_spinner
+    organSlot: ResinSpinner
 
 - type: entity
   parent: BaseSurgeryOpenXenoCavity
@@ -41,7 +42,7 @@
   name: Open Neurotoxin Gland Cavity
   components:
   - type: SurgeryOrganSlotCondition
-    organSlot: neurotoxin_gland
+    organSlot: NeurotoxinGland
 
 - type: entity
   parent: BaseSurgeryOpenXenoCavity
@@ -49,7 +50,7 @@
   name: Open Acid Gland Cavity
   components:
   - type: SurgeryOrganSlotCondition
-    organSlot: acid_gland
+    organSlot: AcidGland
 
 - type: entity
   parent: BaseSurgeryOpenXenoCavity
@@ -59,9 +60,9 @@
   - type: Surgery
     requirement: SurgeryOpenRibcage
   - type: SurgeryPartCondition
-    parts: [ Chest ]
+    parts: [ Torso ]
   - type: SurgeryOrganSlotCondition
-    organSlot: plasma_vessel
+    organSlot: PlasmaVessel
 
 - type: entity
   parent: BaseSurgeryOpenXenoCavity
@@ -69,9 +70,9 @@
   name: Open Egg Sack Cavity
   components:
   - type: SurgeryPartCondition
-    parts: [ Groin ]
+    parts: [ Torso ]
   - type: SurgeryOrganSlotCondition
-    organSlot: egg_sack
+    organSlot: EggSack
 
 # Insert organs (human surgeries)
 
@@ -87,10 +88,9 @@
     - SurgeryStepInsertHiveNode
     - SurgeryStepSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: hive_node
+    organSlot: HiveNode
   - type: SurgeryOrganCondition
-    organ:
-    - type: HiveNode
+    organ: HiveNode
 
 - type: entity
   parent: BaseSurgeryInsertOrgan
@@ -104,10 +104,9 @@
     - SurgeryStepInsertResinSpinner
     - SurgeryStepSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: resin_spinner
+    organSlot: ResinSpinner
   - type: SurgeryOrganCondition
-    organ:
-    - type: ResinSpinner
+    organ: ResinSpinner
 
 - type: entity
   parent: BaseSurgeryInsertOrgan
@@ -121,10 +120,9 @@
     - SurgeryStepInsertNeurotoxinGland
     - SurgeryStepSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: neurotoxin_gland
+    organSlot: NeurotoxinGland
   - type: SurgeryOrganCondition
-    organ:
-    - type: NeurotoxinGland
+    organ: NeurotoxinGland
 
 - type: entity
   parent: BaseSurgeryInsertOrgan
@@ -138,10 +136,9 @@
     - SurgeryStepInsertAcidGland
     - SurgeryStepSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: acid_gland
+    organSlot: AcidGland
   - type: SurgeryOrganCondition
-    organ:
-    - type: AcidGland
+    organ: AcidGland
 
 - type: entity
   parent: BaseSurgeryInsertOrgan
@@ -155,12 +152,11 @@
     - SurgeryStepInsertPlasmaVessel
     - SurgeryStepSealOrganWound
   - type: SurgeryPartCondition
-    parts: [ Chest ]
+    parts: [ Torso ]
   - type: SurgeryOrganSlotCondition
-    organSlot: plasma_vessel
+    organSlot: PlasmaVessel
   - type: SurgeryOrganCondition
-    organ:
-    - type: PlasmaVessel
+    organ: PlasmaVessel
 
 - type: entity
   parent: BaseSurgeryInsertOrgan
@@ -174,12 +170,11 @@
     - SurgeryStepInsertEggSack
     - SurgeryStepSealOrganWound
   - type: SurgeryPartCondition
-    parts: [ Chest, Groin ]
+    parts: [ Torso ]
   - type: SurgeryOrganSlotCondition
-    organSlot: egg_sack
+    organSlot: EggSack
   - type: SurgeryOrganCondition
-    organ:
-    - type: EggSack
+    organ: EggSack
 
 # Remove Organs
 
@@ -189,8 +184,7 @@
   name: Remove Transplanted Hive Node
   components:
   - type: SurgeryOrganCondition
-    organ:
-    - type: HiveNode
+    organ: HiveNode
 
 - type: entity
   parent: BaseSurgeryRemoveOrgan
@@ -198,8 +192,7 @@
   name: Remove Transplanted Resin Spinner
   components:
   - type: SurgeryOrganCondition
-    organ:
-    - type: ResinSpinner
+    organ: ResinSpinner
 
 - type: entity
   parent: BaseSurgeryRemoveOrgan
@@ -207,8 +200,7 @@
   name: Remove Transplanted Neurotoxin Gland
   components:
   - type: SurgeryOrganCondition
-    organ:
-    - type: NeurotoxinGland
+    organ: NeurotoxinGland
 
 - type: entity
   parent: BaseSurgeryRemoveOrgan
@@ -216,8 +208,7 @@
   name: Remove Transplanted Acid Gland
   components:
   - type: SurgeryOrganCondition
-    organ:
-    - type: AcidGland
+    organ: AcidGland
 
 - type: entity
   parent: BaseSurgeryRemoveOrgan
@@ -227,10 +218,9 @@
   - type: Surgery
     requirement: SurgeryOpenRibcage
   - type: SurgeryPartCondition
-    parts: [ Chest ]
+    parts: [ Torso ]
   - type: SurgeryOrganCondition
-    organ:
-    - type: PlasmaVessel
+    organ: PlasmaVessel
 
 - type: entity
   parent: BaseSurgeryRemoveOrgan
@@ -238,7 +228,6 @@
   name: Remove Transplanted Egg Sack
   components:
   - type: SurgeryPartCondition
-    parts: [ Chest, Groin ]
+    parts: [ Torso ]
   - type: SurgeryOrganCondition
-    organ:
-    - type: EggSack
+    organ: EggSack

@@ -1,7 +1,7 @@
 // <Trauma>
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.EntityEffects.Effects;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.EntityEffects;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Heretic;
 using Content.Shared.Temperature.Components;
 // </Trauma>

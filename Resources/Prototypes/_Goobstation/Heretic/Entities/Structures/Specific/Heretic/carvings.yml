@@ -110,7 +110,7 @@
       components: []
     targetedEntityWhitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
   - type: AlertCarving
 
 - type: runeCarving

@@ -5,9 +5,6 @@
   categories: [ HideSpawnMenu ]
   components:
   # <Trauma>
-  - type: Body
-    prototype: Aghost
-    thermalVisibility: false # so you can't see aghost with thermals...
   - type: SupermatterImmune
   - type: Speech
     speechVerb: HolierThanThou

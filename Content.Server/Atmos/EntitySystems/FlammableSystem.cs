@@ -1,10 +1,10 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Flammability;
+using Content.Medical.Common.Targeting;
 using Content.Server._Goobstation.Wizard.Systems;
 using Content.Shared._Goobstation.Wizard.Spellblade;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
@@ -46,7 +46,7 @@ namespace Content.Server.Atmos.EntitySystems
         // <Trauma>
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly SpellbladeSystem _spellblade = default!;
-        [Dependency] private readonly SharedBodySystem _body = default!; // Goobstation
+        [Dependency] private readonly BodySystem _body = default!;
         // </Trauma>
         [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
         [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;

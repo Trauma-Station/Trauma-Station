@@ -10,7 +10,8 @@
   boilingPoint: 212.0  # Dexosyephedrine vape when?
   meltingPoint: 170.0
   metabolisms:
-    Poison:
+    Bloodstream:
+      # Main effects
       effects:
       - !type:HealthChange
         damage:
@@ -25,8 +26,8 @@
           types:
             Poison: 2 # this is added to the base damage of the meth.
             Asphyxiation: 2
-    Narcotic:
-      effects:
+
+      # Main effects
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.35 # Trauma - was 1.20
         sprintSpeedModifier: 1.35 # Trauma - was 1.20
@@ -58,16 +59,18 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      - !type:GenericStatusEffect # goob edit
+      # <Trauma>
+      - !type:GenericStatusEffect
         key: Adrenaline
         component: IgnoreSlowOnDamage
         time: 5
-      - !type:RemoveComponents # Goob
+      - !type:RemoveComponents
         components:
         - type: DelayedKnockdown
         guidebookText: entity-effect-guidebook-remove-delayed-knockdown
-    Medicine:
-      effects:
+      # </Trauma>
+
+      # Side effects
       - !type:ResetNarcolepsy
         conditions:
         - !type:ReagentCondition
@@ -86,7 +89,7 @@
   boilingPoint: 255.0
   meltingPoint: 36.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.25
@@ -116,24 +119,21 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      - !type:PopupMessage
-        visualType: Medium
-        messages: ["ephedrine-effect-tight-pain", "ephedrine-effect-heart-pounds"]
-        type: Local
-        probability: 0.05
-      - !type:GenericStatusEffect # goob edit
+      # <Trauma>
+      - !type:GenericStatusEffect
         key: Adrenaline
         component: IgnoreSlowOnDamage
         time: 5
-      - !type:RemoveComponents # Goob
+      - !type:RemoveComponents
         components:
         - type: DelayedKnockdown
         guidebookText: entity-effect-guidebook-remove-delayed-knockdown
-      - !type:SuppressPain # Shitmed Change
+      - !type:SuppressPain
         amount: 1.2
         time: 10 # it accumulated 1.2*quantity and then exists for 30 seconds.
-    Medicine:
-      effects:
+      # </Trauma>
+
+      # Side effects
       - !type:ResetNarcolepsy
         conditions:
         - !type:ReagentCondition
@@ -152,7 +152,7 @@
   boilingPoint: 212.0
   meltingPoint: 170.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       metabolismRate: 0.25 # Goobstation edit
       effects:
       - !type:MovementSpeedModifier
@@ -191,6 +191,22 @@
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Remove
+      - !type:GenericStatusEffect
+        key: Adrenaline
+        component: IgnoreSlowOnDamage
+        time: 3
+      # Side effects
+      - !type:Jitter
+      # OD
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Stimulants
+          min: 45
+        damage:
+          types:
+            Poison: 3
+      # Interactions
       - !type:ModifyStatusEffect
         conditions:
         - !type:ReagentCondition
@@ -215,22 +231,30 @@
           amount: 1.2
           time: 30 # it accumulated 1.2*quantity and then exists for 30 seconds.
       # </Goob>
-    Medicine:
-      metabolismRate: 0.25 # Goobstation edit
-      effects:
-        - !type:ResetNarcolepsy
-        - !type:SatiateHunger
-          factor: 1
-        - !type:SatiateThirst
-          factor: 1
-        - !type:HealthChange
-          conditions:
-          - !type:TotalDamageCondition
-            min: 70 # only heals when you're more dead than alive
-          damage: # heals at the same rate as tricordrazine, doesn't heal poison because if you OD'd I'm not giving you a safety net
-            groups:
-              Burn: -1
-              Brute: -1
+
+      # Main effects
+      - !type:ModifyBleed
+        amount: -1.5
+      - !type:EvenHealthChange
+        conditions:
+        - !type:TotalDamageCondition
+          min: 70 # only heals when you're more dead than alive
+        damage: # Doesn't heal poison because if you OD'd I'm not giving you a safety net
+          Burn: -0.5
+          Brute: -0.5
+      - !type:HealthChange
+        conditions:
+        - !type:TotalDamageCondition
+          min: 95 # Just to bring you back from the brink of death
+        damage:
+          types:
+            Asphyxiation: -2
+      # Side effects
+      - !type:ResetNarcolepsy
+      - !type:SatiateHunger
+        factor: 1
+      - !type:SatiateThirst
+        factor: 1
 
 - type: reagent
   id: THC
@@ -247,7 +271,7 @@
   - !type:PlantAdjustHealth
     amount: -1
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:ModifyStatusEffect
         effectProto: StatusEffectSeeingRainbow
@@ -277,7 +301,7 @@
   flavor: bitter
   color: "#215263"
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:MovementSpeedModifier
         walkSpeedModifier: 0.65
@@ -304,7 +328,7 @@
   flavor: bitter
   color: "#63806e"
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:ModifyStatusEffect
         effectProto: StatusEffectSeeingRainbow
@@ -320,7 +344,7 @@
   flavor: bitter
   color: "#ffff00"
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:ModifyStatusEffect
         effectProto: StatusEffectSeeingRainbow
@@ -339,7 +363,7 @@
   boilingPoint: 444.0
   meltingPoint: 128.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects: # It would be nice to have speech slurred or mumbly, but accents are a bit iffy atm. Same for distortion effects.
       - !type:MovementSpeedModifier
         walkSpeedModifier: 0.65
@@ -350,7 +374,7 @@
           reagent: Nocturine
           min: 8
         effectProto: StatusEffectForcedSleeping
-        time: 6
+        time: 9
         delay: 5
 
 - type: reagent
@@ -364,7 +388,7 @@
   boilingPoint: 255.0
   meltingPoint: 36.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:GenericStatusEffect
         key: Muted
@@ -384,7 +408,7 @@
   boilingPoint: 255.0
   meltingPoint: 36.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:PopupMessage
         type: Local
@@ -432,7 +456,7 @@
   boilingPoint: 255.0
   meltingPoint: 36.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:PopupMessage
         type: Local
@@ -493,7 +517,7 @@
   flavor: paintthinner
   color: "#EE35FF"
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:Emote
         emote: Laugh

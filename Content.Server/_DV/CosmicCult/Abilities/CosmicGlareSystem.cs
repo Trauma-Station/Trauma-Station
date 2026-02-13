@@ -75,7 +75,7 @@ public sealed class CosmicGlareSystem : EntitySystem
             var ent = player.AttachedEntity.Value;
 
             if (!HasComp<MobStateComponent>(ent)
-                || !HasComp<HumanoidAppearanceComponent>(ent)
+                || !HasComp<HumanoidProfileComponent>(ent)
                 || _cosmicCult.EntityIsCultist(ent)
                 || _divineIntervention.ShouldDeny(ent))
                 return true;
