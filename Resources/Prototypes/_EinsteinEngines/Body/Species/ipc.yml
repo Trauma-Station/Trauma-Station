@@ -93,10 +93,10 @@
   - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
-    - RobotTalk
+    # - RobotTalk
     understands:
     - TauCetiBasic
-    - RobotTalk
+    # - RobotTalk
   - type: HarpySinger
     ShutUpDamageThreshold: 5 # Punch does 5 damage
   - type: Instrument
