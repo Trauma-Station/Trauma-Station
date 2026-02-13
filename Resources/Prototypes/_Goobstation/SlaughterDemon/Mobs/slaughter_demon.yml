@@ -146,7 +146,11 @@
       - DemonicWhisperAction
   - type: ReplacementAccent
     accent: slaughterDemon
-  # - type: GrantHellRip
+  # <Trauma>
+  - type: KnowledgeGrant
+    skills:
+      MartialArtHellRip: 26
+  # </Trauma>
   - type: WeakToHoly
     alwaysTakeHoly: true
   - type: Hands

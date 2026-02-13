@@ -1,13 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: construction
   id: DisposalBlocker
   graph: DisposalPipe
@@ -16,8 +6,8 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
 
 - type: construction
   id: GasFilterInline
@@ -29,8 +19,8 @@
   conditions:
   - !type:NoUnstackableInTile
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
 
 - type: construction
   id: HeatExchangerInline
@@ -40,8 +30,8 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
 
 - type: construction
   id: HeatExchangerInlineBend
@@ -51,5 +41,5 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26

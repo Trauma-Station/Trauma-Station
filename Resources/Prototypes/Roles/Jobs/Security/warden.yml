@@ -42,6 +42,7 @@
           MeleeKnowledge: 26
           ShootingKnowledge: 26
           MartialArtKravMagaKnowledge: 50
+          WeaponsKnowledge: 50
       # </Trauma>
 
 - type: startingGear

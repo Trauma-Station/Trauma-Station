@@ -9,7 +9,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -23,7 +23,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -40,7 +40,7 @@
   - !type:WallmountCondition {}
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 # POWER
@@ -55,7 +55,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -69,7 +69,7 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -83,7 +83,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -97,7 +97,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -111,7 +111,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 # DISPOSALS
@@ -125,8 +125,8 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Electronics
-  - Infrastructure
+    ElectronicsKnowledge: 26
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -139,8 +139,8 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Electronics
-  - Infrastructure
+    ElectronicsKnowledge: 26
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -153,7 +153,7 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -166,8 +166,8 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Electronics
-  - Infrastructure
+    ElectronicsKnowledge: 26
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -180,8 +180,8 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Electronics
-  - Infrastructure
+    ElectronicsKnowledge: 26
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -194,7 +194,7 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -208,7 +208,7 @@
   mirror: DisposalRouterFlipped
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -223,7 +223,7 @@
   mirror: DisposalRouter
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -237,8 +237,8 @@
   mirror: DisposalSignalRouterFlipped
   # <Trauma>
   groups:
-  - Electronics
-  - Infrastructure
+    ElectronicsKnowledge: 26
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -253,8 +253,8 @@
   mirror: DisposalSignalRouter
   # <Trauma>
   groups:
-  - Electronics
-  - Infrastructure
+    ElectronicsKnowledge: 26
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -268,7 +268,7 @@
   mirror: DisposalJunctionFlipped
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -283,7 +283,7 @@
   mirror: DisposalJunction
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -296,7 +296,7 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -309,7 +309,7 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -322,7 +322,7 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 # ATMOS
@@ -340,7 +340,7 @@
   - !type:WallmountCondition {}
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -357,7 +357,7 @@
   - !type:WallmountCondition {}
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -371,7 +371,7 @@
   canRotate: true
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -389,8 +389,8 @@
   - GasPipeSensorAlt2
   # <Trauma>
   groups:
-  - Electronics
-  - Infrastructure
+    ElectronicsKnowledge: 26
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -409,8 +409,8 @@
   - GasPipeSensorAlt2
   # <Trauma>
   groups:
-  - Electronics
-  - Infrastructure
+    ElectronicsKnowledge: 26
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -429,8 +429,8 @@
   - GasPipeSensorAlt2
   # <Trauma>
   groups:
-  - Electronics
-  - Infrastructure
+    ElectronicsKnowledge: 26
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 # ATMOS PIPES
@@ -449,7 +449,7 @@
   - GasPipeHalfAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -467,7 +467,7 @@
   - GasPipeHalfAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -485,7 +485,7 @@
   - GasPipeHalfAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -502,7 +502,7 @@
   - GasPipeStraightAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -520,7 +520,7 @@
   - GasPipeStraightAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -538,7 +538,7 @@
   - GasPipeStraightAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -556,7 +556,7 @@
   - GasPipeBendAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -574,7 +574,7 @@
   - GasPipeBendAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -592,7 +592,7 @@
   - GasPipeBendAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -610,7 +610,7 @@
   - GasPipeTJunctionAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -628,7 +628,7 @@
   - GasPipeTJunctionAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -646,7 +646,7 @@
   - GasPipeTJunctionAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -664,7 +664,7 @@
   - GasPipeFourwayAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -682,7 +682,7 @@
   - GasPipeFourwayAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -700,7 +700,7 @@
   - GasPipeFourwayAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -713,7 +713,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 # ATMOS UNARY
@@ -729,7 +729,7 @@
   - !type:NoUnstackableInTile
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -744,7 +744,7 @@
   - !type:NoUnstackableInTile
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -759,8 +759,8 @@
   - !type:NoUnstackableInTile
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -775,8 +775,8 @@
   - !type:NoUnstackableInTile
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 # ATMOS BINARY
@@ -796,8 +796,8 @@
   - GasPressurePumpAlt2
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -817,8 +817,8 @@
   - GasPressurePumpAlt2
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -838,8 +838,8 @@
   - GasPressurePumpAlt2
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -858,8 +858,8 @@
   - GasVolumePumpAlt2
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -879,8 +879,8 @@
   - GasVolumePumpAlt2
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -900,8 +900,8 @@
   - GasVolumePumpAlt2
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -920,7 +920,7 @@
   - GasPassiveGateAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -940,7 +940,7 @@
   - GasPassiveGateAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -960,7 +960,7 @@
   - GasPassiveGateAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -979,8 +979,8 @@
   - GasPressureRegulatorAlt2
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1000,8 +1000,8 @@
   - GasPressureRegulatorAlt2
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1021,8 +1021,8 @@
   - GasPressureRegulatorAlt2
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1041,7 +1041,7 @@
   - GasValveAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1061,7 +1061,7 @@
   - GasValveAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1081,7 +1081,7 @@
   - GasValveAlt2
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1100,8 +1100,8 @@
   - SignalControlledValveAlt2
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1120,8 +1120,8 @@
   - SignalControlledValveAlt2
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1140,8 +1140,8 @@
   - SignalControlledValveAlt2
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1156,7 +1156,7 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1169,7 +1169,7 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1182,7 +1182,7 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1196,7 +1196,7 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Infrastructure
+    InfrastructureKnowledge: 26
   # </Trauma>
 
 # ATMOS TRINARY
@@ -1213,8 +1213,8 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1231,8 +1231,8 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1248,8 +1248,8 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1266,8 +1266,8 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1282,8 +1282,8 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   groups:
-  - Infrastructure
-  - Electronics
+    InfrastructureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 # INTERCOM
@@ -1301,7 +1301,7 @@
   - !type:WallmountCondition {}
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 # TIMERS
@@ -1318,7 +1318,7 @@
   - !type:WallmountCondition
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1335,7 +1335,7 @@
   - !type:WallmountCondition
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1352,7 +1352,7 @@
   - !type:WallmountCondition
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 # DEFENSES
@@ -1370,5 +1370,5 @@
   - !type:WallmountCondition
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>

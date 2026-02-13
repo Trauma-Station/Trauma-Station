@@ -12,7 +12,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-  - Furniture
+    FurnitureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -28,7 +28,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-  - Furniture
+    FurnitureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -62,7 +62,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-  - Furniture
+    FurnitureKnowledge: 26
   # </Trauma>
 
 # Shelfs
@@ -95,7 +95,7 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-  - Furniture
+    FurnitureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -110,7 +110,7 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-  - Furniture
+    FurnitureKnowledge: 26
   # </Trauma>
 
 # Reinforced
@@ -142,7 +142,7 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-  - Furniture
+    FurnitureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -157,7 +157,7 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-  - Furniture
+    FurnitureKnowledge: 26
   # </Trauma>
 
 # Departmental
@@ -173,7 +173,7 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-  - Furniture
+    FurnitureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -188,7 +188,7 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-  - Furniture
+    FurnitureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -203,5 +203,5 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-  - Furniture
+    FurnitureKnowledge: 26
   # </Trauma>

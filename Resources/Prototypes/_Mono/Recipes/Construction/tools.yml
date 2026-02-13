@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Ilya246
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: construction
   id: Timer
   graph: LogicGate
@@ -10,4 +6,4 @@
   category: construction-category-tools
   objectType: Item
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26

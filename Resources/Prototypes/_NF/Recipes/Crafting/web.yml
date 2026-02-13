@@ -10,7 +10,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SpiderCraft
+    SpiderCraftKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -25,7 +25,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SpiderCraft
+    SpiderCraftKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -40,7 +40,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SpiderCraft
+    SpiderCraftKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -55,5 +55,5 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SpiderCraft
+    SpiderCraftKnowledge: 26
   # </Trauma>

@@ -9,8 +9,8 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Electronics
-  - Science
+    ElectronicsKnowledge: 26
+    ScienceKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -22,8 +22,8 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Electronics
-  - Science
+    ElectronicsKnowledge: 26
+    ScienceKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -35,8 +35,8 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Electronics
-  - Science
+    ElectronicsKnowledge: 26
+    ScienceKnowledge: 26
   # </Trauma>
 
 # Arm
@@ -50,8 +50,8 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Electronics
-  - Science
+    ElectronicsKnowledge: 26
+    ScienceKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -63,8 +63,8 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Electronics
-  - Science
+    ElectronicsKnowledge: 26
+    ScienceKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -76,8 +76,8 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Electronics
-  - Science
+    ElectronicsKnowledge: 26
+    ScienceKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -89,8 +89,8 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Electronics
-  - Science
+    ElectronicsKnowledge: 26
+    ScienceKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -102,6 +102,6 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-  - Electronics
-  - Science
+    ElectronicsKnowledge: 26
+    ScienceKnowledge: 26
   # </Trauma>

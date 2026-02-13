@@ -15,7 +15,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-  - SpiderCraft
+    SpiderCraftKnowledge: 10
   # </Trauma>
 
 - type: construction
@@ -35,7 +35,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-  - SpiderCraft
+    SpiderCraftKnowledge: 10
   # </Trauma>
 
 - type: construction
@@ -55,7 +55,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-  - SpiderCraft
+    SpiderCraftKnowledge: 10
   # </Trauma>
 
 - type: construction
@@ -72,7 +72,7 @@
     - SpiderCraft
   # <Trauma>
   groups:
-  - SpiderCraft
+    SpiderCraftKnowledge: 10
   # </Trauma>
 
 - type: construction
@@ -90,7 +90,7 @@
     - SpiderCraft
   # <Trauma>
   groups:
-  - SpiderCraft
+    SpiderCraftKnowledge: 10
   # </Trauma>
 
 - type: construction
@@ -109,5 +109,5 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-  - SpiderCraft
+    SpiderCraftKnowledge: 10
   # </Trauma>

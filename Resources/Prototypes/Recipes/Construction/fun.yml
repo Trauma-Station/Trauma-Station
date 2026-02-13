@@ -7,5 +7,5 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Bananium
+    BananiumKnowledge: 10
   # </Trauma>

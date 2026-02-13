@@ -22,6 +22,7 @@
       - type: KnowledgeGrant
         skills:
           TechnologyKnowledge: 26
+          ScienceKnowledge: 26
   # </Trauma>
 
 - type: startingGear

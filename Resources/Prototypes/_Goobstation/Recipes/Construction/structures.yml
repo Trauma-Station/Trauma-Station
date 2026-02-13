@@ -1,11 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2025 Thom <119594676+ItsMeThom@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: construction
   id: WallDirectional
   graph: WallDirectional
@@ -16,7 +8,7 @@
   canRotate: true
   canBuildInImpassable: true
   groups:
-  - Walls
+    WallsKnowledge: 26
 
 - type: construction
   id: SolarPanel
@@ -26,7 +18,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
 
 # Barricades
 
@@ -40,7 +32,7 @@
   canRotate: true
   canBuildInImpassable: true
   groups:
-  - AdvancedWalls
+    WallsKnowledge: 76
 
 - type: construction
   id: BarricadeSteelFolding
@@ -52,7 +44,7 @@
   canRotate: true
   canBuildInImpassable: true
   groups:
-  - AdvancedWalls
+    WallsKnowledge: 76
 
 - type: construction
   id: BarricadePlasteel
@@ -64,7 +56,7 @@
   canRotate: true
   canBuildInImpassable: true
   groups:
-  - AdvancedWalls
+    WallsKnowledge: 76
 
 - type: construction
   id: BarricadePlasteelFolding
@@ -76,7 +68,7 @@
   canRotate: true
   canBuildInImpassable: true
   groups:
-  - AdvancedWalls
+    WallsKnowledge: 76
 
 # Airlocks
 
@@ -92,7 +84,7 @@
   conditions:
     - !type:TileNotBlocked
   groups:
-  - Airlocks
+    AirlocksKnowledge: 23
 
 - type: construction
   id: AirlockSealedGlass
@@ -106,4 +98,4 @@
   conditions:
     - !type:TileNotBlocked
   groups:
-  - Airlocks
+    AirlocksKnowledge: 30

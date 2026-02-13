@@ -227,7 +227,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - AdvancedHandmade
+    HandmadeKnowledge: 58
   # </Trauma>
 
 - type: constructionGraph
@@ -256,5 +256,5 @@
     - SpiderCraft
   # <Trauma>
   groups:
-  - SpiderCraft
+    SpiderCraftKnowledge: 10
   # </Trauma>

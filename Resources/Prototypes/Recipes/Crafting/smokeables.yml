@@ -7,7 +7,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Smokeables
+    SmokeablesKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -20,7 +20,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Smokeables
+    SmokeablesKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -32,7 +32,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Smokeables
+    SmokeablesKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -45,7 +45,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Smokeables
+    SmokeablesKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -57,7 +57,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Smokeables
+    SmokeablesKnowledge: 26
   # </Trauma>
 
 # I wanted to put a hand-grinder here but we need construction graphs that use non-consumed catalysts first.
@@ -72,7 +72,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Smokeables
+    SmokeablesKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -84,7 +84,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Smokeables
+    SmokeablesKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -97,5 +97,5 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Smokeables
+    SmokeablesKnowledge: 26
   # </Trauma>

@@ -6,7 +6,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - AdvancedHandmade
+    HandmadeKnowledge: 50 
   # </Trauma>
 
 - type: construction
@@ -17,8 +17,8 @@
   objectType: Item
   # <Trauma>
   groups:
-  - AdvancedHandmade
-  - Technological
+    HandmadeKnowledge: 69
+    TechnologicalKnowledge: 20
   # </Trauma>
 
 - type: construction
@@ -29,8 +29,8 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SimpleHandmade
-  - Technological
+    HandmadeKnowledge: 54
+    TechnologicalKnowledge: 21
   # </Trauma>
 
 - type: construction
@@ -41,8 +41,8 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SimpleHandmade
-  - Technological
+    HandmadeKnowledge: 45
+    TechnologicalKnowledge: 10
   # </Trauma>
 
 - type: construction
@@ -53,8 +53,8 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SimpleHandmade
-  - Technological
+    HandmadeKnowledge: 56
+    TechnologicalKnowledge: 23
   # </Trauma>
 
 - type: construction
@@ -65,8 +65,8 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SimpleHandmade
-  - Technological
+    HandmadeKnowledge: 45
+    TechnologicalKnowledge: 23
   # </Trauma>
 
 - type: construction
@@ -77,6 +77,6 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SimpleHandmade
-  - Technological
+  - Handmade: 57
+  - Technological: 19
   # </Trauma>

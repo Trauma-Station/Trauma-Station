@@ -10,11 +10,9 @@
   conditions:
   - !type:TileNotBlocked
   entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26
 
 - type: construction
   id: RevPrintingPress
@@ -28,11 +26,9 @@
   conditions:
   - !type:TileNotBlocked
   entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26
 
 - type: construction
   id: RevTelecommsWorkbench
@@ -45,12 +41,9 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26
 
 - type: construction
   id: RevTelesphere
@@ -63,12 +56,9 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26
 
 - type: construction
   id: Rev3DPrinter
@@ -82,11 +72,9 @@
   conditions:
   - !type:TileNotBlocked
   entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26
 
 - type: construction
   id: RevBulletPress
@@ -100,11 +88,9 @@
   conditions:
   - !type:TileNotBlocked
   entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26
 
 - type: construction
   id: RevMicroelectronicsAssembler
@@ -118,11 +104,9 @@
   conditions:
   - !type:TileNotBlocked
   entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26
 
 - type: construction
   id: RevUniformPrinter
@@ -136,11 +120,9 @@
   conditions:
   - !type:TileNotBlocked
   entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26
 
 - type: construction
   id: RevTechAnalyzer
@@ -154,11 +136,9 @@
   conditions:
   - !type:TileNotBlocked
   entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26
 
 - type: construction
   id: RevTurretPistol
@@ -172,11 +152,9 @@
   conditions:
   - !type:TileNotBlocked
   entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26
 
 - type: construction
   id: RevTurretSMG
@@ -190,11 +168,9 @@
   conditions:
   - !type:TileNotBlocked
   entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26
 
 - type: construction
   id: RevPlasmaFoundry
@@ -208,8 +184,6 @@
   conditions:
   - !type:TileNotBlocked
   entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26

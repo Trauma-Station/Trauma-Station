@@ -10,4 +10,4 @@
   conditions:
   - !type:TileNotBlocked
   groups:
-  - Technological
+    TechnologicalKnowledge: 10

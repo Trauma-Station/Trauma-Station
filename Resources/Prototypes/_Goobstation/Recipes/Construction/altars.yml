@@ -7,9 +7,9 @@
   placementMode: SnapgridCenter
   canRotate: false
   canBuildInImpassable: false
-  # Trauma edit start
+  # <>
   groups:
-  - SimpleFurniture
+    FurnitureKnowledge: 10
   # Trauma edit end
   conditions:
   - !type:TileNotBlocked

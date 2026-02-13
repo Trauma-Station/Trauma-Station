@@ -25,25 +25,17 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        SimpleHandmadeKnowledge: 26
-        AdvancedHandmadeKnowledge: 26
-        SurvivalWeaponsHandmadeKnowledge: 26
-        SurvivalWeaponsHandmadeAdvancedKnowledge: 26
+        HandmadeKnowledge: 26
         TechnologicalKnowledge: 26
         MaterialsKnowledge: 26
         DoorsKnowledge: 26
         AirlocksKnowledge: 26
-        ToysKnowledge: 26
-        BotsKnowledge: 26
         SimpleFurnitureKnowledge: 26
         FurnitureKnowledge: 26
         InfrastructureKnowledge: 26
         ElectronicsKnowledge: 26
         WallsKnowledge: 26
-        AdvancedWallsKnowledge: 26
-        ScienceKnowledge: 26
         WindowsKnowledge: 26
-        AdvancedWindowsKnowledge: 26
         SmokeablesKnowledge: 50
     # </Trauma>
 - type: startingGear

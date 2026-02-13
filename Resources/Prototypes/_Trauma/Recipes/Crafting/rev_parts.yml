@@ -7,12 +7,9 @@
   targetNode: gear
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26
 
 - type: construction
   id: RevBolt
@@ -21,12 +18,9 @@
   targetNode: bolt
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26
 
 - type: construction
   id: RevNut
@@ -35,9 +29,6 @@
   targetNode: nut
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
   groups:
-  - Technological
+    TechnologicalKnowledge: 26
+    RevolutionaryKnowledge: 26

@@ -6,7 +6,8 @@
   category: construction-category-antagonist
   objectType: Item
   groups:
-  - Revolutionary
+    RevolutionaryKnowledge: 26
+    WeaponsKnowledge: 26
 
 - type: construction
   id: RevResistance
@@ -16,7 +17,8 @@
   category: construction-category-antagonist
   objectType: Item
   groups:
-  - Revolutionary
+    RevolutionaryKnowledge: 26
+    WeaponsKnowledge: 26
 
 - type: construction
   id: RPG2
@@ -26,7 +28,8 @@
   category: construction-category-antagonist
   objectType: Item
   groups:
-  - Revolutionary
+    RevolutionaryKnowledge: 26
+    WeaponsKnowledge: 26
 
 - type: construction
   id: Flamethrower
@@ -36,7 +39,8 @@
   category: construction-category-antagonist
   objectType: Item
   groups:
-  - Revolutionary
+    RevolutionaryKnowledge: 26
+    WeaponsKnowledge: 26
 
 - type: construction
   id: Devastator
@@ -46,7 +50,8 @@
   category: construction-category-antagonist
   objectType: Item
   groups:
-  - Revolutionary
+    RevolutionaryKnowledge: 26
+    WeaponsKnowledge: 26
 
 - type: construction
   id: RevIED
@@ -56,4 +61,5 @@
   category: construction-category-antagonist
   objectType: Item
   groups:
-  - Revolutionary
+    RevolutionaryKnowledge: 26
+    WeaponsKnowledge: 26

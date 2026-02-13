@@ -9,19 +9,15 @@
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: SimpleHandmadeKnowledge
+  id: HandmadeKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: AdvancedHandmadeKnowledge
+  id: SurvivalKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: SurvivalWeaponsHandmadeKnowledge
-
-- type: entity
-  parent: BaseConstructionKnowledge
-  id: SurvivalWeaponsHandmadeAdvancedKnowledge
+  id: WeaponsKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
@@ -53,10 +49,6 @@
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: SimpleFurnitureKnowledge
-
-- type: entity
-  parent: BaseConstructionKnowledge
   id: FurnitureKnowledge
 
 - type: entity
@@ -73,19 +65,11 @@
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: AdvancedWallsKnowledge
-
-- type: entity
-  parent: BaseConstructionKnowledge
   id: ScienceKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: WindowsKnowledge
-
-- type: entity
-  parent: BaseConstructionKnowledge
-  id: AdvancedWindowsKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge

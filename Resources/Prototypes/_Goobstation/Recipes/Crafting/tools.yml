@@ -5,4 +5,4 @@
   targetNode: hammer
   objectType: Item
   groups:
-  - Technological
+    TechnologicalKnowledge: 15

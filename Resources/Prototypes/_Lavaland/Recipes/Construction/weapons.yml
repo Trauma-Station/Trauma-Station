@@ -5,7 +5,9 @@
   targetNode: axe
   objectType: Item
   groups:
-  - SurvivalWeaponsHandmade
+    SurvivalKnowledge: 15
+    WeaponsKnowledge: 15
+    HandmadeKnowledge: 15
 
 - type: construction
   id: BoneDaggerConstruction
@@ -14,4 +16,6 @@
   targetNode: dagger
   objectType: Item
   groups:
-  - SurvivalWeaponsHandmade
+    SurvivalKnowledge: 15
+    WeaponsKnowledge: 15
+    HandmadeKnowledge: 15

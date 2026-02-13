@@ -5,4 +5,4 @@
   targetNode: final
   objectType: Item
   groups:
-  - Technological
+    TechnologicalKnowledge: 26

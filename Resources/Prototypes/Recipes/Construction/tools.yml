@@ -7,7 +7,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -19,7 +19,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -31,7 +31,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -43,7 +43,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -55,7 +55,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -67,7 +67,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -77,12 +77,20 @@
   targetNode: mortarAndPestle
   category: construction-category-tools
   objectType: Item
+  # <Trauma>
+  groups:
+    HandmadeKnowledge: 26
+  # </Trauma>
 
 - type: construction
   id: MakeshiftJuicer
   graph: MakeshiftJuicer
   startNode: start
   targetNode: juicer
+  # <Trauma>
+  groups:
+    HandmadeKnowledge: 26
+  # </Trauma>
 
 - type: construction
   id: MakeshiftCentrifuge
@@ -93,5 +101,5 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Electronics
+    ElectronicsKnowledge: 26
   # </Trauma>

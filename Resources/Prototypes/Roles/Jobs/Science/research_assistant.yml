@@ -22,7 +22,8 @@
     components:
       - type: KnowledgeGrant
         skills:
-          TechnologyKnowledge: 1
+          TechnologyKnowledge: 10
+          ScienceKnowledge: 10
   # </Trauma>
 
 - type: startingGear

@@ -7,7 +7,7 @@
   objectType: Structure
   # <Trauma>
   groups:
-  - Furniture
+    FurnitureKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -19,8 +19,8 @@
   objectType: Structure
   # <Trauma>
   groups:
-  - Furniture
-  - Electronics
+    FurnitureKnowledge: 26
+    ElectronicsKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -33,8 +33,8 @@
   objectType: Structure
   # <Trauma>
   groups:
-  - Furniture
-  - Technological
+    FurnitureKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -46,8 +46,8 @@
   objectType: Structure
   # <Trauma>
   groups:
-  - Furniture
-  - Technological
+    FurnitureKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -64,5 +64,5 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-  - Furniture
+    FurnitureKnowledge: 26
   # </Trauma>

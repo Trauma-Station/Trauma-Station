@@ -7,9 +7,9 @@
   objectType: Item
   # <Trauma>
   groups:
-  - AdvancedHandmade
-  - Technological
-  - Toys
+    HandmadeKnowledge: 51
+    TechnologicalKnowledge: 26
+    ToysKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -21,9 +21,9 @@
   objectType: Item
   # <Trauma>
   groups:
-  - AdvancedHandmade
-  - Technological
-  - Toys
+    HandmadeKnowledge: 52
+    TechnologicalKnowledge: 26
+    ToysKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -35,7 +35,9 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SurvivalWeaponsHandmadeAdvanced
+    SurvivalKnowledge: 57
+    WeaponsKnowledge: 26
+    HandmadeKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -47,7 +49,9 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SurvivalWeaponsHandmadeAdvanced
+    SurvivalKnowledge: 57
+    WeaponsKnowledge: 26
+    HandmadeKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -59,7 +63,9 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SurvivalWeaponsHandmadeAdvanced
+    SurvivalKnowledge: 57
+    WeaponsKnowledge: 26
+    HandmadeKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -71,7 +77,9 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SurvivalWeaponsHandmadeAdvanced
+    SurvivalKnowledge: 57
+    WeaponsKnowledge: 26
+    HandmadeKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -83,7 +91,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Bananium
+    BananiumKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -95,7 +103,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Bananium
+    BananiumKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -107,7 +115,7 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Bananium
+    BananiumKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -119,8 +127,8 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SimpleHandmade
-  - Technological
+    HandmadeKnowledge: 10
+    TechnologicalKnowledge: 10
   # </Trauma>
 
 - type: construction
@@ -132,8 +140,8 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SimpleHandmade
-  - Toys
+    HandmadeKnowledge: 10
+    ToysKnowledge:
   # </Trauma>
 
 - type: construction
@@ -145,8 +153,8 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SimpleHandmade
-  - Toys
+    HandmadeKnowledge: 10
+    ToysKnowledge: 10
   # </Trauma>
 
 - type: construction
@@ -158,8 +166,8 @@
   objectType: Item
   # <Trauma>
   groups:
-  - SimpleHandmade
-  - Technological
+    HandmadeKnowledge: 10
+    TechnologicalKnowledge: 10
   # </Trauma>
 
 - type: construction
@@ -171,8 +179,8 @@
   objectType: Item
   # <Trauma>
   groups:
-  - AdvancedHandmade
-  - Technological
+    HandmadeKnowledge: 50
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -184,6 +192,6 @@
   objectType: Item
   # <Trauma>
   groups:
-  - AdvancedHandmade
-  - Technological
+    HandmadeKnowledge: 50
+    TechnologicalKnowledge: 26
   # </Trauma>
