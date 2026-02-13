@@ -47,7 +47,11 @@
   - type: AutoImplant
     implants:
     - SpaceItalianTranslatorImplant   #chefs should speak space italian
-  - type: GrantCqc                    #Chefs should have CqC
+  # <Trauma>
+  - type: KnowledgeGrant
+    skills:
+      MartialArtCQC: 26
+  # </Trauma
 
 # Lost
 

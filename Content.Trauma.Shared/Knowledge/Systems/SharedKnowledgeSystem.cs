@@ -2,8 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Body;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
 using Content.Shared.Construction;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
@@ -13,10 +11,8 @@ using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
-using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -514,6 +510,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         return knowledgeEnts;
     }
 
+    /// <summary>
+    /// Returns all knowledge that have the specified parent EntProtoId.
+    /// </summary>
     public override List<Entity<KnowledgeComponent>>? TryGetKnowledgeWithProtoId(EntityUid target, EntProtoId id)
     {
         List<Entity<KnowledgeComponent>>? knowledgeEnts = null;

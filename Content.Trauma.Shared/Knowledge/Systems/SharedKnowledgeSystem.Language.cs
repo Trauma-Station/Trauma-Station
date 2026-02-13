@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;

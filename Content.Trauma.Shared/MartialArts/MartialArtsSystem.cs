@@ -213,12 +213,6 @@ public sealed partial class MartialArtsSystem : EntitySystem
         if (ent.Comp.CurrentTarget == null)
             return false;
 
-        if (!proto.CanDoWhileProne && _standing.IsDown(ent.Owner))
-        {
-            _popupSystem.PopupEntity(Loc.GetString("martial-arts-fail-prone"), ent, ent);
-            return false;
-        }
-
         downed = _standing.IsDown(ent.Comp.CurrentTarget.Value);
         target = ent.Comp.CurrentTarget.Value;
 

@@ -80,6 +80,9 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     /// </summary>
     public abstract List<Entity<T, KnowledgeComponent>>? TryGetKnowledgeWithComp<T>(EntityUid target) where T : IComponent;
 
+    /// <summary>
+    /// Returns all knowledge that have the specified parent EntProtoId.
+    /// </summary>
     public abstract List<Entity<KnowledgeComponent>>? TryGetKnowledgeWithProtoId(EntityUid target, EntProtoId id);
     /// <summary>
     /// Returns true if that knowledge can be removed, by taking

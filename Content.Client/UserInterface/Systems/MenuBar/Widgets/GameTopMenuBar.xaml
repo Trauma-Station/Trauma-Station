@@ -88,7 +88,7 @@
     <!-- <Trauma> -->
     <ui:MenuButton
         Name="MartialArtsButton"
-        Access="Internal"
+        Access="Public"
         Icon="{xe:Tex '/Textures/Interface/emotes.svg.192dpi.png'}"
         ToolTip="{Loc 'game-hud-open-martial-arts-menu-button-tooltip'}"
         BoundKey = "{x:Static is:ContentKeyFunctions.OpenMartialArtsMenu}"

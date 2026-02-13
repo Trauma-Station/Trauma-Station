@@ -1,4 +1,3 @@
-using Content.Shared.Body.Components;
 using Content.Shared.Construction;
 using Content.Trauma.Common.Knowledge.Components;
 
