@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Baptr0b0t <152836416+baptr0b0t@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: combo
   id: PushKick
   name: Push Kick
@@ -14,10 +8,16 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit3.ogg
-  extraDamage: 5
-  paralyzeTime: 1
-  dropItems: false
-  canDoWhileProne: false
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 1
+    type: Remove
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 5
+  levelRequired: 10
 
 - type: combo
   id: CircleKick
@@ -29,8 +29,12 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
-  extraDamage: 15
-  canDoWhileProne: false
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 15
+  levelRequired: 10
 
 - type: combo
   id: SweepKick
@@ -42,10 +46,18 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit1.ogg
-  extraDamage: 10
-  paralyzeTime: 1
-  staminaDamage: 10
-  canDoWhileProne: false
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 10
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 1
+    type: Remove
+  - !type:TakeStaminaDamage
+    amount: 10
+  levelRequired: 10
 
 - type: combo
   id: SpinKick
@@ -58,10 +70,18 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit1.ogg
-  paralyzeTime: 2
-  staminaDamage: 15
-  extraDamage: 25
-  canDoWhileProne: false
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 25
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 2
+    type: Remove
+  - !type:TakeStaminaDamage
+    amount: 15
+  levelRequired: 10
 
 - type: combo
   id: KickUp
@@ -69,4 +89,7 @@
   attacks:
   - Disarm
   - Disarm
-  performOnSelf: true
+  userEffects:
+  - !type:ForcedStand
+  giveExperience: false
+  levelRequired: 10

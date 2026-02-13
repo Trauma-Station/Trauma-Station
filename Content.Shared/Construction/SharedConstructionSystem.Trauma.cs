@@ -1,9 +1,4 @@
-using System.Linq;
-using Content.Shared.Construction.Components;
-using Content.Shared.Construction.Prototypes;
-using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Prototypes;
-using static Content.Shared.Construction.Prototypes.ConstructionGroupPrototype;
 
 namespace Content.Shared.Construction;
 
@@ -18,7 +13,7 @@ public abstract partial class SharedConstructionSystem
     /// <summary>
     /// Trauma - Returns all available construction groups for that entity.
     /// </summary>
-    public HashSet<ProtoId<ConstructionGroupPrototype>> AvailableConstructionGroups(EntityUid user)
+    public Dictionary<EntProtoId, int> AvailableConstructionGroups(EntityUid user)
     {
         var ev = new ConstructionGetGroupsEvent(new());
         RaiseLocalEvent(user, ref ev);
@@ -27,4 +22,4 @@ public abstract partial class SharedConstructionSystem
 }
 
 [ByRefEvent]
-public record struct ConstructionGetGroupsEvent(HashSet<ProtoId<ConstructionGroupPrototype>> Groups);
+public record struct ConstructionGetGroupsEvent(Dictionary<EntProtoId, int> Groups);

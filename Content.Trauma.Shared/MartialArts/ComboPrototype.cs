@@ -1,6 +1,5 @@
 using Content.Shared.EntityEffects;
 using Content.Trauma.Common.MartialArts;
-using Content.Trauma.Shared.MartialArts.Events;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.MartialArts;
@@ -44,58 +43,16 @@ public sealed partial class ComboPrototype : IPrototype
     public int LevelExceeded = -1;
 
     /// <summary>
-    /// How much extra damage should this move do on perform?
-    /// </summary>
-    [DataField]
-    public float ExtraDamage;
-
-    /// <summary>
-    /// Stun time.
-    /// </summary>
-    [DataField]
-    public TimeSpan ParalyzeTime = TimeSpan.Zero;
-
-    /// <summary>
-    /// Can a lying person perform this combo
-    /// </summary>
-    [DataField]
-    public bool CanDoWhileProne = true;
-
-    /// <summary>
-    /// Should the target drop items on knockdown?
-    /// </summary>
-    [DataField]
-    public bool DropItems = true;
-
-    /// <summary>
-    /// How much stamina damage should this move do on perform.
-    /// </summary>
-    [DataField]
-    public float StaminaDamage;
-
-    /// <summary>
-    /// Blunt, Slash, etc.
-    /// </summary>
-    [DataField]
-    public string DamageType = "Blunt";
-
-    /// <summary>
-    /// How fast people are thrown on combo
-    /// </summary>
-    [DataField]
-    public float ThrownSpeed = 7f;
-
-    /// <summary>
     /// Name of the move
     /// </summary>
     [DataField(required: true)]
     public string Name = string.Empty;
 
     /// <summary>
-    /// Is this combo performed on self only or only on other targets
+    /// Should give experience?
     /// </summary>
     [DataField]
-    public bool PerformOnSelf;
+    public bool GiveExperience = true;
 }
 
 [Prototype]

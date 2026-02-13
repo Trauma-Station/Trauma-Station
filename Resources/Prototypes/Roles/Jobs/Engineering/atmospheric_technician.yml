@@ -27,26 +27,26 @@
     - type: EngineeringStaff
       # <Trauma>
     - type: KnowledgeGrant
-      ConstructionSimpleHandmade: 26
-      ConstructionAdvancedHandmade: 26
-      ConstructionSurvivalWeaponsHandmade: 26
-      ConstructionSurvivalWeaponsHandmadeAdvanced: 26
-      ConstructionTechnological: 26
-      ConstructionMaterials: 26
-      ConstructionDoors: 26
-      ConstructionAirlocks: 26
-      ConstructionToys: 26
-      ConstructionBots: 26
-      ConstructionSimpleFurniture: 26
-      ConstructionFurniture: 26
-      ConstructionInfrastructure: 26
-      ConstructionElectronics: 26
-      ConstructionWalls: 26
-      ConstructionAdvancedWalls: 26
-      ConstructionScience: 26
-      ConstructionWindows: 26
-      ConstructionAdvancedWindows: 26
-      ConstructionSmokeables: 50
+      SimpleHandmadeKnowledge: 26
+      AdvancedHandmadeKnowledge: 26
+      SurvivalWeaponsHandmadeKnowledge: 26
+      SurvivalWeaponsHandmadeAdvancedKnowledge: 26
+      TechnologicalKnowledge: 26
+      MaterialsKnowledge: 26
+      DoorsKnowledge: 26
+      AirlocksKnowledge: 26
+      ToysKnowledge: 26
+      BotsKnowledge: 26
+      SimpleFurnitureKnowledge: 26
+      FurnitureKnowledge: 26
+      InfrastructureKnowledge: 26
+      ElectronicsKnowledge: 26
+      WallsKnowledge: 26
+      AdvancedWallsKnowledge: 26
+      ScienceKnowledge: 26
+      WindowsKnowledge: 26
+      AdvancedWindowsKnowledge: 26
+      SmokeablesKnowledge: 50
       # </Trauma>
 
 

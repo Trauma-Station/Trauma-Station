@@ -29,26 +29,26 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        ConstructionSimpleHandmade: 10
-        ConstructionAdvancedHandmade: 10
-        ConstructionSurvivalWeaponsHandmade: 10
-        ConstructionSurvivalWeaponsHandmadeAdvanced: 10
-        ConstructionTechnological: 10
-        ConstructionMaterials: 10
-        ConstructionDoors: 10
-        ConstructionAirlocks: 10
-        ConstructionToys: 10
-        ConstructionBots: 10
-        ConstructionSimpleFurniture: 10
-        ConstructionFurniture: 10
-        ConstructionInfrastructure: 10
-        ConstructionElectronics: 10
-        ConstructionWalls: 10
-        ConstructionAdvancedWalls: 10
-        ConstructionScience: 10
-        ConstructionWindows: 10
-        ConstructionAdvancedWindows: 10
-        ConstructionSmokeables: 50
+        SimpleHandmadeKnowledge: 10
+        AdvancedHandmadeKnowledge: 10
+        SurvivalWeaponsHandmadeKnowledge: 10
+        SurvivalWeaponsHandmadeAdvancedKnowledge: 10
+        TechnologicalKnowledge: 10
+        MaterialsKnowledge: 10
+        DoorsKnowledge: 10
+        AirlocksKnowledge: 10
+        ToysKnowledge: 10
+        BotsKnowledge: 10
+        SimpleFurnitureKnowledge: 10
+        FurnitureKnowledge: 10
+        InfrastructureKnowledge: 10
+        ElectronicsKnowledge: 10
+        WallsKnowledge: 10
+        AdvancedWallsKnowledge: 10
+        ScienceKnowledge: 10
+        WindowsKnowledge: 10
+        AdvancedWindowsKnowledge: 10
+        SmokeablesKnowledge: 50
     # </Trauma>
 
 - type: startingGear

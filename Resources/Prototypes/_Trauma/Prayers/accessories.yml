@@ -36,10 +36,3 @@
   subjects: [ "INFINITE AMMO", "INVISIBLE", "CQC" ]
   items:
     id: ClothingHeadHatSolidHeadband
-  effects:
-  - !type:AddComponents
-    probability: 1
-    components:
-    - type: KnowledgeGrantOnWear
-      experience:
-        MartialArtCQC: 10

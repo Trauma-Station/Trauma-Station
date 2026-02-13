@@ -1,6 +1,5 @@
 using Content.Shared.Construction.Conditions;
 using Content.Shared.Whitelist;
-using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Construction.Prototypes;
@@ -94,22 +93,17 @@ public sealed partial class ConstructionPrototype : IPrototype
 
     public IReadOnlyList<IConstructionCondition> Conditions => _conditions;
 
+    // <Trauma>
     /// <summary>
-    /// Trauma - Construction groups that are required to be able to use this craft.
+    /// Construction Knowledge and levels that are required to be able to use this craft.
     /// </summary>
     [DataField(required: true)]
-    public ProtoId<ConstructionGroupPrototype>[] Groups = [];
+    public Dictionary<EntProtoId, int> Groups = new();
+    // </Trauma>
 }
 
 public enum ConstructionType
 {
     Structure,
     Item,
-}
-
-[RegisterComponent, NetworkedComponent]
-public sealed partial class ConstructionExperienceComponent : Component
-{
-    [DataField]
-    public Dictionary<ProtoId<ConstructionGroupPrototype>, int> Groups = new();
 }

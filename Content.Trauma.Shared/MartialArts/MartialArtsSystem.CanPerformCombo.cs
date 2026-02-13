@@ -113,10 +113,6 @@ public partial class MartialArtsSystem
             if (success)
                 break;
 
-            // If we are targeting ourselves and combo doesn't allow it (or otherwise), then continue
-            if (args.Performer == target != proto.PerformOnSelf)
-                continue;
-
             var sum = comp.LastAttacks.Count - proto.AttackTypes.Count;
             if (sum < 0)
                 continue;
@@ -143,6 +139,7 @@ public partial class MartialArtsSystem
                 _effects.ApplyEffects(args.Target, proto.OpponentEffects, scale, args.Performer);
 
             comp.LastAttacks.Clear();
+            success = true;
             if (TryComp<MartialArtsKnowledgeComponent>(uid, out var martialArtsComp) && !martialArtsComp.Blocked && (!_mobState.IsDead(args.Target) && _mobState.IsCritical(args.Target)))
             {
                 var prototypeId = MetaData(uid).EntityPrototype?.ID;

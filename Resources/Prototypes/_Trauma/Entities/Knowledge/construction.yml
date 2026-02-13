@@ -6,165 +6,95 @@
   - type: Knowledge
     color: "#0ba881"
     experienceCost: 20
-  - type: ConstructionKnowledge
+
+- type: entity
+  parent: BaseKnowledge
+  id: SimpleHandmadeKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionSimpleHandmade
-  components:
-  - type: ConstructionKnowledge
-    group: SimpleHandmade
+  id: AdvancedHandmadeKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionAdvancedHandmade
-  components:
-  - type: ConstructionKnowledge
-    group: AdvancedHandmade
+  id: SurvivalWeaponsHandmadeKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionSurvivalWeaponsHandmade
-  components:
-  - type: ConstructionKnowledge
-    group: SurvivalWeaponsHandmade
+  id: SurvivalWeaponsHandmadeAdvancedKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionSurvivalWeaponsHandmadeAdvanced
-  components:
-  - type: ConstructionKnowledge
-    group: SurvivalWeaponsHandmadeAdvanced
+  id: TechnologicalKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionTechnological
-  components:
-  - type: ConstructionKnowledge
-    group: Technological
+  id: MaterialsKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionMaterials
-  components:
-  - type: ConstructionKnowledge
-    group: Materials
+  id: DoorsKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionDoors
-  components:
-  - type: ConstructionKnowledge
-    group: Doors
+  id: AirlocksKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionAirlocks
-  components:
-  - type: ConstructionKnowledge
-    group: Airlocks
+  id: ToysKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionToys
-  components:
-  - type: ConstructionKnowledge
-    group: Toys
+  id: BananiumKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionBananium
-  components:
-  - type: ConstructionKnowledge
-    group: Bananium
+  id: BotsKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionBots
-  components:
-  - type: ConstructionKnowledge
-    group: Bots
+  id: SimpleFurnitureKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionSimpleFurniture
-  components:
-  - type: ConstructionKnowledge
-    group: SimpleFurniture
+  id: FurnitureKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionFurniture
-  components:
-  - type: ConstructionKnowledge
-    group: Furniture
+  id: InfrastructureKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionInfrastructure
-  components:
-  - type: ConstructionKnowledge
-    group: Infrastructure
+  id: ElectronicsKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionElectronics
-  components:
-  - type: ConstructionKnowledge
-    group: Electronics
+  id: WallsKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionWalls
-  components:
-  - type: ConstructionKnowledge
-    group: Walls
+  id: AdvancedWallsKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionAdvancedWalls
-  components:
-  - type: ConstructionKnowledge
-    group: AdvancedWalls
+  id: ScienceKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionScience
-  components:
-  - type: ConstructionKnowledge
-    group: Science
+  id: WindowsKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionWindows
-  components:
-  - type: ConstructionKnowledge
-    group: Windows
+  id: AdvancedWindowsKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionAdvancedWindows
-  components:
-  - type: ConstructionKnowledge
-    group: AdvancedWindows
+  id: SpiderCraftKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionSpiderCraft
-  components:
-  - type: ConstructionKnowledge
-    group: SpiderCraft
+  id: SmokeablesKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge
-  id: ConstructionSmokeables
-  components:
-  - type: ConstructionKnowledge
-    group: Smokeables
-
-- type: entity
-  parent: BaseConstructionKnowledge
-  id: ConstructionRevolutionary
-  components:
-  - type: ConstructionKnowledge
-    group: Revolutionary
+  id: RevolutionaryKnowledge

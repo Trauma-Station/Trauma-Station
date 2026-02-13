@@ -290,7 +290,9 @@ namespace Content.Client.Construction.UI
                 if (_playerManager.LocalSession == null
                     || _playerManager.LocalEntity == null
                     || _whitelistSystem.IsWhitelistFail(recipe.EntityWhitelist, _playerManager.LocalEntity.Value)
-                    || !recipe.Groups.All(group => availableGroups.Contains(group))) // Trauma edit
+                    // <Trauma>
+                    || !recipe.Groups.All(group => availableGroups.Contains(group.Key)))
+                    // </Trauma>
                     continue;
 
                 if (!string.IsNullOrEmpty(search) && (recipe.Name is { } name &&

@@ -7,7 +7,7 @@
   - type: Knowledge
     level: 26
     experienceCost: 4
-    color: "#0b30a8"
+    color: "#ADD8E6"
   - type: LanguageKnowledge
     speaks: true
     understands: true

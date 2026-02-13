@@ -124,7 +124,9 @@ public sealed class ConstructorBUI : BoundUserInterface
         var isEmptyCategory = string.IsNullOrEmpty(category) || category == _forAllCategoryName;
 
         _recipes.Clear();
-        var availableGroups = _construction.AvailableConstructionGroups(user); // Goobstation edit
+        // <Trauma>
+        var availableGroups = _construction.AvailableConstructionGroups(user);
+        // </Trauma>
         foreach (var recipe in _proto.EnumeratePrototypes<ConstructionPrototype>())
         {
             if (recipe.Hide)
@@ -133,10 +135,10 @@ public sealed class ConstructorBUI : BoundUserInterface
             if (_whitelist.IsWhitelistFail(recipe.EntityWhitelist, user))
                 continue;
 
-            // Goobstation edit start
-            if (!availableGroups.Overlaps(recipe.Groups))
+            // <Trauma>
+            if (!availableGroups.Overlaps(recipe.Groups.Keys))
                 continue;
-            // Goobstation edit end
+            // </Trauma>
 
             if (searching
                 && recipe.Name != null

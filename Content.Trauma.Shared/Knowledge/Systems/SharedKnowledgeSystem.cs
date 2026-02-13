@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Construction;
@@ -34,6 +35,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private readonly BodySystem _body = default!;
 
     private EntityQuery<KnowledgeComponent> _knowledgeQuery;
     private EntityQuery<KnowledgeContainerComponent> _containerQuery;
@@ -184,12 +186,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public void SetupHolder(Entity<KnowledgeHolderComponent> ent)
     {
-        var ev = new KnowledgeContainerRelayEvent(ent);
-        RecursiveRaiseRelayEvent(ent, ref ev);
-
-        // Check entity that we have found
-        if (_containerQuery.TryComp(ev.Found, out var knowledgeFound))
-            ent.Comp.KnowledgeEntity = ev.Found;
+        ent.Comp.KnowledgeEntity = TryGetKnowledgeEntity(ent);
         Dirty(ent.Owner, ent.Comp);
         if (TryComp<LanguageSpeakerComponent>(ent.Owner, out var languageSpeaker))
             UpdateEntityLanguages((ent, languageSpeaker));
@@ -594,13 +591,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// <returns>Entity that contains knowledge related to original uid.</returns>
     public override Entity<KnowledgeContainerComponent> EnsureKnowledgeContainer(EntityUid uid)
     {
-        // Raise event on all children
-        var ev = new KnowledgeContainerRelayEvent(uid);
-        RecursiveRaiseRelayEvent(uid, ref ev);
+        var list = _body.GetOrgans<KnowledgeContainerComponent>(uid);
 
-        // Check entity that we have found
-        if (_containerQuery.TryComp(ev.Found, out var knowledgeFound))
-            return (ev.Found.Value, knowledgeFound);
+        foreach (var organ in list)
+        {
+            // Check entity that we have found
+            if (_containerQuery.TryComp(organ, out var knowledgeFound))
+                return (organ, knowledgeFound);
+        }
 
         // If not found just five up
         var knowledge = EnsureComp<KnowledgeContainerComponent>(uid);
@@ -610,15 +608,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// <inheritdoc cref="EnsureKnowledgeContainer(Robust.Shared.GameObjects.EntityUid)"/>
     public override void EnsureKnowledgeContainer(EntityUid uid, out Entity<KnowledgeContainerComponent> container)
     {
-        // Raise event on all children
-        var ev = new KnowledgeContainerRelayEvent(uid);
-        RecursiveRaiseRelayEvent(uid, ref ev);
+        var list = _body.GetOrgans<KnowledgeContainerComponent>(uid);
 
-        // Check entity that we have found
-        if (_containerQuery.TryComp(ev.Found, out var knowledgeFound))
+        foreach (var organ in list)
         {
-            container = (ev.Found.Value, knowledgeFound);
-            return;
+            // Check entity that we have found
+            if (_containerQuery.TryComp(organ, out var knowledgeFound))
+            {
+                container = (organ, knowledgeFound);
+                return;
+            }
         }
 
         // If not found just give up and ensure it on the entity itself
@@ -630,13 +629,15 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         if (TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder) && knowledgeHolder.KnowledgeEntity is { })
             return knowledgeHolder.KnowledgeEntity;
-        // Raise event on all children
-        var ev = new KnowledgeContainerRelayEvent(ent);
-        RecursiveRaiseRelayEvent(ent, ref ev);
 
-        // Check entity that we have found
-        if (_containerQuery.TryComp(ev.Found, out var knowledgeFound))
-            return ev.Found;
+        var list = _body.GetOrgans<KnowledgeContainerComponent>(ent);
+
+        foreach (var organ in list)
+        {
+            // Check entity that we have found
+            if (_containerQuery.TryComp(organ, out var knowledgeFound))
+                return organ;
+        }
 
         return null;
     }
@@ -752,16 +753,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
 
         return (total, isCritical);
-    }
-
-    private void RecursiveRaiseRelayEvent(EntityUid uid, ref KnowledgeContainerRelayEvent ev)
-    {
-        var enumerator = Transform(uid).ChildEnumerator;
-        while (enumerator.MoveNext(out var child))
-        {
-            RaiseLocalEvent(child, ref ev);
-            RecursiveRaiseRelayEvent(child, ref ev);
-        }
     }
 
     private void EnsureContainer(Entity<KnowledgeContainerComponent> ent)

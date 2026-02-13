@@ -7,7 +7,10 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit3.ogg
-  staminaDamage: 50
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 50
+  levelRequired: 10
 
 - type: combo
   id: DragonTail
@@ -19,9 +22,17 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
-  extraDamage: 15
-  staminaDamage: 30
-  paralyzeTime: 6
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 15
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 6
+  levelRequired: 10
 
 - type: combo
   id: DragonStrike
@@ -33,5 +44,12 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit1.ogg
-  extraDamage: 40
-  paralyzeTime: 2 # Actual paralyze
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 40
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 2
+  levelRequired: 10

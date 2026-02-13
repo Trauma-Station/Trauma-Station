@@ -22,7 +22,7 @@ public sealed class CharacterInfoEvent : EntityEventArgs
     public readonly string JobTitle;
     public readonly Dictionary<string, List<ObjectiveInfo>> Objectives;
     public readonly string? Briefing;
-    public readonly Dictionary<string, List<KnowledgeInfo>> Knowledge; // Goobstation edit
+    public readonly Dictionary<string, List<KnowledgeInfo>> Knowledge; // Trauma - Knowledge
 
     public CharacterInfoEvent(NetEntity netEntity, string jobTitle, Dictionary<string, List<ObjectiveInfo>> objectives, string? briefing, Dictionary<string, List<KnowledgeInfo>> knowledge)  // Goobstation edit - added knowledge
     {

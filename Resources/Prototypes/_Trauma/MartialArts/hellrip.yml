@@ -1,20 +1,20 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Lincoln McQueen <lincoln.mcqueen@gmail.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: combo
   id: DropKick
   name: Flying DropKick
   attacks:
   - Disarm
   - Disarm
-  damageType: Slash
-  paralyzeTime: 6
-  staminaDamage: 80
-  canDoWhileProne: false
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 80
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 6
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 10
+  levelRequired: 10
 
 - type: combo
   id: HeadRip
@@ -24,9 +24,13 @@
   - Harm
   - Harm
   - Grab
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 100
   damageType: Slash
-  extraDamage: 100
-  canDoWhileProne: false
+  levelRequired: 10
 
 - type: combo
   id: TearDown
@@ -35,8 +39,15 @@
   - Harm
   - Disarm
   - Grab
-  staminaDamage: 50
-  extraDamage: 60
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 50
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 60
+  damageType: Slash
+  levelRequired: 10
 
 - type: combo
   id: Slam
@@ -44,5 +55,10 @@
   attacks:
   - Disarm
   - Harm
-  paralyzeTime: 8
-  staminaDamage: 100
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 100
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 8
+  levelRequired: 10

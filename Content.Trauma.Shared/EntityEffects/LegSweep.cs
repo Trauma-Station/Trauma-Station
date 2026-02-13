@@ -1,9 +1,6 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Shared.EntityEffects;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffectNew;
-using Robust.Shared.Audio;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -28,18 +25,17 @@ public sealed class LegSweepEffectSystem : EntityEffectSystem<TransformComponent
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<LegSweep> args)
     {
-        if (args.User is { } user)
+        if (args.User is not { } user)
+            return;
+        if (_standing.IsDown(user))
         {
-            if (_standing.IsDown(user))
-            {
-                _standing.Stand(user);
-                _statusEffects.TryAddStatusEffect(ent.Owner, "KnockedDown", out _, TimeSpan.FromSeconds(args.Effect.Time * args.Scale * 2));
-            }
-            else
-            {
-                if (_random.Prob(Math.Min(0.5f * args.Scale, 1f)))
-                    _statusEffects.TryAddStatusEffect(ent.Owner, "KnockedDown", out _, TimeSpan.FromSeconds(args.Effect.Time * args.Scale));
-            }
+            _standing.Stand(user);
+            _statusEffects.TryAddStatusEffect(ent.Owner, "KnockedDown", out _, TimeSpan.FromSeconds(args.Effect.Time * args.Scale * 2));
+        }
+        else
+        {
+            if (_random.Prob(Math.Min(0.5f * args.Scale, 1f)))
+                _statusEffects.TryAddStatusEffect(ent.Owner, "KnockedDown", out _, TimeSpan.FromSeconds(args.Effect.Time * args.Scale));
         }
     }
 }

@@ -1,30 +1,29 @@
 // <Trauma>
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Content.Goobstation.Common.Cloning;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Goobstation.Shared.CloneProjector.Clone;
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Goobstation.Shared.Clothing.Systems;
+using Content.Shared.Clothing.Components;
+using Content.Shared.Clothing.EntitySystems;
+using Content.Shared.Interaction.Components;
+using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Radio.Components;
+using Content.Shared.Radio.EntitySystems;
+using Robust.Shared.Utility;
 // </Trauma>
 using Content.Server.Humanoid;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body;
 using Content.Shared.Cloning;
 using Content.Shared.Cloning.Events;
-using Content.Shared.Clothing.Components;
-using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Database;
 using Content.Shared.Humanoid;
-using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Inventory;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
-using Content.Shared.Interaction.Components;
-using Content.Shared.Inventory;
 using Content.Shared.NameModifier.EntitySystems;
-using Content.Shared.Radio.Components;
-using Content.Shared.Radio.EntitySystems;
 using Content.Shared.StatusEffect;
 using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Storage;
@@ -33,7 +32,8 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Content.Server.Cloning;
 
@@ -46,6 +46,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
     // <Trauma>
     [Dependency] private readonly ToggleableClothingSystem _toggleable = default!;
     [Dependency] private readonly SharedSealableClothingSystem _sealable = default!;
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
     // </Trauma>
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
@@ -58,7 +59,6 @@ public sealed partial class CloningSystem : SharedCloningSystem
     [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
     [Dependency] private readonly NameModifierSystem _nameMod = default!;
     [Dependency] private readonly Shared.StatusEffectNew.StatusEffectsSystem _statusEffects = default!; //TODO: This system has to support both the old and new status effect systems, until the old is able to be fully removed.
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!; // Trauma
 
     /// <summary>
     ///     Spawns a clone of the given humanoid mob at the specified location or in nullspace.
@@ -115,10 +115,10 @@ public sealed partial class CloningSystem : SharedCloningSystem
         if (settings.CopyStatusEffects)
             CopyStatusEffects(original, clone.Value);
 
-        // Trauma start
+        // <Trauma>
         if (settings.CopyKnowledge)
             TransferKnowledge(original, clone.Value);
-        // Trauma end
+        // </Trauma>
 
         var originalName = _nameMod.GetBaseName(original);
 

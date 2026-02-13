@@ -1,3 +1,5 @@
+// <Trauma>
+// </Trauma>
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,10 +19,12 @@ using Content.Shared.Inventory;
 using Content.Shared.Mind.Components; // Goobstation
 using Content.Shared.Storage;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Shared.Toolshed.TypeParsers;
 
 namespace Content.Server.Construction
 {
@@ -350,13 +354,14 @@ namespace Content.Server.Construction
                 return false;
             }
 
-            // Goobstation edit start
-            if (!AvailableConstructionGroups(user).Overlaps(constructionPrototype.Groups))
+            // <Trauma>
+            var userConstructionGroup = AvailableConstructionGroups(user);
+            if (!constructionPrototype.Groups.Keys.All(group => userConstructionGroup.ContainsKey(group)))
             {
                 Log.Error($"User {ToPrettyString(user)} tried to start a construction {prototype} that it doesn't have knowledge about!");
                 return false;
             }
-            // Goobstation edit end
+            // </Trauma>
 
             if (_whitelistSystem.IsWhitelistFail(constructionPrototype.EntityWhitelist, user))
             {
@@ -420,6 +425,14 @@ namespace Content.Server.Construction
             RaiseLocalEvent(user, ref constructedEv);
             // </Goobstation>
 
+            // <Trauma>
+            EnsureComp<KnowledgeConstructionModifierComponent>(item, out var knowledgeConstructionModifier);
+            foreach (var construct in constructionPrototype.Groups)
+            {
+                knowledgeConstructionModifier.LevelDeltas[construct.Key] = construct.Value;
+            }
+            // </Trauma>
+
             // Just in case this is a stack, attempt to merge it. If it isn't a stack, this will just normally pick up
             // or drop the item as normal.
             _stackSystem.TryMergeToHands(item, user);
@@ -460,14 +473,15 @@ namespace Content.Server.Construction
                 return false;
             }
 
-            // Goobstation edit start
-            if (!AvailableConstructionGroups(user).Overlaps(constructionPrototype.Groups))
+            // <Trauma>
+            var userConstructionGroup = AvailableConstructionGroups(user);
+            if (!constructionPrototype.Groups.Keys.All(group => userConstructionGroup.ContainsKey(group)))
             {
                 Log.Error($"User {ToPrettyString(user)} tried to start a construction {prototypeName} that it doesn't have knowledge about!");
                 RaiseNetworkEvent(new AckStructureConstructionMessage(ack), user);
                 return false;
             }
-            // Goobstation edit end
+            // </Trauma>
 
             if (!PrototypeManager.TryIndex(constructionPrototype.Graph, out ConstructionGraphPrototype? constructionGraph))
             {
@@ -623,6 +637,14 @@ namespace Content.Server.Construction
             var constructedEv = new ConstructedEvent(structure);
             RaiseLocalEvent(user, ref constructedEv);
             // </Goobstation>
+
+            // <Trauma>
+            EnsureComp<KnowledgeConstructionModifierComponent>(structure, out var knowledgeConstructionModifier);
+            foreach (var construct in constructionPrototype.Groups)
+            {
+                knowledgeConstructionModifier.LevelDeltas[construct.Key] = construct.Value;
+            }
+            // </Trauma>
 
             RaiseNetworkEvent(new AckStructureConstructionMessage(ack, GetNetEntity(structure)), user);
             _adminLogger.Add(LogType.Construction, LogImpact.Low, $"{ToPrettyString(user):player} has turned a {prototypeName} construction ghost into {ToPrettyString(structure)} at {Transform(structure).Coordinates}");

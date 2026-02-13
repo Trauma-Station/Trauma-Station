@@ -1,13 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Lincoln McQueen <lincoln.mcqueen@gmail.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: combo
   id: JudoDiscombobulate
   name: Discombobulate
@@ -28,6 +18,7 @@
     damage:
       types:
         Blunt: 5
+  levelRequired: 0
 
 - type: combo
   id: JudoThrow
@@ -45,8 +36,7 @@
         Blunt: 5
   - !type:TakeStaminaDamage
     amount: 5
-  dropItems: false
-  canDoWhileProne: false
+  levelRequired: 0
 
 - type: combo
   id: JudoArmbar
@@ -55,9 +45,13 @@
   - Disarm
   - Disarm
   - Grab
-  paralyzeTime: 5
-  staminaDamage: 10
-  dropItems: true
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 5
+  - !type:TakeStaminaDamage
+    amount: 10
+  levelRequired: 0
 
 - type: combo
   id: JudoWheelThrow
@@ -66,7 +60,10 @@
   - Grab
   - Disarm
   - Harm
-  staminaDamage: 120
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 120
+  levelRequired: 0
 
 - type: combo
   id: JudoGoldenBlast
@@ -76,12 +73,16 @@
   - Disarm
   - Hug
   - Grab
-  - Disarm
-  - Disarm
-  - Grab
-  - Hug
-  - Disarm
-  - Disarm
-  - Grab
-  - Hug
-  paralyzeTime: 30
+  # - Disarm
+  # - Disarm
+  # - Grab
+  # - Hug
+  # - Disarm
+  # - Disarm
+  # - Grab
+  # - Hug
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 30
+  levelRequired: 0
