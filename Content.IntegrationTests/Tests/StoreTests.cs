@@ -72,7 +72,7 @@ public sealed class StoreTests
             Assert.That(invSystem.TryEquip(human, uniform, "jumpsuit"));
             Assert.That(invSystem.TryEquip(human, pda, "id"));
 
-            FixedPoint2 originalBalance = 20;
+            FixedPoint2 originalBalance = 100; // Trauma
             uplinkSystem.AddUplink(human, originalBalance, null, true);
 
             var storeComponent = entManager.GetComponent<StoreComponent>(pda);
