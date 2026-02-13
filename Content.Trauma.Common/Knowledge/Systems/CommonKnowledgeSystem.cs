@@ -1,9 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.MartialArts;
-using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Common.Knowledge.Systems;
@@ -82,6 +80,7 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     /// </summary>
     public abstract List<Entity<T, KnowledgeComponent>>? TryGetKnowledgeWithComp<T>(EntityUid target) where T : IComponent;
 
+    public abstract List<Entity<KnowledgeComponent>>? TryGetKnowledgeWithProtoId(EntityUid target, EntProtoId id);
     /// <summary>
     /// Returns true if that knowledge can be removed, by taking
     /// into account its memory level and knowledge category.

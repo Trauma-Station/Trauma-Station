@@ -3,18 +3,6 @@ using Robust.Shared.Serialization;
 namespace Content.Trauma.Common.Knowledge;
 
 /// <summary>
-/// Raised on a knowledge unit entity when it's added to some container entity.
-/// </summary>
-[ByRefEvent]
-public record struct KnowledgeUnitAddedEvent(EntityUid Target);
-
-/// <summary>
-/// Raised on a knowledge unit entity when it's removed from some container entity.
-/// </summary>
-[ByRefEvent]
-public record struct KnowledgeUnitRemovedEvent(EntityUid Target);
-
-/// <summary>
 /// Raised on all children of some entity to try to find an entity with <see cref="KnowledgeContainerComponent"/>
 /// </summary>
 [ByRefEvent] // Im not sure if it's the right way to do a relay, but whatever, it works.

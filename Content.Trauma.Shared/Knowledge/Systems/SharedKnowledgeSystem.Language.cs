@@ -1,20 +1,15 @@
 using System.Linq;
-using System.Net.NetworkInformation;
+using Content.Medical.Common.Targeting;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared._EinsteinEngines.Language.Systems;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
-using Content.Shared.EntityEffects.Effects.Atmos;
-using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Prototypes;
-using YamlDotNet.Core.Tokens;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem

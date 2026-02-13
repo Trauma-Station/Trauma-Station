@@ -1,8 +1,8 @@
 using Content.Goobstation.Shared.Religion;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Server.Administration.Logs;
 using Content.Server.Stunnable;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
@@ -18,7 +18,6 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Chaplain;
 using Content.Trauma.Shared.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 

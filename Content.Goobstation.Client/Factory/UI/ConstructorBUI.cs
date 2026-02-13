@@ -136,7 +136,7 @@ public sealed class ConstructorBUI : BoundUserInterface
                 continue;
 
             // <Trauma>
-            if (!availableGroups.Overlaps(recipe.Groups.Keys))
+            if (!recipe.Groups.Keys.All(group => availableGroups.ContainsKey(group)))
                 continue;
             // </Trauma>
 

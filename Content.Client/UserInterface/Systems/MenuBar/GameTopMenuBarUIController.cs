@@ -1,4 +1,6 @@
-using Content.Client._Trauma;
+// <Trauma>
+using Content.Trauma.Common.Knowledge;
+// </Trauma>
 using Content.Client.UserInterface.Systems.Actions;
 using Content.Client.UserInterface.Systems.Admin;
 using Content.Client.UserInterface.Systems.Bwoink;
@@ -17,6 +19,9 @@ namespace Content.Client.UserInterface.Systems.MenuBar;
 
 public sealed class GameTopMenuBarUIController : UIController
 {
+    // <Trauma>
+    [Dependency] private readonly IMartialArtsUIController _martialArts = default!;
+    // </Trauma>
     [Dependency] private readonly EscapeUIController _escape = default!;
     [Dependency] private readonly AdminUIController _admin = default!;
     [Dependency] private readonly CharacterUIController _character = default!;
@@ -28,18 +33,11 @@ public sealed class GameTopMenuBarUIController : UIController
     [Dependency] private readonly EmotesUIController _emotes = default!;
     [Dependency] private readonly LanguageMenuUIController _language = default!;
 
-    // <Trauma>
-    private MartialArtsUIController? _martialArts;
-    // </Trauma
     private GameTopMenuBar? GameTopMenuBar => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>();
 
     public override void Initialize()
     {
         base.Initialize();
-
-        // <Trauma>
-        _martialArts = UIManager.GetUIController<MartialArtsUIController>();
-        // </Trauma>
 
         var gameplayStateLoad = UIManager.GetUIController<GameplayStateLoadController>();
         gameplayStateLoad.OnScreenLoad += LoadButtons;
@@ -49,7 +47,7 @@ public sealed class GameTopMenuBarUIController : UIController
     public void UnloadButtons()
     {
         // <Trauma>
-        _martialArts?.UnloadButton();
+        _martialArts.OnUnloadButton();
         // </Trauma>
         _escape.UnloadButton();
         _guidebook.UnloadButton();
@@ -66,7 +64,7 @@ public sealed class GameTopMenuBarUIController : UIController
     public void LoadButtons()
     {
         // <Trauma>
-        _martialArts?.LoadButton();
+        _martialArts.OnLoadButton();
         // </Trauma>
         _escape.LoadButton();
         _guidebook.LoadButton();

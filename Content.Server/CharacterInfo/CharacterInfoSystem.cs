@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Systems;
+using Robust.Shared.Prototypes;
 // </Trauma>
 using Content.Server.Mind;
 using Content.Server.Roles;
@@ -9,18 +10,19 @@ using Content.Shared.CharacterInfo;
 using Content.Shared.Objectives;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.CharacterInfo;
 
 public sealed class CharacterInfoSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    // </Trauma>
     [Dependency] private readonly JobSystem _jobs = default!;
     [Dependency] private readonly MindSystem _minds = default!;
     [Dependency] private readonly RoleSystem _roles = default!;
     [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!; // Goobstation edit
-    [Dependency] private readonly IPrototypeManager _proto = default!; // Goobstation edit
 
     public override void Initialize()
     {
@@ -63,7 +65,7 @@ public sealed class CharacterInfoSystem : EntitySystem
             briefing = _roles.MindGetBriefing(mindId);
         }
 
-        // Goobstation edit start
+        // <Trauma>
         var knowledge = new Dictionary<string, List<KnowledgeInfo>>();
         if (_knowledge.TryGetAllKnowledgeUnits(entity) is { } found)
         {
@@ -79,8 +81,8 @@ public sealed class CharacterInfoSystem : EntitySystem
                 knowledge[category].Add(info);
             }
         }
-        // Goobstation edit end
 
-        RaiseNetworkEvent(new CharacterInfoEvent(GetNetEntity(entity), jobTitle, objectives, briefing, knowledge), args.SenderSession);  // Goobstation edit - added knowledge
+        RaiseNetworkEvent(new CharacterInfoEvent(GetNetEntity(entity), jobTitle, objectives, briefing, knowledge), args.SenderSession);
+        // </Trauma>
     }
 }

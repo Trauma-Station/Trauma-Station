@@ -15,7 +15,7 @@ using Robust.Shared.Input.Binding;
 namespace Content.Trauma.Client.Knowledge;
 
 [UsedImplicitly]
-public sealed class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>
+public sealed class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>, IMartialArtsUIController
 {
     [Dependency] private readonly IPlayerManager _player = default!;
     [UISystemDependency] private readonly CommonKnowledgeSystem _knowledge = default!;
@@ -34,6 +34,15 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
     public void OnStateExited(GameplayState state)
     {
         CommandBinds.Unregister<MartialArtsUIController>();
+    }
+
+    public void OnLoadButton()
+    {
+        LoadButton();
+    }
+    public void OnUnloadButton()
+    {
+        UnloadButton();
     }
 
     private void ToggleMartialArtsMenu(bool centered)

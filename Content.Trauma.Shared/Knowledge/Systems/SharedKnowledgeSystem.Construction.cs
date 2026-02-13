@@ -7,12 +7,20 @@ public abstract partial class SharedKnowledgeSystem
 {
     public void OnConstructionGetGroupEvent(Entity<KnowledgeContainerComponent> ent, ref ConstructionGetGroupsEvent args)
     {
-        if (TryGetKnowledgeWithComp<ConstructionKnowledgeComponent>(ent) is not { } knowledge)
+        if (TryGetKnowledgeWithProtoId(ent, "BaseConstructionKnowledge") is not { } knowledge)
             return;
 
-        foreach (var (_, comp, _) in knowledge)
+        foreach (var entity in knowledge)
         {
-            args.Groups.Add(comp.Group);
+            var meta = MetaData(entity);
+
+            if (meta.EntityPrototype == null)
+                continue;
+
+            var protoId = meta.EntityPrototype.ID;
+
+            if (TryComp<KnowledgeComponent>(entity, out var comp))
+                args.Groups.Add(protoId, comp.Level);
         }
     }
 }

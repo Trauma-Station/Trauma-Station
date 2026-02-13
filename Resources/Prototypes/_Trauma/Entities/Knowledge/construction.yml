@@ -8,7 +8,7 @@
     experienceCost: 20
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BaseConstructionKnowledge
   id: SimpleHandmadeKnowledge
 
 - type: entity

@@ -13,6 +13,7 @@ using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
@@ -49,13 +50,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         InitializeOnWear();
 
         SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnKnowledgeContainerShutdown);
-        SubscribeLocalEvent<KnowledgeContainerComponent, EntInsertedIntoContainerMessage>(OnEntityInserted);
-        SubscribeLocalEvent<KnowledgeContainerComponent, EntRemovedFromContainerMessage>(OnEntityRemoved);
-        SubscribeLocalEvent<KnowledgeHolderComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
-        SubscribeLocalEvent<KnowledgeHolderComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
+        SubscribeLocalEvent<KnowledgeContainerComponent, EntGotInsertedIntoContainerMessage>(OnEntInserted);
+        SubscribeLocalEvent<KnowledgeContainerComponent, EntGotRemovedFromContainerMessage>(OnEntRemoved);
 
         SubscribeLocalEvent<KnowledgeContainerComponent, ConstructionGetGroupsEvent>(OnConstructionGetGroupEvent);
-        SubscribeLocalEvent<BodyComponent, ConstructionGetGroupsEvent>(OnConstructionGetGroupEventBodyPart);
 
 
         //Experience Methods
@@ -71,64 +69,22 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             _container.ShutdownContainer(container);
     }
 
-    private void OnEntityInserted(Entity<KnowledgeContainerComponent> ent, ref EntInsertedIntoContainerMessage args)
+    private void OnEntInserted(Entity<KnowledgeContainerComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
-        if (args.Container.ID != KnowledgeContainerComponent.ContainerId
-            || !_knowledgeQuery.TryComp(args.Entity, out var statusComp))
+        var body = _body.GetBody(ent);
+        if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
             return;
-
-        // Make sure AppliedTo is set correctly so events can rely on it
-        if (statusComp.AppliedTo != ent)
-        {
-            statusComp.AppliedTo = ent;
-            Dirty(args.Entity, statusComp);
-        }
-
-        var ev = new KnowledgeUnitAddedEvent(ent);
-        RaiseLocalEvent(args.Entity, ref ev);
-    }
-
-    private void OnEntityRemoved(Entity<KnowledgeContainerComponent> ent, ref EntRemovedFromContainerMessage args)
-    {
-        if (args.Container.ID != KnowledgeContainerComponent.ContainerId
-            || !_knowledgeQuery.TryComp(args.Entity, out var statusComp))
-            return;
-
-        var ev = new KnowledgeUnitRemovedEvent(ent);
-        RaiseLocalEvent(args.Entity, ref ev);
-
-        // Clear AppliedTo after events are handled so event handlers can use it.
-        if (statusComp.AppliedTo == null)
-            return;
-
-        // Why not just delete it? Well, that might end up being best, but this
-        // could theoretically allow for moving status effects from one entity
-        // to another. That might be good to have for polymorphs or something.
-        statusComp.AppliedTo = null;
-        Dirty(args.Entity, statusComp);
-    }
-
-    private void OnEntInserted(Entity<KnowledgeHolderComponent> ent, ref EntInsertedIntoContainerMessage args)
-    {
-        if (!TryFindKnowledgeInEntity(ent, out var brain))
-            return;
-
-        ent.Comp.KnowledgeEntity = brain;
+        knowledgeHolder.KnowledgeEntity = ent;
         Dirty(ent);
     }
 
-    private void OnEntRemoved(Entity<KnowledgeHolderComponent> ent, ref EntRemovedFromContainerMessage args)
+    private void OnEntRemoved(Entity<KnowledgeContainerComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
-        if (ent.Comp.KnowledgeEntity == null)
+        var body = _body.GetBody(ent);
+        if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
             return;
-
-        var brain = ent.Comp.KnowledgeEntity.Value;
-
-        if (args.Entity == brain || !IsDescendantOf(ent, brain))
-        {
-            ent.Comp.KnowledgeEntity = null;
-            Dirty(ent);
-        }
+        knowledgeHolder.KnowledgeEntity = null;
+        Dirty(ent);
     }
 
     private bool TryFindKnowledgeInEntity(EntityUid parent, out EntityUid brain)
@@ -292,10 +248,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             };
 
             knowledgeInfo.Name = Loc.GetString(locKey, ("language", langName));
-        }
-        else if (TryComp<ConstructionKnowledgeComponent>(ent, out var constructionKnowledge))
-        {
-            knowledgeInfo.Name = Loc.GetString("knowledge-construction-name", ("group", Loc.GetString($"knowledge-{knowledgePrototype}")));
         }
         else if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialKnowledge))
         {
@@ -556,6 +508,40 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             {
                 knowledgeEnts ??= [];
                 knowledgeEnts.Add((knowledge, comp, knowledgeComp));
+            }
+        }
+
+        return knowledgeEnts;
+    }
+
+    public override List<Entity<KnowledgeComponent>>? TryGetKnowledgeWithProtoId(EntityUid target, EntProtoId id)
+    {
+        List<Entity<KnowledgeComponent>>? knowledgeEnts = null;
+        EnsureKnowledgeContainer(target, out var ent);
+        EnsureContainer(ent, out var container);
+
+        foreach (var knowledge in container.ContainedEntities)
+        {
+            var meta = MetaData(knowledge);
+            if (meta.EntityPrototype == null)
+                continue;
+
+            var parents = _protoMan.EnumerateParents(meta.EntityPrototype);
+
+            bool add = false;
+            foreach (var item in parents)
+            {
+                if (item == id)
+                {
+                    add = true;
+                    break;
+                }
+            }
+
+            if (add && TryComp<KnowledgeComponent>(knowledge, out var comp))
+            {
+                knowledgeEnts ??= [];
+                knowledgeEnts.Add((knowledge, comp));
             }
         }
 
