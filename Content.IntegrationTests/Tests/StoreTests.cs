@@ -1,3 +1,6 @@
+// </Trauma>
+using Content.Shared._Goobstation.Wizard.Refund
+// <Trauma>
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -140,7 +143,7 @@ public sealed class StoreTests
                     var costAfterBuy = discountedListingItem.Cost[UplinkSystem.TelecrystalCurrencyPrototype];
                     Assert.That(costAfterBuy.Value, Is.EqualTo(prototypeCost.Value), "Expected cost after discount refund to be equal to prototype cost.");
 
-                    var refundMsg = new StoreRequestRefundMessage { Actor = human };
+                    var refundMsg = new StoreRefundAllListingsMessage { Actor = human }; // Trauma
                     server.EntMan.EventBus.RaiseLocalEvent(pda, refundMsg);
 
                     // get refreshed item after refund re-generated items
