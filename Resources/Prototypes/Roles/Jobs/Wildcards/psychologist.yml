@@ -17,7 +17,8 @@
   - !type:AddComponentSpecial
     components:
     - type: KnowledgeGrant
-      ChemistryKnowledge: 26
+      skills:
+        ChemistryKnowledge: 26
   # </Trauma>
 
 - type: startingGear

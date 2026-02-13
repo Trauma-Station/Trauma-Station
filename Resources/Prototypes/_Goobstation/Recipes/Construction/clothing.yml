@@ -77,6 +77,6 @@
   objectType: Item
   # <Trauma>
   groups:
-  - Handmade: 57
-  - Technological: 19
+    HandmadeKnowledge: 57
+    TechnologicalKnowledge: 19
   # </Trauma>

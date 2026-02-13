@@ -56,8 +56,8 @@
   verb: TEACH
   subjects: [ "LEG SWEEP" ]
   effects:
-  - !type:AddComponents
-    components:
+  # - !type:AddComponents
+    # components:
     # - type: KravMaga # it has leg sweep
 
 - type: scrollPrayer

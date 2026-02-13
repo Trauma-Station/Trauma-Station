@@ -25,21 +25,22 @@
   - !type:AddComponentSpecial # Goobstation
     components:
     - type: EngineeringStaff
-      # <Trauma>
+    # <Trauma>
     - type: KnowledgeGrant
-      HandmadeKnowledge: 26
-      TechnologicalKnowledge: 26
-      MaterialsKnowledge: 26
-      DoorsKnowledge: 26
-      AirlocksKnowledge: 26
-      SimpleFurnitureKnowledge: 26
-      FurnitureKnowledge: 26
-      InfrastructureKnowledge: 26
-      ElectronicsKnowledge: 26
-      WallsKnowledge: 26
-      WindowsKnowledge: 26
-      SmokeablesKnowledge: 50
-      # </Trauma>
+      skills:
+        HandmadeKnowledge: 26
+        TechnologicalKnowledge: 26
+        MaterialsKnowledge: 26
+        DoorsKnowledge: 26
+        AirlocksKnowledge: 26
+        SimpleFurnitureKnowledge: 26
+        FurnitureKnowledge: 26
+        InfrastructureKnowledge: 26
+        ElectronicsKnowledge: 26
+        WallsKnowledge: 26
+        WindowsKnowledge: 26
+        SmokeablesKnowledge: 50
+    # </Trauma>
 
 
 - type: startingGear

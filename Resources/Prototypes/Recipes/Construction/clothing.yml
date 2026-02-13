@@ -141,7 +141,7 @@
   # <Trauma>
   groups:
     HandmadeKnowledge: 10
-    ToysKnowledge:
+    ToysKnowledge: 10
   # </Trauma>
 
 - type: construction

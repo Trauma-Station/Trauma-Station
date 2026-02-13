@@ -743,7 +743,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-  - Airlocks
+    AirlocksKnowledge: 26
   # </Trauma>
 
 - type: construction
