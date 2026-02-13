@@ -4,53 +4,53 @@
   name: librarian translator implant
   description: An implant giving the ability to understand and speak most languages.
   categories: [ HideSpawnMenu ]
-  # components:
-  # - type: TranslatorImplant
-  #   spoken:
-  #     - TauCetiBasic # Common Languages -
-  #     - SolCommon
-  #     - Elyran
-  #     - Freespeak
-  #     - NovuNederic
-  #     - Tradeband
-  #     - SpaceItalian # Job Specific -
-  #     - Bubblish # Species Languages -
-  #     - Calcic
-  #     - NewKinPidgin # = Ka'rakk
-  #     - Moffic
-  #     - RobotTalk
-  #     - RootSpeak
-  #     - Draconic # = Sinta'Unathi
-  #     - ValyrianStandard
-  #     - Azaziba # Depricated Languages -
-  #     - Eldritch
-  #     - Cheval # Animal Languages -
-  #     - Mouse
-  #     - Monkey
-  #     - Kobold
+  components:
+  - type: TranslatorImplant
+    spoken:
+      - TauCetiBasic # Common Languages -
+      - SolCommon
+      - Elyran
+      - Freespeak
+      - NovuNederic
+      - Tradeband
+      - SpaceItalian # Job Specific -
+      - Bubblish # Species Languages -
+      - Calcic
+      - NewKinPidgin # = Ka'rakk
+      - Moffic
+      - RobotTalk
+      - RootSpeak
+      - Draconic # = Sinta'Unathi
+      - ValyrianStandard
+      - Azaziba # Depricated Languages -
+      - Eldritch
+      - Cheval # Animal Languages -
+      - Mouse
+      - Monkey
+      - Kobold
 
-  #   understood:
-  #     - TauCetiBasic # Common Languages -
-  #     - SolCommon
-  #     - Elyran
-  #     - Freespeak
-  #     - NovuNederic
-  #     - Tradeband
-  #     - SpaceItalian # Job Specific -
-  #     - Bubblish # Species Languages -
-  #     - Calcic
-  #     - NewKinPidgin # = Ka'rakk
-  #     - Moffic
-  #     - RobotTalk
-  #     - RootSpeak
-  #     - Draconic # = Sinta'Unathi
-  #     - ValyrianStandard
-  #     - Azaziba # Depricated Languages -
-  #     - Eldritch
-  #     - Cheval # Animal Languages -
-  #     - Mouse
-  #     - Monkey
-  #     - Kobold
+    understood:
+      - TauCetiBasic # Common Languages -
+      - SolCommon
+      - Elyran
+      - Freespeak
+      - NovuNederic
+      - Tradeband
+      - SpaceItalian # Job Specific -
+      - Bubblish # Species Languages -
+      - Calcic
+      - NewKinPidgin # = Ka'rakk
+      - Moffic
+      - RobotTalk
+      - RootSpeak
+      - Draconic # = Sinta'Unathi
+      - ValyrianStandard
+      - Azaziba # Depricated Languages -
+      - Eldritch
+      - Cheval # Animal Languages -
+      - Mouse
+      - Monkey
+      - Kobold
 
 - type: entity
   parent: BaseSubdermalImplant

@@ -1,9 +1,5 @@
-using Robust.Shared.Serialization;
+using Content.Shared.Actions;
 
 namespace Content.Trauma.Shared.MartialArts.Events;
 
-[Serializable, NetSerializable]
-public sealed class MartialArtsSaying(LocId saying) : EntityEventArgs
-{
-    public LocId Saying = saying;
-}
+public sealed partial class OpenMartialArtsMenuEvent : InstantActionEvent { }

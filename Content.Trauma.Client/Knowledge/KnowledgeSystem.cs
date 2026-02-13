@@ -2,14 +2,17 @@ using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.MartialArts.Components;
+using Content.Trauma.Shared.MartialArts.Events;
 
 namespace Content.Trauma.Client.Knowledge;
 public sealed class KnowledgeSystem : SharedKnowledgeSystem
 {
+
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeLocalEvent<KnowledgeHolderComponent, OpenMartialArtsMenuEvent>(OnOpenMartialArtsMenu);
         SubscribeLocalEvent<KnowledgeHolderComponent, GetPerformedAttackTypesEvent>(OnGetAttackTypes);
     }
 

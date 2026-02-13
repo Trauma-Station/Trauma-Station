@@ -5,6 +5,7 @@ using Content.Shared.Input;
 using Content.Shared.Whitelist;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Systems;
+using Content.Trauma.Shared.MartialArts.Events;
 using JetBrains.Annotations;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
@@ -15,13 +16,24 @@ using Robust.Shared.Input.Binding;
 namespace Content.Trauma.Client.Knowledge;
 
 [UsedImplicitly]
-public sealed class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>, IMartialArtsUIController
+public sealed class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>
 {
     [Dependency] private readonly IPlayerManager _player = default!;
     [UISystemDependency] private readonly CommonKnowledgeSystem _knowledge = default!;
 
-    public MenuButton? MartialArtsButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.MartialArtsButton;
     private SimpleRadialMenu? _menu;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<OpenMartialArtsMenuEvent>(OnActionTriggered);
+    }
+
+    private void OnActionTriggered(OpenMartialArtsMenuEvent args)
+    {
+        ToggleMartialArtsMenu(true);
+    }
 
     public void OnStateEntered(GameplayState state)
     {
@@ -34,15 +46,6 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
     public void OnStateExited(GameplayState state)
     {
         CommandBinds.Unregister<MartialArtsUIController>();
-    }
-
-    public void OnLoadButton()
-    {
-        LoadButton();
-    }
-    public void OnUnloadButton()
-    {
-        UnloadButton();
     }
 
     private void ToggleMartialArtsMenu(bool centered)
@@ -58,10 +61,6 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
             _menu.Open();
 
             _menu.OnClose += OnWindowClosed;
-            _menu.OnOpen += OnWindowOpen;
-
-            if (MartialArtsButton != null)
-                MartialArtsButton.SetClickPressed(true);
 
             if (centered)
             {
@@ -74,55 +73,21 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         }
         else
         {
-            _menu.OnClose -= OnWindowClosed;
-            _menu.OnOpen -= OnWindowOpen;
-
-            if (MartialArtsButton != null)
-                MartialArtsButton.SetClickPressed(false);
-
             CloseMenu();
         }
     }
 
-    public void UnloadButton()
-    {
-        if (MartialArtsButton == null)
-            return;
-
-        MartialArtsButton.OnPressed -= ActionButtonPressed;
-    }
-
-    public void LoadButton()
-    {
-        if (MartialArtsButton == null)
-            return;
-
-        MartialArtsButton.OnPressed += ActionButtonPressed;
-    }
-
-    private void ActionButtonPressed(BaseButton.ButtonEventArgs args)
-    {
-        ToggleMartialArtsMenu(true);
-    }
-
     private void OnWindowClosed()
     {
-        if (MartialArtsButton != null)
-            MartialArtsButton.Pressed = false;
-
         CloseMenu();
-    }
-
-    private void OnWindowOpen()
-    {
-        if (MartialArtsButton != null)
-            MartialArtsButton.Pressed = true;
     }
 
     private void CloseMenu()
     {
         if (_menu == null)
             return;
+
+        _menu.OnClose -= OnWindowClosed;
 
         _menu.Close();
         _menu = null;
