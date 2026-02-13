@@ -6,7 +6,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50 
+    HandmadeKnowledge: 50
   # </Trauma>
 
 - type: construction
