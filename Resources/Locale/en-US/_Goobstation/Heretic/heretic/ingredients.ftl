@@ -27,3 +27,5 @@ heretic-ritual-ingredient-liver = liver
 heretic-ritual-ingredient-plasma-sheet = plasma sheet
 heretic-ritual-ingredient-steel = steel
 heretic-ritual-ingredient-cable-coil = cable coil
+heretic-ritual-ingredient-beaker = glass beaker
+heretic-ritual-ingredient-codex-cicatrix = codex cicatrix

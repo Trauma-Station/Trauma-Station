@@ -1,3 +1,5 @@
+# TODO: reduce yaml bloat somehow
+
 - type: entity
   id: RitualSacrifice
   name: Sacrifice
@@ -1158,7 +1160,7 @@
       - RitualKnowledge
     - !type:UpdateKnowledgeEffect
       applyOn: Mind
-      amount: 5
+      amount: 4
   - type: HereticKnowledgeRitual
   - type: Tag
     tags:
@@ -1376,6 +1378,58 @@
       output:
         MobGhoulFireShark: 3
 
+- type: entity
+  id: RitualPhylacteryOfDamnation
+  name: Phylactery of Damnation
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/Entities/phylactery.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Puddles
+      individualConditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - Puddle
+      - !type:ReagentsCondition
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Puddles
+        result: Delete2
+        min: 1
+        cancelLoc: heretic-ritual-fail-reagent-blood
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - GlassBeaker
+          name: heretic-ritual-ingredient-beaker
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:EffectsRitualEffect
+      applyOn: Delete2
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        HereticPhylactery: 1
+
 ## stage 6
 - type: entity
   id: RitualRusted
@@ -1478,3 +1532,56 @@
       applyOn: Platform
       output:
         CarvingKnife: 1
+
+- type: entity
+  id: RitualCodexMorbus
+  name: Codex Morbus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/book_morbus.rsi
+    state: icon-on
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:AddToLimitRitualEffect
+      applyOn: Look
+      result: Targets
+      individualConditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - HumanoidProfile
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - CodexCicatrix
+          name: heretic-ritual-ingredient-codex-cicatrix
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Targets
+        result: Result
+        min: 1
+        cancelLoc: heretic-ritual-fail-sacrifice
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SacrificeEffect
+      applyOn: Result
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        CodexMorbus: 1

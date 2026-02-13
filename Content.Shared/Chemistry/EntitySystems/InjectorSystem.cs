@@ -36,6 +36,9 @@ public sealed partial class InjectorSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    // <Trauma>
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    // </Trauma>
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedForensicsSystem _forensics = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -73,8 +76,17 @@ public sealed partial class InjectorSystem : EntitySystem
 
     private void OnInjectorAfterInteract(Entity<InjectorComponent> injector, ref AfterInteractEvent args)
     {
-        if (args.Handled || !args.CanReach || args.Target is not { Valid: true } target)
+        // <Trauma>
+        if (args.Handled || args.Target is not { Valid: true } target)
             return;
+
+        if (!args.CanReach)
+        {
+            if (injector.Comp.InteractionRangeOverride is not { } range ||
+                !_interaction.InRangeAndAccessible(args.User, target, range))
+                return;
+        }
+        // </Trauma>
 
         // Is the target a mob? If yes, use a do-after to give them time to respond.
         if (HasComp<BloodstreamComponent>(target))
@@ -662,6 +674,17 @@ public sealed partial class InjectorSystem : EntitySystem
         var targetIdentity = Identity.Entity(target, EntityManager);
         var finalMessage = Loc.GetString(msg, ("amount", transferAmount), ("target", targetIdentity));
         _popup.PopupClient(finalMessage, target, user);
+
+        // <Trauma>
+        if (_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
+        {
+            if (activeMode.DrawPopupTarget != null && target.Owner != user)
+                _popup.PopupClient(Loc.GetString(activeMode.DrawPopupTarget), target, target);
+
+            if (activeMode.InjectSound != null)
+                _audio.PlayPredicted(activeMode.DrawSound, injector, user);
+        }
+        // </Trauma>
 
         AfterDraw(injector, user, target);
     }

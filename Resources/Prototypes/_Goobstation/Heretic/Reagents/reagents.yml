@@ -53,7 +53,10 @@
       - !type:TakeStaminaDamage
         amount: -10
         immediate: true
-
+      - !type:GenericStatusEffect
+        key: Drowsiness
+        time: 50.0
+        type: Remove
       - !type:Electrocute
         probability: 0.5
         conditions:

@@ -117,14 +117,10 @@ public sealed class EldritchInfluenceSystem : EntitySystem
     }
     private void OnDoAfter(Entity<EldritchInfluenceComponent> ent, ref EldritchInfluenceDoAfterEvent args)
     {
-        if (args.Cancelled || args.Target == null || !_heretic.TryGetHereticComponent(args.User, out var heretic, out _))
+        if (args.Cancelled || args.Target == null || !_heretic.TryGetHereticComponent(args.User, out _, out _))
             return;
 
-        var knowledge = TryComp(args.Used, out EldritchInfluenceDrainerComponent? drainer)
-            ? drainer.KnowledgePerInfluence
-            : 1f;
-
-        _heretic.UpdateKnowledge(args.User, knowledge);
+        _heretic.UpdateKnowledge(args.User, 1f);
 
         Spawn("EldritchInfluenceIntermediate", Transform(args.Target.Value).Coordinates);
         QueueDel(args.Target);

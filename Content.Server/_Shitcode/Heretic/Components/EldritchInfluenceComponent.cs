@@ -23,6 +23,9 @@ public sealed partial class EldritchInfluenceComponent : Component
     public bool Spent;
 
     [DataField]
+    public float KnowledgeGain = 1f;
+
+    [DataField]
     public SoundSpecifier? ExamineSound = new SoundCollectionSpecifier("bloodCrawl");
 
     [DataField]

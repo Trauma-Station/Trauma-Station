@@ -27,7 +27,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Text;
-using Content.Server.Station.Components;
 using Content.Server._Goobstation.Objectives.Components;
 using Content.Shared.Mind;
 using Robust.Server.GameObjects;
@@ -106,8 +105,6 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
             store.Categories.Add(category);
         }
         store.CurrencyWhitelist.Add(Currency);
-        if (!store.Balance.TryAdd(Currency, 2))
-            store.Balance[Currency] += 2;
 
         rule.Minds.Add(mindId);
 

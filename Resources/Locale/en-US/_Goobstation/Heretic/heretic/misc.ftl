@@ -8,6 +8,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 heretic-influence-start = Draining influence...
+heretic-influence-require-drainer = You need a codex to drain influences.
 
 heretic-ritualrune-examine = Current selected ritual: [color=yellow]{$rit}[/color]
 
@@ -31,3 +32,5 @@ void-ascend-end = The snowstorm begins to fade away...
 void-ascend-restart = The snowstorm suddenly appears again...
 
 ghoul-weapon-comp-examine = [color=red]This weapon seems extremely fragile. On further inspection it appears to be made of flesh and blood. It belongs to one of the creatures of the mansus and will disappear when the creature dies.[/color]
+
+injector-component-drain-mode-name = Drain
