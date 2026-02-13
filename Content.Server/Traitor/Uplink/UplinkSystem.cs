@@ -70,13 +70,6 @@ public sealed class UplinkSystem : EntitySystem
         RaiseLocalEvent(uplinkTarget.Value, ref ev);
         setupEvent = ev;
 
-        if (uplinkEntity == null)
-            return ImplantUplink(user, balance, giveDiscounts);
-
-        EnsureComp<UplinkComponent>(uplinkEntity.Value);
-
-        SetUplink(user, uplinkEntity.Value, balance, giveDiscounts);
-
         // TODO add BUI. Currently can't be done outside of yaml -_-
         // ^ What does this even mean?
 

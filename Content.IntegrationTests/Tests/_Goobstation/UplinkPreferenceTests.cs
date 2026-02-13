@@ -114,7 +114,7 @@ public sealed class UplinkPreferenceTests
 
         await SpawnPenInHand();
 
-        await server.WaitPost(() => uplinkSys.AddUplink(_player, 100, PenPreference, out _, out _));
+        await server.WaitPost(() => uplinkSys.AddUplink(_player, 20, PenPreference, out _, out _));
         await _pair.RunTicksSync(5);
 
         await server.WaitAssertion(() =>
@@ -166,7 +166,7 @@ public sealed class UplinkPreferenceTests
 
             await server.WaitAssertion(() =>
             {
-                var success = uplinkSys.AddUplink(_player, 100, pref.ID, out var uplinkTarget, out var setupEvent);
+                var success = uplinkSys.AddUplink(_player, 20, pref.ID, out var uplinkTarget, out var setupEvent);
                 Assert.That(success, Is.True, $"TryAddUplink failed for preference {pref.ID}");
 
                 if (pref.SearchComponents != null)
@@ -196,7 +196,7 @@ public sealed class UplinkPreferenceTests
         var protoMan = server.ProtoMan;
         var uplinkSys = server.System<UplinkSystem>();
 
-        const int startingBalance = 100;
+        const int startingBalance = 20;
         var implantPreference = new ProtoId<UplinkPreferencePrototype>("UplinkImplant");
 
         await server.WaitAssertion(() =>
@@ -258,7 +258,7 @@ public sealed class UplinkFallbackTests
             var penTarget = goobUplinkSys.FindUplinkTarget(dummy, new[] { "Pen" });
             Assert.That(penTarget, Is.Null, "Dummy should not have a pen");
 
-            var success = uplinkSys.AddUplink(dummy, 100, PenPreference, out _, out _);
+            var success = uplinkSys.AddUplink(dummy, 20, PenPreference, out _, out _);
             Assert.That(success, Is.True, "Should fall back to implant when pen unavailable");
         });
 
