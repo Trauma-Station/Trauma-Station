@@ -1,10 +1,11 @@
 // <Trauma>
 using Content.Goobstation.Common.Silicons.Components;
 using Content.Goobstation.Shared.CustomLawboard;
-using Content.Shared.FixedPoint;
+using Content.Server._DV.CosmicCult;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Research.Systems;
 using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.Radio;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
@@ -379,6 +380,8 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
                 SetLaws(lawset, stationAiHeldComp.CurrentConnectedEntity.Value, provider.LawUploadSound);
             }
             // Corvax-Next-AiRemoteControl-End
+
+            RaiseLocalEvent(new AILawUpdatedEvent(update, provider.Laws)); // Trauma
         }
 
         ent.Comp.LastLawset = provider.Laws; // Goob

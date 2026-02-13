@@ -44,6 +44,9 @@
   - type: VisualOrgan
     data:
       sprite: _Goobstation/SlaughterDemon/body_parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
   - type: Woundable
     integrity: 500
     integrityCap: 500

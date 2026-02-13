@@ -49,6 +49,9 @@
   - type: VisualOrgan
     data:
       sprite: Mobs/Animals/kobold.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
 
 ## Parts
 

@@ -3,13 +3,8 @@ using Content.Goobstation.Shared.ManifestListings;
 using Content.Goobstation.Shared.NTR;
 using Content.Goobstation.Shared.NTR.Events;
 using Content.Server._Goobstation.Wizard.Store;
-using Content.Server.Heretic.EntitySystems;
-using Content.Server.PDA.Ringer;
 using Content.Shared._Goobstation.Wizard.Refund;
 using Content.Shared.GameTicking;
-using Content.Shared.Heretic;
-using Content.Shared.Heretic.Prototypes;
-using Robust.Shared.Timing;
 // </Trauma>
 using System.Linq;
 using Content.Server.Actions;
@@ -34,13 +29,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Store.Systems;
 
-// goob edit - fuck newstore
-// do not touch unless you want to shoot yourself in the leg
 public sealed partial class StoreSystem
 {
     // <Trauma>
-    [Dependency] private readonly HereticSystem _heretic = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedGameTicker _ticker = default!;
     // </Trauma>
     [Dependency] private readonly IAdminLogManager _admin = default!;
@@ -157,7 +148,7 @@ public sealed partial class StoreSystem
     /// </summary>
     private void OnBuyRequest(EntityUid uid, StoreComponent component, StoreBuyListingMessage msg)
     {
-        var listing = component.Listings.FirstOrDefault(x => x.Equals(msg.Listing));
+        var listing = component.FullListingsCatalog.FirstOrDefault(x => x.ID.Equals(msg.Listing.Id));
 
         if (listing == null) //make sure this listing actually exists
         {
@@ -174,7 +165,7 @@ public sealed partial class StoreSystem
         //condition checking because why not
         if (listing.Conditions != null)
         {
-            var args = new ListingConditionArgs(component.AccountOwner ?? buyer, uid, listing, EntityManager);
+            var args = new ListingConditionArgs(component.AccountOwner ?? GetBuyerMind(buyer), uid, listing, EntityManager);
             var conditionsMet = listing.Conditions.All(condition => condition.Condition(args));
 
             if (!conditionsMet)
@@ -183,9 +174,9 @@ public sealed partial class StoreSystem
 
         //check that we have enough money
         // var cost = listing.Cost; // Goobstation
-        foreach (var currency in listing.Cost)
+        foreach (var (currency, amount) in listing.Cost)
         {
-            if (!component.Balance.TryGetValue(currency.Key, out var balance) || balance < currency.Value)
+            if (!component.Balance.TryGetValue(currency, out var balance) || balance < amount)
             {
                 return;
             }
@@ -203,7 +194,7 @@ public sealed partial class StoreSystem
         // Goobstation end
 
         // if (!IsOnStartingMap(uid, component)) // Goob edit
-        //     component.RefundAllowed = false;
+        //    DisableRefund(uid, component);
 
         //subtract the cash
         foreach (var (currency, amount) in listing.Cost)
@@ -213,23 +204,6 @@ public sealed partial class StoreSystem
             component.BalanceSpent.TryAdd(currency, FixedPoint2.Zero);
 
             component.BalanceSpent[currency] += amount;
-        }
-
-        // goobstation - heretics
-        // i am too tired of making separate systems for knowledge adding
-        // and all that shit. i've had like 4 failed attempts
-        // so i'm just gonna shitcode my way out of my misery
-        if (listing.ProductHereticKnowledge != null)
-        {
-            mindId = buyer;
-            var mind = CompOrNull<MindComponent>(mindId);
-
-            if (mind != null || _mind.TryGetMind(buyer, out mindId, out mind))
-            {
-                _heretic.TryAddKnowledge((mindId, mind, null),
-                    listing.ProductHereticKnowledge.Value,
-                    mind.CurrentEntity);
-            }
         }
 
         //spawn entity
@@ -260,7 +234,7 @@ public sealed partial class StoreSystem
             EntityUid? actionId;
             // I guess we just allow duplicate actions?
             // Allow duplicate actions and just have a single list buy for the buy-once ones.
-            if (!_mind.TryGetMind(buyer, out var mind, out _))
+            if (listing.ApplyToMob || !_mind.TryGetMind(buyer, out var mind, out _))
                 actionId = _actions.AddAction(buyer, listing.ProductAction);
             else
                 actionId = _actionContainer.AddAction(mind, listing.ProductAction);
@@ -273,7 +247,7 @@ public sealed partial class StoreSystem
 
                 if (listing.ProductUpgradeId != null)
                 {
-                    foreach (var upgradeListing in component.Listings)
+                    foreach (var upgradeListing in component.FullListingsCatalog)
                     {
                         if (upgradeListing.ID == listing.ProductUpgradeId)
                         {
@@ -287,7 +261,7 @@ public sealed partial class StoreSystem
 
         if (listing is { ProductUpgradeId: not null, ProductActionEntity: not null })
         {
-            ListingData? originalListing = null; // Goobstation
+            ListingDataWithCostModifiers? originalListing = null; // Goobstation
             var cost = listing.Cost.ToDictionary(); // Goobstation
             if (listing.ProductActionEntity != null)
             {
@@ -319,7 +293,11 @@ public sealed partial class StoreSystem
 
         if (listing.ProductEvent != null)
         {
-            if (!listing.RaiseProductEventOnUser)
+            // <Trauma>
+            if (listing.RaiseProductEventOnMind && mindId != EntityUid.Invalid)
+                RaiseLocalEvent(mindId, listing.ProductEvent);
+            else if (!listing.RaiseProductEventOnUser)
+            // </Trauma>
                 RaiseLocalEvent(listing.ProductEvent);
             else
                 RaiseLocalEvent(buyer, listing.ProductEvent);
@@ -332,11 +310,13 @@ public sealed partial class StoreSystem
         } */
         if (listing.BlockRefundListings.Count > 0)
         {
-            foreach (var listingData in component.Listings.Where(x => listing.BlockRefundListings.Contains(x.ID)))
+            foreach (var listingData in component.FullListingsCatalog.Where(x => listing.BlockRefundListings.Contains(x.ID)))
             {
                 listingData.DisableRefund = true;
             }
         }
+
+        listing.PurchaseCostHistory.Add(listing.Cost.ToDictionary());
         // Goob edit end
 
         //log dat shit.
@@ -361,20 +341,19 @@ public sealed partial class StoreSystem
         listing.PurchaseAmount++; //track how many times something has been purchased
         _audio.PlayGlobal(component.BuySuccessSound, msg.Actor); //cha-ching! // Goob edit
 
-        //WD EDIT START
-        if (listing.SaleLimit != 0 && listing.DiscountValue > 0 && listing.PurchaseAmount >= listing.SaleLimit)
+        var buyFinished = new StoreBuyFinishedEvent
         {
-            listing.DiscountValue = 0;
-            listing.Cost = listing.OldCost;
-        }
-        //WD EDIT END
+            PurchasedItem = listing,
+            StoreUid = uid
+        };
+        RaiseLocalEvent(ref buyFinished);
 
         UpdateUserInterface(buyer, uid, component);
         UpdateRefundUserInterface(uid, component); // Goobstation
         if (listing.ResetRestockOnPurchase) // goobstation edit start
         {
             // making sure that you cant buy some stuff endlessly if they are not meant to
-            var restockDuration = listing.RestockAfterPurchase ?? listing.RestockDuration; // Just use the value directly.
+            var restockDuration = listing.RestockAfterPurchase ?? listing.RestockTime; // Just use the value directly.
             listing.RestockTime = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan) + restockDuration;
         } // goob edit end
 
@@ -450,7 +429,8 @@ public sealed partial class StoreSystem
 
         /* if (!IsOnStartingMap(uid, component))
         {
-            component.RefundAllowed = false;
+            DisableRefund(uid, component);
+            UpdateUserInterface(buyer, uid, component);
         }
 
         if (!component.RefundAllowed || component.BoughtEntities.Count == 0)
@@ -530,20 +510,23 @@ public sealed partial class StoreSystem
 
         if (refundComp.Data.ProductUpgradeId != null)
         {
-            foreach (var upgradeListing in component.Listings.Where(upgradeListing =>
+            foreach (var upgradeListing in component.FullListingsCatalog.Where(upgradeListing =>
                          upgradeListing.ID == refundComp.Data.ProductUpgradeId))
             {
                 upgradeListing.PurchaseAmount = 0;
+                upgradeListing.PurchaseCostHistory.Clear();
                 break;
             }
         }
 
         component.BoughtEntities.Remove(boughtEntity);
 
-        if (_actions.GetAction(boughtEntity) is { } action)
+        if (_actions.GetAction(boughtEntity, false) is { } action)
             _actionContainer.RemoveAction((boughtEntity, action.Comp));
 
-        refundComp.Data.PurchaseAmount = Math.Max(0, refundComp.Data.PurchaseAmount - 1);
+        var listing = refundComp.Data;
+        listing.PurchaseAmount = Math.Max(0, listing.PurchaseAmount - 1);
+        listing.PurchaseCostHistory = listing.PurchaseCostHistory.Take(listing.PurchaseAmount).ToList();
 
         Del(boughtEntity);
 
@@ -598,14 +581,19 @@ public sealed partial class StoreSystem
     }
     // Goobstation end
 
-    private void HandleRefundComp(EntityUid uid, StoreComponent component, EntityUid purchase, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> cost, ListingData? data, bool overrideCost = false) // Goob edit
+    private void HandleRefundComp(EntityUid uid,
+        StoreComponent component,
+        EntityUid purchase,
+        IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> cost,
+        ListingDataWithCostModifiers? data,
+        bool overrideCost = false) // Goob edit
     {
         component.BoughtEntities.Add(purchase);
         var refundComp = EnsureComp<StoreRefundComponent>(purchase);
         refundComp.StoreEntity = uid;
         // Goobstation start
         if (overrideCost)
-            refundComp.BalanceSpent = cost;
+            refundComp.BalanceSpent = cost.ToDictionary();
         else
         {
             foreach (var (key, value) in cost)
@@ -618,6 +606,8 @@ public sealed partial class StoreSystem
         if (data != null)
             refundComp.Data = data;
         // Goobstation end
+
+        refundComp.BoughtTime = _timing.CurTime;
     }
 
     private bool IsOnStartingMap(EntityUid store, StoreComponent component)
@@ -637,3 +627,14 @@ public sealed partial class StoreSystem
         component.RefundAllowed = false;
     }
 }
+
+/// <summary>
+/// Event of successfully finishing purchase in store (<see cref="StoreSystem"/>.
+/// </summary>
+/// <param name="StoreUid">EntityUid on which store is placed.</param>
+/// <param name="PurchasedItem">ListingItem that was purchased.</param>
+[ByRefEvent]
+public readonly record struct StoreBuyFinishedEvent(
+    EntityUid StoreUid,
+    ListingDataWithCostModifiers PurchasedItem
+);

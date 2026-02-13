@@ -9,6 +9,9 @@
   - type: VisualOrgan
     data:
       sprite: _Shitmed/Mobs/Species/Animal/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
 
 - type: entity
   abstract: true

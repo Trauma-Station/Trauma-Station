@@ -29,6 +29,10 @@
   abstract: true
   parent: OrganCobra
   id: OrganCobraExternal
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
 
 - type: entity
   abstract: true

@@ -28,6 +28,9 @@
     damageOverlayColors:
       Brute: "#DD8822"
     bleedingOverlay: null
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
 
 - type: entity
   abstract: true

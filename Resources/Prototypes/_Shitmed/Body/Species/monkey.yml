@@ -48,6 +48,9 @@
   - type: VisualOrgan
     data:
       sprite: Mobs/Animals/monkey.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: Reptilian
 
 ## Parts
 

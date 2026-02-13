@@ -52,6 +52,11 @@ public sealed partial class CosmicCultComponent : Component
         "ActionCosmicGlare",
     ];
 
+    [DataField]
+    public EntProtoId CosmicFragmentationAction = "ActionCosmicFragmentation";
+
+    public EntityUid? CosmicFragmentationActionEntity;
+
     public HashSet<EntityUid?> ActionEntities = [];
 
     [DataField, AutoNetworkedField]

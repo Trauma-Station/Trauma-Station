@@ -545,7 +545,6 @@
   - !type:BuyerJobCondition
     whitelist:
     - Chaplain
-  saleLimit: 1
 
 
 - type: listing
