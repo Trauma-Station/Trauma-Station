@@ -1,6 +1,8 @@
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared.Antag;
+using Content.Shared.Examine;
 using Content.Shared.Ghost;
+using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Content.Shared._DV.Roles;
@@ -22,6 +24,23 @@ public abstract class SharedCosmicCultSystem : EntitySystem
         SubscribeLocalEvent<CosmicCultLeadComponent, ComponentGetStateAttemptEvent>(OnCosmicCultCompGetStateAttempt);
         SubscribeLocalEvent<CosmicCultComponent, ComponentStartup>(DirtyCosmicCultComps);
         SubscribeLocalEvent<CosmicCultLeadComponent, ComponentStartup>(DirtyCosmicCultComps);
+
+        SubscribeLocalEvent<CosmicCultExamineComponent, ExaminedEvent>(OnCosmicCultExamined);
+        SubscribeLocalEvent<CosmicSubtleMarkComponent, ExaminedEvent>(OnSubtleMarkExamined);
+    }
+
+    private void OnCosmicCultExamined(Entity<CosmicCultExamineComponent> ent, ref ExaminedEvent args)
+    {
+        args.PushMarkup(Loc.GetString(EntitySeesCult(args.Examiner) ? ent.Comp.CultistText : ent.Comp.OthersText));
+    }
+
+    private void OnSubtleMarkExamined(Entity<CosmicSubtleMarkComponent> ent, ref ExaminedEvent args)
+    {
+        var ev = new SeeIdentityAttemptEvent();
+        RaiseLocalEvent(ent, ev);
+        if (ev.TotalCoverage.HasFlag(IdentityBlockerCoverage.EYES)) return;
+
+        args.PushMarkup(Loc.GetString(ent.Comp.ExamineText));
     }
 
     public bool EntityIsCultist(EntityUid user)

@@ -39,6 +39,9 @@
   - type: VisualOrgan
     data:
       sprite: _Shitmed/Mobs/Aliens/Carps/carp_parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
   - type: Woundable
     integrity: 500
     integrityCap: 500

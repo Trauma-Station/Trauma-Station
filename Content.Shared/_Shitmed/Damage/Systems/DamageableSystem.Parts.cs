@@ -26,7 +26,6 @@ public sealed partial class DamageableSystem
     [
         TargetBodyPart.Head,
         TargetBodyPart.Chest,
-        TargetBodyPart.Groin,
         TargetBodyPart.LeftArm,
         TargetBodyPart.LeftHand,
         TargetBodyPart.RightArm,
@@ -40,7 +39,7 @@ public sealed partial class DamageableSystem
     /// <summary>
     /// Applies damage to an entity with body parts, targeting specific parts as needed.
     /// </summary>
-    private DamageSpecifier ApplyDamageToBodyParts(
+    public DamageSpecifier ApplyDamageToBodyParts(
         EntityUid uid,
         DamageSpecifier damage,
         EntityUid? origin,

@@ -110,6 +110,9 @@
   - type: VisualOrgan
     data:
       sprite: _EinsteinEngines/Mobs/Species/Shadow/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: Shadow
   - type: Extractable
     juiceSolution:
       reagents:

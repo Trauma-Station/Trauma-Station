@@ -1,0 +1,214 @@
+- type: entity
+  parent: [ BaseSimpleMob, FlyingMobBase ]
+  id: MobCosmicBase
+  abstract: true
+  components:
+  - type: Puller
+    needsHands: false
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 4
+    weightlessModifier: 1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 30
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: Physics
+    bodyStatus: OnGround
+  - type: NoSlip
+  - type: CanMoveInAir
+  - type: Eye
+    drawFov: true
+  - type: Speech
+    speechVerb: Ghost
+  - type: TypingIndicator
+    proto: CosmicTyping
+  - type: PointLight
+    color: "#42a4ae"
+    radius: 2
+    energy: 2
+    softness: 1
+    castShadows: false
+  - type: LightBehaviour
+    behaviours:
+     - !type:FadeBehaviour
+       interpolate: Linear
+       minDuration: 5.5
+       maxDuration: 5.5
+       startValue: 0.5
+       endValue: 2
+       property: Energy
+       enabled: true
+       isLooped: true
+       reverseWhenFinished: true
+  - type: CombatMode
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      50: Dead
+  - type: Damageable
+    damageContainer: InorganicMetaphysical
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 70
+        behaviors:
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CosmicLapseAbilityVFX:
+                min: 1
+                max: 1
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+          - !type:PlaySoundBehavior
+            sound:
+              path: /Audio/_DV/CosmicCult/ability_lapse.ogg
+  - type: ZombieImmune
+  - type: GhostTakeoverAvailable
+  - type: LanguageKnowledge
+    speaks:
+    - RobotTalk # Placeholder, they are created by the colossus, and colossus speaks binary. TODO: replace with coscult language.
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+  - type: IntrinsicRadioReceiver
+  - type: ActiveRadio
+    channels:
+    - CosmicRadio
+  - type: NightVision
+    color: "#42a4ae"
+    activateSound: null
+    deactivateSound: null
+
+- type: entity
+  parent: MobCosmicBase
+  id: MobCosmicCustodian
+  suffix: Hostile
+  name: malign custodian
+  description: An abomination wrought of malign mass. It floats with a weightless, unnerving grace.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Mobs/custodian.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: custodian
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: custodian_unshaded
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: custodian
+        BaseUnshaded: custodian_unshaded
+      Dead:
+        Base: dead
+        BaseUnshaded: dead_unshaded
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavClimb: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    name: ghost-role-information-custodian-name
+    description: ghost-role-information-colossus-summon-description
+    rules: ghost-role-information-rules-team-antagonist
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonistFlock
+  - type: MeleeWeapon
+    altDisarm: false
+    animation: WeaponArcCosmic
+    attackRate: 2.0
+    damage:
+      types:
+        Slash: 10
+    soundHit:
+      path: /Audio/_DV/CosmicCult/cosmiclance_hit.ogg
+      params:
+        variation: 0.2
+        volume: 1
+    soundSwing:
+      path: /Audio/_DV/CosmicCult/cosmicweapon_swing.ogg
+      params:
+        variation: 0.125
+        volume: -4
+
+- type: entity
+  parent: MobCosmicBase
+  id: MobCosmicLodestar
+  suffix: Hostile
+  name: malign lodestar
+  description: An abomination wrought of malign mass. A searing light glimmers within.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Mobs/lodestar.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: lodestar
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: lodestar_unshaded
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: lodestar
+        BaseUnshaded: lodestar_unshaded
+      Dead:
+        Base: dead
+        BaseUnshaded: dead_unshaded
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+    blackboard:
+      NavClimb: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    name: ghost-role-information-lodestar-name
+    description: ghost-role-information-colossus-summon-description
+    rules: ghost-role-information-rules-team-antagonist
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonistFlock
+  - type: Gun
+    projectileSpeed: 12
+    soundGunshot: /Audio/_DV/CosmicCult/projectile_razor.ogg
+    soundEmpty: null
+    fireRate: 1
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 1.0
+    rechargeSound:
+      path: /Audio/_DV/CosmicCult/projectile_razor_reload.ogg
+      params:
+        volume: -99
+  - type: BasicEntityAmmoProvider
+    proto: ProjectileCosmic
+    capacity: 1
+    count: 1

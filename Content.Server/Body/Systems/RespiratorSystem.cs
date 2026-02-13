@@ -111,6 +111,8 @@ public sealed class RespiratorSystem : EntitySystem
             if (_mobState.IsDead(uid) || HasComp<BreathingImmunityComponent>(uid) || HasComp<SpecialBreathingImmunityComponent>(uid)) // Shitmed: BreathingImmunity
                 continue;
 
+            UpdateSaturation(uid, -(float)respirator.UpdateInterval.TotalSeconds, respirator);
+
             if (!_mobState.IsHardCrit(uid) && !HasComp<DebrainedComponent>(uid)) // Trauma - Cannot breathe in hardcrit or when no brain.
             {
                 switch (respirator.Status)

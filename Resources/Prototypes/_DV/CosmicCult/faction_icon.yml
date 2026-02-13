@@ -5,6 +5,7 @@
   showTo:
     components:
     - CosmicCult
+    - CosmicColossus
     - CosmicAstralBody
     - ShowAntagIcons
   icon:
@@ -18,6 +19,7 @@
   showTo:
     components:
     - CosmicCult
+    - CosmicColossus
     - CosmicAstralBody
     - ShowAntagIcons
   icon:

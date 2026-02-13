@@ -1,0 +1,38 @@
+- type: emoteSounds
+  parent: MaleHuman # Yes it uses human sounds as placeholder, sue me.
+  id: CosmicEmotesMale
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      path: /Audio/_DV/CosmicCult/Emotes/cosmic_scream.ogg
+    Laugh:
+      path: /Audio/_DV/CosmicCult/Emotes/cosmic_laugh.ogg
+    Crying:
+      path: /Audio/_DV/CosmicCult/Emotes/cosmic_crying.ogg # The urge to use minecraft ghast sounds
+    Whistle:
+      collection: TrenchWhistle
+
+- type: emoteSounds #TODO: Make more sounds and make them all unisex. The Unknown doesn't care about your sex.
+  parent: FemaleHuman
+  id: CosmicEmotesFemale
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      path: /Audio/_DV/CosmicCult/Emotes/cosmic_scream.ogg
+    Laugh:
+      path: /Audio/_DV/CosmicCult/Emotes/cosmic_laugh.ogg
+    Crying:
+      path: /Audio/_DV/CosmicCult/Emotes/cosmic_crying.ogg
+    Whistle:
+      collection: TrenchWhistle
+
+- type: emoteSounds #TODO: more sounds, this is pathethic.
+  parent: BaseSilicon
+  id: CosmicColossus
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      path: /Audio/_DV/CosmicCult/Emotes/colossus_laugh.ogg

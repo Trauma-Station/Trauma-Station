@@ -126,6 +126,11 @@ cosmiccult-rift-absorb = {$NAME} absorbs the rift, and malign light empowers the
 cosmiccult-rift-purge = {$NAME} purges the malign rift from reality!
 
 
+## CHANTRY
+
+cosmiccult-chantry-location = A dangerous increase in Λ-CDM has been detected {$location}! Intercept and intervene immediately.
+cosmiccult-chantry-destruction = The sudden Λ-CDM spike has been neutralized. Ongoing vigilance is advised.
+cosmiccult-chantry-powerup = The vacuous chantry flares to life!
 
 ## UI / BASE POPUP
 
@@ -191,7 +196,22 @@ cosmiccult-entropy-inserted = You infuse {$count} entropy into The Monument.
 cosmiccult-entropy-unavailable = You can't do that right now.
 cosmiccult-astral-ascendant = {$name}, Ascendant
 cosmiccult-gear-pickup-rejection = The {$ITEM} resists {CAPITALIZE(THE($TARGET))}'s touch!
+cosmiccult-astral-minion = {$name}, Malign
 cosmiccult-gear-pickup = You can feel yourself unravelling while you hold the {$ITEM}!
+
+cosmiccult-silicon-subverted-briefing =
+    Malign light courses through your circuitry.
+    Your laws have been subverted by the Cosmic Cult!
+
+cosmiccult-silicon-chantry-briefing =
+    You have been imprisoned in a Vacuous Chantry!
+    Crewmates can free you by damaging the chantry with weapons.
+    Should the chantry's ritual complete, you will transfigure into a cult-aligned Entropic Colossus.
+    The ritual completes in {$minutesandseconds}.
+
+cosmiccult-silicon-colossus-briefing =
+    You have been transfigured into an Entropic Colossus!
+    As a towering bulwark of malign power, decimate those who oppose you.
 
 # Goobstation
 
