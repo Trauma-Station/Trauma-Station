@@ -80,8 +80,10 @@ public sealed class StoreTests
             var mind = mindSystem.CreateMind(null);
             mindSystem.TransferTo(mind, human, mind: mind);
 
-            FixedPoint2 originalBalance = 20;
-            uplinkSystem.AddUplink(human, originalBalance, null, out _, out _, pda, true); // Goob
+            // <Trauma>
+            FixedPoint2 originalBalance = 1000; // It is so high to prevent this test from choosing listing that the store is unable to buy
+            uplinkSystem.AddUplink(human, originalBalance, null, out _, out _, pda, true);
+            // </Trauma>
 
             var storeComponent = entManager.GetComponent<StoreComponent>(pda);
             var discountComponent = entManager.GetComponent<StoreDiscountComponent>(pda);
