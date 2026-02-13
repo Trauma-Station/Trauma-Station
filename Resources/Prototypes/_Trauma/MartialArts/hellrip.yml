@@ -29,7 +29,6 @@
     damage:
       types:
         Slash: 100
-  damageType: Slash
   levelRequired: 10
 
 - type: combo
@@ -46,7 +45,6 @@
     damage:
       types:
         Slash: 60
-  damageType: Slash
   levelRequired: 10
 
 - type: combo
