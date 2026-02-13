@@ -34,7 +34,6 @@ public sealed class UplinkSystem : EntitySystem
     private static readonly ProtoId<ListingPrototype> FallbackUplinkCatalog = "UplinkUplinkImplanter";
 
     /// <summary>
-<<<<<<< HEAD
     /// Adds an uplink to the target
     /// </summary>
     /// <param name="user">The person who is getting the uplink</param>
@@ -137,7 +136,6 @@ public sealed class UplinkSystem : EntitySystem
         SetUplink(user, implant.Value, balance, giveDiscounts);
         return true;
     }
-<<<<<<< HEAD
 
     /// <summary>
     /// Finds the entity that can hold an uplink for a user.
@@ -166,6 +164,4 @@ public sealed class UplinkSystem : EntitySystem
 
         return null;
     }
-=======
->>>>>>> 1bf2fdf1c5 (ooplink cleanup (#5915))
 }
