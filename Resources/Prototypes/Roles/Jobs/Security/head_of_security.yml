@@ -50,7 +50,7 @@
         skills:
           MeleeKnowledge: 26
           ShootingKnowledge: 50
-          MartialArtCorporateJudoKnowledge: 50
+          MartialArtCorporateJudo: 50
       # </Trauma>
 
 - type: startingGear

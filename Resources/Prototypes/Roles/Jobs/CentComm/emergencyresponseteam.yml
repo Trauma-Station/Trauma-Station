@@ -242,7 +242,7 @@
     components:
       - type: KnowledgeGrant
         skills:
-          HandMadeKnowledge: 50
+          HandmadeKnowledge: 50
           MeleeKnowledge: 50
           ShootingKnowledge: 50
           TechnologicalKnowledge: 50
