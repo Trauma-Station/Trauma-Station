@@ -9,6 +9,7 @@ using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
+using Content.Shared.Rejuvenate;
 
 namespace Content.Medical.Shared.Wounds;
 
@@ -21,6 +22,16 @@ public partial class WoundSystem
 {
     [Dependency] private readonly ConsciousnessSystem _consciousness = default!;
     [Dependency] private readonly PainSystem _pain = default!;
+
+    private void InitializeHealing()
+    {
+        SubscribeLocalEvent<WoundableComponent, RejuvenateEvent>(OnRejuvenate);
+    }
+
+    private void OnRejuvenate(Entity<WoundableComponent> ent, ref RejuvenateEvent args)
+    {
+        _container.EmptyContainer(ent.Comp.Wounds); // no more wounds
+    }
 
     // Updates pain state after wounds are healed and starts pain decay
     /// <param name="woundable">The entity on which to update the pain state</param>
