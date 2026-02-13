@@ -30,9 +30,9 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        ConstructionBananium: 26
-        ConstructionToys: 26
-        ConstructionHandmade: 26
+        BananiumKnowledge: 26
+        ToysKnowledge: 26
+        HandmadeKnowledge: 26
     # </Trauma>
 
   - !type:AddImplantSpecial
