@@ -521,7 +521,7 @@ public sealed partial class StoreSystem
 
         component.BoughtEntities.Remove(boughtEntity);
 
-        if (_actions.GetAction(boughtEntity) is { } action)
+        if (_actions.GetAction(boughtEntity, false) is { } action)
             _actionContainer.RemoveAction((boughtEntity, action.Comp));
 
         var listing = refundComp.Data;
