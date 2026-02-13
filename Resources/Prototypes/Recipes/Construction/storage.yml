@@ -79,8 +79,8 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-  - SimpleFurniture
-  - Technological
+    FurnitureKnowledge: 10
+   TechnologicalKnowledge: 10
   # </Trauma>
 
 - type: construction
@@ -126,8 +126,8 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-  - SimpleFurniture
-  - Technological
+    FurnitureKnowledge: 10
+    TechnologicalKnowledge: 10
   # </Trauma>
 
 - type: construction

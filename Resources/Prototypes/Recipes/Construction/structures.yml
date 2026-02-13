@@ -443,7 +443,7 @@
   # <Trauma>
   groups:
     WindowsKnowledge: 26
-  - TechnologicalKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -871,7 +871,7 @@
   # <Trauma>
   groups: # Edge case: simple to build, but requires knowing how it even looks like
     FurnitureKnowledge: 10
-  - TechnologicalKnowledge: 10
+    TechnologicalKnowledge: 10
   # </Trauma>
 
 - type: construction
@@ -1009,7 +1009,7 @@
   # <Trauma>
   groups:
     WallsKnowledge: 26
-  - TechnologicalKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1027,7 +1027,7 @@
   # <Trauma>
   groups:
     WallsKnowledge: 26
-  - TechnologicalKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1045,7 +1045,7 @@
   # <Trauma>
   groups:
     WallsKnowledge: 26
-  - TechnologicalKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1062,7 +1062,7 @@
   # <Trauma>
   groups:
     WallsKnowledge: 26
-  - TechnologicalKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 #Wooden fence high
@@ -1404,7 +1404,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups: # In theory just knowing what a light bulb is will be enough to make it
-  - TechnologicalKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1422,7 +1422,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-  - TechnologicalKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1440,7 +1440,7 @@
   # <Trauma>
   groups:
     ElectronicsKnowledge: 26
-  - TechnologicalKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1457,7 +1457,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-  - TechnologicalKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1474,7 +1474,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-  - TechnologicalKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 #conveyor
@@ -1617,7 +1617,7 @@
   # <Trauma>
   groups:
     HandmadeKnowledge: 50
-  - TechnologicalKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 - type: construction
@@ -1635,7 +1635,7 @@
   # <Trauma>
   groups:
     HandmadeKnowledge: 26
-  - TechnologicalKnowledge: 26
+    TechnologicalKnowledge: 26
   # </Trauma>
 
 - type: construction
