@@ -55,7 +55,7 @@
   id: LegSweep
   verb: TEACH
   subjects: [ "LEG SWEEP" ]
-  effects:
+  # effects:
   # - !type:AddComponents
     # components:
     # - type: KravMaga # it has leg sweep

@@ -90,7 +90,7 @@
   - BaseSpeciesMob
   id: MobIPC
   components:
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
     - RobotTalk

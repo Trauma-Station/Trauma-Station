@@ -170,7 +170,7 @@
       Male: SoundsHarpyMale
       Female: SoundsHarpyFemale
       Unsexed: SoundsHarpyFemale
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
     - ValyrianStandard
