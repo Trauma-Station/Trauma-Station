@@ -2,17 +2,14 @@ using System.Linq;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.MenuBar;
-using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Shared.Input;
 using Content.Shared.Whitelist;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Systems;
-using Content.Trauma.Shared.MartialArts.Events;
 using JetBrains.Annotations;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input.Binding;
 
 namespace Content.Trauma.Client.Knowledge;
@@ -31,11 +28,6 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
 
         var menuBar = UIManager.GetUIController<GameTopMenuBarUIController>();
         menuBar.OnMartialArtsPressed += () => ToggleMartialArtsMenu(true);
-    }
-
-    private void OnActionTriggered(OpenMartialArtsMenuEvent args)
-    {
-        ToggleMartialArtsMenu(true);
     }
 
     public void OnStateEntered(GameplayState state)
