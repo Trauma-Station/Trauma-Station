@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
+using Content.Client.UserInterface.Systems.MenuBar;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Shared.Input;
 using Content.Shared.Whitelist;
@@ -28,7 +29,8 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
     {
         base.Initialize();
 
-        SubscribeLocalEvent<OpenMartialArtsMenuEvent>(OnActionTriggered);
+        var menuBar = UIManager.GetUIController<GameTopMenuBarUIController>();
+        menuBar.OnMartialArtsPressed += () => ToggleMartialArtsMenu(true);
     }
 
     private void OnActionTriggered(OpenMartialArtsMenuEvent args)

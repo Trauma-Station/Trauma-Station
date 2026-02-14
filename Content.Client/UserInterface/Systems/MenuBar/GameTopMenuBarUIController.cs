@@ -27,6 +27,9 @@ public sealed class GameTopMenuBarUIController : UIController
     [Dependency] private readonly EmotesUIController _emotes = default!;
     [Dependency] private readonly LanguageMenuUIController _language = default!;
 
+    // <Trauma>
+    public Action? OnMartialArtsPressed;
+    // </Trauma>
     private GameTopMenuBar? GameTopMenuBar => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>();
 
     public override void Initialize()
@@ -50,6 +53,9 @@ public sealed class GameTopMenuBarUIController : UIController
         _sandbox.UnloadButton();
         _emotes.UnloadButton();
         _language.UnloadButton();
+        // <Trauma>
+        OnMartialArtsPressed = null;
+        // </Trauma>
     }
 
     public void LoadButtons()
@@ -64,5 +70,11 @@ public sealed class GameTopMenuBarUIController : UIController
         _sandbox.LoadButton();
         _emotes.LoadButton();
         _language.LoadButton();
+        // <Trauma>
+        if (GameTopMenuBar?.MartialArtsButton is { } button)
+        {
+            button.OnPressed += _ => OnMartialArtsPressed?.Invoke();
+        }
+        // </Trauma>
     }
 }
