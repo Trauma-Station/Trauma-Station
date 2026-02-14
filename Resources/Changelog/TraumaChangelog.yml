@@ -2466,3 +2466,19 @@ Entries:
   id: 298
   time: '2026-02-13T18:20:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/683
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed monkeys having lizard tails real
+  - type: Fix
+    message: Fixed lizard displacement log spam
+  id: 299
+  time: '2026-02-13T18:32:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/684
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not having to breathe 🥹
+  id: 300
+  time: '2026-02-13T19:11:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/687
