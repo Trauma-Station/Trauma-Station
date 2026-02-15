@@ -85,6 +85,7 @@
   id: HereticAshPath4
   name: knowledge-path-ash-s4-name
   description: knowledge-path-ash-s4-desc
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: ashen_shift }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
