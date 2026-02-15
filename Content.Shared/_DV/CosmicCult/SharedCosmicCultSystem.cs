@@ -48,12 +48,12 @@ public abstract class SharedCosmicCultSystem : EntitySystem
         if (!_mind.TryGetMind(user, out var mind, out _))
             return false;
 
-        return HasComp<CosmicCultComponent>(user) || _role.MindHasRole<CosmicCultRoleComponent>(mind);
+        return HasComp<CosmicCultComponent>(user) || _role.MindHasRole<CosmicCultRoleComponent>(mind) || HasComp<CosmicColossusComponent>(user);
     }
 
     public bool EntitySeesCult(EntityUid user)
     {
-        return EntityIsCultist(user) || HasComp<GhostComponent>(user);
+        return EntityIsCultist(user) || HasComp<GhostComponent>(user) || HasComp<CosmicColossusComponent>(user);
     }
 
     /// <summary>
@@ -109,5 +109,10 @@ public abstract class SharedCosmicCultSystem : EntitySystem
         {
             Dirty(uid, comp);
         }
+    }
+
+    public virtual void MalignEcho(Entity<CosmicCultComponent> uid)
+    {
+        // Doesn't do shit on client because the gamerule is server only
     }
 }

@@ -140,6 +140,9 @@
     primeTime: 5
   - type: InstantAction
     event: !type:EventCosmicGlare {}
+  - type: Tag
+    tags:
+    - FlashIgnoreResistances
 
 - type: entity
   parent: BaseAction
@@ -158,6 +161,7 @@
     whitelist:
       components:
         - Door
+        - Lock
     event: !type:EventCosmicIngress {}
 
 - type: entity

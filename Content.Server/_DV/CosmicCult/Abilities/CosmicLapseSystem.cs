@@ -18,7 +18,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Polymorph;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._DV.CosmicCult.Abilities;
+namespace Content.Server._DV.CosmicCult.Abilities; // Not predicting ts because of evil and nefarious PolymorphSystem
 
 public sealed class CosmicLapseSystem : EntitySystem
 {

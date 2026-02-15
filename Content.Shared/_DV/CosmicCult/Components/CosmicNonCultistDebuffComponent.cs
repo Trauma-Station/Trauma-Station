@@ -26,7 +26,7 @@ public sealed partial class CosmicEntropyNonCultistComponent : Component
     public TimeSpan CheckTimer = default!;
 
     [DataField]
-    public TimeSpan CheckWait = TimeSpan.FromSeconds(3);
+    public TimeSpan CheckWait = TimeSpan.FromSeconds(1);
 
     /// <summary>
     /// The chance to recieve a message popup while under the effects of Entropic Degen.
@@ -42,9 +42,9 @@ public sealed partial class CosmicEntropyNonCultistComponent : Component
     {
         DamageDict = new()
         {
-            { "Cold", 10.0},
-            { "Asphyxiation", 20.0},
-            { "Ion", 20.0},
+            { "Cold", 3.0},
+            { "Asphyxiation", 6.0},
+            { "Ion", 6.0},
         }
     };
 }

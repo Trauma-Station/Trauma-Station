@@ -25,3 +25,5 @@ cosmicability-monument-spawn-error-space = Too close to space! The Monument must
 cosmicability-chantry-active = You cannot start a chantry ritual while one is already active!
 
 cosmicability-ingress-bolted = The airlock's bolts prevent it from being forced!
+cosmicability-ingress-not-empowered-door = You must be empowered to open bolted doors!
+cosmicability-ingress-not-empowered-lock = You must be empowered to open access locks!

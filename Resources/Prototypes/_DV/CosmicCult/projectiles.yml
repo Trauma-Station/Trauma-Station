@@ -28,7 +28,20 @@
       params:
         variation: 0.1
         volume: +14
+    damage: # Direct hit damage
+      types:
+        Asphyxiation: 20
+        Ion: 20
   - type: CosmicAstralNova
+    areaDamage: # AOE damage. Stacks with direct hit damage
+      types:
+        Asphyxiation: 25
+        Ion: 25
+    areaBlacklist:
+      components:
+      - CosmicCult
+      - CosmicColossus
+
   - type: Sprite
     sprite: _DV/CosmicCult/Effects/ability_novavfx.rsi
     layers:

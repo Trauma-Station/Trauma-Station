@@ -142,11 +142,12 @@ public sealed class CosmicRiftSystem : EntitySystem
         comp.CosmicFragmentationActionEntity = actionEnt;
         comp.CosmicEmpowered = true;
         comp.CosmicSiphonQuantity = 2;
-        comp.CosmicGlareRange = 10;
-        comp.CosmicGlareDuration = TimeSpan.FromSeconds(10);
-        comp.CosmicGlareStun = TimeSpan.FromSeconds(1);
+        comp.CosmicGlareRange = 8;
+        comp.CosmicGlareDuration = TimeSpan.FromSeconds(6);
+        comp.CosmicGlareStun = TimeSpan.FromSeconds(0.5);
         comp.CosmicImpositionDuration = TimeSpan.FromSeconds(7.2);
         comp.Respiration = false;
+        Dirty(uid, comp);
         EnsureComp<PressureImmunityComponent>(args.User);
         EnsureComp<TemperatureImmunityComponent>(args.User);
         _popup.PopupCoordinates(

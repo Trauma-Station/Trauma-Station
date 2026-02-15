@@ -105,9 +105,6 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         SubscribeLocalEvent<CosmicImposingComponent, ComponentInit>(OnStartImposition);
         SubscribeLocalEvent<CosmicImposingComponent, ComponentRemove>(OnEndImposition);
         SubscribeLocalEvent<CosmicImposingComponent, RefreshMovementSpeedModifiersEvent>(OnImpositionMoveSpeed);
-        SubscribeLocalEvent<CosmicEmpoweredSpeedComponent, ComponentInit>(OnStartCosmicEmpowered);
-        SubscribeLocalEvent<CosmicEmpoweredSpeedComponent, ComponentRemove>(OnEndCosmicEmpowered);
-        SubscribeLocalEvent<CosmicEmpoweredSpeedComponent, RefreshMovementSpeedModifiersEvent>(OnCosmicEmpoweredMove);
 
         SubscribeLocalEvent<CosmicCultComponent, PolymorphedEvent>(OnCultistPolymorphed);
         SubscribeLocalEvent<SpeechOverrideComponent, GotEquippedEvent>(OnGotSpeechOverrideEquipped);
@@ -116,7 +113,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         SubscribeFinale(); //Hook up the cosmic cult finale system
     }
 
-    public void MalignEcho(Entity<CosmicCultComponent> uid)
+    public override void MalignEcho(Entity<CosmicCultComponent> uid)
     {
         if (_cultRule.AssociatedGamerule(uid) is not { } cult)
             return;
@@ -257,34 +254,19 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     #endregion
 
     #region Movespeed
-    private void OnStartInfluenceStride(Entity<InfluenceStrideComponent> uid, ref ComponentInit args) => // i wish movespeed was easier to work with
+    private void OnStartImposition(Entity<CosmicImposingComponent> uid, ref ComponentInit args) => // these functions just make sure
         _movementSpeed.RefreshMovementSpeedModifiers(uid);
-    private void OnEndInfluenceStride(Entity<InfluenceStrideComponent> uid, ref ComponentRemove args) => // that movespeed applies more-or-less correctly
+    private void OnEndImposition(Entity<CosmicImposingComponent> uid, ref ComponentRemove args) => // as various cosmic cult effects get added and removed
         _movementSpeed.RefreshMovementSpeedModifiers(uid);
-    private void OnStartImposition(Entity<CosmicImposingComponent> uid, ref ComponentInit args) // these functions just make sure
-    {
+    private void OnStartInfluenceStride(Entity<InfluenceStrideComponent> uid, ref ComponentInit args) => // that movespeed applies more-or-less correctly
         _movementSpeed.RefreshMovementSpeedModifiers(uid);
-        EnsureComp<CosmicCultExamineComponent>(uid).CultistText = "cosmic-examine-text-malignecho";
-    }
-    private void OnEndImposition(Entity<CosmicImposingComponent> uid, ref ComponentRemove args) // as various cosmic cult effects get added and removed
-    {
+    private void OnEndInfluenceStride(Entity<InfluenceStrideComponent> uid, ref ComponentRemove args) => // i wish movespeed was easier to work with
         _movementSpeed.RefreshMovementSpeedModifiers(uid);
-        RemComp<CosmicCultExamineComponent>(uid);
-    }
 
     private void OnRefreshMoveSpeed(EntityUid uid, InfluenceStrideComponent comp, RefreshMovementSpeedModifiersEvent args) =>
-        args.ModifySpeed(1.1f, 1.1f);
+        args.ModifySpeed(1.15f, 1.15f);
     private void OnImpositionMoveSpeed(EntityUid uid, CosmicImposingComponent comp, RefreshMovementSpeedModifiersEvent args) =>
-        args.ModifySpeed(0.65f, 0.65f);
-
-    // Goob start
-    private void OnStartCosmicEmpowered(Entity<CosmicEmpoweredSpeedComponent> uid, ref ComponentInit args) =>
-        _movementSpeed.RefreshMovementSpeedModifiers(uid);
-    private void OnEndCosmicEmpowered(Entity<CosmicEmpoweredSpeedComponent> uid, ref ComponentRemove args) =>
-        _movementSpeed.RefreshMovementSpeedModifiers(uid);
-    private void OnCosmicEmpoweredMove(EntityUid uid, CosmicEmpoweredSpeedComponent comp, RefreshMovementSpeedModifiersEvent args) =>
-        args.ModifySpeed(comp.SpeedBoost, comp.SpeedBoost);
-    // Goob end
+        args.ModifySpeed(0.80f, 0.80f);
     #endregion
 
     #region Edge cases

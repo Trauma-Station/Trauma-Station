@@ -1,26 +1,20 @@
-// SPDX-FileCopyrightText: 2025 AftrLite <61218133+AftrLite@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Content.Client.Alerts;
+using Content.Client.UserInterface.Systems.Alerts.Controls;
+using Content.Shared._DV.CosmicCult.Components.Examine;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
+using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory.Events;
 using Content.Shared.StatusIcon.Components;
-using Robust.Shared.Prototypes;
 using Robust.Client.GameObjects;
-using Robust.Shared.Utility;
-using Content.Shared._DV.CosmicCult.Components.Examine;
-using System.Numerics;
 using Robust.Client.Audio;
-using Robust.Client.GameObjects;
 using Robust.Shared.Audio;
-using Content.Client.Alerts;
-using Content.Client.UserInterface.Systems.Alerts.Controls;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
+using System.Numerics;
 using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Client._DV.CosmicCult;
@@ -58,14 +52,13 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         SubscribeLocalEvent<CosmicCultLeadComponent, GetStatusIconsEvent>(GetCosmicCultLeadIcon);
         SubscribeLocalEvent<CosmicBlankComponent, GetStatusIconsEvent>(GetCosmicSSDIcon);
 
-        SubscribeNetworkEvent<CosmicSiphonIndicatorEvent>(OnSiphon);
+        SubscribeLocalEvent<HumanoidProfileComponent, CosmicSiphonIndicatorEvent>(OnSiphon);
         SubscribeLocalEvent<CosmicCultComponent, UpdateAlertSpriteEvent>(OnUpdateAlert);
     }
 
     #region Siphon Visuals
-    private void OnSiphon(CosmicSiphonIndicatorEvent args)
+    private void OnSiphon(Entity<HumanoidProfileComponent> ent, ref CosmicSiphonIndicatorEvent args)
     {
-        var ent = GetEntity(args.Target);
         if (!TryComp<SpriteComponent>(ent, out var sprite))
             return;
         var layer = _sprite.AddLayer((ent, sprite), new SpriteSpecifier.Rsi(_rsiPath, "vfx"));
@@ -91,7 +84,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     #region Layer Additions
     private void OnCosmicStarMarkAdded(Entity<CosmicStarMarkComponent> uid, ref ComponentStartup args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), CosmicRevealedKey.Key, out _, logMissing: true))
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), CosmicRevealedKey.Key, out _, logMissing: false))
             return;
 
         var layer = _sprite.AddLayer((uid, sprite), uid.Comp.Sprite);
@@ -107,7 +100,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
 
     private void OnCosmicSubtleMarkAdded(Entity<CosmicSubtleMarkComponent> uid, ref ComponentStartup args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), CosmicRevealedKey.Key, out _, logMissing: true))
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), CosmicRevealedKey.Key, out _, logMissing: false))
             return;
 
         var layer = _sprite.AddLayer((uid, sprite), uid.Comp.Sprite);
@@ -125,7 +118,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
 
     private void OnCosmicImpositionAdded(Entity<CosmicImposingComponent> uid, ref ComponentStartup args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), CosmicImposingKey.Key, out _, logMissing: true))
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), CosmicImposingKey.Key, out _, logMissing: false))
             return;
 
         var layer = _sprite.AddLayer((uid, sprite), uid.Comp.Sprite);
@@ -187,7 +180,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     #region Mark updates
     private void UpdateSubtleMarkVisibility(EntityUid uid)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite) || !_sprite.LayerMapTryGet((uid, sprite), CosmicRevealedKey.Key, out var layer, logMissing: true)) return;
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || !_sprite.LayerMapTryGet((uid, sprite), CosmicRevealedKey.Key, out var layer, logMissing: false)) return;
         if (!TryComp<CosmicSubtleMarkComponent>(uid, out var markComp)) return;
         var ev = new SeeIdentityAttemptEvent();
         RaiseLocalEvent(uid, ev);
