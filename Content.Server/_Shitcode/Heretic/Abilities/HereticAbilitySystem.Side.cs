@@ -8,7 +8,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Server.Polymorph.Components;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Actions;
@@ -16,7 +15,6 @@ using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Heretic;
-using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Polymorph;
 using Robust.Shared.Prototypes;
@@ -41,7 +39,7 @@ public sealed partial class HereticAbilitySystem
             return;
 
         var upgrade = EnsureComp<MansusGraspUpgradeComponent>(grasp.Value);
-        foreach (var (key, value) in args.AddedComponents)
+        foreach (var (key, value) in args.GraspComponents)
         {
             upgrade.AddedComponents[key] = value;
         }

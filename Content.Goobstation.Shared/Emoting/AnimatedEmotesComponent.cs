@@ -68,4 +68,26 @@ public sealed partial class AnimatedEmotesComponent : Component
 
     [DataField]
     public TimeSpan BlockVomitStatusTime = TimeSpan.FromSeconds(10);
+
+    /// <summary>
+    /// Optional state for the mouse tweaking emote.
+    /// </summary>
+    [DataField]
+    public string? TweakState;
+
+    #region Flex emote states
+
+    [DataField]
+    public string? FlexState;
+
+    [DataField]
+    public string? FlexDefaultState;
+
+    [DataField]
+    public string? FlexDamageState;
+
+    [DataField]
+    public string? FlexDefaultDamageState;
+
+    #endregion
 }

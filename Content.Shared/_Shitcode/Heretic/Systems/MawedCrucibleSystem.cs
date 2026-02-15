@@ -1,9 +1,9 @@
-using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
 using Content.Shared.Heretic;
 using Content.Shared.Heretic.Messages;
 using Content.Shared.Interaction;

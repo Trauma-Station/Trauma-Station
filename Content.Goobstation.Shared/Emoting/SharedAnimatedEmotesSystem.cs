@@ -38,35 +38,38 @@ public abstract class SharedAnimatedEmotesSystem : EntitySystem
             args.Cancel();
     }
 
-    private void OnEmote(EntityUid uid, AnimatedEmotesComponent component, ref EmoteEvent args)
+    private void OnEmote(Entity<AnimatedEmotesComponent> ent, ref EmoteEvent args)
     {
-        PlayEmoteAnimation(uid, component, args.Emote.ID);
+        PlayEmoteAnimation(ent.AsNullable(), args.Emote.ID);
 
         var emote = _proto.Index<EmotePrototype>(args.Emote);
         if (emote.Event is not AnimationEmoteEvent { CausesVomit: true })
             return;
 
-        if (_status.HasStatusEffect(uid, component.BlockVomitEmoteStatus))
+        if (_status.HasStatusEffect(ent, ent.Comp.BlockVomitEmoteStatus))
             return;
 
-        if (!_status.TryUpdateStatusEffectDuration(uid,
-                component.VomitStatus,
+        if (!_status.TryUpdateStatusEffectDuration(ent,
+                ent.Comp.VomitStatus,
                 out var effect,
-                component.VomitStatusTime))
+                ent.Comp.VomitStatusTime))
             return;
 
         var counter = EnsureComp<CounterStatusEffectComponent>(effect.Value);
         counter.Count++;
-        if (counter.Count < component.EmotesToVomit)
+        if (counter.Count < ent.Comp.EmotesToVomit)
             return;
 
-        _vomit.Vomit(uid);
-        _status.TryAddStatusEffect(uid, component.BlockVomitEmoteStatus, out _, component.BlockVomitStatusTime);
+        _vomit.Vomit(ent);
+        _status.TryAddStatusEffect(ent, ent.Comp.BlockVomitEmoteStatus, out _, ent.Comp.BlockVomitStatusTime);
     }
 
-    public void PlayEmoteAnimation(EntityUid uid, AnimatedEmotesComponent component, ProtoId<EmotePrototype> prot)
+    public void PlayEmoteAnimation(Entity<AnimatedEmotesComponent?> ent, ProtoId<EmotePrototype> prot)
     {
-        component.Emote = prot;
-        Dirty(uid, component);
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
+        ent.Comp.Emote = prot;
+        Dirty(ent);
     }
 }

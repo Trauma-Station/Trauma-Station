@@ -16,9 +16,5 @@ public sealed partial class LegsParalyzedComponent : Component
     [DataField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
     public float SprintSpeed;
-
-    [DataField]
-    [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public float Acceleration = 20f;
     // </Trauma>
 }

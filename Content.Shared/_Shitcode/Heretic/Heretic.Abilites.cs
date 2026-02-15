@@ -454,6 +454,16 @@ public sealed partial class EventEmp : InstantActionEvent
     public TimeSpan Duration = TimeSpan.FromSeconds(20f);
 }
 
+[DataDefinition]
+public sealed partial class HereticGraspUpgradeEvent : HereticKnowledgeEvent
+{
+    [DataField]
+    public EntProtoId GraspAction = "ActionHereticMansusGrasp";
+
+    [DataField(required: true), NonSerialized]
+    public ComponentRegistry GraspComponents = new();
+}
+
 // ascensions
 public sealed partial class HereticAscensionAshEvent : HereticKnowledgeEvent;
 

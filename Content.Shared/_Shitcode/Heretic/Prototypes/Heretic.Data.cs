@@ -31,13 +31,3 @@ public sealed partial class EventHereticAddKnowledge : EntityEventArgs
     [DataField(required: true)]
     public List<ProtoId<HereticKnowledgePrototype>> Knowledge;
 }
-
-[DataDefinition]
-public sealed partial class HereticGraspUpgradeEvent : EntityEventArgs
-{
-    [DataField]
-    public EntProtoId GraspAction = "ActionHereticMansusGrasp";
-
-    [DataField(required: true), NonSerialized]
-    public ComponentRegistry AddedComponents = new();
-}

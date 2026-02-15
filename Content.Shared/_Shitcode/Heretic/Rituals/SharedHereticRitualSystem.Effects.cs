@@ -91,6 +91,7 @@ public abstract partial class SharedHereticRitualSystem
         var ghoul = Factory.GetComponent<GhoulComponent>();
         ghoul.TotalHealth = args.Effect.Health;
         ghoul.GiveBlade = args.Effect.GiveBlade;
+        ghoul.ChangeHumanoidAppearance = args.Effect.ChangeAppearance;
         AddComp(ent, ghoul, true);
     }
 

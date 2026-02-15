@@ -338,8 +338,9 @@
   id: SeekingBlade
   path: Void
   stage: 7
-  event: !type:HereticAristocratWayEvent
-    grantBreathingImmunity: true
+  event: !type:EventHereticVoidPassiveT2
+    addedComponents:
+    - type: SpecialBreathingImmunity
 
 - type: hereticKnowledge
   id: VoidConduit
@@ -645,7 +646,7 @@
   sideKnowledge: true
   stage: 6
   event: !type:HereticGraspUpgradeEvent
-    addedComponents:
+    graspComponents:
     - type: AreaMansusGrasp
 
 ## stage 8

@@ -5,7 +5,6 @@ using Content.Shared._Shitcode.Heretic.Curses;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
-using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.StatusEffectNew;
@@ -98,7 +97,6 @@ public sealed partial class HereticCurseSystem
         }
 
         var comp = Factory.GetComponent<LegsParalyzedComponent>();
-        comp.Acceleration = MovementSpeedModifierComponent.DefaultAcceleration;
         comp.WalkSpeed = MovementSpeedModifierComponent.DefaultBaseWalkSpeed * 0.5f;
         comp.SprintSpeed = MovementSpeedModifierComponent.DefaultBaseSprintSpeed * 0.5f;
         AddComp(args.Target, comp, true);

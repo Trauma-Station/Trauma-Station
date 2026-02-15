@@ -1,7 +1,7 @@
 using System.Linq;
+using Content.Medical.Common.Targeting;
 using Content.Shared._Goobstation.Wizard.SanguineStrike;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
@@ -113,7 +113,7 @@ public sealed class WoundedSoldierSystem : EntitySystem
             if (state.CurrentState != MobState.Alive)
                 continue;
 
-            _dmg.TryChangeDamage(uid, soldier.DamageOverTime, true, false, dmg, targetPart: TargetBodyPart.Vital);
+            _dmg.ChangeDamage((uid, dmg), soldier.DamageOverTime, true, false, targetPart: TargetBodyPart.Vital);
         }
     }
 }

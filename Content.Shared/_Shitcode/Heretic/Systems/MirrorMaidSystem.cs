@@ -1,7 +1,7 @@
+using Content.Medical.Common.Targeting;
 using Content.Shared._Goobstation.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Effects;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
@@ -59,11 +59,11 @@ public sealed class MirrorMaidSystem : EntitySystem
             !_threshold.TryGetThresholdForState(ent, MobState.Dead, out threshold))
             return;
 
-        if (_damageable.TryChangeDamage(ent,
+        if (!_damageable.TryChangeDamage(ent.Owner,
                 ent.Comp.ExamineDamage,
                 true,
                 origin: args.Examiner,
-                targetPart: TargetBodyPart.Vital) == null)
+                targetPart: TargetBodyPart.Vital))
             return;
 
         _status.TryUpdateStatusEffectDuration(args.Examiner, ent.Comp.ExamineStatus, ent.Comp.ExamineDelay);

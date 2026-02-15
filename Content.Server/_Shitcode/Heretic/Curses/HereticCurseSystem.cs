@@ -1,14 +1,11 @@
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Heretic.EntitySystems;
-using Content.Server.Medical;
 using Content.Shared._Goobstation.Wizard;
 using Content.Shared._Shitcode.Heretic.Curses;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates;
-using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Forensics.Components;
@@ -23,7 +20,11 @@ using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Verbs;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Server._Shitcode.Heretic.EntitySystems;
+using Content.Shared._Shitcode.Heretic.Rituals;
+using Content.Shared.Damage.Systems;
+using Content.Shared.FixedPoint;
+using Content.Shared.Medical;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -168,7 +169,7 @@ public sealed partial class HereticCurseSystem : EntitySystem
             ent.Comp.CursedStatusEffect,
             totalTime + ent.Comp.CurseDelay);
 
-        _ritual.RitualSuccess(rune, args.Actor);
+        _ritual.RitualSuccess(rune, args.Actor, false);
 
         foreach (var source in set)
         {
@@ -257,7 +258,7 @@ public sealed partial class HereticCurseSystem : EntitySystem
         if (dnaDict.Count == 0)
             return set;
 
-        var query = EntityQueryEnumerator<DnaComponent, HumanoidAppearanceComponent, MobStateComponent>();
+        var query = EntityQueryEnumerator<DnaComponent, HumanoidProfileComponent, MobStateComponent>();
         while (query.MoveNext(out var uid, out var dna, out _, out var mobState))
         {
             if (uid == user || dna.DNA == null)

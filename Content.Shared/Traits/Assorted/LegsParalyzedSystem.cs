@@ -19,22 +19,45 @@ public sealed class LegsParalyzedSystem : EntitySystem
         SubscribeLocalEvent<LegsParalyzedComponent, UnbuckledEvent>(OnUnbuckled);
         SubscribeLocalEvent<LegsParalyzedComponent, ThrowPushbackAttemptEvent>(OnThrowPushbackAttempt);
         SubscribeLocalEvent<LegsParalyzedComponent, UpdateCanMoveEvent>(OnUpdateCanMoveEvent);
+        // <Trauma>
+        SubscribeLocalEvent<LegsParalyzedComponent, RefreshMovementSpeedModifiersEvent>(OnRefresh);
+        SubscribeLocalEvent<LegsParalyzedComponent, StandAttemptEvent>(OnStandAttempt);
+        // </Trauma>
     }
+
+    // <Trauma>
+    private void OnStandAttempt(Entity<LegsParalyzedComponent> ent, ref StandAttemptEvent args)
+    {
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
+            return;
+
+        args.Cancel();
+    }
+
+    private void OnRefresh(Entity<LegsParalyzedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        args.ModifySpeed(ent.Comp.WalkSpeed, ent.Comp.SprintSpeed, true);
+    }
+    // </Trauma>
 
     private void OnStartup(EntityUid uid, LegsParalyzedComponent component, ComponentStartup args)
     {
         // TODO: In future probably must be surgery related wound
-        _movementSpeedModifierSystem.ChangeBaseSpeed(uid, component.WalkSpeed, component.SprintSpeed, component.Acceleration); // Trauma
+        // <Trauma>
+        _standingSystem.Down(uid);
+        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(uid);
+        // </Trauma>
     }
 
     private void OnShutdown(EntityUid uid, LegsParalyzedComponent component, ComponentShutdown args)
     {
         _standingSystem.Stand(uid);
+        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(uid); // Trauma
     }
 
     private void OnBuckled(EntityUid uid, LegsParalyzedComponent component, ref BuckledEvent args)
     {
-        _standingSystem.Stand(uid);
+        _standingSystem.Stand(uid, force: true); // Trauma;
     }
 
     private void OnUnbuckled(EntityUid uid, LegsParalyzedComponent component, ref UnbuckledEvent args)

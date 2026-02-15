@@ -370,4 +370,4 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage:7
+    stage: 7

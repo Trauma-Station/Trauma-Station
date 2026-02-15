@@ -76,7 +76,6 @@ public sealed class GhoulSystem : SharedGhoulSystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
     [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
     [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
@@ -106,13 +105,14 @@ public sealed class GhoulSystem : SharedGhoulSystem
         SubscribeLocalEvent<HereticMinionComponent, TakeGhostRoleEvent>(OnTakeGhostRole);
 
         SubscribeLocalEvent<GhoulComponent, SetGhoulBoundHereticEvent>(OnBound);
+
+        SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ShatteredRisenComponent, HandCountChangedEvent>(OnHandCountChanged);
     }
 
     private void OnBound(Entity<GhoulComponent> ent, ref SetGhoulBoundHereticEvent args)
     {
         SetBoundHeretic(ent.Owner, args.Heretic);
-        SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<ShatteredRisenComponent, HandCountChangedEvent>(OnHandCountChanged);
     }
 
     private void OnHandCountChanged(Entity<ShatteredRisenComponent> ent, ref HandCountChangedEvent args)

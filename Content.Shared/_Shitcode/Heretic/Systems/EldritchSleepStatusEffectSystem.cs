@@ -1,8 +1,7 @@
 using System.Linq;
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
-using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Body.Systems;
 using Content.Shared.Rejuvenate;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Timing;
@@ -12,7 +11,7 @@ namespace Content.Shared._Shitcode.Heretic.Systems;
 public sealed class EldritchSleepStatusEffectSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _sol = default!;
+    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
 
 
     public override void Initialize()
@@ -36,13 +35,7 @@ public sealed class EldritchSleepStatusEffectSystem : EntitySystem
             return;
 
         EntityManager.RemoveComponents(args.Target, ent.Comp.ComponentDifference);
-        if (!TryComp(args.Target, out BloodstreamComponent? bloodstream) || !_sol.ResolveSolution(args.Target,
-                bloodstream.ChemicalSolutionName,
-                ref bloodstream.ChemicalSolution,
-                out var sol))
-            return;
-
-        sol.RemoveAllSolution();
+        _bloodstream.FlushChemicals(args.Target, 200);
     }
 
     private void OnApply(Entity<EldritchSleepStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)

@@ -40,7 +40,7 @@
   flavor: eldritch
   color: "#1f8016"
   metabolisms:
-    Bloodstream:
+    Digestion:
       conditions:
       - !type:WhitelistCondition
         checkMind: true
@@ -82,26 +82,23 @@
         key: Drowsiness
         time: 50.0
         type: Remove
+    Bloodstream:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        blacklist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+      effects:
       - !type:Electrocute
-        probability: 0.5
-        conditions:
-        - !type:WhitelistCondition
-          blacklist:
-            components:
-            - Heretic
-            - Ghoul
-          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+        electrocuteTime: 1
+        probability: 0.3
       - !type:HealthChange
-        conditions:
-        - !type:WhitelistCondition
-          blacklist:
-            components:
-            - Heretic
-            - Ghoul
-          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
         damage:
           types:
-            Poison: 5
+            Poison: 3
   tileReactions:
   - !type:ChangeTileReaction # Rusts tile
 
@@ -115,27 +112,43 @@
   flavor: crucibleSoul
   color: "#fb793a"
   metabolisms:
-    Medicine:
+    Digestion:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-heretic-or-ghoul
       effects:
       - !type:ModifyStatusEffect
         conditions:
-        - !type:HasComponentCondition
-          components:
-            - Heretic
-            - Ghoul
-          guidebookComponentName: reagent-comp-condition-heretic-or-ghoul
         - !type:HasStatusEffectCondition
           effectProto: StatusEffectCrucibleSoul
           inverted: true
         - !type:HasStatusEffectCondition
           effectProto: StatusEffectCrucibleSoulCooldown
           inverted: true
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: CrucibleSoul
           min: 5
         effectProto: StatusEffectCrucibleSoul
         time: 40
         type: Set
+    Bloodstream:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        blacklist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+      effects:
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 0.35
+        sprintSpeedModifier: 0.35
 
 - type: reagent
   id: DuskAndDawn
@@ -147,21 +160,39 @@
   flavor: clarity
   color: "#d5dc1d"
   metabolisms:
-    Medicine:
+    Digestion:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-heretic-or-ghoul
       effects:
       - !type:ModifyStatusEffect
         conditions:
-        - !type:HasComponentCondition
-          components:
-            - Heretic
-            - Ghoul
-          guidebookComponentName: reagent-comp-condition-heretic-or-ghoul
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: DuskAndDawn
           min: 5
         effectProto: StatusEffectDuskAndDawn
         time: 90
         type: Set
+    Bloodstream:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        blacklist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+      effects:
+      - !type:GenericStatusEffect
+        key: TemporaryBlindness
+        component: TemporaryBlindness
+        type: Add
+        time: 3
 
 - type: reagent
   id: WoundedSoldier
@@ -173,27 +204,48 @@
   flavor: marshal
   color: "#5e718e"
   metabolisms:
-    Medicine:
+    Digestion:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-heretic-or-ghoul
       effects:
       - !type:ModifyStatusEffect
         conditions:
-        - !type:HasComponentCondition
-          components:
-            - Heretic
-            - Ghoul
-          guidebookComponentName: reagent-comp-condition-heretic-or-ghoul
         - !type:HasStatusEffectCondition
           effectProto: StatusEffectWoundedSoldier
           inverted: true
         - !type:HasStatusEffectCondition
           effectProto: StatusEffectWoundedSoldierCooldown
           inverted: true
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: WoundedSoldier
           min: 5
         effectProto: StatusEffectWoundedSoldier
         time: 60
         type: Set
+    Bloodstream:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        blacklist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+      effects:
+      - !type:HealthChange
+        splitDamage: Split
+        damage:
+          types:
+            Slash: 5
+        woundSeverityMultipliers:
+          Slash: 2
+        partDamageVariation: 2
 
 - type: reagent
   id: NewbornEther
@@ -205,21 +257,46 @@
   flavor: ether
   color: "#92ca35"
   metabolisms:
-    Medicine:
+    Digestion:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-heretic-or-ghoul
       effects:
       - !type:ModifyStatusEffect
         conditions:
-        - !type:HasComponentCondition
-          components:
-            - Heretic
-            - Ghoul
-          guidebookComponentName: reagent-comp-condition-heretic-or-ghoul
         - !type:HasStatusEffectCondition
           effectProto: StatusEffectNewbornEther
           inverted: true
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: NewbornEther
           min: 5
         effectProto: StatusEffectNewbornEther
         time: 60
         type: Set
+    Bloodstream:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        blacklist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+      effects:
+      # Heretic nocturine
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 0.65
+        sprintSpeedModifier: 0.65
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: NewbornEther
+          min: 8
+        effectProto: StatusEffectForcedSleeping
+        time: 9
+        delay: 5

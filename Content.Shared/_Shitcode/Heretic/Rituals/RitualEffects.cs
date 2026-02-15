@@ -1,6 +1,7 @@
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 using Content.Shared.Heretic.Prototypes;
+using Content.Shared.Polymorph;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 
@@ -173,9 +174,21 @@ public sealed partial class GhoulifyEffect : BaseRitualEffect<GhoulifyEffect>
 
     [DataField]
     public float Health = 100f;
+
+    [DataField]
+    public bool ChangeAppearance = true;
 }
 
 public sealed partial class SplitIngredientsRitualEffect : BaseRitualEffect<SplitIngredientsRitualEffect>
 {
     public override bool ForceApplyOnRitual => true;
+}
+
+// Can't use PolymorphEffect because result entity of polymorph should be saved
+public sealed partial class PolymorphRitualEffect : OutputRitualEffect<PolymorphRitualEffect>
+{
+    public override bool ForceApplyOnRitual => true;
+
+    [DataField(required: true)]
+    public ProtoId<PolymorphPrototype> Polymorph;
 }

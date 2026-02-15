@@ -31,16 +31,16 @@ public sealed class MawedCrucibleBoundUserInterface(EntityUid owner, Enum uiKey)
         _menu.Open();
     }
 
-    private IEnumerable<RadialMenuActionOption> ConvertToButtons(IReadOnlyList<EntProtoId> entProtoIds)
+    private IEnumerable<RadialMenuActionOption<EntProtoId>> ConvertToButtons(IReadOnlyList<EntProtoId> entProtoIds)
     {
-        var models = new RadialMenuActionOption[entProtoIds.Count];
+        var models = new RadialMenuActionOption<EntProtoId>[entProtoIds.Count];
         for (var i = 0; i < entProtoIds.Count; i++)
         {
             var protoId = entProtoIds[i];
             var proto = _proto.Index(protoId);
             models[i] = new RadialMenuActionOption<EntProtoId>(HandleRadialMenuClick, protoId)
             {
-                Sprite = new SpriteSpecifier.EntityPrototype(protoId),
+                IconSpecifier = new RadialMenuEntityPrototypeIconSpecifier(protoId),
                 ToolTip = proto.Name,
             };
         }
