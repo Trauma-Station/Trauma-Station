@@ -19,3 +19,4 @@
   - type: OrganComponents
     onAdd:
     - type: Wagging
+      organ: Tail

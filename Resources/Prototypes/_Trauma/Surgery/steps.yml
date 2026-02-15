@@ -47,7 +47,8 @@
   name: Create joint
   components:
   - type: SurgeryStep
-    remove:
+    remove: null
+    add:
     - type: JointCreated
 
 - type: entity
@@ -56,5 +57,6 @@
   name: Stitch joint blood vessels
   components:
   - type: SurgeryStep
-    remove:
+    remove: null
+    add:
     - type: JointStitched
