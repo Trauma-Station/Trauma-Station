@@ -647,8 +647,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         // <Trauma>
         if (user != null)
         {
-            RaiseLocalEvent(user.Value, new AddExperience("ShootingKnowledge", 1));
-            RaiseLocalEvent(user.Value, new AddExperience("WeaponsKnowledge", 1));
+            var evShooting = new AddExperience("ShootingKnowledge", 1);
+            var evWeapons = new AddExperience("ShootingKnowledge", 1);
+            RaiseLocalEvent(user.Value, evShooting);
+            RaiseLocalEvent(user.Value, evWeapons);
         }
         // </Trauma>
 

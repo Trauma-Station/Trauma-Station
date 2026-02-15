@@ -617,7 +617,8 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return;
 
         // <Trauma>
-        RaiseLocalEvent(user, new AddExperience("MeleeKnowledge", 1));
+        var evKnowledge = new AddExperience("MeleeKnowledge", 1);
+        RaiseLocalEvent(user, evKnowledge);
         // </Trauma>
         var targets = new List<EntityUid>(1)
         {
@@ -895,7 +896,8 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         }
 
         // <Trauma>
-        RaiseLocalEvent(user, new AddExperience("MeleeKnowledge", entities.Count));
+        var evKnowledge = new AddExperience("MeleeKnowledge", entities.Count);
+        RaiseLocalEvent(user, evKnowledge);
         // </Trauma>
         return true;
     }
@@ -1117,7 +1119,10 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
 
         // <Trauma>
         if (melee is { } meleeEnt && _knowledge.GetMastery(meleeEnt) < 2)
-            RaiseLocalEvent(user, new AddExperience("MeleeKnowledge", 1));
+        {
+            var evKnowledge = new AddExperience("MeleeKnowledge", 1);
+            RaiseLocalEvent(user, evKnowledge);
+        }
         // </Trauma>
         ShoveOrDisarmPopup(true);
 

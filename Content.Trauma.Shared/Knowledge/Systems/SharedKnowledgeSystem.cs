@@ -124,7 +124,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public void OnInit(Entity<KnowledgeHolderComponent> ent)
     {
-        var knowledgeContainer = EnsureKnowledgeContainer(ent);
+        var knowledgeContainer = TryGetKnowledgeContainer(ent);
         ent.Comp.KnowledgeEntity = knowledgeContainer.Owner;
         Dirty(ent.Owner, ent.Comp);
 
@@ -255,8 +255,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent))
             return knowledgeEnt;
 
-        var ent = EnsureKnowledgeContainer((target, holderComponent));
-        var container = EnsureContainer(ent);
+        var ent = TryGetKnowledgeContainer((target, holderComponent));
+        Container? container = null;
+
+        if (ent is not { } entVerified)
+            return null;
+
+        container = EnsureContainer(entVerified);
 
         if (TryGetKnowledgeUnit(target, knowledgeId.Item1) is { } uid)
         {
@@ -272,7 +277,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             if (_netManager.IsClient)
                 return knowledgeEnt;
 
-            var result = PredictedTrySpawnInContainer(knowledgeId.Item1, ent.Owner, KnowledgeContainerComponent.ContainerId, out var knowledgeUnit);
+            var result = PredictedTrySpawnInContainer(knowledgeId.Item1, entVerified.Owner, KnowledgeContainerComponent.ContainerId, out var knowledgeUnit);
             if (!result || knowledgeUnit is not { } knowledgeUnitVerified)
                 return knowledgeEnt;
             if (TryComp<KnowledgeComponent>(knowledgeUnitVerified, out var knowledgeComp))
@@ -281,7 +286,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 knowledgeEnt = (knowledgeUnitVerified, knowledgeComp);
                 Dirty(knowledgeUnitVerified, knowledgeComp);
             }
-            ent.Comp.KnowledgeContainerIDs[knowledgeId.Item1] = knowledgeUnitVerified;
+            entVerified.Comp.KnowledgeContainerIDs[knowledgeId.Item1] = knowledgeUnitVerified;
             if (TryComp<LanguageKnowledgeComponent>(knowledgeUnitVerified, out var languageComp))
             {
                 EnsureComp<LanguageSpeakerComponent>(target);
@@ -293,7 +298,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
             }
         }
-        Dirty(ent);
+        Dirty(entVerified);
         return knowledgeEnt;
     }
 
@@ -411,8 +416,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent))
             return found;
 
-        var ent = EnsureKnowledgeContainer((target, holderComponent));
-        var container = EnsureContainer(ent);
+        var ent = TryGetKnowledgeContainer((target, holderComponent));
+        Container? container = null;
+
+        if (ent is not { } entVerified)
+            return null;
+
+        container = EnsureContainer(entVerified);
 
         if (container == null)
             return null;
@@ -437,8 +447,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent))
             return null;
 
-        var ent = EnsureKnowledgeContainer((target, holderComponent));
-        var container = EnsureContainer(ent);
+        var ent = TryGetKnowledgeContainer((target, holderComponent));
+
+        Container? container = null;
+
+        if (ent is not { } entVerified)
+            return null;
+
+        container = EnsureContainer(entVerified);
 
         foreach (var knowledge in container.ContainedEntities)
         {
@@ -458,8 +474,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent))
             return knowledgeEnts;
 
-        var ent = EnsureKnowledgeContainer((target, holderComponent));
-        var container = EnsureContainer(ent);
+        var ent = TryGetKnowledgeContainer((target, holderComponent));
+        Container? container = null;
+
+        if (ent is not { } entVerified)
+            return null;
+
+        container = EnsureContainer(entVerified);
 
         foreach (var knowledge in container.ContainedEntities)
         {

@@ -203,7 +203,7 @@ public abstract partial class SharedKnowledgeSystem
         if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder))
             return;
 
-        var knowledgeEnt = EnsureKnowledgeContainer((ent, knowledgeHolder));
+        var knowledgeEnt = TryGetKnowledgeContainer((ent, knowledgeHolder));
 
         var allLanguages = ent.Comp.Speaks
             .Select(l => (Id: l, Speaks: true))
