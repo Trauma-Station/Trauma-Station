@@ -124,7 +124,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public void OnInit(Entity<KnowledgeHolderComponent> ent)
     {
-        var knowledgeContainer = TryGetKnowledgeContainer(ent);
+        var knowledgeContainer = EnsureKnowledgeContainer(ent);
         ent.Comp.KnowledgeEntity = knowledgeContainer.Owner;
         Dirty(ent.Owner, ent.Comp);
 
