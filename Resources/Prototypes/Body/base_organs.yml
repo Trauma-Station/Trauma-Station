@@ -92,7 +92,7 @@
     markingData:
       layers:
       - Chest
-      - Tail
+      #- Tail # Trauma - moved to specific Tail part
       - Overlay
       - UndergarmentTop
       - UndergarmentBottom

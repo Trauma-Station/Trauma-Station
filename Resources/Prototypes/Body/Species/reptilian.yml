@@ -108,6 +108,7 @@
     organs:
       Torso: OrganReptilianTorso
       Head: OrganReptilianHead
+      Tail: OrganReptilianTail # Trauma
       ArmLeft: OrganReptilianArmLeft
       ArmRight: OrganReptilianArmRight
       HandRight: OrganReptilianHandRight
@@ -137,7 +138,7 @@
   name: Urissst Mz'Hand
   components:
   - type: Puller
-    needsHands: false
+    #needsHands: false # Trauma - controlled by tail
   - type: Butcherable
     butcheringType: Spike
     spawned:
@@ -186,7 +187,7 @@
       301: 0.9
       295: 0.8
       285: 0.7
-  - type: Wagging
+  #- type: Wagging # Trauma - moved to tail onAdd
 
 - type: entity
   parent: OrganBaseFleshy # Shitmed - Fleshy
@@ -224,7 +225,7 @@
       group: Reptilian
 
 - type: entity
-  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganReptilianExternal ]
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorsoTailed, OrganReptilianExternal ] # Shitmed - Tailed torso
   id: OrganReptilianTorso
   components:
   - type: VisualOrganMarkings
