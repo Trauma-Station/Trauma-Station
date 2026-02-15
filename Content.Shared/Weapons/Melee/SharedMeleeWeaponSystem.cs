@@ -567,13 +567,13 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         {
             if (_knowledge.GetMastery(melee) < 2)
             {
-                knowledgeMiss = ((float) melee.Comp.Level + 1) / 26.0f;
+                knowledgeMiss = ((float) melee.Comp.Level + 5) / 26.0f;
             }
         }
         // </Trauma>
         if (Deleted(target) ||
             !HasComp<DamageableComponent>(target) ||
-            _random.Prob(1.0f - knowledgeMiss) || // Trauma - Knowledge
+            _random.Prob(Math.Max(1.0f - knowledgeMiss,0)) || // Trauma - Knowledge
             !TryComp(target, out TransformComponent? targetXform)) // Goob edit
         {
             // Leave IsHit set to true, because the only time it's set to false
@@ -704,12 +704,12 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             melee = meleeUnit;
             if (_knowledge.GetMastery(meleeUnit) < 2)
             {
-                knowledgeMiss = ((float) meleeUnit.Comp.Level + 1) / 26.0f;
+                knowledgeMiss = ((float) meleeUnit.Comp.Level + 2) / 26.0f;
             }
         }
         // </Trauma>
 
-        if (entities.Count == 0 || _random.Prob(1.0f - knowledgeMiss)) // Trauma - Knowledge
+        if (entities.Count == 0 || _random.Prob(Math.Max(1.0f - knowledgeMiss, 0))) // Trauma - Knowledge
         {
             if (meleeUid == user)
             {
@@ -1023,10 +1023,10 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             melee = meleeUnit;
             if (_knowledge.GetMastery(meleeUnit) < 2)
             {
-                knowledgeMiss = ((float) meleeUnit.Comp.Level + 1) / 26.0f;
+                knowledgeMiss = ((float) meleeUnit.Comp.Level + 10) / 26.0f;
             }
-        }
-        if (knowledgeMiss < 1.0f && _random.Prob(1.0f - knowledgeMiss))
+        }   
+        if (knowledgeMiss < 1.0f && _random.Prob(Math.Max(1.0f - knowledgeMiss, 0)))
             return true;
         // </Trauma>
 
