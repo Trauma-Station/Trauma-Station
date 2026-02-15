@@ -285,6 +285,8 @@
   - type: SurgeryPartRemovedCondition
     category: Tail
 
+## Tending
+
 - type: entity
   parent: SurgeryBase
   id: SurgeryTendWoundsBrute
