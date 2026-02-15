@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseSimpleMob, FlyingMobBase ]
+  parent: [ BaseMob, FlyingMobBase ]
   abstract: true
   id: MobCosmicColossusBase
   name: entropic colossus
@@ -10,10 +10,6 @@
     cultistText: cosmic-examine-text-cultentity
     othersText: cosmic-examine-text-entities
   - type: AntagImmune
-  - type: StaminaResistance
-    damageCoefficient: 0 # No more stunning colossi
-  - type: ModifyDelayedKnockdown
-    cancel: true # No batoning the colossi either
   - type: Sprite
     drawdepth: Mobs
     sprite: _DV/CosmicCult/Mobs/colossus.rsi
@@ -120,6 +116,7 @@
     - CannotSuicide
     - DoorBumpOpener
     - Unimplantable
+    - StunImmune
   - type: Damageable
     damageContainer: InorganicMetaphysical
     damageModifierSet: CosmicColossus
@@ -148,9 +145,11 @@
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:
+    - Common
     - CosmicRadio
   - type: ActiveRadio
     channels:
+    - Common
     - CosmicRadio
   - type: ZombieImmune
   - type: UserInterface
@@ -211,6 +210,16 @@
     color: "#42a4ae"
     activateSound: null
     deactivateSound: null
+  - type: Polymorphable
+  - type: Pullable
+  - type: WeakToHoly
+    alwaysTakeHoly: true
+  - type: CosmicColossus
+    sunderBlacklist:
+      components:
+      - Ghost
+      - CosmicCult
+      - CosmicColossus
 
 - type: entity
   parent: [ MobCosmicColossusBase ]
@@ -224,6 +233,8 @@
     - ColossusNames
     - ColossusTitlesLone
     nameFormat: name-format-colossus
+  - type: CosmicColossus
+    timed: true
 
 - type: entity
   parent: [ MobCosmicColossusBase ]
@@ -234,7 +245,6 @@
     - ColossusNames
     - ColossusTitlesBase
     nameFormat: name-format-colossus
-  - type: CosmicColossus
 
 - type: speechSounds
   id: ColossusSpeech

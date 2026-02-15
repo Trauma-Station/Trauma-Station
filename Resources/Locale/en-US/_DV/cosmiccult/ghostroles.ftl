@@ -33,7 +33,7 @@ ghost-role-colossus-effigy-confirm = If placement is  valid, press again to Beck
 
 ghost-role-colossus-effigy-error-grid = Invalid location! An Effigy must be beckoned upon a stable surface.
 ghost-role-colossus-effigy-error-location = Invalid location! The Effigy must be beckoned near {$LOCATION}.
-ghost-role-colossus-effigy-error-intersection = Too crowded! An Effigy requires an empty 3x1 area to be beckoned.
+ghost-role-colossus-effigy-error-intersection = Too crowded! An Effigy requires an empty tile to be beckoned.
 ghost-role-colossus-effigy-error-space = Too close to space! An Effigy must be be at least {$DISTANCE}m away.
 
 objective-condition-effigy-no-target = Beckon an Effigy wherever you desire.

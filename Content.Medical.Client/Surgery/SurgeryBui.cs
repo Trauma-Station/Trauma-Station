@@ -7,6 +7,7 @@ using Content.Medical.Shared.Surgery;
 using Content.Shared.Body;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
+using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -47,7 +48,7 @@ public sealed class SurgeryBui : BoundUserInterface
     {
         if (_window == null)
         {
-            _window = new SurgeryWindow();
+            _window = this.CreateWindow<SurgeryWindow>();
             _window.OnClose += Close;
             _window.Title = Loc.GetString("surgery-ui-window-title");
 

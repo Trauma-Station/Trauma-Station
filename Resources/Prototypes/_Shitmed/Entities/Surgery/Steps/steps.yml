@@ -298,6 +298,8 @@
     # <Trauma>
     - type: TissueRearranged
     - type: VesselsStitched
+    - type: JointCreated
+    - type: JointStitched
     # </Trauma>
     duration: 2
   - type: Sprite
@@ -346,6 +348,8 @@
     # <Trauma>
     - type: TissueRearranged
     - type: VesselsStitched
+    - type: JointCreated
+    - type: JointStitched
     # </Trauma>
     duration: 2
   - type: SurgeryAffixPartStep

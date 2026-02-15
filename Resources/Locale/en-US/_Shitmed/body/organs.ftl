@@ -5,7 +5,6 @@ markings-organ-Wings = Wings
 
 # Basic organs
 markings-organ-Brain = Brain
-markings-organ-Eyes = Eyes
 markings-organ-Tongue = Tongue
 markings-organ-Appendix = Appendix
 markings-organ-Ears = Ears
@@ -20,9 +19,9 @@ markings-organ-IPCBrain = Positronic Brain
 markings-organ-IPCPump = Micro Pump
 
 # Augments
-markings-organ-AugmentCharger
-markings-organ-AugmentPowerCell
-markings-organ-ArmAugment
+markings-organ-AugmentCharger = Augment Charger
+markings-organ-AugmentPowerCell = Augment Power cell
+markings-organ-ArmAugment = Arm Augment
 
 # Xeno
 markings-organ-AcidGland = Acid Gland
