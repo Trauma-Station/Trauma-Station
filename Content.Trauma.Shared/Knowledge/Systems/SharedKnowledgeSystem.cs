@@ -608,12 +608,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return 0;
     }
 
-    public int GetMastery(EntityUid? uid)
-    {
-        if (uid is { } validUid)
-            return GetMastery(validUid);
-        return 0;
-    }
     public override float SharpCurve(Entity<KnowledgeComponent> knowledge)
     {
         return ((float) knowledge.Comp.Level / 100.0f) * ((float) knowledge.Comp.Level / 100.0f);
