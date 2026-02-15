@@ -387,9 +387,9 @@ public sealed partial class BodyBloodstreamSystem : EntitySystem
         }
 
         var blood = Comp<BloodstreamComponent>(ent);
+        blood.BleedAmountFromWounds = (float) total;
         blood.BleedAmount = blood.BleedAmountFromWounds + blood.BleedAmountNotFromWounds;
         blood.BleedAmount = Math.Clamp(blood.BleedAmount, 0, blood.MaxBleedAmount);
-        blood.BleedAmountFromWounds = (float) total;
         DirtyFields(ent.Owner, blood, null, nameof(BloodstreamComponent.BleedAmount), nameof(BloodstreamComponent.BleedAmountFromWounds));
 
         if (blood.BleedAmount == 0)

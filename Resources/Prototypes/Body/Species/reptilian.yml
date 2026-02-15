@@ -59,10 +59,17 @@
   - type: Inventory
     speciesId: reptilian
     femaleDisplacements:
+      # <Trauma>
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _White/Mobs/Species/Reptilian/displacement.rsi
+            state: shoes
+      # <Trauma>
       jumpsuit:
         sizeMaps:
           32:
-            sprite: Mobs/Species/Human/displacement.rsi
+            sprite: Mobs/Species/Reptilian/displacement.rsi # Trauma - use Reptilian not Human ???
             state: jumpsuit-female
       head:
         sizeMaps:
@@ -75,6 +82,18 @@
             sprite: Mobs/Species/Reptilian/displacement.rsi
             state: mask
     displacements:
+      # <Trauma>
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _White/Mobs/Species/Reptilian/displacement.rsi
+            state: shoes
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _White/Mobs/Species/Reptilian/displacement.rsi
+            state: jumpsuit
+      # <Trauma>
       head:
         sizeMaps:
           32:
@@ -89,6 +108,7 @@
     organs:
       Torso: OrganReptilianTorso
       Head: OrganReptilianHead
+      Tail: OrganReptilianTail # Trauma
       ArmLeft: OrganReptilianArmLeft
       ArmRight: OrganReptilianArmRight
       HandRight: OrganReptilianHandRight
@@ -118,7 +138,7 @@
   name: Urissst Mz'Hand
   components:
   - type: Puller
-    needsHands: false
+    #needsHands: false # Trauma - controlled by tail
   - type: Butcherable
     butcheringType: Spike
     spawned:
@@ -167,7 +187,7 @@
       301: 0.9
       295: 0.8
       285: 0.7
-  - type: Wagging
+  #- type: Wagging # Trauma - moved to tail onAdd
 
 - type: entity
   parent: OrganBaseFleshy # Shitmed - Fleshy
@@ -205,7 +225,7 @@
       group: Reptilian
 
 - type: entity
-  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganReptilianExternal ]
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorsoTailed, OrganReptilianExternal ] # Shitmed - Tailed torso
   id: OrganReptilianTorso
   components:
   - type: VisualOrganMarkings

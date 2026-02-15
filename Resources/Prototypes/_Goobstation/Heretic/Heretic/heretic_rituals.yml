@@ -341,9 +341,6 @@
         min: 3
         max: 3
         cancelLoc: heretic-ritual-fail-sacrifice-ash
-    - !type:AddKnowledgeEffect
-      applyOn: Mind
-      knowledge: AshlordRite
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -351,6 +348,9 @@
         events:
         - !type:EventHereticAscension
         - !type:EventHereticUpdateTargets
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - AshlordRite
   - type: Tag
     tags:
     - RitualAscension
@@ -456,9 +456,6 @@
         min: 3
         max: 3
         cancelLoc: heretic-ritual-fail-sacrifice-blade
-    - !type:AddKnowledgeEffect
-      applyOn: Mind
-      knowledge: MaelstromOfSilver
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -466,6 +463,9 @@
         events:
         - !type:EventHereticAscension
         - !type:EventHereticUpdateTargets
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - MaelstromOfSilver
   - type: Tag
     tags:
     - RitualAscension
@@ -815,9 +815,6 @@
         min: 4
         max: 4
         cancelLoc: heretic-ritual-fail-sacrifice-not-enough
-    - !type:AddKnowledgeEffect
-      applyOn: Mind
-      knowledge: PriestFinalHymn
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -825,6 +822,9 @@
         events:
         - !type:EventHereticAscension
         - !type:EventHereticUpdateTargets
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - PriestFinalHymn
   - type: Tag
     tags:
     - RitualAscension
@@ -933,9 +933,6 @@
         min: 3
         max: 3
         cancelLoc: heretic-ritual-fail-sacrifice-not-enough
-    - !type:AddKnowledgeEffect
-      applyOn: Mind
-      knowledge: WaltzAtTheEndOfTime
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -943,6 +940,9 @@
         events:
         - !type:EventHereticAscension
         - !type:EventHereticUpdateTargets
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - WaltzAtTheEndOfTime
   - type: Tag
     tags:
     - RitualAscension
@@ -1050,9 +1050,6 @@
         min: 3
         max: 3
         cancelLoc: heretic-ritual-fail-sacrifice-rust
-    - !type:AddKnowledgeEffect
-      applyOn: Mind
-      knowledge: RustbringersOath
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -1060,6 +1057,9 @@
         events:
         - !type:EventHereticAscension
         - !type:EventHereticUpdateTargets
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - RustbringersOath
     - !type:SpawnRitualEffect
       applyOn: Platform
       output:
@@ -1169,9 +1169,6 @@
         min: 3
         max: 3
         cancelLoc: heretic-ritual-fail-sacrifice-cosmos
-    - !type:AddKnowledgeEffect
-      applyOn: Mind
-      knowledge: CreatorsGift
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -1180,6 +1177,9 @@
         - !type:EventHereticAscension
         - !type:EventHereticUpdateTargets
         - !type:EventHereticResolveStarGazer
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - CreatorsGift
   - type: Tag
     tags:
     - RitualAscension

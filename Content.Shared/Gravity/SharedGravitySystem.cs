@@ -104,7 +104,7 @@ public abstract partial class SharedGravitySystem : EntitySystem
     /// <param name="entity">The entity we are updating the weightless status of</param>
     public void RefreshWeightless(Entity<GravityAffectedComponent?> entity)
     {
-        if (!_weightlessQuery.Resolve(entity, ref entity.Comp))
+        if (!_weightlessQuery.Resolve(entity, ref entity.Comp, false)) // Trauma - add false, fuck off heisentest
             return;
 
         UpdateWeightless(entity!);

@@ -29,7 +29,6 @@ changeling-absorb-onexamine = [color=red]The body feels hollow.[/color]
 changeling-absorb-fail-nograb = We aren't grabbing hard enough.
 changeling-absorb-fail-onfire = The target is on fire, put them out first!
 
-
 changeling-absorbbiomatter-start = {THE($user)} starts absorbing the food!
 changeling-absorbbiomatter-bad-food = This food is not absorbable.
 
@@ -39,6 +38,7 @@ changeling-transform-others = {CAPITALIZE(THE($user))}'s body twists and takes s
 changeling-transform-fail-self = We can't transform into the current form!
 changeling-transform-fail-choose = We did not choose a form to transform into!
 changeling-transform-fail-absorbed = We can't transform a husk!
+changeling-transform-fail-generic = We can't transform into them!
 changeling-transform-finish = We are now {$target}.
 
 changeling-sting = We silently sting {CAPITALIZE(THE($target))}

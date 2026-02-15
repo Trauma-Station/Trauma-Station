@@ -18,7 +18,6 @@ public abstract partial class SharedHereticRitualSystem
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<FindLostLimitedOutputEffect>>(OnFindLimited);
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<OpenRuneBuiEffect>>(OnBui);
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<EffectsRitualEffect>>(OnEffects);
-        SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<AddKnowledgeEffect>>(OnAddKnowledge);
         SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<UpdateKnowledgeEffect>>(OnUpdateKnowledge);
         SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<RemoveRitualsEffect>>(OnRemoveRituals);
         SubscribeLocalEvent<HereticRitualComponent, HereticRitualEffectEvent<SplitIngredientsRitualEffect>>(OnSplit);
@@ -144,11 +143,6 @@ public abstract partial class SharedHereticRitualSystem
             return;
 
         args.Ritual.Comp.Blackboard[args.Effect.Result] = uid;
-    }
-
-    private void OnAddKnowledge(Entity<HereticComponent> ent, ref HereticRitualEffectEvent<AddKnowledgeEffect> args)
-    {
-        _heretic.TryAddKnowledge((ent, null, ent), args.Effect.Knowledge);
     }
 
     private void OnPathSpawn(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<PathBasedSpawnEffect> args)

@@ -178,6 +178,12 @@ public sealed partial class ChangelingIdentityComponent : Component
     public int MaxAbsorbedDNA = 5;
 
     /// <summary>
+    ///     The id of the fake mindshield implant
+    /// </summary>
+    [DataField]
+    public EntProtoId FakeMindShieldId = "FakeMindShieldImplant";
+
+    /// <summary>
     ///     Total absorbed DNA. Counts towards objectives.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]

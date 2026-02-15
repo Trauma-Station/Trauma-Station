@@ -127,6 +127,9 @@ namespace Content.Server.Ghost
             if (ent.Comp.LifeStage <= ComponentLifeStage.Running)
             {
                 args.VisibilityMask |= (int)VisibilityFlags.Ghost;
+                // Begin DeltaV additions
+                args.VisibilityMask |= (int)VisibilityFlags.CosmicCultMonument;
+                // End DeltaV additions
             }
         }
 
@@ -596,7 +599,7 @@ namespace Content.Server.Ghost
                             && TryComp<MobThresholdsComponent>(playerEntity, out var thresholds))
                         {
                             var playerDeadThreshold = _mobThresholdSystem.GetThresholdForState(playerEntity.Value, MobState.Dead, thresholds);
-                            dealtDamage = playerDeadThreshold - damageable.TotalDamage;
+                            dealtDamage = playerDeadThreshold - _mobThresholdSystem.CheckVitalDamage(playerEntity.Value, damageable); // Trauma - use vital damage
                         }
 
                         // <Trauma>
@@ -606,7 +609,7 @@ namespace Content.Server.Ghost
                             : AsphyxiationDamageType;
                         DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>(damageType), dealtDamage);
 
-                        TargetBodyPart? targetPart = HasComp<BodyComponent>(playerEntity) ? TargetBodyPart.All : null;
+                        TargetBodyPart? targetPart = HasComp<BodyComponent>(playerEntity) ? TargetBodyPart.Chest : null;
                         _damageable.ChangeDamage(playerEntity.Value, damage, true, targetPart: targetPart);
                         // </Trauma>
                     }

@@ -2442,3 +2442,83 @@ Entries:
   id: 296
   time: '2026-02-12T15:57:35.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/633
+- author: NoElkaTheGod
+  changes:
+  - type: Add
+    message: Added Entropic Colossus, a new antagonist closely related to cosmic cult
+  - type: Add
+    message: >-
+      Cosmic cultists can now subvert the station AI after absorbing a malign
+      rift.
+  - type: Tweak
+    message: Many minor fixes and polishing for the cosmic cult.
+  - type: Tweak
+    message: >-
+      The guidebook for cosmic cult was updated in accordance with the new
+      content. Please read it.
+  id: 297
+  time: '2026-02-13T08:28:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/654
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use Face markings.
+  id: 298
+  time: '2026-02-13T18:20:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/683
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed monkeys having lizard tails real
+  - type: Fix
+    message: Fixed lizard displacement log spam
+  id: 299
+  time: '2026-02-13T18:32:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/684
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not having to breathe 🥹
+  id: 300
+  time: '2026-02-13T19:11:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/687
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Entropic colossus now takes holy damage.
+  - type: Fix
+    message: Entropic colossus is no longer vulnerable to CQC.
+  - type: Fix
+    message: Entropic colossus no longer pushes ghosts.
+  - type: Tweak
+    message: Entropic Colossus min playercount 25 -> 40.
+  id: 301
+  time: '2026-02-14T13:16:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/690
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed /ghost and ghost actions not killing you
+  - type: Fix
+    message: Fixed surgery window reopening 20 times if you close it.
+  id: 302
+  time: '2026-02-14T21:52:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/692
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Tails are now bodyparts and can be removed by surgery, explosions, etc.
+  - type: Add
+    message: 'You can now create a tail joint via surgery to turn people into lizards. '
+  id: 303
+  time: '2026-02-15T21:13:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/696
+- author: John Carpenter
+  changes:
+  - type: Add
+    message: Lings now get a fake mindshield if they absorb someone with a mindshield
+  - type: Tweak
+    message: Lings are now forced to transform into whoever they absorb
+  id: 304
+  time: '2026-02-15T22:19:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/695

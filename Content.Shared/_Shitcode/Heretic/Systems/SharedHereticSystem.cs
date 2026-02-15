@@ -41,11 +41,20 @@ public abstract class SharedHereticSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MindContainerComponent, BeforeConversionEvent>(OnConversionAttempt);
+        SubscribeLocalEvent<HereticComponent, EventHereticAddKnowledge>(OnAddKnowledge);
 
         Subs.CVar(_cfg, GoobCVars.AscensionRequiresObjectives, value => _ascensionRequiresObjectives = value, true);
 
         _hereticQuery = GetEntityQuery<HereticComponent>();
         _ghoulQuery = GetEntityQuery<GhoulComponent>();
+    }
+
+    private void OnAddKnowledge(Entity<HereticComponent> ent, ref EventHereticAddKnowledge args)
+    {
+        foreach (var knowledge in args.Knowledge)
+        {
+            TryAddKnowledge((ent, null, ent.Comp), knowledge);
+        }
     }
 
     private void OnConversionAttempt(Entity<MindContainerComponent> ent, ref BeforeConversionEvent args)

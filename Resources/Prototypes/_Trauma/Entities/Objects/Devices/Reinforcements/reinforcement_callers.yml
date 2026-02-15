@@ -33,8 +33,6 @@
     - ReinforcementsHoS
     currencyWhitelist:
     - Spesos
-    sales:
-      enabled: false
     ownerOnly: false
 
 - type: entity
@@ -58,8 +56,6 @@
     - CargoHoP
     currencyWhitelist:
     - Spesos
-    sales:
-      enabled: false
     ownerOnly: false
 
 - type: storeCategory
