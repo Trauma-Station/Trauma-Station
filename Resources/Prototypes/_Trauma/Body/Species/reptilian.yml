@@ -10,6 +10,12 @@
     data:
       sprite: _Trauma/Mobs/Species/Reptilian/parts.rsi
       state: empty # no sprite since the markings actually control it
+  - type: PullerTail
+    speciesWhitelist:
+    # need to have a body adapted to controlling a tail properly
+    - Reptilian
+    - Kobold
+    - Monkey
   - type: OrganComponents
     onAdd:
     - type: Wagging
