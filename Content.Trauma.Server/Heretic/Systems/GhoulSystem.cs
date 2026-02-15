@@ -40,6 +40,8 @@ using Content.Shared.NPC.Systems;
 using Robust.Server.Audio;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
+using Content.Medical.Shared.Body;
+using Content.Medical.Shared.Wounds;
 using Content.Server.Heretic.Abilities;
 using Content.Server.Heretic.EntitySystems;
 using Content.Server.Jittering;
@@ -60,7 +62,6 @@ using Content.Server.Polymorph.Systems;
 using Content.Server.Speech.EntitySystems;
 using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared.Gibbing;
-using Content.Shared.Interaction.Components;
 using Content.Shared.NPC.Components;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Roles.Components;
@@ -78,7 +79,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
     private static readonly EntProtoId ComponentsToRemoveOnGhoulify = "ComponentsToRemoveOnGhoulify";
     private static readonly EntProtoId ComponentsToRemoveOnUnGhoulify = "ComponentsToRemoveOnUnGhoulify";
 
-    private readonly string[] IgnoredComponentsOnTransfer = ["Transform", "MetaData"];
+    private readonly string[] _ignoredComponentsOnTransfer = ["Transform", "MetaData"];
 
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly JitteringSystem _jitter = default!;
@@ -191,12 +192,16 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
     private void ProcessVoicelessDeadBody(EntityUid uid, bool makeRemovable)
     {
+        var woundableQuery = GetEntityQuery<WoundableComponent>();
         foreach (var organ in _body.GetOrgans(uid))
         {
+            if (woundableQuery.TryComp(organ, out var woundable) && woundable.RootWoundable == organ.Owner)
+                continue;
+
             if (makeRemovable)
-                RemCompDeferred<UnremoveableComponent>(organ);
+                RemCompDeferred<UnremoveableOrganComponent>(organ);
             else
-                EnsureComp<UnremoveableComponent>(organ);
+                EnsureComp<UnremoveableOrganComponent>(organ);
         }
     }
 
@@ -279,7 +284,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         var prototype = _proto.Index(species.Prototype);
 
         var comps = prototype.Components
-            .IntersectBy(_proto.Index(ComponentsToRemoveOnGhoulify).Components.Keys.Except(IgnoredComponentsOnTransfer),
+            .IntersectBy(_proto.Index(ComponentsToRemoveOnGhoulify).Components.Keys.Except(_ignoredComponentsOnTransfer),
                 x => x.Key)
             .ToDictionary();
 
@@ -321,7 +326,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
             _holyFlam.HolyExtinguish(ent, holyFlam);
 
         var comps2 = _proto.Index(ComponentsToRemoveOnUnGhoulify)
-            .Components.ExceptBy(IgnoredComponentsOnTransfer, x => x.Key)
+            .Components.ExceptBy(_ignoredComponentsOnTransfer, x => x.Key)
             .ToDictionary();
         EntityManager.RemoveComponents(ent, new ComponentRegistry(comps2));
     }
@@ -329,7 +334,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
     public void GhoulifyEntity(Entity<GhoulComponent> ent)
     {
         var comps = _proto.Index(ComponentsToRemoveOnGhoulify)
-            .Components.ExceptBy(IgnoredComponentsOnTransfer, x => x.Key)
+            .Components.ExceptBy(_ignoredComponentsOnTransfer, x => x.Key)
             .ToDictionary();
         EntityManager.RemoveComponents(ent, new ComponentRegistry(comps));
 
