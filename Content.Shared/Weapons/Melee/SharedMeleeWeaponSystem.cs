@@ -1025,7 +1025,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             {
                 knowledgeMiss = ((float) meleeUnit.Comp.Level + 10) / 26.0f;
             }
-        }   
+        }
         if (knowledgeMiss < 1.0f && _random.Prob(Math.Max(1.0f - knowledgeMiss, 0)))
             return true;
         // </Trauma>
