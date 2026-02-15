@@ -63,15 +63,6 @@
   - type: MovementSpeedModifier
   - type: LagCompensation
   - type: StunVisuals
-  # <Trauma>
-  - type: KnowledgeHolder
-  - type: KnowledgeGrant
-    skills:
-      StrengthKnowledge: 0
-      ToughnessKnowledge: 0
-      AthleticsKnowledge: 0
-      MeleeKnowledge: 0
-  # </Trauma>
 
 - type: entity
   save: false
