@@ -246,7 +246,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 return true;
         }
 
-        if (hereticComp.PathStage >= 4)
+        if (hereticComp.PathStage >= 3)
             ApplyMark(target, hereticComp.CurrentPath);
 
         return true;
@@ -265,7 +265,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
             return true;
         }
 
-        if (_whitelist.IsWhitelistFail(grasp.Comp.Blacklist, target))
+        if (_whitelist.IsWhitelistPass(grasp.Comp.Blacklist, target))
             return false;
 
         var beforeEvent = new BeforeHarmfulActionEvent(user, HarmfulActionType.MansusGrasp);
@@ -488,7 +488,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
             !TryComp(uid, out MansusGraspComponent? grasp))
             return;
 
-        if (args.Target == null || _whitelist.IsWhitelistFail(grasp.Blacklist, args.Target.Value))
+        if (args.Target == null || _whitelist.IsWhitelistPass(grasp.Blacklist, args.Target.Value))
         {
             RustTile();
             return;
@@ -500,11 +500,11 @@ public abstract class SharedMansusGraspSystem : EntitySystem
             args.Handled = true;
             InvokeGrasp(args.User, (uid, grasp));
             ResetDelay(comp.CatwalkDelayMultiplier);
-            Del(args.Target);
+            PredictedDel(args.Target);
             return;
         }
 
-        if (!_ability.TryMakeRustWall(args.Target.Value, (args.User, heretic)))
+        if (!_ability.TryMakeRustWall(args.Target.Value, args.User, heretic))
             return;
 
         args.Handled = true;
@@ -565,7 +565,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         if (args.Target == null || args.Target == args.User)
             return;
 
-        args.Handled = GraspTarget(ent, args.User,args.Target.Value);
+        args.Handled = GraspTarget(ent, args.User, args.Target.Value);
     }
 
     public virtual void InvokeGrasp(EntityUid user, Entity<MansusGraspComponent>? ent)

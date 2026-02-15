@@ -132,7 +132,7 @@ public sealed class RustSpreaderSystem : EntitySystem
 
                 foreach (var ent in toRust)
                 {
-                    _ability.TryMakeRustWall(ent);
+                    _ability.TryMakeRustWall(ent, rustStrengthOverride: 10);
                 }
 
                 for (var j = 0; j < 4; j++)

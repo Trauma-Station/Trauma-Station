@@ -29,6 +29,7 @@
   - type: ActivatableUI
     key: enum.MawedCrucibleUiKey.Key
   - type: ActivatableUiUserWhitelist
+    checkMind: true
     whitelist:
       components:
       - Heretic

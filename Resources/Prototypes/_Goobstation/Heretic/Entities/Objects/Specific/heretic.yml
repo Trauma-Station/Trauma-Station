@@ -46,7 +46,6 @@
   - type: ItemToggleSize
     activatedSize: Normal
   - type: ToggleAnimation
-  - type: EnchantingTool
   - type: Tag
     tags:
     - HereticItem
@@ -124,7 +123,8 @@
     - HereticItem
     - AnchorHereticStructure
   - type: Injector
-    ignoreClosed: false
+    breakOnMove: false
+    ignoreClosed: true
     interactionRangeOverride: 16
     allowedModes:
     - PhylacteryDrainMode

@@ -173,7 +173,7 @@ public abstract partial class SharedHereticAbilitySystem
 
             foreach (var toRust in Lookup.GetEntitiesInRange(coords, lookupRange, LookupFlags.Static))
             {
-                TryMakeRustWall(toRust, null, rustStrength);
+                TryMakeRustWall(toRust, rustStrengthOverride: rustStrength);
             }
         }
     }
@@ -218,26 +218,26 @@ public abstract partial class SharedHereticAbilitySystem
 
             foreach (var toRust in Lookup.GetEntitiesInRange(coords, args.LookupRange, LookupFlags.Static))
             {
-                TryMakeRustWall(toRust, null, args.RustStrength);
+                TryMakeRustWall(toRust, rustStrengthOverride: args.RustStrength);
             }
         }
     }
 
-    public bool CanSurfaceBeRusted(EntityUid target, Entity<HereticComponent>? ent, out int surfaceStrength)
+    public bool CanSurfaceBeRusted(EntityUid target, EntityUid? user, HereticComponent? heretic, out int surfaceStrength)
     {
         surfaceStrength = 0;
 
         if (!TryComp(target, out RustRequiresPathStageComponent? requiresPathStage))
             return true;
 
-        var stage = ent == null ? 10 : ent.Value.Comp.PathStage;
+        var stage = heretic == null ? 10 : heretic.PathStage;
         surfaceStrength = requiresPathStage.PathStage;
 
         if (surfaceStrength <= stage)
             return true;
 
-        if (ent != null)
-            Popup.PopupClient(Loc.GetString("heretic-ability-fail-rust-stage-low"), ent.Value, ent.Value);
+        if (user != null)
+            Popup.PopupClient(Loc.GetString("heretic-ability-fail-rust-stage-low"), user.Value, user.Value);
 
         return false;
     }
@@ -257,16 +257,16 @@ public abstract partial class SharedHereticAbilitySystem
             Spawn(tileRune, new EntityCoordinates(gridUid, tileRef.GridIndices));
     }
 
-    public bool TryMakeRustWall(EntityUid target, Entity<HereticComponent>? ent = null, int? rustStrengthOverride = null)
+    public bool TryMakeRustWall(EntityUid target, EntityUid? user = null, HereticComponent? heretic = null, int? rustStrengthOverride = null)
     {
-        var canRust = CanSurfaceBeRusted(target, ent, out var surfaceStrength);
+        var canRust = CanSurfaceBeRusted(target, user, heretic, out var surfaceStrength);
 
         if (TryComp(target, out RustedWallComponent? wall))
         {
             if (wall.LifeStage != ComponentLifeStage.Running)
                 return true;
 
-            if (surfaceStrength > (rustStrengthOverride ?? ent?.Comp.PathStage ?? -1))
+            if (surfaceStrength > (rustStrengthOverride ?? heretic?.PathStage ?? -1))
                 return false;
 
             PredictedDel(target);
@@ -300,9 +300,6 @@ public abstract partial class SharedHereticAbilitySystem
             return false;
 
         EnsureComp<RustedWallComponent>(targetEntity);
-
-        if (_net.IsClient)
-            return true;
 
         var rune = EnsureComp<RustRuneComponent>(targetEntity);
         // If targetEntity is target (which means no transformations were performed) - we add rust overlay

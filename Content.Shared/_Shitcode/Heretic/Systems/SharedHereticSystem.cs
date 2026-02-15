@@ -166,6 +166,11 @@ public abstract class SharedHereticSystem : EntitySystem
 
         var data = _proto.Index(id);
 
+        if (data.HereticEvent is { } hereticEv)
+        {
+            RaiseLocalEvent(ent.Owner, hereticEv);
+        }
+
         if (data.Event != null && body != null)
         {
             var ev = _serialization.CreateCopy(data.Event, notNullableOverride: true);

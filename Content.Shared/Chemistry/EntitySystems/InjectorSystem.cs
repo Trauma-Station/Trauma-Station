@@ -36,9 +36,6 @@ public sealed partial class InjectorSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    // <Trauma>
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    // </Trauma>
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedForensicsSystem _forensics = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -51,6 +48,7 @@ public sealed partial class InjectorSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<InjectorComponent, BeforeRangedInteractEvent>(OnBeforeRangedInteract); // Trauma
         SubscribeLocalEvent<InjectorComponent, UseInHandEvent>(OnInjectorUse);
         SubscribeLocalEvent<InjectorComponent, AfterInteractEvent>(OnInjectorAfterInteract);
         SubscribeLocalEvent<InjectorComponent, InjectorDoAfterEvent>(OnInjectDoAfter);
@@ -76,17 +74,8 @@ public sealed partial class InjectorSystem : EntitySystem
 
     private void OnInjectorAfterInteract(Entity<InjectorComponent> injector, ref AfterInteractEvent args)
     {
-        // <Trauma>
-        if (args.Handled || args.Target is not { Valid: true } target)
+        if (args.Handled || !args.CanReach || args.Target is not { Valid: true } target)
             return;
-
-        if (!args.CanReach)
-        {
-            if (injector.Comp.InteractionRangeOverride is not { } range ||
-                !_interaction.InRangeAndAccessible(args.User, target, range))
-                return;
-        }
-        // </Trauma>
 
         // Is the target a mob? If yes, use a do-after to give them time to respond.
         if (HasComp<BloodstreamComponent>(target))
@@ -215,7 +204,10 @@ public sealed partial class InjectorSystem : EntitySystem
 
         if (!_doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, doAfterTime, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner)
         {
-            BreakOnMove = true,
+            // <Trauma>
+            BreakOnMove = injector.Comp.BreakOnMove,
+            DistanceThreshold = injector.Comp.InteractionRangeOverride ?? 1.5f,
+            // </Trauma>
             BreakOnWeightlessMove = false,
             BreakOnDamage = true,
             NeedHand = injector.Comp.NeedHand,
@@ -333,7 +325,10 @@ public sealed partial class InjectorSystem : EntitySystem
 
         return _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, doAfterTime, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner)
         {
-            BreakOnMove = true,
+            // <Trauma>
+            BreakOnMove = injector.Comp.BreakOnMove,
+            DistanceThreshold = injector.Comp.InteractionRangeOverride ?? 1.5f,
+            // </Trauma>
             BreakOnWeightlessMove = false,
             BreakOnDamage = true,
             NeedHand = injector.Comp.NeedHand,
@@ -592,7 +587,7 @@ public sealed partial class InjectorSystem : EntitySystem
     {
         if (GetSolutionEnt(injector) is not {} solutionEnt || solutionEnt.Comp.Solution.AvailableVolume == 0) // Trauma - use GetSolutionEnt
         {
-            _popup.PopupClient("injector-component-cannot-toggle-draw-message", user, user);
+            _popup.PopupClient(Loc.GetString("injector-component-cannot-toggle-draw-message"), user, user); // Trauma - added Loc.GetString
             return false;
         }
 
@@ -681,8 +676,7 @@ public sealed partial class InjectorSystem : EntitySystem
             if (activeMode.DrawPopupTarget != null && target.Owner != user)
                 _popup.PopupClient(Loc.GetString(activeMode.DrawPopupTarget), target, target);
 
-            if (activeMode.InjectSound != null)
-                _audio.PlayPredicted(activeMode.DrawSound, injector, user);
+            _audio.PlayPredicted(activeMode.DrawSound, target, user);
         }
         // </Trauma>
 

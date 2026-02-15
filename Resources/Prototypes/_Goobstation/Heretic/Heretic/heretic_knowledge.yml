@@ -639,14 +639,14 @@
   sideKnowledge: true
   stage: 6
   ritualPrototypes:
-  - ThroughTheBoundary
+  - RitualThroughTheBoundary
 
 - type: hereticKnowledge
   id: MindGrasp
   sideKnowledge: true
   stage: 6
-  event: !type:HereticGraspUpgradeEvent
-    graspComponents:
+  hereticEvent: !type:HereticGraspUpgradeEvent
+    addedComponents:
     - type: AreaMansusGrasp
 
 ## stage 8

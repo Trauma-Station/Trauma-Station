@@ -185,7 +185,9 @@
       # Goobstation - changelings
       enum.StoreUiKey.Key:
         type: StoreBoundUserInterface
+  - type: StepTriggerImmune
   - type: Puller
+    needsHands: false
   - type: Speech
     speechSounds: null
   - type: DamageForceSay

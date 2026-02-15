@@ -1602,7 +1602,7 @@
     - !type:LookupRitualEffect
       applyOn: Platform
       result: Look
-    - !type:AddToLimitRitualEffect
+    - !type:SaveResultRitualEffect
       applyOn: Look
       result: Targets
       individualConditions:
@@ -1630,6 +1630,7 @@
         applyOn: Targets
         result: Result
         min: 1
+        max: 1
         cancelLoc: heretic-ritual-fail-sacrifice
     - !type:EffectsRitualEffect
       applyOn: Delete
@@ -1648,7 +1649,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Icon
-    sprite: _Goobstation/Heretic/Clothing/Shoes/greaves.rs
+    sprite: _Goobstation/Heretic/Clothing/Shoes/greaves.rsi
     state: icon
   - type: HereticRitual
     effects:
@@ -1709,7 +1710,7 @@
     - !type:LookupRitualEffect
       applyOn: Platform
       result: Look
-    - !type:AddToLimitRitualEffect
+    - !type:SaveResultRitualEffect
       applyOn: Look
       result: Targets
       individualConditions:
@@ -1881,7 +1882,7 @@
         - whitelist:
             components:
             - Lung
-          name: heretic-ritual-ingredient-heretic-lung
+          name: heretic-ritual-ingredient-lung
         - whitelist:
             components:
             - SuitSensor

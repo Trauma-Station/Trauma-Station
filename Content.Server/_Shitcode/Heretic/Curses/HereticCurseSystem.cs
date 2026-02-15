@@ -3,6 +3,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared._Goobstation.Wizard;
 using Content.Shared._Shitcode.Heretic.Curses;
+using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates;
@@ -52,6 +53,7 @@ public sealed partial class HereticCurseSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly HereticRitualSystem _ritual = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedHereticSystem _heretic = default!;
 
     public override void Initialize()
     {
@@ -90,7 +92,7 @@ public sealed partial class HereticCurseSystem : EntitySystem
 
     private void OnCurseSelected(Entity<HereticCurseProviderComponent> ent, ref CurseSelectedMessage args)
     {
-        if (!HasComp<HereticComponent>(args.Actor) && !HasComp<GhoulComponent>(args.Actor))
+        if (!_heretic.IsHereticOrGhoul(args.Actor))
         {
             CloseUi(ent);
             return;
@@ -205,7 +207,7 @@ public sealed partial class HereticCurseSystem : EntitySystem
         if (!args.CanInteract || !args.CanAccess)
             return;
 
-        if (!HasComp<HereticComponent>(args.User) && !HasComp<GhoulComponent>(args.User))
+        if (!_heretic.IsHereticOrGhoul(args.User))
             return;
 
         if (!TryComp(args.Using, out HereticCurseProviderComponent? provider))
@@ -343,7 +345,7 @@ public sealed partial class HereticCurseSystem : EntitySystem
 
     private bool CanCurse(Entity<MobStateComponent?> uid)
     {
-        return !_mobState.IsDead(uid) && !HasComp<HereticComponent>(uid) && !HasComp<GhoulComponent>(uid) &&
+        return !_mobState.IsDead(uid) && !_heretic.IsHereticOrGhoul(uid) &&
                !HasComp<WizardComponent>(uid) && !HasComp<ApprenticeComponent>(uid);
     }
 

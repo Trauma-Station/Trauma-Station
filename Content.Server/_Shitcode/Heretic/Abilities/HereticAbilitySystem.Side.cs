@@ -15,6 +15,7 @@ using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Heretic;
+using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Polymorph;
 using Robust.Shared.Prototypes;
@@ -39,7 +40,7 @@ public sealed partial class HereticAbilitySystem
             return;
 
         var upgrade = EnsureComp<MansusGraspUpgradeComponent>(grasp.Value);
-        foreach (var (key, value) in args.GraspComponents)
+        foreach (var (key, value) in args.AddedComponents)
         {
             upgrade.AddedComponents[key] = value;
         }

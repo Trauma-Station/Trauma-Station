@@ -142,7 +142,7 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 3
+    stage: 0
 
 - type: listing
   id: HereticSidePath7RustWalker

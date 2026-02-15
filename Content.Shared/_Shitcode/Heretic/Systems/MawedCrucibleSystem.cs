@@ -29,6 +29,7 @@ public sealed class MawedCrucibleSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
+    [Dependency] private readonly SharedHereticSystem _heretic = default!;
 
     public override void Initialize()
     {
@@ -58,7 +59,7 @@ public sealed class MawedCrucibleSystem : EntitySystem
 
     private void OnExamine(Entity<MawedCrucibleComponent> ent, ref ExaminedEvent args)
     {
-        if (!HereticOrGhoul(args.Examiner))
+        if (!_heretic.IsHereticOrGhoul(args.Examiner))
             return;
 
         if (ent.Comp.CurrentMass > 0)
@@ -79,7 +80,7 @@ public sealed class MawedCrucibleSystem : EntitySystem
 
     private void OnInteract(Entity<MawedCrucibleComponent> ent, ref InteractUsingEvent args)
     {
-        if (!HereticOrGhoul(args.User))
+        if (!_heretic.IsHereticOrGhoul(args.User))
             return;
 
         var xform = Transform(ent);
@@ -205,10 +206,5 @@ public sealed class MawedCrucibleSystem : EntitySystem
 
         ent.Comp.CurrentMass = newMass;
         Dirty(ent);
-    }
-
-    private bool HereticOrGhoul(EntityUid uid)
-    {
-        return HasComp<HereticComponent>(uid) || HasComp<GhoulComponent>(uid);
     }
 }
