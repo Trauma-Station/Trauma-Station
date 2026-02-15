@@ -144,6 +144,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         var knowledge = (knowledgeUnit, knowledgeComponent);
 
+        if (_timing.CurTick.Value < knowledgeComponent.LastExperienceTick + (uint) (1.0f * _timing.TickRate))
+            return;
+
+        knowledgeComponent.LastExperienceTick = _timing.CurTick.Value;
+
         var getMastery = GetMastery(knowledge);
         knowledgeComponent.Experience += args.Experience + knowledgeComponent.BonusExperience;
         if (knowledgeComponent.Experience >= knowledgeComponent.ExperienceCost || knowledgeComponent.Level < 100)
@@ -605,7 +610,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public int GetMastery(EntityUid? uid)
     {
-        return GetMastery(uid ?? EntityUid.Invalid);
+        if (uid is { } validUid)
+            return GetMastery(validUid);
+        return 0;
     }
     public override float SharpCurve(Entity<KnowledgeComponent> knowledge)
     {

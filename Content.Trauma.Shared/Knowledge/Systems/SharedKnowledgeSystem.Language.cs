@@ -246,15 +246,24 @@ public abstract partial class SharedKnowledgeSystem
 
         if (knownLanguage is { } knownLanguageTrue && TryComp<LanguageKnowledgeComponent>(knownLanguageTrue, out var languageKnowledgeComponent))
         {
-            var entitiesNearby = _lookup.GetEntitiesInRange(ent, 7f);
             var modifier = 0.0f;
             bool isCurse = GetMastery(knownLanguageTrue) >= 5 && ContainsCursedWord(args.Message);
             var damage = new DamageSpecifier();
+
             if (isCurse && TryComp<KnowledgeComponent>(knownLanguageTrue, out var knowledgeComponent))
             {
                 modifier = Math.Max(((float) knowledgeComponent.Level - 80f) / 20f, 0f);
                 damage.DamageDict.Add("Brute", 20 * modifier);
+                if (_timing.CurTick.Value < knowledgeComponent.LastExperienceTick + (5.0f * _timing.TickRate))
+                {
+                    var ev = new AddExperience($"language-{args.Language.ID}", (int) Math.Clamp((float) (_timing.CurTick.Value - knowledgeComponent.LastExperienceTick) / _timing.TickRate, 0, 4));
+                    if (ev.Experience > 0)
+                        RaiseLocalEvent(ent, ref ev);
+                    UpdateEntityLanguages(ent);
+                }
             }
+
+            var entitiesNearby = _lookup.GetEntitiesInRange(ent, 7f);
             foreach (var hearer in entitiesNearby)
             {
                 var ev = new AddExperience($"language-{args.Language.ID}", 1);
@@ -271,13 +280,6 @@ public abstract partial class SharedKnowledgeSystem
                         _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
                     }
                 }
-            }
-            if (_timing.CurTick.Value - languageKnowledgeComponent.LastSentMessage >= 250)
-            {
-                var ev = new AddExperience($"language-{args.Language.ID}", Math.Clamp((int) (_timing.CurTick.Value - languageKnowledgeComponent.LastSentMessage - 250) / 100, 1, 4));
-                RaiseLocalEvent(ent, ref ev);
-                languageKnowledgeComponent.LastSentMessage = _timing.CurTick.Value;
-                UpdateEntityLanguages(ent);
             }
             Dirty(knownLanguageTrue, languageKnowledgeComponent);
             return;

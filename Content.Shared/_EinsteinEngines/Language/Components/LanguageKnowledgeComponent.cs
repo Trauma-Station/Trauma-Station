@@ -28,10 +28,4 @@ public sealed partial class LanguageKnowledgeComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<LanguagePrototype> LanguageId;
-
-    /// <summary>
-    ///     Time of last sent message.
-    /// </summary>
-    [DataField]
-    public uint LastSentMessage = 0;
 }

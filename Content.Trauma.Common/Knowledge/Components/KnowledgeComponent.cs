@@ -72,4 +72,10 @@ public sealed partial class KnowledgeComponent : Component
     /// </summary>
     [DataField]
     public int BonusExperience;
+
+    /// <summary>
+    /// Temporary experience boosts that are granted by certain equipment.
+    /// </summary>
+    [DataField]
+    public uint LastExperienceTick;
 }
