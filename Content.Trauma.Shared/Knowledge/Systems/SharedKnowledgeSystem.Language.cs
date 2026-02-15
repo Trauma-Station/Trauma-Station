@@ -11,6 +11,7 @@ using Content.Shared.StatusEffectNew;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Prototypes;
+using YamlDotNet.Core.Tokens;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
@@ -33,11 +34,16 @@ public abstract partial class SharedKnowledgeSystem
 
     public void UpdateEntityLanguages(Entity<LanguageSpeakerComponent> ent)
     {
+        if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder))
+            return;
+
+        var entHolder = (ent, knowledgeHolder);
+
         var ev = new DetermineEntityLanguagesEvent();
         // We add the intrinsically known languages first so other systems can manipulate them easily
-        if (TryGetKnowledgeEntity(ent) is { } knowledgeEnt)
+        if (TryGetKnowledgeEntity(entHolder) is { } knowledgeEnt)
         {
-            var knownLanguages = TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(knowledgeEnt);
+            var knownLanguages = TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(ent);
 
             if (knownLanguages != null)
             {
@@ -73,11 +79,20 @@ public abstract partial class SharedKnowledgeSystem
 
         _language.EnsureValidLanguage(ent);
 
-        // Updates the KnowledgeEntity that is attached to LanguageSpeaker. If this fails, LanguageSpeaker is probably attached to an item or something.
-        if (TryGetKnowledgeEntity(ent) is { } knowledgeEnt2)
+        SpeakerToKnowledge(ent);
+    }
+
+    private void SpeakerToKnowledge(Entity<LanguageSpeakerComponent> ent)
+    {
+        if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder))
+            return;
+
+        var entHolder = (ent, knowledgeHolder);
+
+        if (TryGetKnowledgeEntity(entHolder) is { } knowledgeEnt)
         {
-            var knowledgeContainerComp = Comp<KnowledgeContainerComponent>(knowledgeEnt2);
-            var knownLanguages = TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(knowledgeEnt2);
+            var knowledgeContainerComp = Comp<KnowledgeContainerComponent>(knowledgeEnt);
+            var knownLanguages = TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(ent);
 
             if (knownLanguages != null)
             {
@@ -87,14 +102,14 @@ public abstract partial class SharedKnowledgeSystem
                     {
                         knowledgeContainerComp.LanguageSkillUid = language;
                         Dirty(ent);
-                        Dirty(knowledgeEnt2, knowledgeContainerComp);
+                        Dirty(knowledgeEnt, knowledgeContainerComp);
                         return;
                     }
                 }
             }
             // This means that there is no language skill that the user is using. (i.e. using a translator.)
             knowledgeContainerComp.LanguageSkillUid = null;
-            Dirty(knowledgeEnt2, knowledgeContainerComp);
+            Dirty(knowledgeEnt, knowledgeContainerComp);
         }
 
         Dirty(ent);
@@ -102,10 +117,14 @@ public abstract partial class SharedKnowledgeSystem
 
     public void OnLanguageAdded(Entity<LanguageSpeakerComponent> ent, ref AddLanguageEvent args)
     {
+        if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder))
+            return;
+
+        var entHolder = (ent, knowledgeHolder);
         // We add the intrinsically known languages first so other systems can manipulate them easily
-        if (TryGetKnowledgeEntity(ent) is { } knowledgeEnt && TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledge) && knowledge.KnowledgeContainer != null)
+        if (TryGetKnowledgeEntity(entHolder) is { } knowledgeEnt && TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledge) && knowledge.KnowledgeContainer != null)
         {
-            var knownLanguages = TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(knowledgeEnt);
+            var knownLanguages = TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(ent);
 
             if (knownLanguages != null)
             {
@@ -121,15 +140,15 @@ public abstract partial class SharedKnowledgeSystem
 
                 if (languageToAdd == null)
                 {
-                    if (!TryAddKnowledgeUnit(knowledgeEnt, new KeyValuePair<EntProtoId, int>($"language-{args.Language.Id}", 26)))
-                        Log.Debug($"Language entity already exists for language {args.Language.Id} in entity {ToPrettyString(ent)}");
+                    if (TryAddKnowledgeUnit(knowledgeEnt, ($"language-{args.Language.Id}", 26)) is not { })
+                        Log.Debug($"Couldn't add {args.Language.Id} in entity {ToPrettyString(ent)}");
                 }
                 // Do nothing if they already know the language
             }
             else
             {
-                if (!TryAddKnowledgeUnit(knowledgeEnt, new KeyValuePair<EntProtoId, int>($"language-{args.Language.Id}", 26)))
-                    Log.Debug($"Language entity already exists for language {args.Language.Id} in entity {ToPrettyString(ent)}");
+                if (TryAddKnowledgeUnit(knowledgeEnt, ($"language-{args.Language.Id}", 26)) is not { })
+                    Log.Debug($"Couldn't add {args.Language.Id} in entity {ToPrettyString(ent)}");
             }
             Dirty(ent);
             UpdateEntityLanguages(ent);
@@ -138,10 +157,12 @@ public abstract partial class SharedKnowledgeSystem
 
     public void OnLanguageRemoved(Entity<LanguageSpeakerComponent> ent, ref RemoveLanguageEvent args)
     {
+        if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder))
+            return;
 
-        if (TryGetKnowledgeEntity(ent) is { } knowledgeEnt && TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledge) && knowledge.KnowledgeContainer != null)
+        if (TryGetKnowledgeEntity((ent, knowledgeHolder)) is { } knowledgeEnt && TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledge) && knowledge.KnowledgeContainer != null)
         {
-            var knownLanguages = TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(knowledgeEnt);
+            var knownLanguages = TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(ent);
 
             if (knownLanguages != null)
             {
@@ -176,31 +197,47 @@ public abstract partial class SharedKnowledgeSystem
 
     public void OnLanguageInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
     {
-        if (TryGetKnowledgeEntity(ent) is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainer))
+        if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder))
             return;
 
-        EnsureContainer((knowledgeEnt, knowledgeContainer));
+        var knowledgeEnt = EnsureKnowledgeContainer((ent, knowledgeHolder));
 
-        //Log.Debug($"Entity {ToPrettyString(ent)} has knowledge entity {ToPrettyString(knowledgeEnt)}");
-        //Log.Debug($"Entity {ToPrettyString(ent)} has {ent.Comp.Speaks.Count()} speaks and {ent.Comp.Understands.Count()} understands.");
-        foreach (var spoken in ent.Comp.Speaks)
+        var allLanguages = ent.Comp.Speaks
+            .Select(l => (Id: l, Speaks: true))
+            .Concat(ent.Comp.Understands
+                .Where(u => !ent.Comp.Speaks.Contains(u))
+                .Select(u => (Id: u, Speaks: false)));
+
+        foreach (var lang in allLanguages)
         {
-            if (!TryAddKnowledgeUnit(knowledgeEnt, new KeyValuePair<EntProtoId, int>($"language-{spoken.Id}", 26)))
-                Log.Debug($"Language entity already exists for language {spoken.Id} in entity {ToPrettyString(ent)}");
+            var protoId = $"language-{lang.Id}";
+            var languageUnit = TryAddKnowledgeUnit(ent, (protoId, 26));
+
+            if (languageUnit == null)
+            {
+                Log.Debug($"FAILED to add language {lang.Id} to {ToPrettyString(ent)}. Check Prototype ID: {protoId}");
+                continue;
+            }
+
+            if (TryComp<LanguageKnowledgeComponent>(languageUnit, out var langComp))
+            {
+                langComp.Speaks = lang.Speaks;
+                langComp.Understands = true;
+
+                Dirty(languageUnit.Value, langComp);
+            }
         }
 
-        foreach (var understood in ent.Comp.Understands.Except(ent.Comp.Speaks))
-        {
-            if (TryAddKnowledgeUnit(knowledgeEnt, new KeyValuePair<EntProtoId, int>($"language-{understood.Id}", 26)))
-                Log.Debug($"FLanguage entity already exists for language {understood.Id} in entity {ToPrettyString(ent)}");
-        }
-
+        Dirty(ent);
         UpdateEntityLanguages(ent);
     }
 
     public void OnLanguageSpoke(Entity<LanguageSpeakerComponent> ent, ref EntitySpokeEvent args)
     {
-        if (TryGetKnowledgeEntity(ent) is not { } knowledgeEnt)
+        if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder))
+            return;
+
+        if (TryGetKnowledgeEntity((ent, knowledgeHolder)) is not { } knowledgeEnt)
             return;
         if (!TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledge) || knowledge.KnowledgeContainer == null)
             return;

@@ -76,11 +76,11 @@ public abstract partial class SharedGunSystem
     /// <summary>
     /// Trauma - changed component to Entity, added user, made public
     /// </summary>
-    public Angle GetRecoilAngle(TimeSpan curTime, Entity<GunComponent> ent, Angle direction, EntityUid? user = null)
+    public Angle GetRecoilAngle(TimeSpan curTime, Entity<GunComponent> ent, Angle direction, EntityUid? user = null, float spreadScale = 1.0f)
     {
         var (uid, comp) = ent;
         var timeSinceLastFire = (curTime - comp.LastFire).TotalSeconds;
-        var newTheta = MathHelper.Clamp(comp.CurrentAngle.Theta + comp.AngleIncreaseModified.Theta - comp.AngleDecayModified.Theta * timeSinceLastFire, comp.MinAngleModified.Theta, comp.MaxAngleModified.Theta);
+        var newTheta = MathHelper.Clamp(comp.CurrentAngle.Theta + spreadScale * comp.AngleIncreaseModified.Theta - comp.AngleDecayModified.Theta * timeSinceLastFire, comp.MinAngleModified.Theta, comp.MaxAngleModified.Theta);
         comp.CurrentAngle = new Angle(newTheta);
         comp.LastFire = comp.NextFire;
 
@@ -95,9 +95,9 @@ public abstract partial class SharedGunSystem
         random *= angleEv.Modifier;
         // </Goob>
 
-        var spread = comp.CurrentAngle.Theta * random;
-        var angle = new Angle(direction.Theta + comp.CurrentAngle.Theta * random);
-        DebugTools.Assert(spread <= comp.MaxAngleModified.Theta);
+        var spread = comp.CurrentAngle.Theta * random * spreadScale;
+        var angle = new Angle(direction.Theta + comp.CurrentAngle.Theta * random * spreadScale);
+        DebugTools.Assert(spread <= comp.MaxAngleModified.Theta * spreadScale);
         return angle;
     }
 }

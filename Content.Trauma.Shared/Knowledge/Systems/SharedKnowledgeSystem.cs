@@ -11,6 +11,7 @@ using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -34,9 +35,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly BodySystem _body = default!;
 
-    private EntityQuery<KnowledgeComponent> _knowledgeQuery;
-    private EntityQuery<KnowledgeContainerComponent> _containerQuery;
-
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -51,12 +49,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         SubscribeLocalEvent<KnowledgeContainerComponent, ConstructionGetGroupsEvent>(OnConstructionGetGroupEvent);
 
+        SubscribeLocalEvent<KnowledgeContainerComponent, ComponentInit>(OnComponentInit);
 
         //Experience Methods
         SubscribeLocalEvent<KnowledgeHolderComponent, AddExperience>(OnAddExperience);
-
-        _knowledgeQuery = GetEntityQuery<KnowledgeComponent>();
-        _containerQuery = GetEntityQuery<KnowledgeContainerComponent>();
     }
 
     private void OnKnowledgeContainerShutdown(Entity<KnowledgeContainerComponent> ent, ref ComponentShutdown args)
@@ -126,42 +122,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         return false;
     }
 
-    private void OnHolderStartup(Entity<KnowledgeHolderComponent> ent, ref ComponentStartup args)
-    {
-        SetupHolder(ent);
-    }
-
-    private void OnContainerStartup(Entity<KnowledgeContainerComponent> ent, ref ComponentStartup args)
-    {
-        FindEntityHolder(ent);
-    }
-
-    public void SetupHolder(Entity<KnowledgeHolderComponent> ent)
-    {
-        ent.Comp.KnowledgeEntity = TryGetKnowledgeEntity(ent);
-        Dirty(ent.Owner, ent.Comp);
-        if (TryComp<LanguageSpeakerComponent>(ent.Owner, out var languageSpeaker))
-            UpdateEntityLanguages((ent, languageSpeaker));
-    }
-
-    public void FindEntityHolder(Entity<KnowledgeContainerComponent> ent)
-    {
-        if (!_container.TryGetContainingContainer((ent.Owner, null, null), out var container))
-            return;
-
-        var bodyUid = container.Owner;
-
-        if (!HasComp<KnowledgeHolderComponent>(bodyUid))
-        {
-            AddComp<KnowledgeHolderComponent>(bodyUid);
-        }
-        if (TryComp<KnowledgeHolderComponent>(bodyUid, out var holder))
-            SetupHolder((bodyUid, holder));
-    }
-
     public void OnInit(Entity<KnowledgeHolderComponent> ent)
     {
-        EnsureKnowledgeContainer(ent.Owner, out var knowledgeContainer);
+        var knowledgeContainer = EnsureKnowledgeContainer(ent);
         ent.Comp.KnowledgeEntity = knowledgeContainer.Owner;
         Dirty(ent.Owner, ent.Comp);
 
@@ -172,17 +135,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public void OnAddExperience(Entity<KnowledgeHolderComponent> ent, ref AddExperience args)
     {
-        if (TryGetKnowledgeEntity(ent.Owner) is not { } knowledgeEntity || !TryComp<KnowledgeContainerComponent>(knowledgeEntity, out var knowledgeContainer))
-            return;
         if (TryGetKnowledgeUnit(ent, args.KnowledgeType) is not { } knowledgeUnit || !TryComp<KnowledgeComponent>(knowledgeUnit, out var knowledgeComponent))
         {
             if (_random.Prob(0.2f))
-                TryAddKnowledgeUnit(ent, new KeyValuePair<EntProtoId, int>(args.KnowledgeType, 0));
+                TryAddKnowledgeUnit(ent, (args.KnowledgeType, 0));
             return;
         }
+
         var knowledge = (knowledgeUnit, knowledgeComponent);
 
-        var getMastery = GetMastery(knowledgeComponent);
+        var getMastery = GetMastery(knowledge);
         knowledgeComponent.Experience += args.Experience + knowledgeComponent.BonusExperience;
         if (knowledgeComponent.Experience >= knowledgeComponent.ExperienceCost || knowledgeComponent.Level < 100)
         {
@@ -204,23 +166,15 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 knowledgeComponent.Level += rollResult.Item1;
                 var knowledgePrototype = MetaData(knowledgeUnit).EntityPrototype?.ID;
                 if (rollResult.Item2)
-                {
-                    if (TryComp<LanguageKnowledgeComponent>(knowledgeUnit, out var knowledgeComp))
-                        _popup.PopupEntity(Loc.GetString("knowledge-level-epiphany", ("knowledge", Loc.GetString($"{knowledgeComp.LanguageId.Id}"))), ent, ent, PopupType.Medium);
-                    else
-                        _popup.PopupEntity(Loc.GetString("knowledge-level-epiphany", ("knowledge", Loc.GetString($"knowledge-{knowledgePrototype}"))), ent, ent, PopupType.Medium);
-                }
+                    _popup.PopupEntity(Loc.GetString("knowledge-level-epiphany", ("knowledge", Loc.GetString(PopupString(knowledgeUnit)))), ent, ent, PopupType.Medium);
             }
         }
         if (knowledgeComponent.Level > 100)
             knowledgeComponent.Level = 100;
-        if (getMastery != GetMastery(knowledgeComponent))
+        if (getMastery != GetMastery(knowledge))
         {
             var knowledgePrototype = MetaData(knowledgeUnit).EntityPrototype?.ID;
-            if (TryComp<LanguageKnowledgeComponent>(knowledgeUnit, out var knowledgeComp))
-                _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString($"{knowledgeComp.LanguageId.Id}")), ("mastery", GetMasteryString(knowledge).ToLower())), ent, ent, PopupType.Medium);
-            else
-                _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgePrototype}")), ("mastery", GetMasteryString(knowledge).ToLower())), ent, ent, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString(PopupString(knowledgeUnit))), ("mastery", GetMasteryString(knowledge).ToLower())), ent, ent, PopupType.Medium);
         }
         Dirty(ent);
     }
@@ -268,7 +222,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         [NotNullWhen(true)] out EntityUid? found)
     {
         found = null;
-        EnsureKnowledgeContainer(target, out var ent);
+        if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent))
+            return false;
+
+        var ent = EnsureKnowledgeContainer((target, holderComponent));
         EnsureContainer(ent);
 
         if (TryGetKnowledgeUnit(ent.Owner, knowledgeId) is { } uid)
@@ -281,48 +238,45 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     }
 
     /// <summary>
-    /// Adds a knowledge unit to a knowledge container.
+    /// Returns the knowledge unit.
     /// </summary>
     /// <returns>
-    /// False if container already has knowledge entity with that ID.
+    /// Null if no unit found.
     /// </returns>
-    public override bool TryAddKnowledgeUnit(EntityUid target, KeyValuePair<EntProtoId, int> knowledgeId)
+    public override Entity<KnowledgeComponent>? TryAddKnowledgeUnit(EntityUid target, (EntProtoId, int) knowledgeId)
     {
-        return TryAddKnowledgeUnit(target, knowledgeId, out _);
-    }
+        Entity<KnowledgeComponent>? knowledgeEnt = null;
 
-    /// <inheretdoc cref="TryAddKnowledgeUnit(Robust.Shared.GameObjects.EntityUid, System.Collections.Generic.KeyValuePair{Content.Shared.EntityTable.EntitySelectors.EntProtoId, int})"/>
-    public override bool TryAddKnowledgeUnit(EntityUid target, KeyValuePair<EntProtoId, int> knowledgeId, [NotNullWhen(true)] out EntityUid? knowledgeUnit)
-    {
-        knowledgeUnit = null;
+        if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent))
+            return knowledgeEnt;
 
-        EnsureKnowledgeContainer(target, out var ent);
-        EnsureContainer(ent);
+        var ent = EnsureKnowledgeContainer((target, holderComponent));
+        var container = EnsureContainer(ent);
 
-        if (TryGetKnowledgeUnit(ent.Owner, knowledgeId.Key) is { } uid)
+        if (TryGetKnowledgeUnit(target, knowledgeId.Item1) is { } uid)
         {
-            knowledgeUnit = uid;
-            if (TryComp<KnowledgeComponent>(uid, out var knowledgeComp) && knowledgeComp.Level < knowledgeId.Value)
+            if (TryComp<KnowledgeComponent>(uid, out var knowledgeComp) && knowledgeComp.Level < knowledgeId.Item2)
             {
-                knowledgeComp.Level = knowledgeId.Value;
+                knowledgeComp.Level = knowledgeId.Item2;
+                Dirty(uid, knowledgeComp);
+                knowledgeEnt = (uid, knowledgeComp);
             }
-            Dirty(ent);
-            return false;
         }
         else
         {
             if (_netManager.IsClient)
-                return false;
+                return knowledgeEnt;
 
-            var result = PredictedTrySpawnInContainer(knowledgeId.Key, ent.Owner, KnowledgeContainerComponent.ContainerId, out knowledgeUnit);
+            var result = PredictedTrySpawnInContainer(knowledgeId.Item1, ent.Owner, KnowledgeContainerComponent.ContainerId, out var knowledgeUnit);
             if (!result || knowledgeUnit is not { } knowledgeUnitVerified)
-                return false;
+                return knowledgeEnt;
             if (TryComp<KnowledgeComponent>(knowledgeUnitVerified, out var knowledgeComp))
             {
-                knowledgeComp.Level = knowledgeId.Value;
+                knowledgeComp.Level = knowledgeId.Item2;
+                knowledgeEnt = (knowledgeUnitVerified, knowledgeComp);
                 Dirty(knowledgeUnitVerified, knowledgeComp);
             }
-            ent.Comp.KnowledgeContainerIDs[knowledgeId.Key] = knowledgeUnitVerified;
+            ent.Comp.KnowledgeContainerIDs[knowledgeId.Item1] = knowledgeUnitVerified;
             if (TryComp<LanguageKnowledgeComponent>(knowledgeUnitVerified, out var languageComp))
             {
                 EnsureComp<LanguageSpeakerComponent>(target);
@@ -330,12 +284,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             }
             else
             {
-                _popup.PopupEntity(Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgeId.Key.ToString()}"))), target, target, PopupType.Medium);
+                _popup.PopupEntity(Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgeId.Item1.ToString()}"))), target, target, PopupType.Medium);
 
             }
-            Dirty(ent);
-            return true;
         }
+        Dirty(ent);
+        return knowledgeEnt;
     }
 
     /// <summary>
@@ -343,17 +297,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </summary>
     public override void AddKnowledgeUnits(EntityUid target, Dictionary<EntProtoId, int> knowledgeList)
     {
-        EnsureKnowledgeContainer(target, out var ent);
-        EnsureContainer(ent);
-
-        // Log.Debug($"Adding {knowledgeList.Count()} knowledge units to {ToPrettyString(target)}");
+        var comp = EnsureComp<KnowledgeHolderComponent>(target);
 
         foreach (var knowledgeId in knowledgeList)
         {
-            TryAddKnowledgeUnit(target, knowledgeId);
+            TryAddKnowledgeUnit(target, (knowledgeId.Key, knowledgeId.Value));
         }
-        var comp = EnsureComp<KnowledgeHolderComponent>(target);
-        OnInit((target, comp));
     }
 
     /// <summary>
@@ -362,13 +311,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </summary>
     public override EntityUid? TryRemoveKnowledgeUnit(EntityUid target, EntProtoId knowledgeUnit, bool force = false)
     {
-        if (TryGetKnowledgeUnit(target, knowledgeUnit) is not { } unit || !_knowledgeQuery.TryComp(unit, out var knowledge))
+        if (TryGetKnowledgeUnit(target, knowledgeUnit) is not { } unit || !TryComp<KnowledgeComponent>(unit, out var knowledge))
             return null;
 
         if (!force && knowledge.Unremoveable)
             return null;
 
-        if (TryGetKnowledgeEntity(target) is { } knowledgeEnt && TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainer))
+        if (TryComp<KnowledgeHolderComponent>(target, out var holderComponent) && TryGetKnowledgeEntity((target, holderComponent)) is { } knowledgeEnt && TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainer))
         {
             if (knowledgeContainer.MartialArtSkillUid == unit)
                 knowledgeContainer.MartialArtSkillUid = null;
@@ -437,13 +386,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// <returns>
     /// Null if the target is not a knowledge container, or if knowledge unit wasn't found.
     /// </returns>
-    public override EntityUid? TryGetKnowledgeUnit(EntityUid target, EntProtoId knowledgeUnit)
+    public override Entity<KnowledgeComponent>? TryGetKnowledgeUnit(EntityUid target, EntProtoId knowledgeUnit)
     {
-        if (TryGetKnowledgeEntity(target) is not { } ent || !TryComp<KnowledgeContainerComponent>(ent, out var comp))
+        if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent) || TryGetKnowledgeEntity((target, holderComponent)) is not { } ent || !TryComp<KnowledgeContainerComponent>(ent, out var comp))
             return null;
 
-        if (comp.KnowledgeContainerIDs.TryGetValue(knowledgeUnit, out var knowledge))
-            return knowledge;
+        if (comp.KnowledgeContainerIDs.TryGetValue(knowledgeUnit, out var knowledge) && TryComp<KnowledgeComponent>(knowledge, out var knowledgeComponent))
+            return (knowledge, knowledgeComponent);
         else
             return null;
     }
@@ -454,12 +403,18 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override List<Entity<KnowledgeComponent>>? TryGetAllKnowledgeUnits(EntityUid target)
     {
         List<Entity<KnowledgeComponent>>? found = null;
-        EnsureKnowledgeContainer(target, out var ent);
-        EnsureContainer(ent, out var container);
+        if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent))
+            return found;
+
+        var ent = EnsureKnowledgeContainer((target, holderComponent));
+        var container = EnsureContainer(ent);
+
+        if (container == null)
+            return null;
 
         foreach (var unit in container.ContainedEntities)
         {
-            if (!_knowledgeQuery.TryComp(unit, out var knowledgeComp))
+            if (!TryComp<KnowledgeComponent>(unit, out var knowledgeComp))
                 continue;
 
             found ??= [];
@@ -474,8 +429,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </summary>
     public override EntityUid? HasKnowledgeComp<T>(EntityUid target)
     {
-        EnsureKnowledgeContainer(target, out var ent);
-        EnsureContainer(ent, out var container);
+        if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent))
+            return null;
+
+        var ent = EnsureKnowledgeContainer((target, holderComponent));
+        var container = EnsureContainer(ent);
 
         foreach (var knowledge in container.ContainedEntities)
         {
@@ -492,12 +450,15 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override List<Entity<T, KnowledgeComponent>>? TryGetKnowledgeWithComp<T>(EntityUid target)
     {
         List<Entity<T, KnowledgeComponent>>? knowledgeEnts = null;
-        EnsureKnowledgeContainer(target, out var ent);
-        EnsureContainer(ent, out var container);
+        if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent))
+            return knowledgeEnts;
+
+        var ent = EnsureKnowledgeContainer((target, holderComponent));
+        var container = EnsureContainer(ent);
 
         foreach (var knowledge in container.ContainedEntities)
         {
-            if (!_knowledgeQuery.TryComp(knowledge, out var knowledgeComp))
+            if (!TryComp<KnowledgeComponent>(knowledge, out var knowledgeComp))
                 continue;
 
             if (TryComp<T>(knowledge, out var comp))
@@ -511,120 +472,63 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     }
 
     /// <summary>
-    /// Returns all knowledge that have the specified parent EntProtoId.
-    /// </summary>
-    public override List<Entity<KnowledgeComponent>>? TryGetKnowledgeWithProtoId(EntityUid target, EntProtoId id)
-    {
-        List<Entity<KnowledgeComponent>>? knowledgeEnts = null;
-        EnsureKnowledgeContainer(target, out var ent);
-        EnsureContainer(ent, out var container);
-
-        foreach (var knowledge in container.ContainedEntities)
-        {
-            var meta = MetaData(knowledge);
-            if (meta.EntityPrototype == null)
-                continue;
-
-            var parents = _protoMan.EnumerateParents(meta.EntityPrototype);
-
-            bool add = false;
-            foreach (var item in parents)
-            {
-                if (item == id)
-                {
-                    add = true;
-                    break;
-                }
-            }
-
-            if (add && TryComp<KnowledgeComponent>(knowledge, out var comp))
-            {
-                knowledgeEnts ??= [];
-                knowledgeEnts.Add((knowledge, comp));
-            }
-        }
-
-        return knowledgeEnts;
-    }
-
-    /// <summary>
     /// Returns true if that knowledge can be removed, by taking
     /// into account its memory level and knowledge category.
     /// </summary>
     public override EntityUid? CanRemoveKnowledge(Entity<KnowledgeComponent?> target, ProtoId<KnowledgeCategoryPrototype> category, int level, bool force = false)
     {
-        if (!_knowledgeQuery.Resolve(target.Owner, ref target.Comp))
+        if (!TryComp<KnowledgeComponent>(target, out var component))
             return null;
 
         if (force)
             return target;
 
-        if (target.Comp.Unremoveable
-            || target.Comp.Category != category
-            || target.Comp.Level > level)
+        if (component.Unremoveable || component.Category != category || component.Level > level)
             return null;
 
         return target;
     }
 
-    /// <summary>
-    /// Gets a knowledge container from an entity.
-    /// Since sometimes the entity itself is a knowledge container, and sometimes it's contained in the brain,
-    /// we have to sometimes relay to the brain entity to get knowledge properly.
-    /// </summary>
-    /// <param name="uid">Main entity from which we are trying to get</param>
-    /// <returns>Entity that contains knowledge related to original uid.</returns>
-    public override Entity<KnowledgeContainerComponent> EnsureKnowledgeContainer(EntityUid uid)
+    public override Entity<KnowledgeContainerComponent>? TryGetKnowledgeContainer(Entity<KnowledgeHolderComponent> ent)
     {
-        var list = _body.GetOrgans<KnowledgeContainerComponent>(uid);
+        var list = _body.GetOrgans<KnowledgeContainerComponent>(ent.Owner);
 
         foreach (var organ in list)
         {
-            // Check entity that we have found
-            if (_containerQuery.TryComp(organ, out var knowledgeFound))
-                return (organ, knowledgeFound);
-        }
-
-        // If not found just five up
-        var knowledge = EnsureComp<KnowledgeContainerComponent>(uid);
-        return (uid, knowledge);
-    }
-
-    /// <inheritdoc cref="EnsureKnowledgeContainer(Robust.Shared.GameObjects.EntityUid)"/>
-    public override void EnsureKnowledgeContainer(EntityUid uid, out Entity<KnowledgeContainerComponent> container)
-    {
-        var list = _body.GetOrgans<KnowledgeContainerComponent>(uid);
-
-        foreach (var organ in list)
-        {
-            // Check entity that we have found
-            if (_containerQuery.TryComp(organ, out var knowledgeFound))
-            {
-                container = (organ, knowledgeFound);
-                return;
-            }
-        }
-
-        // If not found just give up and ensure it on the entity itself
-        var knowledge = EnsureComp<KnowledgeContainerComponent>(uid);
-        container = (uid, knowledge);
-    }
-
-    public override EntityUid? TryGetKnowledgeEntity(EntityUid ent)
-    {
-        if (TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder) && knowledgeHolder.KnowledgeEntity is { })
-            return knowledgeHolder.KnowledgeEntity;
-
-        var list = _body.GetOrgans<KnowledgeContainerComponent>(ent);
-
-        foreach (var organ in list)
-        {
-            // Check entity that we have found
-            if (_containerQuery.TryComp(organ, out var knowledgeFound))
-                return organ;
+            ent.Comp.KnowledgeEntity = organ;
+            Dirty(ent.Owner, ent.Comp);
+            return organ;
         }
 
         return null;
+    }
+
+    public override Entity<KnowledgeContainerComponent> EnsureKnowledgeContainer(Entity<KnowledgeHolderComponent> ent)
+    {
+        if (TryGetKnowledgeContainer(ent) is { } knowledgeContainer)
+            return knowledgeContainer;
+
+        // If not found just give up
+        var knowledge = EnsureComp<KnowledgeContainerComponent>(ent);
+        ent.Comp.KnowledgeEntity = ent;
+        Dirty(ent.Owner, ent.Comp);
+        return (ent, knowledge);
+    }
+
+    public override EntityUid? TryGetKnowledgeEntity(EntityUid uid)
+    {
+        if (TryComp<KnowledgeHolderComponent>(uid, out var knowledgeHolder) && knowledgeHolder.KnowledgeEntity is { })
+            return knowledgeHolder.KnowledgeEntity;
+
+        return null;
+    }
+
+    public override EntityUid? TryGetKnowledgeEntity(Entity<KnowledgeHolderComponent> ent)
+    {
+        if (ent.Comp.KnowledgeEntity is { })
+            return ent.Comp.KnowledgeEntity;
+
+        return TryGetKnowledgeContainer(ent);
     }
 
     public override void ChangeMartialArts(EntityUid knowledgeEntity, Entity<MartialArtsKnowledgeComponent>? martialArt)
@@ -653,10 +557,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
     }
 
-    public override List<(EntityUid, string)> GetMartialArtsForClientDoohickey(EntityUid knowledgeEntity)
+    public override List<(EntityUid, string)> GetMartialArtsForClientDoohickey(EntityUid target)
     {
         var clientMartialArts = new List<(EntityUid, string)>();
-        var martialArtsList = TryGetKnowledgeWithComp<MartialArtsKnowledgeComponent>(knowledgeEntity);
+        var martialArtsList = TryGetKnowledgeWithComp<MartialArtsKnowledgeComponent>(target);
         foreach (var martialArt in martialArtsList ?? [])
         {
             var knowledgePrototype = MetaData(martialArt.Owner).EntityPrototype?.ID;
@@ -678,9 +582,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         };
     }
 
-    public int GetMastery(KnowledgeComponent ent)
+    public override int GetMastery(Entity<KnowledgeComponent> ent)
     {
-        return ent.Level switch
+        return ent.Comp.Level switch
         {
             >= 88 => 5,
             >= 76 => 4,
@@ -691,20 +595,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         };
     }
 
-    public int GetMastery(EntityUid uid)
+    public override int GetMastery(EntityUid uid)
     {
         if (TryComp<KnowledgeComponent>(uid, out var comp))
-        {
-            return comp.Level switch
-            {
-                >= 88 => 5,
-                >= 76 => 4,
-                >= 51 => 3,
-                >= 26 => 2,
-                >= 1 => 1,
-                _ => 0,
-            };
-        }
+            return GetMastery((uid, comp));
         else
             return 0;
     }
@@ -712,6 +606,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public int GetMastery(EntityUid? uid)
     {
         return GetMastery(uid ?? EntityUid.Invalid);
+    }
+    public override float SharpCurve(Entity<KnowledgeComponent> knowledge)
+    {
+        return ((float) knowledge.Comp.Level / 100.0f) * ((float) knowledge.Comp.Level / 100.0f);
     }
 
     public (int, bool) RollPenetrating(int sides, bool didCritical = false)
@@ -740,19 +638,31 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         return (total, isCritical);
     }
 
-    private void EnsureContainer(Entity<KnowledgeContainerComponent> ent)
+    private Container EnsureContainer(Entity<KnowledgeContainerComponent> ent)
     {
+        if (ent.Comp.KnowledgeContainer != null)
+            return ent.Comp.KnowledgeContainer;
+
         ent.Comp.KnowledgeContainer = _container.EnsureContainer<Container>(ent.Owner, KnowledgeContainerComponent.ContainerId);
         // We show the contents of the container to allow knowledge to have visible sprites. I mean, if you really need to show some big brains.
         ent.Comp.KnowledgeContainer.ShowContents = true;
+
+        return ent.Comp.KnowledgeContainer;
     }
 
-    private void EnsureContainer(Entity<KnowledgeContainerComponent> ent, out Container container)
+    private void OnComponentInit(Entity<KnowledgeContainerComponent> ent, ref ComponentInit args)
     {
-        container = _container.EnsureContainer<Container>(ent.Owner, KnowledgeContainerComponent.ContainerId);
-        // We show the contents of the container to allow knowledge to have visible sprites. I mean, if you really need to show some big brains.
-        container.ShowContents = true;
+        ent.Comp.KnowledgeContainer = _container.EnsureContainer<Container>(ent.Owner, KnowledgeContainerComponent.ContainerId);
 
-        ent.Comp.KnowledgeContainer = container;
+        ent.Comp.KnowledgeContainer.ShowContents = true;
+        Dirty(ent);
+    }
+
+    private string PopupString(EntityUid knowledgeUnit)
+    {
+        if (TryComp<LanguageKnowledgeComponent>(knowledgeUnit, out var knowledgeComp))
+            return $"{knowledgeComp.LanguageId.Id}";
+        else
+            return $"knowledge-{MetaData(knowledgeUnit).EntityPrototype?.ID}";
     }
 }

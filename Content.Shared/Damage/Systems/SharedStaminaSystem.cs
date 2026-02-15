@@ -1,11 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Damage.Events;
-using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Common.Stunnable;
 using Content.Shared._Shitcode.Weapons.Misc;
-using Content.Shared.Jittering;
-using Content.Shared.Speech.EntitySystems;
-using Robust.Shared.Random;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Administration.Logs;

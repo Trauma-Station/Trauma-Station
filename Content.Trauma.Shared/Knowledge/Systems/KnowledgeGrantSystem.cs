@@ -82,7 +82,7 @@ public sealed class KnowledgeGrantSystem : EntitySystem
         {
             if (_knowledge.TryGetKnowledgeUnit(args.User, skill.Key) is not { } foundSkill)
             {
-                _knowledge.TryAddKnowledgeUnit(args.User, new KeyValuePair<EntProtoId, int>(skill.Key, 0));
+                _knowledge.TryAddKnowledgeUnit(args.User, (skill.Key, 0));
                 continue;
             }
 

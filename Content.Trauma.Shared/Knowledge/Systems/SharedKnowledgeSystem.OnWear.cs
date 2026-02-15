@@ -2,7 +2,6 @@ using Content.Shared.Clothing;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
@@ -23,7 +22,7 @@ public abstract partial class SharedKnowledgeSystem
         foreach (var skill in ent.Comp.Skills)
         {
             if (TryGetKnowledgeUnit(wearer, skill.Key) is not { } knowledgeUnit)
-                TryAddKnowledgeUnit(wearer, new KeyValuePair<EntProtoId, int>(skill.Key, 0));
+                TryAddKnowledgeUnit(wearer, (skill.Key, 0));
 
             if (TryGetKnowledgeUnit(wearer, skill.Key) is { } knowledgeUnitActual && TryComp<KnowledgeComponent>(knowledgeUnitActual, out var knowledgeComponent))
                 knowledgeComponent.TemporaryLevel += skill.Value;
@@ -31,7 +30,7 @@ public abstract partial class SharedKnowledgeSystem
         foreach (var experience in ent.Comp.Experience)
         {
             if (TryGetKnowledgeUnit(wearer, experience.Key) is not { } knowledgeUnit)
-                TryAddKnowledgeUnit(wearer, new KeyValuePair<EntProtoId, int>(experience.Key, 0));
+                TryAddKnowledgeUnit(wearer, (experience.Key, 0));
 
             if (TryGetKnowledgeUnit(wearer, experience.Key) is { } knowledgeUnitActual && TryComp<KnowledgeComponent>(knowledgeUnitActual, out var knowledgeComponent))
                 knowledgeComponent.TemporaryLevel += experience.Value;

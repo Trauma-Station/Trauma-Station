@@ -22,7 +22,7 @@ public sealed partial class KnowledgeContainerComponent : Component
     /// <summary>
     /// Contains a dictionary of added EntProtoIds.
     /// </summary>
-    [ViewVariables]
+    [DataField, AutoNetworkedField, ViewVariables]
     public Dictionary<EntProtoId, EntityUid> KnowledgeContainerIDs = new();
 
     /// <summary>

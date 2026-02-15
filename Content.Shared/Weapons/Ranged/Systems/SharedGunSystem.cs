@@ -6,6 +6,8 @@ using Content.Medical.Common.Weapons;
 using Content.Shared.Mech.Components;
 using Content.Shared.Weapons.Hitscan.Events;
 using Content.Trauma.Common.Projectiles;
+using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Knowledge.Systems;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
@@ -51,6 +53,9 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 
 public abstract partial class SharedGunSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+    // </Trauma>
     [Dependency] private   readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly IMapManager MapManager = default!;
@@ -520,7 +525,29 @@ public abstract partial class SharedGunSystem : EntitySystem
             return;
         // </Trauma>
         var mapAngle = mapDirection.ToAngle();
-        var angle = GetRecoilAngle(Timing.CurTime, (gunUid, gun), mapDirection.ToAngle(), user); // Trauma - pass gunUid and user
+        // <Trauma>
+        var recoilScale = 1.0f;
+        if (TryComp<KnowledgeHolderComponent>(user, out _))
+        {
+            if (TryComp<KnowledgeComponent>(_knowledge.TryGetKnowledgeUnit(user.Value, "ShootingKnowledge"), out var knowledge))
+            {
+                if (knowledge.Level < 26)
+                {
+                    recoilScale = 3.0f - (float) knowledge.Level / 26.0f - ((float) knowledge.Level / 26.0f * (float) knowledge.Level / 26.0f);
+                }
+                else if (knowledge.Level > 50)
+                {
+                    recoilScale = 1.0f - ((float) (knowledge.Level - 50) / 50.0f * (float) (knowledge.Level - 50) / 50.0f);
+                }
+            }
+            else
+            {
+                recoilScale = 3.0f;
+            }
+        }
+        Log.Debug($"recoil:{recoilScale}");
+        // </Trauma>
+        var angle = GetRecoilAngle(Timing.CurTime, (gunUid, gun), mapDirection.ToAngle(), user, recoilScale); // Trauma - pass gunUid and user
 
         userImpulse = true;
 
@@ -613,9 +640,17 @@ public abstract partial class SharedGunSystem : EntitySystem
 
             // <Trauma>
             if (userImpulse)
-                Recoil(user, mapDirection, gun.CameraRecoilScalarModified);
+                Recoil(user, mapDirection, gun.CameraRecoilScalarModified * recoilScale);
             // </Trauma>
         }
+
+        // <Trauma>
+        if (user != null)
+        {
+            RaiseLocalEvent(user.Value, new AddExperience("ShootingKnowledge", 1));
+            RaiseLocalEvent(user.Value, new AddExperience("WeaponsKnowledge", 1));
+        }
+        // </Trauma>
 
         RaiseLocalEvent(gunUid, new AmmoShotEvent()
         {

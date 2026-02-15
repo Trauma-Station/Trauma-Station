@@ -1,5 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;
@@ -55,6 +57,9 @@ namespace Content.Shared.Weapons.Melee;
 
 public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma - made partial
 {
+    // <Trauma>
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+    // </Trauma>
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly IMapManager MapManager = default!;
     [Dependency] private   readonly INetManager _netMan = default!;
@@ -556,8 +561,19 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // Goobstation end
 
         // For consistency with wide attacks stuff needs damageable.
+        // <Trauma>
+        var knowledgeMiss = 1.0f;
+        if (_knowledge.TryGetKnowledgeUnit(user, "MeleeKnowledge") is { } melee)
+        {
+            if (_knowledge.GetMastery(melee) < 2)
+            {
+                knowledgeMiss = ((float) melee.Comp.Level + 1) / 26.0f;
+            }
+        }
+        // </Trauma>
         if (Deleted(target) ||
             !HasComp<DamageableComponent>(target) ||
+            _random.Prob(1.0f - knowledgeMiss) || // Trauma - Knowledge
             !TryComp(target, out TransformComponent? targetXform)) // Goob edit
         {
             // Leave IsHit set to true, because the only time it's set to false
@@ -600,6 +616,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (hitEvent.Handled)
             return;
 
+        // <Trauma>
+        RaiseLocalEvent(user, new AddExperience("MeleeKnowledge", 1));
+        // </Trauma>
         var targets = new List<EntityUid>(1)
         {
             target.Value
@@ -676,7 +695,20 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         var resistanceBypass = GetResistanceBypass(meleeUid, user, component);
         var entities = GetEntityList(ev.Entities);
 
-        if (entities.Count == 0)
+        // <Trauma>
+        Entity<KnowledgeComponent>? melee = null;
+        var knowledgeMiss = 1.0f;
+        if (_knowledge.TryGetKnowledgeUnit(user, "MeleeKnowledge") is { } meleeUnit)
+        {
+            melee = meleeUnit;
+            if (_knowledge.GetMastery(meleeUnit) < 2)
+            {
+                knowledgeMiss = ((float) meleeUnit.Comp.Level + 1) / 26.0f;
+            }
+        }
+        // </Trauma>
+
+        if (entities.Count == 0 || _random.Prob(1.0f - knowledgeMiss)) // Trauma - Knowledge
         {
             if (meleeUid == user)
             {
@@ -850,9 +882,21 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
 
         // goob edit - stunmeta
         if (TryComp<StaminaComponent>(user, out var stamina) && entities.Count != 0)
+        {
+            // <Trauma
+            var staminaDamage = component.HeavyStaminaCost * entities.Count;
+            if (melee is { } meleeEnt)
+            {
+                staminaDamage *= 1 - _knowledge.SharpCurve(meleeEnt);
+            }
+            // </Trauma>
             // make it not immediate to prevent annoying stamcrits
-            _stamina.TakeStaminaDamage(user, component.HeavyStaminaCost * (entities.Count - 1), stamina, visual: false, immediate: false);
+            _stamina.TakeStaminaDamage(user, staminaDamage, stamina, visual: false, immediate: false);
+        }
 
+        // <Trauma>
+        RaiseLocalEvent(user, new AddExperience("MeleeKnowledge", entities.Count));
+        // </Trauma>
         return true;
     }
 
@@ -969,6 +1013,21 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (Deleted(target))
             return true; // Trauma - still do the animation
 
+        // <Trauma>
+        Entity<KnowledgeComponent>? melee = null;
+        var knowledgeMiss = 1.0f;
+        if (_knowledge.TryGetKnowledgeUnit(user, "MeleeKnowledge") is { } meleeUnit)
+        {
+            melee = meleeUnit;
+            if (_knowledge.GetMastery(meleeUnit) < 2)
+            {
+                knowledgeMiss = ((float) meleeUnit.Comp.Level + 1) / 26.0f;
+            }
+        }
+        if (knowledgeMiss < 1.0f && _random.Prob(1.0f - knowledgeMiss))
+            return true;
+        // </Trauma>
+
         if (user == target) // Goobstation
         {
             _meleeSound.PlaySwingSound(user, meleeUid, component);
@@ -1056,6 +1115,10 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return true;
         }
 
+        // <Trauma>
+        if (melee is { } meleeEnt && _knowledge.GetMastery(meleeEnt) < 2)
+            RaiseLocalEvent(user, new AddExperience("MeleeKnowledge", 1));
+        // </Trauma>
         ShoveOrDisarmPopup(true);
 
         return true;

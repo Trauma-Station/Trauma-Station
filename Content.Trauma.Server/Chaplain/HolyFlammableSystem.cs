@@ -38,8 +38,8 @@ public sealed class HolyFlammableSystem : EntitySystem
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
-    private const float InitialGrowthRate = 1f;
-    private const float IntermediateGrowthRate = 2f;
+    private const float InitialGrowthRate = 0.6f;
+    private const float IntermediateGrowthRate = 0.2f;
     private const float LateGrowthRate = 50.0f;
 
     public override void Initialize()

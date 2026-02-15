@@ -32,6 +32,9 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
 
     public void OnStateEntered(GameplayState state)
     {
+        var menuBar = UIManager.GetUIController<GameTopMenuBarUIController>();
+        menuBar.OnMartialArtsPressed += OpenMenuFromAction;
+
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.OpenMartialArtsMenu,
                 InputCmdHandler.FromDelegate(_ => ToggleMartialArtsMenu(false)))
@@ -40,8 +43,13 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
 
     public void OnStateExited(GameplayState state)
     {
+        var menuBar = UIManager.GetUIController<GameTopMenuBarUIController>();
+        menuBar.OnMartialArtsPressed -= OpenMenuFromAction;
         CommandBinds.Unregister<MartialArtsUIController>();
+        CloseMenu();
     }
+
+    private void OpenMenuFromAction() => ToggleMartialArtsMenu(true);
 
     private void ToggleMartialArtsMenu(bool centered)
     {
@@ -106,10 +114,10 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         if (commonKnowledge == null)
             commonKnowledge = EntityManager.System<CommonKnowledgeSystem>();
 
-        if (!(player is { } playerNotNull && commonKnowledge.TryGetKnowledgeEntity(playerNotNull) is { } knowledgeEntity))
+        if (!(player is { } playerNotNull))
             return martialArts;
 
-        var martialArtsList = commonKnowledge.GetMartialArtsForClientDoohickey(knowledgeEntity);
+        var martialArtsList = commonKnowledge.GetMartialArtsForClientDoohickey(playerNotNull);
 
         if (martialArtsList == null)
             return martialArts;

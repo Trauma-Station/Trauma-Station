@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Systems;
 // </Trauma>
 using Content.Shared.IdentityManagement;
@@ -99,14 +98,14 @@ public abstract class SharedRevolutionarySystem : EntitySystem
         var revComps = AllEntityQuery<RevolutionaryComponent>();
         while (revComps.MoveNext(out var uid, out var comp))
         {
-            _commonKnowledge.TryAddKnowledgeUnit(uid, new KeyValuePair<Robust.Shared.Prototypes.EntProtoId, int>("RevolutionaryKnowledge", 20)); // Trauma - Knowledge
+            _commonKnowledge.TryAddKnowledgeUnit(uid, ("RevolutionaryKnowledge", 20)); // Trauma - Knowledge
             Dirty(uid, comp);
         }
 
         var headRevComps = AllEntityQuery<HeadRevolutionaryComponent>();
         while (headRevComps.MoveNext(out var uid, out var comp))
         {
-            _commonKnowledge.TryAddKnowledgeUnit(uid, new KeyValuePair<Robust.Shared.Prototypes.EntProtoId, int>("RevolutionaryKnowledge", 50)); // Trauma - Knowledge
+            _commonKnowledge.TryAddKnowledgeUnit(uid, ("RevolutionaryKnowledge", 50)); // Trauma - Knowledge
             Dirty(uid, comp);
         }
     }

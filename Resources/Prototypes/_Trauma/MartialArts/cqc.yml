@@ -17,10 +17,10 @@
     damage:
       types:
         Blunt: 12
-  - !type:GenericStatusEffect
-    key: KnockedDown
-    time: 2
-    type: Remove
+  - !type:ModifyKnockdown
+    time: 20
+    drop: true
+    type: Add
   levelRequired: 26
 
 - type: combo
@@ -60,9 +60,13 @@
   - !type:TakeStaminaDamage
     amount: 30
   - !type:GenericStatusEffect
-    key: KnockedDown
-    time: 1
+    key: Stutter
+    time: 2
     type: Remove
+  - !type:ModifyKnockdown
+    time: 1
+    drop: true
+    type: Add
   levelRequired: 26
 
 - type: combo
@@ -93,7 +97,7 @@
     sound: /Audio/Weapons/genhit1.ogg
   - !type:PopupMessage
     messages:
-    - cqc-slam
+    - cqc-consecutive
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 40
@@ -117,7 +121,7 @@
     sound: /Audio/Weapons/genhit1.ogg
   - !type:PopupMessage
     messages:
-    - cqc-slam
+    - cqc-consecutive
   opponentEffects:
   - !type:GenericStatusEffect
     key: ForcedSleep
@@ -126,10 +130,10 @@
     damage:
       types:
         Blunt: 30
-  - !type:GenericStatusEffect
-    key: KnockedDown
+  - !type:ModifyKnockdown
     time: 20
-    type: Remove
+    drop: true
+    type: Add
   - !type:GenericStatusEffect
     key: ForcedSleep
     time: 20

@@ -460,7 +460,9 @@ public sealed partial class CloningSystem : SharedCloningSystem
             return;
         if (_knowledge.TryGetAllKnowledgeUnits(originalEntity) is not { } found)
             return;
-        var targetContainer = _knowledge.EnsureKnowledgeContainer(targetEntity);
+        if (!TryComp<KnowledgeHolderComponent>(targetEntity, out var knowledgeHolder))
+            return;
+        var targetContainer = _knowledge.EnsureKnowledgeContainer((targetEntity, knowledgeHolder));
         if (targetContainer.Comp.KnowledgeContainer == null)
             return;
         foreach (var knowledgeEnt in found)

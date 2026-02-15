@@ -25,10 +25,7 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     /// <returns>
     /// False if container already has knowledge entity with that ID.
     /// </returns>
-    public abstract bool TryAddKnowledgeUnit(EntityUid target, KeyValuePair<EntProtoId, int> knowledgeId);
-
-    /// <inheretdoc cref="TryAddKnowledgeUnit(Robust.Shared.GameObjects.EntityUid, System.Collections.Generic.KeyValuePair{Content.Shared.EntityTable.EntitySelectors.EntProtoId, int})"/>
-    public abstract bool TryAddKnowledgeUnit(EntityUid target, KeyValuePair<EntProtoId, int> knowledgeId, [NotNullWhen(true)] out EntityUid? found);
+    public abstract Entity<KnowledgeComponent>? TryAddKnowledgeUnit(EntityUid target, (EntProtoId, int) knowledgeId);
 
     /// <summary>
     /// Adds a list of knowledge units to a knowledge container.
@@ -63,7 +60,7 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     /// <returns>
     /// False if the target is not a knowledge container, or if knowledge unit wasn't found.
     /// </returns>
-    public abstract EntityUid? TryGetKnowledgeUnit(EntityUid target, EntProtoId knowledgeUnit);
+    public abstract Entity<KnowledgeComponent>? TryGetKnowledgeUnit(EntityUid target, EntProtoId knowledgeUnit);
 
     /// <summary>
     /// Returns all knowledge units inside the container component.
@@ -81,14 +78,17 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract List<Entity<T, KnowledgeComponent>>? TryGetKnowledgeWithComp<T>(EntityUid target) where T : IComponent;
 
     /// <summary>
-    /// Returns all knowledge that have the specified parent EntProtoId.
-    /// </summary>
-    public abstract List<Entity<KnowledgeComponent>>? TryGetKnowledgeWithProtoId(EntityUid target, EntProtoId id);
-    /// <summary>
     /// Returns true if that knowledge can be removed, by taking
     /// into account its memory level and knowledge category.
     /// </summary>
     public abstract EntityUid? CanRemoveKnowledge(Entity<KnowledgeComponent?> target, ProtoId<KnowledgeCategoryPrototype> category, int level, bool force = false);
+
+    /// <summary>
+    /// Tries to get a knowledgeContainer.
+    /// </summary>
+    /// <param name="ent">Knowledge Holder</param>
+    /// <returns>container</returns>
+    public abstract Entity<KnowledgeContainerComponent>? TryGetKnowledgeContainer(Entity<KnowledgeHolderComponent> ent);
 
     /// <summary>
     /// Gets a knowledge container from an entity.
@@ -97,14 +97,17 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     /// </summary>
     /// <param name="uid">Main entity from which we are trying to get</param>
     /// <returns>Entity that contains knowledge related to original uid.</returns>
-    public abstract Entity<KnowledgeContainerComponent> EnsureKnowledgeContainer(EntityUid uid);
-    /// <inheritdoc cref="EnsureKnowledgeContainer(Robust.Shared.GameObjects.EntityUid)"/>
-    public abstract void EnsureKnowledgeContainer(EntityUid uid, out Entity<KnowledgeContainerComponent> container);
+    public abstract Entity<KnowledgeContainerComponent> EnsureKnowledgeContainer(Entity<KnowledgeHolderComponent> ent);
 
     /// <summary>
     /// Returns the KnowledgeEntity that holds the character's knowledge. Null if there is non knowledge entity found.
     /// </summary>
-    public abstract EntityUid? TryGetKnowledgeEntity(EntityUid ent);
+    public abstract EntityUid? TryGetKnowledgeEntity(EntityUid uid);
+
+    /// <summary>
+    /// Returns the KnowledgeEntity that holds the character's knowledge. Null if there is non knowledge entity found.
+    /// </summary>
+    public abstract EntityUid? TryGetKnowledgeEntity(Entity<KnowledgeHolderComponent> ent);
 
     /// <summary>
     /// Changes the martial art of the entity. This is used for example when changing the character's class, to change their martial art as well.
@@ -119,9 +122,26 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     /// <summary>
     /// Returns the martial arts that a knowledge entity has, along with some helper data for the client.
     /// </summary>
-    /// <param name="knowledgeEntity"></param>
+    /// <param name="target"></param>
     /// <returns></returns>
-    public abstract List<(EntityUid, string)> GetMartialArtsForClientDoohickey(EntityUid knowledgeEntity);
+    public abstract List<(EntityUid, string)> GetMartialArtsForClientDoohickey(EntityUid target);
+
+    /// <summary>
+    /// Gets the mastery level of a knowledge unit.
+    /// </summary>
+    /// <param name="ent"></param>
+    /// <returns></returns>
+    public abstract int GetMastery(Entity<KnowledgeComponent> ent);
+
+    /// <summary>
+    ///Gets the mastery level of a knowledge unit.
+    /// </summary>
+    public abstract int GetMastery(EntityUid uid);
+
+    /// <summary>
+    /// Curve scale that determines some functionality.
+    /// </summary>
+    public abstract float SharpCurve(Entity<KnowledgeComponent> ent);
 }
 
 [ByRefEvent]
