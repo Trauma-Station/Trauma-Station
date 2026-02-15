@@ -283,13 +283,13 @@ public sealed partial class ChangelingSystem
 
         comp.SelectedForm = TryGetDNA(uid, target, comp);
 
-        TryTransform(uid, comp);
-        _gibbing.Gib(target);
-
         if (HasComp<MindShieldComponent>(target))
         {
             _subdermalImplant.AddImplant(uid, "FakeMindShieldImplant");
         }
+
+        TryTransform(uid, comp);
+        _gibbing.Gib(target);
     }
 
     public List<ProtoId<ReagentPrototype>> BiomassAbsorbedChemicals = new() { "Nutriment", "Protein", "UncookedAnimalProteins", "Fat" }; // fat so absorbing raw meat good
