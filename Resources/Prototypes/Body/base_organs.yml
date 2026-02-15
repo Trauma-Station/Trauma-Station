@@ -69,7 +69,7 @@
   - type: UnremoveableOrgan # root part lol
   - type: Woundable
     canRemove: false # root part
-    integrity: 200
+    integrity: 400 # Trauma - was 200
     integrityCap: 400 # Trauma - was 200
     thresholds:
       Minor: 180
