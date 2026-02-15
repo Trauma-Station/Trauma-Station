@@ -283,8 +283,11 @@ public sealed partial class ChangelingSystem
 
         comp.SelectedForm = TryGetDNA(uid, target, comp);
 
-        if (comp.SelectedForm is not {})
+        if (comp.SelectedForm is not { })
+        {
             _popup.PopupEntity(Loc.GetString("changeling-transform-fail-generic"), uid, uid);
+            return;
+        }
 
         if (HasComp<MindShieldComponent>(target))
             _subdermalImplant.AddImplant(uid, comp.FakeMindShieldId);
