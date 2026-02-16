@@ -21,7 +21,7 @@ public sealed partial class WoundableVisualsComponent : Component
     [DataField]
     public Dictionary<ProtoId<DamageGroupPrototype>, Color> DamageGroupColors = new()
     {
-        {"Brute", Color.Red},
+        { "Brute", Color.Red },
     };
 
     [DataField]
