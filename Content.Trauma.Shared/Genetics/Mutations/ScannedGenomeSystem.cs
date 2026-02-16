@@ -169,8 +169,7 @@ public sealed class ScannedGenomeSystem : EntitySystem
                 continue;
             }
 
-            string? shownId = data.Discovered ? id : null;
-            sequences.Add(new SequenceState(sequence.Bases, data.Number, shownId));
+            sequences.Add(new SequenceState(sequence.Bases, data.Number, data.Discovered ? id.ToString() : null));
         }
     }
 
