@@ -24,6 +24,7 @@ public sealed class MutationTest
         var map = await pair.CreateTestMap();
 
         var entMan = server.ResolveDependency<IEntityManager>();
+        var protoMan = server.ResolveDependency<IPrototypeManager>();
         var mutation = entMan.System<MutationSystem>();
         var factory = entMan.ComponentFactory;
         // monkey polymorph mutation messes it up so exclude it
@@ -36,7 +37,7 @@ public sealed class MutationTest
             {
                 foreach (var id in mutation.AllMutations.Keys)
                 {
-                    if (proto.Components.ContainsKey(blacklisted))
+                    if (!protoMan.Resolve(id, out var proto) || proto.Components.ContainsKey(blacklisted))
                         continue;
 
                     var mob = entMan.SpawnEntity(TestMob, map.GridCoords);
