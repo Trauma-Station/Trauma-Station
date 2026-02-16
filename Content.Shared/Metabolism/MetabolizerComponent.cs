@@ -12,7 +12,7 @@ namespace Content.Shared.Metabolism;
 ///     Handles metabolizing various reagents with given effects.
 /// </summary>
 [RegisterComponent, AutoGenerateComponentPause] // Trauma - no access
-[AutoGenerateComponentState] // Trauma
+[NetworkedComponent, AutoGenerateComponentState] // Trauma
 public sealed partial class MetabolizerComponent : Component
 {
     /// <summary>
