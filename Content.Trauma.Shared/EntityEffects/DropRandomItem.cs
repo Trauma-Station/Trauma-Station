@@ -27,7 +27,6 @@ public sealed partial class DropRandomItem : EntityEffectBase<DropRandomItem>
 
 public sealed class DropRandomItemEffectSystem : EntityEffectSystem<HandsComponent, DropRandomItem>
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -52,8 +51,6 @@ public sealed class DropRandomItemEffectSystem : EntityEffectSystem<HandsCompone
         if (!_hands.TryDrop(ent.AsNullable(), item)) // glued etc
             return;
 
-        _data.SetUser(item, ent); // this mob is doing whatever
-        _effects.ApplyEffects(item, args.Effect.Effects);
-        _data.ClearUser(item);
+        _effects.ApplyEffects(item, args.Effect.Effects, user: args.User ?? ent.Owner);
     }
 }

@@ -101,7 +101,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         ent.Comp.NextScramble = now + ent.Comp.ScrambleCooldown;
         DirtyField(ent, nameof(GeneticsConsoleComponent.NextScramble));
 
-        _mutation.Scramble(mutatable, predicted: true);
+        _mutation.Scramble(mutatable, user: args.User, predicted: true);
         UpdateUI(ent.Owner);
     }
 
@@ -267,7 +267,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         }
 
         // already present or couldn't add it
-        if (!_mutation.AddMutation(mutatable.AsNullable(), result))
+        if (!_mutation.AddMutation(mutatable.AsNullable(), result, user: args.User))
         {
             Speak(ent, "combine-present");
             return;
@@ -370,7 +370,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
 
         _audio.PlayPvs(ent.Comp.SequenceSound, ent);
         data.Discovered = true;
-        _mutation.AddMutation(mob, sequence.Mutation);
+        _mutation.AddMutation(mob, sequence.Mutation, user: args.User, predicted: false); // not predicted because of round data
         UpdateUI(ent.Owner); // it's now discovered
         return true;
     }

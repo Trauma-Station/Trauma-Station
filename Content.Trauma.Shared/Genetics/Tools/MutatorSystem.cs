@@ -117,16 +117,16 @@ public sealed class MutatorSystem : EntitySystem
 
         if (ent.Comp.Remove)
         {
-            _mutation.RemoveMutations(mutatable, ent.Comp.Mutations, predicted: true);
+            _mutation.RemoveMutations(mutatable, ent.Comp.Mutations, user: args.User, predicted: true);
             // TODO: maybe do genetic damage if it succeeded
         }
         else if (ent.Comp.Activator)
         {
-            _mutation.ActivateMutations(mutatable, ent.Comp.Mutations, predicted: true);
+            _mutation.ActivateMutations(mutatable, ent.Comp.Mutations, user: args.User, predicted: true);
         }
         else
         {
-            _mutation.AddMutations(mutatable, ent.Comp.Mutations, predicted: true);
+            _mutation.AddMutations(mutatable, ent.Comp.Mutations, user: args.User, predicted: true);
         }
 
         // prevent reuse

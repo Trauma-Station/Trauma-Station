@@ -10,7 +10,6 @@ namespace Content.Trauma.Shared.Genetics.Abilities;
 /// </summary>
 public sealed class EffectsMutationSystem : EntitySystem
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
@@ -26,7 +25,7 @@ public sealed class EffectsMutationSystem : EntitySystem
         if (args.Automatic && ent.Comp.IgnoreAutomatic)
             return;
 
-        _effects.ApplyEffects(target, ent.Comp.Added, user: args.User);
+        _effects.ApplyEffects(args.Target, ent.Comp.Added, user: args.User);
     }
 
     private void OnRemoved(Entity<EffectsMutationComponent> ent, ref MutationRemovedEvent args)
@@ -34,6 +33,6 @@ public sealed class EffectsMutationSystem : EntitySystem
         if (args.Automatic && ent.Comp.IgnoreAutomatic)
             return;
 
-        _effects.ApplyEffects(target, ent.Comp.Removed, user: args.User);
+        _effects.ApplyEffects(args.Target, ent.Comp.Removed, user: args.User);
     }
 }

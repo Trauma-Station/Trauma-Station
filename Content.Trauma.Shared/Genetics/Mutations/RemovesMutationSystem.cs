@@ -16,7 +16,7 @@ public sealed class RemovesMutationSystem : EntitySystem
     {
         foreach (var id in ent.Comp.Removes)
         {
-            _mutation.RemoveMutation(args.Target, id, automatic: args.Automatic, predicted: args.Predicted);
+            _mutation.RemoveMutation(args.Target.AsNullable(), id, user: args.User, automatic: args.Automatic, predicted: args.Predicted);
         }
     }
 }

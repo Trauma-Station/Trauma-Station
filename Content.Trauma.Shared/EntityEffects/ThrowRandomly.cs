@@ -25,7 +25,6 @@ public sealed partial class ThrowRandomly : EntityEffectBase<ThrowRandomly>
 
 public sealed class ThrowRandomlyEffectSystem : EntityEffectSystem<MetaDataComponent, ThrowRandomly>
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
 
@@ -37,11 +36,10 @@ public sealed class ThrowRandomlyEffectSystem : EntityEffectSystem<MetaDataCompo
         var direction = angle.ToVec();
 
         var effect = args.Effect;
-        var user = _data.GetUser(ent);
         _throwing.TryThrow(ent,
             direction,
             baseThrowSpeed: effect.Speed,
-            user: user,
+            user: args.User,
             predicted: effect.Predicted);
     }
 }
