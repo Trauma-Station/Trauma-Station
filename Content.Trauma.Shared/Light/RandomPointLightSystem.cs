@@ -17,7 +17,7 @@ public sealed class RandomPointLightSystem : EntitySystem
         SubscribeLocalEvent<RandomPointLightComponent, MapInitEvent>(OnMapInit);
     }
 
-    protected void OnMapInit(Entity<RandomPointLightComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<RandomPointLightComponent> ent, ref MapInitEvent args)
     {
         if (!_light.TryGetLight(ent, out var light))
             return;

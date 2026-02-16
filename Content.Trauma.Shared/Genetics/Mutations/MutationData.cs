@@ -17,7 +17,7 @@ public sealed partial class MutationData
     /// <summary>
     /// Top base characters with the bottom base characters concatenated after them.
     /// </summary>
-    public string Bases;
+    public string Bases = string.Empty;
 
     /// <summary>
     /// Once a mutation is discovered via activation in the genetics console,
@@ -55,6 +55,7 @@ public sealed partial class MutationData
             'A' => 'G',
             'G' => 'A',
             'C' => 'T',
-            'T' => 'C'
+            'T' => 'C',
+            _ => 'X'
         };
 }

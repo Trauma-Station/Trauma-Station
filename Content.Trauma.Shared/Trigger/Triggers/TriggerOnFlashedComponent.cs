@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Shared.Trigger.Components.Triggers;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Trigger.Triggers;
 
@@ -9,7 +8,7 @@ namespace Content.Trauma.Shared.Trigger.Triggers;
 /// Triggers when this entity is directly flashed or area flashed.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(TriggerOnFlashedSystem))]
-[AutoGenerateComponentPause, AutoGenerateComponentState]
+[AutoGenerateComponentState]
 public sealed partial class TriggerOnFlashedComponent : BaseTriggerOnXComponent
 {
     /// <summary>

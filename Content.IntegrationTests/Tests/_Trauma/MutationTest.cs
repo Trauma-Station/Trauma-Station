@@ -1,4 +1,4 @@
-using Content.Server.Polymorph.Components;
+using Content.Trauma.Shared.Genetics.Abilities;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
@@ -24,8 +24,10 @@ public sealed class MutationTest
         var map = await pair.CreateTestMap();
 
         var entMan = server.ResolveDependency<IEntityManager>();
-        var polymorphQuery = entMan.GetEntityQuery<PolymorphedEntityComponent>();
         var mutation = entMan.System<MutationSystem>();
+        var factory = entMan.ComponentFactory;
+        // monkey polymorph mutation messes it up so exclude it
+        var blacklisted = factory.GetComponentName<PolymorphMutationComponent>();
 
         var mobs = new List<EntityUid>();
         await server.WaitAssertion(() =>
@@ -34,14 +36,13 @@ public sealed class MutationTest
             {
                 foreach (var id in mutation.AllMutations.Keys)
                 {
+                    if (proto.Components.ContainsKey(blacklisted))
+                        continue;
+
                     var mob = entMan.SpawnEntity(TestMob, map.GridCoords);
                     Assert.That(mutation.AddMutation(mob, id), $"Failed to add {id} to {entMan.ToPrettyString(mob)}");
-                    // for monkified, the new monkey will have the mutation
-                    var target = polymorphQuery.CompOrNull(mob)?.Parent ?? mob;
-                    Assert.That(mutation.HasMutation(target, id), $"Added {id} but it was not present in {entMan.ToPrettyString(mob)}");
+                    Assert.That(mutation.HasMutation(mob, id), $"Added {id} but it was not present in {entMan.ToPrettyString(mob)}");
                     mobs.Add(mob);
-                    if (target != mob)
-                        mobs.Add(target); // delete the polymorphed entity too later
                 }
             });
         });

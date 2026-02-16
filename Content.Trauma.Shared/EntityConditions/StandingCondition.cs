@@ -17,8 +17,6 @@ public sealed partial class StandingCondition : EntityConditionBase<StandingCond
 
 public sealed partial class StandingConditionSystem : EntityConditionSystem<StandingStateComponent, StandingCondition>
 {
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-
     protected override void Condition(Entity<StandingStateComponent> ent, ref EntityConditionEvent<StandingCondition> args)
     {
         args.Result = ent.Comp.Standing;

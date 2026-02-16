@@ -29,7 +29,7 @@ public sealed partial class Sequence
 {
     public EntProtoId<MutationComponent> Mutation;
 
-    public string Bases;
+    public string Bases = string.Empty;
 }
 
 [DataRecord]

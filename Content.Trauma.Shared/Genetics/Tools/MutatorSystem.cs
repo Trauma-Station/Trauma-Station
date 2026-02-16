@@ -16,7 +16,6 @@ namespace Content.Trauma.Shared.Genetics.Tools;
 
 public sealed class MutatorSystem : EntitySystem
 {
-    [Dependency] private readonly GeneticsConsoleSystem _console = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MutationSystem _mutation = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -115,9 +114,10 @@ public sealed class MutatorSystem : EntitySystem
 
         args.Handled = true;
 
+        var body = mutatable.AsNullable();
         if (ent.Comp.Remove)
         {
-            _mutation.RemoveMutations(mutatable, ent.Comp.Mutations, user: args.User, predicted: true);
+            _mutation.RemoveMutations(body, ent.Comp.Mutations, user: args.User, predicted: true);
             // TODO: maybe do genetic damage if it succeeded
         }
         else if (ent.Comp.Activator)
@@ -126,7 +126,7 @@ public sealed class MutatorSystem : EntitySystem
         }
         else
         {
-            _mutation.AddMutations(mutatable, ent.Comp.Mutations, user: args.User, predicted: true);
+            _mutation.AddMutations(body, ent.Comp.Mutations, user: args.User, predicted: true);
         }
 
         // prevent reuse
@@ -151,7 +151,7 @@ public sealed class MutatorSystem : EntitySystem
 
         ent.Comp.Mutations.Add(id);
         Dirty(ent, ent.Comp);
-        UpdateAppearance((ent, ent));
+        UpdateAppearance((ent, ent.Comp));
     }
 
     #endregion

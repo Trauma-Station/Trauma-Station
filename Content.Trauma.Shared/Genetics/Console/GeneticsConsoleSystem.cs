@@ -24,7 +24,6 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
     [Dependency] private readonly GeneticsDiskSystem _disk = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly MutationSystem _mutation = default!;
     [Dependency] private readonly MutatorSystem _mutator = default!;
@@ -71,7 +70,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
     {
         // prevent reconstruct cheesing
         ent.Comp.NextScramble = _timing.CurTime + ent.Comp.ScrambleCooldown;
-        DirtyField(ent, nameof(GeneticsConsoleComponent.NextScramble));
+        DirtyField(ent.AsNullable(), nameof(GeneticsConsoleComponent.NextScramble));
 
         var longestPrintDelay = TimeSpan.Zero;
         foreach (var print in ent.Comp.Prints)
@@ -80,7 +79,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
                 longestPrintDelay = print.Delay;
         }
         ent.Comp.NextPrint = _timing.CurTime + longestPrintDelay;
-        DirtyField(ent, nameof(GeneticsConsoleComponent.NextPrint));
+        DirtyField(ent.AsNullable(), nameof(GeneticsConsoleComponent.NextPrint));
     }
 
     private void OnScramble(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleScrambleMessage args)
@@ -99,7 +98,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         _damage.ChangeDamage(mob, ent.Comp.ScrambleDamage);
 
         ent.Comp.NextScramble = now + ent.Comp.ScrambleCooldown;
-        DirtyField(ent, nameof(GeneticsConsoleComponent.NextScramble));
+        DirtyField(ent.AsNullable(), nameof(GeneticsConsoleComponent.NextScramble));
 
         _mutation.Scramble(mutatable, user: args.Actor, predicted: true);
         UpdateUI(ent.Owner);
@@ -199,7 +198,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
             return;
 
         ent.Comp.NextWrite = now + ent.Comp.WriteDelay;
-        DirtyField(ent, ent.Comp, nameof(GeneticsConsoleComponent.NextWrite));
+        DirtyField(ent.AsNullable(), nameof(GeneticsConsoleComponent.NextWrite));
 
         _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{mutation} from {ToPrettyString(mob)} was written to {ToPrettyString(disk)} by {ToPrettyString(args.Actor)} using console {ToPrettyString(ent)}");
         _audio.PlayPvs(ent.Comp.WriteSound, ent);
@@ -303,7 +302,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
 
         var delay = ent.Comp.Prints[i].Delay;
         ent.Comp.NextPrint = now + delay;
-        DirtyField(ent, ent.Comp, nameof(GeneticsConsoleComponent.NextPrint));
+        DirtyField(ent.AsNullable(), nameof(GeneticsConsoleComponent.NextPrint));
 
         var proto = ent.Comp.Prints[i].Proto;
         var item = PredictedSpawnAtPosition(proto, Transform(ent).Coordinates);

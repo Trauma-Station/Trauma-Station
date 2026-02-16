@@ -10,7 +10,6 @@ namespace Content.Trauma.Shared.Trigger.Triggers;
 public sealed class RandomTriggerSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly TriggerSystem _trigger = default!;
 
     public override void Initialize()

@@ -243,7 +243,7 @@ public sealed partial class MutationSystem : EntitySystem
 
         data = new MutationData();
         int number = _random.Next(1, MutationCount);
-        while (MutationNumbers.Contains(number));
+        while (MutationNumbers.Contains(number))
         {
             // double the number space so it doesnt take a really long time with a lot of mutations trying to roll 1/N chance
             number = _random.Next(1, MutationCount * 2);
@@ -345,7 +345,7 @@ public sealed partial class MutationSystem : EntitySystem
         Log.Debug($"Added mutation {ToPrettyString(uid)} to {ToPrettyString(ent)}");
         ent.Comp.Mutations[id] = uid;
         Dirty(ent);
-        MutationAdded(ent, (uid, _query.Comp(uid)), user, automatic, predicted);
+        MutationAdded((ent, ent.Comp), (uid, _query.Comp(uid)), user, automatic, predicted);
         MutateDna(ent, mutation.Difficulty / 4);
         return true;
     }
@@ -391,9 +391,10 @@ public sealed partial class MutationSystem : EntitySystem
             return false;
 
         var activated = false;
+        var target = ent.AsNullable();
         foreach (var id in ids)
         {
-            activated |= ActivateMutation(ent, id, user, automatic, predicted);
+            activated |= ActivateMutation(target, id, user, automatic, predicted);
         }
 
         return activated;
@@ -415,7 +416,7 @@ public sealed partial class MutationSystem : EntitySystem
         if (_mob.IsDead(ent))
             return false;
 
-        if (GetMutation(ent, id) is not {} mutation)
+        if (GetMutation((ent, ent.Comp), id) is not {} mutation)
             return false; // didn't have it anyways chuddy
 
         if (_unremoveableQuery.HasComp(mutation))
@@ -433,7 +434,7 @@ public sealed partial class MutationSystem : EntitySystem
         Dirty(ent);
 
         Log.Debug($"Removed mutation {ToPrettyString(mutation)} from {ToPrettyString(ent)}");
-        MutationRemoved(ent, mutation, user, automatic, predicted);
+        MutationRemoved((ent, ent.Comp), mutation, user, automatic, predicted);
         MutateDna(ent);
 
         PredictedQueueDel(mutation);
@@ -470,7 +471,7 @@ public sealed partial class MutationSystem : EntitySystem
         foreach (var mutation in ent.Comp.Mutations.Values)
         {
             if (_query.TryComp(mutation, out var mutationComp))
-                MutationRemoved(ent, (mutation, mutationComp), user, automatic, predicted);
+                MutationRemoved((ent, ent.Comp), (mutation, mutationComp), user, automatic, predicted);
             PredictedQueueDel(mutation);
         }
         ent.Comp.Mutations.Clear();

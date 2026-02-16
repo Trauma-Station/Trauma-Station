@@ -24,9 +24,9 @@ public sealed partial class AttackOthers : EntityEffectBase<AttackOthers>
 
 public sealed class AttackOthersEntityEvent : EntityEffectSystem<CombatModeComponent, AttackOthers>
 {
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
+    //[Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    //[Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
 
     private EntityQuery<MeleeWeaponComponent> _query;
 
