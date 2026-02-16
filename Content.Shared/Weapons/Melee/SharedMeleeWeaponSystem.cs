@@ -299,7 +299,12 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         RaiseLocalEvent(uid, ref ev);
         if (user != uid) // Goobstation
             RaiseLocalEvent(user, ref ev);
-
+        // <Trauma>
+        if (_knowledge.TryGetKnowledgeUnit(user, "MeleeKnowledge") is { } melee && _knowledge.GetMastery(melee) > 2)
+        {
+            ev.Multipliers *= 1 + 2 * _knowledge.SharpCurve(melee, -50, 50.0f);
+        }
+        // </Trauma>
         return ev.Rate * ev.Multipliers;
     }
 
@@ -617,8 +622,11 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return;
 
         // <Trauma>
-        var evKnowledge = new AddExperience("MeleeKnowledge", 1);
-        RaiseLocalEvent(user, evKnowledge);
+        if (MobState.IsAlive(target.Value) && !MobState.IsCritical(target.Value))
+        {
+            var evKnowledge = new AddExperience("MeleeKnowledge", 1);
+            RaiseLocalEvent(user, ref evKnowledge);
+        }
         // </Trauma>
         var targets = new List<EntityUid>(1)
         {
@@ -707,9 +715,15 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                 knowledgeMiss = ((float) meleeUnit.Comp.Level + 2) / 26.0f;
             }
         }
+
+        if (_random.Prob(Math.Max(1.0f - knowledgeMiss, 0)))
+        {
+            entities.Clear();
+            entities.Add(user);
+        }
         // </Trauma>
 
-        if (entities.Count == 0 || _random.Prob(Math.Max(1.0f - knowledgeMiss, 0))) // Trauma - Knowledge
+        if (entities.Count == 0)
         {
             if (meleeUid == user)
             {
@@ -896,8 +910,11 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         }
 
         // <Trauma>
-        var evKnowledge = new AddExperience("MeleeKnowledge", entities.Count);
-        RaiseLocalEvent(user, evKnowledge);
+        if (entities.Count > 0 && entities.All(entity => MobState.IsAlive(entity) && !MobState.IsCritical(entity)))
+        {
+            var evKnowledge = new AddExperience("MeleeKnowledge", entities.Count);
+        RaiseLocalEvent(user, ref evKnowledge);
+        }
         // </Trauma>
         return true;
     }
@@ -1118,10 +1135,10 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         }
 
         // <Trauma>
-        if (melee is { } meleeEnt && _knowledge.GetMastery(meleeEnt) < 2)
+        if (melee is { } meleeEnt && _knowledge.GetMastery(meleeEnt) < 2 && MobState.IsAlive(target) && !MobState.IsCritical(target))
         {
             var evKnowledge = new AddExperience("MeleeKnowledge", 1);
-            RaiseLocalEvent(user, evKnowledge);
+            RaiseLocalEvent(user, ref evKnowledge);
         }
         // </Trauma>
         ShoveOrDisarmPopup(true);

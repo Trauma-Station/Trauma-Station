@@ -150,7 +150,6 @@ public abstract partial class InteractionTest
     private const string TestPrototypes = @"
 - type: entity
   id: InteractionTestMob
-  parent: KnowledgeBaseAbstract # Trauma - Knowledge
   components:
   - type: DoAfter
   - type: Hands

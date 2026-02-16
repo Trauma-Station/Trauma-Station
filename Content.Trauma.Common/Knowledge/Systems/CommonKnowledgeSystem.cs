@@ -139,9 +139,14 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract int GetMastery(EntityUid uid);
 
     /// <summary>
-    /// Curve scale that determines some functionality.
+    /// Curve scale that determines some functionality. Goes from 0 to 1.
     /// </summary>
-    public abstract float SharpCurve(Entity<KnowledgeComponent> ent);
+    public abstract float SharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f);
+
+    /// <summary>
+    /// Inverse curve scale that determines some functionality. Goes from 1 to 0.
+    /// </summary>
+    public abstract float InverseSharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f);
 }
 
 [ByRefEvent]

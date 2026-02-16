@@ -629,9 +629,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return 0;
     }
 
-    public override float SharpCurve(Entity<KnowledgeComponent> knowledge)
+    public override float SharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f)
     {
-        return ((float) knowledge.Comp.Level / 100.0f) * ((float) knowledge.Comp.Level / 100.0f);
+        return ((float) (knowledge.Comp.Level + offset) / inverseScale) * ((float) (knowledge.Comp.Level + offset) / inverseScale);
+    }
+
+    public override float InverseSharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f)
+    {
+        return ((float) (offset - knowledge.Comp.Level) / inverseScale) * ((float) (offset - knowledge.Comp.Level) / inverseScale);
     }
 
     public (int, bool) RollPenetrating(int sides, bool didCritical = false)

@@ -1,4 +1,14 @@
 // <Trauma>
+using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Knowledge.Systems;
+using Content.Trauma.Common.MartialArts;
+using Content.Goobstation.Common.Weapons;
+using Content.Lavaland.Common.Weapons;
+using Content.Medical.Common.Targeting;
+using Content.Shared.Coordinates;
+using Content.Shared.Random.Helpers;
+using Robust.Shared.Physics.Components;
 // </Trauma>
 using System.IO;
 using System.Linq;
@@ -356,7 +366,7 @@ namespace Content.Server.Construction
 
             // <Trauma>
             var userConstructionGroup = AvailableConstructionGroups(user);
-            if (!constructionPrototype.Groups.Keys.All(group => userConstructionGroup.ContainsKey(group)))
+            if (TryComp<KnowledgeHolderComponent>(user, out _) && !constructionPrototype.Groups.Keys.All(group => userConstructionGroup.ContainsKey(group)))
             {
                 Log.Error($"User {ToPrettyString(user)} tried to start a construction {prototype} that it doesn't have knowledge about!");
                 return false;
@@ -475,7 +485,7 @@ namespace Content.Server.Construction
 
             // <Trauma>
             var userConstructionGroup = AvailableConstructionGroups(user);
-            if (!constructionPrototype.Groups.Keys.All(group => userConstructionGroup.ContainsKey(group)))
+            if (TryComp<KnowledgeHolderComponent>(user, out _) && !constructionPrototype.Groups.Keys.All(group => userConstructionGroup.ContainsKey(group)))
             {
                 Log.Error($"User {ToPrettyString(user)} tried to start a construction {prototypeName} that it doesn't have knowledge about!");
                 RaiseNetworkEvent(new AckStructureConstructionMessage(ack), user);

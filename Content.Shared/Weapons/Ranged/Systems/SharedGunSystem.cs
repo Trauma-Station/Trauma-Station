@@ -649,8 +649,8 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             var evShooting = new AddExperience("ShootingKnowledge", 1);
             var evWeapons = new AddExperience("ShootingKnowledge", 1);
-            RaiseLocalEvent(user.Value, evShooting);
-            RaiseLocalEvent(user.Value, evWeapons);
+            RaiseLocalEvent(user.Value, ref evShooting);
+            RaiseLocalEvent(user.Value, ref evWeapons);
         }
         // </Trauma>
 

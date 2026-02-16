@@ -1,5 +1,7 @@
 // <Trauma>
 using Content.Trauma.Common.Throwing;
+using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Network;
 // </Trauma>
 using System.Numerics;
@@ -36,6 +38,7 @@ public sealed class ThrowingSystem : EntitySystem
 
     // <Trauma>
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
     // </Trauma>
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -200,6 +203,23 @@ public sealed class ThrowingSystem : EntitySystem
 
         if (tileFriction == 0f)
             compensateFriction = false; // cannot calculate this if there is no friction
+
+        // <Trauma>
+        if (TryComp<KnowledgeHolderComponent>(user, out _))
+        {
+            if (_knowledge.TryGetKnowledgeUnit(user.Value, "StrengthKnowledge") is { } strength)
+            {
+                if (_knowledge.GetMastery(strength) < 2)
+                {
+                    baseThrowSpeed *= 1 + _knowledge.SharpCurve(strength, 50, 50.0f);
+                }
+                else if (_knowledge.GetMastery(strength) > 2)
+                {
+                    baseThrowSpeed *= 1 - _knowledge.InverseSharpCurve(strength, 26, 26.0f) / (26.0f * 2.0f);
+                }
+            }
+        }
+        // </Trauma>
 
         // Set the time the item is supposed to be in the air so we can apply OnGround status.
         // This is a free parameter, but we should set it to something reasonable.
