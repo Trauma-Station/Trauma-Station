@@ -9,7 +9,7 @@
   id: InternalMartyrdom
   result: MutationInternalMartyrdom
   required:
-  - MutationStrong
+  - MutationStrength
   - MutationStimmed
 
 - type: mutationRecipe

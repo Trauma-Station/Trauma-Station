@@ -1328,7 +1328,7 @@
           reagent: Holywater
           min: 10
         - !type:WhitelistCondition
-          guidebookText: entity-effect-condition-guidebook-cosmic-cultist
+          guidebookText: entity-condition-guidebook-cosmic-cultist
           whitelist:
             components:
             - CosmicCult

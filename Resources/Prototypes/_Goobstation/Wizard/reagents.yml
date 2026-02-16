@@ -18,7 +18,7 @@
           components:
           - Wizard
           - Apprentice
-        guidebookText: entity-effect-condition-not-wizard-or-apprentice
+        guidebookText: entity-condition-not-wizard-or-apprentice
       effects:
       - !type:Emote
         emote: Cough
@@ -50,7 +50,7 @@
           components:
           - Wizard
           - Apprentice
-        guidebookText: entity-effect-condition-wizard-or-apprentice
+        guidebookText: entity-condition-wizard-or-apprentice
       effects:
       - !type:ModifyBloodLevel
         amount: 3

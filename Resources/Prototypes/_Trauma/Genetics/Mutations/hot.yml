@@ -35,7 +35,7 @@
   description: Concentrates pyrokinetic forces to create ash, useful for basically nothing.
   components:
   - type: Action
-    iconStyle: BigAction
+    itemIconStyle: BigAction
     icon:
       sprite: Objects/Materials/materials.rsi
       state: ash

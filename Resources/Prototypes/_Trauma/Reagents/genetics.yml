@@ -7,7 +7,7 @@
   flavor: tiredness
   color: "#000000"
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.75
       effects:
       # not parity but idc im not making an effect to scale it based on health

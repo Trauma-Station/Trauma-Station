@@ -67,7 +67,6 @@
         guidebookText: entity-effect-guidebook-increases-reach
         conditions:
         - !type:WhitelistCondition # has to be an organic arm
-          guidebookText: entity-effect-guidebook-cybernetics-blacklist
           blacklist:
             components:
             - Cybernetics

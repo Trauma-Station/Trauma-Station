@@ -27,8 +27,7 @@
   - type: WorldTargetAction
     event: !type:ShootOrganActionEvent
   - type: ShootOrganAction
-    partType: Head
-    organ: tongue
+    organ: Tongue
     polymorph: TongueSpike
 
 - type: entity

@@ -83,10 +83,10 @@
     - effect: !type:NestedEffect
         proto: MakeFragile
     - effect: !type:Polymorph
-      prototype: Slime # CBF to make the reagent stuff, reuse it if xenobio ever makes it
+        prototype: Slime # CBF to make the reagent stuff, reuse it if xenobio ever makes it
     - effect: !type:ModifyStatusEffect
-      effectProto: DecloningStatusEffect # not using a disease because it doesnt exist :(
-      time: 5m
+        effectProto: DecloningStatusEffect # not using a disease because it doesnt exist :(
+        time: 5m
 
 - type: entityEffect
   id: MakeFragile

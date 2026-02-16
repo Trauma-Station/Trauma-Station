@@ -150,7 +150,6 @@
   id: MutationRemoveHead
   effects:
   - !type:RelayBodyParts
-    guidebookText: entity-effect-guidebook-add-brain-slot-torso
     partType: Torso
     effects:
     - !type:AddOrganSlot
@@ -174,13 +173,11 @@
     organ: Ears
     dest: Torso
   - !type:RelayBodyParts
-    guidebookText: entity-effect-guidebook-gib-head
     partType: Head
     effects:
     - !type:DetachOrgan
     - !type:Gib
   - !type:RelayBodyParts
-    guidebookText: entity-effect-guidebook-remove-head-slot
     partType: Torso
     effects:
     - !type:RemoveOrganSlot # no cheesing it by attaching a new head
@@ -196,7 +193,6 @@
   id: MutationAddHead
   effects:
   - !type:RelayBodyParts
-    guidebookText: entity-effect-guidebook-add-head-slot
     partType: Torso
     effects:
     - !type:AddOrganSlot
@@ -204,7 +200,6 @@
     - !type:RegenerateOrgan
       slot: Head
   - !type:RelayBodyParts
-    guidebookText: entity-effect-guidebook-damage-head
     partType: Head
     effects:
     - !type:HealthChange
@@ -224,7 +219,6 @@
     organ: Ears
     dest: Head
   - !type:RelayBodyParts
-    guidebookText: entity-effect-guidebook-remove-brain-slot-torso
     partType: Torso
     effects:
     - !type:RemoveOrganSlot
@@ -274,7 +268,6 @@
   effects:
   - !type:RelayBodyParts
     partType: Head
-    guidebookText: entity-effect-guidebook-delete-head
     effects:
     - !type:Gib # your head explodes, don't drop brain when gibbing
   - !type:SpawnEntity # flash instead of an explosion

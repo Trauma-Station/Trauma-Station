@@ -40,7 +40,7 @@
     icon:
       sprite: _Trauma/Actions/mutations.rsi
       state: mindread
-    itemActionStyle: BigAction
+    itemIconStyle: BigAction
     useDelay: 5
   - type: TargetAction
   - type: EntityTargetAction

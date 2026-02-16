@@ -33,9 +33,9 @@
   - type: ItemSlots
     slots:
       genetics_disk:
+        insertSound: /Audio/Machines/scanning.ogg
+        ejectSound: /Audio/Machines/tray_eject.ogg
         whitelist:
-          insertSound: /Audio/Machines/scanning.ogg
-          ejectSound: /Audio/Machines/tray_eject.ogg
           components:
           - GeneticsDisk
   - type: ContainerContainer

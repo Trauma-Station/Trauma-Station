@@ -47,7 +47,7 @@
   id: ActionMutationMendingTouch
   name: Mending Touch
   description: Lay your hands on other people to transfer a small amount of their physical injuries to yourself.
-  componnets:
+  components:
   - type: Action
     useDelay: 12
   - type: TargetAction
@@ -56,4 +56,4 @@
       requireAll: true
       components:
       - Damageable
-      - HumanoidAppearance
+      - Body

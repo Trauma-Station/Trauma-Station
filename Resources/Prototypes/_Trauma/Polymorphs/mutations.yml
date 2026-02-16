@@ -4,7 +4,7 @@
     entity: MobMonkey
     transferName: true
     stripNameModifier: false # keep it when going monkey -> human -> monkey
-    copiedComponents: [] # no language chud
+    componentsToTransfer: [] # no language chud
     forced: true
     revertOnCrit: false
     revertOnDeath: false
@@ -31,7 +31,7 @@
   configuration:
     entity: MobMouse
     transferName: true
-    copiedComponents: [] # no language chud
+    componentsToTransfer: [] # no language chud
     forced: true
     revertOnCrit: false
     revertOnDeath: false
@@ -64,7 +64,7 @@
     forced: false
     inventory: Drop
     transferName: true
-    copiedComponents: []
+    componentsToTransfer: []
     revertOnCrit: false
     revertOnDeath: false
     revertOnDelete: false
@@ -76,7 +76,7 @@
     forced: false
     inventory: Drop
     transferName: true
-    copiedComponents: []
+    componentsToTransfer: []
     revertOnCrit: false
     revertOnDeath: false
     revertOnDelete: false
@@ -88,7 +88,7 @@
     forced: false
     inventory: Drop
     transferName: true
-    copiedComponents: []
+    componentsToTransfer: []
     revertOnCrit: false
     revertOnDeath: false
     revertOnDelete: false
@@ -101,7 +101,7 @@
     forced: false
     inventory: Drop
     transferName: true
-    copiedComponents: []
+    componentsToTransfer: []
     revertOnCrit: false
     revertOnDeath: false
     revertOnDelete: false
@@ -110,7 +110,7 @@
 - type: polymorph
   id: Skeleton
   configuration:
-    entity: MobSkeleton
+    entity: MobSkeletonPerson
     forced: false
     inventory: Drop # your skin melts off so your clothes drop
     transferName: false # fibula time

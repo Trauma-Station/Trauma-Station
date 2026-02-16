@@ -32,13 +32,13 @@
       type: Pvs
       messages:
       - entity-effect-popup-eyes-melt
-    - !type:RelayOrgans
-      slot: eyes
+    - !type:RelayOrgan
+      category: Eyes
       guidebookText: entity-effect-guidebook-melts-eyes
       effects:
       - !type:Delete
-    - !type:RelayOrgans
-      slot: brain
+    - !type:RelayOrgan
+      category: Brain
       guidebookText: entity-effect-guidebook-melts-brain
       effects:
       - !type:AddComponents

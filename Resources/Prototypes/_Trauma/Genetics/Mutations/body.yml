@@ -177,7 +177,7 @@
   - type: ComponentMutation
     added:
     - type: Deaf
-      permanent: true
+    # TODO: prevent it being removed by anything, use events or something
 
 - type: entity
   parent: BaseMutation
@@ -295,7 +295,7 @@
         Heat: 0.5
         Cold: 0.5
         Shock: 0.5
-        Caustin: 0.5
+        Caustic: 0.5
 
 # if some yml warrior adds endermen give them this trust
 - type: entity
@@ -332,7 +332,7 @@
   - type: EntityEffectOnTrigger
     effects:
     - !type:NestedEffect
-      condition:
+      conditions:
       - !type:UseDelayCondition
       proto: MutationAcidicFleshBubble
     - !type:RelayMutated
@@ -430,7 +430,7 @@
     instability: 10
     difficulty: 16
   - type: BleedingMutation
-    bleedingModifier: 3 # non-parity: 1.5x bleeding feels too weak given this is a fairly strong mutation (nearly ignore bloodloss)
+    bleedModifier: 3 # non-parity: 1.5x bleeding feels too weak given this is a fairly strong mutation (nearly ignore bloodloss)
 
 - type: entity
   parent: BaseMutation
