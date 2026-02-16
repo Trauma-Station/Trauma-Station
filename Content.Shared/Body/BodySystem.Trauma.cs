@@ -242,14 +242,11 @@ public sealed partial class BodySystem
     /// </summary>
     public bool InsertOrgan(Entity<BodyComponent?> body, Entity<OrganComponent?> organ)
     {
-        Log.Debug($"InsertOrgan {ToPrettyString(body)} {ToPrettyString(organ)}");
         if (!_bodyQuery.Resolve(body, ref body.Comp, false) ||
             !_organQuery.Resolve(organ, ref organ.Comp) ||
             body.Comp.Organs is not {} container)
             return false;
 
-        Log.Debug($"parent of organ is {ToPrettyString(Transform(organ).ParentUid)}");
-        Log.Debug($"Container contains it? {container.Contains(organ)}");
         if (container.Contains(organ))
             return true; // it was already inserted
 

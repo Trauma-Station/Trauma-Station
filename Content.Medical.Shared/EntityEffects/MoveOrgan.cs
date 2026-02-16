@@ -10,6 +10,7 @@ namespace Content.Medical.Shared.EntityEffects;
 
 /// <summary>
 /// Moves an organ from one body part to another.
+/// The parent organ will be changed.
 /// The target entity must be the body.
 /// </summary>
 public sealed partial class MoveOrgan : EntityEffectBase<MoveOrgan>
@@ -34,6 +35,7 @@ public sealed class MoveOrganEffectSystem : EntityEffectSystem<BodyComponent, Mo
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly BodyCacheSystem _cache = default!;
     [Dependency] private readonly BodyPartSystem _part = default!;
 
     protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<MoveOrgan> args)
@@ -50,6 +52,8 @@ public sealed class MoveOrganEffectSystem : EntityEffectSystem<BodyComponent, Mo
             !_body.RemoveOrgan(body, organ)) // the organ refused to be removed...
             return;
 
+        // the child organ will refuse to be inserted without this, so set it to the new parent
+        _cache.SetParentCategory(organ, effect.Dest);
         if (!_part.InsertOrgan(dest, organ)) // shouldn't fail...
             Log.Error($"Failed to move organ {ToPrettyString(organ)} from {ToPrettyString(body)} to {ToPrettyString(dest)} in slot {slot}!");
     }

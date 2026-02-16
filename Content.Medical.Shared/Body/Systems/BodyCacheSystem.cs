@@ -98,7 +98,7 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
 
     private void OnChildInsertAttempt(Entity<ChildOrganComponent> ent, ref OrganInsertAttemptEvent args)
     {
-        if (args.Cancelled)
+        if (args.Cancelled || ent.Owner != args.Organ)
             return;
 
         if (_body.GetCategory(ent.Owner) is not {} category ||
@@ -164,6 +164,15 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
         => _query.TryComp(body, out var comp)
             ? GetOrgan((body, comp), category)
             : null;
+
+    public void SetParentCategory(Entity<ChildOrganComponent?> organ, [ForbidLiteral] ProtoId<OrganCategoryPrototype> category)
+    {
+        if (!_childQuery.Resolve(organ, ref organ.Comp) || organ.Comp.ParentCategory == category)
+            return;
+
+        organ.Comp.ParentCategory = category;
+        Dirty(organ, organ.Comp);
+    }
 
     #endregion
 }
