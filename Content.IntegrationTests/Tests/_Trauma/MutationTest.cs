@@ -18,7 +18,7 @@ public sealed class MutationTest
     [Test]
     public async Task AddRemoveAllMutations()
     {
-        await using var pair = await PoolManager.GetServerClient(settings);
+        await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
         var map = await pair.CreateTestMap();
 
