@@ -159,6 +159,8 @@
       category: Eyes
     - !type:AddOrganSlot
       category: Tongue
+    - !type:AddOrganSlot
+      category: Ears
   - !type:MoveOrgan
     organ: Brain
     dest: Torso
