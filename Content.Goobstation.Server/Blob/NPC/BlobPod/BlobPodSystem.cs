@@ -78,7 +78,7 @@ public sealed class BlobPodSystem : SharedBlobPodSystem
         if(args.Container.ID != "head")
             return;
 
-        if (!HasComp<HumanoidAppearanceComponent>(args.Container.Owner) || !HasComp<ZombieBlobComponent>(args.Container.Owner))
+        if (!HasComp<HumanoidProfileComponent>(args.Container.Owner) || !HasComp<ZombieBlobComponent>(args.Container.Owner))
             return;
 
         if (!TryComp<ZombieBlobComponent>(args.Container.Owner, out var zombieBlob))
@@ -169,7 +169,7 @@ public sealed class BlobPodSystem : SharedBlobPodSystem
     {
         if (!Resolve(uid, ref component))
             return false;
-        if (!HasComp<HumanoidAppearanceComponent>(target))
+        if (!HasComp<HumanoidProfileComponent>(target))
             return false;
         if (_mobs.IsAlive(target))
             return false;

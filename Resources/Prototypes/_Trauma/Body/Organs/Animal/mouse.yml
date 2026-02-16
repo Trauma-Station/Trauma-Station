@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseAnimalOrgan
+  parent: [ OrganBaseInternal ]
   id: OrganMouseEggSack
   name: mouse egg sack
   description: This organ is what lets mice asexually reproduce. Its tissues seem... alien, could this really be from nature?
@@ -9,7 +9,10 @@
     state: egg_sack
     scale: 0.25,0.25 # :)
   - type: Organ
-    slotId: egg_sack
+    category: EggSack
+  - type: ChildOrgan
+    parentCategory: Torso
+  - type: OrganComponents
     onAdd:
     - type: EggLayer
       eggSpawn:
@@ -17,4 +20,3 @@
       hungerUsage: 20
       eggLayAction: MouseMultiply
       hungerRequired: true
-  - type: EggSack # only for surgery whitelist, doesn't do anything

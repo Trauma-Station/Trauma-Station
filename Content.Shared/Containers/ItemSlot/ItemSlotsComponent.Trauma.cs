@@ -1,7 +1,20 @@
 namespace Content.Shared.Containers.ItemSlots;
 
 /// <summary>
-/// Trauma - add lavaland related fields
+/// Trauma - add SmartEquip bool
+/// </summary>
+public sealed partial class ItemSlotsComponent
+{
+    /// <summary>
+    /// Allows smart equip keybinds (e.g. F for suit storage) to take and insert items.
+    /// The default of false will just put the item itself into your hands.
+    /// </summary>
+    [DataField]
+    public bool SmartEquip;
+}
+
+/// <summary>
+/// Trauma - add lavaland related fields for a slot
 /// </summary>
 public sealed partial class ItemSlot
 {

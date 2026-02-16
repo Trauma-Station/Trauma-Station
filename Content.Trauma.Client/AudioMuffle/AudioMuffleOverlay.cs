@@ -107,61 +107,38 @@ public sealed class AudioMuffleOverlay : Overlay
         var blockerSet =
             _system.ReverseBlockerIndicesDict.GetValueOrDefault(index, new HashSet<Entity<SoundBlockerComponent>>());
         var blockersCount = blockerSet.Count;
-        var audioSet = _system.ReverseAudioPosDict.GetValueOrDefault(index, new HashSet<Entity<AudioComponent, AudioMuffleComponent>>());
-        var audioCount = audioSet.Count;
         var hasTileData = _system.TileDataDict.TryGetValue(index, out var data);
 
         handle.DrawString(_font, pos, $"Indices: {index}");
         pos += offset;
         handle.DrawString(_font, pos, $"Blockers amount: {blockersCount}");
-        pos += offset;
-        handle.DrawString(_font, pos, $"Audio count: {audioCount}");
 
-        if (hasTileData)
-        {
-            pos += offset;
-            handle.DrawString(_font, pos, "Tile data:");
-            pos += offset2;
-            pos += offset;
-            handle.DrawString(_font, pos, $"Indices: {data!.Indices}");
-            pos += offset;
-            handle.DrawString(_font, pos, $"Total cost: {data.TotalCost}");
-            if (data.Previous != null)
-            {
-                pos += offset;
-                handle.DrawString(_font, pos, $"Previous: {data.Previous.Indices}");
-            }
-
-            if (data.Next.Count <= 0)
-                return;
-
-            pos += offset;
-            handle.DrawString(_font, pos, "Next:");
-            pos += offset2;
-            foreach (var next in data.Next)
-            {
-                pos += offset;
-                handle.DrawString(_font, pos, $"Indices: {next.Indices}");
-            }
-        }
-
-        pos -= offset2;
-
-        if (audioCount <= 0)
+        if (!hasTileData)
             return;
 
         pos += offset;
-        handle.DrawString(_font, pos, "Audio data:");
+        handle.DrawString(_font, pos, "Tile data:");
         pos += offset2;
-        foreach (var audio in audioSet)
+        pos += offset;
+        handle.DrawString(_font, pos, $"Indices: {data!.Indices}");
+        pos += offset;
+        handle.DrawString(_font, pos, $"Total cost: {data.TotalCost}");
+        if (data.Previous != null)
         {
             pos += offset;
-            var volumeStr = $"{audio.Comp2.OriginalVolume:0.00}";
-            var realVolumeStr = $"{audio.Comp1.Params.Volume:0.00}";
+            handle.DrawString(_font, pos, $"Previous: {data.Previous.Indices}");
+        }
 
-            handle.DrawString(_font, pos, $"Volume: {volumeStr}");
+        if (data.Next.Count <= 0)
+            return;
+
+        pos += offset;
+        handle.DrawString(_font, pos, "Next:");
+        pos += offset2;
+        foreach (var next in data.Next)
+        {
             pos += offset;
-            handle.DrawString(_font, pos, $"Real volume: {realVolumeStr}");
+            handle.DrawString(_font, pos, $"Indices: {next.Indices}");
         }
     }
 }

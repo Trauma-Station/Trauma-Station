@@ -406,16 +406,16 @@
     added:
     - !type:NestedEffect
       conditions:
-      - !type:OrganSlotCondition
-        organ: brain
+      - !type:HasOrganSlot
+        organ: Brain
         partType: Head
       proto: MutationRemoveHead
     removed:
     - !type:NestedEffect
       conditions:
-      - !type:OrganSlotCondition
-        organ: brain
-        partType: Chest
+      - !type:HasOrganSlot
+        organ: Brain
+        partType: Torso
       proto: MutationAddHead
 
 # Peak of powergaming technology

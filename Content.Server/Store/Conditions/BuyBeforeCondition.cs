@@ -1,23 +1,9 @@
-// SPDX-FileCopyrightText: 2023 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Fildrance <fildrance@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 pa.pecherskij <pa.pecherskij@interfax.ru>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Store.Conditions;
 
-// goob edit - fuck newstore
-// do not touch unless you want to shoot yourself in the leg
 public sealed partial class BuyBeforeCondition : ListingCondition
 {
     /// <summary>
@@ -45,7 +31,7 @@ public sealed partial class BuyBeforeCondition : ListingCondition
         if (!args.EntityManager.TryGetComponent<StoreComponent>(args.StoreEntity, out var storeComp))
             return false;
 
-        var allListings = storeComp.Listings;
+        var allListings = storeComp.FullListingsCatalog;
 
         var purchasesFound = false;
 

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Polymorph;
 using Content.Shared.Polymorph.Systems;
 using Content.Shared.Popups;
@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.Actions;
 
 public sealed class ShootOrganActionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedPolymorphSystem _polymorph = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
@@ -36,15 +36,15 @@ public sealed class ShootOrganActionSystem : EntitySystem
         if (_polymorph.PolymorphEntity(organ, ent.Comp.Polymorph) is not {} projectile)
             return;
 
-        _throwing.TryThrow(projectile, coordinates: args.Target, user: user);
+        _throwing.TryThrow(projectile, coordinates: args.Target, user: user,
+            predicted: false); // TODO: remove if polymorph gets predicted
     }
 
     private EntityUid? RemoveOrgan(Entity<ShootOrganActionComponent> ent, EntityUid user)
     {
-        if (_body.FindPart(user, ent.Comp.PartType, ent.Comp.Symmetry) is {} part &&
-            _body.FindPartOrgan(part, ent.Comp.Organ) is {} organ &&
-            _body.RemoveOrgan(organ, organ.Comp))
-            return organ.Owner;
+        if (_body.GetOrgan(user, ent.Comp.Organ) is {} organ &&
+            _body.RemoveOrgan(user, organ))
+            return organ;
 
         return null;
     }

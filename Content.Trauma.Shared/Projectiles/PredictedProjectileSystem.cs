@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Goobstation.Common.Projectiles;
 using Content.Goobstation.Common.Weapons.Penetration;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Destructible;
 using Content.Shared.Effects;
@@ -170,7 +170,11 @@ public sealed class PredictedProjectileSystem : EntitySystem
         }
 
         if ((comp.DeleteOnCollide && comp.ProjectileSpent) || (comp.NoPenetrateMask & otherFixture.CollisionLayer) != 0) // Goobstation - Make x-ray arrows not penetrate blob
+        {
+            var deleteEv = new DeletingProjectileEvent(uid);
+            RaiseLocalEvent(ref deleteEv);
             PredictedQueueDel(uid);
+        }
 
         if (comp.ImpactEffect != null && TryComp(uid, out TransformComponent? xform) && _timing.IsFirstTimePredicted)
         {

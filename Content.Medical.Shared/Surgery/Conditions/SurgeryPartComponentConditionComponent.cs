@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+
+namespace Content.Medical.Shared.Surgery.Conditions;
+
+// <summary>
+//   What components are necessary in the targeted body part for the surgery to be valid.
+// </summary>
+[RegisterComponent, NetworkedComponent]
+public sealed partial class SurgeryPartComponentConditionComponent : Component
+{
+    // <summary>
+    //   The components to check for.
+    // </summary>
+    [DataField(required: true)]
+    public ComponentRegistry Components;
+
+    // <summary>
+    //   If true, the lack of these components will instead make the surgery valid.
+    // </summary>
+    [DataField]
+    public bool Inverse;
+}

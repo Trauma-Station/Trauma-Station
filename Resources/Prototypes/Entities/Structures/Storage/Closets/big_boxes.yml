@@ -24,6 +24,7 @@
   description: Huh? Just a box...
   abstract: true
   components:
+    - type: JustABox # Trauma - just a box...
     - type: Transform
       noRot: true
     - type: Clickable
@@ -86,11 +87,12 @@
     - type: Damageable
       damageModifierSet: FlimsyMetallic #Syndicate boxes should have a bit of protection
     - type: CardboardBox
-      quiet: true
+      effectSound: /Audio/_Goobstation/Voice/surprised.ogg # Trauma - more impactful sound
+      quiet: false # Trauma - false so custom logic can be used to control it
     - type: Stealth
       hadOutline: true
     - type: StealthOnMove
-      passiveVisibilityRate: -0.37
+      passiveVisibilityRate: -1 # very useful for going around the station concealed, if you start jitterstrafing you get seen
       movementVisibilityRate: 0.20
 
 - type: entity

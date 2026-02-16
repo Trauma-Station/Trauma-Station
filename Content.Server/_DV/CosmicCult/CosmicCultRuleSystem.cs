@@ -26,6 +26,7 @@ using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
 using Content.Server.Objectives.Components;
+using Content.Server.Polymorph.Components;
 using Content.Server.Popups;
 using Content.Shared.Radio.Components;
 using Content.Server.RoundEnd;
@@ -74,6 +75,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Linq;
 using Content.Goobstation.Common.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Station.Systems;
 using Content.Shared.Cuffs.Components;
 using Content.Server.Cuffs;
@@ -143,6 +145,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         SubscribeLocalEvent<CosmicCultComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<CosmicGodComponent, ComponentInit>(OnGodSpawn);
         SubscribeLocalEvent<CosmicCultComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<CosmicCultComponent, UserShouldTakeHolyEvent>(OnShouldTakeHoly); // Trauma
 
         Subs.CVar(_config,
             DCCVars.CosmicCultT2RevealDelaySeconds,
@@ -163,6 +166,22 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     }
 
     #region Starting Events
+
+    // <Trauma>
+    private void OnShouldTakeHoly(Entity<CosmicCultComponent> ent, ref UserShouldTakeHolyEvent args)
+    {
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
+            return;
+
+        args.WeakToHoly = true;
+
+        if (AssociatedGamerule(ent) is not { } rule)
+            return;
+
+        args.ShouldTakeHoly = rule.Comp.CurrentTier > 2;
+    }
+    // </Trauma>
+
     protected override void Started(EntityUid uid,
         CosmicCultRuleComponent component,
         GameRuleComponent gameRule,
@@ -176,6 +195,11 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         {
             component.StewardVoteTimer = null;
             StewardVote();
+        }
+        if (component.ExtraRiftTimer is { } riftTimer && _timing.CurTime >= riftTimer && !component.RiftStop)
+        {
+            component.ExtraRiftTimer = _timing.CurTime + _rand.Next(TimeSpan.FromSeconds(230), TimeSpan.FromSeconds(360)); //3min50 to 6min between new rifts. Seconds instead of minutes for granularity.
+            SpawnRift();
         }
         if (component.PrepareFinaleTimer is { } finalePrepTimer
             && _timing.CurTime >= finalePrepTimer)
@@ -264,10 +288,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
             for (var i = 0; i < component.TotalCrew / 4; i++) // spawn # malign rifts equal to 25% of the playercount
             {
-                if (!TryFindRandomTile(out var _, out var _, out var _, out var coords))
-                    continue;
-
-                Spawn("CosmicMalignRift", coords);
+                SpawnRift();
             }
 
             var lights = EntityQueryEnumerator<PoweredLightComponent>();
@@ -304,12 +325,14 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         while (cultQuery.MoveNext(out var cult, out var cultComp, out var metadata))
         {
             var playerInfo = metadata.EntityName;
-            cultists.Add((playerInfo, cult));
+            if (TryComp<PolymorphedEntityComponent>(cult, out var polyComp) && polyComp.Parent is { } parent) // If the cultist is polymorphed, we use the original entity instead and hope that they'll polymorph back eventually
+                cultists.Add((playerInfo, parent));
+            else
+                cultists.Add((playerInfo, cult));
         }
 
         var options = new VoteOptions
         {
-            DisplayVotes = false,
             Title = Loc.GetString("cosmiccult-vote-steward-title"),
             InitiatorText = Loc.GetString("cosmiccult-vote-steward-initiator"),
             Duration = _voteTimer,
@@ -356,6 +379,15 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
     private void OnAntagSelect(Entity<CosmicCultRuleComponent> uid, ref AfterAntagEntitySelectedEvent args) =>
         TryStartCult(args.EntityUid, uid);
+
+
+    public void SpawnRift()
+    {
+        if (TryFindRandomTile(out var _, out var _, out var _, out var coords))
+        {
+            Spawn("CosmicMalignRift", coords);
+        }
+    }
 
     private void OnAddedCultist(Entity<CosmicCultRuleComponent> uid, ref CosmicCultAddedCultistEvent args)
     {
@@ -489,6 +521,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             ent.Comp.RoundEndTextAnnouncement);
 
         ent.Comp.RoundEndBehavior = RoundEndBehavior.Nothing; // prevent this being called multiple times.
+        ent.Comp.RiftStop = true; // rifts can stop spawning now.
 
         var gameruleMonument = ent.Comp.MonumentInGame;
         if (TryComp<CosmicFinaleComponent>(gameruleMonument, out var finComp))
@@ -554,7 +587,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         cult.Comp.TotalCrew = _player.Sessions.Count(session
             => session.Status == SessionStatus.InGame
-                && HasComp<HumanoidAppearanceComponent>(session.AttachedEntity));
+                && HasComp<HumanoidProfileComponent>(session.AttachedEntity));
 
 #if DEBUG
         if (cult.Comp.TotalCrew < 25)
@@ -740,6 +773,8 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         EnsureComp<IntrinsicRadioReceiverComponent>(uid);
         TransferCultAssociation(converter, uid);
 
+        EnsureComp<WeakToHolyComponent>(uid); // Trauma
+
         if (cosmicGamerule.CurrentTier == 3)
         {
             cultComp.EntropyBudget = 48; // pity balance
@@ -751,15 +786,14 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             EnsureComp<CosmicStarMarkComponent>(uid);
             EnsureComp<PressureImmunityComponent>(uid);
             EnsureComp<TemperatureImmunityComponent>(uid);
+
+            // <Trauma>
+            var ev = new UnholyStatusChangedEvent(uid, uid, true);
+            RaiseLocalEvent(uid, ref ev);
+            // </Trauma>
         }
         else if (cosmicGamerule.CurrentTier == 2)
         {
-            // Goobstation Change - Shitchap
-            if (!HasComp<WeakToHolyComponent>(uid))
-                EnsureComp<WeakToHolyComponent>(uid).AlwaysTakeHoly = true;
-            else
-                cultComp.WasWeakToHoly = true;
-
             cultComp.EntropyBudget = 26; // pity balance
 
             foreach (var influenceProto in _protoMan.EnumeratePrototypes<InfluencePrototype>().Where(influenceProto => influenceProto.Tier == 2))
@@ -791,7 +825,8 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     {
         if (AssociatedGamerule(uid) is not { } cult)
             return;
-
+        if (TerminatingOrDeleted(uid))
+            return;
         var cosmicGamerule = cult.Comp;
 
         _stun.TryKnockdown(uid.Owner, TimeSpan.FromSeconds(2));
@@ -811,9 +846,10 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         RemComp<TemperatureImmunityComponent>(uid);
         RemComp<CosmicStarMarkComponent>(uid);
 
-        // Goobstation Change: Shitchap
-        if (!uid.Comp.WasWeakToHoly)
-            RemComp<WeakToHolyComponent>(uid);
+        // <Trauma>
+        var ev = new UnholyStatusChangedEvent(uid, uid, false);
+        RaiseLocalEvent(uid, ref ev);
+        // </Trauma>
 
         _damage.SetDamageContainerID(uid.Owner, uid.Comp.StoredDamageContainer);
         _antag.SendBriefing(uid, Loc.GetString("cosmiccult-role-deconverted-fluff"), Color.FromHex("#4cabb3"), _deconvertSound);

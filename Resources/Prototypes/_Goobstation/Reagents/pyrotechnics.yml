@@ -17,7 +17,7 @@
   contrabandSeverity: Major # explosive, with no other functions
   color: black
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.05 # slow, so that I can later implement it exploding when people are on fire/hot
       effects:
       - !type:HealthChange

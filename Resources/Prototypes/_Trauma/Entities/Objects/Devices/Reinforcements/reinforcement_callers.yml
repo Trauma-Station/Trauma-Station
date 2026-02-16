@@ -20,7 +20,7 @@
     key: enum.StoreUiKey.Key
   - type: Store
     balance:
-      Spesos: 0
+      Spesos: 2500
 
 - type: entity
   parent: BaseReinforcementCallerEmpty
@@ -33,8 +33,6 @@
     - ReinforcementsHoS
     currencyWhitelist:
     - Spesos
-    sales:
-      enabled: false
     ownerOnly: false
 
 - type: entity
@@ -58,8 +56,6 @@
     - CargoHoP
     currencyWhitelist:
     - Spesos
-    sales:
-      enabled: false
     ownerOnly: false
 
 - type: storeCategory

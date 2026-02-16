@@ -31,7 +31,7 @@
   result: FoodMeatVoxFried
   time: 10
   solids:
-    LeftLegVox: 1
+    OrganVoxLegLeft: 1
 
 - type: microwaveMealRecipe
   id: RecipeFriedVoxR
@@ -39,7 +39,7 @@
   result: FoodMeatVoxFried
   time: 10
   solids:
-    RightLegVox: 1
+    OrganVoxLegRight: 1
 
 - type: microwaveMealRecipe
   id: RecipeChudBurger
@@ -60,4 +60,4 @@
   time: 5
   group: Savory
   solids:
-    HeadMoth: 1
+    OrganMothHead: 1

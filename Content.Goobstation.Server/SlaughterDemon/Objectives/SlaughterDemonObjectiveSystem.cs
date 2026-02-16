@@ -146,6 +146,6 @@ public sealed class SlaughterDemonObjectiveSystem : EntitySystem
 
     private int GetAllPlayers()
     {
-        return EntityQuery<HumanoidAppearanceComponent, ActorComponent>().Count();
+        return EntityQuery<HumanoidProfileComponent, ActorComponent>().Count();
     }
 }

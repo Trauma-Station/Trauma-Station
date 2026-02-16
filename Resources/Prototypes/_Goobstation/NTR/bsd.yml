@@ -8,7 +8,6 @@
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
-    hair: HairBald # todo: find a new hair for BSD
   - type: Loadout
     prototypes: [BlueshieldDeputyGear]
   - type: RandomMetadata # funny cowboy name

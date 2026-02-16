@@ -100,24 +100,23 @@ public sealed partial class ItemSlotsSystem
 
     private bool TryStartInsertDoAfter(ItemSlot slot, EntityUid item, EntityUid? user)
     {
-        if (slot.InsertDelay != null && user != null)
-        {
-            return _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
-                user.Value,
-                slot.InsertDelay.Value,
-                new ItemSlotInteractionDoAfterEvent(slot.ID!, false, true),
-                slot.ContainerSlot?.Owner,
-                item,
-                item)
-            {
-                BreakOnHandChange = true,
-                BreakOnMove = true,
-                BreakOnDropItem = true,
-                BreakOnDamage = true,
-            });
-        }
+        if (slot.InsertDelay is not {} delay || user == null)
+            return false;
 
-        return false;
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
+            user.Value,
+            delay,
+            new ItemSlotInteractionDoAfterEvent(slot.ID!, false, true),
+            slot.ContainerSlot?.Owner,
+            item,
+            item)
+        {
+            BreakOnHandChange = true,
+            BreakOnMove = true,
+            BreakOnDropItem = true,
+            BreakOnDamage = true,
+        });
+        return true;
     }
 
     private bool TryStartEjectDoAfter(ItemSlot slot, EntityUid item, EntityUid? user)

@@ -112,8 +112,6 @@
   supervisors: job-supervisors-centcom
   canBeAntag: false
   guides:
-  - SOPNanotrasenRep
-  - SOP
   - SpaceLaw
   - Writing
   goobcoins: 40

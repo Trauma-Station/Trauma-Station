@@ -27,7 +27,7 @@
     whitelist:
       requireAll: true
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
       - Inventory
     canTargetSelf: false
     event: !type:MimeMalaiseEvent
@@ -49,7 +49,7 @@
   components:
   - type: Action
     raiseOnUser: true
-    useDelay: 60
+    useDelay: 30
     itemIconStyle: BigAction
     sound: !type:SoundCollectionSpecifier
       collection: CluwneHorn
@@ -62,7 +62,7 @@
     whitelist:
       requireAll: true
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
       - Inventory
     canTargetSelf: false
     event: !type:CluwneCurseEvent
@@ -97,7 +97,7 @@
   - type: EntityTargetAction
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
       - Inventory
     canTargetSelf: false
     event: !type:BananaTouchEvent
@@ -526,7 +526,7 @@
   - type: Action
     raiseOnUser: true
     checkCanInteract: false
-    useDelay: 0.5 # SpellCardsEvent handles use delay
+    useDelay: 0.5
     itemIconStyle: BigAction
     sound:
       path: /Audio/Magic/staff_healing.ogg
@@ -552,6 +552,10 @@
     requiresSpeech: true
     school: Evocation
   - type: SpellCardsAction
+  - type: LimitedCharges
+    maxCharges: 5
+  - type: AutoRecharge
+    rechargeDuration: 2
   - type: LockOnMarkAction
   - type: ActionUpgrade
     effectedLevels:
@@ -629,7 +633,7 @@
       requireAll: true
       components:
       - Inventory
-      - HumanoidAppearance
+      - HumanoidProfile
     canTargetSelf: false
     event: !type:BarnyardCurseEvent
       masks:
@@ -756,6 +760,7 @@
       enum.WizardTeleportUiKey.Key:
         type: WizardTeleportBoundUserInterface
         requireInputValidation: false
+        interactionRange: -1
   - type: ActionUpgrade
     effectedLevels:
       2: ActionTeleportII
@@ -965,7 +970,7 @@
   - type: Action
     raiseOnUser: true
     checkCanInteract: false
-    useDelay: 25
+    useDelay: 15
     itemIconStyle: BigAction
     icon:
       sprite: _Goobstation/Wizard/actions.rsi

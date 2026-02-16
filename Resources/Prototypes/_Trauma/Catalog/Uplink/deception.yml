@@ -1,0 +1,9 @@
+- type: listing
+  id: UplinkUltrabrightLantern
+  name: uplink-ultrabright-lantern-name
+  description: uplink-ultrabright-lantern-desc
+  productEntity: LanternFlash
+  cost:
+    Telecrystal: 5 # literal maints gear, its more useful to just have a backup light option
+  categories:
+  - UplinkDeception

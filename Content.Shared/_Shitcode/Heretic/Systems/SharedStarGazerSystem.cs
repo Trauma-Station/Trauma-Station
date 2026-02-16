@@ -5,7 +5,9 @@ using Content.Shared._Shitcode.Heretic.Systems.Abilities;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Heretic;
+using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mind;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
@@ -46,7 +48,17 @@ public abstract class SharedStarGazerSystem : EntitySystem
         SubscribeLocalEvent<StarGazeComponent, ComponentShutdown>(OnStarGazeShutdown);
         SubscribeLocalEvent<StarGazeComponent, AttackAttemptEvent>(OnStarGazeAttackAttempt);
 
+        SubscribeLocalEvent<HereticComponent, EventHereticResolveStarGazer>(OnResolveStarGazer);
+
         SubscribeAllEvent<LaserBeamEndpointPositionEvent>(OnGetPosition);
+    }
+
+    private void OnResolveStarGazer(Entity<HereticComponent> ent, ref EventHereticResolveStarGazer args)
+    {
+        if (!TryComp(ent, out MindComponent? mind) || mind.OwnedEntity is not { } uid)
+            return;
+
+        ResolveStarGazer(uid, out _, false);
     }
 
     private void OnStarGazerHit(Entity<StarGazerComponent> ent, ref MeleeHitEvent args)

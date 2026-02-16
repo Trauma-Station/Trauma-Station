@@ -7,7 +7,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Heretic;
+using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared._Shitcode.Heretic.Rituals;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Heretic.Prototypes;
@@ -24,7 +25,7 @@ public sealed partial class HereticKnowledgePrototype : IPrototype
     /// <summary>
     ///     Indicates that this should not be on a main branch.
     /// </summary>
-    [DataField] public bool SideKnowledge = false;
+    [DataField] public bool SideKnowledge;
 
     /// <summary>
     ///     What event should be raised
@@ -34,7 +35,8 @@ public sealed partial class HereticKnowledgePrototype : IPrototype
     /// <summary>
     ///     What rituals should be given
     /// </summary>
-    [DataField] public List<ProtoId<HereticRitualPrototype>>? RitualPrototypes;
+    [DataField]
+    public List<EntProtoId<HereticRitualComponent>>? RitualPrototypes;
 
     /// <summary>
     ///     What actions should be given

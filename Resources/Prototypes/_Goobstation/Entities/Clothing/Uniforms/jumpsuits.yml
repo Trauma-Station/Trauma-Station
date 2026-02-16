@@ -33,8 +33,7 @@
     sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/durathread_jumpsuit.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -63,8 +62,7 @@
   components:
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -196,8 +194,7 @@
     sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/navy_gold.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -221,8 +218,7 @@
     sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/specialoperations.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -246,8 +242,7 @@
     sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/diplomat.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg

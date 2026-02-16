@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Shared.Actions.Components;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Forensics.Components;
@@ -77,7 +77,7 @@ public sealed partial class MutationSystem : EntitySystem
         _query = GetEntityQuery<MutationComponent>();
         _unremoveableQuery = GetEntityQuery<UnremoveableComponent>();
 
-        SubscribeLocalEvent<MutatableComponent, MapInitEvent>(OnMapInit, after: new[] { typeof(SharedBodySystem) });
+        SubscribeLocalEvent<MutatableComponent, MapInitEvent>(OnMapInit, after: new[] { typeof(BodySystem) });
         SubscribeLocalEvent<MutatableComponent, PolymorphedEvent>(OnPolymorphed);
         SubscribeLocalEvent<MutatableComponent, DnaScrambledEvent>(OnDnaScrambled);
 

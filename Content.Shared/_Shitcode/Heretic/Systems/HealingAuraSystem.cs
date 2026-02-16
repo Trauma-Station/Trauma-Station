@@ -40,11 +40,8 @@ public sealed class HealingAuraSystem : EntitySystem
                 if (multiplier == 0f)
                     continue;
 
-                _heretic.IHateWoundMed((ent, damageable, null, null),
+                _heretic.IHateWoundMed((ent, damageable, null),
                     aura.ToHeal * multiplier,
-                    aura.BoneHeal * multiplier,
-                    aura.PainHeal * multiplier,
-                    aura.WoundHeal * multiplier,
                     aura.BloodHeal * multiplier,
                     aura.BleedHeal * multiplier);
             }

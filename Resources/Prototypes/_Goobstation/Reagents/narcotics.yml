@@ -26,9 +26,10 @@
   physicalDesc: reagent-physical-desc-murky
   color: "#6e697d"
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.05
       effects:
+      # Main effects
       - !type:HealthChange
         damage:
           groups:
@@ -60,9 +61,8 @@
         damage:
           types:
             Slash: 1 # clawing at your own skin
-    Narcotic:
-      metabolismRate: 0.05
-      effects:
+
+      # Side effects
       - !type:PopupMessage # the usual hallucinations
         type: Local
         visualType: Medium
@@ -102,9 +102,7 @@
       - !type:Emote # Now a bunch of emotes
         emote: Scream
         probability: 0.05
-    Medicine:
-      metabolismRate: 0.05
-      effects:
+
       - !type:SuppressPain # fent does this
         amount: 400
         time: 30
@@ -119,7 +117,7 @@
   boilingPoint: 255.0
   meltingPoint: 36.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:GenericStatusEffect
         key: TemporaryBlindness
@@ -137,7 +135,7 @@
   boilingPoint: 255.0
   meltingPoint: 36.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       metabolismRate: 0.05
       effects:
       - !type:GenericStatusEffect
@@ -233,7 +231,7 @@
   flavor: oily
   color: "#75fff5"
   metabolisms:
-    Narcotic:
+    Bloodstream:
       metabolismRate: 1
       effects:
       - !type:ModifyStatusEffect
@@ -261,13 +259,10 @@
         components:
         - type: DelayedKnockdown
         guidebookText: entity-effect-guidebook-remove-delayed-knockdown
-    Medicine:
-      metabolismRate: 1
-      effects:
+
       - !type:ResetNarcolepsy
-    Poison:
-      metabolismRate: 1
-      effects:
+
+      # Side effects
       - !type:HealthChange
         damage:
           types:
@@ -275,7 +270,7 @@
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
-          reagent: Amnestizine
+          reagent: Aranesp
           min: 50
         damage:
           types:
@@ -293,7 +288,7 @@
   flavor: oily
   color: "#ffaa00"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -321,7 +316,6 @@
         visualType: Medium
         messages: [ "mousebites-effects-vexes", "mousebites-effects-stupid", "mousebites-effects-metoo" ]
         probability: 0.10
-
 
 - type: reagent
   id: OleoresinCapsaicin
@@ -368,7 +362,7 @@
         effectProto: OleoresinSlowdownStatusEffect
 
 - type: reagent
-  id: Heroin
+  id: Heroin # hunter biden's favourite snack
   name: reagent-name-heroin
   group: Medicine
   desc: reagent-desc-heroin
@@ -376,8 +370,7 @@
   flavor: medicine
   color: "#a8a8af"
   metabolisms:
-    Medicine:
-      metabolismRate: 0.5
+    Bloodstream:
       effects:
       - !type:SuppressPain
         amount: 15
@@ -426,18 +419,14 @@
   flavor: sour
   color: "#e1a116"
   metabolisms:
-    Gas:
-      effects:
-      - !type:Jitter
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:Jitter
       - !type:GenericStatusEffect
         key: Stun
         time: 3
         type: Remove
-      - !type:GenericStatusEffect
-        key: KnockedDown
+      - !type:ModifyKnockdown
         time: 3
         type: Remove
       - !type:GenericStatusEffect
@@ -445,7 +434,6 @@
         time: 10
         type: Remove
       - !type:GenericStatusEffect
-        conditions:
         key: ForcedSleep
         type: Remove
         time: 10
@@ -457,8 +445,7 @@
         components:
         - type: DelayedKnockdown
         guidebookText: entity-effect-guidebook-remove-delayed-knockdown
-    Medicine:
-      effects:
+
       - !type:ResetNarcolepsy
         conditions:
         - !type:ReagentCondition

@@ -15,3 +15,8 @@
   - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
     species:
     - Plasmaman
+
+- type: loadout
+  id: CMOMJ
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMilitaryCMO

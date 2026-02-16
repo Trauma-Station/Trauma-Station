@@ -30,9 +30,8 @@
     - PlasmamanSafe
   - type: IgniteFromGasImmunity
     parts:
-    - LeftHand
-    - RightHand
-
+    - HandLeft
+    - HandRight
 
 - type: entity
   parent: ClothingHandModsuitBase

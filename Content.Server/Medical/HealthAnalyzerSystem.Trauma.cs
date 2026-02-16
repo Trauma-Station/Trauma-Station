@@ -1,23 +1,19 @@
 using Content.Server.Medical.Components;
-using Content.Shared._Shitmed.Medical;
 using Content.Shared._Shitmed.Medical.HealthAnalyzer;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Pain.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Systems;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Traumas;
+using Content.Medical.Shared.Wounds;
+using Content.Medical.Shared.Pain;
+using Content.Medical.Shared.Traumas;
+using Content.Shared.Body;
 using Content.Shared.Body.Components;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Damage.Components;
 using Content.Shared.MedicalScanner;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
+using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Server.Medical;
@@ -28,18 +24,17 @@ namespace Content.Server.Medical;
 public sealed partial class HealthAnalyzerSystem
 {
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly CommonBodyPartSystem _part = default!;
     [Dependency] private readonly TraumaSystem _trauma = default!;
     [Dependency] private readonly WoundSystem _wound = default!;
 
     private EntityQuery<BodyComponent> _bodyQuery;
-    private EntityQuery<BodyPartComponent> _partQuery;
     private EntityQuery<DamageableComponent> _damageQuery;
 
     private void InitializeTrauma()
     {
         _bodyQuery = GetEntityQuery<BodyComponent>();
-        _partQuery = GetEntityQuery<BodyPartComponent>();
         _damageQuery = GetEntityQuery<DamageableComponent>();
 
         // not using BuiEvents so it works for cryo pods too for free
@@ -58,16 +53,10 @@ public sealed partial class HealthAnalyzerSystem
             return;
 
         healthAnalyzer.Comp.CurrentMode = HealthAnalyzerMode.Body; // If you press a part ye get redirected bozo.
-        if (args.BodyPart == null)
-        {
+        if (args.Category is not {} category)
             BeginAnalyzingEntity(healthAnalyzer, owner.Value, null);
-        }
-        else
-        {
-            var (targetType, targetSymmetry) = _body.ConvertTargetBodyPart(args.BodyPart.Value);
-            if (_body.GetBodyChildrenOfType(owner.Value, targetType, symmetry: targetSymmetry) is { } part)
-                BeginAnalyzingEntity(healthAnalyzer, owner.Value, part.FirstOrDefault().Id);
-        }
+        else if (_body.GetOrgan(owner.Value, category) is {} organ)
+            BeginAnalyzingEntity(healthAnalyzer, owner.Value, organ);
     }
 
     /// <summary>
@@ -86,7 +75,7 @@ public sealed partial class HealthAnalyzerSystem
 
     // can't keep scanning a deleted or detached part
     private bool IsPartInvalid(EntityUid? uid)
-        => Deleted(uid) || _partQuery.CompOrNull(uid.Value)?.Body == null;
+        => Deleted(uid) || _body.GetBody(uid.Value) == null;
 
     public HealthAnalyzerUiState GetHealthAnalyzerUiState(Entity<HealthAnalyzerComponent?> ent, EntityUid? target)
     {
@@ -99,37 +88,31 @@ public sealed partial class HealthAnalyzerSystem
     private void FetchBodyData(EntityUid target,
         out Dictionary<NetEntity, List<WoundableTraumaData>> traumas,
         out Dictionary<NetEntity, FixedPoint2> pain,
-        out Dictionary<TargetBodyPart, bool> bleeding)
+        out HashSet<ProtoId<OrganCategoryPrototype>> bleeding)
     {
         traumas = new();
         pain = new();
         bleeding = new();
 
-        if (!_bodyQuery.TryComp(target, out var body))
-            return;
-
-        if (body.RootContainer.ContainedEntity is not { } rootPart)
-            return;
-
-        foreach (var (woundable, component) in _wound.GetAllWoundableChildren(rootPart))
+        // TODO SHITMED: all of this shit should just be networked
+        foreach (var part in _body.GetOrgans<WoundableComponent>(target))
         {
-            traumas.Add(GetNetEntity(woundable), FetchTraumaData(woundable, component));
-            pain.Add(GetNetEntity(woundable), FetchPainData(woundable, component));
-            bleeding.Add(_body.GetTargetBodyPart(woundable), component.Bleeds > 0);
+            var ent = GetNetEntity(part);
+            traumas.Add(ent, FetchTraumaData(part, part.Comp));
+            pain.Add(ent, FetchPainData(part));
+            if (part.Comp.Bleeds > 0 && _body.GetCategory(part.Owner) is {} category)
+                bleeding.Add(category);
         }
     }
 
-    private Dictionary<TargetBodyPart, bool> FetchBleedData(Entity<BodyComponent?> body)
+    private HashSet<ProtoId<OrganCategoryPrototype>> FetchBleedData(Entity<BodyComponent?> body)
     {
-        var bleeding = new Dictionary<TargetBodyPart, bool>();
-        if (!Resolve(body, ref body.Comp, false))
-            return bleeding;
-
-        if (body.Comp.RootContainer.ContainedEntity is not { } rootPart)
-            return bleeding;
-
-        foreach (var (woundable, component) in _wound.GetAllWoundableChildren(rootPart))
-            bleeding.Add(_body.GetTargetBodyPart(woundable), component.Bleeds > 0);
+        var bleeding = new HashSet<ProtoId<OrganCategoryPrototype>>();
+        foreach (var part in _body.GetOrgans<WoundableComponent>(body))
+        {
+            if (part.Comp.Bleeds > 0 && _body.GetCategory(part.Owner) is {} category)
+                bleeding.Add(category);
+        }
 
         return bleeding;
     }
@@ -137,38 +120,30 @@ public sealed partial class HealthAnalyzerSystem
     private List<WoundableTraumaData> FetchTraumaData(EntityUid target, WoundableComponent woundable)
     {
         var traumasList = new List<WoundableTraumaData>();
+        if (!_trauma.TryGetWoundableTrauma(target, out var traumasFound))
+            return traumasList;
 
-        if (_trauma.TryGetWoundableTrauma(target, out var traumasFound))
+        foreach (var trauma in traumasFound)
         {
-            foreach (var trauma in traumasFound)
+            if (trauma.Comp.TraumaType == TraumaType.BoneDamage
+                && trauma.Comp.TraumaTarget is { } boneWoundable
+                && TryComp(boneWoundable, out BoneComponent? boneComp))
             {
-                if (trauma.Comp.TraumaType == TraumaType.BoneDamage
-                    && trauma.Comp.TraumaTarget is { } boneWoundable
-                    && TryComp(boneWoundable, out BoneComponent? boneComp))
-                {
-                    traumasList.Add(new WoundableTraumaData(ToPrettyString(target),
-                        trauma.Comp.TraumaType.ToString(), trauma.Comp.TraumaSeverity, boneComp.BoneSeverity.ToString(), trauma.Comp.TargetType));
+                traumasList.Add(new WoundableTraumaData(ToPrettyString(target),
+                    trauma.Comp.TraumaType.ToString(), trauma.Comp.TraumaSeverity, boneComp.BoneSeverity.ToString(), trauma.Comp.TargetType));
 
-                    continue;
-                }
-
-                traumasList.Add(new WoundableTraumaData(ToPrettyString(trauma),
-                        trauma.Comp.TraumaType.ToString(), trauma.Comp.TraumaSeverity, targetType: trauma.Comp.TargetType));
+                continue;
             }
+
+            traumasList.Add(new WoundableTraumaData(ToPrettyString(trauma),
+                    trauma.Comp.TraumaType.ToString(), trauma.Comp.TraumaSeverity, targetType: trauma.Comp.TargetType));
         }
 
         return traumasList;
     }
 
-    private FixedPoint2 FetchPainData(EntityUid target, WoundableComponent woundable)
-    {
-        var pain = FixedPoint2.Zero;
-
-        if (!TryComp<NerveComponent>(target, out var nerve))
-            return pain;
-
-        return nerve.PainFeels;
-    }
+    private FixedPoint2 FetchPainData(EntityUid target)
+        => CompOrNull<NerveComponent>(target)?.PainFeels ?? FixedPoint2.Zero;
 
     private Dictionary<NetEntity, OrganTraumaData> FetchOrganData(EntityUid target)
     {
@@ -176,12 +151,12 @@ public sealed partial class HealthAnalyzerSystem
         if (!_bodyQuery.TryComp(target, out var body))
             return organs;
 
-        foreach (var (organId, organComp) in _body.GetBodyOrgans(target))
+        foreach (var organ in _body.GetOrgans<InternalOrganComponent>(target))
         {
-            organs.Add(GetNetEntity(organId), new OrganTraumaData(organComp.OrganIntegrity,
-                organComp.IntegrityCap,
-                organComp.OrganSeverity,
-                organComp.IntegrityModifiers
+            organs.Add(GetNetEntity(organ), new OrganTraumaData(organ.Comp.OrganIntegrity,
+                organ.Comp.IntegrityCap,
+                organ.Comp.OrganSeverity,
+                organ.Comp.IntegrityModifiers
                     .Select(x => (x.Key.Item1, x.Value))
                     .ToList()));
         }
@@ -193,32 +168,19 @@ public sealed partial class HealthAnalyzerSystem
     {
         var solutionsList = new Dictionary<NetEntity, Solution>();
 
-        if (!TryComp(target, out SolutionContainerManagerComponent? container) || container.Containers.Count == 0)
-            return solutionsList;
-
-        foreach (var (name, solution) in _solutionContainerSystem.EnumerateSolutions((target, container)))
+        if (TryComp<BloodstreamComponent>(target, out var blood) &&
+            _solutionContainerSystem.ResolveSolution(target, blood.BloodSolutionName, ref blood.BloodSolution, out var bloodSol))
         {
-            if (name is null
-                || name == BloodstreamComponent.DefaultBloodTemporarySolutionName
-                // TODO SHITMED: what the fuck is this??
-                || name == "print" // I hate this so fucking much.
-                || !TryGetNetEntity(solution, out var netSolution))
-                continue;
-
-            solutionsList.Add(netSolution.Value, solution.Comp.Solution);
+            solutionsList.Add(GetNetEntity(blood.BloodSolution.Value), bloodSol);
         }
 
-        if (_bodyQuery.TryComp(target, out var body)
-            && _body.TryGetBodyOrganEntityComps<StomachComponent>((target, body), out var stomachs))
+        // TODO SHITMED: this is already networked????
+        foreach (var stomach in _body.GetOrgans<StomachComponent>(target))
         {
-            foreach (var stomach in stomachs)
-            {
-                if (stomach.Comp1.Solution is null
-                    || !TryGetNetEntity(stomach.Comp1.Solution, out var netSolution))
-                    continue;
+            if (stomach.Comp.Solution is not {} solution)
+                continue;
 
-                solutionsList.Add(netSolution.Value, stomach.Comp1.Solution.Value.Comp.Solution); // This is horrible.
-            }
+            solutionsList.Add(GetNetEntity(solution), solution.Comp.Solution);
         }
 
         return solutionsList;

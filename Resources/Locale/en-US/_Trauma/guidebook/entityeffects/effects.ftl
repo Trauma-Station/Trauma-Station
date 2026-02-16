@@ -101,3 +101,8 @@ entity-effect-guidebook-scramble-dna = {$chance ->
     [1] scrambles
     *[other] scramble
 } the target's mutations
+
+entity-effect-guidebook-move-organ = {$chance ->
+    [1] moves
+    *[other] move
+} the target's {$organ} to its {$dest}

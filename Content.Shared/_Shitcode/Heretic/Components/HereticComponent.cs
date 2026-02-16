@@ -9,7 +9,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Heretic;
 using Content.Shared.Dataset;
 using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Objectives.Components;
@@ -37,15 +36,14 @@ public sealed partial class HereticComponent : Component
         "LivingHeart",
         "CodexCicatrix",
         "CloakOfShadow",
-        "Reminiscence",
         "FeastOfOwls",
     };
 
     [DataField, AutoNetworkedField]
-    public List<ProtoId<HereticRitualPrototype>> KnownRituals = new();
+    public List<EntityUid> Rituals = new();
 
-    [DataField]
-    public ProtoId<HereticRitualPrototype>? ChosenRitual;
+    [DataField, AutoNetworkedField]
+    public EntityUid? ChosenRitual;
 
     /// <summary>
     ///     Contains the list of targets that are eligible for sacrifice.
@@ -79,23 +77,11 @@ public sealed partial class HereticComponent : Component
     [DataField, AutoNetworkedField]
     public bool CanAscend = true;
 
-    [DataField]
-    public ProtoId<DatasetPrototype> KnowledgeDataset = "EligibleTags";
-
-    /// <summary>
-    ///     Required tags for ritual of knowledge
-    /// </summary>
-    [DataField(serverOnly: true), NonSerialized]
-    public HashSet<ProtoId<TagPrototype>> KnowledgeRequiredTags = new();
-
     /// <summary>
     ///     Used to prevent double casting mansus grasp.
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
     public EntityUid MansusGraspAction = EntityUid.Invalid;
-
-    [DataField]
-    public Dictionary<ProtoId<HereticRitualPrototype>, List<EntityUid>> LimitedTransmutations = new();
 
     [DataField]
     public SoundSpecifier? InfluenceGainSound = new SoundCollectionSpecifier("bloodCrawl");

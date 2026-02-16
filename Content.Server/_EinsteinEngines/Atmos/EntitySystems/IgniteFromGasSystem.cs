@@ -9,20 +9,19 @@ using Content.Shared.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server._EinsteinEngines.Atmos.Components;
 using Content.Server.Cloning.Components;
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Bed.Components;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._EinsteinEngines.Atmos.EntitySystems;
 
 public sealed class IgniteFromGasSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly FlammableSystem _flammable = default!;
@@ -33,52 +32,37 @@ public sealed class IgniteFromGasSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<FlammableComponent, BodyPartAddedEvent>(OnBodyPartAdded);
-        SubscribeLocalEvent<IgniteFromGasComponent, BodyPartRemovedEvent>(OnBodyPartRemoved);
+        SubscribeLocalEvent<FlammableComponent, OrganInsertedIntoEvent>(OnOrganInsertedInto);
+        SubscribeLocalEvent<IgniteFromGasComponent, OrganRemovedFromEvent>(OnOrganRemovedFrom);
 
         SubscribeLocalEvent<IgniteFromGasImmunityComponent, GotEquippedEvent>(OnIgniteFromGasImmunityEquipped);
         SubscribeLocalEvent<IgniteFromGasImmunityComponent, GotUnequippedEvent>(OnIgniteFromGasImmunityUnequipped);
     }
 
-    private void OnBodyPartAdded(Entity<FlammableComponent> ent, ref BodyPartAddedEvent args) =>
-        HandleAddBodyPart(ent.Owner, args.Part);
-
-    private void HandleAddBodyPart(EntityUid uid, Entity<BodyPartComponent> part)
+    private void OnOrganInsertedInto(Entity<FlammableComponent> ent, ref OrganInsertedIntoEvent args)
     {
-        if (!TryComp<IgniteFromGasPartComponent>(part, out var ignitePart))
+        if (!TryComp<IgniteFromGasPartComponent>(args.Organ, out var ignitePart) ||
+            args.Organ.Comp.Category is not {} category)
             return;
 
-        var targetBodyPart = _body.GetTargetBodyPart(part.Comp.PartType, part.Comp.Symmetry);
-        if (!TryComp<IgniteFromGasComponent>(uid, out var ignite))
-        {
-            ignite = EnsureComp<IgniteFromGasComponent>(uid);
-            ignite.Gas = ignitePart.Gas;
-        }
+        var ignite = EnsureComp<IgniteFromGasComponent>(ent);
+        ignite.Gas = ignitePart.Gas;
+        ignite.IgnitableBodyParts[category] = ignitePart.FireStacks;
 
-        ignite.IgnitableBodyParts[targetBodyPart] = ignitePart.FireStacks;
-
-        UpdateIgniteImmunity((uid, ignite));
+        UpdateIgniteImmunity((ent, ignite));
     }
 
-    private void OnBodyPartRemoved(Entity<IgniteFromGasComponent> ent, ref BodyPartRemovedEvent args) =>
-        HandleRemoveBodyPart(ent, args.Part);
-
-    private void HandleRemoveBodyPart(Entity<IgniteFromGasComponent> ent, Entity<BodyPartComponent> part)
+    private void OnOrganRemovedFrom(Entity<IgniteFromGasComponent> ent, ref OrganRemovedFromEvent args)
     {
-        if (!HasComp<IgniteFromGasPartComponent>(part))
+        if (!HasComp<IgniteFromGasPartComponent>(args.Organ) || args.Organ.Comp.Category is not {} category)
             return;
 
-        var targetBodyPart = _body.GetTargetBodyPart(part.Comp.PartType, part.Comp.Symmetry);
-
-        ent.Comp.IgnitableBodyParts.Remove(targetBodyPart);
+        ent.Comp.IgnitableBodyParts.Remove(category);
 
         if (ent.Comp.IgnitableBodyParts.Count == 0)
-        {
-            RemCompDeferred<IgniteFromGasComponent>(ent);
-            return;
-        }
-
-        UpdateIgniteImmunity((ent, ent.Comp));
+            RemCompDeferred(ent, ent.Comp);
+        else
+            UpdateIgniteImmunity((ent, ent.Comp));
     }
 
     private void OnIgniteFromGasImmunityEquipped(Entity<IgniteFromGasImmunityComponent> ent, ref GotEquippedEvent args) =>
@@ -91,10 +75,10 @@ public sealed class IgniteFromGasSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp1, ref ent.Comp2, false))
             return;
 
-        var exposedBodyParts = new Dictionary<TargetBodyPart, float>(ent.Comp1.IgnitableBodyParts);
+        var exposedBodyParts = new Dictionary<ProtoId<OrganCategoryPrototype>, float>(ent.Comp1.IgnitableBodyParts);
 
-        var containerSlotEnumerator = _inventory.GetSlotEnumerator((ent, ent.Comp2));
-        while (containerSlotEnumerator.NextItem(out var item, out _))
+        var slots = _inventory.GetSlotEnumerator((ent, ent.Comp2));
+        while (slots.NextItem(out var item, out _))
         {
             if (!TryComp<IgniteFromGasImmunityComponent>(item, out var immunity))
                 continue;

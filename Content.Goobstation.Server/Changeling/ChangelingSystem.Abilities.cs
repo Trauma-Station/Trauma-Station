@@ -43,7 +43,7 @@ using Content.Goobstation.Shared.Changeling.Components;
 using Content.Shared.Light.Components;
 using Content.Shared._Goobstation.Weapons.AmmoSelector;
 using Content.Shared._Starlight.CollectiveMind;
-using Content.Shared._Shitmed.Targeting; // Shitmed Change
+using Content.Medical.Common.Targeting; // Shitmed Change
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -73,6 +73,8 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Shared.Actions.Components;
 using Content.Goobstation.Shared.Devour.Events;
+using Content.Server.Actions;
+using Content.Shared.Mindshield.Components;
 
 namespace Content.Goobstation.Server.Changeling;
 
@@ -221,7 +223,7 @@ public sealed partial class ChangelingSystem
             if (TryComp<ChangelingBiomassComponent>(uid, out var userBiomass))
                 biomassMaxIncrease = userBiomass.MaxBiomass / 2;
 
-            if (!TryComp<HumanoidAppearanceComponent>(target, out var targetForm)
+            if (!TryComp<HumanoidProfileComponent>(target, out var targetForm)
                 || targetForm.Species == "Monkey") // if they are a headslug or in monkey form
                 popup = Loc.GetString("changeling-absorb-end-self-ling-incompatible");
         }
@@ -279,6 +281,18 @@ public sealed partial class ChangelingSystem
             Dirty(uid, biomass);
         }
 
+        comp.SelectedForm = TryGetDNA(uid, target, comp);
+
+        if (comp.SelectedForm is not { })
+        {
+            _popup.PopupEntity(Loc.GetString("changeling-transform-fail-generic"), uid, uid);
+            return;
+        }
+
+        if (HasComp<MindShieldComponent>(target))
+            _subdermalImplant.AddImplant(uid, comp.FakeMindShieldId);
+
+        TryTransform(uid, comp);
     }
 
     public List<ProtoId<ReagentPrototype>> BiomassAbsorbedChemicals = new() { "Nutriment", "Protein", "UncookedAnimalProteins", "Fat" }; // fat so absorbing raw meat good

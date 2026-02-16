@@ -1,7 +1,4 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Shared._Shitmed.Body.Part;
-using Content.Shared._Shitmed.Humanoid.Events;
-using Content.Shared.Body.Systems;
 using Content.Shared.DetailExaminable;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Humanoid;
@@ -19,12 +16,11 @@ public sealed class UniqueEnzymesSystem : EntitySystem
 {
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly MutationSystem _mutation = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
 
     private EntityQuery<DetailExaminableComponent> _detailQuery;
     private EntityQuery<FingerprintComponent> _printsQuery;
-    private EntityQuery<HumanoidAppearanceComponent> _humanoidQuery;
+    private EntityQuery<HumanoidProfileComponent> _humanoidQuery;
 
     public override void Initialize()
     {
@@ -32,7 +28,7 @@ public sealed class UniqueEnzymesSystem : EntitySystem
 
         _detailQuery = GetEntityQuery<DetailExaminableComponent>();
         _printsQuery = GetEntityQuery<FingerprintComponent>();
-        _humanoidQuery = GetEntityQuery<HumanoidAppearanceComponent>();
+        _humanoidQuery = GetEntityQuery<HumanoidProfileComponent>();
     }
 
     /// <summary>
@@ -50,15 +46,18 @@ public sealed class UniqueEnzymesSystem : EntitySystem
             Dirty(mob, prints);
         }
 
+        if (enzymes.EyeColor is {} eyeColor)
+            _humanoid.SetEyeColor(mob, eyeColor);
+        if (enzymes.SkinColor is {} skinColor)
+            _humanoid.SetSkinColor(mob, skinColor, enzymes.EyeColor);
+
         if (!_humanoidQuery.TryComp(mob, out var humanoid))
             return;
 
-        if (enzymes.EyeColor is {} eyeColor)
-            humanoid.EyeColor = eyeColor;
-        if (enzymes.SkinColor is {} skinColor)
-            _humanoid.SetSkinColor(mob, skinColor, humanoid: humanoid);
+        // no age because peter thiel
+        // no species because lol
         if (enzymes.Sex is {} sex)
-            _humanoid.SetSex(mob, sex, humanoid: humanoid);
+            _humanoid.SetSex((mob, humanoid), sex);
         if (enzymes.Gender is {} gender)
             _humanoid.SetGender((mob, humanoid), gender);
         return;
@@ -70,13 +69,14 @@ public sealed class UniqueEnzymesSystem : EntitySystem
     public UniqueEnzymes GetEnzymes(EntityUid mob)
     {
         var humanoid = _humanoidQuery.CompOrNull(mob);
+        var organs = _humanoid.GetOrgansData(mob);
         return new UniqueEnzymes(
             Name(mob),
             _printsQuery.CompOrNull(mob)?.Fingerprint,
             humanoid?.Sex,
             humanoid?.Gender,
-            humanoid?.EyeColor,
-            humanoid?.SkinColor
+            _humanoid.GetEyeColor(organs),
+            _humanoid.GetSkinColor(organs)
         );
     }
 }

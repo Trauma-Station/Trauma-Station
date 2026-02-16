@@ -5,12 +5,12 @@
   category: construction-category-utilities
   objectType: Item
 
-- type: construction
-  id: CyberButtBot
-  graph: CyberButtBot
-  targetNode: bot
-  category: construction-category-utilities
-  objectType: Item
+#- type: construction
+#  id: CyberButtBot
+#  graph: CyberButtBot
+#  targetNode: bot
+#  category: construction-category-utilities
+#  objectType: Item
 
 - type: construction
   id: DuckBot

@@ -150,39 +150,39 @@
   id: MutationRemoveHead
   effects:
   - !type:RelayBodyParts
-    guidebookText: entity-effect-guidebook-add-brain-slot-chest
-    partType: Chest
+    guidebookText: entity-effect-guidebook-add-brain-slot-torso
+    partType: Torso
     effects:
     - !type:AddOrganSlot
-      slot: brain
+      category: Brain
     - !type:AddOrganSlot
-      slot: eyes
+      category: Eyes
     - !type:AddOrganSlot
-      slot: tongue
+      category: Tongue
   - !type:MoveOrgan
-    slot: brain
-    src: Head
-    dest: Chest
+    organ: Brain
+    dest: Torso
   - !type:MoveOrgan
-    slot: eyes
-    src: Head
-    dest: Chest
+    organ: Eyes
+    dest: Torso
   - !type:MoveOrgan
-    slot: tongue
-    src: Head
-    dest: Chest
+    organ: Tongue
+    dest: Torso
+  - !type:MoveOrgan
+    organ: Ears
+    dest: Torso
   - !type:RelayBodyParts
     guidebookText: entity-effect-guidebook-gib-head
     partType: Head
     effects:
-    - !type:DetachPart
+    - !type:DetachOrgan
     - !type:Gib
   - !type:RelayBodyParts
     guidebookText: entity-effect-guidebook-remove-head-slot
-    partType: Chest
+    partType: Torso
     effects:
-    - !type:RemovePartSlot # no cheesing it by attaching a new head
-      slot: head
+    - !type:RemoveOrganSlot # no cheesing it by attaching a new head
+      slot: Head
   - !type:SetStanding # Debrained gets added for a moment which downs them, undo that
   - !type:PopupMessage
     type: Pvs
@@ -195,14 +195,12 @@
   effects:
   - !type:RelayBodyParts
     guidebookText: entity-effect-guidebook-add-head-slot
-    partType: Chest
+    partType: Torso
     effects:
-    - !type:AddPartSlot
-      slot: head
-      partType: Head
-      symmetry: None
-    - !type:RegeneratePart
-      slot: head
+    - !type:AddOrganSlot
+      category: Head
+    - !type:RegenerateOrgan
+      slot: Head
   - !type:RelayBodyParts
     guidebookText: entity-effect-guidebook-damage-head
     partType: Head
@@ -212,27 +210,29 @@
         types:
           Blunt: 50
   - !type:MoveOrgan
-    slot: brain
-    src: Chest
+    organ: Brain
     dest: Head
   - !type:MoveOrgan
-    slot: eyes
-    src: Chest
+    organ: Eyes
     dest: Head
   - !type:MoveOrgan
-    slot: tongue
-    src: Chest
+    organ: Tongue
+    dest: Head
+  - !type:MoveOrgan
+    organ: Ears
     dest: Head
   - !type:RelayBodyParts
-    guidebookText: entity-effect-guidebook-remove-brain-slot-chest
-    partType: Chest
+    guidebookText: entity-effect-guidebook-remove-brain-slot-torso
+    partType: Torso
     effects:
     - !type:RemoveOrganSlot
-      slot: brain
+      slot: Brain
     - !type:RemoveOrganSlot
-      slot: eyes
+      slot: Eyes
     - !type:RemoveOrganSlot
-      slot: tongue
+      slot: Tongue
+    - !type:RemoveOrganSlot
+      slot: Ears
   - !type:SetStanding # Debrained gets added for a moment which downs them, undo that
   - !type:PopupMessage
     type: Pvs

@@ -19,8 +19,8 @@ public sealed partial class FleshPassiveComponent : Component
     [DataField]
     public float MimicHealMultiplier = 5f;
 
-    [DataField, NonSerialized]
-    public EntityUid? FleshStomach;
+    [DataField]
+    public EntityUid? Stomach;
 
     [DataField]
     public float BaseMoveSpeedPerFlesh = 0.0003f;

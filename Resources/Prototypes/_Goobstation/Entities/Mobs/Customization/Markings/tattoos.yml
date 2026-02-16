@@ -1,0 +1,43 @@
+- type: marking
+  id: TattooNanotrasenChest
+  bodyPart: Chest
+  groupWhitelist: [Human, Slime]
+  coloring:
+    default:
+      type: !type:TattooColoring
+      fallbackColor: "#666666"
+  sprites:
+  - sprite: _Goobstation/Mobs/Customization/tattoos.rsi
+    state: tattoo_nanotrasen_chest
+
+- type: marking
+  id: BuffChest
+  bodyPart: Chest
+  groupWhitelist: [Human]
+  sprites:
+  - sprite: _Goobstation/Mobs/Customization/scars.rsi
+    state: buff
+
+- type: marking
+  id: TattooTribal1
+  bodyPart: Chest
+  groupWhitelist: [Human, Slime, Reptilian, Harpy]
+  coloring:
+    default:
+      type: !type:TattooColoring
+      fallbackColor: "#666666"
+  sprites:
+  - sprite: _Goobstation/Mobs/Customization/tattoos.rsi
+    state: tribal1
+
+- type: marking
+  id: TattooLoops
+  bodyPart: Chest
+  groupWhitelist: [Human, Slime, Reptilian, Harpy]
+  coloring:
+    default:
+      type: !type:TattooColoring
+      fallbackColor: "#666666"
+  sprites:
+  - sprite: _Goobstation/Mobs/Customization/tattoos.rsi
+    state: loops

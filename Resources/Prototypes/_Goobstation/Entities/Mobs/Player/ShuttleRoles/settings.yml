@@ -21,3 +21,27 @@
     - type: Loadout
       prototypes: [ VisitorAlien ]
       roleLoadout: [ RoleSurvivalStandard ]
+
+# Civilian
+
+- type: randomHumanoidSettings
+  id: VisitorCivilianLibrarian
+  parent: EventHumanoidLibrarian
+  components:
+    - type: GhostRole
+      name: ghost-role-information-civilian-name
+      description: ghost-role-information-civilian-description
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+
+- type: randomHumanoidSettings
+  id: VisitorCivilianChef
+  parent: EventHumanoidChef
+  components:
+    - type: GhostRole
+      name: ghost-role-information-civilian-name
+      description: ghost-role-information-civilian-description
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short

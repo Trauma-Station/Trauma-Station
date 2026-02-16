@@ -2113,3 +2113,446 @@ Entries:
   id: 258
   time: '2026-01-30T08:01:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/557
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: >-
+      Added Blood splatters, blood will now splatter out of people (and
+      monkeys), when slashing or piercing damage is taken, gibbing makes a
+      bigger splatter
+  id: 259
+  time: '2026-01-30T16:16:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/562
+- author: Aviu
+  changes:
+  - type: Add
+    message: Predicted heretic rituals.
+  - type: Remove
+    message: >-
+      Reminiscence ritual removed, blades can be still recalled by performing
+      blade creation ritual again.
+  id: 260
+  time: '2026-01-30T17:25:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/472
+- author: Armok
+  changes:
+  - type: Add
+    message: Added some patreon custom items!
+  - type: Tweak
+    message: Reinforcement callers start with 2.5K spesos.
+  - type: Tweak
+    message: Lowered stam/explosive resist of most armors.
+  id: 261
+  time: '2026-01-30T17:58:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/563
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Insurgents can no longer be plasmamen.
+  - type: Fix
+    message: Fixed job icons from job malfunction event.
+  - type: Fix
+    message: Fixed not being able to make nailgun magazines specifically.
+  - type: Fix
+    message: Fixed station radio sounding weird.
+  id: 262
+  time: '2026-01-31T13:32:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/581
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed the AI being able to knock on shutters and blast doors.
+  id: 263
+  time: '2026-01-31T13:48:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/583
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to move after using a lavaland jaunter.
+  id: 264
+  time: '2026-01-31T14:25:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/585
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed splashing liquids on people being silent.
+  id: 265
+  time: '2026-01-31T15:08:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/587
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to butcher lings and absorbed bodies.
+  id: 266
+  time: '2026-01-31T16:07:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/588
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Screwdrivers now deal damage when thrown
+  - type: Remove
+    message: Removed BSO
+  id: 267
+  time: '2026-01-31T17:27:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/580
+- author: Aviu
+  changes:
+  - type: Add
+    message: Improved audio muffle, it should be more smooth now.
+  id: 268
+  time: '2026-02-01T11:13:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/598
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed abductors console not working.
+  id: 269
+  time: '2026-02-01T11:53:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/600
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lollypops being eaten instantly.
+  id: 270
+  time: '2026-02-01T13:06:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/601
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Predicted space dragon's fireball action.
+  id: 271
+  time: '2026-02-01T14:29:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/602
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Mice no longer have a groin part so you can't cheese the egg sack.
+  id: 272
+  time: '2026-02-01T17:21:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/605
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed deltarune reference not working on lavaland and working on station.
+  id: 273
+  time: '2026-02-01T17:28:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/606
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Toy facehuggers no longer inject nocturine.
+  id: 274
+  time: '2026-02-01T21:42:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/609
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: >-
+      Capoeria sweepkick now properly applies its grabspeed increase, instead of
+      reducing it.
+  id: 275
+  time: '2026-02-01T21:59:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/607
+- author: Aviu
+  changes:
+  - type: Add
+    message: 'New mime exclusive traitor item: guide to advanced mimery.'
+  id: 276
+  time: '2026-02-02T07:07:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/473
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed smart equip trying to take mags out of guns instead of equipping
+      them.
+  id: 277
+  time: '2026-02-02T08:11:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/612
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed some holy fire shitcode that made you stay on fire forever.
+  - type: Tweak
+    message: Blood can now extinguish fires, albeit worse than water.
+  - type: Tweak
+    message: Holy water holy firestacks when drank decreased from 10 to 3 per unit.
+  id: 278
+  time: '2026-02-02T11:29:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/618
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed agent and revolutionary IDs only having maints access.
+  id: 279
+  time: '2026-02-02T11:39:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/621
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Hid crew cassette players when equipped, its sprite was too distracting.
+  id: 280
+  time: '2026-02-02T14:44:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/626
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: You can now chose other species' language in character editor
+  id: 281
+  time: '2026-02-02T16:00:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/625
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Cosmic cultists can see their own monument again.
+  - type: Fix
+    message: Heretics can see reality shifts again.
+  id: 282
+  time: '2026-02-02T16:21:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/628
+- author: Aviu
+  changes:
+  - type: Add
+    message: Reality fractures are visible to everyone now.
+  - type: Fix
+    message: Fix chaplain being able to see reality shifts,
+  id: 283
+  time: '2026-02-03T08:12:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/629
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added Deep fryer, you can deep fry ANYTHING
+  id: 284
+  time: '2026-02-04T21:02:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/637
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed wizard teleport spell not working.
+  - type: Fix
+    message: Fixed smartgun homing not working.
+  id: 285
+  time: '2026-02-05T12:40:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/641
+- author: SpeltIncorrectyl
+  changes:
+  - type: Add
+    message: >-
+      Ported energy chem: synthesize precursor chemicals directly from
+      electricity instead of mixing jugs like a caveman.
+  id: 286
+  time: '2026-02-07T06:58:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/645
+- author: Kirikii
+  changes:
+  - type: Fix
+    message: Fixed the wizard's mind swap ability.
+  id: 287
+  time: '2026-02-07T14:24:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/651
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed deep fryer being locked to one direction
+  id: 288
+  time: '2026-02-07T15:29:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/652
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed Deep fryer making people unstripable
+  - type: Fix
+    message: Fixed Deep fried oils popup
+  id: 289
+  time: '2026-02-07T22:19:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/657
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: >-
+      Fixed deep fryer adding "deep fried" more than one time when someone was
+      fried
+  id: 290
+  time: '2026-02-08T20:53:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/659
+- author: Armok, Sssith
+  changes:
+  - type: Add
+    message: New rules for the server, they are a fast read.
+  - type: Add
+    message: Spacelaw, Sec expected to follow.
+  id: 291
+  time: '2026-02-10T00:25:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/662
+- author: Armok and Joel
+  changes:
+  - type: Add
+    message: Tons new decals
+  - type: Tweak
+    message: fix drone bug
+  id: 292
+  time: '2026-02-10T05:40:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/663
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed Grab popup spam
+  id: 293
+  time: '2026-02-10T10:54:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/661
+- author: Armok
+  changes:
+  - type: Add
+    message: Neon sign sprites.
+  - type: Tweak
+    message: Made fire extinguisher sprites directional.
+  id: 294
+  time: '2026-02-10T12:05:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/664
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed items possibily being stuck in a deep fried bag
+  - type: Fix
+    message: Deep fried bags can now be eaten!
+  id: 295
+  time: '2026-02-10T20:17:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/660
+- author: The Man Who Sold The World
+  changes:
+  - type: Add
+    message: 50000 bugs
+  - type: Tweak
+    message: >-
+      Upstream: Reverted uplink super surplus, python, necronomicon, flash
+      lantern removal
+  - type: Tweak
+    message: 'Upstream: Reverted towel removal'
+  - type: Remove
+    message: >-
+      Removed groin bodypart, it still has targeting for future use but acts
+      like torso for now.
+  - type: Remove
+    message: Removed gradient hair until it's rewritten.
+  - type: Remove
+    message: Removed glowing markings, go back to Ao3 :)
+  - type: Fix
+    message: Skinning monkeys now works properly with bodyparts.
+  id: 296
+  time: '2026-02-12T15:57:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/633
+- author: NoElkaTheGod
+  changes:
+  - type: Add
+    message: Added Entropic Colossus, a new antagonist closely related to cosmic cult
+  - type: Add
+    message: >-
+      Cosmic cultists can now subvert the station AI after absorbing a malign
+      rift.
+  - type: Tweak
+    message: Many minor fixes and polishing for the cosmic cult.
+  - type: Tweak
+    message: >-
+      The guidebook for cosmic cult was updated in accordance with the new
+      content. Please read it.
+  id: 297
+  time: '2026-02-13T08:28:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/654
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use Face markings.
+  id: 298
+  time: '2026-02-13T18:20:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/683
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed monkeys having lizard tails real
+  - type: Fix
+    message: Fixed lizard displacement log spam
+  id: 299
+  time: '2026-02-13T18:32:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/684
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not having to breathe 🥹
+  id: 300
+  time: '2026-02-13T19:11:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/687
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Entropic colossus now takes holy damage.
+  - type: Fix
+    message: Entropic colossus is no longer vulnerable to CQC.
+  - type: Fix
+    message: Entropic colossus no longer pushes ghosts.
+  - type: Tweak
+    message: Entropic Colossus min playercount 25 -> 40.
+  id: 301
+  time: '2026-02-14T13:16:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/690
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed /ghost and ghost actions not killing you
+  - type: Fix
+    message: Fixed surgery window reopening 20 times if you close it.
+  id: 302
+  time: '2026-02-14T21:52:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/692
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Tails are now bodyparts and can be removed by surgery, explosions, etc.
+  - type: Add
+    message: 'You can now create a tail joint via surgery to turn people into lizards. '
+  id: 303
+  time: '2026-02-15T21:13:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/696
+- author: John Carpenter
+  changes:
+  - type: Add
+    message: Lings now get a fake mindshield if they absorb someone with a mindshield
+  - type: Tweak
+    message: Lings are now forced to transform into whoever they absorb
+  id: 304
+  time: '2026-02-15T22:19:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/695
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed torso starting with only half of its integrity.
+  - type: Fix
+    message: Fixed damage visuals being wrong color for some species.
+  - type: Fix
+    message: Fixed wizard rod form having wrong direction.
+  - type: Fix
+    message: Fixed lightning wrong direction.
+  - type: Fix
+    message: Fixed staff of change not working.
+  - type: Fix
+    message: Fixed modsuits not sealing.
+  id: 305
+  time: '2026-02-16T06:42:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/700
+- author: Aviu
+  changes:
+  - type: Add
+    message: Flesh heretic risen ghouls no longer gib on death.
+  - type: Add
+    message: You can deconvert ghoulified people with holy water.
+  - type: Add
+    message: >-
+      Voiceless Dead has more hp and can now be recalled to the ritual rune and
+      revived, see ritual purchase description for details.
+  - type: Add
+    message: Predicted holy damage and bible smite.
+  - type: Tweak
+    message: 'Knit flesh cooldown: 20s -> 5s.'
+  id: 306
+  time: '2026-02-16T06:44:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/615

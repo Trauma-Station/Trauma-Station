@@ -51,8 +51,8 @@ marking-LizardHornsBighorn-horns_bighorn_r = Right horn
 
 # TAILS
 marking-SnakeLargeTail = Lizard, large snake tail
-marking-SnakeLargeTail-tail_snakelarge = Inner
-marking-SnakeLargeTail-tail_snakelarge_overlay = Outer
+marking-SnakeLargeTail-snakelarge = Inner
+marking-SnakeLargeTail-snakelarge_overlay = Outer
 
 # SPINES
 marking-LizardChestSpinesAquatic = Lizard, chest, spines (Aquatic)

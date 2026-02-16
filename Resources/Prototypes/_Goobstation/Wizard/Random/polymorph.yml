@@ -20,12 +20,6 @@
     BananiumDoor: 1
 
 - type: weightedRandomEntity
-  id: WabbajackMonkey
-  weights:
-    MobMonkeyAngry: 1
-    MobKoboldAngry: 1
-
-- type: weightedRandomEntity
   id: WabbajackCluwne
   weights:
     MobCluwneRandom: 1
@@ -55,9 +49,22 @@
 - type: weightedRandomEntity
   id: WabbajackSlime
   weights:
-    MobAdultSlimesBlueAngry: 1
-    MobAdultSlimesGreenAngry: 1
-    MobAdultSlimesYellowAngry: 1
+    MobAdultSlimesBlueAngry: 4
+    MobAdultSlimesGreenAngry: 4
+    MobAdultSlimesYellowAngry: 4
+    ReagentSlime: 1
+    ReagentSlimeBeer: 1
+    ReagentSlimePax: 1
+    ReagentSlimeNocturine: 1
+    ReagentSlimeTHC: 1
+    ReagentSlimeBicaridine: 1
+    ReagentSlimeToxin: 1
+    ReagentSlimeNapalm: 1
+    ReagentSlimeOmnizine: 1
+    ReagentSlimeMuteToxin: 1
+    ReagentSlimeNorepinephricAcid: 1
+    ReagentSlimeEphedrine: 1
+    ReagentSlimeRobustHarvest: 1
 
 - type: weightedRandomEntity
   id: WabbajackSpecies
@@ -170,11 +177,23 @@
     MobGhoulStalker: 0.33
     MobGhoulProphet: 0.33
     MobGhoulRustWalker: 0.33
+    MobMonkeyAngry: 1
+    MobKoboldAngry: 1
+    MobLavalandGoliath: 0.5
+    MobLavalandGoliathAncient: 0.5
+    LavalandEliteLegionnaire: 1
+    LavalandEliteHerald: 1
+    LavalandEliteGoliathBroodmother: 1
+    LavalandMobBrimdemon: 1
 
 - type: weightedRandomEntity
   id: WabbajackSpecial
   weights:
     MobBinglePrime: 1
+    LavalandBossMegaLegion: 1
+    LavalandBossColossus: 1
+    LavalandBossAshDrake: 1
+    LavalandBossBubblegum: 1
 
 - type: weightedRandomEntity
   id: WabbajackXeno
@@ -189,11 +208,10 @@
 - type: weightedRandom
   id: WabbajackGroups
   weights:
-    WabbajackMonkey: 0.8
-    # WabbajackCluwne: 1
-    WabbajackRobot: 0.8
+    WabbajackRobot: 1
     WabbajackSlime: 0.5
     WabbajackSpecies: 1
     WabbajackAnimal: 1
+    WabbajackCluwne: 0.1
     WabbajackXeno: 0.1
     WabbajackSpecial: 0.01 # for high-impact transmutations, approximately 1/160 chance with 8 groups

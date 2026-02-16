@@ -1,0 +1,11 @@
+# For the Python
+- type: listing
+  id: UplinkSpeedLoaderMagnumAP
+  name: uplink-speedloader-magnum-name
+  description: uplink-speedloader-magnu-desc # lol typo
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi, state: icon }
+  productEntity: SpeedLoaderMagnumAP
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkAmmo

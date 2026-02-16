@@ -421,7 +421,6 @@
     implants: [ FreedomImplant, NutrimentPumpImplant, SpaceProofImplant ]
   - type: RandomHumanoidAppearance
     randomizeName: false
-    hair: HairBald
   - type: GhostRole
     name: ghost-role-information-conquest-name
     description: ghost-role-information-conquest-description

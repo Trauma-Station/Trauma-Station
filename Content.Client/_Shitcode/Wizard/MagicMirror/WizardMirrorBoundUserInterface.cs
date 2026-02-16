@@ -1,17 +1,9 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared._Goobstation.Wizard.MagicMirror;
-using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
 namespace Content.Client._Shitcode.Wizard.MagicMirror;
 
-[UsedImplicitly]
 public sealed class WizardMirrorBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [ViewVariables]
@@ -26,13 +18,12 @@ public sealed class WizardMirrorBoundUserInterface(EntityUid owner, Enum uiKey) 
         if (EntMan.TryGetComponent(Owner, out WizardMirrorComponent? mirror))
             _window.AllowedSpecies = new(mirror.AllowedSpecies);
 
-        _window.Save += OnSave;
+        _window.Editor.Save += OnSave;
     }
 
     private void OnSave()
     {
-        var profile = _window?.Profile;
-        if (profile != null)
+        if (_window?.Editor?.Profile is {} profile)
             SendMessage(new WizardMirrorMessage(profile));
     }
 
@@ -46,7 +37,7 @@ public sealed class WizardMirrorBoundUserInterface(EntityUid owner, Enum uiKey) 
         if (_window == null)
             return;
 
-        _window.LoadedProfile = data.Profile.Clone();
-        _window.SetProfile(data.Profile);
+        //_window.Editor.LoadedProfile = data.Profile.Clone();
+        _window.Editor.SetProfile(data.Profile, 0);
     }
 }

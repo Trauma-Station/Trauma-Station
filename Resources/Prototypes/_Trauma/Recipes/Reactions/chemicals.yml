@@ -60,3 +60,13 @@
   products:
     AceticAnhydride: 1
     Water: 1
+
+- type: reaction
+  id: FullFatOilReaction
+  reactants:
+    Oil:
+      amount: 1
+    Fat:
+      amount: 1
+  products:
+    FullFatOils: 2

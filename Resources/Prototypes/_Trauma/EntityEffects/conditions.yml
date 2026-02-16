@@ -14,7 +14,7 @@
   condition: !type:WhitelistCondition
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
     guidebookText: entity-condition-guidebook-is-humanoid
 
 - type: entityCondition

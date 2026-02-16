@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Shared.Actions;
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
 using Content.Shared.Polymorph;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -14,13 +14,7 @@ namespace Content.Trauma.Shared.Actions;
 public sealed partial class ShootOrganActionComponent : Component
 {
     [DataField(required: true)]
-    public BodyPartType PartType;
-
-    [DataField]
-    public BodyPartSymmetry? Symmetry;
-
-    [DataField(required: true)]
-    public string Organ = string.Empty;
+    public ProtoId<OrganCategoryPrototype> Organ;
 
     [DataField(required: true)]
     public ProtoId<PolymorphPrototype> Polymorph;

@@ -1,0 +1,50 @@
+# TODO: these should use welding etc rather than fucking hemostat on METAL
+
+# Insert
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertBorgBrain
+  name: Insert Positronic Brain
+  components:
+  - type: SurgeryOrganSlotCondition
+    organSlot: IPCBrain
+  - type: SurgeryOrganCondition
+    organ: IPCBrain
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertPump
+  name: Insert Pump
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+  - type: SurgeryOrganSlotCondition
+    organSlot: IPCPump
+  - type: SurgeryOrganCondition
+    organ: IPCPump
+
+# Remove
+
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveBorgBrain
+  name: Remove Positronic Brain
+  components:
+  # TODO: ipc surgery steps
+  - type: SurgeryOrganSlotCondition
+    organSlot: IPCBrain
+  - type: SurgeryOrganCondition
+    organ: IPCBrain
+
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemovePump
+  name: Remove Pump
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+  - type: SurgeryOrganSlotCondition
+    organSlot: IPCPump
+  - type: SurgeryOrganCondition
+    organ: IPCPump

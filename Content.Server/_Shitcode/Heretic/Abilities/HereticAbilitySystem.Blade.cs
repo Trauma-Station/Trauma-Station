@@ -23,7 +23,7 @@ using Content.Shared.Heretic;
 using Content.Shared.Stunnable;
 using Content.Shared.CombatMode.Pacification;
 using Robust.Shared.Timing;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components; // Shitmed Change
+using Content.Medical.Shared.Wounds; // Shitmed Change
 
 namespace Content.Server.Heretic.Abilities;
 
@@ -74,13 +74,10 @@ public sealed partial class HereticAbilitySystem
 
     private void OnChampionStance(HereticChampionStanceEvent args)
     {
-        foreach (var part in _body.GetBodyChildren(args.Heretic))
+        foreach (var part in _body.GetOrgans<WoundableComponent>(args.Heretic))
         {
-            if (!TryComp(part.Id, out WoundableComponent? woundable))
-                continue;
-
-            woundable.CanRemove = args.Negative;
-            Dirty(part.Id, woundable);
+            part.Comp.CanRemove = args.Negative;
+            Dirty(part);
         }
     }
 

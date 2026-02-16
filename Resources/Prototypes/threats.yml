@@ -16,6 +16,7 @@
     LoneOperative: 1
     #TODO When Slasher is ready Slasher: 1
     # Goobstation end
+    Colossus: 1 # DeltaV
 
 - type: ninjaHackingThreat
   id: Dragon
@@ -27,3 +28,8 @@
 #  id: Revenant
 #  announcement: terror-revenant
 #  rule: RevenantSpawn
+
+- type: ninjaHackingThreat # DeltaV start
+  id: Colossus
+  announcement: terror-colossus
+  rule: ColossusSpawn # DeltaV end

@@ -11,29 +11,15 @@ namespace Content.Trauma.Client.Projectiles;
 /// </summary>
 public sealed class PredictedProjectileSystem : EntitySystem
 {
-    private EntityQuery<HiddenProjectileComponent> _hiddenQuery;
+    [Dependency] private readonly PhysicsSystem _physics = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _hiddenQuery = GetEntityQuery<HiddenProjectileComponent>();
-
         SubscribeLocalEvent<ProjectileComponent, UpdateIsPredictedEvent>(OnUpdateIsPredicted);
-        SubscribeLocalEvent<HiddenProjectileComponent, AttemptPointLightToggleEvent>(OnAttemptLightToggle);
+        SubscribeLocalEvent<DeletingProjectileEvent>(OnDeletingProjectile);
         SubscribeNetworkEvent<ShotPredictedProjectileEvent>(OnShotPredictedProjectile);
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        // incase the light gets added after it's shot??
-        var query = EntityQueryEnumerator<HiddenProjectileComponent>();
-        while (query.MoveNext(out var uid, out _))
-        {
-            RemComp<PointLightComponent>(uid);
-        }
     }
 
     private void OnUpdateIsPredicted(Entity<ProjectileComponent> ent, ref UpdateIsPredictedEvent args)
@@ -41,21 +27,20 @@ public sealed class PredictedProjectileSystem : EntitySystem
         args.IsPredicted = true;
     }
 
-    private void OnAttemptLightToggle(Entity<HiddenProjectileComponent> ent, ref AttemptPointLightToggleEvent args)
+    private void OnDeletingProjectile(ref DeletingProjectileEvent args)
     {
-        // don't let it be turned on
-        args.Cancelled |= args.Enabled;
+        RemComp<SpriteComponent>(args.Entity);
+        RemComp<PointLightComponent>(args.Entity);
     }
 
     private void OnShotPredictedProjectile(ShotPredictedProjectileEvent args)
     {
         var uid = GetEntity(args.Projectile);
-        Log.Debug($"Got {ToPrettyString(uid)}");
         if (!uid.IsValid())
-            return; // client may not have received the projectile state yet
+            return;
 
-        RemComp<SpriteComponent>(uid);
-        EnsureComp<HiddenProjectileComponent>(uid);
-        RemComp<PointLightComponent>(uid);
+        _physics.UpdateIsPredicted(uid);
+        // TODO: come up with solution to fix the jitter when clientside entity is deleted and serverside one is spawned back at the shooter
+        // clientside components have no way to persist so this may need engine work
     }
 }

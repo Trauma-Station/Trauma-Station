@@ -41,7 +41,7 @@ public sealed partial class GeneticEnzymes : BoxContainer
     {
         _busy = busy;
         UpdateSaveButton();
-        UpdateApplybutton();
+        UpdateApplyButton();
     }
 
     public void SetMob(EntityUid? mob)

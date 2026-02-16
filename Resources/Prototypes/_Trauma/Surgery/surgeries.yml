@@ -12,7 +12,7 @@
   - type: SurgeryPartCondition
     parts: [ Head ]
   - type: SurgeryOrganSlotCondition
-    organSlot: hypoport
+    organSlot: Hypoport
 
 - type: entity
   parent: BaseSurgeryInsertOrgan
@@ -26,10 +26,9 @@
     - SurgeryStepInsertHypoport
     - SurgeryStepSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: hypoport
+    organSlot: Hypoport
   - type: SurgeryOrganCondition
-    organ:
-    - type: Hypoport
+    organ: Hypoport
 
 - type: entity
   parent: BaseSurgeryRemoveOrgan
@@ -37,8 +36,24 @@
   name: Extract Hypoport
   components:
   - type: SurgeryOrganCondition
-    organ:
-    - type: Hypoport
+    organ: Hypoport
+
+- type: entity
+  parent: SurgeryOpenCavityBase
+  id: SurgeryOpenTailSlot
+  name: Create Tail Joint
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepCreateJoint
+    - SurgeryStepStitchJoint
+    - SurgeryStepOpenOrganSlot
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: Tail
 
 - type: entity
   parent: BaseSurgeryRemoveOrgan
@@ -46,8 +61,7 @@
   name: Remove Tongue
   components:
   - type: SurgeryOrganCondition
-    organ:
-    - type: Tongue
+    organ: Tongue
 
 - type: entity
   parent: BaseSurgeryInsertOrgan
@@ -57,10 +71,9 @@
   - type: Surgery
     steps:
     - SurgeryStepSawBones
-    - SurgeryStepInsertTongue
+    - SurgeryStepInsertOrgan
     - SurgeryStepSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: tongue
+    organSlot: Tongue
   - type: SurgeryOrganCondition
-    organ:
-    - type: Tongue
+    organ: Tongue

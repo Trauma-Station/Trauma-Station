@@ -2,10 +2,9 @@
 using Content.Shared._Goobstation.Wizard.BindSoul;
 using Content.Shared.Actions.Components;
 using Content.Shared.Buckle.Components;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
+using Content.Medical.Common.Targeting;
+using Content.Medical.Shared.Wounds;
+using Content.Shared.Body;
 using Content.Shared.Inventory;
 using Content.Shared.NameModifier.Components;
 using Content.Shared.Polymorph.Systems;
@@ -21,6 +20,7 @@ using Content.Server.Actions;
 using Content.Server.Humanoid;
 using Content.Server.Inventory;
 using Content.Server.Polymorph.Components;
+using Content.Shared.Body;
 using Content.Shared.Buckle;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage.Components;
@@ -48,7 +48,7 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
     // <Trauma>
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly WoundSystem _wound = default!;
     // </Trauma>
@@ -60,13 +60,13 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly ServerInventorySystem _inventory = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
 
@@ -275,33 +275,23 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
         //Transfers all damage from the original to the new one
         if (configuration.TransferDamage &&
             TryComp<DamageableComponent>(child, out var damageChild) &&
-            _mobThreshold.GetScaledDamage(uid, child, out var damage, out var woundableDamage) &&
+            _mobThreshold.GetScaledDamage(uid, child, out var damage, out var organDamages) &&
             damage != null)
         {
-            // <Shitmed>
-            if (TryComp<BodyComponent>(child, out var childBody)
-                && childBody.BodyType == Content.Shared._Shitmed.Body.BodyType.Complex // Too lazy to come up with a new name lmfao
-                && _body.TryGetRootPart(child, out var rootPart, childBody))
+            // <Trauma> - update new bodys limb damage with old one
+            if (TryComp<BodyComponent>(child, out var childBody))
             {
-                var woundables = _wound.GetAllWoundableChildrenWithComp<DamageableComponent>(rootPart.Value);
-                var count = woundables.Count();
-                foreach (var woundable in woundables)
+                var organs = _body.GetOrgans((child, childBody));
+                var count = organs.Count();
+                foreach (var organ in organs)
                 {
-                    var target = _body.GetTargetBodyPart(woundable);
-
-                    if (woundableDamage is not null)
-                    {
-                        if (woundableDamage.TryGetValue(target, out var wounds))
-                            _damageable.SetDamage((woundable, woundable.Comp2), wounds);
-                    }
-                    else
-                    {
-                        _damageable.SetDamage((woundable, woundable.Comp2), damage / count);
-                    }
+                    if (organ.Comp.Category is not {} category || organDamages == null || !organDamages.TryGetValue(category, out var organDamage))
+                        organDamage = damage / count;
+                    _damageable.SetDamage(organ.Owner, organDamage);
                 }
 
             }
-            // </Shitmed>
+            // </Trauma>
             _damageable.SetDamage((child, damageChild), damage);
         }
 
@@ -367,7 +357,7 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
 
         if (configuration.TransferHumanoidAppearance)
         {
-            _humanoid.CloneAppearance(uid, child);
+            _visualBody.CopyAppearanceFrom(uid, child);
         }
 
         if (configuration.ComponentsToTransfer.Count > 0) // Goobstation
@@ -474,33 +464,23 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
 
         if (component.Configuration.TransferDamage &&
             TryComp<DamageableComponent>(parent, out var damageParent) &&
-            _mobThreshold.GetScaledDamage(uid, parent, out var damage, out var woundableDamage) &&
+            _mobThreshold.GetScaledDamage(uid, parent, out var damage, out var organDamages) &&
             damage != null)
         {
-            // <Shitmed>
-            if (TryComp<BodyComponent>(parent, out var parentBody)
-                && parentBody.BodyType == Content.Shared._Shitmed.Body.BodyType.Complex // Too lazy to come up with a new name lmfao
-                && _body.TryGetRootPart(parent, out var rootPart, parentBody))
+            // <Trauma> - update old bodys limb damage with reverted one
+            if (TryComp<BodyComponent>(parent, out var parentBody))
             {
-                var woundables = _wound.GetAllWoundableChildrenWithComp<DamageableComponent>(rootPart.Value);
-                var count = woundables.Count();
-                foreach (var woundable in woundables)
+                var organs = _body.GetOrgans((parent, parentBody));
+                var count = organs.Count();
+                foreach (var organ in organs)
                 {
-                    var target = _body.GetTargetBodyPart(woundable);
-
-                    if (woundableDamage is not null)
-                    {
-                        if (woundableDamage.TryGetValue(target, out var wounds))
-                            _damageable.SetDamage((woundable, woundable.Comp2), wounds);
-                    }
-                    else
-                    {
-                        _damageable.SetDamage((woundable, woundable.Comp2), damage / count);
-                    }
+                    if (organ.Comp.Category is not {} category || organDamages == null || !organDamages.TryGetValue(category, out var organDamage))
+                        organDamage = damage / count;
+                    _damageable.SetDamage(organ.Owner, organDamage);
                 }
 
             }
-            // </Shitmed>
+            // </Trauma>
             _damageable.SetDamage((parent, damageParent), damage);
         }
 

@@ -125,11 +125,11 @@
   - type: Strap
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
   - type: DisposalUnit
     blacklist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
       - Plunger
       - SolutionTransfer
       - EntityStorage

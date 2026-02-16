@@ -7,16 +7,16 @@
   group: Narcotics
   flavor: sharp
   metabolisms:
-    Medicine:
-      conditions:
-      - !type:WhitelistCondition
-        whitelist:
-          components:
-          - Shadowling
-          - Thrall
-        guidebookText: entity-effect-condition-shadowling-or-thrall
+    Bloodstream:
       effects:
       - !type:HealthChange
+        conditions:
+        - !type:WhitelistCondition
+          whitelist:
+            components:
+            - Shadowling
+            - Thrall
+          guidebookText: entity-effect-condition-shadowling-or-thrall
         damage:
           groups: # goob edit
             Burn: -12
@@ -25,17 +25,15 @@
             Caustic: -12
             Poison: -12
             Bloodloss: -12
-    Narcotic:
-      conditions:
-      - !type:WhitelistCondition
-        blacklist:
-          components:
-          - Shadowling
-          - Thrall
-        guidebookText: entity-effect-condition-not-shadowling-or-thrall
-      effects:
+
       - !type:GenericStatusEffect
         conditions:
+        - !type:WhitelistCondition
+          blacklist:
+            components:
+            - Shadowling
+            - Thrall
+          guidebookText: entity-effect-condition-not-shadowling-or-thrall
         - !type:ReagentCondition
           reagent: ShadowlingToxin
           min: 5

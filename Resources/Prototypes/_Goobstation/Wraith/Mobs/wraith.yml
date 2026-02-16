@@ -94,8 +94,7 @@
         time: 3
         type: Add
         probability: 1
-  - type: WeakToHoly
-    alwaysTakeHoly: true
+  - type: AlwaysTakeHoly
   - type: Access # Only realistically used while corporeal.
     groups:
     - AllAccess

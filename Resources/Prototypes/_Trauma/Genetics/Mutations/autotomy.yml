@@ -26,9 +26,9 @@
   - type: EffectAction
     effects:
     - !type:RelayRandomPart
-      # No chest, groin or head.
+      # No torso or head.
       types: [ Foot, Hand, Leg, Arm, Tail ]
-      effect: !type:DetachPart
+      effect: !type:DetachOrgan
       failEffect: !type:PopupMessage
         messages:
         - entity-effect-popup-autotomy-failed

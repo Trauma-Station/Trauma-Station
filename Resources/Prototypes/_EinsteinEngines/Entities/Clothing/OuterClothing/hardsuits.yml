@@ -25,8 +25,7 @@
     damageCoefficient: 0.50
   - type: Armor # Good armour resistance across the board, comparable to the standard security hardsuit.
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -46,7 +45,7 @@
       head: ClothingHeadHelmetHardsuitCombatStandard
   - type: AllowSuitStorage
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -83,8 +82,7 @@
     damageCoefficient: 0.60
   - type: Armor # Slightly less armour than the standard hardsuit, but far higher mobility.
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -104,7 +102,7 @@
       head: ClothingHeadHelmetHardsuitCombatMedical
   - type: AllowSuitStorage
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -127,8 +125,7 @@
     damageCoefficient: 0.40
   - type: Armor # More protective than a standard security hardsuit, but far slower.
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg

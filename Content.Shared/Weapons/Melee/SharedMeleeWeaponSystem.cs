@@ -2,7 +2,7 @@
 using Content.Goobstation.Common.Weapons;
 using Content.Goobstation.Common.MartialArts;
 using Content.Lavaland.Common.Weapons;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Coordinates;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Physics.Components;

@@ -29,6 +29,8 @@ using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Goobstation.Shared.Heretic;
 using Content.Server.Atmos.EntitySystems;
+using Content.Server.Body.Components;
+using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Flash;
 using Content.Server.Hands.Systems;
@@ -44,7 +46,8 @@ using Content.Shared.Store.Components;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Random;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
+using Content.Shared.Body.Components;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Content.Shared.Stunnable;
@@ -58,8 +61,6 @@ using Content.Shared.Mobs.Components;
 using Robust.Shared.Prototypes;
 using Content.Server.Heretic.EntitySystems;
 using Content.Server.Actions;
-using Content.Server.Body.Components;
-using Content.Server.Body.Systems;
 using Content.Server.Temperature.Systems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Server.Heretic.Components;
@@ -71,15 +72,14 @@ using Content.Shared._Shitcode.Heretic.Systems.Abilities;
 using Content.Shared.Damage.Components;
 using Content.Shared.FixedPoint;
 using Content.Server.Cloning;
+using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Heretic.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Standing;
 using Content.Shared._Starlight.CollectiveMind;
-using Content.Shared.Body.Components;
 using Content.Shared.Hands.Components;
-using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Tag;
 using Robust.Server.Containers;
 
@@ -100,7 +100,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly FlashSystem _flash = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly PhysicsSystem _phys = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throw = default!;
@@ -126,9 +126,8 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly PvsOverrideSystem _pvs = default!;
     [Dependency] private readonly CloningSystem _cloning = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
 
-    private static readonly ProtoId<HereticRitualPrototype> BladeBladeRitual = "BladeBlade";
+    private static readonly ProtoId<TagPrototype> BladeBladeRitualTag = "RitualBladeBlade";
 
     private const float LeechingWalkUpdateInterval = 1f;
     private float _accumulator;
@@ -236,7 +235,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
         bool InfuseOurBlades()
         {
-            if (!heretic.LimitedTransmutations.TryGetValue(BladeBladeRitual, out var blades))
+            if (!Heretic.TryGetRitual((ent, heretic), BladeBladeRitualTag, out var ritual))
                 return false;
 
             var xformQuery = GetEntityQuery<TransformComponent>();
@@ -245,12 +244,12 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
                 containerEnt = container.Owner;
 
             var success = false;
-            foreach (var blade in blades)
+            foreach (var blade in ritual.Value.Comp.LimitedOutput)
             {
                 if (!Exists(blade))
                     continue;
 
-                if (!_tag.HasTag(blade, MansusGraspSystem.HereticBladeBlade))
+                if (!_tag.HasTag(blade, SharedMansusGraspSystem.HereticBladeBlade))
                     continue;
 
                 if (TryComp(blade, out MansusInfusedComponent? infused) &&
@@ -433,13 +432,10 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
                 continue;
 
             var toHeal = -realMult * AllDamage;
-            var boneHeal = -realMult * flesh.BoneHealMultiplier;
-            var painHeal = -realMult * flesh.PainHealMultiplier;
-            var woundHeal = -realMult * flesh.WoundHealMultiplier;
             var bloodHeal = realMult * flesh.BloodHealMultiplier;
             var bleedHeal = -realMult * flesh.BleedReductionMultiplier;
 
-            IHateWoundMed((uid, dmg, null, null), toHeal, boneHeal, painHeal, woundHeal, bloodHeal, bleedHeal);
+            IHateWoundMed((uid, dmg, null), toHeal, bloodHeal, bleedHeal);
         }
 
         var rustChargeQuery = EntityQueryEnumerator<RustObjectsInRadiusComponent, TransformComponent>();
@@ -514,7 +510,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
                         if (damageable != null && damageable.TotalDamage < FixedPoint2.Epsilon)
                         {
-                            _body.RestoreBody(uid);
+                            //_body.RestoreBody(uid); // TODO NUBODY: bruh
                             shouldHeal = false;
                         }
                     }
@@ -535,11 +531,8 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
             if (shouldHeal && damageable != null)
             {
-                IHateWoundMed((uid, damageable, null, null),
+                IHateWoundMed((uid, damageable, null),
                     toHeal,
-                    boneHeal,
-                    otherHeal,
-                    otherHeal,
                     leech.BloodHeal * multiplier,
                     null);
             }

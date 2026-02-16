@@ -21,6 +21,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Actions;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
@@ -33,8 +35,6 @@ using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
-using Content.Shared._Shitmed.Targeting; // Shitmed Change
-using Content.Shared._Shitmed.Damage; // Shitmed Change
 
 namespace Content.Lavaland.Shared.Body;
 
@@ -99,7 +99,7 @@ public sealed class CursedHeartSystem : EntitySystem
             return;
 
         args.Handled = true;
-        _audio.PlayGlobal(new SoundPathSpecifier("/Audio/_Lavaland/heartbeat.ogg"), uid);
+        _audio.PlayLocal(new SoundPathSpecifier("/Audio/_Lavaland/heartbeat.ogg"), uid, args.Performer);
         _damage.ChangeDamage(uid, args.Damage, true, false, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll); // Shitmed Change
         _bloodstream.TryModifyBloodLevel(uid, 17);
         comp.LastPump = _timing.CurTime;

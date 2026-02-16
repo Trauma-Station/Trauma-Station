@@ -167,6 +167,13 @@ public sealed partial class TrailComponent : Component
     [DataField, AutoNetworkedField]
     public SpriteSpecifier? Sprite;
 
+    /// <summary>
+    /// If trail draws line, should it connect to trail entity?
+    /// Don't use it if entity position is disconnected from trail data
+    /// </summary>
+    [DataField]
+    public bool ConnectLineToTrailEntity = true;
+
     [DataField]
     public float Scale = 1f;
 

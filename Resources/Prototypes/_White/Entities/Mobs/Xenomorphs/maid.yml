@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseMobXenomorphAdult
+  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphMaid ]
   id: MobXenomorphMaid
   name: xenomorph maid
   description: I mean, I guess it is kinda cute?
@@ -18,10 +18,6 @@
       visible: false
   - type: Xenomorph
     caste: Maid
-  #- type: ActionGrant # Goobstation - moved to organ
-  #  actions:
-  #  - ActionTransferPlasma
-  #  - ActionSpawnResinWeedNode
   - type: Cuffable
   - type: MobThresholds
     thresholds:

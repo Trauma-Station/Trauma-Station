@@ -1,9 +1,7 @@
 // <Trauma>
-using Content.Shared._Shitmed.Body;
-using Content.Shared._Shitmed.Body.Part;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Part;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Damage.Components;
@@ -178,7 +176,7 @@ public sealed partial class DamageableSystem
             return damageDone;
 
         // <Goob> - For entities with a body, route damage through body parts and then sum it up
-        if (_bodyQuery.TryComp(ent, out var body) && body.BodyType == BodyType.Complex)
+        if (_bodyQuery.HasComp(ent))
         {
             damage -= vitalDamage;
             damage.TrimZeros();
@@ -189,10 +187,8 @@ public sealed partial class DamageableSystem
             var appliedVitalDamage = ApplyDamageToBodyParts(ent, vitalDamage, origin, ignoreResistances,
                 interruptsDoAfters, TargetBodyPart.Vital, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly);
 
-            if (appliedDamage != null)
-                damageDone += appliedDamage;
-            if (appliedVitalDamage != null)
-                damageDone += appliedVitalDamage;
+            damageDone += appliedDamage;
+            damageDone += appliedVitalDamage;
 
             return damageDone;
         }
@@ -211,14 +207,13 @@ public sealed partial class DamageableSystem
                     DamageSpecifier.PenetrateArmor(modifierSet, modified.ArmorPenetration)); // Goob edit
 
             // <Shitmed>
-            if (TryComp<BodyPartComponent>(ent, out var bodyPart))
+            if (_part.GetPartType(ent) is {} target)
             {
-                TargetBodyPart? target = _body.GetTargetBodyPart(bodyPart);
-                if (bodyPart.Body != null)
+                if (_body.GetBody(ent) is {} body)
                 {
                     // First raise the event on the parent to apply any parent modifiers
-                    var parentEv = new DamageModifyEvent(bodyPart.Body.Value, modified, origin, target);
-                    RaiseLocalEvent(bodyPart.Body.Value, parentEv);
+                    var parentEv = new DamageModifyEvent(body, modified, origin, target);
+                    RaiseLocalEvent(body, parentEv);
                     modified = parentEv.Damage;
                 }
 
@@ -287,11 +282,12 @@ public sealed partial class DamageableSystem
             return damageDone;
 
         OnEntityDamageChanged((ent, ent.Comp), damageDone, interruptsDoAfters, origin, ignoreGlobalModifiers);
-        if (_woundableQuery.HasComp(ent))
+        if (_body.GetBody(ent) is {} parentBody)
         {
             // This means that the damaged part was a woundable
             // which also means we send that shit to refresh the body.
-            UpdateParentDamageFromBodyParts(ent.Owner,
+            UpdateParentDamageFromBodyParts(
+                parentBody,
                 damageDone,
                 interruptsDoAfters,
                 origin,
@@ -528,16 +524,13 @@ public sealed partial class DamageableSystem
             return;
 
         // <Shitmed> - If entity has a body, set damage on all body parts
-        if (_bodyQuery.TryComp(ent, out var body))
+        foreach (var part in _body.GetExternalOrgans(ent.Owner, logMissing: false))
         {
-            foreach (var (part, _) in _body.GetBodyChildren(ent.Owner, body))
-            {
-                if (!_damageableQuery.TryComp(part, out var partDamageable))
-                    continue;
+            if (!_damageableQuery.TryComp(part, out var partDamageable))
+                continue;
 
-                // I LOVE RECURSION!!!
-                SetAllDamage((part, partDamageable), newValue);
-            }
+            // I LOVE RECURSION!!!
+            SetAllDamage((part, partDamageable), newValue);
         }
         // </Shitmed>
 
@@ -552,16 +545,8 @@ public sealed partial class DamageableSystem
         OnEntityDamageChanged((ent, ent.Comp), new DamageSpecifier());
 
         // <Shitmed>
-        if (!_woundableQuery.TryComp(ent, out var woundable) || !woundable.AllowWounds)
-            return;
-
-        _wounds.UpdateWoundableIntegrity(ent, woundable);
-
-        foreach (var (type, value) in ent.Comp.Damage.DamageDict)
-        {
-            var mul = ent.Comp.Damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
-            _wounds.TryInduceWound(ent, type, value * mul, out _, woundable);
-        }
+        var ev = new DamageSetEvent(newValue);
+        RaiseLocalEvent(ent, ref ev);
         // </Shitmed>
     }
 
@@ -577,9 +562,10 @@ public sealed partial class DamageableSystem
 
         ent.Comp.DamageModifierSetId = damageModifierSetId;
         // <Goob>
-        foreach (var (id, part) in _body.GetBodyChildren(ent.Owner))
+        foreach (var organ in _body.GetOrgans<DamageableComponent>(ent.Owner))
         {
-            EnsureComp<DamageableComponent>(id).DamageModifierSetId = damageModifierSetId;
+            organ.Comp.DamageModifierSetId = damageModifierSetId;
+            Dirty(organ);
         }
         // </Goob>
 
