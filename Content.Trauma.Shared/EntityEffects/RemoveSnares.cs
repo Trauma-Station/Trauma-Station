@@ -18,13 +18,12 @@ public sealed partial class RemoveSnares : EntityEffectBase<RemoveSnares>
 
 public sealed class RemoveSnaresEffectSystem : EntityEffectSystem<EnsnareableComponent, RemoveSnares>
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     protected override void Effect(Entity<EnsnareableComponent> ent, ref EntityEffectEvent<RemoveSnares> args)
     {
-        var user = _data.GetUser(ent) ?? ent.Owner;
+        var user = args.User ?? ent.Owner;
 
         // snare api is dogshit and i cbf to improve it
         foreach (var bola in ent.Comp.Container.ContainedEntities)
