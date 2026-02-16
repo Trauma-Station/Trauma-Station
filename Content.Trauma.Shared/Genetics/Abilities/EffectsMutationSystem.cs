@@ -26,10 +26,7 @@ public sealed class EffectsMutationSystem : EntitySystem
         if (args.Automatic && ent.Comp.IgnoreAutomatic)
             return;
 
-        var target = args.Target;
-        _data.SetUser(target, target);
-        _effects.ApplyEffects(target, ent.Comp.Added);
-        _data.ClearUser(target);
+        _effects.ApplyEffects(target, ent.Comp.Added, user: args.User);
     }
 
     private void OnRemoved(Entity<EffectsMutationComponent> ent, ref MutationRemovedEvent args)
@@ -37,9 +34,6 @@ public sealed class EffectsMutationSystem : EntitySystem
         if (args.Automatic && ent.Comp.IgnoreAutomatic)
             return;
 
-        var target = args.Target;
-        _data.SetUser(target, target);
-        _effects.ApplyEffects(target, ent.Comp.Removed);
-        _data.ClearUser(target);
+        _effects.ApplyEffects(target, ent.Comp.Removed, user: args.User);
     }
 }
