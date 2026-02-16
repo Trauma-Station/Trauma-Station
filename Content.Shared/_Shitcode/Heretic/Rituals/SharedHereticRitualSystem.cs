@@ -5,16 +5,12 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using System.Text;
 using Content.Shared.Examine;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Body;
-using Content.Shared.EntityConditions;
 using Content.Shared.Gibbing;
-using Content.Shared.Mind;
 using Content.Shared.Stacks;
-using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.Player;
@@ -34,7 +30,6 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedEntityConditionsSystem _condition = default!;
     [Dependency] private readonly HereticRitualEffectSystem _effects = default!;
 
     public SoundSpecifier RitualSuccessSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");
@@ -47,6 +42,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     public const string Mind = "Mind";
     public const string Platform = "Platform";
     public const string CancelString = "CancelString";
+    public const string SuccessOverride = "SuccessOverride";
 
     public override void Initialize()
     {
@@ -102,20 +98,29 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
 
     private bool TryDoRitual(Entity<HereticRitualComponent> ent, EntityUid user)
     {
+        var result = false;
         if (ent.Comp.Limit > 0)
         {
             ent.Comp.LimitedOutput = ent.Comp.LimitedOutput.Where(Exists).ToList();
             if (ent.Comp.LimitedOutput.Count >= ent.Comp.Limit)
             {
                 if (ent.Comp.LimitReachedEffects is { } limitReachedEffects)
-                    return _effects.TryEffects(ent, limitReachedEffects, ent, user);
-
-                ent.Comp.Blackboard[CancelString] = Loc.GetString("heretic-ritual-fail-limit");
-                return false;
+                    result = _effects.TryEffects(ent, limitReachedEffects, ent, user);
+                else
+                {
+                    ent.Comp.Blackboard[CancelString] = Loc.GetString("heretic-ritual-fail-limit");
+                    return false;
+                }
             }
+            else
+                result = _effects.TryEffects(ent, ent.Comp.Effects, ent, user);
         }
+        else
+            result = _effects.TryEffects(ent, ent.Comp.Effects, ent, user);
 
-        return _effects.TryEffects(ent, ent.Comp.Effects, ent, user);
+        if (TryGetValue(ent, SuccessOverride, out bool overrideSuccess))
+            result = overrideSuccess;
+        return result;
     }
 
     private void SetupBlackboard(Entity<HereticRitualComponent> ent,

@@ -193,6 +193,8 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
                     var ghoul = _compFactory.GetComponent<GhoulComponent>();
                     ghoul.GiveBlade = true;
+                    ghoul.DeathBehavior = GhoulDeathBehavior.NoGib;
+                    ghoul.CanDeconvert = true;
 
                     AddComp(target, ghoul);
                     applyMark = false;

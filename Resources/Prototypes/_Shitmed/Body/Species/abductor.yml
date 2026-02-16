@@ -97,7 +97,7 @@
     data:
       sprite: _Shitmed/Mobs/Species/Abductor/parts.rsi
   - type: WoundableVisuals
-    damageOverlayColors:
+    damageGroupColors:
       Brute: "#878787"
   - type: VisualOrganMarkings
     markingData:

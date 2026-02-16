@@ -75,6 +75,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Linq;
 using Content.Goobstation.Common.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Station.Systems;
 using Content.Shared.Cuffs.Components;
 using Content.Server.Cuffs;
@@ -144,6 +145,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         SubscribeLocalEvent<CosmicCultComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<CosmicGodComponent, ComponentInit>(OnGodSpawn);
         SubscribeLocalEvent<CosmicCultComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<CosmicCultComponent, UserShouldTakeHolyEvent>(OnShouldTakeHoly); // Trauma
 
         Subs.CVar(_config,
             DCCVars.CosmicCultT2RevealDelaySeconds,
@@ -164,6 +166,22 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     }
 
     #region Starting Events
+
+    // <Trauma>
+    private void OnShouldTakeHoly(Entity<CosmicCultComponent> ent, ref UserShouldTakeHolyEvent args)
+    {
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
+            return;
+
+        args.WeakToHoly = true;
+
+        if (AssociatedGamerule(ent) is not { } rule)
+            return;
+
+        args.ShouldTakeHoly = rule.Comp.CurrentTier > 2;
+    }
+    // </Trauma>
+
     protected override void Started(EntityUid uid,
         CosmicCultRuleComponent component,
         GameRuleComponent gameRule,
@@ -755,6 +773,8 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         EnsureComp<IntrinsicRadioReceiverComponent>(uid);
         TransferCultAssociation(converter, uid);
 
+        EnsureComp<WeakToHolyComponent>(uid); // Trauma
+
         if (cosmicGamerule.CurrentTier == 3)
         {
             cultComp.EntropyBudget = 48; // pity balance
@@ -766,15 +786,14 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             EnsureComp<CosmicStarMarkComponent>(uid);
             EnsureComp<PressureImmunityComponent>(uid);
             EnsureComp<TemperatureImmunityComponent>(uid);
+
+            // <Trauma>
+            var ev = new UnholyStatusChangedEvent(uid, uid, true);
+            RaiseLocalEvent(uid, ref ev);
+            // </Trauma>
         }
         else if (cosmicGamerule.CurrentTier == 2)
         {
-            // Goobstation Change - Shitchap
-            if (!HasComp<WeakToHolyComponent>(uid))
-                EnsureComp<WeakToHolyComponent>(uid).AlwaysTakeHoly = true;
-            else
-                cultComp.WasWeakToHoly = true;
-
             cultComp.EntropyBudget = 26; // pity balance
 
             foreach (var influenceProto in _protoMan.EnumeratePrototypes<InfluencePrototype>().Where(influenceProto => influenceProto.Tier == 2))
@@ -827,9 +846,10 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         RemComp<TemperatureImmunityComponent>(uid);
         RemComp<CosmicStarMarkComponent>(uid);
 
-        // Goobstation Change: Shitchap
-        if (!uid.Comp.WasWeakToHoly)
-            RemComp<WeakToHolyComponent>(uid);
+        // <Trauma>
+        var ev = new UnholyStatusChangedEvent(uid, uid, false);
+        RaiseLocalEvent(uid, ref ev);
+        // </Trauma>
 
         _damage.SetDamageContainerID(uid.Owner, uid.Comp.StoredDamageContainer);
         _antag.SendBriefing(uid, Loc.GetString("cosmiccult-role-deconverted-fluff"), Color.FromHex("#4cabb3"), _deconvertSound);

@@ -39,7 +39,7 @@ public sealed class WoundableVisualsSystem : VisualizerSystem<WoundableVisualsCo
 
         _visualQuery = GetEntityQuery<VisualOrganComponent>();
 
-        SubscribeLocalEvent<WoundableVisualsComponent, ComponentInit>(InitializeEntity, after: [typeof(WoundSystem)]);
+        SubscribeLocalEvent<WoundableVisualsComponent, ComponentStartup>(InitializeEntity);
         SubscribeLocalEvent<WoundableVisualsComponent, OrganGotRemovedEvent>(OnWoundableRemoved);
         SubscribeLocalEvent<WoundableVisualsComponent, OrganGotInsertedEvent>(OnWoundableInserted);
         SubscribeLocalEvent<WoundableVisualsComponent, WoundableIntegrityChangedEvent>(OnWoundableIntegrityChanged);
@@ -48,7 +48,7 @@ public sealed class WoundableVisualsSystem : VisualizerSystem<WoundableVisualsCo
     private Enum? GetLayer(EntityUid uid)
         => _visualQuery.CompOrNull(uid)?.Layer;
 
-    private void InitializeEntity(Entity<WoundableVisualsComponent> ent, ref ComponentInit args)
+    private void InitializeEntity(Entity<WoundableVisualsComponent> ent, ref ComponentStartup args)
     {
         InitDamage(ent);
         InitBleeding(ent);
@@ -56,22 +56,28 @@ public sealed class WoundableVisualsSystem : VisualizerSystem<WoundableVisualsCo
 
     private void InitBleeding(Entity<WoundableVisualsComponent> ent)
     {
-        if (ent.Comp.BleedingOverlay is not {} overlay ||
+        if (_body.GetBody(ent.Owner) is not {} body ||
+            !HasComp<HumanoidProfileComponent>(body) ||
+            !TryComp<SpriteComponent>(body, out var sprite) ||
+            ent.Comp.BleedingOverlay is not {} overlay ||
             GetLayer(ent) is not {} layer)
             return;
 
-        AddDamageLayerToSprite(ent.Owner, overlay, BuildStateKey(layer, MinorSuffix), BuildLayerKey(layer, BleedingSuffix));
+        AddDamageLayerToSprite((body, sprite), overlay, BuildStateKey(layer, MinorSuffix), BuildLayerKey(layer, BleedingSuffix));
     }
 
     private void InitDamage(Entity<WoundableVisualsComponent> ent)
     {
-        if (GetLayer(ent) is not {} layer)
+        if (_body.GetBody(ent.Owner) is not {} body ||
+            !HasComp<HumanoidProfileComponent>(body) ||
+            !TryComp<SpriteComponent>(body, out var spriteComp) ||
+            GetLayer(ent) is not {} layer)
             return;
 
         foreach (var (group, sprite) in ent.Comp.DamageGroupSprites)
         {
             var color = GetColor(ent, group);
-            AddDamageLayerToSprite(ent.Owner,
+            AddDamageLayerToSprite((body, spriteComp),
                 sprite,
                 BuildStateKey(layer, group, "100"),
                 BuildLayerKey(layer, group),

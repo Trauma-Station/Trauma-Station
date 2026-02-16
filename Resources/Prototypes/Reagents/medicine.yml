@@ -1302,8 +1302,21 @@
   metabolisms:
     Digestion:
       effects:
-      - !type:HolyIgnite # Trauma
+      # <Trauma>
+      - !type:DeconvertGhoul
+        conditions:
+        - !type:ReagentCondition
+          reagent: Holywater
+          min: 20
+      - !type:HolyIgnite
         stacks: 3
+        conditions:
+        - !type:WhitelistCondition
+          blacklist:
+            components:
+            - GhoulDeconvert
+            - CleanseCult
+      # </Trauma>
       - !type:SatiateThirst
         factor: 3
       - !type:AddComponents # DeltaV - Cosmic Cult
@@ -1344,6 +1357,12 @@
       effects:
       - !type:HolyIgnite
         stacks: 3
+        conditions:
+        - !type:WhitelistCondition
+          blacklist:
+            components:
+            - GhoulDeconvert
+            - CleanseCult
 #    Acidic:  # Goobstation - Removing holy water damage on touch pending rework.
 #      methods: [ Touch ]
 #      effects:

@@ -13,10 +13,11 @@
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.StatusIcon.Components;
+using Content.Trauma.Shared.Heretic.Systems;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._Shitcode.Heretic;
+namespace Content.Trauma.Client.Heretic.Systems;
 
 public sealed class GhoulSystem : SharedGhoulSystem
 {

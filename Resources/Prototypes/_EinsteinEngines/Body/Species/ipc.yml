@@ -291,7 +291,7 @@
     markingData:
       group: IPC
   - type: WoundableVisuals
-    damageOverlayColors:
+    damageGroupColors:
       Brute: "#DD8822"
   - type: Boneless
     bonePenalty: 1

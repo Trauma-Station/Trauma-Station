@@ -99,7 +99,7 @@ public sealed class CursedHeartSystem : EntitySystem
             return;
 
         args.Handled = true;
-        _audio.PlayPredicted(new SoundPathSpecifier("/Audio/_Lavaland/heartbeat.ogg"), uid, args.Performer);
+        _audio.PlayLocal(new SoundPathSpecifier("/Audio/_Lavaland/heartbeat.ogg"), uid, args.Performer);
         _damage.ChangeDamage(uid, args.Damage, true, false, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll); // Shitmed Change
         _bloodstream.TryModifyBloodLevel(uid, 17);
         comp.LastPump = _timing.CurTime;

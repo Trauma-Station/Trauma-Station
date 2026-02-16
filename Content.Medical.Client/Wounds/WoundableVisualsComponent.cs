@@ -19,7 +19,10 @@ public sealed partial class WoundableVisualsComponent : Component
     /// Optional colors for certain damage groups.
     /// </summary>
     [DataField]
-    public Dictionary<ProtoId<DamageGroupPrototype>, Color> DamageGroupColors = new();
+    public Dictionary<ProtoId<DamageGroupPrototype>, Color> DamageGroupColors = new()
+    {
+        { "Brute", Color.Red },
+    };
 
     [DataField]
     public string? BleedingOverlay;

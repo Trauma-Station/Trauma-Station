@@ -212,8 +212,7 @@
     deactivateSound: null
   - type: Polymorphable
   - type: Pullable
-  - type: WeakToHoly
-    alwaysTakeHoly: true
+  - type: AlwaysTakeHoly
   - type: CosmicColossus
     sunderBlacklist:
       components:

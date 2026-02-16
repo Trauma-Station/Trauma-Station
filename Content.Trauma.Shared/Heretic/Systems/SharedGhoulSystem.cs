@@ -1,3 +1,3 @@
-namespace Content.Shared._Shitcode.Heretic.Systems;
+namespace Content.Trauma.Shared.Heretic.Systems;
 
 public abstract class SharedGhoulSystem : EntitySystem;

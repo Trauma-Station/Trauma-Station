@@ -1,8 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Common.Body;
 using Content.Medical.Shared.DelayedDeath;
 using Content.Shared.Body;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Rejuvenate;
 using Content.Shared.Speech;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
@@ -31,6 +34,9 @@ public sealed class DebrainedSystem : EntitySystem
         SubscribeLocalEvent<DebrainedComponent, ComponentRemove>(OnComponentRemove);
         SubscribeLocalEvent<DebrainedComponent, SpeakAttemptEvent>(OnSpeakAttempt);
         SubscribeLocalEvent<DebrainedComponent, StandAttemptEvent>(OnStandAttempt);
+        // TODO: make this real when body restore on rejuvenate is fixed
+        // SubscribeLocalEvent<DebrainedComponent, RejuvenateEvent>(OnRejuvenate,
+        //    before: new []{ typeof(DamageableSystem) });
     }
 
     private void OnComponentInit(EntityUid uid, DebrainedComponent _, ComponentInit args)
@@ -61,4 +67,9 @@ public sealed class DebrainedSystem : EntitySystem
     {
         args.Cancel();
     }
+
+    /*private void OnRejuvenate(Entity<DebrainedComponent> ent, ref RejuvenateEvent args)
+    {
+        RemCompDeferred(ent, ent.Comp);
+    }*/
 }

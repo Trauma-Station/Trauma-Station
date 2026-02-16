@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Goobstation.Shared.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Shared.Actions;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
@@ -25,6 +26,21 @@ public abstract class SharedPossessionSystem : EntitySystem
         SubscribeLocalEvent<PossessedComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<PossessedComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<PossessedComponent, ComponentRemove>(OnRemove);
+        SubscribeLocalEvent<PossessedComponent, UserShouldTakeHolyEvent>(OnShouldTakeHoly);
+        SubscribeLocalEvent<PossessedComponent, BibleSmiteAttemptEvent>(OnShouldSmite);
+    }
+
+    private void OnShouldSmite(Entity<PossessedComponent> ent, ref BibleSmiteAttemptEvent args)
+    {
+        args.ShouldSmite = true;
+    }
+
+    private void OnShouldTakeHoly(Entity<PossessedComponent> ent, ref UserShouldTakeHolyEvent args)
+    {
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
+            return;
+
+        args.ShouldTakeHoly = true;
     }
 
     private void OnInit(Entity<PossessedComponent> possessed, ref ComponentInit args)
@@ -34,9 +50,9 @@ public abstract class SharedPossessionSystem : EntitySystem
 
     private void OnMapInit(Entity<PossessedComponent> possessed, ref MapInitEvent args)
     {
-        possessed.Comp.WasWeakToHoly = EnsureComp<WeakToHolyComponent>(possessed, out var weak);
-        weak.AlwaysTakeHoly = true;
-        Dirty(possessed, weak);
+        EnsureComp<WeakToHolyComponent>(possessed);
+        var ev = new UnholyStatusChangedEvent(possessed, possessed, true);
+        RaiseLocalEvent(possessed, ref ev);
 
         if (possessed.Comp.HideActions)
             possessed.Comp.HiddenActions = _actions.HideActions(possessed);

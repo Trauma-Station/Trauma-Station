@@ -7,6 +7,7 @@
 using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Devil.Condemned;
 using Content.Goobstation.Shared.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Polymorph.Systems;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
@@ -34,9 +35,19 @@ public sealed partial class CondemnedSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<CondemnedComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<CondemnedComponent, MapInitEvent>(OnStartup);
-        SubscribeLocalEvent<CondemnedComponent, ComponentRemove>(OnRemoved);
+        SubscribeLocalEvent<CondemnedComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<CondemnedComponent, UpdateCanMoveEvent>(OnMoveAttempt);
+        SubscribeLocalEvent<CondemnedComponent, UserShouldTakeHolyEvent>(OnShouldTakeHoly);
         InitializeOnDeath();
+    }
+
+    private void OnShouldTakeHoly(Entity<CondemnedComponent> ent, ref UserShouldTakeHolyEvent args)
+    {
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running || ent.Comp.SoulOwnedNotDevil)
+            return;
+
+        args.ShouldTakeHoly = true;
+        args.WeakToHoly = true;
     }
 
     public override void Update(float frameTime)
@@ -63,19 +74,21 @@ public sealed partial class CondemnedSystem : EntitySystem
         if (condemned.Comp.SoulOwnedNotDevil)
             return;
 
-        if (HasComp<WeakToHolyComponent>(condemned))
-            condemned.Comp.WasWeakToHoly = true;
-        else
-            EnsureComp<WeakToHolyComponent>(condemned).AlwaysTakeHoly = true;
+        EnsureComp<WeakToHolyComponent>(condemned);
+        var ev = new UnholyStatusChangedEvent(condemned, condemned, true);
+        RaiseLocalEvent(condemned, ref ev);
     }
 
-    private void OnRemoved(Entity<CondemnedComponent> condemned, ref ComponentRemove args)
+    private void OnShutdown(Entity<CondemnedComponent> condemned, ref ComponentShutdown args)
     {
+        if (TerminatingOrDeleted(condemned))
+            return;
+
         if (condemned.Comp.SoulOwnedNotDevil)
             return;
 
-        if (!condemned.Comp.WasWeakToHoly)
-            RemComp<WeakToHolyComponent>(condemned);
+        var ev = new UnholyStatusChangedEvent(condemned, condemned, false);
+        RaiseLocalEvent(condemned, ref ev);
     }
 
     private void OnMoveAttempt(Entity<CondemnedComponent> condemned, ref UpdateCanMoveEvent args)

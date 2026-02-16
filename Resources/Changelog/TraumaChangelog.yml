@@ -2522,3 +2522,37 @@ Entries:
   id: 304
   time: '2026-02-15T22:19:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/695
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed torso starting with only half of its integrity.
+  - type: Fix
+    message: Fixed damage visuals being wrong color for some species.
+  - type: Fix
+    message: Fixed wizard rod form having wrong direction.
+  - type: Fix
+    message: Fixed lightning wrong direction.
+  - type: Fix
+    message: Fixed staff of change not working.
+  - type: Fix
+    message: Fixed modsuits not sealing.
+  id: 305
+  time: '2026-02-16T06:42:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/700
+- author: Aviu
+  changes:
+  - type: Add
+    message: Flesh heretic risen ghouls no longer gib on death.
+  - type: Add
+    message: You can deconvert ghoulified people with holy water.
+  - type: Add
+    message: >-
+      Voiceless Dead has more hp and can now be recalled to the ritual rune and
+      revived, see ritual purchase description for details.
+  - type: Add
+    message: Predicted holy damage and bible smite.
+  - type: Tweak
+    message: 'Knit flesh cooldown: 20s -> 5s.'
+  id: 306
+  time: '2026-02-16T06:44:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/615
