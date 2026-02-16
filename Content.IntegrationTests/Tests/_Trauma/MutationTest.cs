@@ -23,6 +23,7 @@ public sealed class MutationTest
         var map = await pair.CreateTestMap();
 
         var entMan = server.ResolveDependency<IEntityManager>();
+        var polymorphQuery = entMan.GetEntityQuery<PolymorphedEntityComponent>();
         var mutation = entMan.System<MutationSystem>();
 
         var mobs = new List<EntityUid>();
@@ -34,8 +35,12 @@ public sealed class MutationTest
                 {
                     var mob = entMan.SpawnEntity(TestMob, map.GridCoords);
                     Assert.That(mutation.AddMutation(mob, id), $"Failed to add {id} to {entMan.ToPrettyString(mob)}");
-                    Assert.That(mutation.HasMutation(mob, id), $"Added {id} but it was not present in {entMan.ToPrettyString(mob)}");
+                    // for monkified, the new monkey will have the mutation
+                    var target = polymorphQuery.CompOrNull(mob)?.Parent ?? mob;
+                    Assert.That(mutation.HasMutation(target, id), $"Added {id} but it was not present in {entMan.ToPrettyString(mob)}");
                     mobs.Add(mob);
+                    if (target != mob)
+                        mobs.Add(target); // delete the polymorphed entity too later
                 }
             });
         });
