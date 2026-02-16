@@ -34,7 +34,7 @@
     sound: /Audio/Weapons/genhit2.ogg
   - !type:PopupMessage
     messages:
-    - cqc-slam
+    - cqc-kick
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 25
@@ -55,7 +55,7 @@
   userEffects:
   - !type:PopupMessage
     messages:
-    - cqc-slam
+    - cqc-restrain
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 30
@@ -78,7 +78,7 @@
   userEffects:
   - !type:PopupMessage
     messages:
-    - cqc-slam
+    - cqc-pressure
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 60

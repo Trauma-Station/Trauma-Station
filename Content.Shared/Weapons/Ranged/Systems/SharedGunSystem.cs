@@ -545,7 +545,6 @@ public abstract partial class SharedGunSystem : EntitySystem
                 recoilScale = 3.0f;
             }
         }
-        Log.Debug($"recoil:{recoilScale}");
         // </Trauma>
         var angle = GetRecoilAngle(Timing.CurTime, (gunUid, gun), mapDirection.ToAngle(), user, recoilScale); // Trauma - pass gunUid and user
 

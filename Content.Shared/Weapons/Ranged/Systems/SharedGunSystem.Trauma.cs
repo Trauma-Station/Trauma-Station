@@ -95,7 +95,7 @@ public abstract partial class SharedGunSystem
         random *= angleEv.Modifier;
         // </Goob>
 
-        var spread = comp.CurrentAngle.Theta * random * spreadScale;
+        var spread = comp.CurrentAngle.Theta * random * spreadScale + (0.05f * spreadScale) * random;
         var angle = new Angle(direction.Theta + comp.CurrentAngle.Theta * random * spreadScale);
         DebugTools.Assert(spread <= comp.MaxAngleModified.Theta * spreadScale);
         return angle;
