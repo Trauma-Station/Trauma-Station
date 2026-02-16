@@ -101,7 +101,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         ent.Comp.NextScramble = now + ent.Comp.ScrambleCooldown;
         DirtyField(ent, nameof(GeneticsConsoleComponent.NextScramble));
 
-        _mutation.Scramble(mutatable, user: args.User, predicted: true);
+        _mutation.Scramble(mutatable, user: args.Actor, predicted: true);
         UpdateUI(ent.Owner);
     }
 
@@ -171,7 +171,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        Speak(ent, SequenceMutation(ent, mob, args.Index)
+        Speak(ent, SequenceMutation(ent, mob, args.Index, args.User)
             ? "sequenced"
             : "sequence-failed");
     }
@@ -342,7 +342,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
     /// <summary>
     /// Tries to sequences a mutation, either activating it in the mob or damaging it.
     /// </summary>
-    public bool SequenceMutation(Entity<GeneticsConsoleComponent> ent, EntityUid mob, uint index)
+    public bool SequenceMutation(Entity<GeneticsConsoleComponent> ent, EntityUid mob, uint index, EntityUid? user = null)
     {
         if (!CanWorkOn(ent.Owner, mob) ||
             _genome.GetSequence(mob, index) is not {} sequence)
@@ -370,7 +370,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
 
         _audio.PlayPvs(ent.Comp.SequenceSound, ent);
         data.Discovered = true;
-        _mutation.AddMutation(mob, sequence.Mutation, user: args.User, predicted: false); // not predicted because of round data
+        _mutation.AddMutation(mob, sequence.Mutation, user: user, predicted: false); // not predicted because of round data
         UpdateUI(ent.Owner); // it's now discovered
         return true;
     }
