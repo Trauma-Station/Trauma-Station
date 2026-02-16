@@ -40,7 +40,7 @@ public sealed partial class RelayRandomPart : EntityEffectBase<RelayRandomPart>
     public EntityEffect? FailEffect;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("entity-effect-guidebook-relay-random-part", ("effect", Effect.EntityEffectGuidebookText(prototype, entSys)));
+        => Loc.GetString("entity-effect-guidebook-relay-random-part", ("effect", Effect.EntityEffectGuidebookText(prototype, entSys)!));
 }
 
 public sealed class RelayRandomPartEffectSystem : EntityEffectSystem<BodyComponent, RelayRandomPart>
