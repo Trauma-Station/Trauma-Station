@@ -211,13 +211,15 @@ public sealed class ThrowingSystem : EntitySystem
             {
                 if (_knowledge.GetMastery(strength) < 2)
                 {
-                    baseThrowSpeed *= 1 + _knowledge.SharpCurve(strength, 50, 50.0f);
+                    baseThrowSpeed *= 1 - _knowledge.InverseSharpCurve(strength, 26, 26.0f) / (26.0f * 2.0f);
                 }
                 else if (_knowledge.GetMastery(strength) > 2)
                 {
-                    baseThrowSpeed *= 1 - _knowledge.InverseSharpCurve(strength, 26, 26.0f) / (26.0f * 2.0f);
+                    baseThrowSpeed *= 1 + 0.5f * _knowledge.SharpCurve(strength, 50, 50.0f);
                 }
             }
+            var ev = new AddExperience("ThrowingKnowledge", 1);
+            RaiseLocalEvent(user.Value, ref ev);
         }
         // </Trauma>
 
