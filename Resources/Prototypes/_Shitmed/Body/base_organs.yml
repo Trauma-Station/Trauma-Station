@@ -25,8 +25,6 @@
     damageGroupSprites:
       Brute: _Shitmed/Mobs/Effects/brute_damage.rsi
       Burn: _Shitmed/Mobs/Effects/burn_damage.rsi
-    damageGroupColors:
-      Brute: "#FF0000"
   - type: Appearance
   - type: Nerve
   - type: ContainerContainer

@@ -25,7 +25,7 @@
   - type: Woundable
     canBleed: false
   - type: WoundableVisuals
-    damageOverlayColors:
+    damageGroupColors:
       Brute: "#DD8822"
     bleedingOverlay: null
   - type: VisualOrganMarkings

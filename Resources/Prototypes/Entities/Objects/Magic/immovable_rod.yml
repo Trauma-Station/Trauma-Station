@@ -87,6 +87,8 @@
   #- type: Physics # Goob
   #  bodyType: KinematicController
   #- type: InputMover # Goob
+  - type: Input # Goob
+    context: "human"
   - type: MovementSpeedModifier
     baseWeightlessAcceleration: 5
     baseWeightlessModifier: 2
