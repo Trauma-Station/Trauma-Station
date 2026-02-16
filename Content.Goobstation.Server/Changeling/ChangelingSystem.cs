@@ -47,6 +47,7 @@ using Content.Shared.Forensics.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Implants;
 using Content.Shared.Inventory;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.Medical;
@@ -114,6 +115,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
     [Dependency] private readonly SelectableAmmoSystem _selectableAmmo = default!;
     [Dependency] private readonly ChangelingRuleSystem _changelingRuleSystem = default!;
+    [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
 
     public static readonly EntProtoId ArmbladePrototype = "ArmBladeChangeling";
     public static readonly EntProtoId FakeArmbladePrototype = "FakeArmBladeChangeling";
@@ -540,9 +542,9 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
     public bool TryStealDNA(EntityUid uid, EntityUid target, ChangelingIdentityComponent comp, bool countObjective = false)
     {
-        if (!TryComp<DnaComponent>(target, out var dna)
-        || !TryComp<FingerprintComponent>(target, out var fingerprint)
-        || _humanoid.CreateProfile(target) is not {} profile)
+        var data = TryGetDNA(uid, target, comp);
+
+        if (!TryComp<DnaComponent>(target, out var dna) || data is not {})
         {
             _popup.PopupEntity(Loc.GetString("changeling-sting-extract-fail-lesser"), uid, uid);
             return false;
@@ -556,16 +558,6 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
                 return false;
             }
         }
-
-        var data = new TransformData
-        {
-            Name = Name(target),
-            DNA = dna.DNA ?? Loc.GetString("forensics-dna-unknown"),
-            Profile = profile
-        };
-
-        if (fingerprint.Fingerprint != null)
-            data.Fingerprint = fingerprint.Fingerprint;
 
         if (countObjective
         && _mind.TryGetMind(uid, out var mindId, out var mind)
@@ -587,6 +579,29 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         return true;
     }
+
+    public TransformData? TryGetDNA(EntityUid uid, EntityUid target, ChangelingIdentityComponent comp)
+    {
+        if (!TryComp<DnaComponent>(target, out var dna)
+            || !TryComp<FingerprintComponent>(target, out var fingerprint)
+            || _humanoid.CreateProfile(target) is not {} profile)
+        {
+            return null;
+        }
+
+        var data = new TransformData
+        {
+            Name = Name(target),
+            DNA = dna.DNA ?? Loc.GetString("forensics-dna-unknown"),
+            Profile = profile
+        };
+
+        if (fingerprint.Fingerprint != null)
+            data.Fingerprint = fingerprint.Fingerprint;
+
+        return data;
+    }
+
     private EntityUid? TransformEntity(
         EntityUid uid,
         TransformData? data = null,

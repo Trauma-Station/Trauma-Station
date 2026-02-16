@@ -73,6 +73,8 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Shared.Actions.Components;
 using Content.Goobstation.Shared.Devour.Events;
+using Content.Server.Actions;
+using Content.Shared.Mindshield.Components;
 
 namespace Content.Goobstation.Server.Changeling;
 
@@ -279,6 +281,18 @@ public sealed partial class ChangelingSystem
             Dirty(uid, biomass);
         }
 
+        comp.SelectedForm = TryGetDNA(uid, target, comp);
+
+        if (comp.SelectedForm is not { })
+        {
+            _popup.PopupEntity(Loc.GetString("changeling-transform-fail-generic"), uid, uid);
+            return;
+        }
+
+        if (HasComp<MindShieldComponent>(target))
+            _subdermalImplant.AddImplant(uid, comp.FakeMindShieldId);
+
+        TryTransform(uid, comp);
     }
 
     public List<ProtoId<ReagentPrototype>> BiomassAbsorbedChemicals = new() { "Nutriment", "Protein", "UncookedAnimalProteins", "Fat" }; // fat so absorbing raw meat good
