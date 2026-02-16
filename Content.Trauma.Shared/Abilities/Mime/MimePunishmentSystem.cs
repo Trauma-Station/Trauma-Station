@@ -24,6 +24,6 @@ public sealed class MimePunishmentSystem : EntitySystem
 
     private void OnBrokeVow(Entity<MimePowersComponent> ent, ref MimeBrokeVowEvent args)
     {
-        _nestedEffect.ApplyNestedEffect(ent, Punishments);
+        _nestedEffect.ApplyNestedEffect(ent, Punishments, user: ent.Owner);
     }
 }

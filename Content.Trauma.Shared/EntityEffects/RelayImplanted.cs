@@ -31,7 +31,7 @@ public sealed class RelayImplantedEffectSystem : EntityEffectSystem<SubdermalImp
             return;
 
         _data.CopyData(ent, user);
-        _effects.TryApplyEffect(user, args.Effect.Effect, args.Scale);
+        _effects.TryApplyEffect(user, args.Effect.Effect, args.Scale, args.User);
         _data.ClearData(user);
     }
 }

@@ -74,7 +74,7 @@ public sealed class WeightedRandomEffectSystem : EntityEffectSystem<MetaDataComp
             total += child.Weight;
             if (total >= target)
             {
-                _effects.TryApplyEffect(ent, child.Effect, args.Scale);
+                _effects.TryApplyEffect(ent, child.Effect, args.Scale, args.User);
                 return;
             }
         }
