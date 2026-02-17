@@ -32,7 +32,7 @@ public sealed partial class BodyBloodstreamSystem : EntitySystem
 
     private float _bleedingSeverity = 1f;
 
-    private void InitializeWounds()
+    public override void Initialize()
     {
         base.Initialize();
 
@@ -284,6 +284,7 @@ public sealed partial class BodyBloodstreamSystem : EntitySystem
             return;
 
         // wounds that BLEED will not HEAL.
+        // wounds that bleed. will you heal them, to me?
         component.BleedingAmountRaw = args.Component.WoundSeverityPoint * _bleedingSeverity;
 
         var formula = (float) (args.Component.WoundSeverityPoint / _cfg.GetCVar(SurgeryCVars.BleedsScalingTime) * component.ScalingSpeed);
