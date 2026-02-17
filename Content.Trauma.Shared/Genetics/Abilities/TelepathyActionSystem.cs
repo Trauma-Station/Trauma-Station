@@ -7,6 +7,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;
 
@@ -94,7 +95,7 @@ public sealed class TelepathyActionSystem : EntitySystem
     {
         _chatMan.ChatMessageToOne(ChatChannel.Local,
             message,
-            Loc.GetString("MutationTelepathy-message-wrap", ("message", message)),
+            Loc.GetString("MutationTelepathy-message-wrap", ("message", FormattedMessage.EscapeText(message))),
             source: EntityUid.Invalid, // no doxxing the sender
             hideChat: false,
             client: client,
