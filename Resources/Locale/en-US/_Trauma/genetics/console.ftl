@@ -58,6 +58,7 @@ genetics-console-mutation-name-placeholder = Mutation {$number}
 genetics-console-write-mutation = Save to disk
 genetics-console-sequencer-tip = Tip: Ctrl+Click on the base to set it to X. Right Click to cycle in reverse.
 genetics-console-begin-sequencing = Begin Sequencing
+genetics-console-reset-sequence = Reset Sequence
 
 genetics-console-combine-button = Combine!
 genetics-console-combine-catalyst = Catalyst Mutation: {$mutation}

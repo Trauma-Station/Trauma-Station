@@ -10,6 +10,8 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Genetics.Console;
 
+// TODO: move sequencer and storage to their own components
+
 /// <summary>
 /// Component for the genetics computer.
 /// </summary>
@@ -208,6 +210,15 @@ public sealed partial class GeneticsConsoleSetBaseMessage(uint sequence, uint in
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class GeneticsConsoleSequenceMessage(uint index) : BoundUserInterfaceMessage
+{
+    public readonly uint Index = index;
+}
+
+/// <summary>
+/// Message to reset a sequence in the subject to its original bases from scanning.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class GeneticsConsoleResetSequenceMessage(uint index) : BoundUserInterfaceMessage
 {
     public readonly uint Index = index;
 }

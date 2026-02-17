@@ -30,11 +30,17 @@ public sealed partial class Sequence
     public EntProtoId<MutationComponent> Mutation;
 
     public string Bases = string.Empty;
+
+    /// <summary>
+    /// Bases but generated once when scanning, never gets changed.
+    /// This is used for resetting.
+    /// </summary>
+    public string OriginalBases = string.Empty;
 }
 
 [DataRecord]
 public partial record struct UnknownBase(uint Index, char Value = 'X');
 
-// EntProtoId doesnt work properly with Serializable for some reason
+// EntProtoId? doesnt work properly with Serializable for some reason, so using string
 [Serializable, NetSerializable]
-public record struct SequenceState(string Bases, int Number, string? Mutation);
+public record struct SequenceState(string Bases, string OriginalBases, int Number, string? Mutation);

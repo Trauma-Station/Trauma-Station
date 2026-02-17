@@ -26,6 +26,7 @@ public sealed class GeneticsConsoleBUI : BoundUserInterface
         _window.OnSetBase += (s, i, c) => SendPredictedMessage(new GeneticsConsoleSetBaseMessage(s, i, c));
         _window.OnWriteMutation += i => SendPredictedMessage(new GeneticsConsoleWriteMutationMessage(i));
         _window.OnSequence += i => SendPredictedMessage(new GeneticsConsoleSequenceMessage(i));
+        _window.OnResetSequence += i => SendPredictedMessage(new GeneticsConsoleResetSequenceMessage(i));
         _window.OnPrint += p => SendPredictedMessage(new GeneticsConsolePrintMessage(p));
         _window.OnCombine += i => SendPredictedMessage(new GeneticsConsoleCombineMessage(i));
         _window.OnSaveEnzymes += () => SendPredictedMessage(new GeneticsConsoleSaveEnzymesMessage());

@@ -25,6 +25,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
     public event Action<uint, uint, GeneticsCycle>? OnSetBase;
     public event Action<uint>? OnWriteMutation;
     public event Action<uint>? OnSequence;
+    public event Action<uint>? OnResetSequence;
     public event Action<uint>? OnPrint;
     public event Action<uint>? OnCombine;
     public event Action? OnSaveEnzymes;
@@ -70,6 +71,7 @@ public sealed partial class GeneticsConsoleWindow : FancyWindow
         Sequencer.OnSetBase += (s, i, c) => OnSetBase?.Invoke(s, i, c);
         Sequencer.OnWriteMutation += i => OnWriteMutation?.Invoke(i);
         Sequencer.OnSequence += i => OnSequence?.Invoke(i);
+        Sequencer.OnResetSequence += i => OnResetSequence?.Invoke(i);
 
         Storage.OnPrint += p => OnPrint?.Invoke(p);
 

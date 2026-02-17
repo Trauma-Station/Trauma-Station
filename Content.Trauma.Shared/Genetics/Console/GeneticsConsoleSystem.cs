@@ -56,6 +56,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
             subs.Event<GeneticsConsoleScrambleMessage>(OnScramble);
             subs.Event<GeneticsConsoleSetBaseMessage>(OnSetBase);
             subs.Event<GeneticsConsoleSequenceMessage>(OnSequence);
+            subs.Event<GeneticsConsoleResetSequenceMessage>(OnResetSequence);
             subs.Event<GeneticsConsoleWriteMutationMessage>(OnWriteMutation);
             subs.Event<GeneticsConsoleCombineMessage>(OnCombine);
             subs.Event<GeneticsConsolePrintMessage>(OnPrint);
@@ -141,6 +142,20 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         };
         SetBusy(ent.Owner, _doAfter.TryStartDoAfter(doAfterArgs));
         Speak(ent, "sequencing");
+    }
+
+    private void OnResetSequence(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleResetSequenceMessage args)
+    {
+        if (GetWorkableMob(ent.Owner) is not {} mob ||
+            _genome.GetSequence(mob, args.Index) is not {} sequence ||
+            sequence.Bases == sequence.OriginalBases) // was already reset
+            return;
+
+        // incase some shitter runs in and erases all your progress on your monkey idk
+        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{ToPrettyString(mob)} sequence {args.Index} was reset by {ToPrettyString(args.Actor)} using console {ToPrettyString(ent)}");
+
+        sequence.Bases = sequence.OriginalBases;
+        UpdateUI(ent.Owner);
     }
 
     private void OnSequenceDoAfter(Entity<GeneticsConsoleComponent> ent, ref SequenceDoAfterEvent args)

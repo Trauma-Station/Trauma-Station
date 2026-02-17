@@ -97,7 +97,8 @@ public sealed class ScannedGenomeSystem : EntitySystem
             ent.Comp.Sequences.Add(new Sequence
             {
                 Mutation = id,
-                Bases = data.Bases
+                Bases = data.Bases,
+                OriginalBases = data.Bases
             });
             return;
         }
@@ -136,10 +137,12 @@ public sealed class ScannedGenomeSystem : EntitySystem
                 TryX(i + 1);
             }
         }
+        var bases = _builder.ToString();
         ent.Comp.Sequences.Add(new Sequence
         {
             Mutation = id,
-            Bases = _builder.ToString()
+            Bases = bases,
+            OriginalBases = bases
         });
 
         void TryX(int i)
@@ -169,7 +172,7 @@ public sealed class ScannedGenomeSystem : EntitySystem
                 continue;
             }
 
-            sequences.Add(new SequenceState(sequence.Bases, data.Number, data.Discovered ? id.ToString() : null));
+            sequences.Add(new SequenceState(sequence.Bases, sequence.OriginalBases, data.Number, data.Discovered ? id.ToString() : null));
         }
     }
 

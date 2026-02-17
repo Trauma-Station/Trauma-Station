@@ -12,11 +12,13 @@ public sealed partial class GenePuzzle : Control
 {
     public event Action<uint, GeneticsCycle>? OnSetBase;
     public event Action? OnSequence;
+    public event Action? OnResetSequence;
 
     private bool _busy;
     private bool _sequenced;
     private bool _writable = true;
     private string _bases = string.Empty;
+    private string _originalBases = string.Empty;
 
     public static readonly Color Blue = Color.FromHex("#1c71b1");
     public static readonly Color Green = Color.FromHex("#1b9638");
@@ -26,6 +28,7 @@ public sealed partial class GenePuzzle : Control
         RobustXamlLoader.Load(this);
 
         SequenceButton.OnPressed += _ => OnSequence?.Invoke();
+        ResetSequenceButton.OnPressed += _ => OnResetSequence?.Invoke();
         OnSetBase += (_, _) => UpdateSequenceButton();
     }
 
@@ -39,6 +42,7 @@ public sealed partial class GenePuzzle : Control
     private void UpdateSequenceButton()
     {
         SequenceButton.Disabled = _busy || _sequenced || !IsComplete();
+        ResetSequenceButton.Disabled = _busy || _bases == _originalBases;
     }
 
     private bool IsComplete()
@@ -63,10 +67,11 @@ public sealed partial class GenePuzzle : Control
         UpdateSequenceButton();
     }
 
-    public void SetBases(string bases)
+    public void SetBases(string bases, string originalBases)
     {
         Visible = true;
         _bases = bases;
+        _originalBases = originalBases;
         BaseButtons.RemoveAllChildren();
         for (int i = 0; i < bases.Length; i++)
         {
@@ -80,6 +85,7 @@ public sealed partial class GenePuzzle : Control
         var button = new Button();
         button.Text = b.ToString();
         button.ModulateSelfOverride = GetColor(b);
+        button.Disabled = _originalBases[(int) i] != 'X'; // can't cycle bases that are guaranteed known
         button.OnPressed += _ =>
         {
             if (_busy || !_writable)
