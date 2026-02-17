@@ -21,4 +21,6 @@
   description: Piep!
   components:
   - type: PolymorphMutation
-    prototype: MutationMouse
+    prototypes:
+      Human: MutationMouse
+      # fuck you

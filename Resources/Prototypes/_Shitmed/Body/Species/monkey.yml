@@ -6,6 +6,7 @@
   name: monkey appearance
   components:
   # TODO SHITMED: displacements??
+  # TODO SHITMED: tail
   - type: InitialBody
     organs:
       Torso: OrganMonkeyTorso
