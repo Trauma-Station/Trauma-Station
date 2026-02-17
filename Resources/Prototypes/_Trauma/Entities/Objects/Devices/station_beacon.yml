@@ -8,7 +8,7 @@
 
 - type: entity
   parent: DefaultStationBeaconScience
-  id: DefaultStationBeaconXenobio
+  id: DefaultStationBeaconGenetics
   suffix: Genetics
   components:
   - type: NavMapBeacon
