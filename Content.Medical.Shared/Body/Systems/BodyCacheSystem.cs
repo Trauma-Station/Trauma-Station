@@ -135,13 +135,13 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
     private void OnInserted(Entity<OrganComponent> ent, ref OrganGotInsertedEvent args)
     {
         if (!_timing.ApplyingState) // components are networked this doesnt need to get trolled
-            _body.EnableOrgan(ent.AsNullable());
+            _body.EnableOrgan(ent.AsNullable(), args.Target); // have to pass the body because it's null until after the events are raised
     }
 
     private void OnRemoved(Entity<OrganComponent> ent, ref OrganGotRemovedEvent args)
     {
         if (!_timing.ApplyingState)
-            _body.DisableOrgan(ent.AsNullable());
+            _body.DisableOrgan(ent.AsNullable(), args.Target);
     }
 
     #region Public API
