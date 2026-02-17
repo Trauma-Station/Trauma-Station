@@ -45,18 +45,18 @@ public sealed class ActionEventTest
                     if (hasEnt && hasWorld)
                     {
                         // if both components are present, the event must be on WorldTargetActionComponent
-                        Assert.That(!entAction, "Action {proto.ID} cannot have events set for both Entity and World targets!");
-                        Assert.That(worldAction, "Action {proto.ID} needs an event set for WorldTargetActionComponent because of multi-targeting");
+                        Assert.That(!entAction, $"Action {proto.ID} cannot have events set for both Entity and World targets!");
+                        Assert.That(worldAction, $"Action {proto.ID} needs an event set for WorldTargetActionComponent because of multi-targeting");
                     }
                     else if (hasEnt)
                     {
                         // only entity target, just check it has an event
-                        Assert.That(entAction, "Action {proto.ID} has no event set for EntityTargetActionComponent!");
+                        Assert.That(entAction, $"Action {proto.ID} has no event set for EntityTargetActionComponent!");
                     }
                     else if (hasWorld)
                     {
                         // only world target, just check it has an event
-                        Assert.That(worldAction, "Action {proto.ID} has no event set for WorldTargetActionComponent!");
+                        Assert.That(worldAction, $"Action {proto.ID} has no event set for WorldTargetActionComponent!");
                     }
                     else
                     {
