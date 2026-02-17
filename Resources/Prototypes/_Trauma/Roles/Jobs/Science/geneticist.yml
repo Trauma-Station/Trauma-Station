@@ -13,6 +13,7 @@
   startingGear: GeneticistGear
   icon: JobIconGeneticist
   supervisors: job-supervisors-rd
+  guides: [ Genetics ]
   goobcoins: 25 # harder to roll than scientist
   access:
   - Research
