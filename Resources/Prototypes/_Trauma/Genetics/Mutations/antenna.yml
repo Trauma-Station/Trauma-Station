@@ -44,6 +44,7 @@
     useDelay: 5
   - type: TargetAction
   - type: EntityTargetAction
+    event: !type:MindReadActionEvent
     whitelist:
       components:
       - MindContainer
