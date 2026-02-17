@@ -9,8 +9,10 @@
         	Visible="False"/> <!-- TODO: make visible when it's actually implemented lol -->
         <BoxContainer Name="SequenceButtonContainer" Orientation="Horizontal" Align="Center">
             <controls:StripeBack>
-                <Button Name="SequenceButton" Text="{Loc 'genetics-console-begin-sequencing'}" StyleClasses="Caution" Margin="4"/>
-                <Button Name="ResetSequenceButton" Text="{Loc 'genetics-console-reset-sequence'}" StyleClasses="Caution" Margin="4"/>
+            	<BoxContainer Orientation="Horizontal">
+	                <Button Name="SequenceButton" Text="{Loc 'genetics-console-begin-sequencing'}" StyleClasses="negative" Margin="4"/>
+    	            <Button Name="ResetSequenceButton" Text="{Loc 'genetics-console-reset-sequence'}" StyleClasses="negative" Margin="4"/>
+	            </BoxContainer>
             </controls:StripeBack>
         </BoxContainer>
     </BoxContainer>
