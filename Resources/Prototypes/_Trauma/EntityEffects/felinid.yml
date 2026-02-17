@@ -4,24 +4,38 @@
   conditions:
   - !type:NestedCondition # for debug effect stick
     proto: IsHumanoid
-  - !type:HasMarking
-    organ: Head
-    marking: CatEars
-    inverted: true
+  - !type:WhitelistCondition
+    blacklist:
+      components:
+      - Felinid
   effects:
-  - !type:AddMarking
-    organ: Head
-    marking: CatEars
-    forced: true
-  - !type:AddMarking
-    organ: Torso
-    marking: CatTail
-    forced: true
+  - !type:RelayOrgan
+    category: Ears
+    effects:
+    - !type:Delete # delete old ears, they're being mutated
+  - !type:RelayOrgan
+    category: Head
+    effects:
+    - !type:InsertNewOrgan
+      organ: OrganCatEars
+  - !type:RelayOrgan
+    category: Tail
+    effects:
+    - !type:DetachOrgan # remove lizard tail etc but drop it, it might be cybernetic or something
+  - !type:RelayOrgan
+    category: Torso
+    effects:
+    - !type:AddOrganSlot
+      category: Tail
+    - !type:InsertNewOrgan
+      organ: OrganCatTail
   - !type:RelayOrgans
     whitelist:
       components:
       - Metabolizer
     effects:
+    - !type:RemoveMetabolizerType
+      type: Human
     - !type:AddMetabolizerType
       type: Animal
   - !type:PopupMessage
@@ -29,6 +43,9 @@
     visualType: LargeCaution
     messages:
     - entity-effect-popup-make-felinid
+  - !type:AddComponents
+    components:
+    - type: Felinid
 
 - type: entityEffect
   id: RevertFelinid
@@ -36,16 +53,29 @@
   conditions:
   - !type:NestedCondition # for debug effect stick
     proto: IsHumanoid
-  - !type:HasMarking
-    organ: Head
-    marking: CatEars
+  - !type:WhitelistCondition
+    whitelist:
+      components:
+      - Felinid
   effects:
-  - !type:RemoveMarking
-    organ: Head
-    marking: CatEars
-  - !type:RemoveMarking
-    organ: Torso
-    marking: CatTail
+  - !type:RelayOrgan
+    category: Ears
+    effects:
+    - !type:Delete
+  - !type:RelayOrgan
+    category: Head
+    effects:
+    - !type:RegenerateOrgan
+      slot: Eyes # now give back the original ears
+  - !type:RelayOrgan
+    category: Tail
+    effects:
+    - !type:Delete
+  - !type:RelayOrgan
+    category: Torso
+    effects:
+    - !type:RemoveOrganSlot
+      slot: Tail # lizards will have to get surgery to add it back, unlucky
   - !type:RelayOrgans
     whitelist:
       components:
@@ -53,8 +83,13 @@
     effects:
     - !type:RemoveMetabolizerType
       type: Animal
+    - !type:AddMetabolizerType
+      type: Human # fuck you, lizard with human metabolism! yamlmaxxing!
   - !type:PopupMessage
     type: Pvs
     visualType: MediumCaution
     messages:
     - entity-effect-popup-revert-felinid
+  - !type:RemoveComponents
+    components:
+    - type: Felinid
