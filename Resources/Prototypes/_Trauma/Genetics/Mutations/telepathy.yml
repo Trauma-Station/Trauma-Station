@@ -22,10 +22,10 @@
       sprite: _Trauma/Actions/mutations.rsi
       state: mindread # close enough and im not using fucking revenant icons
   - type: TargetAction
-    canTargetSelf: false # lol
     checkCanAccess: false # MIND POWERS
     range: 7
   - type: EntityTargetAction
+    canTargetSelf: false # lol
     rotateOnUse: false # it's mental
     whitelist:
       components:
