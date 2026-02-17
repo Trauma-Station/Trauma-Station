@@ -40,7 +40,7 @@ public sealed class TelepathyActionSystem : EntitySystem
         // for this specifically, prediction is fucked
         // but other predicted opens are fine (e.g. debug effect stick)
         // incomprehensible shitcode
-        if (_net.Client)
+        if (_net.IsClient)
             return;
 
         var user = args.Performer;
