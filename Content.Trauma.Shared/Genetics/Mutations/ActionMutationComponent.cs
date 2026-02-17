@@ -9,11 +9,12 @@ namespace Content.Trauma.Shared.Genetics.Mutations;
 /// Grants the mutation user an action.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(ActionMutationSystem))]
+[AutoGenerateComponentState]
 public sealed partial class ActionMutationComponent : Component
 {
     [DataField(required: true)]
     public EntProtoId<ActionComponent> Action;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? ActionEntity;
 }
