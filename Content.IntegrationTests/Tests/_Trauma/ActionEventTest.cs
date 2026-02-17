@@ -12,6 +12,15 @@ namespace Content.IntegrationTests.Tests._Trauma;
 [TestFixture]
 public sealed class ActionEventTest
 {
+    /// <summary>
+    /// Actions which have their event set at runtime, these won't be checked for validity
+    /// as it's intentionally null in the prototype.
+    /// </summary>
+    public static readonly EntProtoId[] ActionBlacklist =
+    [
+        "BaseMappingDecalAction"
+    ];
+
     [Test]
     public async Task CheckTargetActions()
     {
@@ -32,7 +41,7 @@ public sealed class ActionEventTest
             {
                 foreach (var proto in protoMan.EnumeratePrototypes<EntityPrototype>())
                 {
-                    if (!proto.Components.ContainsKey(targetName))
+                    if (!proto.Components.ContainsKey(targetName) || ActionBlacklist.Contains(proto.ID))
                         continue; // only process actions with TargetAction
 
                     Assert.That(proto.Components.ContainsKey(actionName), $"Action {proto.ID} is missing ActionComponent");
