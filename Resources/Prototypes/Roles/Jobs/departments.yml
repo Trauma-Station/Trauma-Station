@@ -139,7 +139,10 @@
   - ResearchDirector
   - Scientist
   - ResearchAssistant
-  - Roboticist #Goob
+  # <Trauma>
+  - Roboticist
+  - Geneticist
+  # </Trauma>
 
 - type: department
   id: Silicon
