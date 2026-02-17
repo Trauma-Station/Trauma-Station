@@ -52,10 +52,13 @@ public sealed class HulkSystem : SharedHulkSystem
 
         Scale(ent, 0.8f);
 
-        if (comp.OldEyeColor is {} eyeColor)
-            _humanoid.SetEyeColor(uid, eyeColor);
-        if (comp.OldSkinColor is {} skinColor)
-            _humanoid.SetSkinColor(uid, skinColor);
+        if (HasComp<HumanoidProfileComponent>(uid))
+        {
+            if (comp.OldEyeColor is {} eyeColor)
+                _humanoid.SetEyeColor(uid, eyeColor);
+            if (comp.OldSkinColor is {} skinColor)
+                _humanoid.SetSkinColor(uid, skinColor);
+        }
 
         _popup.PopupEntity(Loc.GetString("hulk-unhulked"), uid, uid);
 
@@ -72,10 +75,13 @@ public sealed class HulkSystem : SharedHulkSystem
 
         Scale(uid, 1.25f);
 
-        var organs = _humanoid.GetOrgansData(uid);
-        comp.OldEyeColor = _humanoid.GetEyeColor(organs);
-        comp.OldSkinColor = _humanoid.GetSkinColor(organs);
-        _humanoid.SetSkinColor(uid, comp.SkinColor);
+        if (HasComp<HumanoidProfileComponent>(uid))
+        {
+            var organs = _humanoid.GetOrgansData(uid);
+            comp.OldEyeColor = _humanoid.GetEyeColor(organs);
+            comp.OldSkinColor = _humanoid.GetSkinColor(organs);
+            _humanoid.SetSkinColor(uid, comp.SkinColor);
+        }
 
         if (!comp.LaserEyes)
             return;
