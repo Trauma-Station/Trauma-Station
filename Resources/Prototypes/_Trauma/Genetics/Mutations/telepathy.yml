@@ -7,3 +7,35 @@
   - type: Mutation
     instability: 10
     difficulty: 12
+  - type: ActionMutation
+    action: ActionMutationTelepathy
+
+- type: entity
+  parent: [ BaseMutationAction, BaseMentalAction ]
+  id: ActionMutationTelepathy
+  name: Telepathy
+  description: Telepathically transmits a message to the target.
+  components:
+  - type: Action
+    useDelay: 5
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: mindread # close enough and im not using fucking revenant icons
+  - type: TargetAction
+    canTargetSelf: false # lol
+    checkCanAccess: false # MIND POWERS
+    range: 7
+  - type: EntityTargetAction
+    rotateOnUse: false # it's mental
+    whitelist:
+      components:
+      - MindContainer
+    event: !type:TelepathyActionEvent
+  - type: TelepathyAction
+  # TODO: check mind resistance antimagic on the target and user
+  - type: UserInterface
+    interfaces:
+      enum.TelepathyUiKey.Key:
+        type: TelepathyBUI
+        interactionRange: 0 # prevent it being closed immediately
+        requireInputValidation: false # action checks stuff

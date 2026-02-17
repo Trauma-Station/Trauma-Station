@@ -179,6 +179,12 @@ MutationPigLatin-removed = The off sensation passes.
 
 MutationTelepathy-mutated = You hear your thoughts echo in your mind.
 MutationTelepathy-removed = You don't hear your mind echo anymore.
+MutationTelepathy-popup-mindless = You can't find a mind to influence...
+MutationTelepathy-popup-blocked = Something has blocked your transmission!
+MutationTelepathy-message-wrap = [bold]You hear a voice in your head...[/bold] {$message}
+MutationTelepathy-window-title = Telepathic Message
+MutationTelepathy-window-message = Message
+MutationTelepathy-window-placeholder = I am in your walls
 
 MutationTongueSpike-mutated = You feel like you can throw your voice.
 MutationTongueSpike-popup-no-organ = You don't have a {$organ} to shoot!
