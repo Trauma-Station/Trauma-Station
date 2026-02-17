@@ -499,7 +499,9 @@ public sealed partial class MutationSystem : EntitySystem
         // add enough random dormant mutations so there will be enough sequences.
         while (ent.Comp.Dormant.Count < ent.Comp.MaxDormant)
         {
-            ent.Comp.Dormant.Add(_random.Pick(UnlockedMutations));
+            var picked = _random.Pick(UnlockedMutations);
+            if (!ent.Comp.Dormant.Contains(picked))
+                ent.Comp.Dormant.Add(picked);
         }
 
         // don't have dormant mutation as first item
