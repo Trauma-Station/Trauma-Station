@@ -33,7 +33,7 @@ public sealed class TelepathyBUI : BoundUserInterface
             msg = msg.Substring(0, Math.Min(maxLength, msg.Length));
 
             SendPredictedMessage(new TelepathyChosenMessage(msg));
-            Close();
+            _window.Close();
         };
     }
 
