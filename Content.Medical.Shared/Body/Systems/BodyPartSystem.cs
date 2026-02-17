@@ -65,12 +65,8 @@ public sealed partial class BodyPartSystem : CommonBodyPartSystem
 
         var container = EnsureSeveredOrgansContainer(ent);
         var body = args.Target.AsNullable();
-        foreach (var category in ent.Comp.Slots)
+        foreach (var (category, organ) in ent.Comp.Children)
         {
-            // empty slot, don't care
-            if (_body.GetOrgan(body, category) is not {} organ)
-                continue;
-
             // slot has an organ so try to put it in the container
             if (!_container.Insert(organ, container))
             {

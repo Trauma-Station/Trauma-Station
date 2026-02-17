@@ -73,6 +73,7 @@
       types:
         Slash: 25
         Structural: 50
+  - type: Evil # Trauma - duh
   - type: SlaughterDemon # main component
     speedModWalk: 2.5
     speedModRun: 2.5

@@ -1,0 +1,119 @@
+- type: polymorph
+  id: MutationMonkey
+  configuration:
+    entity: MobMonkey
+    transferName: true
+    stripNameModifier: false # keep it when going monkey -> human -> monkey
+    componentsToTransfer: [] # no language chud
+    forced: true
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+    inventory: Transfer
+    polymorphSound: /Audio/Animals/monkey_scream.ogg
+
+- type: polymorph
+  id: MutationHuman
+  configuration:
+    entity: MobHuman
+    transferName: true # human named monkey (MK-28) kino
+    stripNameModifier: false
+    # yes language so monkey is still forced to speak monkey
+    forced: true
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+    inventory: Transfer
+    polymorphSound: /Audio/Voice/Human/malescream_1.ogg
+
+- type: polymorph
+  id: MutationMouse
+  configuration:
+    entity: MobMouse
+    transferName: true
+    componentsToTransfer: [] # no language chud
+    forced: true
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+    inventory: Drop
+    polymorphSound: /Audio/Animals/mouse_squeak.ogg
+
+- type: polymorph
+  id: TongueSpike
+  configuration:
+    entity: TongueSpike
+    forced: true
+    polymorphPopup: null
+    exitPolymorphPopup: MutationTongueSpike-popup-revert
+
+- type: polymorph
+  id: TongueSpikeChem
+  configuration:
+    entity: TongueSpikeChem
+    forced: true
+    polymorphPopup: null
+    exitPolymorphPopup: MutationTongueSpike-popup-revert
+
+# Something Horrible polymorphs
+
+- type: polymorph
+  id: Corgi
+  configuration:
+    entity: MobCorgi
+    forced: false
+    inventory: Drop
+    transferName: true
+    componentsToTransfer: []
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+
+- type: polymorph
+  id: Slime
+  configuration:
+    entity: MobAdultSlimes
+    forced: false
+    inventory: Drop
+    transferName: true
+    componentsToTransfer: []
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+
+- type: polymorph
+  id: Snail
+  configuration:
+    entity: MobSnail
+    forced: false
+    inventory: Drop
+    transferName: true
+    componentsToTransfer: []
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+    allowRepeatedMorphs: false
+
+- type: polymorph
+  id: Crab
+  configuration:
+    entity: MobCrab
+    forced: false
+    inventory: Drop
+    transferName: true
+    componentsToTransfer: []
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+    allowRepeatedMorphs: false
+
+- type: polymorph
+  id: Skeleton
+  configuration:
+    entity: MobSkeletonPerson
+    forced: false
+    inventory: Drop # your skin melts off so your clothes drop
+    transferName: false # fibula time
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false

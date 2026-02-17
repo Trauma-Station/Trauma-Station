@@ -1,0 +1,34 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<BoxContainer xmlns="https://spacestation14.io"
+        xmlns:genetics="clr-namespace:Content.Trauma.Client.Genetics.UI"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Orientation="Vertical">
+    <controls:NanoHeading Text="{Loc 'genetics-console-scanned-mob'}"/>
+    <BoxContainer Orientation="Horizontal" Align="Center">
+        <Label Name="MobNameLabel" Text="{Loc 'generic-not-available-shorthand'}" Margin="4"/>
+        <Button Name="SaveButton" Text="{Loc 'genetics-console-save-enzymes'}" Margin="4" Disabled="True"/>
+    </BoxContainer>
+
+    <controls:HLine Color="#222" Margin="10" Thickness="2" HorizontalExpand="True"/>
+
+    <controls:NanoHeading Text="{Loc 'genetics-console-disk-enzymes'}"/>
+    <BoxContainer Orientation="Horizontal" Align="Center">
+        <BoxContainer Orientation="Vertical" Align="Center">
+            <GridContainer Columns="2">
+                <Label Text="Current Disk:" MinWidth="250"/>
+                <Label Name="DiskLabel" Text="{Loc 'genetics-console-no-disk'}"/>
+                <Label Text="Stored Enyzmes:"/>
+                <Label Name="DiskNameLabel" Text="{Loc 'generic-not-available-shorthand'}"/>
+                <Label Text="Sex:"/>
+                <Label Name="DiskSexLabel" Text="{Loc 'generic-not-available-shorthand'}"/>
+                <Label Text="Eye Color:"/>
+                <Label Name="DiskEyeLabel" Text="{Loc 'generic-not-available-shorthand'}"/>
+                <Label Text="Skin Color:"/>
+                <Label Name="DiskSkinLabel" Text="{Loc 'generic-not-available-shorthand'}"/>
+            </GridContainer>
+            <controls:StripeBack MaxWidth="250"> <!-- sanabi -->
+                <Button Name="ApplyButton" Margin="4" Text="{Loc 'genetics-console-apply-enzymes'}" MaxWidth="220" Disabled="True"/>
+            </controls:StripeBack>
+        </BoxContainer>
+    </BoxContainer>
+</BoxContainer>

@@ -45,6 +45,7 @@
       100: SoftCrit
       150: Critical
       200: Dead
+  - type: Mutatable
   # </Trauma>
   # Shitmed - woundable visuals used instead
   #- type: DamageVisuals

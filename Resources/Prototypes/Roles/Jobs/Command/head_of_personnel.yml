@@ -29,6 +29,11 @@
   supervisors: job-supervisors-captain
   canBeAntag: false
   access:
+  # <Trauma>
+  - Journalism
+  - Robotics
+  - Genetics
+  # </Trauma>
   - Command
   - HeadOfPersonnel
   - Bar
@@ -55,8 +60,6 @@
   - Cargo
   - Atmospherics
   - Medical
-  - Journalism # Goob
-  - Robotics # Goob
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

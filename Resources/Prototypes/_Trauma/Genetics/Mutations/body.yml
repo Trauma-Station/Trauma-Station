@@ -1,0 +1,488 @@
+# Free stability
+
+- type: entity
+  parent: BaseTriggerMutation
+  id: MutationEpilepsy
+  name: Epilepsy
+  description: A genetic defect that sporadically causes seizures.
+  components:
+  - type: Mutation
+    instability: -30
+  - type: RandomTrigger
+    # TODO: make synchronizer decrease this chance
+    prob: 0.005 # 0.5%
+  - type: TriggerOnFlashed # get flashed nerd
+    prob: 0.7 # 70%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        conditions:
+        - !type:NestedCondition
+          proto: IsAwake
+        proto: MutationSeizure
+
+- type: entity
+  parent: BaseTriggerMutation
+  id: MutationCough
+  name: Cough
+  description: A chronic cough.
+  components:
+  - type: Mutation
+    instability: -30
+  - type: RandomTrigger
+    prob: 0.025 # 2.5%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        conditions:
+        - !type:NestedCondition
+          proto: IsAwake
+        proto: MutationCough
+
+- type: entity
+  parent: BaseMutation
+  id: MutationParanoia
+  name: Paranoia
+  description: Subject is easily terrified, and may suffer from hallucinations.
+  components:
+  - type: Mutation
+    instability: -30
+  - type: RandomTrigger
+    prob: 0.025 # 2.5%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        conditions:
+        - !type:NestedCondition
+          proto: IsAwake
+        proto: MutationParanoia
+
+# Height
+
+- type: entity
+  parent: BaseMutation
+  id: MutationDwarfism
+  name: Dwarfism
+  description: A mutation believed to be the cause of dwarfism.
+  components:
+  - type: Mutation
+    instability: 10
+    difficulty: 16
+    conflicts:
+    - MutationAcromegaly
+    - MutationGigantism
+  - type: EffectsMutation
+    added:
+    - !type:Scale
+      multiplier: 1, 0.8
+    removed:
+    - !type:Scale
+      multiplier: 1, 1.25
+    # TODO: adjust hitbox?
+
+- type: entity
+  parent: BaseMutation
+  id: MutationAcromegaly
+  name: Acromegaly
+  description: "A mutation believed to be the cause of acromegaly, or 'being unusually tall'."
+  components:
+  - type: Mutation
+    instability: -30
+    difficulty: 16
+    conflicts:
+    - MutationDwarfism
+  - type: EffectsMutation
+    added:
+    - !type:Scale
+      multiplier: 1, 1.25
+    removed:
+    - !type:Scale
+      multiplier: 1, 0.8
+  # TODO: adjust hitbox?
+
+- type: entity
+  parent: BaseFreeMutation
+  id: MutationGigantism
+  name: Gigantism
+  description: The cells within the subject spread out to cover more area, making the subject appear larger.
+  components:
+  - type: Mutation
+    difficulty: 12
+    conflicts:
+    - MutationDwarfism
+  - type: EffectsMutation
+    added:
+    - !type:Scale
+      multiplier: 1.2, 1.2
+    removed:
+    - !type:Scale
+      multiplier: 0.833333, 0.833333 # enjoy being permanently trolled by FP error mixels
+  # TODO: adjust hitbox
+
+# Disabilities
+
+- type: entity
+  parent: BaseMutation
+  id: MutationClumsiness
+  name: Clumsiness
+  description: A genome that inhibits certain brain functions, causing the holder to appear clumsy. Honk!
+  components:
+  - type: Mutation
+    instability: -40
+  - type: ComponentMutation
+    added:
+    - type: Clumsy
+      gunShootFailDamage:
+        types: # literally just copied semi random values a chud picked
+          Blunt: 5
+          Piercing: 4
+        groups:
+          Burn: 3
+
+- type: entity
+  parent: [ BaseFreeMutation, BaseTriggerMutation ]
+  id: MutationTourettes
+  name: Tourette's Syndrome
+  description: A chronic twitch that forces the user to scream bad words.
+  components:
+  - type: RandomTrigger
+    prob: 0.05
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:WeightedRandomEffect
+        conditions:
+        - !type:NestedCondition
+          proto: IsAwake
+        children:
+        - effect: !type:Emote # emote 33%
+            emote: Twitch
+        - effect: !type:Speak # local 33%
+            id: TourettesSwearing
+        - effect: !type:Speak # common 33%
+            id: TourettesSwearing
+            prefix: tourettes-prefix-radio
+
+- type: entity
+  parent: BaseMutation
+  id: MutationDeafness
+  name: Deafness
+  description: The holder of this genome is completely deaf.
+  components:
+  - type: Mutation
+    instability: -40
+  - type: ComponentMutation
+    added:
+    - type: Deaf
+    # TODO: prevent it being removed by anything, use events or something
+
+- type: entity
+  parent: BaseMutation
+  id: MutationMonkified
+  name: Monkified
+  description: A strange genome, believed to be what differentiates monkeys from humans.
+  components:
+  - type: Mutation
+    instability: -40 # mmmonky
+    locked: true # specific to monkeys (active) and humans (dormant)
+  - type: PolymorphMutation
+    prototype: MutationMonkey
+    fallback: MutationHuman
+
+# Powergaming
+
+- type: entity
+  abstract: true
+  parent: BaseMutation
+  id: BaseLightMutation
+  components:
+  - type: PointLight # this works on the mutation entity because the mutations container doesn't occlude lights
+    radius: 3
+    softness: 5
+    enabled: true
+
+- type: entity
+  parent: BaseLightMutation
+  id: MutationGlowy
+  name: Glowy
+  description: You permanently emit a light with a random color and intensity.
+  components:
+  - type: Mutation
+    instability: 5
+    conflicts:
+    - MutationAntiGlow
+  - type: RandomPointLight
+    energy: 0.5, 2.0
+
+- type: entity
+  parent: BaseLightMutation
+  id: MutationAntiGlow
+  name: Anti-Glow
+  description: "Your skin seems to attract and absorb nearby light creating 'darkness' around you."
+  components:
+  - type: Mutation
+    instability: 10
+  - type: RemovesMutation
+    removes:
+    - MutationGlowy
+  - type: PointLight
+    energy: -3 # TODO: find a way to make this work
+
+- type: entity
+  parent: BaseMutation
+  id: MutationStrength
+  name: Strength
+  description: The user's muscles slightly expand. Commonly seen in top-ranking boxers.
+  components:
+  - type: Mutation
+    instability: 5
+    difficulty: 16
+  - type: StrengthMutation
+  # TODO: exercise and fitness buffs
+
+- type: entity
+  parent: BaseMutation
+  id: MutationStimmed
+  name: Stimmed
+  description: The user's chemical balance is more robust. This mutation is known to speed up metabolism of chemicals.
+  components:
+  - type: Mutation
+    instability: 5
+    difficulty: 16
+  - type: MetabolismSpeedMutation # this isn't parity but it does nothing otherwise
+    bonus: 0.25
+  # TODO: exercise modifier if that ever gets added
+
+- type: entity
+  parent: BaseMutation
+  id: MutationInsulated # tider holy grail
+  name: Insulated
+  description: The affected person does not conduct electricity.
+  components:
+  - type: Mutation
+    instability: 25
+    difficulty: 16
+  - type: ComponentMutation
+    added:
+    - type: Insulated
+
+# Dangerous though potentially useful
+
+- type: entity
+  parent: [ BaseFreeMutation, BaseTriggerMutation ]
+  id: MutationFierySweat
+  name: Fiery Sweat
+  description: The user's skin will randomly combust, but is generally a lot more resilient to burning.
+  components:
+  - type: Mutation
+    difficulty: 14
+    conflicts:
+    - MutationHeatAdaptation
+    # TG does not have it incompatible with thermal adaptation :) have fun
+  - type: RandomTrigger
+    prob: 0.0005 # 0.05%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        proto: MutationFierySweat
+  - type: ArmorMutation
+    modifiers:
+      coefficients: # in tg it seems to apply for all burn damage, not just heat
+        Heat: 0.5
+        Cold: 0.5
+        Shock: 0.5
+        Caustic: 0.5
+
+# if some yml warrior adds endermen give them this trust
+- type: entity
+  parent: BaseMutation
+  id: MutationSpatialInstability
+  name: Spatial Instability
+  description: The victim of the mutation has a very weak link to spatial reality, and may be displaced. Often causes extreme nausea.
+  components:
+  - type: Mutation
+    instability: -30
+    difficulty: 18
+  - type: ComponentMutation
+    added:
+    - type: ChaoticJump # technically anom infection can add this too but idgaf
+      jumpMinInterval: 15 # these are also the exact values anoms use
+      jumpMaxInterval: 25
+      rangeMin: 10
+      rangeMax: 15
+      effect: PuddleSparkle # TODO: copy shit from tg
+
+- type: entity
+  parent: BaseTriggerMutation
+  id: MutationAcidicFlesh
+  name: Acidic Flesh
+  description: Subject has acidic chemicals building up underneath the skin. This is often lethal.
+  components:
+  - type: Mutation
+    instability: -40
+    difficulty: 18
+  - type: RandomTrigger
+    prob: 0.13 # 13%
+  - type: UseDelay # for the popup
+    delay: 20
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:NestedEffect
+      conditions:
+      - !type:UseDelayCondition
+      proto: MutationAcidicFleshBubble
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        probability: 0.15
+        proto: MutationAcidicFleshPop
+
+- type: entity
+  parent: BaseTriggerMutation
+  id: MutationSpastic
+  name: Spastic
+  description: Subject suffers from muscle spasms.
+  components:
+  - type: Mutation
+    instability: -30
+    difficulty: 16
+  - type: RandomTrigger
+    prob: 0.15 # 15%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        proto: MutationSpasms
+
+- type: entity
+  parent: BaseTriggerMutation
+  id: MutationTwoLeftFeet
+  name: Two Left Feet
+  description: A mutation that replaces the right foot with another left foot. Symptoms include kissing the floor when taking a step.
+  components:
+  - type: Mutation
+    instability: -30
+    difficulty: 16
+  - type: TriggerOnWalk
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      probability: 0.03 # 3% per tile walked - tg is 0.5% but its too rare for -30, so free
+      effect: !type:NestedEffect
+        conditions:
+        - !type:StandingCondition # bro is not tripping on the floor
+        proto: MutationFeetTrip
+
+- type: entity
+  parent: BaseMutation
+  id: MutationInternalMartyrdom
+  name: Internal Martyrdom
+  description: A mutation that makes the body destruct when near death. Not damaging, but very, VERY disorienting.
+  components:
+  - type: Mutation
+    instability: -40
+  - type: TriggerOnMobstateChange
+    mobState: [ Dead ] # TODO: add hardcrit when implemented
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        proto: MutationInternalMartyrdom
+
+- type: entity
+  parent: BaseMutation
+  id: MutationHeadless
+  name: H.A.R.S.
+  description: "A mutation that makes the body reject the head, the brain receding into the chest. Stands for Head Allergic Rejection Syndrome. Warning: Removing this mutation is very dangerous, though it will regenerate non-vital head organs."
+  components:
+  - type: Mutation
+    instability: -40
+    difficulty: 12
+  - type: EffectsMutation
+    ignoreAutomatic: true # shapeshift system will handle the organs and parts being mirrored
+    added:
+    - !type:NestedEffect
+      conditions:
+      - !type:HasOrganSlot
+        organ: Brain
+        partType: Head
+      proto: MutationRemoveHead
+    removed:
+    - !type:NestedEffect
+      conditions:
+      - !type:HasOrganSlot
+        organ: Brain
+        partType: Torso
+      proto: MutationAddHead
+
+# Peak of powergaming technology
+
+- type: entity
+  parent: BaseMutation
+  id: MutationHypermetabolicBlood
+  name: Hypermetabolic Blood
+  description: The subject's blood is hypermetabolic, causing it to be produced at a much faster rate.
+  components:
+  - type: Mutation
+    instability: 10
+    difficulty: 16
+  - type: BleedingMutation
+    bleedModifier: 3 # non-parity: 1.5x bleeding feels too weak given this is a fairly strong mutation (nearly ignore bloodloss)
+
+- type: entity
+  parent: BaseMutation
+  id: MutationRockEater
+  name: Rock Eater
+  description: The subject's body is able to digest rocks and minerals.
+  components:
+  - type: Mutation
+    instability: 10
+    difficulty: 12
+    conflicts:
+    - MutationRockAbsorber # can't stack them, one-way conflict to allow upgrading
+  # TODO
+
+- type: entity
+  parent: MutationRockEater
+  id: MutationRockAbsorber
+  name: Rock Absorber
+  description: The subject's body is able to digest rocks and minerals, taking on their properties.
+  components:
+  - type: Mutation
+    instability: 35
+    conflicts: [] # uninherit conflicts so it doesn't conflict with itself
+  - type: RemovesMutation
+    removes:
+    - MutationRockEater
+  # TODO
+
+- type: entity
+  parent: BaseMutation
+  id: MutationInexorable
+  name: Inexorable
+  description: Your body can push on beyond the limits of normal human endurance. However, pushing it too far can cause severe damage to your body.
+  components:
+  - type: Mutation
+    instability: 25
+    difficulty: 24
+  - type: MobThresholdMutation
+    removed: SoftCrit
+
+- type: entity
+  parent: BaseMutation
+  id: MutationFelinized
+  name: Felinized
+  description: Unknown
+  components:
+  - type: Mutation
+    instability: -10 # disgusting - naked snake, mgs3
+  - type: EffectsMutation
+    added:
+    - !type:NestedEffect
+      proto: MakeFelinid
+    removed:
+    - !type:NestedEffect
+      proto: RevertFelinid

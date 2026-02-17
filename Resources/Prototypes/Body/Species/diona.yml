@@ -59,6 +59,7 @@
       FootRight: OrganDionaFootRight
       Brain: OrganDionaBrainNymphing
       Eyes: OrganDionaEyes
+      Tongue: OrganDionaTongue # Trauma
       Lungs: OrganDionaLungsNymphing
       Stomach: OrganDionaStomachNymphing
   - type: HumanoidProfile

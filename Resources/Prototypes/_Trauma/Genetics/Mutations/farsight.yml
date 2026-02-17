@@ -1,0 +1,11 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationFarsight
+  name: Farsight
+  description: The subject's eyes are able to see further than normal.
+  components:
+  - type: Mutation
+    instability: 10
+    difficulty: 16
+  - type: MaxZoomMutation
+    modifier: 1.1 # a bit more than 1 tile increase

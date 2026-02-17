@@ -96,3 +96,10 @@ Entries:
   id: 8
   time: '2026-02-07T15:29:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/652
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added genetics to Fland where a sci shooting range used to be.
+  id: 9
+  time: '2026-02-17T09:46:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/707

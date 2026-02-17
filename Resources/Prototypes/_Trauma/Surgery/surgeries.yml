@@ -54,3 +54,26 @@
     parts: [ Torso ]
   - type: SurgeryOrganSlotCondition
     organSlot: Tail
+
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveTongue
+  name: Remove Tongue
+  components:
+  - type: SurgeryOrganCondition
+    organ: Tongue
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertTongue
+  name: Insert Tongue
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepInsertOrgan
+    - SurgeryStepSealOrganWound
+  - type: SurgeryOrganSlotCondition
+    organSlot: Tongue
+  - type: SurgeryOrganCondition
+    organ: Tongue

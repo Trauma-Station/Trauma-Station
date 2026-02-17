@@ -39,7 +39,7 @@ public sealed class StatusEffectEffectsSystem : EntitySystem
             comp.NextUpdate = now + comp.UpdateDelay;
             Dirty(uid, comp);
 
-            _effects.ApplyEffects(target, comp.Effects);
+            _effects.ApplyEffects(target, comp.Effects, user: target);
         }
     }
 

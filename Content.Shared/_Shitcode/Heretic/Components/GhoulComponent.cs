@@ -66,13 +66,11 @@ public sealed partial class GhoulComponent : Component
     [DataField]
     public LocId GhostRoleRules = "ghostrole-ghoul-rules";
 
-    /*
     [DataField]
-    public Color OldSkinColor;
+    public Color? OldSkinColor;
 
     [DataField]
-    public Color OldEyeColor;
-    */
+    public Color? OldEyeColor;
 
     [DataField]
     public HashSet<ProtoId<NpcFactionPrototype>> OldFactions = new();

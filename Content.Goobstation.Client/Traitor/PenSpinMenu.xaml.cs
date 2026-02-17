@@ -53,18 +53,18 @@ public sealed partial class PenSpinMenu : FancyWindow
                 if (degree > _maxDegree)
                 {
                     DegreeInput.Text = _previousInput;
-                    DegreeInput.AddStyleClass("Caution");
+                    DegreeInput.AddStyleClass("negative");
                 }
                 else
                 {
                     _previousInput = DegreeInput.Text;
-                    DegreeInput.RemoveStyleClass("Caution");
+                    DegreeInput.RemoveStyleClass("negative");
                 }
             }
             else
             {
                 DegreeInput.Text = _previousInput;
-                DegreeInput.AddStyleClass("Caution");
+                DegreeInput.AddStyleClass("negative");
             }
         };
 
@@ -73,7 +73,7 @@ public sealed partial class PenSpinMenu : FancyWindow
             if (!IsValidDegree(DegreeInput.Text))
             {
                 DegreeInput.Text = _previousInput;
-                DegreeInput.RemoveStyleClass("Caution");
+                DegreeInput.RemoveStyleClass("negative");
             }
         };
 
@@ -90,7 +90,7 @@ public sealed partial class PenSpinMenu : FancyWindow
     {
         DegreeInput.Text = "0";
         _previousInput = "0";
-        DegreeInput.RemoveStyleClass("Caution");
+        DegreeInput.RemoveStyleClass("negative");
     }
 
     private bool TryGetDegree(out int degree)

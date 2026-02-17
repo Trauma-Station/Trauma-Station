@@ -412,6 +412,8 @@
       jobBlacklist: [ Chaplain, Mime, ChiefEngineer, ResearchDirector, Quartermaster ] #chaplain is obvious, mime can't write.
       mindRoles:
       - DevilMindRole
+      mindComponents: # Trauma - devil is evil
+      - type: Evil
       startingGear: DevilStartingGear
   - type: Tag
     tags:

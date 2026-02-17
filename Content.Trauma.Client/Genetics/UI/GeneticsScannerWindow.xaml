@@ -1,0 +1,8 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<controls:FancyWindow xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        xmlns:genetics="clr-namespace:Content.Trauma.Client.Genetics.UI"
+        Title="{Loc 'genetics-scanner-window-title'}"
+        MinSize="700 350">
+    <genetics:GeneticSequencer Name="Sequencer"/>
+</controls:FancyWindow>

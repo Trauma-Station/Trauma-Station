@@ -1,0 +1,11 @@
+- type: entity
+  abstract: true
+  parent: BaseAction
+  id: BaseConjureAction
+  components:
+  - type: ConjureAction
+  - type: Action
+    useDelay: 5
+    raiseOnAction: true
+  - type: InstantAction
+    event: !type:ConjureActionEvent

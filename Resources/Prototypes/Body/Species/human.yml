@@ -89,6 +89,11 @@
   id: MobHuman
   name: Urist McHands
   components:
+  # <Trauma>
+  - type: Mutatable
+    dormant:
+    - MutationMonkified # return to monke
+  # </Trauma>
   - type: Butcherable
     spawned:
     - id: FoodMeatHuman

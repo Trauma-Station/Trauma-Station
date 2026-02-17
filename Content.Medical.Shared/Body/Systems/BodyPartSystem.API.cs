@@ -212,6 +212,34 @@ public sealed partial class BodyPartSystem
     }
 
     /// <summary>
+    /// Spawn a new organ from the body's <see cref="InitialBodyComponent"/> and inserts it into the desired slot.
+    /// Not recursive, e.g. a head won't have a brain in it.
+    /// Fails if this part doesn't have the slot, it's occupied or can't find a part to attach.
+    /// </summary>
+    /// <returns>true if a new organ was inserted into the slot</returns>
+    public bool RestoreInitialChild(Entity<BodyPartComponent?> part, [ForbidLiteral] ProtoId<OrganCategoryPrototype> slot)
+    {
+        if (!_query.Resolve(part, ref part.Comp) ||
+            !part.Comp.Slots.Contains(slot) || // slot doesn't exist on this part
+            part.Comp.Children.ContainsKey(slot) || // slot is already occupied
+            _body.GetBody(part.Owner) is not {} body || // this part isn't attached to a body
+            !TryComp<InitialBodyComponent>(body, out var initial)) // the body has no default organs to use
+            return false;
+
+        var organs = initial.Organs;
+        if (!organs.TryGetValue(slot, out var proto))
+            return false; // it doesn't have the organ we want
+
+        var organ = PredictedSpawnNextToOrDrop(proto, body);
+        DebugTools.Assert(_body.GetCategory(organ) == slot, $"Organ {ToPrettyString(organ)} for {ToPrettyString(body)}'s initial {slot} organ had the wrong category!");
+        if (InsertOrgan(part, organ))
+            return true; // restored!
+
+        PredictedDel(organ);
+        return false; // some system prevented inserting it
+    }
+
+    /// <summary>
     /// Gets the severed organs container for a bodypart.
     /// Returns null if the bodypart is invalid or not severed.
     /// </summary>

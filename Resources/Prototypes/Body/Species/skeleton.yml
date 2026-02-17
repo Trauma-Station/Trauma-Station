@@ -40,7 +40,7 @@
       required: false
 
 - type: entity
-  parent: BaseSpeciesAppearance
+  parent: BaseSpeciesAppearanceOrganless # Trauma - skeletons have no internal organs
   id: AppearanceSkeletonPerson
   name: skeletonperson appearance
   components:

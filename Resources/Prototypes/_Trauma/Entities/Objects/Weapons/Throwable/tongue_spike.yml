@@ -1,0 +1,36 @@
+- type: entity
+  parent: BaseItem
+  id: TongueSpike
+  name: biomass spike
+  description: Hardened biomass, shaped into a spike. Very pointy!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Throwable/tonguespike.rsi
+    state: icon
+  - type: Sharp
+  - type: EmbeddableProjectile
+    offset: -0.2,0
+  - type: ThrowingAngle
+    angle: -45
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 30 # bit stronger than a spear considering the reload process
+  - type: TriggerOnLand
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RevertPolymorph
+
+- type: entity
+  parent: TongueSpike
+  id: TongueSpikeChem
+  name: chem spike
+  description: Hardened biomass, shaped into... something.
+  components:
+  - type: Sprite
+    state: chemspike
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 5 # it's more of a utility
+  # TODO: add transfer reagents action to the shooter when it embeds

@@ -1,0 +1,24 @@
+- type: entity
+  abstract: true
+  parent: BaseFreeMutation
+  id: BaseMutationAdmeme
+  components:
+  - type: Mutation
+    locked: true # no
+
+- type: entity
+  parent: BaseMutationAdmeme
+  id: MutationUnstableDna
+  components:
+  - type: Mutation
+    instability: -40
+  # TODO
+
+- type: entity
+  parent: BaseMutationAdmeme
+  id: MutationMouse
+  name: Mouse
+  description: Piep!
+  components:
+  - type: PolymorphMutation
+    prototype: MutationMouse

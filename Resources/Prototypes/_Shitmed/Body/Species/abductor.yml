@@ -161,8 +161,14 @@
 
 # missing some abductor sprites, TODO SHITMED: get tg sprites for them
 - type: entity
-  parent: [ OrganBaseTongue, OrganSpriteHumanInternal, OrganAbductorInternal ]
+  parent: [ OrganBaseTongue, OrganAbductorInternal ]
   id: OrganAbductorTongue
+  name: superlingual matrix
+  description: A mysterious structure that allows for instant communication between users. Pretty impressive until you need to eat something.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Species/Abductor/organs.rsi
+  # TODO: grant abductor glorpmind and language
 
 - type: entity
   parent: [ OrganBaseAppendix, OrganSpriteHumanInternal, OrganAbductorInternal ]

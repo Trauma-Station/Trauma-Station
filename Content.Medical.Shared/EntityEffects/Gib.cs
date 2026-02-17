@@ -3,7 +3,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Gibbing;
 using Robust.Shared.Prototypes;
 
-namespace Content.Trauma.Shared.EntityEffects;
+namespace Content.Medical.Shared.EntityEffects;
 
 /// <summary>
 /// Gibs the target mob or other (organs bodyparts etc)

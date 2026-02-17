@@ -1,0 +1,17 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<BoxContainer xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Orientation="Vertical"
+        VerticalExpand="True"
+        Margin="10"
+        Visible="False">
+    <controls:NanoHeading Text="{Loc 'genetics-console-sequence-info'}"/>
+    <GridContainer Columns="2">
+        <Label Text="{Loc 'genetics-console-mutation-name'}"/>
+        <Label Name="MutationName"/>
+        <Label Text="{Loc 'genetics-console-mutation-desc'}"/>
+        <Label Name="MutationDesc"/>
+        <Label Text="{Loc 'genetics-console-mutation-instability'}"/>
+        <Label Name="MutationInstability"/>
+    </GridContainer>
+</BoxContainer>

@@ -40,7 +40,7 @@ public sealed class DnaScrambleOnTriggerSystem : XOnTriggerSystem<DnaScrambleOnT
 
         // Randomness will mispredict
         // and LoadProfile causes a debug assert on the client at the moment.
-        if (_net.IsClient)
+        if (_net.IsClient) // Trauma - note: if this is ever predicted update MutationSystem
             return;
 
         var newProfile = HumanoidCharacterProfile.RandomWithSpecies(humanoid.Species);

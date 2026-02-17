@@ -1433,6 +1433,9 @@
         type: StrippableBoundUserInterface
       enum.StoreUiKey.Key:
         type: StoreBoundUserInterface
+  # stupid monkey needs clever mutation to be literate
+  - type: BlockReading
+  - type: BlockWriting
   # </Trauma>
   - type: CombatMode
     canDisarm: true
@@ -1548,6 +1551,11 @@
   - type: Skinnable # Fuck pun-pun
     skinnedSprite: _Trauma/Mobs/Animals/skinnedmonkey.rsi
     unskinnedSprite: Mobs/Animals/monkey.rsi
+  - type: Mutatable
+    defaultMutations:
+      MutationMonkified: 1.0 # always monkey...
+    dormant:
+    - MutationMonkified
   # </Trauma>
   - type: NameIdentifier
     group: Monkey

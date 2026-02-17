@@ -216,6 +216,7 @@ public sealed partial class WoundSystem : EntitySystem
             return;
 
         // Predict events on client!!
+        // TODO SHITMED: dont fucking need this? container events are applied in prediction
         var holdingWoundable = TryGetEntity(state.HoldingWoundable, out var e) ? e.Value : EntityUid.Invalid;
         if (holdingWoundable != component.HoldingWoundable)
         {

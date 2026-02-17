@@ -3,6 +3,7 @@ using Content.Medical.Common.Body;
 using Content.Shared.Body;
 using Content.Shared.Containers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Body;
 
@@ -13,6 +14,7 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
 {
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly BodyPartSystem _part = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<BodyCacheComponent> _query;
     private EntityQuery<ChildOrganComponent> _childQuery;
@@ -96,7 +98,7 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
 
     private void OnChildInsertAttempt(Entity<ChildOrganComponent> ent, ref OrganInsertAttemptEvent args)
     {
-        if (args.Cancelled)
+        if (args.Cancelled || ent.Owner != args.Organ)
             return;
 
         if (_body.GetCategory(ent.Owner) is not {} category ||
@@ -132,12 +134,14 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
     // so you dont need duplicate events for insert/enable and it auto updates on surgery
     private void OnInserted(Entity<OrganComponent> ent, ref OrganGotInsertedEvent args)
     {
-        _body.EnableOrgan(ent.AsNullable());
+        if (!_timing.ApplyingState) // components are networked this doesnt need to get trolled
+            _body.EnableOrgan(ent.AsNullable(), args.Target); // have to pass the body because it's null until after the events are raised
     }
 
     private void OnRemoved(Entity<OrganComponent> ent, ref OrganGotRemovedEvent args)
     {
-        _body.DisableOrgan(ent.AsNullable());
+        if (!_timing.ApplyingState)
+            _body.DisableOrgan(ent.AsNullable(), args.Target);
     }
 
     #region Public API
@@ -160,6 +164,15 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
         => _query.TryComp(body, out var comp)
             ? GetOrgan((body, comp), category)
             : null;
+
+    public void SetParentCategory(Entity<ChildOrganComponent?> organ, [ForbidLiteral] ProtoId<OrganCategoryPrototype> category)
+    {
+        if (!_childQuery.Resolve(organ, ref organ.Comp) || organ.Comp.ParentCategory == category)
+            return;
+
+        organ.Comp.ParentCategory = category;
+        Dirty(organ, organ.Comp);
+    }
 
     #endregion
 }

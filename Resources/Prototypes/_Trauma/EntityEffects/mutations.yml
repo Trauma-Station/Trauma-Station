@@ -1,0 +1,316 @@
+- type: entityEffect
+  id: MutationSeizure
+  effects:
+  - !type:PopupMessage
+    type: Pvs
+    visualType: LargeCaution
+    messages:
+    - entity-effect-popup-seizure
+  - !type:Jitter
+    amplitude: 20
+    time: 29
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectForcedSleeping
+    time: 20
+
+- type: entityEffect
+  id: MutationCough
+  effects:
+  - !type:Emote
+    emote: Cough
+    showInChat: true
+  - !type:DropItems
+
+- type: entityEffect
+  id: MutationParanoia
+  effects:
+  - !type:Emote
+    emote: Scream
+    showInChat: true
+  # TODO: 25% chance to start hallucinating for 40s
+
+- type: entityEffect
+  id: MutationFierySweat
+  effects:
+  - !type:Flammable
+    multiplier: 2
+  - !type:Ignite
+
+- type: entityEffect
+  id: MutationAcidicFleshBubble
+  effects:
+  - !type:RelayMutated
+    effect: !type:PopupMessage
+      messages:
+      - entity-effect-popup-acidic-flesh-bubbles
+  - !type:StartUseDelay
+
+- type: entityEffect
+  id: MutationAcidicFleshPop
+  effects:
+  - !type:PopupMessage
+    type: Pvs
+    visualType: MediumCaution
+    messages:
+    - entity-effect-popup-acidic-flesh-pops
+  - !type:HealthChange
+    ignoreResistances: false # having lab coats etc help is decent for gameplay, doesnt make much sense though
+    useTargeting: false # picks a random limb instead of applying damage everywhere evenly
+    damage:
+      types:
+        Caustic: 15 # TODO: random scale
+  - !type:PlaySoundEffect
+    sound:
+      path: /Audio/_Trauma/Effects/sear.ogg
+    positional: false
+
+# Spastic
+
+- type: entityEffect
+  id: MutationSpasms
+  effects:
+  - !type:WeightedRandomEffect
+    children:
+    - effect: !type:NestedEffect
+        proto: SpasmMove
+    - effect: !type:NestedEffect
+        conditions:
+        - !type:HoldingItemCondition
+        proto: SpasmAttackSelf
+    - effect: !type:NestedEffect
+        proto: SpasmPunchSelf
+    - effect: !type:NestedEffect
+        proto: SpasmAttackOthers
+    - effect: !type:NestedEffect
+        conditions:
+        - !type:HoldingItemCondition
+        proto: SpasmThrow
+
+- type: entityEffect
+  id: SpasmMove
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-spasm-leg
+  - !type:ThrowRandomly
+    speed: 1.5 # just a spasm
+  # TODO - this would be much better with proper tile movement key queue system
+
+- type: entityEffect
+  id: SpasmAttackSelf
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-spasm-fingers
+  - !type:AttackSelf
+
+- type: entityEffect
+  id: SpasmPunchSelf
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-spasm-arm
+  - !type:AttackSelf
+    useHeld: false
+
+- type: entityEffect
+  id: SpasmAttackOthers
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-spasm-arm
+  - !type:AttackOthers
+  # TODO: attack in a random direction, using 7m range for a gun
+
+- type: entityEffect
+  id: SpasmThrow
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-spasm-arm
+  - !type:DropRandomItem
+    effects:
+    - !type:ThrowRandomly
+
+# Two Left Feet
+
+- type: entityEffect
+  id: MutationFeetTrip
+  effects:
+  - !type:PopupMessage
+    visualType: SmallCaution
+    messages:
+    - entity-effect-popup-feet-trip
+  - !type:Knockdown
+    time: 3
+
+# H.A.R.S.
+
+- type: entityEffect
+  id: MutationRemoveHead
+  effects:
+  - !type:RelayBodyParts
+    partType: Torso
+    effects:
+    - !type:AddOrganSlot
+      category: Brain
+    - !type:AddOrganSlot
+      category: Eyes
+    - !type:AddOrganSlot
+      category: Tongue
+    - !type:AddOrganSlot
+      category: Ears
+  - !type:MoveOrgan
+    organ: Brain
+    dest: Torso
+  - !type:MoveOrgan
+    organ: Eyes
+    dest: Torso
+  - !type:MoveOrgan
+    organ: Tongue
+    dest: Torso
+  - !type:MoveOrgan
+    organ: Ears
+    dest: Torso
+  - !type:RelayBodyParts
+    partType: Head
+    effects:
+    - !type:DetachOrgan
+    - !type:Gib
+  - !type:RelayBodyParts
+    partType: Torso
+    effects:
+    - !type:RemoveOrganSlot # no cheesing it by attaching a new head
+      slot: Head
+  - !type:SetStanding # Debrained gets added for a moment which downs them, undo that
+  - !type:PopupMessage
+    type: Pvs
+    visualType: Medium
+    messages:
+    - entity-effect-popup-head-removed
+
+- type: entityEffect
+  id: MutationAddHead
+  effects:
+  - !type:RelayBodyParts
+    partType: Torso
+    effects:
+    - !type:AddOrganSlot
+      category: Head
+    - !type:RegenerateOrgan
+      slot: Head
+  - !type:RelayBodyParts
+    partType: Head
+    effects:
+    - !type:HealthChange
+      damage:
+        types:
+          Blunt: 50
+  - !type:MoveOrgan
+    organ: Brain
+    dest: Head
+  - !type:MoveOrgan
+    organ: Eyes
+    dest: Head
+  - !type:MoveOrgan
+    organ: Tongue
+    dest: Head
+  - !type:MoveOrgan
+    organ: Ears
+    dest: Head
+  - !type:RelayBodyParts
+    partType: Torso
+    effects:
+    - !type:RemoveOrganSlot
+      slot: Brain
+    - !type:RemoveOrganSlot
+      slot: Eyes
+    - !type:RemoveOrganSlot
+      slot: Tongue
+    - !type:RemoveOrganSlot
+      slot: Ears
+  - !type:SetStanding # Debrained gets added for a moment which downs them, undo that
+  - !type:PopupMessage
+    type: Pvs
+    visualType: Medium
+    messages:
+    - entity-effect-popup-head-regrown
+
+- type: entityEffect
+  id: MutationElvisDance
+  effects:
+  - !type:PopupMessage
+    type: Pvs
+    visualType: Small
+    messages:
+    - MutationElvis-popup-dance-1
+    - MutationElvis-popup-dance-2
+    - MutationElvis-popup-dance-3
+    - MutationElvis-popup-dance-4
+    - MutationElvis-popup-dance-5
+    - MutationElvis-popup-dance-6
+    - MutationElvis-popup-dance-7
+    - MutationElvis-popup-dance-8
+    - MutationElvis-popup-dance-9
+    - MutationElvis-popup-dance-10
+    - MutationElvis-popup-move-1
+    - MutationElvis-popup-move-2
+    - MutationElvis-popup-move-3
+    - MutationElvis-popup-move-4
+    - MutationElvis-popup-move-5
+    - MutationElvis-popup-move-6
+    - MutationElvis-popup-move-7
+
+# Internal Martyrdom
+
+- type: entityEffect
+  id: MutationInternalMartyrdom
+  effects:
+  - !type:RelayBodyParts
+    partType: Head
+    effects:
+    - !type:Gib # your head explodes, don't drop brain when gibbing
+  - !type:SpawnEntity # flash instead of an explosion
+    entity: ReactionFlash
+  - !type:RelayNearby # blind and stun people
+    compName: AwakeMob
+    range: 2
+    blacklist: # never double dip, borgs get their own thing
+      components:
+      - BorgChassis
+    effect: !type:NestedEffect
+      proto: StunBlindMob
+  - !type:RelayNearby # paralyze borgs
+    compName: BorgChassis
+    range: 2
+    effect: !type:NestedEffect
+      proto: ParalyzeBorg
+  - !type:Gib # bye bye
+
+- type: entityEffect
+  id: StunBlindMob
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-martyrdom-blinded
+  - !type:GenericStatusEffect
+    key: BlurryVision
+    component: BlurryVision
+    time: 40
+  - !type:GenericStatusEffect
+    key: TemporaryBlindness
+    component: TemporaryBlindness
+    time: 5 # few seconds of blindness instead of eye damage
+  - !type:ModifyKnockdown
+    time: 2
+  - !type:ModifyParalysis
+    time: 2
+
+- type: entityEffect
+  id: ParalyzeBorg
+  effects:
+  - !type:PopupMessage
+    messages:
+    - entity-effect-popup-martyrdom-borg-disabled
+  - !type:ModifyParalysis
+    time: 6

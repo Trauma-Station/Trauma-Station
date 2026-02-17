@@ -124,10 +124,8 @@ public sealed class EffectsToolSystem : EntitySystem
 
         // do the thing, effects are expected to call MarkUsed
         ent.Comp.Used = false;
-        _data.SetUser(target, user);
         _data.SetTool(target, ent);
-        _effects.ApplyEffects(target, ent.Comp.Effects);
-        _data.ClearUser(target);
+        _effects.ApplyEffects(target, ent.Comp.Effects, user: user);
         _data.ClearTool(target);
 
         if (!ent.Comp.Used)

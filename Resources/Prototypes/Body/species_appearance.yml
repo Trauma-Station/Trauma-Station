@@ -72,7 +72,7 @@
       visible: false
 
 - type: entity
-  id: BaseSpeciesAppearance
+  id: BaseSpeciesAppearanceOrganless # Trauma - this doesn't have internal organ requirements
   parent:
   - InventoryBase
   - BaseSpeciesLayers

@@ -101,6 +101,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
     [Dependency] private readonly HereticSystem _heretic = default!;
     [Dependency] private readonly HolyFlammableSystem _holyFlam = default!;
+    [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
 
     public override void Initialize()
     {
@@ -273,12 +274,10 @@ public sealed class GhoulSystem : SharedGhoulSystem
             return;
         }
 
-        /* TODO NUBODY API
-
-        _humanoid.SetSkinColor(ent, ent.Comp.OldSkinColor, true, false, humanoid);
-        _humanoid.SetBaseLayerColor(ent, HumanoidVisualLayers.Eyes, ent.Comp.OldEyeColor, true, humanoid);
-
-        */
+        if (ent.Comp.OldEyeColor is {} eyeColor)
+            _humanoid.SetEyeColor(ent, eyeColor);
+        if (ent.Comp.OldSkinColor is {} skinColor)
+            _humanoid.SetSkinColor(ent, skinColor);
 
         var species = _proto.Index(humanoid.Species);
         var prototype = _proto.Index(species.Prototype);
@@ -374,19 +373,15 @@ public sealed class GhoulSystem : SharedGhoulSystem
                 SetBoundHeretic((ent.Owner, minion), heretic, null, false);
         }
 
-        if (TryComp<HumanoidProfileComponent>(ent, out var humanoid))
+        if (HasComp<HumanoidProfileComponent>(ent))
         {
-            // make them "have no eyes" and grey
-            // this is clearly a reference to grey tide
-            /* TODO NUBODY API
+            var organs = _humanoid.GetOrgansData(ent);
+            ent.Comp.OldSkinColor = _humanoid.GetSkinColor(organs);
+            ent.Comp.OldEyeColor = _humanoid.GetEyeColor(organs);
 
-            ent.Comp.OldSkinColor = humanoid.SkinColor;
-            ent.Comp.OldEyeColor = humanoid.EyeColor;
-
-            var greycolor = Color.FromHex("#505050");
-            _humanoid.SetSkinColor(ent, greycolor, true, false, humanoid);
-            _humanoid.SetBaseLayerColor(ent, HumanoidVisualLayers.Eyes, greycolor, true, humanoid);
-            */
+            var grey = Color.FromHex("#505050");
+            _humanoid.SetEyeColor(ent, grey);
+            _humanoid.SetSkinColor(ent, grey, grey);
         }
 
         _rejuvenate.PerformRejuvenate(ent);

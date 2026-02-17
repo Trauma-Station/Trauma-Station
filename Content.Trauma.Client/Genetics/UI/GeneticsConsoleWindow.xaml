@@ -1,0 +1,37 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<controls:FancyWindow xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        xmlns:genetics="clr-namespace:Content.Trauma.Client.Genetics.UI"
+        Title="{Loc 'genetics-console-window-title'}"
+        MinSize="800 600">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer>
+            <controls:NanoHeading Text="{Loc 'genetics-console-heading-scanner'}"/>
+            <Button Name="ServerButton" Text="{Loc 'lathe-menu-server-list'}" HorizontalAlignment="Right" HorizontalExpand="True"/>
+        </BoxContainer>
+        <!-- Patient info -->
+        <BoxContainer Orientation="Horizontal">
+            <SpriteView Name="MobView" SetSize="64 64" OverrideDirection="South" Stretch="Fill"/>
+            <GridContainer Columns="4" HorizontalExpand="True">
+                <Label Text="{Loc 'genetics-console-name'}" MinWidth="150"/>
+                <Label Name="MobName" MinWidth="200"/>
+                <Label Text="{Loc 'genetics-console-status'}"/>
+                <Label Name="MobStatus" MinWidth="300"/>
+                <Label Text="{Loc 'genetics-console-integrity'}" MinWidth="150"/>
+                <Label Name="MobIntegrity"/>
+                <Label Text="{Loc 'genetics-console-instability'}" MinWidth="150"/>
+                <Label Name="MobInstability"/>
+            </GridContainer>
+        </BoxContainer>
+        <controls:StripeBack Name="ScrambleContainer" Margin="125 5" Visible="False">
+            <Button Name="ScrambleButton" Text="{Loc 'genetics-console-scramble'}" Disabled="True" SetWidth="400" Margin="5"/>
+        </controls:StripeBack>
+        <!-- Console tabs -->
+        <TabContainer Name="Tabs">
+            <genetics:GeneticSequencer Name="Sequencer"/>
+            <genetics:GeneticStorage Name="Storage"/>
+            <genetics:GeneticCombiner Name="Combiner"/>
+            <genetics:GeneticEnzymes Name="Enzymes"/>
+        </TabContainer>
+    </BoxContainer>
+</controls:FancyWindow>

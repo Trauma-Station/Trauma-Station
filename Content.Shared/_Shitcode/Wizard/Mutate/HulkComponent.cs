@@ -38,16 +38,16 @@ public sealed partial class HulkComponent : Component
     public EntProtoId ShotProto = "RedHeavyLaser";
 
     [DataField]
-    public Color OldSkinColor;
+    public Color? OldSkinColor;
 
     [DataField]
-    public Color OldEyeColor;
+    public Color? OldEyeColor;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField]
     public TimeSpan NextRoar = TimeSpan.Zero;
 
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField]
     public List<Color> NonHumanoidOldLayerData = new();
 
     /// <summary>

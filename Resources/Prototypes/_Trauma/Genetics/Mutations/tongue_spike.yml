@@ -1,0 +1,59 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationTongueSpike
+  name: Tongue Spike
+  description: Allows a creature to voluntarily shoot their tongue out as a deadly weapon.
+  components:
+  - type: Mutation
+    instability: 5
+    conflicts:
+    - MutationChemSpike
+  - type: ActionMutation
+    action: ActionMutationTongueSpike
+
+- type: entity
+  parent: BaseMutationAction
+  id: ActionMutationTongueSpike
+  name: Launch spike
+  description: Shoot your tongue out in the direction you click, embedding it and dealing damage until they remove it.
+  components:
+  - type: Action
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: spike
+    useDelay: 1
+  - type: TargetAction
+    range: 10
+  - type: WorldTargetAction
+    event: !type:ShootOrganActionEvent
+  - type: ShootOrganAction
+    organ: Tongue
+    polymorph: TongueSpike
+
+- type: entity
+  parent: MutationTongueSpike
+  id: MutationChemSpike
+  name: Chem Spike
+  description: Allows a creature to voluntarily shoot their tongue out as biomass, allowing a long range transfer of chemicals.
+  components:
+  - type: Mutation
+    instability: 10
+    conflicts: [] # uninherit
+  - type: RemovesMutation
+    removes:
+    - MutationTongueSpike
+  - type: ActionMutation
+    action: ActionMutationChemSpike
+
+- type: entity
+  parent: ActionMutationTongueSpike
+  id: ActionMutationChemSpike
+  name: Launch chem spike
+  description: Shoot your tongue out in the direction you click, embedding it and dealing damage until they remove it. While the other person has the spike embedded, you can transfer your chemicals to them.
+  components:
+  - type: Action
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: chemspike
+  - type: ShootOrganAction
+    polymorph: TongueSpikeChem

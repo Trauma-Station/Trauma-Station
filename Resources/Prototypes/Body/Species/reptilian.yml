@@ -137,6 +137,18 @@
   id: MobReptilian
   name: Urissst Mz'Hand
   components:
+  # <Trauma>
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic
+    - Draconic
+    understands:
+    - TauCetiBasic
+    - Draconic
+  - type: Mutatable
+    dormant:
+    - MutationFireBreath
+  # </Trauma>
   - type: Puller
     #needsHands: false # Trauma - controlled by tail
   - type: Butcherable

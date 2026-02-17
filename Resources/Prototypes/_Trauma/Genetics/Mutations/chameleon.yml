@@ -1,0 +1,16 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationChameleon
+  name: Chameleon
+  description: A genome that causes the holder's skin to become transparent over time.
+  components:
+  - type: Mutation
+    instability: 35
+    difficulty: 16
+  - type: ComponentMutation
+    added:
+    - type: Stealth
+      enabledOnCrit: false
+      enabledOnDeath: false
+      maxVisibility: 8 # not very powerful because it doesnt use power etc
+    - type: StealthOnMove

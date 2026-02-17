@@ -987,7 +987,7 @@ public sealed partial class WoundSystem
         Dirty(uid, component);
     }
 
-    private bool AddWound(
+    public bool AddWound( // Trauma - made public
         EntityUid target,
         EntityUid wound,
         FixedPoint2 woundSeverity,
