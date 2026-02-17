@@ -37,17 +37,17 @@ public sealed class TelepathyActionSystem : EntitySystem
 
     private void OnTelepathyPrompt(Entity<TelepathyActionComponent> ent, ref TelepathyActionEvent args)
     {
-        // client predicts opening the bui and for some reason server debug asserts for this
+        // for this specifically, prediction is fucked
         // but other predicted opens are fine (e.g. debug effect stick)
-        // fucking incomprehensible shitcode
-        if (_net.IsServer)
+        // incomprehensible shitcode
+        if (_net.Client)
             return;
 
         var user = args.Performer;
         var target = args.Target;
         ent.Comp.Target = target; // so it can be used later
 
-        if (!_ui.TryOpenUi(ent.Owner, TelepathyUiKey.Key, user, predicted: true))
+        if (!_ui.TryOpenUi(ent.Owner, TelepathyUiKey.Key, user))
             Log.Error($"Failed to open UI for {ToPrettyString(ent)} of {ToPrettyString(user)}");
 
         // intentionally not handled, only start the cooldown after a message is sent
