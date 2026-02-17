@@ -4,6 +4,7 @@ using Content.Server.Cloning.Components;
 using Content.Server.Medical.Components;
 using Content.Shared.DeviceLinking.Events;
 using Content.Trauma.Common.Medical;
+using Robust.Shared.Containers;
 
 namespace Content.Trauma.Server.Medical;
 
@@ -20,6 +21,8 @@ public sealed class CloningEventsSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MedicalScannerComponent, NewLinkEvent>(OnNewLink);
+        SubscribeLocalEvent<MedicalScannerComponent, EntInsertedIntoContainerMessage>(OnSubjectInserted);
+        SubscribeLocalEvent<MedicalScannerComponent, EntRemovedFromContainerMessage>(OnSubjectRemoved);
 
         SubscribeLocalEvent<CloningConsoleComponent, ScannerConnectedEvent>(OnScannerConnected);
         SubscribeLocalEvent<CloningConsoleComponent, ScannerDisconnectedEvent>(OnScannerDisconnected);
@@ -34,6 +37,24 @@ public sealed class CloningEventsSystem : EntitySystem
         var ev = new ScannerConnectedEvent(ent.Owner);
         RaiseLocalEvent(args.Source, ref ev);
         ent.Comp.ConnectedConsole = args.Source;
+    }
+
+    private void OnSubjectInserted(Entity<MedicalScannerComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (ent.Comp.ConnectedConsole is not {} console || args.Container != ent.Comp.BodyContainer)
+            return;
+
+        var ev = new ScannerInsertedEvent(ent, args.Entity);
+        RaiseLocalEvent(console, ref ev);
+    }
+
+    private void OnSubjectRemoved(Entity<MedicalScannerComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (ent.Comp.ConnectedConsole is not {} console || args.Container != ent.Comp.BodyContainer)
+            return;
+
+        var ev = new ScannerEjectedEvent(ent, args.Entity);
+        RaiseLocalEvent(console, ref ev);
     }
 
     private void OnScannerConnected(Entity<CloningConsoleComponent> ent, ref ScannerConnectedEvent args)
