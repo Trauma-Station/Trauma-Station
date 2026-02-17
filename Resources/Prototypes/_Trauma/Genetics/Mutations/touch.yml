@@ -38,22 +38,22 @@
   - type: Mutation
     instability: 35
     difficulty: 16
-  - type: ActionMutation
-    action: ActionMutationMendingTouch
+  #- type: ActionMutation
+  #  action: ActionMutationMendingTouch
   # TODO: jesus christ this has a lot of logic
 
-- type: entity
-  parent: BaseAction
-  id: ActionMutationMendingTouch
-  name: Mending Touch
-  description: Lay your hands on other people to transfer a small amount of their physical injuries to yourself.
-  components:
-  - type: Action
-    useDelay: 12
-  - type: TargetAction
-  - type: EntityTargetAction
-    whitelist:
-      requireAll: true
-      components:
-      - Damageable
-      - Body
+#- type: entity
+#  parent: BaseAction
+#  id: ActionMutationMendingTouch
+#  name: Mending Touch
+#  description: Lay your hands on other people to transfer a small amount of their physical injuries to yourself.
+#  components:
+#  - type: Action
+#    useDelay: 12
+#  - type: TargetAction
+#  - type: EntityTargetAction
+#    whitelist:
+#      requireAll: true
+#      components:
+#      - Damageable
+#      - Body
