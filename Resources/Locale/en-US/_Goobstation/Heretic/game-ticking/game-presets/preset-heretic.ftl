@@ -13,7 +13,7 @@ heretic-roundend-name = heretic
 roundend-prepend-heretic-ascension-success = {$name} [color=green]has Ascended![/color]
 roundend-prepend-heretic-ascension-fail = {$name} [color=red]has failed to Ascend![/color]
 roundend-prepend-heretic-ascension-fail-owls = {$name} [color=red]has forsaken Ascension and thus failed![/color]
-roundend-prepend-heretic-knowledge-named = [color=white]{$name}[/color] researched the most knowledges, having [color=purple]{$number}[/color] total. 
+roundend-prepend-heretic-knowledge-named = [color=white]{$name}[/color] researched the most knowledges, having [color=purple]{$number}[/color] total.
 
 heretic-gamemode-title = Heretics
 heretic-gamemode-description =
