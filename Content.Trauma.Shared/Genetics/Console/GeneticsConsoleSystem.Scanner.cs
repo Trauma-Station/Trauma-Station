@@ -128,7 +128,7 @@ public sealed partial class GeneticsConsoleSystem
 
     private void SetScanner(Entity<GeneticsScannerComponent?> ent, EntityUid? scanner)
     {
-        if (!_scannerQuery.Resolve(ent, ref ent.Comp) || ent.Comp.Scanner == scanner)
+        if (!_scannerQuery.Resolve(ent, ref ent.Comp, false) || ent.Comp.Scanner == scanner)
             return;
 
         ent.Comp.Scanner = scanner;

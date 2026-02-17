@@ -373,13 +373,16 @@ public sealed class GhoulSystem : SharedGhoulSystem
                 SetBoundHeretic((ent.Owner, minion), heretic, null, false);
         }
 
-        var organs = _humanoid.GetOrgansData(ent);
-        ent.Comp.OldSkinColor = _humanoid.GetSkinColor(organs);
-        ent.Comp.OldEyeColor = _humanoid.GetEyeColor(organs);
+        if (HasComp<HumanoidProfileComponent>(ent))
+        {
+            var organs = _humanoid.GetOrgansData(ent);
+            ent.Comp.OldSkinColor = _humanoid.GetSkinColor(organs);
+            ent.Comp.OldEyeColor = _humanoid.GetEyeColor(organs);
 
-        var grey = Color.FromHex("#505050");
-        _humanoid.SetEyeColor(ent, grey);
-        _humanoid.SetSkinColor(ent, grey, grey);
+            var grey = Color.FromHex("#505050");
+            _humanoid.SetEyeColor(ent, grey);
+            _humanoid.SetSkinColor(ent, grey, grey);
+        }
 
         _rejuvenate.PerformRejuvenate(ent);
 

@@ -286,7 +286,6 @@
     effect: !type:NestedEffect
       proto: ParalyzeBorg
   - !type:Gib # bye bye
-    gibOrgans: true
 
 - type: entityEffect
   id: StunBlindMob
