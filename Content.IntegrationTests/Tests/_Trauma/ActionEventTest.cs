@@ -13,20 +13,20 @@ namespace Content.IntegrationTests.Tests._Trauma;
 public sealed class ActionEventTest
 {
     [Test]
-    public async Task AddRemoveAllMutations()
+    public async Task CheckTargetActions()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
 
         var factory = server.EntMan.ComponentFactory;
-        var protoMan = server.ResolveDependency<IPrototypeManager>();
+        var protoMan = server.ProtoMan;
 
         var actionName = factory.GetComponentName<ActionComponent>();
         var entName = factory.GetComponentName<EntityTargetActionComponent>();
         var targetName = factory.GetComponentName<TargetActionComponent>();
         var worldName = factory.GetComponentName<WorldTargetActionComponent>();
 
-        server.WaitAssertion(() =>
+        await server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
             {
@@ -38,7 +38,7 @@ public sealed class ActionEventTest
                     Assert.That(proto.Components.ContainsKey(actionName), $"Action {proto.ID} is missing ActionComponent");
 
                     var hasEnt = proto.TryGetComponent<EntityTargetActionComponent>(entName, out var entTarget);
-                    var hasWorld = proto.TryGetComponent<WorldTargetActionComponent>(entName, out var worldTarget);
+                    var hasWorld = proto.TryGetComponent<WorldTargetActionComponent>(worldName, out var worldTarget);
                     var entAction = hasEnt && entTarget.Event != null;
                     var worldAction = hasWorld && worldTarget.Event != null;
 
