@@ -59,6 +59,10 @@
 - type: entity
   parent: [ OrganBaseTorsoTailed, OrganKoboldExternal ]
   id: OrganKoboldTorso
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: None # no undergarments, i cbf to make a kobold specific one
 
 - type: entity
   parent: [ OrganBaseHead, OrganKoboldExternal ]
