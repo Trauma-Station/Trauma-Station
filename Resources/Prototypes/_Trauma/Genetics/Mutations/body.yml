@@ -187,9 +187,14 @@
   components:
   - type: Mutation
     instability: -40 # mmmonky
-    locked: true # specific to monkeys (active) and humans (dormant)
+    locked: true # specific to monkeys/kobolds (active) and humans/reptilians (dormant)
   - type: PolymorphMutation
-    prototype: MutationMonkey
+    prototypes:
+      Human: MutationMonkey
+      Reptilian: MutationKobold
+    reverts:
+      Monkey: MutationHuman
+      Kobold: MutationReptilian
     fallback: MutationHuman
 
 # Powergaming

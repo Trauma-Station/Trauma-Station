@@ -27,6 +27,34 @@
     polymorphSound: /Audio/Voice/Human/malescream_1.ogg
 
 - type: polymorph
+  id: MutationKobold
+  configuration:
+    entity: MobKobold
+    transferName: true
+    stripNameModifier: false # keep it when going monkey -> human -> monkey
+    componentsToTransfer: [] # no language chud
+    forced: true
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+    inventory: Transfer
+    polymorphSound: /Audio/Animals/monkey_scream.ogg
+
+- type: polymorph
+  id: MutationReptilian
+  configuration:
+    entity: MobReptilian
+    transferName: true # human named monkey (MK-28) kino
+    stripNameModifier: false
+    # yes language so monkey is still forced to speak monkey
+    forced: true
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
+    inventory: Transfer
+    polymorphSound: /Audio/Voice/Reptilian/reptilian_scream.ogg
+
+- type: polymorph
   id: MutationMouse
   configuration:
     entity: MobMouse

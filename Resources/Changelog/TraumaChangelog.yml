@@ -2607,3 +2607,79 @@ Entries:
   id: 313
   time: '2026-02-17T21:38:27.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/723
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Monkified mutation now works on kobolds and lizards :)
+  id: 314
+  time: '2026-02-17T23:09:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/730
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Gave moths their wings back, no more Phantom Limbs for the Angel With
+      Broken Wings.
+  - type: Fix
+    message: >-
+      Fixed felinidification not working and making nonhumans asphyxiate after
+      being removed.
+  id: 315
+  time: '2026-02-18T08:01:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/727
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Geneticist job icon is now purple.
+  id: 316
+  time: '2026-02-18T08:15:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/737
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed Slasher meat spike ability spawning fake clientside meat spikes.
+  id: 317
+  time: '2026-02-18T11:45:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/738
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use autodocs.
+  id: 318
+  time: '2026-02-18T12:42:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/743
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Disease can no longer roll immunity resistance behaviour.
+  id: 319
+  time: '2026-02-18T14:08:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/747
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed kobolds and monkeys not having tails...
+  id: 320
+  time: '2026-02-18T15:12:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/745
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Unbanned shadowkin players
+  id: 321
+  time: '2026-02-18T18:49:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/751
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed ERP
+  id: 322
+  time: '2026-02-18T20:00:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/752
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Shiftstart graffiti is no longer randomly rotated.
+  id: 323
+  time: '2026-02-18T20:56:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/753

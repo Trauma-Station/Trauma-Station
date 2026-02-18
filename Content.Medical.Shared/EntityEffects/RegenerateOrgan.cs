@@ -8,7 +8,6 @@ namespace Content.Medical.Shared.EntityEffects;
 
 /// <summary>
 /// Spawns and attaches an organ from the body's initial organs, to this body part entity.
-/// Its child organs do not get regenerated, this isn't recursive.
 /// </summary>
 public sealed partial class RegenerateOrgan : EntityEffectBase<RegenerateOrgan>
 {
@@ -18,6 +17,12 @@ public sealed partial class RegenerateOrgan : EntityEffectBase<RegenerateOrgan>
     /// </summary>
     [DataField(required: true)]
     public ProtoId<OrganCategoryPrototype> Slot;
+
+    /// <summary>
+    /// Whether to also regenerate child organs.
+    /// </summary>
+    [DataField]
+    public bool Recursive = true;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-regenerate-part", ("chance", Probability), ("slot", prototype.Index(Slot).Name));
@@ -29,6 +34,7 @@ public sealed class RegenerateOrganEffectSystem : EntityEffectSystem<BodyPartCom
 
     protected override void Effect(Entity<BodyPartComponent> ent, ref EntityEffectEvent<RegenerateOrgan> args)
     {
-        _part.RestoreInitialChild(ent.AsNullable(), args.Effect.Slot);
+        var e = args.Effect;
+        _part.RestoreInitialChild(ent.AsNullable(), e.Slot, recursive: e.Recursive);
     }
 }

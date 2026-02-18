@@ -26,7 +26,7 @@ public partial interface IAutodocStep
     /// <summary>
     /// Title of this step to display in the UI
     /// </summary>
-    string Title { get; }
+    string Title(IPrototypeManager protoMan);
 
     /// <summary>
     /// Run the step, returning true if it is instantly complete and ready to go to the next step, or false if it needs to wait for something else.
@@ -49,8 +49,6 @@ public partial interface IAutodocStep
 [Serializable, NetSerializable]
 public sealed partial class SurgeryAutodocStep : IAutodocStep
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-
     /// <summary>
     /// The type of part to operate on.
     /// </summary>
@@ -69,14 +67,11 @@ public sealed partial class SurgeryAutodocStep : IAutodocStep
     [DataField(required: true)]
     public EntProtoId<SurgeryComponent> Surgery;
 
-    public string Title
+    string IAutodocStep.Title(IPrototypeManager protoMan)
     {
-        get
-        {
-            var proto = _proto.Index(Surgery);
-            var part = Loc.GetString($"autodoc-body-part-{Part}");
-            return Loc.GetString("autodoc-program-step-surgery", ("part", part), ("name", proto.Name));
-        }
+        var proto = protoMan.Index(Surgery);
+        var part = Loc.GetString($"autodoc-body-part-{Part}");
+        return Loc.GetString("autodoc-program-step-surgery", ("part", part), ("name", proto.Name));
     }
 
     bool IAutodocStep.Run(Entity<AutodocComponent, HandsComponent> ent, SharedAutodocSystem autodoc)
@@ -109,7 +104,8 @@ public sealed partial class GrabItemAutodocStep : IAutodocStep
     [DataField(required: true)]
     public string Name = string.Empty;
 
-    public string Title => Loc.GetString("autodoc-program-step-grab-item", ("name", Name));
+    string IAutodocStep.Title(IPrototypeManager protoMan)
+        => Loc.GetString("autodoc-program-step-grab-item", ("name", Name));
 
     bool IAutodocStep.Validate(Entity<AutodocComponent> ent, SharedAutodocSystem autodoc)
     {
@@ -143,7 +139,8 @@ public abstract partial class GrabAnyItemAutodocStep : IAutodocStep
     /// </summary>
     public virtual LocId Name { get; }
 
-    string IAutodocStep.Title => Loc.GetString("autodoc-program-step-grab-any", ("name", Loc.GetString(Name)));
+    string IAutodocStep.Title(IPrototypeManager protoMan)
+        => Loc.GetString("autodoc-program-step-grab-any", ("name", Loc.GetString(Name)));
 
     bool IAutodocStep.Run(Entity<AutodocComponent, HandsComponent> ent, SharedAutodocSystem autodoc)
     {
@@ -182,7 +179,8 @@ public sealed partial class GrabAnyBodyPartAutodocStep : GrabAnyItemAutodocStep
 [Serializable, NetSerializable]
 public sealed partial class StoreItemAutodocStep : IAutodocStep
 {
-    string IAutodocStep.Title => Loc.GetString("autodoc-program-step-store-item");
+    string IAutodocStep.Title(IPrototypeManager protoMan)
+        => Loc.GetString("autodoc-program-step-store-item");
 
     bool IAutodocStep.Run(Entity<AutodocComponent, HandsComponent> ent, SharedAutodocSystem autodoc)
     {
@@ -200,7 +198,8 @@ public sealed partial class SetLabelAutodocStep : IAutodocStep
     [DataField(required: true)]
     public string Label = string.Empty;
 
-    string IAutodocStep.Title => Loc.GetString("autodoc-program-step-set-label", ("label", Label));
+    string IAutodocStep.Title(IPrototypeManager protoMan)
+        => Loc.GetString("autodoc-program-step-set-label", ("label", Label));
 
     bool IAutodocStep.Validate(Entity<AutodocComponent> ent, SharedAutodocSystem autodoc)
     {
@@ -225,7 +224,8 @@ public sealed partial class WaitAutodocStep : IAutodocStep
     [DataField(required: true)]
     public int Length;
 
-    string IAutodocStep.Title => Loc.GetString("autodoc-program-step-wait", ("length", Length));
+    string IAutodocStep.Title(IPrototypeManager protoMan)
+        => Loc.GetString("autodoc-program-step-wait", ("length", Length));
 
     bool IAutodocStep.Validate(Entity<AutodocComponent> ent, SharedAutodocSystem autodoc)
     {

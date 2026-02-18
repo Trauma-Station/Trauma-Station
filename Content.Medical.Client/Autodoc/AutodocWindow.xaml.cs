@@ -19,8 +19,7 @@ namespace Content.Medical.Client.Autodoc;
 [GenerateTypedNameReferences]
 public sealed partial class AutodocWindow : FancyWindow
 {
-    private readonly IEntityManager _entMan;
-    private readonly IPlayerManager _player;
+    [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly IFileDialogManager _dialogMan = default!;
     [Dependency] private readonly ISerializationManager _serMan = default!;
     [Dependency] private readonly ILogManager _logMan = default!;
@@ -43,17 +42,13 @@ public sealed partial class AutodocWindow : FancyWindow
     private DialogWindow? _dialog;
     private AutodocProgramWindow? _currentProgram;
 
-    public AutodocWindow(EntityUid owner, IEntityManager entMan, IPlayerManager player)
+    public AutodocWindow()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        _entMan = entMan;
-        _player = player;
-        _autodoc = entMan.System<SharedAutodocSystem>();
+        _autodoc = _entMan.System<SharedAutodocSystem>();
         _sawmill = _logMan.GetSawmill("autodoc-ui");
-
-        _owner = owner;
 
         OnClose += () =>
         {
@@ -101,6 +96,11 @@ public sealed partial class AutodocWindow : FancyWindow
 
         UpdateActive();
         UpdatePrograms();
+    }
+
+    public void SetOwner(EntityUid owner)
+    {
+        _owner = owner;
     }
 
     public void UpdateActive()
@@ -175,7 +175,6 @@ public sealed partial class AutodocWindow : FancyWindow
         {
             _sawmill.Error($"Error when importing program: {e}");
         }
-
     }
 
     private void OpenProgram(int index)

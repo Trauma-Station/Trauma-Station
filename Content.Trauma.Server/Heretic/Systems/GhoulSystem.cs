@@ -108,7 +108,8 @@ public sealed class GhoulSystem : SharedGhoulSystem
         base.Initialize();
 
         UpdatesAfter.Add(typeof(HolyFlammableSystem));
-        SubscribeLocalEvent<GhoulComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<GhoulComponent, MapInitEvent>(OnMapInit,
+            after: [ typeof(InitialBodySystem) ]);
         SubscribeLocalEvent<GhoulComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<GhoulComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<GhoulComponent, MobStateChangedEvent>(OnMobStateChange);
@@ -124,7 +125,8 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
         SubscribeLocalEvent<GhoulWeaponComponent, ExaminedEvent>(OnWeaponExamine);
 
-        SubscribeLocalEvent<VoicelessDeadComponent, MapInitEvent>(OnVoicelessDeadInit);
+        SubscribeLocalEvent<VoicelessDeadComponent, MapInitEvent>(OnVoicelessDeadInit,
+            after: [ typeof(InitialBodySystem) ]); // only needed because of RT system ordering shitcode
         SubscribeLocalEvent<VoicelessDeadComponent, ComponentShutdown>(OnVoicelessDeadShutdown);
 
         SubscribeLocalEvent<HereticMinionComponent, AttackAttemptEvent>(OnTryAttack);
@@ -437,7 +439,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         _antag.SendBriefing(ent, brief, Color.MediumPurple, sound);
     }
 
-    private void OnStartup(Entity<GhoulComponent> ent, ref ComponentStartup args)
+    private void OnMapInit(Entity<GhoulComponent> ent, ref MapInitEvent args)
     {
         GhoulifyEntity(ent);
     }

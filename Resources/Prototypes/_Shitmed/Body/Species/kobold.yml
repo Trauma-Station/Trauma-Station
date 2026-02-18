@@ -1,7 +1,6 @@
 ## Mob
 
 - type: entity
-  abstract: true
   parent: BaseSpeciesAppearance
   id: AppearanceKobold
   name: kobold appearance
@@ -11,6 +10,7 @@
     organs:
       Torso: OrganKoboldTorso
       Head: OrganKoboldHead
+      Tail: OrganKoboldTail
       ArmLeft: OrganKoboldArmLeft
       ArmRight: OrganKoboldArmRight
       HandRight: OrganKoboldHandRight
@@ -56,12 +56,20 @@
 ## Parts
 
 - type: entity
-  parent: [ OrganBaseTorso, OrganKoboldExternal ]
+  parent: [ OrganBaseTorsoTailed, OrganKoboldExternal ]
   id: OrganKoboldTorso
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: None # no undergarments, i cbf to make a kobold specific one
 
 - type: entity
   parent: [ OrganBaseHead, OrganKoboldExternal ]
   id: OrganKoboldHead
+
+- type: entity
+  parent: [ OrganBaseTail, OrganKoboldExternal ]
+  id: OrganKoboldTail
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganKoboldExternal ]

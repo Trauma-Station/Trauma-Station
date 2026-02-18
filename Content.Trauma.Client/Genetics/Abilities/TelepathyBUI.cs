@@ -12,6 +12,12 @@ public sealed class TelepathyBUI : BoundUserInterface
 
     public TelepathyBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
+    }
+
+    protected override void Open()
+    {
+        base.Open();
+
         var maxLength = EntMan.GetComponentOrNull<TelepathyActionComponent>(Owner)?.MaxLength ?? 30;
 
         var field = "msg";
@@ -21,7 +27,7 @@ public sealed class TelepathyBUI : BoundUserInterface
         entries.Add(new(field, QuickDialogEntryType.ShortText, prompt, placeholder));
         var title = Loc.GetString("MutationTelepathy-window-title");
 
-        _window = new DialogWindow(title, entries);
+        _window = new(title, entries);
 
         _window.OnClose += Close;
         _window.OnConfirmed += responses =>
@@ -35,12 +41,16 @@ public sealed class TelepathyBUI : BoundUserInterface
             SendPredictedMessage(new TelepathyChosenMessage(msg));
             _window.Close();
         };
+        _window.OpenCentered();
     }
 
-    protected override void Open()
+    protected override void Dispose(bool disposing)
     {
-        base.Open();
+        base.Dispose(disposing);
 
-        _window?.OpenCentered();
+        if (!disposing)
+            return;
+
+        _window?.Orphan();
     }
 }

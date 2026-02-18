@@ -199,6 +199,7 @@
       category: Head
     - !type:RegenerateOrgan
       slot: Head
+      recursive: false # don't spawn new organs for it, they're being moved back in
   - !type:RelayBodyParts
     partType: Head
     effects:

@@ -212,19 +212,37 @@ public sealed partial class BodyPartSystem
     }
 
     /// <summary>
+    /// Find the first root part of a body, i.e. one that has no <see cref="ChildOrganComponent"/>.
+    /// This should almost always be the torso.
+    /// </summary>
+    public Entity<BodyPartComponent>? GetRootPart(Entity<BodyComponent?> body)
+    {
+        foreach (var part in GetBodyParts(body))
+        {
+            if (!_childQuery.HasComp(part))
+                return part;
+        }
+
+        return null;
+    }
+
+    /// <summary>
     /// Spawn a new organ from the body's <see cref="InitialBodyComponent"/> and inserts it into the desired slot.
-    /// Not recursive, e.g. a head won't have a brain in it.
+    /// Recursive, e.g. a head will have its brain restored.
     /// Fails if this part doesn't have the slot, it's occupied or can't find a part to attach.
     /// </summary>
     /// <returns>true if a new organ was inserted into the slot</returns>
-    public bool RestoreInitialChild(Entity<BodyPartComponent?> part, [ForbidLiteral] ProtoId<OrganCategoryPrototype> slot)
+    public bool RestoreInitialChild(Entity<BodyPartComponent?> part, [ForbidLiteral] ProtoId<OrganCategoryPrototype> slot, bool recursive = true)
     {
         if (!_query.Resolve(part, ref part.Comp) ||
             !part.Comp.Slots.Contains(slot) || // slot doesn't exist on this part
-            part.Comp.Children.ContainsKey(slot) || // slot is already occupied
             _body.GetBody(part.Owner) is not {} body || // this part isn't attached to a body
             !TryComp<InitialBodyComponent>(body, out var initial)) // the body has no default organs to use
             return false;
+
+        // slot is already occupied, just restore its organs
+        if (part.Comp.Children.TryGetValue(slot, out var old))
+            return RestoreInitialOrgans(old);
 
         var organs = initial.Organs;
         if (!organs.TryGetValue(slot, out var proto))
@@ -232,11 +250,36 @@ public sealed partial class BodyPartSystem
 
         var organ = PredictedSpawnNextToOrDrop(proto, body);
         DebugTools.Assert(_body.GetCategory(organ) == slot, $"Organ {ToPrettyString(organ)} for {ToPrettyString(body)}'s initial {slot} organ had the wrong category!");
-        if (InsertOrgan(part, organ))
-            return true; // restored!
+        if (!InsertOrgan(part, organ))
+        {
+            PredictedDel(organ);
+            return false; // some system prevented inserting it
+        }
 
-        PredictedDel(organ);
-        return false; // some system prevented inserting it
+        if (recursive) // if it's a part, try to restore its children too
+            RestoreInitialOrgans(organ, recursive);
+        return true; // restored!
+    }
+
+    /// <summary>
+    /// Like <see cref="RestoreInitialChild"/> but for restoring all children of a given part.
+    /// Recursive.
+    /// </summary>
+    /// <returns>true if any organ was restored</returns>
+    public bool RestoreInitialOrgans(Entity<BodyPartComponent?> part, bool recursive = true)
+    {
+        if (!_query.Resolve(part, ref part.Comp, false))
+            return false;
+
+        // technically if you remove a lizard's tail slot somehow, it won't be restored
+        // but i don't care that's a very minor edge case
+        var restored = false;
+        foreach (var slot in part.Comp.Slots)
+        {
+            restored |= RestoreInitialChild(part, slot, recursive);
+        }
+
+        return restored;
     }
 
     /// <summary>

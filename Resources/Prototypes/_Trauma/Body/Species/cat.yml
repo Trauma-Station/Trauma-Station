@@ -1,0 +1,45 @@
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganCat
+  suffix: cat
+  components:
+  - type: UnremoveableOrgan # no cheesing it
+
+- type: entity
+  abstract: true
+  id: OrganSpriteCatExternal
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Species/Cat/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Trauma/Mobs/Species/Cat/parts.rsi
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseTail, OrganCat, OrganSpriteCatExternal ]
+  id: OrganCatTail
+  components:
+  - type: Sprite
+    state: tail
+  - type: VisualOrgan
+    data:
+      state: tail
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
+
+## Organs
+
+- type: entity
+  parent: [ OrganBaseEars, OrganCat, OrganSpriteCatExternal ]
+  id: OrganCatEars
+  components:
+  - type: VisualOrgan
+    layer: enum.HumanoidVisualLayers.Special
+    data:
+      state: ears

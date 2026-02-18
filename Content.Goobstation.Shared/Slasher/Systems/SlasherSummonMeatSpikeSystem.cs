@@ -37,7 +37,7 @@ public sealed class SlasherSummonMeatSpikeSystem : EntitySystem
 
     private void OnSummon(Entity<SlasherSummonMeatSpikeComponent> ent, ref SlasherSummonMeatSpikeEvent args)
     {
-        Spawn(ent.Comp.MeatSpikePrototype, _xform.GetMoverCoordinates(ent.Owner));
+        PredictedSpawnAtPosition(ent.Comp.MeatSpikePrototype, _xform.GetMoverCoordinates(ent.Owner));
         _audio.PlayPredicted(ent.Comp.SummonSound, ent.Owner, ent.Owner);
         _popup.PopupPredicted(Loc.GetString("slasher-summon-meatspike-popup"), ent.Owner, ent.Owner, PopupType.MediumCaution);
         args.Handled = true;
