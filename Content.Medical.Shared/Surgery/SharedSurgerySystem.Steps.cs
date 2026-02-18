@@ -141,7 +141,8 @@ public abstract partial class SharedSurgerySystem
         if (args.IsInvalid)
             return;
 
-        if (!_ignoreQuery.HasComp(args.User)
+        if (args.TargetSlots != SlotFlags.NONE
+            && !_ignoreQuery.HasComp(args.User)
             && !_ignoreQuery.HasComp(args.Tool)
             && _inventory.TryGetContainerSlotEnumerator(args.Body, out var containerSlotEnumerator, args.TargetSlots))
         {
