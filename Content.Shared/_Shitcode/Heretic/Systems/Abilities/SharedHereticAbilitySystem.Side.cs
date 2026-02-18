@@ -24,12 +24,6 @@ public abstract partial class SharedHereticAbilitySystem
 
         SubscribeLocalEvent<RealignmentComponent, StatusEffectEndedEvent>(OnStatusEnded);
         SubscribeLocalEvent<RealignmentComponent, BeforeStaminaDamageEvent>(OnBeforeRealignmentStamina);
-        SubscribeLocalEvent<RealignmentComponent, KnockDownAttemptEvent>(OnBeforeKnockdown);
-    }
-
-    private void OnBeforeKnockdown(Entity<RealignmentComponent> ent, ref KnockDownAttemptEvent args)
-    {
-        args.Cancelled = true;
     }
 
     private void OnStatusEnded(Entity<RealignmentComponent> ent, ref StatusEffectEndedEvent args)
@@ -52,9 +46,6 @@ public abstract partial class SharedHereticAbilitySystem
         StatusNew.TryRemoveStatusEffect(ent, args.DrowsinessStatus);
         StatusNew.TryRemoveStatusEffect(ent, args.SleepStatus);
 
-        RemCompDeferred<KnockedDownComponent>(ent);
-        RemCompDeferred<DelayedKnockdownComponent>(ent);
-
         if (TryComp<StaminaComponent>(ent, out var stam))
         {
             if (stam.StaminaDamage >= stam.CritThreshold)
@@ -63,23 +54,23 @@ public abstract partial class SharedHereticAbilitySystem
             Dirty(ent, stam);
         }
 
-        _standing.Stand(ent);
-        _pulling.StopAllPulls(ent, stopPuller: false);
-        if (Status.TryAddStatusEffect<PacifiedComponent>(ent, "Pacified", args.EffectTime, true))
-            StatusNew.TryUpdateStatusEffectDuration(ent, args.RealignmentStatus, out _, args.EffectTime);
+        if (TryComp(ent, out CuffableComponent? cuffable) && _cuffs.TryGetLastCuff((ent, cuffable), out var cuffs))
+            _cuffs.Uncuff(ent, null, cuffs.Value, cuffable);
 
-        if (TryComp(ent, out CuffableComponent? cuffable) && cuffable.Container.ContainedEntities.Count > 0)
+        if (TryComp(ent, out EnsnareableComponent? ensnareable) && ensnareable.IsEnsnared &&
+            ensnareable.Container.ContainedEntities.Count > 0)
         {
-            var cuffs = cuffable.Container.ContainedEntities[0];
-            _cuffs.Uncuff(ent, null, cuffs, cuffable);
+            var bola = ensnareable.Container.ContainedEntities[0];
+            _snare.ForceFree(bola, Comp<EnsnaringComponent>(bola));
         }
 
-        if (!TryComp(ent, out EnsnareableComponent? ensnareable) || !ensnareable.IsEnsnared ||
-            ensnareable.Container.ContainedEntities.Count == 0)
-            return;
+        _pulling.StopAllPulls(ent, stopPuller: false);
 
-        var bola = ensnareable.Container.ContainedEntities[0];
-        _snare.ForceFree(bola, Comp<EnsnaringComponent>(bola));
+        RemComp<KnockedDownComponent>(ent);
+        RemCompDeferred<DelayedKnockdownComponent>(ent);
+
+        if (Status.TryAddStatusEffect<PacifiedComponent>(ent, "Pacified", args.EffectTime, true))
+            StatusNew.TryUpdateStatusEffectDuration(ent, args.RealignmentStatus, out _, args.EffectTime);
     }
 
     private void OnBeforeRealignmentStamina(Entity<RealignmentComponent> ent, ref BeforeStaminaDamageEvent args)
@@ -169,7 +160,7 @@ public abstract partial class SharedHereticAbilitySystem
         if (dir.LengthSquared() < 0.001f)
             return;
 
-        _standing.Stand(ent);
+        RemComp<KnockedDownComponent>(ent);
         EnsureComp<RustChargeComponent>(ent);
         EnsureComp<RustObjectsInRadiusComponent>(ent);
         _throw.TryThrow(ent, dir.Normalized() * args.Distance, args.Speed, playSound: false, doSpin: false);

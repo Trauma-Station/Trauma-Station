@@ -1,6 +1,5 @@
+using Content.Medical.Common.Targeting;
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction.Events;
@@ -47,7 +46,7 @@ public abstract class SharedSacramentsSystem : EntitySystem
         if (args.Source == null || HasComp<SacramentsOfPowerComponent>(args.Source.Value))
             return;
 
-        _stam.TakeStaminaDamage(args.Source.Value, args.Value, applyResistances: true, source: ent);
+        _stam.TakeStaminaDamage(args.Source.Value, args.Value, source: ent);
     }
 
     private void OnBeforeDamageChange(Entity<SacramentsOfPowerComponent> ent, ref BeforeDamageChangedEvent args)
@@ -61,7 +60,7 @@ public abstract class SharedSacramentsSystem : EntitySystem
         if (args.Origin == null || HasComp<SacramentsOfPowerComponent>(args.Origin.Value))
             return;
 
-        _dmg.TryChangeDamage(args.Origin.Value,
+        _dmg.ChangeDamage(args.Origin.Value,
             args.Damage * ent.Comp.DamageReturnRatio,
             targetPart: TargetBodyPart.Vital,
             origin: ent,

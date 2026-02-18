@@ -111,7 +111,10 @@
   name: knowledge-path-side-s3-realignment-name
   description: knowledge-path-side-s3-realignment-desc
   icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: realignment }
-  productHereticKnowledge: Realignment
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - Realignment
   cost:
     KnowledgePoint: 1
   categories:

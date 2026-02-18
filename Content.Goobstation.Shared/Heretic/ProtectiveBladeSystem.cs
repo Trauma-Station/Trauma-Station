@@ -18,6 +18,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared._Goobstation.Heretic.Systems;
+using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Systems.Abilities;
 using Content.Shared.Input;
@@ -115,6 +116,7 @@ public sealed class ProtectiveBladeSystem : EntitySystem
         if (session?.AttachedEntity is not { Valid: true } player || !Exists(player) ||
             !coords.IsValid(EntityManager) || !_heretic.IsHereticOrGhoul(player) ||
             !TryComp(player, out ProtectiveBladesComponent? blades) ||
+            HasComp<SacramentsOfPowerComponent>(player) ||
             _status.HasStatusEffect(player, blades.BlockShootStatus))
             return false;
 

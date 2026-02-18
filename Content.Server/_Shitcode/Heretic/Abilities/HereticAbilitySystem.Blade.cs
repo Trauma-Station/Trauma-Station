@@ -29,7 +29,7 @@ public sealed partial class HereticAbilitySystem
         SubscribeLocalEvent<EventHereticFuriousSteel>(OnFuriousSteel);
     }
 
-    private void OnChampionStance(ref HereticChampionStanceEvent args)
+    private void OnChampionStance(HereticChampionStanceEvent args)
     {
         foreach (var part in _body.GetOrgans<WoundableComponent>(args.Heretic))
         {
