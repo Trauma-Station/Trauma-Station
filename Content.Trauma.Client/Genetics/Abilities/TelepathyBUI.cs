@@ -51,6 +51,6 @@ public sealed class TelepathyBUI : BoundUserInterface
         if (!disposing)
             return;
 
-        _window.Dispose();
+        _window?.Orphan();
     }
 }
