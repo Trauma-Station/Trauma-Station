@@ -100,6 +100,7 @@ public sealed partial class PickSurgeryWindow : FancyWindow
                 Symmetry = _symmetry,
                 Surgery = _surgeryId!.Value
             };
+            IoCManager.InjectDependencies(step); // TODO: why the fuck do i need this... it should be injected in the constructor
             OnAddStep?.Invoke(step);
         };
 
