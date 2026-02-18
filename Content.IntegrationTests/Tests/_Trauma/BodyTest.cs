@@ -32,7 +32,7 @@ public sealed class BodyTest
             {
                 foreach (var proto in protoMan.EnumeratePrototypes<EntityPrototype>())
                 {
-                    if (proto.IsTestPrototype || !proto.Components.ContainsKey(bodyName))
+                    if (pair.IsTestPrototype(proto) || !proto.Components.ContainsKey(bodyName))
                         continue;
 
                     var mob = entMan.SpawnEntity(proto.ID, map.GridCoords);
