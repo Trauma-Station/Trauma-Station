@@ -1,7 +1,6 @@
 ## Mob
 
 - type: entity
-  abstract: true
   parent: BaseSpeciesAppearance
   id: AppearanceKobold
   name: kobold appearance
