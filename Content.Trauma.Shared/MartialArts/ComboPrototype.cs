@@ -43,12 +43,6 @@ public sealed partial class ComboPrototype : IPrototype
     public int LevelExceeded = -1;
 
     /// <summary>
-    /// Name of the move
-    /// </summary>
-    [DataField(required: true)]
-    public string Name = string.Empty;
-
-    /// <summary>
     /// Should give experience?
     /// </summary>
     [DataField]

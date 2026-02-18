@@ -20,20 +20,16 @@ public sealed class RequestCharacterInfoEvent : EntityEventArgs
 [Serializable, NetSerializable]
 public sealed class CharacterInfoEvent : EntityEventArgs
 {
-    // <Trauma>
-    public readonly Dictionary<string, List<KnowledgeInfo>> Knowledge;
-    // </Trauma>
     public readonly NetEntity NetEntity;
     public readonly string JobTitle;
     public readonly Dictionary<string, List<ObjectiveInfo>> Objectives;
     public readonly string? Briefing;
 
-    public CharacterInfoEvent(NetEntity netEntity, string jobTitle, Dictionary<string, List<ObjectiveInfo>> objectives, string? briefing, Dictionary<string, List<KnowledgeInfo>> knowledge)
+    public CharacterInfoEvent(NetEntity netEntity, string jobTitle, Dictionary<string, List<ObjectiveInfo>> objectives, string? briefing)
     {
         NetEntity = netEntity;
         JobTitle = jobTitle;
         Objectives = objectives;
         Briefing = briefing;
-        Knowledge = knowledge;
     }
 }

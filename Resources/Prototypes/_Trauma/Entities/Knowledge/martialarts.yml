@@ -110,7 +110,9 @@
   components:
   - type: CanPerformCombo
     roundstartCombos:
-    - CQCConsecutive
+    - TornadoSweep
+    - Throwback
+    - ThePlasmaFist
 
 - type: entity
   parent: BaseMartialArtsKnowledge
@@ -118,7 +120,9 @@
   components:
   - type: CanPerformCombo
     roundstartCombos:
-    - CQCConsecutive
+    - BearJaws
+    - PawSlam
+    - Smokey
 
 - type: entity
   parent: BaseMartialArtsKnowledge
@@ -142,7 +146,9 @@
   components:
   - type: CanPerformCombo
     roundstartCombos:
-    - CQCConsecutive
+    - Mimechucks
+    - Smokebomb
+    - SilentPalm
 
 - type: entity
   parent: BaseMartialArtsKnowledge

@@ -1,6 +1,5 @@
 - type: combo
   id: PushKick
-  name: Push Kick
   attacks:
   - Grab
   - Harm
@@ -21,7 +20,6 @@
 
 - type: combo
   id: CircleKick
-  name: Circle Kick
   attacks:
   - Disarm
   - Disarm
@@ -38,7 +36,6 @@
 
 - type: combo
   id: SweepKick
-  name: Sweep Kick
   attacks:
   - Harm
   - Harm
@@ -61,7 +58,6 @@
 
 - type: combo
   id: SpinKick
-  name: Spin Kick
   attacks:
   - Grab
   - Harm

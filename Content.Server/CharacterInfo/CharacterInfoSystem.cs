@@ -1,8 +1,3 @@
-// <Trauma>
-using Content.Trauma.Common.Knowledge;
-using Content.Trauma.Common.Knowledge.Systems;
-using Robust.Shared.Prototypes;
-// </Trauma>
 using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
@@ -15,10 +10,6 @@ namespace Content.Server.CharacterInfo;
 
 public sealed class CharacterInfoSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    // </Trauma>
     [Dependency] private readonly JobSystem _jobs = default!;
     [Dependency] private readonly MindSystem _minds = default!;
     [Dependency] private readonly RoleSystem _roles = default!;
@@ -65,24 +56,6 @@ public sealed class CharacterInfoSystem : EntitySystem
             briefing = _roles.MindGetBriefing(mindId);
         }
 
-        // <Trauma>
-        var knowledge = new Dictionary<string, List<KnowledgeInfo>>();
-        if (_knowledge.TryGetAllKnowledgeUnits(entity) is { } found)
-        {
-            foreach (var unit in found)
-            {
-                if (unit.Comp.Hidden)
-                    continue;
-
-                var (category, info) = _knowledge.GetKnowledgeInfo(unit);
-
-                if (!knowledge.ContainsKey(category))
-                    knowledge[category] = new List<KnowledgeInfo>();
-                knowledge[category].Add(info);
-            }
-        }
-
-        RaiseNetworkEvent(new CharacterInfoEvent(GetNetEntity(entity), jobTitle, objectives, briefing, knowledge), args.SenderSession);
-        // </Trauma>
+        RaiseNetworkEvent(new CharacterInfoEvent(GetNetEntity(entity), jobTitle, objectives, briefing), args.SenderSession);
     }
 }

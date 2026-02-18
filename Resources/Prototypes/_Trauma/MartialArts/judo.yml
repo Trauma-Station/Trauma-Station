@@ -1,13 +1,15 @@
 - type: combo
   id: JudoDiscombobulate
-  name: Discombobulate
   attacks:
   - Disarm
   - Grab
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 10
+  levelRequired: 0
 
 - type: combo
   id: JudoEyePoke
-  name: Eye Poke
   attacks:
   - Disarm
   - Harm
@@ -22,7 +24,6 @@
 
 - type: combo
   id: JudoThrow
-  name: Judo Throw
   attacks:
   - Grab
   - Disarm
@@ -40,7 +41,6 @@
 
 - type: combo
   id: JudoArmbar
-  name: Armbar
   attacks:
   - Disarm
   - Disarm
@@ -55,7 +55,6 @@
 
 - type: combo
   id: JudoWheelThrow
-  name: Wheel Throw
   attacks:
   - Grab
   - Disarm
@@ -67,7 +66,6 @@
 
 - type: combo
   id: JudoGoldenBlast1
-  name: Golden Blast Part 1
   attacks:
   - Hug
   - Disarm
@@ -89,7 +87,6 @@
 
 - type: combo
   id: JudoGoldenBlast2
-  name: Golden Blast Part 2
   attacks:
   - Disarm
   - Disarm
@@ -111,7 +108,6 @@
 
 - type: combo
   id: JudoGoldenBlast3
-  name: Golden Blast Part 3
   attacks:
   - Disarm
   - Hug

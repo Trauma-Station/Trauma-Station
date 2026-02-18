@@ -1,6 +1,5 @@
 - type: combo
   id: CQCSlam
-  name: Slam
   attacks:
   - Grab
   - Harm
@@ -25,7 +24,6 @@
 
 - type: combo
   id: CQCKick
-  name: Kick
   attacks:
   - Harm
   - Harm
@@ -48,7 +46,6 @@
 
 - type: combo
   id: CQCRestrain
-  name: Restrain
   attacks:
   - Grab
   - Grab
@@ -71,7 +68,6 @@
 
 - type: combo
   id: CQCPressure
-  name: Pressure
   attacks:
   - Disarm
   - Grab
@@ -86,7 +82,6 @@
 
 - type: combo
   id: CQCConsecutive
-  name: Consecutive
   attacks:
   - Disarm
   - Hug
@@ -110,7 +105,6 @@
 
 - type: combo
   id: CQCConsecutiveAdvanced
-  name: Consecutive
   attacks:
   - Disarm
   - Hug

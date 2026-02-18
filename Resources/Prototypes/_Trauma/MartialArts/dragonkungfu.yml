@@ -1,6 +1,5 @@
 - type: combo
   id: DragonClaw
-  name: Dragon Claw
   attacks:
   - Disarm
   - Disarm
@@ -14,7 +13,6 @@
 
 - type: combo
   id: DragonTail
-  name: Dragon Tail
   attacks:
   - Disarm
   - Grab
@@ -36,7 +34,6 @@
 
 - type: combo
   id: DragonStrike
-  name: Dragon Strike
   attacks:
   - Disarm
   - Harm

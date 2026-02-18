@@ -234,12 +234,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 rollResult = (rollInnard.Item1, rollInnard.Item2 || rollResult.Item2);
                 ent.Comp.Level += rollResult.Item1;
                 var knowledgePrototype = MetaData(ent).EntityPrototype?.ID;
-                if (rollResult.Item2)
+                if (rollInnard.Item2)
                 {
-                    _popup.PopupEntity(Loc.GetString("knowledge-level-epiphany", ("knowledge", Loc.GetString(PopupString(ent)))), target, target, PopupType.Medium);
                     timesToRoll++;
                 }
             }
+            if (rollResult.Item2)
+                _popup.PopupEntity(Loc.GetString("knowledge-level-epiphany", ("knowledge", Loc.GetString(PopupString(ent)))), target, target, PopupType.Medium);
         }
         else
         {

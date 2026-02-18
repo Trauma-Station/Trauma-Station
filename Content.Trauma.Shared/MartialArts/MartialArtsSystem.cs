@@ -108,9 +108,6 @@ public sealed partial class MartialArtsSystem : EntitySystem
                 Dirty(ent, multiplier);
             }
         }
-
-        if (_netManager.IsClient)
-            return;
     }
 
     #region Event Methods

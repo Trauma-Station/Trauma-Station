@@ -1,6 +1,5 @@
 - type: combo
   id: DropKick
-  name: Flying DropKick
   attacks:
   - Disarm
   - Disarm
@@ -18,7 +17,6 @@
 
 - type: combo
   id: HeadRip
-  name: Head Rip
   attacks:
   - Harm
   - Harm
@@ -33,7 +31,6 @@
 
 - type: combo
   id: TearDown
-  name: Tear Down
   attacks:
   - Harm
   - Disarm
@@ -49,7 +46,6 @@
 
 - type: combo
   id: Slam
-  name: Hellish Slam
   attacks:
   - Disarm
   - Harm
