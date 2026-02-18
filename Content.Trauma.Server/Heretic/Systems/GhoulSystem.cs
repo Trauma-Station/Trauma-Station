@@ -438,7 +438,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         _antag.SendBriefing(ent, brief, Color.MediumPurple, sound);
     }
 
-    private void OnStartup(Entity<GhoulComponent> ent, ref ComponentStartup args)
+    private void OnMapInit(Entity<GhoulComponent> ent, ref MapInitEvent args)
     {
         GhoulifyEntity(ent);
     }
