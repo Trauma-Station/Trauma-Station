@@ -74,8 +74,14 @@ public sealed partial class KnowledgeComponent : Component
     public int BonusExperience;
 
     /// <summary>
-    /// Temporary experience boosts that are granted by certain equipment.
+    /// Stores the last time this component was given exp.
     /// </summary>
     [DataField]
     public uint LastExperienceTick;
+
+    /// <summary>
+    /// Determines if component uses sleep functionality.
+    /// </summary>
+    [DataField]
+    public bool OnSleep = false;
 }

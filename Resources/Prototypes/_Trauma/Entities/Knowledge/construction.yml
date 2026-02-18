@@ -4,7 +4,7 @@
   abstract: true
   components:
   - type: Knowledge
-    categories: Construction
+    category: Construction
     color: "#0ba881"
     experienceCost: 20
 

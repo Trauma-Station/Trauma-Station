@@ -66,23 +66,67 @@
   levelRequired: 0
 
 - type: combo
-  id: JudoGoldenBlast
-  name: Golden Blast
+  id: JudoGoldenBlast1
+  name: Golden Blast Part 1
   attacks:
   - Hug
   - Disarm
   - Hug
   - Grab
-  # - Disarm
-  # - Disarm
-  # - Grab
-  # - Hug
-  # - Disarm
-  # - Disarm
-  # - Grab
-  # - Hug
+  userEffects:
+  - !type:MartialArtsSaying
+    randomSayings:
+    - judo-saying-gold
+    randomSayingsDowned:
+    - judo-saying-gold
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 5
+  - !type:TakeStaminaDamage
+    amount: 50
+  levelRequired: 50
+
+- type: combo
+  id: JudoGoldenBlast2
+  name: Golden Blast Part 2
+  attacks:
+  - Disarm
+  - Disarm
+  - Grab
+  - Hug
+  userEffects:
+  - !type:MartialArtsSaying
+    randomSayings:
+    - judo-saying-en
+    randomSayingsDowned:
+    - judo-saying-en
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 10
+  - !type:TakeStaminaDamage
+    amount: 100
+  levelRequired: 50
+
+- type: combo
+  id: JudoGoldenBlast3
+  name: Golden Blast Part 3
+  attacks:
+  - Disarm
+  - Hug
+  - Grab
+  - Hug
+  userEffects:
+  - !type:MartialArtsSaying
+    randomSayings:
+    - judo-saying-blast
+    randomSayingsDowned:
+    - judo-saying-blast
   opponentEffects:
   - !type:GenericStatusEffect
     key: Paralyze
     time: 30
-  levelRequired: 0
+  - !type:TakeStaminaDamage
+    amount: 120
+  levelRequired: 50

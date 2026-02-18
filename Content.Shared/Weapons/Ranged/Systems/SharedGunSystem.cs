@@ -529,15 +529,16 @@ public abstract partial class SharedGunSystem : EntitySystem
         var recoilScale = 1.0f;
         if (TryComp<KnowledgeHolderComponent>(user, out _))
         {
-            if (TryComp<KnowledgeComponent>(_knowledge.TryGetKnowledgeUnit(user.Value, "ShootingKnowledge"), out var knowledge))
+            var shooting = _knowledge.TryGetKnowledgeUnit(user.Value, "ShootingKnowledge");
+            if (shooting is { } shootingTrue)
             {
-                if (knowledge.Level < 26)
+                if (shootingTrue.Comp.Level < 26)
                 {
-                    recoilScale = 3.0f - (float) knowledge.Level / 26.0f - ((float) knowledge.Level / 26.0f * (float) knowledge.Level / 26.0f);
+                    recoilScale = 3.0f - (float) shootingTrue.Comp.Level / 26.0f - _knowledge.SharpCurve(shootingTrue);
                 }
-                else if (knowledge.Level > 50)
+                else if (shootingTrue.Comp.Level > 50)
                 {
-                    recoilScale = 1.0f - ((float) (knowledge.Level - 50) / 50.0f * (float) (knowledge.Level - 50) / 50.0f);
+                    recoilScale = 1.0f - ((float) (shootingTrue.Comp.Level - 50) / 50.0f * (float) (shootingTrue.Comp.Level - 50) / 50.0f);
                 }
             }
             else

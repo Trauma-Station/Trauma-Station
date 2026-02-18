@@ -46,6 +46,7 @@ public sealed partial class KnowledgeTab : Control
             return;
 
         knowledgeTab.KnowledgePlaceholder.Visible = false;
+        knowledgeTab.KnowledgeBox.SeparationOverride = 10;
         foreach (var (groupId, conditions) in doohickeys)
         {
             var boxContainer = new BoxContainer

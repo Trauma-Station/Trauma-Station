@@ -4,6 +4,7 @@
   abstract: true
   components:
   - type: Knowledge
+    category: MartialArt
     experienceCost: 10
     color: "#c70000"
   - type: MartialArtsKnowledge
@@ -35,7 +36,9 @@
   components:
   - type: CanPerformCombo
     roundstartCombos:
-    - JudoGoldenBlast
+    - JudoGoldenBlast1
+    - JudoGoldenBlast2
+    - JudoGoldenBlast3
     - JudoThrow
     - JudoArmbar
     - JudoDiscombobulate # Due to supercode this needs to be below Armbar, otherwise it takes priority
@@ -100,3 +103,51 @@
     - SleepingCarpKneeHaul
     - SleepingCarpCrashingWaves
   - type: NoGun
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtPlasmaFist
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - CQCConsecutive
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtSpaceBear
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - CQCConsecutive
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtBoxing
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - CQCConsecutive
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtDrunkfu
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - CQCConsecutive
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtMimejutsu
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - CQCConsecutive
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtAdminfu
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - CQCConsecutive

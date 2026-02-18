@@ -2,7 +2,9 @@
 using Content.Trauma.Common.Throwing;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Systems;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Random;
 // </Trauma>
 using System.Numerics;
 using Content.Shared.Administration.Logs;
@@ -39,6 +41,7 @@ public sealed class ThrowingSystem : EntitySystem
     // <Trauma>
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+    [Dependency] private readonly SharedGunSystem _gun = default!;
     // </Trauma>
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -205,22 +208,42 @@ public sealed class ThrowingSystem : EntitySystem
             compensateFriction = false; // cannot calculate this if there is no friction
 
         // <Trauma>
+        var throwingRandomness = 0.0f;
         if (TryComp<KnowledgeHolderComponent>(user, out _))
         {
             if (_knowledge.TryGetKnowledgeUnit(user.Value, "StrengthKnowledge") is { } strength)
             {
                 if (_knowledge.GetMastery(strength) < 2)
                 {
-                    baseThrowSpeed *= 1 - _knowledge.InverseSharpCurve(strength, 26, 26.0f) / (26.0f * 2.0f);
+                    baseThrowSpeed *= 0.5f + _knowledge.SharpCurve(strength, 0, 26.0f) / (2.0f);
                 }
                 else if (_knowledge.GetMastery(strength) > 2)
                 {
-                    baseThrowSpeed *= 1 + 0.5f * _knowledge.SharpCurve(strength, 50, 50.0f);
+                    baseThrowSpeed *= 1 + 0.5f * _knowledge.SharpCurve(strength, -50, 50.0f);
                 }
             }
-            var ev = new AddExperience("ThrowingKnowledge", 1);
-            RaiseLocalEvent(user.Value, ref ev);
+            else
+                baseThrowSpeed *= 0.5f;
+            if (_knowledge.TryGetKnowledgeUnit(user.Value, "ThrowingKnowledge") is { } throwing)
+            {
+                if (_knowledge.GetMastery(throwing) < 2)
+                {
+                    throwingRandomness = 1.0f - _knowledge.SharpCurve(throwing, 0, 26.0f);
+                    throwingRandomness *= _gun.Random(uid).NextFloat(-0.5f, 0.5f) * 3.14159f;
+                }
+                else if (_knowledge.GetMastery(throwing) > 2)
+                {
+                    baseThrowSpeed *= 1 + 0.2f * _knowledge.SharpCurve(throwing, -50, 50.0f);
+                }
+            }
+            else
+                throwingRandomness = _gun.Random(uid).NextFloat(-0.5f, 0.5f) * 3.14159f;
+            var evThrowing = new AddExperience("ThrowingKnowledge", 1);
+            RaiseLocalEvent(user.Value, ref evThrowing);
+            var evStrength = new AddExperience("StrengthKnowledge", 1);
+            RaiseLocalEvent(user.Value, ref evStrength);
         }
+        direction = new Angle(throwingRandomness).RotateVec(direction);
         // </Trauma>
 
         // Set the time the item is supposed to be in the air so we can apply OnGround status.

@@ -1,6 +1,5 @@
 - type: entity
   id: BaseKnowledge
-  name: BaseKnowledge
   abstract: true
   components:
   - type: Knowledge
@@ -23,6 +22,7 @@
   components:
   - type: Knowledge
     category: Physical
+    # onSleep: true
 
 - type: entity
   id: BaseWarKnowledge
@@ -49,7 +49,7 @@
     category: Scientific
 
 - type: entity
-  parent: BasePhysicalKnowledge
+  parent: BaseWarKnowledge
   id: MeleeKnowledge
   components:
   - type: Knowledge

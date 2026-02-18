@@ -60,6 +60,7 @@ knowledge-AthleticsKnowledge = Athletics
 knowledge-MagicalLiteracyKnowledge = Magical Literacy
 knowledge-LiteracyKnowledge = Literacy
 knowledge-JanitorKnowledge = Janitor
+knowledge-ThrowingKnowledge = Throwing
 
 language-curse-pain = You hear bad language!
 

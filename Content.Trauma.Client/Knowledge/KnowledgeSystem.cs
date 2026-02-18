@@ -113,18 +113,12 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
 
     public void OnUpdateExperience(Entity<KnowledgeHolderComponent> ent, ref UpdateExperience args)
     {
-        Log.Debug("Received UpdateExperience event, checking if it pertains to the local player.");
-
         var localPlayer = _playerManager.LocalSession?.AttachedEntity;
         if (localPlayer != ent.Owner)
             return;
 
-        Log.Debug($"Received experience update for {ent.Owner}");
-
         if (_activeWindow == null || !_activeWindow.TryGetTarget(out var window))
             return;
-
-        Log.Debug("Active character window found, updating experience display.");
 
         OnCharacterWindowOpened(window);
     }

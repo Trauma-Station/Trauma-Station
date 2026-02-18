@@ -80,7 +80,7 @@ public abstract partial class SharedGunSystem
     {
         var (uid, comp) = ent;
         var timeSinceLastFire = (curTime - comp.LastFire).TotalSeconds;
-        var newTheta = MathHelper.Clamp(comp.CurrentAngle.Theta + spreadScale * comp.AngleIncreaseModified.Theta - comp.AngleDecayModified.Theta * timeSinceLastFire, comp.MinAngleModified.Theta, comp.MaxAngleModified.Theta);
+        var newTheta = MathHelper.Clamp(comp.CurrentAngle.Theta + spreadScale * comp.AngleIncreaseModified.Theta - comp.AngleDecayModified.Theta * timeSinceLastFire, comp.MinAngleModified.Theta + 0.05f * Math.Max(spreadScale - 1.0f, 0), comp.MaxAngleModified.Theta);
         comp.CurrentAngle = new Angle(newTheta);
         comp.LastFire = comp.NextFire;
 
@@ -95,9 +95,9 @@ public abstract partial class SharedGunSystem
         random *= angleEv.Modifier;
         // </Goob>
 
-        var spread = comp.CurrentAngle.Theta * random * spreadScale + (0.05f * spreadScale) * random;
+        var spread = comp.CurrentAngle.Theta * random * spreadScale;
         var angle = new Angle(direction.Theta + comp.CurrentAngle.Theta * random * spreadScale);
-        DebugTools.Assert(spread <= comp.MaxAngleModified.Theta * spreadScale);
+        //DebugTools.Assert(spread <= comp.MaxAngleModified.Theta * spreadScale || spread <= comp.MinAngleModified.Theta + 0.05f * Math.Max(spreadScale - 1.0f, 0));
         return angle;
     }
 }

@@ -59,6 +59,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
 {
     // <Trauma>
     [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+    [Dependency] private readonly SharedGunSystem _gun = default!;
     // </Trauma>
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly IMapManager MapManager = default!;
@@ -578,7 +579,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // </Trauma>
         if (Deleted(target) ||
             !HasComp<DamageableComponent>(target) ||
-            _random.Prob(Math.Max(1.0f - knowledgeMiss,0)) || // Trauma - Knowledge
+            _gun.Random(target.Value).Prob(Math.Max(1.0f - knowledgeMiss,0)) || // Trauma - Knowledge
             !TryComp(target, out TransformComponent? targetXform)) // Goob edit
         {
             // Leave IsHit set to true, because the only time it's set to false
@@ -715,8 +716,8 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                 knowledgeMiss = ((float) meleeUnit.Comp.Level + 2) / 26.0f;
             }
         }
-
-        if (_random.Prob(Math.Max(1.0f - knowledgeMiss, 0)))
+        
+        if (_gun.Random(user).Prob(Math.Max(1.0f - knowledgeMiss, 0)))
         {
             entities.Clear();
             entities.Add(user);
@@ -913,7 +914,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (entities.Count > 0 && entities.All(entity => MobState.IsAlive(entity) && !MobState.IsCritical(entity)))
         {
             var evKnowledge = new AddExperience("MeleeKnowledge", entities.Count);
-        RaiseLocalEvent(user, ref evKnowledge);
+            RaiseLocalEvent(user, ref evKnowledge);
         }
         // </Trauma>
         return true;
@@ -1043,7 +1044,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                 knowledgeMiss = ((float) meleeUnit.Comp.Level + 10) / 26.0f;
             }
         }
-        if (knowledgeMiss < 1.0f && _random.Prob(Math.Max(1.0f - knowledgeMiss, 0)))
+        if (knowledgeMiss < 1.0f && _gun.Random(user).Prob(Math.Max(1.0f - knowledgeMiss, 0)))
             return true;
         // </Trauma>
 

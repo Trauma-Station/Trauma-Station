@@ -1,10 +1,10 @@
 - type: entity
   parent: BaseKnowledge
   id: BaseLanguageKnowledge
-  name: Language Knowledge
   abstract: true
   components:
   - type: Knowledge
+    category: Language
     level: 26
     experienceCost: 4
     color: "#ADD8E6"

@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Shared.Bed.Sleep;
 using Content.Shared.Body;
 using Content.Shared.Construction;
 using Content.Shared.Damage.Systems;
@@ -24,7 +25,6 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 {
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedLanguageSystem _language = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -33,6 +33,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly BodySystem _body = default!;
+
+    private uint _lastUpdateTick;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -48,10 +50,34 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         SubscribeLocalEvent<KnowledgeContainerComponent, ConstructionGetGroupsEvent>(OnConstructionGetGroupEvent);
 
-        SubscribeLocalEvent<KnowledgeContainerComponent, ComponentInit>(OnComponentInit);
+        //SubscribeLocalEvent<KnowledgeContainerComponent, ComponentInit>(OnComponentInit);
 
         //Experience Methods
         SubscribeLocalEvent<KnowledgeHolderComponent, AddExperience>(OnAddExperience);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_timing.CurTick.Value < _lastUpdateTick + (uint) (10.0f * _timing.TickRate))
+            return;
+
+        var query = EntityQueryEnumerator<KnowledgeHolderComponent>();
+        while (query.MoveNext(out var ent, out var comp))
+        {
+            var knowledgeUnits = TryGetAllKnowledgeUnits(ent);
+
+            if (knowledgeUnits == null)
+                continue;
+
+            foreach (var knowledgeUnit in knowledgeUnits)
+            {
+                if (RollForLevelUp(knowledgeUnit, (ent, comp)))
+                    return;
+            }
+        }
+        _lastUpdateTick = _timing.CurTick.Value;
     }
 
     private void OnKnowledgeContainerShutdown(Entity<KnowledgeContainerComponent> ent, ref ComponentShutdown args)
@@ -136,6 +162,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         if (TryGetKnowledgeUnit(ent, args.KnowledgeType) is not { } knowledgeUnit || !TryComp<KnowledgeComponent>(knowledgeUnit, out var knowledgeComponent))
         {
+            _random.SetSeed((int) _timing.CurTick.Value);
             if (_random.Prob(0.2f))
                 TryAddKnowledgeUnit(ent, (args.KnowledgeType, 0));
             return;
@@ -148,38 +175,75 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public void ExperienceUpdate(Entity<KnowledgeComponent> ent, Entity<KnowledgeHolderComponent> target, ref AddExperience args)
     {
-        if (_timing.CurTick.Value < ent.Comp.LastExperienceTick + (uint) (1.0f * _timing.TickRate))
+        if (_timing.CurTick.Value < ent.Comp.LastExperienceTick + (uint) (1.0f * _timing.TickRate) || ent.Comp.Level > 100)
             return;
 
         ent.Comp.LastExperienceTick = _timing.CurTick.Value;
 
-        (int, bool) rollResult = (0, false);
 
-        var getMastery = GetMastery(ent);
         ent.Comp.Experience += args.Experience + ent.Comp.BonusExperience;
+
+        RollForLevelUp(ent, target);
+    }
+
+    /// <summary>
+    /// Rolls Levelup. True on roll. False on not.
+    /// </summary>
+    /// <param name="ent"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public bool RollForLevelUp(Entity<KnowledgeComponent> ent, Entity<KnowledgeHolderComponent> target)
+    {
+        var getMastery = GetMastery(ent);
+        (int, bool) rollResult = (0, false);
 
         if (ent.Comp.Experience >= ent.Comp.ExperienceCost && ent.Comp.Level < 100)
         {
             _random.SetSeed((int) _timing.CurTick.Value);
+            if (ent.Comp.OnSleep)
+            {
+                if (_mobState.IsCritical(target))
+                {
+                    int diceType = DiceDictionary(ent);
+                    rollResult = RollPenetrating(diceType);
+                    Log.Debug($"Sleepy {ToPrettyString(ent)} needs to roll zenkai on {ToPrettyString(target)}. Suceeded? {rollResult.Item2}");
+                    if (!(rollResult.Item2))
+                        return false;
+                    ent.Comp.Level += rollResult.Item1;
+                    _damageable.HealEvenly(ent.Owner, 150);
+                    Log.Debug($"{ToPrettyString(ent.Owner)}: zenkai boost");
+                }
+                else if (TryComp<SleepingComponent>(target, out _))
+                {
+                    int diceType = DiceDictionary(ent);
+                    rollResult = RollPenetrating(diceType);
+                    Log.Debug($"Sleepy {ToPrettyString(ent)} needs to roll on {ToPrettyString(target)}. Suceeded? {rollResult.Item2}");
+                    if (!(rollResult.Item2))
+                        return false;
+                }
+                else
+                    return false;
+            }
             int timesToRoll = ent.Comp.Experience / ent.Comp.ExperienceCost;
+            (int, bool) rollInnard;
             for (int i = 0; i < timesToRoll; i++)
             {
                 ent.Comp.Experience -= ent.Comp.ExperienceCost;
-                int diceType = ent.Comp.Level switch
-                {
-                    >= 88 => 3,
-                    >= 76 => 4,
-                    >= 51 => 6,
-                    >= 26 => 8,
-                    >= 1 => 12,
-                    _ => 20,
-                };
-                rollResult = RollPenetrating(diceType);
+                int diceType = DiceDictionary(ent);
+                rollInnard = RollPenetrating(diceType);
+                rollResult = (rollInnard.Item1, rollInnard.Item2 || rollResult.Item2);
                 ent.Comp.Level += rollResult.Item1;
                 var knowledgePrototype = MetaData(ent).EntityPrototype?.ID;
                 if (rollResult.Item2)
+                {
                     _popup.PopupEntity(Loc.GetString("knowledge-level-epiphany", ("knowledge", Loc.GetString(PopupString(ent)))), target, target, PopupType.Medium);
+                    timesToRoll++;
+                }
             }
+        }
+        else
+        {
+            return false;
         }
 
         if (ent.Comp.Level > 100)
@@ -193,12 +257,24 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         Dirty(ent);
         Dirty(target);
+        return true;
+    }
+
+    private int DiceDictionary(Entity<KnowledgeComponent> ent)
+    {
+        return ent.Comp.Level switch
+        {
+            >= 88 => 3,
+            >= 76 => 4,
+            >= 51 => 6,
+            >= 26 => 8,
+            >= 1 => 12,
+            _ => 20,
+        };
     }
 
     public override (string Category, KnowledgeInfo Info) GetKnowledgeInfo(Entity<KnowledgeComponent> ent)
     {
-        var category = _protoMan.Index(ent.Comp.Category);
-
         var knowledgeInfo = new KnowledgeInfo("", "", ent.Comp.Color, ent.Comp.Sprite);
         var knowledgePrototype = MetaData(ent).EntityPrototype?.ID;
         knowledgeInfo.Description = Loc.GetString("knowledge-info-description", ("level", ent.Comp.Level), ("mastery", GetMasteryString(ent)), ("exp", ent.Comp.Experience));
@@ -223,7 +299,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         {
             knowledgeInfo.Name = Loc.GetString($"knowledge-{knowledgePrototype}");
         }
-        return (Loc.GetString(category.Name), knowledgeInfo);
+        return (ent.Comp.Category, knowledgeInfo);
     }
 
     /// <summary>
@@ -692,13 +768,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         return ent.Comp.KnowledgeContainer;
     }
 
-    private void OnComponentInit(Entity<KnowledgeContainerComponent> ent, ref ComponentInit args)
-    {
-        ent.Comp.KnowledgeContainer = _container.EnsureContainer<Container>(ent.Owner, KnowledgeContainerComponent.ContainerId);
+    //private void OnComponentInit(Entity<KnowledgeContainerComponent> ent, ref ComponentInit args)
+    //{
+    //    ent.Comp.KnowledgeContainer = _container.EnsureContainer<Container>(ent.Owner, KnowledgeContainerComponent.ContainerId);
 
-        ent.Comp.KnowledgeContainer.ShowContents = true;
-        Dirty(ent);
-    }
+    //    ent.Comp.KnowledgeContainer.ShowContents = true;
+    //    Dirty(ent);
+    //}
 
     private string PopupString(EntityUid knowledgeUnit)
     {
