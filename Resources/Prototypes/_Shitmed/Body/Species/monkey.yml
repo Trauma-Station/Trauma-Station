@@ -6,11 +6,11 @@
   name: monkey appearance
   components:
   # TODO SHITMED: displacements??
-  # TODO SHITMED: tail
   - type: InitialBody
     organs:
       Torso: OrganMonkeyTorso
       Head: OrganMonkeyHead
+      Tail: OrganMonkeyTail
       ArmLeft: OrganMonkeyArmLeft
       ArmRight: OrganMonkeyArmRight
       HandRight: OrganMonkeyHandRight
@@ -56,12 +56,16 @@
 ## Parts
 
 - type: entity
-  parent: [ OrganBaseTorso, OrganMonkeyExternal ]
+  parent: [ OrganBaseTorsoTailed, OrganMonkeyExternal ]
   id: OrganMonkeyTorso
 
 - type: entity
   parent: [ OrganBaseHead, OrganMonkeyExternal ]
   id: OrganMonkeyHead
+
+- type: entity
+  parent: [ OrganBaseTail, OrganMonkeyExternal ]
+  id: OrganMonkeyTail
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganMonkeyExternal ]
