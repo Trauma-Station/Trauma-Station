@@ -13,7 +13,7 @@ knowledge-level-epiphany = You have reached a sudden epiphany regarding { $knowl
 
 knowledge-info-description = {$mastery}
 
-knowledge-language-speaks-understands = {$language} : Speaks and understands 
+knowledge-language-speaks-understands = {$language} : Speaks and understands
 knowledge-language-speaks = {$language} : Speaks
 knowledge-language-understands = {$language} : Understands
 
