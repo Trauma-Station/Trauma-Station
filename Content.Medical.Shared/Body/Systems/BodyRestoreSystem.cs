@@ -30,7 +30,7 @@ public sealed class BodyRestoreSystem : EntitySystem
     public void RestoreBody(Entity<BodyComponent?> body)
     {
         if (_part.GetRootPart(body) is {} root)
-            _part.RestoreInitialOrgans(root); // recursively restore the body from its prototype
+            _part.RestoreInitialOrgans(root.AsNullable()); // recursively restore the body from its prototype
         else
             Log.Error($"Tried to store body {ToPrettyString(body)} which had no root part!");
     }
