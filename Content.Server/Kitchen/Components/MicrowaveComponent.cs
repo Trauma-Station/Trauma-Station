@@ -112,10 +112,10 @@ namespace Content.Server.Kitchen.Components
 
         // <Trauma>
         /// <summary>
-        ///
+        /// Stores the last user of the microwave for xp delivery.
         /// </summary>
         [DataField]
-        public EntityUid? lastKnownKnowledgeHolder;
+        public EntityUid? LastKnownKnowledgeHolder;
         // </Trauma
     }
 }

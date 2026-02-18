@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 // <Trauma>
 using Content.Trauma.Common.MartialArts;
 using Content.Shared.FixedPoint;

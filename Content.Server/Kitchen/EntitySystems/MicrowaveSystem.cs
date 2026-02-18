@@ -379,7 +379,7 @@ namespace Content.Server.Kitchen.EntitySystems
             UpdateUserInterfaceState(ent, ent.Comp);
 
             // <Trauma>
-            ent.Comp.lastKnownKnowledgeHolder = args.User;
+            ent.Comp.LastKnownKnowledgeHolder = args.User;
             // </Trauma>
         }
 
@@ -667,7 +667,7 @@ namespace Content.Server.Kitchen.EntitySystems
                 if (active.PortionedRecipe.Item1 != null)
                 {
                     // <Trauma>
-                    if (microwave.lastKnownKnowledgeHolder is { } chef)
+                    if (microwave.LastKnownKnowledgeHolder is { } chef)
                     {
                         var ev = new AddExperience("MartialArtCQCChef", active.PortionedRecipe.Item2);
                         RaiseLocalEvent(chef, ref ev);

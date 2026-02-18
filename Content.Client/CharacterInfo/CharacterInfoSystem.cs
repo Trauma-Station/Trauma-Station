@@ -52,8 +52,7 @@ public sealed class CharacterInfoSystem : EntitySystem
         string Job,
         Dictionary<string, List<ObjectiveInfo>> Objectives,
         string? Briefing,
-        string EntityName,
-        Dictionary<string, List<KnowledgeInfo>> Knowledge // Trauma
+        string EntityName
     );
 
     /// <summary>

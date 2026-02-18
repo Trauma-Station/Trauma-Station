@@ -623,7 +623,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return;
 
         // <Trauma>
-        if (MobState.IsAlive(target.Value) && !MobState.IsCritical(target.Value))
+        if (MobState.IsAlive(target.Value))
         {
             var evKnowledge = new AddExperience("MeleeKnowledge", 1);
             RaiseLocalEvent(user, ref evKnowledge);

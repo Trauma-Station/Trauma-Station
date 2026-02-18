@@ -28,6 +28,7 @@
         - id: BookMagicalLiteracy
         - id: BookLiteracy
         - id: BookJanitor
+        - id: BookLanguageTauCeti
 
 - type: entityTable
   id: RandomSkillbook
@@ -43,6 +44,7 @@
     - id: BookMagicalLiteracy
     - id: BookLiteracy
     - id: BookJanitor
+    - id: BookLanguageTauCeti
 
 - type: entity
   parent: BaseItem
@@ -201,4 +203,17 @@
       ThrowingKnowledge: 26
     experience:
       ThrowingKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookLanguageTauCeti
+  name: old book
+  description: A small, black manual. Its a book on the basics of the Tau Ceti language.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      language-TauCetiBasic: 26
+    experience:
+      language-TauCetiBasic: 1
     doAfter: 2

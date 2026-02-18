@@ -1,24 +1,19 @@
 // <Trauma>
-using Content.Goobstation.Common.CCVar;
-using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
-using Content.Trauma.Common.MartialArts;
-using Content.Goobstation.Common.Weapons;
-using Content.Lavaland.Common.Weapons;
-using Content.Medical.Common.Targeting;
-using Content.Shared.Coordinates;
-using Content.Shared.Random.Helpers;
-using Robust.Shared.Physics.Components;
 // </Trauma>
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Construction; // Goobstation
+using Content.Goobstation.Common.Weapons;
+using Content.Lavaland.Common.Weapons;
+using Content.Medical.Common.Targeting;
 using Content.Server.Construction.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Construction;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Construction.Steps;
+using Content.Shared.Coordinates;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -27,12 +22,18 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mind.Components; // Goobstation
+using Content.Shared.Random.Helpers;
 using Content.Shared.Storage;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Knowledge.Systems;
+using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Shared.Toolshed.TypeParsers;
 
 namespace Content.Server.Construction
 {
@@ -364,11 +365,8 @@ namespace Content.Server.Construction
 
             // <Trauma>
             var userConstructionGroup = AvailableConstructionGroups(user);
-            if (TryComp<KnowledgeHolderComponent>(user, out _) && !constructionPrototype.Groups.Keys.All(group => userConstructionGroup.ContainsKey(group)))
-            {
-                Log.Error($"User {ToPrettyString(user)} tried to start a construction {prototype} that it doesn't have knowledge about!");
+            if (!CheckConstructionKnowledge(user, userConstructionGroup, constructionPrototype, prototype))
                 return false;
-            }
             // </Trauma>
 
             if (_whitelistSystem.IsWhitelistFail(constructionPrototype.EntityWhitelist, user))
@@ -434,11 +432,7 @@ namespace Content.Server.Construction
             // </Goobstation>
 
             // <Trauma>
-            EnsureComp<KnowledgeConstructionModifierComponent>(item, out var knowledgeConstructionModifier);
-            foreach (var construct in constructionPrototype.Groups)
-            {
-                knowledgeConstructionModifier.LevelDeltas[construct.Key] = construct.Value;
-            }
+            EnsureConstructionKnowledge(item, constructionPrototype);
             // </Trauma>
 
             // Just in case this is a stack, attempt to merge it. If it isn't a stack, this will just normally pick up
@@ -483,9 +477,8 @@ namespace Content.Server.Construction
 
             // <Trauma>
             var userConstructionGroup = AvailableConstructionGroups(user);
-            if (TryComp<KnowledgeHolderComponent>(user, out _) && !constructionPrototype.Groups.Keys.All(group => userConstructionGroup.ContainsKey(group)))
+            if (!CheckConstructionKnowledge(user, userConstructionGroup, constructionPrototype, prototypeName))
             {
-                Log.Error($"User {ToPrettyString(user)} tried to start a construction {prototypeName} that it doesn't have knowledge about!");
                 RaiseNetworkEvent(new AckStructureConstructionMessage(ack), user);
                 return false;
             }
@@ -647,11 +640,7 @@ namespace Content.Server.Construction
             // </Goobstation>
 
             // <Trauma>
-            EnsureComp<KnowledgeConstructionModifierComponent>(structure, out var knowledgeConstructionModifier);
-            foreach (var construct in constructionPrototype.Groups)
-            {
-                knowledgeConstructionModifier.LevelDeltas[construct.Key] = construct.Value;
-            }
+            EnsureConstructionKnowledge(structure, constructionPrototype);
             // </Trauma>
 
             RaiseNetworkEvent(new AckStructureConstructionMessage(ack, GetNetEntity(structure)), user);

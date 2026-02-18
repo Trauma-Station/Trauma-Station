@@ -209,40 +209,8 @@ public sealed class ThrowingSystem : EntitySystem
 
         // <Trauma>
         var throwingRandomness = 0.0f;
-        if (TryComp<KnowledgeHolderComponent>(user, out _))
-        {
-            if (_knowledge.TryGetKnowledgeUnit(user.Value, "StrengthKnowledge") is { } strength)
-            {
-                if (_knowledge.GetMastery(strength) < 2)
-                {
-                    baseThrowSpeed *= 0.5f + _knowledge.SharpCurve(strength, 0, 26.0f) / (2.0f);
-                }
-                else if (_knowledge.GetMastery(strength) > 2)
-                {
-                    baseThrowSpeed *= 1 + 0.5f * _knowledge.SharpCurve(strength, -50, 50.0f);
-                }
-            }
-            else
-                baseThrowSpeed *= 0.5f;
-            if (_knowledge.TryGetKnowledgeUnit(user.Value, "ThrowingKnowledge") is { } throwing)
-            {
-                if (_knowledge.GetMastery(throwing) < 2)
-                {
-                    throwingRandomness = 1.0f - _knowledge.SharpCurve(throwing, 0, 26.0f);
-                    throwingRandomness *= _gun.Random(uid).NextFloat(-0.5f, 0.5f) * 3.14159f;
-                }
-                else if (_knowledge.GetMastery(throwing) > 2)
-                {
-                    baseThrowSpeed *= 1 + 0.2f * _knowledge.SharpCurve(throwing, -50, 50.0f);
-                }
-            }
-            else
-                throwingRandomness = _gun.Random(uid).NextFloat(-0.5f, 0.5f) * 3.14159f;
-            var evThrowing = new AddExperience("ThrowingKnowledge", 1);
-            RaiseLocalEvent(user.Value, ref evThrowing);
-            var evStrength = new AddExperience("StrengthKnowledge", 1);
-            RaiseLocalEvent(user.Value, ref evStrength);
-        }
+        if (user != null)
+            (baseThrowSpeed, throwingRandomness) = RandomSkillThrowingAngle(user.Value, baseThrowSpeed);
         direction = new Angle(throwingRandomness).RotateVec(direction);
         // </Trauma>
 
