@@ -32,6 +32,6 @@ public sealed class BodyRestoreSystem : EntitySystem
         if (_part.GetRootPart(body) is {} root)
             _part.RestoreInitialOrgans(root.AsNullable()); // recursively restore the body from its prototype
         else
-            Log.Error($"Tried to store body {ToPrettyString(body)} which had no root part!");
+            Log.Error($"Tried to restore body {ToPrettyString(body)} which had no root part!");
     }
 }
