@@ -1,7 +1,15 @@
+using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared.CombatMode.Pacification;
+using Content.Shared.Cuffs.Components;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Events;
+using Content.Shared.Ensnaring.Components;
 using Content.Shared.Hands.Components;
 using Content.Shared.Heretic;
 using Content.Shared.Projectiles;
+using Content.Shared.StatusEffect;
+using Content.Shared.Stunnable;
 
 namespace Content.Shared._Shitcode.Heretic.Systems.Abilities;
 
@@ -11,7 +19,75 @@ public abstract partial class SharedHereticAbilitySystem
     {
         SubscribeLocalEvent<EventHereticRustCharge>(OnRustCharge);
         SubscribeLocalEvent<EventHereticIceSpear>(OnIceSpear);
+        SubscribeLocalEvent<EventHereticRealignment>(OnRealignment);
         SubscribeLocalEvent<EventEmp>(OnEmp);
+
+        SubscribeLocalEvent<RealignmentComponent, StatusEffectEndedEvent>(OnStatusEnded);
+        SubscribeLocalEvent<RealignmentComponent, BeforeStaminaDamageEvent>(OnBeforeRealignmentStamina);
+        SubscribeLocalEvent<RealignmentComponent, KnockDownAttemptEvent>(OnBeforeKnockdown);
+    }
+
+    private void OnBeforeKnockdown(Entity<RealignmentComponent> ent, ref KnockDownAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnStatusEnded(Entity<RealignmentComponent> ent, ref StatusEffectEndedEvent args)
+    {
+        if (args.Key != "Pacified")
+            return;
+
+        if (!StatusNew.TryRemoveStatusEffect(ent, ent.Comp.RealignmentStatus))
+            RemCompDeferred(ent.Owner, ent.Comp);
+    }
+
+    private void OnRealignment(EventHereticRealignment args)
+    {
+        if (!TryUseAbility(args))
+            return;
+
+        var ent = args.Performer;
+
+        StatusNew.TryRemoveStatusEffect(ent, args.StunStatus);
+        StatusNew.TryRemoveStatusEffect(ent, args.DrowsinessStatus);
+        StatusNew.TryRemoveStatusEffect(ent, args.SleepStatus);
+
+        RemCompDeferred<KnockedDownComponent>(ent);
+        RemCompDeferred<DelayedKnockdownComponent>(ent);
+
+        if (TryComp<StaminaComponent>(ent, out var stam))
+        {
+            if (stam.StaminaDamage >= stam.CritThreshold)
+                _stam.ExitStamCrit(ent, stam);
+
+            Dirty(ent, stam);
+        }
+
+        _standing.Stand(ent);
+        _pulling.StopAllPulls(ent, stopPuller: false);
+        if (Status.TryAddStatusEffect<PacifiedComponent>(ent, "Pacified", args.EffectTime, true))
+            StatusNew.TryUpdateStatusEffectDuration(ent, args.RealignmentStatus, out _, args.EffectTime);
+
+        if (TryComp(ent, out CuffableComponent? cuffable) && cuffable.Container.ContainedEntities.Count > 0)
+        {
+            var cuffs = cuffable.Container.ContainedEntities[0];
+            _cuffs.Uncuff(ent, null, cuffs, cuffable);
+        }
+
+        if (!TryComp(ent, out EnsnareableComponent? ensnareable) || !ensnareable.IsEnsnared ||
+            ensnareable.Container.ContainedEntities.Count == 0)
+            return;
+
+        var bola = ensnareable.Container.ContainedEntities[0];
+        _snare.ForceFree(bola, Comp<EnsnaringComponent>(bola));
+    }
+
+    private void OnBeforeRealignmentStamina(Entity<RealignmentComponent> ent, ref BeforeStaminaDamageEvent args)
+    {
+        if (args.Value <= 0)
+            return;
+
+        args.Cancelled = true;
     }
 
     private void OnEmp(EventEmp ev)

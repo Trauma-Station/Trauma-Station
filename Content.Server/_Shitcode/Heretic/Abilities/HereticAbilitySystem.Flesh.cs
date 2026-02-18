@@ -283,7 +283,7 @@ public sealed partial class HereticAbilitySystem
         {
             var time = knocked.NextUpdate - Timing.CurTime;
             if (time > TimeSpan.Zero)
-                _stun.TryKnockdown(clone.Value, time,  drop: false);
+                _stun.TryKnockdown(clone.Value, time, drop: false);
         }
 
         var damage = EnsureComp<DamageOverTimeComponent>(clone.Value);

@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Shitcode.Heretic.Components;
 
@@ -12,5 +13,5 @@ namespace Content.Shared._Shitcode.Heretic.Components;
 public sealed partial class RealignmentComponent : Component
 {
     [DataField]
-    public string StaminaRegenKey = "Realignment";
+    public EntProtoId RealignmentStatus = "RealignmentStatusEffect";
 }

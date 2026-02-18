@@ -62,8 +62,6 @@ using Robust.Shared.Prototypes;
 using Content.Server.Heretic.EntitySystems;
 using Content.Server.Actions;
 using Content.Server.Temperature.Systems;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Server.Heretic.Components;
 using Content.Shared.Temperature.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._Goobstation.Heretic.Components;
@@ -101,7 +99,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly PhysicsSystem _phys = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throw = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -109,9 +106,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
     [Dependency] private readonly ProtectiveBladeSystem _pblade = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly TemperatureSystem _temperature = default!;
     [Dependency] private readonly TagSystem _tag = default!;
@@ -160,13 +155,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         QueueDel(ent);
     }
 
-    protected override void SpeakAbility(EntityUid ent, HereticActionComponent actionComp)
-    {
-        // shout the spell out
-        if (!string.IsNullOrWhiteSpace(actionComp.MessageLoc))
-            _chat.TrySendInGameICMessage(ent, Loc.GetString(actionComp.MessageLoc!), InGameICChatType.Speak, false);
-    }
-
     private void OnStore(EventHereticOpenStore args)
     {
         if (!TryUseAbility(args))
@@ -180,6 +168,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
         _store.ToggleUi(args.Performer, ent, store);
     }
+
     private void OnMansusGrasp(EventHereticMansusGrasp args)
     {
         if (!TryUseAbility(args, false))
@@ -551,18 +540,18 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
                     visual: false);
             }
 
+            var reduction = leech.StunReduction * multiplier;
+            _stun.TryAddStunDuration(uid, -reduction);
+            _stun.AddKnockdownTime(uid, -reduction);
+
+            StatusNew.TryRemoveStatusEffect(uid, leech.SleepStatus);
+            StatusNew.TryRemoveStatusEffect(uid, leech.DrowsinessStatus);
+            StatusNew.TryRemoveStatusEffect(uid, leech.RainbowStatus);
+
             if (statusQuery.TryComp(uid, out var status))
             {
-                var reduction = leech.StunReduction * multiplier;
-                _statusEffect.TryRemoveTime(uid, "Stun", reduction, status);
-                _stun.AddKnockdownTime(uid, -reduction);
-
-                _statusEffect.TryRemoveStatusEffect(uid, "Pacified", status);
-                _statusEffect.TryRemoveStatusEffect(uid, "ForcedSleep", status);
-                _statusEffect.TryRemoveStatusEffect(uid, "SlowedDown", status);
-                _statusEffect.TryRemoveStatusEffect(uid, "BlurryVision", status);
-                _statusEffect.TryRemoveStatusEffect(uid, "TemporaryBlindness", status);
-                _statusEffect.TryRemoveStatusEffect(uid, "SeeingRainbows", status);
+                Status.TryRemoveStatusEffect(uid, "BlurryVision", status);
+                Status.TryRemoveStatusEffect(uid, "TemporaryBlindness", status);
             }
         }
     }
