@@ -20,7 +20,6 @@ namespace Content.Medical.Client.Autodoc;
 public sealed partial class AutodocWindow : FancyWindow
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IFileDialogManager _dialogMan = default!;
     [Dependency] private readonly ISerializationManager _serMan = default!;
     [Dependency] private readonly ILogManager _logMan = default!;
