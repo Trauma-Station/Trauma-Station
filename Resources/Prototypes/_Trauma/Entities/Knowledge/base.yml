@@ -10,7 +10,7 @@
 
 - type: entity
   id: BaseMedicalKnowledge
-  name: BaseKnowledge
+  parent: BaseKnowledge
   abstract: true
   components:
   - type: Knowledge
@@ -18,7 +18,7 @@
 
 - type: entity
   id: BasePhysicalKnowledge
-  name: BaseKnowledge
+  parent: BaseKnowledge
   abstract: true
   components:
   - type: Knowledge
@@ -26,7 +26,7 @@
 
 - type: entity
   id: BaseWarKnowledge
-  name: BaseKnowledge
+  parent: BaseKnowledge
   abstract: true
   components:
   - type: Knowledge
@@ -34,7 +34,7 @@
 
 - type: entity
   id: BaseIntellectualKnowledge
-  name: BaseKnowledge
+  parent: BaseKnowledge
   abstract: true
   components:
   - type: Knowledge
@@ -42,7 +42,7 @@
 
 - type: entity
   id: BaseScientificKnowledge
-  name: BaseKnowledge
+  parent: BaseKnowledge
   abstract: true
   components:
   - type: Knowledge
