@@ -716,7 +716,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                 knowledgeMiss = ((float) meleeUnit.Comp.Level + 2) / 26.0f;
             }
         }
-        
+
         if (_gun.Random(user).Prob(Math.Max(1.0f - knowledgeMiss, 0)))
         {
             entities.Clear();
