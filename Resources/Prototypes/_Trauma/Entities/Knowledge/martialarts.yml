@@ -146,7 +146,7 @@
   components:
   - type: CanPerformCombo
     roundstartCombos:
-    - Mimechucks
+    - MimeChucks
     - Smokebomb
     - SilentPalm
 
