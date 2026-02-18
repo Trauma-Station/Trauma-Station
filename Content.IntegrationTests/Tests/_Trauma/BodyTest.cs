@@ -23,6 +23,8 @@ public sealed class BodyTest
         var protoMan = server.ProtoMan;
         var partSys = entMan.System<BodyPartSystem>();
 
+        var map = await pair.CreateTestMap();
+
         var bodyName = factory.GetComponentName<BodyComponent>();
         await server.WaitAssertion(() =>
         {
@@ -33,7 +35,7 @@ public sealed class BodyTest
                     if (!proto.Components.ContainsKey(bodyName))
                         continue;
 
-                    var mob = entMan.SpawnEntity(proto);
+                    var mob = entMan.SpawnEntity(proto, map.GridCoords);
                     Assert.That(partSys.GetRootPart(mob), Is.Not.Null, $"{entMan.ToPrettyString(mob)} had no root part!");
                     entMan.DeleteEntity(mob);
                 }
