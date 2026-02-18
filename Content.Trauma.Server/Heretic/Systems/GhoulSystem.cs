@@ -125,7 +125,8 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
         SubscribeLocalEvent<GhoulWeaponComponent, ExaminedEvent>(OnWeaponExamine);
 
-        SubscribeLocalEvent<VoicelessDeadComponent, MapInitEvent>(OnVoicelessDeadInit);
+        SubscribeLocalEvent<VoicelessDeadComponent, MapInitEvent>(OnVoicelessDeadInit,
+            after: [ typeof(InitialBodySystem) ]); // only needed because of RT system ordering shitcode
         SubscribeLocalEvent<VoicelessDeadComponent, ComponentShutdown>(OnVoicelessDeadShutdown);
 
         SubscribeLocalEvent<HereticMinionComponent, AttackAttemptEvent>(OnTryAttack);
