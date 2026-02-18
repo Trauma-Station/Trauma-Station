@@ -436,9 +436,6 @@ public sealed partial class EventEmp : InstantActionEvent
 public sealed partial class EventHereticRealignment : InstantActionEvent
 {
     [DataField]
-    public float StaminaRegenRate = -9f; // Same value as default stamina consumption for non humans.
-
-    [DataField]
     public EntProtoId RealignmentStatus = "RealignmentStatusEffect";
 
     [DataField]
