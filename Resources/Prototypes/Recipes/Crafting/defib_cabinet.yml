@@ -12,6 +12,6 @@
   - !type:WallmountCondition
   # <Trauma>
   groups:
-    ElectronicsKnowledge: 26
-    TechnologicalKnowledge: 26
+    ElectronicsKnowledge: 2
+    TechnologyKnowledge: 2
   # </Trauma>

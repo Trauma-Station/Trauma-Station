@@ -6,8 +6,8 @@
   category: construction-category-antagonist
   objectType: Item
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
 
 - type: construction
   id: RevRPG2AP
@@ -17,8 +17,8 @@
   category: construction-category-antagonist
   objectType: Item
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
 
 - type: construction
   id: RevFlamethrowerAmmo
@@ -28,5 +28,5 @@
   category: construction-category-antagonist
   objectType: Item
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2

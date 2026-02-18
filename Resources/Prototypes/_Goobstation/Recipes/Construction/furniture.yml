@@ -9,7 +9,7 @@
   conditions:
     - !type:TileNotBlocked
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
 
 - type: construction
   id: CdRack
@@ -22,4 +22,4 @@
   conditions:
     - !type:TileNotBlocked
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2

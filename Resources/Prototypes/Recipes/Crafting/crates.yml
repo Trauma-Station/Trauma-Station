@@ -7,7 +7,7 @@
   objectType: Structure
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -19,7 +19,7 @@
   objectType: Structure
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -31,8 +31,8 @@
   objectType: Structure
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
-    ElectronicsKnowledge: 26
+    FurnitureKnowledge: 2
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -45,8 +45,8 @@
   objectType: Structure
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
-    TechnologicalKnowledge: 26
+    FurnitureKnowledge: 2
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -58,7 +58,7 @@
   objectType: Structure
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -71,7 +71,7 @@
   objectType: Structure
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -84,7 +84,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -97,7 +97,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -110,7 +110,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -122,8 +122,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
-    TechnologicalKnowledge: 26
+    HandmadeKnowledge: 1
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -135,5 +135,5 @@
   objectType: Structure
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>

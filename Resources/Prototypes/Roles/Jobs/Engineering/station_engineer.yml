@@ -26,7 +26,7 @@
     - type: KnowledgeGrant
       skills:
         HandmadeKnowledge: 26
-        TechnologicalKnowledge: 26
+        TechnologyKnowledge: 26
         MaterialsKnowledge: 26
         DoorsKnowledge: 26
         AirlocksKnowledge: 26

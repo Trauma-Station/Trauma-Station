@@ -12,7 +12,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -29,7 +29,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 50
+    WallsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -46,7 +46,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -63,7 +63,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -80,7 +80,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 50
+    WallsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -97,7 +97,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -114,7 +114,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -131,7 +131,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -148,7 +148,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -165,7 +165,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -182,7 +182,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -199,7 +199,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -216,7 +216,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 50
+    WallsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -234,7 +234,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 50
+    WallsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -251,8 +251,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
-    BananiumKnowledge: 26
+    WallsKnowledge: 2
+    BananiumKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -269,7 +269,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -286,7 +286,7 @@
   canRotate: false
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -303,7 +303,7 @@
   canRotate: false
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -320,7 +320,7 @@
   canRotate: false
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -336,7 +336,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -352,7 +352,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -370,7 +370,7 @@
   canRotate: false
   # <Trauma>
   groups:
-    WindowsKnowledge: 26
+    WindowsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -388,7 +388,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WindowsKnowledge: 26
+    WindowsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -406,7 +406,7 @@
   canRotate: false
   # <Trauma>
   groups:
-    WindowsKnowledge: 26
+    WindowsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -424,7 +424,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WindowsKnowledge: 26
+    WindowsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -442,8 +442,8 @@
   canRotate: false
   # <Trauma>
   groups:
-    WindowsKnowledge: 26
-    TechnologicalKnowledge: 26
+    WindowsKnowledge: 2
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -461,7 +461,7 @@
   canRotate: false
   # <Trauma>
   groups:
-    WindowsKnowledge: 26
+    WindowsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -479,7 +479,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WindowsKnowledge: 26
+    WindowsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -497,7 +497,7 @@
   canRotate: false
   # <Trauma>
   groups:
-    WindowsKnowledge: 50
+    WindowsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -515,7 +515,7 @@
   canRotate: false
   # <Trauma>
   groups:
-    WindowsKnowledge: 50
+    WindowsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -533,7 +533,7 @@
   canRotate: false
   # <Trauma>
   groups:
-    WindowsKnowledge: 50
+    WindowsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -551,7 +551,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WindowsKnowledge: 50
+    WindowsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -569,7 +569,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WindowsKnowledge: 50
+    WindowsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -586,7 +586,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WindowsKnowledge: 26
+    WindowsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -603,7 +603,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WindowsKnowledge: 26
+    WindowsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -620,7 +620,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WindowsKnowledge: 26
+    WindowsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -637,7 +637,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WindowsKnowledge: 50
+    WindowsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -654,7 +654,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WindowsKnowledge: 50
+    WindowsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -672,7 +672,7 @@
   canRotate: false
   # <Trauma>
   groups:
-    WindowsKnowledge: 50
+    WindowsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -690,7 +690,7 @@
   canRotate: false
   # <Trauma>
   groups:
-    WindowsKnowledge: 50
+    WindowsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -708,7 +708,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WindowsKnowledge: 50
+    WindowsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -726,7 +726,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   groups:
-    WindowsKnowledge: 50
+    WindowsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -743,7 +743,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -760,7 +760,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -777,7 +777,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -793,7 +793,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -807,7 +807,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -821,7 +821,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -835,7 +835,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -849,7 +849,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -869,9 +869,9 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups: # Edge case: simple to build, but requires knowing how it even looks like
-    FurnitureKnowledge: 10
-    TechnologicalKnowledge: 10
+  groups:
+    FurnitureKnowledge: 1
+    TechnologyKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -891,7 +891,7 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-    BananiumKnowledge: 26
+    BananiumKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -924,7 +924,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -940,7 +940,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -957,7 +957,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -974,7 +974,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -991,7 +991,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 # Chain link fencing
@@ -1008,8 +1008,8 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
-    TechnologicalKnowledge: 26
+    WallsKnowledge: 2
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1026,8 +1026,8 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
-    TechnologicalKnowledge: 26
+    WallsKnowledge: 2
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1044,8 +1044,8 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
-    TechnologicalKnowledge: 26
+    WallsKnowledge: 2
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1061,8 +1061,8 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
-    TechnologicalKnowledge: 26
+    WallsKnowledge: 2
+    TechnologyKnowledge: 2
   # </Trauma>
 
 #Wooden fence high
@@ -1079,7 +1079,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1096,7 +1096,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1113,7 +1113,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1130,7 +1130,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1146,7 +1146,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 #Wooden fence small
@@ -1163,7 +1163,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1180,7 +1180,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1197,7 +1197,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1214,7 +1214,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1231,7 +1231,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
   # </Trauma>
 
 #Airlocks
@@ -1248,7 +1248,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1264,7 +1264,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1281,7 +1281,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1298,7 +1298,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1315,7 +1315,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1333,7 +1333,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    AirlocksKnowledge: 26
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1349,8 +1349,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WindowsKnowledge: 26
-    AirlocksKnowledge: 26
+    WindowsKnowledge: 2
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1366,8 +1366,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WindowsKnowledge: 26
-    AirlocksKnowledge: 26
+    WindowsKnowledge: 2
+    AirlocksKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1383,8 +1383,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WindowsKnowledge: 26
-    AirlocksKnowledge: 26
+    WindowsKnowledge: 2
+    AirlocksKnowledge: 2
   # </Trauma>
 
 #lighting
@@ -1403,8 +1403,8 @@
   # Also see below. Didn't add it b/c construction ECS work going on. Cheers, - 20kdc
     - !type:TileNotBlocked
   # <Trauma>
-  groups: # In theory just knowing what a light bulb is will be enough to make it
-    TechnologicalKnowledge: 26
+  groups:
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1422,7 +1422,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    TechnologicalKnowledge: 26
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1439,8 +1439,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    ElectronicsKnowledge: 26
-    TechnologicalKnowledge: 26
+    ElectronicsKnowledge: 2
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1457,7 +1457,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    TechnologicalKnowledge: 26
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1474,7 +1474,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    TechnologicalKnowledge: 26
+    TechnologyKnowledge: 2
   # </Trauma>
 
 #conveyor
@@ -1491,7 +1491,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    ElectronicsKnowledge: 26
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1507,7 +1507,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    DoorsKnowledge: 26
+    DoorsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1523,7 +1523,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    DoorsKnowledge: 26
+    DoorsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1539,7 +1539,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    DoorsKnowledge: 26
+    DoorsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1555,7 +1555,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    DoorsKnowledge: 26
+    DoorsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1571,7 +1571,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    DoorsKnowledge: 26
+    DoorsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1585,7 +1585,7 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-    DoorsKnowledge: 26
+    DoorsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1599,7 +1599,7 @@
   canBuildInImpassable: false
   # <Trauma>
   groups:
-    DoorsKnowledge: 26
+    DoorsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1616,8 +1616,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
-    TechnologicalKnowledge: 26
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1634,8 +1634,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    HandmadeKnowledge: 26
-    TechnologicalKnowledge: 26
+    HandmadeKnowledge: 2
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1651,7 +1651,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    HandmadeKnowledge: 26
+    HandmadeKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1667,7 +1667,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    BananiumKnowledge: 26
+    BananiumKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1683,8 +1683,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    BananiumKnowledge: 26
-    DoorsKnowledge: 26
+    BananiumKnowledge: 2
+    DoorsKnowledge: 2
   # </Trauma>
 
 ##- type: construction
@@ -1719,9 +1719,9 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 26
-    DoorsKnowledge: 26
-    ElectronicsKnowledge: 26
+    WallsKnowledge: 2
+    DoorsKnowledge: 2
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1738,9 +1738,9 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    WallsKnowledge: 50
-    DoorsKnowledge: 26
-    ElectronicsKnowledge: 26
+    WallsKnowledge: 3
+    DoorsKnowledge: 2
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1756,7 +1756,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1773,7 +1773,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    ElectronicsKnowledge: 26
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1790,7 +1790,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1807,5 +1807,5 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
+    FurnitureKnowledge: 1
   # </Trauma>

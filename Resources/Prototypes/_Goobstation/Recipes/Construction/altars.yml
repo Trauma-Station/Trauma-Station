@@ -9,7 +9,7 @@
   canBuildInImpassable: false
   # <>
   groups:
-    FurnitureKnowledge: 10
+    FurnitureKnowledge: 1
   # Trauma edit end
   conditions:
   - !type:TileNotBlocked

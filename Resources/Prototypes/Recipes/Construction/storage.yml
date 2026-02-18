@@ -12,7 +12,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -28,7 +28,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -44,8 +44,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
-    TechnologicalKnowledge: 10
+    FurnitureKnowledge: 1
+    TechnologyKnowledge: 1
   # </Trauma>
 
 # ItemCabinets
@@ -62,7 +62,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 # Shelfs
@@ -79,8 +79,8 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
-    TechnologicalKnowledge: 10
+    FurnitureKnowledge: 1
+    TechnologyKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -95,7 +95,7 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -110,7 +110,7 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 # Reinforced
@@ -126,8 +126,8 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
-    TechnologicalKnowledge: 10
+    FurnitureKnowledge: 1
+    TechnologyKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -142,7 +142,7 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -157,7 +157,7 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 # Departmental
@@ -173,7 +173,7 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -188,7 +188,7 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -203,5 +203,5 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>

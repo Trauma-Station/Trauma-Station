@@ -4,6 +4,7 @@
   abstract: true
   components:
   - type: Knowledge
+    categories: Construction
     color: "#0ba881"
     experienceCost: 20
 
@@ -18,10 +19,6 @@
 - type: entity
   parent: BaseConstructionKnowledge
   id: WeaponsKnowledge
-
-- type: entity
-  parent: BaseConstructionKnowledge
-  id: TechnologicalKnowledge
 
 - type: entity
   parent: BaseConstructionKnowledge

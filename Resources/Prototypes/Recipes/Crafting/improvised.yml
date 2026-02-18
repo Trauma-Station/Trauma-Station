@@ -7,10 +7,10 @@
   objectType: Item
   # <Trauma>
   groups:
-    SurvivalKnowledge: 26
-    WeaponsKnowledge: 26
-    HandmadeKnowledge: 26
-    TechnologicalKnowledge: 26
+    SurvivalKnowledge: 2
+    WeaponsKnowledge: 2
+    HandmadeKnowledge: 2
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -22,8 +22,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
-    TechnologicalKnowledge: 10
+    HandmadeKnowledge: 1
+    TechnologyKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -35,8 +35,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
-    TechnologicalKnowledge: 10
+    HandmadeKnowledge: 1
+    TechnologyKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -48,10 +48,10 @@
   objectType: Item
   # <Trauma>
   groups:
-    SurvivalKnowledge: 15
-    WeaponsKnowledge: 15
-    HandmadeKnowledge: 15
-    TechnologicalKnowledge: 15
+    SurvivalKnowledge: 1
+    WeaponsKnowledge: 1
+    HandmadeKnowledge: 1
+    TechnologyKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -63,8 +63,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
-    TechnologicalKnowledge: 50
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -76,8 +76,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
-    TechnologicalKnowledge: 50
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -89,7 +89,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -101,7 +101,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
+    HandmadeKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -113,7 +113,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
+    HandmadeKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -125,7 +125,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
+    HandmadeKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -137,8 +137,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
-    TechnologicalKnowledge: 50
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -150,8 +150,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
-    TechnologicalKnowledge: 50
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -163,8 +163,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
-    TechnologicalKnowledge: 10
+    HandmadeKnowledge: 1
+    TechnologyKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -176,8 +176,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
-    TechnologicalKnowledge: 50
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -189,7 +189,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -201,7 +201,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -213,8 +213,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
-    TechnologicalKnowledge: 50
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -226,7 +226,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
+    HandmadeKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -238,8 +238,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
-    TechnologicalKnowledge: 50
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -251,8 +251,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
-    ScienceKnowledge: 50
+    HandmadeKnowledge: 3
+    ScienceKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -264,8 +264,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
-    ScienceKnowledge: 50
+    HandmadeKnowledge: 3
+    ScienceKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -277,7 +277,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
+    HandmadeKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -289,7 +289,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
+    HandmadeKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -301,5 +301,5 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
+    HandmadeKnowledge: 3
   # </Trauma>

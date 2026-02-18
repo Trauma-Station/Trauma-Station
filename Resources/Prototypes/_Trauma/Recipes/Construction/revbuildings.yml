@@ -11,8 +11,8 @@
   - !type:TileNotBlocked
   entityWhitelist:
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
 
 - type: construction
   id: RevPrintingPress
@@ -27,8 +27,8 @@
   - !type:TileNotBlocked
   entityWhitelist:
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
 
 - type: construction
   id: RevTelecommsWorkbench
@@ -42,8 +42,8 @@
   conditions:
   - !type:TileNotBlocked
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
 
 - type: construction
   id: RevTelesphere
@@ -57,8 +57,8 @@
   conditions:
   - !type:TileNotBlocked
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
 
 - type: construction
   id: Rev3DPrinter
@@ -73,8 +73,8 @@
   - !type:TileNotBlocked
   entityWhitelist:
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
 
 - type: construction
   id: RevBulletPress
@@ -89,8 +89,8 @@
   - !type:TileNotBlocked
   entityWhitelist:
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
 
 - type: construction
   id: RevMicroelectronicsAssembler
@@ -105,8 +105,8 @@
   - !type:TileNotBlocked
   entityWhitelist:
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
 
 - type: construction
   id: RevUniformPrinter
@@ -121,8 +121,8 @@
   - !type:TileNotBlocked
   entityWhitelist:
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
 
 - type: construction
   id: RevTechAnalyzer
@@ -137,8 +137,8 @@
   - !type:TileNotBlocked
   entityWhitelist:
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
 
 - type: construction
   id: RevTurretPistol
@@ -153,8 +153,8 @@
   - !type:TileNotBlocked
   entityWhitelist:
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
 
 - type: construction
   id: RevTurretSMG
@@ -169,8 +169,8 @@
   - !type:TileNotBlocked
   entityWhitelist:
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
 
 - type: construction
   id: RevPlasmaFoundry
@@ -185,5 +185,5 @@
   - !type:TileNotBlocked
   entityWhitelist:
   groups:
-    TechnologicalKnowledge: 26
-    RevolutionaryKnowledge: 26
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2

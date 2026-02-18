@@ -18,7 +18,7 @@ namespace Content.Trauma.Client.Knowledge;
 public sealed class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>
 {
     [Dependency] private readonly IPlayerManager _player = default!;
-    [UISystemDependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+    [UISystemDependency] private readonly KnowledgeSystem _knowledge = default!;
 
     private SimpleRadialMenu? _menu;
 
@@ -110,14 +110,14 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
             }
         };
 
-        var commonKnowledge = _knowledge;
-        if (commonKnowledge == null)
-            commonKnowledge = EntityManager.System<CommonKnowledgeSystem>();
+        var knowledge = _knowledge;
+        if (knowledge == null)
+            knowledge = EntityManager.System<KnowledgeSystem>();
 
         if (!(player is { } playerNotNull))
             return martialArts;
 
-        var martialArtsList = commonKnowledge.GetMartialArtsForClientDoohickey(playerNotNull);
+        var martialArtsList = knowledge.GetMartialArtsForClientDoohickey(playerNotNull);
 
         if (martialArtsList == null)
             return martialArts;

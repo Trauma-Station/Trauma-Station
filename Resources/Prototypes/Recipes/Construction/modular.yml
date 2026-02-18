@@ -7,8 +7,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    ScienceKnowledge: 26
-    WeaponsKnowledge: 26
+    ScienceKnowledge: 2
+    WeaponsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -20,6 +20,6 @@
   objectType: Item
   # <Trauma>
   groups:
-    ScienceKnowledge: 26
-    WeaponsKnowledge: 26
+    ScienceKnowledge: 2
+    WeaponsKnowledge: 2
   # </Trauma>

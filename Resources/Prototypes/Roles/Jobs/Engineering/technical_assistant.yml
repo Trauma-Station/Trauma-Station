@@ -30,7 +30,7 @@
     - type: KnowledgeGrant
       skills:
         HandmadeKnowledge: 10
-        TechnologicalKnowledge: 10
+        TechnologyKnowledge: 10
         MaterialsKnowledge: 10
         DoorsKnowledge: 10
         AirlocksKnowledge: 10

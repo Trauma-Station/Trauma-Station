@@ -75,9 +75,18 @@ public sealed class KnowledgeGrantSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target == null || TerminatingOrDeleted(args.Target))
             return;
 
-        if (_netManager.IsClient)
-            return;
+        if (_netManager.IsServer)
+            DoAfter(ent, ref args);
 
+        if (_netManager.IsClient)
+        {
+            var evNetUpdate = new UpdateExperience();
+            RaiseLocalEvent(args.User, ref evNetUpdate);
+        }
+    }
+
+    private void DoAfter(Entity<KnowledgeGrantOnUseComponent> ent, ref KnowledgeLearnDoAfterEvent args)
+    {
         foreach (var skill in ent.Comp.Experience)
         {
             if (_knowledge.TryGetKnowledgeUnit(args.User, skill.Key) is not { } foundSkill)

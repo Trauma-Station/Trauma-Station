@@ -13,9 +13,9 @@ knowledge-level-epiphany = You have reached a sudden epiphany regarding { $knowl
 
 knowledge-info-description = {$mastery}
 
-knowledge-language-speaks-understands = Speaks and understands {$language}
-knowledge-language-speaks = Speaks {$language}
-knowledge-language-understands = Understands {$language}
+knowledge-language-speaks-understands = {$language} : Speaks and understands 
+knowledge-language-speaks = {$language} : Speaks
+knowledge-language-understands = {$language} : Understands
 
 knowledge-construction-name = Construction: {$group}
 knowledge-martial-arts-name = Martial Arts: {$name}
@@ -62,3 +62,6 @@ knowledge-LiteracyKnowledge = Literacy
 knowledge-JanitorKnowledge = Janitor
 
 language-curse-pain = You hear bad language!
+
+trauma-knowledge-title = Knowledge Tab
+trauma-character-title = Character Tab

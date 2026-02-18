@@ -11,13 +11,17 @@ namespace Content.Trauma.Client.Knowledge.Tabs;
 public sealed partial class MartialArtsTabControl : BaseTabControl
 {
     [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
-    [Dependency] private readonly CommonKnowledgeSystem _commonKnowledge = default!;
+    [Dependency] private readonly IEntitySystemManager _system = default!;
+    private readonly KnowledgeSystem _knowledge;
 
     private GridContainer MartialArtsList => FindControl<GridContainer>("MartialArtsList");
     public MartialArtsTabControl()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+
+
+        _knowledge = _system.GetEntitySystem<KnowledgeSystem>();
     }
 
     public override bool UpdateState()
@@ -28,10 +32,10 @@ public sealed partial class MartialArtsTabControl : BaseTabControl
         if (player is not { Valid: true })
             return false;
 
-        if (_commonKnowledge.TryGetKnowledgeEntity(player.Value) is not { } knowledgeEntity)
+        if (_knowledge.TryGetKnowledgeEntity(player.Value) is not { } knowledgeEntity)
             return false;
 
-        var martialArts = _commonKnowledge.TryGetKnowledgeWithComp<MartialArtsKnowledgeComponent>(knowledgeEntity);
+        var martialArts = _knowledge.TryGetKnowledgeWithComp<MartialArtsKnowledgeComponent>(knowledgeEntity);
 
         var button = CreateMartialArtsButton(knowledgeEntity, null);
         MartialArtsList.AddChild(button);
@@ -63,7 +67,7 @@ public sealed partial class MartialArtsTabControl : BaseTabControl
 
     private void OnChangeMartialArts(EntityUid knowledgeEntity, Entity<MartialArtsKnowledgeComponent>? martialArt)
     {
-        _commonKnowledge.ChangeMartialArts(knowledgeEntity, martialArt);
+        _knowledge.ChangeMartialArts(knowledgeEntity, martialArt);
     }
 
     protected override void Resized()

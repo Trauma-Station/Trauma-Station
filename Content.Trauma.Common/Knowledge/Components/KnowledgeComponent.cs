@@ -13,10 +13,10 @@ namespace Content.Trauma.Common.Knowledge.Components;
 public sealed partial class KnowledgeComponent : Component
 {
     /// <summary>
-    /// Category of that knowledge. Used for distinguishing memories from skills.
+    /// Category of that knowledge.
     /// </summary>
-    [DataField(required: true)]
-    public ProtoId<KnowledgeCategoryPrototype> Category;
+    [DataField]
+    public string Category = "";
 
     /// <summary>
     /// Current Mastery of this knowledge.

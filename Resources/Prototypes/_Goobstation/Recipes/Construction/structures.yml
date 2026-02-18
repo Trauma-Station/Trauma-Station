@@ -8,7 +8,7 @@
   canRotate: true
   canBuildInImpassable: true
   groups:
-    WallsKnowledge: 26
+    WallsKnowledge: 2
 
 - type: construction
   id: SolarPanel
@@ -18,7 +18,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   groups:
-    ElectronicsKnowledge: 26
+    ElectronicsKnowledge: 2
 
 # Barricades
 
@@ -32,7 +32,7 @@
   canRotate: true
   canBuildInImpassable: true
   groups:
-    WallsKnowledge: 76
+    WallsKnowledge: 4
 
 - type: construction
   id: BarricadeSteelFolding
@@ -44,7 +44,7 @@
   canRotate: true
   canBuildInImpassable: true
   groups:
-    WallsKnowledge: 76
+    WallsKnowledge: 4
 
 - type: construction
   id: BarricadePlasteel
@@ -56,7 +56,7 @@
   canRotate: true
   canBuildInImpassable: true
   groups:
-    WallsKnowledge: 76
+    WallsKnowledge: 4
 
 - type: construction
   id: BarricadePlasteelFolding
@@ -68,7 +68,7 @@
   canRotate: true
   canBuildInImpassable: true
   groups:
-    WallsKnowledge: 76
+    WallsKnowledge: 4
 
 # Airlocks
 
@@ -84,7 +84,7 @@
   conditions:
     - !type:TileNotBlocked
   groups:
-    AirlocksKnowledge: 23
+    AirlocksKnowledge: 1
 
 - type: construction
   id: AirlockSealedGlass
@@ -98,4 +98,4 @@
   conditions:
     - !type:TileNotBlocked
   groups:
-    AirlocksKnowledge: 30
+    AirlocksKnowledge: 2

@@ -5,8 +5,8 @@
   category: construction-category-utilities
   objectType: Item
   groups:
-    ScienceKnowledge: 26
-    BotsKnowledge: 26
+    ScienceKnowledge: 2
+    BotsKnowledge: 2
 
 #- type: construction
 #  id: CyberButtBot
@@ -15,7 +15,7 @@
 #  category: construction-category-utilities
 #  objectType: Item
 #  groups:
-#  - Science
+#    ScienceKnowledge: 2
 
 - type: construction
   id: DuckBot
@@ -24,8 +24,8 @@
   category: construction-category-utilities
   objectType: Item
   groups:
-    ScienceKnowledge: 26
-    BotsKnowledge: 26
+    ScienceKnowledge: 2
+    BotsKnowledge: 2
 
 - type: construction
   id: BoogieBot
@@ -34,5 +34,5 @@
   category: construction-category-utilities
   objectType: Item
   groups:
-    ScienceKnowledge: 26
-    BotsKnowledge: 26
+    ScienceKnowledge: 2
+    BotsKnowledge: 2

@@ -6,7 +6,7 @@
   category: construction-category-antagonist
   objectType: Item
   groups:
-    RevolutionaryKnowledge: 50
+    RevolutionaryKnowledge: 3
 
 - type: construction
   id: PowerArmorFrame
@@ -16,4 +16,4 @@
   category: construction-category-antagonist
   objectType: Item
   groups:
-    RevolutionaryKnowledge: 26
+    RevolutionaryKnowledge: 2

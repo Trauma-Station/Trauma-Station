@@ -9,7 +9,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -21,7 +21,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -33,7 +33,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -45,7 +45,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -57,7 +57,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -69,7 +69,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -81,7 +81,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -93,5 +93,5 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 10
+    HandmadeKnowledge: 1
   # </Trauma>

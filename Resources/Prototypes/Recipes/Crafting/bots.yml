@@ -7,7 +7,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    BotsKnowledge: 10
+    BotsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -19,7 +19,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    BotsKnowledge: 10
+    BotsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -31,8 +31,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    BotsKnowledge: 10
-    BananiumKnowledge: 10
+    BotsKnowledge: 1
+    BananiumKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -44,7 +44,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    BotsKnowledge: 10
+    BotsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -56,7 +56,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    BotsKnowledge: 10
+    BotsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -68,7 +68,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    BotsKnowledge: 10
+    BotsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -80,7 +80,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    BotsKnowledge: 10
+    BotsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -92,5 +92,5 @@
   objectType: Item
   # <Trauma>
   groups:
-    BotsKnowledge: 10
+    BotsKnowledge: 1
   # </Trauma>

@@ -7,8 +7,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
-    TechnologicalKnowledge: 50
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -20,8 +20,8 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
-    TechnologicalKnowledge: 50
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -33,6 +33,6 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 50
-    TechnologicalKnowledge: 50
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 3
   # </Trauma>

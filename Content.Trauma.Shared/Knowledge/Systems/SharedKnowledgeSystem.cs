@@ -11,7 +11,6 @@ using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -141,24 +140,32 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 TryAddKnowledgeUnit(ent, (args.KnowledgeType, 0));
             return;
         }
+        ExperienceUpdate(knowledgeUnit, ent, ref args);
 
-        var knowledge = (knowledgeUnit, knowledgeComponent);
+        var evNetUpdate = new UpdateExperience();
+        RaiseLocalEvent(ent, ref evNetUpdate);
+    }
 
-        if (_timing.CurTick.Value < knowledgeComponent.LastExperienceTick + (uint) (1.0f * _timing.TickRate))
+    public void ExperienceUpdate(Entity<KnowledgeComponent> ent, Entity<KnowledgeHolderComponent> target, ref AddExperience args)
+    {
+        if (_timing.CurTick.Value < ent.Comp.LastExperienceTick + (uint) (1.0f * _timing.TickRate))
             return;
 
-        knowledgeComponent.LastExperienceTick = _timing.CurTick.Value;
+        ent.Comp.LastExperienceTick = _timing.CurTick.Value;
 
-        var getMastery = GetMastery(knowledge);
-        knowledgeComponent.Experience += args.Experience + knowledgeComponent.BonusExperience;
-        if (knowledgeComponent.Experience >= knowledgeComponent.ExperienceCost || knowledgeComponent.Level < 100)
+        (int, bool) rollResult = (0, false);
+
+        var getMastery = GetMastery(ent);
+        ent.Comp.Experience += args.Experience + ent.Comp.BonusExperience;
+
+        if (ent.Comp.Experience >= ent.Comp.ExperienceCost && ent.Comp.Level < 100)
         {
             _random.SetSeed((int) _timing.CurTick.Value);
-            int timesToRoll = knowledgeComponent.Experience / knowledgeComponent.ExperienceCost;
+            int timesToRoll = ent.Comp.Experience / ent.Comp.ExperienceCost;
             for (int i = 0; i < timesToRoll; i++)
             {
-                knowledgeComponent.Experience -= knowledgeComponent.ExperienceCost;
-                int diceType = knowledgeComponent.Level switch
+                ent.Comp.Experience -= ent.Comp.ExperienceCost;
+                int diceType = ent.Comp.Level switch
                 {
                     >= 88 => 3,
                     >= 76 => 4,
@@ -167,21 +174,25 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                     >= 1 => 12,
                     _ => 20,
                 };
-                var rollResult = RollPenetrating(diceType);
-                knowledgeComponent.Level += rollResult.Item1;
-                var knowledgePrototype = MetaData(knowledgeUnit).EntityPrototype?.ID;
+                rollResult = RollPenetrating(diceType);
+                ent.Comp.Level += rollResult.Item1;
+                var knowledgePrototype = MetaData(ent).EntityPrototype?.ID;
                 if (rollResult.Item2)
-                    _popup.PopupEntity(Loc.GetString("knowledge-level-epiphany", ("knowledge", Loc.GetString(PopupString(knowledgeUnit)))), ent, ent, PopupType.Medium);
+                    _popup.PopupEntity(Loc.GetString("knowledge-level-epiphany", ("knowledge", Loc.GetString(PopupString(ent)))), target, target, PopupType.Medium);
             }
         }
-        if (knowledgeComponent.Level > 100)
-            knowledgeComponent.Level = 100;
-        if (getMastery != GetMastery(knowledge))
+
+        if (ent.Comp.Level > 100)
+            ent.Comp.Level = 100;
+
+        if (getMastery != GetMastery(ent) && !rollResult.Item2)
         {
-            var knowledgePrototype = MetaData(knowledgeUnit).EntityPrototype?.ID;
-            _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString(PopupString(knowledgeUnit))), ("mastery", GetMasteryString(knowledge).ToLower())), ent, ent, PopupType.Medium);
+            var knowledgePrototype = MetaData(ent).EntityPrototype?.ID;
+            _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString(PopupString(ent))), ("mastery", GetMasteryString(ent).ToLower())), target, target, PopupType.Medium);
         }
+
         Dirty(ent);
+        Dirty(target);
     }
 
     public override (string Category, KnowledgeInfo Info) GetKnowledgeInfo(Entity<KnowledgeComponent> ent)
@@ -313,6 +324,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         {
             TryAddKnowledgeUnit(target, (knowledgeId.Key, knowledgeId.Value));
         }
+
+        var evNetUpdate = new UpdateExperience();
+        RaiseLocalEvent(target, ref evNetUpdate);
     }
 
     /// <summary>
@@ -583,18 +597,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
     }
 
-    public override List<(EntityUid, string)> GetMartialArtsForClientDoohickey(EntityUid target)
-    {
-        var clientMartialArts = new List<(EntityUid, string)>();
-        var martialArtsList = TryGetKnowledgeWithComp<MartialArtsKnowledgeComponent>(target);
-        foreach (var martialArt in martialArtsList ?? [])
-        {
-            var knowledgePrototype = MetaData(martialArt.Owner).EntityPrototype?.ID;
-            clientMartialArts.Add((martialArt.Owner, Loc.GetString($"knowledge-{knowledgePrototype}")));
-        }
-        return clientMartialArts;
-    }
-
     public string GetMasteryString(Entity<KnowledgeComponent> ent)
     {
         return ent.Comp.Level switch
@@ -627,6 +629,19 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return GetMastery((uid, comp));
         else
             return 0;
+    }
+
+    public override int GetInverseMastery(int number)
+    {
+        return number switch
+        {
+            >= 5 => 88,
+            >= 4 => 76,
+            >= 3 => 51,
+            >= 2 => 26,
+            >= 1 => 1,
+            _ => 0,
+        };
     }
 
     public override float SharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f)

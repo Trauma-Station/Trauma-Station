@@ -29,12 +29,10 @@ using Content.Shared.Inventory;
 using Content.Shared.Mind.Components; // Goobstation
 using Content.Shared.Storage;
 using Content.Shared.Whitelist;
-using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Toolshed.TypeParsers;
 
 namespace Content.Server.Construction
 {

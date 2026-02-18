@@ -138,7 +138,7 @@
   name: Urissst Mz'Hand
   components:
   # <Trauma>
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
     - Draconic

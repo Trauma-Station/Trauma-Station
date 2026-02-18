@@ -5,8 +5,8 @@
   category: construction-category-misc
   objectType: Item
   groups:
-    ElectronicsKnowledge: 26
-    ScienceKnowledge: 26
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterName
@@ -15,8 +15,8 @@
   category: construction-category-misc
   objectType: Item
   groups:
-    ElectronicsKnowledge: 26
-    ScienceKnowledge: 26
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterStack
@@ -25,8 +25,8 @@
   category: construction-category-misc
   objectType: Item
   groups:
-    ElectronicsKnowledge: 26
-    ScienceKnowledge: 26
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterPressure
@@ -35,8 +35,8 @@
   category: construction-category-misc
   objectType: Item
   groups:
-    ElectronicsKnowledge: 26
-    ScienceKnowledge: 26
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterCombined
@@ -45,8 +45,8 @@
   category: construction-category-misc
   objectType: Item
   groups:
-    ElectronicsKnowledge: 26
-    ScienceKnowledge: 26
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterAnchor
@@ -55,8 +55,8 @@
   category: construction-category-misc
   objectType: Item
   groups:
-    ElectronicsKnowledge: 26
-    ScienceKnowledge: 26
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterMob
@@ -65,8 +65,8 @@
   category: construction-category-misc
   objectType: Item
   groups:
-    ElectronicsKnowledge: 26
-    ScienceKnowledge: 26
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterCuff
@@ -75,5 +75,5 @@
   category: construction-category-misc
   objectType: Item
   groups:
-    ElectronicsKnowledge: 26
-    ScienceKnowledge: 26
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2

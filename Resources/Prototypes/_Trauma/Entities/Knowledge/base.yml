@@ -1,7 +1,6 @@
 - type: entity
   id: BaseKnowledge
   name: BaseKnowledge
-  categories: [ Knowledge ]
   abstract: true
   components:
   - type: Knowledge
@@ -10,105 +9,139 @@
     experienceCost: 1 # We're fucked if its 0 or lower. Do not change lmao.
 
 - type: entity
-  parent: BaseKnowledge
+  id: BaseMedicalKnowledge
+  name: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Medical
+
+- type: entity
+  id: BasePhysicalKnowledge
+  name: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Physical
+
+- type: entity
+  id: BaseWarKnowledge
+  name: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: War
+
+- type: entity
+  id: BaseIntellectualKnowledge
+  name: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Intellectual
+
+- type: entity
+  id: BaseScientificKnowledge
+  name: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Scientific
+
+- type: entity
+  parent: BasePhysicalKnowledge
   id: MeleeKnowledge
-  name: Melee Knowledge
   components:
   - type: Knowledge
     experienceCost: 15
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BaseWarKnowledge
   id: ShootingKnowledge
-  name: ShootingKnowledge
   components:
   - type: Knowledge
     experienceCost: 15
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BaseMedicalKnowledge
   id: SurgeryKnowledge
-  name: SurgeryKnowledge
   components:
   - type: Knowledge
     experienceCost: 24
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BaseMedicalKnowledge
   id: FirstAidKnowledge
-  name: FirstAidKnowledge
   components:
   - type: Knowledge
     experienceCost: 19
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BasePhysicalKnowledge
   id: ToughnessKnowledge
-  name: ToughnessKnowledge
   components:
   - type: Knowledge
     experienceCost: 20
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BasePhysicalKnowledge
   id: StrengthKnowledge
-  name: StrengthKnowledge
   components:
   - type: Knowledge
     experienceCost: 12
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BasePhysicalKnowledge
   id: AthleticsKnowledge
-  name: AthleticsKnowledge
   components:
   - type: Knowledge
     experienceCost: 12
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BaseIntellectualKnowledge
   id: MagicalLiteracyKnowledge
-  name: MagicalLiteracyKnowledge
   components:
   - type: Knowledge
     experienceCost: 30
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BaseIntellectualKnowledge
   id: LiteracyKnowledge
-  name: LiteracyKnowledge
   components:
   - type: Knowledge
     experienceCost: 20
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BaseScientificKnowledge
   id: JanitorKnowledge
-  name: JanitorKnowledge
   components:
   - type: Knowledge
     experienceCost: 5
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BasePhysicalKnowledge
   id: ThrowingKnowledge
-  name: ThrowingKnowledge
   components:
   - type: Knowledge
     experienceCost: 5
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BaseScientificKnowledge
   id: ChemistryKnowledge
-  name: ChemistryKnowledge
   components:
   - type: Knowledge
     experienceCost: 15
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BaseScientificKnowledge
   id: TechnologyKnowledge
-  name: TechnologyKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 15
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: CookingKnowledge
   components:
   - type: Knowledge
     experienceCost: 15

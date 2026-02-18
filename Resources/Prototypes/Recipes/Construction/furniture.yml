@@ -12,7 +12,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -28,7 +28,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -44,7 +44,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -60,7 +60,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -76,7 +76,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -92,7 +92,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -108,7 +108,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -124,7 +124,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -140,7 +140,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -156,7 +156,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -172,7 +172,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -188,7 +188,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -204,7 +204,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -220,7 +220,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -236,7 +236,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -253,7 +253,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -270,7 +270,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 #tables
@@ -287,7 +287,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -303,7 +303,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -319,7 +319,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -335,7 +335,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -351,7 +351,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -367,7 +367,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -383,7 +383,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -399,7 +399,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -415,7 +415,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -432,7 +432,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -449,7 +449,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -466,7 +466,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -483,7 +483,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -500,7 +500,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -517,7 +517,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -534,7 +534,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -551,7 +551,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -568,7 +568,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -585,7 +585,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -601,7 +601,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -617,7 +617,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 #bathroom
@@ -634,7 +634,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 #bedroom
@@ -651,7 +651,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -667,7 +667,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -683,7 +683,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -699,7 +699,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 #racks
@@ -716,7 +716,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 #misc
@@ -733,10 +733,10 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    SurvivalKnowledge: 10
-    WeaponsKnowledge: 10
-    HandmadeKnowledge: 10
-    FurnitureKnowledge: 26
+    SurvivalKnowledge: 1
+    WeaponsKnowledge: 1
+    HandmadeKnowledge: 1
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -751,7 +751,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    FurnitureKnowledge: 10
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -766,7 +766,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -781,7 +781,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -796,7 +796,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -811,7 +811,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -826,7 +826,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -841,7 +841,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -856,7 +856,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -871,7 +871,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -886,7 +886,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -901,7 +901,7 @@
   canBuildInImpassable: true
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -917,7 +917,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -934,7 +934,7 @@
     - !type:WallmountCondition
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -951,5 +951,5 @@
     - !type:TileNotBlocked
   # <Trauma>
   groups:
-    FurnitureKnowledge: 26
+    FurnitureKnowledge: 2
   # </Trauma>

@@ -120,13 +120,6 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract void ClearKnowledge(EntityUid target, bool deleteAll);
 
     /// <summary>
-    /// Returns the martial arts that a knowledge entity has, along with some helper data for the client.
-    /// </summary>
-    /// <param name="target"></param>
-    /// <returns></returns>
-    public abstract List<(EntityUid, string)> GetMartialArtsForClientDoohickey(EntityUid target);
-
-    /// <summary>
     /// Gets the mastery level of a knowledge unit.
     /// </summary>
     /// <param name="ent"></param>
@@ -137,6 +130,11 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     ///Gets the mastery level of a knowledge unit.
     /// </summary>
     public abstract int GetMastery(EntityUid uid);
+
+    /// <summary>
+    ///Gets the mastery level from a category.
+    /// </summary>
+    public abstract int GetInverseMastery(int number);
 
     /// <summary>
     /// Curve scale that determines some functionality. Goes from 0 to 1.
@@ -151,3 +149,6 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
 
 [ByRefEvent]
 public record struct AddExperience(EntProtoId KnowledgeType, int Experience);
+
+[ByRefEvent]
+public record struct UpdateExperience();

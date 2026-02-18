@@ -7,7 +7,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    ToysKnowledge: 26
+    ToysKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -19,7 +19,7 @@
   objectType: Item
   # <Trauma>
   groups:
-    ToysKnowledge: 26
+    ToysKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -31,6 +31,6 @@
   objectType: Item
   # <Trauma>
   groups:
-    HandmadeKnowledge: 26
-    ToysKnowledge: 26
+    HandmadeKnowledge: 2
+    ToysKnowledge: 2
   # </Trauma>

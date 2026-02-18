@@ -5,8 +5,8 @@
   category: construction-category-weapons
   objectType: Item
   groups:
-    BananiumKnowledge: 26
-    TechnologicalKnowledge: 26
+    BananiumKnowledge: 2
+    TechnologyKnowledge: 2
 
 - type: construction
   id: boomerang
@@ -15,6 +15,6 @@
   category: construction-category-weapons
   objectType: Item
   groups:
-    WeaponsKnowledge: 26
-    SurvivalKnowledge: 26
-    HandmadeKnowledge: 26
+    WeaponsKnowledge: 2
+    SurvivalKnowledge: 2
+    HandmadeKnowledge: 2

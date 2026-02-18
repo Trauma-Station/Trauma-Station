@@ -5,8 +5,8 @@
   category: construction-category-weapons
   objectType: Item
   groups:
-    HandmadeKnowledge: 57
-    TechnologicalKnowledge: 5
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 5
 
 - type: construction
   name: recipes-wooden-wand-name
@@ -16,4 +16,4 @@
   category: construction-category-weapons
   objectType: Item
   groups:
-    HandmadeKnowledge: 57
+    HandmadeKnowledge: 3
