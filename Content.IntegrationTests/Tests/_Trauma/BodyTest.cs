@@ -10,7 +10,7 @@ namespace Content.IntegrationTests.Tests._Trauma;
 public sealed class BodyTest
 {
     /// <summary>
-    /// Makes sure that ever mob with a Body has a root part (torso).
+    /// Makes sure that every mob with a Body has a root part (torso).
     /// </summary>
     [Test]
     public async Task BodyRootPartExists()
