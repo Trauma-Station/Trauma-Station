@@ -108,7 +108,8 @@ public sealed class GhoulSystem : SharedGhoulSystem
         base.Initialize();
 
         UpdatesAfter.Add(typeof(HolyFlammableSystem));
-        SubscribeLocalEvent<GhoulComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<GhoulComponent, MapInitEvent>(OnMapInit,
+            after: [ typeof(InitialBodySystem) ]);
         SubscribeLocalEvent<GhoulComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<GhoulComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<GhoulComponent, MobStateChangedEvent>(OnMobStateChange);
