@@ -35,7 +35,7 @@ public sealed class BodyTest
                     if (!proto.Components.ContainsKey(bodyName))
                         continue;
 
-                    var mob = entMan.SpawnEntity(proto, map.GridCoords);
+                    var mob = entMan.SpawnEntity(proto.ID, map.GridCoords);
                     Assert.That(partSys.GetRootPart(mob), Is.Not.Null, $"{entMan.ToPrettyString(mob)} had no root part!");
                     entMan.DeleteEntity(mob);
                 }
