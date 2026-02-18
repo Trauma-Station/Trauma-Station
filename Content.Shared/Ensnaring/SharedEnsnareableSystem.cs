@@ -255,7 +255,7 @@ public abstract class SharedEnsnareableSystem : EntitySystem
 
         if (TryEnsnare(args.Target, uid, component))
         {
-            _audio.PlayLocal(component.EnsnareSound, uid); // Trauma - play local, throwing is predicted
+            _audio.PlayLocal(component.EnsnareSound, uid, null); // Trauma - play local, throwing is predicted
         }
     }
 
