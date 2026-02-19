@@ -55,8 +55,7 @@ public sealed class AbductorConsoleBui : BoundUserInterface
     private void TryInitWindow()
     {
         if (_window != null) return;
-        _window = new AbductorConsoleWindow();
-        _window.OnClose += Close;
+        _window = this.CreateWindow<AbductorConsoleWindow>();
         _window.Title = "console";
 
         _window.TeleportTabButton.OnPressed += _ => View(ViewType.Teleport);
