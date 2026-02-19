@@ -90,7 +90,7 @@ public sealed class AbductorTest : InteractionTest
 
         // spawn our victim and a beacon for him
         var coords = SEntMan.GetNetCoordinates(MapData.GridCoords);
-        var urist = await SpawnTarget(Victim, coords);
+        var urist = SEntMan.GetEntity(await SpawnTarget(Victim, coords));
         var beacon = await Spawn(Beacon, coords);
         // put our brave soldier in interaction range of the console
         Transform.PlaceNextTo(SPlayer, teleporter.Owner);
@@ -168,9 +168,9 @@ public sealed class AbductorTest : InteractionTest
         await CloseBui(AbductorConsoleUIKey.Key, consoleNet);
         await AwaitDoAfters();
 
-        var uristXform = SEntMan.GetComponent<TransformComponent>(STarget!.Value);
+        var uristXform = SEntMan.GetComponent<TransformComponent>(urist);
         Assert.That(uristXform.GridUid, Is.EqualTo(shittle),
-            $"Failed to teleport urist using abductor console!");
+            $"Failed to teleport urist using abductor console, currently at {Transform.GetWorldPosition(urist)}!");
 
         // 5. put urist in the pod and send him home
         await DragDrop(Target.Value, podNet);
