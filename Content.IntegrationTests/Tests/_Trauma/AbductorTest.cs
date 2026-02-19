@@ -4,6 +4,7 @@ using Content.Medical.Shared.Abductor;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Power.Components;
 using Robust.Shared.GameObjects;
@@ -142,7 +143,7 @@ public sealed class AbductorTest : InteractionTest
         // 3. teleport back to ship
         // TODO: this is extreme shitcode and should just be stored on an abductor component
         var action = SEntMan.GetComponent<ActionGrantComponent>(SPlayer).ActionEntities[0];
-        actions.PerformAction(SPlayer, (action, Comp<ActionComponent>(action)), predicted: false);
+        actions.PerformAction(SPlayer, (action, SEntMan.GetComponent<ActionComponent>(action)), predicted: false);
         await AwaitDoAfters();
         await RunTicks(3);
         Assert.That(xform.GridUid, Is.EqualTo(shittle),
