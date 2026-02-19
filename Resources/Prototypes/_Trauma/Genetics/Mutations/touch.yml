@@ -18,6 +18,9 @@
   components:
   - type: Action
     useDelay: 7
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: zap
   - type: TargetAction
   - type: EntityTargetAction
     whitelist:
@@ -50,6 +53,9 @@
 #  components:
 #  - type: Action
 #    useDelay: 12
+#    icon:
+#      sprite: _Trauma/Actions/mutations.rsi
+#      state: mending_touch
 #  - type: TargetAction
 #  - type: EntityTargetAction
 #    whitelist:

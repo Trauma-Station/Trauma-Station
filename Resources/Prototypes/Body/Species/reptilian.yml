@@ -148,6 +148,7 @@
   - type: Mutatable
     dormant:
     - MutationFireBreath
+    - MutationMonkified # return to kobold
   # </Trauma>
   - type: Puller
     #needsHands: false # Trauma - controlled by tail

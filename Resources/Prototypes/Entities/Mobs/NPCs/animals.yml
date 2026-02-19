@@ -1658,6 +1658,11 @@
     - Kobold
     - Monkey
     - TauCetiBasic
+  - type: Mutatable
+    defaultMutations:
+      MutationMonkified: 1.0 # free lizardmen...
+    dormant:
+    - MutationMonkified
   # </Trauma>
   - type: NameIdentifier
     group: Kobold

@@ -26,6 +26,7 @@ public abstract class SharedAutodocSystem : EntitySystem
 {
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly BodyPartSystem _part = default!;
@@ -406,7 +407,7 @@ public abstract class SharedAutodocSystem : EntitySystem
         program.Steps.Insert(index, step);
         Dirty(ent);
 
-        _adminLogger.Add(LogType.InteractActivate, LogImpact.Low, $"{ToPrettyString(user):user} added step '{step.Title}' to autodoc program '{program.Title}'");
+        _adminLogger.Add(LogType.InteractActivate, LogImpact.Low, $"{ToPrettyString(user):user} added step '{step.Title(_proto)}' to autodoc program '{program.Title}'");
         return true;
     }
 

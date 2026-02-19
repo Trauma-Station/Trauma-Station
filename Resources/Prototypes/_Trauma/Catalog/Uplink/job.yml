@@ -11,6 +11,7 @@
   - !type:BuyerJobCondition
     whitelist:
     - Virologist
+    - Geneticist # gene therapy..?
 
 - type: listing
   id: UplinkNecronomicon # dog

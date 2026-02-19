@@ -16,13 +16,19 @@ namespace Content.Trauma.Shared.Genetics.Abilities;
 public sealed partial class PolymorphMutationComponent : Component
 {
     /// <summary>
-    /// The polymorph prototype to use.
+    /// The polymorph prototype to use for each allowd species.
     /// </summary>
     [DataField(required: true)]
-    public ProtoId<PolymorphPrototype> Prototype;
+    public Dictionary<ProtoId<SpeciesPrototype>, ProtoId<PolymorphPrototype>> Prototypes;
 
     /// <summary>
-    /// If non-null and <see cref="Worked"/> is false, will polymorph into this if removed.
+    /// If non-null and <see cref="Worked"/> is false, will polymorph into this if removed for the current species.
+    /// </summary>
+    [DataField]
+    public Dictionary<ProtoId<SpeciesPrototype>, ProtoId<PolymorphPrototype>> Reverts = new();
+
+    /// <summary>
+    /// Fallback for <see cref="Reverts"/> if there is no matching species.
     /// </summary>
     [DataField]
     public ProtoId<PolymorphPrototype>? Fallback;
