@@ -1,10 +1,8 @@
 // <Trauma>
 using Content.Trauma.Common.Throwing;
-using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.Random;
 // </Trauma>
 using System.Numerics;
 using Content.Shared.Administration.Logs;

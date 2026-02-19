@@ -9,11 +9,11 @@ namespace Content.Trauma.Common.MartialArts;
 public sealed partial class SneakAttackComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public bool IsFound;
+    public bool IsFound = false;
 
     [DataField, AutoNetworkedField]
     public int SecondsTillHidden = 2;
 
     [DataField, AutoNetworkedField]
-    public uint FramesTillHidden = 2;
+    public uint FramesTillHidden = 0;
 }

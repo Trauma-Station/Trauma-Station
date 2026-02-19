@@ -291,7 +291,7 @@ namespace Content.Client.Construction.UI
                     || _playerManager.LocalEntity == null
                     || _whitelistSystem.IsWhitelistFail(recipe.EntityWhitelist, _playerManager.LocalEntity.Value)
                     // <Trauma>
-                    || !recipe.Groups.Keys.All(group => availableGroups.ContainsKey(group)))
+                    || (_constructionSystem.IsKnowledgeHolder(_playerManager.LocalEntity.Value) && !recipe.Groups.Keys.All(group => availableGroups.ContainsKey(group))))
                     // </Trauma>
                     continue;
 

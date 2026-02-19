@@ -1,3 +1,4 @@
+using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Construction;
@@ -18,6 +19,11 @@ public abstract partial class SharedConstructionSystem
         var ev = new ConstructionGetGroupsEvent(new());
         RaiseLocalEvent(user, ref ev);
         return ev.Groups;
+    }
+
+    public bool IsKnowledgeHolder(EntityUid user)
+    {
+        return TryComp<KnowledgeHolderComponent>(user, out _);
     }
 }
 

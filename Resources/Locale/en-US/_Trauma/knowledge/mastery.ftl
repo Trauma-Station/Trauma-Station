@@ -43,6 +43,7 @@ knowledge-BotsKnowledge = Bots
 knowledge-FurnitureKnowledge = Furniture
 knowledge-InfrastructureKnowledge = Infrastructure
 knowledge-ElectronicsKnowledge = Electronics
+knowledge-DoorsKnowledge = Doors
 knowledge-WallsKnowledge = Walls
 knowledge-ScienceKnowledge = Science
 knowledge-WindowsKnowledge = Windows

@@ -6,7 +6,7 @@ public abstract partial class SharedKnowledgeSystem
 {
     public void OnConstructionGetGroupEvent(Entity<KnowledgeContainerComponent> ent, ref ConstructionGetGroupsEvent args)
     {
-        if (TryGetKnowledgeWithComp<KnowledgeComponent>(ent) is not { } knowledge)
+        if (TryGetAllKnowledgeUnits(ent) is not { } knowledge)
             return;
 
         foreach (var entity in knowledge)

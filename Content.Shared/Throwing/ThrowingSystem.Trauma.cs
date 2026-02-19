@@ -1,14 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Systems;
-using Content.Trauma.Common.Throwing;
-using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
-using Content.Shared.Weapons.Ranged.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Random;
 
 namespace Content.Shared.Throwing;

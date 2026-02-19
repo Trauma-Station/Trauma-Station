@@ -509,28 +509,15 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </summary>
     public override List<Entity<KnowledgeComponent>>? TryGetAllKnowledgeUnits(EntityUid target)
     {
-        List<Entity<KnowledgeComponent>>? found = null;
-        if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent))
-            return found;
-
-        var ent = TryGetKnowledgeContainer((target, holderComponent));
-        Container? container = null;
-
-        if (ent is not { } entVerified)
+        if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent) || TryGetKnowledgeEntity((target, holderComponent)) is not { } ent || !TryComp<KnowledgeContainerComponent>(ent, out var comp))
             return null;
 
-        container = EnsureContainer(entVerified);
+        var found = new List<Entity<KnowledgeComponent>>();
 
-        if (container == null)
-            return null;
-
-        foreach (var unit in container.ContainedEntities)
+        foreach (var knowledge in comp.KnowledgeContainerIDs)
         {
-            if (!TryComp<KnowledgeComponent>(unit, out var knowledgeComp))
-                continue;
-
-            found ??= [];
-            found.Add((unit, knowledgeComp));
+            if (TryComp<KnowledgeComponent>(knowledge.Value, out var knowledgeComponent))
+                found.Add((knowledge.Value, knowledgeComponent));
         }
 
         return found;

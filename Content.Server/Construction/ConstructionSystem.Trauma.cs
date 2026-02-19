@@ -1,7 +1,6 @@
 using System.Linq;
 using Content.Shared.Construction.Prototypes;
 using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Construction;

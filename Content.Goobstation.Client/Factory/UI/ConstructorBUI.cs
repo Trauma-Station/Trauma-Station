@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.Construction;
 using Content.Client.Construction.UI;
 using Content.Goobstation.Shared.Factory;
@@ -136,7 +129,7 @@ public sealed class ConstructorBUI : BoundUserInterface
                 continue;
 
             // <Trauma>
-            if (!recipe.Groups.Keys.All(group => availableGroups.ContainsKey(group)))
+            if (_construction.IsKnowledgeHolder(user) && !recipe.Groups.Keys.All(group => availableGroups.ContainsKey(group)))
                 continue;
             // </Trauma>
 

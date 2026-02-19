@@ -28,7 +28,23 @@
         - id: BookMagicalLiteracy
         - id: BookLiteracy
         - id: BookJanitor
+        - id: BookTechnology
         - id: BookLanguageTauCeti
+        - id: BookHandmade
+        - id: BookWeapons
+        - id: BookMaterials
+        - id: BookDoors
+        - id: BookAirlocks
+        - id: BookToys
+        - id: BookBananium
+        - id: BookBots
+        - id: BookFurniture
+        - id: BookInfrastructure
+        - id: BookElectronics
+        - id: BookWalls
+        - id: BookScience
+        - id: BookWindows
+        - id: BookSmokeables
 
 - type: entityTable
   id: RandomSkillbook
@@ -44,7 +60,23 @@
     - id: BookMagicalLiteracy
     - id: BookLiteracy
     - id: BookJanitor
+    - id: BookTechnology 
     - id: BookLanguageTauCeti
+    - id: BookHandmade
+    - id: BookWeapons
+    - id: BookMaterials
+    - id: BookDoors
+    - id: BookAirlocks
+    - id: BookToys
+    - id: BookBananium
+    - id: BookBots
+    - id: BookFurniture
+    - id: BookInfrastructure
+    - id: BookElectronics
+    - id: BookWalls
+    - id: BookScience
+    - id: BookWindows
+    - id: BookSmokeables
 
 - type: entity
   parent: BaseItem
@@ -194,6 +226,19 @@
 
 - type: entity
   parent: BookSkillbook
+  id: BookTechnology
+  name: old book
+  description: A small, black manual. Its a book about the basics of technology.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      TechnologyKnowledge: 26
+    experience:
+      TechnologyKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
   id: BookThrowing
   name: old book
   description: A small, black manual. Its a picture book.
@@ -216,4 +261,212 @@
       language-TauCetiBasic: 26
     experience:
       language-TauCetiBasic: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookHandmade
+  name: old book
+  description: A small, black manual. Its a book on the basics of handmade things.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      HandmadeKnowledge: 26
+    experience:
+      HandmadeKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookLanguageTauCeti
+  name: old book
+  description: A small, black manual. Its a book on the basics of the Tau Ceti language.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      SurvivalKnowledge: 26
+    experience:
+      SurvivalKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookWeapons
+  name: old book
+  description: A small, black manual. Its a book on the basics of weapons.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      WeaponsKnowledge: 26
+    experience:
+      WeaponsKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookMaterials
+  name: old book
+  description: A small, black manual. Its a book on the basics of materials.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      MaterialsKnowledge: 26
+    experience:
+      MaterialsKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookDoors
+  name: old book
+  description: A small, black manual. Its a book on the basics of doors.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      DoorsKnowledge: 26
+    experience:
+      DoorsKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookAirlocks
+  name: old book
+  description: A small, black manual. Its a book on the basics of airlocks.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      AirlocksKnowledge: 26
+    experience:
+      AirlocksKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookToys
+  name: old book
+  description: A small, black manual. Its a book on the basics of toys.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      ToysKnowledge: 26
+    experience:
+      ToysKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookBananium
+  name: old book
+  description: A small, black manual. Its a book on the basics of bananium.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      BananiumKnowledge: 26
+    experience:
+      BananiumKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookBots
+  name: old book
+  description: A small, black manual. Its a book on the basics of bots.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      BotsKnowledge: 26
+    experience:
+      BotsKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookFurniture
+  name: old book
+  description: A small, black manual. Its a book on the basics of furniture.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      FurnitureKnowledge: 26
+    experience:
+      FurnitureKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookInfrastructure
+  name: old book
+  description: A small, black manual. Its a book on the basics of infrastructure.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      InfrastructureKnowledge: 26
+    experience:
+      InfrastructureKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookElectronics
+  name: old book
+  description: A small, black manual. Its a book on the basics of electronics.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      ElectronicsKnowledge: 26
+    experience:
+      ElectronicsKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookWalls
+  name: old book
+  description: A small, black manual. Its a book on the basics of walls.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      WallsKnowledge: 26
+    experience:
+      WallsKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookScience
+  name: old book
+  description: A small, black manual. Its a book on the basics of science.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      ScienceKnowledge: 26
+    experience:
+      ScienceKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookWindows
+  name: old book
+  description: A small, black manual. Its a book on the basics of windows.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      WindowsKnowledge: 26
+    experience:
+      WindowsKnowledge: 1
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookSmokeables
+  name: old book
+  description: A small, black manual. Its got instructions on how to make a blunt inside.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      SmokeablessKnowledge: 26
+    experience:
+      SmokeablesKnowledge: 1
     doAfter: 2
