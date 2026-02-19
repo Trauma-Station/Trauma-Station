@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Medical.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Gibbing;
+using Content.Shared.Medical;
 using Content.Shared.Spawners.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -26,6 +29,11 @@ public sealed class BloodSplatterSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<BloodSplattererComponent, DamageChangedEvent>(OnDamage);
         SubscribeLocalEvent<BloodSplattererComponent, BeingGibbedEvent>(OnGib);
+        SubscribeLocalEvent<BloodSplattererComponent, TryVomitEvent>(OnVomit);
+    }
+    private void OnVomit(Entity<BloodSplattererComponent> ent, ref TryVomitEvent args)
+    {
+        Spawn(ent.Comp.VomitDecal, ent.Owner.ToCoordinates());
     }
 
     private void OnGib(Entity<BloodSplattererComponent> ent, ref BeingGibbedEvent args)
@@ -64,6 +72,12 @@ public sealed class BloodSplatterSystem : EntitySystem
 
         if (!_random.Prob(ent.Comp.Chance))
             return;
+
+        if (args.DamageDelta.GetTotal() <= ent.Comp.MinorTriggerDamage)
+        {
+            SpawnDecal(ent, bloodstream, ent.Comp.MinorDecal);
+            return;
+        }
 
         SpawnDecal(ent, bloodstream, ent.Comp.Decal);
 

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Medical.Common.Body;
 using Content.Shared.Body;
+using Content.Shared.Coordinates;
 using Content.Shared.Gibbing;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
@@ -81,6 +82,10 @@ public sealed partial class BodyPartSystem : CommonBodyPartSystem
     {
         if (GetSeveredOrgansContainer(ent.AsNullable()) is not {} container)
             return;
+
+        // Trauma - brain matter splatter
+        Spawn(ent.Comp.BrainSplatterDecal, ent.Owner.ToCoordinates());
+        // TraumaEnd
 
         // gibbing a severed head spills its brains out >:D
         foreach (var organ in container.ContainedEntities)

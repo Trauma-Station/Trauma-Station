@@ -24,7 +24,30 @@
     maxDecals: 1
     prob: 1
     zIndex: 5
-    color: '#9900007F'
+    color: '#800000'
+    cleanable: true
+    deleteSpawnerAfterSpawn: true
+
+- type: entity
+  parent: DecalSpawnerBase
+  id: DecalSpawnerMinorBloodSplattersTrauma
+  suffix: Blood Splatters
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - bloodFloorMinor1
+    - bloodFloorMinor2
+    - bloodFloorMinor3
+    - bloodFloorMinor4
+    - bloodFloorMinor5
+    - bloodFloorMinor6
+    - bloodFloorMinor7
+    radius: 0.5
+    randomRotation: true
+    maxDecals: 1
+    prob: 1
+    zIndex: 5
+    color: '#800000'
     cleanable: true
     deleteSpawnerAfterSpawn: true
 
@@ -51,5 +74,26 @@
     prob: 0.6
     zIndex: 5
     color: '#9900007F'
+    cleanable: true
+    deleteSpawnerAfterSpawn: true
+
+- type: entity
+  parent: DecalSpawnerBase
+  id: DecalSpawnerGibBrainSplatters
+  suffix: Blood Splatters
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - giblet1
+    - giblet2
+    - giblet3
+    - giblet4
+    - giblet5
+    radius: 0.7
+    randomRotation: true
+    maxDecals: 5
+    prob: 1
+    zIndex: 5
+    color: '#c584b8'
     cleanable: true
     deleteSpawnerAfterSpawn: true

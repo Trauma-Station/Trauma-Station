@@ -159,3 +159,66 @@
   sprite:
     sprite: _Trauma/Effects/blood.rsi
     state: giblet5
+
+- type: decal
+  id: bloodFloorMinor1
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/bloodSplatterMinor.rsi
+    state: floor1
+
+- type: decal
+  id: bloodFloorMinor2
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/bloodSplatterMinor.rsi
+    state: floor2
+
+- type: decal
+  id: bloodFloorMinor3
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/bloodSplatterMinor.rsi
+    state: floor3
+
+- type: decal
+  id: bloodFloorMinor4
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/bloodSplatterMinor.rsi
+    state: floor4
+
+- type: decal
+  id: bloodFloorMinor5
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/bloodSplatterMinor.rsi
+    state: floor5
+
+- type: decal
+  id: bloodFloorMinor6
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/bloodSplatterMinor.rsi
+    state: floor6
+
+- type: decal
+  id: bloodFloorMinor7
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/bloodSplatterMinor.rsi
+    state: floor7
