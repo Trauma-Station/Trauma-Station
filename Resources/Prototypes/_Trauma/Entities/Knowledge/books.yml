@@ -31,6 +31,7 @@
         - id: BookTechnology
         - id: BookLanguageTauCeti
         - id: BookHandmade
+        - id: BookSurvival
         - id: BookWeapons
         - id: BookMaterials
         - id: BookDoors
@@ -63,6 +64,7 @@
     - id: BookTechnology
     - id: BookLanguageTauCeti
     - id: BookHandmade
+    - id: BookSurvival
     - id: BookWeapons
     - id: BookMaterials
     - id: BookDoors
@@ -278,9 +280,9 @@
 
 - type: entity
   parent: BookSkillbook
-  id: BookLanguageTauCeti
+  id: BookSurvival
   name: old book
-  description: A small, black manual. Its a book on the basics of the Tau Ceti language.
+  description: A small, black manual. Its a book on the basics of survival.
   components:
   - type: KnowledgeGrantOnUse
     skills:
@@ -466,7 +468,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      SmokeablessKnowledge: 26
+      SmokeablesKnowledge: 26
     experience:
       SmokeablesKnowledge: 1
     doAfter: 2
