@@ -86,13 +86,15 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     private void OnAttractBuiMsg(Entity<AbductorConsoleComponent> ent, ref AbductorAttractBuiMsg args)
     {
+        var user = args.Actorl
         if (GetEntity(ent.Comp.Target) is not {} target || GetEntity(ent.Comp.AlienPod) is not {} telepad)
             return;
 
         var coords = Transform(telepad).Coordinates;
         var ev = new AbductorAttractDoAfterEvent(GetNetCoordinates(coords), GetNetEntity(target));
-        var doAfter = new DoAfterArgs(EntityManager, ent, TimeSpan.FromSeconds(3), ev, eventTarget: ent)
+        var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(3), ev, eventTarget: ent)
         {
+            // you get the doafter but you basically cant fuck it up
             BreakOnDamage = false,
             BreakOnDropItem = false,
             BreakOnHandChange = false,
@@ -101,7 +103,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         };
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
-            Log.Error("Failed to start attract doafter for {ToPrettyString(target)} with {ToPrettyString(ent)}!");
+            Log.Error("Failed to start attract doafter for {ToPrettyString(target)} by {ToPrettyString(user)} with {ToPrettyString(ent)}!");
             return;
         }
 
