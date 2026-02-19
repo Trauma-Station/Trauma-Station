@@ -6,6 +6,8 @@ using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Trauma.Common.Knowledge.Components;
@@ -252,7 +254,6 @@ public abstract partial class SharedKnowledgeSystem
             var modifier = 0.0f;
             bool isCurse = GetMastery(knownLanguageTrue) >= 5 && ContainsCursedWord(args.Message);
             var damage = new DamageSpecifier();
-
 
             if (TryComp<KnowledgeComponent>(knownLanguageTrue, out var knowledgeComponent))
             {

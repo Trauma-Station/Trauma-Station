@@ -1,6 +1,5 @@
 - type: combo
   id: NinjutsuTakedown
-  name: Ninjutsu Takedown
   attacks:
   - Hug
   userEffects:
@@ -20,7 +19,6 @@
 
 - type: combo
   id: BiteTheDust
-  name: Bite The Dust
   attacks:
   - Harm
   - Grab
@@ -40,7 +38,6 @@
 
 - type: combo
   id: DirtyKill
-  name: Dirty Kill
   attacks:
   - Disarm
   - Disarm
