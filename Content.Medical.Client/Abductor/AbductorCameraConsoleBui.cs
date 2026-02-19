@@ -65,15 +65,13 @@ public sealed class AbductorCameraConsoleBui : BoundUserInterface
         foreach (var beacon in beacons)
         {
             var beaconButton = new ChoiceControl();
+            var target = beacon.NetEnt;
 
             beaconButton.Set(beacon.Text, null);
             beaconButton.Button.Modulate = beacon.Color;
             beaconButton.Button.OnPressed += _ =>
             {
-                SendMessage(new AbductorBeaconChosenBuiMsg()
-                {
-                    Beacon = beacon,
-                });
+                SendMessage(new AbductorBeaconChosenBuiMsg(target));
                 Close();
             };
             _window.Beacons.AddChild(beaconButton);

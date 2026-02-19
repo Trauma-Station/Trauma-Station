@@ -9,14 +9,11 @@ namespace Content.Medical.Shared.Abductor;
 
 // RIP mocho fucking chud died fighting in ukraine
 
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem)), AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
 public sealed partial class AbductorHumanObservationConsoleComponent : Component
 {
-    [DataField(readOnly: true)]
+    [DataField]
     public EntProtoId RemoteEntityProto = "AbductorHumanObservationConsoleEye";
-
-    [DataField, AutoNetworkedField]
-    public NetEntity? RemoteEntity;
 }
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem)), AutoGenerateComponentState]
 public sealed partial class AbductorConsoleComponent : Component
@@ -73,7 +70,7 @@ public sealed partial class AbductorVictimComponent : Component
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
 public sealed partial class AbductorOrganComponent : Component;
 
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem)), AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class AbductorScientistComponent : Component
 {
     [DataField, AutoNetworkedField]

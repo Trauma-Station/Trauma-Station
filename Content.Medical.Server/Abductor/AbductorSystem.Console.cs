@@ -24,7 +24,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     public static readonly SoundSpecifier ExperimentSound = new SoundPathSpecifier(new ResPath("/Audio/Voice/Human/wilhelm_scream.ogg"));
 
-    public void InitializeConsole()
+    private void InitializeConsole()
     {
         SubscribeLocalEvent<AbductorConsoleComponent, BeforeActivatableUIOpenEvent>(OnBeforeActivatableUIOpen);
         SubscribeLocalEvent<AbductConditionComponent, ObjectiveGetProgressEvent>(OnAbductGetProgress);
