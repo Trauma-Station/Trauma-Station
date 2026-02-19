@@ -141,7 +141,7 @@ public sealed class AbductorTest : InteractionTest
             $"Using gizmo on a urist didn't set him as the target");
 
         // 3. teleport back to ship
-        EntityUid action;
+        var action = EntityUid.Invalid;
         await Server.WaitPost(() =>
         {
             // TODO: this is extreme shitcode and should just be stored on an abductor component
