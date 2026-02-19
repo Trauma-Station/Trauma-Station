@@ -26,6 +26,7 @@
   id: JudoThrow
   attacks:
   - Grab
+  - Grab
   - Disarm
   opponentEffects:
   - !type:GenericStatusEffect
