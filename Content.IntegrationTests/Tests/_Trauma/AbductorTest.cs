@@ -164,6 +164,7 @@ public sealed class AbductorTest : InteractionTest
         Transform.PlaceNextTo(SPlayer, console.Owner);
         await Activate(consoleNet);
         Assert.That(IsUiOpen(AbductorConsoleUIKey.Key));
+        Assert.That(console.Comp.AlienPod, Is.Not.Null);
         await SendBui(AbductorConsoleUIKey.Key, new AbductorAttractBuiMsg(), consoleNet);
         await CloseBui(AbductorConsoleUIKey.Key, consoleNet);
         await AwaitDoAfters();

@@ -89,12 +89,8 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         if (GetEntity(ent.Comp.Target) is not {} target || GetEntity(ent.Comp.AlienPod) is not {} telepad)
             return;
 
-        AddTeleportationEffect(target, TeleportationEffectEntityShort);
-        AddTeleportationEffect(telepad, TeleportationEffectShort);
-
         var coords = Transform(telepad).Coordinates;
         var ev = new AbductorAttractDoAfterEvent(GetNetCoordinates(coords), GetNetEntity(target));
-        ent.Comp.Target = null;
         var doAfter = new DoAfterArgs(EntityManager, ent, TimeSpan.FromSeconds(3), ev, eventTarget: ent)
         {
             BreakOnDamage = false,
@@ -103,8 +99,19 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
             BreakOnMove = false,
             BreakOnWeightlessMove = false,
         };
-        _doAfter.TryStartDoAfter(doAfter);
+        if (!_doAfter.TryStartDoAfter(doAfter))
+        {
+            Log.Error("Failed to start attract doafter for {ToPrettyString(target)} with {ToPrettyString(ent)}!");
+            return;
+        }
+
+        AddTeleportationEffect(target, TeleportationEffectEntityShort);
+        AddTeleportationEffect(telepad, TeleportationEffectShort);
+
+        ent.Comp.Target = null;
+        Dirty(ent);
     }
+
     private void OnDoAfterAttract(Entity<AbductorConsoleComponent> ent, ref AbductorAttractDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
