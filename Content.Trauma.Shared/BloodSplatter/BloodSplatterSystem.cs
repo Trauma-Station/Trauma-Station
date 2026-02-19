@@ -8,6 +8,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Gibbing;
 using Content.Shared.Medical;
 using Content.Shared.Spawners.Components;
+using Content.Trauma.Shared.Medical.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -29,9 +30,16 @@ public sealed class BloodSplatterSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<BloodSplattererComponent, DamageChangedEvent>(OnDamage);
         SubscribeLocalEvent<BloodSplattererComponent, BeingGibbedEvent>(OnGib);
-        SubscribeLocalEvent<BloodSplattererComponent, TryVomitEvent>(OnVomit);
+        SubscribeLocalEvent<BrainSplattererComponent, BeingGibbedEvent>(OnBrainGib);
+        SubscribeLocalEvent<BloodSplattererComponent, VomitedEvent>(OnVomit);
     }
-    private void OnVomit(Entity<BloodSplattererComponent> ent, ref TryVomitEvent args)
+
+    private void OnBrainGib(Entity<BrainSplattererComponent> ent, ref BeingGibbedEvent args)
+    {
+        Spawn(ent.Comp.BrainSplatterDecal, ent.Owner.ToCoordinates());
+    }
+
+    private void OnVomit(Entity<BloodSplattererComponent> ent, ref VomitedEvent args)
     {
         Spawn(ent.Comp.VomitDecal, ent.Owner.ToCoordinates());
     }

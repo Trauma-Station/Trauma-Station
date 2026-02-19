@@ -1,5 +1,16 @@
 - type: entity
   parent: DecalSpawnerBase
+  id: DecalSpawnerSplatterCleanableBase
+  abstract: true
+  components:
+  - type: RandomDecalSpawner
+    zIndex: 5
+    color: '#800000'
+    cleanable: true
+    deleteSpawnerAfterSpawn: true
+
+- type: entity
+  parent: DecalSpawnerSplatterCleanableBase
   id: DecalSpawnerBloodSplattersTrauma
   suffix: Blood Splatters
   components:
@@ -23,15 +34,12 @@
     randomRotation: true
     maxDecals: 1
     prob: 1
-    zIndex: 5
     color: '#800000'
-    cleanable: true
-    deleteSpawnerAfterSpawn: true
 
 - type: entity
-  parent: DecalSpawnerBase
+  parent: DecalSpawnerSplatterCleanableBase
   id: DecalSpawnerMinorBloodSplattersTrauma
-  suffix: Blood Splatters
+  suffix: Blood Splatters minor
   components:
   - type: RandomDecalSpawner
     decals:
@@ -46,15 +54,12 @@
     randomRotation: true
     maxDecals: 1
     prob: 1
-    zIndex: 5
     color: '#800000'
-    cleanable: true
-    deleteSpawnerAfterSpawn: true
 
 - type: entity
-  parent: DecalSpawnerBase
+  parent: DecalSpawnerSplatterCleanableBase
   id: DecalSpawnerGibBloodSplatters
-  suffix: Blood Splatters
+  suffix: Blood Splatter gib
   components:
   - type: RandomDecalSpawner
     decals:
@@ -72,15 +77,12 @@
     randomRotation: true
     maxDecals: 25
     prob: 0.6
-    zIndex: 5
     color: '#9900007F'
-    cleanable: true
-    deleteSpawnerAfterSpawn: true
 
 - type: entity
-  parent: DecalSpawnerBase
+  parent: DecalSpawnerSplatterCleanableBase
   id: DecalSpawnerGibBrainSplatters
-  suffix: Blood Splatters
+  suffix: Blood Splatters gib
   components:
   - type: RandomDecalSpawner
     decals:
@@ -93,7 +95,4 @@
     randomRotation: true
     maxDecals: 5
     prob: 1
-    zIndex: 5
     color: '#c584b8'
-    cleanable: true
-    deleteSpawnerAfterSpawn: true

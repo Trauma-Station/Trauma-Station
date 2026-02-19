@@ -135,6 +135,9 @@
   - type: WoundableVisuals
     bleedingOverlay: _Shitmed/Mobs/Effects/bleeding_damage.rsi
   # </Shitmed>
+  # <Trauma>
+  - type: BrainSplatterer
+  # </Trauma>
   - type: Organ
     category: Head
   - type: Sprite

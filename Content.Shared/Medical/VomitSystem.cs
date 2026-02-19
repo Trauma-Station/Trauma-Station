@@ -77,6 +77,11 @@ public sealed class VomitSystem : EntitySystem
         if (!ev.Handled)
             return;
 
+        // <Trauma>
+        var vomitEv = new VomitedEvent(solution);
+        RaiseLocalEvent(uid, ref vomitEv);
+        // </Trauma>
+
         // Vomiting makes you hungrier and thirstier
         if (TryComp<HungerComponent>(uid, out var hunger))
             _hunger.ModifyHunger(uid, hungerAdded, hunger);
@@ -129,3 +134,6 @@ public sealed class VomitSystem : EntitySystem
 
 [ByRefEvent]
 public record struct TryVomitEvent(Solution Sol, bool Forced = false, bool Handled = false);
+
+[ByRefEvent]
+public record struct VomitedEvent(Solution Sol, bool Handled = false);
