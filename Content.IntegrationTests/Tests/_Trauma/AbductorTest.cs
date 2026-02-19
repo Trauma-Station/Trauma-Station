@@ -141,9 +141,12 @@ public sealed class AbductorTest : InteractionTest
             $"Using gizmo on a urist didn't set him as the target");
 
         // 3. teleport back to ship
-        // TODO: this is extreme shitcode and should just be stored on an abductor component
-        var action = SEntMan.GetComponent<ActionGrantComponent>(SPlayer).ActionEntities[0];
-        actions.PerformAction(SPlayer, (action, SEntMan.GetComponent<ActionComponent>(action)), predicted: false);
+        await Server.WaitPost(() =>
+        {
+            // TODO: this is extreme shitcode and should just be stored on an abductor component
+            var action = SEntMan.GetComponent<ActionGrantComponent>(SPlayer).ActionEntities[0];
+            actions.PerformAction(SPlayer, (action, SEntMan.GetComponent<ActionComponent>(action)), predicted: false);
+        });
         await AwaitDoAfters();
         await RunTicks(3);
         Assert.That(xform.GridUid, Is.EqualTo(shittle),
