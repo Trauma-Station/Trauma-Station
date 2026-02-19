@@ -1,0 +1,1 @@
+foxdie-yell = Fox..... DIE!!!!!!!
