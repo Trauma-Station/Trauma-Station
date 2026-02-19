@@ -61,7 +61,7 @@ public sealed class AbductorTest : InteractionTest
             rule = ticker.AddGameRule(LoneRule);
 
             // skipping ftl and just teleporting it to the "station" map, in space far away
-            var shittle = SEntMan.GetComponent<RuleGridsComponent>(rule).MapGrids[0];
+            shittle = SEntMan.GetComponent<RuleGridsComponent>(rule).MapGrids[0];
             Transform.SetCoordinates(shittle, new EntityCoordinates(MapData.MapUid, new Vector2(500, 0)));
 
             // prevent colliding with the consoles
@@ -151,7 +151,7 @@ public sealed class AbductorTest : InteractionTest
         await AwaitDoAfters();
         await RunTicks(3);
         Assert.That(xform.GridUid, Is.EqualTo(shittle),
-            $"Abductor failed to return to ship using action {SEntMan.ToPrettyString(action)}!");
+            $"Abductor failed to return to ship using action {SEntMan.ToPrettyString(action)}, currently at {Transform.GetWorldPosition(SPlayer)}!");
 
         // 4. abduct the urist: link the target to abductor console
         Assert.That(console.Comp.Target, Is.Null,
