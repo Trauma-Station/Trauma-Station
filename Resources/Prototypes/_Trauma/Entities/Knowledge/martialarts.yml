@@ -82,6 +82,7 @@
     - BiteTheDust
     - DirtyKill
     - NinjutsuTakedown
+  - type: SneakAttack
 
 - type: entity
   parent: BaseMartialArtsKnowledge

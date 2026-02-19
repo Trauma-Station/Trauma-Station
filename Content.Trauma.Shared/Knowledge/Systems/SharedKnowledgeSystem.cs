@@ -74,8 +74,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             foreach (var knowledgeUnit in knowledgeUnits)
             {
                 if (RollForLevelUp(knowledgeUnit, (ent, comp)))
-                    return;
+                    break;
             }
+
+            if (GetActiveMartialArt(ent) is { } martialArts
+                && TryComp<SneakAttackComponent>(martialArts, out var sneakAttack)
+                && sneakAttack.IsFound
+                && _timing.CurTick.Value < sneakAttack.FramesTillHidden + (uint) (sneakAttack.SecondsTillHidden * _timing.TickRate))
+                sneakAttack.IsFound = false;
         }
         _lastUpdateTick = _timing.CurTick.Value;
     }

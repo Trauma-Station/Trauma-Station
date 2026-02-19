@@ -61,6 +61,9 @@ public partial class MartialArtsSystem
 
     private void OnComboAttackPerformed(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
     {
+        if (TryComp<SneakAttackComponent>(ent, out var sneakAttack) && sneakAttack.IsFound)
+            return;
+
         if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && (martialArtsComp.Blocked || martialArtsComp.TemporaryBlockedCounter > 0))
         {
             var entProto = MetaData(ent).EntityPrototype?.ID;

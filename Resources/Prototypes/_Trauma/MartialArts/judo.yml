@@ -1,6 +1,7 @@
 - type: combo
   id: JudoDiscombobulate
   attacks:
+  - Grab
   - Disarm
   - Grab
   opponentEffects:
@@ -12,6 +13,7 @@
   id: JudoEyePoke
   attacks:
   - Disarm
+  - Harm
   - Harm
   opponentEffects:
   - !type:TakeStaminaDamage
@@ -44,7 +46,7 @@
   id: JudoArmbar
   attacks:
   - Disarm
-  - Disarm
+  - Harm
   - Grab
   opponentEffects:
   - !type:GenericStatusEffect

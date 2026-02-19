@@ -139,10 +139,23 @@ public abstract partial class SharedKnowledgeSystem
             }); //Provide Armor Piercing at high melee
         }
 
-        args.BonusDamage += (args.BaseDamage * bonus / 100);
 
-        if (_netManager.IsClient)
-            return;
+        if (GetActiveMartialArt(ent) is { } martialArt)
+        {
+            if (TryComp<SneakAttackComponent>(martialArt, out var sneakAttack))
+            {
+                sneakAttack.FramesTillHidden = _timing.CurTick.Value;
+                sneakAttack.IsFound = true;
+                Dirty(martialArt, sneakAttack);
+            }
+            if (TryComp<SneakAttackComponent>(martialArt, out var speedArt))
+            {
+                speedArt.FramesTillHidden = _timing.CurTick.Value;
+                Dirty(martialArt, speedArt);
+            }
+        }
+
+        args.BonusDamage += (args.BaseDamage * bonus / 100);
     }
 
     private void OnStaminaTakeDamage(Entity<KnowledgeHolderComponent> ent, ref BeforeStaminaDamageEvent args)
@@ -174,6 +187,12 @@ public abstract partial class SharedKnowledgeSystem
             var ev = new AddExperience("ToughnessKnowledge", Math.Min((int) args.Damage.GetTotal() / 5, 10));
             RaiseLocalEvent(ent, ref ev);
         }
+        if (GetActiveMartialArt(ent) is { } martialArt && TryComp<SneakAttackComponent>(martialArt, out var sneakAttack))
+        {
+            sneakAttack.FramesTillHidden = _timing.CurTick.Value;
+            sneakAttack.IsFound = true;
+            Dirty(martialArt, sneakAttack);
+        }
     }
 
     private void OnUpdateMartialArts(KnowledgeUpdateMartialArts ev, EntitySessionEventArgs args)
@@ -188,5 +207,13 @@ public abstract partial class SharedKnowledgeSystem
 
         knowledgeContainerComp.MartialArtSkillUid = knowledgeUid;
         Dirty(knowledgeEnt, knowledgeContainerComp);
+    }
+
+    private EntityUid? GetActiveMartialArt(EntityUid target)
+    {
+        var brain = TryGetKnowledgeEntity(target);
+        if (brain is { } brainActual && TryComp<KnowledgeContainerComponent>(brainActual, out var knowledgeContainerComp) && knowledgeContainerComp.MartialArtSkillUid is { } martialArt)
+            return martialArt;
+        return null;
     }
 }
