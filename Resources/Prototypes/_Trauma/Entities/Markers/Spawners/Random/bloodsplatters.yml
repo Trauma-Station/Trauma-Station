@@ -34,7 +34,6 @@
     randomRotation: true
     maxDecals: 1
     prob: 1
-    color: '#800000'
 
 - type: entity
   parent: DecalSpawnerSplatterCleanableBase
@@ -54,7 +53,6 @@
     randomRotation: true
     maxDecals: 1
     prob: 1
-    color: '#800000'
 
 - type: entity
   parent: DecalSpawnerSplatterCleanableBase
@@ -82,7 +80,7 @@
 - type: entity
   parent: DecalSpawnerSplatterCleanableBase
   id: DecalSpawnerGibBrainSplatters
-  suffix: Blood Splatters gib
+  suffix: Blood Splatters brain
   components:
   - type: RandomDecalSpawner
     decals:

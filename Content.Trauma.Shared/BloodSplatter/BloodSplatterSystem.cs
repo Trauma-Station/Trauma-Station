@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Medical.Shared.Body;
+using Content.Medical.Common.Vomiting;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Gibbing;
-using Content.Shared.Medical;
 using Content.Shared.Spawners.Components;
 using Content.Trauma.Shared.Medical.Components;
 using Robust.Shared.Prototypes;

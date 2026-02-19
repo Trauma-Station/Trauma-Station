@@ -1,3 +1,4 @@
+using Content.Medical.Common.Vomiting; // Trauma
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -78,7 +79,7 @@ public sealed class VomitSystem : EntitySystem
             return;
 
         // <Trauma>
-        var vomitEv = new VomitedEvent(solution);
+        var vomitEv = new VomitedEvent();
         RaiseLocalEvent(uid, ref vomitEv);
         // </Trauma>
 
@@ -134,6 +135,3 @@ public sealed class VomitSystem : EntitySystem
 
 [ByRefEvent]
 public record struct TryVomitEvent(Solution Sol, bool Forced = false, bool Handled = false);
-
-[ByRefEvent]
-public record struct VomitedEvent(Solution Sol, bool Handled = false);
