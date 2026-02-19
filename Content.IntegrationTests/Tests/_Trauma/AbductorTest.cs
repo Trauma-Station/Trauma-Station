@@ -142,7 +142,7 @@ public sealed class AbductorTest : InteractionTest
         // 3. teleport back to ship
         // TODO: this is extreme shitcode and should just be stored on an abductor component
         var action = SEntMan.GetComponent<ActionGrantComponent>(SPlayer).ActionEntities[0];
-        actions.PerformAction(SPlayer, action, predicted: false);
+        actions.PerformAction(SPlayer, (action, Comp<ActionComponent>(action)), predicted: false);
         await AwaitDoAfters();
         await RunTicks(3);
         Assert.That(xform.GridUid, Is.EqualTo(shittle),
