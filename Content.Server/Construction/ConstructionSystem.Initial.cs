@@ -1,19 +1,12 @@
-// <Trauma>
-// </Trauma>
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Construction; // Goobstation
-using Content.Goobstation.Common.Weapons;
-using Content.Lavaland.Common.Weapons;
-using Content.Medical.Common.Targeting;
 using Content.Server.Construction.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Construction;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Construction.Steps;
-using Content.Shared.Coordinates;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -22,18 +15,12 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mind.Components; // Goobstation
-using Content.Shared.Random.Helpers;
 using Content.Shared.Storage;
 using Content.Shared.Whitelist;
-using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
-using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Toolshed.TypeParsers;
 
 namespace Content.Server.Construction
 {
