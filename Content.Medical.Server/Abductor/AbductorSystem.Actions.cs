@@ -29,7 +29,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     public static readonly SoundSpecifier TeleportSound = new SoundPathSpecifier(new ResPath("/Audio/_Shitmed/Misc/alien_teleport.ogg"));
 
-    public void InitializeActions()
+    private void InitializeActions()
     {
         SubscribeLocalEvent<AbductorScientistComponent, ComponentStartup>(AbductorScientistComponentStartup);
 
@@ -51,6 +51,16 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         if (!TryComp<AbductorScientistComponent>(user, out var comp))
             return;
 
+        var doAfter = new DoAfterArgs(EntityManager, ev.Performer, TimeSpan.FromSeconds(3), new AbductorReturnDoAfterEvent(), ev.Performer)
+        {
+            MultiplyDelay = false,
+        };
+        if (!_doAfter.TryStartDoAfter(doAfter))
+        {
+            Log.Error($"Couldn't start return doafter for {ToPrettyString(user)}!");
+            return;
+        }
+
         AddTeleportationEffect(user, TeleportationEffectEntityShort);
 
         if (comp.SpawnPosition is {} pos)
@@ -59,11 +69,6 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
             _audio.PlayPvs(TeleportSound, effect);
         }
 
-        var doAfter = new DoAfterArgs(EntityManager, ev.Performer, TimeSpan.FromSeconds(3), new AbductorReturnDoAfterEvent(), ev.Performer)
-        {
-            MultiplyDelay = false,
-        };
-        _doAfter.TryStartDoAfter(doAfter);
         ev.Handled = true;
     }
 
@@ -81,19 +86,30 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     private void OnSendYourself(SendYourselfEvent ev)
     {
-        // no sound so you can jump people
         var user = ev.Performer;
+        var @event = new AbductorSendYourselfDoAfterEvent(GetNetCoordinates(ev.Target));
+        var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(5), @event, user)
+        {
+            RequireCanInteract = false, // CANNOT WORK WITHOUT THIS, the abductor eye is usually prevented from interacting.
+        };
+        if (!_doAfter.TryStartDoAfter(doAfter))
+        {
+            Log.Error($"Couldn't start send doafter for {ToPrettyString(user)}!");
+            return;
+        }
+
+        // no sound so you can jump people
         AddTeleportationEffect(user, TeleportationEffectEntity, playAudio: false);
         Spawn(TeleportationEffect, ev.Target);
 
-        var @event = new AbductorSendYourselfDoAfterEvent(GetNetCoordinates(ev.Target));
-        var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(5), @event, user);
-        _doAfter.TryStartDoAfter(doAfter);
         ev.Handled = true;
     }
 
     private void OnDoAfterSendYourself(Entity<AbductorScientistComponent> ent, ref AbductorSendYourselfDoAfterEvent args)
     {
+        if (args.Handled || args.Cancelled)
+            return;
+
         _color.RaiseEffect(Color.FromHex("#BA0099"), new List<EntityUid>(1) { ent }, Filter.Pvs(ent, entityManager: EntityManager));
         StopPulls(ent);
         _xform.SetCoordinates(ent, GetCoordinates(args.TargetCoordinates));
@@ -102,12 +118,12 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     private void OnExit(ExitConsoleEvent ev) => OnCameraExit(ev.Performer);
 
-    private void AddActions(AbductorBeaconChosenBuiMsg args)
+    private void AddActions(EntityUid user)
     {
-        EnsureComp<AbductorsAbilitiesComponent>(args.Actor, out var comp);
-        comp.HiddenActions = _actions.HideActions(args.Actor);
-        _actions.AddAction(args.Actor, ref comp.ExitConsole, ExitAction);
-        _actions.AddAction(args.Actor, ref comp.SendYourself, SendYourself);
+        EnsureComp<AbductorsAbilitiesComponent>(user, out var comp);
+        comp.HiddenActions = _actions.HideActions(user);
+        _actions.AddAction(user, ref comp.ExitConsole, ExitAction);
+        _actions.AddAction(user, ref comp.SendYourself, SendYourself);
     }
 
     private void RemoveActions(EntityUid actor)

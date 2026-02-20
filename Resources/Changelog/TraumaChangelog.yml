@@ -2683,3 +2683,28 @@ Entries:
   id: 323
   time: '2026-02-18T20:56:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/753
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed beenade and sharpnel grenade not activating
+  id: 324
+  time: '2026-02-19T22:01:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/761
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added a decal for whenever you vomit
+  - type: Tweak
+    message: Gibbing a head now spawns decals
+  - type: Tweak
+    message: Damage under a certain threshold now has a special decal
+  id: 325
+  time: '2026-02-20T00:01:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/762
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed abductor shitcode forever.
+  id: 326
+  time: '2026-02-20T00:30:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/764

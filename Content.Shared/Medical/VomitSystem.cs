@@ -1,3 +1,4 @@
+using Content.Medical.Common.Vomiting; // Trauma
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -76,6 +77,11 @@ public sealed class VomitSystem : EntitySystem
 
         if (!ev.Handled)
             return;
+
+        // <Trauma>
+        var vomitEv = new VomitedEvent();
+        RaiseLocalEvent(uid, ref vomitEv);
+        // </Trauma>
 
         // Vomiting makes you hungrier and thirstier
         if (TryComp<HungerComponent>(uid, out var hunger))
