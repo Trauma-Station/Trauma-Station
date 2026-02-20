@@ -64,8 +64,8 @@ public sealed class BodyTest
         var map = await pair.CreateTestMap();
 
         var bodyName = factory.GetComponentName<BodyComponent>();
-        var started = new List<string>();
-        var ended = new List<string>();
+        var started = new HashSet<string>();
+        var ended = new HashSet<string>();
         await server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
