@@ -96,7 +96,7 @@ public sealed partial class ChangelingIdentityComponent : Component
     public List<EntityUid>? ActiveArmor = null;
 
     [DataField, AutoNetworkedField]
-    public Dictionary<string, EntityUid?> Equipment = new();
+    public Dictionary<string, EntityUid> Equipment = new();
 
     /// <summary>
     ///     The default stasis time (in s).
