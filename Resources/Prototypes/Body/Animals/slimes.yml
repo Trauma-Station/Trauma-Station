@@ -4,10 +4,8 @@
   components:
   - type: BodyCache # Shitmed
   - type: Body
-  - type: EntityTableContainerFill
-    containers:
-      body_organs: !type:AllSelector
-        children:
-        - id: OrganSlimesTorso # Shitmed
-        - id: OrganSlimePersonCore
-        - id: OrganSlimePersonLungs
+  - type: InitialBody # Shitmed - replaced container fill
+    organs:
+      Torso: OrganSlimesTorso # Shitmed
+      Stomach: OrganSlimePersonCore
+      Lungs: OrganSlimePersonLungs
