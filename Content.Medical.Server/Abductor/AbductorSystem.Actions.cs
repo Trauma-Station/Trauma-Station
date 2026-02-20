@@ -100,7 +100,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         // no sound so you can jump people
         AddTeleportationEffect(user, TeleportationEffectEntity, playAudio: false);
-        Spawn(TeleportationEffect, ev.Target);
+        SpawnAttachedTo(TeleportationEffect, ev.Target);
 
         ev.Handled = true;
     }
@@ -161,7 +161,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         if (applyColor)
             _color.RaiseEffect(Color.FromHex("#BA0099"), new List<EntityUid>(1) { target }, Filter.Pvs(target, entityManager: EntityManager));
 
-        var effect = Spawn(proto, new EntityCoordinates(target, 0, 0));
+        var effect = SpawnAttachedTo(proto, new EntityCoordinates(target, 0, 0));
 
         if (playAudio)
             _audio.PlayPvs(TeleportSound, effect);
