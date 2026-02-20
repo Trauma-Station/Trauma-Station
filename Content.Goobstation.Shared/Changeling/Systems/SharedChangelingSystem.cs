@@ -109,7 +109,7 @@ public abstract partial class SharedChangelingSystem : EntitySystem
         {
             // Unequip armor
             foreach (var armor in active)
-                PredictedQueueDel(armor);
+                PredictedQueueDel(GetEntity(armor));
 
             Audio.PlayPredicted(comp.ArmourStripSound, uid, uid);
 
@@ -120,7 +120,7 @@ public abstract partial class SharedChangelingSystem : EntitySystem
         }
 
         // Equip armor
-        var newArmor = new List<EntityUid>();
+        var newArmor = new List<NetEntity>();
         var coords = Transform(uid).Coordinates;
         foreach (var (proto, slot) in armors)
         {
@@ -129,11 +129,11 @@ public abstract partial class SharedChangelingSystem : EntitySystem
             {
                 PredictedDel(armor);
                 foreach (var delArmor in newArmor)
-                    PredictedDel(delArmor);
+                    PredictedDel(GetEntity(delArmor));
 
                 return false;
             }
-            newArmor.Add(armor);
+            newArmor.Add(GetNetEntity(armor));
         }
 
         Audio.PlayPredicted(comp.ArmourSound, uid, uid);
