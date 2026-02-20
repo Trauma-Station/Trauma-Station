@@ -7,6 +7,7 @@ using Content.Shared.Devour.Components;
 using Content.Shared.NPC.Components;
 using Content.Shared.Sprite;
 using Content.Shared.Stunnable;
+using Content.Trauma.Common.Sprite;
 using Robust.Shared.Serialization.Manager;
 // </Trauma>
 using Content.Server.Objectives.Components;
