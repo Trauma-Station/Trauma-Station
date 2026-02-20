@@ -43,10 +43,10 @@ public abstract class SharedSacramentsSystem : EntitySystem
         args.Cancelled = true;
         Pulse(ent);
 
-        if (args.Source == null || HasComp<SacramentsOfPowerComponent>(args.Source.Value))
+        if (args.Source is not { } source || HasComp<SacramentsOfPowerComponent>(source))
             return;
 
-        _stam.TakeStaminaDamage(args.Source.Value, args.Value, source: ent);
+        _stam.TakeStaminaDamage(source, args.Value, source: ent);
     }
 
     private void OnBeforeDamageChange(Entity<SacramentsOfPowerComponent> ent, ref BeforeDamageChangedEvent args)
@@ -57,10 +57,10 @@ public abstract class SharedSacramentsSystem : EntitySystem
         args.Cancelled = true;
         Pulse(ent);
 
-        if (args.Origin == null || HasComp<SacramentsOfPowerComponent>(args.Origin.Value))
+        if (args.Origin is not { } origin || HasComp<SacramentsOfPowerComponent>(origin))
             return;
 
-        _dmg.ChangeDamage(args.Origin.Value,
+        _dmg.ChangeDamage(origin,
             args.Damage * ent.Comp.DamageReturnRatio,
             targetPart: TargetBodyPart.Vital,
             origin: ent,
@@ -77,13 +77,13 @@ public sealed class SacramentsPulseEvent(NetEntity entity) : EntityEventArgs
 }
 
 [Serializable, NetSerializable]
-public enum SacramentsKey
+public enum SacramentsKey : byte
 {
     Key
 }
 
 [Serializable, NetSerializable]
-public enum SacramentsState
+public enum SacramentsState : byte
 {
     Opening,
     Open,

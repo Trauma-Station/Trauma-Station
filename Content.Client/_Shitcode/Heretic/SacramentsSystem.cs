@@ -46,26 +46,25 @@ public sealed class SacramentsSystem : SharedSacramentsSystem
 
     private void OnAppearanceChange(Entity<SacramentsOfPowerComponent> ent, ref AppearanceChangeEvent args)
     {
-        if (args.Sprite == null || !args.AppearanceData.TryGetValue(SacramentsKey.Key, out var stateObj))
+        if (args.Sprite is not { } sprite ||
+            !_appearance.TryGetData(ent, SacramentsKey.Key, out SacramentsState state, args.Component))
             return;
 
-        var state = (SacramentsState) stateObj;
-
         _animation.Stop(ent.Owner, AnimationKey);
-        var sprite = new SpriteSpecifier.Rsi(ent.Comp.SpritePath, ent.Comp.SpriteStates[state]);
+        var rsi = new SpriteSpecifier.Rsi(ent.Comp.SpritePath, ent.Comp.SpriteStates[state]);
 
-        if (!_sprite.LayerMapTryGet((ent, args.Sprite), SacramentsKey.Key, out var layer, false))
+        if (!_sprite.LayerMapTryGet((ent, sprite), SacramentsKey.Key, out var layer, false))
         {
-            layer = _sprite.AddLayer((ent, args.Sprite), sprite);
-            args.Sprite.LayerSetShader(layer, "unshaded");
-            _sprite.LayerMapSet((ent, args.Sprite), SacramentsKey.Key, layer);
+            layer = _sprite.AddLayer((ent, sprite), rsi);
+            sprite.LayerSetShader(layer, "unshaded");
+            _sprite.LayerMapSet((ent, sprite), SacramentsKey.Key, layer);
         }
         else
-            _sprite.LayerSetSprite((ent, args.Sprite), layer, sprite);
+            _sprite.LayerSetSprite((ent, sprite), layer, rsi);
 
-        _sprite.LayerSetAutoAnimated((ent, args.Sprite), layer, true);
+        _sprite.LayerSetAutoAnimated((ent, sprite), layer, true);
 
-        if (state != SacramentsState.Open && _sprite.TryGetLayer((ent, args.Sprite), layer, out var spriteLayer, true))
+        if (state != SacramentsState.Open && _sprite.TryGetLayer((ent, sprite), layer, out var spriteLayer, true))
             spriteLayer.Loop = false;
     }
 
