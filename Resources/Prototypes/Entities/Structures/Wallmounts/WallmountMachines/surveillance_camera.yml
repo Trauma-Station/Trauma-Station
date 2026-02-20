@@ -114,7 +114,7 @@
             acts: [ "Destruction" ]
       - trigger:
           !type:DamageTrigger
-          damage: 75 # Goob
+          damage: 45 # Trauma
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
