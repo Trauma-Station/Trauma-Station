@@ -463,7 +463,7 @@
   components:
   # <Shitmed>
   - type: ChildOrgan
-    parentCategory: Head
+    parentCategory: Torso
   # </Shitmed>
   - type: GibbableOrgan
   - type: Organ
