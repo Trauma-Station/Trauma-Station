@@ -72,7 +72,7 @@
   parent: [ ClothingUniformBase, ClothingUniformFoldableBase ]
   id: ClothingUniformJumpsuitTigerStripes
   name: tiger stripes
-  description: A military uniform used in special covert operations. Booms a good camo index.
+  description: A military uniform used in special covert operations. Boons a good camo index.
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/tigerStripes.rsi
