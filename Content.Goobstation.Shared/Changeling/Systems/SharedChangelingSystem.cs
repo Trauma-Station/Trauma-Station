@@ -90,7 +90,7 @@ public abstract partial class SharedChangelingSystem : EntitySystem
         }
 
         item = PredictedSpawnAtPosition(proto, Transform(uid).Coordinates);
-        if (!Hands.TryForcePickupAnyHand(uid, item.Value))
+        if (!Hands.TryForcePickupAnyHand(uid, item))
         {
             Popup.PopupEntity(Loc.GetString("changeling-fail-hands"), uid, uid);
             PredictedDel(item);
