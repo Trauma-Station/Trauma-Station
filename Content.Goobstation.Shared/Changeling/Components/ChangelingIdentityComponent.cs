@@ -93,10 +93,10 @@ public sealed partial class ChangelingIdentityComponent : Component
     public bool VoidAdaptActive = false;
 
     [DataField, AutoNetworkedField]
-    public List<EntityUid>? ActiveArmor = null;
+    public List<EntityUid>? ActiveArmor;
 
     [DataField, AutoNetworkedField]
-    public Dictionary<string, EntityUid> Equipment = new();
+    public Dictionary<string, NetEntity> Equipment = new(); // have to use NetEntity because generator is broken for dictionary
 
     /// <summary>
     ///     The default stasis time (in s).

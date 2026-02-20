@@ -80,8 +80,9 @@ public abstract partial class SharedChangelingSystem : EntitySystem
     public bool TryToggleItem(EntityUid uid, EntProtoId proto, ChangelingIdentityComponent comp, out EntityUid? equipment)
     {
         equipment = null;
-        if (comp.Equipment.TryGetValue(proto.Id, out var item))
+        if (comp.Equipment.TryGetValue(proto.Id, out var netItem))
         {
+            var item = GetEntity(netItem);
             PredictedQueueDel(item);
             // assuming that it exists
             comp.Equipment.Remove(proto.Id);
@@ -89,7 +90,7 @@ public abstract partial class SharedChangelingSystem : EntitySystem
             return true;
         }
 
-        item = PredictedSpawnAtPosition(proto, Transform(uid).Coordinates);
+        var item = PredictedSpawnAtPosition(proto, Transform(uid).Coordinates);
         if (!Hands.TryForcePickupAnyHand(uid, item))
         {
             Popup.PopupEntity(Loc.GetString("changeling-fail-hands"), uid, uid);
@@ -97,7 +98,7 @@ public abstract partial class SharedChangelingSystem : EntitySystem
             return false;
         }
 
-        comp.Equipment.Add(proto.Id, item);
+        comp.Equipment.Add(proto.Id, GetNetEntity(item));
         Dirty(uid, comp);
         equipment = item;
         return true;
