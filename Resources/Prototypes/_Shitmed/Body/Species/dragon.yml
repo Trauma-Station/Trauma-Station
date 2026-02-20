@@ -80,6 +80,9 @@
   - type: MovementBodyPart
     walkSpeed: 2.5
     sprintSpeed: 3.5
+  - type: Sprite
+    layers:
+    - state: tail-icon
   # TODO SHITMED: space flight stuff, give the funny action?
 
 ## Organs
