@@ -100,7 +100,7 @@ public sealed class BodyTest
                     }
 
                     // make sure they are the same, or some organs were lost in the cycle
-                    Assert.That(started, Is.EquivalentTo(ended),
+                    Assert.That(ended, Is.EquivalentTo(started),
                         $"{entMan.ToPrettyString(mob)} had different organs after having its body restored!");
 
                     entMan.DeleteEntity(mob);
