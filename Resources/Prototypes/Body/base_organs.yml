@@ -591,6 +591,7 @@
   # <Shitmed>
   - type: ChildOrgan
     parentCategory: Torso
+  - type: Liver
   # </Shitmed>
   - type: GibbableOrgan
   - type: Organ
