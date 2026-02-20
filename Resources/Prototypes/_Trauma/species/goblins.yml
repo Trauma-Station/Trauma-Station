@@ -1,0 +1,18 @@
+- type: species
+  id: Goblin
+  name: species-name-goblin
+  roundStart: true
+  prototype: MobGoblin
+  defaultSkinTone: "#0fa92f"
+  dollPrototype: AppearanceGoblin
+  skinColoration: Hues
+  naming: First
+  maleFirstNames: NamesGoblin
+  femaleFirstNames: NamesGoblin
+  minAge: 8
+  maxAge: 60
+  youngAge: 8
+  oldAge: 25
+  sexes:
+  - Male
+  - Female

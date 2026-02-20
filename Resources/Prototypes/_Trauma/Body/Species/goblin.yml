@@ -1,0 +1,294 @@
+- type: entity
+  parent: AppearanceHuman
+  id: AppearanceGoblin
+  name: goblin appearance
+  components:
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
+          state: hand
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
+          state: hand
+  - type: Inventory
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
+            state: jumpsuit-female
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
+            state: jumpsuit
+      back:
+        sizeMaps:
+          32:
+            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
+            state: back
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
+            state: outerwear
+      gloves:
+        sizeMaps:
+          32:
+            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
+            state: hand
+      head:
+        sizeMaps:
+          32:
+            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
+            state: head
+      neck:
+        sizeMaps:
+          32:
+            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
+            state: neck
+      eyes:
+        sizeMaps:
+          32:
+            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
+            state: eyes
+      belt:
+        sizeMaps:
+          32:
+            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
+            state: belt
+  - type: InitialBody
+    organs:
+      Torso: OrganGoblinTorso
+      Head: OrganGoblinHead
+      ArmLeft: OrganGoblinArmLeft
+      ArmRight: OrganGoblinArmRight
+      HandRight: OrganGoblinHandRight
+      HandLeft: OrganGoblinHandLeft
+      LegLeft: OrganGoblinLegLeft
+      LegRight: OrganGoblinLegRight
+      FootLeft: OrganGoblinFootLeft
+      FootRight: OrganGoblinFootRight
+      Brain: OrganGoblinBrain
+      Eyes: OrganGoblinEyes
+      Tongue: OrganGoblinTongue
+      Appendix: OrganGoblinAppendix
+      Ears: OrganGoblinEars
+      Lungs: OrganGoblinLungs
+      Heart: OrganDwarfHeart
+      Stomach: OrganDwarfStomach
+      Liver: OrganDwarfLiver
+      Kidneys: OrganGoblinKidneys
+  - type: HumanoidProfile
+    species: Goblin
+
+- type: entity
+  parent:
+  - AppearanceGoblin
+  - MobHuman
+  id: MobGoblin
+  name: Urist McGoblin
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 120
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Vocal
+    sounds:
+      Male: UnisexDwarf
+      Female: FemaleDwarf
+      Unsexed: UnisexDwarf
+
+- type: entity
+  parent: OrganBaseFleshy
+  id: OrganGoblin
+  abstract: true
+  suffix: Goblin
+
+- type: entity
+  id: OrganGoblinMetabolizer
+  abstract: true
+  components:
+  - type: Metabolizer
+    metabolizerTypes: [ Human ]
+
+- type: entity
+  parent: OrganGoblin
+  id: OrganGoblinInternal
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/organs.rsi
+
+- type: entity
+  parent: OrganGoblin
+  id: OrganGoblinExternal
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Species/Goblin/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Trauma/Mobs/Species/Goblin/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: Goblin
+
+- type: entity
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganGoblinExternal ]
+  id: OrganGoblinTorso
+
+- type: entity
+  parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganGoblinExternal ]
+  id: OrganGoblinHead
+  components:
+  - type: VisualOrganMarkings
+    hideableLayers:
+    - enum.HumanoidVisualLayers.Hair
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganGoblinExternal ]
+  id: OrganGoblinArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganGoblinExternal ]
+  id: OrganGoblinArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganGoblinExternal ]
+  id: OrganGoblinHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganGoblinExternal ]
+  id: OrganGoblinHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganGoblinExternal ]
+  id: OrganGoblinLegLeft
+  components:
+  - type: MovementBodyPart
+    walkSpeed: 10
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganGoblinExternal ]
+  id: OrganGoblinLegRight
+  components:
+  - type: MovementBodyPart
+    walkSpeed: 10
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganGoblinExternal ]
+  id: OrganGoblinFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganGoblinExternal ]
+  id: OrganGoblinFootRight
+
+- type: entity
+  parent: [ OrganBaseBrain, OrganGoblinInternal ]
+  id: OrganGoblinBrain
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganGoblinInternal, OrganGoblinExternal ]
+  id: OrganGoblinEyes
+  components:
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Customization/eyes.rsi
+
+- type: entity
+  parent: [ OrganBaseTongue, OrganGoblinInternal ]
+  id: OrganGoblinTongue
+
+- type: entity
+  parent: [ OrganBaseAppendix, OrganGoblinInternal ]
+  id: OrganGoblinAppendix
+
+- type: entity
+  parent: [ OrganBaseEars, OrganGoblinInternal ]
+  id: OrganGoblinEars
+
+- type: entity
+  parent: [ OrganBaseLungs, OrganGoblinInternal, OrganHumanMetabolizer ]
+  id: OrganGoblinLungs
+
+- type: entity
+  parent: [ OrganBaseHeart, OrganGoblinInternal, OrganHumanMetabolizer ]
+  id: OrganGoblinHeart
+
+- type: entity
+  parent: [ OrganBaseStomach, OrganGoblinInternal, OrganHumanMetabolizer ]
+  id: OrganGoblinStomach
+
+- type: entity
+  parent: [ OrganBaseLiver, OrganGoblinInternal, OrganHumanMetabolizer ]
+  id: OrganGoblinLiver
+
+- type: entity
+  parent: [ OrganBaseKidneys, OrganGoblinInternal, OrganHumanMetabolizer ]
+  id: OrganGoblinKidneys
+
+- type: markingsGroup
+  parent: Undergarments
+  id: Goblin
+  onlyGroupWhitelisted: true
+  limits:
+    enum.HumanoidVisualLayers.Hair:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Tail:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.Chest:
+      limit: 3
+      required: false
+    enum.HumanoidVisualLayers.Snout:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: true
+      default: [ EarsGoblin1 ]
+    enum.HumanoidVisualLayers.HeadSide:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
+      required: false

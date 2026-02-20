@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Monkestation2.0 at https://github.com/Monkestation/Monkestation2.0/blob/3f524533c77702fce63e2f0fe7d3bf470aebb75f/monkestation/icons/mob/species/goblin/goblin_ears.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "goblin_ears_normal_adj",
+      "directions": 4
+    },
+    {
+      "name": "goblin_ears_wide_adj",
+      "directions": 4
+    },
+    {
+      "name": "goblin_ears_broad_adj",
+      "directions": 4
+    },
+    {
+      "name": "goblin_ears_long_adj",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+- type: marking
+  id: EarsGoblin1
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Goblin]
+  forcedColoring: true
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/markings/goblin/ear_markings.rsi
+    state: goblin_ears_wide_adj
+
+- type: marking
+  id: EarsGoblin2
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Goblin]
+  forcedColoring: true
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/markings/goblin/ear_markings.rsi
+    state: goblin_ears_normal_adj
+
+- type: marking
+  id: EarsGoblin3
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Goblin]
+  forcedColoring: true
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/markings/goblin/ear_markings.rsi
+    state: goblin_ears_long_adj
+
+- type: marking
+  id: EarsGoblin4
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Goblin]
+  forcedColoring: true
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/markings/goblin/ear_markings.rsi
+    state: goblin_ears_broad_adj

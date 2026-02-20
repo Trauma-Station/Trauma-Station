@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: NamesGoblin
+  values:
+    prefix: names-goblin-dataset-
+    count: 2
