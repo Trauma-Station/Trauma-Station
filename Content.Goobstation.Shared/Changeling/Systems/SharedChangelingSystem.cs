@@ -82,8 +82,7 @@ public abstract partial class SharedChangelingSystem : EntitySystem
         equipment = null;
         if (comp.Equipment.TryGetValue(proto.Id, out var netItem))
         {
-            var item = GetEntity(netItem);
-            PredictedQueueDel(item);
+            PredictedQueueDel(GetEntity(netItem));
             // assuming that it exists
             comp.Equipment.Remove(proto.Id);
             Dirty(uid, comp);
