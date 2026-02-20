@@ -20,7 +20,6 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// Makes sure abductor gamerules work.
 /// </summary>
 [TestFixture]
-[Explicit] // TODO: fix it not teleporting the urist
 public sealed class AbductorTest : InteractionTest
 {
     public static EntProtoId Beacon = "DefaultStationBeacon";
