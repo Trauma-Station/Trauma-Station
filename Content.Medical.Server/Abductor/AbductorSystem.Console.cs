@@ -86,7 +86,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     private void OnAttractBuiMsg(Entity<AbductorConsoleComponent> ent, ref AbductorAttractBuiMsg args)
     {
-        var user = args.Actorl
+        var user = args.Actor;
         if (GetEntity(ent.Comp.Target) is not {} target || GetEntity(ent.Comp.AlienPod) is not {} telepad)
             return;
 
