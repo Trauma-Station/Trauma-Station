@@ -17,6 +17,7 @@ public sealed class SharedChanglingActionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ChangelingActionComponent, ActionAttemptEvent>(OnActionAttempt);
+        SubscribeLocalEvent<ChangelingActionComponent, ActionPerformedEvent>(OnActionPerformed);
 
         _lingQuery = GetEntityQuery<ChangelingIdentityComponent>();
     }
@@ -26,36 +27,33 @@ public sealed class SharedChanglingActionSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (!_lingQuery.TryComp(args.User, out var ling))
+        var user = args.User;
+        if (!_lingQuery.TryComp(user, out var ling))
         {
-            DoPopup(args.User, ent.Comp.NotChangelingPopup);
+            DoPopup(user, ent.Comp.NotChangelingPopup);
             args.Cancelled = true;
-
             return;
         }
 
-        if (!ent.Comp.UseOnFire && OnFire(args.User))
+        if (!ent.Comp.UseOnFire && OnFire(user))
         {
-            DoPopup(args.User, ent.Comp.OnFirePopup, PopupType.LargeCaution);
+            DoPopup(user, ent.Comp.OnFirePopup, PopupType.LargeCaution);
             args.Cancelled = true;
-
             return;
         }
 
         if (!ent.Comp.UseInLastResort && ling.IsInLastResort
             || !ent.Comp.UseInLesserForm && ling.IsInLesserForm)
         {
-            DoPopup(args.User, ent.Comp.LesserFormPopup);
+            DoPopup(user, ent.Comp.LesserFormPopup);
             args.Cancelled = true;
-
             return;
         }
 
         if (ent.Comp.ChemicalCost > ling.Chemicals)
         {
-            DoPopup(args.User, ent.Comp.InvalidChemicalsPopup);
+            DoPopup(user, ent.Comp.InvalidChemicalsPopup);
             args.Cancelled = true;
-
             return;
         }
 
@@ -64,11 +62,17 @@ public sealed class SharedChanglingActionSystem : EntitySystem
             var delta = ent.Comp.RequireAbsorbed - ling.TotalAbsorbedEntities;
             var popup = Loc.GetString("changeling-action-fail-absorbed", ("number", delta));
 
-            DoPopup(args.User, popup);
+            DoPopup(user, popup);
             args.Cancelled = true;
-
             return;
         }
+    }
+
+    private void OnActionPerformed(Entity<ChangelingActionComponent> ent, ref ActionPerformedEvent args)
+    {
+        var user = args.Performer;
+        if (!_lingQuery.TryComp(user, out var ling))
+            return;
 
         var toggled = Comp<ActionComponent>(ent).Toggled;
 
@@ -78,7 +82,7 @@ public sealed class SharedChanglingActionSystem : EntitySystem
         chemicals -= !toggled ? ent.Comp.ChemicalCost : ent.Comp.AltChemicalCost;
         ling.Chemicals = Math.Clamp(chemicals, 0, ling.MaxChemicals);
 
-        Dirty(args.User, ling);
+        Dirty(user, ling);
     }
 
     #region Helper Methods

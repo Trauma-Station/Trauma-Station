@@ -50,7 +50,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: evolution_menu
   - type: InstantAction
-    event: !type:OpenEvolutionMenuEvent {}
+    event: !type:OpenEvolutionMenuEvent
   - type: ChangelingAction
     useOnFire: true
     useInLesserForm: true
@@ -76,7 +76,7 @@
       components:
       - Body
     canTargetSelf: false
-    event: !type:AbsorbDNAEvent {}
+    event: !type:AbsorbDNAEvent
   - type: ChangelingAction
     chemicalCost: 25
     useInLesserForm: true
@@ -101,7 +101,7 @@
       components:
       - Body
     canTargetSelf: false
-    event: !type:StingExtractDNAEvent {}
+    event: !type:StingExtractDNAEvent
   - type: ChangelingAction
     chemicalCost: 25
     useInLesserForm: true
@@ -120,7 +120,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: transform_cycle
   - type: InstantAction
-    event: !type:ChangelingTransformCycleEvent {}
+    event: !type:ChangelingTransformCycleEvent
   - type: ChangelingAction
     useOnFire: true
     useInLesserForm: true
@@ -140,7 +140,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: transform
   - type: InstantAction
-    event: !type:ChangelingTransformEvent {}
+    event: !type:ChangelingTransformEvent
   - type: ChangelingAction
     chemicalCost: 5
     useInLesserForm: true
@@ -160,7 +160,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: stasis_enter
   - type: InstantAction
-    event: !type:EnterStasisEvent {}
+    event: !type:EnterStasisEvent
   - type: ChangelingAction
     useOnFire: true
     useInLesserForm: true
@@ -181,7 +181,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: stasis_exit
   - type: InstantAction
-    event: !type:ExitStasisEvent {}
+    event: !type:ExitStasisEvent
   - type: ChangelingAction
     chemicalCost: 30
     useOnFire: true
@@ -203,7 +203,8 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: armblade
   - type: InstantAction
-    event: !type:ToggleArmbladeEvent {}
+    event: !type:LingToggleItemEvent
+      item: ArmBladeChangeling
   - type: ChangelingAction
     chemicalCost: 15
 
@@ -221,7 +222,8 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: hammer
   - type: InstantAction
-    event: !type:ToggleArmHammerEvent {}
+    event: !type:LingToggleItemEvent
+      item: ArmHammerChangeling
   - type: ChangelingAction
     chemicalCost: 15
 
@@ -239,7 +241,8 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: claw
   - type: InstantAction
-    event: !type:ToggleArmClawEvent {}
+    event: !type:LingToggleItemEvent
+      item: ArmClawChangeling
   - type: ChangelingAction
     chemicalCost: 15
 
@@ -257,7 +260,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: dartgun
   - type: InstantAction
-    event: !type:ToggleDartGunEvent {}
+    event: !type:ToggleDartGunEvent
   - type: ChangelingAction
     chemicalCost: 15
 
@@ -275,7 +278,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: bone_shard
   - type: InstantAction
-    event: !type:CreateBoneShardEvent {}
+    event: !type:CreateBoneShardEvent
   - type: ChangelingAction
     chemicalCost: 15
 
@@ -293,7 +296,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: chitinous_armor
   - type: InstantAction
-    event: !type:ToggleChitinousArmorEvent {}
+    event: !type:ToggleChitinousArmorEvent
   - type: ChangelingAction
     chemicalCost: 25
     requireAbsorbed: 2
@@ -312,7 +315,8 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: organic_shield
   - type: InstantAction
-    event: !type:ToggleOrganicShieldEvent {}
+    event: !type:LingToggleItemEvent
+      item: ChangelingShield
   - type: ChangelingAction
     chemicalCost: 20
     requireAbsorbed: 1
@@ -332,7 +336,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: shriek_dissonant
   - type: InstantAction
-    event: !type:ShriekDissonantEvent {}
+    event: !type:ShriekDissonantEvent
   - type: ChangelingAction
     chemicalCost: 30
     useOnFire: true
@@ -354,7 +358,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: shriek_resonant
   - type: InstantAction
-    event: !type:ShriekResonantEvent {}
+    event: !type:ShriekResonantEvent
   - type: ChangelingAction
     chemicalCost: 30
     useOnFire: true
@@ -376,7 +380,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: strained_muscles
   - type: InstantAction
-    event: !type:ToggleStrainedMusclesEvent {}
+    event: !type:ToggleStrainedMusclesEvent
   - type: ChangelingAction
     chemicalCost: 0
     useOnFire: true
@@ -403,7 +407,7 @@
       components:
       - Body
     canTargetSelf: false
-    event: !type:StingReagentEvent {}
+    event: !type:StingReagentEvent
   - type: ChangelingAction
     chemicalCost: 20
     useInLesserForm: true
@@ -431,7 +435,7 @@
       components:
       - Body
     canTargetSelf: false
-    event: !type:StingReagentEvent {}
+    event: !type:StingReagentEvent
   - type: ChangelingAction
     chemicalCost: 20
     useInLesserForm: true
@@ -459,7 +463,7 @@
       components:
       - Body
     canTargetSelf: false
-    event: !type:StingReagentEvent {}
+    event: !type:StingReagentEvent
   - type: ChangelingAction
     chemicalCost: 30
     useInLesserForm: true
@@ -487,7 +491,7 @@
       components:
       - Body
     canTargetSelf: false
-    event: !type:StingReagentEvent {}
+    event: !type:StingReagentEvent
   - type: ChangelingAction
     chemicalCost: 20
     useInLesserForm: true
@@ -515,7 +519,7 @@
       components:
       - Body
     canTargetSelf: false
-    event: !type:StingFakeArmbladeEvent {}
+    event: !type:StingFakeArmbladeEvent
   - type: ChangelingAction
     chemicalCost: 30
     useInLesserForm: true
@@ -540,7 +544,7 @@
       components:
       - Body
     canTargetSelf: false
-    event: !type:StingTransformEvent {}
+    event: !type:StingTransformEvent
   - type: ChangelingAction
     chemicalCost: 75
     useInLesserForm: true
@@ -564,7 +568,7 @@
       components:
       - Body
     canTargetSelf: false
-    event: !type:StingLayEggsEvent {}
+    event: !type:StingLayEggsEvent
   - type: ChangelingAction
     chemicalCost: 0
     useInLastResort: true
@@ -586,7 +590,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: anatomic_panacea
   - type: InstantAction
-    event: !type:ActionAnatomicPanaceaEvent {}
+    event: !type:ActionAnatomicPanaceaEvent
   - type: ChangelingAction
     chemicalCost: 30
     useInLesserForm: true
@@ -606,7 +610,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: augmented_eyesight
   - type: InstantAction
-    event: !type:ToggleThermalVisionEvent {}
+    event: !type:ToggleThermalVisionEvent
 
 - type: entity
   parent: BaseAction
@@ -624,7 +628,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: biodegrade
   - type: InstantAction
-    event: !type:ActionBiodegradeEvent {}
+    event: !type:ActionBiodegradeEvent
   - type: ChangelingAction
     chemicalCost: 30
     useOnFire: true
@@ -645,7 +649,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: chameleon_skin
   - type: InstantAction
-    event: !type:ActionChameleonSkinEvent {}
+    event: !type:ActionChameleonSkinEvent
   - type: ChangelingAction
     chemicalCost: 20
 
@@ -665,7 +669,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: void_adaptation
   - type: InstantAction
-    event: !type:ActionVoidAdaptEvent {}
+    event: !type:ActionVoidAdaptEvent
   - type: ChangelingAction
     chemicalCost: 0
     useInLesserForm: true
@@ -687,7 +691,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: epinephrine_overdose
   - type: InstantAction
-    event: !type:ActionAdrenalineReservesEvent {}
+    event: !type:ActionAdrenalineReservesEvent
   - type: ChangelingAction
     chemicalCost: 30
     useInLesserForm: true
@@ -709,7 +713,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: fleshmend
   - type: InstantAction
-    event: !type:ActionFleshmendEvent {}
+    event: !type:ActionFleshmendEvent
   - type: ChangelingAction
     chemicalCost: 35
     useInLesserForm: true
@@ -731,7 +735,7 @@
   - type: ConfirmableAction
     popup: changeling-lastresort-activate
   - type: InstantAction
-    event: !type:ActionLastResortEvent {}
+    event: !type:ActionLastResortEvent
   - type: ChangelingAction
     chemicalCost: 20
     useInLesserForm: true
@@ -753,7 +757,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: lesser_form
   - type: InstantAction
-    event: !type:ActionLesserFormEvent {}
+    event: !type:ActionLesserFormEvent
   - type: ChangelingAction
     chemicalCost: 20
 
@@ -772,7 +776,7 @@
       sprite: _Goobstation/Changeling/changeling_abilities.rsi
       state: hivemind_access
   - type: InstantAction
-    event: !type:ActionHivemindAccessEvent {}
+    event: !type:ActionHivemindAccessEvent
   - type: ChangelingAction
     chemicalCost: 0
     useOnFire: true
@@ -800,7 +804,7 @@
       components:
       - Openable # most drinks use this and idc to write specific logic for edible type
     canTargetSelf: false
-    event: !type:AbsorbBiomatterEvent {}
+    event: !type:AbsorbBiomatterEvent
   - type: ChangelingAction
     chemicalCost: 0
     useInLesserForm: true

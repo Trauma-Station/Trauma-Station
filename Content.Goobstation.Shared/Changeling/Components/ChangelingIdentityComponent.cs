@@ -92,8 +92,10 @@ public sealed partial class ChangelingIdentityComponent : Component
 
     public bool VoidAdaptActive = false;
 
+    [DataField, AutoNetworkedField]
     public List<EntityUid>? ActiveArmor = null;
 
+    [DataField, AutoNetworkedField]
     public Dictionary<string, EntityUid?> Equipment = new();
 
     /// <summary>
