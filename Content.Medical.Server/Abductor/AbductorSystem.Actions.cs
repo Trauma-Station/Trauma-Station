@@ -110,7 +110,6 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         if (args.Handled || args.Cancelled)
             return;
 
-        Log.Info($"Teleporting {ToPrettyString(ent)} to {args.TargetCoordinates} / {GetCoordinates(args.TargetCoordinates)}");
         _color.RaiseEffect(Color.FromHex("#BA0099"), new List<EntityUid>(1) { ent }, Filter.Pvs(ent, entityManager: EntityManager));
         StopPulls(ent);
         _xform.SetCoordinates(ent, GetCoordinates(args.TargetCoordinates));
