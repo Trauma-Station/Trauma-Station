@@ -318,7 +318,7 @@
 - type: entity
   name: space carp
   id: MobCarpSentient
-  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat, AppearanceCarp ]
+  parent: [ AppearanceCarp, SimpleSpaceMobBase, FlyingMobBase, MobCombat ]
   description: It's a space carp. Used to be a person.
   components:
   - type: InputMover
