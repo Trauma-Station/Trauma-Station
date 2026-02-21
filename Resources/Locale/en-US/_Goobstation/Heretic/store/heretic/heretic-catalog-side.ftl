@@ -159,7 +159,7 @@ knowledge-path-side-s6-sword-desc =
 
 knowledge-path-side-s6-grasp-name = Mind Grasp
 knowledge-path-side-s6-grasp-desc =
-    You believe that your mind is fortresses.
+    You believe that your mind is a fortress.
     You picture walls of reason, towers of will, and a sanctum to which you hold the key.
     A comforting lie. The walls are only shadows cast by the light of their own fragile understanding.
     The gates of mind do not open inward or outward - they do not exist at all.
