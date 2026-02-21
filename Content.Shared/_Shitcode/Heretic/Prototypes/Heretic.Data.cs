@@ -41,4 +41,3 @@ public sealed partial class HereticGraspUpgradeEvent : EntityEventArgs
     [DataField(required: true)]
     public ComponentRegistry AddedComponents = new();
 }
-
