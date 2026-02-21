@@ -158,7 +158,7 @@ public sealed class BodyTest
                 var errors = new List<string>();
                 foreach (var marking in protoMan.EnumeratePrototypes<MarkingPrototype>())
                 {
-                    if (marking.GroupWhitelist is not {} groups)
+                    if (pair.IsTestPrototype(marking) || marking.GroupWhitelist is not {} groups)
                         continue; // not whitelisted, assumed that it will work on anything?
 
                     var layer = marking.BodyPart;
