@@ -186,7 +186,7 @@ namespace Content.Server.Preferences.Managers
                 antags.ToHashSet(),
                 traits.ToHashSet(),
                 loadouts,
-                profile.BarkVoice ?? HumanoidProfileSystem.DefaultBarkVoice; // Trauma
+                profile.BarkVoice ?? HumanoidProfileSystem.DefaultBarkVoice // Trauma
             );
         }
 
