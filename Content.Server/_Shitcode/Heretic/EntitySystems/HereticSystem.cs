@@ -273,24 +273,40 @@ public sealed class HereticSystem : SharedHereticSystem
         if (!PlayerMan.TryGetSessionById(mind.UserId, out var session))
             return;
 
+        if (showText)
+        {
+            var baseMessage = heretic.InfluenceGainBaseMessage;
+            var message = Loc.GetString(_rand.Pick(heretic.InfluenceGainMessages));
+            var size = heretic.InfluenceGainTextFontSize;
+            var loc = Loc.GetString(baseMessage, ("size", size), ("text", message));
+            SharedChatSystem.UpdateFontSize(size, ref message, ref loc);
+            _chatMan.ChatMessageToOne(ChatChannel.Server,
+                message,
+                loc,
+                default,
+                false,
+                session.Channel,
+                canCoalesce: false);
+        }
+
         if (playSound)
             _audio.PlayGlobal(heretic.InfluenceGainSound, session);
 
-        if (!showText)
+        var couldBreak = ent.Comp1.CanBreakBlade;
+        ent.Comp1.KnowledgeTracker += amount;
+        var canBreak = ent.Comp1.CanBreakBlade;
+
+        if (canBreak || !couldBreak)
             return;
 
-        var baseMessage = heretic.InfluenceGainBaseMessage;
-        var message = Loc.GetString(_rand.Pick(heretic.InfluenceGainMessages));
-        var size = heretic.InfluenceGainTextFontSize;
-        var loc = Loc.GetString(baseMessage, ("size", size), ("text", message));
-        SharedChatSystem.UpdateFontSize(size, ref message, ref loc);
+        var msg = Loc.GetString(ent.Comp1.BreakBladeAbilityLostMessage);
         _chatMan.ChatMessageToOne(ChatChannel.Server,
-            message,
-            loc,
+            msg,
+            msg,
             default,
             false,
             session.Channel,
-            canCoalesce: false);
+            Color.Red);
     }
 
     private void OnCompStartup(Entity<HereticComponent> ent, ref ComponentStartup args)

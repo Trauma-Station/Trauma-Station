@@ -151,6 +151,21 @@ public sealed partial class HereticComponent : Component
     [DataField]
     public int SideDraftChoiceAmount = 3;
 
+    /// <summary>
+    /// After this amount of knowledge heretic loses their blade break ability
+    /// </summary>
+    [DataField]
+    public float LockBladeBreakKnowledgeAmount = 8f;
+
+    [DataField]
+    public float KnowledgeTracker;
+
+    [ViewVariables]
+    public bool CanBreakBlade => !Ascended && KnowledgeTracker < LockBladeBreakKnowledgeAmount;
+
+    [DataField]
+    public LocId BreakBladeAbilityLostMessage = "heretic-blade-break-ability-lost-message";
+
     [DataField]
     public int SacrificeTracker;
 
