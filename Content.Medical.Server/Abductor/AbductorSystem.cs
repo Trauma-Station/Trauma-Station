@@ -41,7 +41,10 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         SubscribeLocalEvent<AbductorHumanObservationConsoleComponent, BeforeActivatableUIOpenEvent>(OnBeforeActivatableUIOpen);
         SubscribeLocalEvent<AbductorHumanObservationConsoleComponent, ActivatableUIOpenAttemptEvent>(OnActivatableUIOpenAttempt);
-        Subs.BuiEvents<AbductorHumanObservationConsoleComponent>(AbductorCameraConsoleUIKey.Key, subs => subs.Event<AbductorBeaconChosenBuiMsg>(OnAbductorBeaconChosenBuiMsg));
+        Subs.BuiEvents<AbductorHumanObservationConsoleComponent>(AbductorCameraConsoleUIKey.Key, subs =>
+        {
+            subs.Event<AbductorBeaconChosenBuiMsg>(OnAbductorBeaconChosenBuiMsg);
+        });
 
         InitializeActions();
         InitializeConsole();
@@ -50,55 +53,63 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     private void OnAbductorBeaconChosenBuiMsg(Entity<AbductorHumanObservationConsoleComponent> ent, ref AbductorBeaconChosenBuiMsg args)
     {
-        OnCameraExit(args.Actor);
+        var user = args.Actor;
+        OnCameraExit(user);
 
-        var beacon = GetEntity(args.Beacon.NetEnt);
-        var eye = SpawnAtPosition(ent.Comp.RemoteEntityProto, Transform(beacon).Coordinates);
-        ent.Comp.RemoteEntity = GetNetEntity(eye);
+        var beacon = GetEntity(args.Target);
+        if (!HasComp<NavMapBeaconComponent>(beacon))
+            return; // malf client trying to teleport to arbitrary entities
+
+        var xform = Transform(beacon);
+        if (xform.MapID != Transform(ent).MapID)
+        {
+            _popup.PopupEntity(Loc.GetString("abductor-console-ftl-to-station"), user, user);
+            return;
+        }
+
+        var eye = SpawnAtPosition(ent.Comp.RemoteEntityProto, xform.Coordinates);
 
         // TODO: holy shitcode just disable interaction??????
-        if (TryComp<HandsComponent>(args.Actor, out var hands))
+        if (TryComp<HandsComponent>(user, out var hands))
         {
-            foreach (var hand in _hands.EnumerateHands((args.Actor, hands)))
+            foreach (var hand in _hands.EnumerateHands((user, hands)))
             {
-                if (!_hands.TryGetHeldItem((args.Actor, hands), hand, out var held))
+                if (!_hands.TryGetHeldItem((user, hands), hand, out var held))
                     continue;
 
                 if (HasComp<UnremoveableComponent>(held))
                     continue;
 
-                _hands.DoDrop((args.Actor, hands), hand);
+                _hands.DoDrop((user, hands), hand);
             }
 
-            if (_virtualItem.TrySpawnVirtualItemInHand(ent.Owner, args.Actor, out var virtItem1))
+            if (_virtualItem.TrySpawnVirtualItemInHand(ent.Owner, user, out var virtItem1))
                 EnsureComp<UnremoveableComponent>(virtItem1.Value);
 
-            if (_virtualItem.TrySpawnVirtualItemInHand(ent.Owner, args.Actor, out var virtItem2))
+            if (_virtualItem.TrySpawnVirtualItemInHand(ent.Owner, user, out var virtItem2))
                 EnsureComp<UnremoveableComponent>(virtItem2.Value);
         }
 
         var visibility = EnsureComp<VisibilityComponent>(eye);
 
-        Dirty(ent);
-
-        if (TryComp(args.Actor, out EyeComponent? eyeComp))
+        if (TryComp(user, out EyeComponent? eyeComp))
         {
-            _eye.SetVisibilityMask(args.Actor, eyeComp.VisibilityMask | (int) VisibilityFlags.Abductor, eyeComp);
-            _eye.SetTarget(args.Actor, eye, eyeComp);
-            _eye.SetDrawFov(args.Actor, false);
-            _eye.SetRotation(args.Actor, Angle.Zero, eyeComp);
-            Dirty(args.Actor, eyeComp);
-            var overlay = EnsureComp<StationAiOverlayComponent>(args.Actor);
+            _eye.SetVisibilityMask(user, eyeComp.VisibilityMask | (int) VisibilityFlags.Abductor, eyeComp);
+            _eye.SetTarget(user, eye, eyeComp);
+            _eye.SetDrawFov(user, false);
+            _eye.SetRotation(user, Angle.Zero, eyeComp);
+            Dirty(user, eyeComp);
+            var overlay = EnsureComp<StationAiOverlayComponent>(user);
             overlay.AllowCrossGrid = true;
-            Dirty(args.Actor, overlay);
+            Dirty(user, overlay);
             var remote = EnsureComp<RemoteEyeSourceContainerComponent>(eye);
-            remote.Actor = args.Actor;
+            remote.Actor = user;
             Dirty(eye, remote);
         }
 
-        AddActions(args);
+        AddActions(user);
 
-        _mover.SetRelay(args.Actor, eye);
+        _mover.SetRelay(user, eye);
     }
 
     private void OnCameraExit(EntityUid actor)

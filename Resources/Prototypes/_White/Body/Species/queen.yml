@@ -65,6 +65,7 @@
     slots:
     - Brain
     - Eyes
+    - Tongue
     - HiveNode
     - ResinSpinner
     - NeurotoxinGland

@@ -1792,8 +1792,8 @@
 - type: entity
   name: mouse
   parent:
-  - SimpleMobBase
   - BaseMobMouse # Shitmed - unique mouse body
+  - SimpleMobBase
   id: MobMouse
   description: Squeak!
   components:

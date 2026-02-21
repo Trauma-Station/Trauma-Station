@@ -36,7 +36,10 @@ public sealed partial class LabelSystem : EntitySystem
     {
         if (!string.IsNullOrEmpty(ent.Comp.CurrentLabel))
         {
-            ent.Comp.CurrentLabel = Loc.GetString(ent.Comp.CurrentLabel);
+            // <Trauma> - half of these arent localized to use TryGetString
+            if (Loc.TryGetString(ent.Comp.CurrentLabel, out var label))
+                ent.Comp.CurrentLabel = label;
+            // </Trauma>
             Dirty(ent);
         }
 

@@ -32,9 +32,9 @@ public sealed class StationBeacons
     public required List<NavMapBeacon> Beacons { get; init; }
 }
 [Serializable, NetSerializable]
-public sealed class AbductorBeaconChosenBuiMsg : BoundUserInterfaceMessage
+public sealed class AbductorBeaconChosenBuiMsg(NetEntity target) : BoundUserInterfaceMessage
 {
-    public required NavMapBeacon Beacon { get; init; }
+    public readonly NetEntity Target = target;
 }
 [Serializable, NetSerializable]
 public sealed class AbductorAttractBuiMsg : BoundUserInterfaceMessage
