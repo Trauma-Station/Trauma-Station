@@ -1,0 +1,12 @@
+- type: entity
+  parent: [ OrganBaseTail, OrganVoxExternal ]
+  id: OrganVoxTail
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Species/Vox/parts.rsi
+    layers:
+    - state: tail
+  - type: VisualOrgan
+    data:
+      sprite: _Trauma/Mobs/Species/Reptilian/parts.rsi
+      state: empty # no sprite since the markings actually control it
