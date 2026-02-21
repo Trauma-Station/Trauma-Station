@@ -23,6 +23,9 @@ public sealed partial class EldritchInfluenceComponent : Component
     public bool Spent;
 
     [DataField]
+    public int Tier = 1;
+
+    [DataField]
     public float KnowledgeGain = 1f;
 
     [DataField]
@@ -30,6 +33,9 @@ public sealed partial class EldritchInfluenceComponent : Component
 
     [DataField]
     public LocId ExamineBaseMessage = "influence-base-message";
+
+    [DataField]
+    public LocId HereticExamineMessage = "influence-heretic-examine-message";
 
     [DataField]
     public int FontSize = 22;

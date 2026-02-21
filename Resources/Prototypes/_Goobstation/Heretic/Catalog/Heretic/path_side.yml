@@ -10,7 +10,26 @@
 # SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
-# store catalog
+
+- type: listing
+  id: HereticSidePathKnowledge
+  name: knowledge-path-side-knowledge-name
+  description: knowledge-path-side-knowledge-desc
+  icon: { sprite: _Goobstation/Heretic/book.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - RitualOfKnowledge
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSideSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 0
+
 - type: listing
   id: HereticSidePath5Armor
   name: knowledge-path-side-s4-armor-name
@@ -23,7 +42,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT1
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -42,7 +61,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT1
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -61,7 +80,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT1
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -80,7 +99,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT1
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -99,7 +118,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT1
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -118,31 +137,12 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT1
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
     stage: 2
-
-- type: listing
-  id: HereticSidePathKnowledge
-  name: knowledge-path-side-knowledge-name
-  description: knowledge-path-side-knowledge-desc
-  icon: { sprite: _Goobstation/Heretic/book.rsi, state: icon }
-  raiseProductEventOnMind: true
-  productEvent: !type:EventHereticAddKnowledge
-    knowledge:
-    - RitualOfKnowledge
-  cost:
-    KnowledgePoint: 1
-  categories:
-  - HereticPathSide
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-  - !type:HereticPathCondition
-    stage: 0
 
 - type: listing
   id: HereticSidePath7RustWalker
@@ -156,7 +156,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT2
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -175,7 +175,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT2
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -194,7 +194,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT2
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -202,7 +202,7 @@
     stage: 5
 
 - type: listing
-  id: HereticSidePath7CMorbus
+  id: HereticSidePath7Morbus
   name: knowledge-path-side-s6-morbus-name
   description: knowledge-path-side-s6-morbus-desc
   icon: { sprite: _Goobstation/Heretic/book_morbus.rsi, state: icon-on }
@@ -213,7 +213,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT2
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -232,7 +232,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT2
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -251,7 +251,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT2
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -270,7 +270,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT2
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -289,7 +289,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT2
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -308,7 +308,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT2
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -327,7 +327,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT3
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -346,7 +346,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT3
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -365,7 +365,7 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSide
+  - HereticPathSideT3
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1

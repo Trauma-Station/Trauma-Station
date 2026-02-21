@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Conversion;
-using Content.Goobstation.Common.Heretic;
 using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared.Actions;
 using Content.Shared.Heretic;
@@ -9,6 +8,7 @@ using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Objectives.Systems;
+using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Configuration;
@@ -198,7 +198,10 @@ public abstract class SharedHereticSystem : EntitySystem
 
         // make sure we only progress when buying current path knowledge
         if (data.Stage > ent.Comp2.PathStage && data.Path == ent.Comp2.CurrentPath)
+        {
             ent.Comp2.PathStage = data.Stage;
+            UpdateHereticCostModifiers((ent, ent.Comp2));
+        }
 
         Dirty(ent, ent.Comp2);
         return true;
@@ -217,6 +220,11 @@ public abstract class SharedHereticSystem : EntitySystem
     protected virtual void SpawnRituals(HereticComponent heretic,
         List<EntProtoId<HereticRitualComponent>> rituals,
         ICommonSession session)
+    {
+    }
+
+    public virtual void UpdateHereticCostModifiers(Entity<HereticComponent?, StoreComponent?> ent,
+        ProtoId<StoreCategoryPrototype>? category = null)
     {
     }
 }

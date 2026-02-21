@@ -25,7 +25,6 @@ using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using System.Text;
 using Content.Server._Goobstation.Objectives.Components;
 using Content.Shared.Mind;
@@ -40,7 +39,6 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
     [Dependency] private readonly SharedRoleSystem _role = default!;
     [Dependency] private readonly ObjectivesSystem _objective = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IRobustRandom _rand = default!;
 
     public static readonly SoundSpecifier BriefingSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain.ogg");
@@ -50,7 +48,7 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
 
     public static readonly ProtoId<CurrencyPrototype> Currency = "KnowledgePoint";
 
-    static EntProtoId MindRole = "MindRoleHeretic";
+    private static EntProtoId MindRole = "MindRoleHeretic";
 
     public override void Initialize()
     {
@@ -58,11 +56,26 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
 
         SubscribeLocalEvent<HereticRuleComponent, AfterAntagEntitySelectedEvent>(OnAntagSelect);
         SubscribeLocalEvent<HereticRuleComponent, ObjectivesTextPrependEvent>(OnTextPrepend);
+
+        SubscribeLocalEvent<SpawnHereticInfluenceEvent>(OnSpawn);
+    }
+
+    private void OnSpawn(ref SpawnHereticInfluenceEvent ev)
+    {
+        SpawnInfluence(ev.Proto, ev.Amount);
     }
 
     private void OnAntagSelect(Entity<HereticRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
         TryMakeHeretic(args.EntityUid, ent.Comp);
+
+        SpawnInfluence(ent.Comp.RealityShift, ent.Comp.RealityShiftPerHeretic);
+    }
+
+    public void SpawnInfluence(EntProtoId proto, int amount)
+    {
+        if (amount <= 0)
+            return;
 
         if (!TryGetRandomStation(out var station))
             return;
@@ -70,10 +83,10 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
         if (GetStationMainGrid((station.Value, Comp<StationDataComponent>(station.Value))) is not {} grid)
             return;
 
-        for (var i = 0; i < ent.Comp.RealityShiftPerHeretic.Next(_rand); i++)
+        for (var i = 0; i < amount; i++)
         {
             if (TryFindTileOnGrid(grid, out _, out var coords))
-                Spawn(ent.Comp.RealityShift, coords);
+                Spawn(proto, coords);
         }
     }
 

@@ -14,6 +14,7 @@ using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Content.Shared.Store;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -134,6 +135,35 @@ public sealed partial class HereticComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Minions = new();
+
+    /// <summary>
+    /// How much drafts of <see cref="SideDraftChoiceAmount"/> side knowledge heretic currently has.
+    /// Side category -> draft amount
+    /// </summary>
+    [DataField]
+    public Dictionary<ProtoId<StoreCategoryPrototype>, int> SideKnowledgeDrafts = new()
+    {
+        { "HereticPathSideT1", 1 }, // 1 free draft of t1 side roundstart
+        { "HereticPathSideT2", 0 },
+        { "HereticPathSideT3", 0 },
+    };
+
+    [DataField]
+    public int SideDraftChoiceAmount = 3;
+
+    [DataField]
+    public int SacrificeTracker;
+
+    /// <summary>
+    /// Influences gradually spawn with increasing tier after sacrifices
+    /// <see cref="SacrificeTracker"/> tracks the amount
+    /// </summary>
+    [DataField]
+    public Dictionary<int, EntProtoId> InfluenceSpawnPerSacrificeAmount = new()
+    {
+        {1, "EldritchInfluenceT2"},
+        {2, "EldritchInfluenceT3"},
+    };
 }
 
 [DataDefinition, Serializable, NetSerializable]

@@ -20,10 +20,10 @@ namespace Content.Server.GameTicking.Rules.Components;
 public sealed partial class HereticRuleComponent : Component
 {
     [DataField]
-    public MinMax RealityShiftPerHeretic = new(4, 6);
+    public int RealityShiftPerHeretic = 1;
 
     [DataField]
-    public EntProtoId RealityShift = "EldritchInfluence";
+    public EntProtoId RealityShift = "EldritchInfluenceT1";
 
     public readonly List<EntityUid> Minds = new();
 
@@ -36,6 +36,9 @@ public sealed partial class HereticRuleComponent : Component
         "HereticPathVoid",
         "HereticPathRust",
         "HereticPathCosmos",
-        "HereticPathSide",
+        "HereticPathSideSpecial",
+        "HereticPathSideT1",
+        "HereticPathSideT2",
+        "HereticPathSideT3",
     };
 }

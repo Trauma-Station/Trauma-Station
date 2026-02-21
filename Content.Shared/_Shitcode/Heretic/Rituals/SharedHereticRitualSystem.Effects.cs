@@ -2,6 +2,7 @@ using Content.Shared.Heretic;
 using Content.Shared.Mind;
 using Content.Shared.Stacks;
 using Content.Shared.Store.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Shitcode.Heretic.Rituals;
 
@@ -219,8 +220,17 @@ public abstract partial class SharedHereticRitualSystem
             RaiseLocalEvent(mind, ref ev2);
         }
 
-        if (knowledgeGain > 0)
-            _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, knowledgeGain);
+        if (knowledgeGain == 0)
+            return;
+
+        _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, knowledgeGain);
+
+        heretic.SacrificeTracker++;
+        if (!heretic.InfluenceSpawnPerSacrificeAmount.TryGetValue(heretic.SacrificeTracker, out var influence))
+            return;
+
+        var influenceEv = new SpawnHereticInfluenceEvent(influence);
+        RaiseLocalEvent(ref influenceEv);
     }
 
     private void OnLookup(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<LookupRitualEffect> args)

@@ -32,6 +32,7 @@ using Content.Server.Heretic.Components;
 using Content.Server.Antag;
 using Robust.Shared.Random;
 using System.Linq;
+using Content.Goobstation.Shared.ManifestListings;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server._Goobstation.Objectives.Components;
 using Content.Server.Actions;
@@ -41,14 +42,12 @@ using Content.Server.Revolutionary.Components;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Chat;
 using Content.Shared.GameTicking;
-using Content.Shared.Humanoid.Markings;
 using Content.Server.Polymorph.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Roles.Jobs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
@@ -58,8 +57,10 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Server.Hands.Systems;
 using Content.Shared._Shitcode.Heretic.Rituals;
+using Content.Shared.Store;
 using Content.Shared.Tag;
 using Robust.Server.GameStates;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Heretic.EntitySystems;
 
@@ -103,6 +104,7 @@ public sealed class HereticSystem : SharedHereticSystem
         SubscribeLocalEvent<HereticComponent, EventHereticUpdateTargets>(OnUpdateTargets);
         SubscribeLocalEvent<HereticComponent, EventHereticRerollTargets>(OnRerollTargets);
         SubscribeLocalEvent<HereticComponent, EventHereticAscension>(OnAscension);
+        SubscribeLocalEvent<HereticComponent, ListingPurchasedEvent>(OnPurchase);
 
         SubscribeLocalEvent<HereticComponent, MindGotRemovedEvent>(OnMindRemoved);
         SubscribeLocalEvent<HereticComponent, MindGotAddedEvent>(OnMindAdded);
@@ -299,6 +301,7 @@ public sealed class HereticSystem : SharedHereticSystem
         }
 
         RaiseLocalEvent(ent, new EventHereticRerollTargets());
+        UpdateHereticCostModifiers(ent.AsNullable());
     }
 
     private void OnShutdown(Entity<HereticComponent> ent, ref ComponentShutdown args)
@@ -483,5 +486,59 @@ public sealed class HereticSystem : SharedHereticSystem
             true,
             ascendSound,
             Color.Pink);
+    }
+
+
+    private void OnPurchase(Entity<HereticComponent> ent, ref ListingPurchasedEvent args)
+    {
+        if (args.Data.Categories.FirstOrNull() is not { } cat)
+            return;
+
+        if (!ent.Comp.SideKnowledgeDrafts.TryGetValue(cat, out var amount))
+            return;
+
+        var listings = _store.GetAvailableListings(args.User, ent, Comp<StoreComponent>(ent));
+        foreach (var listing in listings)
+        {
+            if (!listing.Categories.Contains(cat) || !listing.CostModifiersBySourceId.ContainsKey(cat))
+                continue;
+
+            listing.RemoveCostModifier(cat);
+        }
+
+        var newAmount = Math.Max(amount - 1, 0);
+        ent.Comp.SideKnowledgeDrafts[cat] = newAmount;
+        if (newAmount > 0)
+            UpdateHereticCostModifiers(ent.AsNullable(), cat);
+    }
+
+    public override void UpdateHereticCostModifiers(Entity<HereticComponent?, StoreComponent?> ent,
+        ProtoId<StoreCategoryPrototype>? category = null)
+    {
+        base.UpdateHereticCostModifiers(ent, category);
+
+        if (!Resolve(ent, ref ent.Comp1, ref ent.Comp2))
+            return;
+
+        var allListings = _store.GetAvailableListings(ent, ent, ent.Comp2).ToList();
+        // Order listings by category
+        var listings = allListings
+            .Where(x => (category ?? x.Categories.FirstOrNull()) is { } cat &&
+                        ent.Comp1.SideKnowledgeDrafts.TryGetValue(cat, out var amount) && amount > 0)
+            .ToDictionary(x => x.Categories.First(),
+                x => allListings.Where(y => y.Categories.Intersect(x.Categories).Any()).ToList());
+
+        foreach (var (key, value) in listings)
+        {
+            if (value.Count == 0 || value.Any(x => x.CostModifiersBySourceId.ContainsKey(key)))
+                continue;
+
+            var amount = Math.Max(value.Count, ent.Comp1.SideDraftChoiceAmount);
+            for (var i = 0; i < amount; i++)
+            {
+                var listing = _rand.PickAndTake(value);
+                listing.AddCostModifier(key, listing.Cost.ToDictionary());
+            }
+        }
     }
 }

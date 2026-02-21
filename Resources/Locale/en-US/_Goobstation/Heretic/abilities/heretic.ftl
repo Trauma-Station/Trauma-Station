@@ -31,7 +31,7 @@ mansus-grasp-trigger-fail = Something prevents you from activating this!
 
 ## blade
 heretic-blade-examine = [color=yellow]Using it while it's in your hand will break the blade and teleport you away from danger.[/color]
-heretic-blade-break-fail-acended-message = You cannot break blades while ascended!
+heretic-blade-break-fail-message = You cannot break your blades anymore!
 heretic-blade-use = The blade shatters, and you feel the voices pulling you away.
 heretic-riposte-used = Riposte used!
 heretic-riposte-available = Riposte available!

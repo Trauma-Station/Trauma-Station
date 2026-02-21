@@ -53,6 +53,14 @@ public sealed class EldritchInfluenceSystem : EntitySystem
 
     private void OnExamine(Entity<EldritchInfluenceComponent> ent, ref ExaminedEvent args)
     {
+        if (!ent.Comp.Spent && _heretic.TryGetHereticComponent(args.Examiner, out _, out _))
+        {
+            var msg = Loc.GetString(ent.Comp.HereticExamineMessage, ("tier", ent.Comp.Tier));
+            var wrapped = Loc.GetString(ent.Comp.ExamineBaseMessage, ("text", msg), ("size", 16));
+            args.PushMarkup(wrapped);
+            return;
+        }
+
         if (HasComp<SpectralComponent>(args.Examiner) || HasComp<GhostComponent>(args.Examiner) ||
             HasComp<WizardComponent>(args.Examiner) || HasComp<ApprenticeComponent>(args.Examiner) ||
             _heretic.IsHereticOrGhoul(args.Examiner))
@@ -117,10 +125,19 @@ public sealed class EldritchInfluenceSystem : EntitySystem
     }
     private void OnDoAfter(Entity<EldritchInfluenceComponent> ent, ref EldritchInfluenceDoAfterEvent args)
     {
-        if (args.Cancelled || args.Target == null || !_heretic.TryGetHereticComponent(args.User, out _, out _))
+        if (args.Cancelled || args.Target == null || !_heretic.TryGetHereticComponent(args.User, out var heretic, out _))
             return;
 
         _heretic.UpdateKnowledge(args.User, 1f);
+
+        if (TryComp(args.Used, out EldritchInfluenceDrainerComponent? drainer) &&
+            drainer.TierToCategory.TryGetValue(ent.Comp.Tier, out var cat))
+        {
+            var current = heretic.SideKnowledgeDrafts[cat];
+            heretic.SideKnowledgeDrafts[cat] = current + 1;
+            if (current == 0)
+                _heretic.UpdateHereticCostModifiers((args.User, heretic), cat);
+        }
 
         Spawn("EldritchInfluenceIntermediate", Transform(args.Target.Value).Coordinates);
         QueueDel(args.Target);
