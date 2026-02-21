@@ -1,10 +1,9 @@
 CodeWords-dataset-1 = patriots
 CodeWords-dataset-2 = cipher
-CodeWords-dataset-3 = Snake Eater
+CodeWords-dataset-3 = snake
 CodeWords-dataset-4 = liquid
-CodeWords-dataset-5 = solidus
-CodeWords-dataset-6 = boss
-CodeWords-dataset-7 = adam
-CodeWords-dataset-8 = eva
-CodeWords-dataset-9 = pretty good
-CodeWords-dataset-10 = metal gear
+CodeWords-dataset-5 = boss
+CodeWords-dataset-6 = adam
+CodeWords-dataset-7 = eva
+CodeWords-dataset-8 = pretty good
+CodeWords-dataset-9 = gear
