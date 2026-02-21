@@ -87,6 +87,9 @@
   - type: VisualOrgan
     data:
       sprite: Mobs/Customization/eyes.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
 
 - type: entity
   parent: [ OrganBaseTongue, OrganBioSynthInternal ]

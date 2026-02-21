@@ -325,6 +325,10 @@
 - type: entity
   parent: [ OrganBaseEyes, OrganHarpyInternal ]
   id: OrganHarpyEyes
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: Harpy
 
 - type: entity
   parent: [ OrganBaseTongue, OrganHarpyInternal ]
