@@ -1049,6 +1049,7 @@ ToySkeleton: ToyFigurineSkeleton
 # Trauma - 2025-10-19
 LockerBlueshieldOfficerFilled: null
 DresserBlueshieldOfficerFilled: null
+HolopadCommandBSO: null
 UniqueLockerBlueshieldOfficerFilled: null
 AirlockBlueshieldOfficerCommandLocked: AirlockCentralCommandLocked
 AirlockBlueshieldOfficerCommandGlassLocked: AirlockCentralCommandGlassLocked
