@@ -1316,8 +1316,8 @@ namespace Content.Client.Lobby.UI
                 return;
             }
 
-            _markingsModel.OrganData = _markingManager.GetMarkingData(Profile.Species);
             _markingsModel.OrganProfileData = _markingManager.GetProfileData(Profile.Species, Profile.Sex, Profile.Appearance.SkinColor, Profile.Appearance.EyeColor);
+            _markingsModel.OrganData = _markingManager.GetMarkingData(Profile.Species); // Trauma - moved from above because it was breaking the UI when switching species
             _markingsModel.Markings = Profile.Appearance.Markings;
         }
 

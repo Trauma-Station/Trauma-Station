@@ -122,11 +122,11 @@
   id: HereticBladePath5
   name: knowledge-path-blade-s5-name
   description: knowledge-path-blade-s5-desc
-  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: realignment }
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: sacraments }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - Realignment
+    - SacramentsOfPower
   cost:
     KnowledgePoint: 2
   categories:

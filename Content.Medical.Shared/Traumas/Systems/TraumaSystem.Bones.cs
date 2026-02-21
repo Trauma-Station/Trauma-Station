@@ -83,7 +83,7 @@ public partial class TraumaSystem
 
     private void OnModifyDoAfterDelay(Entity<BoneComponent> bone, ref ModifyDoAfterDelayEvent args)
     {
-        args.Multiplier *= bone.Comp.BoneSeverity switch
+        args.Multiplier /= bone.Comp.BoneSeverity switch
         {
             BoneSeverity.Damaged => 0.92f,
             BoneSeverity.Cracked => 0.84f,

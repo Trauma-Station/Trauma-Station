@@ -5,6 +5,10 @@
 - type: entity
   parent: [ OrganBaseEyes, OrganAnimalInternal ]
   id: OrganAnimalEyes
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
 
 - type: entity
   parent: [ OrganBaseTongue, OrganAnimalInternal ]

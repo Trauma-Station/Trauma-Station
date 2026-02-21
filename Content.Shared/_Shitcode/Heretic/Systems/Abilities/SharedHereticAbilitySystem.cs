@@ -10,11 +10,13 @@ using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Cuffs;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Emp;
+using Content.Shared.Ensnaring;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -26,7 +28,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
-using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
@@ -55,11 +56,10 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] protected readonly StatusEffectsSystem Status = default!;
     [Dependency] protected readonly SharedVoidCurseSystem Voidcurse = default!;
     [Dependency] protected readonly SharedHereticSystem Heretic = default!;
+    [Dependency] protected readonly StatusEffectNew.StatusEffectsSystem StatusNew = default!;
 
-    [Dependency] private readonly StatusEffectNew.StatusEffectsSystem _statusNew = default!;
     [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ThrowingSystem _throw = default!;
@@ -81,6 +81,8 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
+    [Dependency] private readonly SharedEnsnareableSystem _snare = default!;
 
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
 
@@ -170,6 +172,9 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             args.Handled = true;
             return;
         }
+
+        if (HasComp<SacramentsOfPowerComponent>(ent))
+            return;
 
         // TryUseAbility only if we are not cloaked so that we can uncloak without focus
         // Ideally you should uncloak when losing focus but whatever
@@ -357,6 +362,4 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     {
         _audio.PlayPredicted(ent.Comp.Sound, user, user);
     }
-
-    protected virtual void SpeakAbility(EntityUid ent, HereticActionComponent args) { }
 }

@@ -12,7 +12,7 @@
     graph: RevHelmet
     deconstructionTarget: null
     node: finished
-  - type: Armor # same values as BSO chud gear, it should much stronger than a 1 cloth cap hat you can make roundstart as any role
+  - type: Armor # same values as (rip) BSO chud gear, it should much stronger than a 1 cloth cap hat you can make roundstart as any role
     coverage:
     - Head
     traumaDeductions:

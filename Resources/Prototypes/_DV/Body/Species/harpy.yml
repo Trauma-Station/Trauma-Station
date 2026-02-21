@@ -80,6 +80,7 @@
     organs:
       Torso: OrganHarpyTorso
       Head: OrganHarpyHead
+      Tail: OrganHarpyTail
       ArmLeft: OrganHarpyArmLeft
       ArmRight: OrganHarpyArmRight
       HandRight: OrganHarpyHandRight
@@ -246,7 +247,7 @@
 ## Parts
 
 - type: entity
-  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganHarpyExternal ]
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorsoTailed, OrganHarpyExternal ]
   id: OrganHarpyTorso
 
 - type: entity
@@ -255,6 +256,17 @@
   components:
   - type: Woundable
     boneEntity: BoneNeckWeak
+
+- type: entity
+  parent: [ OrganBaseTail, OrganHarpyExternal ]
+  id: OrganHarpyTail
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Species/Reptilian/parts.rsi # TODO: make a unique sprite
+  - type: VisualOrgan
+    data:
+      sprite: _Trauma/Mobs/Species/Reptilian/parts.rsi
+      state: empty # no sprite since the markings actually control it
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganHarpyExternal ]
@@ -313,6 +325,10 @@
 - type: entity
   parent: [ OrganBaseEyes, OrganHarpyInternal ]
   id: OrganHarpyEyes
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: Harpy
 
 - type: entity
   parent: [ OrganBaseTongue, OrganHarpyInternal ]

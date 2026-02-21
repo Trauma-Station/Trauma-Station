@@ -6,7 +6,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobWarden
-      time: 187200 #Same as BSO mantle mostly for shits and giggles. Warden is Harrowing.
+      time: 52h # for shits and giggles. Warden is Harrowing.
 
 - type: loadout
   id: WardenEnvirosuit

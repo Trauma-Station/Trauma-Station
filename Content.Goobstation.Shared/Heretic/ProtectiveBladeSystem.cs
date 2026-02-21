@@ -13,7 +13,6 @@
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Follower;
-using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
 using System.Linq;
 using System.Numerics;
@@ -24,6 +23,7 @@ using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Systems.Abilities;
 using Content.Shared.Input;
 using Content.Shared.Projectiles;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Reflect;
@@ -116,7 +116,8 @@ public sealed class ProtectiveBladeSystem : EntitySystem
         if (session?.AttachedEntity is not { Valid: true } player || !Exists(player) ||
             !coords.IsValid(EntityManager) || !_heretic.IsHereticOrGhoul(player) ||
             !TryComp(player, out ProtectiveBladesComponent? blades) ||
-            HasComp<BlockProtectiveBladeShootComponent>(player))
+            HasComp<SacramentsOfPowerComponent>(player) ||
+            _status.HasStatusEffect(player, blades.BlockShootStatus))
             return false;
 
         if (!_hands.ActiveHandIsEmpty(player))
@@ -248,18 +249,13 @@ public sealed class ProtectiveBladeSystem : EntitySystem
         var direction = target - pos;
 
         var proj = PredictedSpawnAtPosition(BladeProjecilePrototype, Transform(origin).Coordinates);
-        _gun.ShootProjectile(proj, direction, Vector2.Zero, origin, origin);
+        _gun.ShootProjectile(proj, direction, Vector2.Zero, origin, origin, origin.Comp.ProjectileSpeed);
         if (targetEntity != EntityUid.Invalid)
             _gun.SetTarget(proj, targetEntity, out _);
 
         PredictedQueueDel(blade);
 
-        // TODO: status effect entities
-        _status.TryAddStatusEffect<BlockProtectiveBladeShootComponent>(origin,
-            "BlockProtectiveBladeShoot",
-            TimeSpan.FromSeconds(0.25f),
-            true);
-
+        _status.TryUpdateStatusEffectDuration(origin, origin.Comp.BlockShootStatus, out _, origin.Comp.BladeShootDelay);
         return true;
     }
 }

@@ -97,7 +97,6 @@
     accessLevels:
     # <Trauma>
     - NanotrasenRepresentative
-    - BlueshieldOfficer
     - Journalism
     - Robotics
     - Genetics

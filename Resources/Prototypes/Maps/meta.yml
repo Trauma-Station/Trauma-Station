@@ -20,7 +20,6 @@
             #service
             Captain: [ 1, 1 ]
             NanotrasenRepresentative: [ 1, 1 ]
-            #BlueshieldOfficer: [ 1, 1 ] # Trauma
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 2, 2 ]
             Botanist: [ 2, 3 ]

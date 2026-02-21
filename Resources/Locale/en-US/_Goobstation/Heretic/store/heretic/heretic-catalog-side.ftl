@@ -78,6 +78,14 @@ knowledge-path-side-s4-ether-desc =
     drinking it will remove any sort of abnormality from your body including diseases and traumas.
     on top of restoring it to full health, at the cost of losing consciousness for an entire minute.
 
+knowledge-path-side-s4-realignment-name = Realignment
+knowledge-path-side-s4-realignment-desc =
+    In the flurry of death, he found peace within himself. Despite insurmountable odds, he forged on.
+
+    Grants you Realignment a spell that will remove stuns, knockdowns and restraints from you and realign your body rapidly for a short period.
+    During this process, you will rapidly regenerate stamina and quickly recover from stuns, however, you will be unable to attack.
+    Doesn't require focus to cast.
+
 ## stage 6
 knowledge-path-side-s6-ice-spear-name = Mysteries of Creation
 knowledge-path-side-s6-ice-spear-desc =

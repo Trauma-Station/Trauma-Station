@@ -31,7 +31,7 @@
     stage: 0
 
 - type: listing
-  id: HereticSidePath5Armor
+  id: HereticSidePath4Armor
   name: knowledge-path-side-s4-armor-name
   description: knowledge-path-side-s4-armor-desc
   icon: { sprite: _Goobstation/Heretic/Clothing/OuterClothing/eldritch_armor.rsi, state: icon }
@@ -50,7 +50,7 @@
     stage: 3
 
 - type: listing
-  id: HereticSidePath5Flask
+  id: HereticSidePath4Flask
   name: knowledge-path-side-s4-flask-name
   description: knowledge-path-side-s4-flask-desc
   icon: { sprite: _Goobstation/Heretic/items.rsi, state: eldritch_flask }
@@ -69,7 +69,7 @@
     stage: 3
 
 - type: listing
-  id: HereticSidePath5AshenEyes
+  id: HereticSidePath4AshenEyes
   name: knowledge-path-side-s4-ashen-eyes-name
   description: knowledge-path-side-s4-ashen-eyes-desc
   icon: { sprite: _Goobstation/Heretic/eldritch_medalion.rsi, state: icon }
@@ -88,7 +88,7 @@
     stage: 3
 
 - type: listing
-  id: HereticSidePath5VoidCloak
+  id: HereticSidePath4VoidCloak
   name: knowledge-path-side-s4-void-cloak-name
   description: knowledge-path-side-s4-void-cloak-desc
   icon: { sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_cloak.rsi, state: icon }
@@ -107,7 +107,7 @@
     stage: 3
 
 - type: listing
-  id: HereticSidePath5Shark
+  id: HereticSidePath4Shark
   name: knowledge-path-side-s4-shark-name
   description: knowledge-path-side-s4-shark-desc
   icon: { sprite: _Goobstation/Heretic/eldritch_mobs.rsi, state: fire_shark_icon }
@@ -126,7 +126,7 @@
     stage: 3
 
 - type: listing
-  id: HereticSidePath3Ether
+  id: HereticSidePath4Ether
   name: knowledge-path-side-s4-ether-name
   description: knowledge-path-side-s4-ether-desc
   icon: { sprite: _Goobstation/Heretic/Entities/Potions/ether.rsi, state: icon }
@@ -134,6 +134,25 @@
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
     - EtherOfTheNewborn
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSideT1
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 3
+
+- type: listing
+  id: HereticBladePath4Realignment
+  name: knowledge-path-side-s4-realignment-name
+  description: knowledge-path-side-s4-realignment-desc
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: realignment }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - Realignment
   cost:
     KnowledgePoint: 1
   categories:

@@ -51,12 +51,13 @@ knowledge-path-blade-s4-desc =
 
     Being attacked while wielding a Heretic Blade in either hand will deliver a riposte towards your attacker, knocking them down. This effect can only trigger once every 20 seconds.
 
-knowledge-path-blade-s5-name = Realignment
+knowledge-path-blade-s5-name = Sacraments of Power
 knowledge-path-blade-s5-desc =
-    In the flurry of death, he found peace within himself. Despite insurmountable odds, he forged on.
+    Seven times seven techniques were made in Eternal War. These parts of the doctrine contain enough to crush anyone.
 
-    Grants you Realignment a spell that wil realign your body rapidly for a short period.
-    During this process, you will rapidly regenerate stamina and quickly recover from stuns, however, you will be unable to attack.
+    Grants you Sacraments of Power, a spell that makes you immune to all incoming damage and stamina damage for 5 seconds, the portion of absorbed damage will be sent back to attackers.
+    Prevents you from shooting or attacking during the effect duration.
+    Takes about 1 second to activate. Disables choak of shadow effect.
 
 knowledge-path-blade-s6-name = Stance of the Torn Champion
 knowledge-path-blade-s6-desc =

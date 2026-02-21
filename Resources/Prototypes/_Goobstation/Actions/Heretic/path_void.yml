@@ -9,30 +9,9 @@
 
 - type: entity
   parent: BaseAction
-  id: ActionHereticVoidBlast
-  name: Void Blast
-  description: Fire off a cone of ice in front of you.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Action
-    checkCanInteract: false
-    useDelay: 15
-    itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: void_blast
-  - type: InstantAction
-    event: !type:HereticVoidBlastEvent
-  - type: HereticAction
-    requireMagicItem: true
-  - type: SpeakOnAction
-    sentence: heretic-speech-void-blast
-
-- type: entity
-  parent: BaseAction
   id: ActionHereticVoidPhase
   name: Void Phase
-  description: Shift through the void, knocking down everyone around you.
+  description: Lets you blink to your pointed destination, causes 3x3 aoe damage bubble around your pointed destination and your current location.
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
@@ -53,6 +32,9 @@
     requireMagicItem: true
   - type: SpeakOnAction
     sentence: heretic-speech-void-phase
+  - type: ChangeUseDelayOnAscension
+    newUseDelay: 10
+    requiredPath: Void
 
 - type: entity
   parent: BaseAction
@@ -81,6 +63,9 @@
     requireMagicItem: true
   - type: SpeakOnAction
     sentence: heretic-speech-void-prison
+  - type: ChangeUseDelayOnAscension
+    newUseDelay: 15
+    requiredPath: Void
 
 - type: entity
   parent: BaseAction
@@ -104,6 +89,9 @@
     requireMagicItem: true
   - type: SpeakOnAction
     sentence: heretic-speech-void-pull
+  - type: ChangeUseDelayOnAscension
+    newUseDelay: 15
+    requiredPath: Void
 
 - type: entity
   parent: BaseAction
@@ -125,3 +113,6 @@
     requireMagicItem: true
   - type: SpeakOnAction
     sentence: heretic-speech-void-conduit
+  - type: ChangeUseDelayOnAscension
+    newUseDelay: 30
+    requiredPath: Void

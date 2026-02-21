@@ -136,6 +136,7 @@
     organs:
       Torso: OrganVoxTorso
       Head: OrganVoxHead
+      Tail: OrganVoxTail # Trauma
       ArmLeft: OrganVoxArmLeft
       ArmRight: OrganVoxArmRight
       HandRight: OrganVoxHandRight
@@ -307,7 +308,7 @@
     sprite: Mobs/Species/Vox/parts.rsi
 
 - type: entity
-  parent: [ OrganBaseTorso, OrganVoxExternal ]
+  parent: [ OrganBaseTorsoTailed, OrganVoxExternal ] # Shitmed - Tailed torso
   id: OrganVoxTorso
 
 - type: entity

@@ -69,6 +69,7 @@
     organs:
       Torso: OrganVulpkaninTorso
       Head: OrganVulpkaninHead
+      Tail: OrganVulpkaninTail # Trauma
       ArmLeft: OrganVulpkaninArmLeft
       ArmRight: OrganVulpkaninArmRight
       HandRight: OrganVulpkaninHandRight
@@ -239,7 +240,7 @@
     sprite: Mobs/Species/Vulpkanin/parts.rsi
 
 - type: entity
-  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganVulpkaninExternal ]
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorsoTailed, OrganVulpkaninExternal ] # Trauma - Tailed torso
   id: OrganVulpkaninTorso
 
 - type: entity

@@ -1,5 +1,16 @@
 ## Mob
 
+- type: markingsGroup
+  id: Kobold
+  onlyGroupWhitelisted: true
+  limits:
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 2
+      required: false
+    enum.HumanoidVisualLayers.HeadSide:
+      limit: 1
+      required: false
+
 - type: entity
   parent: BaseSpeciesAppearance
   id: AppearanceKobold
@@ -51,7 +62,7 @@
       sprite: Mobs/Animals/kobold.rsi
   - type: VisualOrganMarkings
     markingData:
-      group: Reptilian
+      group: Kobold
 
 ## Parts
 

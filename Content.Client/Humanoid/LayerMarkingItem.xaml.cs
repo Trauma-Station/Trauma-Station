@@ -164,7 +164,7 @@ public sealed partial class LayerMarkingItem : BoxContainer, ISearchableControl
 
             var label = _markingPrototype.Sprites[i] switch
             {
-                SpriteSpecifier.Rsi rsi => Loc.GetString($"marking-{_markingPrototype.ID}-{rsi.RsiState}"),
+                SpriteSpecifier.Rsi rsi => Loc.TryGetString($"marking-{_markingPrototype.ID}-{rsi.RsiState}", out var name) ? name : rsi.RsiState, // Trauma - default to the state like r_hand if it isn't defined
                 SpriteSpecifier.Texture texture => Loc.GetString($"marking-{_markingPrototype.ID}-{texture.TexturePath.Filename}"),
                 _ => throw new InvalidOperationException("SpriteSpecifier not of known type"),
             };

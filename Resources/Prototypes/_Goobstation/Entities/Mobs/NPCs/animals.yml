@@ -577,15 +577,14 @@
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
-  - type: SpamEmitSound
-    minInterval: 5
-    maxInterval: 15
-    sound:
-      path: /Audio/_Goobstation/Wraith/Mobs/brullbar/brullbar_roar.ogg
-      params:
-          volume: 1
-          maxDistance: 20
-          variation: 0.01
+  - type: AutoEmote
+    emotes:
+    - BrullbarHowl
+  - type: Vocal
+    sounds:
+      Male: Brullbar
+      Female: Brullbar
+      Unsexed: Brullbar
   - type: NpcFactionMember
     factions:
     - SimpleHostile

@@ -119,7 +119,7 @@ public abstract partial class SharedGravitySystem : EntitySystem
     /// <param name="weightless">The weightless value we are trying to change to, helps avoid needless networking</param>
     public void RefreshWeightless(Entity<GravityAffectedComponent?> entity, bool weightless)
     {
-        if (!_weightlessQuery.Resolve(entity, ref entity.Comp))
+        if (!_weightlessQuery.Resolve(entity, ref entity.Comp, false)) // Trauma - add false
             return;
 
         // Only update if we're changing our weightless status

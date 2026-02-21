@@ -27,36 +27,6 @@
     state: purplekit
 
 - type: entity
-  id: MedkitBSOFilled
-  suffix: Filled
-  parent: MedkitBSO
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: MedicatedSuture
-        - id: RegenerativeMesh
-        - id: CartridgeBicaridine
-        - id: CartridgeDermaline
-        - id: CartridgeSaline
-        - id: CartridgeEpinephrine
-
-- type: entity
-  id: MedkitBSOIPCFilled
-  suffix: Filled
-  parent: MedkitBSOIPC
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: ClothingEyesGlassesMeson
-        - id: WelderIndustrial
-        - id: CableApcStack
-        - id: PowerCellHigh
-
-- type: entity
   id: MedkitCombatBlueFilled
   suffix: Filled, Pills
   parent: MedkitCombatBlue

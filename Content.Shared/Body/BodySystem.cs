@@ -42,7 +42,7 @@ public sealed partial class BodySystem : EntitySystem
 
     private void OnBodyEntInserted(Entity<BodyComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        if (args.Container.ID != BodyComponent.ContainerID)
+        if (args.Container.ID != BodyComponent.ContainerID || IsDetached(ent)) // Trauma - no events for PVS detached mobs
             return;
 
         if (!_organQuery.TryComp(args.Entity, out var organ))
@@ -63,7 +63,7 @@ public sealed partial class BodySystem : EntitySystem
 
     private void OnBodyEntRemoved(Entity<BodyComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        if (args.Container.ID != BodyComponent.ContainerID)
+        if (args.Container.ID != BodyComponent.ContainerID || IsDetached(ent)) // Trauma - no events for PVS detached mobs
             return;
 
         if (!_organQuery.TryComp(args.Entity, out var organ))

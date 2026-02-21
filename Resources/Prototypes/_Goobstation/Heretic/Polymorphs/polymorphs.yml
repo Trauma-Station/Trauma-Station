@@ -90,6 +90,7 @@
     showPopup: false
     attachToGridOrMap: true
     allowRepeatedMorphs: true
+    allowMovement: false
 
 # shapeshifts
 - type: polymorph

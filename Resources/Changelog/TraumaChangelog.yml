@@ -2759,3 +2759,119 @@ Entries:
   id: 333
   time: '2026-02-20T15:40:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/781
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Blade heretic path overall nerfed.
+  - type: Add
+    message: >-
+      Realignment is now t1 side. It now also removes all restraints on use and
+      doesn't require focus to cast.
+  - type: Add
+    message: Added new blade path ability, replacing realignment.
+  id: 334
+  time: '2026-02-21T10:38:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/736
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mobs appearing dead for no reason.
+  - type: Fix
+    message: Fixed genetics console pairing AG and CT instead of AT and GC.
+  - type: Tweak
+    message: Made genetics scanning doafters much faster.
+  id: 335
+  time: '2026-02-21T10:43:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/793
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lizards showing an error on health analyzers.
+  id: 336
+  time: '2026-02-21T11:32:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/794
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: >-
+      Void conduit ticks every 2 second instead of 1 and also it gradually
+      expands from 0 tile range to 8.
+  - type: Tweak
+    message: >-
+      Being frozen in ice cube gives you brute resits, stamina damage can melt
+      the cube similarly to normal damage.
+  - type: Tweak
+    message: Alert carving can trigger when borg steps on it.
+  - type: Tweak
+    message: Alert carving disappears when you teleport on it.
+  - type: Remove
+    message: Void ascension projectile/hitscan "immunity".
+  - type: Add
+    message: Void ascension now has all void spells' cooldown halved.
+  - type: Add
+    message: Void ascension heretics now waltz in air at increased speed.
+  id: 337
+  time: '2026-02-21T11:59:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/792
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to cut off Vox tails.
+  - type: Fix
+    message: Fixed Arachnids not having their appendages.
+  id: 338
+  time: '2026-02-21T12:37:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/796
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed the lobby character editor breaking if you switched to a different
+      species.
+  id: 339
+  time: '2026-02-21T13:18:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/798
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed eye markings and some others not showing up ingame.
+  id: 340
+  time: '2026-02-21T16:22:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/799
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed IPCs always sounding damaged when speaking.
+  id: 341
+  time: '2026-02-21T17:40:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/805
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed armor examine string.
+  id: 342
+  time: '2026-02-21T17:45:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/806
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: Brullbars no longer scream and howl when dead.
+  id: 343
+  time: '2026-02-21T20:12:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/810
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed broken bones making you faster at doing things.
+  - type: Fix
+    message: Fixed all bones affecting doafters, now it's only for hands.
+  id: 344
+  time: '2026-02-21T20:32:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/812
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added new codewords
+  id: 345
+  time: '2026-02-21T21:22:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/807

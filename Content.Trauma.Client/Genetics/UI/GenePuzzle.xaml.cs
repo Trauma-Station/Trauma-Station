@@ -106,9 +106,9 @@ public sealed partial class GenePuzzle : Control
         => b switch
         {
             'A' => Green,
-            'G' => Green,
+            'T' => Green,
+            'G' => Blue,
             'C' => Blue,
-            'T' => Blue,
             _ => null
         };
 }

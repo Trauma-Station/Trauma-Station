@@ -17,7 +17,6 @@
   - CentralCommand
   # Goobstation
   - NanotrasenRepresentative
-  - BlueshieldOfficer
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
@@ -117,7 +116,6 @@
   - CentralCommand
   # Goobstation
   - NanotrasenRepresentative
-  - BlueshieldOfficer
   special:
   - !type:AddComponentSpecial
     components:
@@ -217,7 +215,6 @@
   - CentralCommand
   # Goobstation
   - NanotrasenRepresentative
-  - BlueshieldOfficer
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
@@ -335,7 +332,6 @@
   - CentralCommand
   # Goobstation
   - NanotrasenRepresentative
-  - BlueshieldOfficer
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm]
@@ -512,7 +508,6 @@
   - CentralCommand
   # Goobstation
   - NanotrasenRepresentative
-  - BlueshieldOfficer
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
@@ -618,7 +613,6 @@
   - CentralCommand
   # Goobstation
   - NanotrasenRepresentative
-  - BlueshieldOfficer
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm]

@@ -2,6 +2,11 @@
   parent: Undergarments
   id: Slime
   limits:
+    # <Trauma>
+    enum.HumanoidVisualLayers.Eyes:
+      limit: 1
+      required: false
+    # </Trauma>
     enum.HumanoidVisualLayers.Hair:
       limit: 1
       required: false
@@ -67,7 +72,10 @@
       LegRight: OrganSlimePersonLegRight
       FootLeft: OrganSlimePersonFootLeft
       FootRight: OrganSlimePersonFootRight
-      Tongue: OrganSlimePersonTongue # Trauma
+      # <Trauma>
+      Eyes: OrganSlimePersonEyes
+      Tongue: OrganSlimePersonTongue
+      # </Trauma>
       Stomach: OrganSlimePersonCore # Shitmed - Brain -> Stomach
       Lungs: OrganSlimePersonLungs
   - type: HumanoidProfile

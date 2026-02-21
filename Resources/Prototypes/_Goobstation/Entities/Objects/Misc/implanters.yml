@@ -106,14 +106,6 @@
     implant: BluespaceLifelineImplant
 
 - type: entity
-  id: CommandTrackingImplanter
-  suffix: Command Tracker
-  parent: BaseImplantOnlyImplanterCentcomm
-  components:
-  - type: Implanter
-    implant: CommandTrackingImplant
-
-- type: entity
   id: CentcommFreedomImplanter
   suffix: Freedom
   parent: BaseImplantOnlyImplanterCentcomm

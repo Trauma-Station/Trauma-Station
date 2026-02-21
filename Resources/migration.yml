@@ -1049,9 +1049,15 @@ ToySkeleton: ToyFigurineSkeleton
 # Trauma - 2025-10-19
 LockerBlueshieldOfficerFilled: null
 DresserBlueshieldOfficerFilled: null
+HolopadCommandBSO: null
 UniqueLockerBlueshieldOfficerFilled: null
 AirlockBlueshieldOfficerCommandLocked: AirlockCentralCommandLocked
 AirlockBlueshieldOfficerCommandGlassLocked: AirlockCentralCommandGlassLocked
+SpawnMobHumanBSOBase: null
+SpawnMobHumanBSOModSuit: null
+SpawnMobHumanBSOSuit: null
+SpawnPointBlueshieldOfficer: null
+BSOManual: DragonKungFuManual
 
 # 2025-10-28
 DrinkKiraSpecial: DrinkOrangeLimeSodaGlass

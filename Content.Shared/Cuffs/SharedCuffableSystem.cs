@@ -170,7 +170,7 @@ namespace Content.Shared.Cuffs
             if (args.Container.ID != component.Container?.ID)
                 return;
 
-            _virtualItem.DeleteInHandsMatching(uid, args.Entity);
+            _virtualItem.DeleteInHandsMatching(uid, args.Entity, false); // Trauma - delete virtual items immediatelly, otherwise causes issues with crawling
             UpdateCuffState(uid, component);
         }
 
