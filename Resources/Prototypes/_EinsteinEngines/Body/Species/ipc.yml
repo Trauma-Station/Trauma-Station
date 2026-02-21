@@ -207,6 +207,7 @@
         Piercing: -15
         Slash: -15
   - type: DamagedSiliconAccent
+    enableChargeCorruption: false
   - type: Uncloneable # it a fucking robot
   - type: ZombieImmune
   - type: Fixtures
