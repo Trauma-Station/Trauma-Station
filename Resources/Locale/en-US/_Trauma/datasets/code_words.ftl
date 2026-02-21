@@ -1,0 +1,9 @@
+CodeWords-dataset-1 = patriots
+CodeWords-dataset-2 = La-li-lu-le-lo
+CodeWords-dataset-3 = cipher
+CodeWords-dataset-4 = Snake Eater
+CodeWords-dataset-5 = solid
+CodeWords-dataset-6 = liquid
+CodeWords-dataset-7 = solidus
+CodeWords-dataset-8 = the boss
+CodeWords-dataset-9 = big boss
