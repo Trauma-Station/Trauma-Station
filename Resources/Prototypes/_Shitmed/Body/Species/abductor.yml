@@ -158,6 +158,9 @@
   - type: Sprite
     layers:
     - state: eyeballs # combined sprite
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
 
 # missing some abductor sprites, TODO SHITMED: get tg sprites for them
 - type: entity

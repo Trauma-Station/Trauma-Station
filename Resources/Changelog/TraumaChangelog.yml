@@ -2831,3 +2831,10 @@ Entries:
   id: 339
   time: '2026-02-21T13:18:39.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/798
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed eye markings and some others not showing up ingame.
+  id: 340
+  time: '2026-02-21T16:22:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/799

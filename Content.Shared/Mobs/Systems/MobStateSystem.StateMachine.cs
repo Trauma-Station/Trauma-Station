@@ -111,6 +111,9 @@ public partial class MobStateSystem
         if (oldState == MobState.Dead && HasComp<DebrainedComponent>(target)) // Shitmed Change
             return;
 
+        if (oldState == MobState.Dead)
+            throw new Exception($"Tried to kill {ToPrettyString(target)}!");
+
         OnExitState(target, component, oldState);
         component.CurrentState = newState;
         OnEnterState(target, component, newState);

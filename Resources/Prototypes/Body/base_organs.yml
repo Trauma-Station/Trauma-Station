@@ -436,7 +436,6 @@
     markingData:
       layers:
       - Eyes
-      group: None # Shitmed - avoid copy pasting it into every eye
 
 - type: entity
   parent: OrganBaseInternal # Shitmed

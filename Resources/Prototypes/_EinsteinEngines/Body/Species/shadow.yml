@@ -31,7 +31,7 @@
       FootRight: OrganShadowFootRight
       # Organs
       Brain: OrganHumanBrain
-      Eyes: OrganHumanEyes
+      Eyes: OrganShadowEyes
       Tongue: OrganHumanTongue
       Appendix: OrganHumanAppendix
       Ears: OrganHumanEars
@@ -102,6 +102,11 @@
 
 - type: entity
   abstract: true
+  parent: [ OrganShadow, OrganSpriteHumanInternal ]
+  id: OrganShadowInternal
+
+- type: entity
+  abstract: true
   parent: OrganShadow
   id: OrganShadowExternal
   components:
@@ -120,6 +125,16 @@
         Quantity: 5
       - ReagentId: FluorosulfuricAcid
         Quantity: 10
+
+## Organs
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganShadowInternal ]
+  id: OrganShadowEyes
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: Shadow
 
 ## Parts
 
