@@ -193,32 +193,32 @@
 
 # HeadTop
 
-# Tail
+# Wings
 
 - type: marking
   id: AbdomenBasic
-  bodyPart: Tail
+  bodyPart: Wings
   groupWhitelist: [ Arachnid ]
   sprites:
-  - sprite: _Impstation/Mobs/Customization/Arachnid/tail.rsi
+  - sprite: _Impstation/Mobs/Customization/Arachnid/wings.rsi
     state: abdomenbasic1
-  - sprite: _Impstation/Mobs/Customization/Arachnid/tail.rsi
+  - sprite: _Impstation/Mobs/Customization/Arachnid/wings.rsi
     state: abdomenbasic2
 
 - type: marking
   id: AbdomenWidow
-  bodyPart: Tail
+  bodyPart: Wings
   groupWhitelist: [ Arachnid ]
   sprites:
-  - sprite: _Impstation/Mobs/Customization/Arachnid/tail.rsi
+  - sprite: _Impstation/Mobs/Customization/Arachnid/wings.rsi
     state: widow1
-  - sprite: _Impstation/Mobs/Customization/Arachnid/tail.rsi
+  - sprite: _Impstation/Mobs/Customization/Arachnid/wings.rsi
     state: widow2
 
 - type: marking
   id: CreepyArms
-  bodyPart: Tail
+  bodyPart: Wings
   groupWhitelist: [ Arachnid ]
   sprites:
-  - sprite: _Impstation/Mobs/Customization/Arachnid/tail.rsi
+  - sprite: _Impstation/Mobs/Customization/Arachnid/wings.rsi
     state: creepy
