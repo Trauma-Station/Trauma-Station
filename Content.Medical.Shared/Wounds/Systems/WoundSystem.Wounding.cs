@@ -295,12 +295,13 @@ public sealed partial class WoundSystem
 
     private void OnModifyDoAfterDelay(Entity<WoundableComponent> ent, ref BodyRelayedEvent<ModifyDoAfterDelayEvent> args)
     {
-        var integrity = ent.Comp.WoundableIntegrity;
+        // prevent divide by 0
+        var integrity = Math.Max(ent.Comp.WoundableIntegrity, 1);
         // random hardcoded number award
         if (integrity > 50)
             return;
 
-        args.Args.Multiplier *= (float) (integrity / ent.Comp.IntegrityCap);
+        args.Args.Multiplier /= (float) (integrity / ent.Comp.IntegrityCap);
     }
 
     private void OnAttemptHandsMelee(EntityUid uid, WoundableComponent component, ref AttemptHandsMeleeEvent args)
