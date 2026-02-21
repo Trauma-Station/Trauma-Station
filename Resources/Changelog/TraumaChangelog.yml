@@ -2759,3 +2759,16 @@ Entries:
   id: 333
   time: '2026-02-20T15:40:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/781
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Blade heretic path overall nerfed.
+  - type: Add
+    message: >-
+      Realignment is now t1 side. It now also removes all restraints on use and
+      doesn't require focus to cast.
+  - type: Add
+    message: Added new blade path ability, replacing realignment.
+  id: 334
+  time: '2026-02-21T10:38:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/736
