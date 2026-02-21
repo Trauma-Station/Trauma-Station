@@ -2772,3 +2772,21 @@ Entries:
   id: 334
   time: '2026-02-21T10:38:38.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/736
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mobs appearing dead for no reason.
+  - type: Fix
+    message: Fixed genetics console pairing AG and CT instead of AT and GC.
+  - type: Tweak
+    message: Made genetics scanning doafters much faster.
+  id: 335
+  time: '2026-02-21T10:43:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/793
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lizards showing an error on health analyzers.
+  id: 336
+  time: '2026-02-21T11:32:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/794

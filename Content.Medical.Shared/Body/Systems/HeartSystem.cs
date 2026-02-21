@@ -3,6 +3,7 @@ using Content.Medical.Common.Body;
 using Content.Medical.Shared.DelayedDeath;
 using Content.Shared.Body;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Body;
 
@@ -10,6 +11,7 @@ namespace Content.Medical.Shared.Body;
 public sealed class HeartSystem : EntitySystem
 {
     [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public static readonly ProtoId<OrganCategoryPrototype> Brain = "Brain";
 
@@ -23,7 +25,7 @@ public sealed class HeartSystem : EntitySystem
 
     private void HandleRemoval(EntityUid uid, HeartComponent _, ref OrganGotRemovedEvent args)
     {
-        if (TerminatingOrDeleted(args.Target))
+        if (TerminatingOrDeleted(args.Target) || _timing.ApplyingState)
             return;
 
         // TODO: Add some form of very violent bleeding effect.
@@ -32,7 +34,7 @@ public sealed class HeartSystem : EntitySystem
 
     private void HandleAddition(EntityUid uid, HeartComponent _, ref OrganGotInsertedEvent args)
     {
-        if (TerminatingOrDeleted(uid) || TerminatingOrDeleted(args.Target))
+        if (_timing.ApplyingState || TerminatingOrDeleted(uid) || TerminatingOrDeleted(args.Target))
             return;
 
         if (_body.GetOrgan(args.Target, Brain) != null)

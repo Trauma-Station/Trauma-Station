@@ -13,5 +13,5 @@ public sealed partial class HandheldGeneticsScannerComponent : Component
     /// How long the mob linking doafter is.
     /// </summary>
     [DataField]
-    public TimeSpan LinkTime = TimeSpan.FromSeconds(3);
+    public TimeSpan LinkTime = TimeSpan.FromSeconds(0.5);
 }

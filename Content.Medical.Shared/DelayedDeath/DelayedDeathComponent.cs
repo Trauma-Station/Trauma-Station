@@ -6,7 +6,7 @@ namespace Content.Medical.Shared.DelayedDeath;
 
 // TODO SHITMED: kill this dogshit and have actual vital organ simulation
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentPause]
+[AutoGenerateComponentPause, AutoGenerateComponentState]
 public sealed partial class DelayedDeathComponent : Component
 {
     /// <summary>
@@ -26,7 +26,7 @@ public sealed partial class DelayedDeathComponent : Component
     /// How long it has been since the delayed death timer started.
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    [AutoPausedField]
+    [AutoPausedField, AutoNetworkedField]
     public TimeSpan NextDeath;
 
     /// <summary>
