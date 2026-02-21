@@ -17,7 +17,7 @@ Your locker will have a box of disks but you can print more in the sci techfab.
 
 # Sequencing
 
-To sequence a mutation, unlocking it and activating it in the subject, solve the gene puzzle so that every A is paired with a G, every C with a T.
+To sequence a mutation, unlocking it and activating it in the subject, solve the gene puzzle so that every A is paired with a T, every C with a G.
 
 For single missing bases this is trivial, but with missing pairs you will need to do some thinking. Or just brute force it and torture your poor monkeys.
 

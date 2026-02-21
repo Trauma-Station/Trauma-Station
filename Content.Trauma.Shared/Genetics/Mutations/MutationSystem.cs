@@ -553,7 +553,7 @@ public sealed partial class MutationSystem : EntitySystem
         for (int i = 0; i < rolls; i++)
         {
             var n = _random.Next(0, max);
-            builder[n] = _random.Pick(MutationData.AGCT);
+            builder[n] = _random.Pick(MutationData.ATGC);
         }
 
         comp.DNA = builder.ToString();
