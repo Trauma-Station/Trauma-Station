@@ -1,0 +1,6 @@
+- type: mutationRecipe
+  id: ThermalAdaptation
+  result: MutationThermalAdaptation
+  required:
+  - MutationColdAdaptation
+  - MutationHeatAdaptation

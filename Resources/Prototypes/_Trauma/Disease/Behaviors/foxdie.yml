@@ -14,6 +14,9 @@
     minProgress: 0.95
   - type: DiseaseEntityEffect
     effects:
+    - !type:Speak
+      probability: 0.25 # rare
+      id: FoxDie
     - !type:NestedEffect
       proto: HeartAttack
   - type: DiseaseRemoveEffect # for gameplay because reviving is easy

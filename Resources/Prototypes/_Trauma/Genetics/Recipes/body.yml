@@ -1,0 +1,20 @@
+- type: mutationRecipe
+  id: AntiGlow
+  result: MutationAntiGlow
+  required:
+  - MutationGlowy
+  - MutationVoidMagnet
+
+- type: mutationRecipe
+  id: InternalMartyrdom
+  result: MutationInternalMartyrdom
+  required:
+  - MutationStrength
+  - MutationStimmed
+
+- type: mutationRecipe
+  id: RockAbsorber
+  result: MutationRockAbsorber
+  required:
+  - MutationRockEater
+  - MutationStoner

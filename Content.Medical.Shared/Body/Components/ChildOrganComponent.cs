@@ -18,7 +18,7 @@ public sealed partial class ChildOrganComponent : Component
     /// <summary>
     /// The category to look for.
     /// </summary>
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField]
     public ProtoId<OrganCategoryPrototype> ParentCategory;
 
     /// <summary>

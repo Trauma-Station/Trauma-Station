@@ -1,0 +1,17 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from https://github.com/space-wizards/space-station-14/tree/705e4d3aa1e759f35c3e79e44d162df7f8ab2680/Resources/Textures/Mobs/Customization/reptilian_parts.rsi and modified by @deltanedas (github)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "tail"
+        },
+        {
+            "name": "empty"
+        }
+    ]
+}

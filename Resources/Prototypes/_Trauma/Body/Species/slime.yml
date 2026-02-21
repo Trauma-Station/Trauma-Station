@@ -1,0 +1,4 @@
+- type: entity
+  parent: [ OrganBaseTongue, OrganSpriteHumanInternal, OrganSlimePersonInternal ]
+  id: OrganSlimePersonTongue
+  # TODO: custom sprite

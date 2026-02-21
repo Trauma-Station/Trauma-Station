@@ -151,7 +151,7 @@ public sealed partial class HealthAnalyzerSystem
         if (!_bodyQuery.TryComp(target, out var body))
             return organs;
 
-        foreach (var organ in _body.GetOrgans<InternalOrganComponent>(target))
+        foreach (var organ in _body.GetOrgans<InternalOrganComponent>((target, body)))
         {
             organs.Add(GetNetEntity(organ), new OrganTraumaData(organ.Comp.OrganIntegrity,
                 organ.Comp.IntegrityCap,

@@ -11,19 +11,12 @@
 
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Shared.Religion;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class WeakToHolyComponent : Component
 {
-    /// <summary>
-    /// Should this entity take holy damage no matter what?
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool AlwaysTakeHoly;
-
     /// <summary>
     /// Is the entity currently standing on a rune?
     /// </summary>

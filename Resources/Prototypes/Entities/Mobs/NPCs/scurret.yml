@@ -4,7 +4,7 @@
 - type: entity
   name: scurret
   id: MobBaseScurret
-  parent: [ MobBaseAncestor, AppearanceScurret ] # Shitmed
+  parent: [ AppearanceScurret, MobBaseAncestor ] # Shitmed
   abstract: true
   components:
   # Custom names

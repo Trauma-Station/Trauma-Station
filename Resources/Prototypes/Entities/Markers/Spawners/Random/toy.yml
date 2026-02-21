@@ -41,7 +41,7 @@
     - id: PlushieMoth
     - id: PlushieArachind
     - id: PlushiePenguin
-    - id: PlushieVulp
+    #- id: PlushieVulp # Trauma - no ERP
     - !type:GroupSelector
       children:
       - id: PlushieBee

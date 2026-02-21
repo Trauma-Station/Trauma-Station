@@ -1,0 +1,26 @@
+- type: entity
+  parent: BaseItem
+  id: HandheldGeneticsScanner
+  name: handheld genome scanner
+  description: A combined DNA sampler and readout device that can show all sequences in a subject outside of the lab.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Research/anomalyscanner.rsi
+    layers:
+    - state: icon # TODO: custom sprite
+  - type: GeneticsScanner
+  - type: HandheldGeneticsScanner
+  - type: DoAfter
+  - type: ActivatableUI
+    key: enum.GeneticsConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.GeneticsConsoleUiKey.Key:
+        type: GeneticsScannerBUI
+  - type: Appearance
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Pai
+  - type: GuideHelp
+    guides:
+    - Genetics

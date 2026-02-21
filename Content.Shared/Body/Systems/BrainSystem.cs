@@ -32,6 +32,7 @@ public sealed class BrainSystem : EntitySystem
 
     private void HandleMind(EntityUid newEntity, EntityUid oldEntity)
     {
+        if (_timing.ApplyingState) return; // Trauma
         if (TerminatingOrDeleted(newEntity) || TerminatingOrDeleted(oldEntity))
             return;
 

@@ -80,7 +80,7 @@
     - toolbox
     - uboa
     radius: 0.5
-    randomRotation: true
+    randomRotation: false # Trauma - fuck you derotates your graffiti
     maxDecals: 1
     zIndex: 2
     randomColorList:

@@ -1,0 +1,12 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<BoxContainer xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Orientation="Vertical"
+        Align="Center"
+        VerticalExpand="True"
+        HorizontalExpand="True">
+    <controls:StripeBack>
+        <Label Name="ErrorLabel" Text="{Loc 'genetics-console-no-scanner'}" HorizontalAlignment="Center" Margin="8"/>
+    </controls:StripeBack>
+    <Button Name="ScanButton" Text="{Loc 'genetics-console-scan'}" MaxWidth="80" Disabled="True"/>
+</BoxContainer>

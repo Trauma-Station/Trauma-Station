@@ -1,4 +1,5 @@
-# stomach given to ascended flesh heretic
+# stomach given to flesh heretic - it is intended to work for all species but IPCs don't get it because it replaces
+# existing stomach - can't roleplay as IPC devourer, literally unplayable
 - type: entity
   parent: OrganVoxStomach # it had vox metabolizer for some reason
   id: OrganFleshHereticStomach

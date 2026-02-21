@@ -60,17 +60,23 @@ public sealed partial class BodyPartSystem : CommonBodyPartSystem
     {
         // don't transfer parts if the body is being deleted
         // note that this will still transfer if the part is being deleted, so its organs will go away too
-        if (TerminatingOrDeleted(ent) || _timing.ApplyingState)
+        if (TerminatingOrDeleted(args.Target) || _timing.ApplyingState)
             return;
 
-        var container = EnsureSeveredOrgansContainer(ent);
         var body = args.Target.AsNullable();
-        foreach (var category in ent.Comp.Slots)
+        if (TerminatingOrDeleted(ent))
         {
-            // empty slot, don't care
-            if (_body.GetOrgan(body, category) is not {} organ)
-                continue;
+            // this part is being deleted so detach the children
+            foreach (var organ in ent.Comp.Children.Values)
+            {
+                _body.RemoveOrgan(body, organ);
+            }
+            return;
+        }
 
+        var container = EnsureSeveredOrgansContainer(ent);
+        foreach (var (category, organ) in ent.Comp.Children)
+        {
             // slot has an organ so try to put it in the container
             if (!_container.Insert(organ, container))
             {

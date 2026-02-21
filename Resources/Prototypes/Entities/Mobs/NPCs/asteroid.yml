@@ -30,7 +30,7 @@
 
 - type: entity
   id: MobGoliath
-  parent: [ BaseMobAsteroid, MobBloodstream, AppearanceGoliath ] # Shitmed
+  parent: [ AppearanceGoliath, BaseMobAsteroid, MobBloodstream ] # Shitmed
   name: goliath
   description: A massive beast that uses long tentacles to ensnare its prey, threatening them is not advised under any conditions.
   components:

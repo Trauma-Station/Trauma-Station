@@ -39,6 +39,6 @@ public sealed class RelayOrganEffectSystem : EntityEffectSystem<BodyComponent, R
         if (_body.GetOrgan(ent.AsNullable(), category) is not {} organ)
             return;
 
-        _effects.ApplyEffects(organ, args.Effect.Effects, args.Scale);
+        _effects.ApplyEffects(organ, args.Effect.Effects, args.Scale, args.User);
     }
 }

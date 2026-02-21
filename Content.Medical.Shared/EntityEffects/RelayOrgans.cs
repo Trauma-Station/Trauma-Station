@@ -44,7 +44,7 @@ public sealed class RelayOrgansEffectSystem : EntityEffectSystem<BodyComponent, 
             if (_whitelist.IsWhitelistFail(whitelist, organ))
                 continue;
 
-            _effects.ApplyEffects(organ, effects, args.Scale);
+            _effects.ApplyEffects(organ, effects, args.Scale, args.User);
         }
     }
 }

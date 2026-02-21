@@ -4,7 +4,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Metabolism;
 using Robust.Shared.Prototypes;
 
-namespace Content.Medical.Server.EntityEffects;
+namespace Content.Medical.Shared.EntityEffects;
 
 /// <summary>
 /// Adds a metabolizer type to the target organ entity.

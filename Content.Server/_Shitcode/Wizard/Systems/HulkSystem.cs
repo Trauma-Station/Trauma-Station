@@ -8,7 +8,6 @@
 using System.Numerics;
 using Content.Server._Goobstation.Wizard.Components;
 using Content.Server.Chat.Systems;
-using Content.Server.Humanoid;
 using Content.Server.Popups;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._Goobstation.Wizard.Mutate;
@@ -30,7 +29,7 @@ public sealed class HulkSystem : SharedHulkSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
     [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
@@ -53,13 +52,12 @@ public sealed class HulkSystem : SharedHulkSystem
 
         Scale(ent, 0.8f);
 
-        if (TryComp(uid, out HumanoidProfileComponent? humanoid))
+        if (HasComp<HumanoidProfileComponent>(uid))
         {
-            /* TODO NUBODY API
-            humanoid.EyeColor = comp.OldEyeColor;
-            humanoid.SkinColor = comp.OldSkinColor;
-            */
-            Dirty(uid, humanoid);
+            if (comp.OldEyeColor is {} eyeColor)
+                _humanoid.SetEyeColor(uid, eyeColor);
+            if (comp.OldSkinColor is {} skinColor)
+                _humanoid.SetSkinColor(uid, skinColor);
         }
 
         _popup.PopupEntity(Loc.GetString("hulk-unhulked"), uid, uid);
@@ -77,25 +75,18 @@ public sealed class HulkSystem : SharedHulkSystem
 
         Scale(uid, 1.25f);
 
-        if (TryComp(uid, out HumanoidProfileComponent? humanoid))
+        if (HasComp<HumanoidProfileComponent>(uid))
         {
-            /* TODO NUBODY
-            comp.OldSkinColor = humanoid.SkinColor;
-            comp.OldEyeColor = humanoid.EyeColor;
-
-            humanoid.SkinColor = comp.SkinColor;
-
-            if (comp.LaserEyes)
-                humanoid.EyeColor = comp.EyeColor;
-
-            Dirty(uid, humanoid);
-            */
-
-            // TODO NUBODY: reimplement setting lizard tail etc
+            var organs = _humanoid.GetOrgansData(uid);
+            comp.OldEyeColor = _humanoid.GetEyeColor(organs);
+            comp.OldSkinColor = _humanoid.GetSkinColor(organs);
+            _humanoid.SetSkinColor(uid, comp.SkinColor);
         }
 
         if (!comp.LaserEyes)
             return;
+
+        _humanoid.SetEyeColor(uid, comp.EyeColor);
 
         RemComp<GunComponent>(uid);
         var gun = AddComp<GunComponent>(uid);
@@ -104,9 +95,10 @@ public sealed class HulkSystem : SharedHulkSystem
         _gun.SetClumsyProof(gun, true);
         _gun.SetSoundGunshot(gun, comp.SoundGunshot);
         _gun.RefreshModifiers((uid, gun));
-        var hitscan = EntityManager.ComponentFactory.GetComponent<BasicHitscanAmmoProviderComponent>();
+        // TODO: kill this shitcode if BasicEntityAmmoProvider gets made to support hitscans like BatteryAmmoProvider does
+        var hitscan = EnsureComp<BasicHitscanAmmoProviderComponent>(uid);
         hitscan.Proto = comp.ShotProto;
-        AddComp(uid, hitscan, true);
+        Dirty(uid, hitscan);
     }
 
     public override void Roar(Entity<HulkComponent> hulk, float prob = 1f)

@@ -10,6 +10,7 @@ using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Possession;
 using Content.Goobstation.Shared.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
@@ -75,8 +76,8 @@ public sealed partial class PossessionSystem : SharedPossessionSystem
         if (!possessed.Comp.WasPacified)
             RemComp<PacifiedComponent>(possessed.Comp.OriginalEntity);
 
-        if (!possessed.Comp.WasWeakToHoly)
-            RemComp<WeakToHolyComponent>(possessed.Comp.OriginalEntity);
+        var ev = new UnholyStatusChangedEvent(possessed, possessed, false);
+        RaiseLocalEvent(possessed, ref ev);
 
         // Transfer followers from possessed entity to possessor's original entity
         // TODO: polymorph revert should handle that...

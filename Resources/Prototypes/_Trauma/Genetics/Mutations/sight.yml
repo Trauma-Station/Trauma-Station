@@ -1,0 +1,84 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationNearSightedness
+  name: Near Sightedness
+  description: The holder of this mutation has poor eyesight.
+  components:
+  - type: Mutation
+    instability: -30
+    # no free -70 chuddha
+    conflicts:
+    - MutationBlindness
+  - type: ComponentMutation
+    added:
+    - type: PermanentBlindness
+      blindness: 4
+
+# Blind makes you blind. Who knew?
+# The above comment was brought to you by /tg/station13
+- type: entity
+  parent: BaseMutation
+  id: MutationBlindness
+  name: Blindness
+  description: Renders the subject completely blind.
+  components:
+  - type: Mutation
+    instability: -40
+  - type: RemovesMutation
+    removes:
+    - MutationNearSightedness
+  - type: ComponentMutation
+    added:
+    - type: PermanentBlindness
+
+- type: entity
+  parent: BaseMutation
+  id: MutationThermalVision
+  name: Thermal Vision
+  description: The user of this genome can visually perceive the unique human thermal signature.
+  components:
+  - type: Mutation
+    instability: 35
+    difficulty: 18
+    # no conflict with blindness because thats some professor X shit
+  - type: ComponentMutation
+    added:
+    - type: ThermalVision
+      toggleAction: MutationActionThermalVision
+      pulseTime: 10
+
+- type: entity
+  parent: ToggleThermalVision
+  id: MutationActionThermalVision
+  components:
+  - type: Action
+    useDelay: 25
+  - type: EffectAction
+    onPerformed: true
+    effects:
+    - !type:EyeDamage
+      amount: 1 # default is negative so this does damage
+      probability: 0.2 # eye damage is obscene compared to ss13 so average 0.2 vs 10 per use
+
+- type: entity
+  parent: BaseMutation
+  id: MutationIlliterate
+  name: Illiterate
+  description: Causes a severe case of Aphasia that prevents reading or writing.
+  components:
+  - type: Mutation
+    instability: -40
+  - type: ComponentMutation
+    added:
+    - type: BlockReading
+    - type: BlockWriting
+
+- type: entity
+  parent: BaseMutationAdmeme # wizard and admeme only
+  id: MutationLaserEyes
+  name: Laser Eyes
+  description: Reflects concentrated light back from the eyes.
+  components:
+  - type: Mutation
+    difficulty: 16
+  # TODO: move out of goob hulk

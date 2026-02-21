@@ -1,0 +1,24 @@
+# Geneticist
+
+- type: entity
+  parent: LockerGeneticist
+  id: LockerGeneticistFilled
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: LockerFillGeneticist
+
+- type: entityTable
+  id: LockerFillGeneticist
+  table: !type:AllSelector
+    children:
+    - id: ClothingHandsGlovesLatex
+    - id: ClothingHeadsetScience
+    - id: ClothingMaskSterile
+    - id: ClothingOuterCoatLabGene
+    - id: BoxGeneticsDisk
+    - id: HandheldGeneticsScanner
+    - id: BarberScissors
+      prob: 0.2 # for unique enzyme trollage

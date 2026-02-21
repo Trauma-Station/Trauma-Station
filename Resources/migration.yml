@@ -87,6 +87,9 @@ SecurityCyberneticEyes: OrganCyberneticEyesSecurity
 BioSynthHeart: OrganBioSynthHeart
 ChestSkeleton: OrganSkeletonPersonTorso
 ChestHuman: OrganHumanTorso
+
+# 2026-02-18 removed vulp plushie
+PlushieVulp: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
@@ -172,7 +175,6 @@ GunSafeAdjutantShotgun: null
 GunSafeEnergyGunMini: null
 GunSafeVulcanRifle: null
 HatSpawner: null
-KitchenDeepFryer: null
 KvassTankFull: null
 LockerForensicMantisFilled: null
 LunchboxSecurityFilledRandom: null

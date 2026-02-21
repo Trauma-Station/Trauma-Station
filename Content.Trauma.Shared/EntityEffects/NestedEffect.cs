@@ -67,13 +67,13 @@ public sealed class NestedEffectSystem : EntityEffectSystem<TransformComponent, 
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<NestedEffect> args)
     {
-        ApplyNestedEffect(ent, args.Effect.Proto, args.Scale);
+        ApplyNestedEffect(ent, args.Effect.Proto, args.Scale, args.User);
     }
 
-    public void ApplyNestedEffect(EntityUid target, ProtoId<EntityEffectPrototype> id, float scale = 1f)
+    public void ApplyNestedEffect(EntityUid target, ProtoId<EntityEffectPrototype> id, float scale = 1f, EntityUid? user = null)
     {
         var proto = _proto.Index(id);
         if (_conditions.TryConditions(target, proto.Conditions))
-            _effects.ApplyEffects(target, proto.Effects, scale);
+            _effects.ApplyEffects(target, proto.Effects, scale, user);
     }
 }

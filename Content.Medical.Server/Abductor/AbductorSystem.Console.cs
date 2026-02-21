@@ -24,7 +24,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     public static readonly SoundSpecifier ExperimentSound = new SoundPathSpecifier(new ResPath("/Audio/Voice/Human/wilhelm_scream.ogg"));
 
-    public void InitializeConsole()
+    private void InitializeConsole()
     {
         SubscribeLocalEvent<AbductorConsoleComponent, BeforeActivatableUIOpenEvent>(OnBeforeActivatableUIOpen);
         SubscribeLocalEvent<AbductConditionComponent, ObjectiveGetProgressEvent>(OnAbductGetProgress);
@@ -86,25 +86,34 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     private void OnAttractBuiMsg(Entity<AbductorConsoleComponent> ent, ref AbductorAttractBuiMsg args)
     {
+        var user = args.Actor;
         if (GetEntity(ent.Comp.Target) is not {} target || GetEntity(ent.Comp.AlienPod) is not {} telepad)
             return;
 
-        AddTeleportationEffect(target, TeleportationEffectEntityShort);
-        AddTeleportationEffect(telepad, TeleportationEffectShort);
-
         var coords = Transform(telepad).Coordinates;
         var ev = new AbductorAttractDoAfterEvent(GetNetCoordinates(coords), GetNetEntity(target));
-        ent.Comp.Target = null;
-        var doAfter = new DoAfterArgs(EntityManager, ent, TimeSpan.FromSeconds(3), ev, eventTarget: ent)
+        var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(3), ev, eventTarget: ent)
         {
+            // you get the doafter but you basically cant fuck it up
             BreakOnDamage = false,
             BreakOnDropItem = false,
             BreakOnHandChange = false,
             BreakOnMove = false,
             BreakOnWeightlessMove = false,
         };
-        _doAfter.TryStartDoAfter(doAfter);
+        if (!_doAfter.TryStartDoAfter(doAfter))
+        {
+            Log.Error("Failed to start attract doafter for {ToPrettyString(target)} by {ToPrettyString(user)} with {ToPrettyString(ent)}!");
+            return;
+        }
+
+        AddTeleportationEffect(target, TeleportationEffectEntityShort);
+        AddTeleportationEffect(telepad, TeleportationEffectShort);
+
+        ent.Comp.Target = null;
+        Dirty(ent);
     }
+
     private void OnDoAfterAttract(Entity<AbductorConsoleComponent> ent, ref AbductorAttractDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)

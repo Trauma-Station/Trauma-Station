@@ -64,6 +64,9 @@ public sealed class TrailSystem : EntitySystem
         if (_player.LocalEntity is not { } player)
             return;
 
+        if (TerminatingOrDeleted(player))
+            return;
+
         var (uid, comp) = ent;
 
         if (HasComp<PredictedSpawnComponent>(uid) || !comp.SpawnRemainingTrail ||

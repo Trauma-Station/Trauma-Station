@@ -16,6 +16,7 @@ using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Devil.Condemned;
 using Content.Goobstation.Shared.Exorcism;
 using Content.Goobstation.Shared.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Goobstation.Shared.Supermatter.Components;
 using Content.Lavaland.Shared.Chasm;
 using Content.Medical.Common.Body;
@@ -119,7 +120,7 @@ public sealed partial class DevilSystem : EntitySystem
         EnsureComp<BreathingImmunityComponent>(devil);
         EnsureComp<PressureImmunityComponent>(devil);
         EnsureComp<ActiveListenerComponent>(devil);
-        EnsureComp<WeakToHolyComponent>(devil).AlwaysTakeHoly = true;
+        EnsureComp<AlwaysTakeHolyComponent>(devil);
         EnsureComp<CrematoriumImmuneComponent>(devil);
         EnsureComp<AntagImmuneComponent>(devil);
         EnsureComp<SupermatterImmuneComponent>(devil);

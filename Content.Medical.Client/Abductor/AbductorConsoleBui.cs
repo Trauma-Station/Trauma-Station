@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Medical.Shared.Abductor;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.RichText;
 using Robust.Shared.Utility;
@@ -55,8 +56,7 @@ public sealed class AbductorConsoleBui : BoundUserInterface
     private void TryInitWindow()
     {
         if (_window != null) return;
-        _window = new AbductorConsoleWindow();
-        _window.OnClose += Close;
+        _window = this.CreateWindow<AbductorConsoleWindow>();
         _window.Title = "console";
 
         _window.TeleportTabButton.OnPressed += _ => View(ViewType.Teleport);

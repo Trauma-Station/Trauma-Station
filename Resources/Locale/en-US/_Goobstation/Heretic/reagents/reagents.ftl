@@ -18,7 +18,6 @@ reagent-desc-marshal = A colorless, dark liquid. Increases your physical strengt
 reagent-name-ether = ether of the newborn
 reagent-desc-ether = Nausea-inducing, thick green liquid. Restores your body completely, then places you into an enhanced sleep for a full minute.
 
-
 entity-condition-guidebook-heretic-or-ghoul = target is a heretic or ghoul
 entity-condition-guidebook-not-heretic-or-ghoul = target is not a heretic or ghoul
 
@@ -45,6 +44,8 @@ reagent-effect-guidebook-has-status-effect =
         [true] has no
         *[false] has
     } {$effect} status effect.
+
+reagent-effect-guidebook-deconvert-ghoul = deconverts ghoulified entity
 
 reagent-physical-desc-eldritch = eldritch
 reagent-physical-desc-crucible-soul = otherworldly

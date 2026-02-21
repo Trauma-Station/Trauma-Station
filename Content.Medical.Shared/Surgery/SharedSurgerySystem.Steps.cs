@@ -141,7 +141,8 @@ public abstract partial class SharedSurgerySystem
         if (args.IsInvalid)
             return;
 
-        if (!_ignoreQuery.HasComp(args.User)
+        if (args.TargetSlots != SlotFlags.NONE
+            && !_ignoreQuery.HasComp(args.User)
             && !_ignoreQuery.HasComp(args.Tool)
             && _inventory.TryGetContainerSlotEnumerator(args.Body, out var containerSlotEnumerator, args.TargetSlots))
         {
@@ -278,7 +279,7 @@ public abstract partial class SharedSurgerySystem
         if (!TryComp(args.Surgery, out SurgeryOrganSlotConditionComponent? condition))
             return;
 
-        args.Cancelled |= _part.HasOrganSlot(args.Part, condition.OrganSlot);
+        args.Cancelled |= !_part.HasOrganSlot(args.Part, condition.OrganSlot);
     }
 
     private void OnAffixPartStep(Entity<SurgeryAffixPartStepComponent> ent, ref SurgeryStepEvent args)

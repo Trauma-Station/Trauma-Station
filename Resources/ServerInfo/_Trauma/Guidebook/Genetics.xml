@@ -1,0 +1,58 @@
+<Document>
+# Genetics
+
+Genetics on Trauma Station is based off of /tg/station with some slight differences in gameplay.
+
+All mutations from tg are implemented here!
+
+# Disks
+
+<Box>
+  <GuideEntityEmbed Entity="GeneticsDisk"/>
+</Box>
+
+Rather than the genetics console having infinite storage, you have to store each mutation on a genetics disk. A hand labeler will save your life here.
+
+Your locker will have a box of disks but you can print more in the sci techfab.
+
+# Sequencing
+
+To sequence a mutation, unlocking it and activating it in the subject, solve the gene puzzle so that every A is paired with a G, every C with a T.
+
+For single missing bases this is trivial, but with missing pairs you will need to do some thinking. Or just brute force it and torture your poor monkeys.
+
+Any incorrect guess when sequencing will severely damage the subject's genome. Get some medicine from chem or more monkey cubes to prepare for this.
+
+# Solving missing base pairs
+
+<Box>
+  <GuideEntityEmbed Entity="HandheldGeneticsScanner"/>
+</Box>
+
+There is no joker button. Go outside of your lab and scan people, or Pun Pun, with your [bold]handheld genome scanner[/bold]. You can use logic to deduce what missing bases in your subjects are by finding multiple people with the same dormant mutation.
+
+Every mutation in the game has a random number assigned each round, however they stay the same between different subjects with the same mutation.
+
+For example, if you have a monkey in the lab with a genome with an unknown first pair, then scan someone with that mutation and a known first pair, you can use that pair to finish the sequence.
+
+# Removing Mutations
+
+To remove mutations instead of using mutadone, you print a cleanser from the storage tab using a disk with the mutation you want to remove. Inject it and the mutation is gone!
+
+# Combining
+
+Combining mutations is done with a "catalyst" mutation stored on the current disk, and any mutation the subject already has.
+
+If you pick a correct combination the result is added, but it is not sequenced! You will need to combine it with many subjects for the complex mutations in order to get enough bases.
+
+# Research
+
+One of the biggest differences from tg is that [bold]you actually contribute to research![/bold]. You get 8000 points for sequencing most mutations, with more complex ones having higher rewards.
+
+# Unique Enzymes
+
+Disks can also store a person's [bold]unique enzymes[/bold] which can be used to copy their name, sex, fingerprints and eye/skin color to another subject.
+
+This won't copy their DNA or current hair styles. Get a pair of scissors and set up a barbershop!
+
+</Document>

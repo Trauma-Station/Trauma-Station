@@ -129,6 +129,7 @@
     slots:
     - Brain
     - Eyes
+    - Tongue
     - HiveNode
 
 - type: entity

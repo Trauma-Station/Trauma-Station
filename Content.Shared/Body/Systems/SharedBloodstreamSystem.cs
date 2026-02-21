@@ -1,10 +1,8 @@
 // <Trauma>
 using Content.Goobstation.Common.Bloodstream;
-using Content.Goobstation.Common.CCVar;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
-using Robust.Shared.Configuration;
 // </Trauma>
 using Content.Shared.Alert;
 using Content.Shared.Body.Components;
@@ -34,13 +32,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Body.Systems;
 
-public abstract class SharedBloodstreamSystem : EntitySystem
+public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma - made partial
 {
     public static readonly EntProtoId Bloodloss = "StatusEffectBloodloss";
 
-    // <Trauma>
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    // </Trauma>
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -52,11 +47,10 @@ public abstract class SharedBloodstreamSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
 
-    private float _bloodlossMultiplier = 4f; // Goobstation
-
     public override void Initialize()
     {
         base.Initialize();
+        InitializeTrauma(); // Trauma
 
         SubscribeLocalEvent<BloodstreamComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<BloodstreamComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
@@ -68,8 +62,6 @@ public abstract class SharedBloodstreamSystem : EntitySystem
         SubscribeLocalEvent<BloodstreamComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
         SubscribeLocalEvent<BloodstreamComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<BloodstreamComponent, MetabolismExclusionEvent>(OnMetabolismExclusion);
-
-        Subs.CVar(_cfg, GoobCVars.BleedMultiplier, value => _bloodlossMultiplier = value, true); // Goobstation
     }
 
     public override void Update(float frameTime)

@@ -67,3 +67,16 @@
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/olivedrabs.rsi
   - type: FoldableClothing
     foldedEquippedPrefix: naked
+
+- type: entity
+  parent: [ ClothingUniformBase, ClothingUniformFoldableBase ]
+  id: ClothingUniformJumpsuitTigerStripes
+  name: tiger stripes
+  description: A military uniform used in special covert operations. Boons a good camo index.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/tigerStripes.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/tigerStripes.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: naked

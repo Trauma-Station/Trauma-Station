@@ -251,7 +251,7 @@ public sealed partial class HereticAbilitySystem
         var ghoul = Factory.GetComponent<GhoulComponent>();
         ghoul.GiveBlade = giveBlade;
         ghoul.TotalHealth = hp;
-        ghoul.DropOrgansOnDeath = false;
+        ghoul.DeathBehavior = GhoulDeathBehavior.Gib;
         ghoul.GhostRoleName = "ghostrole-flesh-mimic-name";
         ghoul.GhostRoleDesc = "ghostrole-flesh-mimic-desc";
         if (weapon != null && _cloning.CopyItem(weapon.Value, xform.Coordinates, copyStorage: false) is { } weaponClone)

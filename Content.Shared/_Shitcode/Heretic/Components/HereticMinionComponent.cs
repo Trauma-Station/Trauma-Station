@@ -10,6 +10,9 @@ public sealed partial class HereticMinionComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? BoundHeretic;
 
+    [DataField]
+    public EntityUid? CreationRitual;
+
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     public ProtoId<FactionIconPrototype> MasterIcon { get; set; } = "GhoulHereticMaster";
 

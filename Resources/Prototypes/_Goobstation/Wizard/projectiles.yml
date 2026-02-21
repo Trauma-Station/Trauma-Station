@@ -303,6 +303,7 @@
       types:
         Heat: 0
   - type: PolymorphOnTrigger
+    targetUser: true
     polymorph: WizardWabbajack
   - type: WhitelistTriggerCondition
     userWhitelist:

@@ -288,6 +288,10 @@ public sealed class MarkingManager
         ProtoId<SpeciesPrototype> species)
     {
         var ret = new Dictionary<ProtoId<OrganCategoryPrototype>, Dictionary<HumanoidVisualLayers, List<Marking>>>();
+        // <Trauma> - prevent having deleted species from banning you lol
+        if (!_prototype.HasIndex(species))
+            return ret;
+        // </Trauma>
 
         var data = GetMarkingData(species);
         var layersToOrgans = data.SelectMany(kvp => kvp.Value.Layers.Select(layer => (layer, kvp.Key))).ToDictionary(pair => pair.layer, pair => pair.Key);

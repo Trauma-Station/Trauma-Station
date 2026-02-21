@@ -70,6 +70,7 @@
   - Changeling
   - ChangelingIdentity # the actual ling component
   - WeakToHoly
+  - AlwaysTakeHoly
   - CanEnchant
   - Store # needed for heretic and any other antags with an intrinsic store, IDEALLY this would be on the mind
   # </Goobstation>

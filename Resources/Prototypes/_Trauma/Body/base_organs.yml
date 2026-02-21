@@ -1,0 +1,21 @@
+- type: entity
+  abstract: true
+  parent: OrganBaseTorso
+  id: OrganBaseTorsoTailed
+  components:
+  - type: BodyPart
+    slots:
+    # Parts
+    - Head
+    - Tail
+    - ArmLeft
+    - ArmRight
+    - LegLeft
+    - LegRight
+    # Organs
+    - Appendix
+    - Heart
+    - Lungs
+    - Stomach
+    - Liver
+    - Kidneys

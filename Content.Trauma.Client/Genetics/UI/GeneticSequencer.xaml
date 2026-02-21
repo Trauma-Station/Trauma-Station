@@ -1,0 +1,24 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<BoxContainer xmlns="https://spacestation14.io"
+        xmlns:genetics="using:Content.Trauma.Client.Genetics.UI"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Orientation="Vertical"
+        HorizontalExpand="True"
+        VerticalExpand="True">
+    <genetics:GeneticScanner Name="Scanner"/>
+    <BoxContainer Name="MobContainer" Orientation="Vertical" Visible="False">
+        <!-- List of sequences available -->
+        <controls:NanoHeading Text="{Loc 'genetics-console-sequences'}"/>
+        <BoxContainer Orientation="Horizontal">
+            <genetics:SequenceButtons Name="SequenceButtons"/>
+            <!-- Mutation Info -->
+            <genetics:SequenceInfo Name="Info">
+                <Button Name="WriteButton" Text="{Loc 'genetics-console-write-mutation'}" Disabled="True" MaxWidth="160"/>
+            </genetics:SequenceInfo>
+            <BoxContainer Name="NoSequence" Align="Center" HorizontalExpand="True">
+                <Label Text="{Loc 'genetics-console-sequencer-no-sequence-selected'}"/>
+            </BoxContainer>
+        </BoxContainer>
+        <genetics:GenePuzzle Name="Puzzle"/>
+    </BoxContainer>
+</BoxContainer>

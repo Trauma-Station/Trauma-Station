@@ -1,3 +1,35 @@
+# Geneticist
+
+- type: loadoutGroup
+  id: GeneticistJumpsuit
+  name: loadout-group-geneticist-jumpsuit
+  loadouts:
+  - GeneticistJumpsuit
+  - GeneticistJumpskirt
+  - ScientistJumpsuit
+  - ScientistJumpskirt
+  - ResearchMJ
+
+- type: loadoutGroup
+  id: GeneticistBackpack
+  name: loadout-group-geneticist-backpack
+  loadouts:
+  - GeneticistBackpack
+  - GeneticistSatchel
+  - GeneticistDuffel
+  - GeneticistMessenger
+
+- type: loadoutGroup
+  id: GeneticistOuterClothing
+  name: loadout-group-geneticist-outerclothing
+  minLimit: 0
+  loadouts:
+  - GeneticistLabCoat
+  - GeneticistWinterCoat
+  - RegularLabCoat
+  - ScienceLabCoat
+  - ScienceWintercoat
+
 #Exclusive items
 - type: loadoutGroup
   id: ExclusiveItems

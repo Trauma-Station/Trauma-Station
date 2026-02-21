@@ -2504,3 +2504,258 @@ Entries:
   id: 302
   time: '2026-02-14T21:52:41.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/692
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Tails are now bodyparts and can be removed by surgery, explosions, etc.
+  - type: Add
+    message: 'You can now create a tail joint via surgery to turn people into lizards. '
+  id: 303
+  time: '2026-02-15T21:13:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/696
+- author: John Carpenter
+  changes:
+  - type: Add
+    message: Lings now get a fake mindshield if they absorb someone with a mindshield
+  - type: Tweak
+    message: Lings are now forced to transform into whoever they absorb
+  id: 304
+  time: '2026-02-15T22:19:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/695
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed torso starting with only half of its integrity.
+  - type: Fix
+    message: Fixed damage visuals being wrong color for some species.
+  - type: Fix
+    message: Fixed wizard rod form having wrong direction.
+  - type: Fix
+    message: Fixed lightning wrong direction.
+  - type: Fix
+    message: Fixed staff of change not working.
+  - type: Fix
+    message: Fixed modsuits not sealing.
+  id: 305
+  time: '2026-02-16T06:42:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/700
+- author: Aviu
+  changes:
+  - type: Add
+    message: Flesh heretic risen ghouls no longer gib on death.
+  - type: Add
+    message: You can deconvert ghoulified people with holy water.
+  - type: Add
+    message: >-
+      Voiceless Dead has more hp and can now be recalled to the ritual rune and
+      revived, see ritual purchase description for details.
+  - type: Add
+    message: Predicted holy damage and bible smite.
+  - type: Tweak
+    message: 'Knit flesh cooldown: 20s -> 5s.'
+  id: 306
+  time: '2026-02-16T06:44:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/615
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed bleeding not existing.
+  id: 307
+  time: '2026-02-17T08:20:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/704
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Genetics is here.
+  id: 308
+  time: '2026-02-17T08:53:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/119
+- author: Kirikii
+  changes:
+  - type: Tweak
+    message: Readded slime people's 80% cellular damage resistance.
+  id: 309
+  time: '2026-02-17T13:09:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/711
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed Deep fryer being in migration for some reason
+  id: 310
+  time: '2026-02-17T14:42:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/714
+- author: Kirikii
+  changes:
+  - type: Tweak
+    message: Changed round end summary for heretics slightly.
+  id: 311
+  time: '2026-02-17T19:52:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/720
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed dwarfs being extra short.
+  id: 312
+  time: '2026-02-17T20:11:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/722
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mutations with actions giving you 2 of them.
+  - type: Add
+    message: Geneticist traitors can now buy FOXDIE.
+  id: 313
+  time: '2026-02-17T21:38:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/723
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Monkified mutation now works on kobolds and lizards :)
+  id: 314
+  time: '2026-02-17T23:09:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/730
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Gave moths their wings back, no more Phantom Limbs for the Angel With
+      Broken Wings.
+  - type: Fix
+    message: >-
+      Fixed felinidification not working and making nonhumans asphyxiate after
+      being removed.
+  id: 315
+  time: '2026-02-18T08:01:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/727
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Geneticist job icon is now purple.
+  id: 316
+  time: '2026-02-18T08:15:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/737
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed Slasher meat spike ability spawning fake clientside meat spikes.
+  id: 317
+  time: '2026-02-18T11:45:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/738
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use autodocs.
+  id: 318
+  time: '2026-02-18T12:42:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/743
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Disease can no longer roll immunity resistance behaviour.
+  id: 319
+  time: '2026-02-18T14:08:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/747
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed kobolds and monkeys not having tails...
+  id: 320
+  time: '2026-02-18T15:12:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/745
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Unbanned shadowkin players
+  id: 321
+  time: '2026-02-18T18:49:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/751
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed ERP
+  id: 322
+  time: '2026-02-18T20:00:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/752
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Shiftstart graffiti is no longer randomly rotated.
+  id: 323
+  time: '2026-02-18T20:56:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/753
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed beenade and sharpnel grenade not activating
+  id: 324
+  time: '2026-02-19T22:01:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/761
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added a decal for whenever you vomit
+  - type: Tweak
+    message: Gibbing a head now spawns decals
+  - type: Tweak
+    message: Damage under a certain threshold now has a special decal
+  id: 325
+  time: '2026-02-20T00:01:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/762
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed abductor shitcode forever.
+  id: 326
+  time: '2026-02-20T00:30:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/764
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added Tiger Stripes from MGS3
+  id: 327
+  time: '2026-02-20T07:31:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/767
+- author: Kirikii
+  changes:
+  - type: Tweak
+    message: Clarified impact element of EMP grenades.
+  id: 328
+  time: '2026-02-20T08:18:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/768
+- author: Kirikii
+  changes:
+  - type: Fix
+    message: Fixed IPC's guidebook entry.
+  id: 329
+  time: '2026-02-20T08:51:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/769
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added animated sprites for carp tails on humanoids.
+  id: 330
+  time: '2026-02-20T11:59:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/778
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed some changeling abilities wasting chemicals if they failed.
+  - type: Tweak
+    message: Changeling item spawning abilities (armblade etc) are now predicted.
+  id: 331
+  time: '2026-02-20T14:03:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/777
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed abductor teleport effects not sticking to the mob.
+  id: 332
+  time: '2026-02-20T14:07:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/780
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: 'Carp tails are now the same colour as they are. '
+  id: 333
+  time: '2026-02-20T15:40:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/781

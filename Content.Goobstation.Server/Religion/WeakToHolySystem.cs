@@ -8,108 +8,124 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
-using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.Religion.Nullrod;
-using Content.Medical.Common.Damage;
-using Content.Server.Heretic.EntitySystems;
+using Content.Goobstation.Shared.Religion.Nullrod.Systems;
 using Content.Shared._Shitcode.Heretic.Rituals;
-using Content.Medical.Shared.Wounds;
-using Content.Shared.Damage;
+using Content.Medical.Common.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Heretic;
-using Content.Shared.Interaction;
-using Content.Shared.Inventory;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
+using Content.Shared.Hands;
+using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
 using Content.Medical.Common.Targeting;
-using Content.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Religion;
 
-public sealed class WeakToHolySystem : EntitySystem
+public sealed class WeakToHolySystem : SharedWeakToHolySystem
 {
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly GoobBibleSystem _goobBible = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly HereticSystem _heretic = default!;
+
+    private readonly HashSet<Entity<ShouldTakeHolyComponent>> _toUpdate = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<WeakToHolyComponent, DamageUnholyEvent>(OnUnholyItemDamage);
-        SubscribeLocalEvent<WeakToHolyComponent, InteractUsingEvent>(AfterBibleUse);
+        SubscribeLocalEvent<ShouldTakeHolyComponent, UnholyStatusChangedEvent>(OnUnholyStatus);
 
         SubscribeLocalEvent<HereticRitualRuneComponent, StartCollideEvent>(OnCollide);
         SubscribeLocalEvent<HereticRitualRuneComponent, EndCollideEvent>(OnCollideEnd);
 
-        SubscribeLocalEvent<DamageableComponent, DamageModifyEvent>(OnHolyDamageModify);
+        SubscribeLocalEvent<WeakToHolyComponent, ComponentShutdown>(OnWeakShutdown);
+        SubscribeLocalEvent<WeakToHolyComponent, UnholyStatusChangedEvent>(OnWeakStatus);
 
+        SubscribeLocalEvent<UnholyItemComponent, GotEquippedEvent>(OnEquip);
+        SubscribeLocalEvent<UnholyItemComponent, GotUnequippedEvent>(OnUnquip);
+        SubscribeLocalEvent<UnholyItemComponent, GotEquippedHandEvent>(OnHandEquip);
+        SubscribeLocalEvent<UnholyItemComponent, GotUnequippedHandEvent>(OnHandUnequip);
     }
 
-    private void AfterBibleUse(Entity<WeakToHolyComponent> ent, ref InteractUsingEvent args)
+    private void OnHandUnequip(Entity<UnholyItemComponent> ent, ref GotUnequippedHandEvent args)
     {
-        if (!TryComp<BibleComponent>(args.Used, out var bibleComp))
-            return;
-
-        if (!TryComp(args.Used, out UseDelayComponent? useDelay)
-            || _useDelay.IsDelayed((args.Used, useDelay))
-            || !HasComp<BibleUserComponent>(args.User))
-            return;
-
-        _goobBible.TryDoSmite(args.Used, args.User, args.Target, useDelay);
+        var ev = new UnholyStatusChangedEvent(args.User, ent, false);
+        RaiseLocalEvent(args.User, ref ev);
     }
 
-    #region Holy Damage Dealing
-
-    private void OnHolyDamageModify(Entity<DamageableComponent> ent, ref DamageModifyEvent args)
+    private void OnHandEquip(Entity<UnholyItemComponent> ent, ref GotEquippedHandEvent args)
     {
-        var unholyEvent = new DamageUnholyEvent(args.Target, args.Origin);
-        RaiseLocalEvent(args.Target, ref unholyEvent);
+        var ev = new UnholyStatusChangedEvent(args.User, ent, true);
+        RaiseLocalEvent(args.User, ref ev);
+    }
 
-        var holyCoefficient = 0f; // Default resistance
+    private void OnUnquip(Entity<UnholyItemComponent> ent, ref GotUnequippedEvent args)
+    {
+        if (args.SlotFlags == SlotFlags.POCKET)
+            return;
 
-        if (unholyEvent.ShouldTakeHoly)
-            holyCoefficient = 1f; //Allow holy damage
+        var ev = new UnholyStatusChangedEvent(args.Equipee, ent, false);
+        RaiseLocalEvent(args.Equipee, ref ev);
+    }
 
-        DamageModifierSet modifierSet = new()
+    private void OnEquip(Entity<UnholyItemComponent> ent, ref GotEquippedEvent args)
+    {
+        if (args.SlotFlags == SlotFlags.POCKET)
+            return;
+
+        var ev = new UnholyStatusChangedEvent(args.Equipee, ent, true);
+        RaiseLocalEvent(args.Equipee, ref ev);
+    }
+
+    private void OnUnholyStatus(Entity<ShouldTakeHolyComponent> ent, ref UnholyStatusChangedEvent args)
+    {
+        if (args.Added)
         {
-            Coefficients = new Dictionary<string, float>
+            ent.Comp.Sources.Add(args.Source);
+            return;
+        }
+
+        if (ent.Owner == args.Source)
+        {
+            var ev = new UserShouldTakeHolyEvent(ent);
+            RaiseLocalEvent(ent, ref ev, true);
+            if (!ev.WeakToHoly)
             {
-                { "Holy", holyCoefficient },
-            },
-        };
+                RemCompDeferred<WeakToHolyComponent>(ent);
+                return;
+            }
 
-        args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modifierSet);
+            if (!ev.ShouldTakeHoly)
+                ent.Comp.Sources.Remove(args.Source);
+            else
+                return;
+        }
+        else
+            ent.Comp.Sources.Remove(args.Source);
+
+        _toUpdate.Add(ent);
     }
 
-    private void OnUnholyItemDamage(Entity<WeakToHolyComponent> uid, ref DamageUnholyEvent args)
+    private void OnWeakStatus(Entity<WeakToHolyComponent> ent, ref UnholyStatusChangedEvent args)
     {
-        if (uid.Comp.AlwaysTakeHoly)
-        {
-            args.ShouldTakeHoly = true;
+        if (!args.Added || HasComp<ShouldTakeHolyComponent>(ent))
             return;
-        }
 
-        if (_heretic.TryGetHereticComponent(uid.Owner, out var heretic, out _) && heretic.Ascended)
-        {
-            args.ShouldTakeHoly = true;
-            return;
-        }
-
-        // If any item in hand or in inventory has Unholy item, shouldtakeholy is true.
-        if (_inventorySystem.GetHandOrInventoryEntities(args.Target, SlotFlags.WITHOUT_POCKET)
-            .Any(HasComp<UnholyItemComponent>))
-            args.ShouldTakeHoly = true;
+        var comp = AddComp<ShouldTakeHolyComponent>(ent);
+        comp.Sources.Add(args.Source);
+        Dirty(ent, comp);
     }
 
-    #endregion
+    private void OnWeakShutdown(Entity<WeakToHolyComponent> ent, ref ComponentShutdown args)
+    {
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        RemCompDeferred<ShouldTakeHolyComponent>(ent);
+        RemCompDeferred<AlwaysTakeHolyComponent>(ent);
+    }
 
     #region Holy Healing
 
@@ -145,14 +161,24 @@ public sealed class WeakToHolySystem : EntitySystem
             if (!TryComp<DamageableComponent>(uid, out var damageable))
                 continue;
 
-            if (TerminatingOrDeleted(uid)
-                || !damageable.Damage.DamageDict.TryGetValue("Holy", out _))
+            if (TerminatingOrDeleted(uid) || !damageable.Damage.DamageDict.TryGetValue("Holy", out _))
                 continue;
 
             // Rune healing vs passive healing
             var healing = weakToHoly.IsColliding ? weakToHoly.HealAmount : weakToHoly.PassiveAmount;
             _damageableSystem.ChangeDamage(uid, healing, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
         }
+
+        if (_toUpdate.Count == 0)
+            return;
+
+        foreach (var ent in _toUpdate)
+        {
+            if (ent.Comp.Sources.Count == 0)
+                RemCompDeferred(ent, ent.Comp);
+        }
+
+        _toUpdate.Clear();
     }
 
     #endregion

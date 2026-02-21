@@ -67,6 +67,7 @@
       LegRight: OrganSlimePersonLegRight
       FootLeft: OrganSlimePersonFootLeft
       FootRight: OrganSlimePersonFootRight
+      Tongue: OrganSlimePersonTongue # Trauma
       Stomach: OrganSlimePersonCore # Shitmed - Brain -> Stomach
       Lungs: OrganSlimePersonLungs
   - type: HumanoidProfile

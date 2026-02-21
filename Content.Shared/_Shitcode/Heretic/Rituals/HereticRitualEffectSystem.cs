@@ -112,7 +112,7 @@ public sealed class HereticRitualRaiser(
             return;
         }
 
-        var ritualEv = new HereticRitualEffectEvent<T>(effect, ritual);
+        var ritualEv = new HereticRitualEffectEvent<T>(effect, ritual, user);
         entMan.EventBus.RaiseLocalEvent(target, ref ritualEv);
     }
 
