@@ -26,10 +26,10 @@ public sealed partial class HereticCurseSystem
         SubscribeLocalEvent<CurseOfBlindnessStatusEffectComponent, StatusEffectAppliedEvent>(OnBlindnessApply);
         SubscribeLocalEvent<CurseOfBlindnessStatusEffectComponent, StatusEffectRemovedEvent>(OnBlindnessRemove);
 
-        SubscribeLocalEvent<FragileComponent, DamageModifyEvent>(OnModify);
+        SubscribeLocalEvent<FragileCurseComponent, DamageModifyEvent>(OnModify);
     }
 
-    private void OnModify(Entity<FragileComponent> ent, ref DamageModifyEvent args)
+    private void OnModify(Entity<FragileCurseComponent> ent, ref DamageModifyEvent args)
     {
         if (!args.Damage.AnyPositive())
             return;
@@ -55,7 +55,7 @@ public sealed partial class HereticCurseSystem
 
     private void OnFragilityApply(Entity<CurseOfFragilityStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
     {
-        EnsureComp<FragileComponent>(args.Target);
+        EnsureComp<FragileCurseComponent>(args.Target);
     }
 
     private void OnFragilityRemove(Entity<CurseOfFragilityStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
@@ -66,7 +66,7 @@ public sealed partial class HereticCurseSystem
         if (TerminatingOrDeleted(args.Target))
             return;
 
-        RemCompDeferred<FragileComponent>(args.Target);
+        RemCompDeferred<FragileCurseComponent>(args.Target);
     }
 
     private void OnAmokApply(Entity<CurseOfAmokStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)

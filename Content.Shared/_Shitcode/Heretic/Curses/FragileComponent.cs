@@ -4,7 +4,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._Shitcode.Heretic.Curses;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class FragileComponent : Component
+public sealed partial class FragileCurseComponent : Component
 {
     [DataField]
     public DamageModifierSet ModifierSet = new()
@@ -23,6 +23,8 @@ public sealed partial class FragileComponent : Component
             {"Poison", 2},
             {"Radiation", 2},
             {"Cellular", 2},
+            {"Ion", 2},
+            {"Holy", 2},
         },
         IgnoreArmorPierceFlags = (int) PartialArmorPierceFlags.All,
     };

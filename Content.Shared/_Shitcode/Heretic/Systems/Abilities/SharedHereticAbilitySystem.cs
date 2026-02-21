@@ -100,6 +100,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             {"Poison", 1},
             {"Radiation", 1},
             {"Cellular", 1},
+            {"Ion", 1},
             {"Holy", 1},
         },
     };

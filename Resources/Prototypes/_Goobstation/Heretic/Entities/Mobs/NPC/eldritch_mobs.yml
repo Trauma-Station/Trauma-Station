@@ -468,7 +468,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Damageable
-    damageContainer: InorganicMetaphysical
+    damageContainer: SiliconMetaphysical
   - type: HealthExaminable
     examinableTypes:
     - Blunt
