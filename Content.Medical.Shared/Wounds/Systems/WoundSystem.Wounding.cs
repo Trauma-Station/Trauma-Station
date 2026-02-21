@@ -61,7 +61,7 @@ public sealed partial class WoundSystem
         SubscribeLocalEvent<WoundableComponent, HealBleedingWoundsEvent>(OnHealBleedingWounds);
         SubscribeLocalEvent<WoundableComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<WoundableComponent, DamageSetEvent>(OnDamageSet);
-        SubscribeLocalEvent<WoundableComponent, BodyRelayedEvent<ModifyDoAfterDelayEvent>>(OnModifyDoAfterDelay);
+        SubscribeLocalEvent<HandOrganComponent, BodyRelayedEvent<ModifyDoAfterDelayEvent>>(OnModifyDoAfterDelay);
         SubscribeLocalEvent<WoundableComponent, AttemptHandsMeleeEvent>(OnAttemptHandsMelee);
         SubscribeLocalEvent<WoundableComponent, AttemptHandsShootEvent>(OnAttemptHandsShoot);
         SubscribeLocalEvent<TraumaInflicterComponent, TraumaBeingRemovedEvent>(OnTraumaBeingRemoved);
@@ -293,14 +293,12 @@ public sealed partial class WoundSystem
         }
     }
 
-    private void OnModifyDoAfterDelay(Entity<WoundableComponent> ent, ref BodyRelayedEvent<ModifyDoAfterDelayEvent> args)
+    private void OnModifyDoAfterDelay(Entity<HandOrganComponent> ent, ref BodyRelayedEvent<ModifyDoAfterDelayEvent> args)
     {
-        var integrity = ent.Comp.WoundableIntegrity;
-        // random hardcoded number award
-        if (integrity > 50)
-            return;
-
-        args.Args.Multiplier *= (float) (integrity / ent.Comp.IntegrityCap);
+        // TODO SHITMED: because of how the shitcode works, missing a hand is faster than having a broken one
+        // make a thing like LegsComponent that makes doafters longer with missing hands
+        if (_trauma.GetBone(ent.Owner) is {} bone)
+            RaiseLocalEvent(bone, args.Args);
     }
 
     private void OnAttemptHandsMelee(EntityUid uid, WoundableComponent component, ref AttemptHandsMeleeEvent args)
