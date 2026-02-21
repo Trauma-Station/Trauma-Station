@@ -37,13 +37,9 @@ namespace Content.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
-    private static readonly EntProtoId<VoidAscensionAuraComponent> VoidAuraId = "VoidAscensionAura";
-
     protected override void SubscribeVoid()
     {
         base.SubscribeVoid();
-
-        SubscribeLocalEvent<HereticAscensionVoidEvent>(OnAscensionVoid);
 
         SubscribeLocalEvent<HereticVoidPrisonEvent>(OnVoidPrison);
 
@@ -57,21 +53,6 @@ public sealed partial class HereticAbilitySystem
 
         Spawn(ent.Comp.EndEffect, Transform(ent).Coordinates);
         Voidcurse.DoCurse(args.NewEntity);
-    }
-
-    private void OnAscensionVoid(HereticAscensionVoidEvent args)
-    {
-        if (!args.Negative)
-            SpawnAttachedTo(VoidAuraId, args.Heretic.ToCoordinates());
-        else
-        {
-            var childEnumerator = Transform(args.Heretic).ChildEnumerator;
-            while (childEnumerator.MoveNext(out var child))
-            {
-                if (HasComp<VoidAscensionAuraComponent>(child))
-                    QueueDel(child);
-            }
-        }
     }
 
     private void OnVoidPrison(HereticVoidPrisonEvent args)

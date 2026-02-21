@@ -380,7 +380,7 @@
     - type: SpecialBreathingImmunity
     - type: SpecialPressureImmunity
     - type: Aristocrat
-    - type: MovementIgnoreGravity
+    - type: MovementAlwaysTouching
     - type: CanMoveInAir
     - type: NoSlip
     - type: ThermalVision
