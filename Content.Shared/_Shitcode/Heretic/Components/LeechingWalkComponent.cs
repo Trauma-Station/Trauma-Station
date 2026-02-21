@@ -22,27 +22,6 @@ public sealed partial class LeechingWalkComponent : Component
     public FixedPoint2 BoneHeal = -5;
 
     [DataField]
-    public DamageSpecifier ToHeal = new()
-    {
-        DamageDict =
-        {
-            {"Blunt", -1},
-            {"Slash", -1},
-            {"Piercing", -1},
-            {"Heat", -1},
-            {"Cold", -1},
-            {"Shock", -1},
-            {"Asphyxiation", -1},
-            {"Bloodloss", -1},
-            {"Caustic", -1},
-            {"Poison", -1},
-            {"Radiation", -1},
-            {"Cellular", -1},
-            {"Holy", -1},
-        },
-    };
-
-    [DataField]
     public float StaminaHeal = 5f;
 
     [DataField]

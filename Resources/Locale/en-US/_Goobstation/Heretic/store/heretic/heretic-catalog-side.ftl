@@ -80,7 +80,7 @@ knowledge-path-side-s4-ether-desc =
 
 knowledge-path-side-s4-realignment-name = Realignment
 knowledge-path-side-s4-realignment-desc =
-    In the flurry of death, he found peace within himself. Despite insurmountable odds, he forged on.
+    Seven times seven techniques were made in Eternal War. These parts of the doctrine contain enough to crush anyone.
 
     Grants you Realignment a spell that will remove stuns, knockdowns and restraints from you and realign your body rapidly for a short period.
     During this process, you will rapidly regenerate stamina and quickly recover from stuns, however, you will be unable to attack.

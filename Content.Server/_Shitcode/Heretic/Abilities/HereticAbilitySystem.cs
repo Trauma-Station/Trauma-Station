@@ -28,6 +28,7 @@ using System.Linq;
 using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Goobstation.Shared.Heretic;
+using Content.Medical.Shared.Body;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
@@ -59,7 +60,6 @@ using Robust.Shared.Prototypes;
 using Content.Server.Heretic.EntitySystems;
 using Content.Server.Actions;
 using Content.Server.Temperature.Systems;
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Temperature.Components;
 using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Components;
@@ -96,6 +96,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly FlashSystem _flash = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly BodyRestoreSystem _bodyRestore = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly StationSystem _station = default!;
@@ -472,6 +473,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         var resiratorQuery = GetEntityQuery<RespiratorComponent>();
         var hereticQuery = GetEntityQuery<HereticComponent>();
         var ghoulQuery = GetEntityQuery<GhoulComponent>();
+        var bodyQuery = GetEntityQuery<BodyComponent>();
 
         var leechQuery = EntityQueryEnumerator<LeechingWalkComponent, MindContainerComponent, TransformComponent>();
         while (leechQuery.MoveNext(out var uid, out var leech, out var mindContainer, out var xform))
@@ -500,7 +502,13 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
                         if (damageable != null && damageable.TotalDamage < FixedPoint2.Epsilon)
                         {
-                            //_body.RestoreBody(uid); // TODO NUBODY: bruh
+                            if (bodyQuery.TryComp(uid, out var body))
+                            {
+                                var parts = _body.GetExternalOrgans((uid, body))
+                                    .Select(x => _body.GetCategory(x.AsNullable()));
+                                if (BodySystem.BodyParts.Any(category => parts.All(x => x != category)))
+                                    _bodyRestore.RestoreBody((uid, body));
+                            }
                             shouldHeal = false;
                         }
                     }
@@ -517,7 +525,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
             RemCompDeferred<DelayedKnockdownComponent>(uid);
 
-            var toHeal = leech.ToHeal * multiplier;
+            var toHeal = AllDamage * multiplier;
 
             if (shouldHeal && damageable != null)
             {
