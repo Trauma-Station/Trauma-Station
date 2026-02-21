@@ -128,15 +128,14 @@ public sealed class BodyTest
         var entMan = server.EntMan;
         var protoMan = server.ProtoMan;
         var bodySys = entMan.System<BodySystem>();
-        var restoreSys = entMan.System<BodyRestoreSystem>();
 
         var map = await pair.CreateTestMap();
-
-        var validLayers = new Dictionary<ProtoId<MarkingsGroupPrototype>, HashSet<HumanoidVisualLayers>>();
         await server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
             {
+                var validLayers = new Dictionary<ProtoId<MarkingsGroupPrototype>, HashSet<HumanoidVisualLayers>>();
+
                 // first collect the marking groups every species' parts has
                 foreach (var species in protoMan.EnumeratePrototypes<SpeciesPrototype>())
                 {
