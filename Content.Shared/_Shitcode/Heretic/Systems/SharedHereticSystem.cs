@@ -224,7 +224,8 @@ public abstract class SharedHereticSystem : EntitySystem
     }
 
     public virtual void UpdateHereticCostModifiers(Entity<HereticComponent?, StoreComponent?> ent,
-        ProtoId<StoreCategoryPrototype>? category = null)
+        ProtoId<StoreCategoryPrototype>? category = null,
+        ListingDataWithCostModifiers? except = null)
     {
     }
 }

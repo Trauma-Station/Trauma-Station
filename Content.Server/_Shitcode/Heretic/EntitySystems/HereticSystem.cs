@@ -516,7 +516,9 @@ public sealed class HereticSystem : SharedHereticSystem
         var listings = _store.GetAvailableListings(args.User, ent, Comp<StoreComponent>(ent));
         foreach (var listing in listings)
         {
-            if (!listing.Categories.Contains(cat) || !listing.CostModifiersBySourceId.ContainsKey(cat))
+            if (listing == args.Data ||
+                !listing.Categories.Contains(cat) ||
+                !listing.CostModifiersBySourceId.ContainsKey(cat))
                 continue;
 
             listing.RemoveCostModifier(cat);
@@ -525,22 +527,28 @@ public sealed class HereticSystem : SharedHereticSystem
         var newAmount = Math.Max(amount - 1, 0);
         ent.Comp.SideKnowledgeDrafts[cat] = newAmount;
         if (newAmount > 0)
-            UpdateHereticCostModifiers(ent.AsNullable(), cat);
+            UpdateHereticCostModifiers(ent.AsNullable(), cat, args.Data);
     }
 
     public override void UpdateHereticCostModifiers(Entity<HereticComponent?, StoreComponent?> ent,
-        ProtoId<StoreCategoryPrototype>? category = null)
+        ProtoId<StoreCategoryPrototype>? category = null,
+        ListingDataWithCostModifiers? except = null)
     {
-        base.UpdateHereticCostModifiers(ent, category);
+        base.UpdateHereticCostModifiers(ent, category, except);
 
         if (!Resolve(ent, ref ent.Comp1, ref ent.Comp2))
             return;
 
         var allListings = _store.GetAvailableListings(ent, ent, ent.Comp2).ToList();
+
+        if (except is { } e)
+            allListings.Remove(e);
+
         // Order listings by category
         var listings = allListings
-            .Where(x => (category ?? x.Categories.FirstOrNull()) is { } cat &&
+            .Where(x => x.Categories.FirstOrNull() is { } cat && (category == null || cat == category) &&
                         ent.Comp1.SideKnowledgeDrafts.TryGetValue(cat, out var amount) && amount > 0)
+            .DistinctBy(x => x.Categories.First())
             .ToDictionary(x => x.Categories.First(),
                 x => allListings.Where(y => y.Categories.Intersect(x.Categories).Any()).ToList());
 
@@ -549,11 +557,11 @@ public sealed class HereticSystem : SharedHereticSystem
             if (value.Count == 0 || value.Any(x => x.CostModifiersBySourceId.ContainsKey(key)))
                 continue;
 
-            var amount = Math.Max(value.Count, ent.Comp1.SideDraftChoiceAmount);
+            var amount = Math.Min(value.Count, ent.Comp1.SideDraftChoiceAmount);
             for (var i = 0; i < amount; i++)
             {
                 var listing = _rand.PickAndTake(value);
-                listing.AddCostModifier(key, listing.Cost.ToDictionary());
+                listing.AddCostModifier(key, listing.Cost.ToDictionary(x => x.Key, x => -x.Value));
             }
         }
     }

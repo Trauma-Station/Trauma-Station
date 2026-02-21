@@ -56,8 +56,7 @@ public sealed class EldritchInfluenceSystem : EntitySystem
         if (!ent.Comp.Spent && _heretic.TryGetHereticComponent(args.Examiner, out _, out _))
         {
             var msg = Loc.GetString(ent.Comp.HereticExamineMessage, ("tier", ent.Comp.Tier));
-            var wrapped = Loc.GetString(ent.Comp.ExamineBaseMessage, ("text", msg), ("size", 16));
-            args.PushMarkup(wrapped);
+            args.PushMarkup(msg);
             return;
         }
 
@@ -125,7 +124,8 @@ public sealed class EldritchInfluenceSystem : EntitySystem
     }
     private void OnDoAfter(Entity<EldritchInfluenceComponent> ent, ref EldritchInfluenceDoAfterEvent args)
     {
-        if (args.Cancelled || args.Target == null || !_heretic.TryGetHereticComponent(args.User, out var heretic, out _))
+        if (args.Cancelled || args.Target == null ||
+            !_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind))
             return;
 
         _heretic.UpdateKnowledge(args.User, 1f);
@@ -136,7 +136,7 @@ public sealed class EldritchInfluenceSystem : EntitySystem
             var current = heretic.SideKnowledgeDrafts[cat];
             heretic.SideKnowledgeDrafts[cat] = current + 1;
             if (current == 0)
-                _heretic.UpdateHereticCostModifiers((args.User, heretic), cat);
+                _heretic.UpdateHereticCostModifiers((mind, heretic), cat);
         }
 
         Spawn("EldritchInfluenceIntermediate", Transform(args.Target.Value).Coordinates);

@@ -109,8 +109,6 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
                 AddComp(mr.Value, new RoleBriefingComponent { Briefing = briefingShort }, overwrite: true);
         }
 
-        EnsureComp<HereticComponent>(mindId);
-
         // add store
         var store = EnsureComp<StoreComponent>(mindId);
         foreach (var category in rule.StoreCategories)
@@ -118,6 +116,9 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
             store.Categories.Add(category);
         }
         store.CurrencyWhitelist.Add(Currency);
+
+        // heretic after store because it requires store on startup
+        EnsureComp<HereticComponent>(mindId);
 
         rule.Minds.Add(mindId);
 

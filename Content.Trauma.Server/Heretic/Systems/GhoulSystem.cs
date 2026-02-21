@@ -133,7 +133,8 @@ public sealed class GhoulSystem : SharedGhoulSystem
         SubscribeLocalEvent<HereticMinionComponent, AttackAttemptEvent>(OnTryAttack);
         SubscribeLocalEvent<HereticMinionComponent, TakeGhostRoleEvent>(OnTakeGhostRole);
 
-        SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit,
+            after: [ typeof(InitialBodySystem) ]);
         SubscribeLocalEvent<ShatteredRisenComponent, HandCountChangedEvent>(OnHandCountChanged);
     }
 
@@ -217,7 +218,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         RefreshShatteredHands(ent);
     }
 
-    private void OnMapInit(Entity<ShatteredRisenComponent> ent, ref MapInitEvent args)
+    private void OnRisenMapInit(Entity<ShatteredRisenComponent> ent, ref MapInitEvent args)
     {
         RefreshShatteredHands(ent);
     }
@@ -320,7 +321,6 @@ public sealed class GhoulSystem : SharedGhoulSystem
         if (!ent.Comp.CanDeconvert)
             return;
 
-        // You can't have non-humanoid deconvertible ghouls normally, but this is here just in case
         if (!TryComp(ent, out HumanoidProfileComponent? humanoid))
         {
             if (Prototype(ent) is not { } proto)
