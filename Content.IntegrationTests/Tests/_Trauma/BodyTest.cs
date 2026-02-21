@@ -155,6 +155,7 @@ public sealed class BodyTest
                 }
 
                 // then make sure every marking has a part to be added to
+                var errors = new List<string>();
                 foreach (var marking in protoMan.EnumeratePrototypes<MarkingPrototype>())
                 {
                     if (marking.GroupWhitelist is not {} groups)
@@ -163,12 +164,20 @@ public sealed class BodyTest
                     var layer = marking.BodyPart;
                     foreach (var group in groups)
                     {
-                        Assert.That(validLayers.TryGetValue(group, out var layers),
-                            $"Marking {marking.ID} is whitelisted for group {group} which has no parts?!");
-                        Assert.That(layers.Contains(layer),
-                            $"Marking {marking.ID} is whitelisted for group {group} which is missing a part for layer {layer}!");
+                        if (!validLayers.TryGetValue(group, out var layers))
+                        {
+                            errors.Add($"Marking {marking.ID} is whitelisted for group {group} which has no parts?!");
+                            continue;
+                        }
+
+                        if (!layers.Contains(layer))
+                            errors.Add($"Marking {marking.ID} is whitelisted for group {group} which is missing a part for layer {layer}!");
                     }
                 }
+
+                // print any errors and fail once instead of having 50 identical stack traces
+                if (errors.Count > 0)
+                    Assert.Fail(string.Join("\n", errors));
             });
         });
 
