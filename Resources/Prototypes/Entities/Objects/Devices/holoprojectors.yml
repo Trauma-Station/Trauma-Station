@@ -198,7 +198,7 @@
         name: power-cell-slot-component-slot-name-default
 
 - type: entity
-  parent: Holoprojector
+  parent: [ Holoprojector, BaseSecurityContraband ] # Trauma - Contraband marker
   id: HoloprojectorSecurity
   name: holobarrier projector
   description: Creates a solid but fragile holographic barrier.
