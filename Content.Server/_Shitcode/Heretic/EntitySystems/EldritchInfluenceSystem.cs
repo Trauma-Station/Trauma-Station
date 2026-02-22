@@ -10,8 +10,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Text.RegularExpressions;
-using Content.Goobstation.Common.Heretic;
 using Content.Server.Chat.Managers;
 using Content.Server.Heretic.Components;
 using Content.Server.Mind;
@@ -26,6 +24,7 @@ using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.Heretic;
 using Content.Shared.Interaction;
+using Content.Shared.StatusEffectNew;
 using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
@@ -40,6 +39,7 @@ public sealed class EldritchInfluenceSystem : EntitySystem
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
     [Dependency] private readonly IPlayerManager _playerMan = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -67,11 +67,16 @@ public sealed class EldritchInfluenceSystem : EntitySystem
             _heretic.IsHereticOrGhoul(args.Examiner))
             return;
 
+        if (_status.HasStatusEffect(args.Examiner, ent.Comp.ExaminedRiftStatusEffect))
+            return;
+
         if (!_mind.TryGetMind(args.Examiner, out _, out var mind))
             return;
 
         if (!_playerMan.TryGetSessionById(mind.UserId, out var session))
             return;
+
+        _status.TryAddStatusEffect(args.Examiner, ent.Comp.ExaminedRiftStatusEffect, out _, ent.Comp.ExamineDelay);
 
         _audio.PlayGlobal(ent.Comp.ExamineSound, session);
 
@@ -136,14 +141,13 @@ public sealed class EldritchInfluenceSystem : EntitySystem
         var type = args.GetType();
         var da = args.DoAfter;
         if (!TryComp(args.User, out DoAfterComponent? doAfter) ||
-            doAfter.DoAfters.Values.All(
-                x =>
-                {
-                    if (x == da || x.Completed || x.Cancelled)
-                        return true;
+            doAfter.DoAfters.Values.All(x =>
+            {
+                if (x == da || x.Completed || x.Cancelled)
+                    return true;
 
-                    return _doafter.GetArgs(x).Event.GetType() != type;
-                }))
+                return _doafter.GetArgs(x).Event.GetType() != type;
+            }))
             RemCompDeferred<HereticEyeOverlayComponent>(args.User);
 
         if (args.Cancelled || args.Target == null ||

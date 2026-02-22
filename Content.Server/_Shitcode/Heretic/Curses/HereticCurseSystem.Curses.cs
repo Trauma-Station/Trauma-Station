@@ -1,123 +1,18 @@
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
-using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Curses;
 using Content.Shared.Atmos.Components;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
-using Content.Shared.Eye.Blinding.Components;
-using Content.Shared.Movement.Components;
-using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
-using Content.Shared.Traits.Assorted;
 
 namespace Content.Server._Shitcode.Heretic.Curses;
 
 public sealed partial class HereticCurseSystem
 {
-    private void InitializeCurses()
-    {
-        SubscribeLocalEvent<CurseOfParalysisStatusEffectComponent, StatusEffectAppliedEvent>(OnParalysisApply);
-        SubscribeLocalEvent<CurseOfParalysisStatusEffectComponent, StatusEffectRemovedEvent>(OnParalysisRemove);
-        SubscribeLocalEvent<CurseOfAmokStatusEffectComponent, StatusEffectAppliedEvent>(OnAmokApply);
-        SubscribeLocalEvent<CurseOfAmokStatusEffectComponent, StatusEffectRemovedEvent>(OnAmokRemove);
-        SubscribeLocalEvent<CurseOfFragilityStatusEffectComponent, StatusEffectAppliedEvent>(OnFragilityApply);
-        SubscribeLocalEvent<CurseOfFragilityStatusEffectComponent, StatusEffectRemovedEvent>(OnFragilityRemove);
-        SubscribeLocalEvent<CurseOfBlindnessStatusEffectComponent, StatusEffectAppliedEvent>(OnBlindnessApply);
-        SubscribeLocalEvent<CurseOfBlindnessStatusEffectComponent, StatusEffectRemovedEvent>(OnBlindnessRemove);
-
-        SubscribeLocalEvent<FragileCurseComponent, DamageModifyEvent>(OnModify);
-    }
-
-    private void OnModify(Entity<FragileCurseComponent> ent, ref DamageModifyEvent args)
-    {
-        if (!args.Damage.AnyPositive())
-            return;
-
-        args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, ent.Comp.ModifierSet);
-    }
-
-    private void OnBlindnessApply(Entity<CurseOfBlindnessStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
-    {
-        EnsureComp<TemporaryBlindnessComponent>(args.Target);
-    }
-
-    private void OnBlindnessRemove(Entity<CurseOfBlindnessStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        if (TerminatingOrDeleted(args.Target))
-            return;
-
-        RemCompDeferred<TemporaryBlindnessComponent>(args.Target);
-    }
-
-    private void OnFragilityApply(Entity<CurseOfFragilityStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
-    {
-        EnsureComp<FragileCurseComponent>(args.Target);
-    }
-
-    private void OnFragilityRemove(Entity<CurseOfFragilityStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        if (TerminatingOrDeleted(args.Target))
-            return;
-
-        RemCompDeferred<FragileCurseComponent>(args.Target);
-    }
-
-    private void OnAmokApply(Entity<CurseOfAmokStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
-    {
-        var affected = EnsureComp<EntropicPlumeAffectedComponent>(args.Target);
-        affected.Duration = float.MaxValue;
-        affected.Sprite = null;
-        Dirty(args.Target, affected);
-    }
-
-    private void OnAmokRemove(Entity<CurseOfAmokStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        if (TerminatingOrDeleted(args.Target))
-            return;
-
-        RemCompDeferred<EntropicPlumeAffectedComponent>(args.Target);
-    }
-
-    private void OnParalysisApply(Entity<CurseOfParalysisStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
-    {
-        if (HasComp<LegsParalyzedComponent>(args.Target))
-        {
-            ent.Comp.WasParalyzed = true;
-            return;
-        }
-
-        var comp = Factory.GetComponent<LegsParalyzedComponent>();
-        comp.WalkSpeed = MovementSpeedModifierComponent.DefaultBaseWalkSpeed * 0.5f;
-        comp.SprintSpeed = MovementSpeedModifierComponent.DefaultBaseSprintSpeed * 0.5f;
-        AddComp(args.Target, comp, true);
-    }
-
-    private void OnParalysisRemove(Entity<CurseOfParalysisStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
-    {
-        if (_timing.ApplyingState || ent.Comp.WasParalyzed)
-            return;
-
-        if (TerminatingOrDeleted(args.Target))
-            return;
-
-        RemCompDeferred<LegsParalyzedComponent>(args.Target);
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var curTime = _timing.CurTime;
+        var curTime = Timing.CurTime;
 
         var corrosionQuery = EntityQueryEnumerator<CurseOfCorrosionStatusEffectComponent, StatusEffectComponent>();
         while (corrosionQuery.MoveNext(out _, out var corrosion, out var status))

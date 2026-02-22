@@ -13,6 +13,7 @@
 using Content.Server.Heretic.EntitySystems;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Heretic.Components;
 
@@ -64,4 +65,10 @@ public sealed partial class EldritchInfluenceComponent : Component
 
     [DataField]
     public List<EntityEffect[]> PossibleExamineEffects = new();
+
+    [DataField]
+    public EntProtoId ExaminedRiftStatusEffect = "ExaminedRiftStatusEffect";
+
+    [DataField]
+    public TimeSpan ExamineDelay = TimeSpan.FromSeconds(1);
 }

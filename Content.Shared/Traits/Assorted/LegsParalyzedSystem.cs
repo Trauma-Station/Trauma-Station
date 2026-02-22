@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Stunnable;
+// </Trauma>
 using Content.Shared.Buckle.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
@@ -18,41 +21,41 @@ public sealed class LegsParalyzedSystem : EntitySystem
         SubscribeLocalEvent<LegsParalyzedComponent, BuckledEvent>(OnBuckled);
         SubscribeLocalEvent<LegsParalyzedComponent, UnbuckledEvent>(OnUnbuckled);
         SubscribeLocalEvent<LegsParalyzedComponent, ThrowPushbackAttemptEvent>(OnThrowPushbackAttempt);
-        SubscribeLocalEvent<LegsParalyzedComponent, UpdateCanMoveEvent>(OnUpdateCanMoveEvent);
         // <Trauma>
+        // SubscribeLocalEvent<LegsParalyzedComponent, UpdateCanMoveEvent>(OnUpdateCanMoveEvent);
         SubscribeLocalEvent<LegsParalyzedComponent, RefreshMovementSpeedModifiersEvent>(OnRefresh);
-        SubscribeLocalEvent<LegsParalyzedComponent, StandAttemptEvent>(OnStandAttempt);
+        SubscribeLocalEvent<LegsParalyzedComponent, StandUpAttemptEvent>(OnStandAttempt);
         // </Trauma>
     }
 
     // <Trauma>
-    private void OnStandAttempt(Entity<LegsParalyzedComponent> ent, ref StandAttemptEvent args)
+    private void OnStandAttempt(Entity<LegsParalyzedComponent> ent, ref StandUpAttemptEvent args)
     {
         if (ent.Comp.LifeStage > ComponentLifeStage.Running)
             return;
 
-        args.Cancel();
+        args.Cancelled = true;
     }
 
     private void OnRefresh(Entity<LegsParalyzedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        args.ModifySpeed(ent.Comp.WalkSpeed, ent.Comp.SprintSpeed, true);
+        args.ModifySpeed(ent.Comp.WalkSpeedModifier, ent.Comp.SprintSpeedModifier, true);
     }
     // </Trauma>
 
     private void OnStartup(EntityUid uid, LegsParalyzedComponent component, ComponentStartup args)
     {
         // TODO: In future probably must be surgery related wound
-        // <Trauma>
-        _standingSystem.Down(uid);
-        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(uid);
-        // </Trauma>
+        EnsureComp<KnockedDownComponent>(uid); // Trauma
     }
 
     private void OnShutdown(EntityUid uid, LegsParalyzedComponent component, ComponentShutdown args)
     {
-        _standingSystem.Stand(uid);
-        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(uid); // Trauma
+        // <Trauma>
+        // _standingSystem.Stand(uid);
+        RemCompDeferred<KnockedDownComponent>(uid);
+        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(uid);
+        // </Trauma>
     }
 
     private void OnBuckled(EntityUid uid, LegsParalyzedComponent component, ref BuckledEvent args)
@@ -65,10 +68,10 @@ public sealed class LegsParalyzedSystem : EntitySystem
         _standingSystem.Down(uid);
     }
 
-    private void OnUpdateCanMoveEvent(EntityUid uid, LegsParalyzedComponent component, UpdateCanMoveEvent args)
+    /*private void OnUpdateCanMoveEvent(EntityUid uid, LegsParalyzedComponent component, UpdateCanMoveEvent args)
     {
         args.Cancel();
-    }
+    }*/
 
     private void OnThrowPushbackAttempt(EntityUid uid, LegsParalyzedComponent component, ThrowPushbackAttemptEvent args)
     {

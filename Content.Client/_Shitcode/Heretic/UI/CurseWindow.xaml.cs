@@ -70,7 +70,7 @@ public sealed partial class CurseWindow : FancyWindow
 
         foreach (var item in _data)
         {
-            var canCurse = item.Multiplier != 0f && item.NextCurseTime < _timing.RealTime;
+            var canCurse = item.Multiplier != 0f && item.NextCurseTime < _timing.CurTime;
             var itemName = item.Name;
             var itemDesc = canCurse
                 ? Loc.GetString("heretic-curse-window-can-curse")

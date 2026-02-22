@@ -6,15 +6,16 @@ namespace Content.Shared.Traits.Assorted;
 /// Set player speed to zero and standing state to down, simulating leg paralysis.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(LegsParalyzedSystem))]
+[AutoGenerateComponentState] // Trauma
 public sealed partial class LegsParalyzedComponent : Component
 {
     // <Trauma>
-    [DataField]
+    [DataField, AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public float WalkSpeed;
+    public float WalkSpeedModifier;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public float SprintSpeed;
+    public float SprintSpeedModifier;
     // </Trauma>
 }

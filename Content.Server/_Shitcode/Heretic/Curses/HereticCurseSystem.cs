@@ -11,7 +11,6 @@ using Content.Shared.Database;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Hands;
-using Content.Shared.Heretic;
 using Content.Shared.Humanoid;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
@@ -28,16 +27,14 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Medical;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Server._Shitcode.Heretic.Curses;
 
 using DnaDict = Dictionary<string, (float, HashSet<EntityUid>)>;
 
-public sealed partial class HereticCurseSystem : EntitySystem
+public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IAdminLogManager _log = default!;
 
@@ -65,8 +62,6 @@ public sealed partial class HereticCurseSystem : EntitySystem
         SubscribeLocalEvent<HereticCurseProviderComponent, HandDeselectedEvent>(OnHandDeselected);
         SubscribeLocalEvent<HereticCurseProviderComponent, GotUnequippedHandEvent>(OnHandUnequipped);
         SubscribeLocalEvent<HereticCurseProviderComponent, ItemToggledEvent>(OnToggle);
-
-        InitializeCurses();
     }
 
     private void OnToggle(Entity<HereticCurseProviderComponent> ent, ref ItemToggledEvent args)
