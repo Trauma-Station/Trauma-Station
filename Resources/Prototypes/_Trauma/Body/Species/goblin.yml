@@ -3,17 +3,6 @@
   id: AppearanceGoblin
   name: goblin appearance
   components:
-  - type: Hands
-    leftHandDisplacement:
-      sizeMaps:
-        32:
-          sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
-          state: hand
-    rightHandDisplacement:
-      sizeMaps:
-        32:
-          sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
-          state: hand
   - type: Inventory
     femaleDisplacements:
       jumpsuit:
@@ -27,41 +16,21 @@
           32:
             sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
             state: jumpsuit
-      back:
-        sizeMaps:
-          32:
-            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
-            state: back
-      outerClothing:
-        sizeMaps:
-          32:
-            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
-            state: outerwear
       gloves:
         sizeMaps:
           32:
             sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
             state: hand
-      head:
-        sizeMaps:
-          32:
-            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
-            state: head
-      neck:
-        sizeMaps:
-          32:
-            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
-            state: neck
-      eyes:
-        sizeMaps:
-          32:
-            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
-            state: eyes
       belt:
         sizeMaps:
           32:
             sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
             state: belt
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
+            state: shoes
   - type: InitialBody
     organs:
       Torso: OrganGoblinTorso
