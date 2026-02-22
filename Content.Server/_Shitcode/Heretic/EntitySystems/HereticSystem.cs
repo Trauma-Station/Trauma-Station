@@ -57,6 +57,7 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Server.Hands.Systems;
 using Content.Shared._Shitcode.Heretic.Rituals;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Store;
 using Content.Shared.Tag;
 using Robust.Server.GameStates;
@@ -113,6 +114,20 @@ public sealed class HereticSystem : SharedHereticSystem
         SubscribeLocalEvent<HereticStartupEvent>(OnHereticStartup);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRestart);
         SubscribeLocalEvent<UserShouldTakeHolyEvent>(OnShouldTakeHoly);
+
+
+        SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectAppliedEvent>(OnApply);
+        SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
+    }
+
+    private void OnRemove(Entity<HideHereticAuraStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
+    {
+        UpdateHereticAura(args.Target);
+    }
+
+    private void OnApply(Entity<HideHereticAuraStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
+    {
+        RemCompDeferred<HereticAuraComponent>(args.Target);
     }
 
     private void OnMindAdded(Entity<HereticComponent> ent, ref MindGotAddedEvent args)
@@ -219,6 +234,8 @@ public sealed class HereticSystem : SharedHereticSystem
             _npcFaction.AddFaction(ev.Heretic, HereticFactionId);
         }
 
+        UpdateHereticAura(ev.Heretic);
+
         if (!TryComp<EyeComponent>(ev.Heretic, out var eye))
             return;
 
@@ -292,21 +309,40 @@ public sealed class HereticSystem : SharedHereticSystem
         if (playSound)
             _audio.PlayGlobal(heretic.InfluenceGainSound, session);
 
-        var couldBreak = ent.Comp1.CanBreakBlade;
-        ent.Comp1.KnowledgeTracker += amount;
-        var canBreak = ent.Comp1.CanBreakBlade;
+        var couldBreak = heretic.CanBreakBlade;
+        var hadAura = heretic.ShouldShowAura;
+        heretic.KnowledgeTracker += amount;
+        var canBreak = heretic.CanBreakBlade;
+        var showAura = heretic.ShouldShowAura;
 
-        if (canBreak || !couldBreak)
-            return;
+        if (!canBreak && couldBreak)
+        {
+            var msg = Loc.GetString(heretic.BreakBladeAbilityLostMessage);
+            _chatMan.ChatMessageToOne(ChatChannel.Server,
+                msg,
+                msg,
+                default,
+                false,
+                session.Channel,
+                Color.Red);
+        }
 
-        var msg = Loc.GetString(ent.Comp1.BreakBladeAbilityLostMessage);
-        _chatMan.ChatMessageToOne(ChatChannel.Server,
-            msg,
-            msg,
-            default,
-            false,
-            session.Channel,
-            Color.Red);
+        if (!hadAura && showAura)
+        {
+            if (uid != null)
+                Status.TryUpdateStatusEffectDuration(uid.Value, heretic.HideAuraStatusEffect, heretic.AuraDelayTime);
+
+            var msg = Loc.GetString(heretic.AuraVisibleMessage);
+            _chatMan.ChatMessageToOne(ChatChannel.Server,
+                msg,
+                msg,
+                default,
+                false,
+                session.Channel,
+                Color.Red);
+        }
+
+        Dirty(mindId, heretic);
     }
 
     private void OnCompStartup(Entity<HereticComponent> ent, ref ComponentStartup args)
@@ -479,6 +515,8 @@ public sealed class HereticSystem : SharedHereticSystem
         RemoveRituals(ent.AsNullable(), [AscensionRitualTag, FeastOfOwlsRitualTag]);
         ent.Comp.ChosenRitual = null;
         Dirty(ent);
+
+        UpdateHereticAura(uid);
 
         // how???
         if (ent.Comp.CurrentPath == null)

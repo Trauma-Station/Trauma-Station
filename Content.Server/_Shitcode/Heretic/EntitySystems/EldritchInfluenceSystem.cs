@@ -9,6 +9,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Goobstation.Common.Heretic;
 using Content.Server.Chat.Managers;
@@ -17,6 +18,7 @@ using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Goobstation.Wizard;
+using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Chat;
 using Content.Shared.DoAfter;
 using Content.Shared.EntityEffects;
@@ -102,10 +104,17 @@ public sealed class EldritchInfluenceSystem : EntitySystem
             BreakOnMove = true,
             BreakOnWeightlessMove = false,
             MultiplyDelay = false,
-            Hidden = hidden,
         };
+
         _popup.PopupEntity(Loc.GetString("heretic-influence-start"), influence, user);
-        return _doafter.TryStartDoAfter(dargs);
+
+        if (!_doafter.TryStartDoAfter(dargs))
+            return false;
+
+        if (!hidden)
+            EnsureComp<HereticEyeOverlayComponent>(user);
+
+        return true;
     }
 
     private void OnInteract(Entity<EldritchInfluenceComponent> ent, ref InteractHandEvent args)
@@ -124,6 +133,19 @@ public sealed class EldritchInfluenceSystem : EntitySystem
     }
     private void OnDoAfter(Entity<EldritchInfluenceComponent> ent, ref EldritchInfluenceDoAfterEvent args)
     {
+        var type = args.GetType();
+        var da = args.DoAfter;
+        if (!TryComp(args.User, out DoAfterComponent? doAfter) ||
+            doAfter.DoAfters.Values.All(
+                x =>
+                {
+                    if (x == da || x.Completed || x.Cancelled)
+                        return true;
+
+                    return _doafter.GetArgs(x).Event.GetType() != type;
+                }))
+            RemCompDeferred<HereticEyeOverlayComponent>(args.User);
+
         if (args.Cancelled || args.Target == null ||
             !_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind))
             return;

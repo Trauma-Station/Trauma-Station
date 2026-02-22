@@ -182,3 +182,10 @@
   parent: MobStatusEffectBase
   id: BlockProtectiveBladeShootStatusEffect
   name: block protective blades shoot
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: HideHereticAuraStatusEffect
+  name: hide heretic aura
+  components:
+  - type: HideHereticAuraStatusEffect

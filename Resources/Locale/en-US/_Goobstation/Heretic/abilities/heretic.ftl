@@ -31,12 +31,15 @@ mansus-grasp-trigger-fail = Something prevents you from activating this!
 
 ## blade
 heretic-blade-examine = [color=yellow]Using it while it's in your hand will break the blade and teleport you away from danger.[/color]
-heretic-blade-break-fail-message = You cannot break blades while ascended!
+heretic-blade-break-fail-message = You cannot break blades anymore!
 heretic-blade-break-ability-lost-message = You have gained a lot of power, the mansus will no longer allow you to break your blades.
 heretic-blade-use = The blade shatters, and you feel the voices pulling you away.
 heretic-riposte-used = Riposte used!
 heretic-riposte-available = Riposte available!
 heretic-cant-shoot = I can't use { THE($entity) } because of my sacred pledge to the path of the blade.
+
+## aura
+heretic-aura-message = You can no longer hide what you truly are. After 1 minute you will get an aura that reveals you as heretic.
 
 ## paths exclusive
 heretic-rust-mark-itembreak = {$name} shatters into dust!

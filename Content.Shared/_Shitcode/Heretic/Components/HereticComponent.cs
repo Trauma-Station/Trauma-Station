@@ -157,14 +157,26 @@ public sealed partial class HereticComponent : Component
     [DataField]
     public float LockBladeBreakKnowledgeAmount = 8f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float KnowledgeTracker;
 
     [ViewVariables]
     public bool CanBreakBlade => !Ascended && KnowledgeTracker < LockBladeBreakKnowledgeAmount;
 
+    [ViewVariables]
+    public bool ShouldShowAura => CurrentPath != "Lock" && (Ascended || CanAscend && !CanBreakBlade);
+
     [DataField]
     public LocId BreakBladeAbilityLostMessage = "heretic-blade-break-ability-lost-message";
+
+    [DataField]
+    public LocId AuraVisibleMessage = "heretic-aura-message";
+
+    [DataField]
+    public TimeSpan AuraDelayTime = TimeSpan.FromMinutes(1);
+
+    [DataField]
+    public EntProtoId HideAuraStatusEffect = "HideHereticAuraStatusEffect";
 
     [DataField]
     public int SacrificeTracker;

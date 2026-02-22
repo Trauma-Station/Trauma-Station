@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Conversion;
+using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared.Actions;
 using Content.Shared.Heretic;
@@ -8,6 +9,7 @@ using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Objectives.Systems;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
@@ -25,6 +27,7 @@ public abstract class SharedHereticSystem : EntitySystem
     [Dependency] private readonly ISerializationManager _serialization = default!;
 
     [Dependency] protected readonly ISharedPlayerManager PlayerMan = default!;
+    [Dependency] protected readonly StatusEffectsSystem Status = default!;
 
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
@@ -205,6 +208,18 @@ public abstract class SharedHereticSystem : EntitySystem
 
         Dirty(ent, ent.Comp2);
         return true;
+    }
+
+    public void UpdateHereticAura(EntityUid uid)
+    {
+        if (!TryGetHereticComponent(uid, out var heretic, out _) || !heretic.ShouldShowAura ||
+            Status.HasEffectComp<HideHereticAuraStatusEffectComponent>(uid))
+        {
+            RemCompDeferred<HereticAuraComponent>(uid);
+            return;
+        }
+
+        EnsureComp<HereticAuraComponent>(uid);
     }
 
     public virtual void UpdateMindKnowledge(Entity<HereticComponent, StoreComponent, MindComponent> ent,
