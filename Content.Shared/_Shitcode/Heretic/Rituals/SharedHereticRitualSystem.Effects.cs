@@ -214,7 +214,7 @@ public abstract partial class SharedHereticRitualSystem
         var ev = new IncrementHereticObjectiveProgressEvent(args.Effect.SacrificeObjective);
         RaiseLocalEvent(mind, ref ev);
 
-        if (!isCommand)
+        if (isCommand)
         {
             var ev2 = new IncrementHereticObjectiveProgressEvent(args.Effect.SacrificeHeadObjective);
             RaiseLocalEvent(mind, ref ev2);
