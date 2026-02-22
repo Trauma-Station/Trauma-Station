@@ -245,7 +245,8 @@
       borg_module:
       - XenoborgModuleBasic
       - XenoborgModuleTool
-      - XenoborgModuleHypo
+#      - XenoborgModuleHypo # Trauma
+      - XenoborgModuleDisruptor # Trauma
       - XenoborgModuleChameleonProjector
       - XenoborgModuleCloakDevice
   - type: ItemSlots
@@ -331,7 +332,8 @@
       borg_module:
       - XenoborgModuleBasic
       - XenoborgModuleTool
-      - XenoborgModuleHypo
+#      - XenoborgModuleHypo # Trauma
+      - XenoborgModuleDisruptor # Trauma
       - XenoborgModuleChameleonProjector
       - XenoborgModuleCloakDevice
   - type: ItemSlots
