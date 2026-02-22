@@ -194,3 +194,32 @@
   parent: MobStatusEffectBase
   id: ExaminedRiftStatusEffect
   name: examined pierced reality
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: MansusGraspAffectedStatusEffect
+  name: affected by mansus grasp
+
+- type: entity
+  parent: StatusEffectSpeed
+  id: ShadowCloakStatusEffect
+  name: shadow cloak
+  components:
+  - type: StatusEffectAlert
+    alert: ShadowCloak
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 1.25
+    walkSpeedModifier: 1.25
+  - type: HereticCloakedStatusEffect
+    component: ShadowCloaked
+    loseFocusMessage: heretic-ability-lose-focus-shadow-cloak
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: ShadowCloakRevealStatusEffect
+  name: shadow cloak revealed
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.75
+    walkSpeedModifier: 0.75
+

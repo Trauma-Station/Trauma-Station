@@ -20,7 +20,7 @@ public sealed partial class AreaMansusGraspComponent : Component
     public float MaxRange = 5f;
 
     [DataField]
-    public float MinRange = 0f;
+    public float MinRange;
 
     [DataField]
     public Color EffectColor = Color.FromHex("#cc66e6");

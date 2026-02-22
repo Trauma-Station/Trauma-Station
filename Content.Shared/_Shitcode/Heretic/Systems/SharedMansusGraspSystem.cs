@@ -8,7 +8,6 @@ using System.Linq;
 using Content.Goobstation.Common.Religion;
 using Content.Server.Heretic.Components.PathSpecific;
 using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Goobstation.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Rituals;
@@ -64,6 +63,8 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
+    [Dependency] protected readonly StatusEffectNew.StatusEffectsSystem Status = default!;
+
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
@@ -89,6 +90,8 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
 
     public static readonly SoundSpecifier DefaultSound = new SoundPathSpecifier("/Audio/Items/welder.ogg");
+
+    public static readonly EntProtoId GraspAffectedStatus = "MansusGraspAffectedStatusEffect";
 
     public override void Initialize()
     {
@@ -298,11 +301,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
             _stun.KnockdownOrStun(target, grasp.Comp.KnockdownTime);
             _stamina.TakeStaminaDamage(target, grasp.Comp.StaminaDamage);
             _language.DoRatvarian(target, grasp.Comp.SpeechTime, true, status);
-            _statusEffect.TryAddStatusEffect<MansusGraspAffectedComponent>(target,
-                "MansusGraspAffected",
-                grasp.Comp.AffectedTime,
-                true,
-                status);
+            Status.TryUpdateStatusEffectDuration(target, GraspAffectedStatus, out _, grasp.Comp.AffectedTime);
         }
 
         if (!deleteGraspOnUse)

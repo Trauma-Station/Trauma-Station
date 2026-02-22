@@ -1,5 +1,6 @@
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared._Shitcode.Heretic.Effects;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage.Components;
@@ -17,6 +18,7 @@ public abstract partial class SharedHereticAbilitySystem
 {
     protected virtual void SubscribeSide()
     {
+        SubscribeLocalEvent<EventHereticCloak>(OnCloak);
         SubscribeLocalEvent<EventHereticRustCharge>(OnRustCharge);
         SubscribeLocalEvent<EventHereticIceSpear>(OnIceSpear);
         SubscribeLocalEvent<EventHereticRealignment>(OnRealignment);
@@ -24,6 +26,27 @@ public abstract partial class SharedHereticAbilitySystem
 
         SubscribeLocalEvent<RealignmentComponent, StatusEffectEndedEvent>(OnStatusEnded);
         SubscribeLocalEvent<RealignmentComponent, BeforeStaminaDamageEvent>(OnBeforeRealignmentStamina);
+    }
+
+    private void OnCloak(EventHereticCloak args)
+    {
+        var ent = args.Performer;
+
+        if (StatusNew.TryEffectsWithComp<HereticCloakedStatusEffectComponent>(ent, out var effects))
+        {
+            foreach (var effect in effects)
+            {
+                PredictedQueueDel(effect.Owner);
+            }
+            args.Handled = true;
+            return;
+        }
+
+        // TryUseAbility only if we are not cloaked so that we can uncloak without focus
+        if (!TryUseAbility(args))
+            return;
+
+        StatusNew.TryAddStatusEffect(ent, args.Status, out _, args.Lifetime);
     }
 
     private void OnStatusEnded(Entity<RealignmentComponent> ent, ref StatusEffectEndedEvent args)

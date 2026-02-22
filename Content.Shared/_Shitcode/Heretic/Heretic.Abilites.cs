@@ -15,6 +15,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared._Shitcode.Heretic.Effects;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -96,6 +97,12 @@ public sealed partial class CheckMagicItemEvent : HandledEntityEventArgs, IInven
     public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
 
+[ByRefEvent]
+public readonly record struct HereticLostFocusEvent;
+
+[ByRefEvent]
+public record struct HereticMagicCastAttemptEvent(EntityUid User, EntityUid Action, bool Cancelled = false);
+
 // basic
 public sealed partial class HereticStartupEvent : HereticKnowledgeEvent;
 public sealed partial class EventHereticOpenStore : InstantActionEvent { }
@@ -105,13 +112,13 @@ public sealed partial class EventHereticLivingHeart : InstantActionEvent { } // 
 [ByRefEvent]
 public readonly record struct HereticMindDetachedEvent(EntityUid Mind);
 
-public sealed partial class EventHereticShadowCloak : InstantActionEvent
+public sealed partial class EventHereticCloak : InstantActionEvent
 {
-    [DataField]
-    public ProtoId<StatusEffectPrototype> Status = "ShadowCloak";
+    [DataField(required: true)]
+    public EntProtoId<HereticCloakedStatusEffectComponent> Status;
 
     [DataField]
-    public TimeSpan Lifetime = TimeSpan.FromSeconds(180);
+    public TimeSpan? Lifetime;
 }
 
 // living heart

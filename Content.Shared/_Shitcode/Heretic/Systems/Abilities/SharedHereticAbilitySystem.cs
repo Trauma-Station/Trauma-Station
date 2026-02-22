@@ -21,6 +21,7 @@ using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Heretic;
+using Content.Shared.Jaunt;
 using Content.Shared.Magic.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
@@ -119,9 +120,8 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         SubscribeFlesh();
         SubscribeSide();
 
-        SubscribeLocalEvent<EventHereticShadowCloak>(OnShadowCloak);
-
         SubscribeLocalEvent<HereticActionComponent, BeforeCastSpellEvent>(OnBeforeCast);
+        SubscribeLocalEvent<JauntComponent, HereticMagicCastAttemptEvent>(OnJauntMagicAttempt);
     }
 
     protected List<Entity<MobStateComponent>> GetNearbyPeople(EntityUid ent,
@@ -158,32 +158,6 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     }
 
 
-    private void OnShadowCloak(EventHereticShadowCloak args)
-    {
-        var ent = args.Performer;
-
-        if (!TryComp(ent, out StatusEffectsComponent? status))
-            return;
-
-        if (TryComp(ent, out ShadowCloakedComponent? shadowCloaked))
-        {
-            Status.TryRemoveStatusEffect(ent, args.Status, status, false);
-            RemCompDeferred(ent, shadowCloaked);
-            args.Handled = true;
-            return;
-        }
-
-        if (HasComp<SacramentsOfPowerComponent>(ent))
-            return;
-
-        // TryUseAbility only if we are not cloaked so that we can uncloak without focus
-        // Ideally you should uncloak when losing focus but whatever
-        if (!TryUseAbility(args))
-            return;
-
-        Status.TryAddStatusEffect<ShadowCloakedComponent>(ent, args.Status, args.Lifetime, true, status);
-    }
-
     public bool TryUseAbility(BaseActionEvent args, bool handle = true)
     {
         if (args.Handled)
@@ -196,9 +170,16 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         return result;
     }
 
+    private void OnJauntMagicAttempt(Entity<JauntComponent> ent, ref HereticMagicCastAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
     private void OnBeforeCast(Entity<HereticActionComponent> ent, ref BeforeCastSpellEvent args)
     {
-        if (HasComp<RustChargeComponent>(args.Performer))
+        var attemptEv = new HereticMagicCastAttemptEvent(args.Performer, ent);
+        RaiseLocalEvent(args.Performer, ref attemptEv);
+        if (attemptEv.Cancelled)
         {
             args.Cancelled = true;
             return;

@@ -19,6 +19,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Heretic;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Shared._Goobstation.Heretic.Components;
@@ -30,6 +31,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Heretic;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
+using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Tag;
 using Content.Shared.Trigger;
 
@@ -55,16 +57,23 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
         SubscribeLocalEvent<TagComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<DrawRitualRuneDoAfterEvent>(OnRitualRuneDoAfter);
         SubscribeLocalEvent<MansusGraspBlockTriggerComponent, AttemptTriggerEvent>(OnAttemptTrigger);
+        SubscribeLocalEvent<StatusEffectContainerComponent, ParentPacketReceiveAttemptEvent>(OnPacket);
+    }
+
+    private void OnPacket(Entity<StatusEffectContainerComponent> ent, ref ParentPacketReceiveAttemptEvent args)
+    {
+        if (Status.HasStatusEffect(ent, GraspAffectedStatus))
+            args.Cancelled = true;
     }
 
     private void OnAttemptTrigger(Entity<MansusGraspBlockTriggerComponent> ent, ref AttemptTriggerEvent args)
     {
-        if (HasComp<MansusGraspAffectedComponent>(args.User))
+        if (args.User is {} user && Status.HasStatusEffect(user, GraspAffectedStatus))
         {
             args.Cancelled = true;
-            _popup.PopupEntity(Loc.GetString("mansus-grasp-trigger-fail"), args.User.Value, args.User.Value);
+            _popup.PopupEntity(Loc.GetString("mansus-grasp-trigger-fail"), user, user);
         }
-        else if (HasComp<MansusGraspAffectedComponent>(Transform(ent).ParentUid))
+        else if (Status.HasStatusEffect(Transform(ent).ParentUid, GraspAffectedStatus))
         {
             args.Cancelled = true;
         }
