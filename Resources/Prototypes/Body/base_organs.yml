@@ -93,7 +93,6 @@
       layers:
       - Chest
       #- Tail # Trauma - moved to specific Tail part
-      - Wings # Trauma - temporary until wings are a part
       - Overlay
       - UndergarmentTop
       - UndergarmentBottom

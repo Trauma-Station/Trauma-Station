@@ -265,7 +265,7 @@
     sprite: _Trauma/Mobs/Species/Reptilian/parts.rsi # TODO: make a unique sprite
   - type: VisualOrgan
     data:
-      sprite: _Trauma/Mobs/Species/Reptilian/parts.rsi
+      sprite: _Trauma/empty.rsi
       state: empty # no sprite since the markings actually control it
 
 - type: entity
