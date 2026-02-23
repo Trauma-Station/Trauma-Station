@@ -117,6 +117,7 @@ public sealed partial class MutationSystem : EntitySystem
         if (ent.Owner != args.OldEntity || !_mutatableQuery.TryComp(target, out var comp))
             return;
 
+        Log.Debug($"Transferring {ent.Comp.Mutations.Count} mutations to {ToPrettyString(target)}!");
         var dna = GetDna(ent);
         TransferMutations(ent, (target, comp));
         if (dna is {} oldDna)
