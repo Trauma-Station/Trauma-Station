@@ -21,7 +21,6 @@
 
 using Content.Goobstation.Common.Heretic;
 using Content.Server.Chat.Systems;
-using Content.Server.Popups;
 using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Rituals;
@@ -33,7 +32,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Tag;
-using Content.Shared.Trigger;
 
 namespace Content.Server.Heretic.EntitySystems;
 
@@ -42,7 +40,6 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly HereticSystem _heretic = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
 
@@ -56,7 +53,6 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
 
         SubscribeLocalEvent<TagComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<DrawRitualRuneDoAfterEvent>(OnRitualRuneDoAfter);
-        SubscribeLocalEvent<MansusGraspBlockTriggerComponent, AttemptTriggerEvent>(OnAttemptTrigger);
         SubscribeLocalEvent<StatusEffectContainerComponent, ParentPacketReceiveAttemptEvent>(OnPacket);
     }
 
@@ -64,19 +60,6 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
     {
         if (Status.HasStatusEffect(ent, GraspAffectedStatus))
             args.Cancelled = true;
-    }
-
-    private void OnAttemptTrigger(Entity<MansusGraspBlockTriggerComponent> ent, ref AttemptTriggerEvent args)
-    {
-        if (args.User is {} user && Status.HasStatusEffect(user, GraspAffectedStatus))
-        {
-            args.Cancelled = true;
-            _popup.PopupEntity(Loc.GetString("mansus-grasp-trigger-fail"), user, user);
-        }
-        else if (Status.HasStatusEffect(Transform(ent).ParentUid, GraspAffectedStatus))
-        {
-            args.Cancelled = true;
-        }
     }
 
     public override void InvokeGrasp(EntityUid user, Entity<MansusGraspComponent>? ent)

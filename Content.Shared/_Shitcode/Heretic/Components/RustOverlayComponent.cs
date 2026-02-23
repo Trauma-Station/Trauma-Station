@@ -8,7 +8,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared._Shitcode.Heretic.SpriteOverlay;
 using Content.Shared.Tag;
 using Robust.Shared.GameStates;
@@ -18,39 +17,25 @@ using Robust.Shared.Utility;
 namespace Content.Shared._Goobstation.Heretic.Components;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class RustRuneComponent : BaseSpriteOverlayComponent
+public sealed partial class RustOverlayComponent : BaseSpriteOverlayComponent
 {
     [DataField]
     public ProtoId<TagPrototype> DiagonalTag = "Diagonal";
 
     [DataField]
-    public Vector2 DiagonalOffset = new(0.25f, -0.25f);
+    public string DiagonalState = "rust_diagonal";
 
     [DataField]
-    public List<string> RuneStates = new()
-    {
-        "small_rune_1",
-        "small_rune_2",
-        "small_rune_3",
-        "small_rune_4",
-        "small_rune_5",
-        "small_rune_6",
-        "small_rune_7",
-        "small_rune_8",
-        "small_rune_9",
-        "small_rune_10",
-        "small_rune_11",
-        "small_rune_12",
-    };
+    public string OverlayState = "rust_default";
 
-    public override Enum Key { get; set; } = RustRuneKey.Key;
+    public override Enum Key { get; set; } = RustOverlayKey.Key;
 
     [DataField]
     public override SpriteSpecifier? Sprite { get; set; } =
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_1");
+        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "rune_default");
 }
 
-public enum RustRuneKey : byte
+public enum RustOverlayKey : byte
 {
     Key
 }

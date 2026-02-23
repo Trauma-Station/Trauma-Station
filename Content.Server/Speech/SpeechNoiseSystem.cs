@@ -79,10 +79,16 @@ namespace Content.Server.Speech
         {
             // <Goob> - Barks
             if (component.SpeechSounds == null
-                || !args.Language.SpeechOverride.RequireSpeech
-                || _barksEnabled // Goob
-                && HasComp<SpeechSynthesisComponent>(uid))
+                || !args.Language.SpeechOverride.RequireSpeech)
                 return;
+
+            if (_barksEnabled)
+            {
+                var ev = new GetBarkSourceEntityEvent();
+                RaiseLocalEvent(uid, ref ev);
+                if (HasComp<SpeechSynthesisComponent>(ev.Ent ?? uid))
+                    return;
+            }
             // </Goob>
 
             var currentTime = _gameTiming.CurTime;

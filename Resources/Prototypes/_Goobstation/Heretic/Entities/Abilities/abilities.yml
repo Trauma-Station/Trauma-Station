@@ -130,7 +130,7 @@
   description: Something is there! Against all reason, this shadow lurks at the corners of your vision. You close your eyes, but still, it is there. No matter how far you run, it is there. In pitchest black, it is there.
   components:
   - type: TimedDespawn
-    lifetime: 185 # Time of the cloak to wear off + time of particles to disappear
+    lifetime: 180
   - type: Sprite
     noRot: true
     drawdepth: Mobs
@@ -151,6 +151,7 @@
   - type: EntityTrail
   - type: RotationVisuals
   - type: Appearance
+  - type: AnimationPlayer
 
 - type: entity
   id: EffectCosmicDiamond

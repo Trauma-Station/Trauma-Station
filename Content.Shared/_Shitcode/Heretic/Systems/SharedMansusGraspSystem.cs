@@ -12,9 +12,11 @@ using Content.Shared._Goobstation.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Medical.Common.Targeting;
+using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems.Abilities;
 using Content.Shared._White.BackStab;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Events;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
@@ -35,11 +37,13 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Silicons.StationAi;
+using Content.Shared.Species;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Timing;
+using Content.Shared.Trigger;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
@@ -106,6 +110,30 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         SubscribeLocalEvent<MansusGraspComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<MansusGraspComponent, MeleeHitEvent>(OnMelee);
         SubscribeLocalEvent<RustGraspComponent, AfterInteractEvent>(OnRustInteract);
+
+        SubscribeLocalEvent<MansusGraspBlockTriggerComponent, AttemptTriggerEvent>(OnAttemptTrigger);
+        SubscribeLocalEvent<MansusGraspBlockTriggerComponent, ActionAttemptEvent>(OnActionAttempt);
+    }
+
+    private void OnActionAttempt(Entity<MansusGraspBlockTriggerComponent> ent, ref ActionAttemptEvent args)
+    {
+        if (!Status.HasStatusEffect(args.User, GraspAffectedStatus))
+            return;
+
+        _popup.PopupClient(Loc.GetString("mansus-grasp-trigger-fail"), args.User, args.User);
+    }
+
+    private void OnAttemptTrigger(Entity<MansusGraspBlockTriggerComponent> ent, ref AttemptTriggerEvent args)
+    {
+        if (args.User is {} user && Status.HasStatusEffect(user, GraspAffectedStatus))
+        {
+            args.Cancelled = true;
+            _popup.PopupClient(Loc.GetString("mansus-grasp-trigger-fail"), user, user);
+        }
+        else if (Status.HasStatusEffect(Transform(ent).ParentUid, GraspAffectedStatus))
+        {
+            args.Cancelled = true;
+        }
     }
 
     public float GetAreaGraspRange(Entity<AreaMansusGraspComponent> ent, float time)

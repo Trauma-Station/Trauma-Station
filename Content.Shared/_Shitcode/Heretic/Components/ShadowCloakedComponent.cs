@@ -1,5 +1,9 @@
+using Content.Shared._Goobstation.Heretic.Components;
+using Content.Shared._Goobstation.Wizard.Traps;
+using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.FixedPoint;
+using Content.Shared.Heretic;
 using Content.Shared.Speech;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -12,9 +16,6 @@ public sealed partial class ShadowCloakedComponent : Component
 {
     [ViewVariables]
     public bool WasVisible = true;
-
-    [DataField]
-    public EntProtoId Status = "ShadowCloakStatusEffect";
 
     [DataField]
     public ProtoId<EmoteSoundsPrototype> EmoteSounds = "ShadowCloak";
@@ -60,4 +61,14 @@ public sealed partial class ShadowCloakedComponent : Component
 
     [DataField]
     public FixedPoint2 SustainedDamageReductionRate = 1;
+
+    [DataField]
+    public Enum[] IgnoredSpriteKeys =
+    [
+        IceCubeKey.Key,
+        SacramentsKey.Key,
+        HereticEyeOverlayKey.Key,
+        VoidCurseKey.Key,
+        HereticCombatMarkKey.Key,
+    ];
 }

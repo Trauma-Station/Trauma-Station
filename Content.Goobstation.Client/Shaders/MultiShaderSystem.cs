@@ -18,7 +18,7 @@ public sealed class MultiShaderSystem : EntitySystem
         SubscribeLocalEvent<SpriteComponent, SetMultiShadersEvent>(OnShaders);
     }
 
-    private void OnShaders(Entity<SpriteComponent> ent, ref SetMultiShadersEvent args)
+    public void OnShaders(Entity<SpriteComponent> ent, ref SetMultiShadersEvent args)
     {
         if (!args.Add)
         {
@@ -48,7 +48,7 @@ public sealed class MultiShaderSystem : EntitySystem
         }
     }
 
-    private void OnShader(Entity<SpriteComponent> ent, ref SetMultiShaderEvent args)
+    public void OnShader(Entity<SpriteComponent> ent, ref SetMultiShaderEvent args)
     {
         if (!args.Add)
         {

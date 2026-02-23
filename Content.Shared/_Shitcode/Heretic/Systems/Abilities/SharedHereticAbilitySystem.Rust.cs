@@ -301,9 +301,10 @@ public abstract partial class SharedHereticAbilitySystem
 
         EnsureComp<RustedWallComponent>(targetEntity);
 
-        var rune = EnsureComp<RustRuneComponent>(targetEntity);
+        EnsureComp<RustRuneComponent>(targetEntity);
         // If targetEntity is target (which means no transformations were performed) - we add rust overlay
-        rune.RustOverlay = targetEntity == target;
+        if (targetEntity == target)
+            EnsureComp<RustOverlayComponent>(targetEntity);
 
         return true;
     }

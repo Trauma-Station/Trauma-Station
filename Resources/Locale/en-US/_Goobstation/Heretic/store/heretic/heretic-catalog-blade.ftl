@@ -57,7 +57,7 @@ knowledge-path-blade-s5-desc =
 
     Grants you Sacraments of Power, a spell that makes you immune to all incoming damage and stamina damage for 5 seconds, the portion of absorbed damage will be sent back to attackers.
     Prevents you from shooting or attacking during the effect duration.
-    Takes about 1 second to activate. Disables choak of shadow effect.
+    Takes about 1 second to activate.
 
 knowledge-path-blade-s6-name = Stance of the Torn Champion
 knowledge-path-blade-s6-desc =

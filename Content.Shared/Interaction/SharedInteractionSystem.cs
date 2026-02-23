@@ -3,6 +3,7 @@ using Content.Goobstation.Common.Interactions;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
@@ -83,6 +84,9 @@ namespace Content.Shared.Interaction
         private EntityQuery<PhysicsComponent> _physicsQuery;
         private EntityQuery<HandsComponent> _handsQuery;
         private EntityQuery<InteractionRelayComponent> _relayQuery;
+        // <Trauma>
+        private EntityQuery<TargetInteractionRelayComponent> _targetRelayQuery;
+        // </Trauma>
         private EntityQuery<CombatModeComponent> _combatQuery;
         private EntityQuery<WallMountComponent> _wallMountQuery;
         private EntityQuery<UseDelayComponent> _delayQuery;
@@ -111,6 +115,9 @@ namespace Content.Shared.Interaction
             _physicsQuery = GetEntityQuery<PhysicsComponent>();
             _handsQuery = GetEntityQuery<HandsComponent>();
             _relayQuery = GetEntityQuery<InteractionRelayComponent>();
+            // <Trauma>
+            _targetRelayQuery = GetEntityQuery<TargetInteractionRelayComponent>();
+            // </Trauma>
             _combatQuery = GetEntityQuery<CombatModeComponent>();
             _wallMountQuery = GetEntityQuery<WallMountComponent>();
             _delayQuery = GetEntityQuery<UseDelayComponent>();
@@ -426,6 +433,23 @@ namespace Content.Shared.Interaction
 
             if (target != null && Deleted(target.Value))
                 return;
+
+            // <Trauma>
+            if (_targetRelayQuery.TryComp(target, out var targetRelay) && Exists(targetRelay.RelayEntity))
+            {
+                if (_actionBlockerSystem.CanInteract(user, target))
+                {
+                    UserInteraction(user,
+                        coordinates,
+                        targetRelay.RelayEntity.Value,
+                        altInteract,
+                        checkCanInteract,
+                        checkAccess,
+                        checkCanUse);
+                    return;
+                }
+            }
+            // </Trauma>
 
             if (!altInteract && _combatQuery.TryComp(user, out var combatMode) && combatMode.IsInCombatMode)
             {
