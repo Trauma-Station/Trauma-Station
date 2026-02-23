@@ -594,7 +594,7 @@
     - id: SolarPanelDamageVariationPass
     - id: SolarPanelEmptyVariationPass
     - id: BasicDecalDirtVariationPass
-    - id: BasicDecalGraffitiVariationPass
+    #- id: BasicDecalGraffitiVariationPass # Trauma - looks shit
     - id: BasicDecalBurnsVariationPass
       prob: 0.50
       orGroup: monospaceDecals
