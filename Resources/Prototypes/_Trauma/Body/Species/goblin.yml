@@ -3,13 +3,17 @@
   id: AppearanceGoblin
   name: goblin appearance
   components:
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      75: SoftCrit
+      125: Critical
+      175: Dead
+  - type: Stamina
+    animationThreshold: 50
+    baseCritThreshold: 80
   - type: Inventory
-    femaleDisplacements:
-      jumpsuit:
-        sizeMaps:
-          32:
-            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
-            state: jumpsuit-female
     displacements:
       jumpsuit:
         sizeMaps:
@@ -31,6 +35,11 @@
           32:
             sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
             state: shoes
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Trauma/Mobs/Species/Goblin/displacement.rsi
+            state: outerwear
   - type: InitialBody
     organs:
       Torso: OrganGoblinTorso
@@ -49,9 +58,9 @@
       Appendix: OrganGoblinAppendix
       Ears: OrganGoblinEars
       Lungs: OrganGoblinLungs
-      Heart: OrganDwarfHeart
-      Stomach: OrganDwarfStomach
-      Liver: OrganDwarfLiver
+      Heart: OrganGoblinHeart
+      Stomach: OrganGoblinStomach
+      Liver: OrganGoblinLiver
       Kidneys: OrganGoblinKidneys
   - type: HumanoidProfile
     species: Goblin
@@ -119,6 +128,10 @@
 - type: entity
   parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganGoblinExternal ]
   id: OrganGoblinTorso
+  components:
+  - type: OrganComponents
+    onAdd:
+    - type: ClimbBoost
 
 - type: entity
   parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganGoblinExternal ]
@@ -149,14 +162,16 @@
   id: OrganGoblinLegLeft
   components:
   - type: MovementBodyPart
-    walkSpeed: 10
+    walkSpeed: 3
+    sprintSpeed: 5.8
 
 - type: entity
   parent: [ OrganBaseLegRight, OrganGoblinExternal ]
   id: OrganGoblinLegRight
   components:
   - type: MovementBodyPart
-    walkSpeed: 10
+    walkSpeed: 3
+    sprintSpeed: 5.8
 
 - type: entity
   parent: [ OrganBaseFootLeft, OrganGoblinExternal ]
@@ -174,6 +189,9 @@
   parent: [ OrganBaseEyes, OrganGoblinInternal, OrganGoblinExternal ]
   id: OrganGoblinEyes
   components:
+  - type: OrganComponents
+    onAdd:
+    - type: NightVision
   - type: VisualOrgan
     data:
       sprite: Mobs/Customization/eyes.rsi
@@ -185,10 +203,18 @@
 - type: entity
   parent: [ OrganBaseAppendix, OrganGoblinInternal ]
   id: OrganGoblinAppendix
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Species/Goblin/organs.rsi
+    state: goblin_appendix
 
 - type: entity
   parent: [ OrganBaseEars, OrganGoblinInternal ]
   id: OrganGoblinEars
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Species/Goblin/organs.rsi
+    state: goblin_ears
 
 - type: entity
   parent: [ OrganBaseLungs, OrganGoblinInternal, OrganHumanMetabolizer ]
@@ -201,10 +227,21 @@
 - type: entity
   parent: [ OrganBaseStomach, OrganGoblinInternal, OrganHumanMetabolizer ]
   id: OrganGoblinStomach
+  components:
+  - type: Stomach
+    specialDigestible:
+      tags:
+      - Meat
+      - Crayon
+    isSpecialDigestibleExclusive: false
 
 - type: entity
   parent: [ OrganBaseLiver, OrganGoblinInternal, OrganHumanMetabolizer ]
   id: OrganGoblinLiver
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Species/Goblin/organs.rsi
+    state: goblin_liver
 
 - type: entity
   parent: [ OrganBaseKidneys, OrganGoblinInternal, OrganHumanMetabolizer ]
@@ -213,7 +250,6 @@
 - type: markingsGroup
   parent: Undergarments
   id: Goblin
-  onlyGroupWhitelisted: true
   limits:
     enum.HumanoidVisualLayers.Hair:
       limit: 1
@@ -231,6 +267,9 @@
       limit: 1
       required: false
     enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Head:
       limit: 1
       required: true
       default: [ EarsGoblin1 ]

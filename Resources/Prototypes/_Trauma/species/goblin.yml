@@ -5,7 +5,7 @@
   prototype: MobGoblin
   defaultSkinTone: "#0fa92f"
   dollPrototype: AppearanceGoblin
-  skinColoration: Hues
+  skinColoration: GoblinSkin
   naming: First
   maleFirstNames: NamesGoblin
   femaleFirstNames: NamesGoblin

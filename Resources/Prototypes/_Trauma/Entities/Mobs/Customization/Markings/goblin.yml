@@ -1,6 +1,6 @@
 - type: marking
   id: EarsGoblin1
-  bodyPart: HeadTop
+  bodyPart: Head
   markingCategory: HeadTop
   speciesRestriction: [Goblin]
   forcedColoring: true
@@ -10,7 +10,7 @@
 
 - type: marking
   id: EarsGoblin2
-  bodyPart: HeadTop
+  bodyPart: Head
   markingCategory: HeadTop
   speciesRestriction: [Goblin]
   forcedColoring: true
@@ -20,7 +20,7 @@
 
 - type: marking
   id: EarsGoblin3
-  bodyPart: HeadTop
+  bodyPart: Head
   markingCategory: HeadTop
   speciesRestriction: [Goblin]
   forcedColoring: true
@@ -30,10 +30,60 @@
 
 - type: marking
   id: EarsGoblin4
-  bodyPart: HeadTop
+  bodyPart: Head
   markingCategory: HeadTop
   speciesRestriction: [Goblin]
   forcedColoring: true
   sprites:
   - sprite: _Trauma/Mobs/Customization/markings/goblin/ear_markings.rsi
     state: goblin_ears_broad_adj
+
+- type: marking
+  id: NoseGoblin1
+  bodyPart: Head
+  markingCategory: Snout
+  speciesRestriction: [Goblin]
+  forcedColoring: true
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/markings/goblin/nose_markings.rsi
+    state: m_goblin_nose_button
+
+- type: marking
+  id: NoseGoblin2
+  bodyPart: Head
+  markingCategory: Snout
+  speciesRestriction: [Goblin]
+  forcedColoring: true
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/markings/goblin/nose_markings.rsi
+    state: m_goblin_nose_liar
+
+- type: marking
+  id: NoseGoblin3
+  bodyPart: Head
+  markingCategory: Snout
+  speciesRestriction: [Goblin]
+  forcedColoring: true
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/markings/goblin/nose_markings.rsi
+    state: m_goblin_nose_sniffer
+
+- type: marking
+  id: NoseGoblin4
+  bodyPart: Head
+  markingCategory: Snout
+  speciesRestriction: [Goblin]
+  forcedColoring: true
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/markings/goblin/nose_markings.rsi
+    state: m_goblin_nose_hook
+
+- type: marking
+  id: NoseGoblin5
+  bodyPart: Head
+  markingCategory: Snout
+  speciesRestriction: [Goblin]
+  forcedColoring: true
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/markings/goblin/nose_markings.rsi
+    state: m_goblin_nose_wobble

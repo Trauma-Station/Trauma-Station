@@ -1,2 +1,2 @@
 names-goblin-dataset-1 = bimbo
-names-goblin-dataset-1 = baggins
+names-goblin-dataset-2 = baggins

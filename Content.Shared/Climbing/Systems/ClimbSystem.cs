@@ -68,6 +68,7 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
+using Content.Trauma.Common.ClimbBonus;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics;
@@ -280,7 +281,13 @@ public sealed partial class ClimbSystem : VirtualController
         if (ev.Cancelled)
             return false;
 
-        var args = new DoAfterArgs(EntityManager, user, comp.ClimbDelay, new ClimbDoAfterEvent(),
+        // <Trauma>
+        var doAfterTime = comp.ClimbDelay;
+        if (TryComp<ClimbBoostComponent>(user, out var climb))
+            doAfterTime /= climb.Coefficient;
+        // </Trauma>
+
+        var args = new DoAfterArgs(EntityManager, user, doAfterTime, new ClimbDoAfterEvent(), // Trauma Changed doAfterTime
             entityToMove,
             target: climbable,
             used: entityToMove)
