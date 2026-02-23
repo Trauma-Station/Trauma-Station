@@ -31,7 +31,7 @@
         Caustic: 0.75
   - type: ExplosionResistance
     damageCoefficient: 0.75
-  - type: FaceHuggerBlocker    
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: [ ClothingHeadHelmetArmoredBase, BaseRevMajorContraband ]
@@ -63,4 +63,4 @@
     damageCoefficient: 0.90
   - type: FireProtection
     reduction: 0.2
-  - type: FaceHuggerBlocker    
+  - type: FaceHuggerBlocker
