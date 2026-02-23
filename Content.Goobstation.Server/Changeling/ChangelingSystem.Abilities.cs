@@ -304,7 +304,7 @@ public sealed partial class ChangelingSystem
 
         foreach (var implant in implanted.ImplantContainer.ContainedEntities)
         {
-            if (Prototype(implant).ID == id)
+            if (Prototype(implant)?.ID == id)
                 return true;
         }
 
