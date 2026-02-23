@@ -192,6 +192,8 @@ public sealed partial class BodySystem
             (BodyPartType.Leg, BodyPartSymmetry.Right) => TargetBodyPart.RightLeg,
             (BodyPartType.Foot, BodyPartSymmetry.Left) => TargetBodyPart.LeftFoot,
             (BodyPartType.Foot, BodyPartSymmetry.Right) => TargetBodyPart.RightFoot,
+            (BodyPartType.Tail, _) => TargetBodyPart.Tail,
+            (BodyPartType.Wings, _) => TargetBodyPart.Wings,
             _ => TargetBodyPart.Chest,
         };
     }
@@ -214,6 +216,8 @@ public sealed partial class BodySystem
             TargetBodyPart.LeftFoot => (BodyPartType.Foot, BodyPartSymmetry.Left),
             TargetBodyPart.RightLeg => (BodyPartType.Leg, BodyPartSymmetry.Right),
             TargetBodyPart.RightFoot => (BodyPartType.Foot, BodyPartSymmetry.Right),
+            TargetBodyPart.Tail => (BodyPartType.Tail, BodyPartSymmetry.None),
+            TargetBodyPart.Wings => (BodyPartType.Wings, BodyPartSymmetry.None),
             _ => (BodyPartType.Torso, BodyPartSymmetry.None)
         };
     }

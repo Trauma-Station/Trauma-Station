@@ -17,5 +17,6 @@ public enum BodyPartType : byte
     Leg = 1 << 4,
     Foot = 1 << 5,
     Tail = 1 << 6,
+    Wings = 1 << 7,
     Vital = Torso | Head
 }
