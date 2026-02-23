@@ -1,8 +1,8 @@
-using Content.Shared._RMC14.Weapons.Ranged.Ammo;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
+using Content.Trauma.Shared.Weapons.Ranged.Ammo;
 using Robust.Shared.Random;
 
-namespace Content.Shared._RMC14.Weapons.Ranged;
+namespace Content.Trauma.Shared.Weapons.Ranged;
 
 public sealed class BulletholeSystem : EntitySystem
 {
@@ -20,7 +20,7 @@ public sealed class BulletholeSystem : EntitySystem
 
     private void OnVisualsDamageChangedEvent(Entity<BulletholeComponent> ent, ref DamageChangedEvent args)
     {
-        if (!TryComp(args.Tool, out BulletholeGeneratorComponent? bulletholeGeneratorComponent))
+        if (!TryComp(args.Origin, out BulletholeGeneratorComponent? bulletholeGeneratorComponent))
             return;
 
         ent.Comp.BulletholeCount++;

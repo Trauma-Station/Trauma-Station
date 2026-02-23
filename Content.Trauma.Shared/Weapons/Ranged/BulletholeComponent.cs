@@ -1,7 +1,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.Weapons.Ranged;
+namespace Content.Trauma.Shared.Weapons.Ranged;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(BulletholeSystem))]

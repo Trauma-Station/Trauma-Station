@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.Weapons.Ranged.Ammo;
+namespace Content.Trauma.Shared.Weapons.Ranged.Ammo;
 
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(BulletholeSystem))]
