@@ -190,7 +190,7 @@ public sealed partial class ChangelingIdentityComponent : Component
     /// <summary>
     ///     Total absorbed DNA. Counts towards objectives.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField, AutoNetworkedField]
     public int TotalAbsorbedEntities = 0;
 
     /// <summary>

@@ -59,6 +59,7 @@ using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Implants.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Nutrition.Components;
@@ -181,12 +182,10 @@ public sealed partial class ChangelingSystem
 
     private void OnAbsorbDoAfter(EntityUid uid, ChangelingIdentityComponent comp, ref AbsorbDNADoAfterEvent args)
     {
-        if (args.Args.Target == null)
-            return;
-
-        var target = args.Args.Target.Value;
-
-        if (args.Cancelled || HasComp<AbsorbedComponent>(target) || (!IsIncapacitated(target) && !IsHardGrabbed(target)))
+        if (args.Cancelled ||
+            args.Args.Target is not {} target ||
+            HasComp<AbsorbedComponent>(target) ||
+            (!IsIncapacitated(target) && !IsHardGrabbed(target)))
             return;
 
         PlayMeatySound(args.User, comp);
@@ -245,6 +244,7 @@ public sealed partial class ChangelingSystem
         {
             comp.TotalAbsorbedEntities++;
             comp.TotalChangelingsAbsorbed += bonusChangelingAbsorbs;
+            Dirty(uid, comp);
         }
 
         TryStealDNA(uid, target, comp, objBool);
@@ -289,10 +289,26 @@ public sealed partial class ChangelingSystem
             return;
         }
 
-        if (HasComp<MindShieldComponent>(target))
+        if (HasComp<MindShieldComponent>(target) && !HasImplant(uid, comp.FakeMindShieldId))
+        {
             _subdermalImplant.AddImplant(uid, comp.FakeMindShieldId);
+        }
 
         TryTransform(uid, comp);
+    }
+
+    private bool HasImplant(EntityUid uid, [ForbidLiteral] EntProtoId id)
+    {
+        if (!TryComp<ImplantedComponent>(uid, out var implanted))
+            return false;
+
+        foreach (var implant in implanted.ImplantContainer.ContainedEntities)
+        {
+            if (Prototype(implant) == id)
+                return true;
+        }
+
+        return false;
     }
 
     private void OnAbsorbBiomatter(EntityUid uid, ChangelingIdentityComponent comp, ref AbsorbBiomatterEvent args)
@@ -388,7 +404,7 @@ public sealed partial class ChangelingSystem
             return;
         }
 
-        var selected = comp.AbsorbedDNA.ToArray()[comp.AbsorbedDNAIndex];
+        var selected = comp.AbsorbedDNA[comp.AbsorbedDNAIndex];
         comp.SelectedForm = selected;
         Popup.PopupEntity(Loc.GetString("changeling-transform-cycle", ("target", selected.Name)), uid, uid);
         args.Handled = true;
