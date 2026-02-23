@@ -9,7 +9,7 @@ namespace Content.Client.Humanoid;
 public sealed class EyeColorPicker : Control
 {
     // <Trauma>
-    [Dependency] private readonly IGameTiming _timing = default;
+    [Dependency] private readonly IGameTiming _timing = default!;
     private uint _lastColorUpdate;
     // </Trauma>
 
