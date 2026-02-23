@@ -11,8 +11,8 @@
       125: Critical
       175: Dead
   - type: Stamina
-    animationThreshold: 50
-    baseCritThreshold: 80
+    animationThreshold: 40
+    baseCritThreshold: 75
   - type: Inventory
     displacements:
       jumpsuit:
