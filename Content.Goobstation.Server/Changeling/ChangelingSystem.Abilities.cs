@@ -297,7 +297,7 @@ public sealed partial class ChangelingSystem
         TryTransform(uid, comp);
     }
 
-    private bool HasImplant(EntityUid uid, [ForbidLiteral] EntProtoId id)
+    private bool HasImplant(EntityUid uid, [ForbidLiteral] string id)
     {
         if (!TryComp<ImplantedComponent>(uid, out var implanted))
             return false;
