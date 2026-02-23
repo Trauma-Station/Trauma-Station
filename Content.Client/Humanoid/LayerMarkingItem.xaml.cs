@@ -21,7 +21,7 @@ namespace Content.Client.Humanoid;
 public sealed partial class LayerMarkingItem : BoxContainer, ISearchableControl
 {
     // <Trauma>
-    [Dependency] private readonly IGameTiming _timing = default;
+    [Dependency] private readonly IGameTiming _timing = default!;
     private uint _lastColorUpdate;
     // </Trauma>
     [Dependency] private readonly IEntityManager _entity = default!;
