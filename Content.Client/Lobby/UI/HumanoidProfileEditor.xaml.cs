@@ -3,6 +3,7 @@ using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Barks;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Timing;
 // </Trauma>
 using System.IO;
 using System.Linq;
@@ -47,6 +48,10 @@ namespace Content.Client.Lobby.UI
     [GenerateTypedNameReferences]
     public sealed partial class HumanoidProfileEditor : BoxContainer
     {
+        // <Trauma>
+        [Dependency] private readonly IGameTiming _timing = default!;
+        private uint _lastColorUpdate;
+        // </Trauma>
         private readonly IClientPreferencesManager _preferencesManager;
         private readonly IConfigurationManager _cfgManager;
         private readonly IEntityManager _entManager;
@@ -126,6 +131,7 @@ namespace Content.Client.Lobby.UI
             MarkingManager markings)
         {
             RobustXamlLoader.Load(this);
+            IoCManager.InjectDependencies(this); // Trauma - did you know IoC exists?
             _sawmill = logManager.GetSawmill("profile.editor");
             _cfgManager = configurationManager;
             _entManager = entManager;
@@ -258,6 +264,13 @@ namespace Content.Client.Lobby.UI
             _rgbSkinColorSelector.SelectorType = ColorSelectorSliders.ColorSelectorType.Hsv; // defaults color selector to HSV
             _rgbSkinColorSelector.OnColorChanged += _ =>
             {
+                // <Trauma> - dont lag the shit out of hte ui
+                var now = _timing.CurFrame;
+                if (_lastColorUpdate == now)
+                    return;
+
+                _lastColorUpdate = now;
+                // </Trauma>
                 OnSkinColorOnValueChanged();
             };
 
