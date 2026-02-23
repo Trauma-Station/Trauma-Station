@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "FairlySadPanda (Discord/Github)",
+    "copyright": "John John",
     "size": {
         "x": 32,
         "y": 32
@@ -12,10 +12,6 @@
     "states": [
         {
             "name": "jumpsuit",
-            "directions": 4
-        },
-        {
-            "name": "jumpsuit-female",
             "directions": 4
         },
         {

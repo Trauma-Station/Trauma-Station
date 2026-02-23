@@ -1,0 +1,61 @@
+- type: language
+  id: Gobbish
+  isVisibleLanguage: true
+  speech:
+    color: "#3af63f"
+    fontId: LDFComicSans # Delta fix fonts pls
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 7
+    maxSyllables: 15
+    replacement:
+    - gobo
+    - gabb
+    - goo
+    - hee
+    - jagja
+    - gooban
+    - goba
+    - goblin
+    - bah
+    - blahh
+    - heh
+    - heh
+    - hah
+    - hee
+    - he
+    - blurt
+    - boop
+    - mimi
+    - meep
+    - goop
+    - golp
+    - gold
+    - ga
+    - ge
+    - go
+    - ba
+    - blat
+    - mook
+    - mo
+    - ba
+    - gloop
+    - goup
+    - gla
+    - gup
+    - glup
+    - galup
+    - gooz
+    - blat
+    - blahhh
+    - boop
+    - ma
+    - mama
+    - moob
+    - bloob
+    - blop
+    - galorp
+    - ha
+    - he he he
+    - glooap
+    - gaop

@@ -234,6 +234,7 @@
     - Freespeak
     - Tradeband
     - NewKinPidgin
+    - Gobbish
     understands:
     - TauCetiBasic # Add individual languages so they can understand without understanding animals.
     - Bubblish
@@ -248,6 +249,7 @@
     - Freespeak
     - Tradeband
     - NewKinPidgin
+    - Gobbish
   # Einstein Engines - Language end
   - type: Vocal
     sounds:

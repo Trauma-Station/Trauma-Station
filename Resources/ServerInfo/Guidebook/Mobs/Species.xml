@@ -9,6 +9,7 @@
     <GuideEntityEmbed Entity="AppearanceIPC" Caption="IPC"/>
     <GuideEntityEmbed Entity="AppearanceMoth" Caption="Moth Person"/>
     <GuideEntityEmbed Entity="AppearanceReptilian" Caption="Reptilian"/>
+    <GuideEntityEmbed Entity="AppearanceGoblin" Caption="Goblin"/>
   </Box>
   <Box>
     <GuideEntityEmbed Entity="AppearanceArachnid" Caption="Arachnid"/>

@@ -116,6 +116,8 @@
   id: OrganGoblinExternal
   abstract: true
   components:
+  - type: Woundable
+    boneEntity: BoneWeak
   - type: Sprite
     sprite: _Trauma/Mobs/Species/Goblin/parts.rsi
   - type: VisualOrgan
@@ -137,6 +139,15 @@
   parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganGoblinExternal ]
   id: OrganGoblinHead
   components:
+  - type: OrganComponents
+    onAdd:
+    - type: LanguageKnowledge
+      speaks:
+      - TauCetiBasic
+      - Gobbish
+      understands:
+      - TauCetiBasic
+      - Gobbish
   - type: VisualOrganMarkings
     hideableLayers:
     - enum.HumanoidVisualLayers.Hair
@@ -186,7 +197,7 @@
   id: OrganGoblinBrain
 
 - type: entity
-  parent: [ OrganBaseEyes, OrganGoblinInternal, OrganGoblinExternal ]
+  parent: [ OrganBaseEyes, OrganGoblinInternal ]
   id: OrganGoblinEyes
   components:
   - type: OrganComponents

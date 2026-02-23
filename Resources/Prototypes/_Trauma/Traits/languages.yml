@@ -111,3 +111,19 @@
     - NewKinPidgin
   languagesUnderstood:
     - NewKinPidgin
+
+- type: trait
+  id: Gobbish
+  name: language-Gobbish-name
+  description: language-Gobbish-description
+  category: LanguageTraits
+  cost: 2
+  blacklist:
+    components:
+    - BorgChassis
+  components:
+  - type: LanguageSpeaker
+  languagesSpoken:
+  - Gobbish
+  languagesUnderstood:
+  - Gobbish
