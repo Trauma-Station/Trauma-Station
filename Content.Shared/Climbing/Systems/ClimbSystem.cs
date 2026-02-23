@@ -68,7 +68,7 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
-using Content.Trauma.Common.ClimbBonus;
+using Content.Trauma.Common.ClimbBonus; // Trauma
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics;
