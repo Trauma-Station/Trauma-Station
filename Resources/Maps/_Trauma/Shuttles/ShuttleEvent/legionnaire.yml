@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 264.0.0
+  engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 01/17/2026 06:05:56
-  entityCount: 503
+  time: 02/24/2026 10:22:36
+  entityCount: 509
 maps: []
 grids:
 - 2
@@ -27,9 +27,8 @@ entities:
   - uid: 2
     components:
     - type: MetaData
-      name: grid
+      name: Legionnaire
     - type: Transform
-      pos: -2.03125,-0.5
       parent: invalid
     - type: MapGrid
       chunks:
@@ -361,44 +360,17 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles:
-          - 21.824879
-          - 82.10312
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
         - volume: 2500
           immutable: True
-          moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+          moles: {}
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
+    - type: TileHistory
+      chunkHistory: {}
+    - type: ExplosionAirtightGrid
 - proto: ActionChangeVoiceMask
   entities:
   - uid: 491
@@ -408,8 +380,8 @@ entities:
     - type: Transform
       parent: 490
     - type: Action
-      container: 490
       originalIconColor: '#FFFFFFFF'
+      container: 490
       attachedEntity: 448
 - proto: ActionToggleInternals
   entities:
@@ -420,8 +392,8 @@ entities:
     - type: Transform
       parent: 178
     - type: Action
-      container: 178
       originalIconColor: '#FFFFFFFF'
+      container: 178
   - uid: 181
     mapInit: true
     paused: true
@@ -429,8 +401,8 @@ entities:
     - type: Transform
       parent: 180
     - type: Action
-      container: 180
       originalIconColor: '#FFFFFFFF'
+      container: 180
 - proto: AirAlarm
   entities:
   - uid: 159
@@ -551,6 +523,24 @@ entities:
     - type: Transform
       pos: 6.5,5.5
       parent: 2
+  - uid: 100
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 7.5,1.5
+      parent: 2
+  - uid: 105
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,-1.5
+      parent: 2
+  - uid: 157
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,-1.5
+      parent: 2
 - proto: AtmosDeviceFanDirectional
   entities:
   - uid: 130
@@ -583,11 +573,6 @@ entities:
     - type: Transform
       pos: 6.5,3.5
       parent: 2
-  - uid: 94
-    components:
-    - type: Transform
-      pos: 6.5,2.5
-      parent: 2
   - uid: 95
     components:
     - type: Transform
@@ -613,11 +598,6 @@ entities:
     - type: Transform
       pos: 5.5,-0.5
       parent: 2
-  - uid: 100
-    components:
-    - type: Transform
-      pos: 4.5,-0.5
-      parent: 2
   - uid: 101
     components:
     - type: Transform
@@ -637,11 +617,6 @@ entities:
     components:
     - type: Transform
       pos: 6.5,-0.5
-      parent: 2
-  - uid: 105
-    components:
-    - type: Transform
-      pos: 7.5,-0.5
       parent: 2
   - uid: 106
     components:
@@ -903,6 +878,21 @@ entities:
     - type: Transform
       pos: 11.5,7.5
       parent: 2
+  - uid: 504
+    components:
+    - type: Transform
+      pos: 2.5,-1.5
+      parent: 2
+  - uid: 505
+    components:
+    - type: Transform
+      pos: 9.5,-1.5
+      parent: 2
+  - uid: 506
+    components:
+    - type: Transform
+      pos: 7.5,1.5
+      parent: 2
 - proto: CableHV
   entities:
   - uid: 89
@@ -1001,6 +991,26 @@ entities:
     components:
     - type: Transform
       pos: 1.5,0.5
+      parent: 2
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 7.5,-0.5
+      parent: 2
+  - uid: 507
+    components:
+    - type: Transform
+      pos: 8.5,-0.5
+      parent: 2
+  - uid: 508
+    components:
+    - type: Transform
+      pos: 9.5,-0.5
+      parent: 2
+  - uid: 509
+    components:
+    - type: Transform
+      pos: 9.5,-1.5
       parent: 2
 - proto: Catwalk
   entities:
@@ -1218,8 +1228,8 @@ entities:
     - type: Transform
       parent: 448
     - type: Clothing
-      inSlotFlag: EYES
       inSlot: eyes
+      inSlotFlag: EYES
     - type: Physics
       canCollide: False
 - proto: ClothingHandsChameleon
@@ -1236,8 +1246,8 @@ entities:
     - type: Transform
       parent: 448
     - type: Clothing
-      inSlotFlag: HEAD
       inSlot: head
+      inSlotFlag: HEAD
     - type: Physics
       canCollide: False
 - proto: ClothingHeadsetChameleon
@@ -1256,8 +1266,8 @@ entities:
     - type: VoiceMask
       actionEntity: 491
     - type: Clothing
-      inSlotFlag: MASK
       inSlot: mask
+      inSlotFlag: MASK
     - type: Physics
       canCollide: False
     - type: ActionsContainer
@@ -1273,8 +1283,8 @@ entities:
     - type: Transform
       parent: 448
     - type: Clothing
-      inSlotFlag: NECK
       inSlot: neck
+      inSlotFlag: NECK
     - type: Physics
       canCollide: False
 - proto: ClothingOuterChameleon
@@ -1284,8 +1294,8 @@ entities:
     - type: Transform
       parent: 448
     - type: Clothing
-      inSlotFlag: OUTERCLOTHING
       inSlot: outerClothing
+      inSlotFlag: OUTERCLOTHING
     - type: Physics
       canCollide: False
 - proto: ClothingShoesChameleon
@@ -1302,8 +1312,8 @@ entities:
     - type: Transform
       parent: 448
     - type: Clothing
-      inSlotFlag: INNERCLOTHING
       inSlot: jumpsuit
+      inSlotFlag: INNERCLOTHING
     - type: Physics
       canCollide: False
 - proto: ComputerGunneryConsole
@@ -1357,8 +1367,6 @@ entities:
         actions: !type:Container
           ents:
           - 179
-- proto: DoubleEmergencyWaterVaporTankFilled
-  entities:
   - uid: 180
     components:
     - type: Transform
@@ -1868,13 +1876,6 @@ entities:
     components:
     - type: Transform
       pos: 9.5,1.5
-      parent: 2
-- proto: MachineFTLDrive
-  entities:
-  - uid: 157
-    components:
-    - type: Transform
-      pos: 7.5,1.5
       parent: 2
 - proto: Mannequin
   entities:

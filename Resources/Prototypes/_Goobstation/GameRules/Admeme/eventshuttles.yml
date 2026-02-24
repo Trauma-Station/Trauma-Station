@@ -122,7 +122,7 @@
     chaosScore: 400
   - type: RuleGrids
   - type: LoadMapRule
-    gridPath: /Maps/_Goobstation/Shuttles/ShuttleEvent/Legionnaire.yml
+    gridPath: /Maps/_Trauma/Shuttles/ShuttleEvent/legionnaire.yml
   - type: AntagLoadProfileRule
     speciesOverrideBlacklist:
     - IPC
