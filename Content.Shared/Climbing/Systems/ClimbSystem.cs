@@ -53,7 +53,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Common.ClimbBonus; // Trauma
+// <Trauma>
+using Content.Trauma.Common.ClimbBonus;
+// </Trauma>
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Climbing.Components;
@@ -283,10 +285,10 @@ public sealed partial class ClimbSystem : VirtualController
 
         // <Trauma>
         var doAfterTime = comp.ClimbDelay;
-        var Modev = new ClimbBoostModifierEvent();
-        RaiseLocalEvent(user, ref Modev);
-        if (Modev.Handled && user == entityToMove)
-            doAfterTime /= Modev.Coefficient;
+        var ModifierEv = new ClimbBoostModifierEvent(user, entityToMove, null);
+        RaiseLocalEvent(entityToMove, ref ModifierEv);
+        if (ModifierEv.Coefficient != null)
+            doAfterTime /= ModifierEv.Coefficient.Value;
         // </Trauma>
 
         var args = new DoAfterArgs(EntityManager, user, doAfterTime, new ClimbDoAfterEvent(), // Trauma Changed doAfterTime

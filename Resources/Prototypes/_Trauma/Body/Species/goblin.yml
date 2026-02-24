@@ -72,7 +72,6 @@
     - Gobbish
   - type: Damageable
     damageModifierSet: Goblin
-  - type: Mutatable
   - type: Fixtures
     fixtures:
       fix1:
@@ -229,7 +228,6 @@
     specialDigestible:
       tags:
       - Meat
-      - Crayon
     isSpecialDigestibleExclusive: false
 
 - type: entity

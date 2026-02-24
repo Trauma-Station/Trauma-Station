@@ -15,7 +15,7 @@ public sealed class ClimbBoostSystem : EntitySystem
 
     private void OnClimbMod(Entity<ClimbBoostComponent> ent, ref ClimbBoostModifierEvent args)
     {
-        args.Handled = true;
-        args.Coefficient = ent.Comp.Coefficient;
+        if (args.User == args.Target)
+            args.Coefficient = ent.Comp.Coefficient;
     }
 }
