@@ -49,11 +49,3 @@ reagent-desc-rororium = A strange substance which fills the cores of the hivelor
 reagent-name-lye = lye
 reagent-desc-lye = A translucent, orange, alkaline solution used in traditional soap production.
 
-reagent-name-calcium-carbonate = calcium carbonate
-reagent-desc-calcium-carbonate = Also known as lime, typically found in limestone and egg shells.
-
-reagent-name-calcium-oxide = calcium oxide
-reagent-desc-calcium-oxide = Also known as quicklime, used in cement, reacts with water to produce heat and calcium hydroxide
-
-reagent-name-calcium-hydroxide = calcium hydroxide
-reagent-desc-calcium-hydroxide = The result of calcium oxide reacting with water.
