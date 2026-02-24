@@ -107,8 +107,6 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
-      enum.StoreUiKey.Key: # Goob - changelings
-        type: StoreBoundUserInterface
   - type: UseDelay
     delay: 0.5
   - type: Speech

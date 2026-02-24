@@ -130,10 +130,8 @@ public sealed partial class ChangelingSystem
 
     private void OnOpenEvolutionMenu(EntityUid uid, ChangelingIdentityComponent comp, ref OpenEvolutionMenuEvent args)
     {
-        if (!TryComp<StoreComponent>(uid, out var store))
-            return;
-
-        _store.ToggleUi(uid, uid, store);
+        if (GetStore(uid) is {} store)
+            _store.ToggleUi(uid, store.Owner, store.Comp);
     }
 
     private void OnAbsorb(EntityUid uid, ChangelingIdentityComponent comp, ref AbsorbDNAEvent args)
@@ -252,14 +250,14 @@ public sealed partial class ChangelingSystem
         Popup.PopupEntity(popup, args.User, args.User);
         comp.MaxChemicals += bonusChemicals;
 
-        if (TryComp<StoreComponent>(args.User, out var store))
-        {
-            _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { "EvolutionPoint", bonusEvolutionPoints } }, args.User, store);
-            _store.UpdateUserInterface(args.User, args.User, store);
-        }
-
         if (Mind.TryGetMind(uid, out var mindId, out var mind))
         {
+            if (GetMindStore((mindId, mind)) is {} store)
+            {
+                _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { "EvolutionPoint", bonusEvolutionPoints } }, store.Owner, store.Comp);
+                _store.UpdateUserInterface(args.User, store.Owner, store.Comp);
+            }
+
             if (Mind.TryGetObjectiveComp<AbsorbConditionComponent>(mindId, out var absorbObj, mind)
                 && !HasComp<PartialAbsorbableComponent>(target))
                 absorbObj.Absorbed += 1;
@@ -611,7 +609,7 @@ public sealed partial class ChangelingSystem
             return;
         }
 
-        if (Mind.GetMind(uid) is not {} mind || !TryComp<StoreComponent>(uid, out var storeComp))
+        if (Mind.GetMind(uid) is not {} mind)
             return;
 
         comp.IsInLastResort = false;
@@ -620,7 +618,6 @@ public sealed partial class ChangelingSystem
         var eggComp = EnsureComp<ChangelingEggComponent>(target);
         eggComp.lingComp = comp;
         eggComp.lingMind = mind;
-        eggComp.lingStore = _serialization.CreateCopy(storeComp, notNullableOverride: true);
         eggComp.AugmentedEyesightPurchased = HasComp<Shared.Overlays.ThermalVisionComponent>(uid);
 
         EnsureComp<AbsorbedComponent>(target);

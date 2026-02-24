@@ -98,6 +98,8 @@ using Content.Shared.Preferences;
 using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Revolutionary.Components;
+using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Content.Shared.Zombies;
@@ -131,6 +133,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
     [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private readonly SharedRoleSystem _role = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly SharedEmpSystem _emp = default!;
@@ -350,6 +353,24 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     }
 
     #region Helper Methods
+
+    /// <summary>
+    /// Get the store from a mob's changeling mind role.
+    /// Returns null if it has no mind or no role.
+    /// </summary>
+    public Entity<StoreComponent>? GetStore(EntityUid mob)
+        => Mind.GetMind(mob) is {} mind && GetMindStore(mind) is {} store
+            ? store
+            : null;
+
+    /// <summary>
+    /// Get the store from a mind entity's changeling mind role.
+    /// Returns null if it has no role.
+    /// </summary>
+    public Entity<StoreComponent>? GetMindStore(Entity<MindComponent?> mind)
+        => _role.MindHasRole<ChangelingRoleComponent>(mind, out var role)
+            ? (role.Value.Owner, Comp<StoreComponent>(role.Value.Owner)) // will throw if the role is missing store component
+            : null;
 
     public void DoScreech(EntityUid uid, ChangelingIdentityComponent comp)
     {
