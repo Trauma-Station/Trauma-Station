@@ -156200,9 +156200,6 @@ entities:
     - type: Transform
       pos: -71.555115,-49.870975
       parent: 2
-    - type: Construction
-      step: 3
-      edge: 0
 - proto: GyroscopeUnanchored
   entities:
   - uid: 23852
