@@ -285,10 +285,10 @@ public sealed partial class ClimbSystem : VirtualController
 
         // <Trauma>
         var doAfterTime = comp.ClimbDelay;
-        var ModifierEv = new ClimbBoostModifierEvent(user, entityToMove, null);
-        RaiseLocalEvent(entityToMove, ref ModifierEv);
-        if (ModifierEv.Coefficient != null)
-            doAfterTime /= ModifierEv.Coefficient.Value;
+        var modifierev = new ClimbBoostModifierEvent(user, entityToMove, null);
+        RaiseLocalEvent(entityToMove, ref modifierev);
+        if (modifierev.Coefficient != null)
+            doAfterTime /= modifierev.Coefficient.Value;
         // </Trauma>
 
         var args = new DoAfterArgs(EntityManager, user, doAfterTime, new ClimbDoAfterEvent(), // Trauma Changed doAfterTime
