@@ -48,4 +48,3 @@ reagent-desc-rororium = A strange substance which fills the cores of the hivelor
 
 reagent-name-lye = lye
 reagent-desc-lye = A translucent, orange, alkaline solution used in traditional soap production.
-
