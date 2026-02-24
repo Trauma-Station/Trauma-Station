@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.MartialArts;
+using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Weapons.Melee;
 // </Trauma>
 using Content.Shared.ActionBlocker;
@@ -278,8 +279,15 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
         if (!args.CanAccess || !args.CanInteract)
             return;
 
+        // <Trauma>
+        var target = args.Target;
+        if (TryComp(target, out TargetInteractionRelayComponent? relay) && relay.RelayPulls &&
+            Exists(relay.RelayEntity))
+            target = relay.RelayEntity.Value;
+        // </Trauma>
+
         // Are they trying to pull themselves up by their bootstraps?
-        if (args.User == args.Target)
+        if (args.User == target) // Trama - args.Target -> target
             return;
 
         //TODO VERB ICONS add pulling icon
@@ -293,12 +301,12 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
             };
             args.Verbs.Add(verb);
         }
-        else if (CanPull(args.User, args.Target))
+        else if (CanPull(args.User, target)) // Trauma - args.Target -> target
         {
             Verb verb = new()
             {
                 Text = Loc.GetString("pulling-verb-get-data-text"),
-                Act = () => TryStartPull(args.User, args.Target),
+                Act = () => TryStartPull(args.User, target), // Trauma - args.Target -> target
                 DoContactInteraction = false // pulling handle its own contact interaction.
             };
             args.Verbs.Add(verb);

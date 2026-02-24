@@ -525,7 +525,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
             RemCompDeferred<DelayedKnockdownComponent>(uid);
 
-            var toHeal = AllDamage * multiplier;
+            var toHeal = -AllDamage * multiplier;
 
             if (shouldHeal && damageable != null)
             {

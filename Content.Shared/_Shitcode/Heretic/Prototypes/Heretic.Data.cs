@@ -9,6 +9,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 
+using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Heretic.Prototypes;
@@ -40,4 +41,11 @@ public sealed partial class HereticGraspUpgradeEvent : EntityEventArgs
 
     [DataField(required: true)]
     public ComponentRegistry AddedComponents = new();
+}
+
+[DataDefinition]
+public sealed partial class HereticRemoveActionEvent : EntityEventArgs
+{
+    [DataField(required: true)]
+    public EntProtoId Action;
 }

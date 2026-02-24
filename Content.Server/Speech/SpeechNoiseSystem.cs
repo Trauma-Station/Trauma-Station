@@ -37,8 +37,14 @@ namespace Content.Server.Speech
             // <Goob>
             var getSpeechSoundEv = new GetSpeechSoundEvent();
             RaiseLocalEvent(ent, ref getSpeechSoundEv);
-            if (getSpeechSoundEv.SpeechSoundProtoId == null ||
-                !_protoManager.TryIndex<SpeechSoundsPrototype>(getSpeechSoundEv.SpeechSoundProtoId, out var prototype))
+            SpeechSoundsPrototype? prototype;
+            if (getSpeechSoundEv.Handled)
+            {
+                if (getSpeechSoundEv.SpeechSoundProtoId is not { } protoId ||
+                    !_protoManager.TryIndex(protoId, out prototype))
+                    return null;
+            }
+            else
             {
                 if (ent.Comp.SpeechSounds == null)
                     return null;

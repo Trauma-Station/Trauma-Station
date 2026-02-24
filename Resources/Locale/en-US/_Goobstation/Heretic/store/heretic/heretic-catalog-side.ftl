@@ -199,3 +199,14 @@ knowledge-path-side-s8-maid-desc =
     Allows you to transmute five sheets of glass, any suit with sensors, and a pair of lungs to create a Maid in the Mirror.
     Maid in the Mirrors are decent combatants that can become incorporeal by phasing in and out of the mirror realm, serving as powerful scouts and ambushers.
     Their attacks also apply a stack of void chill.
+
+knowledge-path-side-s8-admonitions-name = Forest Admonitions
+knowledge-path-side-s8-admonitions-desc =
+    Where the pale fog covers the woods, we go unnoticed, until we are ready.
+
+    Replaces your Cloak of Shadow ability with Forest Admonitions.
+    SImilarly to shadow cloak, it conceals your identity but it lasts longer and gives lower movespeed bonus.
+    You are invisible in this form, but you are temporarily revealed by shooting, throwing or casting spells.
+    You are also visible to people close to you.
+    Forest Admonitions is harder to reveal by damage compared to Cloak Of Shadow, but it has longer cooldown as well.
+    While active, you also spread pale fog around your position, which muffles all audio, debuffs heathens and disables shadow cloak for other heretics.

@@ -373,7 +373,7 @@
     stage: 7
 
 - type: listing
-  id: HereticSidePath6Maid
+  id: HereticSidePath8Maid
   name: knowledge-path-side-s8-maid-name
   description: knowledge-path-side-s8-maid-desc
   icon: { sprite: _Goobstation/Heretic/eldritch_mobs.rsi, state: maid }
@@ -381,6 +381,25 @@
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
     - MaidInTheMirror
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSideT3
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 7
+
+- type: listing
+  id: HereticSidePath8Admonitions
+  name: knowledge-path-side-s8-admonitions-name
+  description: knowledge-path-side-s8-admonitions-desc
+  icon: { sprite: _Goobstation/Heretic/Effects/effects.rsi, state: pale }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - ForestAdmonitions
   cost:
     KnowledgePoint: 1
   categories:

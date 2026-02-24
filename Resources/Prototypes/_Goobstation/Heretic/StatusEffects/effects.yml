@@ -211,8 +211,27 @@
     sprintSpeedModifier: 1.25
     walkSpeedModifier: 1.25
   - type: HereticCloakedStatusEffect
-    component: ShadowCloaked
     loseFocusMessage: heretic-ability-lose-focus-shadow-cloak
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: ShadowCloaked
+
+- type: entity
+  parent: StatusEffectSpeed
+  id: ShadowCloakPaleStatusEffect
+  name: forest admonitions
+  components:
+  - type: StatusEffectAlert
+    alert: ForestAdmonitions
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 1.1
+    walkSpeedModifier: 1.1
+  - type: HereticCloakedStatusEffect
+    loseFocusMessage: heretic-ability-lose-focus-pale-cloak
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: ShadowCloaked
+      shadowCloakEntity: ShadowCloakEntityPale
 
 - type: entity
   parent: StatusEffectSlowdown
@@ -223,3 +242,11 @@
     sprintSpeedModifier: 0.75
     walkSpeedModifier: 0.75
 
+- type: entity
+  parent: StatusEffectSlowdown
+  id: PaleFogAffectedStatusEffect
+  name: pale fog affected
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.85
+    walkSpeedModifier: 0.85

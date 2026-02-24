@@ -11,6 +11,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Movement.Systems;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.Stealth;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Robust.Shared.Network;
@@ -31,6 +32,7 @@ public abstract class SharedShadowCloakSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private readonly DamageableSystem _dmg = default!;
+    [Dependency] private readonly SharedStealthSystem _stealth = default!;
 
     private static readonly ProtoId<TagPrototype> ActionTag = "ShadowCloakAction";
 
@@ -62,14 +64,20 @@ public abstract class SharedShadowCloakSystem : EntitySystem
 
     private void OnGetEmoteSound(Entity<ShadowCloakedComponent> ent, ref GetEmoteSoundsEvent args)
     {
-        if (GetShadowCloakEntity(ent) is not null)
-            args.EmoteSoundProtoId = ent.Comp.EmoteSounds;
+        if (args.Handled || GetShadowCloakEntity(ent) is not { } cloak)
+            return;
+
+        args.Handled = true;
+        args.EmoteSoundProtoId = cloak.Comp.EmoteSounds;
     }
 
     private void OnGetSpeechSound(Entity<ShadowCloakedComponent> ent, ref GetSpeechSoundEvent args)
     {
-        if (GetShadowCloakEntity(ent) is not null)
-            args.SpeechSoundProtoId = ent.Comp.SpeechSounds;
+        if (args.Handled || GetShadowCloakEntity(ent) is not { } cloak)
+            return;
+
+        args.Handled = true;
+        args.SpeechSoundProtoId = cloak.Comp.SpeechSounds;
     }
 
     private void OnGetIdentityEntity(Entity<ShadowCloakedComponent> ent, ref GetIdentityRepresentationEntityEvent args)
@@ -86,9 +94,11 @@ public abstract class SharedShadowCloakSystem : EntitySystem
 
     private void OnTransformName(Entity<ShadowCloakedComponent> ent, ref TransformSpeakerNameEvent args)
     {
-        args.SpeechVerb = ent.Comp.SpeechVerb;
-        if (GetShadowCloakEntity(ent) is { } cloak)
-            args.VoiceName = Name(cloak);
+        if (GetShadowCloakEntity(ent) is not { } cloak)
+            return;
+
+        args.SpeechVerb = cloak.Comp.SpeechVerb;
+        args.VoiceName = Name(cloak);
     }
 
     private void OnDamage(Entity<ShadowCloakEntityComponent> ent, ref DamageChangedEvent args)
@@ -116,21 +126,25 @@ public abstract class SharedShadowCloakSystem : EntitySystem
         if (!args.DamageIncreased || args.DamageDelta == null)
             return;
 
-        ent.Comp.SustainedDamage += args.DamageDelta.GetTotal();
-
-        if (ent.Comp.SustainedDamage < ent.Comp.DamageBeforeReveal)
+        if (GetShadowCloakEntity(ent) is not { } cloak)
             return;
 
-        if (!_random.Prob(Math.Clamp(ent.Comp.SustainedDamage.Float() / 100f, 0f, 1f)))
+        cloak.Comp.SustainedDamage += args.DamageDelta.GetTotal();
+
+        if (cloak.Comp.SustainedDamage < cloak.Comp.DamageBeforeReveal)
             return;
 
-        if (ent.Comp.DebuffOnEarlyReveal)
+        var chance = Math.Clamp(cloak.Comp.SustainedDamage.Float() * cloak.Comp.RevealDamageMultiplier / 100f, 0f, 1f);
+        if (!_random.Prob(chance))
+            return;
+
+        if (cloak.Comp.DebuffOnEarlyReveal)
         {
-            _stun.KnockdownOrStun(ent, ent.Comp.KnockdownTime);
-            _status.TryUpdateStatusEffectDuration(ent, ent.Comp.SlowdownEffect, ent.Comp.SlowdownTime);
+            _stun.KnockdownOrStun(ent, cloak.Comp.KnockdownTime);
+            _status.TryUpdateStatusEffectDuration(ent, cloak.Comp.SlowdownEffect, cloak.Comp.SlowdownTime);
         }
 
-        ResetAbilityCooldown(ent, ent.Comp.ForceRevealCooldown);
+        ResetAbilityCooldown(ent, cloak.Comp.ForceRevealCooldown);
         RemoveShadowCloak(ent);
     }
 
@@ -144,7 +158,8 @@ public abstract class SharedShadowCloakSystem : EntitySystem
 
     private void OnGetDoAfterSpeed(Entity<ShadowCloakedComponent> ent, ref ModifyDoAfterDelayEvent args)
     {
-        args.Multiplier *= ent.Comp.DoAfterSlowdown;
+        if (GetShadowCloakEntity(ent) is { } cloak)
+            args.Multiplier *= cloak.Comp.DoAfterSlowdown;
     }
 
     /// <summary>
@@ -190,17 +205,21 @@ public abstract class SharedShadowCloakSystem : EntitySystem
 
         var xform = Transform(ent);
 
+        var revealCooldown = TimeSpan.FromMinutes(1);
         var shadowCloakQuery = GetEntityQuery<ShadowCloakEntityComponent>();
         var children = xform.ChildEnumerator;
         while (children.MoveNext(out var child))
         {
-            if (shadowCloakQuery.HasComp(child))
-                PredictedQueueDel(child);
+            if (!shadowCloakQuery.TryComp(child, out var cloak))
+                continue;
+
+            revealCooldown = cloak.RevealCooldown;
+            PredictedQueueDel(child);
         }
 
         _modifier.RefreshMovementSpeedModifiers(ent);
 
-        ResetAbilityCooldown(ent, ent.Comp.RevealCooldown);
+        ResetAbilityCooldown(ent, revealCooldown);
     }
 
     private void OnStartup(Entity<ShadowCloakedComponent> ent, ref ComponentStartup args)
@@ -245,7 +264,7 @@ public abstract class SharedShadowCloakSystem : EntitySystem
         }
     }
 
-    public EntityUid? GetShadowCloakEntity(EntityUid ent)
+    public Entity<ShadowCloakEntityComponent>? GetShadowCloakEntity(EntityUid ent)
     {
         var xform = Transform(ent);
 
@@ -253,12 +272,12 @@ public abstract class SharedShadowCloakSystem : EntitySystem
         var children = xform.ChildEnumerator;
         while (children.MoveNext(out var child))
         {
-            if (!shadowCloakQuery.TryComp(child, out var  shadowCloak))
+            if (!shadowCloakQuery.TryComp(child, out var shadowCloak))
                 continue;
 
             shadowCloak.User = ent;
 
-            return child;
+            return (child, shadowCloak);
         }
 
         return null;
@@ -279,9 +298,7 @@ public abstract class SharedShadowCloakSystem : EntitySystem
 
         foreach (var effect in effects)
         {
-            if (effect.Comp1.Component == "ShadowCloaked")
-                result = true;
-
+            result = true;
             PredictedQueueDel(effect.Owner);
         }
 

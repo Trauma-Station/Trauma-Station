@@ -29,9 +29,19 @@ public sealed partial class HereticAbilitySystem
         base.SubscribeSide();
 
         SubscribeLocalEvent<EventHereticCleave>(OnCleave);
-        SubscribeLocalEvent<HereticComponent, HereticGraspUpgradeEvent>(OnGraspUpgrade);
         SubscribeLocalEvent<EventHereticSpacePhase>(OnSpacePhase);
         SubscribeLocalEvent<EventMirrorJaunt>(OnMirrorJaunt);
+
+        SubscribeLocalEvent<HereticComponent, HereticGraspUpgradeEvent>(OnGraspUpgrade);
+        SubscribeLocalEvent<HereticComponent, HereticRemoveActionEvent>(OnRemoveAction);
+    }
+
+    private void OnRemoveAction(Entity<HereticComponent> ent, ref HereticRemoveActionEvent args)
+    {
+        if (!_actions.TryGetActionById(ent.Owner, args.Action, out var act))
+            return;
+
+        _actions.RemoveAction(act.Value.AsNullable());
     }
 
     private void OnGraspUpgrade(Entity<HereticComponent> ent, ref HereticGraspUpgradeEvent args)

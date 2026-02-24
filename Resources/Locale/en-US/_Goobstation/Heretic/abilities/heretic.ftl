@@ -22,6 +22,7 @@ heretic-ability-fail-space-phase-not-space = You must stand in space, or an outd
 heretic-ability-fail-mirror-jaunt-no-mirrors = There are no reflective surfaces nearby!
 
 heretic-ability-lose-focus-shadow-cloak = As you lose your focus, you are pulled out of the shadows!
+heretic-ability-lose-focus-pale-cloak = As you lose your focus, you are pulled out of the light!
 
 heretic-cosmic-rune-fail-star-mark = Blocked by star mark!
 heretic-cosmic-rune-fail-unlinked = No linked rune!

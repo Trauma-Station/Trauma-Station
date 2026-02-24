@@ -59,9 +59,9 @@ public sealed class ShadowCloakSystem : SharedShadowCloakSystem
             return;
 
         if (args.Added)
-            args.Sys.AddOverlay(cloak, args.Comp, ent);
+            args.Sys.AddOverlay(cloak.Owner, args.Comp, ent);
         else
-            args.Sys.RemoveOverlay(cloak, args.Comp);
+            args.Sys.RemoveOverlay(cloak.Owner, args.Comp);
     }
 
     protected override void Startup(Entity<ShadowCloakedComponent> ent)

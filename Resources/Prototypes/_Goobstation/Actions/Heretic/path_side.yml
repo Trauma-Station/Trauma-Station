@@ -133,3 +133,27 @@
     event: !type:EventMirrorJaunt
   - type: HereticAction
     requireMagicItem: true
+
+- type: entity
+  parent: BaseAction
+  id: ActionHereticForestAdmonitions
+  name: Forest Admonitions
+  description: Completely conceals your identity, and makes you invisible. Can be activated early to disable it. While cloaked, you move slightly faster, but undergo actions much slower. Taking damage while cloaked may cause it to lift suddenly. Spreads pale fog around while active.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    checkCanInteract: false
+    useDelay: 6
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Heretic/abilities_heretic.rsi
+      state: palecloak
+  - type: InstantAction
+    event: !type:EventHereticCloak
+      status: ShadowCloakPaleStatusEffect
+      lifetime: 360
+  - type: HereticAction
+    requireMagicItem: true
+  - type: Tag
+    tags:
+    - ShadowCloakAction

@@ -124,6 +124,22 @@
       - HideContextMenu
 
 - type: entity
+  id: BaseShadowCloakEntity
+  abstract: true
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Damageable
+  - type: RotationVisuals
+  - type: Appearance
+  - type: AnimationPlayer
+  - type: ShadowCloakEntity
+
+- type: entity
+  parent: BaseShadowCloakEntity
   id: ShadowCloakEntity
   save: false
   name: a shadow?
@@ -132,14 +148,9 @@
   - type: TimedDespawn
     lifetime: 180
   - type: Sprite
-    noRot: true
-    drawdepth: Mobs
     layers:
-      - sprite: _Goobstation/Heretic/Effects/effects.rsi
-        state: curse
-  - type: Clickable
-  - type: InteractionOutline
-  - type: Damageable
+    - sprite: _Goobstation/Heretic/Effects/effects.rsi
+      state: curse
   - type: Trail
     lifetime: 3.2
     frequency: 0.1
@@ -149,9 +160,29 @@
       sprite: /Textures/_Goobstation/Heretic/Effects/effects.rsi
       state: curse
   - type: EntityTrail
-  - type: RotationVisuals
-  - type: Appearance
-  - type: AnimationPlayer
+
+- type: entity
+  parent: BaseShadowCloakEntity
+  id: ShadowCloakEntityPale
+  save: false
+  name: a pale figure
+  description: There was nothing here a moment ago, but now you see the faintest outline of strange creature lurking in the woods. Its warm embrace siphons your strength, as death approaches peacefully. The forest hums the soothing lullaby and you become the part of its enternal hymn.
+  components:
+  - type: TimedDespawn
+    lifetime: 360
+  - type: Sprite
+    layers:
+    - sprite: _Goobstation/Heretic/Effects/effects.rsi
+      state: pale
+  - type: ShadowCloakEntity
+    emoteSounds: null
+    speechSounds: null
+    damageBeforeReveal: 35
+    revealDamageMultiplier: 1.5
+    sustainedDamageReductionRate: 1.5
+    revealCooldown: 90
+    forceRevealCooldown: 180
+  - type: ForestAdmonitionsEntity
 
 - type: entity
   id: EffectCosmicDiamond

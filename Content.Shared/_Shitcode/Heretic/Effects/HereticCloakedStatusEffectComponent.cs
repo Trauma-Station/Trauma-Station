@@ -6,9 +6,6 @@ namespace Content.Shared._Shitcode.Heretic.Effects;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class HereticCloakedStatusEffectComponent : Component
 {
-    [DataField(required: true)]
-    public string Component;
-
     [DataField]
     public bool RequiresFocus = true;
 

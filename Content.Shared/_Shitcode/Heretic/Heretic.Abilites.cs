@@ -180,11 +180,7 @@ public sealed partial class EventHereticFleshSurgery : InstantActionEvent, ITouc
     public EntProtoId TouchSpell { get; set; } = "TouchSpellFleshSurgery";
 }
 
-public sealed partial class EventHereticFleshPassive : HereticKnowledgeEvent;
-
 // void (+ upgrades)
-public sealed partial class EventHereticVoidPassiveT1 : HereticKnowledgeEvent;
-public sealed partial class EventHereticVoidPassiveT2 : HereticKnowledgeEvent;
 public sealed partial class HereticVoidBlastEvent : InstantActionEvent { }
 
 public sealed partial class HereticVoidBlinkEvent : WorldTargetActionEvent
@@ -245,7 +241,6 @@ public sealed partial class HereticVoidConduitEvent : InstantActionEvent
 }
 
 // blade (+ upgrades)
-public sealed partial class HereticDanceOfTheBrandEvent : HereticKnowledgeEvent;
 public sealed partial class EventHereticSacraments : InstantActionEvent
 {
     [DataField]
@@ -265,8 +260,6 @@ public sealed partial class EventHereticLastRefugee : InstantActionEvent { }
 public sealed partial class EventHereticShapeshift : InstantActionEvent;
 
 // rust
-public sealed partial class HereticLeechingWalkEvent : HereticKnowledgeEvent;
-
 public sealed partial class EventHereticRustConstruction : WorldTargetActionEvent
 {
     [DataField]
@@ -398,8 +391,6 @@ public sealed partial class ResetStarGazerConsciousnessEvent : InstantActionEven
 
 public sealed partial class StarGazerSeekMasterEvent : InstantActionEvent;
 
-public sealed partial class EventHereticCosmosPassive : HereticKnowledgeEvent;
-
 // side
 public sealed partial class EventHereticIceSpear : InstantActionEvent;
 
@@ -480,18 +471,6 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
 }
 
 // ascensions
-public sealed partial class HereticAscensionAshEvent : HereticKnowledgeEvent;
-
-public sealed partial class HereticAscensionVoidEvent : HereticKnowledgeEvent;
-
-public sealed partial class HereticAscensionFleshEvent : HereticKnowledgeEvent;
-
-public sealed partial class HereticAscensionLockEvent : HereticKnowledgeEvent;
-
-public sealed partial class HereticAscensionBladeEvent : HereticKnowledgeEvent;
-
-public sealed partial class HereticAscensionRustEvent : HereticKnowledgeEvent;
-
 public sealed partial class HereticAscensionCosmosEvent : HereticKnowledgeEvent;
 #endregion
 
@@ -512,8 +491,8 @@ public sealed class LaserBeamEndpointPositionEvent(NetEntity uid, MapCoordinates
     public MapCoordinates Coordinates = coords;
 }
 
-[ImplicitDataDefinitionForInheritors]
-public abstract partial class HereticKnowledgeEvent : EntityEventArgs
+[Virtual, DataDefinition, ImplicitDataDefinitionForInheritors]
+public partial class HereticKnowledgeEvent : EntityEventArgs
 {
     public EntityUid Heretic;
 

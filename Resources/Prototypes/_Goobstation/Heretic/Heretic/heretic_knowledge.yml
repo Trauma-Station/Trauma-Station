@@ -140,7 +140,7 @@
   actionPrototypes:
   - ActionHereticAscension1
   - ActionHereticAscension2
-  event: !type:HereticAscensionAshEvent
+  event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: SpecialLowTempImmunity
     - type: SpecialHighTempImmunity
@@ -170,7 +170,7 @@
   id: DanceOfTheBrand
   path: Blade
   stage: 4
-  event: !type:HereticDanceOfTheBrandEvent
+  event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: Ripostee
       data:
@@ -214,7 +214,7 @@
   id: MaelstromOfSilver
   path: Blade
   stage: 10
-  event: !type:HereticAscensionBladeEvent
+  event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: SilverMaelstrom
 
@@ -230,7 +230,7 @@
   id: GraspOfFlesh
   path: Flesh
   stage: 2
-  event: !type:EventHereticFleshPassive
+  event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: FleshPassive
 
@@ -286,7 +286,7 @@
   id: PriestFinalHymn
   path: Flesh
   stage: 10
-  event: !type:HereticAscensionFleshEvent
+  event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: SpecialLowTempImmunity
     - type: SpecialHighTempImmunity
@@ -305,7 +305,7 @@
   id: GraspOfVoid
   path: Void
   stage: 2
-  event: !type:EventHereticVoidPassiveT1
+  event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: SpecialLowTempImmunity
 
@@ -341,7 +341,7 @@
   id: SeekingBlade
   path: Void
   stage: 7
-  event: !type:EventHereticVoidPassiveT2
+  event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: SpecialBreathingImmunity
 
@@ -364,7 +364,7 @@
   id: WaltzAtTheEndOfTime
   stage: 10
   path: Void
-  event: !type:HereticAscensionVoidEvent
+  event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: SpecialLowTempImmunity
     - type: SpecialHighTempImmunity
@@ -395,7 +395,7 @@
   id: GraspOfRust
   path: Rust
   stage: 2
-  event: !type:HereticLeechingWalkEvent
+  event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: LeechingWalk
 
@@ -451,7 +451,7 @@
   id: RustbringersOath
   stage: 10
   path: Rust
-  event: !type:HereticAscensionRustEvent
+  event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: LeechingWalk
     - type: Rustbringer
@@ -468,7 +468,7 @@
   id: GraspOfCosmos
   path: Cosmos
   stage: 2
-  event: !type:EventHereticCosmosPassive
+  event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: CosmosPassive
 
@@ -680,3 +680,15 @@
   stage: 8
   ritualPrototypes:
   - RitualMaidInTheMirror
+
+- type: hereticKnowledge
+  id: ForestAdmonitions
+  sideKnowledge: true
+  stage: 8
+  actionPrototypes:
+  - ActionHereticForestAdmonitions
+  hereticEvent: !type:HereticRemoveActionEvent
+    action: ActionHereticShadowCloak
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: ForestAdmonitions

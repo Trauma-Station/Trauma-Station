@@ -16,4 +16,7 @@ public sealed partial class TargetInteractionRelayComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool RelayMelee = true;
+
+    [DataField, AutoNetworkedField]
+    public bool RelayPulls = true;
 }

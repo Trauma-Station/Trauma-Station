@@ -37,7 +37,7 @@ public sealed class ShadowCloakSystem : SharedShadowCloakSystem
 
         _accumulator = 0f;
 
-        var shadowCloakedQuery = EntityQueryEnumerator<ShadowCloakedComponent>();
+        var shadowCloakedQuery = EntityQueryEnumerator<ShadowCloakEntityComponent>();
         while (shadowCloakedQuery.MoveNext(out _, out var comp))
         {
             comp.SustainedDamage =

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/eeedcc9414cf114e19fbe3c556c923fbcdd01be8; cosmic_slash by Aviu00",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/eeedcc9414cf114e19fbe3c556c923fbcdd01be8; cosmic_slash and pale (recolor) by Aviu00",
   "size": {
     "x": 32,
     "y": 32
@@ -297,6 +297,52 @@
           0.1,
           0.1,
           0.1
+        ]
+      ]
+    },
+    {
+      "name": "pale",
+      "directions": 4,
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ],
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ],
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ],
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4
         ]
       ]
     },

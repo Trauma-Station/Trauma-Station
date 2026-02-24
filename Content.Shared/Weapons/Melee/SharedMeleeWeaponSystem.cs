@@ -430,7 +430,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
 
                 // <Trauma>
                 if (TryComp(target, out TargetInteractionRelayComponent? relay) && relay.RelayMelee &&
-                    Exists(relay.RelayEntity))
+                    Exists(relay.RelayEntity) && relay.RelayEntity.Value != target)
                 {
                     return AttemptAttack(user,
                         weaponUid,

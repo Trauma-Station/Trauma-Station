@@ -298,6 +298,12 @@ namespace Content.Shared.Interaction
             if (Deleted(uid))
                 return false;
 
+            // <Trauma>
+            if (_targetRelayQuery.TryComp(uid, out var relay) && relay.RelayPulls &&
+                Exists(relay.RelayEntity) && relay.RelayEntity.Value != uid)
+                return HandleTryPullObject(session, coords, relay.RelayEntity.Value);
+            // </Trauma>
+
             if (!InRangeUnobstructed(userEntity.Value, uid, popup: true))
                 return false;
 
@@ -435,7 +441,8 @@ namespace Content.Shared.Interaction
                 return;
 
             // <Trauma>
-            if (_targetRelayQuery.TryComp(target, out var targetRelay) && Exists(targetRelay.RelayEntity))
+            if (_targetRelayQuery.TryComp(target, out var targetRelay) && Exists(targetRelay.RelayEntity) &&
+                targetRelay.RelayEntity.Value != target)
             {
                 if (_actionBlockerSystem.CanInteract(user, target))
                 {
