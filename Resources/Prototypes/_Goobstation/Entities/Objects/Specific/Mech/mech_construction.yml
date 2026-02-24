@@ -81,6 +81,10 @@
   - type: Sprite
     noRot: true
     state: ripleymkii0
+  - type: Construction
+    graph: RipleyMKIIHarness
+    node: start
+    defaultTarget: ripleymkiiHarness
 
 # Clarke
 
@@ -211,6 +215,10 @@
   - type: Sprite
     noRot: true
     state: clarke0
+  - type: Construction
+    graph: Clarke
+    node: start
+    defaultTarget: clarke
 
 # Durand
 
@@ -358,6 +366,10 @@
   - type: Sprite
     noRot: true
     state: durand0
+  - type: Construction
+    graph: Durand
+    node: start
+    defaultTarget: durand
 
 # Gygax
 
@@ -505,3 +517,7 @@
   - type: Sprite
     noRot: true
     state: gygax0
+  - type: Construction
+    graph: Gygax
+    node: start
+    defaultTarget: gygax
