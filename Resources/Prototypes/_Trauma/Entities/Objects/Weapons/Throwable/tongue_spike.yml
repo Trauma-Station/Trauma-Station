@@ -34,4 +34,3 @@
       types:
         Piercing: 5 # it's more of a utility
   - type: ChemTransferProjectile
-    action: ActionMutationChemSpikeSend
