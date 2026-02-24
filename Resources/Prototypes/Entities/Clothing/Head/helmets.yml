@@ -468,8 +468,8 @@
     heatingCoefficient: 0.5
     coolingCoefficient: 0.8
   - type: FireProtection
-  - type: FaceHuggerBlocker # Trauma
     reduction: 0.15 # not fully sealed so less protection
+  - type: FaceHuggerBlocker # Trauma    
   - type: IdentityBlocker
   - type: Tag
     tags:
