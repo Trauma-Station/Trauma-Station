@@ -36,11 +36,10 @@ public sealed class ForkliftSystem : EntitySystem
         SubscribeLocalEvent<ForkliftComponent, ComponentInit>(OnUpdate);
         SubscribeLocalEvent<ForkliftComponent, EntInsertedIntoContainerMessage>(OnUpdate);
         SubscribeLocalEvent<ForkliftComponent, EntRemovedFromContainerMessage>(OnUpdate);
-        SubscribeLocalEvent<ForkliftComponent, UnstrappedEvent>(OnUnstrapped);
-        SubscribeLocalEvent<ForkliftComponent, StrapAttemptEvent>(OnStrapAttempt);
+        SubscribeLocalEvent<ForkliftComponent, VehicleDismountedEvent>(OnDismounted);
+        SubscribeLocalEvent<ForkliftComponent, VehicleMountedEvent>(OnMounted);
         SubscribeLocalEvent<ForkliftActionEvent>(OnLiftForks);
         SubscribeLocalEvent<ForkliftComponent, UnforkliftActionEvent>(OnUnliftForks);
-
     }
 
     public override void Update(float frameTime)
@@ -106,19 +105,16 @@ public sealed class ForkliftSystem : EntitySystem
         forklift.Comp.LiftSoundEndTime = _timing.CurTime + action.Comp.UseDelay.Value;
     }
 
-    private void OnUnstrapped(Entity<ForkliftComponent> ent, ref UnstrappedEvent args)
+    private void OnDismounted(Entity<ForkliftComponent> ent, ref VehicleDismountedEvent args)
     {
-        if (ent.Comp.LiftAction == null)
-            return;
-
-        _action.RemoveAction(args.Buckle.Owner, ent.Comp.LiftAction);
-        _action.RemoveAction(args.Buckle.Owner, ent.Comp.UnliftAction);
+        _action.RemoveAction(args.Driver, ent.Comp.LiftAction);
+        _action.RemoveAction(args.Driver, ent.Comp.UnliftAction);
     }
 
-    private void OnStrapAttempt(Entity<ForkliftComponent> ent, ref StrapAttemptEvent args)
+    private void OnMounted(Entity<ForkliftComponent> ent, ref VehicleMountedEvent args)
     {
-        _action.AddAction(args.Buckle.Owner, ref ent.Comp.LiftAction, LiftForkActionId, ent);
-        _action.AddAction(args.Buckle.Owner, ref ent.Comp.UnliftAction, UnliftForkActionId, ent);
+        _action.AddAction(args.Driver, ref ent.Comp.LiftAction, LiftForkActionId, ent);
+        _action.AddAction(args.Driver, ref ent.Comp.UnliftAction, UnliftForkActionId, ent);
     }
 
     private void OnUpdate<T>(Entity<ForkliftComponent> ent, ref T args)
