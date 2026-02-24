@@ -3,7 +3,7 @@
   isVisibleLanguage: true
   speech:
     color: "#3af63f"
-    fontId: LDFComicSans # Delta fix fonts pls
+    fontId: LDFComicSans
   obfuscation:
     !type:SyllableObfuscation
     minSyllables: 7

@@ -1,4 +1,4 @@
-names-goblin-dataset-1 = Bimbo
+names-goblin-dataset-1 = Turd
 names-goblin-dataset-2 = Baggins
 names-goblin-dataset-3 = Borkle
 names-goblin-dataset-4 = Grimbo

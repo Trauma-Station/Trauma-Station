@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Trauma.Common.ClimbBonus;
+namespace Content.Trauma.Shared.ClimbBonus;
 
 /// <summary>
 /// Reduces the amount of time to climb onto something

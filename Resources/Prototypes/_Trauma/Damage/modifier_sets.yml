@@ -29,8 +29,8 @@
 - type: damageModifierSet
   id: Goblin
   coefficients:
-    Blunt: 1.1
-    Slash: 1.1
-    Piercing: 1.1
-    Shock: 1.2
-    Heat: 1.1
+    Blunt: 1.25
+    Slash: 1.25
+    Piercing: 1.25
+    Shock: 1.25
+    Heat: 1.25

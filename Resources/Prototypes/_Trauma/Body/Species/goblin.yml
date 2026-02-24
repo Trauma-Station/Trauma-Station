@@ -3,16 +3,6 @@
   id: AppearanceGoblin
   name: goblin appearance
   components:
-  - type: MobState
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      75: SoftCrit
-      125: Critical
-      175: Dead
-  - type: Stamina
-    animationThreshold: 40
-    baseCritThreshold: 75
   - type: Inventory
     displacements:
       jumpsuit:
@@ -68,10 +58,21 @@
 - type: entity
   parent:
   - AppearanceGoblin
-  - MobHuman
+  - BaseSpeciesMobOrganic
   id: MobGoblin
   name: Urist McGoblin
   components:
+  - type: ClimbBoost
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic
+    - Gobbish
+    understands:
+    - TauCetiBasic
+    - Gobbish
+  - type: Damageable
+    damageModifierSet: Goblin
+  - type: Mutatable
   - type: Fixtures
     fixtures:
       fix1:
@@ -84,6 +85,9 @@
         - MobMask
         layer:
         - MobLayer
+  - type: Stamina
+    animationThreshold: 40
+    baseCritThreshold: 75
   - type: Vocal
     sounds:
       Male: UnisexDwarf
@@ -91,30 +95,27 @@
       Unsexed: UnisexDwarf
 
 - type: entity
+  abstract: true
   parent: OrganBaseFleshy
   id: OrganGoblin
-  abstract: true
   suffix: Goblin
 
 - type: entity
-  id: OrganGoblinMetabolizer
   abstract: true
+  id: OrganGoblinMetabolizer
   components:
   - type: Metabolizer
     metabolizerTypes: [ Human ]
 
 - type: entity
-  parent: OrganGoblin
-  id: OrganGoblinInternal
   abstract: true
-  components:
-  - type: Sprite
-    sprite: Mobs/Species/Human/organs.rsi
+  parent: [OrganGoblin, OrganSpriteHumanInternal]
+  id: OrganGoblinInternal
 
 - type: entity
+  abstract: true
   parent: OrganGoblin
   id: OrganGoblinExternal
-  abstract: true
   components:
   - type: Woundable
     boneEntity: BoneWeak
@@ -130,24 +131,11 @@
 - type: entity
   parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganGoblinExternal ]
   id: OrganGoblinTorso
-  components:
-  - type: OrganComponents
-    onAdd:
-    - type: ClimbBoost
 
 - type: entity
   parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganGoblinExternal ]
   id: OrganGoblinHead
   components:
-  - type: OrganComponents
-    onAdd:
-    - type: LanguageKnowledge
-      speaks:
-      - TauCetiBasic
-      - Gobbish
-      understands:
-      - TauCetiBasic
-      - Gobbish
   - type: VisualOrganMarkings
     hideableLayers:
     - enum.HumanoidVisualLayers.Hair
@@ -174,7 +162,7 @@
   components:
   - type: MovementBodyPart
     walkSpeed: 3
-    sprintSpeed: 5.8
+    sprintSpeed: 5.5
 
 - type: entity
   parent: [ OrganBaseLegRight, OrganGoblinExternal ]
@@ -182,7 +170,7 @@
   components:
   - type: MovementBodyPart
     walkSpeed: 3
-    sprintSpeed: 5.8
+    sprintSpeed: 5.5
 
 - type: entity
   parent: [ OrganBaseFootLeft, OrganGoblinExternal ]
@@ -217,7 +205,6 @@
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Species/Goblin/organs.rsi
-    state: goblin_appendix
 
 - type: entity
   parent: [ OrganBaseEars, OrganGoblinInternal ]
@@ -225,7 +212,6 @@
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Species/Goblin/organs.rsi
-    state: goblin_ears
 
 - type: entity
   parent: [ OrganBaseLungs, OrganGoblinInternal, OrganHumanMetabolizer ]
@@ -252,7 +238,6 @@
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Species/Goblin/organs.rsi
-    state: goblin_liver
 
 - type: entity
   parent: [ OrganBaseKidneys, OrganGoblinInternal, OrganHumanMetabolizer ]
