@@ -1,5 +1,6 @@
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
+using Content.Shared.Heretic;
 using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
@@ -140,12 +141,6 @@ public sealed partial class PathBasedSpawnEffect : BaseRitualEffect<PathBasedSpa
     public Dictionary<string, EntProtoId> Output;
 }
 
-public sealed partial class AddKnowledgeEffect : BaseRitualEffect<AddKnowledgeEffect>
-{
-    [DataField(required: true)]
-    public ProtoId<HereticKnowledgePrototype> Knowledge;
-}
-
 public sealed partial class FindLostLimitedOutputEffect : OutputRitualEffect<FindLostLimitedOutputEffect>
 {
     [DataField]
@@ -178,10 +173,33 @@ public sealed partial class GhoulifyEffect : BaseRitualEffect<GhoulifyEffect>
     public bool GiveBlade = true;
 
     [DataField]
-    public float Health = 100f;
+    public float Health = 150f;
+
+    [DataField]
+    public bool CanDeconvert = true;
+
+    [DataField]
+    public GhoulDeathBehavior DeathBehavior = GhoulDeathBehavior.NoGib;
 }
 
 public sealed partial class SplitIngredientsRitualEffect : BaseRitualEffect<SplitIngredientsRitualEffect>
 {
     public override bool ForceApplyOnRitual => true;
+}
+
+public sealed partial class IfElseRitualEffect : BaseRitualEffect<IfElseRitualEffect>
+{
+    public override bool ForceApplyOnRitual => true;
+
+    [DataField(required: true)]
+    public EntityEffect[] EffectsA;
+
+    [DataField(required: true)]
+    public EntityCondition[] IfConditions;
+
+    [DataField]
+    public EntityEffect[]? EffectsB;
+
+    [DataField]
+    public string? SaveResultKey;
 }

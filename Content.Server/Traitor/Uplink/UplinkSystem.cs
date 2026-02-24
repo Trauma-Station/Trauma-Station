@@ -1,8 +1,9 @@
 // <Trauma>
-using Content.Goobstation.Common.Traitor;
-using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Tag;
+
+using System.Linq;
+using Content.Server.StoreDiscount.Systems;
 // </Trauma>
+using Content.Goobstation.Common.Traitor;
 using Content.Server.Store.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
@@ -16,8 +17,6 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Traitor.Uplink;
 
-// goobstation - heavily edited. fuck newstore
-// do not touch unless you want to shoot yourself in the leg
 public sealed class UplinkSystem : EntitySystem
 {
     // <Trauma>
@@ -35,55 +34,44 @@ public sealed class UplinkSystem : EntitySystem
     private static readonly ProtoId<ListingPrototype> FallbackUplinkCatalog = "UplinkUplinkImplanter";
 
     /// <summary>
-    /// Adds an uplink to the target based on their preference (PDA, Pen, or Implant).
+    /// Adds an uplink to the target
     /// </summary>
     /// <param name="user">The person who is getting the uplink</param>
-    /// <param name="balance">The amount of currency on the uplink.</param>
-    /// <param name="preference">The preferred uplink location. Defaults to PDA.</param>
+    /// <param name="balance">The amount of currency on the uplink. If null, will just use the amount specified in the preset.</param>
+    /// <param name="uplinkEntity">The entity that will actually have the uplink functionality. Defaults to the PDA if null.</param>
+    /// <param name="giveDiscounts">Marker that enables discounts for uplink items.</param>
     /// <returns>Whether or not the uplink was added successfully</returns>
-    public bool AddUplink(EntityUid user, FixedPoint2 balance, UplinkPreference preference = UplinkPreference.Pda)
+    public bool AddUplink(
+        EntityUid user,
+        FixedPoint2 balance,
+        ProtoId<UplinkPreferencePrototype>? preferenceId,
+        out EntityUid? uplinkTarget,
+        out SetupUplinkEvent? setupEvent,
+        EntityUid? uplinkEntity = null,
+        bool giveDiscounts = false
+        ) // Goob - added preference, uplinkTarget, setupEvent
     {
-        EntityUid? uplinkEntity = null;
-        var isPenUplink = false;
+        // Try to find target item if none passed
 
-        switch (preference)
-        {
-            case UplinkPreference.Pda:
-                uplinkEntity = FindPdaUplinkTarget(user);
-                break;
-            case UplinkPreference.Pen:
-                uplinkEntity = _goobUplink.FindPenUplinkTarget(user);
-                isPenUplink = uplinkEntity != null;
-                break;
-            case UplinkPreference.Implant:
-                return ImplantUplink(user, balance);
-        }
+        var preference = _proto.Index(preferenceId);
+        uplinkTarget = uplinkEntity;
+        setupEvent = null;
 
-        if (uplinkEntity == null)
-            return ImplantUplink(user, balance);
+        if (uplinkTarget == null && preference?.SearchComponents != null)
+            uplinkTarget = _goobUplink.FindUplinkTarget(user, preference.SearchComponents);
 
-        EnsureComp<UplinkComponent>(uplinkEntity.Value);
-        SetUplink(user, uplinkEntity.Value, balance);
+        if (uplinkTarget == null)
+            return ImplantUplink(user, balance, giveDiscounts);
 
-        if (isPenUplink)
-            _goobUplink.SetupPenUplink(uplinkEntity.Value);
+        EnsureComp<UplinkComponent>(uplinkTarget.Value);
+        SetUplink(user, uplinkTarget.Value, balance, giveDiscounts);
 
-        return true;
-    }
+        var ev = new SetupUplinkEvent { User = user };
+        RaiseLocalEvent(uplinkTarget.Value, ref ev);
+        setupEvent = ev;
 
-    /// <summary>
-    /// Legacy method for backwards compatibility.
-    /// Adds an uplink to the target, auto-detecting location (prefers PDA).
-    /// </summary>
-    public bool AddUplinkAutoDetect(EntityUid user, FixedPoint2 balance, EntityUid? uplinkEntity = null)
-    {
-        uplinkEntity ??= FindUplinkTarget(user);
-
-        if (uplinkEntity == null)
-            return ImplantUplink(user, balance);
-
-        EnsureComp<UplinkComponent>(uplinkEntity.Value);
-        SetUplink(user, uplinkEntity.Value, balance);
+        // TODO add BUI. Currently can't be done outside of yaml -_-
+        // ^ What does this even mean?
 
         return true;
     }
@@ -91,7 +79,7 @@ public sealed class UplinkSystem : EntitySystem
     /// <summary>
     /// Configure TC for the uplink
     /// </summary>
-    private void SetUplink(EntityUid user, EntityUid uplink, FixedPoint2 balance)
+    private void SetUplink(EntityUid user, EntityUid uplink, FixedPoint2 balance, bool giveDiscounts)
     {
         if (!_mind.TryGetMind(user, out var mind, out _))
             return;
@@ -101,14 +89,23 @@ public sealed class UplinkSystem : EntitySystem
         store.AccountOwner = mind;
 
         store.Balance.Clear();
-        var bal = new Dictionary<string, FixedPoint2> { { TelecrystalCurrencyPrototype, balance } };
-        _store.TryAddCurrency(bal, uplink, store);
+        _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { TelecrystalCurrencyPrototype, balance } },
+            uplink,
+            store);
+
+        var uplinkInitializedEvent = new StoreInitializedEvent(
+            TargetUser: mind,
+            Store: uplink,
+            UseDiscounts: giveDiscounts,
+            Listings: _store.GetAvailableListings(mind, uplink, store)
+                .ToArray());
+        RaiseLocalEvent(ref uplinkInitializedEvent);
     }
 
     /// <summary>
     /// Implant an uplink as a fallback measure if the traitor had no PDA
     /// </summary>
-    private bool ImplantUplink(EntityUid user, FixedPoint2 balance)
+    private bool ImplantUplink(EntityUid user, FixedPoint2 balance, bool giveDiscounts)
     {
         if (!_proto.Resolve<ListingPrototype>(FallbackUplinkCatalog, out var catalog))
             return false;
@@ -124,9 +121,12 @@ public sealed class UplinkSystem : EntitySystem
         var implant = _subdermalImplant.AddImplant(user, FallbackUplinkImplant);
 
         if (!HasComp<StoreComponent>(implant))
+        {
+            Log.Error($"Implant does not have the store component {implant}");
             return false;
+        }
 
-        SetUplink(user, implant.Value, balance);
+        SetUplink(user, implant.Value, balance, giveDiscounts);
         return true;
     }
 
@@ -136,29 +136,22 @@ public sealed class UplinkSystem : EntitySystem
     /// </summary>
     public EntityUid? FindUplinkTarget(EntityUid user)
     {
-        return FindPdaUplinkTarget(user) ?? _goobUplink.FindPenUplinkTarget(user); // Goob - selfexplanatory
-    }
-
-    // Goob - pegged from FindUplinkTarget to FindPda
-    public EntityUid? FindPdaUplinkTarget(EntityUid user)
-    {
         // Try to find PDA in inventory
         if (_inventorySystem.TryGetContainerSlotEnumerator(user, out var containerSlotEnumerator))
         {
-            while (containerSlotEnumerator.MoveNext(out var slot))
+            while (containerSlotEnumerator.MoveNext(out var containerSlot))
             {
-                if (!slot.ContainedEntity.HasValue)
-                    continue;
+                var pdaUid = containerSlot.ContainedEntity;
 
-                if (HasComp<PdaComponent>(slot.ContainedEntity.Value))
-                    return slot.ContainedEntity.Value;
+                if (HasComp<PdaComponent>(pdaUid) && HasComp<StoreComponent>(pdaUid))
+                    return pdaUid;
             }
         }
 
         // Also check hands
         foreach (var item in _handsSystem.EnumerateHeld(user))
         {
-            if (HasComp<PdaComponent>(item))
+            if (HasComp<PdaComponent>(item) && HasComp<StoreComponent>(item))
                 return item;
         }
 

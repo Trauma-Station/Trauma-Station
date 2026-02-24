@@ -1,0 +1,67 @@
+- type: entity
+  abstract: true
+  parent: OrganBaseTorso
+  id: OrganBaseTorsoTailed
+  components:
+  - type: BodyPart
+    slots:
+    # Parts
+    - Head
+    - Tail
+    - ArmLeft
+    - ArmRight
+    - LegLeft
+    - LegRight
+    # Organs
+    - Appendix
+    - Heart
+    - Lungs
+    - Stomach
+    - Liver
+    - Kidneys
+
+- type: entity
+  abstract: true
+  parent: OrganBaseTorso
+  id: OrganBaseTorsoWinged
+  components:
+  - type: BodyPart
+    slots:
+    # Parts
+    - Head
+    - Wings
+    - ArmLeft
+    - ArmRight
+    - LegLeft
+    - LegRight
+    # Organs
+    - Appendix
+    - Heart
+    - Lungs
+    - Stomach
+    - Liver
+    - Kidneys
+
+- type: entity
+  abstract: true
+  parent: OrganBaseExternal
+  id: OrganBaseWings
+  name: wings
+  components:
+  - type: Sprite
+    state: wings
+  - type: Organ
+    category: Wings
+  - type: ChildOrgan
+    parentCategory: Torso
+  - type: BodyPart
+    partType: Wings
+    slots: []
+  - type: VisualOrgan
+    layer: enum.HumanoidVisualLayers.Wings
+    data:
+      state: wings
+  - type: VisualOrganMarkings
+    markingData:
+      layers:
+      - Wings

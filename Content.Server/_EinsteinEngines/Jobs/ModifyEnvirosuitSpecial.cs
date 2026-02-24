@@ -30,7 +30,7 @@ public sealed partial class ModifyEnvirosuitSpecial : JobSpecial
     public override void AfterEquip(EntityUid mob)
     {
         var entMan = IoCManager.Resolve<IEntityManager>();
-        if (!entMan.TryGetComponent<HumanoidAppearanceComponent>(mob, out var appearance) ||
+        if (!entMan.TryGetComponent<HumanoidProfileComponent>(mob, out var appearance) ||
             appearance.Species != Species ||
             !entMan.System<InventorySystem>().TryGetSlotEntity(mob, Slot, out var jumpsuit) ||
             jumpsuit is not { } envirosuit ||

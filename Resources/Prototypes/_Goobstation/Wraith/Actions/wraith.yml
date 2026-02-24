@@ -80,7 +80,7 @@
       requireAll: true
       components:
       - MobState
-      - HumanoidAppearance
+      - HumanoidProfile
     blacklist:
       components:
       - PartialAbsorbable
@@ -295,7 +295,7 @@
     whitelist:
       components:
       - EntityStorage
-      - HumanoidAppearance
+      - HumanoidProfile
     event: !type:RaiseSkeletonEvent
   - type: ActionWraithPoints
     wpConsume: 100

@@ -27,10 +27,10 @@ using Content.Shared.Weapons.Melee;
 using Robust.Shared.Audio;
 
 // Shitmed Change
-using Content.Shared.Body.Part;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Body;
+using Content.Medical.Shared.Wounds;
+using Content.Medical.Shared.Wounds;
+using Content.Medical.Common.Targeting;
 
 namespace Content.Goobstation.Shared.MartialArts;
 
@@ -89,11 +89,7 @@ public partial class SharedMartialArtsSystem
         var damage = new DamageSpecifier();
         damage.DamageDict.Add("Blunt", 300);
         _damageable.TryChangeDamage(target, damage, true, origin: ent, targetPart: TargetBodyPart.Head);
-        var head = _body.GetBodyChildrenOfType(target , BodyPartType.Head).FirstOrDefault();
-        if (head != default
-            && TryComp<WoundableComponent>(head.Id, out var woundable)
-            && woundable.ParentWoundable.HasValue)
-            _wound.AmputateWoundable(woundable.ParentWoundable.Value, head.Id, woundable);
+        _body.TryDecapitate(target, ent);
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Effects/gib1.ogg"), target);
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Effects/demon_attack1.ogg"), ent);

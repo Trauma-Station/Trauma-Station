@@ -1,0 +1,42 @@
+- type: entity
+  id: ComponentsToRemoveOnGhoulify
+  save: false
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Respirator
+    damage: !type:DamageSpecifier
+    damageRecovery: !type:DamageSpecifier
+  - type: Barotrauma
+    damage: !type:DamageSpecifier
+  - type: Hunger
+  - type: Thirst
+  - type: Reproductive
+    offspring: []
+    partnerWhitelist: !type:EntityWhitelist
+  - type: ReproductivePartner
+  - type: Temperature
+  - type: Consciousness
+    threshold: 95
+  - type: Pacified
+  - type: Xenomorph
+    caste: Drone
+  - type: RatKing
+    hungerPerDomainUse: 50
+    hungerPerArmyUse: 25
+  - type: Dragon
+    carpRiftHealing: !type:DamageSpecifier
+
+- type: entity
+  id: ComponentsToRemoveOnUnGhoulify
+  save: false
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Ghoul
+  - type: HereticMinion
+  - type: WeakToHoly
+  - type: GhostTakeoverAvailable
+  - type: VoicelessDead
+  - type: HereticBladeUserBonusDamage
+  - type: GhoulDeconvert
+  - type: HolyIgniteOnCollide
+  - type: HolyFlammable

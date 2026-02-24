@@ -32,6 +32,7 @@ using Content.Server.Heretic.Components;
 using Content.Server.Antag;
 using Robust.Shared.Random;
 using System.Linq;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server._Goobstation.Objectives.Components;
 using Content.Server.Actions;
 using Content.Server.Chat.Managers;
@@ -43,7 +44,6 @@ using Content.Shared.GameTicking;
 using Content.Shared.Humanoid.Markings;
 using Content.Server.Polymorph.Components;
 using Content.Shared.Preferences;
-using Content.Shared.Random.Helpers;
 using Content.Shared.Roles.Jobs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
@@ -79,7 +79,6 @@ public sealed class HereticSystem : SharedHereticSystem
     [Dependency] private readonly PvsOverrideSystem _override = default!;
 
     [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
 
     private float _timer;
@@ -109,12 +108,9 @@ public sealed class HereticSystem : SharedHereticSystem
         SubscribeLocalEvent<HereticComponent, MindGotAddedEvent>(OnMindAdded);
 
         SubscribeLocalEvent<GetVisMaskEvent>(OnGetVisMask);
-
         SubscribeLocalEvent<HereticStartupEvent>(OnHereticStartup);
-
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRestart);
-
-        SubscribeLocalEvent<HereticKnowledgeRitualComponent, ComponentStartup>(OnKnowledgeStartup);
+        SubscribeLocalEvent<UserShouldTakeHolyEvent>(OnShouldTakeHoly);
     }
 
     private void OnMindAdded(Entity<HereticComponent> ent, ref MindGotAddedEvent args)
@@ -142,6 +138,12 @@ public sealed class HereticSystem : SharedHereticSystem
 
         SetMinionsMaster(ent, args.Container);
         RaiseKnowledgeEvents(ent, args.Container, false);
+
+        if (!ent.Comp.Ascended)
+            return;
+
+        var ev2 = new UnholyStatusChangedEvent(args.Container, args.Container, true);
+        RaiseLocalEvent(args.Container, ref ev2);
     }
 
     private void OnMindRemoved(Entity<HereticComponent> ent, ref MindGotRemovedEvent args)
@@ -289,17 +291,6 @@ public sealed class HereticSystem : SharedHereticSystem
             canCoalesce: false);
     }
 
-    private void OnKnowledgeStartup(Entity<HereticKnowledgeRitualComponent> ent, ref ComponentStartup args)
-    {
-        var dataset = _proto.Index(ent.Comp.KnowledgeDataset);
-        for (var i = 0; i < ent.Comp.TagAmount; i++)
-        {
-            ent.Comp.KnowledgeRequiredTags.Add(_rand.Pick(dataset));
-        }
-
-        Dirty(ent);
-    }
-
     private void OnCompStartup(Entity<HereticComponent> ent, ref ComponentStartup args)
     {
         foreach (var k in ent.Comp.BaseKnowledge)
@@ -342,7 +333,14 @@ public sealed class HereticSystem : SharedHereticSystem
         args.VisibilityMask |= HereticVisFlags;
     }
 
-    #region Internal events (target reroll, ascension, etc.)
+    private void OnShouldTakeHoly(ref UserShouldTakeHolyEvent ev)
+    {
+        if (!TryGetHereticComponent(ev.Target, out var heretic, out _))
+            return;
+
+        ev.ShouldTakeHoly |= heretic.Ascended;
+        ev.WeakToHoly = true;
+    }
 
     private void OnUpdateTargets(Entity<HereticComponent> ent, ref EventHereticUpdateTargets args)
     {
@@ -404,7 +402,7 @@ public sealed class HereticSystem : SharedHereticSystem
 
         bool IsSessionValid(ICommonSession session)
         {
-            if (!HasComp<HumanoidAppearanceComponent>(session.AttachedEntity))
+            if (!HasComp<HumanoidProfileComponent>(session.AttachedEntity))
                 return false;
 
             if (HasComp<GhoulComponent>(session.AttachedEntity.Value))
@@ -420,27 +418,13 @@ public sealed class HereticSystem : SharedHereticSystem
 
     private SacrificeTargetData? GetData(EntityUid uid)
     {
-        if (!TryComp(uid, out HumanoidAppearanceComponent? humanoid))
+        if (!TryComp(uid, out HumanoidProfileComponent? humanoid))
             return null;
 
         if (!_mind.TryGetMind(uid, out var mind, out _) || !_job.MindTryGetJobId(mind, out var jobId) || jobId == null)
             return null;
 
-        var hair = (HairStyles.DefaultHairStyle, humanoid.CachedHairColor ?? Color.Black);
-        if (humanoid.MarkingSet.TryGetCategory(MarkingCategories.Hair, out var hairMarkings) && hairMarkings.Count > 0)
-        {
-            var hairMarking = hairMarkings[0];
-            hair = (hairMarking.MarkingId, hairMarking.MarkingColors.FirstOrNull() ?? Color.Black);
-        }
-
-        var facialHair = (HairStyles.DefaultFacialHairStyle, humanoid.CachedFacialHairColor ?? Color.Black);
-        if (humanoid.MarkingSet.TryGetCategory(MarkingCategories.FacialHair, out var facialHairMarkings) &&
-            facialHairMarkings.Count > 0)
-        {
-            var facialHairMarking = facialHairMarkings[0];
-            facialHair = (facialHairMarking.MarkingId, facialHairMarking.MarkingColors.FirstOrNull() ?? Color.Black);
-        }
-
+        /* TODO NUBODY: use api if it gets made
         var appearance = new HumanoidCharacterAppearance(hair.Item1,
             hair.Item2,
             facialHair.Item1,
@@ -448,13 +432,14 @@ public sealed class HereticSystem : SharedHereticSystem
             humanoid.EyeColor,
             humanoid.SkinColor,
             humanoid.MarkingSet.GetForwardEnumerator().ToList());
+        */
 
         var profile = new HumanoidCharacterProfile().WithGender(humanoid.Gender)
             .WithSex(humanoid.Sex)
             .WithSpecies(humanoid.Species)
             .WithName(MetaData(uid).EntityName)
-            .WithAge(humanoid.Age)
-            .WithCharacterAppearance(appearance);
+            .WithAge(humanoid.Age);
+            //.WithCharacterAppearance(appearance);
 
         var netEntity = GetNetEntity(uid);
 
@@ -499,6 +484,4 @@ public sealed class HereticSystem : SharedHereticSystem
             ascendSound,
             Color.Pink);
     }
-
-    #endregion
 }

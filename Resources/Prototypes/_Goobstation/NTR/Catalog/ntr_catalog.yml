@@ -213,23 +213,6 @@
   resetRestockOnPurchase: true
   restockAfterPurchase: 900 # 15 mins
 
-#- type: listing
-#  id: NTRExecutiveBSDCall
-#  name: ntr-executive-bsd-name
-#  description: ntr-executive-bsd-desc
-#  productEntity: SpawnPodBsd
-#  icon:
-#    sprite: _Goobstation/Objects/Tools/executive_briefcase.rsi
-#    state: icon_alt
-#  cost:
-#    NTLoyaltyPoint: 40
-#  categories:
-#  - NTRpersonal
-#  restockTime: 1800 # 3o min
-#  conditions:
-#  - !type:ListingLimitedStockCondition
-#    stock: 1 # we dont want NTR to buy 3 BSDs in one shift so
-
 - type: listing
   id: NTRExecutiveCigar
   name: ntr-executive-cigar-name

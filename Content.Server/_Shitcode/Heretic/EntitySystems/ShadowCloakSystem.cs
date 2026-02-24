@@ -1,4 +1,3 @@
-using Content.Goobstation.Shared.Heretic;
 using Content.Shared.IdentityManagement;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
@@ -9,7 +8,6 @@ namespace Content.Server.Heretic.EntitySystems;
 public sealed class ShadowCloakSystem : SharedShadowCloakSystem
 {
     [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly ProtectiveBladeSystem _blade = default!;
 
     private const float SustainedDamageReductionInterval = 1f;
     private float _accumulator;

@@ -41,7 +41,7 @@ public sealed class RelaySolutionEffectSystem : EntityEffectSystem<SolutionConta
 
         var uid = solution.Value.Owner;
         _data.CopyData(ent, uid);
-        _effects.ApplyEffects(uid, args.Effect.Effects, args.Scale);
+        _effects.ApplyEffects(uid, args.Effect.Effects, args.Scale, args.User);
         _data.ClearData(uid);
     }
 }

@@ -13,6 +13,8 @@ public abstract partial class SharedHereticRitualSystem
         SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<IsTargetCondition>>(OnTargetCheck);
         SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<ConditionsRitualCondition>>(
             OnApplyConditions);
+        SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<IsLimitedOutputCondition>>(
+            OnLimitedCondition);
         SubscribeLocalEvent<HereticRitualComponent, HereticRitualConditionEvent<ProcessIngredientsCondition>>(
             OnProcessIngredients);
         SubscribeLocalEvent<HereticComponent, HereticRitualConditionEvent<CanAscendCondition>>(OnCanAscend);
@@ -22,6 +24,12 @@ public abstract partial class SharedHereticRitualSystem
             OnKnowledge);
         SubscribeLocalEvent<HereticRitualComponent, HereticRitualConditionEvent<TryApplyEffectSequenceCondition>>(
             OnApplySequence);
+    }
+
+    private void OnLimitedCondition(Entity<TransformComponent> ent,
+        ref HereticRitualConditionEvent<IsLimitedOutputCondition> args)
+    {
+        args.Result = args.Ritual.Comp.LimitedOutput.Contains(ent.Owner);
     }
 
     private void OnApplyConditions(Entity<TransformComponent> ent,
@@ -164,5 +172,4 @@ public abstract partial class SharedHereticRitualSystem
         args.Ritual.Comp.Blackboard[args.Condition.Result] = output;
         args.Result = true;
     }
-
 }

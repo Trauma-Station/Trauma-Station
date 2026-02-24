@@ -227,7 +227,7 @@ namespace Content.Shared.Examine
 
         public bool InRangeUnOccluded(EntityUid origin, EntityUid other, float range = ExamineRange, Ignored? predicate = null, bool ignoreInsideBlocker = true)
         {
-            var ev = new InRangeOverrideEvent(origin, other);
+            var ev = new InRangeOverrideEvent(origin, other, range); // Trauma - added range
             RaiseLocalEvent(origin, ref ev);
 
             if (ev.Handled)

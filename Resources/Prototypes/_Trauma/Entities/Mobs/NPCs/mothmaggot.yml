@@ -9,7 +9,7 @@
   - type: Item
     size: Small
   - type: EnterBodyPart
-    part: Chest
+    category: Torso
   - type: TriggerInsideBodyPart
     keyOut: mature
     delay: 40
@@ -38,5 +38,5 @@
   - type: EntityTargetAction
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
     event: !type:EnterBodyPartActionEvent

@@ -28,9 +28,6 @@
         - id: MagazinePistolHighCapacity
           amount: 2
         - id: ClothingHandsGlovesCombat
-        - id: ClothingUniformJumpsuitDetectiveGrey
-        - id: ClothingOuterCoatDetectiveLoadout
-        - id: ClothingShoesBootsLaceup
 
 - type: entity
   id: BriefcaseCentcomm

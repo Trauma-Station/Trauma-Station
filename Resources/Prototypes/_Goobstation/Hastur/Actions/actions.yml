@@ -16,7 +16,7 @@
     canTargetSelf: false
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
       - Body
     event: !type:HasturDevourEvent
 
@@ -38,7 +38,7 @@
     canTargetSelf: false
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
     event: !type:HasturLashEvent
 
 - type: entity

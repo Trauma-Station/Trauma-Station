@@ -75,8 +75,7 @@ public sealed class LightningSystem : SharedLightningSystem
     /// <param name="lightningPrototype">The prototype for the lightning to be created</param>
     /// <param name="triggerLightningEvents">if the lightnings being fired should trigger lightning events.</param>
     /// <param name="beamAction">Goobstation. Action that is called on each beam entity.</param>
-    /// <param name="accumulateIndex">Goobstation. Whether to accumulate BeamSystem.NextIndex.</param>
-    public bool ShootLightning(EntityUid user, EntityUid target, string lightningPrototype = "Lightning", bool triggerLightningEvents = true, Action<EntityUid>? beamAction = null, bool accumulateIndex = true)
+    public bool ShootLightning(EntityUid user, EntityUid target, string lightningPrototype = "Lightning", bool triggerLightningEvents = true, Action<EntityUid>? beamAction = null)
     {
         // Goobstation start. This is required for force walls to block lightning so that you can't stand inside them
         // and spam lightning spells.
@@ -105,7 +104,7 @@ public sealed class LightningSystem : SharedLightningSystem
         // Goobstation end
 
         var spriteState = LightningRandomizer();
-        if (!_beam.TryCreateBeam(user, target, lightningPrototype, spriteState, beamAction: beamAction, accumulateIndex: accumulateIndex)) // Goob edit
+        if (!_beam.TryCreateBeam(user, target, lightningPrototype, spriteState, beamAction: beamAction)) // Goob edit
             return false;
 
         if (triggerLightningEvents) // we don't want certain prototypes to trigger lightning level events
@@ -153,7 +152,7 @@ public sealed class LightningSystem : SharedLightningSystem
             if (!_random.Prob(curTarget.Comp.HitProbability)) //Chance to ignore target
                 continue;
 
-            if (!ShootLightning(user, targets[count].Owner, lightningPrototype, triggerLightningEvents, beamAction, false)) // Goob edit
+            if (!ShootLightning(user, targets[count].Owner, lightningPrototype, triggerLightningEvents, beamAction))
             {
                 shootedCount++;
                 continue;
@@ -164,8 +163,6 @@ public sealed class LightningSystem : SharedLightningSystem
             }
             shootedCount++;
         }
-
-        _beam.AccumulateIndex(); // Goobstation
     }
 }
 

@@ -6,8 +6,7 @@
   physicalDesc: reagent-physical-desc-pungent
   color: "#c4f5ff"
   metabolisms:
-    Poison:
-      metabolismRate: 0.5
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -34,11 +33,11 @@
   contrabandSeverity: Major # you probably aren't making this or the other explosives with permission from HOS
   color: "#e0c009"
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
-          types: # do not eat C4
+          types: # do not eat/shoot up C4
             Poison: 3
 
 - type: reagent
@@ -51,7 +50,7 @@
   contrabandSeverity: Major
   color: white
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -68,7 +67,7 @@
   contrabandSeverity: Major
   color: white
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:

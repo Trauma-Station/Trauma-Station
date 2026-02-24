@@ -11,34 +11,17 @@ namespace Content.Trauma.Shared.EntityEffects;
 /// </remarks>
 public sealed class EffectDataSystem : EntitySystem
 {
-    private EntityQuery<EntityEffectUserComponent> _userQuery;
     private EntityQuery<EntityEffectToolComponent> _toolQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _userQuery = GetEntityQuery<EntityEffectUserComponent>();
         _toolQuery = GetEntityQuery<EntityEffectToolComponent>();
     }
 
-    public EntityUid? GetUser(EntityUid target)
-        => _userQuery.CompOrNull(target)?.User;
-
     public EntityUid? GetTool(EntityUid target)
         => _toolQuery.CompOrNull(target)?.Tool;
-
-    public void SetUser(EntityUid target, EntityUid user)
-    {
-        // don't add components to entities being deleted, 0.001% edge case but still
-        if (TerminatingOrDeleted(target))
-            return;
-
-        EnsureComp<EntityEffectUserComponent>(target).User = user;
-    }
-
-    public void ClearUser(EntityUid target)
-        => RemComp<EntityEffectUserComponent>(target);
 
     public void SetTool(EntityUid target, EntityUid tool)
     {
@@ -54,28 +37,15 @@ public sealed class EffectDataSystem : EntitySystem
 
     public void CopyData(EntityUid src, EntityUid target)
     {
-        // TODO: if you add any more data change these 2 methods to raise events
-        if (GetUser(src) is {} user)
-            SetUser(target, user);
+        // TODO: if you add any more data change these methods to raise events
         if (GetTool(src) is {} tool)
             SetTool(target, tool);
     }
 
     public void ClearData(EntityUid target)
     {
-        ClearUser(target);
         ClearTool(target);
     }
-}
-
-/// <summary>
-/// Temporary data component that stores the user that caused an effect to occur.
-/// </summary>
-[RegisterComponent, Access(typeof(EffectDataSystem))]
-public sealed partial class EntityEffectUserComponent : Component
-{
-    [DataField]
-    public EntityUid User;
 }
 
 /// <summary>

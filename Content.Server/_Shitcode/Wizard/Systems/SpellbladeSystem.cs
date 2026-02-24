@@ -11,7 +11,7 @@ using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Lightning;
 using Content.Shared._Goobstation.Wizard.Spellblade;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;

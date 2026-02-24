@@ -9,7 +9,8 @@
 using System.Linq;
 using Content.Server._DV.CosmicCult.Components;
 using Content.Server._DV.CosmicCult.EntitySystems;
-using Content.Goobstation.Shared.Religion; // Goobstation - Shitchap
+using Content.Goobstation.Shared.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod; // Goobstation - Shitchap
 using Content.Server.Actions;
 using Content.Server.Atmos.Components;
 using Content.Server.Audio;
@@ -32,7 +33,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-using Content.Shared._Shitmed.Targeting; // Shitmed Change
+using Content.Medical.Common.Targeting; // Shitmed Change
 
 namespace Content.Server._DV.CosmicCult;
 
@@ -411,11 +412,8 @@ public sealed class MonumentSystem : SharedMonumentSystem
             EnsureComp<PressureImmunityComponent>(cultist);
             EnsureComp<TemperatureImmunityComponent>(cultist);
 
-            // Goobstation Change - Shitchap
-            if (!HasComp<WeakToHolyComponent>(cultist))
-                EnsureComp<WeakToHolyComponent>(cultist).AlwaysTakeHoly = true;
-            else
-                cultComp.WasWeakToHoly = true;
+            var ev = new UnholyStatusChangedEvent(cultist, cultist, true);
+            RaiseLocalEvent(cultist, ref ev);
 
             foreach (var influenceProto in _protoMan.EnumeratePrototypes<InfluencePrototype>().Where(influenceProto => influenceProto.Tier == 3))
                 cultComp.UnlockedInfluences.Add(influenceProto.ID);

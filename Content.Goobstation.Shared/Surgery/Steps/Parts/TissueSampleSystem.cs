@@ -1,4 +1,4 @@
-using Content.Shared._Shitmed.Medical.Surgery.Tools;
+using Content.Medical.Shared.Surgery.Tools;
 
 namespace Content.Goobstation.Shared.Surgery.Steps.Parts;
 

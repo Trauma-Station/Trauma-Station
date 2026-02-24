@@ -5,17 +5,24 @@
   - !type:PlayerGUIDLoadoutEffect
     guid: bb948988-53ed-4985-aec0-2ca378f7f8b1
 
-# - type: loadoutEffectGroup
-#   id: TurboTracker
-#   effects:
-#   - !type:PlayerGUIDLoadoutEffect
-#     guid:
+- type: loadoutEffectGroup
+  id: TurboTracker
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: aa3158b0-b371-4372-a7c2-aa68ac3967de
+
+- type: loadoutEffectGroup
+  id: Weax
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 5dcc5fac-1983-43be-a6ff-9d8a5ae38157
 
 # - type: loadoutEffectGroup
-#   id: Weax
+#   id: Es
 #   effects:
 #   - !type:PlayerGUIDLoadoutEffect
 #     guid:
+# tom o shatter hat
 
 - type: loadoutEffectGroup
   id: Tia_Zoh
@@ -28,6 +35,14 @@
 #   effects:
 #   - !type:PlayerGUIDLoadoutEffect
 #     guid:
+# trash bag cloak
+
+# - type: loadoutEffectGroup
+#   id: Icortherainwing
+#   effects:
+#   - !type:PlayerGUIDLoadoutEffect
+#     guid:
+#mushroomer hat
 
 - type: loadoutEffectGroup
   id: Tenshi
@@ -58,6 +73,7 @@
 #   effects:
 #   - !type:PlayerGUIDLoadoutEffect
 #     guid:
+# chef jacket black maroon
 
 #Items
 - type: loadout
@@ -86,3 +102,21 @@
   storage:
     back:
     - PatreonTenshi
+
+- type: loadout
+  id: PatreonTurboTracker
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TurboTracker
+  storage:
+    back:
+    - PatreonTurboTracker
+
+- type: loadout
+  id: PatreonWeax
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Weax
+  storage:
+    back:
+    - PatreonWeax

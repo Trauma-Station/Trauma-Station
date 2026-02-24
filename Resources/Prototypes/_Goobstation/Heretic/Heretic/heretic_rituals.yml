@@ -19,7 +19,7 @@
       - !type:WhitelistCondition
         whitelist:
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
@@ -327,7 +327,7 @@
       - !type:WhitelistCondition
         whitelist:
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
@@ -341,9 +341,6 @@
         min: 3
         max: 3
         cancelLoc: heretic-ritual-fail-sacrifice-ash
-    - !type:AddKnowledgeEffect
-      applyOn: Mind
-      knowledge: AshlordRite
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -351,6 +348,9 @@
         events:
         - !type:EventHereticAscension
         - !type:EventHereticUpdateTargets
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - AshlordRite
   - type: Tag
     tags:
     - RitualAscension
@@ -440,12 +440,12 @@
       - !type:WhitelistCondition
         whitelist:
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
-      - !type:HasBodyPartCondition
-        part: Head
+      - !type:HasOrgan
+        organCategory: Head
         inverted: true
     - !type:SacrificeEffect
       applyOn: Targets
@@ -456,9 +456,6 @@
         min: 3
         max: 3
         cancelLoc: heretic-ritual-fail-sacrifice-blade
-    - !type:AddKnowledgeEffect
-      applyOn: Mind
-      knowledge: MaelstromOfSilver
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -466,6 +463,9 @@
         events:
         - !type:EventHereticAscension
         - !type:EventHereticUpdateTargets
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - MaelstromOfSilver
   - type: Tag
     tags:
     - RitualAscension
@@ -564,6 +564,9 @@
         blacklist:
           components:
           - Ghoul
+        whitelist:
+          components:
+          - HumanoidProfile
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
@@ -598,6 +601,57 @@
         components:
         - type: Muted
         - type: HereticBladeUserBonusDamage
+        - type: VoicelessDead
+    limitReachedEffects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Ghouls
+      individualConditions:
+      - !type:IsLimitedOutputCondition
+    - !type:IfElseRitualEffect
+      saveResultKey: SuccessOverride
+      ifConditions:
+      - !type:InputCountCondition
+        applyOn: Ghouls
+        result: ToHeal
+        min: 1
+      effectsA:
+      - !type:EffectsRitualEffect
+        applyOn: ToHeal
+        effects:
+        - !type:Rejuvenate
+        conditions:
+        - !type:ProcessIngredientsCondition
+          applyOn: Look
+          deleteEntitiesKey: Delete
+          splitEntitiesKey: Split
+          ingredients:
+          - whitelist:
+              tags:
+              - Muzzle
+            name: heretic-ritual-ingredient-muzzle
+      - !type:SplitIngredientsRitualEffect
+        applyOn: Split
+      - !type:EffectsRitualEffect
+        applyOn: Delete
+        effects:
+        - !type:Delete
+      effectsB:
+      - !type:FindLostLimitedOutputEffect
+        applyOn: Platform
+        result: Lost
+        minRange: 1.5
+      - !type:TeleportToRuneEffect
+        applyOn: Result
+        conditions:
+        - !type:InputCountCondition
+          applyOn: Lost
+          result: Result
+          min: 1
+          max: 1
 
 - type: entity
   id: RitualRaw
@@ -748,7 +802,7 @@
       - !type:WhitelistCondition
         whitelist:
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
@@ -761,9 +815,6 @@
         min: 4
         max: 4
         cancelLoc: heretic-ritual-fail-sacrifice-not-enough
-    - !type:AddKnowledgeEffect
-      applyOn: Mind
-      knowledge: PriestFinalHymn
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -771,6 +822,9 @@
         events:
         - !type:EventHereticAscension
         - !type:EventHereticUpdateTargets
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - PriestFinalHymn
   - type: Tag
     tags:
     - RitualAscension
@@ -866,7 +920,7 @@
       - !type:WhitelistCondition
         whitelist:
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
@@ -879,9 +933,6 @@
         min: 3
         max: 3
         cancelLoc: heretic-ritual-fail-sacrifice-not-enough
-    - !type:AddKnowledgeEffect
-      applyOn: Mind
-      knowledge: WaltzAtTheEndOfTime
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -889,6 +940,9 @@
         events:
         - !type:EventHereticAscension
         - !type:EventHereticUpdateTargets
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - WaltzAtTheEndOfTime
   - type: Tag
     tags:
     - RitualAscension
@@ -978,7 +1032,7 @@
       - !type:WhitelistCondition
         whitelist:
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
@@ -996,9 +1050,6 @@
         min: 3
         max: 3
         cancelLoc: heretic-ritual-fail-sacrifice-rust
-    - !type:AddKnowledgeEffect
-      applyOn: Mind
-      knowledge: RustbringersOath
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -1006,6 +1057,9 @@
         events:
         - !type:EventHereticAscension
         - !type:EventHereticUpdateTargets
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - RustbringersOath
     - !type:SpawnRitualEffect
       applyOn: Platform
       output:
@@ -1101,7 +1155,7 @@
         whitelist:
           requireAll: true
           components:
-          - HumanoidAppearance
+          - HumanoidProfile
           - StarMark
       - !type:MobStateCondition
         mobstate: Alive
@@ -1115,9 +1169,6 @@
         min: 3
         max: 3
         cancelLoc: heretic-ritual-fail-sacrifice-cosmos
-    - !type:AddKnowledgeEffect
-      applyOn: Mind
-      knowledge: CreatorsGift
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -1126,6 +1177,9 @@
         - !type:EventHereticAscension
         - !type:EventHereticUpdateTargets
         - !type:EventHereticResolveStarGazer
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - CreatorsGift
   - type: Tag
     tags:
     - RitualAscension

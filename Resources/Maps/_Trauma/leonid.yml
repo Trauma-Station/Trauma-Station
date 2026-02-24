@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 270.1.0
+  engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 01/12/2026 15:32:49
-  entityCount: 36104
+  time: 02/07/2026 14:57:30
+  entityCount: 36102
 maps:
 - 1
 grids:
@@ -41458,30 +41458,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 18.635092,-53.639267
-      parent: 2
-- proto: BaseChemistryEmptyVial
-  entities:
-  - uid: 4864
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -96.86403,10.756185
-      parent: 2
-  - uid: 4865
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -53.281322,-4.4777594
-      parent: 2
-  - uid: 4866
-    components:
-    - type: Transform
-      pos: -53.64122,-4.2751365
-      parent: 2
-  - uid: 4867
-    components:
-    - type: Transform
-      pos: -53.428623,-4.229463
       parent: 2
 - proto: BaseComputerAiAccess
   entities:
@@ -99844,6 +99820,30 @@ entities:
     - type: Transform
       pos: -110.55393,14.507229
       parent: 2
+- proto: ChemistryEmptyVial
+  entities:
+  - uid: 4864
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -96.86403,10.756185
+      parent: 2
+  - uid: 4865
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -53.281322,-4.4777594
+      parent: 2
+  - uid: 4866
+    components:
+    - type: Transform
+      pos: -53.64122,-4.2751365
+      parent: 2
+  - uid: 4867
+    components:
+    - type: Transform
+      pos: -53.428623,-4.229463
+      parent: 2
 - proto: ChemistryHotplate
   entities:
   - uid: 16094
@@ -156139,13 +156139,6 @@ entities:
     - type: Transform
       pos: -48.28767,9.934775
       parent: 2
-- proto: GunSafeDisabler
-  entities:
-  - uid: 5189
-    components:
-    - type: Transform
-      pos: -79.5,28.5
-      parent: 2
 - proto: GunSafeJudo
   entities:
   - uid: 17
@@ -156179,6 +156172,13 @@ entities:
     - type: Transform
       pos: -80.5,34.5
       parent: 2
+- proto: GunSafePhaser
+  entities:
+  - uid: 5189
+    components:
+    - type: Transform
+      pos: -79.5,28.5
+      parent: 2
 - proto: GunSafeRiotLauncher
   entities:
   - uid: 5137
@@ -156200,9 +156200,6 @@ entities:
     - type: Transform
       pos: -71.555115,-49.870975
       parent: 2
-    - type: Construction
-      step: 3
-      edge: 0
 - proto: GyroscopeUnanchored
   entities:
   - uid: 23852
@@ -156224,8 +156221,6 @@ entities:
     - type: Transform
       pos: -51.520878,-22.29806
       parent: 2
-- proto: HandheldHealthAnalyzerEmpty
-  entities:
   - uid: 23856
     components:
     - type: Transform
@@ -157544,6 +157539,13 @@ entities:
     - type: Transform
       pos: -56.5,-17.5
       parent: 2
+- proto: KitchenDeepFryer
+  entities:
+  - uid: 5196
+    components:
+    - type: Transform
+      pos: -7.5,-5.5
+      parent: 2
 - proto: KitchenElectricGrill
   entities:
   - uid: 24046
@@ -157641,11 +157643,6 @@ entities:
     components:
     - type: Transform
       pos: -101.5,26.5
-      parent: 2
-  - uid: 24063
-    components:
-    - type: Transform
-      pos: -7.5,-5.5
       parent: 2
   - uid: 24064
     components:
@@ -162880,13 +162877,6 @@ entities:
     components:
     - type: Transform
       pos: -31.587652,27.697378
-      parent: 2
-- proto: PlushieDurk
-  entities:
-  - uid: 24755
-    components:
-    - type: Transform
-      pos: -16.686914,20.786366
       parent: 2
 - proto: PlushieHampter
   entities:
@@ -183427,6 +183417,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: ScrapAirlock1
   entities:
@@ -183743,6 +183734,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
     - type: SiloUtilizer
       silo: 24372
@@ -183756,6 +183748,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
     - type: SiloUtilizer
       silo: 24372
@@ -183788,6 +183781,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: ShardGlass
   entities:
@@ -195086,12 +195080,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -6.5,-7.5
       parent: 2
-  - uid: 30101
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -7.5,-5.5
-      parent: 2
   - uid: 30102
     components:
     - type: Transform
@@ -199913,6 +199901,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: UniqueLockerNanorepFilled
   entities:

@@ -6,9 +6,9 @@
 
 using Content.Goobstation.Shared.CloneProjector.Clone;
 using Content.Shared.Emp;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Systems;
+using Content.Medical.Shared.Wounds;
+using Content.Medical.Common.Targeting;
+using Content.Shared.Body;
 using Content.Shared.Examine;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
@@ -16,9 +16,11 @@ using Content.Shared.Rejuvenate;
 
 namespace Content.Goobstation.Server.CloneProjector;
 
+// TODO: move parts that dont use HostProjector to shared...
 public partial class CloneProjectorSystem
 {
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
+
     public void InitializeClone()
     {
         SubscribeLocalEvent<HolographicCloneComponent, MapInitEvent>(OnInit);
@@ -30,18 +32,15 @@ public partial class CloneProjectorSystem
 
     private void OnInit(Entity<HolographicCloneComponent> clone, ref MapInitEvent args)
     {
-        foreach (var part in _body.GetBodyChildren(clone))
+        foreach (var part in _body.GetOrgans<WoundableComponent>(clone.Owner))
         {
-            if (!TryComp(part.Id, out WoundableComponent? woundable))
-                continue;
-
-            woundable.CanRemove = false;
-            woundable.CanBleed = false;
-            woundable.AllowWounds = false;
-
-            Dirty(part.Id, woundable);
+            part.Comp.CanRemove = false;
+            part.Comp.CanBleed = false;
+            part.Comp.AllowWounds = false;
+            Dirty(part);
         }
     }
+
     private void OnCloneStateChanged(Entity<HolographicCloneComponent> clone, ref MobStateChangedEvent args)
     {
         if (!_mobState.IsIncapacitated(clone)

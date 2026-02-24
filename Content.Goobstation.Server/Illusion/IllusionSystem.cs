@@ -7,7 +7,7 @@ using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Popups;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
+using Content.Medical.Shared.Consciousness;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Cloning;

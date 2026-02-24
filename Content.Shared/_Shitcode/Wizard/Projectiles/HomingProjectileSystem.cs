@@ -7,10 +7,10 @@
 
 using Content.Shared._Goobstation.Wizard.TimeStop;
 using Content.Shared.Interaction;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._Goobstation.Wizard.Projectiles;
 
@@ -19,7 +19,7 @@ public sealed class HomingProjectileSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RotateToFaceSystem _rotate = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
     private EntityQuery<FrozenComponent> _frozenQuery;
@@ -36,20 +36,16 @@ public sealed class HomingProjectileSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        if (_net.IsClient)
-            return;
+        var curTime = _timing.CurTime;
 
         var query =
             EntityQueryEnumerator<HomingProjectileComponent, PhysicsComponent, TransformComponent, FixturesComponent>();
-
         while (query.MoveNext(out var uid, out var homing, out var physics, out var xform, out var fix))
         {
-            homing.HomingAccumulator -= frameTime;
-
-            if (homing.HomingAccumulator >= 0)
+            if (homing.NextUpdate > curTime)
                 continue;
 
-            homing.HomingAccumulator = homing.HomingTime;
+            homing.NextUpdate = curTime + homing.HomingTime;
 
             if (_frozenQuery.HasComp(uid))
                 continue;

@@ -15,3 +15,19 @@ Entries:
   id: 2
   time: '2026-01-26T11:46:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/527
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed rejuvenate not restoring bodyparts/organs.
+  id: 3
+  time: '2026-02-18T11:45:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/738
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the mutation:dump toolshed command for easier debugging/fuckery with
+      genetics
+  id: 4
+  time: '2026-02-24T12:22:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/859

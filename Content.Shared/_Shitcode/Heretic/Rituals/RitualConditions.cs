@@ -129,3 +129,5 @@ public sealed partial class ConditionsRitualCondition : BaseRitualCondition<Cond
     [DataField(required: true)]
     public EntityCondition[] Conditions = default!;
 }
+
+public sealed partial class IsLimitedOutputCondition : BaseRitualCondition<IsLimitedOutputCondition>;

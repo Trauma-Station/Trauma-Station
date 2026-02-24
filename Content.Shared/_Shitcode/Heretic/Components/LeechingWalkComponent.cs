@@ -59,4 +59,13 @@ public sealed partial class LeechingWalkComponent : Component
 
     [DataField]
     public float TargetTemperature = 310f;
+
+    [DataField]
+    public EntProtoId SleepStatus = "StatusEffectForcedSleeping";
+
+    [DataField]
+    public EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
+
+    [DataField]
+    public EntProtoId RainbowStatus = "StatusEffectSeeingRainbow";
 }

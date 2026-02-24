@@ -12,7 +12,7 @@
     sprite: _Trauma/Clothing/OuterClothing/Armor/revchestplate.rsi
   - type: Armor
     coverage:
-    - Chest
+    - Torso
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -54,7 +54,7 @@
       VeinsDamage: 0
       NerveDamage: 0
     coverage:
-    - Chest
+    - Torso
     modifiers:
       coefficients:
         Blunt: 0.7
@@ -85,7 +85,7 @@
     sprite: _Trauma/Clothing/OuterClothing/Vests/revreflective.rsi
   - type: Armor
     coverage:
-    - Chest
+    - Torso
     modifiers:
       coefficients:
         Blunt: 0.7
@@ -123,7 +123,7 @@
     sprite: _Trauma/Clothing/OuterClothing/Armor/revflamearmor.rsi
   - type: Armor
     coverage:
-    - Chest
+    - Torso
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2

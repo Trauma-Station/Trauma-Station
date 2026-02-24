@@ -15,4 +15,4 @@
     requireActiveHand: false
     singleUser: false
     verbOnly: true
-  - type: PenSpin
+  - type: Pen

@@ -4,7 +4,7 @@
   name: reagent-name-nocturine-wonderprod
   desc: reagent-desc-nocturine-wonderprod
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:ModifyStatusEffect
         conditions:

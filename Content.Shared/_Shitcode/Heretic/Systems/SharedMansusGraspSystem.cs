@@ -9,7 +9,7 @@ using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared._Goobstation.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Rituals;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared._White.BackStab;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -193,6 +193,8 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
                     var ghoul = _compFactory.GetComponent<GhoulComponent>();
                     ghoul.GiveBlade = true;
+                    ghoul.DeathBehavior = GhoulDeathBehavior.NoGib;
+                    ghoul.CanDeconvert = true;
 
                     AddComp(target, ghoul);
                     applyMark = false;

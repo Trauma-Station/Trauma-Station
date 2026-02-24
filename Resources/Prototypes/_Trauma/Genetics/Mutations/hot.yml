@@ -1,0 +1,64 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationCindikinesis
+  name: Cindikinesis
+  description: Allows the user to concentrate nearby heat into a pile of ash. Wow. Very interesting.
+  components:
+  - type: Mutation
+    instability: 10
+    difficulty: 10
+  - type: RemovesMutation
+    removes:
+    - MutationGeladikinesis
+  - type: ActionMutation
+    action: ActionMutationCindikinesis
+
+- type: entity
+  parent: BaseMutation
+  id: MutationPyrokinesis
+  name: Pyrokinesis
+  description: Draws positive energy from the surroundings to heat surrounding temperatures at subject's will.
+  components:
+  - type: Mutation
+    instability: 25
+    difficulty: 12
+  - type: RemovesMutation
+    removes:
+    - MutationCryokinesis
+  - type: ActionMutation
+    action: ActionMutationPyrokinesis
+
+- type: entity
+  parent: BaseConjureAction
+  id: ActionMutationCindikinesis
+  name: Create Ash
+  description: Concentrates pyrokinetic forces to create ash, useful for basically nothing.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: Objects/Materials/materials.rsi
+      state: ash
+  - type: ConjureAction
+    spawn: Ash
+
+- type: entity
+  parent: BaseAction
+  id: ActionMutationPyrokinesis
+  name: Pyrobeam
+  description: This power fires a heated bolt at a target.
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: BigAction
+    raiseOnUser: true
+    sound: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: firebeam
+  - type: TargetAction
+    range: 60
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: BulletTemperaturePyro

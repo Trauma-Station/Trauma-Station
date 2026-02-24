@@ -6,13 +6,11 @@
 - type: entity
   name: fermid
   id: MobFermidBase
-  parent: [ SimpleSpaceMobBase, MobCombat ]
+  parent: [ SimpleSpaceMobBase, MobCombat, AppearanceSpaceAnimal ]
   abstract: true
   description: Extremely hostile asteroid-dwelling bugs. Best to avoid them wherever possible.
   components:
   - type: VentCrawler
-  - type: Body
-    prototype: SpaceSpider
   - type: Sprite
     drawdepth: Mobs
     sprite: /Textures/_Goobstation/Mobs/Animals/Fermids/fermid.rsi

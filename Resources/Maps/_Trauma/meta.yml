@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 271.1.0
+  engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 01/22/2026 23:15:58
-  entityCount: 27957
+  time: 02/07/2026 14:54:24
+  entityCount: 27958
 maps:
 - 1
 grids:
@@ -11227,7 +11227,7 @@ entities:
       pos: -42.5,29.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -23812.62
+      secondsUntilStateChange: -23848.928
       state: Opening
     - type: DeviceLinkSink
       invokeCounter: 2
@@ -121192,6 +121192,14 @@ entities:
     components:
     - type: Transform
       pos: 22.5,0.5
+      parent: 2
+- proto: KitchenDeepFryer
+  entities:
+  - uid: 27737
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 30.5,-13.5
       parent: 2
 - proto: KitchenElectricGrill
   entities:

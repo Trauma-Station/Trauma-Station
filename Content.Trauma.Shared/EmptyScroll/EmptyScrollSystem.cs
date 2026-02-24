@@ -90,6 +90,6 @@ public sealed class EmptyScrollSystem : EntitySystem
         }
 
         // do the effects
-        _effects.ApplyEffects(target, prayer.Effects);
+        _effects.ApplyEffects(target, prayer.Effects, user: target);
     }
 }

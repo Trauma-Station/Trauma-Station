@@ -10,7 +10,7 @@
 
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod.Components;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;

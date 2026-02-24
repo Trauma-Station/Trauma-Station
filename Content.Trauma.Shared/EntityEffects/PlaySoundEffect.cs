@@ -28,12 +28,11 @@ public sealed partial class PlaySoundEffect : EntityEffectBase<PlaySoundEffect>
 public sealed class PlaySoundEffectSystem : EntityEffectSystem<TransformComponent, PlaySoundEffect>
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly EffectDataSystem _data = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<PlaySoundEffect> args)
     {
         var sound = args.Effect.Sound;
-        var user = _data.GetUser(ent); // only predicted for debug effect stick etc where there is a clear user
+        var user = args.User ?? ent.Owner; // only predicted for debug effect stick etc where there is a clear user
         if (args.Effect.Positional)
             _audio.PlayPredicted(sound, ent.Comp.Coordinates, user);
         else

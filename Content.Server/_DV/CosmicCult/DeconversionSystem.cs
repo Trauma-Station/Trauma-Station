@@ -1,5 +1,7 @@
 using Content.Goobstation.Common.Religion;
 using Content.Server._DV.CosmicCult.Components;
+using Content.Server.Polymorph.Components;
+using Content.Server.Polymorph.Systems;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._DV.CosmicCult.Components.Examine;
@@ -28,6 +30,7 @@ public sealed class DeconversionSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jittering = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly UseDelaySystem _delay = default!;
+    [Dependency] private readonly PolymorphSystem _polymorph = default!;
 
     public override void Initialize()
     {
@@ -154,5 +157,10 @@ public sealed class DeconversionSystem : EntitySystem
     private void DeconvertCultist(EntityUid uid)
     {
         RemComp<CosmicCultComponent>(uid);
+        if (TryComp<PolymorphedEntityComponent>(uid, out var polyComp) && polyComp.Parent is { } parent) // If the cultist is polymorphed, we revert the polymorph and deconvert the original entity too.
+        {
+            _polymorph.Revert((uid, polyComp));
+            RemCompDeferred<CosmicCultComponent>(parent);
+        }
     }
 }

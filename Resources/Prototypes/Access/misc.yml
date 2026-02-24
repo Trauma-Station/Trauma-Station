@@ -15,6 +15,11 @@
 - type: accessGroup
   id: AllAccess
   tags:
+  # <Trauma>
+  - Robotics
+  - Genetics
+  - Journalism
+  # </Trauma>
   - EmergencyShuttleRepealAll
   - Captain
   - HeadOfPersonnel
@@ -48,8 +53,6 @@
   - Atmospherics
   - GenpopEnter
   - GenpopLeave
-  - Robotics #Goob
-  - Journalism #Goob
 
 - type: accessGroup
   id: General

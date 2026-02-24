@@ -50,10 +50,12 @@
     - Abductors
   # barber scissor
   - type: MagicMirror
-    addSlotTime: 2
-    removeSlotTime: 2 # yawn and your hair is gone
-    selectSlotTime: 2
-    changeSlotTime: 2
+    organs:
+    - Head
+    layers:
+    - Hair
+    - FacialHair
+    modifyTime: 2 # yawn and your hair is gone
   - type: ActivatableUI
     key: enum.MagicMirrorUiKey.Key
     inHandsOnly: true

@@ -1,0 +1,15 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<BoxContainer xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Orientation="Vertical"
+        Align="Center">
+    <GridContainer Columns="2" HorizontalExpand="True" Margin="4">
+        <Label Text="{Loc 'genetics-console-inserted-disk'}" Margin="4" MinWidth="220"/> <!-- curse of 220 -->
+        <Label Name="DiskName" Text="{Loc 'genetics-console-no-disk'}"/>
+        <Label Text="{Loc 'genetics-console-loaded-mutation'}" Margin="4" MinWidth="220"/>
+        <Label Name="MutationName" Text="{Loc 'genetics-console-disk-empty'}"/>
+    </GridContainer>
+    <controls:StripeBack>
+        <BoxContainer Name="PrintButtons" Orientation="Horizontal" Margin="8"/>
+    </controls:StripeBack>
+</BoxContainer>

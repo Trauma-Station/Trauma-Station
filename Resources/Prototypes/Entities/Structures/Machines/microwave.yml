@@ -100,7 +100,10 @@
     canCreateVacuum: false
     deleteAfterExplosion: true
   - type: ApcPowerReceiver
-    powerLoad: 400
+    powerLoad: 5
+  - type: PowerState
+    idlePowerDraw: 5
+    workingPowerDraw: 1000
   - type: Machine
     board: MicrowaveMachineCircuitboard
   - type: ContainerContainer

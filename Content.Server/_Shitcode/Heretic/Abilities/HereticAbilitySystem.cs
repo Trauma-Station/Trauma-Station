@@ -29,6 +29,8 @@ using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Goobstation.Shared.Heretic;
 using Content.Server.Atmos.EntitySystems;
+using Content.Server.Body.Components;
+using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Flash;
 using Content.Server.Hands.Systems;
@@ -44,7 +46,8 @@ using Content.Shared.Store.Components;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Random;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
+using Content.Shared.Body.Components;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Content.Shared.Stunnable;
@@ -58,11 +61,7 @@ using Content.Shared.Mobs.Components;
 using Robust.Shared.Prototypes;
 using Content.Server.Heretic.EntitySystems;
 using Content.Server.Actions;
-using Content.Server.Body.Components;
-using Content.Server.Body.Systems;
 using Content.Server.Temperature.Systems;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Server.Heretic.Components;
 using Content.Shared.Temperature.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._Goobstation.Heretic.Components;
@@ -78,7 +77,6 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Standing;
 using Content.Shared._Starlight.CollectiveMind;
-using Content.Shared.Body.Components;
 using Content.Shared.Hands.Components;
 using Content.Shared.Tag;
 using Robust.Server.Containers;
@@ -100,8 +98,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly FlashSystem _flash = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly PhysicsSystem _phys = default!;
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throw = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -109,9 +106,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
     [Dependency] private readonly ProtectiveBladeSystem _pblade = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly TemperatureSystem _temperature = default!;
     [Dependency] private readonly TagSystem _tag = default!;
@@ -126,7 +121,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly PvsOverrideSystem _pvs = default!;
     [Dependency] private readonly CloningSystem _cloning = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
 
     private static readonly ProtoId<TagPrototype> BladeBladeRitualTag = "RitualBladeBlade";
 
@@ -161,13 +155,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         QueueDel(ent);
     }
 
-    protected override void SpeakAbility(EntityUid ent, HereticActionComponent actionComp)
-    {
-        // shout the spell out
-        if (!string.IsNullOrWhiteSpace(actionComp.MessageLoc))
-            _chat.TrySendInGameICMessage(ent, Loc.GetString(actionComp.MessageLoc!), InGameICChatType.Speak, false);
-    }
-
     private void OnStore(EventHereticOpenStore args)
     {
         if (!TryUseAbility(args))
@@ -181,6 +168,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
         _store.ToggleUi(args.Performer, ent, store);
     }
+
     private void OnMansusGrasp(EventHereticMansusGrasp args)
     {
         if (!TryUseAbility(args, false))
@@ -433,13 +421,10 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
                 continue;
 
             var toHeal = -realMult * AllDamage;
-            var boneHeal = -realMult * flesh.BoneHealMultiplier;
-            var painHeal = -realMult * flesh.PainHealMultiplier;
-            var woundHeal = -realMult * flesh.WoundHealMultiplier;
             var bloodHeal = realMult * flesh.BloodHealMultiplier;
             var bleedHeal = -realMult * flesh.BleedReductionMultiplier;
 
-            IHateWoundMed((uid, dmg, null, null), toHeal, boneHeal, painHeal, woundHeal, bloodHeal, bleedHeal);
+            IHateWoundMed((uid, dmg, null), toHeal, bloodHeal, bleedHeal);
         }
 
         var rustChargeQuery = EntityQueryEnumerator<RustObjectsInRadiusComponent, TransformComponent>();
@@ -514,7 +499,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
                         if (damageable != null && damageable.TotalDamage < FixedPoint2.Epsilon)
                         {
-                            _body.RestoreBody(uid);
+                            //_body.RestoreBody(uid); // TODO NUBODY: bruh
                             shouldHeal = false;
                         }
                     }
@@ -535,11 +520,8 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
             if (shouldHeal && damageable != null)
             {
-                IHateWoundMed((uid, damageable, null, null),
+                IHateWoundMed((uid, damageable, null),
                     toHeal,
-                    boneHeal,
-                    otherHeal,
-                    otherHeal,
                     leech.BloodHeal * multiplier,
                     null);
             }
@@ -558,18 +540,18 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
                     visual: false);
             }
 
+            var reduction = leech.StunReduction * multiplier;
+            _stun.TryAddStunDuration(uid, -reduction);
+            _stun.AddKnockdownTime(uid, -reduction);
+
+            StatusNew.TryRemoveStatusEffect(uid, leech.SleepStatus);
+            StatusNew.TryRemoveStatusEffect(uid, leech.DrowsinessStatus);
+            StatusNew.TryRemoveStatusEffect(uid, leech.RainbowStatus);
+
             if (statusQuery.TryComp(uid, out var status))
             {
-                var reduction = leech.StunReduction * multiplier;
-                _statusEffect.TryRemoveTime(uid, "Stun", reduction, status);
-                _stun.AddKnockdownTime(uid, -reduction);
-
-                _statusEffect.TryRemoveStatusEffect(uid, "Pacified", status);
-                _statusEffect.TryRemoveStatusEffect(uid, "ForcedSleep", status);
-                _statusEffect.TryRemoveStatusEffect(uid, "SlowedDown", status);
-                _statusEffect.TryRemoveStatusEffect(uid, "BlurryVision", status);
-                _statusEffect.TryRemoveStatusEffect(uid, "TemporaryBlindness", status);
-                _statusEffect.TryRemoveStatusEffect(uid, "SeeingRainbows", status);
+                Status.TryRemoveStatusEffect(uid, "BlurryVision", status);
+                Status.TryRemoveStatusEffect(uid, "TemporaryBlindness", status);
             }
         }
     }

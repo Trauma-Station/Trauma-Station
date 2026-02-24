@@ -22,8 +22,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Humanoid;
+using Content.Shared.Preferences;
 using Content.Shared.StatusIcon;
+using Content.Trauma.Common.Genetics.Mutations;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -92,9 +93,13 @@ public sealed partial class ChangelingIdentityComponent : Component
 
     public bool VoidAdaptActive = false;
 
-    public List<EntityUid>? ActiveArmor = null;
+    // have to use NetEntity for these because generator is broken for collections?
 
-    public Dictionary<string, EntityUid?> Equipment = new();
+    [DataField, AutoNetworkedField]
+    public List<NetEntity>? ActiveArmor;
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<string, NetEntity> Equipment = new();
 
     /// <summary>
     ///     The default stasis time (in s).
@@ -178,9 +183,15 @@ public sealed partial class ChangelingIdentityComponent : Component
     public int MaxAbsorbedDNA = 5;
 
     /// <summary>
+    ///     The id of the fake mindshield implant
+    /// </summary>
+    [DataField]
+    public EntProtoId FakeMindShieldId = "FakeMindShieldImplant";
+
+    /// <summary>
     ///     Total absorbed DNA. Counts towards objectives.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField, AutoNetworkedField]
     public int TotalAbsorbedEntities = 0;
 
     /// <summary>
@@ -226,6 +237,12 @@ public sealed partial class TransformData
     /// <summary>
     ///     Entity's humanoid appearance component.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadOnly), NonSerialized]
-    public HumanoidAppearanceComponent Appearance;
+    [DataField]
+    public HumanoidCharacterProfile Profile;
+
+    /// <summary>
+    /// Mutations to set for the changeling when transforming.
+    /// </summary>
+    [DataField]
+    public MutatableData Mutations;
 }

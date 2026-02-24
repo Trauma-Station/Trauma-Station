@@ -1,5 +1,7 @@
 using System.Linq;
 using System.Numerics;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Goobstation.Common.Physics;
 using Content.Server.Chat.Systems;
 using Content.Server.Ghost;
@@ -9,11 +11,9 @@ using Content.Server.Popups;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Database;
 using Content.Shared.Heretic;
 using Content.Shared.Mind.Components;
@@ -44,7 +44,7 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
 
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedAdminLogManager _admin = default!;

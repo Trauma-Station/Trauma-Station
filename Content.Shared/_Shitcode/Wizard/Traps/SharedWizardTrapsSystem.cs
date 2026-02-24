@@ -8,7 +8,7 @@
 
 using Content.Goobstation.Common.Effects;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;

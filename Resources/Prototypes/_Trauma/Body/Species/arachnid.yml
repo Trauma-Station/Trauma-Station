@@ -1,0 +1,12 @@
+- type: entity
+  parent: [ OrganBaseWings, OrganArachnidExternal ]
+  id: OrganArachnidAppendages
+  name: spider appendages
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Species/Arachnid/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Trauma/empty.rsi
+      state: empty # no sprite since the markings actually control it
+  # TODO: if modifying inventory is feasible, tie web slots to this part

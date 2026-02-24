@@ -93,6 +93,8 @@
     startingCharge: 100
   - type: BatterySelfRecharger
     autoRechargeRate: 5
+  - type: TypingIndicatorClothing
+    proto: CosmicTyping
   - type: UnholyItem # Goobstation Shitchap
 
 
@@ -125,3 +127,10 @@
   - type: UnholyItem # Goobstation Shitchap
   - type: FlashImmunity # Goobstation
   - type: FlashSoundSuppression # Goobstation
+  - type: TypingIndicatorClothing
+    proto: CosmicTyping
+  - type: SpeechOverride
+    overrideIDs:
+      Unsexed: CosmicEmotesMale # Humans use male soudns for unsexed so here we are.
+      Female: CosmicEmotesFemale
+      Male: CosmicEmotesMale

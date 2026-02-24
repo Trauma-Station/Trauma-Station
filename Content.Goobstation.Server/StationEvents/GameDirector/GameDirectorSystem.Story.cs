@@ -28,7 +28,7 @@ public sealed partial class GameDirectorSystem
     {
         foreach (var proto in GameTicker.GetAllGameRulePrototypes())
         {
-            if (!proto.TryGetComponent<StationEventComponent>(out var stationEvent, _factory) || !stationEvent.IsSelectable)
+            if (!proto.TryGetComponent<StationEventComponent>(out var stationEvent, Factory) || !stationEvent.IsSelectable)
                 continue;
 
             // Gate here on players, but not on round runtime. The story will probably last long enough for the
@@ -258,7 +258,7 @@ public sealed partial class GameDirectorSystem
             // Look up this event's prototype and check it is ready to run.
             var proto = _prototypeManager.Index<EntityPrototype>(possibleEvent.StationEvent);
 
-            if (!proto.TryGetComponent<StationEventComponent>(out var stationEvent, _factory))
+            if (!proto.TryGetComponent<StationEventComponent>(out var stationEvent, Factory))
                 continue;
 
             if (!_event.CanRun(proto, stationEvent, count.Players, GameTicker.RoundDuration()))

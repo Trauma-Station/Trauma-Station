@@ -6,9 +6,9 @@
 using System.Linq;
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Changeling.Components;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Damage;
+using Content.Medical.Shared.Wounds;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
@@ -22,7 +22,6 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Changeling.Systems;
 
-// TODO: move this to shared
 public sealed partial class FleshmendSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;

@@ -83,3 +83,11 @@
   effects:
     - !type:AdjustTemperature
       amount: 25 # kelvin, kilojoules? WHO KNOWS!
+  id: FullFatOilReaction
+  reactants:
+    Oil:
+      amount: 1
+    Fat:
+      amount: 1
+  products:
+    FullFatOils: 2
