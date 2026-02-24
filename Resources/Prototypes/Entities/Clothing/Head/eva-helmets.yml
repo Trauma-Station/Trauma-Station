@@ -117,7 +117,7 @@
     - HelmetEVA
     - WhitelistChameleon
     - CorgiWearable
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker #Trauma
 
 #Syndicate EVA Helmet
 - type: entity
@@ -141,7 +141,7 @@
         Radiation: 0.5
   - type: StaticPrice
     price: 500 # Suit is 1000
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker #Trauma
 
 #Cosmonaut Helmet
 - type: entity
@@ -154,7 +154,7 @@
     sprite: Clothing/Head/Helmets/cosmonaut.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/cosmonaut.rsi
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker #Trauma
 
 #Paramedic Void Helmet
 - type: entity
@@ -186,7 +186,7 @@
       BoneDamage: 0.14
       VeinsDamage: 0
       NerveDamage: 0
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker #Trauma
 
 #Ancient Void Helmet
 - type: entity
@@ -199,7 +199,7 @@
     sprite: Clothing/Head/Helmets/ancientvoidsuit.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/ancientvoidsuit.rsi
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker #Trauma
 
 # #Paramedic Void Helmet TODO: Move goob prototype to wizden prototype
 #- type: entity
