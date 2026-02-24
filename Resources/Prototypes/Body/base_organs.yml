@@ -29,12 +29,12 @@
         damageType: Piercing
         damage: 600 # needs to be blown clean off by a shotgun
       behaviors:
-      - !type:Amputate
+      - !type:GibBehavior
     - trigger: !type:DamageTypeTrigger
         damageType: Blunt
         damage: 400 # we'll assume the bones are all broken by now
       behaviors:
-      - !type:Amputate
+      - !type:GibBehavior
   # </Shitmed>
   - type: Organ
 
