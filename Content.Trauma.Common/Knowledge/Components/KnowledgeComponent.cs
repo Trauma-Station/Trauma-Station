@@ -15,8 +15,8 @@ public sealed partial class KnowledgeComponent : Component
     /// <summary>
     /// Category of that knowledge.
     /// </summary>
-    [DataField]
-    public string Category = "";
+    [DataField(required: true)]
+    public ProtoId<KnowledgeCategoryPrototype> Category = "";
 
     /// <summary>
     /// Current Mastery of this knowledge.
@@ -31,7 +31,7 @@ public sealed partial class KnowledgeComponent : Component
     public int Experience;
 
     /// <summary>
-    /// Sprite to display in the character UI.
+    /// Experience cost for one roll in the knowledge.
     /// </summary>
     [DataField]
     public int ExperienceCost;
@@ -77,11 +77,11 @@ public sealed partial class KnowledgeComponent : Component
     /// Stores the last time this component was given exp.
     /// </summary>
     [DataField]
-    public uint LastExperienceTick;
+    public TimeSpan LastExperienceTimespan;
 
     /// <summary>
     /// Determines if component uses sleep functionality.
     /// </summary>
     [DataField]
-    public bool OnSleep = false;
+    public bool OnSleep;
 }

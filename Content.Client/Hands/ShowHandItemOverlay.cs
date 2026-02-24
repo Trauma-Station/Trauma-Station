@@ -1,9 +1,9 @@
 // <Trauma>
+using Content.Shared._Goobstation.Weapons.AmmoSelector;
 using Content.Trauma.Common.MartialArts;
 // </Trauma>
 using System.Numerics;
 using Content.Client.Hands.Systems;
-using Content.Shared._Goobstation.Weapons.AmmoSelector;
 using Content.Shared.CCVar;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;

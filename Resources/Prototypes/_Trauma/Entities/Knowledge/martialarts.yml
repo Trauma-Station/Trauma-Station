@@ -1,16 +1,4 @@
 - type: entity
-  parent: BaseKnowledge
-  id: BaseMartialArtsKnowledge
-  abstract: true
-  components:
-  - type: Knowledge
-    category: MartialArt
-    experienceCost: 10
-    color: "#c70000"
-  - type: MartialArtsKnowledge
-    blocked: false
-
-- type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtCQC
   components:
@@ -157,4 +145,6 @@
   components:
   - type: CanPerformCombo
     roundstartCombos:
-    - CQCConsecutive
+    - InstantStun
+    - InstantDeath
+    - InstantRejuvenate

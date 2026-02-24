@@ -1,9 +1,8 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Tim <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+// <Trauma>
+using Content.Trauma.Common.Knowledge;
+// </Trauma>
 using Content.Goobstation.Common.Cloning; // Goobstation
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Chat.Systems;
@@ -98,7 +97,10 @@ public sealed class CloningPodSystem : EntitySystem
         var query = EntityQueryEnumerator<BeingClonedComponent, MindContainerComponent>();
         var found = false;
         EntityUid mob;
-        while (query.MoveNext(out mob, out var cloned, out var mc))
+
+        BeingClonedComponent? cloned;
+
+        while (query.MoveNext(out mob, out cloned, out var mc))
         {
             if (cloned.Mind == mind && mc.Mind == null)
             {
@@ -109,6 +111,9 @@ public sealed class CloningPodSystem : EntitySystem
 
         if (!found)
             return;
+
+        if (cloned is { } && cloned.Original is {} original && Exists(original))
+            RaiseLocalEvent(mob, new KnowledgeCopyEvent(original), true);
 
         _mindSystem.TransferTo(mindId, mob, ghostCheckOverride: true, mind: mind);
         _mindSystem.UnVisit(mindId, mind);

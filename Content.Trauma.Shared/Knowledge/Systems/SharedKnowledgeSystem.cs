@@ -6,6 +6,8 @@ using Content.Shared.Body;
 using Content.Shared.Construction;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
@@ -27,14 +29,15 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedLanguageSystem _language = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly BodySystem _body = default!;
 
-    private uint _lastUpdateTick;
+    private TimeSpan _lastUpdateTick;
+    private TimeSpan _updateDelay = TimeSpan.FromSeconds(1);
+    private float _learnChance = 0.2f;
+    private System.Random _seed = new System.Random(0);
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -43,24 +46,23 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         InitializeLanguage();
         InitializeMartialArts();
         InitializeOnWear();
+        InitializeConstruction();
 
         SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnKnowledgeContainerShutdown);
-        SubscribeLocalEvent<KnowledgeContainerComponent, EntGotInsertedIntoContainerMessage>(OnEntInserted);
-        SubscribeLocalEvent<KnowledgeContainerComponent, EntGotRemovedFromContainerMessage>(OnEntRemoved);
-
-        SubscribeLocalEvent<KnowledgeContainerComponent, ConstructionGetGroupsEvent>(OnConstructionGetGroupEvent);
-
-        //SubscribeLocalEvent<KnowledgeContainerComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotInsertedEvent>(OnEntInserted);
+        SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotRemovedEvent>(OnEntRemoved);
+        SubscribeLocalEvent<MMIComponent, EntGotInsertedIntoContainerMessage>(OnMMIInserted);
+        SubscribeLocalEvent<MMIComponent, EntGotRemovedFromContainerMessage>(OnMMIRemoved);
 
         //Experience Methods
-        SubscribeLocalEvent<KnowledgeHolderComponent, AddExperience>(OnAddExperience);
+        SubscribeLocalEvent<KnowledgeHolderComponent, AddExperienceEvent>(OnAddExperienceEvent);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        if (_timing.CurTick.Value < _lastUpdateTick + (uint) (10.0f * _timing.TickRate))
+        if (_timing.CurTime < _lastUpdateTick + _updateDelay)
             return;
 
         var query = EntityQueryEnumerator<KnowledgeHolderComponent>();
@@ -79,11 +81,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
             if (GetActiveMartialArt(ent) is { } martialArts
                 && TryComp<SneakAttackComponent>(martialArts, out var sneakAttack)
-                && sneakAttack.IsFound
-                && _timing.CurTick.Value < sneakAttack.FramesTillHidden + (uint) (sneakAttack.SecondsTillHidden * _timing.TickRate))
-                sneakAttack.IsFound = false;
+                && sneakAttack.IsFound)
+            {
+                if (_timing.CurTime >= sneakAttack.FramesTillHidden)
+                    sneakAttack.IsFound = false;
+            }
         }
-        _lastUpdateTick = _timing.CurTick.Value;
+        _lastUpdateTick = _timing.CurTime;
     }
 
     private void OnKnowledgeContainerShutdown(Entity<KnowledgeContainerComponent> ent, ref ComponentShutdown args)
@@ -92,7 +96,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             _container.ShutdownContainer(container);
     }
 
-    private void OnEntInserted(Entity<KnowledgeContainerComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+    private void OnEntInserted(Entity<KnowledgeContainerComponent> ent, ref OrganGotInsertedEvent args)
     {
         var body = _body.GetBody(ent);
         if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
@@ -101,7 +105,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         Dirty(ent);
     }
 
-    private void OnEntRemoved(Entity<KnowledgeContainerComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    private void OnEntRemoved(Entity<KnowledgeContainerComponent> ent, ref OrganGotRemovedEvent args)
     {
         var body = _body.GetBody(ent);
         if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
@@ -110,81 +114,49 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         Dirty(ent);
     }
 
-    private bool TryFindKnowledgeInEntity(EntityUid parent, out EntityUid brain)
+    private void OnMMIInserted(Entity<MMIComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
-        brain = default;
-
-        if (HasComp<KnowledgeContainerComponent>(parent))
-        {
-            brain = parent;
-            return true;
-        }
-
-        var xform = Transform(parent);
-        var enumerator = xform.ChildEnumerator;
-
-        while (enumerator.MoveNext(out var child))
-        {
-            if (TryFindKnowledgeInEntity(child, out brain))
-                return true;
-        }
-
-        return false;
+        if (ent.Comp.BrainSlot.ContainerSlot?.ContainedEntity is not { } brain)
+            return;
+        var body = args.Container.Owner;
+        if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
+            return;
+        knowledgeHolder.KnowledgeEntity = ent;
+        Dirty(ent);
     }
 
-    private bool IsDescendantOf(EntityUid potentialParent, EntityUid child)
+    private void OnMMIRemoved(Entity<MMIComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
-        if (!potentialParent.IsValid() || !child.IsValid())
-            return false;
-
-        var current = child;
-
-        while (current.IsValid() && TryComp(current, out TransformComponent? xform))
-        {
-            if (xform.ParentUid == potentialParent)
-                return true;
-
-            current = xform.ParentUid;
-
-            if (HasComp<MapComponent>(current) || HasComp<MapGridComponent>(current))
-                break;
-        }
-
-        return false;
+        if (ent.Comp.BrainSlot.ContainerSlot?.ContainedEntity is not { } brain)
+            return;
+        var body = args.Container.Owner;
+        if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
+            return;
+        knowledgeHolder.KnowledgeEntity = null;
+        Dirty(ent);
     }
 
-    public void OnInit(Entity<KnowledgeHolderComponent> ent)
-    {
-        var knowledgeContainer = EnsureKnowledgeContainer(ent);
-        ent.Comp.KnowledgeEntity = knowledgeContainer.Owner;
-        Dirty(ent.Owner, ent.Comp);
-
-        if (TryComp<LanguageSpeakerComponent>(ent.Owner, out var languageSpeaker))
-            UpdateEntityLanguages((ent, languageSpeaker));
-
-    }
-
-    public void OnAddExperience(Entity<KnowledgeHolderComponent> ent, ref AddExperience args)
+    public void OnAddExperienceEvent(Entity<KnowledgeHolderComponent> ent, ref AddExperienceEvent args)
     {
         if (TryGetKnowledgeUnit(ent, args.KnowledgeType) is not { } knowledgeUnit || !TryComp<KnowledgeComponent>(knowledgeUnit, out var knowledgeComponent))
         {
-            _random.SetSeed((int) _timing.CurTick.Value);
-            if (_random.Prob(0.2f))
+            _seed = new System.Random(SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id));
+            if (_seed.Prob(_learnChance))
                 TryAddKnowledgeUnit(ent, (args.KnowledgeType, 0));
             return;
         }
         ExperienceUpdate(knowledgeUnit, ent, ref args);
 
-        var evNetUpdate = new UpdateExperience();
+        var evNetUpdate = new UpdateExperienceEvent();
         RaiseLocalEvent(ent, ref evNetUpdate);
     }
 
-    public void ExperienceUpdate(Entity<KnowledgeComponent> ent, Entity<KnowledgeHolderComponent> target, ref AddExperience args)
+    public void ExperienceUpdate(Entity<KnowledgeComponent> ent, Entity<KnowledgeHolderComponent> target, ref AddExperienceEvent args)
     {
-        if (_timing.CurTick.Value < ent.Comp.LastExperienceTick + (uint) (1.0f * _timing.TickRate) || ent.Comp.Level > 100)
+        if (_timing.CurTime < ent.Comp.LastExperienceTimespan)
             return;
 
-        ent.Comp.LastExperienceTick = _timing.CurTick.Value;
+        ent.Comp.LastExperienceTimespan = _timing.CurTime + TimeSpan.FromSeconds(1);
 
 
         ent.Comp.Experience += args.Experience + ent.Comp.BonusExperience;
@@ -203,63 +175,57 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         var getMastery = GetMastery(ent);
         (int, bool) rollResult = (0, false);
 
-        if (ent.Comp.Experience >= ent.Comp.ExperienceCost && ent.Comp.Level < 100)
+        if (!(ent.Comp.Experience >= ent.Comp.ExperienceCost && ent.Comp.Level < 100))
+            return false;
+
+        if (ent.Comp.OnSleep)
         {
-            _random.SetSeed((int) _timing.CurTick.Value);
-            if (ent.Comp.OnSleep)
+            if (_mobState.IsCritical(target))
             {
-                if (_mobState.IsCritical(target))
-                {
-                    int diceType = DiceDictionary(ent);
-                    rollResult = RollPenetrating(diceType);
-                    Log.Debug($"Sleepy {ToPrettyString(ent)} needs to roll zenkai on {ToPrettyString(target)}. Suceeded? {rollResult.Item2}");
-                    if (!(rollResult.Item2))
-                        return false;
-                    ent.Comp.Level += rollResult.Item1;
-                    _damageable.HealEvenly(ent.Owner, 150);
-                    Log.Debug($"{ToPrettyString(ent.Owner)}: zenkai boost");
-                }
-                else if (TryComp<SleepingComponent>(target, out _))
-                {
-                    int diceType = DiceDictionary(ent);
-                    rollResult = RollPenetrating(diceType);
-                    Log.Debug($"Sleepy {ToPrettyString(ent)} needs to roll on {ToPrettyString(target)}. Suceeded? {rollResult.Item2}");
-                    if (!(rollResult.Item2))
-                        return false;
-                }
-                else
+                int diceType = DiceDictionary(ent);
+                rollResult = RollPenetrating(diceType);
+                Log.Debug($"Sleepy {ToPrettyString(ent)} needs to roll zenkai on {ToPrettyString(target)}. Suceeded? {rollResult.Item2}");
+                if (!(rollResult.Item2))
+                    return false;
+                ent.Comp.Level += rollResult.Item1;
+                _damageable.HealEvenly(ent.Owner, 150);
+                Log.Debug($"{ToPrettyString(ent.Owner)}: zenkai boost");
+            }
+            else if (HasComp<SleepingComponent>(target))
+            {
+                int diceType = DiceDictionary(ent);
+                rollResult = RollPenetrating(diceType);
+                Log.Debug($"Sleepy {ToPrettyString(ent)} needs to roll on {ToPrettyString(target)}. Suceeded? {rollResult.Item2}");
+                if (!(rollResult.Item2))
                     return false;
             }
-            int timesToRoll = ent.Comp.Experience / ent.Comp.ExperienceCost;
-            (int, bool) rollInnard;
-            for (int i = 0; i < timesToRoll; i++)
-            {
-                ent.Comp.Experience -= ent.Comp.ExperienceCost;
-                int diceType = DiceDictionary(ent);
-                rollInnard = RollPenetrating(diceType);
-                rollResult = (rollInnard.Item1, rollInnard.Item2 || rollResult.Item2);
-                ent.Comp.Level += rollResult.Item1;
-                var knowledgePrototype = MetaData(ent).EntityPrototype?.ID;
-                if (rollInnard.Item2)
-                {
-                    timesToRoll++;
-                }
-            }
-            if (rollResult.Item2)
-                _popup.PopupEntity(Loc.GetString("knowledge-level-epiphany", ("knowledge", Loc.GetString(PopupString(ent)))), target, target, PopupType.Medium);
+            else
+                return false;
         }
-        else
+        int timesToRoll = ent.Comp.Experience / ent.Comp.ExperienceCost;
+        (int, bool) rollInnard;
+        for (int i = 0; i < timesToRoll; i++)
         {
-            return false;
+            ent.Comp.Experience -= ent.Comp.ExperienceCost;
+            int diceType = DiceDictionary(ent);
+            rollInnard = RollPenetrating(diceType);
+            rollResult = (rollInnard.Item1, rollInnard.Item2 || rollResult.Item2);
+            ent.Comp.Level += rollResult.Item1;
+            if (rollInnard.Item2)
+            {
+                timesToRoll++;
+            }
         }
+        if (rollResult.Item2)
+            _popup.PopupClient(Loc.GetString("knowledge-level-epiphany", ("knowledge", PopupString(ent))), target, target, PopupType.Medium);
 
         if (ent.Comp.Level > 100)
             ent.Comp.Level = 100;
 
         if (getMastery != GetMastery(ent) && !rollResult.Item2)
         {
-            var knowledgePrototype = MetaData(ent).EntityPrototype?.ID;
-            _popup.PopupEntity(Loc.GetString("knowledge-level-up-popup", ("knowledge", Loc.GetString(PopupString(ent))), ("mastery", GetMasteryString(ent).ToLower())), target, target, PopupType.Medium);
+            var knowledgePrototype = Prototype(ent)?.ID;
+            _popup.PopupClient(Loc.GetString("knowledge-level-up-popup", ("knowledge", PopupString(ent)), ("mastery", GetMasteryString(ent).ToLower())), target, target, PopupType.Medium);
         }
 
         Dirty(ent);
@@ -283,7 +249,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override (string Category, KnowledgeInfo Info) GetKnowledgeInfo(Entity<KnowledgeComponent> ent)
     {
         var knowledgeInfo = new KnowledgeInfo("", "", ent.Comp.Color, ent.Comp.Sprite);
-        var knowledgePrototype = MetaData(ent).EntityPrototype?.ID;
+        var knowledgePrototype = Prototype(ent)?.ID;
         knowledgeInfo.Description = Loc.GetString("knowledge-info-description", ("level", ent.Comp.Level), ("mastery", GetMasteryString(ent)), ("exp", ent.Comp.Experience));
         if (TryComp<LanguageKnowledgeComponent>(ent, out var languageKnowledge))
         {
@@ -368,9 +334,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
         else
         {
-            if (_netManager.IsClient)
-                return knowledgeEnt;
-
             var result = PredictedTrySpawnInContainer(knowledgeId.Item1, entVerified.Owner, KnowledgeContainerComponent.ContainerId, out var knowledgeUnit);
             if (!result || knowledgeUnit is not { } knowledgeUnitVerified)
                 return knowledgeEnt;
@@ -381,16 +344,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 Dirty(knowledgeUnitVerified, knowledgeComp);
             }
             entVerified.Comp.KnowledgeContainerIDs[knowledgeId.Item1] = knowledgeUnitVerified;
-            if (TryComp<LanguageKnowledgeComponent>(knowledgeUnitVerified, out var languageComp))
-            {
-                EnsureComp<LanguageSpeakerComponent>(target);
-                _popup.PopupEntity(Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Loc.GetString($"{languageComp.LanguageId.Id}"))), target, target, PopupType.Medium);
-            }
-            else
-            {
-                _popup.PopupEntity(Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgeId.Item1.ToString()}"))), target, target, PopupType.Medium);
 
-            }
+            if (TryComp<LanguageKnowledgeComponent>(knowledgeUnitVerified, out var languageComp))
+                EnsureComp<LanguageSpeakerComponent>(target);
+
+            _popup.PopupClient(Loc.GetString("knowledge-unit-learned-popup", ("knowledge", PopupString(knowledgeUnitVerified))), target, target, PopupType.Medium);
         }
         Dirty(entVerified);
         return knowledgeEnt;
@@ -408,7 +366,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             TryAddKnowledgeUnit(target, (knowledgeId.Key, knowledgeId.Value));
         }
 
-        var evNetUpdate = new UpdateExperience();
+        var evNetUpdate = new UpdateExperienceEvent();
         RaiseLocalEvent(target, ref evNetUpdate);
     }
 
@@ -434,12 +392,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
 
         PredictedQueueDel(unit);
-        if (TryComp<LanguageKnowledgeComponent>(unit, out _))
-        {
-            _popup.PopupEntity(Loc.GetString("knowledge-unit-forgotten-popup", ("knowledge", Loc.GetString($"{knowledgeUnit.ToString()}"))), target, target, PopupType.Medium);
-        }
-        else
-            _popup.PopupEntity(Loc.GetString("knowledge-unit-forgotten-popup", ("knowledge", Loc.GetString($"knowledge-{knowledgeUnit.ToString()}"))), target, target, PopupType.Medium);
+        _popup.PopupClient(Loc.GetString("knowledge-unit-forgotten-popup", ("knowledge", PopupString(unit))), target, target, PopupType.Medium);
         return target;
     }
 
@@ -601,6 +554,29 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public override Entity<KnowledgeContainerComponent>? TryGetKnowledgeContainer(Entity<KnowledgeHolderComponent> ent)
     {
+        if (TryComp<BorgChassisComponent>(ent, out var borgComp))
+        {
+            var brain = borgComp.BrainContainer.ContainedEntities;
+            foreach (var entity in brain)
+            {
+                if (TryComp<KnowledgeContainerComponent>(entity, out var knowledgeContainer))
+                {
+                    ent.Comp.KnowledgeEntity = entity;
+                    Dirty(ent.Owner, ent.Comp);
+                    return (entity, knowledgeContainer);
+                }
+                else if (TryComp<MMIComponent>(entity, out var mmiComponent))
+                {
+                    if (mmiComponent.BrainSlot.ContainerSlot?.ContainedEntity is { } && TryComp<KnowledgeContainerComponent>(mmiComponent.BrainSlot.ContainerSlot.ContainedEntity, out var knowledgeContainerMMI))
+                    {
+                        ent.Comp.KnowledgeEntity = mmiComponent.BrainSlot.ContainerSlot.ContainedEntity;
+                        Dirty(ent.Owner, ent.Comp);
+                        return (mmiComponent.BrainSlot.ContainerSlot.ContainedEntity.Value, knowledgeContainerMMI);
+                    }
+                }
+
+            }
+        }
         var list = _body.GetOrgans<KnowledgeContainerComponent>(ent.Owner);
 
         foreach (var organ in list)
@@ -627,10 +603,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public override EntityUid? TryGetKnowledgeEntity(EntityUid uid)
     {
-        if (TryComp<KnowledgeHolderComponent>(uid, out var knowledgeHolder) && knowledgeHolder.KnowledgeEntity is { })
+        if (!TryComp<KnowledgeHolderComponent>(uid, out var knowledgeHolder))
+            return null;
+
+        if (knowledgeHolder.KnowledgeEntity is { })
             return knowledgeHolder.KnowledgeEntity;
 
-        return null;
+        return TryGetKnowledgeContainer((uid, knowledgeHolder));
     }
 
     public override EntityUid? TryGetKnowledgeEntity(Entity<KnowledgeHolderComponent> ent)
@@ -651,20 +630,27 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public override void ClearKnowledge(EntityUid target, bool deleteAll)
     {
-        if (TryComp<KnowledgeContainerComponent>(target, out var knowledgeContainer))
+        if (!TryComp<KnowledgeHolderComponent>(target, out var holder) || TryGetKnowledgeContainer((target, holder)) is not { } knowledgeContainer)
+            return;
+
+        knowledgeContainer.Comp.KnowledgeContainerIDs.Clear();
+        knowledgeContainer.Comp.MartialArtSkillUid = null;
+        knowledgeContainer.Comp.LanguageSkillUid = null;
+        var container = knowledgeContainer.Comp.KnowledgeContainer;
+        if (container is { } && deleteAll)
         {
-            knowledgeContainer.KnowledgeContainerIDs.Clear();
-            knowledgeContainer.MartialArtSkillUid = null;
-            knowledgeContainer.LanguageSkillUid = null;
-            var container = knowledgeContainer.KnowledgeContainer;
-            if (container is { } && deleteAll)
+            foreach (var entity in container.ContainedEntities)
             {
-                foreach (var entity in container.ContainedEntities)
-                {
-                    PredictedQueueDel(entity);
-                }
+                PredictedQueueDel(entity);
             }
         }
+    }
+
+    public override Dictionary<EntProtoId, EntityUid>? TryGetKnowledgeDictionary(EntityUid target)
+    {
+        if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent) || TryGetKnowledgeEntity((target, holderComponent)) is not { } ent || !TryComp<KnowledgeContainerComponent>(ent, out var comp))
+            return null;
+        return comp.KnowledgeContainerIDs;
     }
 
     public string GetMasteryString(Entity<KnowledgeComponent> ent)
@@ -729,7 +715,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         bool isCritical = false;
         int penetratingRolls = 0;
-        int currentRoll = _random.Next(1, sides + 1);
+        int currentRoll = _seed.Next(1, sides + 1);
         int total = currentRoll;
         int newSides = sides;
 
@@ -742,7 +728,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 20 => 6,
                 _ => newSides
             };
-            currentRoll = _random.Next(1, newSides + 1);
+            currentRoll = _seed.Next(1, newSides + 1);
             total += currentRoll - 1;
             isCritical = true;
         }
@@ -762,19 +748,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         return ent.Comp.KnowledgeContainer;
     }
 
-    //private void OnComponentInit(Entity<KnowledgeContainerComponent> ent, ref ComponentInit args)
-    //{
-    //    ent.Comp.KnowledgeContainer = _container.EnsureContainer<Container>(ent.Owner, KnowledgeContainerComponent.ContainerId);
-
-    //    ent.Comp.KnowledgeContainer.ShowContents = true;
-    //    Dirty(ent);
-    //}
-
-    private string PopupString(EntityUid knowledgeUnit)
+    public string PopupString(EntityUid knowledgeUnit)
     {
         if (TryComp<LanguageKnowledgeComponent>(knowledgeUnit, out var knowledgeComp))
-            return $"{knowledgeComp.LanguageId.Id}";
+            return Loc.GetString($"{knowledgeComp.LanguageId.Id}");
         else
-            return $"knowledge-{MetaData(knowledgeUnit).EntityPrototype?.ID}";
+            return Loc.GetString($"knowledge-{Prototype(knowledgeUnit)?.ID}");
     }
 }

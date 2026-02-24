@@ -102,10 +102,4 @@ public sealed partial class CloningSettingsPrototype : IPrototype, IInheritingPr
     [DataField]
     [AlwaysPushInheritance]
     public HashSet<string> EventComponents = new();
-
-    /// <summary>
-    ///     Whether or not to copy knowledge.
-    /// </summary>
-    [DataField]
-    public bool CopyKnowledge = true;
 }

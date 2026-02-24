@@ -18,6 +18,7 @@ public sealed partial class CharacterWindow : DefaultWindow
     // <Trauma>
     protected override void Opened()
     {
+        base.Opened();
         OnOpened?.Invoke(this);
     }
     // </Trauma>

@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Trauma.Common.Knowledge;
 using Content.Medical.Common.Body;
 using Content.Shared.Body;
 using System.Linq;
@@ -17,7 +18,9 @@ namespace Content.Shared.Armor;
 /// <summary>
 ///     This handles logic relating to <see cref="ArmorComponent" />
 /// </summary>
-public abstract class SharedArmorSystem : EntitySystem
+// <Trauma>
+public abstract partial class SharedArmorSystem : EntitySystem
+// </Trauma>
 {
     // <Trauma>
     [Dependency] private readonly BodySystem _body = default!;
@@ -60,9 +63,12 @@ public abstract class SharedArmorSystem : EntitySystem
         if (args.Args.TargetPart is not {} partType)
             return;
 
+        // <Trauma>
+        var newmods = GetQualityAdjustment(uid, component.Modifiers);
         if (component.ArmorCoverage.Contains(partType))
             args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage,
-            DamageSpecifier.PenetrateArmor(component.Modifiers, args.Args.Damage.ArmorPenetration));
+            DamageSpecifier.PenetrateArmor(newmods, args.Args.Damage.ArmorPenetration));
+        // </Trauma>
         // </Goob>
     }
 
@@ -72,8 +78,11 @@ public abstract class SharedArmorSystem : EntitySystem
         if (TryComp<MaskComponent>(uid, out var mask) && mask.IsToggled)
             return;
 
+        // <Trauma>
+        var newmods = GetQualityAdjustment(uid, component.Modifiers);
         args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage,
-            DamageSpecifier.PenetrateArmor(component.Modifiers, args.Args.Damage.ArmorPenetration)); // Goob edit
+            DamageSpecifier.PenetrateArmor(newmods, args.Args.Damage.ArmorPenetration)); // Goob edit
+        // </Trauma>
     }
 
     private void OnArmorVerbExamine(EntityUid uid, ArmorComponent component, GetVerbsEvent<ExamineVerb> args)
@@ -105,7 +114,9 @@ public abstract class SharedArmorSystem : EntitySystem
             return msg;
 
         var coverage = component.ArmorCoverage;
-        var armorModifiers = component.Modifiers;
+        // <Trauma>
+        var armorModifiers = GetQualityAdjustment(component.Owner, component.Modifiers);
+        // </Trauma>
 
         if (!component.ArmourCoverageHidden)
         {

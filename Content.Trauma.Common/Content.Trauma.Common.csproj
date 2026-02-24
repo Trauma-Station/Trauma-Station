@@ -10,12 +10,6 @@
 		<ProjectReference Include="../Content.Goobstation.Maths/Content.Goobstation.Maths.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <None Update="MartialArts\GrabStageEnums.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </None>
-	</ItemGroup>
-
 	<Import Project="../RobustToolbox/Imports/Shared.props" />
 	<Import Project="../RobustToolbox/MSBuild/Robust.Properties.targets" />
 	<Import Project="../RobustToolbox/MSBuild/Robust.CompNetworkGenerator.targets" />

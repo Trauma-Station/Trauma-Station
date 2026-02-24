@@ -53,30 +53,28 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
 
     private void ToggleMartialArtsMenu(bool centered)
     {
-        if (_menu == null)
+        if (_menu is { })
         {
-            // setup window
-            var models = GetButtons().ToList();
+            CloseMenu();
+            return;
+        }
+        // setup window
+        var models = GetButtons().ToList();
 
-            _menu = new SimpleRadialMenu();
-            _menu.SetButtons(models);
+        _menu = new SimpleRadialMenu();
+        _menu.SetButtons(models);
 
-            _menu.Open();
+        _menu.Open();
 
-            _menu.OnClose += OnWindowClosed;
+        _menu.OnClose += OnWindowClosed;
 
-            if (centered)
-            {
-                _menu.OpenCentered();
-            }
-            else
-            {
-                _menu.OpenOverMouseScreenPosition();
-            }
+        if (centered)
+        {
+            _menu.OpenCentered();
         }
         else
         {
-            CloseMenu();
+            _menu.OpenOverMouseScreenPosition();
         }
     }
 
@@ -141,6 +139,6 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
             return;
 
         var netEnt = EntityManager.GetNetEntity(martialArt);
-        EntityManager.RaisePredictiveEvent(new KnowledgeUpdateMartialArts(netEnt));
+        EntityManager.RaisePredictiveEvent(new KnowledgeUpdateMartialArtsEvent(netEnt));
     }
 }

@@ -26,5 +26,5 @@ public sealed partial class KnowledgeGrantOnUseComponent : Component
     /// Length of a simple doafter to learn this knowledge.
     /// </summary>
     [DataField]
-    public float? DoAfter = 1.0f;
+    public TimeSpan DoAfter = TimeSpan.FromSeconds(2);
 }

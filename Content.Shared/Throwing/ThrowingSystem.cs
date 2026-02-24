@@ -23,7 +23,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Throwing;
 
+// <Trauma>
 public sealed partial class ThrowingSystem : EntitySystem
+// </Trauma>
 {
     public const float ThrowAngularImpulse = 5f;
 
@@ -38,8 +40,6 @@ public sealed partial class ThrowingSystem : EntitySystem
 
     // <Trauma>
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
     // </Trauma>
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;

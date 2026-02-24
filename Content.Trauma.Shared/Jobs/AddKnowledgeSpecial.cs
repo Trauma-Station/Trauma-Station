@@ -3,7 +3,7 @@ using Content.Shared.Roles;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 
-namespace Content.Trauma.Server.Jobs;
+namespace Content.Trauma.Shared.Jobs;
 
 /// <summary>
 /// Adds knowledge on spawn to the entity
@@ -11,8 +11,8 @@ namespace Content.Trauma.Server.Jobs;
 [UsedImplicitly]
 public sealed partial class AddKnowledgeSpecial : JobSpecial
 {
-    [DataField]
-    public Dictionary<EntProtoId, int> Knowledge { get; private set; } = new();
+    [DataField(required: true)]
+    public Dictionary<EntProtoId, int> Knowledge = new();
 
     public override void AfterEquip(EntityUid mob)
     {

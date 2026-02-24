@@ -8,47 +8,6 @@
     experienceCost: 1 # We're fucked if its 0 or lower. Do not change lmao.
 
 - type: entity
-  id: BaseMedicalKnowledge
-  parent: BaseKnowledge
-  abstract: true
-  components:
-  - type: Knowledge
-    category: Medical
-
-- type: entity
-  id: BasePhysicalKnowledge
-  parent: BaseKnowledge
-  abstract: true
-  components:
-  - type: Knowledge
-    category: Physical
-    # onSleep: true
-
-- type: entity
-  id: BaseWarKnowledge
-  parent: BaseKnowledge
-  abstract: true
-  components:
-  - type: Knowledge
-    category: War
-
-- type: entity
-  id: BaseIntellectualKnowledge
-  parent: BaseKnowledge
-  abstract: true
-  components:
-  - type: Knowledge
-    category: Intellectual
-
-- type: entity
-  id: BaseScientificKnowledge
-  parent: BaseKnowledge
-  abstract: true
-  components:
-  - type: Knowledge
-    category: Scientific
-
-- type: entity
   parent: BaseWarKnowledge
   id: MeleeKnowledge
   components:

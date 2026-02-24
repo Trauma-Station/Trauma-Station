@@ -1,6 +1,5 @@
 // <Trauma>
-using Content.Trauma.Common.Knowledge.Systems;
-using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Knowledge;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Construction;
@@ -43,7 +42,6 @@ using Content.Shared.Chat;
 using Content.Shared.Damage.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Temperature.Components;
-using System.Diagnostics;
 
 namespace Content.Server.Kitchen.EntitySystems
 {
@@ -76,6 +74,10 @@ namespace Content.Server.Kitchen.EntitySystems
 
         private static readonly ProtoId<TagPrototype> MetalTag = "Metal";
         private static readonly ProtoId<TagPrototype> PlasticTag = "Plastic";
+
+        // <Trauma>
+        private static readonly EntProtoId MartialArtCQCChef = "MartialArtCQCChef";
+        // <Trauma>
 
         public override void Initialize()
         {
@@ -669,8 +671,9 @@ namespace Content.Server.Kitchen.EntitySystems
                     // <Trauma>
                     if (microwave.LastKnownKnowledgeHolder is { } chef)
                     {
-                        var ev = new AddExperience("MartialArtCQCChef", active.PortionedRecipe.Item2);
+                        var ev = new AddExperienceEvent(MartialArtCQCChef, active.PortionedRecipe.Item2);
                         RaiseLocalEvent(chef, ref ev);
+                        microwave.LastKnownKnowledgeHolder = null;
                     }
                     // </Trauma>
 

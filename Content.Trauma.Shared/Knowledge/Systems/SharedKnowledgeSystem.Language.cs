@@ -6,15 +6,10 @@ using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
-using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
+using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
-using Robust.Shared.Physics;
-using Robust.Shared.Prototypes;
-using YamlDotNet.Core.Tokens;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
@@ -24,7 +19,7 @@ public abstract partial class SharedKnowledgeSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die" };
-    private HashSet<Entity<IComponent>> _hearers = new();
+    private HashSet<Entity<LanguageSpeakerComponent>> _hearers = new();
 
     private void InitializeLanguage()
     {
@@ -262,36 +257,37 @@ public abstract partial class SharedKnowledgeSystem
                     modifier = Math.Max(((float) knowledgeComponent.Level - 80f) / 20f, 0f);
                     damage.DamageDict.Add("Brute", 20 * modifier);
                 }
-                if (_timing.CurTick.Value < knowledgeComponent.LastExperienceTick + (5.0f * _timing.TickRate))
+                if (_timing.CurTime >= languageKnowledgeComponent.LastSpoken)
                 {
-                    var evSelf = new AddExperience($"language-{args.Language.ID}", (int) Math.Clamp((float) (_timing.CurTick.Value - knowledgeComponent.LastExperienceTick) / _timing.TickRate, 0, 4));
+                    var evSelf = new AddExperienceEvent($"language-{args.Language.ID}", Math.Clamp((_timing.CurTime - languageKnowledgeComponent.LastSpoken).Seconds, 0, 4));
                     if (evSelf.Experience > 0)
                         RaiseLocalEvent(ent, ref evSelf);
-                    UpdateEntityLanguages(ent);
+
+                    languageKnowledgeComponent.LastSpoken = _timing.CurTime + TimeSpan.FromSeconds(5);
+                    Dirty(knownLanguageTrue, languageKnowledgeComponent);
+
+                    _hearers.Clear();
+                    _lookup.GetEntitiesInRange<LanguageSpeakerComponent>(_transform.GetMoverCoordinates(ent), 7f, _hearers, LookupFlags.All);
+                    var evheard = new AddExperienceEvent($"language-{args.Language.ID}", 1);
+                    foreach (var hearer in _hearers)
+                    {
+                        RaiseLocalEvent(hearer, ref evheard);
+
+                        if (!isCurse)
+                            continue;
+
+                        if (hearer.Owner == ent.Owner) continue; // Don't curse yourself
+
+                        if (_language.CanUnderstand(hearer.Owner, args.Language))
+                        {
+                            _damageable.TryChangeDamage(hearer.Owner, damage, ignoreResistances: false, interruptsDoAfters: false, ignoreBlockers: true, targetPart: TargetBodyPart.Head, splitDamage: SplitDamageBehavior.SplitEnsureAll);
+                            _status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
+
+                            _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
+                        }
+                    }
                 }
             }
-
-            _hearers.Clear();
-            _lookup.GetEntitiesInRange(typeof(LanguageSpeakerComponent), _transform.GetMapCoordinates(ent), 7f, _hearers, LookupFlags.All);
-            var ev = new AddExperience($"language-{args.Language.ID}", 1);
-            foreach (var hearer in _hearers)
-            {
-                RaiseLocalEvent(hearer, ref ev);
-
-                if (!isCurse)
-                    continue;
-
-                if (hearer.Owner == ent.Owner) continue; // Don't curse yourself
-
-                if (_language.CanUnderstand(hearer.Owner, args.Language))
-                {
-                    _damageable.TryChangeDamage(hearer.Owner, damage, ignoreResistances: false, interruptsDoAfters: false, ignoreBlockers: true, targetPart: TargetBodyPart.Head, splitDamage: SplitDamageBehavior.SplitEnsureAll);
-                    _status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
-
-                    _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
-                }
-            }
-            Dirty(knownLanguageTrue, languageKnowledgeComponent);
             return;
         }
     }

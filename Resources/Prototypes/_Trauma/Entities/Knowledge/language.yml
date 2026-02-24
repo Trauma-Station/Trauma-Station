@@ -1,16 +1,4 @@
 - type: entity
-  parent: BaseKnowledge
-  id: BaseLanguageKnowledge
-  abstract: true
-  components:
-  - type: Knowledge
-    category: Language
-    level: 26
-    experienceCost: 4
-    color: "#ADD8E6"
-  - type: LanguageKnowledge
-
-- type: entity
   parent: BaseLanguageKnowledge
   id: language-Cat
   components:

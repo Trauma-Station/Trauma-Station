@@ -414,6 +414,9 @@ namespace Content.Server.Construction
 
             EntityManager.InitializeAndStartEntity(newUid);
 
+            // <Trauma>
+            TransferQuality(uid, newUid);
+            // </Trauma>
             QueueDel(uid);
 
             // If ChangeEntity has ran, then the entity uid has changed and the

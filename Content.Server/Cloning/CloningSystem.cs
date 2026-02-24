@@ -115,11 +115,6 @@ public sealed partial class CloningSystem : SharedCloningSystem
         if (settings.CopyStatusEffects)
             CopyStatusEffects(original, clone.Value);
 
-        // <Trauma>
-        if (settings.CopyKnowledge)
-            TransferKnowledge(original, clone.Value);
-        // </Trauma>
-
         var originalName = _nameMod.GetBaseName(original);
 
         // Set the clone's name. The raised events will also adjust their PDA and ID card names.
@@ -448,27 +443,5 @@ public sealed partial class CloningSystem : SharedCloningSystem
 
             _statusEffects.TrySetStatusEffectDuration(target, effectProto);
         }
-    }
-
-    /// <summary>
-    ///    Grabs knowledge attached to original entity and transfers it to the clone.
-    /// </summary>
-
-    public void TransferKnowledge(EntityUid original, EntityUid target)
-    {
-        if (_knowledge.TryGetKnowledgeEntity(original) is not { } originalEntity || _knowledge.TryGetKnowledgeEntity(target) is not { } targetEntity)
-            return;
-        if (_knowledge.TryGetAllKnowledgeUnits(originalEntity) is not { } found)
-            return;
-        if (!TryComp<KnowledgeHolderComponent>(targetEntity, out var knowledgeHolder))
-            return;
-        var targetContainer = _knowledge.EnsureKnowledgeContainer((targetEntity, knowledgeHolder));
-        if (targetContainer.Comp.KnowledgeContainer == null)
-            return;
-        foreach (var knowledgeEnt in found)
-        {
-            _container.Insert(knowledgeEnt.Owner, targetContainer.Comp.KnowledgeContainer);
-        }
-        _knowledge.ClearKnowledge(originalEntity, false);
     }
 }

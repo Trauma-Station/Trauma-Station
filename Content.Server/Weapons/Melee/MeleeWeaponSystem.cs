@@ -1,6 +1,5 @@
-// <Trauma>
-using Content.Trauma.Common.MartialArts;
-// </Trauma>
+using Content.Shared._EinsteinEngines.Contests;
+using Content.Shared.Chat; // Einstein Engines - Languages
 using Content.Server.Chat.Systems;
 using Content.Server.Movement.Systems;
 using Content.Shared.Chat;
@@ -15,9 +14,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using System.Linq;
 using System.Numerics;
-using Content.Goobstation.Common.CCVar;
-using Content.Shared._EinsteinEngines.Contests;
-using Content.Shared.Chat; // Einstein Engines - Languages
 using Content.Shared.Coordinates;
 using Content.Shared.Item;
 using Content.Shared.Throwing;

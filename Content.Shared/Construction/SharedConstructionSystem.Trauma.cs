@@ -1,5 +1,7 @@
+using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Shared.Construction;
 
@@ -18,14 +20,13 @@ public abstract partial class SharedConstructionSystem
     {
         var ev = new ConstructionGetGroupsEvent(new());
         RaiseLocalEvent(user, ref ev);
+        Log.Debug($"Available construction groups for {user}: {string.Join(", ", ev.Groups.Select(g => g.Key))}");
+        Log.Debug($"ConstructionGetGroupsEvent groups collected for entity {ToPrettyString(user)}, groups count: {ev.Groups.Count()}");
         return ev.Groups;
     }
 
     public bool IsKnowledgeHolder(EntityUid user)
     {
-        return TryComp<KnowledgeHolderComponent>(user, out _);
+        return HasComp<KnowledgeHolderComponent>(user);
     }
 }
-
-[ByRefEvent]
-public record struct ConstructionGetGroupsEvent(Dictionary<EntProtoId, int> Groups);

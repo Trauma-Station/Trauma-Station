@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Trauma.Common.Knowledge;
-// </Trauma>
 using Content.Shared.CharacterInfo;
 using Content.Shared.Objectives;
 using Robust.Client.Player;

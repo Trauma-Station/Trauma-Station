@@ -104,7 +104,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      StrengthKnowledge: 26
+      StrengthKnowledge: 10
     experience:
       StrengthKnowledge: 1
     doAfter: 2
@@ -117,7 +117,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      AthleticsKnowledge: 26
+      AthleticsKnowledge: 10
     experience:
       AthleticsKnowledge: 1
     doAfter: 2
@@ -130,7 +130,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      ToughnessKnowledge: 26
+      ToughnessKnowledge: 10
     experience:
       ToughnessKnowledge: 1
     doAfter: 2
@@ -143,7 +143,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      MeleeKnowledge: 26
+      MeleeKnowledge: 10
     experience:
       MeleeKnowledge: 1
     doAfter: 2
@@ -156,7 +156,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      ShootingKnowledge: 26
+      ShootingKnowledge: 10
     experience:
       ShootingKnowledge: 1
     doAfter: 2
@@ -169,7 +169,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      SurgeryKnowledge: 26
+      SurgeryKnowledge: 10
     experience:
       SurgeryKnowledge: 1
     doAfter: 2
@@ -182,7 +182,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      SurgeryKnowledge: 26
+      SurgeryKnowledge: 10
     experience:
       SurgeryKnowledge: 1
     doAfter: 2
@@ -195,7 +195,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      MagicalLiteracyKnowledge: 26
+      MagicalLiteracyKnowledge: 10
     experience:
       MagicalLiteracyKnowledge: 1
     doAfter: 2

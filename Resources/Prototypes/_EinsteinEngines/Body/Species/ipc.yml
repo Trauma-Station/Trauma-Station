@@ -82,6 +82,9 @@
       IPCPump: OrganIPCPump
   - type: HumanoidProfile
     species: IPC
+    # <Trauma>
+  - type: KnowledgeHolder
+    # </Trauma>
 
 - type: entity
   parent:

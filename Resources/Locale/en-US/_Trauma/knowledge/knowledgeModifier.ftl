@@ -1,0 +1,11 @@
+knowledge-modifier-name--5 = catastrophic {$baseName}
+knowledge-modifier-name--4 = shambling {$baseName}
+knowledge-modifier-name--3 = faulty {$baseName}
+knowledge-modifier-name--2 = shoddy {$baseName}
+knowledge-modifier-name--1 = substandard {$baseName}
+knowledge-modifier-name-0 = {$baseName}
+knowledge-modifier-name-1 = refined {$baseName}
+knowledge-modifier-name-2 = calibrated {$baseName}
+knowledge-modifier-name-3 = superior {$baseName}
+knowledge-modifier-name-4 = robust {$baseName}
+knowledge-modifier-name-5 = masterwork {$baseName}

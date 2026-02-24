@@ -53,9 +53,6 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 
 public abstract partial class SharedGunSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
-    // </Trauma>
     [Dependency] private   readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly IMapManager MapManager = default!;
@@ -526,26 +523,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         // </Trauma>
         var mapAngle = mapDirection.ToAngle();
         // <Trauma>
-        var recoilScale = 1.0f;
-        if (TryComp<KnowledgeHolderComponent>(user, out _))
-        {
-            var shooting = _knowledge.TryGetKnowledgeUnit(user.Value, "ShootingKnowledge");
-            if (shooting is { } shootingTrue)
-            {
-                if (shootingTrue.Comp.Level < 26)
-                {
-                    recoilScale = 3.0f - (float) shootingTrue.Comp.Level / 26.0f - _knowledge.SharpCurve(shootingTrue);
-                }
-                else if (shootingTrue.Comp.Level > 50)
-                {
-                    recoilScale = 1.0f - ((float) (shootingTrue.Comp.Level - 50) / 50.0f * (float) (shootingTrue.Comp.Level - 50) / 50.0f);
-                }
-            }
-            else
-            {
-                recoilScale = 3.0f;
-            }
-        }
+        GetRecoilScale(user, gunUid, out var recoilScale);
         // </Trauma>
         var angle = GetRecoilAngle(Timing.CurTime, (gunUid, gun), mapDirection.ToAngle(), user, recoilScale); // Trauma - pass gunUid and user
 
@@ -585,6 +563,9 @@ public abstract partial class SharedGunSystem : EntitySystem
                     if (!cartridge.Spent)
                     {
                         var uid = PredictedSpawnAtPosition(cartridge.Prototype, fromEnt);
+                        // <Trauma>
+                        TryAddKnowledgeModifiers(ent, uid);
+                        // </Trauma>
                         CreateAndFireProjectiles(uid, cartridge);
 
                         RaiseLocalEvent(ent!.Value, new AmmoShotEvent()
@@ -645,13 +626,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
 
         // <Trauma>
-        if (user != null)
-        {
-            var evShooting = new AddExperience("ShootingKnowledge", 1);
-            var evWeapons = new AddExperience("ShootingKnowledge", 1);
-            RaiseLocalEvent(user.Value, ref evShooting);
-            RaiseLocalEvent(user.Value, ref evWeapons);
-        }
+        AddShootingExperience(user);
         // </Trauma>
 
         RaiseLocalEvent(gunUid, new AmmoShotEvent()
@@ -683,6 +658,9 @@ public abstract partial class SharedGunSystem : EntitySystem
                 for (var i = 1; i < ammoSpreadComp.Count; i++)
                 {
                     var newuid = PredictedSpawnAtPosition(ammoSpreadComp.Proto, fromEnt);
+                    // <Trauma>
+                    TryAddKnowledgeModifiers(ammoEnt, newuid);
+                    // </Trauma>
                     SetProjectilePerfectHitEntities(newuid, user, new MapCoordinates(toMap, fromMap.MapId)); // Goob
                     ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation
                     shotProjectiles.Add(newuid);

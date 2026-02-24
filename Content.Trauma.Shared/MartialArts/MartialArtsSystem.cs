@@ -10,7 +10,6 @@ using Content.Shared.Standing;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -21,11 +20,10 @@ namespace Content.Trauma.Shared.MartialArts;
 /// </summary>
 public sealed partial class MartialArtsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
@@ -63,9 +61,10 @@ public sealed partial class MartialArtsSystem : EntitySystem
         }
 
         var kravBlockedQuery = EntityQueryEnumerator<KravMagaBlockedBreathingComponent>();
+        var curTime = _timing.CurTime;
         while (kravBlockedQuery.MoveNext(out var ent, out var comp))
         {
-            if (_timing.CurTime < comp.BlockedTime)
+            if (curTime < comp.BlockedTime)
                 continue;
             RemCompDeferred(ent, comp);
         }
@@ -179,16 +178,14 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
     private void ComboPopup(EntityUid user, EntityUid target, string comboName)
     {
-        if (!_netManager.IsServer)
-            return;
         var userName = Identity.Entity(user, EntityManager);
         var targetName = Identity.Entity(target, EntityManager);
-        _popupSystem.PopupEntity(Loc.GetString("martial-arts-action-sender",
+        _popup.PopupClient(Loc.GetString("martial-arts-action-sender",
             ("name", targetName),
             ("move", comboName)),
             user,
             user);
-        _popupSystem.PopupEntity(Loc.GetString("martial-arts-action-receiver",
+        _popup.PopupClient(Loc.GetString("martial-arts-action-receiver",
             ("name", userName),
             ("move", comboName)),
             target,

@@ -3,7 +3,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
+using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
 
@@ -66,8 +66,7 @@ public partial class MartialArtsSystem
 
         if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && (martialArtsComp.Blocked || martialArtsComp.TemporaryBlockedCounter > 0))
         {
-            var entProto = MetaData(ent).EntityPrototype?.ID;
-            if (entProto == null)
+            if (Prototype(ent)?.ID is not { } entProto)
                 return;
             var ev = new CanDoCQCEvent(entProto);
             RaiseLocalEvent(ent, ev);
@@ -78,7 +77,7 @@ public partial class MartialArtsSystem
         if (!TryComp<MobStateComponent>(args.Target, out var targetState))
             return;
 
-        if (ent.Comp.CurrentTarget != null && args.Target != ent.Comp.CurrentTarget.Value)
+        if (ent.Comp.CurrentTarget is { } target && args.Target != target)
             ent.Comp.LastAttacks.Clear();
 
         var afterEv = new AfterComboCheckEvent(ent, args.Target, args.Weapon, args.Type);
@@ -95,10 +94,10 @@ public partial class MartialArtsSystem
         CheckCombo(ent, args.Target, ent.Comp, ref args);
         if (targetState.CurrentState == MobState.Alive && args.Type != ComboAttackType.Hug)
         {
-            var prototypeId = MetaData(ent.Owner).EntityPrototype?.ID;
+            var prototypeId = Prototype(ent.Owner)?.ID;
             if (prototypeId != null)
             {
-                var ev = new AddExperience(prototypeId, 1);
+                var ev = new AddExperienceEvent(prototypeId, 1);
                 RaiseLocalEvent(args.Performer, ref ev);
             }
         }
@@ -145,10 +144,10 @@ public partial class MartialArtsSystem
             success = true;
             if (TryComp<MartialArtsKnowledgeComponent>(uid, out var martialArtsComp) && !martialArtsComp.Blocked && (!_mobState.IsDead(args.Target) && _mobState.IsCritical(args.Target)))
             {
-                var prototypeId = MetaData(uid).EntityPrototype?.ID;
-                if (prototypeId != null)
+                var prototypeId = Prototype(uid)?.ID;
+                if (prototypeId is {})
                 {
-                    var ev = new AddExperience(prototypeId, 1);
+                    var ev = new AddExperienceEvent(prototypeId, 1);
                     RaiseLocalEvent(args.Performer, ref ev);
                 }
             }
@@ -156,6 +155,6 @@ public partial class MartialArtsSystem
     }
     private void OnComboBeingPerformed(Entity<CanPerformComboComponent> ent, ref ComboBeingPerformedEvent args)
     {
-        ent.Comp.BeingPerformed = args.ProtoId;
+        ent.Comp.BeingPerformed = args.Combo;
     }
 }

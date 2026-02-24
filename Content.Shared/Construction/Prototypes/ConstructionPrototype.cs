@@ -92,14 +92,6 @@ public sealed partial class ConstructionPrototype : IPrototype
     public ProtoId<ConstructionPrototype>[] AlternativePrototypes = [];
 
     public IReadOnlyList<IConstructionCondition> Conditions => _conditions;
-
-    // <Trauma>
-    /// <summary>
-    /// Construction Knowledge and levels that are required to be able to use this craft.
-    /// </summary>
-    [DataField(required: true)]
-    public Dictionary<EntProtoId, int> Groups = new();
-    // </Trauma>
 }
 
 public enum ConstructionType

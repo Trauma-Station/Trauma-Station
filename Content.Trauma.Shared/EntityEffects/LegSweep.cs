@@ -1,10 +1,10 @@
 using Content.Shared.EntityEffects;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Standing;
-using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -23,11 +23,11 @@ public sealed class LegSweepEffectSystem : EntityEffectSystem<TransformComponent
 {
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<LegSweep> args)
     {
-        Log.Debug($"Applying leg sweep to {ent.Owner} with time {args.Effect.Time} and scale {args.Scale}. {ToPrettyString(args.User)} is {args.User is { }}");
         if (args.User is not { } user)
             return;
 
@@ -35,17 +35,23 @@ public sealed class LegSweepEffectSystem : EntityEffectSystem<TransformComponent
 
         if (_standing.IsDown(user))
         {
-            _standing.Stand(user);
-
+            _standing.Stand(user, force: true);
+            _stun.SetKnockdownTime(user, TimeSpan.FromSeconds(0));
             _stun.TryKnockdown(ent.Owner, duration * 2, true);
         }
         else
         {
             // Standard sweep chance
-            if (_random.Prob(Math.Min(0.5f * args.Scale, 1f)))
+            if (Random(user).NextFloat(0.0f, 1.0f) < Math.Min(0.5f * args.Scale, 1f))
             {
                 _stun.TryKnockdown(ent.Owner, duration, true);
             }
         }
+    }
+
+    public System.Random Random(EntityUid uid)
+    {
+        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(uid).Id);
+        return new System.Random(seed);
     }
 }

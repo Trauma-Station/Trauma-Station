@@ -15,5 +15,5 @@ public sealed partial class SneakAttackComponent : Component
     public int SecondsTillHidden = 2;
 
     [DataField, AutoNetworkedField]
-    public uint FramesTillHidden = 0;
+    public TimeSpan FramesTillHidden = TimeSpan.FromSeconds(0);
 }

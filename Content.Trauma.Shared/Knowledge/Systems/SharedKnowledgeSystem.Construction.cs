@@ -1,25 +1,86 @@
-using Content.Shared.Construction;
+using System.Linq;
+using Content.Shared.Armor;
+using Content.Shared.NameModifier.EntitySystems;
+using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
 {
-    public void OnConstructionGetGroupEvent(Entity<KnowledgeContainerComponent> ent, ref ConstructionGetGroupsEvent args)
+    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
+
+    private static readonly EntProtoId ShootingKnowledge = "ShootingKnowledge";
+    private void InitializeConstruction()
+    {
+        SubscribeLocalEvent<KnowledgeHolderComponent, ConstructionGetGroupsEvent>(OnConstructionGetGroupEvent);
+        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, UpdateItemQualityEvent>(ConstructionInteraction);
+        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, GetMeleeDamageEvent>(AlterMeleeDamage);
+        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, RefreshNameModifiersEvent>(AlterName);
+        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, InvokeArmorQualityEvent>(AlterArmorDamage);
+        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, ProjectileHitEvent>(AlterProjectileDamage);
+    }
+
+    public void OnConstructionGetGroupEvent(Entity<KnowledgeHolderComponent> ent, ref ConstructionGetGroupsEvent args)
     {
         if (TryGetAllKnowledgeUnits(ent) is not { } knowledge)
             return;
 
         foreach (var entity in knowledge)
         {
-            var meta = MetaData(entity);
-
-            if (meta.EntityPrototype == null)
-                continue;
-
-            var protoId = meta.EntityPrototype.ID;
-
-            if (TryComp<KnowledgeComponent>(entity, out var comp))
+            if (Prototype(entity)?.ID is { } protoId && TryComp<KnowledgeComponent>(entity, out var comp))
                 args.Groups.Add(protoId, comp.Level);
         }
+    }
+
+    public void ConstructionInteraction(Entity<KnowledgeConstructionModifierComponent> ent, ref UpdateItemQualityEvent args)
+    {
+        var user = args.User;
+        if (TryGetKnowledgeDictionary(user) is { } userKnowledge)
+        {
+            int added = 0;
+            foreach (var entity in ent.Comp.LevelDeltas)
+            {
+                var mastery = GetMastery(userKnowledge.GetValueOrDefault(entity.Key));
+                added += mastery - entity.Value;
+                var ev = new AddExperienceEvent(entity.Key, 6 - mastery);
+                RaiseLocalEvent(user, ref ev);
+            }
+            ent.Comp.Quality += added / ent.Comp.LevelDeltas.Count();
+            _nameModifier.RefreshNameModifiers(ent.Owner);
+        }
+    }
+
+    public override float ConstructionModifier(Entity<KnowledgeConstructionModifierComponent> ent, float power = 2)
+    {
+        return (float) Math.Pow(power, ent.Comp.Quality);
+    }
+
+    private void AlterMeleeDamage(Entity<KnowledgeConstructionModifierComponent> ent, ref GetMeleeDamageEvent args)
+    {
+        args.Damage *= ConstructionModifier(ent);
+    }
+
+    private void AlterName(Entity<KnowledgeConstructionModifierComponent> ent, ref RefreshNameModifiersEvent args)
+    {
+        args.AddModifier($"knowledge-modifier-name-{(int) Math.Clamp(ent.Comp.Quality, -5, 5)}");
+    }
+
+    private void AlterArmorDamage(Entity<KnowledgeConstructionModifierComponent> ent, ref InvokeArmorQualityEvent args)
+    {
+        args.Coefficient *= ConstructionModifier(ent, 0.87f);
+    }
+
+    private void AlterProjectileDamage(Entity<KnowledgeConstructionModifierComponent> ent, ref ProjectileHitEvent args)
+    {
+        Log.Debug($"Altering projectile damage with construction modifier. Original damage: {args.Damage.GetTotal}");
+        args.Damage *= ConstructionModifier(ent, 1.75f);
+        if (args.Shooter is not { } trueShooter)
+            return;
+
+        var ev = new AddExperienceEvent(ShootingKnowledge, 1);
+        RaiseLocalEvent(trueShooter, ref ev);
     }
 }

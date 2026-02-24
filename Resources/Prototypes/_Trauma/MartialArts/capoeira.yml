@@ -85,6 +85,7 @@
   - Disarm
   - Disarm
   userEffects:
-  - !type:ForcedStand
+  - !type:SetStanding
+    force: true
   giveExperience: false
   levelRequired: 10

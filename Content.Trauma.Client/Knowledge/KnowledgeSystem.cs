@@ -14,7 +14,7 @@ namespace Content.Trauma.Client.Knowledge;
 
 public sealed class KnowledgeSystem : SharedKnowledgeSystem
 {
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
 
     private WeakReference<CharacterWindow>? _activeWindow;
 
@@ -23,7 +23,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         base.Initialize();
 
         SubscribeLocalEvent<KnowledgeHolderComponent, GetPerformedAttackTypesEvent>(OnGetAttackTypes);
-        SubscribeLocalEvent<KnowledgeHolderComponent, UpdateExperience>(OnUpdateExperience);
+        SubscribeLocalEvent<KnowledgeHolderComponent, UpdateExperienceEvent>(OnUpdateExperienceEvent);
 
         CharacterWindow.OnOpened += OnCharacterWindowOpened;
     }
@@ -47,7 +47,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
 
     private void OnCharacterWindowOpened(CharacterWindow window)
     {
-        var player = _playerManager.LocalSession?.AttachedEntity;
+        var player = _player.LocalSession?.AttachedEntity;
         if (player == null)
             return;
 
@@ -83,13 +83,13 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     {
         var martialArtsList = TryGetKnowledgeWithComp<MartialArtsKnowledgeComponent>(target);
 
-        if (martialArtsList == null)
+        if (martialArtsList is not { })
             return new List<(EntityUid, string)>();
 
         return martialArtsList
             .Select(martialArt =>
             {
-                var protoId = MetaData(martialArt.Owner).EntityPrototype?.ID ?? string.Empty;
+                var protoId = Prototype(martialArt.Owner)?.ID ?? string.Empty;
                 return (Uid: martialArt.Owner, ProtoId: protoId);
             })
             .OrderBy(x => x.ProtoId) // Sort alphabetically by Prototype ID
@@ -101,7 +101,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     {
         var knowledgeList = TryGetAllKnowledgeUnits(target);
 
-        if (knowledgeList == null || knowledgeList.Count == 0)
+        if (knowledgeList is not { } || knowledgeList.Count == 0)
             return null;
 
         return knowledgeList
@@ -111,13 +111,13 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         .ToList();
     }
 
-    public void OnUpdateExperience(Entity<KnowledgeHolderComponent> ent, ref UpdateExperience args)
+    public void OnUpdateExperienceEvent(Entity<KnowledgeHolderComponent> ent, ref UpdateExperienceEvent args)
     {
-        var localPlayer = _playerManager.LocalSession?.AttachedEntity;
+        var localPlayer = _player.LocalSession?.AttachedEntity;
         if (localPlayer != ent.Owner)
             return;
 
-        if (_activeWindow == null || !_activeWindow.TryGetTarget(out var window))
+        if (_activeWindow is not { } || !_activeWindow.TryGetTarget(out var window))
             return;
 
         OnCharacterWindowOpened(window);

@@ -1,12 +1,9 @@
-using System.Linq;
-using System.Text;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
-using Content.Shared.Construction.Prototypes;
 using Content.Shared.GameTicking;
-using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Prototypes;
+using System.Linq;
+using System.Text;
 
 namespace Content.Shared._EinsteinEngines.Language.Systems;
 
@@ -41,7 +38,6 @@ public abstract class SharedLanguageSystem : EntitySystem
 
     [Dependency] protected readonly IPrototypeManager _prototype = default!;
     [Dependency] protected readonly SharedGameTicker _ticker = default!;
-    [Dependency] protected readonly CommonKnowledgeSystem _knowledge = default!; // Trauma edit
 
     public override void Initialize()
     {

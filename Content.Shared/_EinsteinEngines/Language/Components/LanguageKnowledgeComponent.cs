@@ -26,6 +26,12 @@ public sealed partial class LanguageKnowledgeComponent : Component
     /// <summary>
     ///     Id of the language this knowledge represents.
     /// </summary>
-    [DataField]
+    [DataField(required: true)]
     public ProtoId<LanguagePrototype> LanguageId;
+
+    /// <summary>
+    ///     Gets or sets the duration since the entity was last spoken to for experience and cursing.
+    /// </summary>
+    [DataField]
+    public TimeSpan LastSpoken = TimeSpan.Zero;
 }

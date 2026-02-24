@@ -1,6 +1,9 @@
-namespace  Content.Trauma.Common.MartialArts;
+using Robust.Shared.Serialization;
 
-public enum GrabStage
+namespace Content.Trauma.Common.MartialArts;
+
+[Serializable, NetSerializable]
+public enum GrabStage : byte
 {
     No = 0,
     Soft = 1,
@@ -8,13 +11,13 @@ public enum GrabStage
     Suffocate = 3,
 }
 
-public enum GrabStageDirection
+public enum GrabStageDirection : byte
 {
     Increase,
     Decrease,
 }
 
-public enum GrabResistResult
+public enum GrabResistResult : byte
 {
     TooSoon,
     Failed,

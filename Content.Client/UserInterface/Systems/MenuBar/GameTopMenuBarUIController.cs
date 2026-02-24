@@ -7,9 +7,9 @@ using Content.Client.UserInterface.Systems.Emotes;
 using Content.Client.UserInterface.Systems.EscapeMenu;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Client.UserInterface.Systems.Guidebook;
-using Content.Client.UserInterface.Systems.Language;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Client.UserInterface.Systems.Sandbox;
+using Content.Client.UserInterface.Systems.Language;
 using Robust.Client.UserInterface.Controllers;
 
 namespace Content.Client.UserInterface.Systems.MenuBar;

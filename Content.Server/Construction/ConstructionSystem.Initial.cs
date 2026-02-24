@@ -419,7 +419,7 @@ namespace Content.Server.Construction
             // </Goobstation>
 
             // <Trauma>
-            EnsureConstructionKnowledge(item, constructionPrototype);
+            EnsureConstructionKnowledge(item, constructionPrototype, user);
             // </Trauma>
 
             // Just in case this is a stack, attempt to merge it. If it isn't a stack, this will just normally pick up
@@ -627,7 +627,7 @@ namespace Content.Server.Construction
             // </Goobstation>
 
             // <Trauma>
-            EnsureConstructionKnowledge(structure, constructionPrototype);
+            EnsureConstructionKnowledge(structure, constructionPrototype, user);
             // </Trauma>
 
             RaiseNetworkEvent(new AckStructureConstructionMessage(ack, GetNetEntity(structure)), user);

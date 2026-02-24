@@ -68,6 +68,13 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract List<Entity<KnowledgeComponent>>? TryGetAllKnowledgeUnits(EntityUid target);
 
     /// <summary>
+    /// Tries to get the dictionary of all knowledge units of a knowledge holder.
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public abstract Dictionary<EntProtoId, EntityUid>? TryGetKnowledgeDictionary(EntityUid target);
+
+    /// <summary>
     /// Checks if the specified component is present on any of the entity's knowledge.
     /// </summary>
     public abstract EntityUid? HasKnowledgeComp<T>(EntityUid target) where T : IComponent;
@@ -145,10 +152,12 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     /// Inverse curve scale that determines some functionality. Goes from 1 to 0.
     /// </summary>
     public abstract float InverseSharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f);
+
+    /// <summary>
+    /// Implents a curve for the quality modifiers of objects.
+    /// </summary>
+    /// <param name="ent"></param>
+    /// <param name="power"></param>
+    /// <returns></returns>
+    public abstract float ConstructionModifier(Entity<KnowledgeConstructionModifierComponent> ent, float power = 2);
 }
-
-[ByRefEvent]
-public record struct AddExperience(EntProtoId KnowledgeType, int Experience);
-
-[ByRefEvent]
-public record struct UpdateExperience();

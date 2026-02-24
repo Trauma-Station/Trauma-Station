@@ -57,10 +57,6 @@ namespace Content.Shared.Weapons.Melee;
 
 public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma - made partial
 {
-    // <Trauma>
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    // </Trauma>
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly IMapManager MapManager = default!;
     [Dependency] private   readonly INetManager _netMan = default!;
@@ -301,10 +297,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (user != uid) // Goobstation
             RaiseLocalEvent(user, ref ev);
         // <Trauma>
-        if (_knowledge.TryGetKnowledgeUnit(user, "MeleeKnowledge") is { } melee && _knowledge.GetMastery(melee) > 2)
-        {
-            ev.Multipliers *= 1 + 2 * _knowledge.SharpCurve(melee, -50, 50.0f);
-        }
+        AdjustAttackRate(user, ref ev);
         // </Trauma>
         return ev.Rate * ev.Multipliers;
     }
@@ -567,19 +560,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // Goobstation end
 
         // For consistency with wide attacks stuff needs damageable.
-        // <Trauma>
-        var knowledgeMiss = 1.0f;
-        if (_knowledge.TryGetKnowledgeUnit(user, "MeleeKnowledge") is { } melee)
-        {
-            if (_knowledge.GetMastery(melee) < 2)
-            {
-                knowledgeMiss = ((float) melee.Comp.Level + 5) / 26.0f;
-            }
-        }
-        // </Trauma>
         if (Deleted(target) ||
             !HasComp<DamageableComponent>(target) ||
-            _gun.Random(target.Value).Prob(Math.Max(1.0f - knowledgeMiss,0)) || // Trauma - Knowledge
+            LightAttackMiss(user, target.Value) || // <Trauma> </Trauma> - Knowledge
             !TryComp(target, out TransformComponent? targetXform)) // Goob edit
         {
             // Leave IsHit set to true, because the only time it's set to false
@@ -623,11 +606,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return;
 
         // <Trauma>
-        if (MobState.IsAlive(target.Value))
-        {
-            var evKnowledge = new AddExperience("MeleeKnowledge", 1);
-            RaiseLocalEvent(user, ref evKnowledge);
-        }
+        AddExperienceLight(target.Value);
         // </Trauma>
         var targets = new List<EntityUid>(1)
         {
@@ -706,22 +685,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         var entities = GetEntityList(ev.Entities);
 
         // <Trauma>
-        Entity<KnowledgeComponent>? melee = null;
-        var knowledgeMiss = 1.0f;
-        if (_knowledge.TryGetKnowledgeUnit(user, "MeleeKnowledge") is { } meleeUnit)
-        {
-            melee = meleeUnit;
-            if (_knowledge.GetMastery(meleeUnit) < 2)
-            {
-                knowledgeMiss = ((float) meleeUnit.Comp.Level + 2) / 26.0f;
-            }
-        }
-
-        if (_gun.Random(user).Prob(Math.Max(1.0f - knowledgeMiss, 0)))
-        {
-            entities.Clear();
-            entities.Add(user);
-        }
+        HeavyAttackMiss(user, out var melee, ref entities);
         // </Trauma>
 
         if (entities.Count == 0)
@@ -901,21 +865,14 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         {
             // <Trauma
             var staminaDamage = component.HeavyStaminaCost * entities.Count;
-            if (melee is { } meleeEnt)
-            {
-                staminaDamage *= 1 - _knowledge.SharpCurve(meleeEnt);
-            }
+            AdjustStaminaDamage(melee, ref staminaDamage);
             // </Trauma>
             // make it not immediate to prevent annoying stamcrits
             _stamina.TakeStaminaDamage(user, staminaDamage, stamina, visual: false, immediate: false);
         }
 
         // <Trauma>
-        if (entities.Count > 0 && entities.All(entity => MobState.IsAlive(entity) && !MobState.IsCritical(entity)))
-        {
-            var evKnowledge = new AddExperience("MeleeKnowledge", entities.Count);
-            RaiseLocalEvent(user, ref evKnowledge);
-        }
+        AddExperienceHeavy(user, ref entities);
         // </Trauma>
         return true;
     }
@@ -1034,17 +991,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return true; // Trauma - still do the animation
 
         // <Trauma>
-        Entity<KnowledgeComponent>? melee = null;
-        var knowledgeMiss = 1.0f;
-        if (_knowledge.TryGetKnowledgeUnit(user, "MeleeKnowledge") is { } meleeUnit)
-        {
-            melee = meleeUnit;
-            if (_knowledge.GetMastery(meleeUnit) < 2)
-            {
-                knowledgeMiss = ((float) meleeUnit.Comp.Level + 10) / 26.0f;
-            }
-        }
-        if (knowledgeMiss < 1.0f && _gun.Random(user).Prob(Math.Max(1.0f - knowledgeMiss, 0)))
+        if (DisarmMiss(user, out var melee))
             return true;
         // </Trauma>
 
@@ -1136,11 +1083,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         }
 
         // <Trauma>
-        if (melee is { } meleeEnt && _knowledge.GetMastery(meleeEnt) < 2 && MobState.IsAlive(target) && !MobState.IsCritical(target))
-        {
-            var evKnowledge = new AddExperience("MeleeKnowledge", 1);
-            RaiseLocalEvent(user, ref evKnowledge);
-        }
+        DisarmExperience(melee, user, target);
         // </Trauma>
         ShoveOrDisarmPopup(true);
 

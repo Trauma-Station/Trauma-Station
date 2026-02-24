@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-// <Trauma>
 using Content.Trauma.Common.MartialArts;
-using Content.Shared.FixedPoint;
-// </Trauma>
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Medical.Common.Body;
 using Content.Shared.FixedPoint;
@@ -21,8 +18,8 @@ using Content.Shared.Heretic;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Components;
-using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Stunnable;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio;
