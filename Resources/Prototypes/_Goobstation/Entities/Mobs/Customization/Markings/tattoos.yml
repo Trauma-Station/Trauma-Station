@@ -21,7 +21,7 @@
 - type: marking
   id: TattooTribal1
   bodyPart: Chest
-  groupWhitelist: [Human, Slime, Reptilian, Harpy]
+  groupWhitelist: [Human, Slime, Reptilian]
   coloring:
     default:
       type: !type:TattooColoring
@@ -33,7 +33,7 @@
 - type: marking
   id: TattooLoops
   bodyPart: Chest
-  groupWhitelist: [Human, Slime, Reptilian, Harpy]
+  groupWhitelist: [Human, Slime, Reptilian]
   coloring:
     default:
       type: !type:TattooColoring

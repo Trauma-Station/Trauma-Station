@@ -127,7 +127,6 @@
     speciesOverrideBlacklist:
     - IPC
     - Diona
-    - Harpy
     - Plasmaman
   - type: AntagObjectives
     objectives:

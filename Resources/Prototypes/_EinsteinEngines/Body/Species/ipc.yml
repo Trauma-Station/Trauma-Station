@@ -97,8 +97,6 @@
     understands:
     - TauCetiBasic
     - RobotTalk
-  - type: HarpySinger
-    ShutUpDamageThreshold: 5 # Punch does 5 damage
   - type: Instrument
     allowPercussion: true
     allowProgramChange: true

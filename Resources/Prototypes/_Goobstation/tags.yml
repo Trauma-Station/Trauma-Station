@@ -296,9 +296,6 @@
   id: HandheldCrewMonitor
 
 - type: Tag
-  id: HarpyEmotes
-
-- type: Tag
   id: HereticBlade
 
 - type: Tag
