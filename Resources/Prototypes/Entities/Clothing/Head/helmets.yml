@@ -307,7 +307,7 @@
         Blunt: 0.9
         Slash: 0.9
         Piercing: 0.9
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker # Trauma
   - type: HideLayerClothing
     layers:
       Hair: HEAD
@@ -468,7 +468,7 @@
     heatingCoefficient: 0.5
     coolingCoefficient: 0.8
   - type: FireProtection
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker # Trauma
     reduction: 0.15 # not fully sealed so less protection
   - type: IdentityBlocker
   - type: Tag
@@ -510,7 +510,7 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.3
     coolingCoefficient: 0.8
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker # Trauma
   - type: FireProtection
     reduction: 0.2
   - type: PressureProtection
@@ -603,7 +603,7 @@
     sprite: Clothing/Head/Helmets/ert_security.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/ert_security.rsi
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker # Trauma
  # - type: HideLayerClothing  #Goobstation
  #   layers:
  #     Hair: HEAD
@@ -619,7 +619,7 @@
     sprite: Clothing/Head/Helmets/ert_medic.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/ert_medic.rsi
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker # Trauma
   #- type: HideLayerClothing  #Goobstation
   #  layers:
   #    Hair: HEAD
@@ -635,7 +635,7 @@
     sprite: Clothing/Head/Helmets/ert_engineer.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/ert_engineer.rsi
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker # Trauma
   - type: EyeProtection # goob - it literally has them in the sprite.
  # - type: HideLayerClothing  #Goobstation
  #   layers:
@@ -652,7 +652,7 @@
     sprite: Clothing/Head/Helmets/ert_janitor.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/ert_janitor.rsi
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker # Trauma
   #- type: HideLayerClothing  #Goobstation
   #  layers:
   #    Hair: HEAD
@@ -683,7 +683,7 @@
         Piercing: 0.35
         Heat: 0.35
         Caustic: 0.35
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker # Trauma
  # - type: HideLayerClothing  #Goobstation
  #   layers:
  #     Hair: HEAD
@@ -715,7 +715,7 @@
     sprite: Clothing/Head/Helmets/podwars_helmet.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/podwars_helmet.rsi
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker # Trauma
  # - type: HideLayerClothing  #Goobstation
  #   layers:
  #     Hair: HEAD
