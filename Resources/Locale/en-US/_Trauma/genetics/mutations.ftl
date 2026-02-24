@@ -191,6 +191,8 @@ MutationTongueSpike-popup-no-organ = You don't have a {$organ} to shoot!
 MutationTongueSpike-popup-revert = {CAPITALIZE(THE($child))} cracks and twists, changing shape!
 
 MutationChemSpike-mutated = You feel like you can really connect with people by throwing your voice.
+MutationChemSpike-target-set = Link established, use the Transfer Chemicals action!
+MutationChemSpike-target-reset = Link lost!
 
 MutationShockTouch-mutated = You feel power flow through your hands.
 MutationShockTouch-removed = The energy in your hands subsides.

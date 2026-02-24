@@ -72,6 +72,7 @@
   configuration:
     entity: TongueSpike
     forced: true
+    makeSentient: false
     polymorphPopup: null
     exitPolymorphPopup: MutationTongueSpike-popup-revert
 
@@ -80,6 +81,7 @@
   configuration:
     entity: TongueSpikeChem
     forced: true
+    makeSentient: false
     polymorphPopup: null
     exitPolymorphPopup: MutationTongueSpike-popup-revert
 

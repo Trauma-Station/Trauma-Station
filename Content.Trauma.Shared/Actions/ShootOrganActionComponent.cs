@@ -9,6 +9,7 @@ namespace Content.Trauma.Shared.Actions;
 
 /// <summary>
 /// Action component for polymorphing an organ of the performer into a projectile and shooting it at the target.
+/// The projectile will have <see cref="ActionProjectileComponent"/> set to the action's container.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(ShootOrganActionSystem))]
 public sealed partial class ShootOrganActionComponent : Component
