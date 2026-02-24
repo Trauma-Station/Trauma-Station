@@ -11,6 +11,7 @@ using Content.Shared.Polymorph;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Trigger.Systems;
+using Content.Trauma.Common.Genetics.Mutations;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -20,7 +21,7 @@ using System.Text;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
 
-public sealed partial class MutationSystem : EntitySystem
+public sealed partial class MutationSystem : CommonMutationSystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
@@ -230,6 +231,42 @@ public sealed partial class MutationSystem : EntitySystem
         };
 
     #region Public API
+
+    public override MutatableData GetMutatableData(EntityUid mob)
+    {
+        var data = new MutatableData(new(), new());
+        if (!_mutatableQuery.TryComp(mob, out var comp))
+            return data;
+
+        foreach (var dormant in comp.Dormant)
+        {
+            data.Dormant.Add(dormant);
+        }
+        foreach (var mutation in comp.Mutations.Keys)
+        {
+            data.Mutations.Add(mutation);
+        }
+        return data;
+    }
+
+    public override bool LoadMutatableData(EntityUid mob, MutatableData data)
+    {
+        if (!_mutatableQuery.TryComp(mob, out var comp))
+            return false;
+
+        var ent = (mob, comp);
+        ClearMutations(ent, automatic: true, predicted: false);
+        foreach (var dormant in data.Dormant)
+        {
+            comp.Dormant.Add(dormant.ToString());
+        }
+        Dirty(mob, comp);
+        foreach (var id in data.Mutations)
+        {
+            AddMutation(ent, id.ToString(), automatic: true, predicted: false);
+        }
+        return true;
+    }
 
     /// <summary>
     /// On server, gets the round data for a given mutation or creates it if it doesn't exist.

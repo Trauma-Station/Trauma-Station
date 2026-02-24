@@ -100,6 +100,7 @@ using Content.Shared.Revolutionary.Components;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Content.Shared.Zombies;
+using Content.Trauma.Common.Genetics.Mutations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
@@ -113,6 +114,7 @@ namespace Content.Goobstation.Server.Changeling;
 public sealed partial class ChangelingSystem : SharedChangelingSystem
 {
     // this is one hell of a star wars intro text
+    [Dependency] private readonly CommonMutationSystem _mutation = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly StoreSystem _store = default!;
@@ -538,7 +540,8 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         {
             Name = Name(target),
             DNA = dna.DNA ?? Loc.GetString("forensics-dna-unknown"),
-            Profile = profile
+            Profile = profile,
+            Mutations = _mutation.GetMutatableData(target)
         };
 
         if (fingerprint.Fingerprint != null)
@@ -598,6 +601,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             _metaData.SetEntityName(newEnt, data.Name);
             var message = Loc.GetString("changeling-transform-finish", ("target", data.Name));
             Popup.PopupEntity(message, newEnt, newEnt);
+            _mutation.LoadMutatableData(newEnt, data.Mutations);
         }
 
         // otherwise we can only transform once
