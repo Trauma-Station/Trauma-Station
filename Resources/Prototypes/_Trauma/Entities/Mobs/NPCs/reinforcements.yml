@@ -27,6 +27,7 @@
   - type: AutoImplant
     implants:
     - MindShieldImplant
+  - type: AntagImmune
 
 - type: entity
   parent: SecurityReinforcement

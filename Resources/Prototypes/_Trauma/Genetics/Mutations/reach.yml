@@ -1,0 +1,84 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationTelekinesis
+  name: Telekinesis
+  description: A strange mutation that allows the holder to interact with objects through thought.
+  components:
+  - type: Mutation
+    instability: 35
+    difficulty: 18
+  - type: ComponentMutation
+    added:
+    - type: Telekinesis
+    - type: TetherGun # surely this won't conflict with anything in the future
+      lineColor: "#18a2d5"
+  - type: ActionMutation
+    action: ActionMutationTelekinesis
+
+- type: entity
+  parent: BaseAction
+  id: ActionMutationTelekinesis
+  name: Use Telekinesis
+  description: Move an object using the power of your mind!
+  components:
+  - type: Action
+    raiseOnUser: true
+    icon:
+      sprite: Mobs/Species/Human/organs.rsi
+      state: brain
+    itemIconStyle: BigAction
+    useDelay: 1
+  - type: TargetAction
+    checkCanAccess: false
+    range: 18 # anti trolling, should be outside PVS anyway
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - Item
+      - MobState
+      - Physics
+    blacklist:
+      components:
+      - PhysicsGunBlacklist
+    canTargetSelf: true # for easy deselecting
+    rotateOnUse: false # its with your mind jimbo
+    event: !type:TelekinesisActionEvent
+
+- type: entity
+  parent: BaseMutation
+  id: MutationElasticArms
+  name: Elastic Arms
+  description: Subject's arms have become elastic, allowing them to stretch up to a meter away. However, this elasticity makes it difficult to wear gloves, handle complex tasks, or grab large objects.
+  components:
+  - type: Mutation
+    instability: 35
+    difficulty: 32 # good luck chuddy
+  # TODO: prevent wearing gloves, disable picking up two handed items
+  - type: EffectsMutation
+    added:
+    - !type:RelayBodyParts
+      guidebookText: entity-effect-guidebook-increases-reach
+      conditions:
+      - !type:MobStateCondition
+        mobstate: Alive
+      partType: Arm
+      effects:
+      - !type:AddComponents
+        guidebookText: entity-effect-guidebook-increases-reach
+        conditions:
+        - !type:WhitelistCondition # has to be an organic arm
+          blacklist:
+            components:
+            - Cybernetics
+        components:
+        - type: ExtraReach
+          bonus: 0.5 # both arms add to 1m
+    removed:
+    - !type:RelayBodyParts
+      guidebookText: entity-effect-guidebook-decreases-reach
+      partType: Arm
+      effects:
+      - !type:RemoveComponents
+        guidebookText: entity-effect-guidebook-decreases-reach
+        components:
+        - type: ExtraReach

@@ -210,20 +210,6 @@
   - type: ShowThirstIcons
 
 - type: entity
-  parent: [ClothingEyesBase, ShowHealthRelatedIcons, BaseCentcommContraband, ClothingEyesGlassesSunglasses]
-  id: ClothingEyesGlassesBSO
-  name: blueshield officer glasses
-  description: Sunglasses with a medical, job and diagnostic hud.
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Clothing/Eyes/Glasses/bsoglasses.rsi
-  - type: Clothing
-    sprite: _Goobstation/Clothing/Eyes/Glasses/bsoglasses.rsi
-  - type: ShowJobIcons
-  - type: ShowMindShieldIcons
-
-
-- type: entity
   parent: [ClothingEyesBase, ClothingEyesGlassesSunglasses, ShowHealthRelatedIcons]
   id: ClothingEyesGlassesMedDiag
   name: meddiag glasses

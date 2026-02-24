@@ -17,7 +17,6 @@ using Content.Server._Goobstation.Heretic.EntitySystems.PathSpecific;
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Audio;
-using Content.Server.Heretic.Components.PathSpecific;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Audio;
@@ -39,20 +38,14 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using System.Linq;
 using System.Numerics;
-using Content.Shared._Goobstation.Wizard.Projectiles;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Doors.Components;
 using Content.Shared.Effects;
-using Content.Shared.Heretic;
-using Content.Shared.Movement.Components;
-using Content.Shared.Projectiles;
+using Content.Shared.Gravity;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
-using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Events;
-using Robust.Shared.Physics.Systems;
 
 namespace Content.Server.Heretic.EntitySystems.PathSpecific;
 
@@ -74,13 +67,13 @@ public sealed class AristocratSystem : EntitySystem
     [Dependency] private readonly SharedWeatherSystem _weather = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly HereticSystem _heretic = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private readonly SharedGravitySystem _gravity = default!;
 
     private static readonly EntProtoId IceTilePrototype = "IceCrust";
     private static readonly EntProtoId IceWallPrototype = "WallIce";
@@ -88,11 +81,11 @@ public sealed class AristocratSystem : EntitySystem
     private static readonly ProtoId<ContentTileDefinition> SnowTilePrototype = "FloorAstroSnow";
     private static readonly ProtoId<TagPrototype> Window = "Window";
 
-    private const float ConduitDelay = 1f;
+    private const float ConduitDelay = 2f;
 
     private float _accumulator;
 
-    private HashSet<Entity<FreezableWallComponent>> _walls = new();
+    private readonly HashSet<Entity<FreezableWallComponent>> _walls = new();
 
     public override void Initialize()
     {
@@ -101,84 +94,14 @@ public sealed class AristocratSystem : EntitySystem
         SubscribeLocalEvent<AristocratComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<AristocratComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<AristocratComponent, MobStateChangedEvent>(OnMobStateChange);
-        SubscribeLocalEvent<AristocratComponent, HitScanReflectAttemptEvent>(OnReflectHitScan);
-
-        SubscribeLocalEvent<VoidAscensionAuraComponent, StartCollideEvent>(OnStartCollide);
-        SubscribeLocalEvent<VoidAscensionAuraComponent, EndCollideEvent>(OnEndCollide);
-
-        SubscribeLocalEvent<AffectedByVoidAuraComponent, MoveEvent>(OnMove);
-    }
-
-    private void OnMove(Entity<AffectedByVoidAuraComponent> ent, ref MoveEvent args)
-    {
-        if (ent.Comp.Aura == EntityUid.Invalid || !TryComp(ent.Comp.Aura, out VoidAscensionAuraComponent? aura))
-        {
-            RemComp(ent, ent.Comp);
-            return;
-        }
-
-        ProcessAura((ent.Comp.Aura, aura), ent, ent.Comp);
-    }
-
-    private void OnEndCollide(Entity<VoidAscensionAuraComponent> ent, ref EndCollideEvent args)
-    {
-        if (TerminatingOrDeleted(args.OtherEntity))
-            return;
-
-        if (!TryComp(args.OtherEntity, out AffectedByVoidAuraComponent? affected) ||
-            !TryComp(args.OtherEntity, out PhysicsComponent? physics))
-            return;
-
-        if (affected.OldVelocity != null)
-        {
-            var velocity = physics.LinearVelocity.Normalized() * affected.OldVelocity.Value;
-            _physics.SetLinearVelocity(args.OtherEntity, velocity, body: physics);
-        }
-
-        RemComp<HomingProjectileComponent>(args.OtherEntity);
-        RemComp(args.OtherEntity, affected);
-    }
-
-    private void OnStartCollide(Entity<VoidAscensionAuraComponent> ent, ref StartCollideEvent args)
-    {
-        ProcessAura(ent, args.OtherEntity, physics: args.OtherBody);
-    }
-
-    private void ProcessAura(Entity<VoidAscensionAuraComponent> ent,
-        EntityUid bullet,
-        AffectedByVoidAuraComponent? affected = null,
-        PhysicsComponent? physics = null)
-    {
-        if (!Resolve(bullet, ref physics, false))
-            return;
-
-        if (!TryComp(bullet, out ProjectileComponent? projectile))
-            return;
-
-        var xform = Transform(ent);
-        var parent = xform.ParentUid;
-        if (!TryComp(parent, out AristocratComponent? aristocrat))
-            return;
-
-        if (projectile.Shooter == parent)
-            return;
-
-        affected ??= EnsureComp<AffectedByVoidAuraComponent>(bullet);
-
-        affected.Aura = ent;
-
-        FreezeBullet((parent, aristocrat, null, null), (bullet, projectile, affected, physics));
-    }
-
-    private void OnReflectHitScan(Entity<AristocratComponent> ent, ref HitScanReflectAttemptEvent args)
-    {
-        args.Reflected = true;
     }
 
     private void OnStartup(Entity<AristocratComponent> ent, ref ComponentStartup args)
     {
         BeginWaltz(ent);
         DoVoidAnnounce(ent, "begin");
+        _movement.RefreshWeightlessModifiers(ent);
+        _gravity.RefreshWeightless(ent.Owner, true);
     }
 
     private bool CheckOtherAristocrats(Entity<AristocratComponent> ent)
@@ -270,6 +193,12 @@ public sealed class AristocratSystem : EntitySystem
     {
         EndWaltz(ent); // its over bros
         DoVoidAnnounce(ent, "end");
+
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        _movement.RefreshWeightlessModifiers(ent);
+        _gravity.RefreshWeightless(ent.Owner, false);
     }
 
     private List<EntityCoordinates> GetTiles(EntityCoordinates coords, int range)
@@ -315,14 +244,18 @@ public sealed class AristocratSystem : EntitySystem
 
         var airlockQuery = GetEntityQuery<AirlockComponent>();
         var xformQuery = GetEntityQuery<TransformComponent>();
-        var hereticQuery = GetEntityQuery<HereticComponent>();
-        var ghoulQuery = GetEntityQuery<GhoulComponent>();
         var statusQuery = GetEntityQuery<StatusEffectsComponent>();
 
         HashSet<EntityUid> ignored = new();
         var conduitQuery = EntityQueryEnumerator<VoidConduitComponent, TransformComponent>();
         while (conduitQuery.MoveNext(out var uid, out var conduit, out var xform))
         {
+            if (!conduit.Active) // Skip first iteration
+            {
+                conduit.Active = true;
+                continue;
+            }
+
             FreezeAtmos((uid, xform));
 
             var (pos, rot) = _xform.GetWorldPositionRotation(xform, xformQuery);
@@ -384,14 +317,17 @@ public sealed class AristocratSystem : EntitySystem
 
             if (affected.Count > 0)
                 _color.RaiseEffect(Color.Black, affected, Filter.Pvs(uid, 3f, EntityManager));
+
+            if (conduit.Range < conduit.MaxRange)
+            {
+                conduit.Range++;
+                Dirty(uid, conduit);
+            }
         }
     }
 
     private void Cycle(Entity<AristocratComponent, TransformComponent> ent)
     {
-        if (TryComp(ent, out PhysicsComponent? physics))
-            _physics.SetBodyStatus(ent.Owner, physics, BodyStatus.InAir);
-
         if (ent.Comp1.HasDied) // powers will only take effect for as long as we're alive
             return;
 
@@ -422,60 +358,6 @@ public sealed class AristocratSystem : EntitySystem
         }
 
         ent.Comp1.UpdateStep++;
-    }
-
-    private void FreezeBullet(Entity<AristocratComponent, TransformComponent?, PhysicsComponent?> ent,
-        Entity<ProjectileComponent, AffectedByVoidAuraComponent, PhysicsComponent> bullet)
-    {
-        if (!Resolve(ent, ref ent.Comp2, ref ent.Comp3, false))
-            return;
-
-        var (uid, proj, affected, physics) = bullet;
-
-        if (proj.Shooter == ent)
-            return;
-
-        var (pos, rot) = _xform.GetWorldPositionRotation(uid);
-
-        var dir = pos - _xform.GetWorldPosition(ent.Comp2);
-        var targetVelocity = dir.Length();
-
-        if (targetVelocity > ent.Comp1.Range)
-            return;
-
-        // antihoming
-        var homing = EnsureComp<HomingProjectileComponent>(uid);
-        homing.Target = ent;
-        var multiplier = MathHelper.Lerp(10f, 0f, Math.Clamp(targetVelocity * 2f / ent.Comp1.Range, 0f, 1f));
-        homing.HomingSpeed = -128f * multiplier;
-        Dirty(uid, homing);
-
-        affected.OldVelocity ??= physics.LinearVelocity.Length();
-        var oldLength = affected.OldVelocity.Value;
-
-        var curVelocity = physics.LinearVelocity.Length();
-
-        if (curVelocity < 0.01f)
-            return;
-
-        var dot = Vector2.Dot(dir, rot.ToWorldVec()) +
-                  Vector2.Dot(dir, rot.ToVec()) +
-                  Vector2.Dot(dir, rot.Opposite().ToVec());
-        var modifier = MathF.Max(0f, dot);
-
-        // If heretic is lying down, walking or moving slowly, bullets are slowed down even more
-        var waltzMultiplier = TryComp(ent, out InputMoverComponent? mover) && !mover.Sprinting ||
-            _standing.IsDown(ent.Owner) || ent.Comp3.LinearVelocity.Length() <= 2.5f
-            ? 1f
-            : 2f;
-
-        targetVelocity = MathF.Max(5f, targetVelocity * (2f * waltzMultiplier + modifier * oldLength));
-        targetVelocity = MathF.Min(targetVelocity, oldLength);
-
-        if (MathF.Abs(curVelocity - targetVelocity) < 0.01f)
-            return;
-
-        _physics.SetLinearVelocity(uid, physics.LinearVelocity / curVelocity * targetVelocity, body: physics);
     }
 
     // makes shit cold

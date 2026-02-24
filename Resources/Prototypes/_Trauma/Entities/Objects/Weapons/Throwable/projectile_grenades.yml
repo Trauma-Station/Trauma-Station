@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ ProjectileGrenadeBase, BaseRevMajorContraband ]
+  parent: [ ProjectileGrenadeBase, BaseRevMajorContraband, TimerGrenadeBase ]
   id: GrenadeShrapnelRev
   name: improvised shrapnel bomb
   description: Releases a deadly spray of shrapnel that causes severe bleeding.

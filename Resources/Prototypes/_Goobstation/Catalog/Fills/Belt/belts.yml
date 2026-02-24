@@ -183,7 +183,7 @@
     - ChaplainsHolster
 
 - type: entityTable
-  id: BeltAssaultBSOEntityTable
+  id: BeltAssaultERT
   table: !type:AllSelector
     children:
     - id: Stunbaton
@@ -198,12 +198,12 @@
 - type: entity
   id: ClothingBeltAssaultFilled
   parent: ClothingBeltMilitaryWebbing
-  suffix: Filled, BSO
+  suffix: Filled, ERT
   components:
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:NestedSelector
-        tableId: BeltAssaultBSOEntityTable
+        tableId: BeltAssaultERT
 
 - type: entity
   parent: ChemBag
@@ -240,21 +240,6 @@
         - id: ChemistryBottleOmnizine
         - id: ChemistryBottleTramadol
         - id: ChemistryBottleOxycodone
-
-- type: entity
-  id: ClothingBeltHolsterFilledBlueshield
-  parent: ClothingBeltHolster
-  suffix: Filled, EG-4
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      item:
-        id: WeaponEnergyRevolver
-      storagebase: !type:AllSelector
-        children:
-        - id: EnergySpeedloaderLethal
-          amount: 2
-        - id: EnergySpeedloaderDisabler
 
 - type: entity
   id: ClothingBeltMilitaryRigGrenadierFilled

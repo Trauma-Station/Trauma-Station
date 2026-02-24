@@ -65,8 +65,8 @@
                         <GridContainer Name="GpsList" Columns="2" HorizontalAlignment="Center" />
                     </ScrollContainer>
                     <BoxContainer Orientation="Horizontal">
-                        <Button Name="DistressButton" Text="⚠" StyleClasses="ButtonCaution" ToolTip="{Loc 'gps-window-alarm-tooltip'}"/>
-                        <Button Name="EnabledButton" StyleClasses="ButtonCaution" ToolTip="{Loc 'gps-window-visibility-tooltip'}"/>
+                        <Button Name="DistressButton" Text="⚠" StyleClasses="negative" ToolTip="{Loc 'gps-window-alarm-tooltip'}"/>
+                        <Button Name="EnabledButton" StyleClasses="negative" ToolTip="{Loc 'gps-window-visibility-tooltip'}"/>
                         <Control HorizontalExpand="true" />
                         <Button Name="ClearButton" Text="{Loc 'gps-window-clear-tracking-button'}" ToolTip="{Loc 'gps-window-clear-tooltip'}"/>
                     </BoxContainer>

@@ -27,7 +27,6 @@
   - CentralCommand
   # Goobstation
   - NanotrasenRepresentative
-  - BlueshieldOfficer
   special: # Goobstation Start - I basically re-did all of deathsquads stuff so. - Sol
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]

@@ -38,7 +38,7 @@ public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<
                 : FixedPoint2.Zero;
         }
 
-        // heretics can heal instead of being poisoned
+        // flesh heretics ignore poison damage from chems
         var ev = new ImmuneToPoisonDamageEvent();
         RaiseLocalEvent(entity, ref ev);
         if (ev.Immune)

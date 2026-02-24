@@ -48,7 +48,7 @@ public sealed class HolyFlammableSystem : EntitySystem
         SubscribeLocalEvent<HolyFlammableComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<HolyFlammableComponent, ResistHolyFireAlertEvent>(OnResistFireAlert);
         Subs.SubscribeWithRelay<HolyFlammableComponent, ExtinguishEvent>(OnExtinguishEvent);
-        Subs.SubscribeWithRelay<WeakToHolyComponent, HolyIgniteEvent>(OnHolyIgniteEvent);
+        SubscribeLocalEvent<ShouldTakeHolyComponent, HolyIgniteEvent>(OnHolyIgniteEvent);
 
         SubscribeLocalEvent<HolyIgniteOnCollideComponent, StartCollideEvent>(HolyIgniteOnCollide);
         SubscribeLocalEvent<HolyIgniteOnMeleeHitComponent, MeleeHitEvent>(OnMeleeHit);
@@ -67,7 +67,7 @@ public sealed class HolyFlammableSystem : EntitySystem
         AdjustFireStacks(ent, args.FireStacksAdjustment, ent.Comp);
     }
 
-    private void OnHolyIgniteEvent(Entity<WeakToHolyComponent> ent, ref HolyIgniteEvent args)
+    private void OnHolyIgniteEvent(Entity<ShouldTakeHolyComponent> ent, ref HolyIgniteEvent args)
     {
         SetupEntity(ent);
         var flammable = EnsureComp<HolyFlammableComponent>(ent);
@@ -83,7 +83,7 @@ public sealed class HolyFlammableSystem : EntitySystem
     {
         foreach (var entity in args.HitEntities)
         {
-            if (!HasComp<WeakToHolyComponent>(ent))
+            if (!HasComp<ShouldTakeHolyComponent>(ent))
                 continue;
 
             SetupEntity(entity);
@@ -103,7 +103,7 @@ public sealed class HolyFlammableSystem : EntitySystem
 
         var otherEnt = args.OtherEntity;
 
-        if (!HasComp<WeakToHolyComponent>(otherEnt))
+        if (!HasComp<ShouldTakeHolyComponent>(otherEnt))
             return;
 
         SetupEntity(otherEnt);
@@ -127,7 +127,7 @@ public sealed class HolyFlammableSystem : EntitySystem
             return;
 
 
-        if (!TryComp<WeakToHolyComponent>(otherUid, out var otherWeak))
+        if (!TryComp<ShouldTakeHolyComponent>(otherUid, out var otherWeak))
             return;
 
         SetupEntity(otherUid);

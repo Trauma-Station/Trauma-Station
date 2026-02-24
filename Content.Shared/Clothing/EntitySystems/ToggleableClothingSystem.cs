@@ -701,7 +701,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         {
             if (container.Contains(attached.Key)
                 && unequipping
-                || CheckEquipped(Transform(toggleable).ParentUid, attached.Key, attached.Value))
+                || !CheckEquipped(Transform(toggleable).ParentUid, attached.Key, attached.Value))
                 continue;
 
             toggledCount++;

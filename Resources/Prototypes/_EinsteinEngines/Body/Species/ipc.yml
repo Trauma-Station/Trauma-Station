@@ -207,6 +207,7 @@
         Piercing: -15
         Slash: -15
   - type: DamagedSiliconAccent
+    enableChargeCorruption: false
   - type: Uncloneable # it a fucking robot
   - type: ZombieImmune
   - type: Fixtures
@@ -291,7 +292,7 @@
     markingData:
       group: IPC
   - type: WoundableVisuals
-    damageOverlayColors:
+    damageGroupColors:
       Brute: "#DD8822"
   - type: Boneless
     bonePenalty: 1
@@ -364,6 +365,10 @@
   id: OrganIPCEyes
   name: robotic eyes
   description: "01001001 00100000 01110011 01100101 01100101 00100000 01111001 01101111 01110101 00100001"
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: IPC
 
 - type: entity
   parent: [ OrganBaseTongue, OrganIPCInternal ]

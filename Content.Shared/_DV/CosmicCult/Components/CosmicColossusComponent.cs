@@ -1,3 +1,4 @@
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
@@ -62,7 +63,7 @@ public sealed partial class CosmicColossusComponent : Component
 
     [DataField] public float SunderThrowDistance = 3f;
 
-    [DataField] public TimeSpan SunderStun = TimeSpan.FromSeconds(2);
+    [DataField] public TimeSpan SunderStun = TimeSpan.FromSeconds(1);
 
     [DataField] public TimeSpan IngressDoAfter = TimeSpan.FromSeconds(4);
 
@@ -97,6 +98,12 @@ public sealed partial class CosmicColossusComponent : Component
 
     [ViewVariables]
     public EntityUid? ImprisonedEntity => Container?.ContainedEntity;
+
+    /// <summary>
+    ///     Entities not affected by entropic sunder
+    /// </summary>
+    [DataField(required: true)]
+    public EntityWhitelist SunderBlacklist = new();
 }
 
 [Serializable, NetSerializable]

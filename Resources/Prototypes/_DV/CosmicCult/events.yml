@@ -6,10 +6,8 @@
     weight: 3
     earliestStart: 30
     reoccurrenceDelay: 20
-    minimumPlayers: 25
+    minimumPlayers: 40
     duration: null
-  #- type: PrecognitionResult # Trauma: psionics aren't real
-  #  message: psionic-power-precognition-colossus-spawn-result-message
   - type: SpaceSpawnRule
   - type: GameRule
     chaosScore: 600 # Same as dragon
@@ -32,6 +30,3 @@
         text: ghost-role-colossus-briefing
         color: CadetBlue
         sound: /Audio/_DV/CosmicCult/antag_cosmic_AI_briefing.ogg
-      components:
-      - type: CosmicColossus
-        timed: true

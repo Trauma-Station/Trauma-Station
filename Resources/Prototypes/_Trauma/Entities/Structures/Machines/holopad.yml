@@ -1,0 +1,16 @@
+# Science
+- type: entity
+  parent: Holopad
+  id: HolopadScienceXenobiology
+  suffix: Xenobio
+  components:
+  - type: Label
+    currentLabel: station-beacon-xenobio
+
+- type: entity
+  parent: Holopad
+  id: HolopadScienceGenetics
+  suffix: Genetics
+  components:
+  - type: Label
+    currentLabel: station-beacon-genetics

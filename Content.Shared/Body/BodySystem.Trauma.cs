@@ -55,9 +55,10 @@ public sealed partial class BodySystem
     /// Tries to enable a given organ, letting systems run logic.
     /// Returns true if it is valid and now enabled.
     /// </summary>
-    public bool EnableOrgan(Entity<OrganComponent?> organ)
+    public bool EnableOrgan(Entity<OrganComponent?> organ, EntityUid? bodyUid = null)
     {
-        if (!_organQuery.Resolve(organ, ref organ.Comp) || organ.Comp.Body is not {} body)
+        // allow the user to pass in a body incase it's null here
+        if (!_organQuery.Resolve(organ, ref organ.Comp) || (bodyUid ?? organ.Comp.Body) is not {} body)
             return false;
 
         if (HasComp<EnabledOrganComponent>(organ))
@@ -80,9 +81,9 @@ public sealed partial class BodySystem
     /// Disabled a given organ, letting systems run logic.
     /// Returns true if it is valid and now disabled.
     /// </summary>
-    public bool DisableOrgan(Entity<OrganComponent?> organ)
+    public bool DisableOrgan(Entity<OrganComponent?> organ, EntityUid? bodyUid = null)
     {
-        if (!_organQuery.Resolve(organ, ref organ.Comp) || organ.Comp.Body is not {} body)
+        if (!_organQuery.Resolve(organ, ref organ.Comp) || (bodyUid ?? organ.Comp.Body) is not {} body)
             return false;
 
         if (!TryComp<EnabledOrganComponent>(organ, out var enabled))
@@ -191,6 +192,8 @@ public sealed partial class BodySystem
             (BodyPartType.Leg, BodyPartSymmetry.Right) => TargetBodyPart.RightLeg,
             (BodyPartType.Foot, BodyPartSymmetry.Left) => TargetBodyPart.LeftFoot,
             (BodyPartType.Foot, BodyPartSymmetry.Right) => TargetBodyPart.RightFoot,
+            (BodyPartType.Tail, _) => TargetBodyPart.Tail,
+            (BodyPartType.Wings, _) => TargetBodyPart.Wings,
             _ => TargetBodyPart.Chest,
         };
     }
@@ -213,6 +216,8 @@ public sealed partial class BodySystem
             TargetBodyPart.LeftFoot => (BodyPartType.Foot, BodyPartSymmetry.Left),
             TargetBodyPart.RightLeg => (BodyPartType.Leg, BodyPartSymmetry.Right),
             TargetBodyPart.RightFoot => (BodyPartType.Foot, BodyPartSymmetry.Right),
+            TargetBodyPart.Tail => (BodyPartType.Tail, BodyPartSymmetry.None),
+            TargetBodyPart.Wings => (BodyPartType.Wings, BodyPartSymmetry.None),
             _ => (BodyPartType.Torso, BodyPartSymmetry.None)
         };
     }
@@ -472,4 +477,7 @@ public sealed partial class BodySystem
     }
 
     #endregion
+
+    private bool IsDetached(EntityUid uid)
+        => (MetaData(uid).Flags & MetaDataFlags.Detached) != 0;
 }

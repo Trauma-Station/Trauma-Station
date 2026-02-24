@@ -7,7 +7,7 @@
       whitelist:
         components:
         - PressureProtection
-      guidebookText: entity-effect-condition-guidebook-pressure-protection
+      guidebookText: entity-condition-guidebook-pressure-protection
 
 - type: entityCondition
   id: IsHumanoid
@@ -16,3 +16,11 @@
       components:
       - HumanoidProfile
     guidebookText: entity-condition-guidebook-is-humanoid
+
+- type: entityCondition
+  id: IsAwake
+  condition: !type:WhitelistCondition
+    whitelist:
+      components:
+      - AwakeMob
+    guidebookText: entity-condition-guidebook-is-awake

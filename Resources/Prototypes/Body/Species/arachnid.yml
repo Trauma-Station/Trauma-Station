@@ -9,7 +9,7 @@
     enum.HumanoidVisualLayers.FacialHair:
       limit: 0
       required: false
-    enum.HumanoidVisualLayers.Tail:
+    enum.HumanoidVisualLayers.Wings: # Trauma - was Tail
       limit: 1
       required: true
       default: [ ArachnidAppendagesDefault ]
@@ -45,6 +45,7 @@
     organs:
       Torso: OrganArachnidTorso
       Head: OrganArachnidHead
+      Wings: OrganArachnidAppendages # Trauma
       ArmLeft: OrganArachnidArmLeft
       ArmRight: OrganArachnidArmRight
       HandRight: OrganArachnidHandRight
@@ -181,7 +182,7 @@
     sprite: Mobs/Species/Arachnid/parts.rsi
 
 - type: entity
-  parent: [ OrganBaseTorso, OrganArachnidExternal ]
+  parent: [ OrganBaseTorsoWinged, OrganArachnidExternal ] # Trauma - Winged torso (appendages count as wings for simplicity)
   id: OrganArachnidTorso
 
 - type: entity

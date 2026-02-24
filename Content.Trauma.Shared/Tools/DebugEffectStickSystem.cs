@@ -69,10 +69,8 @@ public sealed class DebugEffectStickSystem : EntitySystem
 
         _adminLogger.Add(LogType.AdminCommands, LogImpact.High, $"{ToPrettyString(user)} used DEBUG EFFECT STICK {ToPrettyString(ent)} on {ToPrettyString(target)} with effect {effect}");
 
-        _data.SetUser(target, user);
         _data.SetTool(target, ent);
-        _nested.ApplyNestedEffect(target, effect);
-        _data.ClearUser(target);
+        _nested.ApplyNestedEffect(target, effect, user: user);
         _data.ClearTool(target);
     }
 

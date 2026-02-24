@@ -1,14 +1,40 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from and modified by deltanedas (github) for GoobStation",
+    "copyright": "Taken from https://github.com/tgstation/tgstation/blob/8e939d9eba79b87cacfa9cbfb49d1bfb281f8f63/icons/mob/simple/animal.dmi and modified by deltanedas (github) for GoobStation",
     "size": {
         "x": 32,
         "y": 32
     },
     "states": [
         {
-            "name": "tail"
+            "name": "tail",
+            "directions": 4,
+            "delays": [
+                [
+                    0.2,
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "tail-icon"
         },
         {
             "name": "torso"

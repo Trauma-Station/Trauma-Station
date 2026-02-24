@@ -7,6 +7,7 @@ using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
 using Content.Shared.Inventory;
 using Content.Shared.NameModifier.Components;
+using Content.Shared.Polymorph.Systems;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Tag;
 using Robust.Shared.Map;
@@ -42,7 +43,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Polymorph.Systems;
 
-public sealed partial class PolymorphSystem : EntitySystem
+public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - extend shared system
 {
     // <Trauma>
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -193,7 +194,7 @@ public sealed partial class PolymorphSystem : EntitySystem
     /// </summary>
     /// <param name="uid">The entity that will be transformed</param>
     /// <param name="protoId">The id of the polymorph prototype</param>
-    public EntityUid? PolymorphEntity(EntityUid uid, ProtoId<PolymorphPrototype> protoId)
+    public override EntityUid? PolymorphEntity(EntityUid uid, ProtoId<PolymorphPrototype> protoId) // Trauma - override virtual method
     {
         var config = _proto.Index(protoId).Configuration;
         return PolymorphEntity(uid, config);
@@ -205,7 +206,7 @@ public sealed partial class PolymorphSystem : EntitySystem
     /// <param name="uid">The entity that will be transformed</param>
     /// <param name="configuration">The new polymorph configuration</param>
     /// <returns>The new entity, or null if the polymorph failed.</returns>
-    public EntityUid? PolymorphEntity(EntityUid uid, PolymorphConfiguration configuration)
+    public override EntityUid? PolymorphEntity(EntityUid uid, PolymorphConfiguration configuration) // Trauma - override virtual method
     {
         // If they're morphed, check their current config to see if they can be
         // morphed again
@@ -348,10 +349,10 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         if (configuration.TransferName && TryComp(uid, out MetaDataComponent? targetMeta))
         {
-            // Goob edit start
+            // <Trauma> - remove name modifier suffix by default
             _metaData.SetEntityName(child,
-                TryComp(uid, out NameModifierComponent? modifier) ? modifier.BaseName : targetMeta.EntityName);
-            // Goob edit end
+                configuration.StripNameModifier && TryComp(uid, out NameModifierComponent? modifier) ? modifier.BaseName : targetMeta.EntityName);
+            // </Trauma>
         }
 
         if (configuration.TransferHumanoidAppearance)
@@ -418,6 +419,13 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         return child;
     }
+
+    /// <summary>
+    /// Trauma - override version of <see cref="Revert"/> that can't take a component.
+    /// Can't just move the proper method it isn't in shared and idc.
+    /// </summary>
+    public override EntityUid? RevertPolymorph(EntityUid uid)
+        => Revert(uid);
 
     /// <summary>
     /// Reverts a polymorphed entity back into its original form

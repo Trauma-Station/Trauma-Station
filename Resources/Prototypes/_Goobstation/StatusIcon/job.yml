@@ -31,27 +31,11 @@
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconBlueshield
-  icon:
-    sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
-    state: blueshield
-  jobName: job-name-bs
-
-- type: jobIcon
-  parent: JobIcon
   id: JobIconRadioHost
   icon:
     sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
     state: radiohost
   jobName: job-name-radiohost
-
-- type: jobIcon
-  parent: JobIcon
-  id: JobIconNanotrasenTrainer
-  icon:
-    sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
-    state: trainer
-  jobName: job-name-nct
 
 - type: jobIcon
   parent: JobIcon

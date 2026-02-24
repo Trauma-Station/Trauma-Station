@@ -2,6 +2,7 @@
 using Content.Medical.Shared.Abductor;
 using Content.Medical.Client.Choice.UI;
 using static Content.Shared.Pinpointer.SharedNavMapSystem;
+using Robust.Client.UserInterface;
 
 namespace Content.Medical.Client.Abductor;
 
@@ -43,8 +44,8 @@ public sealed class AbductorCameraConsoleBui : BoundUserInterface
     private void TryInitWindow()
     {
         if (_window != null) return;
-        _window = new AbductorCameraConsoleWindow();
-        _window.OnClose += Close;
+
+        _window = this.CreateWindow<AbductorCameraConsoleWindow>();
         _window.Title = "Intercepted cameras.";
 
         _window.StationsButton.OnPressed += _ =>
@@ -64,15 +65,13 @@ public sealed class AbductorCameraConsoleBui : BoundUserInterface
         foreach (var beacon in beacons)
         {
             var beaconButton = new ChoiceControl();
+            var target = beacon.NetEnt;
 
             beaconButton.Set(beacon.Text, null);
             beaconButton.Button.Modulate = beacon.Color;
             beaconButton.Button.OnPressed += _ =>
             {
-                SendMessage(new AbductorBeaconChosenBuiMsg()
-                {
-                    Beacon = beacon,
-                });
+                SendMessage(new AbductorBeaconChosenBuiMsg(target));
                 Close();
             };
             _window.Beacons.AddChild(beaconButton);

@@ -227,6 +227,13 @@ public sealed partial record PolymorphConfiguration
     /// </summary>
     [DataField]
     public bool SkipRevertConfirmation;
+
+    /// <summary>
+    /// Trauma - Whether to strip name modifier if transferring name.
+    /// Can be disabled if you want the modifier suffix to be transferred.
+    /// </summary>
+    [DataField]
+    public bool StripNameModifier = true;
 }
 
 public enum PolymorphInventoryChange : byte

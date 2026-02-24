@@ -8,10 +8,10 @@
         <BoxContainer Orientation="Vertical" Margin="5 5 5 5">
             <Label Name="ProgramTitle"/> <!-- Set to Program.Title -->
             <Button Name="SafetyButton" Text="{Loc 'autodoc-safety-enabled'}"/>
-            <Button Name="RemoveButton" StyleClasses="Caution" Text="{Loc 'autodoc-remove-program'}"/>
+            <Button Name="RemoveButton" StyleClasses="negative" Text="{Loc 'autodoc-remove-program'}"/>
             <Button Name="AddStepButton" Text="{Loc 'autodoc-add-step'}"/>
-            <Button Name="RemoveStepButton" StyleClasses="Caution" Text="{Loc 'autodoc-remove-step'}" Disabled="True"/>
-            <Button Name="StartButton" StyleClasses="Caution" Text="{Loc 'autodoc-start-program'}"/>
+            <Button Name="RemoveStepButton" StyleClasses="negative" Text="{Loc 'autodoc-remove-step'}" Disabled="True"/>
+            <Button Name="StartButton" StyleClasses="negative" Text="{Loc 'autodoc-start-program'}"/>
             <Button Name="ExportProgramButton" Text="{Loc 'autodoc-export-program'}"/>
         </BoxContainer>
         <ScrollContainer HorizontalExpand="True" VerticalExpand="True">

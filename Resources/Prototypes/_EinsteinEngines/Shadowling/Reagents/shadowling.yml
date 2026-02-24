@@ -16,7 +16,7 @@
             components:
             - Shadowling
             - Thrall
-          guidebookText: entity-effect-condition-shadowling-or-thrall
+          guidebookText: entity-condition-shadowling-or-thrall
         damage:
           groups: # goob edit
             Burn: -12
@@ -33,7 +33,7 @@
             components:
             - Shadowling
             - Thrall
-          guidebookText: entity-effect-condition-not-shadowling-or-thrall
+          guidebookText: entity-condition-not-shadowling-or-thrall
         - !type:ReagentCondition
           reagent: ShadowlingToxin
           min: 5

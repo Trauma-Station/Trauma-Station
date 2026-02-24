@@ -35,7 +35,6 @@
     tags:
     - CentralCommand
     - NanotrasenRepresentative
-    - BlueshieldOfficer
     - Wizard
     - NuclearOperative
     - SyndicateAgent
@@ -73,27 +72,8 @@
     tags:
     - CentralCommand
     - NanotrasenRepresentative
-    - BlueshieldOfficer
 
-# Blueshield
-- type: entity
-  parent: IDCardStandard
-  id: BlueshieldIDCard
-  name: blueshield officer ID card
-  components:
-  - type: Sprite
-    layers:
-    - state: centcom
-    - state: idcentcom
-  - type: Item
-    heldPrefix:
-  - type: PresetIdCard
-    job: BlueshieldOfficer
-  - type: Access
-    tags:
-    - CentralCommand
-    - BlueshieldOfficer
-
+# NTR
 - type: entity
   parent: IDCardStandard
   id: NanotrasenRepresentativeIDCard
@@ -111,20 +91,6 @@
     tags:
     - CentralCommand
     - NanotrasenRepresentative
-
-- type: entity
-  parent: IDCardStandard
-  id: NanotrasenCareerTrainerIDCard
-  name: nanotrasen career trainer ID card
-  components:
-  - type: Sprite
-    layers:
-    - state: centcom
-    - state: idcentcom
-  - type: Item
-    heldPrefix:
-  - type: PresetIdCard
-    job: NanotrasenCareerTrainer
 
 # Executive Access
 - type: entity
@@ -158,7 +124,6 @@
     tags:
     - CentralCommand
     - NanotrasenRepresentative
-    - BlueshieldOfficer
 
 - type: entity
   parent: ExecutiveIDCard

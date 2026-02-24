@@ -71,6 +71,7 @@
     layers:
       HeadTop : HEAD
       HeadSide : HEAD
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadHelmetBasic
@@ -204,6 +205,7 @@
       Hair: HEAD
       HeadTop: HEAD
       HeadSide: HEAD
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadHatHelmetTemplar
@@ -225,6 +227,7 @@
     - WhitelistChameleon
   - type: HideLayerClothing
     layers: {}
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadHatHelmetTemplar
@@ -237,6 +240,7 @@
     state: icon
   - type: Clothing
     sprite: _ShitChap/Clothing/Head/Misc/ancient.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadHatHelmetTemplar

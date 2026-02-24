@@ -132,7 +132,7 @@
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: Reflective
-    reflective: None
+    reflective: Magic
 
 - type: entity
   id: Inkofimaginination

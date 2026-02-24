@@ -15,7 +15,7 @@ job-description-navy-special-operations-officer = Send, brief, and direct emerge
 
 # Generic Nanotrasen
 
-job-description-nct = Teach the newbies how to perform their company assigned tasks properly, and stay out of trouble.
+job-description-ntr = Represent NT, Send reports back to them on the station's situation, Inform the heads of anything CentCom orders them to do.
 
 # Syndicate
 
@@ -24,7 +24,7 @@ job-description-highcommander = You are an elite, high-ranking official within t
 # Half Life
 
 job-description-governmentman = Well, well, isn't this just like old times.
-job-description-hecu = Fufill the orders of your supervisor, no matter the morales.
+job-description-hecu = Fufill the orders of your supervisor, no matter the morality.
 
 # Misc
 

@@ -1,0 +1,22 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<BoxContainer xmlns="https://spacestation14.io"
+        xmlns:genetics="clr-namespace:Content.Trauma.Client.Genetics.UI"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Orientation="Vertical"
+        Align="Center">
+    <genetics:GeneticScanner Name="Scanner"/>
+    <BoxContainer Name="MobContainer" Orientation="Vertical" Visible="False">
+        <controls:NanoHeading Text="{Loc 'genetics-console-sequences'}"/>
+        <BoxContainer Orientation="Horizontal">
+            <genetics:SequenceButtons Name="SequenceButtons"/>
+            <genetics:SequenceInfo Name="Info">
+                <Button Name="CombineButton" Text="{Loc 'genetics-console-combine-button'}" Disabled="True" MaxWidth="120"/>
+            </genetics:SequenceInfo>
+            <BoxContainer Name="NoSequence" Align="Center" HorizontalExpand="True">
+                <Label Text="{Loc 'genetics-console-sequencer-no-sequence-selected'}"/>
+            </BoxContainer>
+        </BoxContainer>
+        <Label Name="DiskMutation" Text="{Loc 'genetics-console-disk-empty'}" Align="Center"/>
+        <Label Name="DiskRecipes" Visible="False" Align="Center"/>
+    </BoxContainer>
+</BoxContainer>

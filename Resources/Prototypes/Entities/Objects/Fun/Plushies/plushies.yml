@@ -1196,6 +1196,7 @@
       CottonBurger: MothPlushie
 
 - type: entity
+  abstract: true # Trauma - no ERP
   parent: BasePlushie
   id: PlushieVulp
   name: vulpkanin plushie

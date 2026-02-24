@@ -31,6 +31,9 @@
   - ActionHereticOpenStore
   - ActionHereticMansusGrasp
   event: !type:HereticStartupEvent
+    addedComponents:
+    - type: WeakToHoly
+    - type: CanEnchant
 
 - type: hereticKnowledge
   id: HeartbeatOfMansus
@@ -169,11 +172,11 @@
   stage: 4
 
 - type: hereticKnowledge
-  id: Realignment
+  id: SacramentsOfPower
   path: Blade
   stage: 5
   actionPrototypes:
-  - ActionHereticRealignment
+  - ActionHereticSacraments
 
 - type: hereticKnowledge
   id: TornChampionStance
@@ -377,7 +380,7 @@
     - type: SpecialBreathingImmunity
     - type: SpecialPressureImmunity
     - type: Aristocrat
-    - type: MovementIgnoreGravity
+    - type: MovementAlwaysTouching
     - type: CanMoveInAir
     - type: NoSlip
     - type: ThermalVision
@@ -585,6 +588,13 @@
   stage: 3
   ritualPrototypes:
   - RitualScorchingShark
+
+- type: hereticKnowledge
+  id: Realignment
+  sideKnowledge: true
+  stage: 3
+  actionPrototypes:
+  - ActionHereticRealignment
 
 ## stage 6
 - type: hereticKnowledge

@@ -1,0 +1,69 @@
+- type: entity
+  abstract: true
+  parent: BaseMutation
+  id: BaseMutationAdaptation
+  components:
+  - type: Mutation
+    instability: 25
+    difficulty: 16
+    conflicts:
+    - MutationThermalAdaptation
+    - MutationPressureAdaptation
+
+- type: entity
+  parent: BaseMutationAdaptation
+  id: MutationColdAdaptation
+  name: Cold Adaptation
+  description: A strange mutation that renders the host immune to damage from low temperature environments. It also prevents the host from slipping on ice.
+  components:
+  - type: ComponentMutation
+    added:
+    - type: SpecialLowTempImmunity
+  # TODO: ice slippy thing
+
+# TODO: give this to ashwalkers by default
+- type: entity
+  parent: BaseMutationAdaptation
+  id: MutationHeatAdaptation
+  name: Heat Adaptation
+  description: A strange mutation that renders the host immune to damage from high temperature, including being set alight, though the flame itself still burns clothing. It also seems to make the host resist ash storms.
+  components:
+  - type: ComponentMutation
+    added:
+    - type: SpecialHighTempImmunity
+    - type: FireImmunity
+  # TODO: ash storm immune
+
+- type: entity
+  parent: BaseMutation
+  id: MutationThermalAdaptation
+  name: Thermal Adaptation
+  description: A strange mutation that renders the host immune to damage from both low and high temperature environments. Does not protect from high or low pressure environments.
+  components:
+  - type: Mutation
+    instability: 35
+    difficulty: 32 # powergamers delight
+    conflicts:
+    - MutationPressureAdaptation
+  - type: RemovesMutation
+    removes:
+    - MutationColdAdaptation
+    - MutationHeatAdaptation
+  - type: ComponentMutation
+    added:
+    - type: TemperatureImmunity
+
+- type: entity
+  parent: BaseMutationAdaptation
+  id: MutationPressureAdaptation
+  name: Pressure Adaptation
+  description: A strange mutation that renders the host immune to damage from both low and high pressure environments. Does not protect from temperature, including the cold of space.
+  components:
+  - type: Mutation
+    conflicts: # cant combine temp and pressure at all
+    - MutationColdAdaptation
+    - MutationHeatAdaptation
+    - MutationThermalAdaptation
+  - type: ComponentMutation
+    added:
+    - type: PressureImmunity

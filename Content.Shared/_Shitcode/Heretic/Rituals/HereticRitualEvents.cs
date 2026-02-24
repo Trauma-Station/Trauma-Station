@@ -4,12 +4,14 @@ using Content.Shared.EntityEffects;
 namespace Content.Shared._Shitcode.Heretic.Rituals;
 
 [ByRefEvent]
-public readonly record struct HereticRitualEffectEvent<T>(T Effect, Entity<HereticRitualComponent> Ritual)
+public readonly record struct HereticRitualEffectEvent<T>(T Effect, Entity<HereticRitualComponent> Ritual, EntityUid? User)
     where T : EntityEffectBase<T>
 {
     public readonly T Effect = Effect;
 
     public readonly Entity<HereticRitualComponent> Ritual = Ritual;
+
+    public readonly EntityUid? User = User;
 }
 
 [ByRefEvent]

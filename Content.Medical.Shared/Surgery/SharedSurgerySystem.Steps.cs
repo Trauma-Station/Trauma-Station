@@ -141,7 +141,8 @@ public abstract partial class SharedSurgerySystem
         if (args.IsInvalid)
             return;
 
-        if (!_ignoreQuery.HasComp(args.User)
+        if (args.TargetSlots != SlotFlags.NONE
+            && !_ignoreQuery.HasComp(args.User)
             && !_ignoreQuery.HasComp(args.Tool)
             && _inventory.TryGetContainerSlotEnumerator(args.Body, out var containerSlotEnumerator, args.TargetSlots))
         {
@@ -278,7 +279,7 @@ public abstract partial class SharedSurgerySystem
         if (!TryComp(args.Surgery, out SurgeryOrganSlotConditionComponent? condition))
             return;
 
-        args.Cancelled |= _part.HasOrganSlot(args.Part, condition.OrganSlot);
+        args.Cancelled |= !_part.HasOrganSlot(args.Part, condition.OrganSlot);
     }
 
     private void OnAffixPartStep(Entity<SurgeryAffixPartStepComponent> ent, ref SurgeryStepEvent args)
@@ -310,14 +311,15 @@ public abstract partial class SharedSurgerySystem
 
     private void OnRemovePartStep(Entity<SurgeryRemovePartStepComponent> ent, ref SurgeryStepEvent args)
     {
-        if (!_organQuery.TryComp(args.Part, out var organ) || organ.Body != args.Body)
+        if (!_organQuery.TryComp(args.Part, out var organ) ||
+            organ.Body != args.Body ||
+            _part.GetParentPart(args.Part) is not {} parent)
             return;
 
-        if (_part.GetParentPart(args.Part) is not {} parent)
-            return;
-
-        _wounds.AmputateWoundableSafely(parent, args.Part);
-        _hands.TryPickupAnyHand(args.User, args.Part);
+        if (_wounds.AmputateWoundableSafely(parent, args.Part))
+            _hands.TryPickupAnyHand(args.User, args.Part);
+        else
+            _popup.PopupClient(Loc.GetString("surgery-popup-step-SurgeryStepRemovePart-failed"), args.User, args.User);
     }
 
     private void OnRemovePartCheck(Entity<SurgeryRemovePartStepComponent> ent, ref SurgeryStepCompleteCheckEvent args)

@@ -7,8 +7,10 @@
 
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Devil;
+using Content.Goobstation.Shared.Devil.Condemned;
 using Content.Goobstation.Shared.Exorcism;
 using Content.Goobstation.Shared.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
@@ -34,17 +36,37 @@ public sealed partial class GoobBibleSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _netManager = default!;
 
-    public bool TryDoSmite(EntityUid bible, EntityUid performer, EntityUid target, UseDelayComponent? useDelay = null, BibleComponent? bibleComp = null)
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<CondemnedComponent, BibleSmiteAttemptEvent>(OnSmiteAttempt);
+    }
+
+    private void OnSmiteAttempt(Entity<CondemnedComponent> ent, ref BibleSmiteAttemptEvent args)
+    {
+        if (!ent.Comp.SoulOwnedNotDevil)
+            args.ShouldSmite = true;
+    }
+
+    public bool TryDoSmite(EntityUid bible,
+        EntityUid performer,
+        EntityUid target,
+        UseDelayComponent? useDelay = null,
+        BibleComponent? bibleComp = null)
     {
         if (!Resolve(bible, ref useDelay, ref bibleComp))
             return false;
 
-        if (!TryComp<WeakToHolyComponent>(target, out var weakToHoly)
-            || weakToHoly is {AlwaysTakeHoly: false}
+        if (!HasComp<ShouldTakeHolyComponent>(target)
             || !HasComp<BibleUserComponent>(performer)
             || !_timing.IsFirstTimePredicted
-            || _delay.IsDelayed(bible)
-            || !_netManager.IsServer)
+            || _delay.IsDelayed(bible))
+            return false;
+
+        var ev = new BibleSmiteAttemptEvent(target);
+        RaiseLocalEvent(target, ref ev);
+        if (!ev.ShouldSmite)
             return false;
 
         var multiplier = 1f;
@@ -60,12 +82,17 @@ public sealed partial class GoobBibleSystem : EntitySystem
         {
             var popup = Loc.GetString("weaktoholy-component-bible-sizzle", ("target", target), ("item", bible));
             _popupSystem.PopupPredicted(popup, target, performer, PopupType.LargeCaution);
-            _audio.PlayPvs(bibleComp.SizzleSoundPath, target);
-            _damageableSystem.ChangeDamage(target, bibleComp.SmiteDamage * multiplier, true, origin: bible, targetPart: TargetBodyPart.All, ignoreBlockers: true);
+            _audio.PlayPredicted(bibleComp.SizzleSoundPath, target, performer);
+            _damageableSystem.ChangeDamage(target,
+                bibleComp.SmiteDamage * multiplier,
+                true,
+                origin: bible,
+                targetPart: TargetBodyPart.All,
+                ignoreBlockers: true);
             _stun.TryAddParalyzeDuration(target, bibleComp.SmiteStunDuration * multiplier);
             _delay.TryResetDelay((bible, useDelay));
         }
-        else if (isDevil && HasComp<BibleUserComponent>(performer))
+        else if (isDevil)
         {
             var doAfterArgs = new DoAfterArgs(
                 EntityManager,
@@ -83,7 +110,7 @@ public sealed partial class GoobBibleSystem : EntitySystem
 
             _doAfter.TryStartDoAfter(doAfterArgs);
             var popup = Loc.GetString("devil-banish-begin", ("target", target), ("user", performer));
-            _popupSystem.PopupEntity(popup, target, PopupType.LargeCaution);
+            _popupSystem.PopupPredicted(popup, target, performer, PopupType.LargeCaution);
         }
 
         return true;

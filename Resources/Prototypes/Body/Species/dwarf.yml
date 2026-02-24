@@ -44,6 +44,16 @@
   id: MobDwarf
   name: Urist McHands The Dwarf
   components:
+  # <Trauma>
+  - type: Mutatable # dwarves have dwarfism
+    defaultMutations:
+      MutationDwarfism: 1.0
+    dormant:
+    - MutationDwarfism
+    - MutationRockEater # non parity but peak
+  - type: ScaleVisuals # remove the scale as the mutation will do it instead
+    scale: 1, 1
+  # </Trauma>
   - type: Fixtures
     fixtures: # TODO: This needs a second fixture just for mob collisions.
       fix1:

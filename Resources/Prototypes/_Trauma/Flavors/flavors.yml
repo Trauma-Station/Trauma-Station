@@ -2,3 +2,8 @@
   id: DeepFried
   flavorType: Base
   description: flavor-base-deep-fried
+
+- type: flavor
+  id: tiredness
+  flavorType: Complex
+  description: flavor-complex-tiredness

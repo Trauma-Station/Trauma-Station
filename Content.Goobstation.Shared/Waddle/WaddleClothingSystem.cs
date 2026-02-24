@@ -8,11 +8,14 @@ using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Inventory.Events;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Waddle;
 
 public sealed class WaddleClothingSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -47,7 +50,7 @@ public sealed class WaddleClothingSystem : EntitySystem
 
     private void OnGotUnequipped(Entity<WaddleWhenWornComponent> ent, ref ClothingGotUnequippedEvent args)
     {
-        if (!ent.Comp.AddedWaddle)
+        if (!ent.Comp.AddedWaddle || _timing.ApplyingState)
             return;
 
         // TODO: refcount

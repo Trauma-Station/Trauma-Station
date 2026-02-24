@@ -61,5 +61,4 @@
        enabled: true
        isLooped: true
        reverseWhenFinished: true
-  - type: WeakToHoly # Goobstation Shitchap
-    alwaysTakeHoly: true
+  - type: AlwaysTakeHoly # Trauma

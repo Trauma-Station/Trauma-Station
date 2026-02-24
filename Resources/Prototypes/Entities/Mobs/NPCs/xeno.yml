@@ -3,7 +3,7 @@
 
 - type: entity
   name: space adder
-  parent: [ SimpleSpaceMobBase, AppearanceSpaceAdder ]
+  parent: [ AppearanceSpaceAdder, SimpleSpaceMobBase ] # Shitmed
   id: MobPurpleSnake
   description: A menacing purple snake from Kepler-283c.
   components:
@@ -73,7 +73,7 @@
 
 - type: entity
   name: space adder
-  parent: [ MobPurpleSnake, AppearanceSpaceAdder ] # Shitmed
+  parent: [ AppearanceSpaceAdder, MobPurpleSnake ] # Shitmed
   id: MobSmallPurpleSnake
   suffix: small
   description: A smaller version of the menacing purple snake from Kepler-283c.

@@ -59,7 +59,9 @@ public sealed class HealingSystem : EntitySystem
         "LegLeft",
         "FootLeft",
         "LegRight",
-        "FootRight"
+        "FootRight",
+        "Tail",
+        "Wings"
     };
     // Goobstation end
 

@@ -129,6 +129,7 @@
     slots:
     - Brain
     - Eyes
+    - Tongue
     - HiveNode
 
 - type: entity
@@ -184,6 +185,9 @@
   id: OrganXenomorphEyes
   description: It turned out they had them after all!
   components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
   - type: OrganComponents
     onAdd:
     - type: ThermalVision

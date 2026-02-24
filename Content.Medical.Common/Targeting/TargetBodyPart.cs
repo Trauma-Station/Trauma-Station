@@ -22,6 +22,8 @@ public enum TargetBodyPart : ushort
     LeftFoot = 1 << 8,
     RightLeg = 1 << 9,
     RightFoot = 1 << 10,
+    Tail = 1 << 11,
+    Wings = 1 << 12,
 
     Hands = LeftHand | RightHand,
     Arms = LeftArm | RightArm,
@@ -32,7 +34,8 @@ public enum TargetBodyPart : ushort
     BodyMiddle = Chest | Groin | FullArms,
     FullLegsGroin = FullLegs | Groin,
 
-    All = Head | Chest | Groin | LeftArm | LeftHand | RightArm | RightHand | LeftLeg | LeftFoot | RightLeg | RightFoot,
+    All = Head | Chest | Groin | LeftArm | LeftHand | RightArm | RightHand | LeftLeg | LeftFoot | RightLeg | RightFoot | Tail | Wings,
+    Other = Tail | Wings,
 
     Vital = Head | Chest,
 }

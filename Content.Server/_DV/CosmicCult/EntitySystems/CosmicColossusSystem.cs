@@ -25,14 +25,14 @@ public sealed class CosmicColossusSystem : SharedCosmicColossusSystem
 
     private void OnSpawn(Entity<CosmicColossusComponent> ent, ref ComponentInit args) // I WANT THIS BIG GUY HURLED TOWARDS THE STATION
     {
+        if (!ent.Comp.Timed) return;
         ent.Comp.DeathTimer = _timing.CurTime + ent.Comp.DeathWait;
         if (_station.GetStationInMap(Transform(ent).MapID) is { } station && TryComp<StationDataComponent>(station, out var stationData))
         {
             var stationGrid = _station.GetLargestGrid((station, stationData));
             _throw.TryThrow(ent, Transform(stationGrid!.Value).Coordinates, baseThrowSpeed: 30, null, 0, 0, false, false, false, false, false);
         }
-        if (ent.Comp.Timed)
-            _actions.AddAction(ent, ref ent.Comp.EffigyPlaceActionEntity, ent.Comp.EffigyPlaceAction, ent);
+        _actions.AddAction(ent, ref ent.Comp.EffigyPlaceActionEntity, ent.Comp.EffigyPlaceAction, ent);
     }
 
     protected override void OnColossusEffigy(Entity<CosmicColossusComponent> ent, ref EventCosmicColossusEffigy args)

@@ -20,6 +20,7 @@ using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Warps;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -54,13 +55,11 @@ public abstract class SharedCosmicColossusSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
 
 
     private HashSet<Entity<MobStateComponent>> _mobs = [];
     private HashSet<Entity<PhysicsComponent>> _targets = [];
-
-    private EntityQuery<CosmicCultComponent> _cultistsQuery;
-    private EntityQuery<CosmicColossusComponent> _colossiQuery;
 
     public override void Initialize()
     {
@@ -72,9 +71,6 @@ public abstract class SharedCosmicColossusSystem : EntitySystem
         SubscribeLocalEvent<CosmicColossusComponent, EventCosmicColossusEffigy>(OnColossusEffigy);
         SubscribeLocalEvent<CosmicColossusComponent, EventCosmicColossusIngress>(OnColossusIngress);
         SubscribeLocalEvent<CosmicColossusComponent, EventCosmicColossusIngressDoAfter>(OnColossusIngressDoAfter);
-
-        _cultistsQuery = GetEntityQuery<CosmicCultComponent>();
-        _colossiQuery = GetEntityQuery<CosmicColossusComponent>();
     }
 
     public override void Update(float frameTime)
@@ -92,7 +88,7 @@ public abstract class SharedCosmicColossusSystem : EntitySystem
 
                 _mobs.Clear();
                 _lookup.GetEntitiesInRange<MobStateComponent>(Transform(ent).Coordinates, comp.SunderRange, _mobs);
-                _mobs.RemoveWhere(target => _cultistsQuery.HasComp(target) || _colossiQuery.HasComp(target));
+                _mobs.RemoveWhere(target => _entityWhitelist.IsValid(comp.SunderBlacklist, target));
                 foreach (var mob in _mobs)
                 {
                     _stun.KnockdownOrStun(mob, comp.SunderStun);
@@ -100,7 +96,7 @@ public abstract class SharedCosmicColossusSystem : EntitySystem
 
                 _targets.Clear();
                 _lookup.GetEntitiesInRange<PhysicsComponent>(Transform(ent).Coordinates, comp.SunderRange, _targets);
-                _targets.RemoveWhere(target => _cultistsQuery.HasComp(target) || _colossiQuery.HasComp(target) || _container.TryGetOuterContainer(target, Transform(target), out _));
+                _targets.RemoveWhere(target => _entityWhitelist.IsValid(comp.SunderBlacklist, target) || _container.TryGetOuterContainer(target, Transform(target), out _));
                 var userPosision = _transform.GetWorldPosition(ent);
                 foreach (var target in _targets)
                 {
@@ -118,15 +114,20 @@ public abstract class SharedCosmicColossusSystem : EntitySystem
             }
             if (comp.Timed && _timing.CurTime >= comp.DeathTimer)
             {
+                if (comp.DeathTimer == default!)
+                {
+                    comp.DeathTimer = _timing.CurTime + comp.DeathWait;
+                    continue;
+                }
                 if (!_threshold.TryGetThresholdForState(ent, MobState.Dead, out var damage))
-                    return;
+                    continue; // return in foreach loop award
                 DamageSpecifier dspec = new();
                 dspec.DamageDict.Add("Heat", damage.Value);
                 _damage.TryChangeDamage(ent, dspec, true);
             }
             if (_mobState.IsDead(ent) && _timing.CurTime >= comp.DissolveTimer)
             {
-                if (comp.DissolveTimer == default!) // The event doesn\t fire on the cleint for some reason and I can't figure out why, shitcode GO!
+                if (comp.DissolveTimer == default!) // The event doesn't fire on the cleint for some reason and I can't figure out why, shitcode GO!
                 {
                     comp.DissolveTimer = _timing.CurTime + comp.DissolveWait;
                     continue;

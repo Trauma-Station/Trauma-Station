@@ -1,13 +1,15 @@
 // <Trauma>
+using Content.Goobstation.Shared.Communications;
 using Content.Goobstation.Shared.Loudspeaker.Events;
 using Content.Goobstation.Shared.Radio;
-using Content.Server._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language;
+using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Access.Systems;
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.StatusIcon;
 using Content.Shared.Whitelist;
 using Content.Trauma.Common.Speech;
+using System.Linq;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
@@ -30,14 +32,14 @@ namespace Content.Server.Radio.EntitySystems;
 /// <summary>
 ///     This system handles intrinsic radios and the general process of converting radio messages into chat messages.
 /// </summary>
-public sealed partial class RadioSystem : EntitySystem
+public sealed partial class RadioSystem : EntitySystem // Trauma - made partial
 {
-    // <Goob>
+    // <Trauma>
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedLanguageSystem _language = default!;
     [Dependency] private readonly RadioJobIconSystem _radioIcon = default!;
-    // </Goob>
+    // </Trauma>
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;

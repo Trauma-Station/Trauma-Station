@@ -67,6 +67,7 @@ public sealed class ImmovableRodSystem : EntitySystem
         SubscribeLocalEvent<ImmovableRodComponent, ExaminedEvent>(OnExamined);
     }
 
+    // Trauma - changed world rotation to local rotation
     private void OnMapInit(EntityUid uid, ImmovableRodComponent component, MapInitEvent args)
     {
         if (TryComp(uid, out PhysicsComponent? phys))
@@ -76,20 +77,22 @@ public sealed class ImmovableRodSystem : EntitySystem
             _physics.SetBodyStatus(uid, phys, BodyStatus.InAir);
 
             var xform = Transform(uid);
-            var (worldPos, worldRot) = _transform.GetWorldPositionRotation(uid);
-            var vel = worldRot.ToWorldVec() * component.MaxSpeed;
+            // var (worldPos, worldRot) = _transform.GetWorldPositionRotation(uid);
+            var vel = xform.LocalRotation.ToWorldVec() * component.MaxSpeed; // Trauma
 
             if (component.RandomizeVelocity)
             {
                 vel = component.DirectionOverride.Degrees switch
                 {
                     0f => _random.NextVector2(component.MinSpeed, component.MaxSpeed),
-                    _ => worldRot.RotateVec(component.DirectionOverride.ToVec()) * _random.NextFloat(component.MinSpeed, component.MaxSpeed)
+                    _ => xform.LocalRotation.RotateVec(component.DirectionOverride.ToVec()) * _random.NextFloat(component.MinSpeed, component.MaxSpeed) // Trauma
                 };
+
+                xform.LocalRotation = vel.ToAngle(); // Trauma
             }
 
             _physics.ApplyLinearImpulse(uid, vel, body: phys);
-            xform.LocalRotation = (vel - worldPos).ToWorldAngle() + MathHelper.PiOver2;
+            // xform.LocalRotation = (vel - worldPos).ToWorldAngle() + MathHelper.PiOver2;
         }
     }
 

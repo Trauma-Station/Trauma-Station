@@ -50,6 +50,9 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Linq;
+using Content.Goobstation.Common.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
+using Content.Server.Station.Systems;
 using Content.Shared.Cuffs.Components;
 using Content.Server.Cuffs;
 
@@ -105,9 +108,24 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         SubscribeLocalEvent<CosmicLesserCultistComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<CosmicGodComponent, ComponentInit>(OnGodSpawn);
         SubscribeLocalEvent<CosmicCultComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<CosmicCultComponent, UserShouldTakeHolyEvent>(OnShouldTakeHoly); // Trauma
     }
 
     #region Starting Events
+    // <Trauma>
+    private void OnShouldTakeHoly(Entity<CosmicCultComponent> ent, ref UserShouldTakeHolyEvent args)
+    {
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
+            return;
+        args.WeakToHoly = true;
+
+
+        if (AssociatedGamerule(ent) is not { } rule)
+            return;
+
+        args.ShouldTakeHoly = rule.Comp.CurrentTier > 2;
+    }
+    // </Trauma>
 
     protected override void ActiveTick(EntityUid uid, CosmicCultRuleComponent component, GameRuleComponent gameRule, float frameTime)
     {
@@ -573,9 +591,10 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         RemComp<CosmicStarMarkComponent>(uid);
         RemComp<CosmicSubtleMarkComponent>(uid);
 
-        // Goobstation Change: Shitchap
-        if (!uid.Comp.WasWeakToHoly)
-            RemComp<WeakToHolyComponent>(uid);
+        // <Trauma>
+        var ev = new UnholyStatusChangedEvent(uid, uid, false);
+        RaiseLocalEvent(uid, ref ev);
+        // </Trauma>
 
         _damage.SetDamageContainerID(uid.Owner, uid.Comp.StoredDamageContainer);
         _antag.SendBriefing(uid, Loc.GetString("cosmiccult-role-deconverted-fluff"), Color.FromHex("#4cabb3"), _deconvertSound);

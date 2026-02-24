@@ -10,7 +10,7 @@ public readonly record struct ConsumingFoodEvent(EntityUid Food, FixedPoint2 Vol
 public record struct ImmuneToPoisonDamageEvent(bool Immune = false);
 
 [ByRefEvent]
-public readonly record struct SetGhoulBoundHereticEvent(EntityUid Heretic);
+public readonly record struct SetGhoulBoundHereticEvent(EntityUid Heretic, EntityUid? Ritual);
 
 [ByRefEvent]
 public readonly record struct IncrementHereticObjectiveProgressEvent(EntProtoId Proto, int Amount = 1);

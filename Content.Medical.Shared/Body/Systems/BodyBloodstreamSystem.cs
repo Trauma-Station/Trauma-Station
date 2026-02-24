@@ -32,7 +32,7 @@ public sealed partial class BodyBloodstreamSystem : EntitySystem
 
     private float _bleedingSeverity = 1f;
 
-    private void InitializeWounds()
+    public override void Initialize()
     {
         base.Initialize();
 
@@ -284,6 +284,7 @@ public sealed partial class BodyBloodstreamSystem : EntitySystem
             return;
 
         // wounds that BLEED will not HEAL.
+        // wounds that bleed. will you heal them, to me?
         component.BleedingAmountRaw = args.Component.WoundSeverityPoint * _bleedingSeverity;
 
         var formula = (float) (args.Component.WoundSeverityPoint / _cfg.GetCVar(SurgeryCVars.BleedsScalingTime) * component.ScalingSpeed);
@@ -293,7 +294,8 @@ public sealed partial class BodyBloodstreamSystem : EntitySystem
 
         Dirty(uid, component);
 
-        _bloodstream.TryModifyBleedAmount(uid, component.BleedingAmountRaw.Float());
+        if (_body.GetBody(args.Component.HoldingWoundable) is { } body)
+            _bloodstream.TryModifyBleedAmount(body, component.BleedingAmountRaw.Float());
     }
 
     private void OnWoundHealAttempt(EntityUid uid, BleedInflicterComponent component, ref WoundHealAttemptEvent args)
@@ -316,8 +318,8 @@ public sealed partial class BodyBloodstreamSystem : EntitySystem
             || args.NewSeverity < args.OldSeverity)
             return;
 
-        var oldBleedsAmount = args.OldSeverity * _cfg.GetCVar(SurgeryCVars.BleedingSeverityTrade);
-        component.BleedingAmountRaw = args.NewSeverity * _cfg.GetCVar(SurgeryCVars.BleedingSeverityTrade);
+        var oldBleedsAmount = args.OldSeverity * _bleedingSeverity;
+        component.BleedingAmountRaw = args.NewSeverity * _bleedingSeverity;
 
         var severityPenalty = component.BleedingAmountRaw - oldBleedsAmount / _cfg.GetCVar(SurgeryCVars.BleedsScalingTime);
         component.SeverityPenalty += severityPenalty;

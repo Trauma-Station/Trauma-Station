@@ -56,7 +56,7 @@ public sealed class SlasherSummonMacheteSystem : EntitySystem
             if (!_protos.TryIndex(ent.Comp.MachetePrototype, out EntityPrototype? _))
                 return;
 
-            machete = Spawn(ent.Comp.MachetePrototype, _xform.GetMoverCoordinates(ent.Owner));
+            machete = PredictedSpawnAtPosition(ent.Comp.MachetePrototype, _xform.GetMoverCoordinates(ent.Owner));
             ent.Comp.MacheteUid = machete;
             Dirty(ent);
         }

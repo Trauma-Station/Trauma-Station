@@ -1,17 +1,6 @@
-// SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Milon <milonpl.git@proton.me>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Robust.Shared.Maths;
+// </Trauma>
 using System.Numerics;
 using Content.Server.Beam.Components;
 using Content.Shared.Beam;
@@ -36,8 +25,6 @@ public sealed class BeamSystem : SharedBeamSystem
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
-    public uint NextIndex { get; private set; } // Goobstation
-
     public override void Initialize()
     {
         base.Initialize();
@@ -46,26 +33,7 @@ public sealed class BeamSystem : SharedBeamSystem
         SubscribeLocalEvent<BeamComponent, BeamControllerCreatedEvent>(OnControllerCreated);
         SubscribeLocalEvent<BeamComponent, BeamFiredEvent>(OnBeamFired);
         SubscribeLocalEvent<BeamComponent, ComponentRemove>(OnRemove);
-
-        // Goobstation start
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
-        NextIndex = 0;
-        // Goobstation end
     }
-
-    // Goobstation start
-    public override void AccumulateIndex()
-    {
-        base.AccumulateIndex();
-
-        NextIndex++;
-    }
-
-    private void OnRoundRestart(RoundRestartCleanupEvent ev)
-    {
-        NextIndex = 0;
-    }
-    // Goobstation end
 
     private void OnBeamCreationSuccess(EntityUid uid, BeamComponent component, CreateBeamSuccessEvent args)
     {
@@ -121,7 +89,6 @@ public sealed class BeamSystem : SharedBeamSystem
             return;
 
         beamAction?.Invoke(ent); // Goobstation
-        beam.BeamIndex = NextIndex; // Goobstation
 
         FixturesComponent? manager = null;
         _fixture.TryCreateFixture(
@@ -164,7 +131,6 @@ public sealed class BeamSystem : SharedBeamSystem
             var newEnt = Spawn(prototype, beamSpawnPos);
 
             beamAction?.Invoke(newEnt); // Goobstation
-            Comp<BeamComponent>(newEnt).BeamIndex = NextIndex; // Goobstation
 
             var ev = new BeamVisualizerEvent(GetNetEntity(newEnt), distanceLength, userAngle, bodyState, shader);
             RaiseNetworkEvent(ev);
@@ -185,8 +151,7 @@ public sealed class BeamSystem : SharedBeamSystem
     /// <param name="shader">Optional shader for the <see cref="bodyPrototype"/> if a default one is not given</param>
     /// <param name="controller"></param>
     /// <param name="beamAction">Goobstation. Action that is called on each beam entity.</param>
-    /// <param name="accumulateIndex">Goobstation. Whether to accumulate NextIndex.</param>
-    public bool TryCreateBeam(EntityUid user, EntityUid target, string bodyPrototype, string? bodyState = null, string shader = "unshaded", EntityUid? controller = null, Action<EntityUid>? beamAction = null, bool accumulateIndex = true) // Goob edit
+    public bool TryCreateBeam(EntityUid user, EntityUid target, string bodyPrototype, string? bodyState = null, string shader = "unshaded", EntityUid? controller = null, Action<EntityUid>? beamAction = null) // Goob edit
     {
         if (Deleted(user) || Deleted(target))
             return false; // Goob edit
@@ -197,6 +162,13 @@ public sealed class BeamSystem : SharedBeamSystem
         //The distance between the target and the user.
         var calculatedDistance = targetMapPos.Position - userMapPos.Position;
         var userAngle = calculatedDistance.ToWorldAngle();
+
+        // <Trauma> - fix lightning rotation
+        var gridRot = Angle.Zero;
+        if (Transform(user).GridUid is { } grid)
+            gridRot = -_transform.GetWorldRotation(grid);
+        userAngle += gridRot;
+        // </Trauma>
 
         if (userMapPos.MapId != targetMapPos.MapId)
             return false; // Goob edit
@@ -214,12 +186,9 @@ public sealed class BeamSystem : SharedBeamSystem
             controllerBeamComp.HitTargets.Add(target);
         }
 
-        var distanceCorrection = calculatedDistance - calculatedDistance.Normalized();
+        var distanceCorrection = gridRot.RotateVec(calculatedDistance - calculatedDistance.Normalized()); // Trauma - fix lightning shape rotation
 
         CreateBeam(bodyPrototype, userAngle, calculatedDistance, beamStartPos, distanceCorrection, controller, bodyState, shader, beamAction);
-
-        if (accumulateIndex) // Goobstation
-            AccumulateIndex();
 
         var ev = new CreateBeamSuccessEvent(user, target);
         RaiseLocalEvent(user, ev);

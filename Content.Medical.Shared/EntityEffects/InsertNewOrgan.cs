@@ -4,7 +4,7 @@ using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 
-namespace Content.Trauma.Shared.EntityEffects;
+namespace Content.Medical.Shared.EntityEffects;
 
 /// <summary>
 /// Spawns and inserts an organ/bodypart into the target entity, which must be a bodypart.

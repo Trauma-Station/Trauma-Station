@@ -30,7 +30,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
     private static readonly EntProtoId DefaultAbductorVictimRule = "AbductorVictim";
     private static readonly EntProtoId MindRole = "MindRoleAbductorVictim";
 
-    public void InitializeVictim()
+    private void InitializeVictim()
     {
         SubscribeLocalEvent<AbductorComponent, SurgeryStepEvent>(OnSurgeryStepComplete);
     }

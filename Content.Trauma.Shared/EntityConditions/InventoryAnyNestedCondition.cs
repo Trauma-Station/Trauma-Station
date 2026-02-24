@@ -17,7 +17,7 @@ public sealed partial class InventoryAnyNestedCondition : EntityConditionBase<In
     public EntityCondition Condition = default!;
 
     [DataField]
-    public LocId GuidebookText = "entity-effect-condition-guidebook-inventory-nested";
+    public LocId GuidebookText = "entity-condition-guidebook-inventory-nested";
 
     [DataField]
     public SlotFlags Flags = SlotFlags.WITHOUT_POCKET;

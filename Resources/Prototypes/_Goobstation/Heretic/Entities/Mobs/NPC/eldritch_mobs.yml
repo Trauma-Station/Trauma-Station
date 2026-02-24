@@ -21,8 +21,6 @@
   id: BaseMobGhoul
   abstract: true
   components:
-  - type: WeakToHoly
-    alwaysTakeHoly: true
   - type: Ghoul
   - type: MovementSpeedModifier
     baseWalkSpeed: 4.5 # Trauma edit

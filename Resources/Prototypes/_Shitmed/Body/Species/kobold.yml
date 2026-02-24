@@ -1,7 +1,17 @@
 ## Mob
 
+- type: markingsGroup
+  id: Kobold
+  onlyGroupWhitelisted: true
+  limits:
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 2
+      required: false
+    enum.HumanoidVisualLayers.HeadSide:
+      limit: 1
+      required: false
+
 - type: entity
-  abstract: true
   parent: BaseSpeciesAppearance
   id: AppearanceKobold
   name: kobold appearance
@@ -11,6 +21,7 @@
     organs:
       Torso: OrganKoboldTorso
       Head: OrganKoboldHead
+      Tail: OrganKoboldTail
       ArmLeft: OrganKoboldArmLeft
       ArmRight: OrganKoboldArmRight
       HandRight: OrganKoboldHandRight
@@ -51,17 +62,25 @@
       sprite: Mobs/Animals/kobold.rsi
   - type: VisualOrganMarkings
     markingData:
-      group: Reptilian
+      group: Kobold
 
 ## Parts
 
 - type: entity
-  parent: [ OrganBaseTorso, OrganKoboldExternal ]
+  parent: [ OrganBaseTorsoTailed, OrganKoboldExternal ]
   id: OrganKoboldTorso
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: None # no undergarments, i cbf to make a kobold specific one
 
 - type: entity
   parent: [ OrganBaseHead, OrganKoboldExternal ]
   id: OrganKoboldHead
+
+- type: entity
+  parent: [ OrganBaseTail, OrganKoboldExternal ]
+  id: OrganKoboldTail
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganKoboldExternal ]

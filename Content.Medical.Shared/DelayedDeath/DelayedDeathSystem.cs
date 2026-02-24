@@ -17,9 +17,13 @@ public sealed class DelayedDeathSystem : EntitySystem
     [Dependency] private readonly SharedChatSystem _chat = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
+    private EntityQuery<MobStateComponent> _mobQuery;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _mobQuery = GetEntityQuery<MobStateComponent>();
 
         SubscribeLocalEvent<DelayedDeathComponent, TargetBeforeDefibrillatorZapsEvent>(OnDefibZap);
         SubscribeLocalEvent<DelayedDeathComponent, MapInitEvent>(OnMapInit);
@@ -29,11 +33,13 @@ public sealed class DelayedDeathSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<DelayedDeathComponent, MobStateComponent>();
+        var query = EntityQueryEnumerator<DelayedDeathComponent>();
         var now = _timing.CurTime;
-        while (query.MoveNext(out var ent, out var comp, out var mob))
+        while (query.MoveNext(out var ent, out var comp))
         {
-            if (now < comp.NextDeath || _mob.IsDead(ent, mob))
+            if (now < comp.NextDeath ||
+                !_mobQuery.TryComp(ent, out var mob) ||
+                _mob.IsDead(ent, mob))
                 continue;
 
             // go crit then dead so deathgasp can happen
@@ -67,5 +73,6 @@ public sealed class DelayedDeathSystem : EntitySystem
     private void OnMapInit(Entity<DelayedDeathComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.NextDeath = _timing.CurTime + ent.Comp.DeathDelay;
+        Dirty(ent);
     }
 }

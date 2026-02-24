@@ -1,3 +1,6 @@
+// <Trauma>
+using Robust.Shared.GameStates;
+// </Trauma>
 using Content.Shared.Body.Components;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
@@ -8,7 +11,8 @@ namespace Content.Shared.Metabolism;
 /// <summary>
 ///     Handles metabolizing various reagents with given effects.
 /// </summary>
-[RegisterComponent, AutoGenerateComponentPause, Access(typeof(MetabolizerSystem))]
+[RegisterComponent, AutoGenerateComponentPause] // Trauma - no access
+[NetworkedComponent, AutoGenerateComponentState] // Trauma
 public sealed partial class MetabolizerComponent : Component
 {
     /// <summary>
@@ -28,6 +32,7 @@ public sealed partial class MetabolizerComponent : Component
     /// Multiplier applied to <see cref="UpdateInterval"/> for adjusting based on metabolic rate multiplier.
     /// </summary>
     [DataField]
+    [AutoNetworkedField] // Trauma - genetics can change it
     public float UpdateIntervalMultiplier = 1f;
 
     /// <summary>

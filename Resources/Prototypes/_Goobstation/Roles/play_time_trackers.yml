@@ -15,9 +15,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: playTimeTracker
-  id: JobBlueshieldOfficer
-
-- type: playTimeTracker
   id: JobNanotrasenRepresentative
 
 - type: playTimeTracker
@@ -40,9 +37,6 @@
 
 - type: playTimeTracker
   id: JobInspector
-
-- type: playTimeTracker
-  id: JobNanotrasenCareerTrainer
 
 - type: playTimeTracker
   id: JobHighCommander

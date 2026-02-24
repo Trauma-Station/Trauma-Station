@@ -20,7 +20,7 @@ public abstract partial class SharedAbductorSystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] protected readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] protected readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] protected readonly SharedPopupSystem _popup = default!;
     [Dependency] protected readonly TagSystem _tag = default!;
 
     private static readonly ProtoId<TagPrototype> Abductor = "Abductor";

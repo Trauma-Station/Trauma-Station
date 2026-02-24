@@ -1,12 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Common.Body;
 using Content.Medical.Shared.DelayedDeath;
 using Content.Shared.Body;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Rejuvenate;
 using Content.Shared.Speech;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Body;
 
@@ -18,6 +22,7 @@ namespace Content.Medical.Shared.Body;
 public sealed class DebrainedSystem : EntitySystem
 {
     [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
 
@@ -31,10 +36,16 @@ public sealed class DebrainedSystem : EntitySystem
         SubscribeLocalEvent<DebrainedComponent, ComponentRemove>(OnComponentRemove);
         SubscribeLocalEvent<DebrainedComponent, SpeakAttemptEvent>(OnSpeakAttempt);
         SubscribeLocalEvent<DebrainedComponent, StandAttemptEvent>(OnStandAttempt);
+        SubscribeLocalEvent<DebrainedComponent, RejuvenateEvent>(OnRejuvenate,
+            before: new []{ typeof(DamageableSystem), typeof(BodyRestoreSystem) });
     }
 
     private void OnComponentInit(EntityUid uid, DebrainedComponent _, ComponentInit args)
     {
+        // the components are networked, don't need to let it do weird shit
+        if (_timing.ApplyingState)
+            return;
+
         EnsureComp<DelayedDeathComponent>(uid);
         EnsureComp<StunnedComponent>(uid);
         _standing.Down(uid);
@@ -42,7 +53,7 @@ public sealed class DebrainedSystem : EntitySystem
 
     private void OnComponentRemove(EntityUid uid, DebrainedComponent _, ComponentRemove args)
     {
-        if (TerminatingOrDeleted(uid))
+        if (TerminatingOrDeleted(uid) || _timing.ApplyingState)
             return;
 
         RemComp<DelayedDeathComponent>(uid);
@@ -60,5 +71,10 @@ public sealed class DebrainedSystem : EntitySystem
     private void OnStandAttempt(EntityUid uid, DebrainedComponent _, StandAttemptEvent args)
     {
         args.Cancel();
+    }
+
+    private void OnRejuvenate(Entity<DebrainedComponent> ent, ref RejuvenateEvent args)
+    {
+        RemCompDeferred(ent, ent.Comp);
     }
 }
