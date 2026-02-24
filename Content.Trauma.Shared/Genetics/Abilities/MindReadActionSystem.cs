@@ -110,7 +110,7 @@ public sealed class MindReadActionSystem : EntitySystem
 
             if (_recent.Count > 0)
             {
-                Tell(channel, Loc.GetString("MutationMindReader-popup-messages"));
+                Tell(channel, Loc.GetString("MutationMindReader-popup-messages", ("target", target)));
                 foreach (var msg in _recent)
                 {
                     Tell(channel, Loc.GetString("MutationMindReader-popup-message-format", ("message", msg)));
