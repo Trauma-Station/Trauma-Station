@@ -38,8 +38,8 @@
   - type: AddAccentClothing
     accent: ReplacementAccent
     replacement: mumble
-  - type: ThrowableFacehugger # Goobstation    
-    minThrowForce: 5.0 # Goobstation  
+  - type: ThrowableFacehugger # Goobstation
+    minThrowForce: 5.0 # Goobstation
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Xenomorph
