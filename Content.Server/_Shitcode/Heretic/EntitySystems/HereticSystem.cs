@@ -338,7 +338,7 @@ public sealed class HereticSystem : SharedHereticSystem
         if (!TryGetHereticComponent(ev.Target, out var heretic, out _))
             return;
 
-        ev.ShouldTakeHoly = heretic.Ascended;
+        ev.ShouldTakeHoly |= heretic.Ascended;
         ev.WeakToHoly = true;
     }
 
