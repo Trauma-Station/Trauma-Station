@@ -64,6 +64,9 @@
   - type: Climbable
     delay: 5.0
   - type: Appearance
+  - type: AcousticData # VDS
+    absorption: 8
+    reflectRay: true
 
 - type: entity
   parent: BaseFenceWood

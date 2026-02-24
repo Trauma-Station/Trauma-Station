@@ -71,6 +71,8 @@
     blacklist:
       tags:
       - NoConsoleSound
+  - type: AcousticData # VDS
+    absorption: 20
   - type: ContainerContainer
     containers:
       board: !type:Container

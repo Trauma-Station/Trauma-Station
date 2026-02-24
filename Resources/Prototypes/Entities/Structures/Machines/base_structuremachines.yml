@@ -52,6 +52,8 @@
     penetrateDamage: 5
     damagePenalty: .5
   # </Trauma>
+  - type: AcousticData # VDS
+    absorption: 15
 
 - type: entity
   abstract: true

@@ -73,6 +73,8 @@
   - type: Tag
     tags:
       - Crate
+  - type: AcousticData # VDS
+    absorption: 10
 
 - type: entity
   parent: CrateGeneric

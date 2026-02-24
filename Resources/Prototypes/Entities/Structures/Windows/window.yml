@@ -103,6 +103,9 @@
   - type: StaticPrice
     price: 100
   - type: BlockWeather
+  - type: AcousticData # VDS
+    absorption: 10
+    reflectRay: true
 
 - type: entity
   parent: Window
@@ -243,6 +246,9 @@
   - type: StaticPrice
     price: 15
   - type: ReflectiveSurface # Goob
+  - type: AcousticData # VDS
+    absorption: 6
+    reflectRay: true
 
 - type: entity
   id: WindowDirectionalRCDResistant

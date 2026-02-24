@@ -48,6 +48,8 @@
   - type: Construction
     graph: CobwebsGraph
     node: start
+  - type: AcousticData # VDS. fuck!!!!
+    absorption: 30
 
 - type: entity
   id: SpiderWeb

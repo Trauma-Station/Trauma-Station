@@ -52,6 +52,8 @@
   - type: Tag # goob edit
     tags:
     - Chair
+  - type: AcousticData # VDS
+    absorption: 12
 
 #Starts unanchored, cannot be rotated while anchored
 - type: entity
@@ -100,6 +102,8 @@
     bodyType: Static
   - type: Transform
     anchored: true
+  - type: AcousticData # VDS. smaller :-|
+    absorption: 10
 
 - type: entity
   name: chair
@@ -252,6 +256,8 @@
     - Chair # Goob
   - type: StaticPrice
     price: 75
+  - type: AcousticData # VDS. wood :-)
+    absorption: 18
 
 - type: entity
   name: ritual chair
@@ -361,6 +367,8 @@
   - type: Construction
     graph: WebStructures
     node: chair
+  - type: AcousticData # VDS. web :-)
+    absorption: 20
 
 - type: entity
   parent: [SeatBase, BaseDeployFoldable]
@@ -390,6 +398,8 @@
     graph: Seat
     node: chairFolding
   - type: DamageExaminable
+  - type: AcousticData # VDS. cheap :-(
+    absorption: 6
 
 - type: entity
   parent: ChairFolding
@@ -485,3 +495,5 @@
             max: 4
   - type: StaticPrice
     price: 50
+  - type: AcousticData # VDS. wood (big) :-)
+    absorption: 20

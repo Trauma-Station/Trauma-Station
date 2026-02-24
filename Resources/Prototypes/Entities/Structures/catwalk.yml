@@ -51,6 +51,18 @@
     state: catwalk_preview
   - type: Transform
     anchored: true
+  - type: Physics # VDS
+    bodyType: Static
+  - type: Fixtures # VDS, so catwalks can affect acoustics
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 5
+        hard: false
+        layer:
+        - DoorPassable
   - type: IconSmooth
     key: catwalk
     base: catwalk_
@@ -92,3 +104,5 @@
     cost: 2
     delay: 2
     fx: EffectRCDDeconstruct2
+  - type: AcousticData # VDS
+    absorption: -8 # when I think catwalk I imagine reverb.

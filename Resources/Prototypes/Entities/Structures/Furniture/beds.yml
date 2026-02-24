@@ -98,6 +98,8 @@
     noRot: true
   - type: Anchorable
   - type: Pullable
+  - type: AcousticData # VDS
+    absorption: 15
 
 
 - type: entity

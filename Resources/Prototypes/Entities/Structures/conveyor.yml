@@ -128,6 +128,8 @@
       # if ConveyorBeltAssembly becomes craftable, maybe spawn some of the ingredients?
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: AcousticData
+    absorption: 5
 
 - type: entity
   id: ConveyorBeltAssembly

@@ -53,6 +53,9 @@
     price: 75
   - type: BlockWeather
   - type: SunShadowCast
+  - type: AcousticData # VDS
+    absorption: 5
+    reflectRay: true
   # <Trauma>
   - type: Penetratable
     penetrateDamage: 50
@@ -1322,6 +1325,9 @@
     base: wood
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: WallCosmicCult
+  - type: AcousticData # VDS. wood absorb more!
+    absorption: 12
+    reflectRay: true
 
 - type: entity
   parent: BaseWall
@@ -1371,6 +1377,9 @@
   - type: Construction
     graph: WebStructures
     node: wall
+  - type: AcousticData # VDS. web sticky
+    absorption: 22
+    reflectRay: true
 
 
 # Lavalend Walls
