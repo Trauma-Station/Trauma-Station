@@ -190,9 +190,8 @@
   - type: OrganComponents
     onAdd:
     - type: NightVision
-  - type: VisualOrgan
-    data:
-      sprite: Mobs/Customization/eyes.rsi
+      activateSound: null
+      deactivateSound: null
 
 - type: entity
   parent: [ OrganBaseTongue, OrganGoblinInternal ]
