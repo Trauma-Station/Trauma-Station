@@ -130,8 +130,11 @@ public sealed partial class ChangelingSystem
 
     private void OnOpenEvolutionMenu(EntityUid uid, ChangelingIdentityComponent comp, ref OpenEvolutionMenuEvent args)
     {
-        if (GetStore(uid) is {} store)
-            _store.ToggleUi(uid, store.Owner, store.Comp);
+        if (GetStore(uid) is not {} store)
+            return;
+
+        _store.ToggleUi(uid, store.Owner, store.Comp);
+        args.Handled = true;
     }
 
     private void OnAbsorb(EntityUid uid, ChangelingIdentityComponent comp, ref AbsorbDNAEvent args)
@@ -415,6 +418,7 @@ public sealed partial class ChangelingSystem
 
     private void OnEnterStasis(EntityUid uid, ChangelingIdentityComponent comp, ref EnterStasisEvent args)
     {
+        args.Handled = true;
         if (comp.IsInStasis || HasComp<AbsorbedComponent>(uid))
         {
             Popup.PopupEntity(Loc.GetString("changeling-stasis-enter-fail"), uid, uid);
@@ -444,7 +448,6 @@ public sealed partial class ChangelingSystem
             _mobState.ChangeMobState(uid, MobState.Dead);
 
         comp.IsInStasis = true;
-        args.Handled = true;
     }
 
     private void OnExitStasis(EntityUid uid, ChangelingIdentityComponent comp, ref ExitStasisEvent args)
@@ -455,6 +458,8 @@ public sealed partial class ChangelingSystem
 
         if (reviveEv.Cancelled)
             return;
+
+        args.Handled = true;
 
         if (!comp.IsInStasis)
         {
@@ -490,8 +495,6 @@ public sealed partial class ChangelingSystem
                 _stun.KnockdownOrStun(puller.Value, TimeSpan.FromSeconds(1));
             }
         }
-
-        args.Handled = true;
     }
 
     #endregion
@@ -505,7 +508,9 @@ public sealed partial class ChangelingSystem
         var pos = _transform.GetMapCoordinates(uid);
         var power = comp.ShriekPower;
         _emp.EmpPulse(pos, power, 5000f, TimeSpan.FromSeconds(power * 2));
+        args.Handled = true;
     }
+
     private void OnShriekResonant(EntityUid uid, ChangelingIdentityComponent comp, ref ShriekResonantEvent args)
     {
         DoScreech(uid, comp); // screenshake
@@ -518,11 +523,16 @@ public sealed partial class ChangelingSystem
         foreach (var ent in lookup)
             if (lights.HasComponent(ent))
                 _light.TryDestroyBulb(ent);
+
+        args.Handled = true;
     }
+
     private void OnToggleStrainedMuscles(EntityUid uid, ChangelingIdentityComponent comp, ref ToggleStrainedMusclesEvent args)
     {
         ToggleStrainedMuscles(uid, comp);
+        args.Handled = true;
     }
+
     private void ToggleStrainedMuscles(EntityUid uid, ChangelingIdentityComponent comp)
     {
         if (!comp.StrainedMusclesActive)
@@ -546,7 +556,7 @@ public sealed partial class ChangelingSystem
 
     private void OnStingReagent(EntityUid uid, ChangelingIdentityComponent comp, StingReagentEvent args)
     {
-        TryReagentSting(uid, comp, args);
+        args.Handled |= TryReagentSting(uid, comp, args);
     }
     private void OnStingTransform(EntityUid uid, ChangelingIdentityComponent comp, ref StingTransformEvent args)
     {
@@ -587,6 +597,8 @@ public sealed partial class ChangelingSystem
     public void OnLayEgg(EntityUid uid, ChangelingIdentityComponent comp, ref StingLayEggsEvent args)
     {
         var target = args.Target;
+
+        args.Handled = true;
 
         if (!_mobState.IsDead(target))
         {
@@ -645,11 +657,14 @@ public sealed partial class ChangelingSystem
         {
             { "LingPanacea", 10f },
         };
-        if (TryInjectReagents(uid, reagents))
-            Popup.PopupEntity(Loc.GetString("changeling-panacea"), uid, uid);
-        else return;
+        if (!TryInjectReagents(uid, reagents))
+            return;
+
+        Popup.PopupEntity(Loc.GetString("changeling-panacea"), uid, uid);
         PlayMeatySound(uid, comp);
+        args.Handled = true;
     }
+
     public void OnBiodegrade(EntityUid uid, ChangelingIdentityComponent comp, ref ActionBiodegradeEvent args)
     {
         if (TryComp<CuffableComponent>(uid, out var cuffs) && cuffs.Container.ContainedEntities.Count > 0)
@@ -692,7 +707,9 @@ public sealed partial class ChangelingSystem
             }
         }
         _puddle.TrySplashSpillAt(uid, Transform(uid).Coordinates, soln, out _);
+        args.Handled = true;
     }
+
     public void OnChameleonSkin(EntityUid uid, ChangelingIdentityComponent comp, ref ActionChameleonSkinEvent args)
     {
         if (!comp.ChameleonActive)
@@ -709,9 +726,13 @@ public sealed partial class ChangelingSystem
             RemComp<StealthOnMoveComponent>(uid);
             Popup.PopupEntity(Loc.GetString("changeling-chameleon-end"), uid, uid);
             comp.ChameleonActive = false;
+            // TODO: this should be a reusable component on the action
             comp.ChemicalRegenMultiplier += 0.25f; // chem regen debuff removed
         }
+
+        args.Handled = true;
     }
+
     public void OnVoidAdapt(EntityUid uid, ChangelingIdentityComponent comp, ref ActionVoidAdaptEvent args)
     {
         if (!comp.VoidAdaptActive)
@@ -732,7 +753,10 @@ public sealed partial class ChangelingSystem
             comp.VoidAdaptActive = false;
             comp.ChemicalRegenMultiplier += 0.25f; // chem regen debuff removed
         }
+
+        args.Handled = true;
     }
+
     public void OnAdrenalineReserves(EntityUid uid, ChangelingIdentityComponent comp, ref ActionAdrenalineReservesEvent args)
     {
         var stam = EnsureComp<StaminaComponent>(uid);
@@ -748,7 +772,10 @@ public sealed partial class ChangelingSystem
         {
             Popup.PopupEntity(Loc.GetString("changeling-inject-fail"), uid, uid);
         }
+
+        args.Handled = true;
     }
+
     // john space made me do this
     public void OnHealUltraSwag(EntityUid uid, ChangelingIdentityComponent comp, ref ActionFleshmendEvent args)
     {
@@ -757,7 +784,9 @@ public sealed partial class ChangelingSystem
                     args.Duration,
                     true);
         Popup.PopupEntity(Loc.GetString("changeling-fleshmend"), uid, uid);
+        args.Handled = true;
     }
+
     public void OnLastResort(EntityUid uid, ChangelingIdentityComponent comp, ref ActionLastResortEvent args)
     {
         comp.IsInLastResort = true;
@@ -800,6 +829,7 @@ public sealed partial class ChangelingSystem
         PlayMeatySound(newUid, comp);
         args.Handled = true;
     }
+
     public void OnHivemindAccess(EntityUid uid, ChangelingIdentityComponent comp, ref ActionHivemindAccessEvent args)
     {
         if (HasComp<HivemindComponent>(uid))
@@ -814,6 +844,7 @@ public sealed partial class ChangelingSystem
         mind.CanUseInCrit = true;
 
         Popup.PopupEntity(Loc.GetString("changeling-hivemind-start"), uid, uid);
+        args.Handled = true;
     }
 
     #endregion
