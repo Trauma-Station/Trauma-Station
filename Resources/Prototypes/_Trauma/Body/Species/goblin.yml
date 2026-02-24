@@ -184,7 +184,7 @@
   id: OrganGoblinBrain
 
 - type: entity
-  parent: [ OrganBaseEyes, OrganGoblinInternal ]
+  parent: [ OrganBaseEyes, OrganSpriteHumanInternal ]
   id: OrganGoblinEyes
   components:
   - type: OrganComponents
