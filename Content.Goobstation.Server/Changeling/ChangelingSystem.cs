@@ -49,6 +49,7 @@ using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Changeling.Systems;
 using Content.Goobstation.Shared.Flashbang;
 using Content.Goobstation.Shared.MartialArts.Components;
+using Content.Goobstation.Shared.Overlays;
 using Content.Server.Actions;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
@@ -247,7 +248,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         EnsureComp<FlashImmunityComponent>(uid);
         EnsureComp<EyeProtectionComponent>(uid);
 
-        var thermalVision = Factory.GetComponent<Shared.Overlays.ThermalVisionComponent>();
+        var thermalVision = Factory.GetComponent<ThermalVisionComponent>();
         thermalVision.Color = Color.FromHex("#FB9898");
         thermalVision.LightRadius = 15f;
         thermalVision.FlashDurationMultiplier = 2f;
@@ -577,7 +578,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         var config = new PolymorphConfiguration
         {
-            Entity = (EntProtoId) pid,
+            Entity = pid.Value,
             TransferDamage = transferDamage,
             Forced = true,
             Inventory = (dropInventory) ? PolymorphInventoryChange.Drop : PolymorphInventoryChange.Transfer,
@@ -585,12 +586,26 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             RevertOnDeath = false
         };
 
-        var newUid = _polymorph.PolymorphEntity(uid, config);
+        if (!HasComp<ThermalVisionComponent>(uid))
+            Log.Error("Ling didnt have thermal vision!");
 
-        if (newUid == null)
+        if (_polymorph.PolymorphEntity(uid, config) is not {} newEnt)
             return null;
 
-        var newEnt = newUid.Value;
+        // exceptional comps check
+        // TODO make PolymorphedEvent handlers for all
+        List<Type> types = new()
+        {
+            typeof(FlashImmunityComponent),
+            typeof(EyeProtectionComponent),
+            typeof(NightVisionComponent),
+            typeof(ThermalVisionComponent),
+        };
+        foreach (var type in types)
+            _polymorph.CopyPolymorphComponent(uid, newEnt, type);
+
+        if (!HasComp<ThermalVisionComponent>(newEnt))
+            Log.Error("Ling didnt have thermal vision after transform!");
 
         if (data != null)
         {
@@ -607,18 +622,6 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         // otherwise we can only transform once
         RemCompDeferred<PolymorphedEntityComponent>(newEnt);
 
-        // exceptional comps check
-        // TODO make PolymorphedEvent handlers for all
-        List<Type> types = new()
-        {
-            typeof(FlashImmunityComponent),
-            typeof(EyeProtectionComponent),
-            typeof(Shared.Overlays.NightVisionComponent),
-            typeof(Shared.Overlays.ThermalVisionComponent),
-        };
-        foreach (var type in types)
-            _polymorph.CopyPolymorphComponent(uid, newEnt, nameof(type));
-
         // CopyPolymorphComponent fails to copy the HumanoidProfileComponent in TransformData
         // outside of the first list item so this has to be done manually unfortunately
         if (TryComp<ChangelingIdentityComponent>(newEnt, out var newComp)
@@ -627,7 +630,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         RaiseNetworkEvent(new LoadActionsEvent(GetNetEntity(uid)), newEnt);
 
-        return newUid;
+        return newEnt;
     }
 
     public bool TryTransform(EntityUid target, ChangelingIdentityComponent comp, bool sting = false, bool persistentDna = false)
