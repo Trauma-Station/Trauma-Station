@@ -5,7 +5,6 @@ using Content.Shared.Audio;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
-using Content.Shared.UserInterface;
 using Robust.Shared.Utility;
 
 namespace Content.Server._DV.CosmicCult;
@@ -114,20 +113,15 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         if (stationUid != null)
             _alert.SetLevel(stationUid.Value, "octarine", true, true, true, true);
 
-        if (TryComp<ActivatableUIComponent>(uid, out var uiComp))
-            uiComp.Key = MonumentKey.Key; // wow! This is the laziest way to enable a UI ever!
-
-        _monument.Enable((uid, monument));
         comp.FinaleActive = true;
 
         Dirty(uid, monument);
-        _ui.SetUiState(uid.Owner, MonumentKey.Key, new MonumentBuiState(monument));
     }
 
     private void OnFinaleCancelDoAfter(Entity<CosmicFinaleComponent> uid, ref CancelFinaleDoAfterEvent args)
     {
         var comp = uid.Comp;
-        if (args.Args.Target is not {} target || args.Cancelled || args.Handled)
+        if (args.Args.Target is not { } target || args.Cancelled || args.Handled)
         {
             uid.Comp.Occupied = false;
             return;
@@ -154,22 +148,13 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         if (TryComp<CosmicCorruptingComponent>(uid, out var corruptingComp))
             _corrupting.SetCorruptionTime((uid, corruptingComp), TimeSpan.FromSeconds(6));
 
-        if (TryComp<ActivatableUIComponent>(uid, out var uiComp))
-        {
-            _ui.CloseUi(uid.Owner, MonumentKey.Key);
-
-            uiComp.Key = null; //kazne called this the laziest way to disable a UI ever
-        }
-
         _appearance.SetData(uid, MonumentVisuals.FinaleReached, 1);
 
         if (!TryComp<MonumentComponent>(target, out var monument))
             return;
 
-        _monument.Disable((uid, monument));
         comp.FinaleActive = false;
 
         Dirty(target, monument);
-        _ui.SetUiState(uid.Owner, MonumentKey.Key, new MonumentBuiState(monument));
     }
 }

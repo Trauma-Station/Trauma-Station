@@ -22,8 +22,6 @@ public sealed class CosmicGlareSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedFlashSystem _flash = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedInteractionSystem _interact = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly INetManager _net = default!;
 
     private HashSet<Entity<MobStateComponent>> _mobs = [];
@@ -44,7 +42,7 @@ public sealed class CosmicGlareSystem : EntitySystem
         args.Handled = true;
 
         _mobs.Clear();
-        _lookup.GetEntitiesInRange<MobStateComponent>(Transform(ent).Coordinates, ent.Comp.CosmicGlareRange, _mobs);
+        _lookup.GetEntitiesInRange(Transform(ent).Coordinates, ent.Comp.CosmicGlareRange, _mobs);
         _mobs.RemoveWhere(target =>
         {
             if (_cult.EntityIsCultist(target)) return true;
@@ -52,12 +50,6 @@ public sealed class CosmicGlareSystem : EntitySystem
             var evt = new CosmicAbilityAttemptEvent(target, true);
             RaiseLocalEvent(ref evt);
             return evt.Cancelled;
-
-            return !_interact.InRangeUnobstructed(
-                (ent.Owner, Transform(ent)),
-                (target.Owner, Transform(target)),
-                range: ent.Comp.CosmicGlareRange,
-                collisionMask: CollisionGroup.Impassable);                
         });
 
         foreach (var target in _mobs)

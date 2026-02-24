@@ -12,6 +12,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+// <Trauma>
+using Content.Shared._DV.CosmicCult.Components;
+// </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Mind;
 using Content.Server.Popups;
@@ -77,6 +80,16 @@ public sealed class MindShieldSystem : EntitySystem
         }
         if (HasComp<Goobstation.Shared.Mindcontrol.MindcontrolledComponent>(implanted))   //Goobstation - Mindcontrol Implant
             RemComp<Goobstation.Shared.Mindcontrol.MindcontrolledComponent>(implanted);
+
+        // <Trauma>
+        RemComp<CosmicLesserCultistComponent>(implanted);
+        if (HasComp<CosmicCultComponent>(implanted) && TryComp<MindShieldComponent>(implanted, out var shieldComp))
+        {
+            _popupSystem.PopupEntity(Loc.GetString("cosmiccult-mindshield-popup"), implanted);
+            shieldComp.Broken = true;
+            Dirty(implanted, shieldComp);
+        }
+        // </Trauma>
     }
 
     private void OnImplantRemoved(Entity<MindShieldImplantComponent> ent, ref ImplantRemovedEvent args)

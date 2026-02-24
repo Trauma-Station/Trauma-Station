@@ -1,22 +1,9 @@
-// SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 OnsenCapy <101037138+OnsenCapy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SaffronFennec <firefoxwolf2020@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Shared.GameStates;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Audio;
 using Content.Shared._DV.CosmicCult.Prototypes;
 using Content.Shared.Damage.Prototypes;
-using Content.Shared.Alert;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared._DV.CosmicCult.Components;
 
@@ -42,20 +29,29 @@ public sealed partial class CosmicCultComponent : Component
     [
         "InfluenceAberrantLapse",
         "InfluenceShuntSubjectivity",
-        "InfluenceEschewMetabolism",
+        "InfluenceNullGlare",
     ];
 
     [DataField, AutoNetworkedField]
     public HashSet<EntProtoId> CosmicCultActions =
     [
         "ActionCosmicSiphon",
-        "ActionCosmicGlare",
     ];
 
     [DataField]
     public EntProtoId CosmicFragmentationAction = "ActionCosmicFragmentation";
 
-    public EntityUid? CosmicFragmentationActionEntity;
+    [DataField]
+    public EntProtoId CosmicShopAction = "ActionCosmicShop";
+
+    [DataField]
+    public EntityUid? CosmicShopActionEntity;
+
+    [DataField]
+    public EntProtoId MonumentAction = "ActionCosmicPlaceMonument";
+
+    [DataField]
+    public EntityUid? MonumentActionEntity;
 
     public HashSet<EntityUid?> ActionEntities = [];
 
@@ -67,6 +63,12 @@ public sealed partial class CosmicCultComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan CosmicSiphonDelay = TimeSpan.FromSeconds(2.5f);
+
+    /// <summary>
+    /// The duration of the doAfter (and stun) for Shatter Cognition
+    /// </summary>
+    [DataField]
+    public TimeSpan CosmicConversionDelay = TimeSpan.FromSeconds(6f);
 
     /// <summary>
     /// The duration of the doAfter for Shunt Subjectivity
@@ -119,62 +121,70 @@ public sealed partial class CosmicCultComponent : Component
 
     #region Misc Data
     /// <summary>
-    /// The amount of Entropy the user is allowed to spend at The Monument.
+    /// The cultist's current level. Replaces monument stages.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int EntropyBudget;
+    public int CurrentLevel;
+
+    [DataField]
+    public int MaxLevel = 3;
 
     /// <summary>
-    /// The amount of Entropy the user is currently holding on to.
+    /// For prediction purposes. How many cultists need to get the next level in order for the cult's level to increase.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int EntropyStored;
+    public int CultistsForNextLevel;
 
     /// <summary>
-    /// The maximum amount of Entropy the user can have at once.
+    /// Wether the cultist can get any more entropy than they have.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int EntropyStoredCap = 14;
+    public bool EntropyLocked;
 
-    //Goobstation
     /// <summary>
-    /// The value at which the monument heals each limb.
+    /// Wether we are waiting for the player to confirm leveling up.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float ShitMedHeal = -3f;
+    public bool LevelUpAwaitingConfirmation;
 
-    //Goobstation
     /// <summary>
     /// The probability that siphoning entropy while empowered will cause lights to flicker.
     /// </summary>
     [DataField, AutoNetworkedField]
     public float FlickerProbability = 0.20f;
 
-    //Goobstation
     /// <summary>
     /// The probability that siphoning entropy while empowered will cause lights to flicker.
     /// </summary>
     [DataField, AutoNetworkedField]
     public float FlickerRange = 5f;
 
-    //Goobstation
     /// <summary>
-    /// The maximum amount of Entropy the user can have at once.
-    /// </summary>
-    //[DataField, AutoNetworkedField]
-    //public int MonumentHealRange = 15; Erm...
-
-    /// <summary>
-    /// Wether or not this cultist has been empowered by a Malign Rift.
+    /// The amount of Entropy the user is allowed to spend.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool CosmicEmpowered;
+    public int EntropyBudget;
 
     /// <summary>
-    /// Whether or not this cultist needs to respirate.
+    /// The total amount of Entropy the user collected.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool Respiration = true;
+    public int TotalEntropy;
+
+    /// <summary>
+    /// The amount of Entropy the user needs to progress to the next level. Increases by <see cref="EntropyLevelRequirementIncrease"/> on every level.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int EntropyForNextLevel = 10;
+
+    [DataField]
+    public int EntropyLevelRequirementIncrease = 10;
+
+    /// <summary>
+    /// BUI stuff.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int EntropyRequirementOffset;
 
     /// <summary>
     /// Goobstation Change - Shitchap: Whether or not this cultist was weak to holy before conversion.
@@ -189,30 +199,20 @@ public sealed partial class CosmicCultComponent : Component
     public ProtoId<DamageContainerPrototype> StoredDamageContainer = "Biological";
 
     /// <summary>
-    /// The alert for displaying the cultist's currently held Entropy.
+    /// Wether or not this cultist has been empowered by a Malign Rift.
     /// </summary>
-    [DataField]
-    public ProtoId<AlertPrototype> EntropyAlert = "CosmicEntropy";
+    [DataField, AutoNetworkedField]
+    public bool CosmicEmpowered;
+
     #endregion
 
-    /// <summary>
-    ///     The gamerule that this cultist is associated with
-    /// </summary>
-    [DataField(serverOnly: true)]
-    public EntityUid CultGamerule;
-
     #region VFX & SFX
-    [DataField]
-    public EntProtoId SpawnWisp = "MobCosmicWisp";
-
     [DataField]
     public EntProtoId LapseVFX = "CosmicLapseAbilityVFX";
 
     [DataField]
-    public EntProtoId BlankVFX = "CosmicBlankAbilityVFX";
-
-    [DataField]
     public EntProtoId GlareVFX = "CosmicGlareAbilityVFX";
+
     [DataField]
     public EntProtoId AbsorbVFX = "CosmicGenericVFX";
 
@@ -220,7 +220,8 @@ public sealed partial class CosmicCultComponent : Component
     public EntProtoId ImpositionVFX = "CosmicImpositionAbilityVFX";
 
     [DataField]
-    public SoundSpecifier BlankSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ability_blank.ogg");
+    public EntProtoId CosmicEchoVfx = "CosmicEchoVfx";
+    public EntProtoId TransmuteVFX = "CosmicGenericVFX";
 
     [DataField]
     public SoundSpecifier IngressSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ability_ingress.ogg");
@@ -233,11 +234,7 @@ public sealed partial class CosmicCultComponent : Component
 
     [DataField]
     public SoundSpecifier ImpositionSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ability_imposition.ogg");
+    [DataField]
+    public SoundSpecifier TransmuteSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/glyph_trigger.ogg");
     #endregion
-}
-
-[NetSerializable, Serializable]
-public enum CultAlertVisualLayers : byte
-{
-    Counter,
 }

@@ -29,7 +29,7 @@ ghost-role-colossus-briefing =
 
 ghost-role-colossus-death = The colossus collapses, its surface desintegrating rapidly.
 ghost-role-colossus-hibernate = The colossus begins drawing in energy!
-ghost-role-colossus-effigy-confirm = If placement is  valid, press again to Beckon an Effigy.
+ghost-role-colossus-effigy-confirm = If placement is valid, press again to Beckon an Effigy.
 
 ghost-role-colossus-effigy-error-grid = Invalid location! An Effigy must be beckoned upon a stable surface.
 ghost-role-colossus-effigy-error-location = Invalid location! The Effigy must be beckoned near {$LOCATION}.

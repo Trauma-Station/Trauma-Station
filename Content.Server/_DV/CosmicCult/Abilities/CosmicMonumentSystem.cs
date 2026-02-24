@@ -31,7 +31,6 @@ public sealed class CosmicMonumentSystem : EntitySystem
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
 
-    private static readonly EntProtoId MonumentCollider = "MonumentCollider";
     private static readonly EntProtoId MonumentCosmicCultMoveEnd = "MonumentCosmicCultMoveEnd";
     private static readonly EntProtoId MonumentCosmicCultMoveStart = "MonumentCosmicCultMoveStart";
 
@@ -39,31 +38,16 @@ public sealed class CosmicMonumentSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CosmicCultLeadComponent, EventCosmicPlaceMonument>(OnCosmicPlaceMonument);
-        SubscribeLocalEvent<CosmicCultLeadComponent, EventCosmicMoveMonument>(OnCosmicMoveMonument);
+        SubscribeLocalEvent<CosmicCultComponent, EventCosmicPlaceMonument>(OnCosmicPlaceMonument);
     }
 
-    //todo attack this with a debugger at some point, it seems to un-prime before it should sometimes?
-    //no idea why, might be something to do with verifying placement inside the action's execution instead of in an attemptEvent beforehand?
-    //yeah it is - if the action is primed but fails at this step, then the action becomes un-primed but does not properly go through, requiring it to be primed again
-    //works fine:tm: for now with a slightly jank fix on the client end of things, will probably want to dig deeper?
-    //actually might not want to fix it?
-    //I've got the client stuff working well & this works out to making the ghost stay up so long as you consistently try (& fail) to place the monument
-    //guess I should ask for specific feedback for this one tiny feature?
-    private void OnCosmicPlaceMonument(Entity<CosmicCultLeadComponent> uid, ref EventCosmicPlaceMonument args)
+    private void OnCosmicPlaceMonument(Entity<CosmicCultComponent> uid, ref EventCosmicPlaceMonument args)
     {
         if (!VerifyPlacement(uid, out var pos))
             return;
-
-        _actions.RemoveAction(uid.Comp.CosmicMonumentPlaceActionEntity);
-
-        Spawn(MonumentCollider, pos);
-        var monument = Spawn(uid.Comp.MonumentPrototype, pos);
-
-        _cultRule.TransferCultAssociation(uid, monument);
     }
 
-    private void OnCosmicMoveMonument(Entity<CosmicCultLeadComponent> uid, ref EventCosmicMoveMonument args)
+    /*private void OnCosmicMoveMonument(Entity<CosmicCultComponent> uid, ref EventCosmicMoveMonument args)
     {
 
         args.Handled = true;
@@ -90,10 +74,10 @@ public sealed class CosmicMonumentSystem : EntitySystem
         Spawn(MonumentCollider, Transform(cult.Comp.MonumentInGame).Coordinates); //spawn a new collider
         _monument.PhaseOutMonument(cult.Comp.MonumentInGame);
         destComp.PhaseInTimer = cult.Comp.MonumentInGame.Comp.PhaseOutTimer + TimeSpan.FromSeconds(0.75);
-    }
+    }*/
 
     //todo this can probably be mostly moved to shared but my brain isn't cooperating w/ that rn
-    private bool VerifyPlacement(Entity<CosmicCultLeadComponent> uid, out EntityCoordinates outPos)
+    private bool VerifyPlacement(Entity<CosmicCultComponent> uid, out EntityCoordinates outPos)
     {
         //MAKE SURE WE'RE STANDING ON A GRID
         var xform = Transform(uid);

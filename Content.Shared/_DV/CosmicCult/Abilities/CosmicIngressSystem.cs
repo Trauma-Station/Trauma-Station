@@ -44,14 +44,7 @@ public sealed class CosmicIngressSystem : EntitySystem
             _door.StartOpening(target, doorComp, user: ent, predicted: true);
         }
         else if (TryComp<LockComponent>(target, out var lockComp))
-        {
-            if (!ent.Comp.CosmicEmpowered)
-            {
-                _popup.PopupClient(Loc.GetString("cosmicability-ingress-not-empowered-lock"), ent, ent);
-                return;
-            }
             _lock.Unlock(target, ent, lockComp);
-        }
 
         args.Handled = true;
         _audio.PlayPredicted(ent.Comp.IngressSFX, ent, ent);

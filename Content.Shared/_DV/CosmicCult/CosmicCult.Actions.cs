@@ -17,6 +17,10 @@ public sealed partial class EventCosmicIngress : EntityTargetActionEvent;
 public sealed partial class EventCosmicImposition : InstantActionEvent;
 public sealed partial class EventCosmicNova : WorldTargetActionEvent;
 public sealed partial class EventCosmicFragmentation : EntityTargetActionEvent;
+public sealed partial class EventCosmicShop : InstantActionEvent;
+public sealed partial class EventCosmicConversion : EntityTargetActionEvent;
+public sealed partial class EventCosmicDamageTransfer : EntityTargetActionEvent;
+public sealed partial class EventCosmicTransmutation : InstantActionEvent;
 
 // COLOSSUS ACTIONS
 public sealed partial class EventCosmicColossusSunder : WorldTargetActionEvent;

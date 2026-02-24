@@ -24,6 +24,9 @@ public sealed partial class InfluencePrototype : IPrototype
     [DataField(required: true)]
     public LocId Description;
 
+    [DataField]
+    public LocId? EmpoweredDescription = null;
+
     [DataField(required: true)]
     public SpriteSpecifier Icon = SpriteSpecifier.Invalid;
 

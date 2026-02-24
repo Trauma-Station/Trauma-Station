@@ -143,6 +143,9 @@
       - GasCanisters
     - type: Paintable
       group: Canisters
+    - type: CosmicTransmutable # Trauma
+      transmuteTo: CosmicVacuousSpire
+      requiresEmpowerment: true
 
 - type: entity
   parent: GasCanister

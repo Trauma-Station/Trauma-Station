@@ -62,16 +62,19 @@
             "name": "corruption"
         },
         {
-            "name": "rogueinfect"
+            "name": "shop"
         },
         {
-            "name": "roguenova"
+            "name": "shatter"
         },
         {
-            "name": "rogueshatter"
+            "name": "shunt"
         },
         {
-            "name": "rogueshunt"
+            "name": "absorb"
+        },
+        {
+            "name": "transmute"
         }
     ]
 }

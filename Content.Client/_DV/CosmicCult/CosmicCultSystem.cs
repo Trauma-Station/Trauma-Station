@@ -49,11 +49,10 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         SubscribeLocalEvent<CosmicImposingComponent, ComponentShutdown>(OnCosmicImpositionRemoved);
 
         SubscribeLocalEvent<CosmicCultComponent, GetStatusIconsEvent>(GetCosmicCultIcon);
-        SubscribeLocalEvent<CosmicCultLeadComponent, GetStatusIconsEvent>(GetCosmicCultLeadIcon);
+        SubscribeLocalEvent<CosmicLesserCultistComponent, GetStatusIconsEvent>(GetCosmicCultIcon);
         SubscribeLocalEvent<CosmicBlankComponent, GetStatusIconsEvent>(GetCosmicSSDIcon);
 
         SubscribeLocalEvent<HumanoidProfileComponent, CosmicSiphonIndicatorEvent>(OnSiphon);
-        SubscribeLocalEvent<CosmicCultComponent, UpdateAlertSpriteEvent>(OnUpdateAlert);
     }
 
     #region Siphon Visuals
@@ -69,15 +68,6 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
 
         Timer.Spawn(TimeSpan.FromSeconds(2), () => _sprite.RemoveLayer((ent, sprite), CultSiphonedVisuals.Key));
         _audio.PlayLocal(_siphonSFX, ent, ent, AudioParams.Default.WithVariation(0.1f));
-    }
-
-    private void OnUpdateAlert(Entity<CosmicCultComponent> ent, ref UpdateAlertSpriteEvent args)
-    {
-        if (args.Alert.ID != ent.Comp.EntropyAlert)
-            return;
-        var entropy = Math.Clamp(ent.Comp.EntropyStored, 0, 14);
-        _sprite.LayerSetRsiState((args.SpriteViewEnt.Owner, args.SpriteViewEnt.Comp), AlertVisualLayers.Base, $"base{entropy}");
-        _sprite.LayerSetRsiState((args.SpriteViewEnt.Owner, args.SpriteViewEnt.Comp), CultAlertVisualLayers.Counter, $"num{entropy}");
     }
     #endregion
 
@@ -157,14 +147,11 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     #region Icons
     private void GetCosmicCultIcon(Entity<CosmicCultComponent> ent, ref GetStatusIconsEvent args)
     {
-        if (HasComp<CosmicCultLeadComponent>(ent))
-            return;
-
         if (_prototype.TryIndex(ent.Comp.StatusIcon, out var iconPrototype))
             args.StatusIcons.Add(iconPrototype);
     }
 
-    private void GetCosmicCultLeadIcon(Entity<CosmicCultLeadComponent> ent, ref GetStatusIconsEvent args)
+    private void GetCosmicCultIcon(Entity<CosmicLesserCultistComponent> ent, ref GetStatusIconsEvent args)
     {
         if (_prototype.TryIndex(ent.Comp.StatusIcon, out var iconPrototype))
             args.StatusIcons.Add(iconPrototype);

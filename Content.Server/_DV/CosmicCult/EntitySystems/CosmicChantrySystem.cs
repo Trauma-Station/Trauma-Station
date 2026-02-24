@@ -109,7 +109,7 @@ public sealed class CosmicChantrySystem : EntitySystem
                 }
                 else
                 { // Anything else just gets fully replaced with a mindsink
-                    if (_mind.TryGetMind(borgBrain, out var mindEnt, out _))
+                    if (_mind.TryGetMind(victim, out var mindEnt, out _))
                         _mind.TransferTo(mindEnt, newBrain);
                     else
                         MakeVictimGhostRole(victim);

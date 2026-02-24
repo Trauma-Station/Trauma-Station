@@ -1,4 +1,22 @@
 - type: entity
+  parent: BaseMentalAction
+  id: ActionCosmicShop
+  name: Attune Influence
+  description: Spend gathered entropy to unlock new powers, or view the Cult's progress.
+  components:
+  - type: Action
+    icon:
+      sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
+      state: shop
+  - type: InstantAction
+    event: !type:EventCosmicShop { }
+  - type: UserInterface # Putting it here as to not spam even more components on cultists themselves
+    interfaces:
+      enum.CosmicShopKey.Key:
+        type: CosmicShopBoundUserInterface
+  - type: CosmicShop
+
+- type: entity
   parent: BaseAction
   id: ActionCosmicSiphon
   name: Siphon Entropy
@@ -35,7 +53,7 @@
       state: blank
   - type: TargetAction
   - type: EntityTargetAction
-    canTargetSelf: true
+    canTargetSelf: false
     whitelist:
       components:
       - HumanoidProfile
@@ -49,41 +67,17 @@
   parent: BaseAction
   id: ActionCosmicPlaceMonument
   name: Beckon The Monument
-  description: Call forth The Monument into realspace. Keep it hidden and safe from non-cultists!
+  description: Mark the spot where The Monument must be. The majority of the cult must choose the same spot. Use again to remove the mark.
   components:
   - type: Action
-    useDelay: 999
+    useDelay: 1
     itemIconStyle: NoItem
     icon:
       sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
       state: monument
-  - type: ConfirmableAction
-    popup: cosmicability-monument-spawn-confirm
-    primeTime: 10 #increased to give you more time to figure out where you want to put it
   - type: InstantAction
     event: !type:EventCosmicPlaceMonument {}
-  - type: MonumentPlacementPreview
-    tier: 1
-
-- type: entity
-  parent: BaseAction
-  id: ActionCosmicMoveMonument
-  name: Relocate The Monument
-  description: Your work is imperative, and the end is inevitable. Ensure that it is completed under your watch.
-  components:
-  - type: Action
-    useDelay: 600
-    itemIconStyle: NoItem
-    icon:
-      sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
-      state: monument-relocate
-  - type: ConfirmableAction
-    popup: cosmicability-monument-move-confirm
-    primeTime: 10 #increased to give you more time to figure out where you want to put it
-  - type: InstantAction
-    event: !type:EventCosmicMoveMonument
-  - type: MonumentPlacementPreview
-    tier: 2
+  - type: MonumentPlacementAction
 
 - type: entity
   parent: BaseAction
@@ -125,7 +119,7 @@
   parent: BaseAction
   id: ActionCosmicGlare
   name: Null Glare
-  description: Emit a horrific pulse of cosmic light, slowing and disorienting everyone around you. Its effects are amplified against silicon-based entities.
+  description: Emit a horrific pulse of cosmic light, slowing and disorienting everyone around you.
   components:
   - type: Action
     useDelay: 30
@@ -201,7 +195,7 @@
   parent: BaseAction
   id: ActionCosmicFragmentation
   name: Null Fragmentation
-  description: Transfer your malign empowerment into a digital system, such as an AI Upload Console or Cyborg, corrupting it in the process. Doing so will expend your empowerment.
+  description: Transfer your malign empowerment into a digital system, such as an AI Upload Console or Cyborg, corrupting it in the process.
   components:
   - type: Action
     useDelay: 25
@@ -216,8 +210,66 @@
       - BorgChassis
       - SiliconLawUpdater
     event: !type:EventCosmicFragmentation {}
-  - type: LimitedCharges
-    maxCharges: 1
+
+- type: entity
+  parent: BaseAction
+  id: ActionCosmicConversion
+  name: Shatter Cognition
+  description: Share the knowledge you bear with someone else, forcing them to join your side.
+  components:
+  - type: Action
+    useDelay: 666
+    itemIconStyle: NoItem
+    icon:
+      sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
+      state: shatter
+  - type: TargetAction
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - HumanoidProfile
+    blacklist:
+      components:
+      - CosmicCult
+      - BibleUser
+      - MindShield
+    event: !type:EventCosmicConversion {}
+
+- type: entity
+  parent: BaseAction
+  id: ActionCosmicDamageTransfer
+  name: Forfeit Vitality
+  description: Take the wounds of a fellow cultist as your own, bringing them back to life at the cost of your own.
+  components:
+  - type: Action
+    useDelay: 120
+    itemIconStyle: NoItem
+    icon:
+      sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
+      state: absorb
+  - type: TargetAction
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - Damageable
+    event: !type:EventCosmicDamageTransfer {}
+
+- type: entity
+  parent: BaseAction
+  id: ActionCosmicTransmutation
+  name: Corrupt Matter
+  description: Imbue held item with malign power, transforming it into something else.
+  components:
+  - type: Action
+    useDelay: 20
+    itemIconStyle: NoItem
+    icon:
+      sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
+      state: transmute
+  - type: InstantAction
+    event: !type:EventCosmicTransmutation {}
 
 ## COLOSSUS ACTIONS
 

@@ -26,4 +26,8 @@ cosmicability-chantry-active = You cannot start a chantry ritual while one is al
 
 cosmicability-ingress-bolted = The airlock's bolts prevent it from being forced!
 cosmicability-ingress-not-empowered-door = You must be empowered to open bolted doors!
-cosmicability-ingress-not-empowered-lock = You must be empowered to open access locks!
+
+cosmicability-transmute-not-empowered = You must be empowered to transmute this.
+cosmicability-transmute-not-transmutable = This item cannot be transmuted.
+cosmicability-transmute-type-mismatch = You must improve your transmutation ability to transmute this item.
+cosmicability-transmute-no-item = You must hold an item to transform it.

@@ -1,5 +1,5 @@
 - type: factionIcon
-  id: CosmicCultIcon
+  id: CosmicCultLesserIcon
   isShaded: false
   priority: 11
   showTo:
@@ -13,7 +13,7 @@
     state: CosmicCult
 
 - type: factionIcon
-  id: CosmicCultLeadIcon
+  id: CosmicCultIcon
   isShaded: false
   priority: 11
   showTo:

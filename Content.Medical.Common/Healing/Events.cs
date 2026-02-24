@@ -26,3 +26,9 @@ public record struct PartHealAttemptEvent(bool Cancelled = false, bool Bleeding 
 /// </summary>
 [ByRefEvent]
 public record struct ModifySelfHealSpeedEvent(float Modifier = 1f);
+
+/// <summary>
+/// Raised on a mob to transfer all of it's wounds onto another mob.
+/// </summary>
+[ByRefEvent]
+public record struct TransferWoundsEvent(EntityUid Target);

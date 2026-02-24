@@ -58,6 +58,12 @@ public sealed partial class CosmicCultRuleComponent : Component
     [DataField]
     public bool RiftStop;
 
+    /// <summary>
+    /// Chance that a rift spawn will be replaced with a more dangerous fracture.
+    /// </summary>
+    [DataField]
+    public float FractureChance;
+
     [DataField]
     public EntityUid ActiveChantry;
 
@@ -76,16 +82,22 @@ public sealed partial class CosmicCultRuleComponent : Component
     public EntityUid MonumentSlowZone;
 
     /// <summary>
-    ///     The EntityUid of the cult leader
-    /// </summary>
-    [DataField]
-    public EntityUid? CultLeader;
-
-    /// <summary>
     ///     Current tier of the cult
     /// </summary>
     [DataField]
-    public int CurrentTier;
+    public int CurrentTier = 0;
+
+    /// <summary>
+    ///     Amount of cultists that need to be at least <see cref="CurrentTier"> + 1 level for the current tier to increase.
+    /// </summary>
+    [DataField]
+    public int CultistsForNextTier;
+
+    /// <summary>
+    ///     Amount of cultists that are at <see cref="CurrentTier"> + 1 level.
+    /// </summary>
+    [DataField]
+    public int CultistsAtNextLevel;
 
     /// <summary>
     ///     Amount of present crew
@@ -112,23 +124,14 @@ public sealed partial class CosmicCultRuleComponent : Component
     public int EntropySiphoned;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan? StewardVoteTimer;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? PrepareFinaleTimer;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan? Tier3DelayTimer;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan? Tier2DelayTimer;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? ExtraRiftTimer;
 
 }
 
-public enum WinType : byte
+public enum WinType : byte // TODO make a gentle sledgehammer pass over this
 {
     /// <summary>
     ///     Cult complete win. The Cosmic Cult beckoned the final curtain call.

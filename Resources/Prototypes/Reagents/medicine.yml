@@ -1306,22 +1306,6 @@
         stacks: 3
       - !type:SatiateThirst
         factor: 3
-      - !type:AddComponents # DeltaV - Cosmic Cult
-        guidebookText: reagent-effect-guidebook-cleanse-cultist
-        components:
-        - type: CleanseCult
-        conditions:
-        - !type:ReagentCondition
-          reagent: Holywater
-          min: 10
-        - !type:WhitelistCondition
-          guidebookText: entity-effect-condition-guidebook-cosmic-cultist
-          whitelist:
-            components:
-            - CosmicCult
-          blacklist:
-            components:
-            - CleanseCult
       - !type:HealthChange
         conditions:
         - !type:TotalDamageCondition

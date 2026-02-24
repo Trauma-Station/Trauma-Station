@@ -13,6 +13,7 @@ public sealed partial class CosmicSiphonSystem : SharedCosmicSiphonSystem
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly CosmicCultSystem _cosmicCult = default!;
 
     public override void Initialize() =>
         base.Initialize();
@@ -28,12 +29,8 @@ public sealed partial class CosmicSiphonSystem : SharedCosmicSiphonSystem
 
         RaiseLocalEvent(target, new CosmicSiphonIndicatorEvent());
 
-        var entropySiphoned = Math.Min(ent.Comp.CosmicSiphonQuantity, ent.Comp.EntropyStoredCap - ent.Comp.EntropyStored); // Prevent going over the cap
-
-        ent.Comp.EntropyStored += entropySiphoned;
-        ent.Comp.EntropyBudget += entropySiphoned;
+        _cosmicCult.AddEntropy(ent, ent.Comp.CosmicSiphonQuantity);
 
         _popup.PopupClient(Loc.GetString("cosmicability-siphon-success", ("target", Identity.Entity(target, EntityManager))), ent, ent);
-        _alerts.ShowAlert(ent.Owner, ent.Comp.EntropyAlert);
     }
 }

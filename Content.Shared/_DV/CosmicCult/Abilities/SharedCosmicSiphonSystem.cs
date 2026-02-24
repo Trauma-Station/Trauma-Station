@@ -1,10 +1,8 @@
-using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
-using Content.Shared.NPC;
 using Content.Shared.Popups;
 
 namespace Content.Shared._DV.CosmicCult.Abilities;
@@ -26,7 +24,7 @@ public abstract class SharedCosmicSiphonSystem : EntitySystem
     // Doesn't check for DivineIntervention, because there aren't any negative consequences for the target anymore
     private void OnCosmicSiphon(Entity<CosmicCultComponent> ent, ref EventCosmicSiphon args)
     {
-        if (ent.Comp.EntropyStored >= ent.Comp.EntropyStoredCap)
+        if (ent.Comp.EntropyLocked)
         {
             _popup.PopupClient(Loc.GetString("cosmicability-siphon-full"), ent, ent);
             return;
