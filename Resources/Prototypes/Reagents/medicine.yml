@@ -1387,7 +1387,7 @@
   color: "#aa4308"
   metabolisms:
     Bloodstream:
-      metabolismRate: 0.1 # slow metabolism to not be a godly combat med, its for treating burn victims efficiently
+      metabolismRate: 0.2 # trauma - doubled metabolism and healing to make it a bit more enticing
       effects:
       - !type:SuppressPain
         amount: 4 # To prevent people from dying while being healed
@@ -1395,7 +1395,7 @@
       - !type:HealthChange
         damage:
           types:
-            Heat: -1
+            Heat: -2 # trauma
       # od causes massive bleeding
       - !type:HealthChange
         conditions:
@@ -1404,8 +1404,8 @@
           min: 20
         damage:
           types:
-            Slash: 0.5
-            Piercing: 0.5
+            Slash: 1 # trauma
+            Piercing: 1 # trauma
       - !type:Vomit
         conditions:
         - !type:ReagentCondition
@@ -1430,13 +1430,12 @@
   color: "#8147ff"
   metabolisms:
     Bloodstream:
-      metabolismRate: 0.25
       effects:
       # heals shocks and removes shock chems
       - !type:HealthChange
         damage:
           types:
-            Shock: -1.5 # 6 per u
+            Shock: -3 # trauma - doubled the metabolism, and healing as a result
       - !type:AdjustReagent
         reagent: Licoxide
         amount: -2
