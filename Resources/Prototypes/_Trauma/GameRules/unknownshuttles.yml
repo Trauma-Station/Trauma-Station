@@ -1,0 +1,10 @@
+- type: entity
+  id: UnknownShuttleSlopFactory
+  parent: BaseUnknownShuttleRule
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-unknown-shuttle-incoming #!!
+    weight: 1
+    eventType: FriendlySpawn # lol
+  - type: LoadMapRule
+    preloadedGrid: /Maps/_Trauma/Shuttles/ShuttleEvent/botanyslopfactory.yml

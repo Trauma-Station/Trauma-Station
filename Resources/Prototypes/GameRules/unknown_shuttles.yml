@@ -40,6 +40,7 @@
     - id: UnknownShuttleMicroshuttle
     - id: UnknownShuttleSpacebus
     - id: UnknownShuttleAlienTourist # Goobstation
+    - id: UnknownShuttleSlopFactory # Trauma, lol
 
 - type: entityTable
   id: UnknownShuttlesFreelanceTable
