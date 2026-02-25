@@ -45,7 +45,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         SubscribeLocalEvent<RustbringerComponent, BeforeStaminaDamageEvent>(OnBeforeStaminaDamage);
         SubscribeLocalEvent<RustbringerComponent, KnockDownAttemptEvent>(OnKnockDownAttempt);
-        SubscribeLocalEvent<RustbringerComponent, BeforeStatusEffectAddedEvent>(OnBeforeStatusEffect);sharedhereticrus
+        SubscribeLocalEvent<RustbringerComponent, BeforeStatusEffectAddedEvent>(OnBeforeStatusEffect);
         SubscribeLocalEvent<RustbringerComponent, SlipAttemptEvent>(OnSlipAttempt);
         SubscribeLocalEvent<RustbringerComponent, GetExplosionResistanceEvent>(OnGetExplosionResists);
         SubscribeLocalEvent<RustbringerComponent, ElectrocutionAttemptEvent>(OnElectrocuteAttempt);
