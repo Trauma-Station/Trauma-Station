@@ -110,3 +110,16 @@ Entries:
   id: 10
   time: '2026-02-24T10:45:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/857
+- author: deltanedas
+  changes:
+  - type: Add
+    message: 'Box: Added geneticist and roboticist slots.'
+  - type: Add
+    message: 'Box: Tool room now has an autolathe.'
+  - type: Tweak
+    message: 'Box: The ore processor is no longer locked.'
+  - type: Tweak
+    message: 'Box: Chefs can no longer use CQC in the bar...'
+  id: 11
+  time: '2026-02-25T14:12:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/871
