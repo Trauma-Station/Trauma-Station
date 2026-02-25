@@ -272,7 +272,6 @@ public sealed class MultihitSystem : EntitySystem
 
             active.QueuedAttacks.Enqueue(attack);
             active.LastAttack = null;
-            active.DeletionAccumulator = 0f;
             Dirty(weapon, active);
             return true;
         }

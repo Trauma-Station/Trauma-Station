@@ -110,7 +110,7 @@ public sealed partial class EventHereticMansusGrasp : InstantActionEvent { }
 public sealed partial class EventHereticLivingHeart : InstantActionEvent { } // opens ui
 
 [ByRefEvent]
-public readonly record struct HereticMindDetachedEvent(EntityUid Mind);
+public readonly record struct HereticStateChangedEvent(EntityUid Mind, bool IsDead, bool Temporary);
 
 public sealed partial class EventHereticCloak : InstantActionEvent
 {

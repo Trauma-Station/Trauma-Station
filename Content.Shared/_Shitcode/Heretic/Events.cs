@@ -19,4 +19,4 @@ public readonly record struct IncrementHereticObjectiveProgressEvent(EntProtoId 
 public readonly record struct SpawnHereticInfluenceEvent(EntProtoId Proto, int Amount = 1);
 
 [ByRefEvent]
-public readonly record struct UserInvokeTouchSpellEvent();
+public readonly record struct UserInvokeTouchSpellEvent;

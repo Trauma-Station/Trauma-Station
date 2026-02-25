@@ -129,6 +129,9 @@ public sealed partial class EffectsRitualEffect : BaseRitualEffect<EffectsRitual
 
 public sealed partial class SpawnRitualEffect : BaseRitualEffect<SpawnRitualEffect>
 {
+    [DataField]
+    public ProtoId<TagPrototype> ForceMinionTag = "ForceHereticMinion";
+
     [DataField(required: true)]
     public Dictionary<EntProtoId, int> Output;
 }

@@ -11,8 +11,9 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Rotation;
+using Content.Shared.Standing;
 using Content.Shared.StatusEffectNew;
-using Content.Shared.Stealth;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Robust.Shared.Network;
@@ -26,6 +27,7 @@ public abstract class SharedShadowCloakSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
@@ -33,7 +35,7 @@ public abstract class SharedShadowCloakSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly SharedStealthSystem _stealth = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
 
     private static readonly ProtoId<TagPrototype> ActionTag = "ShadowCloakAction";
 
@@ -52,10 +54,24 @@ public abstract class SharedShadowCloakSystem : EntitySystem
         SubscribeLocalEvent<ShadowCloakedComponent, GetEmoteSoundsEvent>(OnGetEmoteSound);
         SubscribeLocalEvent<ShadowCloakedComponent, GetBarkSourceEntityEvent>(OnGetBark);
         SubscribeLocalEvent<ShadowCloakedComponent, GetVirtualItemBlockingEntityEvent>(OnGetBlockingEntity);
+        SubscribeLocalEvent<ShadowCloakedComponent, DownedEvent>(OnDowned);
+        SubscribeLocalEvent<ShadowCloakedComponent, StoodEvent>(OnStand);
 
         SubscribeLocalEvent<ShadowCloakEntityComponent, EntParentChangedMessage>(OnEntParentChanged);
         SubscribeLocalEvent<ShadowCloakEntityComponent, ComponentShutdown>(OnCloakShutdown);
         SubscribeLocalEvent<ShadowCloakEntityComponent, DamageChangedEvent>(OnDamage);
+    }
+
+    private void OnStand(Entity<ShadowCloakedComponent> ent, ref StoodEvent args)
+    {
+        if (GetShadowCloakEntity(ent) is { } cloak)
+            _appearance.SetData(cloak, RotationVisuals.RotationState, RotationState.Vertical);
+    }
+
+    private void OnDowned(Entity<ShadowCloakedComponent> ent, ref DownedEvent args)
+    {
+        if (GetShadowCloakEntity(ent) is { } cloak)
+            _appearance.SetData(cloak, RotationVisuals.RotationState, RotationState.Horizontal);
     }
 
     private void OnGetBlockingEntity(Entity<ShadowCloakedComponent> ent, ref GetVirtualItemBlockingEntityEvent args)
@@ -260,6 +276,10 @@ public abstract class SharedShadowCloakSystem : EntitySystem
         var relay = EnsureComp<TargetInteractionRelayComponent>(cloakEntity);
         relay.RelayEntity = ent;
         Dirty(cloakEntity, relay);
+
+        _appearance.SetData(cloakEntity,
+            RotationVisuals.RotationState,
+            _standing.IsDown(ent.Owner) ? RotationState.Horizontal : RotationState.Vertical);
     }
 
     private void ResetAbilityCooldown(EntityUid uid, TimeSpan cooldown)

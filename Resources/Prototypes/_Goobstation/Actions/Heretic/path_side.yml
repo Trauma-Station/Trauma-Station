@@ -93,8 +93,6 @@
       state: icon
   - type: InstantAction
     event: !type:EventEmp
-  - type: SpeakOnAction
-    sentence: heretic-speech-cleave
 
 - type: entity
   id: ActionHereticSpacePhase

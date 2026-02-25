@@ -168,7 +168,8 @@ public abstract partial class SharedHereticRitualSystem
 
     private void OnSpawn(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<SpawnRitualEffect> args)
     {
-        if (!TryGetValue(args.Ritual, Performer, out EntityUid performer))
+        if (!TryGetValue(args.Ritual, Performer, out EntityUid performer) ||
+            !TryGetValue(args.Ritual, Mind, out EntityUid mind) || !TryComp(mind, out HereticComponent? heretic))
             return;
 
         var coords = Transform(ent).Coordinates;
@@ -178,8 +179,9 @@ public abstract partial class SharedHereticRitualSystem
             {
                 var spawned = PredictedSpawnAtPosition(obj, coords);
 
-                if (_ghoulQuery.HasComp(spawned))
+                if (_ghoulQuery.HasComp(spawned) || _tag.HasTag(spawned, args.Effect.ForceMinionTag))
                 {
+                    heretic.Minions.Add(spawned);
                     var ev = new SetGhoulBoundHereticEvent(performer, args.Ritual);
                     RaiseLocalEvent(spawned, ref ev);
                 }

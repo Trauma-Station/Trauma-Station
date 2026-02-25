@@ -43,7 +43,7 @@ reagent-effect-guidebook-has-status-effect =
     { $invert ->
         [true] has no
         *[false] has
-    } {$effect} status effect.
+    } {$effect} status effect
 
 reagent-effect-guidebook-deconvert-ghoul = deconverts ghoulified entity
 

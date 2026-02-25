@@ -53,7 +53,7 @@ public sealed class WoundedSoldierSystem : EntitySystem
         if (!_mobState.IsAlive(ent.Owner))
             return;
 
-        if (!_threshold.TryGetThresholdForState(ent.Owner, MobState.Critical, out var threshold))
+        if (!_threshold.TryGetThresholdForState(ent.Owner, MobState.SoftCrit, out var threshold))
             return;
 
         if (!TryComp<DamageableComponent>(ent, out var damageable))

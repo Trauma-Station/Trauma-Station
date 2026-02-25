@@ -1,4 +1,5 @@
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared.Body;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Construction.EntitySystems;
@@ -7,6 +8,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Heretic;
 using Content.Shared.Heretic.Messages;
 using Content.Shared.Interaction;
+using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.UserInterface;
@@ -94,7 +96,7 @@ public sealed class MawedCrucibleSystem : EntitySystem
         if (!xform.Anchored)
             return;
 
-        if (_tag.HasTag(args.Used, ent.Comp.MeatTag) && _whitelist.IsValid(ent.Comp.FuelWhitelist, args.Used))
+        if (HasComp<EdibleComponent>(args.Used) && HasComp<OrganComponent>(args.Used))
         {
             RefuelCrucible(ent, ref args);
             return;

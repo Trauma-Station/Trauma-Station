@@ -9,13 +9,11 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Dataset;
 using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.Store;
-using Content.Shared.Tag;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -133,7 +131,7 @@ public sealed partial class HereticComponent : Component
     /// <summary>
     /// Minions summoned by this heretic
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public HashSet<EntityUid> Minions = new();
 
     /// <summary>
@@ -191,6 +189,12 @@ public sealed partial class HereticComponent : Component
         {1, "EldritchInfluenceT2"},
         {2, "EldritchInfluenceT3"},
     };
+
+    /// <summary>
+    /// Inactive means either dead or in jaunt
+    /// </summary>
+    [DataField]
+    public bool IsActive = true;
 }
 
 [DataDefinition, Serializable, NetSerializable]

@@ -50,6 +50,9 @@
   id: FlamethrowerTank
 
 - type: Tag
+  id: ForceHereticMinion
+
+- type: Tag
   id: ForgeMold
 
 - type: Tag

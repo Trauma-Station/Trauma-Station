@@ -141,3 +141,4 @@
       state: stargazer
   - type: InstantAction
     event: !type:StarGazerSeekMasterEvent
+  - type: HereticAction

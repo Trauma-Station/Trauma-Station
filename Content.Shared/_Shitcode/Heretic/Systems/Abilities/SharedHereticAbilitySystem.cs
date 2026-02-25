@@ -5,6 +5,7 @@ using Content.Shared._Goobstation.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Events;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -122,7 +123,14 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         SubscribeSide();
 
         SubscribeLocalEvent<HereticActionComponent, BeforeCastSpellEvent>(OnBeforeCast);
+        SubscribeLocalEvent<HereticActionComponent, ActionAttemptEvent>(OnAttempt);
         SubscribeLocalEvent<JauntComponent, HereticMagicCastAttemptEvent>(OnJauntMagicAttempt);
+    }
+
+    private void OnAttempt(Entity<HereticActionComponent> ent, ref ActionAttemptEvent args)
+    {
+        if (StatusNew.HasEffectComp<BlockHereticActionsStatusEffectComponent>(args.User))
+            args.Cancelled = true;
     }
 
     protected List<Entity<MobStateComponent>> GetNearbyPeople(EntityUid ent,

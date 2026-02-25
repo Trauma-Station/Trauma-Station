@@ -17,11 +17,11 @@ using Content.Shared.Body;
 using Content.Shared.Database;
 using Content.Shared.Heretic;
 using Content.Shared.Mind.Components;
-using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Throwing;
 using Robust.Server.Audio;
 using Robust.Server.GameStates;
@@ -57,9 +57,8 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
         SubscribeLocalEvent<LaserBeamEndpointComponent, ComponentShutdown>(OnShutdown);
 
         SubscribeLocalEvent<CosmosPassiveComponent, ResetStarGazerConsciousnessEvent>(OnReset);
-        SubscribeLocalEvent<CosmosPassiveComponent, MobStateChangedEvent>(OnMobStateChanged);
 
-        SubscribeLocalEvent<StarGazerComponent, HereticMindDetachedEvent>(OnMindDetached);
+        SubscribeLocalEvent<StarGazerComponent, HereticStateChangedEvent>(OnStateChanged);
         SubscribeLocalEvent<StarGazerComponent, StarGazerSeekMasterEvent>(OnSeekMaster);
         SubscribeLocalEvent<StarGazerComponent, TakeGhostRoleEvent>(OnTakeGhostRole,
             after: [typeof(GhostRoleSystem)]);
@@ -78,13 +77,15 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
         if (!TryComp(ent, out HereticMinionComponent? minion) || !Exists(minion.BoundHeretic))
             return;
 
-        args.Handled = true;
 
-        TeleportStarGazer(ent, minion.BoundHeretic.Value);
+        args.Handled = TeleportStarGazer(ent, minion.BoundHeretic.Value);
     }
 
-    private void TeleportStarGazer(Entity<StarGazerComponent> ent, EntityUid target)
+    private bool TeleportStarGazer(Entity<StarGazerComponent> ent, EntityUid target)
     {
+        if (IsPaused(target))
+            return false;
+
         var xform = Transform(ent);
 
         _audio.PlayPvs(ent.Comp.TeleportSound, xform.Coordinates);
@@ -93,32 +94,25 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
         Xform.SetMapCoordinates((ent.Owner, xform), Xform.GetMapCoordinates(target));
         Spawn(ent.Comp.TeleportEffect, xform.Coordinates);
         _audio.PlayPvs(ent.Comp.TeleportSound, xform.Coordinates);
+        return true;
     }
 
-    private void OnMobStateChanged(Entity<CosmosPassiveComponent> ent, ref MobStateChangedEvent args)
+    private void OnStateChanged(Entity<StarGazerComponent> ent, ref HereticStateChangedEvent args)
     {
-        if (args.NewMobState == MobState.Dead)
+        if (!args.IsDead)
         {
-            if (!Exists(ent.Comp.StarGazer) || TerminatingOrDeleted(ent.Comp.StarGazer.Value))
-                return;
-
-            KillStarGazer(ent.Comp.StarGazer.Value);
+            RemCompDeferred<FadingTimedDespawnComponent>(ent);
+            Status.TryRemoveStatusEffect(ent, ent.Comp.InactiveStatus);
             return;
         }
 
-        if (args.NewMobState != MobState.Alive)
+        if (args.Temporary)
+        {
+            if (!Status.HasStatusEffect(ent, ent.Comp.InactiveStatus))
+                Status.TryAddStatusEffect(ent, ent.Comp.InactiveStatus, out _);
             return;
+        }
 
-        var starGazer = ResolveStarGazer(ent.AsNullable(), out _);
-        if (starGazer == null)
-            return;
-
-        RemCompDeferred<FadingTimedDespawnComponent>(starGazer.Value);
-    }
-
-
-    private void OnMindDetached(Entity<StarGazerComponent> ent, ref HereticMindDetachedEvent args)
-    {
         KillStarGazer(ent);
     }
 

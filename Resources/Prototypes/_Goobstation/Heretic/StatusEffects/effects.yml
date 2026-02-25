@@ -250,3 +250,12 @@
   - type: MovementModStatusEffect
     sprintSpeedModifier: 0.85
     walkSpeedModifier: 0.85
+
+- type: entity
+  parent: StatusEffectBase
+  id: StarGazerInactiveStatusEffect
+  name: star gazer inactive
+  components:
+  - type: ForcedStealthStatusEffect
+    visibility: 0.3
+  - type: BlockHereticActionsStatusEffect

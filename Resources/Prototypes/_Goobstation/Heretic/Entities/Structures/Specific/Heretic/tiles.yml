@@ -57,7 +57,7 @@
         hard: false
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
   - type: PreventCollide
     whitelist:
       components:
@@ -124,7 +124,7 @@
         hard: false
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
   - type: PreventCollide
     whitelist:
       components:
@@ -189,7 +189,7 @@
         hard: false
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: TileHereticRustRune
@@ -227,7 +227,7 @@
     lifetime: 0.7
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: HereticRustAscensionSpreader
@@ -240,7 +240,8 @@
   - type: RustSpreader
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
+    - ForceHereticMinion # Not really minion but doesn't matter
 
 - type: tile
   id: PlatingRust

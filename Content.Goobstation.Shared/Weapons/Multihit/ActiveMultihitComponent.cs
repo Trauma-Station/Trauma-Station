@@ -16,9 +16,6 @@ public sealed partial class ActiveMultihitComponent : Component
     public float NextDamageMultiplier = 1f;
 
     [ViewVariables]
-    public float DeletionAccumulator;
-
-    [ViewVariables]
     public QueuedMultihitAttack? LastAttack;
 
     [DataField, AutoNetworkedField]

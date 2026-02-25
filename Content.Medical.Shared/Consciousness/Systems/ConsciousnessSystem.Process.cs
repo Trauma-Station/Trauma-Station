@@ -90,7 +90,7 @@ public sealed partial class ConsciousnessSystem
     private void ClearPain(Entity<ConsciousnessComponent> ent)
     {
         // remove all pain modifiers and multipliers from the brain
-        if (ent.Comp.NerveSystem is {} brain)
+        if (ent.Comp.NerveSystem is {} brain && brain != default!)
         {
             foreach (var painModifier in brain.Comp.Modifiers.Keys)
                 _pain.TryRemovePainModifier(brain.Owner,

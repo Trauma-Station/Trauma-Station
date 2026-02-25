@@ -14,6 +14,7 @@
 using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Medical.Common.Body;
+using Content.Medical.Shared.Body;
 using Content.Shared.FixedPoint;
 using Content.Server.Ghost.Roles.Components;
 using Content.Shared._Shitcode.Heretic.Components;
@@ -113,12 +114,10 @@ public sealed partial class HereticAbilitySystem
             multiplier *= ent.Comp.BrainMultiplier;
         if (HasComp<InternalOrganComponent>(args.Food))
             multiplier *= ent.Comp.OrganMultiplier;
-        else if (HasComp<OrganComponent>(args.Food)) // hack but i dont care
+        else if (HasComp<BodyPartComponent>(args.Food))
             multiplier *= ent.Comp.BodyPartMultiplier;
         if (HasComp<HumanOrganComponent>(args.Food))
             multiplier *= ent.Comp.HumanMultiplier;
-        if (_tag.HasTag(args.Food, ent.Comp.MeatTag))
-            multiplier *= ent.Comp.MeatMultiplier;
         if (heretic.Ascended)
             multiplier *= ent.Comp.AscensionMultiplier;
 
@@ -181,6 +180,9 @@ public sealed partial class HereticAbilitySystem
             return;
 
         ent.Comp.TrackedDamage += damage;
+
+        if (ent.Comp.TrackedDamage < ent.Comp.MimicDamage)
+            return;
 
         ent.Comp.FleshMimics.RemoveAll(x => !Exists(x));
 

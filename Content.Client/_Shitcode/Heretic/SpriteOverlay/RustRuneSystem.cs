@@ -55,5 +55,8 @@ public sealed class RustRuneSystem : SpriteOverlaySystem<RustRuneComponent>
 
         Sprite.LayerSetRsiState(ent.AsNullable(), layer, rune);
         Sprite.LayerSetOffset(ent.AsNullable(), layer, offset);
+
+        if (Sprite.TryGetLayer(ent.AsNullable(), layer, out var spriteLayer, true))
+            spriteLayer.Loop = false;
     }
 }

@@ -122,7 +122,6 @@ public sealed partial class HereticAbilitySystem
         if (toHeal >= 0)
             return;
 
-        // heals everything by base + power for each burning target
         _stam.TryTakeStamina(args.Performer, toHeal);
         IHateWoundMed(args.Performer, AllDamage * toHeal, 0, 0);
     }

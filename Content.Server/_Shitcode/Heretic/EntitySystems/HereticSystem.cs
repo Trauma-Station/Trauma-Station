@@ -57,6 +57,8 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Server.Hands.Systems;
 using Content.Shared._Shitcode.Heretic.Rituals;
+using Content.Shared.Jaunt;
+using Content.Shared.Mobs;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Store;
 using Content.Shared.Tag;
@@ -114,10 +116,28 @@ public sealed class HereticSystem : SharedHereticSystem
         SubscribeLocalEvent<HereticStartupEvent>(OnHereticStartup);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRestart);
         SubscribeLocalEvent<UserShouldTakeHolyEvent>(OnShouldTakeHoly);
-
+        SubscribeLocalEvent<MobStateChangedEvent>(OnStateChanged);
 
         SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectAppliedEvent>(OnApply);
         SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
+    }
+
+    private void OnStateChanged(MobStateChangedEvent args)
+    {
+        if (!TryGetHereticComponent(args.Target, out var heretic, out var mind))
+            return;
+
+        var newActive = args.NewMobState == MobState.Dead;
+        if (heretic.IsActive == newActive)
+            return;
+
+        heretic.IsActive = newActive;
+
+        var ev = new HereticStateChangedEvent(mind, !newActive, false);
+        foreach (var minion in heretic.Minions)
+        {
+            RaiseLocalEvent(minion, ref ev);
+        }
     }
 
     private void OnRemove(Entity<HideHereticAuraStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
@@ -137,20 +157,34 @@ public sealed class HereticSystem : SharedHereticSystem
         if (TerminatingOrDeleted(args.Container))
             return;
 
-        if (!HasComp<MobStateComponent>(args.Container))
+        if (!TryComp(args.Container, out MobStateComponent? mobState))
         {
-            // Don't kill stargazer if we got temporarily polymorphed
-            if (TryComp(args.Container, out PolymorphedEntityComponent? p) &&
-                (!p.Configuration.Forced || p.Configuration.Duration != null))
+            if (!ent.Comp.IsActive)
                 return;
+            // Don't kill stargazer if we got temporarily polymorphed
+            var temporary = TryComp(args.Container, out PolymorphedEntityComponent? p) &&
+                            (!p.Configuration.Forced || p.Configuration.Duration != null) ||
+                            HasComp<JauntComponent>(args.Container);
 
-            var ev = new HereticMindDetachedEvent(ent);
+            ent.Comp.IsActive = false;
+            var ev = new HereticStateChangedEvent(ent, true, temporary);
             foreach (var minion in ent.Comp.Minions)
             {
                 RaiseLocalEvent(minion, ref ev);
             }
 
             return;
+        }
+
+        var newActive = mobState.CurrentState != MobState.Dead;
+        if (newActive != ent.Comp.IsActive)
+        {
+            var ev = new HereticStateChangedEvent(ent, !newActive, false);
+            foreach (var minion in ent.Comp.Minions)
+            {
+                RaiseLocalEvent(minion, ref ev);
+            }
+            ent.Comp.IsActive = newActive;
         }
 
         SetMinionsMaster(ent, args.Container);
@@ -177,8 +211,11 @@ public sealed class HereticSystem : SharedHereticSystem
     private void SetMinionsMaster(Entity<HereticComponent> ent, EntityUid? newMaster)
     {
         ent.Comp.Minions = ent.Comp.Minions.Where(Exists).ToHashSet();
+        var mobQuery = GetEntityQuery<MobStateComponent>();
         foreach (var uid in ent.Comp.Minions)
         {
+            if (!mobQuery.HasComp(uid))
+                continue;
             var minion = EnsureComp<HereticMinionComponent>(uid);
             minion.BoundHeretic = newMaster;
             Dirty(uid, minion);

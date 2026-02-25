@@ -305,6 +305,9 @@ public sealed class GhoulSystem : SharedGhoulSystem
         EntityUid? ritual = null,
         bool dirty = true)
     {
+        if (_heretic.TryGetHereticComponent(heretic, out var comp, out _))
+            comp.Minions.Add(ent);
+
         if (!Resolve(ent, ref ent.Comp1, false))
             ent.Comp1 = AddComp<HereticMinionComponent>(ent);
 

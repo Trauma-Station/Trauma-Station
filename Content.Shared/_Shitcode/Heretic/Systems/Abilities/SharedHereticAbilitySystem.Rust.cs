@@ -45,7 +45,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         SubscribeLocalEvent<RustbringerComponent, BeforeStaminaDamageEvent>(OnBeforeStaminaDamage);
         SubscribeLocalEvent<RustbringerComponent, KnockDownAttemptEvent>(OnKnockDownAttempt);
-        SubscribeLocalEvent<RustbringerComponent, BeforeStatusEffectAddedEvent>(OnBeforeStatusEffect);
+        SubscribeLocalEvent<RustbringerComponent, BeforeStatusEffectAddedEvent>(OnBeforeStatusEffect);sharedhereticrus
         SubscribeLocalEvent<RustbringerComponent, SlipAttemptEvent>(OnSlipAttempt);
         SubscribeLocalEvent<RustbringerComponent, GetExplosionResistanceEvent>(OnGetExplosionResists);
         SubscribeLocalEvent<RustbringerComponent, ElectrocutionAttemptEvent>(OnElectrocuteAttempt);
@@ -183,6 +183,9 @@ public abstract partial class SharedHereticAbilitySystem
         if (!TryUseAbility(args))
             return;
 
+        if (_net.IsClient)
+            return;
+
         var uid = args.Performer;
 
         Heretic.TryGetHereticComponent(uid, out var heretic, out _);
@@ -301,10 +304,12 @@ public abstract partial class SharedHereticAbilitySystem
 
         EnsureComp<RustedWallComponent>(targetEntity);
 
-        EnsureComp<RustRuneComponent>(targetEntity);
         // If targetEntity is target (which means no transformations were performed) - we add rust overlay
         if (targetEntity == target)
             EnsureComp<RustOverlayComponent>(targetEntity);
+
+        if (_net.IsServer)
+            EnsureComp<RustRuneComponent>(targetEntity);
 
         return true;
     }
