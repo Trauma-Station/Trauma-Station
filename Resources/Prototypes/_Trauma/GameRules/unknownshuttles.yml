@@ -7,4 +7,4 @@
     weight: 1
     eventType: FriendlySpawn # lol
   - type: LoadMapRule
-    preloadedGrid: /Maps/_Trauma/Shuttles/ShuttleEvent/botanyslopfactory.yml
+    gridPath: /Maps/_Trauma/Shuttles/ShuttleEvent/botanyslopfactory.yml
