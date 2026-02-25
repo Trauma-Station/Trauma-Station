@@ -35,7 +35,7 @@
   - type: TileEntityEffect
     effects:
     - !type:Flammable
-      fireProtectionPenetration: 0.5
+      fireProtectionPenetration: 0.35
       multiplier: 3.75
       multiplierOnExisting: 0.75
     - !type:Ignite
@@ -85,7 +85,7 @@
     drawdepth: Effects
     layers:
       - state: chemsmoke_white
-        color: "#ffffff28"
+        color: "#ffffff10"
   - type: TileEntityEffect
     effects:
     - !type:ModifyStatusEffect

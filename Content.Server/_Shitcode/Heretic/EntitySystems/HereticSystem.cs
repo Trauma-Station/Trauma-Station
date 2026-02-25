@@ -599,7 +599,7 @@ public sealed class HereticSystem : SharedHereticSystem
             for (var i = 0; i < amount; i++)
             {
                 var listing = _rand.PickAndTake(value);
-                listing.AddCostModifier(key, listing.Cost.ToDictionary(x => x.Key, x => -x.Value));
+                listing.AddCostModifier(key, listing.Cost.ToDictionary(x => x.Key, _ => -FixedPoint2.New(1)));
             }
         }
     }

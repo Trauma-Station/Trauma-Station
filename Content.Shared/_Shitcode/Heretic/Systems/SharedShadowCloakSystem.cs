@@ -1,3 +1,4 @@
+using Content.Goobstation.Common.Heretic;
 using Content.Goobstation.Common.Identity;
 using Content.Goobstation.Common.Speech;
 using Content.Medical.Common.DoAfter;
@@ -50,10 +51,17 @@ public abstract class SharedShadowCloakSystem : EntitySystem
         SubscribeLocalEvent<ShadowCloakedComponent, GetSpeechSoundEvent>(OnGetSpeechSound);
         SubscribeLocalEvent<ShadowCloakedComponent, GetEmoteSoundsEvent>(OnGetEmoteSound);
         SubscribeLocalEvent<ShadowCloakedComponent, GetBarkSourceEntityEvent>(OnGetBark);
+        SubscribeLocalEvent<ShadowCloakedComponent, GetVirtualItemBlockingEntityEvent>(OnGetBlockingEntity);
 
         SubscribeLocalEvent<ShadowCloakEntityComponent, EntParentChangedMessage>(OnEntParentChanged);
         SubscribeLocalEvent<ShadowCloakEntityComponent, ComponentShutdown>(OnCloakShutdown);
         SubscribeLocalEvent<ShadowCloakEntityComponent, DamageChangedEvent>(OnDamage);
+    }
+
+    private void OnGetBlockingEntity(Entity<ShadowCloakedComponent> ent, ref GetVirtualItemBlockingEntityEvent args)
+    {
+        if (GetShadowCloakEntity(ent) is { } cloak)
+            args.Uid = cloak;
     }
 
     private void OnGetBark(Entity<ShadowCloakedComponent> ent, ref GetBarkSourceEntityEvent args)

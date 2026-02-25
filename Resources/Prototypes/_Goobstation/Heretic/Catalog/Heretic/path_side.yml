@@ -164,7 +164,7 @@
     stage: 3
 
 - type: listing
-  id: HereticSidePath7RustWalker
+  id: HereticSidePath6RustWalker
   name: knowledge-path-side-s6-rustwalker-name
   description: knowledge-path-side-s6-rustwalker-desc
   icon: { sprite: _Goobstation/Heretic/eldritch_mobs.rsi, state: rust_walker }
@@ -183,7 +183,7 @@
     stage: 5
 
 - type: listing
-  id: HereticSidePath7CarvingKnife
+  id: HereticSidePath6CarvingKnife
   name: knowledge-path-side-s6-knife-name
   description: knowledge-path-side-s6-knife-desc
   icon: { sprite: _Goobstation/Heretic/items.rsi, state: rune_carver }
@@ -202,7 +202,7 @@
     stage: 5
 
 - type: listing
-  id: HereticSidePath7IceSpear
+  id: HereticSidePath6IceSpear
   name: knowledge-path-side-s6-ice-spear-name
   description: knowledge-path-side-s6-ice-spear-desc
   icon: { sprite: _Goobstation/Heretic/Entities/ice_spear.rsi, state: spear }
@@ -221,7 +221,7 @@
     stage: 5
 
 - type: listing
-  id: HereticSidePath7Morbus
+  id: HereticSidePath6Morbus
   name: knowledge-path-side-s6-morbus-name
   description: knowledge-path-side-s6-morbus-desc
   icon: { sprite: _Goobstation/Heretic/book_morbus.rsi, state: icon-on }
@@ -316,23 +316,23 @@
     stage: 5
 
 - type: listing
-  id: HereticSidePath6Grasp
-  name: knowledge-path-side-s6-grasp-name
-  description: knowledge-path-side-s6-grasp-desc
+  id: HereticSidePath8Grasp
+  name: knowledge-path-side-s8-grasp-name
+  description: knowledge-path-side-s8-grasp-desc
   icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: grasp_mind }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
     - MindGrasp
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
-  - HereticPathSideT2
+  - HereticPathSideT3
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 5
+    stage: 7
 
 - type: listing
   id: HereticSidePath8Cleave
@@ -344,7 +344,7 @@
     knowledge:
     - Cleave
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathSideT3
   conditions:
@@ -363,7 +363,7 @@
     knowledge:
     - SpacePhase
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathSideT3
   conditions:
@@ -382,7 +382,7 @@
     knowledge:
     - MaidInTheMirror
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathSideT3
   conditions:
@@ -401,7 +401,7 @@
     knowledge:
     - ForestAdmonitions
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathSideT3
   conditions:

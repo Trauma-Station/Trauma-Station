@@ -170,9 +170,9 @@ public sealed partial class BodySystem
                 vital++;
         }
 
-        return total == 0
+        return vital == 0
             ? 0f // no dividing by zero incase a body somehow has no parts?!
-            : (float) vital / total;
+            : (float) total / vital;
     }
 
     /// <summary>

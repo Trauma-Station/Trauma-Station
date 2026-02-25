@@ -12,6 +12,9 @@ public readonly record struct SetMultiShaderEvent(
 [ByRefEvent]
 public readonly record struct SetMultiShadersEvent(Dictionary<string, MultiShaderData>? PostShaders, bool Add);
 
+[ByRefEvent]
+public record struct GetMultiShadersEvent(Dictionary<string, MultiShaderData>? PostShaders = null);
+
 [DataDefinition]
 public sealed partial class MultiShaderData
 {

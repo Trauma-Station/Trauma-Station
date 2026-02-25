@@ -100,4 +100,5 @@ knowledge-path-flesh-s9-desc =
     When completed, you will become even stronger from consuming flesh.
     Additionally, upon taking damage, your body will split into flesh mimic. They will be given a Bloody Blade.
     You can only sustain 10 flesh mimics at once, taking even more damage will instead heal existing mimics.
+    Your Knit Flesh spell can now heal your minions in an area around you when using it in hand, at an increased cooldown.
     You will also become immune to extreme temperatures and pressure.

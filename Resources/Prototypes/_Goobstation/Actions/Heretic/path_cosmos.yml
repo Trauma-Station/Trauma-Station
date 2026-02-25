@@ -37,6 +37,9 @@
     event: !type:EventHereticStarTouch
   - type: HereticAction
     requireMagicItem: true
+  - type: Tag
+    tags:
+    - SpellIgnoreForestAdmonitions
 
 - type: entity
   id: ActionHereticStarBlast

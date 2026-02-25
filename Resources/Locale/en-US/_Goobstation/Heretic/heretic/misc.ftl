@@ -57,4 +57,9 @@ mawed-crucible-flask-full-message = flask is full!
 mirror-maid-examine-message-user = {$ent} seems to fade in and out slightly.
 mirror-maid-examine-message-maid = {$user}'s gaze pierces your every being!
 
-influence-heretic-examine-message = [color=purple]This is [bold]Tier {$tier}[/bold] reality shift. Collecting it with codex will allow you to choose one of three random [bold]Tier {$tier}[/bold] side knowledge upon reaching the required path stage.[/color]
+influence-heretic-examine-message =
+    {"["}color=purple]This is [bold]Tier {$tier}[/bold] reality shift.
+    Collecting it with codex will allow you to get one of three random [bold]Tier {$tier}[/bold] side knowledge { $tier ->
+        [3] for half the cost
+        *[other] for free
+    } upon reaching the required path stage.[/color]

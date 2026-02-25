@@ -18,6 +18,7 @@ namespace Content.Client._Shitcode.Heretic;
 public sealed class ShadowCloakSystem : SharedShadowCloakSystem
 {
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly AppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {
@@ -34,6 +35,26 @@ public sealed class ShadowCloakSystem : SharedShadowCloakSystem
 
         SubscribeLocalEvent<ShadowCloakedComponent, SetMultiShaderEvent>(OnShader);
         SubscribeLocalEvent<ShadowCloakedComponent, SetMultiShadersEvent>(OnShaders);
+
+        SubscribeLocalEvent<ShadowCloakEntityComponent, ComponentStartup>(OnEntityStartup);
+    }
+
+    private void OnEntityStartup(Entity<ShadowCloakEntityComponent> ent, ref ComponentStartup args)
+    {
+        if (!Exists(ent.Comp.User))
+            return;
+
+        // Update visual appearance - overlay layers and shaders
+        if (TryComp(ent.Comp.User.Value, out SpriteComponent? sprite))
+            _appearance.OnChangeData(ent.Comp.User.Value, sprite);
+
+        var ev = new GetMultiShadersEvent();
+        RaiseLocalEvent(ent.Comp.User.Value, ref ev);
+        if (ev.PostShaders == null)
+            return;
+
+        var setEv = new SetMultiShadersEvent(ev.PostShaders, true);
+        RaiseLocalEvent(ent, ref setEv);
     }
 
     private void OnShader(Entity<ShadowCloakedComponent> ent, ref SetMultiShaderEvent args)

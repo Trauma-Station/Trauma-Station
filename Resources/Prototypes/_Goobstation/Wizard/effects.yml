@@ -106,6 +106,9 @@
     duration: 0.5
   - type: TimedDespawn
     lifetime: 0.5
+  - type: Tag
+    tags:
+    - HideContextMenu
 
 - type: entity
   parent: BaseFlashEffect

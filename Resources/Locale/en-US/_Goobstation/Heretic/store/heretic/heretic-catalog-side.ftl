@@ -165,8 +165,9 @@ knowledge-path-side-s6-sword-desc =
     More importantly, attacking with the sword will mark the target with combat mark of any Path of Decay.
     The sword cannot trigger the mark by itself - best used in combination with heretic blade.
 
-knowledge-path-side-s6-grasp-name = Mind Grasp
-knowledge-path-side-s6-grasp-desc =
+## stage 8
+knowledge-path-side-s8-grasp-name = Mind Grasp
+knowledge-path-side-s8-grasp-desc =
     You believe that your mind is a fortress.
     You picture walls of reason, towers of will, and a sanctum to which you hold the key.
     A comforting lie. The walls are only shadows cast by the light of their own fragile understanding.
@@ -177,7 +178,6 @@ knowledge-path-side-s6-grasp-desc =
     The longer you channel it - the higher the range will be. Channeling can be stopped early by activating grasp again.
     Area of effect grasp suffers increased cooldown, scaled by range and the number of victims.
 
-## stage 8
 knowledge-path-side-s8-cleave-name = Blood Cleave
 knowledge-path-side-s8-cleave-desc =
     At first I didn't understand these instruments of war, but the Priest told me to use them regardless. Soon, he said, I would know them well.

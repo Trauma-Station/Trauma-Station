@@ -58,7 +58,7 @@ public sealed class AreaMansusGraspOverlay : Overlay
         }
 
         var query2 = _entMan.EntityQueryEnumerator<AreaGraspEffectComponent, TransformComponent>();
-        while (query2.MoveNext(out var uid, out var effect, out var xform))
+        while (query2.MoveNext(out _, out var effect, out var xform))
         {
             if (effect.Size <= 0)
                 continue;

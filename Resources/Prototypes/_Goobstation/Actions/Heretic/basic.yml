@@ -25,6 +25,9 @@
     event: !type:EventHereticOpenStore {}
   - type: HereticAction
     requireMagicItem: false
+  - type: Tag
+    tags:
+    - SpellIgnoreForestAdmonitions
 
 - type: entity
   parent: BaseAction
@@ -42,6 +45,9 @@
     event: !type:EventHereticMansusGrasp {}
   - type: HereticAction
     requireMagicItem: false
+  - type: Tag
+    tags:
+    - SpellIgnoreForestAdmonitions
 
 - type: entity
   parent: BaseAction
@@ -60,11 +66,14 @@
     event: !type:EventHereticLivingHeart {}
   - type: HereticAction
     requireMagicItem: false
+  - type: Tag
+    tags:
+    - SpellIgnoreForestAdmonitions
 
 - type: entity
   parent: BaseAction
   id: ActionHereticMansusLink
-  name: Manse Link
+  name: Mansus Link
   description: Pierce through reality and connect minds to one another. Default key is +m
   categories: [ HideSpawnMenu ]
   components:

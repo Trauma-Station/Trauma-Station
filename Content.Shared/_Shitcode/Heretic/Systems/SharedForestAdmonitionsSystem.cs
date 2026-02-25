@@ -2,8 +2,10 @@ using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.Examine;
 using Content.Shared.Heretic;
+using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._Shitcode.Heretic.Systems;
@@ -14,6 +16,9 @@ public abstract class SharedForestAdmonitionsSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem XForm = default!;
 
     [Dependency] private readonly SharedShadowCloakSystem _cloak = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+
+    private static readonly ProtoId<TagPrototype> IgnoreTag = "SpellIgnoreForestAdmonitions";
 
     public override void Initialize()
     {
@@ -23,6 +28,7 @@ public abstract class SharedForestAdmonitionsSystem : EntitySystem
 
         SubscribeLocalEvent<ForestAdmonitionsComponent, SelfBeforeGunShotEvent>(OnShot);
         SubscribeLocalEvent<ForestAdmonitionsComponent, BeforeThrowEvent>(OnThrow);
+        SubscribeLocalEvent<ForestAdmonitionsComponent, UserInvokeTouchSpellEvent>(OnTouchSpellInvoke);
 
         SubscribeLocalEvent<ForestAdmonitionsEntityComponent, ExamineAttemptEvent>(OnAttempt);
     }
@@ -31,6 +37,11 @@ public abstract class SharedForestAdmonitionsSystem : EntitySystem
     {
         if (CalculateVisibilityFactor(ent, args.Examiner) < ent.Comp.ExamineThreshold)
             args.Cancel();
+    }
+
+    private void OnTouchSpellInvoke(Entity<ForestAdmonitionsComponent> ent, ref UserInvokeTouchSpellEvent args)
+    {
+        RevealCloak(ent.AsNullable());
     }
 
     private void OnThrow(Entity<ForestAdmonitionsComponent> ent, ref BeforeThrowEvent args)
@@ -45,6 +56,9 @@ public abstract class SharedForestAdmonitionsSystem : EntitySystem
 
     private void OnAction(Entity<HereticActionComponent> ent, ref ActionPerformedEvent args)
     {
+        if (_tag.HasTag(ent, IgnoreTag))
+            return;
+
         RevealCloak(args.Performer);
     }
 

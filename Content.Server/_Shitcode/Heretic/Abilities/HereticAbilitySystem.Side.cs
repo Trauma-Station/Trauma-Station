@@ -41,7 +41,7 @@ public sealed partial class HereticAbilitySystem
         if (!_actions.TryGetActionById(ent.Owner, args.Action, out var act))
             return;
 
-        _actions.RemoveAction(act.Value.AsNullable());
+        _actionContainer.RemoveAction(act.Value.AsNullable());
     }
 
     private void OnGraspUpgrade(Entity<HereticComponent> ent, ref HereticGraspUpgradeEvent args)

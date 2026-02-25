@@ -62,7 +62,7 @@ public sealed partial class FireBlastedComponent : BaseSpriteOverlayComponent
     public float CollisionFireStacks = 0.5f;
 
     [DataField]
-    public float FireProtectionPenetration = 0.5f;
+    public float FireProtectionPenetration = 0.35f;
 
     [DataField]
     public DamageSpecifier FireBlastDamage = new()

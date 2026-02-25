@@ -98,6 +98,9 @@
   id: RitualKnowledge
 
 - type: Tag
+  id: SpellIgnoreForestAdmonitions
+
+- type: Tag
   id: TechfabMachineBoard
 
 - type: Tag

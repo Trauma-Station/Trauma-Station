@@ -16,6 +16,13 @@ public sealed class MultiShaderSystem : EntitySystem
 
         SubscribeLocalEvent<SpriteComponent, SetMultiShaderEvent>(OnShader);
         SubscribeLocalEvent<SpriteComponent, SetMultiShadersEvent>(OnShaders);
+
+        SubscribeLocalEvent<MultiShaderSpriteComponent, GetMultiShadersEvent>(OnGetShaders);
+    }
+
+    private void OnGetShaders(Entity<MultiShaderSpriteComponent> ent, ref GetMultiShadersEvent args)
+    {
+        args.PostShaders = ent.Comp.PostShaders;
     }
 
     public void OnShaders(Entity<SpriteComponent> ent, ref SetMultiShadersEvent args)

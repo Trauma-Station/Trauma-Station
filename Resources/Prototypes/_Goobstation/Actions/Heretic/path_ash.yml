@@ -88,6 +88,7 @@
   - type: ChangeUseDelayOnAscension
     newUseDelay: 10
     requiredPath: Ash
+  - type: NightwatcherRebirthAction
 
 - type: entity
   parent: BaseAction

@@ -176,10 +176,11 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         var originPos = Xform.GetMapCoordinates(origin);
         var targetPos = Xform.GetMapCoordinates(target);
 
-        var dir = (originPos.Position - targetPos.Position).Normalized();
+        var dir = originPos.Position - targetPos.Position;
 
-        var ray = new CollisionRay(originPos.Position, dir, (int) CollisionGroup.Opaque);
-        var result = _physics.IntersectRay(originPos.MapId, ray, origin.Comp.FireBlastRange, origin, false);
+        var ray = new CollisionRay(targetPos.Position, dir.Normalized(), (int) CollisionGroup.Opaque);
+        var dist = MathF.Min(dir.Length(), origin.Comp.FireBlastRange);
+        var result = _physics.IntersectRay(originPos.MapId, ray, dist, origin, false);
 
         var flammableQuery = GetEntityQuery<FlammableComponent>();
         var ghoulQuery = GetEntityQuery<GhoulComponent>();

@@ -74,6 +74,7 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Standing;
 using Content.Shared._Starlight.CollectiveMind;
+using Content.Shared.Actions;
 using Content.Shared.Hands.Components;
 using Content.Shared.Tag;
 using Content.Shared.Weather;
@@ -107,8 +108,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly TemperatureSystem _temperature = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly RespiratorSystem _respirator = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly MansusGraspSystem _mansusGrasp = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
@@ -117,6 +116,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private readonly SharedWeatherSystem _weather = default!;
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
+    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
 
 
     private static readonly ProtoId<TagPrototype> BladeBladeRitualTag = "RitualBladeBlade";
@@ -140,14 +140,14 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         SubscribeLock();
     }
 
-    public override void InvokeTouchSpell<T>(Entity<T> ent, EntityUid user)
+    public override void InvokeTouchSpell<T>(Entity<T> ent, EntityUid user, TimeSpan? cooldownOverride = null)
     {
-        base.InvokeTouchSpell(ent, user);
+        base.InvokeTouchSpell(ent, user, cooldownOverride);
 
         _chat.TrySendInGameICMessage(user, Loc.GetString(ent.Comp.Speech), InGameICChatType.Speak, false);
 
         if (Exists(ent.Comp.Action))
-            _actions.SetCooldown(ent.Comp.Action.Value, ent.Comp.Cooldown);
+            _actions.SetCooldown(ent.Comp.Action.Value, cooldownOverride ?? ent.Comp.Cooldown);
 
         QueueDel(ent);
     }

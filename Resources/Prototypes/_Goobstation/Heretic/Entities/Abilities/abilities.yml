@@ -55,7 +55,7 @@
   - type: EntropicPlume
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: EffectCleave
@@ -72,24 +72,44 @@
       state: cleave
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
+  parent: BaseFlashEffect
   id: EffectVolcanoExplosion
   categories: [ HideSpawnMenu ]
   components:
+  - type: PointLight
+    color: "#ff8b33"
+  - type: LightFade
+    duration: 0.8
   - type: TimedDespawn
     lifetime: 0.8
   - type: Sprite
     noRot: true
     drawdepth: Effects
     layers:
-      - shader: unshaded
-        sprite: _Goobstation/Heretic/Effects/effects.rsi
-        state: explosion
+    - shader: unshaded
+      sprite: _Goobstation/Heretic/Effects/effects.rsi
+      state: explosion
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
+
+- type: entity
+  id: HereticCascade
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 5.1
+  - type: HereticFlames
+    range: 0
+    rangeIncrease: 1
+    updateDuration: 0.5
+    lifetimeDuration: 6
+  - type: Tag
+    tags:
+    - HideContextMenu
 
 - type: entity
   id: EffectVoidBlinkIn
@@ -101,11 +121,11 @@
     noRot: true
     drawdepth: Effects
     layers:
-      - sprite: _Goobstation/Heretic/Effects/effects96x96.rsi
-        state: void_blink_in
+    - sprite: _Goobstation/Heretic/Effects/effects96x96.rsi
+      state: void_blink_in
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: EffectVoidBlinkOut
@@ -117,11 +137,11 @@
     noRot: true
     drawdepth: Effects
     layers:
-      - sprite: _Goobstation/Heretic/Effects/effects96x96.rsi
-        state: void_blink_out
+    - sprite: _Goobstation/Heretic/Effects/effects96x96.rsi
+      state: void_blink_out
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: BaseShadowCloakEntity
@@ -197,7 +217,7 @@
       state: cosmic_diamond
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
   - type: FadingTimedDespawn
     fadeOutTime: 3
     lifetime: 15
@@ -217,7 +237,7 @@
       state: cosmic_cloud
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: EffectCosmicExplosion
@@ -234,7 +254,7 @@
       state: cosmic_explosion
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: EffectSpaceExplosion
@@ -251,7 +271,7 @@
       state: space_explosion
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: EffectCosmicDomain
@@ -268,7 +288,7 @@
       state: cosmic_domain
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: EffectCosmicSlash
@@ -286,7 +306,7 @@
       state: cosmic_slash
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: WeaponArcHereticCosmic
@@ -317,7 +337,7 @@
       state: gazer_beam_charge
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: EffectVoidPrisonEnd
@@ -334,7 +354,7 @@
       state: voidball_closing
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: VoidConduit

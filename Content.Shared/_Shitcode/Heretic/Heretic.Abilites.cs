@@ -150,7 +150,7 @@ public sealed partial class EventHereticVolcanoBlast : InstantActionEvent
 public sealed partial class EventHereticNightwatcherRebirth : InstantActionEvent
 {
     [DataField]
-    public float Range = 7f;
+    public float Range = 14f;
 
     [DataField]
     public DamageSpecifier Damage = new()
@@ -162,16 +162,21 @@ public sealed partial class EventHereticNightwatcherRebirth : InstantActionEvent
     };
 
     [DataField]
-    public float FireStacks = 3f;
-
-    [DataField]
     public float FireProtectionPenetration = 0.5f;
 
     [DataField]
     public float HealAmount = -10f;
+
+    [DataField]
+    public EntProtoId Effect = "NightwatcherEffect";
 }
 public sealed partial class EventHereticFlames : InstantActionEvent { }
-public sealed partial class EventHereticCascade : InstantActionEvent { }
+
+public sealed partial class EventHereticCascade : InstantActionEvent
+{
+    [DataField]
+    public EntProtoId CascadeEnt = "HereticCascade";
+}
 
 // flesh
 public sealed partial class EventHereticFleshSurgery : InstantActionEvent, ITouchSpellEvent

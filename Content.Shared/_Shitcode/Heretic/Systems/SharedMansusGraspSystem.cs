@@ -37,7 +37,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Silicons.StationAi;
-using Content.Shared.Species;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
@@ -142,9 +141,9 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         return MathHelper.Lerp(ent.Comp.MinRange, ent.Comp.MaxRange, blend);
     }
 
-    public TimeSpan CalculateAreaGraspCooldown(float baseCooldown, int hitCount, float range)
+    public TimeSpan CalculateAreaGraspCooldown(float baseCooldown, int hitCount, float range, float multiplier = 2f)
     {
-        var cd = baseCooldown * (1f + 2f * MathF.Pow(range, 0.8f) * (1f - 1f / (MathF.Pow(hitCount, 0.8f) + 1f)));
+        var cd = baseCooldown * (1f + multiplier * MathF.Pow(range, 0.8f) * (1f - 1f / (MathF.Pow(hitCount, 0.8f) + 1f)));
         return TimeSpan.FromSeconds(cd);
     }
 

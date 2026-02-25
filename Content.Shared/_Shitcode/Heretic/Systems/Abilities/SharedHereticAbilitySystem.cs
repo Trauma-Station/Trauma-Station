@@ -84,6 +84,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
     [Dependency] private readonly SharedEnsnareableSystem _snare = default!;
+    [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
 
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
 
@@ -133,14 +134,12 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         var list = new List<Entity<MobStateComponent>>();
         var lookup = Lookup.GetEntitiesInRange<MobStateComponent>(coords ?? Transform(ent).Coordinates, range);
 
+        var ghoulQuery = GetEntityQuery<GhoulComponent>();
         foreach (var look in lookup)
         {
             // ignore heretics with the same path*, affect everyone else
             if (Heretic.TryGetHereticComponent(look.Owner, out var th, out _) && th.CurrentPath == path ||
-                HasComp<GhoulComponent>(look))
-                continue;
-
-            if (!HasComp<StatusEffectsComponent>(look))
+                ghoulQuery.HasComp(look))
                 continue;
 
             if (checkNullRod)
@@ -339,8 +338,12 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         }
     }
 
-    public virtual void InvokeTouchSpell<T>(Entity<T> ent, EntityUid user) where T : Component, ITouchSpell
+    public virtual void InvokeTouchSpell<T>(Entity<T> ent, EntityUid user, TimeSpan? cooldownOverride = null)
+        where T : Component, ITouchSpell
     {
         _audio.PlayPredicted(ent.Comp.Sound, user, user);
+
+        var ev = new UserInvokeTouchSpellEvent();
+        RaiseLocalEvent(user, ref ev);
     }
 }
