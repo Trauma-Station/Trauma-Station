@@ -37,6 +37,7 @@ using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server._Goobstation.Objectives.Components;
 using Content.Server.Actions;
 using Content.Server.Chat.Managers;
+using Content.Server.GameTicking.Rules;
 using Content.Shared.Humanoid;
 using Content.Server.Revolutionary.Components;
 using Content.Shared._Shitcode.Heretic.Components;
@@ -81,6 +82,7 @@ public sealed class HereticSystem : SharedHereticSystem
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly PvsOverrideSystem _override = default!;
+    [Dependency] private readonly HereticRuleSystem _rule = default!;
 
     [Dependency] private readonly IRobustRandom _rand = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
@@ -605,16 +607,18 @@ public sealed class HereticSystem : SharedHereticSystem
             UpdateHereticCostModifiers(ent.AsNullable(), cat, args.Data);
     }
 
-    public override void UpdateHereticCostModifiers(Entity<HereticComponent?, StoreComponent?> ent,
+    public override void UpdateHereticCostModifiers(Entity<HereticComponent?> ent,
         ProtoId<StoreCategoryPrototype>? category = null,
         ListingDataWithCostModifiers? except = null)
     {
         base.UpdateHereticCostModifiers(ent, category, except);
 
-        if (!Resolve(ent, ref ent.Comp1, ref ent.Comp2))
+        if (!Resolve(ent, ref ent.Comp))
             return;
 
-        var allListings = _store.GetAvailableListings(ent, ent, ent.Comp2).ToList();
+        var store = CompOrNull<StoreComponent>(ent) ?? _rule.InitializeStore(ent);
+
+        var allListings = _store.GetAvailableListings(ent, ent, store).ToList();
 
         if (except is { } e)
             allListings.Remove(e);
@@ -622,7 +626,7 @@ public sealed class HereticSystem : SharedHereticSystem
         // Order listings by category
         var listings = allListings
             .Where(x => x.Categories.FirstOrNull() is { } cat && (category == null || cat == category) &&
-                        ent.Comp1.SideKnowledgeDrafts.TryGetValue(cat, out var amount) && amount > 0)
+                        ent.Comp.SideKnowledgeDrafts.TryGetValue(cat, out var amount) && amount > 0)
             .DistinctBy(x => x.Categories.First())
             .ToDictionary(x => x.Categories.First(),
                 x => allListings.Where(y => y.Categories.Intersect(x.Categories).Any()).ToList());
@@ -632,7 +636,7 @@ public sealed class HereticSystem : SharedHereticSystem
             if (value.Count == 0 || value.Any(x => x.CostModifiersBySourceId.ContainsKey(key)))
                 continue;
 
-            var amount = Math.Min(value.Count, ent.Comp1.SideDraftChoiceAmount);
+            var amount = Math.Min(value.Count, ent.Comp.SideDraftChoiceAmount);
             for (var i = 0; i < amount; i++)
             {
                 var listing = _rand.PickAndTake(value);

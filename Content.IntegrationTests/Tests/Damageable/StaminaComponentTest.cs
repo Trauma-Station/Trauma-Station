@@ -18,7 +18,7 @@ public sealed class StaminaComponentTest
             {
                 foreach (var (proto, comp) in protos)
                 {
-                    Assert.That(comp.AnimationThreshold, Is.LessThan(comp.CritThreshold),
+                    Assert.That(comp.AnimationThreshold, Is.LessThan(comp.BaseCritThreshold), // Trauma - CritThreshold -> BaseCritThreshold
                         $"Animation threshold on {proto.ID} must be less than its crit threshold.");
                 }
             });

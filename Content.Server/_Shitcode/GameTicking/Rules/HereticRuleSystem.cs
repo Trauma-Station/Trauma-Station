@@ -27,6 +27,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using System.Text;
 using Content.Server._Goobstation.Objectives.Components;
+using Content.Server.Roles;
 using Content.Shared.Mind;
 using Robust.Server.GameObjects;
 
@@ -57,7 +58,20 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
         SubscribeLocalEvent<HereticRuleComponent, AfterAntagEntitySelectedEvent>(OnAntagSelect);
         SubscribeLocalEvent<HereticRuleComponent, ObjectivesTextPrependEvent>(OnTextPrepend);
 
+        SubscribeLocalEvent<HereticRoleComponent, GetBriefingEvent>(OnGetBriefing);
+
         SubscribeLocalEvent<SpawnHereticInfluenceEvent>(OnSpawn);
+    }
+
+    private void OnGetBriefing(Entity<HereticRoleComponent> ent, ref GetBriefingEvent args)
+    {
+        var uid = args.Mind.Comp.OwnedEntity;
+
+        if (uid == null)
+            return;
+
+        var briefingShort = Loc.GetString("heretic-role-greeting-short");
+        args.Append(briefingShort);
     }
 
     private void OnSpawn(ref SpawnHereticInfluenceEvent ev)
@@ -100,22 +114,12 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
         // briefing
         if (HasComp<MetaDataComponent>(target))
         {
-            var briefingShort = Loc.GetString("heretic-role-greeting-short");
-
             _antag.SendBriefing(target, Loc.GetString("heretic-role-greeting-fluff"), Color.MediumPurple, null);
             _antag.SendBriefing(target, Loc.GetString("heretic-role-greeting"), Color.Red, BriefingSound);
-
-            if (_role.MindHasRole<HereticRoleComponent>(mindId, out var mr))
-                AddComp(mr.Value, new RoleBriefingComponent { Briefing = briefingShort }, overwrite: true);
         }
 
         // add store
-        var store = EnsureComp<StoreComponent>(mindId);
-        foreach (var category in rule.StoreCategories)
-        {
-            store.Categories.Add(category);
-        }
-        store.CurrencyWhitelist.Add(Currency);
+        InitializeStore(mindId);
 
         // heretic after store because it requires store on startup
         EnsureComp<HereticComponent>(mindId);
@@ -126,6 +130,17 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
         _ui.SetUi(mindId, HereticLivingHeartKey.Key, new InterfaceData("LivingHeartMenuBoundUserInterface", -1));
 
         return true;
+    }
+
+    public StoreComponent InitializeStore(EntityUid mindId)
+    {
+        var store = EnsureComp<StoreComponent>(mindId);
+        foreach (var category in HereticRuleComponent.StoreCategories)
+        {
+            store.Categories.Add(category);
+        }
+        store.CurrencyWhitelist.Add(Currency);
+        return store;
     }
 
     public void OnTextPrepend(Entity<HereticRuleComponent> ent, ref ObjectivesTextPrependEvent args)
