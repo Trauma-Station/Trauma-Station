@@ -15,7 +15,8 @@ public sealed class RandomHumanoidAppearanceSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RandomHumanoidAppearanceComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RandomHumanoidAppearanceComponent, MapInitEvent>(OnMapInit,
+            after: [ typeof(InitialBodySystem), typeof(SharedVisualBodySystem) ] ); // Trauma - only set skin color etc after body has been spawned
     }
 
     private void OnMapInit(EntityUid uid, RandomHumanoidAppearanceComponent component, MapInitEvent args)

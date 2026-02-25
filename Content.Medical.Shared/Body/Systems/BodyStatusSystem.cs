@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Medical.Shared.Wounds;
+using Content.Shared.Body;
 using Content.Shared.Mobs;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
@@ -17,6 +18,8 @@ public sealed class BodyStatusSystem : EntitySystem
 
         SubscribeLocalEvent<BodyStatusComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<BodyStatusComponent, MobStateChangedEvent>(OnMobStateChange);
+        SubscribeLocalEvent<BodyStatusComponent, OrganInsertedIntoEvent>(OnOrganInserted);
+        SubscribeLocalEvent<BodyStatusComponent, OrganRemovedFromEvent>(OnOrganRemoved);
     }
 
     private void OnMapInit(Entity<BodyStatusComponent> ent, ref MapInitEvent args)
@@ -25,6 +28,16 @@ public sealed class BodyStatusSystem : EntitySystem
     }
 
     private void OnMobStateChange(Entity<BodyStatusComponent> ent, ref MobStateChangedEvent args)
+    {
+        UpdateStatus(ent.AsNullable());
+    }
+
+    private void OnOrganInserted(Entity<BodyStatusComponent> ent, ref OrganInsertedIntoEvent args)
+    {
+        UpdateStatus(ent.AsNullable());
+    }
+
+    private void OnOrganRemoved(Entity<BodyStatusComponent> ent, ref OrganRemovedFromEvent args)
     {
         UpdateStatus(ent.AsNullable());
     }

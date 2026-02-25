@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Medical.Shared.Traits;
 using Content.Shared.Body;
 using Content.Shared.Containers;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Standing;
+using Content.Shared.Traits.Assorted;
 
 namespace Content.Medical.Shared.Body;
 
@@ -30,8 +30,8 @@ public sealed partial class LegsSystem : EntitySystem
         SubscribeLocalEvent<MovementBodyPartComponent, OrganGotInsertedEvent>(OnLegAdded);
         SubscribeLocalEvent<MovementBodyPartComponent, OrganGotRemovedEvent>(OnLegRemoved);
 
-        SubscribeLocalEvent<LegsStartParalyzedComponent, MapInitEvent>(OnParalyzedInit,
-            after: [ typeof(ContainerFillSystem) ]); // run after the organs are added
+        SubscribeLocalEvent<LegsParalyzedComponent, MapInitEvent>(OnParalyzedInit,
+            after: [ typeof(InitialBodySystem) ]); // run after the organs are added
     }
 
     private void OnStandAttempt(Entity<LegsComponent> ent, ref StandAttemptEvent args)
@@ -76,7 +76,7 @@ public sealed partial class LegsSystem : EntitySystem
         UpdateMovementSpeed((args.Target, comp));
     }
 
-    private void OnParalyzedInit(Entity<LegsStartParalyzedComponent> ent, ref MapInitEvent args)
+    private void OnParalyzedInit(Entity<LegsParalyzedComponent> ent, ref MapInitEvent args)
     {
         if (!_query.TryComp(ent, out var legs))
             return;
@@ -105,6 +105,12 @@ public sealed partial class LegsSystem : EntitySystem
             sprintSpeed += comp.SprintSpeed;
             acceleration += comp.Acceleration;
         }
+
+        // bare minimum speeds for crawling if you have no legs
+        // could make it need arms too, but torsolo...
+        walkSpeed = Math.Max(walkSpeed, 1f);
+        sprintSpeed = Math.Max(sprintSpeed, 1f);
+        acceleration = Math.Max(acceleration, 0.5f);
 
         // missing a leg makes you move at half speed
         // somehow having 3+ legs makes you fast

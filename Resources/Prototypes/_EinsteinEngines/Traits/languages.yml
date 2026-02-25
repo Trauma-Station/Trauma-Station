@@ -93,20 +93,6 @@
   languagesUnderstood:
     - Elyran
 
-# Commented out since it's species-specific.
-# - type: trait
-#   id: ValyrianStandard
-#   name: trait-language-valyrianstandard-name
-#   description: trait-language-valyrianstandard-desc
-#   category: LanguageTraits
-#   cost: 1
-#   functions:
-#     - !type:TraitModifyLanguages
-#       languagesSpoken:
-#         - ValyrianStandard
-#       languagesUnderstood:
-#         - ValyrianStandard
-
 - type: trait
   id: NovuNederic
   name: trait-language-novunederic-name

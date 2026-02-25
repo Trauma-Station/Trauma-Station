@@ -33,4 +33,4 @@
     damage:
       types:
         Piercing: 5 # it's more of a utility
-  # TODO: add transfer reagents action to the shooter when it embeds
+  - type: ChemTransferProjectile

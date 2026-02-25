@@ -19,6 +19,7 @@ public sealed class MindReadActionSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedChatManager _chatMan = default!;
+    [Dependency] private readonly MindMessagesSystem _messages = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
@@ -53,13 +54,13 @@ public sealed class MindReadActionSystem : EntitySystem
         var identity = Identity.Name(target, EntityManager);
         if (!_mind.TryGetMind(target, out var mindId, out var mind))
         {
-            _popup.PopupClient(Loc.GetString("MutationMindRead-popup-target-mindless", ("target", identity)), user, user);
+            _popup.PopupClient(Loc.GetString("MutationMindReader-popup-target-mindless", ("target", identity)), user, user);
             return;
         }
 
         if (_mob.IsDead(target))
         {
-            _popup.PopupClient(Loc.GetString("MutationMindRead-popup-target-dead", ("target", identity)), user, user);
+            _popup.PopupClient(Loc.GetString("MutationMindReader-popup-target-dead", ("target", identity)), user, user);
             return;
         }
 
@@ -68,54 +69,62 @@ public sealed class MindReadActionSystem : EntitySystem
         RaiseLocalEvent(target, ev);
         if (ev.Cancelled)
         {
-            _popup.PopupClient(Loc.GetString("MutationMindRead-popup-mind-protected", ("target", identity)), user, user);
+            _popup.PopupClient(Loc.GetString("MutationMindReader-popup-mind-protected", ("target", identity)), user, user);
             return;
         }
 
         if (user == target)
         {
-            _popup.PopupClient(Loc.GetString("MutationMindRead-popup-self"), user, user);
+            _popup.PopupClient(Loc.GetString("MutationMindReader-popup-self"), user, user);
             return;
         }
 
-        _popup.PopupClient(Loc.GetString("MutationMindRead-popup-plunge", ("target", identity)), user, user);
+        _popup.PopupClient(Loc.GetString("MutationMindReader-popup-plunge", ("target", identity)), user, user);
 
         // you don't know details about other players' minds.
         // also it's using chatcode anyway
         if (_net.IsClient) return;
 
-        // TODO: evil check
         if (_evil.IsEvil(target))
         {
             var alsoEvil = _evil.IsEvil(user);
             var key = alsoEvil ? "also" : "not";
             Color? color = alsoEvil ? Color.Red : null; // if you are evil too this isn't scary...
-            Tell(channel, Loc.GetString("MutationMindRead-popup-target-evil"), color);
-            Tell(channel, Loc.GetString("MutationMindRead-popup-{key}-evil"), color);
+            Tell(channel, Loc.GetString("MutationMindReader-popup-target-evil"), color);
+            Tell(channel, Loc.GetString($"MutationMindReader-popup-{key}-evil"), color);
         }
 
         // chance to alert the target
         if (_random.Prob(ent.Comp.AlertProb))
-            _popup.PopupEntity(Loc.GetString("MutationMindRead-popup-alert"), target, target, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("MutationMindReader-popup-alert"), target, target, PopupType.MediumCaution);
 
-        _recent.Clear();
-        // TODO: copy recent chat messages
-        if (_recent.Count > 0)
+        if (_messages.GetMessages(mindId) is {} messages)
         {
-            Tell(channel, Loc.GetString("MutationMindRead-popup-messages"));
-            foreach (var message in _recent)
+            _recent.Clear();
+            for (int i = 0; i < _random.Next(ent.Comp.MaxMessages); i++)
             {
-                Tell(channel, Loc.GetString("MutationMindRead-popup-message-format", ("message", message)));
+                var msg = _messages.GetMessage(messages, i);
+                if (msg.Length > 0 && _random.Prob(ent.Comp.MessageChance))
+                    _recent.Add(msg);
+            }
+
+            if (_recent.Count > 0)
+            {
+                Tell(channel, Loc.GetString("MutationMindReader-popup-messages", ("target", target)));
+                foreach (var msg in _recent)
+                {
+                    Tell(channel, Loc.GetString("MutationMindReader-popup-message-format", ("message", msg)));
+                }
             }
         }
 
         // doesn't matter much because of combat mode spinning but parity
         var combat = _combatMode.IsInCombatMode(target);
-        Tell(channel, Loc.GetString("MutationMindRead-popup-combat-mode", ("target", target), ("combat", combat)));
+        Tell(channel, Loc.GetString("MutationMindReader-popup-combat-mode", ("target", target), ("combat", combat)));
 
         // reveal mindswaps or whatever
         if (mind.CharacterName is {} name && name != identity)
-            Tell(channel, Loc.GetString("MutationMindRead-popup-true-identity", ("target", target), ("name", name)), Color.Red);
+            Tell(channel, Loc.GetString("MutationMindReader-popup-true-identity", ("target", target), ("name", name)), Color.Red);
     }
 
     private void Tell(INetChannel client, string message, Color? color = null)

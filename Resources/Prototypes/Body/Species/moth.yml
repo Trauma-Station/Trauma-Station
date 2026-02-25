@@ -111,6 +111,7 @@
     organs:
       Torso: OrganMothTorso
       Head: OrganMothHead
+      Wings: OrganMothWings # Trauma
       ArmLeft: OrganMothArmLeft
       ArmRight: OrganMothArmRight
       HandRight: OrganMothHandRight
@@ -166,10 +167,10 @@
       Male: UnisexMoth
       Female: UnisexMoth
       Unsexed: UnisexMoth
-  - type: MovementSpeedModifier
-    baseWeightlessAcceleration: 1.5 # Move around more easily in space.
-    baseWeightlessFriction: 1
-    baseWeightlessModifier: 1
+  #- type: MovementSpeedModifier
+  #  baseWeightlessAcceleration: 1.5 # Move around more easily in space.
+  #  baseWeightlessFriction: 1
+  #  baseWeightlessModifier: 1
   - type: Flammable
     damage:
       types:
@@ -238,7 +239,7 @@
     sprite: Mobs/Species/Moth/parts.rsi
 
 - type: entity
-  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganMothExternal ]
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorsoWinged, OrganMothExternal ] # Trauma - Winged torso
   id: OrganMothTorso
 
 - type: entity

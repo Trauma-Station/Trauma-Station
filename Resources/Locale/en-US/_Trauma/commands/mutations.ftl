@@ -4,3 +4,4 @@ command-description-mutation-clear = Removes all active and dormant mutations fr
 command-description-mutation-list = Returns a list of active mutations an entity has.
 command-description-mutation-dormant = Returns a list of dormant mutations an entity has.
 command-description-mutation-scramble = Clears then randomizes an entity's dormant mutations.
+command-description-mutation-dump = Lists the active and dormant mutations an entity has, as well as their round number and entityuid.

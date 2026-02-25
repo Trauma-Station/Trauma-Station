@@ -4,11 +4,9 @@
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Species/Reptilian/parts.rsi
-    layers:
-    - state: tail
   - type: VisualOrgan
     data:
-      sprite: _Trauma/Mobs/Species/Reptilian/parts.rsi
+      sprite: _Trauma/empty.rsi
       state: empty # no sprite since the markings actually control it
   - type: PullerTail
     speciesWhitelist:

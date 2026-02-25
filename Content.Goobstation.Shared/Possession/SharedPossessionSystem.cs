@@ -40,6 +40,7 @@ public abstract class SharedPossessionSystem : EntitySystem
         if (ent.Comp.LifeStage > ComponentLifeStage.Running)
             return;
 
+        args.WeakToHoly = true;
         args.ShouldTakeHoly = true;
     }
 

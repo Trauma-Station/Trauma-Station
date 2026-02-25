@@ -64,7 +64,6 @@
   - !type:AddComponents
     guidebookText: entity-effect-guidebook-paralyze-legs
     components:
-    - type: LegsStartParalyzed
     - type: LegsParalyzed
   - !type:PopupMessage
     type: Pvs

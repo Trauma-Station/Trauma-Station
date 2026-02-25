@@ -103,3 +103,10 @@ Entries:
   id: 9
   time: '2026-02-17T09:46:42.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/707
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Fixed contractor shuttle's power.
+  id: 10
+  time: '2026-02-24T10:45:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/857

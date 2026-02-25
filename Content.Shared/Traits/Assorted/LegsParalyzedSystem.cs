@@ -20,15 +20,23 @@ public sealed class LegsParalyzedSystem : EntitySystem
         SubscribeLocalEvent<LegsParalyzedComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<LegsParalyzedComponent, BuckledEvent>(OnBuckled);
         SubscribeLocalEvent<LegsParalyzedComponent, UnbuckledEvent>(OnUnbuckled);
-        SubscribeLocalEvent<LegsParalyzedComponent, ThrowPushbackAttemptEvent>(OnThrowPushbackAttempt);
         // <Trauma>
-        // SubscribeLocalEvent<LegsParalyzedComponent, UpdateCanMoveEvent>(OnUpdateCanMoveEvent);
+        /* no
+        SubscribeLocalEvent<LegsParalyzedComponent, ThrowPushbackAttemptEvent>(OnThrowPushbackAttempt);
+        SubscribeLocalEvent<LegsParalyzedComponent, UpdateCanMoveEvent>(OnUpdateCanMoveEvent);
+        */
         SubscribeLocalEvent<LegsParalyzedComponent, RefreshMovementSpeedModifiersEvent>(OnRefresh);
         SubscribeLocalEvent<LegsParalyzedComponent, StandUpAttemptEvent>(OnStandAttempt);
+        SubscribeLocalEvent<LegsParalyzedComponent, MoveEvent>(OnMove);
         // </Trauma>
     }
 
     // <Trauma>
+    private void OnMove(Entity<LegsParalyzedComponent> ent, ref MoveEvent args)
+    {
+        EnsureComp<KnockedDownComponent>(ent);
+    }
+
     private void OnStandAttempt(Entity<LegsParalyzedComponent> ent, ref StandUpAttemptEvent args)
     {
         if (ent.Comp.LifeStage > ComponentLifeStage.Running)
@@ -68,13 +76,16 @@ public sealed class LegsParalyzedSystem : EntitySystem
         _standingSystem.Down(uid);
     }
 
-    /*private void OnUpdateCanMoveEvent(EntityUid uid, LegsParalyzedComponent component, UpdateCanMoveEvent args)
+    /* Trauma - this prevented using a wheelchair
+    private void OnUpdateCanMoveEvent(EntityUid uid, LegsParalyzedComponent component, UpdateCanMoveEvent args)
     {
         args.Cancel();
-    }*/
+    }
 
+    // and this makes no sense.. why would you not be able to throw shit away
     private void OnThrowPushbackAttempt(EntityUid uid, LegsParalyzedComponent component, ThrowPushbackAttemptEvent args)
     {
         args.Cancel();
     }
+    */
 }

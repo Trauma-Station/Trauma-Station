@@ -119,7 +119,7 @@
           sounds:
             collection: Paracusia
         - type: PainNumbness
-        - type: LegsStartParalyzed
+        - type: LegsParalyzed
         guidebookText: entity-effect-guidebook-removes-disabilities
 
 - type: reagent

@@ -44,6 +44,8 @@
     - MutationTongueSpike
   - type: ActionMutation
     action: ActionMutationChemSpike
+  - type: ChemSpikeMutation
+    action: ActionMutationChemSpikeSend
 
 - type: entity
   parent: ActionMutationTongueSpike
@@ -57,3 +59,18 @@
       state: chemspike
   - type: ShootOrganAction
     polymorph: TongueSpikeChem
+
+# only added if the spike embeds in a mob
+- type: entity
+  parent: BaseMutationAction
+  id: ActionMutationChemSpikeSend
+  name: Transfer Chemicals
+  description: Send all of your reagents into whomever the chem spike is embedded in. One use.
+  components:
+  - type: Action
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: chemspike_swap
+  - type: InstantAction
+    event: !type:ChemTransferActionEvent
+  - type: ChemTransferAction

@@ -1,7 +1,7 @@
 - type: marking
   id: MakeupLips
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Arachnid, Harpy]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -14,7 +14,7 @@
 - type: marking
   id: MakeupBlush
   bodyPart: Face
-  groupWhitelist: [Human, Reptilian, Slime, Arachnid, Harpy]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:

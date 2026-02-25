@@ -46,6 +46,8 @@
       150: Critical
       200: Dead
   - type: Mutatable
+  - type: Destructible
+    thresholds: [] # remove gib threshold, you can gib the torso instead
   # </Trauma>
   # Shitmed - woundable visuals used instead
   #- type: DamageVisuals
@@ -179,8 +181,6 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
-      enum.StoreUiKey.Key: # Goob - changelings
-        type: StoreBoundUserInterface
   - type: Puller
   - type: Speech
     speechSounds: Alto

@@ -1,15 +1,16 @@
 using Robust.Shared.Audio;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Shared.Vehicles;
 
 [RegisterComponent]
+[AutoGenerateComponentPause]
 public sealed partial class ForkliftComponent : Component
 {
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField]
     public EntityUid? LiftAction;
 
-
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField]
     public EntityUid? UnliftAction;
 
     [DataField]
@@ -18,9 +19,10 @@ public sealed partial class ForkliftComponent : Component
     [DataField]
     public SoundSpecifier LiftSound;
 
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField]
     public EntityUid? LiftSoundUid;
 
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
     public TimeSpan? LiftSoundEndTime;
 }

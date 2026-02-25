@@ -15,6 +15,7 @@
 		{"name": "RFoot_Brute_10", "directions": 4},
 		{"name": "Chest_Brute_10", "directions": 4},
 		{"name": "Tail_Brute_10", "directions": 4},
+		{"name": "Wings_Brute_10", "directions": 4},
 		{"name": "Head_Brute_20", "directions": 4},
 		{"name": "LArm_Brute_20", "directions": 4},
 		{"name": "LLeg_Brute_20", "directions": 4},
@@ -26,6 +27,7 @@
 		{"name": "RFoot_Brute_20", "directions": 4},
 		{"name": "Chest_Brute_20", "directions": 4},
 		{"name": "Tail_Brute_20", "directions": 4},
+		{"name": "Wings_Brute_20", "directions": 4},
 		{"name": "Head_Brute_30", "directions": 4},
 		{"name": "LArm_Brute_30", "directions": 4},
 		{"name": "LLeg_Brute_30", "directions": 4},
@@ -37,6 +39,7 @@
 		{"name": "RFoot_Brute_30", "directions": 4},
 		{"name": "Chest_Brute_30", "directions": 4},
 		{"name": "Tail_Brute_30", "directions": 4},
+		{"name": "Wings_Brute_30", "directions": 4},
     	{"name": "Head_Brute_40", "directions": 4},
     	{"name": "LArm_Brute_40", "directions": 4},
     	{"name": "LLeg_Brute_40", "directions": 4},
@@ -48,6 +51,7 @@
 		{"name": "RFoot_Brute_40", "directions": 4},
     	{"name": "Chest_Brute_40", "directions": 4},
 		{"name": "Tail_Brute_40", "directions": 4},
+		{"name": "Wings_Brute_40", "directions": 4},
 		{"name": "Head_Brute_50", "directions": 4},
 		{"name": "LArm_Brute_50", "directions": 4},
 		{"name": "LLeg_Brute_50", "directions": 4},
@@ -59,6 +63,7 @@
 		{"name": "RFoot_Brute_50", "directions": 4},
 		{"name": "Chest_Brute_50", "directions": 4},
 		{"name": "Tail_Brute_50", "directions": 4},
+		{"name": "Wings_Brute_50", "directions": 4},
 		{"name": "Head_Brute_70", "directions": 4},
 		{"name": "LArm_Brute_70", "directions": 4},
 		{"name": "LLeg_Brute_70", "directions": 4},
@@ -70,6 +75,7 @@
 		{"name": "RFoot_Brute_70", "directions": 4},
 		{"name": "Chest_Brute_70", "directions": 4},
 		{"name": "Tail_Brute_70", "directions": 4},
+		{"name": "Wings_Brute_70", "directions": 4},
 		{"name": "Head_Brute_100", "directions": 4},
 		{"name": "LArm_Brute_100", "directions": 4},
 		{"name": "LLeg_Brute_100", "directions": 4},
@@ -80,6 +86,7 @@
 		{"name": "RHand_Brute_100", "directions": 4},
 		{"name": "RFoot_Brute_100", "directions": 4},
 		{"name": "Chest_Brute_100", "directions": 4},
-		{"name": "Tail_Brute_100", "directions": 4}
+		{"name": "Tail_Brute_100", "directions": 4},
+		{"name": "Wings_Brute_100", "directions": 4}
 	]
 }

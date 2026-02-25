@@ -1,2 +1,5 @@
 - type: organCategory
   id: Hypoport
+
+- type: organCategory
+  id: Wings

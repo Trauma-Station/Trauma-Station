@@ -26,7 +26,7 @@ MutationMindReader-popup-also-evil = It's nice to find someone who is like-minde
 MutationMindReader-popup-not-evil = What is wrong with this person?
 MutationMindReader-popup-plunge = You plunge into {$target}'s mind...
 MutationMindReader-popup-alert = You feel something foreign enter your mind.
-MutationMindReader-popup-messages = You catch some drifting memories of their past conversations...
+MutationMindReader-popup-messages = You catch some drifting memories of {POSS-ADJ($target)} past conversations...
 MutationMindReader-popup-message-format = "{$message}"
 MutationMindReader-popup-combat-mode = You find that {POSS-ADJ($target)} intent is to {$combat ->
     [true] harm
@@ -191,6 +191,8 @@ MutationTongueSpike-popup-no-organ = You don't have a {$organ} to shoot!
 MutationTongueSpike-popup-revert = {CAPITALIZE(THE($child))} cracks and twists, changing shape!
 
 MutationChemSpike-mutated = You feel like you can really connect with people by throwing your voice.
+MutationChemSpike-target-set = Link established, use the Transfer Chemicals action!
+MutationChemSpike-target-reset = Link lost!
 
 MutationShockTouch-mutated = You feel power flow through your hands.
 MutationShockTouch-removed = The energy in your hands subsides.

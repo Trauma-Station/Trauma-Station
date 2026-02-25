@@ -828,29 +828,24 @@ public sealed partial class WoundSystem
     /// <param name="parentWoundableEntity">Parent of the woundable entity. Yes.</param>
     /// <param name="woundableEntity">The entity containing the vulnerable body part</param>
     /// <param name="woundableComp">Woundable component of woundableEntity.</param>
-    public void AmputateWoundableSafely(EntityUid parentWoundableEntity,
+    public bool AmputateWoundableSafely(EntityUid parentWoundableEntity,
         EntityUid woundableEntity,
         WoundableComponent? woundableComp = null)
     {
-        if (!Resolve(woundableEntity, ref woundableComp)
-            || !woundableComp.CanRemove)
-            return;
-
-        if (_body.GetBody(parentWoundableEntity) is not {} body)
-            return;
+        if (!Resolve(woundableEntity, ref woundableComp) ||
+            !woundableComp.CanRemove ||
+            _body.GetBody(parentWoundableEntity) is not {} body ||
+            !_body.RemoveOrgan(body, woundableEntity))
+            return false;
 
         woundableComp.WoundableSeverity = WoundableSeverity.Severed;
         Dirty(woundableEntity, woundableComp);
-
-        _bodyStatus.UpdateStatus(body);
 
         _appearance.SetData(woundableEntity,
             WoundableVisualizerKeys.Wounds,
             new WoundVisualizerGroupData(GetWoundableWounds(woundableEntity).Select(ent => GetNetEntity(ent)).ToList()));
 
-        // Still does the funny popping, if the children are critted. for the funny :3
-        DestroyWoundableChildren(woundableEntity, woundableComp, amputateChildrenSafely: true);
-        _body.RemoveOrgan(body, woundableEntity);
+        return true;
     }
 
     #endregion

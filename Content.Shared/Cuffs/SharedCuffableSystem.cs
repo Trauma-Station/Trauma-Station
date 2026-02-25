@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Shared._EinsteinEngines.Flight;
 using Content.Shared._Goobstation.Wizard.Mutate;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
@@ -534,15 +533,6 @@ namespace Content.Shared.Cuffs
                 _popup.PopupClient(Loc.GetString("handcuff-component-cannot-drop-cuffs", ("target", Identity.Name(target, EntityManager, user))), user, user);
                 return false;
             }
-
-            // Goobstation Change Start
-            if (TryComp<FlightComponent>(target, out var flight) && flight.On)
-            {
-                _popup.PopupClient(Loc.GetString("handcuff-component-target-flying-error",
-                    ("targetName", Identity.Name(target, EntityManager, user))), user, user);
-                return true;
-            }
-            // Goobstation Change End
 
             var cuffTime = handcuffComponent.CuffTime;
 

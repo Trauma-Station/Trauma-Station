@@ -4,6 +4,7 @@ using Content.Shared.Administration;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
+using System.Text;
 
 namespace Content.Trauma.Server.Genetics;
 
@@ -26,6 +27,8 @@ public sealed class MutationCommand : ToolshedCommand
             return _mutation;
         }
     }
+
+    private StringBuilder _dump = new();
 
     [CommandImplementation("add")]
     public void Add(
@@ -69,6 +72,46 @@ public sealed class MutationCommand : ToolshedCommand
             return;
 
         Mutation.Scramble(ent);
+    }
+
+    [CommandImplementation("dump")]
+    public string Dump([PipedArgument] EntityUid uid)
+    {
+        if (Mutation.GetMutatable(uid, true) is not {} ent)
+            return Loc.GetString("generic-not-available-shorthand");
+
+        _dump.Clear();
+        if (ent.Comp.Mutations.Count > 0)
+        {
+            _dump.Append("Active Mutations:");
+            foreach (var (id, mutation) in ent.Comp.Mutations)
+            {
+                DumpMutation(id);
+                _dump.Append(" - ");
+                _dump.Append(EntityManager.ToPrettyString(mutation));
+            }
+        }
+        if (ent.Comp.Dormant.Count > 0)
+        {
+            _dump.Append("\nDormant Mutations:");
+            foreach (var id in ent.Comp.Dormant)
+            {
+                DumpMutation(id);
+            }
+        }
+        return _dump.ToString();
+    }
+
+    private void DumpMutation(EntProtoId<MutationComponent> id)
+    {
+        _dump.Append("\n- ");
+        _dump.Append(id);
+        _dump.Append(" (");
+        if (Mutation.GetRoundData(id) is {} data)
+            _dump.Append(data.Number);
+        else
+            _dump.Append("???");
+        _dump.Append(")");
     }
 
     private EntProtoId<MutationComponent> Check(string id)

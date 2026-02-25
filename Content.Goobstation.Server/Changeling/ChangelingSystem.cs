@@ -49,6 +49,7 @@ using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Changeling.Systems;
 using Content.Goobstation.Shared.Flashbang;
 using Content.Goobstation.Shared.MartialArts.Components;
+using Content.Goobstation.Shared.Overlays;
 using Content.Server.Actions;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
@@ -97,9 +98,12 @@ using Content.Shared.Preferences;
 using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Revolutionary.Components;
+using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Content.Shared.Zombies;
+using Content.Trauma.Common.Genetics.Mutations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
@@ -113,6 +117,7 @@ namespace Content.Goobstation.Server.Changeling;
 public sealed partial class ChangelingSystem : SharedChangelingSystem
 {
     // this is one hell of a star wars intro text
+    [Dependency] private readonly CommonMutationSystem _mutation = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly StoreSystem _store = default!;
@@ -128,6 +133,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
     [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private readonly SharedRoleSystem _role = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly SharedEmpSystem _emp = default!;
@@ -245,7 +251,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         EnsureComp<FlashImmunityComponent>(uid);
         EnsureComp<EyeProtectionComponent>(uid);
 
-        var thermalVision = Factory.GetComponent<Shared.Overlays.ThermalVisionComponent>();
+        var thermalVision = Factory.GetComponent<ThermalVisionComponent>();
         thermalVision.Color = Color.FromHex("#FB9898");
         thermalVision.LightRadius = 15f;
         thermalVision.FlashDurationMultiplier = 2f;
@@ -347,6 +353,24 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     }
 
     #region Helper Methods
+
+    /// <summary>
+    /// Get the store from a mob's changeling mind role.
+    /// Returns null if it has no mind or no role.
+    /// </summary>
+    public Entity<StoreComponent>? GetStore(EntityUid mob)
+        => Mind.GetMind(mob) is {} mind && GetMindStore(mind) is {} store
+            ? store
+            : null;
+
+    /// <summary>
+    /// Get the store from a mind entity's changeling mind role.
+    /// Returns null if it has no role.
+    /// </summary>
+    public Entity<StoreComponent>? GetMindStore(Entity<MindComponent?> mind)
+        => _role.MindHasRole<ChangelingRoleComponent>(mind, out var role)
+            ? (role.Value.Owner, Comp<StoreComponent>(role.Value.Owner)) // will throw if the role is missing store component
+            : null;
 
     public void DoScreech(EntityUid uid, ChangelingIdentityComponent comp)
     {
@@ -538,7 +562,8 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         {
             Name = Name(target),
             DNA = dna.DNA ?? Loc.GetString("forensics-dna-unknown"),
-            Profile = profile
+            Profile = profile,
+            Mutations = _mutation.GetMutatableData(target)
         };
 
         if (fingerprint.Fingerprint != null)
@@ -574,7 +599,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         var config = new PolymorphConfiguration
         {
-            Entity = (EntProtoId) pid,
+            Entity = pid.Value,
             TransferDamage = transferDamage,
             Forced = true,
             Inventory = (dropInventory) ? PolymorphInventoryChange.Drop : PolymorphInventoryChange.Transfer,
@@ -582,12 +607,26 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             RevertOnDeath = false
         };
 
-        var newUid = _polymorph.PolymorphEntity(uid, config);
+        if (!HasComp<ThermalVisionComponent>(uid))
+            Log.Error("Ling didnt have thermal vision!");
 
-        if (newUid == null)
+        if (_polymorph.PolymorphEntity(uid, config) is not {} newEnt)
             return null;
 
-        var newEnt = newUid.Value;
+        // exceptional comps check
+        // TODO make PolymorphedEvent handlers for all
+        List<Type> types = new()
+        {
+            typeof(FlashImmunityComponent),
+            typeof(EyeProtectionComponent),
+            typeof(NightVisionComponent),
+            typeof(ThermalVisionComponent),
+        };
+        foreach (var type in types)
+            _polymorph.CopyPolymorphComponent(uid, newEnt, type);
+
+        if (!HasComp<ThermalVisionComponent>(newEnt))
+            Log.Error("Ling didnt have thermal vision after transform!");
 
         if (data != null)
         {
@@ -598,22 +637,11 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             _metaData.SetEntityName(newEnt, data.Name);
             var message = Loc.GetString("changeling-transform-finish", ("target", data.Name));
             Popup.PopupEntity(message, newEnt, newEnt);
+            _mutation.LoadMutatableData(newEnt, data.Mutations);
         }
 
         // otherwise we can only transform once
         RemCompDeferred<PolymorphedEntityComponent>(newEnt);
-
-        // exceptional comps check
-        // TODO make PolymorphedEvent handlers for all
-        List<Type> types = new()
-        {
-            typeof(FlashImmunityComponent),
-            typeof(EyeProtectionComponent),
-            typeof(Shared.Overlays.NightVisionComponent),
-            typeof(Shared.Overlays.ThermalVisionComponent),
-        };
-        foreach (var type in types)
-            _polymorph.CopyPolymorphComponent(uid, newEnt, nameof(type));
 
         // CopyPolymorphComponent fails to copy the HumanoidProfileComponent in TransformData
         // outside of the first list item so this has to be done manually unfortunately
@@ -623,7 +651,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         RaiseNetworkEvent(new LoadActionsEvent(GetNetEntity(uid)), newEnt);
 
-        return newUid;
+        return newEnt;
     }
 
     public bool TryTransform(EntityUid target, ChangelingIdentityComponent comp, bool sting = false, bool persistentDna = false)

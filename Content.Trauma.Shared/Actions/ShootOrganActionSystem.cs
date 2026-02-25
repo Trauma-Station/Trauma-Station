@@ -36,6 +36,11 @@ public sealed class ShootOrganActionSystem : EntitySystem
         if (_polymorph.PolymorphEntity(organ, ent.Comp.Polymorph) is not {} projectile)
             return;
 
+        // used by chemspike
+        var projComp = EnsureComp<ActionProjectileComponent>(projectile);
+        projComp.Container = args.Action.Comp.Container;
+        Dirty(projectile, projComp);
+
         _throwing.TryThrow(projectile, coordinates: args.Target, user: user,
             predicted: false); // TODO: remove if polymorph gets predicted
     }

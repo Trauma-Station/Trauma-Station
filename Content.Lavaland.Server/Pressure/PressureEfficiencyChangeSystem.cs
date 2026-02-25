@@ -76,7 +76,7 @@ public sealed class PressureEfficiencyChangeSystem : SharedPressureEfficiencyCha
 
     public bool ApplyModifier(Entity<PressureDamageChangeComponent?> ent)
     {
-        if (!Resolve(ent, ref ent.Comp))
+        if (!Resolve(ent, ref ent.Comp, false))
             return false;
 
         var pressure = _atmos.GetTileMixture((ent.Owner, Transform(ent)))?.Pressure ?? 0f;
@@ -88,7 +88,7 @@ public sealed class PressureEfficiencyChangeSystem : SharedPressureEfficiencyCha
     /// Get the damage modifier for a weapon, returning 1 if it doesn't have the component.
     /// </summary>
     public float GetModifier(Entity<PressureDamageChangeComponent?> ent)
-        => _query.Resolve(ent, ref ent.Comp) ? ent.Comp.AppliedModifier : 1f;
+        => _query.Resolve(ent, ref ent.Comp, false) ? ent.Comp.AppliedModifier : 1f;
 
     private void OnArmorRelayDamageModify(Entity<PressureArmorChangeComponent> ent, ref InventoryRelayedEvent<DamageModifyEvent> args)
     {

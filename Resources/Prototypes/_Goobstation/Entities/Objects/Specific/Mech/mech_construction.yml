@@ -82,9 +82,9 @@
     noRot: true
     state: ripleymkii0
   - type: Construction
-    graph: RipleyMKII
+    graph: RipleyMKIIHarness
     node: start
-    defaultTarget: ripleymkii
+    defaultTarget: ripleymkiiHarness
 
 # Clarke
 
@@ -147,6 +147,10 @@
   - type: Sprite
     state: clarke_harness+o
     noRot: true
+  - type: Construction
+    graph: Clarke
+    node: start
+    defaultTarget: clarke
 
 - type: entity
   parent: BaseClarkePartItem
@@ -282,6 +286,10 @@
   - type: Sprite
     state: durand_harness+o
     noRot: true
+  - type: Construction
+    graph: Durand
+    node: start
+    defaultTarget: durand
 
 - type: entity
   parent: BaseDurandPartItem
@@ -429,6 +437,10 @@
   - type: Sprite
     state: gygax_harness+o
     noRot: true
+  - type: Construction
+    graph: Gygax
+    node: start
+    defaultTarget: gygax
 
 - type: entity
   parent: BaseGygaxPartItem
