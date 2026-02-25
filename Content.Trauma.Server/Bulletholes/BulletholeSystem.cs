@@ -12,7 +12,7 @@ public sealed class BulletholeSystem : EntitySystem
 
     // Bullethole overlays
     private const int MaxBulletholeState = 10;
-    private const int MaxBulletholeCount = 34;
+    private const int MaxBulletholeCount = 24;
 
     public override void Initialize()
     {

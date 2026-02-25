@@ -119,8 +119,8 @@ public sealed class PredictedProjectileSystem : EntitySystem
         var ev = new ProjectileHitEvent(comp.Damage * _damageable.UniversalProjectileDamageModifier, target, shooter);
         RaiseLocalEvent(uid, ref ev);
 
-        var gothitbyprojectileevent = new GotHitByProjectileEvent(uid);
-        RaiseLocalEvent(target, ref gothitbyprojectileevent);
+        var targetEv = new GotHitByProjectileEvent(uid);
+        RaiseLocalEvent(target, ref targetEv);
 
         var otherName = ToPrettyString(target);
         var damageRequired = _destructible.DestroyedAt(target);
