@@ -1,5 +1,6 @@
 using Content.Trauma.Shared.Weapons.Ranged;
 using Robust.Client.GameObjects;
+using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.Weapons.Ranged;
 
@@ -10,25 +11,23 @@ public sealed class BulletholeVisualizerSystem : VisualizerSystem<BulletholeComp
 
     protected override void OnAppearanceChange(EntityUid uid, BulletholeComponent component, ref AppearanceChangeEvent args)
     {
-        if (args.Sprite is not { } sprite)
-            return;
-
-        if (!AppearanceSystem.TryGetData<string>(uid, BulletholeVisuals.State, out var state, args.Component))
+        if (args.Sprite is not { } sprite
+            || !AppearanceSystem.TryGetData<string>(uid, BulletholeVisuals.State, out var state, args.Component))
             return;
 
         var ent = (uid, sprite);
 
-        if (!_sprite.LayerMapTryGet(ent, BulletholeVisualsLayers.Bullethole, out var layer))
-            layer = _sprite.LayerMapReserve(BulletholeVisualsLayers.Bullethole);
+        if (!_sprite.LayerMapTryGet((uid, sprite),BulletholeVisualsLayers.Bullethole, out var layer, false))
+                _sprite.LayerMapReserve(ent,BulletholeVisualsLayers.Bullethole);
 
         var valid = !string.IsNullOrWhiteSpace(state);
 
-        _sprite.LayerSetVisible(BulletholeVisualsLayers.Bullethole, valid);
+        _sprite.LayerSetVisible(ent, BulletholeVisualsLayers.Bullethole, valid);
 
         if (valid)
         {
-            _sprite.LayerSetRsi(BulletholeVisualsLayers.Bullethole, BulletholeRsiPath);
-            _sprite.LayerSetRsiState(BulletholeVisualsLayers.Bullethole, state);
+            _sprite.LayerSetRsi(ent, BulletholeVisualsLayers.Bullethole, new ResPath (BulletholeRsiPath));
+            _sprite.LayerSetRsiState(ent, BulletholeVisualsLayers.Bullethole, state);
         }
     }
 }

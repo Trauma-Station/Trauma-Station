@@ -110,7 +110,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseBullet
+  parent: BaseBulletKinetic # Trauma
   id: PelletShotgunSlug
   categories: [ HideSpawnMenu ]
   name: pellet (.50 slug)
@@ -143,7 +143,7 @@
     damage: 60 # Goob edit
 
 - type: entity
-  parent: BaseBullet
+  parent: BaseBulletKinetic # Trauma
   id: PelletShotgun
   categories: [ HideSpawnMenu ]
   name: pellet (.50)
@@ -165,7 +165,7 @@
     spread: 15
 
 - type: entity
-  parent: BaseBulletIncendiary
+  parent: [BaseBulletIncendiary, BaseBulletKinetic] # Trauma
   id: PelletShotgunIncendiary
   categories: [ HideSpawnMenu ]
   name: pellet (.50 incendiary)
@@ -210,7 +210,7 @@
     spread: 15
 
 - type: entity
-  parent: BaseBullet
+  parent: BaseBulletKinetic # Trauma
   id: PelletShotgunImprovised
   categories: [ HideSpawnMenu ]
   name: improvised pellet
@@ -302,7 +302,7 @@
         Heat: 5
 
 - type: entity
-  parent: BaseBulletUranium
+  parent: [BaseBulletUranium, BaseBulletKinetic] # Trauma
   id: PelletShotgunUranium
   categories: [ HideSpawnMenu ]
   name: pellet (.50 uranium)

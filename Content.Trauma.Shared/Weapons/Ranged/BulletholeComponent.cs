@@ -3,8 +3,10 @@ using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Weapons.Ranged;
 
+/// <summary>
+/// Anything with this component will product bullet-holes when shot by a projectile with the BulletholeGeneratorComponent
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(BulletholeSystem))]
 public sealed partial class BulletholeComponent : Component
 {
     [DataField, AutoNetworkedField]

@@ -1,8 +1,9 @@
-using Content.Shared.Damage.Systems;
+using Content.Trauma.Common.Bulletholes;
+using Content.Trauma.Shared.Weapons.Ranged;
 using Content.Trauma.Shared.Weapons.Ranged.Ammo;
 using Robust.Shared.Random;
 
-namespace Content.Trauma.Shared.Weapons.Ranged;
+namespace Content.Trauma.Server.Bulletholes;
 
 public sealed class BulletholeSystem : EntitySystem
 {
@@ -11,22 +12,20 @@ public sealed class BulletholeSystem : EntitySystem
 
     // Bullethole overlays
     private const int MaxBulletholeState = 10;
-    private const int MaxBulletholeCount = 24;
+    private const int MaxBulletholeCount = 34;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<BulletholeComponent, DamageChangedEvent>(OnVisualsDamageChangedEvent);
+        SubscribeLocalEvent<BulletholeComponent, GotHitByProjectileEvent>(OnVisualsDamageChangedEvent);
     }
 
-    private void OnVisualsDamageChangedEvent(Entity<BulletholeComponent> ent, ref DamageChangedEvent args)
+    private void OnVisualsDamageChangedEvent(Entity<BulletholeComponent> ent, ref GotHitByProjectileEvent args)
     {
-        if (!TryComp(args.Origin, out BulletholeGeneratorComponent? bulletholeGeneratorComponent))
+        if (!HasComp<BulletholeGeneratorComponent>(args.Projectile)
+            || !TryComp<AppearanceComponent>(ent, out var app))
             return;
 
         ent.Comp.BulletholeCount++;
-
-        if (!TryComp<AppearanceComponent>(ent, out var app))
-            return;
 
         if (ent.Comp.BulletholeState < 1 || ent.Comp.BulletholeState > MaxBulletholeState)
             ent.Comp.BulletholeState = _random.Next(1, MaxBulletholeState + 1);
