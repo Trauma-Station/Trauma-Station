@@ -1822,7 +1822,7 @@
       giveBlade: false
       health: 250
       changeAppearance: false
-      deathBehavoir: GibOrgans
+      deathBehavipr: GibOrgans
       canDeconvert: false
 
 - type: entity

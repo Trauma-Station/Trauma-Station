@@ -112,12 +112,9 @@
     - RadiationProtection
     - Adrenaline
   - type: FloatingVisuals
-  - type: Body
-    bodyType: Simple
-    prototype: Animal
 
 - type: entity
-  parent: BaseMobGhoul
+  parent: [BaseMobGhoul, BaseMobAnimal]
   id: MobGhoulStalker
   name: flesh stalker
   description: An abomination cobbled together from varied remains. Its appearance changes slightly every time you blink.
@@ -158,7 +155,7 @@
         Piercing: 10
 
 - type: entity
-  parent: BaseMobGhoul
+  parent: [BaseMobGhoul, BaseMobAnimal]
   id: MobGhoulProphet
   name: raw prophet
   description: An abomination stitched together from a few severed arms and one swollen, orphaned eye.
@@ -266,10 +263,6 @@
           - Opaque # Can go through windows
         layer:
           - FlyingMobLayer
-  - type: Body
-    prototype: null
-    gibSound:
-      collection: GlassBreak
   - type: Reflect # It's a mirror
     reflectProb: 1
     reflects:
@@ -300,7 +293,7 @@
   - type: MovementIgnoreGravity
 
 - type: entity
-  parent: [BaseMobGhoul, FlyingMobBase]
+  parent: [BaseMobGhoul, FlyingMobBase, BaseMobAnimal]
   id: MobGhoulFireShark
   name: fire shark
   description: It is a eldritch dwarf space shark, also known as a fire shark.

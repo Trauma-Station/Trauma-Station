@@ -1,7 +1,7 @@
 ## Mob
 
 - type: entity
-  parent: BaseSpeciesAppearance
+  parent: BaseSpeciesAppearanceOrganless
   id: AppearanceShattered
   name: Shattered appearance
   components:
@@ -20,15 +20,6 @@
       FootRight: OrganShatteredFootRight
       # Organs
       Brain: OrganHumanBrain
-      Eyes: OrganHumanEyes
-      Tongue: OrganHumanTongue
-      Appendix: OrganHumanAppendix
-      Ears: OrganHumanEars
-      Lungs: OrganHumanLungs
-      Heart: OrganHumanHeart
-      Stomach: OrganHumanStomach
-      Liver: OrganHumanLiver
-      Kidneys: OrganHumanKidneys
   - type: HumanoidProfile
     species: Shattered
 
@@ -51,9 +42,6 @@
     alternateState: Standing
   - type: Damageable
     damageContainer: Biological
-  - type: Body
-    prototype: Shattered
-    requiredLegs: 2
   - type: Tag
     tags:
     - CanPilot
@@ -171,7 +159,6 @@
   - type: SSDIndicator
   - type: StandingState
   - type: MindContainer
-    showExamineInfo: true
   - type: NpcFactionMember
     factions:
     - Heretic
@@ -217,7 +204,7 @@
     damagePenalty: 0.2
   - type: ExaminableCharacter
   - type: Stamina
-    critThreshold: 200
+    baseCritThreshold: 200
     animationThreshold: 100
   - type: FootstepModifier
     footstepSoundCollection:

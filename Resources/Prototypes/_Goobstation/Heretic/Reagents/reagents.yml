@@ -243,9 +243,9 @@
         damage:
           types:
             Slash: 5
-        woundSeverityMultipliers:
-          Slash: 2
-        partDamageVariation: 2
+          woundSeverityMultipliers:
+            Slash: 2
+          partDamageVariation: 2
 
 - type: reagent
   id: NewbornEther
