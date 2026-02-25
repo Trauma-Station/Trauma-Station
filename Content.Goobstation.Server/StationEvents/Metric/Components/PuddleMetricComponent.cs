@@ -5,8 +5,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
+using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.StationEvents.Metric.Components;
 
@@ -23,30 +24,28 @@ public sealed partial class PuddleMetricComponent : Component
     ///   The cost of each puddle, per mL. Note about 200 mL is one puddle.
     ///   Example: A water puddle of 200mL would contribute (200 * 0.02) = 4 chaos points.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(DictionarySerializer<string, FixedPoint2>))] // this should be prototyped
-    public Dictionary<string, FixedPoint2> Puddles =
-        new()
-        {
-            { "Water", MinimalImpact },
-            { "SpaceCleaner", MinimalImpact },
+    public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2> Puddles = new()
+    {
+        { "Water", MinimalImpact },
+        { "SpaceCleaner", MinimalImpact },
 
-            { "Nutriment", MinorImpact },
-            { "Sugar", MinorImpact },
-            { "Ephedrine", MinorImpact },
-            { "Ale", MinorImpact },
-            { "Beer", ModerateImpact },
+        { "Nutriment", MinorImpact },
+        { "Sugar", MinorImpact },
+        { "Ephedrine", MinorImpact },
+        { "Ale", MinorImpact },
+        { "Beer", ModerateImpact },
 
-            { "Slime", ModerateImpact },
-            { "Blood", ModerateImpact },
-            { "CopperBlood", ModerateImpact },
-            { "BlackBlood", ModerateImpact }, // Goob Edit
-            { "ZombieBlood", ModerateImpact },
-            { "AmmoniaBlood", ModerateImpact },
-            { "ChangelingBlood", ModerateImpact },
-            { "SpaceDrugs", MajorImpact },
-            { "SpaceLube", MajorImpact },
-            { "SpaceGlue", MajorImpact },
-        };
+        { "Slime", ModerateImpact },
+        { "Blood", ModerateImpact },
+        { "CopperBlood", ModerateImpact },
+        { "BlackBlood", ModerateImpact },
+        { "ZombieBlood", ModerateImpact },
+        { "AmmoniaBlood", ModerateImpact },
+        { "ChangelingBlood", ModerateImpact },
+        { "SpaceDrugs", MajorImpact },
+        { "SpaceLube", MajorImpact },
+        { "SpaceGlue", MajorImpact },
+    };
 
     [DataField]
     public FixedPoint2 PuddleDefault = 0.1f;
