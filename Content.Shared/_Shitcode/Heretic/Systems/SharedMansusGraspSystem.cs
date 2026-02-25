@@ -600,6 +600,9 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     {
         var sound = ent == null ? DefaultSound : ent.Value.Comp.Sound;
         _audio.PlayPredicted(sound, user, user);
+
+        var ev = new UserInvokeTouchSpellEvent();
+        RaiseLocalEvent(user, ref ev);
     }
 }
 

@@ -140,7 +140,6 @@
     - TemporaryBlindness
     - Pacified
     - StaminaModifier
-    - Flashed
     - RadiationProtection
     - Adrenaline
   - type: Identity
@@ -173,6 +172,9 @@
       enum.StoreUiKey.Key:
         type: StoreBoundUserInterface
   - type: StepTriggerImmune
+    whitelist:
+      types:
+      - Shard
   - type: Puller
     needsHands: false
   - type: Speech
@@ -212,6 +214,8 @@
       params:
         variation: 0.09
         volume: -8
+  - type: Insulated
+  - type: FlashImmunity
 
 ## Base
 

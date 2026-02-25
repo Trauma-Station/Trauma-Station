@@ -12,10 +12,10 @@ public sealed partial class LegsParalyzedComponent : Component
     // <Trauma>
     [DataField, AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public float WalkSpeedModifier;
+    public float WalkSpeedModifier = 0.5f;
 
     [DataField, AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public float SprintSpeedModifier;
+    public float SprintSpeedModifier = 0.5f;
     // </Trauma>
 }

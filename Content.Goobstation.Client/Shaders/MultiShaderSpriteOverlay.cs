@@ -72,7 +72,7 @@ public sealed class MultiShaderSpriteOverlay : Overlay
             if (!_renderTargets.TryGetValue(uid, out var target))
             {
                 target = _clyde.CreateRenderTarget(screenSpriteSize,
-                    new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb, true),
+                    new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb),
                     name: $"multi_shader_{uid}");
 
                 _renderTargets[uid] = target;
@@ -82,7 +82,7 @@ public sealed class MultiShaderSpriteOverlay : Overlay
                 target.Dispose();
 
                 target = _clyde.CreateRenderTarget(screenSpriteSize,
-                    new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb, true),
+                    new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb),
                     name: $"multi_shader_{uid}");
 
                 _renderTargets[uid] = target;

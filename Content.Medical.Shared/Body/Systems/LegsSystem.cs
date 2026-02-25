@@ -29,9 +29,6 @@ public sealed partial class LegsSystem : EntitySystem
 
         SubscribeLocalEvent<MovementBodyPartComponent, OrganGotInsertedEvent>(OnLegAdded);
         SubscribeLocalEvent<MovementBodyPartComponent, OrganGotRemovedEvent>(OnLegRemoved);
-
-        SubscribeLocalEvent<LegsParalyzedComponent, MapInitEvent>(OnParalyzedInit,
-            after: [ typeof(InitialBodySystem) ]); // run after the organs are added
     }
 
     private void OnStandAttempt(Entity<LegsComponent> ent, ref StandAttemptEvent args)
@@ -74,21 +71,6 @@ public sealed partial class LegsSystem : EntitySystem
         Dirty(args.Target, comp);
 
         UpdateMovementSpeed((args.Target, comp));
-    }
-
-    private void OnParalyzedInit(Entity<LegsParalyzedComponent> ent, ref MapInitEvent args)
-    {
-        if (!_query.TryComp(ent, out var legs))
-            return;
-
-        foreach (var leg in legs.Legs)
-        {
-            RemComp<MovementBodyPartComponent>(leg);
-        }
-
-        legs.Legs.Clear();
-        Dirty(ent, legs);
-        UpdateMovementSpeed((ent, legs));
     }
 
     public void UpdateMovementSpeed(Entity<LegsComponent> ent)

@@ -15,6 +15,14 @@
 # SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
+#
+- type: entity
+  parent: [OrganBaseTorso, OrganAnimalSpriteExternal]
+  id: OrganTorsoGhoul
+  components:
+  - type: BodyPart
+    slots: []
+  - type: Boneless
 
 - type: entity
   parent:
@@ -27,8 +35,8 @@
   components:
   - type: Ghoul
   - type: MovementSpeedModifier
-    baseWalkSpeed: 4.5 # Trauma edit
-    baseSprintSpeed: 4.5 # Trauma edit
+    baseWalkSpeed: 4.5
+    baseSprintSpeed: 4.5
   - type: InputMover
   - type: MobMover
   - type: Reactive
@@ -136,9 +144,6 @@
     - ActionHereticJaunt
     - ActionActivateEmp
     - ActionHereticShapeshift
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 4.5 # Trauma edit
-    baseSprintSpeed: 4.5 # Trauma edit
   - type: FlashImmunity
   - type: ThermalVision
     thermalShader: null
@@ -215,6 +220,10 @@
     totalHealth: 80
     ghostRoleName: ghostrole-maid-name
     ghostRoleDesc: ghostrole-maid-desc
+  - type: Body
+  - type: InitialBody
+    organs:
+      Torso: OrganTorsoGhoul
   - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: maid
@@ -293,7 +302,7 @@
   - type: MovementIgnoreGravity
 
 - type: entity
-  parent: [BaseMobGhoul, FlyingMobBase, BaseMobAnimal]
+  parent: [BaseMobGhoul, FlyingMobBase]
   id: MobGhoulFireShark
   name: fire shark
   description: It is a eldritch dwarf space shark, also known as a fire shark.
@@ -303,6 +312,10 @@
     totalHealth: 15
     ghostRoleName: ghostrole-fire-shark-name
     ghostRoleDesc: ghostrole-fire-shark-desc
+  - type: Body
+  - type: InitialBody
+    organs:
+      Torso: OrganTorsoGhoul
   - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: fire_shark
@@ -487,8 +500,8 @@
     group: GenericNumber
   - type: Insulated
   - type: MovementSpeedModifier
-    baseWalkSpeed: 4.5 # Trauma edit
-    baseSprintSpeed: 4.5 # Trauma edit
+    baseWalkSpeed: 4.5
+    baseSprintSpeed: 4.5
   - type: FlashImmunity
   - type: HTN
     rootTask:
