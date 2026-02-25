@@ -82,7 +82,7 @@
     CalciumHydroxide: 1
   effects:
     - !type:AdjustTemperature
-      amount: 25 # kelvin, kilojoules? WHO KNOWS!
+      amount: 200 # Like cryostylane-iodine reaction, but making heat
 
 - type: reaction
   id: FullFatOilReaction
