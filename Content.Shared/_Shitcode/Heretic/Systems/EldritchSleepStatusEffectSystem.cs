@@ -1,24 +1,24 @@
 using System.Linq;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared.Bed.Sleep;
 using Content.Shared.Body.Events;
 using Content.Shared.Body.Systems;
 using Content.Shared.Rejuvenate;
 using Content.Shared.StatusEffectNew;
-using Robust.Shared.Timing;
+using Robust.Shared.Network;
 
 namespace Content.Shared._Shitcode.Heretic.Systems;
 
 public sealed class EldritchSleepStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
-
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EldritchSleepStatusEffectComponent, StatusEffectAppliedEvent>(OnApply);
+        SubscribeLocalEvent<EldritchSleepStatusEffectComponent, StatusEffectAppliedEvent>(OnApply, before: new[] {typeof(SleepingSystem)});
         SubscribeLocalEvent<EldritchSleepStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
 
         SubscribeLocalEvent<MetabolismModifierComponent, GetMetabolicMultiplierEvent>(OnGetMultiplier);
@@ -31,7 +31,7 @@ public sealed class EldritchSleepStatusEffectSystem : EntitySystem
 
     private void OnRemove(Entity<EldritchSleepStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
     {
-        if (_timing.ApplyingState)
+        if (_net.IsClient)
             return;
 
         EntityManager.RemoveComponents(args.Target, ent.Comp.ComponentDifference);
@@ -40,7 +40,8 @@ public sealed class EldritchSleepStatusEffectSystem : EntitySystem
 
     private void OnApply(Entity<EldritchSleepStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
     {
-        if (_timing.ApplyingState)
+        // Fuckass status effect system throws exceptions clientside
+        if (_net.IsClient)
             return;
 
         var ev = new RejuvenateEvent(false, false);

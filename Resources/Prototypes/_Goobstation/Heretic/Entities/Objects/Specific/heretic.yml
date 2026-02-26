@@ -76,6 +76,7 @@
   - type: Tag
     tags:
     - HereticItem
+    - AnchorHereticStructure
   - type: TransmutationRuneScriber
     time: 5
     runeDrawingEntity: HereticRuneRitualDrawAnimationMorbus
@@ -121,7 +122,6 @@
   - type: Tag
     tags:
     - HereticItem
-    - AnchorHereticStructure
   - type: Injector
     breakOnMove: false
     ignoreClosed: true

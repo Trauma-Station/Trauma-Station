@@ -209,4 +209,4 @@ knowledge-path-side-s8-admonitions-desc =
     You are invisible in this form, but you are temporarily revealed by shooting, throwing or casting spells.
     You are also visible to people close to you.
     Forest Admonitions is harder to reveal by damage compared to Cloak Of Shadow, but it has longer cooldown as well.
-    While active, you also spread pale fog around your position, which muffles all audio, debuffs heathens and disables shadow cloak for other heretics.
+    While active, you also spread pale fog around your position, which muffles sounds, debuffs heathens and disables shadow cloak for other heretics.

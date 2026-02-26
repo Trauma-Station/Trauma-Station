@@ -1,14 +1,13 @@
 using Content.Medical.Common.Targeting;
 using Content.Shared._Goobstation.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Effects;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.Heretic;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Weapons.Melee.Events;
@@ -20,12 +19,12 @@ namespace Content.Shared._Shitcode.Heretic.Systems;
 public sealed class MirrorMaidSystem : EntitySystem
 {
     [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedVoidCurseSystem _curse = default!;
+    [Dependency] private readonly SharedHereticSystem _heretic = default!;
 
     public override void Initialize()
     {
@@ -50,13 +49,9 @@ public sealed class MirrorMaidSystem : EntitySystem
     {
         if (ent.Comp.ExamineDamage.Empty || args.Examiner == ent.Owner ||
             HasComp<GhostComponent>(args.Examiner) || HasComp<SpectralComponent>(args.Examiner) ||
-            HasComp<GhostComponent>(args.Examiner) || HasComp<HereticComponent>(args.Examiner) ||
+            _heretic.IsHereticOrGhoul(args.Examiner) ||
             HasComp<MirrorMaidComponent>(args.Examiner) ||
             _status.HasStatusEffect(args.Examiner, ent.Comp.ExamineStatus))
-            return;
-
-        if (!_threshold.TryGetThresholdForState(ent, MobState.Critical, out var threshold) ||
-            !_threshold.TryGetThresholdForState(ent, MobState.Dead, out threshold))
             return;
 
         if (!_damageable.TryChangeDamage(ent.Owner,

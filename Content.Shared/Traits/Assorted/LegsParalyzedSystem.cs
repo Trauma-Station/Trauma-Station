@@ -54,7 +54,10 @@ public sealed class LegsParalyzedSystem : EntitySystem
     private void OnStartup(EntityUid uid, LegsParalyzedComponent component, ComponentStartup args)
     {
         // TODO: In future probably must be surgery related wound
-        EnsureComp<KnockedDownComponent>(uid); // Trauma
+        // </Trauma>
+        EnsureComp<KnockedDownComponent>(uid);
+        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(uid);
+        // <Trauma>
     }
 
     private void OnShutdown(EntityUid uid, LegsParalyzedComponent component, ComponentShutdown args)

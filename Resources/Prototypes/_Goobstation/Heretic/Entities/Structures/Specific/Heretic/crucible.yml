@@ -4,7 +4,9 @@
   name: mawed crucible
   description: A deep basin made of cast iron, immortalized by steel-like teeth holding it in place. Staring at the vile extract within fills your mind with terrible ideas.
   components:
+  - type: InteractionOutline
   - type: Sprite
+    noRot: true
     sprite: _Goobstation/Heretic/items.rsi
     layers:
     - state: crucible

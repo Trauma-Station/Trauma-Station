@@ -87,6 +87,9 @@
       - state: chemsmoke_white
         color: "#ffffff10"
   - type: TileEntityEffect
+    conditions:
+    - !type:ProtectedByNullRodCondition
+      inverted: true
     effects:
     - !type:ModifyStatusEffect
       effectProto: PaleFogAffectedStatusEffect

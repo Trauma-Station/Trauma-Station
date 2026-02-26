@@ -16,11 +16,14 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._Shitcode.Heretic.Systems;
 
 public sealed class MawedCrucibleSystem : EntitySystem
 {
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -28,7 +31,6 @@ public sealed class MawedCrucibleSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _sol = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
@@ -138,6 +140,9 @@ public sealed class MawedCrucibleSystem : EntitySystem
 
     private void RefuelCrucible(Entity<MawedCrucibleComponent> ent, ref InteractUsingEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (ent.Comp.CurrentMass >= ent.Comp.MaxMass)
         {
             _popup.PopupClient(Loc.GetString("mawed-crucible-full-message"), ent, args.User);

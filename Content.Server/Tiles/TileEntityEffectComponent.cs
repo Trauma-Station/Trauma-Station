@@ -4,6 +4,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 
 namespace Content.Server.Tiles;
@@ -19,4 +20,8 @@ public sealed partial class TileEntityEffectComponent : Component
     /// </summary>
     [DataField]
     public List<EntityEffect> Effects = default!;
+
+    // Trauma
+    [DataField]
+    public EntityCondition[]? Conditions;
 }

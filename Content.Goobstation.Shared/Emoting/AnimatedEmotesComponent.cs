@@ -36,10 +36,7 @@ public sealed partial class AnimationSpinEmoteEvent : AnimationEmoteEvent
 }
 
 [Serializable, NetSerializable]
-public sealed partial class AnimationJumpEmoteEvent : AnimationEmoteEvent
-{
-    public override bool CausesVomit { get; set; } = true;
-}
+public sealed partial class AnimationJumpEmoteEvent : AnimationEmoteEvent;
 
 [Serializable, NetSerializable]
 public sealed partial class AnimationTweakEmoteEvent : AnimationEmoteEvent;
