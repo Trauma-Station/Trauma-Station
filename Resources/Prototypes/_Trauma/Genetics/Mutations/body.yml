@@ -9,7 +9,6 @@
   - type: Mutation
     instability: -30
   - type: RandomTrigger
-    # TODO: make synchronizer decrease this chance
     prob: 0.005 # 0.5%
   - type: TriggerOnFlashed # get flashed nerd
     prob: 0.7 # 70%

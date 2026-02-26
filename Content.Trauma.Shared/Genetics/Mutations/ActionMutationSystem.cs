@@ -33,4 +33,12 @@ public sealed class ActionMutationSystem : EntitySystem
         if (ent.Comp.ActionEntity is {} action)
             _actions.RemoveProvidedAction(args.Target.Owner, ent.Owner, action);
     }
+
+    public Entity<ActionComponent>? GetAction(Entity<ActionMutationComponent?> ent)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return null;
+
+        return _actions.GetAction(ent.Comp.ActionEntity);
+    }
 }
