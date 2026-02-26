@@ -6,4 +6,4 @@ namespace Content.Trauma.Shared.Weapons.Ranged.Ammo;
 /// Any projectile with this component will make bullet-holes when it hits another entity with the BulletholeComponent
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class BulletholeGeneratorComponent : Component;
+public sealed partial class BulletHoleGeneratorComponent : Component;

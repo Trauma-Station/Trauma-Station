@@ -9,22 +9,21 @@ namespace Content.Trauma.Server.Bulletholes;
 /// <summary>
 /// Handles giving bullet holes a position and sending it to the client
 /// </summary>
-public sealed class BulletholeSystem : EntitySystem
+public sealed class BulletHoleSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
 
-
     public override void Initialize()
     {
-        SubscribeLocalEvent<BulletholeComponent, GotHitByProjectileEvent>(OnHit);
+        SubscribeLocalEvent<BulletHoleComponent, GotHitByProjectileEvent>(OnHit);
     }
 
-    private void OnHit(Entity<BulletholeComponent> ent, ref GotHitByProjectileEvent args)
+    private void OnHit(Entity<BulletHoleComponent> ent, ref GotHitByProjectileEvent args)
     {
-        if (!HasComp<BulletholeGeneratorComponent>(args.Projectile))
+        if (!HasComp<BulletHoleGeneratorComponent>(args.Projectile))
             return;
 
-        if (ent.Comp.HolePositions.Count >= BulletholeComponent.MaxHoles)
+        if (ent.Comp.HolePositions.Count >= BulletHoleComponent.MaxHoles)
             return;
 
         var offset = new Vector2(

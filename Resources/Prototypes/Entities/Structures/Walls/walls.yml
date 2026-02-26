@@ -71,7 +71,7 @@
     # <Trauma>
   - type: FreezableWall
   - type: Appearance
-  - type: Bullethole
+  - type: BulletHole
     # </Trauma>
 
 - type: entity

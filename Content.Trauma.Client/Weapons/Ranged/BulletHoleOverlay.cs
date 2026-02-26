@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Shared.Coordinates;
 using Content.Trauma.Shared.Weapons.Ranged;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -13,7 +12,7 @@ namespace Content.Trauma.Client.Weapons.Ranged;
 /// <summary>
 /// Draws bullet holes on objects
 /// </summary>
-public sealed class BulletholeOverlay : Overlay
+public sealed class BulletHoleOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _entMan    = default!;
     [Dependency] private readonly IResourceCache _resources = default!;
@@ -22,13 +21,13 @@ public sealed class BulletholeOverlay : Overlay
 
     private const string RsiPath  = "/Textures/_RMC14/Effects/bulletholes.rsi";
     private const string RsiState = "bullethole";
-    private const float  DrawSize = 1f;
+    private static readonly Vector2 DrawSize = Vector2.One;
 
     private Texture? _texture;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
-    public BulletholeOverlay()
+    public BulletHoleOverlay()
     {
         IoCManager.InjectDependencies(this);
         _xform = _entMan.System<TransformSystem>();
@@ -47,18 +46,17 @@ public sealed class BulletholeOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        var texture = GetTexture();
-        if (texture == null)
+        if (GetTexture() is not {} texture)
             return;
 
         var handle = args.WorldHandle;
         var bounds = args.WorldBounds;
-        var query  = _entMan.AllEntityQueryEnumerator<BulletholeComponent, TransformComponent>();
+        var query  = _entMan.AllEntityQueryEnumerator<BulletHoleComponent>();
         var expandedBounds = bounds.Enlarged(2f);
 
-        while (query.MoveNext(out var uid, out var holes, out var xform))
+        while (query.MoveNext(out var uid, out var holes))
         {
-            if (holes.HolePositions.Count == 0)
+            if (holes.HolePositions.Count == 0 || !_entMan.TryGetComponent<TransformComponent>(uid, out var xform))
                 continue;
 
             var worldPos = _xform.GetWorldPosition(uid);
@@ -71,14 +69,17 @@ public sealed class BulletholeOverlay : Overlay
                 ? _xform.GetWorldRotation(gridUid.Value)
                 : Angle.Zero;
 
+            var bulletRot = Matrix3x2.CreateRotation((float) gridRot);
+
+            var box = Box2.CenteredAround(Vector2.Zero, DrawSize);
+
             foreach (var localOffset in holes.HolePositions)
             {
-                var worldOffset = Vector2.Transform(localOffset, Matrix3x2.CreateRotation((float)gridRot));
+                var worldOffset = Vector2.Transform(localOffset, bulletRot);
                 var center = worldPos + worldOffset;
-                var box    = Box2.CenteredAround(Vector2.Zero, new Vector2(DrawSize, DrawSize));
 
                 handle.SetTransform(
-                    Matrix3x2.CreateRotation((float)gridRot) *
+                    bulletRot *
                     Matrix3x2.CreateTranslation(center));
 
                 handle.DrawTextureRect(texture, box);
