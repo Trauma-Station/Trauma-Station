@@ -50,7 +50,7 @@ public sealed class FaceHuggerSystem : EntitySystem
     [Dependency] private readonly CommonBodyPartSystem _part = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;    
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -75,7 +75,7 @@ public sealed class FaceHuggerSystem : EntitySystem
     }
 
     private void OnCollideEvent(EntityUid uid, FaceHuggerComponent component, StartCollideEvent args)
-        => TryEquipFaceHugger(uid, args.OtherEntity, component);    
+        => TryEquipFaceHugger(uid, args.OtherEntity, component);
 
     private void OnMeleeHit(EntityUid uid, FaceHuggerComponent component, MeleeHitEvent args)
     {
