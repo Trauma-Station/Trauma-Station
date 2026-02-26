@@ -60,6 +60,8 @@
   - type: ThermalRegulatorMutation
     shivering: 0.001
     sweating: 0.001
+    metabolism: 0.001 # no more metabolism :)
+    regulation: 0.001
   - type: TemperatureDamageMutation
     coldOffset: 40
     heatOffset: -12
