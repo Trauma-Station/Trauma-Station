@@ -20,7 +20,7 @@
   - type: ThrowableFacehugger # Goobstation
     minThrowForce: 5.0 # Goobstation
   - type: GhostRole
-    makeSentient: true
+    makeSentient: false
     allowSpeech: true
     allowMovement: true
     name: ghost-role-information-facehugger-name
