@@ -10,6 +10,12 @@ MutationThermalAdaptation-mutated = Your body feels pleasantly room temperature.
 
 MutationPressureAdaptation-mutated = Your body feels numb.
 
+MutationColdWeakness-mutated = Your skin tingles.
+
+MutationHeatWeakness-mutated = Your sweat glands close up.
+
+MutationThermalWeakness-mutated = Your body feels especially sickly.
+
 MutationAntenna-mutated = You feel an antenna sprout from your forehead.
 MutationAntenna-removed = Your antenna shrinks back down.
 
