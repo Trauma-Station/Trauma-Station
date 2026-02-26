@@ -22,6 +22,7 @@ public sealed class BulletHoleOverlay : Overlay
     private const string RsiPath  = "/Textures/_RMC14/Effects/bulletholes.rsi";
     private const string RsiState = "bullethole";
     private static readonly Vector2 DrawSize = Vector2.One;
+    private static readonly Box2 HoleBox = Box2.CenteredAround(Vector2.Zero, DrawSize);
 
     private Texture? _texture;
 
@@ -70,9 +71,6 @@ public sealed class BulletHoleOverlay : Overlay
                 : Angle.Zero;
 
             var bulletRot = Matrix3x2.CreateRotation((float) gridRot);
-
-            var box = Box2.CenteredAround(Vector2.Zero, DrawSize);
-
             foreach (var localOffset in holes.HolePositions)
             {
                 var worldOffset = Vector2.Transform(localOffset, bulletRot);
@@ -82,7 +80,7 @@ public sealed class BulletHoleOverlay : Overlay
                     bulletRot *
                     Matrix3x2.CreateTranslation(center));
 
-                handle.DrawTextureRect(texture, box);
+                handle.DrawTextureRect(texture, HoleBox);
             }
         }
 
