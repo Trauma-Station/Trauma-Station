@@ -101,7 +101,6 @@
     removed:
     - !type:Scale
       multiplier: 1, 0.8
-  # TODO: adjust hitbox?
 
 - type: entity
   parent: BaseFreeMutation
@@ -117,10 +116,13 @@
     added:
     - !type:Scale
       multiplier: 1.2, 1.2
+    - !type:ScaleFixtures
+      multiplier: 1.2
     removed:
     - !type:Scale
       multiplier: 0.833333, 0.833333 # enjoy being permanently trolled by FP error mixels
-  # TODO: adjust hitbox
+    - !type:ScaleFixtures
+      multiplier: 0.833333
 
 # Disabilities
 
