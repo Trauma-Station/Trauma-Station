@@ -14,7 +14,7 @@
       movement:
         state: facehugger-moving
     noMovementLayers:
-      movement:      
+      movement:
   - type: Clothing
     sprite: _Trauma/Mobs/Xenos/clothing/facehuggermask.rsi
     slots: [mask]
