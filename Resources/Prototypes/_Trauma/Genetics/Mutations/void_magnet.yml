@@ -19,6 +19,9 @@
   description: A rare genome that attracts odd forces not usually observed. May sometimes pull you in randomly.
   components:
   - type: Action
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: void_magnet
     useDelay: 60
   - type: InstantAction
     event: !type:EffectInstantActionEvent
@@ -31,4 +34,4 @@
       messages:
       - entity-effect-popup-convoke-void
     - !type:Polymorph
-      prototype: VoidPocket
+      prototype: VoidMagnet
