@@ -1,29 +1,13 @@
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
+using System.Numerics;
 
 namespace Content.Trauma.Shared.Weapons.Ranged;
 
-/// <summary>
-/// Anything with this component will product a bullet hole when shot by a projectile with a BulletholeGeneratorComponent
-/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BulletholeComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int BulletholeCount = 0;
+    public List<(Vector2 LocalOffset, int Seed)> HolePositions = new();
 
-    [DataField, AutoNetworkedField]
-    public int BulletholeState;
-}
-
-[Serializable, NetSerializable]
-public enum BulletholeVisuals : byte
-{
-    State,
-}
-
-[Serializable, NetSerializable]
-public enum BulletholeVisualsLayers : byte
-{
-    Bullethole,
+    public const int MaxHoles = 50;
 }

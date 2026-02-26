@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Trauma.Common.Bulletholes;
 using Content.Trauma.Shared.Weapons.Ranged;
 using Content.Trauma.Shared.Weapons.Ranged.Ammo;
@@ -7,33 +8,27 @@ namespace Content.Trauma.Server.Bulletholes;
 
 public sealed class BulletholeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
-    // Bullethole overlays
-    private const int MaxBulletholeState = 10;
-    private const int MaxBulletholeCount = 24;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<BulletholeComponent, GotHitByProjectileEvent>(OnVisualsDamageChangedEvent);
+        SubscribeLocalEvent<BulletholeComponent, GotHitByProjectileEvent>(OnHit);
     }
 
-    private void OnVisualsDamageChangedEvent(Entity<BulletholeComponent> ent, ref GotHitByProjectileEvent args)
+    private void OnHit(Entity<BulletholeComponent> ent, ref GotHitByProjectileEvent args)
     {
-        if (!HasComp<BulletholeGeneratorComponent>(args.Projectile)
-            || !TryComp<AppearanceComponent>(ent, out var app))
+        if (!HasComp<BulletholeGeneratorComponent>(args.Projectile))
             return;
 
-        ent.Comp.BulletholeCount++;
+        if (ent.Comp.HolePositions.Count >= BulletholeComponent.MaxHoles)
+            return;
 
-        if (ent.Comp.BulletholeState < 1 || ent.Comp.BulletholeState > MaxBulletholeState)
-            ent.Comp.BulletholeState = _random.Next(1, MaxBulletholeState + 1);
+        var offset = new Vector2(
+            _random.NextFloat() * 0.8f + 0.1f,
+            _random.NextFloat() * 0.8f + 0.1f);
 
-        var displayState = ent.Comp.BulletholeState;
-        var displayCount = ent.Comp.BulletholeCount >= MaxBulletholeCount ? MaxBulletholeCount : ent.Comp.BulletholeCount;
-        var stateString = $"bhole_{displayState}_{displayCount}";
-
-        _appearance.SetData(ent, BulletholeVisuals.State, stateString, app);
+        ent.Comp.HolePositions.Add((offset, _random.Next(1, 100_000)));
+        Dirty(ent);
     }
 }

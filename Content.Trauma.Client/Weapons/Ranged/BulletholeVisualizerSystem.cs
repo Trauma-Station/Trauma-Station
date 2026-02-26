@@ -1,33 +1,20 @@
-using Content.Trauma.Shared.Weapons.Ranged;
-using Robust.Client.GameObjects;
-using Robust.Shared.Utility;
+using Robust.Client.Graphics;
 
 namespace Content.Trauma.Client.Weapons.Ranged;
 
-public sealed class BulletholeVisualizerSystem : VisualizerSystem<BulletholeComponent>
+public sealed class BulletholeVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    private const string BulletholeRsiPath = "/Textures/_RMC14/Effects/bulletholes.rsi";
+    [Dependency] private readonly IOverlayManager _overlayManager = default!;
 
-    protected override void OnAppearanceChange(EntityUid uid, BulletholeComponent component, ref AppearanceChangeEvent args)
+    public override void Initialize()
     {
-        if (args.Sprite is not { } sprite
-            || !AppearanceSystem.TryGetData<string>(uid, BulletholeVisuals.State, out var state, args.Component))
-            return;
+        base.Initialize();
+        _overlayManager.AddOverlay(new BulletholeOverlay());
+    }
 
-        var ent = (uid, sprite);
-
-        if (!_sprite.LayerMapTryGet((uid, sprite),BulletholeVisualsLayers.Bullethole, out var layer, false))
-                _sprite.LayerMapReserve(ent,BulletholeVisualsLayers.Bullethole);
-
-        var valid = !string.IsNullOrWhiteSpace(state);
-
-        _sprite.LayerSetVisible(ent, BulletholeVisualsLayers.Bullethole, valid);
-
-        if (valid)
-        {
-            _sprite.LayerSetRsi(ent, BulletholeVisualsLayers.Bullethole, new ResPath (BulletholeRsiPath));
-            _sprite.LayerSetRsiState(ent, BulletholeVisualsLayers.Bullethole, state);
-        }
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        _overlayManager.RemoveOverlay<BulletholeOverlay>();
     }
 }
