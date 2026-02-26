@@ -19,6 +19,8 @@
   components:
   - type: ThermalRegulatorMutation
     shivering: 0.1
+  - type: TemperatureDamageMutation
+    coldOffset: 30 # -13C -> 23C
   - type: ArmorMutation
     modifiers:
       coefficients:
@@ -32,6 +34,8 @@
   components:
   - type: ThermalRegulatorMutation
     sweating: 0.1
+  - type: TemperatureDamageMutation
+    heatOffset: -10 # 51C -> 41C (fever hits hard ye)
   - type: ArmorMutation
     modifiers:
       coefficients:
@@ -54,6 +58,9 @@
   - type: ThermalRegulatorMutation
     shivering: 0.05
     sweating: 0.05
+  - type: TemperatureDamageMutation
+    coldOffset: 40
+    heatOffset: -12
   - type: ArmorMutation
     modifiers:
       coefficients:
