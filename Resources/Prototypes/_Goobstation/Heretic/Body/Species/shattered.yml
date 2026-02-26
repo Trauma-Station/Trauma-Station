@@ -240,12 +240,9 @@
   - type: Woundable
     canBleed: false
   - type: WoundableVisuals
-    damageOverlayGroups:
-      Brute:
-        sprite: _Shitmed/Mobs/Effects/brute_damage.rsi
-        color: "#000000"
-      Burn:
-        sprite: _Shitmed/Mobs/Effects/burn_damage.rsi
+    damageGroupColors:
+      Brute: "#000000"
+    bleedingOverlay: null
 
 ## Parts
 
