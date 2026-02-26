@@ -10,6 +10,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.Weapons.Ranged;
 
+/// <summary>
+/// Draws bullet holes on objects
+/// </summary>
 public sealed class BulletholeOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _entMan    = default!;
@@ -68,7 +71,7 @@ public sealed class BulletholeOverlay : Overlay
                 ? _xform.GetWorldRotation(gridUid.Value)
                 : Angle.Zero;
 
-            foreach (var (localOffset, _) in holes.HolePositions)
+            foreach (var localOffset in holes.HolePositions)
             {
                 var worldOffset = Vector2.Transform(localOffset, Matrix3x2.CreateRotation((float)gridRot));
                 var center = worldPos + worldOffset;

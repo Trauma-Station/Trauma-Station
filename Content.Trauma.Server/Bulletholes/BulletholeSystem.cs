@@ -6,6 +6,9 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Bulletholes;
 
+/// <summary>
+/// Handles giving bullet holes a position and sending it to the client
+/// </summary>
 public sealed class BulletholeSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -28,7 +31,7 @@ public sealed class BulletholeSystem : EntitySystem
             _random.NextFloat() * 0.8f + 0.1f,
             _random.NextFloat() * 0.8f + 0.1f);
 
-        ent.Comp.HolePositions.Add((offset, _random.Next(1, 100_000)));
+        ent.Comp.HolePositions.Add(offset);
         Dirty(ent);
     }
 }
