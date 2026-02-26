@@ -18,9 +18,10 @@
   description: A strange mutation that cripples the host's ability to raise its body temperature. Cold is far more dangerous.
   components:
   - type: ThermalRegulatorMutation
-    shivering: 0.1
+    shivering: 0.05
+    metabolism: 0.3 # lower metabolism idk
   - type: TemperatureDamageMutation
-    coldOffset: 30 # -13C -> 23C
+    coldOffset: 35 # -13C -> 28C
   - type: ArmorMutation
     modifiers:
       coefficients:
@@ -33,7 +34,8 @@
   description: A strange mutation that cripples the host's ability to lower its body temperature. Heat is far more dangerous.
   components:
   - type: ThermalRegulatorMutation
-    sweating: 0.1
+    sweating: 0.05
+    metabolism: 1.5 # more heat too
   - type: TemperatureDamageMutation
     heatOffset: -10 # 51C -> 41C (fever hits hard ye)
   - type: ArmorMutation
@@ -56,8 +58,8 @@
     - MutationHeatWeakness
   # ... but they're even deadlier
   - type: ThermalRegulatorMutation
-    shivering: 0.05
-    sweating: 0.05
+    shivering: 0.001
+    sweating: 0.001
   - type: TemperatureDamageMutation
     coldOffset: 40
     heatOffset: -12

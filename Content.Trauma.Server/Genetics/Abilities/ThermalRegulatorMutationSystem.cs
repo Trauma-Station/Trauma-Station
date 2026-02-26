@@ -25,6 +25,7 @@ public sealed class ThermalRegulatorMutationSystem : EntitySystem
 
         comp.ShiveringHeatRegulation *= ent.Comp.Shivering;
         comp.SweatHeatRegulation *= ent.Comp.Sweating;
+        comp.MetabolismHeat *= ent.Comp.Metabolism;
     }
 
     private void OnRemoved(Entity<ThermalRegulatorMutationComponent> ent, ref MutationRemovedEvent args)
@@ -34,5 +35,6 @@ public sealed class ThermalRegulatorMutationSystem : EntitySystem
 
         comp.ShiveringHeatRegulation /= ent.Comp.Shivering;
         comp.SweatHeatRegulation /= ent.Comp.Sweating;
+        comp.MetabolismHeat /= ent.Comp.Metabolism;
     }
 }

@@ -13,4 +13,7 @@ public sealed partial class ThermalRegulatorMutationComponent : Component
 
     [DataField]
     public float Sweating = 1f;
+
+    [DataField]
+    public float Metabolism = 1f;
 }
