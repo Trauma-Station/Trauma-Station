@@ -20,8 +20,8 @@
   - type: ThermalRegulatorMutation
     shivering: 0.1
   - type: ArmorMutation
-    coefficients:
-      modifiers:
+    modifiers:
+      coefficients:
         Cold: 1.5
 
 - type: entity
@@ -33,8 +33,8 @@
   - type: ThermalRegulatorMutation
     sweating: 0.1
   - type: ArmorMutation
-    coefficients:
-      modifiers:
+    modifiers:
+      coefficients:
         Heat: 1.2 # not as bad because lasers use it
 
 - type: entity
@@ -55,7 +55,7 @@
     shivering: 0.05
     sweating: 0.05
   - type: ArmorMutation
-    coefficients:
-      modifiers:
+    modifiers:
+      coefficients:
         Cold: 1.8
         Heat: 1.3
