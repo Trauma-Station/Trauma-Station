@@ -14,7 +14,8 @@
   parent: BaseMutationAdaptation
   id: MutationColdAdaptation
   name: Cold Adaptation
-  description: A strange mutation that renders the host immune to damage from low temperature environments. It also prevents the host from slipping on ice.
+  description: A strange mutation that renders the host immune to damage from low temperature environments.
+  #It also prevents the host from slipping on ice.
   components:
   - type: ComponentMutation
     added:
@@ -32,7 +33,7 @@
     added:
     - type: SpecialHighTempImmunity
     - type: FireImmunity
-  # TODO: ash storm immune
+    - type: WeatherImmune # safe from ash storms
 
 - type: entity
   parent: BaseMutation
