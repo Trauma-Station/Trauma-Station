@@ -48,7 +48,7 @@ public abstract class SharedXenomorphAcidSystem : EntitySystem
         }
 
         args.Handled = true;
-        _popup.PopupEntity(Loc.GetString("xenomorphs-acid-apply", ("target", args.Target)), uid, uid, type: PopupType.Small);
+        _popup.PopupClient(Loc.GetString("xenomorphs-acid-apply", ("target", args.Target)), uid, uid, type: PopupType.Small);
 
         if (_net.IsClient)
             return;
