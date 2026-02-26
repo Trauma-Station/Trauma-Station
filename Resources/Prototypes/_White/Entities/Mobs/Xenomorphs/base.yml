@@ -160,7 +160,7 @@
   - type: BloodSplatterer # Trauma
   - type: MovementIgnoreGravity # Trauma
     weightless: true # Trauma
-  - type: CanMoveInAir # Trauma  
+  - type: CanMoveInAir # Trauma
 
 
 - type: entity
