@@ -5,12 +5,18 @@
   description: A writhing nightmare. The facehugger clings to its victim's face, forcibly inserting a xenomorph fetus.
   components:
   - type: Sprite
-    sprite: _White/Mobs/Aliens/Xenomorphs/facehugger.rsi
+    sprite: _Trauma/Mobs/Xenos/facehugger.rsi
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: facehugger
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: facehugger-moving
+    noMovementLayers:
+      movement:      
   - type: Clothing
-    sprite: _White/Mobs/Aliens/Xenomorphs/facehugger.rsi
+    sprite: _Trauma/Mobs/Xenos/clothing/facehuggermask.rsi
     slots: [mask]
   - type: IngestionBlocker
   - type: Blindfold
