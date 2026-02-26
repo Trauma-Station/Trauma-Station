@@ -32,7 +32,7 @@ public abstract class SharedXenomorphAcidSystem : EntitySystem
 
         if (!TryComp<XenomorphAcidComponent>(uid, out var component))
             return;
-            
+
 
         // Check if this is a plasma-cost action and get the cost
         if (!HasComp<StructureComponent>(args.Target)) // TODO: This should check whether the target is a structure.
