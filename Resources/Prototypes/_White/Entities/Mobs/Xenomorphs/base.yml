@@ -158,7 +158,6 @@
     groups:
     - XenomorphAccess
   - type: BloodSplatterer # Trauma
-  - type: CanMoveInAir # Trauma
 
 
 - type: entity
@@ -194,6 +193,7 @@
     - DoorBumpOpener
     - FootstepSound
   - type: XenomorphShoveTracker
+  - type: CanMoveInAir  
 
 - type: entity
   id: BaseMobXenomorphDungeon
