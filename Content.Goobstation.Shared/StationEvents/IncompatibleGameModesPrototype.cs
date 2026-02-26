@@ -3,7 +3,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.GameTicking.Presets;
 using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.StationEvents;
@@ -15,5 +14,5 @@ public sealed partial class IncompatibleGameModesPrototype : IPrototype
     public string ID { get; private set; } = default!;
 
     [DataField(required: true)]
-    public HashSet<ProtoId<GamePresetPrototype>> Modes = new();
+    public HashSet<string> Modes = new();
 }
