@@ -158,8 +158,6 @@
     groups:
     - XenomorphAccess
   - type: BloodSplatterer # Trauma
-  - type: MovementIgnoreGravity # Trauma
-    weightless: true # Trauma
   - type: CanMoveInAir # Trauma
 
 
