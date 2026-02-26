@@ -82,7 +82,8 @@ public sealed class MindShieldSystem : EntitySystem
     private void OnImplantRemoved(Entity<MindShieldImplantComponent> ent, ref ImplantRemovedEvent args)
     {
         // <Goob>
-        _popupSystem.PopupEntity(Loc.GetString("mindshield-implant-effect-removed"), args.Implanted, args.Implanted);
+        // FIXME: should only be shown when removed by implanter not polymorph etc fuck sake
+        //_popupSystem.PopupEntity(Loc.GetString("mindshield-implant-effect-removed"), args.Implanted, args.Implanted);
 
         if (TryComp<HeadRevolutionaryComponent>(args.Implanted, out var headRevComp))
             _revolutionary.ToggleConvertAbility((args.Implanted, headRevComp), true);
