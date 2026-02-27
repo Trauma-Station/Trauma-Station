@@ -35,3 +35,11 @@
         color: "#8c3986"
       mindRoles:
       - MindRoleXenomorph
+
+- type: entity
+  parent: BaseGameRule
+  id: XenomorphsBundleRule
+  components:
+    - type: GameRule
+      chaosScore: 0
+    - type: XenomorphsRule
