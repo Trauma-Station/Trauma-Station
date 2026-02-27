@@ -34,7 +34,7 @@
   categories:
     - UplinkDisruption
   conditions:
-    - !type: StoreWhitelistCondition
-      blacklist:
-        tags:
-          - ContravendUplink
+  - !type: StoreWhitelistCondition
+    blacklist:
+      tags:
+        - ContravendUplink
