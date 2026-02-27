@@ -13,9 +13,6 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 10h
-    - !type:SpeciesRequirement # Trauma - Human only command
-      species:
-      - Human
   weight: 10
   startingGear: CMOGear
   icon: "JobIconChiefMedicalOfficer"

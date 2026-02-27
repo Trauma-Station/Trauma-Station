@@ -139,9 +139,6 @@
     - !type:DepartmentTimeRequirement
       department: Cargo
       time: 10h
-    - !type:SpeciesRequirement # Trauma - Human only command
-      species:
-      - Human
   weight: 10
   startingGear: QuartermasterGear
   icon: "JobIconQuarterMaster"

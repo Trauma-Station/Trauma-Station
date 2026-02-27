@@ -3151,3 +3151,10 @@ Entries:
   id: 381
   time: '2026-02-27T19:36:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/902
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Role playtime restrictions have been largely reduced.
+  id: 382
+  time: '2026-02-27T21:30:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/904
