@@ -122,14 +122,16 @@ public sealed class XenomorphQueenSystem : EntitySystem
     /// </summary>
     public bool IsQueenAlive()
     {
-        var query = EntityQueryEnumerator<XenomorphQueenComponent, DamageableComponent>();
-        while (query.MoveNext(out var uid, out var queen, out var damageable))
+        var query = EntityQueryEnumerator<XenomorphQueenComponent>();
+        while (query.MoveNext(out var uid, out var queen))
         {
-            // Check if the Queen has taken any damage that would indicate she's dead
-            if (damageable.TotalDamage < 1) // Alive if TotalDamage is zero
-                return true;
-        }
+            if (!EntityManager.EntityExists(uid))
+                continue;
 
+            return true;
+        }
         return false;
+        {
+      }
     }
 }
