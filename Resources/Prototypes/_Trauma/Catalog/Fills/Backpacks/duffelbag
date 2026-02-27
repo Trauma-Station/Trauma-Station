@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingBackpackXenomorph
+  parent: ClothingBackpackDuffel
   id: ClothingBackpackXenomorphBundle
   components:
   - type: StorageFill
