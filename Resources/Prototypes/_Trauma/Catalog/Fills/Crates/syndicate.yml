@@ -6,6 +6,7 @@
   description: A crate containing all the tools and organs necessary to kickstart your army of biological terror!
   components:
   - type: StorageFill
+  - type: XenomorphsRule #so we dont end up having 7 xenomorph queens by the end of the shift
     contents:
       - id: OrganXenomorphEyes
       - id: OrganXenomorphResinSpinner
