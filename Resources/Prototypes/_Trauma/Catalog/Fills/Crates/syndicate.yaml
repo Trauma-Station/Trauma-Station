@@ -12,7 +12,7 @@
       - id: OrganXenomorphNeurotoxinGland
       - id: OrganXenomorphAcidGland
       - id: OrganXenomorphPlasmaVessel
-      - id: OrganXenomorphEggSack  
+      - id: OrganXenomorphEggSack
       - id: OrganXenomorphHiveNode
       - id: OmnimedTool
       - id: MonkeyCubeWrapped
