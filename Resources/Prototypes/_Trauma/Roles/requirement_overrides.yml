@@ -3,7 +3,7 @@
   jobs:
     # Dignitrary
     NanotrasenRepresentative:
-    - type:DepartmentTimeRequirement
+    - !type:DepartmentTimeRequirement
       department: Command
       time: 3h
     - !type:SpeciesRequirement
