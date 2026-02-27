@@ -3,11 +3,12 @@ using Content.Goobstation.Shared.Phones.Components;
 using Content.Goobstation.Shared.Phones.Events;
 using Content.Goobstation.Shared.Phones.Systems;
 using Content.Server.Chat.Managers;
-using Content.Server.Radio.Components;
 using Content.Server.Speech;
 using Content.Shared.Audio;
 using Content.Shared.Chat;
 using Content.Shared.Physics;
+using Content.Shared.Radio.Components;
+using Content.Shared.Speech;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -53,7 +54,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
 
         var visuals = EnsureComp<JointVisualsComponent>(uid);
         visuals.Sprite = comp.RopeSprite;
-        visuals.Target = GetNetEntity(args.Entity);
+        visuals.Target = args.Entity;
         Dirty(uid, visuals);
 
         var jointComp = EnsureComp<JointComponent>(uid);
