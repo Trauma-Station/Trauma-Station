@@ -41,7 +41,7 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly XenomorphQueenSystem _queenSystem = default!; // <-- dependency for Queen checks
+    [Dependency] private readonly XenomorphQueenSystem _queen = default!; // <-- dependency for Queen checks
 
     public override void Initialize()
     {
@@ -171,11 +171,11 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
     {
         if (evolveTo == null
             || !_protoManager.TryIndex(evolveTo, out var xenomorphPrototype)
-            || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, _componentFactory))
+            || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, _componentFactory)) // Goobstation
             return false;
 
         // Prevent evolving into Queen if a living Queen already exists
-        if (xenomorph.Caste == "Queen" && _queenSystem.IsQueenAlive())
+        if (xenomorph.Caste == "Queen" && _queen.IsQueenAlive())
         {
             _popup.PopupEntity(
                 Loc.GetString("xenomorphs-evolution-no-cast-slot", ("caste", "Queen")), uid);
