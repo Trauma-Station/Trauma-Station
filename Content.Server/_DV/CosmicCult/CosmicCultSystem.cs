@@ -46,7 +46,6 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly NavMapSystem _navMap = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly ServerGlobalSoundSystem _sound = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
@@ -81,8 +80,22 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         SubscribeLocalEvent<CosmicCultComponent, PolymorphedEvent>(OnCultistPolymorphed);
         SubscribeLocalEvent<SpeechOverrideComponent, GotEquippedEvent>(OnGotSpeechOverrideEquipped);
         SubscribeLocalEvent<SpeechOverrideComponent, GotUnequippedEvent>(OnGotSpeechOverrideUnequipped);
+    }
 
-        SubscribeFinale(); //Hook up the cosmic cult finale system
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var markQuerry = EntityQueryEnumerator<CosmicSubtleMarkComponent>();
+        while (markQuerry.MoveNext(out var uid, out var comp))
+            if (comp.ExpireTimer is { } timer && _timing.CurTime > timer)
+                RemComp<CosmicSubtleMarkComponent>(uid);
+
+        var echoQuerry = EntityQueryEnumerator<CosmicMalignEchoComponent>();
+        while (echoQuerry.MoveNext(out var uid, out var comp))
+            if (_timing.CurTime > comp.ExpireTimer)
+                RemComp<CosmicMalignEchoComponent>(uid);
+
     }
 
     public override int AddEntropy(Entity<CosmicCultComponent> ent, int amount)
@@ -213,6 +226,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     #region Edge cases
     /// <summary>
     /// When a cultist gets polymorphed, ensure that the resulting entity has all the necessary components. Thank god kitsune aren't real.
+    /// Should probably just move most of this shit to mind instead at some point
     /// </summary>
     private void OnCultistPolymorphed(Entity<CosmicCultComponent> ent, ref PolymorphedEvent args)
     {

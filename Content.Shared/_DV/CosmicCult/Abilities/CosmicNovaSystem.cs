@@ -1,8 +1,6 @@
 using System.Numerics;
 using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared._DV.CosmicCult;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Effects;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
@@ -13,7 +11,6 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._DV.CosmicCult.Abilities;
@@ -24,7 +21,6 @@ public sealed class CosmicNovaSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
@@ -51,7 +47,7 @@ public sealed class CosmicNovaSystem : EntitySystem
     {
         var startPos = _transform.GetMapCoordinates(args.Performer);
         var targetPos = _transform.ToMapCoordinates(args.Target);
-        var userVelocity = _physics.GetMapLinearVelocity(args.Performer);
+        var userVelocity = Vector2.Zero; // Actually using this makes it near impossible to aim while moving, and possible to hurl it way too fast
 
         var delta = targetPos.Position - startPos.Position;
         if (delta.EqualsApprox(Vector2.Zero))
@@ -59,7 +55,7 @@ public sealed class CosmicNovaSystem : EntitySystem
 
         args.Handled = true;
         var projectile = PredictedSpawnAtPosition(Projectile, Transform(ent).Coordinates);
-        _gun.ShootProjectile(projectile, delta, userVelocity, args.Performer, args.Performer, 5f);
+        _gun.ShootProjectile(projectile, delta, userVelocity, args.Performer, args.Performer, 7f);
         _audio.PlayPredicted(ent.Comp.NovaCastSFX, ent, ent, AudioParams.Default.WithVariation(0.1f));
         _cult.MalignEcho(ent);
     }
@@ -75,7 +71,7 @@ public sealed class CosmicNovaSystem : EntitySystem
 
     private void OnNovaCollide(Entity<CosmicAstralNovaComponent> ent, ref ProjectileHitEvent args)
     {
-        _lookup.GetEntitiesInRange<MobStateComponent>(Transform(ent).Coordinates, ent.Comp.AreaRange, _mobs);
+        _lookup.GetEntitiesInRange(Transform(ent).Coordinates, ent.Comp.AreaRange, _mobs);
         _mobs.RemoveWhere(target =>
         {
             if (_entityWhitelist.IsValid(ent.Comp.AreaBlacklist, target)) return true;

@@ -19,6 +19,7 @@ public sealed class CosmicShopBuiState(CosmicCultComponent comp) : BoundUserInte
     public int EntropyBudget = comp.EntropyBudget;
     public int CultistsForNextLevel = comp.CultistsForNextLevel;
     public bool LevelUpAwaitingConfirmation = comp.LevelUpAwaitingConfirmation;
+    public bool EntropyLocked = comp.EntropyLocked;
     public float CurrentProgress = comp.TotalEntropy - comp.EntropyRequirementOffset;
     public float TargetProgress = comp.EntropyForNextLevel;
 }

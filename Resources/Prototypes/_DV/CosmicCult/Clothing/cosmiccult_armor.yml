@@ -105,7 +105,7 @@
     sprite: _DV/CosmicCult/Clothing/cosmiccult_armor.rsi
     equipSound:
       path: /Audio/_DV/CosmicCult/helmet_on.ogg
-    UnequipSound:
+    unequipSound:
       path: /Audio/_DV/CosmicCult/helmet_off.ogg
   - type: PressureProtection
     highPressureMultiplier: 0.3

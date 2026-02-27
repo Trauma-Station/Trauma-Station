@@ -36,7 +36,6 @@
     blacklist:
       components:
       - CosmicCult
-      - BibleUser
     event: !type:EventCosmicSiphon {}
 
 - type: entity
@@ -60,7 +59,6 @@
     blacklist:
       components:
       - CosmicCult
-      - BibleUser
     event: !type:EventCosmicBlank {}
 
 - type: entity
@@ -128,10 +126,6 @@
     icon:
       sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
       state: glare
-  - type: ConfirmableAction
-    popup: cosmicability-glare-confirm
-    confirmDelay: 0.1
-    primeTime: 5
   - type: InstantAction
     event: !type:EventCosmicGlare {}
   - type: Tag
@@ -187,7 +181,8 @@
       sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
       state: nova
   - type: TargetAction
-    range: 6000 # You're just picking a direction anyways
+    checkCanAccess: false
+    range: 0
   - type: WorldTargetAction
     event: !type:EventCosmicNova {}
 

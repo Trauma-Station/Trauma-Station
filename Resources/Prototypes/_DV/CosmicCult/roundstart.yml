@@ -25,6 +25,5 @@
         - BibleUser
       components:
       - type: CosmicCult
-      - type: WeakToHoly # GOOBSTATION
       mindRoles:
       - MindRoleCosmicCult

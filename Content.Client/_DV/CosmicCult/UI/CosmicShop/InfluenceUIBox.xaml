@@ -7,18 +7,18 @@
         <!-- Header -->
         <BoxContainer Orientation="Horizontal" Margin="0 0 0 10">
             <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                <TextureRect Name="InfluenceIcon" VerticalAlignment="Top" TextureScale="2 2" Stretch="KeepCentered" Margin="0 0 10 0" />
-                <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Label Name="CostText" Text="{Loc 'cosmic-shop-interface-influences-cost'}" Margin="0 0 10 0" />
-                    <Label Name="Cost" HorizontalAlignment="Center" Text="73" FontColorOverride="#4CA7AD" />
-                </BoxContainer>
-            </BoxContainer>
-            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                 <RichTextLabel Name="Name" HorizontalAlignment="Left"/>
                 <PanelContainer StyleClasses="LowDivider" MinHeight="4" Margin="0 5 0 5" />
                 <BoxContainer VerticalAlignment="Center" Orientation="Vertical">
                     <Label Name="Status" HorizontalAlignment="Center" HorizontalExpand="True" />
                     <Label Name="Type" HorizontalAlignment="Center" HorizontalExpand="True" />
+                </BoxContainer>
+            </BoxContainer>
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                <TextureRect Name="InfluenceIcon" VerticalAlignment="Top" TextureScale="2 2" Stretch="KeepCentered" Margin="10 0 0 0" />
+                <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label Name="CostText" Text="{Loc 'cosmic-shop-interface-influences-cost'}" Margin="0 0 10 0" />
+                    <Label Name="Cost" HorizontalAlignment="Center" Text="73" FontColorOverride="#4CA7AD" />
                 </BoxContainer>
             </BoxContainer>
         </BoxContainer>

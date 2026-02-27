@@ -13,15 +13,21 @@ cosmiccult-gamemode-description = Scanners detect an anomalous increase in Noös
 
 cosmiccult-finale-autocall-briefing = The Monument activates {$minutesandseconds}! Gather yourselves, and prepare for the end.
 cosmiccult-finale-ready = A terrifying light surges forth from The Monument!
+cosmiccult-finale-nobodyes = Bring humanoids in critical condition to quicken the beckoning.
 cosmiccult-finale-speedup = The beckoning quickens! Energy surges through the surroundings...
 
 cosmiccult-finale-degen = You feel yourself unravelling!
-cosmiccult-finale-location = Scanners are detecting an enormous Noöspheric eruption {$location}!
+cosmiccult-finale-location = Scanners are detecting an enormous Noöspheric eruption {$location}! Secure the station's nuclear fission explosive immediately!
 cosmiccult-finale-cancel-begin = Your mind's willpower begins to shatter the ritual...
 cosmiccult-finale-beckon-begin = The whispers in the back of your mind intensify...
-cosmiccult-finale-beckon-success = You beckon for the final curtain call.
 
-cosmiccult-monument-powerdown = The Monument falls eerily silent.
+cosmiccult-monument-approval-lowlevel = You try to concentrate, but you are not yet strong enough.
+cosmiccult-monument-approval-added = You concentrate your willpower to beckon The Monument...
+cosmiccult-monument-approval-removed = You are no longer concentrating on this spot.
+cosmiccult-monument-approval-count = [color=#4cabb3]{$count} cultists are concentrating on this spot.[/color]
+cosmiccult-monument-approval-needed = [color=#4cabb3]{$count} more cultists must concentrate to beckon The Monument.[/color]
+cosmiccult-monument-approval-examine-present = [color=#4cabb3]You are already concentrating on this spot.[/color]
+cosmiccult-monument-mark-removed = Your previous mark was removed.
 
 ## ROUNDEND TEXT
 
@@ -92,9 +98,6 @@ cosmiccult-role-deconverted-briefing =
     Deconverted!
     You are no longer a part of the Cosmic Cult.
 
-cosmiccult-role-levelup-briefing =
-    Malign power grows within you.
-
 cosmiccult-role-levelup-awaiting-input =
     You have gathered enough entropy to achieve a new level of power.
     Attune your Influence for more information.
@@ -144,8 +147,6 @@ cosmiccult-ui-deconverted-text-2 =
 
 cosmiccult-ui-popup-confirm = Confirm
 
-
-
 ## OBJECTIVES / CHARACTERMENU
 
 objective-issuer-cosmiccult = [bold][color=#cae8e8]The Unknown[/color][/bold]
@@ -161,15 +162,15 @@ objective-condition-victory-title = USHER IN THE END
 objective-condition-victory-desc = Beckon The Unknown, and herald the final curtain call.
 
 ## CHAT ANNOUNCEMENTS
+
 cosmiccult-announce-tier1-warning = Scanners detect a notable increase in Noöspheric pressure. Rifts in realspace may appear shortly. Please alert your station's chaplain if sighted.
 
-cosmiccult-announce-tier2-warning = Scanners detect a significant increase in Noöspheric pressure. Realspace integrity is at risk. Avoid standing near fractures in reality.
+cosmiccult-announce-tier2-warning = Scanners detect a significant increase in Noöspheric pressure. Realspace integrity is at risk. Avoid tears in fabric of reality.
 
 cosmiccult-announce-tier3-fluff = Arcs of Noöspheric energy crackle across the station's groaning structure. The end draws near.
 cosmiccult-announce-tier3-warning = Critical increase in Noöspheric pressure detected. Infected personnel are to be neutralized on sight.
 
 cosmiccult-announce-finale-warning = All station crew. The Noöspheric anomaly is going supercritical, instruments failing; Noöspheric-to-real transitional event horizon IMMINENT. If you are not already on counter-protocol, immediately sortie and intervene. Repeat: Intervene immediately or die.
-
 
 ## MISC
 

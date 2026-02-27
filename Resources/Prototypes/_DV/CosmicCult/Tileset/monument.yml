@@ -4,7 +4,7 @@
   parent: BaseStructure
   id: MonumentCosmicCult
   name: The Monument
-  description: A great slab of unknowledge, only visible to those aware of it. Built of a thousand little nothings, its surface reflects a starless emptiness...
+  description: A great slab of unknowledge, built of a thousand little nothings, its surface reflects a starless emptiness...
   suffix: DO NOT MAP
   placement:
     mode: AlignTileAny
@@ -41,13 +41,10 @@
     visuals:
       enum.MonumentVisuals.Monument:
         enum.MonumentVisualLayers.MonumentLayer:
-          1: {state: stage1}
-          2: {state: stage2}
-          3: {state: stage3}
+          1: {state: stage2}
+          2: {state: stage3}
       enum.MonumentVisuals.FinaleReached:
         enum.MonumentVisualLayers.FinaleLayer:
-          True: { visible: true }
-          False: { visible: false }
           1: {state: finale-overlay1}
           2: {state: finale-overlay2}
           3: {state: finale-overlay3}
@@ -85,16 +82,10 @@
     - CosmicCult
   - type: WarpPoint
     location: The Monument
-  - type: Tag
-    tags:
-    - GhostOnlyWarp
   - type: CosmicCultExamine
     cultistText: cosmic-examine-text-forthecult
   - type: CosmicCorrupting
-    corruptionMaxTicks: 15
-    corruptionReduction: 0.03
     corruptionSpeed: 2
-    enabled: false
     floodFillStarting: true
 
 - type: entity
@@ -131,23 +122,6 @@
         pitch: 0.8
   - type: TimedDespawn
     lifetime: 3.8
-  - type: PointLight
-    color: "#42a4ae"
-    radius: 4.5
-    energy: 4
-    castShadows: false
-  - type: LightBehaviour
-    behaviours:
-     - !type:FadeBehaviour
-       interpolate: Linear
-       minDuration: 3.8
-       maxDuration: 3.8
-       startValue: 0.1
-       endValue: 4.5
-       property: Energy
-       enabled: true
-       isLooped: true
-       reverseWhenFinished: true
 
 - type: entity
   categories: [ HideSpawnMenu ]
@@ -162,7 +136,7 @@
     - state: stage2-relocate-in
       shader: unshaded
     offset: 0,1
-    drawdepth: Mobs
+    drawdepth: 11
   - type: Fixtures
     fixtures:
       fix1:
@@ -184,65 +158,12 @@
   - type: TimedDespawn
     lifetime: 3.8
   - type: MonumentOnDespawn
-    prototype: MonumentCosmicCult1
-  - type: PointLight
-    color: "#42a4ae"
-    radius: 4.5
-    energy: 4
-    castShadows: false
-  - type: LightBehaviour
-    behaviours:
-     - !type:FadeBehaviour
-       interpolate: Linear
-       minDuration: 3.8
-       maxDuration: 3.8
-       startValue: 0.1
-       endValue: 4.5
-       property: Energy
-       enabled: true
-       isLooped: true
-       reverseWhenFinished: true
-
- ########### TIER 3 SUPPRESSION AURA #############
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  id: MonumentSlowZone
-  suffix: Debug, DO NOT MAP
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
-  components:
-  - type: Transform
-    anchored: true
-  - type: SpeedModifierContacts
-    walkSpeedModifier: 0.8
-    sprintSpeedModifier: 0.8
-    ignoreWhitelist:
-      components:
-      - CosmicCult
-      - CosmicColossus
-      - CosmicLesserCultist
-  - type: Physics
-    bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-8.5,-8.5,8.5,8.5"
-        layer:
-          - SlipLayer
-        mask:
-          - ItemMask
-        density: 1000
-        hard: false
+    prototype: MonumentCosmicCult
 
 - type: entity
   categories: [ HideSpawnMenu ]
   id: MonumentCosmicCultSpawnMark
-  name: The Monumen't # Nobody examines shit anyway
+  name: The Monumen't
   description: The yet-to-become Monument, it still needs more cultists to make it's way into reality. Only visible to those aware of it.
   placement:
     mode: SnapgridCenter
@@ -260,3 +181,5 @@
   - type: Transform
     anchored: true
   - type: InteractionOutline
+  - type: Clickable
+  - type: MonumentSpawnMark

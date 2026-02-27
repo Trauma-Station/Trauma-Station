@@ -1,5 +1,4 @@
 using Content.Server.RoundEnd;
-using Content.Server._DV.CosmicCult.Abilities;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Server._DV.CosmicCult.EntitySystems;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -9,7 +8,7 @@ namespace Content.Server._DV.CosmicCult.Components;
 /// <summary>
 /// Component for the CosmicCultRuleSystem that should store gameplay info.
 /// </summary>
-[RegisterComponent, Access(typeof(CosmicCultRuleSystem), typeof(CosmicMonumentSystem), typeof(CosmicChantrySystem), typeof(CosmicCultSystem))] // This is getting ridiculous
+[RegisterComponent, Access(typeof(CosmicCultRuleSystem), typeof(CosmicChantrySystem), typeof(CosmicCultSystem), typeof(MonumentSystem))] // This is getting ridiculous
 [AutoGenerateComponentPause]
 public sealed partial class CosmicCultRuleComponent : Component
 {
@@ -59,6 +58,12 @@ public sealed partial class CosmicCultRuleComponent : Component
     public bool RiftStop;
 
     /// <summary>
+    /// Set to true to send all the relevant data to the cultists once. Used on roundstart to pass the amount of cultists.
+    /// </summary>
+    [DataField]
+    public bool UpdateAllCultists;
+
+    /// <summary>
     /// Chance that a rift spawn will be replaced with a more dangerous fracture.
     /// </summary>
     [DataField]
@@ -73,13 +78,7 @@ public sealed partial class CosmicCultRuleComponent : Component
     /// <summary>
     ///     The cult's monument
     /// </summary>
-    public Entity<MonumentComponent> MonumentInGame;
-
-    /// <summary>
-    ///     The slow zone of the spawned monument
-    /// </summary>
-    [DataField]
-    public EntityUid MonumentSlowZone;
+    public Entity<MonumentComponent>? MonumentInGame;
 
     /// <summary>
     ///     Current tier of the cult
@@ -106,7 +105,13 @@ public sealed partial class CosmicCultRuleComponent : Component
     public int TotalCrew;
 
     /// <summary>
-    ///     Amount of cultists
+    ///     Amount of cultists that were initially present
+    /// </summary>
+    [DataField]
+    public int InitialCult;
+
+    /// <summary>
+    ///     Amount of active cultists that contribute to progression (doesn't include dead)
     /// </summary>
     [DataField]
     public int TotalCult;
@@ -124,11 +129,7 @@ public sealed partial class CosmicCultRuleComponent : Component
     public int EntropySiphoned;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan? PrepareFinaleTimer;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? ExtraRiftTimer;
-
 }
 
 public enum WinType : byte // TODO make a gentle sledgehammer pass over this

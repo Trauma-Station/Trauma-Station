@@ -3,7 +3,7 @@
   id: InfluenceAberrantLapse
   name: influence-name-lapse
   influenceType: influence-type-active
-  cost: 8
+  cost: 10
   description: influence-description-lapse
   icon:
     sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
@@ -15,7 +15,7 @@
   id: InfluenceNullGlare
   name: influence-name-glare
   influenceType: influence-type-active
-  cost: 6
+  cost: 14
   description: influence-description-glare
   empoweredDescription: influence-description-glare-upgrade
   icon:
@@ -28,7 +28,7 @@
   id: InfluenceForceIngress
   name: influence-name-ingress
   influenceType: influence-type-active
-  cost: 2
+  cost: 8
   description: influence-description-ingress
   empoweredDescription: influence-description-ingress-upgrade
   icon:
@@ -53,7 +53,7 @@
   id: InfluenceConversion
   name: influence-name-conversion
   influenceType: influence-type-active
-  cost: 12
+  cost: 20
   description: influence-description-conversion
   icon:
     sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
@@ -66,7 +66,7 @@
   id: InfluenceTransmutation
   name: influence-name-transmutation
   influenceType: influence-type-active
-  cost: 8
+  cost: 12
   description: influence-description-transmutation
   empoweredDescription: influence-description-transmutation-upgrade
   icon:
@@ -80,7 +80,7 @@
   id: InfluenceVacuousImposition
   name: influence-name-imposition
   influenceType: influence-type-active
-  cost: 10
+  cost: 18
   description: influence-description-imposition
   empoweredDescription: influence-description-imposition-upgrade
   icon:
@@ -93,7 +93,7 @@
   id: InfluenceAstralNova
   name: influence-name-nova
   influenceType: influence-type-active
-  cost: 6
+  cost: 24
   description: influence-description-nova
   icon:
     sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
@@ -108,20 +108,20 @@
   id: InfluenceUnboundStep
   name: influence-name-step
   influenceType: influence-type-passive
-  cost: 4
+  cost: 8
   description: influence-description-step
   icon:
     sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
     state: step
   add:
   - type: MovementIgnoreGravity
-  tier: 2
+  tier: 1
 
 - type: influence
   id: InfluenceAstralStride
   name: influence-name-stride
   influenceType: influence-type-passive
-  cost: 6
+  cost: 16
   description: influence-description-stride
   icon:
     sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi

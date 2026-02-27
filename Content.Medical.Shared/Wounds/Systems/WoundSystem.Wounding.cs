@@ -64,7 +64,6 @@ public sealed partial class WoundSystem
         SubscribeLocalEvent<HandOrganComponent, BodyRelayedEvent<ModifyDoAfterDelayEvent>>(OnModifyDoAfterDelay);
         SubscribeLocalEvent<WoundableComponent, AttemptHandsMeleeEvent>(OnAttemptHandsMelee);
         SubscribeLocalEvent<WoundableComponent, AttemptHandsShootEvent>(OnAttemptHandsShoot);
-        SubscribeLocalEvent<WoundableComponent, TransferWoundsEvent>(TransferWounds);
         SubscribeLocalEvent<TraumaInflicterComponent, TraumaBeingRemovedEvent>(OnTraumaBeingRemoved);
 
         SubscribeLocalEvent<BodyComponent, DecapitateEvent>(OnDecapitate);
@@ -322,17 +321,6 @@ public sealed partial class WoundSystem
 
         if (TryFumble("arm-fumble", new SoundPathSpecifier("/Audio/Effects/slip.ogg"), body, 0.20f))
             args.Cancelled = true;
-    }
-
-    public void TransferWounds(Entity<WoundableComponent> ent, ref TransferWoundsEvent args)
-    {
-        if (!TryComp<WoundableComponent>(args.Target, out var targetWoundable)) return;
-        var wounds = GetAllWounds(ent.Owner, ent.Comp);
-        foreach (var wound in wounds)
-        {
-            AddWound(args.Target, wound.Owner, wound.Comp.WoundSeverityPoint, wound.Comp.DamageGroup, targetWoundable, wound.Comp);
-            RemoveWound(wound.Owner, wound.Comp);
-        }
     }
 
     #endregion

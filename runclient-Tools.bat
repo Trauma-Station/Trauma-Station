@@ -6,3 +6,4 @@ REM SPDX-License-Identifier: AGPL-3.0-or-later
 
 @echo off
 dotnet run --project Content.Trauma.Client --configuration Tools
+pause

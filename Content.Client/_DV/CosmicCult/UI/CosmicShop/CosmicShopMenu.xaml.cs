@@ -50,6 +50,8 @@ public sealed partial class CosmicShopMenu : FancyWindow
 
         percentComplete = Math.Min(percentComplete, 100f);
 
+        if (state.EntropyLocked) percentComplete = 100f;
+
         CultProgressBar.Value = percentComplete;
 
         ProgressBarPercentage.Text = Loc.GetString("cosmic-shop-interface-progress-bar", ("percentage", percentComplete.ToString("0")));
@@ -61,6 +63,8 @@ public sealed partial class CosmicShopMenu : FancyWindow
     private void UpdateEntropy(CosmicShopBuiState state)
     {
         var entropyToNextStage = Math.Max(state.TargetProgress - state.CurrentProgress, 0);
+        
+        if (state.EntropyLocked) entropyToNextStage = 0;
 
         AvailableEntropy.Text = Loc.GetString("cosmic-shop-interface-entropy-value", ("infused", state.EntropyBudget));
         EntropyUntilNextStage.Text = Loc.GetString("cosmic-shop-interface-entropy-value", ("infused", entropyToNextStage));
@@ -72,10 +76,6 @@ public sealed partial class CosmicShopMenu : FancyWindow
     /// </summary>
     private void UpdateInfluences(CosmicShopBuiState state)
     {
-        SkillTreeUnlocked.RemoveAllChildren();
-        SkillTreeLocked.RemoveAllChildren();
-        SkillTreeOwned.RemoveAllChildren();
-
         var influenceButtons = new List<InfluenceButtonContainer>();
         foreach (var influenceProto in _influencePrototypes)
         {
@@ -85,24 +85,26 @@ public sealed partial class CosmicShopMenu : FancyWindow
             influenceButtons.Add(influenceButton);
         }
 
-        // Sort the list of UI boxes by state (locked -> owned -> not enough entropy -> enough entropy)
-        // Then sort alphabetically within those categories
-        // TODO: achieve decent looking skill tree by nesting an ungodly amount of BoxContainers
-        foreach (var box in influenceButtons.OrderBy(box => box.State).ThenBy(box => box.Proto.ID))
-            switch (box.State)
+        // Yes this is shitcode. No I don't care. I will be replacing it anyway when I implement skill trees. Which will be even worse, because nothing is nice in UI.
+        Level3.RemoveAllChildren();
+        Level2.RemoveAllChildren();
+        Level1.RemoveAllChildren();
+        Level0.RemoveAllChildren();
+        foreach (var box in influenceButtons.OrderBy(box => box.Proto.ID))
+            switch (box.Proto.Tier)
             {
-                case InfluenceUIBox.InfluenceUIBoxState.Owned:
-                    SkillTreeOwned.AddChild(box);
+                case 3:
+                    Level3.AddChild(box);
                     break;
-
-                case InfluenceUIBox.InfluenceUIBoxState.Locked:
-                    SkillTreeLocked.AddChild(box);
+                case 2:
+                    Level2.AddChild(box);
                     break;
-
-                default:
-                    SkillTreeUnlocked.AddChild(box);
+                case 1:
+                    Level1.AddChild(box);
                     break;
-
+                case 0:
+                    Level0.AddChild(box);
+                    break;
             }
     }
 

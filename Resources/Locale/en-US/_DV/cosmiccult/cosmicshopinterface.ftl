@@ -23,10 +23,11 @@ cosmic-shop-interface-influences-unlocked-not-enough-entropy-tooltip = You need 
 cosmic-shop-interface-influences-locked-tooltip = You are not yet strong enough to obtain this influence.
 
 # Levelup
-cosmic-shop-interface-no-consequences = Proceeding to next level will not have any negative consequences.
 cosmic-shop-interface-consequences = Proceeding to next level will have following consequences:
 cosmic-shop-interface-consequence-tier1 = A low severity Noöspheric spike will occur, and malign rifts will form.
 cosmic-shop-interface-consequence-tier2 = A medium severity Noöspheric spike will occur, and rift activity will increase.
 cosmic-shop-interface-consequence-tier3 = A high severity Noöspheric spike will occur, letting us commence the Finale.
-cosmic-shop-interface-consequence-eyes = Your eyes will glow with malign light, giving you away. You should hide them with clothing.
+cosmic-shop-interface-consequence-level1 = Some influences will create lingering vortecies of malign energy.
+cosmic-shop-interface-consequence-level2 = Your eyes will glow with malign light, giving you away. You should hide them with clothing.
+cosmic-shop-interface-consequence-level3 = Using your influences will envelop you in malign light, giving away your position.
 cosmic-shop-interface-confirm-button = Proceed.

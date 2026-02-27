@@ -40,6 +40,7 @@
     areaBlacklist:
       components:
       - CosmicCult
+      - CosmicLesserCultist
       - CosmicColossus
   - type: Sprite
     sprite: _DV/CosmicCult/Effects/ability_novavfx.rsi

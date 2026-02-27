@@ -13,7 +13,4 @@ public record struct DamageUnholyEvent(EntityUid Target, EntityUid? Origin = nul
 public readonly record struct UnholyStatusChangedEvent(EntityUid Target, EntityUid Source, bool Added);
 
 [ByRefEvent]
-public record struct UserShouldTakeHolyEvent(EntityUid Target, bool WeakToHoly = false, bool ShouldTakeHoly = false);
-
-[ByRefEvent]
 public record struct BibleSmiteAttemptEvent(EntityUid Target, bool ShouldSmite = false);

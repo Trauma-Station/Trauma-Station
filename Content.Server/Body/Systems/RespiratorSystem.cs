@@ -134,7 +134,8 @@ public sealed class RespiratorSystem : EntitySystem
                 // Makes cultists gasp and respirate but not asphyxiate in space.
                 if (TryComp<CosmicNonRespiratingComponent>(uid, out var cultComponent)
                     && cultComponent.Enabled
-                    && !_mobState.IsIncapacitated(uid))
+                    && (cultComponent.EnableWhenCritical && _mobState.IsIncapacitated(uid)
+                    || cultComponent.EnableWhenAlive && _mobState.IsAlive(uid)))
                     return;
 
                 if (_gameTiming.CurTime >= respirator.LastGaspEmoteTime + respirator.GaspEmoteCooldown)

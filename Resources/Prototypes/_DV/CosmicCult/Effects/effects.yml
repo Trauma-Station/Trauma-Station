@@ -269,11 +269,12 @@
   description: A trace of malign light..
   components:
   - type: TimedDespawn
-    lifetime: 50
+    lifetime: 30
   - type: CosmicCultExamine
     cultistText: cosmic-examine-text-malignecho
   - type: InteractionOutline
   - type: Sprite
+    drawdepth: 2
     layers:
     - sprite: _DV/CosmicCult/Effects/effect_echo.rsi
       state: vfx

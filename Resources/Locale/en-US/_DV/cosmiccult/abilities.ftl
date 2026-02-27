@@ -31,3 +31,8 @@ cosmicability-transmute-not-empowered = You must be empowered to transmute this.
 cosmicability-transmute-not-transmutable = This item cannot be transmuted.
 cosmicability-transmute-type-mismatch = You must improve your transmutation ability to transmute this item.
 cosmicability-transmute-no-item = You must hold an item to transform it.
+
+cosmicability-convert-mindshield = Mental shielding prevents the influence from taking hold!
+cosmicability-convert-chaplain = A spark of divine light prevents the influence from taking hold!
+cosmicability-convert-mindless = The target has no mind, the power would be wasted.
+cosmicability-convert-rotten = The influence has no effect on rotting corpses!

@@ -1,0 +1,21 @@
+## Cosmic Cult Plushie
+
+- type: entity
+  parent: BookBase
+  id: BookCosmicCult
+  name: Presence of The Unknown
+  description: It appears to be a normal book, and yet, for some reason, no matter how hard you try, you cannot read the author's name.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Objects/book.rsi
+    layers:
+    - state: cosmiccultbook
+  - type: Paper
+    content: cosmiccult-book-text # help I am being posessed
+  - type: PaperVisuals
+    backgroundModulate: "#31004a"
+    fontAccentColor: "#4cabb3"
+  - type: CosmicCultExamine
+    cultistText: cosmic-examine-text-forthecult
+  - type: CosmicTransmutable
+    transmuteTo: null # No reforging

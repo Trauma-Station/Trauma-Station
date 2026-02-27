@@ -12,18 +12,14 @@ public sealed partial class CosmicSiphonSystem : SharedCosmicSiphonSystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly CosmicCultSystem _cosmicCult = default!;
     private readonly HashSet<Entity<PoweredLightComponent>> _lights = [];
 
     protected override void OnCosmicSiphonDoAfter(Entity<CosmicCultComponent> ent, ref EventCosmicSiphonDoAfter args)
     {
-        if (args.Args.Target is not { } target
-            || args.Cancelled
-            || args.Handled)
-            return;
-        args.Handled = true;
+        if (args.Cancelled
+        || args.Handled) return;
 
-        _cosmicCult.AddEntropy(ent, ent.Comp.CosmicSiphonQuantity);
+        base.OnCosmicSiphonDoAfter(ent, ref args);
 
         if (ent.Comp.CosmicEmpowered) // if you're empowered there's a 20% chance to flicker lights on siphon. Not predicted because GhostSystem isn't (and who cares anyway).
         {

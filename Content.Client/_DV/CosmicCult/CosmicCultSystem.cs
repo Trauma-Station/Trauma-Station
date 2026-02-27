@@ -45,6 +45,9 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         SubscribeLocalEvent<CosmicSubtleMarkComponent, ComponentStartup>(OnCosmicSubtleMarkAdded);
         SubscribeLocalEvent<CosmicSubtleMarkComponent, ComponentShutdown>(OnCosmicSubtleMarkRemoved);
 
+        SubscribeLocalEvent<CosmicMalignEchoComponent, ComponentStartup>(OnCosmicEchoAdded);
+        SubscribeLocalEvent<CosmicMalignEchoComponent, ComponentShutdown>(OnCosmicEchoRemoved);
+
         SubscribeLocalEvent<CosmicImposingComponent, ComponentStartup>(OnCosmicImpositionAdded);
         SubscribeLocalEvent<CosmicImposingComponent, ComponentShutdown>(OnCosmicImpositionRemoved);
 
@@ -116,6 +119,16 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         _sprite.LayerMapSet((uid, sprite), CosmicImposingKey.Key, layer);
         sprite.LayerSetShader(layer, "unshaded");
     }
+
+    private void OnCosmicEchoAdded(Entity<CosmicMalignEchoComponent> uid, ref ComponentStartup args)
+    {
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), CosmicEchoKey.Key, out _, logMissing: false))
+            return;
+
+        var layer = _sprite.AddLayer((uid, sprite), uid.Comp.Sprite);
+        _sprite.LayerMapSet((uid, sprite), CosmicEchoKey.Key, layer);
+        sprite.LayerSetShader(layer, "unshaded");
+    }
     #endregion
 
     #region Layer Removals
@@ -141,6 +154,14 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
             return;
 
         _sprite.RemoveLayer((uid, sprite), CosmicImposingKey.Key);
+    }
+
+    private void OnCosmicEchoRemoved(Entity<CosmicMalignEchoComponent> uid, ref ComponentShutdown args)
+    {
+        if (!TryComp<SpriteComponent>(uid, out var sprite))
+            return;
+
+        _sprite.RemoveLayer((uid, sprite), CosmicEchoKey.Key);
     }
     #endregion
 

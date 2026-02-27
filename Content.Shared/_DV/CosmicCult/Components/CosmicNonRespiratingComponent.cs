@@ -11,4 +11,16 @@ public sealed partial class CosmicNonRespiratingComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool Enabled = true;
+
+    /// <summary>
+    /// Whether the entity needs to breathe when alive
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool EnableWhenAlive = true;
+
+    /// <summary>
+    /// Whether the entity needs to breathe when critical. This allows the entity to stay in crit forever, so it's usually off.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool EnableWhenCritical = false;
 }

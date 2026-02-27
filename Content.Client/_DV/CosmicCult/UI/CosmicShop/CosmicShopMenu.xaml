@@ -38,35 +38,34 @@
         <!-- Main body -->
         <BoxContainer Orientation="Vertical" VerticalExpand="True">
             <BoxContainer Orientation="Horizontal" VerticalExpand="True">
-                <!-- Influence details -->
-                <BoxContainer Name="InfluenceInfoContainer" MaxWidth="200" Orientation="Vertical">
-                    <!-- Filled out programatically -->
-                    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
-                        <BoxContainer Name="InfluenceDetails" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" />
+                <!-- Skill tree -->
+                <BoxContainer VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical">
+                    <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
+                        <!-- Temporary, will be replaced with a skill tree in the future-->
+                        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                            <BoxContainer Name="Level3" Orientation="Horizontal" HorizontalExpand="True" />
+                            <BoxContainer Name="Level2" Orientation="Horizontal" HorizontalExpand="True" />
+                            <BoxContainer Name="Level1" Orientation="Horizontal" HorizontalExpand="True" />
+                            <BoxContainer Name="Level0" Orientation="Horizontal" HorizontalExpand="True" />
+                        </BoxContainer>
                     </ScrollContainer>
                 </BoxContainer>
                 <PanelContainer StyleClasses="LowDivider" MinWidth="4" Margin="0 0 5 0" />
-                <!-- Skill tree -->
-                <BoxContainer VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical">
+                <!-- Influence details -->
+                <BoxContainer Name="InfluenceInfoContainer" MaxWidth="250" Orientation="Vertical">
                     <!-- Filled out programatically -->
-                    <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
-                        <!-- Temporary, will be replaced with a skill tree -->
-                        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                            <BoxContainer Name="SkillTreeUnlocked" Orientation="Horizontal" HorizontalExpand="True" />
-                            <BoxContainer Name="SkillTreeLocked" Orientation="Horizontal" HorizontalExpand="True" />
-                            <BoxContainer Name="SkillTreeOwned" Orientation="Horizontal" HorizontalExpand="True" />
-                        </BoxContainer>
+                    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+                        <BoxContainer Name="InfluenceDetails" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" />
                     </ScrollContainer>
                 </BoxContainer>
             </BoxContainer>
             <PanelContainer StyleClasses="LowDivider" MinHeight="4"/>
             <BoxContainer Name="LevelUpConfirmation" Orientation="Horizontal" Visible="false" VerticalAlignment="Bottom">
                 <BoxContainer Orientation="Vertical" HorizontalAlignment="Left">
-                    <Label HorizontalAlignment="Left" Text="Proceeding to next stage will have following consequences:" Margin="5"/>
-                    <Label HorizontalAlignment="Left" Text="Lorem Ipsum" Margin="5" StyleClasses="LabelSmall" />
+                    <RichTextLabel Name="ConsequenceLabel" HorizontalAlignment="Left" Text="{Loc 'cosmic-shop-interface-consequences'}" Margin="5"/>
                 </BoxContainer>
                 <Button Name="LevelUpConfirm"
-                        Text="Lorem Ipsum"
+                        Text="{Loc 'cosmic-shop-interface-confirm-button'}"
                         HorizontalAlignment="Right"
                         StyleClasses="ButtonColorPurpleAndCool"
                         Margin="10" />

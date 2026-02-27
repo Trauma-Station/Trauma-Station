@@ -1,5 +1,6 @@
 using Content.Goobstation.Common.Religion;
 using Content.Server.Actions;
+using Content.Server.Atmos.Rotting;
 using Content.Server.Ghost;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
@@ -7,6 +8,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Light.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mindshield.Components;
+using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -25,6 +27,8 @@ public sealed class CosmicConversionSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly RottingSystem _rotting = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private readonly SoundSpecifier _conversionSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/conversion_start.ogg");
     private readonly SoundSpecifier _conversionEndSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/conversion_end.ogg");
@@ -47,13 +51,30 @@ public sealed class CosmicConversionSystem : EntitySystem
     {
         var target = args.Target;
 
-        if (!_mind.TryGetMind(target, out var mindId, out var mind)
-        || HasComp<MindShieldComponent>(target)
-        || HasComp<BibleUserComponent>(target))
+        //if (!_mind.TryGetMind(target, out _, out _)) // TODO uncomment before release!!!!
+        //{
+        //    _popup.PopupClient(Loc.GetString("cosmicability-convert-mindshield"), ent, ent);
+        //    return;
+        //}
+        if (HasComp<MindShieldComponent>(target))
+        {
+            _popup.PopupClient(Loc.GetString("cosmicability-convert-chaplain"), ent, ent);
             return;
+        }
+        if (HasComp<BibleUserComponent>(target))
+        {
+            _popup.PopupClient(Loc.GetString("cosmicability-convert-mindless"), ent, ent);
+            return;
+        }
+        if (_rotting.IsRotten(target))
+        {
+            _popup.PopupClient(Loc.GetString("cosmicability-convert-rotten"), ent, ent);
+            return;
+        }
 
         if (args.Handled)
             return;
+
         args.Handled = true;
 
         _actions.RemoveAction(ent.Owner, args.Action.Owner);

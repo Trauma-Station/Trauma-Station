@@ -1,16 +1,8 @@
-using System.Linq;
 using Content.Shared.Flash;
-using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared.Effects;
-using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
-using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
-using Content.Shared.Silicons.Borgs.Components;
-using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 
@@ -23,6 +15,7 @@ public sealed class CosmicGlareSystem : EntitySystem
     [Dependency] private readonly SharedFlashSystem _flash = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedInteractionSystem _interact = default!;
 
     private HashSet<Entity<MobStateComponent>> _mobs = [];
 
@@ -49,7 +42,13 @@ public sealed class CosmicGlareSystem : EntitySystem
 
             var evt = new CosmicAbilityAttemptEvent(target, true);
             RaiseLocalEvent(ref evt);
-            return evt.Cancelled;
+            if (evt.Cancelled) return true;
+
+            return !_interact.InRangeUnobstructed(
+                (ent.Owner, Transform(ent)),
+                (target.Owner, Transform(target)),
+                range: ent.Comp.CosmicGlareRange,
+                collisionMask: CollisionGroup.Impassable);
         });
 
         foreach (var target in _mobs)
