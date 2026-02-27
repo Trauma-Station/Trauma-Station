@@ -62,7 +62,7 @@
 
 - type: entity
   parent: BaseItem
-  abstract: true
+  abstract: false
   suffix: Wrapped
   id: BaseWrappedCube
   components:
