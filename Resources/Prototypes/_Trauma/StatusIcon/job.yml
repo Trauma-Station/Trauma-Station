@@ -3,6 +3,6 @@
   id: JobIconPhoneMerchant
   icon:
     sprite: _Trauma/Interface/Misc/job_icons.rsi
-    state: phonemerchant
+    state: Phonemerchant
   jobName: job-name-phonemerchant
   allowSelection: false
