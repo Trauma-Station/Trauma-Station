@@ -24,9 +24,9 @@ jobs:
       id: info
       run: |
         files="${{ steps.files.outputs.modified }} ${{ steps.files.outputs.added }}"
-        count=`echo "$files" | wc -w`
-        infos=`file "$files"`
-        echo "info=**Sound Bot**\n\nThis PR changed $count sounds:\n<details>\n$infos\n</details>" >> $GITHUB_OUTPUT
+        count=`echo -- $files | wc -w`
+        infos=`file -- $files`
+        printf "info=**Sound Bot**\n\nThis PR changed %d sounds:\n<details>\n%s\n</details>" "$count" "$infos" >> $GITHUB_OUTPUT
 
     - name: Potentially find comment
       uses: peter-evans/find-comment@v1
