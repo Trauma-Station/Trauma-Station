@@ -85,3 +85,13 @@
         reagents:
         - ReagentId: Holywater
           Quantity: 1200
+
+- type: entity
+  parent: ClothingBackpackXenomorph
+  id: ClothingBackpackXenomorphBundle
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Clothing/Back/Duffels/blueshield.rsi
+    state: icon
+  - type: SolutionContainerManager  
