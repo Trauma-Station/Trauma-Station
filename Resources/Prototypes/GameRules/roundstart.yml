@@ -305,10 +305,10 @@
       chaosScore: 150 # Goobstation
       blacklist:
         components:
-          - type: XenomorphsRule
-          - type: CommandStaff
-          - type: AntagImmune
-          - type: Changeling
+        - CommandStaff # Goobstation
+        - AntagImmune
+        - Changeling # Goobstation
+        
       lateJoinAdditional: false
       mindRoles:
       - MindRoleTraitor
