@@ -5,6 +5,7 @@
   description: The highest individual, the central element and mother of the Hive. The destruction of the Queen in most cases means the collapse of the Hive.
   abstract: true
   components:
+  - type: XenomorphsRule
   - type: Sprite
     sprite: _Trauma/Mobs/Xenos/queen.rsi
     layers:
@@ -76,6 +77,7 @@
   parent: BaseMobXenomorphQueen
   id: MobXenomorphQueen
   components:
+  - type: XenomorphsRule
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
