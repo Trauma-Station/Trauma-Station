@@ -27,3 +27,11 @@
   productEntity: ClothingBackpackXenomorphBundle
   cost:
     Telecrystal: 100
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - ContravendUplink
+      - ContractorUplink
