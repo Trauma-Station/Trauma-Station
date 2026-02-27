@@ -14,3 +14,6 @@
       - id: MonkeyCubeWrapped
         amount: 3
       - id: ClothingGasMaskSyndicate    
+      - id: XenoTissueSample
+        amount: 3
+      - id: XenoCompatibilityImplanter
