@@ -187,7 +187,6 @@
       roleLoadout:
       - RoleSurvivalNukie
       components:
-      - type: XenomorphsRule # Trauma
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
@@ -250,7 +249,6 @@
   id: BaseTraitorRuleNoObjectives
   components:
   - type: TraitorRule
-  - type: XenomorphsRule # Trauma
   # TODO: codewords in yml
   # TODO: uplink in yml
   - type: AntagSelection
@@ -261,7 +259,6 @@
   parent: BaseTraitorRuleNoObjectives
   id: BaseTraitorRule
   components:
-  - type: XenomorphsRule # Trauma
   - type: AntagRandomObjectives
     sets:
     - groups: TraitorObjectiveGroups
@@ -296,7 +293,6 @@
   components:
   - type: GameRule
     minPlayers: 5
-  - type: XenomorphsRule # Trauma
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn # Goobstation
     definitions:
