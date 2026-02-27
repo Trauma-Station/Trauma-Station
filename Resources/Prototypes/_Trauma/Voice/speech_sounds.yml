@@ -1,0 +1,8 @@
+- type: speechSounds
+  id: RMCPhoneSpeakSounds
+  saySound:
+    collection: RMCPhoneSpeak
+  askSound:
+    collection: RMCPhoneSpeak
+  exclaimSound:
+    collection: RMCPhoneSpeak

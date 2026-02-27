@@ -70,6 +70,3 @@
 
 - type: playTimeTracker
   id: JobVirologist
-
-- type: playTimeTracker
-  id: JobPhoneMerchant
