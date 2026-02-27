@@ -305,10 +305,10 @@
       chaosScore: 150 # Goobstation
       blacklist:
         components:
-        - type: XenomorphsRule # so we dont have 7 xeno queens if they decide to buy the xenomorph bundle
-        - CommandStaff # Goobstation
-        - AntagImmune
-        - Changeling # Goobstation
+          - type: XenomorphsRule
+          - type: CommandStaff
+          - type: AntagImmune
+          - type: Changeling
       lateJoinAdditional: false
       mindRoles:
       - MindRoleTraitor
