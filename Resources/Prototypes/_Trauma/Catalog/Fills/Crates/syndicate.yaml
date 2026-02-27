@@ -13,6 +13,7 @@
       - id: OrganXenomorphAcidGland
       - id: OrganXenomorphPlasmaVessel
       - id: OrganXenomorphEggSack  
+      - id: OrganXenomorphHiveNode
       - id: OmnimedTool
       - id: MonkeyCubeWrapped
         amount: 3
