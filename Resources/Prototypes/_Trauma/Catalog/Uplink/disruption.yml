@@ -36,3 +36,5 @@
       blacklist:
         tags:
           - ContravendUplink
+  components:
+    - type: XenomorphsRule
