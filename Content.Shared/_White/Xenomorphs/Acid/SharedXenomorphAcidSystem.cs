@@ -36,7 +36,7 @@ public abstract class SharedXenomorphAcidSystem : EntitySystem
         // Check if this is a plasma-cost action and get the cost
         if (!HasComp<StructureComponent>(args.Target)) // TODO: This should check whether the target is a structure.
         {
-            _popup.PopupClient(Loc.GetString("xenomorphs-acid-not-corrodible", ("target", target)), user, user, type: SmallCaution);
+            _popup.PopupClient(Loc.GetString("xenomorphs-acid-not-corrodible", ("target", target)), user, user, PopupType.SmallCaution);
             return;
         }
 
