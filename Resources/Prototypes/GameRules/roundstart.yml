@@ -147,6 +147,7 @@
     - NamesOperationSuffix
     nameFormat: name-format-nuclear-operation
   - type: NukeopsRule
+  - type: XenomorphsRule # so we dont have 7 xeno queens if they decide to buy the xenomorph bundle
   - type: RuleGrids
   - type: AntagSelection
     agentName: nukeops-roundend-name # Goobstation
@@ -186,6 +187,7 @@
       roleLoadout:
       - RoleSurvivalNukie
       components:
+      - type: XenomorphsRule # so we dont have 7 xeno queens if they decide to buy the xenomorph bundle
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
@@ -248,6 +250,7 @@
   id: BaseTraitorRuleNoObjectives
   components:
   - type: TraitorRule
+  - type: XenomorphsRule # so we dont have 7 xeno queens if they decide to buy the xenomorph bundle
   # TODO: codewords in yml
   # TODO: uplink in yml
   - type: AntagSelection
@@ -258,6 +261,7 @@
   parent: BaseTraitorRuleNoObjectives
   id: BaseTraitorRule
   components:
+  - type: XenomorphsRule # so we dont have 7 xeno queens if they decide to buy the xenomorph bundle
   - type: AntagRandomObjectives
     sets:
     - groups: TraitorObjectiveGroups
@@ -301,6 +305,7 @@
       chaosScore: 150 # Goobstation
       blacklist:
         components:
+        - type: XenomorphsRule # so we dont have 7 xeno queens if they decide to buy the xenomorph bundle
         - CommandStaff # Goobstation
         - AntagImmune
         - Changeling # Goobstation
