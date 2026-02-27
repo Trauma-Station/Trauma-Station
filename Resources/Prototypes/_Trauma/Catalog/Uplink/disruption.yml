@@ -37,4 +37,4 @@
     - !type: StoreWhitelistCondition
       blacklist:
         tags:
-          - ContravendUplink
+        - Contravenduplink
