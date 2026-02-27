@@ -18,7 +18,7 @@
       role: JobChiefMedicalOfficer
       time: 1h
     - !type:RoleTimeRequirement
-      role: JobQuarterMaster
+      role: JobQuartermaster
       time: 1h
     - !type:RoleTimeRequirement
       role: JobResearchDirector
@@ -38,7 +38,7 @@
       - Human
     HeadOfPersonnel:
     - !type:DepartmentTimeRequirement
-      department: Service
+      department: Civilian
       time: 3h
     - !type:SpeciesRequirement
       species:
@@ -94,7 +94,7 @@
       inverted: true
     ServiceWorker:
     - !type:DepartmentTimeRequirement
-      department: Service
+      department: Civilian
       time: 3h
       inverted: true
     #Cargo - No intern role, so no limits lmao.
