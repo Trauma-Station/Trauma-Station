@@ -92,6 +92,11 @@
       department: Science
       time: 3h
       inverted: true
+    ServiceWorker:
+    - !type:DepartmentTimeRequirement
+      department: Service
+      time: 3h
+      inverted: true
     #Cargo - No intern role, so no limits lmao.
     #Engineering
     StationEngineer:
