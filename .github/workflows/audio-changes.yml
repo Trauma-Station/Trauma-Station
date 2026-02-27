@@ -13,8 +13,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4.2.2
       with:
-        repository: {{ github.event.pull_request.head.repo.full_name }}
+        repository: ${{ github.event.pull_request.head.repo.full_name }}
         ref: ${{ github.event.pull_request.head.sha }}
+        sparse-checkout: |
+          .github
+          Resources/Audio
 
     - name: Get changed files
       id: files
