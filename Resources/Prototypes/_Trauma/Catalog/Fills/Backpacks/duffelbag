@@ -1,0 +1,16 @@
+- type: entity
+  parent: ClothingBackpackDuffelClownBundle
+  id: ClothingBackpackDuffelClownFilledFakeTaiwanPond
+  components:
+  - type: StorageFill
+    contents:
+      - id: OrganXenomorphEyes
+      - id: OrganXenomorphResinSpinner
+      - id: OrganXenomorphNeurotoxinGland
+      - id: OrganXenomorphAcidGland
+      - id: OrganXenomorphPlasmaVesselLargeQueen
+      - id: OrganXenomorphEggSack  
+      - id: Omnitool
+      - id: MonkeyCubeWrapped
+        amount: 3
+      - id: ClothingGasMaskSyndicate    
