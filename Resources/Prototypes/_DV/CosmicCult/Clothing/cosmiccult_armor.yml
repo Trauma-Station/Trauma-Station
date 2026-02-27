@@ -22,13 +22,16 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.4
         Heat: 0.5
-        Radiation: 0.5
-        Caustic: 0.5
-        Holy: 1.25
+        Asphyxiation: 0.6 # Kinda their whole thing so why not
+  - type: ModifyDelayedKnockdown # You can't have 20 cultists anymore, so this is kinda needed
+    delayDelta: 3
+    knockdownTimeDelta: -3
+  - type: StaminaResistance
+    damageCoefficient: 0.5
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -60,23 +63,6 @@
     mask: /Textures/_DV/CosmicCult/LightMasks/cosmic.png
     autoRot: true
     netsync: false
-  - type: LightBehaviour
-    behaviours:
-      - !type:FadeBehaviour
-        id: radiating
-        interpolate: Linear
-        maxDuration: 2.0
-        startValue: 3.0
-        endValue: 2.0
-        isLooped: true
-        reverseWhenFinished: true
-      - !type:PulseBehaviour
-        id: blinking
-        interpolate: Nearest
-        maxDuration: 1.0
-        startValue: 0.1
-        endValue: 2.0
-        isLooped: true
   - type: Battery
     maxCharge: 100
     startingCharge: 100
@@ -125,7 +111,8 @@
   - type: TypingIndicatorClothing
     proto: CosmicTyping
   - type: SpeechOverride
-    overrideIDs:
-      Unsexed: CosmicEmotesMale # Humans use male soudns for unsexed so here we are.
-      Female: CosmicEmotesFemale
-      Male: CosmicEmotesMale
+    emoteIDs:
+      Unsexed: CosmicEmotes # Humans use male soudns for unsexed so here we are.
+      Female: CosmicEmotes
+      Male: CosmicEmotes
+    speechIDs: CosmicSpeech

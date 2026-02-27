@@ -28,6 +28,6 @@ cosmic-shop-interface-consequence-tier1 = A low severity Noöspheric spike will 
 cosmic-shop-interface-consequence-tier2 = A medium severity Noöspheric spike will occur, and rift activity will increase.
 cosmic-shop-interface-consequence-tier3 = A high severity Noöspheric spike will occur, letting us commence the Finale.
 cosmic-shop-interface-consequence-level1 = Some influences will create lingering vortecies of malign energy.
-cosmic-shop-interface-consequence-level2 = Your eyes will glow with malign light, giving you away. You should hide them with clothing.
+cosmic-shop-interface-consequence-level2 = Your eyes will glow with malign light. You should hide them with clothing.
 cosmic-shop-interface-consequence-level3 = Using your influences will envelop you in malign light, giving away your position.
 cosmic-shop-interface-confirm-button = Proceed.

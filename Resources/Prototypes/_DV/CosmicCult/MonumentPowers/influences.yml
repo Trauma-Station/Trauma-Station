@@ -38,6 +38,20 @@
   tier: 1
 
 - type: influence
+  id: InfluenceTransmutation
+  name: influence-name-transmutation
+  influenceType: influence-type-active
+  cost: 12
+  description: influence-description-transmutation
+  empoweredDescription: influence-description-transmutation-upgrade
+  icon:
+    sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
+    state: transmute
+  add:
+  action: ActionCosmicTransmutation
+  tier: 1
+
+- type: influence
   id: InfluenceShuntSubjectivity
   name: influence-name-shunt
   influenceType: influence-type-active
@@ -63,18 +77,18 @@
   tier: 2
 
 - type: influence
-  id: InfluenceTransmutation
-  name: influence-name-transmutation
+  id: InfluenceAstralStride
+  name: influence-name-stride
   influenceType: influence-type-active
-  cost: 12
-  description: influence-description-transmutation
-  empoweredDescription: influence-description-transmutation-upgrade
+  cost: 16
+  description: influence-description-stride
+  empoweredDescription: influence-description-stride-upgrade
   icon:
     sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
-    state: transmute
+    state: stride
   add:
-  action: ActionCosmicTransmutation
-  tier: 1
+  action: ActionCosmicStride
+  tier: 2
 
 - type: influence
   id: InfluenceVacuousImposition
@@ -117,15 +131,3 @@
   - type: MovementIgnoreGravity
   tier: 1
 
-- type: influence
-  id: InfluenceAstralStride
-  name: influence-name-stride
-  influenceType: influence-type-passive
-  cost: 16
-  description: influence-description-stride
-  icon:
-    sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
-    state: stride
-  add:
-  - type: InfluenceStride
-  tier: 2

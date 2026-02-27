@@ -85,6 +85,12 @@ public sealed partial class CosmicCultComponent : Component
     public TimeSpan CosmicImpositionDuration = TimeSpan.FromSeconds(5.8);
 
     /// <summary>
+    /// The duration of Astral Stride.
+    /// </summary>
+    [DataField]
+    public TimeSpan CosmicStrideDuration = TimeSpan.FromSeconds(4.6);
+
+    /// <summary>
     /// The duration of Null Glare's flash/disorientation.
     /// </summary>
     [DataField]
@@ -142,6 +148,12 @@ public sealed partial class CosmicCultComponent : Component
 
     [DataField]
     public int MaxLevel = 3;
+
+    /// <summary>
+    /// The whole cult's tier. Used for UI prediciton.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int CultTier;
 
     /// <summary>
     /// For prediction purposes. How many cultists need to get the next level in order for the cult's level to increase.
@@ -207,12 +219,6 @@ public sealed partial class CosmicCultComponent : Component
     public bool WasWeakToHoly;
 
     /// <summary>
-    /// A string for storing what damage container this cultist had upon conversion.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public ProtoId<DamageContainerPrototype> StoredDamageContainer = "Biological";
-
-    /// <summary>
     /// Wether or not this cultist has been empowered by a Malign Rift.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -250,5 +256,6 @@ public sealed partial class CosmicCultComponent : Component
     public SoundSpecifier ImpositionSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ability_imposition.ogg");
     [DataField]
     public SoundSpecifier TransmuteSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/glyph_trigger.ogg");
+    public SoundSpecifier StrideSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ability_stride.ogg");
     #endregion
 }

@@ -20,6 +20,7 @@ public sealed partial class EventCosmicShop : InstantActionEvent;
 public sealed partial class EventCosmicConversion : EntityTargetActionEvent;
 public sealed partial class EventCosmicDamageTransfer : EntityTargetActionEvent;
 public sealed partial class EventCosmicTransmutation : InstantActionEvent;
+public sealed partial class EventCosmicStride : InstantActionEvent;
 
 // COLOSSUS ACTIONS
 public sealed partial class EventCosmicColossusSunder : WorldTargetActionEvent;

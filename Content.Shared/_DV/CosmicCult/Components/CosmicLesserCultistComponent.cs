@@ -22,12 +22,6 @@ public sealed partial class CosmicLesserCultistComponent : Component
     [DataField, AutoNetworkedField]
     public bool WasWeakToHoly;
 
-    /// <summary>
-    /// A string for storing what damage container this cultist had upon conversion.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public ProtoId<DamageContainerPrototype> StoredDamageContainer = "Biological";
-
     [DataField]
     public EntProtoId DamageTransferAction = "ActionCosmicDamageTransfer";
 

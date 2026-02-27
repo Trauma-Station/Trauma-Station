@@ -3,6 +3,7 @@ using Content.Server.AlertLevel;
 using Content.Server.Audio;
 using Content.Server.Objectives.Components;
 using Content.Server.Pinpointer;
+using Content.Server.RoundEnd;
 using Content.Server.Station.Systems;
 using Content.Server.Chat.Systems;
 using Content.Shared._DV.CosmicCult;
@@ -45,7 +46,7 @@ public sealed class MonumentSystem : SharedMonumentSystem
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    private static readonly EntProtoId DespawnVfx = "MonumentCosmicCultDestruction";
+    [Dependency] private readonly RoundEndSystem _evac = default!;
     private HashSet<Entity<HumanoidProfileComponent>> _targets = [];
 
     public override void Initialize()
@@ -232,6 +233,8 @@ public sealed class MonumentSystem : SharedMonumentSystem
         }
         UpdateMonumentAppearance(ent);
 
+        _evac.CancelRoundEndCountdown(args.User, args.Used, forceRecall: true);
+
         ent.Comp.CanActivate = false;
         ent.Comp.Active = true;
 
@@ -279,7 +282,7 @@ public sealed class MonumentSystem : SharedMonumentSystem
             QueueDel(comp.AstralForm);
         }
 
-        Spawn(DespawnVfx, Transform(ent).Coordinates);
+        Spawn(ent.Comp.DespawnVfx, Transform(ent).Coordinates);
         QueueDel(ent);
     }
 

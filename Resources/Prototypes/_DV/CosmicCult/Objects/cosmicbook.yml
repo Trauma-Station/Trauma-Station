@@ -3,8 +3,8 @@
 - type: entity
   parent: BookBase
   id: BookCosmicCult
-  name: Presence of The Unknown
-  description: It appears to be a normal book, and yet, for some reason, no matter how hard you try, you cannot read the author's name.
+  name: The Unknowledge
+  description: It appears to be a feeble attempt of a mortal mind to describe an indelible truth through paper.
   components:
   - type: Sprite
     sprite: _DV/CosmicCult/Objects/book.rsi
@@ -15,7 +15,5 @@
   - type: PaperVisuals
     backgroundModulate: "#31004a"
     fontAccentColor: "#4cabb3"
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
   - type: CosmicTransmutable
     transmuteTo: null # No reforging

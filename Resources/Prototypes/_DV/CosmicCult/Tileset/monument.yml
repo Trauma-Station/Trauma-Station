@@ -1,6 +1,7 @@
 ########### COSMIC MONUMENT, BASE ABSTRACT #############
 
 - type: entity
+  categories: [ HideSpawnMenu ]
   parent: BaseStructure
   id: MonumentCosmicCult
   name: The Monument

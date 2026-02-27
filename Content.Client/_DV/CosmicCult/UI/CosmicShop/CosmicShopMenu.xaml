@@ -38,6 +38,7 @@
         <!-- Main body -->
         <BoxContainer Orientation="Vertical" VerticalExpand="True">
             <BoxContainer Orientation="Horizontal" VerticalExpand="True">
+                <PanelContainer StyleClasses="LowDivider" MinWidth="4"/>
                 <!-- Skill tree -->
                 <BoxContainer VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical">
                     <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
@@ -50,7 +51,7 @@
                         </BoxContainer>
                     </ScrollContainer>
                 </BoxContainer>
-                <PanelContainer StyleClasses="LowDivider" MinWidth="4" Margin="0 0 5 0" />
+                <PanelContainer StyleClasses="LowDivider" MinWidth="4"/>
                 <!-- Influence details -->
                 <BoxContainer Name="InfluenceInfoContainer" MaxWidth="250" Orientation="Vertical">
                     <!-- Filled out programatically -->
@@ -60,15 +61,16 @@
                 </BoxContainer>
             </BoxContainer>
             <PanelContainer StyleClasses="LowDivider" MinHeight="4"/>
-            <BoxContainer Name="LevelUpConfirmation" Orientation="Horizontal" Visible="false" VerticalAlignment="Bottom">
-                <BoxContainer Orientation="Vertical" HorizontalAlignment="Left">
-                    <RichTextLabel Name="ConsequenceLabel" HorizontalAlignment="Left" Text="{Loc 'cosmic-shop-interface-consequences'}" Margin="5"/>
+            <BoxContainer Name="LevelUpConfirmation" Orientation="Horizontal" Visible="false" VerticalAlignment="Bottom" HorizontalExpand="True">
+                <BoxContainer Orientation="Vertical" HorizontalAlignment="Left" HorizontalExpand="True">
+                    <RichTextLabel Name="ConsequenceLabel" HorizontalAlignment="Left" Margin="5"/>
                 </BoxContainer>
                 <Button Name="LevelUpConfirm"
                         Text="{Loc 'cosmic-shop-interface-confirm-button'}"
-                        HorizontalAlignment="Right"
                         StyleClasses="ButtonColorPurpleAndCool"
-                        Margin="10" />
+                        Margin="5"
+                        SetWidth="90"
+                        SetHeight="35" />
             </BoxContainer>
         </BoxContainer>
     </BoxContainer>

@@ -10,6 +10,7 @@ using Content.Server.Atmos.Rotting;
 using Content.Server.Audio;
 using Content.Server.Cuffs;
 using Content.Server.Chat.Systems;
+using Content.Server.Communications;
 using Content.Server.EUI;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking;
@@ -26,7 +27,6 @@ using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.Roles;
 using Content.Shared.Audio;
 using Content.Shared.Cuffs.Components;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Gibbing;
@@ -105,6 +105,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         SubscribeLocalEvent<CosmicLesserCultistComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<CosmicGodComponent, ComponentInit>(OnGodSpawn);
         SubscribeLocalEvent<CosmicCultComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<CommunicationConsoleCallShuttleAttemptEvent>(OnEvacAttempt);
     }
 
     #region Starting Events
@@ -170,6 +171,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         foreach (var cultist in rule.Comp.Cultists)
         {
             if (!TryComp<CosmicCultComponent>(cultist, out var comp)) return;
+            comp.CultTier = rule.Comp.CurrentTier;
             comp.CultistsForNextLevel = rule.Comp.CurrentTier >= comp.MaxLevel ? 0 : rule.Comp.CultistsForNextTier - cultistsAtNextLevel;
             Dirty(cultist, comp);
             if (comp.CosmicShopActionEntity is not { } shop) return;
@@ -346,6 +348,18 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             ConfirmWinState((ruleUid, ruleComp));
     }
 
+    private void OnEvacAttempt(ref CommunicationConsoleCallShuttleAttemptEvent args)
+    {
+        var query = EntityQueryEnumerator<MonumentComponent>();
+        while (query.MoveNext(out _, out var comp))
+        {
+            if (comp.Active)
+            {
+                args.Cancelled = true;
+            }
+        }
+    }
+
     // TODO: rewrite this fuck
     private void ConfirmWinState(Entity<CosmicCultRuleComponent> ent)
     {
@@ -450,8 +464,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         rule.Comp.TotalCult++;
 
-        cultComp.StoredDamageContainer = Comp<DamageableComponent>(uid).DamageContainerID!.Value; // nullable?
-
         Dirty(uid, cultComp);
 
         rule.Comp.Cultists.Add(uid);
@@ -515,7 +527,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         _antag.SendBriefing(uid, Loc.GetString("cosmiccult-role-conversion-briefing"), Color.FromHex("#cae8e8"), null);
 
         var cultComp = EnsureComp<CosmicLesserCultistComponent>(uid);
-        cultComp.StoredDamageContainer = Comp<DamageableComponent>(uid).DamageContainerID!.Value;
         TransferCultAssociation(converter, uid);
         Dirty(uid, cultComp);
 
@@ -580,7 +591,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         var ev = new UnholyStatusChangedEvent(ent, ent, false);
         RaiseLocalEvent(ent, ref ev);
 
-        _damage.SetDamageContainerID(ent.Owner, ent.Comp.StoredDamageContainer);
         _antag.SendBriefing(ent, Loc.GetString("cosmiccult-role-deconverted-fluff"), Color.FromHex("#4cabb3"), _deconvertSound);
         _antag.SendBriefing(ent, Loc.GetString("cosmiccult-role-deconverted-briefing"), Color.FromHex("#cae8e8"), null);
 
@@ -627,7 +637,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             RaiseLocalEvent(ent, ref ev);
         }
 
-        _damage.SetDamageContainerID(ent.Owner, ent.Comp.StoredDamageContainer);
         _antag.SendBriefing(ent, Loc.GetString("cosmiccult-role-deconverted-fluff"), Color.FromHex("#4cabb3"), _deconvertSound);
         _antag.SendBriefing(ent, Loc.GetString("cosmiccult-role-deconverted-briefing"), Color.FromHex("#cae8e8"), null);
         _eye.SetVisibilityMask(ent, 1);

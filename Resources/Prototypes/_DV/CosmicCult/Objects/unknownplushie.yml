@@ -13,7 +13,7 @@
     state: plushie_cosmic
   - type: EmitSoundOnUse
     sound: &PlushieUnknownSound
-      path: /Audio/ _DV/CosmicCult/ascendant_noise.ogg
+      path: /Audio/_DV/CosmicCult/ascendant_noise.ogg
   - type: EmitSoundOnLand
     sound: *PlushieUnknownSound
   - type: EmitSoundOnActivate

@@ -70,6 +70,9 @@ public sealed partial class MonumentComponent : Component
     public EntProtoId SacrificeVfx = "CosmicBlankAbilityVFX";
 
     [DataField]
+    public EntProtoId DespawnVfx = "MonumentCosmicCultDestruction";
+
+    [DataField]
     public SoundSpecifier SacrificeSfx = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ability_blank.ogg");
 }
 

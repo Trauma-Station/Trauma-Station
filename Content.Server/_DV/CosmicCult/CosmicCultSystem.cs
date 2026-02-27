@@ -20,6 +20,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Polymorph;
 using Content.Shared.Radio.Components;
 using Content.Shared.Speech.Components;
+using Content.Shared.Speech;
 using Content.Shared.Popups;
 using Content.Shared.Temperature.Components;
 using Robust.Server.GameObjects;
@@ -190,20 +191,38 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
 
     private void OnGotSpeechOverrideEquipped(Entity<SpeechOverrideComponent> ent, ref GotEquippedEvent args)
     {
-        if (ent.Comp.OverrideIDs is not { } overrides || !TryComp<VocalComponent>(args.Equipee, out var vocalComp)) return;
-        ent.Comp.StoredIDs = vocalComp.Sounds;
-        vocalComp.Sounds = overrides;
-        var ev = new SoundsChangedEvent();
-        RaiseLocalEvent(args.Equipee, ref ev);
+        if (ent.Comp.EmoteIDs is { } emoteIDs && TryComp<VocalComponent>(args.Equipee, out var vocalComp))
+        {
+            ent.Comp.EmoteStoredIDs = vocalComp.Sounds;
+            vocalComp.Sounds = emoteIDs;
+            var ev = new EmoteSoundsChangedEvent();
+            RaiseLocalEvent(args.Equipee, ref ev);
+        }
+        if (ent.Comp.SpeechIDs is { } speechIDs && TryComp<SpeechComponent>(args.Equipee, out var speechComp))
+        {
+            ent.Comp.SpeechStoredIDs = speechComp.SpeechSounds;
+            speechComp.SpeechSounds = speechIDs;
+            var ev = new SpeechSoundsChangedEvent();
+            RaiseLocalEvent(args.Equipee, ref ev);
+        }
     }
 
     private void OnGotSpeechOverrideUnequipped(Entity<SpeechOverrideComponent> ent, ref GotUnequippedEvent args)
     {
-        if (ent.Comp.StoredIDs is not { } stored || !TryComp<VocalComponent>(args.Equipee, out var vocalComp)) return;
-        ent.Comp.StoredIDs = null;
-        vocalComp.Sounds = stored;
-        var ev = new SoundsChangedEvent();
-        RaiseLocalEvent(args.Equipee, ref ev);
+        if (ent.Comp.EmoteStoredIDs is { } emoteIDs && TryComp<VocalComponent>(args.Equipee, out var vocalComp))
+        {
+            ent.Comp.EmoteStoredIDs = null;
+            vocalComp.Sounds = emoteIDs;
+            var ev = new EmoteSoundsChangedEvent();
+            RaiseLocalEvent(args.Equipee, ref ev);
+        }
+        if (ent.Comp.SpeechStoredIDs is { } speechIDs && TryComp<SpeechComponent>(args.Equipee, out var speechComp))
+        {
+            ent.Comp.SpeechStoredIDs = null;
+            speechComp.SpeechSounds = speechIDs;
+            var ev = new SpeechSoundsChangedEvent();
+            RaiseLocalEvent(args.Equipee, ref ev);
+        }
     }
     #endregion
 
@@ -218,7 +237,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         _movementSpeed.RefreshMovementSpeedModifiers(uid);
 
     private void OnRefreshMoveSpeed(EntityUid uid, InfluenceStrideComponent comp, RefreshMovementSpeedModifiersEvent args) =>
-        args.ModifySpeed(1.15f, 1.15f);
+        args.ModifySpeed(1.4f, 1.4f);
     private void OnImpositionMoveSpeed(EntityUid uid, CosmicImposingComponent comp, RefreshMovementSpeedModifiersEvent args) =>
         args.ModifySpeed(0.80f, 0.80f);
     #endregion
@@ -236,7 +255,6 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         {
             EnsureComp<CosmicCultComponent>(args.NewEntity, out var cultComp);
             cultComp.CosmicEmpowered = oldCultComp.CosmicEmpowered;
-            cultComp.StoredDamageContainer = oldCultComp.StoredDamageContainer;
         }
         if (HasComp<CosmicStarMarkComponent>(args.OldEntity))
             EnsureComp<CosmicStarMarkComponent>(args.NewEntity);

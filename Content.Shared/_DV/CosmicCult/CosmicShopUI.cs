@@ -18,6 +18,8 @@ public sealed class CosmicShopBuiState(CosmicCultComponent comp) : BoundUserInte
     public HashSet<ProtoId<InfluencePrototype>> OwnedInfluences = comp.OwnedInfluences;
     public int EntropyBudget = comp.EntropyBudget;
     public int CultistsForNextLevel = comp.CultistsForNextLevel;
+    public int CurrentLevel = comp.CurrentLevel;
+    public int CurrentTier = comp.CultTier;
     public bool LevelUpAwaitingConfirmation = comp.LevelUpAwaitingConfirmation;
     public bool EntropyLocked = comp.EntropyLocked;
     public float CurrentProgress = comp.TotalEntropy - comp.EntropyRequirementOffset;

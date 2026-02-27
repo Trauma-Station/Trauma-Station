@@ -117,7 +117,7 @@
     size: Large
     shape:
     - 0,0,5,0
-    storedRotation: -45
+    storedRotation: 45
     sprite: _DV/CosmicCult/Objects/cosmiclance-inhands.rsi
   - type: EmitSoundOnThrow
     sound: /Audio/_DV/CosmicCult/cosmicweapon_swing.ogg ## THROWING SOUND - REPLACE THIS!

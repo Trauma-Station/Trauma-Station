@@ -266,6 +266,22 @@
   - type: InstantAction
     event: !type:EventCosmicTransmutation {}
 
+- type: entity
+  parent: BaseAction
+  id: ActionCosmicStride
+  name: Astral Stride
+  description: Call upon astral power to move at incredible speed.
+  components:
+  - type: Action
+    useDelay: 50
+    checkCanInteract: false
+    itemIconStyle: NoItem
+    icon:
+      sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
+      state: stride
+  - type: InstantAction
+    event: !type:EventCosmicStride {}
+
 ## COLOSSUS ACTIONS
 
 - type: entity

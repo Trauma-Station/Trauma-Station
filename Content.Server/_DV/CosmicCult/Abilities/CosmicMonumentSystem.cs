@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Shared.Actions;
 using Content.Shared.Popups;
 using Content.Shared.Station;
@@ -6,9 +5,11 @@ using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Trauma.Common.RoundEnd;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
+using System.Numerics;
 using System.Linq;
 
 namespace Content.Server._DV.CosmicCult.Abilities;
@@ -37,6 +38,7 @@ public sealed class CosmicMonumentSystem : EntitySystem
         SubscribeLocalEvent<CosmicCultComponent, EventCosmicPlaceMonument>(OnCosmicPlaceMonument);
         SubscribeLocalEvent<MonumentSpawnMarkComponent, InteractHandEvent>(OnActivate);
         SubscribeLocalEvent<MonumentOnDespawnComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<EmergencyShuttleDockedEvent>(OnEvacDocked);
     }
 
     public override void Update(float frameTime)
@@ -140,6 +142,27 @@ public sealed class CosmicMonumentSystem : EntitySystem
     {
         if (!TryComp<CosmicCultComponent>(args.User, out var cultComp)) return;
         ToggleMarkApproval(ent, (args.User, cultComp));
+    }
+
+    /// <summary>
+    /// Makes it impossible to place or activate a monument if evac docks to the station.
+    /// </summary>
+    private void OnEvacDocked(ref EmergencyShuttleDockedEvent args)
+    {
+        var cultQuerry = EntityQueryEnumerator<CosmicCultComponent>(); // Remove placement action
+        while (cultQuerry.MoveNext(out _, out var comp))
+            _actions.RemoveAction(comp.MonumentActionEntity);
+
+        foreach (var mark in _marks) // Remove any existing marks
+            QueueDel(mark);
+        _marks.Clear();
+
+        var query = EntityQueryEnumerator<MonumentComponent>(); // REmove any existing monuments
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            Spawn(comp.DespawnVfx, Transform(uid).Coordinates);
+            QueueDel(uid);
+        }
     }
 
     //todo this can probably be mostly moved to shared but my brain isn't cooperating w/ that rn

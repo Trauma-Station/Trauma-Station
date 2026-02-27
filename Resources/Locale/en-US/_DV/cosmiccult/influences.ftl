@@ -30,9 +30,10 @@ influence-name-transmutation = Corrupt Matter
 influence-description-transmutation = Channel malign energy into an object in your palm, twisting it into something else.
 influence-description-transmutation-upgrade = If empowered, you may forge even more sophisticated items.
 
+influence-name-stride = Astral Stride
+influence-description-stride = Astral energy invigorates your every move, allowing you to move at incredible speed for a brief duration.
+influence-description-stride-upgrade = If empowered, cosmic power would stay in your body for a little while longer.
+
 ## PASSIVE INFLUENCES
 influence-name-step = Unbound Step
 influence-description-step = You move relative only to the starless black - your movement is no longer affected by gravity.
-
-influence-name-stride = Astral Stride
-influence-description-stride = Astral energy invigorates your every move, subtly hastening your speed.
