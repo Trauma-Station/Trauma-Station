@@ -308,7 +308,7 @@
         - CommandStaff # Goobstation
         - AntagImmune
         - Changeling # Goobstation
-        
+
       lateJoinAdditional: false
       mindRoles:
       - MindRoleTraitor
