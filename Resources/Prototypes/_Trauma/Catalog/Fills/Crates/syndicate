@@ -1,0 +1,21 @@
+- type: entity
+  id: CrateXenomorphBundle
+  parent: CrateSyndicate
+  name: Syndicate crate
+  description: A crate containing all the tools and organs necessary to kickstart your army of biological terror!
+  components:
+  - type: StorageFill
+    contents:
+      - id: OrganXenomorphEyes
+      - id: OrganXenomorphResinSpinner
+      - id: OrganXenomorphNeurotoxinGland
+      - id: OrganXenomorphAcidGland
+      - id: OrganXenomorphPlasmaVesselLargeQueen
+      - id: OrganXenomorphEggSack  
+      - id: Omnimedtool
+      - id: MonkeyCubeWrapped
+        amount: 3
+      - id: ClothingGasMaskSyndicate    
+      - id: XenoTissueSample
+        amount: 3
+      - id: XenoCompatibilityImplanter
