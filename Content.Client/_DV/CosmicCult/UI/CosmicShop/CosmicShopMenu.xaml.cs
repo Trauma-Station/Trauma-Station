@@ -27,7 +27,7 @@ public sealed partial class CosmicShopMenu : FancyWindow
 
         _influencePrototypes = _proto.EnumeratePrototypes<InfluencePrototype>();
         LevelUpConfirm.OnPressed += _ => OnLevelUpConfirmed?.Invoke();
-    
+
         CultProgressBar.BackgroundStyleBoxOverride = new StyleBoxFlat { BackgroundColor = new Color(15, 17, 30) };
         CultProgressBar.ForegroundStyleBoxOverride = new StyleBoxFlat { BackgroundColor = new Color(91, 62, 124) };
     }
@@ -63,7 +63,7 @@ public sealed partial class CosmicShopMenu : FancyWindow
     private void UpdateEntropy(CosmicShopBuiState state)
     {
         var entropyToNextStage = Math.Max(state.TargetProgress - state.CurrentProgress, 0);
-        
+
         if (state.EntropyLocked) entropyToNextStage = 0;
 
         AvailableEntropy.Text = Loc.GetString("cosmic-shop-interface-entropy-value", ("infused", state.EntropyBudget));
@@ -130,7 +130,7 @@ public sealed partial class CosmicShopMenu : FancyWindow
         //more verbose than it needs to be, but it reads nicer
         if (owned)
             return InfluenceUIBox.InfluenceUIBoxState.Owned;
-        
+
         //TODO: dependency check when skill trees are real
 
         //if it's unlocked, do we have enough entropy to buy it?
