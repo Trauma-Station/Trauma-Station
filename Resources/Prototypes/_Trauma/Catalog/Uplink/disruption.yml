@@ -36,5 +36,5 @@
   conditions:
     - !type: StoreWhitelistCondition
       blacklist:
-      tags:
-      - Contravenduplink
+        tags:
+        - NukeOpsUplink
