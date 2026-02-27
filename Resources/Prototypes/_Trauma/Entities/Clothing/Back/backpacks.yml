@@ -87,7 +87,7 @@
           Quantity: 1200
 
 - type: entity
-  parent: ClothingBackpackXenomorph
+  parent: ClothingBackpack
   id: ClothingBackpackXenomorphBundle
   abstract: true
   components:
