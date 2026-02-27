@@ -16,6 +16,9 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 10h
+    - !type:SpeciesRequirement # Trauma - Human only command
+      species:
+      - Human
   weight: 10
   startingGear: HoSGear
   icon: "JobIconHeadOfSecurity"

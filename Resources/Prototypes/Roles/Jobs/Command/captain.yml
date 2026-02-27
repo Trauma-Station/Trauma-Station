@@ -154,6 +154,9 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 4h
+    - !type:SpeciesRequirement # Trauma - Human only command
+      species:
+      - Human
   guides: # goobstation
   - Command
   goobcoins: 50 #Goob content

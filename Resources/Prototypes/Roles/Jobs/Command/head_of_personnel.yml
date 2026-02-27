@@ -19,6 +19,9 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 2.5h
+    - !type:SpeciesRequirement # Trauma - Human only command
+      species:
+      - Human
   guides: # goobstation
   - Command
   - Writing
