@@ -4,7 +4,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Goobstation.Shared.Phones.Components;
+namespace Content.Trauma.Shared.Phones.Components;
 
 /// <summary>
 /// used for the real phones

@@ -1,7 +1,7 @@
-using Content.Goobstation.Shared.Phones.Components;
+using Content.Trauma.Shared.Phones.Components;
 using Robust.Client.UserInterface;
 
-namespace Content.Goobstation.Client.Phones.UI;
+namespace Content.Trauma.Client.Phones.UI;
 
 public sealed class PhoneNameChangeUI : BoundUserInterface
 {

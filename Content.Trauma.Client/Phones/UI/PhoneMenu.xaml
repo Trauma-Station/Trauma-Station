@@ -1,6 +1,6 @@
 <controls1:FancyWindow
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Goobstation.Client.Phones.UI"
+    xmlns:controls="clr-namespace:Content.Trauma.Client.Phones.UI"
     xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
     Title="Telephone" MinSize="135 90" Resizable="False">
     <GridContainer Columns="2">

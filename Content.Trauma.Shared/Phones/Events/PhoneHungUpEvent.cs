@@ -1,4 +1,4 @@
-namespace Content.Goobstation.Shared.Phones.Events;
+namespace Content.Trauma.Shared.Phones.Events;
 
 public sealed class PhoneHungUpEvent : EntityEventArgs
 {

@@ -1,6 +1,6 @@
-using Content.Goobstation.Shared.Phones.Components;
+using Content.Trauma.Shared.Phones.Components;
 
-namespace Content.Goobstation.Shared.Phones.Events;
+namespace Content.Trauma.Shared.Phones.Events;
 
 public sealed class PhoneRingEvent : EntityEventArgs
 {
