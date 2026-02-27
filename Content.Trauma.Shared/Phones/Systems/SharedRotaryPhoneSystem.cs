@@ -1,8 +1,10 @@
+using System.Numerics;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Destructible;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
@@ -11,6 +13,8 @@ using Content.Trauma.Shared.Phones.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -20,6 +24,7 @@ namespace Content.Trauma.Shared.Phones.Systems;
 public sealed class SharedRotaryPhoneSystem : EntitySystem
 {
     private static readonly ProtoId<TagPrototype> ScrewdriverTag = "Screwdriver";
+    public const string PhoneJoint = "jointphone";
 
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -28,6 +33,7 @@ public sealed class SharedRotaryPhoneSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private readonly SharedJointSystem _jointSystem = default!;
 
     public override void Initialize()
     {
@@ -43,7 +49,26 @@ public sealed class SharedRotaryPhoneSystem : EntitySystem
         SubscribeLocalEvent<RotaryPhoneComponent, DestructionEventArgs>(OnPhoneDestroy);
         SubscribeLocalEvent<RotaryPhoneHolderComponent, ExaminedEvent>(OnExamineHolder);
         SubscribeLocalEvent<RotaryPhoneHolderComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
+        SubscribeLocalEvent<RotaryPhoneHolderComponent, EntRemovedFromContainerMessage>(OnPhoneRemoveHolder);
         SubscribeLocalEvent<RotaryPhoneHolderComponent, DestructionEventArgs>(OnDestruction);
+    }
+
+    private void OnPhoneRemoveHolder(Entity<RotaryPhoneHolderComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if(Deleted(ent.Owner) || Terminating(ent.Owner))
+            return;
+
+        var visuals = EnsureComp<JointVisualsComponent>(ent.Owner);
+        visuals.Sprite = ent.Comp.RopeSprite;
+        visuals.Target = args.Entity;
+        Dirty(ent.Owner, visuals);
+
+        var jointComp = EnsureComp<JointComponent>(ent.Owner);
+        var joint = _jointSystem.CreateDistanceJoint(ent.Owner, args.Entity, anchorA: new Vector2(0f, 0f), id: PhoneJoint);
+        joint.MaxLength = 3f;
+        joint.Stiffness = 0.5f;
+        joint.MinLength = 0;
+        Dirty(ent.Owner, jointComp);
     }
 
     private void OnMapInit(Entity<RotaryPhoneComponent> ent, ref MapInitEvent args)
@@ -56,6 +81,7 @@ public sealed class SharedRotaryPhoneSystem : EntitySystem
     {
         QueueDel(comp.ConnectedPhone);
     }
+
     private void OnPhoneDestroy(Entity<RotaryPhoneComponent> ent, ref DestructionEventArgs args)
     {
         DisconnectPhones(ent.Comp);
@@ -79,6 +105,8 @@ public sealed class SharedRotaryPhoneSystem : EntitySystem
     {
         if (ent.Comp.PhoneNumber != null)
             args.PushMarkup(Loc.GetString("phone-number-description", ("number", ent.Comp.PhoneNumber)));
+
+        Dirty(ent);
     }
 
 

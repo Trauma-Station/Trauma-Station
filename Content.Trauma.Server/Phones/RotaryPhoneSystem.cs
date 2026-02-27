@@ -27,9 +27,6 @@ public sealed class RotaryPhoneSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedRotaryPhoneSystem _rotaryPhoneSystem = default!;
-    [Dependency] private readonly SharedJointSystem _jointSystem = default!;
-
-    public const string PhoneJoint = "jointphone";
 
     public override void Initialize()
     {
@@ -41,27 +38,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
         SubscribeLocalEvent<RotaryPhoneComponent, PhoneCategoryChangedMessage>(OnPhoneCategoryChanged);
         SubscribeLocalEvent<RotaryPhoneComponent, PhoneDialedMessage>(OnDial);
         SubscribeLocalEvent<RotaryPhoneComponent, BoundUIOpenedEvent>(OnOpen);
-        SubscribeLocalEvent<RotaryPhoneHolderComponent, EntRemovedFromContainerMessage>(OnPhoneRemoveHolder);
         SubscribeLocalEvent<RotaryPhoneHolderComponent, EntInsertedIntoContainerMessage>(OnPhoneInsertHolder);
-    }
-
-
-    private void OnPhoneRemoveHolder(Entity<RotaryPhoneHolderComponent> ent, ref EntRemovedFromContainerMessage args)
-    {
-        if(Deleted(ent.Owner) || Terminating(ent.Owner))
-            return;
-
-        var visuals = EnsureComp<JointVisualsComponent>(ent.Owner);
-        visuals.Sprite = ent.Comp.RopeSprite;
-        visuals.Target = args.Entity;
-        Dirty(ent.Owner, visuals);
-
-        var jointComp = EnsureComp<JointComponent>(ent.Owner);
-        var joint = _jointSystem.CreateDistanceJoint(ent.Owner, args.Entity, anchorA: new Vector2(0f, 0f), id: PhoneJoint);
-        joint.MaxLength = 3f;
-        joint.Stiffness = 0.5f;
-        joint.MinLength = 0;
-        Dirty(ent.Owner, jointComp);
     }
 
     private void OnPhoneInsertHolder(Entity<RotaryPhoneHolderComponent> ent, ref EntInsertedIntoContainerMessage args)

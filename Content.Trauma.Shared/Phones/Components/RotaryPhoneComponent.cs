@@ -15,13 +15,13 @@ public sealed partial class RotaryPhoneComponent : Component
     /// <summary>
     /// Becomes true when the phone is picked up or when another phone calls this one
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool Engaged;
 
     /// <summary>
     /// When true phones will transfer messages, becomes true when the phone is picked up while the phone is ringing
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool Connected;
 
     /// <summary>
@@ -39,7 +39,7 @@ public sealed partial class RotaryPhoneComponent : Component
     /// <summary>
     /// The phone number the phone is calling
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public int? DialedNumber;
 
     /// <summary>
@@ -57,19 +57,19 @@ public sealed partial class RotaryPhoneComponent : Component
     /// <summary>
     /// The connected phone, if any
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntityUid? ConnectedPhone;
 
     /// <summary>
     /// What player is holding the other phone
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntityUid? ConnectedPlayer;
 
     /// <summary>
     /// What player is holding the other phone
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntityUid? ConnectedPhoneStand;
 
     [DataField]

@@ -19,5 +19,6 @@
     layers:
     - state: default
     - state: idphonemerchant
+      sprite: _Trauma/Objects/Misc/id_cards.rsi
   - type: PresetIdCard
     job: PhoneMerchant
