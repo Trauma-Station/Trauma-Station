@@ -23,6 +23,7 @@
   id: UplinkXenomorphBundle
   name: uplink-xenomorph-compatibility-bundle-name
   description: uplink-xenomorph-compatibility-bundle-desc
+  icon: { sprite: Resources/Textures/Structures/Storage/Crates/syndicate.rsi, state: icon }
   productEntity: CrateXenomorphBundle
   cost:
     Telecrystal: 100
