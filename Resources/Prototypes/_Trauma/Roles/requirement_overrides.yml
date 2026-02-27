@@ -92,11 +92,6 @@
       department: Science
       time: 3h
       inverted: true
-    ResearchAssistant:
-    - !type:DepartmentTimeRequirement
-      department: Science
-      time: 3h
-      inverted: true
     #Cargo - No intern role, so no limits lmao.
     #Engineering
     StationEngineer:
