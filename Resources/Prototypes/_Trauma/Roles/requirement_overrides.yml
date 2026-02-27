@@ -30,42 +30,42 @@
       species:
       - Human
     Quartermaster:
-    - type:DepartmentTimeRequirement
+    - !type:DepartmentTimeRequirement
       department: Cargo
       time: 3h
     - !type:SpeciesRequirement
       species:
       - Human
     HeadOfPersonnel:
-    - type:DepartmentTimeRequirement
+    - !type:DepartmentTimeRequirement
       department: Service
       time: 3h
     - !type:SpeciesRequirement
       species:
       - Human
     ChiefEngineer:
-    - type:DepartmentTimeRequirement
+    - !type:DepartmentTimeRequirement
       department: Engineering
       time: 3h
     - !type:SpeciesRequirement
       species:
       - Human
     ChiefMedicalOfficer:
-    - type:DepartmentTimeRequirement
+    - !type:DepartmentTimeRequirement
       department: Medical
       time: 3h
     - !type:SpeciesRequirement
       species:
       - Human
     ResearchDirector:
-    - type:DepartmentTimeRequirement
+    - !type:DepartmentTimeRequirement
       department: Science
       time: 3h
     - !type:SpeciesRequirement
       species:
       - Human
     HeadOfSecurity:
-    - type:DepartmentTimeRequirement
+    - !type:DepartmentTimeRequirement
       department: Security
       time: 3h
     - !type:SpeciesRequirement
