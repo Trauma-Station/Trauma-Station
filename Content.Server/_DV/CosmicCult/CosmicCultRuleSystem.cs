@@ -63,7 +63,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
     [Dependency] private readonly EuiManager _euiMan = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
@@ -274,7 +273,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         while (query.MoveNext(out var ruleUid, out _, out var cultRule, out _))
         {
-            SetWinType((ruleUid, cultRule), WinType.CultComplete); //here's no coming back from this. Cult wins this round
+            SetWinType((ruleUid, cultRule), WinType.CultMajor); //here's no coming back from this. Cult wins this round
             _roundEnd.EndRound(); //Woo game over yeaaaah
             foreach (var cultist in cultRule.Cultists)
             {
@@ -301,7 +300,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         ent.Comp.WinType = type;
 
-        if (type is WinType.CultComplete or WinType.CrewComplete) //Let's lock in our WinType to prevent us from setting a worse win if a better win's been achieved.
+        if (type is WinType.CultMajor) //Let's lock in our WinType to prevent us from setting a worse win if a better win's been achieved.
             ent.Comp.WinLocked = true;
     }
 
@@ -342,10 +341,20 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         if (CultistsAlive())
             return;
 
-        var query = QueryActiveRules();
-
+        var query = QueryActiveRules(); // Everyone is dead or captured, call evac
         while (query.MoveNext(out var ruleUid, out _, out var ruleComp, out _))
+        {
             ConfirmWinState((ruleUid, ruleComp));
+
+            _roundEnd.DoRoundEndBehavior(ruleComp.RoundEndBehavior,
+                ruleComp.EvacShuttleTime,
+                ruleComp.RoundEndTextSender,
+                ruleComp.RoundEndTextShuttleCall,
+                ruleComp.RoundEndTextAnnouncement);
+
+            ruleComp.RoundEndBehavior = RoundEndBehavior.Nothing; // prevent this being called multiple times.
+            ruleComp.RiftStop = true; // rifts can stop spawning now.
+        }
     }
 
     private void OnEvacAttempt(ref CommunicationConsoleCallShuttleAttemptEvent args)
@@ -364,27 +373,41 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     private void ConfirmWinState(Entity<CosmicCultRuleComponent> ent)
     {
         _sound.StopStationEventMusic(ent, StationEventMusicType.CosmicCult);
+        if (ent.Comp.WinLocked) return;
 
-        var tier = ent.Comp.CurrentTier;
+        var arrestedCultists = 0; // Cultists that are cuffed and at centcomm
+        var deadCultists = 0; // Cultists that are dead (or crit) and NOT at centcomm
+        var freeCultists = 0; // Cultists that are alive and unrestrained
+        var halfCult = (int) Math.Ceiling(ent.Comp.InitialCult / 2f); // Half of the initial cult, rounded up
+        var totalCult = ent.Comp.InitialCult;
         var centcomm = _emergency.GetCentcommMaps();
         var wrapup = AllEntityQuery<CosmicCultComponent, TransformComponent>();
         while (wrapup.MoveNext(out var cultist, out _, out var cultistLocation))
         {
-            if (cultistLocation.MapUid == null || !centcomm.Contains(cultistLocation.MapUid.Value))
-                continue;
+            if (cultistLocation.MapUid == null) continue;
+            if (centcomm.Contains(cultistLocation.MapUid.Value)
+            && TryComp<CuffableComponent>(ent, out var cuffComp)
+            && _cuffable.IsCuffed((ent, cuffComp)))
+            {
+                arrestedCultists++;
+            }
+            else if (_mobState.IsIncapacitated(cultist))
+            {
+                deadCultists++;
+            }
+            else
+            {
+                freeCultists++;
+            }
         }
-
-        if (CultistsAlive())
-            return;
-
-        _roundEnd.DoRoundEndBehavior(ent.Comp.RoundEndBehavior,
-            ent.Comp.EvacShuttleTime,
-            ent.Comp.RoundEndTextSender,
-            ent.Comp.RoundEndTextShuttleCall,
-            ent.Comp.RoundEndTextAnnouncement);
-
-        ent.Comp.RoundEndBehavior = RoundEndBehavior.Nothing; // prevent this being called multiple times.
-        ent.Comp.RiftStop = true; // rifts can stop spawning now.
+        if (arrestedCultists >= totalCult)
+            SetWinType(ent, WinType.CrewMajor);
+        else if (arrestedCultists >= halfCult)
+            SetWinType(ent, WinType.CrewMinor);
+        else if (deadCultists + arrestedCultists >= halfCult)
+            SetWinType(ent, WinType.Neutral);
+        else
+            SetWinType(ent, WinType.CultMinor);
     }
 
     protected override void AppendRoundEndText(EntityUid uid,
@@ -397,10 +420,17 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         var summaryText = Loc.GetString($"cosmiccult-summary-{ftlKey}");
         args.AddLine(winType);
         args.AddLine(summaryText);
-        args.AddLine(Loc.GetString("cosmiccult-roundend-cultist-count", ("initialCount", component.TotalCult)));
-        args.AddLine(Loc.GetString("cosmiccult-roundend-cultpop-count", ("count", component.PercentConverted)));
+        args.AddLine(Loc.GetString("cosmiccult-roundend-cultist-count", ("initialCount", component.InitialCult)));
         args.AddLine(Loc.GetString("cosmiccult-roundend-entropy-count", ("count", component.EntropySiphoned)));
-        args.AddLine(Loc.GetString("cosmiccult-roundend-monument-stage", ("stage", component.CurrentTier)));
+        args.AddLine(Loc.GetString("cosmiccult-roundend-list-start"));
+
+        var antags = _antag.GetAntagIdentifiers(uid);
+
+        foreach (var (mind, sessionData, name) in antags)
+        {
+            if (!HasComp<CosmicCultRoleComponent>(mind)) continue;
+            args.AddLine(Loc.GetString("cosmiccult-roundend-list-name-user", ("name", name), ("user", sessionData.UserName)));
+        }
     }
 
     public void IncrementCultObjectiveEntropy(Entity<CosmicCultComponent> ent, int amount)

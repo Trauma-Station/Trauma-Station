@@ -35,6 +35,14 @@
   components:
   - type: Stack
     count: 1
+  
+- type: entity
+  parent: MaterialCosmicCultEntropy
+  id: MaterialCosmicCultEntropy5
+  suffix: One
+  components:
+  - type: Stack
+    count: 5
 
 - type: stack
   id: Entropy

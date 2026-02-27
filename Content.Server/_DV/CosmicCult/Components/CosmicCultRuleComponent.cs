@@ -135,31 +135,23 @@ public sealed partial class CosmicCultRuleComponent : Component
 public enum WinType : byte // TODO make a gentle sledgehammer pass over this
 {
     /// <summary>
-    ///     Cult complete win. The Cosmic Cult beckoned the final curtain call.
-    /// </summary>
-    CultComplete,
-    /// <summary>
-    ///    Cult major win. The Monument reached Stage 3 and was fully empowered.
+    ///    Cult major win. The Cosmic Cult beckoned the final curtain call.
     /// </summary>
     CultMajor,
     /// <summary>
-    ///    Cult minor win. Even if the crew escaped, The Monument reached Stage 3.
+    ///    Cult minor win. More than half of the cultists are still alive and free.
     /// </summary>
     CultMinor,
     /// <summary>
-    ///     Neutral. The Monument didn't reach Stage 3, The crew escaped, but the Cult Leader also escaped.
+    ///     Neutral. More than half of the cult are dead and not even on centcomm.
     /// </summary>
     Neutral,
     /// <summary>
-    ///     Crew minor win. The monument didn't reach Stage 3, The crew escaped, and Cult leader was killed, deconverted, or left on the station.
+    ///     Crew minor win. More than half of the cultists are arrested.
     /// </summary>
     CrewMinor,
     /// <summary>
-    ///     Crew major win. The monument didn't reach Stage 3, The crew escaped, and the cult was killed.
+    ///     Crew major win. All cultists arrested.
     /// </summary>
     CrewMajor,
-    /// <summary>
-    ///     Crew complete win. The cult was completely deconverted.
-    /// </summary>
-    CrewComplete,
 }

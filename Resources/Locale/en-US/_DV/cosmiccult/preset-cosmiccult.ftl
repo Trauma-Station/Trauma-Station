@@ -36,32 +36,23 @@ cosmiccult-roundend-cultist-count = {$initialCount ->
     *[other] There were {$initialCount} [color=#4cabb3]Cosmic Cultists[/color].
 }
 cosmiccult-roundend-entropy-count = The cult siphoned {$count} Entropy.
-cosmiccult-roundend-cultpop-count = Cultists made up {$count}% of the crew.
-cosmiccult-roundend-monument-stage = {$stage ->
-    [1] Alas, the Monument seems abandoned.
-    [2] The Monument progressed, but completion was out of reach.
-    [3] The Monument was completed.
-    *[other] [color=red]Something went REALLY wrong.[/color]
-}
+cosmiccult-roundend-list-start = The cultists were:
+cosmiccult-roundend-list-name-user = - [color=#4cabb3]{$name}[/color] ([color=gray]{$user}[/color])
 
-cosmiccult-roundend-cultcomplete = [color=#4cabb3]Cosmic Cult complete victory![/color]
 cosmiccult-roundend-cultmajor = [color=#4cabb3]Cosmic Cult major victory![/color]
 cosmiccult-roundend-cultminor = [color=#4cabb3]Cosmic Cult minor victory![/color]
 cosmiccult-roundend-neutral = [color=yellow]Neutral ending![/color]
 cosmiccult-roundend-crewminor = [color=green]Crew minor victory![/color]
 cosmiccult-roundend-crewmajor = [color=green]Crew major victory![/color]
-cosmiccult-roundend-crewcomplete = [color=green]Crew complete victory![/color]
 
-cosmiccult-summary-cultcomplete = The cosmic cultists ushered in the end!
-cosmiccult-summary-cultmajor = The cosmic cultists' victory will be inevitable.
-cosmiccult-summary-cultminor = The Monument was completed, but not fully empowered.
-cosmiccult-summary-neutral = The cult will live to see another day.
-cosmiccult-summary-crewminor = The cult has been left stewardless.
-cosmiccult-summary-crewmajor = All cosmic cultists were eliminated.
-cosmiccult-summary-crewcomplete = Every single cosmic cultist was deconverted!
+cosmiccult-summary-cultmajor = The cosmic cultists ushered in the end!
+cosmiccult-summary-cultminor = The cult will live to see another day.
+cosmiccult-summary-neutral = The cult has suffered losses, but they will recover.
+cosmiccult-summary-crewminor = Most cosmic cultists were captured.
+cosmiccult-summary-crewmajor = All cosmic cultists were captured!
 
-cosmiccult-elimination-shuttle-call = Based on scans from our long-range sensors, the Noöspheric anomaly has subsided. We thank you for your prudence. An emergency shuttle has been automatically called to the station for decontamination and debriefing procedures. ETA: {$time} {$units}.
-cosmiccult-elimination-announcement = Based on scans from our long-range sensors, the Noöspheric anomaly has subsided. We thank you for your prudence. An emergency shuttle is already inbound. Return to CentComm safely for decontamination and debriefing procedures.
+cosmiccult-elimination-shuttle-call = Based on scans from our long-range sensors, the Noöspheric anomaly has subsided. We thank you for your prudence. An emergency shuttle has been automatically called to the station. Please deliver any infected personnel to CentComm for processing. ETA: {$time} {$units}.
+cosmiccult-elimination-announcement = Based on scans from our long-range sensors, the Noöspheric anomaly has subsided. We thank you for your prudence. An emergency shuttle is already inbound. Please deliver any infected personnel to CentComm for processing.
 
 
 ## BRIEFINGS
