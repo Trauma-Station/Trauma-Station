@@ -171,7 +171,7 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
     {
         if (evolveTo == null
             || !_protoManager.TryIndex(evolveTo, out var xenomorphPrototype)
-            || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, _componentFactory))
+            || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, _Factory))
             return false;
 
         // Prevent evolving into Queen if a living Queen already exists
