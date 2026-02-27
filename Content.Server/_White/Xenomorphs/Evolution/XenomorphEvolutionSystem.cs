@@ -27,7 +27,6 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
-
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
@@ -36,7 +35,7 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly XenomorphQueenSystem _queenSystem = default!; // <- injected Queen system
+    [Dependency] private readonly XenomorphQueenSystem _queenSystem = default!; // <-- dependency for Queen checks
 
     public override void Initialize()
     {
@@ -152,10 +151,10 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
             || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, _componentFactory))
             return false;
 
-        // Prevent multiple Queens
+        // Prevent evolving into Queen if a living Queen already exists
         if (xenomorph.Caste == "Queen" && _queenSystem.IsQueenAlive())
         {
-            _popup.PopupEntity(Loc.GetString("xenomorphs-queen-only-one-allowed"), uid);
+            _popup.PopupEntity(Loc.GetString("xenomorphs-evolution-no-cast-slot", ("caste", "Queen")), uid);
             return false;
         }
 
