@@ -744,7 +744,6 @@
       roleLoadout:
       - RoleSurvivalNukie
       components:
-      - type: XenomorphsRule # Trauma
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
@@ -779,7 +778,6 @@
     eventType: HostilesSpawn # Goobstation
   # Goobstation
   - type: GameRule
-  - type: XenomorphsRule # Trauma
   - type: AlertLevelInterceptionRule
   - type: AntagSelection
     definitions:
