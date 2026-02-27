@@ -2,6 +2,7 @@ using Content.Goobstation.Common.CCVar;
 using Content.Shared._EinsteinEngines.Contests;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage.Events;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Item;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
@@ -22,6 +23,8 @@ public abstract partial class SharedMeleeWeaponSystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
 
+    private EntityQuery<InteractionRelayComponent> _relayQuery;
+
     public static readonly ProtoId<TagPrototype> WideSwingIgnore = "WideSwingIgnore"; // for mice
 
     private float _shoveRange;
@@ -30,6 +33,8 @@ public abstract partial class SharedMeleeWeaponSystem
 
     private void InitializeTrauma()
     {
+        _relayQuery = GetEntityQuery<InteractionRelayComponent>();
+
         Subs.CVar(_cfg, GoobCVars.ShoveRange, x => _shoveRange = x, true);
         Subs.CVar(_cfg, GoobCVars.ShoveSpeed, x => _shoveSpeed = x, true);
         Subs.CVar(_cfg, GoobCVars.ShoveMassFactor, x => _shoveMass = x, true);
