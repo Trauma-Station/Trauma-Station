@@ -1,7 +1,7 @@
 name: List Audio Changes
 
 on:
-  pull_request_target:
+  pull_request:
     paths:
     - '**.ogg'
 
@@ -27,6 +27,7 @@ jobs:
         count=`echo $files | wc -w`
         # no trolling
         infos=`file -- $files | sed s/EOF/E0F/g`
+        echo "Infos = $infos"
         printf 'info<<EOF\n**Sound Bot**\n\nThis PR changed %d sounds:\n<details>\n%s\n</details>\nEOF' "$count" "$infos" >> $GITHUB_OUTPUT
 
     - name: Potentially find comment
