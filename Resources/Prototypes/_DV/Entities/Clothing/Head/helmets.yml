@@ -30,6 +30,3 @@
     sprite: _DV/Clothing/Head/Helmets/roman_centurion.rsi
   - type: Clothing
     sprite: _DV/Clothing/Head/Helmets/roman_centurion.rsi
-  - type: Tag
-    tags:
-    - WhitelistChameleon
