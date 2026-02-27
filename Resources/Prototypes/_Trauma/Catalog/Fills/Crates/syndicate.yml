@@ -20,3 +20,6 @@
         - id: XenoTissueSample
           amount: 3
         - id: XenoCompatibilityImplanter
+    - type: EntitySpawnOnSpawn
+      prototypes:
+        - XenomorphsBundleRule        
