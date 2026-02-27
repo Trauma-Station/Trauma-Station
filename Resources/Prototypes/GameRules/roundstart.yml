@@ -147,7 +147,6 @@
     - NamesOperationSuffix
     nameFormat: name-format-nuclear-operation
   - type: NukeopsRule
-  - type: XenomorphsRule # Trauma
   - type: RuleGrids
   - type: AntagSelection
     agentName: nukeops-roundend-name # Goobstation
