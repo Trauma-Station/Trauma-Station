@@ -101,20 +101,16 @@ public sealed class MeleeDashSystem : EntitySystem
 
     private void OnDash(MeleeDashEvent msg, EntitySessionEventArgs args)
     {
-        if (args.SenderSession.AttachedEntity == null)
-            return;
-
-        var user = args.SenderSession.AttachedEntity.Value;
-
-        if (_standing.IsDown(user))
-            return;
-
-        if (_container.IsEntityInContainer(user))
+        if (args.SenderSession.AttachedEntity is not {} user ||
+            _standing.IsDown(user) ||
+            _container.IsEntityInContainer(user))
             return;
 
         var weapon = GetEntity(msg.Weapon);
 
-        if (!TryComp(weapon, out MeleeDashComponent? dash) ||
+        if (TerminatingOrDeleted(weapon) ||
+            !_hands.IsHolding(user, weapon) ||
+            !TryComp(weapon, out MeleeDashComponent? dash) ||
             !TryComp(weapon, out UseDelayComponent? delay) || _useDelay.IsDelayed((weapon, delay)))
             return;
 
