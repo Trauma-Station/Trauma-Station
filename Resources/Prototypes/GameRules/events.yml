@@ -779,6 +779,7 @@
     eventType: HostilesSpawn # Goobstation
   # Goobstation
   - type: GameRule
+  - type: XenomorphsRule # so we dont have 7 xeno queens if they decide to buy the xenomorph bundle  
   - type: AlertLevelInterceptionRule
   - type: AntagSelection
     definitions:
@@ -790,7 +791,6 @@
       chaosScore: 200 # Goobstation - same as roundstart traitor gamerule
       blacklist:
         components:
-        - type: XenomorphsRule # so we dont have 7 xeno queens if they decide to buy the xenomorph bundle
         - AntagImmune
         - CommandStaff
       mindRoles:
