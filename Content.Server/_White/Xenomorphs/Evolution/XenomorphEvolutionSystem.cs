@@ -5,6 +5,7 @@ using Content.Server.DoAfter;
 using Content.Server.Jittering;
 using Content.Server.Mind;
 using Content.Server.Popups;
+using Content.Server._White.Xenomorphs.Queen;
 using Content.Shared._White.RadialSelector;
 using Content.Shared._White.Xenomorphs;
 using Content.Shared._White.Xenomorphs.Xenomorph;
@@ -35,6 +36,7 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly XenomorphQueenSystem _queenSystem = default!; // <- injected Queen system
 
     public override void Initialize()
     {
@@ -107,7 +109,7 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
         var coordinates = _transform.GetMoverCoordinates(uid);
         var newXeno = Spawn(args.Choice, coordinates);
 
-        _mind.TransferTo(mindUid, newXeno, mind:mind);
+        _mind.TransferTo(mindUid, newXeno, mind: mind);
         _mind.UnVisit(mindUid, mind);
 
         var dropHandItemsEvent = new DropHandItemsEvent();
@@ -147,8 +149,15 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
     {
         if (evolveTo == null
             || !_protoManager.TryIndex(evolveTo, out var xenomorphPrototype)
-            || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, _componentFactory)) // Goobstation
+            || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, _componentFactory))
             return false;
+
+        // Prevent multiple Queens
+        if (xenomorph.Caste == "Queen" && _queenSystem.IsQueenAlive())
+        {
+            _popup.PopupEntity(Loc.GetString("xenomorphs-queen-only-one-allowed"), uid);
+            return false;
+        }
 
         var ev = new BeforeXenomorphEvolutionEvent(xenomorph.Caste, checkNeedCasteDeath);
         RaiseLocalEvent(uid, ev);
