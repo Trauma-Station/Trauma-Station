@@ -728,7 +728,7 @@
   # Goobstation
   - type: GameRule
     chaosScore: 700
-  - type: XenomorphsRule # Trauma    
+  - type: XenomorphsRule # Trauma
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/Shuttles/ShuttleEvent/striker.yml
@@ -779,7 +779,7 @@
     eventType: HostilesSpawn # Goobstation
   # Goobstation
   - type: GameRule
-  - type: XenomorphsRule # Trauma  
+  - type: XenomorphsRule # Trauma
   - type: AlertLevelInterceptionRule
   - type: AntagSelection
     definitions:
