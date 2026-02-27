@@ -1,6 +1,6 @@
 - type: entity
-  parent: ClothingBackpackDuffelClownBundle
-  id: ClothingBackpackDuffelClownFilledFakeTaiwanPond
+  parent: ClothingBackpackXenomorph
+  id: ClothingBackpackXenomorphBundle
   components:
   - type: StorageFill
     contents:
