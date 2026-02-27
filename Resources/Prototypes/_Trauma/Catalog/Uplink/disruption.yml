@@ -31,5 +31,3 @@
     Telecrystal: 100
   categories:
     - UplinkDisruption
-  conditions:
-    - !type: StoreWhitelistCondition
