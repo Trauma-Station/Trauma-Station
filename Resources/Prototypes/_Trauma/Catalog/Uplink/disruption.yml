@@ -27,12 +27,14 @@
     sprite: /Textures/Structures/Storage/Crates/syndicate.rsi
     state: icon
   productEntity: CrateXenomorphBundle
+  spawnEntries:
+    - id: XenomorphsBundleRule
   cost:
     Telecrystal: 100
   categories:
     - UplinkDisruption
   conditions:
-    - !type:StoreWhitelistCondition
+    - !type: StoreWhitelistCondition
       blacklist:
         tags:
           - ContravendUplink
