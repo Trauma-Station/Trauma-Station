@@ -296,6 +296,7 @@
   components:
   - type: GameRule
     minPlayers: 5
+  - type: XenomorphsRule # so we dont have 7 xeno queens if they decide to buy the xenomorph bundle    
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn # Goobstation
     definitions:
