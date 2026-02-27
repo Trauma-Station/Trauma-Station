@@ -23,8 +23,7 @@
   id: UplinkXenomorphBundle
   name: uplink-xenomorph-compatibility-bundle-name
   description: uplink-xenomorph-compatibility-bundle-desc
-  icon: { sprite: Resources/Textures/_White/Structures/Furniture/xenomorph_egg.rsi/egg_grown.png, state: icon }
-  productEntity: ClothingBackpackXenomorphBundle
+  productEntity: CrateXenomorphBundle
   cost:
     Telecrystal: 100
   categories:
