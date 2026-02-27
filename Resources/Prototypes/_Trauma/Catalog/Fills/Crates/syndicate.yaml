@@ -13,7 +13,7 @@
       - id: OrganXenomorphAcidGland
       - id: OrganXenomorphPlasmaVesselLargeQueen
       - id: OrganXenomorphEggSack  
-      - id: Omnimedtool
+      - id: OmnimedTool
       - id: MonkeyCubeWrapped
         amount: 3
       - id: ClothingMaskGasSyndicate    
