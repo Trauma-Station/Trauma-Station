@@ -1,5 +1,5 @@
 - type: entity
-  abstract: false
+  abstract: true
   parent: AppearanceXenomorphBase
   id: AppearanceXenomorphQueen
   components:
