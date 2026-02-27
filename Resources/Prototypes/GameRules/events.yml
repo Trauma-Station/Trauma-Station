@@ -744,7 +744,7 @@
       roleLoadout:
       - RoleSurvivalNukie
       components:
-      - type: XenomorphsRule # so we dont have 7 xeno queens if they decide to buy the xenomorph bundle
+      - type: XenomorphsRule # Trauma
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
@@ -779,7 +779,7 @@
     eventType: HostilesSpawn # Goobstation
   # Goobstation
   - type: GameRule
-  - type: XenomorphsRule # so we dont have 7 xeno queens if they decide to buy the xenomorph bundle
+  - type: XenomorphsRule # Trauma
   - type: AlertLevelInterceptionRule
   - type: AntagSelection
     definitions:
