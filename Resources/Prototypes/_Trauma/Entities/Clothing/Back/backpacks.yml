@@ -94,4 +94,3 @@
   - type: Sprite
     sprite: _Goobstation/Clothing/Back/Duffels/blueshield.rsi
     state: icon
-  - type: SolutionContainerManager  
