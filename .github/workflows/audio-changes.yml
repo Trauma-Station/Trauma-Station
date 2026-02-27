@@ -15,9 +15,6 @@ jobs:
       with:
         repository: {{ github.event.pull_request.head.repo.full_name }}
         ref: ${{ github.event.pull_request.head.sha }}
-        sparse-checkout: |
-          .github
-          Resources/Audio
 
     - name: Get changed files
       id: files
