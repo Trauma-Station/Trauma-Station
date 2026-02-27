@@ -1,5 +1,6 @@
 - type: entity
   id: CrateXenomorphBundle
+  suffix: Filled
   parent: CrateSyndicate
   name: Syndicate crate
   description: A crate containing all the tools and organs necessary to kickstart your army of biological terror!
