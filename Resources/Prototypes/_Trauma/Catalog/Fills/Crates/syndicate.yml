@@ -22,4 +22,4 @@
         - id: XenoCompatibilityImplanter
     - type: EntitySpawnOnSpawn
       prototypes:
-        - XenomorphsBundleRule        
+        - XenomorphsBundleRule
