@@ -12,6 +12,10 @@ using Content.Shared.Popups;
 
 namespace Content.Server._White.Xenomorphs.Queen;
 
+/// <summary>
+///     Handles the behavior of the Xenomorph Queen.
+///     Responsible for promotion actions, spawning Praetorians, and plasma costs.
+/// </summary>
 public sealed class XenomorphQueenSystem : EntitySystem
 {
     [Dependency] private readonly ActionsSystem _actions = default!;
@@ -25,24 +29,30 @@ public sealed class XenomorphQueenSystem : EntitySystem
     {
         base.Initialize();
 
+        // Subscribe to promotion action events
         SubscribeLocalEvent<XenomorphQueenComponent, PromotionActionEvent>(OnPromotionAction);
+        // Setup queen on map initialization
         SubscribeLocalEvent<XenomorphQueenComponent, MapInitEvent>(OnMapInit);
+        // Cleanup actions when component is removed
         SubscribeLocalEvent<XenomorphQueenComponent, ComponentShutdown>(OnShutdown);
     }
 
+    // Add the promotion action to the Queen when it spawns
     private void OnMapInit(EntityUid uid, XenomorphQueenComponent component, MapInitEvent args) =>
         _actions.AddAction(uid, ref component.PromotionAction, component.PromotionActionId);
 
+    // Remove the promotion action when the component shuts down
     private void OnShutdown(EntityUid uid, XenomorphQueenComponent component, ComponentShutdown args) =>
         _actions.RemoveAction(uid, component.PromotionAction);
 
+    // Handle the promotion of a Xenomorph into a Praetorian by the Queen
     private void OnPromotionAction(EntityUid uid, XenomorphQueenComponent component, PromotionActionEvent args)
     {
-        // Goobstation start
+        // Ignore invalid targets or self-targets
         if (args.Target == EntityUid.Invalid || args.Target == args.Performer)
             return;
 
-        // Additional validation in case the target is no longer valid
+        // Validate that the target is a Xenomorph
         if (!HasComp<XenomorphComponent>(args.Target))
         {
             _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-invalid-target"), args.Performer);
@@ -62,7 +72,15 @@ public sealed class XenomorphQueenSystem : EntitySystem
             return;
         }
 
-        // Try direct evolution with optional mind transfer
+        // Prevent promoting to Queen if a living Queen exists
+        if (xenomorph.Caste == "Queen" && _entityManager.System<XenomorphQueenSystem>().IsQueenAlive())
+        {
+            _popup.PopupEntity(
+                Loc.GetString("xenomorphs-evolution-no-cast-slot", ("caste", "Queen")), args.Performer);
+            return;
+        }
+
+        // Spawn the new Praetorian at the target's coordinates
         var target = args.Target;
         var coordinates = Transform(target).Coordinates;
         var newXeno = Spawn(component.PromoteTo, coordinates);
@@ -92,9 +110,28 @@ public sealed class XenomorphQueenSystem : EntitySystem
         Del(target);
 
         // Deduct plasma cost if applicable
-        _plasma.ChangePlasmaAmount(uid, -500f); // Deduct 500 plasma for the promotion
-        _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-success", ("target", targetName)), uid, uid);
+        _plasma.ChangePlasmaAmount(uid, -500f);
+        _popup.PopupEntity(
+            Loc.GetString("xenomorphs-queen-promotion-success", ("target", targetName)), uid, uid);
+
         args.Handled = true;
-        // Goobstation end
+    }
+
+    /// <summary>
+    ///     Returns true if there is at least one living Xenomorph Queen on the station
+    /// </summary>
+    public bool IsQueenAlive()
+    {
+        var query = EntityQueryEnumerator<XenomorphQueenComponent>();
+        while (query.MoveNext(out var uid, out var queen))
+        {
+            if (!EntityManager.EntityExists(uid))
+                continue;
+
+            return true;
+        }
+        return false;
+        {
+      }
     }
 }
