@@ -5,10 +5,13 @@ using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Shared._White.Actions;
 using Content.Shared._White.Xenomorphs;
+using Content.Shared._White.Xenomorphs.Caste;
 using Content.Shared._White.Xenomorphs.Queen;
 using Content.Shared._White.Xenomorphs.Xenomorph;
 using Content.Shared.Mind.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._White.Xenomorphs.Queen;
 
@@ -19,7 +22,9 @@ public sealed class XenomorphQueenSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly XenomorphEvolutionSystem _xenomorphEvolution = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+
+    private static readonly ProtoId<XenomorphCastePrototype> PraetorianCaste = "Praetorian";
 
     public override void Initialize()
     {
@@ -39,13 +44,14 @@ public sealed class XenomorphQueenSystem : EntitySystem
     private void OnPromotionAction(EntityUid uid, XenomorphQueenComponent component, PromotionActionEvent args)
     {
         // Goobstation start
-        if (args.Target == EntityUid.Invalid || args.Target == args.Performer)
+        var user = args.Performer;
+        if (args.Target == EntityUid.Invalid || args.Target == user)
             return;
 
         // Additional validation in case the target is no longer valid
         if (!HasComp<XenomorphComponent>(args.Target))
         {
-            _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-invalid-target"), args.Performer);
+            _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-invalid-target"), user, user);
             return;
         }
 
@@ -53,12 +59,12 @@ public sealed class XenomorphQueenSystem : EntitySystem
             return;
 
         // Check if target is already a Praetorian or not in the whitelist
-        if (xenomorph.Caste == "Praetorian" || !component.CasteWhitelist.Contains(xenomorph.Caste))
+        if (xenomorph.Caste == PraetorianCaste || !component.CasteWhitelist.Contains(xenomorph.Caste))
         {
-            if (xenomorph.Caste == "Praetorian")
-                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-already-praetorian"), args.Performer);
+            if (xenomorph.Caste == PraetorianCaste)
+                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-already-praetorian"), user, user);
             else
-                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-didnt-pass-whitelist"), args.Performer);
+                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-didnt-pass-whitelist"), user, user);
             return;
         }
 
@@ -81,7 +87,7 @@ public sealed class XenomorphQueenSystem : EntitySystem
         // Update the caste to Praetorian for the new entity
         if (TryComp<XenomorphComponent>(newXeno, out var xenomorphComp))
         {
-            xenomorphComp.Caste = "Praetorian";
+            xenomorphComp.Caste = PraetorianCaste;
             Dirty(newXeno, xenomorphComp);
         }
 
@@ -93,8 +99,24 @@ public sealed class XenomorphQueenSystem : EntitySystem
 
         // Deduct plasma cost if applicable
         _plasma.ChangePlasmaAmount(uid, -500f); // Deduct 500 plasma for the promotion
-        _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-success", ("target", targetName)), uid, uid);
+        _popup.PopupEntity(
+            Loc.GetString("xenomorphs-queen-promotion-success", ("target", targetName)), uid, uid);
+
         args.Handled = true;
         // Goobstation end
+    }
+
+    public bool IsQueenAlive(EntityUid? exclude = null)
+    {
+        var query = EntityQueryEnumerator<XenomorphQueenComponent>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            if (uid == exclude)
+                continue;
+
+            if (!_mobState.IsDead(uid))
+                return true;
+        }
+        return false;
     }
 }
