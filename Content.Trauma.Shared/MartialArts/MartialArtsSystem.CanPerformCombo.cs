@@ -21,34 +21,6 @@ public partial class MartialArtsSystem
         SubscribeLocalEvent<CanPerformComboComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CanPerformComboComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
         SubscribeLocalEvent<CanPerformComboComponent, ComboEvent>(OnComboBeingPerformed);
-        SubscribeLocalEvent<CanPerformComboComponent, SaveLastAttacksEvent>(OnSave);
-        SubscribeLocalEvent<CanPerformComboComponent, ResetLastAttacksEvent>(OnReset);
-        SubscribeLocalEvent<CanPerformComboComponent, LoadLastAttacksEvent>(OnLoad);
-    }
-
-    private void OnLoad(Entity<CanPerformComboComponent> ent, ref LoadLastAttacksEvent args)
-    {
-        if (ent.Comp.LastAttacksSaved == null)
-            return;
-
-        ent.Comp.LastAttacks = ent.Comp.LastAttacksSaved;
-        ent.Comp.LastAttacksSaved = null;
-
-        if (args.Dirty)
-            Dirty(ent);
-    }
-
-    private void OnReset(Entity<CanPerformComboComponent> ent, ref ResetLastAttacksEvent args)
-    {
-        ent.Comp.LastAttacks.Clear();
-
-        if (args.Dirty)
-            Dirty(ent);
-    }
-
-    private void OnSave(Entity<CanPerformComboComponent> ent, ref SaveLastAttacksEvent args)
-    {
-        ent.Comp.LastAttacksSaved = new(ent.Comp.LastAttacks);
     }
 
     private void OnMapInit(Entity<CanPerformComboComponent> ent, ref MapInitEvent args)
@@ -57,11 +29,14 @@ public partial class MartialArtsSystem
         {
             ent.Comp.AllowedCombos.Add(_proto.Index(item));
         }
+        Dirty(ent);
     }
 
     private void OnComboAttackPerformed(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
     {
-        if (TryComp<SneakAttackComponent>(ent, out var sneakAttack) && sneakAttack.IsFound)
+        var evSneak = new CanDoSneakAttackEvent(true);
+        RaiseLocalEvent(ent, evSneak);
+        if (!evSneak.CanSneakAttack)
             return;
 
         if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && (martialArtsComp.Blocked || martialArtsComp.TemporaryBlockedCounter > 0))
@@ -94,8 +69,7 @@ public partial class MartialArtsSystem
         CheckCombo(ent, args.Target, ent.Comp, ref args);
         if (targetState.CurrentState == MobState.Alive && args.Type != ComboAttackType.Hug)
         {
-            var prototypeId = Prototype(ent.Owner)?.ID;
-            if (prototypeId != null)
+            if (Prototype(ent.Owner)?.ID is { } prototypeId)
             {
                 var ev = new AddExperienceEvent(prototypeId, 1);
                 RaiseLocalEvent(args.Performer, ref ev);

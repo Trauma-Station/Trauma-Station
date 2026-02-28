@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 // <Trauma>
 using Content.Trauma.Common.Knowledge;
 // </Trauma>
@@ -112,10 +110,10 @@ public sealed class CloningPodSystem : EntitySystem
         if (!found)
             return;
 
-        if (cloned is { } && cloned.Original is {} original && Exists(original))
+        if (cloned?.Original is { } original && Exists(original))
         {
-            var ev = new KnowledgeCopyEvent(original);
-            RaiseLocalEvent(mob, ref ev, true);
+            var ev = new KnowledgeCopyEvent(mob);
+            RaiseLocalEvent(original, ref ev, true);
         }
 
         _mindSystem.TransferTo(mindId, mob, ghostCheckOverride: true, mind: mind);

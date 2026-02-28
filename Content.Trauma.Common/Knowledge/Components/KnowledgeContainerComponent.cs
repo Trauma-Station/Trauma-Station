@@ -20,7 +20,7 @@ public sealed partial class KnowledgeContainerComponent : Component
     public Container? KnowledgeContainer;
 
     /// <summary>
-    /// Contains a dictionary of added EntProtoIds.
+    /// Contains a dictionary of prototypes to knowledge entities.
     /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, EntityUid> KnowledgeContainerIDs = new();

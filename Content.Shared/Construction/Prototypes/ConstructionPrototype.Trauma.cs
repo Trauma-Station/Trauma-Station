@@ -1,6 +1,7 @@
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Construction.Prototypes;
+
 public sealed partial class ConstructionPrototype
 {
     /// <summary>

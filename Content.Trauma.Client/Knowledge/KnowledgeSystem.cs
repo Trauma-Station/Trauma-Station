@@ -9,6 +9,7 @@ using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.MartialArts.Components;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Knowledge;
 
@@ -39,7 +40,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         if (ent.Comp.KnowledgeEntity is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComp))
             return;
 
-        if (knowledgeContainerComp.MartialArtSkillUid is not { } martialArtSkillUid || !TryComp<CanPerformComboComponent>(martialArtSkillUid, out var comboComp))
+        if (knowledgeContainerComp.MartialArtSkillUid is not { } skill || !TryComp<CanPerformComboComponent>(skill, out var comboComp))
             return;
 
         args.AttackTypes = comboComp.LastAttacks;
@@ -47,8 +48,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
 
     private void OnCharacterWindowOpened(CharacterWindow window)
     {
-        var player = _player.LocalSession?.AttachedEntity;
-        if (player == null)
+        if (_player.LocalEntity is not { } player)
             return;
 
         _activeWindow = new WeakReference<CharacterWindow>(window);
@@ -71,7 +71,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             window.Tabs.AddChild(knowledgeTab);
         }
 
-        knowledgeTab.UpdateKnowledgeTab(player.Value, knowledgeTab);
+        knowledgeTab.UpdateKnowledgeTab(player, knowledgeTab);
     }
 
     /// <summary>
@@ -105,15 +105,15 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             return null;
 
         return knowledgeList
-        .Select(ent => GetKnowledgeInfo(ent))
-        .OrderBy(data => data.Category)
-        .ThenBy(data => data.Info.Name)
-        .ToList();
+            .Select(ent => GetKnowledgeInfo(ent))
+            .OrderBy(data => data.Category)
+            .ThenBy(data => data.Info.Name)
+            .ToList();
     }
 
     public void OnUpdateExperienceEvent(Entity<KnowledgeHolderComponent> ent, ref UpdateExperienceEvent args)
     {
-        var localPlayer = _player.LocalSession?.AttachedEntity;
+        var localPlayer = _player.LocalEntity;
         if (localPlayer != ent.Owner)
             return;
 
@@ -121,5 +121,25 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             return;
 
         OnCharacterWindowOpened(window);
+    }
+
+    public EntProtoId? GetEntProtoId(Entity<MartialArtsKnowledgeComponent>? martialArt)
+    {
+        if (martialArt is not { } martialArtTrue)
+            return null;
+
+        return Prototype(martialArtTrue.Owner)?.ID;
+    }
+
+    /// <summary>
+    /// Changes the martial art of the entity.
+    /// </summary>
+    public void ChangeMartialArts(EntityUid knowledgeEntity, Entity<MartialArtsKnowledgeComponent>? martialArt)
+    {
+        if (!TryComp<KnowledgeContainerComponent>(knowledgeEntity, out var knowledgeContainer))
+            return;
+
+        knowledgeContainer.MartialArtSkillUid = martialArt;
+        Dirty(knowledgeEntity, knowledgeContainer);
     }
 }

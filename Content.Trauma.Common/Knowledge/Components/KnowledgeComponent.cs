@@ -16,7 +16,7 @@ public sealed partial class KnowledgeComponent : Component
     /// Category of that knowledge.
     /// </summary>
     [DataField(required: true)]
-    public ProtoId<KnowledgeCategoryPrototype> Category = "";
+    public ProtoId<KnowledgeCategoryPrototype> Category;
 
     /// <summary>
     /// Current Mastery of this knowledge.
@@ -74,10 +74,10 @@ public sealed partial class KnowledgeComponent : Component
     public int BonusExperience;
 
     /// <summary>
-    /// Stores the last time this component was given exp.
+    /// Stores the next time this component shoudl gain exp.
     /// </summary>
     [DataField]
-    public TimeSpan LastExperienceTimespan;
+    public TimeSpan TimeToNextExperience = TimeSpan.Zero;
 
     /// <summary>
     /// Determines if component uses sleep functionality.

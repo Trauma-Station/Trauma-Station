@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Utility;
 
 namespace Content.Trauma.Common.MartialArts;
 
@@ -17,4 +18,7 @@ public sealed partial class MartialArtsKnowledgeComponent : Component
 
     [DataField, AutoNetworkedField]
     public int TemporaryBlockedCounter;
+
+    [DataField(required: true)]
+    public SpriteSpecifier Icon;
 }

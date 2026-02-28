@@ -1,11 +1,12 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Common.MartialArts;
 
 /// <summary>
 /// Sneak attack component for ninja stuff.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class SneakAttackComponent : Component
 {
     /// <summary>
@@ -23,6 +24,6 @@ public sealed partial class SneakAttackComponent : Component
     /// <summary>
     /// Timestamp until player is hidden again.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public TimeSpan FramesTillHidden = TimeSpan.FromSeconds(0);
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextHidden = TimeSpan.Zero;
 }

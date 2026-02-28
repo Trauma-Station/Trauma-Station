@@ -64,7 +64,7 @@ public sealed partial class KnowledgeTab : Control
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
             };
 
-            var objectiveText = new RichTextLabel
+            var skillText = new RichTextLabel
             {
                 Text = conditions.Name,
                 Modulate = conditions.Color,
@@ -72,7 +72,7 @@ public sealed partial class KnowledgeTab : Control
                 HorizontalAlignment = HAlignment.Left,
             };
 
-            var objectiveDescription = new RichTextLabel
+            var masteryText = new RichTextLabel
             {
                 Text = conditions.Description,
                 Modulate = conditions.Color,
@@ -81,8 +81,8 @@ public sealed partial class KnowledgeTab : Control
                 StyleClasses = { "LabelSubText" }
             };
 
-            box.AddChild(objectiveText);
-            box.AddChild(objectiveDescription);
+            box.AddChild(skillText);
+            box.AddChild(masteryText);
             boxContainer.AddChild(textRect);
             boxContainer.AddChild(box);
             knowledgeTab.KnowledgeBox.AddChild(boxContainer);

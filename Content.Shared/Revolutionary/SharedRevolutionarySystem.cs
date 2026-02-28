@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.Knowledge.Systems;
+using Robust.Shared.Prototypes;
 // </Trauma>
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mindshield.Components;
@@ -21,7 +22,7 @@ public abstract class SharedRevolutionarySystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _sharedStun = default!;
 
     // <Trauma>
-    private static readonly string RevolutionaryKnowledge = "RevolutionaryKnowledge";
+    private static readonly EntProtoId RevolutionaryKnowledge = "RevolutionaryKnowledge";
     // </Trauma>
     public override void Initialize()
     {

@@ -277,9 +277,9 @@ namespace Content.Client.Construction.UI
             _selectedCategory = isEmptyCategory ? string.Empty : category;
 
             // <Trauma>
-            if (_playerManager.LocalEntity is not { })
+            if (_playerManager.LocalEntity is not { } player)
                 return recipes;
-            var availableGroups = _constructionSystem!.AvailableConstructionGroups(_playerManager.LocalEntity.Value);
+            var availableGroups = _constructionSystem!.AvailableConstructionGroups(player);
             // </Trauma>
 
             foreach (var recipe in _prototypeManager.EnumeratePrototypes<ConstructionPrototype>())

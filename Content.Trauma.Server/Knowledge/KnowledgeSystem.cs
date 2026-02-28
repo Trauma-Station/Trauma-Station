@@ -6,6 +6,7 @@ using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Containers;
 
 namespace Content.Trauma.Server.Knowledge;
+
 public sealed class KnowledgeSystem : SharedKnowledgeSystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -19,25 +20,30 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, AfterConstructionChangeEntityEvent>(AlterName);
     }
 
-
+    /// <summary>
+    /// Attempts to transfer all knowledge from the raised entity into a target mob.
+    /// </summary>
+    /// <param name="ent"></param>
+    /// <param name="args"></param>
     private void TransferKnowledge(Entity<KnowledgeHolderComponent> ent, ref KnowledgeCopyEvent args)
     {
-        var target = args.Target;
-        if (target is not { } || !TryComp<KnowledgeHolderComponent>(target, out var knowledgeHolder))
+        if (args.Target is not { } mob)
             return;
+
+        if (!TryComp<KnowledgeHolderComponent>(mob, out var knowledgeHolder))
+            knowledgeHolder = EnsureComp<KnowledgeHolderComponent>(mob);
 
         if (TryGetAllKnowledgeUnits(ent) is not { } found)
             return;
 
-        if (TryGetKnowledgeContainer((target.Value, knowledgeHolder)) is not { } targetContainer)
-            return;
+        var mobContainer = EnsureKnowledgeContainer((mob, knowledgeHolder));
 
-        if (targetContainer.Comp.KnowledgeContainer == null)
+        if (mobContainer.Comp.KnowledgeContainer is not { } container)
             return;
 
         foreach (var knowledgeEnt in found)
         {
-            _container.Insert(knowledgeEnt.Owner, targetContainer.Comp.KnowledgeContainer);
+            _container.Insert(knowledgeEnt.Owner, container);
         }
         ClearKnowledge(ent, false);
     }

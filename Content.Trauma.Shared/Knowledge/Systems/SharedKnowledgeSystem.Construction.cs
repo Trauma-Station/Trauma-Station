@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Shared.Armor;
-using Content.Shared.Damage.Events;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;
@@ -9,11 +8,13 @@ using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
+
 public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
 
     private static readonly EntProtoId ShootingKnowledge = "ShootingKnowledge";
+
     private void InitializeConstruction()
     {
         SubscribeLocalEvent<KnowledgeHolderComponent, ConstructionGetGroupsEvent>(OnConstructionGetGroupEvent);
@@ -40,6 +41,7 @@ public abstract partial class SharedKnowledgeSystem
     public void ConstructionInteraction(Entity<KnowledgeConstructionModifierComponent> ent, ref UpdateItemQualityEvent args)
     {
         var user = args.User;
+
         if (TryGetKnowledgeDictionary(user) is { } userKnowledge)
         {
             int added = 0;
@@ -52,6 +54,14 @@ public abstract partial class SharedKnowledgeSystem
             }
             ent.Comp.Quality += added / ent.Comp.LevelDeltas.Count();
             _nameModifier.RefreshNameModifiers(ent.Owner);
+        }
+
+        if (TryComp<ArmorComponent>(ent.Owner, out var armor) && armor.Modifiers.Coefficients is { } armorModifiers)
+        {
+            foreach (var modifier in armorModifiers)
+            {
+                armorModifiers[modifier.Key] = ConstructionModifier(ent, 0.87f) * modifier.Value;
+            }
         }
     }
 
@@ -82,10 +92,10 @@ public abstract partial class SharedKnowledgeSystem
 
     private void DealShootingExperience(Entity<ProjectileComponent> ent, ref ProjectileHitEvent args)
     {
-        if (args.Shooter is not { } trueShooter)
+        if (args.Shooter is not { } shooter)
             return;
 
         var ev = new AddExperienceEvent(ShootingKnowledge, 1);
-        RaiseLocalEvent(trueShooter, ref ev);
+        RaiseLocalEvent(shooter, ref ev);
     }
 }

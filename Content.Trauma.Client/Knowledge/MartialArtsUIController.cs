@@ -18,7 +18,7 @@ namespace Content.Trauma.Client.Knowledge;
 public sealed class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>
 {
     [Dependency] private readonly IPlayerManager _player = default!;
-    [UISystemDependency] private readonly KnowledgeSystem _knowledge = default!;
+    [UISystemDependency] private KnowledgeSystem _knowledge = default!;
 
     private SimpleRadialMenu? _menu;
 
@@ -97,7 +97,6 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
     private IEnumerable<RadialMenuActionOption<EntityUid?>> GetButtons()
     {
         var whitelistSystem = EntitySystemManager.GetEntitySystem<EntityWhitelistSystem>();
-        var player = _player.LocalSession?.AttachedEntity;
 
         var martialArts = new List<RadialMenuActionOption<EntityUid?>>
         {
@@ -108,14 +107,12 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
             }
         };
 
-        var knowledge = _knowledge;
-        if (knowledge == null)
-            knowledge = EntityManager.System<KnowledgeSystem>();
+        _knowledge ??= EntityManager.System<KnowledgeSystem>();
 
-        if (!(player is { } playerNotNull))
+        if (_player.LocalEntity is not { } player)
             return martialArts;
 
-        var martialArtsList = knowledge.GetMartialArtsForClientDoohickey(playerNotNull);
+        var martialArtsList = _knowledge.GetMartialArtsForClientDoohickey(player);
 
         if (martialArtsList == null)
             return martialArts;
@@ -135,7 +132,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
 
     private void HandleRadialButtonClick(EntityUid? martialArt)
     {
-        if (_player.LocalSession?.AttachedEntity is not { } player)
+        if (_player.LocalEntity is not { } player)
             return;
 
         var netEnt = EntityManager.GetNetEntity(martialArt);

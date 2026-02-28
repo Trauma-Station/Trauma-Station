@@ -232,9 +232,7 @@ public sealed partial class PullingSystem
             _ => throw new ArgumentOutOfRangeException(),
         };
 
-        // <Trauma>
         var newStage = (GrabStage) ((int) puller.Comp.GrabStage + nextStageAddition);
-        // </Trauma>
 
         if (HasComp<MartialArtsKnowledgeComponent>(puller) // i really hate this solution holy fuck
             && TryComp<RequireProjectileTargetComponent>(pullable, out var layingDown)

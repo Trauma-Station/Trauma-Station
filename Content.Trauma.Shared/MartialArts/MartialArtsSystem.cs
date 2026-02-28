@@ -1,15 +1,7 @@
 using System.Linq;
-using Content.Medical.Common.Targeting;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.EntityEffects;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Popups;
-using Content.Shared.Standing;
-using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Knowledge;
-using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
 using Robust.Shared.Prototypes;
@@ -36,6 +28,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
         SubscribeLocalEvent<MartialArtModifiersComponent, RefreshMovementSpeedModifiersEvent>(OnGetMovespeed);
         SubscribeLocalEvent<SneakAttackComponent, InvokeSneakAttackSurprisedEvent>(SneakAttackSurprise);
+        SubscribeLocalEvent<SneakAttackComponent, CanDoSneakAttackEvent>(SneakAttackCanAttack);
     }
 
     public override void Update(float frameTime)
@@ -48,7 +41,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
         var query = EntityQueryEnumerator<CanPerformComboComponent>();
         while (query.MoveNext(out var ent, out var comp))
         {
-            if (comp.CurrentTarget != null && TerminatingOrDeleted(comp.CurrentTarget.Value))
+            if (comp.CurrentTarget is { } && TerminatingOrDeleted(comp.CurrentTarget.Value))
                 comp.CurrentTarget = null;
 
             if (_timing.CurTime < comp.ResetTime || comp.LastAttacks.Count == 0 && comp.Momentum == 0)
@@ -112,7 +105,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
         {
             if (sneakAttack is { } && sneakAttack.IsFound)
             {
-                if (_timing.CurTime >= sneakAttack.FramesTillHidden)
+                if (_timing.CurTime >= sneakAttack.NextHidden)
                     sneakAttack.IsFound = false;
             }
         }
@@ -122,7 +115,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
         {
             if (sneakAttack is { } && sneakAttack.IsFound)
             {
-                if (_timing.CurTime >= sneakAttack.FramesTillHidden)
+                if (_timing.CurTime >= sneakAttack.NextHidden)
                     sneakAttack.IsFound = false;
             }
         }
@@ -130,9 +123,14 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
     private void SneakAttackSurprise(Entity<SneakAttackComponent> ent, ref InvokeSneakAttackSurprisedEvent args)
     {
-        ent.Comp.FramesTillHidden = _timing.CurTime + TimeSpan.FromSeconds(ent.Comp.SecondsTillHidden);
+        ent.Comp.NextHidden = _timing.CurTime + TimeSpan.FromSeconds(ent.Comp.SecondsTillHidden);
         ent.Comp.IsFound = true;
         Dirty(ent);
+    }
+
+    private void SneakAttackCanAttack(Entity<SneakAttackComponent> ent, ref CanDoSneakAttackEvent args)
+    {
+        args.CanSneakAttack = !ent.Comp.IsFound;
     }
 
     #region Event Methods

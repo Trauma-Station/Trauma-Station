@@ -69,3 +69,15 @@ public record struct InvokeProjectileQualityEvent(float Coefficient);
 /// </summary>
 [ByRefEvent]
 public record struct InvokeSneakAttackSurprisedEvent();
+
+/// <summary>
+/// Called in order to invoke sneak attack failure.
+/// </summary>
+[ByRefEvent]
+public record struct CanDoSneakAttackEvent(bool CanSneakAttack);
+
+/// <summary>
+/// Called in order to invoke damage modifiers for martial arts. Call on the art itself.
+/// </summary>
+[ByRefEvent]
+public record struct CalculateMartialArtDamageModifiersEvent();

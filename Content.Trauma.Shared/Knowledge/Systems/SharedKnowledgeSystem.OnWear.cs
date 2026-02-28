@@ -5,6 +5,7 @@ using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
+
 public abstract partial class SharedKnowledgeSystem
 {
     private void InitializeOnWear()
@@ -35,7 +36,7 @@ public abstract partial class SharedKnowledgeSystem
                 TryAddKnowledgeUnit(wearer, (experience.Key, 0));
 
             if (TryGetKnowledgeUnit(wearer, experience.Key) is { } knowledgeUnitActual && TryComp<KnowledgeComponent>(knowledgeUnitActual, out var knowledgeComponent))
-                knowledgeComponent.TemporaryLevel += experience.Value;
+                knowledgeComponent.BonusExperience += experience.Value;
         }
         foreach (var blocked in ent.Comp.Blocked)
         {
@@ -69,7 +70,7 @@ public abstract partial class SharedKnowledgeSystem
                 if (knowledgeComponent.Level <= 0)
                     TryRemoveKnowledgeUnit(wearer, experience.Key);
                 else
-                    knowledgeComponent.TemporaryLevel -= experience.Value;
+                    knowledgeComponent.BonusExperience -= experience.Value;
             }
         }
         foreach (var blocked in ent.Comp.Blocked)
@@ -100,7 +101,7 @@ public abstract partial class SharedKnowledgeSystem
                 TryAddKnowledgeUnit(wearer, (experience.Key, 0));
 
             if (TryGetKnowledgeUnit(wearer, experience.Key) is { } knowledgeUnitActual && TryComp<KnowledgeComponent>(knowledgeUnitActual, out var knowledgeComponent))
-                knowledgeComponent.TemporaryLevel += experience.Value;
+                knowledgeComponent.BonusExperience += experience.Value;
         }
         foreach (var blocked in ent.Comp.Blocked)
         {
@@ -135,7 +136,7 @@ public abstract partial class SharedKnowledgeSystem
                 if (knowledgeComponent.Level <= 0)
                     TryRemoveKnowledgeUnit(wearer, experience.Key);
                 else
-                    knowledgeComponent.TemporaryLevel -= experience.Value;
+                    knowledgeComponent.BonusExperience -= experience.Value;
             }
         }
         foreach (var blocked in ent.Comp.Blocked)

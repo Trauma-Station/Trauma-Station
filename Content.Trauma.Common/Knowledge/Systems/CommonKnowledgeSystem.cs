@@ -117,11 +117,6 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract EntityUid? TryGetKnowledgeEntity(Entity<KnowledgeHolderComponent> ent);
 
     /// <summary>
-    /// Changes the martial art of the entity. This is used for example when changing the character's class, to change their martial art as well.
-    /// </summary>
-    public abstract void ChangeMartialArts(EntityUid knowledgeEntity, Entity<MartialArtsKnowledgeComponent>? martialArt);
-
-    /// <summary>
     /// Clears Knowledge from the target entity.
     /// </summary>
     public abstract void ClearKnowledge(EntityUid target, bool deleteAll);

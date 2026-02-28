@@ -91,16 +91,10 @@ public sealed class KnowledgeGrantSystem : EntitySystem
             {
                 var ev = new AddExperienceEvent(skill.Key, skill.Value);
                 RaiseLocalEvent(args.User, ref ev);
-                /*
-                if (TryComp<LanguageKnowledgeComponent>(foundSkill, out var language))
-                    _popup.PopupEntity(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"{language.LanguageId.Id}"))), args.User, args.User, PopupType.Small);
-                else
-                    _popup.PopupEntity(Loc.GetString("knowledge-learn-more", ("knowledge", Loc.GetString($"knowledge-{skill.Key.ToString()}"))), args.User, args.User, PopupType.Small);
-                */
             }
             else
             {
-                _popup.PopupClient(Loc.GetString("knowledge-could-not-learn", ("knowledge", _knowledge.PopupString(foundSkill))), args.User, args.User, PopupType.Small);
+                _popup.PopupClient(Loc.GetString("knowledge-could-not-learn", ("knowledge", _knowledge.KnowledgeString(foundSkill))), args.User, args.User, PopupType.Small);
             }
         }
         args.Handled = true;
