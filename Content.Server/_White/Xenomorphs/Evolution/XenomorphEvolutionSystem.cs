@@ -5,6 +5,7 @@ using Content.Server.DoAfter;
 using Content.Server.Jittering;
 using Content.Server.Mind;
 using Content.Server.Popups;
+using Content.Server._White.Xenomorphs.Queen;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
@@ -17,9 +18,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-
-// Add this so the compiler knows about the Queen system
-using Content.Server._White.Xenomorphs.Queen;
 
 namespace Content.Server._White.Xenomorphs.Evolution;
 
@@ -46,7 +44,6 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
     {
         base.Initialize();
 
-        // Subscribe to events for evolution actions and UI
         SubscribeLocalEvent<XenomorphEvolutionComponent, MapInitEvent>(OnXenomorphEvolutionMapInit);
         SubscribeLocalEvent<XenomorphEvolutionComponent, ComponentShutdown>(OnXenomorphEvolutionShutdown);
         SubscribeLocalEvent<XenomorphEvolutionComponent, EvolutionsActionEvent>(OnEvolutionsAction);
@@ -163,9 +160,6 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
         }
     }
 
-    /// <summary>
-    ///     Attempt to evolve the Xenomorph to a new caste
-    /// </summary>
     public bool Evolve(EntityUid uid, string? evolveTo, TimeSpan evolutionDelay, bool checkNeedCasteDeath = true)
     {
         if (evolveTo == null

@@ -23,93 +23,78 @@ public sealed class XenomorphQueenSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly XenomorphEvolutionSystem _xenomorphEvolution = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+
+    private static readonly ProtoId<EntityPrototype> QueenCaste = "Queen";
+    private static readonly ProtoId<EntityPrototype> PraetorianCaste = "Praetorian";
 
     public override void Initialize()
     {
         base.Initialize();
 
-        // Subscribe to promotion action events
         SubscribeLocalEvent<XenomorphQueenComponent, PromotionActionEvent>(OnPromotionAction);
-        // Setup queen on map initialization
         SubscribeLocalEvent<XenomorphQueenComponent, MapInitEvent>(OnMapInit);
-        // Cleanup actions when component is removed
         SubscribeLocalEvent<XenomorphQueenComponent, ComponentShutdown>(OnShutdown);
     }
 
-    // Add the promotion action to the Queen when it spawns
     private void OnMapInit(EntityUid uid, XenomorphQueenComponent component, MapInitEvent args) =>
         _actions.AddAction(uid, ref component.PromotionAction, component.PromotionActionId);
 
-    // Remove the promotion action when the component shuts down
     private void OnShutdown(EntityUid uid, XenomorphQueenComponent component, ComponentShutdown args) =>
         _actions.RemoveAction(uid, component.PromotionAction);
 
-    // Handle the promotion of a Xenomorph into a Praetorian by the Queen
     private void OnPromotionAction(EntityUid uid, XenomorphQueenComponent component, PromotionActionEvent args)
     {
-        // Ignore invalid targets or self-targets
         if (args.Target == EntityUid.Invalid || args.Target == args.Performer)
             return;
 
-        // Validate that the target is a Xenomorph
         if (!HasComp<XenomorphComponent>(args.Target))
         {
-            _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-invalid-target"), args.Performer);
+            _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-invalid-target"), args.Performer, args.Performer);
             return;
         }
 
         if (!TryComp<XenomorphComponent>(args.Target, out var xenomorph))
             return;
 
-        // Check if target is already a Praetorian or not in the whitelist
-        if (xenomorph.Caste == "Praetorian" || !component.CasteWhitelist.Contains(xenomorph.Caste))
+        if (xenomorph.Caste == PraetorianCaste || !component.CasteWhitelist.Contains(xenomorph.Caste))
         {
-            if (xenomorph.Caste == "Praetorian")
-                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-already-praetorian"), args.Performer);
+            if (xenomorph.Caste == PraetorianCaste)
+                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-already-praetorian"), args.Performer, args.Performer);
             else
-                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-didnt-pass-whitelist"), args.Performer);
+                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-didnt-pass-whitelist"), args.Performer, args.Performer);
             return;
         }
 
-        // Prevent promoting to Queen if a living Queen exists
-        if (xenomorph.Caste == "Queen" && _entityManager.System<XenomorphQueenSystem>().IsQueenAlive())
+        if (xenomorph.Caste == QueenCaste && IsQueenAlive())
         {
             _popup.PopupEntity(
-                Loc.GetString("xenomorphs-evolution-no-cast-slot", ("caste", "Queen")), args.Performer);
+                Loc.GetString("xenomorphs-evolution-no-cast-slot", ("caste", QueenCaste)), args.Performer, args.Performer);
             return;
         }
 
-        // Spawn the new Praetorian at the target's coordinates
         var target = args.Target;
         var coordinates = Transform(target).Coordinates;
         var newXeno = Spawn(component.PromoteTo, coordinates);
 
-        // Transfer mind if it exists
         if (_mind.TryGetMind(target, out var mindId, out var mind))
             _mind.TransferTo(mindId, newXeno, mind: mind);
 
-        // Copy over any important components
         if (TryComp<XenomorphComponent>(newXeno, out var newXenoComp) &&
             TryComp<XenomorphComponent>(target, out var oldXenoComp))
         {
             newXenoComp.Caste = oldXenoComp.Caste;
         }
 
-        // Update the caste to Praetorian for the new entity
         if (TryComp<XenomorphComponent>(newXeno, out var xenomorphComp))
         {
-            xenomorphComp.Caste = "Praetorian";
+            xenomorphComp.Caste = PraetorianCaste;
             Dirty(newXeno, xenomorphComp);
         }
 
-        // Get the target's name before deleting the entity
         var targetName = Name(target);
 
-        // Clean up the old entity
         Del(target);
 
-        // Deduct plasma cost if applicable
         _plasma.ChangePlasmaAmount(uid, -500f);
         _popup.PopupEntity(
             Loc.GetString("xenomorphs-queen-promotion-success", ("target", targetName)), uid, uid);
@@ -122,16 +107,12 @@ public sealed class XenomorphQueenSystem : EntitySystem
     /// </summary>
     public bool IsQueenAlive()
     {
-        var query = EntityQueryEnumerator<XenomorphQueenComponent>();
-        while (query.MoveNext(out var uid, out var queen))
+        var query = EntityQueryEnumerator<XenomorphQueenComponent, MindContainerComponent>();
+        while (query.MoveNext(out var uid, out _, out var mindContainer))
         {
-            if (!EntityManager.EntityExists(uid))
-                continue;
-
-            return true;
+            if (Exists(uid) && mindContainer.HasMind)
+                return true;
         }
         return false;
-        {
-      }
     }
 }
