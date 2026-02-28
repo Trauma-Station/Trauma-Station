@@ -78,7 +78,7 @@
     sound:
       path: /Audio/_DV/CosmicCult/god_ambient.ogg
   - type: Monument
-    stage: 3
+    stage: 2
     canActivate: true
   - type: MonumentTransforming
   - type: GuideHelp

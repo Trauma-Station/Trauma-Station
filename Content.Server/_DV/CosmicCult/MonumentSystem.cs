@@ -88,6 +88,7 @@ public sealed class MonumentSystem : SharedMonumentSystem
                     null,
                     Color.FromHex("#cae8e8"));
 
+                comp.Stage++;
                 UpdateMonumentAppearance((uid, comp));
 
                 comp.MusicTimer = null;
@@ -231,6 +232,7 @@ public sealed class MonumentSystem : SharedMonumentSystem
             RemComp<CosmicSubtleMarkComponent>(cultist);
             EnsureComp<CosmicStarMarkComponent>(cultist);
         }
+        ent.Comp.Stage++;
         UpdateMonumentAppearance(ent);
 
         _evac.CancelRoundEndCountdown(args.User, args.Used, forceRecall: true);
@@ -292,7 +294,6 @@ public sealed class MonumentSystem : SharedMonumentSystem
     public void UpdateMonumentAppearance(Entity<MonumentComponent> ent)
     {
         if (ent.Comp.Stage >= 5) return;
-        ent.Comp.Stage++;
         _appearance.SetData(ent, MonumentVisuals.Monument, Math.Clamp(ent.Comp.Stage, 1, 2));
         _appearance.SetData(ent, MonumentVisuals.FinaleReached, Math.Clamp(ent.Comp.Stage - 1, 0, 3));
 
