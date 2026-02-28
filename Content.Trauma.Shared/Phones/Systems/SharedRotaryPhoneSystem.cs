@@ -13,6 +13,7 @@ using Content.Trauma.Shared.Phones.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
@@ -56,11 +57,15 @@ public sealed class SharedRotaryPhoneSystem : EntitySystem
     private void OnPhoneRemoveHolder(Entity<RotaryPhoneHolderComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         if (Deleted(ent.Owner)
-           || Terminating(ent.Owner)
-           || Deleted(ent.Comp.ConnectedPhone)
-           || Terminating(ent.Comp.ConnectedPhone.Value)
-           || Deleted(args.Entity)
-           || Terminating(args.Entity))
+            || Terminating(ent.Owner)
+            || Deleted(args.Entity)
+            || Terminating(args.Entity))
+            return;
+
+        if (Transform(ent.Owner).MapID == MapId.Nullspace || Transform(args.Entity).MapID == MapId.Nullspace)
+            return;
+
+        if (ent.Comp.ConnectedPhone == null)
             return;
 
         var visuals = EnsureComp<JointVisualsComponent>(ent.Owner);
@@ -84,6 +89,9 @@ public sealed class SharedRotaryPhoneSystem : EntitySystem
 
     private void OnDestruction(Entity<RotaryPhoneHolderComponent> ent, ref DestructionEventArgs args)
     {
+        if (ent.Comp.ConnectedPhone == null)
+            return;
+
         PredictedDel(ent.Comp.ConnectedPhone);
         RemComp<JointVisualsComponent>(ent.Owner);
         RemComp<JointComponent>(ent.Owner);
