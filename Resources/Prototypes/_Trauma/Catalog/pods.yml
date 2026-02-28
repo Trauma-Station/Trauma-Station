@@ -1,0 +1,93 @@
+- type: entity
+  id: SpawnIngredientsBaking
+  categories: [ HideSpawnMenu ]
+  name: baking supplies
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table: !type:AllSelector
+      children:
+      - id: FoodSnackRaisins
+        amount: 4
+      - id: FoodSnackChocolate
+        amount: 4
+      - id: ReagentContainerFlour
+      - id: ReagentContainerSugar
+      - id: FoodContainerEgg
+      - id: DrinkMilkCarton
+
+- type: entity
+  id: SpawnIngredientsExoticMeat
+  categories: [ HideSpawnMenu ]
+  name: exotic meats
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table: !type:AllSelector
+      children:
+      - id: FoodMeatXeno
+        amount: 4
+      - id: FoodMeatCrab
+        amount: 2
+      - id: FoodMeatDuck
+      - id: FoodMeatBear
+      - id: FoodMeatPenguin
+
+- type: entity
+  id: SpawnIngredientsMeat
+  categories: [ HideSpawnMenu ]
+  name: bulk meats
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table: !type:AllSelector
+      children:
+      - id: FoodMeat
+        amount: 10
+      - id: FoodMeatHuman
+
+- type: entity
+  id: SpawnIngredientsVegetables
+  categories: [ HideSpawnMenu ]
+  name: vegetables
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table: !type:AllSelector
+      children:
+      - id: FoodCarrot
+        amount: 3
+      - id: FoodChiliPepper
+        amount: 3
+      - id: FoodTomato
+        amount: 3
+      - id: FoodPotato
+        amount: 3
+      - id: FoodCorn
+        amount: 3
+      - id: FoodCabbage
+        amount: 3
+
+- type: entity
+  id: SpawnIngredientsFruits
+  categories: [ HideSpawnMenu ]
+  name: fruits
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table: !type:AllSelector
+      children:
+      - id: FoodBerries
+        amount: 3
+      - id: FoodGrape
+        amount: 3
+      - id: FoodCherry
+        amount: 3
+      - id: FoodLemon
+        amount: 3
+      - id: FoodApple
+        amount: 3
+      - id: FoodOrange
+        amount: 3
+      - id: FoodBanana
+        amount: 3
