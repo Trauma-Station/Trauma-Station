@@ -1345,7 +1345,6 @@
           blacklist:
             components:
             - GhoulDeconvert
-            - CleanseCult
 #    Acidic:  # Goobstation - Removing holy water damage on touch pending rework.
 #      methods: [ Touch ]
 #      effects:
