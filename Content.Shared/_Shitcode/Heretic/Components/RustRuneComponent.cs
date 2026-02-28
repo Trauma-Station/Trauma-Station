@@ -27,6 +27,12 @@ public sealed partial class RustRuneComponent : BaseSpriteOverlayComponent
     public Vector2 DiagonalOffset = new(0.25f, -0.25f);
 
     [DataField]
+    public string? SelectedRune;
+
+    [DataField]
+    public Vector2? SelectedOffset;
+
+    [DataField]
     public List<string> RuneStates = new()
     {
         "small_rune_1",

@@ -49,9 +49,11 @@ public sealed class RustRuneSystem : SpriteOverlaySystem<RustRuneComponent>
     {
         base.UpdateOverlayLayer(ent, comp, layer, source);
 
-        var rune = _random.Pick(comp.RuneStates);
+        var rune = comp.SelectedRune ?? _random.Pick(comp.RuneStates);
+        comp.SelectedRune = rune;
         var diagonal = _tag.HasTag(ent, comp.DiagonalTag);
-        var offset = diagonal ? comp.DiagonalOffset : _random.NextVector2Box(0.25f, 0.25f);
+        var offset = comp.SelectedOffset ?? (diagonal ? comp.DiagonalOffset : _random.NextVector2Box(0.25f, 0.25f));
+        comp.SelectedOffset = offset;
 
         Sprite.LayerSetRsiState(ent.AsNullable(), layer, rune);
         Sprite.LayerSetOffset(ent.AsNullable(), layer, offset);

@@ -260,6 +260,7 @@ public abstract partial class SharedHereticAbilitySystem
         var plating = _tileDefinitionManager[RustTile];
         _map.SetTile(gridUid, mapGrid, tileRef.GridIndices, new Tile(plating.TileId));
 
+        // Serverside spawn because it gets randomized sprite offset clientside and predict would break it
         if (_net.IsServer)
             Spawn(tileRune, new EntityCoordinates(gridUid, tileRef.GridIndices));
     }
@@ -312,6 +313,7 @@ public abstract partial class SharedHereticAbilitySystem
         if (targetEntity == target)
             EnsureComp<RustOverlayComponent>(targetEntity);
 
+        // Rune gets sprite and offset randomized clientside, predict would break it
         if (_net.IsServer)
             EnsureComp<RustRuneComponent>(targetEntity);
 
