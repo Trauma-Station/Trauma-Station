@@ -4,6 +4,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Common.Knowledge;
@@ -28,13 +29,11 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<NoGunComponent, ShotAttemptedEvent>(OnShotAttemptKnowledge);
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeInteractHandEvent>(OnInteract);
         SubscribeLocalEvent<KnowledgeHolderComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
-        SubscribeLocalEvent<KnowledgeHolderComponent, SaveLastAttacksEvent>(OnSave);
-        SubscribeLocalEvent<KnowledgeHolderComponent, ResetLastAttacksEvent>(OnReset);
-        SubscribeLocalEvent<KnowledgeHolderComponent, LoadLastAttacksEvent>(OnLoad);
         SubscribeLocalEvent<MeleeHitEvent>(OnMeleeHit);
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeStaminaDamageEvent>(OnStaminaTakeDamage);
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeDamageChangedEvent>(OnTakeDamage);
         SubscribeLocalEvent<KnowledgeHolderComponent, CheckGrabOverridesEvent>(CheckGrabStageOverridePass);
+        SubscribeLocalEvent<KnowledgeHolderComponent, RefreshMovementSpeedModifiersEvent>(SpeedModifier);
 
         SubscribeNetworkEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
     }
@@ -83,38 +82,6 @@ public abstract partial class SharedKnowledgeSystem
         RaiseLocalEvent(martialArtSkillUid, args);
     }
 
-    private void OnSave(Entity<KnowledgeHolderComponent> ent, ref SaveLastAttacksEvent args)
-    {
-        if (ent.Comp.KnowledgeEntity is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComp))
-            return;
-
-        if (knowledgeContainerComp.MartialArtSkillUid is not { } martialArtSkillUid || !TryComp<MartialArtsKnowledgeComponent>(martialArtSkillUid, out var martialArtComp))
-            return;
-
-        RaiseLocalEvent(martialArtSkillUid, args);
-    }
-    private void OnReset(Entity<KnowledgeHolderComponent> ent, ref ResetLastAttacksEvent args)
-    {
-        if (ent.Comp.KnowledgeEntity is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComp))
-            return;
-
-        if (knowledgeContainerComp.MartialArtSkillUid is not { } martialArtSkillUid || !TryComp<MartialArtsKnowledgeComponent>(martialArtSkillUid, out var martialArtComp))
-            return;
-
-        RaiseLocalEvent(martialArtSkillUid, args);
-    }
-
-    private void OnLoad(Entity<KnowledgeHolderComponent> ent, ref LoadLastAttacksEvent args)
-    {
-        if (ent.Comp.KnowledgeEntity is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComp))
-            return;
-
-        if (knowledgeContainerComp.MartialArtSkillUid is not { } martialArtSkillUid || !TryComp<MartialArtsKnowledgeComponent>(martialArtSkillUid, out var martialArtComp))
-            return;
-
-        RaiseLocalEvent(martialArtSkillUid, args);
-    }
-
     private void OnMeleeHit(MeleeHitEvent args)
     {
         if (args.Handled)
@@ -135,11 +102,8 @@ public abstract partial class SharedKnowledgeSystem
         {
             var evSneakAttack = new InvokeSneakAttackSurprisedEvent();
             RaiseLocalEvent(martialArt, ref evSneakAttack);
-            if (TryComp<SneakAttackComponent>(martialArt, out var speedArt))
-            {
-                speedArt.FramesTillHidden = _timing.CurTime + TimeSpan.FromSeconds(speedArt.SecondsTillHidden);
-                Dirty(martialArt, speedArt);
-            }
+            var evMartialDamage = new MartialArtDamageModifierEvent(ent);
+            RaiseLocalEvent(martialArt, ref evMartialDamage);
         }
 
         args.BonusDamage += (args.BaseDamage * bonus);
@@ -213,5 +177,14 @@ public abstract partial class SharedKnowledgeSystem
         var martialArt = GetActiveMartialArt(ent);
         if (martialArt is { } martialArtSkillUid)
             RaiseLocalEvent(martialArtSkillUid, ref args);
+    }
+
+    private void SpeedModifier(Entity<KnowledgeHolderComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        if (GetActiveMartialArt(ent) is not { } art)
+            return;
+        var ev = new MartialArtSpeedModifierEvent(ent.Owner, 1.0f);
+        RaiseLocalEvent(art, ref ev);
+        args.ModifySpeed(ev.Coefficient);
     }
 }

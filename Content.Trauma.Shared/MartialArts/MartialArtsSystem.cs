@@ -2,8 +2,10 @@ using System.Linq;
 using Content.Shared.EntityEffects;
 using Content.Shared.Movement.Systems;
 using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -16,7 +18,6 @@ public sealed partial class MartialArtsSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
@@ -26,7 +27,8 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
         SubscribeLocalEvent<GrabStagesOverrideComponent, CheckGrabOverridesEvent>(CheckGrabStageOverride);
 
-        SubscribeLocalEvent<FastSpeedComponent, RefreshMovementSpeedModifiersEvent>(OnGetMovespeed);
+        SubscribeLocalEvent<FastSpeedComponent, MartialArtDamageModifierEvent>(OnDamageSpeed);
+        SubscribeLocalEvent<FastSpeedComponent, MartialArtSpeedModifierEvent>(OnMoveSpeed);
         SubscribeLocalEvent<SneakAttackComponent, InvokeSneakAttackSurprisedEvent>(SneakAttackSurprise);
         SubscribeLocalEvent<SneakAttackComponent, CanDoSneakAttackEvent>(SneakAttackCanAttack);
     }
@@ -59,45 +61,6 @@ public sealed partial class MartialArtsSystem : EntitySystem
             if (curTime < comp.BlockedTime)
                 continue;
             RemCompDeferred(ent, comp);
-        }
-
-        var meleeAttackRateMultiplierQuery = EntityQueryEnumerator<MartialArtModifiersComponent>();
-        while (meleeAttackRateMultiplierQuery.MoveNext(out var ent, out var multiplier))
-        {
-            if (_timing.CurTime < multiplier.NextUpdate)
-                continue;
-
-            double? nextUpdate = null;
-            var refreshSpeed = false;
-            for (var i = multiplier.Data.Count - 1; i >= 0; i--)
-            {
-                var data = multiplier.Data[i];
-
-                if (_timing.CurTime < data.EndTime)
-                {
-                    nextUpdate = nextUpdate == null
-                        ? data.EndTime.TotalSeconds
-                        : Math.Min(nextUpdate.Value, data.EndTime.TotalSeconds);
-                    continue;
-                }
-
-                if ((data.Type & MartialArtModifierType.MoveSpeed) != 0)
-                    refreshSpeed = true;
-
-                multiplier.Data.RemoveAt(i);
-            }
-
-            if (refreshSpeed)
-                _modifier.RefreshMovementSpeedModifiers(ent);
-
-            if (multiplier.Data.Count == 0)
-                RemCompDeferred(ent, multiplier);
-            else
-            {
-                if (nextUpdate != null)
-                    multiplier.NextUpdate = TimeSpan.FromSeconds(nextUpdate.Value);
-                Dirty(ent, multiplier);
-            }
         }
 
         var sneakAttackQuery = EntityQueryEnumerator<SneakAttackComponent>();
@@ -133,45 +96,21 @@ public sealed partial class MartialArtsSystem : EntitySystem
         args.CanSneakAttack = !ent.Comp.IsFound;
     }
 
-    #region Event Methods
-
-    private void OnGetMovespeed(Entity<MartialArtModifiersComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    private void OnMoveSpeed(Entity<FastSpeedComponent> ent, ref MartialArtSpeedModifierEvent args)
     {
-        var (mult, _) = GetMultiplierModifier(ent, MartialArtModifierType.MoveSpeed, null);
-        args.ModifySpeed(mult, mult);
+        args.Coefficient *= Math.Abs(ent.Comp.SpeedModifier);
     }
 
-    private (float mult, float mod) GetMultiplierModifier(Entity<MartialArtModifiersComponent> ent,
-        MartialArtModifierType type,
-        bool? armed)
+    private void OnDamageSpeed(Entity<FastSpeedComponent> ent, ref MartialArtDamageModifierEvent args)
     {
-        var mult = 1f;
-        var mod = 0f;
-        foreach (var data in ent.Comp.Data.Where(x => (x.Type & type) != 0))
-        {
-            if (armed is true)
-            {
-                if ((data.Type & MartialArtModifierType.Armed) == 0
-                    && (data.Type & MartialArtModifierType.Unarmed) != 0)
-                    continue;
-            }
-            else if (armed is false)
-            {
-                if ((data.Type & MartialArtModifierType.Unarmed) == 0
-                    && (data.Type & MartialArtModifierType.Armed) != 0)
-                    continue;
-            }
-            mult *= data.Multiplier;
-            mod += data.Modifier;
-        }
+        var user = args.User;
+        if (!TryComp<PhysicsComponent>(user, out var physics))
+            return;
 
-        foreach (var (_, limit) in ent.Comp.MinMaxModifiersMultipliers.Where(x => (x.Key & type) != 0))
-        {
-            mult = Math.Clamp(mult, limit.X, limit.Y);
-            mod = Math.Clamp(mod, limit.Z, limit.W);
-        }
-
-        return (mult, mod);
+        if (ent.Comp.InvertSpeed)
+            args.Coefficient *= Math.Max(10 - (physics.LinearVelocity.Length() * ent.Comp.SpeedModifier / 2), 0);
+        else
+            args.Coefficient *= physics.LinearVelocity.Length() * ent.Comp.SpeedModifier / 2;
     }
 
     private void CheckGrabStageOverride(Entity<GrabStagesOverrideComponent> ent, ref CheckGrabOverridesEvent args)
@@ -179,7 +118,4 @@ public sealed partial class MartialArtsSystem : EntitySystem
         if (args.Stage == GrabStage.Soft)
             args.Stage = ent.Comp.StartingStage;
     }
-
-
-    #endregion
 }

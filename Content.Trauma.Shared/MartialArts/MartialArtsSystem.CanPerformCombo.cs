@@ -35,7 +35,7 @@ public partial class MartialArtsSystem
     private void OnComboAttackPerformed(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
     {
         var evSneak = new CanDoSneakAttackEvent(true);
-        RaiseLocalEvent(ent, evSneak);
+        RaiseLocalEvent(ent, ref evSneak);
         if (!evSneak.CanSneakAttack)
             return;
 
@@ -66,7 +66,7 @@ public partial class MartialArtsSystem
             if (difference > 0)
                 ent.Comp.LastAttacks.RemoveRange(0, difference);
         }
-        CheckCombo(ent, args.Target, ent.Comp, ref args);
+        CheckCombo(ent, ref args);
         if (targetState.CurrentState == MobState.Alive && args.Type != ComboAttackType.Hug)
         {
             if (Prototype(ent.Owner)?.ID is { } prototypeId)
@@ -79,9 +79,11 @@ public partial class MartialArtsSystem
         Dirty(ent, ent.Comp);
     }
 
-    private void CheckCombo(EntityUid uid, EntityUid target, CanPerformComboComponent comp, ref ComboAttackPerformedEvent args)
+    private void CheckCombo(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
     {
         var success = false;
+        var (uid, comp) = ent;
+        var target = args.Target;
 
         foreach (var proto in comp.AllowedCombos)
         {
@@ -108,6 +110,9 @@ public partial class MartialArtsSystem
             comp.Momentum += 1;
 
             float scale = Math.Clamp(((float) (skillComponent.Level + skillComponent.TemporaryLevel - proto.LevelRequired)) / 10.0f, 0.1f, 2.0f) + Math.Min(((float) comp.Momentum) / 20f, 2.0f);
+            var evDamage = new MartialArtDamageModifierEvent(args.Performer, 1);
+            RaiseLocalEvent(ent, ref evDamage);
+            scale *= evDamage.Coefficient;
 
             if (proto.UserEffects != null)
                 _effects.ApplyEffects(args.Performer, proto.UserEffects, scale, args.Target);

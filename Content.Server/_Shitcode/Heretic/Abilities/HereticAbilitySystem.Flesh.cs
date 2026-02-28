@@ -80,9 +80,9 @@ public sealed partial class HereticAbilitySystem
         if (heretic.Ascended)
             time += TimeSpan.FromMinutes(1);
 
-        ApplyMultiplier(ent, multiplier * ent.Comp.BaseHealingPerFlesh, time, MartialArtModifierType.Healing);
-        ApplyMultiplier(ent, multiplier * ent.Comp.BaseAttackRatePerFlesh, time, MartialArtModifierType.AttackRate);
-        ApplyMultiplier(ent, multiplier * ent.Comp.BaseMoveSpeedPerFlesh, time, MartialArtModifierType.MoveSpeed);
+        ApplyMultiplier(ent, multiplier * ent.Comp.BaseHealingPerFlesh, time);
+        ApplyMultiplier(ent, multiplier * ent.Comp.BaseAttackRatePerFlesh, time);
+        ApplyMultiplier(ent, multiplier * ent.Comp.BaseMoveSpeedPerFlesh, time);
         _modifier.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
@@ -116,20 +116,10 @@ public sealed partial class HereticAbilitySystem
     }
 
     // Martial arts cuz yeah
-    private void ApplyMultiplier(EntityUid uid, float multiplier, TimeSpan time, MartialArtModifierType type)
+    private void ApplyMultiplier(EntityUid uid, float multiplier, TimeSpan time)
     {
         if (Math.Abs(multiplier) < 0.01f || time <= TimeSpan.Zero)
             return;
-
-        var multComp = EnsureComp<MartialArtModifiersComponent>(uid);
-        multComp.Data.Add(new MartialArtModifierData
-        {
-            Type = type,
-            Multiplier = multiplier + 1f,
-            EndTime = Timing.CurTime + time,
-        });
-
-        Dirty(uid, multComp);
     }
 
     private void OnMapInit(Entity<FleshPassiveComponent> ent, ref MapInitEvent args)
