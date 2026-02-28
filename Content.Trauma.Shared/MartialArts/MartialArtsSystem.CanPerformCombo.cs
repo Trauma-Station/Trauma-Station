@@ -20,7 +20,7 @@ public partial class MartialArtsSystem
     {
         SubscribeLocalEvent<CanPerformComboComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CanPerformComboComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
-        SubscribeLocalEvent<CanPerformComboComponent, ComboBeingPerformedEvent>(OnComboBeingPerformed);
+        SubscribeLocalEvent<CanPerformComboComponent, ComboEvent>(OnComboBeingPerformed);
         SubscribeLocalEvent<CanPerformComboComponent, SaveLastAttacksEvent>(OnSave);
         SubscribeLocalEvent<CanPerformComboComponent, ResetLastAttacksEvent>(OnReset);
         SubscribeLocalEvent<CanPerformComboComponent, LoadLastAttacksEvent>(OnLoad);
@@ -129,7 +129,7 @@ public partial class MartialArtsSystem
                 continue;
 
 
-            var beingPerformedEv = new ComboBeingPerformedEvent(proto.ID);
+            var beingPerformedEv = new ComboEvent(proto.ID);
             RaiseLocalEvent(uid, ref beingPerformedEv);
             comp.Momentum += 1;
 
@@ -153,7 +153,7 @@ public partial class MartialArtsSystem
             }
         }
     }
-    private void OnComboBeingPerformed(Entity<CanPerformComboComponent> ent, ref ComboBeingPerformedEvent args)
+    private void OnComboBeingPerformed(Entity<CanPerformComboComponent> ent, ref ComboEvent args)
     {
         ent.Comp.BeingPerformed = args.Combo;
     }
