@@ -25,31 +25,8 @@ public sealed class LegsParalyzedSystem : EntitySystem
         SubscribeLocalEvent<LegsParalyzedComponent, ThrowPushbackAttemptEvent>(OnThrowPushbackAttempt);
         SubscribeLocalEvent<LegsParalyzedComponent, UpdateCanMoveEvent>(OnUpdateCanMoveEvent);
         */
-        SubscribeLocalEvent<LegsParalyzedComponent, RefreshMovementSpeedModifiersEvent>(OnRefresh);
-        SubscribeLocalEvent<LegsParalyzedComponent, StandUpAttemptEvent>(OnStandAttempt);
-        SubscribeLocalEvent<LegsParalyzedComponent, MoveEvent>(OnMove);
         // </Trauma>
     }
-
-    // <Trauma>
-    private void OnMove(Entity<LegsParalyzedComponent> ent, ref MoveEvent args)
-    {
-        EnsureComp<KnockedDownComponent>(ent);
-    }
-
-    private void OnStandAttempt(Entity<LegsParalyzedComponent> ent, ref StandUpAttemptEvent args)
-    {
-        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
-            return;
-
-        args.Cancelled = true;
-    }
-
-    private void OnRefresh(Entity<LegsParalyzedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
-    {
-        args.ModifySpeed(ent.Comp.WalkSpeedModifier, ent.Comp.SprintSpeedModifier, true);
-    }
-    // </Trauma>
 
     private void OnStartup(EntityUid uid, LegsParalyzedComponent component, ComponentStartup args)
     {

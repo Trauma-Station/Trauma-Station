@@ -14,7 +14,6 @@
   id: ActionHereticSacraments
   name: Sacraments of Power
   description: Become immune to all damage temporarily, sending it back to attackers.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
@@ -35,7 +34,6 @@
   id: ActionHereticFuriousSteel
   name: Furious Steel
   description: Summon three orbiting protecting blades around you.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false

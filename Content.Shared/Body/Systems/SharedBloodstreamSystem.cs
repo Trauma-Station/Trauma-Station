@@ -403,34 +403,6 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
     }
 
     /// <summary>
-    /// Goob
-    /// Removes a certain amount of all reagents except of excluded ones from the bloodstream.
-    /// </summary>
-    public Solution? FlushChemicals(Entity<BloodstreamComponent?> ent,
-        FixedPoint2 quantity,
-        params ProtoId<ReagentPrototype>[] excludedReagents)
-    {
-        if (!Resolve(ent, ref ent.Comp, logMissing: false)
-            || !SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution, out var bloodSolution))
-            return null;
-
-        var flushedSolution = new Solution();
-
-        for (var i = bloodSolution.Contents.Count - 1; i >= 0; i--)
-        {
-            var (reagentId, _) = bloodSolution.Contents[i];
-            if (ent.Comp.BloodReferenceSolution.ContainsPrototype(reagentId.Prototype) ||
-                excludedReagents.Contains(reagentId.Prototype))
-                continue;
-
-            var reagentFlushAmount = SolutionContainer.RemoveReagent(ent.Comp.BloodSolution.Value, reagentId, quantity);
-            flushedSolution.AddReagent(reagentId, reagentFlushAmount);
-        }
-
-        return flushedSolution.Volume == 0 ? null : flushedSolution;
-    }
-
-    /// <summary>
     /// A simple helper that tries to move blood volume up or down by a specified amount.
     /// Blood will not go over normal volume for this entity's bloodstream.
     /// </summary>

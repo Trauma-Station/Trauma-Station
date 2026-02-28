@@ -141,6 +141,8 @@ public sealed class EldritchInfluenceSystem : EntitySystem
     {
         var type = args.GetType();
         var da = args.DoAfter;
+        // Remove eye overlay when heretic finishes gathering rift with codex. If they are gathering multiple rifts at
+        // the same time - don't remove eye overlay
         if (!TryComp(args.User, out DoAfterComponent? doAfter) ||
             doAfter.DoAfters.Values.All(x =>
             {

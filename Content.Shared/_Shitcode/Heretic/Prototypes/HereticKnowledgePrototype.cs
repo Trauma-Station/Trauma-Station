@@ -40,8 +40,8 @@ public sealed partial class HereticKnowledgePrototype : IPrototype
     /// <summary>
     ///     What event should be raised (on mind)
     /// </summary>
-    [DataField, NonSerialized]
-    public object? HereticEvent;
+    [DataField]
+    public object? MindEvent;
 
     /// <summary>
     ///     What rituals should be given

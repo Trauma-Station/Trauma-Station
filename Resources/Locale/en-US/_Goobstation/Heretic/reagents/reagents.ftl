@@ -45,6 +45,9 @@ reagent-effect-guidebook-has-status-effect =
         *[false] has
     } {$effect} status effect
 
+entity-condition-guidebook-nullrod-protected = target is protected by nullrod
+entity-condition-guidebook-nullrod-not-protected = target is not protected by nullrod
+
 reagent-effect-guidebook-deconvert-ghoul = deconverts ghoulified entity
 
 reagent-physical-desc-eldritch = eldritch

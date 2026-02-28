@@ -16,6 +16,8 @@ public sealed class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
+    private readonly HashSet<Entity<PhysicsComponent>> _lookupPhysics = new();
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -63,8 +65,9 @@ public sealed class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
 
                 const int mask = (int) (CollisionGroup.Impassable | CollisionGroup.HighImpassable);
 
-                var look = _lookup.GetEntitiesInRange<PhysicsComponent>(mapPos, 0.1f);
-                if (look.Any(e => (e.Comp.CollisionLayer & mask) != 0))
+                _lookupPhysics.Clear();
+                _lookup.GetEntitiesInRange(mapPos, 0.1f, _lookupPhysics);
+                if (_lookupPhysics.Any(e => (e.Comp.CollisionLayer & mask) != 0))
                     continue;
 
                 Spawn(forest.FogProto, mapPos);

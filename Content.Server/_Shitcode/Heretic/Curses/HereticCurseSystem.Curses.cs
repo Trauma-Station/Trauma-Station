@@ -38,12 +38,12 @@ public sealed partial class HereticCurseSystem
         var flamesQuery = EntityQueryEnumerator<CurseOfFlamesStatusEffectComponent, StatusEffectComponent>();
         while (flamesQuery.MoveNext(out _, out var flames, out var status))
         {
-            if (flames.NextIgnition > curTime || status.AppliedTo == null || status.EndEffectTime < curTime)
+            if (flames.NextIgnition > curTime || status.AppliedTo is not { } target || status.EndEffectTime < curTime)
                 continue;
 
             flames.NextIgnition = curTime + flames.Delay;
 
-            if (!flammableQuery.TryComp(status.AppliedTo.Value, out var flam))
+            if (!flammableQuery.TryComp(target, out var flam))
                 continue;
 
             if (flam.FireStacks > flames.MinFireStacks &&
@@ -51,7 +51,7 @@ public sealed partial class HereticCurseSystem
                 flam.FireProtectionPenetration >= flames.Penetration)
                 continue;
 
-            _flammable.SetFireStacks(status.AppliedTo.Value,
+            _flammable.SetFireStacks(target,
                 MathF.Max(flames.MinFireStacks, flam.FireStacks),
                 flam,
                 true,

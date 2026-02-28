@@ -655,7 +655,7 @@
   id: MindGrasp
   sideKnowledge: true
   stage: 6
-  hereticEvent: !type:HereticGraspUpgradeEvent
+  mindEvent: !type:HereticGraspUpgradeEvent
     addedComponents:
     - type: AreaMansusGrasp
 
@@ -687,7 +687,7 @@
   stage: 8
   actionPrototypes:
   - ActionHereticForestAdmonitions
-  hereticEvent: !type:HereticRemoveActionEvent
+  mindEvent: !type:HereticRemoveActionEvent
     action: ActionHereticShadowCloak
   event: !type:HereticKnowledgeEvent
     addedComponents:

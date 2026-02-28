@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 
 namespace Content.Server.Tiles;
@@ -20,8 +13,4 @@ public sealed partial class TileEntityEffectComponent : Component
     /// </summary>
     [DataField]
     public List<EntityEffect> Effects = default!;
-
-    // Trauma
-    [DataField]
-    public EntityCondition[]? Conditions;
 }

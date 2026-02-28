@@ -70,9 +70,7 @@ using Content.Server.Cloning;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Heretic.Components;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Standing;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Hands.Components;
@@ -503,12 +501,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
                         if (damageable != null && damageable.TotalDamage < FixedPoint2.Epsilon)
                         {
                             if (bodyQuery.TryComp(uid, out var body))
-                            {
-                                var parts = _body.GetExternalOrgans((uid, body))
-                                    .Select(x => _body.GetCategory(x.AsNullable()));
-                                if (BodySystem.BodyParts.Any(category => parts.All(x => x != category)))
-                                    _bodyRestore.RestoreBody((uid, body));
-                            }
+                                _bodyRestore.RestoreBody((uid, body));
                             shouldHeal = false;
                         }
                     }

@@ -169,7 +169,7 @@ public abstract class SharedHereticSystem : EntitySystem
 
         var data = _proto.Index(id);
 
-        if (data.HereticEvent is { } hereticEv)
+        if (data.MindEvent is { } hereticEv)
         {
             RaiseLocalEvent(ent.Owner, hereticEv);
         }

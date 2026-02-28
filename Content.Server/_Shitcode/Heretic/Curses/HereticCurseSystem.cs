@@ -340,7 +340,8 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
 
     private bool CanCurse(Entity<MobStateComponent?> uid)
     {
-        return !_mobState.IsDead(uid) && !_heretic.IsHereticOrGhoul(uid) &&
+        return Resolve(uid, ref uid.Comp, false) && !_mobState.IsDead(uid) &&
+               !_heretic.IsHereticOrGhoul(uid) &&
                !HasComp<WizardComponent>(uid) && !HasComp<ApprenticeComponent>(uid);
     }
 

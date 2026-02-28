@@ -18,8 +18,9 @@ public sealed partial class EntropicPlumeAffectedComponent : BaseSpriteOverlayCo
     [DataField, AutoNetworkedField]
     public EntityUid ExcludedEntity;
 
+    // Null for infinite
     [DataField]
-    public float Duration = 10f;
+    public float? Duration = 10f;
 
     [DataField, AutoNetworkedField, AutoPausedField]
     public TimeSpan NextAttack = TimeSpan.Zero;

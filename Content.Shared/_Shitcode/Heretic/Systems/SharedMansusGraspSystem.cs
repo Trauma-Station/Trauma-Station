@@ -59,10 +59,9 @@ namespace Content.Shared._Shitcode.Heretic.Systems;
 public abstract class SharedMansusGraspSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
+    [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -91,6 +90,8 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
+
+    private readonly HashSet<Entity<MobStateComponent>> _lookupMobs = new();
 
     public static readonly SoundSpecifier DefaultSound = new SoundPathSpecifier("/Audio/Items/welder.ogg");
 
@@ -167,10 +168,11 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         var range = GetAreaGraspRange(ent, (float) time.TotalSeconds);
 
         var pos = Transform(args.User).Coordinates;
-        var look = _look.GetEntitiesInRange<MobStateComponent>(pos, range, LookupFlags.Dynamic);
+        _lookupMobs.Clear();
+        _look.GetEntitiesInRange<MobStateComponent>(pos, range, _lookupMobs, LookupFlags.Dynamic);
         var hitCount = 0;
 
-        foreach (var uid in look)
+        foreach (var uid in _lookupMobs)
         {
             if (uid.Owner == args.User)
                 continue;
@@ -451,7 +453,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
                     EnsureComp<HereticMinionComponent>(target).BoundHeretic = performer;
 
-                    var ghoul = _compFactory.GetComponent<GhoulComponent>();
+                    var ghoul = Factory.GetComponent<GhoulComponent>();
                     ghoul.GiveBlade = true;
                     ghoul.DeathBehavior = GhoulDeathBehavior.NoGib;
                     ghoul.CanDeconvert = true;
@@ -516,23 +518,23 @@ public abstract class SharedMansusGraspSystem : EntitySystem
             !TryComp(uid, out MansusGraspComponent? grasp))
             return;
 
-        if (args.Target == null || _whitelist.IsWhitelistPass(grasp.Blacklist, args.Target.Value))
+        if (args.Target is not { } target || _whitelist.IsWhitelistPass(grasp.Blacklist, target))
         {
             RustTile();
             return;
         }
 
         // Death to catwalks
-        if (_tag.HasTag(args.Target.Value, Catwalk))
+        if (_tag.HasTag(target, Catwalk))
         {
             args.Handled = true;
             InvokeGrasp(args.User, (uid, grasp));
             ResetDelay(comp.CatwalkDelayMultiplier);
-            PredictedDel(args.Target);
+            PredictedDel(target);
             return;
         }
 
-        if (!_ability.TryMakeRustWall(args.Target.Value, args.User, heretic))
+        if (!_ability.TryMakeRustWall(target, args.User, heretic))
             return;
 
         args.Handled = true;
@@ -550,7 +552,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 return;
 
             var tileRef = _mapSystem.GetTileRef(gridUid, mapGrid, args.ClickLocation);
-            var tileDef = (ContentTileDefinition) _tileDefinitionManager[tileRef.Tile.TypeId];
+            var tileDef = (ContentTileDefinition) _tile[tileRef.Tile.TypeId];
 
             if (!_ability.CanRustTile(tileDef))
                 return;
@@ -590,10 +592,10 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         if (!args.CanReach)
             return;
 
-        if (args.Target == null || args.Target == args.User)
+        if (args.Target is not { } target || target == args.User)
             return;
 
-        args.Handled = GraspTarget(ent, args.User, args.Target.Value);
+        args.Handled = GraspTarget(ent, args.User, target);
     }
 
     public virtual void InvokeGrasp(EntityUid user, Entity<MansusGraspComponent>? ent)

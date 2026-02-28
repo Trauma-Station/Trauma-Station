@@ -26,8 +26,8 @@ public sealed class WoundedSoldierSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _dmg = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
 
-    private const float DamageInterval = 1f;
-    private float _accumulator;
+    private readonly TimeSpan _damageInterval = TimeSpan.FromSeconds(1);
+    private TimeSpan _nextDamage = TimeSpan.Zero;
 
     public override void Initialize()
     {
@@ -100,12 +100,12 @@ public sealed class WoundedSoldierSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        _accumulator += frameTime;
+        var now = _timing.CurTime;
 
-        if (_accumulator < DamageInterval)
+        if (now < _nextDamage)
             return;
 
-        _accumulator = 0f;
+        _nextDamage = now + _damageInterval;
 
         var query = EntityQueryEnumerator<WoundedSoldierComponent, MobStateComponent, DamageableComponent>();
         while (query.MoveNext(out var uid, out var soldier, out var state, out var dmg))

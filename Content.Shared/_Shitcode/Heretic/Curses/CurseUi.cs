@@ -3,21 +3,15 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._Shitcode.Heretic.Curses;
 
-[Serializable, NetSerializable, DataDefinition]
-public sealed partial class CurseData(NetEntity ent, string name, float multiplier, TimeSpan nextCurseTime)
+[Serializable, NetSerializable, DataRecord]
+public partial struct CurseData(NetEntity ent, string name, float multiplier, TimeSpan nextCurseTime)
 {
-    public CurseData() : this(NetEntity.Invalid, "", 0f, TimeSpan.Zero) { }
-
-    [DataField]
     public NetEntity Entity = ent;
 
-    [DataField]
     public string Name = name;
 
-    [DataField]
     public float Multiplier = multiplier;
 
-    [DataField]
     public TimeSpan NextCurseTime = nextCurseTime;
 }
 

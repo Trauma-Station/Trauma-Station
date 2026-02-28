@@ -19,8 +19,6 @@ public sealed class MultiShaderSpriteOverlay : Overlay
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
-    private readonly Dictionary<EntityUid, IRenderTexture> _renderTargets = new();
-
     public MultiShaderSpriteOverlay()
     {
         IoCManager.InjectDependencies(this);
@@ -41,8 +39,6 @@ public sealed class MultiShaderSpriteOverlay : Overlay
         var bounds = args.WorldAABB.Enlarged(2f);
 
         var localMatrix = viewport.GetWorldToLocalMatrix();
-
-        var processed = new List<EntityUid>();
 
         var query = _entMan.EntityQueryEnumerator<MultiShaderSpriteComponent, SpriteComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var multi, out var sprite, out var xform))
@@ -67,15 +63,13 @@ public sealed class MultiShaderSpriteOverlay : Overlay
             if (screenSpriteSize.Y % 2 != 0)
                 screenSpriteSize.Y++;
 
-            processed.Add(uid);
-
-            if (!_renderTargets.TryGetValue(uid, out var target))
+            if (multi.RenderTarget is not { } target)
             {
                 target = _clyde.CreateRenderTarget(screenSpriteSize,
                     new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb),
                     name: $"multi_shader_{uid}");
 
-                _renderTargets[uid] = target;
+                multi.RenderTarget = target;
             }
             else if (target.Size != screenSpriteSize)
             {
@@ -85,7 +79,7 @@ public sealed class MultiShaderSpriteOverlay : Overlay
                     new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb),
                     name: $"multi_shader_{uid}");
 
-                _renderTargets[uid] = target;
+                multi.RenderTarget = target;
             }
 
             var quad = Box2.FromDimensions(Vector2.Zero, screenSpriteSize).Scale(new Vector2(1f, -1f));
@@ -157,26 +151,5 @@ public sealed class MultiShaderSpriteOverlay : Overlay
         }
 
         handle.SetTransform(Matrix3x2.Identity);
-
-        foreach (var (key, target) in _renderTargets)
-        {
-            if (processed.Contains(key))
-                continue;
-
-            target.Dispose();
-            _renderTargets.Remove(key);
-        }
-    }
-
-    protected override void DisposeBehavior()
-    {
-        base.DisposeBehavior();
-
-        foreach (var (_, target) in _renderTargets)
-        {
-            target.Dispose();
-        }
-
-        _renderTargets.Clear();
     }
 }

@@ -45,7 +45,7 @@ public sealed partial class InjectorSystem
 
     private void OnBeforeRangedInteract(Entity<InjectorComponent> injector, ref BeforeRangedInteractEvent args)
     {
-        if (args.Handled || args.Target is not { Valid: true } target)
+        if (args.Handled || args.Target is not { } target)
             return;
 
         if (injector.Comp.InteractionRangeOverride is not { } range ||

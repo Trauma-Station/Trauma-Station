@@ -11,6 +11,7 @@ using Content.Shared.Electrocution;
 using Content.Shared.Explosion;
 using Content.Shared.Heretic;
 using Content.Shared.Maps;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Content.Shared.Slippery;
 using Content.Shared.StatusEffectNew;
@@ -30,6 +31,9 @@ public abstract partial class SharedHereticAbilitySystem
     public static readonly ProtoId<ContentTileDefinition> RustTile = "PlatingRust";
     public static readonly ProtoId<TagPrototype> Wall = "Wall";
     public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
+
+    private readonly HashSet<Entity<FixturesComponent>> _lookupFixtures = new();
+    private readonly HashSet<Entity<MobStateComponent>> _lookupMobs = new();
 
     public static readonly Dictionary<EntProtoId, EntProtoId> Transformations = new()
     {
@@ -330,9 +334,9 @@ public abstract partial class SharedHereticAbilitySystem
         var mask = CollisionGroup.LowImpassable | CollisionGroup.MidImpassable | CollisionGroup.HighImpassable |
                    CollisionGroup.Impassable;
 
-        var lookup =
-            Lookup.GetEntitiesInRange<FixturesComponent>(args.Target, args.ObstacleCheckRange, LookupFlags.Static);
-        foreach (var (_, fix) in lookup)
+        _lookupFixtures.Clear();
+        Lookup.GetEntitiesInRange(args.Target, args.ObstacleCheckRange, _lookupFixtures, LookupFlags.Static);
+        foreach (var (_, fix) in _lookupFixtures)
         {
             if (fix.Fixtures.All(x => (x.Value.CollisionLayer & (int) mask) == 0))
                 continue;
@@ -343,11 +347,10 @@ public abstract partial class SharedHereticAbilitySystem
 
         var mapCoords = _transform.ToMapCoordinates(args.Target);
 
-        var lookup2 =
-            Lookup.GetEntitiesInRange<TransformComponent>(args.Target, args.MobCheckRange, LookupFlags.Dynamic);
-        foreach (var (entity, xform) in lookup2)
+        Lookup.GetEntitiesInRange(args.Target, args.MobCheckRange, _lookupMobs, LookupFlags.Dynamic);
+        foreach (var (entity, _) in _lookupMobs)
         {
-            var dir = _transform.GetWorldPosition(xform) - mapCoords.Position;
+            var dir = _transform.GetWorldPosition(entity) - mapCoords.Position;
             if (dir.LengthSquared() < 0.001f)
                 continue;
             _throw.TryThrow(entity, dir.Normalized() * args.ThrowRange, args.ThrowSpeed);

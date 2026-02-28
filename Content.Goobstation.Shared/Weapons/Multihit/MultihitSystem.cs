@@ -95,11 +95,10 @@ public sealed class MultihitSystem : EntitySystem
 
     private EntityUid? ResolveUser(Entity<ActiveMultihitComponent> ent)
     {
-        if (ent.Comp.User == null || TerminatingOrDeleted(ent.Comp.User.Value) ||
-            !_hands.IsHolding(ent.Comp.User.Value, ent))
+        if (ent.Comp.User is not { } user || TerminatingOrDeleted(user) || !_hands.IsHolding(user, ent))
             return null;
 
-        return ent.Comp.User.Value;
+        return user;
     }
 
     private void PerformFollowupAttack(Entity<ActiveMultihitComponent, MeleeWeaponComponent> ent,
@@ -249,10 +248,10 @@ public sealed class MultihitSystem : EntitySystem
             if (weapon == uid)
                 return false;
 
-            if (component.MultihitWhitelist != null && !_whitelist.IsValid(component.MultihitWhitelist, weapon))
+            if (_whitelist.IsWhitelistFail(component.MultihitWhitelist, weapon))
                 return false;
 
-            if (!TryComp(weapon, out MeleeWeaponComponent? melee))
+            if (!HasComp<MeleeWeaponComponent>(weapon))
                 return false;
 
             var active = EnsureComp<ActiveMultihitComponent>(weapon);

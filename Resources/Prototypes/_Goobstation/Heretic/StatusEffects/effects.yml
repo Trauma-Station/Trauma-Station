@@ -29,21 +29,29 @@
   id: StatusEffectCurseOfAmok
   name: curse of amok
   components:
-  - type: CurseOfAmokStatusEffect
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: EntropicPlumeAffected
+      duration: null
+      sprite: null
 
 - type: entity
   parent: MobStatusEffectBase
   id: StatusEffectCurseOfBlindness
   name: curse of blindness
   components:
-  - type: CurseOfBlindnessStatusEffect
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: TemporaryBlindness
 
 - type: entity
   parent: MobStatusEffectBase
   id: StatusEffectCurseOfFragility
   name: curse of fragility
   components:
-  - type: CurseOfFragilityStatusEffect
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: FragileCurse
 
 - type: entity
   parent: MobStatusEffectBase

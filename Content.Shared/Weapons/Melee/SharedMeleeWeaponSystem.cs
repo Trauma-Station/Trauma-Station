@@ -2,6 +2,7 @@
 using Content.Goobstation.Common.Weapons;
 using Content.Goobstation.Common.MartialArts;
 using Content.Lavaland.Common.Weapons;
+using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Physics.Components;
@@ -9,7 +10,6 @@ using Robust.Shared.Physics.Components;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
-using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Components;

@@ -12,6 +12,8 @@ namespace Content.Shared._Shitcode.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {
+    private readonly HashSet<Entity<GhoulComponent>> _lookupGhouls = new();
+
     protected virtual void SubscribeFlesh()
     {
         SubscribeLocalEvent<EventHereticFleshSurgery>(OnFleshSurgery);
@@ -109,14 +111,15 @@ public abstract partial class SharedHereticAbilitySystem
 
         var xform = Transform(args.User);
         var coords = _transform.GetMapCoordinates(args.User, xform);
-        var look = Lookup.GetEntitiesInRange<GhoulComponent>(coords, ent.Comp.AreaHealRange, LookupFlags.Dynamic);
-        foreach (var ghoul in look)
+        _lookupGhouls.Clear();
+        Lookup.GetEntitiesInRange(coords, ent.Comp.AreaHealRange, _lookupGhouls, LookupFlags.Dynamic);
+        foreach (var ghoul in _lookupGhouls)
         {
             HealGhoul(ghoul, args.User);
         }
 
         var cd = _grasp.CalculateAreaGraspCooldown((float) ent.Comp.Cooldown.TotalSeconds,
-            look.Count,
+            _lookupGhouls.Count,
             ent.Comp.AreaHealRange,
             1f);
         if (cd > ent.Comp.MaxAreaCooldown)
