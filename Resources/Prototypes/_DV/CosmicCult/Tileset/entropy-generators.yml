@@ -127,3 +127,4 @@
             volume: -8
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: Visibility # No idea how but lack of this causes a test fail?
