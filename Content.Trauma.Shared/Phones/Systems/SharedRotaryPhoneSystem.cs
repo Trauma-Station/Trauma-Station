@@ -55,7 +55,7 @@ public sealed class SharedRotaryPhoneSystem : EntitySystem
 
     private void OnPhoneRemoveHolder(Entity<RotaryPhoneHolderComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        if(Deleted(ent.Owner) || Terminating(ent.Owner))
+        if(Deleted(ent.Owner) || Terminating(ent.Owner) || Deleted(ent.Comp.ConnectedPhone) || Terminating(ent.Comp.ConnectedPhone.Value))
             return;
 
         var visuals = EnsureComp<JointVisualsComponent>(ent.Owner);
@@ -77,9 +77,12 @@ public sealed class SharedRotaryPhoneSystem : EntitySystem
             ent.Comp.PhoneNumber = _random.Next(11111,99999);
     }
 
-    private void OnDestruction(EntityUid uid, RotaryPhoneHolderComponent comp, ref DestructionEventArgs args)
+    private void OnDestruction(Entity<RotaryPhoneHolderComponent> ent, ref DestructionEventArgs args)
     {
-        QueueDel(comp.ConnectedPhone);
+        PredictedDel(ent.Comp.ConnectedPhone);
+        RemComp<JointVisualsComponent>(ent.Owner);
+        RemComp<JointComponent>(ent.Owner);
+        Dirty(ent);
     }
 
     private void OnPhoneDestroy(Entity<RotaryPhoneComponent> ent, ref DestructionEventArgs args)
