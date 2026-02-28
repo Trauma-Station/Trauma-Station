@@ -32,6 +32,7 @@ public sealed class BulletHoleOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
         _xform = _entMan.System<TransformSystem>();
+        ZIndex = -2; // Renderer it under every other overlay
     }
 
     private Texture? GetTexture()

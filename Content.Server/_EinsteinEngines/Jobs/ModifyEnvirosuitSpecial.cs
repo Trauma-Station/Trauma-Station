@@ -9,6 +9,7 @@ using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Inventory;
 using Content.Shared.Roles;
 using Content.Shared._EinsteinEngines.SelfExtinguisher;
+using Robust.Shared.Prototypes;
 using JetBrains.Annotations;
 
 namespace Content.Server._EinsteinEngines.Jobs;
@@ -22,16 +23,15 @@ public sealed partial class ModifyEnvirosuitSpecial : JobSpecial
     [DataField(required: true)]
     public int Charges { get; private set; }
 
-    [ValidatePrototypeId<SpeciesPrototype>]
-    private const string Species = "Plasmaman";
+    private static readonly ProtoId<SpeciesPrototype> Species = "Plasmaman";
 
     private const string Slot = "jumpsuit";
 
     public override void AfterEquip(EntityUid mob)
     {
         var entMan = IoCManager.Resolve<IEntityManager>();
-        if (!entMan.TryGetComponent<HumanoidProfileComponent>(mob, out var appearance) ||
-            appearance.Species != Species ||
+        if (!entMan.TryGetComponent<HumanoidProfileComponent>(mob, out var humanoid) ||
+            humanoid.Species != Species ||
             !entMan.System<InventorySystem>().TryGetSlotEntity(mob, Slot, out var jumpsuit) ||
             jumpsuit is not { } envirosuit ||
             !entMan.TryGetComponent<SelfExtinguisherComponent>(envirosuit, out var selfExtinguisher))

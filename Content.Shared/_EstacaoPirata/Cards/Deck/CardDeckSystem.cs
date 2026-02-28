@@ -35,7 +35,8 @@ public sealed class CardDeckSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    public readonly EntProtoId CardDeckBaseName = "CardDeckBase";
+
+    public static readonly EntProtoId CardDeckBaseName = "CardDeckBase";
 
     /// <inheritdoc/>
     public override void Initialize()

@@ -3137,3 +3137,24 @@ Entries:
   id: 379
   time: '2026-02-27T00:33:32.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/886
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mech melee weapons' wideswing not working properly.
+  id: 380
+  time: '2026-02-27T17:02:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/900
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Command and Dignitary positions are now human only.
+  id: 381
+  time: '2026-02-27T19:36:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/902
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Role playtime restrictions have been largely reduced.
+  id: 382
+  time: '2026-02-27T21:30:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/904
