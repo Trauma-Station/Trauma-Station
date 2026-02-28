@@ -18,6 +18,8 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Content.Server._White.Xenomorphs.Queen;
+using Content.Shared._White.Xenomorphs.Caste;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._White.Xenomorphs.Evolution;
 
@@ -35,6 +37,8 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenomorphQueenSystem _queen = default!;
+
+    private static readonly ProtoId<XenomorphCastePrototype> QueenCaste = "Queen";
 
     public override void Initialize()
     {
@@ -154,10 +158,10 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
             || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, Factory)) // Goobstation
             return false;
 
-        if (xenomorph.Caste == "Queen" && _queen.IsQueenAlive(uid))
+        if (xenomorph.Caste == QueenCaste && _queen.IsQueenAlive(uid))
         {
             _popup.PopupEntity(
-                Loc.GetString("xenomorphs-evolution-no-cast-slot", ("caste", "Queen")), uid);
+                Loc.GetString("xenomorphs-evolution-no-cast-slot", ("caste", QueenCaste)), uid, uid);
             return false;
         }
 
