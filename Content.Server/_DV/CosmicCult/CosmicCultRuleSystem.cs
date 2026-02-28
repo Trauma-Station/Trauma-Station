@@ -170,7 +170,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             comp.CultistsForNextLevel = rule.Comp.CurrentTier >= comp.MaxLevel ? 0 : rule.Comp.CultistsForNextTier - cultistsAtNextLevel;
             Dirty(cultist, comp);
             if (comp.CosmicShopActionEntity is not { } shop) return;
-            _ui.SetUiState(shop, CosmicShopKey.Key, new CosmicShopBuiState(comp));
+            _ui.SetUiState(shop, CosmicShopKey.Key, new CosmicShopBuiState(cultist));
         }
 
         rule.Comp.TotalCrew = _player.Sessions.Count(session
