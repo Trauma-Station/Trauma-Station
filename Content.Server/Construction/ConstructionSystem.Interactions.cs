@@ -220,7 +220,7 @@ namespace Content.Server.Construction
             if (user is { } trueUser)
             {
                 var evKnowledge = new UpdateItemQualityEvent(trueUser);
-                RaiseLocalEvent(uid, evKnowledge);
+                RaiseLocalEvent(uid, ref evKnowledge);
             }
             // </Trauma>
             return HandleResult.True;

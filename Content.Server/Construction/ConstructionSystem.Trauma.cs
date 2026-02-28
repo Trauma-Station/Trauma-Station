@@ -47,7 +47,7 @@ public sealed partial class ConstructionSystem
         if (!HasComp<KnowledgeHolderComponent>(user))
             return;
         var ev = new UpdateItemQualityEvent(user);
-        RaiseLocalEvent(item, ev);
+        RaiseLocalEvent(item, ref ev);
     }
 
     public void TransferQuality(EntityUid original, EntityUid created)

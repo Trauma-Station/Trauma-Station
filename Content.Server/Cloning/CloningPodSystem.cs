@@ -113,7 +113,10 @@ public sealed class CloningPodSystem : EntitySystem
             return;
 
         if (cloned is { } && cloned.Original is {} original && Exists(original))
-            RaiseLocalEvent(mob, new KnowledgeCopyEvent(original), true);
+        {
+            var ev = new KnowledgeCopyEvent(original);
+            RaiseLocalEvent(mob, ref ev, true);
+        }
 
         _mindSystem.TransferTo(mindId, mob, ghostCheckOverride: true, mind: mind);
         _mindSystem.UnVisit(mindId, mind);

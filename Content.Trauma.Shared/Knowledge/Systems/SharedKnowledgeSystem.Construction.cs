@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared.Armor;
+using Content.Shared.Damage.Events;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;
@@ -20,7 +21,8 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, GetMeleeDamageEvent>(AlterMeleeDamage);
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, RefreshNameModifiersEvent>(AlterName);
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, InvokeArmorQualityEvent>(AlterArmorDamage);
-        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, ProjectileHitEvent>(AlterProjectileDamage);
+        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, InvokeProjectileQualityEvent>(AlterProjectileDamage);
+        SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(DealShootingExperience);
     }
 
     public void OnConstructionGetGroupEvent(Entity<KnowledgeHolderComponent> ent, ref ConstructionGetGroupsEvent args)
@@ -73,10 +75,13 @@ public abstract partial class SharedKnowledgeSystem
         args.Coefficient *= ConstructionModifier(ent, 0.87f);
     }
 
-    private void AlterProjectileDamage(Entity<KnowledgeConstructionModifierComponent> ent, ref ProjectileHitEvent args)
+    private void AlterProjectileDamage(Entity<KnowledgeConstructionModifierComponent> ent, ref InvokeProjectileQualityEvent args)
     {
-        Log.Debug($"Altering projectile damage with construction modifier. Original damage: {args.Damage.GetTotal}");
-        args.Damage *= ConstructionModifier(ent, 1.75f);
+        args.Coefficient *= ConstructionModifier(ent, 1.75f);
+    }
+
+    private void DealShootingExperience(Entity<ProjectileComponent> ent, ref ProjectileHitEvent args)
+    {
         if (args.Shooter is not { } trueShooter)
             return;
 

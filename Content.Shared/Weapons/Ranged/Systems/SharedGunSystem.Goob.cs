@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Knowledge;
+// </Trauma>
 using Content.Goobstation.Common.Projectiles;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
@@ -33,6 +36,11 @@ public abstract partial class SharedGunSystem
         if (ent.Comp.Proto is not {} proto || GetProjectileDamage(proto) is not {} damage)
             return;
 
+        // <Trauma>
+        var ev = new InvokeProjectileQualityEvent(1.0f);
+        RaiseLocalEvent(ent, ref ev);
+        damage *= ev.Coefficient;
+        // <Trauma>
         _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damage), Loc.GetString("damage-projectile"));
 
         var ap = GetProjectilePenetration(proto);
