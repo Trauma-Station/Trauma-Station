@@ -78,6 +78,9 @@
     sound:
       path: /Audio/_DV/CosmicCult/god_ambient.ogg
   - type: Monument
+    stage: 2
+    canActivate: true
+  - type: MonumentTransforming
   - type: GuideHelp
     guides:
     - CosmicCult
@@ -160,6 +163,7 @@
     lifetime: 3.8
   - type: MonumentOnDespawn
     prototype: MonumentCosmicCult
+    spawnTimer: 0 # Test fail without
 
 - type: entity
   categories: [ HideSpawnMenu ]

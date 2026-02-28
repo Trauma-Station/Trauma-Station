@@ -96,7 +96,7 @@
   - type: ApcPowerReceiver
     powerLoad: 5000
   - type: ExtensionCableReceiver
-    range: 0
+    receptionRange: 0
   - type: Item
     size: Normal
   - type: SubFloorHide
@@ -125,6 +125,5 @@
           collection: MetalBreak
           params:
             volume: -8
-        offset: 0
       - !type:DoActsBehavior
         acts: ["Destruction"]

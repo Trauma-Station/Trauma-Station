@@ -130,6 +130,8 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
+  - type: CosmicTransmutable # Trauma
+    transmuteTo: ScytheCosmicCult
 
 - type: entity
   name: spade
