@@ -117,8 +117,8 @@
     ears: ClothingHeadsetService
     belt: ClothingBeltChefFilled
   storage:
-     back:
-     - IngredientsBeacon #Trauma
+    back:
+    - IngredientsBeacon #Trauma
 
 - type: chameleonOutfit
   id: ChefChameleonOutfit
