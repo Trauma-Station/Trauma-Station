@@ -9,6 +9,7 @@ using Content.Shared._White.Xenomorphs.Caste;
 using Content.Shared._White.Xenomorphs.Queen;
 using Content.Shared._White.Xenomorphs.Xenomorph;
 using Content.Shared.Mind.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Prototypes;
 
@@ -21,6 +22,7 @@ public sealed class XenomorphQueenSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly XenomorphEvolutionSystem _xenomorphEvolution = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     private static readonly ProtoId<XenomorphCastePrototype> PraetorianCaste = "Praetorian";
 
@@ -59,7 +61,9 @@ public sealed class XenomorphQueenSystem : EntitySystem
         if (xenomorph.Caste == PraetorianCaste || !component.CasteWhitelist.Contains(xenomorph.Caste))
         {
             if (xenomorph.Caste == PraetorianCaste)
-                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-already-praetorian"), args.Performer, args.Performer);
+                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-already-praetorian"), args.Performer);
+            else
+                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-didnt-pass-whitelist"), args.Performer);
             return;
         }
 
@@ -103,13 +107,13 @@ public sealed class XenomorphQueenSystem : EntitySystem
 
     public bool IsQueenAlive(EntityUid? exclude = null)
     {
-        var query = EntityQueryEnumerator<XenomorphQueenComponent, MindContainerComponent>();
-        while (query.MoveNext(out var uid, out _, out var mindContainer))
+        var query = EntityQueryEnumerator<XenomorphQueenComponent>();
+        while (query.MoveNext(out var uid, out _))
         {
             if (uid == exclude)
                 continue;
 
-            if (mindContainer.HasMind)
+            if (!_mobState.IsDead(uid))
                 return true;
         }
         return false;
