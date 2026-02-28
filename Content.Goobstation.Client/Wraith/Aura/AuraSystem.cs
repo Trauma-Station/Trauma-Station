@@ -1,10 +1,12 @@
-using Content.Goobstation.Client.Shaders;
-using Content.Goobstation.Common.Shaders;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Aura;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Prototypes;
 using System.Numerics;
+using Content.Goobstation.Client.Shaders;
+using Content.Goobstation.Common.Shaders;
 
 namespace Content.Goobstation.Client.Wraith.Aura;
 

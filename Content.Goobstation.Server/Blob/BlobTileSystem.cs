@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -28,25 +19,25 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Blob;
 
 public sealed class BlobTileSystem : SharedBlobTileSystem
 {
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly BlobCoreSystem _blobCoreSystem = default!;
-    [Dependency] private readonly AudioSystem _audioSystem = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly BlobCoreSystem _core = default!;
+    [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedEmpSystem _emp = default!;
-    [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFactionSystem = default!;
+    [Dependency] private readonly NpcFactionSystem _faction = default!;
 
     private EntityQuery<BlobCoreComponent> _blobCoreQuery;
 
-    [ValidatePrototypeId<NpcFactionPrototype>]
-    private const string BlobFaction = "Blob";
+    private static readonly ProtoId<NpcFactionPrototype> BlobFaction = "Blob";
 
     public override void Initialize()
     {
@@ -65,8 +56,8 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
         var faction = EnsureComp<NpcFactionMemberComponent>(ent);
         Entity<NpcFactionMemberComponent?> factionEnt = (ent, faction);
 
-        _npcFactionSystem.ClearFactions(factionEnt, false);
-        _npcFactionSystem.AddFaction(factionEnt, BlobFaction, true);
+        _faction.ClearFactions(factionEnt, false);
+        _faction.AddFaction(factionEnt, BlobFaction, true);
 
         // make alive - true for npc combat
         EnsureComp<MobStateComponent>(ent);
@@ -109,11 +100,11 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
                 healCore.DamageDict.Add(keyValuePair.Key, keyValuePair.Value * 5);
             }
 
-            _damageableSystem.TryChangeDamage(uid, healCore);
+            _damage.TryChangeDamage(uid, healCore);
         }
         else
         {
-            _damageableSystem.TryChangeDamage(uid, component.HealthOfPulse);
+            _damage.TryChangeDamage(uid, component.HealthOfPulse);
         }
 
         if (!args.Handled)
@@ -126,12 +117,12 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
             return;
         }
 
-        var nearNode = _blobCoreSystem.GetNearNode(xform.Coordinates, core.Comp.TilesRadiusLimit);
+        var nearNode = _core.GetNearNode(xform.Coordinates, core.Comp.TilesRadiusLimit);
 
         if (nearNode == null)
             return;
 
-        var mobTile = _mapSystem.GetTileRef(xform.GridUid.Value, grid, xform.Coordinates);
+        var mobTile = _map.GetTileRef(xform.GridUid.Value, grid, xform.Coordinates);
 
         var mobAdjacentTiles = new[]
         {
@@ -147,7 +138,7 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
 
         var radius = 1.0f;
 
-        var innerTiles = _mapSystem.GetLocalTilesIntersecting(xform.GridUid.Value,
+        var innerTiles = _map.GetLocalTilesIntersecting(xform.GridUid.Value,
                 grid,
                 new Box2(localPos + new Vector2(-radius, -radius), localPos + new Vector2(radius, radius)))
             .ToArray();
@@ -159,20 +150,20 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
                 continue;
             }
 
-            foreach (var ent in _mapSystem.GetAnchoredEntities(xform.GridUid.Value, grid, innerTile.GridIndices))
+            foreach (var ent in _map.GetAnchoredEntities(xform.GridUid.Value, grid, innerTile.GridIndices))
             {
                 if (!HasComp<DestructibleComponent>(ent) || !HasComp<ConstructionComponent>(ent))
                     continue;
 
                 DoLunge(uid, ent);
-                _damageableSystem.TryChangeDamage(ent, core.Comp.ChemDamageDict[core.Comp.CurrentChem]);
-                _audioSystem.PlayPvs(core.Comp.AttackSound, uid, AudioParams.Default);
+                _damage.TryChangeDamage(ent, core.Comp.ChemDamageDict[core.Comp.CurrentChem]);
+                _audio.PlayPvs(core.Comp.AttackSound, uid, AudioParams.Default);
                 args.Handled = true;
                 return;
             }
 
             var spawn = true;
-            foreach (var ent in _mapSystem.GetAnchoredEntities(xform.GridUid.Value, grid, innerTile.GridIndices))
+            foreach (var ent in _map.GetAnchoredEntities(xform.GridUid.Value, grid, innerTile.GridIndices))
             {
                 if (!HasComp<BlobTileComponent>(ent))
                     continue;
@@ -183,9 +174,9 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
             if (!spawn)
                 continue;
 
-            var location = _mapSystem.ToCoordinates(xform.GridUid.Value, innerTile.GridIndices, grid);
+            var location = _map.ToCoordinates(xform.GridUid.Value, innerTile.GridIndices, grid);
 
-            if (_blobCoreSystem.TransformBlobTile(null,
+            if (_core.TransformBlobTile(null,
                     core,
                     nearNode,
                     BlobTileType.Normal,
@@ -201,7 +192,7 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
         if (target.Comp.BlobTileType == BlobTileType.Reflective)
             return;
 
-        var nearNode = _blobCoreSystem.GetNearNode(coords, core.Comp.TilesRadiusLimit);
+        var nearNode = _core.GetNearNode(coords, core.Comp.TilesRadiusLimit);
         if (nearNode == null)
             return;
 

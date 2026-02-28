@@ -68,7 +68,11 @@
   id: BaseWall
   components:
   - type: Occluder # Breaks on diagonal walls
-  - type: FreezableWall # Trauma - all non diagonal walls can be frozen by artistocrat's way
+    # <Trauma>
+  - type: FreezableWall
+  - type: Appearance
+  - type: BulletHole
+    # </Trauma>
 
 - type: entity
   abstract: true

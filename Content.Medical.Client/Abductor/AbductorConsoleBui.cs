@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Shared.Abductor;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;

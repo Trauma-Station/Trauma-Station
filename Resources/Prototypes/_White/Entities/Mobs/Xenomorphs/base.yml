@@ -193,6 +193,7 @@
     - DoorBumpOpener
     - FootstepSound
   - type: XenomorphShoveTracker
+  - type: CanMoveInAir
 
 - type: entity
   id: BaseMobXenomorphDungeon

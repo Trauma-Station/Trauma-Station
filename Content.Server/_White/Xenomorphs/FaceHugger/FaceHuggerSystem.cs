@@ -67,29 +67,14 @@ public sealed class FaceHuggerSystem : EntitySystem
         SubscribeLocalEvent<FaceHuggerComponent, StepTriggeredOffEvent>(OnStepTriggered);
         SubscribeLocalEvent<FaceHuggerComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<FaceHuggerComponent, BeingUnequippedAttemptEvent>(OnBeingUnequippedAttempt);
-        SubscribeLocalEvent<FaceHuggerComponent, PlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<FaceHuggerComponent, PlayerDetachedEvent>(OnPlayerDetached);
 
         // Goobstation - Throwing behavior
         SubscribeLocalEvent<ThrowableFacehuggerComponent, ThrownEvent>(OnThrown);
         SubscribeLocalEvent<ThrowableFacehuggerComponent, ThrowDoHitEvent>(OnThrowDoHit);
     }
 
-    private void OnPlayerAttached(EntityUid uid, FaceHuggerComponent component, PlayerAttachedEvent args) // Trauma, player controlled facehuggers
-    {
-        component.PlayerControlled = true;
-    }
-
-    private void OnPlayerDetached(EntityUid uid, FaceHuggerComponent component, PlayerDetachedEvent args) // Trauma, player controlled facehuggers
-    {
-        component.PlayerControlled = false;
-    }
-
     private void OnCollideEvent(EntityUid uid, FaceHuggerComponent component, StartCollideEvent args)
     {
-        if(!component.PlayerControlled) // Trauma, player controlled facehuggers
-            return;
-
         TryEquipFaceHugger(uid, args.OtherEntity, component);
     }
 
@@ -107,7 +92,7 @@ public sealed class FaceHuggerSystem : EntitySystem
 
     private void OnStepTriggered(EntityUid uid, FaceHuggerComponent component, ref StepTriggeredOffEvent args)
     {
-        if (component.Active && component.PlayerControlled) // Trauma, player controlled facehuggers
+        if (component.Active)
             TryEquipFaceHugger(uid, args.Tripper, component);
     }
 
@@ -194,13 +179,10 @@ public sealed class FaceHuggerSystem : EntitySystem
             }
             // Goobstaion end
 
-            if (!faceHugger.PlayerControlled) // Trauma, no auto jumping facehuggers without player
-                return;
-
             if (faceHugger.Active && clothing?.InSlot == null)
             {
                 foreach (var entity in _entityLookup.GetEntitiesInRange<InventoryComponent>(Transform(uid).Coordinates,
-                             1.3f))
+                             1.5f))
                 {
                     if (TryEquipFaceHugger(uid, entity, faceHugger))
                         break;

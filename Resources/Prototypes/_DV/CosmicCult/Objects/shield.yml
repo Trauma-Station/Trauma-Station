@@ -1,0 +1,44 @@
+- type: entity
+  name: malign barrier
+  parent: [ BaseRepairableShield, BaseCosmicContraband ]
+  id: ShieldCosmicCult
+  description: A heavy shield wrought of constantly shifting malign plating, it appears to slightly bend reality to protect it's user.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Objects/shield.rsi
+    layers:
+      - state: icon
+      - state: icon-unshaded
+        shader: unshaded
+  - type: Item
+    sprite: _DV/CosmicCult/Objects/shield.rsi
+    heldPrefix: null
+    size: Ginormous
+  - type: CosmicEquipment
+  - type: PassiveDamage
+    damage:
+      groups: # .25 per second per type
+        Brute: -0.75
+        Burn: -1
+  - type: HeldSpeedModifier # Heavy indeed
+    walkModifier: 0.8
+    sprintModifier: 0.8
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 300 # Overkill threshold
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+      - trigger:
+          !type:DamageTrigger
+          damage: 200
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+          - !type:PlaySoundBehavior
+            sound:
+              collection: MetalBreak
+  - type: CosmicTransmutable
+    transmuteTo: null # No reforging

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Virology;
 using Content.Trauma.Shared.Disease;
 using Robust.Shared.Audio;

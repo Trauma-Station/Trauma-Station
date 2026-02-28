@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Common.CCVar;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Consciousness;

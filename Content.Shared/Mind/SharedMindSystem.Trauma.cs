@@ -10,6 +10,7 @@ public abstract partial class SharedMindSystem
 {
     [Dependency] private readonly SharedLanguageSystem _language = default!; // Trauma
 
+    // TODO: make it only delete certain objectives and not all of them in case an antag is ever converted and then deconverted.
     public void ClearObjectives(Entity<MindComponent?> mind)
     {
         if (!Resolve(mind, ref mind.Comp))

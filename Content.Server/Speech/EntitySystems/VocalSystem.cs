@@ -32,7 +32,7 @@ public sealed class VocalSystem : EntitySystem
         SubscribeLocalEvent<VocalComponent, SexChangedEvent>(OnSexChanged);
         SubscribeLocalEvent<VocalComponent, EmoteEvent>(OnEmote);
         SubscribeLocalEvent<VocalComponent, ScreamActionEvent>(OnScreamAction);
-        SubscribeLocalEvent<VocalComponent, SoundsChangedEvent>(OnSoundsChanged); // DeltaV - support for changing vocal sounds on the go. Why it wasn't there in the first place is beyond me.
+        SubscribeLocalEvent<VocalComponent, EmoteSoundsChangedEvent>(OnSoundsChanged); // DeltaV - support for changing vocal sounds on the go. Why it wasn't there in the first place is beyond me.
     }
 
     private void OnMapInit(EntityUid uid, VocalComponent component, MapInitEvent args)
@@ -57,7 +57,7 @@ public sealed class VocalSystem : EntitySystem
     }
 
 // Begin DeltaV additions
-    private void OnSoundsChanged(EntityUid uid, VocalComponent component, ref SoundsChangedEvent args)
+    private void OnSoundsChanged(EntityUid uid, VocalComponent component, ref EmoteSoundsChangedEvent args)
     {
         LoadSounds(uid, component);
     }

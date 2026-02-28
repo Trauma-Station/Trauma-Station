@@ -147,3 +147,17 @@
     revertOnCrit: false
     revertOnDeath: false
     revertOnDelete: false
+
+- type: polymorph
+  id: VoidMagnet
+  configuration:
+    entity: VoidMagnetPocket
+    transferName: false
+    inventory: None
+    forced: true # have to wait it out chud
+    revertOnDeath: true
+    allowRepeatedMorphs: false
+    polymorphSound: /Audio/Magic/ethereal_enter.ogg
+    exitPolymorphSound: /Audio/Magic/ethereal_exit.ogg
+    duration: 10
+    effectProto: EffectDesynchronizer # TODO: make a more evil one

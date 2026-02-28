@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Slasher.Objectives;
 using Content.Server.Objectives.Systems;
 using Content.Shared.Objectives.Components;

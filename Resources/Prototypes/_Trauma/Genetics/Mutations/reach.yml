@@ -52,7 +52,7 @@
   components:
   - type: Mutation
     instability: 35
-    difficulty: 32 # good luck chuddy
+    difficulty: 24 # good luck chuddy
   # TODO: prevent wearing gloves, disable picking up two handed items
   - type: EffectsMutation
     added:

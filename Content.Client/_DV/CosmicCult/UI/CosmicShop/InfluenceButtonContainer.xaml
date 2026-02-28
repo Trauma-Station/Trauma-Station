@@ -1,0 +1,8 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              Margin="5"
+              HorizontalAlignment="Right"
+              Name="InfluenceButton">
+    <PanelContainer StyleClasses="AngleRect">
+        <TextureButton Name="DetailButton" Scale="2 2" />
+    </PanelContainer>
+</BoxContainer>

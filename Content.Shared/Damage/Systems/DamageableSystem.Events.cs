@@ -183,7 +183,6 @@ public sealed partial class DamageableSystem
         _mobThreshold.SetAllowRevives(ent, true);
         ClearAllDamage(ent.AsNullable());
         _mobThreshold.SetAllowRevives(ent, false);
-        Log.Debug($"Rejuvenate called for {ToPrettyString(ent)} now {_mobThreshold.CheckVitalDamage(ent, ent)} vital damage");
     }
 
     private void DamageableHandleState(Entity<DamageableComponent> ent, ref ComponentHandleState args)

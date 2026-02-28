@@ -152,6 +152,8 @@
   - type: Tag
     tags:
     - Pickaxe
+  - type: CosmicTransmutable # Trauma
+    transmuteTo: ScytheCosmicCult # Similar-ish in function
 
 - type: entity
   parent: [ BaseWeaponCrusher, BaseSalvageContraband ]

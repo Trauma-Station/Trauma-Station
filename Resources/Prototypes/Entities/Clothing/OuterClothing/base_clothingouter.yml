@@ -227,6 +227,8 @@
   - type: HideClothingLayerClothing # Goobstation
     hiddenSlots:
     - jumpsuit
+  - type: CosmicTransmutable # Trauma
+    transmuteTo: ClothingOuterHardsuitCosmicCult
 
 - type: entity
   abstract: true
@@ -271,6 +273,8 @@
   - type: Tag
     tags:
     - PlasmamanSafe # EE Plasmeme Change
+  - type: CosmicTransmutable # Trauma
+    transmuteTo: ClothingOuterHardsuitCosmicCult
 
 - type: entity
   parent: ClothingOuterBase

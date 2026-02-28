@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Humanoid;
 using Robust.Shared.Enums;
 using Robust.Shared.Serialization;

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
@@ -7,26 +8,36 @@ public sealed partial class MutationSystem
 {
     /// <summary>
     /// A dictionary of mutation ids to lists of mutations that require it and could be unlocked by combining.
+    /// This is ingredients -> recipes.
     /// </summary>
     public Dictionary<EntProtoId<MutationComponent>, List<ProtoId<MutationRecipePrototype>>> Recipes = new();
+
     /// <summary>
-    /// Every mutation that has a recipe, and its recipe.
+    /// Every mutation that has a recipe, and its recipes that provide it.
+    /// This is result -> recipes.
     /// </summary>
-    private HashSet<EntProtoId<MutationComponent>> RecipeMutations = new();
+    public Dictionary<EntProtoId<MutationComponent>, List<ProtoId<MutationRecipePrototype>>> ResultRecipes = new();
 
     private void LoadRecipes()
     {
         Recipes.Clear();
-        RecipeMutations.Clear();
+        ResultRecipes.Clear();
         foreach (var recipe in _proto.EnumeratePrototypes<MutationRecipePrototype>())
         {
-            RecipeMutations.Add(recipe.Result);
+            var id = recipe.ID;
+            // index recipes by the result
+            if (ResultRecipes.TryGetValue(recipe.Result, out var recipes))
+                recipes.Add(id);
+            else
+                ResultRecipes[recipe.Result] = new() { id };
+
+            // then by each ingredient
             foreach (var required in recipe.Required)
             {
                 if (Recipes.TryGetValue(required, out var results))
-                    results.Add(recipe.ID);
+                    results.Add(id);
                 else
-                    Recipes[required] = new List<ProtoId<MutationRecipePrototype>>() { recipe.ID };
+                    Recipes[required] = new() { id };
             }
         }
     }
@@ -45,7 +56,7 @@ public sealed partial class MutationSystem
     /// Returns true if a mutation has at least 1 recipe to combine it.
     /// </summary>
     public bool HasRecipe(EntProtoId<MutationComponent> id)
-        => RecipeMutations.Contains(id);
+        => ResultRecipes.ContainsKey(id);
 
     /// <summary>
     /// Returns a new mutation from two input mutations.

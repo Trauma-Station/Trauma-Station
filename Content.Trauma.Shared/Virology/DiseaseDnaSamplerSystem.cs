@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Virology;
 using Content.Shared.DoAfter;
 using Content.Shared.Forensics.Components;

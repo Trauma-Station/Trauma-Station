@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.NPC.Pathfinding;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Interaction;

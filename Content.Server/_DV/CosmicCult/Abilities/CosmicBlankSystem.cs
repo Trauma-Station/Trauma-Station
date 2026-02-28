@@ -1,14 +1,5 @@
-// SPDX-FileCopyrightText: 2025 AftrLite <61218133+AftrLite@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Collections.Immutable;
 using Content.Server._DV.CosmicCult.Components;
-using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.Religion; // Goobstation - Bible
 using Content.Server.Popups;
 using Content.Shared._DV.CosmicCult;
@@ -26,6 +17,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._DV.CosmicCult.Abilities;
 
@@ -42,6 +34,10 @@ public sealed class CosmicBlankSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly DivineInterventionSystem _divineIntervention = default!;
+
+    public SoundSpecifier BlankSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ability_blank.ogg");
+    public EntProtoId BlankVFX = "CosmicBlankAbilityVFX";
+    public EntProtoId SpawnWisp = "MobCosmicWisp";
 
     public override void Initialize()
     {
@@ -70,7 +66,7 @@ public sealed class CosmicBlankSystem : EntitySystem
         var doargs = new DoAfterArgs(EntityManager, uid, uid.Comp.CosmicBlankDelay, new EventCosmicBlankDoAfter(), uid, args.Target)
         {
             DistanceThreshold = 1.5f,
-            Hidden = false,
+            Hidden = true,
             BreakOnDamage = true,
             BreakOnMove = true,
             BreakOnDropItem = true,
@@ -78,7 +74,6 @@ public sealed class CosmicBlankSystem : EntitySystem
 
         args.Handled = true;
         _doAfter.TryStartDoAfter(doargs);
-        _popup.PopupEntity(Loc.GetString("cosmicability-blank-begin", ("target", Identity.Entity(uid, EntityManager))), uid, args.Target);
     }
 
     public override void Update(float frameTime)
@@ -110,22 +105,17 @@ public sealed class CosmicBlankSystem : EntitySystem
 
         args.Handled = true;
 
-        if (!TryComp<MindContainerComponent>(target, out var mindContainer)
-            || !mindContainer.HasMind)
-            return;
-
-        EnsureComp<CosmicBlankComponent>(target);
-        var examine = EnsureComp<CosmicCultExamineComponent>(target);
-        examine.CultistText = "cosmic-examine-text-abilityblank";
-
         _popup.PopupEntity(Loc.GetString("cosmicability-blank-success",
             ("target", Identity.Entity(target, EntityManager))), uid, uid);
-        var tgtpos = Transform(target).Coordinates;
-        var mindEnt = mindContainer.Mind.Value;
-        var mind = Comp<MindComponent>(mindEnt);
-        var comp = uid.Comp;
-        mind.PreventGhosting = true;
 
+        _cult.MalignEcho(uid);
+
+        ShuntTarget(target, uid.Comp.CosmicBlankDuration);
+    }
+
+    public void ShuntTarget(EntityUid target, TimeSpan duration)
+    {
+        var tgtpos = Transform(target).Coordinates;
         var spawnPoints = EntityManager
             .GetAllComponents(typeof(CosmicVoidSpawnComponent))
             .ToImmutableList();
@@ -133,22 +123,32 @@ public sealed class CosmicBlankSystem : EntitySystem
         if (spawnPoints.IsEmpty)
             return;
 
-        _audio.PlayPvs(comp.BlankSFX, uid, AudioParams.Default.WithVolume(6f));
-        Spawn(comp.BlankVFX, tgtpos);
+        if (!TryComp<MindContainerComponent>(target, out var mindContainer)
+            || mindContainer.Mind is not { } mindEnt)
+            return;
+
+        var mind = Comp<MindComponent>(mindEnt);
+        mind.PreventGhosting = true;
+
+        EnsureComp<CosmicBlankComponent>(target);
+        var examine = EnsureComp<CosmicCultExamineComponent>(target);
+        examine.CultistText = "cosmic-examine-text-abilityblank";
+
+        _audio.PlayPvs(BlankSFX, target, AudioParams.Default.WithVolume(6f));
+        Spawn(BlankVFX, tgtpos);
         var newSpawn = _random.Pick(spawnPoints);
         var spawnTgt = Transform(newSpawn.Uid).Coordinates;
-        var mobUid = Spawn(comp.SpawnWisp, spawnTgt);
+        var mobUid = Spawn(SpawnWisp, spawnTgt);
         EnsureComp<InVoidComponent>(mobUid, out var inVoid);
         inVoid.OriginalBody = target;
-        inVoid.ExitVoidTime = _timing.CurTime + comp.CosmicBlankDuration;
+        inVoid.ExitVoidTime = _timing.CurTime + duration;
         _mind.TransferTo(mindEnt, mobUid);
-        _stun.TryKnockdown(target, comp.CosmicBlankDuration + TimeSpan.FromSeconds(2), true);
+        _stun.TryKnockdown(target, duration + TimeSpan.FromSeconds(2), true);
         _popup.PopupEntity(Loc.GetString("cosmicability-blank-transfer"), mobUid, mobUid);
-        _audio.PlayPvs(comp.BlankSFX, spawnTgt, AudioParams.Default.WithVolume(6f));
+        _audio.PlayPvs(BlankSFX, spawnTgt, AudioParams.Default.WithVolume(6f));
         _color.RaiseEffect(Color.CadetBlue,
-            new List<EntityUid>() { target },
+            [target],
             Filter.Pvs(target, entityManager: EntityManager));
-        Spawn(comp.BlankVFX, spawnTgt);
-        _cult.MalignEcho(uid);
+        Spawn(BlankVFX, spawnTgt);
     }
 }

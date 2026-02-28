@@ -11,4 +11,20 @@
   - type: Sprite
     sprite: _DV/CosmicCult/Objects/unknownplushie.rsi
     state: plushie_cosmic
-  - type: UnholyItem # Goobstation Shitchap
+  - type: EmitSoundOnUse
+    sound: &PlushieUnknownSound
+      path: /Audio/_DV/CosmicCult/ascendant_noise.ogg
+  - type: EmitSoundOnLand
+    sound: *PlushieUnknownSound
+  - type: EmitSoundOnActivate
+    sound: *PlushieUnknownSound
+  - type: EmitSoundOnTrigger
+    sound: *PlushieUnknownSound
+  - type: EmitSoundOnCollide
+    sound: *PlushieUnknownSound
+  - type: Edible
+    useSound: *PlushieUnknownSound
+  - type: MeleeWeapon
+    soundHit: *PlushieUnknownSound
+  - type: CosmicTransmutable
+    transmuteTo: null # No reforging

@@ -32,6 +32,7 @@
   id: RandomHandwrittenBookTable
   table: !type:GroupSelector
     children:
+    - id: BookCosmicCult # Trauma
     - id: BookAurora
     - id: BookCafe
     - id: BookEarth

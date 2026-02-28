@@ -28,17 +28,25 @@
       params:
         variation: 0.1
         volume: +14
+    damage: # Direct hit damage
+      types:
+        Asphyxiation: 20
+        Ion: 20
   - type: CosmicAstralNova
+    areaDamage: # AOE damage. Stacks with direct hit damage
+      types:
+        Asphyxiation: 25
+        Ion: 25
+    areaBlacklist:
+      components:
+      - CosmicCult
+      - CosmicLesserCultist
+      - CosmicColossus
   - type: Sprite
     sprite: _DV/CosmicCult/Effects/ability_novavfx.rsi
     layers:
     - state: vfx
       shader: unshaded
-  - type: GravityWell
-    maxRange: 4
-    baseRadialAcceleration: 12.5
-    baseTangentialAcceleration: 4
-    gravPulsePeriod: 0.05
   - type: SingularityDistortion
     intensity: +20
     falloffPower: 1.5
@@ -104,58 +112,26 @@
 - type: entity
   id: ProjectileCosmicRazor
   name: Astral Bolt
-  parent: BaseBullet
+  parent: ProjectileCosmic
   categories: [ HideSpawnMenu ]
-  description: Marks a target for additional damage.
+  description: Ouch.
   components:
-  - type: Reflective
-    reflective: Magic
-  - type: Sprite
-    noRot: false
-    sprite: _DV/CosmicCult/Effects/weaponprojectiles.rsi
-    layers:
-      - state: razor
-        shader: unshaded
   - type: DamageMarkerOnCollide
+    effect: { sprite: /Textures/_DV/CosmicCult/Effects/ascendantaura.rsi, state: vfx }
+    sound: /Audio/_DV/CosmicCult/ability_nova_impact.ogg
     whitelist:
       components:
       - MobState
     damage:
       types:
-        Cold: 15
-        Asphyxiation: 10
-        Ion: 25
+        Asphyxiation: 30
+        Ion: 35
   - type: Projectile
     impactEffect: BulletImpactEffectCosmic
     damage:
       types:
-        Cold: 10
         Asphyxiation: 5
-        Ion: 15
-    soundHit:
-      path: /Audio/_DV/CosmicCult/projectile_razor_hit.ogg
-  - type: Ammo
-    muzzleFlash: null
-  # Short lifespan
-  - type: TimedDespawn
-    lifetime: 15
-  - type: PointLight
-    color: "#42a4ae"
-    radius: 1.5
-    energy: 6
-    castShadows: false
-  - type: LightBehaviour
-    behaviours:
-      - !type:FadeBehaviour
-        interpolate: Linear
-        minDuration: 0.58
-        maxDuration: 0.59
-        startValue: 0.1
-        endValue: 6
-        property: Energy
-        enabled: true
-        reverseWhenFinished: true
-
+        Ion: 8
 
 - type: entity
   id: BulletImpactEffectCosmic

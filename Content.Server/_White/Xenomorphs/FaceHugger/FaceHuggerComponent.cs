@@ -87,9 +87,6 @@ public sealed partial class FaceHuggerComponent : Component
     [ViewVariables]
     public bool Active = true;
 
-    [DataField]
-    public bool PlayerControlled;
-
     [ViewVariables]
     public TimeSpan InfectIn = TimeSpan.Zero;
 

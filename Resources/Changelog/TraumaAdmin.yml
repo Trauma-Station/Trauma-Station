@@ -31,3 +31,10 @@ Entries:
   id: 4
   time: '2026-02-24T12:22:38.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/859
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed rejuvenate not fixing bleeding properly.
+  id: 5
+  time: '2026-02-26T12:12:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/881

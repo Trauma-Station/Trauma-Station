@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Shared._RMC14.LinkAccount;
+using Content.Shared.Humanoid.Markings;
 // </Trauma>
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
@@ -229,8 +230,19 @@ namespace Content.Server.Database
                 .SelectMany(i => i)
                 .Select(marking => marking.ToString())
                 .ToList();
-            var flattenedMarkings = appearance.Markings.SelectMany(it => it.Value)
-                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            // <Trauma> - no linq fuck you, it throws for duplicate keys
+            var flattenedMarkings = new Dictionary<HumanoidVisualLayers, List<Marking>>();
+            foreach (var layers in appearance.Markings.Values)
+            {
+                foreach (var (layer, markings) in layers)
+                {
+                    // this will just add to an existing list incase there are somehow multiple organs with markings of the same layer
+                    if (!flattenedMarkings.TryGetValue(layer, out var list))
+                        flattenedMarkings[layer] = list = new();
+                    list.AddRange(markings);
+                }
+            }
+            // </Trauma>
             var hairMarking = flattenedMarkings.FirstOrNull(kvp => kvp.Key == HumanoidVisualLayers.Hair)?.Value.FirstOrDefault();
             var facialHairMarking = flattenedMarkings.FirstOrNull(kvp => kvp.Key == HumanoidVisualLayers.FacialHair)?.Value.FirstOrDefault();
             profile.Markings =

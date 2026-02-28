@@ -39,7 +39,7 @@ const fs = require("fs");
 const yaml = require("js-yaml");
 
 // Regexes
-const HeaderRegex = /^\s*(?::cl:|🆑) *([a-z0-9_\- ,]+)?\s+(.+)/ims; // :cl: or 🆑 [0] followed by optional author name [1] and the changelog [2]
+const HeaderRegex = /^\s*(?::cl:|🆑) *([a-z0-9_\- ,.]+)?\s+(.+)/ims; // :cl: or 🆑 [0] followed by optional author name [1] and the changelog [2]
 const LineRegex = /\r?\n/;
 const CategoryRegex = /^([a-zA-Z]+)\s*:/;
 const EntryRegex = /^ *[*-]? *(add|remove|tweak|fix): *([^\n\r]+)\r?$/im; // * or - followed by change type [0] and change message [1]

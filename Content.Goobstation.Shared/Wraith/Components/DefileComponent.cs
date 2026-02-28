@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.FixedPoint;
 using Content.Shared._White.ListViewSelector;
 using Content.Shared.Chemistry.Reagent;

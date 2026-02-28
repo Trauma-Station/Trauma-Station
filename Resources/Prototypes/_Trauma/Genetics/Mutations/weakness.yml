@@ -1,0 +1,72 @@
+# not tg parity but it's yin and yang
+
+- type: entity
+  abstract: true
+  parent: BaseMutation
+  id: BaseMutationWeakness
+  components:
+  - type: Mutation
+    instability: -15
+    difficulty: 12
+    conflicts:
+    - MutationThermalWeakness
+
+- type: entity
+  parent: BaseMutationWeakness
+  id: MutationColdWeakness
+  name: Cold Weakness
+  description: A strange mutation that cripples the host's ability to raise its body temperature. Cold is far more dangerous.
+  components:
+  - type: ThermalRegulatorMutation
+    shivering: 0.05
+    metabolism: 0.3 # lower metabolism idk
+  - type: TemperatureDamageMutation
+    coldOffset: 35 # -13C -> 28C
+  - type: ArmorMutation
+    modifiers:
+      coefficients:
+        Cold: 1.5
+
+- type: entity
+  parent: BaseMutationWeakness
+  id: MutationHeatWeakness
+  name: Heat Weakness
+  description: A strange mutation that cripples the host's ability to lower its body temperature. Heat is far more dangerous.
+  components:
+  - type: ThermalRegulatorMutation
+    sweating: 0.05
+    metabolism: 1.5 # more heat too
+  - type: TemperatureDamageMutation
+    heatOffset: -10 # 51C -> 41C (fever hits hard ye)
+  - type: ArmorMutation
+    modifiers:
+      coefficients:
+        Heat: 1.2 # not as bad because lasers use it
+
+- type: entity
+  parent: BaseMutationWeakness
+  id: MutationThermalWeakness
+  name: Homeostatic Shutdown
+  description: A life-threatening mutation that almost shuts down the host's ability to control its body temperature.
+  components:
+  - type: Mutation
+    instability: -40 # bonus 10 stability when combined for being a smart lad...
+    conflicts: []
+  - type: RemovesMutation
+    removes:
+    - MutationColdWeakness
+    - MutationHeatWeakness
+  # ... but they're even deadlier
+  - type: ThermalRegulatorMutation
+    shivering: 0.001
+    sweating: 0.001
+    metabolism: 0.001 # no more metabolism :)
+    regulation: 0.001
+  - type: TemperatureDamageMutation
+    coldOffset: 40
+    heatOffset: -12
+  - type: ArmorMutation
+    modifiers:
+      coefficients:
+        Cold: 1.8
+        Heat: 1.3
