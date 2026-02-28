@@ -96,7 +96,7 @@ namespace Content.Goobstation.Server.NTR.Scan
             }
             else
             {
-                var current = new Dictionary<string, FixedPoint2>
+                var currency = new Dictionary<string, FixedPoint2>
                 {
                     { "NTLoyaltyPoint", FixedPoint2.New(points) }
                 };
