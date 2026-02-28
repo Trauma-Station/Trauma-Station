@@ -8,6 +8,7 @@
     - CosmicColossus
     - CosmicAstralBody
     - ShowAntagIcons
+    - CosmicLesserCultist
   icon:
     sprite: /Textures/_DV/CosmicCult/Icons/antag_icons.rsi
     state: CosmicCult
@@ -22,6 +23,7 @@
     - CosmicColossus
     - CosmicAstralBody
     - ShowAntagIcons
+    - CosmicLesserCultist
   icon:
     sprite: /Textures/_DV/CosmicCult/Icons/antag_icons.rsi
     state: CosmicCultLead

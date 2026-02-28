@@ -11,16 +11,18 @@ using Content.Shared.Popups;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._DV.CosmicCult.Abilities;
 
 public abstract class SharedCosmicSiphonSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedCosmicCultSystem _cosmicCult = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -66,7 +68,8 @@ public abstract class SharedCosmicSiphonSystem : EntitySystem
 
     protected virtual void OnCosmicSiphonDoAfter(Entity<CosmicCultComponent> ent, ref EventCosmicSiphonDoAfter args)
     {
-        if (args.Args.Target is not { } target
+        if (args.Target is not {} target
+            || !_timing.IsFirstTimePredicted
             || args.Cancelled
             || args.Handled)
             return;
@@ -76,7 +79,7 @@ public abstract class SharedCosmicSiphonSystem : EntitySystem
 
         if (_mobState.IsCritical(target)) // If target is critical, we get way more entropy and kill the target
         {
-            entropyQuantity += _entityWhitelist.IsValid(ent.Comp.HighValueTargetWhitelist, target) ?
+            entropyQuantity += _whitelist.IsValid(ent.Comp.HighValueTargetWhitelist, target) ?
             ent.Comp.CosmicSiphonQuantityCritHighValue : ent.Comp.CosmicSiphonQuantityCrit;
 
             if (!_threshold.TryGetThresholdForState(target, MobState.Dead, out var damage))

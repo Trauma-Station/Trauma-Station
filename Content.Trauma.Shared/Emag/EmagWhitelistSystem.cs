@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Common.Emag;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;

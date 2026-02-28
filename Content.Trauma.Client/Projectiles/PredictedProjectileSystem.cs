@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Projectiles;
 using Content.Trauma.Shared.Projectiles;
 using Robust.Client.GameObjects;

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.Guidebook.Controls;
 using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared.Localizations;

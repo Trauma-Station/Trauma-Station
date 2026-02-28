@@ -69,7 +69,11 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         _sprite.LayerSetScale((ent, sprite), layer, new Vector2(0.65f, 0.65f));
         sprite.LayerSetShader(layer, "unshaded");
 
-        Timer.Spawn(TimeSpan.FromSeconds(2), () => _sprite.RemoveLayer((ent, sprite), CultSiphonedVisuals.Key));
+        Timer.Spawn(TimeSpan.FromSeconds(2), () =>
+        {
+            if (Exists(ent) && _sprite.LayerMapTryGet((ent, sprite), CultSiphonedVisuals.Key, out var layer, false))
+                _sprite.RemoveLayer((ent, sprite), layer);
+        });
         _audio.PlayLocal(_siphonSFX, ent, ent, AudioParams.Default.WithVariation(0.1f));
     }
     #endregion
