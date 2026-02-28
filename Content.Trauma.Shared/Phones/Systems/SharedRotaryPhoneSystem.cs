@@ -55,7 +55,12 @@ public sealed class SharedRotaryPhoneSystem : EntitySystem
 
     private void OnPhoneRemoveHolder(Entity<RotaryPhoneHolderComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        if(Deleted(ent.Owner) || Terminating(ent.Owner) || Deleted(ent.Comp.ConnectedPhone) || Terminating(ent.Comp.ConnectedPhone.Value))
+        if (Deleted(ent.Owner)
+           || Terminating(ent.Owner)
+           || Deleted(ent.Comp.ConnectedPhone)
+           || Terminating(ent.Comp.ConnectedPhone.Value)
+           || Deleted(args.Entity)
+           || Terminating(args.Entity))
             return;
 
         var visuals = EnsureComp<JointVisualsComponent>(ent.Owner);
