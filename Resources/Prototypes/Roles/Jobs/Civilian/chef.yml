@@ -118,7 +118,7 @@
     belt: ClothingBeltChefFilled
   storage:
     back:
-    - IngredientsBeacon #Trauma
+    - IngredientsBeacon # Trauma
 
 - type: chameleonOutfit
   id: ChefChameleonOutfit
