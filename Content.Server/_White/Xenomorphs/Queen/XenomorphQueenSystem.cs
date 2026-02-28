@@ -44,13 +44,14 @@ public sealed class XenomorphQueenSystem : EntitySystem
     private void OnPromotionAction(EntityUid uid, XenomorphQueenComponent component, PromotionActionEvent args)
     {
         // Goobstation start
-        if (args.Target == EntityUid.Invalid || args.Target == args.Performer)
+        var user = args.Performer;
+        if (args.Target == EntityUid.Invalid || args.Target == user)
             return;
 
         // Additional validation in case the target is no longer valid
         if (!HasComp<XenomorphComponent>(args.Target))
         {
-            _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-invalid-target"), args.Performer, args.Performer);
+            _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-invalid-target"), user, user);
             return;
         }
 
@@ -61,9 +62,9 @@ public sealed class XenomorphQueenSystem : EntitySystem
         if (xenomorph.Caste == PraetorianCaste || !component.CasteWhitelist.Contains(xenomorph.Caste))
         {
             if (xenomorph.Caste == PraetorianCaste)
-                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-already-praetorian"), args.Performer);
+                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-already-praetorian"), user, user);
             else
-                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-didnt-pass-whitelist"), args.Performer);
+                _popup.PopupEntity(Loc.GetString("xenomorphs-queen-promotion-didnt-pass-whitelist"), user, user);
             return;
         }
 
