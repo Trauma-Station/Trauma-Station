@@ -134,7 +134,7 @@ public abstract partial class SharedKnowledgeSystem
         if (GetActiveMartialArt(ent) is { } martialArt)
         {
             var evSneakAttack = new InvokeSneakAttackSurprisedEvent();
-            RaiseLocalEvent(martialArt, evSneakAttack);
+            RaiseLocalEvent(martialArt, ref evSneakAttack);
             if (TryComp<SneakAttackComponent>(martialArt, out var speedArt))
             {
                 speedArt.FramesTillHidden = _timing.CurTime + TimeSpan.FromSeconds(speedArt.SecondsTillHidden);
@@ -177,7 +177,7 @@ public abstract partial class SharedKnowledgeSystem
         if (GetActiveMartialArt(ent) is { } martialArt)
         {
             var evSneakAttack = new InvokeSneakAttackSurprisedEvent();
-            RaiseLocalEvent(martialArt, evSneakAttack);
+            RaiseLocalEvent(martialArt, ref evSneakAttack);
         }
     }
 
