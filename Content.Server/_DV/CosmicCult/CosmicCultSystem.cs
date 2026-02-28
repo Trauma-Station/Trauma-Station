@@ -87,13 +87,13 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     {
         base.Update(frameTime);
 
-        var markQuerry = EntityQueryEnumerator<CosmicSubtleMarkComponent>();
-        while (markQuerry.MoveNext(out var uid, out var comp))
+        var markQuery = EntityQueryEnumerator<CosmicSubtleMarkComponent>();
+        while (markQuery.MoveNext(out var uid, out var comp))
             if (comp.ExpireTimer is { } timer && _timing.CurTime > timer)
                 RemComp<CosmicSubtleMarkComponent>(uid);
 
-        var echoQuerry = EntityQueryEnumerator<CosmicMalignEchoComponent>();
-        while (echoQuerry.MoveNext(out var uid, out var comp))
+        var echoQuery = EntityQueryEnumerator<CosmicMalignEchoComponent>();
+        while (echoQuery.MoveNext(out var uid, out var comp))
             if (_timing.CurTime > comp.ExpireTimer)
                 RemComp<CosmicMalignEchoComponent>(uid);
 

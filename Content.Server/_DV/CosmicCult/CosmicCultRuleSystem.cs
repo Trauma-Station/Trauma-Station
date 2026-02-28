@@ -27,7 +27,6 @@ using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.Roles;
 using Content.Shared.Audio;
 using Content.Shared.Cuffs.Components;
-using Content.Shared.Damage.Systems;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
@@ -84,7 +83,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
-    private ISawmill _sawmill = default!;
     private readonly SoundSpecifier _briefingSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_briefing.ogg");
     private readonly SoundSpecifier _deconvertSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_deconvert.ogg");
     private readonly SoundSpecifier _tier3Sound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/tier3.ogg");
@@ -94,8 +92,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     public override void Initialize()
     {
         base.Initialize();
-
-        _sawmill = IoCManager.Resolve<ILogManager>().GetSawmill("cosmiccult");
 
         SubscribeLocalEvent<GameRunLevelChangedEvent>(OnRunLevelChanged);
         SubscribeLocalEvent<CosmicCultAssociateRuleEvent>(OnAssociateRule);
@@ -257,8 +253,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
                 break;
             default:
-                _sawmill.Debug("{0} progressed to a stage with no defined behaviour", ent);
-                break;
+                throw new ArgumentException("Cosmic cult rule progressed to a stage with no defined behaviour");
         }
         UpdateCultData(ent); // Update all the data again
     }
@@ -518,13 +513,13 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     {
         if (!TryComp<CosmicCultAssociatedRuleComponent>(uid, out var associated))
         {
-            _sawmill.Debug("{0} has no associated rule", uid);
+            Log.Debug("{0} has no associated rule", uid);
             return null;
         }
 
         if (!TryComp<CosmicCultRuleComponent>(associated.CultGamerule, out var cult))
         {
-            _sawmill.Debug("Associated gamerule {0} is not a cult gamerule", associated.CultGamerule);
+            Log.Debug("Associated gamerule {0} is not a cult gamerule", associated.CultGamerule);
             return null;
         }
 

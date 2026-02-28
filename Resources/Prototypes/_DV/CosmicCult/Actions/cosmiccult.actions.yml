@@ -9,8 +9,8 @@
       sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
       state: shop
   - type: InstantAction
-    event: !type:EventCosmicShop { }
-  - type: UserInterface # Putting it here as to not spam even more components on cultists themselves
+    event: !type:EventCosmicShop
+  - type: UserInterface
     interfaces:
       enum.CosmicShopKey.Key:
         type: CosmicShopBoundUserInterface
@@ -36,7 +36,7 @@
     blacklist:
       components:
       - CosmicCult
-    event: !type:EventCosmicSiphon {}
+    event: !type:EventCosmicSiphon
 
 - type: entity
   parent: BaseAction
@@ -59,7 +59,7 @@
     blacklist:
       components:
       - CosmicCult
-    event: !type:EventCosmicBlank {}
+    event: !type:EventCosmicBlank
 
 - type: entity
   parent: BaseAction
@@ -74,7 +74,7 @@
       sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
       state: monument
   - type: InstantAction
-    event: !type:EventCosmicPlaceMonument {}
+    event: !type:EventCosmicPlaceMonument
   - type: MonumentPlacementAction
 
 - type: entity
@@ -91,7 +91,7 @@
       sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
       state: return
   - type: InstantAction
-    event: !type:EventCosmicReturn {}
+    event: !type:EventCosmicReturn
 
 - type: entity
   parent: BaseAction
@@ -111,7 +111,7 @@
     whitelist:
       components:
       - HumanoidProfile
-    event: !type:EventCosmicLapse {}
+    event: !type:EventCosmicLapse
 
 - type: entity
   parent: BaseAction
@@ -127,7 +127,7 @@
       sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
       state: glare
   - type: InstantAction
-    event: !type:EventCosmicGlare {}
+    event: !type:EventCosmicGlare
   - type: Tag
     tags:
     - FlashIgnoreResistances
@@ -150,7 +150,7 @@
       components:
         - Door
         - Lock
-    event: !type:EventCosmicIngress {}
+    event: !type:EventCosmicIngress
 
 - type: entity
   parent: BaseAction
@@ -166,7 +166,7 @@
       sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
       state: entropic
   - type: InstantAction
-    event: !type:EventCosmicImposition {}
+    event: !type:EventCosmicImposition
 
 - type: entity
   parent: BaseAction
@@ -184,7 +184,7 @@
     checkCanAccess: false
     range: 0
   - type: WorldTargetAction
-    event: !type:EventCosmicNova {}
+    event: !type:EventCosmicNova
 
 - type: entity
   parent: BaseAction
@@ -204,7 +204,7 @@
       components:
       - BorgChassis
       - SiliconLawUpdater
-    event: !type:EventCosmicFragmentation {}
+    event: !type:EventCosmicFragmentation
 
 - type: entity
   parent: BaseAction
@@ -229,7 +229,7 @@
       - CosmicCult
       - BibleUser
       - MindShield
-    event: !type:EventCosmicConversion {}
+    event: !type:EventCosmicConversion
 
 - type: entity
   parent: BaseAction
@@ -249,7 +249,7 @@
     whitelist:
       components:
       - Damageable
-    event: !type:EventCosmicDamageTransfer {}
+    event: !type:EventCosmicDamageTransfer
 
 - type: entity
   parent: BaseAction
@@ -264,7 +264,7 @@
       sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
       state: transmute
   - type: InstantAction
-    event: !type:EventCosmicTransmutation {}
+    event: !type:EventCosmicTransmutation
 
 - type: entity
   parent: BaseAction
@@ -280,7 +280,7 @@
       sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
       state: stride
   - type: InstantAction
-    event: !type:EventCosmicStride {}
+    event: !type:EventCosmicStride
 
 ## COLOSSUS ACTIONS
 
@@ -338,7 +338,7 @@
     confirmDelay: 0.1
     primeTime: 5
   - type: InstantAction
-    event: !type:EventCosmicColossusHibernate {}
+    event: !type:EventCosmicColossusHibernate
 
 - type: entity
   id: ActionCosmicColossusEffigy
@@ -352,4 +352,4 @@
       sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
       state: nova
   - type: InstantAction
-    event: !type:EventCosmicColossusEffigy {}
+    event: !type:EventCosmicColossusEffigy

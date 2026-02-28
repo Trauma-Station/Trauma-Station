@@ -71,6 +71,7 @@ public sealed class CosmicNovaSystem : EntitySystem
 
     private void OnNovaCollide(Entity<CosmicAstralNovaComponent> ent, ref ProjectileHitEvent args)
     {
+        _mobs.Clear();
         _lookup.GetEntitiesInRange(Transform(ent).Coordinates, ent.Comp.AreaRange, _mobs);
         _mobs.RemoveWhere(target =>
         {

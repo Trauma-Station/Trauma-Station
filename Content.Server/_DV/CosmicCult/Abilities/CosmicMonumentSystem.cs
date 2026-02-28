@@ -27,8 +27,6 @@ public sealed class CosmicMonumentSystem : EntitySystem
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
-
-    private HashSet<EntityUid> _marks = [];
     private HashSet<Entity<MonumentSpawnMarkComponent>> _nearbyMarks = [];
 
     public override void Initialize()
@@ -43,6 +41,8 @@ public sealed class CosmicMonumentSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        base.Update(frameTime);
+
         var spawnQuery = EntityQueryEnumerator<MonumentOnDespawnComponent>();
         while (spawnQuery.MoveNext(out var uid, out var comp))
         {
@@ -91,7 +91,6 @@ public sealed class CosmicMonumentSystem : EntitySystem
 
         var newMark = Spawn(monuPlacement.MarkProto, targetPos); // If all else failed, just create a new mark
         monuPlacement.MarkUid = newMark;
-        _marks.Add(newMark);
         _cultRule.TransferCultAssociation(ent, newMark);
         EnsureComp<MonumentSpawnMarkComponent>(newMark, out var markComp);
         markComp.ApprovalsRequired = (int) Math.Ceiling(cult.Comp.TotalCult / 2f);
@@ -128,14 +127,23 @@ public sealed class CosmicMonumentSystem : EntitySystem
         var newMonument = Spawn(monument.Comp.MonumentSpawnIn, Transform(monument).Coordinates);
         var evt = new CosmicCultAssociateRuleEvent(monument, newMonument);
         RaiseLocalEvent(ref evt);
+        RemoveAllMonumentMarks();
 
-        var cultQuerry = EntityQueryEnumerator<CosmicCultComponent>();
-        while (cultQuerry.MoveNext(out _, out var comp))
-            _actions.RemoveAction(comp.MonumentActionEntity);
-        foreach (var mark in _marks) // Delete all the marks
-            QueueDel(mark);
-        _marks.Clear();
         Dirty(monument, monument.Comp);
+    }
+
+    /// <summary>
+    /// Removes all already placed monument marks, and all "Place Monument" actions from all cultists
+    /// </summary>
+    private void RemoveAllMonumentMarks()
+    {
+        var cultQuery = EntityQueryEnumerator<CosmicCultComponent>();
+        while (cultQuery.MoveNext(out _, out var comp))
+            _actions.RemoveAction(comp.MonumentActionEntity);
+
+        var markQuery = EntityQueryEnumerator<MonumentSpawnMarkComponent>();
+        while (markQuery.MoveNext(out var mark, out _))
+            QueueDel(mark);
     }
 
     private void OnActivate(Entity<MonumentSpawnMarkComponent> ent, ref InteractHandEvent args)
@@ -149,13 +157,7 @@ public sealed class CosmicMonumentSystem : EntitySystem
     /// </summary>
     private void OnEvacDocked(ref EmergencyShuttleDockedEvent args)
     {
-        var cultQuerry = EntityQueryEnumerator<CosmicCultComponent>(); // Remove placement action
-        while (cultQuerry.MoveNext(out _, out var comp))
-            _actions.RemoveAction(comp.MonumentActionEntity);
-
-        foreach (var mark in _marks) // Remove any existing marks
-            QueueDel(mark);
-        _marks.Clear();
+        RemoveAllMonumentMarks();
 
         var query = EntityQueryEnumerator<MonumentComponent>(); // REmove any existing monuments
         while (query.MoveNext(out var uid, out var comp))

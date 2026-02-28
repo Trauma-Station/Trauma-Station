@@ -13,6 +13,7 @@ public partial class SharedCosmicShopSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
 
     public override void Initialize()
     {
@@ -61,22 +62,9 @@ public partial class SharedCosmicShopSystem : EntitySystem
     private void UnlockPassive(EntityUid cultist, InfluencePrototype proto)
     {
         if (proto.Add != null)
-        {
-            foreach (var reg in proto.Add.Values)
-            {
-                var compType = reg.Component.GetType();
-                if (HasComp(cultist, compType))
-                    continue;
-                AddComp(cultist, _componentFactory.GetComponent(compType));
-            }
-        }
+            _entMan.AddComponents(cultist, proto.Add);
 
         if (proto.Remove != null)
-        {
-            foreach (var reg in proto.Remove.Values)
-            {
-                RemComp(cultist, reg.Component.GetType());
-            }
-        }
+            _entMan.RemoveComponents(cultist, proto.Remove);
     }
 }

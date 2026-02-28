@@ -1,6 +1,7 @@
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
@@ -8,6 +9,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Shared._DV.CosmicCult.Abilities;
@@ -22,6 +24,8 @@ public abstract class SharedCosmicSiphonSystem : EntitySystem
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+
+    private readonly ProtoId<DamageTypePrototype> DamageType = "Cold";
 
     public override void Initialize()
     {
@@ -80,10 +84,11 @@ public abstract class SharedCosmicSiphonSystem : EntitySystem
             var curDamage = 0f;
             if (TryComp<DamageableComponent>(target, out var damageComp)) curDamage = (float) _damage.GetDamage((target, damageComp)).GetTotal();
             DamageSpecifier dspec = new();
-            dspec.DamageDict.Add("Cold", damage.Value - curDamage + _random.NextFloat(30f, 60f));
+            dspec.DamageDict.Add(DamageType, damage.Value - curDamage + _random.NextFloat(30f, 60f));
             _damage.TryChangeDamage(target, dspec, true);
         }
 
+        RaiseLocalEvent(target, new CosmicSiphonIndicatorEvent());
         _popup.PopupClient(Loc.GetString("cosmicability-siphon-success", ("target", Identity.Entity(target, EntityManager))), ent, ent);
         _cosmicCult.AddEntropy(ent, entropyQuantity);
     }

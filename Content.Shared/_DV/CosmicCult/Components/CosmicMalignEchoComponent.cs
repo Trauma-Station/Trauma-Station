@@ -19,7 +19,7 @@ public sealed partial class CosmicMalignEchoComponent : Component
 }
 
 [Serializable, NetSerializable]
-public enum CosmicEchoKey
+public enum CosmicEchoKey : byte
 {
     Key
 }

@@ -54,8 +54,8 @@ public sealed class CosmicRiftSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var riftQuerry = EntityQueryEnumerator<CosmicMalignRiftComponent>();
-        while (riftQuerry.MoveNext(out var uid, out var comp))
+        var riftQuery = EntityQueryEnumerator<CosmicMalignRiftComponent>();
+        while (riftQuery.MoveNext(out var uid, out var comp))
         {
             if (comp.DangerWait is not { } dangerWait || _timing.CurTime < comp.DangerTimer)
                 continue;

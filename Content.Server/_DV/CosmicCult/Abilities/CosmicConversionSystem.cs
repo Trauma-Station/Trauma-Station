@@ -51,19 +51,19 @@ public sealed class CosmicConversionSystem : EntitySystem
     {
         var target = args.Target;
 
-        //if (!_mind.TryGetMind(target, out _, out _)) // TODO uncomment before release!!!!
-        //{
-        //    _popup.PopupClient(Loc.GetString("cosmicability-convert-mindshield"), ent, ent);
-        //    return;
-        //}
+        if (!_mind.TryGetMind(target, out _, out _)) // TODO uncomment before release!!!!
+        {
+            _popup.PopupClient(Loc.GetString("cosmicability-convert-mindless"), ent, ent);
+            return;
+        }
         if (HasComp<MindShieldComponent>(target))
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-convert-chaplain"), ent, ent);
+            _popup.PopupClient(Loc.GetString("cosmicability-convert-mindshield"), ent, ent);
             return;
         }
         if (HasComp<BibleUserComponent>(target))
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-convert-mindless"), ent, ent);
+            _popup.PopupClient(Loc.GetString("cosmicability-convert-chaplain"), ent, ent);
             return;
         }
         if (_rotting.IsRotten(target))

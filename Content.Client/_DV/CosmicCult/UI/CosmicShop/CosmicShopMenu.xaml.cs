@@ -86,27 +86,11 @@ public sealed partial class CosmicShopMenu : FancyWindow
             influenceButtons.Add(influenceButton);
         }
 
-        // Yes this is shitcode. No I don't care. I will be replacing it anyway when I implement skill trees. Which will probably be even worse, because nothing is nice in UI.
-        Level3.RemoveAllChildren();
-        Level2.RemoveAllChildren();
-        Level1.RemoveAllChildren();
-        Level0.RemoveAllChildren();
+        Array containers = [Level0, Level1, Level2, Level3];
+        foreach (var container in containers)
+            container.RemoveAllChildren();
         foreach (var box in influenceButtons.OrderBy(box => box.Proto.Cost))
-            switch (box.Proto.Tier)
-            {
-                case 3:
-                    Level3.AddChild(box);
-                    break;
-                case 2:
-                    Level2.AddChild(box);
-                    break;
-                case 1:
-                    Level1.AddChild(box);
-                    break;
-                case 0:
-                    Level0.AddChild(box);
-                    break;
-            }
+            containers[box.Proto.Tier].AddChild(box);
     }
 
     private void UpdateLevelupConfirmation(CosmicShopBuiState state)

@@ -15,7 +15,7 @@ public sealed partial class InfluenceUIBox : BoxContainer
 
     public Action? OnGainButtonPressed;
 
-    public enum InfluenceUIBoxState
+    public enum InfluenceUIBoxState : byte
     {
         UnlockedAndEnoughEntropy = 0,
         UnlockedAndNotEnoughEntropy = 1,

@@ -1,24 +1,22 @@
-using Content.Goobstation.Shared.Bible;
-using Content.Goobstation.Shared.Religion; // Goobstation - Bible
-using Content.Server.Polymorph.Systems;
-using Content.Server.Popups;
-using Content.Shared._DV.CosmicCult;
+using Content.Shared.Polymorph.Systems;
+using Content.Shared.Popups;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._DV.CosmicCult.Components.Examine;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Polymorph;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._DV.CosmicCult.Abilities; // Not predicting ts because of evil and nefarious PolymorphSystem
+namespace Content.Shared._DV.CosmicCult.Abilities;
 
 public sealed class CosmicLapseSystem : EntitySystem
 {
-    [Dependency] private readonly CosmicCultSystem _cult = default!;
+    [Dependency] private readonly SharedCosmicCultSystem _cult = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly DivineInterventionSystem _divineIntervention = default!;
+    [Dependency] private readonly SharedPolymorphSystem _polymorph = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private static readonly ProtoId<PolymorphPrototype> HumanLapse = "CosmicLapseMobHuman";
 
@@ -29,25 +27,28 @@ public sealed class CosmicLapseSystem : EntitySystem
         SubscribeLocalEvent<CosmicCultComponent, EventCosmicLapse>(OnCosmicLapse);
     }
 
-    private void OnCosmicLapse(Entity<CosmicCultComponent> uid, ref EventCosmicLapse action)
+    private void OnCosmicLapse(Entity<CosmicCultComponent> ent, ref EventCosmicLapse action)
     {
         if (action.Handled
             || HasComp<CosmicBlankComponent>(action.Target))
         {
-            _popup.PopupEntity(Loc.GetString("cosmicability-generic-fail"), uid, uid);
+            _popup.PopupClient(Loc.GetString("cosmicability-generic-fail"), ent, ent);
             return;
         }
 
-        if (_divineIntervention.TouchSpellDenied(action.Target))
-            return;
+        var evt = new CosmicAbilityAttemptEvent(action.Target, PlayEffects: true);
+        RaiseLocalEvent(ref evt);
+        if (evt.Cancelled) return;
 
         action.Handled = true;
         var tgtpos = Transform(action.Target).Coordinates;
-        Spawn(uid.Comp.LapseVFX, tgtpos);
-        _popup.PopupEntity(Loc.GetString("cosmicability-lapse-success",
+        if (_net.IsServer) // Predicted spawn looks bad with animations
+            PredictedSpawnAtPosition(ent.Comp.LapseVFX, tgtpos);
+
+        _popup.PopupClient(Loc.GetString("cosmicability-lapse-success",
             ("target", Identity.Entity(action.Target, EntityManager))),
-            uid,
-            uid);
+            ent,
+            ent);
         var species = Comp<HumanoidProfileComponent>(action.Target).Species;
         var polymorphId = "CosmicLapseMob" + species;
 
@@ -56,6 +57,6 @@ public sealed class CosmicLapseSystem : EntitySystem
         else
             _polymorph.PolymorphEntity(action.Target, HumanLapse);
 
-        _cult.MalignEcho(uid);
+        _cult.MalignEcho(ent);
     }
 }

@@ -47,9 +47,6 @@ public sealed partial class InfluenceButtonContainer : BoxContainer
                 break;
 
             case InfluenceUIBox.InfluenceUIBoxState.UnlockedAndNotEnoughEntropy:
-                DetailButton.Modulate = Color.Gray;
-                break;
-
             case InfluenceUIBox.InfluenceUIBoxState.Locked:
                 DetailButton.Modulate = Color.Gray;
                 break;

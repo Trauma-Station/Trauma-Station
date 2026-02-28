@@ -29,7 +29,7 @@ public sealed class CosmicStrideSystem : EntitySystem
             if (_timing.CurTime < comp.Expiry)
                 continue;
 
-            RemComp(uid, comp);
+            RemCompDeferred(uid, comp);
         }
     }
 

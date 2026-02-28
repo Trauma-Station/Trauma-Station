@@ -124,10 +124,9 @@ public sealed class CosmicBlankSystem : EntitySystem
             return;
 
         if (!TryComp<MindContainerComponent>(target, out var mindContainer)
-            || !mindContainer.HasMind)
+            || mindContainer.Mind is not { } mindEnt)
             return;
 
-        var mindEnt = mindContainer.Mind.Value;
         var mind = Comp<MindComponent>(mindEnt);
         mind.PreventGhosting = true;
 

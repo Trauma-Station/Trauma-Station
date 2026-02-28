@@ -1,4 +1,5 @@
 - type: emoteSounds
+  parent: BaseMobEmotes
   id: CosmicEmotes
   params:
     variation: 0.125
@@ -17,21 +18,6 @@
       path: /Audio/_DV/CosmicCult/Emotes/cosmic_gasp.ogg
     DefaultDeathgasp:
       path: /Audio/_DV/CosmicCult/Emotes/cosmic_ded.ogg
-    # Whatever the fuck allat is
-    Weh:
-      collection: Weh
-    Hew:
-      collection: Hew
-    Honk:
-      collection: BikeHorn
-    CatMeow:
-      collection: CatMeows
-    CatHisses:
-      collection: CatHisses
-    MonkeyScreeches:
-      collection: MonkeyScreeches
-    RobotBeep:
-      collection: RobotBeeps
 
 - type: speechSounds
   id: CosmicSpeech
