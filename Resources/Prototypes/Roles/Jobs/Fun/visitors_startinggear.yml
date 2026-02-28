@@ -1073,7 +1073,7 @@
   inhand:
   #- ClothingMaskItalianMoustache         #Chefs now start with the space italian implant.
   - DrinkWineBottleFull
-  - IngredientsBeacon # Traumastation
+  - IngredientsBeacon #Trauma
 
 - type: startingGear
   id: VisitorChefAlt

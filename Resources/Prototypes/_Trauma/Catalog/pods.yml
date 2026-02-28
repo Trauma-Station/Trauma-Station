@@ -54,19 +54,14 @@
   components:
   - type: SpawnTableOnDespawn
     table: !type:AllSelector
+      roll: 3
       children:
       - id: FoodCarrot
-        amount: 3
       - id: FoodChiliPepper
-        amount: 3
       - id: FoodTomato
-        amount: 3
       - id: FoodPotato
-        amount: 3
       - id: FoodCorn
-        amount: 3
       - id: FoodCabbage
-        amount: 3
 
 - type: entity
   id: SpawnIngredientsFruits
@@ -76,18 +71,12 @@
   components:
   - type: SpawnTableOnDespawn
     table: !type:AllSelector
+      roll: 3
       children:
       - id: FoodBerries
-        amount: 3
       - id: FoodGrape
-        amount: 3
       - id: FoodCherry
-        amount: 3
       - id: FoodLemon
-        amount: 3
       - id: FoodApple
-        amount: 3
       - id: FoodOrange
-        amount: 3
       - id: FoodBanana
-        amount: 3
