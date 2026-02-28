@@ -30,7 +30,6 @@ namespace Content.Server._White.Xenomorphs.Evolution;
 public sealed class XenomorphEvolutionSystem : EntitySystem
 {
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
@@ -171,7 +170,7 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
     {
         if (evolveTo == null
             || !_protoManager.TryIndex(evolveTo, out var xenomorphPrototype)
-            || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, _componentFactory)) // Goobstation
+            || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, Factory)) // Goobstation
             return false;
 
         // Prevent evolving into Queen if a living Queen already exists
