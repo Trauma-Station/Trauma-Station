@@ -63,6 +63,23 @@
     mask: /Textures/_DV/CosmicCult/LightMasks/cosmic.png
     autoRot: true
     netsync: false
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour
+        id: radiating
+        interpolate: Linear
+        maxDuration: 2.0
+        startValue: 3.0
+        endValue: 2.0
+        isLooped: true
+        reverseWhenFinished: true
+      - !type:PulseBehaviour
+        id: blinking
+        interpolate: Nearest
+        maxDuration: 1.0
+        startValue: 0.1
+        endValue: 2.0
+        isLooped: true
   - type: Battery
     maxCharge: 100
     startingCharge: 100
