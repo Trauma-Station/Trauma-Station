@@ -1,25 +1,24 @@
 using System.Linq;
+using Content.Server._White.Xenomorphs.Queen;
 using Content.Server.Actions;
 using Content.Server.Administration.Logs;
 using Content.Server.DoAfter;
 using Content.Server.Jittering;
 using Content.Server.Mind;
 using Content.Server.Popups;
+using Content.Shared._White.Xenomorphs;
+using Content.Shared._White.Xenomorphs.Caste;
+using Content.Shared._White.Xenomorphs.Xenomorph;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
-using Content.Shared.Standing;
 using Content.Shared._White.RadialSelector;
-using Content.Shared._White.Xenomorphs;
-using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.Shared.Standing;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Content.Server._White.Xenomorphs.Queen;
-using Content.Shared._White.Xenomorphs.Caste;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server._White.Xenomorphs.Evolution;
 
@@ -158,7 +157,7 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
             || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, Factory)) // Goobstation
             return false;
 
-        if (xenomorph.Caste == QueenCaste && _queen.IsQueenAlive(uid))
+        if (xenomorph.Caste == QueenCaste && _queen.IsQueenAlive())
         {
             _popup.PopupEntity(
                 Loc.GetString("xenomorphs-evolution-no-cast-slot", ("caste", QueenCaste)), uid, uid);
