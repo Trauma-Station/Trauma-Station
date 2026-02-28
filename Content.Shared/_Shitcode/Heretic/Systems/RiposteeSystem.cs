@@ -198,9 +198,6 @@ public sealed class RiposteeSystem : EntitySystem
         var nextAttack = weapon.Comp.NextAttack;
         weapon.Comp.NextAttack = TimeSpan.Zero;
 
-        RaiseLocalEvent(user, new SaveLastAttacksEvent());
-        RaiseLocalEvent(user, new ResetLastAttacksEvent(false));
-
         var inCombat = _combatMode.IsInCombatMode(user);
         if (!inCombat)
             _combatMode.SetInCombatMode(user, true);
@@ -217,8 +214,6 @@ public sealed class RiposteeSystem : EntitySystem
 
         if (!inCombat)
             _combatMode.SetInCombatMode(user, false);
-
-        RaiseLocalEvent(user, new LoadLastAttacksEvent());
 
         weapon.Comp.NextAttack = nextAttack;
         Dirty(weapon);

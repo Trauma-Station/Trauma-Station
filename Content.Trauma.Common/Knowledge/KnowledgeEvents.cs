@@ -80,4 +80,4 @@ public record struct CanDoSneakAttackEvent(bool CanSneakAttack);
 /// Called in order to invoke damage modifiers for martial arts. Call on the art itself.
 /// </summary>
 [ByRefEvent]
-public record struct CalculateMartialArtDamageModifiersEvent();
+public record struct CalculateMartialArtDamageModifiersEvent(EntityUid user);

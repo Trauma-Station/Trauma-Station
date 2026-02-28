@@ -380,31 +380,14 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         _flash.Flash(args.Target, null, null, TimeSpan.FromSeconds(2f), 0f, false, true, stunDuration: TimeSpan.FromSeconds(1f));
     }
 
-    private float GetFleshHealMultiplier(Entity<MartialArtModifiersComponent> ent)
-    {
-        var mult = 1f;
-        const MartialArtModifierType type = MartialArtModifierType.Healing;
-        foreach (var data in ent.Comp.Data.Where(x => (x.Type & type) != 0))
-        {
-            mult *= data.Multiplier;
-        }
-
-        foreach (var (_, limit) in ent.Comp.MinMaxModifiersMultipliers.Where(x => (x.Key & type) != 0))
-        {
-            mult = Math.Clamp(mult, limit.X, limit.Y);
-        }
-
-        return mult;
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
         var bloodQuery = GetEntityQuery<BloodstreamComponent>();
 
-        var fleshQuery = EntityQueryEnumerator<FleshPassiveComponent, MartialArtModifiersComponent, DamageableComponent>();
-        while (fleshQuery.MoveNext(out var uid, out var flesh, out var modifiers, out var dmg))
+        var fleshQuery = EntityQueryEnumerator<FleshPassiveComponent, DamageableComponent>();
+        while (fleshQuery.MoveNext(out var uid, out var flesh, out var dmg))
         {
             flesh.Accumulator += frameTime;
 
@@ -413,9 +396,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
             flesh.Accumulator = 0f;
 
-            var mult = GetFleshHealMultiplier((uid, modifiers));
-
-            var realMult = mult - 1;
+            var realMult = 2;
 
             if (realMult <= 0f)
                 continue;
