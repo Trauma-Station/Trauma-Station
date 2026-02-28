@@ -5,13 +5,8 @@
   description: Summon ingredients to help you get started cooking
   components:
   - type: Sprite
-    sprite: Objects/Devices/door_remote.rsi
-    layers:
-    - state: door_remotebase
-    - state: door_remotelightscolour
-      color: "#58c800"
-    - state: door_remotescreencolour
-      color: "#3a7231"
+    sprite: _Trauma/Objects/Revs/droppodbeacon.rsi
+    state: icon
   - type: UserInterface
     interfaces:
       enum.RadialSelectorUiKey.Key:

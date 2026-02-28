@@ -65,7 +65,6 @@
         - id: FoodCorn
         - id: FoodCabbage
 
-
 - type: entity
   id: SpawnIngredientsFruits
   categories: [ HideSpawnMenu ]
