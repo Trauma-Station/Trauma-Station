@@ -296,6 +296,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         RaiseLocalEvent(uid, ref ev);
         if (user != uid) // Goobstation
             RaiseLocalEvent(user, ref ev);
+
         // <Trauma>
         AdjustAttackRate(user, ref ev);
         // </Trauma>
@@ -687,7 +688,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // <Trauma>
         HeavyAttackMiss(user, out var melee, ref entities);
         // </Trauma>
-
         if (entities.Count == 0)
         {
             if (meleeUid == user)
@@ -998,7 +998,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (DisarmMiss(user, out var melee))
             return true;
         // </Trauma>
-
         if (user == target) // Goobstation
         {
             _meleeSound.PlaySwingSound(user, meleeUid, component);

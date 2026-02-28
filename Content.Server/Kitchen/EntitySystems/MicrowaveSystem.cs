@@ -77,6 +77,7 @@ namespace Content.Server.Kitchen.EntitySystems
 
         // <Trauma>
         private static readonly EntProtoId MartialArtCQCChef = "MartialArtCQCChef";
+        private static readonly EntProtoId CookingKnowledge = "CookingKnowledge";
         // <Trauma>
 
         public override void Initialize()
@@ -673,6 +674,8 @@ namespace Content.Server.Kitchen.EntitySystems
                     {
                         var ev = new AddExperienceEvent(MartialArtCQCChef, active.PortionedRecipe.Item2);
                         RaiseLocalEvent(chef, ref ev);
+                        var evCooking = new AddExperienceEvent(CookingKnowledge, active.PortionedRecipe.Item2);
+                        RaiseLocalEvent(chef, ref evCooking);
                         microwave.LastKnownKnowledgeHolder = null;
                     }
                     // </Trauma>

@@ -107,6 +107,16 @@ public sealed partial class MartialArtsSystem : EntitySystem
                 Dirty(ent, multiplier);
             }
         }
+
+        var sneakAttackQuery = EntityQueryEnumerator<SneakAttackComponent>();
+        while (sneakAttackQuery.MoveNext(out var ent, out var sneakAttack))
+        {
+            if (sneakAttack is { } && sneakAttack.IsFound)
+            {
+                if (_timing.CurTime >= sneakAttack.FramesTillHidden)
+                    sneakAttack.IsFound = false;
+            }
+        }
     }
 
     #region Event Methods

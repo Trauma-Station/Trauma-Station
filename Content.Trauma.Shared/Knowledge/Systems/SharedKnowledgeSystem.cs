@@ -78,14 +78,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 if (RollForLevelUp(knowledgeUnit, (ent, comp)))
                     break;
             }
-
-            if (GetActiveMartialArt(ent) is { } martialArts
-                && TryComp<SneakAttackComponent>(martialArts, out var sneakAttack)
-                && sneakAttack.IsFound)
-            {
-                if (_timing.CurTime >= sneakAttack.FramesTillHidden)
-                    sneakAttack.IsFound = false;
-            }
         }
         _lastUpdateTick = _timing.CurTime;
     }
