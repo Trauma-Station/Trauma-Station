@@ -34,6 +34,7 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<MeleeHitEvent>(OnMeleeHit);
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeStaminaDamageEvent>(OnStaminaTakeDamage);
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeDamageChangedEvent>(OnTakeDamage);
+        SubscribeLocalEvent<KnowledgeHolderComponent, CheckGrabOverridesEvent>(CheckGrabStageOverridePass);
 
         SubscribeNetworkEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
     }
@@ -128,35 +129,12 @@ public abstract partial class SharedKnowledgeSystem
         if (TryGetKnowledgeUnit(ent, StrengthKnowledge) is { } strength)
         {
             bonus += 3 * SharpCurve(strength);
-            args.ModifiersList.Add(new DamageModifierSet()
-            {
-                FlatReduction = new Dictionary<string, float>()
-                {
-                    ["Brute"] = -5 * SharpCurve(strength) * Math.Min(GetMastery(strength) - 3, 0) * Math.Min(GetMastery(strength) - 3, 0)
-                }
-            }); //Provide Armor Piercing at high strength
         }
-
-        if (TryGetKnowledgeUnit(ent, MeleeKnowledge) is { } melee)
-        {
-            args.ModifiersList.Add(new DamageModifierSet()
-            {
-                FlatReduction = new Dictionary<string, float>()
-                {
-                    ["Brute"] = -3 * SharpCurve(melee) * Math.Min(GetMastery(melee) - 3, 0) * Math.Min(GetMastery(melee) - 3, 0)
-                }
-            }); //Provide Armor Piercing at high melee
-        }
-
 
         if (GetActiveMartialArt(ent) is { } martialArt)
         {
-            if (TryComp<SneakAttackComponent>(martialArt, out var sneakAttack))
-            {
-                sneakAttack.FramesTillHidden = _timing.CurTime + TimeSpan.FromSeconds(sneakAttack.SecondsTillHidden);
-                sneakAttack.IsFound = true;
-                Dirty(martialArt, sneakAttack);
-            }
+            var evSneakAttack = new InvokeSneakAttackSurprisedEvent();
+            RaiseLocalEvent(martialArt, evSneakAttack);
             if (TryComp<SneakAttackComponent>(martialArt, out var speedArt))
             {
                 speedArt.FramesTillHidden = _timing.CurTime + TimeSpan.FromSeconds(speedArt.SecondsTillHidden);
@@ -196,11 +174,10 @@ public abstract partial class SharedKnowledgeSystem
             var ev = new AddExperienceEvent(ToughnessKnowledge, Math.Min((int) args.Damage.GetTotal() / 5, 10));
             RaiseLocalEvent(ent, ref ev);
         }
-        if (GetActiveMartialArt(ent) is { } martialArt && TryComp<SneakAttackComponent>(martialArt, out var sneakAttack))
+        if (GetActiveMartialArt(ent) is { } martialArt)
         {
-            sneakAttack.FramesTillHidden = _timing.CurTime;
-            sneakAttack.IsFound = true;
-            Dirty(martialArt, sneakAttack);
+            var evSneakAttack = new InvokeSneakAttackSurprisedEvent();
+            RaiseLocalEvent(martialArt, evSneakAttack);
         }
     }
 
@@ -210,18 +187,31 @@ public abstract partial class SharedKnowledgeSystem
             return;
 
         var knowledgeUid = GetEntity(ev.Knowledge);
+        string? proto = null;
+        if (knowledgeUid is { } notNullKnowledge)
+            proto = Prototype(notNullKnowledge)?.ID;
 
-        if (TryGetKnowledgeEntity(player) is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComp))
+        if (knowledgeUid is { } && proto is { } && TryGetKnowledgeUnit(player, proto) is { } trueKnowledge && trueKnowledge != knowledgeUid) // Anti-cheat line, if the client is trying to set a martial art they don't actually have and not null, ignore it.
             return;
 
-        knowledgeContainerComp.MartialArtSkillUid = knowledgeUid;
-        Dirty(knowledgeEnt, knowledgeContainerComp);
+        if (!TryComp<KnowledgeHolderComponent>(player, out var knowledgeHolder) || TryGetKnowledgeContainer((player, knowledgeHolder)) is not { } knowledgeEnt)
+            return;
+
+        knowledgeEnt.Comp.MartialArtSkillUid = knowledgeUid;
+        Dirty(knowledgeEnt);
     }
 
     private EntityUid? GetActiveMartialArt(EntityUid target)
     {
-        if (TryGetKnowledgeEntity(target) is { } brainActual && TryComp<KnowledgeContainerComponent>(brainActual, out var knowledgeContainerComp) && knowledgeContainerComp.MartialArtSkillUid is { } martialArt)
+        if (TryGetKnowledgeEntity(target) is { } brain && TryComp<KnowledgeContainerComponent>(brain, out var knowledgeContainerComp) && knowledgeContainerComp.MartialArtSkillUid is { } martialArt)
             return martialArt;
         return null;
+    }
+
+    private void CheckGrabStageOverridePass(Entity<KnowledgeHolderComponent> ent, ref CheckGrabOverridesEvent args)
+    {
+        var martialArt = GetActiveMartialArt(ent);
+        if (martialArt is { } martialArtSkillUid)
+            RaiseLocalEvent(martialArtSkillUid, ref args);
     }
 }

@@ -1,19 +1,28 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Common.MartialArts;
 
+/// <summary>
+/// Sneak attack component for ninja stuff.
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SneakAttackComponent : Component
 {
+    /// <summary>
+    /// Indicates whether the player has been found.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool IsFound = false;
 
-    [DataField, AutoNetworkedField]
-    public int SecondsTillHidden = 2;
+    /// <summary>
+    /// Cooldown time before the player can hide again after being found.
+    /// </summary>
+    [DataField(required: true), AutoNetworkedField]
+    public int SecondsTillHidden;
 
+    /// <summary>
+    /// Timestamp until player is hidden again.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan FramesTillHidden = TimeSpan.FromSeconds(0);
 }

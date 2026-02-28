@@ -9,7 +9,7 @@ namespace Content.Trauma.Common.Knowledge.Components;
 /// Stores information about a set of knowledge units, assigned
 /// to a dummy entity that is parented to some entity with <see cref="KnowledgeContainerComponent"/>, usually a brain.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, EntityCategory("Knowledge")]
 public sealed partial class KnowledgeComponent : Component
 {
     /// <summary>

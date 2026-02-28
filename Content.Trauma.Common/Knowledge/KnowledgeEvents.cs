@@ -51,3 +51,9 @@ public record struct UpdateItemQualityEvent(EntityUid User);
 /// </summary>
 [ByRefEvent]
 public record struct InvokeArmorQualityEvent(float Coefficient);
+
+/// <summary>
+/// Called in order to invoke sneak attack failure.
+/// </summary>
+[ByRefEvent]
+public record struct InvokeSneakAttackSurprisedEvent();

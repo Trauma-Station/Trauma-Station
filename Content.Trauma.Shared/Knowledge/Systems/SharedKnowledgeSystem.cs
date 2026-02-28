@@ -38,6 +38,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(1);
     private float _learnChance = 0.2f;
     private System.Random _seed = new System.Random(0);
+    private EntityQuery<KnowledgeHolderComponent> _holderQuery;
+    private EntityQuery<KnowledgeContainerComponent> _containerQuery;
+    private EntityQuery<KnowledgeComponent> _knowledgeQuery;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -56,6 +59,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         //Experience Methods
         SubscribeLocalEvent<KnowledgeHolderComponent, AddExperienceEvent>(OnAddExperienceEvent);
+
+        _holderQuery = GetEntityQuery<KnowledgeHolderComponent>();
+        _containerQuery = GetEntityQuery<KnowledgeContainerComponent>();
+        _knowledgeQuery = GetEntityQuery<KnowledgeComponent>();
     }
 
     public override void Update(float frameTime)
@@ -307,11 +314,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent))
             return knowledgeEnt;
 
-        var ent = TryGetKnowledgeContainer((target, holderComponent));
-        Container? container = null;
-
-        if (ent is not { } entVerified)
+        if (TryGetKnowledgeContainer((target, holderComponent)) is not { } entVerified)
             return null;
+
+        Container? container = null;
 
         container = EnsureContainer(entVerified);
 
@@ -440,10 +446,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </returns>
     public override Entity<KnowledgeComponent>? TryGetKnowledgeUnit(EntityUid target, EntProtoId knowledgeUnit)
     {
-        if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent) || TryGetKnowledgeEntity((target, holderComponent)) is not { } ent || !TryComp<KnowledgeContainerComponent>(ent, out var comp))
+        if (!_holderQuery.TryComp(target, out var holderComponent) || TryGetKnowledgeContainer((target, holderComponent)) is not { } ent)
             return null;
 
-        if (comp.KnowledgeContainerIDs.TryGetValue(knowledgeUnit, out var knowledge) && TryComp<KnowledgeComponent>(knowledge, out var knowledgeComponent))
+        if (ent.Comp.KnowledgeContainerIDs.TryGetValue(knowledgeUnit, out var knowledge) && _knowledgeQuery.TryComp(knowledge, out var knowledgeComponent))
             return (knowledge, knowledgeComponent);
         else
             return null;
@@ -476,12 +482,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent))
             return null;
 
-        var ent = TryGetKnowledgeContainer((target, holderComponent));
+        if (TryGetKnowledgeContainer((target, holderComponent)) is not { } entVerified)
+            return null;
 
         Container? container = null;
-
-        if (ent is not { } entVerified)
-            return null;
 
         container = EnsureContainer(entVerified);
 
@@ -503,11 +507,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (!TryComp<KnowledgeHolderComponent>(target, out var holderComponent))
             return knowledgeEnts;
 
-        var ent = TryGetKnowledgeContainer((target, holderComponent));
-        Container? container = null;
-
-        if (ent is not { } entVerified)
+        if (TryGetKnowledgeContainer((target, holderComponent)) is not { } entVerified)
             return null;
+
+        Container? container = null;
 
         container = EnsureContainer(entVerified);
 
@@ -545,6 +548,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     }
 
     public override Entity<KnowledgeContainerComponent>? TryGetKnowledgeContainer(Entity<KnowledgeHolderComponent> ent)
+    {
+        if (ent.Comp.KnowledgeEntity is { } knowledgeEnt && TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainer))
+            return (knowledgeEnt, knowledgeContainer);
+        return SearchForKnowledgeContainer(ent);
+    }
+
+    public Entity<KnowledgeContainerComponent>? SearchForKnowledgeContainer(Entity<KnowledgeHolderComponent> ent)
     {
         if (TryComp<BorgChassisComponent>(ent, out var borgComp))
         {

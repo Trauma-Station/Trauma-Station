@@ -145,7 +145,7 @@ public partial class MartialArtsSystem
             if (TryComp<MartialArtsKnowledgeComponent>(uid, out var martialArtsComp) && !martialArtsComp.Blocked && (!_mobState.IsDead(args.Target) && _mobState.IsCritical(args.Target)))
             {
                 var prototypeId = Prototype(uid)?.ID;
-                if (prototypeId is {})
+                if (prototypeId is { })
                 {
                     var ev = new AddExperienceEvent(prototypeId, 1);
                     RaiseLocalEvent(args.Performer, ref ev);

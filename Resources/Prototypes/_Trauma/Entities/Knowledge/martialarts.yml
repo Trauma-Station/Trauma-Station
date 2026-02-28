@@ -49,6 +49,8 @@
     - CircleKick
     - SpinKick
     - KickUp
+  - type: FastSpeed
+    speedModifier: 2
 
 - type: entity
   parent: BaseMartialArtsKnowledge
@@ -71,6 +73,7 @@
     - DirtyKill
     - NinjutsuTakedown
   - type: SneakAttack
+    secondsTillHidden: 2
 
 - type: entity
   parent: BaseMartialArtsKnowledge

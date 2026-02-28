@@ -67,3 +67,5 @@ language-curse-pain = You hear bad language!
 
 trauma-knowledge-title = Knowledge Tab
 trauma-character-title = Character Tab
+
+entity-category-name-knowledge = Knowledge

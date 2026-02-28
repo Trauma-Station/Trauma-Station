@@ -8,6 +8,8 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
 using Robust.Shared.Prototypes;
@@ -20,11 +22,8 @@ namespace Content.Trauma.Shared.MartialArts;
 /// </summary>
 public sealed partial class MartialArtsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
 
@@ -35,8 +34,8 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
         SubscribeLocalEvent<GrabStagesOverrideComponent, CheckGrabOverridesEvent>(CheckGrabStageOverride);
 
-        SubscribeLocalEvent<MartialArtModifiersComponent, GetMeleeAttackRateEvent>(OnGetMeleeAttackRate);
         SubscribeLocalEvent<MartialArtModifiersComponent, RefreshMovementSpeedModifiersEvent>(OnGetMovespeed);
+        SubscribeLocalEvent<SneakAttackComponent, InvokeSneakAttackSurprisedEvent>(SneakAttackSurprise);
     }
 
     public override void Update(float frameTime)
@@ -117,6 +116,23 @@ public sealed partial class MartialArtsSystem : EntitySystem
                     sneakAttack.IsFound = false;
             }
         }
+
+        var fastDamageQuery = EntityQueryEnumerator<SneakAttackComponent>();
+        while (fastDamageQuery.MoveNext(out var ent, out var sneakAttack))
+        {
+            if (sneakAttack is { } && sneakAttack.IsFound)
+            {
+                if (_timing.CurTime >= sneakAttack.FramesTillHidden)
+                    sneakAttack.IsFound = false;
+            }
+        }
+    }
+
+    private void SneakAttackSurprise(Entity<SneakAttackComponent> ent, ref InvokeSneakAttackSurprisedEvent args)
+    {
+        ent.Comp.FramesTillHidden = _timing.CurTime + TimeSpan.FromSeconds(ent.Comp.SecondsTillHidden);
+        ent.Comp.IsFound = true;
+        Dirty(ent);
     }
 
     #region Event Methods
@@ -125,26 +141,6 @@ public sealed partial class MartialArtsSystem : EntitySystem
     {
         var (mult, _) = GetMultiplierModifier(ent, MartialArtModifierType.MoveSpeed, null);
         args.ModifySpeed(mult, mult);
-    }
-
-    private DamageModifierSet GetDamageModifierSet(DamageSpecifier specifier, float multiplier, float modifier)
-    {
-        return new()
-        {
-            Coefficients = specifier.DamageDict
-                .Select(x => KeyValuePair.Create(x.Key, multiplier))
-                .ToDictionary(),
-            FlatReduction = specifier.DamageDict
-                .Select(x => KeyValuePair.Create(x.Key, -modifier)) // Minus mod because it subtracts values from damage
-                .ToDictionary(),
-        };
-    }
-
-    private void OnGetMeleeAttackRate(Entity<MartialArtModifiersComponent> ent, ref GetMeleeAttackRateEvent args)
-    {
-        var (mult, mod) = GetMultiplierModifier(ent, MartialArtModifierType.AttackRate, args.Weapon != args.User);
-        args.Multipliers *= mult;
-        args.Rate += mod;
     }
 
     private (float mult, float mod) GetMultiplierModifier(Entity<MartialArtModifiersComponent> ent,
@@ -186,65 +182,6 @@ public sealed partial class MartialArtsSystem : EntitySystem
             args.Stage = ent.Comp.StartingStage;
     }
 
-    private void ComboPopup(EntityUid user, EntityUid target, string comboName)
-    {
-        var userName = Identity.Entity(user, EntityManager);
-        var targetName = Identity.Entity(target, EntityManager);
-        _popup.PopupClient(Loc.GetString("martial-arts-action-sender",
-            ("name", targetName),
-            ("move", comboName)),
-            user,
-            user);
-        _popup.PopupClient(Loc.GetString("martial-arts-action-receiver",
-            ("name", userName),
-            ("move", comboName)),
-            target,
-            target);
-    }
-
-    #endregion
-
-    #region Helper Methods
-
-    private bool TryUseMartialArt(Entity<CanPerformComboComponent> ent,
-        ComboPrototype proto,
-        out EntityUid target,
-        out bool downed)
-    {
-        target = EntityUid.Invalid;
-        downed = false;
-
-        if (ent.Comp.CurrentTarget == null)
-            return false;
-
-        downed = _standing.IsDown(ent.Comp.CurrentTarget.Value);
-        target = ent.Comp.CurrentTarget.Value;
-
-        return true;
-    }
-
-    private void DoDamage(EntityUid ent,
-        EntityUid target,
-        string damageType,
-        float damageAmount,
-        out DamageSpecifier damage,
-        TargetBodyPart? targetBodyPart = null)
-    {
-        damage = new DamageSpecifier();
-        if (!TryComp<TargetingComponent>(ent, out var targetingComponent))
-            return;
-        damage.DamageDict.Add(damageType, damageAmount);
-        if (TryComp(ent, out MartialArtModifiersComponent? modifiers))
-        {
-            var (mult, mod) = GetMultiplierModifier((ent, modifiers), MartialArtModifierType.Damage, false);
-            var modifierSet = GetDamageModifierSet(damage, mult, mod);
-            damage = DamageSpecifier.ApplyModifierSet(damage, modifierSet);
-        }
-        _damageable.TryChangeDamage(target,
-            damage,
-            origin: ent,
-            targetPart: targetBodyPart ?? targetingComponent.Target);
-    }
 
     #endregion
 }
