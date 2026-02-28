@@ -2,6 +2,7 @@ using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._DV.CosmicCult.Prototypes;
 using Robust.Client.UserInterface;
+using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._DV.CosmicCult.UI.CosmicShop;
@@ -10,6 +11,7 @@ public sealed class CosmicShopBoundUserInterface(EntityUid owner, Enum uiKey) : 
 {
     [ViewVariables] private CosmicShopMenu? _menu;
     [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
 
     protected override void Open()
     {
@@ -25,7 +27,7 @@ public sealed class CosmicShopBoundUserInterface(EntityUid owner, Enum uiKey) : 
     {
         base.UpdateState(state);
         if (state is not CosmicShopBuiState buiState
-        || !_entMan.TryGetComponent<CosmicCultComponent>(buiState.Cultist, out var comp))
+        || !_entMan.TryGetComponent<CosmicCultComponent>(_player.LocalEntity, out var comp))
             return;
 
         _menu?.UpdateState(comp);

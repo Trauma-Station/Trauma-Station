@@ -12,7 +12,6 @@ public enum CosmicShopKey : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class CosmicShopBuiState(EntityUid ent) : BoundUserInterfaceState
+public sealed class CosmicShopBuiState() : BoundUserInterfaceState
 {
-    public EntityUid Cultist = ent;
 }

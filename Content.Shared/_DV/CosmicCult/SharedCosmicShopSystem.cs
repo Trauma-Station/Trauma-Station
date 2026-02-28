@@ -26,7 +26,7 @@ public partial class SharedCosmicShopSystem : EntitySystem
         if (!TryComp<CosmicCultComponent>(args.Actor, out var cultComp))
             return;
 
-        _ui.SetUiState(ent.Owner, CosmicShopKey.Key, new CosmicShopBuiState(ent.Owner));
+        _ui.SetUiState(ent.Owner, CosmicShopKey.Key, new CosmicShopBuiState());
     }
 
     #region UI listeners
@@ -54,7 +54,7 @@ public partial class SharedCosmicShopSystem : EntitySystem
         cultComp.EntropyBudget -= proto.Cost;
         Dirty(args.Actor, cultComp); //force an update to make sure that the client has the correct set of owned abilities
 
-        _ui.SetUiState(ent.Owner, CosmicShopKey.Key, new CosmicShopBuiState(ent.Owner));
+        _ui.SetUiState(ent.Owner, CosmicShopKey.Key, new CosmicShopBuiState());
     }
     #endregion
 

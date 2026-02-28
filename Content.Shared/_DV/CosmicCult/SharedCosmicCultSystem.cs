@@ -209,7 +209,7 @@ public abstract class SharedCosmicCultSystem : EntitySystem
         ent.Comp.EntropyBudget += amount;
         TryLevelUp(ent);
         if (ent.Comp.CosmicShopActionEntity is { } shop)
-            _ui.SetUiState(shop, CosmicShopKey.Key, new CosmicShopBuiState(ent.Owner));
+            _ui.SetUiState(shop, CosmicShopKey.Key, new CosmicShopBuiState());
         return amount;
     }
 
