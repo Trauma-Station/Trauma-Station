@@ -1,8 +1,8 @@
 - type: entity
-  name: ingredients beacon
-  description: Summon ingredients to help you get started cooking
   parent: BaseItem
   id: IngredientsBeacon
+  name: ingredients beacon
+  description: Summon ingredients to help you get started cooking
   components:
   - type: Sprite
     sprite: Objects/Devices/door_remote.rsi
