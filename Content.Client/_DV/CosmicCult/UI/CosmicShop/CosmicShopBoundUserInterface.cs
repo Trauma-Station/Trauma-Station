@@ -9,6 +9,7 @@ namespace Content.Client._DV.CosmicCult.UI.CosmicShop;
 public sealed class CosmicShopBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [ViewVariables] private CosmicShopMenu? _menu;
+    [Dependency] private readonly IEntityManager _entMan = default!;
 
     protected override void Open()
     {
@@ -23,10 +24,11 @@ public sealed class CosmicShopBoundUserInterface(EntityUid owner, Enum uiKey) : 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);
-        if (state is not CosmicShopBuiState buiState)
+        if (state is not CosmicShopBuiState buiState
+        || !_entMan.TryGetComponent<CosmicCultComponent>(buiState.Cultist, out var comp))
             return;
 
-        _menu?.UpdateState(buiState);
+        _menu?.UpdateState(comp);
     }
 
     private void OnInfluenceSelected(ProtoId<InfluencePrototype> selectedInfluence) =>
