@@ -13,11 +13,14 @@ public sealed partial class WoundedSoldierComponent : Component
     public float StaminaHealMultiplier = 0.3f;
 
     [DataField]
+    public float OvertimeDamageThresholdRatio = 0.1f;
+
+    [DataField]
     public DamageSpecifier DamageOverTime = new()
     {
         DamageDict =
         {
-            { "Heat", 3 },
+            { "Heat", 10 },
         },
     };
 

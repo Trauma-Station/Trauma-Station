@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Medical.Common.Targeting;
 using Content.Shared._Goobstation.Wizard.SanguineStrike;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
@@ -34,7 +35,7 @@ public sealed class WoundedSoldierSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<WoundedSoldierComponent, MeleeAttackEvent>(OnAttack);
-        SubscribeLocalEvent<WoundedSoldierComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
+        SubscribeLocalEvent<WoundedSoldierComponent, DamageModifyEvent>(OnDamageModify);
         SubscribeLocalEvent<WoundedSoldierComponent, ExaminedEvent>(OnExamine);
 
         SubscribeLocalEvent<MeleeHitEvent>(OnHit);
@@ -45,7 +46,7 @@ public sealed class WoundedSoldierSystem : EntitySystem
         args.PushMarkup(Loc.GetString(ent.Comp.ExamineLoc, ("ent", Identity.Entity(ent, EntityManager))));
     }
 
-    private void OnBeforeDamageChanged(Entity<WoundedSoldierComponent> ent, ref BeforeDamageChangedEvent args)
+    private void OnDamageModify(Entity<WoundedSoldierComponent> ent, ref DamageModifyEvent args)
     {
         if (!args.Damage.AnyPositive())
             return;
@@ -53,16 +54,11 @@ public sealed class WoundedSoldierSystem : EntitySystem
         if (!_mobState.IsAlive(ent.Owner))
             return;
 
-        if (!_threshold.TryGetThresholdForState(ent.Owner, MobState.SoftCrit, out var threshold))
+        var ratio = GetCritThresholdDamageRatio(ent.Owner);
+        if (ratio == 0f)
             return;
 
-        if (!TryComp<DamageableComponent>(ent, out var damageable))
-            return;
-
-        if (_threshold.CheckVitalDamage(ent, damageable) + args.Damage.GetTotal() < threshold)
-            return;
-
-        args.Cancelled = true;
+        args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, GetResistances(ratio));
     }
 
     private void OnHit(MeleeHitEvent args)
@@ -88,8 +84,10 @@ public sealed class WoundedSoldierSystem : EntitySystem
         if (!TryComp<MeleeWeaponComponent>(args.Weapon, out var weapon) || !TryComp(ent, out DamageableComponent? dmg))
             return;
 
+        var ratio = GetCritThresholdDamageRatio((ent, dmg, null));
+
         var rate = weapon.NextAttack - _timing.CurTime;
-        weapon.NextAttack -= rate - rate / (MathF.Pow(dmg.TotalDamage.Float() * 0.1f, 0.5f) + 1f);
+        weapon.NextAttack -= rate * MathF.Pow(ratio * 0.8f, 0.5f);
         Dirty(args.Weapon, weapon);
     }
 
@@ -107,13 +105,58 @@ public sealed class WoundedSoldierSystem : EntitySystem
 
         _nextDamage = now + _damageInterval;
 
-        var query = EntityQueryEnumerator<WoundedSoldierComponent, MobStateComponent, DamageableComponent>();
-        while (query.MoveNext(out var uid, out var soldier, out var state, out var dmg))
+        var query =
+            EntityQueryEnumerator<WoundedSoldierComponent, MobStateComponent, MobThresholdsComponent,
+                DamageableComponent>();
+        while (query.MoveNext(out var uid, out var soldier, out var state, out var threshold, out var dmg))
         {
             if (state.CurrentState != MobState.Alive)
                 continue;
 
-            _dmg.ChangeDamage((uid, dmg), soldier.DamageOverTime, true, false, targetPart: TargetBodyPart.Vital);
+            var ratio = 1f - GetCritThresholdDamageRatio((uid, dmg, threshold));
+
+            if (ratio < soldier.OvertimeDamageThresholdRatio)
+                continue;
+
+            _dmg.ChangeDamage((uid, dmg),
+                soldier.DamageOverTime * ratio,
+                true,
+                false,
+                targetPart: TargetBodyPart.Vital);
         }
+    }
+
+    /// <summary>
+    /// Returns 0 on full hp and 1 when vital damage equals crit threshold
+    /// </summary>
+    private float GetCritThresholdDamageRatio(Entity<DamageableComponent?, MobThresholdsComponent?> ent)
+    {
+        if (!_threshold.TryGetThresholdForState(ent.Owner, MobState.SoftCrit, out var threshold, ent.Comp2) &&
+            !_threshold.TryGetThresholdForState(ent.Owner, MobState.Critical, out threshold, ent.Comp2) ||
+            threshold <= 0f || !Resolve(ent, ref ent.Comp1, false))
+            return 0f;
+
+        var damage = _threshold.CheckVitalDamage(ent, ent.Comp1);
+
+        return Math.Clamp(damage.Float() / threshold.Value.Float(), 0f, 1f);
+    }
+
+    private DamageModifierSet GetResistances(float damageRatio)
+    {
+        var coef = 1f - 0.65f * damageRatio;
+        return new()
+        {
+            Coefficients =
+            {
+                { "Blunt", coef },
+                { "Slash", coef },
+                { "Piercing", coef },
+                { "Heat", coef },
+                { "Clod", coef },
+                { "Bloodloss", coef },
+                { "Asphyxiation", coef },
+            },
+            IgnoreArmorPierceFlags = (int) PartialArmorPierceFlags.All,
+        };
     }
 }
