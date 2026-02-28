@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Construction;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Trauma.Common.Knowledge;
