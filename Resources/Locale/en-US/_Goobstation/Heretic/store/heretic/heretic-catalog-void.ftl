@@ -107,8 +107,9 @@ knowledge-path-void-s9-desc =
     The ascension ritual of the Path of Void.
     Bring 3 corpses to a transmutation rune in sub-zero temperatures to complete the ritual.
     When completed, grants you Aristocrat's Blessing.
-    A snowstorm is summoned, everything around you will be turned into snow and the air will constantly be frozen. Those nearby will be silenced and frozen even quicker.
+    A snowstorm is summoned, everything around you will be turned into snow and the air will constantly be frozen.
     Lights will shatter when nearby.
-    Lasers will pass through you and bullets will be slowed down at your presense and will avoid hitting you, the effect is greater if you are either walking or lying down.
-    Water, ice and slippery surfaces no slip you.
-    You will also become immune to flames, space, and similar environmental hazards. You gain total freedom of movement in zero-gravity.
+    Water, ice and slippery surfaces no longer slip you.
+    You will also become immune to flames, space, and similar environmental hazards.
+    You now waltz in the air, ignoring gravitation and moving at increased speed.
+    All your path specific abilities have their cooldowns halved.

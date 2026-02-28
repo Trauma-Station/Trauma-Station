@@ -239,13 +239,13 @@ public sealed partial class HereticVoidConduitEvent : InstantActionEvent
 
 // blade (+ upgrades)
 public sealed partial class HereticDanceOfTheBrandEvent : HereticKnowledgeEvent;
-public sealed partial class EventHereticRealignment : InstantActionEvent
+public sealed partial class EventHereticSacraments : InstantActionEvent
 {
     [DataField]
-    public float StaminaRegenRate = -9f; // Same value as default stamina consumption for non humans.
+    public TimeSpan Time = TimeSpan.FromSeconds(6.7);
 
     [DataField]
-    public string StaminaRegenKey = "Realignment";
+    public EntProtoId Status = "SacramentsOfPowerStatusEffect";
 }
 
 public sealed partial class HereticChampionStanceEvent : HereticKnowledgeEvent;
@@ -431,6 +431,24 @@ public sealed partial class EventEmp : InstantActionEvent
 
     [DataField]
     public TimeSpan Duration = TimeSpan.FromSeconds(20f);
+}
+
+public sealed partial class EventHereticRealignment : InstantActionEvent
+{
+    [DataField]
+    public EntProtoId RealignmentStatus = "RealignmentStatusEffect";
+
+    [DataField]
+    public EntProtoId StunStatus = "RealignmentStatusEffect";
+
+    [DataField]
+    public EntProtoId SleepStatus = "StatusEffectForcedSleeping";
+
+    [DataField]
+    public EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
+
+    [DataField]
+    public TimeSpan EffectTime = TimeSpan.FromSeconds(10);
 }
 
 // ascensions

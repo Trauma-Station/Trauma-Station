@@ -182,6 +182,9 @@
       Normal: 21
       Damaged: 11
       Destroyed: 0
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
   - type: OrganComponents
     onAdd:
     - type: FlashImmunity

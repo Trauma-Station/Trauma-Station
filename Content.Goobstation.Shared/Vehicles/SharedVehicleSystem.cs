@@ -239,6 +239,9 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
         if (HasComp<TileMovementComponent>(driver))
             EnsureComp<TileMovementComponent>(vehicle);
+
+        var ev = new VehicleMountedEvent(driver);
+        RaiseLocalEvent(vehicle, ref ev);
     }
 
     private void Dismount(EntityUid driver, EntityUid vehicle)
@@ -248,9 +251,9 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
         vehicleComp.Driver = null;
 
-        if (vehicleComp.ActiveOverlay.HasValue)
+        if (vehicleComp.ActiveOverlay is {} overlay)
         {
-            EntityManager.QueueDeleteEntity(vehicleComp.ActiveOverlay.Value);
+            PredictedQueueDel(overlay);
             vehicleComp.ActiveOverlay = null;
         }
         RemComp<RelayInputMoverComponent>(driver);
@@ -262,8 +265,10 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
         _virtualItem.DeleteInHandsMatching(driver, vehicle);
 
-        if (HasComp<TileMovementComponent>(vehicle))
-            RemComp<TileMovementComponent>(vehicle);
+        RemComp<TileMovementComponent>(vehicle);
+
+        var ev = new VehicleDismountedEvent(driver);
+        RaiseLocalEvent(vehicle, ref ev);
     }
 
     private void OnItemSlotEject(EntityUid uid, VehicleComponent comp, ref ItemSlotEjectAttemptEvent args)
@@ -303,3 +308,15 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         args.Entities.Add(driver.Value);
     }
 }
+
+/// <summary>
+/// Event raised on the vehicle after it can be driven (keys in and buckled)
+/// </summary>
+[ByRefEvent]
+public record struct VehicleMountedEvent(EntityUid Driver);
+
+/// <summary>
+/// Event raised on the vehicle after it can no longer be driven (unbuckled, keys removed, etc)
+/// </summary>
+[ByRefEvent]
+public record struct VehicleDismountedEvent(EntityUid Driver);

@@ -25,3 +25,26 @@
   name: alerted
   components:
   - type: CarvingAlertedStatusEffect
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: SacramentsOfPowerStatusEffect
+  name: sacraments of power
+  components:
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: SacramentsOfPower
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: RealignmentStatusEffect
+  name: realignment
+  components:
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: Realignment
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: BlockProtectiveBladeShootStatusEffect
+  name: block protective blades shoot

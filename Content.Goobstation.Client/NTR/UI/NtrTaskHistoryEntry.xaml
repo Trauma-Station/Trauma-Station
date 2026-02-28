@@ -15,8 +15,8 @@
                     <RichTextLabel Name="IdLabel" HorizontalAlignment="Right" />
                 </BoxContainer>
             </BoxContainer>
-            <customControls:HSeparator Margin="5 10 5 10"/>
             <RichTextLabel Name="NoticeLabel" />
+            <customControls:HSeparator Margin="5 10 5 10"/>
         </BoxContainer>
     </PanelContainer>
 </BoxContainer>

@@ -1,0 +1,32 @@
+# where you put the maints chem reactions for tiders, greytide worldwide
+- type: reaction
+  id: NitratedSlurryMold
+  reactants:
+    Mold:
+      amount: 1
+    Water:
+      amount: 1
+  products:
+    NitratedSlurry: 2
+
+- type: reaction
+  id: NitratedSlurryRot
+  reactants:
+    GastroToxin:
+      amount: 1
+    Water:
+      amount: 1
+  products:
+    NitratedSlurry: 2
+
+- type: reaction
+  id: SaltpeterPrimitive
+  minTemp: 370
+  reactants:
+    NitratedSlurry:
+      amount: 1
+    Potash:
+      amount: 1
+  products:
+    Saltpeter: 2
+    CalciumCarbonate: 1

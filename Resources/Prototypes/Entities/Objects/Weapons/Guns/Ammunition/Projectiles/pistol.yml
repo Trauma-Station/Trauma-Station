@@ -28,7 +28,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseBullet
+  parent: BaseBulletKinetic # Trauma
   id: BulletPistol
   categories: [ HideSpawnMenu ]
   name: bullet (.35 auto)
@@ -50,7 +50,7 @@
         Blunt: 2
 
 - type: entity
-  parent: BaseBulletIncendiary
+  parent: [BaseBulletIncendiary, BaseBulletKinetic] # Trauma
   id: BulletPistolIncendiary
   categories: [ HideSpawnMenu ]
   name: bullet (.35 auto incendiary)
@@ -62,7 +62,7 @@
         Heat: 4
 
 - type: entity
-  parent: BaseBulletUranium
+  parent: [BaseBulletUranium, BaseBulletKinetic] # Trauma
   id: BulletPistolUranium
   categories: [ HideSpawnMenu ]
   name: bullet (.35 auto uranium)

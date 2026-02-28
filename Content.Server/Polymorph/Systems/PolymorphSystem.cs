@@ -248,8 +248,9 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
         }
         var child = Spawn(proto, _transform.GetMapCoordinates(uid, targetTransformComp), rotation: _transform.GetWorldRotation(uid));
 
-        // added AllowMovement
-        _mindSystem.MakeSentient(child, configuration.AllowMovement);
+        // added AllowMovement, check MakeSentient option
+        if (configuration.MakeSentient)
+            _mindSystem.MakeSentient(child, configuration.AllowMovement);
         // </Goob>
 
         var polymorphedComp = Factory.GetComponent<PolymorphedEntityComponent>();

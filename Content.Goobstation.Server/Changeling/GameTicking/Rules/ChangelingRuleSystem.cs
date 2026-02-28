@@ -36,6 +36,7 @@ public sealed class ChangelingRuleSystem : GameRuleSystem<ChangelingRuleComponen
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly SharedRoleSystem _role = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly ObjectivesSystem _objective = default!;
 
@@ -51,7 +52,7 @@ public sealed class ChangelingRuleSystem : GameRuleSystem<ChangelingRuleComponen
 
     public readonly int StartingCurrency = 16;
 
-    [ValidatePrototypeId<EntityPrototype>] EntProtoId mindRole = "MindRoleChangeling";
+    public static readonly EntProtoId<ChangelingRoleComponent> MindRole = "MindRoleChangeling";
 
     public override void Initialize()
     {
@@ -73,7 +74,7 @@ public sealed class ChangelingRuleSystem : GameRuleSystem<ChangelingRuleComponen
         if (!_mind.TryGetMind(target, out var mindId, out var mind))
             return false;
 
-        _role.MindAddRole(mindId, mindRole.Id, mind, true);
+        _role.MindAddRole(mindId, MindRole, mind, true);
 
         // briefing
         var name = Name(target) ?? Loc.GetString("generic-unknown-title");
@@ -82,8 +83,14 @@ public sealed class ChangelingRuleSystem : GameRuleSystem<ChangelingRuleComponen
 
         _antag.SendBriefing(target, briefing, Color.Yellow, BriefingSound);
 
-        if (_role.MindHasRole<ChangelingRoleComponent>(mindId, out var mr))
-            AddComp(mr.Value, new RoleBriefingComponent { Briefing = briefingShort }, overwrite: true);
+        if (!_role.MindHasRole<ChangelingRoleComponent>(mindId, out var mr))
+        {
+            Log.Error($"Mind role {MindRole} did not have ChangelingRoleComponent!");
+            return false;
+        }
+
+        var role = mr.Value.Owner;
+        AddComp(role, new RoleBriefingComponent { Briefing = briefingShort }, overwrite: true);
 
         // hivemind stuff
         _npcFaction.RemoveFaction(target, NanotrasenFactionId, false);
@@ -93,11 +100,17 @@ public sealed class ChangelingRuleSystem : GameRuleSystem<ChangelingRuleComponen
         EnsureComp<ChangelingComponent>(target);
 
         // add store
-        var store = EnsureComp<StoreComponent>(target);
+        var store = EnsureComp<StoreComponent>(role);
         foreach (var category in rule.StoreCategories)
             store.Categories.Add(category);
         store.CurrencyWhitelist.Add(Currency);
         store.Balance.Add(Currency, StartingCurrency);
+        // TODO: uncomment if store gets predicted
+        //Dirty(role, store)
+
+        // no range or validation because it's on the mind and would immediately get closed
+        var uiData = new InterfaceData("StoreBoundUserInterface", 0f, false);
+        _ui.SetUi(role, StoreUiKey.Key, uiData);
 
         rule.ChangelingMinds.Add(mindId);
 

@@ -7,7 +7,8 @@ surgery-popup-step-SurgeryStepInsertHypoport = {$user} is installing a hypoport 
 
 surgery-popup-step-SurgeryStepCreateJoint = {$user} is create bone jointwork on {$target}'s {$part}!
 surgery-popup-step-SurgeryStepStitchJoint = {$user} is stitching a joint's vessels on {$target}'s {$part}!
-surgery-popup-step-SurgeryStepInsertTail = {$user} is inserting a tail into {$target}'s {$part}!
+surgery-popup-procedure-SurgeryAttachTail-step-SurgeryStepInsertFeature = {$user} is attaching a tail onto {$target}'s {$part}!
+surgery-popup-procedure-SurgeryAttachWings-step-SurgeryStepInsertFeature = {$user} is attaching wings onto {$target}'s {$part}!
 
 surgery-popup-procedure-SurgeryRemoveTongue-step-SurgeryStepRemoveOrgan = {$user} is removing {$target}'s tongue!
 

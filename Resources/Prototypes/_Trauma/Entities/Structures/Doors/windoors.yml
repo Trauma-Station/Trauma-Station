@@ -1,0 +1,17 @@
+- type: entity
+  parent: WindoorSecureScienceLocked
+  id: WindoorSecureGeneticsLocked
+  suffix: Genetics, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsGenetics ]
+
+- type: entity
+  parent: WindoorSecureScienceLocked
+  id: WindoorSecureRoboticsLocked
+  suffix: Robotics, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRobotics ]

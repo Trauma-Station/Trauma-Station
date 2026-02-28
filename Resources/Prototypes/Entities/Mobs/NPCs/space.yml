@@ -74,7 +74,7 @@
 - type: entity
   name: space bear
   id: MobBearSpace
-  parent: [ MobSpaceBasic, AppearanceSpaceAnimal ] # Shitmed
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic ] # Shitmed
   description: It looks friendly. Why don't you give it a hug?
   components:
   - type: Fauna # Goob
@@ -125,7 +125,7 @@
 - type: entity
   name: space kangaroo
   id: MobKangarooSpace
-  parent: [MobSpaceBasic, StripableInventoryBase, AppearanceSpaceAnimal ] # Shitmed
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic, StripableInventoryBase ] # Shitmed
   description: It looks friendly. Why don't you give it a hug?
   components:
   - type: Sprite
@@ -197,7 +197,7 @@
 - type: entity
   name: space spider
   id: MobSpiderSpace
-  parent: [ MobSpaceBasic, AppearanceSpaceAnimal ] # Shitmed
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic ] # Shitmed
   description: It's so glowing, it looks dangerous.
   components:
   # <Goob>
@@ -307,7 +307,7 @@
 - type: entity
   name: space cobra
   id: MobCobraSpace
-  parent: [ MobSpaceBasic, AppearanceSpaceCobra ] # Shitmed
+  parent: [ AppearanceSpaceCobra, MobSpaceBasic ] # Shitmed
   description: Long fangs and a glowing hood, and the alluring look begs to come closer.
   components:
     # <Goob>

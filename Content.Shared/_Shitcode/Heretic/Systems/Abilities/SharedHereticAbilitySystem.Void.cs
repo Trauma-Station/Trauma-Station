@@ -1,8 +1,11 @@
 using System.Linq;
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Medical.Common.Targeting;
+using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared.Gravity;
 using Content.Shared.Heretic;
 using Content.Shared.Interaction;
+using Content.Shared.Movement.Systems;
 
 namespace Content.Shared._Shitcode.Heretic.Systems.Abilities;
 
@@ -13,6 +16,23 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<HereticVoidBlinkEvent>(OnVoidBlink);
         SubscribeLocalEvent<HereticVoidPullEvent>(OnVoidPull);
         SubscribeLocalEvent<HereticVoidConduitEvent>(OnVoidConduit);
+
+        SubscribeLocalEvent<AristocratComponent, IsWeightlessEvent>(OnIsWeightless);
+        SubscribeLocalEvent<AristocratComponent, RefreshWeightlessModifiersEvent>(OnRefreshFriction);
+    }
+
+    private void OnRefreshFriction(Entity<AristocratComponent> ent, ref RefreshWeightlessModifiersEvent args)
+    {
+        // Intentionally don't multiply the values to prevent void ascended moths to be extra speedy
+        args.WeightlessFriction = ent.Comp.Friction;
+        args.WeightlessAcceleration = ent.Comp.Acceleration;
+        args.WeightlessModifier = ent.Comp.Modifier;
+    }
+
+    private void OnIsWeightless(Entity<AristocratComponent> ent, ref IsWeightlessEvent args)
+    {
+        args.Handled = true;
+        args.IsWeightless = true;
     }
 
     private void OnVoidConduit(HereticVoidConduitEvent args)

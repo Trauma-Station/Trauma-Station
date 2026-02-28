@@ -38,6 +38,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
 using Robust.Server.Audio;
+using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Medical.Shared.Body;

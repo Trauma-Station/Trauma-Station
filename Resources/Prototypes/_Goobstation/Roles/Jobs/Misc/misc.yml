@@ -30,7 +30,6 @@
   access:
   - CentralCommand
   - NanotrasenRepresentative
-  - BlueshieldOfficer
   - Wizard
   - NuclearOperative
   - SyndicateAgent
@@ -65,7 +64,6 @@
   access:
   - CentralCommand
   - NanotrasenRepresentative
-  - BlueshieldOfficer
   - Wizard
   - NuclearOperative
   - SyndicateAgent
@@ -162,7 +160,6 @@
   access:
   - CentralCommand
   - NanotrasenRepresentative
-  - BlueshieldOfficer
   - NuclearOperative
   - SyndicateAgent
   special:

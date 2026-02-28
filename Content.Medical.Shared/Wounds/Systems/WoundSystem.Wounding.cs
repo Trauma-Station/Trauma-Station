@@ -61,7 +61,7 @@ public sealed partial class WoundSystem
         SubscribeLocalEvent<WoundableComponent, HealBleedingWoundsEvent>(OnHealBleedingWounds);
         SubscribeLocalEvent<WoundableComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<WoundableComponent, DamageSetEvent>(OnDamageSet);
-        SubscribeLocalEvent<WoundableComponent, BodyRelayedEvent<ModifyDoAfterDelayEvent>>(OnModifyDoAfterDelay);
+        SubscribeLocalEvent<HandOrganComponent, BodyRelayedEvent<ModifyDoAfterDelayEvent>>(OnModifyDoAfterDelay);
         SubscribeLocalEvent<WoundableComponent, AttemptHandsMeleeEvent>(OnAttemptHandsMelee);
         SubscribeLocalEvent<WoundableComponent, AttemptHandsShootEvent>(OnAttemptHandsShoot);
         SubscribeLocalEvent<TraumaInflicterComponent, TraumaBeingRemovedEvent>(OnTraumaBeingRemoved);
@@ -293,14 +293,12 @@ public sealed partial class WoundSystem
         }
     }
 
-    private void OnModifyDoAfterDelay(Entity<WoundableComponent> ent, ref BodyRelayedEvent<ModifyDoAfterDelayEvent> args)
+    private void OnModifyDoAfterDelay(Entity<HandOrganComponent> ent, ref BodyRelayedEvent<ModifyDoAfterDelayEvent> args)
     {
-        var integrity = ent.Comp.WoundableIntegrity;
-        // random hardcoded number award
-        if (integrity > 50)
-            return;
-
-        args.Args.Multiplier *= (float) (integrity / ent.Comp.IntegrityCap);
+        // TODO SHITMED: because of how the shitcode works, missing a hand is faster than having a broken one
+        // make a thing like LegsComponent that makes doafters longer with missing hands
+        if (_trauma.GetBone(ent.Owner) is {} bone)
+            RaiseLocalEvent(bone, args.Args);
     }
 
     private void OnAttemptHandsMelee(EntityUid uid, WoundableComponent component, ref AttemptHandsMeleeEvent args)
@@ -830,29 +828,24 @@ public sealed partial class WoundSystem
     /// <param name="parentWoundableEntity">Parent of the woundable entity. Yes.</param>
     /// <param name="woundableEntity">The entity containing the vulnerable body part</param>
     /// <param name="woundableComp">Woundable component of woundableEntity.</param>
-    public void AmputateWoundableSafely(EntityUid parentWoundableEntity,
+    public bool AmputateWoundableSafely(EntityUid parentWoundableEntity,
         EntityUid woundableEntity,
         WoundableComponent? woundableComp = null)
     {
-        if (!Resolve(woundableEntity, ref woundableComp)
-            || !woundableComp.CanRemove)
-            return;
-
-        if (_body.GetBody(parentWoundableEntity) is not {} body)
-            return;
+        if (!Resolve(woundableEntity, ref woundableComp) ||
+            !woundableComp.CanRemove ||
+            _body.GetBody(parentWoundableEntity) is not {} body ||
+            !_body.RemoveOrgan(body, woundableEntity))
+            return false;
 
         woundableComp.WoundableSeverity = WoundableSeverity.Severed;
         Dirty(woundableEntity, woundableComp);
-
-        _bodyStatus.UpdateStatus(body);
 
         _appearance.SetData(woundableEntity,
             WoundableVisualizerKeys.Wounds,
             new WoundVisualizerGroupData(GetWoundableWounds(woundableEntity).Select(ent => GetNetEntity(ent)).ToList()));
 
-        // Still does the funny popping, if the children are critted. for the funny :3
-        DestroyWoundableChildren(woundableEntity, woundableComp, amputateChildrenSafely: true);
-        _body.RemoveOrgan(body, woundableEntity);
+        return true;
     }
 
     #endregion

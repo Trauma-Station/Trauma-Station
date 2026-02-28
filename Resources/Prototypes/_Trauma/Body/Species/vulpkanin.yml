@@ -1,0 +1,10 @@
+- type: entity
+  parent: [ OrganBaseTail, OrganVulpkaninExternal ]
+  id: OrganVulpkaninTail
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Species/Vulpkanin/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Trauma/empty.rsi
+      state: empty # no sprite since the markings actually control it

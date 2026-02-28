@@ -1,17 +1,6 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 EmoGarbage404 <retron404@gmail.com>
-// SPDX-FileCopyrightText: 2023 coolmankid12345 <55817627+coolmankid12345@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 coolmankid12345 <coolmankid12345@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Shared._DV.CosmicCult.Components;
+// </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Mind;
 using Content.Server.Popups;
@@ -77,12 +66,23 @@ public sealed class MindShieldSystem : EntitySystem
         }
         if (HasComp<Goobstation.Shared.Mindcontrol.MindcontrolledComponent>(implanted))   //Goobstation - Mindcontrol Implant
             RemComp<Goobstation.Shared.Mindcontrol.MindcontrolledComponent>(implanted);
+
+        // <Trauma>
+        RemComp<CosmicLesserCultistComponent>(implanted);
+        if (HasComp<CosmicCultComponent>(implanted) && TryComp<MindShieldComponent>(implanted, out var shieldComp))
+        {
+            _popupSystem.PopupEntity(Loc.GetString("cosmiccult-mindshield-popup"), implanted);
+            shieldComp.Broken = true;
+            Dirty(implanted, shieldComp);
+        }
+        // </Trauma>
     }
 
     private void OnImplantRemoved(Entity<MindShieldImplantComponent> ent, ref ImplantRemovedEvent args)
     {
         // <Goob>
-        _popupSystem.PopupEntity(Loc.GetString("mindshield-implant-effect-removed"), args.Implanted, args.Implanted);
+        // FIXME: should only be shown when removed by implanter not polymorph etc fuck sake
+        //_popupSystem.PopupEntity(Loc.GetString("mindshield-implant-effect-removed"), args.Implanted, args.Implanted);
 
         if (TryComp<HeadRevolutionaryComponent>(args.Implanted, out var headRevComp))
             _revolutionary.ToggleConvertAbility((args.Implanted, headRevComp), true);

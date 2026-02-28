@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Trauma.Shared.Genetics.Abilities;
 using Content.Trauma.Shared.Genetics.Mutations;
+using Content.Server.Polymorph.Systems;
+using Content.Shared.Polymorph;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using System.Collections.Generic;
@@ -12,6 +14,9 @@ namespace Content.IntegrationTests.Tests._Trauma;
 public sealed class MutationTest
 {
     private static readonly EntProtoId TestMob = "MobHuman";
+    private static readonly EntProtoId TestMobPoly = "MobDwarf";
+    private static readonly EntProtoId<MutationComponent> TestMutation = "MutationDwarfism";
+    private static readonly ProtoId<PolymorphPrototype> TestPolymorph = "MutationMonkey";
 
     /// <summary>
     /// Makes sure no errors happen when adding, updating and removing every mutation.
@@ -61,6 +66,55 @@ public sealed class MutationTest
         });
 
         await server.WaitRunTicks(150); // 5 seconds
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// Checks that mutations are correctly transferred when polymorphing into another entity.
+    /// </summary>
+    [Test]
+    public async Task MutationsPolymorphTest()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var mutation = entMan.System<MutationSystem>();
+        var polymorph = entMan.System<PolymorphSystem>();
+
+        var map = await pair.CreateTestMap();
+
+        await server.WaitAssertion(() =>
+        {
+            var dorf = entMan.SpawnEntity(TestMobPoly, map.GridCoords);
+
+            // dwarf must start with dwarfism
+            Assert.That(mutation.HasMutation(dorf, TestMutation),
+                $"{TestMutation} was not present in {entMan.ToPrettyString(dorf)}!");
+
+            // return to monke
+            if (polymorph.PolymorphEntity(dorf, TestPolymorph) is not {} monkey)
+            {
+                Assert.Fail($"Failed to polymorph {entMan.ToPrettyString(dorf)} into {TestPolymorph}!");
+                return;
+            }
+
+            // the monkey must have taken all mutations
+            Assert.That(mutation.HasMutation(monkey, TestMutation),
+                $"{TestMutation} was not moved to {entMan.ToPrettyString(monkey)}!");
+            Assert.That(!mutation.HasMutation(dorf, TestMutation),
+                $"{TestMutation} was not moved from {entMan.ToPrettyString(dorf)}!");
+
+            // return from monke
+            Assert.That(polymorph.Revert(monkey), Is.EqualTo(dorf),
+                $"Failed to revert polymorph from {entMan.ToPrettyString(monkey)} back to {entMan.ToPrettyString(dorf)}!");
+
+            // dwarf should have his mutations back
+            Assert.That(mutation.HasMutation(dorf, TestMutation),
+                $"{TestMutation} was not moved back to {entMan.ToPrettyString(dorf)}!");
+
+            entMan.DeleteEntity(dorf);
+        });
 
         await pair.CleanReturnAsync();
     }

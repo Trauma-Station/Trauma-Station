@@ -1,7 +1,7 @@
 - type: entity
   name: laser raptor
   id: MobLaserRaptor
-  parent: [ SimpleMobBase, AppearanceLaserRaptor ] # Shitmed
+  parent: [ AppearanceLaserRaptor, SimpleMobBase ] # Shitmed
   description: From the Viking age.
   components:
     - type: NpcFactionMember

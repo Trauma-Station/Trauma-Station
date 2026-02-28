@@ -203,8 +203,6 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
-      enum.StoreUiKey.Key: # Goob - changelings
-        type: StoreBoundUserInterface
   - type: InteractionPopup
     successChance: 1
     interactSuccessString: hugging-success-generic

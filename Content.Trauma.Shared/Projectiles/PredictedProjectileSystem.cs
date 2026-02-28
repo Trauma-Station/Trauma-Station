@@ -13,6 +13,7 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.Bulletholes;
 using Content.Trauma.Shared.Executions;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
@@ -117,6 +118,9 @@ public sealed class PredictedProjectileSystem : EntitySystem
         var shooter = comp.Shooter;
         var ev = new ProjectileHitEvent(comp.Damage * _damageable.UniversalProjectileDamageModifier, target, shooter);
         RaiseLocalEvent(uid, ref ev);
+
+        var targetEv = new GotHitByProjectileEvent(uid);
+        RaiseLocalEvent(target, ref targetEv);
 
         var otherName = ToPrettyString(target);
         var damageRequired = _destructible.DestroyedAt(target);

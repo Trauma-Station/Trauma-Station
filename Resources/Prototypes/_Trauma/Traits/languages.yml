@@ -17,22 +17,6 @@
     - Calcic
 
 - type: trait
-  id: ValyrianStandard
-  name: language-ValyrianStandard-name
-  description: language-ValyrianStandard-description
-  category: LanguageTraits
-  cost: 2
-  blacklist:
-    components:
-      - BorgChassis
-  components:
-  - type: LanguageSpeaker
-  languagesSpoken:
-    - ValyrianStandard
-  languagesUnderstood:
-    - ValyrianStandard
-
-- type: trait
   id: RootSpeak
   name: language-RootSpeak-name
   description: language-RootSpeak-description

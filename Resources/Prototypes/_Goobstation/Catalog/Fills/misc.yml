@@ -8,9 +8,3 @@
   parent:
   - ClothingShoesWinterCombatBoots
   - ClothingShoesBootsSecFilled
-
-- type: entity
-  id: ClothingShoesBootsWinterSnowjackBsoFilled
-  parent:
-  - ClothingShoesBootsWinterSnowjackBso
-  - ClothingShoesBootsSecFilled

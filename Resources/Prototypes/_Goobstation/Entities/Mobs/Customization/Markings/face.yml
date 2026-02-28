@@ -1,7 +1,7 @@
 - type: marking
   id: FaceBindi
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -14,7 +14,7 @@
 - type: marking
   id: FaceFullblush
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -27,7 +27,7 @@
 - type: marking
   id: FaceCheekspotRight
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -40,7 +40,7 @@
 - type: marking
   id: FaceCheekspotLeft
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -53,7 +53,7 @@
 - type: marking
   id: FaceChesireRight
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -66,7 +66,7 @@
 - type: marking
   id: FaceChesireLeft
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -79,7 +79,7 @@
 - type: marking
   id: FaceCrowRight
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -92,7 +92,7 @@
 - type: marking
   id: FaceCrowLeft
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -105,7 +105,7 @@
 - type: marking
   id: FaceEarRight
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -118,7 +118,7 @@
 - type: marking
   id: FaceEarLeft
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -131,7 +131,7 @@
 - type: marking
   id: FaceEyebrowRight
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -145,7 +145,7 @@
 - type: marking
   id: FaceEyebrowLeft
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -159,7 +159,7 @@
 - type: marking
   id: FaceEyebrows
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -172,7 +172,7 @@
 - type: marking
   id: FaceEyecornerRight
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -185,7 +185,7 @@
 - type: marking
   id: FaceEyecornerLeft
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -198,7 +198,7 @@
 - type: marking
   id: FaceEyelashRight
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -211,7 +211,7 @@
 - type: marking
   id: FaceEyelashLeft
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -224,7 +224,7 @@
 - type: marking
   id: FaceEyestripe
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -237,7 +237,7 @@
 - type: marking
   id: FaceLipcornerRight
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -250,7 +250,7 @@
 - type: marking
   id: FaceLipcornerLeft
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -263,7 +263,7 @@
 - type: marking
   id: FaceGlabella
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -276,7 +276,7 @@
 - type: marking
   id: FaceLowercheekRight
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -289,7 +289,7 @@
 - type: marking
   id: FaceLowercheekLeft
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -302,7 +302,7 @@
 - type: marking
   id: FaceNosetape
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -315,7 +315,7 @@
 - type: marking
   id: FaceNosetip
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -329,7 +329,7 @@
 - type: marking
   id: FaceNosestripe
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -342,7 +342,7 @@
 - type: marking
   id: FaceUnibrow
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   coloring:
     default:
       type:
@@ -355,7 +355,7 @@
 - type: marking
   id: FaceNeckSlim
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   sprites:
   - sprite: Mobs/Customization/face.rsi
     state: neck_f
@@ -363,7 +363,7 @@
 - type: marking
   id: FaceNeckWide
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   sprites:
   - sprite: Mobs/Customization/face.rsi
     state: neck_m
@@ -371,7 +371,7 @@
 - type: marking
   id: FaceNeckSlimThick
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   sprites:
   - sprite: Mobs/Customization/face.rsi
     state: neck_thick_f
@@ -379,7 +379,7 @@
 - type: marking
   id: FaceNeckWideThick
   bodyPart: Face
-  groupWhitelist: [Human, Slime, Harpy, Reptilian, Arachnid]
+  groupWhitelist: [Human, Slime, Reptilian, Arachnid]
   sprites:
   - sprite: Mobs/Customization/face.rsi
     state: neck_thick_m

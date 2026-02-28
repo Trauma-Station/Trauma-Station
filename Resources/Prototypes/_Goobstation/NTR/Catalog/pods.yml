@@ -80,15 +80,6 @@
     prototype: InternCoin
 
 - type: entity
-  id: SpawnPodBsd
-  categories: [ HideSpawnMenu ]
-  name: SpawnSupplyBsd
-  parent: SpawnSupplyEmpty
-  components:
-  - type: SpawnOnDespawn
-    prototype: BlueShieldDeputySpawnBriefcase
-
-- type: entity
   id: SpawnPodHardsuitExperimental
   categories: [ HideSpawnMenu ]
   name: SpawnSupplyHardsuit

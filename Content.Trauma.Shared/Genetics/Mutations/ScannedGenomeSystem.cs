@@ -67,6 +67,13 @@ public sealed class ScannedGenomeSystem : EntitySystem
         {
             TryAddSequence(ent, id);
         }
+
+        foreach (var (id, _) in mutatable.Mutations)
+        {
+            // only add non-dormant so they aren't duplicated
+            if (_mutation.IsForeign(mutatable, id))
+                TryAddSequence(ent, id);
+        }
     }
 
     /// <summary>

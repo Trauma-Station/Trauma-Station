@@ -17,6 +17,8 @@
       movement:
         state: facehugger
   - type: GhostTakeoverAvailable
+  - type: ThrowableFacehugger # Goobstation
+    minThrowForce: 5.0 # Goobstation
   - type: GhostRole
     makeSentient: true
     allowSpeech: true

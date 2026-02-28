@@ -8,6 +8,9 @@
     instability: 25
   - type: ActionMutation
     action: ActionMutationVoidMagnet
+  - type: MutationActionOnTrigger
+  - type: RandomTrigger
+    prob: 0.0025 # :)
 
 - type: entity
   parent: BaseMutationAction
@@ -16,8 +19,19 @@
   description: A rare genome that attracts odd forces not usually observed. May sometimes pull you in randomly.
   components:
   - type: Action
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: void_magnet
     useDelay: 60
   - type: InstantAction
-    event: !type:ConvokeVoidActionEvent
-  - type: ConvokeVoidAction
-  # TODO: have it randomly activate
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:PopupMessage
+      type: Pvs
+      visualType: LargeCaution
+      method: PopupCoordinates
+      messages:
+      - entity-effect-popup-convoke-void
+    - !type:Polymorph
+      prototype: VoidMagnet

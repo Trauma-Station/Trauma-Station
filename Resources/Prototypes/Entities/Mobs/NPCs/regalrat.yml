@@ -1,7 +1,7 @@
 - type: entity
   name: rat king
   id: MobRatKing
-  parent: [ BaseMobRat, SimpleMobBase, MobCombat, AppearanceRatKing ] # Shitmed
+  parent: [ AppearanceRatKing, BaseMobRat, SimpleMobBase, MobCombat ] # Shitmed
   description: He's da rat. He make da roolz.
   components:
   - type: VentCrawler # goobstation - Ventcrawl

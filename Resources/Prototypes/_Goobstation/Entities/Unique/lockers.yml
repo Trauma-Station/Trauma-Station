@@ -11,13 +11,3 @@
   - type: ConditionalSpawner
     prototypes:
     - UniqueMarkerNanorepLocker
-
-- type: entity
-  abstract: true # Trauma
-  id: UniqueLockerBlueshieldOfficerFilled
-  suffix: MAP THIS, Unique, Filled
-  parent: LockerBlueshieldOfficerFilled
-  components:
-  - type: ConditionalSpawner
-    prototypes:
-    - UniqueMarkerBlueshieldLocker

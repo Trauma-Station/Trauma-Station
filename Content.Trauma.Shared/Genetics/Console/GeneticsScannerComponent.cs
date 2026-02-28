@@ -43,7 +43,7 @@ public sealed partial class GeneticsScannerComponent : Component
     /// How long it takes to scan a mob's genome.
     /// </summary>
     [DataField]
-    public TimeSpan ScanDelay = TimeSpan.FromSeconds(15);
+    public TimeSpan ScanDelay = TimeSpan.FromSeconds(6);
 
     /// <summary>
     /// Sound played after successfully scanning a mob.

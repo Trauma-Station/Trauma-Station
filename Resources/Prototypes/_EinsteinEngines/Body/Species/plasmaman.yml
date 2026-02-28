@@ -326,6 +326,9 @@
   - type: Sprite
     layers:
     - state: eyes
+  - type: VisualOrganMarkings
+    markingData:
+      group: Plasmaman
 
 - type: entity
   parent: [ OrganBaseTongue, OrganPlasmamanInternal ]

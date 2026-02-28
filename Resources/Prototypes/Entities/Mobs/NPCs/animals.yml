@@ -1431,8 +1431,6 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
-      enum.StoreUiKey.Key:
-        type: StoreBoundUserInterface
   # stupid monkey needs clever mutation to be literate
   - type: BlockReading
   - type: BlockWriting
@@ -1537,7 +1535,7 @@
 - type: entity
   name: monkey
   id: MobMonkey
-  parent: [ MobBaseAncestor, AppearanceMonkey ] # Shitmed
+  parent: [ AppearanceMonkey, MobBaseAncestor ] # Shitmed
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   components:
   # <Trauma>
@@ -1589,7 +1587,7 @@
 - type: entity
   name: monkey
   id: MobBaseSyndicateMonkey
-  parent: [ MobBaseAncestor, AppearanceMonkey ] # Shitmed
+  parent: [ AppearanceMonkey, MobBaseAncestor ] # Shitmed
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   suffix: syndicate base
   components:
@@ -1646,7 +1644,7 @@
 - type: entity
   name: kobold
   id: MobBaseKobold
-  parent: [ MobBaseAncestor, AppearanceKobold ] # Shitmed
+  parent: [ AppearanceKobold, MobBaseAncestor ] # Shitmed
   description: Cousins to the sentient race of lizard people, kobolds blend in with their natural habitat and are as nasty as monkeys; ready to pull out your hair and stab you to death.
   abstract: true
   components:
@@ -1792,8 +1790,8 @@
 - type: entity
   name: mouse
   parent:
-  - SimpleMobBase
   - BaseMobMouse # Shitmed - unique mouse body
+  - SimpleMobBase
   id: MobMouse
   description: Squeak!
   components:

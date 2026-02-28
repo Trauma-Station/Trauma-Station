@@ -338,6 +338,13 @@
       roleLoadout:
       - RoleSurvivalNukieHonkops
       components:
+      # clown
+      - type: Clumsy
+      - type: SleepEmitSound
+        snore: /Audio/Voice/Misc/silly_snore.ogg
+        interval: 10
+      - type: SpeechFontOverride
+        font: LDFComicSans
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:

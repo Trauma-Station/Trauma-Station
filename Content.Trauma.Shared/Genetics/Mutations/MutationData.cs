@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.Genetics.Mutations;
 [DataRecord]
 public sealed partial class MutationData
 {
-    public static readonly char[] AGCT = new[] { 'A', 'G', 'C', 'T' };
+    public static readonly char[] ATGC = new[] { 'A', 'T', 'G', 'C' };
     public const int PairCount = 16;
     public const int BaseCount = PairCount * 2;
 
@@ -37,7 +37,7 @@ public sealed partial class MutationData
         var builder = new StringBuilder();
         for (int p = 0; p < PairCount; p++)
         {
-            builder.Append(random.Pick(AGCT));
+            builder.Append(random.Pick(ATGC));
         }
         for (int p = 0; p < PairCount; p++) {
             builder.Append(GetMatching(builder[p]));
@@ -52,10 +52,10 @@ public sealed partial class MutationData
     public static char GetMatching(char b)
         => b switch
         {
-            'A' => 'G',
-            'G' => 'A',
-            'C' => 'T',
-            'T' => 'C',
+            'A' => 'T',
+            'T' => 'A',
+            'G' => 'C',
+            'C' => 'G',
             _ => 'X'
         };
 }

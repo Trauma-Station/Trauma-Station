@@ -298,8 +298,17 @@
     anchored: true
   - type: Physics
     bodyType: Static
-    canCollide: false
   - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 1
+        layer:
+        - BulletImpassable
+        - Opaque
+  - type: RequireProjectileTarget
   - type: Sprite
     layers:
     - sprite: _Goobstation/Heretic/void_overlay.rsi
@@ -308,7 +317,7 @@
   - type: InteractionOutline
   - type: Clickable
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: InorganicMetaphysical
   - type: Destructible
     thresholds:
     - trigger:
@@ -327,22 +336,3 @@
   - type: VoidConduit
   - type: TimedDespawn
     lifetime: 60
-
-- type: entity
-  id: VoidAscensionAura
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Physics
-    bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 10
-        density: 1
-        hard: false
-        layer:
-        - BulletImpassable
-        - Opaque
-  - type: VoidAscensionAura

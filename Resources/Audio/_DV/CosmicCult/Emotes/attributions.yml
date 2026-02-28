@@ -2,7 +2,13 @@
   - cosmic_laugh.ogg
   - cosmic_scream.ogg
   - cosmic_crying.ogg
+  - cosmic_say.ogg
+  - cosmic_ask.ogg
+  - cosmic_exclaim.ogg
+  - cosmic_gasp.ogg
+  - cosmic_ded.ogg
+  - cosmic_yawn.ogg
   - colossus_laugh.ogg
   license: "CC-BY-SA-3.0"
-  copyright: "By NoElkaTheGod(GitHub) for Cosmic Cult. Made using a combination of (Creative Commons 0) samples from freesound.org."
+  copyright: "By NoElkaTheGod(GitHub) for Cosmic Cult. Made using a combination of (Creative Commons 0) samples from freesound.org and SS14 assets."
   source: "https://freesound.org/"

@@ -47,6 +47,8 @@
       path: /Audio/Items/Culinary/chop.ogg
   - type: Scalpel # Shitmed
     speed: 0.65
+  - type: CosmicTransmutable # Trauma
+    transmuteTo: SwordCosmicCult
 
 - type: entity
   parent: BaseKnife

@@ -1,3 +1,6 @@
+// <Trauma>
+using Robust.Shared.Timing;
+// </Trauma>
 using System.Linq;
 using Content.Client.Guidebook.Controls;
 using Content.Shared.Body;
@@ -17,6 +20,10 @@ namespace Content.Client.Humanoid;
 [GenerateTypedNameReferences]
 public sealed partial class LayerMarkingItem : BoxContainer, ISearchableControl
 {
+    // <Trauma>
+    [Dependency] private readonly IGameTiming _timing = default!;
+    private uint _lastColorUpdate;
+    // </Trauma>
     [Dependency] private readonly IEntityManager _entity = default!;
 
     private readonly SpriteSystem _sprite;
@@ -164,7 +171,7 @@ public sealed partial class LayerMarkingItem : BoxContainer, ISearchableControl
 
             var label = _markingPrototype.Sprites[i] switch
             {
-                SpriteSpecifier.Rsi rsi => Loc.GetString($"marking-{_markingPrototype.ID}-{rsi.RsiState}"),
+                SpriteSpecifier.Rsi rsi => Loc.TryGetString($"marking-{_markingPrototype.ID}-{rsi.RsiState}", out var name) ? name : rsi.RsiState, // Trauma - default to the state like r_hand if it isn't defined
                 SpriteSpecifier.Texture texture => Loc.GetString($"marking-{_markingPrototype.ID}-{texture.TexturePath.Filename}"),
                 _ => throw new InvalidOperationException("SpriteSpecifier not of known type"),
             };
@@ -179,6 +186,13 @@ public sealed partial class LayerMarkingItem : BoxContainer, ISearchableControl
             var colorIndex = i;
             selector.OnColorChanged += _ =>
             {
+                // <Trauma> - dont lag the shit out of the ui
+                var now = _timing.CurFrame;
+                if (_lastColorUpdate == now)
+                    return;
+
+                _lastColorUpdate = now;
+                // </Trauma>
                 _markingsModel.TrySetMarkingColor(_organ, _layer, _markingPrototype.ID, colorIndex, selector.Color);
             };
         }

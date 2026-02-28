@@ -1,6 +1,7 @@
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
 using Content.Medical.Shared.Wounds;
+using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -27,7 +28,7 @@ public abstract class SharedWeakToHolySystem : EntitySystem
         SubscribeLocalEvent<AlwaysTakeHolyComponent, UserShouldTakeHolyEvent>(OnUserStatus);
         SubscribeLocalEvent<AlwaysTakeHolyComponent, BibleSmiteAttemptEvent>(OnSmiteAttempt);
 
-        SubscribeLocalEvent<DamageableComponent, DamageModifyEvent>(OnHolyDamageModify);
+        SubscribeLocalEvent<BodyComponent, DamageModifyEvent>(OnHolyDamageModify);
     }
 
     private void OnUnholyDamage(Entity<ShouldTakeHolyComponent> uid, ref DamageUnholyEvent args)
@@ -57,6 +58,7 @@ public abstract class SharedWeakToHolySystem : EntitySystem
         if (ent.Comp.LifeStage > ComponentLifeStage.Running)
             return;
 
+        args.WeakToHoly = true;
         args.ShouldTakeHoly = true;
     }
 
@@ -76,7 +78,7 @@ public abstract class SharedWeakToHolySystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
     }
 
-    private void OnHolyDamageModify(Entity<DamageableComponent> ent, ref DamageModifyEvent args)
+    private void OnHolyDamageModify(Entity<BodyComponent> ent, ref DamageModifyEvent args)
     {
         var unholyEvent = new DamageUnholyEvent(args.Target, args.Origin);
         RaiseLocalEvent(args.Target, ref unholyEvent);

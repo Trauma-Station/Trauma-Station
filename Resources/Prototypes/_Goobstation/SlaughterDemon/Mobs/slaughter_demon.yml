@@ -5,9 +5,9 @@
 
 - type: entity
   parent:
+  - AppearanceSlaughterDemon
   - SimpleSpaceMobBase
   - MobPolymorphable
-  - AppearanceSlaughterDemon
   id: BaseMobSlaughterDemon
   name: slaughter demon
   suffix: ""

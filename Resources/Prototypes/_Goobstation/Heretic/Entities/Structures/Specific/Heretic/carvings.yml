@@ -111,6 +111,7 @@
     targetedEntityWhitelist:
       components:
       - HumanoidProfile
+      - BorgChassis
   - type: AlertCarving
 
 - type: runeCarving

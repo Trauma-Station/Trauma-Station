@@ -24,13 +24,11 @@
   components:
   - type: BodyCache # Shitmed
   - type: Body
-  - type: EntityTableContainerFill
-    containers:
-      body_organs: !type:AllSelector
-        children:
-        - id: OrganAnimalTorso # Shitmed
-        - id: OrganCarpLungs # Shitmed - Animal -> Carp
-        - id: OrganBloodsuckerHeart
-        - id: OrganBloodsuckerStomach
-        - id: OrganBloodsuckerLiver
-        - id: OrganAnimalKidneys
+  - type: InitialBody # Shitmed - replaced container fill
+    organs:
+      Torso: OrganAnimalTorso # Shitmed
+      Lungs: OrganCarpLungs # Shitmed - Animal -> Carp
+      Heart: OrganBloodsuckerHeart
+      Stomach: OrganBloodsuckerStomach
+      Liver: OrganBloodsuckerLiver
+      Kidneys: OrganAnimalKidneys

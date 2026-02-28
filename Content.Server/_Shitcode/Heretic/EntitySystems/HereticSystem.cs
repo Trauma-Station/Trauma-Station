@@ -19,6 +19,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Religion;
 using Content.Server.Store.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Eye;
@@ -338,7 +339,7 @@ public sealed class HereticSystem : SharedHereticSystem
         if (!TryGetHereticComponent(ev.Target, out var heretic, out _))
             return;
 
-        ev.ShouldTakeHoly = heretic.Ascended;
+        ev.ShouldTakeHoly |= heretic.Ascended;
         ev.WeakToHoly = true;
     }
 

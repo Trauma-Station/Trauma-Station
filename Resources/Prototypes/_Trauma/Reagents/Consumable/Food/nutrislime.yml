@@ -1,0 +1,16 @@
+- type: reagent
+  parent: Nutriment
+  id: Nutrislime
+  name: reagent-name-nutrislime
+  desc: reagent-desc-nutrislime
+  physicalDesc: reagent-physical-desc-viscous
+  flavor: slimy
+  metabolisms:
+    Metabolites:
+      effects:
+      - !type:SatiateHunger
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Slime ]
+        factor: 15 # 10x as effective
+  pricePerUnit: 20

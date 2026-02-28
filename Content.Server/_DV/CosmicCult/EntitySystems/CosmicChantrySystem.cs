@@ -25,7 +25,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -109,11 +108,11 @@ public sealed class CosmicChantrySystem : EntitySystem
                 }
                 else
                 { // Anything else just gets fully replaced with a mindsink
-                    if (_mind.TryGetMind(borgBrain, out var mindEnt, out _))
+                    _containerSystem.Insert(newBrain, borgComp.BrainContainer);
+                    if (_mind.TryGetMind(victim, out var mindEnt, out _))
                         _mind.TransferTo(mindEnt, newBrain);
                     else
                         MakeVictimGhostRole(victim);
-                    _containerSystem.Insert(newBrain, borgComp.BrainContainer);
                     QueueDel(borgBrain);
                 }
             }

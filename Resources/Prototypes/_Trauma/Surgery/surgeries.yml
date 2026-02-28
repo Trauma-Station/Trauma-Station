@@ -1,3 +1,5 @@
+# Hypoport
+
 - type: entity
   parent: SurgeryOpenCavityBase
   id: SurgeryOpenCavityHypoport
@@ -38,6 +40,8 @@
   - type: SurgeryOrganCondition
     organ: Hypoport
 
+# Tail
+
 - type: entity
   parent: SurgeryOpenCavityBase
   id: SurgeryOpenTailSlot
@@ -54,6 +58,8 @@
     parts: [ Torso ]
   - type: SurgeryOrganSlotCondition
     organSlot: Tail
+
+# Tongue
 
 - type: entity
   parent: BaseSurgeryRemoveOrgan
@@ -77,3 +83,30 @@
     organSlot: Tongue
   - type: SurgeryOrganCondition
     organ: Tongue
+
+# Wings
+
+- type: entity
+  parent: SurgeryOpenCavityBase
+  id: SurgeryOpenWingsSlot
+  name: Create Wing Joints
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepCreateJoint
+    - SurgeryStepStitchJoint
+    - SurgeryStepOpenOrganSlot
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: Wings
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachWings
+  name: Attach Wings
+  components:
+  - type: SurgeryPartRemovedCondition
+    category: Wings

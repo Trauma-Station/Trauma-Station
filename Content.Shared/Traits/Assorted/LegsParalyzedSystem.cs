@@ -17,8 +17,10 @@ public sealed class LegsParalyzedSystem : EntitySystem
         SubscribeLocalEvent<LegsParalyzedComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<LegsParalyzedComponent, BuckledEvent>(OnBuckled);
         SubscribeLocalEvent<LegsParalyzedComponent, UnbuckledEvent>(OnUnbuckled);
+        /* Trauma - no
         SubscribeLocalEvent<LegsParalyzedComponent, ThrowPushbackAttemptEvent>(OnThrowPushbackAttempt);
         SubscribeLocalEvent<LegsParalyzedComponent, UpdateCanMoveEvent>(OnUpdateCanMoveEvent);
+        */
     }
 
     private void OnStartup(EntityUid uid, LegsParalyzedComponent component, ComponentStartup args)
@@ -42,13 +44,16 @@ public sealed class LegsParalyzedSystem : EntitySystem
         _standingSystem.Down(uid);
     }
 
+    /* Trauma - this prevented using a wheelchair
     private void OnUpdateCanMoveEvent(EntityUid uid, LegsParalyzedComponent component, UpdateCanMoveEvent args)
     {
         args.Cancel();
     }
 
+    // and this makes no sense.. why would you not be able to throw shit away
     private void OnThrowPushbackAttempt(EntityUid uid, LegsParalyzedComponent component, ThrowPushbackAttemptEvent args)
     {
         args.Cancel();
     }
+    */
 }

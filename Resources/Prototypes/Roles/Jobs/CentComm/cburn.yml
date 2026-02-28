@@ -25,7 +25,6 @@
   - CentralCommand
   # Goobstation
   - NanotrasenRepresentative
-  - BlueshieldOfficer
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
