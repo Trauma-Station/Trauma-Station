@@ -106,7 +106,7 @@
     channels:
     - CosmicRadio
   - type: Visibility
-    layer: 32 #ghost vis layer
+    layer: 32 #monument vis layer
 
 - type: entity
   parent: [ Incorporeal, BaseMob ]

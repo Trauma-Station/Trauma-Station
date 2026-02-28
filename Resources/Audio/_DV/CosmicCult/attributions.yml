@@ -92,7 +92,8 @@
   - tier2.ogg
   - conversion_start.ogg
   - conversion_end.ogg
-  - conversion_end.ogg
+  - helmet_on.ogg
+  - helmet_off.ogg
   - ability_stride.ogg
   license: "CC-BY-SA-3.0"
   copyright: "Made by NoElkaTheGod(GitHub) using a combination of other SS14 assets."
