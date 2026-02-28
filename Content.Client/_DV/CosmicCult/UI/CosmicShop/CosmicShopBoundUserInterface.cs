@@ -3,9 +3,6 @@ using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._DV.CosmicCult.Prototypes;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Audio;
-using Robust.Shared.Player;
 
 namespace Content.Client._DV.CosmicCult.UI.CosmicShop;
 
