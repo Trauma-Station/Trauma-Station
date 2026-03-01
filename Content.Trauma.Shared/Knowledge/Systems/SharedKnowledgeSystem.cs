@@ -53,6 +53,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         InitializeOnWear();
         InitializeConstruction();
 
+        SubscribeLocalEvent<KnowledgeContainerComponent, ComponentStartup>(OnKnowledgeContainerStartup);
         SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnKnowledgeContainerShutdown);
         SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotInsertedEvent>(OnOrganInserted);
         SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotRemovedEvent>(OnOrganRemoved);
@@ -90,6 +91,36 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
     }
 
+    private void OnKnowledgeContainerStartup(Entity<KnowledgeContainerComponent> ent, ref ComponentStartup args)
+    {
+        if (TryComp<MMIComponent>(ent, out var mmiComp))
+        {
+            if (!_container.TryGetContainingContainer((ent, null, null), out var container))
+                return;
+
+            var mmiHolder = container.Owner;
+
+            if (!_container.TryGetContainingContainer((ent, null, null), out var borgContainer))
+                return;
+
+            var borg = borgContainer.Owner;
+
+            if (!TryComp<KnowledgeHolderComponent>(borg, out var knowledgeHolder))
+                return;
+
+            knowledgeHolder.KnowledgeEntity = ent;
+            Dirty(ent);
+        }
+        else
+        {
+            var body = _body.GetBody(ent);
+            if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
+                return;
+            knowledgeHolder.KnowledgeEntity = ent;
+            Dirty(ent);
+        }
+    }
+
     private void OnKnowledgeContainerShutdown(Entity<KnowledgeContainerComponent> ent, ref ComponentShutdown args)
     {
         if (ent.Comp.KnowledgeContainer is { } container)
@@ -99,16 +130,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     private void OnOrganInserted(Entity<KnowledgeContainerComponent> ent, ref OrganGotInsertedEvent args)
     {
         var body = _body.GetBody(ent);
-        if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
+        if (body is not { } user || !TryComp<KnowledgeHolderComponent>(user, out var knowledgeHolder))
             return;
         knowledgeHolder.KnowledgeEntity = ent;
-        Dirty(ent);
+        Dirty(user, knowledgeHolder);
     }
 
     private void OnOrganRemoved(Entity<KnowledgeContainerComponent> ent, ref OrganGotRemovedEvent args)
     {
         var body = _body.GetBody(ent);
-        if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
+        if (body is not { } user || !TryComp<KnowledgeHolderComponent>(user, out var knowledgeHolder))
             return;
         knowledgeHolder.KnowledgeEntity = null;
         Dirty(ent);
