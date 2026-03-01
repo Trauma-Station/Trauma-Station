@@ -319,6 +319,9 @@
     category: HiveNode
   - type: ChildOrgan
     parentCategory: Head
+  - type: OrganComponents
+    onAdd:
+    - type: FacehuggerImmune
     # TODO: Organ should give XenoHivemind language and Xeno faction
 
 - type: entity
