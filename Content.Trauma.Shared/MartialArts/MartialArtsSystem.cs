@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Shared.Actions.Components;
 using Content.Shared.EntityEffects;
 using Content.Shared.Movement.Systems;
 using Content.Trauma.Common.Knowledge;
@@ -42,8 +43,8 @@ public sealed partial class MartialArtsSystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        var query = EntityQueryEnumerator<CanPerformComboComponent>();
-        while (query.MoveNext(out var ent, out var comp))
+        var queryComboComponent = EntityQueryEnumerator<CanPerformComboComponent>();
+        while (queryComboComponent.MoveNext(out var ent, out var comp))
         {
             if (comp.CurrentTarget is { } && TerminatingOrDeleted(comp.CurrentTarget.Value))
                 comp.CurrentTarget = null;
@@ -82,6 +83,22 @@ public sealed partial class MartialArtsSystem : EntitySystem
             {
                 if (_timing.CurTime >= sneakAttack.NextHidden)
                     sneakAttack.IsFound = false;
+            }
+        }
+
+        var comboActionsQuery = EntityQueryEnumerator<ComboActionsComponent>();
+        while (comboActionsQuery.MoveNext(out var uid, out var combo))
+        {
+            if (combo.QueuedPrototype is not { } comboPrototype)
+                continue;
+
+            if (combo.ComboActions.TryGetValue(comboPrototype, out var actionEnt))
+            {
+                if (!TryComp<ActionComponent>(actionEnt, out var action) || action.Cooldown == null)
+                {
+                    combo.QueuedPrototype = null;
+                    Dirty(uid, combo);
+                }
             }
         }
     }

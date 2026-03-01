@@ -38,6 +38,7 @@
   id: MartialArtKravMaga
   name: MartialArtKravMaga
   components:
+  - type: CanPerformCombo
   - type: ComboActions
     storedComboActions:
     - ActionLegSweep

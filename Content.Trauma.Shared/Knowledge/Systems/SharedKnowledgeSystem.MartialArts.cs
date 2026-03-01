@@ -12,6 +12,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Shared.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
 using Robust.Shared.Prototypes;
 
@@ -20,6 +21,7 @@ public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";
     private static readonly EntProtoId AthleticsKnowledge = "AthleticsKnowledge";
@@ -37,6 +39,7 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeDamageChangedEvent>(OnTakeDamage);
         SubscribeLocalEvent<KnowledgeHolderComponent, CheckGrabOverridesEvent>(CheckGrabStageOverridePass);
         SubscribeLocalEvent<KnowledgeHolderComponent, RefreshMovementSpeedModifiersEvent>(SpeedModifier);
+        SubscribeLocalEvent<PerformMartialArtComboEvent>(OnComboActionClicked);
 
         SubscribeNetworkEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
     }
@@ -161,6 +164,11 @@ public abstract partial class SharedKnowledgeSystem
         if (knowledgeUid is { } && proto is { } && TryGetKnowledgeUnit(player, proto) is { } trueKnowledge && trueKnowledge != knowledgeUid) // Anti-cheat line, if the client is trying to set a martial art they don't actually have and not null, ignore it.
             return;
 
+        ChangeMartialArts(player, knowledgeUid);
+    }
+
+    public void ChangeMartialArts(EntityUid player, EntityUid? knowledgeUid)
+    {
         if (!TryComp<KnowledgeHolderComponent>(player, out var knowledgeHolder) || TryGetKnowledgeContainer((player, knowledgeHolder)) is not { } knowledgeEnt)
             return;
 
@@ -207,5 +215,30 @@ public abstract partial class SharedKnowledgeSystem
         var ev = new MartialArtSpeedModifierEvent(ent.Owner, 1.0f);
         RaiseLocalEvent(art, ref ev);
         args.ModifySpeed(ev.Coefficient);
+    }
+
+    private void OnComboActionClicked(PerformMartialArtComboEvent args)
+    {
+        var uid = args.Performer;
+
+        // 1. Get the Knowledge entity (where the ComboActionsComponent lives)
+        if (GetActiveMartialArt(uid) is not { } martialArt)
+            return;
+
+        if (!TryComp<ComboActionsComponent>(martialArt, out var comboActions))
+            return;
+
+        // 2. Map the Action ID to your Prototype ID
+        // You can name your Action IDs to match your Combo IDs to make this easy
+        if (_proto.TryIndex<ComboPrototype>(args.Combo, out var comboProto))
+        {
+            comboActions.QueuedPrototype = comboProto.ID;
+            Dirty(martialArt, comboActions);
+
+            // Provide feedback
+            _popup.PopupEntity(Loc.GetString("martial-arts-queued", ("combo", comboProto.ID)), uid, uid);
+        }
+
+        args.Handled = true; // This starts the cooldown in the UI
     }
 }

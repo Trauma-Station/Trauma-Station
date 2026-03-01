@@ -381,7 +381,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (TryComp<KnowledgeHolderComponent>(target, out var holderComponent) && TryGetKnowledgeEntity((target, holderComponent)) is { } knowledgeEnt && TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainer))
         {
             if (knowledgeContainer.MartialArtSkillUid == unit)
-                knowledgeContainer.MartialArtSkillUid = null;
+                ChangeMartialArts(target, null);
             if (knowledgeContainer.LanguageSkillUid == unit)
                 knowledgeContainer.LanguageSkillUid = null;
             knowledgeContainer.KnowledgeContainerIDs.Remove(knowledgeUnit);
@@ -590,7 +590,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return;
 
         knowledgeContainer.Comp.KnowledgeContainerIDs.Clear();
-        knowledgeContainer.Comp.MartialArtSkillUid = null;
+        ChangeMartialArts(target, null);
         knowledgeContainer.Comp.LanguageSkillUid = null;
         var container = knowledgeContainer.Comp.KnowledgeContainer;
         if (container is { } && deleteAll)
