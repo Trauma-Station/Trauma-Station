@@ -31,8 +31,8 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
 {
     private static readonly ProtoId<ToolQualityPrototype> ScrewingQuality = "Screwing";
     private readonly HashSet<int> _phoneNumbers = new();
-    private const int PhoneNumberMin = 11111;
-    private const int PhoneNumberMax = 99999;
+    protected const int PhoneNumberMin = 11111;
+    protected const int PhoneNumberMax = 99999;
     private const int PhoneNumberPoolSize = PhoneNumberMax - PhoneNumberMin; // 88,888 possible numbers
     public const string PhoneJoint = "jointphone";
 
