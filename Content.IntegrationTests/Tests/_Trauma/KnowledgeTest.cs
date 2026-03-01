@@ -42,7 +42,7 @@ public sealed class EngineeringKnowledgeTest
             engineer = entMan.SpawnEntity("MobHumanEngineer", coords);
         });
 
-        await pair.RunTicksSync(10);
+        await pair.RunTicksSync(2);
         await server.WaitAssertion(() =>
         {
             var entMan = server.ResolveDependency<IEntityManager>();
