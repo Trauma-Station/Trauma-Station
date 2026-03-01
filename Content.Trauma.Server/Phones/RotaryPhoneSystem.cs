@@ -95,7 +95,7 @@ public sealed class RotaryPhoneSystem : SharedRotaryPhoneSystem
 
     private void OnKeyPadPressed(Entity<RotaryPhoneComponent> ent, ref PhoneKeypadMessage args)
     {
-        if (ent.Comp.DialedNumber.ToString() is { Length: >= 5 })
+        if (ent.Comp.DialedNumber > 9999)
             return;
 
         PlayPhoneSound(ent.AsNullable(), args.Value);
