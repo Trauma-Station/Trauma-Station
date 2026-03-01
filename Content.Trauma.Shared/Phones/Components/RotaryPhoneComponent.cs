@@ -41,7 +41,7 @@ public sealed partial class RotaryPhoneComponent : Component
     /// <summary>
     /// The phone number the phone is calling
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int? DialedNumber;
 
     /// <summary>
@@ -59,7 +59,7 @@ public sealed partial class RotaryPhoneComponent : Component
     /// <summary>
     /// The connected phone, if any
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? ConnectedPhone;
 
     /// <summary>
@@ -88,24 +88,25 @@ public sealed partial class RotaryPhoneComponent : Component
 
     #region sounds
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public SoundSpecifier SpeakSound = new SoundCollectionSpecifier("RMCPhoneSpeak", AudioParams.Default.WithVolume(-3));
 
+    [DataField]
     public SoundSpecifier KeypadPressSound = new SoundPathSpecifier("/Audio/_RMC14/Phone/Tone1.ogg");
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public SoundPathSpecifier RingSound = new SoundPathSpecifier("/Audio/_RMC14/Phone/telephone_ring.ogg");
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public SoundPathSpecifier RingingSound = new SoundPathSpecifier("/Audio/_RMC14/Phone/ring_outgoing.ogg");
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public SoundPathSpecifier HandUpSoundLocal = new SoundPathSpecifier ("/Audio/_RMC14/Phone/phone_busy.ogg");
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public SoundPathSpecifier BusySound = new SoundPathSpecifier ("/Audio/_RMC14/Phone/Phone_voicemail.ogg");
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntityUid? SoundEntity;
 
     #endregion

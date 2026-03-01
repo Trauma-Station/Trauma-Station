@@ -150,7 +150,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
 
         if (otherPhoneComponent.SpeakerPhone)
         {
-            _chat.TrySendInGameICMessage(ent.Comp.ConnectedPhone.Value,
+            _chat.TrySendInGameICMessage(connected,
                 args.Message,
                 InGameICChatType.Speak,
                 hideChat: true,

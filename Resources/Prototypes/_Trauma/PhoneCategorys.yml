@@ -42,3 +42,4 @@
   id: Hidden
   text: phone-category-hidden
   index: 9
+  hideInPhonebook: true

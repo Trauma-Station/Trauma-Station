@@ -11,36 +11,21 @@ public sealed class PhoneKeypadMessage(int value) : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public sealed class PhoneBookPressedMessage : BoundUserInterfaceMessage
+public sealed class PhoneBookPressedMessage(int value) : BoundUserInterfaceMessage
 {
-    public int Value;
-
-    public PhoneBookPressedMessage(int value)
-    {
-        Value = value;
-    }
+    public readonly int Value = value;
 }
 
 [Serializable, NetSerializable]
-public sealed class PhoneNameChangedMessage : BoundUserInterfaceMessage
+public sealed class PhoneNameChangedMessage(string value) : BoundUserInterfaceMessage
 {
-    public string Value;
-
-    public PhoneNameChangedMessage(string value)
-    {
-        Value = value;
-    }
+    public readonly string Value = value;
 }
 
 [Serializable, NetSerializable]
-public sealed class PhoneCategoryChangedMessage : BoundUserInterfaceMessage
+public sealed class PhoneCategoryChangedMessage(string value) : BoundUserInterfaceMessage
 {
-    public string Value;
-
-    public PhoneCategoryChangedMessage(string value)
-    {
-        Value = value;
-    }
+    public readonly string Value = value;
 }
 
 [Serializable, NetSerializable]
@@ -50,27 +35,10 @@ public sealed class PhoneKeypadClearMessage : BoundUserInterfaceMessage;
 public sealed class PhoneDialedMessage : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class GoobPhoneBuiState : BoundUserInterfaceState
+public sealed class GoobPhoneBuiState(List<PhoneData> phones) : BoundUserInterfaceState
 {
-    public List<PhoneData> Phones { get; }
-
-    public GoobPhoneBuiState(List<PhoneData> phones)
-    {
-        Phones = phones;
-    }
+    public readonly List<PhoneData> Phones = phones;
 }
 
 [Serializable, NetSerializable]
-public record struct PhoneData
-{
-    public string Name;
-    public string Category;
-    public int Number;
-
-    public PhoneData(string name, string category, int number)
-    {
-        Name = name;
-        Category = category;
-        Number = number;
-    }
-}
+public record struct PhoneData(string Name, string Category, int Number);

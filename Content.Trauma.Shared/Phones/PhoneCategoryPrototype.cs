@@ -17,11 +17,17 @@ public sealed partial class PhoneCategoryPrototype : IPrototype
     /// The name of the category e.g "command"
     /// </summary>
     [DataField (required: true)]
-    public required string Text;
+    public required LocId Text;
 
     /// <summary>
     /// The appearance order of the category, 1 is high
     /// </summary>
     [DataField(required: true)]
     public required int Index;
+
+    /// <summary>
+    /// The appearance order of the category, 1 is high
+    /// </summary>
+    [DataField]
+    public bool HideInPhonebook = false;
 }

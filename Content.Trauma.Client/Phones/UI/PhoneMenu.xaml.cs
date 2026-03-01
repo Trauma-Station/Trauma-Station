@@ -77,7 +77,7 @@ public sealed partial class PhoneMenu : FancyWindow
 
         foreach (var prototype in sorted)
         {
-            if (prototype.ID == "Hidden")
+            if (prototype.HideInPhonebook)
                 continue;
 
             var container = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
@@ -89,7 +89,7 @@ public sealed partial class PhoneMenu : FancyWindow
             collapsible.AddChild(body);
 
             PhoneBookContainer.AddChild(collapsible);
-            _categoryContainers[prototype.ID.ToLower()] = container;
+            _categoryContainers[prototype.ID] = container;
         }
     }
 
@@ -103,10 +103,10 @@ public sealed partial class PhoneMenu : FancyWindow
 
     public void AddPhoneBookLabel(string name, string category, int phonenumber)
     {
-        if (!_categoryContainers.TryGetValue(category.ToLower(), out var container))
+        if (!_categoryContainers.TryGetValue(category, out var container))
             return;
 
-        var btn = new Button() { Text = name + " - " + phonenumber };
+        var btn = new Button() { Text = Loc.GetString("phonebook-format", ("name", name), ("phonenumber", phonenumber)) };
         btn.OnPressed += _ => OnPhoneBookButtonPressed?.Invoke(phonenumber);
         container.AddChild(btn);
     }

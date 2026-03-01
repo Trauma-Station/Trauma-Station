@@ -9,6 +9,9 @@ using Content.Shared.Interaction;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
+using Content.Shared.Tools;
+using Content.Shared.Tools.Components;
+using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Trauma.Shared.Phones.Components;
 using Content.Trauma.Shared.Phones.Events;
@@ -26,8 +29,11 @@ namespace Content.Trauma.Shared.Phones.Systems;
 
 public sealed class RotaryPhoneSystem : EntitySystem
 {
-    private static readonly ProtoId<TagPrototype> ScrewdriverTag = "Screwdriver";
-    private List<int> PhoneNumbers = new ();
+    private static readonly ProtoId<ToolQualityPrototype> ScrewingQuality = "Screwing";
+    private readonly HashSet<int> _phoneNumbers = new();
+    private const int PhoneNumberMin = 11111;
+    private const int PhoneNumberMax = 99999;
+    private const int PhoneNumberPoolSize = PhoneNumberMax - PhoneNumberMin; // 88,888 possible numbers
     public const string PhoneJoint = "jointphone";
 
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -35,7 +41,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedDeviceLinkSystem _deviceLink = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly SharedJointSystem _joint = default!;
 
@@ -87,17 +93,26 @@ public sealed class RotaryPhoneSystem : EntitySystem
 
     private void OnMapInit(Entity<RotaryPhoneComponent> ent, ref MapInitEvent args)
     {
-        var randPhoneNumber = _random.Next(11111, 99999);
-
-        while (PhoneNumbers.Contains(randPhoneNumber))
+        if (ent.Comp.PhoneNumber is { } existing)
         {
-            randPhoneNumber = _random.Next(11111, 99999);
+            _phoneNumbers.Add(existing);
+            return;
         }
 
-        PhoneNumbers.Add(randPhoneNumber);
+        if (_phoneNumbers.Count >= PhoneNumberPoolSize)
+        {
+            Log.Error("too many phone numbers, did you seriously put 88,888 phones on a single map?");
+            return;
+        }
 
-        if (ent.Comp.PhoneNumber == null)
-            ent.Comp.PhoneNumber = randPhoneNumber;
+        int numberToAdd;
+        do
+        {
+            numberToAdd = _random.Next(PhoneNumberMin, PhoneNumberMax);
+        } while (_phoneNumbers.Contains(numberToAdd));
+
+        _phoneNumbers.Add(numberToAdd);
+        ent.Comp.PhoneNumber = numberToAdd;
     }
 
     private void OnDestruction(Entity<RotaryPhoneHolderComponent> ent, ref DestructionEventArgs args)
@@ -118,10 +133,8 @@ public sealed class RotaryPhoneSystem : EntitySystem
 
     private void OnInteract(Entity<RotaryPhoneComponent> ent, ref InteractUsingEvent args)
     {
-        if (_tag.HasTag(args.Used, ScrewdriverTag))
-        {
+        if (_tool.HasQuality(args.Used, ScrewingQuality))
             _uiSystem.OpenUi(ent.Owner, PhoneUiKey.NameChange, args.User);
-        }
     }
 
     private void OnExamine(Entity<RotaryPhoneComponent> ent, ref ExaminedEvent args)
@@ -139,7 +152,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
 
     private void OnGetVerbs(Entity<RotaryPhoneComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (args.CanComplexInteract
+        if (!args.CanComplexInteract
             || !args.CanAccess
             || !args.CanInteract)
             return;
@@ -175,6 +188,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
     private void OnUiClosed(Entity<RotaryPhoneComponent> ent, ref BoundUIClosedEvent args)
     {
         ent.Comp.DialedNumber = null;
+        Dirty(ent);
     }
 
     private void OnRing(Entity<RotaryPhoneComponent> ent, ref  PhoneRingEvent args)
@@ -184,12 +198,12 @@ public sealed class RotaryPhoneSystem : EntitySystem
         if (ent.Comp.ConnectedPhoneStand != null)
             UpdateAppearance(ent.Comp.ConnectedPhoneStand.Value, RotaryPhoneVisuals.Ring);
 
-        var name = Loc.GetString("phone-popup-ring", ("location", args.ent.Comp.Name ?? Loc.GetString("phone-number-unknown")));
+        var name = Loc.GetString("phone-popup-ring", ("location", args.Phone.Comp.Name ?? Loc.GetString("phone-number-unknown")));
 
         _popup.PopupEntity(name, ent.Owner, PopupType.Medium);
 
         RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.RingPort);
-        ent.Comp.ConnectedPhone = args.ent.Owner;
+        ent.Comp.ConnectedPhone = args.Phone.Owner;
     }
 
     private void OnPickup(Entity<RotaryPhoneComponent> ent, ref EntGotRemovedFromContainerMessage args)
@@ -229,7 +243,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
 
         RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.HangUpPort);
         DisconnectPhones(ent.Comp);
-
+        Dirty(ent);
     }
     private void OnGotHungUp(Entity<RotaryPhoneComponent> ent, ref PhoneHungUpEvent args)
     {
@@ -247,6 +261,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
 
         ent.Comp.ConnectedPhone = null;
         ent.Comp.Connected = false;
+        Dirty(ent);
     }
 
     #region Helpers
@@ -259,6 +274,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
 
         otherPhone.SoundEntity = _audio.Stop(otherPhone.SoundEntity);
         thisPhone.SoundEntity = _audio.Stop(thisPhone.SoundEntity);
+        Dirty(uid, thisPhone);
     }
 
     private void DisconnectPhones(RotaryPhoneComponent thisPhone)

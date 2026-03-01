@@ -8,7 +8,14 @@ phone-speakerphone-onoff = The speaker is now {$status}.
 
 phone-speak = {$name} says: {$message}
 
+phone-menu-title = Telephone
+
 phone-menu-button-confirm = Change name
+
+phone-options = Phone Options
+phone-category = Phone Category
+
+phonebook-format = {$name} - {$phonenumber}
 
 phone-category-command = Command
 phone-category-security = Security
