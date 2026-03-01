@@ -41,7 +41,7 @@
                         StyleClasses="ButtonColorPurpleAndCool"
                         Margin="5"
                         SetWidth="80"
-                        SetHeight="35" 
+                        SetHeight="35"
                         HorizontalAlignment="Right"/>
             </BoxContainer>
         </BoxContainer>
