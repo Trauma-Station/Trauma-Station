@@ -18,6 +18,7 @@ using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Containers;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -34,7 +35,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly BodySystem _body = default!;
 
     private TimeSpan _nextUpdate;
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(1);
@@ -53,7 +53,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         InitializeOnWear();
         InitializeConstruction();
 
-        SubscribeLocalEvent<KnowledgeContainerComponent, ComponentStartup>(OnKnowledgeContainerStartup);
         SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnKnowledgeContainerShutdown);
         SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotInsertedEvent>(OnOrganInserted);
         SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotRemovedEvent>(OnOrganRemoved);
@@ -91,37 +90,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
     }
 
-    private void OnKnowledgeContainerStartup(Entity<KnowledgeContainerComponent> ent, ref ComponentStartup args)
-    {
-        if (TryComp<MMIComponent>(ent, out var mmiComp))
-        {
-            if (!_container.TryGetContainingContainer((ent, null, null), out var container))
-                return;
-
-            var mmiHolder = container.Owner;
-
-            if (!_container.TryGetContainingContainer((ent, null, null), out var borgContainer))
-                return;
-
-            var borg = borgContainer.Owner;
-
-            if (!TryComp<KnowledgeHolderComponent>(borg, out var knowledgeHolder))
-                return;
-
-            knowledgeHolder.KnowledgeEntity = ent;
-            Dirty(ent);
-        }
-        else
-        {
-            var body = _body.GetBody(ent);
-            Log.Debug($"Knowledge container {ToPrettyString(ent)} has body {ToPrettyString(body)}");
-            if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
-                return;
-            knowledgeHolder.KnowledgeEntity = ent;
-            Dirty(ent);
-            Log.Debug($"Knowledge container {ToPrettyString(ent)} started up with body {ToPrettyString(body)}");
-        }
-    }
 
     private void OnKnowledgeContainerShutdown(Entity<KnowledgeContainerComponent> ent, ref ComponentShutdown args)
     {
@@ -131,20 +99,18 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     private void OnOrganInserted(Entity<KnowledgeContainerComponent> ent, ref OrganGotInsertedEvent args)
     {
-        var body = _body.GetBody(ent);
-        if (body is not { } user || !TryComp<KnowledgeHolderComponent>(user, out var knowledgeHolder))
+        if (!TryComp<KnowledgeHolderComponent>(args.Target, out var knowledgeHolder))
             return;
         knowledgeHolder.KnowledgeEntity = ent;
-        Dirty(user, knowledgeHolder);
+        Dirty(args.Target, knowledgeHolder);
     }
 
     private void OnOrganRemoved(Entity<KnowledgeContainerComponent> ent, ref OrganGotRemovedEvent args)
     {
-        var body = _body.GetBody(ent);
-        if (body is not { } user || !TryComp<KnowledgeHolderComponent>(user, out var knowledgeHolder))
+        if (!TryComp<KnowledgeHolderComponent>(args.Target, out var knowledgeHolder))
             return;
         knowledgeHolder.KnowledgeEntity = null;
-        Dirty(ent);
+        Dirty(args.Target, knowledgeHolder);
     }
 
     private void OnMMIInserted(Entity<MMIComponent> ent, ref EntGotInsertedIntoContainerMessage args)
@@ -155,7 +121,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
             return;
         knowledgeHolder.KnowledgeEntity = ent;
-        Dirty(ent);
+        Dirty(body, knowledgeHolder);
     }
 
     private void OnMMIRemoved(Entity<MMIComponent> ent, ref EntGotRemovedFromContainerMessage args)
@@ -166,7 +132,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
             return;
         knowledgeHolder.KnowledgeEntity = null;
-        Dirty(ent);
+        Dirty(body, knowledgeHolder);
     }
 
     public void OnAddExperienceEvent(Entity<KnowledgeHolderComponent> ent, ref AddExperienceEvent args)

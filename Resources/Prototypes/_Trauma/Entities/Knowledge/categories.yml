@@ -72,3 +72,4 @@
     color: "#c70000"
   - type: MartialArtsKnowledge
     blocked: false
+    icon: Objects/Misc/skub.rsi
