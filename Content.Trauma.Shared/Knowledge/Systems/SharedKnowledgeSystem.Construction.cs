@@ -59,7 +59,7 @@ public abstract partial class SharedKnowledgeSystem
                 RaiseLocalEvent(user, ref ev);
             }
             added += added / ent.Comp.LevelDeltas.Count();
-            var qualityToAdd = ent.Comp.Quality * ent.Comp.NumberOfMasteries;
+            var qualityToAdd = ent.Comp.Quality * ent.Comp.NumberOfMasteries + added;
             ent.Comp.NumberOfMasteries++;
             ent.Comp.Quality = qualityToAdd / ent.Comp.NumberOfMasteries;
             _nameModifier.RefreshNameModifiers(ent.Owner);
