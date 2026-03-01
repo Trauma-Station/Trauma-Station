@@ -32,6 +32,7 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, InvokeThrownQualityEvent>(AlterThrownDamage);
         SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(DealShootingExperience);
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, StackSplitEvent>(SplitStack);
+        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, AttemptMergeStackEvent>(AttemptMergeStack);
     }
 
     public void OnConstructionGetGroupEvent(Entity<KnowledgeHolderComponent> ent, ref ConstructionGetGroupsEvent args)
@@ -128,6 +129,36 @@ public abstract partial class SharedKnowledgeSystem
 
     private void SplitStack(Entity<KnowledgeConstructionModifierComponent> ent, ref StackSplitEvent args)
     {
+        var comp = EnsureComp<KnowledgeConstructionModifierComponent>(args.NewId);
+        comp.LevelDeltas = ent.Comp.LevelDeltas;
+        comp.Quality = ent.Comp.Quality;
+        comp.NumberOfMasteries = ent.Comp.NumberOfMasteries;
+    }
 
+    private void AttemptMergeStack(Entity<KnowledgeConstructionModifierComponent> ent, ref AttemptMergeStackEvent args)
+    {
+        if (!TryComp<KnowledgeConstructionModifierComponent>(args.OtherStack, out var other))
+        {
+            args.ShouldNotMerge = true;
+            return;
+        }
+
+        if (other.Quality != ent.Comp.Quality ||
+        other.NumberOfMasteries != ent.Comp.NumberOfMasteries ||
+        !LevelDeltasMatch(other.LevelDeltas, ent.Comp.LevelDeltas))
+        {
+            args.ShouldNotMerge = true;
+        }
+    }
+
+    private bool LevelDeltasMatch(Dictionary<EntProtoId, int> a, Dictionary<EntProtoId, int> b)
+    {
+        if (a.Count != b.Count) return false;
+        foreach (var (key, value) in a)
+        {
+            if (!b.TryGetValue(key, out var otherValue) || value != otherValue)
+                return false;
+        }
+        return true;
     }
 }

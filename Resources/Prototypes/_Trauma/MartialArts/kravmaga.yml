@@ -7,6 +7,8 @@
   components:
   - type: Action
     useDelay: 0.5
+    event: !type:LegSweep
+      time: 4
     icon:
       sprite: _Goobstation/Actions/kravmaga.rsi
       state: legsweep
@@ -23,6 +25,8 @@
   components:
   - type: Action
     useDelay: 0.5
+    event: !type:LegSweep
+      time: 4
     icon:
       sprite: _Goobstation/Actions/kravmaga.rsi
       state: neckchop
@@ -39,6 +43,8 @@
   components:
   - type: Action
     useDelay: 0.5
+    event: !type:LegSweep
+      time: 4
     icon:
       sprite: _Goobstation/Actions/kravmaga.rsi
       state: lungpunch

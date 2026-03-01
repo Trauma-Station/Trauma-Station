@@ -37,6 +37,12 @@
   parent: BaseMartialArtsKnowledge
   id: MartialArtKravMaga
   name: MartialArtKravMaga
+  components:
+  - type: ComboActions
+    storedComboActions:
+    - ActionLegSweep
+    - ActionNeckChop
+    - ActionLungPunch
 
 - type: entity
   parent: BaseMartialArtsKnowledge

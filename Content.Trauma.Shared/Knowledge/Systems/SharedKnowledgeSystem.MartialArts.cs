@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Actions;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction;
@@ -18,6 +19,7 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
     private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";
     private static readonly EntProtoId AthleticsKnowledge = "AthleticsKnowledge";
@@ -162,7 +164,25 @@ public abstract partial class SharedKnowledgeSystem
         if (!TryComp<KnowledgeHolderComponent>(player, out var knowledgeHolder) || TryGetKnowledgeContainer((player, knowledgeHolder)) is not { } knowledgeEnt)
             return;
 
+        if (TryComp<ComboActionsComponent>(knowledgeEnt.Comp.MartialArtSkillUid, out var actionComp))
+        {
+            foreach (var (comboId, actionEntity) in actionComp.ComboActions)
+            {
+                _actions.RemoveAction(player, actionEntity);
+            }
+        }
+
         knowledgeEnt.Comp.MartialArtSkillUid = knowledgeUid;
+
+        if (TryComp<ComboActionsComponent>(knowledgeEnt.Comp.MartialArtSkillUid, out var actionCompTwo))
+        {
+            foreach (var comboId in actionCompTwo.StoredComboActions)
+            {
+                if (_actions.AddAction(player, comboId) is { } action)
+                    actionCompTwo.ComboActions[comboId] = action;
+            }
+        }
+
         Dirty(knowledgeEnt);
     }
 

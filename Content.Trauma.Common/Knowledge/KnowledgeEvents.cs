@@ -89,3 +89,11 @@ public record struct MartialArtDamageModifierEvent(EntityUid User, float Coeffic
 /// </summary>
 [ByRefEvent]
 public record struct MartialArtSpeedModifierEvent(EntityUid User, float Coefficient = 1.0f);
+
+/// <summary>
+/// Raised on the donor or recipient stack and determines if the qualities are similiar enough to merge
+/// </summary>
+/// <param name="Recipient"></param>
+/// <param name="ShouldMerge"></param>
+[ByRefEvent]
+public record struct AttemptMergeStackEvent(EntityUid OtherStack, bool ShouldNotMerge);
