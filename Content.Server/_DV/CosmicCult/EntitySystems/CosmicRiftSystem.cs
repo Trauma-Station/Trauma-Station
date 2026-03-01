@@ -8,6 +8,7 @@ using Content.Goobstation.Shared.Bible; // Goobstation - Bible
 using Content.Server.Popups;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
+using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
@@ -152,7 +153,7 @@ public sealed class CosmicRiftSystem : EntitySystem
     private void OnAbsorbDoAfter(Entity<CosmicCultComponent> uid, ref EventAbsorbRiftDoAfter args)
     {
         var comp = uid.Comp;
-        if (args.Args.Target is not { } target || args.Cancelled || args.Handled || !TryComp<CosmicMalignRiftComponent>(args.Args.Target, out var rift))
+        if (args.Target is not { } target || args.Cancelled || args.Handled || !TryComp<CosmicMalignRiftComponent>(target, out var rift))
             return;
 
         args.Handled = true;
@@ -162,7 +163,7 @@ public sealed class CosmicRiftSystem : EntitySystem
         var hasNullFrag = false;
         foreach (var item in uid.Comp.ActionEntities)
         {
-            if (TryComp<MetaDataComponent>(item, out var data) && data.EntityName == "Null Fragmentation") // Is it stupid? Yes. Does it work? Also yes.
+            if (CompOrNull<EntityTargetActionComponent>(item)?.Event is EventCosmicFragmentation)
             {
                 hasNullFrag = true;
                 break;

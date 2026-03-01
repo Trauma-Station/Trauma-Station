@@ -23,7 +23,7 @@ public partial class SharedCosmicShopSystem : EntitySystem
 
     private void OnUIOpened(Entity<CosmicShopComponent> ent, ref BoundUIOpenedEvent args)
     {
-        if (!TryComp<CosmicCultComponent>(args.Actor, out _))
+        if (!HasComp<CosmicCultComponent>(args.Actor))
             return;
 
         _ui.SetUiState(ent.Owner, CosmicShopKey.Key, new CosmicShopBuiState());
@@ -78,7 +78,7 @@ public partial class SharedCosmicShopSystem : EntitySystem
 
             if (!proto.Passive)
             {
-                if (!_prototype.TryIndex(proto.Action, out var actProto)) continue;
+                if (!_prototype.Resolve(proto.Action, out var actProto)) continue;
                 foreach (var action in cultComp.ActionEntities)
                 {
                     if (!TryComp<MetaDataComponent>(action, out var data) || data.EntityName != actProto.Name) continue;

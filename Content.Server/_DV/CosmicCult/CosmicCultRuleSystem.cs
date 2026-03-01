@@ -456,7 +456,8 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         associatedComp.CultGamerule = rule;
 
-        if (!_role.MindHasRole<CosmicCultRoleComponent>(mindId, out _)) _role.MindAddRole(mindId, "MindRoleCosmicCult", mind, true); // It applies twise for some reason?
+        if (!_role.MindHasRole<CosmicCultRoleComponent>(mindId, out _))
+            _role.MindAddRole(mindId, "MindRoleCosmicCult", mind, true); // It applies twice for some reason?
         _role.MindHasRole<CosmicCultRoleComponent>(mindId, out var cosmicRole);
 
         _antag.SendBriefing(uid, Loc.GetString("cosmiccult-role-roundstart-fluff"), Color.FromHex("#4cabb3"), _briefingSound);

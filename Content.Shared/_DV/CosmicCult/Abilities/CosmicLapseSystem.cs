@@ -53,14 +53,15 @@ public sealed class CosmicLapseSystem : EntitySystem
         if (!_prototype.HasIndex(polymorphId))
             polymorphId = HumanLapse;
         if (!_prototype.Resolve(polymorphId, out var polymorph)) return;
+        var copy = polymorph.Configuration;
 
         if (_cult.EntityIsCultist(action.Target))
         {
-            polymorph.Configuration.Duration *= 2;
-            polymorph.Configuration.Forced = false;
+            copy.Duration *= 2;
+            copy.Forced = false;
         }
 
-        _polymorph.PolymorphEntity(action.Target, polymorph.Configuration);
+        _polymorph.PolymorphEntity(action.Target, copy);
 
         // Doesn't make an echo because the morph is invisible
     }

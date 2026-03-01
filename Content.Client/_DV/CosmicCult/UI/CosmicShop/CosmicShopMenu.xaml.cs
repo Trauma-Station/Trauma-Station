@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._DV.CosmicCult;
@@ -26,7 +25,7 @@ public sealed partial class CosmicShopMenu : FancyWindow
     public Action? OnLevelUpConfirmed;
     public Action? OnRespecConfirmed;
     private InfluencePrototype? SelectedInfluence = null;
-    private TimeSpan? _timer; // It refuses to work with TimeSpan for some reason, so we use ancient tech of frameTime accumulation
+    private TimeSpan? _timer;
     private TimeSpan _respecLockTime = TimeSpan.FromSeconds(0.8);
     private TimeSpan _respecResetTime = TimeSpan.FromSeconds(4);
 
