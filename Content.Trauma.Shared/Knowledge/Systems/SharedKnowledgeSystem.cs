@@ -114,10 +114,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         else
         {
             var body = _body.GetBody(ent);
+            Log.Debug($"Knowledge container {ToPrettyString(ent)} has body {ToPrettyString(body)}");
             if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
                 return;
             knowledgeHolder.KnowledgeEntity = ent;
             Dirty(ent);
+            Log.Debug($"Knowledge container {ToPrettyString(ent)} started up with body {ToPrettyString(body)}");
         }
     }
 
