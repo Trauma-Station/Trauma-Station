@@ -61,7 +61,7 @@ public abstract partial class SharedKnowledgeSystem
             added = added / ent.Comp.LevelDeltas.Count();
             var qualityToAdd = ent.Comp.Quality * ent.Comp.NumberOfMasteries + added;
             ent.Comp.NumberOfMasteries++;
-            ent.Comp.Quality = qualityToAdd / ent.Comp.NumberOfMasteries;
+            ent.Comp.Quality = Math.Clamp(qualityToAdd / ent.Comp.NumberOfMasteries, -6, 6); // Make sure numbers don't go too crazy.
             _nameModifier.RefreshNameModifiers(ent.Owner);
         }
 

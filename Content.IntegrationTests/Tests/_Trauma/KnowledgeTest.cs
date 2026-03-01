@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
 using Content.Server.Construction;
@@ -6,6 +7,7 @@ using Content.Shared.Construction.Components;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Coordinates;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Shared.Knowledge.Components;
 using NUnit.Framework;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -39,10 +41,29 @@ public sealed class EngineeringKnowledgeTest
             var mapId = mapMan.CreateMap();
             var grid = mapMan.CreateGrid(mapId);
             coords = new EntityCoordinates(grid.Owner, Vector2.Zero);
-            engineer = entMan.SpawnEntity("MobHumanEngineer", coords);
+            engineer = entMan.SpawnEntity("MobHuman", coords);
+
+            // Define our custom knowledge for this specific test case
+            var grant = entMan.AddComponent<KnowledgeGrantComponent>(engineer);
+            grant.Skills = new Dictionary<EntProtoId, int>
+            {
+                { "HandmadeKnowledge", 50 } ,
+                { "TechnologyKnowledge", 50 } ,
+                { "MaterialsKnowledge", 50 } ,
+                { "DoorsKnowledge", 50 } ,
+                { "AirlocksKnowledge", 50 } ,
+                { "FurnitureKnowledge", 50 } ,
+                { "InfrastructureKnowledge", 50 } ,
+                { "ElectronicsKnowledge", 50 } ,
+                { "WallsKnowledge", 50 } ,
+                { "WindowsKnowledge", 50 } ,
+                { "SmokeablesKnowledge", 50 } ,
+            };
+            entMan.InitializeAndStartEntity(engineer);
         });
 
         await pair.RunTicksSync(2);
+
         await server.WaitAssertion(() =>
         {
             var entMan = server.ResolveDependency<IEntityManager>();

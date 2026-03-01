@@ -3,7 +3,6 @@
 using System.Linq;
 using Content.Server.Administration;
 using Content.Shared.Administration;
-using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
