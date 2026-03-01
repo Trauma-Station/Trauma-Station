@@ -26,7 +26,7 @@ public sealed partial class PhoneCategoryPrototype : IPrototype
     public required int Index;
 
     /// <summary>
-    /// The appearance order of the category, 1 is high
+    /// Should the phone be hidden in the phonebook
     /// </summary>
     [DataField]
     public bool HideInPhonebook = false;
