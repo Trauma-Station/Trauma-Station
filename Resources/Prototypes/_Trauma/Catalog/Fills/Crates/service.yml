@@ -6,6 +6,6 @@
   components:
   - type: EntityTableContainerFill
     containers:
-      contents:
+      entity_storage:
         id: RotaryPhoneFlatPack
         amount: 5
