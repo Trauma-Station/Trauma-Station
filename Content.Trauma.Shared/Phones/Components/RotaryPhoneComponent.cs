@@ -48,7 +48,7 @@ public sealed partial class RotaryPhoneComponent : Component
     /// What category under the phone book should this phone be under
     /// </summary>
     [DataField, AutoNetworkedField]
-    public string? Category = "Uncategorized";
+    public ProtoId<PhoneCategoryPrototype>? Category = "Uncategorized";
 
     /// <summary>
     /// What should the phone be called

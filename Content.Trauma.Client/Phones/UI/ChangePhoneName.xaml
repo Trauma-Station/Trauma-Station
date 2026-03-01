@@ -7,7 +7,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     xmlns:controls="using:Content.Client.UserInterface.Controls"
     Title="{Loc 'phone-options'}" MinSize="300 70">
     <BoxContainer Orientation="Vertical">
-        <Label Text="Phone Name"></Label>
+        <Label Text="{Loc 'phone-name' }"/>
         <LineEdit Name="MessageEdit"
                   HorizontalExpand="True"
                   Access="Public" />

@@ -11,17 +11,15 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <controls:StripeBack>
                 <BoxContainer Orientation="Horizontal" Align="Center">
                     <GridContainer Columns="3"
-                                   Name="KeypadGrid">
-                        <!-- Keypad is filled by code -->
-                    </GridContainer>
+                                   Name="KeypadGrid"/>
+                    <!-- Keypad is filled by code -->
                 </BoxContainer>
             </controls:StripeBack>
-            <RichTextLabel Name="DialNumber" Text="" Access="Public" HorizontalAlignment="Center"></RichTextLabel>
+            <RichTextLabel Name="DialNumber" Text="" Access="Public" HorizontalAlignment="Center"/>
         </BoxContainer>
         <!-- phonebook is filled by code -->
         <ScrollContainer MinSize="250 90">
-            <BoxContainer MinSize="100 90" Orientation="Vertical" Name="PhoneBookContainer" Access="Public">
-            </BoxContainer>
+            <BoxContainer MinSize="100 90" Orientation="Vertical" Name="PhoneBookContainer" Access="Public"/>
         </ScrollContainer>
     </GridContainer>
 </controls:FancyWindow>

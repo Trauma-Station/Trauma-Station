@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Phones.Components;
@@ -41,4 +42,4 @@ public sealed class GoobPhoneBuiState(List<PhoneData> phones) : BoundUserInterfa
 }
 
 [Serializable, NetSerializable]
-public record struct PhoneData(string Name, string Category, int Number);
+public record struct PhoneData(string Name, ProtoId<PhoneCategoryPrototype> Category, int Number);

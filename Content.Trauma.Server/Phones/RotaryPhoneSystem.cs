@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Server.Chat.Managers;
 using Content.Shared.Audio;
 using Content.Shared.Chat;
@@ -16,7 +15,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Phones;
@@ -27,7 +25,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly Shared.Phones.Systems.RotaryPhoneSystem _rotaryPhone = default!;
+    [Dependency] private readonly SharedRotaryPhoneSystem _sharedRotaryPhone = default!;
 
     public override void Initialize()
     {
@@ -134,12 +132,11 @@ public sealed class RotaryPhoneSystem : EntitySystem
                 break;
             }
         }
-        Dirty(ent);
     }
 
     private void OnListen(Entity<RotaryPhoneComponent> ent, ref ListenEvent args)
     {
-        if(HasComp<RotaryPhoneComponent>(args.Source)
+        if (HasComp<RotaryPhoneComponent>(args.Source)
            || args.Source == ent.Owner
            || HasComp<RadioSpeakerComponent>(args.Source)
            || ent.Comp.ConnectedPhone is not {} connected
@@ -162,7 +159,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
         }
 
 
-        if(!TryComp(otherPhoneComponent.ConnectedPlayer, out ActorComponent? actor) || otherPhoneComponent.ConnectedPlayer == null)
+        if (!TryComp(otherPhoneComponent.ConnectedPlayer, out ActorComponent? actor) || otherPhoneComponent.ConnectedPlayer == null)
             return;
 
         var sound = _audio.ResolveSound(ent.Comp.SpeakSound);
@@ -182,16 +179,16 @@ public sealed class RotaryPhoneSystem : EntitySystem
             ent.Comp.Engaged = true;
             ent.Comp.ConnectedPhone = phone;
             phoneComp.Engaged = true;
-            ent.Comp.SoundEntity = _audio.PlayPvs(ent.Comp.RingingSound, ent.Owner, AudioParams.Default.WithLoop(true))?.Entity;
-            _rotaryPhone.RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.OutGoingPort);
+            ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.RingingSound, ent.Owner, ent.Comp.ConnectedPlayer, AudioParams.Default.WithLoop(true))?.Entity;
+            _sharedRotaryPhone.RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.OutGoingPort);
 
             var ev = new PhoneRingEvent(ent);
 
             RaiseLocalEvent(phone, ref ev);
         }
-        else if(ent.Comp.SoundEntity is null)
+        else if (ent.Comp.SoundEntity is null)
         {
-            ent.Comp.SoundEntity = _audio.PlayPvs(ent.Comp.BusySound, ent.Owner)?.Entity;
+            ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.BusySound, ent.Owner, ent.Comp.ConnectedPlayer)?.Entity;
         }
     }
 

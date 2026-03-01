@@ -21,10 +21,17 @@ public sealed class PhoneBoundUserInterface : BoundUserInterface
 
         _menu.OnKeypadButtonPressed += i =>
         {
-            SendPredictedMessage(new PhoneKeypadMessage(i));
-
             var current = _menu.DialNumber.GetMessage();
-            _menu.DialNumber.SetMessage(current + i.ToString());
+
+            if (current is not {})
+                return;
+
+            if (current.Length >= 5)
+                return;
+
+            _menu.DialNumber.SetMessage(current + i);
+
+            SendPredictedMessage(new PhoneKeypadMessage(i));
         };
         _menu.OnEnterButtonPressed += () => SendPredictedMessage(new PhoneDialedMessage());
         _menu.OnClearButtonPressed += () =>

@@ -14,6 +14,8 @@ phone-menu-button-confirm = Change name
 
 phone-options = Phone Options
 phone-category = Phone Category
+phone-name = Phone Name
+
 
 phonebook-format = {$name} - {$phonenumber}
 
