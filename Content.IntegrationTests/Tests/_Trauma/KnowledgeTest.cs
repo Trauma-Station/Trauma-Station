@@ -26,6 +26,9 @@ public sealed class EngineeringKnowledgeTest
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
         var server = pair.Server;
 
+        EntityUid engineer = default;
+        EntityCoordinates coords = default;
+
         await server.WaitPost(() =>
         {
             var mapMan = server.ResolveDependency<IMapManager>();
@@ -35,8 +38,15 @@ public sealed class EngineeringKnowledgeTest
             // 1. Setup Map and Engineer
             var mapId = mapMan.CreateMap();
             var grid = mapMan.CreateGrid(mapId);
-            var coords = new EntityCoordinates(grid.Owner, Vector2.Zero);
-            var engineer = entMan.SpawnEntity("MobHumanEngineer", coords);
+            coords = new EntityCoordinates(grid.Owner, Vector2.Zero);
+            engineer = entMan.SpawnEntity("MobHumanEngineer", coords);
+        });
+
+        await pair.RunTicksSync(10);
+        await server.WaitAssertion(() =>
+        {
+            var entMan = server.ResolveDependency<IEntityManager>();
+            var protoMan = server.ResolveDependency<IPrototypeManager>();
 
             // 2. Setup the Construction Target (e.g., an APC frame)
             var apcFrame = entMan.SpawnEntity("APCFrame", coords);
@@ -48,7 +58,7 @@ public sealed class EngineeringKnowledgeTest
 
             // 4. Simulate the interaction logic
             // We check if the current construction edge is valid for this user
-            var consSystem = entMan.EntitySysManager.GetEntitySystem<ConstructionSystem>();
+            var consSystem = entMan.System<ConstructionSystem>();
 
             // Check the first step of the APC graph
             var graph = protoMan.Index<ConstructionGraphPrototype>(construction.Graph);
