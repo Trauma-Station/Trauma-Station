@@ -21,7 +21,6 @@ public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";
     private static readonly EntProtoId AthleticsKnowledge = "AthleticsKnowledge";
@@ -234,14 +233,12 @@ public abstract partial class SharedKnowledgeSystem
 
         // 2. Map the Action ID to your Prototype ID
         // You can name your Action IDs to match your Combo IDs to make this easy
-        if (_proto.TryIndex<ComboPrototype>(args.Combo, out var comboProto))
-        {
-            comboActions.QueuedPrototype = comboProto.ID;
-            Dirty(martialArt, comboActions);
+        comboActions.QueuedPrototype = args.Combo;
 
-            // Provide feedback
-            _popup.PopupEntity(Loc.GetString("martial-arts-queued", ("combo", comboProto.ID)), uid, uid);
-        }
+        Dirty(martialArt, comboActions);
+
+        // Provide feedback
+        _popup.PopupEntity(Loc.GetString("martial-arts-queued", ("combo", args.Combo)), uid, uid);
 
         args.Handled = true; // This starts the cooldown in the UI
     }

@@ -12,5 +12,5 @@ public sealed partial class PerformMartialArtComboEvent : InstantActionEvent
 {
     // This allows you to tell the system which specific button was pressed
     [DataField]
-    public ProtoId<ComboPrototype>? Combo;
+    public ProtoId<ComboPrototype> Combo;
 }

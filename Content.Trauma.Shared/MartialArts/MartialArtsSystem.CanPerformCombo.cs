@@ -104,7 +104,7 @@ public partial class MartialArtsSystem
                 break;
 
             var sum = ent.Comp.LastAttacks.Count - proto.AttackTypes.Count;
-            if (sum < 0)
+            if (proto.AttackTypes.Count > 0 || sum < 0)
                 continue;
 
             var list = ent.Comp.LastAttacks.GetRange(sum, proto.AttackTypes.Count).AsEnumerable();
