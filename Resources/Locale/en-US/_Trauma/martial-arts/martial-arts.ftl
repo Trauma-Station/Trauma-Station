@@ -71,3 +71,5 @@ cqc-consecutive = CONSECUTIVE! C! Q! C!
 no-martial-art = No Martial Art
 
 melee-clumsy-self-hit = You hit yourself!
+
+martial-arts-queued = Queued move: {$combo}!

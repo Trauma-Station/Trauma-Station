@@ -19,12 +19,6 @@ public sealed partial class CanPerformComboComponent : Component
     public EntityUid? CurrentTarget;
 
     /// <summary>
-    /// Gets current combo being performed.
-    /// </summary>
-    [DataField]
-    public ProtoId<ComboPrototype>? BeingPerformed;
-
-    /// <summary>
     /// Combo memory size.
     /// </summary>
     [DataField]

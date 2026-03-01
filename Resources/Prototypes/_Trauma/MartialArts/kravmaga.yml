@@ -7,11 +7,12 @@
   components:
   - type: Action
     useDelay: 0.5
-    event: !type:PerformMartialArtComboEvent
-      combo: CQCKick
-    icon:
+    icon: !type:SpriteSpecifier+Rsi
       sprite: _Goobstation/Actions/kravmaga.rsi
       state: legsweep
+  - type: InstantAction
+    event: !type:PerformMartialArtComboEvent
+        combo: KravLegSweep  
   - type: Sprite # For guidebook
     sprite: _Goobstation/Actions/kravmaga.rsi
     state: legsweep
@@ -25,11 +26,12 @@
   components:
   - type: Action
     useDelay: 0.5
-    event: !type:PerformMartialArtComboEvent
-      combo: CQCKick
-    icon:
+    icon: !type:SpriteSpecifier+Rsi
       sprite: _Goobstation/Actions/kravmaga.rsi
       state: neckchop
+  - type: InstantAction
+    event: !type:PerformMartialArtComboEvent
+        combo: KravNeckChop
   - type: Sprite # For guidebook
     sprite: _Goobstation/Actions/kravmaga.rsi
     state: neckchop
@@ -43,11 +45,63 @@
   components:
   - type: Action
     useDelay: 0.5
-    event: !type:PerformMartialArtComboEvent
-      combo: CQCKick
-    icon:
+    icon: !type:SpriteSpecifier+Rsi
       sprite: _Goobstation/Actions/kravmaga.rsi
       state: lungpunch
+  - type: InstantAction
+    event: !type:PerformMartialArtComboEvent
+        combo: KravLungPunch
   - type: Sprite # For guidebook
     sprite: _Goobstation/Actions/kravmaga.rsi
     state: lungpunch
+
+- type: combo
+  id: KravLegSweep
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-slam
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:LegSweep
+    time: 4
+  levelRequired: 26
+
+- type: combo
+  id: KravNeckChop
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-kick
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:GenericStatusEffect
+    key: Stutter
+    time: 20
+    type: Add
+  levelRequired: 26
+
+- type: combo
+  id: KravLungPunch
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - cqc-restrain
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 30
+  - !type:GenericStatusEffect
+    key: Stutter
+    time: 30
+    type: Add
+  - !type:ModifyKnockdown
+    time: 1
+    drop: true
+    type: Add
+  levelRequired: 26

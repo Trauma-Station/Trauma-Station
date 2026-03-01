@@ -23,7 +23,6 @@ public partial class MartialArtsSystem
     {
         SubscribeLocalEvent<CanPerformComboComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CanPerformComboComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
-        SubscribeLocalEvent<CanPerformComboComponent, ComboEvent>(OnComboBeingPerformed);
     }
 
     private void OnMapInit(Entity<CanPerformComboComponent> ent, ref MapInitEvent args)
@@ -37,6 +36,9 @@ public partial class MartialArtsSystem
 
     private void OnComboAttackPerformed(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         var evSneak = new CanDoSneakAttackEvent(true);
         RaiseLocalEvent(ent, ref evSneak);
         if (!evSneak.CanSneakAttack)
@@ -58,13 +60,10 @@ public partial class MartialArtsSystem
         if (ent.Comp.CurrentTarget is { } target && args.Target != target)
             ent.Comp.LastAttacks.Clear();
 
-        if (TryComp<ComboActionsComponent>(ent, out var comboActions) && comboActions.QueuedPrototype is { } queued)
+        if (TryComp<ComboActionsComponent>(ent, out var comboActions) && comboActions.QueuedPrototype is { } queued && TryComp<KnowledgeComponent>(ent, out var skillComp))
         {
             var proto = _proto.Index(queued);
-            if (TryComp<KnowledgeComponent>(ent, out var skillComp))
-            {
-                OverrideCombo(args.Performer, args.Target, proto, ent, skillComp);
-            }
+            OverrideCombo(args.Performer, args.Target, proto, ent, skillComp);
             comboActions.QueuedPrototype = null;
             return;
         }
@@ -125,8 +124,6 @@ public partial class MartialArtsSystem
 
     public void OverrideCombo(EntityUid performer, EntityUid target, ComboPrototype proto, Entity<CanPerformComboComponent> ent, KnowledgeComponent skillComponent)
     {
-        var beingPerformedEv = new ComboEvent(proto.ID);
-        RaiseLocalEvent(ent, ref beingPerformedEv);
         ent.Comp.Momentum += 1;
 
         float scale = Math.Clamp(((float) (skillComponent.Level + skillComponent.TemporaryLevel - proto.LevelRequired)) / 10.0f, 0.1f, 2.0f) + Math.Min(((float) ent.Comp.Momentum) / 20f, 2.0f);
@@ -137,7 +134,7 @@ public partial class MartialArtsSystem
         if (proto.UserEffects != null)
             _effects.ApplyEffects(performer, proto.UserEffects, scale, target);
         if (proto.OpponentEffects != null)
-            _effects.ApplyEffects(performer, proto.OpponentEffects, scale, target);
+            _effects.ApplyEffects(target, proto.OpponentEffects, scale, performer);
 
         ent.Comp.LastAttacks.Clear();
 
@@ -152,10 +149,5 @@ public partial class MartialArtsSystem
         }
 
         Dirty(ent);
-    }
-
-    private void OnComboBeingPerformed(Entity<CanPerformComboComponent> ent, ref ComboEvent args)
-    {
-        ent.Comp.BeingPerformed = args.Combo;
     }
 }

@@ -219,6 +219,9 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnComboActionClicked(PerformMartialArtComboEvent args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         var uid = args.Performer;
 
         // 1. Get the Knowledge entity (where the ComboActionsComponent lives)
