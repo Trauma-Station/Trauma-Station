@@ -19,13 +19,12 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Phones;
 
-public sealed class RotaryPhoneSystem : EntitySystem
+public sealed class RotaryPhoneSystem : SharedRotaryPhoneSystem
 {
     [Dependency] private readonly SharedChatSystem _chat = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedRotaryPhoneSystem _sharedRotaryPhone = default!;
 
     public override void Initialize()
     {
@@ -180,7 +179,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
             ent.Comp.ConnectedPhone = phone;
             phoneComp.Engaged = true;
             ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.RingingSound, ent.Owner, ent.Comp.ConnectedPlayer, AudioParams.Default.WithLoop(true))?.Entity;
-            _sharedRotaryPhone.RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.OutGoingPort);
+            RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.OutGoingPort);
 
             var ev = new PhoneRingEvent(ent);
 

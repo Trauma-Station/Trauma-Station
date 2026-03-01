@@ -27,7 +27,7 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Phones.Systems;
 
-public sealed class SharedRotaryPhoneSystem : EntitySystem
+public abstract class SharedRotaryPhoneSystem : EntitySystem
 {
     private static readonly ProtoId<ToolQualityPrototype> ScrewingQuality = "Screwing";
     private readonly HashSet<int> _phoneNumbers = new();
