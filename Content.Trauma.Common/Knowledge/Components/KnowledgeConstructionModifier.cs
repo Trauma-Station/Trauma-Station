@@ -27,5 +27,5 @@ public sealed partial class KnowledgeConstructionModifierComponent : Component
     /// Stores the amount of items with mastery that have been added together.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int NumberOfMasteries = 1;
+    public int NumberOfMasteries = 0;
 }
