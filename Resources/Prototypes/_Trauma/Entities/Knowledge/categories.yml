@@ -73,3 +73,35 @@
   - type: MartialArtsKnowledge
     blocked: false
     icon: Objects/Misc/skub.rsi
+
+- type: KnowledgeCategory
+  id: MartialArt
+  name: Martial Arts
+
+- type: KnowledgeCategory
+  id: Construction
+  name: Construction
+
+- type: KnowledgeCategory
+  id: Language
+  name: Languages
+
+- type: KnowledgeCategory
+  id: War
+  name: Combat & Tactics
+
+- type: KnowledgeCategory
+  id: Medical
+  name: Medical
+
+- type: KnowledgeCategory
+  id: Physical
+  name: Physical
+
+- type: KnowledgeCategory
+  id: Intellectual
+  name: Intellectual
+
+- type: KnowledgeCategory
+  id: Scientific
+  name: Scientific

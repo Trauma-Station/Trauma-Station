@@ -2,6 +2,9 @@
 
 using System.Linq;
 using Content.Shared.Armor;
+using Content.Shared.Damage.Components;
+using Content.Shared.Destructible;
+using Content.Shared.Destructible.Thresholds.Triggers;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;
@@ -64,6 +67,17 @@ public abstract partial class SharedKnowledgeSystem
             foreach (var modifier in armorModifiers)
             {
                 armorModifiers[modifier.Key] = ConstructionModifier(ent, 0.87f) * modifier.Value;
+            }
+        }
+
+        if (TryComp<DestructibleComponent>(ent.Owner, out var destructible))
+        {
+            foreach (var threshold in destructible.Thresholds)
+            {
+                if (threshold.Trigger is DamageTrigger trigger)
+                {
+                    trigger.Damage *= ConstructionModifier(ent, 1.6f);
+                }
             }
         }
     }
