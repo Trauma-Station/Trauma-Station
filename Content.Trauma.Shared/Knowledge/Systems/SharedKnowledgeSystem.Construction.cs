@@ -58,7 +58,7 @@ public abstract partial class SharedKnowledgeSystem
                 var ev = new AddExperienceEvent(entity.Key, 6 - mastery);
                 RaiseLocalEvent(user, ref ev);
             }
-            added += added / ent.Comp.LevelDeltas.Count();
+            added = added / ent.Comp.LevelDeltas.Count();
             var qualityToAdd = ent.Comp.Quality * ent.Comp.NumberOfMasteries + added;
             ent.Comp.NumberOfMasteries++;
             ent.Comp.Quality = qualityToAdd / ent.Comp.NumberOfMasteries;
