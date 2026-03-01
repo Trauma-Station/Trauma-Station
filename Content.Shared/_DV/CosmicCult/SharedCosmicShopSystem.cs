@@ -76,16 +76,7 @@ public partial class SharedCosmicShopSystem : EntitySystem
             cultComp.UnlockedInfluences.Add(influence);
             cultComp.EntropyBudget += proto.Cost;
 
-            if (!proto.Passive)
-            {
-                if (!_prototype.Resolve(proto.Action, out var actProto)) continue;
-                foreach (var action in cultComp.ActionEntities)
-                {
-                    if (!TryComp<MetaDataComponent>(action, out var data) || data.EntityName != actProto.Name) continue;
-                    _actions.RemoveAction(action);
-                }
-            }
-            else
+            if (proto.Passive)
             {
                 if (proto.Add != null)
                     _entMan.RemoveComponents(args.Actor, proto.Add);
@@ -94,6 +85,9 @@ public partial class SharedCosmicShopSystem : EntitySystem
                     _entMan.AddComponents(args.Actor, proto.Remove); // This will probably not work well, but there are currently no influences that remove components. Should be careful with those in the future.
             }
         }
+        foreach (var action in cultComp.ActionEntities)
+            _actions.RemoveAction(action);
+        cultComp.ActionEntities.Clear();
 
         _audio.PlayLocal(ent.Comp.PurchaseSfx, args.Actor, args.Actor);
         cultComp.RespecsAvailable--;

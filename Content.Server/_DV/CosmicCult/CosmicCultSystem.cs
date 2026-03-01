@@ -147,10 +147,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         _eye.RefreshVisibilityMask(uid.Owner);
         if (!HasComp<HumanoidProfileComponent>(uid)) return; // Non-humanoids don't get abilities
         foreach (var actionId in uid.Comp.CosmicCultActions)
-        {
-            var actionEnt = _actions.AddAction(uid, actionId);
-            uid.Comp.ActionEntities.Add(actionEnt);
-        }
+            _actions.AddAction(uid, actionId);
 
         uid.Comp.CosmicShopActionEntity = _actions.AddAction(uid, uid.Comp.CosmicShopAction);
 

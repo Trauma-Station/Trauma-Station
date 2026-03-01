@@ -160,20 +160,8 @@ public sealed class CosmicRiftSystem : EntitySystem
         rift.Occupied = false;
         var tgtpos = Transform(target).Coordinates;
         Spawn(uid.Comp.AbsorbVFX, tgtpos);
-        var hasNullFrag = false;
-        foreach (var item in uid.Comp.ActionEntities)
-        {
-            if (CompOrNull<EntityTargetActionComponent>(item)?.Event is EventCosmicFragmentation)
-            {
-                hasNullFrag = true;
-                break;
-            }
-        }
-        if (!hasNullFrag)
-        {
-            var actionEnt = _actions.AddAction(uid, uid.Comp.CosmicFragmentationAction);
-            comp.ActionEntities.Add(actionEnt);
-        }
+        if (comp.CosmicFragmentationActionEntity == null)
+            comp.CosmicFragmentationActionEntity = _actions.AddAction(uid, uid.Comp.CosmicFragmentationAction);
         comp.CosmicEmpowered = true;
         comp.RespecsAvailable++;
         comp.CosmicSiphonQuantity = 2;
