@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.DarkLord;
 using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;

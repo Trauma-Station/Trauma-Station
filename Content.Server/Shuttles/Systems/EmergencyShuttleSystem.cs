@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.RoundEnd;
+// </Trauma>
 using System.Linq;
 using System.Numerics;
 using System.Threading;
@@ -474,6 +477,11 @@ public sealed partial class EmergencyShuttleSystem : SharedEmergencyShuttleSyste
         }
 
         _commsConsole.UpdateCommsConsoleInterface();
+
+        // <Trauma>
+        var ev = new EmergencyShuttleDockedEvent();
+        RaiseLocalEvent(ref ev);
+        // </Trauma>
     }
 
     private void SetupEmergencyShuttle()

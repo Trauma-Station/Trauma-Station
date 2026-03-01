@@ -177,6 +177,8 @@
     ignoreReagents:
     - Fiber
   # Goobstation Edit End
+  - type: CosmicTransmutable # Trauma
+    transmuteTo: BookCosmicCult
 
 - type: entity
   parent: BaseItem
@@ -222,6 +224,8 @@
     ignoreReagents:
     - Fiber
   # Goobstation Edit End
+  - type: CosmicTransmutable # Trauma
+    transmuteTo: BookCosmicCult
 
 - type: entity
   id: BookSpaceEncyclopedia

@@ -6,6 +6,7 @@ using Content.Server.Popups;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Piping.Unary.Components;
+using Content.Shared.Stacks;
 using Robust.Server.GameObjects;
 
 namespace Content.Server._DV.CosmicCult.EntitySystems;
@@ -20,6 +21,10 @@ public sealed class CosmicSpireSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly GasVentScrubberSystem _scrub = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+
+    private readonly HashSet<Entity<CosmicEntropyMoteComponent>> _motes = [];
 
     public override void Initialize()
     {
@@ -70,8 +75,14 @@ public sealed class CosmicSpireSystem : EntitySystem
         {
             _popup.PopupCoordinates(Loc.GetString("cosmiccult-spire-entropy"), Transform(ent).Coordinates);
             ent.Comp.Storage.Clear();
+
+            _motes.Clear();
+            _lookup.GetEntitiesInRange(Transform(ent).Coordinates, range: 0.7f, _motes);
+
             Spawn(ent.Comp.SpawnVFX, Transform(ent).Coordinates);
-            Spawn(ent.Comp.EntropyMote, Transform(ent).Coordinates);
+            var mote = Spawn(ent.Comp.EntropyMote, Transform(ent).Coordinates);
+            foreach (var otherMote in _motes)
+                if (_stack.TryMergeStacks(mote, otherMote.Owner, out _)) break; // We spawn 1 mote at a time, so we just check whether we merged any, and then stop if we do.
 
             if (_cosmicRule.AssociatedGamerule(ent) is not { } cult)
                 return;

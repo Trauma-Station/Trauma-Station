@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Traitor.PenSpin;
 using Content.Goobstation.Shared.Traitor.PenSpin;
 using JetBrains.Annotations;

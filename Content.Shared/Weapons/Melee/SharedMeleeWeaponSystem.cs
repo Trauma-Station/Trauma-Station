@@ -857,6 +857,10 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
 
     public HashSet<EntityUid> ArcRayCast(Vector2 position, Angle angle, Angle arcWidth, float range, MapId mapId, EntityUid ignore) // Goob edit
     {
+        // <Trauma> - if the user is in a mech, ignore that mech for raycasts. the user can't collide inside the mech anyway
+        if (_relayQuery.CompOrNull(ignore)?.RelayEntity is {} relayed)
+            ignore = relayed;
+        // </Trauma>
         // TODO: This is pretty sucky.
         var widthRad = arcWidth;
         var increments = 1 + 35 * (int) Math.Ceiling(widthRad / (2 * Math.PI));

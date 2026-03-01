@@ -94,6 +94,8 @@
     materialComposition:
       Steel: 100
       Plastic: 100
+  - type: CosmicTransmutable # Trauma
+    transmuteTo: ScytheCosmicCult # Is in fact a scythe
 
 - type: entity
   name: hatchet
@@ -128,6 +130,8 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
+  - type: CosmicTransmutable # Trauma
+    transmuteTo: ScytheCosmicCult
 
 - type: entity
   name: spade

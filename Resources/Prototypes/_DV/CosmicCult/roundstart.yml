@@ -1,24 +1,11 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 loltart <159829224+loltart@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 loltart <lo1tartyt@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   parent: BaseGameRule
   id: CosmicCult
   components:
   - type: CosmicCultRule
   - type: GameRule
-    minPlayers: 25
+    minPlayers: 15 # Ultra lowpop cult is now possible. Would it be good? Idk we'd have to test that.
     chaosScore: 1200
-    delay:
-      min: 60
-      max: 120
   - type: AntagObjectives
     objectives:
     - CosmicFinalityObjective
@@ -27,8 +14,8 @@
   - type: AntagSelection
     definitions:
     - prefRoles: [ CosmicAntagCultist ]
-      min: 2
-      max: 6
+      min: 1 # It just works trust me
+      max: 8
       playerRatio: 10
       jobBlacklist: [ Chaplain ] # GOOBSTATION
       blacklist:
@@ -38,6 +25,5 @@
         - BibleUser
       components:
       - type: CosmicCult
-      - type: WeakToHoly # GOOBSTATION
       mindRoles:
       - MindRoleCosmicCult

@@ -3130,3 +3130,142 @@ Entries:
   id: 378
   time: '2026-02-26T22:22:07.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/873
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenomorph acid and plasma transfer actions not working.
+  id: 379
+  time: '2026-02-27T00:33:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/886
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mech melee weapons' wideswing not working properly.
+  id: 380
+  time: '2026-02-27T17:02:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/900
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Command and Dignitary positions are now human only.
+  id: 381
+  time: '2026-02-27T19:36:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/902
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Role playtime restrictions have been largely reduced.
+  id: 382
+  time: '2026-02-27T21:30:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/904
+- author: Pharaz4
+  changes:
+  - type: Add
+    message: Added some roman clothing to the AutoDrobe
+  id: 383
+  time: '2026-02-28T01:33:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/887
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenobio slimes having the wrong organs.
+  - type: Tweak
+    message: Nutrislime is now its own reagent so it is much faster for slimes to eat.
+  id: 384
+  time: '2026-02-28T14:26:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/912
+- author: NoElkaTheGod
+  changes:
+  - type: Add
+    message: >-
+      Cosmic Cult has been significantly reworked. See guidebok and/or the PR
+      for details.
+  - type: Tweak
+    message: Cosmic Cult is back in rotation
+  id: 385
+  time: '2026-02-28T16:00:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/854
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added a mutations list to the guidebook, showing every mutation and how to
+      get them.
+  id: 386
+  time: '2026-02-28T16:16:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/913
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      NTR scanning no longer teleports items to CentComm, lock up your
+      contraband.
+  id: 387
+  time: '2026-02-28T16:57:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/914
+- author: TurboTrackerss14
+  changes:
+  - type: Remove
+    message: >-
+      removed the human only requirement from command and dignitary at armoks
+      behest.
+  id: 388
+  time: '2026-02-28T18:03:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/916
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mothroaches reverting to maggot form on death.
+  id: 389
+  time: '2026-02-28T21:39:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/921
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: You can now use hyposprays on people who are downed (bed or on the floor)
+  id: 390
+  time: '2026-02-28T22:59:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/922
+- author: caoimhan2008
+  changes:
+  - type: Add
+    message: >-
+      Added a new xenomorph compatibility bundle to the uplink for 100 TC that
+      allows you to make an army of xenos.
+  id: 391
+  time: '2026-02-28T23:11:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/910
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      the Xeno Hive Node now makes facehuggers ignore you (also added a new
+      xenomorph themed bundle for 100 tc i messed up the changelog on that pr)
+  id: 392
+  time: '2026-03-01T00:52:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/923
+- author: RatherUncreativeName
+  changes:
+  - type: Add
+    message: Added an ingredient beacon for chefs.
+  id: 393
+  time: '2026-03-01T11:25:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/911
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed mortar and pestle's grinding sound never ending if the food was
+      eaten/rotted/etc.
+  id: 394
+  time: '2026-03-01T13:10:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/929
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Genetics console now allows ctrl click and right click for resetting and
+      going back in bases.
+  id: 395
+  time: '2026-03-01T14:26:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/931

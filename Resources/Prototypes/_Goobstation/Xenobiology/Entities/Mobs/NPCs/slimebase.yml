@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ SimpleMobBase, MobCombat, BaseMobSlimes ]
+  parent: [ BaseMobSlimes, SimpleMobBase, MobCombat ]
   id: BaseMobSlimeXenobio
   name: basic slime
   description: It looks so much like jelly. I wonder what it tastes like?

@@ -24,11 +24,9 @@ public sealed partial class ModifyEnvirohelmSpecial : JobSpecial
     [DataField(required: true)]
     public ProtoId<EntityPrototype> PowerCell { get; private set; }
 
-    [ValidatePrototypeId<SpeciesPrototype>]
-    private const string Species = "Plasmaman";
+    private static readonly ProtoId<SpeciesPrototype> Species = "Plasmaman";
 
-    [ValidatePrototypeId<TagPrototype>]
-    private const string Tag = "Envirohelm";
+    private static readonly ProtoId<TagPrototype> Tag = "Envirohelm";
 
     private const string Slot = "head";
 
@@ -37,8 +35,8 @@ public sealed partial class ModifyEnvirohelmSpecial : JobSpecial
     public override void AfterEquip(EntityUid mob)
     {
         var entMan = IoCManager.Resolve<IEntityManager>();
-        if (!entMan.TryGetComponent<HumanoidProfileComponent>(mob, out var appearanceComp) ||
-            appearanceComp.Species != Species ||
+        if (!entMan.TryGetComponent<HumanoidProfileComponent>(mob, out var humanoid) ||
+            humanoid.Species != Species ||
             !entMan.System<InventorySystem>().TryGetSlotEntity(mob, Slot, out var helmet) ||
             helmet is not { } envirohelm ||
             !entMan.System<TagSystem>().HasTag(envirohelm, Tag) ||

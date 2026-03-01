@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -46,6 +36,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Blob;
 
@@ -54,28 +45,25 @@ public sealed class BlobCoreSystem : EntitySystem
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
+    [Dependency] private readonly GameTicker _ticker = default!;
+    [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly AlertLevelSystem _alertLevelSystem = default!;
-    [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
-    [Dependency] private readonly MetaDataSystem _metaDataSystem = default!;
+    [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
+    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly ActionsSystem _action = default!;
-    [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly StoreSystem _storeSystem = default!;
+    [Dependency] private readonly MapSystem _map = default!;
+    [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly BlobTileSystem _blobTile = default!;
 
     private EntityQuery<BlobTileComponent> _tile;
     private EntityQuery<BlobFactoryComponent> _factory;
     private EntityQuery<BlobNodeComponent> _node;
 
-    [ValidatePrototypeId<AlertPrototype>]
-    private const string BlobHealth = "BlobHealth";
-    [ValidatePrototypeId<AlertPrototype>]
-    private const string BlobResource = "BlobResource";
-    [ValidatePrototypeId<CurrencyPrototype>]
-    private const string BlobMoney = "BlobPoint";
+    private static readonly ProtoId<AlertPrototype> BlobHealth = "BlobHealth";
+    private static readonly ProtoId<AlertPrototype> BlobResource = "BlobResource";
+    private static readonly ProtoId<CurrencyPrototype> BlobMoney = "BlobPoint";
 
     private readonly ReaderWriterLockSlim _pointsChange = new();
 
@@ -221,8 +209,8 @@ public sealed class BlobCoreSystem : EntitySystem
 
     private void OnBlobCaptureInfo(EntityUid uid, Objectives.BlobCaptureConditionComponent component, ref ObjectiveAfterAssignEvent args)
     {
-        _metaDataSystem.SetEntityName(uid,Loc.GetString("objective-condition-blob-capture-title"));
-        _metaDataSystem.SetEntityDescription(uid,Loc.GetString("objective-condition-blob-capture-description", ("count", component.Target)));
+        _meta.SetEntityName(uid,Loc.GetString("objective-condition-blob-capture-title"));
+        _meta.SetEntityDescription(uid,Loc.GetString("objective-condition-blob-capture-description", ("count", component.Target)));
     }
 
     private void OnBlobCaptureProgress(EntityUid uid, Objectives.BlobCaptureConditionComponent component, ref ObjectiveGetProgressEvent args)
@@ -277,7 +265,7 @@ public sealed class BlobCoreSystem : EntitySystem
         var blobRule = EntityQuery<BlobRuleComponent>().FirstOrDefault();
         if (blobRule == null)
         {
-            _gameTicker.StartGameRule("BlobRule", out _);
+            _ticker.StartGameRule("BlobRule", out _);
         }
 
         var ev = new CreateBlobObserverEvent(userId);
@@ -337,7 +325,7 @@ public sealed class BlobCoreSystem : EntitySystem
         {
             case BlobChemType.ExplosiveLattice:
                 _damageable.SetDamageModifierSetId(uid, "ExplosiveLatticeBlob");
-                _explosionSystem.SetExplosionResistance(uid, 0f, EnsureComp<ExplosionResistanceComponent>(uid));
+                _explosion.SetExplosionResistance(uid, 0f, EnsureComp<ExplosionResistanceComponent>(uid));
                 break;
             case BlobChemType.ElectromagneticWeb:
                 _damageable.SetDamageModifierSetId(uid, "ElectromagneticWebBlob");
@@ -439,14 +427,14 @@ public sealed class BlobCoreSystem : EntitySystem
 
         Entity<MapGridComponent> grid = (gridUid.Value, gridComp);
 
-        var centerTile = _mapSystem.GetLocalTilesIntersecting(grid,
+        var centerTile = _map.GetLocalTilesIntersecting(grid,
                 grid,
                 new Box2(args.Target.Position, args.Target.Position))
             .ToArray();
 
         foreach (var tileRef in centerTile)
         {
-            foreach (var ent in _mapSystem.GetAnchoredEntities(grid, grid, tileRef.GridIndices))
+            foreach (var ent in _map.GetAnchoredEntities(grid, grid, tileRef.GridIndices))
             {
                 if (!_tile.TryGetComponent(ent, out var blobTileComponent))
                     continue;
@@ -580,9 +568,9 @@ public sealed class BlobCoreSystem : EntitySystem
                     continue;
 
                 if(stationUid != null)
-                    _alertLevelSystem.SetLevel(stationUid.Value, "green", true, true, true);
+                    _alertLevel.SetLevel(stationUid.Value, "green", true, true, true);
 
-                _roundEndSystem.CancelRoundEndCountdown(forceRecall: false);
+                _roundEnd.CancelRoundEndCountdown(forceRecall: false);
                 blobRuleComp.Stage = BlobStage.Default;
             }
         }
@@ -631,7 +619,7 @@ public sealed class BlobCoreSystem : EntitySystem
         if (!_pointsChange.TryEnterWriteLock(1000))
             return false;
 
-        if (_storeSystem.TryAddCurrency(new Dictionary<string, FixedPoint2>
+        if (_store.TryAddCurrency(new Dictionary<string, FixedPoint2>
                 {
                     { BlobMoney, amount }
                 },
@@ -708,7 +696,7 @@ public sealed class BlobCoreSystem : EntitySystem
         var nodeComponent = new BlobNodeComponent();
         var nearestEntityUid = EntityUid.Invalid;
 
-        var innerTiles = _mapSystem.GetLocalTilesIntersecting(
+        var innerTiles = _map.GetLocalTilesIntersecting(
                 gridUid,
                 grid,
                 new Box2(coords.Position + new Vector2(-radius, -radius),
@@ -718,7 +706,7 @@ public sealed class BlobCoreSystem : EntitySystem
 
         foreach (var tileRef in innerTiles)
         {
-            foreach (var ent in _mapSystem.GetAnchoredEntities(gridUid, grid, tileRef.GridIndices))
+            foreach (var ent in _map.GetAnchoredEntities(gridUid, grid, tileRef.GridIndices))
             {
                 if (!_node.TryComp(ent, out var nodeComp))
                     continue;

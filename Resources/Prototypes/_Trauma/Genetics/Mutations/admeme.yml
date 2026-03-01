@@ -9,6 +9,8 @@
 - type: entity
   parent: BaseMutationAdmeme
   id: MutationUnstableDna
+  name: Unstable DNA
+  description: ???
   components:
   - type: Mutation
     instability: -40

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Shared.Pain;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Network;

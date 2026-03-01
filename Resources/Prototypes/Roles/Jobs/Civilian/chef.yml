@@ -116,9 +116,9 @@
     id: ChefPDA
     ears: ClothingHeadsetService
     belt: ClothingBeltChefFilled
-  #storage:
-    #back:
-    #- Stuff
+  storage:
+    back:
+    - IngredientsBeacon # Trauma
 
 - type: chameleonOutfit
   id: ChefChameleonOutfit

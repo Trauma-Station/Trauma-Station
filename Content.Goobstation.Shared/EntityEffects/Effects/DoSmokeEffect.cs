@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Chemistry.Components;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;

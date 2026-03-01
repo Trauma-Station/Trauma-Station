@@ -1,14 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
-
 ############ [ HARDSUIT ] ############
 
 # COSMIC CULT HARDSUIT BODY
@@ -33,13 +22,16 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.4
         Heat: 0.5
-        Radiation: 0.5
-        Caustic: 0.5
-        Holy: 1.25
+        Asphyxiation: 0.6 # Kinda their whole thing so why not
+  - type: ModifyDelayedKnockdown # You can't have 20 cultists anymore, so this is kinda needed
+    delayDelta: 3
+    knockdownTimeDelta: -3
+  - type: StaminaResistance
+    damageCoefficient: 0.5
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -96,6 +88,8 @@
   - type: TypingIndicatorClothing
     proto: CosmicTyping
   - type: UnholyItem # Goobstation Shitchap
+  - type: CosmicTransmutable
+    transmuteTo: null # No reforging
 
 
 # COSMIC CULT HARDSUIT HELMET
@@ -112,6 +106,10 @@
     - state: icon-helmet
   - type: Clothing
     sprite: _DV/CosmicCult/Clothing/cosmiccult_armor.rsi
+    equipSound:
+      path: /Audio/_DV/CosmicCult/helmet_on.ogg
+    unequipSound:
+      path: /Audio/_DV/CosmicCult/helmet_off.ogg
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
@@ -130,7 +128,8 @@
   - type: TypingIndicatorClothing
     proto: CosmicTyping
   - type: SpeechOverride
-    overrideIDs:
-      Unsexed: CosmicEmotesMale # Humans use male soudns for unsexed so here we are.
-      Female: CosmicEmotesFemale
-      Male: CosmicEmotesMale
+    emoteIDs:
+      Unsexed: CosmicEmotes
+      Female: CosmicEmotes
+      Male: CosmicEmotes
+    speechIDs: CosmicSpeech

@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._DV.CosmicCult.Components;
 
 /// <summary>
-/// Component for Cosmic Cult's entropic colossus.
+/// Component for Cosmic Cult's entropic colossus. Currently unused.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentPause]
@@ -21,7 +21,7 @@ public sealed partial class CosmicTileDetonatorComponent : Component
 
     [DataField] public Vector2i DetonationCenter;
 
-    [DataField] public Vector2 MaxSize = new Vector2(8, 8);
+    [DataField] public Vector2 MaxSize = new(8, 8);
 
-    [DataField] public Vector2 Size = new Vector2(0, 0);
+    [DataField] public Vector2 Size = new(0, 0);
 }

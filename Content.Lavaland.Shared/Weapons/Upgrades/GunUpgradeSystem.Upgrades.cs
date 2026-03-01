@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Lavaland.Common.Weapons;
 using Content.Lavaland.Common.Weapons.Ranged;
 using Content.Lavaland.Shared.Pressure;

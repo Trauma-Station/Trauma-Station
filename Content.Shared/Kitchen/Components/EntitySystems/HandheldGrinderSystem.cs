@@ -1,3 +1,6 @@
+// <Trauma>
+using Robust.Shared.Network;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Destructible;
@@ -15,6 +18,9 @@ namespace Content.Shared.Kitchen.EntitySystems;
 
 internal sealed class HandheldGrinderSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly INetManager _net = default!;
+    // </Trauma>
     [Dependency] private readonly SharedReagentGrinderSystem _reagentGrinder = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SharedStackSystem _stackSystem = default!;
@@ -74,8 +80,8 @@ internal sealed class HandheldGrinderSystem : EntitySystem
             BreakOnMove = true
         };
 
-        if (_doAfter.TryStartDoAfter(doAfter))
-            ent.Comp.AudioStream = _audio.PlayPredicted(ent.Comp.Sound, ent, args.User)?.Entity ?? ent.Comp.AudioStream;
+        if (_doAfter.TryStartDoAfter(doAfter) && _net.IsServer) // Trauma - can't store result of PlayPredicted on client, it leaves lingering audio
+            ent.Comp.AudioStream = _audio.PlayPvs(ent.Comp.Sound, ent)?.Entity ?? ent.Comp.AudioStream; // Trauma - Pvs instead of Predicted
     }
 
     private void OnHandheldDoAfter(Entity<HandheldGrinderComponent> ent, ref HandheldGrinderDoAfterEvent args)

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Trauma.Common.Spawners;

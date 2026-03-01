@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Sprites by AftrLite(Github).",
+    "copyright": "Sprites by AftrLite(Github). Transmute and absorb by NoElkaTheGod",
     "size": {
         "x": 32,
         "y": 32
@@ -62,16 +62,19 @@
             "name": "corruption"
         },
         {
-            "name": "rogueinfect"
+            "name": "shop"
         },
         {
-            "name": "roguenova"
+            "name": "shatter"
         },
         {
-            "name": "rogueshatter"
+            "name": "shunt"
         },
         {
-            "name": "rogueshunt"
+            "name": "absorb"
+        },
+        {
+            "name": "transmute"
         }
     ]
 }

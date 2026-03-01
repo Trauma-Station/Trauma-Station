@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Clothing;
 using Content.Shared.Body;

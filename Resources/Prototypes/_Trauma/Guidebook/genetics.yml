@@ -2,3 +2,11 @@
   id: Genetics
   name: guide-entry-genetics
   text: "/ServerInfo/_Trauma/Guidebook/Genetics.xml"
+  children:
+  - GeneticsMutations
+
+- type: guideEntry
+  id: GeneticsMutations
+  name: guide-entry-mutations
+  text: "/ServerInfo/_Trauma/Guidebook/Mutations.xml"
+  filterEnabled: True
