@@ -57,8 +57,7 @@
 
 - type: combo
   id: KravLegSweep
-  attacks:
-    []
+  attacks: []
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
@@ -74,8 +73,7 @@
 
 - type: combo
   id: KravNeckChop
-  attacks:
-    []
+  attacks: []
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
@@ -93,8 +91,7 @@
 
 - type: combo
   id: KravLungPunch
-  attacks:
-    []
+  attacks: []
   userEffects:
   - !type:PopupMessage
     messages:
