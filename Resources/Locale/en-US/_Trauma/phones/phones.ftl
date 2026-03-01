@@ -1,4 +1,4 @@
-phone-number-description = It's phone number is {$number}
+phone-number-description = Its phone number is {$number}
 phone-popup-ring = Incoming call from {$location}
 phone-number-unknown = Unknown
 
@@ -10,15 +10,15 @@ phone-speak = {$name} says: {$message}
 
 phone-menu-button-confirm = Change name
 
-phone-category-command = command
-phone-category-security = security
-phone-category-engineering = engineering
-phone-category-cargo = cargo
-phone-category-medical = medical
-phone-category-science = science
-phone-category-service = service
-phone-category-uncategorized = uncategorized
-phone-category-hidden = hidden
+phone-category-command = Command
+phone-category-security = Security
+phone-category-engineering = Engineering
+phone-category-cargo = Cargo
+phone-category-medical = Medical
+phone-category-science = Science
+phone-category-service = Service
+phone-category-uncategorized = Uncategorized
+phone-category-hidden = Hidden
 
 signal-port-name-phone-call = On call recieved
 signal-port-description-phone-call = Called whenever the phone starts to ring.

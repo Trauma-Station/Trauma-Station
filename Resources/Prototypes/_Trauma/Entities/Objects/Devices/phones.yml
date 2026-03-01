@@ -22,8 +22,8 @@
         type: PhoneNameChangeUI
   - type: ActivatableUI
     key: enum.PhoneUiKey.Key
-  - type: LanguageSpeaker # Einstein Engines - Languages
-  - type: LanguageKnowledge # Einstein Engines - Languages
+  - type: LanguageSpeaker
+  - type: LanguageKnowledge
     speaks:
     - TauCetiBasic
     - RobotTalk
@@ -85,11 +85,14 @@
         name: phone
         insertSound: /Audio/_RMC14/Phone/sound_machines_phones_hang_up.ogg
         ejectSound: /Audio/_RMC14/Phone/sound_machines_phones_pick_up.ogg
-        startingItem: RotaryPhone
         ejectOnInteract: true
         whitelist:
           components:
           - RotaryPhone
+  - type: ContainerFill
+    containers:
+      phone:
+      - RotaryPhone
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -119,7 +122,7 @@
           Ring: { state: wall_phone_ring }
           Ear: { state: wall_phone_ear }
 
-# Different category's for mappers
+# Different categorys for mappers
 
 # Phones
 
@@ -203,109 +206,77 @@
   suffix: Command
   id: RotaryPhoneStandCommand
   components:
-  - type: ItemSlots
-    slots:
+  - type: ContainerFill
+    containers:
       phone:
-        name: phone
-        insertSound: /Audio/_RMC14/Phone/sound_machines_phones_hang_up.ogg
-        ejectSound: /Audio/_RMC14/Phone/sound_machines_phones_pick_up.ogg
-        startingItem: RotaryPhoneCommand
-        ejectOnInteract: true
+      - RotaryPhoneCommand
 
 - type: entity
   parent: RotaryPhoneStand
   suffix: Security
   id: RotaryPhoneStandSecurity
   components:
-  - type: ItemSlots
-    slots:
+  - type: ContainerFill
+    containers:
       phone:
-        name: phone
-        insertSound: /Audio/_RMC14/Phone/sound_machines_phones_hang_up.ogg
-        ejectSound: /Audio/_RMC14/Phone/sound_machines_phones_pick_up.ogg
-        startingItem: RotaryPhoneSecurity
-        ejectOnInteract: true
+      - RotaryPhoneSecurity
 
 - type: entity
   parent: RotaryPhoneStand
   suffix: Security (911)
   id: RotaryPhoneStandSecurity911
   components:
-  - type: ItemSlots
-    slots:
+  - type: ContainerFill
+    containers:
       phone:
-        name: phone
-        insertSound: /Audio/_RMC14/Phone/sound_machines_phones_hang_up.ogg
-        ejectSound: /Audio/_RMC14/Phone/sound_machines_phones_pick_up.ogg
-        startingItem: RotaryPhoneSecurity911
-        ejectOnInteract: true
+      - RotaryPhoneSecurity911
 
 - type: entity
   parent: RotaryPhoneStand
   suffix: Medical
   id: RotaryPhoneStandMedical
   components:
-  - type: ItemSlots
-    slots:
+  - type: ContainerFill
+    containers:
       phone:
-        name: phone
-        insertSound: /Audio/_RMC14/Phone/sound_machines_phones_hang_up.ogg
-        ejectSound: /Audio/_RMC14/Phone/sound_machines_phones_pick_up.ogg
-        startingItem: RotaryPhoneMedical
-        ejectOnInteract: true
+      - RotaryPhoneMedical
 
 - type: entity
   parent: RotaryPhoneStand
   suffix: Engineering
   id: RotaryPhoneStandEngineering
   components:
-  - type: ItemSlots
-    slots:
+  - type: ContainerFill
+    containers:
       phone:
-        name: phone
-        insertSound: /Audio/_RMC14/Phone/sound_machines_phones_hang_up.ogg
-        ejectSound: /Audio/_RMC14/Phone/sound_machines_phones_pick_up.ogg
-        startingItem: RotaryPhoneEngineering
-        ejectOnInteract: true
+      - RotaryPhoneEngineering
 
 - type: entity
   parent: RotaryPhoneStand
   suffix: Cargo
   id: RotaryPhoneStandCargo
   components:
-  - type: ItemSlots
-    slots:
+  - type: ContainerFill
+    containers:
       phone:
-        name: phone
-        insertSound: /Audio/_RMC14/Phone/sound_machines_phones_hang_up.ogg
-        ejectSound: /Audio/_RMC14/Phone/sound_machines_phones_pick_up.ogg
-        startingItem: RotaryPhoneCargo
-        ejectOnInteract: true
+      - RotaryPhoneCargo
 
 - type: entity
   parent: RotaryPhoneStand
   suffix: Science
   id: RotaryPhoneStandScience
   components:
-  - type: ItemSlots
-    slots:
+  - type: ContainerFill
+    containers:
       phone:
-        name: phone
-        insertSound: /Audio/_RMC14/Phone/sound_machines_phones_hang_up.ogg
-        ejectSound: /Audio/_RMC14/Phone/sound_machines_phones_pick_up.ogg
-        startingItem: RotaryPhoneScience
-        ejectOnInteract: true
+      - RotaryPhoneScience
 
 - type: entity
   parent: RotaryPhoneStand
   suffix: Service
   id: RotaryPhoneStandService
   components:
-  - type: ItemSlots
-    slots:
+  - type: ContainerFill
+    containers:
       phone:
-        name: phone
-        insertSound: /Audio/_RMC14/Phone/sound_machines_phones_hang_up.ogg
-        ejectSound: /Audio/_RMC14/Phone/sound_machines_phones_pick_up.ogg
-        startingItem: RotaryPhoneService
-        ejectOnInteract: true
+      - RotaryPhoneService

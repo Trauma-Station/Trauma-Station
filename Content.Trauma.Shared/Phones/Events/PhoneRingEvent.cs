@@ -2,13 +2,12 @@ using Content.Trauma.Shared.Phones.Components;
 
 namespace Content.Trauma.Shared.Phones.Events;
 
-public sealed class PhoneRingEvent : EntityEventArgs
+[ByRefEvent]
+public record struct PhoneRingEvent
 {
-    public EntityUid phone { get; }
-    public RotaryPhoneComponent otherPhoneComponent { get; }
-    public PhoneRingEvent(EntityUid IncomingPhone,  RotaryPhoneComponent otherPhoneComp)
+    public Entity<RotaryPhoneComponent> ent { get; }
+    public PhoneRingEvent(Entity<RotaryPhoneComponent> Ent)
     {
-        phone = IncomingPhone;
-        otherPhoneComponent = otherPhoneComp;
+        ent = Ent;
     }
 }

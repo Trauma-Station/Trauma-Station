@@ -19,11 +19,11 @@ public sealed class PhoneNameChangeUI : BoundUserInterface
 
         _menu.OnTextChanged += i =>
         {
-            SendMessage(new PhoneNameChangedMessage(i));
+            SendPredictedMessage(new PhoneNameChangedMessage(i));
         };
         _menu.OnCategoryChanged += i =>
         {
-            SendMessage(new PhoneCategoryChangedMessage(i));
+            SendPredictedMessage(new PhoneCategoryChangedMessage(i));
         };
     }
 }

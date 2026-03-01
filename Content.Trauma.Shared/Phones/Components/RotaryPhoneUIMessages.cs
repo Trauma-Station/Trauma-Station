@@ -3,14 +3,9 @@ using Robust.Shared.Serialization;
 namespace Content.Trauma.Shared.Phones.Components;
 
 [Serializable, NetSerializable]
-public sealed class PhoneKeypadMessage : BoundUserInterfaceMessage
+public sealed class PhoneKeypadMessage(int value) : BoundUserInterfaceMessage
 {
-    public int Value;
-
-    public PhoneKeypadMessage(int value)
-    {
-        Value = value;
-    }
+    public readonly int Value = value;
 }
 
 [Serializable, NetSerializable]
@@ -47,14 +42,10 @@ public sealed class PhoneCategoryChangedMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public sealed class PhoneKeypadClearMessage : BoundUserInterfaceMessage
-{
-}
+public sealed class PhoneKeypadClearMessage : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class PhoneDialedMessage : BoundUserInterfaceMessage
-{
-}
+public sealed class PhoneDialedMessage : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
 public sealed class GoobPhoneBuiState : BoundUserInterfaceState
@@ -68,7 +59,7 @@ public sealed class GoobPhoneBuiState : BoundUserInterfaceState
 }
 
 [Serializable, NetSerializable]
-public sealed class PhoneData
+public record struct PhoneData
 {
     public string Name;
     public string Category;

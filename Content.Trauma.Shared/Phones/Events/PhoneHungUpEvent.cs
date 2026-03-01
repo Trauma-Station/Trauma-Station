@@ -1,6 +1,7 @@
 namespace Content.Trauma.Shared.Phones.Events;
 
-public sealed class PhoneHungUpEvent : EntityEventArgs
+[ByRefEvent]
+public record struct PhoneHungUpEvent
 {
     public PhoneHungUpEvent()
     {

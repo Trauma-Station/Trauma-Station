@@ -21,15 +21,15 @@ namespace Content.Trauma.Server.Phones;
 
 public sealed class RotaryPhoneSystem : EntitySystem
 {
-
-    [Dependency] private readonly SharedChatSystem _chatSystem = default!;
+    [Dependency] private readonly SharedChatSystem _chat = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedRotaryPhoneSystem _rotaryPhoneSystem = default!;
+    [Dependency] private readonly Shared.Phones.Systems.RotaryPhoneSystem _rotaryPhone = default!;
 
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<RotaryPhoneComponent, ListenEvent>(OnListen);
         SubscribeLocalEvent<RotaryPhoneComponent, PhoneKeypadMessage>(OnKeyPadPressed);
         SubscribeLocalEvent<RotaryPhoneComponent, PhoneKeypadClearMessage>(OnKeyPadClear);
@@ -43,7 +43,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
 
     private void OnPhoneInsertHolder(Entity<RotaryPhoneHolderComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        if(Deleted(ent.Owner) || Terminating(ent.Owner))
+        if (Deleted(ent.Owner) || Terminating(ent.Owner))
             return;
 
         RemComp<JointVisualsComponent>(ent.Owner);
@@ -77,10 +77,10 @@ public sealed class RotaryPhoneSystem : EntitySystem
             if (xform.MapID == MapId.Nullspace)
                 continue;
 
-            if (phoneComp.PhoneNumber == null || phoneComp.Category == null)
+            if (phoneComp.PhoneNumber is not {} number|| phoneComp.Category is not {} category)
                 continue;
 
-            var phones = new PhoneData(phoneComp.Name ?? Loc.GetString("phone-number-unknown"), phoneComp.Category, phoneComp.PhoneNumber.Value);
+            var phones = new PhoneData(phoneComp.Name ?? Loc.GetString("phone-number-unknown"), category, number);
 
             data.Add(phones);
         }
@@ -96,7 +96,7 @@ public sealed class RotaryPhoneSystem : EntitySystem
 
     private void OnKeyPadPressed(Entity<RotaryPhoneComponent> ent, ref PhoneKeypadMessage args)
     {
-        PlayPhoneSound(ent.Owner, args.Value, ent.Comp);
+        PlayPhoneSound(ent.AsNullable(), args.Value);
         ent.Comp.DialedNumber = (ent.Comp.DialedNumber ?? 0) * 10 + args.Value;
         Dirty(ent);
     }
@@ -106,30 +106,30 @@ public sealed class RotaryPhoneSystem : EntitySystem
         ent.Comp.DialedNumber = null;
         Dirty(ent);
     }
-    private void PlayPhoneSound(EntityUid uid, int number, RotaryPhoneComponent? component = null) // Stolen from nuke code
+    private void PlayPhoneSound(Entity<RotaryPhoneComponent?> ent, int number) // Stolen from nuke code
     {
-        if (!Resolve(uid, ref component))
+        if (!Resolve(ent.Owner, ref ent.Comp))
             return;
 
         var semitoneShift = number - 2;
 
-        var opts = component.KeypadPressSound.Params;
+        var opts = ent.Comp.KeypadPressSound.Params;
         opts = AudioHelpers.ShiftSemitone(opts, semitoneShift).AddVolume(-7f);
-        _audio.PlayPvs(component.KeypadPressSound, uid, opts);
+        _audio.PlayPvs(ent.Comp.KeypadPressSound, ent.Owner, opts);
     }
 
     private void OnDial(Entity<RotaryPhoneComponent> ent, ref PhoneDialedMessage args)
     {
-        if (ent.Comp.ConnectedPhone == null)
+        if (ent.Comp.ConnectedPhone != null)
+            return;
+
+        var query = EntityQueryEnumerator<RotaryPhoneComponent>();
+        while (query.MoveNext(out var phone, out var phoneComp))
         {
-            var query = EntityQueryEnumerator<RotaryPhoneComponent>();
-            while (query.MoveNext(out var phone, out var phoneComp))
+            if (ent.Comp.DialedNumber == phoneComp.PhoneNumber && phone != ent.Owner)
             {
-                if (ent.Comp.DialedNumber == phoneComp.PhoneNumber && phone != ent.Owner)
-                {
-                    DoPickupLogic(phoneComp, ent, phone);
-                    break;
-                }
+                DoPickupLogic(phoneComp, ent, phone);
+                break;
             }
         }
         Dirty(ent);
@@ -140,16 +140,15 @@ public sealed class RotaryPhoneSystem : EntitySystem
         if(HasComp<RotaryPhoneComponent>(args.Source)
            || args.Source == ent.Owner
            || HasComp<RadioSpeakerComponent>(args.Source)
-           || ent.Comp.ConnectedPhone == null
-           || !ent.Comp.Connected
-           || !TryComp(ent.Comp.ConnectedPhone, out RotaryPhoneComponent? otherPhoneComponent))
+           || ent.Comp.ConnectedPhone is not {} connected
+           || !TryComp(connected, out RotaryPhoneComponent? otherPhoneComponent))
             return;
 
         var entityMeta = MetaData(args.Source);
 
         if (otherPhoneComponent.SpeakerPhone)
         {
-            _chatSystem.TrySendInGameICMessage(ent.Comp.ConnectedPhone.Value,
+            _chat.TrySendInGameICMessage(ent.Comp.ConnectedPhone.Value,
                 args.Message,
                 InGameICChatType.Speak,
                 hideChat: true,
@@ -181,18 +180,16 @@ public sealed class RotaryPhoneSystem : EntitySystem
             ent.Comp.Engaged = true;
             ent.Comp.ConnectedPhone = phone;
             phoneComp.Engaged = true;
-            var audio = _audio.PlayPvs(ent.Comp.RingingSound, ent.Owner, AudioParams.Default.WithLoop(true));
-            _rotaryPhoneSystem.RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.OutGoingPort);
-            if (audio != null)
-                ent.Comp.SoundEntity = audio.Value.Entity;
+            ent.Comp.SoundEntity = _audio.PlayPvs(ent.Comp.RingingSound, ent.Owner, AudioParams.Default.WithLoop(true))?.Entity;
+            _rotaryPhone.RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.OutGoingPort);
 
-            RaiseLocalEvent(phone, new PhoneRingEvent(ent.Owner, ent.Comp));
+            var ev = new PhoneRingEvent(ent);
+
+            RaiseLocalEvent(phone, ref ev);
         }
-        else if(ent.Comp.SoundEntity is {})
+        else if(ent.Comp.SoundEntity is null)
         {
-            var audio = _audio.PlayPvs(ent.Comp.BusySound, ent.Owner);
-            if (audio != null)
-                ent.Comp.SoundEntity = audio.Value.Entity;
+            ent.Comp.SoundEntity = _audio.PlayPvs(ent.Comp.BusySound, ent.Owner)?.Entity;
         }
     }
 

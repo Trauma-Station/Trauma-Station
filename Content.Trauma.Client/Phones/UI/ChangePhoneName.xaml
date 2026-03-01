@@ -1,7 +1,6 @@
-<controls1:FancyWindow
+<controls:FancyWindow
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Trauma.Client.Phones.UI"
-    xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
     Title="Phone Options" MinSize="300 70">
     <BoxContainer Orientation="Vertical">
         <Label Text="Phone Name"></Label>
@@ -15,4 +14,4 @@
             StyleClasses="ButtonSquare"
             Access="Public"/>
     </BoxContainer>
-</controls1:FancyWindow>
+</controls:FancyWindow>

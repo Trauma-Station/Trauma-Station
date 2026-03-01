@@ -110,13 +110,13 @@ public sealed partial class RotaryPhoneComponent : Component
 }
 
 [Serializable, NetSerializable]
-public enum RotaryPhoneLayers
+public enum RotaryPhoneLayers : byte
 {
     Layer,
 }
 
 [Serializable, NetSerializable]
-public enum RotaryPhoneVisuals
+public enum RotaryPhoneVisuals : byte
 {
     Base,
     Ring,

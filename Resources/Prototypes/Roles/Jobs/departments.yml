@@ -34,7 +34,7 @@
   - Reporter
   - Visitor
   - ServiceWorker # Trauma
-  - PhoneMerchant # Goobstation
+  - PhoneMerchant # Trauma
 
 - type: department
   id: CentralCommand
