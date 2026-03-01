@@ -66,11 +66,9 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly RoleSystem _role = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly SharedRevolutionarySystem _revolutionarySystem = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
+    [Dependency] private readonly ChatSystem _chat = default!; // Goob
 
     //Used in OnPostFlash, no reference to the rule component is available
     public readonly ProtoId<NpcFactionPrototype> RevolutionaryNpcFaction = "Revolutionary";
@@ -108,7 +106,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
             {
                 if (!component.HasRevAnnouncementPlayed)
                 {
-                    _chatSystem.DispatchGlobalAnnouncement(
+                    _chat.DispatchGlobalAnnouncement(
                         Loc.GetString("revolutionaries-win-announcement"),
                         Loc.GetString("revolutionaries-win-sender"),
                         colorOverride: Color.Gold);
@@ -130,7 +128,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
 
             if (CheckRevsLose() && !component.HasAnnouncementPlayed)
             {
-                _chatSystem.DispatchGlobalAnnouncement(
+                _chat.DispatchGlobalAnnouncement(
                     Loc.GetString("revolutionaries-lose-announcement"),
                     Loc.GetString("revolutionaries-sender-cc"),
                     colorOverride: Color.Gold);

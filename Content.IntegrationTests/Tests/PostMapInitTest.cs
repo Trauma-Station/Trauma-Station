@@ -31,6 +31,7 @@ namespace Content.IntegrationTests.Tests
     {
         private const bool SkipTestMaps = true;
         private const string TestMapsPath = "/Maps/Test/";
+        private static readonly ProtoId<EntityCategoryPrototype> DoNotMap = "DoNotMap"; // Trauma
 
         private static readonly string[] NoSpawnMaps =
         {
@@ -312,12 +313,11 @@ namespace Content.IntegrationTests.Tests
                 var postMapInit = meta["postmapinit"].AsBool();
                 Assert.That(postMapInit, Is.False, $"Map {map.Filename} was saved postmapinit");
 
+                // <Trauma>
                 // testing that maps have nothing with the DoNotMap entity category
                 // I do it here because it's basically copy-paste code for the most part
                 var yamlEntities = root["entities"];
-                if (!protoManager.TryIndex<EntityCategoryPrototype>("DoNotMap", out var dnmCategory))
-                    return;
-                // <Trauma> - wrap in Assert.Multiple
+                var dnmCategory = protoManager.Index(DoNotMap);
                 Assert.Multiple(() =>
                 {
                     foreach (var yamlEntity in (YamlSequenceNode) yamlEntities)
@@ -333,6 +333,7 @@ namespace Content.IntegrationTests.Tests
                         }
                     }
                 });
+                // </Trauma>
             }
 
             var deps = server.ResolveDependency<IEntitySystemManager>().DependencyCollection;

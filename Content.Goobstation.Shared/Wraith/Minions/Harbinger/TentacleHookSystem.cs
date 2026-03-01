@@ -11,7 +11,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using System.Numerics;
-using Content.Shared.Stunnable;
 using Robust.Shared.Spawners;
 
 namespace Content.Goobstation.Shared.Wraith.Minions.Harbinger;
@@ -22,7 +21,6 @@ public sealed class TentacleHookSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedJointSystem _joints = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
 

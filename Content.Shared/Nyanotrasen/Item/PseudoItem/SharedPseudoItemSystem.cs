@@ -103,7 +103,7 @@ public sealed partial class SharedPseudoItemSystem : EntitySystem
         component.Active = false;
     }
 
-    protected void OnGettingPickedUpAttempt(EntityUid uid, PseudoItemComponent component,
+    private void OnGettingPickedUpAttempt(EntityUid uid, PseudoItemComponent component,
         GettingPickedUpAttemptEvent args)
     {
         if (args.User == args.Item)
@@ -143,7 +143,7 @@ public sealed partial class SharedPseudoItemSystem : EntitySystem
         args.Handled = TryInsert(args.Args.Used.Value, uid, component);
     }
 
-    protected void StartInsertDoAfter(EntityUid inserter, EntityUid toInsert, EntityUid storageEntity,
+    private void StartInsertDoAfter(EntityUid inserter, EntityUid toInsert, EntityUid storageEntity,
         PseudoItemComponent? pseudoItem = null)
     {
         if (!Resolve(toInsert, ref pseudoItem))

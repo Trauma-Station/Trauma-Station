@@ -3,39 +3,36 @@
 using Content.Shared.Weapons.Melee.EnergySword;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
-using Robust.Shared.Prototypes;
 
-namespace Content.Goobstation.Client.Weapons.Melee.EnergySword
+namespace Content.Goobstation.Client.Weapons.Melee.EnergySword;
+
+[UsedImplicitly]
+public sealed class EsColorPickerBUI(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [UsedImplicitly]
-    public sealed class EsColorPickerBUI(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+    private EsColorPicker? _window;
+    private EntityUid _prototypeView;
+
+    protected override void Open()
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
+        base.Open();
 
-        private EsColorPicker? _window;
-        private EntityUid _prototypeView;
+        _window = this.CreateWindow<EsColorPicker>();
 
-        protected override void Open()
+        if (!EntMan.TryGetComponent<MetaDataComponent>(Owner, out var metadata) || metadata?.EntityPrototype?.ID is not {} proto)
+            return;
+
+        _prototypeView = EntMan.Spawn(proto);
+
+        _window.SetEntity(_prototypeView, Owner);
+        _window.SetLogoAndFlavor(_prototypeView);
+
+        _window.OnConfirmButtonPressed += color =>
         {
-            base.Open();
-            _window = this.CreateWindow<EsColorPicker>();
-
-            if (!EntMan.TryGetComponent<MetaDataComponent>(Owner, out var metadata) && metadata == null || metadata.EntityPrototype == null)
-                return;
-            _prototypeView = EntMan.Spawn(metadata.EntityPrototype.ID);
-
-            _window.SetEntity(_prototypeView, Owner);
-            _window.SetLogoAndFlavor(_prototypeView);
-
-            _window.OnConfirmButtonPressed += color =>
-            {
-                SendPredictedMessage(new EsColorChangedMessage(color));
-            };
-            _window.OnSecretButtonPressed += state =>
-            {
-                SendPredictedMessage(new EsHackedStateChangedMessage(state));
-            };
-        }
+            SendPredictedMessage(new EsColorChangedMessage(color));
+        };
+        _window.OnSecretButtonPressed += state =>
+        {
+            SendPredictedMessage(new EsHackedStateChangedMessage(state));
+        };
     }
 }

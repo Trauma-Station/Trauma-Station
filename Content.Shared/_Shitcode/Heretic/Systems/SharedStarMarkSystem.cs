@@ -45,7 +45,6 @@ public abstract class SharedStarMarkSystem : EntitySystem
     public static readonly EntProtoId CosmicField = "WallFieldCosmic";
 
     private const float CosmosPassiveStaminaHealInterval = 1f;
-    private float _accumulator;
 
     public override void Initialize()
     {

@@ -5,7 +5,6 @@ using Content.Goobstation.Shared.Blob.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
@@ -13,8 +12,8 @@ namespace Content.Goobstation.Shared.Blob;
 
 public abstract class SharedBlobMobSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+
     private EntityQuery<BlobTileComponent> _tileQuery;
     private EntityQuery<BlobMobComponent> _mobQuery;
 
@@ -50,7 +49,7 @@ public abstract class SharedBlobMobSystem : EntitySystem
         if (args.Cancelled || !_tileQuery.HasComp(args.Target) && !_mobQuery.HasComp(args.Target))
             return;
 
-        _popupSystem.PopupCursor(Loc.GetString("blob-mob-attack-blob"), PopupType.Large);
+        _popup.PopupCursor(Loc.GetString("blob-mob-attack-blob"), PopupType.Large);
         args.Cancel();
     }
 }

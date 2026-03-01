@@ -3303,3 +3303,10 @@ Entries:
   id: 398
   time: '2026-03-01T18:18:01.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/934
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed goliath and carp organs not having unique names.
+  id: 399
+  time: '2026-03-01T19:25:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/935

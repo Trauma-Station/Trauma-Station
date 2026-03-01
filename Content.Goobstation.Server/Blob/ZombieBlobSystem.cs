@@ -19,7 +19,6 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
 using Content.Shared._Starlight.CollectiveMind;
-using Content.Shared.Tag;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Trigger.Systems;
 using Content.Shared.Zombies;
@@ -36,8 +35,6 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
 {
     [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -124,9 +121,6 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
         _faction.AddFaction(uid, BlobFaction);
         component.OldFactions = oldFactions;
 
-        // var accent = EnsureComp<ReplacementAccentComponent>(uid); // Languages - No need for accents.
-        // accent.Accent = "genericAggressive";
-
         EnsureComp<PressureImmunityComponent>(uid);
 
         if (TryComp<TemperatureDamageComponent>(uid, out var tempDamage))
@@ -143,15 +137,6 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
         var mindComp = EnsureComp<MindContainerComponent>(uid);
         if (mindComp.Mind != null)
         {
-            /*
-            if (!_roleSystem.MindHasRole<BlobRoleComponent>(mindComp.Mind.Value))
-            {
-                _roleSystem.MindAddRole(mindComp.Mind.Value, new BlobRoleComponent
-                {
-                    PrototypeId = "Blob"
-                });
-            }*/
-
             if (_player.TryGetSessionByEntity(mindComp.Mind.Value, out var session))
             {
                 _chatMan.DispatchServerMessage(session, Loc.GetString("blob-zombie-greeting"));

@@ -17,7 +17,7 @@ public sealed class DefaultWalkSystem : EntitySystem
     [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
 
-    private void Initialize()
+    public override void Initialize()
     {
         base.Initialize();
 

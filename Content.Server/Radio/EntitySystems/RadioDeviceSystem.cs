@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Server._EinsteinEngines.Language;
 using Content.Shared.Power.EntitySystems;
 // </Trauma>
 using System.Linq;
@@ -26,7 +25,6 @@ namespace Content.Server.Radio.EntitySystems;
 public sealed class RadioDeviceSystem : SharedRadioDeviceSystem
 {
     // <Trauma>
-    [Dependency] private readonly LanguageSystem _language = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
     // </Trauma>
     [Dependency] private readonly IPrototypeManager _protoMan = default!;

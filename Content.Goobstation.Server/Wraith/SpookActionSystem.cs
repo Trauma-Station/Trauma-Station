@@ -10,7 +10,6 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Server.Ghost;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
-using Content.Shared.Popups;
 using Content.Server.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Storage.Components;

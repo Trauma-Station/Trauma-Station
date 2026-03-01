@@ -10,7 +10,6 @@ using Content.Shared.Destructible;
 using Content.Shared.Trigger.Components.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Prototypes;
 
@@ -18,7 +17,6 @@ namespace Content.Goobstation.Server.Blob;
 
 public sealed class BlobFactorySystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
 

@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Collections.Immutable;
 using System.Net;
 using System.Net.Http;
@@ -123,9 +110,10 @@ namespace Content.Server.Administration
 
         public async Task<LocatedPlayerData?> LookupIdAsync(NetUserId userId, CancellationToken cancel = default)
         {
+// <Trauma> - disable it on debug
 #if DEBUG
             return null; // this is MF DOOM.
-#endif
+#else
             // Check people currently on the server, the easiest case.
             if (_playerManager.TryGetSessionById(userId, out var session))
                 return ReturnForSession(session);
@@ -141,6 +129,8 @@ namespace Content.Server.Administration
             using var resp = await _httpClient.GetAsync(requestUri, cancel);
 
             return await HandleAuthServerResponse(resp, cancel);
+#endif
+// </Trauma>
         }
 
         private async Task<LocatedPlayerData?> HandleAuthServerResponse(HttpResponseMessage resp, CancellationToken cancel)

@@ -38,7 +38,7 @@ public sealed class ReflectSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     // </Trauma>
     [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    //[Dependency] private readonly IRobustRandom _random = default!; // Trauma - replaced by predicted random
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;

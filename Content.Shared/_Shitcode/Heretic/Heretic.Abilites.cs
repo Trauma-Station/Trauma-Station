@@ -1,18 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 the biggest bruh <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 yglop <95057024+yglop@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
@@ -36,18 +21,22 @@ public sealed partial class HereticActionComponent : Component
     /// <summary>
     ///     Indicates that a user should wear a heretic amulet, a hood or something else.
     /// </summary>
-    [DataField] public bool RequireMagicItem = true;
+    [DataField]
+    public bool RequireMagicItem = true;
 
-    [DataField] public string? MessageLoc = null;
+    [DataField]
+    public string? MessageLoc = null;
 }
 
 #region DoAfters
 
-[Serializable, NetSerializable] public sealed partial class EldritchInfluenceDoAfterEvent : SimpleDoAfterEvent
+[Serializable, NetSerializable]
+public sealed partial class EldritchInfluenceDoAfterEvent : SimpleDoAfterEvent;
+
+[Serializable, NetSerializable]
+public sealed partial class DrawRitualRuneDoAfterEvent : DoAfterEvent
 {
-}
-[Serializable, NetSerializable] public sealed partial class DrawRitualRuneDoAfterEvent : SimpleDoAfterEvent
-{
+    // TODO: NetCoordinates / NetEntity
     [NonSerialized] public EntityCoordinates Coords;
     [NonSerialized] public EntityUid RitualRune;
 
@@ -56,16 +45,12 @@ public sealed partial class HereticActionComponent : Component
         RitualRune = ritualRune;
         Coords = coords;
     }
-}
-[Serializable, NetSerializable] public sealed partial class HereticMansusLinkDoAfter : SimpleDoAfterEvent
-{
-    [NonSerialized] public EntityUid Target;
 
-    public HereticMansusLinkDoAfter(EntityUid target)
-    {
-        Target = target;
-    }
+    public override DoAfterEvent Clone() => new DrawRitualRuneDoAfterEvent(RitualRune, Coords);
 }
+
+[Serializable, NetSerializable]
+public sealed partial class HereticMansusLinkDoAfter : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
 public sealed partial class EventHereticFleshSurgeryDoAfter : SimpleDoAfterEvent;
@@ -73,15 +58,15 @@ public sealed partial class EventHereticFleshSurgeryDoAfter : SimpleDoAfterEvent
 [Serializable, NetSerializable]
 public sealed partial class StarGazeDoAfterEvent : DoAfterEvent
 {
+    [DataField]
+    public NetEntity OrbEffect = NetEntity.Invalid;
+
     public StarGazeDoAfterEvent(NetEntity orbEffect)
     {
         OrbEffect = orbEffect;
     }
 
-    [DataField]
-    public NetEntity OrbEffect = NetEntity.Invalid;
-
-    public override DoAfterEvent Clone() => this;
+    public override DoAfterEvent Clone() => new StarGazeDoAfterEvent(OrbEffect);
 }
 
 #endregion
@@ -98,9 +83,9 @@ public sealed partial class CheckMagicItemEvent : HandledEntityEventArgs, IInven
 
 // basic
 public sealed partial class HereticStartupEvent : HereticKnowledgeEvent;
-public sealed partial class EventHereticOpenStore : InstantActionEvent { }
-public sealed partial class EventHereticMansusGrasp : InstantActionEvent { }
-public sealed partial class EventHereticLivingHeart : InstantActionEvent { } // opens ui
+public sealed partial class EventHereticOpenStore : InstantActionEvent;
+public sealed partial class EventHereticMansusGrasp : InstantActionEvent;
+public sealed partial class EventHereticLivingHeart : InstantActionEvent; // opens ui
 
 [ByRefEvent]
 public readonly record struct HereticMindDetachedEvent(EntityUid Mind);
@@ -125,7 +110,7 @@ public sealed partial class EventHereticShadowCloak : InstantActionEvent
 }
 
 // ghoul specific
-public sealed partial class EventHereticMansusLink : EntityTargetActionEvent { }
+public sealed partial class EventHereticMansusLink : EntityTargetActionEvent;
 
 // ash
 public sealed partial class EventHereticAshenShift : InstantActionEvent
@@ -163,8 +148,8 @@ public sealed partial class EventHereticNightwatcherRebirth : InstantActionEvent
     [DataField]
     public float HealAmount = -10f;
 }
-public sealed partial class EventHereticFlames : InstantActionEvent { }
-public sealed partial class EventHereticCascade : InstantActionEvent { }
+public sealed partial class EventHereticFlames : InstantActionEvent;
+public sealed partial class EventHereticCascade : InstantActionEvent;
 
 // flesh
 public sealed partial class EventHereticFleshSurgery : InstantActionEvent, ITouchSpellEvent
@@ -178,7 +163,7 @@ public sealed partial class EventHereticFleshPassive : HereticKnowledgeEvent;
 // void (+ upgrades)
 public sealed partial class EventHereticVoidPassiveT1 : HereticKnowledgeEvent;
 public sealed partial class EventHereticVoidPassiveT2 : HereticKnowledgeEvent;
-public sealed partial class HereticVoidBlastEvent : InstantActionEvent { }
+public sealed partial class HereticVoidBlastEvent : InstantActionEvent;
 
 public sealed partial class HereticVoidBlinkEvent : WorldTargetActionEvent
 {
@@ -249,11 +234,11 @@ public sealed partial class EventHereticSacraments : InstantActionEvent
 }
 
 public sealed partial class HereticChampionStanceEvent : HereticKnowledgeEvent;
-public sealed partial class EventHereticFuriousSteel : InstantActionEvent { }
+public sealed partial class EventHereticFuriousSteel : InstantActionEvent;
 
 // lock
-public sealed partial class EventHereticBulglarFinesse : InstantActionEvent { }
-public sealed partial class EventHereticLastRefugee : InstantActionEvent { }
+public sealed partial class EventHereticBulglarFinesse : InstantActionEvent;
+public sealed partial class EventHereticLastRefugee : InstantActionEvent;
 
 public sealed partial class EventHereticShapeshift : InstantActionEvent;
 

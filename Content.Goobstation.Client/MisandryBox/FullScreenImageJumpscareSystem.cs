@@ -23,9 +23,7 @@ namespace Content.Goobstation.Client.MisandryBox;
 public sealed class ClientFullScreenImageJumpscare : IFullScreenImageJumpscare, IPostInjectInit
 {
     [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly IResourceManager _resource = default!;
     [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly IAudioManager _audio = default!;
     [Dependency] private readonly IClyde _clyde = default!;
     [Dependency] private readonly INetManager _netManager = default!;
 

@@ -33,7 +33,7 @@ public sealed partial class InfluenceUIBox : BoxContainer
         _sprite = _entityManager.System<SpriteSystem>();
 
         InfluenceIcon.Texture = _sprite.Frame0(influenceProto.Icon);
-        Name.SetMessage(Loc.GetString(influenceProto.Name), Color.FromHex("#4CA7AD"));
+        NameLabel.SetMessage(Loc.GetString(influenceProto.Name), Color.FromHex("#4CA7AD"));
 
         State = state;
         Proto = influenceProto;

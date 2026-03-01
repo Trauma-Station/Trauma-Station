@@ -8,13 +8,6 @@ namespace Content.Goobstation.Common.CCVar;
 public sealed partial class GoobCVars
 {
     /// <summary>
-    ///     Whether pipes will unanchor on ANY conflicting connection. May break maps.
-    ///     If false, allows you to stack pipes as long as new directions are added (i.e. in a new pipe rotation, layer or multi-Z link), otherwise unanchoring them.
-    /// </summary>
-    public static readonly CVarDef<bool> StrictPipeStacking =
-        CVarDef.Create("atmos.strict_pipe_stacking", false, CVar.SERVERONLY);
-
-    /// <summary>
     ///     If an object's mass is below this number, then this number is used in place of mass to determine whether air pressure can throw an object.
     ///     This has nothing to do with throwing force, only acting as a way of reducing the odds of tiny 5 gram objects from being yeeted by people's breath
     /// </summary>

@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Server.Chat.Systems;
+using Robust.Server.Player;
+// </Trauma>
 using Content.Server.Antag;
 using Content.Server.Communications;
 using Content.Server.GameTicking.Rules.Components;
@@ -27,9 +31,6 @@ using Robust.Shared.Utility;
 using System.Linq;
 using Content.Shared.Station.Components;
 using Content.Shared.Store.Components;
-using Content.Server.Station.Systems;
-using Content.Server.Chat.Systems;
-using Robust.Server.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.GameTicking.Rules;
@@ -37,7 +38,6 @@ namespace Content.Server.GameTicking.Rules;
 public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 {
     // <Trauma>
-    [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     // </Trauma>

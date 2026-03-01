@@ -4,9 +4,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Station.Events;
-using Content.Shared.Physics;
+using Content.Shared._EinsteinEngines.Physics;
 
-namespace Content.Server.Station.Systems;
+namespace Content.Server._EinsteinEngines.Station.Systems;
 
 public sealed class StationDampeningSystem : EntitySystem
 {

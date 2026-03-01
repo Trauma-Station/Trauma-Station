@@ -4,7 +4,6 @@ using System.Linq;
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Medical.Common.Damage;
-using Content.Medical.Shared.Wounds;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Systems;
@@ -26,7 +25,6 @@ public sealed partial class FleshmendSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
 
     public override void Initialize()
     {
@@ -165,7 +163,6 @@ public sealed partial class FleshmendSystem : EntitySystem
 
         // heal bleeding and restore blood
         _bloodstream.TryModifyBleedAmount(ent.Owner, ent.Comp.BleedingAdjust);
-        //_wound.TryHealMostSevereBleedingWoundables(ent, -ent.Comp.BleedingAdjust, out _); - moved to trymodifybleedamount
         _bloodstream.TryModifyBloodLevel(ent.Owner, ent.Comp.BloodLevelAdjust);
     }
 }

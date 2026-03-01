@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.Knowledge;
 using Content.Medical.Common.Body;
-using Content.Shared.Body;
 using System.Linq;
 // </Trauma>
 using Content.Shared.Clothing.Components;
@@ -20,9 +19,6 @@ namespace Content.Shared.Armor;
 /// </summary>
 public abstract class SharedArmorSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private readonly BodySystem _body = default!;
-    // </Trauma>
     [Dependency] private readonly ExamineSystemShared _examine = default!;
 
     /// <inheritdoc />

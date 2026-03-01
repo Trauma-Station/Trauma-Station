@@ -3,14 +3,11 @@
 using System.Linq;
 using Content.Shared.Damage;
 using Content.Shared.Weapons.Melee.Events;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Weapons.Multihit;
 
 public sealed class ActiveMultihitSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-
     public override void Initialize()
     {
         base.Initialize();
