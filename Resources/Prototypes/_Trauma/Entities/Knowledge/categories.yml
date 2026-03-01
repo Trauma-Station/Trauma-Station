@@ -76,32 +76,32 @@
 
 - type: knowledgeCategory
   id: MartialArt
-  name: Martial Arts
+  name: knowledge-category-prototype-Martial
 
 - type: knowledgeCategory
   id: Construction
-  name: Construction
+  name: knowledge-category-prototype-Construction
 
 - type: knowledgeCategory
   id: Language
-  name: Languages
+  name: knowledge-category-prototype-Languages
 
 - type: knowledgeCategory
   id: War
-  name: Combat & Tactics
+  name: knowledge-category-prototype-Combat
 
 - type: knowledgeCategory
   id: Medical
-  name: Medical
+  name: knowledge-category-prototype-Medical
 
 - type: knowledgeCategory
   id: Physical
-  name: Physical
+  name: knowledge-category-prototype-Physical
 
 - type: knowledgeCategory
   id: Intellectual
-  name: Intellectual
+  name: knowledge-category-prototype-Intellectual
 
 - type: knowledgeCategory
   id: Scientific
-  name: Scientific
+  name: knowledge-category-prototype-Scientific

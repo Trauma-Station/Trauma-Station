@@ -69,3 +69,13 @@ trauma-knowledge-title = Knowledge Tab
 trauma-character-title = Character Tab
 
 entity-category-name-knowledge = Knowledge
+
+
+knowledge-category-prototype-Martial = Martial Arts
+knowledge-category-prototype-Construction = Construction
+knowledge-category-prototype-Languages = Languages
+knowledge-category-prototype-Combat = Combat & Tactics
+knowledge-category-prototype-Medical = Medical
+knowledge-category-prototype-Physical = Physical
+knowledge-category-prototype-Intellectual = Intellectual
+knowledge-category-prototype-Scientific = Scientific
