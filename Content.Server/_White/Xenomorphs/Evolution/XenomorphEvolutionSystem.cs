@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server._White.Xenomorphs.Queen;
 using Content.Server.Actions;
 using Content.Server.Administration.Logs;
 using Content.Server.DoAfter;
@@ -7,6 +8,7 @@ using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Shared._White.RadialSelector;
 using Content.Shared._White.Xenomorphs;
+using Content.Shared._White.Xenomorphs.Caste;
 using Content.Shared._White.Xenomorphs.Xenomorph;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -23,10 +25,8 @@ namespace Content.Server._White.Xenomorphs.Evolution;
 public sealed class XenomorphEvolutionSystem : EntitySystem
 {
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
-
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
@@ -35,6 +35,9 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly XenomorphQueenSystem _queen = default!;
+
+    private static readonly ProtoId<XenomorphCastePrototype> QueenCaste = "Queen";
 
     public override void Initialize()
     {
@@ -62,7 +65,9 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
         {
             if (component.Points < component.Max)
             {
-                _popup.PopupEntity(Loc.GetString("xenomorphs-evolution-not-enough-points", ("seconds", (component.Max - component.Points) / component.PointsPerSecond)), uid, uid);
+                _popup.PopupEntity(
+                    Loc.GetString("xenomorphs-evolution-not-enough-points",
+                    ("seconds", (component.Max - component.Points) / component.PointsPerSecond)), uid, uid);
                 return;
             }
 
@@ -80,7 +85,9 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
     {
         if (component.Points < component.Max)
         {
-            _popup.PopupEntity(Loc.GetString("xenomorphs-evolution-not-enough-points", ("seconds", (component.Max - component.Points) / component.PointsPerSecond)), uid, uid);
+            _popup.PopupEntity(
+                Loc.GetString("xenomorphs-evolution-not-enough-points",
+                ("seconds", (component.Max - component.Points) / component.PointsPerSecond)), uid, uid);
             return;
         }
 
@@ -107,7 +114,7 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
         var coordinates = _transform.GetMoverCoordinates(uid);
         var newXeno = Spawn(args.Choice, coordinates);
 
-        _mind.TransferTo(mindUid, newXeno, mind:mind);
+        _mind.TransferTo(mindUid, newXeno, mind: mind);
         _mind.UnVisit(mindUid, mind);
 
         var dropHandItemsEvent = new DropHandItemsEvent();
@@ -147,8 +154,15 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
     {
         if (evolveTo == null
             || !_protoManager.TryIndex(evolveTo, out var xenomorphPrototype)
-            || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, _componentFactory)) // Goobstation
+            || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, Factory)) // Goobstation
             return false;
+
+        if (xenomorph.Caste == QueenCaste && _queen.IsQueenAlive())
+        {
+            _popup.PopupEntity(
+                Loc.GetString("xenomorphs-evolution-no-cast-slot", ("caste", QueenCaste)), uid, uid);
+            return false;
+        }
 
         var ev = new BeforeXenomorphEvolutionEvent(xenomorph.Caste, checkNeedCasteDeath);
         RaiseLocalEvent(uid, ev);

@@ -239,6 +239,7 @@
   components:
   - type: Action
     checkCanInteract: false
+    raiseOnUser: true # its container is a heart
     useDelay: 40
     icon: { sprite: _Goobstation/Objects/Misc/berserker_heart.rsi, state: icon }
     itemIconStyle: NoItem

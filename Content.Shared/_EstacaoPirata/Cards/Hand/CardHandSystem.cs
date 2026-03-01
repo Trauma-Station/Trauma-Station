@@ -28,10 +28,8 @@ namespace Content.Shared._EstacaoPirata.Cards.Hand;
 
 public sealed class CardHandSystem : EntitySystem
 {
-    [ValidatePrototypeId<EntityPrototype>]
-    public readonly EntProtoId CardHandBaseName = "CardHandBase";
-    [ValidatePrototypeId<EntityPrototype>]
-    public readonly EntProtoId CardDeckBaseName = "CardDeckBase";
+    public static readonly EntProtoId CardHandBaseName = "CardHandBase";
+    public static readonly EntProtoId CardDeckBaseName = "CardDeckBase";
 
     [Dependency] private readonly CardStackSystem _cardStack = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;

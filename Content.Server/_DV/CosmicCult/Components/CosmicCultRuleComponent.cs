@@ -1,5 +1,4 @@
 using Content.Server.RoundEnd;
-using Content.Server._DV.CosmicCult.Abilities;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Server._DV.CosmicCult.EntitySystems;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -9,7 +8,7 @@ namespace Content.Server._DV.CosmicCult.Components;
 /// <summary>
 /// Component for the CosmicCultRuleSystem that should store gameplay info.
 /// </summary>
-[RegisterComponent, Access(typeof(CosmicCultRuleSystem), typeof(CosmicMonumentSystem), typeof(CosmicChantrySystem), typeof(CosmicCultSystem))] // This is getting ridiculous
+[RegisterComponent, Access(typeof(CosmicCultRuleSystem), typeof(CosmicChantrySystem), typeof(CosmicCultSystem), typeof(MonumentSystem))] // This is getting ridiculous
 [AutoGenerateComponentPause]
 public sealed partial class CosmicCultRuleComponent : Component
 {
@@ -58,6 +57,18 @@ public sealed partial class CosmicCultRuleComponent : Component
     [DataField]
     public bool RiftStop;
 
+    /// <summary>
+    /// Set to true to send all the relevant data to the cultists once. Used on roundstart to pass the amount of cultists.
+    /// </summary>
+    [DataField]
+    public bool UpdateAllCultists;
+
+    /// <summary>
+    /// Chance that a rift spawn will be replaced with a more dangerous fracture.
+    /// </summary>
+    [DataField]
+    public float FractureChance;
+
     [DataField]
     public EntityUid ActiveChantry;
 
@@ -67,25 +78,25 @@ public sealed partial class CosmicCultRuleComponent : Component
     /// <summary>
     ///     The cult's monument
     /// </summary>
-    public Entity<MonumentComponent> MonumentInGame;
-
-    /// <summary>
-    ///     The slow zone of the spawned monument
-    /// </summary>
-    [DataField]
-    public EntityUid MonumentSlowZone;
-
-    /// <summary>
-    ///     The EntityUid of the cult leader
-    /// </summary>
-    [DataField]
-    public EntityUid? CultLeader;
+    public Entity<MonumentComponent>? MonumentInGame;
 
     /// <summary>
     ///     Current tier of the cult
     /// </summary>
     [DataField]
-    public int CurrentTier;
+    public int CurrentTier = 0;
+
+    /// <summary>
+    ///     Amount of cultists that need to be at least <see cref="CurrentTier"> + 1 level for the current tier to increase.
+    /// </summary>
+    [DataField]
+    public int CultistsForNextTier;
+
+    /// <summary>
+    ///     Amount of cultists that are at <see cref="CurrentTier"> + 1 level.
+    /// </summary>
+    [DataField]
+    public int CultistsAtNextLevel;
 
     /// <summary>
     ///     Amount of present crew
@@ -94,7 +105,13 @@ public sealed partial class CosmicCultRuleComponent : Component
     public int TotalCrew;
 
     /// <summary>
-    ///     Amount of cultists
+    ///     Amount of cultists that were initially present
+    /// </summary>
+    [DataField]
+    public int InitialCult;
+
+    /// <summary>
+    ///     Amount of active cultists that contribute to progression (doesn't include dead)
     /// </summary>
     [DataField]
     public int TotalCult;
@@ -112,50 +129,34 @@ public sealed partial class CosmicCultRuleComponent : Component
     public int EntropySiphoned;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan? StewardVoteTimer;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan? PrepareFinaleTimer;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan? Tier3DelayTimer;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan? Tier2DelayTimer;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? ExtraRiftTimer;
 
+    /// <summary>
+    /// Used to prevent recursion with IncreaseTier and UpdateCultData
+    /// </summary>
+    public bool IncreasingTier;
 }
 
-public enum WinType : byte
+public enum WinType : byte // TODO make a gentle sledgehammer pass over this
 {
     /// <summary>
-    ///     Cult complete win. The Cosmic Cult beckoned the final curtain call.
-    /// </summary>
-    CultComplete,
-    /// <summary>
-    ///    Cult major win. The Monument reached Stage 3 and was fully empowered.
+    ///    Cult major win. The Cosmic Cult beckoned the final curtain call.
     /// </summary>
     CultMajor,
     /// <summary>
-    ///    Cult minor win. Even if the crew escaped, The Monument reached Stage 3.
+    ///    Cult minor win. More than half of the cultists are still alive and free.
     /// </summary>
     CultMinor,
     /// <summary>
-    ///     Neutral. The Monument didn't reach Stage 3, The crew escaped, but the Cult Leader also escaped.
+    ///     Neutral. More than half of the cult are dead and not even on centcomm.
     /// </summary>
     Neutral,
     /// <summary>
-    ///     Crew minor win. The monument didn't reach Stage 3, The crew escaped, and Cult leader was killed, deconverted, or left on the station.
+    ///     Crew minor win. More than half of the cultists are arrested.
     /// </summary>
     CrewMinor,
     /// <summary>
-    ///     Crew major win. The monument didn't reach Stage 3, The crew escaped, and the cult was killed.
+    ///     Crew major win. All cultists arrested.
     /// </summary>
     CrewMajor,
-    /// <summary>
-    ///     Crew complete win. The cult was completely deconverted.
-    /// </summary>
-    CrewComplete,
 }

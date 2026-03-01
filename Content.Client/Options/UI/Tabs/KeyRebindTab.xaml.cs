@@ -1,4 +1,6 @@
-using Content.Goobstation.Common.CCVar; // Goob
+// <Trauma>
+using Content.Goobstation.Common.CCVar;
+// </Trauma>
 using System.Numerics;
 using Content.Client.Stylesheets;
 using Content.Shared.CCVar;
@@ -255,7 +257,8 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.EscapeMenu);
             AddButton(ContentKeyFunctions.EscapeContext);
 
-            // Shitmed Change Start - TODO: Add hands, feet and groin targeting.
+            // <Trauma>
+            // TODO: change to scrolling x/y
             AddHeader("ui-options-header-targeting");
             AddButton(ContentKeyFunctions.TargetHead);
             AddButton(ContentKeyFunctions.TargetChest);
@@ -268,7 +271,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.TargetLeftFoot);
             AddButton(ContentKeyFunctions.TargetRightLeg);
             AddButton(ContentKeyFunctions.TargetRightFoot);
-            // Shitmed Change End
+            // </Trauma>
 
             AddHeader("ui-options-header-misc");
             AddButton(ContentKeyFunctions.TakeScreenshot);

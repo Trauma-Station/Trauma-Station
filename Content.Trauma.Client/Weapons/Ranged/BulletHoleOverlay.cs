@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Numerics;
 using Content.Trauma.Shared.Weapons.Ranged;
 using Robust.Client.GameObjects;
@@ -32,6 +34,7 @@ public sealed class BulletHoleOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
         _xform = _entMan.System<TransformSystem>();
+        ZIndex = -2; // Renderer it under every other overlay
     }
 
     private Texture? GetTexture()

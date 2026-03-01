@@ -10,6 +10,9 @@ cosmic-examine-text-imposition = [color=#4cabb3]A barrier of astral power wards 
 cosmic-examine-text-chantry = [color=#4cabb3]You get the horrific feeling that there's somebody trapped inside![/color]
 cosmic-examine-text-effigy = [color=#4cabb3]It radiates unstable anomalous energy![/color]
 cosmic-examine-text-god = [color=#4cabb3]the end is the end is the end is the end is the end is the end is the end is the end is the end is the end is[/color]
+cosmic-examine-text-fracture = [color=#4cabb3]Reality is falling apart near it. Standing close to it may prove dangerous.[/color]
+cosmic-examine-text-subtle-mark = [color=#4cabb3]Ripples of otherworldly energy flicker within their eyes.[/color]
+cosmic-examine-text-mote = [color=#4cabb3]Feels hard-yet-malleable, as though you could crush it with your bare hands.[/color]
 
 ## CULTIST EXAMINES
 cosmic-examine-text-forthecult = [color=#4cabb3]This is our doing. As things should be.[/color]
@@ -28,3 +31,8 @@ cosmic-examine-glyph-cessation = [color=#4cabb3]Transmutes a portable gas scrubb
 cosmic-examine-glyph-projection = [color=#4cabb3]Allows us to ascend in a temporary astral form to spy on those around us.[/color]
 cosmic-examine-glyph-blades = [color=#4cabb3]Transmutes and extrudes sharp objects into more lethal weaponry.[/color]
 cosmic-examine-glyph-warding = [color=#4cabb3]Transmutes pressure-resistant clothing into entropic garb.[/color]
+
+## TRANSMUTE EXAMINES
+cosmic-examine-transmutable = This can be transmuted into [color=#4cabb3]{$result}[/color].
+cosmic-examine-transmutable-empowerment = [color=#4cabb3]Only empowered cultists can transmute this.[/color]
+cosmic-examine-transmutable-verb-text = Transmutability.

@@ -1,0 +1,124 @@
+- type: jobRequirementOverride
+  id: Trauma
+  jobs:
+    # Dignitrary
+    NanotrasenRepresentative:
+    - !type:DepartmentTimeRequirement
+      department: Command
+      time: 3h
+    # Command
+    Captain:
+    - !type:RoleTimeRequirement
+      role: JobHeadOfSecurity
+      time: 1h
+    - !type:RoleTimeRequirement
+      role: JobChiefMedicalOfficer
+      time: 1h
+    - !type:RoleTimeRequirement
+      role: JobQuartermaster
+      time: 1h
+    - !type:RoleTimeRequirement
+      role: JobResearchDirector
+      time: 1h
+    - !type:RoleTimeRequirement
+      role: JobChiefEngineer
+      time: 1h
+    Quartermaster:
+    - !type:DepartmentTimeRequirement
+      department: Cargo
+      time: 3h
+    HeadOfPersonnel:
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 3h
+    ChiefEngineer:
+    - !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 3h
+    ChiefMedicalOfficer:
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 3h
+    ResearchDirector:
+    - !type:DepartmentTimeRequirement
+      department: Science
+      time: 3h
+    HeadOfSecurity:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 3h
+    #Intern
+    SecurityCadet:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 3h
+      inverted: true
+    TechnicalAssistant:
+    - !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 3h
+      inverted: true
+    MedicalIntern:
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 3h
+      inverted: true
+    ResearchAssistant:
+    - !type:DepartmentTimeRequirement
+      department: Science
+      time: 3h
+      inverted: true
+    ServiceWorker:
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 3h
+      inverted: true
+    #Cargo - No intern role, so no limits lmao.
+    #Engineering
+    StationEngineer:
+    - !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 1h
+    AtmosphericTechnician:
+    - !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 1h
+    #Medical
+    Chemist:
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 1h
+    MedicalDoctor:
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 1h
+    Paramedic:
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 1h
+    #Science
+    Scientist:
+    - !type:DepartmentTimeRequirement
+      department: Science
+      time: 1h
+    #Security
+    SecurityOfficer:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 1h
+    Detective:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 1h
+    Warden:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 2h # muh intermediary role, also kinda has to know a bit more law.
+    #Silicon
+    StationAi:
+    - !type:RoleTimeRequirement
+      role: JobBorg
+      time: 3h
+    Borg:
+    - !type:OverallPlaytimeRequirement
+      time: 2h

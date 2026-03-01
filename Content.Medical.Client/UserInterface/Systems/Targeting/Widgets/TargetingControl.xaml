@@ -1,4 +1,7 @@
-<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
 <widgets:TargetingControl
     xmlns="https://spacestation14.io"
     xmlns:widgets="using:Content.Medical.Client.UserInterface.Systems.Targeting.Widgets"

@@ -1,6 +1,6 @@
 - files: ["dionacry.ogg"]
   license: "CC0-1.0"
-  copyright: "sound taken from https://freesound.org/people/DaniloSFX/sounds/672724/?, Cut and converted to .Ogg by Stomf"
+  copyright: "sound taken from https://freesound.org/people/DaniloSFX/sounds/672724/?, Cut and converted to .Ogg by Stomf. Converted to mono by @deltanedas (github)"
   source: "https://freesound.org/people/DaniloSFX/sounds/672724/?"
 
 - files: ["dionawhistle1.ogg"]
@@ -15,7 +15,7 @@
 
 - files: ["dionacough.ogg"]
   license: "CC0-1.0"
-  copyright: "sound taken from https://freesound.org/people/wniebelski/sounds/695978/, cut and converted to .Ogg by Stomf"
+  copyright: "sound taken from https://freesound.org/people/wniebelski/sounds/695978/, cut and converted to .Ogg by Stomf Converted to mono by @deltanedas (github)"
   source: "https://freesound.org/people/wniebelski/sounds/695978/"
 
 - files: ["dionayawn.ogg"]
@@ -25,5 +25,5 @@
 
 - files: ["dionasigh.ogg"]
   license: "CC0-1.0"
-  copyright: "sound taken from https://freesound.org/people/DariusOW/sounds/766406/, converted to .Ogg by Stomf"
+  copyright: "sound taken from https://freesound.org/people/DariusOW/sounds/766406/, converted to .Ogg by Stomf Converted to mono by @deltanedas (github)"
   source: "https://freesound.org/people/DariusOW/sounds/766406/"

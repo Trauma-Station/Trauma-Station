@@ -57,8 +57,8 @@ public sealed class CosmicFragmentationSystem : EntitySystem
 
         args.Handled = true;
         _cult.MalignEcho(ent);
-        _actions.RemoveAction(ent.Owner, ent.Comp.CosmicFragmentationActionEntity);
-        ent.Comp.CosmicFragmentationActionEntity = default!;
+        ent.Comp.ActionEntities.Remove(args.Action.Owner);
+        _actions.RemoveAction(ent.Owner, args.Action.Owner);
     }
 
     private void OnFragmentBorg(Entity<BorgChassisComponent> ent, ref MalignFragmentationEvent args)

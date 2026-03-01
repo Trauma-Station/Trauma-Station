@@ -1,0 +1,71 @@
+name: List Audio Changes
+
+on:
+  pull_request_target:
+    paths:
+    - '**.ogg'
+
+jobs:
+  run:
+    name: List Audio Changes
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4.2.2
+      with:
+        repository: ${{ github.event.pull_request.head.repo.full_name }}
+        ref: ${{ github.event.pull_request.head.sha }}
+        sparse-checkout: |
+          .github
+          Resources/Audio
+
+    - name: Get changed files
+      id: files
+      uses: Ana06/get-changed-files@v2.3.0
+      with:
+        format: 'space-delimited'
+        filter: '**.ogg'
+
+    - name: Get audio info
+      id: info
+      run: |
+        files="${{ steps.files.outputs.modified }} ${{ steps.files.outputs.added }}"
+        count=`echo $files | wc -w`
+        # no trolling
+        infos=`file -- $files | sed s/EOF/E0F/g`
+        echo "Infos = $infos"
+        printf 'info<<EOF\n**Sound Bot**\n\nThis PR changed %d sounds:\n<details>\n%s\n</details>\nEOF' "$count" "$infos" >> $GITHUB_OUTPUT
+
+    - name: Potentially find comment
+      uses: peter-evans/find-comment@v1
+      id: fc
+      with:
+        issue-number: ${{ github.event.number }}
+        comment-author: 'github-actions[bot]'
+        body-includes: 'Sound Bot'
+
+    - name: Create comment if it doesn't exist
+      if: steps.fc.outputs.comment-id == ''
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        issue-number: ${{ github.event.number }}
+        body: |
+          ${{ steps.info.outputs.info }}
+
+    - name: Update comment if it exists
+      if: steps.fc.outputs.comment-id != ''
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        comment-id: ${{ steps.fc.outputs.comment-id }}
+        edit-mode: replace
+        body: |
+          ${{ steps.info.outputs.info }}
+
+    - name: Update comment to read that it has been edited
+      if: steps.fc.outputs.comment-id != ''
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        comment-id: ${{ steps.fc.outputs.comment-id }}
+        edit-mode: append
+        body: |
+          Edit: Updated after ${{ github.event.pull_request.head.sha }}

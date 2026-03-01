@@ -3,5 +3,8 @@
   configuration:
     entity: MobMothroach
     forced: true
+    revertOnCrit: false
+    revertOnDeath: false
+    revertOnDelete: false
     polymorphSound:
       path: /Audio/Voice/Moth/moth_chitter.ogg

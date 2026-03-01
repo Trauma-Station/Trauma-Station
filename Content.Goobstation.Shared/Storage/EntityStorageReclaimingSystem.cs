@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Storage.Components;
 using Content.Shared.Materials;
 using Robust.Shared.Containers;

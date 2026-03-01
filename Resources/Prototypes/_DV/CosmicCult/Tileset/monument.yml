@@ -1,18 +1,12 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
-
- ########### COSMIC MONUMENT, BASE ABSTRACT #############
+########### COSMIC MONUMENT, BASE ABSTRACT #############
 
 - type: entity
-  abstract: true
+  categories: [ HideSpawnMenu ]
   parent: BaseStructure
-  id: MonumentCosmicCultBase
+  id: MonumentCosmicCult
   name: The Monument
-  description: A great slab of unknowledge, only visible to those aware of it. Built of a thousand little nothings, its surface reflects a starless emptiness...
+  description: A great slab of unknowledge, built of a thousand little nothings, its surface reflects a starless emptiness...
+  suffix: DO NOT MAP
   placement:
     mode: AlignTileAny
   components:
@@ -28,17 +22,13 @@
         layer:
         - WallLayer
         density: 1000
-        hard: false
-  - type: Visibility
-    layer: 32
-#  - type: SpriteFade # - Supercode breaks clickability with this.
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/monument.rsi
     layers:
-      - state: stage1
+      - state: stage2
         visible: true
         map: ["enum.MonumentVisualLayers.MonumentLayer"]
-      - state: transform-stage2
+      - state: transform-stage3
         visible: false
         map: ["enum.MonumentVisualLayers.TransformLayer"]
       - state: finale-overlay1
@@ -52,13 +42,10 @@
     visuals:
       enum.MonumentVisuals.Monument:
         enum.MonumentVisualLayers.MonumentLayer:
-          1: {state: stage1}
-          2: {state: stage2}
-          3: {state: stage3}
+          1: {state: stage2}
+          2: {state: stage3}
       enum.MonumentVisuals.FinaleReached:
         enum.MonumentVisualLayers.FinaleLayer:
-          True: { visible: true }
-          False: { visible: false }
           1: {state: finale-overlay1}
           2: {state: finale-overlay2}
           3: {state: finale-overlay3}
@@ -90,22 +77,10 @@
     volume: -9
     sound:
       path: /Audio/_DV/CosmicCult/god_ambient.ogg
-  - type: ActivatableUI
-    singleUser: false
-    requiresComplex: true
-    blockSpectators: true
-    key: enum.MonumentKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.MonumentKey.Key:
-        type: MonumentBoundUserInterface
-  - type: CosmicFinale
   - type: Monument
-    unlockedGlyphs:
-    - ccGlyphKnowledge
-    - ccGlyphProjection
-    selectedGlyph: ccGlyphKnowledge
-    totalEntropy: 0
+    stage: 2
+    canActivate: true
+  - type: MonumentTransforming
   - type: GuideHelp
     guides:
     - CosmicCult
@@ -114,79 +89,16 @@
   - type: CosmicCultExamine
     cultistText: cosmic-examine-text-forthecult
   - type: CosmicCorrupting
-    corruptionReduction: 0.01
-    enabled: false
+    corruptionSpeed: 2
     floodFillStarting: true
 
- ########### SPAWN-IN ANIMATION #############
-
 - type: entity
   categories: [ HideSpawnMenu ]
-  id: MonumentCosmicCultSpawnIn
+  id: MonumentCosmicCultDestruction
   name: The Monument
   parent: BaseStructure
-  suffix: Spawn, DO NOT MAP
+  suffix: Destruiction, DO NOT MAP
   components:
-  - type: Visibility
-    layer: 32
-  - type: Sprite
-    sprite: _DV/CosmicCult/Tileset/monument.rsi
-    layers:
-      - state: stage1-spawnin
-      - state: stage1-spawnin-overlay
-        shader: unshaded
-    offset: 0,1
-    drawdepth: Mobs
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-1.1,-0.2,1.1,0.7"
-        hard: false
-        mask:
-        - LargeMobMask
-        layer:
-        - WallLayer
-  - type: InteractionOutline
-  - type: Transform
-  - type: EmitSoundOnSpawn
-    sound:
-      path: /Audio/_DV/CosmicCult/monument_spawn.ogg
-      params:
-        volume: +8
-        pitch: 0.8
-  - type: TimedDespawn
-    lifetime: 3.8
-  - type: MonumentOnDespawn
-    prototype: MonumentCosmicCult1
-  - type: PointLight
-    enabled: true
-    radius: 4.5
-    energy: 4
-    color: "#43286a"
-  - type: LightBehaviour
-    behaviours:
-     - !type:FadeBehaviour
-       interpolate: Linear
-       minDuration: 3.8
-       maxDuration: 3.8
-       startValue: 0.5
-       endValue: 4.5
-       property: Energy
-       enabled: true
-
- ########### RELOCATION ANIMATIONS #############
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  id: MonumentCosmicCultMoveStart
-  name: The Monument
-  parent: BaseStructure
-  suffix: Spawn, DO NOT MAP
-  components:
-  - type: Visibility
-    layer: 32
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/monument.rsi
     layers:
@@ -200,7 +112,6 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-1.1,-0.2,1.1,0.7"
-        hard: false
         mask:
         - LargeMobMask
         layer:
@@ -215,47 +126,27 @@
         pitch: 0.8
   - type: TimedDespawn
     lifetime: 3.8
-  - type: PointLight
-    color: "#42a4ae"
-    radius: 4.5
-    energy: 4
-    castShadows: false
-  - type: LightBehaviour
-    behaviours:
-     - !type:FadeBehaviour
-       interpolate: Linear
-       minDuration: 3.8
-       maxDuration: 3.8
-       startValue: 0.1
-       endValue: 4.5
-       property: Energy
-       enabled: true
-       isLooped: true
-       reverseWhenFinished: true
 
 - type: entity
   categories: [ HideSpawnMenu ]
-  id: MonumentCosmicCultMoveEnd
+  id: MonumentCosmicCultSpawn
   name: The Monument
   parent: BaseStructure
   suffix: Spawn, DO NOT MAP
   components:
-  - type: Visibility
-    layer: 32
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/monument.rsi
     layers:
     - state: stage2-relocate-in
       shader: unshaded
     offset: 0,1
-    drawdepth: Mobs
+    drawdepth: 11
   - type: Fixtures
     fixtures:
       fix1:
         shape:
           !type:PhysShapeAabb
           bounds: "-1.1,-0.2,1.1,0.7"
-        hard: false
         mask:
         - LargeMobMask
         layer:
@@ -270,111 +161,30 @@
         pitch: 0.8
   - type: TimedDespawn
     lifetime: 3.8
-  - type: MonumentMoveDestination
-  - type: PointLight
-    color: "#42a4ae"
-    radius: 4.5
-    energy: 4
-    castShadows: false
-  - type: LightBehaviour
-    behaviours:
-     - !type:FadeBehaviour
-       interpolate: Linear
-       minDuration: 3.8
-       maxDuration: 3.8
-       startValue: 0.1
-       endValue: 4.5
-       property: Energy
-       enabled: true
-       isLooped: true
-       reverseWhenFinished: true
-
- ########### COLLIDER LAY-Z FIX #############
+  - type: MonumentOnDespawn
+    prototype: MonumentCosmicCult
+    spawnTimer: 0 # Test fail without
 
 - type: entity
   categories: [ HideSpawnMenu ]
-  id: MonumentCollider
-  suffix: Debug, DO NOT MAP
-  parent: BaseStructure
-  placement:
-    mode: AlignTileAny
-  components:
-  - type: MonumentCollision
-  - type: Fixtures
-    fixtures:
-      MonumentCollider:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-1.08,-0.18,1.08,0.68"
-        density: 9999
-        mask:
-        - LargeMobMask
-        layer:
-        - WallLayer
-
- ########### TIER 3 SUPPRESSION AURA #############
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  id: MonumentSlowZone
-  suffix: Debug, DO NOT MAP
+  id: MonumentCosmicCultSpawnMark
+  name: The Monumen't
+  description: The yet-to-become Monument, it still needs more cultists to make it's way into reality. Only visible to those aware of it.
   placement:
     mode: SnapgridCenter
     snap:
     - Wall
   components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/monument.rsi
+    layers:
+      - state: spawn-mark
+    offset: 0,1
+    drawdepth: Overdoors
+  - type: Visibility
+    layer: 32
   - type: Transform
     anchored: true
-  - type: SpeedModifierContacts
-    walkSpeedModifier: 0.7
-    sprintSpeedModifier: 0.75
-    ignoreWhitelist:
-      components:
-      - CosmicCult
-      - MindShield
-      - BibleUser
-  - type: Physics
-    bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-8.5,-8.5,8.5,8.5"
-        layer:
-          - SlipLayer
-        mask:
-          - ItemMask
-        density: 1000
-        hard: false
-
- ########### STAGE 1 #############
-
-- type: entity
-  parent: MonumentCosmicCultBase
-  id: MonumentCosmicCult1
-  suffix: Base, DO NOT MAP
-  components:
-  - type: Monument # Causes test fail without
-    targetProgress: 35
-
-
-- type: entity
-  id: MonumentCosmicCult2
-  suffix: DO NOT MAP, DO NOT SPAWN
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _DV/CosmicCult/Tileset/monument.rsi
-    layers:
-      - state: stage2
-
-- type: entity
-  id: MonumentCosmicCult3
-  suffix: DO NOT MAP, DO NOT SPAWN
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _DV/CosmicCult/Tileset/monument.rsi
-    layers:
-      - state: stage3
+  - type: InteractionOutline
+  - type: Clickable
+  - type: MonumentSpawnMark
