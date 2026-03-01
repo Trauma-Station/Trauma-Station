@@ -88,7 +88,7 @@ public sealed class RespiratorSystem : EntitySystem
             && pullable.GrabStage == GrabStage.Suffocate)
             return false;
 
-        return !HasComp<KravMagaBlockedBreathingComponent>(uid);
+        return !HasComp<BlockedBreathingComponent>(uid);
     }
     // Goobstation end
     private void OnMapInit(Entity<RespiratorComponent> ent, ref MapInitEvent args)

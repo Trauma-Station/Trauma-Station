@@ -10,7 +10,7 @@ namespace Content.Trauma.Common.MartialArts;
 /// May cause suffocation damage over time when integrated with respiration systems.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class KravMagaBlockedBreathingComponent : Component
+public sealed partial class BlockedBreathingComponent : Component
 {
     [DataField]
     public TimeSpan BlockedTime = TimeSpan.Zero;

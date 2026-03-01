@@ -57,7 +57,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
             Dirty(ent, comp);
         }
 
-        var kravBlockedQuery = EntityQueryEnumerator<KravMagaBlockedBreathingComponent>();
+        var kravBlockedQuery = EntityQueryEnumerator<BlockedBreathingComponent>();
         var curTime = _timing.CurTime;
         while (kravBlockedQuery.MoveNext(out var ent, out var comp))
         {

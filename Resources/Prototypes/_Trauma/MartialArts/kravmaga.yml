@@ -107,4 +107,6 @@
     time: 1
     drop: true
     type: Add
+  - !type:BlockedBreathing
+    time: 10
   levelRequired: 26
