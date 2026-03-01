@@ -5,7 +5,7 @@ namespace Content.Trauma.Shared.Phones;
 /// <summary>
 /// This is a prototype for phone category's in the phone-book
 /// </summary>
-[Prototype()]
+[Prototype]
 public sealed partial class PhoneCategoryPrototype : IPrototype
 {
     [IdDataField]
