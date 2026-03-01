@@ -5,7 +5,6 @@ using Content.Shared.Coordinates;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._White.Xenomorphs.Acid;
@@ -13,9 +12,7 @@ namespace Content.Shared._White.Xenomorphs.Acid;
 public abstract class SharedXenomorphAcidSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-
 
     public override void Initialize()
     {

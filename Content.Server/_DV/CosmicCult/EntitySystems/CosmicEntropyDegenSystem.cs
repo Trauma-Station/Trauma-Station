@@ -1,9 +1,8 @@
 using Content.Shared._DV.CosmicCult.Components;
 using Robust.Shared.Timing;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Popups;
-using Robust.Shared.Random;
-using Content.Medical.Common.Targeting; // Shitmed Change
+using Content.Medical.Common.Targeting;
+
 namespace Content.Server._DV.CosmicCult.EntitySystems;
 
 /// <summary>
@@ -13,9 +12,7 @@ namespace Content.Server._DV.CosmicCult.EntitySystems;
 public sealed partial class CosmicEntropyDegenSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

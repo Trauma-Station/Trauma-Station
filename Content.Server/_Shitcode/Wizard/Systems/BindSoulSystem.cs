@@ -8,7 +8,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Clothing.Systems;
-using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.Destructible.Thresholds.Behaviors;
 using Content.Shared.Destructible.Thresholds.Triggers;

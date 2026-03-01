@@ -25,6 +25,7 @@
   - type: ContentEye
     maxZoom: 1.2, 1.2
   - type: Speech
+    speechSounds: CosmicSpeech
     speechVerb: Ghost
   - type: PointLight
     color: "#42a4ae"

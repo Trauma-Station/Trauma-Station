@@ -34,5 +34,5 @@ public interface ISharedChatManager
     /// Trauma - moved from server, sends a message to a single player.
     /// </summary>
     void ChatMessageToOne(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat,
-        INetChannel client, Color? colorOverride = null, bool recordReplay = false, string? audioPath = null, float audioVolume = 0, NetUserId? author = null, bool canCoalesce = true);
+        INetChannel client, Color? colorOverride = null, bool recordReplay = false, string? audioPath = null, float audioVolume = 0, NetUserId? author = null, bool canCoalesce = true, bool hidePopup = false); // Trauma added hidePopup
 }

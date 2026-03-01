@@ -5,14 +5,11 @@ using Content.Server.Construction.Components;
 using Content.Shared.Climbing.Systems;
 using Content.Shared.DragDrop;
 using Content.Shared.Hands.Components;
-using Content.Shared.Interaction;
 
 namespace Content.Goobstation.Server.DragDrop;
 
 public sealed partial class GoobDragDropSystem : SharedGoobDragDropSystem
 {
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-
     public override void Initialize()
     {
         base.Initialize();

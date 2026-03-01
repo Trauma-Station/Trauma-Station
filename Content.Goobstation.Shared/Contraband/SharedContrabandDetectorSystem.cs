@@ -18,7 +18,6 @@ public abstract class SharedContrabandDetectorSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly ContrabandSystem _contrabandSystem = default!;
     [Dependency] private readonly SharedIdCardSystem _idCardSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _powerReceiverSystem = default!;

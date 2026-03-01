@@ -7,7 +7,6 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Timing;
 
@@ -15,11 +14,10 @@ namespace Content.Goobstation.Shared.Weapons.RequiresDualWield;
 
 public sealed class RequiresDualWieldSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -39,7 +37,7 @@ public sealed class RequiresDualWieldSystem : EntitySystem
         if (handsComp.Count != 2)
             return;
 
-        var EnumeratedItems = _handsSystem.EnumerateHeld((args.User, handsComp));
+        var EnumeratedItems = _hands.EnumerateHeld((args.User, handsComp));
 
         if (EnumeratedItems.ToList().Count <= 1)
         {
@@ -79,12 +77,12 @@ public sealed class RequiresDualWieldSystem : EntitySystem
         {
             component.LastPopup = time;
             var message = Loc.GetString("dual-wield-component-requires", ("item", args.Used));
-            _popupSystem.PopupClient(message, args.Used, args.User);
+            _popup.PopupClient(message, args.Used, args.User);
         }
     }
 
     private bool CheckGun(EntityUid target, EntityWhitelist? whitelist)
     {
-        return _whitelistSystem.IsWhitelistPassOrNull(whitelist, target);
+        return _whitelist.IsWhitelistPassOrNull(whitelist, target);
     }
 }

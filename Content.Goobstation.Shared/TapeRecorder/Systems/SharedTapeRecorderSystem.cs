@@ -6,7 +6,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Labels.Components;
-using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Content.Shared.UserInterface;
 using Content.Shared.Whitelist;
@@ -29,7 +28,6 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
     [Dependency] protected readonly SharedAudioSystem Audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     protected const string SlotName = "cassette_tape";

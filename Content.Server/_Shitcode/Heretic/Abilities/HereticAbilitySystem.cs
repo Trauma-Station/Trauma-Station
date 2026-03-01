@@ -344,20 +344,20 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
             return;
 
         var ent = args.Performer;
-
-        if (!HasComp<MindContainerComponent>(args.Target))
+        var target = args.Target;
+        if (!HasComp<MindContainerComponent>(target))
         {
             Popup.PopupEntity(Loc.GetString("heretic-manselink-fail-nomind"), ent, ent);
             return;
         }
 
-        if (TryComp<CollectiveMindComponent>(args.Target, out var mind) && mind.Channels.Contains(MansusLinkMind))
+        if (TryComp<CollectiveMindComponent>(target, out var mind) && mind.Channels.Contains(MansusLinkMind))
         {
             Popup.PopupEntity(Loc.GetString("heretic-manselink-fail-exists"), ent, ent);
             return;
         }
 
-        var dargs = new DoAfterArgs(EntityManager, ent, 5f, new HereticMansusLinkDoAfter(args.Target), ent, args.Target)
+        var dargs = new DoAfterArgs(EntityManager, ent, 5f, new HereticMansusLinkDoAfter(), eventTarget: ent, target: target)
         {
             BreakOnDamage = true,
             BreakOnMove = true,
@@ -365,19 +365,17 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
             MultiplyDelay = false
         };
         Popup.PopupEntity(Loc.GetString("heretic-manselink-start"), ent, ent);
-        Popup.PopupEntity(Loc.GetString("heretic-manselink-start-target"), args.Target, args.Target, PopupType.MediumCaution);
+        Popup.PopupEntity(Loc.GetString("heretic-manselink-start-target"), target, target, PopupType.MediumCaution);
         DoAfter.TryStartDoAfter(dargs);
     }
     private void OnMansusLinkDoafter(HereticMansusLinkDoAfter args)
     {
-        if (args.Cancelled)
+        if (args.Cancelled || args.Target is not {} target)
             return;
 
-        EnsureComp<CollectiveMindComponent>(args.Target).Channels.Add(MansusLinkMind);
+        EnsureComp<CollectiveMindComponent>(target).Channels.Add(MansusLinkMind);
 
-        // this "* 1000f" (divided by 1000 in FlashSystem) is gonna age like fine wine :clueless:
-        // updated: get upstream'ed you clanker
-        _flash.Flash(args.Target, null, null, TimeSpan.FromSeconds(2f), 0f, false, true, stunDuration: TimeSpan.FromSeconds(1f));
+        _flash.Flash(target, null, null, TimeSpan.FromSeconds(2f), 0f, false, true, stunDuration: TimeSpan.FromSeconds(1f));
     }
 
     private float GetFleshHealMultiplier(Entity<MartialArtModifiersComponent> ent)

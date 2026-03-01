@@ -9,12 +9,14 @@ namespace Content.Goobstation.Shared.Stunnable;
 
 public sealed class ParalyzeOnCollideSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<ParalyzeOnCollideComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<ParalyzeOnCollideComponent, LandEvent>(OnLand);
     }
@@ -22,25 +24,21 @@ public sealed class ParalyzeOnCollideSystem : EntitySystem
     private void OnStartCollide(EntityUid uid, ParalyzeOnCollideComponent component, ref StartCollideEvent args)
     {
         if (component.CollidableEntities != null &&
-            _whitelistSystem.IsValid(component.CollidableEntities, args.OtherEntity))
+            _whitelist.IsValid(component.CollidableEntities, args.OtherEntity))
             return;
 
-        if (component.ParalyzeOther && args.OtherEntity != null)
-            _stunSystem.TryUpdateParalyzeDuration(args.OtherEntity, component.ParalyzeTime);
-        if (component.ParalyzeSelf && uid != null)
-            _stunSystem.TryUpdateParalyzeDuration(uid, component.ParalyzeTime);
+        if (component.ParalyzeOther)
+            _stun.TryUpdateParalyzeDuration(args.OtherEntity, component.ParalyzeTime);
+        if (component.ParalyzeSelf)
+            _stun.TryUpdateParalyzeDuration(uid, component.ParalyzeTime);
 
         if (component.RemoveAfterCollide)
-        {
-            RemComp(uid, component);
-        }
+            RemCompDeferred(uid, component);
     }
 
     private void OnLand(EntityUid uid, ParalyzeOnCollideComponent component, ref LandEvent args)
     {
         if (component.RemoveOnLand)
-        {
-            RemComp(uid, component);
-        }
+            RemCompDeferred(uid, component);
     }
 }

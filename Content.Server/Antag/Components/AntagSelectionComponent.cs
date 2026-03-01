@@ -76,6 +76,34 @@ public sealed partial class AntagSelectionComponent : Component
 [DataDefinition]
 public partial struct AntagSelectionDefinition()
 {
+    // <Trauma>
+
+    /// <summary>
+    /// A list of jobs which cannnot roll this antag.
+    /// </summary>
+    [DataField]
+    public List<ProtoId<JobPrototype>>? JobBlacklist;
+
+    /// <summary>
+    /// Does this antag role roll before job
+    /// </summary>
+    [DataField]
+    public bool RollBeforeJob = true;
+
+    /// <summary>
+    /// Unequip all gear before making antag
+    /// </summary>
+    [DataField]
+    public bool UnequipOldGear;
+
+    /// <summary>
+    /// If not null, how much chaos should secret+ consider us to have per-antag.
+    /// </summary>
+    [DataField]
+    public float? ChaosScore = null;
+
+    // </Trauma>
+
     /// <summary>
     /// A list of antagonist roles that are used for selecting which players will be antagonists.
     /// </summary>

@@ -23,6 +23,9 @@ public sealed partial class CosmicMalignRiftComponent : Component
     public float DangerRange = 6;
 
     [DataField]
+    public int EntropyGranted = 10;
+
+    [DataField]
     public TimeSpan MarkTime = TimeSpan.FromMinutes(2);
 
     [DataField]

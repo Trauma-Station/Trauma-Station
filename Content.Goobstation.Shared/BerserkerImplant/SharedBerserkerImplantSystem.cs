@@ -11,7 +11,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.BerserkerImplant;
@@ -22,7 +21,6 @@ public abstract class SharedBerserkerImplantSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
 
     public override void Initialize()

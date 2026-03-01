@@ -33,7 +33,8 @@
   - Passenger
   - Reporter
   - Visitor
-  - ServiceWorker
+  - ServiceWorker # Trauma
+  - PhoneMerchant # Trauma
 
 - type: department
   id: CentralCommand

@@ -1,5 +1,6 @@
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
+using Content.Shared.Maps;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Dynamics;
@@ -50,13 +51,13 @@ public sealed partial class PlaceTileEntityEvent : WorldTargetActionEvent
     /// The prototype of the entity to be created
     /// </summary>
     [DataField]
-    public EntProtoId? Entity;
+    public new EntProtoId? Entity;
 
     /// <summary>
     /// The identifier of the tile to be placed
     /// </summary>
     [DataField]
-    public string? TileId;
+    public ProtoId<ContentTileDefinition>? TileId;
 
     /// <summary>
     /// The sound that will be played when the action is performed
@@ -80,7 +81,7 @@ public sealed partial class PlaceTileEntityEvent : WorldTargetActionEvent
 [Serializable, NetSerializable]
 public sealed partial class PlaceTileEntityDoAfterEvent : DoAfterEvent
 {
-    public NetCoordinates Target;
+    public new NetCoordinates Target;
     public EntProtoId? Entity;
     public string? TileId;
     public SoundSpecifier? Audio;
@@ -89,5 +90,15 @@ public sealed partial class PlaceTileEntityDoAfterEvent : DoAfterEvent
     public FixedPoint2 PlasmaCost; // Goobstation
     public NetEntity Action; // Goobstation
 
-    public override DoAfterEvent Clone() => this;
+    public override DoAfterEvent Clone() => new PlaceTileEntityDoAfterEvent()
+    {
+        Target = Target,
+        Entity = Entity,
+        TileId = TileId,
+        Audio = Audio,
+        BlockedCollisionMask = BlockedCollisionMask,
+        BlockedCollisionLayer = BlockedCollisionLayer,
+        PlasmaCost = PlasmaCost,
+        Action = Action
+    };
 }

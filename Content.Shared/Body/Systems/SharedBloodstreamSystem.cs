@@ -40,7 +40,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
     [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    //[Dependency] private readonly SharedPopupSystem _popup = default!; // Trauma - not used anymore
     [Dependency] private readonly SharedPuddleSystem _puddle = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;

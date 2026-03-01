@@ -15,11 +15,9 @@ using Content.Shared._Goobstation.Wizard.BindSoul;
 using Content.Shared._Goobstation.Wizard.MagicMirror;
 using Content.Shared.Body;
 using Content.Shared.Humanoid;
-using Content.Shared.Humanoid.Markings;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Polymorph;
 using Content.Shared.Preferences;
-using Robust.Shared.GameObjects.Components.Localization;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._Goobstation.Wizard.Systems;
@@ -27,8 +25,6 @@ namespace Content.Server._Goobstation.Wizard.Systems;
 public sealed class WizardMirrorSystem : SharedWizardMirrorSystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly GrammarSystem _grammar = default!;
-    [Dependency] private readonly MarkingManager _markingManager = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly PolymorphSystem _polymorph = default!;

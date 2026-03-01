@@ -130,6 +130,11 @@ public sealed partial class CosmicCultRuleComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? ExtraRiftTimer;
+
+    /// <summary>
+    /// Used to prevent recursion with IncreaseTier and UpdateCultData
+    /// </summary>
+    public bool IncreasingTier;
 }
 
 public enum WinType : byte // TODO make a gentle sledgehammer pass over this

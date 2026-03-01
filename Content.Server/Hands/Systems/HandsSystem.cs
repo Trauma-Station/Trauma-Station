@@ -24,6 +24,7 @@ namespace Content.Server.Hands.Systems
 {
     public sealed class HandsSystem : SharedHandsSystem
     {
+        /* Trauma - no longer used
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly StackSystem _stackSystem = default!;
@@ -31,6 +32,7 @@ namespace Content.Server.Hands.Systems
         [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
         [Dependency] private readonly PullingSystem _pullingSystem = default!;
         [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
+        */
 
         // Trauma - moved query and DropHeldItemsSpread to PredictedHandsSystem
 

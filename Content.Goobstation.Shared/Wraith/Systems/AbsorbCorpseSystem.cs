@@ -16,7 +16,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
 
@@ -29,7 +28,6 @@ public sealed class AbsorbCorpseSystem : EntitySystem
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly ISharedAdminLogManager _admin = default!;
 

@@ -50,8 +50,20 @@
     chaplainTime: 30
     absorbTime: 15
     dangerWait: 20
+    entropyGranted: 15
   - type: CosmicCorrupting
     corruptionMaxTicks: 7
     corruptionSpeed: 6
     corruptionChance: 1
     corruptionReduction: 0.08
+
+- type: entity
+  id: CosmicMalignRiftDebug
+  parent: CosmicMalignRift
+  suffix: Debug
+  components:
+  - type: CosmicMalignRift # Very fast, for easier testing
+    bibleTime: 1
+    chaplainTime: 1
+    absorbTime: 1
+    entropyGranted: 0

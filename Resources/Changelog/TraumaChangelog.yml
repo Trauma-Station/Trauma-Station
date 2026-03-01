@@ -3235,3 +3235,108 @@ Entries:
   id: 391
   time: '2026-02-28T23:11:42.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/910
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      the Xeno Hive Node now makes facehuggers ignore you (also added a new
+      xenomorph themed bundle for 100 tc i messed up the changelog on that pr)
+  id: 392
+  time: '2026-03-01T00:52:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/923
+- author: RatherUncreativeName
+  changes:
+  - type: Add
+    message: Added an ingredient beacon for chefs.
+  id: 393
+  time: '2026-03-01T11:25:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/911
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed mortar and pestle's grinding sound never ending if the food was
+      eaten/rotted/etc.
+  id: 394
+  time: '2026-03-01T13:10:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/929
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Genetics console now allows ctrl click and right click for resetting and
+      going back in bases.
+  id: 395
+  time: '2026-03-01T14:26:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/931
+- author: NoElkaTheGod
+  changes:
+  - type: Add
+    message: Cosmic Cultists can now respec their purchased Influences.
+  - type: Tweak
+    message: Absorbing a malign rift now grants some entropy
+  - type: Fix
+    message: Cosmic Cultists are now immune to low temperatures
+  - type: Fix
+    message: Temperature Adaptation mutation now works properly
+  - type: Tweak
+    message: >-
+      Cosmic Cult lapse ability is now only visible to cultists, who can exit at
+      will.
+  id: 396
+  time: '2026-03-01T16:17:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/930
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: >-
+      You no longer far asleep every minute after standing near a malign
+      fracture for 0.01 seconds (I forgot one line of code, point and laugh
+      everyone)
+  id: 397
+  time: '2026-03-01T18:09:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/933
+- author: The Man Who Sold The World
+  changes:
+  - type: Add
+    message: Re-enabled holocigar but without the gun buffs slop.
+  id: 398
+  time: '2026-03-01T18:18:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/934
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed goliath and carp organs not having unique names.
+  id: 399
+  time: '2026-03-01T19:25:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/935
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to mutate geminis...
+  id: 400
+  time: '2026-03-01T20:33:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/937
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed chef shittle being able to use CQC everywhere...
+  id: 401
+  time: '2026-03-01T20:49:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/938
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed walking by default setting being inverted.
+  id: 402
+  time: '2026-03-01T21:38:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/939
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added real phones, prank call the hop
+  - type: Add
+    message: Added phone merchant to the job distribution error
+  id: 403
+  time: '2026-03-01T21:49:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/909

@@ -77,7 +77,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Changeling;
@@ -97,7 +96,6 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
     [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;

@@ -51,7 +51,7 @@ public sealed class RustSpreaderSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        _accumulator += frameTime;
+        _accumulator += frameTime; // TODO: kill
 
         if (_accumulator < RustSpreadInterval)
             return;

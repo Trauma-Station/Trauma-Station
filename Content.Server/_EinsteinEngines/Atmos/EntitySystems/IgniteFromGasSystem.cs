@@ -21,7 +21,6 @@ namespace Content.Server._EinsteinEngines.Atmos.EntitySystems;
 
 public sealed class IgniteFromGasSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly FlammableSystem _flammable = default!;

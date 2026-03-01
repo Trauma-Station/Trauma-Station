@@ -16,9 +16,7 @@ using Content.Server.StationEvents.Events;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
-using Robust.Server.Audio;
 using Robust.Server.Player;
-using Robust.Shared.Audio;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
@@ -28,7 +26,6 @@ namespace Content.Server._DV.CosmicCult;
 public sealed class MalignRiftSpawnRule : StationEventSystem<MalignRiftSpawnRuleComponent>
 {
     [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;

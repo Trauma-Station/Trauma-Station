@@ -11,8 +11,6 @@ using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
-using Content.Server.Mind;
-using Content.Server.Nuke;
 using Content.Server.Objectives;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
@@ -27,10 +25,8 @@ namespace Content.Goobstation.Server.Blob.GameTicking;
 
 public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
 {
-    [Dependency] private readonly MindSystem _mindSystem = default!;
     [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly NukeCodePaperSystem _nukeCode = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly ObjectivesSystem _objectivesSystem = default!;
     [Dependency] private readonly AlertLevelSystem _alertLevelSystem = default!;
@@ -164,7 +160,6 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                 return;
             case BlobStage.Begin when blobTilesCount >= (stationUid.Comp?.StageCritical ?? StationBlobConfigComponent.DefaultStageCritical):
             {
-                // <Trauma> autocall cburn instead of sending nuke codes
                 blobRuleComp.Stage = BlobStage.Critical;
                     _chatSystem.DispatchGlobalAnnouncement(
                     Loc.GetString("blob-alert-critical-cburn"),
@@ -176,7 +171,6 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                 if (!blobRuleComp.BlobCBurnCalled)
                     _ticker.StartGameRule(blobRuleComp.BlobCBurnEvent);
                 blobRuleComp.BlobCBurnCalled = true;
-                // </Trauma>
 
                 _alertLevelSystem.SetLevel(stationUid, StationAlertCritical, true, true, true, true);
 

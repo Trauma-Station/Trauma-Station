@@ -20,19 +20,14 @@ public sealed class PocketDimensionSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly LinkedEntitySystem _link = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-
-    private ISawmill _sawmill = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<PocketDimensionComponent, ComponentRemove>(OnRemoved);
         SubscribeLocalEvent<PocketDimensionComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
-
-        _sawmill = Logger.GetSawmill("pocket_dimension");
     }
 
     private void OnRemoved(EntityUid uid, PocketDimensionComponent comp, ComponentRemove args)
@@ -64,7 +59,7 @@ public sealed class PocketDimensionSystem : EntitySystem
             if (!_mapLoader.TryLoadMap(comp.PocketDimensionPath, out var map, out var roots,
                 options: new Robust.Shared.EntitySerialization.DeserializationOptions { InitializeMaps = true }))
             {
-                _sawmill.Error($"Failed to load pocket dimension map {comp.PocketDimensionPath}");
+                Log.Error($"Failed to load pocket dimension map {comp.PocketDimensionPath}");
                 QueueDel(map);
                 return;
             }
@@ -86,7 +81,7 @@ public sealed class PocketDimensionSystem : EntitySystem
                 EnsureComp<LinkedEntityComponent>(uid);
                 portal.CanTeleportToOtherMaps = true;
 
-                _sawmill.Info($"Created pocket dimension on grid {root} of map {map}");
+                Log.Info($"Created pocket dimension on grid {root} of map {map}");
 
                 // if someone closes your portal you can use the one inside to escape
                 _link.OneWayLink(comp.ExitPortal.Value, uid);
@@ -95,8 +90,8 @@ public sealed class PocketDimensionSystem : EntitySystem
             }
             if (!foundGrid)
             {
-                _sawmill.Error($"Pocket dimension {comp.PocketDimensionPath} had no grids!");
-                QueueDel(comp.PocketDimensionMap);
+                Log.Error($"Pocket dimension {comp.PocketDimensionPath} had no grids!");
+                Del(comp.PocketDimensionMap);
                 return;
             }
         }

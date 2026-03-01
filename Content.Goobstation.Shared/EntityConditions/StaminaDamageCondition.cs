@@ -23,8 +23,6 @@ public sealed partial class StaminaDamageCondition : EntityConditionBase<Stamina
 
 public sealed class StaminaDamageConditionSystem : EntityConditionSystem<StaminaComponent, StaminaDamageCondition>
 {
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-
     protected override void Condition(Entity<StaminaComponent> ent, ref EntityConditionEvent<StaminaDamageCondition> args)
     {
         var total = ent.Comp.StaminaDamage;

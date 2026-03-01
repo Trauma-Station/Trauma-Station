@@ -97,7 +97,7 @@
   parent: BaseAction
   id: ActionCosmicLapse
   name: Abberant Lapse
-  description: Lapse your target's corporeal form, temporarily rendering it immutable, impassible, and frozen in place.
+  description: Lapse your target's corporeal form, temporarily rendering it immutable, imperceptible, and frozen in place.
   components:
   - type: Action
     useDelay: 24

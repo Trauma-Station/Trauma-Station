@@ -2,16 +2,12 @@
 
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
-using Content.Shared.Administration.Logs;
 using Content.Shared.GameTicking.Components;
 
 namespace Content.Goobstation.Server.StationEvents;
 
 public sealed partial class ChristmasEventSchedulerRule : GameRuleSystem<ChristmasEventSchedulerComponent>
 {
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);

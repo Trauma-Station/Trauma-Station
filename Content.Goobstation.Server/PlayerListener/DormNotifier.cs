@@ -169,42 +169,34 @@ public sealed class DormNotifier : EntitySystem
 
     private void Recheck(Condemnation condemned, bool expedited = false)
     {
-        try
+        var sinners = new HashSet<Entity<HumanoidProfileComponent>>();
+        foreach (var con in condemned.Condemned)
         {
-            var sinners = condemned.Condemned
-                .Select(con => new Entity<HumanoidProfileComponent>(con, Comp<HumanoidProfileComponent>(con)))
-                .ToHashSet();
-
-            bool valid = Validate(condemned.Marker, sinners, out _);
-
-            if (!valid)
-            {
-                RemovePotentialCondemned(condemned);
-                return;
-            }
+            if (TryComp<HumanoidProfileComponent>(con, out var humanoid))
+                sinners.Add((con, humanoid));
         }
-        catch (KeyNotFoundException e)
+
+        bool valid = Validate(condemned.Marker, sinners, out _);
+
+        if (!valid)
         {
-            Log.Warning("Entity didn't have HumanoidProfileComponent");
+            RemovePotentialCondemned(condemned);
+            return;
         }
 
         var current = DetermineExpedited(condemned.Condemned);
 
-        // It was expedited
-        if (expedited)
+        // It was expedited, but isn't now
+        if (expedited && !current)
         {
-            // But isn't now.
-            if (!current)
+            if (_timeout > _timeoutExpedited)
             {
-                if (_timeout > _timeoutExpedited)
-                {
-                    QueueRecheck(TimeSpan.FromSeconds(_timeout - _timeoutExpedited), condemned);
-                    return;
-                }
-
-                Log.Warning("DormNotifierPresenceTimeoutNude is larger than DormNotifierPresenceTimeout!");
+                QueueRecheck(TimeSpan.FromSeconds(_timeout - _timeoutExpedited), condemned);
                 return;
             }
+
+            Log.Warning("DormNotifierPresenceTimeoutNude is larger than DormNotifierPresenceTimeout!");
+            return;
         }
 
         // If it wasn't expedited, but is now - oh well.

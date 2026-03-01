@@ -48,6 +48,7 @@
     implants:
     - SpaceItalianTranslatorImplant   #chefs should speak space italian
   - type: GrantCqc                    #Chefs should have CqC
+    isBlocked: true # can only use it in kitchen (on chef shittle or station)
 
 # Lost
 

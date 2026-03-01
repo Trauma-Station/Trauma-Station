@@ -3,22 +3,14 @@
 using Content.Goobstation.Shared.Penalties.Components;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Clothing.EntitySystems;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Popups;
 using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Shared.Penalties.Systems;
 
 public sealed partial class OuterSlotPenaltySystem : EntitySystem
 {
-    [Dependency] private readonly ClothingSystem _clothingSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly ClothingSpeedModifierSystem _clothingSpeedModifierSystem = default!;
-
     public override void Initialize()
     {
         base.Initialize();

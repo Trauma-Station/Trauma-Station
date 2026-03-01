@@ -21,15 +21,17 @@ public sealed class MedicalPatchSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainers = default!;
     [Dependency] private readonly ReactiveSystem _reactiveSystem = default!;
-    [Dependency] protected readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<MedicalPatchComponent, EntityUnstuckEvent>(OnUnstuck);
         SubscribeLocalEvent<MedicalPatchComponent, EntityStuckEvent>(OnStuck);
     }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);

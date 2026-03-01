@@ -34,6 +34,7 @@ using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Silicons.StationAi;
@@ -90,6 +91,14 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
+
+    public static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
+    public static readonly ProtoId<DamageTypePrototype> Slash = "Slash";
+
+    public static readonly ProtoId<TagPrototype> Bot = "Bot";
+    public static readonly ProtoId<TagPrototype> Catwalk = "Catwalk";
+    public static readonly ProtoId<TagPrototype> HereticBladeBlade = "HereticBladeBlade";
+    public static readonly ProtoId<TagPrototype> Wall = "Wall";
 
     private readonly HashSet<Entity<MobStateComponent>> _lookupMobs = new();
 
@@ -169,7 +178,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
         var pos = Transform(args.User).Coordinates;
         _lookupMobs.Clear();
-        _look.GetEntitiesInRange<MobStateComponent>(pos, range, _lookupMobs, LookupFlags.Dynamic);
+        _look.GetEntitiesInRange(pos, range, _lookupMobs, LookupFlags.Dynamic);
         var hitCount = 0;
 
         foreach (var uid in _lookupMobs)
@@ -248,15 +257,6 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         ent.Comp.NextPath = _random.Pick(ent.Comp.Paths);
         Dirty(ent);
     }
-
-    public static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
-    public static readonly ProtoId<DamageTypePrototype> Slash = "Slash";
-
-    public static readonly ProtoId<TagPrototype> Bot = "Bot";
-    public static readonly ProtoId<TagPrototype> Catwalk = "Catwalk";
-    public static readonly ProtoId<TagPrototype> HereticBladeBlade = "HereticBladeBlade";
-    public static readonly ProtoId<TagPrototype> Meat = "Meat";
-    public static readonly ProtoId<TagPrototype> Wall = "Wall";
 
     public bool TryApplyGraspEffectAndMark(EntityUid user,
         HereticComponent hereticComp,
@@ -481,7 +481,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                              target)) // If we have rust grasp and targeting a wall (or a catwalk) - do nothing, let other methods handle that. Also don't damage transmutation rune.
                     return false;
                 else if (TryComp(target, out DamageableComponent? damageable) && // Is it even damageable?
-                         !_tag.HasTag(target, Meat) && // Is it not organic body part or organ?
+                         !HasComp<EdibleComponent>(target) && // Is it not organic body part or organ? (edible)
                          !HasComp<ShadowCloakEntityComponent>(target) && // No instakilling shadow cloak heretics
                          (!HasComp<MobStateComponent>(target) || HasComp<SiliconComponent>(target) ||
                           HasComp<BorgChassisComponent>(target) ||

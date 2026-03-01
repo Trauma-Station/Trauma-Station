@@ -28,7 +28,6 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly HereticRitualEffectSystem _effects = default!;
 

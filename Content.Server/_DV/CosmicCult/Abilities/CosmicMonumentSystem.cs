@@ -14,12 +14,12 @@ using System.Linq;
 
 namespace Content.Server._DV.CosmicCult.Abilities;
 
+// TODO: why the fuck is this not in MonumentSystem
 public sealed class CosmicMonumentSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly MonumentSystem _monument = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;

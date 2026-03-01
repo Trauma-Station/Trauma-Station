@@ -1,0 +1,86 @@
+- type: entity
+  id: SpawnIngredientsBaking
+  categories: [ HideSpawnMenu ]
+  name: baking supplies
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table: !type:AllSelector
+      children:
+      - id: FoodSnackRaisins
+        amount: 4
+      - id: FoodSnackChocolate
+        amount: 4
+      - id: ReagentContainerFlour
+      - id: ReagentContainerSugar
+      - id: FoodContainerEgg
+      - id: DrinkMilkCarton
+
+- type: entity
+  id: SpawnIngredientsExoticMeat
+  categories: [ HideSpawnMenu ]
+  name: exotic meats
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table: !type:AllSelector
+      children:
+      - id: FoodMeatXeno
+        amount: 4
+      - id: FoodMeatCrab
+        amount: 2
+      - id: FoodMeatDuck
+      - id: FoodMeatBear
+      - id: FoodMeatPenguin
+
+- type: entity
+  id: SpawnIngredientsMeat
+  categories: [ HideSpawnMenu ]
+  name: bulk meats
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table: !type:AllSelector
+      children:
+      - id: FoodMeat
+        amount: 10
+      - id: FoodMeatHuman
+
+- type: entity
+  id: SpawnIngredientsVegetables
+  categories: [ HideSpawnMenu ]
+  name: vegetables
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table: !type:AllSelector
+      children:
+      - !type:AllSelector
+        rolls: 3
+        children:
+        - id: FoodCarrot
+        - id: FoodChiliPepper
+        - id: FoodTomato
+        - id: FoodPotato
+        - id: FoodCorn
+        - id: FoodCabbage
+
+- type: entity
+  id: SpawnIngredientsFruits
+  categories: [ HideSpawnMenu ]
+  name: fruits
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table: !type:AllSelector
+      children:
+      - !type:AllSelector
+        rolls: 3
+        children:
+        - id: FoodBerries
+        - id: FoodGrape
+        - id: FoodCherry
+        - id: FoodLemon
+        - id: FoodApple
+        - id: FoodOrange
+        - id: FoodBanana

@@ -14,16 +14,12 @@ using Robust.Shared.Audio;
 
 // Shitmed Change
 using Content.Shared.Body;
-using Content.Medical.Shared.Wounds;
-using Content.Medical.Shared.Wounds;
 using Content.Medical.Common.Targeting;
 
 namespace Content.Goobstation.Shared.MartialArts;
 
 public partial class SharedMartialArtsSystem
 {
-    [Dependency] private readonly WoundSystem _wound = default!; // Shitmed Change
-
     private void InitializeHellRip()
     {
         SubscribeLocalEvent<CanPerformComboComponent, HellRipSlamPerformedEvent>(OnHellRipSlam);

@@ -18,7 +18,6 @@ public sealed partial class LawboardSiliconLawUi : FancyWindow
     private List<SiliconLaw> _laws = new();
 
     public event Action<List<SiliconLaw>, bool>? LawsChangedEvent;
-    public event Action<bool>? LawsSavedEvent;
     public EntityUid Entity;
     public SiliconLawProviderComponent? LawProvider;
 

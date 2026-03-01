@@ -91,7 +91,7 @@ public abstract partial class SharedGunSystem
         var angleEv = new GetRecoilModifiersEvent(uid, user ?? uid);
         if (user != null)
             RaiseLocalEvent(user.Value, ref angleEv);
-        RaiseLocalEvent(comp.Owner, ref angleEv);
+        RaiseLocalEvent(uid, ref angleEv);
         random *= angleEv.Modifier;
         // </Goob>
 

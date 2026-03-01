@@ -2,8 +2,7 @@
 - type: influence
   id: InfluenceAberrantLapse
   name: influence-name-lapse
-  influenceType: influence-type-active
-  cost: 12
+  cost: 6
   description: influence-description-lapse
   icon:
     sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
@@ -14,7 +13,6 @@
 - type: influence
   id: InfluenceNullGlare
   name: influence-name-glare
-  influenceType: influence-type-active
   cost: 8
   description: influence-description-glare
   empoweredDescription: influence-description-glare-upgrade
@@ -27,7 +25,6 @@
 - type: influence
   id: InfluenceForceIngress
   name: influence-name-ingress
-  influenceType: influence-type-active
   cost: 8
   description: influence-description-ingress
   empoweredDescription: influence-description-ingress-upgrade
@@ -40,7 +37,6 @@
 - type: influence
   id: InfluenceTransmutation
   name: influence-name-transmutation
-  influenceType: influence-type-active
   cost: 12
   description: influence-description-transmutation
   empoweredDescription: influence-description-transmutation-upgrade
@@ -54,7 +50,6 @@
 - type: influence
   id: InfluenceShuntSubjectivity
   name: influence-name-shunt
-  influenceType: influence-type-active
   cost: 12
   description: influence-description-shunt
   icon:
@@ -66,7 +61,6 @@
 - type: influence
   id: InfluenceConversion
   name: influence-name-conversion
-  influenceType: influence-type-active
   cost: 20
   description: influence-description-conversion
   icon:
@@ -79,7 +73,6 @@
 - type: influence
   id: InfluenceAstralStride
   name: influence-name-stride
-  influenceType: influence-type-active
   cost: 16
   description: influence-description-stride
   empoweredDescription: influence-description-stride-upgrade
@@ -93,7 +86,6 @@
 - type: influence
   id: InfluenceVacuousImposition
   name: influence-name-imposition
-  influenceType: influence-type-active
   cost: 18
   description: influence-description-imposition
   empoweredDescription: influence-description-imposition-upgrade
@@ -106,7 +98,6 @@
 - type: influence
   id: InfluenceAstralNova
   name: influence-name-nova
-  influenceType: influence-type-active
   cost: 24
   description: influence-description-nova
   icon:
@@ -121,7 +112,7 @@
 - type: influence
   id: InfluenceUnboundStep
   name: influence-name-step
-  influenceType: influence-type-passive
+  passive: true
   cost: 8
   description: influence-description-step
   icon:

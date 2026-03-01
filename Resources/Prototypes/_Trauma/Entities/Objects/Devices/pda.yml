@@ -15,3 +15,15 @@
   - type: PdaBorderColor
     borderColor: "#FAFAFA"
     accentVColor: "#0097CA"
+
+- type: entity
+  parent: BasePDA
+  id: PhoneMerchantPDA
+  name: phone merchant PDA
+  description: Ring a ding ding!
+  components:
+  - type: Pda
+    id: PhoneMerchantIDCard
+  - type: PdaBorderColor
+    borderColor: "#c48c4d"
+    accentVColor: "#C0C0C0"

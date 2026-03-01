@@ -1,0 +1,41 @@
+- type: entity
+  parent: BaseItem
+  id: IngredientsBeacon
+  name: ingredients beacon
+  description: Summon ingredients to help you get started cooking
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/droppodbeacon.rsi
+    state: icon
+  - type: UserInterface
+    interfaces:
+      enum.RadialSelectorUiKey.Key:
+        type: AttachedRadialSelectorMenuBUI
+  - type: ActivatableUI
+    key: enum.RadialSelectorUiKey.Key
+    inHandsOnly: true
+    singleUser: true
+  - type: RadialItemSelector
+    entries:
+    - prototype: SpawnIngredientsBaking
+      icon:
+        sprite: Objects/Consumable/Food/snacks.rsi
+        state: raisins
+    - prototype: SpawnIngredientsExoticMeat
+      icon:
+        sprite: Objects/Consumable/Food/meat.rsi
+        state: xeno
+    - prototype: SpawnIngredientsMeat
+      icon:
+        sprite: Objects/Consumable/Food/meat.rsi
+        state: plain
+    - prototype: SpawnIngredientsVegetables
+      icon:
+        sprite: Objects/Specific/Hydroponics/carrot.rsi
+        state: produce
+    - prototype: SpawnIngredientsFruits
+      icon:
+        sprite: Objects/Specific/Hydroponics/apple.rsi
+        state: produce
+  - type: StaticPrice
+    price: 500

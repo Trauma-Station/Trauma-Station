@@ -44,15 +44,24 @@ public sealed partial class CosmicCultComponent : Component
     public EntityUid? CosmicShopActionEntity;
 
     [DataField]
+    public EntityUid? CosmicFragmentationActionEntity;
+
+    [DataField]
     public EntProtoId MonumentAction = "ActionCosmicPlaceMonument";
 
     [DataField]
     public EntityUid? MonumentActionEntity;
 
-    public HashSet<EntityUid?> ActionEntities = [];
+    public HashSet<EntityUid?> ActionEntities = []; // all of those get removed whenever the cultist respecs, so don't use it for non-purchaseable influences
 
     [DataField, AutoNetworkedField]
     public HashSet<ProtoId<InfluencePrototype>> OwnedInfluences = [];
+
+    /// <summary>
+    /// How many times this cultist can respec. Someone will abuse the hell out of it eventually.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int RespecsAvailable;
 
     /// <summary>
     /// The duration of the doAfter for Siphon Entropy

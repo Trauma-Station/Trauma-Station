@@ -7,7 +7,7 @@
         <!-- Header -->
         <BoxContainer Orientation="Horizontal" Margin="0 0 0 10">
             <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                <RichTextLabel Name="Name" HorizontalAlignment="Left"/>
+                <RichTextLabel Name="NameLabel" HorizontalAlignment="Left"/>
                 <PanelContainer StyleClasses="LowDivider" MinHeight="4" Margin="0 5 0 5" />
                 <BoxContainer VerticalAlignment="Center" Orientation="Vertical">
                     <Label Name="Status" HorizontalAlignment="Center" HorizontalExpand="True" />

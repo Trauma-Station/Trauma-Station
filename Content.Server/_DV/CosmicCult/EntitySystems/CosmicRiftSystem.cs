@@ -1,4 +1,5 @@
 using Content.Goobstation.Common.Religion;
+using Content.Goobstation.Common.Temperature.Components;
 using Content.Server._DV.CosmicCult.Abilities;
 using Content.Server._DV.CosmicCult.Components;
 using Content.Server.Actions;
@@ -7,13 +8,13 @@ using Content.Goobstation.Shared.Bible; // Goobstation - Bible
 using Content.Server.Popups;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
+using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
-using Content.Shared.Temperature.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -31,6 +32,7 @@ public sealed class CosmicRiftSystem : EntitySystem
     [Dependency] private readonly SharedCosmicCultSystem _cult = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly CosmicBlankSystem _blank = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private readonly HashSet<Entity<HumanoidProfileComponent>> _targets = [];
 
@@ -62,6 +64,7 @@ public sealed class CosmicRiftSystem : EntitySystem
 
             comp.DangerTimer = _timing.CurTime + dangerWait;
 
+            _targets.Clear();
             _lookup.GetEntitiesInRange(Transform(uid).Coordinates, comp.DangerRange, _targets);
             _targets.RemoveWhere(target =>
             {
@@ -104,15 +107,6 @@ public sealed class CosmicRiftSystem : EntitySystem
         {
             _popup.PopupEntity(Loc.GetString("cosmiccult-rift-invaliduser"), args.User, args.User);
             return;
-        }
-
-        foreach (var item in cultist.ActionEntities)
-        {
-            if (TryComp<MetaDataComponent>(item, out var data) && data.EntityName == "Null Fragmentation") // Is it stupid? Yes. Does it work? Also yes.
-            {
-                _popup.PopupEntity(Loc.GetString("cosmiccult-rift-alreadyempowered"), args.User, args.User);
-                return;
-            }
         }
 
         args.Handled = true;
@@ -160,20 +154,17 @@ public sealed class CosmicRiftSystem : EntitySystem
     private void OnAbsorbDoAfter(Entity<CosmicCultComponent> uid, ref EventAbsorbRiftDoAfter args)
     {
         var comp = uid.Comp;
-        if (args.Args.Target is not { } target || args.Cancelled || args.Handled)
-        {
-            if (TryComp<CosmicMalignRiftComponent>(args.Args.Target, out var rift))
-                rift.Occupied = false;
-
+        if (args.Target is not { } target || args.Cancelled || args.Handled || !TryComp<CosmicMalignRiftComponent>(target, out var rift))
             return;
-        }
 
         args.Handled = true;
+        rift.Occupied = false;
         var tgtpos = Transform(target).Coordinates;
-        var actionEnt = _actions.AddAction(uid, uid.Comp.CosmicFragmentationAction);
         Spawn(uid.Comp.AbsorbVFX, tgtpos);
-        comp.ActionEntities.Add(actionEnt);
+        if (comp.CosmicFragmentationActionEntity == null)
+            comp.CosmicFragmentationActionEntity = _actions.AddAction(uid, uid.Comp.CosmicFragmentationAction);
         comp.CosmicEmpowered = true;
+        comp.RespecsAvailable++;
         comp.CosmicSiphonQuantity = 2;
         comp.CosmicGlareRange = 8;
         comp.CosmicGlareDuration = TimeSpan.FromSeconds(6);
@@ -182,15 +173,19 @@ public sealed class CosmicRiftSystem : EntitySystem
         comp.CosmicStrideDuration = TimeSpan.FromSeconds(7);
         Dirty(uid, comp);
         EnsureComp<PressureImmunityComponent>(args.User);
-        EnsureComp<TemperatureImmunityComponent>(args.User);
+        EnsureComp<SpecialLowTempImmunityComponent>(args.User);
         EnsureComp<CosmicNonRespiratingComponent>(args.User);
         RemComp<HungerComponent>(args.User); // Eschew Metabolism is kill, rifts give the effect instead
         RemComp<ThirstComponent>(args.User);
+        _cult.AddEntropy(uid, rift.EntropyGranted);
         _popup.PopupCoordinates(
             Loc.GetString("cosmiccult-rift-absorb", ("NAME", Identity.Entity(args.Args.User, EntityManager))),
             Transform(args.Args.User).Coordinates,
             PopupType.MediumCaution);
         QueueDel(target);
+
+        if (comp.CosmicShopActionEntity is { } shop)
+            _ui.SetUiState(shop, CosmicShopKey.Key, new CosmicShopBuiState());
     }
 
     private void OnPurgeDoAfter(Entity<CosmicMalignRiftComponent> uid, ref EventPurgeRiftDoAfter args)

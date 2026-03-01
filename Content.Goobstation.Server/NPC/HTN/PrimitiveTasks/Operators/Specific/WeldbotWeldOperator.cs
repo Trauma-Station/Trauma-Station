@@ -22,7 +22,6 @@ namespace Content.Goobstation.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 public sealed partial class WeldbotWeldOperator : HTNOperator
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     private ChatSystem _chat = default!;
     private WeldbotSystem _weldbot = default!;
     private SharedAudioSystem _audio = default!;

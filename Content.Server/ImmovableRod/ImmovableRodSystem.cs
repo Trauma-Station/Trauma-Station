@@ -36,7 +36,7 @@ public sealed class ImmovableRodSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly DestructibleSystem _destructible = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    //[Dependency] private readonly SharedTransformSystem _transform = default!; // Trauma - now unused
     [Dependency] private readonly SharedMapSystem _map = default!;
 
     private static readonly ProtoId<TagPrototype> IgnoreTag = "IgnoreImmovableRod"; // Goobstation

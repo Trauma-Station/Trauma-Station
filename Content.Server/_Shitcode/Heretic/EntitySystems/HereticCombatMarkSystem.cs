@@ -13,7 +13,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Heretic;
-using Content.Server.Body.Systems;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Heretic;
@@ -43,7 +42,6 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly BloodstreamSystem _blood = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly ProtectiveBladeSystem _pbs = default!;

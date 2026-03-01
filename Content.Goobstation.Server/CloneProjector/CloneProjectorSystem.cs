@@ -64,7 +64,6 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
     [Dependency] private readonly CarryingSystem _carrying = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly MobThresholdSystem _thresholds = default!;
-    [Dependency] private readonly InternalEncryptionKeySpawner _encryptionKeySpawner = default!;
 
     public override void Initialize()
     {

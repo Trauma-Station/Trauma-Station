@@ -14,22 +14,20 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Timing;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Bible;
 
 public sealed partial class GoobBibleSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly UseDelaySystem _delay = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
 
     public override void Initialize()
     {
@@ -73,12 +71,12 @@ public sealed partial class GoobBibleSystem : EntitySystem
             multiplier = devil.BibleUserDamageMultiplier;
         }
 
-        if (!_mobStateSystem.IsIncapacitated(target))
+        if (!_mobState.IsIncapacitated(target))
         {
             var popup = Loc.GetString("weaktoholy-component-bible-sizzle", ("target", target), ("item", bible));
-            _popupSystem.PopupPredicted(popup, target, performer, PopupType.LargeCaution);
+            _popup.PopupPredicted(popup, target, performer, PopupType.LargeCaution);
             _audio.PlayPredicted(bibleComp.SizzleSoundPath, target, performer);
-            _damageableSystem.ChangeDamage(target,
+            _damage.ChangeDamage(target,
                 bibleComp.SmiteDamage * multiplier,
                 true,
                 origin: bible,
@@ -105,7 +103,7 @@ public sealed partial class GoobBibleSystem : EntitySystem
 
             _doAfter.TryStartDoAfter(doAfterArgs);
             var popup = Loc.GetString("devil-banish-begin", ("target", target), ("user", performer));
-            _popupSystem.PopupPredicted(popup, target, performer, PopupType.LargeCaution);
+            _popup.PopupPredicted(popup, target, performer, PopupType.LargeCaution);
         }
 
         return true;

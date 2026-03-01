@@ -12,13 +12,8 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._EstacaoPirata.Cards.Card;
 
-/// <summary>
-/// This handles...
-/// </summary>
 public sealed class CardSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
-    [Dependency] private readonly CardSpriteSystem _cardSpriteSystem = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -28,20 +23,18 @@ public sealed class CardSystem : EntitySystem
 
     private void OnComponentStartupEvent(EntityUid uid, CardComponent comp, ComponentStartup args)
     {
-        if (!TryComp(uid, out SpriteComponent? spriteComponent))
+        if (!TryComp(uid, out SpriteComponent? sprite))
             return;
 
-        for (var i = 0; i < spriteComponent.AllLayers.Count(); i++)
+        for (var i = 0; i < sprite.AllLayers.Count(); i++)
         {
-            //Log.Debug($"Layer {i}");
-            if (!spriteComponent.TryGetLayer(i, out var layer) || layer.State.Name == null)
+            if (!sprite.TryGetLayer(i, out var layer) || layer.State.Name == null)
                 continue;
 
-            var rsi = layer.RSI ?? spriteComponent.BaseRSI;
+            var rsi = layer.RSI ?? sprite.BaseRSI;
             if (rsi == null)
                 continue;
 
-            //Log.Debug("FOI");
             comp.FrontSprite.Add(new SpriteSpecifier.Rsi(rsi.Path, layer.State.Name));
         }
 
@@ -59,35 +52,33 @@ public sealed class CardSystem : EntitySystem
 
     private void UpdateSprite(EntityUid uid, CardComponent comp)
     {
-        var newSprite = comp.Flipped ? comp.BackSprite : comp.FrontSprite;
-        //if (newSprite == null)
-        //    return;
-
-        if (!TryComp(uid, out SpriteComponent? spriteComponent))
+        if (!TryComp(uid, out SpriteComponent? sprite))
             return;
+
+        var newSprite = comp.Flipped ? comp.BackSprite : comp.FrontSprite;
         var layerCount = newSprite.Count();
 
         //inserts Missing Layers
-        if (spriteComponent.AllLayers.Count() < layerCount)
+        if (sprite.AllLayers.Count() < layerCount)
         {
-            for (var i = spriteComponent.AllLayers.Count(); i < layerCount; i++)
+            for (var i = sprite.AllLayers.Count(); i < layerCount; i++)
             {
-                spriteComponent.AddBlankLayer(i);
+                sprite.AddBlankLayer(i);
             }
         }
         //Removes extra layers
-        else if (spriteComponent.AllLayers.Count() > layerCount)
+        else if (sprite.AllLayers.Count() > layerCount)
         {
-            for (var i = spriteComponent.AllLayers.Count() - 1; i >= layerCount; i--)
+            for (var i = sprite.AllLayers.Count() - 1; i >= layerCount; i--)
             {
-                spriteComponent.RemoveLayer(i);
+                sprite.RemoveLayer(i);
             }
         }
 
         for (var i = 0; i < newSprite.Count(); i++)
         {
             var layer = newSprite[i];
-            spriteComponent.LayerSetSprite(i, layer);
+            sprite.LayerSetSprite(i, layer);
         }
     }
 }
