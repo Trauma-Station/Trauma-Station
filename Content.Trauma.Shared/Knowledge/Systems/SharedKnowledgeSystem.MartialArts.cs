@@ -185,9 +185,9 @@ public abstract partial class SharedKnowledgeSystem
 
         if (TryComp<ComboActionsComponent>(knowledgeEnt.Comp.MartialArtSkillUid, out var actionCompTwo))
         {
-            foreach (var comboId in actionCompTwo.StoredComboActions)
+            foreach (var (comboId, actionId) in actionCompTwo.StoredComboActions)
             {
-                if (_actions.AddAction(player, comboId) is { } action)
+                if (_actions.AddAction(player, actionId) is { } action)
                     actionCompTwo.ComboActions[comboId] = action;
             }
         }

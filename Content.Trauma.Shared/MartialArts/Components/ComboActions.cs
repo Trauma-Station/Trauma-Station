@@ -15,10 +15,10 @@ public sealed partial class ComboActionsComponent : Component
     public Dictionary<ProtoId<ComboPrototype>, EntityUid> ComboActions = new();
 
     /// <summary>
-    /// Stores list of combos.
+    /// Stores list of combos from YAML.
     /// </summary>
     [DataField]
-    public List<string> StoredComboActions = new();
+    public Dictionary<ProtoId<ComboPrototype>, EntProtoId> StoredComboActions = new();
 
     /// <summary>
     /// Queued prototype for the next strike.
