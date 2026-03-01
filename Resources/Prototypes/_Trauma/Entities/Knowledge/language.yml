@@ -168,13 +168,6 @@
 
 - type: entity
   parent: BaseLanguageKnowledge
-  id: language-ValyrianStandard
-  components:
-  - type: LanguageKnowledge
-    languageId: ValyrianStandard
-
-- type: entity
-  parent: BaseLanguageKnowledge
   id: language-Moffic
   components:
   - type: LanguageKnowledge
