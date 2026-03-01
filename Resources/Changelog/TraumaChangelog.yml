@@ -3310,3 +3310,17 @@ Entries:
   id: 399
   time: '2026-03-01T19:25:57.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/935
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to mutate geminis...
+  id: 400
+  time: '2026-03-01T20:33:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/937
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed chef shittle being able to use CQC everywhere...
+  id: 401
+  time: '2026-03-01T20:49:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/938
