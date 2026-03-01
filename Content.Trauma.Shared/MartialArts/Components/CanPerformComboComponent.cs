@@ -66,3 +66,11 @@ public sealed partial class CanPerformComboComponent : Component
     [DataField]
     public int Momentum;
 }
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class ComboActionsComponent : Component
+{
+    // Maps the Combo ID to the EntityUid of the action button on the UI
+    [DataField]
+    public Dictionary<string, EntityUid> ComboActions = new();
+}

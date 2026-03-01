@@ -14,6 +14,54 @@
   id: EventHumanoidLibrarian
   parent: EventHumanoid
   components:
+  # <Trauma>
+  - type: KnowledgeGrant
+    skills:
+      language-Cat: 26
+      language-Dog: 26
+      language-Fox: 26
+      language-Xeno: 26
+      language-Monkey: 26
+      language-Mouse: 26
+      language-Chicken: 26
+      language-Duck: 26
+      language-Cow: 26
+      language-Sheep: 26
+      language-Kangaroo: 26
+      language-Pig: 26
+      language-Crab: 26
+      language-Kobold: 26
+      language-Hissing: 26
+      language-Penguin: 26
+      language-Deer: 26
+      language-Universal: 26
+      language-RobotTalk: 26
+      language-DroneTalk: 26
+      language-Psychomantic: 26
+      language-Blob: 26
+      language-Eldritch: 26
+      language-RootSpeak: 26
+      language-Moffic: 26
+      language-Draconic: 26
+      language-Bubblish: 26
+      language-NewKinPidgin: 26
+      language-Xeeplian: 26
+      language-Elyran: 26
+      language-Freespeak: 26
+      language-NovuNederic: 26
+      language-SolCommon: 26
+      language-TauCetiBasic: 26
+      language-Tradeband: 26
+      language-SpaceItalian: 26
+      language-Carptongue: 26
+      language-FloorGoblin: 26
+      language-Cheval: 26
+      language-Bingle: 26
+      language-Revolutionary: 26
+      language-XenoHivemind: 26
+      language-Azaziba: 26
+      language-Calcic: 26
+  # </Trauma>
   - type: AutoImplant
     implants:
     - LibrarianTranslatorImplant      #Librarians should speak most languages
@@ -29,7 +77,7 @@
   - type: KnowledgeGrant
     skills:
       MartialArtCQCChef: 26
-  # </Trauma
+  # </Trauma>
 
 # Lost
 

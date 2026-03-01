@@ -7,6 +7,7 @@ using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Triggers;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Projectiles;
+using Content.Shared.Stacks;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
@@ -30,6 +31,7 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, InvokeProjectileQualityEvent>(AlterProjectileDamage);
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, InvokeThrownQualityEvent>(AlterThrownDamage);
         SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(DealShootingExperience);
+        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, StackSplitEvent>(SplitStack);
     }
 
     public void OnConstructionGetGroupEvent(Entity<KnowledgeHolderComponent> ent, ref ConstructionGetGroupsEvent args)
@@ -122,5 +124,10 @@ public abstract partial class SharedKnowledgeSystem
 
         var ev = new AddExperienceEvent(ShootingKnowledge, 1);
         RaiseLocalEvent(shooter, ref ev);
+    }
+
+    private void SplitStack(Entity<KnowledgeConstructionModifierComponent> ent, ref StackSplitEvent args)
+    {
+
     }
 }

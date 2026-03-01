@@ -29,7 +29,7 @@
     components:
       - type: SecurityStaff
       # <Trauma>
-      - type: KnowledgeGrant # Trauma - Knowledge
+      - type: KnowledgeGrant
         skills:
           MeleeKnowledge: 26
           ShootingKnowledge: 50
