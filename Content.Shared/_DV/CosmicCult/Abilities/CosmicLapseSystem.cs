@@ -19,8 +19,6 @@ public sealed class CosmicLapseSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
 
     private static readonly ProtoId<PolymorphPrototype> HumanLapse = "CosmicLapseMobHuman";
-    private static readonly ProtoId<PolymorphPrototype> CultistLapse = "CosmicLapseMobHumanCultist";
-
     public override void Initialize()
     {
         base.Initialize();
