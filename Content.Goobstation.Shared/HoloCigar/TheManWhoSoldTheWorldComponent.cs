@@ -2,7 +2,7 @@
 
 using Robust.Shared.Audio;
 
-namespace Content.Goobstation.Common.TheManWhoSoldTheWorld;
+namespace Content.Goobstation.Shared.HoloCigar;
 
 /// <summary>
 /// This is used to identify a Holo Cigar User
@@ -15,7 +15,4 @@ public sealed partial class TheManWhoSoldTheWorldComponent : Component
 
     [DataField]
     public SoundSpecifier DeathAudio = new SoundPathSpecifier("/Audio/_Goobstation/Items/TheManWhoSoldTheWorld/ouchies.ogg");
-
-    [DataField]
-    public bool AddedNoWieldNeeded;
 }

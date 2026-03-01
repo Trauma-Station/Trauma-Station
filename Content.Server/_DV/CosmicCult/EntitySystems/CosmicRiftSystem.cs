@@ -64,6 +64,7 @@ public sealed class CosmicRiftSystem : EntitySystem
 
             comp.DangerTimer = _timing.CurTime + dangerWait;
 
+            _targets.Clear();
             _lookup.GetEntitiesInRange(Transform(uid).Coordinates, comp.DangerRange, _targets);
             _targets.RemoveWhere(target =>
             {
