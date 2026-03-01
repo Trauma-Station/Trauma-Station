@@ -41,12 +41,12 @@ public partial class SharedCosmicShopSystem : EntitySystem
         _audio.PlayLocal(ent.Comp.PurchaseSfx, args.Actor, args.Actor);
         cultComp.OwnedInfluences.Add(proto);
 
-        if (proto.InfluenceType == "influence-type-active")
+        if (!proto.Passive)
         {
             var actionEnt = _actions.AddAction(args.Actor, proto.Action);
             cultComp.ActionEntities.Add(actionEnt);
         }
-        else if (proto.InfluenceType == "influence-type-passive")
+        else
         {
             if (proto.Add != null)
                 _entMan.AddComponents(args.Actor, proto.Add);
@@ -71,12 +71,12 @@ public partial class SharedCosmicShopSystem : EntitySystem
 
         foreach (var influence in cultComp.OwnedInfluences)
         {
-            if (!_prototype.TryIndex(influence, out var proto)) continue;
+            if (!_prototype.Resolve(influence, out var proto)) continue;
             cultComp.OwnedInfluences.Remove(influence);
             cultComp.UnlockedInfluences.Add(influence);
             cultComp.EntropyBudget += proto.Cost;
 
-            if (proto.InfluenceType == "influence-type-active")
+            if (!proto.Passive)
             {
                 if (!_prototype.TryIndex(proto.Action, out var actProto)) continue;
                 foreach (var action in cultComp.ActionEntities)
@@ -85,7 +85,7 @@ public partial class SharedCosmicShopSystem : EntitySystem
                     _actions.RemoveAction(action);
                 }
             }
-            else if (proto.InfluenceType == "influence-type-passive")
+            else
             {
                 if (proto.Add != null)
                     _entMan.RemoveComponents(args.Actor, proto.Add);

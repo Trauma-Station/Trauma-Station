@@ -30,7 +30,6 @@
     duration: 15
     polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
 
-
 - type: polymorph
   id: CosmicLapseMobVox
   configuration:
@@ -53,64 +52,6 @@
     entity: CosmicPolymorphEntDecapoid
     forced: true
     duration: 15
-    polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
-
-# This is kinda awful but it's the easiest solution. Makes sure that cultists can revert at will and have a longer duration
-- type: polymorph
-  id: CosmicLapseMobHumanCultist
-  configuration:
-    entity: CosmicPolymorphEntHuman
-    skipRevertConfirmation: true
-    duration: 30
-    polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
-
-- type: polymorph
-  id: CosmicLapseMobArachnidCultist
-  configuration:
-    entity: CosmicPolymorphEntArachnid
-    skipRevertConfirmation: true
-    duration: 30
-    polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
-
-- type: polymorph
-  id: CosmicLapseMobDionaCultist
-  configuration:
-    entity: CosmicPolymorphEntDiona
-    skipRevertConfirmation: true
-    duration: 30
-    polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
-
-- type: polymorph
-  id: CosmicLapseMobMothCultist
-  configuration:
-    entity: CosmicPolymorphEntMoth
-    skipRevertConfirmation: true
-    duration: 30
-    polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
-
-
-- type: polymorph
-  id: CosmicLapseMobVoxCultist
-  configuration:
-    entity: CosmicPolymorphEntVox
-    skipRevertConfirmation: true
-    duration: 30
-    polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
-
-- type: polymorph
-  id: CosmicLapseMobSnailCultist
-  configuration:
-    entity: CosmicPolymorphEntSnail
-    skipRevertConfirmation: true
-    duration: 30
-    polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
-
-- type: polymorph
-  id: CosmicLapseMobDecapoidCultist
-  configuration:
-    entity: CosmicPolymorphEntDecapoid
-    skipRevertConfirmation: true
-    duration: 30
     polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
 
 - type: entity

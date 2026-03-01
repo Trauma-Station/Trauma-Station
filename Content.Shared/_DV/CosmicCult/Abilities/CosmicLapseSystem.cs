@@ -51,19 +51,18 @@ public sealed class CosmicLapseSystem : EntitySystem
             ent,
             ent);
         var species = Comp<HumanoidProfileComponent>(action.Target).Species;
-        var polymorphId = "CosmicLapseMob" + species;
-        if (_cult.EntityIsCultist(action.Target))
-            polymorphId += "Cultist";
+        ProtoId<PolymorphPrototype> polymorphId = "CosmicLapseMob" + species;
+        if (!_prototype.HasIndex(polymorphId))
+            polymorphId = HumanLapse;
+        if (!_prototype.Resolve(polymorphId, out var polymorph)) return;
 
-        if (_prototype.HasIndex<PolymorphPrototype>(polymorphId))
-            _polymorph.PolymorphEntity(action.Target, polymorphId);
-        else
+        if (_cult.EntityIsCultist(action.Target))
         {
-            if (_cult.EntityIsCultist(action.Target))
-                _polymorph.PolymorphEntity(action.Target, CultistLapse);
-            else
-                _polymorph.PolymorphEntity(action.Target, HumanLapse);
+            polymorph.Configuration.Duration *= 2;
+            polymorph.Configuration.Forced = false;
         }
+
+        _polymorph.PolymorphEntity(action.Target, polymorph.Configuration);
 
         // Doesn't make an echo because the morph is invisible
     }
