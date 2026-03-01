@@ -122,6 +122,7 @@
     - type: SolutionContainerManager
     - type: Dna
     - type: Absorbable
+    - type: Mutatable
     - type: Fingerprint
     - type: Perishable
     - type: Hunger
