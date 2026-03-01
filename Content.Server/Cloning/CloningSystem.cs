@@ -46,7 +46,6 @@ public sealed partial class CloningSystem : SharedCloningSystem
     // <Trauma>
     [Dependency] private readonly ToggleableClothingSystem _toggleable = default!;
     [Dependency] private readonly SharedSealableClothingSystem _sealable = default!;
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
     // </Trauma>
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
