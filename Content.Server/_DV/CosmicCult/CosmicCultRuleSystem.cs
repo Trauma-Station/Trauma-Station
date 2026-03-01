@@ -179,7 +179,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         rule.Comp.PercentConverted = Math.Round((double) (100 * totalCult) / rule.Comp.TotalCrew);
 
-        if (cultistsAtNextLevel >= rule.Comp.CultistsForNextTier)
+        if (cultistsAtNextLevel >= rule.Comp.CultistsForNextTier && !rule.Comp.IncreasingTier)
             IncreaseCultTier(rule);
 
         rule.Comp.TotalCult = totalCult;
@@ -191,6 +191,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     /// </summary>
     private void IncreaseCultTier(Entity<CosmicCultRuleComponent> ent)
     {
+        ent.Comp.IncreasingTier = true; // don't recurse, prevent infinite UpdateCultData-IncreaseCultTier loop
         ent.Comp.CurrentTier++;
         var component = ent.Comp;
         var lights = EntityQueryEnumerator<PoweredLightComponent>();
@@ -256,6 +257,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
                 throw new ArgumentException("Cosmic cult rule progressed to a stage with no defined behaviour");
         }
         UpdateCultData(ent); // Update all the data again
+        ent.Comp.IncreasingTier = false;
     }
 
     #endregion
