@@ -12,7 +12,7 @@
       state: legsweep
   - type: InstantAction
     event: !type:PerformMartialArtComboEvent
-        combo: KravLegSweep  
+        combo: KravLegSweep
   - type: Sprite # For guidebook
     sprite: _Goobstation/Actions/kravmaga.rsi
     state: legsweep
