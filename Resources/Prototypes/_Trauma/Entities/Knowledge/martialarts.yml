@@ -41,9 +41,9 @@
   - type: CanPerformCombo
   - type: ComboActions
     storedComboActions:
-    KravLegSweep: ActionLegSweep
-    KravNeckChop: ActionNeckChop
-    KravLungPunch: ActionLungPunch
+      KravLegSweep: ActionLegSweep
+      KravNeckChop: ActionNeckChop
+      KravLungPunch: ActionLungPunch
 
 - type: entity
   parent: BaseMartialArtsKnowledge
