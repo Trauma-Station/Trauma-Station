@@ -27,12 +27,12 @@
   - type: ClothingGrantComponent
     component:
     - type: TheManWhoSoldTheWorld
+  # IF YOU GIVE IT ACTUAL FUNCTIONALITY, MAKE SURE TO NERF THE PRICE AND REMOVE FROM CIG VENDOR!!!
 
 - type: entity
   parent: HoloCigar
   id: HoloCigarWestern
   name: western holo-cigar
-  description: A sleek electronic cigar imported straight from Sol. You feel badass merely glimpsing it...
   components:
   - type: HoloCigar
     music:
