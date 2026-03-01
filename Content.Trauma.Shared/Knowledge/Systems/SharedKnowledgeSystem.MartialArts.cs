@@ -178,6 +178,7 @@ public abstract partial class SharedKnowledgeSystem
             {
                 _actions.RemoveAction(player, actionEntity);
             }
+            actionComp.ComboActions.Clear();
         }
 
         knowledgeEnt.Comp.MartialArtSkillUid = knowledgeUid;
