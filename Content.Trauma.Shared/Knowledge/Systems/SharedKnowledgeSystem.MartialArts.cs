@@ -238,7 +238,7 @@ public abstract partial class SharedKnowledgeSystem
         Dirty(martialArt, comboActions);
 
         // Provide feedback
-        _popup.PopupEntity(Loc.GetString("martial-arts-queued", ("combo", args.Combo)), uid, uid);
+        _popup.PopupClient(Loc.GetString("martial-arts-queued", ("combo", args.Combo)), uid, uid);
 
         args.Handled = true; // This starts the cooldown in the UI
     }
