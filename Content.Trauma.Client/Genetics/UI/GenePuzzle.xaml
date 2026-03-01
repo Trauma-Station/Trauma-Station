@@ -8,8 +8,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <BoxContainer Orientation="Vertical">
         <controls:NanoHeading Text="{Loc 'genetics-console-genome-sequencer'}" HorizontalExpand="True"/>
         <GridContainer Name="BaseButtons" Columns="16"/> <!-- Populated at runtime -->
-        <Label Name="Tip" Text="{Loc 'genetics-console-sequencer-tip'}"
-        	Visible="False"/> <!-- TODO: make visible when it's actually implemented lol -->
+        <Label Name="Tip" Text="{Loc 'genetics-console-sequencer-tip'}"/>
         <BoxContainer Name="SequenceButtonContainer" Orientation="Horizontal" Align="Center">
             <controls:StripeBack>
             	<BoxContainer Orientation="Horizontal">
