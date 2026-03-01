@@ -6,8 +6,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 0.5
-    icon: !type:SpriteSpecifier+Rsi
+    useDelay: 2.5
+    icon:
       sprite: _Goobstation/Actions/kravmaga.rsi
       state: legsweep
   - type: InstantAction
@@ -25,8 +25,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 0.5
-    icon: !type:SpriteSpecifier+Rsi
+    useDelay: 2.5
+    icon:
       sprite: _Goobstation/Actions/kravmaga.rsi
       state: neckchop
   - type: InstantAction
@@ -44,8 +44,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 0.5
-    icon: !type:SpriteSpecifier+Rsi
+    useDelay: 2.5
+    icon:
       sprite: _Goobstation/Actions/kravmaga.rsi
       state: lungpunch
   - type: InstantAction
@@ -57,6 +57,7 @@
 
 - type: combo
   id: KravLegSweep
+  attacks:
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
@@ -72,6 +73,7 @@
 
 - type: combo
   id: KravNeckChop
+  attacks:
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
@@ -89,6 +91,7 @@
 
 - type: combo
   id: KravLungPunch
+  attacks:
   userEffects:
   - !type:PopupMessage
     messages:
