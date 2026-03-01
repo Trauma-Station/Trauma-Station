@@ -21,6 +21,7 @@ public sealed class CosmicShopBoundUserInterface(EntityUid owner, Enum uiKey) : 
 
         _menu.OnGainButtonPressed += OnInfluenceSelected;
         _menu.OnLevelUpConfirmed += OnLevelUpConfirmed;
+        _menu.OnRespecConfirmed += OnRespecConfirmed;
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -38,4 +39,7 @@ public sealed class CosmicShopBoundUserInterface(EntityUid owner, Enum uiKey) : 
 
     private void OnLevelUpConfirmed() =>
         SendPredictedMessage(new LevelUpconfirmedMessage());
+
+    private void OnRespecConfirmed() =>
+        SendPredictedMessage(new RespecConfirmedMessage());
 }

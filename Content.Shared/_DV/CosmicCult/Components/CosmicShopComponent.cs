@@ -23,3 +23,6 @@ public sealed class InfluenceSelectedMessage(ProtoId<InfluencePrototype> influen
 
 [Serializable, NetSerializable]
 public sealed class LevelUpconfirmedMessage() : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class RespecConfirmedMessage() : BoundUserInterfaceMessage;

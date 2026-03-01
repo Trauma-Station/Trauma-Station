@@ -30,12 +30,19 @@ repos:
   hooks:
   # Fixers
   - id: license-headers-cs
-    name: "Update License Headers"
+    name: "Update License Headers (C#)"
     entry: pre_commit_hooks/license-headers.py
     language: python
     args: ["-c", "^(\\s*//[^\\n]*\\n)*\\s*", "-H", "// SPDX-License-Identifier: AGPL-3.0-or-later"]
     # Applies to all modules
     files: "^Content\\.(Trauma|Goobstation|Lavaland|Medical)\\..+/.*\\.cs$"
+  - id: license-headers-xaml
+    name: "Update License Headers (XAML)"
+    entry: pre_commit_hooks/license-headers.py
+    language: python
+    args: ["-c", "^\\s*(<!--.*?-->)?\\s*", "-H", "<!--\nSPDX-License-Identifier: AGPL-3.0-or-later\n-->"]
+    # Applies to all modules
+    files: "^Content\\.(Trauma|Goobstation|Lavaland|Medical)\\..+/.*\\.xaml$"
 
 ci:
   autofix_commit_msg: "[pre-commit] automated pr fixes"

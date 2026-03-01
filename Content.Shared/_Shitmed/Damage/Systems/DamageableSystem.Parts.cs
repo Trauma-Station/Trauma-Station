@@ -251,6 +251,9 @@ public sealed partial class DamageableSystem
         }
 
         // Raise the damage changed event on the parent
+        if (TerminatingOrDeleted(body))
+            return false;
+
         OnEntityDamageChanged((body, bodyDamage),
             appliedDamage,
             interruptsDoAfters,

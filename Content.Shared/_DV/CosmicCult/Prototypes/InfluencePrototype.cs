@@ -15,8 +15,8 @@ public sealed partial class InfluencePrototype : IPrototype
     [DataField(required: true)]
     public LocId Name;
 
-    [DataField(required: true)]
-    public LocId InfluenceType;
+    [DataField]
+    public bool Passive;
 
     [DataField(required: true)]
     public int Cost;

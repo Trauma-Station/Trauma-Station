@@ -1,4 +1,7 @@
-<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
 <widgets:PartStatusControl
     xmlns="https://spacestation14.io"
     xmlns:gfx="using:Robust.Client.Graphics"

@@ -1,4 +1,5 @@
 using Content.Goobstation.Common.Religion;
+using Content.Goobstation.Common.Temperature.Components;
 using Content.Goobstation.Shared.Religion; // Goobstation - Shitchap
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server._DV.CosmicCult.Components;
@@ -40,7 +41,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
-using Content.Shared.Temperature.Components;
 using Robust.Server.Audio;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -179,7 +179,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         rule.Comp.PercentConverted = Math.Round((double) (100 * totalCult) / rule.Comp.TotalCrew);
 
-        if (cultistsAtNextLevel >= rule.Comp.CultistsForNextTier)
+        if (cultistsAtNextLevel >= rule.Comp.CultistsForNextTier && !rule.Comp.IncreasingTier)
             IncreaseCultTier(rule);
 
         rule.Comp.TotalCult = totalCult;
@@ -191,6 +191,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     /// </summary>
     private void IncreaseCultTier(Entity<CosmicCultRuleComponent> ent)
     {
+        ent.Comp.IncreasingTier = true; // don't recurse, prevent infinite UpdateCultData-IncreaseCultTier loop
         ent.Comp.CurrentTier++;
         var component = ent.Comp;
         var lights = EntityQueryEnumerator<PoweredLightComponent>();
@@ -256,6 +257,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
                 throw new ArgumentException("Cosmic cult rule progressed to a stage with no defined behaviour");
         }
         UpdateCultData(ent); // Update all the data again
+        ent.Comp.IncreasingTier = false;
     }
 
     #endregion
@@ -423,7 +425,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         foreach (var (mind, sessionData, name) in antags)
         {
-            if (!HasComp<CosmicCultRoleComponent>(mind)) continue;
+            if (!_role.MindHasRole<CosmicCultRoleComponent>(mind, out _)) continue;
             args.AddLine(Loc.GetString("cosmiccult-roundend-list-name-user", ("name", name), ("user", sessionData.UserName)));
         }
     }
@@ -456,14 +458,9 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         associatedComp.CultGamerule = rule;
 
-        _role.MindAddRole(mindId, "MindRoleCosmicCult", mind, true);
+        if (!_role.MindHasRole<CosmicCultRoleComponent>(mindId, out _))
+            _role.MindAddRole(mindId, "MindRoleCosmicCult", mind, true); // It applies twice for some reason?
         _role.MindHasRole<CosmicCultRoleComponent>(mindId, out var cosmicRole);
-
-        if (cosmicRole is not null)
-        {
-            EnsureComp<RoleBriefingComponent>(cosmicRole.Value.Owner);
-            Comp<RoleBriefingComponent>(cosmicRole.Value.Owner).Briefing = Loc.GetString("objective-cosmiccult-charactermenu");
-        }
 
         _antag.SendBriefing(uid, Loc.GetString("cosmiccult-role-roundstart-fluff"), Color.FromHex("#4cabb3"), _briefingSound);
         _antag.SendBriefing(uid, Loc.GetString("cosmiccult-role-short-briefing"), Color.FromHex("#cae8e8"), null);
@@ -540,11 +537,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         _role.MindAddRole(mindId, "MindRoleCosmicCult", mind, true);
         _role.MindHasRole<CosmicCultRoleComponent>(mindId, out var cosmicRole);
 
-        if (cosmicRole is not null)
-        {
-            EnsureComp<RoleBriefingComponent>(cosmicRole.Value.Owner);
-            Comp<RoleBriefingComponent>(cosmicRole.Value.Owner).Briefing = Loc.GetString("objective-cosmiccult-charactermenu");
-        }
         if (!_player.TryGetSessionById(mind.UserId, out var session))
             return;
 
@@ -557,7 +549,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         EnsureComp<CosmicSubtleMarkComponent>(uid);
         EnsureComp<PressureImmunityComponent>(uid);
-        EnsureComp<TemperatureImmunityComponent>(uid);
+        EnsureComp<SpecialLowTempImmunityComponent>(uid);
         EnsureComp<CosmicNonRespiratingComponent>(uid);
 
         cultComp.WasWeakToHoly = HasComp<WeakToHolyComponent>(uid);
@@ -608,7 +600,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         RemComp<InfluenceVitalityComponent>(ent);
         RemComp<InfluenceStrideComponent>(ent);
         RemComp<PressureImmunityComponent>(ent);
-        RemComp<TemperatureImmunityComponent>(ent);
+        RemComp<SpecialLowTempImmunityComponent>(ent);
         RemComp<CosmicNonRespiratingComponent>(ent);
         RemComp<CosmicStarMarkComponent>(ent);
         RemComp<CosmicSubtleMarkComponent>(ent);
@@ -625,7 +617,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         _mind.ClearObjectives((mindId, mindComp));
         _role.MindRemoveRole<CosmicCultRoleComponent>(mindId);
-        _role.MindRemoveRole<RoleBriefingComponent>(mindId);
 
         if (_player.TryGetSessionById(mindComp.UserId, out var session))
             _euiMan.OpenEui(new CosmicDeconvertedEui(), session);
@@ -651,7 +642,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             radio.Channels.Remove("CosmicRadio");
 
         RemComp<PressureImmunityComponent>(ent);
-        RemComp<TemperatureImmunityComponent>(ent);
+        RemComp<SpecialLowTempImmunityComponent>(ent);
         RemComp<CosmicNonRespiratingComponent>(ent);
         RemComp<CosmicSubtleMarkComponent>(ent);
 
@@ -672,7 +663,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
         _mind.ClearObjectives((mindId, mindComp));
         _role.MindRemoveRole<CosmicCultRoleComponent>(mindId);
-        _role.MindRemoveRole<RoleBriefingComponent>(mindId);
 
         if (_player.TryGetSessionById(mindComp.UserId, out var session))
             _euiMan.OpenEui(new CosmicDeconvertedEui(), session);

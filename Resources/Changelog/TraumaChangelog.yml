@@ -3244,3 +3244,45 @@ Entries:
   id: 392
   time: '2026-03-01T00:52:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/923
+- author: RatherUncreativeName
+  changes:
+  - type: Add
+    message: Added an ingredient beacon for chefs.
+  id: 393
+  time: '2026-03-01T11:25:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/911
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed mortar and pestle's grinding sound never ending if the food was
+      eaten/rotted/etc.
+  id: 394
+  time: '2026-03-01T13:10:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/929
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Genetics console now allows ctrl click and right click for resetting and
+      going back in bases.
+  id: 395
+  time: '2026-03-01T14:26:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/931
+- author: NoElkaTheGod
+  changes:
+  - type: Add
+    message: Cosmic Cultists can now respec their purchased Influences.
+  - type: Tweak
+    message: Absorbing a malign rift now grants some entropy
+  - type: Fix
+    message: Cosmic Cultists are now immune to low temperatures
+  - type: Fix
+    message: Temperature Adaptation mutation now works properly
+  - type: Tweak
+    message: >-
+      Cosmic Cult lapse ability is now only visible to cultists, who can exit at
+      will.
+  id: 396
+  time: '2026-03-01T16:17:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/930

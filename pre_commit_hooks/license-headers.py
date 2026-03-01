@@ -30,7 +30,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 	parser.add_argument('filenames', nargs='*', help='Filenames to check')
 	args = parser.parse_args(argv)
 
-	comment = re.compile(args.comment)
+	comment = re.compile(args.comment, re.S) # S: dotall
 	header = args.header + "\n\n" # empty line + joining newline for the actual file contents
 	prefix = bytes(header, encoding='utf-8')
 	res = 0

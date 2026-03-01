@@ -57,7 +57,7 @@ public sealed class CosmicFragmentationSystem : EntitySystem
 
         args.Handled = true;
         _cult.MalignEcho(ent);
-        ent.Comp.ActionEntities.Remove(args.Action.Owner);
+        ent.Comp.CosmicFragmentationActionEntity = null;
         _actions.RemoveAction(ent.Owner, args.Action.Owner);
     }
 

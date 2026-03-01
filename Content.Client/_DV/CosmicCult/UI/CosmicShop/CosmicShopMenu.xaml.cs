@@ -8,6 +8,7 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Client._DV.CosmicCult.UI.CosmicShop;
@@ -16,12 +17,17 @@ namespace Content.Client._DV.CosmicCult.UI.CosmicShop;
 public sealed partial class CosmicShopMenu : FancyWindow
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     // All influence prototypes
     private readonly IEnumerable<InfluencePrototype> _influencePrototypes;
     public Action<ProtoId<InfluencePrototype>>? OnGainButtonPressed;
     public Action? OnLevelUpConfirmed;
+    public Action? OnRespecConfirmed;
     private InfluencePrototype? SelectedInfluence = null;
+    private TimeSpan? _timer;
+    private TimeSpan _respecLockTime = TimeSpan.FromSeconds(0.8);
+    private TimeSpan _respecResetTime = TimeSpan.FromSeconds(4);
 
     public CosmicShopMenu()
     {
@@ -30,6 +36,7 @@ public sealed partial class CosmicShopMenu : FancyWindow
 
         _influencePrototypes = _proto.EnumeratePrototypes<InfluencePrototype>();
         LevelUpConfirm.OnPressed += _ => OnLevelUpConfirmed?.Invoke();
+        RespecButton.OnPressed += _ => RespecButtonPressed();
 
         CultProgressBar.BackgroundStyleBoxOverride = new StyleBoxFlat { BackgroundColor = new Color(15, 17, 30) };
         CultProgressBar.ForegroundStyleBoxOverride = new StyleBoxFlat { BackgroundColor = new Color(91, 62, 124) };
@@ -72,6 +79,20 @@ public sealed partial class CosmicShopMenu : FancyWindow
         AvailableEntropy.Text = Loc.GetString("cosmic-shop-interface-entropy-value", ("infused", state.EntropyBudget));
         EntropyUntilNextStage.Text = Loc.GetString("cosmic-shop-interface-entropy-value", ("infused", entropyToNextStage));
         CultisttUntilNextCultStage.Text = state.CultistsForNextLevel.ToString();
+
+        if (state.RespecsAvailable <= 0 || state.OwnedInfluences.Count <= 0)
+        {
+            RespecText.Text = Loc.GetString(state.RespecsAvailable <= 0 ? "cosmic-shop-interface-respec-no-rift" : "cosmic-shop-interface-respec-no-influence");
+            RespecButton.Disabled = true;
+            RespecButton.Modulate = Color.Gray;
+        }
+        else
+        {
+            if (_timer != null) return;
+            RespecText.SetMessage(Loc.GetString("cosmic-shop-interface-respec-amount", ("count", state.RespecsAvailable)));
+            RespecButton.Disabled = false;
+            RespecButton.Modulate = Color.White;
+        }
     }
 
     /// <summary>
@@ -148,5 +169,42 @@ public sealed partial class CosmicShopMenu : FancyWindow
                 : InfluenceUIBox.InfluenceUIBoxState.UnlockedAndEnoughEntropy;
 
         return InfluenceUIBox.InfluenceUIBoxState.Locked;
+    }
+
+    private void RespecButtonPressed()
+    {
+        if (_timer == null)
+        {
+            _timer = _timing.CurTime;
+            RespecButton.Modulate = Color.Red;
+            RespecButton.Text = Loc.GetString("cosmic-shop-interface-respec-confirmation");
+            RespecButton.Disabled = true; // Prevent accidental double-clicking for .5 seconds
+        }
+        else
+        {
+            _timer = null;
+            OnRespecConfirmed?.Invoke();
+            RespecButton.Disabled = true; // Lock the button until next state arrives
+            RespecButton.Modulate = Color.Gray;
+            RespecButton.Text = Loc.GetString("cosmic-shop-interface-respec-button");
+        }
+    }
+
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        if (!VisibleInTree || _timer is not { } timer)
+        {
+            return;
+        }
+        if (timer + _respecLockTime <= _timing.CurTime)
+        {
+            RespecButton.Disabled = false;
+        }
+        if (timer + _respecResetTime <= _timing.CurTime)
+        {
+            RespecButton.Modulate = Color.White;
+            RespecButton.Text = Loc.GetString("cosmic-shop-interface-respec-button");
+            _timer = null;
+        }
     }
 }

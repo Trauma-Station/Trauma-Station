@@ -19,7 +19,6 @@ public sealed class CosmicLapseSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
 
     private static readonly ProtoId<PolymorphPrototype> HumanLapse = "CosmicLapseMobHuman";
-
     public override void Initialize()
     {
         base.Initialize();
@@ -50,13 +49,20 @@ public sealed class CosmicLapseSystem : EntitySystem
             ent,
             ent);
         var species = Comp<HumanoidProfileComponent>(action.Target).Species;
-        var polymorphId = "CosmicLapseMob" + species;
+        ProtoId<PolymorphPrototype> polymorphId = "CosmicLapseMob" + species;
+        if (!_prototype.HasIndex(polymorphId))
+            polymorphId = HumanLapse;
+        if (!_prototype.Resolve(polymorphId, out var polymorph)) return;
+        var copy = polymorph.Configuration;
 
-        if (_prototype.HasIndex<PolymorphPrototype>(polymorphId))
-            _polymorph.PolymorphEntity(action.Target, polymorphId);
-        else
-            _polymorph.PolymorphEntity(action.Target, HumanLapse);
+        if (_cult.EntityIsCultist(action.Target))
+        {
+            copy.Duration *= 2;
+            copy.Forced = false;
+        }
 
-        _cult.MalignEcho(ent);
+        _polymorph.PolymorphEntity(action.Target, copy);
+
+        // Doesn't make an echo because the morph is invisible
     }
 }

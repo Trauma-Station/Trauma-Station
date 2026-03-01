@@ -77,7 +77,7 @@ public sealed partial class InfluenceUIBox : BoxContainer
                 break;
         }
 
-        Type.Text = Loc.GetString(influenceProto.InfluenceType);
+        Type.Text = Loc.GetString(influenceProto.Passive ? "influence-type-passive" : "influence-type-active");
         Cost.Text = influenceProto.Cost.ToString();
         Description.SetMessage(Loc.GetString(influenceProto.Description));
         if (influenceProto.EmpoweredDescription is { } desc)
