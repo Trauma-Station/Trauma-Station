@@ -1,3 +1,4 @@
+using Content.Goobstation.Common.Temperature.Components;
 using Content.Server._DV.CosmicCult.EntitySystems;
 using Content.Server.Actions;
 using Content.Server.AlertLevel;
@@ -260,8 +261,8 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
             EnsureComp<CosmicStarMarkComponent>(args.NewEntity);
         if (HasComp<CosmicSubtleMarkComponent>(args.OldEntity))
             EnsureComp<CosmicSubtleMarkComponent>(args.NewEntity);
-        if (HasComp<TemperatureImmunityComponent>(args.OldEntity))
-            EnsureComp<TemperatureImmunityComponent>(args.NewEntity);
+        if (HasComp<SpecialLowTempImmunityComponent>(args.OldEntity))
+            EnsureComp<SpecialLowTempImmunityComponent>(args.NewEntity);
         if (HasComp<PressureImmunityComponent>(args.OldEntity))
             EnsureComp<PressureImmunityComponent>(args.NewEntity);
         if (HasComp<CosmicNonRespiratingComponent>(args.OldEntity))

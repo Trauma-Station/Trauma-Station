@@ -52,7 +52,8 @@
     - MutationHeatAdaptation
   - type: ComponentMutation
     added:
-    - type: TemperatureImmunity
+    - type: SpecialLowTempImmunity
+    - type: SpecialHighTempImmunity
 
 - type: entity
   parent: BaseMutationAdaptation

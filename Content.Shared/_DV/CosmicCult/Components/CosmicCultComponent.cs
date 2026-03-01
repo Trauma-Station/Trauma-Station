@@ -55,6 +55,12 @@ public sealed partial class CosmicCultComponent : Component
     public HashSet<ProtoId<InfluencePrototype>> OwnedInfluences = [];
 
     /// <summary>
+    /// How many times this cultist can respec. Someone will abuse the hell out of it eventually.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int RespecsAvailable;
+
+    /// <summary>
     /// The duration of the doAfter for Siphon Entropy
     /// </summary>
     [DataField]

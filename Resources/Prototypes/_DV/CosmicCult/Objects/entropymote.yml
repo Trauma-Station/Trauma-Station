@@ -3,7 +3,7 @@
   id: MaterialCosmicCultEntropy
   name: mote of entropy
   description: A solidified mote of entropic essence. Numbing to the touch.
-  suffix: Full
+  suffix: 20
   components:
   - type: Stack
     count: 20
@@ -31,18 +31,18 @@
 - type: entity
   parent: MaterialCosmicCultEntropy
   id: MaterialCosmicCultEntropy1
-  suffix: One
+  suffix: 1
   components:
   - type: Stack
     count: 1
 
 - type: entity
   parent: MaterialCosmicCultEntropy
-  id: MaterialCosmicCultEntropy5
-  suffix: One
+  id: MaterialCosmicCultEntropy10
+  suffix: 10
   components:
   - type: Stack
-    count: 5
+    count: 10
 
 - type: stack
   id: Entropy

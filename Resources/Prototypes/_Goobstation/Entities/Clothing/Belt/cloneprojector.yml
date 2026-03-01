@@ -34,7 +34,8 @@
     - type: ZombieImmune
     - type: CrematoriumImmune
     - type: BreathingImmunity
-    - type: TemperatureImmunity
+    - type: SpecialLowTempImmunity
+    - type: SpecialHighTempImmunity
     - type: TypingIndicator
       proto: robot
     - type: Speech

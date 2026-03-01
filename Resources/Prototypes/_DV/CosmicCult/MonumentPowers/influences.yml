@@ -3,7 +3,7 @@
   id: InfluenceAberrantLapse
   name: influence-name-lapse
   influenceType: influence-type-active
-  cost: 12
+  cost: 6
   description: influence-description-lapse
   icon:
     sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi

@@ -19,6 +19,7 @@ public sealed class CosmicLapseSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
 
     private static readonly ProtoId<PolymorphPrototype> HumanLapse = "CosmicLapseMobHuman";
+    private static readonly ProtoId<PolymorphPrototype> CultistLapse = "CosmicLapseMobHumanCultist";
 
     public override void Initialize()
     {
@@ -51,12 +52,19 @@ public sealed class CosmicLapseSystem : EntitySystem
             ent);
         var species = Comp<HumanoidProfileComponent>(action.Target).Species;
         var polymorphId = "CosmicLapseMob" + species;
+        if (_cult.EntityIsCultist(action.Target))
+            polymorphId += "Cultist";
 
         if (_prototype.HasIndex<PolymorphPrototype>(polymorphId))
             _polymorph.PolymorphEntity(action.Target, polymorphId);
         else
-            _polymorph.PolymorphEntity(action.Target, HumanLapse);
+        {
+            if (_cult.EntityIsCultist(action.Target))
+                _polymorph.PolymorphEntity(action.Target, CultistLapse);
+            else
+                _polymorph.PolymorphEntity(action.Target, HumanLapse);
+        }
 
-        _cult.MalignEcho(ent);
+        // Doesn't make an echo because the morph is invisible
     }
 }
