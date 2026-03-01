@@ -7,7 +7,7 @@ namespace Content.Trauma.Common.AlertLevel;
 /// Not raised if SetLevel is called with <c>force: true</c>
 /// </summary>
 [ByRefEvent]
-public record struct ChangeAlertLevelAttemptEvent(string AlertLevel, bool Cancelled = false)
+public record struct ChangeAlertLevelAttemptEvent(string AlertLevel, string CurrentLevel, bool Cancelled = false)
 {
     public void Cancel()
     {

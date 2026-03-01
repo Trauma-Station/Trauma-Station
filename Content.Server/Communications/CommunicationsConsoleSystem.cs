@@ -150,7 +150,7 @@ namespace Content.Server.Communications
                         foreach (var (id, detail) in alertComp.AlertLevels.Levels)
                         {
                             // <Trauma> - only show alert levels that won't get cancelled
-                            var attemptEv = new ChangeAlertLevelAttemptEvent(id);
+                            var attemptEv = new ChangeAlertLevelAttemptEvent(id, alertComp.CurrentLevel);
                             RaiseLocalEvent(stationUid.Value, ref attemptEv);
                             if (attemptEv.Cancelled)
                                 continue;
