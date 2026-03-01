@@ -25,6 +25,7 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, RefreshNameModifiersEvent>(AlterName);
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, InvokeArmorQualityEvent>(AlterArmorDamage);
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, InvokeProjectileQualityEvent>(AlterProjectileDamage);
+        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, InvokeThrownQualityEvent>(AlterThrownDamage);
         SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(DealShootingExperience);
     }
 
@@ -88,6 +89,11 @@ public abstract partial class SharedKnowledgeSystem
     }
 
     private void AlterProjectileDamage(Entity<KnowledgeConstructionModifierComponent> ent, ref InvokeProjectileQualityEvent args)
+    {
+        args.Coefficient *= ConstructionModifier(ent, 1.75f);
+    }
+
+    private void AlterThrownDamage(Entity<KnowledgeConstructionModifierComponent> ent, ref InvokeThrownQualityEvent args)
     {
         args.Coefficient *= ConstructionModifier(ent, 1.75f);
     }
