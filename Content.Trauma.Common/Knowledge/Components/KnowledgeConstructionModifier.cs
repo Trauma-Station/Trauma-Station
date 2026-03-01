@@ -21,5 +21,11 @@ public sealed partial class KnowledgeConstructionModifierComponent : Component
     /// Stores the quality of the item, which changes some functionality when used.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int Quality = 0;
+    public float Quality = 0;
+
+    /// <summary>
+    /// Stores the amount of items with mastery that have been added together.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int NumberOfMasteries = 1;
 }

@@ -57,12 +57,17 @@ public sealed partial class ConstructionSystem
 
         if (TryComp<KnowledgeConstructionModifierComponent>(created, out var newComp))
         {
-            newComp.Quality += originalComp.Quality;
+            var quality = newComp.Quality * newComp.NumberOfMasteries;
+            quality += originalComp.Quality;
+            newComp.NumberOfMasteries++;
+            newComp.Quality = quality / newComp.NumberOfMasteries;
+            Dirty(created, newComp);
             return;
         }
         newComp = EnsureComp<KnowledgeConstructionModifierComponent>(created);
         newComp.LevelDeltas = originalComp.LevelDeltas;
         newComp.Quality = originalComp.Quality;
+        Dirty(created, newComp);
         return;
     }
 }
