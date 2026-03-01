@@ -74,34 +74,34 @@
     blocked: false
     icon: Objects/Misc/skub.rsi
 
-- type: KnowledgeCategoryPrototype
+- type: KnowledgeCategory
   id: MartialArt
   name: Martial Arts
 
-- type: KnowledgeCategoryPrototype
+- type: KnowledgeCategory
   id: Construction
   name: Construction
 
-- type: KnowledgeCategoryPrototype
+- type: KnowledgeCategory
   id: Language
   name: Languages
 
-- type: KnowledgeCategoryPrototype
+- type: KnowledgeCategory
   id: War
   name: Combat & Tactics
 
-- type: KnowledgeCategoryPrototype
+- type: KnowledgeCategory
   id: Medical
   name: Medical
 
-- type: KnowledgeCategoryPrototype
+- type: KnowledgeCategory
   id: Physical
   name: Physical
 
-- type: KnowledgeCategoryPrototype
+- type: KnowledgeCategory
   id: Intellectual
   name: Intellectual
 
-- type: KnowledgeCategoryPrototype
+- type: KnowledgeCategory
   id: Scientific
   name: Scientific
