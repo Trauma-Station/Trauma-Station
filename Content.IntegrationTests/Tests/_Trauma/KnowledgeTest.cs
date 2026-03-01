@@ -59,15 +59,6 @@ public sealed class EngineeringKnowledgeTest
                 { "WindowsKnowledge", 50 } ,
                 { "SmokeablesKnowledge", 50 } ,
             };
-            entMan.InitializeAndStartEntity(engineer);
-        });
-
-        await pair.RunTicksSync(2);
-
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.ResolveDependency<IEntityManager>();
-            var protoMan = server.ResolveDependency<IPrototypeManager>();
 
             // 2. Setup the Construction Target (e.g., an APC frame)
             var apcFrame = entMan.SpawnEntity("APCFrame", coords);
