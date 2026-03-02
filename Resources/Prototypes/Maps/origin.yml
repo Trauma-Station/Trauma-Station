@@ -49,7 +49,6 @@
           availableJobs:
             #service
             StationAi: [ 1, 1 ]
-            NanotrasenRepresentative: [ 1, 1 ]
             Captain: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 2, 2 ]

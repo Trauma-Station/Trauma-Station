@@ -19,7 +19,6 @@
           availableJobs: # 64 jobs total w/o latejoins & interns, 81 jobs total w/ latejoins & interns
             #command (7)
             Captain: [ 1, 1 ]
-            NanotrasenRepresentative: [ 1, 1 ]
             #service
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 1, 2 ]

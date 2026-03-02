@@ -52,7 +52,6 @@
         - type: StationJobs
           availableJobs:
             #service
-            NanotrasenRepresentative: [ 1, 1 ]
             Captain: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 1, 2 ]

@@ -49,7 +49,6 @@
         - type: StationJobs
           availableJobs:
             Captain: [ -1, -1 ]
-            NanotrasenRepresentative: [ -1, -1 ] # Goob - remove it after test
         # Goobstation blob-config-start DEBUG
         - type: StationBlobConfig
           stageBegin: 20
