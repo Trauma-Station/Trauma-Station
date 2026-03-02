@@ -91,7 +91,7 @@
         Access="Public"
         Icon="{xe:Tex '/Textures/Interface/emotes.svg.192dpi.png'}"
         ToolTip="{Loc 'game-hud-open-martial-arts-menu-button-tooltip'}"
-        BoundKey = "{x:Static is:ContentKeyFunctions.OpenMartialArtsMenu}"
+        BoundKey = "{x:Static is:TraumaKeyFunctions.OpenMartialArtsMenu}"
         MinSize="42 64"
         HorizontalExpand="True"
         AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
