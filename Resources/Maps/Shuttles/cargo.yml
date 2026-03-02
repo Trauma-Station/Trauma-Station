@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 264.0.0
+  engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 12/30/2025 03:02:27
-  entityCount: 188
+  time: 03/02/2026 21:12:20
+  entityCount: 189
 maps: []
 grids:
 - 1
@@ -144,22 +144,8 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles:
-          - 21.824879
-          - 82.10312
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
         chunkSize: 4
     - type: OccluderTree
     - type: Shuttle
@@ -176,6 +162,9 @@ entities:
       shakeTimes: 10
     - type: GasTileOverlay
     - type: ImplicitRoof
+    - type: TileHistory
+      chunkHistory: {}
+    - type: ExplosionAirtightGrid
 - proto: AirCanister
   entities:
   - uid: 2
@@ -953,6 +942,15 @@ entities:
       parent: 1
     - type: ApcPowerReceiver
       powerLoad: 0
+- proto: RotaryPhoneStandCargo
+  entities:
+  - uid: 189
+    components:
+    - type: Transform
+      pos: -3.5,7.5
+      parent: 1
+    - type: RotaryPhoneHolder
+      name: Cargo Shuttle
 - proto: ShuttleWindow
   entities:
   - uid: 132

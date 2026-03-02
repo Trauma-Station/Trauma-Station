@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 271.1.0
+  engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 01/25/2026 11:02:08
+  time: 03/02/2026 21:14:39
   entityCount: 2491
 maps:
 - 1
@@ -793,6 +793,8 @@ entities:
     - type: RadiationGridResistance
     - type: ImplicitRoof
     - type: ExplosionAirtightGrid
+    - type: TileHistory
+      chunkHistory: {}
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 979
@@ -925,7 +927,7 @@ entities:
       pos: 35.5,-15.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1982.8783
+      secondsUntilStateChange: -2040.1893
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1061,7 +1063,7 @@ entities:
       pos: 32.5,4.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -4485.227
+      secondsUntilStateChange: -4542.538
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -3785,13 +3787,6 @@ entities:
     - type: Transform
       pos: 3.5,-15.5
       parent: 2
-- proto: CardBoxSyndicate
-  entities:
-  - uid: 4
-    components:
-    - type: Transform
-      pos: 38.6494,-10.402651
-      parent: 2
 - proto: CargoPallet
   entities:
   - uid: 639
@@ -4299,13 +4294,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 26.5,-17.5
       parent: 2
-- proto: ChemDispenser
-  entities:
-  - uid: 1456
-    components:
-    - type: Transform
-      pos: -7.5,-0.5
-      parent: 2
 - proto: ChemicalPayload
   entities:
   - uid: 619
@@ -4809,6 +4797,13 @@ entities:
     components:
     - type: Transform
       pos: 11.587524,-0.9412551
+      parent: 2
+- proto: EnergyChemDispenser
+  entities:
+  - uid: 1456
+    components:
+    - type: Transform
+      pos: -7.5,-0.5
       parent: 2
 - proto: FaxMachineSyndie
   entities:
@@ -8864,6 +8859,15 @@ entities:
     - type: Transform
       pos: 43.5,-13.5
       parent: 2
+- proto: RotaryPhoneStandHidden
+  entities:
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 3.5,-0.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: NO-CALLER-ID
 - proto: SheetPlasma10
   entities:
   - uid: 1858
