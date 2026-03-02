@@ -24,6 +24,10 @@
             "directions": 4
         },
         {
+            "name": "pipeBendConnectors",
+            "directions": 4
+        },
+        {
             "name": "pipeFourway",
             "directions": 4
         },
@@ -41,6 +45,10 @@
         },
         {
             "name": "pipeBinaryConnectors",
+            "directions": 4
+        },
+        {
+            "name": "pipeBinaryConnectorsShort",
             "directions": 4
         },
         {

@@ -868,6 +868,139 @@
   - GasDualPortVentPumpAlt3
   - GasDualPortVentPumpAlt4
 
+- type: construction
+  id: HeatExchangerAlt1
+  hide: true
+  graph: GasBinary
+  startNode: start
+  targetNode: radiatorAlt1
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: false
+  alternativePrototypes:
+  - HeatExchanger
+  - HeatExchangerAlt1
+  - HeatExchangerAlt2
+  - HeatExchangerAlt3
+  - HeatExchangerAlt4
+
+- type: construction
+  id: HeatExchangerAlt2
+  hide: true
+  graph: GasBinary
+  startNode: start
+  targetNode: radiatorAlt2
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: false
+  alternativePrototypes:
+  - HeatExchanger
+  - HeatExchangerAlt1
+  - HeatExchangerAlt2
+  - HeatExchangerAlt3
+  - HeatExchangerAlt4
+
+- type: construction
+  id: HeatExchangerAlt3
+  hide: true
+  graph: GasBinary
+  startNode: start
+  targetNode: radiatorAlt3
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: false
+  alternativePrototypes:
+  - HeatExchanger
+  - HeatExchangerAlt1
+  - HeatExchangerAlt2
+  - HeatExchangerAlt3
+  - HeatExchangerAlt4
+
+- type: construction
+  id: HeatExchangerAlt4
+  hide: true
+  graph: GasBinary
+  startNode: start
+  targetNode: radiatorAlt4
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: false
+  alternativePrototypes:
+  - HeatExchanger
+  - HeatExchangerAlt1
+  - HeatExchangerAlt2
+  - HeatExchangerAlt3
+  - HeatExchangerAlt4
+
+- type: construction
+  id: HeatExchangerBendAlt1
+  hide: true
+  name: construction-recipe-heat-exchanger-bend
+  graph: GasBinary
+  startNode: start
+  targetNode: bendradiatorAlt1
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: false
+  alternativePrototypes:
+  - HeatExchangerBend
+  - HeatExchangerBendAlt1
+  - HeatExchangerBendAlt2
+  - HeatExchangerBendAlt3
+  - HeatExchangerBendAlt4
+
+- type: construction
+  id: HeatExchangerBendAlt2
+  hide: true
+  name: construction-recipe-heat-exchanger-bend
+  graph: GasBinary
+  startNode: start
+  targetNode: bendradiatorAlt2
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: false
+  alternativePrototypes:
+  - HeatExchangerBend
+  - HeatExchangerBendAlt1
+  - HeatExchangerBendAlt2
+  - HeatExchangerBendAlt3
+  - HeatExchangerBendAlt4
+
+- type: construction
+  id: HeatExchangerBendAlt3
+  hide: true
+  name: construction-recipe-heat-exchanger-bend
+  graph: GasBinary
+  startNode: start
+  targetNode: bendradiatorAlt3
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: false
+  alternativePrototypes:
+  - HeatExchangerBend
+  - HeatExchangerBendAlt1
+  - HeatExchangerBendAlt2
+  - HeatExchangerBendAlt3
+  - HeatExchangerBendAlt4
+
+- type: construction
+  id: HeatExchangerBendAlt4
+  hide: true
+  name: construction-recipe-heat-exchanger-bend
+  graph: GasBinary
+  startNode: start
+  targetNode: bendradiatorAlt4
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: false
+  alternativePrototypes:
+  - HeatExchangerBend
+  - HeatExchangerBendAlt1
+  - HeatExchangerBendAlt2
+  - HeatExchangerBendAlt3
+  - HeatExchangerBendAlt4
+
+
 # ATMOS TRINARY
 - type: construction
   id: GasFilterAlt1

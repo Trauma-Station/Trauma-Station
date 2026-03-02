@@ -729,7 +729,7 @@
   name: radiator
   description: Transfers heat between the pipe and its surroundings.
   placement:
-    mode: SnapgridCenter
+    mode: AlignAtmosPipeLayers # Carpmosia-edit - Heat exchanger layers
   components:
   # Carpmosia-start - Atmos stacking
   - type: Tag
@@ -743,13 +743,20 @@
     sprite: _Carpmosia/Structures/Piping/Atmospherics/heatexchanger.rsi # Carpmosia-edit - 5 pipe layers
     layers:
     - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
-      state: pipeStraight
+      state: pipeBinaryConnectorsShort # Carpmosia-edit - Heat exchanger layers
       map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: heStraight
       map: [ "enum.SubfloorLayers.FirstLayer" ]
+  # Carpmosia-start - Heat exchanger layers
   - type: AtmosPipeLayers
+    alternativePrototypes:
+      Primary: HeatExchanger
+      Secondary: HeatExchangerAlt1
+      Tertiary: HeatExchangerAlt2
+      Quaternary: HeatExchangerAlt3
+      Quinary: HeatExchangerAlt4
     spriteRsiPaths: {}
-    numberOfPipeLayers: 1
+  # Carpmosia-end - Heat exchanger layers
   - type: SubFloorHide
     visibleLayers:
     - enum.SubfloorLayers.FirstLayer
@@ -787,10 +794,19 @@
     - type: Sprite
       layers:
       - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
-        state: pipeBend
+        state: pipeBendConnectors
         map: [ "enum.PipeVisualLayers.Pipe" ]
       - state: heBend
         map: [ "enum.SubfloorLayers.FirstLayer" ]
+    # Carpmosia-start - Heat exchanger layers
+    - type: AtmosPipeLayers
+      alternativePrototypes:
+        Primary: HeatExchangerBend
+        Secondary: HeatExchangerBendAlt1
+        Tertiary: HeatExchangerBendAlt2
+        Quaternary: HeatExchangerBendAlt3
+        Quinary: HeatExchangerBendAlt4
+    # Carpmosia-end - Heat exchanger layers
     - type: NodeContainer
       nodes:
         inlet:
