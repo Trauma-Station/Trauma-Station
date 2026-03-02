@@ -92,6 +92,8 @@ ChestHuman: OrganHumanTorso
 PlushieVulp: null
 
 # 2026-03-02 removed playing cards
+CardDeckBlack: null
+CardDeckSyndicate: null
 CardBoxBlack: null
 CardBoxSyndicate: null
 # </Trauma>
