@@ -4,7 +4,7 @@ meta:
   engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 03/02/2026 22:55:44
+  time: 03/02/2026 23:01:04
   entityCount: 38245
 maps:
 - 1
@@ -188398,7 +188398,7 @@ entities:
       pos: 22.5,2.5
       parent: 2
     - type: RotaryPhoneHolder
-      name: Name
+      name: Security
   - uid: 38211
     components:
     - type: Transform
