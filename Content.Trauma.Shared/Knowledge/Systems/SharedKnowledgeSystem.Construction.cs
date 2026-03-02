@@ -24,12 +24,12 @@ public abstract partial class SharedKnowledgeSystem
     private void InitializeConstruction()
     {
         SubscribeLocalEvent<KnowledgeHolderComponent, ConstructionGetGroupsEvent>(OnConstructionGetGroupEvent);
-        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, UpdateItemQualityEvent>(ConstructionInteraction);
-        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, GetMeleeDamageEvent>(AlterMeleeDamage);
-        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, RefreshNameModifiersEvent>(AlterName);
+        SubscribeLocalEvent<QualityComponent, UpdateItemQualityEvent>(ConstructionInteraction);
+        SubscribeLocalEvent<QualityComponent, GetMeleeDamageEvent>(AlterMeleeDamage);
+        SubscribeLocalEvent<QualityComponent, RefreshNameModifiersEvent>(AlterName);
         SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(DealShootingExperience);
-        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, StackSplitEvent>(SplitStack);
-        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, AttemptMergeStackEvent>(AttemptMergeStack);
+        SubscribeLocalEvent<QualityComponent, StackSplitEvent>(SplitStack);
+        SubscribeLocalEvent<QualityComponent, AttemptMergeStackEvent>(AttemptMergeStack);
     }
 
     public void OnConstructionGetGroupEvent(Entity<KnowledgeHolderComponent> ent, ref ConstructionGetGroupsEvent args)
@@ -44,7 +44,7 @@ public abstract partial class SharedKnowledgeSystem
         }
     }
 
-    public void ConstructionInteraction(Entity<KnowledgeConstructionModifierComponent> ent, ref UpdateItemQualityEvent args)
+    public void ConstructionInteraction(Entity<QualityComponent> ent, ref UpdateItemQualityEvent args)
     {
         var user = args.User;
 
@@ -71,7 +71,7 @@ public abstract partial class SharedKnowledgeSystem
     /// This should only ever be run once on any entity ever.
     /// </summary>
     /// <param name="ent"></param>
-    public void ModifyValues(Entity<KnowledgeConstructionModifierComponent> ent)
+    public void ModifyValues(Entity<QualityComponent> ent)
     {
         if (TryComp<ArmorComponent>(ent.Owner, out var armor) && armor.Modifiers.Coefficients is { } armorModifiers)
         {
@@ -108,17 +108,17 @@ public abstract partial class SharedKnowledgeSystem
         }
     }
 
-    public float ConstructionModifier(Entity<KnowledgeConstructionModifierComponent> ent, float power = 2)
+    public float ConstructionModifier(Entity<QualityComponent> ent, float power = 2)
     {
         return (float) Math.Pow(power, ent.Comp.Quality);
     }
 
-    private void AlterMeleeDamage(Entity<KnowledgeConstructionModifierComponent> ent, ref GetMeleeDamageEvent args)
+    private void AlterMeleeDamage(Entity<QualityComponent> ent, ref GetMeleeDamageEvent args)
     {
         args.Damage *= ConstructionModifier(ent);
     }
 
-    private void AlterName(Entity<KnowledgeConstructionModifierComponent> ent, ref RefreshNameModifiersEvent args)
+    private void AlterName(Entity<QualityComponent> ent, ref RefreshNameModifiersEvent args)
     {
         args.AddModifier($"knowledge-modifier-name-{(int) Math.Clamp(ent.Comp.Quality, -5, 5)}");
     }
@@ -132,17 +132,17 @@ public abstract partial class SharedKnowledgeSystem
         RaiseLocalEvent(shooter, ref ev);
     }
 
-    private void SplitStack(Entity<KnowledgeConstructionModifierComponent> ent, ref StackSplitEvent args)
+    private void SplitStack(Entity<QualityComponent> ent, ref StackSplitEvent args)
     {
-        var comp = EnsureComp<KnowledgeConstructionModifierComponent>(args.NewId);
+        var comp = EnsureComp<QualityComponent>(args.NewId);
         comp.LevelDeltas = ent.Comp.LevelDeltas;
         comp.Quality = ent.Comp.Quality;
         comp.NumberOfMasteries = ent.Comp.NumberOfMasteries;
     }
 
-    private void AttemptMergeStack(Entity<KnowledgeConstructionModifierComponent> ent, ref AttemptMergeStackEvent args)
+    private void AttemptMergeStack(Entity<QualityComponent> ent, ref AttemptMergeStackEvent args)
     {
-        if (!TryComp<KnowledgeConstructionModifierComponent>(args.OtherStack, out var other))
+        if (!TryComp<QualityComponent>(args.OtherStack, out var other))
         {
             args.Cancelled = true;
             return;

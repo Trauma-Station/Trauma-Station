@@ -19,7 +19,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         base.Initialize();
 
         SubscribeLocalEvent<KnowledgeHolderComponent, KnowledgeCopyEvent>(TransferKnowledge);
-        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, AfterConstructionChangeEntityEvent>(AlterName);
+        SubscribeLocalEvent<QualityComponent, AfterConstructionChangeEntityEvent>(AlterName);
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         ClearKnowledge(ent, false);
     }
 
-    private void AlterName(Entity<KnowledgeConstructionModifierComponent> ent, ref AfterConstructionChangeEntityEvent args)
+    private void AlterName(Entity<QualityComponent> ent, ref AfterConstructionChangeEntityEvent args)
     {
         _nameModifier.RefreshNameModifiers(ent.Owner);
     }

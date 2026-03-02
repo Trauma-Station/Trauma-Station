@@ -160,20 +160,20 @@ public abstract partial class SharedGunSystem
     /// Attempts to copy knowledge construction modifiers from the specified ammo entity to the target entity. If the
     /// ammo entity contains knowledge modifier data, it is applied to the target entity.
     /// </summary>
-    /// <remarks>If the ammo entity does not have a KnowledgeConstructionModifierComponent, no modifiers are
+    /// <remarks>If the ammo entity does not have a QualityComponent, no modifiers are
     /// added to the target entity.</remarks>
     /// <param name="ammoEnt">The entity identifier of the ammo from which knowledge construction modifiers are sourced.</param>
     /// <param name="newUid">The entity identifier of the target to which knowledge construction modifiers will be added.</param>
     private void TryAddKnowledgeModifiers(EntityUid? ammoEnt, EntityUid newUid)
     {
-        if (!TryComp<KnowledgeConstructionModifierComponent>(ammoEnt, out var ammoKnowledge))
+        if (!TryComp<QualityComponent>(ammoEnt, out var ammoKnowledge))
             return;
 
-        var newKnowledge = EnsureComp<KnowledgeConstructionModifierComponent>(newUid);
+        var newKnowledge = EnsureComp<QualityComponent>(newUid);
         newKnowledge.LevelDeltas = new Dictionary<EntProtoId, int>(ammoKnowledge.LevelDeltas);
         newKnowledge.Quality = ammoKnowledge.Quality;
         newKnowledge.NumberOfMasteries = ammoKnowledge.NumberOfMasteries;
 
-        _knowledge.RunQualityModifiersOutsideOfConstruction((newUid, newKnowledge));
+        _knowledge.RunQualitysOutsideOfConstruction((newUid, newKnowledge));
     }
 }

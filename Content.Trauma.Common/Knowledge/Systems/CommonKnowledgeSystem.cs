@@ -154,5 +154,5 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     /// Runs quality instructions for an item outside of the construction loop, such as the bullets for the shotgun ammo.
     /// </summary>
     /// <param name="ent"></param>
-    public abstract void RunQualityModifiersOutsideOfConstruction(Entity<KnowledgeConstructionModifierComponent> ent);
+    public abstract void RunQualitysOutsideOfConstruction(Entity<QualityComponent> ent);
 }

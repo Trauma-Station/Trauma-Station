@@ -9,7 +9,7 @@ namespace Content.Trauma.Common.Knowledge.Components;
 /// Stores information about a set of constructed object
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class KnowledgeConstructionModifierComponent : Component
+public sealed partial class QualityComponent : Component
 {
     /// <summary>
     /// Stores the level mastery of the item required to modify it.

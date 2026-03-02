@@ -39,10 +39,10 @@ public sealed partial class ConstructionSystem
     /// <param name="constructionPrototype"></param>
     public void EnsureConstructionKnowledge(EntityUid item, ConstructionPrototype constructionPrototype, EntityUid user)
     {
-        EnsureComp<KnowledgeConstructionModifierComponent>(item, out var knowledgeConstructionModifier);
+        EnsureComp<QualityComponent>(item, out var Quality);
         foreach (var construct in constructionPrototype.Groups)
         {
-            knowledgeConstructionModifier.LevelDeltas[construct.Key] = construct.Value;
+            Quality.LevelDeltas[construct.Key] = construct.Value;
         }
         if (!HasComp<KnowledgeHolderComponent>(user))
             return;
@@ -52,10 +52,10 @@ public sealed partial class ConstructionSystem
 
     public void TransferQuality(EntityUid original, EntityUid created)
     {
-        if (!TryComp<KnowledgeConstructionModifierComponent>(original, out var originalComp))
+        if (!TryComp<QualityComponent>(original, out var originalComp))
             return;
 
-        if (TryComp<KnowledgeConstructionModifierComponent>(created, out var newComp))
+        if (TryComp<QualityComponent>(created, out var newComp))
         {
             var quality = newComp.Quality * originalComp.NumberOfMasteries;
             quality += originalComp.Quality;
@@ -64,7 +64,7 @@ public sealed partial class ConstructionSystem
             Dirty(created, newComp);
             return;
         }
-        newComp = EnsureComp<KnowledgeConstructionModifierComponent>(created);
+        newComp = EnsureComp<QualityComponent>(created);
         newComp.LevelDeltas = originalComp.LevelDeltas;
         newComp.Quality = originalComp.Quality;
         newComp.NumberOfMasteries = originalComp.NumberOfMasteries;
