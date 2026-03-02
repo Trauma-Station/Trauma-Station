@@ -94,7 +94,7 @@
       shuttleTime: 600
     blue:
       announcement: alert-level-gamma-announcement #alert-level-blue-announcement
-      sound: 
+      sound:
         path: /Audio/Misc/gamma.ogg
         params:
           volume: -2 #/Audio/Misc/bluealert.ogg
@@ -104,7 +104,7 @@
       shuttleTime: 600
     violet:
       announcement: alert-level-epsilon-announcement #alert-level-violet-announcement
-      sound: 
+      sound:
         path: /Audio/Misc/epsilon.ogg
         params:
           volume: -2 #/Audio/Misc/notice1.ogg
@@ -114,7 +114,7 @@
       shuttleTime: 600
     yellow:
       announcement: alert-level-delta-announcement
-      sound: 
+      sound:
         path: /Audio/Misc/delta.ogg
         params:
           volume: -3
