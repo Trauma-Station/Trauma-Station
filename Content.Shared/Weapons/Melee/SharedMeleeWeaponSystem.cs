@@ -586,7 +586,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // For consistency with wide attacks stuff needs damageable.
         if (Deleted(target) ||
             !HasComp<DamageableComponent>(target) ||
-            LightAttackMiss(user, target.Value) || // Trauma    
+            LightAttackMiss(user, target.Value) || // Trauma
             !TryComp(target, out TransformComponent? targetXform)) // Goob edit
         {
             // Leave IsHit set to true, because the only time it's set to false
