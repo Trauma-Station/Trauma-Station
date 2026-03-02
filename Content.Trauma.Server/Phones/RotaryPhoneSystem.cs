@@ -48,6 +48,12 @@ public sealed class RotaryPhoneSystem : SharedRotaryPhoneSystem
         RemComp<JointVisualsComponent>(ent.Owner);
         RemComp<JointComponent>(ent.Owner);
         Dirty(ent);
+
+        // Basically on map init set the phones name to whatever the holders name is so it can be changed in mapping
+        if (!TryComp<RotaryPhoneComponent>(args.Entity, out var phone) || phone.Name != null)
+            return;
+
+        phone.Name = ent.Comp.Name;
     }
 
     private void OnPhoneCategoryChanged(Entity<RotaryPhoneComponent> ent, ref PhoneCategoryChangedMessage args)
