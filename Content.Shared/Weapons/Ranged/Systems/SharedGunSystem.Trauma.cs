@@ -174,6 +174,6 @@ public abstract partial class SharedGunSystem
         newKnowledge.Quality = ammoKnowledge.Quality;
         newKnowledge.NumberOfMasteries = ammoKnowledge.NumberOfMasteries;
 
-        _knowledge.RunQualitysOutsideOfConstruction((newUid, newKnowledge));
+        _knowledge.ModifyValues((newUid, newKnowledge));
     }
 }

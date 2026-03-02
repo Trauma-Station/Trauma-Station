@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Input;
+// </Trauma>
 using Content.Shared.Input;
 using Robust.Shared.Input;
 
@@ -94,7 +97,7 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.Arcade1);
             human.AddFunction(ContentKeyFunctions.Arcade2);
             human.AddFunction(ContentKeyFunctions.Arcade3);
-            human.AddFunction(ContentKeyFunctions.OpenMartialArtsMenu); // Trauma
+            human.AddFunction(TraumaKeyFunctions.OpenMartialArtsMenu); // Trauma
             // Shitmed Change Start - TODO: Add hands, feet and groin targeting.
             human.AddFunction(ContentKeyFunctions.TargetHead);
             human.AddFunction(ContentKeyFunctions.TargetChest);

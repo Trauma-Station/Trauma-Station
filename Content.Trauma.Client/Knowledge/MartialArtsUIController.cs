@@ -4,10 +4,9 @@ using System.Linq;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.MenuBar;
-using Content.Shared.Input;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Input;
 using Content.Trauma.Common.Knowledge;
-using Content.Trauma.Common.Knowledge.Systems;
 using JetBrains.Annotations;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
@@ -38,7 +37,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         menuBar.OnMartialArtsPressed += OpenMenuFromAction;
 
         CommandBinds.Builder
-            .Bind(ContentKeyFunctions.OpenMartialArtsMenu,
+            .Bind(TraumaKeyFunctions.OpenMartialArtsMenu,
                 InputCmdHandler.FromDelegate(_ => ToggleMartialArtsMenu(false)))
             .Register<MartialArtsUIController>();
     }

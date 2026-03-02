@@ -73,7 +73,7 @@ public abstract partial class SharedKnowledgeSystem
     /// This should only ever be run once on any entity ever.
     /// </summary>
     /// <param name="ent"></param>
-    public void ModifyValues(Entity<QualityComponent> ent)
+    public override void ModifyValues(Entity<QualityComponent> ent)
     {
         if (TryComp<ArmorComponent>(ent.Owner, out var armor) && armor.Modifiers.Coefficients is { } armorModifiers)
         {
