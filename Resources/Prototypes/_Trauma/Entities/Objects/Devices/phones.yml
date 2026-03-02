@@ -199,6 +199,15 @@
   - type: RotaryPhone
     category: Service
 
+- type: entity
+  parent: RotaryPhone
+  suffix: Hidden
+  categories: [ HideSpawnMenu ]
+  id: RotaryPhoneHidden
+  components:
+  - type: RotaryPhone
+    category: Hidden
+
 # Stands
 
 - type: entity
@@ -280,3 +289,13 @@
     containers:
       phone:
       - RotaryPhoneService
+
+- type: entity
+  parent: RotaryPhoneStand
+  suffix: Hidden
+  id: RotaryPhoneStandHidden
+  components:
+  - type: ContainerFill
+    containers:
+      phone:
+      - RotaryPhoneHidden
