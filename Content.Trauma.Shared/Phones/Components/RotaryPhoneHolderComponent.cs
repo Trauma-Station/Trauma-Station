@@ -14,7 +14,7 @@ public sealed partial class RotaryPhoneHolderComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? ConnectedPhone;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public string Name = "Unknown";
 
     [DataField]
