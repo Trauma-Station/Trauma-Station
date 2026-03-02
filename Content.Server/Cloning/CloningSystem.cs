@@ -13,6 +13,7 @@ using Robust.Shared.Utility;
 // </Trauma>
 using Content.Server.Humanoid;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Body;
 using Content.Shared.Cloning;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Database;
@@ -44,7 +45,6 @@ public sealed partial class CloningSystem : SharedCloningSystem
     [Dependency] private readonly ToggleableClothingSystem _toggleable = default!;
     [Dependency] private readonly SharedSealableClothingSystem _sealable = default!;
     // </Trauma>
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidSystem = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -53,6 +53,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
+    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
     [Dependency] private readonly NameModifierSystem _nameMod = default!;
     [Dependency] private readonly Shared.StatusEffectNew.StatusEffectsSystem _statusEffects = default!; //TODO: This system has to support both the old and new status effect systems, until the old is able to be fully removed.
 
@@ -65,8 +66,8 @@ public sealed partial class CloningSystem : SharedCloningSystem
         if (!_prototype.Resolve(settingsId, out var settings))
             return false; // invalid settings
 
-        // Goobstation start
-        if (!TryComp<HumanoidAppearanceComponent>(original, out var humanoid) && !settings.AllowNonHumanoid)
+        // Goobstation start - non humanoid cloning
+        if (!TryComp<HumanoidProfileComponent>(original, out var humanoid) && !settings.AllowNonHumanoid)
             return false; // whatever body was to be cloned, was not a humanoid
 
         SpeciesPrototype? speciesPrototype = null;
@@ -89,8 +90,8 @@ public sealed partial class CloningSystem : SharedCloningSystem
         if (attemptEv.Cancelled && !settings.ForceCloning)
             return false; // cannot clone, for example due to the unrevivable trait
 
-        clone = coords == null ? Spawn(proto) : Spawn(proto, coords.Value); // Goob edit
-        _humanoidSystem.CloneAppearance(original, clone.Value);
+        clone = coords == null ? Spawn(proto) : Spawn(proto, coords.Value); // Goob - use proto from above
+        _visualBody.CopyAppearanceFrom(original, clone.Value);
 
         CloneComponents(original, clone.Value, settings);
 

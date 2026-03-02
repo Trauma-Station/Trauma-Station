@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 IrisTheAmped <iristheamped@gmail.com>
-// SPDX-FileCopyrightText: 2025 McBosserson <mcbosserson@hotmail.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SoundingExpert <204983230+SoundingExpert@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 john git <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Power.PTL;
@@ -42,7 +34,6 @@ public sealed partial class PTLSystem : EntitySystem
 {
     [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly IPrototypeManager _protMan = default!;
     [Dependency] private readonly FlashSystem _flash = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
@@ -134,21 +125,17 @@ public sealed partial class PTLSystem : EntitySystem
         provider.FireCost = desiredFireCost;
         Dirty(ent, provider);
 
-        if (TryComp<GunComponent>(ent, out var gun))
-        {
-            if (!TryComp<TransformComponent>(ent, out var xform))
-                return;
+        var gun = Comp<GunComponent>(ent);
+        var xform = Transform(ent);
 
-            var localDirectionVector = Vector2.UnitY * -1;
-            if (ent.Comp1.ReversedFiring)
-                localDirectionVector *= -1f;
+        var localDirectionVector = Vector2.UnitY * -1;
+        if (ent.Comp1.ReversedFiring)
+            localDirectionVector *= -1f;
 
-            var directionInParentSpace = xform.LocalRotation.RotateVec(localDirectionVector);
-
-            var targetCoords = xform.Coordinates.Offset(directionInParentSpace);
-
-            _gun.AttemptShoot(ent, ent, gun, targetCoords);
-        }
+        // shoot the laser
+        var directionInParentSpace = xform.LocalRotation.RotateVec(localDirectionVector);
+        var targetCoords = xform.Coordinates.Offset(directionInParentSpace);
+        _gun.AttemptShoot(ent, ent, gun, targetCoords);
 
         // Determine actual energy used.
         var chargeAfter = _battery.GetCharge((ent, ent.Comp2));

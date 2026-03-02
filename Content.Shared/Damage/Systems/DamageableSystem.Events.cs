@@ -1,13 +1,11 @@
 // <Trauma>
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Components;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Targeting;
 // </Trauma>
 using Content.Shared.CCVar;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Radiation.Events;
 using Content.Shared.Rejuvenate;
@@ -19,19 +17,13 @@ public sealed partial class DamageableSystem
 {
     public override void Initialize()
     {
+        InitializeTrauma(); // Trauma
         SubscribeLocalEvent<DamageableComponent, ComponentInit>(DamageableInit);
         SubscribeLocalEvent<DamageableComponent, ComponentHandleState>(DamageableHandleState);
         SubscribeLocalEvent<DamageableComponent, ComponentGetState>(DamageableGetState);
         SubscribeLocalEvent<DamageableComponent, OnIrradiatedEvent>(OnIrradiated);
         SubscribeLocalEvent<DamageableComponent, RejuvenateEvent>(OnRejuvenate);
 
-        InitializeTrauma(); // Trauma
-
-        // <Shitmed>
-        _bodyQuery = GetEntityQuery<BodyComponent>();
-        _consciousnessQuery = GetEntityQuery<ConsciousnessComponent>();
-        _woundableQuery = GetEntityQuery<WoundableComponent>();
-        // </Shitmed>
         _appearanceQuery = GetEntityQuery<AppearanceComponent>();
         _damageableQuery = GetEntityQuery<DamageableComponent>();
 
@@ -191,7 +183,6 @@ public sealed partial class DamageableSystem
         _mobThreshold.SetAllowRevives(ent, true);
         ClearAllDamage(ent.AsNullable());
         _mobThreshold.SetAllowRevives(ent, false);
-        Log.Debug($"Rejuvenate called for {ToPrettyString(ent)} now {_mobThreshold.CheckVitalDamage(ent, ent)} vital damage");
     }
 
     private void DamageableHandleState(Entity<DamageableComponent> ent, ref ComponentHandleState args)
@@ -232,19 +223,35 @@ public record struct BeforeDamageChangedEvent(DamageSpecifier Damage, EntityUid?
 ///     For example, armor.
 /// </summary>
 // Goob - added target, targetPart
-public sealed class DamageModifyEvent(EntityUid target, DamageSpecifier damage, EntityUid? origin = null, TargetBodyPart? targetPart = null)
+public sealed class DamageModifyEvent(EntityUid target, DamageSpecifier damage, EntityUid? origin = null, BodyPartType? targetPart = null)
     : EntityEventArgs, IInventoryRelayEvent
 {
-    // Whenever locational damage is a thing, this should just check only that bit of armour.
+    /// <inheritdoc/>
+    /// <remarks>
+    ///     Whenever locational damage is a thing, this should just check only that bit of armor.
+    /// </remarks>
     public SlotFlags TargetSlots => ~SlotFlags.POCKET;
 
     // <Goob>
     public readonly EntityUid Target = target;
-    public readonly EntityUid? Origin = origin; // Why was this not a field already?
-    public readonly TargetBodyPart? TargetPart = targetPart;
+    public readonly BodyPartType? TargetPart = targetPart;
     // </Goob>
+
+    /// <summary>
+    ///     Contains the original damage, prior to any modifers.
+    /// </summary>
     public readonly DamageSpecifier OriginalDamage = damage;
+
+    /// <summary>
+    ///     Contains the damage after modifiers have been applied.
+    ///     This is the damage that will be inflicted.
+    /// </summary>
     public DamageSpecifier Damage = damage;
+
+    /// <summary>
+    ///     Contains the entity which caused the damage, if any was responsible.
+    /// </summary>
+    public readonly EntityUid? Origin = origin;
 }
 
 public sealed class DamageChangedEvent : EntityEventArgs

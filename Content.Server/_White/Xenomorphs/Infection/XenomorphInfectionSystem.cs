@@ -1,8 +1,9 @@
 using Content.Shared._White.Xenomorphs.Infection;
 using Content.Shared._White.Xenomorphs.Larva;
-using Content.Shared.Body.Events;
+using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Rejuvenate;
 using Robust.Server.Containers;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -16,14 +17,21 @@ public sealed class XenomorphInfectionSystem : EntitySystem
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenomorphInfectionComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<XenomorphInfectionComponent, OrganAddedToBodyEvent>(OnOrganAddedToBody);
-        SubscribeLocalEvent<XenomorphInfectionComponent, OrganRemovedFromBodyEvent>(OnOrganRemovedFromBody);
+        SubscribeLocalEvent<XenomorphInfectionComponent, OrganGotInsertedEvent>(OnOrganInserted);
+        SubscribeLocalEvent<XenomorphInfectionComponent, OrganGotRemovedEvent>(OnOrganRemoved);
+        SubscribeLocalEvent<XenomorphInfectedComponent, RejuvenateEvent>(OnRejuvenate);
+    }
+
+    private void OnRejuvenate(Entity<XenomorphInfectedComponent> ent, ref RejuvenateEvent args)
+    {
+        _transform.AttachToGridOrMap(ent.Comp.Infection);
     }
 
     private void OnShutdown(EntityUid uid, XenomorphInfectionComponent component, ComponentShutdown args)
@@ -32,20 +40,20 @@ public sealed class XenomorphInfectionSystem : EntitySystem
             RemComp<XenomorphInfectedComponent>(component.Infected.Value);
     }
 
-    private void OnOrganAddedToBody(EntityUid uid, XenomorphInfectionComponent component, OrganAddedToBodyEvent args)
+    private void OnOrganInserted(EntityUid uid, XenomorphInfectionComponent component, ref OrganGotInsertedEvent args)
     {
-        var xenomorphInfected = EnsureComp<XenomorphInfectedComponent>(args.Body);
+        var xenomorphInfected = EnsureComp<XenomorphInfectedComponent>(args.Target);
         xenomorphInfected.Infection = uid;
         xenomorphInfected.InfectedIcons = component.InfectedIcons;
-        Dirty(args.Body, xenomorphInfected);
+        Dirty(args.Target, xenomorphInfected);
 
-        component.Infected = args.Body;
+        component.Infected = args.Target;
     }
 
-    private void OnOrganRemovedFromBody(EntityUid uid, XenomorphInfectionComponent component, OrganRemovedFromBodyEvent args)
+    private void OnOrganRemoved(EntityUid uid, XenomorphInfectionComponent component, ref OrganGotRemovedEvent args)
     {
-        RemComp<XenomorphPreventSuicideComponent>(args.OldBody);
-        RemComp<XenomorphInfectedComponent>(args.OldBody);
+        RemComp<XenomorphPreventSuicideComponent>(args.Target);
+        RemComp<XenomorphInfectedComponent>(args.Target);
         component.Infected = null;
     }
 

@@ -1,4 +1,6 @@
-using Content.Server.Explosion.EntitySystems; // Goob
+// <Trauma>
+using Content.Trauma.Common.RoundEnd;
+// </Trauma>
 using System.Linq;
 using System.Numerics;
 using System.Threading;
@@ -68,7 +70,6 @@ public sealed partial class EmergencyShuttleSystem : SharedEmergencyShuttleSyste
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!; // Goob edit
 
     private const float ShuttleSpawnBuffer = 1f;
 
@@ -476,6 +477,11 @@ public sealed partial class EmergencyShuttleSystem : SharedEmergencyShuttleSyste
         }
 
         _commsConsole.UpdateCommsConsoleInterface();
+
+        // <Trauma>
+        var ev = new EmergencyShuttleDockedEvent();
+        RaiseLocalEvent(ref ev);
+        // </Trauma>
     }
 
     private void SetupEmergencyShuttle()

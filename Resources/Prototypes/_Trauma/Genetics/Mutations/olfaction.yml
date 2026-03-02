@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationDogNose
+  name: Transcendent Olfaction
+  description: Your sense of smell is comparable to that of a canine.
+  components:
+  - type: Mutation
+    instability: 25
+    difficulty: 12
+  - type: ComponentMutation
+    added:
+    - type: ScentTracker
+  # TODO: huge shitcode needed for parity

@@ -1,0 +1,22 @@
+- type: entity
+  parent: DiseaseBehaviorBase
+  id: DiseaseBehaviorHeartAttack
+  name: Heart Attack
+  description: Buildup of TNF-ε instructs the myocardial cells to die, causing a heart attack.
+  components:
+  - type: DiseaseEffect
+    complexity: 30 # need to cook this up in a lab
+  - type: DiseaseDnaTargetCondition # fox... DIE!!!
+  - type: DiseasePeriodicCondition # slightly random death time
+    delayMin: 1
+    delayMax: 3
+  - type: DiseaseProgressCondition
+    minProgress: 0.95
+  - type: DiseaseEntityEffect
+    effects:
+    - !type:Speak
+      probability: 0.25 # rare
+      id: FoxDie
+    - !type:NestedEffect
+      proto: HeartAttack
+  - type: DiseaseRemoveEffect # for gameplay because reviving is easy

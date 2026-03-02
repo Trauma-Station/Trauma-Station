@@ -157,7 +157,6 @@
     #Once the issues are fixed the species should be removed from this list to be enabled.
     #Balance concerns are not a valid reason to disable a species, except for high-impact Nukie-specific exploits.
     #- Vox
-    - Yowie # Goobstation
     - Plasmaman # EE
   - type: AntagObjectives # Goobstation
     objectives:
@@ -174,7 +173,7 @@
   - type: GameRule
     minPlayers: 20
   - type: LoadMapRule
-    mapPath: /Maps/_Goobstation/Nonstations/nukieplanet.yml # goob edit
+    mapPath: /Maps/_Trauma/Nonstations/nukieplanet.yml # Trauma
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
     definitions:
@@ -308,6 +307,15 @@
       lateJoinAdditional: false
       mindRoles:
       - MindRoleTraitor
+
+#- type: entity
+#  id: TraitorReinforcement
+#  parent: Traitor
+#  components:
+#  - type: TraitorRule
+#    giveUplink: false
+#    giveCodewords: false # It would actually give them a different set of codewords than the regular traitors, anyway
+#    giveBriefing: false
 
 - type: entity
   id: Revolutionary
@@ -586,7 +594,7 @@
     - id: SolarPanelDamageVariationPass
     - id: SolarPanelEmptyVariationPass
     - id: BasicDecalDirtVariationPass
-    - id: BasicDecalGraffitiVariationPass
+    #- id: BasicDecalGraffitiVariationPass # Trauma - looks shit
     - id: BasicDecalBurnsVariationPass
       prob: 0.50
       orGroup: monospaceDecals

@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Lavaland.Megafauna.Components;
-using Content.Shared._Lavaland.Megafauna.Systems;
+using Content.Lavaland.Shared.Megafauna.Components;
+using Content.Lavaland.Shared.Megafauna.Systems;
 using Robust.Shared.GameObjects;
 
 namespace Content.IntegrationTests.Tests._Lavaland.Megafauna;

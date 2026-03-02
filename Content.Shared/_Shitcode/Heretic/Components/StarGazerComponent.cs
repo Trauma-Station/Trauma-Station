@@ -6,12 +6,9 @@ using Content.Shared.StatusIcon;
 
 namespace Content.Shared._Shitcode.Heretic.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class StarGazerComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public EntityUid Summoner;
-
     [DataField]
     public ProtoId<FactionIconPrototype> MasterIcon = "GhoulHereticMaster";
 
@@ -38,4 +35,7 @@ public sealed partial class StarGazerComponent : Component
 
     [DataField]
     public SoundSpecifier TeleportSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/cosmic_energy.ogg");
+
+    [DataField]
+    public EntProtoId InactiveStatus = "StarGazerInactiveStatusEffect";
 }

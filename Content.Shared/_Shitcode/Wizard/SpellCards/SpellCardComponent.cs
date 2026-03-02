@@ -7,41 +7,42 @@
 
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Goobstation.Wizard.SpellCards;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class SpellCardComponent : Component
 {
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public EntityUid? Target;
 
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public bool Targeted;
 
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public bool Flipped;
 
     [DataField]
     public float TargetedSpeed = 20f;
 
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField, AutoNetworkedField]
+    public TimeSpan FlipAt = TimeSpan.Zero;
+
     [DataField]
-    public float FlipTime = 0.4f;
+    public TimeSpan TimeToFlip = TimeSpan.FromMilliseconds(400);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField, AutoNetworkedField]
+    public TimeSpan NextUpdate = TimeSpan.Zero;
+
+    [DataField]
+    public TimeSpan UpdateTime = TimeSpan.FromMilliseconds(100);
 
     [DataField]
     public float Tolerance = 0.1f;
 
     [DataField]
     public Color FlippedTrailColor = Color.White;
-
-    [ViewVariables(VVAccess.ReadOnly)]
-    public float FlipAccumulator;
-
-    [DataField]
-    public float RotateTime = 0.1f;
-
-    [ViewVariables(VVAccess.ReadOnly)]
-    public float RotateAccumulator;
 }
 
 [Serializable, NetSerializable]

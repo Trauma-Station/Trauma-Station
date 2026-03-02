@@ -57,7 +57,6 @@
             #service
             Captain: [ 1, 1 ]
             NanotrasenRepresentative: [ 1, 1 ]
-            #BlueshieldOfficer: [ 1, 1 ] # Trauma
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 3, 3 ]
             Botanist: [ 5, 5 ]
@@ -92,7 +91,7 @@
             Brigmedic: [ 1, 1 ]
             #supply
             Quartermaster: [ 1, 1 ]
-            SalvageSpecialist: [ 8, 8 ]
+            SalvageSpecialist: [ 4, 4 ]
             CargoTechnician: [ -1, -1 ]
             #civilian
             Passenger: [ -1, -1 ]

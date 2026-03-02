@@ -9,7 +9,6 @@ using System.Linq;
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Server._Goobstation.Wizard.Systems;
 using Content.Server.Actions;
-using Content.Server.Chat.Systems;
 using Content.Server.Pinpointer;
 using Content.Server.Popups;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
@@ -37,7 +36,6 @@ public sealed class WizardTeleportSystem : SharedWizardTeleportSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly PullingSystem _pullingSystem = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly WizardRuleSystem _wizard = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
@@ -150,19 +148,12 @@ public sealed class WizardTeleportSystem : SharedWizardTeleportSystem
 
     public override void OnTeleportSpell(EntityUid performer, EntityUid action)
     {
-        if (!_uiSystem.HasUi(performer, WizardTeleportUiKey.Key))
+        var key = WizardTeleportUiKey.Key;
+        if (!_uiSystem.TryToggleUi(action, key, performer))
             return;
-
-        if (!_uiSystem.IsUiOpen(performer, WizardTeleportUiKey.Key, performer))
-            _uiSystem.OpenUi(performer, WizardTeleportUiKey.Key, performer);
-        else
-        {
-            _uiSystem.CloseUi(performer, WizardTeleportUiKey.Key);
-            return;
-        }
 
         var state = new WizardTeleportState(GetWizardTeleportLocations().ToList(), GetNetEntity(action));
-        _uiSystem.SetUiState(performer, WizardTeleportUiKey.Key, state);
+        _uiSystem.SetUiState(action, key, state);
     }
 
     private void OnAfterUIOpen(Entity<TeleportScrollComponent> ent, ref AfterActivatableUIOpenEvent args)

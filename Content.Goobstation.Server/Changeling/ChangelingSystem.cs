@@ -1,66 +1,37 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 TGRCDev <tgrc@tgrc.dev>
-// SPDX-FileCopyrightText: 2024 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Marcus F <marcus2008stoke@gmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Rinary <72972221+Rinary1@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 the biggest bruh <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 thebiggestbruh <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 thebiggestbruh <marcus2008stoke@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.Actions;
+using Content.Goobstation.Common.Body;
 using Content.Goobstation.Common.Changeling;
+using Content.Goobstation.Common.Conversion;
+using Content.Goobstation.Common.Magic;
 using Content.Goobstation.Common.MartialArts;
-using Content.Goobstation.Maths.FixedPoint;
-using Content.Goobstation.Server.Changeling.Objectives.Components;
+using Content.Goobstation.Common.Medical;
 using Content.Goobstation.Server.Changeling.GameTicking.Rules;
-using Content.Goobstation.Shared.Flashbang;
+using Content.Goobstation.Server.Changeling.Objectives.Components;
+using Content.Goobstation.Shared.Changeling;
 using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Changeling.Systems;
+using Content.Goobstation.Shared.Flashbang;
 using Content.Goobstation.Shared.MartialArts.Components;
+using Content.Goobstation.Shared.Overlays;
 using Content.Server.Actions;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
+using Content.Shared.Body;
 using Content.Shared.Emp;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Gravity;
 using Content.Server.Guardian;
-using Content.Server.Humanoid;
 using Content.Shared.Light.EntitySystems;
 using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
-using Content.Server.Popups;
 using Content.Server.Store.Systems;
 using Content.Server.Stunnable;
-using Content.Shared._Goobstation.Weapons.AmmoSelector;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Alert;
@@ -75,13 +46,13 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.Flash.Components;
 using Content.Shared.Fluids;
 using Content.Shared.Forensics.Components;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Inventory;
+using Content.Shared.Implants;
 using Content.Shared.Medical;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
@@ -91,20 +62,21 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Polymorph;
-using Content.Shared.Popups;
+using Content.Shared.Preferences;
 using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Revolutionary.Components;
+using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Content.Shared.Zombies;
-using Robust.Server.Audio;
+using Content.Trauma.Common.Genetics.Mutations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Changeling;
@@ -112,24 +84,22 @@ namespace Content.Goobstation.Server.Changeling;
 public sealed partial class ChangelingSystem : SharedChangelingSystem
 {
     // this is one hell of a star wars intro text
+    [Dependency] private readonly CommonMutationSystem _mutation = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IRobustRandom _rand = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly StoreSystem _store = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
+    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private readonly SharedRoleSystem _role = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly SharedEmpSystem _emp = default!;
@@ -137,8 +107,6 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private readonly SharedPoweredLightSystem _light = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly GravitySystem _gravity = default!;
@@ -147,27 +115,16 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private readonly SharedPuddleSystem _puddle = default!;
     [Dependency] private readonly StunSystem _stun = default!;
     [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SelectableAmmoSystem _selectableAmmo = default!;
     [Dependency] private readonly ChangelingRuleSystem _changelingRuleSystem = default!;
-
-    public EntProtoId ArmbladePrototype = "ArmBladeChangeling";
-    public EntProtoId FakeArmbladePrototype = "FakeArmBladeChangeling";
-    public EntProtoId HammerPrototype = "ArmHammerChangeling";
-    public EntProtoId ClawPrototype = "ArmClawChangeling";
-    public EntProtoId DartGunPrototype = "DartGunChangeling";
-
-    public EntProtoId ShieldPrototype = "ChangelingShield";
-    public EntProtoId BoneShardPrototype = "ThrowingStarChangeling";
-
-    public EntProtoId ArmorPrototype = "ChangelingClothingOuterArmor";
-    public EntProtoId ArmorHelmetPrototype = "ChangelingClothingHeadHelmet";
+    [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ChangelingIdentityComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<ChangelingIdentityComponent, MapInitEvent>(OnIdentityMapInit);
+        SubscribeLocalEvent<ChangelingComponent, MapInitEvent>(OnChangelingMapInit);
+
         SubscribeLocalEvent<ChangelingIdentityComponent, MobStateChangedEvent>(OnMobStateChange);
         SubscribeLocalEvent<ChangelingIdentityComponent, UpdateMobStateEvent>(OnUpdateMobState);
         SubscribeLocalEvent<ChangelingIdentityComponent, DamageChangedEvent>(OnDamageChange);
@@ -175,7 +132,13 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         SubscribeLocalEvent<ChangelingIdentityComponent, TargetBeforeDefibrillatorZapsEvent>(OnDefibZap);
         SubscribeLocalEvent<ChangelingIdentityComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<ChangelingIdentityComponent, PolymorphedEvent>(OnPolymorphed);
+
         SubscribeLocalEvent<ChangelingComponent, PolymorphedEvent>(OnPolymorphedTakeTwo);
+        SubscribeLocalEvent<ChangelingComponent, BeforeAmputationDamageEvent>(OnLimbAmputation);
+        SubscribeLocalEvent<ChangelingComponent, BeforeMindSwappedEvent>(OnMindswapAttempt);
+        SubscribeLocalEvent<ChangelingComponent, BeforeConversionEvent>(OnConversionAttempt);
+        SubscribeLocalEvent<ChangelingComponent, BeforeBrainRemovedEvent>(OnBrainRemoveAttempt);
+        SubscribeLocalEvent<ChangelingComponent, BeforeBrainAddedEvent>(OnBrainAddAttempt);
 
         SubscribeLocalEvent<ChangelingIdentityComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
 
@@ -183,16 +146,40 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         SubscribeLocalEvent<ChangelingIdentityComponent, AwakenedInstinctPurchasedEvent>(OnAwakenedInstinctPurchased);
         SubscribeLocalEvent<ChangelingIdentityComponent, AugmentedEyesightPurchasedEvent>(OnAugmentedEyesightPurchased);
-
-        SubscribeAbilities();
     }
 
     private void OnPolymorphed(Entity<ChangelingIdentityComponent> ent, ref PolymorphedEvent args)
         => _polymorph.CopyPolymorphComponent<ChangelingIdentityComponent>(ent, args.NewEntity);
 
-    // we really should get rid of it.
     private void OnPolymorphedTakeTwo(Entity<ChangelingComponent> ent, ref PolymorphedEvent args)
         => _polymorph.CopyPolymorphComponent<ChangelingComponent>(ent, args.NewEntity);
+
+    private void OnLimbAmputation(Entity<ChangelingComponent> ent, ref BeforeAmputationDamageEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnMindswapAttempt(Entity<ChangelingComponent> ent, ref BeforeMindSwappedEvent args)
+    {
+        args.Message = ent.Comp.MindswapText;
+        args.Cancelled = true;
+    }
+
+    private void OnConversionAttempt(Entity<ChangelingComponent> ent, ref BeforeConversionEvent args)
+    {
+        args.Blocked = true;
+    }
+
+    // stop the changeling from losing control over the body
+    private void OnBrainRemoveAttempt(Entity<ChangelingComponent> ent, ref BeforeBrainRemovedEvent args)
+    {
+        args.Blocked = true;
+    }
+
+    private void OnBrainAddAttempt(Entity<ChangelingComponent> ent, ref BeforeBrainAddedEvent args)
+    {
+        args.Blocked = true;
+    }
 
     private void OnDartHit(Entity<ChangelingDartComponent> ent, ref ProjectileHitEvent args)
     {
@@ -230,7 +217,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         EnsureComp<FlashImmunityComponent>(uid);
         EnsureComp<EyeProtectionComponent>(uid);
 
-        var thermalVision = _compFactory.GetComponent<Shared.Overlays.ThermalVisionComponent>();
+        var thermalVision = Factory.GetComponent<ThermalVisionComponent>();
         thermalVision.Color = Color.FromHex("#FB9898");
         thermalVision.LightRadius = 15f;
         thermalVision.FlashDurationMultiplier = 2f;
@@ -297,8 +284,12 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         }
 
         if (comp.IsInStasis && comp.StasisTime > 0f)
+        {
             comp.StasisTime -= 1f;
 
+            if (comp.StasisTime == 0f) // If this tick finished the stasis timer
+                Popup.PopupEntity(Loc.GetString("changeling-stasis-finished"), uid, uid);
+        }
     }
 
     private void RegenerateChemicals(EntityUid uid, ChangelingIdentityComponent comp, float amount) // this happens passively
@@ -329,15 +320,27 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
     #region Helper Methods
 
-    public void PlayMeatySound(EntityUid uid, ChangelingIdentityComponent comp)
-    {
-        var rand = _rand.Next(0, comp.SoundPool.Count - 1);
-        var sound = comp.SoundPool.ToArray()[rand];
-        _audio.PlayPvs(sound, uid, AudioParams.Default.WithVolume(-3f));
-    }
+    /// <summary>
+    /// Get the store from a mob's changeling mind role.
+    /// Returns null if it has no mind or no role.
+    /// </summary>
+    public Entity<StoreComponent>? GetStore(EntityUid mob)
+        => Mind.GetMind(mob) is {} mind && GetMindStore(mind) is {} store
+            ? store
+            : null;
+
+    /// <summary>
+    /// Get the store from a mind entity's changeling mind role.
+    /// Returns null if it has no role.
+    /// </summary>
+    public Entity<StoreComponent>? GetMindStore(Entity<MindComponent?> mind)
+        => _role.MindHasRole<ChangelingRoleComponent>(mind, out var role)
+            ? (role.Value.Owner, Comp<StoreComponent>(role.Value.Owner)) // will throw if the role is missing store component
+            : null;
+
     public void DoScreech(EntityUid uid, ChangelingIdentityComponent comp)
     {
-        _audio.PlayPvs(comp.ShriekSound, uid);
+        Audio.PlayPvs(comp.ShriekSound, uid);
 
         var center = Transform(uid).MapPosition;
         var gamers = Filter.Empty();
@@ -418,52 +421,6 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         return (TryComp<FlammableComponent>(uid, out var fire) && fire.OnFire);
     }
 
-    public bool TryUseAbility(EntityUid uid,
-        ChangelingIdentityComponent comp,
-        BaseActionEvent action,
-        float? chemCostOverride = null,
-        bool fireAffected = true)
-    {
-        if (action.Handled)
-            return false;
-
-        if (!TryComp<ChangelingActionComponent>(action.Action, out var lingAction))
-            return false;
-
-        if (CheckFireStatus(uid) && fireAffected) // checks if the changeling is on fire, and if the ability is affected by fire
-        {
-            _popup.PopupEntity(Loc.GetString("changeling-onfire"), uid, uid, PopupType.LargeCaution);
-            return false;
-        }
-
-
-        if ((!lingAction.UseInLesserForm && comp.IsInLesserForm) || (!lingAction.UseInLastResort && comp.IsInLastResort))
-        {
-            _popup.PopupEntity(Loc.GetString("changeling-action-fail-lesserform"), uid, uid);
-            return false;
-        }
-
-        var chemCost = chemCostOverride ?? lingAction.ChemicalCost;
-
-        if (comp.Chemicals < chemCost)
-        {
-            _popup.PopupEntity(Loc.GetString("changeling-chemicals-deficit"), uid, uid);
-            return false;
-        }
-
-        if (lingAction.RequireAbsorbed > comp.TotalAbsorbedEntities)
-        {
-            var delta = lingAction.RequireAbsorbed - comp.TotalAbsorbedEntities;
-            _popup.PopupEntity(Loc.GetString("changeling-action-fail-absorbed", ("number", delta)), uid, uid);
-            return false;
-        }
-
-        UpdateChemicals(uid, comp, -chemCost);
-
-        action.Handled = true;
-
-        return true;
-    }
     public bool TrySting(EntityUid uid, ChangelingIdentityComponent comp, EntityTargetActionEvent action, bool overrideMessage = false)
     {
         var target = action.Target;
@@ -471,22 +428,19 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         // can't sting a dried out husk
         if (HasComp<AbsorbedComponent>(target))
         {
-            _popup.PopupEntity(Loc.GetString("changeling-sting-fail-hollow"), uid, uid);
+            Popup.PopupEntity(Loc.GetString("changeling-sting-fail-hollow"), uid, uid);
             return false;
         }
 
         if (HasComp<ChangelingIdentityComponent>(target))
         {
-            _popup.PopupEntity(Loc.GetString("changeling-sting-fail-self", ("target", Identity.Entity(target, EntityManager))), uid, uid);
-            _popup.PopupEntity(Loc.GetString("changeling-sting-fail-ling"), target, target);
+            Popup.PopupEntity(Loc.GetString("changeling-sting-fail-self", ("target", Identity.Entity(target, EntityManager))), uid, uid);
+            Popup.PopupEntity(Loc.GetString("changeling-sting-fail-ling"), target, target);
             return false;
         }
 
-        if (!TryUseAbility(uid, comp, action))
-            return false;
-
         if (!overrideMessage)
-            _popup.PopupEntity(Loc.GetString("changeling-sting", ("target", Identity.Entity(target, EntityManager))), uid, uid);
+            Popup.PopupEntity(Loc.GetString("changeling-sting", ("target", Identity.Entity(target, EntityManager))), uid, uid);
         return true;
     }
     public bool TryInjectReagents(EntityUid uid, Dictionary<string, FixedPoint2> reagents)
@@ -520,79 +474,14 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         return true;
     }
-    public bool TryToggleItem(EntityUid uid, EntProtoId proto, ChangelingIdentityComponent comp, out EntityUid? equipment)
-    {
-        equipment = null;
-        if (!comp.Equipment.TryGetValue(proto.Id, out var item))
-        {
-            item = Spawn(proto, Transform(uid).Coordinates);
-            if (!_hands.TryForcePickupAnyHand(uid, (EntityUid) item))
-            {
-                _popup.PopupEntity(Loc.GetString("changeling-fail-hands"), uid, uid);
-                QueueDel(item);
-                return false;
-            }
-            comp.Equipment.Add(proto.Id, item);
-            equipment = item;
-            return true;
-        }
-
-        QueueDel(item);
-        // assuming that it exists
-        comp.Equipment.Remove(proto.Id);
-
-        return true;
-    }
-
-    public bool TryToggleArmor(EntityUid uid, ChangelingIdentityComponent comp, (EntProtoId, string)[] armors)
-    {
-        if (comp.ActiveArmor == null)
-        {
-            // Equip armor
-            var newArmor = new List<EntityUid>();
-            var coords = Transform(uid).Coordinates;
-            foreach (var (proto, slot) in armors)
-            {
-                EntityUid armor = EntityManager.SpawnEntity(proto, coords);
-                if (!_inventory.TryEquip(uid, armor, slot, force: true))
-                {
-                    QueueDel(armor);
-                    foreach (var delArmor in newArmor)
-                        QueueDel(delArmor);
-
-                    return false;
-                }
-                newArmor.Add(armor);
-            }
-
-            _audio.PlayPvs(comp.ArmourSound, uid, AudioParams.Default);
-
-            comp.ActiveArmor = newArmor;
-            comp.ChemicalRegenMultiplier -= 0.25f; // base chem regen slowed by a flat 25%
-            return true;
-        }
-        else
-        {
-            // Unequip armor
-            foreach (var armor in comp.ActiveArmor)
-                QueueDel(armor);
-
-            _audio.PlayPvs(comp.ArmourStripSound, uid, AudioParams.Default);
-
-            comp.ActiveArmor = null!;
-            comp.ChemicalRegenMultiplier += 0.25f; // chem regen debuff removed
-            return true;
-        }
-    }
 
     public bool TryStealDNA(EntityUid uid, EntityUid target, ChangelingIdentityComponent comp, bool countObjective = false)
     {
-        if (!TryComp<HumanoidAppearanceComponent>(target, out var appearance)
-        || !TryComp<MetaDataComponent>(target, out var metadata)
-        || !TryComp<DnaComponent>(target, out var dna)
-        || !TryComp<FingerprintComponent>(target, out var fingerprint))
+        var data = TryGetDNA(uid, target, comp);
+
+        if (!TryComp<DnaComponent>(target, out var dna) || data is not {})
         {
-            _popup.PopupEntity(Loc.GetString("changeling-sting-extract-fail-lesser"), uid, uid);
+            Popup.PopupEntity(Loc.GetString("changeling-sting-extract-fail-lesser"), uid, uid);
             return false;
         }
 
@@ -600,31 +489,21 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         {
             if (storedDNA.DNA != null && storedDNA.DNA == dna.DNA) // the dna NEEDS to be unique
             {
-                _popup.PopupEntity(Loc.GetString("changeling-sting-extract-fail-duplicate"), uid, uid);
+                Popup.PopupEntity(Loc.GetString("changeling-sting-extract-fail-duplicate"), uid, uid);
                 return false;
             }
         }
 
-        var data = new TransformData
-        {
-            Name = metadata.EntityName,
-            DNA = dna.DNA ?? Loc.GetString("forensics-dna-unknown"),
-            Appearance = appearance
-        };
-
-        if (fingerprint.Fingerprint != null)
-            data.Fingerprint = fingerprint.Fingerprint;
-
         if (countObjective
-        && _mind.TryGetMind(uid, out var mindId, out var mind)
-        && _mind.TryGetObjectiveComp<StealDNAConditionComponent>(mindId, out var objective, mind)
+        && Mind.TryGetMind(uid, out var mindId, out var mind)
+        && Mind.TryGetObjectiveComp<StealDNAConditionComponent>(mindId, out var objective, mind)
         && comp.AbsorbedDNA.Count < comp.MaxAbsorbedDNA) // no cheesing by spamming dna extract
         {
             objective.DNAStolen += 1;
         }
 
         if (comp.AbsorbedDNA.Count >= comp.MaxAbsorbedDNA)
-            _popup.PopupEntity(Loc.GetString("changeling-sting-extract-max"), uid, uid);
+            Popup.PopupEntity(Loc.GetString("changeling-sting-extract-max"), uid, uid);
         else
         {
             comp.AbsorbedHistory.Add(data); // so we can't just come back and sting them again
@@ -635,6 +514,30 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         return true;
     }
+
+    public TransformData? TryGetDNA(EntityUid uid, EntityUid target, ChangelingIdentityComponent comp)
+    {
+        if (!TryComp<DnaComponent>(target, out var dna)
+            || !TryComp<FingerprintComponent>(target, out var fingerprint)
+            || _humanoid.CreateProfile(target) is not {} profile)
+        {
+            return null;
+        }
+
+        var data = new TransformData
+        {
+            Name = Name(target),
+            DNA = dna.DNA ?? Loc.GetString("forensics-dna-unknown"),
+            Profile = profile,
+            Mutations = _mutation.GetMutatableData(target)
+        };
+
+        if (fingerprint.Fingerprint != null)
+            data.Fingerprint = fingerprint.Fingerprint;
+
+        return data;
+    }
+
     private EntityUid? TransformEntity(
         EntityUid uid,
         TransformData? data = null,
@@ -648,7 +551,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         if (data != null)
         {
-            if (!_proto.TryIndex(data.Appearance.Species, out var species))
+            if (!_proto.TryIndex(data.Profile.Species, out var species))
                 return null;
             pid = species.Prototype;
         }
@@ -662,7 +565,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         var config = new PolymorphConfiguration
         {
-            Entity = (EntProtoId) pid,
+            Entity = pid.Value,
             TransferDamage = transferDamage,
             Forced = true,
             Inventory = (dropInventory) ? PolymorphInventoryChange.Drop : PolymorphInventoryChange.Transfer,
@@ -670,25 +573,11 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             RevertOnDeath = false
         };
 
-        var newUid = _polymorph.PolymorphEntity(uid, config);
+        if (!HasComp<ThermalVisionComponent>(uid))
+            Log.Error("Ling didnt have thermal vision!");
 
-        if (newUid == null)
+        if (_polymorph.PolymorphEntity(uid, config) is not {} newEnt)
             return null;
-
-        var newEnt = newUid.Value;
-
-        if (data != null)
-        {
-            Comp<FingerprintComponent>(newEnt).Fingerprint = data.Fingerprint;
-            Comp<DnaComponent>(newEnt).DNA = data.DNA;
-            _humanoid.CloneAppearance(data.Appearance.Owner, newEnt);
-            _metaData.SetEntityName(newEnt, data.Name);
-            var message = Loc.GetString("changeling-transform-finish", ("target", data.Name));
-            _popup.PopupEntity(message, newEnt, newEnt);
-        }
-
-        // otherwise we can only transform once
-        RemCompDeferred<PolymorphedEntityComponent>(newEnt);
 
         // exceptional comps check
         // TODO make PolymorphedEvent handlers for all
@@ -696,13 +585,31 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         {
             typeof(FlashImmunityComponent),
             typeof(EyeProtectionComponent),
-            typeof(Shared.Overlays.NightVisionComponent),
-            typeof(Shared.Overlays.ThermalVisionComponent),
+            typeof(NightVisionComponent),
+            typeof(ThermalVisionComponent),
         };
         foreach (var type in types)
-            _polymorph.CopyPolymorphComponent(uid, newEnt, nameof(type));
+            _polymorph.CopyPolymorphComponent(uid, newEnt, type);
 
-        // CopyPolymorphComponent fails to copy the HumanoidAppearanceComponent in TransformData
+        if (!HasComp<ThermalVisionComponent>(newEnt))
+            Log.Error("Ling didnt have thermal vision after transform!");
+
+        if (data != null)
+        {
+            Comp<FingerprintComponent>(newEnt).Fingerprint = data.Fingerprint;
+            Comp<DnaComponent>(newEnt).DNA = data.DNA;
+            _visualBody.ApplyProfileTo(newEnt, data.Profile);
+            _humanoid.ApplyProfileTo(newEnt, data.Profile);
+            _metaData.SetEntityName(newEnt, data.Name);
+            var message = Loc.GetString("changeling-transform-finish", ("target", data.Name));
+            Popup.PopupEntity(message, newEnt, newEnt);
+            _mutation.LoadMutatableData(newEnt, data.Mutations);
+        }
+
+        // otherwise we can only transform once
+        RemCompDeferred<PolymorphedEntityComponent>(newEnt);
+
+        // CopyPolymorphComponent fails to copy the HumanoidProfileComponent in TransformData
         // outside of the first list item so this has to be done manually unfortunately
         if (TryComp<ChangelingIdentityComponent>(newEnt, out var newComp)
             && comp != null)
@@ -710,14 +617,14 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         RaiseNetworkEvent(new LoadActionsEvent(GetNetEntity(uid)), newEnt);
 
-        return newUid;
+        return newEnt;
     }
 
     public bool TryTransform(EntityUid target, ChangelingIdentityComponent comp, bool sting = false, bool persistentDna = false)
     {
         if (HasComp<AbsorbedComponent>(target))
         {
-            _popup.PopupEntity(Loc.GetString("changeling-transform-fail-absorbed"), target, target);
+            Popup.PopupEntity(Loc.GetString("changeling-transform-fail-absorbed"), target, target);
             return false;
         }
 
@@ -725,12 +632,12 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         if (data == null)
         {
-            _popup.PopupEntity(Loc.GetString("changeling-transform-fail-self"), target, target);
+            Popup.PopupEntity(Loc.GetString("changeling-transform-fail-self"), target, target);
             return false;
         }
         if (data == comp.CurrentForm)
         {
-            _popup.PopupEntity(Loc.GetString("changeling-transform-fail-choose"), target, target);
+            Popup.PopupEntity(Loc.GetString("changeling-transform-fail-choose"), target, target);
             return false;
         }
 
@@ -755,12 +662,11 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     public void RemoveAllChangelingEquipment(EntityUid target, ChangelingIdentityComponent comp)
     {
         // check if there's no entities or all entities are null
-        if (comp.Equipment.Values.Count == 0
-        || comp.Equipment.Values.All(ent => ent == null ? true : false))
+        if (comp.Equipment.Values.Count == 0)
             return;
 
         foreach (var equip in comp.Equipment.Values)
-            QueueDel(equip);
+            QueueDel(GetEntity(equip));
 
         PlayMeatySound(target, comp);
     }
@@ -769,37 +675,55 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
     #region Event Handlers
 
-    private void OnStartup(EntityUid uid, ChangelingIdentityComponent comp, ref ComponentStartup args)
+    private void OnIdentityMapInit(Entity<ChangelingIdentityComponent> ent, ref MapInitEvent args)
     {
-        RemComp<HungerComponent>(uid);
-        RemComp<ThirstComponent>(uid);
-        RemComp<CanHostGuardianComponent>(uid);
-        RemComp<MartialArtsKnowledgeComponent>(uid);
-        RemComp<CanPerformComboComponent>(uid);
-        EnsureComp<ZombieImmuneComponent>(uid);
+        RemComp<HungerComponent>(ent);
+        RemComp<ThirstComponent>(ent);
+        RemComp<CanHostGuardianComponent>(ent);
+        RemComp<MartialArtsKnowledgeComponent>(ent);
+        RemComp<CanPerformComboComponent>(ent);
+        EnsureComp<ZombieImmuneComponent>(ent);
 
         // add actions
-        foreach (var actionId in comp.BaseChangelingActions)
-            _actions.AddAction(uid, actionId);
-
-        // making sure things are right in this world
-        comp.Chemicals = comp.MaxChemicals;
+        foreach (var actionId in ent.Comp.BaseChangelingActions)
+            _actions.AddAction(ent, actionId);
 
         // make sure its set to the default
-        comp.TotalEvolutionPoints = _changelingRuleSystem.StartingCurrency;
+        ent.Comp.TotalEvolutionPoints = _changelingRuleSystem.StartingCurrency;
 
         // don't want instant stasis
-        comp.StasisTime = comp.DefaultStasisTime;
+        ent.Comp.StasisTime = ent.Comp.DefaultStasisTime;
 
         // show alerts
-        UpdateChemicals(uid, comp, 0);
+        UpdateChemicals(ent, ent.Comp, 0);
 
-        if (!TryComp<BloodstreamComponent>(uid, out var blood))
+        if (!TryComp<BloodstreamComponent>(ent, out var blood))
             return;
 
         // make their blood unreal
         var volume = blood.BloodReferenceSolution.Volume;
-        _blood.ChangeBloodReagents((uid, blood), new([new("BloodChangeling", volume)]));
+        _blood.ChangeBloodReagents((ent, blood), new([new("BloodChangeling", volume)]));
+    }
+
+    // in the future ChangelingIdentity should have its own system and be ONLY used for holding stored DNA and handling transformations.
+    private void OnChangelingMapInit(Entity<ChangelingComponent> ent, ref MapInitEvent args)
+    {
+        if (ent.Comp.EvolutionsAssigned) // this is solely because polymorph will cause mega errors otherwise
+            return;
+
+        if (!_proto.TryIndex(ent.Comp.EvolutionsProto, out var evoProto))
+            return;
+
+        foreach (var startingComp in evoProto.Components)
+        {
+            var startCompType = startingComp.Value.Component.GetType();
+            var startComp = Factory.GetComponent(startCompType);
+
+            if (!HasComp(ent, startCompType)) // don't overwrite the starting components if you already have them (somehow)
+                AddComp(ent, startComp, true);
+        }
+
+        ent.Comp.EvolutionsAssigned = true;
     }
 
     private void OnMobStateChange(EntityUid uid, ChangelingIdentityComponent comp, ref MobStateChangedEvent args)
@@ -849,7 +773,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         if (ent.Comp.IsInStasis) // so you don't get a free insta-rejuvenate after being defibbed
         {
             ent.Comp.IsInStasis = false;
-            _popup.PopupEntity(Loc.GetString("changeling-stasis-exit-defib"), ent, ent);
+            Popup.PopupEntity(Loc.GetString("changeling-stasis-exit-defib"), ent, ent);
         }
     }
 
@@ -866,7 +790,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         else
         {
             UpdateChemicals(ent, ent.Comp, ent.Comp.MaxChemicals); // only by admin rejuv, for testing and whatevs
-            _popup.PopupEntity(Loc.GetString("changeling-rejuvenate"), ent, ent); // woah...
+            Popup.PopupEntity(Loc.GetString("changeling-rejuvenate"), ent, ent); // woah...
         }
     }
     #endregion

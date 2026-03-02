@@ -16578,7 +16578,6 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
-    - type: FTLDrive
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 5
@@ -43094,7 +43093,7 @@ entities:
     - type: Transform
       pos: 8.5,7.5
       parent: 4
-- proto: WarpPoint
+- proto: GhostWarpPoint
   entities:
   - uid: 419
     components:

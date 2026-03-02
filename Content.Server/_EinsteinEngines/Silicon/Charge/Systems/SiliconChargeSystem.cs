@@ -7,7 +7,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.CCVar;
-using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
 using Content.Shared.Power.EntitySystems; // Goobstation - Energycrit
 using Content.Shared.PowerCell;
@@ -34,7 +33,6 @@ public sealed class SiliconChargeSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly FlammableSystem _flammable = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _moveMod = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -181,9 +179,6 @@ public sealed class SiliconChargeSystem : EntitySystem
             if (!_random.Prob(Math.Clamp(temp.CurrentTemperature / (upperThresh * 5), 0.001f, 0.9f)))
                 return hotTempMulti;
 
-            // Goobstation: Replaced by KillOnOverheatSystem
-            //_flammable.AdjustFireStacks(silicon, Math.Clamp(siliconComp.FireStackMultiplier, -10, 10), flamComp);
-            //_flammable.Ignite(silicon, silicon, flamComp);
             return hotTempMulti;
         }
 

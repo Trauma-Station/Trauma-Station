@@ -34,6 +34,7 @@
     - BaseSimpleMob
     - MobBloodstream
     - MobFlammable
+    - BaseMobAnimal
   id: MobGondola
   description: Having no hands he embodies the Taoist principle of wu-wei (non-action) while his smiling facial expression shows his utter and complete acceptance of the world as it is.
   components:
@@ -137,9 +138,6 @@
   - type: HTN
     rootTask:
       task: IdleCompound
-  - type: Body
-    prototype: Animal
-    bodyType: Simple
   - type: Climbing
   - type: NameIdentifier
     group: GenericNumber
@@ -320,7 +318,7 @@
 - type: entity
   name: space carp
   id: MobCarpSentient
-  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat ]
+  parent: [ AppearanceCarp, SimpleSpaceMobBase, FlyingMobBase, MobCombat ]
   description: It's a space carp. Used to be a person.
   components:
   - type: InputMover
@@ -399,9 +397,6 @@
     interactFailureString: petting-failure-carp
     interactFailureSound:
       path: /Audio/Effects/bite.ogg
-  - type: Body
-    prototype: Carp
-    bodyType: Simple
   - type: NightVision
     color: "#808080"
     activateSound: null
@@ -582,15 +577,14 @@
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
-  - type: SpamEmitSound
-    minInterval: 5
-    maxInterval: 15
-    sound:
-      path: /Audio/_Goobstation/Wraith/Mobs/brullbar/brullbar_roar.ogg
-      params:
-          volume: 1
-          maxDistance: 20
-          variation: 0.01
+  - type: AutoEmote
+    emotes:
+    - BrullbarHowl
+  - type: Vocal
+    sounds:
+      Male: Brullbar
+      Female: Brullbar
+      Unsexed: Brullbar
   - type: NpcFactionMember
     factions:
     - SimpleHostile
@@ -742,6 +736,7 @@
       - Dog
       understands:
       - Dog
+      - TauCetiBasic
 
 - type: entity
   name: horse

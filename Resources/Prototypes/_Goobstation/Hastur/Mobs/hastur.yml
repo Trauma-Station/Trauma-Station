@@ -114,8 +114,7 @@
           Burn: -2
           Toxin: -15
           Genetic: -15
-    - type: WeakToHoly
-      alwaysTakeHoly: true
+    - type: AlwaysTakeHoly
     - type: NoSlip
     - type: Bloodstream
       bloodReferenceSolution:

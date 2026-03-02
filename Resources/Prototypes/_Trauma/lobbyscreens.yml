@@ -1,29 +1,29 @@
 - type: lobbyBackground
   id: hereticLobbyArt
   background: /Textures/_Trauma/LobbyScreens/hereticLobbyArt.webp
-  name: The Heretic
+  title: lobby-state-background-the-heretic
   artist: asardonicsailor
 
 - type: lobbyBackground
   id: changelingLobbyArt
   background: /Textures/_Trauma/LobbyScreens/changeling_lobby_art.webp
-  name: The Changeling
+  title: lobby-state-background-the-changeling
   artist: asardonicsailor
 
 - type: lobbyBackground
   id: hereticLobbyArt2
   background: /Textures/_Trauma/LobbyScreens/heretic_lobby_art2.webp
-  name: The Mansus
+  title: lobby-state-background-the-mansus
   artist: asardonicsailor
 
 - type: lobbyBackground
   id: revLobbyArt
   background: /Textures/_Trauma/LobbyScreens/rev_lobby_art.webp
-  name: The Revolution
+  title: lobby-state-background-the-revolution
   artist: asardonicsailor
 
 - type: lobbyBackground
   id: syndicateLobbyArt
   background: /Textures/_Trauma/LobbyScreens/syndicate_lobby_art.webp
-  name: The Syndicate
+  title: lobby-state-background-the-syndicate
   artist: asardonicsailor

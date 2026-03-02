@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Rinary <72972221+Rinary1@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Chat.Managers;
@@ -25,32 +16,32 @@ namespace Content.Goobstation.Server.StationEvents;
 public sealed class JobAddCollectiveMindRule : StationEventSystem<JobAddCollectiveMindRuleComponent>
 {
     [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
 
+    // TODO: delete this and add collective mind entity effect
     protected override void Started(EntityUid uid, JobAddCollectiveMindRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         var query = EntityQueryEnumerator<MindContainerComponent>();
         while (query.MoveNext(out var target, out var mindContainer))
         {
-            if (mindContainer.Mind == null)
+            if (mindContainer.Mind is not {} mind)
                 continue;
 
             foreach (var proto in component.Affected)
             {
-                if (_job.MindHasJobWithId(mindContainer.Mind, proto))
+                if (!_job.MindHasJobWithId(mind, proto))
+                    continue;
+
+                EnsureComp<CollectiveMindComponent>(target).Channels.Add(component.Channel);
+                if (component.Message != null &&
+                    TryComp<MindComponent>(mind, out var mindComp) &&
+                    _player.TryGetSessionById(mindComp.UserId, out var session))
                 {
-                    EnsureComp<CollectiveMindComponent>(target).Channels.Add(component.Channel);
-                    if (component.Message != null &&
-                        TryComp<MindComponent>(mindContainer.Mind, out var mind) &&
-                        _player.TryGetSessionById(mind.UserId, out var session))
-                    {
-                        var message = Loc.GetString("chat-manager-server-wrap-message", ("message", Loc.GetString(component.Message)));
-                        _chat.ChatMessageToOne(ChatChannel.Local, message, message, EntityUid.Invalid, false, session.Channel);
-                    }
-                    break;
+                    var message = Loc.GetString("chat-manager-server-wrap-message", ("message", Loc.GetString(component.Message)));
+                    _chat.ChatMessageToOne(ChatChannel.Local, message, message, EntityUid.Invalid, false, session.Channel);
                 }
+                break;
             }
         }
     }

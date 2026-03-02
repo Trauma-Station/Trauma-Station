@@ -1,22 +1,17 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.HisGrace;
 using Content.Goobstation.Shared.Overlays;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Server.Atmos.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
-using Content.Shared._Shitmed.Body.Components;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -472,7 +467,7 @@ public sealed class HisGraceSystem : SharedHisGraceSystem
 
         // don't apply bonuses for entities consumed that don't have minds or aren't human (no farming sentient mice)
         if (_mind.TryGetMind(target, out _, out _)
-            && HasComp<HumanoidAppearanceComponent>(target))
+            && HasComp<HumanoidProfileComponent>(target))
         {
             var ev = new HisGraceEntityConsumedEvent();
             RaiseLocalEvent(hisGrace, ref ev);

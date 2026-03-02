@@ -47,7 +47,7 @@ public sealed partial class HumanoidProfileEditor
             if (bark == Profile.BarkVoice)
                 selectedBarkId = i;
 
-            BarkVoiceButton.AddItem(Loc.GetString(bark.Name), i);
+            BarkVoiceButton.AddItem(bark.Name, i);
         }
 
         if (selectedBarkId == -1)

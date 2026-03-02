@@ -1,43 +1,38 @@
-using System.Linq;
 using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Medical.Common.Damage;
+using Content.Shared.FixedPoint;
 using Content.Shared._Goobstation.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared._Shitcode.Roles;
-using Content.Shared._Shitmed.Body;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Pain.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Events;
+using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Cuffs;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Emp;
+using Content.Shared.Ensnaring;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Heretic;
+using Content.Shared.Jaunt;
+using Content.Shared.Magic.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
-using Content.Shared.Roles;
-using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
@@ -45,8 +40,8 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._Shitcode.Heretic.Systems.Abilities;
 
@@ -55,17 +50,18 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly SharedDoAfterSystem DoAfter = default!;
     [Dependency] protected readonly EntityLookupSystem Lookup = default!;
     [Dependency] protected readonly StatusEffectsSystem Status = default!;
     [Dependency] protected readonly SharedVoidCurseSystem Voidcurse = default!;
+    [Dependency] protected readonly SharedHereticSystem Heretic = default!;
+    [Dependency] protected readonly StatusEffectNew.StatusEffectsSystem StatusNew = default!;
 
-    [Dependency] private readonly StatusEffectNew.StatusEffectsSystem _statusNew = default!;
     [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ThrowingSystem _throw = default!;
@@ -78,18 +74,18 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
-    [Dependency] private readonly TraumaSystem _trauma = default!;
-    [Dependency] private readonly PainSystem _pain = default!;
-    [Dependency] private readonly ConsciousnessSystem _consciousness = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedBloodstreamSystem _blood = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SharedEmpSystem _emp = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
+    [Dependency] private readonly SharedEnsnareableSystem _snare = default!;
+    [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
 
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
 
@@ -109,6 +105,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             {"Poison", 1},
             {"Radiation", 1},
             {"Cellular", 1},
+            {"Ion", 1},
             {"Holy", 1},
         },
     };
@@ -125,7 +122,15 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         SubscribeFlesh();
         SubscribeSide();
 
-        SubscribeLocalEvent<HereticComponent, EventHereticShadowCloak>(OnShadowCloak);
+        SubscribeLocalEvent<HereticActionComponent, BeforeCastSpellEvent>(OnBeforeCast);
+        SubscribeLocalEvent<HereticActionComponent, ActionAttemptEvent>(OnAttempt);
+        SubscribeLocalEvent<JauntComponent, HereticMagicCastAttemptEvent>(OnJauntMagicAttempt);
+    }
+
+    private void OnAttempt(Entity<HereticActionComponent> ent, ref ActionAttemptEvent args)
+    {
+        if (StatusNew.HasEffectComp<BlockHereticActionsStatusEffectComponent>(args.User))
+            args.Cancelled = true;
     }
 
     protected List<Entity<MobStateComponent>> GetNearbyPeople(EntityUid ent,
@@ -137,13 +142,12 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         var list = new List<Entity<MobStateComponent>>();
         var lookup = Lookup.GetEntitiesInRange<MobStateComponent>(coords ?? Transform(ent).Coordinates, range);
 
+        var ghoulQuery = GetEntityQuery<GhoulComponent>();
         foreach (var look in lookup)
         {
             // ignore heretics with the same path*, affect everyone else
-            if (TryComp<HereticComponent>(look, out var th) && th.CurrentPath == path || HasComp<GhoulComponent>(look))
-                continue;
-
-            if (!HasComp<StatusEffectsComponent>(look))
+            if (Heretic.TryGetHereticComponent(look.Owner, out var th, out _) && th.CurrentPath == path ||
+                ghoulQuery.HasComp(look))
                 continue;
 
             if (checkNullRod)
@@ -161,70 +165,63 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     }
 
 
-    private void OnShadowCloak(Entity<HereticComponent> ent, ref EventHereticShadowCloak args)
+    public bool TryUseAbility(BaseActionEvent args, bool handle = true)
     {
-        if (!TryComp(ent, out StatusEffectsComponent? status))
-            return;
-
-        if (TryComp(ent, out ShadowCloakedComponent? shadowCloaked))
-        {
-            Status.TryRemoveStatusEffect(ent, args.Status, status, false);
-            RemCompDeferred(ent.Owner, shadowCloaked);
+        if (args.Handled)
+            return false;
+        var ev = new BeforeCastSpellEvent(args.Performer);
+        RaiseLocalEvent(args.Action, ref ev);
+        var result = !ev.Cancelled;
+        if (result && handle)
             args.Handled = true;
-            return;
-        }
-
-        // TryUseAbility only if we are not cloaked so that we can uncloak without focus
-        // Ideally you should uncloak when losing focus but whatever
-        if (!TryUseAbility(ent, args))
-            return;
-
-        args.Handled = true;
-        Status.TryAddStatusEffect<ShadowCloakedComponent>(ent, args.Status, args.Lifetime, true, status);
+        return result;
     }
 
-    public bool TryUseAbility(EntityUid ent, BaseActionEvent args)
+    private void OnJauntMagicAttempt(Entity<JauntComponent> ent, ref HereticMagicCastAttemptEvent args)
     {
-        if (args.Handled
-        || HasComp<RustChargeComponent>(ent) // no abilities while charging
-        || !TryComp<HereticActionComponent>(args.Action, out var actionComp))
-            return false;
+        args.Cancelled = true;
+    }
 
-        // doesn't have any roles that allow heretic abilities
-        // this is mostly a barrier for idiots who want to transfer their brains into heretic bodies.
-        if (!_mind.TryGetMind(ent, out var mindId, out _) || !_role.MindHasRole<HereticRoleComponent>(mindId))
-            return false;
-
-        // check if any magic items are worn
-        if (!TryComp<HereticComponent>(ent, out var hereticComp)
-        || !actionComp.RequireMagicItem
-        || hereticComp.Ascended)
+    private void OnBeforeCast(Entity<HereticActionComponent> ent, ref BeforeCastSpellEvent args)
+    {
+        var attemptEv = new HereticMagicCastAttemptEvent(args.Performer, ent);
+        RaiseLocalEvent(args.Performer, ref attemptEv);
+        if (attemptEv.Cancelled)
         {
-            SpeakAbility(ent, actionComp);
-            return true;
+            args.Cancelled = true;
+            return;
         }
+
+        if (HasComp<GhoulComponent>(args.Performer) || HasComp<StarGazerComponent>(args.Performer))
+            return;
+
+        if (!Heretic.TryGetHereticComponent(args.Performer, out var heretic, out _))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (!ent.Comp.RequireMagicItem || heretic.Ascended)
+            return;
 
         var ev = new CheckMagicItemEvent();
-        RaiseLocalEvent(ent, ev);
+        RaiseLocalEvent(args.Performer, ev);
 
         if (ev.Handled)
-        {
-            SpeakAbility(ent, actionComp);
-            return true;
-        }
+            return;
 
         // Almost all of the abilites are serverside anyway
         if (_net.IsServer)
-            Popup.PopupEntity(Loc.GetString("heretic-ability-fail-magicitem"), ent, ent);
+            Popup.PopupEntity(Loc.GetString("heretic-ability-fail-magicitem"), args.Performer, args.Performer);
 
-        return false;
+        args.Cancelled = true;
     }
 
-    private EntityUid? GetTouchSpell<TEvent, TComp>(Entity<HereticComponent> ent, ref TEvent args)
+    private EntityUid? GetTouchSpell<TEvent, TComp>(EntityUid ent, ref TEvent args)
         where TEvent : InstantActionEvent, ITouchSpellEvent
         where TComp : Component
     {
-        if (!TryUseAbility(ent, args))
+        if (!TryUseAbility(args, false))
             return null;
 
         if (!TryComp(ent, out HandsComponent? hands) || hands.Hands.Count < 1)
@@ -288,16 +285,10 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     /// </summary>
     /// <param name="uid">Entity to heal</param>
     /// <param name="toHeal">how much to heal, null = full heal</param>
-    /// <param name="boneHeal">how much to heal bones, null = full heal</param>
-    /// <param name="painHeal">how much to heal pain, null = full heal</param>
-    /// <param name="woundHeal">how much to heal wounds, null = full heal</param>
     /// <param name="bloodHeal">how much to restore blood, null = fully restore</param>
     /// <param name="bleedHeal">how much to heal bleeding, null = full heal</param>
-    public void IHateWoundMed(Entity<DamageableComponent?, BodyComponent?, ConsciousnessComponent?> uid,
+    public void IHateWoundMed(Entity<DamageableComponent?, BodyComponent?> uid,
         DamageSpecifier? toHeal,
-        FixedPoint2? boneHeal,
-        FixedPoint2? painHeal,
-        FixedPoint2? woundHeal,
         FixedPoint2? bloodHeal,
         FixedPoint2? bleedHeal)
     {
@@ -322,97 +313,10 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             _mobThreshold.SetAllowRevives(uid, false, thresholds);
         }
 
-        if (Resolve(uid, ref uid.Comp2, false) && uid.Comp2.BodyType == BodyType.Complex && (boneHeal != FixedPoint2.Zero || woundHeal != FixedPoint2.Zero))
-        {
-            if (_body.TryGetRootPart(uid, out var rootPart, uid.Comp2))
-            {
-                foreach (var woundable in _wound.GetAllWoundableChildren(rootPart.Value))
-                {
-                    if (woundHeal != FixedPoint2.Zero)
-                    {
-                        _wound.TryHaltAllBleeding(woundable.Owner, woundable.Comp, true);
-                        if (woundHeal == null)
-                            _wound.ForceHealWoundsOnWoundable(woundable.Owner, out _, null, woundable.Comp);
-                        else
-                            _wound.TryHealWoundsOnWoundable(woundable.Owner, -woundHeal.Value, out _, woundable.Comp, null, true, true);
-                    }
-
-                    if (boneHeal == FixedPoint2.Zero)
-                        continue;
-
-                    if (woundable.Comp.Bone.ContainedEntities.FirstOrNull() is not { } bone ||
-                        !TryComp(bone, out BoneComponent? boneComp))
-                        continue;
-
-                    if (boneHeal != null)
-                        _trauma.ApplyDamageToBone(bone, boneHeal.Value, boneComp);
-                    else
-                        _trauma.SetBoneIntegrity(bone, boneComp.IntegrityCap, boneComp);
-                }
-            }
-        }
-
-        if (painHeal != FixedPoint2.Zero && Resolve(uid, ref uid.Comp3, false))
-        {
-            if (uid.Comp3.NerveSystem != default)
-            {
-                foreach (var painModifier in uid.Comp3.NerveSystem.Comp.Modifiers)
-                {
-                    if (painHeal != null && painModifier.Value.Change > -painHeal.Value)
-                    {
-                        // This reduces pain maybe, who the hell knows
-                        _pain.TryChangePainModifier(uid.Comp3.NerveSystem.Owner,
-                            painModifier.Key.Item1,
-                            painModifier.Key.Item2,
-                            painModifier.Value.Change + painHeal.Value,
-                            uid.Comp3.NerveSystem.Comp);
-                        continue;
-                    }
-
-                    _pain.TryRemovePainModifier(uid.Comp3.NerveSystem.Owner,
-                        painModifier.Key.Item1,
-                        painModifier.Key.Item2,
-                        uid.Comp3.NerveSystem.Comp);
-                }
-
-                foreach (var painMultiplier in uid.Comp3.NerveSystem.Comp.Multipliers)
-                {
-                    // Uhh... just fucking remove it, who cares
-                    _pain.TryRemovePainMultiplier(uid.Comp3.NerveSystem.Owner,
-                        painMultiplier.Key,
-                        uid.Comp3.NerveSystem.Comp);
-                }
-
-                foreach (var nerve in uid.Comp3.NerveSystem.Comp.Nerves)
-                {
-                    foreach (var painFeelsModifier in nerve.Value.PainFeelingModifiers)
-                    {
-                        // Idk what it does, just remove it
-                        _pain.TryRemovePainFeelsModifier(painFeelsModifier.Key.Item1,
-                            painFeelsModifier.Key.Item2,
-                            nerve.Key,
-                            nerve.Value);
-                    }
-                }
-            }
-
-            foreach (var multiplier in
-                     uid.Comp3.Multipliers.Where(multiplier => multiplier.Value.Type == ConsciousnessModType.Pain))
-            {
-                // Wtf is consciousness???
-                _consciousness.RemoveConsciousnessMultiplier(uid,
-                    multiplier.Key.Item1,
-                    multiplier.Key.Item2,
-                    uid.Comp3);
-            }
-
-            foreach (var modifier in
-                     uid.Comp3.Modifiers.Where(modifier => modifier.Value.Type == ConsciousnessModType.Pain))
-            {
-                // Read this method name
-                _consciousness.RemoveConsciousnessModifier(uid, modifier.Key.Item1, modifier.Key.Item2, uid.Comp3);
-            }
-        }
+        // im too lazy to update some unused shit to reduce pain by an arbitrary number (makes no fucking sense)
+        // have this shit instead
+        var painEv = new LifeStealHealEvent();
+        RaiseLocalEvent(uid, ref painEv);
 
         if (bleedHeal == FixedPoint2.Zero && bloodHeal == FixedPoint2.Zero ||
             !TryComp(uid, out BloodstreamComponent? blood))
@@ -442,10 +346,12 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         }
     }
 
-    public virtual void InvokeTouchSpell<T>(Entity<T> ent, EntityUid user) where T : Component, ITouchSpell
+    public virtual void InvokeTouchSpell<T>(Entity<T> ent, EntityUid user, TimeSpan? cooldownOverride = null)
+        where T : Component, ITouchSpell
     {
         _audio.PlayPredicted(ent.Comp.Sound, user, user);
-    }
 
-    protected virtual void SpeakAbility(EntityUid ent, HereticActionComponent args) { }
+        var ev = new UserInvokeTouchSpellEvent();
+        RaiseLocalEvent(user, ref ev);
+    }
 }

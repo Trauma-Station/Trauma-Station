@@ -1,0 +1,22 @@
+- type: entity
+  parent: OrganAnimalLungs
+  id: OrganRatLungs
+  suffix: Rat
+  components:
+  - type: Metabolizer
+    metabolizerTypes: [ Rat ]
+
+- type: entity
+  id: BaseMobRat
+  abstract: true
+  components:
+  - type: BodyCache # Shitmed
+  - type: Body
+  - type: InitialBody # Shitmed - replaced container fill
+    organs:
+      Torso: OrganAnimalTorso # Shitmed
+      Lungs: OrganRatLungs
+      Heart: OrganAnimalHeart
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys

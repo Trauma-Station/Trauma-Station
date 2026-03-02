@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
@@ -11,16 +13,23 @@ namespace Content.Goobstation.Shared.EntityEffects.Effects;
 public sealed partial class RandomSpeciesChange : EntityEffectBase<RandomSpeciesChange>
 {
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null;
+        => Loc.GetString("reagent-effect-guidebook-change-species-random");
 }
 
-public sealed class RandomSpeciesChangeEffectSystem : EntityEffectSystem<HumanoidAppearanceComponent, RandomSpeciesChange>
+public sealed class RandomSpeciesChangeEffectSystem : EntityEffectSystem<HumanoidProfileComponent, RandomSpeciesChange>
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedSpeciesChangeEffectSystem _speciesChange = default!;
 
-    private List<string> _species = new();
+    public static readonly HashSet<ProtoId<SpeciesPrototype>> SpeciesBlacklist = new()
+    {
+        "IPC",
+        "Shadowling", // no ontag
+        "Skeleton"
+    };
+
+    private List<ProtoId<SpeciesPrototype>> _species = new();
 
     public override void Initialize()
     {
@@ -31,7 +40,7 @@ public sealed class RandomSpeciesChangeEffectSystem : EntityEffectSystem<Humanoi
         LoadPrototypes();
     }
 
-    protected override void Effect(Entity<HumanoidAppearanceComponent> ent, ref EntityEffectEvent<RandomSpeciesChange> args)
+    protected override void Effect(Entity<HumanoidProfileComponent> ent, ref EntityEffectEvent<RandomSpeciesChange> args)
     {
         var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
         var rand = new System.Random(seed);
@@ -50,7 +59,9 @@ public sealed class RandomSpeciesChangeEffectSystem : EntityEffectSystem<Humanoi
         _species.Clear();
         foreach (var species in _proto.EnumeratePrototypes<SpeciesPrototype>())
         {
-            _species.Add(species.ID);
+            var id = new ProtoId<SpeciesPrototype>(species.ID);
+            if (!SpeciesBlacklist.Contains(id))
+                _species.Add(id);
         }
     }
 }

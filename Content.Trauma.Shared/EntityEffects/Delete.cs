@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 
@@ -17,6 +18,6 @@ public sealed class DeleteEffectSystem : EntityEffectSystem<MetaDataComponent, D
 {
     protected override void Effect(Entity<MetaDataComponent> ent, ref EntityEffectEvent<Delete> args)
     {
-        PredictedQueueDel(ent.AsNullable());
+        PredictedDel(ent.AsNullable());
     }
 }

@@ -146,9 +146,9 @@
     locked: false
 
 - type: entity
-  parent: [GlassBoxLaser, AlertLevelLock] # WWDP
+  parent: GlassBoxLaser
   id: GlassBoxLaserFilled
-  suffix: AntiqueLaser, Filled, Alert Level Lock # WWDP
+  suffix: AntiqueLaser, Filled, Alert Level Lock
   components:
   - type: ContainerFill
     containers:

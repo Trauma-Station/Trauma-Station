@@ -1,19 +1,12 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Flammability;
 using Content.Goobstation.Shared.Clothing.Components;
+using Content.Server.Heretic.EntitySystems;
 using Content.Shared.Atmos;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Heretic;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Jittering;
@@ -30,6 +23,7 @@ public sealed class MadnessMaskSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly HereticSystem _heretic = default!;
 
     public override void Initialize()
     {
@@ -43,7 +37,7 @@ public sealed class MadnessMaskSystem : EntitySystem
 
     private void OnUnequip(Entity<MadnessMaskComponent> ent, ref BeingUnequippedAttemptEvent args)
     {
-        if (IsHereticOrGhoul(args.Unequipee))
+        if (_heretic.IsHereticOrGhoul(args.Unequipee))
             return;
 
         if (TryComp<ClothingComponent>(ent, out var clothing) && (clothing.Slots & args.SlotFlags) == SlotFlags.NONE)
@@ -55,7 +49,7 @@ public sealed class MadnessMaskSystem : EntitySystem
     private void OnTemperatureChangeAttempt(Entity<MadnessMaskComponent> ent,
         ref InventoryRelayedEvent<ModifyChangedTemperatureEvent> args)
     {
-        if (!IsHereticOrGhoul(args.Args.Target))
+        if (!_heretic.IsHereticOrGhoul(args.Args.Target))
             return;
 
         if (args.Args.TemperatureDelta > 0)
@@ -64,7 +58,7 @@ public sealed class MadnessMaskSystem : EntitySystem
 
     private void OnGetProtection(Entity<MadnessMaskComponent> ent, ref InventoryRelayedEvent<GetFireProtectionEvent> args)
     {
-        if (!IsHereticOrGhoul(args.Args.Target) || HasComp<VeryFlammableComponent>(args.Args.Target))
+        if (!_heretic.IsHereticOrGhoul(args.Args.Target) || HasComp<VeryFlammableComponent>(args.Args.Target))
             return;
 
         args.Args.Multiplier = -10f; // Basically ignore fire AP
@@ -91,7 +85,7 @@ public sealed class MadnessMaskSystem : EntitySystem
             foreach (var look in lookup)
             {
                 // heathens exclusive
-                if (IsHereticOrGhoul(look))
+                if (_heretic.IsHereticOrGhoul(look))
                     continue;
 
                 if (HasComp<StaminaComponent>(look) && _random.Prob(.4f))
@@ -109,10 +103,5 @@ public sealed class MadnessMaskSystem : EntitySystem
                 }
             }
         }
-    }
-
-    private bool IsHereticOrGhoul(EntityUid uid)
-    {
-        return HasComp<HereticComponent>(uid) || HasComp<GhoulComponent>(uid);
     }
 }

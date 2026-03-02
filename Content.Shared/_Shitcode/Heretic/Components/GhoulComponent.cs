@@ -10,30 +10,31 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Maths.FixedPoint;
-using Content.Shared.StatusIcon;
+using Content.Shared.FixedPoint;
+using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Heretic;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class GhoulComponent : Component
 {
     /// <summary>
-    ///     Indicates who ghouled the entity.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid? BoundHeretic;
-
-    /// <summary>
     ///     Total health for ghouls.
     /// </summary>
-    [DataField] public FixedPoint2 TotalHealth = 50;
+    [DataField]
+    public FixedPoint2 TotalHealth = 50;
+
+    /// <summary>
+    /// Whether this ghoul can be unghoulified
+    /// </summary>
+    [DataField]
+    public bool CanDeconvert;
 
     [DataField]
-    public bool DropOrgansOnDeath = true;
+    public GhoulDeathBehavior DeathBehavior = GhoulDeathBehavior.GibOrgans;
 
     [DataField]
     public EntProtoId? SpawnOnDeathPrototype;
@@ -43,6 +44,9 @@ public sealed partial class GhoulComponent : Component
     /// </summary>
     [DataField]
     public bool GiveBlade;
+
+    [DataField]
+    public bool ChangeHumanoidProfile = true;
 
     [DataField]
     public LocId? ExamineMessage = "examine-system-cant-see-entity";
@@ -56,11 +60,6 @@ public sealed partial class GhoulComponent : Component
     [DataField]
     public SoundSpecifier? BladeDeleteSound = new SoundCollectionSpecifier("gib");
 
-    [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public ProtoId<FactionIconPrototype> MasterIcon { get; set; } = "GhoulHereticMaster";
-    [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public ProtoId<FactionIconPrototype> GhoulIcon { get; set; } = "GhoulFaction";
-
     [DataField]
     public LocId GhostRoleName = "ghostrole-ghoul-name";
 
@@ -69,4 +68,20 @@ public sealed partial class GhoulComponent : Component
 
     [DataField]
     public LocId GhostRoleRules = "ghostrole-ghoul-rules";
+
+    [DataField]
+    public Color? OldSkinColor;
+
+    [DataField]
+    public Color? OldEyeColor;
+
+    [DataField]
+    public HashSet<ProtoId<NpcFactionPrototype>> OldFactions = new();
+}
+
+public enum GhoulDeathBehavior : byte
+{
+    GibOrgans, // Gibs into organs
+    Gib, // Gibs without organs
+    NoGib, // Doesn't gib
 }

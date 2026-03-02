@@ -6,7 +6,7 @@
   name: chair
   id: RollingOfficeChairBase
   description: Scoot from desk to desk because standing is for interns.
-  parent: BaseVehicle
+  parent: BaseGroundVehicle
   abstract: true
   components:
   - type: Anchorable

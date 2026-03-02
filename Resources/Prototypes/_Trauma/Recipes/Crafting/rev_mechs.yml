@@ -9,3 +9,15 @@
     components:
     - HeadRevolutionary
     - Revolutionary
+
+- type: construction
+  id: PowerArmorFrame
+  graph: PowerArmorFrame
+  startNode: start
+  targetNode: Frame
+  category: construction-category-antagonist
+  objectType: Item
+  entityWhitelist:
+    components:
+    - HeadRevolutionary
+    - Revolutionary

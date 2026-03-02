@@ -1,16 +1,16 @@
 // <Trauma>
 using Content.Goobstation.Common.Silicons.Components;
 using Content.Goobstation.Shared.CustomLawboard;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Server._DV.CosmicCult;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Research.Systems;
 using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.Radio;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Research.Components;
 using Content.Shared.Silicons.StationAi;
-using Content.Shared.Tag;
 using Robust.Shared.Random;
 // </Trauma>
 using System.Linq;
@@ -23,6 +23,7 @@ using Content.Shared.Emag.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.Overlays;
 using Content.Shared.Radio.Components;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
@@ -41,7 +42,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 {
     // <Trauma>
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IonStormSystem _ionStorm = default!;
     [Dependency] private readonly ResearchSystem _research = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
@@ -54,6 +54,9 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
 
+    private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov";
+
+    /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
@@ -83,7 +86,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
         // Corvax-Next-AiRemoteControl-Start
         if (HasComp<AiRemoteControllerComponent>(uid)
-            || _tag.HasTag(uid, "StationAi")) // skip a law's notification for remotable and AI
+            || HasComp<StationAiCustomizationComponent>(uid)) // skip a law's notification for remotable and AI
             return;
         // Corvax-Next-AiRemoteControl-End
 
@@ -362,6 +365,11 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
         while (query.MoveNext(out var update))
         {
+            if (TryComp<ShowCrewIconsComponent>(update, out var crewIconComp))
+            {
+                crewIconComp.UncertainCrewBorder = DefaultCrewLawset != provider.Laws;
+                Dirty(update, crewIconComp);
+            }
             SetLaws(lawset, update, provider.LawUploadSound); // Trauma - lawset itself is a List now
 
             // Corvax-Next-AiRemoteControl-Start
@@ -372,6 +380,8 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
                 SetLaws(lawset, stationAiHeldComp.CurrentConnectedEntity.Value, provider.LawUploadSound);
             }
             // Corvax-Next-AiRemoteControl-End
+
+            RaiseLocalEvent(new AILawUpdatedEvent(update, provider.Laws)); // Trauma
         }
 
         ent.Comp.LastLawset = provider.Laws; // Goob

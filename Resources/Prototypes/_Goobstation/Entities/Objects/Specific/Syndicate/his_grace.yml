@@ -50,4 +50,3 @@
         enum.ToggleableVisuals.Layer:
           True: { visible: true }
           False: { visible: false }
-

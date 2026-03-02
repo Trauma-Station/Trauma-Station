@@ -1,0 +1,14 @@
+- type: listing
+  id: UplinkClusterGrenade
+  name: uplink-cluster-grenade-name
+  description: uplink-cluster-grenade-desc
+  productEntity: ClusterGrenade
+  cost:
+    Telecrystal: 22
+  categories:
+  - UplinkExplosives
+  conditions: # 11tc for nukies
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
@@ -98,7 +99,7 @@ public sealed class RelayNearbyEffectSystem : EntityEffectSystem<TransformCompon
                 continue;
 
             _data.CopyData(ent, uid);
-            _effects.TryApplyEffect(uid, relayed, args.Scale);
+            _effects.TryApplyEffect(uid, relayed, args.Scale, args.User);
             _data.ClearData(uid);
         }
     }

@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -17,7 +14,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.UIKit.UserInterface.Controls;
 
-internal struct CustomRichTextEntry
+public struct CustomRichTextEntry
 {
     public static readonly Type[] DefaultTags =
     [
@@ -298,7 +295,7 @@ internal struct CustomRichTextEntry
         DrawBoxContent(tagManager, handle, defaultFont, drawBox, verticalOffset, scrollBarPixelSize, context, uiScale, lineHeightScale);
     }
 
-    private UIBox2 DrawBoxContent(
+    private readonly UIBox2 DrawBoxContent(
         MarkupTagManager tagManager,
         DrawingHandleBase handle,
         Font defaultFont,

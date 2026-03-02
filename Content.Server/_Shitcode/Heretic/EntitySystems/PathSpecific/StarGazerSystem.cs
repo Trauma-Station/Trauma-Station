@@ -1,5 +1,7 @@
 using System.Linq;
 using System.Numerics;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Goobstation.Common.Physics;
 using Content.Server.Chat.Systems;
 using Content.Server.Ghost;
@@ -9,18 +11,17 @@ using Content.Server.Popups;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Body;
 using Content.Shared.Database;
 using Content.Shared.Heretic;
 using Content.Shared.Mind.Components;
-using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Throwing;
 using Robust.Server.Audio;
 using Robust.Server.GameStates;
@@ -43,6 +44,7 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly BodySystem _body = default!;
 
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedAdminLogManager _admin = default!;
@@ -55,9 +57,8 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
         SubscribeLocalEvent<LaserBeamEndpointComponent, ComponentShutdown>(OnShutdown);
 
         SubscribeLocalEvent<CosmosPassiveComponent, ResetStarGazerConsciousnessEvent>(OnReset);
-        SubscribeLocalEvent<CosmosPassiveComponent, ComponentShutdown>(OnPassiveShutdown);
-        SubscribeLocalEvent<CosmosPassiveComponent, MobStateChangedEvent>(OnMobStateChanged);
 
+        SubscribeLocalEvent<StarGazerComponent, HereticStateChangedEvent>(OnStateChanged);
         SubscribeLocalEvent<StarGazerComponent, StarGazerSeekMasterEvent>(OnSeekMaster);
         SubscribeLocalEvent<StarGazerComponent, TakeGhostRoleEvent>(OnTakeGhostRole,
             after: [typeof(GhostRoleSystem)]);
@@ -73,16 +74,18 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
 
     private void OnSeekMaster(Entity<StarGazerComponent> ent, ref StarGazerSeekMasterEvent args)
     {
-        if (!Exists(ent.Comp.Summoner))
+        if (!TryComp(ent, out HereticMinionComponent? minion) || !Exists(minion.BoundHeretic))
             return;
 
-        args.Handled = true;
 
-        TeleportStarGazer(ent, ent.Comp.Summoner);
+        args.Handled = TeleportStarGazer(ent, minion.BoundHeretic.Value);
     }
 
-    private void TeleportStarGazer(Entity<StarGazerComponent> ent, EntityUid target)
+    private bool TeleportStarGazer(Entity<StarGazerComponent> ent, EntityUid target)
     {
+        if (IsPaused(target))
+            return false;
+
         var xform = Transform(ent);
 
         _audio.PlayPvs(ent.Comp.TeleportSound, xform.Coordinates);
@@ -91,35 +94,26 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
         Xform.SetMapCoordinates((ent.Owner, xform), Xform.GetMapCoordinates(target));
         Spawn(ent.Comp.TeleportEffect, xform.Coordinates);
         _audio.PlayPvs(ent.Comp.TeleportSound, xform.Coordinates);
+        return true;
     }
 
-    private void OnMobStateChanged(Entity<CosmosPassiveComponent> ent, ref MobStateChangedEvent args)
+    private void OnStateChanged(Entity<StarGazerComponent> ent, ref HereticStateChangedEvent args)
     {
-        if (args.NewMobState == MobState.Dead)
+        if (!args.IsDead)
         {
-            if (!Exists(ent.Comp.StarGazer) || TerminatingOrDeleted(ent.Comp.StarGazer.Value))
-                return;
-
-            KillStarGazer(ent.Comp.StarGazer.Value);
+            RemCompDeferred<FadingTimedDespawnComponent>(ent);
+            Status.TryRemoveStatusEffect(ent, ent.Comp.InactiveStatus);
             return;
         }
 
-        if (args.NewMobState != MobState.Alive)
+        if (args.Temporary)
+        {
+            if (!Status.HasStatusEffect(ent, ent.Comp.InactiveStatus))
+                Status.TryAddStatusEffect(ent, ent.Comp.InactiveStatus, out _);
             return;
+        }
 
-        var starGazer = ResolveStarGazer((ent.Owner, null, ent.Comp), out _);
-        if (starGazer == null)
-            return;
-
-        RemCompDeferred<FadingTimedDespawnComponent>(starGazer.Value);
-    }
-
-    private void OnPassiveShutdown(Entity<CosmosPassiveComponent> ent, ref ComponentShutdown args)
-    {
-        if (!Exists(ent.Comp.StarGazer) || TerminatingOrDeleted(ent.Comp.StarGazer.Value))
-            return;
-
-        KillStarGazer(ent.Comp.StarGazer.Value);
+        KillStarGazer(ent);
     }
 
     private void KillStarGazer(EntityUid starGazer)
@@ -139,12 +133,15 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
             ent.Comp.ResettingMindSession,
             PopupType.LargeCaution);
 
-        _popup.PopupEntity(Loc.GetString("heretic-stargazer-consciousness-reset-user"),
-            ent.Comp.Summoner,
-            ent.Comp.Summoner,
-            PopupType.Large);
-
         ent.Comp.ResettingMindSession = null;
+
+        if (!TryComp(ent, out HereticMinionComponent? minion) || minion.BoundHeretic is not { } heretic)
+            return;
+
+        _popup.PopupEntity(Loc.GetString("heretic-stargazer-consciousness-reset-user"),
+            heretic,
+            heretic,
+            PopupType.Large);
     }
 
     private void OnReset(Entity<CosmosPassiveComponent> ent, ref ResetStarGazerConsciousnessEvent args)
@@ -186,6 +183,7 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
         var starGazeQuery = GetEntityQuery<StarGazeComponent>();
         var ghostRoleQuery = GetEntityQuery<GhostRoleComponent>();
         var actorQuery = GetEntityQuery<ActorComponent>();
+        var minionQuery = GetEntityQuery<HereticMinionComponent>();
 
         var query = EntityQueryEnumerator<StarGazerComponent, MindContainerComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var starGazer, out var mindContainer, out var xform))
@@ -195,33 +193,37 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
             var changedSession = resettingMind && (!actorQuery.TryComp(uid, out var actor) ||
                 actor.PlayerSession != starGazer.ResettingMindSession);
 
-            if (changedSession)
-                RemoveGhostRole((uid, starGazer), hasMind, resettingMind);
-            else if (hasMind && resettingMind && ghostRoleQuery.TryComp(uid, out var ghostRole))
-            {
-                starGazer.GhostRoleAccumulator += frameTime;
+            var minion = minionQuery.CompOrNull(uid);
 
-                if (starGazer.GhostRoleAccumulator > starGazer.GhostRoleTimer)
+            if (minion != null && Exists(minion.BoundHeretic))
+            {
+                if (changedSession)
+                    RemoveGhostRole((uid, starGazer), hasMind, resettingMind);
+                else if (hasMind && resettingMind &&  ghostRoleQuery.TryComp(uid, out var ghostRole))
                 {
-                    RemoveGhostRole((uid, starGazer, ghostRole), hasMind, resettingMind);
-                    _popup.PopupEntity(Loc.GetString("heretic-stargazer-consciousness-reset-fail"),
-                        starGazer.Summoner,
-                        starGazer.Summoner,
-                        PopupType.Large);
+                    starGazer.GhostRoleAccumulator += frameTime;
+
+                    if (starGazer.GhostRoleAccumulator > starGazer.GhostRoleTimer)
+                    {
+                        RemoveGhostRole((uid, starGazer, ghostRole), hasMind, resettingMind);
+                        _popup.PopupEntity(Loc.GetString("heretic-stargazer-consciousness-reset-fail"),
+                            minion.BoundHeretic.Value,
+                            minion.BoundHeretic.Value,
+                            PopupType.Large);
+                    }
                 }
-            }
-            else
-                RemoveGhostRole((uid, starGazer), hasMind, resettingMind);
+                else
+                    RemoveGhostRole((uid, starGazer), hasMind, resettingMind);
 
-            starGazer.ResetDistanceAccumulator += frameTime;
+                starGazer.ResetDistanceAccumulator += frameTime;
 
-            if (starGazer.ResetDistanceAccumulator > starGazer.ResetDistanceTimer)
-            {
-                starGazer.ResetDistanceAccumulator = 0f;
+                if (starGazer.ResetDistanceAccumulator > starGazer.ResetDistanceTimer)
+                {
+                    starGazer.ResetDistanceAccumulator = 0f;
 
-                if (Exists(starGazer.Summoner) &&
-                    !Xform.InRange((uid, xform), starGazer.Summoner, starGazer.MaxDistance))
-                    TeleportStarGazer((uid, starGazer), starGazer.Summoner);
+                    if (!Xform.InRange((uid, xform), minion.BoundHeretic.Value, starGazer.MaxDistance))
+                        TeleportStarGazer((uid, starGazer), minion.BoundHeretic.Value);
+                }
             }
 
             if (!starGazeQuery.TryComp(uid, out var starGaze))
@@ -357,7 +359,7 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
             var noobs = _lookup.GetEntitiesIntersecting(xform.MapID, boxRot, LookupFlags.Dynamic);
             foreach (var noob in noobs)
             {
-                if (noob == starGazer.Summoner)
+                if (noob == minion?.BoundHeretic)
                     continue;
 
                 if (!mobStateQuery.TryComp(noob, out var mobState))
@@ -388,9 +390,9 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
 
                 _mark.TryApplyStarMark((noob, mobState));
                 _dmg.TryChangeDamage(noob,
-                    starGaze.Damage,
+                    starGaze.Damage * _body.GetVitalBodyPartRatio(noob),
                     origin: uid,
-                    targetPart: TargetBodyPart.Vital,
+                    targetPart: TargetBodyPart.All,
                     splitDamage: SplitDamageBehavior.SplitEnsureAll);
 
                 if (_random.Prob(starGaze.ScreamProb))
@@ -401,7 +403,7 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
             var noobs2 = _lookup.GetEntitiesIntersecting(xform.MapID, boxRot2, LookupFlags.Dynamic);
             foreach (var noob in noobs2)
             {
-                if (noob == starGazer.Summoner)
+                if (noob == minion?.BoundHeretic)
                     continue;
 
                 if (!mobStateQuery.HasComp(noob))

@@ -1,4 +1,6 @@
-﻿using Content.Client.Alerts;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Client.Alerts;
 using Content.Client.UserInterface.Systems.Alerts.Controls;
 using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.LightDetection.Systems;

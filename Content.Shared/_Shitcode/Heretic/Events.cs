@@ -1,12 +1,7 @@
-using Content.Goobstation.Maths.FixedPoint;
-using Content.Shared.Body.Organ;
-using Content.Shared.Body.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Heretic;
-
-[ByRefEvent]
-public record struct GetBodyOrganOverrideEvent<T>(Entity<T, OrganComponent>? Organ) where T : IComponent;
 
 [ByRefEvent]
 public readonly record struct ConsumingFoodEvent(EntityUid Food, FixedPoint2 Volume);
@@ -15,4 +10,13 @@ public readonly record struct ConsumingFoodEvent(EntityUid Food, FixedPoint2 Vol
 public record struct ImmuneToPoisonDamageEvent(bool Immune = false);
 
 [ByRefEvent]
-public record struct ExcludeMetabolismGroupsEvent(EntityUid Metabolizer, List<ProtoId<MetabolismGroupPrototype>>? Groups = null);
+public readonly record struct SetGhoulBoundHereticEvent(EntityUid Heretic, EntityUid? Ritual);
+
+[ByRefEvent]
+public readonly record struct IncrementHereticObjectiveProgressEvent(EntProtoId Proto, int Amount = 1);
+
+[ByRefEvent]
+public readonly record struct SpawnHereticInfluenceEvent(EntProtoId Proto, int Amount = 1);
+
+[ByRefEvent]
+public readonly record struct UserInvokeTouchSpellEvent;

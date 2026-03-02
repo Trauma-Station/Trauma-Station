@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Abilities.Mime;
 using Content.Trauma.Common.Abilities.Mime;
 using Content.Trauma.Shared.EntityEffects;
@@ -24,6 +25,6 @@ public sealed class MimePunishmentSystem : EntitySystem
 
     private void OnBrokeVow(Entity<MimePowersComponent> ent, ref MimeBrokeVowEvent args)
     {
-        _nestedEffect.ApplyNestedEffect(ent, Punishments);
+        _nestedEffect.ApplyNestedEffect(ent, Punishments, user: ent.Owner);
     }
 }

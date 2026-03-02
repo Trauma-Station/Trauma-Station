@@ -313,9 +313,11 @@
     - state: durathread_3
       map: ["base"]
   - type: Appearance
-  - type: Construction
-    graph: Durathread
-    node: MaterialDurathread
+#<Trauma> - remove durathread craft
+#  - type: Construction
+#    graph: Durathread
+#    node: MaterialDurathread
+#</Trauma>
   - type: Edible
     requiresSpecialDigestion: true
   - type: SolutionContainerManager

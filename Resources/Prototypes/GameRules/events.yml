@@ -292,11 +292,9 @@
     # Goobstation start
     speciesOverride: Human
     speciesOverrideBlacklist:
-    - Yowie
     - IPC
     - Diona
     - Abductor
-    - Harpy
     - Plasmaman # EE
     # Goobstation end
   - type: AntagObjectives

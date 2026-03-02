@@ -9,12 +9,11 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Dataset;
 using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Content.Shared.Tag;
+using Content.Shared.Store;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -22,10 +21,11 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Heretic;
 
-// TODO: Move all of this to mind components, heretics should be safely polymorphable
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class HereticComponent : Component
 {
+    public override bool SessionSpecific => true;
+
     [DataField]
     public List<ProtoId<HereticKnowledgePrototype>> BaseKnowledge = new()
     {
@@ -35,21 +35,15 @@ public sealed partial class HereticComponent : Component
         "LivingHeart",
         "CodexCicatrix",
         "CloakOfShadow",
-        "Reminiscence",
         "FeastOfOwls",
+        "PhylacteryOfDamnation",
     };
 
-    [DataField]
-    public List<ProtoId<HereticKnowledgePrototype>> ResearchedKnowledge = new();
-
-    [DataField]
-    public List<EntityUid> ProvidedActions = new();
+    [DataField, AutoNetworkedField]
+    public List<EntityUid> Rituals = new();
 
     [DataField, AutoNetworkedField]
-    public List<ProtoId<HereticRitualPrototype>> KnownRituals = new();
-
-    [DataField]
-    public ProtoId<HereticRitualPrototype>? ChosenRitual;
+    public EntityUid? ChosenRitual;
 
     /// <summary>
     ///     Contains the list of targets that are eligible for sacrifice.
@@ -83,35 +77,11 @@ public sealed partial class HereticComponent : Component
     [DataField, AutoNetworkedField]
     public bool CanAscend = true;
 
-    [DataField]
-    public ProtoId<DatasetPrototype> KnowledgeDataset = "EligibleTags";
-
-    /// <summary>
-    ///     Required tags for ritual of knowledge
-    /// </summary>
-    [DataField(serverOnly: true), NonSerialized]
-    public HashSet<ProtoId<TagPrototype>> KnowledgeRequiredTags = new();
-
     /// <summary>
     ///     Used to prevent double casting mansus grasp.
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
-    public EntityUid MansusGrasp = EntityUid.Invalid;
-
-    [DataField]
-    public Dictionary<ProtoId<HereticRitualPrototype>, List<EntityUid>> LimitedTransmutations = new();
-
-    // Required for reminiscence, Path -> Blade ritual id
-    [DataField]
-    public Dictionary<string, ProtoId<HereticRitualPrototype>> Blades = new()
-    {
-        {"Ash", "BladeAsh"},
-        {"Blade", "BladeBlade"},
-        {"Flesh", "BladeFlesh"},
-        {"Void", "BladeVoid"},
-        {"Rust", "BladeRust"},
-        {"Cosmos", "BladeCosmos"},
-    };
+    public EntityUid MansusGraspAction = EntityUid.Invalid;
 
     [DataField]
     public SoundSpecifier? InfluenceGainSound = new SoundCollectionSpecifier("bloodCrawl");
@@ -151,6 +121,80 @@ public sealed partial class HereticComponent : Component
         "HereticSacrificeObjective",
         "HereticSacrificeHeadObjective",
     };
+
+    /// <summary>
+    /// Events raised when on new body when mind gets transferred to it
+    /// </summary>
+    [DataField, NonSerialized]
+    public List<HereticKnowledgeEvent> KnowledgeEvents = new();
+
+    /// <summary>
+    /// Minions summoned by this heretic
+    /// </summary>
+    [DataField]
+    public HashSet<EntityUid> Minions = new();
+
+    /// <summary>
+    /// How much drafts of <see cref="SideDraftChoiceAmount"/> side knowledge heretic currently has.
+    /// Side category -> draft amount
+    /// </summary>
+    [DataField]
+    public Dictionary<ProtoId<StoreCategoryPrototype>, int> SideKnowledgeDrafts = new()
+    {
+        { "HereticPathSideT1", 1 }, // 1 free draft of t1 side roundstart
+        { "HereticPathSideT2", 0 },
+        { "HereticPathSideT3", 0 },
+    };
+
+    [DataField]
+    public int SideDraftChoiceAmount = 3;
+
+    /// <summary>
+    /// After this amount of knowledge heretic loses their blade break ability
+    /// </summary>
+    [DataField]
+    public float LockBladeBreakKnowledgeAmount = 8f;
+
+    [DataField, AutoNetworkedField]
+    public float KnowledgeTracker;
+
+    [ViewVariables]
+    public bool CanBreakBlade => !Ascended && KnowledgeTracker < LockBladeBreakKnowledgeAmount;
+
+    [ViewVariables]
+    public bool ShouldShowAura => CurrentPath != "Lock" && (Ascended || CanAscend && !CanBreakBlade);
+
+    [DataField]
+    public LocId BreakBladeAbilityLostMessage = "heretic-blade-break-ability-lost-message";
+
+    [DataField]
+    public LocId AuraVisibleMessage = "heretic-aura-message";
+
+    [DataField]
+    public TimeSpan AuraDelayTime = TimeSpan.FromMinutes(1);
+
+    [DataField]
+    public EntProtoId HideAuraStatusEffect = "HideHereticAuraStatusEffect";
+
+    [DataField]
+    public int SacrificeTracker;
+
+    /// <summary>
+    /// Influences gradually spawn with increasing tier after sacrifices
+    /// <see cref="SacrificeTracker"/> tracks the amount
+    /// </summary>
+    [DataField]
+    public Dictionary<int, EntProtoId> InfluenceSpawnPerSacrificeAmount = new()
+    {
+        {1, "EldritchInfluenceT2"},
+        {2, "EldritchInfluenceT3"},
+    };
+
+    /// <summary>
+    /// Inactive means either dead or in jaunt
+    /// </summary>
+    [DataField]
+    public bool IsActive = true;
 }
 
 [DataDefinition, Serializable, NetSerializable]

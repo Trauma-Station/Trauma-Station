@@ -1,841 +1,829 @@
 Name: Traumalog
-Order: -1
+Order: -2
 Entries:
 - author: Durk
   changes:
-    - type: Remove
-      message: ERP
+  - type: Remove
+    message: ERP
   id: 1
   time: '1984-01-01T12:00:00.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: Slop
+  - type: Add
+    message: Slop
   id: 2
   time: '2025-10-06T22:40:15.0000000+00:00'
 - author: Aviu
   changes:
-    - type: Remove
-      message: Sprinting is no more.
+  - type: Remove
+    message: Sprinting is no more.
   id: 3
   time: '2025-10-07T13:30:44.0000000+00:00'
 - author: Aviu
   changes:
-    - type: Remove
-      message: Bookrevs.
-    - type: Remove
-      message: Rev language.
-    - type: Add
-      message: Flashrevs.
+  - type: Remove
+    message: Bookrevs.
+  - type: Remove
+    message: Rev language.
+  - type: Add
+    message: Flashrevs.
   id: 4
   time: '2025-10-07T17:37:41.0000000+00:00'
 - author: Aviu
   changes:
-    - type: Remove
-      message: Nuked height and width sliders
+  - type: Remove
+    message: Nuked height and width sliders
   id: 5
   time: '2025-10-07T17:37:47.0000000+00:00'
 - author: Aviu
   changes:
-    - type: Remove
-      message: Removed tider sickness.
+  - type: Remove
+    message: Removed tider sickness.
   id: 6
   time: '2025-10-07T17:41:34.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: 'Replaced Crewsimov with Asimov '
+  - type: Tweak
+    message: 'Replaced Crewsimov with Asimov '
   id: 7
   time: '2025-10-10T02:00:30.0000000+00:00'
 - author: BombasterDS2
   changes:
-    - type: Fix
-      message: Fixed propaganda pamphlet charge spending before conversion.
+  - type: Fix
+    message: Fixed propaganda pamphlet charge spending before conversion.
   id: 8
   time: '2025-10-10T18:11:12.0000000+00:00'
 - author: ReiderJack
   changes:
-    - type: Add
-      message: harvest for plantbot
+  - type: Add
+    message: harvest for plantbot
   id: 9
   time: '2025-10-11T04:20:29.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: Rev forge
-    - type: Add
-      message: Rev Printing Press
-    - type: Add
-      message: Rev Tellecomms becnh
-    - type: Add
-      message: Rev Tellecomms channel
-    - type: Add
-      message: Rev Deathgasp implant
-    - type: Add
-      message: Rev Telesphere
-    - type: Add
-      message: Rev drop pods
-    - type: Add
-      message: 5 rev melee weapons
-    - type: Add
-      message: rev caltrops
-    - type: Add
-      message: rev liberator pistol
-    - type: Add
-      message: rev 3d printer
-    - type: Add
-      message: rev turrets
-    - type: Add
-      message: rev IFF
-    - type: Add
-      message: rev armor
-    - type: Add
-      message: the grinning pals
+  - type: Add
+    message: Rev forge
+  - type: Add
+    message: Rev Printing Press
+  - type: Add
+    message: Rev Tellecomms becnh
+  - type: Add
+    message: Rev Tellecomms channel
+  - type: Add
+    message: Rev Deathgasp implant
+  - type: Add
+    message: Rev Telesphere
+  - type: Add
+    message: Rev drop pods
+  - type: Add
+    message: 5 rev melee weapons
+  - type: Add
+    message: rev caltrops
+  - type: Add
+    message: rev liberator pistol
+  - type: Add
+    message: rev 3d printer
+  - type: Add
+    message: rev turrets
+  - type: Add
+    message: rev IFF
+  - type: Add
+    message: rev armor
+  - type: Add
+    message: the grinning pals
   id: 10
   time: '2025-10-11T05:16:28.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: >-
-        Unfinished rev weapons now tell you the construction steps when
-        examined.
-    - type: Tweak
-      message: Rev gears and stuff can now be stacked.
-    - type: Tweak
-      message: >-
-        Rev machines actually need tools to make, you can't just summon it with
-        your mind in 5 seconds.
-    - type: Tweak
-      message: Rev chestplate is now normal sized instead of tiny.
+  - type: Tweak
+    message: Unfinished rev weapons now tell you the construction steps when examined.
+  - type: Tweak
+    message: Rev gears and stuff can now be stacked.
+  - type: Tweak
+    message: >-
+      Rev machines actually need tools to make, you can't just summon it with
+      your mind in 5 seconds.
+  - type: Tweak
+    message: Rev chestplate is now normal sized instead of tiny.
   id: 11
   time: '2025-10-11T16:22:28.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: Rev bullet press
-    - type: Add
-      message: Rev resistance gun
-    - type: Tweak
-      message: fix a bunch of bugs
+  - type: Add
+    message: Rev bullet press
+  - type: Add
+    message: Rev resistance gun
+  - type: Tweak
+    message: fix a bunch of bugs
   id: 12
   time: '2025-10-11T18:53:00.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Remove
-      message: Removed pain pending rework (goidaden reference)
+  - type: Remove
+    message: Removed pain pending rework (goidaden reference)
   id: 13
   time: '2025-10-11T20:55:26.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed slaughter demon popups being visible to everyone
+  - type: Fix
+    message: Fixed slaughter demon popups being visible to everyone
   id: 14
   time: '2025-10-12T08:26:21.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Changed rev machine cost from 30 to 5 steel.
-    - type: Tweak
-      message: Changed rev propaganda cost from 30 to 10 paper.
+  - type: Tweak
+    message: Changed rev machine cost from 30 to 5 steel.
+  - type: Tweak
+    message: Changed rev propaganda cost from 30 to 10 paper.
   id: 15
   time: '2025-10-12T08:33:55.0000000+00:00'
 - author: Speebro
   changes:
-    - type: Tweak
-      message: Max nukies is 5, but this doesn't affect buying reinforcements.
+  - type: Tweak
+    message: Max nukies is 5, but this doesn't affect buying reinforcements.
   id: 16
   time: '2025-10-13T01:56:02.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Buffed rev pitchfork to not be worse than a random tider spear.
+  - type: Tweak
+    message: Buffed rev pitchfork to not be worse than a random tider spear.
   id: 17
   time: '2025-10-13T18:50:50.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Changed contraband examine text for all rev items.
+  - type: Tweak
+    message: Changed contraband examine text for all rev items.
   id: 18
   time: '2025-10-13T18:50:57.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: Rev rocket launcher
-    - type: Add
-      message: Microelectronics Assembler
-    - type: Add
-      message: More bugfixes
-    - type: Add
-      message: More rev items to use
-    - type: Add
-      message: Made revs slightly faster
-    - type: Add
-      message: Temp way to craft paper
+  - type: Add
+    message: Rev rocket launcher
+  - type: Add
+    message: Microelectronics Assembler
+  - type: Add
+    message: More bugfixes
+  - type: Add
+    message: More rev items to use
+  - type: Add
+    message: Made revs slightly faster
+  - type: Add
+    message: Temp way to craft paper
   id: 19
   time: '2025-10-14T02:52:08.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: Mice now have an egg sack organ, steal their powers!
+  - type: Add
+    message: Mice now have an egg sack organ, steal their powers!
   id: 20
   time: '2025-10-14T07:12:55.0000000+00:00'
 - author: MayasMischief
   changes:
-    - type: Add
-      message: Added Spray Paint and compressed paint to loadout trinkets.
+  - type: Add
+    message: Added Spray Paint and compressed paint to loadout trinkets.
   id: 21
   time: '2025-10-14T18:55:04.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: Rev ID cards and doors now use their own access instead of syndicate.
+  - type: Add
+    message: Rev ID cards and doors now use their own access instead of syndicate.
   id: 22
   time: '2025-10-14T20:08:41.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed rev machines working when unanchored.
+  - type: Fix
+    message: Fixed rev machines working when unanchored.
   id: 23
   time: '2025-10-14T20:57:13.0000000+00:00'
 - author: JetstreamToaster
   changes:
-    - type: Remove
-      message: Poison to dionas from animal proteins are no more
+  - type: Remove
+    message: Poison to dionas from animal proteins are no more
   id: 24
   time: '2025-10-15T09:02:00.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Remove
-      message: Tail and catear style markings from humans.
+  - type: Remove
+    message: Tail and catear style markings from humans.
   id: 25
   time: '2025-10-16T23:20:22.0000000+00:00'
 - author: ImWeax
   changes:
-    - type: Add
-      message: Juice that kills people named John
+  - type: Add
+    message: Juice that kills people named John
   id: 26
   time: '2025-10-17T16:50:35.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Remove
-      message: Only CE and engiborgs get an RCD now.
+  - type: Remove
+    message: Only CE and engiborgs get an RCD now.
   id: 27
   time: '2025-10-17T16:51:40.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Renamed goobcoin to evilcoin.
+  - type: Tweak
+    message: Renamed goobcoin to evilcoin.
   id: 28
   time: '2025-10-17T17:04:02.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Surgical omnitools are no longer available 5 seconds into the round.
+  - type: Tweak
+    message: Surgical omnitools are no longer available 5 seconds into the round.
   id: 29
   time: '2025-10-17T17:53:32.0000000+00:00'
 - author: Aviu
   changes:
-    - type: Remove
-      message: Goodbye antag pity.
+  - type: Remove
+    message: Goodbye antag pity.
   id: 30
   time: '2025-10-18T13:23:25.0000000+00:00'
 - author: ARMOKS
   changes:
-    - type: Remove
-      message: Ventilator syndicate gun, its gimmick was useless
-    - type: Remove
-      message: Krav maga implant, its now warden only.
-    - type: Remove
-      message: >-
-        Big shotgun, does not match game vision, TTK too low to ever bring into
-        a proper place.
-    - type: Remove
-      message: Scram implant, replaced by teleporter
-    - type: Remove
-      message: Syndicate disabler, its job is done better by the telebaton
-    - type: Remove
-      message: Syndicate knuckle dusters, they are just stronger northstars
-    - type: Remove
-      message: Cat ears, no more being trolled in surplus crates.
-    - type: Tweak
-      message: Thermals and NVG now give flash weakness even if you have protection on
-    - type: Tweak
-      message: Syndicate teleporter made cheaper, its a better version of scram
+  - type: Remove
+    message: Ventilator syndicate gun, its gimmick was useless
+  - type: Remove
+    message: Krav maga implant, its now warden only.
+  - type: Remove
+    message: >-
+      Big shotgun, does not match game vision, TTK too low to ever bring into a
+      proper place.
+  - type: Remove
+    message: Scram implant, replaced by teleporter
+  - type: Remove
+    message: Syndicate disabler, its job is done better by the telebaton
+  - type: Remove
+    message: Syndicate knuckle dusters, they are just stronger northstars
+  - type: Remove
+    message: Cat ears, no more being trolled in surplus crates.
+  - type: Tweak
+    message: Thermals and NVG now give flash weakness even if you have protection on
+  - type: Tweak
+    message: Syndicate teleporter made cheaper, its a better version of scram
   id: 31
   time: '2025-10-18T18:26:00.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: Rev rocket crafting recipe
-    - type: Add
-      message: Rev rocket launcher crafting recipe
-    - type: Add
-      message: Rev uniform printer
-    - type: Add
-      message: Rev ball bearings, can be used to make improv grenades
-    - type: Add
-      message: >-
-        Guidebook section for making weird chem things like gunpowder and
-        plastic
-    - type: Add
-      message: Microelectronic Assembler crafting recipe
-    - type: Add
-      message: Made IEDS and Pipebombs not shit
-    - type: Add
-      message: Walls no longer die to bullets
-    - type: Add
-      message: Entire rev clothing set
-    - type: Add
-      message: Rev visor and earpiece
-    - type: Add
-      message: >-
-        Craftable rev helmets and vests, made with helmet liners and armor
-        plates
-    - type: Add
-      message: Nut, Bolt, and Gear sprites for bigger stacks.
-    - type: Tweak
-      message: RPG-2 slows you down while walking now
-    - type: Tweak
-      message: 'Some rev lathes made more expensive '
-    - type: Tweak
-      message: Basic rev parts made much cheaper
+  - type: Add
+    message: Rev rocket crafting recipe
+  - type: Add
+    message: Rev rocket launcher crafting recipe
+  - type: Add
+    message: Rev uniform printer
+  - type: Add
+    message: Rev ball bearings, can be used to make improv grenades
+  - type: Add
+    message: Guidebook section for making weird chem things like gunpowder and plastic
+  - type: Add
+    message: Microelectronic Assembler crafting recipe
+  - type: Add
+    message: Made IEDS and Pipebombs not shit
+  - type: Add
+    message: Walls no longer die to bullets
+  - type: Add
+    message: Entire rev clothing set
+  - type: Add
+    message: Rev visor and earpiece
+  - type: Add
+    message: Craftable rev helmets and vests, made with helmet liners and armor plates
+  - type: Add
+    message: Nut, Bolt, and Gear sprites for bigger stacks.
+  - type: Tweak
+    message: RPG-2 slows you down while walking now
+  - type: Tweak
+    message: 'Some rev lathes made more expensive '
+  - type: Tweak
+    message: Basic rev parts made much cheaper
   id: 32
   time: '2025-10-18T18:46:47.0000000+00:00'
 - author: ImWeax
   changes:
-    - type: Tweak
-      message: >-
-        You can now grind up cigarettes for their reagents. Inject pure nicotine
-        into your bloodstream.
+  - type: Tweak
+    message: >-
+      You can now grind up cigarettes for their reagents. Inject pure nicotine
+      into your bloodstream.
   id: 33
   time: '2025-10-18T18:55:38.0000000+00:00'
 - author: ShellKnight
   changes:
-    - type: Add
-      message: >-
-        Ported WDP's Alert Level Locks (Certain safes cannot be opened unless it
-        is red)
+  - type: Add
+    message: >-
+      Ported WDP's Alert Level Locks (Certain safes cannot be opened unless it
+      is red)
   id: 34
   time: '2025-10-18T18:59:07.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Remove
-      message: remove flash revs fuck you aviu
+  - type: Remove
+    message: remove flash revs fuck you aviu
   id: 35
   time: '2025-10-18T20:37:25.0000000+00:00'
 - author: ARMOKS
   changes:
-    - type: Fix
-      message: Fixed revs not being able to build a printing press.
+  - type: Fix
+    message: Fixed revs not being able to build a printing press.
   id: 36
   time: '2025-10-18T20:43:36.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed rev printing press gmod ERROR
+  - type: Fix
+    message: Fixed rev printing press gmod ERROR
   id: 37
   time: '2025-10-19T15:17:12.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Remove
-      message: Removed BSO.
+  - type: Remove
+    message: Removed BSO.
   id: 38
   time: '2025-10-19T16:27:21.0000000+00:00'
 - author: JoeHammad
   changes:
-    - type: Add
-      message: You can now wear the RPG2 on your back
-    - type: Tweak
-      message: RPG2 sprites are now 48x32, aka longer
+  - type: Add
+    message: You can now wear the RPG2 on your back
+  - type: Tweak
+    message: RPG2 sprites are now 48x32, aka longer
   id: 39
   time: '2025-10-20T04:10:17.0000000+00:00'
 - author: Lumminal
   changes:
-    - type: Tweak
-      message: Flashes only work directionally now.
+  - type: Tweak
+    message: Flashes only work directionally now.
   id: 40
   time: '2025-10-20T22:44:03.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: Replace Sec roundstart 80DPS pistol with a 32 DPS laser pistol
+  - type: Add
+    message: Replace Sec roundstart 80DPS pistol with a 32 DPS laser pistol
   id: 41
   time: '2025-10-21T00:21:01.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: The station has to be on blue alert for 10 minutes to unlock red alert.
-    - type: Tweak
-      message: >-
-        The station has to be on red alert or higher to order guns and combat
-        hardsuits.
-    - type: Tweak
-      message: >-
-        The station has to be on red alert or higher to build gygax/durand
-        mechs.
+  - type: Tweak
+    message: The station has to be on blue alert for 10 minutes to unlock red alert.
+  - type: Tweak
+    message: >-
+      The station has to be on red alert or higher to order guns and combat
+      hardsuits.
+  - type: Tweak
+    message: The station has to be on red alert or higher to build gygax/durand mechs.
   id: 42
   time: '2025-10-21T01:37:52.0000000+00:00'
 - author: Armok
   changes:
-    - type: Remove
-      message: Gygax and Durand bounty
+  - type: Remove
+    message: Gygax and Durand bounty
   id: 43
   time: '2025-10-21T01:40:40.0000000+00:00'
 - author: ARMOKS
   changes:
-    - type: Add
-      message: new lobby art
-    - type: Remove
-      message: Every lobby art
+  - type: Add
+    message: new lobby art
+  - type: Remove
+    message: Every lobby art
   id: 44
   time: '2025-10-21T02:24:31.0000000+00:00'
 - author: Armok
   changes:
-    - type: Remove
-      message: Some slop chems
+  - type: Remove
+    message: Some slop chems
   id: 45
   time: '2025-10-21T03:50:46.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: >-
-        Every grenade can be taken apart and put back together with each others
-        payloads / triggers.
-    - type: Add
-      message: >-
-        EMP, air, bee, cluster, clusterband, explosive, foam, holy, incendiary,
-        minibomb, nuclear, plasteel shrapnel, sarin gas, speaker, smoke,
-        stinger, supermatter, tear gas, and whitehole grenade payloads.
-    - type: Add
-      message: Whitehole, supermatter, silent, minibomb, and holy timers.
-    - type: Add
-      message: >-
-        you can put the new grenade payloads in landmines, or other grenade
-        shells
-    - type: Add
-      message: TONS of grenade shells
-    - type: Add
-      message: Crowbars take grenades apart.
-    - type: Add
-      message: you can put any bomb in plushies
-    - type: Add
-      message: bomb components can spawn in maints
+  - type: Add
+    message: >-
+      Every grenade can be taken apart and put back together with each others
+      payloads / triggers.
+  - type: Add
+    message: >-
+      EMP, air, bee, cluster, clusterband, explosive, foam, holy, incendiary,
+      minibomb, nuclear, plasteel shrapnel, sarin gas, speaker, smoke, stinger,
+      supermatter, tear gas, and whitehole grenade payloads.
+  - type: Add
+    message: Whitehole, supermatter, silent, minibomb, and holy timers.
+  - type: Add
+    message: you can put the new grenade payloads in landmines, or other grenade shells
+  - type: Add
+    message: TONS of grenade shells
+  - type: Add
+    message: Crowbars take grenades apart.
+  - type: Add
+    message: you can put any bomb in plushies
+  - type: Add
+    message: bomb components can spawn in maints
   id: 46
   time: '2025-10-21T04:28:43.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: Bigger fland maints
+  - type: Add
+    message: Bigger fland maints
   id: 47
   time: '2025-10-22T02:02:07.0000000+00:00'
 - author: Speebro
   changes:
-    - type: Add
-      message: >-
-        Tranquility now slowly increases while in your bloodstream, find a cure
-        before you turn...
+  - type: Add
+    message: >-
+      Tranquility now slowly increases while in your bloodstream, find a cure
+      before you turn...
   id: 48
   time: '2025-10-24T10:52:03.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Remove
-      message: Nutriment no longer provides minor healing.
-    - type: Tweak
-      message: Vitamin gained the healing lost from nutriment values.
+  - type: Remove
+    message: Nutriment no longer provides minor healing.
+  - type: Tweak
+    message: Vitamin gained the healing lost from nutriment values.
   id: 49
   time: '2025-10-24T21:19:14.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: Rev Tech Analyzer
-    - type: Add
-      message: Rev reflective armor
-    - type: Add
-      message: Updated fire sprites
-    - type: Add
-      message: Rev boots, with caltrop resist
-    - type: Add
-      message: A WHOLE REV FLAMETHROWER
-    - type: Add
-      message: Four four new rev datachips
-    - type: Add
-      message: Rev AI lawboard
-    - type: Add
-      message: Command pinpointer
-    - type: Add
-      message: Rev shieldripper
-    - type: Add
-      message: Rev fake mindshield
-    - type: Fix
-      message: Bugs
+  - type: Add
+    message: Rev Tech Analyzer
+  - type: Add
+    message: Rev reflective armor
+  - type: Add
+    message: Updated fire sprites
+  - type: Add
+    message: Rev boots, with caltrop resist
+  - type: Add
+    message: A WHOLE REV FLAMETHROWER
+  - type: Add
+    message: Four four new rev datachips
+  - type: Add
+    message: Rev AI lawboard
+  - type: Add
+    message: Command pinpointer
+  - type: Add
+    message: Rev shieldripper
+  - type: Add
+    message: Rev fake mindshield
+  - type: Fix
+    message: Bugs
   id: 50
   time: '2025-10-25T16:23:58.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: Salv now gets up to 100 evil coin if they actually mine.
+  - type: Add
+    message: Salv now gets up to 100 evil coin if they actually mine.
   id: 51
   time: '2025-10-26T11:32:24.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: >-
-        Re ported alert level locks for gun safes from white dream, no more
-        lecters on green.
+  - type: Add
+    message: >-
+      Re ported alert level locks for gun safes from white dream, no more
+      lecters on green.
   id: 52
   time: '2025-10-26T12:51:20.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: >-
-        Made rev endgame armor much stronger, it was worse than crew's free
-        roundstart gear.
-    - type: Tweak
-      message: >-
-        Changed rev endgame armor to have construction steps instead of a 30s
-        doafter.
+  - type: Tweak
+    message: >-
+      Made rev endgame armor much stronger, it was worse than crew's free
+      roundstart gear.
+  - type: Tweak
+    message: >-
+      Changed rev endgame armor to have construction steps instead of a 30s
+      doafter.
   id: 53
   time: '2025-10-26T13:47:00.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: >-
-        For abductor duos, the agent can now use gizmos as well, which he gets
-        instead of the scientist.
+  - type: Tweak
+    message: >-
+      For abductor duos, the agent can now use gizmos as well, which he gets
+      instead of the scientist.
   id: 54
   time: '2025-10-26T16:21:39.0000000+00:00'
 - author: rustdevelopment
   changes:
-    - type: Tweak
-      message: Changed default rat servant behavior from "Loose" to "Follow"
+  - type: Tweak
+    message: Changed default rat servant behavior from "Loose" to "Follow"
   id: 55
   time: '2025-10-27T20:13:14.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: Killdozer
-    - type: Add
-      message: Plasma Foundry
-    - type: Add
-      message: Flame armor
-    - type: Add
-      message: bunch more stuff I forgot
-    - type: Add
-      message: Insurgents for real this time?
+  - type: Add
+    message: Killdozer
+  - type: Add
+    message: Plasma Foundry
+  - type: Add
+    message: Flame armor
+  - type: Add
+    message: bunch more stuff I forgot
+  - type: Add
+    message: Insurgents for real this time?
   id: 56
   time: '2025-10-31T22:33:49.0000000+00:00'
 - author: ParadoxumOfficial
   changes:
-    - type: Tweak
-      message: Updated some Job Sprites.
+  - type: Tweak
+    message: Updated some Job Sprites.
   id: 57
   time: '2025-11-02T09:42:01.0000000+00:00'
 - author: ParadoxumOfficial
   changes:
-    - type: Tweak
-      message: Updated Material Sprites!
+  - type: Tweak
+    message: Updated Material Sprites!
   id: 58
   time: '2025-11-03T00:58:54.0000000+00:00'
 - author: ParadoxumOfficial
   changes:
-    - type: Tweak
-      message: Updated Wood Sprites
-    - type: Tweak
-      message: Updated Durathread Sprites
-    - type: Tweak
-      message: Updated Cloth Sprites
-    - type: Tweak
-      message: Updated Cotton Sprites
-    - type: Tweak
-      message: Updated Pyrotton Sprites
+  - type: Tweak
+    message: Updated Wood Sprites
+  - type: Tweak
+    message: Updated Durathread Sprites
+  - type: Tweak
+    message: Updated Cloth Sprites
+  - type: Tweak
+    message: Updated Cotton Sprites
+  - type: Tweak
+    message: Updated Pyrotton Sprites
   id: 59
   time: '2025-11-03T07:02:01.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: Added bugs, please report them on traumastation github.
-    - type: Remove
-      message: Removed anything burgers pending rework due to shitcode.
+  - type: Add
+    message: Added bugs, please report them on traumastation github.
+  - type: Remove
+    message: Removed anything burgers pending rework due to shitcode.
   id: 60
   time: '2025-11-03T10:46:20.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Remove
-      message: Removed DT-12 anti-structure firing mode.
+  - type: Remove
+    message: Removed DT-12 anti-structure firing mode.
   id: 61
   time: '2025-11-03T21:31:23.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Hardgrab and choking now pulls your victim in closer.
+  - type: Tweak
+    message: Hardgrab and choking now pulls your victim in closer.
   id: 62
   time: '2025-11-08T16:29:10.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: >-
-        CQC now has the Chokehold move to put someone to sleep, like Neck Snap
-        but disarm instead of punching.
+  - type: Add
+    message: >-
+      CQC now has the Chokehold move to put someone to sleep, like Neck Snap but
+      disarm instead of punching.
   id: 63
   time: '2025-11-08T16:48:42.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: Hos and Hop reinforcement callers
-    - type: Add
-      message: D-Class Personnel
-    - type: Remove
-      message: Lobby Guilt trip
+  - type: Add
+    message: Hos and Hop reinforcement callers
+  - type: Add
+    message: D-Class Personnel
+  - type: Remove
+    message: Lobby Guilt trip
   id: 64
   time: '2025-11-08T21:25:15.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed everything
+  - type: Fix
+    message: Fixed everything
   id: 65
   time: '2025-11-09T22:41:50.0000000+00:00'
 - author: Scribbles0
   changes:
-    - type: Add
-      message: >-
-        CBURN autocall when zombies reach 60% infected crew or blob reaches the
-        halfway point to its goal.
+  - type: Add
+    message: >-
+      CBURN autocall when zombies reach 60% infected crew or blob reaches the
+      halfway point to its goal.
   id: 66
   time: '2025-11-11T07:12:19.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: Added bugs from upstream.
+  - type: Add
+    message: Added bugs from upstream.
   id: 67
   time: '2025-11-12T15:04:59.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: >-
-        Added hypoports and secure hypoports which allow using hyposprays on
-        their owner.
-    - type: Add
-      message: Crew can enable the Hypoport trait for a free roundstart hypoport.
-    - type: Add
-      message: Nukies get nukie-locked secure hypoports by default.
-    - type: Tweak
-      message: Hyposprays now require the target to have a hypoport and be grabbed.
+  - type: Add
+    message: >-
+      Added hypoports and secure hypoports which allow using hyposprays on their
+      owner.
+  - type: Add
+    message: Crew can enable the Hypoport trait for a free roundstart hypoport.
+  - type: Add
+    message: Nukies get nukie-locked secure hypoports by default.
+  - type: Tweak
+    message: Hyposprays now require the target to have a hypoport and be grabbed.
   id: 68
   time: '2025-11-12T16:50:14.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: >-
-        You can now surgically put items in peoples groin cavity like with chest
-        cavity.
+  - type: Add
+    message: >-
+      You can now surgically put items in peoples groin cavity like with chest
+      cavity.
   id: 69
   time: '2025-11-13T15:08:37.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Abductors have much lower chaos score, so less chudshifts.
+  - type: Tweak
+    message: Abductors have much lower chaos score, so less chudshifts.
   id: 70
   time: '2025-11-14T18:01:03.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Remove
-      message: Removed sign language.
+  - type: Remove
+    message: Removed sign language.
   id: 71
   time: '2025-11-14T23:11:44.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: Added the old CQC box to traitor uplinks for 100TC.
+  - type: Add
+    message: Added the old CQC box to traitor uplinks for 100TC.
   id: 72
   time: '2025-11-14T23:13:05.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: winter coats are now consistently armor
+  - type: Fix
+    message: winter coats are now consistently armor
   id: 73
   time: '2025-11-15T11:18:05.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: >-
-        Fixed vulp beheading making everyone blackscreen, resuming beheading
-        vulps.
+  - type: Fix
+    message: >-
+      Fixed vulp beheading making everyone blackscreen, resuming beheading
+      vulps.
   id: 74
   time: '2025-11-15T18:13:22.0000000+00:00'
 - author: ParadoxumOfficial
   changes:
-    - type: Tweak
-      message: Updated Metal Textures.
+  - type: Tweak
+    message: Updated Metal Textures.
   id: 75
   time: '2025-11-16T01:47:53.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Remove
-      message: Removed AI vision from pAIs.
+  - type: Remove
+    message: Removed AI vision from pAIs.
   id: 76
   time: '2025-11-16T15:48:30.0000000+00:00'
 - author: MayasMischief
   changes:
-    - type: Add
-      message: >-
-        Bananadine bottles can now be grabbed by Botany from hacking their
-        vendor.
+  - type: Add
+    message: Bananadine bottles can now be grabbed by Botany from hacking their vendor.
   id: 77
   time: '2025-11-16T20:26:56.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed batong not having delayed knockdown.
+  - type: Fix
+    message: Fixed batong not having delayed knockdown.
   id: 78
   time: '2025-11-22T22:15:52.0000000+00:00'
 - author: Aviu
   changes:
-    - type: Add
-      message: Sound now gets muffled when passing through obstacles.
+  - type: Add
+    message: Sound now gets muffled when passing through obstacles.
   id: 79
   time: '2025-11-24T16:29:56.0000000+00:00'
 - author: armok
   changes:
-    - type: Tweak
-      message: Most armors made weaker
-    - type: Tweak
-      message: Many syndicate items made weaker.
+  - type: Tweak
+    message: Most armors made weaker
+  - type: Tweak
+    message: Many syndicate items made weaker.
   id: 80
   time: '2025-11-29T18:42:13.0000000+00:00'
 - author: Aviu
   changes:
-    - type: Fix
-      message: Fix audio muffle being shitty in some scenarios.
+  - type: Fix
+    message: Fix audio muffle being shitty in some scenarios.
   id: 81
   time: '2025-11-29T18:56:46.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Remove
-      message: Removed slot machine adhd slop.
-    - type: Remove
-      message: Removed wizard chud 2 wizcoin demonic heart.
-    - type: Remove
-      message: No heretic flesh path rework due to shitcode crimes.
+  - type: Remove
+    message: Removed slot machine adhd slop.
+  - type: Remove
+    message: Removed wizard chud 2 wizcoin demonic heart.
+  - type: Remove
+    message: No heretic flesh path rework due to shitcode crimes.
   id: 82
   time: '2025-11-30T01:37:40.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: >-
-        Bomb collars for insurgents, they are disabled and serve as a way to
-        identify.
-    - type: Fix
-      message: Guns hitting targets a tile after the target
+  - type: Add
+    message: >-
+      Bomb collars for insurgents, they are disabled and serve as a way to
+      identify.
+  - type: Fix
+    message: Guns hitting targets a tile after the target
   id: 83
   time: '2025-11-30T05:22:27.0000000+00:00'
 - author: Armok
   changes:
-    - type: Remove
-      message: Hos magnum
-    - type: Tweak
-      message: EMP implant is stronger
-    - type: Tweak
-      message: Laser rifles stronger, and tweaked for lasersec
-    - type: Tweak
-      message: Shivs hit faster but break after being used for a while.
-    - type: Tweak
-      message: >-
-        Improv spears damage standardized and they break after being used for a
-        while.
-    - type: Remove
-      message: 8 gauge printing
-    - type: Remove
-      message: brass knuckle crafting
-    - type: Remove
-      message: temperature gun and ion rifle printing
-    - type: Tweak
-      message: >-
-        Ammo and guns can only be printed on red alert, with the exception of
-        detective ammo
-    - type: Tweak
-      message: Ion rifle EMPS on hit
-    - type: Tweak
-      message: temp gun cannot be reflected
-    - type: Tweak
-      message: buff hardlight bow EMP effect
-    - type: Add
-      message: laser sec to fland for testing
-    - type: Tweak
-      message: armory safes are much stronger
-    - type: Fix
-      message: broken drop pods bug
-    - type: Tweak
-      message: laser sidearm DPS 13>10, capacity is doubled
-    - type: Tweak
-      message: new laser gun sprites
+  - type: Remove
+    message: Hos magnum
+  - type: Tweak
+    message: EMP implant is stronger
+  - type: Tweak
+    message: Laser rifles stronger, and tweaked for lasersec
+  - type: Tweak
+    message: Shivs hit faster but break after being used for a while.
+  - type: Tweak
+    message: >-
+      Improv spears damage standardized and they break after being used for a
+      while.
+  - type: Remove
+    message: 8 gauge printing
+  - type: Remove
+    message: brass knuckle crafting
+  - type: Remove
+    message: temperature gun and ion rifle printing
+  - type: Tweak
+    message: >-
+      Ammo and guns can only be printed on red alert, with the exception of
+      detective ammo
+  - type: Tweak
+    message: Ion rifle EMPS on hit
+  - type: Tweak
+    message: temp gun cannot be reflected
+  - type: Tweak
+    message: buff hardlight bow EMP effect
+  - type: Add
+    message: laser sec to fland for testing
+  - type: Tweak
+    message: armory safes are much stronger
+  - type: Fix
+    message: broken drop pods bug
+  - type: Tweak
+    message: laser sidearm DPS 13>10, capacity is doubled
+  - type: Tweak
+    message: new laser gun sprites
   id: 84
   time: '2025-11-30T05:46:57.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Tweak
-      message: >-
-        CQC removed from hitman bundle, replaced with capoeira an extra mag and
-        an energy dagger.
-    - type: Tweak
-      message: >-
-        Krav Maga implant removed from Cyberpsychosis bundle, replaced with fake
-        mindshield.
-    - type: Remove
-      message: BigBoxCQC 100TC crate.
+  - type: Tweak
+    message: >-
+      CQC removed from hitman bundle, replaced with capoeira an extra mag and an
+      energy dagger.
+  - type: Tweak
+    message: >-
+      Krav Maga implant removed from Cyberpsychosis bundle, replaced with fake
+      mindshield.
+  - type: Remove
+    message: BigBoxCQC 100TC crate.
   id: 85
   time: '2025-11-30T06:11:04.0000000+00:00'
 - author: Aviu
   changes:
-    - type: Add
-      message: Flesh heretic path rework.
+  - type: Add
+    message: Flesh heretic path rework.
   id: 86
   time: '2025-11-30T20:04:05.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Fix
-      message: Hivelord brood no longer attack other megafauna.
+  - type: Fix
+    message: Hivelord brood no longer attack other megafauna.
   id: 87
   time: '2025-11-30T22:23:50.0000000+00:00'
 - author: Santa
   changes:
-    - type: Add
-      message: More present anomalies, merry christmas.
+  - type: Add
+    message: More present anomalies, merry christmas.
   id: 88
   time: '2025-12-04T01:46:29.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Tweak
-      message: >-
-        Specified that the character description box, is for visually describing
-        your character. Failure to comply will lead to beatings.
+  - type: Tweak
+    message: >-
+      Specified that the character description box, is for visually describing
+      your character. Failure to comply will lead to beatings.
   id: 89
   time: '2025-12-04T18:52:05.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: >-
-        Fixed plasmamen traitors getting 5x more bribery because of unadjusted
-        uplink price.
+  - type: Fix
+    message: >-
+      Fixed plasmamen traitors getting 5x more bribery because of unadjusted
+      uplink price.
   id: 90
   time: '2025-12-09T20:00:27.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Tweak
-      message: Weldbot requires an experimental welder.
+  - type: Tweak
+    message: Weldbot requires an experimental welder.
   id: 91
   time: '2025-12-10T21:37:23.0000000+00:00'
 - author: GeneRickUsername
   changes:
-    - type: Add
-      message: Planet Analyzer
+  - type: Add
+    message: Planet Analyzer
   id: 92
   time: '2025-12-17T06:29:59.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Remove
-      message: Removed animal loadouts.
-    - type: Remove
-      message: Removed squackroach and goldfish.
+  - type: Remove
+    message: Removed animal loadouts.
+  - type: Remove
+    message: Removed squackroach and goldfish.
   id: 93
   time: '2025-12-18T11:26:17.0000000+00:00'
 - author: Added
@@ -848,8 +836,8 @@ Entries:
   time: '2025-12-19T09:15:43.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Remove
-      message: You can no longer play as oni or vulp.
+  - type: Remove
+    message: You can no longer play as oni or vulp.
   id: 96
   time: '2025-12-21T13:37:16.0000000+00:00'
 - author: Added Holy
@@ -858,68 +846,68 @@ Entries:
   time: '2025-12-21T13:39:14.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: Added pirate clothes to hacked autodrobes.
+  - type: Add
+    message: Added pirate clothes to hacked autodrobes.
   id: 98
   time: '2025-12-22T16:02:57.0000000+00:00'
 - author: Speebro
   changes:
-    - type: Add
-      message: >-
-        Ported Tryded's chemical explosives PR, adding three new explosives and
-        a long list of chemicals to make them!
-    - type: Tweak
-      message: >-
-        Formaldehyde's recipe is more difficult, to make creating the new
-        explosives harder
-    - type: Tweak
-      message: >-
-        In exchange, formaldehyde is ~60% longer lasting in corpses, and no
-        longer deals poison damage to the dead
+  - type: Add
+    message: >-
+      Ported Tryded's chemical explosives PR, adding three new explosives and a
+      long list of chemicals to make them!
+  - type: Tweak
+    message: >-
+      Formaldehyde's recipe is more difficult, to make creating the new
+      explosives harder
+  - type: Tweak
+    message: >-
+      In exchange, formaldehyde is ~60% longer lasting in corpses, and no longer
+      deals poison damage to the dead
   id: 99
   time: '2025-12-28T13:57:42.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Harpy flight no longer has any stamina interactions.
-    - type: Tweak
-      message: Botany can still mutate hyperzine and nocturine using mutagen.
-    - type: Tweak
-      message: All borgs still have their tool modules.
+  - type: Tweak
+    message: Harpy flight no longer has any stamina interactions.
+  - type: Tweak
+    message: Botany can still mutate hyperzine and nocturine using mutagen.
+  - type: Tweak
+    message: All borgs still have their tool modules.
   id: 100
   time: '2025-12-29T01:11:44.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: Added streamer mode for muting copyrighted audio.
+  - type: Add
+    message: Added streamer mode for muting copyrighted audio.
   id: 101
   time: '2025-12-29T15:52:06.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed kudzu spreading way too fast.
+  - type: Fix
+    message: Fixed kudzu spreading way too fast.
   id: 102
   time: '2025-12-29T18:06:11.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Tweak
-      message: Matchboxes can now only contain matches
-    - type: Tweak
-      message: Large Cigarette cartons can only store cigarette packs
-    - type: Tweak
-      message: Syringe Case can now only store syringes, medipens, and vials.
+  - type: Tweak
+    message: Matchboxes can now only contain matches
+  - type: Tweak
+    message: Large Cigarette cartons can only store cigarette packs
+  - type: Tweak
+    message: Syringe Case can now only store syringes, medipens, and vials.
   id: 103
   time: '2025-12-29T20:33:40.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed medborg surgery UI being buggy.
+  - type: Fix
+    message: Fixed medborg surgery UI being buggy.
   id: 104
   time: '2025-12-29T20:35:16.0000000+00:00'
 - author: GeneRickUsername
   changes:
-    - type: Fix
-      message: Fixed Shitcode that keeps light on when no fire active.
+  - type: Fix
+    message: Fixed Shitcode that keeps light on when no fire active.
   id: 105
   time: '2025-12-29T20:36:19.0000000+00:00'
 - author: Fixed Index
@@ -928,631 +916,2482 @@ Entries:
   time: '2025-12-29T20:37:48.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed not being able to use kammerer shotguns.
+  - type: Fix
+    message: Fixed not being able to use kammerer shotguns.
   id: 107
   time: '2025-12-29T23:52:47.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed modsuit power alert.
+  - type: Fix
+    message: Fixed modsuit power alert.
   id: 108
   time: '2025-12-30T04:49:08.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Made hardgrabs not laggy, they're fully predicted now.
+  - type: Tweak
+    message: Made hardgrabs not laggy, they're fully predicted now.
   id: 109
   time: '2025-12-31T19:28:33.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: >-
-        Fultons can be now be used on mobs directly, though it will you them
-        down.
-    - type: Tweak
-      message: Being fultoned while injured can now hurt you from the shock.
+  - type: Tweak
+    message: Fultons can be now be used on mobs directly, though it will you them down.
+  - type: Tweak
+    message: Being fultoned while injured can now hurt you from the shock.
   id: 110
   time: '2025-12-31T20:27:12.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Butchering with a cleaver is now 25% faster.
+  - type: Tweak
+    message: Butchering with a cleaver is now 25% faster.
   id: 111
   time: '2025-12-31T21:21:35.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Xenobio slimes can no longer become zombies.
+  - type: Tweak
+    message: Xenobio slimes can no longer become zombies.
   id: 112
   time: '2025-12-31T21:44:16.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Add
-      message: All butcherable humanoids now drop Bones.
-    - type: Add
-      message: Butchered dionas now drop wood.
+  - type: Add
+    message: All butcherable humanoids now drop Bones.
+  - type: Add
+    message: Butchered dionas now drop wood.
   id: 113
   time: '2025-12-31T22:29:53.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Remove
-      message: Removed ERP and herobrine.
+  - type: Remove
+    message: Removed ERP and herobrine.
   id: 114
   time: '2026-01-01T00:19:02.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Tweak
-      message: >-
-        Service Worker is now an intern role locked after 5 hours service
-        department playtime.
+  - type: Tweak
+    message: >-
+      Service Worker is now an intern role locked after 5 hours service
+      department playtime.
   id: 115
   time: '2026-01-01T16:00:47.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Remove
-      message: AI Scurret hologram
-    - type: Remove
-      message: Cargo Scurret purchase.
-    - type: Remove
-      message: Scurret posters no longer in legit poster spawntable.
-    - type: Tweak
-      message: Scurrets are now near impossible to pet.
+  - type: Remove
+    message: AI Scurret hologram
+  - type: Remove
+    message: Cargo Scurret purchase.
+  - type: Remove
+    message: Scurret posters no longer in legit poster spawntable.
+  - type: Tweak
+    message: Scurrets are now near impossible to pet.
   id: 116
   time: '2026-01-01T18:40:19.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Throwing is no longer affected by lag, it's all predicted now.
+  - type: Fix
+    message: Throwing is no longer affected by lag, it's all predicted now.
   id: 117
   time: '2026-01-02T01:33:15.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Plague mice now spawn from a random event instead of roundstart.
+  - type: Tweak
+    message: Plague mice now spawn from a random event instead of roundstart.
   id: 118
   time: '2026-01-02T17:58:22.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Guns are now predicted.
+  - type: Tweak
+    message: Guns are now predicted.
   id: 119
   time: '2026-01-03T03:58:35.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed laser guns.
+  - type: Fix
+    message: Fixed laser guns.
   id: 120
   time: '2026-01-03T22:02:18.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: Guns are now lag compensated.
+  - type: Add
+    message: Guns are now lag compensated.
   id: 121
   time: '2026-01-03T22:10:06.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed throwing rubber banding.
+  - type: Fix
+    message: Fixed throwing rubber banding.
   id: 122
   time: '2026-01-04T02:14:51.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Fix
-      message: >-
-        Station Radios respect their toggle/powered states on new music being
-        played.
+  - type: Fix
+    message: >-
+      Station Radios respect their toggle/powered states on new music being
+      played.
   id: 123
   time: '2026-01-04T04:52:35.0000000+00:00'
 - author: Nousagi37
   changes:
-    - type: Add
-      message: Radio host enabled on Loop
-    - type: Add
-      message: Xenobio added east of Science though maintenance on Loop
-    - type: Tweak
-      message: Armory Alert level safes standardized to match Fland
+  - type: Add
+    message: Radio host enabled on Loop
+  - type: Add
+    message: Xenobio added east of Science though maintenance on Loop
+  - type: Tweak
+    message: Armory Alert level safes standardized to match Fland
   id: 124
   time: '2026-01-04T20:53:55.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: You can now build wooden crosses to crucify people with.
+  - type: Add
+    message: You can now build wooden crosses to crucify people with.
   id: 125
   time: '2026-01-04T20:54:02.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: >-
-        Added softcrit, you can crawl around and whisper at 100 damage until you
-        hardcrit at 150 damage.
+  - type: Add
+    message: >-
+      Added softcrit, you can crawl around and whisper at 100 damage until you
+      hardcrit at 150 damage.
   id: 126
   time: '2026-01-05T02:43:28.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Tweak
-      message: >-
-        Adjusted contraband markings from items that are inconsistent. See PR
-        for full details.
+  - type: Tweak
+    message: >-
+      Adjusted contraband markings from items that are inconsistent. See PR for
+      full details.
   id: 127
   time: '2026-01-05T23:03:36.0000000+00:00'
 - author: GoidaYAMLWarrior
   changes:
-    - type: Add
-      message: Added billy club, a sidegrade to the baton locked behind research.
-    - type: Tweak
-      message: Judo users can no longer shoot disablers.
+  - type: Add
+    message: Added billy club, a sidegrade to the baton locked behind research.
+  - type: Tweak
+    message: Judo users can no longer shoot disablers.
   id: 128
   time: '2026-01-06T22:25:19.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Remove
-      message: No jet injectors, meaningless quirky syringe.
-    - type: Remove
-      message: 'Removed examine showing in chat due to insane shitcode. '
+  - type: Remove
+    message: No jet injectors, meaningless quirky syringe.
+  - type: Remove
+    message: 'Removed examine showing in chat due to insane shitcode. '
   id: 129
   time: '2026-01-07T12:55:16.0000000+00:00'
 - author: Nousagi37
   changes:
-    - type: Add
-      message: Added Radio Host to Fland
-    - type: Add
-      message: Added Reporter to Fland
-    - type: Add
-      message: Added Xenobio to Fland
+  - type: Add
+    message: Added Radio Host to Fland
+  - type: Add
+    message: Added Reporter to Fland
+  - type: Add
+    message: Added Xenobio to Fland
   id: 130
   time: '2026-01-08T15:01:37.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Missing a shove still does the effect where you clicked anyway.
+  - type: Tweak
+    message: Missing a shove still does the effect where you clicked anyway.
   id: 131
   time: '2026-01-08T15:54:35.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: Added wizden mail.
-    - type: Remove
-      message: Removed stinky nyano mail.
+  - type: Add
+    message: Added wizden mail.
+  - type: Remove
+    message: Removed stinky nyano mail.
   id: 132
   time: '2026-01-08T16:46:47.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: >-
-        Added mothmaggots which can now burrow into peoples' chests to mature
-        into mothroaches.
+  - type: Add
+    message: >-
+      Added mothmaggots which can now burrow into peoples' chests to mature into
+      mothroaches.
   id: 133
   time: '2026-01-09T10:13:29.0000000+00:00'
 - author: JohnJJohn
   changes:
-    - type: Tweak
-      message: Changed the lights back to LightTube instead of LED's
-    - type: Tweak
-      message: Changed the plating texture
+  - type: Tweak
+    message: Changed the lights back to LightTube instead of LED's
+  - type: Tweak
+    message: Changed the plating texture
   id: 134
   time: '2026-01-09T15:39:41.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Tweak
-      message: Rosary can now be worn as a necklace
-    - type: Tweak
-      message: Arrythmic knife is smaller
-    - type: Tweak
-      message: Monkstaff can be stored in suitstorage slot.
-    - type: Tweak
-      message: 'Bulwark can now reflect magic when in bagslot. '
-    - type: Fix
-      message: Casul and Jackal pistols reverted to hellsing themed sprites.
-    - type: Remove
-      message: Ratvar spear can no longer be stored in beltslot.
+  - type: Tweak
+    message: Rosary can now be worn as a necklace
+  - type: Tweak
+    message: Arrythmic knife is smaller
+  - type: Tweak
+    message: Monkstaff can be stored in suitstorage slot.
+  - type: Tweak
+    message: 'Bulwark can now reflect magic when in bagslot. '
+  - type: Fix
+    message: Casul and Jackal pistols reverted to hellsing themed sprites.
+  - type: Remove
+    message: Ratvar spear can no longer be stored in beltslot.
   id: 135
   time: '2026-01-09T16:02:15.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed russian shitcode examining.
+  - type: Fix
+    message: Fixed russian shitcode examining.
   id: 136
   time: '2026-01-09T20:15:52.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed cigars/cigarettes not being usable as a cautery in surgery.
+  - type: Fix
+    message: Fixed cigars/cigarettes not being usable as a cautery in surgery.
   id: 137
   time: '2026-01-10T11:57:19.0000000+00:00'
 - author: JohnJJohn
   changes:
-    - type: Tweak
-      message: Changed all the xenomorph sprites to be from CM-13
-    - type: Tweak
-      message: >-
-        Changed it so facehuggers are a ghost role and need to be controlled by
-        a player to latch onto people
+  - type: Tweak
+    message: Changed all the xenomorph sprites to be from CM-13
+  - type: Tweak
+    message: >-
+      Changed it so facehuggers are a ghost role and need to be controlled by a
+      player to latch onto people
   id: 138
   time: '2026-01-10T13:32:27.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: Reimplemented Felinid mutation toxin to give anything cat ears and tail.
+  - type: Add
+    message: Reimplemented Felinid mutation toxin to give anything cat ears and tail.
   id: 139
   time: '2026-01-10T14:34:18.0000000+00:00'
 - author: Jackgoob14
   changes:
-    - type: Remove
-      message: Removed insulated gloves from EngiVend and YouTool.
-    - type: Remove
-      message: Removed armor vests from BarDrobe.
+  - type: Remove
+    message: Removed insulated gloves from EngiVend and YouTool.
+  - type: Remove
+    message: Removed armor vests from BarDrobe.
   id: 140
   time: '2026-01-11T04:52:16.0000000+00:00'
 - author: JohnJJohn
   changes:
-    - type: Add
-      message: Added ButtBot
-    - type: Add
-      message: Added DuckBot
-    - type: Add
-      message: Added BoogieBot
-    - type: Tweak
-      message: You can now wear butts as hats
+  - type: Add
+    message: Added ButtBot
+  - type: Add
+    message: Added DuckBot
+  - type: Add
+    message: Added BoogieBot
+  - type: Tweak
+    message: You can now wear butts as hats
   id: 141
   time: '2026-01-11T15:16:24.0000000+00:00'
 - author: JohnJJohn
   changes:
-    - type: Add
-      message: >-
-        Added new reagent, NanoMachines, turns people into cyborgs when enough
-        is consumed
+  - type: Add
+    message: >-
+      Added new reagent, NanoMachines, turns people into cyborgs when enough is
+      consumed
   id: 142
   time: '2026-01-12T02:25:03.0000000+00:00'
 - author: Nousagi37
   changes:
-    - type: Remove
-      message: Removed extra SecTechFab on Fland
+  - type: Remove
+    message: Removed extra SecTechFab on Fland
   id: 143
   time: '2026-01-12T03:19:53.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: 'Food now rots into slop if left out of refrigeration '
-    - type: Add
-      message: >-
-        Slop will rot away, deleting excess entities, it has a chance to spawn a
-        roach when rotted.
-    - type: Fix
-      message: Roaches no longer randomly die and are poison immune.
-    - type: Fix
-      message: Roaches go around and eat other food, clearing up more entities.
+  - type: Add
+    message: 'Food now rots into slop if left out of refrigeration '
+  - type: Add
+    message: >-
+      Slop will rot away, deleting excess entities, it has a chance to spawn a
+      roach when rotted.
+  - type: Fix
+    message: Roaches no longer randomly die and are poison immune.
+  - type: Fix
+    message: Roaches go around and eat other food, clearing up more entities.
   id: 144
   time: '2026-01-12T04:56:55.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed bodypart health examine.
+  - type: Fix
+    message: Fixed bodypart health examine.
   id: 145
   time: '2026-01-12T05:56:06.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: >-
-        Fixed being able to buckle yourself or use some actions while in
-        softcrit.
+  - type: Fix
+    message: Fixed being able to buckle yourself or use some actions while in softcrit.
   id: 146
   time: '2026-01-12T07:21:22.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: >-
-        Fixed reinforcement callers and NTRs briefcase having wrong cooldowns on
-        items.
+  - type: Fix
+    message: >-
+      Fixed reinforcement callers and NTRs briefcase having wrong cooldowns on
+      items.
   id: 147
   time: '2026-01-12T09:26:18.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: >-
-        Chefs can only use CQC inside the kitchen areas now, not just around
-        their spawnpoints.
+  - type: Tweak
+    message: >-
+      Chefs can only use CQC inside the kitchen areas now, not just around their
+      spawnpoints.
   id: 148
   time: '2026-01-12T09:59:41.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: >-
-        You can now breathe in softcrit at 30% efficiency. Give people internals
-        to keep them alive longer.
+  - type: Tweak
+    message: >-
+      You can now breathe in softcrit at 30% efficiency. Give people internals
+      to keep them alive longer.
   id: 149
   time: '2026-01-12T11:14:42.0000000+00:00'
 - author: Aviu
   changes:
-    - type: Add
-      message: >-
-        Added hair color gradients. Check markings tab in character creator
-        (Hair/Facial Hair Special) to apply them.
+  - type: Add
+    message: >-
+      Added hair color gradients. Check markings tab in character creator
+      (Hair/Facial Hair Special) to apply them.
   id: 150
   time: '2026-01-12T12:47:11.0000000+00:00'
 - author: ciaran
   changes:
-    - type: Add
-      message: >-
-        other people still touching a body when a defib is used will be shocked
-        too
+  - type: Add
+    message: >-
+      other people still touching a body when a defib is used will be shocked
+      too
   id: 151
   time: '2026-01-12T14:55:58.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Re-enabled Leonid station, redid its armory.
+  - type: Tweak
+    message: Re-enabled Leonid station, redid its armory.
   id: 152
   time: '2026-01-12T16:25:48.0000000+00:00'
 - author: JohnJJohn
   changes:
-    - type: Add
-      message: Added facehuggers can now jump
+  - type: Add
+    message: Added facehuggers can now jump
   id: 153
   time: '2026-01-12T20:08:45.0000000+00:00'
 - author: Armok
   changes:
-    - type: Tweak
-      message: Vending machines give you cancer
+  - type: Tweak
+    message: Vending machines give you cancer
   id: 154
   time: '2026-01-12T21:53:12.0000000+00:00'
 - author: Nousagi37
   changes:
-    - type: Add
-      message: Cog has been localized with Trauma content.
-    - type: Tweak
-      message: >-
-        Cog botany has been moved above Kitchen, and bigger maintenance in the
-        place of old botany
-    - type: Tweak
-      message: Medical maintenance is a bit bigger
-    - type: Tweak
-      message: Xenobio now has a freezer and a biomass reclaimer.
+  - type: Add
+    message: Cog has been localized with Trauma content.
+  - type: Tweak
+    message: >-
+      Cog botany has been moved above Kitchen, and bigger maintenance in the
+      place of old botany
+  - type: Tweak
+    message: Medical maintenance is a bit bigger
+  - type: Tweak
+    message: Xenobio now has a freezer and a biomass reclaimer.
   id: 155
   time: '2026-01-13T07:25:57.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed some xenobio extracts not doing anything.
-    - type: Fix
-      message: Fixed engiborgs not being able to pick up steel.
+  - type: Fix
+    message: Fixed some xenobio extracts not doing anything.
+  - type: Fix
+    message: Fixed engiborgs not being able to pick up steel.
   id: 156
   time: '2026-01-13T08:16:48.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: >-
-        Chef now makes organic chocolate and popcorn, vending machine versions
-        are slop.
-    - type: Fix
-      message: Fixed some vending machine snacks being healthy when they shouldn't.
+  - type: Tweak
+    message: >-
+      Chef now makes organic chocolate and popcorn, vending machine versions are
+      slop.
+  - type: Fix
+    message: Fixed some vending machine snacks being healthy when they shouldn't.
   id: 157
   time: '2026-01-13T09:10:55.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: CQC still has ripostee. 🥚
-    - type: Tweak
-      message: Ghost bar still exists. 🥚
+  - type: Tweak
+    message: CQC still has ripostee. 🥚
+  - type: Tweak
+    message: Ghost bar still exists. 🥚
   id: 158
   time: '2026-01-13T14:24:47.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Updated and re-enabled Bagel Station.
+  - type: Tweak
+    message: Updated and re-enabled Bagel Station.
   id: 159
   time: '2026-01-13T18:07:36.0000000+00:00'
 - author: Joel
   changes:
-    - type: Add
-      message: 4 new lobby arts
+  - type: Add
+    message: 4 new lobby arts
   id: 160
   time: '2026-01-13T22:08:57.0000000+00:00'
 - author: SpeltIncorrectyl
   changes:
-    - type: Tweak
-      message: Security sidearm now goes red when set to lethal mode.
+  - type: Tweak
+    message: Security sidearm now goes red when set to lethal mode.
   id: 161
   time: '2026-01-13T22:11:02.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: Grey slime extract makes slime food instead of monkies to reduce lag.
+  - type: Add
+    message: Grey slime extract makes slime food instead of monkies to reduce lag.
   id: 162
   time: '2026-01-13T23:56:23.0000000+00:00'
 - author: Armok
   changes:
-    - type: Add
-      message: >-
-        Egg cartons, donut boxes, pizza boxes, food carts, and plant bags all
-        prevent food rot.
-    - type: Tweak
-      message: Blob mobs can move in zero-G
-    - type: Fix
-      message: blob mobs can heal poison, genetic, and radiation damage.
+  - type: Add
+    message: >-
+      Egg cartons, donut boxes, pizza boxes, food carts, and plant bags all
+      prevent food rot.
+  - type: Tweak
+    message: Blob mobs can move in zero-G
+  - type: Fix
+    message: blob mobs can heal poison, genetic, and radiation damage.
   id: 163
   time: '2026-01-14T00:37:08.0000000+00:00'
 - author: Nousagi37
   changes:
-    - type: Tweak
-      message: >-
-        Updated Box with localized content, and re-enabled it back in the map
-        pool.
+  - type: Tweak
+    message: >-
+      Updated Box with localized content, and re-enabled it back in the map
+      pool.
   id: 164
   time: '2026-01-14T08:40:37.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: >-
-        Harmpack will double crawl speed, losing all your hands still lets you
-        crawl at 10% speed.
-    - type: Tweak
-      message: >-
-        Crawling with items in your hands now scales based off item size instead
-        of preventing you from moving entirely.
+  - type: Tweak
+    message: >-
+      Harmpack will double crawl speed, losing all your hands still lets you
+      crawl at 10% speed.
+  - type: Tweak
+    message: >-
+      Crawling with items in your hands now scales based off item size instead
+      of preventing you from moving entirely.
   id: 165
   time: '2026-01-14T18:30:39.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed hyposprays.
+  - type: Fix
+    message: Fixed hyposprays.
   id: 166
   time: '2026-01-14T22:26:35.0000000+00:00'
 - author: MayasMischief
   changes:
-    - type: Fix
-      message: >-
-        The forged knife can now be used for slicing, and also the sword too I
-        guess.
-    - type: Remove
-      message: Removed BSO
+  - type: Fix
+    message: >-
+      The forged knife can now be used for slicing, and also the sword too I
+      guess.
+  - type: Remove
+    message: Removed BSO
   id: 167
   time: '2026-01-15T08:36:02.0000000+00:00'
 - author: JohnJJohn
   changes:
-    - type: Add
-      message: Added ED-209, beepskys bigger brother
+  - type: Add
+    message: Added ED-209, beepskys bigger brother
   id: 168
   time: '2026-01-15T19:03:07.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Fix
-      message: Pentenic Acid no longer purges itself from your bloodstream.
+  - type: Fix
+    message: Pentenic Acid no longer purges itself from your bloodstream.
   id: 169
   time: '2026-01-15T19:10:58.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Fix
-      message: >-
-        Musiver, EldritchEssence, and Mugwort no longer purge themselves when
-        used.
+  - type: Fix
+    message: >-
+      Musiver, EldritchEssence, and Mugwort no longer purge themselves when
+      used.
   id: 170
   time: '2026-01-15T19:29:59.0000000+00:00'
 - author: Nousagi37
   changes:
-    - type: Tweak
-      message: >-
-        Updated Marathon with localized content, and re-enabled it back in the
-        map pool.
+  - type: Tweak
+    message: >-
+      Updated Marathon with localized content, and re-enabled it back in the map
+      pool.
   id: 171
   time: '2026-01-15T19:45:47.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: >-
-        Changed department economy so that heads approve their departments
-        orders, not cargo approving everyone's orders.
+  - type: Tweak
+    message: >-
+      Changed department economy so that heads approve their departments orders,
+      not cargo approving everyone's orders.
   id: 172
   time: '2026-01-15T19:49:19.0000000+00:00'
 - author: JohnJJohn
   changes:
-    - type: Fix
-      message: Fixed borg sprites displaying errors sometimes (hopefully)
+  - type: Fix
+    message: Fixed borg sprites displaying errors sometimes (hopefully)
   id: 173
   time: '2026-01-15T21:28:56.0000000+00:00'
 - author: MayasMischief
   changes:
-    - type: Tweak
-      message: Monkeys and Kobolds are ghostroles more often.
-    - type: Remove
-      message: Removed BSO
+  - type: Tweak
+    message: Monkeys and Kobolds are ghostroles more often.
+  - type: Remove
+    message: Removed BSO
   id: 174
   time: '2026-01-16T07:32:17.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: >-
-        Food that rots in containers like mail won't teleport slop outside of
-        the container.
-    - type: Fix
-      message: Fixed plastic bananas rotting.
-    - type: Tweak
-      message: Plastic bananas are now made of microplastics.
-    - type: Fix
-      message: Fixed clowns shooting guns mispredicting.
-    - type: Fix
-      message: Fixed crew reinforcements' IDs having no name.
+  - type: Fix
+    message: >-
+      Food that rots in containers like mail won't teleport slop outside of the
+      container.
+  - type: Fix
+    message: Fixed plastic bananas rotting.
+  - type: Tweak
+    message: Plastic bananas are now made of microplastics.
+  - type: Fix
+    message: Fixed clowns shooting guns mispredicting.
+  - type: Fix
+    message: Fixed crew reinforcements' IDs having no name.
   id: 175
   time: '2026-01-16T07:49:29.0000000+00:00'
 - author: Nousagi37
   changes:
-    - type: Tweak
-      message: >-
-        Updated Metastation with localized content, and re-enabled it back in
-        the map pool.
+  - type: Tweak
+    message: >-
+      Updated Metastation with localized content, and re-enabled it back in the
+      map pool.
   id: 176
   time: '2026-01-16T08:40:55.0000000+00:00'
 - author: JohnJJohn
   changes:
-    - type: Fix
-      message: Fixed Crit killing just ghosting you
+  - type: Fix
+    message: Fixed Crit killing just ghosting you
   id: 177
   time: '2026-01-16T15:48:49.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: Added Hideo Kojima to the credits.
+  - type: Add
+    message: Added Hideo Kojima to the credits.
   id: 178
   time: '2026-01-16T17:03:56.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Fix
-      message: Fixed Box station's power in medbay.
+  - type: Fix
+    message: Fixed Box station's power in medbay.
   id: 179
   time: '2026-01-16T19:38:27.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Fix
-      message: Tinned food and lollypops no longer rot into slop.
+  - type: Fix
+    message: Tinned food and lollypops no longer rot into slop.
   id: 180
   time: '2026-01-16T19:55:09.0000000+00:00'
 - author: TurboTrackerss14
   changes:
-    - type: Tweak
-      message: Boris Module unlock moved to a tier 2 research.
+  - type: Tweak
+    message: Boris Module unlock moved to a tier 2 research.
   id: 181
   time: '2026-01-17T09:21:36.0000000+00:00'
 - author: JohnJJohn
   changes:
-    - type: Add
-      message: 'Added Trauma by shellknight to lobby and vinyl '
+  - type: Add
+    message: 'Added Trauma by shellknight to lobby and vinyl '
   id: 182
   time: '2026-01-17T09:22:03.0000000+00:00'
 - author: MayasMischief
   changes:
-    - type: Tweak
-      message: BZ made from invisible instakill gas to visible instakill gas.
-    - type: Remove
-      message: Removed BSO
+  - type: Tweak
+    message: BZ made from invisible instakill gas to visible instakill gas.
+  - type: Remove
+    message: Removed BSO
   id: 183
   time: '2026-01-18T07:18:04.0000000+00:00'
 - author: JohnJJohn
   changes:
-    - type: Add
-      message: Added Robotics tech tree section
-    - type: Tweak
-      message: Moved the tech tree around to make it look better
+  - type: Add
+    message: Added Robotics tech tree section
+  - type: Tweak
+    message: Moved the tech tree around to make it look better
   id: 184
   time: '2026-01-18T07:50:43.0000000+00:00'
 - author: catboycorporate
   changes:
-    - type: Tweak
-      message: 'Banana peels take longer to rot. '
-    - type: Tweak
-      message: There is a heightened chance of (mapped) banana peels being explosive.
+  - type: Tweak
+    message: 'Banana peels take longer to rot. '
+  - type: Tweak
+    message: There is a heightened chance of (mapped) banana peels being explosive.
   id: 185
   time: '2026-01-18T08:45:12.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Tweak
-      message: Renamed Ammonia gas to Miasma.
+  - type: Tweak
+    message: Renamed Ammonia gas to Miasma.
   id: 186
   time: '2026-01-18T08:53:47.0000000+00:00'
 - author: deltanedas
   changes:
-    - type: Add
-      message: >-
-        Breathing miasma can now give you diseases, as predicted by 19th century
-        doctors.
+  - type: Add
+    message: >-
+      Breathing miasma can now give you diseases, as predicted by 19th century
+      doctors.
   id: 187
   time: '2026-01-18T09:43:13.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Updated and re-enabled Delta station.
+  id: 188
+  time: '2026-01-18T13:27:47.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed BZ and other gases not making you high, go to sleep, etc.
+  id: 189
+  time: '2026-01-18T16:04:52.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Nullrod forms tweaked to do majority holy damage, rather than brute.
+  - type: Remove
+    message: Removed wound multiplier from Holy Chainsaw and Holy Claymore.
+  id: 190
+  time: '2026-01-18T17:33:49.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Updated Kettle station and added it back to the pool.
+  id: 191
+  time: '2026-01-19T08:44:10.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: NanoTask printing delay increased from 5 to 20 seconds.
+  id: 192
+  time: '2026-01-19T15:18:45.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: Reinforcement Security Officers are mindshielded on arrival.
+  - type: Add
+    message: SecHud to Reinforcement Security Officers loadout.
+  - type: Fix
+    message: Specialist reinforcement now spawns the correct loadout.
+  id: 193
+  time: '2026-01-19T21:03:25.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changed stimkit price from 40 to 25 TC, nobody was buying that slop for
+      that much.
+  - type: Tweak
+    message: >-
+      Mediborg first aid module gets crew hypo and syringe instead of chud
+      injector. The hypo still needs a hypoport so use the syringe as a backup.
+  id: 194
+  time: '2026-01-20T18:09:23.0000000+00:00'
+- author: Fardownup
+  changes:
+  - type: Add
+    message: Added Security gloves! in secDrobe and security lockers.
+  id: 195
+  time: '2026-01-20T18:11:00.0000000+00:00'
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed cauterized wound popup appearing for everyone
+  id: 196
+  time: '2026-01-20T19:03:11.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+  - type: Remove
+    message: Rulebreak bait (ooc in ic) ionlaws.
+  - type: Remove
+    message: Goob self-insert plushies/posters.
+  - type: Remove
+    message: yakub references.
+  id: 197
+  time: '2026-01-20T20:31:21.0000000+00:00'
+- author: Armok
+  changes:
+  - type: Add
+    message: reinforced and normal secret wall sprites
+  id: 198
+  time: '2026-01-20T20:48:14.0000000+00:00'
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed ED-209 being uncraftable
+  id: 199
+  time: '2026-01-21T00:20:24.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: You can go to red alert after 5 minutes, down from 10.
+  id: 200
+  time: '2026-01-21T00:37:37.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Donuts no longer rot into slop. Secoffs get a reliable mini meal at brig.
+  - type: Tweak
+    message: >-
+      Donkpockets no longer rot into slop. Tiders get a reliable mini meal in
+      maint.
+  - type: Tweak
+    message: >-
+      Bungo and cherry pits no longer rot into slop, remaining a viable poison
+      for annoying chefs/botanists.
+  id: 201
+  time: '2026-01-21T10:02:09.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed the round end summary not showing purchased items.
+  id: 202
+  time: '2026-01-21T12:12:13.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added a button to view the source code to the escape menu.
+  id: 203
+  time: '2026-01-21T14:00:39.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Clowns now speak in comic sans.
+  id: 204
+  time: '2026-01-21T14:28:55.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed FTL drives.
+  id: 205
+  time: '2026-01-21T15:36:03.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed traitor dart guns not having inhand sprites.
+  id: 206
+  time: '2026-01-21T16:05:37.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed borgs being affected by language-related traits.
+  id: 207
+  time: '2026-01-21T20:09:23.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xeno actions not using any plasma.
+  - type: Fix
+    message: Fixed ashen passage round removing you.
+  id: 208
+  time: '2026-01-21T20:22:33.0000000+00:00'
+- author: Armok
+  changes:
+  - type: Add
+    message: RD gets a custom law board in thier locker
+  id: 209
+  time: '2026-01-21T22:56:12.0000000+00:00'
+- author: Armok
+  changes:
+  - type: Fix
+    message: Sprays work again
+  - type: Fix
+    message: Sec can no longer print shotguns
+  - type: Fix
+    message: Bananium peels no longer rot
+  - type: Fix
+    message: Vox raiders get objectives and cannot remove hardsuits
+  - type: Fix
+    message: remove a ton of buggy / weird looking borg skins
+  - type: Fix
+    message: xenovac fits on back
+  - type: Fix
+    message: facehuggers speak xeno and have hivemind
+  id: 210
+  time: '2026-01-21T23:20:28.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed vox raider stealth suit
+  id: 211
+  time: '2026-01-22T10:51:16.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: Vox sounds returned to their disgusting goob varients.
+  id: 212
+  time: '2026-01-22T11:11:16.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed reflection and pacifist not being predicted.
+  - type: Tweak
+    message: Predicted some parts of heretic protective blades.
+  id: 213
+  time: '2026-01-22T12:43:02.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenovac not being able to suck slimes.
+  - type: Fix
+    message: >-
+      Fixed being able to instantly shove or pull latched slimes off of their
+      food.
+  - type: Tweak
+    message: Fully predicted xenovac and latching.
+  id: 214
+  time: '2026-01-22T13:26:17.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Removed the damage cap on limbs, you can now kill someone by targeting 1
+      part again.
+  - type: Fix
+    message: Fixed delimbing not working.
+  id: 215
+  time: '2026-01-22T14:19:25.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed CPR not working.
+  - type: Tweak
+    message: >-
+      CPR now actually makes you breathe instead of magically removing airloss
+      damage.
+  - type: Remove
+    message: CPR no longer removes rotting, use stasis instead.
+  - type: Tweak
+    message: CPR is much more reliable now, especially for the CMO and paramedics.
+  id: 216
+  time: '2026-01-22T21:28:10.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed a bleeding examine message not being localized.
+  id: 217
+  time: '2026-01-23T08:45:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/463
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Predicted reverse beartraps.
+  id: 218
+  time: '2026-01-23T12:56:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/464
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Changed undergarments to be the same as on wizden.
+  id: 219
+  time: '2026-01-23T16:05:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/468
+- author: TurboTrackerss14
+  changes:
+  - type: Remove
+    message: Durathread crafts through lathe and construction menu.
+  id: 220
+  time: '2026-01-23T22:27:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/471
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Made hardgrabs feel less jank.
+  id: 221
+  time: '2026-01-24T13:25:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/476
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Signing paper is now fully predicted.
+  id: 222
+  time: '2026-01-24T19:26:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/480
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: Made gun executions more real (you can now execute with any gun)
+  id: 223
+  time: '2026-01-24T19:27:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/470
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed slime wizards not being able to use the teleport spell.
+  id: 224
+  time: '2026-01-24T19:30:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/478
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Most mobs now have sounds for gulp/surprised emotes instead of squeaking
+      or whatever.
+  id: 225
+  time: '2026-01-24T19:39:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/481
+- author: Joel and Armok
+  changes:
+  - type: Add
+    message: Tons of sprites
+  - type: Remove
+    message: Midround changelings, heretics, devils, and demons
+  - type: Tweak
+    message: Midround antag rates
+  id: 226
+  time: '2026-01-24T23:13:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/485
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added T-45 P.O.W.A.R Armor, a new mech for revs
+  id: 227
+  time: '2026-01-24T23:14:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/456
+- author: SpeltIncorrectyl
+  changes:
+  - type: Tweak
+    message: Renamed 'Law Bringer' to 'Order' to fit in more with the 'Justice'
+  id: 228
+  time: '2026-01-24T23:44:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/484
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed bullets always targeting a random part, now they will go where you
+      aim if you are very close.
+  id: 229
+  time: '2026-01-24T23:59:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/482
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Re-enabled limb targeting random miss chances.
+  - type: Remove
+    message: The Phantom Pain
+  id: 230
+  time: '2026-01-25T09:30:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/490
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed bullets having 2 lights instead of 1.
+  id: 231
+  time: '2026-01-25T10:41:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/496
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      All crew get hypoports by default. The No Hypoport trait is now an
+      opt-out.
+  id: 232
+  time: '2026-01-25T10:59:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/497
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Nukies no longer get xenobio or maxcaps for free.
+  id: 233
+  time: '2026-01-25T11:27:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/498
+- author: deltanedas
+  changes:
+  - type: Add
+    message: You can now get a hold of yourself.
+  id: 234
+  time: '2026-01-25T11:34:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/500
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the FOXDIE retrovirus, traitor virologists can buy it and sample a
+      target's DNA. It will only kill targets with sampled DNA, being
+      transmitted harmlessly by everyone else.
+  id: 235
+  time: '2026-01-25T15:36:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/501
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: NTR report now shows the round ID at the end
+  id: 236
+  time: '2026-01-25T19:17:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/486
+- author: Armok
+  changes:
+  - type: Tweak
+    message: 'Warden shotgun: Damage decreased'
+  - type: Tweak
+    message: 'Warden shotgun: Ammo Cap increased'
+  - type: Tweak
+    message: >-
+      adjusted almost every single laser weapon to be in line with laser sec and
+      occupy its own niche
+  - type: Add
+    message: grille and lattice sprites
+  id: 237
+  time: '2026-01-25T19:49:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/488
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Station Radios can now be muted by streamer mode.
+  id: 238
+  time: '2026-01-25T22:55:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/517
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: Facehuggers can now infect if manually put onto someone.
+  id: 239
+  time: '2026-01-26T08:24:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/523
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed canceling lathe recipes spamming sounds.
+  id: 240
+  time: '2026-01-26T10:57:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/526
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed ancient xenos attacking real xenos.
+  id: 241
+  time: '2026-01-26T11:48:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/528
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Lighters can be toggled faster.
+  - type: Tweak
+    message: Made PKA sounds much quieter.
+  id: 242
+  time: '2026-01-26T12:01:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/529
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed ripleyMK2 being unbuildable
+  id: 243
+  time: '2026-01-26T12:25:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/530
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed AP weapons ignoring damage increases like species downsides or
+      executions.
+  id: 244
+  time: '2026-01-26T13:11:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/531
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Massively nerfed firelock health, it now takes 100 damage (before
+      modifiers) to break instead of 500.
+  id: 245
+  time: '2026-01-26T15:23:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/532
+- author: Rouden
+  changes:
+  - type: Fix
+    message: Fixed GPS showing the station's beacons on lavaland.
+  id: 246
+  time: '2026-01-26T20:36:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/534
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed slime steroids letting you make infinite slimes, it's capped to 6
+      max now.
+  - type: Tweak
+    message: Capped slime extracts to 8 max.
+  id: 247
+  time: '2026-01-27T09:42:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/543
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to print nails below red alert.
+  id: 248
+  time: '2026-01-27T09:46:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/544
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed drones t-ray scanners not working.
+  id: 249
+  time: '2026-01-27T12:23:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/545
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added a Use In Hand mode to the interactor.
+  - type: Add
+    message: >-
+      Added verbs for the interactor to toggle settings without needing to link
+      anything.
+  id: 250
+  time: '2026-01-27T13:26:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/546
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed issues with autodoc not finishing surgeries.
+  id: 251
+  time: '2026-01-27T20:06:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/547
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed batong having half as many uses as advertised when left clicking.
+  id: 252
+  time: '2026-01-27T20:12:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/549
+- author: JohnJJohn
+  changes:
+  - type: Remove
+    message: >-
+      Removed sci from the cuck chair (they can now build all the MechBoards in
+      the exosuit fab)
+  - type: Tweak
+    message: The normal mech drill is now in the basic mech equipment research
+  id: 253
+  time: '2026-01-28T14:22:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/552
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed station radio, radio's spamming ghost chat
+  id: 254
+  time: '2026-01-28T15:45:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/551
+- author: JohnJJohn
+  changes:
+  - type: Remove
+    message: Removed Power game species (Yowie)
+  id: 255
+  time: '2026-01-28T18:32:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/553
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added splitter  facepaint marking.
+  id: 256
+  time: '2026-01-29T18:41:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/559
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed access breakers not working on cargo request consoles.
+  id: 257
+  time: '2026-01-29T19:21:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/561
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: 'Lavaland 2: No job split between salvage specialists.'
+  - type: Tweak
+    message: 'Lavaland 2: Points vendor is mostly untouched.'
+  - type: Remove
+    message: Reverted passive regen and other slop.
+  - type: Tweak
+    message: Increased default wideswing stamina cost to 10, up from 5.
+  id: 258
+  time: '2026-01-30T08:01:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/557
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: >-
+      Added Blood splatters, blood will now splatter out of people (and
+      monkeys), when slashing or piercing damage is taken, gibbing makes a
+      bigger splatter
+  id: 259
+  time: '2026-01-30T16:16:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/562
+- author: Aviu
+  changes:
+  - type: Add
+    message: Predicted heretic rituals.
+  - type: Remove
+    message: >-
+      Reminiscence ritual removed, blades can be still recalled by performing
+      blade creation ritual again.
+  id: 260
+  time: '2026-01-30T17:25:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/472
+- author: Armok
+  changes:
+  - type: Add
+    message: Added some patreon custom items!
+  - type: Tweak
+    message: Reinforcement callers start with 2.5K spesos.
+  - type: Tweak
+    message: Lowered stam/explosive resist of most armors.
+  id: 261
+  time: '2026-01-30T17:58:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/563
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Insurgents can no longer be plasmamen.
+  - type: Fix
+    message: Fixed job icons from job malfunction event.
+  - type: Fix
+    message: Fixed not being able to make nailgun magazines specifically.
+  - type: Fix
+    message: Fixed station radio sounding weird.
+  id: 262
+  time: '2026-01-31T13:32:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/581
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed the AI being able to knock on shutters and blast doors.
+  id: 263
+  time: '2026-01-31T13:48:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/583
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to move after using a lavaland jaunter.
+  id: 264
+  time: '2026-01-31T14:25:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/585
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed splashing liquids on people being silent.
+  id: 265
+  time: '2026-01-31T15:08:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/587
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to butcher lings and absorbed bodies.
+  id: 266
+  time: '2026-01-31T16:07:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/588
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Screwdrivers now deal damage when thrown
+  - type: Remove
+    message: Removed BSO
+  id: 267
+  time: '2026-01-31T17:27:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/580
+- author: Aviu
+  changes:
+  - type: Add
+    message: Improved audio muffle, it should be more smooth now.
+  id: 268
+  time: '2026-02-01T11:13:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/598
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed abductors console not working.
+  id: 269
+  time: '2026-02-01T11:53:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/600
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lollypops being eaten instantly.
+  id: 270
+  time: '2026-02-01T13:06:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/601
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Predicted space dragon's fireball action.
+  id: 271
+  time: '2026-02-01T14:29:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/602
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Mice no longer have a groin part so you can't cheese the egg sack.
+  id: 272
+  time: '2026-02-01T17:21:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/605
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed deltarune reference not working on lavaland and working on station.
+  id: 273
+  time: '2026-02-01T17:28:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/606
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Toy facehuggers no longer inject nocturine.
+  id: 274
+  time: '2026-02-01T21:42:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/609
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: >-
+      Capoeria sweepkick now properly applies its grabspeed increase, instead of
+      reducing it.
+  id: 275
+  time: '2026-02-01T21:59:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/607
+- author: Aviu
+  changes:
+  - type: Add
+    message: 'New mime exclusive traitor item: guide to advanced mimery.'
+  id: 276
+  time: '2026-02-02T07:07:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/473
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed smart equip trying to take mags out of guns instead of equipping
+      them.
+  id: 277
+  time: '2026-02-02T08:11:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/612
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed some holy fire shitcode that made you stay on fire forever.
+  - type: Tweak
+    message: Blood can now extinguish fires, albeit worse than water.
+  - type: Tweak
+    message: Holy water holy firestacks when drank decreased from 10 to 3 per unit.
+  id: 278
+  time: '2026-02-02T11:29:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/618
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed agent and revolutionary IDs only having maints access.
+  id: 279
+  time: '2026-02-02T11:39:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/621
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Hid crew cassette players when equipped, its sprite was too distracting.
+  id: 280
+  time: '2026-02-02T14:44:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/626
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: You can now chose other species' language in character editor
+  id: 281
+  time: '2026-02-02T16:00:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/625
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Cosmic cultists can see their own monument again.
+  - type: Fix
+    message: Heretics can see reality shifts again.
+  id: 282
+  time: '2026-02-02T16:21:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/628
+- author: Aviu
+  changes:
+  - type: Add
+    message: Reality fractures are visible to everyone now.
+  - type: Fix
+    message: Fix chaplain being able to see reality shifts,
+  id: 283
+  time: '2026-02-03T08:12:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/629
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added Deep fryer, you can deep fry ANYTHING
+  id: 284
+  time: '2026-02-04T21:02:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/637
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed wizard teleport spell not working.
+  - type: Fix
+    message: Fixed smartgun homing not working.
+  id: 285
+  time: '2026-02-05T12:40:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/641
+- author: SpeltIncorrectyl
+  changes:
+  - type: Add
+    message: >-
+      Ported energy chem: synthesize precursor chemicals directly from
+      electricity instead of mixing jugs like a caveman.
+  id: 286
+  time: '2026-02-07T06:58:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/645
+- author: Kirikii
+  changes:
+  - type: Fix
+    message: Fixed the wizard's mind swap ability.
+  id: 287
+  time: '2026-02-07T14:24:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/651
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed deep fryer being locked to one direction
+  id: 288
+  time: '2026-02-07T15:29:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/652
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed Deep fryer making people unstripable
+  - type: Fix
+    message: Fixed Deep fried oils popup
+  id: 289
+  time: '2026-02-07T22:19:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/657
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: >-
+      Fixed deep fryer adding "deep fried" more than one time when someone was
+      fried
+  id: 290
+  time: '2026-02-08T20:53:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/659
+- author: Armok, Sssith
+  changes:
+  - type: Add
+    message: New rules for the server, they are a fast read.
+  - type: Add
+    message: Spacelaw, Sec expected to follow.
+  id: 291
+  time: '2026-02-10T00:25:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/662
+- author: Armok and Joel
+  changes:
+  - type: Add
+    message: Tons new decals
+  - type: Tweak
+    message: fix drone bug
+  id: 292
+  time: '2026-02-10T05:40:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/663
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed Grab popup spam
+  id: 293
+  time: '2026-02-10T10:54:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/661
+- author: Armok
+  changes:
+  - type: Add
+    message: Neon sign sprites.
+  - type: Tweak
+    message: Made fire extinguisher sprites directional.
+  id: 294
+  time: '2026-02-10T12:05:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/664
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed items possibily being stuck in a deep fried bag
+  - type: Fix
+    message: Deep fried bags can now be eaten!
+  id: 295
+  time: '2026-02-10T20:17:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/660
+- author: The Man Who Sold The World
+  changes:
+  - type: Add
+    message: 50000 bugs
+  - type: Tweak
+    message: >-
+      Upstream: Reverted uplink super surplus, python, necronomicon, flash
+      lantern removal
+  - type: Tweak
+    message: 'Upstream: Reverted towel removal'
+  - type: Remove
+    message: >-
+      Removed groin bodypart, it still has targeting for future use but acts
+      like torso for now.
+  - type: Remove
+    message: Removed gradient hair until it's rewritten.
+  - type: Remove
+    message: Removed glowing markings, go back to Ao3 :)
+  - type: Fix
+    message: Skinning monkeys now works properly with bodyparts.
+  id: 296
+  time: '2026-02-12T15:57:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/633
+- author: NoElkaTheGod
+  changes:
+  - type: Add
+    message: Added Entropic Colossus, a new antagonist closely related to cosmic cult
+  - type: Add
+    message: >-
+      Cosmic cultists can now subvert the station AI after absorbing a malign
+      rift.
+  - type: Tweak
+    message: Many minor fixes and polishing for the cosmic cult.
+  - type: Tweak
+    message: >-
+      The guidebook for cosmic cult was updated in accordance with the new
+      content. Please read it.
+  id: 297
+  time: '2026-02-13T08:28:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/654
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use Face markings.
+  id: 298
+  time: '2026-02-13T18:20:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/683
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed monkeys having lizard tails real
+  - type: Fix
+    message: Fixed lizard displacement log spam
+  id: 299
+  time: '2026-02-13T18:32:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/684
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not having to breathe 🥹
+  id: 300
+  time: '2026-02-13T19:11:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/687
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Entropic colossus now takes holy damage.
+  - type: Fix
+    message: Entropic colossus is no longer vulnerable to CQC.
+  - type: Fix
+    message: Entropic colossus no longer pushes ghosts.
+  - type: Tweak
+    message: Entropic Colossus min playercount 25 -> 40.
+  id: 301
+  time: '2026-02-14T13:16:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/690
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed /ghost and ghost actions not killing you
+  - type: Fix
+    message: Fixed surgery window reopening 20 times if you close it.
+  id: 302
+  time: '2026-02-14T21:52:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/692
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Tails are now bodyparts and can be removed by surgery, explosions, etc.
+  - type: Add
+    message: 'You can now create a tail joint via surgery to turn people into lizards. '
+  id: 303
+  time: '2026-02-15T21:13:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/696
+- author: John Carpenter
+  changes:
+  - type: Add
+    message: Lings now get a fake mindshield if they absorb someone with a mindshield
+  - type: Tweak
+    message: Lings are now forced to transform into whoever they absorb
+  id: 304
+  time: '2026-02-15T22:19:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/695
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed torso starting with only half of its integrity.
+  - type: Fix
+    message: Fixed damage visuals being wrong color for some species.
+  - type: Fix
+    message: Fixed wizard rod form having wrong direction.
+  - type: Fix
+    message: Fixed lightning wrong direction.
+  - type: Fix
+    message: Fixed staff of change not working.
+  - type: Fix
+    message: Fixed modsuits not sealing.
+  id: 305
+  time: '2026-02-16T06:42:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/700
+- author: Aviu
+  changes:
+  - type: Add
+    message: Flesh heretic risen ghouls no longer gib on death.
+  - type: Add
+    message: You can deconvert ghoulified people with holy water.
+  - type: Add
+    message: >-
+      Voiceless Dead has more hp and can now be recalled to the ritual rune and
+      revived, see ritual purchase description for details.
+  - type: Add
+    message: Predicted holy damage and bible smite.
+  - type: Tweak
+    message: 'Knit flesh cooldown: 20s -> 5s.'
+  id: 306
+  time: '2026-02-16T06:44:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/615
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed bleeding not existing.
+  id: 307
+  time: '2026-02-17T08:20:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/704
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Genetics is here.
+  id: 308
+  time: '2026-02-17T08:53:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/119
+- author: Kirikii
+  changes:
+  - type: Tweak
+    message: Readded slime people's 80% cellular damage resistance.
+  id: 309
+  time: '2026-02-17T13:09:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/711
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed Deep fryer being in migration for some reason
+  id: 310
+  time: '2026-02-17T14:42:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/714
+- author: Kirikii
+  changes:
+  - type: Tweak
+    message: Changed round end summary for heretics slightly.
+  id: 311
+  time: '2026-02-17T19:52:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/720
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed dwarfs being extra short.
+  id: 312
+  time: '2026-02-17T20:11:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/722
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mutations with actions giving you 2 of them.
+  - type: Add
+    message: Geneticist traitors can now buy FOXDIE.
+  id: 313
+  time: '2026-02-17T21:38:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/723
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Monkified mutation now works on kobolds and lizards :)
+  id: 314
+  time: '2026-02-17T23:09:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/730
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Gave moths their wings back, no more Phantom Limbs for the Angel With
+      Broken Wings.
+  - type: Fix
+    message: >-
+      Fixed felinidification not working and making nonhumans asphyxiate after
+      being removed.
+  id: 315
+  time: '2026-02-18T08:01:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/727
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Geneticist job icon is now purple.
+  id: 316
+  time: '2026-02-18T08:15:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/737
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed Slasher meat spike ability spawning fake clientside meat spikes.
+  id: 317
+  time: '2026-02-18T11:45:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/738
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use autodocs.
+  id: 318
+  time: '2026-02-18T12:42:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/743
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Disease can no longer roll immunity resistance behaviour.
+  id: 319
+  time: '2026-02-18T14:08:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/747
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed kobolds and monkeys not having tails...
+  id: 320
+  time: '2026-02-18T15:12:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/745
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Unbanned shadowkin players
+  id: 321
+  time: '2026-02-18T18:49:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/751
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed ERP
+  id: 322
+  time: '2026-02-18T20:00:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/752
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Shiftstart graffiti is no longer randomly rotated.
+  id: 323
+  time: '2026-02-18T20:56:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/753
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed beenade and sharpnel grenade not activating
+  id: 324
+  time: '2026-02-19T22:01:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/761
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added a decal for whenever you vomit
+  - type: Tweak
+    message: Gibbing a head now spawns decals
+  - type: Tweak
+    message: Damage under a certain threshold now has a special decal
+  id: 325
+  time: '2026-02-20T00:01:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/762
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed abductor shitcode forever.
+  id: 326
+  time: '2026-02-20T00:30:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/764
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added Tiger Stripes from MGS3
+  id: 327
+  time: '2026-02-20T07:31:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/767
+- author: Kirikii
+  changes:
+  - type: Tweak
+    message: Clarified impact element of EMP grenades.
+  id: 328
+  time: '2026-02-20T08:18:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/768
+- author: Kirikii
+  changes:
+  - type: Fix
+    message: Fixed IPC's guidebook entry.
+  id: 329
+  time: '2026-02-20T08:51:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/769
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added animated sprites for carp tails on humanoids.
+  id: 330
+  time: '2026-02-20T11:59:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/778
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed some changeling abilities wasting chemicals if they failed.
+  - type: Tweak
+    message: Changeling item spawning abilities (armblade etc) are now predicted.
+  id: 331
+  time: '2026-02-20T14:03:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/777
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed abductor teleport effects not sticking to the mob.
+  id: 332
+  time: '2026-02-20T14:07:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/780
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: 'Carp tails are now the same colour as they are. '
+  id: 333
+  time: '2026-02-20T15:40:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/781
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Blade heretic path overall nerfed.
+  - type: Add
+    message: >-
+      Realignment is now t1 side. It now also removes all restraints on use and
+      doesn't require focus to cast.
+  - type: Add
+    message: Added new blade path ability, replacing realignment.
+  id: 334
+  time: '2026-02-21T10:38:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/736
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mobs appearing dead for no reason.
+  - type: Fix
+    message: Fixed genetics console pairing AG and CT instead of AT and GC.
+  - type: Tweak
+    message: Made genetics scanning doafters much faster.
+  id: 335
+  time: '2026-02-21T10:43:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/793
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lizards showing an error on health analyzers.
+  id: 336
+  time: '2026-02-21T11:32:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/794
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: >-
+      Void conduit ticks every 2 second instead of 1 and also it gradually
+      expands from 0 tile range to 8.
+  - type: Tweak
+    message: >-
+      Being frozen in ice cube gives you brute resits, stamina damage can melt
+      the cube similarly to normal damage.
+  - type: Tweak
+    message: Alert carving can trigger when borg steps on it.
+  - type: Tweak
+    message: Alert carving disappears when you teleport on it.
+  - type: Remove
+    message: Void ascension projectile/hitscan "immunity".
+  - type: Add
+    message: Void ascension now has all void spells' cooldown halved.
+  - type: Add
+    message: Void ascension heretics now waltz in air at increased speed.
+  id: 337
+  time: '2026-02-21T11:59:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/792
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to cut off Vox tails.
+  - type: Fix
+    message: Fixed Arachnids not having their appendages.
+  id: 338
+  time: '2026-02-21T12:37:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/796
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed the lobby character editor breaking if you switched to a different
+      species.
+  id: 339
+  time: '2026-02-21T13:18:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/798
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed eye markings and some others not showing up ingame.
+  id: 340
+  time: '2026-02-21T16:22:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/799
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed IPCs always sounding damaged when speaking.
+  id: 341
+  time: '2026-02-21T17:40:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/805
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed armor examine string.
+  id: 342
+  time: '2026-02-21T17:45:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/806
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: Brullbars no longer scream and howl when dead.
+  id: 343
+  time: '2026-02-21T20:12:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/810
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed broken bones making you faster at doing things.
+  - type: Fix
+    message: Fixed all bones affecting doafters, now it's only for hands.
+  id: 344
+  time: '2026-02-21T20:32:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/812
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added new codewords
+  id: 345
+  time: '2026-02-21T21:22:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/807
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: Slaughter Demons can bloodjaunt again.
+  - type: Fix
+    message: Slaughter Demons have hands again.
+  id: 346
+  time: '2026-02-21T22:54:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/815
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: Security reinforcements can no longer roll antagonist.
+  id: 347
+  time: '2026-02-22T21:19:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/814
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: >-
+      Security Holobarrier and Advanced Holobarrier are now properly contraband
+      marked.
+  id: 348
+  time: '2026-02-22T21:19:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/813
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mutations you added not being shown when scanning someone.
+  id: 349
+  time: '2026-02-23T08:09:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/830
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed changelings getting multiple fake mindshield implants when absorbing
+      people.
+  - type: Fix
+    message: >-
+      Fixed some changeling actions that needed you to absorb bodies being
+      weird.
+  id: 350
+  time: '2026-02-23T13:00:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/837
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed shadowkin
+  id: 351
+  time: '2026-02-23T13:18:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/838
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed office chairs and other vehicles being able to fly in space.
+      Research hoverchairs instead!
+  id: 352
+  time: '2026-02-23T13:32:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/840
+- author: deltanedas
+  changes:
+  - type: Add
+    message: You can now cut off moth wings or arachnid appendages :)
+  - type: Remove
+    message: Removed IPC wing markings. Go play ultrakill.
+  id: 353
+  time: '2026-02-23T15:31:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/842
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to delete felinids by pulling their tails.
+  id: 354
+  time: '2026-02-23T17:40:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/843
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: No more roundstart random graffiti decals.
+  id: 355
+  time: '2026-02-23T17:48:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/845
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Character editor's colour sliders no longer lag like crazy.
+  id: 356
+  time: '2026-02-23T19:48:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/846
+- author: caoimhan2008
+  changes:
+  - type: Add
+    message: more helmets now block facehuggers
+  - type: Add
+    message: facehuggers should now be throwable again while non player controlled
+  id: 357
+  time: '2026-02-24T00:44:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/848
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix holy damage not working.
+  id: 358
+  time: '2026-02-24T08:24:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/849
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Changelings now copy mutations from people they steal DNA from.
+  id: 359
+  time: '2026-02-24T08:36:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/850
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed random humanoids always being default skin colour etc.
+  id: 360
+  time: '2026-02-24T09:20:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/851
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fix forklift shitcode letting you use it telepathically anywhere.
+  id: 361
+  time: '2026-02-24T09:36:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/852
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed paralyzed trait not letting you use a wheelchair.
+  - type: Tweak
+    message: You can now crawl very slowly if you have no legs.
+  id: 362
+  time: '2026-02-24T09:55:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/853
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed changelings losing augmented eyesight after transforming.
+  id: 363
+  time: '2026-02-24T10:11:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/855
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed gibbing bodyparts being inconsistent.
+  id: 364
+  time: '2026-02-24T10:34:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/856
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed shitcode with changeling evolution menu.
+  id: 365
+  time: '2026-02-24T11:19:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/858
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Fully implemented the Mind Reader mutation.
+  id: 366
+  time: '2026-02-24T12:42:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/860
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Nuked harpy
+  id: 367
+  time: '2026-02-24T13:31:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/862
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Made NTR tasks window less confusing.
+  id: 368
+  time: '2026-02-24T13:32:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/861
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to build most mechs.
+  id: 369
+  time: '2026-02-24T20:27:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/864
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Fully implement the chemspike mutation.
+  id: 370
+  time: '2026-02-24T22:32:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/865
+- author: Speebro
+  changes:
+  - type: Add
+    message: Chemical reactions for tiders to make saltpeter out of rotting slop
+  - type: Tweak
+    message: Increased ANFO yield to 3 so it stops blowing up just by making it
+  id: 371
+  time: '2026-02-25T22:29:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/630
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Gigantism mutation now makes you fat.
+  id: 372
+  time: '2026-02-26T08:58:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/876
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added Cold/Heat weaknesses and their combined Homeostatic Shutdown
+      mutations.
+  id: 373
+  time: '2026-02-26T10:37:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/877
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Honk Ops are now actual clowns if they ever roll.
+  id: 374
+  time: '2026-02-26T11:25:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/879
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Implemented the Void Magnet mutation.
+  id: 375
+  time: '2026-02-26T15:41:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/882
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: Facehuggers no longer need to be player controlled to hug
+  id: 376
+  time: '2026-02-26T20:13:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/884
+- author: caoimhan2008
+  changes:
+  - type: Tweak
+    message: xenomorphs can now move in space to make playing with lag less frustrating
+  id: 377
+  time: '2026-02-26T20:30:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/874
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: >-
+      Added Bullet hole decals, whenever a kenetic bullet hits a wall they'll be
+      created.
+  id: 378
+  time: '2026-02-26T22:22:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/873
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenomorph acid and plasma transfer actions not working.
+  id: 379
+  time: '2026-02-27T00:33:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/886
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mech melee weapons' wideswing not working properly.
+  id: 380
+  time: '2026-02-27T17:02:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/900
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Command and Dignitary positions are now human only.
+  id: 381
+  time: '2026-02-27T19:36:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/902
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Role playtime restrictions have been largely reduced.
+  id: 382
+  time: '2026-02-27T21:30:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/904
+- author: Pharaz4
+  changes:
+  - type: Add
+    message: Added some roman clothing to the AutoDrobe
+  id: 383
+  time: '2026-02-28T01:33:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/887
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenobio slimes having the wrong organs.
+  - type: Tweak
+    message: Nutrislime is now its own reagent so it is much faster for slimes to eat.
+  id: 384
+  time: '2026-02-28T14:26:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/912
+- author: NoElkaTheGod
+  changes:
+  - type: Add
+    message: >-
+      Cosmic Cult has been significantly reworked. See guidebok and/or the PR
+      for details.
+  - type: Tweak
+    message: Cosmic Cult is back in rotation
+  id: 385
+  time: '2026-02-28T16:00:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/854
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added a mutations list to the guidebook, showing every mutation and how to
+      get them.
+  id: 386
+  time: '2026-02-28T16:16:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/913
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      NTR scanning no longer teleports items to CentComm, lock up your
+      contraband.
+  id: 387
+  time: '2026-02-28T16:57:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/914
+- author: TurboTrackerss14
+  changes:
+  - type: Remove
+    message: >-
+      removed the human only requirement from command and dignitary at armoks
+      behest.
+  id: 388
+  time: '2026-02-28T18:03:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/916
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mothroaches reverting to maggot form on death.
+  id: 389
+  time: '2026-02-28T21:39:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/921
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: You can now use hyposprays on people who are downed (bed or on the floor)
+  id: 390
+  time: '2026-02-28T22:59:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/922
+- author: caoimhan2008
+  changes:
+  - type: Add
+    message: >-
+      Added a new xenomorph compatibility bundle to the uplink for 100 TC that
+      allows you to make an army of xenos.
+  id: 391
+  time: '2026-02-28T23:11:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/910
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      the Xeno Hive Node now makes facehuggers ignore you (also added a new
+      xenomorph themed bundle for 100 tc i messed up the changelog on that pr)
+  id: 392
+  time: '2026-03-01T00:52:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/923
+- author: RatherUncreativeName
+  changes:
+  - type: Add
+    message: Added an ingredient beacon for chefs.
+  id: 393
+  time: '2026-03-01T11:25:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/911
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed mortar and pestle's grinding sound never ending if the food was
+      eaten/rotted/etc.
+  id: 394
+  time: '2026-03-01T13:10:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/929
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Genetics console now allows ctrl click and right click for resetting and
+      going back in bases.
+  id: 395
+  time: '2026-03-01T14:26:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/931
+- author: NoElkaTheGod
+  changes:
+  - type: Add
+    message: Cosmic Cultists can now respec their purchased Influences.
+  - type: Tweak
+    message: Absorbing a malign rift now grants some entropy
+  - type: Fix
+    message: Cosmic Cultists are now immune to low temperatures
+  - type: Fix
+    message: Temperature Adaptation mutation now works properly
+  - type: Tweak
+    message: >-
+      Cosmic Cult lapse ability is now only visible to cultists, who can exit at
+      will.
+  id: 396
+  time: '2026-03-01T16:17:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/930
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: >-
+      You no longer far asleep every minute after standing near a malign
+      fracture for 0.01 seconds (I forgot one line of code, point and laugh
+      everyone)
+  id: 397
+  time: '2026-03-01T18:09:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/933
+- author: The Man Who Sold The World
+  changes:
+  - type: Add
+    message: Re-enabled holocigar but without the gun buffs slop.
+  id: 398
+  time: '2026-03-01T18:18:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/934
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed goliath and carp organs not having unique names.
+  id: 399
+  time: '2026-03-01T19:25:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/935
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to mutate geminis...
+  id: 400
+  time: '2026-03-01T20:33:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/937
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed chef shittle being able to use CQC everywhere...
+  id: 401
+  time: '2026-03-01T20:49:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/938
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed walking by default setting being inverted.
+  id: 402
+  time: '2026-03-01T21:38:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/939
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added real phones, prank call the hop
+  - type: Add
+    message: Added phone merchant to the job distribution error
+  id: 403
+  time: '2026-03-01T21:49:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/909
+- author: Aviu
+  changes:
+  - type: Add
+    message: Heretic progression fully reworked.
+  - type: Add
+    message: Added like 10 new heretic side knowledge.
+  - type: Fix
+    message: Fixed firestacks dealing almost no damage.
+  - type: Tweak
+    message: Reduced ash heretic fire stacks fire protection penetration 50% -> 35%
+  - type: Fix
+    message: >-
+      Fixed new blade path sacraments ability consuming orbiting blades whenever
+      you are hit.
+  - type: Fix
+    message: Fix sacrifice command heretic objective progress being inverted.
+  - type: Tweak
+    message: Void conduit ticks every 1 second instead of 2 again.
+  - type: Add
+    message: Predicted mansus grasp.
+  - type: Add
+    message: Partially predicted rust path.
+  id: 404
+  time: '2026-03-02T00:01:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/694
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Brought back putting anything in burgers!
+  id: 405
+  time: '2026-03-02T11:09:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/947
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed stunprod not being able to stun anything.
+  id: 406
+  time: '2026-03-02T14:52:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/953
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Removed playing cards for being gigantic shitcode, nobody even used them
+      anyway.
+  id: 407
+  time: '2026-03-02T15:27:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/951
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Lowered the delay on saying your last words from 10 to 2 seconds.
+  id: 408
+  time: '2026-03-02T20:09:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/955

@@ -5,6 +5,7 @@ using Content.Shared.Heretic;
 using Content.Shared.Heretic.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
@@ -27,6 +28,8 @@ public sealed class InfusedItemSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
+    [Dependency] private readonly SharedHereticSystem _heretic = default!;
+
 
     public override void Initialize()
     {
@@ -49,7 +52,7 @@ public sealed class InfusedItemSystem : EntitySystem
     {
         var target = args.User;
 
-        if (HasComp<HereticComponent>(target) || HasComp<GhoulComponent>(target))
+        if (_heretic.IsHereticOrGhoul(target))
             return;
 
         if (HasComp<StatusEffectsComponent>(target))
@@ -65,32 +68,25 @@ public sealed class InfusedItemSystem : EntitySystem
 
     private void OnInfusedMeleeHit(Entity<MansusInfusedComponent> ent, ref MeleeHitEvent args)
     {
-        if (!args.IsHit || args.HitEntities.Count == 0)
+        if (!args.IsHit || args.HitEntities.Count == 0 || args.Direction != null)
             return;
 
-        if (!TryComp(args.User, out HereticComponent? heretic))
+        if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out _))
             return;
 
-        var success = false;
-        foreach (var target in args.HitEntities)
-        {
-            if (target == args.User)
-                continue;
+        var target = args.HitEntities[0];
 
-            if (!HasComp<StatusEffectsComponent>(target) && !HasComp<MobStateComponent>(target))
-                continue;
+        if (target == args.User)
+            return;
 
-            if ((TryComp<HereticComponent>(target, out var th) && th.CurrentPath == heretic.CurrentPath))
-                continue;
+        if (!HasComp<StatusEffectsComponent>(target) || !TryComp(target, out MobStateComponent? mobState) ||
+            mobState.CurrentState == MobState.Dead)
+            return;
 
-            if (!_grasp.TryApplyGraspEffectAndMark(args.User, heretic, target, null, out _))
-                continue;
+        if (!_grasp.TryApplyGraspEffectAndMark(args.User, heretic, target, null, out _))
+            return;
 
-            success = true;
-        }
-
-        if (success)
-            SpendInfusionCharges(ent);
+        SpendInfusionCharges(ent);
     }
 
     private void SpendInfusionCharges(Entity<MansusInfusedComponent> ent)

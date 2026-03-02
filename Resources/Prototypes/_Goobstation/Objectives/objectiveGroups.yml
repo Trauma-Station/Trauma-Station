@@ -25,7 +25,6 @@
     LingCaptainGunStealObjective: 1
     LingCaptainJetpackStealObjective: 1
     LingHandTeleporterStealObjective: 1
-    LingEnergyShotgunStealObjective: 1
     LingStealSupermatterSliverObjective: 1
     ## all equal chance regardless of risk - put those abilities to use
 
@@ -34,3 +33,8 @@
   weights:
     LingKillRandomHeadObjective: 3
     ChangelingAbsorbOtherObjective: 1 # absorb another changeling
+
+- type: weightedRandom
+  id: ConctactorObjectiveGroupRansom
+  weights:
+    ContractorRansomObjective: 1

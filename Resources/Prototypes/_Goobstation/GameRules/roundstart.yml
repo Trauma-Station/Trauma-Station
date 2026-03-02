@@ -164,7 +164,7 @@
   - type: GameRule
     minPlayers: 30
   - type: LoadMapRule
-    mapPath: /Maps/_Goobstation/Nonstations/nukieplanet.yml
+    mapPath: /Maps/_Trauma/Nonstations/nukieplanet.yml
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
     definitions:
@@ -327,7 +327,7 @@
   - type: NukeopsRule
     localePrefix: "honkops-"
   - type: LoadMapRule
-    mapPath: /Maps/_Goobstation/Nonstations/nukieplanet-honkops.yml
+    mapPath: /Maps/_Trauma/Nonstations/nukieplanet-honkops.yml
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
     definitions:
@@ -338,6 +338,13 @@
       roleLoadout:
       - RoleSurvivalNukieHonkops
       components:
+      # clown
+      - type: Clumsy
+      - type: SleepEmitSound
+        snore: /Audio/Voice/Misc/silly_snore.ogg
+        interval: 10
+      - type: SpeechFontOverride
+        font: LDFComicSans
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
@@ -412,6 +419,8 @@
       jobBlacklist: [ Chaplain, Mime, ChiefEngineer, ResearchDirector, Quartermaster ] #chaplain is obvious, mime can't write.
       mindRoles:
       - DevilMindRole
+      mindComponents: # Trauma - devil is evil
+      - type: Evil
       startingGear: DevilStartingGear
   - type: Tag
     tags:

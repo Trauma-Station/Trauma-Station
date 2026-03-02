@@ -22,3 +22,6 @@
   - type: InstantAction
     event: !type:EventHereticFleshSurgery
   - type: HereticAction
+  - type: Tag
+    tags:
+    - SpellIgnoreForestAdmonitions

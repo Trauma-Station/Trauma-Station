@@ -8,8 +8,7 @@
   - type: Item
     size: Huge
   - type: Organ
-    slotId: armImplant
-  - type: AugmentArm
+    category: ArmAugment
 
 # Tools
 

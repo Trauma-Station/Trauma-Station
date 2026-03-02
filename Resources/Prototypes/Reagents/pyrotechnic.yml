@@ -52,21 +52,14 @@
   - !type:FlammableTileReaction
     temperatureMultiplier: 2
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Heat: 2
             Poison: 1
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
         damage:
           types:
             Heat: 2
@@ -90,25 +83,13 @@
       - !type:Flammable
         multiplier: 0.4
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Heat: 2
             Poison: 1
-            Caustic: 0.5 # based off napalm being an irritant
-      - !type:HealthChange # Goob - Yowie takes no poison from it
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-        damage:
-          types:
-            Heat: 2
             Caustic: 0.5 # based off napalm being an irritant
       - !type:Flammable
         multiplier: 0.4
@@ -123,24 +104,13 @@
   flavor: bitter
   color: "#D4872A"
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Heat: 3
             Poison: 1
-      - !type:HealthChange # Goob - Yowie takes no poison from phlog
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-        damage:
-          types:
-            Heat: 3
       - !type:Flammable
         multiplier: 0.1
       - !type:AdjustTemperature
@@ -166,25 +136,13 @@
   tileReactions:
   - !type:PryTileReaction
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Heat: 2
             Poison: 1
-            Caustic: 0.5 # CLF3 is corrosive
-      - !type:HealthChange # Goob - Yowie takes no poison from CLF3
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-        damage:
-          types:
-            Heat: 2
             Caustic: 0.5 # CLF3 is corrosive
       - !type:Flammable
         multiplier: 0.2
@@ -235,19 +193,17 @@
   tileReactions:
   - !type:FlammableTileReaction {}
   metabolisms:
-    Food:
+    Bloodstream:
       effects:
       - !type:SatiateThirst
         factor: 1
         conditions:
         - !type:MetabolizerTypeCondition
           type: [Vox]
-    Poison:
-      effects:
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Vox, Yowie ] # Goob - Yowie
+          type: [ Vox ]
           inverted: true
         damage:
           types:

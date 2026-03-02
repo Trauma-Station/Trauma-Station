@@ -24,8 +24,9 @@ jobs:
     if: github.repository == 'Trauma-Station/Trauma-Station'
 
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v5
         with:
+          token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           ref: master
 
       - name: Get this week's Contributors
@@ -45,21 +46,8 @@ jobs:
       # Uncomment this and comment the other line if you do this.
       # https://github.com/stefanzweifel/git-auto-commit-action#push-to-protected-branches
 
-      #- name: Commit new credit files
-      #  uses: stefanzweifel/git-auto-commit-action@v4
-      #  with:
-      #    commit_message: Update Credits
-      #    commit_author: PJBot <pieterjan.briers+bot@gmail.com>
-
-      # This will make a PR
-      - name: Set current date as env variable
-        run: echo "NOW=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+      - name: Commit new credit files
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit-message: Update Credits
-          title: Update Credits
-          body: This is an automated Pull Request. This PR updates the github contributors in the credits section.
-          author: SlopBot <slopbot@traumastation.com>
-          branch: automated/credits-${{env.NOW}}
+          commit_message: Update Credits
+          commit_author: SlopBot <slopbot@traumastation.com>

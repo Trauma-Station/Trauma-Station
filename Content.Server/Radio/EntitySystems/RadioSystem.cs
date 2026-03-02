@@ -1,12 +1,15 @@
 // <Trauma>
+using Content.Goobstation.Shared.Communications;
 using Content.Goobstation.Shared.Loudspeaker.Events;
 using Content.Goobstation.Shared.Radio;
-using Content.Server._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language;
+using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Access.Systems;
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.StatusIcon;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Speech;
+using System.Linq;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
@@ -29,14 +32,13 @@ namespace Content.Server.Radio.EntitySystems;
 /// <summary>
 ///     This system handles intrinsic radios and the general process of converting radio messages into chat messages.
 /// </summary>
-public sealed partial class RadioSystem : EntitySystem
+public sealed partial class RadioSystem : EntitySystem // Trauma - made partial
 {
-    // <Goob>
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
+    // <Trauma>
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedLanguageSystem _language = default!;
     [Dependency] private readonly RadioJobIconSystem _radioIcon = default!;
-    // </Goob>
+    // </Trauma>
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
@@ -75,10 +77,9 @@ public sealed partial class RadioSystem : EntitySystem
         if (TryComp(uid, out ActorComponent? actor))
         {
             // Einstein Engines - Languages begin
-            var listener = component.Owner;
             var msg = args.OriginalChatMsg;
 
-            if (listener != null && !_language.CanUnderstand(listener, args.Language.ID))
+            if (!_language.CanUnderstand(uid, args.Language.ID))
                 msg = args.LanguageObfuscatedChatMsg;
 
             _netMan.ServerSendMessage(new MsgChatMessage { Message = msg }, actor.PlayerSession.Channel);
@@ -291,10 +292,15 @@ public sealed partial class RadioSystem : EntitySystem
             : Loc.GetString("chat-radio-message-name-with-icon", ("jobIcon", jobIcon), ("jobName", jobName ?? ""), ("name", name));
         // goob end
 
+        // <Trauma> - allow source entity to replace font
+        var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
+        RaiseLocalEvent(source, ref fontEv);
+        // </Trauma>
+
         return Loc.GetString(wrapId,
             ("color", channel.Color),
             ("languageColor", languageColor),
-            ("fontType", language.SpeechOverride.FontId ?? speech.FontId),
+            ("fontType", fontEv.Font), // Trauma - use Font from above
             ("fontSize", loudSpeakFont ?? language.SpeechOverride.FontSize ?? speech.FontSize), // goob edit - "loudSpeakFont"
             ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId), // Goob Edit - Custom Bold Fonts
             ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),

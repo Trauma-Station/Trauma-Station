@@ -17,9 +17,6 @@
   id: DataChip
 
 - type: Tag
-  id: Ed209Prox
-
-- type: Tag
   id: Ed209Shell
 
 - type: Tag
@@ -53,7 +50,13 @@
   id: FlamethrowerTank
 
 - type: Tag
+  id: ForceHereticMinion
+
+- type: Tag
   id: ForgeMold
+
+- type: Tag
+  id: FusionCore
 
 - type: Tag
   id: HandTeleporter
@@ -86,7 +89,43 @@
   id: RevTurretBoard
 
 - type: Tag
+  id: RitualAscension
+
+- type: Tag
+  id: RitualBladeBlade
+
+- type: Tag
+  id: RitualFeastOfOwls
+
+- type: Tag
+  id: RitualKnowledge
+
+- type: Tag
+  id: SpellIgnoreForestAdmonitions
+
+- type: Tag
   id: TechfabMachineBoard
+
+- type: Tag
+  id: T45Frame
+
+- type: Tag
+  id: T45LegL
+
+- type: Tag
+  id: T45LegR
+
+- type: Tag
+  id: T45ArmR
+
+- type: Tag
+  id: T45ArmL
+
+- type: Tag
+  id: T45Chest
+
+- type: Tag
+  id: T45Helmet
 
 - type: Tag
   id: WelderExperimental

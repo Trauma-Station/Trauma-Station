@@ -1,0 +1,52 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationGeladikinesis
+  name: Geladikinesis
+  description: Allows the user to concentrate moisture and sub-zero forces into snow.
+  components:
+  - type: Mutation
+    instability: 10
+    difficulty: 10
+  - type: ActionMutation
+    action: ActionMutationGeladikinesis
+
+- type: entity
+  parent: BaseMutation
+  id: MutationCryokinesis
+  name: Cryokinesis
+  description: Draws negative energy from the sub-zero void to freeze surrounding temperatures at subject's will.
+  components:
+  - type: Mutation
+    instability: 25
+    difficulty: 12
+  - type: ActionMutation
+    action: ActionMutationCryokinesis
+
+- type: entity
+  parent: BaseConjureAction
+  id: ActionMutationGeladikinesis
+  name: Create Snow
+  description: Concentrates cryokinetic forces to create snow, useful for snow-like construction.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: Objects/Consumable/Food/frozen.rsi
+      state: cone
+  - type: ConjureAction
+    spawn: FoodFrozenSnowcone # TODO: if anyone ever makes a snow item, spawn that instead
+
+- type: entity
+  parent: ActionMutationPyrokinesis
+  id: ActionMutationCryokinesis
+  name: Cryobeam
+  description: This power fires a frozen bolt at a target.
+  components:
+  - type: Action
+    useDelay: 16
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: icebeam
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: BulletTemperatureCryo

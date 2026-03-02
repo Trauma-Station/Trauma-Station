@@ -30,26 +30,30 @@
   actionPrototypes:
   - ActionHereticOpenStore
   - ActionHereticMansusGrasp
+  event: !type:HereticStartupEvent
+    addedComponents:
+    - type: WeakToHoly
+    - type: CanEnchant
 
 - type: hereticKnowledge
   id: HeartbeatOfMansus
   ritualPrototypes:
-  - Sacrifice
+  - RitualSacrifice
 
 - type: hereticKnowledge
   id: AmberFocus
   ritualPrototypes:
-  - AmberFocus
+  - RitualAmberFocus
 
 - type: hereticKnowledge
   id: CodexCicatrix
   ritualPrototypes:
-  - CodexCicatrix
+  - RitualCodexCicatrix
 
 - type: hereticKnowledge
   id: LivingHeart
   ritualPrototypes:
-  - LivingHeart
+  - RitualLivingHeart
   actionPrototypes:
   - ActionHereticLivingHeart
 
@@ -59,14 +63,14 @@
   - ActionHereticShadowCloak
 
 - type: hereticKnowledge
-  id: Reminiscence
-  ritualPrototypes:
-  - Reminiscence
-
-- type: hereticKnowledge
   id: FeastOfOwls
   ritualPrototypes:
-  - FeastOfOwls
+  - RitualFeastOfOwls
+
+- type: hereticKnowledge
+  id: PhylacteryOfDamnation
+  ritualPrototypes:
+  - RitualPhylacteryOfDamnation
 
 ### ash path
 - type: hereticKnowledge
@@ -74,7 +78,7 @@
   path: Ash
   stage: 1
   ritualPrototypes:
-  - BladeAsh
+  - RitualBladeAsh
 
 - type: hereticKnowledge
   id: GraspOfAsh
@@ -82,17 +86,17 @@
   stage: 2
 
 - type: hereticKnowledge
+  id: MarkOfAsh
+  path: Ash
+  stage: 3
+
+- type: hereticKnowledge
   id: AshenShift
   path: Ash
   sideKnowledge: true
-  stage: 3
+  stage: 4
   actionPrototypes:
   - ActionHereticJaunt
-
-- type: hereticKnowledge
-  id: MarkOfAsh
-  path: Ash
-  stage: 4
 
 - type: hereticKnowledge
   id: VolcanicBlast
@@ -107,7 +111,7 @@
   sideKnowledge: true
   stage: 6
   ritualPrototypes:
-  - MaskOfMadness
+  - RitualMaskOfMadness
 
 - type: hereticKnowledge
   id: FieryBlade
@@ -127,7 +131,7 @@
   path: Ash
   stage: 9
   ritualPrototypes:
-  - AscensionAsh
+  - RitualAscensionAsh
 
 - type: hereticKnowledge
   id: AshlordRite
@@ -136,16 +140,21 @@
   actionPrototypes:
   - ActionHereticAscension1
   - ActionHereticAscension2
-  event: !type:HereticAscensionAshEvent
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: SpecialLowTempImmunity
+    - type: SpecialHighTempImmunity
+    - type: SpecialBreathingImmunity
+    - type: SpecialPressureImmunity
+    - type: FireImmunity
 
 ### blade path
 - type: hereticKnowledge
   id: CuttingEdge
   path: Blade
   stage: 1
-  event: !type:HereticCuttingEdgeEvent
   ritualPrototypes:
-  - BladeBlade
+  - RitualBladeBlade
 
 - type: hereticKnowledge
   id: GraspOfBlade
@@ -153,28 +162,34 @@
   stage: 2
 
 - type: hereticKnowledge
-  id: DanceOfTheBrand
-  path: Blade
-  stage: 3
-  event: !type:HereticDanceOfTheBrandEvent
-
-- type: hereticKnowledge
   id: MarkOfBlade
   path: Blade
-  stage: 4
+  stage: 3
 
 - type: hereticKnowledge
-  id: Realignment
+  id: DanceOfTheBrand
+  path: Blade
+  stage: 4
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: Ripostee
+      data:
+        HereticBlade: !type:RiposteData
+
+- type: hereticKnowledge
+  id: SacramentsOfPower
   path: Blade
   stage: 5
   actionPrototypes:
-  - ActionHereticRealignment
+  - ActionHereticSacraments
 
 - type: hereticKnowledge
   id: TornChampionStance
   path: Blade
   stage: 6
   event: !type:HereticChampionStanceEvent
+    addedComponents:
+    - type: ChampionStance
 
 - type: hereticKnowledge
   id: EmpoweredBlades
@@ -193,13 +208,15 @@
   path: Blade
   stage: 9
   ritualPrototypes:
-  - AscensionBlade
+  - RitualAscensionBlade
 
 - type: hereticKnowledge
   id: MaelstromOfSilver
   path: Blade
   stage: 10
-  event: !type:HereticAscensionBladeEvent
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: SilverMaelstrom
 
 ### flesh path
 - type: hereticKnowledge
@@ -207,26 +224,28 @@
   path: Flesh
   stage: 1
   ritualPrototypes:
-  - BladeFlesh
+  - RitualBladeFlesh
 
 - type: hereticKnowledge
   id: GraspOfFlesh
   path: Flesh
   stage: 2
-  event: !type:EventHereticFleshPassive
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: FleshPassive
+
+- type: hereticKnowledge
+  id: MarkOfFlesh
+  path: Flesh
+  stage: 3
 
 - type: hereticKnowledge
   id: ImperfectRitual
   path: Flesh
   sideKnowledge: true
-  stage: 3
-  ritualPrototypes:
-  - ImperfectRitual
-
-- type: hereticKnowledge
-  id: MarkOfFlesh
-  path: Flesh
   stage: 4
+  ritualPrototypes:
+  - RitualImperfect
 
 - type: hereticKnowledge
   id: KnittingOfFlesh
@@ -241,7 +260,7 @@
   sideKnowledge: true
   stage: 6
   ritualPrototypes:
-  - RawRitual
+  - RitualRaw
 
 - type: hereticKnowledge
   id: BleedingSteel
@@ -254,20 +273,25 @@
   sideKnowledge: true
   stage: 8
   ritualPrototypes:
-  - LonelyRitual
+  - RitualLonely
 
 - type: hereticKnowledge
   id: AscensionFlesh
   path: Flesh
   stage: 9
   ritualPrototypes:
-  - AscensionFlesh
+  - RitualAscensionFlesh
 
 - type: hereticKnowledge
   id: PriestFinalHymn
   path: Flesh
   stage: 10
-  event: !type:HereticAscensionFleshEvent
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: SpecialLowTempImmunity
+    - type: SpecialHighTempImmunity
+    - type: SpecialPressureImmunity
+    - type: FleshPassive
 
 ### void path
 - type: hereticKnowledge
@@ -275,42 +299,28 @@
   path: Void
   stage: 1
   ritualPrototypes:
-  - BladeVoid
+  - RitualBladeVoid
 
 - type: hereticKnowledge
   id: GraspOfVoid
   path: Void
   stage: 2
-  event: !type:HereticAristocratWayEvent
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: SpecialLowTempImmunity
 
-#- type: hereticKnowledge
-#  id: AristocratWay
-#  path: Void
-#  sideKnowledge: true
-#  stage: 3
-#  event: !type:HereticAristocratWayEvent
+- type: hereticKnowledge
+  id: MarkOfVoid
+  path: Void
+  stage: 3
 
 - type: hereticKnowledge
   id: VoidPhase
   path: Void
   sideKnowledge: true
-  stage: 3
+  stage: 4
   actionPrototypes:
   - ActionHereticVoidPhase
-
-- type: hereticKnowledge
-  id: MarkOfVoid
-  path: Void
-  stage: 4
-  event: !type:HereticAristocratWayEvent
-    grantBreathingImmunity: true
-
-#- type: hereticKnowledge
-#  id: VoidBlast
-#  path: Void
-#  stage: 5
-#  actionPrototypes:
-#  - ActionHereticVoidBlast
 
 - type: hereticKnowledge
   id: VoidPrison
@@ -331,6 +341,9 @@
   id: SeekingBlade
   path: Void
   stage: 7
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: SpecialBreathingImmunity
 
 - type: hereticKnowledge
   id: VoidConduit
@@ -345,13 +358,30 @@
   stage: 9
   path: Void
   ritualPrototypes:
-  - AscensionVoid
+  - RitualAscensionVoid
 
 - type: hereticKnowledge
   id: WaltzAtTheEndOfTime
   stage: 10
   path: Void
-  event: !type:HereticAscensionVoidEvent
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: SpecialLowTempImmunity
+    - type: SpecialHighTempImmunity
+    - type: SpecialBreathingImmunity
+    - type: SpecialPressureImmunity
+    - type: Aristocrat
+    - type: MovementAlwaysTouching
+    - type: CanMoveInAir
+    - type: NoSlip
+    - type: ThermalVision
+      color: "#b4babf"
+      isActive: true
+      lightRadius: 7.5
+      flashDurationMultiplier: 1
+      activateSound: null
+      deactivateSound: null
+      thermalShader: null
 
 ## rust path
 - type: hereticKnowledge
@@ -359,26 +389,28 @@
   path: Rust
   stage: 1
   ritualPrototypes:
-  - BladeRust
+  - RitualBladeRust
 
 - type: hereticKnowledge
   id: GraspOfRust
   path: Rust
   stage: 2
-  event: !type:HereticLeechingWalkEvent
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: LeechingWalk
+
+- type: hereticKnowledge
+  id: MarkOfRust
+  path: Rust
+  stage: 3
 
 - type: hereticKnowledge
   id: AggressiveSpread
   path: Rust
   sideKnowledge: true
-  stage: 3
+  stage: 4
   actionPrototypes:
   - ActionHereticAggressiveSpread
-
-- type: hereticKnowledge
-  id: MarkOfRust
-  path: Rust
-  stage: 4
 
 - type: hereticKnowledge
   id: RustConstruction
@@ -413,13 +445,16 @@
   stage: 9
   path: Rust
   ritualPrototypes:
-  - AscensionRust
+  - RitualAscensionRust
 
 - type: hereticKnowledge
   id: RustbringersOath
   stage: 10
   path: Rust
-  event: !type:HereticAscensionRustEvent
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: LeechingWalk
+    - type: Rustbringer
 
 ## cosmos path
 - type: hereticKnowledge
@@ -427,26 +462,28 @@
   path: Cosmos
   stage: 1
   ritualPrototypes:
-  - BladeCosmos
+  - RitualBladeCosmos
 
 - type: hereticKnowledge
   id: GraspOfCosmos
   path: Cosmos
   stage: 2
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: CosmosPassive
+
+- type: hereticKnowledge
+  id: MarkOfCosmos
+  path: Cosmos
+  stage: 3
 
 - type: hereticKnowledge
   id: CosmicRunes
   path: Cosmos
   sideKnowledge: true
-  stage: 3
+  stage: 4
   actionPrototypes:
   - ActionHereticCosmicRune
-
-- type: hereticKnowledge
-  id: MarkOfCosmos
-  path: Cosmos
-  stage: 4
-  event: !type:EventHereticCosmosPassive
 
 - type: hereticKnowledge
   id: StarTouch
@@ -481,58 +518,81 @@
   stage: 9
   path: Cosmos
   ritualPrototypes:
-  - AscensionCosmos
+  - RitualAscensionCosmos
 
 - type: hereticKnowledge
   id: CreatorsGift
   stage: 10
   path: Cosmos
   event: !type:HereticAscensionCosmosEvent
+    addedComponents:
+    - type: SpecialLowTempImmunity
+    - type: SpecialHighTempImmunity
+    - type: SpecialPressureImmunity
+    - type: NightVision
+      color: white
+      activateSound: null
+      deactivateSound: null
+      drawOverlay: false
   actionPrototypes:
   - ActionResetStarGazerConsciousness
 
-### side paths
 - type: hereticKnowledge
   id: RitualOfKnowledge
   sideKnowledge: true
   ritualPrototypes:
-  - RitualOfKnowledge
+  - RitualKnowledge
 
-## stage 3
+## stage 4
+
 - type: hereticKnowledge
   id: ArmorerRitual
   sideKnowledge: true
-  stage: 3
+  stage: 4
   ritualPrototypes:
-  - ArmorerRitual
+  - RitualArmorer
 
 - type: hereticKnowledge
   id: AshenEyesRitual
   sideKnowledge: true
-  stage: 3
+  stage: 4
   ritualPrototypes:
-  - AshenEyesRitual
+  - RitualAshenEyes
 
 - type: hereticKnowledge
   id: PriestRitual
   sideKnowledge: true
-  stage: 3
+  stage: 4
   ritualPrototypes:
-  - PriestRitual
+  - RitualPriest
 
 - type: hereticKnowledge
   id: VoidCloak
   sideKnowledge: true
-  stage: 3
+  stage: 4
   ritualPrototypes:
-  - VoidCloak
+  - RitualVoidCloak
 
 - type: hereticKnowledge
   id: ScorchingShark
   sideKnowledge: true
+  stage: 4
+  ritualPrototypes:
+  - RitualScorchingShark
+
+- type: hereticKnowledge
+  id: EtherOfTheNewborn
+  sideKnowledge: true
   stage: 3
   ritualPrototypes:
-  - ScorchingShark
+  - RitualEtherOfTheNewborn
+
+- type: hereticKnowledge
+  id: Realignment
+  sideKnowledge: true
+  stage: 3
+  actionPrototypes:
+  - ActionHereticRealignment
 
 ## stage 6
 - type: hereticKnowledge
@@ -540,14 +600,14 @@
   sideKnowledge: true
   stage: 6
   ritualPrototypes:
-  - RustedRitual
+  - RitualRusted
 
 - type: hereticKnowledge
   id: CarvingKnife
   sideKnowledge: true
   stage: 6
   ritualPrototypes:
-  - CarvingKnife
+  - RitualCarvingKnife
 
 - type: hereticKnowledge
   id: MysteriesOfCreation
@@ -556,6 +616,49 @@
   actionPrototypes:
   - ActionHereticIceSpear
 
+- type: hereticKnowledge
+  id: CodexMorbus
+  sideKnowledge: true
+  stage: 6
+  ritualPrototypes:
+  - RitualCodexMorbus
+
+- type: hereticKnowledge
+  id: GreavesOfTheProphet
+  sideKnowledge: true
+  stage: 6
+  ritualPrototypes:
+  - RitualGreavesOfTheProphet
+
+- type: hereticKnowledge
+  id: ShatteredRitual
+  sideKnowledge: true
+  stage: 6
+  ritualPrototypes:
+  - RitualShattered
+
+- type: hereticKnowledge
+  id: MawedCrucible
+  sideKnowledge: true
+  stage: 6
+  ritualPrototypes:
+  - RitualMawedCrucible
+
+- type: hereticKnowledge
+  id: ThroughTheBoundary
+  sideKnowledge: true
+  stage: 6
+  ritualPrototypes:
+  - RitualThroughTheBoundary
+
+- type: hereticKnowledge
+  id: MindGrasp
+  sideKnowledge: true
+  stage: 6
+  mindEvent: !type:HereticGraspUpgradeEvent
+    addedComponents:
+    - type: AreaMansusGrasp
+
 ## stage 8
 - type: hereticKnowledge
   id: Cleave
@@ -563,3 +666,29 @@
   stage: 8
   actionPrototypes:
   - ActionHereticCleave
+
+- type: hereticKnowledge
+  id: SpacePhase
+  sideKnowledge: true
+  stage: 8
+  actionPrototypes:
+  - ActionHereticSpacePhase
+
+- type: hereticKnowledge
+  id: MaidInTheMirror
+  sideKnowledge: true
+  stage: 8
+  ritualPrototypes:
+  - RitualMaidInTheMirror
+
+- type: hereticKnowledge
+  id: ForestAdmonitions
+  sideKnowledge: true
+  stage: 8
+  actionPrototypes:
+  - ActionHereticForestAdmonitions
+  mindEvent: !type:HereticRemoveActionEvent
+    action: ActionHereticShadowCloak
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: ForestAdmonitions

@@ -240,6 +240,7 @@
   - type: Penetratable # Goobstation - Better snipers
     penetrateDamage: 25
     damagePenalty: 0.1
+  - type: ReflectiveSurface # Goob
 
 - type: entity
   id: BaseSecureWindoor

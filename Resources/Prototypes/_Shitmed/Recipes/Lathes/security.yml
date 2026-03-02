@@ -8,7 +8,7 @@
 
 - type: latheRecipe
   id: SecurityCyberneticEyes
-  result: SecurityCyberneticEyes
+  result: OrganCyberneticEyesSecurity
   categories:
   - Robotics
   completetime: 10

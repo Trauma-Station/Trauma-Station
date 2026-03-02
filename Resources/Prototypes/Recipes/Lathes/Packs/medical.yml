@@ -15,8 +15,9 @@
   - Syringe
   - PillCanister
   - HandLabeler
-  - ChemicalPayload
-  - BaseChemistryEmptyVial
+  - ChemicalPayload # Goob
+  - ChemistryEmptyVial
+  - ChemistryEmptyVialSmall
   - Dropper
 
 - type: latheRecipePack
@@ -86,6 +87,7 @@
   - ChemMasterMachineCircuitboard
   - CondenserMachineCircuitBoard
   - HotplateMachineCircuitboard
+  - EnergyChemDispenserMachineCircuitboard #Goob edit - all things that get base med boards get E-Chem
 
 ## Dynamic
 

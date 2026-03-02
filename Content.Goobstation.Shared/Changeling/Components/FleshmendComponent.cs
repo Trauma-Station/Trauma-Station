@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Audio;
@@ -41,13 +38,13 @@ public sealed partial class FleshmendComponent : Component
     public bool IgnoreFire = false; // for whatever reason
 
     [DataField]
-    public float BruteHeal = -10f;
+    public float BruteHeal = -9f;
 
     [DataField]
     public float BurnHeal = -5f;
 
     [DataField]
-    public float AsphyxHeal = -2f;
+    public float AsphyxHeal = -4f;
 
     [DataField]
     public float BleedingAdjust = -2.5f;

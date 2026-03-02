@@ -7,7 +7,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Prototypes;
 
@@ -16,38 +16,20 @@ namespace Content.Shared._Goobstation.Heretic.Components;
 [RegisterComponent]
 public sealed partial class LeechingWalkComponent : Component
 {
-    [DataField]
-    public FixedPoint2 BoneHeal = -5;
+    public override bool SessionSpecific => true;
 
     [DataField]
-    public DamageSpecifier ToHeal = new()
-    {
-        DamageDict =
-        {
-            {"Blunt", -1},
-            {"Slash", -1},
-            {"Piercing", -1},
-            {"Heat", -1},
-            {"Cold", -1},
-            {"Shock", -1},
-            {"Asphyxiation", -1},
-            {"Bloodloss", -1},
-            {"Caustic", -1},
-            {"Poison", -1},
-            {"Radiation", -1},
-            {"Cellular", -1},
-            {"Holy", -1},
-        },
-    };
+    public FixedPoint2 BoneHeal = -5;
 
     [DataField]
     public float StaminaHeal = 5f;
 
     [DataField]
-    public float ChemPurgeRate = 2f;
+    public float ChemPurgeRate = 3f;
 
     [DataField]
-    public ProtoId<ReagentPrototype> ExcludedReagent = "EldritchEssence";
+    public ProtoId<ReagentPrototype>[] ExcludedReagents =
+        ["EldritchEssence", "CrucibleSoul", "DuskAndDawn", "WoundedSoldier", "NewbornEther"];
 
     [DataField]
     public FixedPoint2 BloodHeal = 5f;
@@ -57,4 +39,13 @@ public sealed partial class LeechingWalkComponent : Component
 
     [DataField]
     public float TargetTemperature = 310f;
+
+    [DataField]
+    public EntProtoId SleepStatus = "StatusEffectForcedSleeping";
+
+    [DataField]
+    public EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
+
+    [DataField]
+    public EntProtoId RainbowStatus = "StatusEffectSeeingRainbow";
 }

@@ -1,9 +1,9 @@
 // <Trauma>
 using Content.Shared._DV.StepTrigger.Components;
-using Content.Shared._vg.TileMovement;
-using Content.Shared.Interaction;
 using Content.Shared.Physics;
+using Content.Shared._vg.TileMovement;
 using Content.Shared.Standing;
+using Content.Trauma.Common.Movement;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
@@ -42,7 +42,6 @@ namespace Content.Shared.Movement.Systems;
 public abstract partial class SharedMoverController : VirtualController
 {
     // <Trauma>
-    [Dependency] private   readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private   readonly StandingStateSystem _standing = default!;
     // </Trauma>
     [Dependency] private   readonly IConfigurationManager _configManager = default!;
@@ -431,6 +430,11 @@ public abstract partial class SharedMoverController : VirtualController
                 {
                     _audio.PlayPredicted(sound, uid, uid, audioParams);
                 }
+
+                // <Trauma>
+                var stepEv = new FootStepEvent(uid);
+                RaiseLocalEvent(uid, ref stepEv);
+                // </Trauma>
             }
         }
     }
@@ -828,6 +832,10 @@ public abstract partial class SharedMoverController : VirtualController
                     tileMovement,
                     movementSpeed))
                 {
+                    // <Trauma>
+                    var stepEv = new FootStepEvent(uid);
+                    RaiseLocalEvent(uid, ref stepEv);
+                    // </Trauma>
                     EndSlide(uid, tileMovement);
 
                     // After ending the slide, check for immediately starting a new slide.

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Configuration;
 
 namespace Content.Trauma.Common.CCVar;
@@ -5,13 +7,7 @@ namespace Content.Trauma.Common.CCVar;
 [CVarDefs]
 public sealed partial class TraumaCVars
 {
-    #region Slop
-
-    /// <summary>
-    ///     Is antag pity enabled
-    /// </summary>
-    public static readonly CVarDef<bool> AntagPityEnabled =
-        CVarDef.Create("trauma.pity_enabled", false, CVar.SERVER | CVar.REPLICATED);
+    #region Disabling features
 
     /// <summary>
     /// Whether to enable the ghost bar.
@@ -19,6 +15,12 @@ public sealed partial class TraumaCVars
     /// </summary>
     public static readonly CVarDef<bool> GhostBarEnabled =
         CVarDef.Create("trauma.ghost_bar_enabled", true, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// Whether to disable pathfinding, used for tests to not balloon memory usage and runtime.
+    /// </summary>
+    public static readonly CVarDef<bool> DisablePathfinding =
+        CVarDef.Create("trauma.disable_pathfinding", false, CVar.SERVER);
 
     #endregion
 
@@ -39,12 +41,6 @@ public sealed partial class TraumaCVars
     #endregion
 
     #region AudioMuffle
-
-    /// <summary>
-    /// Is audio muffle raycast behavior enabled?
-    /// </summary>
-    public static readonly CVarDef<bool> AudioMuffleRaycast =
-        CVarDef.Create("trauma.audio_muffle_raycast", true, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     /// Is audio muffle pathfinding behavior enabled?

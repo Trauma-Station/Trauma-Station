@@ -13,16 +13,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Weapons.DelayedKnockdown;
-using Content.Server.Heretic.Components.PathSpecific;
-using Content.Shared._Goobstation.Heretic.Components;
-using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared.Damage.Components;
 using Content.Shared.Heretic;
-using Content.Shared.Stunnable;
-using Content.Shared.CombatMode.Pacification;
 using Robust.Shared.Timing;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components; // Shitmed Change
+using Content.Medical.Shared.Wounds; // Shitmed Change
 
 namespace Content.Server.Heretic.Abilities;
 
@@ -32,69 +25,25 @@ public sealed partial class HereticAbilitySystem
     {
         base.SubscribeBlade();
 
-        SubscribeLocalEvent<HereticComponent, HereticDanceOfTheBrandEvent>(OnDanceOfTheBrand);
-        SubscribeLocalEvent<HereticComponent, EventHereticRealignment>(OnRealignment);
-        SubscribeLocalEvent<HereticComponent, HereticChampionStanceEvent>(OnChampionStance);
-        SubscribeLocalEvent<HereticComponent, EventHereticFuriousSteel>(OnFuriousSteel);
-
-        SubscribeLocalEvent<HereticComponent, HereticAscensionBladeEvent>(OnAscensionBlade);
+        SubscribeLocalEvent<HereticChampionStanceEvent>(OnChampionStance);
+        SubscribeLocalEvent<EventHereticFuriousSteel>(OnFuriousSteel);
     }
 
-    private void OnDanceOfTheBrand(Entity<HereticComponent> ent, ref HereticDanceOfTheBrandEvent args)
+    private void OnChampionStance(HereticChampionStanceEvent args)
     {
-        var riposte = EnsureComp<RiposteeComponent>(ent);
-        riposte.Data.TryAdd("HereticBlade", new());
+        foreach (var part in _body.GetOrgans<WoundableComponent>(args.Heretic))
+        {
+            part.Comp.CanRemove = args.Negative;
+            Dirty(part);
+        }
     }
 
-    private void OnRealignment(Entity<HereticComponent> ent, ref EventHereticRealignment args)
+    private void OnFuriousSteel(EventHereticFuriousSteel args)
     {
-        if (!TryUseAbility(ent, args))
+        if (!TryUseAbility(args))
             return;
 
-        _statusEffect.TryRemoveStatusEffect(ent, "Stun");
-        RemComp<KnockedDownComponent>(ent);
-        _statusEffect.TryRemoveStatusEffect(ent, "ForcedSleep");
-        _statusEffect.TryRemoveStatusEffect(ent, "Drowsiness");
-
-        if (TryComp<StaminaComponent>(ent, out var stam))
-        {
-            if (stam.StaminaDamage >= stam.CritThreshold)
-                _stam.ExitStamCrit(ent, stam);
-
-            // Trauma edit start
-            stam.StaminaDamage = 0;
-            RemComp<ActiveStaminaComponent>(ent);
-            // _stam.ToggleStaminaDrain(ent, args.StaminaRegenRate, true, true, args.StaminaRegenKey, ent);
-            // Trauma edit end
-            Dirty(ent, stam);
-        }
-
-        _standing.Stand(ent);
-        RemCompDeferred<DelayedKnockdownComponent>(ent);
-        _pulling.StopAllPulls(ent, stopPuller: false);
-        if (_statusEffect.TryAddStatusEffect<PacifiedComponent>(ent, "Pacified", TimeSpan.FromSeconds(10f), true))
-            _statusEffect.TryAddStatusEffect<RealignmentComponent>(ent, "Realignment", TimeSpan.FromSeconds(10f), true);
-
-        args.Handled = true;
-    }
-
-    private void OnChampionStance(Entity<HereticComponent> ent, ref HereticChampionStanceEvent args)
-    {
-        foreach (var part in _body.GetBodyChildren(ent))
-        {
-            if (!TryComp(part.Id, out WoundableComponent? woundable))
-                continue;
-
-            woundable.CanRemove = false;
-            Dirty(part.Id, woundable);
-        }
-
-        EnsureComp<ChampionStanceComponent>(ent);
-    }
-    private void OnFuriousSteel(Entity<HereticComponent> ent, ref EventHereticFuriousSteel args)
-    {
-        if (!TryUseAbility(ent, args))
-            return;
+        var ent = args.Performer;
 
         _pblade.AddProtectiveBlade(ent);
         for (var i = 1; i < 3; i++)
@@ -110,10 +59,5 @@ public sealed partial class HereticAbilitySystem
         }
 
         args.Handled = true;
-    }
-
-    private void OnAscensionBlade(Entity<HereticComponent> ent, ref HereticAscensionBladeEvent args)
-    {
-        EnsureComp<SilverMaelstromComponent>(ent);
     }
 }

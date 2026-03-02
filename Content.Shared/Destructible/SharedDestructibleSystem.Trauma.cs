@@ -1,13 +1,13 @@
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos.EntitySystems;
-using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Construction;
 using Content.Shared.Destructible.Thresholds.Behaviors;
 using Content.Shared.Destructible.Thresholds.Triggers;
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.Fluids;
+using Content.Shared.Gibbing;
 using Content.Shared.Stacks;
 using Content.Shared.Trigger.Systems;
 using Robust.Shared.Audio.Systems;
@@ -28,7 +28,7 @@ public abstract partial class SharedDestructibleSystem
 
     [Dependency] public readonly SharedAtmosphereSystem AtmosphereSystem = default!;
     [Dependency] public readonly SharedAudioSystem AudioSystem = default!;
-    [Dependency] public readonly SharedBodySystem BodySystem = default!;
+    [Dependency] public readonly GibbingSystem Gibbing = default!;
     [Dependency] public readonly SharedConstructionSystem ConstructionSystem = default!;
     [Dependency] public readonly SharedExplosionSystem ExplosionSystem = default!;
     [Dependency] public readonly SharedStackSystem StackSystem = default!;

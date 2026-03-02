@@ -56,6 +56,13 @@
     ClothingShoesBootsCowboyBrown: 1
     ClothingShoesBootsCowboyBlack: 1
     ClothingShoesBootsCowboyWhite: 1
+    # <DeltaV>
+    ClothingHeadHelmetRoman: 2
+    ClothingHeadHelmetRomanCenturion: 2
+    ClothingUniformJumpsuitRoman: 3
+    ClothingShoesBootsRoman: 3
+    ClothingHeadHatLaurelWreath: 2
+    # </DeltaV>
     # <Goob>
     ClothingCostumeAbductorHead: 1
     ClothingCostumeAbductor: 1

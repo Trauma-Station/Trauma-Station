@@ -1,10 +1,9 @@
 using Content.Server.Heretic.Abilities;
 using Content.Server.Heretic.Components.PathSpecific;
 using Content.Server.Shuttles.Components;
-using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared.Atmos;
+using Content.Shared.Heretic;
 using Content.Shared.Maps;
-using Content.Shared.Mobs;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 
@@ -15,7 +14,6 @@ public sealed class RustSpreaderSystem : EntitySystem
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
 
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly HereticAbilitySystem _ability = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
@@ -28,25 +26,12 @@ public sealed class RustSpreaderSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RustSpreaderComponent, MapInitEvent>(OnInit);
-
-        SubscribeLocalEvent<RustbringerComponent, MobStateChangedEvent>(OnStateChanged);
-        SubscribeLocalEvent<RustbringerComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<RustSpreaderComponent, HereticStateChangedEvent>(OnStateChanged);
     }
 
-    private void OnShutdown(Entity<RustbringerComponent> ent, ref ComponentShutdown args)
+    private void OnStateChanged(Entity<RustSpreaderComponent> ent, ref HereticStateChangedEvent args)
     {
-        if (!Exists(ent.Comp.RustSpreader) || TerminatingOrDeleted(ent.Comp.RustSpreader))
-            return;
-
-        QueueDel(ent.Comp.RustSpreader);
-    }
-
-    private void OnStateChanged(Entity<RustbringerComponent> ent, ref MobStateChangedEvent args)
-    {
-        if (!Exists(ent.Comp.RustSpreader) || !TryComp(ent.Comp.RustSpreader, out RustSpreaderComponent? spreader))
-            return;
-
-        spreader.Paused = args.NewMobState == MobState.Dead;
+        ent.Comp.Paused = args.IsDead;
     }
 
     private void OnInit(Entity<RustSpreaderComponent> ent, ref MapInitEvent args)
@@ -66,7 +51,7 @@ public sealed class RustSpreaderSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        _accumulator += frameTime;
+        _accumulator += frameTime; // TODO: kill
 
         if (_accumulator < RustSpreadInterval)
             return;
@@ -133,7 +118,7 @@ public sealed class RustSpreaderSystem : EntitySystem
                 List<EntityUid> toRust = new();
                 while (ourEnts.MoveNext(out var ent))
                 {
-                    if (dockQuery.TryGetComponent(ent.Value, out var dock))
+                    if (dockQuery.HasComp(ent.Value))
                         spreader.AffectedDocks.Add(ent.Value);
                     else
                         toRust.Add(ent.Value);

@@ -39,3 +39,12 @@ reagent-desc-nanomachines = A black, dark fluid that seems to move on it's own. 
 
 reagent-name-nanoprocessor = nanoprocessor
 reagent-desc-nanoprocessor = A white fluid that is responsible for computing at the nanoscopic level.
+
+reagent-name-calcium-carbonate = calcium carbonate
+reagent-desc-calcium-carbonate = Also known as lime, typically found in limestone and egg shells.
+
+reagent-name-calcium-oxide = calcium oxide
+reagent-desc-calcium-oxide = Also known as quicklime, used in cement, reacts with water to produce heat and calcium hydroxide
+
+reagent-name-calcium-hydroxide = calcium hydroxide
+reagent-desc-calcium-hydroxide = The result of calcium oxide reacting with water.

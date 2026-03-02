@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.GameTicking;
 using Content.Goobstation.Common.StationReport;
 using Content.Shared.Paper;
@@ -25,7 +27,7 @@ public sealed class StationReportSystem : EntitySystem
         {
             if (!TryComp<PaperComponent>(uid, out var paper))
                return;
-            
+
             stationReportText = paper.Content;
             break;
         }
@@ -36,6 +38,5 @@ public sealed class StationReportSystem : EntitySystem
     public void BroadcastStationReport(string? stationReportText)
     {
         RaiseNetworkEvent(new StationReportEvent(stationReportText));//to send to client
-        RaiseLocalEvent(new StationReportEvent(stationReportText));//to send to discord intergration
     }
 }

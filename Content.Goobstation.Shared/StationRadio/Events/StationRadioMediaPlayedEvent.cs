@@ -1,14 +1,8 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Audio;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.StationRadio.Events;
 
-[Serializable, NetSerializable]
-public sealed class StationRadioMediaPlayedEvent : EntityEventArgs
-{
-    public SoundPathSpecifier MediaPlayed { get; }
-    public StationRadioMediaPlayedEvent(SoundPathSpecifier Media)
-    {
-        MediaPlayed = Media;
-    }
-}
+[ByRefEvent]
+public record struct StationRadioMediaPlayedEvent(SoundPathSpecifier MediaPlayed);

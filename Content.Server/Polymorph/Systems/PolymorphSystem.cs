@@ -2,12 +2,10 @@
 using Content.Shared._Goobstation.Wizard.BindSoul;
 using Content.Shared.Actions.Components;
 using Content.Shared.Buckle.Components;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Inventory;
 using Content.Shared.NameModifier.Components;
+using Content.Shared.Polymorph.Systems;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Tag;
 using Robust.Shared.Map;
@@ -20,6 +18,7 @@ using Content.Server.Actions;
 using Content.Server.Humanoid;
 using Content.Server.Inventory;
 using Content.Server.Polymorph.Components;
+using Content.Shared.Body;
 using Content.Shared.Buckle;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage.Components;
@@ -42,14 +41,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Polymorph.Systems;
 
-public sealed partial class PolymorphSystem : EntitySystem
+public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - extend shared system
 {
     // <Trauma>
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
     // </Trauma>
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
@@ -59,13 +57,13 @@ public sealed partial class PolymorphSystem : EntitySystem
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly ServerInventorySystem _inventory = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
 
@@ -193,7 +191,7 @@ public sealed partial class PolymorphSystem : EntitySystem
     /// </summary>
     /// <param name="uid">The entity that will be transformed</param>
     /// <param name="protoId">The id of the polymorph prototype</param>
-    public EntityUid? PolymorphEntity(EntityUid uid, ProtoId<PolymorphPrototype> protoId)
+    public override EntityUid? PolymorphEntity(EntityUid uid, ProtoId<PolymorphPrototype> protoId) // Trauma - override virtual method
     {
         var config = _proto.Index(protoId).Configuration;
         return PolymorphEntity(uid, config);
@@ -205,7 +203,7 @@ public sealed partial class PolymorphSystem : EntitySystem
     /// <param name="uid">The entity that will be transformed</param>
     /// <param name="configuration">The new polymorph configuration</param>
     /// <returns>The new entity, or null if the polymorph failed.</returns>
-    public EntityUid? PolymorphEntity(EntityUid uid, PolymorphConfiguration configuration)
+    public override EntityUid? PolymorphEntity(EntityUid uid, PolymorphConfiguration configuration) // Trauma - override virtual method
     {
         // If they're morphed, check their current config to see if they can be
         // morphed again
@@ -247,17 +245,10 @@ public sealed partial class PolymorphSystem : EntitySystem
         }
         var child = Spawn(proto, _transform.GetMapCoordinates(uid, targetTransformComp), rotation: _transform.GetWorldRotation(uid));
 
-        // added AllowMovement
-        _mindSystem.MakeSentient(child, configuration.AllowMovement);
+        // added AllowMovement, check MakeSentient option
+        if (configuration.MakeSentient)
+            _mindSystem.MakeSentient(child, configuration.AllowMovement);
         // </Goob>
-
-        // Einstein Engines - Language begin
-
-        // Copy specified components over
-        foreach (var compName in configuration.CopiedComponents)
-            CopyPolymorphComponent(uid, child, compName, transfer: false);
-
-        // Einstein Engines - Language end
 
         var polymorphedComp = Factory.GetComponent<PolymorphedEntityComponent>();
         polymorphedComp.Parent = uid;
@@ -282,33 +273,23 @@ public sealed partial class PolymorphSystem : EntitySystem
         //Transfers all damage from the original to the new one
         if (configuration.TransferDamage &&
             TryComp<DamageableComponent>(child, out var damageChild) &&
-            _mobThreshold.GetScaledDamage(uid, child, out var damage, out var woundableDamage) &&
+            _mobThreshold.GetScaledDamage(uid, child, out var damage, out var organDamages) &&
             damage != null)
         {
-            // <Shitmed>
-            if (TryComp<BodyComponent>(child, out var childBody)
-                && childBody.BodyType == Content.Shared._Shitmed.Body.BodyType.Complex // Too lazy to come up with a new name lmfao
-                && _body.TryGetRootPart(child, out var rootPart, childBody))
+            // <Trauma> - update new bodys limb damage with old one
+            if (TryComp<BodyComponent>(child, out var childBody))
             {
-                var woundables = _wound.GetAllWoundableChildrenWithComp<DamageableComponent>(rootPart.Value);
-                var count = woundables.Count();
-                foreach (var woundable in woundables)
+                var organs = _body.GetOrgans((child, childBody));
+                var count = organs.Count();
+                foreach (var organ in organs)
                 {
-                    var target = _body.GetTargetBodyPart(woundable);
-
-                    if (woundableDamage is not null)
-                    {
-                        if (woundableDamage.TryGetValue(target, out var wounds))
-                            _damageable.SetDamage((woundable, woundable.Comp2), wounds);
-                    }
-                    else
-                    {
-                        _damageable.SetDamage((woundable, woundable.Comp2), damage / count);
-                    }
+                    if (organ.Comp.Category is not {} category || organDamages == null || !organDamages.TryGetValue(category, out var organDamage))
+                        organDamage = damage / count;
+                    _damageable.SetDamage(organ.Owner, organDamage);
                 }
 
             }
-            // </Shitmed>
+            // </Trauma>
             _damageable.SetDamage((child, damageChild), damage);
         }
 
@@ -366,31 +347,30 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         if (configuration.TransferName && TryComp(uid, out MetaDataComponent? targetMeta))
         {
-            // Goob edit start
+            // <Trauma> - remove name modifier suffix by default
             _metaData.SetEntityName(child,
-                TryComp(uid, out NameModifierComponent? modifier) ? modifier.BaseName : targetMeta.EntityName);
-            // Goob edit end
+                configuration.StripNameModifier && TryComp(uid, out NameModifierComponent? modifier) ? modifier.BaseName : targetMeta.EntityName);
+            // </Trauma>
         }
 
         if (configuration.TransferHumanoidAppearance)
         {
-            _humanoid.CloneAppearance(uid, child);
+            _visualBody.CopyAppearanceFrom(uid, child);
         }
 
         if (configuration.ComponentsToTransfer.Count > 0) // Goobstation
         {
             foreach (var data in configuration.ComponentsToTransfer)
             {
-                Type type;
-                try
+                // <Trauma>
+                if (!Factory.TryGetRegistration(data.Component, out var registration))
                 {
-                    type = Factory.GetRegistration(data.Component).Type;
-                }
-                catch (UnknownComponentException e)
-                {
-                    Log.Error(e.Message);
+                    Log.Error($"Unknown component name: {data.Component}");
                     continue;
                 }
+                // </Trauma>
+
+                var type = registration.Type;
 
                 if (!EntityManager.TryGetComponent(uid, type, out var component))
                     continue;
@@ -439,6 +419,13 @@ public sealed partial class PolymorphSystem : EntitySystem
     }
 
     /// <summary>
+    /// Trauma - override version of <see cref="Revert"/> that can't take a component.
+    /// Can't just move the proper method it isn't in shared and idc.
+    /// </summary>
+    public override EntityUid? RevertPolymorph(EntityUid uid)
+        => Revert(uid);
+
+    /// <summary>
     /// Reverts a polymorphed entity back into its original form
     /// </summary>
     /// <param name="uid">The entityuid of the entity being reverted</param>
@@ -446,7 +433,7 @@ public sealed partial class PolymorphSystem : EntitySystem
     public EntityUid? Revert(Entity<PolymorphedEntityComponent?> ent)
     {
         var (uid, component) = ent;
-        if (!Resolve(ent, ref component))
+        if (!Resolve(ent, ref component, false)) // Trauma - add false so it doesn't error for non polymorphed entities
             return null;
 
         if (Deleted(uid))
@@ -475,33 +462,23 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         if (component.Configuration.TransferDamage &&
             TryComp<DamageableComponent>(parent, out var damageParent) &&
-            _mobThreshold.GetScaledDamage(uid, parent, out var damage, out var woundableDamage) &&
+            _mobThreshold.GetScaledDamage(uid, parent, out var damage, out var organDamages) &&
             damage != null)
         {
-            // <Shitmed>
-            if (TryComp<BodyComponent>(parent, out var parentBody)
-                && parentBody.BodyType == Content.Shared._Shitmed.Body.BodyType.Complex // Too lazy to come up with a new name lmfao
-                && _body.TryGetRootPart(parent, out var rootPart, parentBody))
+            // <Trauma> - update old bodys limb damage with reverted one
+            if (TryComp<BodyComponent>(parent, out var parentBody))
             {
-                var woundables = _wound.GetAllWoundableChildrenWithComp<DamageableComponent>(rootPart.Value);
-                var count = woundables.Count();
-                foreach (var woundable in woundables)
+                var organs = _body.GetOrgans((parent, parentBody));
+                var count = organs.Count();
+                foreach (var organ in organs)
                 {
-                    var target = _body.GetTargetBodyPart(woundable);
-
-                    if (woundableDamage is not null)
-                    {
-                        if (woundableDamage.TryGetValue(target, out var wounds))
-                            _damageable.SetDamage((woundable, woundable.Comp2), wounds);
-                    }
-                    else
-                    {
-                        _damageable.SetDamage((woundable, woundable.Comp2), damage / count);
-                    }
+                    if (organ.Comp.Category is not {} category || organDamages == null || !organDamages.TryGetValue(category, out var organDamage))
+                        organDamage = damage / count;
+                    _damageable.SetDamage(organ.Owner, organDamage);
                 }
 
             }
-            // </Shitmed>
+            // </Trauma>
             _damageable.SetDamage((parent, damageParent), damage);
         }
 
@@ -644,7 +621,7 @@ public sealed partial class PolymorphSystem : EntitySystem
             var newComp = (Component) Factory.GetComponent(compType);
             var temp = (object) newComp;
             _serialization.CopyTo(comp, ref temp, notNullableOverride: true);
-            EntityManager.AddComponent(@new, (Component) temp!);
+            EntityManager.AddComponent(@new, (Component) temp!, overwrite: true);
             return temp as IComponent;
         }
 

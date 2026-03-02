@@ -65,3 +65,29 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
+
+# Airlocks
+
+- type: construction
+  id: AirlockSealed
+  graph: Airlock
+  startNode: start
+  targetNode: sealedAirlock
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: AirlockSealedGlass
+  graph: Airlock
+  startNode: start
+  targetNode: sealedGlassAirlock
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

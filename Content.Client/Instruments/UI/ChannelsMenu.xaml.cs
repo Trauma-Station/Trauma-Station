@@ -50,7 +50,6 @@ public sealed partial class ChannelsMenu : DefaultWindow
 
     private void OnDisplayTrackNamesPressed(BaseButton.ButtonEventArgs obj)
     {
-        DisplayTrackNames.SetClickPressed(!DisplayTrackNames.Pressed);
         Populate();
     }
 

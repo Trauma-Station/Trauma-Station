@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 270.1.0
+  engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 01/12/2026 00:29:56
-  entityCount: 32676
+  time: 02/07/2026 14:55:47
+  entityCount: 32677
 maps:
 - 1
 grids:
@@ -10699,7 +10699,6 @@ entities:
     - type: SpreaderGrid
     - type: GridPathfinding
     - type: ImplicitRoof
-    - type: FTLDrive
     - type: ExplosionAirtightGrid
 - proto: AccordionInstrument
   entities:
@@ -82651,7 +82650,7 @@ entities:
       pos: -36.5,-19.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -12029.034
+      secondsUntilStateChange: -12058.649
       state: Closing
 - proto: d10Dice
   entities:
@@ -141618,6 +141617,13 @@ entities:
     - type: Transform
       pos: 39.418716,8.426597
       parent: 2
+- proto: KitchenDeepFryer
+  entities:
+  - uid: 24753
+    components:
+    - type: Transform
+      pos: 1.5,9.5
+      parent: 2
 - proto: KitchenElectricGrill
   entities:
   - uid: 21527
@@ -159007,6 +159013,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: Screen
   entities:
@@ -159086,6 +159093,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
     - type: MaterialStorage
       materialWhiteList:
@@ -159102,6 +159110,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
     - type: SiloUtilizer
       silo: 2207
@@ -159129,6 +159138,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
   - uid: 32058
     components:
@@ -159140,6 +159150,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: ShardGlass
   entities:
@@ -163830,11 +163841,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 7.5,-48.5
       parent: 2
-  - uid: 24753
-    components:
-    - type: Transform
-      pos: 1.5,9.5
-      parent: 2
   - uid: 24754
     components:
     - type: Transform
@@ -163914,6 +163920,12 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 53.5,15.5
+      parent: 2
+  - uid: 32676
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 6.5,6.5
       parent: 2
 - proto: SlimeGrinder
   entities:
@@ -175688,6 +175700,7 @@ entities:
       - Industrial
       - Arsenal
       - Experimental
+      - Robotics
       - CivilianServices
 - proto: UniformShortsRedWithTop
   entities:
@@ -202923,33 +202936,6 @@ entities:
     - type: Transform
       pos: 28.5,14.5
       parent: 2
-- proto: WeaponDisabler
-  entities:
-  - uid: 25533
-    components:
-    - type: Transform
-      pos: 2.3969226,21.669706
-      parent: 2
-  - uid: 25896
-    components:
-    - type: Transform
-      pos: -0.92736554,19.641062
-      parent: 2
-  - uid: 31399
-    components:
-    - type: Transform
-      pos: 12.563014,21.38584
-      parent: 2
-  - uid: 31400
-    components:
-    - type: Transform
-      pos: 12.453639,21.54209
-      parent: 2
-  - uid: 31735
-    components:
-    - type: Transform
-      pos: 1.5033059,21.690983
-      parent: 2
 - proto: WeaponEnergyTurretAI
   entities:
   - uid: 18521
@@ -203189,6 +203175,33 @@ entities:
       devices:
       - 25552
       - 25645
+- proto: WeaponLaserSidearm
+  entities:
+  - uid: 25533
+    components:
+    - type: Transform
+      pos: 2.3969226,21.669706
+      parent: 2
+  - uid: 25896
+    components:
+    - type: Transform
+      pos: -0.92736554,19.641062
+      parent: 2
+  - uid: 31399
+    components:
+    - type: Transform
+      pos: 12.563014,21.38584
+      parent: 2
+  - uid: 31400
+    components:
+    - type: Transform
+      pos: 12.453639,21.54209
+      parent: 2
+  - uid: 31735
+    components:
+    - type: Transform
+      pos: 1.5033059,21.690983
+      parent: 2
 - proto: WeaponMailLake
   entities:
   - uid: 32406

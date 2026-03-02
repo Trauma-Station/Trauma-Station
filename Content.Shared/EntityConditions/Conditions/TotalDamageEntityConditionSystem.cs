@@ -1,5 +1,5 @@
 using Content.Shared.Damage.Components;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.EntityConditions.Conditions;

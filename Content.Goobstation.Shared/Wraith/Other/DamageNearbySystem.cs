@@ -1,4 +1,6 @@
-using Content.Shared._Shitmed.Targeting;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Whitelist;

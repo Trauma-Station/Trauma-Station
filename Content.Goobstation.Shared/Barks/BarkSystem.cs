@@ -1,5 +1,8 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Barks;
 using Content.Goobstation.Common.CCVar;
+using Content.Goobstation.Common.Speech;
 using Content.Shared.Chat;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
@@ -22,12 +25,22 @@ public sealed class BarkSystem : EntitySystem
 
     private void OnEntitySpoke(EntityUid uid, SpeechSynthesisComponent comp, EntitySpokeEvent args)
     {
-        if (comp.VoicePrototypeId is null
+        var ev = new GetBarkSourceEntityEvent();
+        RaiseLocalEvent(uid, ref ev);
+        PlayBark(ev.Ent ?? uid, args);
+    }
+
+    private void PlayBark(Entity<SpeechSynthesisComponent?> ent, EntitySpokeEvent args)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
+        if (ent.Comp.VoicePrototypeId is null
             || !args.Language.SpeechOverride.RequireSpeech
             || !_enabled)
             return;
 
-        var sourceEntity = GetNetEntity(uid);
-        RaiseNetworkEvent(new PlayBarkEvent(sourceEntity, args.Message, args.IsWhisper), Filter.Pvs(uid));
+        var sourceEntity = GetNetEntity(ent);
+        RaiseNetworkEvent(new PlayBarkEvent(sourceEntity, args.Message, args.IsWhisper), Filter.Pvs(ent));
     }
 }

@@ -28,4 +28,3 @@ public sealed class InteractionTestTests : InteractionTest
         Assert.That(SEntMan.GetComponent<MetaDataComponent>(MapData.MapUid).EntityName, Is.EqualTo("Empty Debug Map"));
     }
 }
-

@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Containers;
@@ -21,8 +17,8 @@ public sealed partial class XenoVacuumTankComponent : Component
     /// <summary>
     /// The ID of the tank's container.
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
-    public Container StorageTank = new();
+    [ViewVariables]
+    public Container StorageTank = default!;
 
     /// <summary>
     /// The maximum amount of entities in this tank at a time.
@@ -34,6 +30,6 @@ public sealed partial class XenoVacuumTankComponent : Component
     /// <summary>
     /// The EntityUid of the nozzle attached to this tank.
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public EntityUid? LinkedNozzle;
 }

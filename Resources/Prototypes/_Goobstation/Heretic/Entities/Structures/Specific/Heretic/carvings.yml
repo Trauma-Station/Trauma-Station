@@ -34,7 +34,6 @@
     canReveal: false
     ignoredEntityWhitelist:
       components:
-      - Heretic
       - Ghoul
   - type: Tag
     tags:
@@ -111,7 +110,8 @@
       components: []
     targetedEntityWhitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
+      - BorgChassis
   - type: AlertCarving
 
 - type: runeCarving

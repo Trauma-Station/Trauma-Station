@@ -1,14 +1,12 @@
 // <Trauma>
-using Content.Shared._Shitmed.Body;
-using Content.Shared._Shitmed.Body.Part;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Part;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Damage.Systems;
@@ -78,20 +76,21 @@ public sealed partial class DamageableSystem
         bool interruptsDoAfters = true,
         EntityUid? origin = null,
         bool ignoreGlobalModifiers = false,
-        // <Shitmed>
+        // <Trauma>
         bool canBeCancelled = false,
         float partMultiplier = 1.00f,
         TargetBodyPart? targetPart = null,
         bool ignoreBlockers = false,
         SplitDamageBehavior splitDamage = SplitDamageBehavior.Split,
-        bool canMiss = true
-        // </Shitmed>
+        bool canMiss = true,
+        bool increaseOnly = false
+        // </Trauma>
     )
     {
         //! Empty just checks if the DamageSpecifier is _literally_ empty, as in, is internal dictionary of damage types is empty.
         // If you deal 0.0 of some damage type, Empty will be false!
         return TryChangeDamage(ent, damage, out _, ignoreResistances, interruptsDoAfters, origin, ignoreGlobalModifiers,
-            canBeCancelled, partMultiplier, targetPart, ignoreBlockers, splitDamage, canMiss); // Shitmed
+            canBeCancelled, partMultiplier, targetPart, ignoreBlockers, splitDamage, canMiss, increaseOnly); // Trauma
     }
 
     /// <summary>
@@ -113,20 +112,21 @@ public sealed partial class DamageableSystem
         bool interruptsDoAfters = true,
         EntityUid? origin = null,
         bool ignoreGlobalModifiers = false,
-        // <Shitmed>
+        // <Trauma>
         bool canBeCancelled = false,
         float partMultiplier = 1.00f,
         TargetBodyPart? targetPart = null,
         bool ignoreBlockers = false,
         SplitDamageBehavior splitDamage = SplitDamageBehavior.Split,
-        bool canMiss = true
-        // </Shitmed>
+        bool canMiss = true,
+        bool increaseOnly = false
+        // </Trauma>
     )
     {
         //! Empty just checks if the DamageSpecifier is _literally_ empty, as in, is internal dictionary of damage types is empty.
         // If you deal 0.0 of some damage type, Empty will be false!
         newDamage = ChangeDamage(ent, damage, ignoreResistances, interruptsDoAfters, origin, ignoreGlobalModifiers,
-            canBeCancelled, partMultiplier, targetPart, ignoreBlockers, splitDamage, canMiss); // Shitmed
+            canBeCancelled, partMultiplier, targetPart, ignoreBlockers, splitDamage, canMiss, increaseOnly); // Trauma
         return !newDamage.Empty;
     }
 
@@ -148,14 +148,15 @@ public sealed partial class DamageableSystem
         bool interruptsDoAfters = true,
         EntityUid? origin = null,
         bool ignoreGlobalModifiers = false,
-        // <Shitmed>
+        // <Trauma>
         bool canBeCancelled = false,
         float partMultiplier = 1.00f,
         TargetBodyPart? targetPart = null,
         bool ignoreBlockers = false,
         SplitDamageBehavior splitDamage = SplitDamageBehavior.Split,
-        bool canMiss = true
-        // </Shitmed>
+        bool canMiss = true,
+        bool increaseOnly = false // for ignoreResistances=false, only use increased damage modifiers.
+        // </Trauma>
     )
     {
         var damageDone = new DamageSpecifier();
@@ -175,21 +176,19 @@ public sealed partial class DamageableSystem
             return damageDone;
 
         // <Goob> - For entities with a body, route damage through body parts and then sum it up
-        if (_bodyQuery.TryComp(ent, out var body) && body.BodyType == BodyType.Complex)
+        if (_bodyQuery.HasComp(ent))
         {
             damage -= vitalDamage;
             damage.TrimZeros();
 
             var appliedDamage = ApplyDamageToBodyParts(ent, damage, origin, ignoreResistances,
-                interruptsDoAfters, targetPart, partMultiplier, ignoreBlockers, splitDamage, canMiss);
+                interruptsDoAfters, targetPart, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly);
 
             var appliedVitalDamage = ApplyDamageToBodyParts(ent, vitalDamage, origin, ignoreResistances,
-                interruptsDoAfters, TargetBodyPart.Vital, partMultiplier, ignoreBlockers, splitDamage, canMiss);
+                interruptsDoAfters, TargetBodyPart.Vital, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly);
 
-            if (appliedDamage != null)
-                damageDone += appliedDamage;
-            if (appliedVitalDamage != null)
-                damageDone += appliedVitalDamage;
+            damageDone += appliedDamage;
+            damageDone += appliedVitalDamage;
 
             return damageDone;
         }
@@ -198,38 +197,55 @@ public sealed partial class DamageableSystem
         // Apply resistances
         if (!ignoreResistances)
         {
+            // <Trauma> - for increaseOnly, ignore damage reductions. replaced damage with modified everywhere below this
+            var modified = increaseOnly ? new DamageSpecifier(damage) : damage;
             if (
                 ent.Comp.DamageModifierSetId != null &&
                 _prototypeManager.Resolve(ent.Comp.DamageModifierSetId, out var modifierSet)
             )
-                damage = DamageSpecifier.ApplyModifierSet(damage,
-                    DamageSpecifier.PenetrateArmor(modifierSet, damage.ArmorPenetration)); // Goob edit
+                modified = DamageSpecifier.ApplyModifierSet(modified,
+                    DamageSpecifier.PenetrateArmor(modifierSet, modified.ArmorPenetration)); // Goob edit
 
             // <Shitmed>
-            if (TryComp<BodyPartComponent>(ent, out var bodyPart))
+            if (_part.GetPartType(ent) is {} target)
             {
-                TargetBodyPart? target = _body.GetTargetBodyPart(bodyPart);
-                if (bodyPart.Body != null)
+                if (_body.GetBody(ent) is {} body)
                 {
                     // First raise the event on the parent to apply any parent modifiers
-                    var parentEv = new DamageModifyEvent(bodyPart.Body.Value, damage, origin, target);
-                    RaiseLocalEvent(bodyPart.Body.Value, parentEv);
-                    damage = parentEv.Damage;
+                    var parentEv = new DamageModifyEvent(body, modified, origin, target);
+                    RaiseLocalEvent(body, parentEv);
+                    modified = parentEv.Damage;
                 }
 
                 // Then raise on the part itself for any part-specific modifiers
-                var ev = new DamageModifyEvent(ent, damage, origin, target);
+                var ev = new DamageModifyEvent(ent, modified, origin, target);
                 RaiseLocalEvent(ent, ev);
-                damage = ev.Damage;
+                modified = ev.Damage;
             }
             else
             {
                 // Not a body part, just apply modifiers normally
-                var ev = new DamageModifyEvent(ent, damage, origin);
+                var ev = new DamageModifyEvent(ent, modified, origin);
                 RaiseLocalEvent(ent, ev);
-                damage = ev.Damage;
+                modified = ev.Damage;
             }
             // </Shitmed>
+
+            if (increaseOnly)
+            {
+                // now change damage only where it increased
+                var dest = damage.DamageDict;
+                foreach (var (type, value) in modified.DamageDict)
+                {
+                    if (value > dest[type])
+                        dest[type] = value;
+                }
+            }
+            else
+            {
+                damage = modified;
+            }
+            // </Trauma>
 
             if (damage.Empty)
                 return damageDone;
@@ -246,18 +262,6 @@ public sealed partial class DamageableSystem
 
         damageDone.DamageDict.EnsureCapacity(damage.DamageDict.Count);
 
-        // <Shitmed> - Check for integrity cap on body parts
-        bool isWoundable = false;
-        FixedPoint2? damageCap = null;
-        FixedPoint2? remainingCap = null;
-        if (_woundableQuery.TryComp(ent, out var woundable))
-        {
-            isWoundable = true;
-            damageCap = woundable.IntegrityCap;
-            remainingCap = woundable.IntegrityCap - ent.Comp.TotalDamage;
-        }
-        // </Shitmed>
-
         var dict = ent.Comp.Damage.DamageDict;
         foreach (var (type, value) in damage.DamageDict)
         {
@@ -265,47 +269,12 @@ public sealed partial class DamageableSystem
             if (!dict.TryGetValue(type, out var oldValue))
                 continue;
 
-            // <Shitmed> - damage cap
-            // For positive damage, we need to check if we've hit the cap
-            if (value > 0)
-            {
-                // Delta ignores this stuff since we need it for effects.
-                damageDone.DamageDict[type] = value;
+            var newValue = FixedPoint2.Max(FixedPoint2.Zero, oldValue + value);
+            if (newValue == oldValue)
+                continue;
 
-                // If we're not a woundable or we don't have a cap, apply the damage normally
-                if (!isWoundable
-                    || remainingCap is null)
-                {
-                    dict[type] = oldValue + value;
-                    continue;
-                }
-
-                // If we've already hit the cap, skip this damage type
-                if (remainingCap.Value <= 0)
-                    continue;
-
-                // Calculate how much of this damage type we can apply
-                var damageToApply = FixedPoint2.Min(value, remainingCap.Value);
-                var newValue = FixedPoint2.Max(FixedPoint2.Zero, oldValue + damageToApply);
-
-                // Update remaining cap
-                remainingCap -= damageToApply;
-
-                // Only update the dict if the value actually changed
-                if (newValue != oldValue)
-                    dict[type] = newValue;
-            }
-            else
-            {
-                // For negative damage (healing), apply normally
-                var newValue = FixedPoint2.Max(FixedPoint2.Zero, oldValue + value);
-                if (newValue != oldValue)
-                {
-                    dict[type] = newValue;
-                    damageDone.DamageDict[type] = newValue - oldValue;
-                }
-            }
-            // </Shitmed>
+            dict[type] = newValue;
+            damageDone.DamageDict[type] = newValue - oldValue;
         }
 
         // <Shitmed> - add ignoreGlobalModifiers, check woundable
@@ -313,11 +282,12 @@ public sealed partial class DamageableSystem
             return damageDone;
 
         OnEntityDamageChanged((ent, ent.Comp), damageDone, interruptsDoAfters, origin, ignoreGlobalModifiers);
-        if (isWoundable)
+        if (_body.GetBody(ent) is {} parentBody)
         {
             // This means that the damaged part was a woundable
             // which also means we send that shit to refresh the body.
-            UpdateParentDamageFromBodyParts(ent.Owner,
+            UpdateParentDamageFromBodyParts(
+                parentBody,
                 damageDone,
                 interruptsDoAfters,
                 origin,
@@ -554,16 +524,13 @@ public sealed partial class DamageableSystem
             return;
 
         // <Shitmed> - If entity has a body, set damage on all body parts
-        if (_bodyQuery.TryComp(ent, out var body))
+        foreach (var part in _body.GetExternalOrgans(ent.Owner, logMissing: false))
         {
-            foreach (var (part, _) in _body.GetBodyChildren(ent.Owner, body))
-            {
-                if (!_damageableQuery.TryComp(part, out var partDamageable))
-                    continue;
+            if (!_damageableQuery.TryComp(part, out var partDamageable))
+                continue;
 
-                // I LOVE RECURSION!!!
-                SetAllDamage((part, partDamageable), newValue);
-            }
+            // I LOVE RECURSION!!!
+            SetAllDamage((part, partDamageable), newValue);
         }
         // </Shitmed>
 
@@ -578,16 +545,8 @@ public sealed partial class DamageableSystem
         OnEntityDamageChanged((ent, ent.Comp), new DamageSpecifier());
 
         // <Shitmed>
-        if (!_woundableQuery.TryComp(ent, out var woundable) || !woundable.AllowWounds)
-            return;
-
-        _wounds.UpdateWoundableIntegrity(ent, woundable);
-
-        foreach (var (type, value) in ent.Comp.Damage.DamageDict)
-        {
-            var mul = ent.Comp.Damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
-            _wounds.TryInduceWound(ent, type, value * mul, out _, woundable);
-        }
+        var ev = new DamageSetEvent(newValue);
+        RaiseLocalEvent(ent, ref ev);
         // </Shitmed>
     }
 
@@ -603,9 +562,10 @@ public sealed partial class DamageableSystem
 
         ent.Comp.DamageModifierSetId = damageModifierSetId;
         // <Goob>
-        foreach (var (id, part) in _body.GetBodyChildren(ent.Owner))
+        foreach (var organ in _body.GetOrgans<DamageableComponent>(ent.Owner))
         {
-            EnsureComp<DamageableComponent>(id).DamageModifierSetId = damageModifierSetId;
+            organ.Comp.DamageModifierSetId = damageModifierSetId;
+            Dirty(organ);
         }
         // </Goob>
 

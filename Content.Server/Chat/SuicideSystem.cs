@@ -1,7 +1,8 @@
 // <Trauma>
+using Content.Goobstation.Shared.Possession;
 using Content.Shared._White.Xenomorphs.Infection;
 using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
+using Content.Medical.Shared.Consciousness;
 // </Trauma>
 using Content.Server.Ghost;
 using Content.Server.Hands.Systems;
@@ -53,7 +54,8 @@ public sealed class SuicideSystem : EntitySystem
     public bool Suicide(EntityUid victim)
     {
         // Can't suicide if we're already dead
-        if (!TryComp<MobStateComponent>(victim, out var mobState) || _mobState.IsDead(victim, mobState) || _tagSystem.HasTag(victim, "CannotSuicideAny")) // Goobstation
+        if (!TryComp<MobStateComponent>(victim, out var mobState) || _mobState.IsDead(victim, mobState)
+            || HasComp<PossessedComponent>(victim)) // Goob - TODO: make this an event handler
             return false;
 
         _adminLogger.Add(LogType.Mind, $"{ToPrettyString(victim):player} is attempting to suicide");

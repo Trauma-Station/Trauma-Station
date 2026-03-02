@@ -26,6 +26,9 @@
   id: MiningWeapons
   recipes:
   - WeaponProtoKineticAccelerator
+  - WeaponProtoKineticShotgun
+  - WeaponProtoKineticRepeater
+  - WeaponProtoKineticPistol
   - WeaponPlasmaCutter
   # - WeaponPlasmaRifle
 
@@ -40,3 +43,4 @@
   - PKAUpgradeDamage
   - PKAUpgradeRange
   - PKAUpgradeFireRate
+  - PKAUpgradeSpace

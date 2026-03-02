@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Goobstation.Shared.Disease.Components;
@@ -365,7 +367,7 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
 
         if (!TryComp<DiseaseComponent>(disease, out var diseaseComp))
         {
-            Log.Error($"Attempted to infect {ToPrettyString(ent)} with disease ToPrettyString{disease}, but it had no DiseaseComponent");
+            Log.Error($"Attempted to infect {ToPrettyString(ent)} with disease {ToPrettyString(disease)}, but it had no DiseaseComponent");
             return false;
         }
 
@@ -376,8 +378,9 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
             return false;
 
         _container.Insert(disease, ent.Comp.Diseases);
-        var ev = new DiseaseGainedEvent((disease, diseaseComp));
+        var ev = new DiseaseGainedEvent((disease, diseaseComp), (ent, ent.Comp));
         RaiseLocalEvent(ent, ref ev);
+        RaiseLocalEvent(disease, ref ev);
         return true;
     }
 

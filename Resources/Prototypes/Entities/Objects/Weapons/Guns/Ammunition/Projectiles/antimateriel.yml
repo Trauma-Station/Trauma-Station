@@ -38,7 +38,7 @@
 
 - type: entity
   categories: [ HideSpawnMenu ]
-  parent: BaseBullet
+  parent: BaseBulletKinetic # Trauma
   id: BulletAntiMateriel
   name: bullet (.60 anti-materiel)
   components:

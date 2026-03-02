@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Animals.Components;
 using Content.Shared.Actions;
+
+namespace Content.Trauma.Server.Animals;
 
 /// <summary>
 /// Removes egg laying action when <see cref="EggLayerComponent"/> is removed from an entity.

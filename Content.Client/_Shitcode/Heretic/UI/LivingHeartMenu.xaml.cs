@@ -10,7 +10,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
-using Content.Client.Lobby;
+using Content.Client.Lobby.UI.ProfileEditorControls;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Heretic;
 using Robust.Client.Player;
@@ -26,7 +26,7 @@ public sealed class LivingHeartMenu : RadialMenu
     [Dependency] private readonly IPrototypeManager _prot = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
-    private readonly LobbyUIController _controller;
+    private readonly HereticSystem _heretic;
 
     public EntityUid Entity { get; private set; }
 
@@ -37,7 +37,7 @@ public sealed class LivingHeartMenu : RadialMenu
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
-        _controller = UserInterfaceManager.GetUIController<LobbyUIController>();
+        _heretic = _ent.System<HereticSystem>();
     }
 
     public void SetEntity(EntityUid ent)
@@ -53,13 +53,29 @@ public sealed class LivingHeartMenu : RadialMenu
 
         var player = _player.LocalEntity;
 
-        if (!_ent.TryGetComponent<HereticComponent>(player, out var heretic))
+        if (player == null || !_heretic.TryGetHereticComponent(player.Value, out var heretic, out _))
             return;
 
         foreach (var target in heretic.SacrificeTargets)
         {
-            if (!_ent.TryGetEntity(target.Entity, out var ent) || !_ent.EntityExists(ent))
-                ent = _controller.LoadProfileEntity(target.Profile, _prot.Index(target.Job), true);
+            SpriteView texture;
+            if (_ent.TryGetEntity(target.Entity, out var ent) && _ent.EntityExists(ent))
+            {
+                texture = new SpriteView(ent.Value, _ent)
+                {
+                    OverrideDirection = Direction.South,
+                    VerticalAlignment = VAlignment.Center,
+                    SetSize = new Vector2(64, 64),
+                    VerticalExpand = true,
+                    Stretch = SpriteView.StretchMode.Fill,
+                };
+            }
+            else
+            {
+                var view = new ProfilePreviewSpriteView();
+                view.LoadPreview(target.Profile, _prot.Index(target.Job), true);
+                texture = view;
+            }
 
             var button = new EmbeddedEntityMenuButton
             {
@@ -68,14 +84,6 @@ public sealed class LivingHeartMenu : RadialMenu
                 NetEntity = target.Entity,
             };
 
-            var texture = new SpriteView(ent.Value, _ent)
-            {
-                OverrideDirection = Direction.South,
-                VerticalAlignment = VAlignment.Center,
-                SetSize = new Vector2(64, 64),
-                VerticalExpand = true,
-                Stretch = SpriteView.StretchMode.Fill,
-            };
             button.AddChild(texture);
 
             main.AddChild(button);

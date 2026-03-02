@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Disease.Components;
 
 namespace Content.Goobstation.Shared.Disease.Systems;
@@ -19,7 +21,7 @@ public partial class SharedDiseaseSystem
 
     private void OnImmunityDiseaseGained(Entity<ImmunityComponent> ent, ref DiseaseGainedEvent args)
     {
-        if (!args.Disease.Comp.CanGainImmunity)
+        if (ent.Owner != args.Carrier.Owner || !args.Disease.Comp.CanGainImmunity)
             return;
 
         TryAddImmunity((ent, ent.Comp), (args.Disease, args.Disease.Comp));

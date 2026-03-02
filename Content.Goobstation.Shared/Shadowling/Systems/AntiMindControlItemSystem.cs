@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.DoAfter;
@@ -59,7 +61,7 @@ public sealed class AntiMindControlItemSystem : EntitySystem
         var target = args.Target.Value;
 
         if (args.User == target
-            || !HasComp<HumanoidAppearanceComponent>(target))
+            || !HasComp<HumanoidProfileComponent>(target))
             return;
 
         var doAfter = new DoAfterArgs(

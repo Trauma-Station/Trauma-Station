@@ -118,7 +118,7 @@
   - type: Projectile
     damage:
       types:
-        Heat: 5
+        Heat: 10
   - type: Trail
     color: "#FF0033DD"
     scale: 0.08
@@ -149,7 +149,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SpellCard
-    rotateTime: 0.2
+    updateTime: 0.2
     flippedTrailColor: "#AA00FFDD"
   - type: HomingProjectile
     homingTime: 0.2
@@ -303,6 +303,7 @@
       types:
         Heat: 0
   - type: PolymorphOnTrigger
+    targetUser: true
     polymorph: WizardWabbajack
   - type: WhitelistTriggerCondition
     userWhitelist:
@@ -577,6 +578,7 @@
     range: 3
     energyConsumption: 50000
     disableDuration: 15
+  - type: DeleteOnTrigger
 
 - type: entity
   id: ProjectileSmokeBolt

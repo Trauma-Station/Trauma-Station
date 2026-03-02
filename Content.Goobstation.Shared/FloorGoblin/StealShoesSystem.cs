@@ -1,12 +1,10 @@
-// SPDX-FileCopyrightText: 2025 Evaisa <mail@evaisa.dev>
-// SPDX-FileCopyrightText: 2025 RichardBlonski <48651647+RichardBlonski@users.noreply.github.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared._Starlight.VentCrawling;
 using Content.Shared.Actions;
-using Content.Shared.Body.Systems;
 using Content.Shared.Clothing.Components;
 using Content.Shared.DoAfter;
+using Content.Shared.Gibbing;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -42,7 +40,7 @@ public sealed partial class StealShoesSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedCrawlUnderFloorSystem _crawlUnderFloorSystem = default!;
     [Dependency] private readonly MobStateSystem _mobstate = default!;
 
@@ -200,7 +198,7 @@ public sealed partial class StealShoesSystem : EntitySystem
         }
 
 
-        _body.GibBody(uid);
+        _gibbing.Gib(uid);
     }
 
     private bool CanStealHere(EntityUid uid)

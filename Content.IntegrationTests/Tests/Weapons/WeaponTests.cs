@@ -53,12 +53,13 @@ public sealed class WeaponTests : InteractionTest
         Assert.That(wieldComp.Wielded, Is.True, "Mosin failed to wield when interacted with!");
 
         await AttemptShoot(urist);
-        return; // Trauma - the gun doesn't shoot but AttemptShoot works for some reason I have no idea why
+        /* Trauma - the gun doesn't shoot but AttemptShoot works for some reason I have no idea why
         updatedAmmo = gunSystem.GetAmmoCount(mosinEnt);
 
         Assert.That(updatedAmmo, Is.EqualTo(startAmmo - 1), "Mosin failed to discharge appropriate amount of ammo!");
         Assert.That(damageComp.TotalDamage.Value,
             Is.GreaterThan(0),
             "Mosin was fired but urist sustained no damage!");
+        */
     }
 }

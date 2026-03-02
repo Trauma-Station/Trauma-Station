@@ -15,7 +15,6 @@
 
 using System.Linq;
 using System.Numerics;
-using System.Text;
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Physics;
 using Content.Goobstation.Common.Weapons;
@@ -64,6 +63,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
     [Dependency] private readonly SharedCombatModeSystem _combat = default!;
     [Dependency] private readonly SharedVoidCurseSystem _voidCurse = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedHereticSystem _heretic = default!;
 
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -85,7 +85,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
         if (args.Target == null)
             return;
 
-        if (!TryComp(args.User, out HereticComponent? heretic))
+        if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out _))
             return;
 
         if (ent.Comp.Path != heretic.CurrentPath || heretic.PathStage < 7)
@@ -155,7 +155,8 @@ public abstract class SharedHereticBladeSystem : EntitySystem
         if (ev.Cancelled)
             return false;
 
-        if (target == user || ent.Comp.Path != "Void" || !TryComp(user, out HereticComponent? heretic) ||
+        if (target == user || ent.Comp.Path != "Void" ||
+            !_heretic.TryGetHereticComponent(user, out var heretic, out _) ||
             !TryComp(user, out CombatModeComponent? combat) ||
             heretic is not { CurrentPath: "Void", PathStage: >= 7 } || !HasComp<MobStateComponent>(target) ||
             !TryComp(ent, out MeleeWeaponComponent? melee) || melee.NextAttack > _timing.CurTime)
@@ -201,7 +202,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
     public void ApplySpecialEffect(EntityUid performer, EntityUid target, MeleeHitEvent args)
     {
         var path = HasComp<HereticBladeUserBonusDamageComponent>(performer) ? "Flesh" : null;
-        if (TryComp<HereticComponent>(performer, out var hereticComp))
+        if (_heretic.TryGetHereticComponent(performer, out var hereticComp, out _))
             path = hereticComp.CurrentPath;
 
         if (path == null)
@@ -241,12 +242,12 @@ public abstract class SharedHereticBladeSystem : EntitySystem
 
     private void OnInteract(Entity<HereticBladeComponent> ent, ref UseInHandEvent args)
     {
-        if (!TryComp<HereticComponent>(args.User, out var heretic))
+        if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out _))
             return;
 
-        if (heretic.Ascended)
+        if (!heretic.CanBreakBlade)
         {
-            _popup.PopupClient(Loc.GetString("heretic-blade-break-fail-acended-message"), args.User, args.User);
+            _popup.PopupClient(Loc.GetString("heretic-blade-break-fail-message"), args.User, args.User);
             return;
         }
 
@@ -266,10 +267,10 @@ public abstract class SharedHereticBladeSystem : EntitySystem
 
     private void OnExamine(Entity<HereticBladeComponent> ent, ref ExaminedEvent args)
     {
-        if (!TryComp<HereticComponent>(args.Examiner, out var heretic) || heretic.Ascended)
+        if (!HasComp<RandomTeleportComponent>(ent))
             return;
 
-        if (!HasComp<RandomTeleportComponent>(ent))
+        if (!_heretic.TryGetHereticComponent(args.Examiner, out var heretic, out _) || !heretic.CanBreakBlade)
             return;
 
         args.PushMarkup(Loc.GetString("heretic-blade-examine"));
@@ -280,7 +281,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
         if (!args.IsHit || string.IsNullOrWhiteSpace(ent.Comp.Path))
             return;
 
-        TryComp<HereticComponent>(args.User, out var hereticComp);
+        _heretic.TryGetHereticComponent(args.User, out var hereticComp, out _);
 
         if (TryComp(args.User, out HereticBladeUserBonusDamageComponent? bonus) &&
             (bonus.Path == null || bonus.Path == ent.Comp.Path))
@@ -337,7 +338,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
                     if (hitEnts.Count == 0)
                         break;
 
-                    _combo.ComboProgress((args.User, hereticComp), hitEnts);
+                    _combo.ComboProgress(args.User, hereticComp, hitEnts);
 
                     foreach (var uid in hitEnts)
                     {
@@ -357,12 +358,8 @@ public abstract class SharedHereticBladeSystem : EntitySystem
             if (TryComp(hit, out MobStateComponent? mobState) && mobState.CurrentState != MobState.Dead)
                 aliveMobsCount++;
 
-            if (TryComp(hit, out HereticComponent? targetHeretic) &&
-                targetHeretic.CurrentPath == hereticComp.CurrentPath)
-                continue;
-
             if (TryComp<HereticCombatMarkComponent>(hit, out var mark))
-                _combatMark.ApplyMarkEffect(hit, mark, ent.Comp.Path, args.User, hereticComp);
+                _combatMark.ApplyMarkEffect(hit, mark, mark.Path, args.User, hereticComp);
 
             if (hereticComp.PathStage >= 7)
                 ApplySpecialEffect(args.User, hit, args);
@@ -374,11 +371,9 @@ public abstract class SharedHereticBladeSystem : EntitySystem
             args.BonusDamage += args.BaseDamage * 0.5f;
             if (aliveMobsCount > 0 && TryComp<DamageableComponent>(args.User, out var dmg))
             {
-                var baseHeal = args.BaseDamage.GetTotal();
-                var bonusHeal = HasComp<MansusInfusedComponent>(ent) ? baseHeal / 2f : baseHeal / 4f;
-                bonusHeal *= aliveMobsCount;
+                var heal = args.BaseDamage.GetTotal() * aliveMobsCount * 0.25f;
 
-                _sanguine.LifeSteal(args.User, bonusHeal, dmg);
+                _sanguine.LifeSteal((args.User, dmg), heal);
             }
         }
     }

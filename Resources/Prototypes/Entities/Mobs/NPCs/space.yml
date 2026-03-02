@@ -74,14 +74,10 @@
 - type: entity
   name: space bear
   id: MobBearSpace
-  parent: MobSpaceBasic
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic ] # Shitmed
   description: It looks friendly. Why don't you give it a hug?
   components:
-  # <Goob>
-  - type: Body
-    prototype: SpaceBear
-  - type: Fauna
-  # </Goob>
+  - type: Fauna # Goob
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/bear.rsi
@@ -129,11 +125,9 @@
 - type: entity
   name: space kangaroo
   id: MobKangarooSpace
-  parent: [MobSpaceBasic, StripableInventoryBase]
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic, StripableInventoryBase ] # Shitmed
   description: It looks friendly. Why don't you give it a hug?
   components:
-  - type: Body # Shitmed Change
-    prototype: SpaceKangaroo
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/kangaroo.rsi
@@ -180,6 +174,7 @@
     - Kangaroo
     understands:
     - Kangaroo
+    - TauCetiBasic
   - type: Butcherable
     spawned:
     - id: FoodMeat
@@ -202,13 +197,11 @@
 - type: entity
   name: space spider
   id: MobSpiderSpace
-  parent: MobSpaceBasic
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic ] # Shitmed
   description: It's so glowing, it looks dangerous.
   components:
   # <Goob>
   - type: VentCrawler
-  - type: Body
-    prototype: SpaceSpider
   - type: Fauna
   - type: CombatPower
     factor: 1.5 # times more dangerous than a crew-member
@@ -281,6 +274,7 @@
     - Xeno
     understands:
     - Xeno
+    - TauCetiBasic
   - type: InteractionPopup
     successChance: 0.20
     interactSuccessString: petting-success-tarantula
@@ -313,18 +307,17 @@
 - type: entity
   name: space cobra
   id: MobCobraSpace
-  parent: MobSpaceBasic
+  parent: [ AppearanceSpaceCobra, MobSpaceBasic ] # Shitmed
   description: Long fangs and a glowing hood, and the alluring look begs to come closer.
   components:
     # <Goob>
-    - type: Body
-      prototype: SpaceCobra
     - type: Fauna
     - type: LanguageKnowledge
       speaks:
       - Xeno
       understands:
       - Xeno
+      - TauCetiBasic
     - type: NpcFactionMember
       factions:
       - Xeno # Aligning them with Space Adders
@@ -423,13 +416,13 @@
     - type: SalvageMobRestrictions
 
 - type: entity
-  parent: SimpleSpaceMobBase
+  parent:
+  - SimpleSpaceMobBase
+  - BaseMobAnimal
   id: MobSnail
   name: snail
   description: Revolting unless you're french.
   components:
-  - type: Body
-    prototype: Mouse
   - type: GhostRole
     makeSentient: true
     allowSpeech: false
@@ -618,12 +611,10 @@
   - type: MovementAlwaysTouching
 
 - type: entity
-  parent: MobSnail
+  parent: [ BaseMobMothroach, MobSnail ]
   id: MobSnailMoth
   name: Snoth
   components:
-  - type: Body
-    prototype: Mothroach
   - type: GhostRole
     name: ghost-role-information-snoth-name
     description: ghost-role-information-snoth-description

@@ -141,7 +141,6 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: NavMap
-    - type: FTLDrive
     - type: ImplicitRoof
     - type: ExplosionAirtightGrid
 - proto: AirlockShuttle

@@ -45,8 +45,7 @@
       - state: equipped-belt-buckle
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -55,3 +54,29 @@
       coefficients:
         Blunt: 0.85
         Heat: 0.85
+
+- type: entity
+  parent: [ ClothingUniformBase, ClothingUniformFoldableBase ]
+  id: ClothingUniformJumpsuitOliveDrabs
+  name: olive drabs
+  description: Standard-issue military uniform in a plain olive pattern. Lacks a good camo index.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/olivedrabs.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/olivedrabs.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: naked
+
+- type: entity
+  parent: [ ClothingUniformBase, ClothingUniformFoldableBase ]
+  id: ClothingUniformJumpsuitTigerStripes
+  name: tiger stripes
+  description: A military uniform used in special covert operations. Boons a good camo index.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/tigerStripes.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/tigerStripes.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: naked

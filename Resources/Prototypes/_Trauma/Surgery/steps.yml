@@ -40,3 +40,23 @@
   parent: SurgeryStepInsertOrgan
   id: SurgeryStepInsertHypoport
   name: Add hypoport assembly
+
+- type: entity
+  parent: SurgeryStepSealBones
+  id: SurgeryStepCreateJoint
+  name: Create joint
+  components:
+  - type: SurgeryStep
+    remove: null
+    add:
+    - type: JointCreated
+
+- type: entity
+  parent: SurgeryStepCloseBloodOutputs
+  id: SurgeryStepStitchJoint
+  name: Stitch joint blood vessels
+  components:
+  - type: SurgeryStep
+    remove: null
+    add:
+    - type: JointStitched

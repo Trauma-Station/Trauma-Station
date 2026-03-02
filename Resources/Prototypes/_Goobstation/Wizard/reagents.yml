@@ -11,17 +11,14 @@
   color: "#28005B"
   physicalDesc: reagent-physical-desc-thick
   metabolisms:
-    Poison:
+    Bloodstream:
       conditions:
-      - !type:MetabolizerTypeCondition
-        type: [ Yowie ]
-        inverted: true
       - !type:WhitelistCondition
         blacklist:
           components:
           - Wizard
           - Apprentice
-        guidebookText: entity-effect-condition-not-wizard-or-apprentice
+        guidebookText: entity-condition-not-wizard-or-apprentice
       effects:
       - !type:Emote
         emote: Cough
@@ -46,14 +43,14 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Medicine:
+    Bloodstream:
       conditions:
       - !type:WhitelistCondition
         whitelist:
           components:
           - Wizard
           - Apprentice
-        guidebookText: entity-effect-condition-wizard-or-apprentice
+        guidebookText: entity-condition-wizard-or-apprentice
       effects:
       - !type:ModifyBloodLevel
         amount: 3
@@ -68,9 +65,9 @@
       - !type:ModifyBleed
         amount: -1.5
       - !type:CleanBloodstream
-        excluded: Mugwort # Trauma - Exclude from chempurge
+        excluded: [Mugwort] # Trauma - Exclude from chempurge
         cleanseRate: 6
-      - !type:GenericStatusEffect
-        key: SeeingRainbows
-        time: 100.0
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
+        time: 100
         type: Remove

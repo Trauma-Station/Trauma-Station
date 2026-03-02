@@ -4,7 +4,7 @@ using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Events;
 using Robust.Shared.GameStates;
@@ -372,7 +372,7 @@ public sealed partial class MobThresholdSystem : EntitySystem // Trauma - made p
         _mobStateSystem.UpdateMobState(target, mobState, origin);
     }
 
-    private void UpdateAlerts(EntityUid target, MobState currentMobState, MobThresholdsComponent? threshold = null,
+    public void UpdateAlerts(EntityUid target, MobState currentMobState, MobThresholdsComponent? threshold = null, // Trauma - made public
         DamageableComponent? damageable = null)
     {
         if (!Resolve(target, ref threshold, ref damageable))

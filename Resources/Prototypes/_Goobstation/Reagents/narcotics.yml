@@ -26,13 +26,10 @@
   physicalDesc: reagent-physical-desc-murky
   color: "#6e697d"
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.05
-      conditions:
-      - !type:MetabolizerTypeCondition
-        type: [ Yowie ]
-        inverted: true
       effects:
+      # Main effects
       - !type:HealthChange
         damage:
           groups:
@@ -64,9 +61,8 @@
         damage:
           types:
             Slash: 1 # clawing at your own skin
-    Narcotic:
-      metabolismRate: 0.05
-      effects:
+
+      # Side effects
       - !type:PopupMessage # the usual hallucinations
         type: Local
         visualType: Medium
@@ -82,35 +78,23 @@
         messages: ["fentanyl-effect-skinworms","fentanyl-effect-breathingrazors","fentanyl-effect-lungstight","fentanyl-effect-observed"]
         probability: 0.05
       - !type:ModifyStatusEffect # you didn't think this would improve your abilities right?
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         effectProto: FentanylSlowdownStatusEffect
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
       - !type:Jitter
       - !type:ModifyParalysis # loss of muscle control
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         probability: 0.05
         time: 2
       - !type:ModifyParalysis # more severe effects when you are overdosing
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Fentanyl
           min: 5
         probability: 0.05
         time: 4
-      - !type:GenericStatusEffect # tripping balls, duh
-        key: SeeingRainbows
-        component: SeeingRainbows
+      - !type:ModifyStatusEffect # tripping balls, duh
+        effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 20
       - !type:Drunk
@@ -118,9 +102,7 @@
       - !type:Emote # Now a bunch of emotes
         emote: Scream
         probability: 0.05
-    Medicine:
-      metabolismRate: 0.05
-      effects:
+
       - !type:SuppressPain # fent does this
         amount: 400
         time: 30
@@ -135,13 +117,9 @@
   boilingPoint: 255.0
   meltingPoint: 36.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:GenericStatusEffect
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         key: TemporaryBlindness
         component: TemporaryBlindness
         type: Add
@@ -157,7 +135,7 @@
   boilingPoint: 255.0
   meltingPoint: 36.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       metabolismRate: 0.05
       effects:
       - !type:GenericStatusEffect
@@ -167,10 +145,6 @@
         key: Stutter
         component: StutteringAccent
       - !type:TakeStaminaDamage
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         amount: 7
         immediate: false
       - !type:PopupMessage
@@ -198,18 +172,12 @@
         time: 4
       - !type:ModifyStatusEffect # You can't quite remember how to walk properly.
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Amnestizine
           min: 4
         effectProto: AmnestizineSlowdownStatusEffect
       - !type:GenericStatusEffect
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Amnestizine
           min: 10
@@ -228,9 +196,6 @@
             Poison: 0.25
             Asphyxiation: 0.25
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Amnestizine
           min: 15
@@ -240,19 +205,12 @@
             Cellular: 1
             Asphyxiation: 1
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Amnestizine
           min: 30
       - !type:Flammable
         multiplier: 0.3
       - !type:ModifyParalysis
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         probability: 0.05
         time: 2
   reactiveEffects:
@@ -273,21 +231,9 @@
   flavor: oily
   color: "#75fff5"
   metabolisms:
-    Narcotic:
+    Bloodstream:
       metabolismRate: 1
       effects:
-      - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-        damage:
-          groups:
-            Brute: -1
-          types:
-            Heat: -0.5
-            Shock: -0.5
-            Cold: -0.5
-            Radiation: -0.5
       - !type:ModifyStatusEffect
         effectProto: AranespStatusEffect
       - !type:GenericStatusEffect
@@ -313,28 +259,18 @@
         components:
         - type: DelayedKnockdown
         guidebookText: entity-effect-guidebook-remove-delayed-knockdown
-    Medicine:
-      metabolismRate: 1
-      effects:
+
       - !type:ResetNarcolepsy
-    Poison:
-      metabolismRate: 1
-      effects:
+
+      # Side effects
       - !type:HealthChange
         damage:
           types:
             Asphyxiation: 0.5
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
-          reagent: Amnestizine
+          reagent: Aranesp
           min: 50
         damage:
           types:
@@ -342,9 +278,6 @@
       - !type:Emote
         emote: Gasp
         probability: 0.1
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
 
 - type: reagent
   id: MouseBites
@@ -355,7 +288,7 @@
   flavor: oily
   color: "#ffaa00"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -383,7 +316,6 @@
         visualType: Medium
         messages: [ "mousebites-effects-vexes", "mousebites-effects-stupid", "mousebites-effects-metoo" ]
         probability: 0.10
-
 
 - type: reagent
   id: OleoresinCapsaicin
@@ -430,7 +362,7 @@
         effectProto: OleoresinSlowdownStatusEffect
 
 - type: reagent
-  id: Heroin
+  id: Heroin # hunter biden's favourite snack
   name: reagent-name-heroin
   group: Medicine
   desc: reagent-desc-heroin
@@ -438,8 +370,7 @@
   flavor: medicine
   color: "#a8a8af"
   metabolisms:
-    Medicine:
-      metabolismRate: 0.5
+    Bloodstream:
       effects:
       - !type:SuppressPain
         amount: 15
@@ -458,16 +389,12 @@
         - !type:ReagentCondition
           reagent: Heroin
           min: 10.5
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
-      - !type:GenericStatusEffect # tripping balls
+      - !type:ModifyStatusEffect # tripping balls
         conditions:
         - !type:ReagentCondition
           reagent: Heroin
           min: 10.5
-        key: SeeingRainbows
-        component: SeeingRainbows
+        effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 20
       - !type:Drunk
@@ -492,18 +419,14 @@
   flavor: sour
   color: "#e1a116"
   metabolisms:
-    Gas:
-      effects:
-      - !type:Jitter
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:Jitter
       - !type:GenericStatusEffect
         key: Stun
         time: 3
         type: Remove
-      - !type:GenericStatusEffect
-        key: KnockedDown
+      - !type:ModifyKnockdown
         time: 3
         type: Remove
       - !type:GenericStatusEffect
@@ -511,7 +434,6 @@
         time: 10
         type: Remove
       - !type:GenericStatusEffect
-        conditions:
         key: ForcedSleep
         type: Remove
         time: 10
@@ -523,8 +445,7 @@
         components:
         - type: DelayedKnockdown
         guidebookText: entity-effect-guidebook-remove-delayed-knockdown
-    Medicine:
-      effects:
+
       - !type:ResetNarcolepsy
         conditions:
         - !type:ReagentCondition

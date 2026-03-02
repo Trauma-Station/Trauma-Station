@@ -5,8 +5,9 @@
 
 - type: entity
   parent:
-    - SimpleSpaceMobBase
-    - MobPolymorphable
+  - AppearanceSlaughterDemon
+  - SimpleSpaceMobBase
+  - MobPolymorphable
   id: BaseMobSlaughterDemon
   name: slaughter demon
   suffix: ""
@@ -72,6 +73,7 @@
       types:
         Slash: 25
         Structural: 50
+  - type: Evil # Trauma - duh
   - type: SlaughterDemon # main component
     speedModWalk: 2.5
     speedModRun: 2.5
@@ -118,13 +120,10 @@
     speechSounds: SlaughterDemon
   - type: TypingIndicator
     proto: guardian
-  - type: Gibbable
   - type: Crawler
   - type: RotationVisuals
     defaultRotation: 90
     horizontalRotation: 90
-  - type: Body
-    prototype: SlaughterDemon
   - type: StandingState
   - type: Fixtures
     fixtures:
@@ -149,8 +148,7 @@
   - type: ReplacementAccent
     accent: slaughterDemon
   - type: GrantHellRip
-  - type: WeakToHoly
-    alwaysTakeHoly: true
+  - type: AlwaysTakeHoly
   - type: Hands
   - type: PressureImmunity
   - type: TriggerOnMobstateChange

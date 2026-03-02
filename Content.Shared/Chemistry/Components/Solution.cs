@@ -2,7 +2,7 @@ using System.Collections;
 using System.Linq;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reagent;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -82,6 +82,13 @@ namespace Content.Shared.Chemistry.Components
         ///     If true, then <see cref="_heatCapacity"/> needs to be recomputed.
         /// </summary>
         [ViewVariables] private bool _heatCapacityDirty = true;
+
+        // Goobstation
+        public bool HeatCapacityDirty
+        {
+            get => _heatCapacityDirty;
+            set => _heatCapacityDirty = value;
+        }
 
         [ViewVariables(VVAccess.ReadWrite)]
         private int _heatCapacityUpdateCounter;

@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Fax;
@@ -69,7 +64,7 @@ public sealed class FaxSlipSystem : EntitySystem
 
             _deviceNetwork.QueuePacket(args.Fax, args.Fax.Comp.DestinationFaxAddress, payload);
 
-            var actor = args.Args.Actor;
+            var actor = args.Actor;
             if (actor.IsValid())
                 _adminLogger.Add(LogType.Action,
                     LogImpact.Low,

@@ -60,8 +60,7 @@
   - type: Damageable
     damageContainer: BiologicalMetaphysical
     damageModifierSet: AdvancedSpirit
-  - type: WeakToHoly
-    alwaysTakeHoly: true
+  - type: AlwaysTakeHoly
   - type: NoSlip
   - type: MovementSpeedModifier
     baseWalkSpeed : 1
@@ -81,7 +80,8 @@
     energy: 12.5
     color: "#793a80"
   - type: SpawnLootOnDeath
-    loot: AnomalyCoreShadow
+    table:
+      id: AnomalyCoreShadow
 
 - type: entity
   name: ???
@@ -116,7 +116,8 @@
     damageContainer: ManifestedSpirit
     damageModifierSet: ManifestedSpirit
   - type: SpawnLootOnDeath
-    loot: DiamondOre1Unprocessed
+    table:
+      id: DiamondOre1Unprocessed
 
 - type: entity
   name: glutton

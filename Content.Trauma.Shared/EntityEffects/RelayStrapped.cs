@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Buckle.Components;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
@@ -30,7 +31,7 @@ public sealed class RelayStrappedEffectSystem : EntityEffectSystem<StrapComponen
         foreach (var strapped in ent.Comp.BuckledEntities)
         {
             _data.CopyData(ent, strapped);
-            _effects.ApplyEffects(strapped, args.Effect.Effects, args.Scale);
+            _effects.ApplyEffects(strapped, args.Effect.Effects, args.Scale, args.User);
             _data.ClearData(strapped);
         }
     }

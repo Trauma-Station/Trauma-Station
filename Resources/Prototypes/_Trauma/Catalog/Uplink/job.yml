@@ -1,0 +1,32 @@
+- type: listing
+  id: UplinkFoxDie
+  name: uplink-foxdie-name
+  description: uplink-foxdie-desc
+  productEntity: DiseaseDnaSamplerFoxDie
+  cost:
+    Telecrystal: 50 # you can fucking genocide with it if you are smart
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Virologist
+    - Geneticist # gene therapy..?
+
+- type: listing
+  id: UplinkNecronomicon # dog
+  name: uplink-necronomicon-name
+  description: uplink-necronomicon-desc
+  productEntity: BibleNecronomicon
+  cost:
+    Telecrystal: 20 # 5 dogs
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Chaplain
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityConditions;
 using Content.Shared.Inventory;
 using Robust.Shared.Prototypes;
@@ -17,7 +18,7 @@ public sealed partial class InventoryAnyNestedCondition : EntityConditionBase<In
     public EntityCondition Condition = default!;
 
     [DataField]
-    public LocId GuidebookText = "entity-effect-condition-guidebook-inventory-nested";
+    public LocId GuidebookText = "entity-condition-guidebook-inventory-nested";
 
     [DataField]
     public SlotFlags Flags = SlotFlags.WITHOUT_POCKET;

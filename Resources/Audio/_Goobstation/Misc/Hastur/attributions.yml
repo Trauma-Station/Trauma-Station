@@ -1,34 +1,4 @@
-- files: ["devour1.ogg"]
+- files: ["devour1.ogg", "devour2.ogg", "devour3.ogg", "devour4.ogg", "growl.ogg", "tentacle_hit.ogg", "tentacle_walk.ogg"]
   license: "CC-BY-SA-3.0"
-  copyright: "Taken from Goonstation."
-  source: "https://github.com/goonstation/goonstation/blob/7a09de03575c8158526c1dbdff4cb7fb8021d641/sound/misc/hastur/devour1.ogg"
-
-- files: ["devour2.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from Goonstation."
-  source: "https://github.com/goonstation/goonstation/blob/7a09de03575c8158526c1dbdff4cb7fb8021d641/sound/misc/hastur/devour2.ogg"
-
-- files: ["devour3.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from Goonstation."
-  source: "https://github.com/goonstation/goonstation/blob/7a09de03575c8158526c1dbdff4cb7fb8021d641/sound/misc/hastur/devour3.ogg"
-
-- files: ["devour4.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from Goonstation."
-  source: "https://github.com/goonstation/goonstation/blob/7a09de03575c8158526c1dbdff4cb7fb8021d641/sound/misc/hastur/devour4.ogg"
-
-- files: ["growl.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from Goonstation."
-  source: "https://github.com/goonstation/goonstation/blob/7a09de03575c8158526c1dbdff4cb7fb8021d641/sound/misc/hastur/growl.ogg"
-
-- files: ["tentacle_hit.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from Goonstation."
-  source: "https://github.com/goonstation/goonstation/blob/7a09de03575c8158526c1dbdff4cb7fb8021d641/sound/misc/hastur/tentacle_hit.ogg"
-
-- files: ["tentacle_walk.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from Goonstation."
-  source: "https://github.com/goonstation/goonstation/blob/7a09de03575c8158526c1dbdff4cb7fb8021d641/sound/misc/hastur/tentacle_walk.ogg"
+  copyright: "Taken from Goonstation, converted to mono by @deltanedas (github)"
+  source: "https://github.com/goonstation/goonstation/tree/7a09de03575c8158526c1dbdff4cb7fb8021d641/sound/misc/hastur"

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Server.Devil.Contract;
 using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
@@ -29,7 +31,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using FixedPoint2 = Content.Goobstation.Maths.FixedPoint.FixedPoint2;
+using FixedPoint2 = Content.Shared.FixedPoint.FixedPoint2;
 using System.Linq;
 using Content.Shared.Light.Components;
 using Robust.Server.GameObjects;
@@ -62,6 +64,8 @@ public sealed class SlasherSoulStealSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedPoweredLightSystem _light = default!;
     [Dependency] private readonly SlasherRegenerateSystem _regenerate = default!;
+
+    public static readonly ProtoId<WeatherPrototype> Storm = "Storm";
 
     public override void Initialize()
     {
@@ -236,7 +240,7 @@ public sealed class SlasherSoulStealSystem : EntitySystem
 
                 // Make it rain in space
                 var xform = Transform(user);
-                _weather.SetWeather(xform.MapID, _protoMan.Index<WeatherPrototype>("Storm"), null);
+                _weather.SetWeather(xform.MapID, _protoMan.Index(Storm), null);
 
                 // Make station announcement from Central Command
                 _chatSystem.DispatchStationAnnouncement(

@@ -14,9 +14,7 @@
   - MofficTranslator
   - XenoTranslator
   - AnimalTranslator
-  - ValyrianStandardTranslator
   - NewKinPidginTranslator
-  - YowKriolTranslator # goob edit - yowie language
 
 - type: latheRecipePack
   id: TranslatorImplanters
@@ -28,7 +26,5 @@
   - SolCommonTranslatorImplanter
   - RootSpeakTranslatorImplanter
   - MofficTranslatorImplanter
-  - ValyrianStandardTranslatorImplanter
   - ChevalTranslatorImplanter
   - NewKinPidginTranslatorImplanter
-  - YowKriolTranslatorImplanter # goob edit - yowie language

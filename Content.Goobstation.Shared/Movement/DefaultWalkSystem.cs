@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 MarkerWicker <markerWicker@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.CCVar;
@@ -20,7 +17,7 @@ public sealed class DefaultWalkSystem : EntitySystem
     [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
 
-    private void Initialize()
+    public override void Initialize()
     {
         base.Initialize();
 
@@ -35,7 +32,7 @@ public sealed class DefaultWalkSystem : EntitySystem
 
         if (session.Channel is not { } channel) return;
 
-        ent.Comp.DefaultSprinting = _netConfig.GetClientCVar(channel, GoobCVars.DefaultWalk);
+        ent.Comp.DefaultSprinting = !_netConfig.GetClientCVar(channel, GoobCVars.DefaultWalk);
         RaiseLocalEvent(ent, new SprintingInputEvent(ent));
     }
 
@@ -50,7 +47,7 @@ public sealed class DefaultWalkSystem : EntitySystem
         if (args.SenderSession.AttachedEntity is not { } uid || !TryComp<InputMoverComponent>(uid, out var mover))
             return;
 
-        mover.DefaultSprinting = _netConfig.GetClientCVar(args.SenderSession.Channel, GoobCVars.DefaultWalk);
+        mover.DefaultSprinting = !_netConfig.GetClientCVar(args.SenderSession.Channel, GoobCVars.DefaultWalk);
         RaiseLocalEvent(uid, new SprintingInputEvent((uid, mover)));
     }
 }

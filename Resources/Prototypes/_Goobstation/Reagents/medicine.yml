@@ -27,7 +27,7 @@
   color: "#8364BE"
   worksOnTheDead: true
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:ModifyBloodLevel
         amount: 10
@@ -69,8 +69,7 @@
   flavor: clean
   color: "#ff0000"
   metabolisms:
-    Medicine:
-      metabolismRate: 0.5
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -79,9 +78,9 @@
             Cellular: -3
             Radiation: -3
       - !type:PopupMessage
-          type: Local
-          messages: [ "reagent-popup-panacea" ]
-          probability: 0.2
+        type: Local
+        messages: [ "reagent-popup-panacea" ]
+        probability: 0.2
       - !type:AdjustReagent
         reagent: Pax
         amount: -7.5
@@ -89,17 +88,17 @@
         reagent: BZ
         amount: -7.5
       - !type:GenericStatusEffect
-          key: Jitter
-          time: 10.0
-          type: Remove
-      - !type:GenericStatusEffect
-          key: SeeingRainbows
-          time: 10.0
-          type: Remove
-      - !type:GenericStatusEffect
-          key: Drunk
-          time: 10.0
-          type: Remove
+        key: Jitter
+        time: 10.0
+        type: Remove
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
+        time: 10.0
+        type: Remove
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDrunk
+        time: 10
+        type: Remove
       - !type:EyeDamage
       - !type:RemoveComponents
         components:
@@ -120,7 +119,7 @@
           sounds:
             collection: Paracusia
         - type: PainNumbness
-        - type: LegsStartParalyzed
+        - type: LegsParalyzed
         guidebookText: entity-effect-guidebook-removes-disabilities
 
 - type: reagent
@@ -133,8 +132,7 @@
   color: "#ff0000"
   worksOnTheDead: true
   metabolisms:
-    Medicine:
-      metabolismRate: 0.5
+    Bloodstream:
       effects:
       - !type:AdjustReagent
         reagent: ChloralHydrate
@@ -199,7 +197,7 @@
   flavor: medicine
   color: "#ffff64"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -210,9 +208,6 @@
         - !type:ReagentCondition
           reagent: Probital
           min: 20
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         amount: 5 # effectively 3 "sleeps" per 20OD, but only 1 on 10 (like with 2 syringes)
         immediate: false
       - !type:ModifyStatusEffect # kinda sleepiness
@@ -222,9 +217,6 @@
         - !type:ReagentCondition
           reagent: Probital
           min: 20
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         effectProto: ProbitalSlowdownStatusEffect
       - !type:GenericStatusEffect
         conditions:
@@ -242,9 +234,6 @@
         - !type:ReagentCondition
           reagent: Probital
           min: 20
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         key: ForcedSleep
         component: ForcedSleeping
         type: Add
@@ -256,9 +245,6 @@
         - !type:ReagentCondition
           reagent: Probital
           min: 20
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         amount: -100 # power nap
         immediate: true
       - !type:AdjustReagent
@@ -274,7 +260,7 @@
   flavor: medicine
   color: "#ffc41a"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.05
       effects:
       - !type:Vomit
@@ -282,9 +268,6 @@
         - !type:ReagentCondition
           reagent: Mitogen
           min: 10
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         probability: 0.15
 
 - type: reagent
@@ -296,7 +279,7 @@
   flavor: terrible
   color: "#cc9c14"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -307,7 +290,9 @@
         amount: -0.5
       - !type:ModifyBloodLevel
         amount: 3
-    Food:
+    Digestion:
+      metabolites:
+        Mitotrophin: 0.2 # a little something for wasting it all on hunger
       effects:
       - !type:SatiateHunger
         factor: 1.5 # 50% less
@@ -321,30 +306,19 @@
   flavor: medicine
   color: "#ff6060"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
           types:
             Asphyxiation: -6 # intended to be stronger, but more annoying than inapr
       - !type:TakeStaminaDamage
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         amount: 3 # full syringe doesn't stamcrit (maybe it should?)
         immediate: false
       - !type:ModifyStatusEffect
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         effectProto: TirimolSlowdownStatusEffect
       - !type:ModifyParalysis # more severe effect when overdosing, doesn't matter since you want to use it on crit ppl
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Tirimol
           min: 15
@@ -364,7 +338,7 @@
   flavor: medicine
   color: "#e1d758"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.25
       effects:
       - !type:HealthChange
@@ -372,63 +346,21 @@
           types:
             Poison: -1
       - !type:CleanBloodstream
-        excluded: Musiver # Trauma - Exclude from chempurge
+        excluded: [Musiver] # Trauma - Exclude from chempurge
         cleanseRate: 1
       - !type:HealthChange
         damage:
           groups:
             Brute: 0.1
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Musiver
           min: 20
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Blunt: 5
 
-- type: reagent
-  id: Tehifin
-  name: reagent-name-tehifin
-  group: Medicine
-  desc: reagent-desc-tehifin
-  physicalDesc: reagent-physical-desc-nondescript
-  flavor: medicine
-  color: "#ff8af3"
-  metabolisms:
-    Medicine:
-      metabolismRate: 0.5
-      effects:
-      - !type:HealthChange
-        damage:
-          groups:
-            Burn: -16
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 0.1
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentCondition
-          reagent: Tehifin
-          min: 10
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
-        damage:
-          types:
-            Blunt: 5
 
 - type: reagent # in medicine.yml since it's a direct precursor/step
   id: ProcenylLazideSludge
@@ -448,7 +380,7 @@
   flavor: medicine
   color: "#ffdf97"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 3
       effects:
       - !type:HealthChange
@@ -490,7 +422,7 @@
   flavor: medicine
   color: "#65583b"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.1
       effects:
       - !type:HealthChange
@@ -501,18 +433,11 @@
         damage:
           types:
             Radiation: 0.05 # very slight side effect
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Bozaide
           min: 20
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Radiation: 5
@@ -535,20 +460,14 @@
     - !type:PlantAdjustHealth
       amount: 10
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
-      - !type:AdjustReagentsByGroup
-        group: Medicine
-        amount: -3
+      - !type:CleanBloodstream
+        excluded: [Multiver]
+        cleanseRate: -3
         conditions:
         - !type:BloodstreamCountCondition
           max: 3 # the gist is, 2 and below this sucks, 3 and above it's great; mix with water etc for good results
-      - !type:AdjustReagentsByGroup
-        group: Poison
-        amount: -3
-      - !type:AdjustReagentsByGroup
-        group: Narcotic
-        amount: -3
       - !type:HealthChange
         damage:
           types:
@@ -564,10 +483,6 @@
         damage:
           groups:
             Brute: 0.5
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
 
 - type: reagent
   id: Monover
@@ -585,7 +500,7 @@
     - !type:PlantAdjustHealth
       amount: -10
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         conditions:
@@ -601,9 +516,6 @@
         conditions:
         - !type:BloodstreamCountCondition
           min: 1 # potential use for checking bloodstream cleanliness?
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
 
 - type: reagent
   id: Calomel
@@ -621,7 +533,7 @@
     - !type:PlantAdjustHealth
       amount: -50
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 1
       effects:
       - !type:CleanBloodstream
@@ -640,9 +552,6 @@
         conditions:
         - !type:MobStateCondition
           mobstate: Alive
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:HealthChange
         damage:
           types:
@@ -651,9 +560,6 @@
         - !type:ReagentCondition
           reagent: Calomel
           min: 15
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:AdjustReagent
         reagent: Calomel
         amount: -2
@@ -678,12 +584,12 @@
   - !type:PlantAdjustHealth
     amount: -20
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.15
       effects:
-      - !type:AdjustReagentsByGroup
-        group: Poison
-        amount: -6
+      - !type:CleanBloodstream
+        excluded: [AmmoniatedMercury]
+        cleanseRate: 6
       - !type:HealthChange
         damage:
           types:
@@ -692,9 +598,6 @@
         - !type:ReagentCondition
           reagent: AmmoniatedMercury
           min: 10
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:HealthChange
         damage:
           types:
@@ -727,7 +630,7 @@
     - !type:PlantAdjustHealth
       amount: -10
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         conditions:
@@ -754,7 +657,7 @@
   - !type:PlantAdjustHealth
     amount: -10
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.15
       effects:
       - !type:SuppressPain
@@ -788,9 +691,6 @@
         - !type:ReagentCondition
           reagent: Ibuprofen
           min: 20
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:AdjustConsciousness
         conditions:
         - !type:ReagentCondition
@@ -874,7 +774,7 @@
         - !type:NestedCondition
           proto: NoPressureProtection
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -901,7 +801,7 @@
   - !type:PlantAdjustHealth
     amount: -10
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -936,9 +836,6 @@
         - !type:ReagentCondition
           reagent: SalicylicAcid
           min: 25
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
 
 - type: reagent
   id: Oxandrolone
@@ -952,7 +849,7 @@
   - !type:PlantAdjustHealth
     amount: -8
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -990,9 +887,6 @@
         - !type:ReagentCondition
           reagent: Oxandrolone
           min: 25
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
 
 - type: reagent
   id: PentenicAcid
@@ -1008,11 +902,11 @@
     - !type:PlantAdjustToxins
       amount: -8
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.25
       effects:
       - !type:CleanBloodstream
-        excluded: PentenicAcid # Trauma - Exclude pentacid from its own chem purge
+        excluded: [PentenicAcid] # Trauma - Exclude pentacid from its own chem purge
       - !type:HealthChange
         damage:
           types:
@@ -1038,7 +932,7 @@
     - !type:PlantAdjustHealth
       amount: -5
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.25
       effects:
       - !type:HealthChange
@@ -1056,10 +950,6 @@
           min: 0
           max: 35
       - !type:ModifyStatusEffect # and basically every visual/combat side effect that can be reasonably put
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         effectProto: AtropineSlowdownStatusEffect
       - !type:GenericStatusEffect
         key: Stutter
@@ -1067,9 +957,6 @@
       - !type:Jitter
       - !type:ModifyParalysis
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Atropine
           min: 35
@@ -1085,9 +972,6 @@
         - !type:ReagentCondition
           reagent: Atropine
           min: 35
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:ModifyBloodLevel
         amount: 5
       - !type:ModifyBleed
@@ -1112,7 +996,7 @@
     - !type:PlantAdjustHealth
       amount: -20
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 1
       effects:
       - !type:HealthChange
@@ -1165,7 +1049,7 @@
           min: 160.15
         amount: -10000
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -1222,7 +1106,7 @@
           max: 420
         amount: 10000
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -1254,7 +1138,7 @@
   flavor: medicine
   color: "#ad2cfa"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.1
       effects:
       - !type:SuppressPain
@@ -1272,9 +1156,6 @@
         - !type:ReagentCondition
           reagent: Tramadol
           min: 15.5
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:AdjustConsciousness
         allowNewModifiers: true
         modifierType: Pain
@@ -1291,7 +1172,7 @@
   flavor: medicine
   color: "#2cfa76"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.1
       effects:
       - !type:SuppressPain
@@ -1309,9 +1190,6 @@
         - !type:ReagentCondition
           reagent: Oxycodone
           min: 10.5
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
       - !type:AdjustConsciousness
         allowNewModifiers: true
         modifierType: Pain
@@ -1330,7 +1208,7 @@
   color: "#FFA500"
   worksOnTheDead: true
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.03 # Trauma - harder to make, buffed to 33s/u
       effects:
       - !type:HealthChange
@@ -1340,9 +1218,7 @@
         damage:
           types:
             Poison: 0.1 # Trauma
-    Medicine:
-      metabolismRate: 0.03
-      effects:
+
       - !type:ReduceRotting
         seconds: 1
         conditions:
@@ -1367,7 +1243,7 @@
   flavor: medicine
   color: "#fcf7f9"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.25
       effects:
       - !type:HealthChange
@@ -1382,9 +1258,7 @@
         key: Stun
         time: 3
         type: Remove
-    Narcotic:
-      metabolismRate: 0.25
-      effects:
+
       - !type:GenericStatusEffect
         key: KnockedDown
         time: 3
@@ -1410,6 +1284,7 @@
 
 # <Viro>
 
+# TODO KILL THIS DOGSHIT
 - type: reagent
   id: Immurin
   name: reagent-name-immurin
@@ -1419,7 +1294,7 @@
   flavor: terrible
   color: "#A2AF8A"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       # it's a cheap mass-produceable cure-all so it's rather weak
       - !type:ImmunityModifier
@@ -1436,7 +1311,7 @@
   flavor: medicine
   color: "#559955"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:DiseaseProgressChange
         affectedType: Bacterial
@@ -1455,7 +1330,7 @@
   flavor: medicine
   color: "#995555"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:DiseaseProgressChange
         affectedType: Viral

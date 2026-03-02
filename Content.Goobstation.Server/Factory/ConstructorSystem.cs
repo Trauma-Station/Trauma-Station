@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Factory;
@@ -52,7 +49,8 @@ public sealed class ConstructorSystem : SharedConstructorSystem
         var completed = proto.Type switch
         {
             ConstructionType.Structure => await _construction.TryStartStructureConstruction(uid, id, OutputPosition(ent), Angle.Zero),
-            ConstructionType.Item => await _construction.TryStartItemConstruction(id, uid)
+            ConstructionType.Item => await _construction.TryStartItemConstruction(id, uid),
+            _ => false
         };
 
         if (completed)

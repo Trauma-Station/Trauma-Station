@@ -34,7 +34,8 @@
     - type: ZombieImmune
     - type: CrematoriumImmune
     - type: BreathingImmunity
-    - type: TemperatureImmunity
+    - type: SpecialLowTempImmunity
+    - type: SpecialHighTempImmunity
     - type: TypingIndicator
       proto: robot
     - type: Speech
@@ -121,6 +122,7 @@
     - type: SolutionContainerManager
     - type: Dna
     - type: Absorbable
+    - type: Mutatable
     - type: Fingerprint
     - type: Perishable
     - type: Hunger

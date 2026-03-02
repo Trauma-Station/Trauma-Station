@@ -1,5 +1,4 @@
 using System.Linq;
-using Content.Shared.Destructible; // Trama - moved to shared
 using Content.Shared.Destructible.Thresholds; // Trauma - moved to shared
 using Content.Server.Destructible.Thresholds.Behaviors;
 using Content.Shared.Destructible.Thresholds.Behaviors; // Trauma
@@ -7,7 +6,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Triggers;

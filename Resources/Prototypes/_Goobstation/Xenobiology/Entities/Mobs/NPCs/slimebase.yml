@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ SimpleMobBase, MobCombat ]
+  parent: [ BaseMobSlimes, SimpleMobBase, MobCombat ]
   id: BaseMobSlimeXenobio
   name: basic slime
   description: It looks so much like jelly. I wonder what it tastes like?
@@ -77,6 +77,7 @@
       reagents:
       - ReagentId: Slime
         Quantity: 150
+    smokeImmune: true  #No more 50000 slime extracts midshift
     bloodlossDamage:
       types:
         Bloodloss:
@@ -109,9 +110,12 @@
         type: Local
         messages: [ "slime-hurt-by-water-popup" ]
         probability: 0.25
-  - type: Body
-    prototype: Slimes
-    requiredLegs: 1
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Burn: 5
+    animation: WeaponArcPunch
+    soundHit: /Audio/Weapons/punch3.ogg
   - type: InteractionPopup
     successChance: 0.5
     interactSuccessString: petting-success-slimes

@@ -1,31 +1,20 @@
-// SPDX-FileCopyrightText: 2025 BeBright <98597725+be1bright@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 LuciferEOS <stepanteliatnik2022@gmail.com>
-// SPDX-FileCopyrightText: 2025 LuciferMkshelter <154002422+LuciferEOS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 LuciferMkshelter <stepanteliatnik2022@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Goobstation.Common.NTR;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.NTR;
 using Content.Goobstation.Shared.NTR.Documents;
 using Content.Goobstation.Shared.NTR.Events;
 using Content.Server.NameIdentifier;
 using Content.Server.Popups;
 using Content.Server.Station.Systems;
-using Content.Shared.Access.Components;
-using Content.Shared.Access.Systems;
-using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
+using Content.Shared.NameIdentifier;
 using Content.Shared.Paper;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
@@ -42,8 +31,6 @@ public sealed class NtrTaskSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly NameIdentifierSystem _nameIdentifier = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -52,7 +39,9 @@ public sealed class NtrTaskSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly TagSystem _tag = default!;
 
-    private const string NameIdentifierGroup = "Task";
+    public static readonly ProtoId<NameIdentifierGroupPrototype> NameIdentifierGroup = "Task";
+    public static readonly ProtoId<TagPrototype> Bottle = "Bottle";
+    public static readonly ProtoId<TagPrototype> Vial = "Vial";
 
     public override void Initialize()
     {
@@ -270,7 +259,7 @@ public sealed class NtrTaskSystem : EntitySystem
 
     private bool TryHandleVial(EntityUid item, EntityUid console, NtrTaskConsoleComponent component)
     {
-        if (!_tag.HasTag(item, "Vial") && !_tag.HasTag(item, "Bottle"))
+        if (!_tag.HasTag(item, Vial) && !_tag.HasTag(item, Bottle))
             return false;
 
         var station = _station.GetOwningStation(console);

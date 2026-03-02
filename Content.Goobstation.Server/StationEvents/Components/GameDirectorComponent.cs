@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Server.StationEvents.Metric;
@@ -12,7 +7,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Server.StationEvents.Components;
 
-[RegisterComponent, Access(typeof(GameDirectorSystem))]
+[RegisterComponent, Access(typeof(GameDirector.GameDirectorSystem))]
 public sealed partial class GameDirectorComponent : Component
 {
 
@@ -135,8 +130,7 @@ public sealed partial class StoryPrototype : IPrototype
 ///   endIfAllBetter is suitable for when you want the station to reach a given level of peace before you subject them to
 ///   the next round of chaos.
 /// </summary>
-[DataDefinition]
-[Prototype("storyBeat")]
+[Prototype]
 public sealed partial class StoryBeatPrototype : IPrototype
 {
     [IdDataField]
@@ -145,8 +139,8 @@ public sealed partial class StoryBeatPrototype : IPrototype
     /// <summary>
     ///   A human-readable description string for logging / admins
     /// </summary>
-    [DataField]
-    public string Description;
+    [DataField(required: true)]
+    public string Description = string.Empty;
 
     /// <summary>
     ///   Which chaos levels we are driving in this beat and the values we are aiming for

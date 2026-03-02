@@ -10,7 +10,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 150 # TODO: change to 15
+        maxVol: 15
         reagents:
-        - ReagentId: Nutriment # TODO: change to some slime food reagent, which metabolizes into nutriment in slime stomachs at 10x ratio
-          Quantity: 150 # TODO: change to 15
+        - ReagentId: Nutrislime
+          Quantity: 15

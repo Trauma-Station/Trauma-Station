@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Overlays;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.PreAscension;
@@ -47,6 +49,8 @@ public sealed class ShadowlingAscensionEggSystem : EntitySystem
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly ServerGlobalSoundSystem _globalSound = default!;
+
+    public static readonly EntProtoId NightmareAbilities = "NightmareAbilities";
 
     public override void Initialize()
     {
@@ -232,7 +236,7 @@ public sealed class ShadowlingAscensionEggSystem : EntitySystem
             _actions.RemoveAction(ascendant.ActionHatchEntity);
         }
 
-        var nightmareComps = _protoMan.Index("NightmareAbilities");
+        var nightmareComps = _protoMan.Index(NightmareAbilities);
         foreach (var thrall in thralls)
         {
             if (HasComp<LesserShadowlingComponent>(thrall))

@@ -1,8 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Weapons.NoWieldNeeded;
 using Content.Shared.Item.ItemToggle;
-using Content.Shared.Standing;
-using Content.Shared.Stunnable;
 using Robust.Shared.Audio;
 // </Trauma>
 using System.Linq;
@@ -36,10 +34,6 @@ namespace Content.Shared.Wieldable;
 
 public abstract class SharedWieldableSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    // </Trauma>
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -91,19 +85,7 @@ public abstract class SharedWieldableSystem : EntitySystem
         if (TryComp<WieldableComponent>(uid, out var wieldable) &&
             !wieldable.Wielded)
         {
-            // Lavaland Change: If the weapon can fumble, the player will get knocked down if they try to use the weapon without wielding it.
-            if (component.FumbleOnAttempt)
-            {
-                args.Message = Loc.GetString("wieldable-component-requires-fumble", ("item", uid));
-                var playSound = !_standing.IsDown(args.User);
-                _stun.TryKnockdown(args.User, TimeSpan.FromSeconds(1.5f), true);
-                if (playSound)
-                    _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/slip.ogg"), args.User, args.User);
-            }
-            else
-            {
-                args.Message = Loc.GetString("wieldable-component-requires", ("item", uid));
-            }
+            args.Message = Loc.GetString("wieldable-component-requires", ("item", uid));
             args.Cancelled = true;
         }
     }
@@ -112,7 +94,7 @@ public abstract class SharedWieldableSystem : EntitySystem
     {
         if (TryComp<WieldableComponent>(uid, out var wieldable) &&
             !wieldable.Wielded &&
-            !HasComp<NoWieldNeededComponent>(args.User) // Goobstation - Yowies
+            !HasComp<NoWieldNeededComponent>(args.User) // Goobstation
             )
         {
             args.Cancel();

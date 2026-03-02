@@ -1,4 +1,4 @@
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Tag;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -8,6 +8,8 @@ namespace Content.Shared._Shitcode.Heretic.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class FleshPassiveComponent : Component
 {
+    public override bool SessionSpecific => true;
+
     [DataField, NonSerialized]
     public List<EntityUid> FleshMimics = new();
 
@@ -17,8 +19,8 @@ public sealed partial class FleshPassiveComponent : Component
     [DataField]
     public float MimicHealMultiplier = 5f;
 
-    [DataField, NonSerialized]
-    public EntityUid? FleshStomach;
+    [DataField]
+    public EntityUid? Stomach;
 
     [DataField]
     public float BaseMoveSpeedPerFlesh = 0.0003f;
@@ -31,9 +33,6 @@ public sealed partial class FleshPassiveComponent : Component
 
     [DataField]
     public float OrganMultiplier = 2f;
-
-    [DataField]
-    public float MeatMultiplier = 1.1f;
 
     [DataField]
     public float BodyPartMultiplier = 5f;
@@ -64,9 +63,6 @@ public sealed partial class FleshPassiveComponent : Component
 
     [DataField]
     public float BleedReductionMultiplier = 5f;
-
-    [DataField]
-    public ProtoId<TagPrototype> MeatTag = "Meat";
 
     [DataField]
     public float HealInterval = 1f;

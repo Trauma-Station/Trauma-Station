@@ -12,7 +12,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Body.Systems;
+using Content.Goobstation.Shared.Heretic;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Heretic;
@@ -27,11 +27,10 @@ using Content.Server._Shitcode.Heretic.EntitySystems.PathSpecific;
 using Content.Server.Heretic.Abilities;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Medical;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Stunnable;
 
@@ -43,7 +42,6 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly BloodstreamSystem _blood = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly ProtectiveBladeSystem _pbs = default!;
@@ -55,6 +53,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StarMarkSystem _starMark = default!;
     [Dependency] private readonly HereticAbilitySystem _ability = default!;
+    [Dependency] private readonly HereticSystem _heretic = default!;
 
     public override void Initialize()
     {
@@ -127,7 +126,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
                     break;
 
                 var targetCoords = Transform(target).Coordinates;
-                _starMark.SpawnCosmicField(targetCoords, heretic.PathStage);
+                _starMark.SpawnCosmicField(targetCoords, heretic.PathStage, predicted: false);
 
                 if (Exists(cosmicMark.CosmicDiamondUid))
                 {
@@ -152,15 +151,13 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
 
         // transfers the mark to the next nearby person
         var look = _lookup.GetEntitiesInRange(target, 5f, flags: LookupFlags.Dynamic)
-            .Where(x => x != target && HasComp<HumanoidAppearanceComponent>(x) && !HasComp<HereticComponent>(x) && !HasComp<GhoulComponent>(x))
+            .Where(x => x != target && HasComp<HumanoidProfileComponent>(x) && !_heretic.IsHereticOrGhoul(x))
             .ToList();
         if (look.Count == 0)
             return true;
 
         _random.Shuffle(look);
         var lookent = look.First();
-        if (!HasComp<HumanoidAppearanceComponent>(lookent) || HasComp<HereticComponent>(lookent))
-            return true;
 
         var markComp = EnsureComp<HereticCombatMarkComponent>(lookent);
         markComp.DisappearTime = markComp.MaxDisappearTime;

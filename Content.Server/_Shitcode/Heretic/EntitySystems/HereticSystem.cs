@@ -19,9 +19,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Text.RegularExpressions;
+using Content.Goobstation.Common.Religion;
 using Content.Server.Store.Systems;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Eye;
 using Content.Shared.Heretic;
 using Content.Shared.Mind;
@@ -33,77 +33,255 @@ using Content.Server.Heretic.Components;
 using Content.Server.Antag;
 using Robust.Shared.Random;
 using System.Linq;
-using Content.Goobstation.Common.CCVar;
+using Content.Goobstation.Shared.ManifestListings;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server._Goobstation.Objectives.Components;
 using Content.Server.Actions;
 using Content.Server.Chat.Managers;
-using Content.Server.Objectives;
+using Content.Server.GameTicking.Rules;
 using Content.Shared.Humanoid;
-using Robust.Server.Player;
 using Content.Server.Revolutionary.Components;
+using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Chat;
 using Content.Shared.GameTicking;
-using Content.Shared.Humanoid.Markings;
+using Content.Server.Polymorph.Components;
 using Content.Shared.Preferences;
-using Content.Shared.Random.Helpers;
 using Content.Shared.Roles.Jobs;
-using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Content.Shared._Shitcode.Heretic.Systems;
+using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
+using Content.Shared.Mind.Components;
+using Content.Shared.Mobs.Components;
+using Content.Shared.NPC.Prototypes;
+using Content.Shared.NPC.Systems;
+using Content.Server.Hands.Systems;
+using Content.Shared._Shitcode.Heretic.Rituals;
+using Content.Shared.Jaunt;
+using Content.Shared.Mobs;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.Store;
+using Content.Shared.Tag;
+using Robust.Server.GameStates;
 using Robust.Shared.Utility;
-using Content.Shared.Polymorph;
-using Content.Server.Polymorph.Systems;
 
 namespace Content.Server.Heretic.EntitySystems;
 
-public sealed class HereticSystem : EntitySystem
+public sealed class HereticSystem : SharedHereticSystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly StoreSystem _store = default!;
-    [Dependency] private readonly HereticKnowledgeSystem _knowledge = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly ObjectivesSystem _objectives = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
+    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
+    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private readonly PvsOverrideSystem _override = default!;
+    [Dependency] private readonly HereticRuleSystem _rule = default!;
 
     [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly IPlayerManager _playerMan = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     private float _timer;
     private const float PassivePointCooldown = 20f * 60f;
-    private bool _ascensionRequiresObjectives;
 
     private const int HereticVisFlags = (int) VisibilityFlags.EldritchInfluence;
+
+    public static readonly ProtoId<NpcFactionPrototype> HereticFactionId = "Heretic";
+
+    public static readonly ProtoId<NpcFactionPrototype> NanotrasenFactionId = "NanoTrasen";
+
+    public static readonly ProtoId<TagPrototype> AscensionRitualTag = "RitualAscension";
+
+    public static readonly ProtoId<TagPrototype> FeastOfOwlsRitualTag = "RitualFeastOfOwls";
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<HereticComponent, ComponentInit>(OnCompInit);
+        SubscribeLocalEvent<HereticComponent, ComponentStartup>(OnCompStartup);
         SubscribeLocalEvent<HereticComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<HereticComponent, GetVisMaskEvent>(OnGetVisMask);
         SubscribeLocalEvent<HereticComponent, EventHereticUpdateTargets>(OnUpdateTargets);
         SubscribeLocalEvent<HereticComponent, EventHereticRerollTargets>(OnRerollTargets);
         SubscribeLocalEvent<HereticComponent, EventHereticAscension>(OnAscension);
+        SubscribeLocalEvent<HereticComponent, ListingPurchasedEvent>(OnPurchase);
 
-        SubscribeLocalEvent<HereticComponent, PolymorphedEvent>(OnPolymorphed);
+        SubscribeLocalEvent<HereticComponent, MindGotRemovedEvent>(OnMindRemoved);
+        SubscribeLocalEvent<HereticComponent, MindGotAddedEvent>(OnMindAdded);
 
+        SubscribeLocalEvent<GetVisMaskEvent>(OnGetVisMask);
+        SubscribeLocalEvent<HereticStartupEvent>(OnHereticStartup);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRestart);
+        SubscribeLocalEvent<UserShouldTakeHolyEvent>(OnShouldTakeHoly);
+        SubscribeLocalEvent<MobStateChangedEvent>(OnStateChanged);
 
-        Subs.CVar(_cfg, GoobCVars.AscensionRequiresObjectives, value => _ascensionRequiresObjectives = value, true);
+        SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectAppliedEvent>(OnApply);
+        SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
     }
 
-    private void OnPolymorphed(Entity<HereticComponent> ent, ref PolymorphedEvent args)
-        => _polymorph.CopyPolymorphComponent<HereticComponent>(ent, args.NewEntity);
+    private void OnStateChanged(MobStateChangedEvent args)
+    {
+        if (!TryGetHereticComponent(args.Target, out var heretic, out var mind))
+            return;
+
+        var newActive = args.NewMobState == MobState.Dead;
+        if (heretic.IsActive == newActive)
+            return;
+
+        heretic.IsActive = newActive;
+
+        var ev = new HereticStateChangedEvent(mind, !newActive, false);
+        foreach (var minion in heretic.Minions)
+        {
+            RaiseLocalEvent(minion, ref ev);
+        }
+    }
+
+    private void OnRemove(Entity<HideHereticAuraStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
+    {
+        UpdateHereticAura(args.Target);
+    }
+
+    private void OnApply(Entity<HideHereticAuraStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
+    {
+        RemCompDeferred<HereticAuraComponent>(args.Target);
+    }
+
+    private void OnMindAdded(Entity<HereticComponent> ent, ref MindGotAddedEvent args)
+    {
+        ent.Comp.MansusGraspAction = EntityUid.Invalid;
+
+        if (TerminatingOrDeleted(args.Container))
+            return;
+
+        if (!TryComp(args.Container, out MobStateComponent? mobState))
+        {
+            if (!ent.Comp.IsActive)
+                return;
+            // Don't kill stargazer if we got temporarily polymorphed
+            var temporary = TryComp(args.Container, out PolymorphedEntityComponent? p) &&
+                            (!p.Configuration.Forced || p.Configuration.Duration != null) ||
+                            HasComp<JauntComponent>(args.Container);
+
+            ent.Comp.IsActive = false;
+            var ev = new HereticStateChangedEvent(ent, true, temporary);
+            foreach (var minion in ent.Comp.Minions)
+            {
+                RaiseLocalEvent(minion, ref ev);
+            }
+
+            return;
+        }
+
+        var newActive = mobState.CurrentState != MobState.Dead;
+        if (newActive != ent.Comp.IsActive)
+        {
+            var ev = new HereticStateChangedEvent(ent, !newActive, false);
+            foreach (var minion in ent.Comp.Minions)
+            {
+                RaiseLocalEvent(minion, ref ev);
+            }
+            ent.Comp.IsActive = newActive;
+        }
+
+        SetMinionsMaster(ent, args.Container);
+        RaiseKnowledgeEvents(ent, args.Container, false);
+
+        if (!ent.Comp.Ascended)
+            return;
+
+        var ev2 = new UnholyStatusChangedEvent(args.Container, args.Container, true);
+        RaiseLocalEvent(args.Container, ref ev2);
+    }
+
+    private void OnMindRemoved(Entity<HereticComponent> ent, ref MindGotRemovedEvent args)
+    {
+        ent.Comp.MansusGraspAction = EntityUid.Invalid;
+
+        if (TerminatingOrDeleted(args.Container) || !HasComp<MobStateComponent>(args.Container))
+            return;
+
+        SetMinionsMaster(ent, null);
+        RaiseKnowledgeEvents(ent, args.Container, true);
+    }
+
+    private void SetMinionsMaster(Entity<HereticComponent> ent, EntityUid? newMaster)
+    {
+        ent.Comp.Minions = ent.Comp.Minions.Where(Exists).ToHashSet();
+        var mobQuery = GetEntityQuery<MobStateComponent>();
+        foreach (var uid in ent.Comp.Minions)
+        {
+            if (!mobQuery.HasComp(uid))
+                continue;
+            var minion = EnsureComp<HereticMinionComponent>(uid);
+            minion.BoundHeretic = newMaster;
+            Dirty(uid, minion);
+        }
+    }
+
+    private void RaiseKnowledgeEvents(Entity<HereticComponent> mind, EntityUid body, bool negative)
+    {
+        foreach (var ev in mind.Comp.KnowledgeEvents)
+        {
+            RaiseKnowledgeEvent(body, ev, negative);
+        }
+    }
+
+    public override void RaiseKnowledgeEvent(EntityUid uid, HereticKnowledgeEvent ev, bool negative)
+    {
+        if (negative)
+            EntityManager.RemoveComponents(uid, ev.AddedComponents);
+        else
+            EntityManager.AddComponents(uid, ev.AddedComponents);
+        ev.Negative = negative;
+        ev.Heretic = uid;
+        RaiseLocalEvent(uid, (object) ev, true);
+    }
+
+    protected override void SpawnRituals(HereticComponent heretic,
+        List<EntProtoId<HereticRitualComponent>> rituals,
+        ICommonSession session)
+    {
+        base.SpawnRituals(heretic, rituals, session);
+
+        foreach (var ritual in rituals)
+        {
+            var ritUid = Spawn(ritual);
+            _override.AddSessionOverride(ritUid, session);
+            heretic.Rituals.Add(ritUid);
+        }
+    }
+
+    private void OnHereticStartup(HereticStartupEvent ev)
+    {
+        foreach (var item in _hands.EnumerateHeld(ev.Heretic))
+        {
+            if (HasComp<MansusGraspComponent>(item))
+                QueueDel(item);
+        }
+
+        if (ev.Negative)
+            _npcFaction.RemoveFaction(ev.Heretic, HereticFactionId);
+        else
+        {
+            _npcFaction.RemoveFaction(ev.Heretic, NanotrasenFactionId, false);
+            _npcFaction.AddFaction(ev.Heretic, HereticFactionId);
+        }
+
+        UpdateHereticAura(ev.Heretic);
+
+        if (!TryComp<EyeComponent>(ev.Heretic, out var eye))
+            return;
+
+        var mask = ev.Negative ? eye.VisibilityMask & ~HereticVisFlags : eye.VisibilityMask | HereticVisFlags;
+        _eye.SetVisibilityMask(ev.Heretic, mask, eye);
+    }
 
     private void OnRestart(RoundRestartCleanupEvent ev)
     {
@@ -121,46 +299,27 @@ public sealed class HereticSystem : EntitySystem
 
         _timer = 0f;
 
-        foreach (var heretic in EntityQuery<HereticComponent>())
+        var query = EntityQueryEnumerator<HereticComponent, StoreComponent, MindComponent>();
+        while (query.MoveNext(out var uid, out var heretic, out var store, out var mind))
         {
             // passive point gain every 20 minutes
-            UpdateKnowledge(heretic.Owner, heretic, 1f);
+            UpdateMindKnowledge((uid, heretic, store, mind), null, 1f);
         }
     }
 
-    public bool ObjectivesAllowAscension(Entity<HereticComponent> ent)
-    {
-        if (!_ascensionRequiresObjectives)
-            return true;
-
-        if (!_mind.TryGetMind(ent, out var mindId, out var mind))
-            return false;
-
-        foreach (var objId in ent.Comp.AllObjectives)
-        {
-            if (_mind.TryFindObjective((mindId, mind), objId, out var obj) &&
-                !_objectives.IsCompleted(obj.Value, (mindId, mind)))
-                return false;
-        }
-
-        return true;
-    }
-
-    public void UpdateKnowledge(EntityUid uid,
-        HereticComponent comp,
+    public override void UpdateMindKnowledge(Entity<HereticComponent, StoreComponent, MindComponent> ent,
+        EntityUid? user,
         float amount,
-        StoreComponent? store = null,
         bool showText = true,
         bool playSound = true)
     {
-        if (Resolve(uid, ref store, false))
-        {
-            _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { "KnowledgePoint", amount } }, uid, store);
-            _store.UpdateUserInterface(uid, uid, store);
-        }
+        base.UpdateMindKnowledge(ent, user, amount, showText, playSound);
 
-        if (!_mind.TryGetMind(uid, out var mindId, out var mind))
-            return;
+        var (mindId, heretic, store, mind) = ent;
+        var uid = user ?? mind.OwnedEntity;
+
+        _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { "KnowledgePoint", amount } }, mindId, store);
+        _store.UpdateUserInterface(uid, mindId, store);
 
         if (_mind.TryGetObjectiveComp<HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
             objective.Researched += amount;
@@ -168,75 +327,115 @@ public sealed class HereticSystem : EntitySystem
         if (!showText && !playSound)
             return;
 
-        if (!_playerMan.TryGetSessionById(mind.UserId, out var session))
+        if (!PlayerMan.TryGetSessionById(mind.UserId, out var session))
             return;
 
-        if (playSound)
-            _audio.PlayGlobal(comp.InfluenceGainSound, session);
-
-        if (!showText)
-            return;
-
-        var baseMessage = comp.InfluenceGainBaseMessage;
-        var message = Loc.GetString(_rand.Pick(comp.InfluenceGainMessages));
-        var size = comp.InfluenceGainTextFontSize;
-        var loc = Loc.GetString(baseMessage, ("size", size), ("text", message));
-        SharedChatSystem.UpdateFontSize(size, ref message, ref loc);
-        _chatMan.ChatMessageToOne(ChatChannel.Server, message, loc, default, false, session.Channel, canCoalesce: false);
-    }
-
-    public HashSet<ProtoId<TagPrototype>>? TryGetRequiredKnowledgeTags(Entity<HereticComponent> ent)
-    {
-        if (ent.Comp.KnowledgeRequiredTags.Count > 0 || GenerateRequiredKnowledgeTags(ent))
-            return ent.Comp.KnowledgeRequiredTags;
-
-        return null;
-    }
-
-    public bool GenerateRequiredKnowledgeTags(Entity<HereticComponent> ent)
-    {
-        ent.Comp.KnowledgeRequiredTags.Clear();
-        var dataset = _proto.Index(ent.Comp.KnowledgeDataset);
-        for (var i = 0; i < 4; i++)
+        if (showText)
         {
-            ent.Comp.KnowledgeRequiredTags.Add(_rand.Pick(dataset));
+            var baseMessage = heretic.InfluenceGainBaseMessage;
+            var message = Loc.GetString(_rand.Pick(heretic.InfluenceGainMessages));
+            var size = heretic.InfluenceGainTextFontSize;
+            var loc = Loc.GetString(baseMessage, ("size", size), ("text", message));
+            SharedChatSystem.UpdateFontSize(size, ref message, ref loc);
+            _chatMan.ChatMessageToOne(ChatChannel.Server,
+                message,
+                loc,
+                default,
+                false,
+                session.Channel,
+                canCoalesce: false);
         }
 
-        return ent.Comp.KnowledgeRequiredTags.Count > 0;
+        if (playSound)
+            _audio.PlayGlobal(heretic.InfluenceGainSound, session);
+
+        var couldBreak = heretic.CanBreakBlade;
+        var hadAura = heretic.ShouldShowAura;
+        heretic.KnowledgeTracker += amount;
+        var canBreak = heretic.CanBreakBlade;
+        var showAura = heretic.ShouldShowAura;
+
+        if (!canBreak && couldBreak)
+        {
+            var msg = Loc.GetString(heretic.BreakBladeAbilityLostMessage);
+            _chatMan.ChatMessageToOne(ChatChannel.Server,
+                msg,
+                msg,
+                default,
+                false,
+                session.Channel,
+                Color.Red);
+        }
+
+        if (!hadAura && showAura)
+        {
+            if (uid != null)
+                Status.TryUpdateStatusEffectDuration(uid.Value, heretic.HideAuraStatusEffect, heretic.AuraDelayTime);
+
+            var msg = Loc.GetString(heretic.AuraVisibleMessage);
+            _chatMan.ChatMessageToOne(ChatChannel.Server,
+                msg,
+                msg,
+                default,
+                false,
+                session.Channel,
+                Color.Red);
+        }
+
+        Dirty(mindId, heretic);
     }
 
-    private void OnCompInit(Entity<HereticComponent> ent, ref ComponentInit args)
+    private void OnCompStartup(Entity<HereticComponent> ent, ref ComponentStartup args)
     {
-        // add influence layer
-        if (TryComp<EyeComponent>(ent, out var eye))
-            _eye.SetVisibilityMask(ent, eye.VisibilityMask | HereticVisFlags, eye);
-
         foreach (var k in ent.Comp.BaseKnowledge)
-            _knowledge.AddKnowledge(ent, ent.Comp, k, research: false);
+        {
+            TryAddKnowledge((ent, null, ent), k);
+        }
 
-        // in case of polymorph
-        foreach (var k in ent.Comp.ResearchedKnowledge)
-            _knowledge.AddKnowledge(ent, ent.Comp, k, research: false);
-
-        GenerateRequiredKnowledgeTags(ent);
         RaiseLocalEvent(ent, new EventHereticRerollTargets());
+        UpdateHereticCostModifiers(ent.AsNullable());
     }
 
     private void OnShutdown(Entity<HereticComponent> ent, ref ComponentShutdown args)
     {
-        if (TryComp<EyeComponent>(ent, out var eye))
-            _eye.SetVisibilityMask(ent, eye.VisibilityMask & ~HereticVisFlags, eye);
+        if (TryComp(ent, out MindComponent? mind) && mind.CurrentEntity is { } body && !TerminatingOrDeleted(body))
+        {
+            SetMinionsMaster(ent, null);
+            RaiseKnowledgeEvents(ent, body, true);
+        }
 
-        foreach (var action in ent.Comp.ProvidedActions)
-            _actions.RemoveAction(action);
+        if (TerminatingOrDeleted(ent) || !TryComp(ent, out ActionsContainerComponent? container))
+            return;
+
+        foreach (var action in container.Container.ContainedEntities.ToList())
+        {
+            if (HasComp<HereticActionComponent>(action))
+                _actionContainer.RemoveAction(action);
+        }
+
+        foreach (var ritual in ent.Comp.Rituals)
+        {
+            if (!TerminatingOrDeleted(ritual))
+                QueueDel(ritual);
+        }
     }
 
-    private void OnGetVisMask(Entity<HereticComponent> uid, ref GetVisMaskEvent args)
+    private void OnGetVisMask(ref GetVisMaskEvent args)
     {
-        args.VisibilityMask |= (int) VisibilityFlags.EldritchInfluence;
+        if (!TryGetHereticComponent(args.Entity, out _, out _))
+            return;
+
+        args.VisibilityMask |= HereticVisFlags;
     }
 
-    #region Internal events (target reroll, ascension, etc.)
+    private void OnShouldTakeHoly(ref UserShouldTakeHolyEvent ev)
+    {
+        if (!TryGetHereticComponent(ev.Target, out var heretic, out _))
+            return;
+
+        ev.ShouldTakeHoly |= heretic.Ascended;
+        ev.WeakToHoly = true;
+    }
 
     private void OnUpdateTargets(Entity<HereticComponent> ent, ref EventHereticUpdateTargets args)
     {
@@ -252,7 +451,7 @@ public sealed class HereticSystem : EntitySystem
         // welcome to my linq smorgasbord of doom
         // have fun figuring that out
 
-        var targets = _antag.GetAliveConnectedPlayers(_playerMan.Sessions)
+        var targets = _antag.GetAliveConnectedPlayers(PlayerMan.Sessions)
             .Where(IsSessionValid)
             .Select(x => x.AttachedEntity!.Value)
             .ToList();
@@ -298,41 +497,29 @@ public sealed class HereticSystem : EntitySystem
 
         bool IsSessionValid(ICommonSession session)
         {
-            if (!HasComp<HumanoidAppearanceComponent>(session.AttachedEntity))
+            if (!HasComp<HumanoidProfileComponent>(session.AttachedEntity))
                 return false;
 
-            if (HasComp<GhoulComponent>(session.AttachedEntity.Value) ||
-                HasComp<HereticComponent>(session.AttachedEntity.Value))
+            if (HasComp<GhoulComponent>(session.AttachedEntity.Value))
                 return false;
 
-            return _mind.TryGetMind(session.AttachedEntity.Value, out var mind, out _) &&
-                   _job.MindTryGetJobId(mind, out _);
+            if (!_mind.TryGetMind(session.AttachedEntity.Value, out var mind, out _) ||
+                mind == ent.Owner || !_job.MindTryGetJobId(mind, out _))
+                return false;
+
+            return !HasComp<HereticComponent>(mind);
         }
     }
 
     private SacrificeTargetData? GetData(EntityUid uid)
     {
-        if (!TryComp(uid, out HumanoidAppearanceComponent? humanoid))
+        if (!TryComp(uid, out HumanoidProfileComponent? humanoid))
             return null;
 
         if (!_mind.TryGetMind(uid, out var mind, out _) || !_job.MindTryGetJobId(mind, out var jobId) || jobId == null)
             return null;
 
-        var hair = (HairStyles.DefaultHairStyle, humanoid.CachedHairColor ?? Color.Black);
-        if (humanoid.MarkingSet.TryGetCategory(MarkingCategories.Hair, out var hairMarkings) && hairMarkings.Count > 0)
-        {
-            var hairMarking = hairMarkings[0];
-            hair = (hairMarking.MarkingId, hairMarking.MarkingColors.FirstOrNull() ?? Color.Black);
-        }
-
-        var facialHair = (HairStyles.DefaultFacialHairStyle, humanoid.CachedFacialHairColor ?? Color.Black);
-        if (humanoid.MarkingSet.TryGetCategory(MarkingCategories.FacialHair, out var facialHairMarkings) &&
-            facialHairMarkings.Count > 0)
-        {
-            var facialHairMarking = facialHairMarkings[0];
-            facialHair = (facialHairMarking.MarkingId, facialHairMarking.MarkingColors.FirstOrNull() ?? Color.Black);
-        }
-
+        /* TODO NUBODY: use api if it gets made
         var appearance = new HumanoidCharacterAppearance(hair.Item1,
             hair.Item2,
             facialHair.Item1,
@@ -340,13 +527,14 @@ public sealed class HereticSystem : EntitySystem
             humanoid.EyeColor,
             humanoid.SkinColor,
             humanoid.MarkingSet.GetForwardEnumerator().ToList());
+        */
 
         var profile = new HumanoidCharacterProfile().WithGender(humanoid.Gender)
             .WithSex(humanoid.Sex)
             .WithSpecies(humanoid.Species)
             .WithName(MetaData(uid).EntityName)
-            .WithAge(humanoid.Age)
-            .WithCharacterAppearance(appearance);
+            .WithAge(humanoid.Age);
+            //.WithCharacterAppearance(appearance);
 
         var netEntity = GetNetEntity(uid);
 
@@ -356,35 +544,105 @@ public sealed class HereticSystem : EntitySystem
     // notify the crew of how good the person is and play the cool sound :godo:
     private void OnAscension(Entity<HereticComponent> ent, ref EventHereticAscension args)
     {
+        if (!TryComp(ent, out MindComponent? mind) || mind.CurrentEntity is not { } uid)
+            return;
+
         // you've already ascended, man.
         if (ent.Comp.Ascended || !ent.Comp.CanAscend)
             return;
 
         ent.Comp.Ascended = true;
-        ent.Comp.KnownRituals.Remove("FeastOfOwls");
+        RemoveRituals(ent.AsNullable(), [AscensionRitualTag, FeastOfOwlsRitualTag]);
         ent.Comp.ChosenRitual = null;
         Dirty(ent);
+
+        UpdateHereticAura(uid);
 
         // how???
         if (ent.Comp.CurrentPath == null)
             return;
 
-        foreach (var (action, _) in _actions.GetActions(ent))
+        if (TryComp(ent, out ActionsContainerComponent? container))
         {
-            if (TryComp(action, out ChangeUseDelayOnAscensionComponent? changeUseDelay) &&
-                (changeUseDelay.RequiredPath == null || changeUseDelay.RequiredPath == ent.Comp.CurrentPath))
-                _actions.SetUseDelay(action, changeUseDelay.NewUseDelay);
+            foreach (var action in container.Container.ContainedEntities)
+            {
+                if (TryComp(action, out ChangeUseDelayOnAscensionComponent? changeUseDelay) &&
+                    (changeUseDelay.RequiredPath == null || changeUseDelay.RequiredPath == ent.Comp.CurrentPath))
+                    _actions.SetUseDelay(action, changeUseDelay.NewUseDelay);
+            }
         }
 
         var pathLoc = ent.Comp.CurrentPath.ToLower();
         var ascendSound =
             new SoundPathSpecifier($"/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/ascend_{pathLoc}.ogg");
         _chat.DispatchGlobalAnnouncement(Loc.GetString($"heretic-ascension-{pathLoc}"),
-            Name(ent),
+            Name(uid),
             true,
             ascendSound,
             Color.Pink);
     }
 
-    #endregion
+
+    private void OnPurchase(Entity<HereticComponent> ent, ref ListingPurchasedEvent args)
+    {
+        if (args.Data.Categories.FirstOrNull() is not { } cat)
+            return;
+
+        if (!ent.Comp.SideKnowledgeDrafts.TryGetValue(cat, out var amount))
+            return;
+
+        var listings = _store.GetAvailableListings(args.User, ent, Comp<StoreComponent>(ent));
+        foreach (var listing in listings)
+        {
+            if (listing == args.Data ||
+                !listing.Categories.Contains(cat) ||
+                !listing.CostModifiersBySourceId.ContainsKey(cat))
+                continue;
+
+            listing.RemoveCostModifier(cat);
+        }
+
+        var newAmount = Math.Max(amount - 1, 0);
+        ent.Comp.SideKnowledgeDrafts[cat] = newAmount;
+        if (newAmount > 0)
+            UpdateHereticCostModifiers(ent.AsNullable(), cat, args.Data);
+    }
+
+    public override void UpdateHereticCostModifiers(Entity<HereticComponent?> ent,
+        ProtoId<StoreCategoryPrototype>? category = null,
+        ListingDataWithCostModifiers? except = null)
+    {
+        base.UpdateHereticCostModifiers(ent, category, except);
+
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        var store = CompOrNull<StoreComponent>(ent) ?? _rule.InitializeStore(ent);
+
+        var allListings = _store.GetAvailableListings(ent, ent, store).ToList();
+
+        if (except is { } e)
+            allListings.Remove(e);
+
+        // Order listings by category
+        var listings = allListings
+            .Where(x => x.Categories.FirstOrNull() is { } cat && (category == null || cat == category) &&
+                        ent.Comp.SideKnowledgeDrafts.TryGetValue(cat, out var amount) && amount > 0)
+            .DistinctBy(x => x.Categories.First())
+            .ToDictionary(x => x.Categories.First(),
+                x => allListings.Where(y => y.Categories.Intersect(x.Categories).Any()).ToList());
+
+        foreach (var (key, value) in listings)
+        {
+            if (value.Count == 0 || value.Any(x => x.CostModifiersBySourceId.ContainsKey(key)))
+                continue;
+
+            var amount = Math.Min(value.Count, ent.Comp.SideDraftChoiceAmount);
+            for (var i = 0; i < amount; i++)
+            {
+                var listing = _rand.PickAndTake(value);
+                listing.AddCostModifier(key, listing.Cost.ToDictionary(x => x.Key, _ => -FixedPoint2.New(1)));
+            }
+        }
+    }
 }

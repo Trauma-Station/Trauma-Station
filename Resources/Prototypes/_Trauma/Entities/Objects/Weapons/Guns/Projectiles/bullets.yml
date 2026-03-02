@@ -1,0 +1,17 @@
+- type: entity
+  parent: BaseBullet
+  id: BulletTurret
+  name: bullet (.22 short)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 10
+
+- type: entity
+  parent: BaseBullet
+  id: BaseBulletKinetic
+  abstract: true
+  components:
+  - type: BulletHoleGenerator

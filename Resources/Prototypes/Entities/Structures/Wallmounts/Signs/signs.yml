@@ -122,6 +122,18 @@
   components:
     - type: Sprite
       snapCardinals: false
+#     <Trauma>
+      sprite: _Trauma/Structures/Wallmounts/signs.rsi
+    - type: PointLight
+      radius: 1.4
+      energy: 7
+      castShadows: false
+      color: "#ff8227"
+    - type: MeleeSound
+      soundGroups:
+        Brute:
+          collection: GlassSmash
+#     </Trauma>
 
 - type: entity
   parent: BaseSignDirectional
@@ -130,7 +142,11 @@
   description: A direction sign, pointing out which way the Atmospherics department is.
   components:
   - type: Sprite
-    state: direction_atmos
+    layers:
+    - state: direction_atmos
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#ff8227"
 
 - type: entity
   parent: BaseSignDirectional
@@ -139,7 +155,11 @@
   description: A direction sign, pointing out which way the bar is.
   components:
   - type: Sprite
-    state: direction_bar
+    layers:
+    - state: direction_bar
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#27ff44"
 
 - type: entity
   parent: BaseSignDirectional
@@ -148,7 +168,11 @@
   description: A direction sign, pointing out which way the Bridge is.
   components:
   - type: Sprite
-    state: direction_bridge
+    layers:
+    - state: direction_bridge
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#273dff"
 
 - type: entity
   parent: BaseSignDirectional
@@ -157,7 +181,11 @@
   description: A direction sign, pointing out which way the Brig is.
   components:
   - type: Sprite
-    state: direction_brig
+    layers:
+    - state: direction_brig
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#ff2727"
 
 - type: entity
   parent: BaseSignDirectional
@@ -166,7 +194,11 @@
   description: A direction sign, pointing out which way the Chapel is.
   components:
   - type: Sprite
-    state: direction_chapel
+    layers:
+    - state: direction_chapel
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#ffa127"
 
 - type: entity
   parent: BaseSignDirectional
@@ -175,7 +207,11 @@
   description: A direction sign, pointing out which way the chemistry lab is.
   components:
   - type: Sprite
-    state: direction_chemistry
+    layers:
+    - state: direction_chemistry
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#ffa927"
 
 - type: entity
   parent: BaseSignDirectional
@@ -184,7 +220,11 @@
   description: A direction sign, pointing out the way to cryogenics.
   components:
   - type: Sprite
-    state: direction_cryo
+    layers:
+    - state: cryo
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#1ddb36"
 
 - type: entity
   parent: BaseSignDirectional
@@ -193,7 +233,11 @@
   description: A direction sign, pointing out which way the Dorms are.
   components:
   - type: Sprite
-    state: direction_dorms
+    layers:
+    - state: direction_dorms
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#1ddb36"
 
 - type: entity
   parent: BaseSignDirectional
@@ -202,7 +246,11 @@
   description: A direction sign, pointing out which way the Engineering department is.
   components:
   - type: Sprite
-    state: direction_eng
+    layers:
+    - state: direction_eng
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#ff8227"
 
 - type: entity
   parent: BaseSignDirectional
@@ -213,13 +261,9 @@
   - type: Sprite
     layers:
     - state: direction_evac
-    - state: direction_evac_glow
-      shader: unshaded
-    - state: direction_evac_glow
-      shader: shaded
-      #This is a neat trick I found to sort of "hack" an emissive map into ss14. Basically, the direction_evac_glow texture has an alpha channel.
-      #Alpha doesn't work for unshaded, but for *shaded* it does, and by putting a shaded texture infront of the unshaded, we can dim the unshaded texture, effectively allowing brightness control.
-      #I am re-using this from my high-vis vest PR, where I go further into detail, https://github.com/space-wizards/space-station-14/pull/37869
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#27ffd0"
 
 - type: entity
   parent: BaseSignDirectional
@@ -228,7 +272,11 @@
   description: A direction sign, pointing out which way the examination room(s) are.
   components:
   - type: Sprite
-    state: direction_exam
+    layers:
+    - state: direction_exam
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#27f8ff"
 
 - type: entity
   parent: BaseSignDirectional
@@ -237,7 +285,11 @@
   description: A direction sign, pointing out which way the kitchen is.
   components:
   - type: Sprite
-    state: direction_food
+    layers:
+    - state: direction_food
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#27ff44"
 
 - type: entity
   parent: BaseSignDirectional
@@ -246,7 +298,11 @@
   description: A direction sign, pointing out which way the gravity generator is.
   components:
   - type: Sprite
-    state: direction_gravity
+    layers:
+    - state: direction_gravity
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#ff8227"
 
 - type: entity
   parent: BaseSignDirectional
@@ -255,7 +311,11 @@
   description: A direction sign, pointing out which way Head of Personnel's office is.
   components:
   - type: Sprite
-    state: direction_hop
+    layers:
+    - state: direction_hop
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#273dff"
 
 - type: entity
   parent: BaseSignDirectional
@@ -264,7 +324,11 @@
   description: A direction sign, pointing out which way hydroponics is.
   components:
   - type: Sprite
-    state: direction_hydro
+    layers:
+    - state: direction_hydro
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#27ff44"
 
 - type: entity
   parent: BaseSignDirectional
@@ -273,7 +337,11 @@
   description: A direction sign, pointing out which way the ICU is.
   components:
   - type: Sprite
-    state: direction_icu
+    layers:
+    - state: direction_icu
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#27f8ff"
 
 - type: entity
   parent: BaseSignDirectional
@@ -282,7 +350,11 @@
   description: A direction sign, pointing out which way the janitor's closet is.
   components:
   - type: Sprite
-    state: direction_janitor
+    layers:
+    - state: direction_janitor
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#bb27ff"
 
 - type: entity
   parent: BaseSignDirectional
@@ -291,7 +363,11 @@
   description: A direction sign, pointing out which way the library is.
   components:
   - type: Sprite
-    state: direction_library
+    layers:
+    - state: direction_library
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#bb27ff"
 
 - type: entity
   parent: BaseSignDirectional
@@ -300,7 +376,11 @@
   description: A direction sign, pointing out which way the Medical department is.
   components:
   - type: Sprite
-    state: direction_med
+    layers:
+    - state: direction_med
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#27f8ff"
 
 - type: entity
   parent: BaseSignDirectional
@@ -309,7 +389,11 @@
   description: A direction sign, pointing out which way the Salvage department is.
   components:
   - type: Sprite
-    state: direction_salvage
+    layers:
+    - state: direction_salvage
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#ff7627"
 
 - type: entity
   parent: BaseSignDirectional
@@ -318,7 +402,11 @@
   description: A direction sign, pointing out which way the Science department is.
   components:
   - type: Sprite
-    state: direction_sci
+    layers:
+    - state: direction_sci
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#bb27ff"
 
 - type: entity
   parent: BaseSignDirectional
@@ -327,7 +415,11 @@
   description: A direction sign, pointing out which way Security is.
   components:
   - type: Sprite
-    state: direction_sec
+    layers:
+    - state: direction_sec
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#ff2727"
 
 - type: entity
   parent: BaseSignDirectional
@@ -336,7 +428,11 @@
   description: A direction sign, pointing out which way solars are.
   components:
   - type: Sprite
-    state: direction_solar
+    layers:
+    - state: direction_solar
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#ff8227"
 
 - type: entity
   parent: BaseSignDirectional
@@ -345,7 +441,11 @@
   description: A direction sign, pointing to some supplies.
   components:
   - type: Sprite
-    state: direction_supply
+    layers:
+    - state: direction_supply
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#ff7627"
 
 - type: entity
   parent: BaseSignDirectional
@@ -354,7 +454,11 @@
   description: A direction sign, pointing to the way to a washroom.
   components:
   - type: Sprite
-    state: direction_wash
+    layers:
+    - state: direction_wash
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#27f8ff"
 
 - type: entity
   parent: BaseSignDirectional
@@ -363,7 +467,11 @@
   description: A direction sign, pointing out the way to an escape pod dock.
   components:
   - type: Sprite
-    state: direction_pods
+    layers:
+    - state: direction_pods
+      shader: unshaded # Trauma
+  - type: PointLight # Trauma
+    color: "#27ffd0"
 
 # Regular Signs
 

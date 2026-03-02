@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Goobstation.Shared.Wraith.WraithPoints;
@@ -27,7 +29,7 @@ public sealed partial class HauntSystem : EntitySystem
     private EntityQuery<HauntedComponent> _hauntQuery;
     private EntityQuery<WraithAbsorbableComponent> _wraithAbsorbableQuery;
 
-    private readonly HashSet<Entity<HumanoidAppearanceComponent>> _humanoid = new();
+    private readonly HashSet<Entity<HumanoidProfileComponent>> _humanoid = new();
     private readonly HashSet<Entity<StatusEffectsComponent>> _statusEffects = new();
     public override void Initialize()
     {

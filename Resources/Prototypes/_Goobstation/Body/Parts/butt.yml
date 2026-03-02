@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
+# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# TODO: if someone ever makes a photocopier port ass.dmi or whatever and give every species a unique one
+- type: entity
+  parent: [ OrganBase, ClothingHeadBase ]
+  id: Butt
+  name: butt
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Mobs/butt.rsi
+    state: "butt"
+  - type: Organ
+    category: Butt
+  - type: ChildOrgan
+    parentCategory: Torso
+  - type: Tag
+    tags:
+    - Butt
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Helmets/butt_hat.rsi

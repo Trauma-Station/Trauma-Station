@@ -1,29 +1,14 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Baptr0b0t <152836416+Baptr0b0t@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Baptr0b0t <152836416+baptr0b0t@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lincoln McQueen <lincoln.mcqueen@gmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
 using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Shared.MartialArts.Components;
 using Content.Goobstation.Shared.MartialArts.Events;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Shared.Traumas;
+using Content.Medical.Shared.Wounds;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Bed.Sleep;
-using Content.Shared.Body.Components;
+using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
@@ -41,6 +26,8 @@ namespace Content.Goobstation.Shared.MartialArts;
 public partial class SharedMartialArtsSystem
 {
     private readonly ProtoId<DamageTypePrototype> Asphyxiation = "Asphyxiation";
+    private readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
+    private readonly ProtoId<OrganCategoryPrototype> HeadCategory = "Head";
     private readonly EntProtoId ForcedSleeping = "StatusEffectForcedSleeping";
 
     private void InitializeCqc()
@@ -118,21 +105,15 @@ public partial class SharedMartialArtsSystem
                 {
                     _pulling.TryStopPull(args.Target, pullable);
 
-                    var blunt = new DamageSpecifier(_proto.Index<DamageTypePrototype>("Blunt"), damageToKill.Value);
+                    var blunt = new DamageSpecifier(_proto.Index(Blunt), damageToKill.Value);
                     _damageable.TryChangeDamage(args.Target, blunt, true, targetPart: TargetBodyPart.Chest);
 
-                    var (partType, symmetry) = _body.ConvertTargetBodyPart(targeting.Target);
-                    var targetedBodyPart = _body.GetBodyChildrenOfType(args.Target, partType, body, symmetry)
-                        .ToList()
-                        .FirstOrNull();
-
-                    if (targetedBodyPart == null ||
-                        !TryComp(targetedBodyPart.Value.Id, out WoundableComponent? woundable) ||
-                        woundable.Bone.ContainedEntities.FirstOrNull() is not { } bone ||
-                        !TryComp(bone, out BoneComponent? boneComp) || boneComp.BoneSeverity == BoneSeverity.Broken)
+                    if (_body.GetOrgan(args.Target, HeadCategory) is not {} head ||
+                        _trauma.GetBone(head) is not {} bone)
                         break;
 
-                    _trauma.ApplyDamageToBone(bone, boneComp.BoneIntegrity, boneComp);
+                    // break the head bone (aka skull thanks mocho)
+                    _trauma.ApplyDamageToBone(bone, bone.Comp.BoneIntegrity, bone.Comp);
                     ComboPopup(ent, args.Target, "Neck Snap");
                     break;
                 }

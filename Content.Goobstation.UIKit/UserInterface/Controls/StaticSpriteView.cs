@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
@@ -13,12 +10,11 @@ using Robust.Shared.Utility;
 namespace Content.Goobstation.UIKit.UserInterface.Controls;
 
 // fuck you drunk shitcoders
-[Virtual]
-public class StaticSpriteView : Control
+public sealed class StaticSpriteView : Control
 {
-    protected SpriteSystem? SpriteSystem;
+    private SpriteSystem? _sprite;
     private SharedTransformSystem? _transform;
-    protected readonly IEntityManager EntMan;
+    private readonly IEntityManager EntMan;
 
     private readonly Angle _cachedWorldRotation = Angle.Zero;
 
@@ -161,9 +157,9 @@ public class StaticSpriteView : Control
         SetEntity(uid);
     }
 
-    protected override void Dispose(bool disposing)
+    protected override void Deparented()
     {
-        base.Dispose(disposing);
+        base.Deparented();
 
         Reset();
     }
@@ -201,16 +197,17 @@ public class StaticSpriteView : Control
             return;
         }
 
-        SpriteSystem ??= EntMan.System<SpriteSystem>();
+        _sprite ??= EntMan.System<SpriteSystem>();
 
         var fake = Entity?.Owner ?? EntMan.Spawn();
         var fakeSprite = EntMan.EnsureComponent<SpriteComponent>(fake);
         Entity = (fake, fakeSprite);
-        SpriteSystem.CopySprite((uid.Value, sprite), Entity.Value);
+        _sprite.CopySprite((uid.Value, sprite), Entity.Value.AsNullable());
 
         NetEnt = EntMan.GetNetEntity(uid);
         RealEntity = uid;
     }
+
     protected override Vector2 MeasureOverride(Vector2 availableSize)
     {
         // TODO Make this get called when sprite bounds/properties update?
@@ -223,7 +220,9 @@ public class StaticSpriteView : Control
         if (ResolveEntity() is not {} ent)
             return;
 
-        var spriteBox = ent.Comp.CalculateRotatedBoundingBox(default,  _worldRotation ?? Angle.Zero, _eyeRotation)
+        _sprite ??= EntMan.System<SpriteSystem>();
+
+        var spriteBox = _sprite.CalculateBounds(ent, Vector2.Zero, _worldRotation ?? Angle.Zero, _eyeRotation)
             .CalcBoundingBox();
 
         if (!SpriteOffset)
@@ -268,7 +267,7 @@ public class StaticSpriteView : Control
         if (ResolveEntity() is not {} ent)
             return;
 
-        SpriteSystem ??= EntMan.System<SpriteSystem>();
+        _sprite ??= EntMan.System<SpriteSystem>();
         _transform ??= EntMan.System<TransformSystem>();
 
         var stretchVec = Stretch switch

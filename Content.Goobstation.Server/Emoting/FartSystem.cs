@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 JohnOakman <sremy2012@hotmail.fr>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 jellygato <aly.jellygato@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
@@ -17,7 +6,7 @@ using Content.Goobstation.Shared.Emoting;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Popups;
 using Content.Shared.Atmos;
-using Content.Shared.Body.Systems;
+using Content.Shared.Gibbing;
 using Content.Shared.Chat;
 using Content.Shared.Camera;
 using Robust.Server.Audio;
@@ -41,7 +30,7 @@ public sealed partial class FartSystem : SharedFartSystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _recoilSystem = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
 
 
     private readonly string[] _fartSounds = [
@@ -229,7 +218,7 @@ public sealed partial class FartSystem : SharedFartSystem
 
             var ev = new BibleFartSmiteEvent(GetNetEntity(near));
             RaiseNetworkEvent(ev);
-            _bodySystem.GibBody(ent, splatModifier: 15);
+            _gibbing.Gib(ent);
             _audio.PlayEntity(ent.Comp.BibleSmiteSnd, Filter.Pvs(near), near, true);
             if (!ent.Comp.SuperFarted)
             {

@@ -1,4 +1,4 @@
-using Content.Shared._Shitmed.Targeting; // Shitmed Change
+using Content.Medical.Common.Targeting; // Shitmed Change
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Timing;

@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -73,7 +70,7 @@ public sealed class KeyringSystem : EntitySystem
 
         _audioSystem.PlayPredicted(keyring.Comp.UseSound, keyring, args.User);
 
-        args.Handled = true; 
+        args.Handled = true;
     }
 
     private void OnDoAfterEvent(Entity<KeyringComponent> keyring, ref KeyringDoAfterEvent args)

@@ -29,6 +29,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics.Joints;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
+using System.Numerics;
 
 namespace Content.Shared.Movement.Pulling.Systems;
 
@@ -39,11 +40,14 @@ public sealed partial class PullingSystem
 {
     [Dependency] private readonly ContestsSystem _contests = default!;
     [Dependency] private readonly GrabThrownSystem _grabThrown = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
+
+    public const float NudgeImpulse = 2f;
 
     private void InitializeTrauma()
     {
@@ -125,20 +129,20 @@ public sealed partial class PullingSystem
         switch (releaseAttempt)
         {
             case GrabResistResult.Failed:
-                _popup.PopupEntity(Loc.GetString("popup-grab-release-fail-self"),
+                _popup.PopupClient(Loc.GetString("popup-grab-release-fail-self"),
                                 pullableUid,
                                 pullableUid,
                                 PopupType.SmallCaution);
                 return false;
             case GrabResistResult.TooSoon:
-                _popup.PopupEntity(Loc.GetString("popup-grab-release-too-soon"),
+                _popup.PopupClient(Loc.GetString("popup-grab-release-too-soon"),
                                 pullableUid,
                                 pullableUid,
                                 PopupType.SmallCaution);
                 return false;
         }
 
-        _popup.PopupEntity(Loc.GetString("popup-grab-release-success-self"),
+        _popup.PopupClient(Loc.GetString("popup-grab-release-success-self"),
             pullableUid,
             pullableUid,
             PopupType.SmallCaution);
@@ -199,7 +203,7 @@ public sealed partial class PullingSystem
         var now = _timing.CurTime;
         var attackRateEv = new GetMeleeAttackRateEvent(puller, meleeWeapon.AttackRate, 1, puller);
         RaiseLocalEvent(puller, ref attackRateEv);
-        meleeWeapon.NextAttack = now + puller.Comp.StageChangeCooldown * attackRateEv.Multipliers;
+        meleeWeapon.NextAttack = now + puller.Comp.StageChangeCooldown / attackRateEv.Multipliers;
         DirtyField(puller, meleeWeapon, nameof(MeleeWeaponComponent.NextAttack));
 
         var beforeEvent = new BeforeHarmfulActionEvent(puller, HarmfulActionType.Grab);
@@ -275,6 +279,13 @@ public sealed partial class PullingSystem
         {
             distJoint.MaxLength = stageLength;
             Dirty(pullable, jointComp);
+            // nudge the puller in the pulled entity's direction to ensure it snaps without having to move
+            var nudge = _transform.GetWorldPosition(pullable) - _transform.GetWorldPosition(puller);
+            if (nudge != Vector2.Zero)
+            {
+                nudge = Vector2.Normalize(nudge) * NudgeImpulse;
+                _physics.ApplyLinearImpulse(puller, nudge);
+            }
         }
 
         if (!TryUpdateGrabVirtualItems(puller, pullable))

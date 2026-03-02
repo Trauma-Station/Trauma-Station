@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.EntityTable;
 using Content.Shared.Hands.EntitySystems;
@@ -90,6 +91,6 @@ public sealed class EmptyScrollSystem : EntitySystem
         }
 
         // do the effects
-        _effects.ApplyEffects(target, prayer.Effects);
+        _effects.ApplyEffects(target, prayer.Effects, user: target);
     }
 }

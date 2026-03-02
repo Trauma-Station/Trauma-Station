@@ -11,7 +11,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Database;
 using Content.Shared.Effects;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Fluids;
 using Content.Shared.Fluids.Components;
 using Content.Shared.IdentityManagement;
@@ -439,6 +439,9 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         {
             // sorry! no overload for returning uid, so .owner must be used
             var owner = ent.Owner;
+
+            if (owner == user) // Goobtation - can't spill at yourself (have to use melee)
+                continue;
 
             // between 5 and 30%
             var splitAmount = spilled.Volume * _random.NextFloat(0.05f, 0.30f);

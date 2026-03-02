@@ -1,0 +1,15 @@
+- type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband ]
+  id: ShellShotgunBreaching
+  name: shell (12 Gauge breaching)
+  description: The standard cartridge used by most modern shotguns. Breaching ammunition is designed to deal maximum damage to structures such as walls.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Casings/shotgun_shell.rsi
+    layers:
+    - state: breach
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunBreachingSpread
+  - type: SpentAmmoVisuals
+    state: "breach"

@@ -1,22 +1,11 @@
-<!--
-SPDX-FileCopyrightText: 2022 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-SPDX-FileCopyrightText: 2022 Jezithyr <Jezithyr.@gmail.com>
-SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-
-SPDX-License-Identifier: AGPL-3.0-or-later
--->
-
 <widgets:AlertsUI xmlns="https://spacestation14.io"
                   xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Alerts.Widgets"
-                  xmlns:partStatus="clr-namespace:Content.Client._Shitmed.UserInterface.Systems.PartStatus.Widgets"
                   MinSize="64 64">
-    <!-- Shitmed Change Start - TODO: Refactor this godforsaken abomination -->
-    <GridContainer Columns="1" HorizontalAlignment="Right" VerticalAlignment="Top">
-        <PanelContainer >
-            <GridContainer Name="AlertContainer" Columns="1" HorizontalAlignment="Right" VerticalAlignment="Center" Access="Public" />
-        </PanelContainer>
-        <partStatus:PartStatusControl Name="PartStatus" Access="Protected"/>
-    </GridContainer>
-    <!-- Shitmed Change End -->
+	<!-- Shitmed - wrapped in BoxContainer so PartStatus goes at the bottom of your alerts -->
+	<BoxContainer Orientation="Vertical">
+	    <PanelContainer HorizontalAlignment="Right" VerticalAlignment="Top">
+	        <BoxContainer Name="AlertContainer" Access="Public" Orientation="Vertical" />
+	    </PanelContainer>
+	    <Control Name="PartStatus" Access="Public"/> <!-- Shitmed -->
+    </BoxContainer>
 </widgets:AlertsUI>

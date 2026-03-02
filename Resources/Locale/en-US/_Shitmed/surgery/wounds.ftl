@@ -1,6 +1,6 @@
 inspect-wound-minor = injured
 inspect-wound-moderate = hurt
-inspect-wound-severe = badly damaged 
+inspect-wound-severe = badly damaged
 inspect-wound-critical = mangled
 inspect-wound-loss = completely mangled
 

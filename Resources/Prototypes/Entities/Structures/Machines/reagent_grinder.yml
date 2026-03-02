@@ -81,7 +81,10 @@
     insertedItemSlotID: beakerSlot
     fillBaseName: beakerSlot
   - type: ApcPowerReceiver
-    powerLoad: 300
+    powerLoad: 0
+  - type: PowerState
+    idlePowerDraw: 0
+    workingPowerDraw: 750 # medium power blender
   - type: ItemSlots
     slots:
       beakerSlot:

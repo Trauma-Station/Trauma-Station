@@ -38,9 +38,11 @@
     Plasma: 100
 
 - type: latheRecipe
-  parent: BaseAmmoRecipe
   id: MagazineNailgun
   result: MagazineNailgun
+  categories:
+  - Ammo
+  completetime: 5
   materials:
     Steel: 200
 
@@ -52,7 +54,7 @@
     Steel: 25
 
 - type: latheRecipe
-  parent: BaseAmmoRecipe
+  parent: MagazineNailgun
   id: MagazineNailgunArmorPiercing
   result: MagazineNailgunArmorPiercing
   materials:

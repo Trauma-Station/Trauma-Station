@@ -38,34 +38,11 @@
     noRot: true
   - type: Anchorable
   - type: Pullable
-
-- type: entity
-  parent: BaseAutosurgeon
-  id: BaseAutosurgeonSingle
-  description: A single-use autosurgeon for replacing or upgrading your parts with cybernetic implants. Rip that station apart and make it a part of you.
-  abstract: true
-  components:
   - type: AutoSurgeon
 
 - type: entity
-  parent: BaseAutosurgeon
-  id: BaseAutosurgeonMultiple
-  description: A single-use autosurgeon for replacing or upgrading your parts with cybernetic implants. Rip that station apart and make it a part of you.
-  abstract: true
-  components:
-  - type: AutoSurgeonMultiple
-
-- type: entity
-  parent: [BaseAutosurgeonSingle, BaseSyndicateContraband]
-  id: BaseAutosurgeonSyndicateSingle
-  abstract: true
-  components:
-  - type: Sprite
-    state: icon-syndie
-
-- type: entity
-  parent: [BaseAutosurgeonMultiple, BaseSyndicateContraband]
-  id: BaseAutosurgeonSyndicateMultiple
+  parent: [BaseAutosurgeon, BaseSyndicateContraband]
+  id: BaseAutosurgeonSyndicate
   abstract: true
   components:
   - type: Sprite
@@ -74,121 +51,103 @@
 # CREW (currently not used, use for testing purposes admeme etc.)
 
 - type: entity
-  parent: BaseAutosurgeonSingle
+  parent: BaseAutosurgeon
   id: AutosurgeonRightSpeedLeg
   name: autosurgeon (right S.P.E.E.D leg)
   components:
   - type: AutoSurgeon
-    targetBodyPart: Groin
-    newPartProto: SpeedRightLeg
+    entries:
+    - targetCategory: Torso
+      newOrganProto: OrganSpeedLegRight
 
 - type: entity
-  parent: BaseAutosurgeonSingle
+  parent: BaseAutosurgeon
   id: AutosurgeonLeftSpeedLeg
   name: autosurgeon (left S.P.E.E.D leg)
   components:
   - type: AutoSurgeon
-    targetBodyPart: Groin
-    newPartProto: SpeedLeftLeg
+    entries:
+    - targetCategory: Torso
+      newOrganProto: OrganSpeedLegLeft
 
 # SYNDICATE
 
 - type: entity
-  parent: BaseAutosurgeonSyndicateSingle
+  parent: BaseAutosurgeonSyndicate
   id: AutosurgeonRightMantisBlade
   name: syndicate autosurgeon (right mantis blade)
   components:
   - type: AutoSurgeon
-    targetBodyPart: Arm
-    targetBodyPartSymmetry: Right
-    componentsToPart:
-    - type: MantisBladeArm
-      actionProto: ActionToggleRightMantisBlade
+    entries:
+    - targetCategory: ArmRight
+      organComponents:
+      - type: MantisBladeArm
+        actionProto: ActionToggleRightMantisBlade
+      - type: Cybernetics # Disable on EMP
 
 - type: entity
-  parent: BaseAutosurgeonSyndicateSingle
+  parent: BaseAutosurgeonSyndicate
   id: AutosurgeonLeftMantisBlade
   name: syndicate autosurgeon (left mantis blade)
   components:
   - type: AutoSurgeon
-    targetBodyPart: Arm
-    targetBodyPartSymmetry: Left
-    componentsToPart:
-    - type: MantisBladeArm
-      actionProto: ActionToggleLeftMantisBlade
+    entries:
+    - targetCategory: ArmLeft
+      organComponents:
+      - type: MantisBladeArm
+        actionProto: ActionToggleLeftMantisBlade
+      - type: Cybernetics # Disable on EMP
 
 - type: entity
-  parent: BaseAutosurgeonSyndicateSingle
+  parent: BaseAutosurgeonSyndicate
   id: AutosurgeonSandevistan
   name: syndicate autosurgeon (sandevistan)
   components:
   - type: AutoSurgeon
-    targetBodyPart: Chest
-    targetOrgan: Skibidi
-    newPartProto: OrganHeartSandevistan
+    entries:
+    - targetCategory: Heart
+      newOrganProto: OrganHeartSandevistan
 
 - type: entity
-  parent: BaseAutosurgeonSyndicateMultiple
+  parent: BaseAutosurgeonSyndicate
   id: AutosurgeonSmartLink
   name: syndicate autosurgeon (smartlink arms)
   components:
-  - type: AutoSurgeonMultiple
+  - type: AutoSurgeon
     entries:
-    - targetBodyPart: Arm
-      targetBodyPartSymmetry: Right
-      newPartProto: SmartlinkRightHand
-    - targetBodyPart: Arm
-      targetBodyPartSymmetry: Left
-      newPartProto: SmartlinkLeftHand
-
-    - targetBodyPart: Arm
-      targetBodyPartSymmetry: Right
-      componentsToPart:
-      - type: SmartLinkArm
-    - targetBodyPart: Arm
-      targetBodyPartSymmetry: Left
-      componentsToPart:
-      - type: SmartLinkArm
+    - targetCategory: HandRight
+      newOrganProto: SmartlinkRightHand
+    - targetCategory: HandLeft
+      newOrganProto: SmartlinkLeftHand
 
 - type: entity
-  parent: BaseAutosurgeonSyndicateMultiple
+  parent: BaseAutosurgeonSyndicate
   id: AutosurgeonRecoilAbsorber
   name: syndicate autosurgeon (recoil absorbing arms)
   components:
-  - type: AutoSurgeonMultiple
+  - type: AutoSurgeon
     entries:
-    - targetBodyPart: Arm
-      targetBodyPartSymmetry: Right
-      newPartProto: RecoilAbsorberRightHand
-    - targetBodyPart: Arm
-      targetBodyPartSymmetry: Left
-      newPartProto: RecoilAbsorberLeftHand
-
-    - targetBodyPart: Arm
-      targetBodyPartSymmetry: Right
-      componentsToPart:
-      - type: RecoilAbsorberArm
-    - targetBodyPart: Arm
-      targetBodyPartSymmetry: Left
-      componentsToPart:
-      - type: RecoilAbsorberArm
+    - targetCategory: ArmRight
+      newOrganProto: RecoilAbsorberRightHand
+    - targetCategory: ArmLeft
+      newOrganProto: RecoilAbsorberLeftHand
 
 - type: entity
-  parent: BaseAutosurgeonSyndicateSingle
+  parent: BaseAutosurgeonSyndicate
   id: AutosurgeonBerserker
   name: syndicate autosurgeon (berserker heart)
   components:
   - type: AutoSurgeon
-    targetBodyPart: Chest
-    targetOrgan: heart
-    newPartProto: SyndicateBerserkerHeart
+    entries:
+    - targetCategory: Heart
+      newOrganProto: SyndicateBerserkerHeart
 
 - type: entity
-  parent: BaseAutosurgeonSyndicateSingle
+  parent: BaseAutosurgeonSyndicate
   id: AutosurgeonJumpstarter
   name: syndicate autosurgeon (jumpstarter heart)
   components:
   - type: AutoSurgeon
-    targetBodyPart: Chest
-    targetOrgan: heart
-    newPartProto: SyndicateJumpstarterHeart
+    entries:
+    - targetCategory: Heart
+      newOrganProto: SyndicateJumpstarterHeart

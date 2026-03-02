@@ -39,9 +39,6 @@
   texturePath: /Textures/Effects/fire.rsi
   fireStates: 3
 
-- type: Tag
-  id: BlobMob
-
 - type: entity
   parent: MobMouse
   id: MobMouseBlob

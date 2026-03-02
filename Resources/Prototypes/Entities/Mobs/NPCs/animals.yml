@@ -59,6 +59,11 @@
     - Mouse
     understands:
     - Mouse
+    - TauCetiBasic
+  - type: NightVision # Goobstation - Nightvision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Effects/bite.ogg
@@ -84,10 +89,6 @@
   - type: Tag
     tags:
     - VimPilot
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
 
 - type: entity
   name: bee
@@ -120,7 +121,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      5: Dead # Goob edit
+      5: Dead # Goob - was 10
   - type: Stamina
     baseCritThreshold: 10
     animationThreshold: 1
@@ -289,6 +290,7 @@
     - Chicken
     understands:
     - Chicken
+    - TauCetiBasic
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -368,6 +370,18 @@
   id: MobCockroach
   description: This station is just crawling with bugs.
   components:
+  # <Trauma>
+  - type: LanguageKnowledge
+    speaks:
+    - Hissing
+    understands:
+    - Hissing
+    - TauCetiBasic
+  - type: ThermalRegulator
+    metabolismHeat: 300
+  - type: StaticPrice
+    price: -520
+  # </Trauma>
   - type: Sprite
     drawdepth: SmallMobs
     sprite: Mobs/Animals/cockroach.rsi
@@ -387,7 +401,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 2 # Goob edit
+        density: 2 # Goob - was 100
         mask:
         - SmallMobMask
         layer:
@@ -447,12 +461,8 @@
         damage: 3 # Trauma, was 10
       behaviors:
       - !type:GibBehavior
-        gibContents: Skip # Shitmed Change
         recursive: false
   - type: NonSpreaderZombie
-  - type: LanguageKnowledge # Einstein Engines - Languages
-    speaks: [Hissing]
-    understands: [Hissing]
   - type: StepTrigger
     requiredTriggeredSpeed: 1
   - type: TriggerOnStepTrigger
@@ -468,13 +478,6 @@
     damage:
       types:
         Piercing: 0
-  - type: Body # <Trauma>
-    prototype: Rat
-    requiredLegs: 0
-  - type: ThermalRegulator
-    metabolismHeat: 300
-  - type: StaticPrice
-    price: -520 # </Trauma>
 
 - type: entity
   name: glockroach
@@ -511,7 +514,7 @@
 
 - type: entity
   name: mothroach
-  parent: MobCockroach
+  parent: [ BaseMobMothroach, MobCockroach ]
   id: MobMothroach
   description: This is the adorable by-product of multiple attempts at genetically mixing mothpeople with cockroaches.
   components:
@@ -530,7 +533,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 12 # Goob edit
+        density: 12 # Goob - was 120
         mask:
         - SmallMobMask
         layer:
@@ -539,7 +542,7 @@
   - type: Speech
     speechVerb: Moth
     speechSounds: Squeak
-    allowedEmotes: ['Chitter', 'Squeak', 'Flap'] #flap is from goob
+    allowedEmotes: ['Chitter', 'Squeak', 'Flap'] # Goob - added Flap
   - type: FaxableObject
     insertingState: inserting_mothroach
   - type: FaxSlip # Goobstation
@@ -614,6 +617,7 @@
     - Moffic
     understands:
     - Moffic
+    - TauCetiBasic
   - type: ZombieAccentOverride
     accent: zombieMoth
   - type: Vocal
@@ -633,8 +637,6 @@
   - type: NpcFactionMember
     factions:
     - Mouse
-  - type: Body
-    prototype: Mothroach
   - type: TypingIndicator
     proto: moth
   - type: Destructible
@@ -645,7 +647,7 @@
         damage: 60
       behaviors:
       - !type:GibBehavior
-        gibContents: Skip
+        deleteGibs: true # Trauma
         recursive: false
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
@@ -765,6 +767,7 @@
     - Duck
     understands:
     - Duck
+    - TauCetiBasic
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -905,7 +908,7 @@
 
 - type: entity
   name: cow
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseMobRuminant ]
   id: MobCow
   description: Moo.
   components:
@@ -978,8 +981,6 @@
   - type: NpcFactionMember
     factions:
     - Passive
-  - type: Body
-    prototype: AnimalRuminant
   - type: HTN
     rootTask:
       task: RuminantCompound
@@ -990,7 +991,7 @@
 
 - type: entity
   name: crab
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseMobHemocyanin ]
   id: MobCrab
   description: A folk legend goes around that his claw snaps spacemen out of existence over distasteful remarks. Be polite and tolerant for your own safety.
   components:
@@ -1048,6 +1049,7 @@
     - Crab
     understands:
     - Crab
+    - TauCetiBasic
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -1059,12 +1061,10 @@
   - type: HTN
     rootTask:
       task: RuminantCompound
-  - type: Body
-    prototype: AnimalHemocyanin
 
 - type: entity
   name: goat
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseMobRuminant ]
   id: MobGoat
   description: Her spine consists of long sharp segments, no wonder she is so grumpy.
   components:
@@ -1156,8 +1156,6 @@
   - type: NpcFactionMember
     factions:
     - Passive
-  - type: Body
-    prototype: AnimalRuminant
   - type: NPCRetaliation
     attackMemoryLength: 5
   - type: FactionException
@@ -1339,6 +1337,7 @@
     - Kangaroo
     understands:
     - Kangaroo
+    - TauCetiBasic
   - type: Butcherable
     spawned:
     - id: FoodMeat
@@ -1402,19 +1401,42 @@
 - type: entity
   name: genetic ancestor
   id: MobBaseAncestor
-  parent: [SimpleMobBase, StripableInventoryBase]
+  parent: [BaseMobAnimal, SimpleMobBase, StripableInventoryBase]
   description: The genetic bipedal ancestor of... Uh... Something. Yeah, there's definitely something on the station that descended from whatever this is.
   abstract: true
   components:
-  - type: VentCrawler # goobstation - Ventcrawl
+  # <Trauma>
+  - type: BloodSplatterer
+  - type: VentCrawler
     allowInventory: false
+  - type: GroupRetaliation
+    range: 8
+  - type: Targeting
+  - type: HumanoidProfile
+    species: Monkey
+  - type: Vocal
+    sounds:
+      Male: MonkeyMode
+      Female: MonkeyMode
+      Unsexed: MonkeyMode
+    wilhelmProbability: 0.001
+  - type: Consciousness
+    hasPainScreams: false
+    threshold: 70
+    cap: 140
+  - type: DiseaseCarrier
+  - type: UserInterface
+    interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+  # stupid monkey needs clever mutation to be literate
+  - type: BlockReading
+  - type: BlockWriting
+  # </Trauma>
   - type: CombatMode
     canDisarm: true
-  # <Shitmed>
-  - type: Targeting
-  - type: HumanoidAppearance
-    species: Monkey
-  # </Shitmed>
   - type: Inventory
     templateId: monkey
     speciesId: monkey
@@ -1438,54 +1460,11 @@
   - type: Stripping
   - type: Sprite
     drawdepth: Mobs
-    layers:
-  # Shitmed Change Start
-    - map: [ "enum.HumanoidVisualLayers.Chest" ]
-    - map: [ "enum.HumanoidVisualLayers.Groin" ]
-    - map: [ "enum.HumanoidVisualLayers.Head" ]
-    - map: [ "enum.HumanoidVisualLayers.Snout" ]
-    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
-    - map: [ "enum.HumanoidVisualLayers.RArm" ]
-    - map: [ "enum.HumanoidVisualLayers.LArm" ]
-    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
-    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-    - state: monkey_skinned # Goobstation - Fuck pun-pun
-      sprite: /Textures/Mobs/Animals/monkey.rsi
-      visible: false
-      map: [ "enum.ToggleableVisuals.Layer" ]
-    - map: ["jumpsuit"]
-    - map: ["enum.HumanoidVisualLayers.LFoot"]
-    - map: ["enum.HumanoidVisualLayers.RFoot"]
-    - map: ["enum.HumanoidVisualLayers.LHand"]
-    - map: ["enum.HumanoidVisualLayers.RHand"]
-    - map: ["enum.HumanoidVisualLayers.Handcuffs"]
-      color: "#ffffff"
-      sprite: Objects/Misc/handcuffs.rsi
-      state: body-overlay-2
-      visible: false
-    - map: [ "gloves" ]
-    - map: [ "shoes" ]
-    - map: [ "ears" ]
-    - map: [ "id" ]
-    - map: [ "outerClothing" ]
-    - map: [ "eyes" ]
-    - map: [ "belt" ]
-    - map: [ "neck" ]
-    - map: [ "back" ]
-    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
-    - map: [ "enum.HumanoidVisualLayers.FacialHairSpecial" ] # Trauma
-    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
-    - map: [ "maskalt" ]
-    - map: [ "enum.HumanoidVisualLayers.Hair" ]
-    - map: [ "enum.HumanoidVisualLayers.HairSpecial" ] # Trauma
-    - map: [ "mask" ]
-    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
-    - map: [ "enum.HumanoidVisualLayers.Tail" ]
-    - map: [ "head" ]
-    - map: [ "pocket1" ]
-    - map: [ "pocket2" ]
-  # Shitmed Change End
   - type: Hands
+    activeHandId: Hand
+    hands:
+      Hand:
+        location: Left
   - type: ComplexInteraction
   - type: GenericVisualizer
     visuals:
@@ -1493,14 +1472,6 @@
         clownedon:
           True: {visible: true}
           False: {visible: false}
-      enum.ToggleableVisuals.Enabled: # Goobstation - Skinnable monkey
-        enum.ToggleableVisuals.Layer:
-          True: { visible: true }
-          False: { visible: false }
-  - type: Body # Shitmed Change
-    bodyType: Complex
-    prototype: Monkey
-    requiredLegs: 2
   - type: CreamPied
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
@@ -1533,9 +1504,6 @@
   - type: CanHostGuardian
   - type: NPCRetaliation
     attackMemoryLength: 10
-  # Goobstation
-  - type: GroupRetaliation
-    range: 8
   - type: FactionException
   - type: NpcFactionMember
     factions:
@@ -1560,38 +1528,38 @@
       effects:
       - !type:WashCreamPie
   - type: Crawler
-  # <Goob>
-  - type: Vocal
-    sounds:
-      Male: MonkeyMode
-      Female: MonkeyMode
-      Unsexed: MonkeyMode
-    wilhelmProbability: 0.001
-  - type: Consciousness
-    hasPainScreams: false
-    threshold: 70
-    cap: 140
-  - type: DiseaseCarrier
-  # </Goob>
   - type: StatusIcon
+    bounds: -0.5,-0.5,0.5,0.5
+  - type: JobStatus # marks them as crew
 
 - type: entity
   name: monkey
   id: MobMonkey
-  parent: MobBaseAncestor
+  parent: [ AppearanceMonkey, MobBaseAncestor ] # Shitmed
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   components:
-  - type: NameIdentifier
-    group: Monkey
-  - type: Speech
-    speechSounds: Monkey
-    speechVerb: Monkey
-  - type: LanguageKnowledge # Einstein Engines - Language
+  # <Trauma>
+  - type: LanguageKnowledge
     speaks:
     - Monkey
     understands:
     - Monkey
     - Kobold
+    - TauCetiBasic
+  - type: Skinnable # Fuck pun-pun
+    skinnedSprite: _Trauma/Mobs/Animals/skinnedmonkey.rsi
+    unskinnedSprite: Mobs/Animals/monkey.rsi
+  - type: Mutatable
+    defaultMutations:
+      MutationMonkified: 1.0 # always monkey...
+    dormant:
+    - MutationMonkified
+  # </Trauma>
+  - type: NameIdentifier
+    group: Monkey
+  - type: Speech
+    speechSounds: Monkey
+    speechVerb: Monkey
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
   - type: AlwaysRevolutionaryConvertible
@@ -1600,11 +1568,10 @@
     makeSentient: true
     name: ghost-role-information-monkey-name
     description: ghost-role-information-monkey-description
-    rules: ghost-role-information-freeagent-rules # Goobstation - - remove: 1984
+    rules: ghost-role-information-freeagent-rules # Goobstation - remove: 1984
     mindRoles:
     - MindRoleGhostRoleFreeAgent
   - type: GhostTakeoverAvailable
-  - type: Skinnable # Goobstation - Fuck pun-pun
   - type: Clumsy
     gunShootFailDamage:
       types:
@@ -1620,7 +1587,7 @@
 - type: entity
   name: monkey
   id: MobBaseSyndicateMonkey
-  parent: MobBaseAncestor
+  parent: [ AppearanceMonkey, MobBaseAncestor ] # Shitmed
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   suffix: syndicate base
   components:
@@ -1677,26 +1644,27 @@
 - type: entity
   name: kobold
   id: MobBaseKobold
-  parent: MobBaseAncestor
+  parent: [ AppearanceKobold, MobBaseAncestor ] # Shitmed
   description: Cousins to the sentient race of lizard people, kobolds blend in with their natural habitat and are as nasty as monkeys; ready to pull out your hair and stab you to death.
   abstract: true
   components:
-  - type: NameIdentifier
-    group: Kobold
-  - type: LizardAccent
-  - type: LanguageKnowledge # Einstein Engines - Language
+  # <Trauma>
+  - type: LanguageKnowledge
     speaks:
     - Kobold
     understands:
     - Kobold
     - Monkey
-  # Shitmed Change Start
-  - type: HumanoidAppearance
-    species: Kobold
-  - type: Body
-    prototype: Kobold
-    requiredLegs: 2
-  # Shitmed Change End
+    - TauCetiBasic
+  - type: Mutatable
+    defaultMutations:
+      MutationMonkified: 1.0 # free lizardmen...
+    dormant:
+    - MutationMonkified
+  # </Trauma>
+  - type: NameIdentifier
+    group: Kobold
+  - type: LizardAccent
   - type: Speech
     speechSounds: Lizard
     speechVerb: Reptilian
@@ -1715,8 +1683,6 @@
     interactSuccessString: petting-success-monkey
     interactFailureString: petting-failure-monkey
     interactSuccessSpawn: EffectHearts
-    interactSuccessSound:
-      path: /Audio/Animals/lizard_happy.ogg
     interactFailureSound:
       path: /Audio/Items/wirecutter.ogg
   - type: MobThresholds
@@ -1823,14 +1789,14 @@
 
 - type: entity
   name: mouse
-  parent: SimpleMobBase
+  parent:
+  - BaseMobMouse # Shitmed - unique mouse body
+  - SimpleMobBase
   id: MobMouse
   description: Squeak!
   components:
   - type: VentCrawler # goobstation - Ventcrawl
     enterDelay: 0.5
-  - type: Body
-    prototype: Mouse
   - type: GhostRole
     makeSentient: true
     allowSpeech: true
@@ -1955,6 +1921,7 @@
     - Mouse
     understands:
     - Mouse
+    - TauCetiBasic
   - type: Tag
     tags:
     - Trash
@@ -2031,8 +1998,6 @@
   - type: MeleeChemicalInjector
     transferAmount: 1
     solution: melee
-  - type: DodgeWideswing
-    staminaRatio: 1 # mice are small so can probably evade without much stamina drain
   - type: Stamina
     baseCritThreshold: 20
     animationThreshold: 10
@@ -2064,8 +2029,17 @@
         damage: 100
       behaviors:
       - !type:GibBehavior
-        gibContents: Skip
+        deleteGibs: true # Trauma
         recursive: false
+  - type: ActionGrant
+    actions:
+    - ActionMouseCall
+  - type: MobCallSource
+    whitelist:
+      tags:
+      - Mouse
+  - type: MobCallable
+  - type: XenoCompatible # to let egg sack surgeries work nicely...
   # </Goobstation>
 
 - type: entity
@@ -2182,7 +2156,8 @@
     energy: 5
     netsync: false
   - type: RadiationSource
-    intensity: 0.3
+    intensity: 0.5
+    slope: 0.3
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -2250,8 +2225,6 @@
     interactSuccessString: petting-success-reptile
     interactFailureString: petting-failure-generic
     interactSuccessSpawn: EffectHearts
-    interactSuccessSound:
-      path: /Audio/Animals/lizard_happy.ogg
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -2544,8 +2517,11 @@
       types:
         Heat : 0.2 #per second, scales with temperature & other constants
   - type: LanguageKnowledge # Einstein Engines - Language
-    speaks: [Penguin]
-    understands: [Penguin]
+    speaks:
+    - Penguin
+    understands:
+    - Penguin
+    - TauCetiBasic
 
 # TODO: Make grenade penguin voice activated like the rest of the stealth items.
 - type: entity
@@ -2675,13 +2651,16 @@
     damageContainer: Biological
     damageModifierSet: Scale
   - type: LanguageKnowledge # Einstein Engines - Language
-    speaks: [Hissing]
-    understands: [Hissing]
+    speaks:
+    - Hissing
+    understands:
+    - Hissing
+    - TauCetiBasic
 
 # Code unique spider prototypes or combine them all into one spider and get a
 # random sprite state when you spawn it.
 - type: entity
-  parent: [ SimpleMobBase, MobCombat ]
+  parent: [ SimpleMobBase, BaseMobHemocyanin, MobCombat ]
   id: MobSpiderBase
   abstract: true
   components:
@@ -2703,8 +2682,6 @@
     - id: FoodMeatSpider
       amount: 2
   - type: CombatMode
-  - type: Body
-    prototype: AnimalHemocyanin
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -2727,6 +2704,7 @@
     - Xeno
     understands:
     - Xeno
+    - TauCetiBasic
   - type: InteractionPopup
     successChance: 0.5
     interactSuccessString: petting-success-tarantula
@@ -2967,6 +2945,7 @@
     - Hissing
     understands:
     - Hissing
+    - TauCetiBasic
 
 - type: entity
   name: possum
@@ -3046,6 +3025,7 @@
     - Hissing
     understands:
     - Hissing
+    - TauCetiBasic
 
 - type: entity
   name: fox
@@ -3133,6 +3113,7 @@
     - Fox
     understands:
     - Fox
+    - TauCetiBasic
 
 - type: entity
   abstract: true
@@ -3199,6 +3180,7 @@
     - Dog
     understands:
     - Dog
+    - TauCetiBasic
   #- type: ReplacementAccent # Trauma - uses languages instead
   #  accent: dog
   - type: Tag
@@ -3345,6 +3327,7 @@
     - Cat
     understands:
     - Cat
+    - TauCetiBasic
   - type: InteractionPopup
     successChance: 0.7
     interactSuccessString: petting-success-cat
@@ -3605,6 +3588,7 @@
     - Hissing
     understands:
     - Hissing
+    - TauCetiBasic
 
 - type: entity
   name: ferret
@@ -3664,6 +3648,7 @@
     - Hissing
     understands:
     - Hissing
+    - TauCetiBasic
 
 - type: entity
   name: hamster
@@ -3770,6 +3755,7 @@
     - Mouse
     understands:
     - Mouse
+    - TauCetiBasic
   - type: Tag
     tags:
     - VimPilot
@@ -3892,6 +3878,7 @@
     - Pig
     understands:
     - Pig
+    - TauCetiBasic
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -3903,7 +3890,7 @@
 
 - type: entity
   name: diona nymph
-  parent: [SimpleMobBase, StripableInventoryBase]
+  parent: [BaseMobAnimal, SimpleMobBase, StripableInventoryBase]
   id: MobDionaNymph
   description: It's like a cat, only.... branch-ier.
   components:
@@ -4067,6 +4054,7 @@
     - Deer
     understands:
     - Deer
+    - TauCetiBasic
 
 - type: entity
   name: reindeer doe
@@ -4143,14 +4131,18 @@
             sprite: Mobs/Pets/displacements.rsi
             state: corgi_head_displacement
   - type: Hands # HANDS!
+    activeHandId: Right
+    hands:
+      Right:
+        location: Right
+      Left:
+        location: Left
   - type: Puller
   - type: Cuffable # bad dog!
   - type: BlockWriting # dogs can't write, paws unwieldy; mouth-writing is a myth
   - type: Stripping
   - type: ComplexInteraction
   # Implement custom borgi body type
-  - type: Body
-    prototype: SmartCorgi
   - type: RotationVisuals
     defaultRotation: 90
     horizontalRotation: 180
@@ -4163,8 +4155,9 @@
     - VimPilot
     - CanPilot
     - DoorBumpOpener
-  - type: StatusIcon # marks them as crew
+  - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
+  - type: JobStatus # marks them as crew
   - type: NpcFactionMember
     factions:
     - NanoTrasen

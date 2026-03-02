@@ -53,7 +53,7 @@
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:BodyPartsSelector
-        proto: Human
+        proto: AppearanceHuman
   - type: Storage
     grid:
     - 0,0,5,3 # Shitmed Change - more parts!!!!11!!!
@@ -70,7 +70,7 @@
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:BodyPartsSelector
-        proto: Reptilian
+        proto: AppearanceReptilian
 
 - type: entity
   suffix: Slime
@@ -81,7 +81,7 @@
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:BodyPartsSelector
-        proto: Slime
+        proto: AppearanceSlimePerson
 
 - type: entity
   suffix: Vox
@@ -92,4 +92,4 @@
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:BodyPartsSelector
-        proto: Vox
+        proto: AppearanceVox

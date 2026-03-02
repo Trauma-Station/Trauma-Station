@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Humanoid;
@@ -21,9 +17,9 @@ public sealed partial class SpeciesChange : EntityEffectBase<SpeciesChange>
         => Loc.GetString("reagent-effect-guidebook-change-species", ("species", prototype.Index(NewSpecies).Name));
 }
 
-public abstract class SharedSpeciesChangeEffectSystem : EntityEffectSystem<HumanoidAppearanceComponent, SpeciesChange>
+public abstract class SharedSpeciesChangeEffectSystem : EntityEffectSystem<HumanoidProfileComponent, SpeciesChange>
 {
-    protected override void Effect(Entity<HumanoidAppearanceComponent> ent, ref EntityEffectEvent<SpeciesChange> args)
+    protected override void Effect(Entity<HumanoidProfileComponent> ent, ref EntityEffectEvent<SpeciesChange> args)
     {
         Polymorph(ent, args.Effect.NewSpecies);
     }

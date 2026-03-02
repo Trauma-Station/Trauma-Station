@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Goobstation.Shared.Wraith.Spook;
@@ -8,7 +10,6 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Server.Ghost;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
-using Content.Shared.Popups;
 using Content.Server.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Storage.Components;
@@ -49,7 +50,7 @@ public sealed class SpookActionSystem : EntitySystem
     private EntityQuery<ApcComponent> _apcQuery;
     private EntityQuery<ActionComponent> _actionQuery;
     private EntityQuery<FlammableComponent> _flammable;
-    private EntityQuery<HumanoidAppearanceComponent> _humanoidAppearanceQuery;
+    private EntityQuery<HumanoidProfileComponent> _humanoidAppearanceQuery;
 
     public override void Initialize()
     {
@@ -61,7 +62,7 @@ public sealed class SpookActionSystem : EntitySystem
         _apcQuery = GetEntityQuery<ApcComponent>();
         _actionQuery = GetEntityQuery<ActionComponent>();
         _flammable = GetEntityQuery<FlammableComponent>();
-        _humanoidAppearanceQuery = GetEntityQuery<HumanoidAppearanceComponent>();
+        _humanoidAppearanceQuery = GetEntityQuery<HumanoidProfileComponent>();
 
         SubscribeLocalEvent<SpookMarkComponent, SpookEvent>(OnSpookEvent);
 

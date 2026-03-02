@@ -1,4 +1,6 @@
-﻿using Content.Shared.DoAfter;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 

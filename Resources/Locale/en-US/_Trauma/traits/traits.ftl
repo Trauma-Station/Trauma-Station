@@ -1,2 +1,2 @@
-trait-hypoport-name = Hypoport
-trait-hypoport-desc = You have a hypoport installed in your neck to allow instant, sterile hypospray usage.
+trait-no-hypoport-name = No Hypoport
+trait-no-hypoport-desc = Unlike most personnel, having a hypoport creeps you out too much. You won't have a hypoport installed.

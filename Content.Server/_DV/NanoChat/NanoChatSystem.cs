@@ -11,7 +11,7 @@
 using System.Linq;
 using Content.Server.Access.Systems;
 using Content.Server.Administration.Logs;
-using Content.Server.Kitchen.Components;
+using Content.Shared.Kitchen.Components; // Trauma - moved microwaved event to shared
 using Content.Server.NameIdentifier;
 using Content.Shared.Database;
 using Content.Shared._DV.CartridgeLoader.Cartridges;
@@ -68,10 +68,7 @@ public sealed class NanoChatSystem : SharedNanoChatSystem
     private void OnMicrowaved(Entity<NanoChatCardComponent> ent, ref BeingMicrowavedEvent args)
     {
         // Skip if the entity was deleted (e.g., by ID card system burning it)
-        if (Deleted(ent))
-            return;
-
-        if (!TryComp<MicrowaveComponent>(args.Microwave, out var micro) || micro.Broken)
+        if (TerminatingOrDeleted(ent))
             return;
 
         var randomPick = _random.NextFloat();

@@ -1,0 +1,48 @@
+- type: entity
+  id: BlueSlimeExtract
+  parent: BaseSlimeExtract
+  name: blue slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _Goobstation/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#79F6FC"
+  - type: Reactive
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReaction
+      - !type:DoSmokeEffect
+        duration: 10
+        spreadAmount: 75
+        smokePrototype: Foam
+      - !type:PlaySoundEffect
+        sound: /Audio/Effects/extinguish.ogg
+    - reagents: [ Plasma ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReagent
+      - !type:RelaySolution
+        name: extract
+        effects:
+        - !type:AdjustReagent
+          reagent: FrostOil
+          amount: 15
+    - reagents: [ Blood ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReagent
+      - !type:RelaySolution
+        name: extract
+        effects:
+        - !type:AdjustReagent
+          reagent: XenobioJellyBlue
+          amount: 1
+  - type: Tag
+    tags:
+    - XenobiologyBlueExtract

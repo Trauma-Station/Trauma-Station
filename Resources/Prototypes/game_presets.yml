@@ -40,6 +40,7 @@
     - Revolutionary
     - Zombie
     - Wizard
+    - CosmicCult # DeltaV
     - Xenoborgs
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
@@ -201,7 +202,7 @@
   rules:
   - Nukeops
   - DummyNonAntagChance
-  - SubGamemodesRule
+  # - SubGamemodesRule
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
@@ -235,7 +236,7 @@
   rules:
   - Xenoborgs
   - DummyNonAntagChance
-  - SubGamemodesRuleNoWizardNoXenoborg # no two motherships
+  - SubGamemodesRule
   - BasicStationEventScheduler
   # - MeteorSwarmScheduler - Trauma
   - SpaceTrafficControlEventScheduler

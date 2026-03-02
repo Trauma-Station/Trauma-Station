@@ -1,69 +1,79 @@
+# shitter didnt just add this, thanks
+- type: entity
+  abstract: true
+  parent: ChemistryEmptyVial
+  id: BaseChemistryVialFilled
+  components:
+  - type: Tag
+    tags: # Remove trash tag when we have a filled solution
+    - CentrifugeCompatible
+
 ## Fear & Hunger vials
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialBlack
   name: black vial
   suffix: Oil
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Oil # not exactly black
           Quantity: 30
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialBlood
   name: blood vial
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Blood
           Quantity: 30
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialBlue
   name: blue vial
   suffix: Dexalin
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Dexalin
           Quantity: 30
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialBrown
   name: brown vial
   suffix: Coffee
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Coffee
           Quantity: 30
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialElixirBody
   name: elixir of body
   suffix: Omnizine
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Omnizine
@@ -72,14 +82,14 @@
           Quantity: 10
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialElixirMind
   name: elixir of mind
   suffix: Haloperidol
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Wine
@@ -88,14 +98,14 @@
           Quantity: 20
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialExplosive
   name: explosive vial
   suffix: CLF3
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         canReact: false # don't react until you throw it, drink it, etc
         reagents:
@@ -105,14 +115,14 @@
           Quantity: 22.5
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialGreen
   name: green vial
   suffix: Meth
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Desoxyephedrine
@@ -121,28 +131,28 @@
           Quantity: 20
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialLightBlue
   name: light blue vial
   suffix: Tricordrazine
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Tricordrazine
           Quantity: 30
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialMurky
   name: murky vial
   suffix: Phlogiston
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Phlogiston
@@ -151,82 +161,82 @@
           Quantity: 10
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialOrange
   name: orange vial
   suffix: OJ # (if) I Did It
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: JuiceOrange
           Quantity: 30
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialPurple
   name: purple vial
   suffix: Lead
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Lead
           Quantity: 30
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialRed
   name: red vial
   suffix: Thermite
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Thermite
           Quantity: 30
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialWater
   name: water vial
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Water
           Quantity: 30
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialWhite
   name: white vial
   suffix: Omnizine
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Omnizine
           Quantity: 30
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialWormJuice
   name: worm juice
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Water # TODO: if someone makes antiparasitic medicine put it here
@@ -235,14 +245,14 @@
           Quantity: 20
 
 - type: entity
-  parent: BaseChemistryEmptyVial
+  parent: BaseChemistryVialFilled
   id: VialYellow
   name: yellow vial
   suffix: Gnome milk
   components:
   - type: SolutionContainerManager
     solutions:
-      beaker:
+      drink:
         maxVol: 30
         reagents:
         - ReagentId: Cornoil

@@ -11,7 +11,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Chemistry.Components;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
@@ -37,7 +37,7 @@ namespace Content.Shared.Fluids.Components
         [DataField]
         public float DefaultSlippery = 5.5f;
 
-        [ViewVariables]
+        [ViewVariables, Access(Other = AccessPermissions.ReadWriteExecute)] // Goob edit
         public Entity<SolutionComponent>? Solution;
 
         // Corvax-Next-Footprints-Start

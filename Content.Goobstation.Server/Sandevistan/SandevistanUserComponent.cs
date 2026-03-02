@@ -1,4 +1,6 @@
-using Content.Goobstation.Maths.FixedPoint;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Sandevistan;
 using Content.Shared._Goobstation.Wizard.Projectiles;
 using Content.Shared.Abilities;

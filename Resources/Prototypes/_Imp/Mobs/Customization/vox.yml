@@ -8,8 +8,7 @@
 - type: marking
   id: ScarsVoxClawTorso
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   coloring:
     default:
       type:
@@ -22,8 +21,7 @@
 - type: marking
   id: SpotsChest
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/chest.rsi
     state: spots1
@@ -33,8 +31,7 @@
 - type: marking
   id: VChest
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/chest.rsi
     state: v1
@@ -46,8 +43,7 @@
 - type: marking
   id: VoxBelly
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/chest.rsi
     state: belly
@@ -55,8 +51,7 @@
 - type: marking
   id: VoxChestPlumage
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/chest.rsi
     state: plumage
@@ -64,8 +59,7 @@
 - type: marking
   id: VoxScarIncision
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/chest.rsi
     state: scarincision
@@ -73,8 +67,7 @@
 - type: marking
   id: VoxScarMangled
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/chest.rsi
     state: scarmangled
@@ -82,8 +75,7 @@
 - type: marking
   id: VoxScarSpinal
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/chest.rsi
     state: scarspinal
@@ -91,8 +83,7 @@
 - type: marking
   id: VoxTailSingleStripe
   bodyPart: Chest
-  markingCategory: Overlay
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/chest.rsi
     state: tailsinglestripe
@@ -100,8 +91,7 @@
 - type: marking
   id: VoxTailStripes
   bodyPart: Chest
-  markingCategory: Overlay
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/chest.rsi
     state: tailstripes
@@ -111,8 +101,7 @@
 - type: marking
   id: ScarsVoxBigslashLeftHead
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   coloring:
     default:
       type:
@@ -125,8 +114,7 @@
 - type: marking
   id: ScarsVoxBigslashRightHead
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   coloring:
     default:
       type:
@@ -139,8 +127,7 @@
 - type: marking
   id: ScarsVoxRoadrashLeftHead
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   coloring:
     default:
       type:
@@ -153,8 +140,7 @@
 - type: marking
   id: ScarsVoxRoadrashRightHead
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   coloring:
     default:
       type:
@@ -167,8 +153,7 @@
 - type: marking
   id: ScarsVoxSlashLeftHead
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   coloring:
     default:
       type:
@@ -181,8 +166,7 @@
 - type: marking
   id: ScarsVoxSlashRightHead
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   coloring:
     default:
       type:
@@ -195,8 +179,7 @@
 - type: marking
   id: VoxCheeks
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/head.rsi
     state: cheeks
@@ -204,8 +187,7 @@
 - type: marking
   id: VoxEarhole
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/head.rsi
     state: earhole
@@ -213,8 +195,7 @@
 - type: marking
   id: VoxHeadGradient
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/head.rsi
     state: gradient1
@@ -226,8 +207,7 @@
 - type: marking
   id: VoxNeckband
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/head.rsi
     state: neckband
@@ -235,8 +215,7 @@
 - type: marking
   id: VoxScarBlasted
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/head.rsi
     state: scarblasted
@@ -246,8 +225,7 @@
 - type: marking
   id: VoxBeakColor
   bodyPart: Snout
-  markingCategory: Snout
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/snout.rsi
     state: color
@@ -255,8 +233,7 @@
 - type: marking
   id: VoxBeakSplit
   bodyPart: Snout
-  markingCategory: Snout
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/snout.rsi
     state: split1
@@ -266,8 +243,7 @@
 - type: marking
   id: VoxBeakTipped
   bodyPart: Snout
-  markingCategory: Snout
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/snout.rsi
     state: tipped
@@ -279,8 +255,7 @@
 - type: marking
   id: SpotsArmR
   bodyPart: RArm
-  markingCategory: RightArm
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/rarm.rsi
     state: spots
@@ -288,8 +263,7 @@
 - type: marking
   id: VoxArmsStripesRHand # what i would pay to be able to rename prototypes
   bodyPart: RArm
-  markingCategory: RightArm
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/rarm.rsi
     state: stripes
@@ -299,8 +273,7 @@
 - type: marking
   id: SpotsArmL
   bodyPart: LArm
-  markingCategory: LeftArm
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/larm.rsi
     state: spots
@@ -308,8 +281,7 @@
 - type: marking
   id: VoxArmsStripesLHand
   bodyPart: LArm
-  markingCategory: LeftArm
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/larm.rsi
     state: stripes
@@ -319,8 +291,7 @@
 - type: marking
   id: FeatheredLegR
   bodyPart: RLeg
-  markingCategory: RightLeg
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/rleg.rsi
     state: feathered
@@ -328,8 +299,7 @@
 - type: marking
   id: VoxLegGradientRLeg
   bodyPart: RLeg
-  markingCategory: RightLeg
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/rleg.rsi
     state: gradient
@@ -337,8 +307,7 @@
 - type: marking
   id: VoxLegsStripesRLeg
   bodyPart: RLeg
-  markingCategory: RightLeg
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/rleg.rsi
     state: stripes
@@ -348,8 +317,7 @@
 - type: marking
   id: FeatheredLegL
   bodyPart: LLeg
-  markingCategory: LeftLeg
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/lleg.rsi
     state: feathered
@@ -357,8 +325,7 @@
 - type: marking
   id: VoxLegGradientLLeg
   bodyPart: LLeg
-  markingCategory: LeftLeg
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/lleg.rsi
     state: gradient
@@ -366,8 +333,7 @@
 - type: marking
   id: VoxLegsStripesLLeg
   bodyPart: LLeg
-  markingCategory: LeftLeg
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/lleg.rsi
     state: stripes
@@ -377,8 +343,7 @@
 - type: marking
   id: VoxFootGradientLFoot
   bodyPart: LFoot
-  markingCategory: LeftFoot
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/lfoot.rsi
     state: gradient
@@ -388,8 +353,7 @@
 - type: marking
   id: VoxFootGradientRFoot
   bodyPart: RFoot
-  markingCategory: RightFoot
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/rfoot.rsi
     state: gradient
@@ -399,8 +363,7 @@
 - type: marking
   id: VoxHandGradientLHand
   bodyPart: LHand
-  markingCategory: LeftHand
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/lhand.rsi
     state: gradient1
@@ -412,8 +375,7 @@
 - type: marking
   id: VoxLArmProsthetic
   bodyPart: LHand
-  markingCategory: LeftHand
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   coloring:
     default:
       type:
@@ -428,8 +390,7 @@
 - type: marking
   id: VoxHandGradientRHand
   bodyPart: RHand
-  markingCategory: RightHand
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/rhand.rsi
     state: gradient1
@@ -441,8 +402,7 @@
 - type: marking
   id: VoxRArmProsthetic
   bodyPart: RHand
-  markingCategory: RightHand
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   coloring:
     default:
       type:
@@ -457,8 +417,7 @@
 - type: marking
   id: BeardPadovana
   bodyPart: FacialHair
-  markingCategory: FacialHair
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/facialhair.rsi
     state: padovana
@@ -466,8 +425,7 @@
 - type: marking
   id: LargeWattle
   bodyPart: FacialHair
-  markingCategory: HeadSide
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/facialhair.rsi
     state: largewattle
@@ -475,8 +433,7 @@
 - type: marking
   id: SmallWattle
   bodyPart: FacialHair
-  markingCategory: HeadSide
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/facialhair.rsi
     state: smallwattle
@@ -486,9 +443,8 @@
 - type: marking
   id: HairPadovana
   bodyPart: Hair
-  markingCategory: Hair
   canBeDisplaced: false
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/hair.rsi
     state: padovana
@@ -496,9 +452,8 @@
 - type: marking
   id: HijabSimpleVox
   bodyPart: Hair
-  markingCategory: Hair
   canBeDisplaced: false
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/hair.rsi
     state: hijabsimple
@@ -506,9 +461,8 @@
 - type: marking
   id: HijabFashionableVox
   bodyPart: Hair
-  markingCategory: Hair
   canBeDisplaced: false
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/hair.rsi
     state: hijabchic
@@ -516,8 +470,7 @@
 - type: marking
   id: LargeComb
   bodyPart: Hair
-  markingCategory: HeadSide
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/hair.rsi
     state: largecomb
@@ -525,9 +478,8 @@
 - type: marking
   id: TichelSimpleVox
   bodyPart: Hair
-  markingCategory: Hair
   canBeDisplaced: false
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/hair.rsi
     state: tichelsimple
@@ -535,9 +487,8 @@
 - type: marking
   id: TichelFashionableVox
   bodyPart: Hair
-  markingCategory: Hair
   canBeDisplaced: false
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/hair.rsi
     state: tichelfashionable
@@ -545,9 +496,8 @@
 - type: marking
   id: VoxBald
   bodyPart: Hair
-  markingCategory: Hair
   canBeDisplaced: false
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/hair.rsi
     state: balding
@@ -555,9 +505,8 @@
 - type: marking
   id: VoxEmover
   bodyPart: Hair
-  markingCategory: Hair
   canBeDisplaced: false
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/hair.rsi
     state: emover
@@ -565,9 +514,8 @@
 - type: marking
   id: VoxPolish
   bodyPart: Hair
-  markingCategory: Hair
   canBeDisplaced: false
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/hair.rsi
     state: polish
@@ -575,9 +523,8 @@
 - type: marking
   id: VoxWindswept
   bodyPart: Hair
-  markingCategory: Hair
   canBeDisplaced: false
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/hair.rsi
     state: windswept
@@ -587,8 +534,7 @@
 - type: marking
   id: SideQuills
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/headside.rsi
     state: quills1
@@ -600,8 +546,7 @@
 - type: marking
   id: VoxStreamers
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/headside.rsi
     state: streamers1
@@ -617,8 +562,7 @@
 - type: marking
   id: FriendsOfAFeather
   bodyPart: Tail
-  markingCategory: Overlay
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: friendsfeather1
@@ -628,10 +572,8 @@
 - type: marking
   id: SpotsTail
   bodyPart: Tail
-  markingCategory: Overlay
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   forcedColoring: true
-  followSkinColor: true
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: spots
@@ -639,8 +581,7 @@
 - type: marking
   id: TailBloom
   bodyPart: Tail
-  markingCategory: Overlay
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: bloom1
@@ -652,8 +593,7 @@
 - type: marking
   id: VoxChains
   bodyPart: Tail
-  markingCategory: Overlay
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: chains
@@ -661,8 +601,7 @@
 - type: marking
   id: VoxCocktail
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: cocktail1
@@ -676,8 +615,7 @@
 - type: marking
   id: VoxFootSpines
   bodyPart: Tail
-  markingCategory: Overlay
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: footspines
@@ -685,10 +623,8 @@
 - type: marking
   id: VoxTailBack
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   forcedColoring: true
-  followSkinColor: true
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: colorable
@@ -696,10 +632,8 @@
 - type: marking
   id: VoxTailBalled
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   forcedColoring: true
-  followSkinColor: true
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: balled
@@ -707,8 +641,7 @@
 - type: marking
   id: VoxTailBell
   bodyPart: Tail
-  markingCategory: Overlay
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: bell1
@@ -718,8 +651,7 @@
 - type: marking
   id: VoxTailLantern
   bodyPart: Tail
-  markingCategory: Overlay
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: lantern
@@ -727,8 +659,7 @@
 - type: marking
   id: VoxTailNub
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: nub1
@@ -738,10 +669,8 @@
 - type: marking
   id: VoxTailRaptor
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   forcedColoring: true
-  followSkinColor: true
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: raptor
@@ -749,10 +678,8 @@
 - type: marking
   id: VoxTailShort1
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   forcedColoring: true
-  followSkinColor: true
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: short
@@ -760,10 +687,8 @@
 - type: marking
   id: VoxTailShort2
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   forcedColoring: true
-  followSkinColor: true
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: short2
@@ -771,8 +696,7 @@
 - type: marking
   id: VoxTailSmallPlume
   bodyPart: Tail
-  markingCategory: Overlay
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: smallplume
@@ -780,8 +704,7 @@
 - type: marking
   id: VoxTailSpines
   bodyPart: Tail
-  markingCategory: Overlay
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: spines
@@ -789,8 +712,7 @@
 - type: marking
   id: VoxSunAndMoon
   bodyPart: Tail
-  markingCategory: Overlay
-  speciesRestriction: [ Vox ]
+  groupWhitelist: [ Vox ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Vox/tail.rsi
     state: sunandmoon

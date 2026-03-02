@@ -1,0 +1,12 @@
+- type: entity
+  parent: [ OrganBaseWings, OrganMothExternal ]
+  id: OrganMothWings
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Species/Moth/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Trauma/empty.rsi
+      state: empty # no sprite since the markings actually control it
+  - type: SpeedModifierOrgan
+    weightlessAcceleration: 0.5 # 50% faster base acceleration in space/0G

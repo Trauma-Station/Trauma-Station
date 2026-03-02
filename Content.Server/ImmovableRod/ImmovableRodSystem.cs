@@ -1,62 +1,43 @@
-// SPDX-FileCopyrightText: 2022 Andreas K�mper <andreas.kaemper@5minds.de>
-// SPDX-FileCopyrightText: 2022 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Jezithyr <Jezithyr@gmail.com>
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 SpaceManiac <tad@platymuus.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vasilis <vasilis@pikachu.systems>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 MilenVolf <63782763+MilenVolf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 TsjipTsjip <19798667+TsjipTsjip@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Server.Body.Systems;
+// <Trauma>
+using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Stunnable;
+using Content.Shared.Tag;
+using Robust.Shared.Prototypes;
+// </Trauma>
 using Content.Server.Destructible;
 using Content.Server.Polymorph.Components;
 using Content.Server.Popups;
-using Content.Server.Storage.Components;
-using Content.Server.Storage.EntitySystems;
-using Content.Server.Stunnable;
-using Content.Shared.Body.Components;
+using Content.Shared.Body;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
+using Content.Shared.Gibbing;
 using Content.Shared.Popups;
-using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server.ImmovableRod;
 
 public sealed class ImmovableRodSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+    // </Trauma>
     [Dependency] private readonly IRobustRandom _random = default!;
-
-    [Dependency] private readonly BodySystem _bodySystem = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly DestructibleSystem _destructible = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    //[Dependency] private readonly SharedTransformSystem _transform = default!; // Trauma - now unused
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly EntityStorageSystem _entityStorage = default!; // Goobstation
-    [Dependency] private readonly TagSystem _tag = default!; // Goobstation
-    [Dependency] private readonly StunSystem _stun = default!; // Goobstation
 
     private static readonly ProtoId<TagPrototype> IgnoreTag = "IgnoreImmovableRod"; // Goobstation
 
@@ -86,6 +67,7 @@ public sealed class ImmovableRodSystem : EntitySystem
         SubscribeLocalEvent<ImmovableRodComponent, ExaminedEvent>(OnExamined);
     }
 
+    // Trauma - changed world rotation to local rotation
     private void OnMapInit(EntityUid uid, ImmovableRodComponent component, MapInitEvent args)
     {
         if (TryComp(uid, out PhysicsComponent? phys))
@@ -95,20 +77,22 @@ public sealed class ImmovableRodSystem : EntitySystem
             _physics.SetBodyStatus(uid, phys, BodyStatus.InAir);
 
             var xform = Transform(uid);
-            var (worldPos, worldRot) = _transform.GetWorldPositionRotation(uid);
-            var vel = worldRot.ToWorldVec() * component.MaxSpeed;
+            // var (worldPos, worldRot) = _transform.GetWorldPositionRotation(uid);
+            var vel = xform.LocalRotation.ToWorldVec() * component.MaxSpeed; // Trauma
 
             if (component.RandomizeVelocity)
             {
                 vel = component.DirectionOverride.Degrees switch
                 {
                     0f => _random.NextVector2(component.MinSpeed, component.MaxSpeed),
-                    _ => worldRot.RotateVec(component.DirectionOverride.ToVec()) * _random.NextFloat(component.MinSpeed, component.MaxSpeed)
+                    _ => xform.LocalRotation.RotateVec(component.DirectionOverride.ToVec()) * _random.NextFloat(component.MinSpeed, component.MaxSpeed) // Trauma
                 };
+
+                xform.LocalRotation = vel.ToAngle(); // Trauma
             }
 
             _physics.ApplyLinearImpulse(uid, vel, body: phys);
-            xform.LocalRotation = (vel - worldPos).ToWorldAngle() + MathHelper.PiOver2;
+            // xform.LocalRotation = (vel - worldPos).ToWorldAngle() + MathHelper.PiOver2;
         }
     }
 
@@ -150,7 +134,7 @@ public sealed class ImmovableRodSystem : EntitySystem
         }
 
         // gib or damage em
-        if (TryComp<BodyComponent>(ent, out var body))
+        if (HasComp<BodyComponent>(ent))
         {
             component.MobCount++;
             _popup.PopupEntity(Loc.GetString("immovable-rod-penetrated-mob", ("rod", uid), ("mob", ent)), uid, PopupType.LargeCaution);
@@ -167,7 +151,7 @@ public sealed class ImmovableRodSystem : EntitySystem
                 return;
             }
 
-            _bodySystem.GibBody(ent, body: body);
+            _gibbing.Gib(ent);
             return;
         }
 

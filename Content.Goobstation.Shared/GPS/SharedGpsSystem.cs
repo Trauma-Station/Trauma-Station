@@ -1,13 +1,13 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.GPS.Components;
 using Content.Shared.UserInterface;
-using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.GPS;
 
 public abstract class SharedGpsSystem : EntitySystem
 {
     [Dependency] protected readonly SharedUserInterfaceSystem UiSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {

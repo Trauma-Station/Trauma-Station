@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid;
 using Content.Shared.Trigger.Systems;
@@ -17,11 +18,11 @@ public sealed partial class ScrambleDna : EntityEffectBase<ScrambleDna>
 }
 
 // fuck you mocho
-public sealed class ScrambleDnaEntityEffectSystem : EntityEffectSystem<HumanoidAppearanceComponent, ScrambleDna>
+public sealed class ScrambleDnaEntityEffectSystem : EntityEffectSystem<HumanoidProfileComponent, ScrambleDna>
 {
     [Dependency] private readonly DnaScrambleOnTriggerSystem _scramble = default!;
 
-    protected override void Effect(Entity<HumanoidAppearanceComponent> ent, ref EntityEffectEvent<ScrambleDna> args)
+    protected override void Effect(Entity<HumanoidProfileComponent> ent, ref EntityEffectEvent<ScrambleDna> args)
     {
         _scramble.Scramble(ent, ent.Comp);
     }

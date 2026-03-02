@@ -30,22 +30,18 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Physics.Controllers;
 using Content.Shared.Polymorph;
 using Content.Shared.Stunnable;
+using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
-    private static readonly EntProtoId VoidAuraId = "VoidAscensionAura";
-
     protected override void SubscribeVoid()
     {
         base.SubscribeVoid();
 
-        SubscribeLocalEvent<HereticComponent, HereticAscensionVoidEvent>(OnAscensionVoid);
-
-        SubscribeLocalEvent<HereticComponent, HereticVoidBlastEvent>(OnVoidBlast);
-        SubscribeLocalEvent<HereticComponent, HereticVoidPrisonEvent>(OnVoidPrison);
+        SubscribeLocalEvent<HereticVoidPrisonEvent>(OnVoidPrison);
 
         SubscribeLocalEvent<VoidPrisonComponent, PolymorphedEvent>(OnPrisonRevert);
     }
@@ -59,61 +55,14 @@ public sealed partial class HereticAbilitySystem
         Voidcurse.DoCurse(args.NewEntity);
     }
 
-    private void OnAscensionVoid(Entity<HereticComponent> ent, ref HereticAscensionVoidEvent args)
-    {
-        EnsureComp<SpecialHighTempImmunityComponent>(ent);
-        EnsureComp<SpecialPressureImmunityComponent>(ent);
-        EnsureComp<AristocratComponent>(ent);
-
-        EnsureComp<MovementIgnoreGravityComponent>(ent);
-        EnsureComp<CanMoveInAirComponent>(ent);
-        EnsureComp<NoSlipComponent>(ent); // :godo:
-
-        // fire immunity
-        var flam = EnsureComp<FlammableComponent>(ent);
-        flam.Damage = new(); // reset damage dict
-
-        // the hunt begins
-        var voidVision = new HereticVoidVisionEvent();
-        RaiseLocalEvent(ent, voidVision);
-
-        SpawnAttachedTo(VoidAuraId, ent.Owner.ToCoordinates());
-    }
-
-    private void OnVoidBlast(Entity<HereticComponent> ent, ref HereticVoidBlastEvent args)
-    {
-        if (!TryUseAbility(ent, args))
-            return;
-
-        var rod = Spawn("ImmovableVoidRod", Transform(ent).Coordinates);
-        if (TryComp<ImmovableVoidRodComponent>(rod, out var vrod))
-            vrod.User = ent;
-
-        if (TryComp(rod, out PhysicsComponent? phys))
-        {
-            _phys.SetLinearDamping(rod, phys, 0f);
-            _phys.SetFriction(rod, phys, 0f);
-            _phys.SetBodyStatus(rod, phys, BodyStatus.InAir);
-
-            var xform = Transform(rod);
-            var vel = Transform(ent).WorldRotation.ToWorldVec() * 15f;
-
-            _phys.SetLinearVelocity(rod, vel, body: phys);
-            xform.LocalRotation = Transform(ent).LocalRotation;
-        }
-
-        args.Handled = true;
-    }
-
-    private void OnVoidPrison(Entity<HereticComponent> ent, ref HereticVoidPrisonEvent args)
+    private void OnVoidPrison(HereticVoidPrisonEvent args)
     {
         var target = args.Target;
 
-        if (!HasComp<PolymorphableComponent>(target) || HasComp<PolymorphedEntityComponent>(target) ||
-            HasComp<VoidPrisonComponent>(target))
+        if (!HasComp<PolymorphableComponent>(target) || HasComp<VoidPrisonComponent>(target))
             return;
 
-        if (!TryUseAbility(ent, args))
+        if (!TryUseAbility(args))
             return;
 
         args.Handled = true;

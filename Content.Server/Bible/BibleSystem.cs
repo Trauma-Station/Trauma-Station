@@ -1,8 +1,8 @@
 // <Trauma>
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Bible.Components;
 // </Trauma>
 using Content.Server.Ghost.Roles.Events;
