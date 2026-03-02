@@ -69,7 +69,7 @@ public abstract partial class SharedKnowledgeSystem
                 added = GetMastery(crafting) - 2;
             else
                 added = -3;
-            added = (added + ownMasteries - itemMasteries) / ent.Comp.LevelDeltas.Count();
+            added = added + (ownMasteries - itemMasteries) / ent.Comp.LevelDeltas.Count();
             var evCrafting = new AddExperienceEvent(CraftingKnowledge, itemMasteries);
             RaiseLocalEvent(user, ref evCrafting);
             var qualityToAdd = ent.Comp.Quality * ent.Comp.NumberOfMasteries + added;
