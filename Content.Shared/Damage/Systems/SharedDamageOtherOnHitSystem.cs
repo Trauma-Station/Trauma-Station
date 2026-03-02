@@ -23,11 +23,7 @@ public abstract partial class SharedDamageOtherOnHitSystem : EntitySystem // Tra
 
     private void OnDamageExamine(Entity<DamageOtherOnHitComponent> ent, ref DamageExamineEvent args)
     {
-        // <Trauma>
-        var ev = new InvokeThrownQualityEvent(1.0f);
-        RaiseLocalEvent(ent.Owner, ref ev);
-        _damageExamine.AddDamageExamine(args.Message, _damageable.ApplyUniversalAllModifiers(ent.Comp.Damage * _damageable.UniversalThrownDamageModifier * ev.Coefficient), Loc.GetString("damage-throw"));
-        // <Trauma>
+        _damageExamine.AddDamageExamine(args.Message, _damageable.ApplyUniversalAllModifiers(ent.Comp.Damage * _damageable.UniversalThrownDamageModifier), Loc.GetString("damage-throw"));
     }
 
     /// <summary>

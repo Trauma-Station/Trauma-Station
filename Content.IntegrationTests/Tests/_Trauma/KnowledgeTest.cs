@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using System.Numerics;
-using System.Threading.Tasks;
 using Content.Server.Construction;
 using Content.Server.Construction.Components;
-using Content.Shared.Construction.Components;
+using Content.Server.Station.Systems;
 using Content.Shared.Construction.Prototypes;
-using Content.Shared.Coordinates;
+using Content.Shared.Mind;
+using Content.Shared.Roles;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Components;
-using NUnit.Framework;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -16,7 +15,7 @@ using Robust.Shared.Prototypes;
 namespace Content.IntegrationTests.Tests._Trauma;
 
 [TestFixture]
-public sealed class EngineeringKnowledgeTest
+public sealed class KnowledgeTest
 {
     /// <summary>
     /// Makes sure that engineers can build an APC.
@@ -27,52 +26,32 @@ public sealed class EngineeringKnowledgeTest
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
         var server = pair.Server;
+        var mapMan = server.MapMan;
+        var entMan = server.EntMan;
+        var protoMan = server.ProtoMan;
 
-        EntityUid engineer = default;
-        EntityCoordinates coords = default;
+        var stationSystem = entMan.System<StationJobsSystem>();
+        var mindSystem = entMan.System<SharedMindSystem>();
+        var consSystem = entMan.System<ConstructionSystem>();
 
         await server.WaitPost(() =>
         {
-            var mapMan = server.ResolveDependency<IMapManager>();
-            var entMan = server.ResolveDependency<IEntityManager>();
-            var protoMan = server.ResolveDependency<IPrototypeManager>();
+            var mapId = pair.CreateTestMap();
+            var coords = pair.TestMap.GridCoords;
+            var grid = pair.TestMap.Grid;
+            var engineer = entMan.SpawnEntity("MobHuman", coords);
 
-            // 1. Setup Map and Engineer
-            var mapId = mapMan.CreateMap();
-            var grid = mapMan.CreateGrid(mapId);
-            coords = new EntityCoordinates(grid.Owner, Vector2.Zero);
-            engineer = entMan.SpawnEntity("MobHuman", coords);
+            var jobProto = new ProtoId<JobPrototype>("StationEngineer");
 
-            // Define our custom knowledge for this specific test case
-            var grant = entMan.AddComponent<KnowledgeGrantComponent>(engineer);
-            grant.Skills = new Dictionary<EntProtoId, int>
-            {
-                { "HandmadeKnowledge", 50 } ,
-                { "TechnologyKnowledge", 50 } ,
-                { "MaterialsKnowledge", 50 } ,
-                { "DoorsKnowledge", 50 } ,
-                { "AirlocksKnowledge", 50 } ,
-                { "FurnitureKnowledge", 50 } ,
-                { "InfrastructureKnowledge", 50 } ,
-                { "ElectronicsKnowledge", 50 } ,
-                { "WallsKnowledge", 50 } ,
-                { "WindowsKnowledge", 50 } ,
-                { "SmokeablesKnowledge", 50 } ,
-            };
+            stationSystem.MakeJobUnlimited(grid, jobProto);
 
-            // 2. Setup the Construction Target (e.g., an APC frame)
             var apcFrame = entMan.SpawnEntity("APCFrame", coords);
             var construction = entMan.GetComponent<ConstructionComponent>(apcFrame);
 
-            // 3. Verify the Engineer has the required knowledge components
-            // This assumes your system adds knowledge to the Engineer prototype
             Assert.That(entMan.HasComponent<KnowledgeHolderComponent>(engineer), "Engineer must have a KnowledgeHolder");
 
-            // 4. Simulate the interaction logic
-            // We check if the current construction edge is valid for this user
             var consSystem = entMan.System<ConstructionSystem>();
 
-            // Check the first step of the APC graph
             var graph = protoMan.Index<ConstructionGraphPrototype>(construction.Graph);
             var startNode = graph.Nodes[construction.Node];
 

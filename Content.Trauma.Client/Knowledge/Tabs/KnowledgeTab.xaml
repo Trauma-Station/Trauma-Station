@@ -4,9 +4,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <Control
         xmlns="https://spacestation14.io"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
-        x:Class="Content.Trauma.Client.Knowledge.Tabs.KnowledgeTab">
+        xmlns:controls="using:Content.Client.UserInterface.Controls">
 
     <BoxContainer Orientation="Vertical">
         <ScrollContainer VerticalExpand="True" HScrollEnabled="False">

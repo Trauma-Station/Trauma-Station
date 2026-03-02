@@ -1,0 +1,9 @@
+namespace Content.Trauma.Common.Stack;
+
+/// <summary>
+/// Raised on the donor or recipient stack and determines if the qualities are similiar enough to merge
+/// </summary>
+/// <param name="Recipient"></param>
+/// <param name="ShouldMerge"></param>
+[ByRefEvent]
+public record struct AttemptMergeStackEvent(EntityUid OtherStack, bool Cancelled);

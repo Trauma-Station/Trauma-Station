@@ -563,7 +563,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // For consistency with wide attacks stuff needs damageable.
         if (Deleted(target) ||
             !HasComp<DamageableComponent>(target) ||
-            LightAttackMiss(user, target.Value) || // <Trauma> </Trauma> - Knowledge
+            LightAttackMiss(user, target.Value) || // Trauma    
             !TryComp(target, out TransformComponent? targetXform)) // Goob edit
         {
             // Leave IsHit set to true, because the only time it's set to false
@@ -863,7 +863,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // goob edit - stunmeta
         if (TryComp<StaminaComponent>(user, out var stamina) && entities.Count != 0)
         {
-            // <Trauma
+            // <Trauma>
             var staminaDamage = component.HeavyStaminaCost * entities.Count;
             AdjustStaminaDamage(melee, ref staminaDamage);
             // </Trauma>

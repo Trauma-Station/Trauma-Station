@@ -1,7 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.Cloning;
-using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
 using Content.Goobstation.Shared.CloneProjector.Clone;
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Goobstation.Shared.Clothing.Systems;

@@ -140,11 +140,6 @@ public abstract partial class SharedGunSystem
                 recoilScale = 3.0f;
             }
         }
-
-        if (TryComp<KnowledgeConstructionModifierComponent>(gun, out var knowledgeModifier))
-        {
-            recoilScale *= _knowledge.ConstructionModifier((gun, knowledgeModifier), 0.9f);
-        }
     }
 
     /// <summary>
@@ -177,5 +172,8 @@ public abstract partial class SharedGunSystem
         var newKnowledge = EnsureComp<KnowledgeConstructionModifierComponent>(newUid);
         newKnowledge.LevelDeltas = new Dictionary<EntProtoId, int>(ammoKnowledge.LevelDeltas);
         newKnowledge.Quality = ammoKnowledge.Quality;
+        newKnowledge.NumberOfMasteries = ammoKnowledge.NumberOfMasteries;
+
+        _knowledge.RunQualityModifiersOutsideOfConstruction((newUid, newKnowledge));
     }
 }

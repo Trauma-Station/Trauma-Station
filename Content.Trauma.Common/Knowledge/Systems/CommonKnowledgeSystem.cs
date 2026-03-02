@@ -151,10 +151,8 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract float InverseSharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f);
 
     /// <summary>
-    /// Implents a curve for the quality modifiers of objects.
+    /// Runs quality instructions for an item outside of the construction loop, such as the bullets for the shotgun ammo.
     /// </summary>
     /// <param name="ent"></param>
-    /// <param name="power"></param>
-    /// <returns></returns>
-    public abstract float ConstructionModifier(Entity<KnowledgeConstructionModifierComponent> ent, float power = 2);
+    public abstract void RunQualityModifiersOutsideOfConstruction(Entity<KnowledgeConstructionModifierComponent> ent);
 }

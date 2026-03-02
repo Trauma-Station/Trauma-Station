@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.Armor;
 using Content.Shared.Damage.Components;
@@ -12,6 +10,8 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Prototypes;
+using Content.Trauma.Common.Stack;
+using Content.Shared.Weapons.Ranged.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
@@ -27,9 +27,6 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, UpdateItemQualityEvent>(ConstructionInteraction);
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, GetMeleeDamageEvent>(AlterMeleeDamage);
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, RefreshNameModifiersEvent>(AlterName);
-        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, InvokeArmorQualityEvent>(AlterArmorDamage);
-        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, InvokeProjectileQualityEvent>(AlterProjectileDamage);
-        SubscribeLocalEvent<KnowledgeConstructionModifierComponent, InvokeThrownQualityEvent>(AlterThrownDamage);
         SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(DealShootingExperience);
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, StackSplitEvent>(SplitStack);
         SubscribeLocalEvent<KnowledgeConstructionModifierComponent, AttemptMergeStackEvent>(AttemptMergeStack);
@@ -67,7 +64,15 @@ public abstract partial class SharedKnowledgeSystem
             ent.Comp.Quality = Math.Clamp(qualityToAdd / ent.Comp.NumberOfMasteries, -6, 6); // Make sure numbers don't go too crazy.
             _nameModifier.RefreshNameModifiers(ent.Owner);
         }
+        ModifyValues(ent);
+    }
 
+    /// <summary>
+    /// This should only ever be run once on any entity ever.
+    /// </summary>
+    /// <param name="ent"></param>
+    public void ModifyValues(Entity<KnowledgeConstructionModifierComponent> ent)
+    {
         if (TryComp<ArmorComponent>(ent.Owner, out var armor) && armor.Modifiers.Coefficients is { } armorModifiers)
         {
             foreach (var modifier in armorModifiers)
@@ -86,9 +91,24 @@ public abstract partial class SharedKnowledgeSystem
                 }
             }
         }
+
+        if (TryComp<DamageOtherOnHitComponent>(ent.Owner, out var thrown))
+        {
+            thrown.Damage *= ConstructionModifier(ent, 1.75f);
+        }
+
+        if (TryComp<GunComponent>(ent.Owner, out var gun))
+        {
+            gun.MaxAngle *= ConstructionModifier(ent, 0.9f);
+        }
+
+        if (TryComp<ProjectileComponent>(ent.Owner, out var projectile))
+        {
+            projectile.Damage *= ConstructionModifier(ent, 1.75f);
+        }
     }
 
-    public override float ConstructionModifier(Entity<KnowledgeConstructionModifierComponent> ent, float power = 2)
+    public float ConstructionModifier(Entity<KnowledgeConstructionModifierComponent> ent, float power = 2)
     {
         return (float) Math.Pow(power, ent.Comp.Quality);
     }
@@ -101,21 +121,6 @@ public abstract partial class SharedKnowledgeSystem
     private void AlterName(Entity<KnowledgeConstructionModifierComponent> ent, ref RefreshNameModifiersEvent args)
     {
         args.AddModifier($"knowledge-modifier-name-{(int) Math.Clamp(ent.Comp.Quality, -5, 5)}");
-    }
-
-    private void AlterArmorDamage(Entity<KnowledgeConstructionModifierComponent> ent, ref InvokeArmorQualityEvent args)
-    {
-        args.Coefficient *= ConstructionModifier(ent, 0.87f);
-    }
-
-    private void AlterProjectileDamage(Entity<KnowledgeConstructionModifierComponent> ent, ref InvokeProjectileQualityEvent args)
-    {
-        args.Coefficient *= ConstructionModifier(ent, 1.75f);
-    }
-
-    private void AlterThrownDamage(Entity<KnowledgeConstructionModifierComponent> ent, ref InvokeThrownQualityEvent args)
-    {
-        args.Coefficient *= ConstructionModifier(ent, 1.75f);
     }
 
     private void DealShootingExperience(Entity<ProjectileComponent> ent, ref ProjectileHitEvent args)
@@ -139,7 +144,7 @@ public abstract partial class SharedKnowledgeSystem
     {
         if (!TryComp<KnowledgeConstructionModifierComponent>(args.OtherStack, out var other))
         {
-            args.ShouldNotMerge = true;
+            args.Cancelled = true;
             return;
         }
 
@@ -147,7 +152,7 @@ public abstract partial class SharedKnowledgeSystem
         other.NumberOfMasteries != ent.Comp.NumberOfMasteries ||
         !LevelDeltasMatch(other.LevelDeltas, ent.Comp.LevelDeltas))
         {
-            args.ShouldNotMerge = true;
+            args.Cancelled = true;
         }
     }
 

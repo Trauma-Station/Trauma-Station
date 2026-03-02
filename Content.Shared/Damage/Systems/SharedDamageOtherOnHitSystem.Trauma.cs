@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Trauma.Common.Knowledge;
-// </Trauma>
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
 using Content.Shared.Coordinates;
@@ -50,11 +47,7 @@ public abstract partial class SharedDamageOtherOnHitSystem
             return;
 
         var targetPart = _gun.GetTargetPart(args.Component.Thrower, args.Target);
-        // <Trauma>
-        var ev = new InvokeThrownQualityEvent(1.0f);
-        RaiseLocalEvent(uid, ref ev);
-        var dmg = _damageable.ChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier * ev.Coefficient, component.IgnoreResistances,
-        // </Trauma>
+        var dmg = _damageable.ChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances,
             targetPart: targetPart, origin: args.Component.Thrower, increaseOnly: component.IncreaseOnly);
 
         // <Goob>

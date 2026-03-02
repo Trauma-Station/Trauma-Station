@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
 using Content.Shared.StationAi;
-using Content.Trauma.Common.Knowledge;
 // </Trauma>
 using Content.Shared.Access.Systems;
 using Content.Shared.Actions;

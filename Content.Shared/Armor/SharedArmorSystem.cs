@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Trauma.Common.Knowledge;
 using Content.Medical.Common.Body;
 using System.Linq;
 // </Trauma>

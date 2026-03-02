@@ -49,24 +49,6 @@ public record struct UpdateExperienceEvent();
 public record struct UpdateItemQualityEvent(EntityUid User);
 
 /// <summary>
-/// Called in order to invoke modifier to armor quality.
-/// </summary>
-[ByRefEvent]
-public record struct InvokeArmorQualityEvent(float Coefficient);
-
-/// <summary>
-/// Called in order to invoke modifier to thrown quality.
-/// </summary>
-[ByRefEvent]
-public record struct InvokeThrownQualityEvent(float Coefficient);
-
-/// <summary>
-/// Called in order to invoke modifier to thrown quality.
-/// </summary>
-[ByRefEvent]
-public record struct InvokeProjectileQualityEvent(float Coefficient);
-
-/// <summary>
 /// Called in order to invoke sneak attack failure.
 /// </summary>
 [ByRefEvent]
@@ -89,11 +71,3 @@ public record struct MartialArtDamageModifierEvent(EntityUid User, float Coeffic
 /// </summary>
 [ByRefEvent]
 public record struct MartialArtSpeedModifierEvent(EntityUid User, float Coefficient = 1.0f);
-
-/// <summary>
-/// Raised on the donor or recipient stack and determines if the qualities are similiar enough to merge
-/// </summary>
-/// <param name="Recipient"></param>
-/// <param name="ShouldMerge"></param>
-[ByRefEvent]
-public record struct AttemptMergeStackEvent(EntityUid OtherStack, bool ShouldNotMerge);

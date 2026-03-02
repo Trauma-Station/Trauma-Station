@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Stack;
 // </Trauma>
 using Content.Shared.Hands.Components;
 using JetBrains.Annotations;
@@ -41,7 +41,7 @@ public abstract partial class SharedStackSystem
         RaiseLocalEvent(donor, ref evRec);
         var evDon = new AttemptMergeStackEvent(donor, false);
         RaiseLocalEvent(recipient, ref evDon);
-        if (evRec.ShouldNotMerge || evDon.ShouldNotMerge)
+        if (evRec.Cancelled || evDon.Cancelled)
             return false;
         // <Trauma>
 

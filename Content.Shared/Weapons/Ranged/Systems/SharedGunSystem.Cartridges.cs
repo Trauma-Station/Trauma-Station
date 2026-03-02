@@ -36,11 +36,6 @@ public abstract partial class SharedGunSystem
         if (damageSpec == null)
             return;
 
-        // <Trauma>
-        var ev = new InvokeProjectileQualityEvent(1.0f);
-        RaiseLocalEvent(uid, ref ev);
-        damageSpec *= ev.Coefficient;
-        // <Trauma>
         _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damageSpec), Loc.GetString("damage-projectile"));
 
         // <Goob> - partial armor penetration
