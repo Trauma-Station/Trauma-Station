@@ -18,6 +18,11 @@ heretic-ability-fail-tile-occupied = Targeted tile is occupied!
 heretic-ability-fail-rust-stage-low = You are not powerful enough to rust this surface!
 heretic-ability-fail-target-ghoul = Target is ghoul already!
 heretic-ability-fail-target-no-mind = Target has no soul!
+heretic-ability-fail-space-phase-not-space = You must stand in space, or an outdoor area with low pressure!
+heretic-ability-fail-mirror-jaunt-no-mirrors = There are no reflective surfaces nearby!
+
+heretic-ability-lose-focus-shadow-cloak = As you lose your focus, you are pulled out of the shadows!
+heretic-ability-lose-focus-pale-cloak = As you lose your focus, you are pulled out of the light!
 
 heretic-cosmic-rune-fail-star-mark = Blocked by star mark!
 heretic-cosmic-rune-fail-unlinked = No linked rune!
@@ -29,11 +34,15 @@ mansus-grasp-trigger-fail = Something prevents you from activating this!
 
 ## blade
 heretic-blade-examine = [color=yellow]Using it while it's in your hand will break the blade and teleport you away from danger.[/color]
-heretic-blade-break-fail-acended-message = You cannot break blades while ascended!
+heretic-blade-break-fail-message = You cannot break blades anymore!
+heretic-blade-break-ability-lost-message = You have gained a lot of power, the mansus will no longer allow you to break your blades.
 heretic-blade-use = The blade shatters, and you feel the voices pulling you away.
 heretic-riposte-used = Riposte used!
 heretic-riposte-available = Riposte available!
 heretic-cant-shoot = I can't use { THE($entity) } because of my sacred pledge to the path of the blade.
+
+## aura
+heretic-aura-message = You can no longer hide what you truly are. After 1 minute you will get an aura that reveals you as heretic.
 
 ## paths exclusive
 heretic-rust-mark-itembreak = {$name} shatters into dust!

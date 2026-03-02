@@ -17,3 +17,9 @@ public sealed class ButtonTagPressedEvent(string id, NetEntity user, NetCoordina
 
 [ByRefEvent]
 public record struct HereticCheckEvent(EntityUid Uid, bool Result = false);
+
+[ByRefEvent]
+public record struct ParentPacketReceiveAttemptEvent(bool Cancelled = false);
+
+[ByRefEvent]
+public record struct GetVirtualItemBlockingEntityEvent(EntityUid Uid);

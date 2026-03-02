@@ -15,7 +15,6 @@
 
 using System.Linq;
 using System.Numerics;
-using System.Text;
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Physics;
 using Content.Goobstation.Common.Weapons;
@@ -246,9 +245,9 @@ public abstract class SharedHereticBladeSystem : EntitySystem
         if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out _))
             return;
 
-        if (heretic.Ascended)
+        if (!heretic.CanBreakBlade)
         {
-            _popup.PopupClient(Loc.GetString("heretic-blade-break-fail-acended-message"), args.User, args.User);
+            _popup.PopupClient(Loc.GetString("heretic-blade-break-fail-message"), args.User, args.User);
             return;
         }
 
@@ -271,7 +270,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
         if (!HasComp<RandomTeleportComponent>(ent))
             return;
 
-        if (!_heretic.TryGetHereticComponent(args.Examiner, out var heretic, out _) || heretic.Ascended)
+        if (!_heretic.TryGetHereticComponent(args.Examiner, out var heretic, out _) || !heretic.CanBreakBlade)
             return;
 
         args.PushMarkup(Loc.GetString("heretic-blade-examine"));
@@ -360,7 +359,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
                 aliveMobsCount++;
 
             if (TryComp<HereticCombatMarkComponent>(hit, out var mark))
-                _combatMark.ApplyMarkEffect(hit, mark, ent.Comp.Path, args.User, hereticComp);
+                _combatMark.ApplyMarkEffect(hit, mark, mark.Path, args.User, hereticComp);
 
             if (hereticComp.PathStage >= 7)
                 ApplySpecialEffect(args.User, hit, args);

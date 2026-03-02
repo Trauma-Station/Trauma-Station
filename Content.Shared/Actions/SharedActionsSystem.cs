@@ -1239,13 +1239,16 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
     // Goobstation edit start
     public bool TryGetActionById(
-        EntityUid actionContainer,
+        EntityUid ent,
         EntProtoId actionId,
-        [NotNullWhen(true)] out Entity<ActionComponent>? action)
+        [NotNullWhen(true)] out Entity<ActionComponent>? action,
+        ActionsContainerComponent? container = null)
     {
         action = null;
-        var actions = GetActions(actionContainer).ToList();
-        foreach (var (uid, comp) in actions)
+        var actions = Resolve(ent, ref container, false)
+            ? container.Container.ContainedEntities
+            : GetActions(ent).Select(x => x.Owner);
+        foreach (var uid in actions)
         {
             if (TerminatingOrDeleted(uid))
                 continue;
@@ -1255,7 +1258,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
                 || entityPrototypeId != actionId)
                 continue;
 
-            action = (uid, comp);
+            action = (uid, Comp<ActionComponent>(uid));
             return true;
         }
 

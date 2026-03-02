@@ -3,7 +3,6 @@
 //
 // SPDX-License-Identifier: MIT
 
-using Content.Shared._Goobstation.Heretic.Components; // Goobstation
 using Content.Shared.Species.Components;
 using Content.Shared.Actions;
 using Content.Shared.Body.Systems;
@@ -57,14 +56,6 @@ public sealed partial class GibActionSystem : EntitySystem
 
     private void OnGibAction(EntityUid uid, GibActionComponent comp, GibActionEvent args)
     {
-        // Goobstation start
-        if (HasComp<MansusGraspBlockTriggerComponent>(args.Action.Owner) && HasComp<MansusGraspAffectedComponent>(args.Performer))
-        {
-            _popupSystem.PopupClient(Loc.GetString("mansus-grasp-trigger-fail"), args.Performer, args.Performer);
-            return;
-        }
-        // Goobstation end
-
         // When they use the action, gib them.
         _popupSystem.PopupClient(Loc.GetString(comp.PopupText, ("name", uid)), uid, uid);
         _gibbing.Gib(uid, user: args.Performer);

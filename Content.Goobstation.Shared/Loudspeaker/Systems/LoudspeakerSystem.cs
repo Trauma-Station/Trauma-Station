@@ -91,6 +91,8 @@ public sealed class LoudSpeakerSystem : EntitySystem
 
     private void OnGetSpeechSound(Entity<LoudspeakerHolderComponent> ent, ref GetSpeechSoundEvent args)
     {
+        if (args.Handled)
+            return;
 
         foreach (var loudspeaker in ent.Comp.Loudspeakers)
         {
@@ -100,6 +102,7 @@ public sealed class LoudSpeakerSystem : EntitySystem
             if (speechEv.SpeechSounds != null)
             {
                 args.SpeechSoundProtoId = speechEv.SpeechSounds;
+                args.Handled = true;
                 return;
             }
 

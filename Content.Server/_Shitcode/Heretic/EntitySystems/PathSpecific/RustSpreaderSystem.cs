@@ -1,10 +1,9 @@
 using Content.Server.Heretic.Abilities;
 using Content.Server.Heretic.Components.PathSpecific;
 using Content.Server.Shuttles.Components;
-using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared.Atmos;
+using Content.Shared.Heretic;
 using Content.Shared.Maps;
-using Content.Shared.Mobs;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 
@@ -27,16 +26,12 @@ public sealed class RustSpreaderSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RustSpreaderComponent, MapInitEvent>(OnInit);
-
-        SubscribeLocalEvent<RustbringerComponent, MobStateChangedEvent>(OnStateChanged);
+        SubscribeLocalEvent<RustSpreaderComponent, HereticStateChangedEvent>(OnStateChanged);
     }
 
-    private void OnStateChanged(Entity<RustbringerComponent> ent, ref MobStateChangedEvent args)
+    private void OnStateChanged(Entity<RustSpreaderComponent> ent, ref HereticStateChangedEvent args)
     {
-        if (!Exists(ent.Comp.RustSpreader) || !TryComp(ent.Comp.RustSpreader, out RustSpreaderComponent? spreader))
-            return;
-
-        spreader.Paused = args.NewMobState == MobState.Dead;
+        ent.Comp.Paused = args.IsDead;
     }
 
     private void OnInit(Entity<RustSpreaderComponent> ent, ref MapInitEvent args)
@@ -123,7 +118,7 @@ public sealed class RustSpreaderSystem : EntitySystem
                 List<EntityUid> toRust = new();
                 while (ourEnts.MoveNext(out var ent))
                 {
-                    if (dockQuery.TryGetComponent(ent.Value, out var dock))
+                    if (dockQuery.HasComp(ent.Value))
                         spreader.AffectedDocks.Add(ent.Value);
                     else
                         toRust.Add(ent.Value);

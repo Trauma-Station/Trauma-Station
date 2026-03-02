@@ -4,11 +4,11 @@ namespace Content.Shared._Shitcode.Heretic.Components;
 
 public interface ITouchSpell
 {
-    public EntityUid? Action { get; set; }
+    EntityUid? Action { get; set; }
 
-    public TimeSpan Cooldown { get; set; }
+    TimeSpan Cooldown { get; set; }
 
-    public LocId Speech { get; set; }
+    LocId Speech { get; set; }
 
-    public SoundSpecifier? Sound { get; set; }
+    SoundSpecifier? Sound { get; set; }
 }

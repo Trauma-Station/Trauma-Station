@@ -31,4 +31,7 @@ public sealed partial class RustSpreaderComponent : Component
 
     [DataField]
     public EntProtoId TileRune = "TileHereticRustRune";
+
+    [DataField]
+    public EntityUid HereticMind;
 }

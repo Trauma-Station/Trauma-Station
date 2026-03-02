@@ -2,6 +2,7 @@ using Content.Shared.Heretic;
 using Content.Shared.Mind;
 using Content.Shared.Stacks;
 using Content.Shared.Store.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Shitcode.Heretic.Rituals;
 
@@ -100,6 +101,7 @@ public abstract partial class SharedHereticRitualSystem
         var ghoul = Factory.GetComponent<GhoulComponent>();
         ghoul.TotalHealth = args.Effect.Health;
         ghoul.GiveBlade = args.Effect.GiveBlade;
+        ghoul.ChangeHumanoidProfile = args.Effect.ChangeAppearance;
         ghoul.CanDeconvert = args.Effect.CanDeconvert;
         ghoul.DeathBehavior = args.Effect.DeathBehavior;
         AddComp(ent, ghoul, true);
@@ -166,7 +168,8 @@ public abstract partial class SharedHereticRitualSystem
 
     private void OnSpawn(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<SpawnRitualEffect> args)
     {
-        if (!TryGetValue(args.Ritual, Performer, out EntityUid performer))
+        if (!TryGetValue(args.Ritual, Performer, out EntityUid performer) ||
+            !TryGetValue(args.Ritual, Mind, out EntityUid mind) || !TryComp(mind, out HereticComponent? heretic))
             return;
 
         var coords = Transform(ent).Coordinates;
@@ -176,8 +179,9 @@ public abstract partial class SharedHereticRitualSystem
             {
                 var spawned = PredictedSpawnAtPosition(obj, coords);
 
-                if (_ghoulQuery.HasComp(spawned))
+                if (_ghoulQuery.HasComp(spawned) || _tag.HasTag(spawned, args.Effect.ForceMinionTag))
                 {
+                    heretic.Minions.Add(spawned);
                     var ev = new SetGhoulBoundHereticEvent(performer, args.Ritual);
                     RaiseLocalEvent(spawned, ref ev);
                 }
@@ -212,14 +216,23 @@ public abstract partial class SharedHereticRitualSystem
         var ev = new IncrementHereticObjectiveProgressEvent(args.Effect.SacrificeObjective);
         RaiseLocalEvent(mind, ref ev);
 
-        if (!isCommand)
+        if (isCommand)
         {
             var ev2 = new IncrementHereticObjectiveProgressEvent(args.Effect.SacrificeHeadObjective);
             RaiseLocalEvent(mind, ref ev2);
         }
 
-        if (knowledgeGain > 0)
-            _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, knowledgeGain);
+        if (knowledgeGain == 0)
+            return;
+
+        _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, knowledgeGain);
+
+        heretic.SacrificeTracker++;
+        if (!heretic.InfluenceSpawnPerSacrificeAmount.TryGetValue(heretic.SacrificeTracker, out var influence))
+            return;
+
+        var influenceEv = new SpawnHereticInfluenceEvent(influence);
+        RaiseLocalEvent(ref influenceEv);
     }
 
     private void OnLookup(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<LookupRitualEffect> args)

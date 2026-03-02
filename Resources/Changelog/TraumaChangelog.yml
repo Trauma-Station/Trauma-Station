@@ -3340,3 +3340,28 @@ Entries:
   id: 403
   time: '2026-03-01T21:49:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/909
+- author: Aviu
+  changes:
+  - type: Add
+    message: Heretic progression fully reworked.
+  - type: Add
+    message: Added like 10 new heretic side knowledge.
+  - type: Fix
+    message: Fixed firestacks dealing almost no damage.
+  - type: Tweak
+    message: Reduced ash heretic fire stacks fire protection penetration 50% -> 35%
+  - type: Fix
+    message: >-
+      Fixed new blade path sacraments ability consuming orbiting blades whenever
+      you are hit.
+  - type: Fix
+    message: Fix sacrifice command heretic objective progress being inverted.
+  - type: Tweak
+    message: Void conduit ticks every 1 second instead of 2 again.
+  - type: Add
+    message: Predicted mansus grasp.
+  - type: Add
+    message: Partially predicted rust path.
+  id: 404
+  time: '2026-03-02T00:01:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/694

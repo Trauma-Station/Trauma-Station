@@ -1,12 +1,41 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/80ab61c8c7741e1d95e5f168357a9e6e61b38f2c. beam1 beam2 beam3 end1 end2 end3 taken from https://github.com/tgstation/tgstation/pull/92119/files. cosmic_slash by Aviu00",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/eeedcc9414cf114e19fbe3c556c923fbcdd01be8; cosmic_slash and pale (recolor) by Aviu00",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
+    {
+      "name": "heretic_aura",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "heretic_eye_dripping",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "heretic_eye"
+    },
     {
       "name": "eye_close",
       "delays": [
@@ -268,6 +297,52 @@
           0.1,
           0.1,
           0.1
+        ]
+      ]
+    },
+    {
+      "name": "pale",
+      "directions": 4,
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ],
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ],
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ],
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4
         ]
       ]
     },

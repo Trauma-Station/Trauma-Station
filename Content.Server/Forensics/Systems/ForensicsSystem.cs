@@ -480,6 +480,8 @@ namespace Content.Server.Forensics
                 return;
 
             var recipientComp = EnsureComp<ForensicsComponent>(args.Recipient);
+            if (!recipientComp.CanStoreDNA) // Goobstation
+                return;
             recipientComp.DNAs.Add((component.DNA, TimeSpan.Zero)); // Goobstation
             recipientComp.CanDnaBeCleaned = args.CanDnaBeCleaned;
         }
@@ -511,6 +513,8 @@ namespace Content.Server.Forensics
             if (TryComp<DnaComponent>(donor, out var donorComp) && donorComp.DNA != null)
             {
                 EnsureComp<ForensicsComponent>(recipient, out var recipientComp);
+                if (!recipientComp.CanStoreDNA) // Goobstation
+                    return;
                 recipientComp.DNAs.Add((donorComp.DNA, TimeSpan.Zero)); // Goobstation
                 recipientComp.CanDnaBeCleaned = canDnaBeCleaned;
             }

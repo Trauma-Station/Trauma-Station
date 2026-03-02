@@ -28,9 +28,6 @@ public sealed partial class RustbringerComponent : Component
     };
 
     [DataField]
-    public EntityUid RustSpreader;
-
-    [DataField]
     public EntProtoId Effect = "TileHereticRustRune";
 
     [ViewVariables(VVAccess.ReadWrite)]

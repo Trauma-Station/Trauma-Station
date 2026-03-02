@@ -8,6 +8,7 @@ using Content.Shared._Shitcode.Heretic.Components;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Heretic;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Standing;
@@ -39,6 +40,12 @@ public abstract class SharedRustChargeSystem : EntitySystem
         SubscribeLocalEvent<RustChargeComponent, InteractionAttemptEvent>(OnInteractAttempt);
         SubscribeLocalEvent<RustChargeComponent, KnockDownAttemptEvent>(OnKnockDownAttempt);
         SubscribeLocalEvent<RustChargeComponent, ComponentShutdown>(OnRustChargeShutdown);
+        SubscribeLocalEvent<RustChargeComponent, HereticMagicCastAttemptEvent>(OnMagicAttempt);
+    }
+
+    private void OnMagicAttempt(Entity<RustChargeComponent> ent, ref HereticMagicCastAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 
     private void OnRustChargeShutdown(Entity<RustChargeComponent> ent, ref ComponentShutdown args)

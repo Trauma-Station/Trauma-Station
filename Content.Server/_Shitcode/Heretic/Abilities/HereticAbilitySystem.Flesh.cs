@@ -8,9 +8,7 @@ using Content.Server.Ghost.Roles.Components;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Cloning;
-using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Hands.Components;
@@ -25,7 +23,6 @@ using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Server.Heretic.Abilities;
 
@@ -102,12 +99,10 @@ public sealed partial class HereticAbilitySystem
             multiplier *= ent.Comp.BrainMultiplier;
         if (HasComp<InternalOrganComponent>(args.Food))
             multiplier *= ent.Comp.OrganMultiplier;
-        else if (HasComp<OrganComponent>(args.Food)) // hack but i dont care
+        else if (HasComp<OrganComponent>(args.Food))
             multiplier *= ent.Comp.BodyPartMultiplier;
         if (HasComp<HumanOrganComponent>(args.Food))
             multiplier *= ent.Comp.HumanMultiplier;
-        if (_tag.HasTag(args.Food, ent.Comp.MeatTag))
-            multiplier *= ent.Comp.MeatMultiplier;
         if (heretic.Ascended)
             multiplier *= ent.Comp.AscensionMultiplier;
 
@@ -160,6 +155,9 @@ public sealed partial class HereticAbilitySystem
             return;
 
         ent.Comp.TrackedDamage += damage;
+
+        if (ent.Comp.TrackedDamage < ent.Comp.MimicDamage)
+            return;
 
         ent.Comp.FleshMimics.RemoveAll(x => !Exists(x));
 

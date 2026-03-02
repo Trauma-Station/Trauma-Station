@@ -4,4 +4,4 @@ using Content.Goobstation.Shared.Emoting;
 
 namespace Content.Goobstation.Server.Emoting;
 
-public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem;
+public sealed class AnimatedEmotesSystem : SharedAnimatedEmotesSystem;

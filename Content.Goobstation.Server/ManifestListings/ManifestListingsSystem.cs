@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.ManifestListings;
+using Content.Server.Heretic.EntitySystems;
 using Content.Shared.Actions.Components;
 using Content.Shared.Mind;
 using Content.Shared.Store;
@@ -22,7 +23,8 @@ public sealed class ManifestListingsSystem : EntitySystem
 
         SubscribeLocalEvent<MindComponent, ListingPurchasedEvent>(OnPurchase);
 
-        SubscribeLocalEvent<MindListingsComponent, PrependObjectivesSummaryTextEvent>(OnPrepend);
+        SubscribeLocalEvent<MindListingsComponent, PrependObjectivesSummaryTextEvent>(OnPrepend,
+            before: [typeof(HereticSystem)]);
     }
 
     private void OnPurchase(Entity<MindComponent> ent, ref ListingPurchasedEvent args)

@@ -59,6 +59,9 @@
   id: AthiestsFedora
 
 - type: Tag
+  id: AnchorHereticStructure
+
+- type: Tag
   id: AtmosBackTank # Assmos - Extinguisher Nozzle
 
 - type: Tag
@@ -146,6 +149,9 @@
   id: ClownEmergencyOxygenTank
 
 - type: Tag
+  id: CodexCicatrix
+
+- type: Tag
   id: CombatMech
 
 - type: Tag
@@ -189,6 +195,9 @@
 
 - type: Tag
   id: DurandTargetingControlModule
+
+- type: Tag
+  id: EldritchFlask
 
 - type: Tag
   id: EmergencyMedipen
@@ -249,6 +258,9 @@
 
 - type: Tag
   id: GorillaFormAction
+
+- type: Tag
+  id: GoldBar
 
 - type: Tag
   id: GrimoireGhost
@@ -582,6 +594,9 @@
   id: ShellShotgunHeavy
 
 - type: Tag
+  id: SilverBar
+
+- type: Tag
   id: SyringeArmor
 
 - type: Tag
@@ -794,6 +809,12 @@
 
 - type: Tag
   id: Crate
+
+- type: Tag
+  id: GlovesLatex
+
+- type: Tag
+  id: GlovesNitrile
 
 - type: Tag
   id: GreenGloves

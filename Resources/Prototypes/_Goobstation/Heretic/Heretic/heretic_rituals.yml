@@ -1,3 +1,5 @@
+# TODO: reduce yaml bloat somehow
+
 - type: entity
   id: RitualSacrifice
   name: Sacrifice
@@ -150,9 +152,11 @@
         splitEntitiesKey: Split
         ingredients:
         - whitelist:
-            tags:
-            - Meat
-          name: heretic-ritual-ingredient-meat
+            requireAll: true
+            components:
+            - Organ
+            - Edible
+          name: heretic-ritual-ingredient-organ
         - whitelist:
             tags:
             - Pen
@@ -1212,7 +1216,7 @@
       - RitualKnowledge
     - !type:UpdateKnowledgeEffect
       applyOn: Mind
-      amount: 5
+      amount: 4
   - type: HereticKnowledgeRitual
   - type: Tag
     tags:
@@ -1430,6 +1434,112 @@
       output:
         MobGhoulFireShark: 3
 
+- type: entity
+  id: RitualPhylacteryOfDamnation
+  name: Phylactery of Damnation
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/Entities/phylactery.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Puddles
+      individualConditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - Puddle
+      - !type:ReagentsCondition
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Puddles
+        result: Delete2
+        min: 1
+        cancelLoc: heretic-ritual-fail-reagent-blood
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - GlassBeaker
+          name: heretic-ritual-ingredient-beaker
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:EffectsRitualEffect
+      applyOn: Delete2
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        HereticPhylactery: 1
+
+- type: entity
+  id: RitualEtherOfTheNewborn
+  name: Ether of the Newborn
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/Entities/Potions/ether.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Puddles
+      individualConditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - Puddle
+      - !type:ReagentsCondition
+        reagents:
+        - Vomit
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Puddles
+        result: Delete2
+        min: 1
+        cancelLoc: heretic-ritual-fail-reagent-vomit
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - GlassShard
+          name: heretic-ritual-ingredient-glass-shard
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:EffectsRitualEffect
+      applyOn: Delete2
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        PotionEther: 1
+
 ## stage 6
 - type: entity
   id: RitualRusted
@@ -1493,7 +1603,7 @@
 
 - type: entity
   id: RitualCarvingKnife
-  name: CarvingKnife
+  name: Carving Knife
   categories: [ HideSpawnMenu ]
   components:
   - type: Icon
@@ -1532,3 +1642,312 @@
       applyOn: Platform
       output:
         CarvingKnife: 1
+
+- type: entity
+  id: RitualCodexMorbus
+  name: Codex Morbus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/book_morbus.rsi
+    state: icon-on
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Targets
+      individualConditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - HumanoidProfile
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - CodexCicatrix
+          name: heretic-ritual-ingredient-codex-cicatrix
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Targets
+        result: Result
+        min: 1
+        max: 1
+        cancelLoc: heretic-ritual-fail-sacrifice
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SacrificeEffect
+      applyOn: Result
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        CodexMorbus: 1
+
+- type: entity
+  id: RitualGreavesOfTheProphet
+  name: Greaves of the Prophet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/Clothing/Shoes/greaves.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - SilverBar
+          name: heretic-ritual-ingredient-silver
+          amount: 2
+        - whitelist:
+            components:
+            - Magboots
+          blacklist:
+            tags:
+            - HereticItem
+          name: heretic-ritual-ingredient-magboots
+        - whitelist:
+            requireAll: true
+            components:
+            - Clothing
+            - ClothingSlowOnDamageModifier
+            - ModifyStandingUpTime
+          blacklist:
+            tags:
+            - HereticItem
+          name: heretic-ritual-ingredient-combat-boots
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        ClothingShoesGreavesHeretic: 1
+
+- type: entity
+  id: RitualShattered
+  name: Shattered Ritual
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    state: ghoul_shattered
+  - type: HereticRitual
+    limit: 1
+    cancelLoc: heretic-ritual-fail-ghoulify
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Targets
+      individualConditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - HumanoidProfile
+        blacklist:
+          components:
+          - Ghoul
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - GlovesLatex
+            - GlovesNitrile
+          name: heretic-ritual-ingredient-gloves-medical
+        - whitelist:
+            requireAll: true
+            components:
+            - AllowSuitStorage
+            - StaminaResistance
+            - Clothing
+            - Armor
+          name: heretic-ritual-ingredient-armor-outer
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Targets
+        result: Result
+        min: 1
+        max: 1
+        cancelLoc: heretic-ritual-fail-ghoulify
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:PolymorphRitualEffect
+      applyOn: Result
+      result: Polymorphed
+      polymorph: ShatteredRisen
+    - !type:AddToLimitRitualEffect
+      applyOn: Polymorphed
+      result: Ghoul
+    - !type:GhoulifyEffect
+      applyOn: Ghoul
+      giveBlade: false
+      health: 250
+      changeAppearance: false
+      deathBehavior: GibOrgans
+      canDeconvert: false
+
+- type: entity
+  id: RitualMawedCrucible
+  name: Mawed Crucible
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/items.rsi
+    state: crucible
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - WaterTank
+          name: heretic-ritual-ingredient-water-tank
+        - whitelist:
+            tags:
+            - Table
+          name: heretic-ritual-ingredient-table
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        MawedCrucible: 1
+
+- type: entity
+  id: RitualThroughTheBoundary
+  name: Through the Boundary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/Entities/sword.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - GoldBar
+          name: heretic-ritual-ingredient-gold
+          amount: 2
+        - whitelist:
+            tags:
+            - HereticBlade
+          name: heretic-ritual-ingredient-heretic-blade
+          amount: 2
+        - whitelist:
+            components:
+            - IdCard
+          name: heretic-ritual-ingredient-id-card
+          amount: 2
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        RaggedSword: 1
+
+# stage 8
+- type: entity
+  id: RitualMaidInTheMirror
+  name: Maid in the Mirror
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/eldritch_mobs.rsi
+    state: maid
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - SheetGlass
+          name: heretic-ritual-ingredient-glass-sheet
+          amount: 5
+        - whitelist:
+            components:
+            - Lung
+          name: heretic-ritual-ingredient-lung
+        - whitelist:
+            components:
+            - SuitSensor
+          name: heretic-ritual-ingredient-suit-sensors
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        MobGhoulMirrorMaid: 1

@@ -346,7 +346,7 @@
           types:
             Poison: -1
       - !type:CleanBloodstream
-        excluded: Musiver # Trauma - Exclude from chempurge
+        excluded: [Musiver] # Trauma - Exclude from chempurge
         cleanseRate: 1
       - !type:HealthChange
         damage:
@@ -463,7 +463,7 @@
     Bloodstream:
       effects:
       - !type:CleanBloodstream
-        excluded: Multiver
+        excluded: [Multiver]
         cleanseRate: -3
         conditions:
         - !type:BloodstreamCountCondition
@@ -588,7 +588,7 @@
       metabolismRate: 0.15
       effects:
       - !type:CleanBloodstream
-        excluded: AmmoniatedMercury
+        excluded: [AmmoniatedMercury]
         cleanseRate: 6
       - !type:HealthChange
         damage:
@@ -906,7 +906,7 @@
       metabolismRate: 0.25
       effects:
       - !type:CleanBloodstream
-        excluded: PentenicAcid # Trauma - Exclude pentacid from its own chem purge
+        excluded: [PentenicAcid] # Trauma - Exclude pentacid from its own chem purge
       - !type:HealthChange
         damage:
           types:
