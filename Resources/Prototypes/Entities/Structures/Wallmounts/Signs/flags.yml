@@ -96,8 +96,8 @@
 - type: entity
   parent: BaseFlag
   id: NTFlag
-  name: Nanotrasen flag
-  description: Glory to NT! Wait, they really made a flag for a corporation?
+  name: Diamond Dogs flag
+  description: Long live Big Boss! Wait, they really made a flag for a private military corporation?
   components:
   - type: Sprite
     state: NT_flag

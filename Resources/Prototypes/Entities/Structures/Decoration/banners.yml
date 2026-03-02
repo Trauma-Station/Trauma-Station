@@ -56,8 +56,8 @@
 - type: entity
   id: BannerNanotrasen
   parent: BannerBase
-  name: nanotrasen banner
-  description: A banner displaying the Nanotrasen logo. It looks rather cheap.
+  name: Diamond Dogs banner
+  description: A banner displaying the Diamond Dogs emblem.
   components:
   - type: Sprite
     sprite: Structures/Decoration/banner.rsi
