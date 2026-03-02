@@ -184,7 +184,7 @@
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
        !type:String
-       iDroid
+       pda
   - type: Sprite
     sprite: Objects/Devices/pda.rsi
     layers:
@@ -200,7 +200,7 @@
       visible: false
   - type: Icon
     sprite: Objects/Devices/pda.rsi
-    state: iDroid
+    state: pda
   - type: Pda
     paiSlot:
       priority: -2
@@ -225,9 +225,9 @@
     size: Small
   - type: ContainerContainer
     containers:
-      pda-id: !type:ContainerSlot {}
-      pda-pen: !type:ContainerSlot {}
-      pda-pai: !type:ContainerSlot {}
+      PDA-id: !type:ContainerSlot {}
+      PDA-pen: !type:ContainerSlot {}
+      PDA-pai: !type:ContainerSlot {}
       Cartridge-Slot: !type:ContainerSlot {}
       program-container: !type:Container
   - type: ItemSlots
@@ -247,7 +247,7 @@
   - type: RingerUplink
   - type: DeviceNetwork
     deviceNetId: Wireless
-    receiveFrequencyId: iDroid
+    receiveFrequencyId: PDA
     prefix: device-address-prefix-console
     savableAddress: false
   - type: WirelessNetworkConnection

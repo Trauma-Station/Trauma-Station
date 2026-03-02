@@ -97,7 +97,7 @@
   id: NanotrasenRepresentative
   name: job-name-ntr
   description: job-description-ntr
-  roundStart: false # doesnt make sense
+  setPreference: false # doesnt make sense
   playTimeTracker: JobNanotrasenRepresentative
   requirements:
     - !type:DepartmentTimeRequirement
