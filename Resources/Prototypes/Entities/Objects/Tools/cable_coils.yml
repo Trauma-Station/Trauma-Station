@@ -35,7 +35,6 @@
     - VoltageNetworks
     - Power
   # EE Change Start
-  #MORE than ointment Estacao Pirata IPCs
   - type: Healing
     delay: 1
     damageContainers:
