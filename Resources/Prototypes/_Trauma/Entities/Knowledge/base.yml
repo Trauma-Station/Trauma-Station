@@ -104,3 +104,10 @@
   components:
   - type: Knowledge
     experienceCost: 15
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: CraftingKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 15

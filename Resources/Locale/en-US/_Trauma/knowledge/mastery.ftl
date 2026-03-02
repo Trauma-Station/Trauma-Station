@@ -62,6 +62,7 @@ knowledge-MagicalLiteracyKnowledge = Magical Literacy
 knowledge-LiteracyKnowledge = Literacy
 knowledge-JanitorKnowledge = Janitor
 knowledge-ThrowingKnowledge = Throwing
+knowledge-CraftingKnowledge = Crafting
 
 language-curse-pain = You hear bad language!
 

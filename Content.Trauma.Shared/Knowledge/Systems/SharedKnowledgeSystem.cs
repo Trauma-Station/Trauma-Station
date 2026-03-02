@@ -200,10 +200,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 return false;
         }
         int timesToRoll = ent.Comp.Experience / ent.Comp.ExperienceCost;
+        ent.Comp.Experience -= ent.Comp.ExperienceCost * timesToRoll;
         (int, bool) rollInnard;
         for (int i = 0; i < timesToRoll; i++)
         {
-            ent.Comp.Experience -= ent.Comp.ExperienceCost;
             int diceType = DiceDictionary(ent);
             rollInnard = RollPenetrating(diceType);
             rollResult = (rollInnard.Item1, rollInnard.Item2 || rollResult.Item2);
