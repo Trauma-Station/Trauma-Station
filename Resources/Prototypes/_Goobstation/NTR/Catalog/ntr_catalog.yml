@@ -362,7 +362,7 @@
 - type: listing
   id: NTRExecutiveMarlen
   name: Marlen
-  description: A stylish Centcomm umbrella, made by "NanoFashion" for the rich people of central command. Surprisingly durable.
+  description: A stylish Centcomm umbrella, made by "NanoFashion" for the rich people of the Patriots. Surprisingly durable.
   productEntity: SpawnPodMarlen
   icon:
     sprite: _Goobstation/Objects/Weapons/Melee/marlen.rsi

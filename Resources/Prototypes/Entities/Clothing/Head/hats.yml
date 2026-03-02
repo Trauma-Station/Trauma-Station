@@ -350,8 +350,8 @@
 - type: entity
   parent: [ClothingHeadHatBeretRND, BaseSecurityCommandContraband] # Goob edit
   id: ClothingHeadHatBeretHoS
-  name: head of security's beret
-  description: A black beret with a commander's rank emblem. For officers that are more inclined towards style than safety.
+  name: executive officer's beret
+  description: A black beret with an XO's rank emblem. For those who lost everything.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret_hos.rsi
@@ -507,8 +507,8 @@
 - type: entity
   parent: [ ClothingHeadHatBeretRND, BaseCommandContraband ]
   id: ClothingHeadHatCaptain
-  name: captain's hardhat
-  description: Feels good being the king.
+  name: Big Boss's hardhat
+  description: Feels good being the Boss.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/captain.rsi
@@ -556,8 +556,8 @@
 - type: entity
   parent: [ ClothingHeadBase, BaseCentcommContraband ]
   id: ClothingHeadHatCentcom
-  name: CentComm brand hat
-  description: Feels good being the king's boss.
+  name: Patriots brand hat
+  description: Feels good being the Boss's boss.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/centcom.rsi
@@ -717,8 +717,8 @@
 - type: entity
   parent: [ClothingHeadBase, BaseCommandContraband]
   id: ClothingHeadHatHoshat
-  name: head of security cap
-  description: A stylish cap worn by the Head of Security. Shows the officers who's in charge.
+  name: executive officer's cap
+  description: A stylish cap worn by the Executive Officer. Shows the grunts who's in charge.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/hoshat.rsi
@@ -1553,8 +1553,8 @@
 - type: entity
   parent: [ ClothingHeadBase, BaseCentcommContraband ]
   id: ClothingHeadHatCentcomcap
-  name: CentComm cap
-  description: An extravagant, stylish cap worn by CentComm officials. Shows the Captain who's in charge.
+  name: Patriots cap
+  description: An extravagant, stylish cap worn by the Patriots. Shows Big Boss who's in charge.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/comcap.rsi

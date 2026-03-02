@@ -8,4 +8,4 @@ station-beacon-ruin-small-outpost = Small Outpost
 station-beacon-ruin-rouge-ai = Unknown Laboratory
 station-beacon-ruin-snow-biodome = Snow Biodome
 
-station-beacon-ruin-syndicate = Syndicate Signal
+station-beacon-ruin-syndicate = Soviet Signal

@@ -189,7 +189,7 @@
 - type: entity
   parent: [ ClothingHeadset, BaseCentcommContraband ]
   id: ClothingHeadsetCentCom
-  name: CentComm headset
+  name: Patriots headset
   description: A headset used by the upper echelons of Nanotrasen.
   components:
   - type: ContainerFill
@@ -205,8 +205,8 @@
 - type: entity
   parent: [ClothingHeadset, BaseCommandContraband]
   id: ClothingHeadsetCommand
-  name: command headset
-  description: A headset with a commanding channel.
+  name: Big Boss's headset
+  description: A headset with all channels.
   components:
   - type: ContainerFill
     containers:

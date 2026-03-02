@@ -336,7 +336,7 @@
 - type: entity
   id: SpawnPointCaptain
   parent: SpawnPointJobBase
-  name: captain
+  name: big boss
   components:
   - type: SpawnPoint
     job_id: Captain
@@ -512,7 +512,7 @@
 - type: entity
   id: SpawnPointDetective
   parent: SpawnPointJobBase
-  name: detective
+  name: interrogator
   components:
   - type: SpawnPoint
     job_id: Detective

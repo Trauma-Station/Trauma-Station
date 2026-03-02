@@ -228,7 +228,7 @@
 - type: entity
   id: SuitStorageHOS
   parent: SuitStorageBase
-  suffix: Head of Security
+  suffix: Executive Officer
   components:
   - type: EntityTableContainerFill
     containers:

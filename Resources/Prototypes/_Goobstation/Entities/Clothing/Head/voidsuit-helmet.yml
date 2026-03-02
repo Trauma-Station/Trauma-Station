@@ -172,11 +172,11 @@
   - type: FlashImmunity
   - type: FlashSoundSuppression
 
-# Head of Security
+# Executive Officer
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetHardsuitHeadOfSecurityExperimental
-  name: head of security's advanced hardsuit helmet
+  name: executive officer's advanced hardsuit helmet
   description: Security hardsuit helmet with the latest top secret NT-HUD software. This one seems more durable than stand issue helmets.
   components:
   - type: Sprite
@@ -318,8 +318,8 @@
 - type: entity
   parent: ClothingHeadHelmetVoidsuitSecurity
   id: ClothingHeadHelmetHardsuitDetective
-  name: detective hardsuit helmet
-  description: A helmet with a built-in fedora for the detective's hardsuit.
+  name: interrogator hardsuit helmet
+  description: A helmet with a built-in fedora for the interrogator's hardsuit.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/Head/Hardsuits/detective.rsi

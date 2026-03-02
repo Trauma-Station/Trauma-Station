@@ -130,7 +130,7 @@
   parent: [ClothingEyesHudOmni, BaseCentcommContraband]
   id: ClothingEyesGlassesDeathsquad
   suffix: DO NOT MAP
-  name: central commander shades
+  name: patriots shades
   description: Pride. Hubris. Wrath. It's not a sin if you're right.
   components:
   - type: Sprite
@@ -163,8 +163,8 @@
   parent: [ClothingEyesHudOmni, BaseCentcommContraband]
   id: ClothingEyesGlassesCentComm
   suffix: DO NOT MAP
-  name: central command shades
-  description: A pair of shades designed for central command personnel. It's nothing personal. # *teleports behind you*, Nothing personnel, kid.
+  name: patriots shades
+  description: A pair of shades designed for Patriots personnel. It's nothing personal. # *teleports behind you*, Nothing personnel, kid.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/Eyes/Glasses/centcommglasses.rsi
@@ -187,8 +187,8 @@
   parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons, BaseCentcommContraband]
   id: ClothingEyesGlassesCentCommNoThermal
   suffix: No thermals, DO NOT MAP
-  name: central command shades
-  description: A pair of shades designed for central command personnel. Comes with more features than you could imagine.
+  name: patriots shades
+  description: A pair of shades designed for Patriots personnel. Comes with more features than you could imagine.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/Eyes/Glasses/centcommglasses.rsi

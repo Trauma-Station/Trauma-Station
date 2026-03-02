@@ -370,16 +370,16 @@ accent-medieval-words-replace-107 = arresteth
 accent-medieval-words-108 = spider
 accent-medieval-words-replace-108 = arachnidbeast
 
-accent-medieval-words-109 = syndicate
+accent-medieval-words-109 = soviets
 accent-medieval-words-replace-109 = renegades
 
-accent-medieval-words-110 = syndi
+accent-medieval-words-110 = soviet
 accent-medieval-words-replace-110 = renegade
 
 accent-medieval-words-111 = traitor
 accent-medieval-words-replace-111 = betrayer
 
-accent-medieval-words-112 = nukie
+accent-medieval-words-112 = xof
 accent-medieval-words-replace-112 = harbinger o' destruction
 
 accent-medieval-words-113 = nukies

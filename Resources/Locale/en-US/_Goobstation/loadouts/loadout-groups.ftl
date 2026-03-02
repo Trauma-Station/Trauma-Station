@@ -84,10 +84,10 @@ loadout-group-security-cadet-envirosuit = Security Cadet envirosuit
 loadout-group-security-cadet-envirogloves = Security Cadet envirogloves
 
 # Detective
-loadout-group-detective-envirohelm = Detective envirohelm
-loadout-group-detective-envirosuit = Detective envirosuit
-loadout-group-detective-envirogloves = Detective envirogloves
-loadout-group-detective-gloves = Detective gloves
+loadout-group-detective-envirohelm = Interrogator envirohelm
+loadout-group-detective-envirosuit = Interrogator envirosuit
+loadout-group-detective-envirogloves = Interrogator envirogloves
+loadout-group-detective-gloves = Interrogator gloves
 
 # Warden
 loadout-group-warden-envirohelm = Warden envirohelm
@@ -101,9 +101,9 @@ loadout-group-hop-envirogloves = Head of Personnel envirogloves
 loadout-group-hop-gloves = Head of Personnel gloves
 
 # CentCom Officer
-loadout-group-centcom-officer-envirohelm = CentCom Officer envirohelm
-loadout-group-centcom-officer-envirosuit = CentCom Officer envirosuit
-loadout-group-centcom-officer-envirogloves = CentCom Officer envirogloves
+loadout-group-centcom-officer-envirohelm = Patriots Officer envirohelm
+loadout-group-centcom-officer-envirosuit = Patriots Officer envirosuit
+loadout-group-centcom-officer-envirogloves = Patriots Officer envirogloves
 
 # Botanist
 loadout-group-botanist-envirohelm = Botanist envirohelm
@@ -142,9 +142,9 @@ loadout-group-mime-envirogloves = Mime envirogloves
 loadout-group-mime-gloves = Mime gloves
 
 # Assistant
-loadout-group-assistant-envirohelm = Assistant envirohelm
-loadout-group-assistant-envirosuit = Assistant envirosuit
-loadout-group-assistant-envirogloves = Assistant envirogloves
+loadout-group-assistant-envirohelm = Private envirohelm
+loadout-group-assistant-envirosuit = Private envirosuit
+loadout-group-assistant-envirogloves = Private envirogloves
 
 # Musician
 loadout-group-musician-envirohelm = Musician envirohelm
@@ -177,10 +177,10 @@ loadout-group-reporter-envirosuit = Reporter envirosuit
 loadout-group-reporter-envirogloves = Reporter envirogloves
 
 # Captain
-loadout-group-captain-envirohelm = Captain envirohelm
-loadout-group-captain-envirosuit = Captain envirosuit
-loadout-group-captain-envirogloves = Captain envirogloves
-loadout-group-captain-gloves = Captain gloves
+loadout-group-captain-envirohelm = Big Boss envirohelm
+loadout-group-captain-envirosuit = Big Boss envirosuit
+loadout-group-captain-envirogloves = Big Boss envirogloves
+loadout-group-captain-gloves = Big Boss gloves
 
 
 # Salvage Specialist
@@ -194,10 +194,10 @@ loadout-group-chemist-envirosuit = Chemist envirosuit
 loadout-group-chemist-envirogloves = Chemist envirogloves
 
 # Head of Security
-loadout-group-head-of-security-envirohelm = Head of Security envirohelm
-loadout-group-head-of-security-envirosuit = Head of Security envirosuit
-loadout-group-head-of-security-envirogloves = Head of Security envirogloves
-loadout-group-head-of-security-gloves = Head of Security gloves
+loadout-group-head-of-security-envirohelm = Executive Officer envirohelm
+loadout-group-head-of-security-envirosuit = Executive Officer envirosuit
+loadout-group-head-of-security-envirogloves = Executive Officer envirogloves
+loadout-group-head-of-security-gloves = Executive Officer gloves
 
 # Brigmedic
 loadout-group-brigmedic-envirohelm = Brigmedic envirohelm

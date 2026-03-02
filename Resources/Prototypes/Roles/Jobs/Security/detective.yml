@@ -104,6 +104,7 @@
     belt: ClothingBeltHolsterFilled
   storage:
     back:
+    - WeaponRevolverInspector # dual wield!
     - Flash
     - ForensicPad
     - ForensicScanner

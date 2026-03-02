@@ -1718,7 +1718,7 @@
   id: UplinkSnackBox
   name: uplink-snack-box-name
   description: uplink-snack-box-desc
-  productEntity: HappyHonkNukieSnacks
+  productEntity: HappyHonkNukie # empty, in soviet russia food eats you!
   cost:
     Telecrystal: 5 # goob
   categories:

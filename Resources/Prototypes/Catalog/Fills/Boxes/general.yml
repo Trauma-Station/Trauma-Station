@@ -134,10 +134,10 @@
         rolls: 6 # Rolls instead of amounts to alternate.
 
 - type: entity
-  name: PDA box
+  name: iDroid box
   parent: BoxCardboard
   id: BoxPDA
-  description: A box of spare PDA microcomputers.
+  description: A box of spare iDroids.
   components:
   - type: EntityTableContainerFill
     containers:

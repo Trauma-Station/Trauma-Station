@@ -9,17 +9,17 @@
 
 job-description-navy-officer-undercover = Complete your assigned tasks, Terminate the given targets. Good luck.
 job-description-navy-captain = Classified.
-job-description-navy-officer = Answer faxes and radio communications directed at Central Command. Perform investigations on the station and it's crew.
-job-description-diplomat = Represent Central Command, managing relationships with other factions aboard the station. Cleanup the issues the captain has likely caused.
+job-description-navy-officer = Answer faxes and radio communications directed at the Patriots. Perform investigations on the station and it's crew.
+job-description-diplomat = Represent the Patriots, managing relationships with other factions aboard the station. Cleanup the issues the captain has likely caused.
 job-description-navy-special-operations-officer = Send, brief, and direct emergency response teams or other Nanotrasen forces. Release the nuclear codes, or don't.
 
 # Generic Nanotrasen
 
-job-description-ntr = Represent NT, Send reports back to them on the station's situation, Inform the heads of anything CentCom orders them to do.
+job-description-ntr = Represent NT, Send reports back to them on the station's situation, Inform the heads of anything the Patriots order them to do.
 
 # Syndicate
 
-job-description-highcommander = You are an elite, high-ranking official within the Spinward Syndicate. It doesn't matter which faction, you're important to them all.
+job-description-highcommander = You are the leader of XOF, Cipher's elite strike force. Don't tell anyone what you did at Camp Omega.
 
 # Half Life
 

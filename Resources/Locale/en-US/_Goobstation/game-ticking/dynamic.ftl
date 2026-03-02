@@ -33,11 +33,11 @@ dynamic-gamerule-xenos-title = Xenobiology Outbreak
 dynamic-gamerule-revenant-title = Revenant Spawn
 dynamic-gamerule-ratking-title = Rat Migration
 
-dynamic-gamerule-midround-traitor-title = Sleeper Agents (Traitors)
+dynamic-gamerule-midround-traitor-title = Sleeper Agents (Soviets)
 dynamic-gamerule-midround-changeling-title = Genome Awakening (Changelings)
 dynamic-gamerule-midround-heretic-title = Sudden Englightment (Heretics)
 dynamic-gamerule-midround-revolutionary-title = Provocateurs (Revolutionaries)
-dynamic-gamerule-midround-zombies-title = Romerol Outbreak (Zombies)
+dynamic-gamerule-midround-zombies-title = Puppet Soldier Outbreak (Zombies)
 dynamic-gamerule-midround-blob-title = Blob Spawn (Blob)
 
 dynamic-fax-threat-none =

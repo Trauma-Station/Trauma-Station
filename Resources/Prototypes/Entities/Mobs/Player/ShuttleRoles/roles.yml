@@ -98,7 +98,7 @@
 
 - type: entity
   id: RandomHumanoidVisitorDetective
-  name: visiting detective role
+  name: visiting interrogator role
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -358,7 +358,7 @@
 
 - type: entity
   id: RandomHumanoidVisitorLawyerCentcom
-  name: visiting centcom lawyer ghost role
+  name: visiting patriots lawyer ghost role
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi

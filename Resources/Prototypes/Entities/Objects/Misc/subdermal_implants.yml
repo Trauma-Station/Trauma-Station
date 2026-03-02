@@ -513,7 +513,7 @@
   parent: BaseSubdermalImplant
   id: RadioImplantCentcomm
   name: radio implant
-  description: This implant grants access to the Centcomm channel without a headset. Only authorized for Centcomm employees.
+  description: This implant grants access to the Patriots channel without a headset. Only authorized for the Patriots.
   categories: [ HideSpawnMenu ]
   components:
   - type: SubdermalImplant
@@ -524,8 +524,8 @@
 - type: entity
   parent: DeathRattleImplant
   id: DeathRattleImplantCentcomm
-  name: centcomm death rattle implant
-  description: This implant will inform the Centcomm radio channel should the user fall into critical condition or die.
+  name: patriots death rattle implant
+  description: This implant will inform the Patriots radio channel should the user fall into critical condition or die.
   categories: [ HideSpawnMenu ]
   components:
   - type: RattleOnTrigger

@@ -204,7 +204,7 @@
             - EnergySpeedloader
 
 - type: entity
-  name: centcomm disabler
+  name: Patriots disabler
   parent: [ WeaponDisablerPractice, BaseCentcommContraband ]
   id: WeaponDisablerAdvanced
   description: A non-lethal self-defense weapon for agents not trustable with traditional lethals. Recharges over time.

@@ -34,8 +34,8 @@
 - type: entity
   parent: ClothingUniformEnvirosuitBase
   id: ClothingUniformEnvirosuitCaptain
-  name: captain's envirosuit
-  description: It's a blue envirosuit with some gold markings denoting the rank of "Captain".
+  name: Big Boss's envirosuit
+  description: It's a blue envirosuit with some gold markings denoting the rank of "Big Boss".
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/captain.rsi
@@ -122,8 +122,8 @@
 - type: entity
   parent: ClothingUniformEnvirosuitEnviroslacksColorOrange
   id: ClothingUniformEnvirosuitDetective
-  name: detective envirosuit
-  description: The pet project of a particularly posh Plasmaman, this custom suit was modified by Nanotrasen for its detectives.
+  name: interrogator envirosuit
+  description: The pet project of a particularly posh Plasmaman, this custom suit was modified by the Diamond Dogs for its interrogator.
 
 - type: entity
   parent: ClothingUniformEnvirosuitBase
@@ -139,8 +139,8 @@
 - type: entity
   parent: ClothingUniformEnvirosuitBase
   id: ClothingUniformEnvirosuitHoS
-  name: head of security's envirosuit
-  description: A Plasmaman containment suit decorated for those few with the dedication to achieve the position of Head of Security.
+  name: executive officer's envirosuit
+  description: A Plasmaman containment suit decorated for those few with the dedication to achieve the position of Executive Officer.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/hos.rsi
@@ -615,8 +615,8 @@
 - type: entity
   parent: ClothingUniformEnvirosuitBase
   id: ClothingUniformEnvirosuitCentcomAgent
-  name: CentCom agent's envirosuit
-  description: An envirosuit tailored for CentCom's legal team. Smells of burnt coffee.
+  name: Patriots agent's envirosuit
+  description: An envirosuit tailored for the Patriots' legal team. Smells of burnt coffee.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/centcom_agent.rsi
@@ -626,8 +626,8 @@
 - type: entity
   parent: ClothingUniformEnvirosuitBase
   id: ClothingUniformEnvirosuitCentcomOfficial
-  name: CentCom official's envirosuit
-  description: It's an envirosuit worn by CentCom's officials.
+  name: Patriots official's envirosuit
+  description: It's an envirosuit worn by the Patriots' officials.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/centcom_official.rsi
@@ -637,8 +637,8 @@
 - type: entity
   parent: ClothingUniformEnvirosuitBase
   id: ClothingUniformEnvirosuitCentcomOfficer
-  name: CentCom officer's envirosuit
-  description: It's an envirosuit worn by CentCom Officers.
+  name: Patriots officer's envirosuit
+  description: It's an envirosuit worn by the Patriots officers.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/centcom_officer.rsi

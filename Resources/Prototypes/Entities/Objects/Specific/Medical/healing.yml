@@ -780,7 +780,7 @@
         amount: 15 # Goob - was 3
 
 - type: entity
-  name: romerol pill
+  name: puppet parasites pill
   parent: Pill
   id: PillRomerol
   components:
@@ -1050,7 +1050,7 @@
 
 #this is where all the syringes are so i didn't know where to put it
 - type: entity
-  suffix: romerol
+  suffix: puppet parasites
   parent: PrefilledSyringe
   id: SyringeRomerol
   components:

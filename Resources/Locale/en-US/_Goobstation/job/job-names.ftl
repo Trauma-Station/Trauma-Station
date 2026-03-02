@@ -26,11 +26,11 @@ job-name-navy-officer = Navy Officer
 job-name-navy-officer-undercover = Undercover Navy Officer
 job-name-navy-captain = Navy Captain
 job-name-diplomat = Diplomat
-job-name-inspector = Central Command Auditor
+job-name-inspector = Patriots Auditor
 
 # Syndicate
 
-job-name-highcommander = High Commander
+job-name-highcommander = Skull Face
 
 # Half Life
 
@@ -55,7 +55,7 @@ JobNavyCaptain = Navy Captain
 JobDiplomat = Diplomat
 JobGovernmentMan = The G-Man
 JobConquest = Conquest
-JobInspector = Central Command Auditor
+JobInspector = Patriots Auditor
 JobMercenaryCaptain = Mercenary Captain
 JobPartyMaker = Party Maker
 JobRoboticist = Roboticist

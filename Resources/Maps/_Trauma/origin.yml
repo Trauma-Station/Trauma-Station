@@ -167232,7 +167232,7 @@ entities:
       setupAvailableNetworks:
       - SurveillanceCameraCommand
       nameSet: True
-      id: 'head of security '
+      id: 'executive officer'
   - uid: 25257
     components:
     - type: Transform

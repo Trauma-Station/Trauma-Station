@@ -11,14 +11,14 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-department-Cargo = Cargo
-department-Civilian = Civilian
+department-Cargo = Support Team
+department-Civilian = Standby
 department-Command = Command
-department-CentralCommand = Central Command
+department-CentralCommand = The Patriots
 department-Engineering = Engineering
-department-Medical = Medical
-department-Security = Security
-department-Science = Science
+department-Medical = Medical Team
+department-Security = Combat Team
+department-Science = Research Team
 department-Silicon = Silicon
 department-Specific = Station specific
 

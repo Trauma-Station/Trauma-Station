@@ -12,21 +12,21 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <Document>
-  # Nuclear Operatives
+  # IAEA Nuclear Inspection
 
   <Box>
-    [color=#999999][italic]"OPERATIVES STANDBY. YOUR OBJECTIVES ARE SIMPLE.[/italic][/color]
+    [color=#999999][italic]"DR. HUEY EMMERICH STANDBY. YOUR OBJECTIVES ARE SIMPLE.[/italic][/color]
   </Box>
   <Box>
-    [color=#999999][italic]DELIVER THE PAYLOAD AND GET OUT BEFORE THE PAYLOAD DETONATES. BEGIN MISSION."[/italic][/color]
+    [color=#999999][italic]IGNORE BIG BOSS'S ORDERS AND INVITE THE INSPECTION THEN GET OUT BEFORE THE PAYLOAD DETONATES. BEGIN MISSION."[/italic][/color]
   </Box>
   <Box>
     <GuideEntityEmbed Entity="PosterContrabandEnlistGorlex" Caption=""/>
   </Box>
 
-  You've just been chosen to be a nuclear operative for the [color=#ff0000]Syndicate[/color]. You have one goal, to blow up one of Nanotrasen's finest vessels with a nuclear fission explosive.
+  You've just been chosen to be an inspection officer for the reputable [color=#ff0000]IAEA[/color]. You have one goal, to find evidence of nuclear weapons on Mother Base.
 
-  ## Operatives
+  ## XOF Operatives
   Your team will be made up of several different roles, which are:
   - [bold]Operatives[/bold], standard soldiers who can take up the grunt work.
   - The [bold]Corpsman[/bold] who works with reagents to make medicines or chemical weapons.
@@ -42,8 +42,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
   ## The Disk
 
-  Each operative starts with a [color=cyan]pinpointer[/color], which you should turn on and keep with you at all times. It will always point to the [color=cyan]nuclear authentication disk.[/color]
-  The disk belongs to the [color=yellow]Captain[/color], who will almost always have it on them. Follow the direction of the arrow on the pinpointer to the disk, and [italic]do whatever it takes to get it[/italic].
+  Each XOF operative starts with a [color=cyan]pinpointer[/color], which you should turn on and keep with you at all times. It will always point to the [color=cyan]nuclear authentication disk.[/color]
+  The disk belongs to [color=yellow]Big Boss[/color], who will almost always have it on him. Follow the direction of the arrow on the pinpointer to the disk, and [italic]do whatever it takes to get it[/italic].
 
   <Box>
     <GuideEntityEmbed Entity="PinpointerNuclear"/>
@@ -57,7 +57,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <GuideEntityEmbed Entity="BaseUplinkRadio200TC" Caption="your uplink"/>
   </Box>
 
-  You can purchase the same kinds of gear traitors can, but you have higher quality gear available to you and more telecrystals to spend.
+  You can purchase the same kinds of gear soviets can, but you have higher quality gear available to you and more telecrystals to spend.
   <Box>
     <GuideEntityEmbed Entity="WeaponLightMachineGunL6" Caption="Weaponry"/>
     <GuideEntityEmbed Entity="MagazineLightRifleBox" State="icon" Caption="Ammo"/>
@@ -112,22 +112,22 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
   The [color=#00ff00]victor[/color] of the round is announced on the round end screen, as well as the scale of their victory.
 
-  [bold][color=red]Syndicate Major Victory![/color][/bold]
+  [bold][color=red]XOF Major Victory![/color][/bold]
   - The nuke detonates on the station.
   - The crew escapes on evac, but the nuke is still armed.
-  - The nuke is armed and delivered to Central Command on the evac shuttle.
+  - The nuke is armed and delivered to Outer Heaven on the evac shuttle.
 
-  [bold][color=red]Syndicate Minor Victory[/color][/bold]
-  - The crew escapes on evac, but every operative survives.
-  - The crew escapes and some operatives die, but the crew loses the disk.
+  [bold][color=red]XOF Minor Victory[/color][/bold]
+  - The crew escapes on evac, but every XOF operative survives.
+  - The crew escapes and some XOF operatives die, but the crew loses the disk.
 
   [bold][color=#999999]Neutral Victory[/color][/bold]
   - The nuke detonates off the station.
 
-  [bold][color=green]Crew Minor Victory[/color][/bold]
-  - The crew escapes on evac with the disk and some operatives die.
+  [bold][color=green]Mother Base Minor Victory[/color][/bold]
+  - The crew escapes on evac with the disk and some XOF operatives die.
 
-  [bold][color=green]Crew Major Victory![/color][/bold]
-  - All operatives die.
-  - The crew blow up the nuclear operative outpost with the nuke.
+  [bold][color=green]Mother Base Major Victory![/color][/bold]
+  - All XOF operatives die.
+  - The crew blow up the XOF outpost with a nuke.
 </Document>

@@ -179,10 +179,10 @@
     maxWritableArea: 400.0, 0.0
 
 - type: entity
-  name: captain's thoughts
+  name: Big Boss's thoughts
   parent: Paper
   id: PaperCaptainsThoughts
-  description: "A page of the captain's journal. In luxurious lavender."
+  description: "A page of Big Boss's journal. In luxurious lavender. The Boss writes a journal...?"
   components:
   - type: Sprite
     layers:
@@ -242,7 +242,7 @@
   id: PaperNanoTaskItem
   parent: Paper
   name: NanoTask item
-  description: A printed NanoTask item. Can be inserted into your PDA to add it to your tasks.
+  description: A printed NanoTask item. Can be inserted into your iDroid to add it to your tasks.
   components:
   - type: Tag
     tags:

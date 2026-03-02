@@ -96,8 +96,8 @@
 - type: entity
   parent: [ClothingBackpackDuffel, BaseCommandContraband]
   id: ClothingBackpackDuffelCaptain
-  name: captain's duffel bag
-  description: A large duffel bag for holding extra captainly goods.
+  name: Big Boss's duffel bag
+  description: A large duffel bag for holding extra sneaky goods.
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/captain.rsi

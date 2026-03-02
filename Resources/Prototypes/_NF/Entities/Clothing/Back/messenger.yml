@@ -35,8 +35,8 @@
 - type: entity
   parent: [ BaseCommandContraband , ClothingBackpackMessengerBase ]
   id: ClothingBackpackMessengerCaptain
-  name: captain's messenger bag
-  description: A robust bag made exclusively for Nanotrasen officers.
+  name: Big Boss's messenger bag
+  description: A robust bag made exclusively for Big Boss. What kind of bitch uses a messenger bag...
   components:
   - type: Sprite
     layers:
@@ -71,8 +71,8 @@
 - type: entity
   parent: [ BaseCentcommContraband , ClothingBackpackMessengerBase ]
   id: ClothingBackpackMessengerCentcomm
-  name: centcomm messenger bag
-  description: A robust bag made for Nanotrasen high-ranking officials.
+  name: Patriots messenger bag
+  description: A robust bag made for the Patriots.
   components:
   - type: Sprite
     layers:

@@ -52,8 +52,8 @@ nuke-user-interface-second-status-cooldown-time = WAIT: {$time}
 nuke-label-nanotrasen = NT-{$serial}
 
 # do you even need this one? It's more funnier to say that
-# the Syndicate stole a NT nuke
-nuke-label-syndicate = SYN-{$serial}
+# the XOF stole a NT nuke
+nuke-label-syndicate = XOF-{$serial}
 
 # Codes
 nuke-codes-message = [color=red]TOP SECRET![/color]

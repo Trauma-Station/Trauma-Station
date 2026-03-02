@@ -598,8 +598,8 @@
 - type: entity
   parent: [ClothingOuterHardsuitBase, BaseCommandContraband]
   id: ClothingOuterHardsuitCap
-  name: captain's parade hardsuit # Goob edit
-  description: A formal and slightly armored hardsuit, made for the station's captain. # Goob edit
+  name: Big Boss's parade hardsuit # Goob edit
+  description: A formal and slightly armored hardsuit, made specifically for Big Boss. # Goob edit
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/capspace.rsi
@@ -769,11 +769,11 @@
   - type: StealTarget
     stealGroup: ClothingOuterHardsuitRd
 
-#Head of Security's Hardsuit, heavily edited by goob
+#Executive Officer's Hardsuit, heavily edited by goob
 - type: entity
   parent: [ClothingOuterHardsuitBase, BaseCommandContraband]
   id: ClothingOuterHardsuitSecurityRed
-  name: head of security's hardsuit
+  name: executive officer's hardsuit
   description: Lighter and more protective than the standard security hardsuit, but not by much.
   components:
   - type: Sprite

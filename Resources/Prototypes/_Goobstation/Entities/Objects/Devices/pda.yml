@@ -21,8 +21,8 @@
 - type: entity
   parent: AdminPDA
   id: ChronoPDA
-  name: futuristic PDA
-  description: A powerful quantum computer disguised as a regular pda for disguise.
+  name: futuristic iDroid
+  description: A powerful quantum computer disguised as a regular iDroid for disguise.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Devices/pda.rsi
@@ -48,7 +48,7 @@
 - type: entity
   parent: AdminPDA
   id: GmanPDA
-  name: strange PDA
+  name: strange iDroid
   description: Your mind can't quite comprehend this.
   components:
   - type: Sprite
@@ -75,7 +75,7 @@
 - type: entity
   parent: SalvagePDA
   id: HelldiverPDA
-  name: salvage diver PDA
+  name: salvage diver iDroid
   description: Smells like corpses of insects and androids.
   components:
   - type: Sprite
@@ -100,7 +100,7 @@
 - type: entity
   parent: CentcomPDA
   id: HecuPDA
-  name: HECU PDA
+  name: HECU iDroid
   description: Smells of gunpowder.
   components:
   - type: Appearance
@@ -121,7 +121,7 @@
 - type: entity
   parent: CentcomPDA
   id: DeathsquadPDA
-  name: deathsquad PDA
+  name: deathsquad iDroid
   description: Rip and tear until it is done.
   components:
   - type: Appearance
@@ -146,7 +146,7 @@
 - type: entity
   parent: CentcomPDA
   id: NanotrasenRepresentativePDA
-  name: nanotrasen representative's PDA
+  name: nanotrasen representative's iDroid
   description: The devil's in the details.
   components:
   - type: Pda
@@ -155,7 +155,7 @@
 - type: entity
   parent: CentcomPDA
   id: NavyCaptainPDA
-  name: navy captain's PDA
+  name: navy captain's iDroid
   description: The devil's in the details.
   components:
   - type: Pda
@@ -180,7 +180,7 @@
 - type: entity
   parent: NavyCaptainPDA
   id: NavyOfficerPDA
-  name: navy officer's PDA
+  name: navy officer's iDroid
   components:
   - type: Pda
     id: CentcomIDCardNavyOfficer
@@ -188,7 +188,7 @@
 - type: entity
   parent: NavyCaptainPDA
   id: SpecialOperationsOfficerPDA
-  name: special operations officer's PDA
+  name: special operations officer's iDroid
   components:
   - type: Pda
     id: CentcomIDCardSpecialOperationsOfficer
@@ -196,7 +196,7 @@
 - type: entity
   parent: NavyCaptainPDA
   id: DiplomatPDA
-  name: diplomat's PDA
+  name: diplomat's iDroid
   components:
   - type: Pda
     id: CentcomIDCardDiplomat
@@ -204,7 +204,7 @@
 - type: entity
   parent: NavyCaptainPDA
   id: InspectorPDA
-  name: auditor's PDA
+  name: auditor's iDroid
   components:
   - type: Pda
     id: CentcomIDCardInspector
@@ -212,7 +212,7 @@
 - type: entity
   parent: SyndiPDA
   id: SyndiPDANukie
-  name: syndicate PDA
+  name: XOF iDroid
   description: Ok, time to be a productive member of- oh cool I'm a bad guy time to kill people!
   components:
   - type: Pda
@@ -221,8 +221,8 @@
 - type: entity
   parent: NavyCaptainPDA
   id: HighCommandPDA
-  name: high commander PDA
-  description: An ordinary syndicate PDA, adorned with gilded symbols. It's owner is clearly of a higher standing.
+  name: Skull Face iDroid
+  description: An ordinary XOF iDroid, adorned with gilded symbols. It's owner is clearly of a higher standing.
   components:
   - type: Appearance
     appearanceDataInit:
@@ -254,7 +254,7 @@
 - type: entity
   parent: BaseMedicalPDA
   id: VirologistPDA
-  name: virology PDA
+  name: virology iDroid
   description: You're not sure if touching it is safe.
   components:
   - type: Pda
@@ -274,8 +274,8 @@
 - type: entity
   parent: ClownPDA
   id: SecurityClownPDA
-  name: security clown PDA
-  description: Who has a pink PDA in security?
+  name: security clown iDroid
+  description: Who has a pink iDroid in security?
   components:
   - type: Pda
     id: SecurityClownIDCard
@@ -283,7 +283,7 @@
 - type: entity
   parent: JanitorPDA
   id: CommandMaidPDA
-  name: command maid PDA
+  name: command maid iDroid
   components:
   - type: Pda
     id: CommandMaidIDCard
@@ -291,7 +291,7 @@
 - type: entity
   parent: MusicianPDA
   id: PartyMakerPDA
-  name: party maker PDA
+  name: party maker iDroid
   description: The best helper to make a party.
   components:
   - type: Pda
@@ -300,7 +300,7 @@
 - type: entity
   parent: BasePDA
   id: RoboticistPDA
-  name: roboticist PDA
+  name: roboticist iDroid
   description: It's covered with failed ambitions.
   components:
   - type: Pda
@@ -319,8 +319,8 @@
 - type: entity
   parent: BasePDA
   id: RadioHostPDA
-  name: radio host PDA
-  description: You're listening to the smooth sounds of 145.9 FM.
+  name: radio host iDroid
+  description: You're listening to The Man Who Sold The World on repeat.
   components:
   - type: Pda
     id: RadioHostIDCard

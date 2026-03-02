@@ -239,7 +239,7 @@
   - type: StaminaResistance
     damageCoefficient: 0.6
 
-# Head of Security's experimental voidsuit
+# Executive Officer's experimental voidsuit
 - type: entity
   parent: ClothingOuterHardsuitSecurityRed
   id: ClothingOuterHardsuitHeadOfSecurityExperimental
@@ -345,8 +345,8 @@
 - type: entity
   parent: [ClothingOuterVoidsuitSecurity, BaseSecurityContraband]
   id: ClothingOuterHardsuitDetective
-  name: detective hardsuit
-  description: A hardsuit custom-made for the Detective. It has a strong smell of alcohol and cigarettes.
+  name: interrogator hardsuit
+  description: A hardsuit custom-made for the Interrogator. It has a strong smell of gunpowder.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/detective.rsi

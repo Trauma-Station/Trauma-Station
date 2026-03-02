@@ -326,7 +326,7 @@
   parent: VendingMachine
   id: VendingMachineCart
   name: PTech
-  description: PTech vending! Providing a ROBUST selection of PDAs, cartridges, and anything else a dull paper pusher needs!
+  description: PTech vending! Providing a ROBUST selection of iDroids, cartridges, and anything else a dull paper pusher needs!
   components:
   - type: VendingMachine
     pack: PTechInventory
@@ -1946,7 +1946,7 @@
   parent: VendingMachine
   id: VendingMachineDetDrobe
   name: DetDrobe
-  description: A machine for all your detective needs, as long as you need clothes.
+  description: A machine for all your interrogation needs, as long as you need clothes.
   components:
   - type: VendingMachine
     pack: DetDrobeInventory

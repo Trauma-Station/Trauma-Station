@@ -127,8 +127,8 @@
 - type: entity
   parent: [ClothingMaskGasAtmos, BaseCommandContraband]
   id: ClothingMaskGasCaptain
-  name: captain's gas mask
-  description: Nanotrasen cut corners and repainted a spare atmospheric gas mask, but don't tell anyone.
+  name: Big Boss's gas mask
+  description: The most luxurious gas mask hand-crafted for Big Boss. Safe from airborne parasite eggs.
   components:
   - type: Sprite
     sprite: Clothing/Mask/gascaptain.rsi
@@ -142,7 +142,7 @@
 - type: entity
   parent: [ ClothingMaskGasAtmos, BaseCentcommContraband ]
   id: ClothingMaskGasCentcom
-  name: CentComm gas mask
+  name: Patriots gas mask
   description: Oooh, gold and green. Fancy! This should help as you sit in your office.
   components:
   - type: Sprite

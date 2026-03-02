@@ -58,7 +58,7 @@
   parent: [ClothingUniformJumpsuitResonant, BaseMajorContraband]
   id: ClothingUniformJumpsuitWestern
   name: authentic cowboy's jumpsuit
-  description: Let's show the head of security how we used to do things out west.
+  description: Let's show the executive officer how we used to do things out west.
   components:
   - type: Armor
     coverage:
@@ -108,7 +108,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitCasualCentcom
-  name: casual centcom jumpsuit
+  name: casual patriots jumpsuit
   description: Paperwork's tough.
   components:
   - type: Sprite
@@ -120,7 +120,7 @@
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitCasualCommand
   name: casual command jumpsuit
-  description: Wait, where's my PDA?.
+  description: Wait, where's my iDroid?
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/casualcommand.rsi
@@ -164,7 +164,7 @@
   parent: [ClothingUniformBase, BaseCentcommContraband]
   id: ClothingUniformJumpsuitNavyGold
   name: navy officer's jumpsuit
-  description: A suit worn by high-ranking Central Command members. The rest is classified.
+  description: A suit worn by high-ranking Patriots members. The rest is classified.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/navy_gold.rsi
@@ -212,7 +212,7 @@
   parent: ClothingUniformJumpsuitNavyGold
   id: ClothingUniformJumpsuitDiplomat
   name: diplomat's jumpsuit
-  description: A suit worn by diplomacy focused Central Command workers.
+  description: A suit worn by diplomacy focused Patriots workers.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/diplomat.rsi
@@ -276,8 +276,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
   id: ClothingUniformJumpsuitHoSSummer
-  name: head of security's summer shirt
-  description: The head of security's custom-commissioned summer outfit, for when chasing tiders gets hot.
+  name: executive officer's summer shirt
+  description: The XO's custom-commissioned summer outfit, for when chasing tiders gets hot.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/casualshirt_hos.rsi
@@ -309,8 +309,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
   id: ClothingUniformJumpsuitCaptainSummer
-  name: captain's summer shirt
-  description: The captain's custom-commissioned summer outfit, for when you've been in the green for a while.
+  name: Big Boss's summer shirt
+  description: Big Boss's custom-commissioned summer outfit, for when you've been in the green for a while.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/casualshirt_captain.rsi

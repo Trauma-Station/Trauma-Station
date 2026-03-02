@@ -104,12 +104,12 @@ The [color=#8b0000]Delta Alert[/color] will appear in situations where the stati
   </ColorBox>
   <ColorBox>
     <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="10">
-      Attention! Station alert level is now epsilon! Central Command has ordered the Epsilon security level on the station. Consider all contracts terminated.
+      Attention! Station alert level is now epsilon! The Patriots have ordered the Epsilon security level on the station. Consider all contracts terminated.
     </Box>
   </ColorBox>
 </Table>
 
-The [color=#9400d3]Epsilon Alert[/color] is only set when Central Command intervenes on the station for whatever reason.
+The [color=#9400d3]Epsilon Alert[/color] is only set when the Patriots intervene on the station for whatever reason.
 
 <Table Columns="1">
   <ColorBox Color="#db7093">
@@ -119,7 +119,7 @@ The [color=#9400d3]Epsilon Alert[/color] is only set when Central Command interv
   </ColorBox>
   <ColorBox>
     <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="10">
-      Attention! Station alert level is now gamma! Central Command has ordered the Gamma security level on the station. Security is to have weapons at all times, and all civilians are to immediately seek their nearest head for transportation to a secure location.
+      Attention! Station alert level is now gamma! The Patriots have ordered the Gamma security level on the station. Security is to have weapons at all times, and all civilians are to immediately seek their nearest head for transportation to a secure location.
     </Box>
   </ColorBox>
 </Table>

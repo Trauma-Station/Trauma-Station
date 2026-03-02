@@ -18,16 +18,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 id-card-access-level-command = Command
-id-card-access-level-captain = Captain
+id-card-access-level-captain = Big Boss
 id-card-access-level-head-of-personnel = Head of Personnel
 id-card-access-level-cryogenics = Cryogenics
 id-card-access-level-emergency-shuttle-repeal = E.Shuttle Repeal All
 
-id-card-access-level-head-of-security = Head of Security
+id-card-access-level-head-of-security = Executive Officer
 id-card-access-level-security = Security
 id-card-access-level-armory = Armory
 id-card-access-level-brig = Brig
-id-card-access-level-detective = Detective
+id-card-access-level-detective = Interrogator
 id-card-access-level-genpop-enter = Enter Genpop
 id-card-access-level-genpop-leave = Leave Genpop
 
@@ -60,10 +60,10 @@ id-card-access-level-maintenance = Maintenance
 
 id-card-access-level-external = External
 
-id-card-access-level-nuclear-operative = Nuclear Operative
-id-card-access-level-syndicate-agent = Syndicate Agent
+id-card-access-level-nuclear-operative = XOF
+id-card-access-level-syndicate-agent = Soviet
 
-id-card-access-level-central-command = Central Command
+id-card-access-level-central-command = Patriots
 
 id-card-access-level-wizard = Wizard
 

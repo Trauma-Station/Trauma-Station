@@ -140,7 +140,7 @@
     - MobHumanSecurityOfficerSuit
 
 - type: entity
-  name: Head of Security ModSuit Spawner
+  name: Executive Officer ModSuit Spawner
   id: SpawnMobHumanHosModSuit
   parent: MarkerBase
   suffix: DEBUG
@@ -170,7 +170,7 @@
     - MobHumanSecurityOfficerModSuit
 
 - type: entity
-  name: Head of Security Suit Spawner
+  name: Executive Officer Suit Spawner
   id: SpawnMobHumanHoSSuit
   parent: MarkerBase
   suffix: DEBUG
@@ -275,7 +275,7 @@
     - MobHumanSecurityOfficerBasicArmorHelmet
 
 - type: entity
-  name: Head of Security Spawner
+  name: Executive Officer Spawner
   id: SpawnMobHumanHos
   parent: MarkerBase
   suffix: DEBUG

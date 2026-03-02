@@ -11,20 +11,20 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-ghost-role-information-nukie-reinforcement-name = Nuclear Operative
-ghost-role-information-nukie-reinforcement-description = The nuclear operatives need reinforcements. You, a reserve agent, will help them.
-ghost-role-information-nukie-reinforcement-rules = You are a [color=red][bold]Team Antagonist[/bold][/color] with the nuclear operatives who summoned you.
+ghost-role-information-nukie-reinforcement-name = XOF Soldier
+ghost-role-information-nukie-reinforcement-description = XOF needs reinforcements. You, a reserve agent, will help them.
+ghost-role-information-nukie-reinforcement-rules = You are a [color=red][bold]Team Antagonist[/bold][/color] with the XOF soldiers who summoned you.
 
-ghost-role-information-SyndiRoach-name = SyndiRoach
-ghost-role-information-SyndiRoach-description = You're the faithful trained pet of nuclear operatives with a microbomb. Serve your master to the death!
+ghost-role-information-SyndiRoach-name = CipheRoach
+ghost-role-information-SyndiRoach-description = You're the faithful trained pet of XOF soldiers with a microbomb. Serve your master to the death!
 ghost-role-information-SyndiRoach-rules = You are a [color=red][bold]Team Antagonist[/bold][/color] with the agent who summoned you.
 
 ghost-role-information-skibidi-toilet-name = Skibidi Toilet
 ghost-role-information-skibidi-toilet-description = Unalive people with your skibidi ohio rizz.
 ghost-role-information-skibidi-toilet-rules = You are a [color=red][bold]Antagonist[/bold][/color] with the objective of unaliving as many ohioans as you can.
 
-ghost-role-information-Hecu-name = HECU Operative
-ghost-role-information-Hecu-description = Central Command needs something done.
+ghost-role-information-Hecu-name = Cipher Operative
+ghost-role-information-Hecu-description = The Patriots need something done.
 ghost-role-information-Hecu-rules = You are required to obey orders given by your superior, you are effectively their [color=#6495ed][bold]Familiar[/bold][/color].
 
 ghost-role-information-lootbug-name = LootBug
@@ -39,7 +39,7 @@ ghost-role-information-huborg-description = You are a disgusting abomination of 
 ghost-role-information-c4-name = Composition C-4
 ghost-role-information-c4-description = Assist your user with bombing things.
 
-ghost-role-information-derelict-cyborg-syndicate-name = Derelict Syndicate Cyborg
+ghost-role-information-derelict-cyborg-syndicate-name = Derelict XOF Assault Cyborg
 ghost-role-information-derelict-cyborg-syndicate-description = You were lost during an assault on a station. After years of exposure to ion storms you find yourself near a space station.
 
 ghost-role-information-navy-captain-name = Navy Captain
@@ -51,17 +51,17 @@ ghost-role-information-special-operations-officer-description = Send, brief, and
 ghost-role-information-special-operations-officer-rules = Bring the Nanotrasen Representative in alive, the rest are just collateral. [color=#yellow][bold]Navy Captain[/bold][/color] orders may change this.
 
 ghost-role-information-navy-officer-name = Navy Officer
-ghost-role-information-navy-officer-description = Answer faxes and radio communications directed at Central Command. Perform investigations on the station and it's crew.
+ghost-role-information-navy-officer-description = Answer faxes and radio communications directed at the Patriots. Perform investigations on the station and it's crew.
 ghost-role-information-navy-officer-rules = Follow the orders of the [color=#yellow][bold]Navy Captain[/bold][/color]. In the absence of one, make your own judgements.
 
 ghost-role-information-navy-officer-undercover-name = Undercover Navy officer
 ghost-role-information-navy-officer-undercover-description = Complete your assigned tasks and terminate the given targets. Good luck.
-ghost-role-information-navy-officer-undercover-rules = Follow the orders of the [color=#yellow][bold]Navy Captain[/bold][/color], or other Central Command official.
+ghost-role-information-navy-officer-undercover-rules = Follow the orders of the [color=#yellow][bold]Navy Captain[/bold][/color], or other Patriots officials.
 
 ghost-role-information-diplomat-name = Diplomat
-ghost-role-information-diplomat-description = Represent Central Command, managing relationships with other factions aboard the station. Cleanup the issues the captain has likely caused.
+ghost-role-information-diplomat-description = Represent the Patriots, managing relationships with other factions aboard the station. Cleanup the issues the captain has likely caused.
 
-ghost-role-information-inspector-name = Central Command Auditor
+ghost-role-information-inspector-name = Patriots Auditor
 ghost-role-information-inspector-description = Perform inspections on the stations assets and its crew. Probably die in a horrific accident and get a deathsquad called.
 
 ghost-role-information-sentient-shark-name = Sentient Sharkminnow
@@ -78,12 +78,12 @@ ghost-role-information-Gman-description = The right man in the wrong place can m
 ghost-role-information-Gman-rules = You are beholden to no rules or boundaries. Death cannot hold you, and neither can Nanotrasen.
 
 # interns
-ghost-role-intern-name = CentComm intern
-ghost-role-nerd-intern-name = CentComm Nerd Intern
-ghost-role-lead-intern-name = CentComm Lead Intern
-ghost-role-intern-desc = You are a CentComm intern, you're underpaid, hungry, with a large student debt to pay off, but you have no other options so you better listen up!
-ghost-role-intern-rules = Follow the orders given you by the [color=yellow][bold]NanoTrasen Representative[/bold][/color] & CentComm, protect command, listen to the Lead intern.
-ghost-role-lead-intern-rules = Follow the orders given you by the [color=yellow][bold]NanoTrasen Representative[/bold][/color] & CentComm, protect command, give orders to other interns.
+ghost-role-intern-name = Patriots intern
+ghost-role-nerd-intern-name = Patriots Nerd Intern
+ghost-role-lead-intern-name = Patriots Lead Intern
+ghost-role-intern-desc = You are a Patriots intern, you're underpaid, hungry, with a large student debt to pay off, but you have no other options so you better listen up!
+ghost-role-intern-rules = Follow the orders given you by the [color=yellow][bold]NanoTrasen Representative[/bold][/color] & Patriots, protect command, listen to the Lead intern.
+ghost-role-lead-intern-rules = Follow the orders given you by the [color=yellow][bold]NanoTrasen Representative[/bold][/color] & Patriots, protect command, give orders to other interns.
 
 # cargo bingle
 ghost-role-cargo-bingle-name = Cargo bingle
@@ -127,7 +127,7 @@ ghost-role-information-space-ninja-name-token = Space Ninja (Token)
 ghost-role-information-space-dragon-name-token = Space Dragon (Token)
 ghost-role-information-revenant-name-token = Revenant (Token)
 ghost-role-information-loneop-name-token = Lone Operative (Token)
-ghost-role-information-derelict-cyborg-syndicate-name-token = Derelict Assault Cyborg (Token)
+ghost-role-information-derelict-cyborg-syndicate-name-token = Derelict XOF Assault Cyborg (Token)
 ghost-role-information-bingle-name-token = Bingle (Token)
 blob-carrier-role-name-token = Blob Carrier (Token)
 abductor-lone-ghost-role-name-token = Lone Abductor (Token)
@@ -158,17 +158,17 @@ Singuloth-Knight-role-greeting = Thou art a [color=#880808]Singuloth Knight[/col
 objective-issuer-lord-singuloth = [color=#320022]Lord Singuloth[/color]
 
 ghost-role-information-dark-lord-name = Dark Lord
-ghost-role-information-dark-lord-description = A syndicate agent themed after a sith lord, use your lightning powers and energy sword to complete your objectives!
-dark-lord-role-greeting = You are a [color=#880808]Dark Lord[/color] sent by the syndicate to this station to do their dirty work, check your character sheet for your objectives.
+ghost-role-information-dark-lord-description = A soviet agent themed after a sith lord, use your lightning powers and energy sword to complete your objectives!
+dark-lord-role-greeting = You are a [color=#880808]Dark Lord[/color] sent by the Soviet Union to this station to do their dirty work, check your character sheet for your objectives.
 
 ghost-role-information-chosen-one-name = The Chosen One
 ghost-role-information-chosen-one-description = A special agent sent to the station by Nanotrasen to defeat a dark lord.
-chosen-one-role-greeting = You are the [color=#0087FF]Chosen One[/color], you have been sent to this station to defeat a Dark Lord sent by the syndicate, check your character sheet for your objectives.
+chosen-one-role-greeting = You are the [color=#0087FF]Chosen One[/color], you have been sent to this station to defeat a Dark Lord sent by the Soviet Union, check your character sheet for your objectives.
 objective-condition-dark-lord-kill-title = Ensure Dark Lord {$targetName} dies.
 
 ghost-role-information-mime-Assassin-name = Mime Assassin
 ghost-role-information-mime-Assassin-description = An assassin that uses mime clothes and favors silent kills, their name? well they probably can't tell you, but thats what makes then so good!
-mime-Assassin-role-greeting = You are a [color=#880808]Mime Assassin[/color], you have been sent to this station by the syndicate to kill some members of command that they need taken out of the equation, the syndicate have supplied you with some tools to get the job done, quietly... check your character sheet for your objectives, and don't get caught.
+mime-Assassin-role-greeting = You are a [color=#880808]Mime Assassin[/color], you have been sent to this station by the Soviet Union to kill some members of command that they need taken out of the equation, the Soviets have supplied you with some tools to get the job done, quietly... check your character sheet for your objectives, and don't get caught.
 
 ghost-role-information-dark-priest-name = Dark Priest
 ghost-role-information-dark-priest-description = An agent of the dark gods, sent to kill someone, protect someone and hire someone who has roused their interest as their apprentice, Carries the "blessing of the reaper".
@@ -185,7 +185,7 @@ ghost-role-information-clown-goblin-description = A terrible creature, born out 
 
 ghost-role-information-slasher-token = The Slasher (Token)
 
-ghost-role-information-contractor-name = Syndicate Contractor
-ghost-role-information-contractor-token = Syndicate Contractor (Token)
+ghost-role-information-contractor-name = Soviet Contractor
+ghost-role-information-contractor-token = Soviet Contractor (Token)
 ghost-role-information-contractor-description = GET DA... tider..?
-contractor-role-greeting = You are a [color=#611b2b]Syndicate Contractor[/color], a bounty hunter, you are tasked with retreving targets from the station, dead or alive.
+contractor-role-greeting = You are a [color=#611b2b]Soviet Contractor[/color], a bounty hunter, you are tasked with retreving targets from the station, dead or alive.

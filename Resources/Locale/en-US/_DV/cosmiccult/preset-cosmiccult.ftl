@@ -51,8 +51,8 @@ cosmiccult-summary-neutral = The cult has suffered losses, but they will recover
 cosmiccult-summary-crewminor = Most cosmic cultists were captured.
 cosmiccult-summary-crewmajor = All cosmic cultists were captured!
 
-cosmiccult-elimination-shuttle-call = Based on scans from our long-range sensors, the Noöspheric anomaly has subsided. We thank you for your prudence. An emergency shuttle has been automatically called to the station. Please deliver any infected personnel to CentComm for processing. ETA: {$time} {$units}.
-cosmiccult-elimination-announcement = Based on scans from our long-range sensors, the Noöspheric anomaly has subsided. We thank you for your prudence. An emergency shuttle is already inbound. Please deliver any infected personnel to CentComm for processing.
+cosmiccult-elimination-shuttle-call = Based on scans from our long-range sensors, the Noöspheric anomaly has subsided. We thank you for your prudence. An emergency shuttle has been automatically called to the station. Please deliver any infected personnel to Quarantine Platform for processing. ETA: {$time} {$units}.
+cosmiccult-elimination-announcement = Based on scans from our long-range sensors, the Noöspheric anomaly has subsided. We thank you for your prudence. An emergency shuttle is already inbound. Please deliver any infected personnel to Quarantine Platform for processing.
 
 
 ## BRIEFINGS

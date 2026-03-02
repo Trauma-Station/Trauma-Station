@@ -113,7 +113,7 @@
 
 - type: entity
   id: TowelColorCentcom
-  name: centcom towel
+  name: Patriots towel
   parent: BaseTowel
   components:
   - type: Sprite

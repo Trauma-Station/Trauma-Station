@@ -450,7 +450,7 @@
 - type: entity
   parent: ClothingHandsGlovesEnviroglovesHoP
   id: ClothingHandsGlovesEnviroglovesCaptain
-  name: captain's envirogloves
+  name: Big Boss's envirogloves
   description: Covers up those scandalous, bony hands in a fancy way.
   components:
   - type: FingerprintMask

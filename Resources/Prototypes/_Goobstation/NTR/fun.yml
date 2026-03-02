@@ -144,7 +144,7 @@
   parent: SoapGold
   id: SoapCentcomm
   description: They clearly should stop with the green theme on everything man. Smells like lube.
-  name: centcomm soap
+  name: patriots soap
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Fun/soap.rsi

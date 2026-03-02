@@ -126,7 +126,7 @@
 - type: entity
   id: LockerCaptain
   parent: LockerBaseSecure
-  name: captain's locker
+  name: Big Boss's locker
   components:
   - type: Appearance
   - type: EntityStorageVisuals
@@ -383,7 +383,7 @@
 - type: entity
   id: LockerHeadOfSecurity
   parent: LockerBaseSecure
-  name: head of security's locker
+  name: executive officer's locker
   components:
   - type: Appearance
   - type: EntityStorageVisuals
@@ -580,7 +580,7 @@
 - type: entity
   id: LockerDetective
   parent: LockerBooze
-  name: detective's cabinet
+  name: interrogator's cabinet
   description: Usually cold and empty... like your heart.
   components:
   - type: AccessReader

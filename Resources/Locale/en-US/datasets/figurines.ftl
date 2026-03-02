@@ -117,17 +117,17 @@ figurines-scientist-6 = The anomaly exploded!
 
 # Security
 
-figurines-hos-1 = Space law? What?
-figurines-hos-2 = Shoot the clown.
-figurines-hos-3 = Yes, I shot the clown. No, I don't regret it.
-figurines-hos-4 = Clown is now KOS.
-figurines-hos-5 = Armory is now open to the public!
+figurines-hos-1 = Why are we still here? Just to suffer?
+figurines-hos-2 = It's not fair, make them give it back!
+figurines-hos-3 = Boss, she works for Cipher!
+figurines-hos-4 = All the limbs I've lost, the comrades I've lost...
+figurines-hos-5 = It's like they're all still there!
 
-figurines-detective-1 = The butler did it.
-figurines-detective-2 = I need some whiskey after this.
-figurines-detective-3 = Chameleon fibers? How did a chameleon get in here?
-figurines-detective-4 = Go go gadget!
-figurines-detective-5 = Of course I checked the door logs!
+figurines-detective-1 = Let the legend come back to life!
+figurines-detective-2 = Pretty... good...
+figurines-detective-3 = This reload time is exhilirating!
+figurines-detective-4 = This isn't over Snake!
+figurines-detective-5 = If you aren't The Boss, then die!
 
 figurines-security-1 = I am the law!
 figurines-security-2 = You have violated article 1984.
@@ -270,8 +270,8 @@ figurines-passenger-5 = How much for a toolbelt?
 
 # Silicon
 
-figurines-AI-1 = I'm sorry, Captain. I'm afraid I can't do that.
-figurines-AI-2 = Security, there is a crime in progress.
+figurines-AI-1 = I'm defecting to the Soviet Union.
+figurines-AI-2 = Snake, is that you?
 figurines-AI-3 = 01100100 01101001 01100101 00100000 01101101 01100101 01100001 01110100
 figurines-AI-4 = I am not malfunctioning.
 figurines-AI-5 = Try to change my laws and see what happens.
@@ -281,10 +281,10 @@ figurines-AI-7 = { law-nutimov-4 }
 # Antagonists
 
 figurines-footsoldier-1 = I'm an evil boy. Less boy every day, more evil every day.
-figurines-footsoldier-2 = Who will you choose? Them or us? Us or them?
-figurines-footsoldier-3 = Glory to the Syndicate!
-figurines-footsoldier-4 = Down with Nanotrasen!
-figurines-footsoldier-5 = I'd rather die than join Nanotrasen.
+figurines-footsoldier-2 = Loyalty to the mission, or loyalty to me?
+figurines-footsoldier-3 = Glory to the Soviet Union!
+figurines-footsoldier-4 = Down with the West!
+figurines-footsoldier-5 = I'd rather die than join the Diamond Dogs.
 
 figurines-holoclown-1 = I'm helping my older brother.
 figurines-holoclown-2 = Hello, officer!
@@ -298,15 +298,15 @@ figurines-nukie-1 = I got the disk!
 figurines-nukie-2 = Whiskey, Echo, Whiskey.
 figurines-nukie-3 = The nuke makes boom.
 figurines-nukie-4 = What's the code?
-figurines-nukie-5 = Commander...? ...That's a balloon...
+figurines-nukie-5 = Major, I'm burning up!!!
 
 figurines-nukie-commander-1 = GET DAT FUKKEN DISK!
 figurines-nukie-commander-2 = Fuckin' flukies.
-figurines-nukie-commander-3 = The Syndicate sends its regards.
+figurines-nukie-commander-3 = XOF sends its regards.
 figurines-nukie-commander-4 = Failure is not an option.
 figurines-nukie-commander-5 = Whoops.
 
-figurines-nukie-elite-1 = Not a word in Nanotrasen.
+figurines-nukie-elite-1 = No time for anesthetic!
 figurines-nukie-elite-2 = THAT'S A KEG!
 figurines-nukie-elite-3 = Guys, are you alive?
 figurines-nukie-elite-4 = Breach and clear!

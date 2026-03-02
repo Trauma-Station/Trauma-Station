@@ -196,7 +196,7 @@
 - type: entity
   parent: [FoodSnackLollypopWrappedBase, BaseCentcommContraband]
   id: FoodSnackLollypopWrappedBaseCentcomm
-  name: wrapped centcomm lollypop
+  name: wrapped patriots lollypop
   description: A highly expensive lollypop. It's still in it's gold wrapper.
   abstract: true
   components:
@@ -216,7 +216,7 @@
 - type: entity
   parent: FoodSnackLollypopBase
   id: FoodSnackLollypopBaseCentcomm
-  name: centcomm lollypop
+  name: Patriots lollypop
   description: An extremely expensive tasting lollypop. Can hold an ungodly amount of chemicals.
   abstract: true
   components:
@@ -356,7 +356,7 @@
 - type: entity
   parent: FoodSnackLollypopWrappedBaseNanotrasen
   id: FoodSnackLollypopWrappedCaptain
-  name: wrapped captains' lollypop
+  name: wrapped Big Boss' lollypop
   description: An extravagant lollypop. It's still in the wrapper
   components:
   - type: Tag
@@ -372,8 +372,8 @@
 - type: entity
   parent: FoodSnackLollypopBaseNanotrasen
   id: FoodSnackLollypopCaptain
-  name: captains' lollypop
-  description: A blueish lollypop containing a potentially unhealthy amount of gold leaf. Only for the goodest of captains.
+  name: Big Boss's lollypop
+  description: A blueish lollypop containing a potentially unhealthy amount of gold leaf. Only for the biggest of bosses.
   components:
   - type: Tag
     tags:
@@ -1330,8 +1330,8 @@
   parent: FoodSnackLollypopWrappedSyndicate
   id: FoodSnackLollypopWrappedRomerol
   name: wrapped syndicate lollypop
-  suffix: romerol
-  description: A lollypop containing romerol. Appears completely ordinary when unwrapped.
+  suffix: puppet parasites
+  description: A lollypop containing puppet parasites. Appears completely ordinary when unwrapped.
   components:
   - type: Tag
     tags:
@@ -1347,7 +1347,7 @@
   parent: FoodSnackLollypopBaseSyndicate
   id: FoodSnackLollypopRomerol
   name: lollypop
-  suffix: romerol
+  suffix: puppet parasites
   components:
   - type: Tag
     tags:

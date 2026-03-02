@@ -36,7 +36,7 @@ alert-level-yellow-announcement = There is a structural or atmospheric threat wi
 alert-level-yellow-instructions = Crewmembers are advised to stay away from the threat, and stay in their workplaces if necessary.
 
 alert-level-gamma = Gamma
-alert-level-gamma-announcement = Central Command has ordered the Gamma security level on the station. Security is to have weapons equipped at all times, and all civilians are to immediately seek their nearest head for transportation to a secure location.
+alert-level-gamma-announcement = The Patriots have ordered the Gamma security level on the station. Security is to have weapons equipped at all times, and all civilians are to immediately seek their nearest head for transportation to a secure location.
 alert-level-gamma-instructions = All civilians are to immediately seek their nearest head for transportation to a secure location.
 
 alert-level-delta = Delta
@@ -44,11 +44,11 @@ alert-level-delta-announcement = The station is currently under threat of immine
 alert-level-delta-instructions = Crewmembers are advised to listen to heads of staff for more information.
 
 alert-level-epsilon = Epsilon
-alert-level-epsilon-announcement = Central Command has ordered the Epsilon security level on the station. Consider all contracts terminated.
+alert-level-epsilon-announcement = The Patriots have ordered the Epsilon security level on the station. Consider all contracts terminated. XOF joint strike force inbound.
 alert-level-epsilon-instructions = Consider all contracts terminated.
 
 alert-level-omicron = Omicron
-alert-level-omicron-announcement = Station override activated. Await further orders from Central Command staff, stay in your departments.
+alert-level-omicron-announcement = Station override activated. Await further orders from The Patriots, stay in your departments.
 alert-level-omicron-instructions = Await further orders.
 
 ## DeltaV - Cosmic Cult

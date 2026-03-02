@@ -219,10 +219,10 @@
 
 #Longswords
 - type: entity
-  name: captain's sabre
+  name: Big Boss's sabre
   parent: [ BaseSword, BaseCommandContraband ]
   id: CaptainSabre
-  description: A ceremonial weapon belonging to the captain of the station.
+  description: A ceremonial weapon belonging to Big Boss.
   components:
   # Goobstation edit start
   - type: EmitSoundOnLand

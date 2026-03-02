@@ -6,7 +6,7 @@
 
 traitor-arcterrorist-intro = You are an ARC terrorist.
 traitor-arcterrorist-goal = The creatures of this world must be freed from the iron grasp of Nanotrasen, and you are their only hope!
-traitor-arcterrorist-allies = You may cooperate with other syndicate agents if you support our cause. Maybe you can convince the Bee Liberation Front agents to cooperate for once?
+traitor-arcterrorist-allies = You may cooperate with other soviet agents if you support our cause. Maybe you can convince the Bee Liberation Front agents to cooperate for once?
 traitor-arcterrorist-uplink = The Syndicate have graciously given one of their PDA-uplinks for your task.
 traitor-arcterrorist-roundend = [color=green]an activist from the Animal Rights Consortium[/color]
 
@@ -76,5 +76,5 @@ traitor-neulithivfederationvisionary-allies = Members of the Space Wizards Feder
 traitor-neulithivfederationvisionary-uplink = The federation has granted you an uplink in your PDA. Use it wisely.
 traitor-neulithivfederationvisionary-roundend = [color=violet]a Federation Visionary[/color]
 
-issuers-corporate-flavor-1 = NanoTrasen
-issuers-corporate-flavor-2 = Central Command
+issuers-corporate-flavor-1 = The Diamond Dogs
+issuers-corporate-flavor-2 = The Patriots

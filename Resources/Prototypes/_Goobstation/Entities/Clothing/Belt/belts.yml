@@ -172,8 +172,8 @@
 - type: entity
   parent: ClothingBeltSheath
   id: ClothingBeltSheathHeadOfSecurity
-  name: head of security's sheath
-  description: A rugged sheath, designed to hold the Head of Security's custom energy sword.
+  name: executive officer's sheath
+  description: A rugged sheath, designed to hold the XO's custom energy sword.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/Belt/hossheath.rsi

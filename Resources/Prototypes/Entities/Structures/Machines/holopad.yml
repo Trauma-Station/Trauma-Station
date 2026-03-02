@@ -680,7 +680,7 @@
 - type: entity
   parent: Holopad
   id: HolopadSecurityDetective
-  suffix: Detective
+  suffix: Interrogator
   components:
   - type: Label
     currentLabel: holopad-security-detective

@@ -285,7 +285,7 @@
 - type: entity
   parent: LockableButton
   id: LockableButtonDetective
-  suffix: Detective
+  suffix: Interrogator
   components:
   - type: AccessReader
     access: [["Detective"]]

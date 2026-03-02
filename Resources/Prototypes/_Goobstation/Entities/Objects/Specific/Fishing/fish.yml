@@ -213,8 +213,8 @@
 - type: entity
   id: FishNuker
   parent: BaseFishRare
-  name: nuclear operative fish
-  description: Predator of the nuke disk fish.
+  name: XOF fish
+  description: Predator of the eel. # snake fish
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
