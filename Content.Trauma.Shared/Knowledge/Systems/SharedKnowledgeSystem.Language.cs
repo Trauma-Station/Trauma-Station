@@ -186,7 +186,7 @@ public abstract partial class SharedKnowledgeSystem
 
             if (languageUnit is not { })
             {
-                Log.Warning($"FAILED to add language {lang.Id} to {ToPrettyString(ent)}. Check Prototype ID: {protoId}");
+                Log.Info($"FAILED to add language {lang.Id} to {ToPrettyString(ent)}. Check Prototype ID: {protoId}");
                 continue;
             }
 

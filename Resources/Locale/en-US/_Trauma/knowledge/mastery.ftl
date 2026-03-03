@@ -71,6 +71,7 @@ trauma-character-title = Character Tab
 
 entity-category-name-knowledge = Knowledge
 
+knowledge-zenkai-boost = Your body is filled with a second wind as you finally understand something.
 
 knowledge-category-prototype-Martial = Martial Arts
 knowledge-category-prototype-Construction = Construction

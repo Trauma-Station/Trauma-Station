@@ -190,6 +190,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 if (!(rollResult.Item2))
                     return false;
                 ent.Comp.Level += rollResult.Item1;
+                _popup.PopupClient(Loc.GetString("knowledge-zenkai-boost"), target, target, PopupType.Large);
                 _damageable.ClearAllDamage(target.Owner);
             }
             else if (HasComp<SleepingComponent>(target))

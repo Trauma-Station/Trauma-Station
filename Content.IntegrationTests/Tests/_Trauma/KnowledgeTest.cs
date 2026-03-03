@@ -1,15 +1,12 @@
 #nullable enable
 
-using Content.Server.Construction;
-using Content.Server.Construction.Components;
-using Content.Server.Station.Systems;
+using System.Collections.Generic;
+using Content.Shared._EinsteinEngines.Language;
 using Content.Shared.Body;
-using Content.Shared.Construction.Prototypes;
-using Content.Shared.Mind;
-using Content.Shared.Roles;
 using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
+using Robust.Shared.IoC;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
@@ -104,5 +101,25 @@ public sealed class KnowledgeTest
         });
 
         await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public void TestLanguageHasLanguageKnowledgeCounterpart()
+    {
+        var protoMan = IoCManager.Resolve<IPrototypeManager>();
+
+        var languages = protoMan.EnumeratePrototypes<LanguagePrototype>();
+        var missingEntities = new List<string>();
+
+        foreach (var lang in languages)
+        {
+            var expectedEntityId = $"language-{lang.ID}";
+
+            if (!protoMan.HasIndex<EntityPrototype>(expectedEntityId))
+                missingEntities.Add($"{lang.ID} (Expected entity: {expectedEntityId})");
+        }
+
+        Assert.That(missingEntities, Is.Empty,
+            $"The following languages are missing their 'language-ID' entity prototypes: \n{string.Join("\n", missingEntities)}");
     }
 }
