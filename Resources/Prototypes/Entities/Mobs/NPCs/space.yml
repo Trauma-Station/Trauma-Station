@@ -180,8 +180,6 @@
     - id: FoodMeat
       amount: 1
   - type: Fauna # Lavaland Change
-  - type: CombatPower # Goobstation
-    factor: 1 # times more dangerous than a crew-member
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -203,8 +201,6 @@
   # <Goob>
   - type: VentCrawler
   - type: Fauna
-  - type: CombatPower
-    factor: 1.5 # times more dangerous than a crew-member
   # </Goob>
   - type: Sprite
     drawdepth: Mobs

@@ -13,6 +13,7 @@
     - BorgModuleScience #until sciborgs are added
 
   defaultModules:
+  - BorgModulePrying
   - BorgModuleTool
   - BorgModuleInflatable
   - BorgModuleArtifact
@@ -47,6 +48,7 @@
     - BorgModuleEngineering
 
   defaultModules:
+  - BorgModulePrying
   - BorgModuleTool
   - BorgModuleConstruction
   - BorgModuleRCD
@@ -85,6 +87,7 @@
     - BorgModuleCargo
 
   defaultModules:
+  - BorgModulePrying
   - BorgModuleTool
   - BorgModuleMining
   - BorgModuleTraversal
@@ -131,6 +134,7 @@
 
   defaultModules:
   - BorgModuleTool # Trauma - fuck you borgs get tools
+  - BorgModulePrying
   - BorgModuleCleaning
   - BorgModuleCustodial
 
@@ -169,6 +173,7 @@
 
   defaultModules:
   - BorgModuleTool # Trauma - fuck you borgs get tools
+  - BorgModulePrying
   - BorgModuleChemical
   - BorgModuleTopicals
   - BorgModuleRescue
@@ -227,12 +232,12 @@
 
   defaultModules:
   - BorgModuleTool # Trauma - serviceborgs on suicide watch
+  - BorgModulePrying
   - BorgModuleMusique
   - BorgModuleService
   - BorgModuleClowning
   - BorgModuleGardening
   - BorgModuleHarvesting
-  - BorgModuleLollypop # Goobstation
 
   lawset: Clown # DeltaV: Custom lawset
 

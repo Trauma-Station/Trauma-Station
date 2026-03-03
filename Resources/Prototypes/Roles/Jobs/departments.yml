@@ -12,19 +12,20 @@
   id: Civilian
   name: department-Civilian
   description: department-Civilian-description
-  color: "#9FED58"
+  color: "#6C6A78" # Trauma - assistant grey
   weight: -10
   roles:
   # <Trauma>
   - RadioHost
   - PartyMaker
+  - PhoneMerchant
   # </Trauma>
-  - Bartender
-  - Botanist
+  #- Bartender # Trauma - moved to Service
+  #- Botanist # Trauma - moved to Service
   - Chaplain
-  - Chef
+  #- Chef # Trauma - moved to Service
   - Clown
-  - HeadOfPersonnel
+  #- HeadOfPersonnel # Trauma - moved to Service
   - Janitor
   - Lawyer
   - Librarian
@@ -33,8 +34,7 @@
   - Passenger
   - Reporter
   - Visitor
-  - ServiceWorker # Trauma
-  - PhoneMerchant # Trauma
+  #- ServiceWorker # Trauma - moved to Service
 
 - type: department
   id: CentralCommand

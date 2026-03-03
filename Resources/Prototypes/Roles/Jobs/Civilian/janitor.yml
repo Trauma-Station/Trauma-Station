@@ -9,7 +9,7 @@
   guides: [ Janitorial ] # goobstation
   goobcoins: 20 # Goobstation
   access:
-  - Service
+  #- Service # Trauma - janitor should not be cooking??
   - Janitor
   - Maintenance
   special:

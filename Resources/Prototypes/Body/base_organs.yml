@@ -94,6 +94,7 @@
       - Chest
       #- Tail # Trauma - moved to specific Tail part
       - Overlay
+      - TailOverlay
       - UndergarmentTop
       - UndergarmentBottom
       - Special

@@ -25,7 +25,6 @@ public sealed class RandomTriggerSystem : EntitySystem
         base.Update(frameTime);
 
         var now = _timing.CurTime;
-        var tick = (int) _timing.CurTick.Value;
         var query = EntityQueryEnumerator<RandomTriggerComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
@@ -33,9 +32,7 @@ public sealed class RandomTriggerSystem : EntitySystem
                 continue;
 
             comp.NextUpdate = now + comp.UpdateDelay;
-            var seed = SharedRandomExtensions.HashCodeCombine(tick, GetNetEntity(uid).Id);
-            var rand = new Random(seed);
-            if (!rand.Prob(comp.Prob))
+            if (!SharedRandomExtensions.PredictedProb(_timing, comp.Prob, GetNetEntity(uid)))
                 continue;
 
             _trigger.Trigger(uid, key: comp.KeyOut);

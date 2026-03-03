@@ -5,7 +5,6 @@
   - type: CosmicCultRule
   - type: GameRule
     minPlayers: 15 # Ultra lowpop cult is now possible. Would it be good? Idk we'd have to test that.
-    chaosScore: 1200
   - type: AntagObjectives
     objectives:
     - CosmicFinalityObjective

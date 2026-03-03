@@ -21,7 +21,6 @@
     - prefRoles: [ Thief ]
       max: 3
       playerRatio: 15 # Goob - was 20
-      chaosScore: 100 # Goob
       lateJoinAdditional: true
       allowNonHumans: true
       multiAntagSetting: NotExclusive
@@ -38,6 +37,8 @@
         sound: "/Audio/Misc/thief_greeting.ogg"
   - type: DynamicRuleCost
     cost: 75
+  - type: GameRule
+    cancelPresetOnTooFewPlayers: false
 
 # Needs testing
 #- type: entity # Trauma - no chud wizard
@@ -72,17 +73,16 @@
 #        nameFormat: name-format-wizard
 #      mindRoles:
 #      - MindRoleWizard
+#  - type: GameRule
+#    cancelPresetOnTooFewPlayers: false
 
 - type: entity
-  parent: BaseGameRule
-  id: Xenoborgs
+  parent: BaseXenoborgsRule
+  id: SubXenoborgs
   components:
-  - type: XenoborgsRule
-  - type: RuleGrids
   - type: GameRule
     minPlayers: 30
-  - type: LoadMapRule
-    gridPath: /Maps/Shuttles/mothership.yml
+    cancelPresetOnTooFewPlayers: false
   - type: AntagMultipleRoleSpawner
     antagRoleToPrototypes:
       MothershipCore: [ MothershipCore ]

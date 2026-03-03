@@ -1467,9 +1467,7 @@ public abstract class SharedSpellsSystem : EntitySystem
 
         var angles = _gun.LinearSpread(mapAngle - ev.Spread / 2, mapAngle + ev.Spread / 2, ev.ProjectilesAmount);
 
-        // TODO: PredictedRandom when it's real
-        var seed = SharedRandomExtensions.HashCodeCombine((int) Timing.CurTick.Value, GetNetEntity(ev.Performer).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(Timing, GetNetEntity(ev.Performer));
 
         var linearDamping = rand.NextFloat(ev.MinMaxLinearDamping.X, ev.MinMaxLinearDamping.Y);
 

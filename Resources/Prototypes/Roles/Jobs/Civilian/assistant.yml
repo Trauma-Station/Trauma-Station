@@ -6,7 +6,8 @@
   startingGear: PassengerGear
   icon: "JobIconPassenger"
   supervisors: job-supervisors-everyone
-  goobcoins: 0 # Trauma - was 20
+  guides: [ Civilian ] # Trauma
+  goobcoins: 0 # Trauma
   access:
   - Maintenance
   special: # Goobstation

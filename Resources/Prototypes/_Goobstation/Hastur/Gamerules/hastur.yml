@@ -24,17 +24,6 @@
     minimumPlayers: 30
     duration: null
     maxOccurrences: 1
-    chaos:
-      Hostile: 200
-      Friend: 40
-      Medical: 200
-      Death: 200
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 600
-  - type: Tag
-    tags:
-    - MidroundAntag
 
 - type: entity
   parent: HasturMidround
