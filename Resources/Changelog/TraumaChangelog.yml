@@ -3438,3 +3438,14 @@ Entries:
   id: 409
   time: '2026-03-03T01:12:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/760
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed cryostylane cooling reactions, for the 2 people that know what they
+      are.
+  - type: Tweak
+    message: Reverted 5x buff on plastic production since energy chem exists.
+  id: 410
+  time: '2026-03-03T09:21:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/960
