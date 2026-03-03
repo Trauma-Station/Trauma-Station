@@ -101,7 +101,7 @@ public sealed partial class InjectorSystem
         if (HasComp<KnowledgeHolderComponent>(user) && HasComp<MobStateComponent>(target) && !_mobState.IsDead(target))
         {
             var evFirstAid = new AddExperienceEvent(FirstAidKnowledge, 1);
-            RaiseLocalEvent(user, evFirstAid);
+            RaiseLocalEvent(user, ref evFirstAid);
 
             if (_knowledge.TryGetKnowledgeUnit(user, FirstAidKnowledge) is { } firstAid)
             {
