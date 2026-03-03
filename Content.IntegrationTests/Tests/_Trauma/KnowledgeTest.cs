@@ -56,13 +56,13 @@ public sealed class KnowledgeTest
             }
 
             Assert.That(brain, Is.Not.Null, "Human should spawn with a brain inside");
-
+            Assert.That(brainSlot, Is.Not.Null, "Brain should be inside a container");
             Assert.That(humanComp.KnowledgeEntity, Is.EqualTo(brain), "Human should be linked to its internal brain on spawn");
 
-            containerSys.Remove(brain.Value, brainSlot);
+            containerSys.Remove(brain!.Value, brainSlot!);
             Assert.That(humanComp.KnowledgeEntity, Is.Null, "KnowledgeEntity should be null after brain removal");
 
-            containerSys.Insert(brain.Value, brainSlot);
+            containerSys.Insert(brain.Value, brainSlot!);
             Assert.That(humanComp.KnowledgeEntity, Is.EqualTo(brain), "KnowledgeEntity should re-link after brain is re-inserted");
         });
 
@@ -87,13 +87,13 @@ public sealed class KnowledgeTest
 
             var borg = entMan.SpawnEntity("PlayerBorgGeneric", coords);
             var mmi = entMan.SpawnEntity("MMI", coords);
-            var brain = entMan.SpawnEntity("OrganBrain", coords);
+            var brain = entMan.SpawnEntity("OrganHumanBrain", coords);
 
             var borgComp = entMan.GetComponent<KnowledgeHolderComponent>(borg);
-            var brainSlot = containerSys.EnsureContainer<ContainerSlot>(mmi, "brain");
+            var brainSlot = containerSys.EnsureContainer<ContainerSlot>(mmi, "brain_slot");
             containerSys.Insert(brain, brainSlot);
 
-            var mmiSlot = containerSys.EnsureContainer<ContainerSlot>(borg, "mmi_slot");
+            var mmiSlot = containerSys.EnsureContainer<ContainerSlot>(borg, "borg_brain");
             containerSys.Insert(mmi, mmiSlot);
 
             Assert.That(borgComp.KnowledgeEntity, Is.EqualTo(brain), "Borg should draw knowledge from the brain inside the MMI");
