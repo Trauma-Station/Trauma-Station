@@ -20,10 +20,7 @@ public abstract partial class SharedGunSystem
     /// Get a predicted random instance for an entity, specific to this tick.
     /// </summary>
     public System.Random Random(EntityUid uid)
-    {
-        var seed = SharedRandomExtensions.HashCodeCombine((int) Timing.CurTick.Value, GetNetEntity(uid).Id);
-        return new System.Random(seed);
-    }
+        => SharedRandomExtensions.PredictedRandom(Timing, GetNetEntity(uid));
 
     /// <summary>
     /// Client-overriden function to do recoil for a shot.

@@ -27,13 +27,6 @@
       path: /Audio/Announcements/intercept.ogg
     duration: null
     occursDuringRoundEnd: false
-    chaos:
-      Hostile: 100
-      Medical: 100
-      Death: 100
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 400
   - type: AlertLevelInterceptionRule
   - type: AntagSelection
     selectionTime: PostPlayerSpawn
@@ -50,9 +43,6 @@
       lateJoinAdditional: true
       mindRoles:
       - MindRoleTraitor
-  - type: Tag
-    tags:
-      - MidroundAntag
 
 # Midround Changelings
 - type: entity
@@ -69,13 +59,6 @@
       path: /Audio/Announcements/intercept.ogg
     duration: null
     occursDuringRoundEnd: false
-    chaos:
-      Hostile: 150
-      Medical: 150
-      Death: 150
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 600
   - type: AlertLevelInterceptionRule
   - type: AntagSelection
     selectionTime: PostPlayerSpawn
@@ -93,9 +76,6 @@
       lateJoinAdditional: true
       mindRoles:
       - MindRoleChangelingmidround
-  - type: Tag
-    tags:
-      - MidroundAntag
 
 # Midround Heretics
 - type: entity
@@ -112,13 +92,6 @@
       path: /Audio/Announcements/intercept.ogg
     duration: null
     occursDuringRoundEnd: false
-    chaos:
-      Hostile: 200
-      Medical: 150
-      Death: 200
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 500
   - type: AlertLevelInterceptionRule
   - type: AntagSelection
     selectionTime: PostPlayerSpawn
@@ -138,9 +111,6 @@
       jobBlacklist: [ Chaplain ] # GOOBSTATION
       mindRoles:
       - MindRoleHeretic
-  - type: Tag
-    tags:
-      - MidroundAntag
 
 # Midround Revolutionaries
 - type: entity
@@ -154,13 +124,6 @@
     maxOccurrences: 1
     duration: null
     occursDuringRoundEnd: false
-    chaos:
-      Hostile: 250
-      Medical: 250
-      Death: 250
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 900
   - type: AntagSelection
     selectionTime: PostPlayerSpawn
     definitions:
@@ -181,9 +144,6 @@
       - type: HeadRevolutionary
       mindRoles:
       - MindRoleHeadRevolutionary
-  - type: Tag
-    tags:
-      - MidroundAntag
 
 # Skeleton Spawn
 - type: entity
@@ -195,18 +155,8 @@
     duration: 1
     minimumPlayers: 15
     maxOccurrences: 2
-    chaos:
-      Hostile: 40
-      Medical: 40
-      Death: 40
-    eventType: Chaotic
-  - type: GameRule
-    chaosScore: 150
   - type: RandomEntityStorageSpawnRule
     prototype: MobSkeletonCloset
-  - type: Tag
-    tags:
-      - MidroundAntag
 
 # Blob Midround
 - type: entity
@@ -219,21 +169,11 @@
     minimumPlayers: 50
     duration: null
     maxOccurrences: 1
-    chaos:
-      Hostile: 400
-      Medical: 400
-      Death: 400
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 1100
   - type: BlobSpawnRule
     carrierBlobProtos:
     - SpawnPointGhostBlobRat
     playersPerCarrierBlob: 30
     maxCarrierBlob: 1
-  - type: Tag
-    tags:
-      - MidroundAntag
 
 - type: entity
   parent: BaseGameRule
@@ -244,15 +184,11 @@
     earliestStart: 15
     minimumPlayers: 15
     maxOccurrences: 2
-    eventType: Neutral
-  - type: GameRule
-    chaosScore: 20
   - type: VentCrittersRule
     max: 1
     table: !type:GroupSelector
       children:
       - id: MobFloorGoblin
-  - type: Tag
 
 # Midround Devil
 - type: entity
@@ -269,13 +205,6 @@
       path: /Audio/Announcements/intercept.ogg
     duration: null
     occursDuringRoundEnd: false
-    chaos:
-      Hostile: 200
-      Medical: 150
-      Death: 200
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 400
   - type: AlertLevelInterceptionRule
   - type: AntagSelection
     selectionTime: PostPlayerSpawn
@@ -293,9 +222,6 @@
       jobBlacklist: [ Chaplain ] # GOOBSTATION
       mindRoles:
       - DevilMindRole
-  - type: Tag
-    tags:
-      - MidroundAntag
 
 - type: entity
   parent: BaseGameRule
@@ -306,12 +232,6 @@
     duration: null
     earliestStart: 20
     minimumPlayers: 40
-    chaos:
-      Hostile: 50
-      Combat: 20
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 220 # ПРОКЛЯТИЕ 220!
   - type: AntagSpawner
     prototype: MobHumanGreyTide
   - type: AntagSelection
@@ -341,12 +261,6 @@
     duration: null
     earliestStart: 15
     minimumPlayers: 20
-    chaos:
-      Hostile: 15
-      Combat: 20
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 280
   - type: AntagSpawner
     prototype: MobHumanTunnelClown
   - type: AntagSelection
@@ -376,12 +290,6 @@
     duration: null
     earliestStart: 45
     minimumPlayers: 50
-    chaos:
-      Hostile: 75
-      Combat: 40
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 420
   - type: AntagSpawner
     prototype: MobHumanSingulothKnight
   - type: AntagSelection
@@ -413,13 +321,6 @@
     duration: null
     earliestStart: 30
     minimumPlayers: 30
-    chaos:
-      Death: 100
-      Combat: 85
-      Hostile: 40
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 550
   - type: AntagSpawner
     prototype: MobHumanDarkLord
   - type: AntagSelection
@@ -446,8 +347,6 @@
   parent: BaseGameRule
   id: ChosenOneMidround
   components:
-  - type: GameRule
-    chaosScore: 50
   - type: AntagSpawner
     prototype: MobHumanChosenOne
   - type: AntagSelection
@@ -477,12 +376,6 @@
     duration: null
     earliestStart: 30
     minimumPlayers: 30
-    chaos:
-      Hostile: 40
-      Combat: 50
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 300
   - type: AntagSpawner
     prototype: MobHumanMimeAssassin
   - type: AntagSelection
@@ -515,11 +408,6 @@
     duration: null
     earliestStart: 30
     minimumPlayers: 30
-    chaos:
-      Death: 60
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 350
   - type: AntagSpawner
     prototype: MobHumanDarkPriest
   - type: AntagSelection
@@ -552,13 +440,6 @@
     weight: 2.5
     minimumPlayers: 50
     duration: 1
-    chaos:
-      Hostile: 300
-      Medical: 200
-      Death: 300
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 800
   - type: AntagSpawner
     prototype: MobVoxRaider
   - type: RuleGrids
@@ -599,14 +480,10 @@
     earliestStart: 15
     minimumPlayers: 15
     maxOccurrences: 2
-    eventType: Neutral
-  - type: GameRule
-    chaosScore: 0
   - type: VentCrittersRule
     max: 1
     table:
       id: MobClownGoblin
-  - type: Tag
 
 # Slasher
 - type: entity
@@ -618,13 +495,6 @@
     duration: null
     earliestStart: 30
     minimumPlayers: 30
-    chaos:
-      Hostile: 40
-      Combat: 40
-      Death: 40
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 600
   - type: AntagRandomSpawn
   - type: AntagLoadProfileRule
     speciesOverride: Human
@@ -681,15 +551,3 @@
         - NamesSlasherTitle
         - NamesSlasher
         nameFormat: name-format-slasher
-  - type: Tag
-    tags:
-    - MidroundAntag
-
-#Contractor
-- type: entity
-  parent: ContractorSpawn
-  id: ContractorSpawnMidround
-  components:
-  - type: Tag
-    tags:
-    - MidroundAntag

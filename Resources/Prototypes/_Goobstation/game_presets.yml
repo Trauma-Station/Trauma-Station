@@ -132,6 +132,7 @@
   rules:
   - BlobGameMode
   - BasicStationEventScheduler
+  - MeteorSwarmScheduler
   - BasicRoundstartVariation
   - SubGamemodesRule
 
@@ -151,109 +152,6 @@
     - BasicRoundstartVariation
 
 - type: gamePreset
-  id: TheGhost
-  alias:
-    - calm
-    - calmdynamic
-  name: sleeper-title
-  description: sleeper-description
-  showInVote: false # Trauma
-  minPlayers: 5
-  rules:
-    - CalmDynamic
-    - SubGamemodesRule
-    - RareIonStormScheduler
-    - SpaceTrafficControlFriendlyEventScheduler
-    - BasicRoundstartVariation # Trauma
-    - Insurgency # Trauma
-
-- type: gamePreset
-  id: TheGuide
-  alias:
-    - combat
-    - combatdynamic
-  name: guide-title
-  description: guide-description
-  showInVote: false
-  minPlayers: 25
-  rules:
-    - CombatDynamic
-    - SubGamemodesRule
-    - IonStormScheduler
-    - SpaceTrafficControlEventScheduler
-    - BasicRoundstartVariation # Trauma
-    - Insurgency # Trauma
-
-- type: gamePreset
-  id: SecretPlusLow
-  alias:
-    - secretpluslow
-    - secretpluscalm
-    - turbulence
-  name: secretplus-low-title
-  description: secretplus-low-description
-  showInVote: false # Trauma
-  rules:
-    - SecretPlusLow
-    - BasicRoundstartVariation # Trauma
-    - Insurgency # Trauma
-
-- type: gamePreset
-  id: SecretPlusMid
-  alias:
-    - secretplusmid
-    - secretplus
-    - entropy
-  name: secretplus-mid-title
-  description: secretplus-mid-description
-  showInVote: false # Trauma
-  rules:
-    - SecretPlusMid
-    - BasicRoundstartVariation # Trauma
-    - Insurgency # Trauma
-
-- type: gamePreset
-  id: SecretPlusAdmeme
-  alias:
-    - secretplusadmeme
-    - secretplusevil
-    - secretplushigh
-    - chaos
-  name: secretplus-admeme-title
-  description: secretplus-admeme-description
-  showInVote: false # 1984
-  rules:
-    - SecretPlusAdmeme
-    - BasicRoundstartVariation # Trauma
-    - Insurgency # Trauma
-
-- type: gamePreset
-  id: SurvivalPlusMid
-  alias:
-    - survivalplus
-    - newsurvival
-    - survivalnew
-  name: survivalplus-title
-  description: survivalplus-description
-  showInVote: false # Trauma
-  rules:
-    - SecretPlusRampingMid
-    - BasicRoundstartVariation # Trauma
-
-# hermit gamemode, internal threat focused gamemode
-- type: gamePreset
-  id: SecretPlusHermit
-  alias:
-    - secretPlusHermit
-    - The hermit
-    - Ingress
-  name: hermitplus-title
-  description: hermitplus-description
-  showInVote: false # Trauma
-  rules:
-    - SecretPlusHermit
-
-- type: gamePreset
   id: Xenomorphs
   alias:
   - ayyliens
@@ -264,4 +162,7 @@
   rules:
   - XenomorphsInfestationRoundstart
   - SubGamemodesRule
-  - SecretPlusRampingMid
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - BasicRoundstartVariation

@@ -3,7 +3,6 @@
   id: WraithRoundstart
   components:
   - type: GameRule
-    chaosScore: 1000
     minPlayers: 35
   - type: AntagSpawner
     prototype: MobWraithMidround

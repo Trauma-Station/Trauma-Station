@@ -71,7 +71,7 @@
   - AppearanceSkeletonPerson
   - BaseSpeciesMob
   id: MobSkeletonPerson
-  name: Urist McSkelly
+  name: Urist McBones
   components:
   # <Trauma>
   - type: LanguageKnowledge # Einstein Engines - Language

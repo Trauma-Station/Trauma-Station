@@ -22,7 +22,6 @@
   - type: WizardRule
   - type: GameRule
     minPlayers: 30
-    chaosScore: 900
   - type: AntagObjectives
     objectives:
     - WizardSurviveObjective
@@ -66,9 +65,6 @@
   - type: RuleGrids
   - type: LoadMapRule
     mapPath: /Maps/_Goobstation/Nonstations/wizden.yml
-  - type: Tag
-    tags:
-      - RoundstartAntag
 
 - type: entity
   parent: BaseWizardRule
@@ -83,11 +79,6 @@
     weight: 5.5
     minimumPlayers: 20
     duration: 1
-    chaos: # Goobstation
-      Hostile: 200
-      Friend: 40
-      Medical: 200
-      Death: 200
   - type: AntagSelection
     useCharacterNames: true
     selectionTime: PostPlayerSpawn
@@ -120,9 +111,6 @@
       - type: NpcFactionMember
         factions:
         - Wizard
-  - type: Tag
-    tags:
-      - MidroundAntag
 
 - type: entity
   parent: BaseGameRule

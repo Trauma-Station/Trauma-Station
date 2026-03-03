@@ -3449,3 +3449,29 @@ Entries:
   id: 410
   time: '2026-03-03T09:21:22.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/960
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the Service department for catering staff, no more civilian
+      "department" with 10 different jobs.
+  id: 411
+  time: '2026-03-03T21:08:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/968
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Removed the Hermit and game director gamemodes for being shitcode and
+      slop.
+  - type: Fix
+    message: Service borgs no longer get medborgs modules holy copy paste fail
+  - type: Tweak
+    message: Kept travelling chef and clown shuttle events.
+  - type: Tweak
+    message: Didnt remove sovl, pjb
+  - type: Remove
+    message: No hugbox alerts on emitters
+  id: 412
+  time: '2026-03-03T21:27:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/965

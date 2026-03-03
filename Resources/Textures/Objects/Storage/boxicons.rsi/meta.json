@@ -93,6 +93,9 @@
     },
     {
       "name": "tracks"
+    },
+    {
+      "name": "syndicate_circuit"
     }
   ]
 }

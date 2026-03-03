@@ -143,8 +143,6 @@
       tags:
       - DoorBumpOpener
       - FootstepSound
-    - type: CombatPower
-      factor: 10 # times more dangerous than a crew-member
 
 - type: entity
   name: ????

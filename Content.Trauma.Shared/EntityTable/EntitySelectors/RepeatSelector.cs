@@ -33,4 +33,17 @@ public sealed partial class RepeatSelector : EntityTableSelector
             }
         }
     }
+
+    // the same probabilities
+    protected override IEnumerable<(EntProtoId, double)> ListSpawnsImplementation(IEntityManager entMan, IPrototypeManager proto, EntityTableContext ctx)
+        => Repeated.ListSpawns(entMan, proto, ctx);
+
+    // but scaled averages
+    protected override IEnumerable<(EntProtoId, double)> AverageSpawnsImplementation(IEntityManager entMan, IPrototypeManager proto, EntityTableContext ctx)
+    {
+        foreach (var (id, average) in Repeated.AverageSpawns(entMan, proto, ctx))
+        {
+            yield return (id, average * Count);
+        }
+    }
 }

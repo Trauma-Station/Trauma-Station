@@ -27,10 +27,7 @@ public sealed partial class TriggerOnDamageSystem : EntitySystem
             delta.GetTotal() <= ent.Comp.Threshold) // don't trigger on low damage
             return;
 
-        // TODO: PredictedRandom when it's real
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new Random(seed);
-        if (!rand.Prob(ent.Comp.Probability))
+        if (!SharedRandomExtensions.PredictedProb(_timing, ent.Comp.Probability, GetNetEntity(ent)))
             return;
 
         _trigger.Trigger(ent.Owner, args.Origin, ent.Comp.KeyOut);

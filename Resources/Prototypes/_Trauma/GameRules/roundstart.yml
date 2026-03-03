@@ -25,7 +25,6 @@
       unequipOldGear: true
       max: 8
       playerRatio: 10
-      chaosScore: 50
       roleLoadout:
       - RoleSurvivalStandard
       components:
@@ -38,10 +37,6 @@
   parent: DuoAbductorSpawn
   id: DuoAbductorRoundstart
   components:
-  - type: StationEvent
-    chaos: # 20 chaos because abductors aren't mean to actively harm crew just experiment
-      Hostile: 20
-    earliestStart: 0 # its roundstart chud
   # I LOVE GOIDA COPY PASTING THE ENTIRE THING
   # this just has ghost roles removed, pref roles added and players are picked roundstart
   - type: AntagSelection
@@ -150,7 +145,6 @@
     - prefRoles: [ Heretic ]
       max: 6
       playerRatio: 10
-      chaosScore: 250
       lateJoinAdditional: true
       jobBlacklist: [ Chaplain ]
       blacklist:
@@ -158,9 +152,6 @@
         - CommandStaff
       mindRoles:
       - MindRoleHeretic
-  - type: Tag
-    tags:
-    - RoundstartAntag
 
 - type: entity
   parent: BaseGameRule
@@ -174,7 +165,6 @@
     - prefRoles: [ Shadowling ]
       max: 3
       playerRatio: 25
-      chaosScore: 500
       jobBlacklist: [ Chaplain ]
       blacklist:
         components:
@@ -184,6 +174,3 @@
   - type: AntagObjectives
     objectives:
     - ShadowlingAscendObjective
-  - type: Tag
-    tags:
-    - RoundstartAntag

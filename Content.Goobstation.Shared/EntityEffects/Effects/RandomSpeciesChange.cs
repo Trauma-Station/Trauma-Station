@@ -42,8 +42,7 @@ public sealed class RandomSpeciesChangeEffectSystem : EntityEffectSystem<Humanoi
 
     protected override void Effect(Entity<HumanoidProfileComponent> ent, ref EntityEffectEvent<RandomSpeciesChange> args)
     {
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         var species = rand.Pick(_species);
         _speciesChange.Polymorph(ent, species);
     }

@@ -370,10 +370,6 @@
 - type: Tag
   id: Lighter # for whitelisted cig pack strorage
 
-# tag roundstart rules that should be run alone
-- type: Tag
-  id: LoneRunRule
-
 - type: Tag
   id: LoneOpsUplink
 
@@ -785,15 +781,6 @@
 
 - type: Tag
   id: Jetpack
-
-- type: Tag
-  id: RoundstartAntag
-
-- type: Tag
-  id: CalmAntag
-
-- type: Tag
-  id: MidroundAntag
 
 - type: Tag
   id: DisposableBattery

@@ -113,9 +113,7 @@ public sealed partial class PullingSystem
             || !TryComp(args.User, out PullableComponent? pullable))
             return;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
-        if (rand.Prob(pullable.GrabEscapeChance))
+        if (SharedRandomExtensions.PredictedProb(_timing, pullable.GrabEscapeChance, GetNetEntity(ent)))
             TryLowerGrabStage((args.User, pullable), (ent.Owner, ent.Comp), true);
     }
 
@@ -405,9 +403,7 @@ public sealed partial class PullingSystem
             _timing.CurTime < pullable.Comp.NextEscapeAttempt)
             return GrabResistResult.TooSoon;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(pullable).Id);
-        var rand = new System.Random(seed);
-        if (rand.Prob(pullable.Comp.GrabEscapeChance))
+        if (SharedRandomExtensions.PredictedProb(_timing, pullable.Comp.GrabEscapeChance, GetNetEntity(pullable)))
             return GrabResistResult.Succeeded;
 
         pullable.Comp.NextEscapeAttempt = _timing.CurTime.Add(TimeSpan.FromSeconds(pullable.Comp.EscapeAttemptCooldown));

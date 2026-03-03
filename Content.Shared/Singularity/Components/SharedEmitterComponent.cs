@@ -18,6 +18,7 @@
 
 using System.Threading;
 using Content.Shared.DeviceLinking;
+using Content.Shared.Radio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -114,6 +115,12 @@ public sealed partial class EmitterComponent : Component
     /// </summary>
     [DataField]
     public Dictionary<ProtoId<SinkPortPrototype>, EntProtoId> SetTypePorts = new();
+
+    [DataField]
+    public ProtoId<RadioChannelPrototype> RadioChannel = "Engineering";
+
+    [DataField]
+    public bool AlertRadio = false; // is this emitter critical to the station to the point a radio channel should be alerted if anything happens to it (i.e. emitters near singularity/tesla containment)
 }
 
 [NetSerializable, Serializable]

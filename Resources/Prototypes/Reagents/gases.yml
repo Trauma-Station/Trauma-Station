@@ -467,9 +467,10 @@
           type: [ Slime, Cybernetic ] # Goob - added Cybernetic
           inverted: true
         ignoreResistances: true
+        scaling: true
         damage:
           types:
-            Poison: 0.25
+            Poison: 1
 
 - type: reagent
   id: Frezon
