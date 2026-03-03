@@ -71,4 +71,3 @@ public record struct MartialArtDamageModifierEvent(EntityUid User, float Coeffic
 /// </summary>
 [ByRefEvent]
 public record struct MartialArtSpeedModifierEvent(EntityUid User, float Coefficient = 1.0f);
-
