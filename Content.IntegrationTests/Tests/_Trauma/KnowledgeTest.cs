@@ -21,7 +21,7 @@ public sealed class KnowledgeTest
     /// Makes sure that engineers can build an APC.
     /// </summary>
     /// <returns></returns>
-    
+
 
     /// <summary>
     /// Makes sure that humans brains can go in and out.
