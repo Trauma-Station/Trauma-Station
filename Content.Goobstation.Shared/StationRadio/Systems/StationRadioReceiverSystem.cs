@@ -45,7 +45,6 @@ public sealed class StationRadioReceiverSystem : EntitySystem
             return;
 
         comp.SoundEntity = audio.Entity;
-        Dirty(uid, comp);
         EnsureComp<CopyrightedAudioComponent>(audio.Entity);
 
         UpdateAudible((uid, comp));
@@ -53,11 +52,7 @@ public sealed class StationRadioReceiverSystem : EntitySystem
 
     private void OnMediaStopped(EntityUid uid, StationRadioReceiverComponent comp, ref StationRadioMediaStoppedEvent args)
     {
-        if (comp.SoundEntity == null)
-            return;
-
         comp.SoundEntity = _audio.Stop(comp.SoundEntity);
-        Dirty(uid, comp);
     }
 
     private void UpdateAudible(Entity<StationRadioReceiverComponent> ent)

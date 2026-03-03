@@ -56,6 +56,12 @@ public sealed partial class AbsorbCorpseComponent : Component
     [DataField]
     public SoundSpecifier? AbsorbSound = new SoundCollectionSpecifier("Wraith_SoulSucc");
 
+    /// <summary>
+    /// How long the doafter of absorbing the corpse is
+    /// </summary>
+    [DataField]
+    public TimeSpan AbsorbDoAfter = TimeSpan.FromSeconds(8);
+
     [ViewVariables]
     public ProtoId<TagPrototype> Tag = "VimPilot";
 }

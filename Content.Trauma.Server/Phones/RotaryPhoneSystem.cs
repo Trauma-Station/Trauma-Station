@@ -48,6 +48,12 @@ public sealed class RotaryPhoneSystem : SharedRotaryPhoneSystem
         RemComp<JointVisualsComponent>(ent.Owner);
         RemComp<JointComponent>(ent.Owner);
         Dirty(ent);
+
+        // Basically on map init set the phones name to whatever the holders name is so it can be changed in mapping
+        if (!TryComp<RotaryPhoneComponent>(args.Entity, out var phone) || phone.Name != null)
+            return;
+
+        phone.Name = ent.Comp.Name;
     }
 
     private void OnPhoneCategoryChanged(Entity<RotaryPhoneComponent> ent, ref PhoneCategoryChangedMessage args)
@@ -181,7 +187,7 @@ public sealed class RotaryPhoneSystem : SharedRotaryPhoneSystem
             ent.Comp.Engaged = true;
             ent.Comp.ConnectedPhone = phone;
             phoneComp.Engaged = true;
-            ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.RingingSound, ent.Owner, ent.Comp.ConnectedPlayer, AudioParams.Default.WithLoop(true))?.Entity;
+            ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.RingingSound, ent.Owner, ent.Owner, AudioParams.Default.WithLoop(true))?.Entity;
             RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.OutGoingPort);
 
             var ev = new PhoneRingEvent(ent);

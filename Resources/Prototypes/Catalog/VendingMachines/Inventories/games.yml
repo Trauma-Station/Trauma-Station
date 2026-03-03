@@ -17,10 +17,7 @@
     MysteryFigureBox: 2
     BooksBag: 3
     Magic9Ball: 2
-    CardBoxBlack: 3 # GoobStation
   contrabandInventory:
     Basketball: 1
     FoodSnackBoritos: 3
     DrinkSpaceMountainWindCan: 3
-  emaggedInventory: #Goob
-    CardBoxSyndicate: 1

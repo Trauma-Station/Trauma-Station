@@ -90,6 +90,14 @@ ChestHuman: OrganHumanTorso
 
 # 2026-02-18 removed vulp plushie
 PlushieVulp: null
+
+# 2026-03-02 removed playing cards
+CardDeckBlack: null
+CardDeckSyndicate: null
+CardDeckNanotrasen: null
+CardBoxBlack: null
+CardBoxSyndicate: null
+CardBoxNanotrasen: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

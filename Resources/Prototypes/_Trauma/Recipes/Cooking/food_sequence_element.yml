@@ -1,0 +1,5 @@
+# Fallback used for non-food items in burgers etc
+# The item prototype's sprite is used instead
+- type: foodSequenceElement
+  id: ItemFallback
+  # TODO

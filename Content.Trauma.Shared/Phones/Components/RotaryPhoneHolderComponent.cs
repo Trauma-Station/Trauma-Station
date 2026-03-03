@@ -15,5 +15,8 @@ public sealed partial class RotaryPhoneHolderComponent : Component
     public EntityUid? ConnectedPhone;
 
     [DataField]
+    public string Name = "Unknown";
+
+    [DataField]
     public SpriteSpecifier RopeSprite = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Objects/phone/phone.rsi"), "rope");
 }
