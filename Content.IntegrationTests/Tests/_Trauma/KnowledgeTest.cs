@@ -1,4 +1,5 @@
-using Content.Medical.Shared.Augments;
+#nullable enable
+
 using Content.Server.Construction;
 using Content.Server.Construction.Components;
 using Content.Server.Station.Systems;
@@ -17,12 +18,6 @@ namespace Content.IntegrationTests.Tests._Trauma;
 [TestFixture]
 public sealed class KnowledgeTest
 {
-    /// <summary>
-    /// Makes sure that engineers can build an APC.
-    /// </summary>
-    /// <returns></returns>
-    
-
     /// <summary>
     /// Makes sure that humans brains can go in and out.
     /// </summary>
