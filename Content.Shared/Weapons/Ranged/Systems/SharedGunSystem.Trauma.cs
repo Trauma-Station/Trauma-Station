@@ -121,7 +121,7 @@ public abstract partial class SharedGunSystem
         if (user is not { } trueUser)
             return;
 
-        if (TryComp<KnowledgeHolderComponent>(user, out _))
+        if (HasComp<KnowledgeHolderComponent>(user))
         {
             var shooting = _knowledge.TryGetKnowledgeUnit(trueUser, ShootingKnowledge);
             if (shooting is { } shootingTrue)

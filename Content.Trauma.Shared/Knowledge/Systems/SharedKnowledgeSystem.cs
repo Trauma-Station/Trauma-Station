@@ -187,8 +187,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 if (!(rollResult.Item2))
                     return false;
                 ent.Comp.Level += rollResult.Item1;
-                if (TryComp<DamageableComponent>(target, out var damageable))
-                    _damageable.ClearAllDamage((target.Owner, damageable));
+                _damageable.ClearAllDamage(target.Owner);
             }
             else if (HasComp<SleepingComponent>(target))
             {
