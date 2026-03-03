@@ -1,8 +1,15 @@
-# Service
+- type: entity
+  abstract: true
+  parent: BaseAreaStation
+  id: BaseAreaService
+  name: service
+  components:
+  - type: DepartmentArea
+    department: Service
 
 # For the kitchen itself
 - type: entity
-  parent: BaseAreaStation
+  parent: BaseAreaService
   id: AreaKitchen
   name: kitchen
   description: Allows the Chef to use CQC inside of here.
