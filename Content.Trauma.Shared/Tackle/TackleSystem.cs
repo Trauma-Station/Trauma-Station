@@ -175,13 +175,12 @@ public sealed class TackleSystem : EntitySystem
         }
 
         if (ShouldStopTackle((ent.Owner, body), args.Target))
-        {
-            _thrown.StopThrow(ent, args.Component);
             severity += speed;
-        }
 
         if (severity == 0f)
             return;
+
+        _thrown.StopThrow(ent, args.Component);
 
         severity *= mod.SeverityModifier;
 
