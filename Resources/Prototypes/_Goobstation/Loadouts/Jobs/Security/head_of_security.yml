@@ -68,4 +68,4 @@
 - type: loadout
   id: CombatGloves
   equipment:
-    gloves: ClothingHandsGlovesCombat
+    gloves: ClothingHandsGlovesGorilla

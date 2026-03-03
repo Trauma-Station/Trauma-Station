@@ -7,8 +7,8 @@ namespace Content.Trauma.Shared.Tackle;
 public sealed partial class TacklingComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public float MinDistance;
+    public NetCoordinates TackleStartPosition;
 
     [DataField, AutoNetworkedField]
-    public MapCoordinates TackleStartPosition;
+    public EntityUid Source;
 }

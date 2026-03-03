@@ -2,6 +2,10 @@ using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Tackle;
 
+/// <summary>
+/// This component doesn't make user tackle by default, they still need special equipment.
+/// Unless they also have <see cref="TackleModifierComponent"/>
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class TacklerComponent : Component
 {

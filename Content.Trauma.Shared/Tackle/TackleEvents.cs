@@ -2,16 +2,14 @@ using Content.Shared.Inventory;
 
 namespace Content.Trauma.Shared.Tackle;
 
-public sealed class TackleEvent(float range, float speed, float minDistance, TimeSpan knockdownTime)
-    : EntityEventArgs, IInventoryRelayEvent
+[ByRefEvent]
+public record struct TackleEvent(
+    float Range,
+    float Speed,
+    float StaminaCost,
+    TimeSpan KnockdownTime,
+    EntityUid User,
+    EntityUid? Source = null) : IInventoryRelayEvent
 {
     public SlotFlags TargetSlots => SlotFlags.GLOVES;
-
-    public float Range = range;
-
-    public float Speed = speed;
-
-    public float MinDistance = minDistance;
-
-    public TimeSpan KnockdownTime = knockdownTime;
 }
