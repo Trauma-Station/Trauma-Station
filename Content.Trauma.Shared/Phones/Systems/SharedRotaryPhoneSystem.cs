@@ -101,7 +101,7 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
 
         if (_phoneNumbers.Count >= PhoneNumberPoolSize)
         {
-            Log.Error("too many phone numbers, did you seriously put 88,888 phones on a single map?");
+            Log.Error("too many phone numbers, did you seriously put more than 99,999 phones on a single map?");
             return;
         }
 

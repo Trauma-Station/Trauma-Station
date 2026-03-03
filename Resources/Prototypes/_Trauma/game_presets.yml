@@ -56,3 +56,18 @@
   - BasicStationEventScheduler
   - BasicRoundstartVariation
   - SubGamemodesRule
+
+- type: gamePreset
+  id: Wraith
+  alias:
+  - wraith
+  - ayyghost
+  - ghostie
+  name: wraith-title
+  description: wraith-description
+  showInVote: false
+  rules:
+  - WraithRoundstart
+  - BasicStationEventScheduler
+  - SubGamemodesRule
+  - BasicRoundstartVariation

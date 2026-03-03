@@ -28,7 +28,7 @@
     - id: DarkPriestMidround
     - id: VoxRaidersMidround
     - id: TunnelClownMidround
-    #- id: WraithMidround # if someone makes it less chuddy
+    - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     # - id: ChangelingMidround # Trauma - We dont want lings in other game modes people hate it
     # - id: HereticMidround # Trauma - Heretics scale too slowly here to do this
     # - id: Devilmidround # Trauma - Devil midround does not make sense and is kinda weird

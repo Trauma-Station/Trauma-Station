@@ -3365,3 +3365,76 @@ Entries:
   id: 404
   time: '2026-03-02T00:01:16.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/694
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Brought back putting anything in burgers!
+  id: 405
+  time: '2026-03-02T11:09:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/947
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed stunprod not being able to stun anything.
+  id: 406
+  time: '2026-03-02T14:52:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/953
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Removed playing cards for being gigantic shitcode, nobody even used them
+      anyway.
+  id: 407
+  time: '2026-03-02T15:27:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/951
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Lowered the delay on saying your last words from 10 to 2 seconds.
+  id: 408
+  time: '2026-03-02T20:09:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/955
+- author: Lumminal
+  changes:
+  - type: Add
+    message: >-
+      Wraith can now be played as a roundstart antagonist. Wraith got majorly
+      rebalanced and slightly overhauled.
+  - type: Add
+    message: >-
+      New wraith action, dark whisper. Lets you speak through someone for 15
+      seconds
+  - type: Remove
+    message: Wraith midround is back but it can't evolve.
+  - type: Remove
+    message: >-
+      Wraith no longer gets a second-life when dying. Die once, and its game
+      over.
+  - type: Tweak
+    message: Absorb Corpse, Decay and other abilities require corporeal form
+  - type: Tweak
+    message: 'Absorbing a corpse as wraith has a do-after now. '
+  - type: Tweak
+    message: >-
+      Wraith Curses can now be removed via any bible. You don't have to be a
+      chaplain anymore.
+  - type: Tweak
+    message: Some wraith abilities got their WP cost increased
+  - type: Tweak
+    message: >-
+      All wraith mobs and structures got their damage and health reduced by A
+      LOT.
+  - type: Tweak
+    message: Salt lines can be made from beakers
+  - type: Tweak
+    message: Salt lines don't break if you step over them
+  - type: Tweak
+    message: Wraith gets the "Command" action back
+  - type: Tweak
+    message: Wraith requires 4 corpses to evolve, instead of 3
+  - type: Tweak
+    message: Wraith Curses don't work on unholy entities (heretics and the like)
+  id: 409
+  time: '2026-03-03T01:12:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/760

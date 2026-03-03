@@ -4,8 +4,8 @@ meta:
   engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 02/07/2026 14:45:55
-  entityCount: 39116
+  time: 03/02/2026 18:37:33
+  entityCount: 39167
 maps:
 - 1
 grids:
@@ -31092,6 +31092,8 @@ entities:
     - type: NavMap
     - type: ImplicitRoof
     - type: ExplosionAirtightGrid
+    - type: TileHistory
+      chunkHistory: {}
 - proto: AccordionInstrument
   entities:
   - uid: 3
@@ -109545,62 +109547,6 @@ entities:
     - type: Transform
       pos: 24.262762,-27.091896
       parent: 2
-- proto: ChemDispenser
-  entities:
-  - uid: 14666
-    components:
-    - type: Transform
-      pos: 3.5,-33.5
-      parent: 2
-    - type: ContainerContainer
-      containers:
-        ReagentDispenser-beaker: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        machine_board: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        machine_parts: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        beakerSlot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-  - uid: 14667
-    components:
-    - type: Transform
-      pos: 6.5,-29.5
-      parent: 2
-    - type: ContainerContainer
-      containers:
-        ReagentDispenser-beaker: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        machine_board: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        machine_parts: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        beakerSlot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
 - proto: ChemicalPayload
   entities:
   - uid: 14668
@@ -131495,6 +131441,62 @@ entities:
       parent: 18033
     - type: Physics
       canCollide: False
+- proto: EnergyChemDispenser
+  entities:
+  - uid: 14666
+    components:
+    - type: Transform
+      pos: 3.5,-33.5
+      parent: 2
+    - type: ContainerContainer
+      containers:
+        ReagentDispenser-beaker: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        machine_board: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        machine_parts: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        beakerSlot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+  - uid: 14667
+    components:
+    - type: Transform
+      pos: 6.5,-29.5
+      parent: 2
+    - type: ContainerContainer
+      containers:
+        ReagentDispenser-beaker: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        machine_board: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        machine_parts: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        beakerSlot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
 - proto: EngineeringTechFab
   entities:
   - uid: 18035
@@ -183326,7 +183328,7 @@ entities:
   - uid: 24867
     components:
     - type: Transform
-      pos: 63.569263,-24.38388
+      pos: 63.50808,-25.235418
       parent: 2
 - proto: Hemostat
   entities:
@@ -188156,7 +188158,7 @@ entities:
   - uid: 25598
     components:
     - type: Transform
-      pos: -9.5,-30.5
+      pos: -9.700949,-32.166496
       parent: 2
 - proto: MicrophoneInstrument
   entities:
@@ -188691,7 +188693,7 @@ entities:
   - uid: 25666
     components:
     - type: Transform
-      pos: -9.5,-30.5
+      pos: -9.638449,-32.010246
       parent: 2
   - uid: 25667
     components:
@@ -188901,7 +188903,7 @@ entities:
   - uid: 25699
     components:
     - type: Transform
-      pos: -9.606294,-31.675497
+      pos: -9.607041,-32.228825
       parent: 2
   - uid: 25700
     components:
@@ -190675,13 +190677,6 @@ entities:
       parent: 2
 - proto: PhoneInstrument
   entities:
-  - uid: 25969
-    components:
-    - type: Transform
-      pos: 41.402508,19.727028
-      parent: 2
-    - type: Physics
-      canCollide: False
   - uid: 25970
     components:
     - type: Transform
@@ -194154,8 +194149,7 @@ entities:
   - uid: 26504
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 37.5,9.5
+      pos: 36.5,7.5
       parent: 2
   - uid: 26505
     components:
@@ -211320,6 +211314,20 @@ entities:
     - type: Transform
       pos: -32.479275,-77.35582
       parent: 2
+- proto: RMCRotaryPhoneWallmount
+  entities:
+  - uid: 39129
+    components:
+    - type: Transform
+      pos: -6.5,-73.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Evac
+  - uid: 39164
+    components:
+    - type: Transform
+      pos: 1.5,5.5
+      parent: 2
 - proto: RobocopCircuitBoard
   entities:
   - uid: 29149
@@ -211371,6 +211379,360 @@ entities:
     - type: Transform
       pos: 10.507141,-45.24613
       parent: 2
+- proto: RotaryPhoneStand
+  entities:
+  - uid: 25969
+    components:
+    - type: Transform
+      pos: 37.5,-9.5
+      parent: 2
+  - uid: 39127
+    components:
+    - type: Transform
+      pos: -25.5,12.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Tools
+  - uid: 39138
+    components:
+    - type: Transform
+      pos: -40.5,62.5
+      parent: 2
+  - uid: 39141
+    components:
+    - type: Transform
+      pos: 19.5,68.5
+      parent: 2
+  - uid: 39142
+    components:
+    - type: Transform
+      pos: 21.5,62.5
+      parent: 2
+  - uid: 39151
+    components:
+    - type: Transform
+      pos: 93.5,-1.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Brig
+  - uid: 39155
+    components:
+    - type: Transform
+      pos: 63.5,-24.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Boxing Ring
+  - uid: 39156
+    components:
+    - type: Transform
+      pos: 49.5,-43.5
+      parent: 2
+  - uid: 39157
+    components:
+    - type: Transform
+      pos: 51.5,-53.5
+      parent: 2
+  - uid: 39158
+    components:
+    - type: Transform
+      pos: 47.5,-49.5
+      parent: 2
+  - uid: 39165
+    components:
+    - type: Transform
+      pos: 43.5,-24.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Dorms
+  - uid: 39166
+    components:
+    - type: Transform
+      pos: 29.5,-0.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Court Room
+- proto: RotaryPhoneStandCargo
+  entities:
+  - uid: 39143
+    components:
+    - type: Transform
+      pos: 8.5,37.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Cargo
+  - uid: 39144
+    components:
+    - type: Transform
+      pos: 20.5,39.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Cargo Bay
+  - uid: 39167
+    components:
+    - type: Transform
+      pos: 38.5,29.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Salvage
+- proto: RotaryPhoneStandCommand
+  entities:
+  - uid: 39117
+    components:
+    - type: Transform
+      pos: 5.5,16.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Bridge
+  - uid: 39118
+    components:
+    - type: Transform
+      pos: -9.5,9.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Conference Room
+  - uid: 39119
+    components:
+    - type: Transform
+      pos: 12.5,9.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Captain's Room
+  - uid: 39120
+    components:
+    - type: Transform
+      pos: -12.5,5.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: HOP
+  - uid: 39121
+    components:
+    - type: Transform
+      pos: -2.5,8.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: NTR
+  - uid: 39133
+    components:
+    - type: Transform
+      pos: -20.5,-42.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: RD
+  - uid: 39135
+    components:
+    - type: Transform
+      pos: -62.5,7.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: CE
+  - uid: 39145
+    components:
+    - type: Transform
+      pos: 27.5,37.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: QM
+  - uid: 39148
+    components:
+    - type: Transform
+      pos: 53.5,3.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Warden
+  - uid: 39154
+    components:
+    - type: Transform
+      pos: 41.5,19.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: HOS
+  - uid: 39161
+    components:
+    - type: Transform
+      pos: 22.5,-46.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: CMO
+- proto: RotaryPhoneStandEngineering
+  entities:
+  - uid: 39128
+    components:
+    - type: Transform
+      pos: -52.5,12.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Engineering
+  - uid: 39136
+    components:
+    - type: Transform
+      pos: -74.5,-8.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: P.A Room
+  - uid: 39137
+    components:
+    - type: Transform
+      pos: -48.5,47.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: TEG Room
+- proto: RotaryPhoneStandMedical
+  entities:
+  - uid: 39159
+    components:
+    - type: Transform
+      pos: 27.5,-65.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Viro
+  - uid: 39160
+    components:
+    - type: Transform
+      pos: 31.5,-41.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Examination
+  - uid: 39162
+    components:
+    - type: Transform
+      pos: 26.5,-27.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Medical
+  - uid: 39163
+    components:
+    - type: Transform
+      pos: 2.5,-31.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Chem
+- proto: RotaryPhoneStandScience
+  entities:
+  - uid: 39130
+    components:
+    - type: Transform
+      pos: -47.5,-25.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: XenoBio
+  - uid: 39131
+    components:
+    - type: Transform
+      pos: -9.5,-30.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Science
+  - uid: 39132
+    components:
+    - type: Transform
+      pos: -6.5,-39.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Robotics
+  - uid: 39134
+    components:
+    - type: Transform
+      pos: -31.5,-42.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Arti
+- proto: RotaryPhoneStandSecurity
+  entities:
+  - uid: 39147
+    components:
+    - type: Transform
+      pos: 31.5,8.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Detective
+  - uid: 39149
+    components:
+    - type: Transform
+      pos: 34.5,2.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Lawyer's Office
+  - uid: 39150
+    components:
+    - type: Transform
+      pos: 60.5,-4.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Brig Med
+  - uid: 39152
+    components:
+    - type: Transform
+      pos: 66.5,27.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Sec Kitchen
+  - uid: 39153
+    components:
+    - type: Transform
+      pos: 55.5,30.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Court Room
+- proto: RotaryPhoneStandSecurity911
+  entities:
+  - uid: 39146
+    components:
+    - type: Transform
+      pos: 37.5,9.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Security
+- proto: RotaryPhoneStandService
+  entities:
+  - uid: 39122
+    components:
+    - type: Transform
+      pos: 11.5,68.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Radio Host
+  - uid: 39123
+    components:
+    - type: Transform
+      pos: -34.5,52.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Botany
+  - uid: 39124
+    components:
+    - type: Transform
+      pos: -27.5,33.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Kitchen
+  - uid: 39125
+    components:
+    - type: Transform
+      pos: -8.5,40.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Bar
+  - uid: 39126
+    components:
+    - type: Transform
+      pos: -23.5,23.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Reporter
+  - uid: 39139
+    components:
+    - type: Transform
+      pos: -10.5,54.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Clown's Room
+  - uid: 39140
+    components:
+    - type: Transform
+      pos: 0.5,50.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Janitorial
 - proto: RubberStampApproved
   entities:
   - uid: 29158
@@ -211911,7 +212273,7 @@ entities:
   - uid: 29244
     components:
     - type: Transform
-      pos: -62.5,7.5
+      pos: -62.45091,8.845468
       parent: 2
   - uid: 29245
     components:
@@ -231030,7 +231392,7 @@ entities:
   - uid: 32265
     components:
     - type: Transform
-      pos: 63.75272,-24.7508
+      pos: 63.679947,-25.01667
       parent: 2
 - proto: ToyHammer
   entities:
@@ -231085,7 +231447,7 @@ entities:
   - uid: 32275
     components:
     - type: Transform
-      pos: 63.385803,-24.640722
+      pos: 63.336197,-25.079168
       parent: 2
 - proto: ToyMarauder
   entities:
