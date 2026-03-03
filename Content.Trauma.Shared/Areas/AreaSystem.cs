@@ -83,7 +83,7 @@ public sealed class AreaSystem : EntitySystem
                 continue;
 
             var deptId = comp.Department;
-            if (DepartmentAreas.TryGetValue(deptId, out var list))
+            if (!DepartmentAreas.TryGetValue(deptId, out var list))
                 DepartmentAreas[deptId] = list = [];
             list.Add(id);
         }
