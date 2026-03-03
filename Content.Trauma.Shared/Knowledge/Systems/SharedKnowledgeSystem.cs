@@ -118,24 +118,27 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     private void OnMMIInserted(Entity<MMIComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
-        if (HasComp<BorgChassisComponent>(args.Container.Owner) && ent.Comp.BrainSlot.ContainerSlot?.ContainedEntity is not { } brain)
+        if (!HasComp<BorgChassisComponent>(args.Container.Owner) || ent.Comp.BrainSlot.ContainerSlot?.ContainedEntity is not { } brain)
             return;
         var body = args.Container.Owner;
         if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
             return;
-        knowledgeHolder.KnowledgeEntity = ent;
+        knowledgeHolder.KnowledgeEntity = brain;
         Dirty(body, knowledgeHolder);
     }
 
     private void OnMMIRemoved(Entity<MMIComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
-        if (HasComp<BorgChassisComponent>(args.Container.Owner) && ent.Comp.BrainSlot.ContainerSlot?.ContainedEntity is not { } brain)
+        if (!HasComp<BorgChassisComponent>(args.Container.Owner) || ent.Comp.BrainSlot.ContainerSlot?.ContainedEntity is not { } brain)
             return;
         var body = args.Container.Owner;
         if (!TryComp<KnowledgeHolderComponent>(body, out var knowledgeHolder))
             return;
-        knowledgeHolder.KnowledgeEntity = null;
-        Dirty(body, knowledgeHolder);
+        if (knowledgeHolder.KnowledgeEntity == brain)
+        {
+            knowledgeHolder.KnowledgeEntity = null;
+            Dirty(body, knowledgeHolder);
+        }
     }
 
     public void OnAddExperienceEvent(Entity<KnowledgeHolderComponent> ent, ref AddExperienceEvent args)
