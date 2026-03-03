@@ -6,13 +6,13 @@ using Robust.Shared.Prototypes;
 namespace Content.Trauma.Common.Knowledge.Components;
 
 /// <summary>
-/// Stores information about a set of constructed object
+/// Stores the quality info of an object
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class QualityComponent : Component
 {
     /// <summary>
-    /// Stores the level mastery of the item required to modify it.
+    /// Stores the level mastery of the item that will satisfactorily modify it.
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public Dictionary<EntProtoId, int> LevelDeltas = new();

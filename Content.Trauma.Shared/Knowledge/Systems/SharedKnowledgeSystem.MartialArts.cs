@@ -138,7 +138,7 @@ public abstract partial class SharedKnowledgeSystem
             if (args.Damage.GetTotal() > 0)
                 args.Damage *= 1 - 0.99f * SharpCurve(toughness);
         }
-        if (args.Damage.GetTotal() > 0 && _mobState.IsAlive(ent))
+        if (args.Damage.GetTotal() > 0 && !_mobState.IsDead(ent))
         {
             var ev = new AddExperienceEvent(ToughnessKnowledge, Math.Min((int) args.Damage.GetTotal() / 5, 10));
             RaiseLocalEvent(ent, ref ev);

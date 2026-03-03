@@ -6,8 +6,6 @@ using Content.Medical.Common.Weapons;
 using Content.Shared.Mech.Components;
 using Content.Shared.Weapons.Hitscan.Events;
 using Content.Trauma.Common.Projectiles;
-using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;

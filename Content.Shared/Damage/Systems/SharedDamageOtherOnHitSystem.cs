@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Trauma.Common.Knowledge;
-// </Trauma>
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;

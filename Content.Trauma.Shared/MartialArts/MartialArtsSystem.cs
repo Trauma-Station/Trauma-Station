@@ -69,20 +69,10 @@ public sealed partial class MartialArtsSystem : EntitySystem
         var sneakAttackQuery = EntityQueryEnumerator<SneakAttackComponent>();
         while (sneakAttackQuery.MoveNext(out var ent, out var sneakAttack))
         {
-            if (sneakAttack is { } && sneakAttack.IsFound)
+            if (sneakAttack.IsFound && _timing.CurTime >= sneakAttack.NextHidden)
             {
-                if (_timing.CurTime >= sneakAttack.NextHidden)
-                    sneakAttack.IsFound = false;
-            }
-        }
-
-        var fastDamageQuery = EntityQueryEnumerator<SneakAttackComponent>();
-        while (fastDamageQuery.MoveNext(out var ent, out var sneakAttack))
-        {
-            if (sneakAttack is { } && sneakAttack.IsFound)
-            {
-                if (_timing.CurTime >= sneakAttack.NextHidden)
-                    sneakAttack.IsFound = false;
+                sneakAttack.IsFound = false;
+                Dirty(ent, sneakAttack);
             }
         }
 

@@ -6,6 +6,7 @@ using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Body;
 using Content.Shared.Construction;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
@@ -52,6 +53,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         InitializeMartialArts();
         InitializeOnWear();
         InitializeConstruction();
+        InitializeQuality();
+        InitializeShooting();
 
         SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnKnowledgeContainerShutdown);
         SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotInsertedEvent>(OnOrganInserted);
@@ -181,18 +184,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             {
                 int diceType = DiceDictionary(ent);
                 rollResult = RollPenetrating(diceType);
-                Log.Debug($"Sleepy {ToPrettyString(ent)} needs to roll zenkai on {ToPrettyString(target)}. Suceeded? {rollResult.Item2}");
                 if (!(rollResult.Item2))
                     return false;
                 ent.Comp.Level += rollResult.Item1;
-                _damageable.HealEvenly(ent.Owner, 150);
-                Log.Debug($"{ToPrettyString(ent.Owner)}: zenkai boost");
+                if (TryComp<DamageableComponent>(target, out var damageable))
+                    _damageable.ClearAllDamage((target.Owner, damageable));
             }
             else if (HasComp<SleepingComponent>(target))
             {
                 int diceType = DiceDictionary(ent);
                 rollResult = RollPenetrating(diceType);
-                Log.Debug($"Sleepy {ToPrettyString(ent)} needs to roll on {ToPrettyString(target)}. Suceeded? {rollResult.Item2}");
                 if (!(rollResult.Item2))
                     return false;
             }

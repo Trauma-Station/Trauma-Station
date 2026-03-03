@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Trauma.Common.Knowledge;
-// </Trauma>
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;

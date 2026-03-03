@@ -91,7 +91,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         return martialArtsList
             .Select(martialArt =>
             {
-                var protoId = Prototype(martialArt.Owner)?.ID ?? string.Empty;
+                var protoId = Prototype(martialArt.Owner)!.ID ?? string.Empty;
                 return (Uid: martialArt.Owner, ProtoId: protoId);
             })
             .OrderBy(x => x.ProtoId) // Sort alphabetically by Prototype ID

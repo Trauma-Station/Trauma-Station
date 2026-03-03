@@ -108,14 +108,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
             }
         };
 
-        _knowledge ??= EntityManager.System<KnowledgeSystem>();
-
-        if (_player.LocalEntity is not { } player)
-            return martialArts;
-
-        var martialArtsList = _knowledge.GetMartialArtsForClientDoohickey(player);
-
-        if (martialArtsList == null)
+        if (_player.LocalEntity is not { } player || _knowledge.GetMartialArtsForClientDoohickey(player) is not { } martialArtsList)
             return martialArts;
 
         foreach (var martialArt in martialArtsList)
@@ -133,7 +126,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
 
     private void HandleRadialButtonClick(EntityUid? martialArt)
     {
-        if (_player.LocalEntity is not { } player)
+        if (_player.LocalEntity is not { })
             return;
 
         var netEnt = EntityManager.GetNetEntity(martialArt);

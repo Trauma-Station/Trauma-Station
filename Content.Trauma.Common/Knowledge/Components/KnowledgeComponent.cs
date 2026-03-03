@@ -29,7 +29,7 @@ public sealed partial class KnowledgeComponent : Component
     /// <summary>
     /// Current Stored experience.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int Experience;
 
     /// <summary>
