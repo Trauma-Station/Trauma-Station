@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.MartialArts;
 using Content.Medical.Common.Targeting;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle;
@@ -16,6 +15,7 @@ using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Trauma.Common.Input;
+using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
@@ -42,7 +42,6 @@ public sealed partial class TackleSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _dmg = default!;
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-
 
     public override void Initialize()
     {
