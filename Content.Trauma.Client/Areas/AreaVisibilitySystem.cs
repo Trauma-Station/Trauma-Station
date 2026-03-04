@@ -87,12 +87,13 @@ public sealed class AreaVisibilitySystem : CommonAreaVisibilitySystem
 
     private Button? EnsureButton(SandboxWindow window)
     {
-        // basically TryFindControl because engine is dogshit
-        if (window.FindNameScope() is not {} scope)
-            return null;
-
-        if (scope.Find(ButtonName) is {} existing)
-            return (Button) existing; // throws if it has the wrong type
+        // cant use NameScope because you arent allowed to register after xaml loads
+        // have to do this dogshit instead :))))
+        foreach (var child in window.Children)
+        {
+            if (child.Name == ButtonName)
+                return (Button) child;
+        }
 
         // want to have the areas button below the markers button, so markers is above areas
         var above = window.ShowMarkersButton;
@@ -108,8 +109,6 @@ public sealed class AreaVisibilitySystem : CommonAreaVisibilitySystem
         // now position it below markers button
         window.Buttons.AddChild(button);
         button.SetPositionInParent(index);
-        // needed so it can be got by Find when reopening the window
-        scope.Register(ButtonName, button);
         return button;
     }
 
