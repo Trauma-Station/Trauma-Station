@@ -4,8 +4,8 @@ meta:
   engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 03/04/2026 14:56:57
-  entityCount: 22419
+  time: 03/04/2026 15:32:45
+  entityCount: 22440
 maps:
 - 1
 grids:
@@ -9947,7 +9947,7 @@ entities:
       pos: 4.5,83.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -22507.867
+      secondsUntilStateChange: -22551.244
       state: Opening
     - type: AccessReader
       accessListsOriginal: []
@@ -9996,7 +9996,7 @@ entities:
     - type: AccessReader
       accessListsOriginal: []
     - type: Door
-      secondsUntilStateChange: -72988.484
+      secondsUntilStateChange: -73031.86
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11628,7 +11628,7 @@ entities:
       pos: 72.5,-33.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -16253.54
+      secondsUntilStateChange: -16296.916
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -12700,7 +12700,7 @@ entities:
     - type: AccessReader
       accessListsOriginal: []
     - type: Door
-      secondsUntilStateChange: -23288.334
+      secondsUntilStateChange: -23331.71
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -37664,6 +37664,111 @@ entities:
     components:
     - type: Transform
       pos: 96.5,-17.5
+      parent: 2
+  - uid: 22420
+    components:
+    - type: Transform
+      pos: 32.5,-26.5
+      parent: 2
+  - uid: 22421
+    components:
+    - type: Transform
+      pos: 32.5,-27.5
+      parent: 2
+  - uid: 22422
+    components:
+    - type: Transform
+      pos: 32.5,-28.5
+      parent: 2
+  - uid: 22423
+    components:
+    - type: Transform
+      pos: 32.5,-29.5
+      parent: 2
+  - uid: 22424
+    components:
+    - type: Transform
+      pos: 31.5,-29.5
+      parent: 2
+  - uid: 22425
+    components:
+    - type: Transform
+      pos: 30.5,-30.5
+      parent: 2
+  - uid: 22426
+    components:
+    - type: Transform
+      pos: 30.5,-31.5
+      parent: 2
+  - uid: 22427
+    components:
+    - type: Transform
+      pos: 30.5,-32.5
+      parent: 2
+  - uid: 22428
+    components:
+    - type: Transform
+      pos: 30.5,-29.5
+      parent: 2
+  - uid: 22429
+    components:
+    - type: Transform
+      pos: 29.5,-32.5
+      parent: 2
+  - uid: 22430
+    components:
+    - type: Transform
+      pos: 28.5,-32.5
+      parent: 2
+  - uid: 22431
+    components:
+    - type: Transform
+      pos: 27.5,-32.5
+      parent: 2
+  - uid: 22432
+    components:
+    - type: Transform
+      pos: 27.5,-33.5
+      parent: 2
+  - uid: 22433
+    components:
+    - type: Transform
+      pos: 27.5,-34.5
+      parent: 2
+  - uid: 22434
+    components:
+    - type: Transform
+      pos: 27.5,-35.5
+      parent: 2
+  - uid: 22435
+    components:
+    - type: Transform
+      pos: 27.5,-36.5
+      parent: 2
+  - uid: 22436
+    components:
+    - type: Transform
+      pos: 27.5,-37.5
+      parent: 2
+  - uid: 22437
+    components:
+    - type: Transform
+      pos: 28.5,-37.5
+      parent: 2
+  - uid: 22438
+    components:
+    - type: Transform
+      pos: 29.5,-37.5
+      parent: 2
+  - uid: 22439
+    components:
+    - type: Transform
+      pos: 29.5,-38.5
+      parent: 2
+  - uid: 22440
+    components:
+    - type: Transform
+      pos: 29.5,-39.5
       parent: 2
 - proto: CableHVStack
   entities:
@@ -67230,7 +67335,7 @@ entities:
       pos: 68.5,-32.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -19585.836
+      secondsUntilStateChange: -19629.213
       state: Closing
   - uid: 15747
     components:
