@@ -5,8 +5,6 @@ using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Body;
-using Content.Shared.Construction;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
@@ -17,9 +15,6 @@ using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Containers;
-using Robust.Shared.Map.Components;
-using Robust.Shared.Network;
-using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -185,8 +180,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         {
             if (_mobState.IsCritical(target))
             {
-                int diceType = DiceDictionary(ent);
-                rollResult = RollPenetrating(diceType);
+                rollResult = RollPenetrating(ent);
                 if (!(rollResult.Item2))
                     return false;
                 ent.Comp.Level += rollResult.Item1;
@@ -195,8 +189,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             }
             else if (HasComp<SleepingComponent>(target))
             {
-                int diceType = DiceDictionary(ent);
-                rollResult = RollPenetrating(diceType);
+                rollResult = RollPenetrating(ent);
                 if (!(rollResult.Item2))
                     return false;
             }
@@ -208,8 +201,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         (int, bool) rollInnard;
         for (int i = 0; i < timesToRoll; i++)
         {
-            int diceType = DiceDictionary(ent);
-            rollInnard = RollPenetrating(diceType);
+            rollInnard = RollPenetrating(ent);
             rollResult = (rollInnard.Item1, rollInnard.Item2 || rollResult.Item2);
             ent.Comp.Level += rollResult.Item1;
             if (rollInnard.Item2)
@@ -234,14 +226,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         return true;
     }
 
-    private int DiceDictionary(Entity<KnowledgeComponent> ent)
+    private int DiceDictionary(Entity<KnowledgeComponent> ent, int shift = 0)
     {
-        return ent.Comp.Level switch
+        return (GetMastery(ent) + shift) switch
         {
-            >= 88 => 3,
-            >= 76 => 4,
-            >= 51 => 6,
-            >= 26 => 8,
+            >= 5 => 3,
+            >= 4 => 4,
+            >= 3 => 6,
+            >= 2 => 8,
             >= 1 => 12,
             _ => 20,
         };
@@ -670,27 +662,23 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         return ((float) (offset - knowledge.Comp.Level) / inverseScale) * ((float) (offset - knowledge.Comp.Level) / inverseScale);
     }
 
-    public (int, bool) RollPenetrating(int sides, bool didCritical = false)
+    public (int, bool) RollPenetrating(Entity<KnowledgeComponent> ent)
     {
-
+        var sides = DiceDictionary(ent);
         bool isCritical = false;
         int penetratingRolls = 0;
         int currentRoll = _seed.Next(1, sides + 1);
         int total = currentRoll;
-        int newSides = sides;
 
-        while (currentRoll == newSides && penetratingRolls < 10)
+        Log.Error($"Rolling: {currentRoll}, max {sides}, {isCritical}");
+        while (currentRoll == sides && penetratingRolls < 10)
         {
             penetratingRolls++;
-            newSides = newSides switch
-            {
-                100 => 20,
-                20 => 6,
-                _ => newSides
-            };
-            currentRoll = _seed.Next(1, newSides + 1);
+            sides = DiceDictionary(ent, penetratingRolls);
+            currentRoll = _seed.Next(1, sides + 1);
             total += currentRoll - 1;
             isCritical = true;
+            Log.Error($"Rolling pen: {currentRoll}, max {sides}, {isCritical}");
         }
 
         return (total, isCritical);
