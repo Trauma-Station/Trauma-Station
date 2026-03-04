@@ -58,7 +58,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         InitializeQuality();
         InitializeShooting();
 
-        SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnKnowledgeContainerShutdown);
+        SubscribeLocalEvent<KnowledgeContainerComponent, ComponentStartup>(OnContainerStartup);
+        SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnContainerShutdown);
         SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotInsertedEvent>(OnOrganInserted);
         SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotRemovedEvent>(OnOrganRemoved);
         SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainInsertedEvent>(OnBorgBrainInserted);
@@ -96,7 +97,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     }
 
 
-    private void OnKnowledgeContainerShutdown(Entity<KnowledgeContainerComponent> ent, ref ComponentShutdown args)
+    private void OnContainerStartup(Entity<KnowledgeContainerComponent> ent, ref ComponentStartup args)
+    {
+        EnsureContainer(ent);
+    }
+
+    private void OnContainerShutdown(Entity<KnowledgeContainerComponent> ent, ref ComponentShutdown args)
     {
         if (ent.Comp.Container is { } container)
             _container.ShutdownContainer(container);
@@ -330,7 +336,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         PredictedTrySpawnInContainer(id, ent.Owner, KnowledgeContainerComponent.ContainerId, out var spawned);
         if (spawned is not {} unit)
+        {
+            Log.Error($"Failed to spawn knowledge {id} for {ToPrettyString(ent)}!");
             return null;
+        }
 
         var comp = _query.Comp(unit);
         comp.Level = level;
