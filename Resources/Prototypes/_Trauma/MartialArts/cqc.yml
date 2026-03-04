@@ -78,6 +78,7 @@
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 60
+  - !type:StealItem
   levelRequired: 26
 
 - type: combo
