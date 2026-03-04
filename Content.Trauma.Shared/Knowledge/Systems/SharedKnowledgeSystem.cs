@@ -104,7 +104,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     protected void LinkContainer(EntityUid target, Entity<KnowledgeContainerComponent> ent)
     {
+        // its all networked
+        if (_timing.ApplyingState)
+            return;
+
         var holder = EnsureComp<KnowledgeHolderComponent>(target);
+        if (holder.KnowledgeEntity == ent.Owner)
+            return; // no change
 
         DebugTools.Assert(ent.Comp.Holder == null,
             $"Tried to link {ToPrettyString(target)} to {ToPrettyString(ent)} but it was already linked to another holder {ToPrettyString(ent.Comp.Holder)}!");
@@ -119,7 +125,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     private void UnlinkContainer(EntityUid target, Entity<KnowledgeContainerComponent> ent)
     {
-        if (!_holderQuery.TryComp(target, out var holder))
+        // its all networked
+        if (_timing.ApplyingState ||
+            !_holderQuery.TryComp(target, out var holder) ||
+            holder.KnowledgeEntity == null) // already unlinked
             return;
 
         DebugTools.Assert(ent.Comp.Holder == target,
