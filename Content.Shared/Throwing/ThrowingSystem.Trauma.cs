@@ -25,7 +25,7 @@ public sealed partial class ThrowingSystem
         {
             if (_knowledge.GetMastery(strength) < 2)
             {
-                baseThrowSpeed *= 0.5f + _knowledge.SharpCurve(strength, 0, 26.0f) / (2.0f);
+                baseThrowSpeed *= 1 + _knowledge.SharpCurve(strength, 0, 26.0f) / (2.0f);
             }
             else if (_knowledge.GetMastery(strength) > 2)
             {
@@ -36,18 +36,11 @@ public sealed partial class ThrowingSystem
             baseThrowSpeed *= 0.5f;
         if (_knowledge.TryGetKnowledgeUnit(user, ThrowingKnowledge) is { } throwing)
         {
-            if (_knowledge.GetMastery(throwing) < 2)
-            {
-                throwingRandomness = 1.0f - _knowledge.SharpCurve(throwing, 0, 26.0f);
-                throwingRandomness *= _gun.Random(user).NextFloat(-0.5f, 0.5f) * 3.14159f;
-            }
-            else if (_knowledge.GetMastery(throwing) > 2)
+            if (_knowledge.GetMastery(throwing) > 2)
             {
                 baseThrowSpeed *= 1 + 0.2f * _knowledge.SharpCurve(throwing, -50, 50.0f);
             }
         }
-        else
-            throwingRandomness = _gun.Random(user).NextFloat(-0.5f, 0.5f) * 3.14159f;
         var evThrowing = new AddExperienceEvent(ThrowingKnowledge, 1);
         RaiseLocalEvent(user, ref evThrowing);
         var evStrength = new AddExperienceEvent(StrengthKnowledge, 1);
