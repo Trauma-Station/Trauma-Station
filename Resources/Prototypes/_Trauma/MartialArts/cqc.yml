@@ -17,7 +17,7 @@
       types:
         Blunt: 12
   - !type:ModifyKnockdown
-    time: 20
+    time: 5
     drop: true
     type: Add
   levelRequired: 26

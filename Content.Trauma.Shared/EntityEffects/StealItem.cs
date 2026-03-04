@@ -3,8 +3,9 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Wieldable;
+using Content.Shared.Wieldable.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -25,6 +26,7 @@ public sealed class StealItemSystem : EntityEffectSystem<HandsComponent, StealIt
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedWieldableSystem _wield = default!;
 
     protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<StealItem> args)
     {
@@ -35,13 +37,28 @@ public sealed class StealItemSystem : EntityEffectSystem<HandsComponent, StealIt
         if (Random(user).NextFloat(0.0f, 1.0f) >= Math.Min(0.5f * args.Scale, 1f))
             return;
 
-        if (!_hands.TryGetActiveItem(target, out var item) || (!HasComp<HandsComponent>(user)))
+        if (!TryComp<HandsComponent>(ent, out var hands) || (!HasComp<HandsComponent>(user)))
             return;
 
-        if (!_hands.TryDrop(target, item.Value))
+        EntityUid? item = null;
+        if (_hands.TryGetActiveItem(target, out item))
+        {
+            foreach (var hand in hands.Hands)
+            {
+                item = _hands.GetHeldItem((ent, hands), hand.Key);
+            }
+        }
+
+        if (item is not { } trueItem)
             return;
 
-        _hands.TryPickup(user, item.Value);
+        if (TryComp<WieldableComponent>(ent, out var wield))
+            _wield.TryUnwield(trueItem, wield, ent, true);
+
+        if (!_hands.TryDrop(target, trueItem))
+            return;
+
+        _hands.TryPickupAnyHand(user, trueItem);
     }
 
     public System.Random Random(EntityUid uid)

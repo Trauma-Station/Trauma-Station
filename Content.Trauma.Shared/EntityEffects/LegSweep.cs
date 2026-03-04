@@ -38,7 +38,7 @@ public sealed class LegSweepEffectSystem : EntityEffectSystem<TransformComponent
         if (_standing.IsDown(user))
         {
             _standing.Stand(user, force: true);
-            _stun.SetKnockdownTime(user, TimeSpan.FromSeconds(0));
+            _stun.ForceStandUp(user);
             _stun.TryKnockdown(ent.Owner, duration * 2, true);
         }
         else
