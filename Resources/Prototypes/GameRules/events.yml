@@ -27,6 +27,7 @@
     - id: SpiderClownSpawn
     - id: SpiderSpawn
     - id: VentClog
+    - id: HellGooseSpawn # Goobstation
 
 - type: entityTable
   id: BasicAntagEventsTable
