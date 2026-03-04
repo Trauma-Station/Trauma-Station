@@ -103,4 +103,4 @@
 - type: latheRecipe
   id: RevGunpowder
   parent: BaseRevsMaterials
-  result: MaterialGunpowder60
+  result: MaterialGunpowder30

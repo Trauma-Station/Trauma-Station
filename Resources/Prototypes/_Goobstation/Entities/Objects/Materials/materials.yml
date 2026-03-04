@@ -19,11 +19,12 @@
   parent: MaterialBase
   id: MaterialBSCrystal
   name: bluespace crystal
-  suffix: Full
+  suffix: Single
   components:
   - type: Stack
     stackType: BSCrystal
     baseLayer: base
+    count: 1
     layerStates:
     - bluespace_crystal
     - bluespace_crystal_2
@@ -53,10 +54,10 @@
 - type: entity
   parent: MaterialBSCrystal
   id: MaterialBSCrystal1
-  suffix: Single
+  suffix: Full
   components:
   - type: Stack
-    count: 1
+    count: 30
 
 - type: entity
   parent: MaterialBSCrystal

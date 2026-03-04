@@ -10,8 +10,8 @@
 
 - type: material
   id: BSCrystal
-  stackEntity: MaterialBSCrystal1
-  name: materials-bscrystal
+  stackEntity: MaterialBSCrystal
+  name: materials-BSCrystal
   unit: materials-unit-piece
   icon: { sprite: _Goobstation/Objects/Materials/materials.rsi, state: bluespace_crystal }
   color: "#80ffff"
@@ -25,3 +25,4 @@
   icon: { sprite: _Goobstation/Objects/Materials/materials.rsi, state: bluespace_crystal }
   color: "#80ffff"
   price: 1.175
+
