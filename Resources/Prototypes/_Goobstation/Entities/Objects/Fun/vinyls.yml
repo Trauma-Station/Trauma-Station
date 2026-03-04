@@ -6,6 +6,8 @@
   parent: BaseItem
   components:
   - type: Vinyl
+    song:
+      path: /Audio/_Trauma/RadioStation/Music/thebestsongever.ogg
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/RadioStation/vinyls.rsi
   - type: EmbeddableProjectile
@@ -80,9 +82,6 @@
   components:
   - type: Sprite
     state: ai-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/SpaceJazz.ogg
 
 - type: entity
   name: "vinyl disk: airport lounge"
@@ -92,9 +91,6 @@
   components:
   - type: Sprite
     state: devil-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/AirportLounge.ogg
 
 - type: entity
   name: "vinyl disk: boogie party"
@@ -104,9 +100,6 @@
   components:
   - type: Sprite
     state: pizza-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/BoogieParty.ogg
 
 - type: entity
   name: "vinyl disk: corncob"
@@ -116,9 +109,6 @@
   components:
   - type: Sprite
     state: glossy-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/Corncob.ogg
 
 - type: entity
   name: "vinyl disk: night in Venice"
@@ -127,9 +117,6 @@
   components:
   - type: Sprite
     state: red-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/NightInVenice.ogg
 
 - type: entity
   name: "vinyl disk: distant star"
@@ -138,9 +125,6 @@
   components:
   - type: Sprite
     state: lightblue-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/distant_star.ogg
 
 - type: entity
   name: "vinyl disk: banana"
@@ -168,9 +152,6 @@
         hard: false
         layer:
         - SlipLayer
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/honkmas.ogg
 
 - type: entity
   name: "vinyl disk: atlas"
@@ -180,9 +161,6 @@
   components:
   - type: Sprite
     state: carrot-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/atlas.ogg
 
 - type: entity
   name: "vinyl disk: beaches"
@@ -191,9 +169,6 @@
   components:
   - type: Sprite
     state: cyan-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/beaches.ogg
 
 - type: entity
   name: "vinyl disk: vibing over venus"
@@ -202,9 +177,6 @@
   components:
   - type: Sprite
     state: blue-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/VibingOverVenus.ogg
 
 - type: entity
   name: "vinyl disk: deadly roulette"
@@ -213,9 +185,6 @@
   components:
   - type: Sprite
     state: yellow-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/DeadlyRoulette.ogg
 
 - type: entity
   name: "vinyl disk: late night radio"
@@ -224,9 +193,6 @@
   components:
   - type: Sprite
     state: green-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/LateNightRadio.ogg
 
 - type: entity
   name: "vinyl disk: adventure 3"
@@ -236,9 +202,6 @@
   components:
   - type: Sprite
     state: purple-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/adventure_3.ogg
 
 - type: entity
   name: "vinyl disk: everyone is so alive"
@@ -247,9 +210,6 @@
   components:
   - type: Sprite
     state: orange-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/everyone_is_so_alive.ogg
 
 - type: entity
   name: "vinyl disk: groovy"
@@ -258,9 +218,6 @@
   components:
   - type: Sprite
     state: white-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/groovy.ogg
 
 - type: entity
   name: "vinyl disk: fart elise"
@@ -270,9 +227,6 @@
   components:
   - type: Sprite
     state: lightishred-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/fart_elise.ogg
 
 - type: entity
   name: "vinyl disk: dance on a space volcano"
@@ -281,9 +235,6 @@
   components:
   - type: Sprite
     state: darkblue-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/dance_on_a_space_volcano.ogg
 
 - type: entity
   name: "vinyl disk: floaty"
@@ -292,9 +243,6 @@
   components:
   - type: Sprite
     state: floaty-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/floaty.ogg
 
 - type: entity
   name: "vinyl disk: key lime"
@@ -303,9 +251,6 @@
   components:
   - type: Sprite
     state: lime-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/key_lime.ogg
 
 - type: entity
   name: "vinyl disk: christmassong"
@@ -314,9 +259,7 @@
   components:
   - type: Sprite
     state: pink-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/christmassong.ogg
+
 
 - type: entity
   name: "vinyl disk: burn the world waltz"
@@ -325,9 +268,7 @@
   components:
   - type: Sprite
     state: red-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/BurnTheWorldWaltz.ogg
+
 
 - type: entity
   name: "vinyl disk: feral angel waltz"
@@ -336,9 +277,6 @@
   components:
   - type: Sprite
     state: darkblue-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/FeralAngelWaltz.ogg
 
 - type: entity
   name: "vinyl disk: Also sprach Zarathustra"
@@ -347,9 +285,6 @@
   components:
   - type: Sprite
     state: white-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/Also-Sprach-Zarathustra-PM-Music.ogg
 
 - type: entity
   name: "vinyl disk: Ride of the Valkyries"
@@ -358,9 +293,8 @@
   components:
   - type: Sprite
     state: white-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/Ride-of-the-Valkyries-PM-Music.ogg
+
+
 
 - type: entity
   name: "vinyl disk: Romeo and Juliet"
@@ -369,9 +303,7 @@
   components:
   - type: Sprite
     state: white-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/Romeo-and-Juliet-PM-Music.ogg
+
 
 - type: entity
   name: "vinyl disk: Russian Dance"
@@ -380,9 +312,7 @@
   components:
   - type: Sprite
     state: white-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/Russian-Dance-PM-Music.ogg
+
 
 - type: entity
   name: "vinyl disk: The Flower Duet"
@@ -391,9 +321,7 @@
   components:
   - type: Sprite
     state: white-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/The-Flower-Duet-PM-Music.ogg
+
 
 - type: entity
   name: "vinyl disk: Winter Vivaldi"
@@ -402,9 +330,7 @@
   components:
   - type: Sprite
     state: white-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/Winter-Vivaldi-PM-Music.ogg
+
 
 - type: entity
   name: "vinyl disk: Bach Cello"
@@ -413,9 +339,6 @@
   components:
   - type: Sprite
     state: white-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/Bach-Cello-Suite-PM-Music.ogg
 
 - type: entity
   name: "vinyl disk: Get that antag!"
@@ -424,9 +347,6 @@
   components:
   - type: Sprite
     state: valid-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/GetThatAntag!.ogg
 
 - type: entity
   name: "vinyl disk: Want you gone"
@@ -435,9 +355,6 @@
   components:
   - type: Sprite
     state: earth-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/WantYouGone.ogg
 
 - type: entity
   name: "vinyl disk: Law 2, open armory"
@@ -446,9 +363,6 @@
   components:
   - type: Sprite
     state: aisad-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/LAW2OPENARMORY.ogg
 
 - type: entity
   name: "vinyl disk: Ephedrine Overdose"
@@ -457,9 +371,7 @@
   components:
   - type: Sprite
     state: ephedrine-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/EphedrineOverdose.ogg
+
 
 - type: entity
   name: "vinyl disk: Running Out Cover"
@@ -468,9 +380,7 @@
   components:
   - type: Sprite
     state: greenish-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/RunningOutCover.ogg
+
 
 - type: entity
   name: "vinyl disk: Journey"
@@ -479,9 +389,7 @@
   components:
   - type: Sprite
     state: ttd-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/OpenTTDJourney.ogg
+
 
 - type: entity
   name: "vinyl disk: Traitorous Intent"
@@ -490,9 +398,7 @@
   components:
   - type: Sprite
     state: lightishred-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/TraitorousIntent.ogg
+
 
 - type: entity
   name: "vinyl disk: Violet"
@@ -501,9 +407,9 @@
   components:
   - type: Sprite
     state: purple-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/violet.ogg
+
+
+
 
 - type: entity
   name: "vinyl disk: lay egg is true"
@@ -512,9 +418,8 @@
   components:
   - type: Sprite
     state: pizza-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/lay_egg_is_true.ogg
+
+
 
 - type: entity
   name: "vinyl disk: We are number two"
@@ -523,9 +428,8 @@
   components:
   - type: Sprite
     state: purple-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/we_are_number_two.ogg
+
+
 
 - type: entity
   name: "vinyl disk: EXTRA METAL"
@@ -534,9 +438,8 @@
   components:
   - type: Sprite
     state: green-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/xtra.ogg
+
+
 
 - type: entity
   name: forgotten vinyl disk
@@ -546,9 +449,8 @@
   components:
   - type: Sprite
     state: forgotten-vinyl-disk
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/peakasshole.ogg
+
+
 
 - type: entity
   name: broken vinyl disk
