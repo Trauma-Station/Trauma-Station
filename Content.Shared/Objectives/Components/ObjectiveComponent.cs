@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Systems;
 using Robust.Shared.Utility;
@@ -51,16 +42,10 @@ public sealed partial class ObjectiveComponent : Component
     public SpriteSpecifier? Icon;
 
     /// <summary>
-    /// Goob - Server currency awarded for if this completed at round end
+    /// Trauma - if true, this objective will use the old failed/completed text on round end. If all objectives use old summary, the player will be unable to submit a custom summary.
     /// </summary>
     [DataField]
-    public int ServerCurrency = 5;
-
-    /// <summary>
-    /// Goob - Should the percentage of currency rewarded correspond to the percentage of the objective completed
-    /// </summary>
-    [DataField]
-    public bool ServerCurrencyRewardPartial;
+    public bool UseOldSummary;
 }
 
 /// <summary>

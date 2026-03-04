@@ -6,6 +6,7 @@
   - type: Objective
     difficulty: 1
     issuer: objective-issuer-xenomorph-hive
+    useOldSummary: true # Not RP antag
   - type: RoleRequirement
     roles:
     - XenomorphRole

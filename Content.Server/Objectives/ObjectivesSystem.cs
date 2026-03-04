@@ -1,35 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Colin-Tel <113523727+Colin-Tel@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Flareguy <78941145+Flareguy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 themias <89101928+themias@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Crotalus <Crotalus@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Hreno <hrenor@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Conchelle <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Killerqu00 <47712032+Killerqu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.GameTicking;
 using Content.Server.Shuttles.Systems;
 using Content.Shared.Cuffs.Components;
@@ -226,10 +194,6 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
 
                     var objectiveTitle = info.Value.Title;
                     var progress = info.Value.Progress;
-                    // <Goob>
-                    var reward = info.Value.ServerCurrency;
-                    var rewardPartial = info.Value.PartialCurrency;
-                    // </Goob>
                     totalObjectives++;
 
                     // Goob (even tho the entire file got massacred by John already)
@@ -245,71 +209,51 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
                                     $"{username:subject} achieved {progress}% of objective {objectiveTitle}");
 
                     agentSummary.Append("- ");
-                    /* Begin DeltaV removal - Removed greentext
-                    if (!_showGreentext)
+                    // <Trauma>
+                    if (!TryComp<CustomObjectiveSummaryComponent>(mindId, out var summary) || summary.ObjectiveSummary.Length <= 0 || info.Value.UseOldSummary) // If the objective should use greentext, or the player didn't write a summary, use greentext as a fallback
                     {
-                        agentSummary.AppendLine(objectiveTitle);
-                    }
-                    else if (progress > 0.99f)
-                    {
-                        agentSummary.AppendLine(Loc.GetString(
-                            "objectives-objective-success",
-                            ("objective", objectiveTitle),
-                            ("progress", progress)
-                        ));
-                        completedObjectives++;
-
-                        // <Goob>
-                        // Easiest place to give people points for completing objectives lol
-                        if (userid is {} id)
+                        if (!_showGreentext)
                         {
-                            if (currencyStorage.ContainsKey(id))
-                                currencyStorage[id] += reward;
-                            else
-                                currencyStorage.Add(id, reward);
+                            agentSummary.AppendLine(objectiveTitle);
+                            continue;
                         }
-                        // </Goob>
-                    }
-                    else if (progress <= 0.99f && progress >= 0.5f)
-                    {
-                        agentSummary.AppendLine(Loc.GetString(
-                            "objectives-objective-partial-success",
-                            ("objective", objectiveTitle),
-                            ("progress", progress)
-                        ));
-                        // <Goob>
-                        if (rewardPartial && userid is {} id)
+                        else if (progress > 0.99f)
                         {
-                            if (currencyStorage.ContainsKey(id))
-                                currencyStorage[id] += reward * progress;
-                            else
-                                currencyStorage.Add(id, reward * progress);
+                            agentSummary.AppendLine(Loc.GetString(
+                                "objectives-objective-success",
+                                ("objective", objectiveTitle),
+                                ("progress", progress)
+                            ));
+                            completedObjectives++;
                         }
-                        // </Goob>
-                    }
-                    else if (progress < 0.5f && progress > 0f)
-                    {
-                        agentSummary.AppendLine(Loc.GetString(
-                            "objectives-objective-partial-failure",
-                            ("objective", objectiveTitle),
-                            ("progress", progress)
-                        ));
+                        else if (progress <= 0.99f && progress >= 0.5f)
+                        {
+                            agentSummary.AppendLine(Loc.GetString(
+                                "objectives-objective-partial-success",
+                                ("objective", objectiveTitle),
+                                ("progress", progress)
+                            ));
+                        }
+                        else if (progress < 0.5f && progress > 0f)
+                        {
+                            agentSummary.AppendLine(Loc.GetString(
+                                "objectives-objective-partial-failure",
+                                ("objective", objectiveTitle),
+                                ("progress", progress)
+                            ));
+                        }
+                        else
+                        {
+                            agentSummary.AppendLine(Loc.GetString(
+                                "objectives-objective-fail",
+                                ("objective", objectiveTitle),
+                                ("progress", progress)
+                            ));
+                        }
                     }
                     else
-                    {
-                        agentSummary.AppendLine(Loc.GetString(
-                            "objectives-objective-fail",
-                            ("objective", objectiveTitle),
-                            ("progress", progress)
-                        ));
-                    }
-                    End DeltaV removal */
-                    // Begin DeltaV Additions - Generic objective
-                    agentSummary.AppendLine(Loc.GetString(
-                        "objectives-objective",
-                        ("objective", objectiveTitle)
-                    ));
-                    // End DeltaV Additions
+                        agentSummary.AppendLine(Loc.GetString("objectives-objective", ("objective", objectiveTitle)));
+                    // </Trauma>
                 }
             }
 

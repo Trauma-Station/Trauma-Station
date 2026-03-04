@@ -11,6 +11,7 @@
     icon:
       sprite: Objects/Devices/nuke.rsi
       state: nuclearbomb_base
+    useOldSummary: true # Doesn't show in summary
   - type: RoleRequirement
     roles:
     - NukeopsRole

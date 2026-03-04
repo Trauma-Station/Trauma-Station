@@ -17,6 +17,7 @@
     icon:
       sprite: _Goobstation/Blob/Mobs/blob.rsi
       state: blob_nuke_overlay
+    useOldSummary: true # Not an RP antag
   - type: RoleRequirement
     roles:
     - BlobRole

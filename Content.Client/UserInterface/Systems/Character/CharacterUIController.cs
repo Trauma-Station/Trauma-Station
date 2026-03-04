@@ -181,8 +181,19 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
 
             _window.Objectives.AddChild(objectiveControl);
         }
-        // Begin DeltaV Additions - Custom objective summary
+        // <Trauma>
+        var useCustomSumamry = false;
         if (objectives.Count > 0)
+        {
+            foreach (var objectiveInfos in objectives.Values) // Check if we have any objectives that want to use new summary
+                foreach (var objective in objectiveInfos) // I dunno man it's just laid out like that for some reason
+                {
+                    if (objective.UseOldSummary) continue;
+                    useCustomSumamry = true;
+                    break;
+                }
+        }
+        if (useCustomSumamry)
         {
             var button = new Button
             {
@@ -193,7 +204,7 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
 
             _window.Objectives.AddChild(button);
         }
-        // End DeltaV Additions
+        // </Trauma>
 
         if (briefing != null)
         {

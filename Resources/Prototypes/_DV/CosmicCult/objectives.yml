@@ -6,6 +6,7 @@
   - type: Objective
     difficulty: 1.5
     issuer: objective-issuer-cosmiccult
+    useOldSummary: true # Doesn't show in summary
   - type: RoleRequirement
     roles:
     - CosmicCultRole
@@ -18,6 +19,7 @@
   - type: Objective
     difficulty: 1.5
     issuer: objective-issuer-cosmiccult
+    useOldSummary: true # Doesn't show in summary
   - type: RoleRequirement
     roles:
     - CosmicColossusRole

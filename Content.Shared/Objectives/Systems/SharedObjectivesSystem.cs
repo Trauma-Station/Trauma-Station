@@ -136,7 +136,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
         }
 
         return new ObjectiveInfo(title, description, comp.Icon, progress,
-            comp.ServerCurrency, comp.ServerCurrencyRewardPartial); // Goob
+            comp.UseOldSummary); // Trauma
     }
 
     /// <summary>
