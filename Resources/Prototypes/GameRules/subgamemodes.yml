@@ -29,7 +29,7 @@
       startingGear: ThiefGear
       jobBlacklist: [ Chaplain ] # Goob
       components:
-      - type: Pacifism
+      - type: Pacified
       - type: Thieving
         stripTimeReduction: 2
         stealthy: true
