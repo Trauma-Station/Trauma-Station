@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ RadioJammer, BaseRevMajorContraband ]
+  parent: [ BaseRevMajorContraband, RadioJammer ]
   id: RevRadioJammer
   name: revolutionary radio jammer
   components:
