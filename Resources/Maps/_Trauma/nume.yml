@@ -4,8 +4,8 @@ meta:
   engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 03/04/2026 15:49:24
-  entityCount: 22480
+  time: 03/04/2026 16:20:19
+  entityCount: 22491
 maps:
 - 1
 grids:
@@ -9945,7 +9945,7 @@ entities:
       pos: 4.5,83.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -23537.154
+      secondsUntilStateChange: -23770.973
       state: Opening
     - type: AccessReader
       accessListsOriginal: []
@@ -9994,7 +9994,7 @@ entities:
     - type: AccessReader
       accessListsOriginal: []
     - type: Door
-      secondsUntilStateChange: -74017.77
+      secondsUntilStateChange: -74251.59
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11626,7 +11626,7 @@ entities:
       pos: 72.5,-33.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -17282.826
+      secondsUntilStateChange: -17516.645
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -12700,7 +12700,7 @@ entities:
     - type: AccessReader
       accessListsOriginal: []
     - type: Door
-      secondsUntilStateChange: -24317.621
+      secondsUntilStateChange: -24551.44
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -16786,6 +16786,18 @@ entities:
     components:
     - type: Transform
       pos: 29.5,-9.5
+      parent: 2
+- proto: ArrivalsShuttleTimer
+  entities:
+  - uid: 22482
+    components:
+    - type: Transform
+      pos: -31.5,20.5
+      parent: 2
+  - uid: 22483
+    components:
+    - type: Transform
+      pos: -30.5,37.5
       parent: 2
 - proto: Ashtray
   entities:
@@ -67461,7 +67473,7 @@ entities:
       pos: 68.5,-32.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -20615.123
+      secondsUntilStateChange: -20848.941
       state: Closing
   - uid: 15747
     components:
@@ -112262,6 +112274,56 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 90.5,-21.5
+      parent: 2
+  - uid: 22481
+    components:
+    - type: Transform
+      pos: -19.5,-9.5
+      parent: 2
+  - uid: 22484
+    components:
+    - type: Transform
+      pos: -8.5,24.5
+      parent: 2
+  - uid: 22485
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 42.5,21.5
+      parent: 2
+  - uid: 22486
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 23.5,23.5
+      parent: 2
+  - uid: 22487
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 47.5,-12.5
+      parent: 2
+  - uid: 22488
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 49.5,-42.5
+      parent: 2
+  - uid: 22489
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 19.5,-34.5
+      parent: 2
+  - uid: 22490
+    components:
+    - type: Transform
+      pos: 27.5,-21.5
+      parent: 2
+  - uid: 22491
+    components:
+    - type: Transform
+      pos: -3.5,-13.5
       parent: 2
 - proto: Screwdriver
   entities:
