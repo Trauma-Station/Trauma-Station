@@ -41,7 +41,7 @@ public sealed class RandomFoxyJumpscare : EntitySystem
     {
         var image = new SpriteSpecifier.Texture(new ResPath(FoxyImage));
 
-        // JUMPSCARE EVERYONE AT THE SAME TIME
+        // JUMPSCARE
         foreach (var session in _player.Sessions)
         {
             _audio.PlayGlobal(jumpscaresound, session);
