@@ -62,6 +62,20 @@
   - type: MobMover
   - type: MovementSpeedModifier
   - type: LagCompensation
+  - type: ReplacementAccent
+    accent: Elvis
+  - type: RandomTrigger
+    prob: 0.075 # 7.5%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        conditions:
+        - !type:NestedCondition
+          proto: IsAwake
+        - !type:InContainerCondition
+          inverted: true # can't dance inside a locker bro
+        proto: MutationElvisDance
 
 - type: entity
   save: false

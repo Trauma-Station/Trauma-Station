@@ -166,6 +166,7 @@
   name: Uristititi McVox
   components:
   # <Trauma>
+  - type: BritishAccent
   - type: Uncloneable
   - type: LanguageKnowledge
     speaks:
