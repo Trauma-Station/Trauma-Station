@@ -6,6 +6,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -20,7 +21,7 @@ using Robust.Shared.Timing;
 namespace Content.Shared.Chemistry.EntitySystems;
 
 /// <summary>
-/// Trauma - code relating to DNA freshness and GetSolution overriding.
+/// Trauma - code relating to DNA freshness, GetSolution overriding and skills.
 /// </summary>
 public sealed partial class InjectorSystem
 {
@@ -93,41 +94,40 @@ public sealed partial class InjectorSystem
     /// <summary>
     /// Runs the logic for checking and failing to inject someone due to low knowledge.
     /// </summary>
-    /// <param name="user"></param>
-    /// <param name="target"></param>
-    /// <returns></returns>
     private bool TryGetKnowledgeFirstAidFail(EntityUid user, EntityUid target)
     {
-        if (HasComp<KnowledgeHolderComponent>(user) && HasComp<MobStateComponent>(target) && !_mobState.IsDead(target))
+        if (!HasComp<KnowledgeHolderComponent>(user) || !HasComp<MobStateComponent>(target) || _mobState.IsDead(target))
+            return false;
+
+        var evFirstAid = new AddExperienceEvent(FirstAidKnowledge, 1);
+        RaiseLocalEvent(user, ref evFirstAid);
+
+        if (_knowledge.GetKnowledge(user, FirstAidKnowledge) is { } firstAid)
         {
-            var evFirstAid = new AddExperienceEvent(FirstAidKnowledge, 1);
-            RaiseLocalEvent(user, ref evFirstAid);
+            if (_knowledge.GetMastery(firstAid.Comp) > 1)
+                return false;
 
-            if (_knowledge.TryGetKnowledgeUnit(user, FirstAidKnowledge) is { } firstAid)
-            {
-                if (_knowledge.GetMastery(firstAid) > 1)
-                    return false;
-                var seed = new System.Random(SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(user).Id));
-                if (seed.Prob(_knowledge.SharpCurve(firstAid, 0, 26)))
-                    return false;
-            }
+            if (SharedRandomExtensions.PredictedProb(_timing, _knowledge.SharpCurve(firstAid, 0, 26), GetNetEntity(user)))
+                return false;
+        }
 
-            var part = TargetBodyPart.Chest;
-            if (TryComp<TargetingComponent>(user, out var targeting))
-            {
-                part = targeting.Target;
-            }
-            _damageable.TryChangeDamage(target, NeedleDamage, targetPart: part, origin: user);
-            if (user == target)
-            {
-                _popup.PopupClient(Loc.GetString("injection-failed-self", ("target", target), ("user", user), ("part", part)), user, user);
-                return true;
-            }
-            _popup.PopupClient(Loc.GetString("injection-failed-user", ("target", target), ("user", user), ("part", part)), user, user);
-            _popup.PopupClient(Loc.GetString("injection-failed-target", ("target", target), ("user", user), ("part", part)), target, target);
+        var part = TargetBodyPart.Chest;
+        if (TryComp<TargetingComponent>(user, out var targeting))
+        {
+            part = targeting.Target;
+        }
+        _damageable.TryChangeDamage(target, NeedleDamage, targetPart: part, origin: user);
+        if (user == target)
+        {
+            _popup.PopupClient(Loc.GetString("injection-failed-self"), user, user);
             return true;
         }
-        return false;
+
+        var uIdent = Identity.Entity(user, EntityManager);
+        var tIdent = Identity.Entity(target, EntityManager);
+        _popup.PopupClient(Loc.GetString("injection-failed-user", ("target", tIdent), ("part", part)), user, user);
+        _popup.PopupEntity(Loc.GetString("injection-failed-target", ("user", uIdent), ("part", part)), target, target);
+        return true;
     }
 }
 

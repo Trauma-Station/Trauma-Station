@@ -6,38 +6,30 @@ using Robust.Shared.Serialization;
 namespace Content.Trauma.Common.Knowledge;
 
 /// <summary>
-/// Event that sends the client's wanted martial art entity to the server to update the martial art skill of the knowledge container component.
+/// Event that sends the client's wanted martial art id to the server to update the active martial art skill.
 /// </summary>
-/// <param name="knowledge"></param>
 [Serializable, NetSerializable]
-public sealed class KnowledgeUpdateMartialArtsEvent(NetEntity? knowledge) : EntityEventArgs
+public sealed class KnowledgeUpdateMartialArtsEvent(EntProtoId? knowledge) : EntityEventArgs
 {
-    public NetEntity? Knowledge = knowledge;
+    public readonly EntProtoId? Knowledge = knowledge;
 }
-
-/// <summary>
-/// Event that is raised to get a description of some knowledge to display it in the character menu.
-/// </summary>
-[ByRefEvent]
-public record struct KnowledgeCopyEvent(EntityUid? Target);
 
 /// <summary>
 /// Gets all ConstructionSkills of a character.
 /// </summary>
-/// <param name="Groups"></param>
 [ByRefEvent]
 public record struct ConstructionGetGroupsEvent(Dictionary<EntProtoId, int> Groups);
 
 /// <summary>
-/// Called in order to add experience to the character. Simply pass in a EntProtoId of the knowledge and the amount of exp you want to add.
+/// Called in order to add experience to a knowledge holder. Simply pass in a EntProtoId of the knowledge and the amount of exp you want to add.
+/// User will default to the knowledge holder.
+/// Pass user if e.g. you punch someone and the target gains a level, you are the user. The target can't predict any popups from it.
 /// </summary>
-/// <param name="KnowledgeType"></param>
-/// <param name="Experience"></param>
 [ByRefEvent]
-public record struct AddExperienceEvent(EntProtoId KnowledgeType, int Experience);
+public record struct AddExperienceEvent(EntProtoId KnowledgeType, int Experience, EntityUid? User = null);
 
 /// <summary>
-/// Called in order to update the experience of the character, need be.
+/// Raised to let the client update XP ui stuff.
 /// </summary>
 [ByRefEvent]
 public record struct UpdateExperienceEvent();

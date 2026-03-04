@@ -4,7 +4,6 @@ using System.Linq;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.MenuBar;
-using Content.Shared.Whitelist;
 using Content.Trauma.Common.Input;
 using Content.Trauma.Common.Knowledge;
 using JetBrains.Annotations;
@@ -12,6 +11,7 @@ using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Knowledge;
 
@@ -95,41 +95,32 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         _menu = null;
     }
 
-    private IEnumerable<RadialMenuActionOption<EntityUid?>> GetButtons()
+    private IEnumerable<RadialMenuActionOption<EntProtoId?>> GetButtons()
     {
-        var whitelistSystem = EntitySystemManager.GetEntitySystem<EntityWhitelistSystem>();
-
-        var martialArts = new List<RadialMenuActionOption<EntityUid?>>
+        var martialArts = new List<RadialMenuActionOption<EntProtoId?>>
         {
-            new RadialMenuActionOption<EntityUid?>(HandleRadialButtonClick, null)
+            new RadialMenuActionOption<EntProtoId?>(_knowledge.ChangeMartialArt, null)
             {
                 //IconSpecifier = RadialMenuIconSpecifier.With(emote.Icon),
                 ToolTip = Loc.GetString("no-martial-art")
             }
         };
 
-        if (_player.LocalEntity is not { } player || _knowledge.GetMartialArtsForClientDoohickey(player) is not { } martialArtsList)
+        if (_player.LocalEntity is not {} player)
             return martialArts;
 
-        foreach (var martialArt in martialArtsList)
+        var arts = _knowledge.GetMartialArtsForClientDoohickey(player);
+        foreach (var martialArt in arts)
         {
-            var actionOption = new RadialMenuActionOption<EntityUid?>(HandleRadialButtonClick, martialArt.Item1)
+            var actionOption = new RadialMenuActionOption<EntProtoId?>(_knowledge.ChangeMartialArt, martialArt.Item1)
             {
-                //IconSpecifier = RadialMenuIconSpecifier.With(emote.Icon),
+                // TODO: give them sprites then use entity view of the knowledge entity?
+                //IconSpecifier = RadialMenuIconSpecifier.With(Icon),
                 ToolTip = Loc.GetString(martialArt.Item2)
             };
             martialArts.Add(actionOption);
         }
 
         return martialArts;
-    }
-
-    private void HandleRadialButtonClick(EntityUid? martialArt)
-    {
-        if (_player.LocalEntity is not { })
-            return;
-
-        var netEnt = EntityManager.GetNetEntity(martialArt);
-        EntityManager.RaisePredictiveEvent(new KnowledgeUpdateMartialArtsEvent(netEnt));
     }
 }

@@ -10,32 +10,39 @@ namespace Content.Trauma.Common.Knowledge.Components;
 /// Contains knowledge entities inside with <see cref="KnowledgeComponent"/>.
 /// Assigned to some physical bodies, for example brains.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class KnowledgeContainerComponent : Component
 {
     public const string ContainerId = "knowledge";
 
     /// <summary>
-    /// Contains all knowledge entities.
+    /// The actual container that contains all knowledge entities.
     /// </summary>
     [ViewVariables]
-    public Container? KnowledgeContainer;
+    public Container? Container;
 
     /// <summary>
-    /// Contains a dictionary of prototypes to knowledge entities.
+    /// The knowledge holder using this container.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<EntProtoId, EntityUid> KnowledgeContainerIDs = new();
+    public EntityUid? Holder;
 
     /// <summary>
-    ///    The skill entity that links to the current Language.
+    /// Contains a dictionary of prototypes to knowledge entities, which are stored inside <see cref="KnowledgeContainer"/>.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid? LanguageSkillUid;
+    public Dictionary<EntProtoId, EntityUid> KnowledgeDict = new();
 
     /// <summary>
-    ///    The skill entity that links to the current MartialArt.
+    /// The currently spoken language.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid? MartialArtSkillUid;
+    public EntityUid? ActiveLanguage;
+
+    /// <summary>
+    /// The currently enabled martial art.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? ActiveMartialArt;
 }

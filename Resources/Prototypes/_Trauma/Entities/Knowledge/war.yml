@@ -1,0 +1,15 @@
+- type: entity
+  parent: BaseWarKnowledge
+  id: MeleeKnowledge
+  name: Melee
+  components:
+  - type: Knowledge
+    experienceCost: 15
+
+- type: entity
+  parent: BaseWarKnowledge
+  id: ShootingKnowledge
+  name: Shooting
+  components:
+  - type: Knowledge
+    experienceCost: 15

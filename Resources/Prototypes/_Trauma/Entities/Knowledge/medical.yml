@@ -1,0 +1,15 @@
+- type: entity
+  parent: BaseMedicalKnowledge
+  id: SurgeryKnowledge
+  name: Surgery
+  components:
+  - type: Knowledge
+    experienceCost: 24
+
+- type: entity
+  parent: BaseMedicalKnowledge
+  id: FirstAidKnowledge
+  name: First Aid
+  components:
+  - type: Knowledge
+    experienceCost: 19

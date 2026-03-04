@@ -121,13 +121,13 @@ public sealed class KnowledgeTest
 
             foreach (var lang in languages)
             {
-                var expectedEntityId = $"language-{lang.ID}";
+                var expectedEntityId = $"Language{lang.ID}";
 
                 if (!protoMan.HasIndex<EntityPrototype>(expectedEntityId))
                     missingEntities.Add($"{lang.ID} (Expected entity: {expectedEntityId})");
             }
 
-            Assert.That(missingEntities, Is.Empty, $"The following languages are missing their 'language-ID' entity prototypes: \n{string.Join("\n", missingEntities)}");
+            Assert.That(missingEntities, Is.Empty, $"The following languages are missing their 'Language<ID>' entity prototypes: \n{string.Join("\n", missingEntities)}");
         });
 
         await pair.CleanReturnAsync();

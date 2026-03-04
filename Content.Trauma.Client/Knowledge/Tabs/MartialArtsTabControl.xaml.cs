@@ -8,14 +8,15 @@ using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Knowledge.Tabs;
 
 [GenerateTypedNameReferences]
 public sealed partial class MartialArtsTabControl : BaseTabControl
 {
+    [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly IEntitySystemManager _system = default!;
     private readonly KnowledgeSystem _knowledge;
     private readonly SpriteSystem _sprite;
 
@@ -24,48 +25,43 @@ public sealed partial class MartialArtsTabControl : BaseTabControl
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        _knowledge = _system.GetEntitySystem<KnowledgeSystem>();
-        _sprite = _system.GetEntitySystem<SpriteSystem>();
+        _knowledge = _entMan.System<KnowledgeSystem>();
+        _sprite = _entMan.System<SpriteSystem>();
     }
 
     public override bool UpdateState()
     {
+        // TODO: fix scroll when this happens ugh
         MartialArtsList.RemoveAllChildren();
 
-        if (_player.LocalEntity is not { } player || _knowledge.TryGetKnowledgeEntity(player) is not { } knowledgeEntity)
+        if (_player.LocalEntity is not {} player ||
+            _knowledge.GetContainer(player) is not {} brain ||
+            _knowledge.GetKnowledgeWith<MartialArtsKnowledgeComponent>(brain) is not {} arts)
             return false;
 
-        var martialArts = _knowledge.TryGetKnowledgeWithComp<MartialArtsKnowledgeComponent>(knowledgeEntity);
-
-        var button = CreateMartialArtsButton(knowledgeEntity, null);
+        var button = CreateMartialArtsButton(null);
         MartialArtsList.AddChild(button);
 
-        if (martialArts is { })
+        foreach (var martialArt in arts)
         {
-            foreach (var martialArt in martialArts)
-            {
-                button = CreateMartialArtsButton(knowledgeEntity, martialArt);
-                MartialArtsList.AddChild(button);
-            }
+            button = CreateMartialArtsButton(martialArt);
+            MartialArtsList.AddChild(button);
         }
         return true;
     }
 
 
-    private IconButton CreateMartialArtsButton(EntityUid knowledgeEntity, Entity<MartialArtsKnowledgeComponent>? martialArt)
+    private IconButton CreateMartialArtsButton(Entity<MartialArtsKnowledgeComponent>? martialArt)
     {
-        string locString = _knowledge.GetEntProtoId(martialArt) ?? "no-martial-art";
+        var (name, proto) = _entMan.TryGetComponent<MetaDataComponent>(martialArt, out var meta)
+            ? (meta.EntityName, meta.EntityPrototype?.ID)
+            : (Loc.GetString("no-martial-art"), null);
 
-        var button = new IconButton(Loc.GetString(locString));
-        if (martialArt is { } martialArtTrue)
-            button.Icon.Texture = _sprite.Frame0(martialArtTrue.Comp.Icon);
-        button.OnPressed += _ => OnChangeMartialArts(knowledgeEntity, martialArt);
+        var button = new IconButton(name);
+        if (martialArt?.Comp.Icon is {} icon)
+            button.Icon.Texture = _sprite.Frame0(icon);
+        button.OnPressed += _ => _knowledge.ChangeMartialArt(proto);
 
         return button;
-    }
-
-    private void OnChangeMartialArts(EntityUid knowledgeEntity, Entity<MartialArtsKnowledgeComponent>? martialArt)
-    {
-        _knowledge.ChangeMartialArts(knowledgeEntity, martialArt);
     }
 }
