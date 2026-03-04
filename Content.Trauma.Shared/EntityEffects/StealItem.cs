@@ -23,7 +23,6 @@ public sealed class StealItemSystem : EntityEffectSystem<HandsComponent, StealIt
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<StealItem> args)
     {
