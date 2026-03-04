@@ -39,11 +39,12 @@ public sealed partial class ConstructionSystem
     /// <param name="constructionPrototype"></param>
     public void EnsureConstructionKnowledge(EntityUid item, ConstructionPrototype constructionPrototype, EntityUid user)
     {
-        EnsureComp<QualityComponent>(item, out var Quality);
+        EnsureComp<QualityComponent>(item, out var quality);
         foreach (var construct in constructionPrototype.Groups)
         {
-            Quality.LevelDeltas[construct.Key] = construct.Value;
+            quality.LevelDeltas[construct.Key] = construct.Value;
         }
+        quality.QualityCoefficent = constructionPrototype.QualityCoefficient;
         if (!HasComp<KnowledgeHolderComponent>(user))
             return;
         var ev = new UpdateItemQualityEvent(user);
@@ -61,6 +62,7 @@ public sealed partial class ConstructionSystem
             quality += originalComp.Quality;
             newComp.NumberOfMasteries = originalComp.NumberOfMasteries + 1;
             newComp.Quality = quality / newComp.NumberOfMasteries;
+            newComp.QualityCoefficent = (newComp.QualityCoefficent + originalComp.QualityCoefficent) / 2;
             Dirty(created, newComp);
             return;
         }
@@ -68,6 +70,7 @@ public sealed partial class ConstructionSystem
         newComp.LevelDeltas = originalComp.LevelDeltas;
         newComp.Quality = originalComp.Quality;
         newComp.NumberOfMasteries = originalComp.NumberOfMasteries;
+        newComp.QualityCoefficent = originalComp.QualityCoefficent;
         Dirty(created, newComp);
         return;
     }

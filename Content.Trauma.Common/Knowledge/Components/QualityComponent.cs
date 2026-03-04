@@ -28,4 +28,10 @@ public sealed partial class QualityComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int NumberOfMasteries = 0;
+
+    /// <summary>
+    /// Stores the quality coefficient used in calculations.
+    /// </summary>
+    [DataField]
+    public float QualityCoefficent = 1;
 }

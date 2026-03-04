@@ -94,24 +94,24 @@ public abstract partial class SharedKnowledgeSystem
             {
                 if (threshold.Trigger is DamageTrigger trigger)
                 {
-                    trigger.Damage *= ConstructionModifier(ent, 1.6f);
+                    trigger.Damage *= ConstructionModifier(ent, ent.Comp.QualityCoefficent);
                 }
             }
         }
 
         if (TryComp<DamageOtherOnHitComponent>(ent.Owner, out var thrown))
         {
-            thrown.Damage *= ConstructionModifier(ent, 1.75f);
+            thrown.Damage *= ConstructionModifier(ent, ent.Comp.QualityCoefficent);
         }
 
         if (TryComp<GunComponent>(ent.Owner, out var gun))
         {
-            gun.MaxAngle *= ConstructionModifier(ent, 0.9f);
+            gun.MaxAngle *= ConstructionModifier(ent, 1 / ent.Comp.QualityCoefficent);
         }
 
         if (TryComp<ProjectileComponent>(ent.Owner, out var projectile))
         {
-            projectile.Damage *= ConstructionModifier(ent, 1.75f);
+            projectile.Damage *= ConstructionModifier(ent, ent.Comp.QualityCoefficent);
         }
     }
 

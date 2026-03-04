@@ -6,3 +6,4 @@
   objectType: Item
   groups:
     TechnologyKnowledge: 1
+  qualityCoefficient: 1.3
