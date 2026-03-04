@@ -29,7 +29,7 @@
       startingGear: ThiefGear
       jobBlacklist: [ Chaplain ] # Goob
       components:
-      #- type: Pacified # DeltaV - forced pacifism is lame
+      - type: Pacifism
       - type: Thieving
         stripTimeReduction: 2
         stealthy: true
