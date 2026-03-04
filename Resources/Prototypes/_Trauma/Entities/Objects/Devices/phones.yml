@@ -33,6 +33,7 @@
 - type: entity
   parent: BaseStructure
   id: RotaryPhoneStand
+  abstract: true
   name: phone stand
   description: it's a phone stand
   components:
