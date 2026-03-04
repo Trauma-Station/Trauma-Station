@@ -119,6 +119,7 @@
         type: PaperBoundUserInterface
   - type: FaxableObject
   - type: PaperVisuals
+  - type: StationAiWhitelist
   - type: Construction # Goob - so you can click with spray painter
     graph: SpesosCounterfeit
     node: start
@@ -500,3 +501,4 @@
       - !type:EmptyAllContainersBehaviour
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: StationAiWhitelist

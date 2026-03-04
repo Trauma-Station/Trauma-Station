@@ -171,9 +171,7 @@ public sealed partial class DamageableSystem
         if (possibleTargets.Count == 0)
             return new DamageSpecifier();
 
-        // TODO: PredictedRandom when it's real
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(uid).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(uid));
         var chosenTarget = rand.Pick(possibleTargets);
         return ChangeDamage(chosenTarget, adjustedDamage, ignoreResistances,
             interruptsDoAfters, origin, ignoreBlockers: ignoreBlockers, increaseOnly: increaseOnly);
@@ -189,9 +187,7 @@ public sealed partial class DamageableSystem
         _weights.Clear();
         _weights.EnsureCapacity(count);
         var totalWeight = 0f;
-        // TODO: proper predicted random
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(uid).Id);
-        var random = new System.Random(seed);
+        var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(uid));
         for (var i = 0; i < count; i++)
         {
             var weight = random.NextFloat() * MathF.Abs(variation) + 1f;

@@ -187,7 +187,7 @@ public sealed class RotaryPhoneSystem : SharedRotaryPhoneSystem
             ent.Comp.Engaged = true;
             ent.Comp.ConnectedPhone = phone;
             phoneComp.Engaged = true;
-            ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.RingingSound, ent.Owner, ent.Owner, AudioParams.Default.WithLoop(true))?.Entity;
+            ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.RingingSound, ent.Owner, ent.Owner, AudioParams.Default.WithLoop(true).WithMaxDistance(2.5f))?.Entity;
             RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.OutGoingPort);
 
             var ev = new PhoneRingEvent(ent);

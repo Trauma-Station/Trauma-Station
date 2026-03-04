@@ -1020,15 +1020,18 @@
 
 # Goob - Not buyable anymore in favor of the custom lawboard.
 #- type: listing
-#  id: UplinkAntimovCircuitBoard
-#  name: uplink-antimov-law-name
-#  description: uplink-antimov-law-desc
-#  productEntity: AntimovCircuitBoard
+#  id: UplinkSyndimovCircuitKit
+#  name: uplink-syndimov-law-name
+#  description: uplink-syndimov-law-desc
+#  icon: { sprite: /Textures/Objects/Storage/boxicons.rsi, state: syndicate_circuit }
+#  productEntity: SyndimovCircuitKit
+#  discountCategory: usualDiscounts
+#  discountDownTo:
+#    Telecrystal: 6
 #  cost:
-#    Telecrystal: 50 # goob
+#    Telecrystal: 8
 #  categories:
 #  - UplinkDisruption
-# Goob - Antimov was given the same price for traitors and nukies
 #  conditions:
 #  - !type:StoreWhitelistCondition
 #     blacklist:
@@ -1345,7 +1348,7 @@
   id: UplinkEmpImplanter
   name: uplink-emp-implanter-name
   description: uplink-emp-implanter-desc
-  icon: { sprite: /Textures/Objects/Magic/magicactions.rsi, state: shield }
+  icon: { sprite: /Textures/Effects/emp.rsi, state: emp_disable }
   productEntity: EmpImplanter
   cost:
     Telecrystal: 10 # goob

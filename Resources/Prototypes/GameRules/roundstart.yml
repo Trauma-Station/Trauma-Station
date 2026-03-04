@@ -22,18 +22,18 @@
     rules:
     - id: Thief
       prob: 0.5
-    #- id: SubWizard # Trauma - not real
+    # <Trauma>
+    #- id: SubWizard # not real
     #  prob: 0.05
-    # - id: Xenoborgs # Trauma - no
-    #   prob: 0.05
-    # <Goob>
+    #- id: SubXenoborgs # no
+    #  prob: 0.05
     - id: Heretic
       prob: 0.2
     - id: Devil
       prob: 0.02
     - id: Shadowling
       prob: 0.02
-    # </Goob>
+    # </Trauma>
 
 - type: entity
   parent: BaseGameRule
@@ -43,16 +43,16 @@
     rules:
     - id: Thief
       prob: 0.5
-    - id: Xenoborgs
-      prob: 0.05
-    # <Goob>
+    # <Trauma>
+    #- id: SubXenoborgs
+    #  prob: 0.05
     - id: Heretic
       prob: 0.2
     - id: Devil
       prob: 0.02
     - id: Shadowling
       prob: 0.02
-    # </Goob>
+    # </Trauma>
 
 - type: entity
   parent: BaseGameRule
@@ -62,16 +62,16 @@
     rules:
     - id: Thief
       prob: 0.5
-    #- id: SubWizard # Trauma - not real
+    # <Trauma>
+    #- id: SubWizard # not real
     #  prob: 0.05
-    # <Goob>
     - id: Heretic
       prob: 0.2
     - id: Devil
       prob: 0.02
     - id: Shadowling
       prob: 0.02
-    # </Goob>
+    # </Trauma>
 
 - type: entity
   parent: BaseGameRule
@@ -182,7 +182,6 @@
       spawnerPrototype: SpawnPointNukeopsCommander
       startingGear: SyndicateCommanderGearFull
       unequipOldGear: true
-      chaosScore: 300 # Goobstation
       roleLoadout:
       - RoleSurvivalNukie
       components:
@@ -201,7 +200,6 @@
       spawnerPrototype: SpawnPointNukeopsMedic
       startingGear: SyndicateOperativeMedicFull
       unequipOldGear: true
-      chaosScore: 300 # Goobstation
       roleLoadout:
       - RoleSurvivalNukie
       components:
@@ -222,7 +220,6 @@
       spawnerPrototype: SpawnPointNukeopsOperative
       max: 10 # Goobstation / 古布空间站 - 没有限制的核特工
       playerRatio: 16 # Goobstation
-      chaosScore: 300 # Goobstation
       startingGear: SyndicateOperativeGearFull
       unequipOldGear: true
       roleLoadout:
@@ -298,7 +295,6 @@
     - prefRoles: [ Traitor ]
       max: 8
       playerRatio: 10
-      chaosScore: 150 # Goobstation
       blacklist:
         components:
         - CommandStaff # Goobstation
@@ -323,7 +319,6 @@
   components:
   - type: GameRule
     minPlayers: 15
-    chaosScore: 1000 # Goobstation - intentionally not per-antag
   - type: RevolutionaryRule
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn # Goobstation
@@ -424,12 +419,6 @@
     delay:
       min: 600
       max: 900
-    # Goobstation
-    chaosScore: 1200
-  # Goobstation
-  - type: Tag
-    tags:
-    - LoneRunRule
   - type: ZombieRule
   - type: AntagSelection
     definitions:
@@ -455,6 +444,46 @@
       - MindRoleInitialInfected
   - type: DynamicRuleCost
     cost: 200
+
+- type: entity
+  abstract: true
+  parent: BaseGameRule
+  id: BaseXenoborgsRule
+  components:
+  - type: XenoborgsRule
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/Shuttles/mothership.yml
+
+- type: entity
+  parent: BaseXenoborgsRule
+  id: Xenoborgs
+  components:
+  - type: GameRule
+    minPlayers: 30
+  - type: AntagMultipleRoleSpawner
+    antagRoleToPrototypes:
+      MothershipCore: [ MothershipCore ]
+      Xenoborg: [ XenoborgEngi, XenoborgHeavy, XenoborgScout, XenoborgStealth ]
+    pickAndTake: true
+  - type: AntagSelection
+    selectionTime: PrePlayerSpawn
+    definitions:
+    - prefRoles: [ MothershipCore ]
+      fallbackRoles: [ Xenoborg ]
+      spawnerPrototype: SpawnPointGhostRoleMothershipCore
+      mindRoles:
+      - MindRoleMothershipCore
+    - prefRoles: [ Xenoborg ]
+      fallbackRoles: [ MothershipCore ]
+      spawnerPrototype: SpawnPointGhostRoleXenoborg
+      mindRoles:
+      - MindRoleXenoborg
+      min: 4
+      max: 4
+  - type: DynamicRuleCost
+    cost: 200
+
 
 # This rule makes the chosen players unable to get other antag rules, as a way to prevent metagaming job rolls.
 # Put this before antags assigned to station jobs, but after non-job antags (NukeOps/Wiz).
@@ -508,14 +537,8 @@
 
 - type: entityTable
   id: SpaceTrafficControlTable
-  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
-    children:
-      - !type:NestedSelector
-        tableId: UnknownShuttlesFriendlyTable
-      - !type:NestedSelector
-        tableId: UnknownShuttlesFreelanceTable
-      - !type:NestedSelector
-        tableId: UnknownShuttlesHostileTable
+  table: !type:NestedSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+    tableId: UnknownShuttlesHostileTable
 
 - type: entity
   id: BasicStationEventScheduler
@@ -553,23 +576,13 @@
   components:
   - type: BasicStationEventScheduler
     minimumTimeUntilFirstEvent: 2700 # 45 mins #shows up like half way through shift.
+    maximumSpanUntilFirstEvent: 900 # At longest takes an hour to show up.
     minMaxEventTiming:
       min: 1200 # 20 mins
       max: 7200 # 120 mins # you probably arent getting a second visitor shuttle in one round, but it is possible.
     scheduledGameRules: !type:NestedSelector
+      prob: 0.05 # Only 1 in 20 rounds...
       tableId: SpaceTrafficControlTable
-
-- type: entity
-  id: SpaceTrafficControlFriendlyEventScheduler
-  parent: BaseGameRule
-  components:
-  - type: BasicStationEventScheduler
-    minimumTimeUntilFirstEvent: 1200 # 20 mins
-    minMaxEventTiming:
-      min: 600 # 10 mins
-      max: 1800 # 30 mins
-    scheduledGameRules: !type:NestedSelector
-      tableId: UnknownShuttlesFriendlyTable
 
 # variation passes
 - type: entity

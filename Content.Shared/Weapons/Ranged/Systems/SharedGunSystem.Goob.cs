@@ -60,9 +60,7 @@ public abstract partial class SharedGunSystem
 
         var dist = (shootCoords.Position - targetCoords.Position).Length();
         var missChance = MathHelper.Lerp(0f, 1f, Math.Clamp(dist / 2f, 0f, 1f));
-        var seed = SharedRandomExtensions.HashCodeCombine((int) Timing.CurTick.Value, GetNetEntity(ent).Id);
-        var random = new System.Random(seed);
-        return random.Prob(missChance) ? TargetBodyPart.Chest : ent.Comp.Target;
+        return SharedRandomExtensions.PredictedProb(Timing, missChance, GetNetEntity(ent)) ? TargetBodyPart.Chest : ent.Comp.Target;
     }
 
     public void SetProjectilePerfectHitEntities(EntityUid projectile,

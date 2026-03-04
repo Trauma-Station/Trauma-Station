@@ -14,11 +14,6 @@
     minimumPlayers: 15
     weight: 4
     duration: 30
-    eventType: Neutral
-  - type: GameRule
-    chaosScore: 40
- #- type: PrecognitionResult
- #  message: psionic-power-precognition-mothroach-spawn-result-message
   - type: VentCrittersRule
     table:
       id: MobMothmaggot
@@ -31,9 +26,6 @@
     earliestStart: 15
     minimumPlayers: 15
     weight: 1 #this should be rare to throw people off, otherwise it happens every shift. Not THAT rare, though. This is still as rare as midround wizard.
-    eventType: Neutral
     duration: 20
     occursDuringRoundEnd: false
-  - type: GameRule
-    chaosScore: -50
   - type: MalignRiftSpawnRule

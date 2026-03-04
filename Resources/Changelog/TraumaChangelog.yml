@@ -3395,3 +3395,90 @@ Entries:
   id: 408
   time: '2026-03-02T20:09:39.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/955
+- author: Lumminal
+  changes:
+  - type: Add
+    message: >-
+      Wraith can now be played as a roundstart antagonist. Wraith got majorly
+      rebalanced and slightly overhauled.
+  - type: Add
+    message: >-
+      New wraith action, dark whisper. Lets you speak through someone for 15
+      seconds
+  - type: Remove
+    message: Wraith midround is back but it can't evolve.
+  - type: Remove
+    message: >-
+      Wraith no longer gets a second-life when dying. Die once, and its game
+      over.
+  - type: Tweak
+    message: Absorb Corpse, Decay and other abilities require corporeal form
+  - type: Tweak
+    message: 'Absorbing a corpse as wraith has a do-after now. '
+  - type: Tweak
+    message: >-
+      Wraith Curses can now be removed via any bible. You don't have to be a
+      chaplain anymore.
+  - type: Tweak
+    message: Some wraith abilities got their WP cost increased
+  - type: Tweak
+    message: >-
+      All wraith mobs and structures got their damage and health reduced by A
+      LOT.
+  - type: Tweak
+    message: Salt lines can be made from beakers
+  - type: Tweak
+    message: Salt lines don't break if you step over them
+  - type: Tweak
+    message: Wraith gets the "Command" action back
+  - type: Tweak
+    message: Wraith requires 4 corpses to evolve, instead of 3
+  - type: Tweak
+    message: Wraith Curses don't work on unholy entities (heretics and the like)
+  id: 409
+  time: '2026-03-03T01:12:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/760
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed cryostylane cooling reactions, for the 2 people that know what they
+      are.
+  - type: Tweak
+    message: Reverted 5x buff on plastic production since energy chem exists.
+  id: 410
+  time: '2026-03-03T09:21:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/960
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the Service department for catering staff, no more civilian
+      "department" with 10 different jobs.
+  id: 411
+  time: '2026-03-03T21:08:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/968
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Removed the Hermit and game director gamemodes for being shitcode and
+      slop.
+  - type: Fix
+    message: Service borgs no longer get medborgs modules holy copy paste fail
+  - type: Tweak
+    message: Kept travelling chef and clown shuttle events.
+  - type: Tweak
+    message: Didnt remove sovl, pjb
+  - type: Remove
+    message: No hugbox alerts on emitters
+  id: 412
+  time: '2026-03-03T21:27:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/965
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Civilian jobs now have their own guidebook separate from Service.
+  id: 413
+  time: '2026-03-03T21:50:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/969

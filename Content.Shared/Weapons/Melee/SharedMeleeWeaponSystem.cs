@@ -799,10 +799,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         }
 
         var appliedDamage = new DamageSpecifier();
-        // <Goob>
-        var seed = SharedRandomExtensions.HashCodeCombine(GetNetEntity(meleeUid).Id, (int) Timing.CurTick.Value);
-        var random = new System.Random(seed);
-        // </Goob>
+        // <Trauma>
+        var random = SharedRandomExtensions.PredictedRandom(Timing, GetNetEntity(meleeUid));
+        // </Trauma>
 
         for (var i = targets.Count - 1; i >= 0; i--)
         {

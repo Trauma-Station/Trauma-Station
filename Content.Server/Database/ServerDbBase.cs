@@ -228,7 +228,7 @@ namespace Content.Server.Database
             var legacyMarkings = appearance.Markings
                 .SelectMany(organ => organ.Value.Values)
                 .SelectMany(i => i)
-                .Select(marking => marking.ToString())
+                .Select(marking => marking.ToLegacyDbString())
                 .ToList();
             // <Trauma> - no linq fuck you, it throws for duplicate keys
             var flattenedMarkings = new Dictionary<HumanoidVisualLayers, List<Marking>>();

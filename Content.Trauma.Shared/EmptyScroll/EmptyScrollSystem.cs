@@ -81,8 +81,7 @@ public sealed class EmptyScrollSystem : EntitySystem
         // give items before any effects happen
         if (prayer.Items is {} table)
         {
-            var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(target).Id);
-            var rand = new System.Random(seed);
+            var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(target));
             foreach (var id in _entityTable.GetSpawns(table, rand))
             {
                 var item = PredictedSpawnNextToOrDrop(id, target);
