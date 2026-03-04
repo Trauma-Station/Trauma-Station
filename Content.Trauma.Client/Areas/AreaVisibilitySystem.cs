@@ -89,7 +89,7 @@ public sealed class AreaVisibilitySystem : CommonAreaVisibilitySystem
     {
         // cant use NameScope because you arent allowed to register after xaml loads
         // have to do this dogshit instead :))))
-        foreach (var child in window.Children)
+        foreach (var child in window.Buttons.Children)
         {
             if (child.Name == ButtonName)
                 return (Button) child;
