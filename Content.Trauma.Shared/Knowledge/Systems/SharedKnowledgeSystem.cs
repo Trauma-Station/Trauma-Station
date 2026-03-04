@@ -145,8 +145,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         if (TryGetKnowledgeUnit(ent, args.KnowledgeType) is not { } knowledgeUnit || !TryComp<KnowledgeComponent>(knowledgeUnit, out var knowledgeComponent))
         {
-            _seed = new System.Random(SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id));
-            if (_seed.Prob(_learnChance))
+            if (SharedRandomExtensions.PredictedProb(_timing, _learnChance, GetNetEntity(ent)))
                 TryAddKnowledgeUnit(ent, (args.KnowledgeType, 0));
             return;
         }
