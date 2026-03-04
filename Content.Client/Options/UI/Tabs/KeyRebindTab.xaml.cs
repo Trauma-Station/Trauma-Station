@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Trauma.Common.Input;
 using Content.Goobstation.Common.CCVar;
 using Content.Trauma.Common.Input;
 // </Trauma>
