@@ -1,0 +1,20 @@
+- type: entity
+  parent: BaseAreaStation
+  id: AreaMaints
+  components:
+  - type: Sprite
+    state: maints
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaRadstorm
+  components:
+  - type: Sprite
+    state: radstorm_shelter
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaHolodeck
+  components:
+  - type: Sprite
+    state: holodeck
