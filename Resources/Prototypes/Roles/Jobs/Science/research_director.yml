@@ -19,20 +19,19 @@
   guides: # goobstation
   - Science
   - Command
-
   goobcoins: 40 #Goob content
   access:
+  # <Trauma>
+  - External
+  - Robotics
+  - Genetics
+  # </Trauma>
   - Research
   - Command
   - Maintenance
   - ResearchDirector
   - Brig
   - Cryogenics
-  # <Trauma>
-  - External
-  - Robotics
-  - Genetics
-  # </Trauma>
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
