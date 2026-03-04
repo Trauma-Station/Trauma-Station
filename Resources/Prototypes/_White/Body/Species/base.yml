@@ -191,7 +191,7 @@
   - type: OrganComponents
     onAdd:
     - type: ThermalVision
-      thermalShader: null    
+      thermalShader: null
       toggleAction: ToggleThermalVisionXenomorph
       color: white
       drawOverlay: false
