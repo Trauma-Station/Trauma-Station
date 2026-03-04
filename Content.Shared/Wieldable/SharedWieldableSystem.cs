@@ -101,8 +101,8 @@ public abstract class SharedWieldableSystem : EntitySystem
 
             var time = _timing.CurTime;
             if (time > component.LastPopup + component.PopupCooldown &&
-                !HasComp<MeleeWeaponComponent>(uid) &&
-                !HasComp<MeleeRequiresWieldComponent>(uid))
+                //!(HasComp<MeleeWeaponComponent>(uid) && // Trauma - many guns have melee for barrel/stock hits
+                !HasComp<MeleeRequiresWieldComponent>(uid)))
             {
                 component.LastPopup = time;
                 var message = Loc.GetString("wieldable-component-requires", ("item", uid));
