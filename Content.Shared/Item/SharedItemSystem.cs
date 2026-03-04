@@ -105,7 +105,6 @@ using JetBrains.Annotations;
 using Robust.Shared.Collections;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Item;
@@ -118,7 +117,6 @@ public abstract class SharedItemSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private   readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] protected readonly SharedContainerSystem Container = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {
