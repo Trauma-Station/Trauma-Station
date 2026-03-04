@@ -37,6 +37,7 @@ public sealed class ShortConstructionBUI : BoundUserInterface
     {
         _menu = CreateMenu();
         _menu.OpenCenteredAt(_input.MouseScreenPosition.Position / _clyde.ScreenSize);
+        _menu.OnClose += Close;
     }
 
     private RadialMenu CreateMenu()
@@ -106,6 +107,5 @@ public sealed class ShortConstructionBUI : BoundUserInterface
         }, new ConstructionPlacementHijack(_construction, prototype));
 
         _menu?.Close();
-        Close();
     }
 }
