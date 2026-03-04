@@ -5,7 +5,6 @@ namespace Content.Shared.Input
     [KeyFunctions]
     public static class ContentKeyFunctions
     {
-        public static readonly BoundKeyFunction Tackle = "Tackle"; // Trauma
         public static readonly BoundKeyFunction Sprint = "Sprint"; // Goobstation
         public static readonly BoundKeyFunction ToggleKnockdown = "ToggleKnockdown";
         public static readonly BoundKeyFunction UseItemInHand = "ActivateItemInHand";

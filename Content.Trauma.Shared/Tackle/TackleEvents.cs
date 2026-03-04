@@ -13,3 +13,6 @@ public record struct TackleEvent(
 {
     public SlotFlags TargetSlots => SlotFlags.GLOVES;
 }
+
+[ByRefEvent]
+public record struct CalculateTackleModifierEvent(float Modifier = 0f);

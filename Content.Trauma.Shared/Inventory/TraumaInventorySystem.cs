@@ -11,12 +11,6 @@ public sealed class TraumaInventorySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InventoryComponent, TackleEvent>(RefRelayInventoryEvent);
-    }
-
-
-    private void RefRelayInventoryEvent<T>(EntityUid uid, InventoryComponent component, ref T args) where T : IInventoryRelayEvent
-    {
-        _inventory.RelayEvent((uid, component), ref args);
+        SubscribeLocalEvent<InventoryComponent, TackleEvent>(_inventory.RelayEvent);
     }
 }

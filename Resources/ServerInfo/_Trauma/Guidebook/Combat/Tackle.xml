@@ -1,7 +1,7 @@
 <Document>
 # Tackle
 
-Tackle is a combat move that allows the user to dive some distance forward, knocking down first victim on their path.
+Tackle is a combat move that allows the user to dive some distance forward, knocking down the first victim on their path.
 
 To perform a tackle you must have a special kind of gloves with tackle ability.
 
@@ -19,7 +19,7 @@ To perform a tackle you must have a special kind of gloves with tackle ability.
 
 Tackle can be performed once every 3 seconds with [color=yellow]Alt-Q[/color] key by default.
 
-Be aware that you will knock yourself down and drop all held items when performing a tackle. Also avoid any obstacles such as walls, as they may cause unhappy landing.
+Be aware that you will knock yourself down and drop all held items when performing a tackle. Also avoid any obstacles such as walls, as they may cause an unhappy landing.
 
 Tackle outcome is determined by multiple factors (modifiers), such as: user/victim health, stamina damage, weight, user speed, victim stamina protection and the gloves modifier itself.
 

@@ -5,7 +5,7 @@
   components:
   - type: FingerprintMask
   - type: TackleModifier
-    skillMod: 3
+    skillMod: 1
   - type: GuideHelp
     guides:
     - Tackle
@@ -64,7 +64,7 @@
     staminaCostMultiplier: 1.2
     knockdownTimeMultiplier: 1.25
     rangeMultiplier: 1.65
-    skillMod: 5
+    skillMod: 3
 
 - type: entity
   parent: [BaseSyndicateContraband, ClothingHandsGlovesGorilla]
@@ -76,7 +76,7 @@
     sprite: _Trauma/Clothing/Hands/Gloves/guerrilla.rsi
   - type: TackleModifier
     grabOnSuccess: true
-    staminaCostMultiplier: 0.6
+    staminaCostMultiplier: 1
 
 - type: entity
   parent: [BaseGlovesTackle, BaseSecurityContraband]

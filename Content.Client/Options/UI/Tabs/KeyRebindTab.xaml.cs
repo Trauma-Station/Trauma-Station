@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.Input;
 // </Trauma>
 using System.Numerics;
 using Content.Client.Stylesheets;
@@ -209,7 +210,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.SaveItemLocation);
 
             AddHeader("ui-options-header-interaction-adv");
-            AddButton(ContentKeyFunctions.Tackle); // Trauma
+            AddButton(TraumaKeyFunctions.Tackle); // Trauma
             AddButton(ContentKeyFunctions.SmartEquipBackpack);
             AddButton(ContentKeyFunctions.SmartEquipBelt);
             AddButton(ContentKeyFunctions.SmartEquipPocket1);

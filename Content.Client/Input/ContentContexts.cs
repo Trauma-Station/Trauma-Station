@@ -70,6 +70,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+// <Trauma>
+using Content.Trauma.Common.Input;
+// </Trauma>
 using Content.Shared.Input;
 using Robust.Shared.Input;
 
@@ -141,7 +144,7 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.OpenEmotesMenu);
             human.AddFunction(ContentKeyFunctions.OpenLanguageMenu); // Einstein Engines - Language
             human.AddFunction(ContentKeyFunctions.ActivateItemInWorld);
-            human.AddFunction(ContentKeyFunctions.Tackle); // Trauma
+            human.AddFunction(TraumaKeyFunctions.Tackle); // Trauma
             human.AddFunction(ContentKeyFunctions.ThrowItemInHand);
             human.AddFunction(ContentKeyFunctions.AltActivateItemInWorld);
             human.AddFunction(ContentKeyFunctions.TryPullObject);
