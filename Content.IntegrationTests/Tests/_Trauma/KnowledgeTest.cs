@@ -103,23 +103,33 @@ public sealed class KnowledgeTest
         await pair.CleanReturnAsync();
     }
 
+
+    /// <summary>
+    /// Ensures that every Language Prototype has a corresponding knowledge entity.
+    /// </summary>
     [Test]
-    public void TestLanguageHasLanguageKnowledgeCounterpart()
+    public async Task TestLanguageHasLanguageKnowledgeCounterpart()
     {
-        var protoMan = IoCManager.Resolve<IPrototypeManager>();
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
+        var server = pair.Server;
+        var protoMan = server.ProtoMan;
 
-        var languages = protoMan.EnumeratePrototypes<LanguagePrototype>();
-        var missingEntities = new List<string>();
-
-        foreach (var lang in languages)
+        await server.WaitPost(() =>
         {
-            var expectedEntityId = $"language-{lang.ID}";
+            var languages = protoMan.EnumeratePrototypes<LanguagePrototype>();
+            var missingEntities = new List<string>();
 
-            if (!protoMan.HasIndex<EntityPrototype>(expectedEntityId))
-                missingEntities.Add($"{lang.ID} (Expected entity: {expectedEntityId})");
-        }
+            foreach (var lang in languages)
+            {
+                var expectedEntityId = $"language-{lang.ID}";
 
-        Assert.That(missingEntities, Is.Empty,
-            $"The following languages are missing their 'language-ID' entity prototypes: \n{string.Join("\n", missingEntities)}");
+                if (!protoMan.HasIndex<EntityPrototype>(expectedEntityId))
+                    missingEntities.Add($"{lang.ID} (Expected entity: {expectedEntityId})");
+            }
+
+            Assert.That(missingEntities, Is.Empty, $"The following languages are missing their 'language-ID' entity prototypes: \n{string.Join("\n", missingEntities)}");
+        });
+
+        await pair.CleanReturnAsync();
     }
 }
