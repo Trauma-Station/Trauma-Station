@@ -10,7 +10,6 @@ namespace Content.Shared.Throwing;
 public sealed partial class ThrowingSystem
 {
     [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
 
     private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";
     private static readonly EntProtoId ThrowingKnowledge = "ThrowingKnowledge";
