@@ -1,6 +1,6 @@
 - type: entity
   parent: LockerScientist
-  id: LockerGeneticist
+  id: LockerRoboticist
   name: roboticist's locker
   components:
   # TODO: unique sprite
