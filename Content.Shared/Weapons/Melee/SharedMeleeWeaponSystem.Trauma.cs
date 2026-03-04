@@ -101,7 +101,7 @@ public abstract partial class SharedMeleeWeaponSystem
         if (!_gun.Random(target).Prob(Math.Max(1.0f - knowledgeMiss, 0)))
             return false;
 
-        PopupSystem.PopupClient(Loc.GetString("container-thrown-missed", user, user);
+        PopupSystem.PopupClient(Loc.GetString("container-thrown-missed"), user, user);
         return true;
     }
 
