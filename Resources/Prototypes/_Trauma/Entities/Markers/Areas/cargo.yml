@@ -1,0 +1,16 @@
+- type: entity
+  abstract: true
+  parent: BaseAreaStation
+  id: BaseAreaCargo
+  name: cargo
+  components:
+  - type: DepartmentArea
+    department: Cargo
+
+- type: entity
+  parent: BaseAreaCargo
+  id: AreaCargoBay
+  name: cargo bay
+  components:
+  - type: Sprite
+    state: cargo_bay

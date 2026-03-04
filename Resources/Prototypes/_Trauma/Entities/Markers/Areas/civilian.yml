@@ -1,0 +1,32 @@
+- type: entity
+  abstract: true
+  parent: BaseAreaStation
+  id: BaseAreaCivilian
+  name: civilian
+  components:
+  - type: DepartmentArea
+    department: Civilian
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaLibrary
+  name: library
+  components:
+  - type: Sprite
+    state: library
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaDorms
+  name: dorms
+  components:
+  - type: Sprite
+    state: dorms
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaFitness
+  name: fitness
+  components:
+  - type: Sprite
+    state: fitness
