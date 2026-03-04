@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Weapons.Melee;
 // </Trauma>

@@ -182,6 +182,15 @@
       types:
         Asphyxiation: -1.0
     maxSaturation: 15
+  # <Trauma>
+  - type: KnowledgeHolder
+  - type: KnowledgeGrant
+    skills:
+      StrengthKnowledge: 0
+      ToughnessKnowledge: 0
+      AthleticsKnowledge: 0
+      MeleeKnowledge: 0
+  # </Trauma>
 
 - type: entity
   parent: OrganBaseFleshy # Shitmed - Fleshy???

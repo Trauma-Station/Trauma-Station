@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Knowledge;
+// </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Construction;
 using Content.Server.Explosion.EntitySystems;
@@ -71,6 +74,11 @@ namespace Content.Server.Kitchen.EntitySystems
 
         private static readonly ProtoId<TagPrototype> MetalTag = "Metal";
         private static readonly ProtoId<TagPrototype> PlasticTag = "Plastic";
+
+        // <Trauma>
+        private static readonly EntProtoId MartialArtCQCChef = "MartialArtCQCChef";
+        private static readonly EntProtoId CookingKnowledge = "CookingKnowledge";
+        // <Trauma>
 
         public override void Initialize()
         {
@@ -372,6 +380,10 @@ namespace Content.Server.Kitchen.EntitySystems
             args.Handled = true;
             _handsSystem.TryDropIntoContainer(args.User, args.Used, ent.Comp.Storage);
             UpdateUserInterfaceState(ent, ent.Comp);
+
+            // <Trauma>
+            ent.Comp.LastKnownKnowledgeHolder = args.User;
+            // </Trauma>
         }
 
         private void OnBreak(Entity<MicrowaveComponent> ent, ref BreakageEventArgs args)
@@ -657,6 +669,17 @@ namespace Content.Server.Kitchen.EntitySystems
 
                 if (active.PortionedRecipe.Item1 != null)
                 {
+                    // <Trauma>
+                    if (microwave.LastKnownKnowledgeHolder is { } chef)
+                    {
+                        var ev = new AddExperienceEvent(MartialArtCQCChef, active.PortionedRecipe.Item2);
+                        RaiseLocalEvent(chef, ref ev);
+                        var evCooking = new AddExperienceEvent(CookingKnowledge, active.PortionedRecipe.Item2);
+                        RaiseLocalEvent(chef, ref evCooking);
+                        microwave.LastKnownKnowledgeHolder = null;
+                    }
+                    // </Trauma>
+
                     var coords = Transform(uid).Coordinates;
                     for (var i = 0; i < active.PortionedRecipe.Item2; i++)
                     {

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 
 namespace Content.Trauma.Shared.Areas;
 
@@ -21,7 +21,7 @@ public sealed class MartialArtAreaSystem : EntitySystem
 
     private void OnCanDoCQC(Entity<TransformComponent> ent, ref CanDoCQCEvent args)
     {
-        args.Handled |= _area.GetArea(ent.Comp.Coordinates) is {} area &&
+        args.Handled |= _area.GetArea(ent.Comp.Coordinates) is { } area &&
             _query.TryComp(area, out var comp) &&
             comp.Form == args.Form;
     }

@@ -17,7 +17,7 @@
   - type: Sprite
     state: kitchen
   - type: MartialArtArea
-    form: CloseQuartersCombat
+    form: MartialArtCQCChef
 
 # For the seating area between kitchen and bar
 - type: entity

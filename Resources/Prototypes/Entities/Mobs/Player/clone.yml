@@ -18,7 +18,7 @@
   - CanEnchant
   - Store # needed for heretic and any other antags with an intrinsic store, IDEALLY this would be on the mind
   - LanguageSpeaker
-  - LanguageKnowledge
+  # - LanguageKnowledge # Trauma - knowledge
   - ForeignerTrait
   # </Trauma>
   # general

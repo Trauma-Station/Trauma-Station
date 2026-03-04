@@ -21,6 +21,15 @@
   extendedAccess:
   - Kitchen
   - Hydroponics
+  # <Trauma>
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 26
+        ShootingKnowledge: 26
+  # </Trauma>
 
 - type: startingGear
   id: BartenderGear

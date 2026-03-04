@@ -25,8 +25,11 @@
   special: # Goobstation - Martial Arts
   - !type:AddComponentSpecial
     components:
-      - type: GrantCqc
-        isBlocked: true # can only use it in kitchen
+      # <Trauma>
+      - type: KnowledgeGrant
+        skills:
+          MartialArtCQCChef: 26
+      # </Trauma>
   - !type:AddImplantSpecial # Chefs speak space italian
     implants: [ SpaceItalianTranslatorImplant ]
 

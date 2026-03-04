@@ -1,26 +1,13 @@
-# SPDX-FileCopyrightText: 2024 Archylle <81660513+Archylle@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 inquisitor-star <81660513+inquisitor-star@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 inquisitor-star <thecatankha@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Creatorbot01 <creatorbot20@gmail.com>
-# SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-# SPDX-FileCopyrightText: 2025 shityaml <unalterableness@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: construction
   id: GoliathCloak
   graph: GoliathCloak
   targetNode: cloak
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  groups:
+    HandmadeKnowledge: 3
+  # </Trauma>
 
 - type: construction
   id: makeshiftvoicechanger
@@ -28,6 +15,11 @@
   targetNode: end
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  groups:
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: MedicalGlasses
@@ -35,6 +27,11 @@
   targetNode: glassesMed
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  groups:
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: DiagnosticGlasses
@@ -42,6 +39,11 @@
   targetNode: glassesDiag
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  groups:
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: MedicalSecurityGlasses
@@ -49,6 +51,11 @@
   targetNode: glassesMedSec
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  groups:
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: GlassesMedDiag
@@ -56,6 +63,11 @@
   targetNode: glassesMedDiag
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  groups:
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: HudMedDiagHUD
@@ -63,3 +75,8 @@
   targetNode: meddiagHud
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  groups:
+    HandmadeKnowledge: 3
+    TechnologyKnowledge: 1
+  # </Trauma>

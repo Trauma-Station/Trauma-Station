@@ -47,8 +47,6 @@ public abstract class SharedLanguageSystem : EntitySystem
          // Initialize the Psychomantic prototype
         Psychomantic = _prototype.Index<LanguagePrototype>(PsychomanticPrototype);
 
-        SubscribeLocalEvent<LanguageSpeakerComponent, MapInitEvent>(OnSpeakerInit);
-
         SubscribeLocalEvent<UniversalLanguageSpeakerComponent, DetermineEntityLanguagesEvent>(OnDetermineUniversalLanguages);
         SubscribeAllEvent<LanguagesSetMessage>(OnClientSetLanguage);
 
@@ -91,14 +89,6 @@ public abstract class SharedLanguageSystem : EntitySystem
 
     #region Event handlers
 
-    private void OnSpeakerInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
-    {
-        if (string.IsNullOrEmpty(ent.Comp.CurrentLanguage))
-            ent.Comp.CurrentLanguage = ent.Comp.SpokenLanguages.FirstOrDefault(UniversalPrototype);
-
-        UpdateEntityLanguages((ent, ent.Comp));
-    }
-
     private void OnDetermineUniversalLanguages(Entity<UniversalLanguageSpeakerComponent> entity, ref DetermineEntityLanguagesEvent ev)
     {
         // We only add it as a spoken language: CanUnderstand checks for ULSC itself.
@@ -127,7 +117,7 @@ public abstract class SharedLanguageSystem : EntitySystem
         if (language == PsychomanticPrototype || language == UniversalPrototype || TryComp<UniversalLanguageSpeakerComponent>(ent, out var uni) && uni.Enabled)
             return true;
 
-        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.UnderstoodLanguages.Contains(language);
+        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.Understands.Contains(language);
     }
 
     public bool CanSpeak(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)
@@ -135,7 +125,7 @@ public abstract class SharedLanguageSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, logMissing: false))
             return false;
 
-        return ent.Comp.SpokenLanguages.Contains(language);
+        return ent.Comp.Speaks.Contains(language);
     }
 
     /// <summary>
@@ -157,7 +147,7 @@ public abstract class SharedLanguageSystem : EntitySystem
     /// <remarks>This simply returns the value of <see cref="LanguageSpeakerComponent.SpokenLanguages"/>.</remarks>
     public List<ProtoId<LanguagePrototype>> GetSpokenLanguages(EntityUid uid)
     {
-        return TryComp<LanguageSpeakerComponent>(uid, out var component) ? component.SpokenLanguages : [];
+        return TryComp<LanguageSpeakerComponent>(uid, out var component) ? component.Speaks : [];
     }
 
     /// <summary>
@@ -166,7 +156,7 @@ public abstract class SharedLanguageSystem : EntitySystem
     /// <remarks>This simply returns the value of <see cref="LanguageSpeakerComponent.SpokenLanguages"/>.</remarks>
     public List<ProtoId<LanguagePrototype>> GetUnderstoodLanguages(EntityUid uid)
     {
-        return TryComp<LanguageSpeakerComponent>(uid, out var component) ? component.UnderstoodLanguages : [];
+        return TryComp<LanguageSpeakerComponent>(uid, out var component) ? component.Understands : [];
     }
 
     public void SetLanguage(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)
@@ -183,46 +173,24 @@ public abstract class SharedLanguageSystem : EntitySystem
     /// <summary>
     ///     Adds a new language to the respective lists of intrinsically known languages of the given entity.
     /// </summary>
-    public void AddLanguage(
-        EntityUid uid,
-        ProtoId<LanguagePrototype> language,
-        bool addSpoken = true,
-        bool addUnderstood = true)
+    public void AddLanguage(EntityUid uid, ProtoId<LanguagePrototype> language, bool addSpoken = true, bool addUnderstood = true)
     {
-        var knowledge = EnsureComp<LanguageKnowledgeComponent>(uid);
-        var speaker = EnsureComp<LanguageSpeakerComponent>(uid);
-
-        if (addSpoken && !knowledge.SpokenLanguages.Contains(language))
-            knowledge.SpokenLanguages.Add(language);
-
-        if (addUnderstood && !knowledge.UnderstoodLanguages.Contains(language))
-            knowledge.UnderstoodLanguages.Add(language);
-
-        Dirty(uid, knowledge);
-        UpdateEntityLanguages((uid, speaker));
+        var ev = new AddLanguageEvent(language, addSpoken, addUnderstood);
+        RaiseLocalEvent(uid, ref ev);
+        return;
     }
 
     /// <summary>
     ///     Removes a language from the respective lists of intrinsically known languages of the given entity.
     /// </summary>
-    public void RemoveLanguage(
-        Entity<LanguageKnowledgeComponent?> ent,
-        ProtoId<LanguagePrototype> language,
-        bool removeSpoken = true,
-        bool removeUnderstood = true)
+    public void RemoveLanguage(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language, bool removeSpoken = true, bool removeUnderstood = true)
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        if (removeSpoken)
-            ent.Comp.SpokenLanguages.Remove(language);
-
-        if (removeUnderstood)
-            ent.Comp.UnderstoodLanguages.Remove(language);
-
-        // We don't ensure that the entity has a speaker comp. If it doesn't... Well, woe be the caller of this method.
-        Dirty(ent, ent.Comp);
-        UpdateEntityLanguages(ent.Owner);
+        var ev = new RemoveLanguageEvent(language, removeSpoken, removeUnderstood);
+        RaiseLocalEvent(ent, ref ev);
+        return;
     }
 
     /// <summary>
@@ -230,14 +198,11 @@ public abstract class SharedLanguageSystem : EntitySystem
     ///   If not, sets it to the first entry of its SpokenLanguages list, or universal if it's empty.
     /// </summary>
     /// <returns>True if the current language was modified, false otherwise.</returns>
-    public bool EnsureValidLanguage(Entity<LanguageSpeakerComponent?> ent)
+    public bool EnsureValidLanguage(Entity<LanguageSpeakerComponent> ent)
     {
-        if (!Resolve(ent, ref ent.Comp, false))
-            return false;
-
-        if (!ent.Comp.SpokenLanguages.Contains(ent.Comp.CurrentLanguage))
+        if (!ent.Comp.Speaks.Contains(ent.Comp.CurrentLanguage))
         {
-            ent.Comp.CurrentLanguage = ent.Comp.SpokenLanguages.FirstOrDefault(UniversalPrototype);
+            ent.Comp.CurrentLanguage = ent.Comp.Speaks.FirstOrDefault(UniversalPrototype);
             Dirty(ent);
             return true;
         }
@@ -253,29 +218,17 @@ public abstract class SharedLanguageSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        var ev = new DetermineEntityLanguagesEvent();
-        // We add the intrinsically known languages first so other systems can manipulate them easily
-        if (TryComp<LanguageKnowledgeComponent>(ent, out var knowledge))
-        {
-            foreach (var spoken in knowledge.SpokenLanguages)
-                ev.SpokenLanguages.Add(spoken);
-
-            foreach (var understood in knowledge.UnderstoodLanguages)
-                ev.UnderstoodLanguages.Add(understood);
-        }
-
+        var ev = new UpdateLanguageEvent();
         RaiseLocalEvent(ent, ref ev);
-
-        ent.Comp.SpokenLanguages.Clear();
-        ent.Comp.UnderstoodLanguages.Clear();
-
-        ent.Comp.SpokenLanguages.AddRange(ev.SpokenLanguages);
-        ent.Comp.UnderstoodLanguages.AddRange(ev.UnderstoodLanguages);
-
-        EnsureValidLanguage(ent);
-
-        Dirty(ent);
+        return;
     }
 
     #endregion
 }
+
+[ByRefEvent]
+public record struct AddLanguageEvent(ProtoId<LanguagePrototype> Language, bool AddSpoken, bool AddUnderstood);
+[ByRefEvent]
+public record struct RemoveLanguageEvent(ProtoId<LanguagePrototype> Language, bool RemoveSpoken, bool RemoveUnderstood);
+[ByRefEvent]
+public record struct UpdateLanguageEvent();

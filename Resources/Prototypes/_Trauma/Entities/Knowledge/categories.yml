@@ -1,0 +1,107 @@
+- type: entity
+  id: BaseMedicalKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Medical
+
+- type: entity
+  id: BasePhysicalKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Physical
+    onSleep: true
+
+- type: entity
+  id: BaseWarKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: War
+
+- type: entity
+  id: BaseIntellectualKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Intellectual
+
+- type: entity
+  id: BaseScientificKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Scientific
+
+- type: entity
+  parent: BaseKnowledge
+  id: BaseConstructionKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Construction
+    color: "#0ba881"
+    experienceCost: 20
+
+- type: entity
+  parent: BaseKnowledge
+  id: BaseLanguageKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Language
+    level: 26
+    experienceCost: 4
+    color: "#ADD8E6"
+  - type: LanguageKnowledge
+
+- type: entity
+  parent: BaseKnowledge
+  id: BaseMartialArtsKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: MartialArt
+    experienceCost: 10
+    color: "#c70000"
+  - type: MartialArtsKnowledge
+    blocked: false
+    icon: Objects/Misc/skub.rsi
+
+- type: knowledgeCategory
+  id: MartialArt
+  name: knowledge-category-prototype-Martial
+
+- type: knowledgeCategory
+  id: Construction
+  name: knowledge-category-prototype-Construction
+
+- type: knowledgeCategory
+  id: Language
+  name: knowledge-category-prototype-Languages
+
+- type: knowledgeCategory
+  id: War
+  name: knowledge-category-prototype-Combat
+
+- type: knowledgeCategory
+  id: Medical
+  name: knowledge-category-prototype-Medical
+
+- type: knowledgeCategory
+  id: Physical
+  name: knowledge-category-prototype-Physical
+
+- type: knowledgeCategory
+  id: Intellectual
+  name: knowledge-category-prototype-Intellectual
+
+- type: knowledgeCategory
+  id: Scientific
+  name: knowledge-category-prototype-Scientific

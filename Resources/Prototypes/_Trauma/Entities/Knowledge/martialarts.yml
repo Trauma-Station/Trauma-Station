@@ -1,0 +1,160 @@
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtCQC
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - CQCConsecutive
+    - CQCPressure
+    - CQCRestrain
+    - CQCKick
+    - CQCSlam
+    - CQCConsecutiveAdvanced
+
+- type: entity
+  parent: MartialArtCQC
+  id: MartialArtCQCChef
+  components:
+  - type: MartialArtsKnowledge
+    blocked: true
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtCorporateJudo
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - JudoGoldenBlast1
+    - JudoGoldenBlast2
+    - JudoGoldenBlast3
+    - JudoThrow
+    - JudoArmbar
+    - JudoDiscombobulate # Due to supercode this needs to be below Armbar, otherwise it takes priority
+    - JudoWheelThrow
+    - JudoEyePoke # Same here, must be below WheelThrow
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtKravMaga
+  name: MartialArtKravMaga
+  components:
+  - type: CanPerformCombo
+  - type: ComboActions
+    storedComboActions:
+      KravLegSweep: ActionLegSweep
+      KravNeckChop: ActionNeckChop
+      KravLungPunch: ActionLungPunch
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtCapoeira
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - PushKick
+    - SweepKick
+    - CircleKick
+    - SpinKick
+    - KickUp
+  - type: FastSpeed
+    speedModifier: 2
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtHellRip
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - DropKick
+    - HeadRip
+    - Slam
+    - TearDown
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtNinjutsu
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - BiteTheDust
+    - DirtyKill
+    - NinjutsuTakedown
+  - type: SneakAttack
+    secondsTillHidden: 2
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtDragon
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - DragonClaw
+    - DragonTail
+    - DragonStrike
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtSleepingCarp
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - SleepingCarpGnashingTeeth
+    - SleepingCarpKneeHaul
+    - SleepingCarpCrashingWaves
+  - type: NoGun
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtPlasmaFist
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - TornadoSweep
+    - Throwback
+    - ThePlasmaFist
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtSpaceBear
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - BearJaws
+    - PawSlam
+    - Smokey
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtBoxing
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - CQCConsecutive
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtDrunkfu
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - CQCConsecutive
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtMimejutsu
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - MimeChucks
+    - Smokebomb
+    - SilentPalm
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtAdminfu
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - InstantStun
+    - InstantDeath
+    - InstantRejuvenate

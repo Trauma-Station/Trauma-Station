@@ -100,6 +100,15 @@
       amount: 5
     - id: MaterialBones1 # Trauma - Bones on butchering humanoids
       amount: 3
+  # <Trauma>
+  - type: KnowledgeHolder
+  - type: KnowledgeGrant
+    skills:
+      StrengthKnowledge: 0
+      ToughnessKnowledge: 0
+      AthleticsKnowledge: 0
+      MeleeKnowledge: 0
+  # </Trauma>
 
 - type: entity
   parent: OrganBaseFleshy # Shitmed - Fleshy

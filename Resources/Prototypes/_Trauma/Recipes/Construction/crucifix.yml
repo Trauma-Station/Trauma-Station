@@ -9,3 +9,5 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  groups:
+    TechnologyKnowledge: 10

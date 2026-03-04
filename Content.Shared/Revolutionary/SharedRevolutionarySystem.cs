@@ -1,15 +1,7 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 EmoGarbage404 <retron404@gmail.com>
-// SPDX-FileCopyrightText: 2023 coolmankid12345 <55817627+coolmankid12345@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 coolmankid12345 <coolmankid12345@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Trauma.Common.Knowledge.Systems;
+using Robust.Shared.Prototypes;
+// </Trauma>
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
@@ -23,9 +15,15 @@ namespace Content.Shared.Revolutionary;
 
 public abstract class SharedRevolutionarySystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+    // </Trauma>
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedStunSystem _sharedStun = default!;
 
+    // <Trauma>
+    private static readonly EntProtoId RevolutionaryKnowledge = "RevolutionaryKnowledge";
+    // </Trauma>
     public override void Initialize()
     {
         base.Initialize();
@@ -106,12 +104,14 @@ public abstract class SharedRevolutionarySystem : EntitySystem
         var revComps = AllEntityQuery<RevolutionaryComponent>();
         while (revComps.MoveNext(out var uid, out var comp))
         {
+            _knowledge.TryAddKnowledgeUnit(uid, (RevolutionaryKnowledge, 20)); // Trauma - Knowledge
             Dirty(uid, comp);
         }
 
         var headRevComps = AllEntityQuery<HeadRevolutionaryComponent>();
         while (headRevComps.MoveNext(out var uid, out var comp))
         {
+            _knowledge.TryAddKnowledgeUnit(uid, (RevolutionaryKnowledge, 50)); // Trauma - Knowledge
             Dirty(uid, comp);
         }
     }

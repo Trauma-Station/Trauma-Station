@@ -10,3 +10,8 @@
   canBuildInImpassable: true
   conditions:
   - !type:WallmountCondition
+  # <Trauma>
+  groups:
+    ElectronicsKnowledge: 2
+    TechnologyKnowledge: 2
+  # </Trauma>

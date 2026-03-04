@@ -39,6 +39,12 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
+      # <Trauma>
+      - type: KnowledgeGrant
+        skills:
+          TechnologyKnowledge: 50
+          ScienceKnowledge: 50
+      # </Trauma>
 
 - type: startingGear
   id: ResearchDirectorGear

@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Trauma.Common.Knowledge;
 using Content.Goobstation.Common.Cloning;
 using Content.Shared._EinsteinEngines.Silicon.Components;
 // </Trauma>
@@ -93,7 +94,10 @@ public sealed class CloningPodSystem : EntitySystem
         var query = EntityQueryEnumerator<BeingClonedComponent, MindContainerComponent>();
         var found = false;
         EntityUid mob;
-        while (query.MoveNext(out mob, out var cloned, out var mc))
+
+        BeingClonedComponent? cloned;
+
+        while (query.MoveNext(out mob, out cloned, out var mc))
         {
             if (cloned.Mind == mind && mc.Mind == null)
             {
@@ -104,6 +108,12 @@ public sealed class CloningPodSystem : EntitySystem
 
         if (!found)
             return;
+
+        if (cloned?.Original is { } original && Exists(original))
+        {
+            var ev = new KnowledgeCopyEvent(mob);
+            RaiseLocalEvent(original, ref ev, true);
+        }
 
         _mindSystem.TransferTo(mindId, mob, ghostCheckOverride: true, mind: mind);
         _mindSystem.UnVisit(mindId, mind);

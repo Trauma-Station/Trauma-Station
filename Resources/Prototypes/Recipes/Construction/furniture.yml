@@ -1,34 +1,3 @@
-# SPDX-FileCopyrightText: 2021 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Swept <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-# SPDX-FileCopyrightText: 2021 wrexbe <81056464+wrexbe@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Kevin Zheng <kevinz5000@gmail.com>
-# SPDX-FileCopyrightText: 2022 Lamrr <96937466+Lamrr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Martin Petkovski <63034378+martin69420@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Morb <14136326+Morb0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Zymem <97173622+Zymem@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Kit0vras <123590995+Kit0vras@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Futuristic-OK <141568243+Futuristic-OK@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Futuristic-OK <141568243+FuturisticRUS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ko4ergaPunk <62609550+Ko4ergaPunk@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 MACMAN2003 <macman2003c@gmail.com>
-# SPDX-FileCopyrightText: 2024 Nairod <110078045+Nairodian@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Nim <128169402+Nimfar11@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-# SPDX-FileCopyrightText: 2024 Token <esil.bektay@yandex.com>
-# SPDX-FileCopyrightText: 2024 brainfood1183 <113240905+brainfood1183@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 #chairs
 - type: construction
   id: Chair
@@ -41,6 +10,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: Stool
@@ -53,6 +26,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: StoolBar
@@ -65,6 +42,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ChairBrass
@@ -77,6 +58,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ChairOfficeLight
@@ -89,6 +74,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ChairOfficeDark
@@ -101,6 +90,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ChairComfy
@@ -113,6 +106,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: chairPilotSeat
@@ -125,6 +122,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ChairWood
@@ -137,6 +138,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ChairMeat
@@ -149,6 +154,10 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ChairRitual
@@ -161,6 +170,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ChairFolding
@@ -173,6 +186,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ChairSteelBench
@@ -185,6 +202,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: StoolCard
@@ -197,6 +218,10 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ChairWoodBench
@@ -209,6 +234,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: RedComfBench
@@ -222,6 +251,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BlueComfBench
@@ -235,6 +268,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 #tables
 - type: construction
@@ -248,6 +285,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableReinforced
@@ -260,6 +301,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableGlass
@@ -272,6 +317,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableCard
@@ -284,6 +333,10 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableReinforcedGlass
@@ -296,6 +349,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TablePlasmaGlass
@@ -308,6 +365,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableBrass
@@ -320,6 +381,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableWood
@@ -332,6 +397,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: TableCarpet
@@ -344,6 +413,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: TableFancyBlack
@@ -357,6 +430,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableFancyBlue
@@ -370,6 +447,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableFancySkyBlue
@@ -383,6 +464,10 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableFancyCyan
@@ -396,6 +481,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableFancyGreen
@@ -409,6 +498,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableFancyOrange
@@ -422,6 +515,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableFancyPurple
@@ -435,6 +532,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableFancyPink
@@ -448,6 +549,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableFancyRed
@@ -461,6 +566,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableFancyWhite
@@ -474,6 +583,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableCounterMetal
@@ -486,6 +599,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TableCounterWood
@@ -498,6 +615,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 #bathroom
 - type: construction
@@ -511,6 +632,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 #bedroom
 - type: construction
@@ -524,6 +649,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: MedicalBed
@@ -536,6 +665,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: DogBed
@@ -548,6 +681,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: Dresser
@@ -560,6 +697,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 #racks
 - type: construction
@@ -573,6 +714,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 #misc
 - type: construction
@@ -586,6 +731,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    SurvivalKnowledge: 1
+    WeaponsKnowledge: 1
+    HandmadeKnowledge: 1
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: Curtains
@@ -597,6 +749,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: CurtainsBlack
@@ -608,6 +764,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: CurtainsBlue
@@ -619,6 +779,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: CurtainsSkyBlue
@@ -630,6 +794,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: CurtainsCyan
@@ -641,6 +809,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: CurtainsGreen
@@ -652,6 +824,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: CurtainsOrange
@@ -663,6 +839,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: CurtainsPink
@@ -674,6 +854,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: CurtainsPurple
@@ -685,6 +869,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: CurtainsRed
@@ -696,6 +884,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: CurtainsWhite
@@ -707,6 +899,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: Bookshelf
@@ -719,6 +915,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: NoticeBoard
@@ -732,6 +932,10 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: Mannequin
@@ -745,3 +949,7 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>

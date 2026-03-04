@@ -5,7 +5,8 @@ using Robust.Shared.Input;
 namespace Content.Trauma.Common.Input;
 
 [KeyFunctions]
-public sealed class TraumaKeyFunctions
+public static class TraumaKeyFunctions
 {
+    public static readonly BoundKeyFunction OpenMartialArtsMenu = "OpenMartialArtsMenu";
     public static readonly BoundKeyFunction Tackle = "Tackle";
 }

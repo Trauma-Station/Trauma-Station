@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aineias1 <142914808+Aineias1@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 # Seat
 - type: construction
   id: BenchSofaMiddle
@@ -14,6 +10,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchSofaLeft
@@ -26,6 +26,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchSofaRight
@@ -38,6 +42,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchSofaCorner
@@ -50,6 +58,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchSofaCorpMiddle
@@ -62,6 +74,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchSofaCorpLeft
@@ -74,6 +90,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchSofaCorpRight
@@ -86,6 +106,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchSofaCorpCorner
@@ -98,6 +122,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchSteelMiddle
@@ -110,6 +138,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchSteelRight
@@ -122,6 +154,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchSteelLeft
@@ -134,6 +170,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchPewMiddle
@@ -146,6 +186,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchPewRight
@@ -158,6 +202,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchPewLeft
@@ -170,6 +218,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchParkMiddle
@@ -182,6 +234,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchParkRight
@@ -194,6 +250,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchParkLeft
@@ -206,6 +266,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchSteelWhiteMiddle
@@ -218,6 +282,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchSteelWhiteRight
@@ -230,6 +298,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchSteelWhiteLeft
@@ -242,6 +314,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchParkBambooMiddle
@@ -254,6 +330,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchParkBambooRight
@@ -266,6 +346,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BenchParkBambooLeft
@@ -278,6 +362,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 # Decorations (bonfire, fireplace)
 - type: construction
@@ -291,6 +379,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 1
+  # </Trauma>
 
 # Banners
 - type: construction
@@ -304,6 +396,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BannerCargo
@@ -316,6 +412,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BannerEngineering
@@ -328,6 +428,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BannerMedical
@@ -340,6 +444,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BannerScience
@@ -352,6 +460,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BannerSecurity
@@ -364,6 +476,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BannerBlue
@@ -376,6 +492,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BannerRed
@@ -388,6 +508,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BannerYellow
@@ -400,6 +524,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BannerGreen
@@ -412,6 +540,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BannerRevolution
@@ -424,6 +556,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BannerSyndicate
@@ -436,3 +572,7 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>

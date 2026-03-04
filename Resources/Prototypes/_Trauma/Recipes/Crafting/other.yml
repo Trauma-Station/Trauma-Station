@@ -5,6 +5,8 @@
   targetNode: paper sheet
   category: construction-category-materials
   objectType: Item
+  groups:
+    RevolutionaryKnowledge: 0
 
 - type: construction
   id: PowerArmorStand
@@ -13,7 +15,5 @@
   targetNode: PowerArmorStand
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  groups:
+    RevolutionaryKnowledge: 2

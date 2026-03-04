@@ -17,6 +17,11 @@
       factions:
       - NanoTrasen
       - Assistant
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        HandmadeKnowledge: 26
+    # </Trauma>
 
 - type: startingGear
   id: PassengerGear

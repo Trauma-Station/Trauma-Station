@@ -5,6 +5,7 @@
            xmlns:is="clr-namespace:Content.Shared.Input;assembly=Content.Shared"
            xmlns:xe="clr-namespace:Content.Client.UserInterface.XamlExtensions"
            xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+           xmlns:it="using:Content.Trauma.Common.Input"
            xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.MenuBar.Widgets"
            Name = "MenuButtons"
            VerticalExpand="False"
@@ -85,6 +86,18 @@
         AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
         />
     <!-- </EE> -->
+    <!-- <Trauma> -->
+    <ui:MenuButton
+        Name="MartialArtsButton"
+        Access="Public"
+        Icon="{xe:Tex '/Textures/Interface/emotes.svg.192dpi.png'}"
+        ToolTip="{Loc 'game-hud-open-martial-arts-menu-button-tooltip'}"
+        BoundKey = "{x:Static it:TraumaKeyFunctions.OpenMartialArtsMenu}"
+        MinSize="42 64"
+        HorizontalExpand="True"
+        AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
+        />
+    <!-- </Trauma> -->
     <ui:MenuButton
         Name="AdminButton"
         Access="Internal"

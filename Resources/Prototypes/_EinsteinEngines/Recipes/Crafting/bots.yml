@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: construction
   id: weldbot
   graph: WeldBot
@@ -11,6 +5,10 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
+  # <Trauma>
+  groups:
+    BotsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: plantbot
@@ -19,6 +17,10 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
+  # <Trauma>
+  groups:
+    BotsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: fillbot
@@ -27,6 +29,10 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
+  # <Trauma>
+  groups:
+    BotsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: minebot
@@ -35,3 +41,7 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
+  # <Trauma>
+  groups:
+    BotsKnowledge: 2
+  # </Trauma>

@@ -1,0 +1,38 @@
+- type: combo
+  id: TornadoSweep
+  attacks:
+  - Harm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - plasmafist-tornadosweep
+  opponentEffects:
+  levelRequired: 26
+
+- type: combo
+  id: Throwback
+  attacks:
+  - Harm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+
+  levelRequired: 26
+
+- type: combo
+  id: ThePlasmaFist
+  attacks:
+  - Harm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - plasmafist-plasmafist
+  opponentEffects:
+  levelRequired: 26

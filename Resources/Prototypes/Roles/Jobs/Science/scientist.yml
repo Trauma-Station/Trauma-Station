@@ -15,9 +15,18 @@
   access:
   - Research
   - Maintenance
-  extendedAccess: # Trauma
+  # <Trauma>
+  special:
+  - !type:AddComponentSpecial
+    components:
+      - type: KnowledgeGrant
+        skills:
+          TechnologyKnowledge: 26
+          ScienceKnowledge: 26
+  extendedAccess:
   - Robotics
   - Genetics
+  # </Trauma>
 
 - type: startingGear
   id: ScientistGear

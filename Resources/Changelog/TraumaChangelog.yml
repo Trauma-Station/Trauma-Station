@@ -3482,3 +3482,32 @@ Entries:
   id: 413
   time: '2026-03-03T21:50:21.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/969
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: Xenomorph thermal vision no longer has a filter
+  id: 414
+  time: '2026-03-04T02:52:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/979
+- author: GeneRickUsername
+  changes:
+  - type: Add
+    message: Added KnowledgeComponent
+  - type: Add
+    message: >-
+      All Construction Ghosts / Crafting should all have categories they belong
+      too.
+  - type: Add
+    message: You can create Masterwork or Catastrophic items.
+  - type: Add
+    message: Martial Arts have been unshitcoded and are now all yamlable.
+  - type: Add
+    message: >-
+      Added a variety of knowledge tidbits to augment gameplay. It's
+      semi-yamlable and semi-hardcoded. (You can create as many knowledges as
+      you want, but you need to hook them into through C# for them to actually
+      do anything. If it takes too short or too long to get to a high level,
+      feel free to adjust.)
+  id: 415
+  time: '2026-03-04T03:31:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/262

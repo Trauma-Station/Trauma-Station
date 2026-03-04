@@ -389,6 +389,10 @@
     identifier: "nerveSystem"
     causesDeath: true
   # </Shitmed>
+  # <Trauma>
+  - type: KnowledgeContainer
+  - type: ContainerContainer
+  # </Trauma>
   - type: GibbableOrgan
   - type: Organ
     category: Brain

@@ -119,6 +119,9 @@ public sealed class ConstructorBUI : BoundUserInterface
         var isEmptyCategory = string.IsNullOrEmpty(category) || category == _forAllCategoryName;
 
         _recipes.Clear();
+        // <Trauma>
+        var availableGroups = _construction.AvailableConstructionGroups(user);
+        // </Trauma>
         foreach (var recipe in _proto.EnumeratePrototypes<ConstructionPrototype>())
         {
             if (recipe.Hide)
@@ -126,6 +129,11 @@ public sealed class ConstructorBUI : BoundUserInterface
 
             if (_whitelist.IsWhitelistFail(recipe.EntityWhitelist, user))
                 continue;
+
+            // <Trauma>
+            if (_construction.IsKnowledgeHolder(user) && !recipe.Groups.Keys.All(group => availableGroups.ContainsKey(group)))
+                continue;
+            // </Trauma>
 
             if (searching
                 && recipe.Name != null

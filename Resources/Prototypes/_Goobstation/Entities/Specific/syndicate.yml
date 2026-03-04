@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Lincoln McQueen <lincoln.mcqueen@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   parent: [BaseItem, BaseSyndicateContraband]
   id: CQCManual
@@ -21,7 +12,12 @@
     size: Small
   - type: StaticPrice
     price: 3000
-  - type: GrantCqc
+  - type: KnowledgeGrantOnUse
+    skills:
+      MartialArtCQC: 26
+    experience:
+      MartialArtCQC: 10
+    doAfter: 2
   - type: GuideHelp
     guides:
     - CQC
@@ -41,7 +37,12 @@
     size: Small
   - type: StaticPrice
     price: 3000
-  - type: GrantSleepingCarp
+  - type: KnowledgeGrantOnUse
+    skills:
+      MartialArtSleepingCarp: 26
+    experience:
+      MartialArtSleepingCarp: 10
+    doAfter: 2
   - type: GuideHelp
     guides:
     - SleepingCarp
@@ -60,7 +61,12 @@
     size: Small
   - type: StaticPrice
     price: 3000
-  - type: GrantCapoeira
+  - type: KnowledgeGrantOnUse
+    skills:
+      MartialArtCapoeira: 26
+    experience:
+      MartialArtCapoeira: 10
+    doAfter: 2
   - type: GuideHelp
     guides:
     - Capoeira

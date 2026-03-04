@@ -187,7 +187,7 @@
     speedModifier: 2.5 # fast because dragon strong
     useSound:
       path: /Audio/Items/crowbar.ogg
-  - type: LanguageKnowledge # goob edit - carp language (keeping basic as an option because the space monster gloating is funny)
+  - type: LanguageSpeaker # Trauma - carp language (keeping basic as an option because the space monster gloating is funny)
     speaks:
     - TauCetiBasic
     - Carptongue

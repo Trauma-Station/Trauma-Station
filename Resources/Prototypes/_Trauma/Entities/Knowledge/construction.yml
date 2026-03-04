@@ -1,0 +1,71 @@
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: HandmadeKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: SurvivalKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: WeaponsKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: MaterialsKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: DoorsKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: AirlocksKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: ToysKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: BananiumKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: BotsKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: FurnitureKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: InfrastructureKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: ElectronicsKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: WallsKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: ScienceKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: WindowsKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: SpiderCraftKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: SmokeablesKnowledge
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: RevolutionaryKnowledge

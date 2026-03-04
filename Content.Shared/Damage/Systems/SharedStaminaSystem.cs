@@ -1,11 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Damage.Events;
-using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Common.Stunnable;
 using Content.Shared._Shitcode.Weapons.Misc;
-using Content.Shared.Jittering;
-using Content.Shared.Speech.EntitySystems;
-using Robust.Shared.Random;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Administration.Logs;
@@ -164,13 +160,6 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         {
             return;
         }
-
-        // Goobstation - Martial Arts
-        if (TryComp<MartialArtsKnowledgeComponent>(args.User, out var knowledgeComp)
-            && TryComp<MartialArtBlockedComponent>(args.Weapon, out var blockedComp)
-            && knowledgeComp.MartialArtsForm == blockedComp.Form)
-            return;
-        // Goobstation
 
         var ev = new StaminaDamageOnHitAttemptEvent(args.Direction == null, false); // Goob edit
         RaiseLocalEvent(uid, ref ev);

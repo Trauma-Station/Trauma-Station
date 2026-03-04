@@ -1694,6 +1694,9 @@
     tags:
     - PetWearable
     - CorgiWearable
+  - type: KnowledgeGrantOnWear
+    experience:
+      MartialArtCQC: 10
 
 - type: entity
   parent: ClothingHeadBase

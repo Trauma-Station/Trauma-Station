@@ -1,0 +1,307 @@
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Cat
+  components:
+  - type: LanguageKnowledge
+    languageId: Cat
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Dog
+  components:
+  - type: LanguageKnowledge
+    languageId: Dog
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Fox
+  components:
+  - type: LanguageKnowledge
+    languageId: Fox
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Xeno
+  components:
+  - type: LanguageKnowledge
+    languageId: Xeno
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Monkey
+  components:
+  - type: LanguageKnowledge
+    languageId: Monkey
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Mouse
+  components:
+  - type: LanguageKnowledge
+    languageId: Mouse
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Chicken
+  components:
+  - type: LanguageKnowledge
+    languageId: Chicken
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Duck
+  components:
+  - type: LanguageKnowledge
+    languageId: Duck
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Cow
+  components:
+  - type: LanguageKnowledge
+    languageId: Cow
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Sheep
+  components:
+  - type: LanguageKnowledge
+    languageId: Sheep
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Kangaroo
+  components:
+  - type: LanguageKnowledge
+    languageId: Kangaroo
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Pig
+  components:
+  - type: LanguageKnowledge
+    languageId: Pig
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Crab
+  components:
+  - type: LanguageKnowledge
+    languageId: Crab
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Kobold
+  components:
+  - type: LanguageKnowledge
+    languageId: Kobold
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Hissing
+  components:
+  - type: LanguageKnowledge
+    languageId: Hissing
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Penguin
+  components:
+  - type: LanguageKnowledge
+    languageId: Penguin
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Deer
+  components:
+  - type: LanguageKnowledge
+    languageId: Deer
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Universal
+  components:
+  - type: LanguageKnowledge
+    languageId: Universal
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-RobotTalk
+  components:
+  - type: LanguageKnowledge
+    languageId: RobotTalk
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-DroneTalk
+  components:
+  - type: LanguageKnowledge
+    languageId: DroneTalk
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Psychomantic
+  components:
+  - type: LanguageKnowledge
+    languageId: Psychomantic
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Blob
+  components:
+  - type: LanguageKnowledge
+    languageId: Blob
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Eldritch
+  components:
+  - type: LanguageKnowledge
+    languageId: Eldritch
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-RootSpeak
+  components:
+  - type: LanguageKnowledge
+    languageId: RootSpeak
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Moffic
+  components:
+  - type: LanguageKnowledge
+    languageId: Moffic
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Draconic
+  components:
+  - type: LanguageKnowledge
+    languageId: Draconic
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Azaziba
+  components:
+  - type: LanguageKnowledge
+    languageId: Azaziba
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Calcic
+  components:
+  - type: LanguageKnowledge
+    languageId: Calcic
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Bubblish
+  components:
+  - type: LanguageKnowledge
+    languageId: Bubblish
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-NewKinPidgin
+  components:
+  - type: LanguageKnowledge
+    languageId: NewKinPidgin
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Xeeplian
+  components:
+  - type: LanguageKnowledge
+    languageId: Xeeplian
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Elyran
+  components:
+  - type: LanguageKnowledge
+    languageId: Elyran
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Freespeak
+  components:
+  - type: LanguageKnowledge
+    languageId: Freespeak
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-NovuNederic
+  components:
+  - type: LanguageKnowledge
+    languageId: NovuNederic
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-SolCommon
+  components:
+  - type: LanguageKnowledge
+    languageId: SolCommon
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-TauCetiBasic
+  components:
+  - type: LanguageKnowledge
+    languageId: TauCetiBasic
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Tradeband
+  components:
+  - type: LanguageKnowledge
+    languageId: Tradeband
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-SpaceItalian
+  components:
+  - type: LanguageKnowledge
+    languageId: SpaceItalian
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Carptongue
+  components:
+  - type: LanguageKnowledge
+    languageId: Carptongue
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-FloorGoblin
+  components:
+  - type: LanguageKnowledge
+    languageId: FloorGoblin
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Cheval
+  components:
+  - type: LanguageKnowledge
+    languageId: Cheval
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Bingle
+  components:
+  - type: LanguageKnowledge
+    languageId: Bingle
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-Revolutionary
+  components:
+  - type: LanguageKnowledge
+    languageId: Revolutionary
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: language-XenoHivemind
+  components:
+  - type: LanguageKnowledge
+    languageId: XenoHivemind

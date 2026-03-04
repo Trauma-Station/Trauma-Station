@@ -1,5 +1,7 @@
 // <Trauma>
 using Content.Trauma.Common.Throwing;
+using Content.Trauma.Common.Knowledge.Systems;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Network;
 // </Trauma>
 using System.Numerics;
@@ -21,7 +23,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Throwing;
 
-public sealed class ThrowingSystem : EntitySystem
+// <Trauma>
+public sealed partial class ThrowingSystem : EntitySystem
+// </Trauma>
 {
     public const float ThrowAngularImpulse = 5f;
 
@@ -200,6 +204,13 @@ public sealed class ThrowingSystem : EntitySystem
 
         if (tileFriction == 0f)
             compensateFriction = false; // cannot calculate this if there is no friction
+
+        // <Trauma>
+        var throwingRandomness = 0.0f;
+        if (user != null)
+            (baseThrowSpeed, throwingRandomness) = RandomSkillThrowingAngle(user.Value, baseThrowSpeed);
+        direction = new Angle(throwingRandomness).RotateVec(direction);
+        // </Trauma>
 
         // Set the time the item is supposed to be in the air so we can apply OnGround status.
         // This is a free parameter, but we should set it to something reasonable.

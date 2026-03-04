@@ -1,0 +1,91 @@
+- type: combo
+  id: PushKick
+  attacks:
+  - Grab
+  - Harm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 1
+    type: Remove
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 5
+  levelRequired: 10
+
+- type: combo
+  id: CircleKick
+  attacks:
+  - Disarm
+  - Disarm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 15
+  levelRequired: 10
+
+- type: combo
+  id: SweepKick
+  attacks:
+  - Harm
+  - Harm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit1.ogg
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 10
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 1
+    type: Remove
+  - !type:TakeStaminaDamage
+    amount: 10
+  levelRequired: 10
+
+- type: combo
+  id: SpinKick
+  attacks:
+  - Grab
+  - Harm
+  - Disarm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit1.ogg
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 25
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 2
+    type: Remove
+  - !type:TakeStaminaDamage
+    amount: 15
+  levelRequired: 10
+
+- type: combo
+  id: KickUp
+  attacks:
+  - Disarm
+  - Disarm
+  userEffects:
+  - !type:SetStanding
+    force: true
+  giveExperience: false
+  levelRequired: 10

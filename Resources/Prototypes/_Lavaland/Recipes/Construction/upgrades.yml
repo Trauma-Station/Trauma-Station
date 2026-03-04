@@ -4,6 +4,9 @@
   category: construction-category-weapons
   targetNode: crystal
   objectType: Item
+  groups:
+    TechnologyKnowledge: 2
+    WeaponsKnowledge: 2
 
 - type: construction
   id: CrusherUpgradeLavaCrystalConstruction
@@ -11,6 +14,9 @@
   category: construction-category-weapons
   targetNode: crystal
   objectType: Item
+  groups:
+    TechnologyKnowledge: 2
+    WeaponsKnowledge: 2
 
 - type: construction
   id: CrusherUpgradeIceCrystalConstruction
@@ -18,3 +24,6 @@
   category: construction-category-weapons
   targetNode: crystal
   objectType: Item
+  groups:
+    TechnologyKnowledge: 2
+    WeaponsKnowledge: 2

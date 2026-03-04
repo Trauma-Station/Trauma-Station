@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: job
   id: Brigmedic
   name: job-name-brigmedic
@@ -36,6 +31,12 @@
   - !type:AddComponentSpecial
     components: # Intentionally no surgery buff, you're reliable but not powerful as a real doctor
     - type: SecurityStaff
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        FirstAidKnowledge: 26
+        SurgeryKnowledge: 26
+    # </Trauma>
 
 - type: chameleonOutfit
   id: BrigmedicChameleonOutfit

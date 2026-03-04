@@ -36,7 +36,7 @@ public sealed partial class HolyFlammableComponent : Component
     {
         DamageDict =
         {
-            ["Holy"] = 0.5
+            ["Holy"] = 0.5f
         }
     };
 

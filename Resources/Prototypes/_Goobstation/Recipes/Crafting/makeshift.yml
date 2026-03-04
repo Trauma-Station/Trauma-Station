@@ -4,3 +4,5 @@
   category: construction-category-misc
   targetNode: final
   objectType: Item
+  groups:
+    TechnologyKnowledge: 2

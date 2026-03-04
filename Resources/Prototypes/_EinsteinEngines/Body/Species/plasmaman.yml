@@ -134,7 +134,7 @@
     firestackFade: -0.05
   - type: TypingIndicator
     proto: plasmaman
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
     - Calcic

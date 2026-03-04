@@ -4,6 +4,10 @@
   category: construction-category-weapons
   targetNode: axe
   objectType: Item
+  groups:
+    SurvivalKnowledge: 1
+    WeaponsKnowledge: 1
+    HandmadeKnowledge: 1
 
 - type: construction
   id: BoneDaggerConstruction
@@ -11,3 +15,7 @@
   category: construction-category-weapons
   targetNode: dagger
   objectType: Item
+  groups:
+    SurvivalKnowledge: 1
+    WeaponsKnowledge: 1
+    HandmadeKnowledge: 1

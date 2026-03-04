@@ -58,7 +58,6 @@
       components:
       - SecretStash
   - type: LanguageSpeaker # Einstein Engines - Language
-  - type: LanguageKnowledge # Einstein Engines - Language
     speaks:
     - TauCetiBasic
     - RobotTalk
@@ -161,10 +160,13 @@
     - type: ConsciousnessRequired
       identifier: "nerveSystem"
     - type: LanguageSpeaker # Einstein Engines - Language
-    - type: LanguageKnowledge # Einstein Engines - Language
       speaks:
       - TauCetiBasic # Added since posi brains should be able to talk to roboticists/scientists.
       - RobotTalk
       understands:
       - TauCetiBasic # Added since posi brains should be able to understand TauCetiBasic (they can in a chassis)
       - RobotTalk
+    # <Trauma>
+    - type: KnowledgeContainer
+    - type: ContainerContainer
+    # </Trauma>

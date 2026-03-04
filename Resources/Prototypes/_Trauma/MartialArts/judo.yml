@@ -1,0 +1,131 @@
+- type: combo
+  id: JudoDiscombobulate
+  attacks:
+  - Grab
+  - Disarm
+  - Grab
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 10
+  levelRequired: 0
+
+- type: combo
+  id: JudoEyePoke
+  attacks:
+  - Disarm
+  - Harm
+  - Harm
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 5
+  levelRequired: 0
+
+- type: combo
+  id: JudoThrow
+  attacks:
+  - Grab
+  - Grab
+  - Disarm
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 4
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 5
+  - !type:TakeStaminaDamage
+    amount: 5
+  levelRequired: 0
+
+- type: combo
+  id: JudoArmbar
+  attacks:
+  - Disarm
+  - Harm
+  - Grab
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 5
+  - !type:TakeStaminaDamage
+    amount: 10
+  levelRequired: 0
+
+- type: combo
+  id: JudoWheelThrow
+  attacks:
+  - Grab
+  - Disarm
+  - Harm
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 120
+  levelRequired: 0
+
+- type: combo
+  id: JudoGoldenBlast1
+  attacks:
+  - Hug
+  - Disarm
+  - Hug
+  - Grab
+  userEffects:
+  - !type:MartialArtsSaying
+    randomSayings:
+    - judo-saying-gold
+    randomSayingsDowned:
+    - judo-saying-gold
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 5
+  - !type:TakeStaminaDamage
+    amount: 50
+  levelRequired: 50
+
+- type: combo
+  id: JudoGoldenBlast2
+  attacks:
+  - Disarm
+  - Disarm
+  - Grab
+  - Hug
+  userEffects:
+  - !type:MartialArtsSaying
+    randomSayings:
+    - judo-saying-en
+    randomSayingsDowned:
+    - judo-saying-en
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 10
+  - !type:TakeStaminaDamage
+    amount: 100
+  levelRequired: 50
+
+- type: combo
+  id: JudoGoldenBlast3
+  attacks:
+  - Disarm
+  - Hug
+  - Grab
+  - Hug
+  userEffects:
+  - !type:MartialArtsSaying
+    randomSayings:
+    - judo-saying-blast
+    randomSayingsDowned:
+    - judo-saying-blast
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 30
+  - !type:TakeStaminaDamage
+    amount: 120
+  levelRequired: 50

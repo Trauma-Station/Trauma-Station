@@ -1,0 +1,133 @@
+- type: combo
+  id: CQCSlam
+  attacks:
+  - Grab
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-slam
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 12
+  - !type:ModifyKnockdown
+    time: 5
+    drop: true
+    type: Add
+  levelRequired: 26
+
+- type: combo
+  id: CQCKick
+  attacks:
+  - Harm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-kick
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 12
+  - !type:LegSweep
+    time: 2
+  levelRequired: 26
+
+- type: combo
+  id: CQCRestrain
+  attacks:
+  - Grab
+  - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - cqc-restrain
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 30
+  - !type:GenericStatusEffect
+    key: Stutter
+    time: 2
+    type: Add
+  - !type:ModifyKnockdown
+    time: 1
+    drop: true
+    type: Add
+  levelRequired: 26
+
+- type: combo
+  id: CQCPressure
+  attacks:
+  - Disarm
+  - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - cqc-pressure
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 60
+  - !type:StealItem
+  levelRequired: 26
+
+- type: combo
+  id: CQCConsecutive
+  attacks:
+  - Disarm
+  - Hug
+  - Hug
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit1.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-consecutive
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 40
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 10
+  levelRequired: 26
+  levelExceeded: 60
+
+- type: combo
+  id: CQCConsecutiveAdvanced
+  attacks:
+  - Disarm
+  - Hug
+  - Hug
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit1.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-consecutive
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: ForcedSleep
+    time: 70
+    type: Add
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 30
+  - !type:ModifyKnockdown
+    time: 20
+    drop: true
+    type: Add
+  levelRequired: 50

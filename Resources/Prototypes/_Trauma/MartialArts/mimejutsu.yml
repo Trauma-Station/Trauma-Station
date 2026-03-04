@@ -1,0 +1,38 @@
+- type: combo
+  id: MimeChucks
+  attacks:
+  - Harm
+  - Grab
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - plasmafist-tornadosweep
+  opponentEffects:
+  levelRequired: 26
+
+- type: combo
+  id: Smokebomb
+  attacks:
+  - Disarm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+
+  levelRequired: 26
+
+- type: combo
+  id: SilentPalm
+  attacks:
+  - Disarm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - plasmafist-plasmafist
+  opponentEffects:
+  levelRequired: 26

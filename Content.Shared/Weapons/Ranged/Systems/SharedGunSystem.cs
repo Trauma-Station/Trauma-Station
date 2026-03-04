@@ -518,9 +518,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         // <Trauma> - prevent shooting with 0,0 direction
         if (mapDirection == Vector2.Zero)
             return;
-        // </Trauma>
+        GetRecoilScale(user, gunUid, out var recoilScale);
         var mapAngle = mapDirection.ToAngle();
-        var angle = GetRecoilAngle(Timing.CurTime, (gunUid, gun), mapDirection.ToAngle(), user); // Trauma - pass gunUid and user
+        var angle = GetRecoilAngle(Timing.CurTime, (gunUid, gun), mapDirection.ToAngle(), user, recoilScale); // Trauma - pass gunUid and user
+        // </Trauma>
 
         userImpulse = true;
 
@@ -558,6 +559,9 @@ public abstract partial class SharedGunSystem : EntitySystem
                     if (!cartridge.Spent)
                     {
                         var uid = PredictedSpawnAtPosition(cartridge.Prototype, fromEnt);
+                        // <Trauma>
+                        TryAddKnowledgeModifiers(ent, uid);
+                        // </Trauma>
                         CreateAndFireProjectiles(uid, cartridge);
 
                         RaiseLocalEvent(ent!.Value, new AmmoShotEvent()
@@ -613,9 +617,13 @@ public abstract partial class SharedGunSystem : EntitySystem
 
             // <Trauma>
             if (userImpulse)
-                Recoil(user, mapDirection, gun.CameraRecoilScalarModified);
+                Recoil(user, mapDirection, gun.CameraRecoilScalarModified * recoilScale);
             // </Trauma>
         }
+
+        // <Trauma>
+        AddShootingExperience(user);
+        // </Trauma>
 
         RaiseLocalEvent(gunUid, new AmmoShotEvent()
         {
@@ -646,6 +654,9 @@ public abstract partial class SharedGunSystem : EntitySystem
                 for (var i = 1; i < ammoSpreadComp.Count; i++)
                 {
                     var newuid = PredictedSpawnAtPosition(ammoSpreadComp.Proto, fromEnt);
+                    // <Trauma>
+                    TryAddKnowledgeModifiers(ammoEnt, newuid);
+                    // </Trauma>
                     SetProjectilePerfectHitEntities(newuid, user, new MapCoordinates(toMap, fromMap.MapId)); // Goob
                     ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation
                     shotProjectiles.Add(newuid);

@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2024 MilenVolf <63782763+MilenVolf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Nairod <110078045+Nairodian@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Sphiral <145869023+SphiraI@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 #bureaucracy
 - type: construction
   id: FilingCabinet
@@ -19,6 +10,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: TallCabinet
@@ -31,6 +26,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ChestDrawer
@@ -43,6 +42,11 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 1
+    TechnologyKnowledge: 1
+  # </Trauma>
 
 # ItemCabinets
 - type: construction
@@ -56,6 +60,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 # Shelfs
 # Normals
@@ -69,6 +77,11 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 1
+    TechnologyKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ShelfMetal
@@ -80,6 +93,10 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ShelfGlass
@@ -91,6 +108,10 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 # Reinforced
 - type: construction
@@ -103,6 +124,11 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 1
+    TechnologyKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ShelfRMetal
@@ -114,6 +140,10 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ShelfRGlass
@@ -125,6 +155,10 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 # Departmental
 - type: construction
@@ -137,6 +171,10 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ShelfKitchen
@@ -148,6 +186,10 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ShelfChemistry
@@ -159,3 +201,7 @@
   canBuildInImpassable: true
   conditions:
     - !type:WallmountCondition
+  # <Trauma>
+  groups:
+    FurnitureKnowledge: 2
+  # </Trauma>

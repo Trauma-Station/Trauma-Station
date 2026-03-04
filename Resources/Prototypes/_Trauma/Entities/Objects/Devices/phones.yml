@@ -23,7 +23,6 @@
   - type: ActivatableUI
     key: enum.PhoneUiKey.Key
   - type: LanguageSpeaker
-  - type: LanguageKnowledge
     speaks:
     - TauCetiBasic
     - RobotTalk

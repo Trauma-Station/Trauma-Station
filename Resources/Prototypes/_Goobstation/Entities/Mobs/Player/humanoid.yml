@@ -1,25 +1,3 @@
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 ThunderBear2006 <bearthunder06@gmail.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 # Civilian
 
 - type: randomHumanoidSettings
@@ -36,6 +14,54 @@
   id: EventHumanoidLibrarian
   parent: EventHumanoid
   components:
+  # <Trauma>
+  - type: KnowledgeGrant
+    skills:
+      language-Cat: 26
+      language-Dog: 26
+      language-Fox: 26
+      language-Xeno: 26
+      language-Monkey: 26
+      language-Mouse: 26
+      language-Chicken: 26
+      language-Duck: 26
+      language-Cow: 26
+      language-Sheep: 26
+      language-Kangaroo: 26
+      language-Pig: 26
+      language-Crab: 26
+      language-Kobold: 26
+      language-Hissing: 26
+      language-Penguin: 26
+      language-Deer: 26
+      language-Universal: 26
+      language-RobotTalk: 26
+      language-DroneTalk: 26
+      language-Psychomantic: 26
+      language-Blob: 26
+      language-Eldritch: 26
+      language-RootSpeak: 26
+      language-Moffic: 26
+      language-Draconic: 26
+      language-Bubblish: 26
+      language-NewKinPidgin: 26
+      language-Xeeplian: 26
+      language-Elyran: 26
+      language-Freespeak: 26
+      language-NovuNederic: 26
+      language-SolCommon: 26
+      language-TauCetiBasic: 26
+      language-Tradeband: 26
+      language-SpaceItalian: 26
+      language-Carptongue: 26
+      language-FloorGoblin: 26
+      language-Cheval: 26
+      language-Bingle: 26
+      language-Revolutionary: 26
+      language-XenoHivemind: 26
+      language-Azaziba: 26
+      language-Calcic: 26
+  # </Trauma>
   - type: AutoImplant
     implants:
     - LibrarianTranslatorImplant      #Librarians should speak most languages
@@ -47,8 +73,11 @@
   - type: AutoImplant
     implants:
     - SpaceItalianTranslatorImplant   #chefs should speak space italian
-  - type: GrantCqc                    #Chefs should have CqC
-    isBlocked: true # can only use it in kitchen (on chef shittle or station)
+  # <Trauma>
+  - type: KnowledgeGrant
+    skills:
+      MartialArtCQCChef: 26
+  # </Trauma>
 
 # Lost
 

@@ -192,7 +192,7 @@
       Male: UnisexArachnid
       Female: UnisexArachnid
       Unsexed: UnisexArachnid
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - Dog
     understands:
@@ -276,7 +276,7 @@
       Male: Cerberus
       Female: Cerberus
       Unsexed: Cerberus
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - Dog
     understands:

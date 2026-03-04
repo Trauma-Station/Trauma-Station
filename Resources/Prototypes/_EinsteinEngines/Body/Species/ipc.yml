@@ -82,6 +82,9 @@
       IPCPump: OrganIPCPump
   - type: HumanoidProfile
     species: IPC
+    # <Trauma>
+  - type: KnowledgeHolder
+    # </Trauma>
 
 - type: entity
   parent:
@@ -90,7 +93,7 @@
   - BaseSpeciesMob
   id: MobIPC
   components:
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
     - RobotTalk

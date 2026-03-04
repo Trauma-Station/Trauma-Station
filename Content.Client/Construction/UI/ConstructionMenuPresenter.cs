@@ -276,6 +276,12 @@ namespace Content.Client.Construction.UI
             var isEmptyCategory = string.IsNullOrEmpty(category) || category == ForAllCategoryName;
             _selectedCategory = isEmptyCategory ? string.Empty : category;
 
+            // <Trauma>
+            if (_playerManager.LocalEntity is not { } player)
+                return recipes;
+            var availableGroups = _constructionSystem!.AvailableConstructionGroups(player);
+            // </Trauma>
+
             foreach (var recipe in _prototypeManager.EnumeratePrototypes<ConstructionPrototype>())
             {
                 if (recipe.Hide)
@@ -283,7 +289,10 @@ namespace Content.Client.Construction.UI
 
                 if (_playerManager.LocalSession == null
                     || _playerManager.LocalEntity == null
-                    || _whitelistSystem.IsWhitelistFail(recipe.EntityWhitelist, _playerManager.LocalEntity.Value))
+                    || _whitelistSystem.IsWhitelistFail(recipe.EntityWhitelist, _playerManager.LocalEntity.Value)
+                    // <Trauma>
+                    || (_constructionSystem.IsKnowledgeHolder(_playerManager.LocalEntity.Value) && !recipe.Groups.Keys.All(group => availableGroups.ContainsKey(group))))
+                    // </Trauma>
                     continue;
 
                 if (!string.IsNullOrEmpty(search) && (recipe.Name is { } name &&

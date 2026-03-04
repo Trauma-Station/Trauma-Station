@@ -13,7 +13,58 @@
   special: # Goobstation start - Librarian should speak most languages.
   - !type:AddImplantSpecial
     implants: [ LibrarianTranslatorImplant ] # Goobstation end
-
+    # <Trauma>
+  - !type:AddComponentSpecial
+    components:
+    - type: KnowledgeGrant
+      skills:
+        LiteracyKnowledge: 50
+        MagicalLiteracyKnowledge: 26
+        language-Cat: 50
+        language-Dog: 50
+        language-Fox: 50
+        language-Xeno: 50
+        language-Monkey: 50
+        language-Mouse: 50
+        language-Chicken: 50
+        language-Duck: 50
+        language-Cow: 50
+        language-Sheep: 50
+        language-Kangaroo: 50
+        language-Pig: 50
+        language-Crab: 50
+        language-Kobold: 50
+        language-Hissing: 50
+        language-Penguin: 50
+        language-Deer: 50
+        language-Universal: 50
+        language-RobotTalk: 50
+        language-DroneTalk: 50
+        language-Psychomantic: 50
+        language-Blob: 50
+        language-Eldritch: 50
+        language-RootSpeak: 50
+        language-Moffic: 50
+        language-Draconic: 50
+        language-Bubblish: 50
+        language-NewKinPidgin: 50
+        language-Xeeplian: 50
+        language-Elyran: 50
+        language-Freespeak: 50
+        language-NovuNederic: 50
+        language-SolCommon: 50
+        language-TauCetiBasic: 50
+        language-Tradeband: 50
+        language-SpaceItalian: 50
+        language-Carptongue: 50
+        language-FloorGoblin: 50
+        language-Cheval: 50
+        language-Bingle: 50
+        language-Revolutionary: 50
+        language-XenoHivemind: 50
+        language-Azaziba: 50
+        language-Calcic: 50
+    # </Trauma>
 - type: startingGear
   id: LibrarianGear
   equipment:

@@ -1,11 +1,15 @@
+using System.Numerics;
 using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Shared.Projectiles;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -15,6 +19,10 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 public abstract partial class SharedGunSystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+
+    private static readonly EntProtoId ShootingKnowledge = "ShootingKnowledge";
+    private static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
 
     /// <summary>
     /// Get a predicted random instance for an entity, specific to this tick.
@@ -73,11 +81,11 @@ public abstract partial class SharedGunSystem
     /// <summary>
     /// Trauma - changed component to Entity, added user, made public
     /// </summary>
-    public Angle GetRecoilAngle(TimeSpan curTime, Entity<GunComponent> ent, Angle direction, EntityUid? user = null)
+    public Angle GetRecoilAngle(TimeSpan curTime, Entity<GunComponent> ent, Angle direction, EntityUid? user = null, float spreadScale = 1.0f)
     {
         var (uid, comp) = ent;
         var timeSinceLastFire = (curTime - comp.LastFire).TotalSeconds;
-        var newTheta = MathHelper.Clamp(comp.CurrentAngle.Theta + comp.AngleIncreaseModified.Theta - comp.AngleDecayModified.Theta * timeSinceLastFire, comp.MinAngleModified.Theta, comp.MaxAngleModified.Theta);
+        var newTheta = MathHelper.Clamp(comp.CurrentAngle.Theta + spreadScale * comp.AngleIncreaseModified.Theta - comp.AngleDecayModified.Theta * timeSinceLastFire, comp.MinAngleModified.Theta + 0.05f * Math.Max(spreadScale - 1.0f, 0), comp.MaxAngleModified.Theta);
         comp.CurrentAngle = new Angle(newTheta);
         comp.LastFire = comp.NextFire;
 
@@ -92,9 +100,77 @@ public abstract partial class SharedGunSystem
         random *= angleEv.Modifier;
         // </Goob>
 
-        var spread = comp.CurrentAngle.Theta * random;
-        var angle = new Angle(direction.Theta + comp.CurrentAngle.Theta * random);
-        DebugTools.Assert(spread <= comp.MaxAngleModified.Theta);
+        var spread = comp.CurrentAngle.Theta * random * spreadScale;
+        var angle = new Angle(direction.Theta + comp.CurrentAngle.Theta * random * spreadScale);
+        //DebugTools.Assert(spread <= comp.MaxAngleModified.Theta * spreadScale || spread <= comp.MinAngleModified.Theta + 0.05f * Math.Max(spreadScale - 1.0f, 0));
         return angle;
+    }
+
+    /// <summary>
+    /// Gets recoil scale for gun according to knowledge system.
+    /// </summary>
+    /// <param name="user"></param>
+    /// <param name="gun"></param>
+    /// <param name="recoilScale"></param>
+    private void GetRecoilScale(EntityUid? user, EntityUid gun, out float recoilScale)
+    {
+        recoilScale = 1.0f;
+        if (user is not { } trueUser)
+            return;
+
+        if (HasComp<KnowledgeHolderComponent>(user))
+        {
+            var shooting = _knowledge.TryGetKnowledgeUnit(trueUser, ShootingKnowledge);
+            if (shooting is { } shootingTrue)
+            {
+                if (shootingTrue.Comp.Level < 26)
+                {
+                    recoilScale = 3.0f - (float) shootingTrue.Comp.Level / 26.0f - _knowledge.SharpCurve(shootingTrue);
+                }
+                else if (shootingTrue.Comp.Level > 50)
+                {
+                    recoilScale = 1.0f - ((float) (shootingTrue.Comp.Level - 50) / 50.0f * (float) (shootingTrue.Comp.Level - 50) / 50.0f);
+                }
+            }
+            else
+            {
+                recoilScale = 3.0f;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Adds shooting experience according to knowledge system.
+    /// </summary>
+    /// <param name="user"></param>
+    private void AddShootingExperience(EntityUid? user)
+    {
+        if (user is not { } trueUser)
+            return;
+        var evShooting = new AddExperienceEvent(ShootingKnowledge, 1);
+        var evWeapons = new AddExperienceEvent(WeaponsKnowledge, 1);
+        RaiseLocalEvent(trueUser, ref evShooting);
+        RaiseLocalEvent(trueUser, ref evWeapons);
+    }
+
+    /// <summary>
+    /// Attempts to copy knowledge construction modifiers from the specified ammo entity to the target entity. If the
+    /// ammo entity contains knowledge modifier data, it is applied to the target entity.
+    /// </summary>
+    /// <remarks>If the ammo entity does not have a QualityComponent, no modifiers are
+    /// added to the target entity.</remarks>
+    /// <param name="ammoEnt">The entity identifier of the ammo from which knowledge construction modifiers are sourced.</param>
+    /// <param name="newUid">The entity identifier of the target to which knowledge construction modifiers will be added.</param>
+    private void TryAddKnowledgeModifiers(EntityUid? ammoEnt, EntityUid newUid)
+    {
+        if (!TryComp<QualityComponent>(ammoEnt, out var ammoKnowledge))
+            return;
+
+        var newKnowledge = EnsureComp<QualityComponent>(newUid);
+        newKnowledge.LevelDeltas = new Dictionary<EntProtoId, int>(ammoKnowledge.LevelDeltas);
+        newKnowledge.Quality = ammoKnowledge.Quality;
+        newKnowledge.NumberOfMasteries = ammoKnowledge.NumberOfMasteries;
+
+        _knowledge.ModifyValues((newUid, newKnowledge));
     }
 }

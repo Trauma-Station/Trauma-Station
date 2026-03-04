@@ -891,6 +891,7 @@
   name: gunpowder
   description: An explosive compound.
   components:
+  - type: Material # Trauma
   - type: Stack
     stackType: Gunpowder
     count: 1
@@ -903,6 +904,12 @@
       Gunpowder: 100
   - type: Item
     size: Tiny
+# <Trauma>
+  - type: Tag
+    tags:
+    - Gunpowder
+    - RawMaterial
+# </Trauma>
 
 - type: entity
   parent: MaterialBase

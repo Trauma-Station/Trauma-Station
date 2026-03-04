@@ -1,15 +1,12 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: construction
   id: AutomationFilterLabel
   graph: AutomationFilter
   targetNode: label
   category: construction-category-misc
   objectType: Item
+  groups:
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterName
@@ -17,6 +14,9 @@
   targetNode: name
   category: construction-category-misc
   objectType: Item
+  groups:
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterStack
@@ -24,6 +24,9 @@
   targetNode: stack
   category: construction-category-misc
   objectType: Item
+  groups:
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterPressure
@@ -31,6 +34,9 @@
   targetNode: pressure
   category: construction-category-misc
   objectType: Item
+  groups:
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterCombined
@@ -38,6 +44,9 @@
   targetNode: combined
   category: construction-category-misc
   objectType: Item
+  groups:
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterAnchor
@@ -45,6 +54,9 @@
   targetNode: anchor
   category: construction-category-misc
   objectType: Item
+  groups:
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterMob
@@ -52,6 +64,9 @@
   targetNode: mob
   category: construction-category-misc
   objectType: Item
+  groups:
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2
 
 - type: construction
   id: AutomationFilterCuff
@@ -59,3 +74,6 @@
   targetNode: cuff
   category: construction-category-misc
   objectType: Item
+  groups:
+    ElectronicsKnowledge: 2
+    ScienceKnowledge: 2

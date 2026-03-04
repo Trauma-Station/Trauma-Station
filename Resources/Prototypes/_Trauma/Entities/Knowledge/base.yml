@@ -1,0 +1,113 @@
+- type: entity
+  id: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Skills
+    level: 0
+    experienceCost: 1 # We're fucked if its 0 or lower. Do not change lmao.
+
+- type: entity
+  parent: BaseWarKnowledge
+  id: MeleeKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 15
+
+- type: entity
+  parent: BaseWarKnowledge
+  id: ShootingKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 15
+
+- type: entity
+  parent: BaseMedicalKnowledge
+  id: SurgeryKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 24
+
+- type: entity
+  parent: BaseMedicalKnowledge
+  id: FirstAidKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 19
+
+- type: entity
+  parent: BasePhysicalKnowledge
+  id: ToughnessKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 20
+
+- type: entity
+  parent: BasePhysicalKnowledge
+  id: StrengthKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 12
+
+- type: entity
+  parent: BasePhysicalKnowledge
+  id: AthleticsKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 12
+
+- type: entity
+  parent: BaseIntellectualKnowledge
+  id: MagicalLiteracyKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 30
+
+- type: entity
+  parent: BaseIntellectualKnowledge
+  id: LiteracyKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 20
+
+- type: entity
+  parent: BaseScientificKnowledge
+  id: JanitorKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 5
+
+- type: entity
+  parent: BasePhysicalKnowledge
+  id: ThrowingKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 5
+
+- type: entity
+  parent: BaseScientificKnowledge
+  id: ChemistryKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 15
+
+- type: entity
+  parent: BaseScientificKnowledge
+  id: TechnologyKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 15
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: CookingKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 15
+
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: CraftingKnowledge
+  components:
+  - type: Knowledge
+    experienceCost: 15
