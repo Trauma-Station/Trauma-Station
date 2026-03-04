@@ -105,6 +105,7 @@ using JetBrains.Annotations;
 using Robust.Shared.Collections;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Item;
@@ -117,6 +118,7 @@ public abstract class SharedItemSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private   readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] protected readonly SharedContainerSystem Container = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -243,6 +245,10 @@ public abstract class SharedItemSystem : EntitySystem
         args.PushMarkup(Loc.GetString("item-component-on-examine-size",
             ("size", GetItemSizeLocale(component.Size))),
             priority: -2);
+
+        args.PushMarkup("[color=red]Made by Hideo Kojima[/color]");
+        args.PushMarkup("[color=red]Created and directed by Hideo Kojima[/color]");
+        args.PushMarkup("[color=red]Original director: Hideo Kojima[/color]");
     }
 
     public ItemSizePrototype GetSizePrototype(ProtoId<ItemSizePrototype> id)
