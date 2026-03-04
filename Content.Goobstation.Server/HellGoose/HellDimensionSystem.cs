@@ -15,7 +15,6 @@ public sealed class HellPortalSystem : EntitySystem
 {
     [Dependency] private readonly LinkedEntitySystem _link = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
     public override void Initialize()
     {
         base.Initialize();
