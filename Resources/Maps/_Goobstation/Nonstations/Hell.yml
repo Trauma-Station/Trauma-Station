@@ -1045,7 +1045,6 @@ entities:
       dampingModifier: 0.25
     - type: GridPathfinding
     - type: RadiationGridResistance
-    - type: FTLDrive
     - type: GravityShake
       shakeTimes: 10
   - uid: 40
