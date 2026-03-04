@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.MartialArts;
 using Content.Medical.Common.Targeting;
 using Content.Shared.ActionBlocker;
