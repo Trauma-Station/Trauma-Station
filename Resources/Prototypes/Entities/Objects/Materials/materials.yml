@@ -904,12 +904,12 @@
       Gunpowder: 100
   - type: Item
     size: Tiny
-# [Trauma]
+# <Trauma>
   - type: Tag
     tags:
     - Gunpowder
     - RawMaterial
-# [/Trauma]
+# </Trauma>
 
 - type: entity
   parent: MaterialBase
