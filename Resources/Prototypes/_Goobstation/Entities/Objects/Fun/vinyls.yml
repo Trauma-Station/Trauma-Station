@@ -67,8 +67,8 @@
     slots:
       vinyl:
         name: vinyl
-        insertSound: /RadioStation/vinyl/vinylEject.ogg
-        ejectSound: /RadioStation/vinyl/vinylInsert.ogg
+        insertSound: /Audio/_Goobstation/RadioStation/vinyl/vinylEject.ogg
+        ejectSound: /Audio/_Goobstation/RadioStation/vinyl/vinylInsert.ogg
         whitelist:
           tags:
           - VinylSleeveFit
