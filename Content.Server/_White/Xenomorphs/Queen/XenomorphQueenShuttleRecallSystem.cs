@@ -15,7 +15,6 @@ public sealed class XenomorphQueenShuttleRecallSystem : EntitySystem
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
 
-    // # Trauma
     private const float CheckInterval = 5f;
     private float _timer;
 
@@ -40,11 +39,11 @@ public sealed class XenomorphQueenShuttleRecallSystem : EntitySystem
             }
         }
 
-        // # Trauma Block the shuttle from being called while the queen is alive.
-        // # Trauma When the queen dies, allow it again.
+        // # Block the shuttle from being called while the queen is alive.
+        // # When the queen dies, allow it again.
         _roundEnd.CantRecall = queenAlive;
 
-        // # Trauma If the shuttle was already called and the queen is alive, force recall it — mirroring how the blob does it.
+        // # If the shuttle was already called and the queen is alive, force recall it — mirroring how the blob does it.
         if (queenAlive && _roundEnd.ExpectedCountdownEnd != null)
         {
             _roundEnd.CancelRoundEndCountdown(forceRecall: true);
