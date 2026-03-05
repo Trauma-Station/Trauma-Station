@@ -1694,7 +1694,7 @@
     tags:
     - PetWearable
     - CorgiWearable
-  - type: KnowledgeGrantOnWear
+  - type: KnowledgeGrantOnWear # Trauma
     experience:
       MartialArtCQC: 10
 
