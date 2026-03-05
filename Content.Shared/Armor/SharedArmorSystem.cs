@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Medical.Common.Body;
 using System.Linq;
+using System.Text;
 // </Trauma>
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
@@ -105,13 +106,22 @@ public abstract class SharedArmorSystem : EntitySystem
 
         if (!component.ArmourCoverageHidden)
         {
-            foreach (var coveragePart in coverage.Where(coveragePart => coveragePart != BodyPartType.Other))
+            // <Trauma>
+            var coveredParts = coverage.Where(coveragePart => coveragePart != BodyPartType.Other).ToList();
+            var coverageText = new StringBuilder();
+            for (var i = 0; i < coveredParts.Count; i++)
             {
-                msg.PushNewline();
+                coverageText.Append(Loc.GetString("armor-coverage-type-" + coveredParts[i].ToString().ToLower()));
 
-                var bodyPartType = Loc.GetString("armor-coverage-type-" + coveragePart.ToString().ToLower());
-                msg.AddMarkupOrThrow(Loc.GetString("armor-coverage-value", ("type", bodyPartType)));
+                if (i == coverage.Count - 1) continue; // Last element, no connector
+                coverageText.Append(", ");
+                if (i == coverage.Count - 2) // Second-to-last element, also add "and " so it reads nicer
+                    coverageText.Append(Loc.GetString("armor-coverage-end-connector") + ' ');
             }
+
+            msg.PushNewline();
+            msg.AddMarkupOrThrow(Loc.GetString("armor-coverage-value", ("type", coverageText.ToString())));
+            // </Trauma>
         }
 
         if (!component.ArmourModifiersHidden)
