@@ -38,7 +38,6 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         base.Initialize();
 
         GameTopMenuBarUIController.OnLoad += OnLoadGameBar;
-        GameTopMenuBarUIController.OnUnload += OnUnloadGameBar;
     }
 
     public void OnStateEntered(GameplayState state)
@@ -58,11 +57,6 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
     private void OnLoadGameBar(GameTopMenuBar bar)
     {
         EnsureButton(bar);
-    }
-
-    private void OnUnloadGameBar(GameTopMenuBar bar)
-    {
-        _button?.Orphan();
     }
 
     private MenuButton? EnsureButton(GameTopMenuBar bar)
