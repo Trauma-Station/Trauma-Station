@@ -5,6 +5,8 @@ knowledge-could-not-learn = You cannot learn any more about { $knowledge } from 
 knowledge-learn-more = You learn more about { $knowledge }.
 knowledge-level-epiphany = You have reached a sudden epiphany regarding { $knowledge }!
 
+knowledge-no-martial-art = You don't know any martial arts.
+
 knowledge-info-description = {$mastery}
 
 knowledge-language-speaks-understands = {$language} : Speaks and understands

@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.MenuBar;
+using Content.Shared.Popups;
 using Content.Trauma.Common.Input;
 using Content.Trauma.Common.Knowledge;
-using JetBrains.Annotations;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -15,27 +14,27 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Knowledge;
 
-[UsedImplicitly]
 public sealed class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>
 {
     [Dependency] private readonly IPlayerManager _player = default!;
     [UISystemDependency] private KnowledgeSystem _knowledge = default!;
+    [UISystemDependency] private SharedPopupSystem _popup = default!;
+
+    public const string ButtonName = "MartialArtsButton";
 
     private SimpleRadialMenu? _menu;
+    private Button? _button;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        var menuBar = UIManager.GetUIController<GameTopMenuBarUIController>();
-        menuBar.OnMartialArtsPressed += () => ToggleMartialArtsMenu(true);
+        GameTopMenuBarUIController.OnLoad += OnLoadGameBar;
+        GameTopMenuBarUIController.OnUnload += OnUnloadGameBar;
     }
 
     public void OnStateEntered(GameplayState state)
     {
-        var menuBar = UIManager.GetUIController<GameTopMenuBarUIController>();
-        menuBar.OnMartialArtsPressed += OpenMenuFromAction;
-
         CommandBinds.Builder
             .Bind(TraumaKeyFunctions.OpenMartialArtsMenu,
                 InputCmdHandler.FromDelegate(_ => ToggleMartialArtsMenu(false)))
@@ -44,10 +43,49 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
 
     public void OnStateExited(GameplayState state)
     {
-        var menuBar = UIManager.GetUIController<GameTopMenuBarUIController>();
-        menuBar.OnMartialArtsPressed -= OpenMenuFromAction;
         CommandBinds.Unregister<MartialArtsUIController>();
         CloseMenu();
+    }
+
+    private void OnLoadGameBar(GameTopMenuBar bar)
+    {
+        EnsureButton(bar);
+    }
+
+    private void OnUnloadGameBar(GameTopMenuBar bar)
+    {
+        _button?.Orphan();
+    }
+
+    private Button? EnsureButton(GameTopMenuBar bar)
+    {
+        // first try find it
+        foreach (var child in bar.Children)
+        {
+            if (child.Name == ButtonName)
+                return (Button) child;
+        }
+
+        // insert at the same index as admin button (so before it)
+        var index = bar.AdminButton.GetPositionInParent();
+
+        // add a new button for the first time it's loaded
+        var button = new MenuButton()
+        {
+            Icon = new SpriteSpecifier.Texture("/Textures/Interface/emotes.svg.192dpi.png"),
+            ToolTip = Loc.GetString("game-hud-open-martial-arts-menu-button-tooltip"),
+            BoundKey = TraumaKeyFunctions.OpenMartialArtsMenu,
+            MinSize = new Vector2(42, 64),
+            HorizontalExpand = true,
+        };
+        button.AddStyleClass(StyleClass.ButtonSquare);
+        button.Pressed = _menu != null;
+        button.OnPressed += _ => ToggleMartialArtsMenu(false); // not centered on mouse since it's at the top of your screen rn
+
+        bar.AddChild(button);
+        button.SetPositionInParent(index);
+
+        return _button = button;
     }
 
     private void OpenMenuFromAction() => ToggleMartialArtsMenu(true);
@@ -59,15 +97,24 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
             CloseMenu();
             return;
         }
-        // setup window
-        var models = GetButtons().ToList();
+
+        // setup window if there are any martial arts to use
+        var buttons = GetButtons();
+        if (buttons.Count == 0)
+        {
+            var player = _player.LocalEntity;
+            _popup.PopupClient(Loc.GetString("knowledge-no-martial-art"), player, player);
+            return;
+        }
 
         _menu = new SimpleRadialMenu();
-        _menu.SetButtons(models);
+        _menu.SetButtons(buttons);
 
         _menu.Open();
 
         _menu.OnClose += OnWindowClosed;
+
+        _button.Pressed = true;
 
         if (centered)
         {
@@ -93,9 +140,10 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
 
         _menu.Close();
         _menu = null;
+        _button.Pressed = false;
     }
 
-    private IEnumerable<RadialMenuActionOption<EntProtoId?>> GetButtons()
+    private List<RadialMenuActionOption<EntProtoId?>> GetButtons()
     {
         var martialArts = new List<RadialMenuActionOption<EntProtoId?>>
         {
