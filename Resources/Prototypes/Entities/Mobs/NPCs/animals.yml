@@ -1624,6 +1624,9 @@
   - type: GhostTakeoverAvailable
   - type: Loadout
     prototypes: [SyndicateOperativeGearMonkey]
+  # <Trauma>
+  - type: KnowledgeHolder
+  # </Trauma>
 
 - type: entity
   id: MobMonkeySyndicateAgent

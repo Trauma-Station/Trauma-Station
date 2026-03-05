@@ -85,20 +85,20 @@ public sealed class KnowledgeGrantSystem : EntitySystem
     private void DoAfter(Entity<KnowledgeGrantOnUseComponent> ent, ref KnowledgeLearnDoAfterEvent args)
     {
         var user = args.User;
-        if (!_timing.IsFirstTimePredicted || _knowledge.GetContainer(user) is not {} brain)
+        if (!_timing.IsFirstTimePredicted || _knowledge.GetContainer(user) is not { } brain)
             return;
 
         bool hasLearned = false;
         foreach (var (id, xp) in ent.Comp.Experience)
         {
-            if (_knowledge.EnsureKnowledge(brain, id, popup: true) is not {} skill)
+            if (_knowledge.EnsureKnowledge(brain, id, popup: true) is not { } skill)
                 continue;
 
-            if (!TryComp<KnowledgeComponent>(foundSkill, out var foundComp) || !(!ent.Comp.Skills.TryGetValue(skill.Key, out var skillCap) || (foundComp.Level < skillCap || skillCap < 0)))
+            if (!TryComp<KnowledgeComponent>(skill, out var foundComp) || !(!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (foundComp.Level < skillCap || skillCap < 0)))
                 continue;
 
             hasLearned |= true;
-            var ev = new AddExperienceEvent(skill.Key, skill.Value);
+            var ev = new AddExperienceEvent(id, xp);
             RaiseLocalEvent(args.User, ref ev);
         }
 

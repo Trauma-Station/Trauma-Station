@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.Polls;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Events;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
@@ -24,22 +26,24 @@ public abstract partial class SharedKnowledgeSystem
 
     public void InitializeInjector()
     {
-        SubscribeLocalEvent<InjectorComponent, >(OnInjectorCheck);
+        SubscribeLocalEvent<InjectorComponent, InjectorBeforeInjectEvent>(OnInjectorCheck);
     }
 
-    private void OnInjectorCheck(Entity<InjectorComponent> ent, ref args)
+    private void OnInjectorCheck(Entity<InjectorComponent> ent, ref InjectorBeforeInjectEvent args)
     {
+        var user = args.EntityUsingInjector;
+        var target = args.TargetGettingInjected;
         // This codes only gonna run if the target is not dead and the user has a knowledge component and is not using something like a medipen.
-        if (HasComp<EasyToUseComponent>(ent) || !HasComp<KnowledgeHolderComponent>(user) || !HasComp<MobStateComponent>(target) || _mobState.IsDead(target))
-            return false;
+        if (HasComp<EasyToUseComponent>(ent) || !HasComp<KnowledgeHolderComponent>(user) || !HasComp<MobStateComponent>(target) || _mobState.IsDead(target) || GetContainer(user) is not { } brain)
+            return;
 
         var evFirstAid = new AddExperienceEvent(FirstAidKnowledge, 1);
         RaiseLocalEvent(user, ref evFirstAid);
 
-        if (TryGetKnowledgeUnit(user, FirstAidKnowledge) is { } firstAid)
+        if (GetKnowledge(brain, FirstAidKnowledge) is { } firstAid)
         {
             // No need to roll a random number if we're average in first aid. It's trivial for the user.
-            if (GetMastery(firstAid) > 2)
+            if (GetMastery(firstAid.Comp) > 2)
                 return;
 
             if (SharedRandomExtensions.PredictedProb(_timing, SharpCurve(firstAid, 0, 26), GetNetEntity(user)))
@@ -55,13 +59,13 @@ public abstract partial class SharedKnowledgeSystem
         _damageable.TryChangeDamage(target, NeedleDamage, targetPart: part, origin: user);
         if (user == target)
         {
-            _popup.PopupClient(Loc.GetString("injection-failed-self", ("target", target), ("user", user), ("part", part)), user, user);
+            args.OverrideMessage = Loc.GetString("injection-failed-self", ("target", target), ("user", user), ("part", part));
         }
         else
         {
-            _popup.PopupClient(Loc.GetString("injection-failed-user", ("target", target), ("user", user), ("part", part)), user, user);
+            args.OverrideMessage = Loc.GetString("injection-failed-user", ("target", target), ("user", user), ("part", part));
             _popup.PopupClient(Loc.GetString("injection-failed-target", ("target", target), ("user", user), ("part", part)), target, target);
         }
-        args.Miss = true;
+        args.Cancel();
     }
 }

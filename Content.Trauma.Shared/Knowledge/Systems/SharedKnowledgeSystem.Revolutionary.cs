@@ -15,11 +15,13 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnRevStartup(Entity<RevolutionaryComponent> ent, ref ComponentStartup args)
     {
-        TryAddKnowledgeUnit(ent, (RevolutionaryKnowledge, 26));
+        if (GetContainer(ent) is { } brain)
+            EnsureKnowledge(brain, RevolutionaryKnowledge, 26);
     }
 
     private void OnHeadRevStartup(Entity<HeadRevolutionaryComponent> ent, ref ComponentStartup args)
     {
-        TryAddKnowledgeUnit(ent, (RevolutionaryKnowledge, 40));
+        if (GetContainer(ent) is { } brain)
+            EnsureKnowledge(brain, RevolutionaryKnowledge, 40);
     }
 }

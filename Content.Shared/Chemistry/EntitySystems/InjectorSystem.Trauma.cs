@@ -80,20 +80,6 @@ public sealed partial class InjectorSystem
 
         args.Handled |= TryContainerDoAfter(injector, args.User, target);
     }
-
-    /// <summary>
-    /// Runs the logic for checking and failing to inject someone due to low knowledge.
-    /// </summary>
-    /// <param name="user"></param>
-    /// <param name="target"></param>
-    /// <returns></returns>
-    private bool TryGetKnowledgeFirstAidFail(EntityUid user, EntityUid target, EntityUid injector)
-    {
-        var ev = ;
-        RaiseLocalEvent(injector, ev);
-
-        return ev.Miss;
-    }
 }
 
 /// <summary>
