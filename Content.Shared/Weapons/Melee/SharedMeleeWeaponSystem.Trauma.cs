@@ -88,24 +88,6 @@ public abstract partial class SharedMeleeWeaponSystem
         }
     }
 
-    private bool LightAttackMiss(EntityUid user, EntityUid target)
-    {
-        var knowledgeMiss = 1.0f;
-        if (_knowledge.GetKnowledge(user, MeleeKnowledge) is {} melee)
-        {
-            if (_knowledge.GetMastery(melee.Comp) < 2)
-            {
-                knowledgeMiss = ((float) melee.Comp.Level + 5) / 26.0f;
-            }
-        }
-
-        if (!_gun.Random(target).Prob(Math.Max(1.0f - knowledgeMiss, 0)))
-            return false;
-
-        PopupSystem.PopupClient(Loc.GetString("container-thrown-missed"), user, user);
-        return true;
-    }
-
     private void AddExperienceLight(EntityUid user)
     {
         if (!MobState.IsAlive(user))
@@ -113,26 +95,6 @@ public abstract partial class SharedMeleeWeaponSystem
 
         var evKnowledge = new AddExperienceEvent(MeleeKnowledge, 1);
         RaiseLocalEvent(user, ref evKnowledge);
-    }
-
-    private void HeavyAttackMiss(EntityUid user, out Entity<KnowledgeComponent>? melee, ref List<EntityUid> entities)
-    {
-        melee = null;
-        var knowledgeMiss = 1.0f;
-        if (_knowledge.GetKnowledge(user, MeleeKnowledge) is {} meleeUnit)
-        {
-            melee = meleeUnit;
-            if (_knowledge.GetMastery(meleeUnit.Comp) < 2)
-            {
-                knowledgeMiss = ((float) meleeUnit.Comp.Level + 2) / 26.0f;
-            }
-        }
-
-        if (_gun.Random(user).Prob(Math.Max(1.0f - knowledgeMiss, 0)))
-        {
-            entities.Clear();
-            entities.Add(user);
-        }
     }
 
     private void AdjustStaminaDamage(Entity<KnowledgeComponent>? melee, ref float staminaDamage)
@@ -150,17 +112,6 @@ public abstract partial class SharedMeleeWeaponSystem
             var evKnowledge = new AddExperienceEvent(MeleeKnowledge, entities.Count(entity => MobState.IsAlive(entity)));
             RaiseLocalEvent(user, ref evKnowledge);
         }
-    }
-
-    private bool DisarmMiss(EntityUid user, out Entity<KnowledgeComponent>? melee)
-    {
-        melee = _knowledge.GetKnowledge(user, MeleeKnowledge);
-        if (melee is not {} meleeUnit || meleeUnit.Comp.Level > 16)
-            return false;
-
-        // 0-15 -> 38% to 96% chance to succeed
-        var hitChance = ((float) meleeUnit.Comp.Level + 10) / 26f;
-        return !_gun.Random(user).Prob(hitChance);
     }
 
     private void DisarmExperience(Entity<KnowledgeComponent>? melee, EntityUid user, EntityUid target)

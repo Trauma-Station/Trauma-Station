@@ -585,7 +585,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // For consistency with wide attacks stuff needs damageable.
         if (Deleted(target) ||
             !HasComp<DamageableComponent>(target) ||
-            LightAttackMiss(user, target.Value) || // Trauma
             !TryComp(target, out TransformComponent? targetXform)) // Goob edit
         {
             // Leave IsHit set to true, because the only time it's set to false
@@ -704,9 +703,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         var resistanceBypass = GetResistanceBypass(meleeUid, user, component);
         var entities = GetEntityList(ev.Entities);
 
-        // <Trauma>
-        HeavyAttackMiss(user, out var melee, ref entities);
-        // </Trauma>
         if (entities.Count == 0)
         {
             if (meleeUid == user)
@@ -1012,10 +1008,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (Deleted(target))
             return true; // Trauma - still do the animation
 
-        // <Trauma>
-        if (DisarmMiss(user, out var melee))
-            return true;
-        // </Trauma>
         if (user == target) // Goobstation
         {
             _meleeSound.PlaySwingSound(user, meleeUid, component);
