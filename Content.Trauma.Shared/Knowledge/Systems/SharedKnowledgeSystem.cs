@@ -8,6 +8,7 @@ using Content.Shared.Body;
 using Content.Shared.Construction;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Knowledge;

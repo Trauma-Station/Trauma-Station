@@ -1,29 +1,37 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Gameplay;
+using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.MenuBar;
+using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Shared.Popups;
 using Content.Trauma.Common.Input;
 using Content.Trauma.Common.Knowledge;
 using Robust.Client.Player;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
+using Robust.Client.UserInterface.Controls;
+using Robust.Shared.ContentPack;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Trauma.Client.Knowledge;
 
 public sealed class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>
 {
     [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IResourceCache _cache = default!;
     [UISystemDependency] private KnowledgeSystem _knowledge = default!;
     [UISystemDependency] private SharedPopupSystem _popup = default!;
 
     public const string ButtonName = "MartialArtsButton";
 
     private SimpleRadialMenu? _menu;
-    private Button? _button;
+    private MenuButton? _button;
 
     public override void Initialize()
     {
@@ -57,13 +65,13 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         _button?.Orphan();
     }
 
-    private Button? EnsureButton(GameTopMenuBar bar)
+    private MenuButton? EnsureButton(GameTopMenuBar bar)
     {
         // first try find it
         foreach (var child in bar.Children)
         {
             if (child.Name == ButtonName)
-                return (Button) child;
+                return (MenuButton) child;
         }
 
         // insert at the same index as admin button (so before it)
@@ -72,7 +80,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         // add a new button for the first time it's loaded
         var button = new MenuButton()
         {
-            Icon = new SpriteSpecifier.Texture("/Textures/Interface/emotes.svg.192dpi.png"),
+            Icon = _cache.GetResource<TextureResource>(new ResPath("/Textures/Interface/emotes.svg.192dpi.png")).Texture,
             ToolTip = Loc.GetString("game-hud-open-martial-arts-menu-button-tooltip"),
             BoundKey = TraumaKeyFunctions.OpenMartialArtsMenu,
             MinSize = new Vector2(42, 64),
@@ -103,7 +111,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         if (buttons.Count == 0)
         {
             var player = _player.LocalEntity;
-            _popup.PopupClient(Loc.GetString("knowledge-no-martial-art"), player, player);
+            _popup.PopupClient(Loc.GetString("knowledge-no-martial-art"), player);
             return;
         }
 
