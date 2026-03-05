@@ -108,7 +108,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
 
         // setup window if there are any martial arts to use
         var buttons = GetButtons();
-        if (buttons.Count == 0)
+        if (buttons.Count < 2) // always have 1 from no martial art option
         {
             var player = _player.LocalEntity;
             _popup.PopupClient(Loc.GetString("knowledge-no-martial-art"), player);
