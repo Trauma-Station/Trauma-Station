@@ -627,7 +627,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (hitEvent.Handled)
             return;
 
-        AddExperienceLight(user); // Trauma
         var targets = new List<EntityUid>(1)
         {
             target.Value

@@ -1585,6 +1585,9 @@
         Blunt: 1
     clumsySound:
       path: /Audio/Animals/monkey_scream.ogg
+  # <Trauma>
+  - type: KnowledgeHolder
+  # </Trauma>
 
 - type: entity
   name: monkey
@@ -1624,6 +1627,9 @@
   - type: GhostTakeoverAvailable
   - type: Loadout
     prototypes: [SyndicateOperativeGearMonkey]
+  # <Trauma>
+  - type: KnowledgeHolder
+  # </Trauma>
 
 - type: entity
   id: MobMonkeySyndicateAgent

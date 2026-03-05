@@ -75,35 +75,12 @@ public abstract partial class SharedMeleeWeaponSystem
         _throwing.TryThrow(target, pushVector, force * _shoveSpeed, animated: animated);
     }
 
-    private bool LightAttackMiss(EntityUid user)
-    {
-        var ev = new MissAttackEvent(5);
-        RaiseLocalEvent(user, ev);
-
-        if (ev.Miss)
-            PopupSystem.PopupClient(Loc.GetString("container-thrown-missed"), user, user);
-
-        return ev.Miss;
-    }
-
     private void AddExperienceLight(EntityUid target, EntityUid user)
     {
         if (MobState.IsAlive(target) && target != user)
         {
             var evKnowledge = new AddExperienceEvent(MeleeKnowledge, 1);
             RaiseLocalEvent(user, ref evKnowledge);
-        }
-    }
-
-    private void HeavyAttackMiss(EntityUid user, ref List<EntityUid> entities)
-    {
-        var ev = new MissAttackEvent(2);
-        RaiseLocalEvent(user, ev);
-
-        if (ev.Miss)
-        {
-            entities.Clear();
-            entities.Add(user);
         }
     }
 
