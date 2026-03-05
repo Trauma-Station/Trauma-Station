@@ -10,6 +10,7 @@ using Content.Server.RoundEnd;
 using Content.Server.Screens.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
+using Content.Shared._White.Xenomorphs.Queen;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.CCVar;
@@ -19,6 +20,8 @@ using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
@@ -217,6 +220,18 @@ namespace Content.Server.Communications
             return !(left.TotalSeconds / expected.TotalSeconds < recallThreshold);
         }
 
+        // # Trauma
+        private bool IsXenomorphQueenAlive()
+        {
+            var query = EntityQueryEnumerator<XenomorphQueenComponent, MobStateComponent>();
+            while (query.MoveNext(out _, out _, out var mobState))
+            {
+                if (mobState.CurrentState != MobState.Dead)
+                    return true;
+            }
+            return false;
+        }
+
         private void OnSelectAlertLevelMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleSelectAlertLevelMessage message)
         {
             if (message.Actor is not { Valid: true } mob)
@@ -307,10 +322,22 @@ namespace Content.Server.Communications
 
         private void OnCallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleCallEmergencyShuttleMessage message)
         {
+            var mob = message.Actor;
+
+            // # Trauma
+            if (IsXenomorphQueenAlive())
+            {
+                _chatSystem.DispatchGlobalAnnouncement(
+                    Loc.GetString("comms-console-xeno-queen-blocking"),
+                    Loc.GetString("xeno-queen-shuttle-recall-sender"),
+                    true,
+                    null,
+                    Color.Red);
+                return;
+            }
+
             if (!CanCallOrRecall(comp))
                 return;
-
-            var mob = message.Actor;
 
             if (!CanUse(mob, uid))
             {
