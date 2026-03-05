@@ -122,7 +122,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
 
         _menu.OnClose += OnWindowClosed;
 
-        _button.Pressed = true;
+        _button?.Pressed = true;
 
         if (centered)
         {
@@ -148,7 +148,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
 
         _menu.Close();
         _menu = null;
-        _button.Pressed = false;
+        _button?.Pressed = false;
     }
 
     private List<RadialMenuActionOption<EntProtoId?>> GetButtons()
