@@ -296,7 +296,6 @@ namespace Content.Client.Construction.UI
                 // <Trauma> - don't allow a recipe if the user is missing any needed skills
                 if (useKnowledge && !_constructionSystem.CheckConstructionGroups(skills, recipe))
                     continue;
-                    var missing = false;
                 // </Trauma>
 
                 if (!string.IsNullOrEmpty(search) && (recipe.Name is { } name &&
