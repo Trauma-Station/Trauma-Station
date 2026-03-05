@@ -6,6 +6,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -20,7 +21,7 @@ using Robust.Shared.Timing;
 namespace Content.Shared.Chemistry.EntitySystems;
 
 /// <summary>
-/// Trauma - code relating to DNA freshness and GetSolution overriding.
+/// Trauma - code relating to DNA freshness, GetSolution overriding and skills.
 /// </summary>
 public sealed partial class InjectorSystem
 {

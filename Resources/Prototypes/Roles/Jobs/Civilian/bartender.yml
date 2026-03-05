@@ -23,12 +23,10 @@
   - Hydroponics
   # <Trauma>
   special:
-  - !type:AddComponentSpecial
-    components:
-    - type: KnowledgeGrant
-      skills:
-        MeleeKnowledge: 26
-        ShootingKnowledge: 26
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      MeleeKnowledge: 26
+      ShootingKnowledge: 26
   # </Trauma>
 
 - type: startingGear

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Common.Knowledge.Systems;
+using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Shared.Roles;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
@@ -19,7 +19,7 @@ public sealed partial class AddKnowledgeSpecial : JobSpecial
     public override void AfterEquip(EntityUid mob)
     {
         var entMan = IoCManager.Resolve<IEntityManager>();
-        var knowledgeSystem = entMan.System<CommonKnowledgeSystem>();
-        knowledgeSystem.AddKnowledgeUnits(mob, Knowledge);
+        var knowledgeSystem = entMan.System<SharedKnowledgeSystem>();
+        knowledgeSystem.AddKnowledgeUnits(mob, Knowledge); // job spawns arent predicted, no user
     }
 }

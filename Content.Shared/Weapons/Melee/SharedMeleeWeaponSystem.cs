@@ -586,7 +586,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // For consistency with wide attacks stuff needs damageable.
         if (Deleted(target) ||
             !HasComp<DamageableComponent>(target) ||
-            LightAttackMiss(user) || // Trauma
             !TryComp(target, out TransformComponent? targetXform)) // Goob edit
         {
             // Leave IsHit set to true, because the only time it's set to false
@@ -625,10 +624,10 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         var hitEvent = new MeleeHitEvent(new List<EntityUid> { target.Value }, user, meleeUid, damage, null, GetCoordinates(ev.Coordinates)); // Goob edit
         RaiseLocalEvent(meleeUid, hitEvent, true); // Goob station - broadcast
 
-
         if (hitEvent.Handled)
             return;
 
+        AddExperienceLight(user); // Trauma
         var targets = new List<EntityUid>(1)
         {
             target.Value
@@ -705,9 +704,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         var resistanceBypass = GetResistanceBypass(meleeUid, user, component);
         var entities = GetEntityList(ev.Entities);
 
-        // <Trauma>
-        HeavyAttackMiss(user, ref entities);
-        // </Trauma>
         if (entities.Count == 0)
         {
             if (meleeUid == user)
@@ -884,6 +880,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         {
             // <Trauma>
             var staminaDamage = component.HeavyStaminaCost * entities.Count;
+            AdjustStaminaDamage(user, ref staminaDamage);
             // </Trauma>
             // make it not immediate to prevent annoying stamcrits
             _stamina.TakeStaminaDamage(user, staminaDamage, stamina, visual: false, immediate: false);
@@ -1012,10 +1009,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (Deleted(target))
             return true; // Trauma - still do the animation
 
-        // <Trauma>
-        if (DisarmMiss(user))
-            return true;
-        // </Trauma>
         if (user == target) // Goobstation
         {
             _meleeSound.PlaySwingSound(user, meleeUid, component);
@@ -1103,6 +1096,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return true;
         }
 
+        // <Trauma>
+        DisarmExperience(user, target);
+        // </Trauma>
         ShoveOrDisarmPopup(true);
 
         return true;

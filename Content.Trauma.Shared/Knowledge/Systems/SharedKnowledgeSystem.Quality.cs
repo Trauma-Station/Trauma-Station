@@ -22,10 +22,14 @@ public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
 
+    private EntityQuery<QualityComponent> _qualityQuery;
+
     private static readonly EntProtoId CraftingKnowledge = "CraftingKnowledge";
 
     private void InitializeQuality()
     {
+        _qualityQuery = GetEntityQuery<QualityComponent>();
+
         SubscribeLocalEvent<QualityComponent, UpdateItemQualityEvent>(ConstructionInteraction);
         SubscribeLocalEvent<QualityComponent, GetMeleeDamageEvent>(AlterMeleeDamage);
         SubscribeLocalEvent<QualityComponent, RefreshNameModifiersEvent>(AlterName);
@@ -36,41 +40,48 @@ public abstract partial class SharedKnowledgeSystem
     public void ConstructionInteraction(Entity<QualityComponent> ent, ref UpdateItemQualityEvent args)
     {
         var user = args.User;
-
-        if (TryGetKnowledgeDictionary(user) is { } userKnowledge)
+        if (GetContainer(user) is not {} brain)
         {
-            int ownMasteries = 0;
-            int itemMasteries = 0;
-            foreach (var entity in ent.Comp.LevelDeltas)
-            {
-                var mastery = GetMastery(userKnowledge.GetValueOrDefault(entity.Key));
-                ownMasteries += mastery;
-                itemMasteries += entity.Value;
-                var ev = new AddExperienceEvent(entity.Key, 6 - mastery);
-                RaiseLocalEvent(user, ref ev);
-            }
-            int added = 0;
-            if (TryGetKnowledgeUnit(user, CraftingKnowledge) is { } crafting)
-                added = GetMastery(crafting) - 2;
-            else
-                added = -3;
-            added = added + (ownMasteries - itemMasteries) / ent.Comp.LevelDeltas.Count();
-            var evCrafting = new AddExperienceEvent(CraftingKnowledge, itemMasteries);
-            RaiseLocalEvent(user, ref evCrafting);
-            var qualityToAdd = ent.Comp.Quality * ent.Comp.NumberOfMasteries + added;
-            ent.Comp.NumberOfMasteries++;
-            ent.Comp.Quality = Math.Clamp(qualityToAdd / ent.Comp.NumberOfMasteries, -6, 6); // Make sure numbers don't go too crazy.
-            _nameModifier.RefreshNameModifiers(ent.Owner);
+            ModifyValues(ent);
+            return;
         }
+
+        int ownMasteries = 0;
+        int itemMasteries = 0;
+        var knowledge = brain.Comp.KnowledgeDict;
+        foreach (var (id, delta) in ent.Comp.LevelDeltas)
+        {
+            var mastery = GetMastery(knowledge.GetValueOrDefault(id));
+            ownMasteries += mastery;
+            itemMasteries += delta;
+            var ev = new AddExperienceEvent(id, 6 - mastery);
+            RaiseLocalEvent(user, ref ev);
+        }
+
+        int added = 0;
+        if (GetKnowledge(brain, CraftingKnowledge) is { } crafting)
+            added = GetMastery(crafting.Comp) - 2;
+        else
+            added = -3;
+        added = added + (ownMasteries - itemMasteries) / ent.Comp.LevelDeltas.Count();
+
+        var evCrafting = new AddExperienceEvent(CraftingKnowledge, itemMasteries);
+        RaiseLocalEvent(user, ref evCrafting);
+
+        var qualityToAdd = ent.Comp.Quality * ent.Comp.NumberOfMasteries + added;
+        ent.Comp.NumberOfMasteries++;
+        ent.Comp.Quality = Math.Clamp(qualityToAdd / ent.Comp.NumberOfMasteries, -6, 6); // Make sure numbers don't go too crazy.
+        Dirty(ent);
+        _nameModifier.RefreshNameModifiers(ent.Owner);
         ModifyValues(ent);
     }
 
     /// <summary>
     /// This should only ever be run once on any entity ever.
     /// </summary>
-    /// <param name="ent"></param>
     public override void ModifyValues(Entity<QualityComponent> ent)
     {
+        // TODO: make this dogshit an event
         if (TryComp<ArmorComponent>(ent.Owner, out var armor))
         {
             var newModifiers = new DamageModifierSet
@@ -116,9 +127,7 @@ public abstract partial class SharedKnowledgeSystem
     }
 
     public float ConstructionModifier(Entity<QualityComponent> ent, float power = 2)
-    {
-        return (float) Math.Pow(power, ent.Comp.Quality);
-    }
+        => MathF.Pow(power, ent.Comp.Quality);
 
     private void AlterMeleeDamage(Entity<QualityComponent> ent, ref GetMeleeDamageEvent args)
     {
@@ -136,20 +145,21 @@ public abstract partial class SharedKnowledgeSystem
         comp.LevelDeltas = ent.Comp.LevelDeltas;
         comp.Quality = ent.Comp.Quality;
         comp.NumberOfMasteries = ent.Comp.NumberOfMasteries;
+        Dirty(args.NewId, comp);
         ModifyValues((args.NewId, comp));
     }
 
     private void AttemptMergeStack(Entity<QualityComponent> ent, ref AttemptMergeStackEvent args)
     {
-        if (!TryComp<QualityComponent>(args.OtherStack, out var other))
+        if (!_qualityQuery.TryComp(args.OtherStack, out var other))
         {
             args.Cancelled = true;
             return;
         }
 
         if (other.Quality != ent.Comp.Quality ||
-        other.NumberOfMasteries != ent.Comp.NumberOfMasteries ||
-        !LevelDeltasMatch(other.LevelDeltas, ent.Comp.LevelDeltas))
+            other.NumberOfMasteries != ent.Comp.NumberOfMasteries ||
+            !LevelDeltasMatch(other.LevelDeltas, ent.Comp.LevelDeltas))
         {
             args.Cancelled = true;
         }

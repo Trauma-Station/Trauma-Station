@@ -15,24 +15,6 @@ public sealed partial class ConstructionSystem
         => ChangeNode(uid, userUid, id, performActions, null);
 
     /// <summary>
-    /// Returns true on knowing construction. False if not. Logs error too.
-    /// </summary>
-    /// <param name="user"></param>
-    /// <param name="userConstructionGroup"></param>
-    /// <param name="constructionPrototype"></param>
-    /// <param name="prototype"></param>
-    /// <returns></returns>
-    public bool CheckConstructionKnowledge(EntityUid user, Dictionary<EntProtoId, int> userConstructionGroup, ConstructionPrototype constructionPrototype, string prototype)
-    {
-        if (HasComp<KnowledgeHolderComponent>(user) && !constructionPrototype.Groups.Keys.All(group => userConstructionGroup.ContainsKey(group)))
-        {
-            Log.Error($"User {ToPrettyString(user)} tried to start a construction {prototype} that it doesn't have knowledge about!");
-            return false;
-        }
-        return true;
-    }
-
-    /// <summary>
     /// Passes constructionPrototype entiry into the modifier component
     /// </summary>
     /// <param name="item"></param>

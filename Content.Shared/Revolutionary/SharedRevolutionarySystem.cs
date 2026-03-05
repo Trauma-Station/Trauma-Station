@@ -1,7 +1,3 @@
-// <Trauma>
-using Content.Trauma.Common.Knowledge.Systems;
-using Robust.Shared.Prototypes;
-// </Trauma>
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;

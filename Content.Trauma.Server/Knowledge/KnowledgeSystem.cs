@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Cloning;
 using Content.Server.Construction;
 using Content.Shared.NameModifier.EntitySystems;
-using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Containers;
@@ -18,29 +18,22 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<KnowledgeHolderComponent, KnowledgeCopyEvent>(TransferKnowledge);
+        SubscribeLocalEvent<KnowledgeHolderComponent, TransferredToCloneEvent>(TransferKnowledge);
         SubscribeLocalEvent<QualityComponent, AfterConstructionChangeEntityEvent>(AlterName);
     }
 
     /// <summary>
-    /// Attempts to transfer all knowledge from the raised entity into a target mob.
+    /// Attempts to transfer all knowledge from the original entity into the cloned mob.
     /// </summary>
-    /// <param name="ent"></param>
-    /// <param name="args"></param>
-    private void TransferKnowledge(Entity<KnowledgeHolderComponent> ent, ref KnowledgeCopyEvent args)
+    private void TransferKnowledge(Entity<KnowledgeHolderComponent> ent, ref TransferredToCloneEvent args)
     {
-        if (args.Target is not { } mob)
-            return;
-
-        if (!TryComp<KnowledgeHolderComponent>(mob, out var knowledgeHolder))
-            knowledgeHolder = EnsureComp<KnowledgeHolderComponent>(mob);
-
         if (TryGetAllKnowledgeUnits(ent) is not { } found)
             return;
 
-        var mobContainer = EnsureKnowledgeContainer((mob, knowledgeHolder));
-
-        if (mobContainer.Comp.KnowledgeContainer is not { } container)
+        var mob = args.Cloned;
+        var holder = EnsureComp<KnowledgeHolderComponent>(mob);
+        var mobContainer = EnsureKnowledgeContainer((mob, holder));
+        if (mobContainer.Comp.Container is not { } container)
             return;
 
         foreach (var knowledgeEnt in found)

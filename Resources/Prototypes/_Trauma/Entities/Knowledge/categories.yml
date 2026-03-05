@@ -13,7 +13,6 @@
   components:
   - type: Knowledge
     category: Physical
-    onSleep: true
 
 - type: entity
   id: BaseWarKnowledge
@@ -76,32 +75,32 @@
 
 - type: knowledgeCategory
   id: MartialArt
-  name: knowledge-category-prototype-Martial
+  name: knowledge-category-Martial
 
 - type: knowledgeCategory
   id: Construction
-  name: knowledge-category-prototype-Construction
+  name: knowledge-category-Construction
 
 - type: knowledgeCategory
   id: Language
-  name: knowledge-category-prototype-Languages
+  name: knowledge-category-Languages
 
 - type: knowledgeCategory
   id: War
-  name: knowledge-category-prototype-Combat
+  name: knowledge-category-Combat
 
 - type: knowledgeCategory
   id: Medical
-  name: knowledge-category-prototype-Medical
+  name: knowledge-category-Medical
 
 - type: knowledgeCategory
   id: Physical
-  name: knowledge-category-prototype-Physical
+  name: knowledge-category-Physical
 
 - type: knowledgeCategory
   id: Intellectual
-  name: knowledge-category-prototype-Intellectual
+  name: knowledge-category-Intellectual
 
 - type: knowledgeCategory
   id: Scientific
-  name: knowledge-category-prototype-Scientific
+  name: knowledge-category-Scientific

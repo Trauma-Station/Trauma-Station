@@ -1,0 +1,15 @@
+- type: entity
+  parent: BaseIntellectualKnowledge
+  id: MagicalLiteracyKnowledge
+  name: Magical Literacy
+  components:
+  - type: Knowledge
+    experienceCost: 30
+
+- type: entity
+  parent: BaseIntellectualKnowledge
+  id: LiteracyKnowledge
+  name: Literacy
+  components:
+  - type: Knowledge
+    experienceCost: 20

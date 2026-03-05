@@ -5,6 +5,7 @@ using Content.Client.UserInterface.Systems.Character.Windows;
 using Content.Trauma.Client.Knowledge.Tabs;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Systems;
@@ -39,13 +40,11 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
 
     private void OnGetAttackTypes(Entity<KnowledgeHolderComponent> ent, ref GetPerformedAttackTypesEvent args)
     {
-        if (ent.Comp.KnowledgeEntity is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComp))
+        if (GetActiveMartialArt(ent) is not {} skill ||
+            !TryComp<CanPerformComboComponent>(skill, out var combo))
             return;
 
-        if (knowledgeContainerComp.MartialArtSkillUid is not { } skill || !TryComp<CanPerformComboComponent>(skill, out var comboComp))
-            return;
-
-        args.AttackTypes = comboComp.LastAttacks;
+        args.AttackTypes = combo.LastAttacks;
     }
 
     private void OnCharacterWindowOpened(CharacterWindow window)
@@ -81,25 +80,21 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    public List<(EntityUid, string)> GetMartialArtsForClientDoohickey(EntityUid target)
+    public List<(EntProtoId, string)> GetMartialArtsForClientDoohickey(EntityUid target)
     {
-        var martialArtsList = TryGetKnowledgeWithComp<MartialArtsKnowledgeComponent>(target);
+        if (GetKnowledgeWith<MartialArtsKnowledgeComponent>(target) is not {} arts)
+            return [];
 
-        if (martialArtsList is not { })
-            return new List<(EntityUid, string)>();
-
-        return martialArtsList
-            .Select(martialArt =>
-            {
-                var protoId = Prototype(martialArt.Owner)!.ID ?? string.Empty;
-                return (Uid: martialArt.Owner, ProtoId: protoId);
-            })
-            .OrderBy(x => x.ProtoId) // Sort alphabetically by Prototype ID
-            .Select(x => (x.Uid, Loc.GetString($"knowledge-{x.ProtoId}")))
-            .ToList();
+        var list = new List<(EntProtoId, string)>();
+        foreach (var art in arts)
+        {
+            list.Add((Prototype(art)!.ID, Name(art)));
+        }
+        list.Sort((a, b) => a.Item1.CompareTo(b.Item1));
+        return list;
     }
 
-    public List<(string Category, KnowledgeInfo Info)>? GrabAllKnowledge(EntityUid target)
+    public List<(ProtoId<KnowledgeCategoryPrototype> Category, KnowledgeInfo Info)>? GrabAllKnowledge(EntityUid target)
     {
         var knowledgeList = TryGetAllKnowledgeUnits(target);
 
@@ -134,14 +129,10 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     }
 
     /// <summary>
-    /// Changes the martial art of the entity.
+    /// Changes the active martial art of the player.
     /// </summary>
-    public void ChangeMartialArts(EntityUid knowledgeEntity, Entity<MartialArtsKnowledgeComponent>? martialArt)
+    public void ChangeMartialArt(EntProtoId? id)
     {
-        if (!TryComp<KnowledgeContainerComponent>(knowledgeEntity, out var knowledgeContainer))
-            return;
-
-        knowledgeContainer.MartialArtSkillUid = martialArt;
-        Dirty(knowledgeEntity, knowledgeContainer);
+        RaisePredictiveEvent(new KnowledgeUpdateMartialArtsEvent(id));
     }
 }

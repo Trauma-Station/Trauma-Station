@@ -24,11 +24,11 @@
     components:
     - type: SurgerySpeedModifier
       speedModifier: 1.25
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        ChemistryKnowledge: 50
-    # </Trauma>
+  # <Trauma>
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      ChemistryKnowledge: 50
+  # </Trauma>
 
 - type: startingGear
   id: ChemistGear

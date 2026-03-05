@@ -7,7 +7,6 @@ using Content.Shared.Item;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Configuration;
@@ -25,7 +24,7 @@ public abstract partial class SharedMeleeWeaponSystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
 
     private EntityQuery<InteractionRelayComponent> _relayQuery;
 
@@ -108,6 +107,15 @@ public abstract partial class SharedMeleeWeaponSystem
         }
     }
 
+    private void AdjustStaminaDamage(EntityUid user, ref float staminaDamage)
+    {
+        // TODO: use event for this bruh
+        if (_knowledge.GetKnowledge(user, MeleeKnowledge) is {} melee)
+        {
+            staminaDamage *= 1 - _knowledge.SharpCurve(melee);
+        }
+    }
+
     private void AddExperienceHeavy(EntityUid user, ref List<EntityUid> entities)
     {
         if (entities.Count(entity => MobState.IsAlive(entity)) is var count and > 0)
@@ -119,11 +127,13 @@ public abstract partial class SharedMeleeWeaponSystem
         }
     }
 
-    private bool DisarmMiss(EntityUid user)
+    private void DisarmExperience(EntityUid user, EntityUid target)
     {
-        var ev = new MissAttackEvent(10);
-        RaiseLocalEvent(user, ev);
-
-        return ev.Miss;
+        // TODO: move all this shit to event handlers bruh
+        if (_knowledge.GetKnowledge(user, MeleeKnowledge) is {} melee && _knowledge.GetMastery(melee.Comp) < 2 && MobState.IsAlive(target))
+        {
+            var evKnowledge = new AddExperienceEvent(MeleeKnowledge, 1);
+            RaiseLocalEvent(user, ref evKnowledge);
+        }
     }
 }

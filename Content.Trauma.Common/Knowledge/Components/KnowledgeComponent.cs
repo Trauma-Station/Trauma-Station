@@ -76,14 +76,8 @@ public sealed partial class KnowledgeComponent : Component
     public int BonusExperience;
 
     /// <summary>
-    /// Stores the next time this component shoudl gain exp.
+    /// Stores the next time this component will allow gaining XP.
     /// </summary>
     [DataField]
     public TimeSpan TimeToNextExperience = TimeSpan.Zero;
-
-    /// <summary>
-    /// Determines if component uses sleep functionality.
-    /// </summary>
-    [DataField]
-    public bool OnSleep;
 }

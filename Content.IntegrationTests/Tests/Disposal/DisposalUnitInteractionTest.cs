@@ -1,5 +1,5 @@
 using Content.IntegrationTests.Tests.Interaction;
-using Content.Server.Containers;
+using Content.Trauma.Shared.Containers; // Trauma - moved it out of server
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
