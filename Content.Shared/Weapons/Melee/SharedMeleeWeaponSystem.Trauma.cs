@@ -98,7 +98,11 @@ public abstract partial class SharedMeleeWeaponSystem
                 knowledgeMiss = ((float) melee.Comp.Level + 5) / 26.0f;
             }
         }
-        return _gun.Random(target).Prob(Math.Max(1.0f - knowledgeMiss, 0));
+        if (!_gun.Random(target).Prob(Math.Max(1.0f - knowledgeMiss, 0)))
+            return false;
+
+        PopupSystem.PopupClient(Loc.GetString("container-thrown-missed"), user, user);
+        return true;
     }
 
     private void AddExperienceLight(EntityUid target)

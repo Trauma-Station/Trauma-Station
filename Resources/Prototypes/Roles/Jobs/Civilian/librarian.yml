@@ -8,7 +8,8 @@
   supervisors: job-supervisors-hop
   goobcoins: 10 #Goob content
   access:
-  #- Service # Trauma - librarian feeds the mind and soul
+  - Library # Trauma - TODO, remove service after mapping is done
+  - Service
   - Maintenance
   special: # Goobstation start - Librarian should speak most languages.
   - !type:AddImplantSpecial

@@ -3511,3 +3511,85 @@ Entries:
   id: 415
   time: '2026-03-04T03:31:12.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/262
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed guns that need wielding not having a popup when trying to shoot
+      them.
+  id: 416
+  time: '2026-03-04T08:32:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/989
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added Library access level, currently used by the CuraDrobe.
+  - type: Fix
+    message: Fixed librarians not being able to open their doors.
+  id: 417
+  time: '2026-03-04T08:37:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/986
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed projectile hit sounds playing twice.
+  id: 418
+  time: '2026-03-04T08:46:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/990
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed not being able to eject materials from lathes which don't have
+      recipes using them.
+  id: 419
+  time: '2026-03-04T08:51:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/992
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Robotics vending machines and crates now use robotics access instead of
+      research.
+  id: 420
+  time: '2026-03-04T11:18:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/994
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      The abductor scientist now spawns with a radio jammer which helps them not
+      immediately get called out over radio
+  id: 421
+  time: '2026-03-04T12:27:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/997
+- author: Kirikii
+  changes:
+  - type: Fix
+    message: Fixed revolutionary radio jammers having the wrong contraband level.
+  id: 422
+  time: '2026-03-04T14:06:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1002
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed library access name not being localized.
+  id: 423
+  time: '2026-03-04T16:01:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1006
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Randomly missing a melee attack now has a popup.
+  - type: Fix
+    message: Fixed non-humans not having knowledge bruh
+  id: 424
+  time: '2026-03-04T16:03:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1005
+- author: MayasMischief
+  changes:
+  - type: Remove
+    message: Removed BSO
+  id: 425
+  time: '2026-03-04T21:54:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1017

@@ -123,7 +123,12 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             _transform.SetLocalPosition(uid, xform.LocalPosition + rotation.RotateVec(component.Offset), xform);
         }
 
-        _audio.PlayPredicted(component.Sound, uid, null);
+        // <Trauma> - for projectiles use PlayLocal since clients predict their physics
+        if (user != null)
+            _audio.PlayLocal(component.Sound, uid, null);
+        else
+            _audio.PlayPvs(component.Sound, uid);
+        // </Trauma>
         component.EmbeddedIntoUid = target;
         var ev = new EmbedEvent(user, target);
         RaiseLocalEvent(uid, ref ev);

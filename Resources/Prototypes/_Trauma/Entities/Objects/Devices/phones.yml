@@ -103,6 +103,13 @@
 
 - type: entity
   parent: RotaryPhoneStand
+  id: RotaryPhoneStandNoRot
+  components:
+  - type: Transform
+    noRot: true
+
+- type: entity
+  parent: RotaryPhoneStand
   id: RMCRotaryPhoneWallmount
   name: wall-mounted phone
   description: "It is a wall mounted telephone. The fine text reads: To log your details with the mainframe please insert your keycard into the slot below. Unfortunately the slot is jammed. You can still use the phone, however."
@@ -210,7 +217,7 @@
 # Stands
 
 - type: entity
-  parent: RotaryPhoneStand
+  parent: RotaryPhoneStandNoRot
   suffix: Command
   id: RotaryPhoneStandCommand
   components:
@@ -220,7 +227,7 @@
       - RotaryPhoneCommand
 
 - type: entity
-  parent: RotaryPhoneStand
+  parent: RotaryPhoneStandNoRot
   suffix: Security
   id: RotaryPhoneStandSecurity
   components:
@@ -230,7 +237,7 @@
       - RotaryPhoneSecurity
 
 - type: entity
-  parent: RotaryPhoneStand
+  parent: RotaryPhoneStandNoRot
   suffix: Security (911)
   id: RotaryPhoneStandSecurity911
   components:
@@ -240,7 +247,7 @@
       - RotaryPhoneSecurity911
 
 - type: entity
-  parent: RotaryPhoneStand
+  parent: RotaryPhoneStandNoRot
   suffix: Medical
   id: RotaryPhoneStandMedical
   components:
@@ -250,7 +257,7 @@
       - RotaryPhoneMedical
 
 - type: entity
-  parent: RotaryPhoneStand
+  parent: RotaryPhoneStandNoRot
   suffix: Engineering
   id: RotaryPhoneStandEngineering
   components:
@@ -260,7 +267,7 @@
       - RotaryPhoneEngineering
 
 - type: entity
-  parent: RotaryPhoneStand
+  parent: RotaryPhoneStandNoRot
   suffix: Cargo
   id: RotaryPhoneStandCargo
   components:
@@ -270,7 +277,7 @@
       - RotaryPhoneCargo
 
 - type: entity
-  parent: RotaryPhoneStand
+  parent: RotaryPhoneStandNoRot
   suffix: Science
   id: RotaryPhoneStandScience
   components:
@@ -280,7 +287,7 @@
       - RotaryPhoneScience
 
 - type: entity
-  parent: RotaryPhoneStand
+  parent: RotaryPhoneStandNoRot
   suffix: Service
   id: RotaryPhoneStandService
   components:
@@ -290,9 +297,91 @@
       - RotaryPhoneService
 
 - type: entity
-  parent: RotaryPhoneStand
+  parent: RotaryPhoneStandNoRot
   suffix: Hidden
   id: RotaryPhoneStandHidden
+  components:
+  - type: ContainerFill
+    containers:
+      phone:
+      - RotaryPhoneHidden
+
+# wall phones
+
+- type: entity
+  parent: RMCRotaryPhoneWallmount
+  suffix: Command
+  id: RotaryPhoneStandWallCommand
+  components:
+  - type: ContainerFill
+    containers:
+      phone:
+      - RotaryPhoneCommand
+
+- type: entity
+  parent: RMCRotaryPhoneWallmount
+  suffix: Security
+  id: RotaryPhoneStandWallSecurity
+  components:
+  - type: ContainerFill
+    containers:
+      phone:
+      - RotaryPhoneSecurity
+
+- type: entity
+  parent: RMCRotaryPhoneWallmount
+  suffix: Medical
+  id: RotaryPhoneStandWallMedical
+  components:
+  - type: ContainerFill
+    containers:
+      phone:
+      - RotaryPhoneMedical
+
+- type: entity
+  parent: RMCRotaryPhoneWallmount
+  suffix: Engineering
+  id: RotaryPhoneStandWallEngineering
+  components:
+  - type: ContainerFill
+    containers:
+      phone:
+      - RotaryPhoneEngineering
+
+- type: entity
+  parent: RMCRotaryPhoneWallmount
+  suffix: Cargo
+  id: RotaryPhoneStandWallCargo
+  components:
+  - type: ContainerFill
+    containers:
+      phone:
+      - RotaryPhoneCargo
+
+- type: entity
+  parent: RMCRotaryPhoneWallmount
+  suffix: Science
+  id: RotaryPhoneStandWallScience
+  components:
+  - type: ContainerFill
+    containers:
+      phone:
+      - RotaryPhoneScience
+
+- type: entity
+  parent: RMCRotaryPhoneWallmount
+  suffix: Service
+  id: RotaryPhoneStandWallService
+  components:
+  - type: ContainerFill
+    containers:
+      phone:
+      - RotaryPhoneService
+
+- type: entity
+  parent: RMCRotaryPhoneWallmount
+  suffix: Hidden
+  id: RotaryPhoneStandWallHidden
   components:
   - type: ContainerFill
     containers:
