@@ -35,6 +35,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedLanguageSystem _language = default!;
@@ -96,7 +97,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             }
         }
     }
-
 
     private void OnContainerStartup(Entity<KnowledgeContainerComponent> ent, ref ComponentStartup args)
     {
@@ -184,13 +184,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         AddExperience(brain, args.KnowledgeType, args.Experience, user: args.User ?? ent.Owner);
     }
 
-    public void AddExperience(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int xp, EntityUid? user = null)
+    public void AddExperience(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int xp, bool predicted = true)
     {
         if (GetKnowledge(ent, id) is not {} unit)
         {
             // if you don't have it, you have a small change to learn it when gaining some xp
             if (SharedRandomExtensions.PredictedProb(_timing, _learnChance, GetNetEntity(ent)))
-                EnsureKnowledge(ent, id, 0, user: user);
+                EnsureKnowledge(ent, id, 0, predicted);
             return;
         }
 
@@ -219,39 +219,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// <summary>
     /// Rolls Levelup. True on roll. False on not.
     /// </summary>
-    /// <param name="ent"></param>
-    /// <param name="target"></param>
-    /// <returns></returns>
     public bool RollForLevelUp(Entity<KnowledgeComponent> ent, EntityUid target)
     {
         var getMastery = GetMastery(ent.Comp);
         (int, bool) rollResult = (0, false);
 
-        if (!(ent.Comp.Experience >= ent.Comp.ExperienceCost && ent.Comp.Level < 100))
+        if (ent.Comp.Experience < ent.Comp.ExperienceCost || ent.Comp.Level >= 100))
             return false;
 
-        if (ent.Comp.OnSleep)
-        {
-            if (_mobState.IsCritical(target))
-            {
-                int diceType = DiceDictionary(ent);
-                rollResult = RollPenetrating(target, diceType);
-                if (!(rollResult.Item2))
-                    return false;
-                ent.Comp.Level += rollResult.Item1;
-                _popup.PopupClient(Loc.GetString("knowledge-zenkai-boost"), target, target, PopupType.Large);
-                _damageable.ClearAllDamage(target);
-            }
-            else if (HasComp<SleepingComponent>(target))
-            {
-                int diceType = DiceDictionary(ent);
-                rollResult = RollPenetrating(target, diceType);
-                if (!(rollResult.Item2))
-                    return false;
-            }
-            else
-                return false;
-        }
         int timesToRoll = ent.Comp.Experience / ent.Comp.ExperienceCost;
         ent.Comp.Experience -= ent.Comp.ExperienceCost * timesToRoll;
         (int, bool) rollInnard;
@@ -330,7 +305,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// <returns>
     /// Null if spawning it fails.
     /// </returns>
-    public Entity<KnowledgeComponent>? EnsureKnowledge(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int level = 0, EntityUid? user = null)
+    public Entity<KnowledgeComponent>? EnsureKnowledge(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int level = 0, bool predicted = true)
     {
         if (GetKnowledge(ent, id) is {} existing)
         {
@@ -363,21 +338,24 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         RaiseLocalEvent(unit, ref ev);
 
         var msg = Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Name(unit)));
-        _popup.PopupPredicted(msg, holder, user);
+        if (predicted)
+            _popup.PopupClient(msg, holder, holder);
+        else if (_net.IsServer)
+            _popup.PopupEntity(msg, holder, holder);
         return (unit, comp);
     }
 
     /// <summary>
     /// Adds a list of knowledge units to a knowledge container.
     /// </summary>
-    public void AddKnowledgeUnits(EntityUid target, Dictionary<EntProtoId, int> knowledgeList, EntityUid? user = null)
+    public void AddKnowledgeUnits(EntityUid target, Dictionary<EntProtoId, int> knowledgeList, bool predicted = true)
     {
         if (GetContainer(target) is not {} ent)
             return;
 
         foreach (var (id, level) in knowledgeList)
         {
-            EnsureKnowledge(ent, id, level, user);
+            EnsureKnowledge(ent, id, level, predicted);
         }
 
         var updateEv = new UpdateExperienceEvent();

@@ -38,7 +38,7 @@ public abstract partial class SharedKnowledgeSystem
         // Handle Skills (Temporary Levels)
         foreach (var (id, level) in component.Skills)
         {
-            if (EnsureKnowledge(ent, id, user: wearer) is {} unit)
+            if (EnsureKnowledge(ent, id, predicted: true) is {} unit)
             {
                 unit.Comp.TemporaryLevel += level;
                 Dirty(unit);
@@ -48,7 +48,7 @@ public abstract partial class SharedKnowledgeSystem
         // Handle Experience
         foreach (var (id, xp) in component.Experience)
         {
-            if (EnsureKnowledge(ent, id, user: wearer) is {} unit)
+            if (EnsureKnowledge(ent, id, predicted: true) is {} unit)
             {
                 unit.Comp.BonusExperience += xp;
                 Dirty(unit);

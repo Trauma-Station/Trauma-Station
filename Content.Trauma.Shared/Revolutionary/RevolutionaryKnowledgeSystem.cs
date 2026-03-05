@@ -48,6 +48,6 @@ public sealed class RevolutionaryKnowledgeSystem : EntitySystem
         if (_knowledge.GetContainer(uid) is not {} brain)
             return;
 
-        _knowledge.EnsureKnowledge(brain, RevolutionaryKnowledge, level, user: uid);
+        _knowledge.EnsureKnowledge(brain, RevolutionaryKnowledge, level, predicted: true);
     }
 }

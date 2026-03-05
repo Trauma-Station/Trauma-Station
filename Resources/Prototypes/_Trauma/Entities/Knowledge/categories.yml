@@ -13,7 +13,6 @@
   components:
   - type: Knowledge
     category: Physical
-    onSleep: true
 
 - type: entity
   id: BaseWarKnowledge

@@ -106,12 +106,12 @@ public abstract partial class SharedMeleeWeaponSystem
         return true;
     }
 
-    private void AddExperienceLight(EntityUid target)
+    private void AddExperienceLight(EntityUid user)
     {
         if (MobState.IsAlive(target))
         {
             var evKnowledge = new AddExperienceEvent(MeleeKnowledge, 1);
-            RaiseLocalEvent(target, ref evKnowledge);
+            RaiseLocalEvent(user, ref evKnowledge);
         }
     }
 

@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
 using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;
@@ -625,13 +624,10 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         var hitEvent = new MeleeHitEvent(new List<EntityUid> { target.Value }, user, meleeUid, damage, null, GetCoordinates(ev.Coordinates)); // Goob edit
         RaiseLocalEvent(meleeUid, hitEvent, true); // Goob station - broadcast
 
-
         if (hitEvent.Handled)
             return;
 
-        // <Trauma>
-        AddExperienceLight(target.Value);
-        // </Trauma>
+        AddExperienceLight(user); // Trauma
         var targets = new List<EntityUid>(1)
         {
             target.Value
