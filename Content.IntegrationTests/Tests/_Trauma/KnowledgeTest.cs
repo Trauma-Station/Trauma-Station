@@ -39,8 +39,8 @@ public sealed class KnowledgeTest
             Assert.That(entMan.HasComponent<KnowledgeHolderComponent>(human), "Human needs a KnowledgeHolder");
             var brain = knowledge.GetContainer(human);
             Assert.That(brain, Is.Not.Null, "Human has no knowledge container");
-            Assert.That(brain != human, "Human's knowledge container was not the brain");
             var (uid, comp) = brain!.Value;
+            Assert.That(uid != human, "Human's knowledge container was not the brain");
             Assert.That(comp.Holder, Is.EqualTo(human), "Brain's knowledge holder was not the human");
 
             Assert.That(bodySystem.RemoveOrgan(human, uid), "Failed to remove brain from the human");
