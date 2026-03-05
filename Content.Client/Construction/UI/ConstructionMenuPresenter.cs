@@ -289,11 +289,26 @@ namespace Content.Client.Construction.UI
 
                 if (_playerManager.LocalSession == null
                     || _playerManager.LocalEntity == null
-                    || _whitelistSystem.IsWhitelistFail(recipe.EntityWhitelist, _playerManager.LocalEntity.Value)
-                    // <Trauma>
-                    || (_constructionSystem.IsKnowledgeHolder(_playerManager.LocalEntity.Value) && !recipe.Groups.Keys.All(group => availableGroups.ContainsKey(group))))
-                    // </Trauma>
+                    || _whitelistSystem.IsWhitelistFail(recipe.EntityWhitelist, _playerManager.LocalEntity.Value))
                     continue;
+
+                // <Trauma> - don't allow a recipe if the user is missing any needed skills
+                if (_constructionSystem.IsKnowledgeHolder(player))
+                {
+                    var missing = false;
+                    foreach (var (id, needed) in recipe.Groups)
+                    {
+                        if (availableGroups.GetValueOrDefault(id, out var level) < needed)
+                        {
+                            missing = true;
+                            break;
+                        }
+                    }
+
+                    if (missing)
+                        continue;
+                }
+                // </Trauma>
 
                 if (!string.IsNullOrEmpty(search) && (recipe.Name is { } name &&
                                                       !name.Contains(search.Trim(),
