@@ -9,8 +9,10 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: _DV/CosmicCult/Objects/unknownplushie.rsi
-    state: plushie_cosmic
+    sprite: _DV/CosmicCult/Mobs/cosmicgod.rsi
+    offset: 0, 2
+    drawdepth: Ghosts
+    scale: 2,2
   - type: EmitSoundOnUse
     sound: &PlushieUnknownSound
       path: /Audio/_DV/CosmicCult/ascendant_noise.ogg
@@ -28,3 +30,9 @@
     soundHit: *PlushieUnknownSound
   - type: CosmicTransmutable
     transmuteTo: null # No reforging
+  - type: AmbientSound
+    enabled: true
+    volume: 0
+    range: 25
+    sound:
+      path: /Audio/_DV/CosmicCult/god_ambient.ogg

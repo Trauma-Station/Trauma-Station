@@ -72,7 +72,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.40
+          radius: 0.80 # Chonk boi lmfao
         density: 2500
         mask:
         - FlyingMobMask

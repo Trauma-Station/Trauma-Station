@@ -6,10 +6,8 @@
   components:
   - type: Sprite
     noRot: true
-    sprite: _DV/CosmicCult/Mobs/cosmicgod.rsi
-    offset: 0, 2
-    drawdepth: Ghosts
-    scale: 2,2
+    sprite: _DV/CosmicCult/Objects/unknownplushie.rsi
+    state: plushie_cosmic
     layers:
     - state: god
       shader: unshaded
@@ -55,9 +53,6 @@
   id: MobCosmicGod
   components:
   - type: CargoSellBlacklist
-  # big mob needs to see everything
-  - type: ContentEye
-    maxZoom: 2.2,2.2
   - type: Eye
     drawFov: false
   - type: Fixtures
