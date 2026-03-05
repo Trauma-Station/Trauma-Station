@@ -298,7 +298,7 @@ namespace Content.Client.Construction.UI
                     var missing = false;
                     foreach (var (id, needed) in recipe.Groups)
                     {
-                        if (availableGroups.GetValueOrDefault(id, out var level) < needed)
+                        if (availableGroups.GetValueOrDefault(id) < needed)
                         {
                             missing = true;
                             break;
