@@ -740,10 +740,11 @@
   description: A large stuffed doll of the elder god Ratvar.
   components:
   - type: Sprite
-    sprite: Mobs/Demons/ratvar.rsi
-    state: ratvar
+    sprite: Objects/Fun/Plushies/ratvar.rsi
+    state: icon
   - type: Item
     size: Normal
+    sprite: Objects/Fun/Plushies/ratvar.rsi
   - type: MultiHandedItem
   - type: Clothing
     quickEquip: false
@@ -761,10 +762,11 @@
   description: A large stuffed doll of the elder goddess Nar'Sie.
   components:
   - type: Sprite
-    sprite: Mobs/Demons/narsie.rsi
-    state: narsie
+    sprite: Objects/Fun/Plushies/narsie.rsi
+    state: icon
   - type: Item
     size: Normal
+    sprite: Objects/Fun/Plushies/narsie.rsi
   - type: MultiHandedItem
   - type: Clothing
     quickEquip: false
