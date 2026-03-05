@@ -177,10 +177,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (GetContainer(ent) is not { } brain)
             return;
 
-        AddExperience(brain, args.KnowledgeType, args.Experience, popup: args.Popup);
+        AddExperience(brain, args.KnowledgeType, args.Experience, args.LevelCap, popup: args.Popup);
     }
 
-    public void AddExperience(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int xp, bool popup = true)
+    public void AddExperience(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int xp, int levelCap = 100, bool popup = true)
     {
         if (GetKnowledge(ent, id) is not { } unit)
         {
@@ -190,7 +190,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return;
         }
 
-        if (ent.Comp.Holder is { } holder)
+        if (unit.Comp.Level < levelCap && ent.Comp.Holder is { } holder)
         {
             AddExperience(unit, holder, xp);
 

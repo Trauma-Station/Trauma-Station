@@ -132,12 +132,10 @@ public partial class MartialArtsSystem
 
         if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && !martialArtsComp.Blocked && _mobState.IsAlive(target) && proto.GiveExperience)
         {
-            var prototypeId = Prototype(ent)?.ID;
-            if (prototypeId is { })
-            {
-                var ev = new AddExperienceEvent(prototypeId, 1);
-                RaiseLocalEvent(performer, ref ev);
-            }
+            if (Prototype(ent)?.ID is not { } prototypeId)
+                return;
+            var ev = new AddExperienceEvent(prototypeId, 1);
+            RaiseLocalEvent(performer, ref ev);
         }
 
         Dirty(ent);

@@ -24,7 +24,7 @@ public record struct ConstructionGetGroupsEvent(Dictionary<EntProtoId, int> Grou
 /// Called in order to add experience to a knowledge holder. Simply pass in a EntProtoId of the knowledge and the amount of exp you want to add.
 /// </summary>
 [ByRefEvent]
-public record struct AddExperienceEvent(EntProtoId KnowledgeType, int Experience, bool Popup = true);
+public record struct AddExperienceEvent(EntProtoId KnowledgeType, int Experience, int LevelCap = 100, bool Popup = true);
 
 /// <summary>
 /// Raised to let the client update XP ui stuff.
