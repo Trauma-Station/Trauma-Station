@@ -1462,11 +1462,11 @@
   - type: Stripping
   - type: Sprite
     drawdepth: Mobs
-  - type: Hands
-    activeHandId: Hand
-    hands:
-      Hand:
-        location: Left
+  #- type: Hands # Trauma - no third hand
+  #  activeHandId: Hand
+  #  hands:
+  #    Hand:
+  #      location: Left
   - type: ComplexInteraction
   - type: GenericVisualizer
     visuals:

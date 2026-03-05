@@ -83,6 +83,7 @@
 - type: entity
   parent: BaseItem
   id: BookSkillbook
+  abstract: true
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
@@ -100,6 +101,7 @@
   parent: BookSkillbook
   id: BookStrength
   name: old book
+  suffix: strength
   description: A small, black manual. There are drawn instructions of curl-ups and sit-ups.
   components:
   - type: KnowledgeGrantOnUse
@@ -113,6 +115,7 @@
   parent: BookSkillbook
   id: BookAthletics
   name: old book
+  suffix: athletics
   description: A small, black manual. There are drawn instructions of a man running.
   components:
   - type: KnowledgeGrantOnUse
@@ -126,6 +129,7 @@
   parent: BookSkillbook
   id: BookToughness
   name: old book
+  suffix: toughness
   description: A small, black manual. There are drawn instructions of a man getting lashed.
   components:
   - type: KnowledgeGrantOnUse
@@ -139,6 +143,7 @@
   parent: BookSkillbook
   id: BookMelee
   name: old book
+  suffix: melee
   description: A small, black manual. There are drawn instructions of a man in fisticuffs.
   components:
   - type: KnowledgeGrantOnUse
@@ -152,6 +157,7 @@
   parent: BookSkillbook
   id: BookShooting
   name: old book
+  suffix: shooting
   description: A small, black manual. There are drawn instructions of a man firing his gun.
   components:
   - type: KnowledgeGrantOnUse
@@ -165,6 +171,7 @@
   parent: BookSkillbook
   id: BookSurgery
   name: old book
+  suffix: surgery
   description: A small, black manual. There are drawn instructions of a man operating on a body.
   components:
   - type: KnowledgeGrantOnUse
@@ -178,6 +185,7 @@
   parent: BookSkillbook
   id: BookFirstaid
   name: old book
+  suffix: first aid
   description: A small, black manual. There are drawn instructions of a man applying bandages to himself.
   components:
   - type: KnowledgeGrantOnUse
@@ -191,6 +199,7 @@
   parent: BookSkillbook
   id: BookMagicalLiteracy
   name: old book
+  suffix: magical literacy
   description: A small, black manual. There are drawn instructions of a man watching sigils pop out of the page.
   components:
   - type: KnowledgeGrantOnUse
@@ -204,6 +213,7 @@
   parent: BookSkillbook
   id: BookLiteracy
   name: old book
+  suffix: literacy
   description: A small, black manual. Its a picture book.
   components:
   - type: KnowledgeGrantOnUse
@@ -217,6 +227,7 @@
   parent: BookSkillbook
   id: BookJanitor
   name: old book
+  suffix: janitor
   description: A small, black manual. Its a picture book.
   components:
   - type: KnowledgeGrantOnUse
@@ -230,6 +241,7 @@
   parent: BookSkillbook
   id: BookTechnology
   name: old book
+  suffix: technology
   description: A small, black manual. Its a book about the basics of technology.
   components:
   - type: KnowledgeGrantOnUse
@@ -243,6 +255,7 @@
   parent: BookSkillbook
   id: BookThrowing
   name: old book
+  suffix: throwing
   description: A small, black manual. Its a picture book.
   components:
   - type: KnowledgeGrantOnUse
@@ -256,6 +269,7 @@
   parent: BookSkillbook
   id: BookLanguageTauCeti
   name: old book
+  suffix: Tau Ceti
   description: A small, black manual. Its a book on the basics of the Tau Ceti language.
   components:
   - type: KnowledgeGrantOnUse
@@ -269,6 +283,7 @@
   parent: BookSkillbook
   id: BookHandmade
   name: old book
+  suffix: handmade
   description: A small, black manual. Its a book on the basics of handmade things.
   components:
   - type: KnowledgeGrantOnUse
@@ -282,6 +297,7 @@
   parent: BookSkillbook
   id: BookSurvival
   name: old book
+  suffix: survival
   description: A small, black manual. Its a book on the basics of survival.
   components:
   - type: KnowledgeGrantOnUse
@@ -295,6 +311,7 @@
   parent: BookSkillbook
   id: BookWeapons
   name: old book
+  suffix: weapons
   description: A small, black manual. Its a book on the basics of weapons.
   components:
   - type: KnowledgeGrantOnUse
@@ -308,6 +325,7 @@
   parent: BookSkillbook
   id: BookMaterials
   name: old book
+  suffix: materials
   description: A small, black manual. Its a book on the basics of materials.
   components:
   - type: KnowledgeGrantOnUse
@@ -321,6 +339,7 @@
   parent: BookSkillbook
   id: BookDoors
   name: old book
+  suffix: doors
   description: A small, black manual. Its a book on the basics of doors.
   components:
   - type: KnowledgeGrantOnUse
@@ -334,6 +353,7 @@
   parent: BookSkillbook
   id: BookAirlocks
   name: old book
+  suffix: airlocks
   description: A small, black manual. Its a book on the basics of airlocks.
   components:
   - type: KnowledgeGrantOnUse
@@ -347,6 +367,7 @@
   parent: BookSkillbook
   id: BookToys
   name: old book
+  suffix: toys
   description: A small, black manual. Its a book on the basics of toys.
   components:
   - type: KnowledgeGrantOnUse
@@ -360,6 +381,7 @@
   parent: BookSkillbook
   id: BookBananium
   name: old book
+  suffix: bananium
   description: A small, black manual. Its a book on the basics of bananium.
   components:
   - type: KnowledgeGrantOnUse
@@ -373,6 +395,7 @@
   parent: BookSkillbook
   id: BookBots
   name: old book
+  suffix: bots
   description: A small, black manual. Its a book on the basics of bots.
   components:
   - type: KnowledgeGrantOnUse
@@ -386,6 +409,7 @@
   parent: BookSkillbook
   id: BookFurniture
   name: old book
+  suffix: furniture
   description: A small, black manual. Its a book on the basics of furniture.
   components:
   - type: KnowledgeGrantOnUse
@@ -399,6 +423,7 @@
   parent: BookSkillbook
   id: BookInfrastructure
   name: old book
+  suffix: infrastructure
   description: A small, black manual. Its a book on the basics of infrastructure.
   components:
   - type: KnowledgeGrantOnUse
@@ -412,6 +437,7 @@
   parent: BookSkillbook
   id: BookElectronics
   name: old book
+  suffix: electronics
   description: A small, black manual. Its a book on the basics of electronics.
   components:
   - type: KnowledgeGrantOnUse
@@ -425,6 +451,7 @@
   parent: BookSkillbook
   id: BookWalls
   name: old book
+  suffix: walls
   description: A small, black manual. Its a book on the basics of walls.
   components:
   - type: KnowledgeGrantOnUse
@@ -438,6 +465,7 @@
   parent: BookSkillbook
   id: BookScience
   name: old book
+  suffix: science
   description: A small, black manual. Its a book on the basics of science.
   components:
   - type: KnowledgeGrantOnUse
@@ -451,6 +479,7 @@
   parent: BookSkillbook
   id: BookWindows
   name: old book
+  suffix: windows
   description: A small, black manual. Its a book on the basics of windows.
   components:
   - type: KnowledgeGrantOnUse
@@ -464,6 +493,7 @@
   parent: BookSkillbook
   id: BookSmokeables
   name: old book
+  suffix: smokeables
   description: A small, black manual. Its got instructions on how to make a blunt inside.
   components:
   - type: KnowledgeGrantOnUse
