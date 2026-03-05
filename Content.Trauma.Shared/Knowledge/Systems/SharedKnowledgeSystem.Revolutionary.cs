@@ -1,0 +1,23 @@
+using Content.Shared.Revolutionary.Components;
+using Robust.Shared.Prototypes;
+
+namespace Content.Trauma.Shared.Knowledge.Systems;
+public abstract partial class SharedKnowledgeSystem
+{
+    private static readonly EntProtoId RevolutionaryKnowledge = "RevolutionaryKnowledge";
+    void InitializeRevolutionaries()
+    {
+        SubscribeLocalEvent<RevolutionaryComponent, ComponentStartup>(OnRevStartup);
+        SubscribeLocalEvent<HeadRevolutionaryComponent, ComponentStartup>(OnHeadRevStartup);
+    }
+
+    private void OnRevStartup(Entity<RevolutionaryComponent> ent, ref ComponentStartup args)
+    {
+        TryAddKnowledgeUnit(ent, (RevolutionaryKnowledge, 26));
+    }
+
+    private void OnHeadRevStartup(Entity<HeadRevolutionaryComponent> ent, ref ComponentStartup args)
+    {
+        TryAddKnowledgeUnit(ent, (RevolutionaryKnowledge, 40));
+    }
+}

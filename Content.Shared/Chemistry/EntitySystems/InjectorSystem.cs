@@ -462,9 +462,7 @@ public sealed partial class InjectorSystem : EntitySystem
     {
         // <Trauma>
         if (TryGetKnowledgeFirstAidFail(user, target, injector))
-        {
             return false;
-        }
         // </Trauma>
 
         if (GetSolutionEnt(injector) is not {} solutionEnt || // Trauma - use GetSolutionEnt

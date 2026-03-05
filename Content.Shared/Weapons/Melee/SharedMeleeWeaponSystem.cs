@@ -1,7 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
-using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;
@@ -588,7 +586,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // For consistency with wide attacks stuff needs damageable.
         if (Deleted(target) ||
             !HasComp<DamageableComponent>(target) ||
-            LightAttackMiss(user, target.Value) || // Trauma
+            LightAttackMiss(user) || // Trauma
             !TryComp(target, out TransformComponent? targetXform)) // Goob edit
         {
             // Leave IsHit set to true, because the only time it's set to false
@@ -708,7 +706,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         var entities = GetEntityList(ev.Entities);
 
         // <Trauma>
-        HeavyAttackMiss(user, out var melee, ref entities);
+        HeavyAttackMiss(user, ref entities);
         // </Trauma>
         if (entities.Count == 0)
         {
@@ -886,7 +884,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         {
             // <Trauma>
             var staminaDamage = component.HeavyStaminaCost * entities.Count;
-            AdjustStaminaDamage(melee, ref staminaDamage);
             // </Trauma>
             // make it not immediate to prevent annoying stamcrits
             _stamina.TakeStaminaDamage(user, staminaDamage, stamina, visual: false, immediate: false);
@@ -1016,7 +1013,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return true; // Trauma - still do the animation
 
         // <Trauma>
-        if (DisarmMiss(user, out var melee))
+        if (DisarmMiss(user))
             return true;
         // </Trauma>
         if (user == target) // Goobstation
@@ -1106,9 +1103,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return true;
         }
 
-        // <Trauma>
-        DisarmExperience(melee, user, target);
-        // </Trauma>
         ShoveOrDisarmPopup(true);
 
         return true;

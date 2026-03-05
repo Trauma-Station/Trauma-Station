@@ -65,3 +65,9 @@ public record struct CanDoSneakAttackEvent(bool CanSneakAttack);
 /// </summary>
 [ByRefEvent]
 public record struct MartialArtDamageModifierEvent(EntityUid User, float Coefficient = 1.0f);
+
+/// <summary>
+///
+/// </summary>
+[ByRefEvent]
+public record struct MissAttackEvent(int Adjust, bool Miss = false);

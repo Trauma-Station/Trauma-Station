@@ -15,15 +15,9 @@ namespace Content.Shared.Revolutionary;
 
 public abstract class SharedRevolutionarySystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
-    // </Trauma>
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedStunSystem _sharedStun = default!;
 
-    // <Trauma>
-    private static readonly EntProtoId RevolutionaryKnowledge = "RevolutionaryKnowledge";
-    // </Trauma>
     public override void Initialize()
     {
         base.Initialize();
@@ -104,14 +98,12 @@ public abstract class SharedRevolutionarySystem : EntitySystem
         var revComps = AllEntityQuery<RevolutionaryComponent>();
         while (revComps.MoveNext(out var uid, out var comp))
         {
-            _knowledge.TryAddKnowledgeUnit(uid, (RevolutionaryKnowledge, 20)); // Trauma - Knowledge
             Dirty(uid, comp);
         }
 
         var headRevComps = AllEntityQuery<HeadRevolutionaryComponent>();
         while (headRevComps.MoveNext(out var uid, out var comp))
         {
-            _knowledge.TryAddKnowledgeUnit(uid, (RevolutionaryKnowledge, 50)); // Trauma - Knowledge
             Dirty(uid, comp);
         }
     }
