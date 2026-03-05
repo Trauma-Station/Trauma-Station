@@ -33,5 +33,5 @@ public sealed partial class QualityComponent : Component
     /// Stores the quality coefficient used in calculations.
     /// </summary>
     [DataField]
-    public float QualityCoefficent = 1;
+    public float QualityCoefficent = 1.3f;
 }

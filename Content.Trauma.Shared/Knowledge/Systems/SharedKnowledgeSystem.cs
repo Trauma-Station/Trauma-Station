@@ -173,7 +173,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     private void OnAddExperience(Entity<KnowledgeHolderComponent> ent, ref AddExperienceEvent args)
     {
-        if (GetContainer(ent) is not {} brain)
+        if (GetContainer(ent) is not { } brain)
             return;
 
         AddExperience(brain, args.KnowledgeType, args.Experience, popup: args.Popup);
@@ -181,7 +181,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public void AddExperience(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int xp, bool popup = true)
     {
-        if (GetKnowledge(ent, id) is not {} unit)
+        if (GetKnowledge(ent, id) is not { } unit)
         {
             // if you don't have it, you have a small change to learn it when gaining some xp
             if (SharedRandomExtensions.PredictedProb(_timing, _learnChance, GetNetEntity(ent)))
@@ -189,7 +189,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return;
         }
 
-        if (ent.Comp.Holder is {} holder)
+        if (ent.Comp.Holder is { } holder)
         {
             AddExperience(unit, holder, xp);
 
@@ -223,30 +223,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (ent.Comp.Experience < ent.Comp.ExperienceCost || ent.Comp.Level >= 100)
             return false;
 
-        // Set a predicted random seed so that the dice are predicted between client/server.
-        _seed = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
-        Log.Error($"Roll counter {ent.Comp.Experience / ent.Comp.ExperienceCost}");
-        if (ent.Comp.OnSleep)
-        {
-            if (_mobState.IsCritical(target))
-            {
-                rollResult = RollPenetrating(ent);
-                if (!(rollResult.Item2))
-                    return false;
-                ent.Comp.Level += rollResult.Item1;
-                _popup.PopupClient(Loc.GetString("knowledge-zenkai-boost"), target, target, PopupType.Large);
-                _damageable.ClearAllDamage(target.Owner);
-            }
-            else if (HasComp<SleepingComponent>(target))
-            {
-                rollResult = RollPenetrating(ent);
-                if (!(rollResult.Item2))
-                    return false;
-            }
-            else
-                return false;
-        }
-
         // This should roll as many times as experience cached experience.
         int timesToRoll = ent.Comp.Experience / ent.Comp.ExperienceCost;
         ent.Comp.Experience -= ent.Comp.ExperienceCost * timesToRoll;
@@ -265,12 +241,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (rollResult.Item2)
             _popup.PopupClient(Loc.GetString("knowledge-level-epiphany", ("knowledge", Name(ent))), target, target, PopupType.Medium);
 
-        if (getMastery != GetMastery(ent) && !rollResult.Item2)
+        if (getMastery != GetMastery(ent.Comp.Level) && !rollResult.Item2)
         {
             _popup.PopupClient(Loc.GetString("knowledge-level-up-popup", ("knowledge", Name(ent)), ("mastery", GetMasteryString(ent).ToLower())), target, target, PopupType.Medium);
         }
         else if (!rollResult.Item2)
-            _popup.PopupClient(Loc.GetString("knowledge-level-more", ("knowledge", KnowledgeString(ent))), target, target, PopupType.Medium);
+            _popup.PopupClient(Loc.GetString("knowledge-level-more", ("knowledge", Name(ent))), target, target, PopupType.Medium);
 
         return true;
     }
@@ -577,7 +553,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     }
 
     public override float SharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f)
-        => SharpCurve(knowledge.Comp.Level, offset, inverseScale);
+        => SharpCurve(knowledge.Comp.Level + knowledge.Comp.TemporaryLevel, offset, inverseScale);
 
     public float SharpCurve(int level, int offset = 0, float inverseScale = 100f)
     {
