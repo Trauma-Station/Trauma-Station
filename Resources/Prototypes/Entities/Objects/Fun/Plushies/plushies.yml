@@ -744,8 +744,6 @@
     state: ratvar
   - type: Item
     size: Normal
-    sprite: Mobs/Demons/ratvar.rsi
-    state: ratvar
   - type: MultiHandedItem
   - type: Clothing
     quickEquip: false
@@ -767,8 +765,6 @@
     state: narsie
   - type: Item
     size: Normal
-    sprite: Mobs/Demons/narsie.rsi
-    state: narsie
   - type: MultiHandedItem
   - type: Clothing
     quickEquip: false
