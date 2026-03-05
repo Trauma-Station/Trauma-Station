@@ -7,7 +7,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 
-namespace Content.Trauma.Client.Knowledge.Tabs;
+namespace Content.Trauma.Client.Knowledge.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class KnowledgeTab : Control
@@ -28,24 +28,19 @@ public sealed partial class KnowledgeTab : Control
     /// <summary>
     /// Updates the specificied knowledge tab with the player's current martial arts knowledge.
     /// </summary>
-    /// <param name="player"></param>
-    /// <param name="knowledgeTab"></param>
-    public void UpdateKnowledgeTab(EntityUid? player, KnowledgeTab knowledgeTab)
+    public void UpdateKnowledgeTab(EntityUid player)
     {
-        if (player is not { } truePlayer)
-            return;
+        TabContainer.SetTabTitle(this, Loc.GetString("trauma-knowledge-title"));
 
-        TabContainer.SetTabTitle(knowledgeTab, Loc.GetString("trauma-knowledge-title"));
+        KnowledgeBox.RemoveAllChildren();
+        KnowledgePlaceholder.Visible = true;
 
-        knowledgeTab.KnowledgeBox.RemoveAllChildren();
-        knowledgeTab.KnowledgePlaceholder.Visible = true;
-
-        var doohickeys = _knowledge.GrabAllKnowledge(truePlayer);
+        var doohickeys = _knowledge.GrabAllKnowledge(player);
         if (doohickeys == null)
             return;
 
-        knowledgeTab.KnowledgePlaceholder.Visible = false;
-        knowledgeTab.KnowledgeBox.SeparationOverride = 10;
+        KnowledgePlaceholder.Visible = false;
+        KnowledgeBox.SeparationOverride = 10;
         foreach (var (groupId, conditions) in doohickeys)
         {
             var boxContainer = new BoxContainer
@@ -87,7 +82,7 @@ public sealed partial class KnowledgeTab : Control
             box.AddChild(masteryText);
             boxContainer.AddChild(textRect);
             boxContainer.AddChild(box);
-            knowledgeTab.KnowledgeBox.AddChild(boxContainer);
+            KnowledgeBox.AddChild(boxContainer);
         }
     }
 }

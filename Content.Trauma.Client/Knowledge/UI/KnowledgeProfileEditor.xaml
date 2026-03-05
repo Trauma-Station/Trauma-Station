@@ -1,0 +1,17 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<BoxContainer xmlns="https://spacestation14.io"
+		Orientation="Vertical">
+	<BoxContainer Orientation="Horizontal" Align="Center" HorizontalExpand="True">
+    	<Label Name="PointsLabel"/>
+	    <Button Name="SaveButton" Text="Save!"/>
+	</BoxContainer>
+    <ScrollContainer VerticalExpand="True">
+    	<Label Text="{Loc 'knowledge-editor-selected'}"/>
+	    <BoxContainer Name="EnabledSkills"/>
+    	<Label Text="{Loc 'knowledge-editor-available'}"/>
+	    <ItemList Name="AvailableSkills"/>
+	</ScrollContainer>
+</BoxContainer>
