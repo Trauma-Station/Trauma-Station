@@ -1,0 +1,24 @@
+- type: entity
+  abstract: true
+  parent: BaseAreaStation
+  id: BaseAreaEngineering
+  name: engineering
+  components:
+  - type: DepartmentArea
+    department: Engineering
+
+- type: entity
+  parent: BaseAreaEngineering
+  id: AreaEngineering
+  name: engineering
+  components:
+  - type: Sprite
+    state: engie
+
+- type: entity
+  parent: BaseAreaEngineering
+  id: AreaAtmos
+  name: atmos
+  components:
+  - type: Sprite
+    state: atmos
