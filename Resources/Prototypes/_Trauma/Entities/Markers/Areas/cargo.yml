@@ -14,3 +14,11 @@
   components:
   - type: Sprite
     state: cargo_bay
+
+- type: entity
+  parent: BaseAreaCargo
+  id: AreaSalvage
+  name: salv
+  components:
+  - type: Sprite
+    state: salv

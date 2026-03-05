@@ -30,3 +30,35 @@
   components:
   - type: Sprite
     state: fitness
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaCourtRoom
+  name: court room
+  components:
+  - type: Sprite
+    state: courtroom
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaTheatre
+  name: theatre
+  components:
+  - type: Sprite
+    state: theatre
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaJanitor
+  name: janitor
+  components:
+  - type: Sprite
+    state: janitor
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaChapel
+  name: chapel
+  components:
+  - type: Sprite
+    state: chapel

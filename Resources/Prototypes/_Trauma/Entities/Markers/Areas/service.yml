@@ -39,43 +39,11 @@
 
 - type: entity
   parent: BaseAreaService
-  id: AreaJanitor
-  name: janitor
-  components:
-  - type: Sprite
-    state: janitor
-
-- type: entity
-  parent: BaseAreaService
-  id: AreaChapel
-  name: chapel
-  components:
-  - type: Sprite
-    state: chapel
-
-- type: entity
-  parent: BaseAreaService
   id: AreaBarber
   name: barber
   components:
   - type: Sprite
     state: barber
-
-- type: entity
-  parent: BaseAreaService
-  id: AreaCourtRoom
-  name: court room
-  components:
-  - type: Sprite
-    state: courtroom
-
-- type: entity
-  parent: BaseAreaService
-  id: AreaTheatre
-  name: theatre
-  components:
-  - type: Sprite
-    state: theatre
 
 - type: entity
   parent: BaseAreaService

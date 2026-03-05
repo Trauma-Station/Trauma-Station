@@ -26,7 +26,7 @@
 - type: entity
   parent: BaseAreaCommand
   id: AreaOfficeCmo
-  name: Cmo office
+  name: CMO office
   components:
   - type: Sprite
     state: cmo_office
@@ -34,7 +34,7 @@
 - type: entity
   parent: BaseAreaCommand
   id: AreaOfficeHop
-  name: Hop
+  name: HOP
   components:
   - type: Sprite
     state: hop_office
@@ -42,7 +42,7 @@
 - type: entity
   parent: BaseAreaCommand
   id: AreaOfficeHos
-  name: Hos office
+  name: HOS office
   components:
   - type: Sprite
     state: hos_office
@@ -50,7 +50,7 @@
 - type: entity
   parent: BaseAreaCommand
   id: AreaOfficeRd
-  name: Rd office
+  name: RD office
   components:
   - type: Sprite
     state: rd_office
@@ -58,7 +58,7 @@
 - type: entity
   parent: BaseAreaCommand
   id: AreaOfficeQm
-  name: Qm office
+  name: QM office
   components:
   - type: Sprite
     state: qm_office
@@ -74,7 +74,7 @@
 - type: entity
   parent: BaseAreaCommand
   id: AreaAi
-  name: ai
+  name: AI
   components:
   - type: Sprite
     state: ai
@@ -82,7 +82,7 @@
 - type: entity
   parent: BaseAreaCommand
   id: AreaAiUpload
-  name: ai upload
+  name: AI upload
   components:
   - type: Sprite
     state: ai_upload
