@@ -15,3 +15,12 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsRobotics ]
+
+- type: entity
+  parent: WindoorServiceLocked
+  id: WindoorLibraryLocked
+  suffix: Library, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsLibrary ]

@@ -133,6 +133,7 @@
     outerClothing: ClothingOuterCoatAbductor
     back: ClothingBackpackDuffelAbductor
     pocket1: Silencer # Trauma - swapped silencer and gizmo
+    pocket2: RadioJammer # Trauma
     suitstorage: WeaponDecloner
     id: AgentIDCard
 
