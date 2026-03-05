@@ -52,7 +52,7 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<NoGunComponent, ProjectileReflectAttemptEvent>(OnProjectileHitMartialArt);
         SubscribeLocalEvent<PerformMartialArtComboEvent>(OnComboActionClicked);
 
-        SubscribeNetworkEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
+        SubscribeAllEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
     }
 
     private void OnMartialArtAdded(Entity<MartialArtsKnowledgeComponent> ent, ref KnowledgeAddedEvent args)
@@ -162,7 +162,7 @@ public abstract partial class SharedKnowledgeSystem
         }
         if (args.Value > 0 && _mobState.IsAlive(ent))
         {
-            AddExperience(brain, AthleticsKnowledge, Math.Min((int) args.Value / 5, 10), user: ent.Owner);
+            AddExperience(brain, AthleticsKnowledge, Math.Min((int) args.Value / 5, 10));
         }
     }
 

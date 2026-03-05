@@ -150,7 +150,7 @@ public abstract partial class SharedKnowledgeSystem
 
         // We add the intrinsically known languages first so other systems can manipulate them easily
         var lang = args.Language;
-        EnsureKnowledge(brain, LanguageUnit(args.Language), 26, predicted: false);
+        EnsureKnowledge(brain, LanguageUnit(args.Language), 26);
 
         UpdateEntityLanguages(ent);
     }

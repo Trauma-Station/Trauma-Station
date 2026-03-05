@@ -38,7 +38,8 @@ public sealed class KnowledgeGrantSystem : EntitySystem
 
     private void OnKnowledgeGrantInit(Entity<KnowledgeGrantComponent> ent, ref MapInitEvent args)
     {
-        _knowledge.AddKnowledgeUnits(ent.Owner, ent.Comp.Skills, user: ent.Owner);
+        // don't need popups for default knowledge
+        _knowledge.AddKnowledgeUnits(ent.Owner, ent.Comp.Skills, popup: false);
         RemComp(ent.Owner, ent.Comp);
     }
 
@@ -89,7 +90,7 @@ public sealed class KnowledgeGrantSystem : EntitySystem
 
         foreach (var (id, xp) in ent.Comp.Experience)
         {
-            if (_knowledge.EnsureKnowledge(brain, id, user: user) is not {} skill)
+            if (_knowledge.EnsureKnowledge(brain, id, popup: true) is not {} skill)
                 continue;
 
             if (!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (skill.Comp.Level < skillCap || skillCap < 0))

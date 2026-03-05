@@ -5,6 +5,8 @@
   components:
   - type: Knowledge
     experienceCost: 5
+  - type: ThrowInsertKnowledge
+    inverseScale: 35 # almost guaranteed landing for roundstart janitors, dunk that can
 
 - type: entity
   parent: BaseScientificKnowledge

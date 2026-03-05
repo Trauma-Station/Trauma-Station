@@ -21,9 +21,12 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract void ClearKnowledge(EntityUid target, bool deleteAll);
 
     /// <summary>
-    /// Gets the mastery level of a knowledge unit's component.
+    /// Gets the mastery level for a knowledge level.
     /// </summary>
-    public abstract int GetMastery(KnowledgeComponent comp);
+    public abstract int GetMastery(int level);
+
+    public int GetMastery(KnowledgeComponent comp)
+        => GetMastery(comp.Level);
 
     /// <summary>
     /// Gets the mastery level of a knowledge unit's entity.
@@ -39,11 +42,6 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     /// Curve scale that determines some functionality. Goes from 0 to 1.
     /// </summary>
     public abstract float SharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f);
-
-    /// <summary>
-    /// Inverse curve scale that determines some functionality. Goes from 1 to 0.
-    /// </summary>
-    public abstract float InverseSharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f);
 
     /// <summary>
     /// Runs quality instructions for an item outside of the construction loop, such as the bullets for the shotgun ammo.

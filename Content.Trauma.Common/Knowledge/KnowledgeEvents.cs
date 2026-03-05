@@ -22,11 +22,9 @@ public record struct ConstructionGetGroupsEvent(Dictionary<EntProtoId, int> Grou
 
 /// <summary>
 /// Called in order to add experience to a knowledge holder. Simply pass in a EntProtoId of the knowledge and the amount of exp you want to add.
-/// User will default to the knowledge holder.
-/// Pass user if e.g. you punch someone and the target gains a level, you are the user. The target can't predict any popups from it.
 /// </summary>
 [ByRefEvent]
-public record struct AddExperienceEvent(EntProtoId KnowledgeType, int Experience, EntityUid? User = null);
+public record struct AddExperienceEvent(EntProtoId KnowledgeType, int Experience, bool Popup = true);
 
 /// <summary>
 /// Raised to let the client update XP ui stuff.

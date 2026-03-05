@@ -181,16 +181,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (GetContainer(ent) is not {} brain)
             return;
 
-        AddExperience(brain, args.KnowledgeType, args.Experience, user: args.User ?? ent.Owner);
+        AddExperience(brain, args.KnowledgeType, args.Experience, popup: args.Popup);
     }
 
-    public void AddExperience(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int xp, bool predicted = true)
+    public void AddExperience(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int xp, bool popup = true)
     {
         if (GetKnowledge(ent, id) is not {} unit)
         {
             // if you don't have it, you have a small change to learn it when gaining some xp
             if (SharedRandomExtensions.PredictedProb(_timing, _learnChance, GetNetEntity(ent)))
-                EnsureKnowledge(ent, id, 0, predicted);
+                EnsureKnowledge(ent, id, 0, popup);
             return;
         }
 
@@ -224,7 +224,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         var getMastery = GetMastery(ent.Comp);
         (int, bool) rollResult = (0, false);
 
-        if (ent.Comp.Experience < ent.Comp.ExperienceCost || ent.Comp.Level >= 100))
+        if (ent.Comp.Experience < ent.Comp.ExperienceCost || ent.Comp.Level >= 100)
             return false;
 
         int timesToRoll = ent.Comp.Experience / ent.Comp.ExperienceCost;
@@ -305,7 +305,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// <returns>
     /// Null if spawning it fails.
     /// </returns>
-    public Entity<KnowledgeComponent>? EnsureKnowledge(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int level = 0, bool predicted = true)
+    public Entity<KnowledgeComponent>? EnsureKnowledge(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int level = 0, bool popup = true)
     {
         if (GetKnowledge(ent, id) is {} existing)
         {
@@ -337,25 +337,25 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         var ev = new KnowledgeAddedEvent(ent, holder);
         RaiseLocalEvent(unit, ref ev);
 
-        var msg = Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Name(unit)));
-        if (predicted)
-            _popup.PopupClient(msg, holder, holder);
-        else if (_net.IsServer)
-            _popup.PopupEntity(msg, holder, holder);
+        if (popup)
+        {
+            var msg = Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Name(unit)));
+            _popup.PopupPredicted(msg, holder, holder);
+        }
         return (unit, comp);
     }
 
     /// <summary>
     /// Adds a list of knowledge units to a knowledge container.
     /// </summary>
-    public void AddKnowledgeUnits(EntityUid target, Dictionary<EntProtoId, int> knowledgeList, bool predicted = true)
+    public void AddKnowledgeUnits(EntityUid target, Dictionary<EntProtoId, int> knowledgeList, bool popup = true)
     {
         if (GetContainer(target) is not {} ent)
             return;
 
         foreach (var (id, level) in knowledgeList)
         {
-            EnsureKnowledge(ent, id, level, predicted);
+            EnsureKnowledge(ent, id, level, popup);
         }
 
         var updateEv = new UpdateExperienceEvent();
@@ -501,6 +501,20 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         return (ent, _containerQuery.Comp(ent));
     }
 
+    /// <summary>
+    /// Relays an event to all knowledge entities a mob has.
+    /// </summary>
+    public void RelayEvent<T>(Entity<KnowledgeHolderComponent> ent, ref T args) where T: notnull
+    {
+        if (GetContainer(ent)?.Comp.Container is not {} container)
+            return;
+
+        foreach (var unit in container.ContainedEntities)
+        {
+            RaiseLocalEvent(unit, ref args);
+        }
+    }
+
     public string GetMasteryString(Entity<KnowledgeComponent> ent)
         => ent.Comp.Level switch
         {
@@ -512,8 +526,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             _ => Loc.GetString("knowledge-mastery-unskilled"),
         };
 
-    public override int GetMastery(KnowledgeComponent comp)
-        => comp.Level switch
+    public override int GetMastery(int level)
+        => level switch
         {
             >= 88 => 5,
             >= 76 => 4,
@@ -524,10 +538,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         };
 
     public override int GetMastery(EntityUid uid)
-        => _query.TryComp(uid, out var comp) ? GetMastery(comp) : 0;
+        => GetMastery(GetLevel(uid));
 
-    public override int GetInverseMastery(int number)
-        => number switch
+    /// <summary>
+    /// Get the level of a knowledge entity, defaulting to 0 for bad entities.
+    /// </summary>
+    public int GetLevel(EntityUid uid)
+        => _query.CompOrNull(uid)?.Level ?? 0;
+
+    public override int GetInverseMastery(int mastery)
+        => mastery switch
         {
             >= 5 => 88,
             >= 4 => 76,
@@ -538,13 +558,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         };
 
     public override float SharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f)
-    {
-        return ((float) (knowledge.Comp.Level + offset) / inverseScale) * ((float) (knowledge.Comp.Level + offset) / inverseScale);
-    }
+        => SharpCurve(knowledge.Comp.Level, offset, inverseScale);
 
-    public override float InverseSharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f)
+    public float SharpCurve(int level, int offset = 0, float inverseScale = 100f)
     {
-        return ((float) (offset - knowledge.Comp.Level) / inverseScale) * ((float) (offset - knowledge.Comp.Level) / inverseScale);
+        // ((level + offset)/inverseScale)^2
+        // for level: [0, 100] and inverseScale = 100, this is just the graph of x^2 on [0, 1] :)
+        var linear = (float) (level + offset) / inverseScale;
+        return linear * linear;
     }
 
     public (int, bool) RollPenetrating(EntityUid uid, int sides, bool didCritical = false)
