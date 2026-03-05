@@ -48,10 +48,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override void Initialize()
     {
         base.Initialize();
+        InitializeConstruction();
+        InitializeInjector();
         InitializeLanguage();
         InitializeMartialArts();
         InitializeOnWear();
-        InitializeConstruction();
         InitializeQuality();
         InitializeShooting();
 
@@ -480,7 +481,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not { } ent)
             return null;
 
-        return (ent, _containerQuery.Comp(ent));
+        if (_containerQuery.CompOrNull(ent) is not { } brain)
+            return null;
+
+        return (ent, brain);
     }
 
     /// <summary>
