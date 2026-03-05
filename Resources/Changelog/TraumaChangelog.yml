@@ -3593,3 +3593,33 @@ Entries:
   id: 425
   time: '2026-03-04T21:54:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1017
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed monkeys/kobolds having 3 hands.
+  id: 426
+  time: '2026-03-05T08:46:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1026
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed revs radio jammer.
+  id: 427
+  time: '2026-03-05T08:50:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1027
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to read paper and CQC manuals while blind.
+  id: 428
+  time: '2026-03-05T09:40:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1028
+- author: NoElkaTheGod, deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Thief no longer has objectives, it's a freeform antag now, steal whatever
+      you want.
+  id: 429
+  time: '2026-03-05T14:42:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/995
