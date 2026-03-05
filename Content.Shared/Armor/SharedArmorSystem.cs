@@ -113,9 +113,9 @@ public abstract class SharedArmorSystem : EntitySystem
             {
                 coverageText.Append(Loc.GetString("armor-coverage-type-" + coveredParts[i].ToString().ToLower()));
 
-                if (i == coverage.Count - 1) continue; // Last element, no connector
+                if (i >= coveredParts.Count - 1) continue; // Last element, no connector
                 coverageText.Append(", ");
-                if (i == coverage.Count - 2) // Second-to-last element, also add "and " so it reads nicer
+                if (i == coveredParts.Count - 2) // Second-to-last element, also add "and " so it reads nicer
                     coverageText.Append(Loc.GetString("armor-coverage-end-connector") + ' ');
             }
 
