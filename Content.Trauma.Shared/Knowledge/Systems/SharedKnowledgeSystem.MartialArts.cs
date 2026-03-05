@@ -181,7 +181,9 @@ public abstract partial class SharedKnowledgeSystem
     private void OnDamageChanged(Entity<KnowledgeHolderComponent> ent, ref DamageChangedEvent args)
     {
         // ignore healing or things like radiation
-        if (args.DamageDelta is not {} delta || !args.DamageIncreased || !args.InterruptsDoAfters)
+        if (args.DamageDelta is not {} delta || !args.DamageIncreased || !args.InterruptsDoAfters ||
+            // pvs can remove the brain sometimes so dont get trolled
+            _timing.ApplyingState || !_timing.IsFirstTimePredicted)
             return;
 
         if (_mobState.IsAlive(ent))
