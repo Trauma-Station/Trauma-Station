@@ -255,9 +255,7 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
             return;
         }
 
-        var audio = _audio.PlayPvs(ent.Comp.HandUpSoundLocal, ent.Owner);
-        if (audio != null)
-            ent.Comp.SoundEntity = audio.Value.Entity;
+        ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.HandUpSoundLocal, ent.Owner, ent.Owner, AudioParams.Default.WithMaxDistance(2.5f))?.Entity;
 
         ent.Comp.ConnectedPhone = null;
         ent.Comp.Connected = false;
@@ -291,7 +289,6 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
                     otherPhone.SoundEntity = _audio.Stop(otherPhone.SoundEntity);
 
                 otherPhone.ConnectedPhone = null;
-                otherPhone.Engaged = false;
             }
         }
 

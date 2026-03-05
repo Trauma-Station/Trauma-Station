@@ -36,3 +36,19 @@
   components:
   - type: Sprite
     state: kitchen_cold
+
+- type: entity
+  parent: BaseAreaService
+  id: AreaBarber
+  name: barber
+  components:
+  - type: Sprite
+    state: barber
+
+- type: entity
+  parent: BaseAreaService
+  id: AreaBar
+  name: bar
+  components:
+  - type: Sprite
+    state: bar
