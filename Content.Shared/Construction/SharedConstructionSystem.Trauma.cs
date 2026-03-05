@@ -37,7 +37,7 @@ public abstract partial class SharedConstructionSystem
             return true;
         if (log)
             Log.Error($"User {ToPrettyString(user)} tried to start a construction {prototype.ID} that it doesn't have required knowledge for!");
-        retunr false;
+        return false;
     }
 
     public bool CheckConstructionGroups(Dictionary<EntProtoId, int> skills, ConstructionPrototype prototype)
