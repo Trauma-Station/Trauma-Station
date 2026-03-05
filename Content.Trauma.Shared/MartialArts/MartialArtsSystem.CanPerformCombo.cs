@@ -80,14 +80,6 @@ public partial class MartialArtsSystem
                 ent.Comp.LastAttacks.RemoveRange(0, difference);
         }
         CheckCombo(ent, ref args);
-        if (targetState.CurrentState == MobState.Alive && args.Type != ComboAttackType.Hug)
-        {
-            if (Prototype(ent.Owner)?.ID is { } prototypeId)
-            {
-                var ev = new AddExperienceEvent(prototypeId, 1);
-                RaiseLocalEvent(args.Performer, ref ev);
-            }
-        }
         RaiseLocalEvent(ent, ref afterEv);
     }
 
@@ -138,7 +130,7 @@ public partial class MartialArtsSystem
 
         ent.Comp.LastAttacks.Clear();
 
-        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && !martialArtsComp.Blocked && _mobState.IsAlive(target))
+        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && !martialArtsComp.Blocked && _mobState.IsAlive(target) && proto.GiveExperience)
         {
             var prototypeId = Prototype(ent)?.ID;
             if (prototypeId is { })

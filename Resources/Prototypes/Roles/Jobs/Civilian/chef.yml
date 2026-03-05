@@ -29,6 +29,8 @@
       - type: KnowledgeGrant
         skills:
           MartialArtCQCChef: 26
+          MeleeKnowledge: 26
+          CookingKnowledge: 26
       # </Trauma>
   - !type:AddImplantSpecial # Chefs speak space italian
     implants: [ SpaceItalianTranslatorImplant ]

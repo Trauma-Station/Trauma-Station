@@ -297,9 +297,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (user != uid) // Goobstation
             RaiseLocalEvent(user, ref ev);
 
-        // <Trauma>
-        AdjustAttackRate(user, ref ev);
-        // </Trauma>
         return ev.Rate * ev.Multipliers;
     }
 
@@ -583,6 +580,11 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return;
         // Goobstation end
 
+        // <Trauma>
+        if (target is { })
+            AddExperienceLight(target.Value, user);
+        // </Trauma>
+
         // For consistency with wide attacks stuff needs damageable.
         if (Deleted(target) ||
             !HasComp<DamageableComponent>(target) ||
@@ -629,9 +631,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (hitEvent.Handled)
             return;
 
-        // <Trauma>
-        AddExperienceLight(target.Value);
-        // </Trauma>
         var targets = new List<EntityUid>(1)
         {
             target.Value

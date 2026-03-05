@@ -86,6 +86,7 @@
   - Disarm
   userEffects:
   - !type:SetStanding
+    standing: true
     force: true
   giveExperience: false
   levelRequired: 10

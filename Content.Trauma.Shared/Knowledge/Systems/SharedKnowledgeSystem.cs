@@ -16,7 +16,6 @@ using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
@@ -152,7 +151,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public void ExperienceUpdate(Entity<KnowledgeComponent> ent, Entity<KnowledgeHolderComponent> target, ref AddExperienceEvent args)
     {
-        if (_timing.CurTime < ent.Comp.TimeToNextExperience)
+        if (_timing.CurTime < ent.Comp.TimeToNextExperience || ent.Comp.Level >= 100)
             return;
 
         ent.Comp.TimeToNextExperience = _timing.CurTime + TimeSpan.FromSeconds(1);
@@ -172,9 +171,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         var getMastery = GetMastery(ent);
         (int, bool) rollResult = (0, false);
 
-        if (!(ent.Comp.Experience >= ent.Comp.ExperienceCost && ent.Comp.Level < 100))
+        // If we don't have enough experience or level is max, return.
+        if (ent.Comp.Experience < ent.Comp.ExperienceCost || ent.Comp.Level >= 100)
             return false;
 
+        // Set a predicted random seed so that the dice are predicted between client/server.
+        _seed = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
+        Log.Error($"Roll counter {ent.Comp.Experience / ent.Comp.ExperienceCost}");
         if (ent.Comp.OnSleep)
         {
             if (_mobState.IsCritical(target))
@@ -195,6 +198,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             else
                 return false;
         }
+
+        // This should roll as many times as experience cached experience.
         int timesToRoll = ent.Comp.Experience / ent.Comp.ExperienceCost;
         ent.Comp.Experience -= ent.Comp.ExperienceCost * timesToRoll;
         (int, bool) rollInnard;
@@ -203,39 +208,26 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             rollInnard = RollPenetrating(ent);
             rollResult = (rollInnard.Item1, rollInnard.Item2 || rollResult.Item2);
             ent.Comp.Level += rollResult.Item1;
-            if (rollInnard.Item2)
-            {
-                timesToRoll++;
-            }
         }
+
+        if (ent.Comp.Level > 100) // Ensures Level doesn't go above 100.
+            ent.Comp.Level = 100;
+
+        // Controls client popup whatnot when you level up.
         if (rollResult.Item2)
             _popup.PopupClient(Loc.GetString("knowledge-level-epiphany", ("knowledge", KnowledgeString(ent))), target, target, PopupType.Medium);
-
-        if (ent.Comp.Level > 100)
-            ent.Comp.Level = 100;
 
         if (getMastery != GetMastery(ent) && !rollResult.Item2)
         {
             var knowledgePrototype = Prototype(ent)?.ID;
             _popup.PopupClient(Loc.GetString("knowledge-level-up-popup", ("knowledge", KnowledgeString(ent)), ("mastery", GetMasteryString(ent).ToLower())), target, target, PopupType.Medium);
         }
+        else if (!rollResult.Item2)
+            _popup.PopupClient(Loc.GetString("knowledge-level-more", ("knowledge", KnowledgeString(ent))), target, target, PopupType.Medium);
 
         Dirty(ent);
         Dirty(target);
         return true;
-    }
-
-    private int DiceDictionary(Entity<KnowledgeComponent> ent, int shift = 0)
-    {
-        return (GetMastery(ent) + shift) switch
-        {
-            >= 5 => 3,
-            >= 4 => 4,
-            >= 3 => 6,
-            >= 2 => 8,
-            >= 1 => 12,
-            _ => 20,
-        };
     }
 
     public override (string Category, KnowledgeInfo Info) GetKnowledgeInfo(Entity<KnowledgeComponent> ent)
@@ -651,6 +643,19 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         };
     }
 
+    private int DiceDictionary(Entity<KnowledgeComponent> ent, int shift = 0)
+    {
+        return (GetMastery(ent) + shift) switch
+        {
+            >= 5 => 3,
+            >= 4 => 4,
+            >= 3 => 6,
+            >= 2 => 8,
+            >= 1 => 12,
+            _ => 12,
+        };
+    }
+
     public override float SharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f)
     {
         return ((float) (knowledge.Comp.Level + offset) / inverseScale) * ((float) (knowledge.Comp.Level + offset) / inverseScale);
@@ -669,15 +674,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         int currentRoll = _seed.Next(1, sides + 1);
         int total = currentRoll;
 
-        Log.Error($"Rolling: {currentRoll}, max {sides}, {isCritical}");
         while (currentRoll == sides && penetratingRolls < 10)
         {
-            penetratingRolls++;
-            sides = DiceDictionary(ent, penetratingRolls);
+            sides = DiceDictionary(ent, penetratingRolls / 2);
             currentRoll = _seed.Next(1, sides + 1);
             total += currentRoll - 1;
             isCritical = true;
-            Log.Error($"Rolling pen: {currentRoll}, max {sides}, {isCritical}");
+            penetratingRolls++;
         }
 
         return (total, isCritical);

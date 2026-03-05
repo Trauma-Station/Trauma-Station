@@ -65,9 +65,3 @@ public record struct CanDoSneakAttackEvent(bool CanSneakAttack);
 /// </summary>
 [ByRefEvent]
 public record struct MartialArtDamageModifierEvent(EntityUid User, float Coefficient = 1.0f);
-
-/// <summary>
-/// Called in order to invoke speed modifiers for martial arts. Call on the art itself.
-/// </summary>
-[ByRefEvent]
-public record struct MartialArtSpeedModifierEvent(EntityUid User, float Coefficient = 1.0f);

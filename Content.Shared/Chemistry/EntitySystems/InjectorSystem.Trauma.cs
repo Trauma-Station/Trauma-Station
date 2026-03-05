@@ -96,38 +96,42 @@ public sealed partial class InjectorSystem
     /// <param name="user"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    private bool TryGetKnowledgeFirstAidFail(EntityUid user, EntityUid target)
+    private bool TryGetKnowledgeFirstAidFail(EntityUid user, EntityUid target, EntityUid injector)
     {
-        if (HasComp<KnowledgeHolderComponent>(user) && HasComp<MobStateComponent>(target) && !_mobState.IsDead(target))
+        // This codes only gonna run if the target is not dead and the user has a knowledge component and is not using something like a medipen.
+        if (HasComp<EasyToUseComponent>(injector) || !HasComp<KnowledgeHolderComponent>(user) || !HasComp<MobStateComponent>(target) || _mobState.IsDead(target))
+            return false;
+
+        var evFirstAid = new AddExperienceEvent(FirstAidKnowledge, 1);
+        RaiseLocalEvent(user, ref evFirstAid);
+
+        if (_knowledge.TryGetKnowledgeUnit(user, FirstAidKnowledge) is { } firstAid)
         {
-            var evFirstAid = new AddExperienceEvent(FirstAidKnowledge, 1);
-            RaiseLocalEvent(user, ref evFirstAid);
+            // No need to roll a random number if we're average in first aid. It's trivial for the user.
+            if (_knowledge.GetMastery(firstAid) > 2)
+                return false;
 
-            if (_knowledge.TryGetKnowledgeUnit(user, FirstAidKnowledge) is { } firstAid)
-            {
-                if (_knowledge.GetMastery(firstAid) > 1)
-                    return false;
-                var seed = new System.Random(SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(user).Id));
-                if (seed.Prob(_knowledge.SharpCurve(firstAid, 0, 26)))
-                    return false;
-            }
+            if (SharedRandomExtensions.PredictedProb(_timing, _knowledge.SharpCurve(firstAid, 0, 26), GetNetEntity(user)))
+                return false;
+        }
 
-            var part = TargetBodyPart.Chest;
-            if (TryComp<TargetingComponent>(user, out var targeting))
-            {
-                part = targeting.Target;
-            }
-            _damageable.TryChangeDamage(target, NeedleDamage, targetPart: part, origin: user);
-            if (user == target)
-            {
-                _popup.PopupClient(Loc.GetString("injection-failed-self", ("target", target), ("user", user), ("part", part)), user, user);
-                return true;
-            }
+        var part = TargetBodyPart.Chest;
+        if (TryComp<TargetingComponent>(user, out var targeting))
+        {
+            part = targeting.Target;
+        }
+
+        _damageable.TryChangeDamage(target, NeedleDamage, targetPart: part, origin: user);
+        if (user == target)
+        {
+            _popup.PopupClient(Loc.GetString("injection-failed-self", ("target", target), ("user", user), ("part", part)), user, user);
+        }
+        else
+        {
             _popup.PopupClient(Loc.GetString("injection-failed-user", ("target", target), ("user", user), ("part", part)), user, user);
             _popup.PopupClient(Loc.GetString("injection-failed-target", ("target", target), ("user", user), ("part", part)), target, target);
-            return true;
         }
-        return false;
+        return true;
     }
 }
 

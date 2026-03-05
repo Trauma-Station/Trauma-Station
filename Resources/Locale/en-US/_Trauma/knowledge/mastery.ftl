@@ -7,8 +7,8 @@ knowledge-mastery-unskilled = Unskilled
 knowledge-level-up-popup = You gained {$mastery} mastery in {$knowledge}!
 knowledge-unit-learned-popup = You have learned {$knowledge}!
 knowledge-unit-forgotten-popup = You have forgotten the secrets of {$knowledge}!
-knowledge-could-not-learn = You cannot learn any more about { $knowledge } from this.
-knowledge-learn-more = You learn more about { $knowledge }.
+knowledge-could-not-learn = There is nothing left to learn from this.
+knowledge-level-more = You learn more about { $knowledge }.
 knowledge-level-epiphany = You have reached a sudden epiphany regarding { $knowledge }!
 
 knowledge-info-description = {$mastery}
@@ -63,6 +63,9 @@ knowledge-LiteracyKnowledge = Literacy
 knowledge-JanitorKnowledge = Janitor
 knowledge-ThrowingKnowledge = Throwing
 knowledge-CraftingKnowledge = Crafting
+knowledge-CookingKnowledge = Cooking
+
+game-hud-open-martial-arts-menu-button-tooltip = Martial Arts Menu
 
 language-curse-pain = You hear bad language!
 
@@ -79,3 +82,4 @@ knowledge-category-prototype-Medical = Medical
 knowledge-category-prototype-Physical = Physical
 knowledge-category-prototype-Intellectual = Intellectual
 knowledge-category-prototype-Scientific = Scientific
+

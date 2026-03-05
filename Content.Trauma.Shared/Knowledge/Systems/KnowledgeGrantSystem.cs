@@ -82,6 +82,7 @@ public sealed class KnowledgeGrantSystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
+        bool hasLearned = false;
         foreach (var skill in ent.Comp.Experience)
         {
             if (_knowledge.TryGetKnowledgeUnit(args.User, skill.Key) is not { } foundSkill)
@@ -90,30 +91,20 @@ public sealed class KnowledgeGrantSystem : EntitySystem
                 continue;
             }
 
-            if (TryComp<KnowledgeComponent>(foundSkill, out var foundComp) && (!ent.Comp.Skills.TryGetValue(skill.Key, out var skillCap) || (foundComp.Level < skillCap || skillCap < 0)))
-            {
-                var ev = new AddExperienceEvent(skill.Key, skill.Value);
-                RaiseLocalEvent(args.User, ref ev);
-            }
-            else
-            {
-                _popup.PopupClient(Loc.GetString("knowledge-could-not-learn", ("knowledge", _knowledge.KnowledgeString(foundSkill))), args.User, args.User, PopupType.Small);
-            }
+            if (!TryComp<KnowledgeComponent>(foundSkill, out var foundComp) || !(!ent.Comp.Skills.TryGetValue(skill.Key, out var skillCap) || (foundComp.Level < skillCap || skillCap < 0)))
+                continue;
+
+            hasLearned |= true;
+            var ev = new AddExperienceEvent(skill.Key, skill.Value);
+            RaiseLocalEvent(args.User, ref ev);
         }
+
         args.Handled = true;
 
-        bool canStillLearn = false;
-        foreach (var skill in ent.Comp.Experience)
-        {
-            if (_knowledge.TryGetKnowledgeUnit(args.User, skill.Key) is { } foundSkill && TryComp<KnowledgeComponent>(foundSkill, out var foundComp) && (!ent.Comp.Skills.TryGetValue(skill.Key, out var skillCap) || (foundComp.Level < skillCap || skillCap < 0)))
-            {
-                canStillLearn = true;
-                break;
-            }
-        }
-
-        if (canStillLearn)
+        if (hasLearned)
             StartLearningDoAfter(args.User, ent);
+        else
+            _popup.PopupClient(Loc.GetString("knowledge-could-not-learn"), args.User, args.User, PopupType.Small);
     }
 }
 

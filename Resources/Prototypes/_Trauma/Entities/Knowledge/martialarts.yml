@@ -57,7 +57,7 @@
     - SpinKick
     - KickUp
   - type: FastSpeed
-    speedModifier: 2
+    speedModifier: 1
 
 - type: entity
   parent: BaseMartialArtsKnowledge

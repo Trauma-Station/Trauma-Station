@@ -23,6 +23,7 @@ public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
 
     private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";
     private static readonly EntProtoId AthleticsKnowledge = "AthleticsKnowledge";
@@ -40,6 +41,7 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeDamageChangedEvent>(OnTakeDamage);
         SubscribeLocalEvent<KnowledgeHolderComponent, CheckGrabOverridesEvent>(CheckGrabStageOverridePass);
         SubscribeLocalEvent<KnowledgeHolderComponent, RefreshMovementSpeedModifiersEvent>(OnSpeedModifier);
+        SubscribeLocalEvent<KnowledgeHolderComponent, GetMeleeAttackRateEvent>(OnMeleeAttackModifier);
         SubscribeLocalEvent<KnowledgeHolderComponent, ProjectileReflectAttemptEvent>(OnProjectileHit);
         SubscribeLocalEvent<NoGunComponent, ProjectileReflectAttemptEvent>(OnProjectileHitMartialArt);
         SubscribeLocalEvent<PerformMartialArtComboEvent>(OnComboActionClicked);
@@ -194,7 +196,7 @@ public abstract partial class SharedKnowledgeSystem
                     actionCompTwo.ComboActions[comboId] = action;
             }
         }
-
+        _speed.RefreshMovementSpeedModifiers(player);
         Dirty(knowledgeEnt);
     }
 
@@ -216,9 +218,21 @@ public abstract partial class SharedKnowledgeSystem
     {
         if (GetActiveMartialArt(ent) is not { } art)
             return;
-        var ev = new MartialArtSpeedModifierEvent(ent.Owner, 1.0f);
+        var ev = new RefreshMovementSpeedModifiersEvent();
+        RaiseLocalEvent(art, ev);
+        args.ModifySpeed(ev.WalkSpeedModifier, ev.SprintSpeedModifier);
+    }
+
+    private void OnMeleeAttackModifier(Entity<KnowledgeHolderComponent> ent, ref GetMeleeAttackRateEvent args)
+    {
+        if (TryGetKnowledgeUnit(ent, MeleeKnowledge) is { } melee && GetMastery(melee) > 2)
+        {
+            args.Multipliers *= 1 + 2 * SharpCurve(melee, -50, 50.0f);
+        }
+        if (GetActiveMartialArt(ent) is not { } art)
+            return;
+        var ev = new GetMeleeAttackRateEvent(args.Weapon, args.Rate, args.Multipliers, args.User);
         RaiseLocalEvent(art, ref ev);
-        args.ModifySpeed(ev.Coefficient);
     }
 
     private void OnProjectileHit(Entity<KnowledgeHolderComponent> ent, ref ProjectileReflectAttemptEvent args)

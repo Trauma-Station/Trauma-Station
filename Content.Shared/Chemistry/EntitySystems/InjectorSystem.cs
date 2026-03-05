@@ -461,7 +461,7 @@ public sealed partial class InjectorSystem : EntitySystem
     private bool TryInject(Entity<InjectorComponent> injector, EntityUid user, EntityUid target, Entity<SolutionComponent> targetSolution, bool asRefill)
     {
         // <Trauma>
-        if (TryGetKnowledgeFirstAidFail(user, target))
+        if (TryGetKnowledgeFirstAidFail(user, target, injector))
         {
             return false;
         }
@@ -599,7 +599,7 @@ public sealed partial class InjectorSystem : EntitySystem
         }
 
         // <Trauma>
-        if (TryGetKnowledgeFirstAidFail(user, target))
+        if (TryGetKnowledgeFirstAidFail(user, target, injector))
         {
             return false;
         }
