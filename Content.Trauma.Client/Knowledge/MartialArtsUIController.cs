@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Gameplay;
+using Content.Client.Popups;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.MenuBar;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
-using Content.Shared.Popups;
 using Content.Trauma.Common.Input;
 using Content.Trauma.Common.Knowledge;
 using Robust.Client.Player;
@@ -25,8 +25,8 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
 {
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IResourceCache _cache = default!;
-    [UISystemDependency] private KnowledgeSystem _knowledge = default!;
-    [UISystemDependency] private SharedPopupSystem _popup = default!;
+    [UISystemDependency] private readonly KnowledgeSystem _knowledge = default!;
+    [UISystemDependency] private readonly PopupSystem _popup = default!;
 
     public const string ButtonName = "MartialArtsButton";
 
