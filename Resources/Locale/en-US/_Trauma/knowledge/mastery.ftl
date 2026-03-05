@@ -82,4 +82,3 @@ knowledge-category-prototype-Medical = Medical
 knowledge-category-prototype-Physical = Physical
 knowledge-category-prototype-Intellectual = Intellectual
 knowledge-category-prototype-Scientific = Scientific
-
