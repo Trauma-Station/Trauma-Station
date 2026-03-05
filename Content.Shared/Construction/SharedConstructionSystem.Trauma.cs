@@ -1,3 +1,4 @@
+using Content.Shared.Construction.Prototypes;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Prototypes;
