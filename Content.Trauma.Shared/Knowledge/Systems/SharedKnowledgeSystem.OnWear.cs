@@ -68,7 +68,7 @@ public abstract partial class SharedKnowledgeSystem
 
     private void RemoveKnowledgeModifiers(EntityUid wearer, KnowledgeGrantOnWearComponent component)
     {
-        if (GetContainer(wearer) is not {} ent)
+        if (TerminatingOrDeleted(wearer) || GetContainer(wearer) is not {} ent)
             return;
 
         // Remove Skills
