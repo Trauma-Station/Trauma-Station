@@ -172,12 +172,12 @@ public abstract partial class SharedKnowledgeSystem
     private void OnDamageChanged(Entity<KnowledgeHolderComponent> ent, ref DamageChangedEvent args)
     {
         // ignore healing or things like radiation
-        if (!args.DamageIncreased || !args.InterruptsDoAfters)
+        if (args.DamageDelta is not {} delta || !args.DamageIncreased || !args.InterruptsDoAfters)
             return;
 
         if (_mobState.IsAlive(ent))
         {
-            var ev = new AddExperienceEvent(ToughnessKnowledge, Math.Min((int) args.DamageDelta.GetTotal() / 5, 10));
+            var ev = new AddExperienceEvent(ToughnessKnowledge, Math.Min((int) delta.GetTotal() / 5, 10));
             RaiseLocalEvent(ent, ref ev);
         }
         if (GetActiveMartialArt(ent) is { } martialArt)

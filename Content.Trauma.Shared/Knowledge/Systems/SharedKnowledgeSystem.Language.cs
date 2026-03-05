@@ -12,7 +12,6 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Popups;
 using Content.Shared.RetractableItemAction;
-using Content.Shared.StatusEffectNew;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Prototypes;
@@ -24,7 +23,6 @@ public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<LanguageKnowledgeComponent> _langQuery;
@@ -241,7 +239,7 @@ public abstract partial class SharedKnowledgeSystem
         comp.LastSpoken = now + TimeSpan.FromSeconds(5);
         Dirty(unit, comp);
 
-        var Modifier = 0f;
+        var modifier = 0f;
         DamageSpecifier damage = default!;
 
         var isCurse = GetMastery(unit.Comp) >= 5 && ContainsCursedWord(args.Message);
@@ -250,7 +248,7 @@ public abstract partial class SharedKnowledgeSystem
         if (isCurse)
         {
             // 0-1s, 0-20 damage
-            var modifier = Math.Max(((float) unit.Comp.Level - 80f) / 20f, 0f);
+            modifier = Math.Max(((float) unit.Comp.Level - 80f) / 20f, 0f);
             damage = new DamageSpecifier();
             damage.DamageDict.Add(Blunt, 20 * modifier);
         }
