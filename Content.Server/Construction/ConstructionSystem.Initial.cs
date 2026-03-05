@@ -351,8 +351,7 @@ namespace Content.Server.Construction
             }
 
             // <Trauma>
-            var userConstructionGroup = AvailableConstructionGroups(user);
-            if (!CheckConstructionKnowledge(user, userConstructionGroup, constructionPrototype, prototype))
+            if (!CheckConstructionKnowledge(user, constructionPrototype))
                 return false;
             // </Trauma>
 
@@ -463,8 +462,7 @@ namespace Content.Server.Construction
             }
 
             // <Trauma>
-            var userConstructionGroup = AvailableConstructionGroups(user);
-            if (!CheckConstructionKnowledge(user, userConstructionGroup, constructionPrototype, prototypeName))
+            if (!CheckConstructionKnowledge(user, constructionPrototype))
             {
                 RaiseNetworkEvent(new AckStructureConstructionMessage(ack), user);
                 return false;
