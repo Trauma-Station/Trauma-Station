@@ -108,11 +108,11 @@ public abstract partial class SharedMeleeWeaponSystem
 
     private void AddExperienceLight(EntityUid user)
     {
-        if (MobState.IsAlive(target))
-        {
-            var evKnowledge = new AddExperienceEvent(MeleeKnowledge, 1);
-            RaiseLocalEvent(user, ref evKnowledge);
-        }
+        if (!MobState.IsAlive(user))
+            return;
+
+        var evKnowledge = new AddExperienceEvent(MeleeKnowledge, 1);
+        RaiseLocalEvent(user, ref evKnowledge);
     }
 
     private void HeavyAttackMiss(EntityUid user, out Entity<KnowledgeComponent>? melee, ref List<EntityUid> entities)
